@@ -1,0 +1,29 @@
+bun test v1.3.9 (cf6cdbbb)
+
+mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.test.ts:
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > parses agentstream_tool_proposal stream extension [0.17ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > parses assistant tool_use blocks [0.04ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > G3: aborts on block; confirm only when CI/strict env [0.05ms]
+doneDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=mock_block
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > terminates turn when gate blocks Shell proposal in stream [25.47ms]
+okDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=confirm reason=mock_confirm
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > G3: CI strict aborts turn on confirm decision [18.40ms]
+okDIAGNOSTIC: jev harness live tool gate: tool=Shell decision=allow reason=mock_allow
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > runAgent composition > allows turn when gate allows Shell proposal [20.21ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=mock_block
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > G4: collectClaudeStreamFromSpawn applies jevToolGate on NDJSON [21.38ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR] > evaluateStreamToolProposal returns diagnostic [0.09ms]
+
+mcp-server/packages/agentstream/src/jev-harness-preflight.test.ts:
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > is disabled by default [1.24ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > reads enablement from .tied-yaml.yaml jev.agentstream_harness [1.14ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > warns fail-closed when enabled without JEV_API_KEY [0.07ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > live preflight runs mock Jev integration smoke via injected deps [0.23ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: sync preflight hard-stops when harness on and dist missing [0.41ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: live preflight hard-stops when harness on and dist missing [0.37ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: injected deps bypass missing-dist hard stop [0.13ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: live-executor belt aborts when harness enabled and gate null [0.01ms]
+
+ 16 pass
+ 0 fail
+Ran 16 tests across 2 files. [128.00ms]

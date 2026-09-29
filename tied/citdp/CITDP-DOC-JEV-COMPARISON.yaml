@@ -37,28 +37,30 @@ CITDP-DOC-JEV-COMPARISON:
       assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
       counterexamples:
-        - "Doc claims production W5 while sponsor S2 leaves dist fail-open"
+        - "Doc claims production W5 while older S2 left dist fail-open; superseded by G2-DIST-2C"
       depth_change_waiver: null
       depth_tier: "minimal"
       disconfirming_observations:
+        - "S2 updated to 2C missing-dist hard stop via CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C"
         - "Sponsor policy table and G2-G4 audit rows present in comparison doc"
       eligibility_triggers_matched: []
       evidence_references:
         - "docs/comparisons/jev-for-tied-improvement.md"
+        - "tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C.yaml"
         - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/sponsor-decisions-doc-jev-2026-09-28.md"
       falsification_questions:
-        - "Does the doc state S2-S4 limits explicitly?"
+        - "Does the doc state S2 as 2C hard stop?"
       gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null
-      rationale: "Documentation-only refresh."
+      rationale: "Documentation-only refresh; S2 text updated when G2-DIST-2C shipped."
       research_profile: "integrated-agent"
       strict_eligibility_prerequisites: []
       sub_adversarial_inquiry_pass: "not_applicable"
   sponsor_decisions:
     decisions:
       S1_shadow_errors: "1C replay CI fail on Jev errors"
-      S2_missing_dist: "2B document fail-open when dist missing"
+      S2_missing_dist: "2C missing-dist hard stop when harness enabled"
       S3_confirm_policy: "3C CI strict confirm local log-only"
       S4_driver_parity: "4A Claude Cursor parity before production W5"
       S5_live_agreement: "7A tuning baseline only"
@@ -69,4 +71,4 @@ CITDP-DOC-JEV-COMPARISON:
     recorded_at: "2026-09-28"
     summary_ref: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/sponsor-decisions-doc-jev-2026-09-28.md"
   test_strategy:
-    summary: "Docs-only verification."
+    summary: "Docs-only verification; runtime G2 covered by CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C."

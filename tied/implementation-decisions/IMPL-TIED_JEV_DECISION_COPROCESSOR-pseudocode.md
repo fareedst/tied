@@ -124,20 +124,37 @@ Grammar-Version: v2
 
 ## RUN_JEV_HARNESS_PREFLIGHT
 
-- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: Agentstream hook after DAE gate; opt-in via AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness; bootstrap diagnostics only on dry-run; live smoke when dist/jev built and key present.
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: Agentstream hook after DAE gate; opt-in via AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness; **harness dist gate** hard-stops when `mcp-server/dist/jev/harness-tool-guard.js` is missing (sponsor **2C** / **JEV-HARNESS-DIST-2C**); live smoke when dist built and key present; injected live deps may bypass dist check for unit smoke only.
 - procedure RUN_JEV_HARNESS_PREFLIGHT(cfg):
   - CONTROL: compose after tiedpreflight and DAE gate; does not replace checklist gates
-  - OUTPUT: stderr DEBUG/DIAGNOSTIC lines; exitCode 0 (non-blocking preflight)
+  - PRE: harness enabled OR return exitCode 0 empty stderr
+  - PRE: isHarnessDistBuilt(projectRoot) OR return exitCode 1 + formatHarnessDistMissingMessage (dry-run / sync always)
+  - EFFECTS: emit bootstrap DEBUG/DIAGNOSTIC lines (key missing → fail-closed tool policy note)
+  - POST: exitCode 0 when harness disabled OR dist present; exitCode 1 when harness enabled and dist missing
+  - FAILURE_MODES: missing dist → exit 1 (missing-dist hard stop); never auto-build dist
+  - OUTPUT: stderr lines; exitCode 0 | 1
+
+- procedure RUN_JEV_HARNESS_PREFLIGHT_LIVE(cfg, deps?):
+  - PRE: harness enabled OR return exitCode 0
+  - PRE: deps.evaluateSampleTool OR deps.adviseSampleContext → skip dist hard-stop (injected deps bypass / T-CFG only)
+  - PRE: ELSE isHarnessDistBuilt OR return exitCode 1 + formatHarnessDistMissingMessage
+  - EFFECTS: optional live smoke via dist module or injected deps
+  - POST: exitCode 0 on success or deps smoke; exitCode 1 on missing-dist hard stop
+  - FAILURE_MODES: missing dist without deps → exit 1; never bypass checklist gates
 
 ## RUN_JEV_LIVE_TOOL_GATE
 
-- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: W5 residual — parse stream-json tool proposals in live executor; CALL EVALUATE_HARNESS_TOOL_CALL before turn proceeds; SIGTERM agent subprocess on block.
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: W5 residual — parse stream-json tool proposals in live executor; CALL EVALUATE_HARNESS_TOOL_CALL before turn proceeds; SIGTERM agent subprocess on block; live-executor **dist belt** aborts when harness enabled and gate is null after create (defense in depth behind preflight).
 - procedure RUN_JEV_LIVE_TOOL_GATE(stream_line, cfg, gate):
   - PRE: jev harness enabled OR no-op
   - PRE: parseToolProposalFromStreamObject OR continue
   - EFFECTS: evaluateHarnessToolCall for blocking tools only (guard internal)
-  - POST: block → abort turn exit 1 + DIAGNOSTIC; confirm/allow → stderr advisory only
-  - FAILURE_MODES: dist/jev missing → gate null (preflight diagnostic only); never bypass checklist gates
+  - POST: block → abort turn exit 1 + DIAGNOSTIC; confirm/allow → stderr advisory only (CI / CONFIRM_STRICT may abort on confirm)
+  - FAILURE_MODES: dist/jev missing → createJevLiveToolGate returns null; RUN_JEV_HARNESS_PREFLIGHT(_LIVE) and live-executor belt must exit 1 before turns (missing-dist hard stop); never bypass checklist gates
+
+- procedure REQUIRE_JEV_LIVE_GATE_WHEN_HARNESS_ENABLED(cfg, gate):
+  - PRE: harness enabled AND gate is null → return abort exitCode 1 + formatHarnessDistMissingMessage
+  - POST: else continue live bind
 
 ## RESOLVE_PLAN_SKILLS_CONFIG
 

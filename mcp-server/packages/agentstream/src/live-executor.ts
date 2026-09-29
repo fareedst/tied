@@ -13,7 +13,11 @@ import { bindLiveExecutorDriver } from "./live-driver-bind.js";
 import { runTiedPreflight, type DryRunStreams } from "./executor-dry-run.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
 import { createJevLiveToolGate } from "./jev-harness-live-tool-gate.js";
-import { runJevHarnessPreflightLive } from "./jev-harness-preflight.js";
+import {
+  jevAgentstreamHarnessEnabled,
+  runJevHarnessPreflightLive,
+} from "./jev-harness-preflight.js";
+import { jevHarnessMissingDistAbortMessage } from "./jev-harness-shared.js";
 import { knownStepStubs, replaceRemainingFromStep } from "./pipeline-route.js";
 import { chainBetween, sessionForTurn } from "./pipeline-session.js";
 import { buildTurnsFromConfig } from "./run-pipeline-prep.js";
@@ -248,6 +252,17 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
   }
 
   const jevToolGate = await createJevLiveToolGate(cfg);
+  const missingDistAbort = jevHarnessMissingDistAbortMessage(
+    jevAgentstreamHarnessEnabled(cfg.workspace),
+    jevToolGate === null,
+  );
+  if (missingDistAbort !== null) {
+    return {
+      stdout: "",
+      stderr: stderrAcc + missingDistAbort,
+      exitCode: 1,
+    };
+  }
 
   const liveBinding = bindLiveExecutorDriver({
     harnessProfile: cfg.agentHarness,

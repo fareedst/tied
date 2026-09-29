@@ -8,6 +8,8 @@ import path from "node:path";
 import type { DryRunConfig } from "./dry-run-config.js";
 import { findRepoRootFromPath } from "./repo-root.js";
 import {
+  formatHarnessDistMissingMessage,
+  isHarnessDistBuilt,
   loadJevHarnessDistModule,
   manifestEnablesJevHarness,
   resolveProjectRootForJev,
@@ -83,7 +85,13 @@ export function runJevHarnessPreflight(cfg: DryRunConfig): {
   if (!jevAgentstreamHarnessEnabled(cfg.workspace)) {
     return { exitCode: 0, stderr: "" };
   }
-  return { exitCode: 0, stderr: bootstrapLines(cfg).join("") };
+  const lines = bootstrapLines(cfg);
+  const projectRoot = resolveProjectRootForJev(cfg);
+  if (!isHarnessDistBuilt(projectRoot)) {
+    lines.push(formatHarnessDistMissingMessage());
+    return { exitCode: 1, stderr: lines.join("") };
+  }
+  return { exitCode: 0, stderr: lines.join("") };
 }
 
 /** Live run: bootstrap + optional mock Jev smoke when key or deps present. */
@@ -91,12 +99,16 @@ export async function runJevHarnessPreflightLive(
   cfg: DryRunConfig,
   deps?: JevHarnessLiveDeps,
 ): Promise<{ exitCode: number; stderr: string }> {
-  const sync = runJevHarnessPreflight(cfg);
   if (!jevAgentstreamHarnessEnabled(cfg.workspace)) {
-    return sync;
+    return { exitCode: 0, stderr: "" };
   }
 
-  const lines = sync.stderr.split("\n").filter((l) => l.length > 0);
+  const hasInjectedDeps = Boolean(
+    deps?.evaluateSampleTool || deps?.adviseSampleContext,
+  );
+
+  // Injected deps bypass dist hard-stop (T-CFG unit smoke only).
+  const lines: string[] = [];
   const append = (s: string) => {
     if (!s.endsWith("\n")) {
       lines.push(s + "\n");
@@ -104,6 +116,17 @@ export async function runJevHarnessPreflightLive(
       lines.push(s);
     }
   };
+  for (const line of bootstrapLines(cfg)) {
+    lines.push(line.endsWith("\n") ? line : line + "\n");
+  }
+
+  if (!hasInjectedDeps) {
+    const projectRoot = resolveProjectRootForJev(cfg);
+    if (!isHarnessDistBuilt(projectRoot)) {
+      append(formatHarnessDistMissingMessage().trimEnd());
+      return { exitCode: 1, stderr: lines.join("") };
+    }
+  }
 
   if (deps?.evaluateSampleTool) {
     const tool = await deps.evaluateSampleTool();
@@ -118,17 +141,16 @@ export async function runJevHarnessPreflightLive(
     );
   }
 
-  if (deps?.evaluateSampleTool || deps?.adviseSampleContext) {
+  if (hasInjectedDeps) {
     return { exitCode: 0, stderr: lines.join("") };
   }
 
   const projectRoot = resolveProjectRootForJev(cfg);
   const mod = await loadJevHarnessDistModule(projectRoot);
   if (!mod) {
-    append(
-      "DIAGNOSTIC: jev harness: mcp-server/dist/jev not built — run npm run build in mcp-server for live Jev smoke",
-    );
-    return { exitCode: 0, stderr: lines.join("") };
+    // Belt: race between existsSync and import — still hard-stop.
+    append(formatHarnessDistMissingMessage().trimEnd());
+    return { exitCode: 1, stderr: lines.join("") };
   }
 
   const manifestFlag = manifestEnablesJevHarness(projectRoot);

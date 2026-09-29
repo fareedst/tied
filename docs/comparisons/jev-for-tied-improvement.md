@@ -7,7 +7,7 @@
 | **Program coordinator** | Executable waves, gates, and evidence live in [`working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md`](../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md). |
 | **Preferred vocabulary** | [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md) |
 | **TIED stack (reference only)** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) — **Implemented** (2026-09-26); this doc does not mint new tokens. |
-| **Last updated** | 2026-09-28 (doc refresh: `DOC-JEV-COMPARISON-REFRESH`) |
+| **Last updated** | 2026-09-28 (G2/S2 missing-dist hard stop **2C**; prior doc refresh `DOC-JEV-COMPARISON-REFRESH`) |
 
 ---
 
@@ -169,7 +169,7 @@ Document these when interpreting metrics or enabling W5 in production. **Follow-
 | ID | Gap | Primary anchor | Verify |
 | --- | --- | --- | --- |
 | **G1** | ~~Shadow metrics: vendor errors → `agrees: true`~~ **Fixed 2026-09-28 (S1/1C):** `jev_error` + `agrees: false`; `summarizeShadowAgreement.jev_errors`; live replay exits non-zero on errors | [`shadow-vocab-preload.ts`](../../mcp-server/src/jev/shadow-vocab-preload.ts); [`plan-skills-shadow.ts`](../../mcp-server/src/jev/plan-skills-shadow.ts); [`replay-jev-vocab-shadow.ts`](../../mcp-server/scripts/replay-jev-vocab-shadow.ts) | `rg -n 'jev_error' mcp-server/src/jev/shadow-vocab-preload.ts mcp-server/scripts/replay-jev-vocab-shadow.ts` |
-| **G2** | Live gate: missing built `mcp-server/dist/jev/harness-tool-guard.js` → `createJevLiveToolGate` returns **null** (fail-open while harness flag set) | [`jev-harness-live-tool-gate.ts`](../../mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts) L129–132 | `rg -n 'loadJevHarnessDistModule' mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts` |
+| **G2** | ~~Live gate: missing built `mcp-server/dist/jev/harness-tool-guard.js` → fail-open~~ **Fixed 2026-09-28 (S2/2C):** dry-run + live preflight **exit 1** with build hint when harness enabled and dist missing; live-executor belt aborts if gate still null | [`jev-harness-preflight.ts`](../../mcp-server/packages/agentstream/src/jev-harness-preflight.ts); [`live-executor.ts`](../../mcp-server/packages/agentstream/src/live-executor.ts) | `rg -n 'formatHarnessDistMissingMessage' mcp-server/packages/agentstream/src/` |
 | **G3** | ~~Live loop ignored `confirm`~~ **Fixed 2026-09-28 (S3):** local log-only; **`CI=true`** or **`AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT=1`** aborts on `confirm` | [`jev-harness-live-tool-gate.ts`](../../mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts) (`jevHarnessConfirmStrictEnabled`) | `rg -n 'jevHarnessConfirmStrictEnabled' mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts` |
 | **G4** | ~~Claude bypassed `jevToolGate`~~ **Fixed 2026-09-28 (S4):** `collectClaudeStreamFromSpawn` + bind default launch share gate with Cursor | [`claude-driver.ts`](../../mcp-server/packages/agentstream/src/claude-driver.ts), [`live-driver-bind.ts`](../../mcp-server/packages/agentstream/src/live-driver-bind.ts) | `rg -n 'jevToolGate' mcp-server/packages/agentstream/src/live-driver-bind.ts mcp-server/packages/agentstream/src/claude-driver.ts` |
 | **G5** | This comparison doc was **stale** (W5/W6 listed as missing) | *This file* — fixed 2026-09-28 | `rg -n 'Gap' docs/comparisons/jev-for-tied-improvement.md` — should not claim W5/W6 implementation gap |
@@ -208,11 +208,11 @@ Each row is a **bounded procedural judgment** — Jev suggests; deterministic co
 2. **PRELOAD cascade** shadow (rank 2) — extends proven W2 pattern.
 3. Checklist **semantic adjunct** (rank 1) — highest operator value if kept strictly non-authoritative.
 4. Touchpoint 1 **RESOLVE** assist (rank 3) — pairs with vocab discipline.
-5. W5 production hardening bundle: **G2–G4** (dist fail-closed, `confirm` policy, Claude parity).
+5. ~~W5 production hardening bundle: **G2–G4**~~ **G2 Fixed (2026-09-28, S2/2C)**; G3/G4 Fixed earlier same day — remaining production-default W5 still gated on operator opt-in + sponsor reassessment.
 6. W4-style **residuality** expansion (rank 5) before any integrated inquiry coupling.
 7. Threshold tuning doc + model-version registry (program optional `threshold-tuning-doc` todo).
 
-Sequence **5** is gated on sponsor **4A** (Claude + Cursor parity) before calling live W5 “production ready.” **2B** and **3C** remain documented limits until a follow-on code CITDP changes runtime behavior.
+Sequence **5** (G2–G4) is complete for the documented sponsor policies; calling live W5 “production ready” as a **default** remains gated on opt-in ops + any future depth reassessment. **2C**, **3C**, and **4A** are implemented runtime behavior.
 
 ---
 
@@ -223,7 +223,7 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 | ID | Topic | Decision | Plain effect |
 | --- | --- | --- | --- |
 | **S1** | Shadow errors (G1) | **1C** | Replay/CI scripts **fail** when Jev returns a vendor/transport error—not counted as agreement. |
-| **S2** | Missing harness `dist` (G2) | **2B** | Live runs may continue **without** the gate if build output is missing; **document** clearly (no silent “safe” claim). |
+| **S2** | Missing harness `dist` (G2) | **2C** | **Implemented:** when harness is enabled and `mcp-server/dist/jev/harness-tool-guard.js` is missing, dry-run and live **exit 1** with a build hint (missing-dist hard stop); live-executor belt if gate is still null. |
 | **S3** | Medium risk `confirm` (G3) | **3C** | **Implemented:** CI / `AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT=1` aborts on `confirm`; local default log-only. |
 | **S4** | Live drivers (G4) | **4A** | **Implemented:** Claude default launch wires `jevToolGate` (parity with Cursor `runAgent`). |
 | **S5** | Live agreement rates | **7A** | 70% / ~83% live samples are **tuning baseline**, not gate failure for the closed program. |

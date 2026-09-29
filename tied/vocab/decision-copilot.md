@@ -21,6 +21,8 @@
 | **confidence threshold policy** | magic cutoff | Pinned per model version; medium → confirm, low → escalate |
 | **`jev_data_tier`** | GDPR mode (alone) | `standard_us` for US operator; `eu_strict` optional per client CITDP |
 | **fail-closed tool block** | Auto Mode (Cursor) | W5 harness may deny high-risk tools; deny if Jev unavailable for blocking set |
+| **harness dist gate** | missing-dist fail-open (2B) | Opt-in W5: require `mcp-server/dist/jev/harness-tool-guard.js` before dry-run/live proceed |
+| **missing-dist hard stop** | continue unguarded (2B) | Sponsor **2C** / **JEV-HARNESS-DIST-2C**: exit 1 + build hint when harness on and dist absent |
 
 ---
 
@@ -35,6 +37,7 @@
 | Shadow PRELOAD replay | `mcp-server/scripts/replay-jev-vocab-shadow.ts` | W2 keyword vs Jev JSONL log |
 | Prompt-type advisory | `advisePromptTypes` in `mcp-server/src/jev/` | W3 explicit-name heuristic + Jev hint |
 | Adversarial triage pilot | `runAdversarialTriagePilot` | W4 observation-only nouls; no finding-ledger |
+| Harness dist module | `mcp-server/dist/jev/harness-tool-guard.js` | Built artifact required by **harness dist gate** when agentstream harness enabled |
 
 ---
 
@@ -84,6 +87,8 @@
 | confidence threshold policy | Preferred terms |
 | decision coprocessor | Preferred terms |
 | fail-closed tool block | Preferred terms |
+| harness dist gate | Preferred terms |
+| missing-dist hard stop | Preferred terms |
 | jev-plan-skills-status.v1 | W6 Cursor plan-skill wiring |
 | jev-plan-skills-vocab-shadow.v1 | W6 Cursor plan-skill wiring |
 | key present | W6 Cursor plan-skill wiring |

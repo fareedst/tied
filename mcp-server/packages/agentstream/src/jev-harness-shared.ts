@@ -46,6 +46,41 @@ export function taskSummaryFromCfg(cfg: DryRunConfig): string {
   return "agentstream session";
 }
 
+/** Absolute path to built W5 harness guard module under project root. */
+export function harnessDistModulePath(projectRoot: string): string {
+  return path.join(
+    projectRoot,
+    "mcp-server",
+    "dist",
+    "jev",
+    "harness-tool-guard.js",
+  );
+}
+
+/** True when mcp-server/dist/jev/harness-tool-guard.js exists (sync probe). */
+export function isHarnessDistBuilt(projectRoot: string): boolean {
+  return fs.existsSync(harnessDistModulePath(projectRoot));
+}
+
+/** Stable operator message for missing-dist hard stop (sponsor 2C). */
+export function formatHarnessDistMissingMessage(): string {
+  return "agentstream: jev harness enabled but mcp-server/dist/jev not built — run: cd mcp-server && npm run build\n";
+}
+
+/**
+ * Live-executor belt: when harness is enabled and gate is null, return abort stderr.
+ * [IMPL-TIED_JEV_DECISION_COPROCESSOR] How: REQUIRE_JEV_LIVE_GATE_WHEN_HARNESS_ENABLED
+ */
+export function jevHarnessMissingDistAbortMessage(
+  harnessEnabled: boolean,
+  gateIsNull: boolean,
+): string | null {
+  if (!harnessEnabled || !gateIsNull) {
+    return null;
+  }
+  return formatHarnessDistMissingMessage();
+}
+
 export type JevHarnessDistModule = {
   evaluateHarnessToolCall: (
     input: { tool: string; arguments?: string; goal?: string; context?: string },
@@ -67,7 +102,7 @@ export type JevHarnessDistModule = {
 export async function loadJevHarnessDistModule(
   projectRoot: string,
 ): Promise<JevHarnessDistModule | null> {
-  const modPath = path.join(projectRoot, "mcp-server", "dist", "jev", "harness-tool-guard.js");
+  const modPath = harnessDistModulePath(projectRoot);
   if (!fs.existsSync(modPath)) {
     return null;
   }
