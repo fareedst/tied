@@ -9,7 +9,8 @@
 docs/*26-??-??*.md
 docs/agentstream-unitconv-general-transcript-difficulties.md
 # Private local comparison / planning docs (maintain on disk; not published in git)
-docs/comparisons/
+docs/comparisons/*
+!docs/comparisons/jev-for-tied-improvement.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

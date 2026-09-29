@@ -1,0 +1,36 @@
+# Per-request Tracker — docs-only Jev comparison refresh (copy_hygiene: scoped to this pass)
+execution_evidence:
+  request: REQ-TIED_JEV_DECISION_COPROCESSOR
+  completed: []
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - tied/vocab/decision-copilot.md
+      - tied/vocab/prompt-composer.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/CITDP-DOC-JEV-COMPARISON.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - docs/comparisons/jev-for-tied-improvement.md
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/CITDP-DOC-JEV-COMPARISON.yaml
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/CITDP-DOC-JEV-COMPARISON.yaml
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    rationale: "Documentation-only pass at minimal depth; no integrated inquiry artifacts or activation."
+    policy: "depth_tier minimal — sub-adversarial-inquiry-pass N/A per eligibility table §7 (no external/auth/persistence triggers)."
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/CITDP-DOC-JEV-COMPARISON.yaml
