@@ -1,0 +1,12 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#RESOLVE_CHECKLIST_EVIDENCE_SUFFICIENCY_CONFIG#32e6cafc15e73810"
+  ],
+  "status": "passed",
+  "verdict": "PASS"
+}

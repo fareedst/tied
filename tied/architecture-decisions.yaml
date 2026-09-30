@@ -1870,6 +1870,15 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
+  cross_references:
+    architecture: []
+    implementation: []
+    requirements:
+      - "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+  detail_file: "architecture-decisions/ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml"
+  name: "Checklist evidence sufficiency pre-gate architecture"
+  status: "Active"
 ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     architecture: []

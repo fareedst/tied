@@ -1,0 +1,15 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "phase": "pre_implementation",
+  "diagnostics": [
+    "tracker_sparse",
+    "pending_required_step:risk-assessment",
+    "pending_required_step:gate-pseudocode-validation",
+    "missing_required_step:sub-adversarial-inquiry-pass",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete"
+  ],
+  "note": "Expected W0 state before integrated adversarial activation; complete inquiry + tracker dispositions before W1 RED."
+}

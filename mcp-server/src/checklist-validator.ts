@@ -126,6 +126,51 @@ function trackerSteps(tracker: unknown): Record<string, unknown>[] {
   return [];
 }
 
+// [IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: merge main steps and sub_procedures for slug lookup without forking disposition rules.
+export function listChecklistTrackerSteps(tracker: unknown): Record<string, unknown>[] {
+  if (!isRecord(tracker)) return [];
+  const main = trackerSteps(tracker);
+  const sub = Array.isArray(tracker.sub_procedures)
+    ? tracker.sub_procedures.filter(isRecord)
+    : [];
+  const bySlug = new Map<string, Record<string, unknown>>();
+  for (const step of [...main, ...sub]) {
+    const slug = getString(step, "slug", "id");
+    if (slug) bySlug.set(slug, step);
+  }
+  return [...bySlug.values()];
+}
+
+// [IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: collect step evidence fields used by gate validate (evidence_refs, tracking.evidence, etc.).
+export function collectChecklistStepEvidenceStrings(step: Record<string, unknown>): string[] {
+  const out: string[] = [];
+  const push = (value: unknown) => {
+    if (typeof value === "string" && value.trim()) {
+      out.push(value.trim());
+      return;
+    }
+    if (!Array.isArray(value)) return;
+    for (const item of value) {
+      if (typeof item === "string" && item.trim()) {
+        out.push(item.trim());
+      } else if (isRecord(item) && typeof item.path === "string" && item.path.trim()) {
+        out.push(item.path.trim());
+      }
+    }
+  };
+  push(step.evidence);
+  push(step.evidence_refs);
+  if (nonEmpty(step.evidence_reference)) out.push(String(step.evidence_reference).trim());
+  if (isRecord(step.tracking)) {
+    push(step.tracking.evidence);
+    push(step.tracking.evidence_refs);
+    if (nonEmpty(step.tracking.evidence_reference)) {
+      out.push(String(step.tracking.evidence_reference).trim());
+    }
+  }
+  return out;
+}
+
 function disposition(step: Record<string, unknown>): string | undefined {
   const tracking = isRecord(step.tracking) ? step.tracking : undefined;
   return getString(step, "disposition", "status")

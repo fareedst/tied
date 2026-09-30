@@ -1,0 +1,19 @@
+{
+  "provenance": {
+    "block_id": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#RESOLVE_CHECKLIST_EVIDENCE_SUFFICIENCY_CONFIG#32e6cafc15e73810",
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "pre_implementation",
+    "production_path": "mcp-server/src/jev/checklist-evidence-sufficiency.ts",
+    "project_id": "cfd5bf6ad98024eb",
+    "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+    "run_id": "closeout-inquiry-2026-09-30-pre_implementation",
+    "source_revision": "closeout-inquiry-2026-09-30",
+    "test_paths": [
+      "mcp-server/src/jev/checklist-evidence-sufficiency.test.ts"
+    ],
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

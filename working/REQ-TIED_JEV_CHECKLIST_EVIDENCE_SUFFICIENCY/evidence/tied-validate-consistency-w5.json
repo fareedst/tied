@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "index_valid": true,
+  "note": "Full MCP output archived at /tmp/consistency-w5.json during W5 close-out; summary in tied-validate-consistency-w5-summary.json",
+  "summary_path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/tied-validate-consistency-w5-summary.json"
+}

@@ -136,6 +136,10 @@ import { collectChecklistActivation } from "../checklist-activation-collect.js";
 import { collectEnvelopeGapReport } from "../request-evidence-envelope/batch-collect.js";
 import { backfillRequestEvidenceEnvelope } from "../request-evidence-envelope/backfill.js";
 import { jevPlanSkillsTools } from "./jev-plan-skills-tools.js";
+import {
+  checklistEvidenceSufficiencyTools,
+  hookChecklistGateEvidenceSufficiencyPreGate,
+} from "./checklist-evidence-sufficiency-mcp.js";
 import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
 import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
 import { validateRequestEvidenceEnvelope } from "../request-evidence-envelope/validate.js";
@@ -1799,6 +1803,20 @@ export const allTools = [
           evidence: evidence as never,
           projectRoot,
         });
+        const preGateReject = await hookChecklistGateEvidenceSufficiencyPreGate({
+          projectRoot,
+          phase: args.phase,
+          tracker,
+          citdp: args.citdp,
+          requiredStepSlugs: args.required_step_slugs,
+        });
+        if (preGateReject) {
+          return textContent(JSON.stringify({
+            ...preGateReject,
+            ...(hydration.hydrated.length > 0 ? { evidence_hydrated: hydration.hydrated } : {}),
+            ...(hydration.diagnostics.length > 0 ? { hydration_diagnostics: hydration.diagnostics } : {}),
+          }, null, 2));
+        }
         const result = validateChecklistGate({
           phase: args.phase,
           tracker,
@@ -3283,4 +3301,5 @@ export const allTools = [
     },
   },
   ...jevPlanSkillsTools,
+  ...checklistEvidenceSufficiencyTools,
 ];

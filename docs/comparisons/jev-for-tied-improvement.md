@@ -4,6 +4,7 @@
 | --- | --- |
 | **Purpose** | Operator-facing guide: what System One / Jev is, how TIED uses it today, known gaps, and where bounded judgment helps next. |
 | **Audience** | TIED implementers, agent operators, and plan-skill authors wiring advisory layers. |
+| **Comprehensive taxonomy & opportunities** | [`system-one-jev-taxonomy-and-opportunities.md`](system-one-jev-taxonomy-and-opportunities.md) (40-role decision taxonomy, 6-operator algebra, 27 verbs, systematic LLM task mapping) |
 | **Program coordinator** | Executable waves, gates, and evidence live in [`working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md`](../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md). |
 | **Preferred vocabulary** | [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md) |
 | **TIED stack (reference only)** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) — **Implemented** (2026-09-26); this doc does not mint new tokens. |
@@ -180,7 +181,9 @@ Additional hardening notes (not separate G-rows): response shape validation for 
 
 ## Ranked opportunity catalog (future waves)
 
-Each row is a **bounded procedural judgment** — Jev suggests; deterministic code and gates commit.
+For the complete 40-role decision taxonomy, underlying 6-operator decision algebra, and blueprints for Context Semantic GC and Shell Safety Gating, see [`system-one-jev-taxonomy-and-opportunities.md`](system-one-jev-taxonomy-and-opportunities.md).
+
+Each row below is a **bounded procedural judgment** — Jev suggests; deterministic code and gates commit.
 
 | Rank | Procedure | Typed question(s) | State (bounded) | Confidence / fallback | Authority |
 | --- | --- | --- | --- | --- | --- |
@@ -231,6 +234,20 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 | **S7** | Article in repo | **10A** | **Paraphrase only** in-repo; full article stays out of git. |
 | **S8** | Next code investment | *(prior)* | **G1 metrics fix** first (implements S1). |
 | **S9** | PRELOAD long term | *(prior)* | Keyword PRELOAD stays authoritative; **gated promotion** of Jev picks is a **future** policy change only. |
+
+---
+
+## Blueprint C follow-on (checklist evidence sufficiency)
+
+**Child REQ:** [`REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY`](../../tied/requirements/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) — opt-in **pre-gate** (Pattern 11 + 5) that may block gate submission when checklist evidence is superficial; **never** sets gate `allowed` or emits a gate receipt.
+
+| Surface | Path |
+| --- | --- |
+| Module | [`checklist-evidence-sufficiency.ts`](../../mcp-server/src/jev/checklist-evidence-sufficiency.ts) |
+| Shared decide trace | [`decide-trace.ts`](../../mcp-server/src/jev/decide-trace.ts) + [`jevDecide`](../../mcp-server/src/jev/client.ts) `contextMeta` |
+| Execution plan | [`working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/PLAN.md`](../../working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/PLAN.md) |
+
+**Operator env (MCP `tied-yaml` process):** `TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY=1` (or `.tied-yaml.yaml` → `jev.checklist_evidence_sufficiency: true`) enables the pre-gate inside `tied_checklist_gate_validate` and the read-only tool `tied_jev_checklist_evidence_sufficiency`; **`JEV_DECIDE_TRACE=1`** (+ optional `JEV_DECIDE_TRACE_PATH`, `JEV_DECIDE_TRACE_STDERR`) logs redacted `system-one-decide-trace.v1` JSONL under `working/jev-decide-trace/` (gitignored). Trace is independent of pre-gate enablement. **v1 integration is MCP-only** — Agentstream `dae-gate-preflight` remains a separate opt-in; Blueprint C does not compose there yet.
 
 ---
 

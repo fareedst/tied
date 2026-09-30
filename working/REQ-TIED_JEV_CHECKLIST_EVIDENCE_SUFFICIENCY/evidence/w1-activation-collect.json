@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+    "project_id": "cfd5bf6ad98024eb",
+    "run_id": "w1-build-plan-2026-09-29",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#RESOLVE_CHECKLIST_EVIDENCE_SUFFICIENCY_CONFIG#w1pre"
+    ],
+    "scope_hash": "8db2cd2eeee7cc3042128689f6bb434873d64920b617d67340f2b72dd4b6abbf",
+    "artifact_hashes": {
+      "obligation-report.json": "fc7e906715f762a17be3b15acb4aabe11c926305e79b8fcd1dc41cea26d87405",
+      "finding-ledger.jsonl": "de26cdac36e517d491b5e7f53debb422327bc8c7b0970ac5582b9c5ac0ec8dd7",
+      "gate-result.json": "856fc70ebe1c4e8dba1dc4304d3d834171cd5eb9d3bde610ad58865df500dbd8",
+      "evidence-provenance.json": "c82382d5d99f37b7a4e3411a12033ab046d165e8e770b6b4cfba6593fd3b2140"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "w1-build-plan-2026-09-29",
+      "phase": "pre_implementation",
+      "scope_hash": "8db2cd2eeee7cc3042128689f6bb434873d64920b617d67340f2b72dd4b6abbf",
+      "hash": "fc7e906715f762a17be3b15acb4aabe11c926305e79b8fcd1dc41cea26d87405",
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "w1-build-plan-2026-09-29",
+      "phase": "pre_implementation",
+      "scope_hash": "8db2cd2eeee7cc3042128689f6bb434873d64920b617d67340f2b72dd4b6abbf",
+      "hash": "de26cdac36e517d491b5e7f53debb422327bc8c7b0970ac5582b9c5ac0ec8dd7",
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "w1-build-plan-2026-09-29",
+      "phase": "pre_implementation",
+      "scope_hash": "8db2cd2eeee7cc3042128689f6bb434873d64920b617d67340f2b72dd4b6abbf",
+      "hash": "856fc70ebe1c4e8dba1dc4304d3d834171cd5eb9d3bde610ad58865df500dbd8",
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "w1-build-plan-2026-09-29",
+      "phase": "pre_implementation",
+      "scope_hash": "8db2cd2eeee7cc3042128689f6bb434873d64920b617d67340f2b72dd4b6abbf",
+      "hash": "c82382d5d99f37b7a4e3411a12033ab046d165e8e770b6b4cfba6593fd3b2140",
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+    "project_id": "cfd5bf6ad98024eb",
+    "run_id": "w1-build-plan-2026-09-29",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#RESOLVE_CHECKLIST_EVIDENCE_SUFFICIENCY_CONFIG#w1pre"
+    ],
+    "scope_hash": "8db2cd2eeee7cc3042128689f6bb434873d64920b617d67340f2b72dd4b6abbf"
+  },
+  "diagnostics": []
+}

@@ -28,3 +28,10 @@ export function manifestEnablesJevPlanSkills(projectRoot: string): boolean {
   const jev = repo && isRecord(repo.jev) ? repo.jev : undefined;
   return jev?.plan_skills === true;
 }
+
+/** [IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] [REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] */
+export function manifestEnablesChecklistEvidenceSufficiency(projectRoot: string): boolean {
+  const repo = readRepoTiedYaml(projectRoot);
+  const jev = repo && isRecord(repo.jev) ? repo.jev : undefined;
+  return jev?.checklist_evidence_sufficiency === true;
+}

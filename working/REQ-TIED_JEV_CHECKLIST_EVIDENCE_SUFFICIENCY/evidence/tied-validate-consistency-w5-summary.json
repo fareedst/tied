@@ -1,0 +1,17 @@
+{
+  "index": {
+    "requirements": {
+      "valid": true
+    },
+    "architecture": {
+      "valid": true
+    },
+    "implementation": {
+      "valid": true
+    },
+    "semantic-tokens": {
+      "valid": true
+    }
+  },
+  "valid": true
+}

@@ -1,1 +1,5 @@
 scalar_style: wrapped
+jev:
+  plan_skills: true
+dae:
+  crap_threshold: 30

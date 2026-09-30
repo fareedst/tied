@@ -1,0 +1,43 @@
+{
+  "blockRevision": "fdb28b7acb025802",
+  "specification": [
+    {
+      "id": "stmt-path-1",
+      "kind": "behavior",
+      "value": "Behavior covered by mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+      "order": 1
+    }
+  ],
+  "testEvidence": [
+    {
+      "id": "test-path-1",
+      "direction": "test",
+      "statementId": "stmt-path-1",
+      "kind": "behavior",
+      "value": "Declared test path mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+      "order": 1,
+      "reliable": true,
+      "source": {
+        "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts"
+      },
+      "provenance": "declared-path",
+      "blockRevision": "fdb28b7acb025802"
+    }
+  ],
+  "productionEvidence": [
+    {
+      "id": "prod-path-1",
+      "direction": "production",
+      "statementId": "stmt-path-prod",
+      "kind": "behavior",
+      "value": "Declared production path mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts",
+      "order": 1,
+      "reliable": true,
+      "source": {
+        "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts"
+      },
+      "provenance": "declared-path",
+      "blockRevision": "fdb28b7acb025802"
+    }
+  ]
+}

@@ -29,6 +29,9 @@ scripts/update_client.sh
 # Local feature-orchestration scratch (feature_create / onboarding demos; not canonical TIED intent)
 tied/features/
 
+# Local System One decide trace JSONL (operator-only; JEV_DECIDE_TRACE)
+working/jev-decide-trace/
+
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
 # Optional live Jev benchmark appendix (mocked CI uses context-pruning-benchmark.v1.json)
@@ -176,6 +179,11 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/verification-evidence-manifest.v1.json
 !working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/evidence-chain-profile.v1.json
+!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json
+!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/
+!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/**
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/not-applicable-receipt.v1.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/gate-pseudocode-validation-evidence.md
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/

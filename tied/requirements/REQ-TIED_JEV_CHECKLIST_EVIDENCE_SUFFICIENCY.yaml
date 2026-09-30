@@ -1,0 +1,51 @@
+REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+    implementation:
+      - "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-09-29"
+    last_updated:
+      author: "build-plan"
+      date: "2026-09-29"
+      reason: "W0 mint"
+  name: "Jev checklist evidence sufficiency pre-gate (Blueprint C)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Catch superficial checklist evidence before authoritative gate validation"
+    problems_solved:
+      - "Vacuous execution_evidence advances steps and fails late at verification"
+    why: "Blueprint C Pattern 11 verification and Pattern 5 evidence gate as opt-in Jev pre-gate; never substitutes gate receipts."
+  satisfaction_criteria:
+    - criterion: "Benchmark lists deterministic_only jev_on jev_off on same fixture_hash."
+      id: "SC-BENCH-ARMS"
+      metric: "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/checklist-evidence-sufficiency-benchmark.v1.json"
+    - criterion: "Feature unset; checklist gate behavior unchanged."
+      id: "SC-DEFAULT-OFF"
+      metric: "mcp-server checklist gate regression tests"
+    - criterion: "Jev skip proceeds to validateChecklistGate."
+      id: "SC-FAIL-OPEN"
+      metric: "unit tests"
+    - criterion: "JEV_DECIDE_TRACE=1 emits system-one-decide-trace.v1 with context_meta."
+      id: "SC-DECIDE-TRACE"
+      metric: "jev client trace unit test"
+    - criterion: "jev_on agreement >=85% on clear substantive vs superficial or documented waiver."
+      id: "SC-AGREEMENT"
+      metric: "benchmark report"
+    - criterion: "No path sets gate allowed from Jev."
+      id: "SC-AUTHORITY"
+      metric: "composition tests"
+    - criterion: "Superficial fixtures pre-gate reject without gate_receipt."
+      id: "SC-OPT-IN-BLOCK"
+      metric: "checklist-evidence-sufficiency unit tests"
+    - criterion: "tied_validate_consistency passes."
+      id: "SC-TRACE"
+      metric: "tied_validate_consistency"
+  status: "In Progress"

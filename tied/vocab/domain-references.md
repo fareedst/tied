@@ -37,7 +37,7 @@
 | 5d | [`prompt-composer.md`](prompt-composer.md) | TIED-source-only Prompt Composer, prompt types, global prompt skills, explicit router, prompt envelope, shared references, and client skill installation; glossary not installed into clients |
 | 5e | [`feature-orchestration.md`](feature-orchestration.md) | Feature manifests, lifecycle, clarification and constitution gates, task graphs, generated views, onboarding, migration, and client publication |
 | 5f | [`async-methodology.md`](async-methodology.md) | Async methodology: seven semantic classes, optional v1 contract rows, REQ/ARCH/IMPL naming bridges, proof boundaries |
-| 5g | [`decision-copilot.md`](decision-copilot.md) | Jev / System One decision coprocessor, shadow routing, noul gates, harness fail-closed blocking |
+| 5g | [`decision-copilot.md`](decision-copilot.md) | Jev / System One decision coprocessor, shadow routing, noul gates, harness fail-closed blocking, bounded semantic decision engine, decision role taxonomy |
 | 5h | [`residuality.md`](residuality.md) | Residuality Theory stressors, residues, attractors, stressor-residue records, discovery loop |
 | 5i | [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) | BBCE behavioral slices, change locality, declared change surface, boundary violations |
 | — | [`config-discovery.md`](config-discovery.md) | Planned layered YAML config (stub; `(proposed)` terms) |

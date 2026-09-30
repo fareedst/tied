@@ -1,0 +1,1284 @@
+{
+  "schema": "checklist-evidence-sufficiency-benchmark.v1",
+  "meta": {
+    "fixture_hash": "6eec3bb7f0aa764fe8a0de2ef98477c7ff0b78f83b1c3225a6cdc15c79d3c427",
+    "fixture_path": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/checklist-evidence-sufficiency/labeled-corpus.v1.jsonl",
+    "git_rev": "ac72841492c7386f6773c9fa3d361fa90c3f03b3",
+    "JEV_MODEL": "jev-1.13.0",
+    "thresholds": {
+      "substantive_noul_below": 0.6,
+      "completeness_score_at_or_below": 2,
+      "token_noul_below": 0.6
+    },
+    "mode": "mocked",
+    "timestamp": "2026-09-30T03:50:54.280Z",
+    "fixture_count": 24,
+    "arms": [
+      "deterministic_only",
+      "jev_on",
+      "jev_off",
+      "shadow_compare"
+    ]
+  },
+  "agreement": {
+    "clear_substantive_superficial_count": 17,
+    "jev_on_agreement_count": 17,
+    "jev_on_agreement_rate": 1,
+    "substantive_pass_recall": 1,
+    "superficial_reject_precision": 1
+  },
+  "authority_invariant_ok": true,
+  "arms": {
+    "deterministic_only": {
+      "per_fixture": [
+        {
+          "fixture_id": "sub-01",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.23329199999999872,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-02",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.011375000000001023,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-03",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.022500000000000853,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-04",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.005457999999997298,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-05",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.003667000000000087,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-06",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.005749999999999034,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-07",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.0030409999999960746,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-08",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.003208999999998241,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-01",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.006833999999997786,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-02",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.003208999999998241,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-03",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.003916000000003805,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-04",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.0048340000000024475,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-05",
+          "arm": "deterministic_only",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.011666999999995653,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "empty_evidence_excerpt"
+          ]
+        },
+        {
+          "fixture_id": "sup-06",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.003583999999996479,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-07",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.0027910000000019863,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-08",
+          "arm": "deterministic_only",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.013958000000002357,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "missing_required_token:REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+          ]
+        },
+        {
+          "fixture_id": "bor-01",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.012249999999994543,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-02",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.00549999999999784,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-03",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.005124999999999602,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-04",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.003124999999997158,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-05",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.0031669999999976994,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-06",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.0027919999999994616,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "fail-open-01",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.0027910000000019863,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "canary-redact-01",
+          "arm": "deterministic_only",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.002957999999999572,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        }
+      ],
+      "aggregate": {
+        "mean_elapsed_ms": 0.015699708333332413,
+        "jev_call_count": 0,
+        "jev_skip_count": 0,
+        "expected_match_rate": 0.7083333333333334
+      }
+    },
+    "jev_on": {
+      "per_fixture": [
+        {
+          "fixture_id": "sub-01",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.6729170000000053,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-02",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.09325000000000472,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-03",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.03187499999999943,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-04",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.014624999999995225,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-05",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.020041999999996563,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-06",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.012959000000002163,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-07",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.036000000000001364,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-08",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.01604199999999878,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-01",
+          "arm": "jev_on",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.016459000000004664,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "noul_evidence_substantive below threshold for step traceable-commit",
+            "score_evidence_completeness at or below 2 for step traceable-commit"
+          ]
+        },
+        {
+          "fixture_id": "sup-02",
+          "arm": "jev_on",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.026291999999997984,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "noul_evidence_substantive below threshold for step unit-test-green",
+            "score_evidence_completeness at or below 2 for step unit-test-green"
+          ]
+        },
+        {
+          "fixture_id": "sup-03",
+          "arm": "jev_on",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.01566599999999596,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "noul_evidence_substantive below threshold for step sync-tied-stack",
+            "score_evidence_completeness at or below 2 for step sync-tied-stack"
+          ]
+        },
+        {
+          "fixture_id": "sup-04",
+          "arm": "jev_on",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.01345799999999997,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "noul_evidence_substantive below threshold for step traceable-commit",
+            "score_evidence_completeness at or below 2 for step traceable-commit"
+          ]
+        },
+        {
+          "fixture_id": "sup-05",
+          "arm": "jev_on",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.0077499999999943725,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "empty_evidence_excerpt"
+          ]
+        },
+        {
+          "fixture_id": "sup-06",
+          "arm": "jev_on",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.011625000000002217,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "noul_evidence_substantive below threshold for step gate-pseudocode-validation",
+            "score_evidence_completeness at or below 2 for step gate-pseudocode-validation"
+          ]
+        },
+        {
+          "fixture_id": "sup-07",
+          "arm": "jev_on",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.01941699999999713,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "noul_evidence_substantive below threshold for step unit-test-green",
+            "score_evidence_completeness at or below 2 for step unit-test-green"
+          ]
+        },
+        {
+          "fixture_id": "sup-08",
+          "arm": "jev_on",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.008333000000000368,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "missing_required_token:REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+          ]
+        },
+        {
+          "fixture_id": "bor-01",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.018875000000001307,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-02",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.018124999999997726,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-03",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.01720900000000114,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-04",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.015083000000004176,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-05",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.012500000000002842,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-06",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.012708000000003494,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        },
+        {
+          "fixture_id": "fail-open-01",
+          "arm": "jev_on",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.014250000000004093,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "noul_evidence_substantive below threshold for step traceable-commit",
+            "score_evidence_completeness at or below 2 for step traceable-commit"
+          ]
+        },
+        {
+          "fixture_id": "canary-redact-01",
+          "arm": "jev_on",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.022792000000002588,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": []
+        }
+      ],
+      "aggregate": {
+        "mean_elapsed_ms": 0.0478438333333339,
+        "jev_call_count": 24,
+        "jev_skip_count": 0,
+        "expected_match_rate": 1
+      }
+    },
+    "jev_off": {
+      "per_fixture": [
+        {
+          "fixture_id": "sub-01",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.06724999999999426,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-02",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.04145799999999866,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-03",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.031540999999997155,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-04",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.04437499999999517,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-05",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.016334000000000515,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-06",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.011042000000003327,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-07",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.013125000000002274,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sub-08",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.015541999999996392,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-01",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.010167000000002702,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-02",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.007874999999998522,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-03",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.009374999999998579,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-04",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.015000000000000568,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-05",
+          "arm": "jev_off",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.0030409999999960746,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "empty_evidence_excerpt"
+          ]
+        },
+        {
+          "fixture_id": "sup-06",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.025749999999995055,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-07",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.00995900000000205,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "sup-08",
+          "arm": "jev_off",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.009582999999999231,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "missing_required_token:REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+          ]
+        },
+        {
+          "fixture_id": "bor-01",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.013750000000001705,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-02",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.01637500000000358,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-03",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.0067909999999997694,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-04",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.010457999999999856,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-05",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.006083999999994205,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "bor-06",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.009875000000000966,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "fail-open-01",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.016125000000002387,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        },
+        {
+          "fixture_id": "canary-redact-01",
+          "arm": "jev_off",
+          "predicted": "fail_open_to_gate",
+          "pre_gate_ok": true,
+          "jev_skipped": true,
+          "elapsed_ms": 0.012083000000004063,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": false,
+          "reasons": []
+        }
+      ],
+      "aggregate": {
+        "mean_elapsed_ms": 0.017623249999999462,
+        "jev_call_count": 0,
+        "jev_skip_count": 22,
+        "expected_match_rate": 0.08333333333333333
+      }
+    },
+    "shadow_compare": {
+      "per_fixture": [
+        {
+          "fixture_id": "sub-01",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.06862499999999727,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sub-02",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.03545800000000554,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sub-03",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.027667000000000996,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sub-04",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.021957999999997924,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sub-05",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.01795900000000472,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sub-06",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.012041000000003521,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sub-07",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.01158299999999457,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sub-08",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.01624999999999943,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sup-01",
+          "arm": "shadow_compare",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.016707999999994172,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sup-02",
+          "arm": "shadow_compare",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.01462500000000233,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sup-03",
+          "arm": "shadow_compare",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.01624999999999943,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sup-04",
+          "arm": "shadow_compare",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.014500000000005286,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sup-05",
+          "arm": "shadow_compare",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.005833000000002642,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=false"
+          ]
+        },
+        {
+          "fixture_id": "sup-06",
+          "arm": "shadow_compare",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.015999999999998238,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sup-07",
+          "arm": "shadow_compare",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.021374999999999034,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "sup-08",
+          "arm": "shadow_compare",
+          "predicted": "reject_deterministic",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.008875000000003297,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=false"
+          ]
+        },
+        {
+          "fixture_id": "bor-01",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.022334000000000742,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "bor-02",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.018250000000001876,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "bor-03",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.011333999999997957,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "bor-04",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.013334000000000401,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "bor-05",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.012790999999999997,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "bor-06",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.010374999999996248,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "fail-open-01",
+          "arm": "shadow_compare",
+          "predicted": "reject_jev",
+          "pre_gate_ok": false,
+          "elapsed_ms": 0.018625000000000114,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=true",
+            "jev_off_pass=true"
+          ]
+        },
+        {
+          "fixture_id": "canary-redact-01",
+          "arm": "shadow_compare",
+          "predicted": "pre_gate_pass",
+          "pre_gate_ok": true,
+          "elapsed_ms": 0.02095799999999315,
+          "authority_gate_allowed_emitted": false,
+          "matches_expected": true,
+          "reasons": [
+            "shadow:would_block_jev_on=false",
+            "jev_off_pass=true"
+          ]
+        }
+      ],
+      "aggregate": {
+        "mean_elapsed_ms": 0.018904499999999953,
+        "jev_call_count": 0,
+        "jev_skip_count": 0,
+        "expected_match_rate": 1
+      }
+    }
+  },
+  "shadow_compare": {
+    "per_fixture": [
+      {
+        "fixture_id": "sub-01",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sub-02",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sub-03",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sub-04",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sub-05",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sub-06",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sub-07",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sub-08",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sup-01",
+        "would_block_jev_on": true,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sup-02",
+        "would_block_jev_on": true,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sup-03",
+        "would_block_jev_on": true,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sup-04",
+        "would_block_jev_on": true,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sup-05",
+        "would_block_jev_on": true,
+        "jev_off_passes": false
+      },
+      {
+        "fixture_id": "sup-06",
+        "would_block_jev_on": true,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sup-07",
+        "would_block_jev_on": true,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "sup-08",
+        "would_block_jev_on": true,
+        "jev_off_passes": false
+      },
+      {
+        "fixture_id": "bor-01",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "bor-02",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "bor-03",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "bor-04",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "bor-05",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "bor-06",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "fail-open-01",
+        "would_block_jev_on": true,
+        "jev_off_passes": true
+      },
+      {
+        "fixture_id": "canary-redact-01",
+        "would_block_jev_on": false,
+        "jev_off_passes": true
+      }
+    ]
+  }
+}

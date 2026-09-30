@@ -1,0 +1,216 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "cfd5bf6ad98024eb",
+    "scope": [
+      "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close"
+    ],
+    "graph": {
+      "projectId": "cfd5bf6ad98024eb",
+      "nodes": [
+        {
+          "id": "case:CE-001",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-002",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-003",
+          "kind": "case"
+        },
+        {
+          "id": "constraint:constraint-tied_jev_checklist_evidence_sufficiency",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:prod-1",
+          "kind": "evidence",
+          "revision": "w5-close-20260929"
+        },
+        {
+          "id": "evidence:test-1",
+          "kind": "evidence",
+          "revision": "w5-close-20260929"
+        },
+        {
+          "id": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+          "kind": "block",
+          "revision": "fdb28b7acb025802"
+        },
+        {
+          "id": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#criterion-1",
+          "kind": "criterion",
+          "revision": "criterion-rev-tied_jev_checklist_evidence_sufficiency"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#criterion-1",
+          "to": "constraint:constraint-tied_jev_checklist_evidence_sufficiency",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-tied_jev_checklist_evidence_sufficiency",
+          "to": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+          "to": "evidence:prod-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+          "to": "evidence:test-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+          "to": "case:CE-001",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+          "to": "case:CE-002",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+          "to": "case:CE-003",
+          "kind": "block_case"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "4ebefdb0ef6fdb51",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "stmt-path-prod",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts"
+        },
+        "evidenceRefs": [
+          "prod-path-1"
+        ]
+      },
+      {
+        "id": "547295f8680c0e8b",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "stmt-path-1",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts"
+        },
+        "evidenceRefs": [
+          "test-path-1"
+        ]
+      },
+      {
+        "id": "7efd52eb1e6610e6",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "stmt-path-1",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "w5-close-out-2026-09-29",
+      "phase": "close_out",
+      "scope": [
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close"
+      ],
+      "scope_hash": "f3358bac2091c1df04c61a5b45a3ff4242636f57a3dc2da839fd703394e77098",
+      "artifact_hashes": {
+        "obligation-report.json": "7ba32417883e5f50786ba5242edc0846c68569d3a1cd25b4c5b54d2c24efa441",
+        "finding-ledger.jsonl": "102c45f8b01ca478bf99cf8433736792c36d00c20544f351bea2eaf5bb2567a0",
+        "gate-result.json": "2992124aa614c1783506b3ad994e7281c869662dc0b5f46de7faa8ec34ef08ac",
+        "evidence-provenance.json": "043486e62f5d4f848abffd9336b1e22c11553f2c29ab2a0aa0e0bc777d674269"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "w5-close-out-2026-09-29",
+        "phase": "close_out",
+        "scope_hash": "f3358bac2091c1df04c61a5b45a3ff4242636f57a3dc2da839fd703394e77098",
+        "hash": "7ba32417883e5f50786ba5242edc0846c68569d3a1cd25b4c5b54d2c24efa441",
+        "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "w5-close-out-2026-09-29",
+        "phase": "close_out",
+        "scope_hash": "f3358bac2091c1df04c61a5b45a3ff4242636f57a3dc2da839fd703394e77098",
+        "hash": "102c45f8b01ca478bf99cf8433736792c36d00c20544f351bea2eaf5bb2567a0",
+        "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "w5-close-out-2026-09-29",
+        "phase": "close_out",
+        "scope_hash": "f3358bac2091c1df04c61a5b45a3ff4242636f57a3dc2da839fd703394e77098",
+        "hash": "2992124aa614c1783506b3ad994e7281c869662dc0b5f46de7faa8ec34ef08ac",
+        "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "w5-close-out-2026-09-29",
+        "phase": "close_out",
+        "scope_hash": "f3358bac2091c1df04c61a5b45a3ff4242636f57a3dc2da839fd703394e77098",
+        "hash": "043486e62f5d4f848abffd9336b1e22c11553f2c29ab2a0aa0e0bc777d674269",
+        "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+      }
+    }
+  }
+}

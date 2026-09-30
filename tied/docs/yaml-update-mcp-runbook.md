@@ -108,6 +108,22 @@ Align with `[PROC-YAML_EDIT_LOOP]` and **sub-yaml-edit-loop** in [agent-req-impl
 
 ---
 
+## 5.1 Optional Jev MCP env (operator-local)
+
+Set on the **tied-yaml** MCP server process (`.cursor/mcp.json` → `mcpServers.tied-yaml.env`). Restart MCP after changes. These do **not** mutate project TIED YAML.
+
+| Variable | Default | Role |
+| --- | --- | --- |
+| `JEV_API_KEY` | unset | Vendor credential; missing → Jev calls **skip** (fail-open for advisory/pre-gate paths). |
+| `JEV_DECIDE_TRACE` | unset / `0` | **`1`** appends redacted `system-one-decide-trace.v1` JSONL per `jevDecide` (including skips). |
+| `JEV_DECIDE_TRACE_PATH` | `working/jev-decide-trace/system-one-decide.v1.jsonl` (relative to repo root via `TIED_BASE_PATH` parent) | Trace sink; parent dirs created best-effort. |
+| `JEV_DECIDE_TRACE_STDERR` | unset | **`1`**: one-line `DEBUG: jev-decide-trace …` summary (no full state on stderr). |
+| `TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | unset | **`1`/`true`**: opt-in Blueprint C evidence sufficiency pre-gate (see [`jev-for-tied-improvement.md`](../../docs/comparisons/jev-for-tied-improvement.md) Blueprint C section). |
+
+Trace files are **local operator artifacts** — do not commit; `working/jev-decide-trace/` is gitignored.
+
+---
+
 ## 6. References
 
 - Tool and resource catalog: [mcp-server/README.md](../../mcp-server/README.md)

@@ -1,0 +1,28 @@
+ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
+  alternatives_considered:
+    - description: "New MCP gate replacing checklist validator"
+      name: "Separate gate validator"
+      rejected_because: "Breaks REQ-TIED_CHECKLIST_GATE_ENFORCEMENT authority"
+  consequences:
+    negative:
+      - "External Jev latency when enabled"
+      - "False reject risk on terse valid evidence"
+    positive:
+      - "Early reject of placeholder evidence"
+      - "Educational decide trace via mcp.json env"
+  context: "Follow-on child of Jev coprocessor; opt-in pre-gate before tied_checklist_gate_validate; shared JEV_DECIDE_TRACE in jevDecide."
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+  decision: "Pure mcp-server/src/jev/checklist-evidence-sufficiency module; hook inside tied_checklist_gate_validate when enabled; standalone diagnostic MCP tool; compose-don't-fork gate authority."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-09-29"
+      reason: "W0 mint"
+  name: "Checklist evidence sufficiency pre-gate architecture"
+  status: "Active"

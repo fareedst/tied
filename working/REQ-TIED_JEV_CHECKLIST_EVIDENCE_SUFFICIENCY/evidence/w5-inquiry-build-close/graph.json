@@ -1,0 +1,67 @@
+{
+  "projectId": "cfd5bf6ad98024eb",
+  "criteria": [
+    {
+      "identity": {
+        "id": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#criterion-1",
+        "kind": "criterion",
+        "derivation": "explicit",
+        "revision": "criterion-rev-tied_jev_checklist_evidence_sufficiency",
+        "sourceRevision": "w5-close-20260929"
+      },
+      "architectureConstraintIds": [
+        "constraint-tied_jev_checklist_evidence_sufficiency"
+      ]
+    }
+  ],
+  "architectureConstraints": [
+    {
+      "id": "constraint-tied_jev_checklist_evidence_sufficiency",
+      "implementationBlockIds": [
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close"
+      ]
+    }
+  ],
+  "implementationBlocks": [
+    {
+      "identity": {
+        "id": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+        "kind": "block",
+        "name": "HOOK_CHECKLIST_GATE_VALIDATE",
+        "derivation": "content",
+        "revision": "fdb28b7acb025802",
+        "sourceRevision": "w5-close-20260929"
+      }
+    }
+  ],
+  "evidenceLoci": [
+    {
+      "id": "test-1",
+      "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+      "kind": "test",
+      "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+      "sourceRevision": "w5-close-20260929"
+    },
+    {
+      "id": "prod-1",
+      "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close",
+      "kind": "production",
+      "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts",
+      "sourceRevision": "w5-close-20260929"
+    }
+  ],
+  "adversarialCases": [
+    {
+      "id": "CE-001",
+      "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close"
+    },
+    {
+      "id": "CE-002",
+      "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close"
+    },
+    {
+      "id": "CE-003",
+      "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5close"
+    }
+  ]
+}

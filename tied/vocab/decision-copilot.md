@@ -44,6 +44,57 @@
 | Prompt-type advisory | `advisePromptTypes` in `mcp-server/src/jev/` | W3 explicit-name heuristic + Jev hint |
 | Adversarial triage pilot | `runAdversarialTriagePilot` | W4 observation-only nouls; no finding-ledger |
 | Harness dist module | `mcp-server/dist/jev/harness-tool-guard.js` | Built artifact required by **harness dist gate** when agentstream harness enabled |
+| Checklist evidence sufficiency | `mcp-server/src/jev/checklist-evidence-sufficiency.ts` | Blueprint C pre-gate module; opt-in `TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` |
+| Gate MCP pre-gate hook | `mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts` | `HOOK_CHECKLIST_GATE_VALIDATE` inside `tied_checklist_gate_validate` |
+| Standalone diagnostic MCP | `tied_jev_checklist_evidence_sufficiency` | Same module; does not emit gate `allowed` |
+| Sufficiency replay / benchmark | `mcp-server/scripts/replay-jev-checklist-evidence-sufficiency.ts` | Arms `deterministic_only`, `jev_on`, `jev_off`, `shadow_compare`; schema `checklist-evidence-sufficiency-benchmark.v1` |
+| Decide trace writer | `mcp-server/src/jev/decide-trace.ts` | Opt-in `JEV_DECIDE_TRACE`; schema **`system-one-decide-trace.v1`** |
+
+---
+
+## Blueprint C — checklist evidence sufficiency (child REQ)
+
+**Traceability:** [REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY](../requirements/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) · [ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY](../architecture-decisions/ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) · [IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY](../implementation-decisions/IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml)
+
+| Preferred term | Avoid | Notes |
+|---|---|---|
+| **evidence sufficiency pre-gate** | checklist gate, gate receipt | Opt-in filter on gate-call path; may reject submission; never authoritative `allowed` |
+| **Blueprint C** | Pattern 11 alone | Taxonomy slice: Pattern **11** (verification — claim vs evidence) + Pattern **5** (evidence gate — factual evidence before phase advance) |
+| **Pattern 5 evidence gate** | pre-gate receipt | Factual evidence before phase advance; code-owned thresholds |
+| **Pattern 11 verification** | envelope validate | Semantic substance of step evidence vs vacuous claims |
+| **compose-don’t-fork** | second gate MCP | Hook inside `tied_checklist_gate_validate`; standalone tool is diagnostic only |
+| **pre_gate** disposition | gate_receipt | Response field `pre_gate: "jev_evidence_sufficiency"` on reject; no `gate_receipt` |
+
+### Configuration (Blueprint C)
+
+| Source | Key | Enabled when |
+|---|---|---|
+| Env | `TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | `"1"` or `"true"`; explicit `"0"`/`"false"` overrides manifest |
+| Manifest | `.tied-yaml.yaml` → `jev.checklist_evidence_sufficiency: true` | boolean `true` only |
+| Trace (independent) | `JEV_DECIDE_TRACE`, `JEV_DECIDE_TRACE_PATH` | Trace may be on while pre-gate is off |
+
+### Decide trace (Blueprint C + shared JEV)
+
+| Preferred term | Env / schema | Notes |
+|---|---|---|
+| **`system-one-decide-trace.v1`** | JSONL `schema` field | One line per `jevDecide` when trace enabled |
+| **`JEV_DECIDE_TRACE`** | env | `"1"` / `"true"` enables append |
+| **`JEV_DECIDE_TRACE_PATH`** | env optional | Default `working/jev-decide-trace/system-one-decide.v1.jsonl` under repo root |
+| **`context_meta` (Blueprint C)** | trace record | Includes `gate_phase`, `step_slug`, feature id `checklist_evidence_sufficiency` for sufficiency fan-out |
+
+### Blueprint C pseudo-code blocks (IMPL)
+
+| Preferred term | UPPER_SNAKE block | Role |
+|---|---|---|
+| Resolve sufficiency config | `RESOLVE_CHECKLIST_EVIDENCE_SUFFICIENCY_CONFIG` | Env + manifest opt-in |
+| Slug scope | `DERIVE_PRE_GATE_TARGET_SLUGS` | Same required set as authoritative gate |
+| Evidence excerpt | `EXTRACT_GATE_EVIDENCE_STATE` | Per-slug text for Jev state |
+| Tier-1 checks | `RUN_DETERMINISTIC_EVIDENCE_PRECHECKS` | Empty / missing token literals |
+| Jev fan-out | `RUN_JEV_EVIDENCE_SUFFICIENCY_FANOUT` | Three questions; fail-open on skip |
+| Thresholds | `APPLY_SUFFICIENCY_THRESHOLDS` | `0.60` nouls; score `<= 2` reject |
+| Pre-gate JSON | `EMIT_PRE_GATE_DISPOSITION` | Never `allowed: true` from Jev |
+| Gate hook | `HOOK_CHECKLIST_GATE_VALIDATE` | W4 MCP integration seam |
+| Trace append | `APPEND_SYSTEM_ONE_DECIDE_TRACE` | Shared with parent JEV program |
 
 ---
 
@@ -113,4 +164,14 @@
 | shadow routing | Preferred terms |
 | service readiness | W6 Cursor plan-skill wiring |
 | speculative fan-out | Preferred terms |
+| Blueprint C | Blueprint C — checklist evidence sufficiency |
+| evidence sufficiency pre-gate | Blueprint C — checklist evidence sufficiency |
+| Pattern 5 evidence gate | Blueprint C — checklist evidence sufficiency |
+| Pattern 11 verification | Blueprint C — checklist evidence sufficiency |
+| system-one-decide-trace.v1 | Blueprint C — checklist evidence sufficiency |
+| JEV_DECIDE_TRACE | Blueprint C — checklist evidence sufficiency |
+| context_meta (Blueprint C) | Blueprint C — checklist evidence sufficiency |
+| HOOK_CHECKLIST_GATE_VALIDATE | Blueprint C — checklist evidence sufficiency |
+| tied_jev_checklist_evidence_sufficiency | Blueprint C — checklist evidence sufficiency |
+| checklist-evidence-sufficiency-benchmark.v1 | Blueprint C — checklist evidence sufficiency |
 | System One model | Preferred terms |

@@ -1,0 +1,13 @@
+{
+  "builder": "build_adversarial_inquiry_from_tied.rb",
+  "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+  "block_id": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver",
+  "project_id": "cfd5bf6ad98024eb",
+  "source_revision": "w5-ver-20260929",
+  "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+  "test_paths": [
+    "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+    "mcp-server/src/jev/checklist-evidence-sufficiency.test.ts"
+  ],
+  "production_path": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts"
+}

@@ -1,0 +1,206 @@
+{
+  "phase": "close_out",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": false,
+    "reason": "collect",
+    "run_id": "w5-close-out-2026-09-29"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "translate-sponsor-intent",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/translate-sponsor-intent-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sync-tied-stack",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/sync-tied-stack-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "apply-token-comments",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/apply-token-comments-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "change-definition",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/change-definition-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "catalog-pseudocode-contracts",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/catalog-pseudocode-contracts-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "test-strategy",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/test-strategy-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "flag-contradictory-specs",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/flag-contradictory-specs-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "session-bootstrap",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/session-bootstrap-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "author-architecture",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/author-architecture-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "author-requirement",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/author-requirement-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "flag-insufficient-specs",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/flag-insufficient-specs-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "impact-discovery",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/impact-discovery-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "resolve-pseudocode",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/resolve-pseudocode-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "persist-citdp-record",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/CITDP-REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "persist-implementation-records",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/persist-implementation-records-evidence.md\""
+          }
+        }
+      ],
+      "ledger_rows": 22,
+      "read_only": true,
+      "process_grade": {
+        "score": 69,
+        "band": "C",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 100,
+            "weight": 0.2,
+            "gap_codes": []
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/verification-evidence-manifest.v1.json"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": false,
+    "envelope_ok": false,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": false,
+    "blocking": true,
+    "diagnostics": [
+      "envelope_blocking_gap:expected_artifact_missing",
+      "envelope_blocking_gap:finding_unresolved",
+      "warn_not_success",
+      "finding_unresolved"
+    ],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 7,
+    "advisory_gap_count": 1,
+    "diagnostics": [
+      "envelope_blocking_gap:expected_artifact_missing",
+      "envelope_blocking_gap:finding_unresolved",
+      "envelope_blocking_gap:finding_unresolved",
+      "envelope_blocking_gap:finding_unresolved",
+      "envelope_blocking_gap:finding_unresolved",
+      "envelope_blocking_gap:finding_unresolved",
+      "envelope_blocking_gap:finding_unresolved"
+    ]
+  }
+}

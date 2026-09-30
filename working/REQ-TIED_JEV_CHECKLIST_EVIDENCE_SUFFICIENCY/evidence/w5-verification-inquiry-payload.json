@@ -1,0 +1,160 @@
+{
+  "graph": {
+    "projectId": "cfd5bf6ad98024eb",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#criterion-1",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-tied_jev_checklist_evidence_sufficiency",
+          "sourceRevision": "w5-ver-20260929"
+        },
+        "architectureConstraintIds": [
+          "constraint-tied_jev_checklist_evidence_sufficiency"
+        ]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-tied_jev_checklist_evidence_sufficiency",
+        "implementationBlockIds": [
+          "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver",
+          "kind": "block",
+          "name": "HOOK_CHECKLIST_GATE_VALIDATE",
+          "derivation": "content",
+          "revision": "02af0d6c14c4f423",
+          "sourceRevision": "w5-ver-20260929"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "test-1",
+        "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver",
+        "kind": "test",
+        "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+        "sourceRevision": "w5-ver-20260929"
+      },
+      {
+        "id": "test-2",
+        "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver",
+        "kind": "test",
+        "location": "mcp-server/src/jev/checklist-evidence-sufficiency.test.ts",
+        "sourceRevision": "w5-ver-20260929"
+      },
+      {
+        "id": "prod-1",
+        "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver",
+        "kind": "production",
+        "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts",
+        "sourceRevision": "w5-ver-20260929"
+      }
+    ],
+    "adversarialCases": [
+      {
+        "id": "CE-001",
+        "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver"
+      },
+      {
+        "id": "CE-002",
+        "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver"
+      },
+      {
+        "id": "CE-003",
+        "blockId": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "02af0d6c14c4f423",
+    "specification": [
+      {
+        "id": "stmt-path-1",
+        "kind": "behavior",
+        "value": "Behavior covered by mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+        "order": 1
+      },
+      {
+        "id": "stmt-path-2",
+        "kind": "behavior",
+        "value": "Behavior covered by mcp-server/src/jev/checklist-evidence-sufficiency.test.ts",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-path-1",
+        "direction": "test",
+        "statementId": "stmt-path-1",
+        "kind": "behavior",
+        "value": "Declared test path mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+        "order": 1,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts"
+        },
+        "provenance": "declared-path",
+        "blockRevision": "02af0d6c14c4f423"
+      },
+      {
+        "id": "test-path-2",
+        "direction": "test",
+        "statementId": "stmt-path-2",
+        "kind": "behavior",
+        "value": "Declared test path mcp-server/src/jev/checklist-evidence-sufficiency.test.ts",
+        "order": 2,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/jev/checklist-evidence-sufficiency.test.ts"
+        },
+        "provenance": "declared-path",
+        "blockRevision": "02af0d6c14c4f423"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-path-1",
+        "direction": "production",
+        "statementId": "stmt-path-prod",
+        "kind": "behavior",
+        "value": "Declared production path mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts",
+        "order": 1,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts"
+        },
+        "provenance": "declared-path",
+        "blockRevision": "02af0d6c14c4f423"
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+  "run_id": "w5-build-plan-2026-09-29",
+  "phase": "verification",
+  "provenance": {
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+    "block_id": "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY#HOOK_CHECKLIST_GATE_VALIDATE#w5ver",
+    "project_id": "cfd5bf6ad98024eb",
+    "source_revision": "w5-ver-20260929",
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "test_paths": [
+      "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+      "mcp-server/src/jev/checklist-evidence-sufficiency.test.ts"
+    ],
+    "production_path": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts"
+  }
+}
