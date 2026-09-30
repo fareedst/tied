@@ -11,10 +11,10 @@
       "subject": "docs(evidence): record Blueprint C machine close-out and PLAN pass 3"
     }
   ],
-  "co5_sponsor_commit_sha": null,
-  "co5_sponsor_commit_subject": null,
-  "committed_at": null,
-  "sponsor_commit_status": "pending_parent_delta_commit",
+  "co5_sponsor_commit_sha": "d65bbf9",
+  "co5_sponsor_commit_subject": "docs(evidence): CO5 sponsor close-out for Blueprint C checklist sufficiency.",
+  "committed_at": "2026-09-30",
+  "sponsor_commit_status": "complete",
   "gate_artifact": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json",
   "gate_allowed": true,
   "envelope_blocking_gap_count": 0,
