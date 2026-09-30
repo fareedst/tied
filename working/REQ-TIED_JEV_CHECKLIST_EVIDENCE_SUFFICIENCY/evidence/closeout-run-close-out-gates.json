@@ -1,6 +1,3 @@
-DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/verification-evidence-manifest.v1.json: envelope_revision_conflict
-DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
-DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json: envelope_revision_conflict
 {
   "phase": "close_out",
   "depth_tier": "integrated",
@@ -86,5 +83,10 @@ DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SU
     "blocking_gap_count": 0,
     "advisory_gap_count": 0,
     "diagnostics": []
+  },
+  "co5_revalidation": {
+    "session_run_id": "closeout-2026-09-30-co5",
+    "unified_runner_run_id": "closeout-2026-09-30",
+    "note": "Activation provenance binds closeout-2026-09-30; co5 sponsor pass re-ran unified runner with identity run_id."
   }
 }

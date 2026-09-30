@@ -19,7 +19,7 @@ todos:
     status: completed
   - id: co5-changelog-commit
     content: "CO5 — CHANGELOG; parent git commit when machine close-out pass (plan-close-out proposes message only)"
-    status: pending
+    status: completed
 isProject: false
 ---
 

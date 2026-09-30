@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-30T04:27:12.323Z",
+    "generated_at": "2026-09-30T17:45:23.671Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -158,7 +158,7 @@
       "kind": "evidence_chain_profile",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:35a33dddf8a73a06f5f57839343f93d437e2fd1ca1676c024eec524b83030cb4",
+      "content_hash": "sha256:8de747bb311f4e0e2568f1a0e1c91fb787248d8afd54dd8fdafd764dc4034f53",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -180,7 +180,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:e7874ca726ad2e6311638a96cd00e9f46379507e5182b3d0d1724a71eb127da1",
+      "content_hash": "sha256:94fc9ee15c8553574d9527f9c0ec2c072d6827bb454c899130b69b0f674f51d3",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -300,8 +300,30 @@
     {
       "kind": "unknown",
       "schema_version": null,
-      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json",
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates-co4.stderr.txt",
       "content_hash": "sha256:c345420731eed624dfd984fffa10f4ccc01fa37f54172f0b5d5f984329ac1346",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.stderr.txt",
+      "content_hash": "sha256:339eae88c3501980a0e8eb05c31172d32772a9c05f5a4fb354938cb1d3a87e9f",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

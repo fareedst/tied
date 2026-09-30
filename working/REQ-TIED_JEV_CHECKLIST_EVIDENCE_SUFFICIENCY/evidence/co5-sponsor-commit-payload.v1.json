@@ -1,0 +1,90 @@
+{
+  "schema": "co5-sponsor-commit-payload.v1",
+  "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+  "blueprint": "C",
+  "run_id": "closeout-2026-09-30-co5",
+  "prepared_at": "2026-09-30",
+  "prepared_by": "plan-close-out (CO5); sponsor commit deferred to parent agent",
+  "proposed_commit_message": "docs(evidence): CO5 sponsor close-out for Blueprint C checklist sufficiency.\n\nRefresh unified close-out gates, envelope/profile snapshots, and CO5 sponsor\npayload for REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY; product shipped in\n7c7b110 and d8fc09d.",
+  "primary_feature_commits": [
+    {
+      "sha": "7c7b110",
+      "subject": "feat(jev): close out Blueprint C checklist evidence sufficiency pre-gate"
+    },
+    {
+      "sha": "d8fc09d",
+      "subject": "docs(evidence): record Blueprint C machine close-out and PLAN pass 3"
+    }
+  ],
+  "stage_paths": {
+    "include_globs": [
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json",
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json",
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json",
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/tied-validate-consistency-closeout.json",
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/co5-sponsor-commit-payload.v1.json",
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/co5-sponsor-commit-receipt.v1.json",
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/plan-close-out-handoff.md",
+      "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/PLAN-CLOSE-OUT.md"
+    ],
+    "exclude_notes": [
+      "Feature code and TIED tokens already on main via 7c7b110 + d8fc09d — do not re-stage mcp-server/ or tied/ unless sponsor intentionally amends those commits",
+      "tied/citdp/CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME.yaml and REQ-TIED_SETUP.yaml",
+      "mcp-server/test/fixtures/adversarial-inquiry-*/**/request-evidence-envelope.v1.json",
+      "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-* unrelated churn",
+      "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/** and working/REQ-TIED_JEV_TOOL_SAFETY_GATING/** unless separate commit",
+      "scripts/refresh-tied-client.sh, scripts/build-commands.sh, unrelated mcp-server test churn",
+      "working/jev-decide-trace/"
+    ],
+    "summary": "CO5 evidence delta only: refreshed close-out gates (co5 session), envelope/profile/consistency snapshots, sponsor payload/receipt, handoff and PLAN-CLOSE-OUT frontmatter."
+  },
+  "gate_pass_criteria": {
+    "machine_close_out": {
+      "tied_checklist_gate_validate": {
+        "phase": "close_out",
+        "allowed": true,
+        "run_id": "closeout-2026-09-30",
+        "co5_note": "Unified runner uses identity run_id closeout-2026-09-30; --run-id closeout-2026-09-30-co5 alone fails activation collect (run_id_provenance_mismatch)."
+      },
+      "unified_close_out_runner": {
+        "artifact": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json",
+        "gate_allowed": true,
+        "envelope_blocking_gap_count": 0,
+        "merged_decision_blocking": false,
+        "co5_session_run_id": "closeout-2026-09-30-co5"
+      },
+      "request_evidence_envelope": {
+        "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json",
+        "fail_on_error_gaps": true,
+        "blocking_gaps": 0
+      }
+    },
+    "verification": {
+      "focused_tests": {
+        "cmd": "cd mcp-server && bun test src/jev/checklist-evidence-sufficiency.test.ts src/jev/checklist-evidence-sufficiency-benchmark.test.ts src/tools/checklist-evidence-sufficiency-mcp.test.ts",
+        "passed": 33,
+        "failed": 0,
+        "evidence": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/w5-build-plan-handoff.md"
+      },
+      "lint": {
+        "cmd": "cd mcp-server && bunx tsc -b",
+        "exit_code": 0,
+        "evidence": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/plan-close-out-handoff.md (CO0)"
+      },
+      "tied_validate_consistency": {
+        "ok": true,
+        "artifact": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/tied-validate-consistency-closeout.json"
+      }
+    },
+    "sponsor_commit": {
+      "action": "parent_agent_traceable_commit",
+      "must_not": ["git commit by plan-close-out subagent"],
+      "feature_already_committed": true,
+      "post_commit_evidence_optional": "record CO5 delta commit SHA in co5-sponsor-commit-receipt.v1.json"
+    }
+  },
+  "handoff_pointers": [
+    "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/plan-close-out-handoff.md",
+    "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/PLAN-CLOSE-OUT.md"
+  ]
+}

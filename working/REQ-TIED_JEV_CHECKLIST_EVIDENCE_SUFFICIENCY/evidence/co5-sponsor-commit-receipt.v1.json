@@ -1,0 +1,31 @@
+{
+  "schema": "co5-sponsor-commit-receipt.v1",
+  "request_token": "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+  "primary_feature_commits": [
+    {
+      "sha": "7c7b110",
+      "subject": "feat(jev): close out Blueprint C checklist evidence sufficiency pre-gate"
+    },
+    {
+      "sha": "d8fc09d",
+      "subject": "docs(evidence): record Blueprint C machine close-out and PLAN pass 3"
+    }
+  ],
+  "co5_sponsor_commit_sha": null,
+  "co5_sponsor_commit_subject": null,
+  "committed_at": null,
+  "sponsor_commit_status": "pending_parent_delta_commit",
+  "gate_artifact": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json",
+  "gate_allowed": true,
+  "envelope_blocking_gap_count": 0,
+  "run_id": "closeout-2026-09-30-co5",
+  "activation_identity_run_id": "closeout-2026-09-30",
+  "payload": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/co5-sponsor-commit-payload.v1.json",
+  "excluded_from_commit": [
+    "mcp-server/ and tied/ product paths (already in 7c7b110)",
+    "tied/requirements/REQ-TIED_SETUP.yaml",
+    "tied/citdp/CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME.yaml",
+    "mcp-server/test/fixtures/adversarial-inquiry-* envelope churn",
+    "unrelated working/REQ-* tracks and scripts/refresh-tied-client.sh"
+  ]
+}
