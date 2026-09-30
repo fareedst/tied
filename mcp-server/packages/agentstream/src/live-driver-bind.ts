@@ -11,6 +11,7 @@ import {
 } from "./claude-driver.js";
 import type { AgentHarnessProfile } from "./harness-select.js";
 import { runAgent, type RunResult } from "./executor-run.js";
+import type { ContextLogPruneHook } from "./jev-context-log-pruning-stream.js";
 import type { JevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import { selectLiveDriver } from "./live-driver-select.js";
 
@@ -36,6 +37,7 @@ export type BindLiveExecutorInput = {
   claudeLaunchFn?: ClaudeLaunchFn;
   claudeLaunchFnIsTestDouble?: boolean;
   jevToolGate?: JevLiveToolGate | null;
+  contextLogPrune?: ContextLogPruneHook | null;
 };
 
 /** [BIND_LIVE_EXECUTOR_CLAUDE] Bind harness profile to Cursor or Claude live driver. */
@@ -61,6 +63,7 @@ export function bindLiveExecutorDriver(
 
   if (selection.driverKind === "claude") {
     const jevToolGate = input.jevToolGate ?? null;
+    const contextLogPrune = input.contextLogPrune ?? null;
     return {
       driverKind: "claude",
       runTurn: async (argv, extraEnv) => {
@@ -69,6 +72,7 @@ export function bindLiveExecutorDriver(
           (() =>
             collectClaudeStreamFromSpawn(argv, extraEnv, {
               jevToolGate,
+              contextLogPrune,
             }));
         let lastStderrTail = "";
         let lastGateStderr = "";
@@ -121,6 +125,7 @@ export function bindLiveExecutorDriver(
         agentPathOverride !== "" ? [agentPathOverride, ...argv.slice(1)] : argv;
       const { result, exitCode, gateStderr } = await runAgent(effectiveArgv, extraEnv, {
         jevToolGate: input.jevToolGate ?? null,
+        contextLogPrune: input.contextLogPrune ?? null,
       });
       return { result, exitCode, jevGateStderr: gateStderr };
     },

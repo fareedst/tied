@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_JEV_DECISION_COPROCESSOR](../requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml)
 
-**See also:** [`routing.md`](routing.md) · [`prompt-composer.md`](prompt-composer.md) · [`fidelity-research.md`](fidelity-research.md)
+**See also:** [`routing.md`](routing.md) · [`prompt-composer.md`](prompt-composer.md) · [`fidelity-research.md`](fidelity-research.md) · [`system-one-jev-taxonomy-and-opportunities.md`](../../docs/comparisons/system-one-jev-taxonomy-and-opportunities.md)
 
 ---
 
@@ -13,7 +13,11 @@
 | Preferred | Avoid | Notes |
 |-----------|-------|-------|
 | **System One model** | small LLM, classifier LLM | Typed decisions only; no prose generation |
+| **bounded semantic decision engine** | generative LLM (for decisions) | State in, typed judgments + calibrated probabilities out |
 | **decision coprocessor** | Jev agent | Advises; code and deterministic gates commit outcomes |
+| **decision algebra** | ad-hoc classification | 6 operators: judge, transform collection, control program, control sequence, control uncertainty, control expensive intelligence |
+| **decision role taxonomy** | subject-matter catalog | 40-category functional classification organized by 27 canonical decision verbs |
+| **semantic garbage collection** | context summarization | Pruning logs and context chunks by semantic relevance rather than lossy LLM summarization |
 | **noul gate** | boolean LLM output | Calibrated 0–1 yes/no; threshold policy is code-owned |
 | **speculative fan-out** | sequential LLM chain | Many `questions` in one `/v1/decide` call |
 | **shadow routing** | replace routing.md | Log Jev glossary picks vs keyword PRELOAD without changing behavior |
@@ -30,10 +34,12 @@
 
 | Concept | Env / path | Role |
 |---------|------------|------|
-| API key | `JEV_API_KEY` | Server-side only; `jv_live_*` |
+| API key | `JEV_API_KEY` | Server-side only; `jv_live_*`; CLI/replay may fall back to `.cursor/mcp.json` `tied-yaml` env when process env is unset (file is gitignored) |
 | Model pin | `JEV_MODEL` | Default `jev-1.13.0` |
 | API base | `JEV_API_BASE` | Default `https://jevtypesafeai.com/api` |
 | HTTP client | `mcp-server/src/jev/` | W1 `jevDecide` wrapper |
+| Context log pruner | `mcp-server/src/jev/context-log-pruner.ts` | Blueprint A chunk pipeline; opt-in `TIED_JEV_CONTEXT_LOG_PRUNING` |
+| Context pruning replay | `mcp-server/scripts/replay-jev-context-pruning.ts` | Five benchmark arms; `context-pruning-benchmark.v1` |
 | Shadow PRELOAD replay | `mcp-server/scripts/replay-jev-vocab-shadow.ts` | W2 keyword vs Jev JSONL log |
 | Prompt-type advisory | `advisePromptTypes` in `mcp-server/src/jev/` | W3 explicit-name heuristic + Jev hint |
 | Adversarial triage pilot | `runAdversarialTriagePilot` | W4 observation-only nouls; no finding-ledger |
@@ -84,8 +90,11 @@
 | tiebreak shadow mode | W6 Cursor plan-skill wiring |
 | tied_jev_adversarial_triage_pilot | W6 Cursor plan-skill wiring |
 | configured | W6 Cursor plan-skill wiring |
+| bounded semantic decision engine | Preferred terms |
 | confidence threshold policy | Preferred terms |
+| decision algebra | Preferred terms |
 | decision coprocessor | Preferred terms |
+| decision role taxonomy | Preferred terms |
 | fail-closed tool block | Preferred terms |
 | harness dist gate | Preferred terms |
 | missing-dist hard stop | Preferred terms |
@@ -100,6 +109,7 @@
 | plan-skills adjunct | W6 Cursor plan-skill wiring |
 | RESOLVE_PLAN_SKILLS_CONFIG | W6 proposed pseudo-code blocks |
 | RUN_PLAN_SKILLS_SHADOW | W6 proposed pseudo-code blocks |
+| semantic garbage collection | Preferred terms |
 | shadow routing | Preferred terms |
 | service readiness | W6 Cursor plan-skill wiring |
 | speculative fan-out | Preferred terms |

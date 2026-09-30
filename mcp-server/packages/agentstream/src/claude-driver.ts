@@ -8,6 +8,11 @@ import readline from "node:readline";
 
 import type { RunResult } from "./executor-run.js";
 import {
+  createContextLogPruneStreamState,
+  enqueueContextLogPruneLineCheck,
+  type ContextLogPruneHook,
+} from "./jev-context-log-pruning-stream.js";
+import {
   createToolGateStreamState,
   enqueueToolGateLineCheck,
   type JevLiveToolGate,
@@ -39,6 +44,7 @@ export type ClaudeLaunchResult = {
 
 export type CollectClaudeStreamOptions = {
   jevToolGate?: JevLiveToolGate | null;
+  contextLogPrune?: ContextLogPruneHook | null;
 };
 
 export type ClaudeLaunchFn = () => Promise<ClaudeLaunchResult> | ClaudeLaunchResult;
@@ -167,7 +173,9 @@ export async function collectClaudeStreamFromSpawn(
     const lines: string[] = [];
     let stderrBuf = "";
     const toolGate = options.jevToolGate ?? null;
+    const contextLogPrune = options.contextLogPrune ?? null;
     const gateState = createToolGateStreamState();
+    const pruneState = createContextLogPruneStreamState();
     const rl = readline.createInterface({ input: cmd.stdout! });
     rl.on("line", (line) => {
       const trimmed = line.trim();
@@ -178,6 +186,9 @@ export async function collectClaudeStreamFromSpawn(
         enqueueToolGateLineCheck(gateState, toolGate, line, () => {
           cmd.kill("SIGTERM");
         });
+      }
+      if (contextLogPrune) {
+        enqueueContextLogPruneLineCheck(pruneState, contextLogPrune, line);
       }
     });
     cmd.stderr!.on("data", (chunk: Buffer | string) => {
@@ -192,7 +203,7 @@ export async function collectClaudeStreamFromSpawn(
       rl.close();
     });
     rl.on("close", () => {
-      void gateState.gateChain.then(() => {
+      void Promise.all([gateState.gateChain, pruneState.chain]).then(() => {
         let exitCode = childExitCode;
         if (gateState.gateBlocked) {
           exitCode = 1;

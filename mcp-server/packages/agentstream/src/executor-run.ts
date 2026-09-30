@@ -5,6 +5,11 @@
 import { spawn } from "node:child_process";
 import readline from "node:readline";
 
+import type { ContextLogPruneHook } from "./jev-context-log-pruning-stream.js";
+import {
+  createContextLogPruneStreamState,
+  enqueueContextLogPruneLineCheck,
+} from "./jev-context-log-pruning-stream.js";
 import type { JevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import {
   createToolGateStreamState,
@@ -13,6 +18,7 @@ import {
 
 export type RunAgentOptions = {
   jevToolGate?: JevLiveToolGate | null;
+  contextLogPrune?: ContextLogPruneHook | null;
 };
 
 export type RunResult = {
@@ -74,7 +80,9 @@ export async function runAgent(
     let transcript = "";
     const errLines: string[] = [];
     const gateState = createToolGateStreamState();
+    const pruneState = createContextLogPruneStreamState();
     const toolGate = options.jevToolGate ?? null;
+    const contextLogPrune = options.contextLogPrune ?? null;
 
     const rl = readline.createInterface({ input: cmd.stdout! });
     rl.on("line", (line) => {
@@ -94,6 +102,9 @@ export async function runAgent(
           errLines.push(`agentstream: jev harness blocked tool proposal\n`);
           cmd.kill("SIGTERM");
         });
+      }
+      if (contextLogPrune) {
+        enqueueContextLogPruneLineCheck(pruneState, contextLogPrune, trimmed);
       }
       if (typeof obj.session_id === "string" && obj.session_id !== "") {
         captured = obj.session_id;
@@ -122,7 +133,7 @@ export async function runAgent(
 
     cmd.on("close", (code) => {
       rl.close();
-      void gateState.gateChain.then(() => {
+      void Promise.all([gateState.gateChain, pruneState.chain]).then(() => {
         let exitCode = code ?? 1;
         if (gateState.gateBlocked) {
           exitCode = 1;
@@ -133,7 +144,8 @@ export async function runAgent(
           thinkingText,
           transcript,
         };
-        const gateStderr = gateState.gateStderrLines.join("");
+        const gateStderr =
+          gateState.gateStderrLines.join("") + pruneState.stderrLines.join("");
         if (exitCode !== 0) {
           errLines.push(`agent exited with status ${exitCode}\n`);
           resolve({

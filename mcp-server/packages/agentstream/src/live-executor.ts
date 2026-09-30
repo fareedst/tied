@@ -12,6 +12,7 @@ import { agentArgv } from "./executor-run.js";
 import { bindLiveExecutorDriver } from "./live-driver-bind.js";
 import { runTiedPreflight, type DryRunStreams } from "./executor-dry-run.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
+import { createContextLogPruneHook } from "./jev-context-log-pruning-stream.js";
 import { createJevLiveToolGate } from "./jev-harness-live-tool-gate.js";
 import {
   jevAgentstreamHarnessEnabled,
@@ -264,10 +265,13 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     };
   }
 
+  const contextLogPrune = await createContextLogPruneHook(cfg);
+
   const liveBinding = bindLiveExecutorDriver({
     harnessProfile: cfg.agentHarness,
     agentPath: cfg.agentPath,
     jevToolGate,
+    contextLogPrune,
   });
 
   let running = "";

@@ -8,6 +8,10 @@ export {
   DEFAULT_JEV_MODEL,
 } from "./constants.js";
 export { jevDecide, resolveJevConfig, type JevClientConfig, type JevFetch } from "./client.js";
+export {
+  resolveJevApiKey,
+  readJevApiKeyFromMcpJsonFile,
+} from "./resolve-jev-api-key.js";
 export { matchKeywordGlossaries } from "./keyword-preload.js";
 export { redactState, redactString, stateSerializedLength } from "./redact-state.js";
 export {
@@ -65,3 +69,13 @@ export type {
   JevSkipReason,
   JevState,
 } from "./types.js";
+export {
+  pruneContextLog,
+  resolveContextLogPruningConfig,
+  deterministicChunkDisposition,
+  splitIntoChunks,
+  type BenchmarkArm,
+  type ContextLogPruningConfig,
+  type ContextLogPruneMetrics,
+  type PruneContextLogOptions,
+} from "./context-log-pruner.js";

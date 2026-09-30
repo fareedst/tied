@@ -1,0 +1,25 @@
+IMPL-TIED_JEV_CONTEXT_LOG_PRUNING:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"
+    implementation: []
+    requirements:
+      - "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
+  description: "Chunking, noul disposition, metrics, fallback, replay CLI per essence_pseudocode sidecar."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_JEV_CONTEXT_LOG_PRUNING-pseudocode.md"
+  implementation_approach:
+    details:
+      - approach: "fixtures JSONL and benchmark schema v1"
+        phase: "W3"
+      - approach: "Jev fan-out per chunk with fallback keep"
+        phase: "W2"
+      - approach: "pass-through, chunk, surround merge, deterministic disposition"
+        phase: "W1"
+    summary: "TDD on context-log-pruner.ts; mocked Jev in CI; replay-jev-context-pruning.ts for five arms."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-09-29"
+      reason: "W0 mint"
+  name: "Context log pruner implementation"
+  status: "Active"

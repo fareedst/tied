@@ -1870,6 +1870,16 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
+    requirements:
+      - "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
+  detail_file: "architecture-decisions/ARCH-TIED_JEV_CONTEXT_LOG_PRUNING.yaml"
+  name: "Context log pruner architecture"
+  status: "Active"
 ARCH-TIED_JEV_DECISION_COPROCESSOR:
   cross_references:
     architecture: []

@@ -2100,6 +2100,16 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
     - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
       method: "Unit tests"
+REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
+  cross_references:
+    architecture: []
+    implementation: []
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  detail_file: "requirements/REQ-TIED_JEV_CONTEXT_LOG_PRUNING.yaml"
+  name: "Jev context log semantic pruning (Blueprint A)"
+  priority: "P2"
+  status: "In Progress"
 REQ-TIED_JEV_DECISION_COPROCESSOR:
   category: "Methodology"
   cross_references:

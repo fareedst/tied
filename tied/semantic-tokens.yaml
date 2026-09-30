@@ -796,6 +796,19 @@ ARCH-TIED_FIDELITY_RESEARCH:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
+  cross_references:
+    - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
+    - "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
+  description: "Pure pruner module and Jev adapter boundary"
+  detail_file: "architecture-decisions/ARCH-TIED_JEV_CONTEXT_LOG_PRUNING.yaml"
+  metadata:
+    last_updated: "2026-09-29"
+    registered: "2026-09-29"
+  name: "Context log pruner architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_JEV_DECISION_COPROCESSOR:
   cross_references:
     - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
@@ -1898,6 +1911,19 @@ IMPL-TIED_FILES:
     last_updated: "2026-02-08T00:00:00.000Z"
     registered: "2025-12-18T00:00:00.000Z"
   name: "TIED File Creation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_JEV_CONTEXT_LOG_PRUNING:
+  cross_references:
+    - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"
+    - "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
+  description: "Chunking, disposition, metrics, replay CLI"
+  detail_file: "implementation-decisions/IMPL-TIED_JEV_CONTEXT_LOG_PRUNING.yaml"
+  metadata:
+    last_updated: "2026-09-29"
+    registered: "2026-09-29"
+  name: "Context log pruner implementation"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -3168,6 +3194,20 @@ REQ-TIED_FIDELITY_RESEARCH:
   name: "TIED Fidelity Research"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
+  cross_references:
+    - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"
+    - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  description: "Blueprint A opt-in semantic GC for terminal/tool output with benchmark arms"
+  detail_file: "requirements/REQ-TIED_JEV_CONTEXT_LOG_PRUNING.yaml"
+  metadata:
+    last_updated: "2026-09-29"
+    registered: "2026-09-29"
+  name: "Jev context log semantic pruning"
+  source_index: "requirements.yaml"
+  status: "In Progress"
   type: "REQ"
 REQ-TIED_JEV_DECISION_COPROCESSOR:
   cross_references:

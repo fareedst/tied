@@ -1,0 +1,25 @@
+ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
+  alternatives_considered:
+    - description: "Single-item advisory only"
+      name: "Merge into adviseContextFilter"
+      rejected_because: "Loses chunk pipeline and benchmark clarity per PLAN.md"
+  consequences:
+    negative:
+      - "External Jev latency on large logs when enabled"
+    positive:
+      - "Isolated benchmark arms and safety tests"
+  context: "Follow-on child of Jev coprocessor; prunes sanitized terminal/tool-result text only."
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
+    requirements:
+      - "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
+  decision: "Pure mcp-server/src/jev/context-log-pruner module with Jev adapter boundary; W5 adviseContextFilter unchanged; opt-in TIED_JEV_CONTEXT_LOG_PRUNING; replay benchmark emits context-pruning-benchmark.v1."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-09-29"
+      reason: "W0 mint"
+  name: "Context log pruner architecture"
+  status: "Active"

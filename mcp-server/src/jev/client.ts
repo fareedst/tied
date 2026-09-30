@@ -7,6 +7,7 @@ import {
   DEFAULT_JEV_MAX_STATE_CHARS,
   DEFAULT_JEV_MODEL,
 } from "./constants.js";
+import { resolveJevApiKey } from "./resolve-jev-api-key.js";
 import { redactState, stateSerializedLength } from "./redact-state.js";
 import type {
   JevDecideRequest,
@@ -34,9 +35,12 @@ export function resolveJevConfig(
   overrides: JevClientConfig = {},
 ): Required<Pick<JevClientConfig, "apiBase" | "model" | "maxStateChars">> &
   Pick<JevClientConfig, "apiKey" | "fetchImpl"> {
+  const apiKey =
+    "apiKey" in overrides
+      ? overrides.apiKey
+      : resolveJevApiKey(env) ?? env.JEV_API_KEY;
   return {
-    apiKey:
-      overrides.apiKey !== undefined ? overrides.apiKey : env.JEV_API_KEY,
+    apiKey,
     apiBase: overrides.apiBase ?? env.JEV_API_BASE ?? DEFAULT_JEV_API_BASE,
     model: overrides.model ?? env.JEV_MODEL ?? DEFAULT_JEV_MODEL,
     maxStateChars: overrides.maxStateChars ?? DEFAULT_JEV_MAX_STATE_CHARS,
