@@ -22,7 +22,7 @@
 | --- | --- |
 | CO0–CO4 | Completed prior session (tracker, inquiry ×3, first unified close-out) |
 | CO5 (plan-close-out) | CHANGELOG Unreleased entry; `.gitignore` `!` negations applied unstaged; gate JSON refreshed; **CO5 subagent complete** |
-| CO5 (sponsor) | **Ready for parent** — stage/commit per [co5-sponsor-commit-payload.v1.json](evidence/co5-sponsor-commit-payload.v1.json) (no commit from plan-close-out) |
+| CO5 (sponsor) | **Done** — commit `41e89bb` on `main`; [co5-sponsor-commit-receipt.v1.json](evidence/co5-sponsor-commit-receipt.v1.json) |
 
 ## Validation
 
