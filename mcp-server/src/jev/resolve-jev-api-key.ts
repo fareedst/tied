@@ -46,15 +46,15 @@ export function defaultMcpJsonPath(repoRoot: string): string {
 
 /**
  * PRE: env may be empty; mcp.json may exist locally and is gitignored.
- * POST: trimmed key or undefined; env always wins when set.
+ * POST: trimmed key or undefined; when JEV_API_KEY is present in env (even blank), mcp.json is not consulted.
  */
 export function resolveJevApiKey(
   env: NodeJS.ProcessEnv = process.env,
   options?: { repoRoot?: string; mcpJsonPath?: string },
 ): string | undefined {
-  const fromEnv = env.JEV_API_KEY?.trim();
-  if (fromEnv) {
-    return fromEnv;
+  if (Object.prototype.hasOwnProperty.call(env, "JEV_API_KEY")) {
+    const fromEnv = env.JEV_API_KEY?.trim();
+    return fromEnv !== "" ? fromEnv : undefined;
   }
   const mcpPath =
     options?.mcpJsonPath ??

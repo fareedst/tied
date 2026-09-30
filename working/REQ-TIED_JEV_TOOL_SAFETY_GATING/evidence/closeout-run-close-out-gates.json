@@ -1,0 +1,101 @@
+{
+  "phase": "close_out",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": false,
+    "reason": "collect",
+    "run_id": "closeout-inquiry-2026-09-30-close_out"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "verification-gate",
+            "error": "missing_artifact: \"working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/verification-evidence-manifest.v1.json\""
+          }
+        }
+      ],
+      "ledger_rows": 23,
+      "read_only": true,
+      "process_grade": {
+        "score": 69,
+        "band": "C",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 100,
+            "weight": 0.2,
+            "gap_codes": []
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "manifest_not_collected"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": false,
+    "envelope_ok": false,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": false,
+    "blocking": true,
+    "diagnostics": [
+      "missing_completion_activation",
+      "envelope_blocking_gap:expected_artifact_missing"
+    ],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 1,
+    "advisory_gap_count": 1,
+    "diagnostics": [
+      "envelope_blocking_gap:expected_artifact_missing"
+    ]
+  }
+}

@@ -140,6 +140,7 @@ import {
   checklistEvidenceSufficiencyTools,
   hookChecklistGateEvidenceSufficiencyPreGate,
 } from "./checklist-evidence-sufficiency-mcp.js";
+import { toolSafetyMcpTools } from "./tool-safety-mcp.js";
 import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
 import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
 import { validateRequestEvidenceEnvelope } from "../request-evidence-envelope/validate.js";
@@ -3302,4 +3303,5 @@ export const allTools = [
   },
   ...jevPlanSkillsTools,
   ...checklistEvidenceSufficiencyTools,
+  ...toolSafetyMcpTools,
 ];

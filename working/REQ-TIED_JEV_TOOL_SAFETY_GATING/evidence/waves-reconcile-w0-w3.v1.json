@@ -1,0 +1,104 @@
+{
+  "schema": "blueprint-d-wave-reconcile.v1",
+  "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+  "reconciled_at": "2026-09-30",
+  "summary": "W0–W3 implementation artifacts and tests match plan scope; PLAN todos updated to completed. W0 pre_implementation checklist gate remained blocked at mint time (tracker/adversarial pairing); Layer B/C pseudo-code gates passed.",
+  "waves": {
+    "W0": {
+      "plan_todo": "w0-child-contract",
+      "status": "completed",
+      "deliverables": {
+        "req_arch_impl_minted": true,
+        "citdp": "tied/citdp/CITDP-REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml",
+        "tracker": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/agent-req-implementation-checklist.yaml",
+        "sidecar": "tied/implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING-pseudocode.md",
+        "layer_b_pseudocode_ok": true,
+        "layer_c_pseudocode_analyze_ok": true,
+        "tied_validate_consistency_ok": true
+      },
+      "evidence": [
+        "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/w0-req-create.json",
+        "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/w0-arch-create.json",
+        "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/w0-impl-create.json",
+        "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/w0-citdp-record.json",
+        "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w0-pseudocode-validate-result.json",
+        "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/w0-pseudocode-analyze.json",
+        "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w0-pre-implementation-gate.json"
+      ],
+      "gaps": [
+        "pre_implementation tied_checklist_gate_validate allowed=false (tracker_sparse, integrated activation pairing incomplete at W0)"
+      ]
+    },
+    "W1": {
+      "plan_todo": "w1-guard-tdd",
+      "status": "completed",
+      "module": "mcp-server/src/jev/harness-tool-guard.ts",
+      "tests": "mcp-server/src/jev/harness-tool-guard.test.ts",
+      "criteria": [
+        "SC-D-QUESTIONS",
+        "SC-D-FAST-DENY",
+        "SC-D-THRESHOLDS",
+        "SC-D-SCOPE (guard unit)",
+        "SC-D-FALLBACK (missing key)",
+        "SC-D-TRACE-PRIVACY (redactState path)",
+        "SC-W5-PRESERVED"
+      ],
+      "test_run": {
+        "cmd": "cd mcp-server && bun test src/jev/harness-tool-guard.test.ts",
+        "passed": 14,
+        "failed": 0,
+        "reconciled_exit_code": 0
+      },
+      "residual": [
+        "SC-D-FALLBACK: malformed/missing noul answer keys may allow at combined=0 (see w5-verify-closeout.v1.json)"
+      ],
+      "w5_fallback_tests_added": [
+        "SC-D-FALLBACK: non-2xx Jev response fail-closed",
+        "SC-D-FALLBACK: state-too-large skip fail-closed"
+      ]
+    },
+    "W2": {
+      "plan_todo": "w2-benchmark",
+      "status": "completed",
+      "module": "mcp-server/src/jev/tool-safety-benchmark.ts",
+      "fixture": "mcp-server/test/fixtures/tool-safety/labeled-corpus.v1.jsonl",
+      "replay": "mcp-server/scripts/replay-jev-tool-safety-benchmark.ts",
+      "report": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tool-safety-benchmark.v1.json",
+      "criteria": ["SC-D-BENCH"],
+      "fixture_hash": "71ec25869edade56e8cedeae095d5be43000c0ea27c612d2868698e3376a9a33",
+      "fixture_count": 33,
+      "arms": [
+        "deterministic_only",
+        "jev_on",
+        "jev_off",
+        "jev_unavailable",
+        "shadow_compare"
+      ],
+      "test_run": {
+        "cmd": "cd mcp-server && bun test src/jev/tool-safety-benchmark.test.ts",
+        "passed": 2,
+        "failed": 0
+      }
+    },
+    "W3": {
+      "plan_todo": "w3-diagnostic-mcp",
+      "status": "completed",
+      "module": "mcp-server/src/tools/tool-safety-mcp.ts",
+      "registration": "mcp-server/src/tools/index.ts (toolSafetyMcpTools)",
+      "tool_name": "tied_jev_tool_safety_evaluate",
+      "tests": "mcp-server/src/tools/tool-safety-mcp.test.ts",
+      "criteria": ["SC-D-MCP-AUTHORITY"],
+      "test_run": {
+        "cmd": "cd mcp-server && bun test src/tools/tool-safety-mcp.test.ts",
+        "passed": 4,
+        "failed": 0
+      }
+    }
+  },
+  "combined_test_run": {
+    "cmd": "cd mcp-server && bun test src/jev/harness-tool-guard.test.ts src/jev/tool-safety-benchmark.test.ts src/tools/tool-safety-mcp.test.ts",
+    "passed": 20,
+    "failed": 0,
+    "exit_code": 0
+  }
+}

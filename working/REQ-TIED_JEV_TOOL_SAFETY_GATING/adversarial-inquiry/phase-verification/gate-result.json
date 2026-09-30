@@ -1,0 +1,12 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "IMPL-TIED_JEV_TOOL_SAFETY_GATING#RUN_HARNESS_SAFETY_FANOUT#0a6633a5899abc88"
+  ],
+  "status": "passed",
+  "verdict": "PASS"
+}

@@ -13,9 +13,9 @@ import {
 import { collectClaudeStreamFromSpawn } from "./claude-driver.js";
 import { runAgent } from "./executor-run.js";
 
-// [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR]
+// [IMPL-TIED_JEV_TOOL_SAFETY_GATING] [REQ-TIED_JEV_TOOL_SAFETY_GATING] [REQ-TIED_JEV_DECISION_COPROCESSOR]
 
-describe("jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR]", () => {
+describe("jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING]", () => {
   it("parses agentstream_tool_proposal stream extension", () => {
     const p = parseToolProposalFromStreamObject({
       type: "agentstream_tool_proposal",
@@ -39,6 +39,28 @@ describe("jev harness live tool gate [REQ-TIED_JEV_DECISION_COPROCESSOR]", () =>
     assert.ok(p);
     assert.equal(p!.tool, "bash");
     assert.equal(p!.arguments, "echo hi");
+  });
+
+  it("SC-D-SCOPE: passes workspace into gate evaluate", async () => {
+    let seenWorkspace: string | undefined;
+    await evaluateStreamToolProposal(
+      {
+        goal: "g",
+        workspace: "/tmp/declared-ws",
+        evaluate: async (input) => {
+          seenWorkspace = input.workspace;
+          return {
+            decision: "allow",
+            risk: null,
+            reason: "mock",
+            jev_skipped: true,
+            destructive_pattern: false,
+          };
+        },
+      },
+      { tool: "Shell", arguments: "echo hi" },
+    );
+    assert.equal(seenWorkspace, "/tmp/declared-ws");
   });
 
   it("G3: aborts on block; confirm only when CI/strict env", () => {
@@ -138,6 +160,32 @@ console.log(JSON.stringify({ session_id: "s-allow", type: "assistant", message: 
       assert.equal(out.exitCode, 0);
       assert.equal(out.result.sessionId, "s-allow");
     });
+
+    it("SC-D-SCOPE: runAgent forwards declared gate workspace into evaluate", async () => {
+      let seenWorkspace: string | undefined;
+      scriptPath = path.join(os.tmpdir(), `fake-shell-ws-${Date.now()}.js`);
+      fs.writeFileSync(
+        scriptPath,
+        `#!/usr/bin/env node
+console.log(JSON.stringify({ type: "agentstream_tool_proposal", tool: "Shell", command: "echo ws" }));
+console.log(JSON.stringify({ session_id: "s-ws", type: "assistant", message: { content: [{ type: "text", text: "ok" }] } }));
+`,
+        { mode: 0o755 },
+      );
+
+      const declaredWs = path.join(os.tmpdir(), "cursor-declared-ws");
+      await runAgent([process.execPath, scriptPath], [], {
+        jevToolGate: {
+          goal: "test",
+          workspace: declaredWs,
+          evaluate: async (input) => {
+            seenWorkspace = input.workspace;
+            return { decision: "allow", reason: "mock_allow" };
+          },
+        },
+      });
+      assert.equal(seenWorkspace, declaredWs);
+    });
   });
 
   it("G4: collectClaudeStreamFromSpawn applies jevToolGate on NDJSON", async () => {
@@ -160,6 +208,32 @@ console.log(JSON.stringify({ type: "agentstream_tool_proposal", tool: "Shell", c
     assert.equal(launched.gateBlocked, true);
     assert.equal(launched.exitCode, 1);
     assert.match(launched.gateStderr ?? "", /decision=block/);
+  });
+
+  it("SC-D-SCOPE: collectClaudeStreamFromSpawn forwards declared gate workspace into evaluate", async () => {
+    let seenWorkspace: string | undefined;
+    const scriptPath = path.join(os.tmpdir(), `fake-claude-ws-${Date.now()}.js`);
+    fs.writeFileSync(
+      scriptPath,
+      `#!/usr/bin/env node
+console.log(JSON.stringify({ type: "system", subtype: "init", session_id: "claude-ws-s" }));
+console.log(JSON.stringify({ type: "agentstream_tool_proposal", tool: "Shell", command: "echo ws" }));
+`,
+      { mode: 0o755 },
+    );
+    const declaredWs = path.join(os.tmpdir(), "claude-declared-ws");
+    await collectClaudeStreamFromSpawn([process.execPath, scriptPath], [], {
+      jevToolGate: {
+        goal: "test",
+        workspace: declaredWs,
+        evaluate: async (input) => {
+          seenWorkspace = input.workspace;
+          return { decision: "allow", reason: "mock_allow" };
+        },
+      },
+    });
+    fs.unlinkSync(scriptPath);
+    assert.equal(seenWorkspace, declaredWs);
   });
 
   it("evaluateStreamToolProposal returns diagnostic", async () => {

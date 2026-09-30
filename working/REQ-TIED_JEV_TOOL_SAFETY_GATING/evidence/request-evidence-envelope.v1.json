@@ -1,0 +1,649 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-30T16:56:26.024Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "integrated",
+    "gate_policy": "mixed",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:40236dc978d5cb58f34fdf45c56345d04a979b52c7cbea98ff8a654ed15db878",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:8bfa8aff09ebc4336bc1918cebb6b17cfc544e60d1ff7c053f7b9ef3aa5d1ca2",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:54bf9944214d15f4e13017e150472c60817fcd84654a35e496df31d551b01b9d",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:5b32e24724f28ac19d30d6caa0dacf35f2a753bf212e622a75530ab487428d60",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:f43b3d6a6d9780d51767c307ff17b5364363d56789b3fe7d37c8602077857809",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:3137a0209da6f708e6eefcdc1006d4220c7a3dadbdbe2895c383595c435e529d",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:b2169311b98e90129275706c0a860ade66b51e6a4c6f4d13a5d98f8115acdd3a",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:9cceaa3a25331d1a9114ff19fe900af3e69a8d2a22a7333c6554dca77cf35987",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:638119a9bf60a5ee8cba19740cd4c9b749ce08f5cc2221c6d9b76471923d1a84",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:ce8de8ba48c891e48ec44c939f6857d5f2ff1b28787528338bd20da6de5bd808",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml",
+      "content_hash": "sha256:1a78a34e480978e7d8aaba1b78120e41b0bc96ce530e3e764365baa9356ac330",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:8073ce59293c46731f50c7ed11a18efb99d0792effd5eea2a00efc40b76c446a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "pseudocode_analysis_report",
+      "schema_version": "pseudocode-analysis-report.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/pseudocode-analysis/IMPL-TIED_JEV_TOOL_SAFETY_GATING.v1.json",
+      "content_hash": "sha256:4105d090fc35635ea7deb6dc9d3382b3e5a3aa1f4ab489c78fbc086c1d893639",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:2a856ae275c4be10448260f9f251bbe9dbe8e2f70a6c39145ddc95620bde3903",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:1f3a6fbdb9fa912cd20dbe52d7a401ffeb57ab6734f1e64c305080e004172a5e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:c7ad5d2d16c918956ca5fdde098030ed605cf31c47a5c7b8b5a5ab05ca9808fe",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:b64a6dfe25dfaa612b241da5730979568121a4722f86e847ffc96a24259cc277",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:f3b186a28bac0e2f5b54a3ef227a1fcecb7c9152a1619b3c87e41664521b1571",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:323d6d3ceeb595fb1f24bf6fd40865c40cb839ff441e5c213d60159e80ec7637",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-inquiry-close_out-run.json",
+      "content_hash": "sha256:1e6004f9f2c7c681c5137edc995097f1dc655364b6162a9f90f2cdb4497b0843",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-inquiry-phases-summary.json",
+      "content_hash": "sha256:6f536f83b8560b3aeeeca2ec09ffcd4f7032d6bcd24b7ba18531be546110a539",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-inquiry-pre_implementation-run.json",
+      "content_hash": "sha256:ac6e85f3b631c87d1070d21f21c79562af8fcbc9606084b9881eae52d72b2e1b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-inquiry-verification-run.json",
+      "content_hash": "sha256:3d01e7b0719d2e84e02229131e475127f3b389d88799f641bb545a4d33df0cef",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:7ae02c6fa2b3d0fce3b909adab258e53df80dda9624b9ce2ab540f22495fe5de",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-run-close-out-gates.json",
+      "content_hash": "sha256:dd25a46f435a45c084a9abc7dadc64de5569fc63aed80dd1e64a2f2f17093fa5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/co5-sponsor-commit-payload.v1.json",
+      "content_hash": "sha256:dc927784040a37d7d3f647ef2652b89c9459eee2477ca978ae7e15d25ec9c6ee",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:708275d0209e37ce4b5640a370127e7cc574e1af8e9e687e0cd4936afa6ad71d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/flag-contradictory-specs-evidence.md",
+      "content_hash": "sha256:3428b2fbb03c1f45f7702f97e4195e4bd9c7bfceaf046096fd1cfe1368bc9189",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/flag-insufficient-specs-evidence.md",
+      "content_hash": "sha256:00b1e40ab0d2fd05103d7788f1734c5735b4f293733b23e3f3f08bd64a4f5b19",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:27c88bbe67d0dd4d77806427a91da636968683861d84373fcf7a6e44ca20d0ed",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:4b68fd30444eb3d4d8591135cba5c0e555e5838187a5a9b1a7aaa954eb3dec95",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:6781c9464a93c8db8fa75aabb51b1c9a22d764d81baf2429ef5b2d32f1794b20",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:5304f21bb05f347f0dc53b9532343e7fdfe358fe0b320102bf7c5140f5f042c8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:1c61085fea9dd9a7b0e4e766b502c7af11c9849e92c5ce24cec50ad064a4ea2c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:722a2c3b7c588a310ee135d71427dfb3bf8db569d2d8b1b3073abc3b149a60f4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:ecbc98578f55c975b60644730a022e8acbfb7310b186abc15462eb4b25e7c782",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:eda778529a333d337828caf88d23abc62eb74790b939686f589b07342b7a674b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:6a4d683b91db78af8a98be20443086f812d1151746606b2355a6441833407ddf",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:17cc996191524ac5138490cd76a31feb82d7a27bbfaaa783c3422d7176df8802",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-validate-consistency-closeout.json",
+      "content_hash": "sha256:068f504fa5ba5ef0976f5246db5a4f24bbad1aeb5bbe890224509241dc911d76",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-validate-consistency-w5.json",
+      "content_hash": "sha256:2fe8cb744ff144e7e80483897da0fbe738dd28ecdd9be09ca10b5d88c5a82441",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tool-safety-benchmark.v1.json",
+      "content_hash": "sha256:961bcb29259e7cb42d6f5cc77c99dda01805b3067ca17910f533236a84f2c0ba",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:caea3382eadc48e49703e37d3b80e4a8433e7e76d2428ccb66277f77049387ab",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:7b379d48b42e1cda0a83bb1966e18adf39c3b2a16cd38d94d1e65bdf4806ebb4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:dae426da317e30c254f20584d4033d2cf63acc53e3af55b17d8ff9befdf76103",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:b9217a109fff6957a43ff70e7e3d0ecba1afc81e9ed0e8f9019dbbd44562cd8c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:8038c1a2583f8b2ec6c1eff41c5a026595410cd55c1c8834df3a2bc0a6b7ca68",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w0-pre-implementation-gate.json",
+      "content_hash": "sha256:bc28fb0c04b42dd1ab9fb758628db37afa0530edbbc0a7e19a2a83b1a497f61e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w0-pseudocode-validate-result.json",
+      "content_hash": "sha256:85da6fa00f3cc46482f99635d845f341651c42ce58030e92b42bc8591bf81ada",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w4-agentstream-workspace.v1.json",
+      "content_hash": "sha256:4bc26bd06b1c5a2068e3bf323ac76ffe8652297a3c1954aa5cbe221cc290e457",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w5-inquiry-verification-run.json",
+      "content_hash": "sha256:69cf8b5826e52d79455e3b773a11406369357d0a13d023f53bcb22adcd510917",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w5-verification-gate.json",
+      "content_hash": "sha256:3181a1d8ea40f31b2159b54c62358d1b21a839bfac45834a4b91ca905ec671d2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w5-verify-closeout.v1.json",
+      "content_hash": "sha256:e54f522ed5667779e6c7b26baeba7eeb715bb67bbc37ba15f5d98e6ed1eadb5e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/waves-reconcile-w0-w3.v1.json",
+      "content_hash": "sha256:298365856caf207b27dd587d88bf69da628ce40a16cfca14ac07de4d41345048",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:ecac99548de96de25c8aca5e52a70a27e20a6e44db17734db5841163f651090c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:a2eed6dd9a6daa501750c56231c1ee56aa550c7ca64b2a0ca05cdf8187ef7f6c",
+    "citdp_path": null,
+    "evidence_chain_profile_path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": []
+}

@@ -251,6 +251,22 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 
 ---
 
+## Blueprint D follow-on (harness tool safety gating)
+
+**Child REQ:** [`REQ-TIED_JEV_TOOL_SAFETY_GATING`](../../tied/requirements/REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml) — hardens the **existing W5** live harness with Blueprint D question ids, workspace scope signals, expanded deterministic fast-deny, five-arm benchmark, and one read-only diagnostic MCP. **Fail-closed** for enabled `bash`/`Shell` when Jev is unavailable (contrast Blueprint C fail-open).
+
+| Surface | Path |
+| --- | --- |
+| Guard core | [`harness-tool-guard.ts`](../../mcp-server/src/jev/harness-tool-guard.ts) |
+| Benchmark | [`tool-safety-benchmark.ts`](../../mcp-server/src/jev/tool-safety-benchmark.ts) + [`replay-jev-tool-safety-benchmark.ts`](../../mcp-server/scripts/replay-jev-tool-safety-benchmark.ts) |
+| Diagnostic MCP | [`tool-safety-mcp.ts`](../../mcp-server/src/tools/tool-safety-mcp.ts) → `tied_jev_tool_safety_evaluate` |
+| Live composition | [`jev-harness-live-tool-gate.ts`](../../mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts) passes declared workspace |
+| Execution plan | [`working/REQ-TIED_JEV_TOOL_SAFETY_GATING/PLAN.md`](../../working/REQ-TIED_JEV_TOOL_SAFETY_GATING/PLAN.md) |
+
+**Operator enablement (unchanged from W5):** `AGENTSTREAM_JEV_HARNESS=1` or `.tied-yaml.yaml` → `jev.agentstream_harness: true`. **`tied_jev_tool_safety_evaluate`** requires `workspace` and does not execute commands or emit checklist gate authority. **`JEV_DECIDE_TRACE=1`** may log `context_meta.feature: tool_safety_gating` when the guard calls Jev.
+
+---
+
 ## Handoff checklist (doc maintenance)
 
 When updating this file again:

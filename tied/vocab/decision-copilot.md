@@ -80,7 +80,7 @@
 | **`system-one-decide-trace.v1`** | JSONL `schema` field | One line per `jevDecide` when trace enabled |
 | **`JEV_DECIDE_TRACE`** | env | `"1"` / `"true"` enables append |
 | **`JEV_DECIDE_TRACE_PATH`** | env optional | Default `working/jev-decide-trace/system-one-decide.v1.jsonl` under repo root |
-| **`context_meta` (Blueprint C)** | trace record | Includes `gate_phase`, `step_slug`, feature id `checklist_evidence_sufficiency` for sufficiency fan-out |
+| **context_meta (Blueprint C)** | trace record | Includes `gate_phase`, `step_slug`, feature id `checklist_evidence_sufficiency` for sufficiency fan-out |
 
 ### Blueprint C pseudo-code blocks (IMPL)
 
@@ -95,6 +95,49 @@
 | Pre-gate JSON | `EMIT_PRE_GATE_DISPOSITION` | Never `allowed: true` from Jev |
 | Gate hook | `HOOK_CHECKLIST_GATE_VALIDATE` | W4 MCP integration seam |
 | Trace append | `APPEND_SYSTEM_ONE_DECIDE_TRACE` | Shared with parent JEV program |
+
+---
+
+## Blueprint D — harness tool safety gating (child REQ)
+
+**Traceability:** [REQ-TIED_JEV_TOOL_SAFETY_GATING](../requirements/REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml) · [ARCH-TIED_JEV_TOOL_SAFETY_GATING](../architecture-decisions/ARCH-TIED_JEV_TOOL_SAFETY_GATING.yaml) · [IMPL-TIED_JEV_TOOL_SAFETY_GATING](../implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING.yaml)
+
+| Preferred term | Avoid | Notes |
+|---|---|---|
+| **Blueprint D** | Pattern 6 alone | Taxonomy slice: Pattern **6** (command-risk, scope) + Pattern **5** (execute/do-not-execute gate) on W5 live harness |
+| **tool safety gating** | second runtime gate | Extends `evaluateHarnessToolCall`; no parallel evaluator or IDE hook |
+| **combined max risk** | per-axis confirm | `max(destructive, scope)` with bands 0.45 / 0.72 |
+| **noul_destructive_risk** | high_risk (W5 legacy id) | Blueprint D fan-out question id |
+| **noul_scope_violation** | needs_confirm (W5 legacy id) | Workspace scope question id |
+| **declared workspace** | raw path in Jev state | Live agentstream + diagnostic MCP require workspace; vendor state uses placeholder |
+| **scope_class** | scope proof | `in_scope` / `out_of_scope` / `unknown` / `not_evaluated`; shell expansion outside proof boundary |
+| **deterministic fast-deny** | Jev-only safety | Regex/path signals before `jevDecide`; fail-closed when Jev unavailable for blocking tools |
+| **tied_jev_tool_safety_evaluate** | gate receipt | Read-only diagnostic MCP; never `allowed` or command execution |
+
+### Configuration (Blueprint D)
+
+| Source | Key | Enabled when |
+|---|---|---|
+| Env | `AGENTSTREAM_JEV_HARNESS` | `"1"` / `"true"` (same as W5; no separate Blueprint D flag) |
+| Manifest | `.tied-yaml.yaml` → `jev.agentstream_harness: true` | Same as W5 when env unset |
+| Env | `JEV_API_KEY`, optional `JEV_MODEL` | Required for Jev fan-out when harness on blocking tools |
+| Env | `AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT` / `CI` | Abort turn on `confirm` (W5 G3) |
+| Trace | `JEV_DECIDE_TRACE`, `JEV_DECIDE_TRACE_PATH` | Opt-in; `context_meta.feature: tool_safety_gating` |
+
+### Blueprint D pseudo-code blocks (IMPL)
+
+| Preferred term | UPPER_SNAKE block | Role |
+|---|---|---|
+| Harness config | `RESOLVE_HARNESS_SAFETY_CONFIG` | Reuse W5 enablement |
+| Input normalization | `NORMALIZE_TOOL_SAFETY_INPUT` | Cap and redact proposal |
+| Fast deny | `MATCH_DESTRUCTIVE_COMMAND` | Pre-Jev hard block |
+| Scope signals | `DERIVE_WORKSPACE_SCOPE_SIGNAL` | Workspace-bound path features |
+| Jev fan-out | `RUN_HARNESS_SAFETY_FANOUT` | D question ids |
+| Thresholds | `APPLY_HARNESS_RISK_THRESHOLDS` | Combined max bands |
+| Decision record | `EMIT_HARNESS_DECISION` | `HarnessToolEvaluation` |
+| Trace | `APPEND_TOOL_SAFETY_TRACE` | Shared decide trace |
+| Diagnostic MCP | `BUILD_TOOL_SAFETY_DIAGNOSTIC` | `tied_jev_tool_safety_evaluate` |
+| Live seam | `BIND_WORKSPACE_TO_LIVE_GATE` | Agentstream workspace pass-through |
 
 ---
 

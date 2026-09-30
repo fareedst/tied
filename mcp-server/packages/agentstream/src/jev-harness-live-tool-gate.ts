@@ -1,4 +1,5 @@
 /**
+ * [IMPL-TIED_JEV_TOOL_SAFETY_GATING] [REQ-TIED_JEV_TOOL_SAFETY_GATING]
  * [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR]
  * Per-turn stream-json tool proposal gate via evaluateHarnessToolCall (W5 residual).
  */
@@ -20,11 +21,18 @@ export type StreamToolProposal = {
 };
 
 export type JevLiveToolGateEvaluate = (
-  input: { tool: string; arguments?: string; goal?: string; context?: string },
+  input: {
+    tool: string;
+    arguments?: string;
+    goal?: string;
+    context?: string;
+    workspace?: string;
+  },
 ) => Promise<HarnessToolEvaluation>;
 
 export type JevLiveToolGate = {
   goal: string;
+  workspace?: string;
   evaluate: JevLiveToolGateEvaluate;
 };
 
@@ -190,22 +198,28 @@ export async function createJevLiveToolGate(
     return null;
   }
   const goal = taskSummaryFromCfg(cfg);
-  if (deps?.evaluate) {
-    return { goal, evaluate: deps.evaluate };
-  }
   const projectRoot = resolveProjectRootForJev(cfg);
+  if (deps?.evaluate) {
+    return { goal, workspace: projectRoot, evaluate: deps.evaluate };
+  }
   const mod = await loadJevHarnessDistModule(projectRoot);
   if (!mod) {
     return null;
   }
   const manifestFlag = manifestEnablesJevHarness(projectRoot);
   const harness = mod.resolveHarnessFromEnv(process.env, manifestFlag);
+  const workspace = projectRoot;
   return {
     goal,
+    workspace,
     evaluate: async (input) =>
-      mod.evaluateHarnessToolCall(input, harness, {
-        apiKey: process.env.JEV_API_KEY,
-      }),
+      mod.evaluateHarnessToolCall(
+        { ...input, workspace: input.workspace ?? workspace },
+        harness,
+        {
+          apiKey: process.env.JEV_API_KEY,
+        },
+      ),
   };
 }
 
@@ -219,6 +233,7 @@ export async function evaluateStreamToolProposal(
     arguments: proposal.arguments,
     goal: gate.goal,
     context: turnContext,
+    workspace: gate.workspace,
   });
   const diagnostic = formatJevToolGateDiagnostic(proposal, evaluation);
   return {

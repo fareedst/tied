@@ -83,7 +83,7 @@ export function jevHarnessMissingDistAbortMessage(
 
 export type JevHarnessDistModule = {
   evaluateHarnessToolCall: (
-    input: { tool: string; arguments?: string; goal?: string; context?: string },
+    input: { tool: string; arguments?: string; goal?: string; context?: string; workspace?: string },
     harness: { enabled: boolean; hasApiKey: boolean; blockWhenUnavailable: boolean },
     jevConfig?: { apiKey?: string; fetchImpl?: typeof fetch },
   ) => Promise<{ decision: string; reason: string; jev_skipped?: boolean }>;

@@ -53,3 +53,16 @@ test("resolveJevApiKey falls back to mcp.json when env empty", () => {
 test("readJevApiKeyFromMcpJsonFile returns undefined for missing file", () => {
   assert.equal(readJevApiKeyFromMcpJsonFile("/nonexistent/mcp.json"), undefined);
 });
+
+test("resolveJevApiKey whitespace-only env does not fall back to mcp.json", () => {
+  tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "jev-key-"));
+  const mcpPath = path.join(tempDir, "mcp.json");
+  fs.writeFileSync(
+    mcpPath,
+    JSON.stringify({
+      mcpServers: { "tied-yaml": { env: { JEV_API_KEY: "from_file" } } },
+    }),
+  );
+  const key = resolveJevApiKey({ JEV_API_KEY: "   " }, { mcpJsonPath: mcpPath });
+  assert.equal(key, undefined);
+});

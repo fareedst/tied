@@ -1,0 +1,24 @@
+{
+  "wave": "W4",
+  "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+  "criterion": "SC-D-SCOPE / SC-D-AGENTSTREAM",
+  "summary": "Declared workspace flows resolveProjectRootForJev(cfg) -> JevLiveToolGate.workspace -> evaluateStreamToolProposal -> evaluateHarnessToolCall input.workspace on Cursor (runAgent) and Claude (collectClaudeStreamFromSpawn) paths.",
+  "artifacts": [
+    "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts",
+    "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.test.ts"
+  ],
+  "commands": [
+    {
+      "cmd": "cd mcp-server/packages/agentstream && bun run build && bun test src/jev-harness-live-tool-gate.test.ts",
+      "exit_code": 0,
+      "tests_passed": 11,
+      "tests_failed": 0
+    }
+  ],
+  "w5_preserved": [
+    "stream proposal shapes unchanged",
+    "SIGTERM on block via runAgent/claude spawn",
+    "local diagnostic on confirm; CI strict abort",
+    "createJevLiveToolGate dist hard stop when mod missing"
+  ]
+}

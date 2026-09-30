@@ -1,0 +1,12 @@
+{
+  "mode": "project",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+  "impl_token": "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+  "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+  "phase": "verification",
+  "run_id": "w5-build-plan-d-verification",
+  "policy": "advisory",
+  "production_path": "mcp-server/src/jev/harness-tool-guard.ts",
+  "test_path": "mcp-server/src/jev/harness-tool-guard.test.ts"
+}

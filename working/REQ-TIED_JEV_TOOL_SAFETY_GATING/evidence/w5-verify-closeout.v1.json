@@ -1,0 +1,47 @@
+{
+  "schema": "blueprint-d-w5-verify-closeout.v1",
+  "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+  "completed_at": "2026-09-30",
+  "summary": "W5 verification pass: 33 focused tests green, tsc -b green, mocked benchmark replay, tied_validate_consistency ok, close_out gate allowed with envelope blocking_gaps=0.",
+  "tests": {
+    "cmd": "cd mcp-server && bun test src/jev/harness-tool-guard.test.ts src/jev/tool-safety-benchmark.test.ts src/tools/tool-safety-mcp.test.ts packages/agentstream/src/jev-harness-live-tool-gate.test.ts",
+    "passed": 33,
+    "failed": 0,
+    "w5_delta": "Added SC-D-FALLBACK unit tests for HTTP 503 and state_too_large skip"
+  },
+  "lint": {
+    "cmd": "cd mcp-server && bunx tsc -b",
+    "exit_code": 0
+  },
+  "benchmark": {
+    "cmd": "cd mcp-server && bun run scripts/replay-jev-tool-safety-benchmark.ts",
+    "report": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tool-safety-benchmark.v1.json",
+    "mode": "mocked"
+  },
+  "tied_validate_consistency": {
+    "ok": true,
+    "artifact": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-validate-consistency-closeout.json"
+  },
+  "checklist_gates": {
+    "close_out": {
+      "artifact": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-run-close-out-gates-final.json",
+      "run_id": "closeout-inquiry-2026-09-30-close_out",
+      "gate_allowed": true,
+      "envelope_blocking_gap_count": 0
+    },
+    "verification": {
+      "note": "verification phase gate allowed=false (missing_completion_activation for verification run_id pairing); close_out is authoritative machine close-out per PLAN-CLOSE-OUT.md",
+      "artifact": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w5-verification-gate.json"
+    }
+  },
+  "residual_risks": [
+    "Malformed Jev JSON body or missing noul keys may parse as combined=0 allow (proof boundary; not HTTP-layer fail-closed)",
+    "Reconcile process_grade verification_manifest dimension score 0 while quality_manifest.ok true",
+    "tied_verify status update not run; REQ may remain In Progress until sponsor runs verification-gated update",
+    "CO5 sponsor git commit pending parent; payload at evidence/co5-sponsor-commit-payload.v1.json"
+  ],
+  "operator_docs": [
+    "docs/comparisons/jev-for-tied-improvement.md (Blueprint D section)",
+    "tied/vocab/decision-copilot.md (Blueprint D block)"
+  ]
+}

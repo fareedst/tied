@@ -1,0 +1,28 @@
+ARCH-TIED_JEV_TOOL_SAFETY_GATING:
+  alternatives_considered:
+    - description: "Parallel evaluator file"
+      name: "New blueprint-d-tool-guard module"
+      rejected_because: "Duplicates W5 seam and risks dual policy"
+  consequences:
+    negative:
+      - "Confirm is log-only not interactive prompt"
+      - "Regex/path proof boundary residual risk"
+    positive:
+      - "Benchmark evidence for thresholds"
+      - "Blueprint D taxonomy alignment"
+  context: "Child of Jev coprocessor; extends W5 harness-tool-guard; agentstream live gate composition; one diagnostic MCP adapter."
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_JEV_TOOL_SAFETY_GATING"
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+  decision: "Single shared guard in harness-tool-guard.ts; agentstream passes workspace; tied_jev_tool_safety_evaluate read-only over same function; no second runtime hook."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-09-29"
+      reason: "W0 mint"
+  name: "Harness tool safety gating architecture"
+  status: "Active"

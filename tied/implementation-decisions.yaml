@@ -2312,6 +2312,16 @@ IMPL-TIED_JEV_DECISION_COPROCESSOR:
   detail_file: "implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml"
   name: "Jev decision coprocessor implementation"
   status: "Active"
+IMPL-TIED_JEV_TOOL_SAFETY_GATING:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_TOOL_SAFETY_GATING"
+    implementation: []
+    requirements:
+      - "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+  detail_file: "implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING.yaml"
+  name: "Harness tool safety gating implementation"
+  status: "Active"
 IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"

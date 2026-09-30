@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "index": {
+    "requirements": {
+      "valid": true
+    },
+    "architecture": {
+      "valid": true
+    },
+    "implementation": {
+      "valid": true
+    },
+    "semantic-tokens": {
+      "valid": true
+    }
+  },
+  "reconciled_at": "2026-09-30"
+}

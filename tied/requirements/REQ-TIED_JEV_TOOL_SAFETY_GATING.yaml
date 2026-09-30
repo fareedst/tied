@@ -1,0 +1,59 @@
+REQ-TIED_JEV_TOOL_SAFETY_GATING:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_TOOL_SAFETY_GATING"
+    implementation:
+      - "IMPL-TIED_JEV_TOOL_SAFETY_GATING"
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-09-29"
+    last_updated:
+      author: "build-plan"
+      date: "2026-09-29"
+      reason: "W0 mint"
+  name: "Jev harness tool safety gating (Blueprint D)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Fail-closed shell safety on opt-in harness"
+      - "Reproducible five-arm benchmark"
+      - "Workspace scope evidence in Jev fan-out"
+    problems_solved:
+      - "No diagnostic MCP for tool proposals"
+      - "W5 guard lacks Blueprint D question ids and scope normalization"
+    why: "Blueprint D Pattern 6 command-risk and Pattern 5 execute gate on residual W5 live harness; single guard core; never checklist authority."
+  satisfaction_criteria:
+    - criterion: "combined max at 0.45 and 0.72 bands."
+      id: "SC-D-THRESHOLDS"
+      metric: "unit boundary tests"
+    - criterion: "Consistency and verification gate pass."
+      id: "SC-D-TIED"
+      metric: "tied_validate_consistency"
+    - criterion: "Default-off harness; W5 guard and live-gate tests green."
+      id: "SC-W5-PRESERVED"
+      metric: "bun test harness-tool-guard jev-harness-live-tool-gate"
+    - criterion: "Deterministic hard-deny before Jev; safe near misses not overmatched."
+      id: "SC-D-FAST-DENY"
+      metric: "unit + deterministic_only benchmark arm"
+    - criterion: "Five arms share one fixture hash."
+      id: "SC-D-BENCH"
+      metric: "tool-safety-benchmark.v1.json"
+    - criterion: "Live and diagnostic MCP pass declared workspace."
+      id: "SC-D-SCOPE"
+      metric: "composition tests"
+    - criterion: "Missing key and Jev errors fail closed for blocking tools."
+      id: "SC-D-FALLBACK"
+      metric: "unit + jev_unavailable arm"
+    - criterion: "noul_destructive_risk and noul_scope_violation in one fan-out."
+      id: "SC-D-QUESTIONS"
+      metric: "unit tests + IMPL sidecar"
+    - criterion: "tied_jev_tool_safety_evaluate read-only; no gate receipt."
+      id: "SC-D-MCP-AUTHORITY"
+      metric: "tool-safety-mcp.test.ts"
+    - criterion: "Trace has feature tool_safety_gating; no secrets or raw workspace."
+      id: "SC-D-TRACE-PRIVACY"
+      metric: "unit canaries"
+  status: "In Progress"

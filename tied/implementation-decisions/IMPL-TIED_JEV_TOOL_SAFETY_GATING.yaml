@@ -1,0 +1,32 @@
+IMPL-TIED_JEV_TOOL_SAFETY_GATING:
+  code_locations:
+    files:
+      - description: "Diagnostic MCP"
+        path: "mcp-server/src/tools/tool-safety-mcp.ts"
+      - description: "Five-arm replay"
+        path: "mcp-server/src/jev/tool-safety-benchmark.ts"
+      - description: "Guard decision core"
+        path: "mcp-server/src/jev/harness-tool-guard.ts"
+      - description: "Live workspace binding"
+        path: "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_TOOL_SAFETY_GATING"
+    implementation: []
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Combined max risk thresholds 0.45/0.72"
+      - "DEFAULT_BLOCKING_TOOLS bash and Shell only"
+      - "Fail-closed when Jev unavailable for blocking tools"
+    summary: "Extend harness-tool-guard.ts; tool-safety-benchmark.ts; tool-safety-mcp.ts; jev-harness-live-tool-gate workspace seam."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-09-29"
+      reason: "W0 mint"
+  name: "Harness tool safety gating implementation"
+  status: "Active"

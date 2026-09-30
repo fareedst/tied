@@ -1,0 +1,235 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "RESOLVE_HARNESS_SAFETY_CONFIG",
+      "line": 7,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "NORMALIZE_TOOL_SAFETY_INPUT",
+      "line": 18,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "MATCH_DESTRUCTIVE_COMMAND",
+      "line": 29,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+      "line": 40,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "RUN_HARNESS_SAFETY_FANOUT",
+      "line": 52,
+      "token_refs": [
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "APPLY_HARNESS_RISK_THRESHOLDS",
+      "line": 64,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "EMIT_HARNESS_DECISION",
+      "line": 74,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "APPEND_TOOL_SAFETY_TRACE",
+      "line": 84,
+      "token_refs": [
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "BUILD_TOOL_SAFETY_DIAGNOSTIC",
+      "line": 93,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "BIND_WORKSPACE_TO_LIVE_GATE",
+      "line": 102,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "RESOLVE_HARNESS_SAFETY_CONFIG",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "NORMALIZE_TOOL_SAFETY_INPUT",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "MATCH_DESTRUCTIVE_COMMAND",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "RUN_HARNESS_SAFETY_FANOUT",
+      "branch_lines": [],
+      "failure_modes": [
+        "OUTPUT: destructive noul, scope noul, or skip/error observation",
+        "POST: on skip/error caller applies fail-closed for blocking tools"
+      ],
+      "references": []
+    },
+    {
+      "block": "APPLY_HARNESS_RISK_THRESHOLDS",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "EMIT_HARNESS_DECISION",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "APPEND_TOOL_SAFETY_TRACE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "BUILD_TOOL_SAFETY_DIAGNOSTIC",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "BIND_WORKSPACE_TO_LIVE_GATE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    }
+  ],
+  "diagnostics": [],
+  "leakage": []
+}

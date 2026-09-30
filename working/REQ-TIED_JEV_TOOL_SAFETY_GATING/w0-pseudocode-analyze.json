@@ -1,0 +1,889 @@
+{
+  "ok": true,
+  "gate_mode_applied": true,
+  "schema_version": "pseudocode-analysis-report.v1",
+  "grammar_version": "pseudocode-grammar.v2",
+  "analyzer_version": "1.0.0",
+  "proof_boundary": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.",
+  "token": "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+  "input_identity": {
+    "algorithm": "sha256",
+    "hash": "2a5779dbb9711870c3a95e46549b978501509dfbe280cb63644193b76462ff4c",
+    "byte_length": 5705
+  },
+  "budgets_applied": {
+    "requested": {},
+    "effective": {
+      "max_parse_nodes": 5000,
+      "max_procedures": 256,
+      "max_cfg_blocks_per_procedure": 512,
+      "max_call_graph_edges": 2048,
+      "max_fixed_point_iterations": 32,
+      "max_path_conditions": 64,
+      "max_report_diagnostics": 500,
+      "max_source_bytes": 512000,
+      "max_cfg_join_iterations": 32
+    }
+  },
+  "truncated": false,
+  "diagnostics_truncated": false,
+  "sections": {
+    "parse": {
+      "procedure_count": 10,
+      "parse_node_count": 14,
+      "token_refs": [
+        "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+        "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR",
+        "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+      ],
+      "unsupported_syntax_count": 0
+    },
+    "symbols": {
+      "procedures": [
+        "APPEND_TOOL_SAFETY_TRACE",
+        "APPLY_HARNESS_RISK_THRESHOLDS",
+        "BIND_WORKSPACE_TO_LIVE_GATE",
+        "BUILD_TOOL_SAFETY_DIAGNOSTIC",
+        "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+        "EMIT_HARNESS_DECISION",
+        "MATCH_DESTRUCTIVE_COMMAND",
+        "NORMALIZE_TOOL_SAFETY_INPUT",
+        "RESOLVE_HARNESS_SAFETY_CONFIG",
+        "RUN_HARNESS_SAFETY_FANOUT"
+      ],
+      "symbols": [
+        {
+          "name": "APPEND_TOOL_SAFETY_TRACE",
+          "kind": "procedure",
+          "declared_line": 84
+        },
+        {
+          "name": "APPLY_HARNESS_RISK_THRESHOLDS",
+          "kind": "procedure",
+          "declared_line": 64
+        },
+        {
+          "name": "BIND_WORKSPACE_TO_LIVE_GATE",
+          "kind": "procedure",
+          "declared_line": 102
+        },
+        {
+          "name": "BUILD",
+          "kind": "local",
+          "declared_line": 9,
+          "procedure": "EMIT_HARNESS_DECISION"
+        },
+        {
+          "name": "BUILD",
+          "kind": "local",
+          "declared_line": 10,
+          "procedure": "RUN_HARNESS_SAFETY_FANOUT"
+        },
+        {
+          "name": "BUILD_TOOL_SAFETY_DIAGNOSTIC",
+          "kind": "procedure",
+          "declared_line": 93
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 9,
+          "procedure": "RESOLVE_HARNESS_SAFETY_CONFIG"
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 11,
+          "procedure": "RUN_HARNESS_SAFETY_FANOUT"
+        },
+        {
+          "name": "COMPARE",
+          "kind": "local",
+          "declared_line": 10,
+          "procedure": "DERIVE_WORKSPACE_SCOPE_SIGNAL"
+        },
+        {
+          "name": "COMPUTE",
+          "kind": "local",
+          "declared_line": 8,
+          "procedure": "APPLY_HARNESS_RISK_THRESHOLDS"
+        },
+        {
+          "name": "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+          "kind": "procedure",
+          "declared_line": 40
+        },
+        {
+          "name": "EMIT_HARNESS_DECISION",
+          "kind": "procedure",
+          "declared_line": 74
+        },
+        {
+          "name": "MAP",
+          "kind": "local",
+          "declared_line": 9,
+          "procedure": "APPLY_HARNESS_RISK_THRESHOLDS"
+        },
+        {
+          "name": "MATCH_DESTRUCTIVE_COMMAND",
+          "kind": "procedure",
+          "declared_line": 29
+        },
+        {
+          "name": "NORMALIZE_TOOL_SAFETY_INPUT",
+          "kind": "procedure",
+          "declared_line": 18
+        },
+        {
+          "name": "PARSE",
+          "kind": "local",
+          "declared_line": 9,
+          "procedure": "DERIVE_WORKSPACE_SCOPE_SIGNAL"
+        },
+        {
+          "name": "RESOLVE_HARNESS_SAFETY_CONFIG",
+          "kind": "procedure",
+          "declared_line": 7
+        },
+        {
+          "name": "RUN_HARNESS_SAFETY_FANOUT",
+          "kind": "procedure",
+          "declared_line": 52
+        },
+        {
+          "name": "SLICE",
+          "kind": "local",
+          "declared_line": 9,
+          "procedure": "NORMALIZE_TOOL_SAFETY_INPUT"
+        },
+        {
+          "name": "TEST",
+          "kind": "local",
+          "declared_line": 9,
+          "procedure": "MATCH_DESTRUCTIVE_COMMAND"
+        }
+      ],
+      "defined_calls": [],
+      "unresolved_calls": []
+    },
+    "cfg": {
+      "procedures": [
+        {
+          "procedure": "RESOLVE_HARNESS_SAFETY_CONFIG",
+          "nodes": [
+            {
+              "id": "RESOLVE_HARNESS_SAFETY_CONFIG::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 7
+            },
+            {
+              "id": "RESOLVE_HARNESS_SAFETY_CONFIG::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 7
+            },
+            {
+              "id": "RESOLVE_HARNESS_SAFETY_CONFIG::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 9,
+              "span": {
+                "line": 9,
+                "column": 3,
+                "end_line": 9,
+                "end_column": 30
+              }
+            },
+            {
+              "id": "RESOLVE_HARNESS_SAFETY_CONFIG::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 10,
+              "span": {
+                "line": 10,
+                "column": 3,
+                "end_line": 10,
+                "end_column": 15
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "RESOLVE_HARNESS_SAFETY_CONFIG::entry",
+              "to": "RESOLVE_HARNESS_SAFETY_CONFIG::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "RESOLVE_HARNESS_SAFETY_CONFIG::n1",
+              "to": "RESOLVE_HARNESS_SAFETY_CONFIG::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "RESOLVE_HARNESS_SAFETY_CONFIG::n2",
+              "to": "RESOLVE_HARNESS_SAFETY_CONFIG::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "RESOLVE_HARNESS_SAFETY_CONFIG::entry",
+            "RESOLVE_HARNESS_SAFETY_CONFIG::exit",
+            "RESOLVE_HARNESS_SAFETY_CONFIG::n1",
+            "RESOLVE_HARNESS_SAFETY_CONFIG::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "NORMALIZE_TOOL_SAFETY_INPUT",
+          "nodes": [
+            {
+              "id": "NORMALIZE_TOOL_SAFETY_INPUT::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 9,
+              "span": {
+                "line": 9,
+                "column": 3,
+                "end_line": 9,
+                "end_column": 25
+              }
+            },
+            {
+              "id": "NORMALIZE_TOOL_SAFETY_INPUT::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 10,
+              "span": {
+                "line": 10,
+                "column": 3,
+                "end_line": 10,
+                "end_column": 26
+              }
+            },
+            {
+              "id": "NORMALIZE_TOOL_SAFETY_INPUT::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 18
+            },
+            {
+              "id": "NORMALIZE_TOOL_SAFETY_INPUT::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 18
+            }
+          ],
+          "edges": [
+            {
+              "from": "NORMALIZE_TOOL_SAFETY_INPUT::entry",
+              "to": "NORMALIZE_TOOL_SAFETY_INPUT::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "NORMALIZE_TOOL_SAFETY_INPUT::n1",
+              "to": "NORMALIZE_TOOL_SAFETY_INPUT::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "NORMALIZE_TOOL_SAFETY_INPUT::n2",
+              "to": "NORMALIZE_TOOL_SAFETY_INPUT::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "NORMALIZE_TOOL_SAFETY_INPUT::entry",
+            "NORMALIZE_TOOL_SAFETY_INPUT::exit",
+            "NORMALIZE_TOOL_SAFETY_INPUT::n1",
+            "NORMALIZE_TOOL_SAFETY_INPUT::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "MATCH_DESTRUCTIVE_COMMAND",
+          "nodes": [
+            {
+              "id": "MATCH_DESTRUCTIVE_COMMAND::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 9,
+              "span": {
+                "line": 9,
+                "column": 3,
+                "end_line": 9,
+                "end_column": 32
+              }
+            },
+            {
+              "id": "MATCH_DESTRUCTIVE_COMMAND::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 10,
+              "span": {
+                "line": 10,
+                "column": 3,
+                "end_line": 10,
+                "end_column": 21
+              }
+            },
+            {
+              "id": "MATCH_DESTRUCTIVE_COMMAND::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 29
+            },
+            {
+              "id": "MATCH_DESTRUCTIVE_COMMAND::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 29
+            }
+          ],
+          "edges": [
+            {
+              "from": "MATCH_DESTRUCTIVE_COMMAND::entry",
+              "to": "MATCH_DESTRUCTIVE_COMMAND::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "MATCH_DESTRUCTIVE_COMMAND::n1",
+              "to": "MATCH_DESTRUCTIVE_COMMAND::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "MATCH_DESTRUCTIVE_COMMAND::n2",
+              "to": "MATCH_DESTRUCTIVE_COMMAND::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "MATCH_DESTRUCTIVE_COMMAND::entry",
+            "MATCH_DESTRUCTIVE_COMMAND::exit",
+            "MATCH_DESTRUCTIVE_COMMAND::n1",
+            "MATCH_DESTRUCTIVE_COMMAND::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+          "nodes": [
+            {
+              "id": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 9,
+              "span": {
+                "line": 9,
+                "column": 3,
+                "end_line": 9,
+                "end_column": 29
+              }
+            },
+            {
+              "id": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 10,
+              "span": {
+                "line": 10,
+                "column": 3,
+                "end_line": 10,
+                "end_column": 43
+              }
+            },
+            {
+              "id": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n3",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 11,
+              "span": {
+                "line": 11,
+                "column": 3,
+                "end_line": 11,
+                "end_column": 21
+              }
+            },
+            {
+              "id": "DERIVE_WORKSPACE_SCOPE_SIGNAL::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 40
+            },
+            {
+              "id": "DERIVE_WORKSPACE_SCOPE_SIGNAL::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 40
+            }
+          ],
+          "edges": [
+            {
+              "from": "DERIVE_WORKSPACE_SCOPE_SIGNAL::entry",
+              "to": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n1",
+              "to": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n2",
+              "to": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "DERIVE_WORKSPACE_SCOPE_SIGNAL::n3",
+              "to": "DERIVE_WORKSPACE_SCOPE_SIGNAL::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "DERIVE_WORKSPACE_SCOPE_SIGNAL::entry",
+            "DERIVE_WORKSPACE_SCOPE_SIGNAL::exit",
+            "DERIVE_WORKSPACE_SCOPE_SIGNAL::n1",
+            "DERIVE_WORKSPACE_SCOPE_SIGNAL::n2",
+            "DERIVE_WORKSPACE_SCOPE_SIGNAL::n3"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "RUN_HARNESS_SAFETY_FANOUT",
+          "nodes": [
+            {
+              "id": "RUN_HARNESS_SAFETY_FANOUT::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 10,
+              "span": {
+                "line": 10,
+                "column": 3,
+                "end_line": 10,
+                "end_column": 34
+              }
+            },
+            {
+              "id": "RUN_HARNESS_SAFETY_FANOUT::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 11,
+              "span": {
+                "line": 11,
+                "column": 3,
+                "end_line": 11,
+                "end_column": 42
+              }
+            },
+            {
+              "id": "RUN_HARNESS_SAFETY_FANOUT::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 52
+            },
+            {
+              "id": "RUN_HARNESS_SAFETY_FANOUT::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 52
+            }
+          ],
+          "edges": [
+            {
+              "from": "RUN_HARNESS_SAFETY_FANOUT::entry",
+              "to": "RUN_HARNESS_SAFETY_FANOUT::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_HARNESS_SAFETY_FANOUT::n1",
+              "to": "RUN_HARNESS_SAFETY_FANOUT::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_HARNESS_SAFETY_FANOUT::n2",
+              "to": "RUN_HARNESS_SAFETY_FANOUT::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "RUN_HARNESS_SAFETY_FANOUT::entry",
+            "RUN_HARNESS_SAFETY_FANOUT::exit",
+            "RUN_HARNESS_SAFETY_FANOUT::n1",
+            "RUN_HARNESS_SAFETY_FANOUT::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "APPLY_HARNESS_RISK_THRESHOLDS",
+          "nodes": [
+            {
+              "id": "APPLY_HARNESS_RISK_THRESHOLDS::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 8,
+              "span": {
+                "line": 8,
+                "column": 3,
+                "end_line": 8,
+                "end_column": 22
+              }
+            },
+            {
+              "id": "APPLY_HARNESS_RISK_THRESHOLDS::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 9,
+              "span": {
+                "line": 9,
+                "column": 3,
+                "end_line": 9,
+                "end_column": 23
+              }
+            },
+            {
+              "id": "APPLY_HARNESS_RISK_THRESHOLDS::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 64
+            },
+            {
+              "id": "APPLY_HARNESS_RISK_THRESHOLDS::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 64
+            }
+          ],
+          "edges": [
+            {
+              "from": "APPLY_HARNESS_RISK_THRESHOLDS::entry",
+              "to": "APPLY_HARNESS_RISK_THRESHOLDS::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_HARNESS_RISK_THRESHOLDS::n1",
+              "to": "APPLY_HARNESS_RISK_THRESHOLDS::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_HARNESS_RISK_THRESHOLDS::n2",
+              "to": "APPLY_HARNESS_RISK_THRESHOLDS::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "APPLY_HARNESS_RISK_THRESHOLDS::entry",
+            "APPLY_HARNESS_RISK_THRESHOLDS::exit",
+            "APPLY_HARNESS_RISK_THRESHOLDS::n1",
+            "APPLY_HARNESS_RISK_THRESHOLDS::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "EMIT_HARNESS_DECISION",
+          "nodes": [
+            {
+              "id": "EMIT_HARNESS_DECISION::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 9,
+              "span": {
+                "line": 9,
+                "column": 3,
+                "end_line": 9,
+                "end_column": 25
+              }
+            },
+            {
+              "id": "EMIT_HARNESS_DECISION::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 74
+            },
+            {
+              "id": "EMIT_HARNESS_DECISION::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 74
+            }
+          ],
+          "edges": [
+            {
+              "from": "EMIT_HARNESS_DECISION::entry",
+              "to": "EMIT_HARNESS_DECISION::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_HARNESS_DECISION::n1",
+              "to": "EMIT_HARNESS_DECISION::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "EMIT_HARNESS_DECISION::entry",
+            "EMIT_HARNESS_DECISION::exit",
+            "EMIT_HARNESS_DECISION::n1"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "APPEND_TOOL_SAFETY_TRACE",
+          "nodes": [
+            {
+              "id": "APPEND_TOOL_SAFETY_TRACE::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 84
+            },
+            {
+              "id": "APPEND_TOOL_SAFETY_TRACE::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 84
+            }
+          ],
+          "edges": [
+            {
+              "from": "APPEND_TOOL_SAFETY_TRACE::entry",
+              "to": "APPEND_TOOL_SAFETY_TRACE::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "APPEND_TOOL_SAFETY_TRACE::entry",
+            "APPEND_TOOL_SAFETY_TRACE::exit"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_TOOL_SAFETY_DIAGNOSTIC",
+          "nodes": [
+            {
+              "id": "BUILD_TOOL_SAFETY_DIAGNOSTIC::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 93
+            },
+            {
+              "id": "BUILD_TOOL_SAFETY_DIAGNOSTIC::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 93
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_TOOL_SAFETY_DIAGNOSTIC::entry",
+              "to": "BUILD_TOOL_SAFETY_DIAGNOSTIC::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_TOOL_SAFETY_DIAGNOSTIC::entry",
+            "BUILD_TOOL_SAFETY_DIAGNOSTIC::exit"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BIND_WORKSPACE_TO_LIVE_GATE",
+          "nodes": [
+            {
+              "id": "BIND_WORKSPACE_TO_LIVE_GATE::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 102
+            },
+            {
+              "id": "BIND_WORKSPACE_TO_LIVE_GATE::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 102
+            }
+          ],
+          "edges": [
+            {
+              "from": "BIND_WORKSPACE_TO_LIVE_GATE::entry",
+              "to": "BIND_WORKSPACE_TO_LIVE_GATE::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BIND_WORKSPACE_TO_LIVE_GATE::entry",
+            "BIND_WORKSPACE_TO_LIVE_GATE::exit"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    "call_graph": {
+      "edges": [],
+      "unresolved": [],
+      "truncated": false
+    },
+    "abstract": {
+      "facts": [
+        {
+          "variable": "COMPUTE",
+          "procedure": "APPLY_HARNESS_RISK_THRESHOLDS",
+          "fact": "defined",
+          "line": 8
+        },
+        {
+          "variable": "MAP",
+          "procedure": "APPLY_HARNESS_RISK_THRESHOLDS",
+          "fact": "defined",
+          "line": 9
+        },
+        {
+          "variable": "COMPARE",
+          "procedure": "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+          "fact": "defined",
+          "line": 10
+        },
+        {
+          "variable": "PARSE",
+          "procedure": "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+          "fact": "defined",
+          "line": 9
+        },
+        {
+          "variable": "BUILD",
+          "procedure": "EMIT_HARNESS_DECISION",
+          "fact": "defined",
+          "line": 9
+        },
+        {
+          "variable": "TEST",
+          "procedure": "MATCH_DESTRUCTIVE_COMMAND",
+          "fact": "defined",
+          "line": 9
+        },
+        {
+          "variable": "SLICE",
+          "procedure": "NORMALIZE_TOOL_SAFETY_INPUT",
+          "fact": "defined",
+          "line": 9
+        },
+        {
+          "variable": "CALL",
+          "procedure": "RESOLVE_HARNESS_SAFETY_CONFIG",
+          "fact": "defined",
+          "line": 9
+        },
+        {
+          "variable": "BUILD",
+          "procedure": "RUN_HARNESS_SAFETY_FANOUT",
+          "fact": "defined",
+          "line": 10
+        },
+        {
+          "variable": "CALL",
+          "procedure": "RUN_HARNESS_SAFETY_FANOUT",
+          "fact": "defined",
+          "line": 11
+        }
+      ],
+      "path_conditions": [],
+      "effect_gaps": [],
+      "termination_unknown": []
+    },
+    "obligations": {
+      "decision_tables": [],
+      "path_obligations": []
+    },
+    "traceability": {
+      "block_edges": [
+        {
+          "block": "APPEND_TOOL_SAFETY_TRACE",
+          "tokens": [
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_DECISION_COPROCESSOR"
+          ],
+          "line": 84
+        },
+        {
+          "block": "APPLY_HARNESS_RISK_THRESHOLDS",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 64
+        },
+        {
+          "block": "BIND_WORKSPACE_TO_LIVE_GATE",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_DECISION_COPROCESSOR"
+          ],
+          "line": 102
+        },
+        {
+          "block": "BUILD_TOOL_SAFETY_DIAGNOSTIC",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 93
+        },
+        {
+          "block": "DERIVE_WORKSPACE_SCOPE_SIGNAL",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 40
+        },
+        {
+          "block": "EMIT_HARNESS_DECISION",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 74
+        },
+        {
+          "block": "MATCH_DESTRUCTIVE_COMMAND",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 29
+        },
+        {
+          "block": "NORMALIZE_TOOL_SAFETY_INPUT",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 18
+        },
+        {
+          "block": "RESOLVE_HARNESS_SAFETY_CONFIG",
+          "tokens": [
+            "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 7
+        },
+        {
+          "block": "RUN_HARNESS_SAFETY_FANOUT",
+          "tokens": [
+            "IMPL-TIED_JEV_TOOL_SAFETY_GATING",
+            "REQ-TIED_JEV_DECISION_COPROCESSOR",
+            "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+          ],
+          "line": 52
+        }
+      ]
+    }
+  },
+  "diagnostics": [],
+  "unsupported_syntax": [],
+  "unknowns": []
+}

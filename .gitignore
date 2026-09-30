@@ -184,6 +184,11 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json
 !working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/
 !working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/**
+!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/evidence-chain-profile.v1.json
+!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/
+!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/**
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/not-applicable-receipt.v1.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/gate-pseudocode-validation-evidence.md
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/

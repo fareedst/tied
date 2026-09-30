@@ -48,9 +48,7 @@ export function resolveJevConfig(
 ): Required<Pick<JevClientConfig, "apiBase" | "model" | "maxStateChars">> &
   Pick<JevClientConfig, "apiKey" | "fetchImpl"> {
   const apiKey =
-    "apiKey" in overrides
-      ? overrides.apiKey
-      : resolveJevApiKey(env) ?? env.JEV_API_KEY;
+    "apiKey" in overrides ? overrides.apiKey : resolveJevApiKey(env);
   return {
     apiKey,
     apiBase: overrides.apiBase ?? env.JEV_API_BASE ?? DEFAULT_JEV_API_BASE,

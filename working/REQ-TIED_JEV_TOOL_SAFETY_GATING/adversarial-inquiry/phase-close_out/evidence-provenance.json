@@ -1,0 +1,19 @@
+{
+  "provenance": {
+    "block_id": "IMPL-TIED_JEV_TOOL_SAFETY_GATING#BIND_WORKSPACE_TO_LIVE_GATE#cb87a9a989e7d431",
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "close_out",
+    "production_path": "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts",
+    "project_id": "cfd5bf6ad98024eb",
+    "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+    "run_id": "closeout-inquiry-2026-09-30-close_out",
+    "source_revision": "closeout-inquiry-2026-09-30",
+    "test_paths": [
+      "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.test.ts"
+    ],
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

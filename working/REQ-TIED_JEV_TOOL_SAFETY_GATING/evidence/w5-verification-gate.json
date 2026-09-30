@@ -1,0 +1,17 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "phase": "verification",
+  "depth": "integrated",
+  "diagnostics": [
+    "missing_completion_activation",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete"
+  ],
+  "note": "Verification-phase gate uses different activation run_id pairing than close_out; machine close-out authority is close_out allowed=true per closeout-run-close-out-gates-final.json (refreshed 2026-09-30 W5 pass).",
+  "evidence_hydrated": [
+    "request-evidence-envelope.v1.json:gaps",
+    "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/pseudocode-analysis/IMPL-TIED_JEV_TOOL_SAFETY_GATING.v1.json:IMPL-TIED_JEV_TOOL_SAFETY_GATING"
+  ]
+}

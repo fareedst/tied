@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "mode": "project",
+  "stage": "project-scope-loader",
+  "error": {
+    "code": "INVALID_INPUT",
+    "message": "Mode B test_path must be a supported Ruby Minitest (.rb) or Go (_test.go) file.",
+    "path": "mcp-server/src/jev/harness-tool-guard.test.ts"
+  }
+}

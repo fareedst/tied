@@ -1899,6 +1899,15 @@ ARCH-TIED_JEV_DECISION_COPROCESSOR:
   detail_file: "architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml"
   name: "Jev decision coprocessor architecture"
   status: "Active"
+ARCH-TIED_JEV_TOOL_SAFETY_GATING:
+  cross_references:
+    architecture: []
+    implementation: []
+    requirements:
+      - "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+  detail_file: "architecture-decisions/ARCH-TIED_JEV_TOOL_SAFETY_GATING.yaml"
+  name: "Harness tool safety gating architecture"
+  status: "Active"
 ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"

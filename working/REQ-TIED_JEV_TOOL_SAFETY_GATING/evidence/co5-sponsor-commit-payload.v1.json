@@ -1,0 +1,96 @@
+{
+  "schema": "co5-sponsor-commit-payload.v1",
+  "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+  "blueprint": "D",
+  "run_id": "closeout-inquiry-2026-09-30-close_out",
+  "prepared_at": "2026-09-30",
+  "prepared_by": "plan-close-out (CO5); sponsor commit deferred to parent agent",
+  "proposed_commit_message": "Blueprint D: harness tool safety gating on opt-in W5 guard.\n\nExtend harness-tool-guard with D noul question ids, combined thresholds,\nworkspace scope, benchmark + diagnostic MCP, and agentstream workspace\nbinding; integrated close-out evidence for REQ-TIED_JEV_TOOL_SAFETY_GATING.",
+  "stage_paths": {
+    "include_globs": [
+      "mcp-server/src/jev/harness-tool-guard.ts",
+      "mcp-server/src/jev/harness-tool-guard.test.ts",
+      "mcp-server/src/jev/tool-safety-benchmark.ts",
+      "mcp-server/src/jev/tool-safety-benchmark.test.ts",
+      "mcp-server/src/jev/client.ts",
+      "mcp-server/src/jev/resolve-jev-api-key.ts",
+      "mcp-server/test/jev/resolve-jev-api-key.test.ts",
+      "mcp-server/src/tools/tool-safety-mcp.ts",
+      "mcp-server/src/tools/tool-safety-mcp.test.ts",
+      "mcp-server/src/tools/index.ts",
+      "mcp-server/scripts/replay-jev-tool-safety-benchmark.ts",
+      "mcp-server/test/fixtures/tool-safety/**",
+      "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.ts",
+      "mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.test.ts",
+      "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
+      "tied/requirements.yaml",
+      "tied/architecture-decisions.yaml",
+      "tied/implementation-decisions.yaml",
+      "tied/requirements/REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml",
+      "tied/architecture-decisions/ARCH-TIED_JEV_TOOL_SAFETY_GATING.yaml",
+      "tied/implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING.yaml",
+      "tied/implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING-pseudocode.md",
+      "tied/citdp/CITDP-REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml",
+      "tied/vocab/decision-copilot.md",
+      "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/**",
+      "docs/comparisons/jev-for-tied-improvement.md",
+      ".gitignore",
+      "CHANGELOG.md"
+    ],
+    "exclude_notes": [
+      "tied/citdp/CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME.yaml and REQ-TIED_SETUP.yaml unless intentionally bundled",
+      "mcp-server/test/fixtures/adversarial-inquiry-*/**/request-evidence-envelope.v1.json",
+      "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-* unrelated churn",
+      "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/** unless separate commit",
+      "scripts/refresh-tied-client.sh unless sponsor scopes infra separately",
+      "onboarding.test.ts / yaml-canonicalizer / yaml-client-styling unless LEAP-linked to Blueprint D"
+    ],
+    "summary": "Blueprint D product (mcp-server jev/tools/agentstream), child REQ/ARCH/IMPL + CITDP, working/REQ-TIED_JEV_TOOL_SAFETY_GATING track artifacts, comparison doc, vocab, CHANGELOG, .gitignore negations."
+  },
+  "gate_pass_criteria": {
+    "machine_close_out": {
+      "tied_checklist_gate_validate": {
+        "phase": "close_out",
+        "allowed": true,
+        "run_id": "closeout-inquiry-2026-09-30-close_out",
+        "co5_mcp_receipt": "plan-close-out session 2026-09-30 (activation collect + inner CITDP)"
+      },
+      "unified_close_out_runner": {
+        "artifact": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-run-close-out-gates-final.json",
+        "gate_allowed": true,
+        "envelope_blocking_gap_count": 0,
+        "merged_decision_blocking": false
+      },
+      "request_evidence_envelope": {
+        "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/request-evidence-envelope.v1.json",
+        "fail_on_error_gaps": true,
+        "blocking_gaps": 0
+      }
+    },
+    "verification": {
+      "focused_tests": {
+        "cmd": "cd mcp-server && bun test src/jev/harness-tool-guard.test.ts src/jev/tool-safety-benchmark.test.ts src/tools/tool-safety-mcp.test.ts packages/agentstream/src/jev-harness-live-tool-gate.test.ts",
+        "passed": 33,
+        "failed": 0,
+        "evidence": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/w5-verify-closeout.v1.json"
+      },
+      "lint": {
+        "cmd": "cd mcp-server && bunx tsc -b",
+        "exit_code": 0
+      },
+      "tied_validate_consistency": {
+        "ok": true,
+        "artifact": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-validate-consistency-closeout.json"
+      }
+    },
+    "sponsor_commit": {
+      "action": "parent_agent_traceable_commit",
+      "must_not": ["git commit by plan-close-out subagent"],
+      "post_commit_evidence_optional": "record commit SHA in working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/co5-sponsor-commit-receipt.v1.json"
+    }
+  },
+  "handoff_pointers": [
+    "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/plan-close-out-handoff.md",
+    "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/PLAN-CLOSE-OUT.md"
+  ]
+}
