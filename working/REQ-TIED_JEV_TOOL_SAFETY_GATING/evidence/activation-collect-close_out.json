@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+    "project_id": "cfd5bf6ad98024eb",
+    "run_id": "closeout-inquiry-2026-09-30-close_out",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-TIED_JEV_TOOL_SAFETY_GATING#BIND_WORKSPACE_TO_LIVE_GATE#cb87a9a989e7d431"
+    ],
+    "scope_hash": "db0823deff499b57f28244c0da108cdd5a61c89394080af5a19e8cabe38de42e",
+    "artifact_hashes": {
+      "obligation-report.json": "5b32e24724f28ac19d30d6caa0dacf35f2a753bf212e622a75530ab487428d60",
+      "finding-ledger.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gate-result.json": "40236dc978d5cb58f34fdf45c56345d04a979b52c7cbea98ff8a654ed15db878",
+      "evidence-provenance.json": "b2169311b98e90129275706c0a860ade66b51e6a4c6f4d13a5d98f8115acdd3a"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "closeout-inquiry-2026-09-30-close_out",
+      "phase": "close_out",
+      "scope_hash": "db0823deff499b57f28244c0da108cdd5a61c89394080af5a19e8cabe38de42e",
+      "hash": "5b32e24724f28ac19d30d6caa0dacf35f2a753bf212e622a75530ab487428d60",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "closeout-inquiry-2026-09-30-close_out",
+      "phase": "close_out",
+      "scope_hash": "db0823deff499b57f28244c0da108cdd5a61c89394080af5a19e8cabe38de42e",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "closeout-inquiry-2026-09-30-close_out",
+      "phase": "close_out",
+      "scope_hash": "db0823deff499b57f28244c0da108cdd5a61c89394080af5a19e8cabe38de42e",
+      "hash": "40236dc978d5cb58f34fdf45c56345d04a979b52c7cbea98ff8a654ed15db878",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "closeout-inquiry-2026-09-30-close_out",
+      "phase": "close_out",
+      "scope_hash": "db0823deff499b57f28244c0da108cdd5a61c89394080af5a19e8cabe38de42e",
+      "hash": "b2169311b98e90129275706c0a860ade66b51e6a4c6f4d13a5d98f8115acdd3a",
+      "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+    "project_id": "cfd5bf6ad98024eb",
+    "run_id": "closeout-inquiry-2026-09-30-close_out",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-TIED_JEV_TOOL_SAFETY_GATING#BIND_WORKSPACE_TO_LIVE_GATE#cb87a9a989e7d431"
+    ],
+    "scope_hash": "db0823deff499b57f28244c0da108cdd5a61c89394080af5a19e8cabe38de42e"
+  },
+  "diagnostics": []
+}

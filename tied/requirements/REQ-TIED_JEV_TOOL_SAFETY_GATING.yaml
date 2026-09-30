@@ -11,9 +11,9 @@ REQ-TIED_JEV_TOOL_SAFETY_GATING:
       author: "build-plan"
       date: "2026-09-29"
     last_updated:
-      author: "build-plan"
-      date: "2026-09-29"
-      reason: "W0 mint"
+      author: "tied_verify"
+      date: "2026-09-30"
+      reason: "close_out verification-gated status update"
   name: "Jev harness tool safety gating (Blueprint D)"
   priority: "P2"
   rationale:
@@ -56,4 +56,4 @@ REQ-TIED_JEV_TOOL_SAFETY_GATING:
     - criterion: "Trace has feature tool_safety_gating; no secrets or raw workspace."
       id: "SC-D-TRACE-PRIVACY"
       metric: "unit canaries"
-  status: "In Progress"
+  status: "Implemented"

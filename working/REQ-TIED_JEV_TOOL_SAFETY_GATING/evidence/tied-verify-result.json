@@ -1,0 +1,23 @@
+{
+  "schema": "tied-verify-result.v1",
+  "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+  "run_id": "closeout-inquiry-2026-09-30-close_out",
+  "applied_at": "2026-09-30",
+  "ok": true,
+  "requirements_updated": 1,
+  "implementation_updated": 1,
+  "requirements_set_implemented": [
+    "REQ-TIED_JEV_TOOL_SAFETY_GATING"
+  ],
+  "implementation_set_active": [
+    "IMPL-TIED_JEV_TOOL_SAFETY_GATING"
+  ],
+  "gate_receipt": {
+    "path": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/close_out-2026-09-30T17-12-11-620Z.json",
+    "hash": "sha256:83fdd6e75bc2656ca1603a0e90253358feba73001d19bad06c8556fe89b95d01"
+  },
+  "status_mutation_receipt": true,
+  "payload": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/tied-verify-payload.json",
+  "activation_collect": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/activation-collect-close_out.json",
+  "note": "Applied via updateStatusFromPassedTokens after MCP rebuild; tied-cli @file dry_run:false was ignored (stale dist path). Detail status synced via yaml_detail_update."
+}

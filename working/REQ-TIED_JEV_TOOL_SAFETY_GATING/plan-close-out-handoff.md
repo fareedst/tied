@@ -13,7 +13,7 @@
 
 - Benign `envelope_revision_conflict` DIAGNOSTIC on manifest/profile patch during runner (gate still passes; artifacts on disk).
 - Reconcile dimension `verification_manifest` score 0 in process_grade while `quality_manifest.ok: true` (read-only reconcile path; manifest file present).
-- **`tied_verify` with update:** not re-run this session; use explicit gate receipt scope if verification-gated REQ status update is required (same posture as Blueprint C).
+- **`tied_verify` with update:** **done** — REQ **Implemented** (index + detail); evidence [tied-verify-result.json](evidence/tied-verify-result.json) (committed in verify follow-up).
 - Malformed Jev JSON / missing noul keys may parse as combined=0 allow (documented proof boundary in W5 verify).
 
 ## CO waves executed

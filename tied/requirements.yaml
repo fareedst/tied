@@ -2151,7 +2151,7 @@ REQ-TIED_JEV_TOOL_SAFETY_GATING:
   detail_file: "requirements/REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml"
   name: "Jev harness tool safety gating (Blueprint D)"
   priority: "P2"
-  status: "In Progress"
+  status: "Implemented"
 REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   category: "Methodology"
   cross_references:
