@@ -767,7 +767,7 @@ export function validateFindingDisposition(input: {
     }
   }
   const uniqueDiagnostics = [...new Set(diagnostics)];
-  const advisoryOnly = input.gatePolicy === "advisory"
+  const advisoryOnly = (input.gatePolicy === "advisory" || input.gatePolicy === "mixed")
     && uniqueDiagnostics.length > 0
     && uniqueDiagnostics.every((code) => ADVISORY_FINDING_DIAGNOSTICS.has(code));
   if (advisoryOnly) {

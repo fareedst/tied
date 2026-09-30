@@ -111,23 +111,24 @@ function addUniqueReference(
   diagnostics: GraphDiagnostic[],
   context: string,
 ): boolean {
-  if (!value.trim()) {
+  if (typeof value !== "string" || !value.trim()) {
     diagnostics.push({
       code: "MALFORMED_REFERENCE",
-      message: `${context} contains an empty reference.`,
-      reference: value,
+      message: `${context} contains an empty or non-string reference.`,
+      reference: typeof value === "string" ? value : String(value),
     });
     return false;
   }
-  if (seen.has(value)) {
+  const normalized = value.trim();
+  if (seen.has(normalized)) {
     diagnostics.push({
       code: "DUPLICATE_REFERENCE",
-      message: `${context} repeats reference ${value}.`,
-      reference: value,
+      message: `${context} repeats reference ${normalized}.`,
+      reference: normalized,
     });
     return false;
   }
-  seen.add(value);
+  seen.add(normalized);
   return true;
 }
 
@@ -262,18 +263,19 @@ export function buildObligationGraph(input: ObligationGraphInput): GraphBuildRes
     addCase(adversarialCase, blocks, nodes, edges, diagnostics);
   }
 
-  if (diagnostics.length > 0) return { diagnostics };
-  return {
-    graph: {
-      projectId: input.projectId,
-      nodes: [...nodes.values()].sort((left, right) => left.id.localeCompare(right.id)),
-      edges: [...edges.values()].sort((left, right) =>
-        EDGE_ORDER[left.kind] - EDGE_ORDER[right.kind]
-        || left.from.localeCompare(right.from)
-        || left.to.localeCompare(right.to)),
-    },
-    diagnostics: [],
+  const graph: ObligationGraph = {
+    projectId: input.projectId,
+    nodes: [...nodes.values()].sort((left, right) => left.id.localeCompare(right.id)),
+    edges: [...edges.values()].sort((left, right) =>
+      EDGE_ORDER[left.kind] - EDGE_ORDER[right.kind]
+      || left.from.localeCompare(right.from)
+      || left.to.localeCompare(right.to)),
   };
+  const blockingDiagnostics = diagnostics.filter((item) => item.code !== "MALFORMED_REFERENCE");
+  if (blockingDiagnostics.length > 0) {
+    return { diagnostics };
+  }
+  return { graph, diagnostics: [...diagnostics] };
 }
 
 function addCase(
@@ -492,9 +494,13 @@ export function projectReadOnlyReport(input: {
   scope: readonly string[];
   graph: ObligationGraph;
   findings: readonly FidelityFinding[];
+  graphDiagnostics?: readonly GraphDiagnostic[];
 }): ReadOnlyReport {
   const proofBoundaries = [...new Set(input.findings.map((item) => item.proofBoundary))]
     .sort() as ReadOnlyReport["proofBoundaries"];
+  const graphDiagnostics = input.graphDiagnostics?.length
+    ? input.graphDiagnostics.map((item) => ({ ...item }))
+    : undefined;
   return {
     schemaVersion: "adversarial-inquiry-report.v1",
     projectId: input.projectId,
@@ -503,6 +509,7 @@ export function projectReadOnlyReport(input: {
       projectId: input.graph.projectId,
       nodes: input.graph.nodes.map((node) => ({ ...node })),
       edges: input.graph.edges.map((edge) => ({ ...edge })),
+      ...(graphDiagnostics ? { diagnostics: graphDiagnostics } : {}),
     },
     findings: input.findings
       .map((item) => ({ ...item, evidenceRefs: item.evidenceRefs ? [...item.evidenceRefs] : undefined }))
@@ -547,6 +554,7 @@ export function runAdversarialInquiry(input: AdversarialInquiryInput): Adversari
     scope: input.scope,
     graph: graphResult.graph,
     findings: fidelity.findings,
+    graphDiagnostics: graphResult.diagnostics,
   });
   const eligibility = input.eligibility ?? {
     eligible: true,

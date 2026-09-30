@@ -110,6 +110,7 @@ import {
   type OperationalSource,
 } from "../feedback-promotion.js";
 import {
+  normalizeInquiryActivation,
   runChecklistInquiry,
   type ChecklistInquiryInput,
   type GatePolicy,
@@ -1661,9 +1662,7 @@ export const allTools = [
             phase?: InquiryActivation["phase"];
           };
           const activation = projectArgs.activation
-            ?? (projectArgs.run_id && projectArgs.phase
-              ? { runId: projectArgs.run_id, phase: projectArgs.phase }
-              : undefined);
+            ?? normalizeInquiryActivation(projectArgs.run_id, projectArgs.phase);
           const result = await runProjectInquiry({
             ...projectArgs,
             activation,
@@ -1682,9 +1681,7 @@ export const allTools = [
           humanApproval: args.human_approval as unknown as HumanStrictApproval | undefined,
           repositoryRoot: args.repository_root,
           requestToken: args.request_token,
-          activation: args.run_id && args.phase
-            ? { runId: args.run_id, phase: args.phase }
-            : undefined,
+          activation: normalizeInquiryActivation(args.run_id, args.phase),
           provenance: args.provenance,
           redact: args.redact,
         });

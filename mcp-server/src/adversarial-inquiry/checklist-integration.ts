@@ -119,7 +119,39 @@ export type ChecklistInquiryResult = AdversarialInquiryResult & {
 };
 
 function sortedUnique(values: readonly string[]): string[] {
-  return [...new Set(values.map((value) => value.trim()).filter(Boolean))].sort();
+  return [
+    ...new Set(
+      values
+        .filter((value): value is string => typeof value === "string")
+        .map((value) => value.trim())
+        .filter(Boolean),
+    ),
+  ].sort();
+}
+
+const INQUIRY_ACTIVATION_PHASES = new Set<InquiryActivation["phase"]>([
+  "pre_implementation",
+  "verification",
+  "close_out",
+  "post_test",
+]);
+
+/** Normalize MCP run_id + phase into activation pairing; both must be present and non-empty. */
+export function normalizeInquiryActivation(
+  runId: unknown,
+  phase: unknown,
+): InquiryActivation | undefined {
+  if (typeof phase !== "string" || !INQUIRY_ACTIVATION_PHASES.has(phase as InquiryActivation["phase"])) {
+    return undefined;
+  }
+  if (typeof runId !== "string") {
+    return undefined;
+  }
+  const trimmedRunId = runId.trim();
+  if (!trimmedRunId) {
+    return undefined;
+  }
+  return { runId: trimmedRunId, phase: phase as InquiryActivation["phase"] };
 }
 
 function isWithin(root: string, candidate: string): boolean {
@@ -167,7 +199,7 @@ export function evaluateScopedGate(input: {
       schemaVersion: "adversarial-inquiry-gate.v1",
       policy: input.policy,
       scope,
-      status: "warn",
+      status: input.verdict === "PASS" ? "passed" : "warn",
       blocking: false,
       verdict: input.verdict,
       diagnostics,
@@ -216,7 +248,8 @@ export function resolveArtifactPaths(input: {
   phase?: InquiryActivation["phase"];
   artifactRoot?: string;
 }): ArtifactPaths {
-  const requestToken = input.requestToken.trim();
+  const requestToken =
+    typeof input.requestToken === "string" ? input.requestToken.trim() : "";
   if (!isValidWorkingRequestToken(requestToken)) {
     throw new Error(`INVALID_SCOPE: invalid request token ${input.requestToken}`);
   }

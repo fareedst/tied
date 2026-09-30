@@ -325,4 +325,31 @@ describe("RUN_ADVERSARIAL_INQUIRY REQ-TIED_ADVERSARIAL_INQUIRY", () => {
       assert.deepEqual(result.status, { [blockId]: "PASS" });
     }
   });
+
+  it("reports MALFORMED_REFERENCE instead of throwing on non-string graph refs", () => {
+    const blockId = `${TOKENS.impl}#BUILD_GRAPH#block`;
+    const graph = buildObligationGraph({
+      projectId: "p1",
+      criteria: [{
+        identity: resolveCriterionIdentity({
+          requirementToken: TOKENS.req,
+          criterionId: "criterion-1",
+          text: "Behavior holds.",
+          sourceRevision: "rev-1",
+        }),
+        architectureConstraintIds: [undefined as unknown as string],
+      }],
+      architectureConstraints: [{ id: "c1", implementationBlockIds: [blockId] }],
+      implementationBlocks: [{
+        identity: resolveBlockIdentity({
+          implementationToken: TOKENS.impl,
+          blockName: "BUILD_GRAPH",
+          semanticContent: "link",
+          sourceRevision: "rev-1",
+        }),
+      }],
+      evidenceLoci: [],
+    });
+    assert.ok(graph.diagnostics.some((d) => d.code === "MALFORMED_REFERENCE"));
+  });
 });

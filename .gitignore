@@ -11,6 +11,7 @@ docs/agentstream-unitconv-general-transcript-difficulties.md
 # Private local comparison / planning docs (maintain on disk; not published in git)
 docs/comparisons/*
 !docs/comparisons/jev-for-tied-improvement.md
+!docs/comparisons/system-one-jev-taxonomy-and-opportunities.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md
@@ -30,6 +31,8 @@ tied/features/
 
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
+# Optional live Jev benchmark appendix (mocked CI uses context-pruning-benchmark.v1.json)
+working/**/context-pruning-benchmark-live.v1.json
 # MCP server cwd gate scratch (mirrors working/**/gates receipts; regenerate per local MCP run)
 mcp-server/working/
 # Disposable client demo folders (e.g. REDDIT-CLIENT-<timestamp>)
@@ -170,6 +173,9 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/not-applicable-receipt.v1.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/evidence-chain-profile.v1.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/not-applicable-receipt.v1.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/gate-pseudocode-validation-evidence.md
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/

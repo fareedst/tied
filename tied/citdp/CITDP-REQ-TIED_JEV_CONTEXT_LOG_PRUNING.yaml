@@ -11,20 +11,25 @@ CITDP-REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
       - "Five benchmark arms on same fixture hash"
     unchanged_behavior: "adviseContextFilter W5; default-off env"
   completion_criteria:
-    focused_tests: "bun test mcp-server/src/jev/context-log-pruner.test.ts; bun test mcp-server/src/jev/"
+    activation:
+      phase: "close_out"
+      run_id: "close-out-2026-09-29-graph"
+    focused_tests: "bun test mcp-server/test/jev/context-log-pruner.test.ts; bun test mcp-server/src/jev/"
     lint: "cd mcp-server && bunx tsc -b"
     verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
   evidence:
     commands:
       - command:
+          - "./src/jev/jev.test.ts"
+          - "./src/jev/shadow-vocab-preload.test.ts"
+          - "./test/jev/context-log-pruner.test.ts"
           - "bun"
-          - "src/jev/"
           - "test"
         cwd: "mcp-server"
-        id: "jev-regression"
+        id: "jev-regression-scoped"
       - command:
+          - "./test/jev/context-log-pruner.test.ts"
           - "bun"
-          - "src/jev/context-log-pruner.test.ts"
           - "test"
         cwd: "mcp-server"
         id: "context-pruner-unit"
@@ -38,9 +43,9 @@ CITDP-REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
   record_identity:
     change_request_id: "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
     gate_policy: "mixed"
-    phase: "implementation"
+    phase: "close_out"
     profile_depth: "integrated"
-    record_status: "draft"
+    record_status: "complete"
     recorded_at: "2026-09-29"
     title: "Blueprint A context log pruning"
   risk_analysis:

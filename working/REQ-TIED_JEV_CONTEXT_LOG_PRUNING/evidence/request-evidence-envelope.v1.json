@@ -1,0 +1,192 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-30T02:42:26.985Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "integrated",
+    "gate_policy": "mixed",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:1e9f96632dd9282c38c811d863e403e67042a1d0d480e0797aeb1e617570cf5f",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:647c4b77b84e48315d7ecfada5b90167a01ac06bf59f0c26b3dcbf82c5bacaef",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:63d1c317cf687fef30f3c84a708d40438fef8e1164dd96574777c4ec468571ae",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:482748cbd5aacbefd2cc55ba4778521835227d610d184dfcf62d855c66ed852c",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:8e8a25c4388644db77de5864a323e2e20b7b52bed7426eb4bcd1e6850fa1828d",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:e3b4e466324b1bdad9490f10c05cfe0efab1b837df3cd16f3b948eba9fc1650f",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:5c835b76fd7fb8a3c0e23fc006b9978152ce4511ca554f66bb4f733823b62f37",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_JEV_CONTEXT_LOG_PRUNING.yaml",
+      "content_hash": "sha256:7430e866eea741e3cfbf6720cfde0d7b874f7385f5344cff21aeb515ee13e787",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:ec7ecacf360d4f7977b92dc4e55b65206cb2d8f5bbd662f5da0e01828266be74",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:d3d465ac894155fa022202c8d21109188148f38c6c9d06fe5d06b3e03a4f90c2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark-live.v1.json",
+      "content_hash": "sha256:74214ad5502d7b048d35c8cbab1eafe0f847361a36d4e5c47876b39eb0a15e43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json",
+      "content_hash": "sha256:a75aacb55851662d403d6070fa196bcaa6977cb972e2ce0c73a10e29c007844c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/tied-validate-consistency.json",
+      "content_hash": "sha256:c2653b9da11b1036eda6ff4b956025d9cfb7ca9076990be3ef0a98567b25a9bc",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:5097e2a19e8d45988e885ef3299acc9eea9ce474e1546ab228f37e2d31704f6e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:628db4130641c2238f64c787850c7eda1ee91fd2e2d2ab5b7aa37f0ec31e2539",
+    "citdp_path": null,
+    "evidence_chain_profile_path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": []
+}

@@ -108,8 +108,9 @@ export async function collectChecklistActivation(
   input: CollectChecklistActivationInput,
 ): Promise<CollectChecklistActivationResult> {
   const diagnostics: string[] = [];
-  const requestToken = input.requestToken.trim();
-  const runId = input.runId.trim();
+  const requestToken =
+    typeof input.requestToken === "string" ? input.requestToken.trim() : "";
+  const runId = typeof input.runId === "string" ? input.runId.trim() : "";
   const phase = input.phase;
 
   if (!isValidWorkingRequestToken(requestToken)) {

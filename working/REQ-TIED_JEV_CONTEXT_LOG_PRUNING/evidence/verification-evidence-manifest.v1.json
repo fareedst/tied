@@ -1,0 +1,72 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-2026-09-29-graph",
+  "commit": "36dbd9c+close-out",
+  "environment": {
+    "close_out": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
+  },
+  "command_results": [
+    {
+      "id": "context-pruner-unit",
+      "command": ["bun", "test", "./test/jev/context-log-pruner.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 88,
+      "artifacts": [
+        "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/quality-manifest/context-pruner-unit.stderr.txt",
+        "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/quality-manifest/context-pruner-unit.stdout.txt"
+      ]
+    },
+    {
+      "id": "jev-regression-scoped",
+      "command": [
+        "bun",
+        "test",
+        "./test/jev/context-log-pruner.test.ts",
+        "./src/jev/jev.test.ts",
+        "./src/jev/shadow-vocab-preload.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 134,
+      "artifacts": [
+        "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/quality-manifest/jev-regression-scoped.stderr.txt",
+        "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/quality-manifest/jev-regression-scoped.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "context-pruner-unit",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "Blueprint A pruner unit tests",
+      "evidence_method": "command",
+      "result": "passed"
+    },
+    {
+      "id": "jev-regression-scoped",
+      "attribute": "ai-enabled",
+      "applicability": "applicable",
+      "rationale": "Scoped Jev regression for pruner + core client tests",
+      "evidence_method": "command",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING",
+    "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING",
+    "REQ-TIED_JEV_CONTEXT_LOG_PRUNING"
+  ],
+  "proof_boundaries": ["executable_behavior"],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": ["tied/citdp/CITDP-REQ-TIED_JEV_CONTEXT_LOG_PRUNING.yaml"]
+  },
+  "diff_scoped_crap_hook": {
+    "skipped": true,
+    "reason": "diff_scoped_crap_disabled"
+  }
+}

@@ -8,6 +8,7 @@ import { describe, it } from "node:test";
 
 import {
   evaluateScopedGate,
+  normalizeInquiryActivation,
   persistWorkingArtifacts,
   resolveArtifactPaths,
   type HumanStrictApproval,
@@ -19,6 +20,19 @@ const TOKENS = {
   arch: "ARCH-TIED_ADVERSARIAL_INQUIRY",
   impl: "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
 };
+
+describe("normalizeInquiryActivation [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
+  it("returns undefined for whitespace run_id", () => {
+    assert.equal(normalizeInquiryActivation("   ", "verification"), undefined);
+  });
+
+  it("trims run_id and accepts valid phase", () => {
+    assert.deepEqual(normalizeInquiryActivation("  run-1  ", "verification"), {
+      runId: "run-1",
+      phase: "verification",
+    });
+  });
+});
 
 const approval: HumanStrictApproval = {
   reviewer: "reviewer@example.test",

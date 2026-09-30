@@ -178,6 +178,58 @@ describe("tied_adversarial_inquiry_run composition [REQ-TIED_ADVERSARIAL_INQUIRY
   });
 
   // [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: dispatch an explicit project-input inquiry through the validated orchestrator and existing checklist persistence.
+  it("returns structured inquiry result when graph refs are malformed (no trim throw)", async () => {
+    const handler = toolHandler("tied_adversarial_inquiry_run");
+    const blockId = "IMPL-FIXTURE#BLOCK#block";
+    const result = parse(await handler({
+      graph: {
+        projectId: "p1",
+        criteria: [{
+          identity: {
+            id: "REQ-FIXTURE#criterion-1",
+            kind: "criterion",
+            derivation: "explicit",
+            revision: "criterion-rev",
+            sourceRevision: "source-rev",
+          },
+          architectureConstraintIds: [undefined],
+        }],
+        architectureConstraints: [{ id: "constraint-1", implementationBlockIds: [blockId] }],
+        implementationBlocks: [{
+          identity: {
+            id: blockId,
+            kind: "block",
+            name: "BLOCK",
+            derivation: "content",
+            revision: "block-rev",
+            sourceRevision: "source-rev",
+          },
+        }],
+        evidenceLoci: [],
+      },
+      fidelity: {
+        blockRevision: "block-rev",
+        specification: [{ id: "statement-1", kind: "behavior", value: "accept input", order: 1 }],
+        testEvidence: [],
+        productionEvidence: [],
+      },
+      scope: [blockId],
+      policy: "advisory",
+      repository_root: fs.mkdtempSync(path.join(os.tmpdir(), "adversarial-inquiry-malformed-")),
+      request_token: "REQ-TIED_ADVERSARIAL_INQUIRY",
+      phase: "verification",
+      run_id: "run-malformed-graph",
+      redact: [],
+    }));
+    assert.equal(result.ok, true);
+    const report = result.report as { graph: { diagnostics?: Array<{ code: string }> } };
+    assert.ok(
+      report.graph?.diagnostics?.some((d) => d.code === "MALFORMED_REFERENCE")
+        ?? JSON.stringify(report).includes("MALFORMED_REFERENCE"),
+    );
+    assert.ok(result.activation);
+  });
+
   it("dispatches all Mode B fixture cases without changing Mode A", async () => {
     const handler = toolHandler("tied_adversarial_inquiry_run");
     const fixtureRoot = path.resolve(
