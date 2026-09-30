@@ -1,3 +1,4 @@
+DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/verification-evidence-manifest.v1.json: envelope_revision_conflict
 DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
 DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json: envelope_revision_conflict
 {
@@ -83,7 +84,7 @@ DIAGNOSTIC: envelope patch failed for working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SU
     "ok": true,
     "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json",
     "blocking_gap_count": 0,
-    "advisory_gap_count": 1,
+    "advisory_gap_count": 0,
     "diagnostics": []
   }
 }

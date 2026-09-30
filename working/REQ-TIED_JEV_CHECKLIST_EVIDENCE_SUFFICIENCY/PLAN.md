@@ -1,6 +1,6 @@
 ---
 name: Blueprint C Evidence Gate
-overview: "Opt-in Jev pre-gate for checklist evidence sufficiency (Blueprint C / Patterns 11 & 5): block superficial execution_evidence before tied_checklist_gate_validate when enabled; labeled fixtures + benchmark arms; shared JEV_DECIDE_TRACE; never sets gate allowed. Mirror to working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/PLAN.md on /build-plan W0."
+overview: "Opt-in Jev pre-gate for checklist evidence sufficiency (Blueprint C / Patterns 11 & 5): block superficial execution_evidence before tied_checklist_gate_validate when enabled; labeled fixtures + benchmark arms; shared JEV_DECIDE_TRACE; never sets gate allowed. W0–W5 shipped; machine close-out pending (see PLAN-CLOSE-OUT.md)."
 todos:
   - id: refine-sponsor-defaults
     content: "Refine gate: child REQ/ARCH/IMPL tokens, integrated+mixed, opt-in TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY, thresholds 0.60 / score≤2, fail-open, decide-trace env"
@@ -26,6 +26,9 @@ todos:
   - id: link-taxonomy
     content: "Optional: Related Docs link from taxonomy § Blueprint C to working PLAN path"
     status: cancelled
+  - id: close-out-track
+    content: "Execute PLAN-CLOSE-OUT CO0–CO5 (envelope blockers + CHANGELOG commit) — see PLAN-CLOSE-OUT.md"
+    status: completed
 isProject: false
 ---
 
@@ -39,9 +42,10 @@ isProject: false
 | **Sibling** | Blueprint A — [REQ-TIED_JEV_CONTEXT_LOG_PRUNING](tied/requirements/REQ-TIED_JEV_CONTEXT_LOG_PRUNING.yaml) (structure / opt-in / fail-open precedent) |
 | **Gate authority** | [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](tied/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) — `tied_checklist_gate_validate` remains sole authoritative gate |
 | **Operator guide** | [jev-for-tied-improvement.md](docs/comparisons/jev-for-tied-improvement.md) — compose-don’t-fork; Jev never sets gate `allowed` |
-| **Working folder** | `working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/` (create on build-plan) |
-| **Plan mirror** | Copy this file to `working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/PLAN.md` when execution starts |
-| **Last refined** | 2026-09-29 (`build-plan` **W0** mint; pre_implementation gate deferred — see [evidence/w0-build-plan-handoff.md](evidence/w0-build-plan-handoff.md)) |
+| **Working folder** | `working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/` |
+| **Feature plan** | This file (`PLAN.md`) — normative spec + acceptance map post-W5 |
+| **Close-out plan** | [PLAN-CLOSE-OUT.md](PLAN-CLOSE-OUT.md) — machine close-out CO0–CO5 (envelope + commit) |
+| **Last refined** | 2026-09-30 (refine-plan **pass 3** — post-W5 as-built sync; see [evidence/refine-plan-pass3-2026-09-30.md](evidence/refine-plan-pass3-2026-09-30.md)) |
 
 ```mermaid
 flowchart TD
@@ -120,6 +124,16 @@ flowchart TD
 
 **Ambiguity accepted this refine:** Mapping table score “1–10” vs Blueprint body “1–5” → **1–5** pinned. Score criteria array length in IMPL must match (five ordered criteria strings).
 
+**Pass 3 (2026-09-30):** PLAN synced to **as-built** W0–W5; feature SC-* met per [evidence/w5-build-plan-handoff.md](evidence/w5-build-plan-handoff.md). **Machine close-out** and envelope remediation remain in [PLAN-CLOSE-OUT.md](PLAN-CLOSE-OUT.md).
+
+### Completion signals (post-W5; pass 3)
+
+| Signal | Status | Pointer |
+| --- | --- | --- |
+| Feature SC-* | **pass** | [w5-build-plan-handoff.md § SC-*](evidence/w5-build-plan-handoff.md) |
+| Machine close-out | **pass** | [closeout-run-close-out-gates.json](evidence/closeout-run-close-out-gates.json) — 0 blocking gaps |
+| Process / adherence | **pass** | Reconcile band B; typed refs + manifest — [plan-close-out-handoff.md](plan-close-out-handoff.md) |
+
 ### Configuration contract (env + manifest)
 
 Mirror [plan-skills-config.ts](mcp-server/src/jev/plan-skills-config.ts) / Blueprint A pruner opt-in semantics:
@@ -191,17 +205,20 @@ Add a **follow-on row** to [working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md](w
 
 ## Plan (CITDP)
 
-### Proposed traceability stack (mint at build-plan `author-requirement` / W0)
+### Traceability stack (minted W0)
 
-| Layer | Proposed token | Role |
+| Layer | Token | Detail |
 | --- | --- | --- |
-| REQ | `REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | Opt-in pre-gate; labeled benchmark; never authoritative gate |
-| ARCH | `ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | Module boundary: extract → deterministic → Jev → disposition; MCP surface; decide-trace `context_meta` |
-| IMPL | `IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | Question map, thresholds, fixture replay, MCP/CLI wrapper; shared trace writer ownership note vs parent client |
+| REQ | `REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | [tied/requirements/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml](tied/requirements/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) |
+| ARCH | `ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | [tied/architecture-decisions/ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml](tied/architecture-decisions/ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) |
+| IMPL | `IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` | [tied/implementation-decisions/IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml](tied/implementation-decisions/IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) + [pseudocode sidecar](tied/implementation-decisions/IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY-pseudocode.md) |
 
 **Cross-references / see_also:** `REQ-TIED_JEV_DECISION_COPROCESSOR`, `REQ-TIED_CHECKLIST_GATE_ENFORCEMENT`, `REQ-REQUEST_EVIDENCE_ENVELOPE` (complementary only).
 
-**CITDP / Tracker persistence:** Deferred to `/build-plan` W0. This refine pass does **not** mint YAML or run `tied_checklist_gate_validate` (no Tracker/CITDP on disk for this child REQ yet).
+**CITDP / Tracker (persisted):**
+
+- CITDP: [tied/citdp/CITDP-REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml](tied/citdp/CITDP-REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) (`depth_tier: integrated`, `gate_policy: mixed`)
+- Tracker: [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml)
 
 ### Change definition (outline for CITDP W0)
 
@@ -249,13 +266,13 @@ Add a **follow-on row** to [working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md](w
 
 ### Test strategy (Implement gate entry)
 
-| Layer | Focus | Path (planned) |
+| Layer | Focus | Path (as-built) |
 | --- | --- | --- |
 | Unit | Threshold edges (`0.599`/`0.600`, score `2`/`3`), skip/no key, state too large, empty evidence, token-contract on/off | `mcp-server/src/jev/checklist-evidence-sufficiency.test.ts` |
 | Unit | Extract evidence from tracker shapes used by gate validate | Align with [checklist-validator.ts](mcp-server/src/checklist-validator.ts) helpers |
 | Unit | `JEV_DECIDE_TRACE=1` → JSONL record shape; skip path logs `skipped_reason`; canary secret absent | Extend client or dedicated trace test |
 | Contract | Report schema `checklist-evidence-sufficiency-benchmark.v1`; fixture JSONL; decide-trace `system-one-decide-trace.v1` | schema/snapshot tests |
-| Composition | Opt-in flag wraps gate validate in MCP tool chain; mocked Jev reject then allow | `mcp-server/src/tools/` or checklist-gate MCP test |
+| Composition | Opt-in flag wraps gate validate in MCP tool chain; mocked Jev reject then allow | [checklist-evidence-sufficiency-mcp.test.ts](mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts) |
 | Evaluation | Replay script (pattern [replay-jev-vocab-shadow.ts](mcp-server/scripts/replay-jev-vocab-shadow.ts), [adversarial-triage-pilot.ts](mcp-server/src/jev/adversarial-triage-pilot.ts)) | `mcp-server/scripts/replay-jev-checklist-evidence-sufficiency.ts` |
 | Regression | [checklist-pseudocode-gate.test.ts](mcp-server/src/checklist-pseudocode-gate.test.ts), gate enforcement fixtures | No behavior change when flag off |
 
@@ -380,7 +397,7 @@ JSONL under `mcp-server/test/fixtures/checklist-evidence-sufficiency/`:
 | `deterministic_only` | off | Tier-1 heuristics only | Isolates regex/empty checks |
 | `jev_on` | on (mocked or `--live`) | Full Blueprint C thresholds | Primary agreement arm |
 | `jev_off` | forced skip | Feature path with skip → fail-open | Fail-open + latency baseline |
-| `shadow_compare` | on | Log would-block vs eventual gate outcome | Optional W4 observability |
+| `shadow_compare` | on | Log would-block vs eventual gate outcome | Shipped in W3 benchmark module ([checklist-evidence-sufficiency-benchmark.ts](mcp-server/src/jev/checklist-evidence-sufficiency-benchmark.ts)) |
 
 **CI default:** mocked Jev (deterministic canned nouls/scores). **`--live`:** requires `JEV_API_KEY`; evidence under `working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/` only; no secrets in committed JSON.
 
@@ -397,7 +414,7 @@ Per fixture × arm, then aggregate:
 
 ---
 
-## Implementation sequence (build-plan waves)
+## Implementation status (as-built)
 
 ```mermaid
 flowchart TD
@@ -408,56 +425,70 @@ flowchart TD
   W4 --> W5[Verification + vocab + consistency]
 ```
 
-| Wave | Deliverable | Exit |
-| --- | --- | --- |
-| **W0** | Mirror PLAN.md; mint REQ/ARCH/IMPL + sidecar; CITDP; tracker copy; `semantic-tokens.yaml` | `pre_implementation` gate `allowed: true` |
-| **W1** | `checklist-evidence-sufficiency.ts` — extract, deterministic checks, disposition struct | Unit tests green |
-| **W2** | Jev question map + `jevDecide` integration; **shared** `JEV_DECIDE_TRACE` JSONL writer + Blueprint C `context_meta` | Mocked Jev tests + **SC-DECIDE-TRACE** unit test |
-| **W3** | Fixtures (≥20) + `replay-jev-checklist-evidence-sufficiency.ts` + benchmark report | Report in `working/.../evidence/` |
-| **W4** | MCP tool `tied_jev_checklist_evidence_sufficiency` (or Jev-status family) + opt-in hook **before** authoritative logic in [`tied_checklist_gate_validate`](mcp-server/src/tools/index.ts) | Composition test; document agentstream deferral if not composed |
-| **W5** | Full suite; vocab RECORD in [decision-copilot.md](tied/vocab/decision-copilot.md); `tied_validate_consistency`; verification / close_out | Close-out signals per prompt-shared |
+| Wave | Deliverable | Exit | Status |
+| --- | --- | --- | --- |
+| **W0** | Mirror PLAN.md; mint REQ/ARCH/IMPL + sidecar; CITDP; tracker copy; `semantic-tokens.yaml` | `pre_implementation` gate `allowed: true` | **done** — [evidence/w0-build-plan-handoff.md](evidence/w0-build-plan-handoff.md) |
+| **W1** | `checklist-evidence-sufficiency.ts` — extract, deterministic checks, disposition struct | Unit tests green | **done** — [evidence/w1-build-plan-handoff.md](evidence/w1-build-plan-handoff.md) |
+| **W2** | Jev question map + `jevDecide` integration; **shared** `JEV_DECIDE_TRACE` JSONL writer + Blueprint C `context_meta` | Mocked Jev tests + **SC-DECIDE-TRACE** unit test | **done** — [evidence/w2-build-plan-handoff.md](evidence/w2-build-plan-handoff.md) |
+| **W3** | Fixtures (≥20) + `replay-jev-checklist-evidence-sufficiency.ts` + benchmark report | Report in `working/.../evidence/` | **done** — 24 fixtures; [evidence/w3-build-plan-handoff.md](evidence/w3-build-plan-handoff.md), [checklist-evidence-sufficiency-benchmark.v1.json](evidence/checklist-evidence-sufficiency-benchmark.v1.json) |
+| **W4** | MCP tool `tied_jev_checklist_evidence_sufficiency` + opt-in hook **before** authoritative logic in [`tied_checklist_gate_validate`](mcp-server/src/tools/index.ts) | Composition test; agentstream deferral documented | **done** — [evidence/w4-build-plan-handoff.md](evidence/w4-build-plan-handoff.md) |
+| **W5** | Full suite; vocab RECORD; `tied_validate_consistency`; verification / close_out gates | SC-* met; machine close-out **pending** | **done** (feature) — [evidence/w5-build-plan-handoff.md](evidence/w5-build-plan-handoff.md) |
 
-**Key files (planned):**
+**Key files (as-built):**
 
-- `mcp-server/src/jev/checklist-evidence-sufficiency.ts` (new)
-- `mcp-server/src/jev/checklist-evidence-sufficiency.test.ts` (new)
-- `mcp-server/scripts/replay-jev-checklist-evidence-sufficiency.ts` (new)
-- `mcp-server/test/fixtures/checklist-evidence-sufficiency/*.jsonl` (new)
-- `mcp-server/src/jev/client.ts` (extend: optional `contextMeta` + decide-trace writer)
-- `mcp-server/src/tools/index.ts` (pre-gate hook + tool)
-- Reuse: `mcp-server/src/jev/redact-state.ts`, checklist evidence readers
+- [mcp-server/src/jev/checklist-evidence-sufficiency.ts](mcp-server/src/jev/checklist-evidence-sufficiency.ts)
+- [mcp-server/src/jev/checklist-evidence-sufficiency.test.ts](mcp-server/src/jev/checklist-evidence-sufficiency.test.ts)
+- [mcp-server/src/jev/checklist-evidence-sufficiency-benchmark.ts](mcp-server/src/jev/checklist-evidence-sufficiency-benchmark.ts) + [benchmark.test.ts](mcp-server/src/jev/checklist-evidence-sufficiency-benchmark.test.ts)
+- [mcp-server/scripts/replay-jev-checklist-evidence-sufficiency.ts](mcp-server/scripts/replay-jev-checklist-evidence-sufficiency.ts)
+- [mcp-server/test/fixtures/checklist-evidence-sufficiency/labeled-corpus.v1.jsonl](mcp-server/test/fixtures/checklist-evidence-sufficiency/labeled-corpus.v1.jsonl)
+- [mcp-server/src/jev/decide-trace.ts](mcp-server/src/jev/decide-trace.ts) + [client.ts](mcp-server/src/jev/client.ts) (`contextMeta`, trace writer)
+- [mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts](mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts) + [mcp test](mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts)
+- [mcp-server/src/tools/index.ts](mcp-server/src/tools/index.ts) (pre-gate hook)
+- Reuse: [redact-state.ts](mcp-server/src/jev/redact-state.ts), checklist evidence readers
 
-**Integration seam (W4):** Gate validate today accepts tracker + CITDP in MCP. Pre-gate runs **inside** that tool path when env/manifest enabled (single operator call). Agentstream [dae-gate-preflight.ts](mcp-server/packages/agentstream/src/dae-gate-preflight.ts) is a separate opt-in — document whether Blueprint C composes there or only via MCP (default: **MCP-only in v1**; agentstream as follow-on note).
+**Integration seam (W4):** Gate validate accepts tracker + CITDP in MCP. Pre-gate runs **inside** that tool path when env/manifest enabled (single operator call). Agentstream [dae-gate-preflight.ts](mcp-server/packages/agentstream/src/dae-gate-preflight.ts) remains **deferred** (MCP-only in v1). Replay script not yet wired into default CI `bun test` (W5 follow-up).
 
 ---
 
-## Implement gate (do not start until plan accepted)
+## Implementation complete (W0–W5)
 
-1. Copy checklist to `working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/agent-req-implementation-checklist.yaml`.
-2. Persist CITDP with `depth_tier: integrated`, `gate_policy: mixed`; run `tied_checklist_gate_validate` `phase: pre_implementation` with identity-bound activation when required.
-3. Complete IMPL `essence_pseudocode` with block token comments → `pseudocode_validate` / gate-pseudocode-validation → persist IMPL.
-4. RED unit tests per block → GREEN → composition → replay benchmark.
-5. Jev remains **coprocessor**; checklist gates and YAML MCP stay authoritative.
-6. Before completion claims: verification gate + unified close-out sync (prompt-shared `tied-implement.md`).
+All implement-gate steps below **completed** during build-plan W0–W5. **Next:** `/plan-close-out` per [PLAN-CLOSE-OUT.md](PLAN-CLOSE-OUT.md) (envelope blockers — not feature code).
+
+1. Checklist copied to [agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml).
+2. CITDP persisted (`integrated` / `mixed`); `pre_implementation` gate passed — [evidence/w1-pre-implementation-gate.json](evidence/w1-pre-implementation-gate.json).
+3. IMPL sidecar + pseudocode validation — W0/W1 evidence.
+4. Unit → composition → replay benchmark — green (33+ feature tests at W5).
+5. Jev remains **coprocessor**; checklist gates and YAML MCP authoritative.
+6. Verification gate **allowed**; unified close-out runner **blocking** — see completion signals above.
+
+**Still deferred (non-blocking for feature SC-*):** Agentstream DAE composition; CI default inclusion of replay script.
 
 ---
 
 ## Acceptance criteria (plan-level)
 
-- [ ] **SC-DEFAULT-OFF:** With feature unset, existing checklist gate fixtures and MCP composition tests behave identically to pre-change.
-- [ ] **SC-OPT-IN-BLOCK:** With `TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY=1` (or `jev.checklist_evidence_sufficiency: true`), superficial labeled fixtures produce pre-gate reject (`pre_gate: "jev_evidence_sufficiency"`, no `gate_receipt` field) and do **not** invoke authoritative gate success.
-- [ ] **SC-SLUG-SCOPE:** Pre-gate evaluates only slugs in the same required set as the gate call for that `phase` (+ `required_step_slugs`); composition test proves an out-of-scope step is not judged.
-- [ ] **SC-REMEDIATION:** Reject payload includes `remediation_hints` derived from which threshold failed (substantive / completeness / tokens).
-- [ ] **SC-THRESHOLDS:** Disposition uses code pins `noul_evidence_substantive < 0.60` OR `score_evidence_completeness <= 2` OR (when required) `noul_tokens_present < 0.60`.
-- [ ] **SC-FAIL-OPEN:** No credentials / skip / HTTP error → proceed to `tied_checklist_gate_validate` (Tier-1 empty evidence may still reject when feature on).
-- [ ] **SC-AUTHORITY:** No code path sets checklist gate `allowed: true` from Jev; composition test locks this invariant.
-- [ ] **SC-BENCH-ARMS:** Evidence report lists `deterministic_only`, `jev_on`, `jev_off` (and `shadow_compare` if shipped) on identical `fixture_hash`.
-- [ ] **SC-AGREEMENT:** On clear substantive vs superficial labels, `jev_on` agreement ≥**85%** or documented disagreement appendix with sponsor acceptance.
-- [ ] **SC-FIXTURES:** ≥20 labeled snippets covering substantive / superficial / borderline (+ canary secret row).
-- [ ] **SC-DECIDE-TRACE:** With `JEV_DECIDE_TRACE=1`, a Blueprint C fixture run appends ≥1 JSONL record containing `request.state`, `request.questions`, `response`, and `context_meta.gate_phase`.
-- [ ] **SC-PRIVACY:** Trace and fixtures contain no canary secrets; `working/jev-decide-trace/` gitignored or documented non-commit.
-- [ ] **SC-TRACE:** Token audit + `tied_validate_consistency` ok after TIED persist.
-- [ ] **SC-VOCAB:** RECORD **evidence sufficiency pre-gate**, **Blueprint C**, **Pattern 5 evidence gate**, **Pattern 11 verification**, and decide-trace terms in [decision-copilot.md](tied/vocab/decision-copilot.md); VALIDATE before commit.
+- [x] **SC-DEFAULT-OFF:** With feature unset, existing checklist gate fixtures and MCP composition tests behave identically to pre-change.
+- [x] **SC-OPT-IN-BLOCK:** With `TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY=1` (or `jev.checklist_evidence_sufficiency: true`), superficial labeled fixtures produce pre-gate reject (`pre_gate: "jev_evidence_sufficiency"`, no `gate_receipt` field) and do **not** invoke authoritative gate success.
+- [x] **SC-SLUG-SCOPE:** Pre-gate evaluates only slugs in the same required set as the gate call for that `phase` (+ `required_step_slugs`); composition test proves an out-of-scope step is not judged.
+- [x] **SC-REMEDIATION:** Reject payload includes `remediation_hints` derived from which threshold failed (substantive / completeness / tokens).
+- [x] **SC-THRESHOLDS:** Disposition uses code pins `noul_evidence_substantive < 0.60` OR `score_evidence_completeness <= 2` OR (when required) `noul_tokens_present < 0.60`.
+- [x] **SC-FAIL-OPEN:** No credentials / skip / HTTP error → proceed to `tied_checklist_gate_validate` (Tier-1 empty evidence may still reject when feature on).
+- [x] **SC-AUTHORITY:** No code path sets checklist gate `allowed: true` from Jev; composition test locks this invariant.
+- [x] **SC-BENCH-ARMS:** Evidence report lists `deterministic_only`, `jev_on`, `jev_off`, and `shadow_compare` on identical `fixture_hash`.
+- [x] **SC-AGREEMENT:** On clear substantive vs superficial labels, `jev_on` agreement ≥**85%** (mocked: **100%** on 17 clear rows).
+- [x] **SC-FIXTURES:** ≥20 labeled snippets (24 in corpus) covering substantive / superficial / borderline (+ canary secret row).
+- [x] **SC-DECIDE-TRACE:** With `JEV_DECIDE_TRACE=1`, a Blueprint C fixture run appends ≥1 JSONL record containing `request.state`, `request.questions`, `response`, and `context_meta.gate_phase`.
+- [x] **SC-PRIVACY:** Trace and fixtures contain no canary secrets; `working/jev-decide-trace/` gitignored or documented non-commit.
+- [x] **SC-TRACE:** Token audit + `tied_validate_consistency` ok after TIED persist.
+- [x] **SC-VOCAB:** RECORD **evidence sufficiency pre-gate**, **Blueprint C**, **Pattern 5 evidence gate**, **Pattern 11 verification**, and decide-trace terms in [decision-copilot.md](tied/vocab/decision-copilot.md); VALIDATE before commit.
+
+| Criterion | Evidence |
+| --- | --- |
+| SC-DEFAULT-OFF, SC-OPT-IN-BLOCK, SC-SLUG-SCOPE, SC-AUTHORITY | [checklist-evidence-sufficiency-mcp.test.ts](mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts) |
+| SC-REMEDIATION, SC-THRESHOLDS, SC-FAIL-OPEN | [checklist-evidence-sufficiency.test.ts](mcp-server/src/jev/checklist-evidence-sufficiency.test.ts) |
+| SC-BENCH-ARMS, SC-AGREEMENT, SC-FIXTURES | [checklist-evidence-sufficiency-benchmark.v1.json](evidence/checklist-evidence-sufficiency-benchmark.v1.json) |
+| SC-DECIDE-TRACE, SC-PRIVACY | client / decide-trace unit tests (W2) |
+| SC-TRACE, SC-VOCAB | [tied-validate-consistency-w5-summary.json](evidence/tied-validate-consistency-w5-summary.json); [decision-copilot.md](tied/vocab/decision-copilot.md) § Blueprint C |
 
 ---
 
@@ -475,21 +506,22 @@ flowchart TD
 
 ---
 
-## Vocabulary PRELOAD / RECORD (build-plan session)
+## Vocabulary PRELOAD / RECORD
 
-- PRELOAD: [decision-copilot.md](tied/vocab/decision-copilot.md), [quality-assurance.md](tied/vocab/quality-assurance.md), [fidelity-research.md](tied/vocab/fidelity-research.md); client [routing.md](tied/vocab/routing.md) → methodology as needed
-- RECORD at build-plan (not this refine pass — plan-mode purity): terms listed in **SC-VOCAB**
-- This refine: terms **RESOLVED** in-session; **RECORD deferred** to avoid TIED/vocab file mutation under plan-only constraint
+- PRELOAD: [decision-copilot.md](tied/vocab/decision-copilot.md), [quality-assurance.md](tied/vocab/quality-assurance.md), [fidelity-research.md](tied/vocab/fidelity-research.md)
+- RECORD **done** at W5 — terms in **SC-VOCAB**; VALIDATE before sponsor commit (close-out track)
 
 ---
 
 ## Risks and open items
 
+- **Machine close-out / envelope (primary):** Seven blocking gaps at W5 — missing `evidence_chain_profile`, six mixed-policy inquiry `finding_unresolved` / `warn_not_success` (close_out inquiry used narrow scope + synthetic paths → UNRELIABLE). Remediation: [PLAN-CLOSE-OUT.md](PLAN-CLOSE-OUT.md); inquiry run: [evidence/w5-close-out-inquiry-run.json](evidence/w5-close-out-inquiry-run.json).
 - **False reject** on valid terse evidence → borderline fixtures; remediation text; human improves evidence
 - **Overlap with LLM agent** self-checking — pre-gate is deterministic + cheap Jev, not second frontier pass
 - **Threshold pins** (0.60, score ≤2) are **code-owned**; benchmark calibrates, not taxonomy headlines
-- **Agentstream composition** deferred unless W4 proves a safe seam; document N/A
-- **Optional taxonomy Related Docs** one-liner — defer unless sponsor wants doc churn in same PR
+- **Agentstream composition** deferred (MCP-only v1)
+- **CI replay script** not in default test script (optional follow-on)
+- **Taxonomy Related Docs link** — cancelled (no Blueprint C anchor in taxonomy doc)
 
 ---
 
@@ -507,10 +539,10 @@ flowchart TD
 
 | Item | Status |
 | --- | --- |
-| Linked plan | **Updated** (this file) — pass **2**: config contract, slug scope, MCP shapes, standalone tool I/O, LEAP trace note |
-| Working PLAN.md | **Deferred** — mirror on `/build-plan` W0 to `working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/PLAN.md` |
-| Tracker / CITDP / TIED YAML | **Deferred** to build-plan (plan-mode purity) |
-| Vocab RECORD | **Deferred** to build-plan (terms RESOLVED above) |
-| `tied_checklist_gate_validate` | **Not run** (no Tracker/CITDP on disk for this child REQ yet) |
-| Jev plan-skills adjunct | **Skipped** (`tied_jev_status` unavailable / no-op this session) |
-| Next step | User accepts plan → **`/build-plan`** with remainder `Wave W0` (mint stack + checklist + pre_implementation gate) |
+| Linked plan | **Updated** — pass **3** (2026-09-30): as-built W0–W5 sync, SC-* checked, completion signals |
+| Working PLAN.md | **Current** (this file) |
+| Tracker / CITDP / TIED YAML | **On disk** — links in Plan (CITDP) section |
+| Vocab RECORD | **Done** (W5) |
+| `tied_checklist_gate_validate` | **Historical** — pre_implementation [w1-pre-implementation-gate.json](evidence/w1-pre-implementation-gate.json); verification W5 passed; **not re-run** for plan-doc-only pass 3 |
+| Build-plan pass 3 | **Executed** — PLAN.md only; no code/YAML changes |
+| Next step | **`/plan-close-out`** → [PLAN-CLOSE-OUT.md](PLAN-CLOSE-OUT.md) (CO0–CO5 envelope + commit) |

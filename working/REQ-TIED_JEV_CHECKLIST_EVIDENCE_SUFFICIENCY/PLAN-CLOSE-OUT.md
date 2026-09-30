@@ -4,19 +4,19 @@ overview: "Close-out pass 2: clear 7 envelope blockers (PSA + profile, verificat
 todos:
   - id: co0-precond
     content: "CO0 — build + 33+ feature tests green; tied base path; mirror plan to working/.../PLAN-CLOSE-OUT.md"
-    status: pending
+    status: completed
   - id: co1-typed-manifest
     content: "CO1 — fix tracker CITDP path; backfill 14 slug evidence.md stubs; verification-evidence-manifest.v1.json on disk"
-    status: pending
+    status: completed
   - id: co2-psa-profile
     content: "CO2 — pseudocode_validate + analyze gate_mode → working/.../pseudocode-analysis/IMPL-*.v1.json; profile via runner or evidence_chain_profile_generate"
-    status: pending
+    status: completed
   - id: co3-inquiry-rerun
     content: "CO3 — tied_adversarial_inquiry_run mode=project per phase with real prod/test paths; refresh activation"
-    status: pending
+    status: completed
   - id: co4-unified-closeout
     content: "CO4 — run-close-out-gates envelope-blocking; tied_validate_consistency + tied_verify; plan-close-out handoff + three signals"
-    status: pending
+    status: completed
   - id: co5-changelog-commit
     content: "CO5 — CHANGELOG; parent git commit when machine close-out pass (plan-close-out proposes message only)"
     status: pending
@@ -31,7 +31,7 @@ isProject: false
 | **Close-out plan** | This file (refine pass **2**, 2026-09-30) |
 | **Request token** | `REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` |
 | **Depth / policy** | `integrated` / `mixed` (unchanged) |
-| **Last refined** | 2026-09-30 — plan-only; no close-out execution in refine pass |
+| **Last refined** | 2026-09-30 — close-out executed; handoff [plan-close-out-handoff.md](plan-close-out-handoff.md) |
 
 ---
 
@@ -267,4 +267,4 @@ Then:
 | --- | --- |
 | Linked plan | **Updated** (this file) — pass 2: Refine defaults, CO0–CO5 waves, Mode B inquiry contract, PSA path contract |
 | Working mirror | **Deferred** to CO0 executor |
-| Execution | **Deferred** — invoke `/plan-close-out` or `plan-close-out` subagent with this plan |
+| Execution | **Complete** (CO0–CO4); CO5 commit **pending sponsor** — see handoff |

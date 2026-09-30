@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-30T04:13:54.724Z",
+    "generated_at": "2026-09-30T04:27:12.323Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -158,7 +158,7 @@
       "kind": "evidence_chain_profile",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:352291d6d4814078d6015a2b959720c78d87c9469ec482ff67dcb9b7b9caf3a1",
+      "content_hash": "sha256:35a33dddf8a73a06f5f57839343f93d437e2fd1ca1676c024eec524b83030cb4",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -180,7 +180,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:37e1a1348193f57d7d30cc31bf07c374045771445136bc99051383c19b5a7116",
+      "content_hash": "sha256:e7874ca726ad2e6311638a96cd00e9f46379507e5182b3d0d1724a71eb127da1",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -191,7 +191,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/apply-token-comments-evidence.md",
-      "content_hash": "sha256:2d9cefa383601ed357285808680a2df5d654db3768b85dace3ebda2c40097709",
+      "content_hash": "sha256:7d5743ee32890059b7558671df4783139c9ec53800db4256e28c1d367fb97b9c",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -202,7 +202,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/author-architecture-evidence.md",
-      "content_hash": "sha256:f94d2d3f3201c913af02e0fbf2401e8a9909984cf6ecf82fb277bf0ab058e81a",
+      "content_hash": "sha256:40bbeb1a8c7dd244b8619e911f21a1495b729ceb504d09bffc5c428c1f706478",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -213,7 +213,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/author-requirement-evidence.md",
-      "content_hash": "sha256:f49d9a22b68a8392044f367beb83ece04f40f9c5e6f305cf91aabb7838c9dcab",
+      "content_hash": "sha256:1fcfb522f65493d22816f1f52a3b609d81f0ef8581c978f3e40baa65081e5198",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -224,7 +224,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/catalog-pseudocode-contracts-evidence.md",
-      "content_hash": "sha256:fa2a2447c624c546479877d79f481dd1da2def7fd93284ca82684d28d4947c17",
+      "content_hash": "sha256:9965b14ea581a4e1a2f20aba9bbe183e9c6dfefe9d0781089c9fecee267c9ae0",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -235,7 +235,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/change-definition-evidence.md",
-      "content_hash": "sha256:7c27c5c19b879f78095fde5facdafff2e98782bc39664eb1bbe61b0d33cdf69b",
+      "content_hash": "sha256:1a14940f495a3d641fbe406b31f6be24b362fca71dc230caaac2768417e2743d",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -301,7 +301,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/closeout-run-close-out-gates.json",
-      "content_hash": "sha256:ffc505380081d5a8ce51dce1570918f0e01cb578e6961565883704fcd0b6f40f",
+      "content_hash": "sha256:c345420731eed624dfd984fffa10f4ccc01fa37f54172f0b5d5f984329ac1346",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -312,7 +312,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/flag-contradictory-specs-evidence.md",
-      "content_hash": "sha256:2a0f96f89c84652f16b2a02436b995519479f8421bf7013ccf9a54fda042d36c",
+      "content_hash": "sha256:d61057eeb1c54e31434af24b62f01c4c065fdba644e80249a7b48264865d1d0f",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -323,7 +323,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/flag-insufficient-specs-evidence.md",
-      "content_hash": "sha256:289c230da8f0e563591f2f0dbf40578ffe3f699a94dc83bccbf0d9715fa8c915",
+      "content_hash": "sha256:6ab3a75419a033c448a4dc78d55c51a3d3208dafdf525bc40cb2b63ed3d805d0",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -334,7 +334,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/impact-discovery-evidence.md",
-      "content_hash": "sha256:2332fa8df750779a1e3033f1fea17cdb225b770ec53083671c351e3f1795fb49",
+      "content_hash": "sha256:9e114bebfc42ceeb383da11bfb134db8a02480ffa91a0b3f76b1790a1a5d686c",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -356,7 +356,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/persist-implementation-records-evidence.md",
-      "content_hash": "sha256:a83e107e62ef617cb4ffa5263aa39bb4295d1b385a54c1dd24b2d6bd08ccc3d2",
+      "content_hash": "sha256:5fc5f66db59e61630ea82b92146169e0cb24eb5d0b65c788dca4b2f2bbd23ade",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -399,8 +399,19 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/refine-plan-pass3-2026-09-30.md",
+      "content_hash": "sha256:5cd0e187437932a09a4bf53dd94b31354bcb5ef0ec0ca91f552d2a9a649abb1b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/resolve-pseudocode-evidence.md",
-      "content_hash": "sha256:44f5d15d62d53514a7a32fc5bdb2a9d55ea0b09b88666d53f82bbc7ce88dd775",
+      "content_hash": "sha256:63bb20087cea5292d7fe72751bac06deec38de0e705419028b013d4fb51a43e7",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -411,7 +422,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/session-bootstrap-evidence.md",
-      "content_hash": "sha256:184b5a9fa0aaf3efd0408a2487f5bd660daa0454c4ba5e29e8bd588ad3e06f46",
+      "content_hash": "sha256:e3a16f0da224d9585d37b800e0077c1160a8b648fbf92f858cc32b6db9623fbe",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -422,7 +433,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/sync-tied-stack-evidence.md",
-      "content_hash": "sha256:c906ff8fd5bbc11bf559d03eb56fc36e4a9cc60e65d3cbb748ef41ac11797fa3",
+      "content_hash": "sha256:06f097181105b2f1675a5e323d30fe376828f26bd9cfe4022fb2681ac60ef549",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -433,7 +444,18 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/test-strategy-evidence.md",
-      "content_hash": "sha256:3dcc138d5224aa092d12a14c05ff78ea12a9746084945e08da128ac6e184a2c7",
+      "content_hash": "sha256:96fbe61e45d883bc484fc5a0f00d1d617038508e3e69176c5f54d80f7113ec19",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/tied-validate-consistency-closeout-summary.json",
+      "content_hash": "sha256:b39ee35dc2e38a3c1c5ce12c6ef873b081c495bc6cd10a3bec1e972426720556",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -444,7 +466,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/tied-validate-consistency-closeout.json",
-      "content_hash": "sha256:81f178023ad13c7988468b755f9ec2b9c085fbf6a2f2f4a01b5811e84c43fdcf",
+      "content_hash": "sha256:b39ee35dc2e38a3c1c5ce12c6ef873b081c495bc6cd10a3bec1e972426720556",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -488,7 +510,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/translate-sponsor-intent-evidence.md",
-      "content_hash": "sha256:d30d0d61b27683402d889381a076221ad60918f8489be719c2ee6b6c3039583f",
+      "content_hash": "sha256:47d7cfa0f5bb20eded7547d731872b46f34b160415591e3b05d0736c8e7d4b9b",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -692,6 +714,17 @@
       "proof_boundaries": [
         "discovery_only"
       ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:130ebf1bf95eadf3e31d9c9108fbb2cccea75924bc37f4077b26502c834c492c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
     }
   ],
   "cross_links": {
@@ -700,14 +733,5 @@
     "citdp_path": null,
     "evidence_chain_profile_path": "working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json"
   },
-  "gaps": [
-    {
-      "code": "expected_artifact_missing",
-      "artifact_kind": "verification_evidence_manifest",
-      "phase": null,
-      "detail": "Completed verification/test slugs require verification-evidence-manifest.v1.json or not-applicable receipt",
-      "severity": "warn",
-      "source": "manifest-expectation"
-    }
-  ]
+  "gaps": []
 }

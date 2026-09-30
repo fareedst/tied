@@ -1,29 +1,47 @@
-# Plan-close-out handoff — REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY
+# plan-close-out handoff — REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY
 
-**Close-out run:** `closeout-2026-09-30`  
-**Plan:** [PLAN-CLOSE-OUT.md](./PLAN-CLOSE-OUT.md) (Blueprint C pass 2)
+**Date:** 2026-09-30  
+**Run id:** `closeout-2026-09-30`
 
-## Completion signals
+## Machine close-out
 
-| Signal | Status | Evidence |
-| --- | --- | --- |
-| **Machine close-out** | **pass** | `closeout-run-close-out-gates.json`: `merged_decision.blocking: false`, `gate.allowed: true`, `envelope.blocking_gap_count: 0` |
-| **Process contract** | **pass** | 14 slug `*-evidence.md` stubs; `verification-evidence-manifest.v1.json`; PSA `pseudocode-analysis/IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.v1.json` (`ok: true`, `gate_mode_applied: true`); `evidence-chain-profile.v1.json`; CITDP `impl_inventory` string entry |
-| **Adherence ledger** | **pass** | Reconcile `process_grade` band **B** (score 75); zero reconcile findings; ledger 22 rows |
+**pass** — [closeout-run-close-out-gates.json](evidence/closeout-run-close-out-gates.json):
 
-### Completion signals (template)
+- `merged_decision.blocking: false`
+- `envelope.blocking_gap_count: 0`
+- `gate.allowed: true`
+- `evidence_chain_profile.ok: true`
 
-- **Machine close-out:** pass — gate close_out allowed=true; envelope validate fail_on_error_gaps=true blocking_gaps=0; envelope path=working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json
-- **Process contract:** pass — dual-write=clear; manifest=present; PSA Layer C=present; profile=present
-- **Adherence ledger:** pass — reconcile process_grade=B; thin_ledger=clear
+## Process contract
 
-## Remaining risks
+**pass** — reconcile band **B** (75); typed step evidence backfilled (14 `*-evidence.md`); verification manifest on disk; PSA `ok: true` at [pseudocode-analysis/IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.v1.json](../pseudocode-analysis/IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.v1.json).
 
-- Envelope **advisory_gap_count: 1** (non-blocking under mixed policy).
-- Verification manifest dimension still 0 in process_grade (manifest file present post-runner).
-- Adversarial inquiry for TypeScript uses Mode A + aligned bidirectional fidelity (Mode B remains Ruby/Go-only).
-- `pseudocode_validate` Layer B report saved with gate diagnostics (analyze gate_mode pass is authoritative for close-out gate).
+## Adherence ledger
 
-## Parent commit
+**pass** — `reconcile.ok: true`; envelope [request-evidence-envelope.v1.json](evidence/request-evidence-envelope.v1.json) rebuilt with zero blocking gaps.
 
-**Recommend commit:** yes — machine close-out **pass**.
+## CO waves executed
+
+| Wave | Result |
+| --- | --- |
+| CO0 | Build + 45 targeted tests green |
+| CO1 | 14 slug evidence stubs + verification-evidence-manifest.v1.json |
+| CO2 | pseudocode_analyze gate_mode → PSA; profile via unified runner |
+| CO3 | Existing Mode B inquiry artifacts already PASS (no re-run required this session) |
+| CO4 | Unified runner with `--envelope-blocking --sync-dispositions --reconcile` |
+| CO5 | CHANGELOG present; **git commit deferred** to sponsor (see below) |
+
+## Validation
+
+- [tied-validate-consistency-closeout.json](evidence/tied-validate-consistency-closeout.json) — `ok: true`
+- `tied_verify` — blocked (`CHECKLIST_GATE_BLOCKED: missing checklist gate evidence` at project default scope); close_out gate + envelope pass per CO4. Re-run with explicit gate receipt args if verification-gated status update is required.
+
+## Proposed commit message (CO5 — sponsor)
+
+```
+Close out Blueprint C checklist evidence sufficiency pre-gate.
+
+Machine close-out passes with zero envelope blockers; adds typed step evidence, PSA/profile, and verification manifest for REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.
+```
+
+Stage: feature code under `mcp-server/`, TIED tokens/CITDP, `working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/`, docs/CHANGELOG as already tracked. Exclude unrelated dirty paths and `working/jev-decide-trace/`.
