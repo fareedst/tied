@@ -1,0 +1,19 @@
+{
+  "schema": "co5-sponsor-commit-receipt.v1",
+  "request_token": "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+  "commit_sha": "41e89bb",
+  "commit_subject": "Blueprint D: harness tool safety gating on opt-in W5 guard.",
+  "committed_at": "2026-09-30",
+  "files_changed": 72,
+  "gate_artifact": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/closeout-run-close-out-gates-final.json",
+  "gate_allowed": true,
+  "envelope_blocking_gap_count": 0,
+  "run_id": "closeout-inquiry-2026-09-30-close_out",
+  "payload": "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/co5-sponsor-commit-payload.v1.json",
+  "excluded_from_commit": [
+    "tied/requirements/REQ-TIED_SETUP.yaml",
+    "tied/citdp/CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME.yaml",
+    "mcp-server/test/fixtures/adversarial-inquiry-* envelope churn",
+    "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-validate-consistency-w5.json (full dump; closeout snapshot committed)"
+  ]
+}
