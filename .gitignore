@@ -196,6 +196,15 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-verify-result.json
 !working/REQ-TIED_JEV_TOOL_SAFETY_GATING/tied-verify-payload.json
 !working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/activation-collect-close_out.json
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/request-evidence-envelope.v1.json
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/verification-evidence-manifest.v1.json
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/evidence-chain-profile.v1.json
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/co5-sponsor-commit-payload.v1.json
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/**
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/**
+!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/close_out-*.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/not-applicable-receipt.v1.json
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/gate-pseudocode-validation-evidence.md
 !working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-*

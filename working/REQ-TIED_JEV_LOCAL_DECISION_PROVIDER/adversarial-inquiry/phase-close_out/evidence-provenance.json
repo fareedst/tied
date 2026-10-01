@@ -1,0 +1,19 @@
+{
+  "provenance": {
+    "block_id": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "close_out",
+    "production_path": "mcp-server/src/jev/harness-config.ts",
+    "project_id": "cfd5bf6ad98024eb",
+    "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+    "run_id": "closeout-inquiry-2026-09-30-close_out",
+    "source_revision": "closeout-inquiry-2026-09-30",
+    "test_paths": [
+      "mcp-server/src/jev/harness-tool-guard.test.ts"
+    ],
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

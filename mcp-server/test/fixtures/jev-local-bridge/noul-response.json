@@ -1,0 +1,13 @@
+{
+  "schema": "jev-local-bridge-response.v1",
+  "ok": true,
+  "response": {
+    "model": "aac6fef/laya-mlx",
+    "answers": {
+      "urgent": {
+        "type": "noul",
+        "noul": 0.42
+      }
+    }
+  }
+}

@@ -1899,6 +1899,16 @@ ARCH-TIED_JEV_DECISION_COPROCESSOR:
   detail_file: "architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml"
   name: "Jev decision coprocessor architecture"
   status: "Active"
+ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+  detail_file: "architecture-decisions/ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml"
+  name: "Local Jev decision provider architecture"
+  status: "Active"
 ARCH-TIED_JEV_TOOL_SAFETY_GATING:
   cross_references:
     architecture: []

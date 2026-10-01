@@ -1,0 +1,12 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#INVOKE_LOCAL_DECISION_BRIDGE#e06af6f2dca5dec5"
+  ],
+  "status": "passed",
+  "verdict": "PASS"
+}

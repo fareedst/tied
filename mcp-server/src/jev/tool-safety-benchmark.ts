@@ -184,13 +184,34 @@ async function runRowForArm(
     };
   }
 
-  let harness = { enabled: true, hasApiKey: true, blockWhenUnavailable: true };
+  let harness = {
+    enabled: true,
+    hasApiKey: true,
+    decisionBackendReady: true,
+    decisionProvider: "remote" as const,
+    localFallback: "skip" as const,
+    blockWhenUnavailable: true,
+  };
   let jevConfig: JevClientConfig = { apiKey: "mock", fetchImpl: mockFetchForRow(row) };
 
   if (arm === "jev_off") {
-    harness = { enabled: false, hasApiKey: false, blockWhenUnavailable: true };
+    harness = {
+      enabled: false,
+      hasApiKey: false,
+      decisionBackendReady: false,
+      decisionProvider: "remote" as const,
+      localFallback: "skip" as const,
+      blockWhenUnavailable: true,
+    };
   } else if (arm === "jev_unavailable") {
-    harness = { enabled: true, hasApiKey: false, blockWhenUnavailable: true };
+    harness = {
+      enabled: true,
+      hasApiKey: false,
+      decisionBackendReady: false,
+      decisionProvider: "remote" as const,
+      localFallback: "skip" as const,
+      blockWhenUnavailable: true,
+    };
     jevConfig = { apiKey: undefined };
   } else if (arm === "jev_on" && liveDecideFn) {
     jevConfig = { apiKey: process.env.JEV_API_KEY };

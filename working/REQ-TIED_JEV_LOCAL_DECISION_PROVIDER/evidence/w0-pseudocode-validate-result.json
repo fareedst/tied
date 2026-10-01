@@ -1,0 +1,206 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "RESOLVE_LOCAL_PROVIDER_CONFIG",
+      "line": 7,
+      "token_refs": [
+        "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR",
+        "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "ASSESS_DECISION_BACKEND_READINESS",
+      "line": 18,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "ROUTE_DECISION_PROVIDER",
+      "line": 29,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "INVOKE_REMOTE_DECIDE",
+      "line": 42,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "INVOKE_LOCAL_DECISION_BRIDGE",
+      "line": 52,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "NORMALIZE_LOCAL_RESPONSE",
+      "line": 65,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "HANDLE_LOCAL_FAILURE",
+      "line": 75,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "EXTEND_HARNESS_BACKEND_SIGNAL",
+      "line": 85,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "EXTEND_DECIDE_TRACE_PROVIDER_META",
+      "line": 94,
+      "token_refs": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "RESOLVE_LOCAL_PROVIDER_CONFIG",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "ASSESS_DECISION_BACKEND_READINESS",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "ROUTE_DECISION_PROVIDER",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "INVOKE_REMOTE_DECIDE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "INVOKE_LOCAL_DECISION_BRIDGE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "NORMALIZE_LOCAL_RESPONSE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "HANDLE_LOCAL_FAILURE",
+      "branch_lines": [],
+      "failure_modes": [
+        "# [IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER] How: auto applies TIED_JEV_LOCAL_FALLBACK skip|error|remote; local mode never remote.",
+        "INPUT: local failure, fallback policy"
+      ],
+      "references": []
+    },
+    {
+      "block": "EXTEND_HARNESS_BACKEND_SIGNAL",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "EXTEND_DECIDE_TRACE_PROVIDER_META",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    }
+  ],
+  "diagnostics": [],
+  "leakage": []
+}

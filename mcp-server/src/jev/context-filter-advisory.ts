@@ -30,7 +30,7 @@ export async function adviseContextFilter(
     };
   }
 
-  if (!harness.hasApiKey) {
+  if (!harness.decisionBackendReady) {
     return {
       action: "keep",
       relevance: null,

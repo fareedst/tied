@@ -60,15 +60,43 @@ function firstPromptSnippet(cfg: DryRunConfig): string {
   return "";
 }
 
-function bootstrapLines(cfg: DryRunConfig): string[] {
-  const lines: string[] = [];
-  const hasKey = (process.env.JEV_API_KEY ?? "").trim() !== "";
-  lines.push("DEBUG: jev harness preflight: enabled (AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness)\n");
-  if (!hasKey) {
+function appendProviderDiagnostics(env: NodeJS.ProcessEnv, lines: string[]): void {
+  const rawProvider = env.TIED_JEV_DECISION_PROVIDER?.trim().toLowerCase() ?? "remote";
+  const provider =
+    rawProvider === "local" || rawProvider === "auto" || rawProvider === "remote"
+      ? rawProvider
+      : "remote";
+  const fallbackRaw = env.TIED_JEV_LOCAL_FALLBACK?.trim().toLowerCase() ?? "skip";
+  const fallback =
+    fallbackRaw === "remote" || fallbackRaw === "error" ? fallbackRaw : "skip";
+  lines.push(`DEBUG: jev decision provider=${provider} local_fallback=${fallback}\n`);
+  const remoteReady = (env.JEV_API_KEY ?? "").trim() !== "";
+  const bridge = env.TIED_JEV_LOCAL_BRIDGE?.trim() ?? "";
+  const localReady = bridge !== "" && path.isAbsolute(bridge);
+  lines.push(
+    `DEBUG: jev decision backend: remote_ready=${remoteReady} local_ready=${localReady}\n`,
+  );
+  if (provider === "auto" && fallback === "remote") {
+    lines.push(
+      "DIAGNOSTIC: jev auto mode may egress to remote Jev when local fails (TIED_JEV_LOCAL_FALLBACK=remote)\n",
+    );
+  }
+  if (provider === "remote" && !remoteReady) {
     lines.push(
       "DIAGNOSTIC: jev harness: JEV_API_KEY missing — blocking tools (bash/Shell) will fail-closed per jev_unavailable_policy\n",
     );
   }
+  if (provider === "local" && !localReady) {
+    lines.push(
+      "DIAGNOSTIC: jev local provider misconfigured — blocking harness tools fail-closed\n",
+    );
+  }
+}
+
+function bootstrapLines(cfg: DryRunConfig): string[] {
+  const lines: string[] = [];
+  lines.push("DEBUG: jev harness preflight: enabled (AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness)\n");
+  appendProviderDiagnostics(process.env, lines);
   if (cfg.skipTiedMcpPreflight) {
     lines.push(
       "DEBUG: jev harness: runs after static tiedpreflight; does not replace tied_checklist_gate_validate or MCP gates\n",
@@ -158,7 +186,7 @@ export async function runJevHarnessPreflightLive(
   const task = taskSummaryFromCfg(cfg);
   const snippet = firstPromptSnippet(cfg);
 
-  if (harness.hasApiKey) {
+  if (harness.decisionBackendReady) {
     const toolEval = await mod.evaluateHarnessToolCall(
       { tool: "Shell", arguments: "echo agentstream-jev-smoke", goal: task },
       harness,

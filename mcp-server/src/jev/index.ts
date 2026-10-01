@@ -7,7 +7,27 @@ export {
   DEFAULT_JEV_MAX_STATE_CHARS,
   DEFAULT_JEV_MODEL,
 } from "./constants.js";
-export { jevDecide, resolveJevConfig, type JevClientConfig, type JevFetch } from "./client.js";
+export {
+  jevDecide,
+  invokeRemoteDecide,
+  resolveJevConfig,
+  type JevClientConfig,
+  type JevFetch,
+} from "./client.js";
+export {
+  assessDecisionBackendReady,
+  buildProviderTraceMeta,
+  formatDecisionBackendPreflightLines,
+  resolveLocalProviderConfig,
+  type JevDecisionProviderMode,
+  type JevLocalFallback,
+  type LocalProviderConfig,
+} from "./decision-provider.js";
+export {
+  invokeLocalDecisionBridge,
+  normalizeLocalBridgeResponse,
+  type LocalProcessRunner,
+} from "./local-client.js";
 export {
   resolveJevApiKey,
   readJevApiKeyFromMcpJsonFile,

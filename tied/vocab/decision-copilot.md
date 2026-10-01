@@ -52,8 +52,32 @@
 
 ---
 
+## Local decision provider (child REQ)
 
-## Laya terms (self-hosted System One)
+**Traceability:** [REQ-TIED_JEV_LOCAL_DECISION_PROVIDER](../requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) · [ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER](../architecture-decisions/ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) · [IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER](../implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml)
+
+| Preferred term | Avoid | Notes |
+|---|---|---|
+| **decision provider** | local LLM | Env `TIED_JEV_DECISION_PROVIDER`: `remote` (default), `local`, `auto` |
+| **decision backend** | vendor only | HTTP remote or validated local subprocess bridge |
+| **decision backend ready** | key_present alone | Remote: `JEV_API_KEY`; local: absolute `TIED_JEV_LOCAL_BRIDGE` + executable |
+| **subprocess bridge** | in-process Python | One-shot stdin/stdout JSON; `shell: false` |
+| **explicit fallback** | silent remote | `auto` uses `TIED_JEV_LOCAL_FALLBACK` (`skip` default); `local` never egresses |
+| **provider router** | second decide API | Centralized in `decision-provider.ts` on `jevDecide` |
+
+### Configuration (local provider)
+
+| Source | Key | Notes |
+|---|---|---|
+| Env | `TIED_JEV_DECISION_PROVIDER` | Default **`remote`** |
+| Env | `TIED_JEV_LOCAL_BRIDGE` | **Absolute path only** (required for local attempt) |
+| Env | `TIED_JEV_LOCAL_EXECUTABLE` | Default `python3` |
+| Env | `TIED_JEV_LOCAL_MODEL` | Default `aac6fef/laya-mlx` |
+| Env | `TIED_JEV_LOCAL_FALLBACK` | `skip` \| `error` \| `remote` for **`auto`** only |
+| Env | `JEV_LOCAL_MLX_SMOKE` | Opt-in real MLX smoke (not CI) |
+| Script | `mcp-server/scripts/jev-local-laya-mlx-bridge.py` | Bridge contract `jev-local-bridge-request.v1` / `jev-local-bridge-response.v1` |
+
+### Laya terms (self-hosted System One)
 
 | Preferred term | Avoid | Notes |
 |---|---|---|

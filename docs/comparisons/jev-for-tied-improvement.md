@@ -268,7 +268,22 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 
 ---
 
+## Local decision provider follow-on
+
+**Child REQ:** [`REQ-TIED_JEV_LOCAL_DECISION_PROVIDER`](../../tied/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) — optional **local subprocess bridge** (`laya_mlx`) on the existing **`jevDecide`** API with env **`TIED_JEV_DECISION_PROVIDER`** (`remote` default, `local`, `auto`). **`local`** never calls the remote HTTP API; **`auto`** applies **`TIED_JEV_LOCAL_FALLBACK`** (`skip` default). Harness blocking uses **`decisionBackendReady`** (remote key or absolute **`TIED_JEV_LOCAL_BRIDGE`**) instead of **`hasApiKey`** alone.
+
+| Surface | Path |
+| --- | --- |
+| Provider router | [`decision-provider.ts`](../../mcp-server/src/jev/decision-provider.ts) |
+| Local subprocess | [`local-client.ts`](../../mcp-server/src/jev/local-client.ts) |
+| Bridge script | [`jev-local-laya-mlx-bridge.py`](../../mcp-server/scripts/jev-local-laya-mlx-bridge.py) |
+| Harness config | [`harness-config.ts`](../../mcp-server/src/jev/harness-config.ts) |
+| Agentstream preflight | [`jev-harness-preflight.ts`](../../mcp-server/packages/agentstream/src/jev-harness-preflight.ts) |
+
+**Operator notes:** Bridge path must be **absolute**. Real MLX validation is **`JEV_LOCAL_MLX_SMOKE=1`** only (not CI). When **`auto`** + **`TIED_JEV_LOCAL_FALLBACK=remote`**, preflight and decide trace **`context_meta`** record possible vendor egress.
+
 ---
+
 ## Handoff checklist (doc maintenance)
 
 When updating this file again:

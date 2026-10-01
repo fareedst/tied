@@ -1,0 +1,18 @@
+ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  consequences:
+    negative:
+      - "laya_mlx adapter may need smoke tuning"
+      - "Subprocess operational burden"
+    positive:
+      - "Backward compatible remote default"
+      - "Local mode without vendor egress"
+  context: "Child of closed JEV coprocessor; provider router on jevDecide; subprocess bridge; harness decisionBackendReady."
+  cross_references:
+    implementation:
+      - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+  decision: "Centralize routing in decision-provider.ts and local-client.ts; remote HTTP extracted to invokeRemoteDecide; no second decide API."
+  name: "Local Jev decision provider architecture"
+  status: "Active"

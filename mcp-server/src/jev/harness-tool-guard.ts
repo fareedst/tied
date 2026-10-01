@@ -183,7 +183,7 @@ export async function evaluateHarnessToolCall(
     };
   }
 
-  if (!harness.hasApiKey) {
+  if (!harness.decisionBackendReady) {
     if (harness.blockWhenUnavailable) {
       return {
         decision: "block",

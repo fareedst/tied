@@ -84,6 +84,28 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR jev client", () => {
     assert.equal(result.ok, true);
   });
 
+  it("SC-LOCAL-NO-EGRESS: local provider never calls fetch", async () => {
+    let fetchCalled = false;
+    const fetchImpl = async () => {
+      fetchCalled = true;
+      return new Response("{}", { status: 200 });
+    };
+    const result = await jevDecide(
+      "state",
+      { q: { type: "noul", instructions: "?" } },
+      {
+        apiKey: "jv_live_should_not_matter",
+        fetchImpl,
+        traceEnv: {
+          TIED_JEV_DECISION_PROVIDER: "local",
+          TIED_JEV_LOCAL_BRIDGE: "/nonexistent/abs-bridge.py",
+        },
+      },
+    );
+    assert.equal(fetchCalled, false);
+    assert.equal(result.ok, false);
+  });
+
   it("resolveJevConfig reads env defaults", () => {
     const cfg = resolveJevConfig({
       JEV_API_KEY: "a",

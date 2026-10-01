@@ -1,0 +1,15 @@
+{
+  "schema": "w5-verify-closeout.v1",
+  "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+  "recorded_at": "2026-09-30",
+  "focused_tests": {
+    "cmd": "cd mcp-server && bun test src/jev/decision-provider.test.ts src/jev/local-client.test.ts src/jev/jev.test.ts src/jev/harness-tool-guard.test.ts",
+    "passed": 31,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "lint": {
+    "cmd": "cd mcp-server && bunx tsc -b",
+    "exit_code": 0
+  }
+}

@@ -2142,6 +2142,19 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
       - "REQ-TIED_DAE_INCORPORATION"
     supersedes: []
   status: "Implemented"
+REQ-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    implementation:
+      - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  detail_file: "requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml"
+  name: "Jev local decision provider"
+  priority: "P2"
+  status: "Planned"
 REQ-TIED_JEV_TOOL_SAFETY_GATING:
   cross_references:
     architecture: []

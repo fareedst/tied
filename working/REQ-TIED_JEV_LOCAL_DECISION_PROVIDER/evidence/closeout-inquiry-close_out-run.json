@@ -1,0 +1,177 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "cfd5bf6ad98024eb",
+    "scope": [
+      "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf"
+    ],
+    "graph": {
+      "projectId": "cfd5bf6ad98024eb",
+      "nodes": [
+        {
+          "id": "case:CE-001",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-002",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-003",
+          "kind": "case"
+        },
+        {
+          "id": "constraint:constraint-tied_jev_local_decision_provider",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:prod-1",
+          "kind": "evidence",
+          "revision": "closeout-inquiry-2026-09-30"
+        },
+        {
+          "id": "evidence:test-1",
+          "kind": "evidence",
+          "revision": "closeout-inquiry-2026-09-30"
+        },
+        {
+          "id": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+          "kind": "block",
+          "revision": "1f58515c34d4f0b0"
+        },
+        {
+          "id": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER#criterion-1",
+          "kind": "criterion",
+          "revision": "criterion-rev-tied_jev_local_decision_provider"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER#criterion-1",
+          "to": "constraint:constraint-tied_jev_local_decision_provider",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-tied_jev_local_decision_provider",
+          "to": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+          "to": "evidence:prod-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+          "to": "evidence:test-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+          "to": "case:CE-001",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+          "to": "case:CE-002",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+          "to": "case:CE-003",
+          "kind": "block_case"
+        }
+      ]
+    },
+    "findings": [],
+    "proofBoundaries": [],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "PASS",
+  "status": {
+    "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf": "PASS"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf"
+    ],
+    "status": "passed",
+    "blocking": false,
+    "verdict": "PASS",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "closeout-inquiry-2026-09-30-close_out",
+      "phase": "close_out",
+      "scope": [
+        "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf"
+      ],
+      "scope_hash": "344ebc50cda113372d9f1f8ed1fb14cbb0f0f51cc33798ab1ef1634afe28be5d",
+      "artifact_hashes": {
+        "obligation-report.json": "2af95e976ca9baf4257f7334e0f744a4989adee9c5dc8fdd820324c92433f464",
+        "finding-ledger.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gate-result.json": "ea7923f96f653e3880b34131b5c78760b3f6cc3c749c84bdd3385d0ff8418a84",
+        "evidence-provenance.json": "35268a481503731a9bfe76df865ba566c5040b6725b8edc5e132ad69fb59b304"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-inquiry-2026-09-30-close_out",
+        "phase": "close_out",
+        "scope_hash": "344ebc50cda113372d9f1f8ed1fb14cbb0f0f51cc33798ab1ef1634afe28be5d",
+        "hash": "2af95e976ca9baf4257f7334e0f744a4989adee9c5dc8fdd820324c92433f464",
+        "path": "working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-inquiry-2026-09-30-close_out",
+        "phase": "close_out",
+        "scope_hash": "344ebc50cda113372d9f1f8ed1fb14cbb0f0f51cc33798ab1ef1634afe28be5d",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-inquiry-2026-09-30-close_out",
+        "phase": "close_out",
+        "scope_hash": "344ebc50cda113372d9f1f8ed1fb14cbb0f0f51cc33798ab1ef1634afe28be5d",
+        "hash": "ea7923f96f653e3880b34131b5c78760b3f6cc3c749c84bdd3385d0ff8418a84",
+        "path": "working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-inquiry-2026-09-30-close_out",
+        "phase": "close_out",
+        "scope_hash": "344ebc50cda113372d9f1f8ed1fb14cbb0f0f51cc33798ab1ef1634afe28be5d",
+        "hash": "35268a481503731a9bfe76df865ba566c5040b6725b8edc5e132ad69fb59b304",
+        "path": "working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+      }
+    }
+  }
+}

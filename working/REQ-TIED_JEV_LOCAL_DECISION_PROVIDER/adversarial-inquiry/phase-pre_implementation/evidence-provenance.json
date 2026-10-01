@@ -1,0 +1,20 @@
+{
+  "provenance": {
+    "block_id": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#INVOKE_LOCAL_DECISION_BRIDGE#e06af6f2dca5dec5",
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "pre_implementation",
+    "production_path": "mcp-server/src/jev/local-client.ts",
+    "project_id": "cfd5bf6ad98024eb",
+    "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+    "run_id": "closeout-inquiry-2026-09-30-pre_implementation",
+    "source_revision": "closeout-inquiry-2026-09-30",
+    "test_paths": [
+      "mcp-server/src/jev/local-client.test.ts",
+      "mcp-server/src/jev/decision-provider.test.ts"
+    ],
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

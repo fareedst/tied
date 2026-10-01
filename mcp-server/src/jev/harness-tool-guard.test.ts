@@ -3,6 +3,7 @@
  */
 
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
@@ -16,7 +17,14 @@ import {
   resolveHarnessFromEnv,
 } from "./harness-tool-guard.js";
 
-const harnessOn = { enabled: true, hasApiKey: true, blockWhenUnavailable: true };
+const harnessOn = {
+  enabled: true,
+  hasApiKey: true,
+  decisionBackendReady: true,
+  decisionProvider: "remote" as const,
+  localFallback: "skip" as const,
+  blockWhenUnavailable: true,
+};
 
 function mockJevResponse(destructive: number, scope: number) {
   return async () =>
@@ -36,7 +44,14 @@ describe("REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard", () => {
   it("SC-W5-PRESERVED: allows when harness disabled", async () => {
     const out = await evaluateHarnessToolCall(
       { tool: "bash", arguments: "rm -rf /tmp/x" },
-      { enabled: false, hasApiKey: false, blockWhenUnavailable: true },
+      {
+        enabled: false,
+        hasApiKey: false,
+        decisionBackendReady: false,
+        decisionProvider: "remote" as const,
+        localFallback: "skip" as const,
+        blockWhenUnavailable: true,
+      },
     );
     assert.equal(out.decision, "allow");
   });
@@ -59,10 +74,61 @@ describe("REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard", () => {
   it("SC-D-FALLBACK: fail-closed blocks Shell when Jev key missing", async () => {
     const out = await evaluateHarnessToolCall(
       { tool: "Shell", arguments: "npm test" },
-      { enabled: true, hasApiKey: false, blockWhenUnavailable: true },
+      {
+        enabled: true,
+        hasApiKey: false,
+        decisionBackendReady: false,
+        decisionProvider: "remote" as const,
+        localFallback: "skip" as const,
+        blockWhenUnavailable: true,
+      },
     );
     assert.equal(out.decision, "block");
     assert.equal(out.reason, "jev_unavailable_fail_closed");
+  });
+
+  it("SC-HARNESS-LOCAL: allows Shell when local backend ready without API key", async () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "jev-local-harness-"));
+    const bridge = path.join(dir, "fake-bridge.py");
+    fs.writeFileSync(
+      bridge,
+      `#!/usr/bin/env python3
+import json, sys
+json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model":"test","answers":{"noul_destructive_risk":{"type":"noul","noul":0.1},"noul_scope_violation":{"type":"noul","noul":0.1}}}}, sys.stdout)
+`,
+      "utf8",
+    );
+    const prev = {
+      provider: process.env.TIED_JEV_DECISION_PROVIDER,
+      bridge: process.env.TIED_JEV_LOCAL_BRIDGE,
+      key: process.env.JEV_API_KEY,
+    };
+    process.env.TIED_JEV_DECISION_PROVIDER = "local";
+    process.env.TIED_JEV_LOCAL_BRIDGE = bridge;
+    delete process.env.JEV_API_KEY;
+    try {
+      const out = await evaluateHarnessToolCall(
+        { tool: "Shell", arguments: "npm test" },
+        {
+          enabled: true,
+          hasApiKey: false,
+          decisionBackendReady: true,
+          decisionProvider: "local",
+          localFallback: "skip",
+          blockWhenUnavailable: true,
+        },
+      );
+      assert.equal(out.decision, "allow");
+      assert.equal(out.jev_skipped, false);
+    } finally {
+      if (prev.provider === undefined) delete process.env.TIED_JEV_DECISION_PROVIDER;
+      else process.env.TIED_JEV_DECISION_PROVIDER = prev.provider;
+      if (prev.bridge === undefined) delete process.env.TIED_JEV_LOCAL_BRIDGE;
+      else process.env.TIED_JEV_LOCAL_BRIDGE = prev.bridge;
+      if (prev.key === undefined) delete process.env.JEV_API_KEY;
+      else process.env.JEV_API_KEY = prev.key;
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
   });
 
   it("SC-D-FALLBACK: non-2xx Jev response fail-closed", async () => {
@@ -89,7 +155,14 @@ describe("REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard", () => {
   it("allows non-blocking tools without key", async () => {
     const out = await evaluateHarnessToolCall(
       { tool: "Read", arguments: "/path" },
-      { enabled: true, hasApiKey: false, blockWhenUnavailable: true },
+      {
+        enabled: true,
+        hasApiKey: false,
+        decisionBackendReady: false,
+        decisionProvider: "remote" as const,
+        localFallback: "skip" as const,
+        blockWhenUnavailable: true,
+      },
     );
     assert.equal(out.decision, "allow");
   });
@@ -181,5 +254,6 @@ describe("REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard", () => {
     });
     assert.equal(cfg.enabled, true);
     assert.equal(cfg.hasApiKey, false);
+    assert.equal(cfg.decisionBackendReady, false);
   });
 });

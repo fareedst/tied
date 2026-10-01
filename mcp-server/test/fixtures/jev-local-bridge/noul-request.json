@@ -1,0 +1,11 @@
+{
+  "schema": "jev-local-bridge-request.v1",
+  "model": "aac6fef/laya-mlx",
+  "state": "fixture state",
+  "questions": {
+    "urgent": {
+      "type": "noul",
+      "instructions": "Is this urgent?"
+    }
+  }
+}

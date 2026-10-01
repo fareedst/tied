@@ -1,0 +1,12 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf"
+  ],
+  "status": "passed",
+  "verdict": "PASS"
+}

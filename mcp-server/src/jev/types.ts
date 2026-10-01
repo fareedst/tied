@@ -50,7 +50,15 @@ export type JevDecideResponse = {
   };
 };
 
-export type JevSkipReason = "no_credentials" | "state_too_large";
+export type JevSkipReason =
+  | "no_credentials"
+  | "state_too_large"
+  | "provider_misconfigured"
+  | "decision_backend_unavailable"
+  | "local_timeout"
+  | "local_bridge_failed"
+  | "malformed_local_response"
+  | "unsupported_question_type";
 
 export type JevDecideResult =
   | { ok: true; response: JevDecideResponse }

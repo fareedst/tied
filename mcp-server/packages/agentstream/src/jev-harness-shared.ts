@@ -84,19 +84,34 @@ export function jevHarnessMissingDistAbortMessage(
 export type JevHarnessDistModule = {
   evaluateHarnessToolCall: (
     input: { tool: string; arguments?: string; goal?: string; context?: string; workspace?: string },
-    harness: { enabled: boolean; hasApiKey: boolean; blockWhenUnavailable: boolean },
+    harness: {
+      enabled: boolean;
+      hasApiKey: boolean;
+      decisionBackendReady: boolean;
+      blockWhenUnavailable: boolean;
+    },
     jevConfig?: { apiKey?: string; fetchImpl?: typeof fetch },
   ) => Promise<{ decision: string; reason: string; jev_skipped?: boolean }>;
   adviseContextFilter?: (
     task: string,
     item: string,
-    harness: { enabled: boolean; hasApiKey: boolean; blockWhenUnavailable: boolean },
+    harness: {
+      enabled: boolean;
+      hasApiKey: boolean;
+      decisionBackendReady: boolean;
+      blockWhenUnavailable: boolean;
+    },
     jevConfig?: { apiKey?: string; fetchImpl?: typeof fetch },
   ) => Promise<{ action: string; reason: string }>;
   resolveHarnessFromEnv: (
     env?: NodeJS.ProcessEnv,
     manifestFlag?: boolean,
-  ) => { enabled: boolean; hasApiKey: boolean; blockWhenUnavailable: boolean };
+  ) => {
+    enabled: boolean;
+    hasApiKey: boolean;
+    decisionBackendReady: boolean;
+    blockWhenUnavailable: boolean;
+  };
 };
 
 export async function loadJevHarnessDistModule(

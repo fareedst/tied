@@ -822,6 +822,20 @@ ARCH-TIED_JEV_DECISION_COPROCESSOR:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  cross_references:
+    - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  description: "Provider routing and local subprocess bridge on jevDecide"
+  detail_file: "architecture-decisions/ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml"
+  metadata:
+    last_updated: "2026-09-30"
+    registered: "2026-09-30"
+  name: "Jev local decision provider architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
@@ -1939,6 +1953,20 @@ IMPL-TIED_JEV_DECISION_COPROCESSOR:
   name: "Jev decision coprocessor implementation"
   source_index: "implementation-decisions.yaml"
   status: "In Progress"
+  type: "IMPL"
+IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  cross_references:
+    - "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  description: "decision-provider router, local-client subprocess, harness backend readiness"
+  detail_file: "implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml"
+  metadata:
+    last_updated: "2026-09-30"
+    registered: "2026-09-30"
+  name: "Jev local decision provider implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
   type: "IMPL"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
@@ -3221,6 +3249,20 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
   name: "Jev decision coprocessor program"
   source_index: "requirements.yaml"
   status: "In Progress"
+  type: "REQ"
+REQ-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  cross_references:
+    - "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  description: "Optional local subprocess bridge for jevDecide with provider routing"
+  detail_file: "requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml"
+  metadata:
+    last_updated: "2026-09-30"
+    registered: "2026-09-30"
+  name: "Jev local decision provider"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:

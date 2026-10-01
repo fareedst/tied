@@ -1,0 +1,89 @@
+{
+  "canonicalMutation": false,
+  "findings": [],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER#criterion-1",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-tied_jev_local_decision_provider"
+      },
+      {
+        "from": "constraint:constraint-tied_jev_local_decision_provider",
+        "kind": "constraint_block",
+        "to": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf"
+      },
+      {
+        "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+        "kind": "block_evidence",
+        "to": "evidence:prod-1"
+      },
+      {
+        "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+        "kind": "block_evidence",
+        "to": "evidence:test-1"
+      },
+      {
+        "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+        "kind": "block_case",
+        "to": "case:CE-001"
+      },
+      {
+        "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+        "kind": "block_case",
+        "to": "case:CE-002"
+      },
+      {
+        "from": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+        "kind": "block_case",
+        "to": "case:CE-003"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "case:CE-001",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-002",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-003",
+        "kind": "case"
+      },
+      {
+        "id": "constraint:constraint-tied_jev_local_decision_provider",
+        "kind": "constraint"
+      },
+      {
+        "id": "evidence:prod-1",
+        "kind": "evidence",
+        "revision": "closeout-inquiry-2026-09-30"
+      },
+      {
+        "id": "evidence:test-1",
+        "kind": "evidence",
+        "revision": "closeout-inquiry-2026-09-30"
+      },
+      {
+        "id": "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf",
+        "kind": "block",
+        "revision": "1f58515c34d4f0b0"
+      },
+      {
+        "id": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER#criterion-1",
+        "kind": "criterion",
+        "revision": "criterion-rev-tied_jev_local_decision_provider"
+      }
+    ],
+    "projectId": "cfd5bf6ad98024eb"
+  },
+  "projectId": "cfd5bf6ad98024eb",
+  "proofBoundaries": [],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER#EXTEND_HARNESS_BACKEND_SIGNAL#df4903d2e7419fcf"
+  ]
+}

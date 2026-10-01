@@ -1,0 +1,50 @@
+{
+  "schema": "co5-sponsor-commit-payload.v1",
+  "request_token": "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER",
+  "run_id": "closeout-inquiry-2026-09-30-close_out",
+  "prepared_at": "2026-09-30",
+  "prepared_by": "plan-close-out",
+  "proposed_commit_message": "Add local JEV decision provider routing and laya bridge stub.\n\nREQ-TIED_JEV_LOCAL_DECISION_PROVIDER: provider-first jevDecide,\nsubprocess local client, harness decisionBackendReady, and integrated\nclose-out evidence; real MLX bridge remains opt-in smoke-only.",
+  "stage_paths": {
+    "include_globs": [
+      "mcp-server/src/jev/decision-provider.ts",
+      "mcp-server/src/jev/decision-provider.test.ts",
+      "mcp-server/src/jev/local-client.ts",
+      "mcp-server/src/jev/local-client.test.ts",
+      "mcp-server/scripts/jev-local-laya-mlx-bridge.py",
+      "mcp-server/test/fixtures/jev-local-bridge/**",
+      "mcp-server/src/jev/client.ts",
+      "mcp-server/src/jev/types.ts",
+      "mcp-server/src/jev/index.ts",
+      "mcp-server/src/jev/harness-config.ts",
+      "mcp-server/src/jev/harness-tool-guard.ts",
+      "mcp-server/src/jev/harness-tool-guard.test.ts",
+      "mcp-server/src/jev/plan-skills-status.ts",
+      "mcp-server/src/jev/context-filter-advisory.ts",
+      "mcp-server/src/jev/tool-safety-benchmark.ts",
+      "mcp-server/src/jev/jev.test.ts",
+      "mcp-server/packages/agentstream/src/jev-harness-preflight.ts",
+      "mcp-server/packages/agentstream/src/jev-harness-shared.ts",
+      "tied/requirements.yaml",
+      "tied/architecture-decisions.yaml",
+      "tied/implementation-decisions.yaml",
+      "tied/semantic-tokens.yaml",
+      "tied/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml",
+      "tied/architecture-decisions/ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml",
+      "tied/implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml",
+      "tied/implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER-pseudocode.md",
+      "tied/citdp/CITDP-REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml",
+      "tied/vocab/decision-copilot.md",
+      "working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/**",
+      "docs/comparisons/jev-for-tied-improvement.md",
+      ".gitignore",
+      "CHANGELOG.md"
+    ],
+    "exclude_notes": [
+      "USPS WIP",
+      "scripts/build-commands.sh",
+      "onboarding.test.ts",
+      "unrelated working/REQ-* evidence"
+    ]
+  }
+}

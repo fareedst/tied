@@ -3,6 +3,7 @@
  */
 
 import { DEFAULT_JEV_API_BASE, DEFAULT_JEV_MODEL } from "./constants.js";
+import { assessDecisionBackendReady, resolveLocalProviderConfig } from "./decision-provider.js";
 import { resolveJevConfig } from "./client.js";
 import { resolvePlanSkillsConfig } from "./plan-skills-config.js";
 import {
@@ -26,12 +27,16 @@ export function buildPlanSkillsStatus(
   const cfg = resolvePlanSkillsConfig(projectRoot, env);
   const jevCfg = resolveJevConfig(env);
   const keyPresent = (jevCfg.apiKey?.trim() ?? "").length > 0;
+  const lp = resolveLocalProviderConfig(env);
+  const decisionBackendReady = assessDecisionBackendReady(env);
 
   return {
     schema: PLAN_SKILLS_STATUS_SCHEMA,
     enabled: cfg.enabled,
     enabled_source: cfg.enabled_source,
     key_present: keyPresent,
+    decision_provider: lp.provider,
+    decision_backend_ready: decisionBackendReady,
     model: jevCfg.model ?? DEFAULT_JEV_MODEL,
     api_base_redacted: redactApiBase(jevCfg.apiBase ?? DEFAULT_JEV_API_BASE),
     timeout_ms: cfg.timeout_ms,

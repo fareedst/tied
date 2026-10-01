@@ -1,0 +1,12 @@
+IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    requirements:
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+  description: "TypeScript provider router, local subprocess client, Python bridge script, harness and agentstream diagnostics."
+  essence_pseudocode_path: "tied/implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER-pseudocode.md"
+  implementation_approach: "TDD waves W1-W5 per linked plan; fake Python in CI; JEV_LOCAL_MLX_SMOKE opt-in."
+  name: "Local Jev decision provider implementation"
+  status: "Planned"

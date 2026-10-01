@@ -1,0 +1,57 @@
+CITDP-REQ-TIED_JEV_LOCAL_DECISION_PROVIDER:
+  change_definition:
+    current_behavior: "jevDecide requires JEV_API_KEY; harness fail-closed uses hasApiKey only."
+    desired_behavior: "Provider routing on jevDecide with optional local subprocess bridge; harness decisionBackendReady."
+    non_goals:
+      - "Checklist gate authority"
+      - "CI MLX dependency"
+      - "In-process Python"
+    success_criteria:
+      - "SC-* in REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    unchanged_behavior: "Remote default; Blueprint C fail-open; coprocessor authority"
+  impact_analysis:
+    blast_radius: "mcp-server/src/jev, agentstream jev-harness-preflight"
+    impl_inventory:
+      - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    modules_or_boundaries: "mcp-server/src/jev"
+    tied_tokens_new:
+      - "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER"
+      - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
+      - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+  record_identity:
+    change_request_id: "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
+    gate_policy: "mixed"
+    phase: "close_out"
+    profile_depth: "integrated"
+    record_status: "complete"
+    recorded_at: "2026-09-30"
+    title: "Local JEV decision provider"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      run_id: "closeout-inquiry-2026-09-30-close_out"
+    focused_tests: "bun test decision-provider local-client jev harness-tool-guard"
+    lint: "cd mcp-server && bunx tsc -b"
+    verification: "tied_validate_consistency; integrated close_out gates"
+  evidence:
+    commands:
+      - "cd mcp-server && bun test src/jev/decision-provider.test.ts src/jev/local-client.test.ts src/jev/jev.test.ts src/jev/harness-tool-guard.test.ts"
+    proof_boundaries:
+      - "Remote default; local bridge stub; JEV_LOCAL_MLX_SMOKE opt-in only"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Relative bridge path accepted"
+        - "auto fallback egress invisible in trace"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Absolute bridge rejection in decision-provider tests"
+        - "SC-LOCAL-NO-EGRESS jev.test.ts"
+      falsification_questions:
+        - "Does local mode ever call fetch?"
+      gate_policy: "mixed"
+      sub_adversarial_inquiry_pass: "required_when_mcp_available"
+    depth_tier: "integrated"
+  test_strategy:
+    summary: "TDD W1-W4; bun test jev modules"
