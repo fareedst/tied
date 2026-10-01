@@ -24,10 +24,10 @@ Applied unstaged `!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/...` negations in
 - `tied_verify` ok → `evidence/tied-verify-result.json`
 - `tied_validate_consistency` ok → `evidence/tied-validate-consistency.json`
 
-### Proposed commit message
+### Product commit (done)
 
-```
-Add sponsor–agent relationship layer with hinge-field gate diagnostics.
+**Commit:** `85c5791` — message matches `evidence/co5-sponsor-commit-payload.v1.json`.
 
-Articulate roles and consequence ladder in vocab and checklist; enforce validateHingeFields under existing checklist gate (warn-only advisory).
-```
+### Optional follow-up (docs / working folder)
+
+Refine-plan pass `refine-plan-pass-2026-10-01` updated `PLAN.md`, added `checklist-tracker.yaml`, and evidence stubs; sponsor may commit these separately if desired.

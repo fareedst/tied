@@ -1,6 +1,6 @@
 ---
 name: sponsor-agent-relationship-layer
-overview: Plan-mode output for the Sponsor-Agent Relationship Layer (instrument vs person operating principles). Refine and CITDP Plan complete; Implement gate pending sponsor approval. No code, tests, or project TIED YAML written.
+overview: "Sponsor-Agent Relationship Layer: W0–W4, plan-close-out, and product traceable-commit complete (`85c5791`, `closeout-sar-2026-10-01`); REQ Implemented. Refine-plan pass aligned PLAN with disk and closed working-folder gaps."
 todos:
   - id: refine
     content: "Refine: resolve sponsor terms, choose REQ/ARCH/IMPL tokens, change definition with non-goals and success criteria"
@@ -8,24 +8,36 @@ todos:
   - id: citdp-plan
     content: "CITDP Plan: depth_tier, profile_depth, gate policy, assurance profile, file-by-file change list (Tier A/B/C x project/templates), RED test list, tracker proposal"
     status: completed
-  - id: implement-gate
-    content: "Implement gate: OD-1..OD-3 locked; refine-plan iteration synced to Cursor linked plan; pending sponsor execute → build-plan W0-W4"
-    status: pending
+  - id: plan-close-out
+    content: "Implement gate + W4 plan-close-out (build-plan W0–W4, gates, tied_verify, handoff)"
+    status: completed
+  - id: traceable-commit
+    content: "Sponsor: stage, commit using plan-close-out-handoff.md and co5-sponsor-commit-payload.v1.json"
+    status: completed
+  - id: refine-plan-pass
+    content: "Refine-plan: reconcile PLAN with close-out evidence, authoritative Tracker path, sponsor decisions"
+    status: completed
 isProject: false
 ---
 
 # Plan: Sponsor-Agent Relationship Layer for TIED ("instrument vs person")
 
-**Status:** W4 plan-close-out complete (`closeout-sar-2026-10-01`). Build-plan + close-out evidence on disk; `tied_verify` updated REQ to Implemented.
+**Status:** **Closed for product delivery** — W0–W4, plan-close-out (`closeout-sar-2026-10-01`), product **traceable-commit** `85c5791`, REQ **Implemented** (`tied_verify`). Refine-plan pass `refine-plan-pass-2026-10-01` updated this document and working-folder hygiene (see § 10).
 
-**Verification-gated:** `[PROC-TIED_VERIFICATION_GATED]` — record `REQ-TIED_SPONSOR_AGENT_RELATIONSHIP` as `Planned` at W0 if needed, but **never** hand-set passing/failing `status`; only `tied_verify` with update at W4 derives requirement status from tests.
+**Verification-gated:** `[PROC-TIED_VERIFICATION_GATED]` — `REQ-TIED_SPONSOR_AGENT_RELATIONSHIP` status is **Implemented** only via `tied_verify` (receipt: `evidence/tied-verify-result.json`).
 
-**Build-plan entry (when sponsor approves execute):** `@build-plan` or Task `build-plan` with linked plan `/Users/fareed/.cursor/plans/sponsor-agent_relationship_layer_156132d8.plan.md` (this file remains the detail reference).
+**Historical execution:** `build-plan` + `plan-close-out` run `closeout-sar-2026-10-01`; Cursor linked plans `/Users/fareed/.cursor/plans/sponsor-agent_relationship_layer_156132d8.plan.md` and `/Users/fareed/.cursor/plans/sar_w4_plan-close-out_c7e6fd60.plan.md`.
 
 **Working scope:** `working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/`
-**Tracker (copy at build-plan W0):** `working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/agent-req-implementation-checklist.yaml` (from `tied/docs/agent-req-implementation-checklist.yaml`, per its `copy_hygiene` header: set `execution_evidence.request`, clear `completed`, `close_out_evidence`, `gates`).
-**CITDP (persist at `persist-citdp-record`):** `tied/citdp/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml` — draft in § 4 below.
-**TIED base path confirmed:** `tied_config_get_base_path` → `/Users/fareed/Documents/dev/chatgpt/stdd/tied` (via `tied-cli.sh`, read-only).
+
+| Artifact | Path | Note |
+| --- | --- | --- |
+| **Per-request checklist copy** | `agent-req-implementation-checklist.yaml` | Human-readable disposition history; keep in sync with authoritative Tracker after edits. |
+| **Authoritative Tracker** | `checklist-tracker.yaml` | Required for `tied gate check` / `tied_checklist_gate_validate` at verification and close_out ([`checklist-tracker.v1`](../../tied/vocab/fidelity-research.md)); added in refine-plan pass (was missing at first re-gate). |
+| **CITDP (canonical)** | `tied/citdp/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml` | `leap_feedback.record_status: final`; working copy beside tracker. |
+| **Refine receipt** | `refine-plan-pass-2026-10-01.md` | This refine-plan gate output. |
+
+**TIED base path:** `tied_config_get_base_path` → `/Users/fareed/Documents/dev/chatgpt/stdd/tied` (confirmed via `tied-cli.sh`, read-only).
 
 | Field | Value |
 | --- | --- |
@@ -201,7 +213,9 @@ Legend: **P** = project tree (`tied/` root, repo docs, code) · **T** = `templat
 
 ---
 
-## 4. CITDP draft (to persist at `persist-citdp-record`; not written in Plan mode)
+## 4. CITDP draft (historical spec — persisted at close-out)
+
+**Persisted — see** `tied/citdp/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml`, `working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml`, and `leap_feedback.record_status: final` at close-out (`closeout-sar-2026-10-01`). The block below is the original Plan-mode draft.
 
 ```yaml
 CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
@@ -305,21 +319,21 @@ procedure AUDIT_RELATIONSHIP_LAYER_CONTRACT
 
 ### 6.1 Build slices W0–W4 (dependencies, gates, stop-before-commit)
 
-| Slice | Depends on | Work | Gate receipt / stop |
-| --- | --- | --- | --- |
-| **W0** | Sponsor execute approval | `tied_config_get_base_path`; Tracker copy; `tied_token_create_with_detail` ×3; sidecar + Layer B/C; persist CITDP; **`sub-adversarial-inquiry-pass` (structural)** + four artifacts under `working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/`; `tied_checklist_gate_validate` **`phase: pre_implementation`** → save JSON under `working/.../gates/` | **Stop before W1** if `allowed: false` or integrated activation incomplete |
-| **W1** | W0 pre_implementation pass | RED T1–T7 (fail for expected reasons) | **Stop before GREEN** |
-| **W2** | W1 | GREEN Tier A1–A6, B1–B11, C1/C2/C6, templates R6; optional pre-RED adversarial pass at W1/W2 boundary | `bunx tsc -b` incrementally |
-| **W3** | W2 | Composition: gate hinge diagnostics, bootstrap T5, parity T3, corpus T6 | Composition tests green |
-| **W4** | W3 | `bunx tsc -b`; **`ruby scripts/validate_vocab_index.rb`**; **`lint_yaml`** on all changed YAML; **`tied_verify` (update)**; **`tied_validate_consistency`**; verification + close_out adversarial passes; close-out gate; CHANGELOG; vocab VALIDATE; **propose commit — no git commit** | Sponsor commits |
+| Slice | Status | Depends on | Work | Gate receipt / evidence |
+| --- | --- | --- | --- | --- |
+| **W0** | **Done** | Sponsor execute approval | `tied_config_get_base_path`; Tracker copy; R+A+I; sidecar + Layer B/C; CITDP; structural adversarial inquiry | `working/.../gates/` pre_implementation; `adversarial-inquiry/phase-pre_implementation/`; `evidence/pseudocode-validate-*` |
+| **W1** | **Done** | W0 | RED T1–T7 | Test files §6 (checklist-validator, contract, parity, consequence-ladder, fixture-corpus) |
+| **W2** | **Done** | W1 | GREEN Tier A/B/C + templates R6 | Product tree §3; `templates/` promotion; `evidence/client-refresh-parity-report.v1.json` |
+| **W3** | **Done** | W2 | Composition (gate, bootstrap T5, parity, corpus T6) | `new-tied-client.test.ts`; `fixture-corpus-regression.test.ts` (17 cases) |
+| **W4** | **Done** | W3 | verify, lint, consistency, close_out gates, handoff | `plan-close-out-handoff.md`; `evidence/tied-verify-result.json`; `gates/ledger.jsonl`; run `closeout-sar-2026-10-01` |
 
 Mandatory order at build: W0 → W1 → W2 → W3 → W4 (see linked Cursor plan Mermaid).
 
 ---
 
-## 7. Tracker proposal (per-request copy at W0)
+## 7. Tracker (dispositions frozen at close-out)
 
-Copy `tied/docs/agent-req-implementation-checklist.yaml` → `working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/agent-req-implementation-checklist.yaml`; set `execution_evidence.request: REQ-TIED_SPONSOR_AGENT_RELATIONSHIP`; clear `completed`, `close_out_evidence`, `gates`. Planned dispositions:
+Per-request copies: `agent-req-implementation-checklist.yaml` and **`checklist-tracker.yaml`** (`execution_evidence.request: REQ-TIED_SPONSOR_AGENT_RELATIONSHIP`). W0–W4 slugs **completed** at close-out; **`traceable-commit`** satisfied by git commit **`85c5791`** (message matches `evidence/co5-sponsor-commit-payload.v1.json`). `execution_evidence.close_out_evidence` records `closeout-sar-2026-10-01` receipt. Historical disposition plan:
 
 | Slug | Disposition plan |
 | --- | --- |
@@ -330,7 +344,7 @@ Copy `tied/docs/agent-req-implementation-checklist.yaml` → `working/REQ-TIED_S
 | composition-integration | W3 (gate wiring, bootstrap install) |
 | end-to-end-ui | `not_applicable` (no UI) with rationale |
 | sub-residuality-analysis-pass, sub-bbce-advisory-verification-pass, sub-shared-code-change-justification-pass | `not_applicable` with rationale |
-| verification-gate, sync-tied-stack, persist-citdp-record, gitignore-close-out-hygiene, traceable-commit | W4; commit deferred to sponsor |
+| verification-gate, sync-tied-stack, persist-citdp-record, gitignore-close-out-hygiene, traceable-commit | W4; **traceable-commit** → commit `85c5791` |
 
 ---
 
@@ -352,8 +366,56 @@ Copy `tied/docs/agent-req-implementation-checklist.yaml` → `working/REQ-TIED_S
 
 ## 9. Implement gate
 
-**PENDING sponsor execute approval.** No code, tests, project TIED YAML, CITDP YAML, or Tracker copy has been written.
+**Status: SATISFIED** — W0–W4 build slices and plan-close-out (`closeout-sar-2026-10-01`) complete.
 
-**Pre_implementation gate on current drafts:** **Cannot pass yet** — no per-request Tracker, no persisted CITDP YAML, no R+A+I records, no Layer B/C sidecar receipts, and no integrated adversarial-inquiry activation artifacts. Expect **`tied_checklist_gate_validate` `allowed: false`** until W0 completes; do not run build-plan without a passing W0 receipt.
+- **`tied_checklist_gate_validate`:** `pre_implementation`, `verification`, and `close_out` → `allowed: true` (receipts under `working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/`).
+- **Evidence envelope:** `request-evidence-envelope.v1.json` with `blocking_gaps=0` (see `evidence/closeout-run-close-out-gates-final.json`).
+- **`tied_verify` (update):** ok — `REQ-TIED_SPONSOR_AGENT_RELATIONSHIP` → **Implemented** (`evidence/tied-verify-result.json`).
+- **`tied_validate_consistency`:** ok (`evidence/tied-validate-consistency.json`).
+- **Machine / process / adherence signals:** pass per `plan-close-out-handoff.md`.
 
-On approval, enter **`build-plan`** with linked plan `/Users/fareed/.cursor/plans/sponsor-agent_relationship_layer_156132d8.plan.md`. W0 starts with `tied_config_get_base_path`, Tracker copy, `tied_token_create_with_detail` ×3, sidecar, Layer B/C, structural adversarial inquiry, and `tied_checklist_gate_validate phase: pre_implementation`.
+**Product traceable-commit:** **Done** — `85c5791` on default branch; excludes unrelated untracked paths listed in `co5-sponsor-commit-payload.v1.json`.
+
+**Re-gate note (refine-plan):** A naïve `tied gate check --phase close_out` after editing Tracker bytes may report `allowed: false` until receipts are re-hydrated with current Tracker/CITDP hashes and integrated activation pairing is re-collected. The **2026-10-01** close-out run remains the authoritative pass (`evidence/closeout-run-close-out-gates-final.json` → `merged_decision.allowed: true`, `blocking_gap_count: 0`). Use § 10.3 if you need a fresh close_out receipt.
+
+---
+
+## 10. Refine-plan pass (`refine-plan-pass-2026-10-01`)
+
+### 10.1 Refine gate (Touchpoint 1)
+
+- **Sponsor terms:** unchanged from § 1.1; glossary **`tied/vocab/sponsor-agent-relationship.md`** on disk matches plan rows.
+- **Vocabulary RECORD/VALIDATE:** RECORD complete at build; VALIDATE passed at close-out (`ruby scripts/validate_vocab_index.rb`).
+- **Open decisions:** **OD-1..OD-3 accepted**; no new costly choices.
+
+### 10.2 CITDP Plan gate (read-only reconcile)
+
+| Field | Value | Refine note |
+| --- | --- | --- |
+| `depth_tier` | `integrated` | Unchanged; adversarial-inquiry four-artifact sets exist under `adversarial-inquiry/phase-{pre_implementation,verification,close_out}/`. |
+| `gate_policy` | `advisory` | Unchanged |
+| CITDP | `tied/citdp/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml` | Persisted; not rewritten in this pass |
+
+### 10.3 Gaps closed in this pass
+
+| Gap | Resolution |
+| --- | --- |
+| PLAN claimed **traceable-commit pending** while commit **`85c5791`** existed | § 7–§ 9 and frontmatter aligned to git truth. |
+| Missing **`checklist-tracker.yaml`** (gate default path) | Created as a sync copy of the per-request checklist; document dual-file hygiene in artifact table above. |
+| Missing **`sub-adversarial-inquiry-pass-evidence.md`** referenced by reconcile | Stub points at phase artifact dirs (see `evidence/sub-adversarial-inquiry-pass-evidence.md`). |
+| Stale gate hash warnings in reconcile report | Documented: edit Tracker → invalidate downstream receipts; re-run close-out tooling only if sponsor needs a new receipt. |
+
+### 10.4 Implement gate preparation
+
+- **No further product implementation** in this pass (scope was plan refinement only).
+- **`tied_validate_consistency`:** ok (re-run via `tied-cli.sh` at refine time).
+- **Optional sponsor follow-ups:** (1) commit updated `PLAN.md` + refine artifacts if you want them in git; (2) `git push` when ready; (3) refresh close_out gate only if Tracker/CITDP change again.
+
+---
+
+## 11. Actionable next steps (sponsor)
+
+1. **Optional docs commit** — stage `working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/PLAN.md`, `refine-plan-pass-2026-10-01.md`, `checklist-tracker.yaml`, and evidence stubs if you want working-folder parity in git (product code already committed).
+2. **No REQ/ARCH/IMPL edits required** — stack is Implemented and consistent unless you change behavior.
+3. **Re-audit gates** — only if you mutate Tracker or CITDP: run `node mcp-server/packages/cli/dist/index.js gate check --request-token REQ-TIED_SPONSOR_AGENT_RELATIONSHIP --phase close_out --tracker working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/checklist-tracker.yaml` and refresh `gates/` receipts per `plan-close-out-handoff.md`.
+4. **Exclude unrelated work** — keep `co5-sponsor-commit-payload.v1.json` `exclude_paths` in mind for any future SAR commits (`CITDP-REQ-USPS_ADDRESS_VERIFICATION.yaml`, `REQ-TIED_JEV_TOOL_SAFETY_GATING/`).
