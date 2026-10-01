@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_JEV_DECISION_COPROCESSOR](../requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml)
 
-**See also:** [`routing.md`](routing.md) · [`prompt-composer.md`](prompt-composer.md) · [`fidelity-research.md`](fidelity-research.md) · [`system-one-jev-taxonomy-and-opportunities.md`](../../docs/comparisons/system-one-jev-taxonomy-and-opportunities.md)
+**See also:** [`routing.md`](routing.md) · [`prompt-composer.md`](prompt-composer.md) · [`fidelity-research.md`](fidelity-research.md) · [`system-one-jev-taxonomy-and-opportunities.md`](../../docs/comparisons/system-one-jev-taxonomy-and-opportunities.md) · [`system-one-jev-vs-laya.md`](../../docs/comparisons/system-one-jev-vs-laya.md)
 
 ---
 
@@ -49,6 +49,22 @@
 | Standalone diagnostic MCP | `tied_jev_checklist_evidence_sufficiency` | Same module; does not emit gate `allowed` |
 | Sufficiency replay / benchmark | `mcp-server/scripts/replay-jev-checklist-evidence-sufficiency.ts` | Arms `deterministic_only`, `jev_on`, `jev_off`, `shadow_compare`; schema `checklist-evidence-sufficiency-benchmark.v1` |
 | Decide trace writer | `mcp-server/src/jev/decide-trace.ts` | Opt-in `JEV_DECIDE_TRACE`; schema **`system-one-decide-trace.v1`** |
+
+---
+
+
+## Laya terms (self-hosted System One)
+
+| Preferred term | Avoid | Notes |
+|---|---|---|
+| **Laya** | local LLM (generic) | Apache 2.0 open-weight System One family; not a prose model |
+| **laya-serve** | custom HTTP decide | Jev-compatible **`/v1/systemone`** wire for drop-in self-host |
+| **answer_confidence** | confidence (alone) | Laya calibrated field; distinct from entropy **`confidence`** — thresholds do not transfer from Jev |
+| **head_max_len** | max options | Choice-head width (~20 practical options; use **`predict_shortlist`** beyond) |
+| **predict_shortlist** | full 255 choice | Laya path for larger option sets before head scoring |
+| **Jev-compatible wire protocol** | second decide API | Same question map through **`jevDecide`** + provider router |
+
+Full comparison: [`system-one-jev-vs-laya.md`](../../docs/comparisons/system-one-jev-vs-laya.md).
 
 ---
 
@@ -175,6 +191,7 @@
 
 | Term | Section |
 |------|---------|
+| answer_confidence | Laya terms (self-hosted System One) |
 | ASSESS_JEV_SERVICE_READINESS | W6 proposed pseudo-code blocks |
 | LOAD_MERGED_ROUTING_BASELINE | W6 proposed pseudo-code blocks |
 | agrees | W6 Cursor plan-skill wiring |
@@ -185,6 +202,11 @@
 | tied_jev_adversarial_triage_pilot | W6 Cursor plan-skill wiring |
 | configured | W6 Cursor plan-skill wiring |
 | bounded semantic decision engine | Preferred terms |
+| head_max_len | Laya terms (self-hosted System One) |
+| Jev-compatible wire protocol | Laya terms (self-hosted System One) |
+| Laya | Laya terms (self-hosted System One) |
+| laya-serve | Laya terms (self-hosted System One) |
+| predict_shortlist | Laya terms (self-hosted System One) |
 | confidence threshold policy | Preferred terms |
 | decision algebra | Preferred terms |
 | decision coprocessor | Preferred terms |

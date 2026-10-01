@@ -5,7 +5,7 @@
 | **Purpose** | Comprehensive reference taxonomy of System One (Jev) decision models, underlying decision algebra, and systematic mapping to existing LLM tasks across TIED agent workflows. |
 | **Audience** | AI agent developers, TIED systems architects, and harness engineers designing fast, bounded judgment layers. |
 | **Traceability** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
-| **Related Docs** | [`docs/comparisons/jev-for-tied-improvement.md`](jev-for-tied-improvement.md) · [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md) · [`working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md`](../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md) |
+| **Related Docs** | [`docs/comparisons/jev-for-tied-improvement.md`](jev-for-tied-improvement.md) · [`docs/comparisons/system-one-jev-vs-laya.md`](system-one-jev-vs-laya.md) · [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md) · [`working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md`](../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md) |
 | **Status** | Canonical reference (2026-09-29) |
 
 ---

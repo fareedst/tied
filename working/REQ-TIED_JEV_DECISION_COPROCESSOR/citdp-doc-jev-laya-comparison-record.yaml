@@ -1,0 +1,78 @@
+record_identity:
+  change_request_id: DOC-JEV-LAYA-COMPARISON
+  title: "Jev vs Laya System One comparison reference (hosted vs self-hosted)"
+  recorded_at: "2026-09-30"
+  record_status: complete
+  gate_policy: advisory
+  depth_tier: minimal
+  profile_depth: minimal
+change_definition:
+  current_behavior: >
+    No published operator comparison between hosted Jev and self-hosted Laya; decision-copilot lacked Laya lexicon cross-links.
+  desired_behavior: >
+    Publish system-one-jev-vs-laya.md with gitignore exception, RECORD Laya terms in decision-copilot, taxonomy/jev-for-tied cross-links, and minimal close-out evidence.
+  non_goals:
+    - "New REQ/ARCH/IMPL tokens or runtime code in this CITDP"
+    - "Integrated adversarial inquiry (separate child REQ program)"
+  success_criteria:
+    - "vs-laya doc tracked with gitignore negation"
+    - "Relative links resolve from comparisons and vocab"
+    - "Laya lexicon table matches vs-laya §9"
+  unchanged_behavior:
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR program status and runtime gates"
+impact_analysis:
+  files:
+    - docs/comparisons/system-one-jev-vs-laya.md
+    - docs/comparisons/system-one-jev-taxonomy-and-opportunities.md
+    - docs/comparisons/jev-for-tied-improvement.md
+    - tied/vocab/decision-copilot.md
+    - tied/vocab/routing.md
+    - tied/citdp/CITDP-DOC-JEV-COMPARISON.yaml
+  tied_tokens_affected:
+    - REQ-TIED_JEV_DECISION_COPROCESSOR
+  tied_tokens_new: []
+risk_analysis:
+  depth_tier: minimal
+  gate_policy: advisory
+  adversarial_inquiry:
+    assurance_profile: baseline-functional
+    close_out_inquiry_waiver: null
+    depth_change_waiver: null
+    depth_tier: minimal
+    eligibility_triggers_matched: []
+    gate_policy: advisory
+    integrated_waiver: null
+    prior_depth_tier: null
+    rationale: "Documentation-only comparison; labeled article vs repo evidence."
+    research_profile: integrated-agent
+    strict_eligibility_prerequisites: []
+    sub_adversarial_inquiry_pass: not_applicable
+    counterexamples:
+      - "Doc states benchmark numbers as repo gate constants"
+    disconfirming_observations:
+      - "vs-laya uses label discipline; no CI gate thresholds from article metrics"
+    falsification_questions:
+      - "Does vs-laya label article metrics separately from repo gate constants?"
+    evidence_references:
+      - docs/comparisons/system-one-jev-vs-laya.md
+      - tied/vocab/decision-copilot.md
+  residual_risks:
+    - id: RISK-DOC-LAYA-001
+      summary: "Stub bridge placeholder may be misread as production MLX path"
+      severity: low
+      mitigation: "Child REQ CITDP and vs-laya §7 document opt-in smoke-only bridge"
+evidence:
+  commands:
+    - "rg 'system-one-jev-vs-laya' docs/comparisons/*.md tied/vocab/decision-copilot.md"
+    - tied_validate_consistency
+  proof_boundaries:
+    - docs_and_citdp_only
+  evidence_references:
+    - docs/comparisons/system-one-jev-vs-laya.md
+    - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-closeout-2026-09-30.json
+test_strategy:
+  summary: "Docs-only; link grep + minimal close_out gate."
+leap_feedback:
+  divergences_from_analysis: none
+  record_status: complete
+  tied_stack_updates_required: []

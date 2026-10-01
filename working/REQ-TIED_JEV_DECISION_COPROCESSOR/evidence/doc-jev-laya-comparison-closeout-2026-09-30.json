@@ -1,0 +1,26 @@
+{
+  "schema": "doc-jev-laya-comparison-closeout.v1",
+  "change_request_id": "DOC-JEV-LAYA-COMPARISON",
+  "recorded_at": "2026-09-30",
+  "depth_tier": "minimal",
+  "gate_policy": "advisory",
+  "link_check": {
+    "command": "rg 'system-one-jev-vs-laya' docs/comparisons/*.md tied/vocab/decision-copilot.md",
+    "exit_code": 0,
+    "matches": 4
+  },
+  "tied_validate_consistency": {
+    "ok": false,
+    "note": "USPS orphan_detail tokens in semantic-tokens.yaml — out of DOC-JEV-LAYA proof boundary (docs_and_citdp_only)",
+    "orphan_tokens": [
+      "REQ-USPS_ADDRESS_VERIFICATION",
+      "ARCH-USPS_ADDRESS_VERIFICATION",
+      "IMPL-USPS_ADDRESS_VERIFICATION"
+    ]
+  },
+  "close_out_gate": {
+    "allowed": true,
+    "run_id": "doc-jev-laya-comparison-closeout-2026-09-30",
+    "receipt": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-10-01T03-13-49-260Z.json"
+  }
+}

@@ -1,0 +1,54 @@
+# Per-request Tracker — DOC-JEV-LAYA comparison (minimal doc-only close-out)
+execution_evidence:
+  request: REQ-TIED_JEV_DECISION_COPROCESSOR
+  completed:
+    - three-way-alignment-unit
+    - composition-integration
+    - verification-gate
+  close_out_evidence:
+    date: "2026-09-30"
+    deferred: []
+steps:
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - tied/vocab/decision-copilot.md
+      - tied/vocab/routing.md
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/citdp-doc-jev-laya-comparison-record.yaml
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - docs/comparisons/system-one-jev-vs-laya.md
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/citdp-doc-jev-laya-comparison-record.yaml
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/citdp-doc-jev-laya-comparison-record.yaml
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    rationale: "Documentation-only pass at minimal depth; no integrated inquiry activation."
+    policy: "depth_tier minimal — sub-adversarial-inquiry-pass N/A."
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/citdp-doc-jev-laya-comparison-record.yaml
+  - slug: three-way-alignment-unit
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-closeout-2026-09-30.json
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-closeout-2026-09-30.json
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-closeout-2026-09-30.json
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-handoff-2026-09-30.md

@@ -12,11 +12,20 @@ CITDP-DOC-JEV-COMPARISON:
   evidence:
     commands:
       - "tied_validate_consistency"
+      - "rg 'system-one-jev-vs-laya' docs/comparisons/*.md tied/vocab/decision-copilot.md"
     proof_boundaries:
       - "docs_and_citdp_only"
+    evidence_references:
+      - "docs/comparisons/system-one-jev-vs-laya.md"
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/citdp-doc-jev-laya-comparison-record.yaml"
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-closeout-2026-09-30.json"
   impact_analysis:
     files:
       - "docs/comparisons/jev-for-tied-improvement.md"
+      - "docs/comparisons/system-one-jev-vs-laya.md"
+      - "docs/comparisons/system-one-jev-taxonomy-and-opportunities.md"
+      - "tied/vocab/decision-copilot.md"
+      - "tied/vocab/routing.md"
     tied_tokens_affected:
       - "REQ-TIED_JEV_DECISION_COPROCESSOR"
     tied_tokens_new: []
