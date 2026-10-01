@@ -92,7 +92,7 @@ This acknowledgment confirms that the AI agent has:
 13. **Domain Vocabulary Discipline — Peer Agent-Control Layer** `[PROC-VOCABULARY_INDEX]`
     - Vocabulary is equally important to pseudo-code, semantic-token, YAML, and test precision. It is the primary guide for how the agent interprets and discusses developer intent, not a passive glossary consulted after implementation.
     - **Three mandatory touchpoints** (via `sub-vocabulary-sync` in `[PROC-AGENT_REQ_CHECKLIST]`):
-      - **Prompt intake (RESOLVE):** reword sponsor/user wording that names concepts before it drives REQ/ARCH/IMPL work (`translate-sponsor-intent`, `change-definition`).
+      - **Prompt intake (RESOLVE):** reword sponsor/user wording that names concepts before it drives REQ/ARCH/IMPL work (`translate-sponsor-intent`, `change-definition`). **RESOLVE charter:** RESOLVE changes names, not sponsor intent authority (non-goals, approvals, irreversible choices).
       - **Pre-read (PRELOAD):** read client `tied/vocab/routing.md`, dispatch to `tied/methodology/vocab/routing.md`, match task keywords across both ownership layers, and load only matched glossaries before reading TIED YAML, docs, source, or tests (`session-bootstrap`, `impact-discovery`).
       - **Pre-commit (VALIDATE):** audit names in docs, `semantic-tokens.yaml`, TIED records, tests, and code vs the index before commit (`traceable-commit`).
     - **Inline during work:** **RESOLVE** before naming; **RECORD** when concepts appear or artifacts change — update client glossary rows in `tied/vocab/*.md` and methodology glossary rows in the TIED source tree, keeping naming bridges, UPPER_SNAKE block-name tables, and alphabetical indexes synchronized.
@@ -101,7 +101,7 @@ This acknowledgment confirms that the AI agent has:
     - Standards: `tied/docs/vocabulary-index-analysis-and-standards.md`; client routing handoff: `tied/vocab/routing.md`; methodology routing: `tied/methodology/vocab/routing.md`; full indexes (on-demand): the matching `domain-references.md` in each layer; full process: `tied/docs/processes.md` § `[PROC-VOCABULARY_INDEX]`.
 
 14. **Sponsor default-proceed (planned development)**
-    - For the **majority of planned work** (refine, plan-new-feature, build-plan slices bounded by an approved plan/CITDP), **proceed on documented defaults** without sponsor Q&A when the decision is **reversible or inexpensive to unwind** and consistent with existing REQ/ARCH/IMPL and prior sponsor artifacts.
+    - For the **majority of planned work** (refine, plan-new-feature, build-plan slices bounded by an approved plan/CITDP), **proceed on documented defaults** without sponsor Q&A when the decision is a **reversible choice** (reversible or inexpensive to unwind) and consistent with existing REQ/ARCH/IMPL and prior sponsor artifacts. **Costly choice** decisions become end-of-turn sponsor questions with a recommended default. See the **consequence ladder** in `tied/docs/sponsor-agent-relationship.md`.
     - **Reconsideration:** Plans, acceptance records, trackers, gate receipts, tests, and implementation commits are the audit trail; they are **sufficient to reverse direction and reimplement** (amend acceptance, withdraw a batch, LEAP, re-run gates) without re-deriving intent from memory.
     - **Ask the sponsor only** when the default would be **permanent or costly to explore after the fact**—with plain-language description, recommended default, and links to plan sections, TIED tokens, and evidence paths.
     - **Fleet Track B batches:** concrete proceed/stop boundaries live in [`docs/pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) § Sponsor default-proceed policy; vocabulary term **sponsor default-proceed policy** in `tied/vocab/pseudocode-and-citdp.md`.
@@ -113,6 +113,12 @@ This acknowledgment confirms that the AI agent has:
     - Persist the four bounded artifacts only under `working/{REQ-TOKEN}/adversarial-inquiry/`: `obligation-report.json`, `finding-ledger.jsonl`, `gate-result.json`, and `evidence-provenance.json`.
     - Observed findings remain review-gated and do not trigger LEAP; only confirmed findings route to existing owners.
     - Inherited checklist `execution_evidence`, checklist text, token presence, and TIED consistency are not feature activation evidence. Integrated activation requires the matching inquiry metric and all four artifacts.
+
+16. **Sponsor–agent relationship (agency boundary condition)** `[REQ-TIED_SPONSOR_AGENT_RELATIONSHIP]`
+    - **Instrument branch** (agent): observe → act → measure → adapt within the **delegated work envelope**; failure is information.
+    - **Person branch** (sponsor/reviewer): express → listen → choose → respect → adapt; feedback is information, not authorization to control agency.
+    - **Agency boundary condition:** toward persons, agency is a constraint that must not be optimized away; toward the agent instrument, direct and optimize within the envelope.
+    - **Prohibited optimization targets:** sponsor non-goals, approvals, irreversible choices, and disagreement. Failure modes: **over-asking** and **instrumentalizing the sponsor**. Glossary: `tied/vocab/sponsor-agent-relationship.md`.
 
 **Bugs vs requirements (operational rule):** Requirements describe desired behavior (WHAT and WHY). Bugs describe implementation failures. Do NOT document bugs as requirements; document bugs in architecture/implementation decisions with cross-reference to the requirement that should be satisfied. If a bug reveals missing behavior specification, add a requirement first, then fix.
 

@@ -1,0 +1,187 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "cfd5bf6ad98024eb",
+    "scope": [
+      "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88"
+    ],
+    "graph": {
+      "projectId": "cfd5bf6ad98024eb",
+      "nodes": [
+        {
+          "id": "case:CE-001",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-002",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-003",
+          "kind": "case"
+        },
+        {
+          "id": "constraint:constraint-tied_sponsor_agent_relationship",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:prod-1",
+          "kind": "evidence",
+          "revision": "closeout-sar-2026-10-01"
+        },
+        {
+          "id": "evidence:test-1",
+          "kind": "evidence",
+          "revision": "closeout-sar-2026-10-01"
+        },
+        {
+          "id": "evidence:test-2",
+          "kind": "evidence",
+          "revision": "closeout-sar-2026-10-01"
+        },
+        {
+          "id": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "kind": "block",
+          "revision": "413b32adad62ffe9"
+        },
+        {
+          "id": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP#criterion-1",
+          "kind": "criterion",
+          "revision": "criterion-rev-tied_sponsor_agent_relationship"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP#criterion-1",
+          "to": "constraint:constraint-tied_sponsor_agent_relationship",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-tied_sponsor_agent_relationship",
+          "to": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "to": "evidence:prod-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "to": "evidence:test-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "to": "evidence:test-2",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "to": "case:CE-001",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "to": "case:CE-002",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+          "to": "case:CE-003",
+          "kind": "block_case"
+        }
+      ]
+    },
+    "findings": [],
+    "proofBoundaries": [],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "PASS",
+  "status": {
+    "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88": "PASS"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88"
+    ],
+    "status": "passed",
+    "blocking": false,
+    "verdict": "PASS",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "closeout-sar-2026-10-01-verification",
+      "phase": "verification",
+      "scope": [
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88"
+      ],
+      "scope_hash": "ee90ac3be9bf42cb8828cb38e254d8349d6e9385c1685ef03ec4619f06929247",
+      "artifact_hashes": {
+        "obligation-report.json": "6d2766e1f9d46bfaaae231b73500d069a6bf0e2db1540830611dfa0b9ab0a46c",
+        "finding-ledger.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gate-result.json": "54f9846c195ba05763931b05eac35628ffdc99abe28d0aa477b384d8b076d934",
+        "evidence-provenance.json": "c6ea48a859a7986732d48e173aea0fe9295df9c508a020c2463f87064ac2353a"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-sar-2026-10-01-verification",
+        "phase": "verification",
+        "scope_hash": "ee90ac3be9bf42cb8828cb38e254d8349d6e9385c1685ef03ec4619f06929247",
+        "hash": "6d2766e1f9d46bfaaae231b73500d069a6bf0e2db1540830611dfa0b9ab0a46c",
+        "path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-sar-2026-10-01-verification",
+        "phase": "verification",
+        "scope_hash": "ee90ac3be9bf42cb8828cb38e254d8349d6e9385c1685ef03ec4619f06929247",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-sar-2026-10-01-verification",
+        "phase": "verification",
+        "scope_hash": "ee90ac3be9bf42cb8828cb38e254d8349d6e9385c1685ef03ec4619f06929247",
+        "hash": "54f9846c195ba05763931b05eac35628ffdc99abe28d0aa477b384d8b076d934",
+        "path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "closeout-sar-2026-10-01-verification",
+        "phase": "verification",
+        "scope_hash": "ee90ac3be9bf42cb8828cb38e254d8349d6e9385c1685ef03ec4619f06929247",
+        "hash": "c6ea48a859a7986732d48e173aea0fe9295df9c508a020c2463f87064ac2353a",
+        "path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/evidence-provenance.json"
+      }
+    }
+  }
+}

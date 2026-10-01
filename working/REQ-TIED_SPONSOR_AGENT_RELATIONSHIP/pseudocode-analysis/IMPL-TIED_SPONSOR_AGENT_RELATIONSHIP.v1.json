@@ -1,0 +1,254 @@
+{
+  "ok": true,
+  "gate_mode_applied": true,
+  "schema_version": "pseudocode-analysis-report.v1",
+  "grammar_version": "pseudocode-grammar.v2",
+  "analyzer_version": "1.0.0",
+  "proof_boundary": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.",
+  "token": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+  "input_identity": {
+    "algorithm": "sha256",
+    "hash": "a4c050ed4e55484e5cae8c488e958fe467eade2779e3c983f0bdc954539f38df",
+    "byte_length": 2364
+  },
+  "budgets_applied": {
+    "requested": {},
+    "effective": {
+      "max_parse_nodes": 5000,
+      "max_procedures": 256,
+      "max_cfg_blocks_per_procedure": 512,
+      "max_call_graph_edges": 2048,
+      "max_fixed_point_iterations": 32,
+      "max_path_conditions": 64,
+      "max_report_diagnostics": 500,
+      "max_source_bytes": 512000,
+      "max_cfg_join_iterations": 32
+    }
+  },
+  "truncated": false,
+  "diagnostics_truncated": false,
+  "sections": {
+    "parse": {
+      "procedure_count": 4,
+      "parse_node_count": 0,
+      "token_refs": [
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ],
+      "unsupported_syntax_count": 0
+    },
+    "symbols": {
+      "procedures": [
+        "AUDIT_RELATIONSHIP_LAYER_CONTRACT",
+        "CLASSIFY_DECISION_CONSEQUENCE",
+        "ROUTE_SPONSOR_TIED_DISAGREEMENT",
+        "VALIDATE_HINGE_FIELD"
+      ],
+      "symbols": [
+        {
+          "name": "AUDIT_RELATIONSHIP_LAYER_CONTRACT",
+          "kind": "procedure",
+          "declared_line": 37
+        },
+        {
+          "name": "CLASSIFY_DECISION_CONSEQUENCE",
+          "kind": "procedure",
+          "declared_line": 6
+        },
+        {
+          "name": "ROUTE_SPONSOR_TIED_DISAGREEMENT",
+          "kind": "procedure",
+          "declared_line": 27
+        },
+        {
+          "name": "VALIDATE_HINGE_FIELD",
+          "kind": "procedure",
+          "declared_line": 17
+        }
+      ],
+      "defined_calls": [],
+      "unresolved_calls": []
+    },
+    "cfg": {
+      "procedures": [
+        {
+          "procedure": "CLASSIFY_DECISION_CONSEQUENCE",
+          "nodes": [
+            {
+              "id": "CLASSIFY_DECISION_CONSEQUENCE::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 6
+            },
+            {
+              "id": "CLASSIFY_DECISION_CONSEQUENCE::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 6
+            }
+          ],
+          "edges": [
+            {
+              "from": "CLASSIFY_DECISION_CONSEQUENCE::entry",
+              "to": "CLASSIFY_DECISION_CONSEQUENCE::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "CLASSIFY_DECISION_CONSEQUENCE::entry",
+            "CLASSIFY_DECISION_CONSEQUENCE::exit"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "VALIDATE_HINGE_FIELD",
+          "nodes": [
+            {
+              "id": "VALIDATE_HINGE_FIELD::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 17
+            },
+            {
+              "id": "VALIDATE_HINGE_FIELD::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 17
+            }
+          ],
+          "edges": [
+            {
+              "from": "VALIDATE_HINGE_FIELD::entry",
+              "to": "VALIDATE_HINGE_FIELD::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "VALIDATE_HINGE_FIELD::entry",
+            "VALIDATE_HINGE_FIELD::exit"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "ROUTE_SPONSOR_TIED_DISAGREEMENT",
+          "nodes": [
+            {
+              "id": "ROUTE_SPONSOR_TIED_DISAGREEMENT::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 27
+            },
+            {
+              "id": "ROUTE_SPONSOR_TIED_DISAGREEMENT::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 27
+            }
+          ],
+          "edges": [
+            {
+              "from": "ROUTE_SPONSOR_TIED_DISAGREEMENT::entry",
+              "to": "ROUTE_SPONSOR_TIED_DISAGREEMENT::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "ROUTE_SPONSOR_TIED_DISAGREEMENT::entry",
+            "ROUTE_SPONSOR_TIED_DISAGREEMENT::exit"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "AUDIT_RELATIONSHIP_LAYER_CONTRACT",
+          "nodes": [
+            {
+              "id": "AUDIT_RELATIONSHIP_LAYER_CONTRACT::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 37
+            },
+            {
+              "id": "AUDIT_RELATIONSHIP_LAYER_CONTRACT::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 37
+            }
+          ],
+          "edges": [
+            {
+              "from": "AUDIT_RELATIONSHIP_LAYER_CONTRACT::entry",
+              "to": "AUDIT_RELATIONSHIP_LAYER_CONTRACT::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "AUDIT_RELATIONSHIP_LAYER_CONTRACT::entry",
+            "AUDIT_RELATIONSHIP_LAYER_CONTRACT::exit"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    "call_graph": {
+      "edges": [],
+      "unresolved": [],
+      "truncated": false
+    },
+    "abstract": {
+      "facts": [],
+      "path_conditions": [],
+      "effect_gaps": [],
+      "termination_unknown": []
+    },
+    "obligations": {
+      "decision_tables": [],
+      "path_obligations": []
+    },
+    "traceability": {
+      "block_edges": [
+        {
+          "block": "AUDIT_RELATIONSHIP_LAYER_CONTRACT",
+          "tokens": [
+            "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+          ],
+          "line": 37
+        },
+        {
+          "block": "CLASSIFY_DECISION_CONSEQUENCE",
+          "tokens": [
+            "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+          ],
+          "line": 6
+        },
+        {
+          "block": "ROUTE_SPONSOR_TIED_DISAGREEMENT",
+          "tokens": [
+            "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+          ],
+          "line": 27
+        },
+        {
+          "block": "VALIDATE_HINGE_FIELD",
+          "tokens": [
+            "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+            "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+            "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+          ],
+          "line": 17
+        }
+      ]
+    }
+  },
+  "diagnostics": [],
+  "unsupported_syntax": [],
+  "unknowns": []
+}

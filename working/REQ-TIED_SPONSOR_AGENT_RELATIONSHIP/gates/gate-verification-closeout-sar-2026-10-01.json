@@ -1,0 +1,23 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [
+    "missing_completion_activation",
+    "pending_required_step:verification-gate",
+    "psa_missing:IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+    "pseudocode_analysis_incomplete"
+  ],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/verification-2026-10-01T20-01-25-824Z.json",
+    "hash": "sha256:d2d7e8cd2f7f911f3312ffd6d23913305e5cfe6a51d5821cffdbcd235eaf5f41"
+  }
+}

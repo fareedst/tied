@@ -1,0 +1,20 @@
+{
+  "provenance": {
+    "block_id": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+    "builder": "build_adversarial_inquiry_from_tied.rb",
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "verification",
+    "production_path": "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts",
+    "project_id": "cfd5bf6ad98024eb",
+    "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+    "run_id": "closeout-sar-2026-10-01-verification",
+    "source_revision": "closeout-sar-2026-10-01",
+    "test_paths": [
+      "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts",
+      "mcp-server/src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts"
+    ],
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

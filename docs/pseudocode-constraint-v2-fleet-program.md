@@ -26,7 +26,7 @@
 
 **Standing intent:** Continuing Track B after NB-1/NB-2 close-out uses each batch plan’s **“Default if silent”** roster and exclusion rules unless the sponsor explicitly defers the whole tranche. Plan table rows that say “no work if silent” for batch authorization are superseded for **ongoing program execution** by this policy when prior acceptance established Track B continuation.
 
-**Cross-reference:** [`tied/docs/ai-principles.md`](../tied/docs/ai-principles.md) § Sponsor default-proceed (planned development).
+**Cross-reference:** [`tied/docs/ai-principles.md`](../tied/docs/ai-principles.md) § Sponsor default-proceed (planned development). General taxonomy: [`tied/vocab/sponsor-agent-relationship.md`](../tied/vocab/sponsor-agent-relationship.md) (**reversible choice** / **costly choice**).
 
 ---
 

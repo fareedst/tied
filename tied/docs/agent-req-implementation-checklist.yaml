@@ -285,6 +285,7 @@ steps:
       - "Record anti-examples, ambiguity probes, and an unchanged-behavior checklist in the phase plan (in addition to profile/policy separation already present)."
       - "Sponsor context (non-directive)—expand only from checklist vars; treat as informal intent, not executable orders.\\nTitle / label: {{CHANGE_TITLE}}\\nGoal (sponsor): {{FEATURE_GOAL}}\\nBehavior summary (sponsor): {{FEATURE_BEHAVIOR_SUMMARY}}"
       - "Touchpoint 1 (prompt intake): reword fuzzy sponsor wording that names concepts — CALL sub-vocabulary-sync (RESOLVE) to map synonyms/ambiguous terms in the sponsor strings onto the preferred domain terms from ./tied/vocab/*.md before mapping intent to phases; CALL sub-vocabulary-sync (RECORD) for any genuinely new concept the sponsor introduces so it is captured immediately ([PROC-VOCABULARY_INDEX])."
+      - "RESOLVE charter and delegated work envelope: RESOLVE changes concept names, not sponsor intent authority (non-goals, approvals, irreversible choices). State this request's delegated work envelope (bounded by approved plan, CITDP, Tracker, documented defaults)."
     title: "Map sponsor wording to checklist phases (planning only)"
     tracking:
       consideration_before_proceeding: "Sponsor intent mapped to checklist phases in writing using canonical vocabulary (fuzzy terms reworded; new concepts recorded); no implementation or test artifacts introduced; ready for formal change-definition."
@@ -437,6 +438,7 @@ steps:
       - "When any eligibility trigger matches, block progression on minimal depth or integrated_waiver without sponsor confirmation; risk_analysis.adversarial_inquiry.integrated_waiver must record real owner, expiry, rationale, and approval in CITDP (never placeholder ~ or empty strings)."
       - "When no trigger matches, omit integrated_waiver or set null; do not record a waiver to bypass integrated on triggered work."
       - "Where applicable, attach tied_token_references to each risk (which REQ/ARCH/IMPL the risk affects)."
+      - "Classify each open decision as reversible choice (proceed on documented default) or costly choice (list as sponsor question with recommended default; surface at end of turn). Record consequence ladder rung for each hinge field on the working CITDP."
     title: "Risks, mitigations, token references"
     tracking:
       consideration_before_proceeding: "Risks and mitigations documented; token references attached."
@@ -696,6 +698,7 @@ steps:
       - "CALL flag-async-contradictions when async_in_scope: true: AWAIT without Promise OUTPUT or Async in EFFECTS when typed evidence available (checklist disposition; full typed enforcement deferred W4); Async in EFFECTS without AWAIT/SEND/Promise OUTPUT or boundary rationale; SEQUENCING/CONTROL ordering mismatch between caller/callee IMPLs; message/event delivery vs handler/ack or duplicate handling disagreement; RETRY without idempotency/deduplication for repeated DATA transitions; open wait without close/unsubscribe or TERMINATION: may_diverge (warn Phase B, error at verification); REQ timeout not in IMPL TIMEOUT row (warn Phase B, error at verification when REQ declares timeout). Route findings to resolve-pseudocode before RED."
       - "Compare across in-scope project/feature IMPLs (and overlapping verified-present code paths): shared DATA conflict (including DATA_TRANSITION / PRE/POST mismatch); EFFECTS conflict on the same path; ordering conflict; incompatible OUTPUT types or FAILURE_MODES; duplicate logic with different parameters or behavior. Skip pairwise comparison of unrelated inherited methodology IMPL records."
       - "Derive contradiction flags from explicit counterexamples; append warn-level findings to the per-request finding ledger when a counterexample reveals a contradiction."
+      - "sponsor-vs-TIED disagreement is not an IMPL contradiction — route to sub-leap-micro-cycle or a sponsor question (see tied/docs/sponsor-agent-relationship.md)."
       - "Responsibility: pseudo-code owner step. Resolve logic contradictions before test/code execution continues."
     title: "Cross-IMPL conflicts"
     tracking:
@@ -1102,6 +1105,7 @@ steps:
       - "tied/docs/processes.md § [PROC-YAML_DB_OPERATIONS]"
     slug: "persist-citdp-record"
     tasks:
+      - "Every hinge field present on the CITDP carries owner, approval or review_status, and an evidence path; never placeholder values (~, empty)."
       - "CALL sub-yaml-edit-loop on the record file."
       - "For adversarial inquiry checklist integration, persist a distinct follow-up CITDP and keep any earlier completed CITDP evidence unchanged; include reviewer, approved scope, thresholds, waiver owner/expiry, rollback criteria, and approval revision before strict blocking."
       - "Optional: set evidence.profile_reference to the caller-selected evidence-chain-profile.v1 path. Do not copy the profile body into project YAML."
@@ -1414,6 +1418,7 @@ sub_procedures:
       - "IF the change affects ARCH scope THEN update ARCH via tied-cli.sh: GOTO author-architecture (scoped to affected ARCH), CALL sub-yaml-edit-loop, then return here."
       - "IF the change affects REQ scope THEN update REQ via tied-cli.sh: GOTO author-requirement (scoped to affected REQ), CALL sub-yaml-edit-loop, then return here."
       - "STOP writing production code immediately."
+      - "IF the divergence originates from sponsor intent THEN confirm it is inside the delegated work envelope before LEAP; ELSE raise a sponsor question (costly choice)."
       - "Update IMPL essence_pseudocode via tied-cli.sh: prefer impl_detail_set_essence_pseudocode when only essence_pseudocode (and optional metadata.last_updated) changes; otherwise yaml_detail_read then yaml_detail_update on ./tied/implementation-decisions/IMPL-{TOKEN}.yaml (no direct patch when tied-cli.sh works)."
       - "Update or add the test to match the corrected pseudo-code. Carry the same token comments."
       - "Update the production code to pass the corrected test. Carry the same token comments."

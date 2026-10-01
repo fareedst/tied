@@ -37,6 +37,7 @@
     "agent-req-implementation-checklist.md",
     "architecture-decisions.md",
     "citdp-policy.md",
+    "sponsor-agent-relationship.md",
     "citdp-record-template.yaml",
     "client-development-index.md",
     "commit-guidelines.md",

@@ -373,8 +373,10 @@ Prefer in `essence_pseudocode` (not domain terms):
 | Term / artifact | Preferred definition |
 |-----------------|----------------------|
 | **sponsor default-proceed policy** | Proceed on plan/program **defaults** without sponsor clarification when reversible or cheap to unwind; work artifacts (plans, od-* acceptance, CITDP, trackers, receipts, tests) suffice to **reconsider and reimplement**; ask sponsor only for irreversible or costly choices with linked references |
-| **reversible sponsor choice (fleet)** | Acceptance JSON edits, roster overrides before client migration, dry-run G3, tranche ≤5 within schema |
-| **costly sponsor choice (fleet)** | Client migration close_out, manifest fleet-migrated without receipts, orchestrator re-verify, tranche >5, durable waivers |
+| **reversible sponsor choice (fleet)** | Specialization of **reversible choice** — acceptance JSON edits, roster overrides before client migration, dry-run G3, tranche ≤5 within schema |
+| **costly sponsor choice (fleet)** | Specialization of **costly choice** — client migration close_out, manifest fleet-migrated without receipts, orchestrator re-verify, tranche >5, durable waivers |
+
+**General taxonomy:** [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) (**reversible choice** / **costly choice**, **consequence ladder**).
 
 **Canonical:** [`docs/pseudocode-constraint-v2-fleet-program.md`](../../docs/pseudocode-constraint-v2-fleet-program.md) § Sponsor default-proceed policy · [`tied/docs/ai-principles.md`](../docs/ai-principles.md) § Sponsor default-proceed (planned development).
 

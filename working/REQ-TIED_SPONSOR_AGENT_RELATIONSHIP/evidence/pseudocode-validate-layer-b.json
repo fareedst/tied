@@ -1,0 +1,109 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "CLASSIFY_DECISION_CONSEQUENCE",
+      "line": 6,
+      "token_refs": [
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "VALIDATE_HINGE_FIELD",
+      "line": 17,
+      "token_refs": [
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "ROUTE_SPONSOR_TIED_DISAGREEMENT",
+      "line": 27,
+      "token_refs": [
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "AUDIT_RELATIONSHIP_LAYER_CONTRACT",
+      "line": 37,
+      "token_refs": [
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "CLASSIFY_DECISION_CONSEQUENCE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "VALIDATE_HINGE_FIELD",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "ROUTE_SPONSOR_TIED_DISAGREEMENT",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "AUDIT_RELATIONSHIP_LAYER_CONTRACT",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    }
+  ],
+  "diagnostics": [],
+  "leakage": []
+}

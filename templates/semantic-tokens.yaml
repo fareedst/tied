@@ -572,6 +572,37 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  description: "Sponsor-agent relationship layer (instrument vs person operating principles)"
+  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer"
+  source_index: "requirements.yaml"
+  status: "Planned"
+  type: "REQ"
+ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Architecture"
+  cross_references:
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Planned"
+  type: "ARCH"
+IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Implementation"
+  cross_references:
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+  type: "IMPL"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   cross_references:

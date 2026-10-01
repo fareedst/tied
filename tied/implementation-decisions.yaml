@@ -2388,6 +2388,14 @@ IMPL-TIED_RESEARCH_RECORDS:
     tests:
       - "mcp-server/src/research-records.test.ts"
       - "mcp-server/src/tools/batch-5-mcp.test.ts"
+IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer implementation"
+  status: "Active"
 IMPL-TIED_UNIFIED_TOOLCHAIN:
   description: "Workspace layout, CLI dispatch, MCP stdio entry, migration hooks, and deprecation switches for Go/Ruby tools."
   detail_file: "implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml"

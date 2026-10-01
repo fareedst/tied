@@ -1,0 +1,58 @@
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  description: "Make agent-as-instrument and sponsor-as-person operating principles explicit: role vocabulary, reversible/costly taxonomy, RESOLVE charter, hinge-field rule, consequence ladder, and warn-only hinge diagnostics in the checklist gate."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-01"
+  name: "Sponsor-Agent Relationship Layer"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Canonical sponsor/agent/reviewer vocabulary"
+      - "Consequence ladder for reversible vs costly choices"
+      - "Generalized hinge_field_incomplete diagnostic under existing gate"
+    problems_solved:
+      - "Fleet-local reversible/costly taxonomy"
+      - "Scattered escalation ladder"
+      - "Sponsor-vs-TIED disagreement unrouted"
+    why: "Roles and escalation are implicit across checklist and CITDP; generalized hinge hygiene and parity tests reduce drift and over-asking."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_VOCABULARY_OWNERSHIP"
+    related_to:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Bootstrap propagation of docs and templates promotion."
+      criterion_id: "SC-SAR-005"
+      metric: "manifest DOCS_TO_COPY + client-refresh-parity when promoted"
+    - criterion: "Checklist YAML/MD marker parity for five slugs."
+      criterion_id: "SC-SAR-003"
+      metric: "sponsor-agent-checklist-parity.test.ts"
+    - criterion: "Glossary and routing catalog the relationship layer."
+      criterion_id: "SC-SAR-001"
+      metric: "validate_vocab_index.rb + contract test"
+    - criterion: "Principles and AGENTS.md carry relationship markers."
+      criterion_id: "SC-SAR-002"
+      metric: "Static contract test"
+    - criterion: "TIED stack consistency and pseudo-code validation."
+      criterion_id: "SC-SAR-006"
+      metric: "tied_validate_consistency + Layer B/C"
+    - criterion: "validateHingeFields and gate wiring per OD-3."
+      criterion_id: "SC-SAR-004"
+      metric: "checklist-validator.test.ts VALIDATE_HINGE_FIELD"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    implementation:
+      - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    tests:
+      - "mcp-server/src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts"
+      - "mcp-server/src/relationship/consequence-ladder.test.ts"

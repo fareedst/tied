@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "phases": [
+    {
+      "phase": "pre_implementation",
+      "run_id": "closeout-sar-2026-10-01-pre_implementation",
+      "allowed": true,
+      "blockId": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#VALIDATE_HINGE_FIELD#5cc1fe6328a24bbe",
+      "receiptPath": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/closeout-inquiry-pre_implementation-run.json",
+      "gateReceiptPath": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/gate-pre_implementation-closeout-sar-2026-10-01.json"
+    },
+    {
+      "phase": "verification",
+      "run_id": "closeout-sar-2026-10-01-verification",
+      "allowed": true,
+      "blockId": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+      "receiptPath": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/closeout-inquiry-verification-run.json"
+    },
+    {
+      "phase": "close_out",
+      "run_id": "closeout-sar-2026-10-01-close_out",
+      "allowed": true,
+      "blockId": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+      "receiptPath": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/closeout-inquiry-close_out-run.json"
+    }
+  ]
+}

@@ -300,6 +300,18 @@ describe("new-tied-client integration", () => {
       if (!fs.existsSync(path.join(clientDir, "tied", "requirements.yaml"))) {
         throw new Error("requirements.yaml missing");
       }
+      const sarDoc = path.join(clientDir, "tied", "docs", "sponsor-agent-relationship.md");
+      const sarVocab = path.join(
+        clientDir,
+        "tied",
+        "methodology",
+        "vocab",
+        "sponsor-agent-relationship.md",
+      );
+      if (!fs.existsSync(sarDoc)) throw new Error("missing tied/docs/sponsor-agent-relationship.md");
+      if (!fs.existsSync(sarVocab)) {
+        throw new Error("missing tied/methodology/vocab/sponsor-agent-relationship.md");
+      }
       const yamlFiles = collectYamlFiles(clientDir);
       if (yamlFiles.length === 0) throw new Error("expected tied yaml files");
       const auditReport = path.join(clientDir, "working", "tied-new-client-audit.v1.json");

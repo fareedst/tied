@@ -885,6 +885,92 @@ function waiverDiagnosticsInvalid(section: Record<string, unknown> | undefined):
   return [];
 }
 
+function hasHingeEvidencePath(record: Record<string, unknown>): boolean {
+  return (
+    waiverFieldPresent(record.evidence_path)
+    || waiverFieldPresent(record.evidence_ref)
+    || waiverFieldPresent(record.referenced_verification_run_id)
+    || waiverFieldPresent(record.rationale)
+  );
+}
+
+function hingeMapHasPlaceholder(record: Record<string, unknown>): boolean {
+  for (const field of Object.values(record)) {
+    if (field === null || field === undefined) continue;
+    if (typeof field === "string" && (field.trim() === "" || PLACEHOLDER_WAIVER_VALUES.has(field.trim()))) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function validatePresentHingeMap(path: string, value: unknown): string[] {
+  if (value === null || value === undefined) return [];
+  if (!isRecord(value)) return [`hinge_field_incomplete:${path}`];
+  if (hingeMapHasPlaceholder(value)) return [`hinge_field_incomplete:${path}`];
+  const missing: string[] = [];
+  if (!waiverFieldPresent(value.owner)) missing.push(`hinge_field_incomplete:${path}`);
+  const approval = value.approval ?? value.review_status;
+  if (!waiverFieldPresent(approval)) missing.push(`hinge_field_incomplete:${path}`);
+  if (!hasHingeEvidencePath(value)) missing.push(`hinge_field_incomplete:${path}`);
+  return missing.length > 0 ? [`hinge_field_incomplete:${path}`] : [];
+}
+
+function validateResidualRiskHinge(value: unknown): string[] {
+  const path = "risk_analysis.residual_risk";
+  if (!isRecord(value) || !waiverFieldPresent(value.summary)) return [];
+  if (hingeMapHasPlaceholder(value)) return [`hinge_field_incomplete:${path}`];
+  if (!waiverFieldPresent(value.owner) || !waiverFieldPresent(value.expiry)) {
+    return [`hinge_field_incomplete:${path}`];
+  }
+  return [];
+}
+
+function citdpRecordRoot(citdp: unknown): Record<string, unknown> | undefined {
+  if (!isRecord(citdp)) return undefined;
+  const keys = Object.keys(citdp);
+  if (keys.length === 1 && isRecord(citdp[keys[0]])) return citdp[keys[0]] as Record<string, unknown>;
+  return citdp;
+}
+
+// [IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP] [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP] [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] — How: generalized hinge-field hygiene for present CITDP maps (VALIDATE_HINGE_FIELD).
+export function validateHingeFields(citdp: unknown): ValidationResult {
+  const record = citdpRecordRoot(citdp);
+  if (!record) return { ok: true, diagnostics: [] };
+  const diagnostics: string[] = [];
+  const risk = isRecord(record.risk_analysis) ? record.risk_analysis : undefined;
+  if (risk) {
+    const adversarial = isRecord(risk.adversarial_inquiry) ? risk.adversarial_inquiry : undefined;
+    if (adversarial) {
+      for (const key of ["integrated_waiver", "depth_change_waiver", "close_out_inquiry_waiver"] as const) {
+        diagnostics.push(...validatePresentHingeMap(`risk_analysis.adversarial_inquiry.${key}`, adversarial[key]));
+      }
+    }
+    const bbce = isRecord(risk.bbce_alignment) ? risk.bbce_alignment : undefined;
+    if (bbce) {
+      diagnostics.push(...validatePresentHingeMap(
+        "risk_analysis.bbce_alignment.shared_code_justification",
+        bbce.shared_code_justification,
+      ));
+    }
+    diagnostics.push(...validateResidualRiskHinge(risk.residual_risk));
+  }
+  const completion = isRecord(record.completion_criteria) ? record.completion_criteria : undefined;
+  if (completion) {
+    diagnostics.push(...validatePresentHingeMap("completion_criteria.strict_approval", completion.strict_approval));
+  }
+  const identity = isRecord(record.record_identity) ? record.record_identity : undefined;
+  if (identity) {
+    diagnostics.push(...validatePresentHingeMap("record_identity.disjoint_verifier_waiver", identity.disjoint_verifier_waiver));
+  }
+  const unique = [...new Set(diagnostics)];
+  return { ok: unique.length === 0, diagnostics: unique };
+}
+
+export function hingeDiagnosticsAreBlocking(gatePolicy: string | undefined): boolean {
+  return gatePolicy === "strict-candidate" || gatePolicy === "strict-approved";
+}
+
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: emit stable remediation diagnostics alongside granular codes.
 export function normalizeRemediationDiagnostics(diagnostics: readonly string[]): string[] {
   const out = new Set(diagnostics);
@@ -1387,6 +1473,13 @@ export function validateChecklistGate(input: {
   }
 
   diagnostics.push(...waiverDiagnosticsInvalid(section));
+
+  const hingeResult = validateHingeFields(input.citdp);
+  if (hingeDiagnosticsAreBlocking(gatePolicy)) {
+    diagnostics.push(...hingeResult.diagnostics);
+  } else if (hingeResult.diagnostics.length > 0) {
+    findingAdvisoryDiagnostics = [...findingAdvisoryDiagnostics, ...hingeResult.diagnostics];
+  }
 
   const parentChildResult = validateIntegratedParentChildSlugs({
     tracker: input.tracker,

@@ -40,6 +40,7 @@
 | 5g | [`decision-copilot.md`](decision-copilot.md) | Jev / System One decision coprocessor, shadow routing, noul gates, harness fail-closed blocking, bounded semantic decision engine, decision role taxonomy |
 | 5h | [`residuality.md`](residuality.md) | Residuality Theory stressors, residues, attractors, stressor-residue records, discovery loop |
 | 5i | [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) | BBCE behavioral slices, change locality, declared change surface, boundary violations |
+| 5j | [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) | Sponsor, agent, reviewer roles; instrument vs person branch; agency boundary; hinge fields; consequence ladder; reversible/costly choices |
 | — | [`config-discovery.md`](config-discovery.md) | Planned layered YAML config (stub; `(proposed)` terms) |
 
 ---

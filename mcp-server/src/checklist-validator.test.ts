@@ -12,6 +12,7 @@ import {
   validateActivationPairing,
   validateChecklistGate,
   validateDepthDowngrade,
+  validateHingeFields,
   validateEnvelopeBlockingCrossRead,
   validateEnvelopePsaHydration,
   validateIntegratedParentChildSlugs,
@@ -1011,6 +1012,125 @@ describe("disjoint verifier charter [REQ-TIED_DAE_VERIFICATION_CHARTER]", () => 
       },
     });
     assert.equal(result.allowed, true);
+  });
+});
+
+// [IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP] [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] — How: VALIDATE_HINGE_FIELD unit + gate composition (OD-3).
+describe("VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP]", () => {
+  const baseCitdp = {
+    "CITDP-TEST": {
+      risk_analysis: {
+        adversarial_inquiry: {
+          depth_tier: "integrated",
+          gate_policy: "advisory",
+          counterexamples: ["x"],
+          falsification_questions: ["y"],
+          disconfirming_observations: ["z"],
+          evidence_references: ["plan.md"],
+        },
+      },
+    },
+  };
+
+  it("absent or null hinge maps produce no hinge diagnostics", () => {
+    const result = validateHingeFields(baseCitdp);
+    assert.equal(result.ok, true);
+    assert.equal(result.diagnostics.length, 0);
+    const withNull = {
+      "CITDP-TEST": {
+        ...baseCitdp["CITDP-TEST"],
+        completion_criteria: { strict_approval: null },
+      },
+    };
+    assert.equal(validateHingeFields(withNull).diagnostics.length, 0);
+  });
+
+  it("placeholder strict_approval emits hinge_field_incomplete", () => {
+    const citdp = {
+      "CITDP-TEST": {
+        ...baseCitdp["CITDP-TEST"],
+        completion_criteria: { strict_approval: { reviewer: "~" } },
+      },
+    };
+    const result = validateHingeFields(citdp);
+    assert.ok(result.diagnostics.includes("hinge_field_incomplete:completion_criteria.strict_approval"));
+  });
+
+  it("BBCE shared_code_justification missing owner emits diagnostic", () => {
+    const citdp = {
+      "CITDP-TEST": {
+        risk_analysis: {
+          ...baseCitdp["CITDP-TEST"].risk_analysis,
+          bbce_alignment: {
+            shared_code_justification: { review_status: "pending_human" },
+          },
+        },
+      },
+    };
+    const result = validateHingeFields(citdp);
+    assert.ok(
+      result.diagnostics.includes("hinge_field_incomplete:risk_analysis.bbce_alignment.shared_code_justification"),
+    );
+  });
+
+  it("complete integrated_waiver does not add hinge diagnostic", () => {
+    const citdp = {
+      "CITDP-TEST": {
+        risk_analysis: {
+          adversarial_inquiry: {
+            ...baseCitdp["CITDP-TEST"].risk_analysis.adversarial_inquiry,
+            integrated_waiver: {
+              owner: "sponsor",
+              approval: "accepted",
+              rationale: "voluntary integrated depth",
+            },
+          },
+        },
+      },
+    };
+    assert.equal(validateHingeFields(citdp).diagnostics.length, 0);
+  });
+
+  it("residual_risk summary with placeholder expiry emits diagnostic", () => {
+    const citdp = {
+      "CITDP-TEST": {
+        risk_analysis: {
+          adversarial_inquiry: baseCitdp["CITDP-TEST"].risk_analysis.adversarial_inquiry,
+          residual_risk: { summary: "known gap", owner: "team", expiry: "~" },
+        },
+      },
+    };
+    assert.ok(
+      validateHingeFields(citdp).diagnostics.includes("hinge_field_incomplete:risk_analysis.residual_risk"),
+    );
+  });
+
+  it("advisory gate keeps allowed true with hinge diagnostics advisory", () => {
+    const citdp = {
+      ...minimalCitdp({ gate_policy: "advisory" }),
+      completion_criteria: { strict_approval: { reviewer: "~" } },
+    };
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: minimalTracker(),
+      citdp,
+    });
+    assert.equal(result.allowed, true);
+    assert.ok(result.diagnostics.some((d) => d.startsWith("hinge_field_incomplete:")));
+  });
+
+  it("strict-candidate gate blocks on hinge_field_incomplete", () => {
+    const citdp = {
+      ...minimalCitdp({ gate_policy: "strict-candidate" }),
+      completion_criteria: { strict_approval: { reviewer: "~" } },
+    };
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: minimalTracker(),
+      citdp,
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.some((d) => d.startsWith("hinge_field_incomplete:")));
   });
 });
 

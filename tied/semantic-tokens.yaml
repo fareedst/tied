@@ -825,8 +825,8 @@ ARCH-TIED_JEV_DECISION_COPROCESSOR:
 ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER:
   cross_references:
     - "IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER"
-    - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
     - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
   description: "Provider routing and local subprocess bridge on jevDecide"
   detail_file: "architecture-decisions/ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml"
   metadata:
@@ -872,6 +872,9 @@ ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  description: "Sponsor-agent relationship layer"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "IMPL-TIED_FILES"
@@ -1957,8 +1960,8 @@ IMPL-TIED_JEV_DECISION_COPROCESSOR:
 IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER:
   cross_references:
     - "ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER"
-    - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
     - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    - "REQ-TIED_JEV_LOCAL_DECISION_PROVIDER"
   description: "decision-provider router, local-client subprocess, harness backend readiness"
   detail_file: "implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml"
   metadata:
@@ -2004,6 +2007,9 @@ IMPL-TIED_RESEARCH_RECORDS:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  description: "Sponsor-agent relationship layer"
 IMPL-TIED_UNIFIED_TOOLCHAIN:
   cross_references:
     - "ARCH-TIED_UNIFIED_TOOLCHAIN"
@@ -3309,6 +3315,9 @@ REQ-TIED_SETUP:
   source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  description: "Sponsor-agent relationship layer"
 REQ-TIED_UNIFIED_TOOLCHAIN:
   category: "Tooling"
   cross_references:

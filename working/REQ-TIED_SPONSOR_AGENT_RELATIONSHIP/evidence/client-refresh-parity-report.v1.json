@@ -1,0 +1,619 @@
+{
+  "schema_version": "client-refresh-parity-report.v1",
+  "generated_at": "2026-10-01T19:59:01.437Z",
+  "source_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "client_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "options": {
+    "strict_refresh": false,
+    "semantic_yaml_compare": false,
+    "report_only": true
+  },
+  "parity_a": {
+    "label": "templates_vs_methodology",
+    "entries": [
+      {
+        "relative_path": ".tied-yaml.yaml",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      },
+      {
+        "relative_path": "agent-req-checklist-feat-spawned-phase5.v1.yaml",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      },
+      {
+        "relative_path": "architecture-decisions.yaml",
+        "disposition": "drifted",
+        "compare_mode": "sha256",
+        "source_sha256": "216824a51b2dd1412f58acbf0ac912d3f0f15476b49684278267119712deec4f",
+        "client_sha256": "c1e6f5d62e980ff04870f889d196ee14c1004ad9ea78d4a89922a1b8d988a8d4"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-EVIDENCE_CHAIN_PROFILE.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-MODULE_VALIDATION.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_STRUCTURE.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "impl-essence-pseudocode-template.md",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      },
+      {
+        "relative_path": "implementation-decisions.yaml",
+        "disposition": "drifted",
+        "compare_mode": "sha256",
+        "source_sha256": "5e5718544b77c9fdce926cd06c6aea1dc1c37ce569ccc2494bd9d3929250da08",
+        "client_sha256": "52dba010e4b0c0cf170747cb9e111adbe23e079fbd40187d5f33295e4ad33e1d"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MODULE_VALIDATION.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FILES-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FILES.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP-pseudocode.md",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "processes.md",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      },
+      {
+        "relative_path": "requirements.yaml",
+        "disposition": "drifted",
+        "compare_mode": "sha256",
+        "source_sha256": "46acda3455374ba96077cea2a6b5c778634791886dd47cee08a7f3cb22540dc4",
+        "client_sha256": "59a119b90201e8a4a15f899ef771a1c192a62308bc58fe7ba2ac4e8ec5ed1276"
+      },
+      {
+        "relative_path": "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "requirements/REQ-FEEDBACK_TO_TIED.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "requirements/REQ-MODULE_VALIDATION.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_SETUP.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+        "disposition": "missing",
+        "notes": "missing client methodology file"
+      },
+      {
+        "relative_path": "semantic-tokens.yaml",
+        "disposition": "drifted",
+        "compare_mode": "sha256",
+        "source_sha256": "8c6cd8a93e91c6631297e600e561c390271aed74a770059578e97b0202e7b3a4",
+        "client_sha256": "b539de66802067ec62d644e9fb2a21ba5bc6be1d8513d9d7899195c059544d2a"
+      }
+    ]
+  },
+  "parity_b": {
+    "label": "docs_to_copy_hashes",
+    "entries": [
+      {
+        "relative_path": "adding-tied-mcp-and-invoking-passes.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "72b3001d8379c6355f833957dbc42aedf5543dc79268d93453ad4042b2b3fa2e",
+        "client_sha256": "72b3001d8379c6355f833957dbc42aedf5543dc79268d93453ad4042b2b3fa2e"
+      },
+      {
+        "relative_path": "agent-preload-contract-template.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "aa8269c1378615e6470f76da9a50e27093cf95d627f03691877333f966930283",
+        "client_sha256": "aa8269c1378615e6470f76da9a50e27093cf95d627f03691877333f966930283"
+      },
+      {
+        "relative_path": "ai-principles.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "fb4e7c55be93a0ee43069239b97da6f31413ede50bf940875b4a4fd74b89fb6c",
+        "client_sha256": "fb4e7c55be93a0ee43069239b97da6f31413ede50bf940875b4a4fd74b89fb6c"
+      },
+      {
+        "relative_path": "agent-req-implementation-checklist.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "d4f2208fd4f4fda2c2834b61f6bd9ed3139194c39b2f71dc0e65bc2696ac0e80",
+        "client_sha256": "d4f2208fd4f4fda2c2834b61f6bd9ed3139194c39b2f71dc0e65bc2696ac0e80"
+      },
+      {
+        "relative_path": "architecture-decisions.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "075c156f7b945df1ce85b0e6ad8653bc130bfea06508c3758337d25fd0bf7d8c",
+        "client_sha256": "075c156f7b945df1ce85b0e6ad8653bc130bfea06508c3758337d25fd0bf7d8c"
+      },
+      {
+        "relative_path": "citdp-policy.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a16a6d4bd0680aed0efd1b70fb5460dd932197a8ea258c3be454247ccad0de58",
+        "client_sha256": "a16a6d4bd0680aed0efd1b70fb5460dd932197a8ea258c3be454247ccad0de58"
+      },
+      {
+        "relative_path": "sponsor-agent-relationship.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "1a650271ae9aff0029a7958a01956b8482ca0d5f691f1f63fd243517eaeb239a",
+        "client_sha256": "1a650271ae9aff0029a7958a01956b8482ca0d5f691f1f63fd243517eaeb239a"
+      },
+      {
+        "relative_path": "citdp-record-template.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "d71eecc9739a863e1200f8f73988d0186827546331455c7be65b27bb866dcbcc",
+        "client_sha256": "d71eecc9739a863e1200f8f73988d0186827546331455c7be65b27bb866dcbcc"
+      },
+      {
+        "relative_path": "client-development-index.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "1d7f20dd2548770868b5f54c99c8b99526c4bb284f1d68678768ca5432090568",
+        "client_sha256": "1d7f20dd2548770868b5f54c99c8b99526c4bb284f1d68678768ca5432090568"
+      },
+      {
+        "relative_path": "commit-guidelines.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a73638ed2f1fb7e9739cc9c2535e484898ebd89edfba8a606b3ffb4d911820e5",
+        "client_sha256": "a73638ed2f1fb7e9739cc9c2535e484898ebd89edfba8a606b3ffb4d911820e5"
+      },
+      {
+        "relative_path": "composition-coverage.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "e9a3fee4edf42dc489889235344abac0fc8859285b6c1491749bb422c805d999",
+        "client_sha256": "e9a3fee4edf42dc489889235344abac0fc8859285b6c1491749bb422c805d999"
+      },
+      {
+        "relative_path": "detail-files-schema.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8013e55b2cd269b8cddcb6ef993ca994a25abbb0481484eb45c059571d7676ff",
+        "client_sha256": "8013e55b2cd269b8cddcb6ef993ca994a25abbb0481484eb45c059571d7676ff"
+      },
+      {
+        "relative_path": "evidence-chain-profile.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "4b085d0f3721b7682cecb52a166d90be44776386e4f05023747ef929a2a06728",
+        "client_sha256": "4b085d0f3721b7682cecb52a166d90be44776386e4f05023747ef929a2a06728"
+      },
+      {
+        "relative_path": "agent-req-implementation-checklist.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "771ffc2af1e9c92f9f12d760bf44b777cb0dfdb15f30ab5e12bfc2ba60f9dd8b",
+        "client_sha256": "771ffc2af1e9c92f9f12d760bf44b777cb0dfdb15f30ab5e12bfc2ba60f9dd8b"
+      },
+      {
+        "relative_path": "ai-agent-tied-mcp-usage.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "e36741b943869b575351f4789fae4b08456bdc1bf10002025ca496d1196a3231",
+        "client_sha256": "e36741b943869b575351f4789fae4b08456bdc1bf10002025ca496d1196a3231"
+      },
+      {
+        "relative_path": "yaml-update-mcp-runbook.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "cd0659a1a55312cd494fc200b9f03886c9f3e24fcc9dde01986dab5db0aa5c6f",
+        "client_sha256": "cd0659a1a55312cd494fc200b9f03886c9f3e24fcc9dde01986dab5db0aa5c6f"
+      },
+      {
+        "relative_path": "implementation-decisions.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "e64bc825ab0df7a58132381f2e50d02112b3008d5b5f13f078779f9a14e2afb6",
+        "client_sha256": "e64bc825ab0df7a58132381f2e50d02112b3008d5b5f13f078779f9a14e2afb6"
+      },
+      {
+        "relative_path": "implementation-order.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8ebe0b06706971aecfc98c3d7c274af8f5ef49cf1ac718f54394e07a4b8657ff",
+        "client_sha256": "8ebe0b06706971aecfc98c3d7c274af8f5ef49cf1ac718f54394e07a4b8657ff"
+      },
+      {
+        "relative_path": "LEAP.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "2c19ca4381fea28fa779e0d614d1de05b655d99c135d850b39399d4fb90d28f5",
+        "client_sha256": "2c19ca4381fea28fa779e0d614d1de05b655d99c135d850b39399d4fb90d28f5"
+      },
+      {
+        "relative_path": "methodology-migration.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "f6c922eaa1f68364f83a90a09cba19c24f4aec9603b873be3ce3944660e9e576",
+        "client_sha256": "f6c922eaa1f68364f83a90a09cba19c24f4aec9603b873be3ce3944660e9e576"
+      },
+      {
+        "relative_path": "methodology-diagrams.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "82fe3f8230adb8edb0dfc5f122bfc7c33e6d5fcf1b8cdc8d2dc91c84ca0467f3",
+        "client_sha256": "82fe3f8230adb8edb0dfc5f122bfc7c33e6d5fcf1b8cdc8d2dc91c84ca0467f3"
+      },
+      {
+        "relative_path": "processes.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "3f7e2b764f9b84778b11151b4fe5d92ff3ed481195b564ada027d6c23c07aa3a",
+        "client_sha256": "3f7e2b764f9b84778b11151b4fe5d92ff3ed481195b564ada027d6c23c07aa3a"
+      },
+      {
+        "relative_path": "tied-fidelity-research.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "db71b5b00e1d4dd1c2bdd6491f6fdf9c70b731a7604ef811249aa639d4f6528a",
+        "client_sha256": "db71b5b00e1d4dd1c2bdd6491f6fdf9c70b731a7604ef811249aa639d4f6528a"
+      },
+      {
+        "relative_path": "tied-feature-onboarding.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "552a2939a7642563e45b2f0e4ddbb4c90fc08e5ffd3076559b7a6d785ed24bef",
+        "client_sha256": "552a2939a7642563e45b2f0e4ddbb4c90fc08e5ffd3076559b7a6d785ed24bef"
+      },
+      {
+        "relative_path": "pseudocode-format-and-practices.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "88b7a26e2c7c7765e3432b65511b0797962124cfa6e33b8f4a9eff30e351126b",
+        "client_sha256": "88b7a26e2c7c7765e3432b65511b0797962124cfa6e33b8f4a9eff30e351126b"
+      },
+      {
+        "relative_path": "pseudocode-fidelity-audit-agent-prompt.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a8d9cb87606233016bfe3dbf95fff3300b70f7d8742f9a7092a7ae28e33c8a51",
+        "client_sha256": "a8d9cb87606233016bfe3dbf95fff3300b70f7d8742f9a7092a7ae28e33c8a51"
+      },
+      {
+        "relative_path": "pseudocode-writing-and-validation.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "5724e8da18b914e1a5d0ffd0b5f307ad1312f7c59b02de5cf7ffcdd18c035f23",
+        "client_sha256": "5724e8da18b914e1a5d0ffd0b5f307ad1312f7c59b02de5cf7ffcdd18c035f23"
+      },
+      {
+        "relative_path": "pseudocode-validation-checklist.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "126bb19ffeb41305a8815639493e6478d703b6d4df385217b367c327c69d4cdc",
+        "client_sha256": "126bb19ffeb41305a8815639493e6478d703b6d4df385217b367c327c69d4cdc"
+      },
+      {
+        "relative_path": "prompt-type-skills.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "ae2247a2d16dcee8b60a50083dff2eecc283aa3f6fae6a5ba809a1fc299663d7",
+        "client_sha256": "ae2247a2d16dcee8b60a50083dff2eecc283aa3f6fae6a5ba809a1fc299663d7"
+      },
+      {
+        "relative_path": "quality-assurance-commands.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "119262ca92e55529f88338c1c45594217c0cd1670e5d772092148ca5f1405a7f",
+        "client_sha256": "119262ca92e55529f88338c1c45594217c0cd1670e5d772092148ca5f1405a7f"
+      },
+      {
+        "relative_path": "quality-assurance-pilot.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "2319acfde0cf9786d94e31d5160ff9f51c8782004949e7252754c8a1626f3108",
+        "client_sha256": "2319acfde0cf9786d94e31d5160ff9f51c8782004949e7252754c8a1626f3108"
+      },
+      {
+        "relative_path": "quality-evidence-manifest.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "36cd19ff2bff7f361625a717e1b5211db05cbf49ebc7b75976ee86b102450642",
+        "client_sha256": "36cd19ff2bff7f361625a717e1b5211db05cbf49ebc7b75976ee86b102450642"
+      },
+      {
+        "relative_path": "req-impl-state-guide-agent-workflow.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a2cd7a510e57982544cace0d056f8e39042e577c1d634eae205813a701bef743",
+        "client_sha256": "a2cd7a510e57982544cace0d056f8e39042e577c1d634eae205813a701bef743"
+      },
+      {
+        "relative_path": "requirement-list-state-guide-agent-workflow.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "07e7484097501e4ebcde0fb2256cbf017e3bee10062f4380e0925f7a8abd106c",
+        "client_sha256": "07e7484097501e4ebcde0fb2256cbf017e3bee10062f4380e0925f7a8abd106c"
+      },
+      {
+        "relative_path": "requirements.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "164fb2c8da1a8e48d52487f435047de15e80c396a53e6218ab74a64f936a589e",
+        "client_sha256": "164fb2c8da1a8e48d52487f435047de15e80c396a53e6218ab74a64f936a589e"
+      },
+      {
+        "relative_path": "semantic-tokens.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "999c6fd3672069d4cd344ca1a5a581898ac725388c1dfc6a2dfc6fbceea6eba2",
+        "client_sha256": "999c6fd3672069d4cd344ca1a5a581898ac725388c1dfc6a2dfc6fbceea6eba2"
+      },
+      {
+        "relative_path": "tied-first-implementation-procedure.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8c390a934c292bb32039370e12ce6df672a3d562a45eed934b3f22e0a663d6b4",
+        "client_sha256": "8c390a934c292bb32039370e12ce6df672a3d562a45eed934b3f22e0a663d6b4"
+      },
+      {
+        "relative_path": "tied-yaml-agent-index.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "2d55553f2c7a956a0baeffe5d63503d615d0d983eae6b019a481669ed1b80b8e",
+        "client_sha256": "2d55553f2c7a956a0baeffe5d63503d615d0d983eae6b019a481669ed1b80b8e"
+      },
+      {
+        "relative_path": "using-tied-without-mcp.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "3a9f0c5cc05c08c7dc9aa8eefab191a39862d814732f2ac4c95dc3ed457b40be",
+        "client_sha256": "3a9f0c5cc05c08c7dc9aa8eefab191a39862d814732f2ac4c95dc3ed457b40be"
+      },
+      {
+        "relative_path": "vocabulary-index-analysis-and-standards.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "0c4f58d2e75984baa752a3c24f89180de8e0f25c71f1238f230355ca18f63121",
+        "client_sha256": "0c4f58d2e75984baa752a3c24f89180de8e0f25c71f1238f230355ca18f63121"
+      },
+      {
+        "relative_path": "tied-domain-vocabulary-research-prompt.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "f8c5b2d2e1d6516b6426fe8ee9c985242207b1dac09c8e39dc67cb36845d9f16",
+        "client_sha256": "f8c5b2d2e1d6516b6426fe8ee9c985242207b1dac09c8e39dc67cb36845d9f16"
+      },
+      {
+        "relative_path": "vocabulary-layer-tied-leap-citdp.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "bb485dc2882ced586cfafd8d2dc33eb93f2dbe781cf8f5084202213c1bae30e8",
+        "client_sha256": "bb485dc2882ced586cfafd8d2dc33eb93f2dbe781cf8f5084202213c1bae30e8"
+      }
+    ]
+  },
+  "summary": {
+    "methodology_drift_count": 4,
+    "doc_drift_count": 0,
+    "missing_count": 50,
+    "preserved_by_policy_count": 4
+  }
+}

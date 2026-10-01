@@ -1955,6 +1955,13 @@ ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_RESEARCH_RECORD_BOUNDARY.yaml"
   name: "External research record boundary"
   status: "Active"
+ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  cross_references:
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer architecture"
+  status: "Planned"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - cons:

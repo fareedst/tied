@@ -22,7 +22,7 @@
 | **speculative fan-out** | sequential LLM chain | Many `questions` in one `/v1/decide` call |
 | **shadow routing** | replace routing.md | Log Jev glossary picks vs keyword PRELOAD without changing behavior |
 | **Jev ready-made API** | custom decide only | Shortcuts such as agent risk, context filter, model route |
-| **confidence threshold policy** | magic cutoff | Pinned per model version; medium → confirm, low → escalate |
+| **confidence threshold policy** | magic cutoff | Pinned per model version; medium → confirm, low → escalate on the **consequence ladder** (rung 4: tier-4 frontier / sponsor approval — see [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md)) |
 | **`jev_data_tier`** | GDPR mode (alone) | `standard_us` for US operator; `eu_strict` optional per client CITDP |
 | **fail-closed tool block** | Auto Mode (Cursor) | W5 harness may deny high-risk tools; deny if Jev unavailable for blocking set |
 | **harness dist gate** | missing-dist fail-open (2B) | Opt-in W5: require `mcp-server/dist/jev/harness-tool-guard.js` before dry-run/live proceed |

@@ -1,0 +1,71 @@
+
+src/fixture-corpus-regression.test.ts:
+(pass) fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > runs all 17 corpus cases with expected gate decisions [23.28ms]
+(pass) fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > A4 missing pairing rejects with activation_pairing_incomplete [0.16ms]
+
+src/checklist-validator.test.ts:
+(pass) VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT > blocks pending steps and generic skip dispositions
+(pass) VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT > requires every explicitly governed step to be present
+(pass) VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT > requires evidence, rationale, and waiver ownership by disposition [0.05ms]
+(pass) VALIDATE_ADVERSARIAL_CONTRACT REQ-TIED_CHECKLIST_GATE_ENFORCEMENT > requires the complete minimal evidence set [0.05ms]
+(pass) VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT > rejects stale identities and accepts a complete matching pair [0.14ms]
+(pass) VALIDATE_ACTIVATION_PAIRING REQ-TIED_CHECKLIST_GATE_ENFORCEMENT > rejects cross-phase and root-projection artifact paths [Slice P] [0.13ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > fails closed when integrated depth omits activation [0.04ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > requires auto sub-adversarial slug even when caller omits required_step_slugs [0.10ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > unions caller slugs with auto slugs and cannot subtract auto slugs [0.07ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > passes integrated verification with VolumeStats-style fixture [0.05ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > rejects the same run_id when receipt phase differs from gate phase [0.04ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > rejects verification receipt submitted as close_out activation even with citation [0.06ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > requires depth-change waiver when downgrading from integrated to minimal [0.04ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > skips downgrade diagnostic when prior_depth_tier is missing [0.02ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > requires completion_criteria.activation at verification and close_out [0.03ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > fails strict_candidate at close_out without pairing [0.10ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > allows strict_candidate at pre_implementation with counterexamples only [0.04ms]
+(pass) VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > allows close_out with close-out inquiry waiver instead of pairing [0.05ms]
+(pass) VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > rejects placeholder close_out inquiry waiver (1787507684 shape) [0.03ms]
+(pass) VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > derives expected from receipt when activation omits expected [0.14ms]
+(pass) VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > fails when receipt is incomplete and expected is omitted [0.04ms]
+(pass) VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > fails minimal depth when sub-adversarial-inquiry-pass is pending [0.05ms]
+(pass) VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > fails integrated depth when parent slug is completed and sub-stub is pending [0.05ms]
+(pass) VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > validateIntegratedParentChildSlugs detects parent completed with pending sub-stub [0.02ms]
+(pass) VALIDATE_CHECKLIST_GATE Slice 0 hotfixes [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > rejects placeholder depth-change waiver on downgrade [0.01ms]
+(pass) VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > warns when triggered minimal depth lacks integrated_waiver [0.06ms]
+(pass) VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > is clean when triggered minimal depth has complete integrated_waiver [0.04ms]
+(pass) VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > does not warn for non-triggered minimal depth [0.03ms]
+(pass) VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > does not warn for integrated depth even when triggers are recorded [0.05ms]
+(pass) VALIDATE_MINIMAL_WAIVER Slice A3 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > validateMinimalWaiver isolates advisory diagnostic semantics [0.03ms]
+(pass) Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > A1 rejects sparse legacy summary without matching step rows [0.03ms]
+(pass) Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > A6 passes minimal pre_implementation gate for Go writer fixture [0.05ms]
+(pass) Go writer fixture gate composition [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > A7 fails integrated writer output without activation under advisory policy [0.20ms]
+(pass) validateEnvelopePsaHydration W7-D5 > fails verification when envelope reports PSA expected_artifact_missing without reports [0.07ms]
+(pass) validateEnvelopePsaHydration W7-D5 > passes when pseudocode reports are hydrated for impl inventory
+(pass) validateEnvelopePsaHydration W7-D5 > skips when gate-pseudocode-validation is not completed [0.01ms]
+(pass) validateEnvelopeBlockingCrossRead [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > blocks when envelopeBlocking and error-severity gap present
+(pass) validateEnvelopeBlockingCrossRead [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] > allows warn-severity gaps when envelopeBlocking [0.02ms]
+(pass) disjoint verifier charter [REQ-TIED_DAE_VERIFICATION_CHARTER] > blocks verification when implementer and verifier session ids match [0.03ms]
+(pass) disjoint verifier charter [REQ-TIED_DAE_VERIFICATION_CHARTER] > allows when sessions differ [0.09ms]
+(pass) VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > absent or null hinge maps produce no hinge diagnostics [0.02ms]
+(pass) VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > placeholder strict_approval emits hinge_field_incomplete [0.02ms]
+(pass) VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > BBCE shared_code_justification missing owner emits diagnostic [0.04ms]
+(pass) VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > complete integrated_waiver does not add hinge diagnostic [0.01ms]
+(pass) VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > residual_risk summary with placeholder expiry emits diagnostic [0.01ms]
+(pass) VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > advisory gate keeps allowed true with hinge diagnostics advisory [0.03ms]
+(pass) VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > strict-candidate gate blocks on hinge_field_incomplete [0.02ms]
+(pass) Stage P trigger: non-agentstream unresolved evidence_refs > A32 trigger fires when gate accepts manual Tracker with nonexistent evidence_refs [0.02ms]
+
+src/relationship/consequence-ladder.test.ts:
+(pass) CLASSIFY_DECISION_CONSEQUENCE [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > returns rung 1 for reversible documented defaults
+(pass) CLASSIFY_DECISION_CONSEQUENCE [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > returns rung 2 when reversibility evidence is recorded [0.06ms]
+(pass) CLASSIFY_DECISION_CONSEQUENCE [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > returns rung 4 when status or clients are affected
+(pass) ROUTE_SPONSOR_TIED_DISAGREEMENT [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > never returns a contradiction finding route [0.03ms]
+(pass) ROUTE_SPONSOR_TIED_DISAGREEMENT [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > routes rung 3+ to sponsor question [0.01ms]
+
+src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts:
+(pass) AUDIT_RELATIONSHIP_LAYER_CONTRACT checklist parity [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > YAML tasks and MD sections share relationship markers per slug [1.54ms]
+
+src/e2e/sponsor-agent-relationship-contract.test.ts:
+(pass) AUDIT_RELATIONSHIP_LAYER_CONTRACT [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] > glossary, routing, principles, AGENTS, citdp-policy, manifest, prompt-shared, templates [0.51ms]
+
+ 57 pass
+ 0 fail
+Ran 57 tests across 5 files. [49.00ms]

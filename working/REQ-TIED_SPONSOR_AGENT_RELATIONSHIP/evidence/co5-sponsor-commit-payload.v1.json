@@ -1,0 +1,10 @@
+{
+  "schema_version": "co5-sponsor-commit-payload.v1",
+  "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+  "run_id": "closeout-sar-2026-10-01",
+  "proposed_commit_message": "Add sponsor–agent relationship layer with hinge-field gate diagnostics.\n\nArticulate roles and consequence ladder in vocab and checklist; enforce validateHingeFields under existing checklist gate (warn-only advisory).",
+  "exclude_paths": [
+    "tied/citdp/CITDP-REQ-USPS_ADDRESS_VERIFICATION.yaml",
+    "working/REQ-TIED_JEV_TOOL_SAFETY_GATING/"
+  ]
+}

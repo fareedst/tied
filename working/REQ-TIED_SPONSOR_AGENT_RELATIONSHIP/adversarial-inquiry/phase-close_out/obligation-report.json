@@ -1,0 +1,99 @@
+{
+  "canonicalMutation": false,
+  "findings": [],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP#criterion-1",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-tied_sponsor_agent_relationship"
+      },
+      {
+        "from": "constraint:constraint-tied_sponsor_agent_relationship",
+        "kind": "constraint_block",
+        "to": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88"
+      },
+      {
+        "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+        "kind": "block_evidence",
+        "to": "evidence:prod-1"
+      },
+      {
+        "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+        "kind": "block_evidence",
+        "to": "evidence:test-1"
+      },
+      {
+        "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+        "kind": "block_evidence",
+        "to": "evidence:test-2"
+      },
+      {
+        "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+        "kind": "block_case",
+        "to": "case:CE-001"
+      },
+      {
+        "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+        "kind": "block_case",
+        "to": "case:CE-002"
+      },
+      {
+        "from": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+        "kind": "block_case",
+        "to": "case:CE-003"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "case:CE-001",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-002",
+        "kind": "case"
+      },
+      {
+        "id": "case:CE-003",
+        "kind": "case"
+      },
+      {
+        "id": "constraint:constraint-tied_sponsor_agent_relationship",
+        "kind": "constraint"
+      },
+      {
+        "id": "evidence:prod-1",
+        "kind": "evidence",
+        "revision": "closeout-sar-2026-10-01"
+      },
+      {
+        "id": "evidence:test-1",
+        "kind": "evidence",
+        "revision": "closeout-sar-2026-10-01"
+      },
+      {
+        "id": "evidence:test-2",
+        "kind": "evidence",
+        "revision": "closeout-sar-2026-10-01"
+      },
+      {
+        "id": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88",
+        "kind": "block",
+        "revision": "413b32adad62ffe9"
+      },
+      {
+        "id": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP#criterion-1",
+        "kind": "criterion",
+        "revision": "criterion-rev-tied_sponsor_agent_relationship"
+      }
+    ],
+    "projectId": "cfd5bf6ad98024eb"
+  },
+  "projectId": "cfd5bf6ad98024eb",
+  "proofBoundaries": [],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP#AUDIT_RELATIONSHIP_LAYER_CONTRACT#d572bdd0e0e7ff88"
+  ]
+}

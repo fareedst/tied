@@ -1,0 +1,26 @@
+ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  alternatives_considered:
+    - name: "Blocking hinge under advisory"
+      rationale: "Over-enforcement (OD-3)"
+      rejected: true
+    - name: "Extend pseudocode-and-citdp only"
+      rationale: "Cross-cutting roles deserve dedicated routing row"
+      rejected: true
+    - name: "New PROC token"
+      rationale: "Duplicates PROC-AGENT_REQ_CHECKLIST and PROC-VOCABULARY_INDEX"
+      rejected: true
+  decision: "Vocab + principles + warn-only hinge diagnostic under advisory; blocking under strict-*; consequence ladder as single escalation reference."
+  description: "Articulate roles and agency boundary in vocabulary and principles; enforce hinge-field hygiene and checklist parity via existing checklist gate validator and static contract tests; route to existing PROC tokens without new PROC."
+  name: "Sponsor-Agent Relationship Layer architecture"
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    see_also:
+      - "ARCH-TIED_STRUCTURE"
+  status: "Planned"
+  traceability:
+    implementation:
+      - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    requirements:
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"

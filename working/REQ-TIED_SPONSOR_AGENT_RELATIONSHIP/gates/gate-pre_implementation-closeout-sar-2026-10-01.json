@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/pre_implementation-2026-10-01T20-01-52-613Z.json",
+    "hash": "sha256:afea8a6295710fe327bf9595acde170901f548b96417c1b5eb1aa66d766d5a59"
+  }
+}

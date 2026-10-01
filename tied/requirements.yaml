@@ -2301,6 +2301,18 @@ REQ-TIED_SETUP:
       method: "Manual verification"
     - coverage: "All index files have corresponding detail directories with proper naming"
       method: "Structure validation"
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_UNIFIED_TOOLCHAIN:
   category: "Tooling"
   description: "Deliver a single-language (primary: TypeScript/Node) developer and operator tool suite for macOS and Windows that consolidates MCP server, agentstream, bootstrap, YAML tooling, and shell wrappers behind one workspace build and umbrella CLI, with phased migration off Go and Ruby implementations."

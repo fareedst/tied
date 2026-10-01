@@ -1,0 +1,7 @@
+{
+  "phase": "pre_implementation",
+  "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+  "tracker_path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/agent-req-implementation-checklist.yaml",
+  "citdp_path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+}

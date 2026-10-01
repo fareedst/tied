@@ -103,6 +103,18 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
     implementation:
       - "IMPL-TIED_ADVERSARIAL_INQUIRY"
       - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer"
+  priority: "P1"
+  status: "Planned"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

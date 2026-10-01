@@ -39,6 +39,7 @@ This document centralizes every instruction AI coding assistants must follow whi
   - IMPL `essence_pseudocode` is the **most critical artifact** for implementation traceability. Without token comments in pseudo-code, traceability from REQ→ARCH→IMPL breaks at the pseudo-code layer and tests/code cannot be reliably aligned to requirements.
   - **Every block** in `essence_pseudocode` must have a comment that (1) names all REQ, ARCH, and IMPL reflected in that block and (2) states how that block implements those requirements. Top-level: one comment naming IMPL, ARCH, and REQ plus a one-line summary; sub-blocks with the same set → comment only the "how"; sub-blocks with a different set → comment listing that set and how the sub-block implements it.
   - **Contract precision:** new/changed Active procedure blocks declare PRE/POST/EFFECTS (and FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable); Layer B SHAPE-003..006. Distinct from domain vocab in `tied/vocab/`.
+- **Sponsor–agent relationship** — Principle 16 and [`tied/vocab/sponsor-agent-relationship.md`](tied/vocab/sponsor-agent-relationship.md): instrument branch for the agent, person branch for sponsor/reviewer, **agency boundary condition**, **consequence ladder**, **reversible choice** / **costly choice**, **RESOLVE charter** (names only, not intent authority).
 - **Domain vocabulary discipline** `[PROC-VOCABULARY_INDEX]`
   - **Three mandatory touchpoints** (executor: `sub-vocabulary-sync` in `[PROC-AGENT_REQ_CHECKLIST]`):
     | Touchpoint | When | Mode |
@@ -99,6 +100,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 - [ ] **Domain vocabulary** ([PROC-VOCABULARY_INDEX]): **PRELOAD** — read client `tied/vocab/routing.md`, dispatch to methodology `tied/methodology/vocab/routing.md`, match task keywords across both layers, and open only matched glossaries before reading TIED YAML or source (Touchpoint 2)
 
 ### 3.3 During Work
+- [ ] At **`risk-assessment`**, classify open decisions as **reversible choice** vs **costly choice** on the **consequence ladder**; surface costly choices at end of turn (see `tied/docs/sponsor-agent-relationship.md`).
 - [ ] **Do not edit methodology YAML** in the client (`tied/methodology/`); add and edit REQ/ARCH/IMPL only in **project** YAML under `tied/` ([PROC-TIED_METHODOLOGY_READONLY]).
 - [ ] Use semantic tokens in code comments and test names
 - [ ] **IMPL `essence_pseudocode`**: Every block has a comment naming REQ/ARCH/IMPL and how the block implements them; add/update when authoring or editing IMPL pseudo-code

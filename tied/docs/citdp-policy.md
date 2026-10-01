@@ -130,6 +130,17 @@ For small but real behavior changes, some teams still want a **short** CITDP rec
 
 After `copy_files.sh`, use the layout in **`./tied/docs/citdp-record-template.yaml`** when creating `tied/citdp/CITDP-{change_request_id}.yaml` (see **persist-citdp-record** in `agent-req-implementation-checklist.yaml`).
 
+## Hinge fields
+
+A **hinge field** is a CITDP map that is simultaneously measurement for the agent and consent for the sponsor/reviewer. When present (non-null), require:
+
+- `owner`
+- `approval` or `review_status`
+- one of `evidence_path`, `evidence_ref`, `referenced_verification_run_id`, or `rationale`
+- `expiry` when time-bounded (e.g. residual risk with `summary`)
+
+Placeholder values (`~`, empty strings) are invalid. The checklist gate emits `hinge_field_incomplete:<dotted.path>` — **warn-only** under `gate_policy: advisory`; **blocking** under `strict-candidate` or `strict-approved`. Instances include adversarial inquiry waivers, `completion_criteria.strict_approval`, BBCE `shared_code_justification`, residual risk, and `disjoint_verifier_waiver`. See `tied/vocab/sponsor-agent-relationship.md`.
+
 ## References
 
 - `tied/docs/processes.md` § `[PROC-CITDP]` (especially step 8 — persistence).

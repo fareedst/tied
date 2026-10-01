@@ -190,6 +190,42 @@ export function buildGateInputForCase(testCase: CorpusCase, root = repoRoot()) {
         tracker = integratedTracker("close_out");
         activation = buildActivation("verification", "verification-run-remediation");
         break;
+      case "synthetic:hinge_strict_approval_complete": {
+        const base = integratedCitdp() as Record<string, unknown>;
+        const completion = (base.completion_criteria ?? {}) as Record<string, unknown>;
+        citdp = {
+          ...base,
+          completion_criteria: {
+            ...completion,
+            strict_approval: {
+              owner: "sponsor",
+              approval: "accepted",
+              evidence_path: "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/od-acceptance.json",
+            },
+          },
+        };
+        tracker = integratedTracker("verification");
+        activation = buildActivation("verification", "sar-corpus-hinge-complete");
+        evidence.trackerSource = "authoritative_file";
+        break;
+      }
+      case "synthetic:strict_approval_placeholder": {
+        const base = integratedCitdp() as Record<string, unknown>;
+        const completion = (base.completion_criteria ?? {}) as Record<string, unknown>;
+        citdp = {
+          ...base,
+          completion_criteria: {
+            ...completion,
+            strict_approval: {
+              reviewer: "~",
+            },
+          },
+        };
+        tracker = integratedTracker("verification");
+        activation = buildActivation("verification", "sar-corpus-hinge-incomplete");
+        evidence.trackerSource = "authoritative_file";
+        break;
+      }
       default:
         break;
     }

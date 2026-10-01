@@ -1,7 +1,7 @@
 {
   "schema_version": "regression-manifest.v1",
-  "stdd_revision": "b151a8451641ce893f8108ca6f9e9f9dd082c665",
-  "corpus_manifest_ref": "848ea2bf9298dde880977af20ef68c67aa36ca18fef65ef7c848e9a67dedc259",
+  "stdd_revision": "9614ccc3b24472f0d22a067479d7356137fa1374",
+  "corpus_manifest_ref": "e61102244b1d839b132c407aa4d44ff1461030418a12cb2ff5ed6b47372787fa",
   "gate_receipts": [
     {
       "phase": "pre_implementation",
@@ -132,7 +132,8 @@
         "tracker_not_authoritative",
         "waiver_invalid",
         "integrated_depth_requires_pairing",
-        "activation_pairing_incomplete"
+        "activation_pairing_incomplete",
+        "hinge_field_incomplete:risk_analysis.adversarial_inquiry.close_out_inquiry_waiver"
       ],
       "matches_expected": true,
       "classification": "stdd_guard_confirmed"
@@ -212,6 +213,24 @@
       "classification": "stdd_guard_confirmed"
     },
     {
+      "case_id": "SAR-A20-hinge-complete-advisory",
+      "acceptance_row": "SAR-A20",
+      "actual_allowed": true,
+      "actual_diagnostics": [],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
+      "case_id": "SAR-A21-hinge-incomplete-advisory",
+      "acceptance_row": "SAR-A21",
+      "actual_allowed": true,
+      "actual_diagnostics": [
+        "hinge_field_incomplete:completion_criteria.strict_approval"
+      ],
+      "matches_expected": true,
+      "classification": "stdd_guard_confirmed"
+    },
+    {
       "case_id": "A11-valid-integrated-verification",
       "acceptance_row": "A11",
       "actual_allowed": true,
@@ -236,7 +255,7 @@
     }
   ],
   "classification_summary": {
-    "stdd_guard_confirmed": 15,
+    "stdd_guard_confirmed": 17,
     "needs_review": 0
   },
   "residual_risks": [

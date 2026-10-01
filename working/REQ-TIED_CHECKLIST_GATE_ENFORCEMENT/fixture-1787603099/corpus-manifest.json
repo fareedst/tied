@@ -157,6 +157,24 @@
       "expected_allowed": false,
       "expected_diagnostics": ["activation_pairing_incomplete"],
       "proof_boundary": "Advisory gate_policy does not bypass fail-closed activation pairing."
+    },
+    {
+      "id": "SAR-A20-hinge-complete-advisory",
+      "acceptance_row": "SAR-A20",
+      "input_refs": ["synthetic:hinge_strict_approval_complete"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": true,
+      "expected_diagnostics": [],
+      "proof_boundary": "[REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] complete strict_approval hinge map yields no hinge_field_incomplete under advisory."
+    },
+    {
+      "id": "SAR-A21-hinge-incomplete-advisory",
+      "acceptance_row": "SAR-A21",
+      "input_refs": ["synthetic:strict_approval_placeholder"],
+      "expected_gate_phase": "verification",
+      "expected_allowed": true,
+      "expected_diagnostics": ["hinge_field_incomplete"],
+      "proof_boundary": "[REQ-TIED_SPONSOR_AGENT_RELATIONSHIP] placeholder strict_approval warns with hinge_field_incomplete; allowed stays true under advisory."
     }
   ],
   "positive_case": {

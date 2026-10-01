@@ -12,7 +12,7 @@
    any trigger matches (external input, auth, network, persistence, strict close-out), default
    `depth_tier` is `integrated` — do not set `minimal` or record `integrated_waiver` without
    sponsor confirmation with real owner, expiry, rationale, and approval in CITDP. Run the
-   `pre_implementation` checklist gate before any RED test or code.
+   `pre_implementation` checklist gate before any RED test or code. Classify open decisions on the **consequence ladder**; proceed on **reversible choice** defaults; collect **costly choice** items for the end-of-turn sponsor question.
 5. Design tests and security mitigations per **Checklist** / **`test-strategy`**. If behavior changes, write RED (failing) tests that lock the **desired** behavior--not silent preservation of the old behavior unless that is the explicit goal.
 6. If a change is recommended but out of scope, capture it in `leap-proposals/` (if the project uses it) or a dated note in the task working folder for a future CITDP evaluation.
 

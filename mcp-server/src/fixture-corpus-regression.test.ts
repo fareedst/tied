@@ -47,13 +47,13 @@ function loadAdversarialInquiryRuns(root: string) {
 }
 
 describe("fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () => {
-  it("runs all 15 corpus cases with expected gate decisions", () => {
+  it("runs all 17 corpus cases with expected gate decisions", () => {
     const manifest = loadCorpusManifest();
     const cases = [...manifest.negative_cases, manifest.positive_case];
-    assert.equal(cases.length, 15);
+    assert.equal(cases.length, 17);
 
     const results = runAllCorpusCases();
-    assert.equal(results.length, 15);
+    assert.equal(results.length, 17);
 
     const failures = results.filter((item) => !item.matches_expected);
     if (failures.length > 0) {

@@ -200,6 +200,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 5. For adversarial inquiry, state that research profile, assurance profile, and gate policy are independent; `strict-candidate` is not blocking.
 6. Record anti-examples, ambiguity probes, and an unchanged-behavior checklist in the phase plan (in addition to profile/policy separation already present).
 7. **Touchpoint 1 (prompt intake):** **Reword fuzzy sponsor wording that names concepts** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RESOLVE**) to map synonyms/ambiguous sponsor terms onto the preferred domain terms in `tied/vocab/*.md` before mapping intent to phases; **CALL sub-vocabulary-sync** (**RECORD**) for any genuinely new concept the sponsor introduces so it is captured immediately.
+8. **RESOLVE charter** and **delegated work envelope**: RESOLVE changes concept names, not sponsor intent authority (non-goals, approvals, irreversible choices). State what this request's **delegated work envelope** allows the agent to do without asking (bounded by approved plan, CITDP, Tracker, documented defaults).
 
 **Outcomes**: Sponsor wording translated into an explicit checklist-phase plan using canonical domain terms; agent primed to follow slug order rather than imperative goal phrasing alone.
 
@@ -399,6 +400,7 @@ Full typed-flow enforcement of AWAIT/Promise consistency is deferred to W4; docu
    - **Incompatible OUTPUT types** — IMPL-A produces `{ result }` but IMPL-B expects `{ result, metadata }` from the same procedure; or FAILURE_MODES disagree.
    - **Duplicate logic** — the same step appears in two IMPLs with different parameters or behavior.
    - Derive contradiction flags from explicit counterexamples; append warn-level findings to the per-request finding ledger when a counterexample reveals a contradiction.
+   - **sponsor-vs-TIED disagreement** is **not** an IMPL contradiction — route to `sub-leap-micro-cycle` or a sponsor question (see `tied/docs/sponsor-agent-relationship.md`).
 
 **Branch**: IF two IMPLs have irreconcilable assumptions THEN refactor (split or restructure) one IMPL before proceeding. Do not paper over contradictions.
 
@@ -459,10 +461,11 @@ Full typed-flow enforcement of AWAIT/Promise consistency is deferred to W4; docu
 6. For strict inquiry policy, record negative controls, bounded execution, explicit proof boundaries, deterministic scope, waiver owner/expiry, and the human approval requirement.
 7. Select and document the adversarial depth tier (`minimal` | `integrated` | `strict_candidate`) and, when blocking is desired later, list every strict-eligibility prerequisite with owner.
 8. Record the selected **assurance profile**, proof boundaries, and which evidence-chain edges are in scope. Keep inquiry `research_profile` separate from **evidence-chain profile depth**.
+9. Classify each open decision as a **reversible choice** (proceed on documented default) or **costly choice** (list as sponsor question with recommended default; surface at end of turn). Record **consequence ladder** rung for each **hinge field** present on the working CITDP.
 
 **Outcomes**: Risks documented with token references. Mitigations identified.
 
-**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 4.
+**Reference**: `tied/docs/processes.md` § `[PROC-CITDP]` step 4; `tied/docs/sponsor-agent-relationship.md`.
 
 ---
 
@@ -742,7 +745,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Vocabulary benefit**: Preserves the canonical terms used to explain the change, its risks, and any divergence from the original analysis.
 
 **Tasks**:
-1. Populate the CITDP YAML record with:
+1. Every **hinge field** present on the CITDP carries `owner`, `approval` or `review_status`, and an evidence path; never placeholder values (`~`, empty).
+2. Populate the CITDP YAML record with:
    - **Record identity**: change request ID, date, author.
    - **Change definition** (from change-definition): current behavior, desired behavior, unchanged behavior, non-goals, success criteria.
    - **Impact analysis** (from impact-discovery): affected modules, tied_context, IMPL inventory.
@@ -919,6 +923,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Tasks**:
 1. **STOP** writing production code immediately.
+1a. IF the divergence originates from sponsor intent THEN confirm it is inside the **delegated work envelope** before LEAP; ELSE raise a sponsor question (costly choice).
 2. **Update IMPL** `essence_pseudocode`: add the missing block, fix the contract, or add the new dependency comment. **CALL sub-yaml-edit-loop** on the detail file.
 3. **Update or add the test** to match the corrected pseudo-code. Carry the same token comments.
 4. **Update the production code** to pass the corrected test. Carry the same token comments.

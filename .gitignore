@@ -197,6 +197,17 @@ working/**/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-verify-result.json
 !working/REQ-TIED_JEV_TOOL_SAFETY_GATING/tied-verify-payload.json
 !working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/activation-collect-close_out.json
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/**
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/**
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/**
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/pseudocode-analysis/
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/pseudocode-analysis/**
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/agent-req-implementation-checklist.yaml
+!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/plan-close-out-handoff.md
 !working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/request-evidence-envelope.v1.json
 !working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/verification-evidence-manifest.v1.json
 !working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/evidence-chain-profile.v1.json
