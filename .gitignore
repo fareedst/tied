@@ -102,6 +102,7 @@ working/**/create-req.json
 !working/REQ-TIED_DAE_INCORPORATION/create-impl.json
 !working/REQ-TIED_DAE_INCORPORATION/create-req.json
 working/**/validate-consistency.json
+working/**/tied-validate-consistency*.json
 working/**/p*-yaml-updates.json
 working/**/adversarial-inquiry-p*-run.json
 working/**/evidence/quality/**/*.stdout.txt

@@ -169,17 +169,17 @@ test_all() {
   (
     set -euo pipefail
     echo "DEBUG: test-all step 1/6: build_mcp"
-    build_mcp
+    build_mcp || exit 1
     echo "DEBUG: test-all step 2/6: test_mcp"
-    test_mcp
+    test_mcp || exit 1
     echo "DEBUG: test-all step 3/6: test_tied_cli_smoke"
-    test_tied_cli_smoke
+    test_tied_cli_smoke || exit 1
     echo "DEBUG: test-all step 4/6: validate_tied"
-    validate_tied
+    validate_tied || exit 1
     echo "DEBUG: test-all step 5/6: validate_vocab"
-    validate_vocab
+    validate_vocab || exit 1
     echo "DEBUG: test-all step 6/6: lint_tied"
-    lint_tied
+    lint_tied || exit 1
     echo "DEBUG: test-all completed successfully"
   ) || rc=$?
   if (( rc != 0 )); then

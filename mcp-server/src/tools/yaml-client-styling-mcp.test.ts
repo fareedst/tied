@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { describe, it } from "node:test";
 import { allTools } from "./index.js";
 
@@ -18,15 +21,28 @@ describe("tied_client_yaml_styling_apply composition [REQ-TIED_YAML_STYLE_CONFIG
   });
 
   it("returns not_configured when repository hook is absent", async () => {
-    const result = await toolHandler("tied_client_yaml_styling_apply")({
-      file_path: "tied/requirements.yaml",
-    });
-    const payload = JSON.parse(result.content[0]?.text ?? "{}") as {
-      ok?: boolean;
-      styling_status?: string;
-      styling?: { styling_status?: string };
-    };
-    assert.equal(payload.ok, true);
-    assert.equal(payload.styling_status ?? payload.styling?.styling_status, "not_configured");
+    const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-styling-mcp-"));
+    const tiedBasePath = path.join(projectRoot, "tied");
+    fs.mkdirSync(tiedBasePath);
+    const yamlPath = path.join(tiedBasePath, "requirements.yaml");
+    fs.writeFileSync(yamlPath, "REQ-EXAMPLE:\n  name: example\n");
+    const previousBasePath = process.env.TIED_BASE_PATH;
+    try {
+      process.env.TIED_BASE_PATH = tiedBasePath;
+      const result = await toolHandler("tied_client_yaml_styling_apply")({
+        file_path: yamlPath,
+      });
+      const payload = JSON.parse(result.content[0]?.text ?? "{}") as {
+        ok?: boolean;
+        styling_status?: string;
+        styling?: { styling_status?: string };
+      };
+      assert.equal(payload.ok, true);
+      assert.equal(payload.styling_status ?? payload.styling?.styling_status, "not_configured");
+    } finally {
+      if (previousBasePath === undefined) delete process.env.TIED_BASE_PATH;
+      else process.env.TIED_BASE_PATH = previousBasePath;
+      fs.rmSync(projectRoot, { recursive: true, force: true });
+    }
   });
 });

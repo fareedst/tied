@@ -44,6 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Post Laya close-out git-hygiene (`jev-laya-post-closeout-git-hygiene-2026-09-30`)** — `test-all` subshell steps fail fast with explicit `|| exit 1`; add [`refresh-tied-client.sh`](scripts/refresh-tied-client.sh); isolate `TIED_BASE_PATH` in onboarding and YAML MCP/canonicalizer tests; sync DOC-JEV-LAYA `gates/ledger.jsonl` + missing close-out receipt. Receipt: [git-hygiene-receipt-2026-09-30.md](working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/git-hygiene-receipt-2026-09-30.md). REQ status unchanged.
+
 - **Gitignore close-out hygiene ([PROC-GITIGNORE_CLOSE_OUT])** — Ignore `mcp-server/working/` MCP gate scratch,
   `working/*-CLIENT-*/` disposable client demos, and `working/REQ-ENVELOPE_TRACKER_HASH_STABILITY/` debug probes;
   canonical-sort residuality LEAP list fields in feature REQ/ARCH/IMPL YAML and checklist sub-procedure order.

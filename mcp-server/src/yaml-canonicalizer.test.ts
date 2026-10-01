@@ -107,22 +107,33 @@ test("preserves opaque block-scalar bodies REQ-TIED_YAML_CANONICALIZATION", () =
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 // How: Return stable metadata describing the canonical profile and its preservation boundaries.
 test("reports tied-yaml-canonical-v1 metadata REQ-TIED_YAML_CANONICALIZATION", () => {
-  const metadata = formatYamlMetadata();
-  assert.equal(metadata.profile_id, "tied-yaml-canonical-v1");
-  assert.equal(metadata.scalar_style, "unwrapped");
-  assert.ok(["default", "repository"].includes(metadata.style_source));
-  assert.equal(
-    metadata.recursive_key_order,
-    "case-insensitive-primary locale-independent lexical with original-value tie-break",
-  );
-  assert.equal(metadata.ordered_list_key_pattern, "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*");
-  assert.equal(metadata.string_list_rule, "sort all-string lists except ordered-list keys");
-  assert.equal(
-    metadata.record_list_rule,
-    "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
-  );
-  assert.equal(metadata.scalar_policy, "preserve string, boolean, number, and null types");
-  assert.equal(metadata.opaque_block_policy, "preserve block-scalar bodies and IMPL pseudo-code sidecars");
+  const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-metadata-"));
+  const tiedBasePath = path.join(projectRoot, "tied");
+  fs.mkdirSync(tiedBasePath);
+  const previousBasePath = process.env.TIED_BASE_PATH;
+  try {
+    process.env.TIED_BASE_PATH = tiedBasePath;
+    const metadata = formatYamlMetadata();
+    assert.equal(metadata.profile_id, "tied-yaml-canonical-v1");
+    assert.equal(metadata.scalar_style, "unwrapped");
+    assert.ok(["default", "repository"].includes(metadata.style_source));
+    assert.equal(
+      metadata.recursive_key_order,
+      "case-insensitive-primary locale-independent lexical with original-value tie-break",
+    );
+    assert.equal(metadata.ordered_list_key_pattern, "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*");
+    assert.equal(metadata.string_list_rule, "sort all-string lists except ordered-list keys");
+    assert.equal(
+      metadata.record_list_rule,
+      "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
+    );
+    assert.equal(metadata.scalar_policy, "preserve string, boolean, number, and null types");
+    assert.equal(metadata.opaque_block_policy, "preserve block-scalar bodies and IMPL pseudo-code sidecars");
+  } finally {
+    if (previousBasePath === undefined) delete process.env.TIED_BASE_PATH;
+    else process.env.TIED_BASE_PATH = previousBasePath;
+    fs.rmSync(projectRoot, { recursive: true, force: true });
+  }
 });
 
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]

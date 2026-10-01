@@ -8,12 +8,24 @@ import { dispatchOnboardingCommand } from "./onboarding.js";
 describe("ONBOARDING_COMMANDS REQ-FEAT_ONBOARDING_COMMANDS", () => {
   it("delegates feature new to the shared feature store", () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "batch6-onboarding-"));
-    const result = dispatchOnboardingCommand(["feature", "new", "Count lines"], { project_root: root, capabilities: { node: true, mcp: true, feature_orchestrator: true } });
+    const previousBasePath = process.env.TIED_BASE_PATH;
+    delete process.env.TIED_BASE_PATH;
+    try {
+    const tiedBase = path.join(root, "tied");
+    const result = dispatchOnboardingCommand(["feature", "new", "Count lines"], {
+      project_root: root,
+      capabilities: { node: true, mcp: true, feature_orchestrator: true },
+      defaults: { basePath: tiedBase, featureDirectory: path.join(tiedBase, "features") },
+    });
     assert.equal(result.ok, true);
     if (!result.ok) return;
     assert.equal(result.delegate, "FeatureStore.createIdempotently");
     assert.match(result.next_action, /feature build/);
     assert.equal(fs.readdirSync(path.join(root, "tied", "features")).some((name) => name.startsWith("FEAT-001-")), true);
+    } finally {
+      if (previousBasePath === undefined) delete process.env.TIED_BASE_PATH;
+      else process.env.TIED_BASE_PATH = previousBasePath;
+    }
   });
 
   it("reports an actionable prerequisite instead of mutating config", () => {
