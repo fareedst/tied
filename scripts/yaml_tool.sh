@@ -18,6 +18,7 @@ usage() {
   printf '               Rejects the sort when semantic comparison fails (file unchanged).\n' 1>&2
   printf '  --sort-keys   with --sort-lists, also sort sibling map keys at every indent level.\n' 1>&2
   printf '  -q, --quiet   with --sort-lists, suppress success summaries.\n' 1>&2
+  printf '  -v, --verbose  print a one-line summary on stderr after lint (file count).\n' 1>&2
   printf '  -F, --find [DIR [GLOB]]  run find internally (default DIR=. GLOB=*.yaml);\n' 1>&2
   printf '     quote GLOB to avoid shell expansion. Mutually exclusive with file args / stdin.\n' 1>&2
   printf '  Unusual find expressions: use find ... -print0 | %s -0 (paths NUL-separated).\n' "${0##*/}" 1>&2
@@ -76,6 +77,7 @@ find_base='.'
 find_name='*.yaml'
 sort_keys=false
 quiet=false
+verbose=false
 check_mode=false
 
 while [ "$#" -gt 0 ]; do
@@ -94,6 +96,10 @@ while [ "$#" -gt 0 ]; do
       ;;
     -q | --quiet)
       quiet=true
+      shift
+      ;;
+    -v | --verbose)
+      verbose=true
       shift
       ;;
     --check)
@@ -161,10 +167,19 @@ fi
 
 # Collect paths: --find, CLI args, or stdin (newline- or NUL-separated).
 paths=()
+find_rc=0
 if [ "$find_mode" = true ]; then
+  _find_tmp=$(mktemp -t yaml_tool_find.XXXXXX)
+  find "$find_base" -type f -name "$find_name" -print0 >"$_find_tmp" || find_rc=$?
+  if [ "$find_rc" -ne 0 ]; then
+    rm -f "$_find_tmp"
+    printf '%s: find failed under %q (exit %s)\n' "${0##*/}" "$find_base" "$find_rc" 1>&2
+    exit "$find_rc"
+  fi
   while IFS= read -r -d '' line || [ -n "${line:-}" ]; do
     [ -n "$line" ] && paths+=("$line")
-  done < <(find "$find_base" -type f -name "$find_name" -print0)
+  done <"$_find_tmp"
+  rm -f "$_find_tmp"
 elif [ "$#" -gt 0 ]; then
   if [ "$#" -eq 1 ] && [ "$1" = "-" ]; then
     if "$null_delim"; then
@@ -197,12 +212,22 @@ else
 fi
 
 if [ "${#paths[@]}" -eq 0 ]; then
-  exit 0
+  if [ "$find_mode" = true ]; then
+    printf '%s: no files matched -name %q under %q\n' "${0##*/}" "$find_name" "$find_base" 1>&2
+  else
+    printf '%s: no input paths\n' "${0##*/}" 1>&2
+  fi
+  exit 1
 fi
 
 case "$operation" in
   lint)
     lint_yaml_files "${paths[@]}"
+    lint_rc=$?
+    if [ "$verbose" = true ] && [ "$lint_rc" -eq 0 ]; then
+      printf '%s: linted %s YAML file(s)\n' "${0##*/}" "${#paths[@]}" 1>&2
+    fi
+    exit "$lint_rc"
     ;;
   sort_lists)
     sort_yaml_list_files "${paths[@]}"

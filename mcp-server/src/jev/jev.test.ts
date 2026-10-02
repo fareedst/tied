@@ -6,11 +6,15 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { jevDecide, redactString, resolveJevConfig } from "./index.js";
 
+function remoteTraceEnv(extra: NodeJS.ProcessEnv = {}): NodeJS.ProcessEnv {
+  return { TIED_JEV_DECISION_PROVIDER: "remote", ...extra };
+}
+
 describe("REQ-TIED_JEV_DECISION_COPROCESSOR jev client", () => {
   it("jevDecide skips when no credentials", async () => {
     const result = await jevDecide("hello", {
       urgent: { type: "noul", instructions: "Is this urgent?" },
-    }, { apiKey: undefined });
+    }, { apiKey: undefined, traceEnv: remoteTraceEnv() });
     assert.equal(result.ok, false);
     if (!result.ok && result.skipped) {
       assert.equal(result.reason, "no_credentials");
@@ -44,6 +48,7 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR jev client", () => {
         apiKey: "jv_live_test",
         apiBase: "https://example.test/api",
         fetchImpl,
+        traceEnv: remoteTraceEnv(),
       },
     );
 
@@ -78,7 +83,7 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR jev client", () => {
     const result = await jevDecide(
       "x",
       { ok: { type: "noul", instructions: "?" } },
-      { apiKey: "k", fetchImpl },
+      { apiKey: "k", fetchImpl, traceEnv: remoteTraceEnv() },
     );
     assert.equal(n, 2);
     assert.equal(result.ok, true);

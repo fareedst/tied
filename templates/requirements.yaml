@@ -103,18 +103,29 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
     implementation:
       - "IMPL-TIED_ADVERSARIAL_INQUIRY"
       - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  category: "Methodology"
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  category: "Tooling"
   cross_references:
-    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    - "REQ-TIED_SETUP"
-    - "REQ-TIED_VOCABULARY_OWNERSHIP"
-  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer"
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for shared checklist evidence gate (composed_with sponsor-agent hinge validation)"
+  name: "Machine-enforced checklist evidence gates"
   priority: "P1"
-  status: "Planned"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    related_to:
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"
@@ -154,3 +165,15 @@ REQ-TIED_SETUP:
       - "ARCH-TIED_STRUCTURE"
     implementation:
       - "IMPL-TIED_FILES"
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer"
+  priority: "P1"
+  status: "Planned"

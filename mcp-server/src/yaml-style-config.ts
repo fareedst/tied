@@ -41,6 +41,43 @@ export function getDefaultTiedBasePath(): string {
   return path.isAbsolute(configured) ? configured : path.resolve(process.cwd(), configured);
 }
 
+function isTiedProjectRoot(projectRoot: string): boolean {
+  const tiedDir = path.join(projectRoot, "tied");
+  if (!fs.existsSync(tiedDir) || !fs.statSync(tiedDir).isDirectory()) {
+    return false;
+  }
+  return (
+    fs.existsSync(path.join(tiedDir, "requirements.yaml")) ||
+    fs.existsSync(path.join(tiedDir, "semantic-tokens.yaml"))
+  );
+}
+
+/** Walk upward from a YAML file path to find the client tied directory under a TIED project. */
+export function resolveTiedBasePathForYamlFile(filePath: string): string | undefined {
+  let dir = path.dirname(path.resolve(filePath));
+  for (;;) {
+    if (isTiedProjectRoot(dir)) {
+      return path.join(dir, "tied");
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) {
+      return undefined;
+    }
+    dir = parent;
+  }
+}
+
+/** Prefer the TIED project containing the YAML file; otherwise MCP/CLI default. */
+export function tiedBasePathForYamlContext(contextFilePath?: string): string {
+  if (contextFilePath) {
+    const fromFile = resolveTiedBasePathForYamlFile(contextFilePath);
+    if (fromFile) {
+      return fromFile;
+    }
+  }
+  return getDefaultTiedBasePath();
+}
+
 function parseConfigFile(filePath: string): unknown {
   let raw: string;
   try {

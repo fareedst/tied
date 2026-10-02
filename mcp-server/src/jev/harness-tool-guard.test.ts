@@ -26,6 +26,22 @@ const harnessOn = {
   blockWhenUnavailable: true,
 };
 
+/** Isolate remote Jev tests from shell TIED_JEV_DECISION_PROVIDER=local. */
+function remoteJevClientConfig(
+  overrides: { apiKey?: string; fetchImpl?: typeof fetch; maxStateChars?: number } = {},
+) {
+  const traceEnv: NodeJS.ProcessEnv = {
+    ...process.env,
+    TIED_JEV_DECISION_PROVIDER: "remote",
+    ...("apiKey" in overrides && overrides.apiKey !== undefined
+      ? { JEV_API_KEY: overrides.apiKey }
+      : {}),
+  };
+  delete traceEnv.TIED_JEV_LOCAL_BRIDGE;
+  const { apiKey, fetchImpl, maxStateChars } = overrides;
+  return { apiKey, fetchImpl, maxStateChars, traceEnv };
+}
+
 function mockJevResponse(destructive: number, scope: number) {
   return async () =>
     new Response(
@@ -136,7 +152,7 @@ json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model"
     const out = await evaluateHarnessToolCall(
       { tool: "bash", arguments: "npm test" },
       harnessOn,
-      { apiKey: "k", fetchImpl },
+      remoteJevClientConfig({ apiKey: "k", fetchImpl }),
     );
     assert.equal(out.decision, "block");
     assert.equal(out.reason, "jev_error_fail_closed");
@@ -146,7 +162,7 @@ json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model"
     const out = await evaluateHarnessToolCall(
       { tool: "bash", arguments: "x".repeat(50_000), goal: "y".repeat(50_000) },
       harnessOn,
-      { apiKey: "k", maxStateChars: 100 },
+      remoteJevClientConfig({ apiKey: "k", maxStateChars: 100 }),
     );
     assert.equal(out.decision, "block");
     assert.equal(out.reason, "jev_skip_fail_closed");
@@ -178,7 +194,7 @@ json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model"
     const out = await evaluateHarnessToolCall(
       { tool: "bash", arguments: "curl https://example.com" },
       harnessOn,
-      { apiKey: "k", fetchImpl: mockJevResponse(0.95, 0.2) },
+      remoteJevClientConfig({ apiKey: "k", fetchImpl: mockJevResponse(0.95, 0.2) }),
     );
     assert.equal(out.decision, "block");
     assert.equal(out.risk, 0.95);
@@ -189,7 +205,7 @@ json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model"
     const out = await evaluateHarnessToolCall(
       { tool: "Shell", arguments: "git status" },
       harnessOn,
-      { apiKey: "k", fetchImpl: mockJevResponse(0.2, 0.55) },
+      remoteJevClientConfig({ apiKey: "k", fetchImpl: mockJevResponse(0.2, 0.55) }),
     );
     assert.equal(out.decision, "confirm");
     assert.equal(out.risk, 0.55);
@@ -200,7 +216,7 @@ json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model"
     const out = await evaluateHarnessToolCall(
       { tool: "bash", arguments: "bun test" },
       harnessOn,
-      { apiKey: "k", fetchImpl: mockJevResponse(0.1, 0.2) },
+      remoteJevClientConfig({ apiKey: "k", fetchImpl: mockJevResponse(0.1, 0.2) }),
     );
     assert.equal(out.decision, "allow");
     assert.ok(out.risk! < CONFIRM_RISK_THRESHOLD);
@@ -210,7 +226,10 @@ json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model"
     const out = await evaluateHarnessToolCall(
       { tool: "bash", arguments: "ls" },
       harnessOn,
-      { apiKey: "k", fetchImpl: mockJevResponse(BLOCK_RISK_THRESHOLD, 0.1) },
+      remoteJevClientConfig({
+        apiKey: "k",
+        fetchImpl: mockJevResponse(BLOCK_RISK_THRESHOLD, 0.1),
+      }),
     );
     assert.equal(out.decision, "block");
   });
@@ -240,7 +259,7 @@ json.dump({"schema":"jev-local-bridge-response.v1","ok":True,"response":{"model"
         workspace: "/Users/me/secret-project",
       },
       harnessOn,
-      { apiKey: "k", fetchImpl },
+      remoteJevClientConfig({ apiKey: "k", fetchImpl }),
     );
     assert.doesNotMatch(capturedBody, /jv_live_secret123/);
     assert.doesNotMatch(capturedBody, /\/Users\/me\/secret-project/);

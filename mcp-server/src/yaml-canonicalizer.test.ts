@@ -295,6 +295,37 @@ test("preserves implementation_order files list under *_order key REC-ORDERED-KE
   );
 });
 
+test("lint uses repository style from YAML file path when TIED_BASE_PATH points elsewhere REQ-TIED_YAML_STYLE_CONFIGURATION", () => {
+  const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-cross-base-"));
+  const tiedBasePath = path.join(projectRoot, "tied");
+  fs.mkdirSync(tiedBasePath);
+  fs.writeFileSync(path.join(tiedBasePath, "requirements.yaml"), "{}\n");
+  const filePath = path.join(tiedBasePath, "record.yaml");
+  const otherRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-other-base-"));
+  const otherTied = path.join(otherRoot, "tied");
+  fs.mkdirSync(otherTied);
+  const previousBasePath = process.env.TIED_BASE_PATH;
+  try {
+    fs.writeFileSync(path.join(projectRoot, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    fs.writeFileSync(filePath, "message: hello\n");
+    process.env.TIED_BASE_PATH = otherTied;
+
+    const result = writeCanonicalYamlAtomic(filePath);
+
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    const output = fs.readFileSync(filePath, "utf8");
+    assert.match(output, /message: "hello"/);
+    assert.equal(result.yaml_format.scalar_style, "wrapped");
+    assert.equal(result.yaml_format.style_source, "repository");
+  } finally {
+    if (previousBasePath === undefined) delete process.env.TIED_BASE_PATH;
+    else process.env.TIED_BASE_PATH = previousBasePath;
+    fs.rmSync(projectRoot, { recursive: true, force: true });
+    fs.rmSync(otherRoot, { recursive: true, force: true });
+  }
+});
+
 test("wrapped style quotes strings and preserves typed scalar output REQ-TIED_YAML_STYLE_CONFIGURATION", () => {
   const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-wrapped-"));
   const tiedBasePath = path.join(projectRoot, "tied");

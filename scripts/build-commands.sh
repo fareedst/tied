@@ -265,15 +265,15 @@ _new_tied_test_client() {
 }
 
 new_tied_client() {
-  local client_dir="${1:?usage: new-tied-client CLIENT_DIR [TIED_SOURCE_ROOT]}"
-  local source_root="${2:-${TIED_SOURCE_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
+  local client_dir="${1:?usage: new-tied-client CLIENT_DIR [TIED_REPO_ROOT]}"
+  local source_root="${2:-${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
   _new_tied_test_client "$client_dir" "$source_root"
 }
 alias new-tied-client=new_tied_client
 
 make_new_tied_client() {
   local test_root="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
-  local source_root="${TIED_SOURCE_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
+  local source_root="${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
   local dn
   dn=$(date +%s)
   mkdir -p "$test_root/$dn"
@@ -284,8 +284,8 @@ alias test-new-tied-client=make_new_tied_client
 alias setx-test-new-tied-client='( set -x; make_new_tied_client ); echo "rc=$?"'
 
 new_claude_tied_client() {
-  local client_dir="${1:?usage: new-claude-tied-client CLIENT_DIR [TIED_SOURCE_ROOT]}"
-  local source_root="${2:-${TIED_SOURCE_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
+  local client_dir="${1:?usage: new-claude-tied-client CLIENT_DIR [TIED_REPO_ROOT]}"
+  local source_root="${2:-${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
   node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
     --harness claude --with-agentstream-dry-run \
     --source-root "${source_root}" "${client_dir}"
@@ -294,7 +294,7 @@ alias new-claude-tied-client=new_claude_tied_client
 
 make_new_claude_tied_client() {
   local test_root="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
-  local source_root="${TIED_SOURCE_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
+  local source_root="${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
   node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
     --disposable --harness claude --with-agentstream-dry-run \
     --source-root "${source_root}" --test-root "${test_root}"
@@ -302,8 +302,8 @@ make_new_claude_tied_client() {
 alias test-new-claude-tied-client=make_new_claude_tied_client
 
 validate_claude_tied_client() {
-  local client_dir="${1:?usage: validate-claude-tied-client CLIENT_DIR [TIED_SOURCE_ROOT]}"
-  local source_root="${2:-${TIED_SOURCE_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
+  local client_dir="${1:?usage: validate-claude-tied-client CLIENT_DIR [TIED_REPO_ROOT]}"
+  local source_root="${2:-${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
   node "${source_root}/scripts/run-tied-claude-client-validation.mjs" \
     --client-root "${client_dir}" --source-root "${source_root}" --with-agentstream-dry-run
 }
@@ -590,7 +590,7 @@ _how_env() {
 Environment (this script sets TIED_MCP_COLLECT_METRICS=1 on source)
   TIED_BASE_PATH             tied/ directory for tied-cli and MCP
   TIED_MCP_BIN               path to mcp-server/dist/index.js
-  TIED_SOURCE_ROOT           TIED repo root for new-tied-client / test-new-tied-client
+  TIED_REPO_ROOT             TIED repo root for new-tied-client / test-new-tied-client
   TIED_TEST_ROOT             parent dir for test-new-tied-client (default ~/Documents/dev/test)
   TIED_SKIP_NEW_CLIENT_AUDIT set to 1 to skip G4 onboarding audit in bootstrap smoke
   TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1  opt-in consistency during Claude client validation

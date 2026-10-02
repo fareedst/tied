@@ -128,34 +128,6 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
       - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
     requirements:
       - "REQ-TIED_ADVERSARIAL_INQUIRY"
-ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  cross_references:
-    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
-  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer architecture"
-  status: "Planned"
-ARCH-TIED_FIDELITY_RESEARCH:
-  cross_references:
-    - "REQ-TIED_FIDELITY_RESEARCH"
-  detail_file: "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml"
-  metadata:
-    last_updated:
-      reason: "Methodology seed for read-only fidelity research; procedure: tied/docs/tied-fidelity-research.md"
-  name: "Read-Only Fidelity Research Boundary"
-  related_decisions:
-    depends_on:
-      - "ARCH-MODULE_VALIDATION"
-      - "ARCH-TIED_STRUCTURE"
-    informs:
-      - "IMPL-TIED_FIDELITY_RESEARCH"
-    see_also:
-      - "ARCH-QUALITY_ASSURANCE_PROFILES"
-  status: "Active"
-  traceability:
-    implementation:
-      - "IMPL-TIED_FIDELITY_RESEARCH"
-    requirements:
-      - "REQ-TIED_FIDELITY_RESEARCH"
 ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   cross_references:
     - "ARCH-TIED_STRUCTURE"
@@ -179,6 +151,55 @@ ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
       - "IMPL-TIED_FILES"
     requirements:
       - "REQ-TIED_SETUP"
+ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  detail_file: "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for shared checklist evidence gate"
+  name: "Shared checklist evidence gate boundary"
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    informs:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+ARCH-TIED_FIDELITY_RESEARCH:
+  cross_references:
+    - "REQ-TIED_FIDELITY_RESEARCH"
+  detail_file: "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for read-only fidelity research; procedure: tied/docs/tied-fidelity-research.md"
+  name: "Read-Only Fidelity Research Boundary"
+  related_decisions:
+    depends_on:
+      - "ARCH-MODULE_VALIDATION"
+      - "ARCH-TIED_STRUCTURE"
+    informs:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    see_also:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+    requirements:
+      - "REQ-TIED_FIDELITY_RESEARCH"
+ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  cross_references:
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer architecture"
+  status: "Planned"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "REQ-TIED_SETUP"

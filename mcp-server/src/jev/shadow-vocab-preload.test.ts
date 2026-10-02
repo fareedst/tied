@@ -19,6 +19,10 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROUTING_PATH = path.join(__dirname, "../../../tied/vocab/routing.md");
 
+function remoteTraceEnv(): NodeJS.ProcessEnv {
+  return { TIED_JEV_DECISION_PROVIDER: "remote" };
+}
+
 describe("REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing", () => {
   const routingMd = fs.readFileSync(ROUTING_PATH, "utf8");
   const rows = parseRoutingTableMarkdown(routingMd);
@@ -72,6 +76,7 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing", () => {
     const log = await shadowVocabPreloadFromRows("tied agentstream batch", rows, {
       apiKey: "test",
       fetchImpl,
+      traceEnv: remoteTraceEnv(),
     });
     assert.equal(log.jev_skipped, false);
     assert.equal(log.jev_error, true);
@@ -117,6 +122,7 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing", () => {
     const log = await shadowVocabPreloadFromRows("tied agentstream batch", rows, {
       apiKey: "test",
       fetchImpl,
+      traceEnv: remoteTraceEnv(),
     });
     assert.ok(log.jev_glossaries.includes("config-discovery"));
     assert.ok(log.keyword_glossaries.includes("agentstream"));

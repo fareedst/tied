@@ -147,6 +147,7 @@ export async function runPlanSkillsShadow(
     model: jevCfg.model,
     maxStateChars: jevCfg.maxStateChars,
     fetchImpl: withTimeoutFetch(input.fetchImpl ?? globalThis.fetch, cfg.timeout_ms),
+    traceEnv: env,
   };
 
   const state = { prompt, plan_excerpt: planExcerpt || undefined, skill };

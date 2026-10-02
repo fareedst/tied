@@ -336,7 +336,7 @@ describe("new-tied-client integration", () => {
       {
         cwd: repoRoot,
         encoding: "utf8",
-        env: { ...process.env, TIED_SOURCE_ROOT: repoRoot },
+        env: { ...process.env, TIED_REPO_ROOT: repoRoot },
       }
     );
 
@@ -371,7 +371,7 @@ describe("new-tied-client integration", () => {
       {
         cwd: repoRoot,
         encoding: "utf8",
-        env: { ...process.env, TIED_SOURCE_ROOT: repoRoot },
+        env: { ...process.env, TIED_REPO_ROOT: repoRoot },
       }
     );
 
@@ -407,7 +407,7 @@ describe("new-tied-client integration", () => {
         encoding: "utf8",
         env: {
           ...process.env,
-          TIED_SOURCE_ROOT: repoRoot,
+          TIED_REPO_ROOT: repoRoot,
           TIED_MCP_COLLECT_METRICS: "1",
           TIED_MCP_METRICS_CLIENT: "stdd-dev",
         },

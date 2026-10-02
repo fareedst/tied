@@ -345,11 +345,11 @@ esac
             #   local _root
             #   _root="$(_realpath "${SCRIPT_DIR}")"
             #   local _patch_rc=0
-            #   TIED_CLI_PATH="${_cli}" TIED_SOURCE_ROOT="${_root}" TIED_CLI_MARKER="${TIED_CLI_REPO_ROOT_MARKER}" \
+            #   TIED_CLI_PATH="${_cli}" TIED_REPO_ROOT="${_root}" TIED_CLI_MARKER="${TIED_CLI_REPO_ROOT_MARKER}" \
             #     python3 -c '
             # import os, sys
             # path = os.environ["TIED_CLI_PATH"]
-            # root = os.environ["TIED_SOURCE_ROOT"]
+            # root = os.environ["TIED_REPO_ROOT"]
             # marker = os.environ["TIED_CLI_MARKER"]
             # old_line = f": \"${{TIED_REPO_ROOT:={marker}}}\""
             # new_line = f": \"${{TIED_REPO_ROOT:={root}}}\""

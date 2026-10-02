@@ -67,6 +67,8 @@ describe("jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR]", () => {
   let tempDir = "";
   let prevHarness = "";
   let prevKey = "";
+  let prevDecisionProvider = "";
+  let prevLocalBridge = "";
 
   afterEach(() => {
     if (tempDir) {
@@ -82,6 +84,16 @@ describe("jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR]", () => {
       delete process.env.JEV_API_KEY;
     } else {
       process.env.JEV_API_KEY = prevKey;
+    }
+    if (prevDecisionProvider === "") {
+      delete process.env.TIED_JEV_DECISION_PROVIDER;
+    } else {
+      process.env.TIED_JEV_DECISION_PROVIDER = prevDecisionProvider;
+    }
+    if (prevLocalBridge === "") {
+      delete process.env.TIED_JEV_LOCAL_BRIDGE;
+    } else {
+      process.env.TIED_JEV_LOCAL_BRIDGE = prevLocalBridge;
     }
   });
 
@@ -105,8 +117,12 @@ describe("jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR]", () => {
   it("warns fail-closed when enabled without JEV_API_KEY", () => {
     prevHarness = process.env.AGENTSTREAM_JEV_HARNESS ?? "";
     prevKey = process.env.JEV_API_KEY ?? "";
+    prevDecisionProvider = process.env.TIED_JEV_DECISION_PROVIDER ?? "";
+    prevLocalBridge = process.env.TIED_JEV_LOCAL_BRIDGE ?? "";
     process.env.AGENTSTREAM_JEV_HARNESS = "1";
     delete process.env.JEV_API_KEY;
+    process.env.TIED_JEV_DECISION_PROVIDER = "remote";
+    delete process.env.TIED_JEV_LOCAL_BRIDGE;
     const out = runJevHarnessPreflight(minimalCfg());
     assert.match(out.stderr, /fail-closed/);
   });

@@ -64,6 +64,16 @@ ARCH-TIED_ADVERSARIAL_INQUIRY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "A shared fail-closed gate evaluator is the authority for Tracker dispositions, CITDP depth, activation pairing, and lifecycle evidence."
+  detail_file: "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  name: "Shared checklist evidence gate boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FIDELITY_RESEARCH:
   cross_references:
     - "IMPL-TIED_FIDELITY_RESEARCH"
@@ -76,6 +86,16 @@ ARCH-TIED_FIDELITY_RESEARCH:
   name: "Read-Only Fidelity Research Boundary"
   source_index: "architecture-decisions.yaml"
   status: "Active"
+  type: "ARCH"
+ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Planned"
   type: "ARCH"
 ARCH-TIED_STRUCTURE:
   cross_references:
@@ -266,6 +286,16 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "Pure shared validator for Tracker dispositions, CITDP shape/depth, and identity-bound activation artifacts."
+  detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  name: "Checklist, CITDP, and activation validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_FIDELITY_RESEARCH:
   cross_references:
     - "ARCH-TIED_FIDELITY_RESEARCH"
@@ -291,6 +321,16 @@ IMPL-TIED_FILES:
   name: "TIED File Creation"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
   type: "IMPL"
 PROC-BUILD_PIPELINE_VALIDATION:
   cross_references:
@@ -572,37 +612,16 @@ REQ-TIED_ADVERSARIAL_INQUIRY:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  category: "Methodology"
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
-    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
-  description: "Sponsor-agent relationship layer (instrument vs person operating principles)"
-  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer"
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  description: "Checklist progression, verification, and close-out require machine-validated adversarial and execution evidence."
+  detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  name: "Machine-enforced checklist evidence gates"
   source_index: "requirements.yaml"
-  status: "Planned"
+  status: "Active"
   type: "REQ"
-ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  category: "Architecture"
-  cross_references:
-    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
-  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer architecture"
-  source_index: "architecture-decisions.yaml"
-  status: "Planned"
-  type: "ARCH"
-IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  category: "Implementation"
-  cross_references:
-    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
-  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer implementation"
-  source_index: "implementation-decisions.yaml"
-  status: "Planned"
-  type: "IMPL"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   cross_references:
@@ -630,4 +649,15 @@ REQ-TIED_SETUP:
   name: "TIED Methodology Setup"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  description: "Sponsor-agent relationship layer (instrument vs person operating principles)"
+  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"

@@ -16,7 +16,7 @@ import { skillsRerootEnabledFromEnv } from "./skills-reroot.mjs";
 import { bootstrapToolFlagsToArgv } from "./client-tool-use-bootstrap.mjs";
 
 export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
-  const raw = env.TIED_SOURCE_ROOT;
+  const raw = env.TIED_REPO_ROOT;
   return path.resolve(raw && raw.trim() ? raw : fallback);
 }
 

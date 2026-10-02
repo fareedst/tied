@@ -3,7 +3,14 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { resolveYamlStyle, resolveClientFormatter, validateFormatterDeclaration, YamlStyleConfigurationError } from "./yaml-style-config.js";
+import {
+  resolveTiedBasePathForYamlFile,
+  resolveYamlStyle,
+  resolveClientFormatter,
+  tiedBasePathForYamlContext,
+  validateFormatterDeclaration,
+  YamlStyleConfigurationError,
+} from "./yaml-style-config.js";
 
 function makeProject(): { root: string; tied: string } {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-style-"));
@@ -134,6 +141,44 @@ test("resolveClientFormatter returns not_configured when command absent", () => 
     assert.equal(resolved.scalar_style, "wrapped");
   } finally {
     fs.rmSync(project.root, { recursive: true, force: true });
+  }
+});
+
+test("resolveTiedBasePathForYamlFile finds tied/ from nested project YAML paths", () => {
+  const project = makeProject();
+  try {
+    fs.writeFileSync(path.join(project.tied, "requirements.yaml"), "{}\n");
+    const yamlPath = path.join(project.tied, "requirements", "REQ-FIXTURE.yaml");
+    fs.mkdirSync(path.dirname(yamlPath), { recursive: true });
+    fs.writeFileSync(yamlPath, "token: REQ-FIXTURE\n");
+    assert.equal(resolveTiedBasePathForYamlFile(yamlPath), project.tied);
+  } finally {
+    fs.rmSync(project.root, { recursive: true, force: true });
+  }
+});
+
+test("tiedBasePathForYamlContext prefers file project over TIED_BASE_PATH", () => {
+  const project = makeProject();
+  const other = makeProject();
+  try {
+    fs.writeFileSync(path.join(project.tied, "requirements.yaml"), "{}\n");
+    fs.writeFileSync(path.join(project.root, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    const yamlPath = path.join(project.tied, "record.yaml");
+    fs.writeFileSync(yamlPath, "message: hello\n");
+    const previousBasePath = process.env.TIED_BASE_PATH;
+    process.env.TIED_BASE_PATH = other.tied;
+    try {
+      assert.equal(tiedBasePathForYamlContext(yamlPath), project.tied);
+      const resolved = resolveYamlStyle(tiedBasePathForYamlContext(yamlPath));
+      assert.equal(resolved.scalar_style, "wrapped");
+      assert.equal(resolved.config_path, path.join(project.root, ".tied-yaml.yaml"));
+    } finally {
+      if (previousBasePath === undefined) delete process.env.TIED_BASE_PATH;
+      else process.env.TIED_BASE_PATH = previousBasePath;
+    }
+  } finally {
+    fs.rmSync(project.root, { recursive: true, force: true });
+    fs.rmSync(other.root, { recursive: true, force: true });
   }
 });
 

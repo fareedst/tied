@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Checklist gate remediation close-out slice ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** — YAML canonicalization resolves `tied/` from the file’s project root (`tiedBasePathForYamlContext`); methodology templates for checklist gate REQ/ARCH/IMPL; fixture `1787603099` regression manifest refresh; integrated `close_out` via `run-close-out-gates.mjs` with activation `run_id` `wave8-closeout-20260911` (`allowed: true`, zero blocking envelope gaps). Evidence: [closeout-run-close-out-gates-final.json](working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/closeout-run-close-out-gates-final.json), [plan-close-out-handoff.md](working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/plan-close-out-handoff.md).
+
 ### Added
 
 - **Sponsor–agent relationship layer ([REQ-TIED_SPONSOR_AGENT_RELATIONSHIP])** — Canonical glossary and `tied/docs/sponsor-agent-relationship.md`, principles P16 + checklist markers, exported `validateHingeFields` / `hinge_field_incomplete` (advisory warn-only), `mcp-server/src/relationship/consequence-ladder.ts`, contract and parity tests, templates promotion, CITDP + integrated adversarial inquiry close-out (`closeout-sar-2026-10-01`), verification-gated `tied_verify` → Implemented.

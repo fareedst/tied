@@ -272,13 +272,6 @@ IMPL-TIED_ADVERSARIAL_INQUIRY:
       - "ARCH-TIED_ADVERSARIAL_INQUIRY"
     requirements:
       - "REQ-TIED_ADVERSARIAL_INQUIRY"
-IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  cross_references:
-    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
-  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer implementation"
-  status: "Planned"
 IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   cross_references:
     - "ARCH-TIED_ADVERSARIAL_INQUIRY"
@@ -306,6 +299,26 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
       - "ARCH-TIED_ADVERSARIAL_INQUIRY"
     requirements:
       - "REQ-TIED_ADVERSARIAL_INQUIRY"
+IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for shared checklist evidence gate (index only; pseudo-code sidecar stays in methodology repo project YAML)"
+  name: "Checklist, CITDP, and activation validator"
+  related_decisions:
+    depends_on:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    informs:
+      - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
 IMPL-TIED_FIDELITY_RESEARCH:
   cross_references:
     - "ARCH-TIED_FIDELITY_RESEARCH"
@@ -352,3 +365,10 @@ IMPL-TIED_FILES:
       - "REQ-TIED_SETUP"
     tests:
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer implementation"
+  status: "Planned"

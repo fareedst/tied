@@ -37,6 +37,10 @@ export function lintClientTiedYaml({ clientDir, sourceRoot, nodeExec = process.e
   }
 
   const files = collectYamlFiles(clientDir);
+  if (files.length === 0) {
+    sayErr("lint: no .yaml files under tied/ (missing tied/ or empty tree)");
+    return { ok: false, code: 1, step: "lint", fileCount: 0 };
+  }
   for (const file of files) {
     const result = spawn(nodeExec, [canonicalizer, file], {
       cwd: clientDir,

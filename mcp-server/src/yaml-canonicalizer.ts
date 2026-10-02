@@ -4,6 +4,7 @@ import yaml from "js-yaml";
 import {
   getDefaultTiedBasePath,
   resolveYamlStyle,
+  tiedBasePathForYamlContext,
   yamlDumpOptionsForStyle,
   type ResolvedYamlStyle,
   type YamlScalarStyle,
@@ -248,7 +249,7 @@ export function writeCanonicalYamlAtomic(
 ): { ok: true; yaml_format: YamlFormatMetadata } | { ok: false; error: string } {
   try {
     const source = fs.readFileSync(filePath, "utf8");
-    const canonical = canonicalizeYamlText(source);
+    const canonical = canonicalizeYamlText(source, filePath);
     if (!canonical.ok) return canonical;
     return writeSerializedAtomic(filePath, canonical.text, canonical.yaml_format);
   } catch (error) {
@@ -258,9 +259,10 @@ export function writeCanonicalYamlAtomic(
 
 export function canonicalizeYamlText(
   text: string,
+  contextFilePath?: string,
 ): { ok: true; text: string; yaml_format: YamlFormatMetadata } | { ok: false; error: string } {
   try {
-    const resolvedStyle = resolveYamlStyle(getDefaultTiedBasePath());
+    const resolvedStyle = resolveYamlStyle(tiedBasePathForYamlContext(contextFilePath));
     const serialized = yaml.dump(canonicalizeValue(yaml.load(text)), {
       lineWidth: -1,
       noRefs: true,
@@ -278,7 +280,7 @@ export function writeCanonicalYamlTextAtomic(
   text: string
 ): { ok: true; yaml_format: YamlFormatMetadata } | { ok: false; error: string } {
   try {
-    const canonical = canonicalizeYamlText(text);
+    const canonical = canonicalizeYamlText(text, filePath);
     if (!canonical.ok) return canonical;
     return writeSerializedAtomic(filePath, canonical.text, canonical.yaml_format);
   } catch (error) {

@@ -219,6 +219,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
             "sub_stub_pending",
             "parent_child_inconsistent",
             "depth_downgrade_requires_waiver",
+            "hinge_field_incomplete",
           ].includes(diagnostic),
           diagnostic,
         );

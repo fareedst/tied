@@ -23,7 +23,7 @@ for (const filePath of paths) {
     | { ok: false; error: string };
   if (checkOnly) {
     try {
-      result = canonicalizeYamlText(fs.readFileSync(filePath, "utf8"));
+      result = canonicalizeYamlText(fs.readFileSync(filePath, "utf8"), filePath);
     } catch (error) {
       result = { ok: false, error: error instanceof Error ? error.message : String(error) };
     }

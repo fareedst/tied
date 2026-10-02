@@ -40,7 +40,7 @@ Options:
   --tools jev,dae,bbce      Comma-separated tool flags (same as granular flags)
   --force-tool-config       Merge tool keys into an existing .tied-yaml.yaml
 
-Environment: TIED_SOURCE_ROOT, TIED_TEST_ROOT, CURSOR_CLI_NAME (default agent),
+Environment: TIED_REPO_ROOT, TIED_TEST_ROOT, CURSOR_CLI_NAME (default agent),
   TIED_CURSOR_AGENT_CMD (full override; wins over CURSOR_CLI_NAME),
   TIED_BOOTSTRAP_FULL_TOOLS, TIED_BOOTSTRAP_WITH_JEV, TIED_BOOTSTRAP_WITH_DAE,
   TIED_BOOTSTRAP_WITH_BBCE, TIED_BOOTSTRAP_FORCE_TOOL_CONFIG (CLI overrides env),
