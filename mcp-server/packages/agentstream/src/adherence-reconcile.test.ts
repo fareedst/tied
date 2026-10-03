@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 
 import { runAdherenceReconcileCli } from "./adherence-reconcile-cli.js";
+import { computeProcessGrade } from "./adherence-process-grade.js";
+import { reconcileAdherenceChain, trackerRequestToken } from "./adherence-reconcile.js";
 import { repoRootFromModule } from "./paths.js";
 
 // [IMPL-TIED_UNIFIED_TOOLCHAIN] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
@@ -21,6 +23,70 @@ describe("adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
     );
     return p;
   }
+
+  function writeTrackerYaml(dir: string, yamlBody: string): string {
+    const p = path.join(dir, "tracker.yaml");
+    fs.writeFileSync(p, yamlBody);
+    return p;
+  }
+
+  it("trackerRequestToken falls back to execution_evidence.request", () => {
+    assert.equal(
+      trackerRequestToken({
+        schema_version: "checklist-tracker.v1",
+        execution_evidence: { request: "REQ-ONLY-EE", completed: ["verification-gate"] },
+      }),
+      "REQ-ONLY-EE",
+    );
+    assert.equal(
+      trackerRequestToken({
+        request_token: "REQ-TOP",
+        execution_evidence: { request: "REQ-EE" },
+      }),
+      "REQ-TOP",
+    );
+  });
+
+  it("process grade finds manifest when token is only under execution_evidence.request", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "recon-manifest-"));
+    const token = "REQ-MANIFEST-EE-ONLY";
+    const working = path.join(dir, "working", token, "evidence");
+    fs.mkdirSync(working, { recursive: true });
+    fs.writeFileSync(
+      path.join(working, "verification-evidence-manifest.v1.json"),
+      JSON.stringify({ schema_version: "verification-evidence-manifest.v1" }),
+    );
+    const trackerPath = writeTrackerYaml(
+      dir,
+      [
+        "schema_version: checklist-tracker.v1",
+        "steps: []",
+        "execution_evidence:",
+        `  request: ${token}`,
+        "  completed:",
+        "    - verification-gate",
+      ].join("\n") + "\n",
+    );
+    fs.writeFileSync(path.join(dir, "ledger.jsonl"), "\n");
+    const report = reconcileAdherenceChain({
+      ledgerPath: path.join(dir, "ledger.jsonl"),
+      trackerPath,
+      gatesDir: "",
+      workspace: dir,
+    });
+    const grade = computeProcessGrade(
+      {
+        ledgerPath: path.join(dir, "ledger.jsonl"),
+        trackerPath,
+        gatesDir: "",
+        workspace: dir,
+      },
+      report,
+    );
+    assert.equal(report.request_token, token);
+    assert.ok(!grade.gap_codes.includes("expected_artifact_missing"));
+    assert.equal(grade.dimensions.find((d) => d.name === "verification_manifest")?.score, 100);
+  });
 
   function writeLedger(dir: string, rows: Record<string, unknown>[]): string {
     const p = path.join(dir, "events.jsonl");

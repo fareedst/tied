@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Adherence reconcile request resolution ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** — `trackerRequestToken` in `@tied/agentstream` now falls back to `execution_evidence.request` and legacy `request`, matching checklist validator and `validateTrackerIdentity`; process-grade manifest lookup works when top-level `request_token` is absent. Tests: `adherence-reconcile.test.ts` (5/5). Fixture `1787603099` regression manifest pinned to `06e49de`; adversarial Mode B fixture envelopes and fleet `envelope-gap-report.v1.yaml` refreshed.
+
 ### Added
 
 - **Two-folder layout close-out ([REQ-TIED_TWO_FOLDER_LAYOUT])** — Integrated `close_out` via `run-close-out-gates.mjs` with inquiry run id `phase8-verify-2026-10-02` (`gate.allowed=true`, envelope `blocking_gap_count=0`). **Field validation:** disposable linked client `/Users/fareed/Documents/dev/test/1791037288` shipped `mac-displays-cli` (`REQ-MACOS_DISPLAY_CLI`) with G4 `two_folder_layout.ok`, 12/12 unit tests, and live Darwin CLI (sponsor success). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/closeout-run-close-out-gates-final.json), [factory-field-client-1791037288-evidence.md](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/factory-field-client-1791037288-evidence.md), [plan-close-out-handoff.md](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/plan-close-out-handoff.md).

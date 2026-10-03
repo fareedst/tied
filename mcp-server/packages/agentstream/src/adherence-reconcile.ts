@@ -73,9 +73,20 @@ export function loadTracker(input: ReconcileInput): Record<string, unknown> {
   return doc;
 }
 
+/** Align with validateTrackerIdentity (tracker-ensure) and checklist-validator request resolution. */
 export function trackerRequestToken(tracker: Record<string, unknown>): string {
-  const token = tracker.request_token;
-  return typeof token === "string" ? token.trim() : "";
+  const top = tracker.request_token;
+  if (typeof top === "string" && top.trim()) return top.trim();
+  const ee = tracker.execution_evidence;
+  if (ee !== null && typeof ee === "object" && !Array.isArray(ee)) {
+    const fromEvidence = (ee as Record<string, unknown>).request;
+    if (typeof fromEvidence === "string" && fromEvidence.trim()) {
+      return fromEvidence.trim();
+    }
+  }
+  const legacy = tracker.request;
+  if (typeof legacy === "string" && legacy.trim()) return legacy.trim();
+  return "";
 }
 
 export function trackerStepsFromMap(tracker: Record<string, unknown>): Record<string, unknown>[] {
