@@ -136,7 +136,7 @@ flowchart TD
 
 ## Diagram 4 — TDD Inner Loop (RED-GREEN-REFACTOR per Iteration)
 
-Each iteration within steps 3–7 of the dev cycle follows this mandatory cycle. RED is the only entry point: every iteration starts with a failing test. GREEN writes minimum production code. A lint gate (language-specific: Rust via `bun run lint:rust`, TypeScript via `bunx tsc -b`) blocks progress until tests pass and lint is clean. REFACTOR is optional. The loop repeats until all behavior for the current step is covered.
+Each iteration within steps 3–7 of the dev cycle follows this mandatory cycle. RED is the only entry point: every iteration starts with a failing test. GREEN writes minimum production code. A lint gate (language-specific: Rust via `bun run lint:rust`, TypeScript via `npx tsc -b`) blocks progress until tests pass and lint is clean. REFACTOR is optional. The loop repeats until all behavior for the current step is covered.
 
 ```mermaid
 flowchart TD

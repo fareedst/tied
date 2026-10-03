@@ -2221,6 +2221,30 @@ REQ-TIED_NEW_CLIENT_ADHERENCE:
   name: "New TIED client adherence"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
+  category: "Tooling"
+  description: "Repository-defined install, build, test, and replay entrypoints for the TIED TypeScript workspace must invoke Node, npm, npx, or tsx only—never Bun—for controlled operator and CI paths."
+  detail_file: "requirements/REQ-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
+  name: "Node-only controlled TIED toolchain runners"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Agent and methodology lint guidance cites npx tsc / npm for TypeScript in this repo"
+      metric: "AGENTS.md and tied-bundle/docs/ai-principles.md PROC-TS_CHECK rows"
+    - criterion: "Full mcp-server suite passes via npm test without Bun on PATH"
+      metric: "npm test --prefix mcp-server exit 0"
+    - criterion: "Zero Bun spawn or shebang in canonical controlled-runner files"
+      metric: "mcp-server contract test node-only-controlled-runners.test.ts"
+  status: "Proposed"
+  traceability:
+    architecture:
+      - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
+    implementation:
+      - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
 REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   category: "Functional"
   cross_references:

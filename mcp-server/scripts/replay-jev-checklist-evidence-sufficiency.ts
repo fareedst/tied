@@ -1,10 +1,10 @@
-#!/usr/bin/env bun
 /**
  * [REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] W3 replay — labeled fixtures × benchmark arms.
  */
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 import { jevDecide } from "../src/jev/client.js";
 import {
@@ -13,7 +13,7 @@ import {
 } from "../src/jev/checklist-evidence-sufficiency-benchmark.js";
 import { resolveJevApiKey } from "../src/jev/resolve-jev-api-key.js";
 
-const repoRoot = path.resolve(import.meta.dir, "../..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const defaultFixtures = path.join(
   repoRoot,
   "mcp-server/test/fixtures/checklist-evidence-sufficiency/labeled-corpus.v1.jsonl",

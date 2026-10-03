@@ -58,4 +58,8 @@ if (cjsFiles.length > 0) {
 }
 
 console.error("DIAGNOSTIC: run-mcp-tests — replay-jev-context-pruning");
-run("bun", ["run", "scripts/replay-jev-context-pruning.ts"], "jev context pruning replay");
+const replayScript = path.join(mcpRoot, "scripts/replay-jev-context-pruning.ts");
+const replayTsxArgs = fs.existsSync(tsxBin)
+  ? [replayScript]
+  : ["tsx", replayScript];
+run(tsxCmd, replayTsxArgs, "jev context pruning replay");

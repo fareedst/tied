@@ -110,14 +110,14 @@ alias validate-vocab=validate_vocab
 # --- Build ---
 
 build_agentstream() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' build
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/cli' build
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build -w @tied/agentstream
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build -w @tied/cli
 }
 alias build-agentstream=build_agentstream
 
 build_mcp() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun install
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run build
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm install
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build
 }
 alias build-mcp=build_mcp
 
@@ -129,7 +129,7 @@ alias build-all=build_all
 # --- Test / verify ---
 
 test_mcp() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run test
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run test
 }
 alias test-mcp=test_mcp
 
@@ -156,14 +156,14 @@ test_tied_cli_smoke() {
 }
 
 test_agentstream() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' build
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' test
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build -w @tied/agentstream
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run test -w @tied/agentstream
 }
 alias test-agentstream=test_agentstream
 
 verify_agentstream_parity() {
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run build
-  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" bun run --filter '@tied/agentstream' test
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run build
+  echo_exec --cd "${_BUILD_COMMANDS_REPO_ROOT}/mcp-server" npm run test -w @tied/agentstream
 }
 alias verify-agentstream-parity=verify_agentstream_parity
 
@@ -535,7 +535,7 @@ build-commands.sh — TIED repo shell helpers
   how                                  full command map
   how TOPIC                            one section (backup|build|test|tied|vocab|agentstream|close-out|smoke|drivers|env)
 
-Prerequisites for smoke tests: build-mcp (or test-all), node, bun, jq, yq, git, agent CLI.
+Prerequisites for smoke tests: build-mcp (or test-all), node, npm, jq, yq, git, agent CLI.
 Runbook: docs/tied-feature-extended-demo.md
 EOF
 }
@@ -551,8 +551,8 @@ EOF
 _how_build() {
   cat <<'EOF'
 Build
-  build-mcp                  bun install + full workspace build in mcp-server/
-  build-agentstream          bun filter build @tied/agentstream + @tied/cli (incremental)
+  build-mcp                  npm install + full workspace build in mcp-server/
+  build-agentstream          npm -w build @tied/agentstream + @tied/cli (incremental)
   build-all                  same as build-mcp (root + all packages/*)
 EOF
 }
@@ -569,7 +569,7 @@ Test / verify
                              node --test install-options, layers/*, install-layers.integration,
                              tied-new-client-audit ([REQ-TIED_LAYERED_CLIENT_INSTALL]; needs mcp dist)
   test-agentstream           @tied/agentstream package tests (frozen oracle fixtures)
-  verify-agentstream-parity  bun build + @tied/agentstream test (TS parity vs frozen oracle)
+  verify-agentstream-parity  npm run build + @tied/agentstream test (TS parity vs frozen oracle)
   test-bootstrap-claude-harness
                              node --test tools/bootstrap/lib/claude-harness.test.mjs (8 tests;
                              builds mcp-server if dist missing; [REQ-TIED_CLAUDE_HARNESS])

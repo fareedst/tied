@@ -859,6 +859,16 @@ ARCH-TIED_NEW_CLIENT_ADHERENCE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
+  cross_references:
+    - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+    - "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+  description: "npm/tsx controlled runners; no Bun opt-in."
+  detail_file: "architecture-decisions/ARCH-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
+  name: "Node-only controlled runner architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Proposed"
+  type: "ARCH"
 ARCH-TIED_PROJECT_IDENTITY:
   cross_references:
     - "IMPL-TIED_PROJECT_IDENTITY"
@@ -2003,6 +2013,16 @@ IMPL-TIED_NEW_CLIENT_ONBOARDING:
   name: "New TIED client onboarding audit"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
+  cross_references:
+    - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
+    - "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+  description: "build-commands, package.json, run-mcp-tests, replay-jev conversions."
+  detail_file: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
+  name: "Node-only controlled runner implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Proposed"
   type: "IMPL"
 IMPL-TIED_PROJECT_IDENTITY:
   cross_references:
@@ -3312,6 +3332,17 @@ REQ-TIED_NEW_CLIENT_ADHERENCE:
   name: "New TIED client adherence"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
+    - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+  description: "Controlled install/build/test/replay entrypoints use Node/npm/npx/tsx only."
+  detail_file: "requirements/REQ-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
+  name: "Node-only controlled TIED toolchain runners"
+  source_index: "requirements.yaml"
+  status: "Proposed"
   type: "REQ"
 REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   cross_references:

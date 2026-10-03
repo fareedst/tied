@@ -1,0 +1,12 @@
+IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
+  IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT-pseudocode.md"
+    implementation_approach:
+      details:
+        - "NODE_ONLY_MCP_TEST_RUNNER: run-mcp-tests invokes replays via tsx"
+        - "NODE_ONLY_SHELL_ALIASES: build-commands.sh uses npm install/run and -w workspace filters"
+        - "NODE_ONLY_WORKSPACE_BUILD: tsc then npm run build --workspaces --if-present"
+        - "REPLAY_SCRIPT_NODE_ENTRY: replay-jev scripts use fileURLToPath(import.meta.url) for repoRoot"
+      summary: "Replace Bun spawns with npm/npx/tsx; normalize replay script path resolution; guard canonical files with a failing contract test until green."
+    name: "Node-only controlled runner implementation"
+    status: "Proposed"

@@ -14,7 +14,7 @@
     "tied": "packages/cli/dist/index.js"
   },
   "scripts": {
-    "build": "tsc && bun run --workspaces --if-present build",
+    "build": "tsc && npm run build --workspaces --if-present",
     "start": "node dist/index.js",
     "test": "npm run build && node scripts/run-mcp-tests.mjs",
     "traceability-gap": "node dist/cli/traceability-gap.js",

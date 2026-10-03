@@ -1,4 +1,3 @@
-#!/usr/bin/env bun
 /**
  * [REQ-TIED_JEV_CONTEXT_LOG_PRUNING] [IMPL-TIED_JEV_CONTEXT_LOG_PRUNING]
  * Replay context pruning benchmark — all five arms on the same fixture corpus.
@@ -7,6 +6,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 import {
   type BenchmarkArm,
@@ -23,7 +23,7 @@ const ARMS: BenchmarkArm[] = [
   "pruner_jev_unavailable",
 ];
 
-const repoRoot = path.resolve(import.meta.dir, "../..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const defaultFixtures = path.join(
   repoRoot,
   "mcp-server/fixtures/context-pruning/labeled-corpus.jsonl",

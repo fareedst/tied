@@ -2360,6 +2360,17 @@ IMPL-TIED_NEW_CLIENT_ONBOARDING:
   detail_file: "implementation-decisions/IMPL-TIED_NEW_CLIENT_ONBOARDING.yaml"
   name: "New TIED client onboarding audit"
   status: "Active"
+IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
+    implementation: []
+    requirements:
+      - "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+  description: "Convert package.json build, build-commands.sh, run-mcp-tests.mjs, and replay-jev scripts to Node/tsx; add static contract test."
+  detail_file: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
+  name: "Node-only controlled runner implementation"
+  status: "Proposed"
 IMPL-TIED_PROJECT_IDENTITY:
   cross_references:
     - "ARCH-TIED_PROJECT_IDENTITY"

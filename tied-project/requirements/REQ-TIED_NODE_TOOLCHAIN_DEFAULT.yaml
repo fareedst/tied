@@ -1,0 +1,39 @@
+REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
+  REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
+    category: "Tooling"
+    metadata:
+      created:
+        author: "build-plan"
+        date: "2026-10-03"
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-03"
+        reason: "Initial REQ for Node-only controlled runners"
+    name: "Node-only controlled TIED toolchain runners"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "One runtime story aligned with mcp-server README"
+        - "Safer default for contributors without Bun installed"
+        - "Static guard against Bun reintroduction in canonical paths"
+      problems_solved:
+        - "build-commands.sh and package.json invoking bun run --workspaces"
+        - "Mixed bun/npm instructions in AGENTS and REQ metrics"
+        - "Replay scripts requiring Bun shebang and import.meta.dir"
+      why: "Bun in controlled paths diverges from documented npm/CI defaults and adds a second runtime agents must remember."
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_UNIFIED_TOOLCHAIN"
+      related_to: []
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "Canonical controlled files contain no Bun invocations"
+        id: "SC-NODE-ONLY-CONTROLLED-FILES"
+        metric: "Contract test scans package.json, build-commands.sh, run-mcp-tests.mjs, replay-jev-*.ts"
+      - criterion: "No TIED_TOOLCHAIN_RUNTIME or Bun opt-in env var"
+        id: "SC-NODE-ONLY-NO-OPTIN"
+        metric: "CITDP change definition and codebase grep"
+      - criterion: "npm test builds and runs full MCP workspace suite"
+        id: "SC-NODE-ONLY-NPM-TEST"
+        metric: "cd mcp-server && npm test"
+    status: "Proposed"

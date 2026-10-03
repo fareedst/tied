@@ -1,17 +1,17 @@
-#!/usr/bin/env bun
 /**
  * [REQ-TIED_JEV_DECISION_COPROCESSOR] W2 offline replay — keyword vs Jev shadow.
  */
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   parseRoutingTableMarkdown,
   shadowVocabPreloadFromRows,
   summarizeShadowAgreement,
 } from "../src/jev/index.js";
 
-const repoRoot = path.resolve(import.meta.dir, "../..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const defaultFixtures = path.join(
   repoRoot,
   "working/REQ-TIED_JEV_DECISION_COPROCESSOR/fixtures/vocab-shadow-prompts.jsonl",

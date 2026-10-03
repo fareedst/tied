@@ -1,0 +1,70 @@
+CITDP-REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
+  change_definition:
+    current_behavior: "Controlled TIED toolchain paths invoke Bun for workspace build (mcp-server/package.json), shell helpers (scripts/build-commands.sh), MCP test runner replay spawn, and replay-jev-*.ts shebangs/import.meta.dir. AGENTS and methodology docs cite bunx tsc for TypeScript lint."
+    desired_behavior: "All controlled install/build/test/replay entrypoints use Node, npm, npx, or tsx only; static contract test guards canonical files; active REQ metrics and process docs cite npm/npx equivalents."
+    non_goals:
+      - "Mass-editing tool-safety training corpus example strings"
+      - "Removing bun.lock or blocking personal Bun installs"
+      - "Rewriting frozen CITDP evidence blobs"
+    success_criteria:
+      - "npm test --prefix mcp-server exit 0"
+      - "REQ/ARCH/IMPL chain validates"
+      - "Zero Bun in controlled runner inventory"
+    unchanged_behavior: "MCP stdio via node dist/index.js; @tied/* package boundaries; full test graph semantics"
+  evidence:
+    commands:
+      - "cd mcp-server && npm run build && npm test"
+      - "cd mcp-server && npx tsc -b"
+      - "TIED_BASE_PATH=tied-project TIED_MCP_BIN=mcp-server/dist/index.js tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_validate_consistency '{}'"
+    proof_boundaries:
+      - "Historical tied-project/citdp and quality-manifest stderr with bunx unchanged"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
+    implementation_decisions:
+      - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+    modules_or_boundaries: "mcp-server/package.json, scripts/build-commands.sh, mcp-server/scripts/*"
+    requirements:
+      - "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    tied_tokens_new:
+      - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
+      - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+      - "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+  record_identity:
+    change_request_id: "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-03"
+    title: "Node-only controlled TIED toolchain runners"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Bun remains required for npm test to pass"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "node-only-controlled-runners.test.ts passes on controlled paths"
+      evidence_references:
+        - "cd mcp-server && npm test exit 0"
+        - "mcp-server/src/node-only-controlled-runners.test.ts"
+      falsification_questions:
+        - "Does any controlled runner still spawn bun?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    items:
+      - id: "R1"
+        mitigation: "Follow tools/bootstrap README smoke if needed"
+        risk: "npm workspace flags differ from Bun on Windows"
+      - id: "R2"
+        mitigation: "fileURLToPath(import.meta.url) repoRoot; replay in npm test"
+        risk: "Replay scripts break after shedding Bun APIs"
+  test_strategy:
+    integration:
+      - "npm test in mcp-server including replay-jev-context-pruning via tsx"
+    unit:
+      - "node-only-controlled-runners.test.ts static contract"
+    verification:
+      - "npx tsc -b in mcp-server"
+      - "tied_validate_consistency"

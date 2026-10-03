@@ -1,13 +1,13 @@
-#!/usr/bin/env bun
 /**
  * [REQ-TIED_JEV_DECISION_COPROCESSOR] W3 offline replay for prompt-type advisory.
  */
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { advisePromptTypes } from "../src/jev/prompt-type-advisory.js";
 
-const repoRoot = path.resolve(import.meta.dir, "../..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const defaultFixtures = path.join(
   repoRoot,
   "working/REQ-TIED_JEV_DECISION_COPROCESSOR/fixtures/prompt-type-advisory-prompts.jsonl",

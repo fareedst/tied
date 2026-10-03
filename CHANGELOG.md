@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Node-only controlled TIED toolchain ([REQ-TIED_NODE_TOOLCHAIN_DEFAULT])** — Controlled build, test, shell, and Jev replay entrypoints use Node/npm/npx/tsx; static contract test blocks Bun regression in canonical paths. Minimal `close_out` via `run-close-out-gates.mjs` (`gate.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/request-evidence-envelope.v1.json).
+
 ### Fixed
 
 - **Adherence reconcile request resolution ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])** — `trackerRequestToken` in `@tied/agentstream` now falls back to `execution_evidence.request` and legacy `request`, matching checklist validator and `validateTrackerIdentity`; process-grade manifest lookup works when top-level `request_token` is absent. Tests: `adherence-reconcile.test.ts` (5/5). Fixture `1787603099` regression manifest pinned to `06e49de`; adversarial Mode B fixture envelopes and fleet `envelope-gap-report.v1.yaml` refreshed.

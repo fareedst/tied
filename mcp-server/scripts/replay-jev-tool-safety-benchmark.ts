@@ -1,10 +1,10 @@
-#!/usr/bin/env bun
 /**
  * [REQ-TIED_JEV_TOOL_SAFETY_GATING] W2 replay — labeled fixtures × five benchmark arms.
  */
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 import { jevDecide } from "../src/jev/client.js";
 import {
@@ -13,7 +13,7 @@ import {
 } from "../src/jev/tool-safety-benchmark.js";
 import { resolveJevApiKey } from "../src/jev/resolve-jev-api-key.js";
 
-const repoRoot = path.resolve(import.meta.dir, "../..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const defaultFixtures = path.join(
   repoRoot,
   "mcp-server/test/fixtures/tool-safety/labeled-corpus.v1.jsonl",

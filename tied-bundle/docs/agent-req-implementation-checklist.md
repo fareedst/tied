@@ -550,7 +550,7 @@ LOOP FOR each IMPL block classified as unit or integration in test-strategy:
    Nested blocks follow the same rules: same token set comments only *how*; different token set names that set.
 3. Run tests. IF tests fail THEN iterate on production code only (do not add new tests in GREEN).
 4. **IF the focused RED test now passes but other existing tests still fail** THEN stop iterating production code in this turn; emit a **final** fenced JSON **`agentstream_control`** with **`action: goto`**, **`target: flag-contradictory-specs`**, and evidence, so the **`tied agentstream`** driver can re-queue the remaining checklist to resolve cross-IMPL or contradictory specs before more GREEN work (see executable checklist YAML and [mcp-server/packages/agentstream/README.md](../../mcp-server/packages/agentstream/README.md)).
-5. Run language-specific lint: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b` or `bun run lint:ts`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`). IF lint fails THEN fix before proceeding.
+5. Run language-specific lint: Rust → `bun run lint:rust`; TypeScript → `npx tsc -b` or `npm run lint:ts`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`). IF lint fails THEN fix before proceeding.
 6. When a bidirectional fidelity adapter is in scope for this block's language, run the adapter check; a detected mismatch is warn-only and routes to **sub-leap-micro-cycle**, never a hard block in this step.
 
 **Branch**: IF the focused test is green but unrelated tests break THEN **GOTO** **`flag-contradictory-specs`** via machine-readable **`agentstream_control`** (`tied agentstream` live runs). IF GREEN reveals the pseudo-code is incomplete, wrong, or requires a new dependency THEN **CALL sub-leap-micro-cycle**. Do not silently diverge.
@@ -663,7 +663,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Tasks**:
 0. **CALL sub-pseudocode-validation-pass** — full Layer B including **minimum_gating_rules** now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.
 1. Run the **full test suite** (unit, composition, E2E). All must pass.
-2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `bunx tsc -b`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`).
+2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `npx tsc -b`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`).
 2a. Rebuild/reload the MCP server and smoke-test live discovery and invocation of `tied_adversarial_inquiry_run`; source registration alone is not adoption evidence.
 2b. Build the full fidelity matrix with an executable evidence partition; **CALL sub-adversarial-inquiry-pass** with `phase: verification` and profile-dependent blocking (strict-eligible only).
 2c. The executable-evidence partition of the fidelity matrix must cite **command provenance** (command, revision, environment, result) from `evidence-provenance.json`, not a bare pass/fail flag.

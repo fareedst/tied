@@ -1960,6 +1960,18 @@ ARCH-TIED_NEW_CLIENT_ADHERENCE:
   detail_file: "architecture-decisions/ARCH-TIED_NEW_CLIENT_ADHERENCE.yaml"
   name: "New TIED client adherence architecture"
   status: "Implemented"
+ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+    requirements:
+      - "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  description: "Controlled TIED toolchain entrypoints delegate to Node/npm/npx/tsx; replay TypeScript uses tsx with standard import.meta.url path resolution."
+  detail_file: "architecture-decisions/ARCH-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
+  name: "Node-only controlled runner architecture"
+  status: "Proposed"
 ARCH-TIED_PROJECT_CONFIG_OWNERSHIP:
   description: "Disjoint project vs install config ownership with single install_defaults overlay."
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_CONFIG_OWNERSHIP.yaml"

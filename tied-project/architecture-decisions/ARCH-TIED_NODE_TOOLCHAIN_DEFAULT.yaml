@@ -1,0 +1,19 @@
+ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
+  ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
+    alternatives_considered:
+      - description: "npm test but bun run --workspaces build"
+        name: "Keep Bun for workspace build only"
+        rejected_because: "Still requires Bun for controlled build path"
+      - description: "Allow local Bun override via env"
+        name: "TIED_TOOLCHAIN_RUNTIME=bun opt-in"
+        rejected_because: "Sponsor rejected; splits operator docs and static guards"
+    consequences:
+      negative:
+        - "npm workspace flags differ slightly from Bun filters on edge cases"
+      positive:
+        - "Matches mcp-server README canonical npm test"
+        - "Replay scripts runnable via npx tsx"
+    context: "REQ-TIED_UNIFIED_TOOLCHAIN established TypeScript-on-Node as primary; residual Bun in shell wrappers and replay scripts breaks parity with README and CI."
+    decision: "Treat npm scripts, build-commands.sh, run-mcp-tests.mjs, and replay-jev-*.ts as controlled runners that must use Node ecosystem tools only; reject Bun opt-in environment variables."
+    name: "Node-only controlled runner architecture"
+    status: "Proposed"

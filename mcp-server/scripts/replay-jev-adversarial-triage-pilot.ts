@@ -1,16 +1,16 @@
-#!/usr/bin/env bun
 /**
  * [REQ-TIED_JEV_DECISION_COPROCESSOR] W4 labeled adversarial triage pilot replay.
  */
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   loadLabeledTriageFixture,
   runAdversarialTriagePilot,
 } from "../src/jev/adversarial-triage-pilot.js";
 
-const repoRoot = path.resolve(import.meta.dir, "../..");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const defaultFixture = path.join(
   repoRoot,
   "working/REQ-TIED_JEV_DECISION_COPROCESSOR/fixtures/adversarial-triage-labeled.v1.json",

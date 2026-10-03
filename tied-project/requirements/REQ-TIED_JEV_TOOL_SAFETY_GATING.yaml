@@ -34,7 +34,7 @@ REQ-TIED_JEV_TOOL_SAFETY_GATING:
       metric: "tied_validate_consistency"
     - criterion: "Default-off harness; W5 guard and live-gate tests green."
       id: "SC-W5-PRESERVED"
-      metric: "bun test harness-tool-guard jev-harness-live-tool-gate"
+      metric: "cd mcp-server && npx tsx --test src/jev/harness-tool-guard.test.ts src/jev/jev-harness-live-tool-gate.test.ts"
     - criterion: "Deterministic hard-deny before Jev; safe near misses not overmatched."
       id: "SC-D-FAST-DENY"
       metric: "unit + deterministic_only benchmark arm"
