@@ -1,0 +1,20 @@
+{
+  "schema_version": "co-sponsor-commit-payload.v1",
+  "request_token": "REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH",
+  "generated_at": "2026-10-03T14:16:00.000Z",
+  "proposed_commit_message": "Fix factory onboarding audit path for two-folder clients.\n\nWrite tied-new-client-audit.v1.json under tied-project/working/ via\ncommittedWorkingFileRel; align bash G4 helper; add warn-only\nSC-TFL-NO-ROOT-WORKING when both working roots exist.\n\nREQ-TIED_FACTORY_ONBOARDING_WORKING_PATH · SC-FOW-001..005",
+  "scope_summary": [
+    "tools/bootstrap/lib/new-client-onboarding-audit.mjs",
+    "tools/bootstrap/lib/new-client-onboarding-audit.test.mjs",
+    "scripts/build-commands.sh",
+    "scripts/lib/tied-two-folder-audit.mjs",
+    "scripts/tied-new-client-audit.test.mjs",
+    "mcp-server/src/e2e/new-tied-client.test.ts",
+    "tied-project/citdp + REQ/ARCH tokens",
+    "docs + CHANGELOG"
+  ],
+  "close_out_evidence": {
+    "gate_json": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/closeout-run-close-out-gates-final.json",
+    "envelope": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/request-evidence-envelope.v1.json"
+  }
+}

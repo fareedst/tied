@@ -1,0 +1,5 @@
+{
+  "token": "ARCH-TIED_PROJECT_CONFIG_OWNERSHIP",
+  "index_record": "{\"description\":\"Disjoint project vs install config ownership with single install_defaults overlay.\",\"name\":\"TIED project config ownership\",\"status\":\"Planned\",\"traceability\":{\"requirements\":[\"REQ-TIED_TWO_FOLDER_LAYOUT\"],\"implementation\":[\"IMPL-TIED_TWO_FOLDER_LAYOUT\"]}}",
+  "detail_record": "{\"ARCH-TIED_PROJECT_CONFIG_OWNERSHIP\":{\"description\":\"tied-project/config.yaml vs tied-bundle/install.json; CONFIG_KEY_OWNERSHIP_VIOLATION on overlap; MCP env derived from install config.\",\"name\":\"TIED project config ownership\",\"status\":\"Planned\",\"traceability\":{\"requirements\":[\"REQ-TIED_TWO_FOLDER_LAYOUT\"],\"implementation\":[\"IMPL-TIED_TWO_FOLDER_LAYOUT\"]}}}"
+}

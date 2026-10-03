@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node --test dist/*.test.js dist/gate-check.test.js dist/tied-next.test.js"
+    "test": "npm run build && npx tsx --test src/**/*.test.ts"
   },
   "engines": {
     "node": ">=18"

@@ -1,0 +1,267 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "BUILD_PILOT_INVENTORY",
+      "line": 9,
+      "token_refs": [
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "RUN_MIGRATION_DRY_RUN",
+      "line": 25,
+      "token_refs": [
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "EMIT_MIGRATION_RECEIPT",
+      "line": 37,
+      "token_refs": [
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "REVERT_MIGRATION_APPLY",
+      "line": 53,
+      "token_refs": [
+        "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "BUILD_FLEET_INVENTORY",
+      "line": 70,
+      "token_refs": [
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "EMIT_G3_RECEIPT",
+      "line": 87,
+      "token_refs": [
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "RUN_FLEET_WAVE",
+      "line": 104,
+      "token_refs": [
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "RECORD_WAVE_STOP_GO",
+      "line": 121,
+      "token_refs": [
+        "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "REFRESH_WAIVER_REGISTRY",
+      "line": 135,
+      "token_refs": [
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "APPLY_FLEET_WAVE_ASSIST",
+      "line": 151,
+      "token_refs": [
+        "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "APPLY_CONSTRAINT_READY_ASSIST",
+      "line": 183,
+      "token_refs": [
+        "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "contract_fields": [
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "BUILD_PILOT_INVENTORY",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "RUN_MIGRATION_DRY_RUN",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "EMIT_MIGRATION_RECEIPT",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "REVERT_MIGRATION_APPLY",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "BUILD_FLEET_INVENTORY",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "EMIT_G3_RECEIPT",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "RUN_FLEET_WAVE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "RECORD_WAVE_STOP_GO",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "REFRESH_WAIVER_REGISTRY",
+      "branch_lines": [
+        148
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "APPLY_FLEET_WAVE_ASSIST",
+      "branch_lines": [
+        173,
+        175,
+        179
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "APPLY_CONSTRAINT_READY_ASSIST",
+      "branch_lines": [
+        202,
+        208,
+        209,
+        210,
+        212,
+        216
+      ],
+      "failure_modes": [],
+      "references": []
+    }
+  ],
+  "diagnostics": []
+}

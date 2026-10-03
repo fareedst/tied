@@ -1,0 +1,96 @@
+copy_hygiene: "Track C validator hardening per docs/pseudocode-grammar-v2-and-hygiene-plan.md §Track C."
+execution_evidence:
+  close_out_evidence:
+    deferred: true
+  completed: []
+  request: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  note: "Validator-only Layer B hardening; inquiry waived inquiry_not_required_validator_only."
+request: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+run_id: "track-c-validator-20260911"
+source_plan: "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+      - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/analysis/pseudocode-shared.ts"
+      - "mcp-server/src/analysis/pseudocode-validator.ts"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md"
+    slug: "catalog-pseudocode-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md"
+    slug: "apply-token-comments"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md"
+    slug: "resolve-pseudocode"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/analysis/pseudocode-shared.test.ts"
+      - "mcp-server/src/analysis/pseudocode-validator.test.ts"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/dist/analysis/pseudocode-shared.test.js"
+      - "mcp-server/dist/analysis/pseudocode-validator.test.js"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/analysis/pseudocode-shared.ts"
+      - "mcp-server/src/analysis/pseudocode-validator.ts"
+    slug: "unit-refactor"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/analysis/pseudocode-shared.test.ts"
+      - "mcp-server/src/analysis/pseudocode-validator.test.ts"
+    slug: "three-way-alignment-unit"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml"
+    policy: "inquiry_not_required_validator_only"
+    rationale: "Minimal depth validator-only change; no tied_adversarial_inquiry_run."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md"
+      - "tied/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md"
+    slug: "sync-tied-stack"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-verification-track-c-result.json"
+    slug: "verification-gate"

@@ -17,8 +17,28 @@ class VocabularyIndexValidator
 
   def initialize(repository_root)
     @repository_root = File.expand_path(repository_root)
-    @client_vocab_root = File.join(@repository_root, "tied", "vocab")
-    @methodology_vocab_root = File.join(@repository_root, "tied", "methodology", "vocab")
+    @client_vocab_root = resolve_client_vocab_root
+    @methodology_vocab_root = resolve_methodology_vocab_root
+  end
+
+  def resolve_client_vocab_root
+    modern = File.join(@repository_root, "tied-project", "vocab")
+    return modern if File.directory?(modern)
+
+    legacy = File.join(@repository_root, "tied", "vocab")
+    return legacy if File.directory?(legacy)
+
+    modern
+  end
+
+  def resolve_methodology_vocab_root
+    bundle = File.join(@repository_root, "tied-bundle", "vocab")
+    return bundle if File.directory?(bundle)
+
+    legacy = File.join(@repository_root, "tied", "methodology", "vocab")
+    return legacy if File.directory?(legacy)
+
+    bundle
   end
 
   def validate

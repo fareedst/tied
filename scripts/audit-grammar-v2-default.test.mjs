@@ -42,10 +42,10 @@ describe("grammar-v2-default audit modules [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]",
 });
 
 describe("bootstrap-to-audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
-  it("wires copy_files.sh output into independent audit dimensions [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
+  it("wires tied-install.sh output into independent audit dimensions [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
     // [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Prove bootstrap template emission and audit reporting at the composition boundary.
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-grammar-v2-audit-compose-"));
-    const copyScript = path.join(REPO_ROOT, "copy_files.sh");
+    const copyScript = path.join(REPO_ROOT, "tied-install.sh");
     try {
       execFileSync("bash", [copyScript, tempDir], { cwd: REPO_ROOT, stdio: "pipe" });
       const report = runGrammarV2DefaultAudit(tempDir);
@@ -65,7 +65,7 @@ describe("bootstrap-to-audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", (
   it("passes bootstrap_enforcement when gateStage is G4 [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
     // [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] How: G4 disposable client audit requires constraint_flow true, not header-only Track A.
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-grammar-v2-g4-bootstrap-"));
-    const copyScript = path.join(REPO_ROOT, "copy_files.sh");
+    const copyScript = path.join(REPO_ROOT, "tied-install.sh");
     try {
       execFileSync("bash", [copyScript, tempDir], { cwd: REPO_ROOT, stdio: "pipe" });
       const report = runGrammarV2DefaultAudit(tempDir, { gateStage: "G4" });

@@ -12,7 +12,7 @@ const fixtureRoot = path.resolve(
 
 const baseInput = {
   projectRoot: fixtureRoot,
-  tiedBasePath: path.join(fixtureRoot, "tied"),
+  tiedBasePath: path.join(fixtureRoot, "tied-project"),
   requestToken: "REQ-FIXTURE-ADVERSARIAL",
   implToken: "IMPL-FIXTURE-ADVERSARIAL",
   testPath: "test/sample_divide_good_test.rb",
@@ -24,10 +24,10 @@ describe("BUILD_PROJECT_INQUIRY_INPUT project scope loader REQ-TIED_ADVERSARIAL_
   // [IMPL-TIED_ADVERSARIAL_INQUIRY] [ARCH-TIED_ADVERSARIAL_INQUIRY] [REQ-TIED_ADVERSARIAL_INQUIRY] How: validate an explicit project boundary, load declared read-only inputs, and normalize one supported Ruby Minitest fixture into the existing inquiry core.
   it("loads an explicit project scope without using the process TIED_BASE_PATH", async () => {
     const canonicalPaths = [
-      path.join(fixtureRoot, "tied/requirements.yaml"),
-      path.join(fixtureRoot, "tied/architecture-decisions.yaml"),
-      path.join(fixtureRoot, "tied/implementation-decisions.yaml"),
-      path.join(fixtureRoot, "tied/semantic-tokens.yaml"),
+      path.join(fixtureRoot, "tied-project/requirements.yaml"),
+      path.join(fixtureRoot, "tied-project/architecture-decisions.yaml"),
+      path.join(fixtureRoot, "tied-project/implementation-decisions.yaml"),
+      path.join(fixtureRoot, "tied-project/semantic-tokens.yaml"),
     ];
     const before = canonicalPaths.map((filePath) => fs.readFileSync(filePath, "utf8"));
     const previous = process.env.TIED_BASE_PATH;
@@ -88,10 +88,10 @@ describe("BUILD_PROJECT_INQUIRY_INPUT project scope loader REQ-TIED_ADVERSARIAL_
     }
   });
 
-  it("rejects a TIED base path that is not projectRoot/tied", async () => {
+  it("rejects a TIED base path that is not projectRoot/tied-project", async () => {
     const result = await loadProjectScope({
       ...baseInput,
-      tiedBasePath: path.join(os.tmpdir(), "other-project", "tied"),
+      tiedBasePath: path.join(os.tmpdir(), "other-project", "tied-project"),
     });
 
     assert.equal(result.ok, false);

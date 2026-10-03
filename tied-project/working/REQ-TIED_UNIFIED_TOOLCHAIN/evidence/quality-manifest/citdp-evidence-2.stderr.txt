@@ -1,0 +1,2 @@
+bash: -c: line 1: syntax error near unexpected token `('
+bash: -c: line 1: `mcp-server npm test (@tied/agentstream oracle fixtures; dist/hooks/adherence-append-action-attempted.test.js; no in-repo Go tree post-4d)'

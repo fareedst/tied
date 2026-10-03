@@ -1,0 +1,13 @@
+REQ-GOAGENT-AGENT-EXECUTOR:
+  category: "Tooling"
+  detail_file: "requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml"
+  name: "Agent subprocess stream-json executor"
+  priority: "P1"
+  satisfaction_criteria:
+    - criterion: "Executor and stream-json terms are canonical in tied-project/vocab/agentstream.md; executor_Run block in IMPL-GOAGENT-EXECUTOR-pseudocode.md"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-GOAGENT-EXECUTOR"
+    implementation:
+      - "IMPL-GOAGENT-EXECUTOR"

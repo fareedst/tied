@@ -1,0 +1,36 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T21:20:19.656Z",
+  "client_id": "1787638699",
+  "wave_scope": "W-ext-1787638699-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_CLI-pseudocode.md",
+      "impl_token": "IMPL-WININFO_CLI",
+      "action": "none",
+      "classification_before": "constraint-ready-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_ENUMERATE-pseudocode.md",
+      "impl_token": "IMPL-WININFO_ENUMERATE",
+      "action": "none",
+      "classification_before": "constraint-ready-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_FILTER-pseudocode.md",
+      "impl_token": "IMPL-WININFO_FILTER",
+      "action": "none",
+      "classification_before": "constraint-ready-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_RENDER-pseudocode.md",
+      "impl_token": "IMPL-WININFO_RENDER",
+      "action": "none",
+      "classification_before": "constraint-ready-v2"
+    }
+  ],
+  "dry_run_content_hash": "7d9ad5c27a0ade6a147c5af214ba39079c4369c621b46b0118d0e950dc104ae0",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787638699/dry-run/snapshots/W-ext-1787638699-1"
+}

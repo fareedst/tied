@@ -19,8 +19,8 @@ import {
 } from "./checklist-async-dispositions.js";
 
 const REPO_ROOT = path.resolve(import.meta.dirname, "../..");
-const CHECKLIST_YAML = path.join(REPO_ROOT, "tied/docs/agent-req-implementation-checklist.yaml");
-const CHECKLIST_MD = path.join(REPO_ROOT, "tied/docs/agent-req-implementation-checklist.md");
+const CHECKLIST_YAML = path.join(REPO_ROOT, "tied-bundle/docs/agent-req-implementation-checklist.yaml");
+const CHECKLIST_MD = path.join(REPO_ROOT, "tied-bundle/docs/agent-req-implementation-checklist.md");
 const PILOT_AFTER_T0 = path.join(
   REPO_ROOT,
   "working/REQ-TIED_ASYNC_METHODOLOGY/pilot/after-t0/IMPL-GOAGENT-EXECUTOR-with-async-rows.md",

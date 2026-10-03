@@ -1,0 +1,73 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "REQ-TIED_CLAUDE_CLIENT_FACTORY-close-out-2026-09-24",
+  "commit": "32922fd5e91f1389d9be207d10457eb55a5c28d4",
+  "environment": {
+    "node": "plan-close-out"
+  },
+  "command_results": [
+    {
+      "id": "claude-client-validation-unit",
+      "command": ["node", "--test", "tools/bootstrap/lib/claude-client-validation.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/claude-client-validation-test-stdout.txt"
+      ]
+    },
+    {
+      "id": "new-tied-client-e2e",
+      "command": ["npm", "test", "--", "src/e2e/new-tied-client.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/new-tied-client-e2e-stdout.txt"
+      ]
+    },
+    {
+      "id": "tied-validate-consistency",
+      "command": [".cursor/skills/tied-yaml/scripts/tied-cli.sh", "tied_validate_consistency"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/tied-validate-consistency-summary.json"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "claude-factory-unit",
+      "attribute": "claude_client_validation",
+      "applicability": "applicable",
+      "evidence_method": "automated_test",
+      "command_or_test": "node --test tools/bootstrap/lib/claude-client-validation.test.mjs",
+      "result": "passed"
+    },
+    {
+      "id": "claude-harness-pipeline-e2e",
+      "attribute": "harness_claude_skip_cursor_mcp",
+      "applicability": "applicable",
+      "evidence_method": "automated_test",
+      "command_or_test": "npm test src/e2e/new-tied-client.test.ts",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
+    "REQ-TIED_CLAUDE_HARNESS",
+    "REQ-TIED_SETUP",
+    "IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
+  ],
+  "proof_boundaries": [
+    "no_live_claude_ide_in_ci",
+    "cursor_mcp_enable_skipped_for_harness_claude",
+    "Integrated adversarial inquiry N/A at minimal depth"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

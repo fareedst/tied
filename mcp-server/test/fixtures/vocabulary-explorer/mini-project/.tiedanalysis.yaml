@@ -8,7 +8,7 @@ token_scan:
   max_files: 100
 traceability_gap:
   methodology_path_markers:
-    - "tied/methodology/"
+    - "tied-bundle/"
   non_production_path_markers:
     - "templates/"
     - "examples/"

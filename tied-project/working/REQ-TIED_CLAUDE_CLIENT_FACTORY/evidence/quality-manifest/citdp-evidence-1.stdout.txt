@@ -1,0 +1,34 @@
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-rTge0O/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-rTge0O/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-DznvZS/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-DznvZS/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-falDUd/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-falDUd/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-ZEsadp/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-ZEsadp/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-IHowVb/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-IHowVb/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+▶ buildClaudeClientValidationReport [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ uses tied-claude-client-validation.v1 schema_version (1.090666ms)
+✔ buildClaudeClientValidationReport [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (1.539833ms)
+▶ assertMcpJsonHarnessContract [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ passes when harness and TIED_BASE_PATH match client tied/ (14.544584ms)
+  ✔ fails when TIED_MCP_HARNESS is not claude (7.454417ms)
+✔ assertMcpJsonHarnessContract [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (22.079958ms)
+▶ runClaudeCodeInteractiveSmoke [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ skips when claude CLI is not on PATH (7.468125ms)
+  ✔ passes when claude returns expected base_path (8.81975ms)
+✔ runClaudeCodeInteractiveSmoke [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (16.369417ms)
+▶ runClaudeClientValidation fail-fast [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ stops after mcp_json failure without tied-cli smoke (8.787375ms)
+  ✔ honors reroot tied-cli path when skills reroot enabled (0.293042ms)
+  ✔ records check order constants aligned with implementation (0.033209ms)
+✔ runClaudeClientValidation fail-fast [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (9.220291ms)
+ℹ tests 8
+ℹ suites 4
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.590875

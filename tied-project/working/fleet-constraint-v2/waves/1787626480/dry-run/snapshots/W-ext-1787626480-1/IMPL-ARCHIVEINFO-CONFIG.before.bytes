@@ -1,0 +1,16 @@
+# [IMPL-ARCHIVEINFO-CONFIG] Config parsing
+# Implements [ARCH-ARCHIVEINFO-MODULES] for [REQ-ARCHIVEINFO-GLOB]
+
+PROCEDURE Parse(args []string) -> (Config, error)
+  // [IMPL-ARCHIVEINFO-CONFIG] [ARCH-ARCHIVEINFO-MODULES] [REQ-ARCHIVEINFO-GLOB] — parse flags and one glob positional
+  INPUT: args excluding program name
+  PRE: none
+  POST: Config with GlobPattern when positional present; JSON flag set when --json
+  EFFECTS:
+    parse --json, --help flags
+    collect remaining non-flag tokens as positional
+    IF --help THEN set ShowHelp=true; RETURN cfg, nil
+    IF len(positional) != 1 THEN RETURN error "glob pattern required"
+    SET cfg.GlobPattern = positional[0]
+    RETURN cfg, nil
+  FAILURE_MODES: missing glob → error (exit 2 upstream); unknown flag → error

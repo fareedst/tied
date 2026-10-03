@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node --test dist/*.test.js dist/red/*.test.js",
-    "test:harness-red": "npm run build && node --test dist/red/harness-select-phase2.test.js"
+    "test": "npm run build && npx tsx --test src/**/*.test.ts",
+    "test:harness-red": "npm run build && npx tsx --test src/red/harness-select-phase2.test.ts"
   },
   "engines": {
     "node": ">=18"

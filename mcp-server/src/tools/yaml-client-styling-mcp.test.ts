@@ -22,7 +22,7 @@ describe("tied_client_yaml_styling_apply composition [REQ-TIED_YAML_STYLE_CONFIG
 
   it("returns not_configured when repository hook is absent", async () => {
     const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-styling-mcp-"));
-    const tiedBasePath = path.join(projectRoot, "tied");
+    const tiedBasePath = path.join(projectRoot, "tied-project");
     fs.mkdirSync(tiedBasePath);
     const yamlPath = path.join(tiedBasePath, "requirements.yaml");
     fs.writeFileSync(yamlPath, "REQ-EXAMPLE:\n  name: example\n");

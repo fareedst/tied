@@ -1,0 +1,21 @@
+ledger_disposition: "architecture_constraint"
+note: "Distinct from S-T01 (delivery idempotency). Do not merge into a single REQ criterion without sponsor review."
+proposed_arch_deltas:
+  ARCH-FEAT_TASK_EXECUTION_STATE:
+    add_constraints:
+      - "Evidence history must not contain unbounded duplicate rows for the same logical attempt; deduplication or stable attempt key is required for audit integrity."
+proposed_impl_deltas:
+  IMPL-FEAT_TASK_EXECUTION_STATE:
+    blocks_affected:
+      - "APPEND_EVIDENCE"
+    contract_hints:
+      FAILURE_MODES: "EVIDENCE_DUPLICATE_REJECTED"
+      POST: "Duplicate append with same attempt key is rejected or collapsed per dedup policy."
+      PRE: "Attempt identity key present or derivable for each evidence append."
+proposed_req_deltas: {}
+residuality_facet:
+  proof_boundary: "Audit integrity risk; W4 dedup tests required"
+  residue_summary: "Duplicate evidence rows vs single logical attempt (ordering-key defect)"
+  source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+residue_class_w1: "harmful"
+stressor_id: "S-T12"

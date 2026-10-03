@@ -17,21 +17,21 @@ export function selectOfflinePath(capabilityProbe: CapabilityProbe, projectRoot:
     return {
       kind: "feature-orchestrator",
       command: "feature-orchestrator --help",
-      references: ["tied-cli.sh", "TIED YAML MCP", "agentstream", "tied/docs/using-tied-without-mcp.md"],
+      references: ["tied-cli.sh", "TIED YAML MCP", "agentstream", "tied-bundle/docs/using-tied-without-mcp.md"],
       mutated_configuration: false,
     };
   }
   if (capabilityProbe.tied_cli === true && capabilityProbe.node && capabilityProbe.mcp) {
     return {
       kind: "tied-cli",
-      command: `TIED_BASE_PATH="${projectRoot}/tied" .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'`,
-      references: ["TIED YAML MCP", "agentstream", "tied/docs/using-tied-without-mcp.md"],
+      command: `TIED_BASE_PATH="${projectRoot}/tied-project" .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'`,
+      references: ["TIED YAML MCP", "agentstream", "tied-bundle/docs/using-tied-without-mcp.md"],
       mutated_configuration: false,
     };
   }
   return {
     kind: "manual",
-    command: "see tied/docs/using-tied-without-mcp.md",
+    command: "see tied-bundle/docs/using-tied-without-mcp.md",
     references: ["tied-cli.sh", "TIED YAML MCP", "agentstream"],
     mutated_configuration: false,
   };

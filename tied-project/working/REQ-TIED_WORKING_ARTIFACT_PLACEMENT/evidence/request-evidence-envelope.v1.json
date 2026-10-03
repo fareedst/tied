@@ -1,0 +1,69 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-03T13:22:36.943Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_WORKING_ARTIFACT_PLACEMENT",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_WORKING_ARTIFACT_PLACEMENT/CITDP-REQ-TIED_WORKING_ARTIFACT_PLACEMENT.yaml",
+      "content_hash": "sha256:79efe8c1a482e0b7a407d9e5ed1391ab0caabfca1e836619d12911f1a1f8d7f3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_WORKING_ARTIFACT_PLACEMENT/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:a6b54df570f86a5752c6e1bcab1c4c652d73330834a52f8fff481eea29e3af3d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_WORKING_ARTIFACT_PLACEMENT/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:10c806bf480f40cb7afddce4c12f78b6b522d91aaeeb76e88ba35edb7a29698d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_WORKING_ARTIFACT_PLACEMENT/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:e5e82d55507243f9fd07b16e3a7472a76e29dfeabcee9e6f894abc8ac985f5c2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "tied-project/working/REQ-TIED_WORKING_ARTIFACT_PLACEMENT/CITDP-REQ-TIED_WORKING_ARTIFACT_PLACEMENT.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

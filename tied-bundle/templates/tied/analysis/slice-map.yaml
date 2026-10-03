@@ -1,0 +1,6 @@
+bindings: []
+notes: "Reference from CITDP risk_analysis.bbce_alignment.slice_map_ref when using BBCE advisory passes."
+schema_version: "bbce-slice-map.v1"
+shared_mechanism_globs:
+  - ".cursor/**"
+  - "tied/**"

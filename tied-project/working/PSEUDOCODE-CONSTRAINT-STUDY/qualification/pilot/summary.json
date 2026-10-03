@@ -1,0 +1,13 @@
+{
+  "run_at": "2026-09-10T14:47:33.250Z",
+  "mode": "pilot",
+  "typed_flow": true,
+  "gate_mode": true,
+  "regression_typed_flow_false": true,
+  "total": 124,
+  "parse_ok": 124,
+  "gate_pass": 96,
+  "regression_gate_unchanged": 124,
+  "new_gate_failures": [],
+  "failures": []
+}

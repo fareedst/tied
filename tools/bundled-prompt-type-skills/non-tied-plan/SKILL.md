@@ -9,7 +9,7 @@ disable-model-invocation: true
 Explicit invocation only (`@non-tied-plan` or `prompt-type: non-tied-plan`).
 
 This skill is the workflow source of truth for client prompt-type invocation.
-`copy_files.sh` installs it under `.cursor/skills/non-tied-plan/`. Task wrappers under
+`tied-install.sh` installs it under `.cursor/skills/non-tied-plan/`. Task wrappers under
 `.cursor/agents/` remain TIED-source development artifacts only.
 [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
 [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]

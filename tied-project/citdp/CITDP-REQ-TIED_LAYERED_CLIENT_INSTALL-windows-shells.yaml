@@ -1,0 +1,40 @@
+CITDP-REQ-TIED_LAYERED_CLIENT_INSTALL-windows-shells:
+  change_definition:
+    current_behavior: "Linked install reachable from Git Bash and CMD; no PowerShell shims; install-layers legacy hard-codes copy_files.sh on Windows."
+    desired_behavior: "Three install surfaces (.sh / .cmd / .ps1) delegate to tied-install-dispatch.mjs; full .ps1 shim suite mirrors .cmd; Windows smoke covers linked install and factory."
+    non_goals:
+      - "Porting build-commands.sh to PowerShell"
+      - "Script signing or changing layer semantics"
+    success_criteria:
+      - "tied-install-dispatch and windows-shims tests pass in test-bootstrap-layered-install"
+      - "windows-bootstrap-smoke.cmd phases 4-5 and pwsh tied-install.ps1 step green"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+    implementation_decisions:
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+    requirements:
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_LAYERED_CLIENT_INSTALL-windows-shells"
+    created_at: "2026-10-02"
+    status: "implemented"
+    title: "Windows Git Bash, CMD, and PowerShell install shims"
+    updated_at: "2026-10-02"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      rationale: "Installer writes client trees and accepts external argv from shells; persistence + external input triggers integrated depth."
+      research_profile: "integrated-agent"
+    risks:
+      - description: "Argv tokenization differs across cmd, pwsh, and Git Bash"
+        id: "RISK-WIN-SHIM-001"
+        likelihood: "Medium"
+        mitigation: "Dispatch unit tests + pwsh CI step; matrix documents MSYS_NO_PATHCONV and ExecutionPolicy Bypass"
+  test_strategy:
+    summary: "Node unit/composition on Unix; Windows cmd + pwsh smoke for E2E-only shell behavior."

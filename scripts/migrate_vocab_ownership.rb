@@ -15,7 +15,7 @@ options = {
 
 OptionParser.new do |parser|
   parser.banner = "Usage: migrate_vocab_ownership.rb [options] CLIENT_PROJECT"
-  parser.on("--apply", "Move exact methodology glossaries into tied/methodology/vocab") do
+  parser.on("--apply", "Move exact methodology glossaries into tied-bundle/vocab") do
     options[:apply] = true
   end
   parser.on("--fail-on-review", "Exit 2 when files require human review") do
@@ -85,10 +85,10 @@ Dir.glob(File.join(client_vocab, "*.md")).sort.each do |client_path|
   if options[:apply]
     FileUtils.mkdir_p(methodology_vocab)
     FileUtils.mv(client_path, target_path)
-    puts "MOVE: #{basename} -> tied/methodology/vocab/#{basename}"
+    puts "MOVE: #{basename} -> tied-bundle/vocab/#{basename}"
     moved << basename
   else
-    puts "CANDIDATE: #{basename} -> tied/methodology/vocab/#{basename}"
+    puts "CANDIDATE: #{basename} -> tied-bundle/vocab/#{basename}"
     moved << basename
   end
 end

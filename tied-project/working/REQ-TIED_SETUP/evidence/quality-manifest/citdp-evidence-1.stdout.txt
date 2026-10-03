@@ -1,0 +1,14 @@
+▶ resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]
+  ✔ uses timestamp basename under dev/test when shell has stdd-dev (0.498041ms)
+  ✔ uses ten-digit basename even outside dev/test path (0.08675ms)
+  ✔ honors explicit env override for named project dirs (0.054167ms)
+  ✔ falls back to basename when env unset on named project dirs (0.043667ms)
+✔ resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS] (1.291833ms)
+ℹ tests 4
+ℹ suites 1
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 66.628

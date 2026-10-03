@@ -16,12 +16,8 @@ if errorlevel 1 (
 )
 for /f "delims=" %%v in ('node --version') do echo Node: %%v
 
-if not exist "tools\bootstrap\copy-files.mjs" (
-  echo FAIL: tools\bootstrap\copy-files.mjs missing
-  exit /b 1
-)
-if not exist "copy_files.cmd" (
-  echo FAIL: copy_files.cmd missing at repo root
+if not exist "tied-install.cmd" (
+  echo FAIL: tied-install.cmd missing at repo root
   exit /b 1
 )
 if not exist "mcp-server\dist\index.js" (
@@ -39,30 +35,32 @@ echo SMOKE_DIR=!SMOKE_DIR!
 if not exist "!SMOKE_DIR!" mkdir "!SMOKE_DIR!"
 
 echo.
-echo --- 1/3 copy_files.cmd ---
+echo --- 1/4 tied-install.cmd linked ---
 cd /d "!SMOKE_DIR!"
-call "%REPO_ROOT%\copy_files.cmd"
+call "%REPO_ROOT%\tied-install.cmd" --mode linked
 if errorlevel 1 (
-  echo FAIL: copy_files.cmd
+  echo FAIL: tied-install.cmd linked
   popd
   exit /b 1
 )
-if not exist "tied\requirements.yaml" (
-  echo FAIL: tied\requirements.yaml not created
-  popd
-  exit /b 1
+if not exist "tied-project\requirements.yaml" (
+  if not exist "tied\requirements.yaml" (
+    echo FAIL: project requirements.yaml not created
+    popd
+    exit /b 1
+  )
 )
 if not exist ".cursor\mcp.json" (
   echo FAIL: .cursor\mcp.json not initialized
   popd
   exit /b 1
 )
-if not exist ".tied-yaml.yaml" (
-  echo FAIL: .tied-yaml.yaml not seeded at client project root
+if not exist "tied-bundle\install.json" (
+  echo FAIL: tied-bundle\install.json missing after linked install
   popd
   exit /b 1
 )
-echo OK: bootstrap layout
+echo OK: linked bootstrap layout
 
 echo.
 echo --- 1b Claude dual-bootstrap asserts [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] ---
@@ -75,7 +73,7 @@ if errorlevel 1 (
 echo OK: Claude skills + repo-root .mcp.json
 
 echo.
-echo --- 2/3 lint_yaml.cmd -F tied ---
+echo --- 2/4 lint_yaml.cmd -F tied ---
 call "%REPO_ROOT%\scripts\lint_yaml.cmd" -F tied
 if errorlevel 1 (
   echo FAIL: lint_yaml.cmd
@@ -85,24 +83,21 @@ if errorlevel 1 (
 echo OK: YAML lint
 
 echo.
-echo --- 3/3 Node direct entrypoint ---
+echo --- 3/4 install-layers.mjs direct entrypoint ---
 set "NODE_SMOKE=%TEMP%\tied-node-smoke-%RANDOM%"
 mkdir "!NODE_SMOKE!" 2>nul
-node "%REPO_ROOT%\tools\bootstrap\copy-files.mjs" "!NODE_SMOKE!"
+node "%REPO_ROOT%\tools\bootstrap\install-layers.mjs" --mode linked "!NODE_SMOKE!"
 if errorlevel 1 (
-  echo FAIL: copy-files.mjs direct invoke
+  echo FAIL: install-layers.mjs direct invoke
   popd
   exit /b 1
 )
-if not exist "!NODE_SMOKE!\tied\requirements.yaml" (
-  echo FAIL: Node entrypoint did not create tied\requirements.yaml
-  popd
-  exit /b 1
-)
-if not exist "!NODE_SMOKE!\.tied-yaml.yaml" (
-  echo FAIL: Node entrypoint did not seed .tied-yaml.yaml
-  popd
-  exit /b 1
+if not exist "!NODE_SMOKE!\tied-project\requirements.yaml" (
+  if not exist "!NODE_SMOKE!\tied\requirements.yaml" (
+    echo FAIL: Node entrypoint did not create requirements.yaml
+    popd
+    exit /b 1
+  )
 )
 echo OK: Node CLI entrypoint
 
@@ -115,6 +110,31 @@ if errorlevel 1 (
   exit /b 1
 )
 echo OK: Claude asserts on Node smoke client
+
+echo.
+echo --- 4/4 migrate-layout dry-run on legacy fixture ---
+set "LEGACY_FIX=%TEMP%\tied-legacy-fix-%RANDOM%"
+mkdir "!LEGACY_FIX!\tied" 2>nul
+echo requirements: []> "!LEGACY_FIX!\tied\requirements.yaml"
+node "%REPO_ROOT%\tools\bootstrap\install-layers.mjs" --migrate-layout --dry-run "!LEGACY_FIX!"
+if errorlevel 1 (
+  echo FAIL: migrate-layout dry-run
+  popd
+  exit /b 1
+)
+echo OK: migrate-layout dry-run
+
+echo.
+echo --- 5/5 test-new-tied-client.cmd factory skips ---
+set "TIED_TEST_ROOT=%TEMP%\tied-factory-smoke"
+if not exist "!TIED_TEST_ROOT!" mkdir "!TIED_TEST_ROOT!"
+call "%REPO_ROOT%\test-new-tied-client.cmd" --skip-mcp-enable --skip-git --skip-onboarding-audit
+if errorlevel 1 (
+  echo FAIL: test-new-tied-client.cmd
+  popd
+  exit /b 1
+)
+echo OK: disposable factory smoke
 
 popd
 echo.

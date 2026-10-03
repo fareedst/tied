@@ -1,0 +1,55 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "goagent-cli-config-closeout-20260911",
+  "commit": "HEAD",
+  "environment": {
+    "go": "1.22+"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": ["go", "test", "./..."],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/tools/agentstream",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 16375,
+      "artifacts": [
+        "working/REQ-GOAGENT-CLI-CONFIG/evidence/quality-manifest/citdp-evidence-1/citdp-evidence-1.stderr.txt",
+        "working/REQ-GOAGENT-CLI-CONFIG/evidence/quality-manifest/citdp-evidence-1/citdp-evidence-1.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-2",
+      "command": ["go", "build", "-trimpath", "-o", "agentstream", "./cmd/agentstream"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/tools/agentstream",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 131,
+      "artifacts": [
+        "working/REQ-GOAGENT-CLI-CONFIG/evidence/quality-manifest/citdp-evidence-2/citdp-evidence-2.stderr.txt",
+        "working/REQ-GOAGENT-CLI-CONFIG/evidence/quality-manifest/citdp-evidence-2/citdp-evidence-2.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "citdp-evidence-1",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "CITDP evidence.commands for REQ-GOAGENT-CLI-CONFIG",
+      "risk": "CLI/env precedence regression",
+      "evidence_method": "automated_test",
+      "command_or_test": "go test ./...",
+      "threshold": "exit 0",
+      "result": "passed",
+      "owner": "REQ-GOAGENT-CLI-CONFIG",
+      "limitation": "tools/agentstream module only"
+    }
+  ],
+  "covered_tokens": ["IMPL-GOAGENT-CLI-CMD", "REQ-GOAGENT-CLI-CONFIG"],
+  "proof_boundaries": ["CLI config resolution only; no executor behavior change"],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

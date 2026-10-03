@@ -1,0 +1,10 @@
+Close-out regression 2026-10-03
+
+node --test tools/bootstrap/lib/new-client-onboarding-audit.test.mjs
+  pass 3/3
+
+node --test scripts/tied-new-client-audit.test.mjs
+  pass 8/8
+
+cd mcp-server && bun test src/e2e/new-tied-client.test.ts
+  pass 14/14

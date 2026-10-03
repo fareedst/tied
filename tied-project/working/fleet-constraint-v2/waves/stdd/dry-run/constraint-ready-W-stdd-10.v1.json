@@ -1,0 +1,48 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-12T22:45:19.812Z",
+  "client_id": "stdd",
+  "wave_scope": "W-stdd-10",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV-pseudocode.md",
+      "impl_token": "IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "wire_tdd_yaml_turns_from_argv(argv)",
+          "start_line": 6
+        }
+      ]
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS-pseudocode.md",
+      "impl_token": "IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "export_step_entries_to_markdown(yaml_path, out_dir)",
+          "start_line": 6
+        }
+      ]
+    },
+    {
+      "sidecar_path": "tied/implementation-decisions/IMPL-ATDD-E2E-AGENT_STREAM-pseudocode.md",
+      "impl_token": "IMPL-ATDD-E2E-AGENT_STREAM",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "run_agent_stream_subprocess(cmd)",
+          "start_line": 6
+        }
+      ]
+    }
+  ],
+  "dry_run_content_hash": "1cfa7ff23faa6a3fb544a41831da3c130abda8c57e45dcb71ca4b032ba0e6da1",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/stdd/dry-run/snapshots-constraint-ready/W-stdd-10"
+}

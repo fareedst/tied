@@ -1,0 +1,56 @@
+# [IMPL-FILEHASH_DISCOVER] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# Summary: Expand CLI roots; walk directories; skip symlinks; dedupe files.
+
+## EXPAND_ROOTS
+# [IMPL-FILEHASH_DISCOVER] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Process each root path and aggregate discovery results.
+
+Contract:
+  INPUT: root_paths
+  OUTPUT: files; immediate_errors; root_errors
+  DATA: dedupe_map
+  PRE: len(root_paths) >= 1
+  POST: deduped file list and error collections returned
+  EFFECTS: filesystem stat and walk
+  FAILURE_MODES: ROOT_NOT_FOUND; ROOT_STAT_FAILED
+
+procedure EXPAND_ROOTS:
+  Contract:
+    INPUT: root_paths
+    OUTPUT: discover_result
+    PRE: len(root_paths) >= 1
+    POST: deduped regular files enqueued
+    EFFECTS: Lstat and WalkDir
+    FAILURE_MODES: ROOT_NOT_FOUND; ROOT_STAT_FAILED
+  FOR EACH root IN root_paths:
+    CALL Lstat root
+    IF lstat fails:
+      APPEND root_errors AND CONTINUE
+    IF root is symlink:
+      APPEND immediate_errors AND CONTINUE
+    IF root is directory:
+      CALL WALK_DIRECTORY WITH root
+    ELSE IF root is regular file:
+      ENQUEUE file with dedupe
+    ELSE:
+      APPEND immediate_errors not_a_regular_file
+  RETURN discover_result
+
+## WALK_DIRECTORY
+# [IMPL-FILEHASH_DISCOVER] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Walk directory depth-first; enqueue regular files.
+
+procedure WALK_DIRECTORY:
+  Contract:
+    INPUT: directory_root
+    OUTPUT: files enqueued
+    PRE: directory_root is accessible directory
+    POST: all regular files under root enqueued
+    EFFECTS: WalkDir
+    FAILURE_MODES: WALK_CALLBACK_ERROR
+  FOR EACH entry IN WalkDir(directory_root):
+    IF entry is symlink:
+      SKIP entry without follow
+      CONTINUE
+    IF entry is regular file:
+      ENQUEUE with dedupe by absolute path

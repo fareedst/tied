@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, it } from "node:test";
 
@@ -14,6 +14,7 @@ import {
   runCorpusCase,
   writeRegressionManifest,
 } from "./fixture-corpus-regression.js";
+import { resolveWorkingPath } from "./working-root.js";
 
 const REQUEST_TOKEN = "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT";
 
@@ -22,24 +23,26 @@ function sha256File(filePath: string): string {
 }
 
 function loadGateReceipts(root: string) {
-  const working = path.join(root, "working", REQUEST_TOKEN);
   const phases = [
     { phase: "pre_implementation", file: "gate-pre-implementation.json" },
     { phase: "verification", file: "gate-verification.json" },
     { phase: "close_out", file: "gate-close_out.json" },
   ] as const;
-  return phases.map(({ phase, file }) => {
-    const gatePath = path.join(working, file);
-    return {
+  return phases.flatMap(({ phase, file }) => {
+    const gatePath = resolveWorkingPath(root, REQUEST_TOKEN, file);
+    if (!existsSync(gatePath)) {
+      return [];
+    }
+    return [{
       phase,
-      path: path.relative(root, gatePath),
+      path: path.relative(root, gatePath).split(path.sep).join("/"),
       hash: sha256File(gatePath),
-    };
+    }];
   });
 }
 
 function loadAdversarialInquiryRuns(root: string) {
-  const evidencePath = path.join(root, "working", REQUEST_TOKEN, "evidence-manifest.json");
+  const evidencePath = path.join(root, "tied-project", "working", REQUEST_TOKEN, "evidence-manifest.json");
   const evidence = JSON.parse(readFileSync(evidencePath, "utf8")) as {
     adversarial_inquiry_runs?: Array<{ phase: string; run_id: string; proof_boundary?: string }>;
   };

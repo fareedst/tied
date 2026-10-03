@@ -1,0 +1,14 @@
+f11: true
+run_at: "2026-09-12T15:07:53.593Z"
+tier_A:
+  new_gate_failures: 0
+  pass: true
+tier_B:
+  pass: true
+  regression: true
+tier_C:
+  pass: true
+  report_only: true
+tier_D:
+  optional: true
+  pass: true

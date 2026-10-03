@@ -1,0 +1,63 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-03T04:33:44.844Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_LAYERED_CLIENT_INSTALL",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "phase8-verify-2026-10-02",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "evidence_chain_profile_generate"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:12d2fae53a50b33cee0bd11e92565af3fa16839244355d210cc4293b3284b82b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": "evidence-chain-profile.v1",
+      "path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:b0811ccbfc13d93df4b25637f7139ae27f7fd71b46f5c81f3d65069fd93414fc",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:a878696231ed80478bd8eee0f0ffe0e944f27735bc7512f3f0eee8fbabe36bb8",
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "expected_artifact_missing",
+      "artifact_kind": "evidence_chain_profile",
+      "phase": null,
+      "detail": "Integrated depth expects evidence-chain-profile artifact",
+      "severity": "error",
+      "source": "profile-cross-link"
+    }
+  ]
+}

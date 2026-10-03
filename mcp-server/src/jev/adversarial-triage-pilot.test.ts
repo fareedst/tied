@@ -16,9 +16,10 @@ import {
 } from "./adversarial-triage-pilot.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(__dirname, "../../..");
 const FIXTURE = path.join(
-  __dirname,
-  "../../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/fixtures/adversarial-triage-labeled.v1.json",
+  repoRoot,
+  "tied-project/working/REQ-TIED_JEV_DECISION_COPROCESSOR/fixtures/adversarial-triage-labeled.v1.json",
 );
 
 describe("REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot", () => {
@@ -80,6 +81,7 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot", () => 
     const obs = await observeAdversarialTriageCase(labeled, {
       apiKey: "test",
       fetchImpl,
+      traceEnv: { TIED_JEV_DECISION_PROVIDER: "remote" },
     });
     assert.equal(obs.triage_class, "aligned");
     assert.equal(obs.matches_labels, true);

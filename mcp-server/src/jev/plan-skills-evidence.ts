@@ -6,6 +6,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { isValidWorkingRequestToken } from "../working-request-token.js";
+import { resolveWorkingPath, workingPathRelativeToProject } from "../working-root.js";
 
 const RUN_ID_RE = /^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/;
 
@@ -33,14 +34,14 @@ export function resolvePlanSkillsEvidenceDir(
   if (!isValidWorkingRequestToken(requestToken)) {
     return { error: "invalid_request_token" };
   }
-  const anchor = path.resolve(projectRoot, "working", requestToken, "jev", "plan-skills");
+  const anchor = resolveWorkingPath(projectRoot, requestToken, "jev", "plan-skills");
   const dir = path.resolve(anchor, runId);
   const rel = path.relative(anchor, dir);
   if (rel.startsWith("..") || path.isAbsolute(rel)) {
     return { error: "unsafe_evidence_path" };
   }
-  const artifact_relpath = path.join(
-    "working",
+  const artifact_relpath = workingPathRelativeToProject(
+    projectRoot,
     requestToken,
     "jev",
     "plan-skills",
@@ -78,8 +79,8 @@ export function writeTriagePilotEvidence(
   }
   fs.mkdirSync(resolved.dir, { recursive: true });
   const filePath = path.join(resolved.dir, "adversarial-triage-pilot.v1.json");
-  const artifact_relpath = path.join(
-    "working",
+  const artifact_relpath = workingPathRelativeToProject(
+    projectRoot,
     requestToken,
     "jev",
     "plan-skills",

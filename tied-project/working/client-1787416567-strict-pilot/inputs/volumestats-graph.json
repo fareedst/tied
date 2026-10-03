@@ -1,0 +1,53 @@
+{
+  "projectId": "1787416567",
+  "criteria": [
+    {
+      "identity": {
+        "id": "REQ-VOLUMESTATS-CLI#criterion-success",
+        "kind": "criterion",
+        "derivation": "explicit",
+        "revision": "working-tree-2026-08-24",
+        "sourceRevision": "citdp-20260824"
+      },
+      "architectureConstraintIds": ["constraint-volumestats-modules"]
+    }
+  ],
+  "architectureConstraints": [
+    {
+      "id": "constraint-volumestats-modules",
+      "implementationBlockIds": ["IMPL-VOLUMESTATS-CLI#RUN_VOLUMESTATS"]
+    }
+  ],
+  "implementationBlocks": [
+    {
+      "identity": {
+        "id": "IMPL-VOLUMESTATS-CLI#RUN_VOLUMESTATS",
+        "kind": "block",
+        "name": "RUN_VOLUMESTATS",
+        "derivation": "legacy",
+        "revision": "working-tree-2026-08-24",
+        "sourceRevision": "citdp-20260824"
+      }
+    }
+  ],
+  "evidenceLoci": [
+    {
+      "id": "evidence:VS-TEST-COMPOSITION",
+      "blockId": "IMPL-VOLUMESTATS-CLI#RUN_VOLUMESTATS",
+      "kind": "test",
+      "location": "tools/volumestats/cmd/volumestats/composition_test.go:1",
+      "sourceRevision": "citdp-20260824"
+    }
+  ],
+  "bindings": [],
+  "adversarialCases": [
+    {
+      "id": "case:VS-CASE-CONFLICTING-OUTPUT-FLAGS",
+      "blockId": "IMPL-VOLUMESTATS-CLI#RUN_VOLUMESTATS"
+    },
+    {
+      "id": "case:VS-CASE-PARTIAL-COLLECTION-FAILURE",
+      "blockId": "IMPL-VOLUMESTATS-CLI#RUN_VOLUMESTATS"
+    }
+  ]
+}

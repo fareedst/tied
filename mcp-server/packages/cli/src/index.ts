@@ -8,6 +8,7 @@ import { spawn } from "node:child_process";
 import {
   agentstreamTsEntryFromCliModule,
   bootstrapCopyFilesEntryFromCliModule,
+  bootstrapInstallLayersEntryFromCliModule,
   bootstrapNewClientEntryFromCliModule,
   branchCheckCliEntryFromCliModule,
   gateCheckCliEntryFromCliModule,
@@ -24,6 +25,7 @@ function printHelp(): void {
 Subcommands:
   mcp         Start the TIED YAML MCP server on stdio (same as mcp-server/dist/index.js)
   bootstrap   Copy TIED templates into a client (default: copy-files; use "new-client" for pipeline)
+  install     Layered client install (default linked; see tied-install.sh)
   yaml        Lint or canonicalize YAML (lint | canonicalize)
   gate        Checklist gate composition (check — calls tied_checklist_gate_validate)
   branch      Git branch hygiene vs CITDP/Tracker (check)
@@ -84,6 +86,11 @@ function main(): void {
 
   if (subcommand === "mcp") {
     runNodeEntry(mcpStdioEntryFromCliModule(import.meta.url), rest);
+    return;
+  }
+
+  if (subcommand === "install") {
+    runNodeEntry(bootstrapInstallLayersEntryFromCliModule(import.meta.url), rest);
     return;
   }
 

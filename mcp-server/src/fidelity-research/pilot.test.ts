@@ -9,7 +9,7 @@ describe("RUN_FIDELITY_RESEARCH_PILOT REQ-TIED_FIDELITY_RESEARCH", () => {
     const result = runFidelityResearchPilot({
       manifest: {
         projectRoot: "/pilot-project",
-        tiedBasePath: "/pilot-project/tied",
+        tiedBasePath: "/pilot-project/tied-project",
         version: "3.0.0",
         languages: ["typescript"],
         testClassifiers: ["*.test.ts"],
@@ -21,7 +21,7 @@ describe("RUN_FIDELITY_RESEARCH_PILOT REQ-TIED_FIDELITY_RESEARCH", () => {
         currentRevision: "rev-1",
         artifacts: [
           {
-            path: "tied/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md",
+            path: "tied-project/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md",
             kind: "pseudocode",
             content: "procedure PROJECT_MANIFEST(input): RETURN input",
           },
@@ -92,7 +92,7 @@ describe("RUN_FIDELITY_RESEARCH_PILOT REQ-TIED_FIDELITY_RESEARCH", () => {
     const result = runFidelityResearchPilot({
       manifest: {
         projectRoot: "/pilot-project",
-        tiedBasePath: "/other-project/tied",
+        tiedBasePath: "/other-project/tied-project",
         version: "3.0.0",
         languages: ["typescript"],
         testClassifiers: ["*.test.ts"],

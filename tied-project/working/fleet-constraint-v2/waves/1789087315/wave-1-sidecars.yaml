@@ -1,0 +1,8 @@
+client_id: "1789087315"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 1 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-DUPCOMPARE"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1789087315/tied/implementation-decisions/IMPL-DUPCOMPARE-pseudocode.md"
+wave_id: "W-ext-1789087315-1"

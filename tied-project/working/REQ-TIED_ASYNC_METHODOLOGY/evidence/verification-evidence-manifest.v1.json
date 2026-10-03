@@ -1,0 +1,98 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "w5w6-verify-closeout-20260910",
+  "commit": "unknown",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "w5w6-build",
+      "command": [
+        "bash",
+        "-lc",
+        "npm run build --prefix mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "w5-binding-inventory-tests",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test mcp-server/dist/analysis/binding-inventory.test.js mcp-server/dist/analysis/binding-inventory-composition.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "w5-quality-validation-mcp",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test dist/tools/quality-validation-mcp.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "w6-agentstream-highlight",
+      "command": [
+        "bash",
+        "-lc",
+        "go test ./checklist/ -run TestLoadTurns_asyncMethodologyHighlightForPhaseBAndG -count=1"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/tools/agentstream",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "w6-scoped-analysis-preview",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test mcp-server/dist/analysis/scoped-analysis-async-preview.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "CITDP W5+W6 quality profile — binding inventory and advisory preload",
+      "evidence_method": "command",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_ASYNC_METHODOLOGY",
+    "REQ-ASYNC_COMPOSITION_INVENTORY",
+    "ARCH-ASYNC_COMPOSITION_BINDING",
+    "IMPL-ASYNC_BINDING_VALIDATOR"
+  ],
+  "proof_boundaries": [
+    "baseline-functional",
+    "binding inventory completeness only; no runtime ordering delivery or race-freedom claims",
+    "advisory preload and preview only"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": [
+      "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w5.yaml",
+      "working/REQ-TIED_ASYNC_METHODOLOGY/CITDP-REQ-TIED_ASYNC_METHODOLOGY-w6.yaml"
+    ]
+  }
+}

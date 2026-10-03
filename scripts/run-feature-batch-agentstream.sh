@@ -94,7 +94,7 @@ main() {
   local select_order=""
   local workspace="."
   local runner_ignored=0
-  local lead_checklist_yaml="${_repo_root}/tied/docs/agent-req-implementation-checklist.yaml"
+  local lead_checklist_yaml="${_repo_root}/tied-bundle/docs/agent-req-implementation-checklist.yaml"
   local lead_checklist_from_step=""
   local lead_checklist_to_step=""
   local checklist_var_strict=0

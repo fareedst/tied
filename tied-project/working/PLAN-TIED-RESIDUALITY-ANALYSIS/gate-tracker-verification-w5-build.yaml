@@ -1,0 +1,49 @@
+depth_tier: "minimal"
+execution_evidence:
+  batch: "W5-build-plan-promotion"
+  completed:
+    - "verification-gate"
+  request: "PLAN-TIED-RESIDUALITY-ANALYSIS"
+gate_policy: "advisory"
+note: "tracker_path for tied_checklist_gate_validate verification — w5-build-plan-promotion"
+profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/docs/agent-req-implementation-checklist.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w5-build-plan-summary.md"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/implementation-decisions/IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "mcp-server/src/residuality/stressor-residue-validate.test.ts"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/requirements/REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION.yaml"
+    slug: "sub-yaml-edit-loop"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sub-adversarial-inquiry-pass-w5-refine.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "W5 build verification at minimal depth; validator covered by unit tests."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-residuality-analysis-plan.md"
+      - kind: "file_path"
+        path: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w5-build-plan-summary.md"
+    slug: "verification-gate"

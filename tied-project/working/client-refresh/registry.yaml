@@ -1,0 +1,40 @@
+clients:
+  - brownfield:
+      docs_synced_from_source_count: 16
+      mixed_vocab_in_tied_vocab: true
+      stale_methodology_glossaries_removed:
+        - "agent-stream-ruby.md"
+        - "agentstream.md"
+        - "config-discovery.md"
+        - "feedback-to-tied.md"
+        - "leap-proposal-queue.md"
+        - "pseudocode-and-citdp.md"
+        - "tied-methodology.md"
+        - "tied-yaml-mcp.md"
+      vocab_migrate_apply_moved: 0
+    client_root: "/Users/fareed/Documents/dev/go/bkpdir"
+    harness: "cursor"
+    id: "bkpdir"
+    last_refresh:
+      client_git_sha_before: "6a84907"
+      date: "2026-09-28"
+      notes:
+        - "Omitted --semantic-yaml-compare due to templates/ vs methodology/ root YAML parity false positive."
+        - "Parity B cleared by syncing 16 drifted tied/docs from stdd source (--sync-docs pattern)."
+        - "Used tools/bootstrap/copy-files.mjs; copy_files.sh CLI lacks hook/parity flags."
+      parity_report: "/Users/fareed/Documents/dev/go/bkpdir/.tied/client-refresh-parity-report.json"
+      pre_parity_report: "/Users/fareed/Documents/dev/go/bkpdir/.tied/client-refresh-parity-report.pre.json"
+      rollback_tag: "pre-tied-methodology-refresh-20260928223558"
+      stdd_git_sha: "df74f1a"
+      tied_validate_consistency_ok: true
+    methodology_hooks:
+      bootstrap_flags:
+        - "--install-methodology-hook"
+        - "--merge-vocab"
+        - "--methodology-readonly"
+        - "--strict-refresh"
+      core_hooks_path: ".githooks"
+      hooks_enabled: true
+    tied_base_path: "/Users/fareed/Documents/dev/go/bkpdir/tied"
+schema_version: "client-refresh-registry.v1"
+tied_source_default: "/Users/fareed/Documents/dev/chatgpt/stdd"

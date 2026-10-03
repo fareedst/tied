@@ -1,0 +1,18 @@
+client_id: "1787626480"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 6 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-ARCHIVEINFO-CLI-CMD"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-CLI-CMD-pseudocode.md"
+  - impl_token: "IMPL-ARCHIVEINFO-CONFIG"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-CONFIG-pseudocode.md"
+  - impl_token: "IMPL-ARCHIVEINFO-FORMAT-DETECT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-FORMAT-DETECT-pseudocode.md"
+  - impl_token: "IMPL-ARCHIVEINFO-FORMAT-OUT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-FORMAT-OUT-pseudocode.md"
+  - impl_token: "IMPL-ARCHIVEINFO-GLOB"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-GLOB-pseudocode.md"
+  - impl_token: "IMPL-ARCHIVEINFO-READ"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-READ-pseudocode.md"
+wave_id: "W-ext-1787626480-1"

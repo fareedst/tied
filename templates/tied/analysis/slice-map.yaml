@@ -1,7 +1,0 @@
-# Client starter slice map (bbce-slice-map.v1). Customize bindings for your repository.
-schema_version: bbce-slice-map.v1
-bindings: []
-shared_mechanism_globs:
-  - "tied/**"
-  - ".cursor/**"
-notes: "Reference from CITDP risk_analysis.bbce_alignment.slice_map_ref when using BBCE advisory passes."

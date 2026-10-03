@@ -1,0 +1,42 @@
+{
+  "schema_version": "grammar-v2-default-audit.v1",
+  "client_root": "/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-grammar-v2-audit-NKeS5x",
+  "template_path": "/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-grammar-v2-audit-NKeS5x/templates/impl-essence-pseudocode-template.md",
+  "smoke_sidecar_path": "/Users/fareed/Documents/dev/chatgpt/stdd/scripts/fixtures/grammar-v2-default-smoke.sidecar.md",
+  "dimensions": {
+    "grammar_v2_header": "pass",
+    "layer_b": {
+      "ok": true,
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "error_count": 0,
+      "diagnostics": []
+    },
+    "layer_c": {
+      "ok": true,
+      "gate_mode_applied": true,
+      "constraint_flow": false
+    },
+    "constraint_flow": false,
+    "legacy_v1_compatibility": {
+      "compatible": true,
+      "classification": "legacy_v1",
+      "sidecar_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md"
+    }
+  },
+  "audit": {
+    "ok": true,
+    "dimensions": {
+      "grammar_v2_header": "pass",
+      "layer_b": {
+        "ok": true
+      },
+      "layer_c": {
+        "ok": true,
+        "gate_mode_applied": true
+      },
+      "constraint_flow": false,
+      "legacy_v1_compatibility": "pass"
+    }
+  },
+  "ok": true
+}

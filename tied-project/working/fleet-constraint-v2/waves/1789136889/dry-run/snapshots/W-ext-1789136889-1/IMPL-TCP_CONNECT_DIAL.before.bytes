@@ -1,0 +1,51 @@
+# [IMPL-TCP_CONNECT_DIAL] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]
+
+TCP dial attempt with deadline and pure error classification into probe status literals.
+
+## CLASSIFY_ERROR
+
+<!-- [IMPL-TCP_CONNECT_DIAL] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]: maps dial errors to OK/REFUSED/TIMEOUT/ERROR status literals -->
+
+Contract:
+  INPUT: err may be nil or a dial/network error
+  OUTPUT: status literal OK, REFUSED, TIMEOUT, or ERROR
+  PRE: err is nil or a dial/network error
+  POST: returns exactly one of OK, REFUSED, TIMEOUT, ERROR
+  EFFECTS: pure; classifies error category without I/O
+  MESSAGE_CONTRACT: N/A — no message/event delivery
+  RETRY: N/A — classification only
+  IDEMPOTENCY: N/A — pure function
+  TERMINATION: total
+
+procedure CLASSIFY_ERROR(): # [IMPL-TCP_CONNECT_DIAL] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]
+1. IF err IS nil THEN RETURN OK
+2. IF err indicates deadline exceeded THEN RETURN TIMEOUT
+3. IF err indicates connection refused THEN RETURN REFUSED
+4. RETURN ERROR
+
+## ATTEMPT_DIAL
+
+<!-- [IMPL-TCP_CONNECT_DIAL] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]: dials one target within ctx deadline and returns classified result with elapsed time -->
+
+Contract:
+  INPUT: addr valid host:port; ctx carries per-probe deadline; dialFn injectable for tests
+  OUTPUT: Result with address, classified status, elapsed duration >= 0
+  PRE: addr is valid host:port; ctx carries per-probe deadline; dialFn injectable for tests
+  POST: Result contains address, classified status, elapsed duration >= 0
+  EFFECTS: opens TCP via dialFn; closes connection immediately on success
+  ASYNC_BOUNDARY: await
+  TIMEOUT: ctx deadline expiry → TIMEOUT via CLASSIFY_ERROR
+  CANCELLATION: ctx cancel → dial aborts; CLASSIFY_ERROR maps to TIMEOUT or ERROR
+  MESSAGE_CONTRACT: N/A — no message/event delivery
+  RETRY: N/A — single dial attempt
+  IDEMPOTENCY: N/A — read-only probe side effect is one dial
+  FAILURE_MODES: TIMEOUT, REFUSED, ERROR per CLASSIFY_ERROR
+  TERMINATION: returns when dial completes or ctx expires
+
+procedure ATTEMPT_DIAL(): # [IMPL-TCP_CONNECT_DIAL] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]
+1. start := clock now()
+2. conn, err := dial via dialFn on transport tcp to addr using ctx
+3. elapsed := clock since(start)
+4. IF conn IS NOT nil THEN close conn
+5. status := CLASSIFY_ERROR(err)
+6. RETURN Result with address addr, status status, elapsed elapsed

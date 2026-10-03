@@ -1,0 +1,2 @@
+bash: -c: line 1: syntax error near unexpected token `after'
+bash: -c: line 1: `scripts/windows-bootstrap-smoke.cmd (after B1 asserts)'

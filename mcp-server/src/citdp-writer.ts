@@ -1,5 +1,5 @@
 /**
- * Write CITDP YAML records under tied/citdp/ ([PROC-CITDP] persistence).
+ * Write CITDP YAML records under tied-project/citdp/ ([PROC-CITDP] persistence).
  */
 
 import fs from "node:fs";

@@ -1,0 +1,11 @@
+{
+  "phase": "verification",
+  "tracker_path": "working/PLAN-TIED-BBCE-ALIGNMENT/gate-tracker-verification.yaml",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "citdp_path": "working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml",
+  "receipt_persistence": {
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "gates_dir": "working/PLAN-TIED-BBCE-ALIGNMENT/gates",
+    "ledger_path": "working/PLAN-TIED-BBCE-ALIGNMENT/gates/ledger.jsonl"
+  }
+}

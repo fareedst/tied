@@ -1,0 +1,18 @@
+# [IMPL-ARCHIVEINFO-FORMAT-OUT] Output rendering
+# Implements [ARCH-ARCHIVEINFO-MODULES] for [REQ-ARCHIVEINFO-OUTPUT], [REQ-ARCHIVEINFO-DISPLAY]
+
+PROCEDURE Render(archives []ArchiveInfo, jsonFlag bool, w io.Writer)
+  // [IMPL-ARCHIVEINFO-FORMAT-OUT] [ARCH-ARCHIVEINFO-MODULES] [REQ-ARCHIVEINFO-OUTPUT] [REQ-ARCHIVEINFO-DISPLAY]
+  INPUT: archive slice, json flag, writer
+  PRE: none
+  POST: formatted output written to w
+  EFFECTS:
+    IF jsonFlag THEN
+      write JSON {"archives":[...]} with path, format, entry_count, total_size, entries
+      omit null compressed_size when unavailable
+    ELSE
+      FOR each archive:
+        write section header === path (format, N entries, total bytes) ===
+        write column header NAME SIZE COMPRESSED METHOD MODIFIED
+        FOR each entry:
+          write aligned row; use "-" for missing compressed size

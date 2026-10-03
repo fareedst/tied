@@ -1,0 +1,201 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-25T17:24:23.447Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_DAE_INCORPORATION",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": "agent-adherence-event.v1",
+      "path": "working/REQ-TIED_DAE_INCORPORATION/adversarial-inquiry/finding-ledger.jsonl",
+      "content_hash": "sha256:568c68fc8240eb560bfaf1f938a7c66bcee3b9ae072de39486deb7d08befd8ad",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_DAE_INCORPORATION/gates/pre_implementation-2026-09-25T00-49-48-881Z.json",
+      "content_hash": "sha256:499d8f748e5d49e4522dff9a29f75ba0a78c674ce7de79ad317b1a0a3372f344",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml",
+      "content_hash": "sha256:0e78c95dd80df5bd779045fd5cdf725e306e625c6f013daf2b35b9f3973a39c6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:3bc0e30664922c98cfc6abde7a8c7d7aee4e41b24151ce4aa88d345fbec85f34",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:2465d363f5a171acaddc3ce343ab3c8033f5b4b1af0cbe3b955e2a06fe192cf5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/close-out-gates-2026-09-24.json",
+      "content_hash": "sha256:9b0995914d2cf04ac613ce7dcba9ebc6ef20ff10a0be155ae921dcef8c000b9c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/close-out-gates-2026-09-25-residual.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/close-out-receipt-2026-09-24.md",
+      "content_hash": "sha256:5300a96d67682f77b4157991728fe32b0e6eebd7840eca2d933733099cd76e1a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/refine-plan-2026-09-24-pass2.md",
+      "content_hash": "sha256:ea92bf7b366def03969063f19be07e6f2d810161c51dfc89b28ee6382c4acda2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/refine-plan-2026-09-24-pass3.md",
+      "content_hash": "sha256:c6bd15e370b87a078aefbbcf0a5addeb82da20696c26cf9222844eac63e3239e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/refine-plan-2026-09-24.md",
+      "content_hash": "sha256:216d85432d912329960eb1c3d6ff98664d11bd9f7b0ef1cd7f2bdccf331e4c1e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/refine-plan-2026-09-25.md",
+      "content_hash": "sha256:c1eee4ddbfd6781865f255946902b6239e73da1baf61d3f375ad846567c6fc8c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/refine-plan-close-out-2026-09-24.md",
+      "content_hash": "sha256:82d37568055474de2aa02b061d7ff2bb99bd98bdaeac3a061043c4f3e71c432d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/wave-0-close-2026-09-24.md",
+      "content_hash": "sha256:f57a3d81ea42612fabef5cbac21fe9c037311cfa74cc019565863938f6b03656",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/wave-3-close-2026-09-24.md",
+      "content_hash": "sha256:fcdc72b996e0a75767ff1f2055349d355498aa1cef7410e8c8a8aa9bca8116cb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_INCORPORATION/evidence/wave-5-close-2026-09-24.md",
+      "content_hash": "sha256:43390840f3ecbf067a51023d137c390d05d8ce82fa5dc0692d67998a4041e99e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

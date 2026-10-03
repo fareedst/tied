@@ -1,0 +1,19 @@
+{
+  "schema_version": "co-sponsor-commit-payload.v1",
+  "request_token": "REQ-TIED_TWO_FOLDER_LAYOUT",
+  "generated_at": "2026-10-03T16:30:00.000Z",
+  "proposed_commit_message": "Complete two-folder TIED layout (tied-project + tied-bundle).\n\nHard-cut legacy tied/ and copy_files; layout helpers, config\nownership, working-root split, store self-migration, stale-layout\nlint, and G4 two-folder audit. Integrated close-out with field\nvalidation on factory client 1791037288 (mac-displays-cli).\n\nREQ-TIED_TWO_FOLDER_LAYOUT · SC-TFL-*",
+  "scope_summary": [
+    "tools/bootstrap (layout, migrate, install layers, lint-stale-layout)",
+    "mcp-server (tied-layout, working-root, yaml-loader, fixtures → tied-project/)",
+    "tied-bundle/ methodology corpus (store exception)",
+    "tied-project/ REQ-ARCH-IMPL + CITDP + working evidence",
+    "scripts (G4 audit, build-commands, Windows smoke)",
+    "AGENTS.md, README, CHANGELOG"
+  ],
+  "close_out_evidence": {
+    "gate_json": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/closeout-run-close-out-gates-final.json",
+    "envelope": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/request-evidence-envelope.v1.json",
+    "factory_field": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/factory-field-client-1791037288-evidence.md"
+  }
+}

@@ -1,0 +1,25 @@
+# IMPL-WININFO_ENUMERATE essence pseudocode
+
+// [IMPL-WININFO_ENUMERATE] [ARCH-WININFO_MACOS_COREGRAPHICS] [REQ-WININFO_OPEN_WINDOWS]
+// Enumerate macOS windows via CoreGraphics and parse CFDictionary records into domain models.
+PROCEDURE LIST_RAW_WINDOWS
+  PRE: runtime GOOS is darwin and GUI window server is available
+  INPUT: include_offscreen boolean (default false)
+  CONTROL: IF include_offscreen THEN options = kCGWindowListOptionAll | kCGWindowListExcludeDesktopElements
+           ELSE options = kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements
+  DATA: raw_list = CGWindowListCopyWindowInfo(options, kCGNullWindowID)
+  POST: raw_list is non-nil CFArray or FAILURE_MODES fires
+  EFFECTS: returns slice of parsed Window values (may be empty)
+  FAILURE_MODES:
+    - window server unavailable (raw_list is NULL) -> return error "no window server"
+    - CG call fails -> return wrapped error
+
+// [IMPL-WININFO_ENUMERATE] [ARCH-WININFO_MACOS_COREGRAPHICS] [REQ-WININFO_OPEN_WINDOWS]
+PROCEDURE PARSE_CG_DICTIONARY
+  PRE: dict is CFDictionary from CGWindowListCopyWindowInfo entry
+  INPUT: dict
+  DATA: extract kCGWindowNumber, kCGWindowOwnerPID, kCGWindowOwnerName, kCGWindowName,
+        kCGWindowBounds (X,Y,Width,Height), kCGWindowLayer, kCGWindowIsOnscreen
+  POST: Window struct populated or entry skipped when bounds missing
+  EFFECTS: one Window value or skip malformed entry (WININFO_DEBUG logs skip count)
+  FAILURE_MODES: missing bounds -> skip entry, continue enumeration

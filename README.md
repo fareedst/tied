@@ -73,7 +73,7 @@ At the relevant gate, an edge case or open question belongs in one of five bucke
 
 If a decision cannot be classified, the checklist and configured gate policy can block progression until the missing intent is resolved. An explicit deferral is different from silently leaving a gap.
 
-The negative space is part of the design. Record what must remain unchanged, what is out of scope, and which counterexamples would falsify “done.” The full procedure is the [agent requirement implementation checklist](tied/docs/agent-req-implementation-checklist.md), identified by `[PROC-AGENT_REQ_CHECKLIST]`.
+The negative space is part of the design. Record what must remain unchanged, what is out of scope, and which counterexamples would falsify “done.” The full procedure is the [agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md), identified by `[PROC-AGENT_REQ_CHECKLIST]`.
 
 ## What TIED is
 
@@ -85,7 +85,7 @@ vocabulary → REQ (what and why) → ARCH (high-level how)
           → tests → code → composition and quality evidence
 ```
 
-Semantic tokens such as `[REQ-FEATURE]`, `[ARCH-DESIGN]`, and `[IMPL-IMPLEMENTATION]` connect the records, tests, code, and documentation. The token registry is `tied/semantic-tokens.yaml`.
+Semantic tokens such as `[REQ-FEATURE]`, `[ARCH-DESIGN]`, and `[IMPL-IMPLEMENTATION]` connect the records, tests, code, and documentation. The token registry is `tied-project/semantic-tokens.yaml`.
 
 TIED is methodology-level and language-independent. Templates and process rules can be adapted to Go, Ruby, TypeScript, Swift, or another stack. Language-specific syntax belongs in the implementation decision for that project; the intent and traceability model remains the same.
 
@@ -129,8 +129,8 @@ Records can be wrong. Tests can miss behavior. Structural checks can pass while 
 
 There are two useful starting points:
 
-1. **Evaluate TIED** — read this overview, then the [Core seven references](tied/docs/client-development-index.md), [LEAP guide](tied/docs/LEAP.md), and [methodology diagrams](tied/docs/methodology-diagrams.md).
-2. **Bootstrap a client** — run `copy_files.sh` against a project, then choose the optional MCP or documented non-MCP workflow below.
+1. **Evaluate TIED** — read this overview, then the [Core seven references](tied-bundle/docs/client-development-index.md), [LEAP guide](tied-bundle/docs/LEAP.md), and [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
+2. **Bootstrap a client** — run `./tied-install.sh` (default linked) against a project; brownfield layouts use `tied-install --migrate-layout`. Then choose the optional MCP or documented non-MCP workflow below.
 
 The TIED repository is the source of the methodology. A client receives its own copy of the layout and can maintain project-specific requirements, decisions, and tokens without changing the inherited methodology.
 
@@ -161,8 +161,8 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
 ```bash
 ./scripts/run-feature-batch.sh \
   --workspace . \
-  --prompt-file ./tied/agent-preload-contract.yaml \
-  --lead-checklist-yaml $TIED/tied/docs/agent-req-implementation-checklist.yaml \
+  --prompt-file ./tied-project/agent-preload-contract.yaml \
+  --lead-checklist-yaml $TIED/tied-bundle/docs/agent-req-implementation-checklist.yaml \
   --feature-spec-batch-yaml ./prompts/initial-specs.yaml \
   --select-order 1
 ```
@@ -171,14 +171,14 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
 
 ## TIED source repository setup
 
-These steps prepare **this TIED checkout** (MCP server, npm workspace CLIs, bootstrap engine). They are separate from bootstrapping a **client project** with `copy_files`.
+These steps prepare **this TIED checkout** (MCP server, npm workspace CLIs, bootstrap engine). They are separate from bootstrapping a **client project** with `tied-install`.
 
 **Prerequisites**
 
 | Tool | Version | Required for |
 | --- | --- | --- |
-| Node.js | 18+ | `copy_files`, MCP server, bootstrap verification gates |
-| Go | — | **Not required** (Go `tools/agentstream/` removed Phase **4d**; see [phase4d-go-oracle-freeze.json](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json)) |
+| Node.js | 18+ | `tied-install`, MCP server, bootstrap verification gates |
+| Go | — | **Not required** (Go `tools/agentstream/` removed Phase **4d**; see [phase4d-go-oracle-freeze.json](tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json)) |
 
 **Unix / Git Bash** (from the TIED repository root):
 
@@ -199,55 +199,55 @@ What each step enables:
 
 | Step | Produces | Used by |
 | --- | --- | --- |
-| `mcp-server` workspace build | `mcp-server/dist/index.js`, `mcp-server/node_modules/.bin/tied` | TIED YAML MCP, `tied mcp` / `tied-cli`, `copy_files` (hard prerequisite), YAML lint |
-| `tools/bootstrap` install | `js-yaml` for verification gates | `copy_files.sh` / `copy-files.mjs` completion checks |
+| `mcp-server` workspace build | `mcp-server/dist/index.js`, `mcp-server/node_modules/.bin/tied` | TIED YAML MCP, `tied mcp` / `tied-cli`, `tied-install` (hard prerequisite), YAML lint |
+| `tools/bootstrap` install | `js-yaml` for verification gates | `tied-install.sh` / `install-layers.mjs` completion checks |
 | `@tied/agentstream` + `@tied/cli` build | `mcp-server/packages/cli/dist/index.js` | `tied agentstream`, `scripts/run-feature-batch-agentstream.sh` |
 
 Notes:
 
 - `npm install` in `mcp-server` also runs `prepare` → `npm run build`, so an explicit `npm run build` is optional but documents intent.
 - `scripts/run-feature-batch-agentstream.sh` requires a built `@tied/cli` (`cd mcp-server && npm run build`) unless `AGENTSTREAM` points at another compatible binary.
-- See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`copy_files.cmd`, `scripts\test-new-tied-client`).
+- See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`tied-install.cmd`, `tied-install.cmd`, `test-new-tied-client.cmd`, PowerShell `.ps1` shims).
 
 ## Getting started with a new client project
 
-Complete [TIED source repository setup](#tied-source-repository-setup) first. `copy_files` fails without a built MCP server and bootstrap dependencies.
+Complete [TIED source repository setup](#tied-source-repository-setup) first. `tied-install` fails without a built MCP server and bootstrap dependencies.
 
 ### 1. Copy the methodology
 
 From a TIED repository clone, run:
 
 ```bash
-./copy_files.sh /path/to/your/project
+./tied-install.sh /path/to/your/project
 ```
 
 **Windows disposable client smoke** (from the TIED repo):
 
 ```cmd
-scripts\test-new-tied-client
+scripts\test-new-tied-client.cmd
 ```
 
-Or from repo root: `test-new-tied-client.cmd`
+Or from repo root: `test-new-tied-client.cmd`. PowerShell: `powershell -ExecutionPolicy Bypass -File .\test-new-tied-client.ps1`
 
-**Windows:** from a neighboring client repo (PATHEXT resolves `copy_files.cmd`):
+**Windows:** from a neighboring client repo (PATHEXT resolves `tied-install.cmd`):
 
 ```cmd
-..\dev\tied\copy_files
+..\dev\tied\tied-install.cmd C:\path\to\your\project
 ```
 
-The script copies the inherited methodology from `templates/` into the client’s `tied/methodology/`, creates missing project indexes under `tied/`, copies the canonical guides into `tied/docs/`, and installs the bundled [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) to `.cursor/skills/tied-yaml/` when appropriate. It does not overwrite an existing `AGENTS.md` or `.cursorrules`.
+`tied-install` materializes the inherited methodology into the client’s gitignored `tied-bundle/`, creates missing project indexes under `tied-project/`, and installs the bundled [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) to `.cursor/skills/tied-yaml/` when appropriate. It does not overwrite an existing `AGENTS.md` or `.cursorrules`. Brownfield clients: `tied-install --migrate-layout` from the project root.
 
-Methodology-owned YAML under `tied/methodology/` is read-only in the client and can be refreshed by running `copy_files.sh` again. Project-owned REQ/ARCH/IMPL indexes and detail files live at the root of the client’s `tied/` directory and are not overwritten.
+Methodology-owned YAML under `tied-bundle/` is read-only in the client and can be refreshed by running `tied-install.sh` again. Project-owned REQ/ARCH/IMPL indexes and detail files live at the root of the client’s `tied-project/` directory and are not overwritten.
 
 ### 2. Optionally enable the MCP server
 
-The MCP server stays in this TIED repository; it is not copied into the client. After [source setup](#tied-source-repository-setup), `mcp-server/dist/index.js` serves any client. `copy_files.sh` creates `.cursor/mcp.json` with the `tied-yaml` entry when that file is missing, and preserves an existing file byte-for-byte. For manual configuration or details, see [adding TIED MCP and invoking passes](tied/docs/adding-tied-mcp-and-invoking-passes.md). From the client project root, the recommended Cursor flow is:
+The MCP server stays in this TIED repository; it is not copied into the client. After [source setup](#tied-source-repository-setup), `mcp-server/dist/index.js` serves any client. `tied-install.sh` creates `.cursor/mcp.json` with the `tied-yaml` entry when that file is missing, and preserves an existing file byte-for-byte. For manual configuration or details, see [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md). From the client project root, the recommended Cursor flow is:
 
 ```bash
 agent mcp enable tied-yaml
 ```
 
-Approve the project MCP configuration when prompted, then type `quit` to exit the interactive Agent session. Set `TIED_BASE_PATH` to the client’s absolute `tied/` directory. If the server binary is outside the client tree, set `TIED_MCP_BIN` to the absolute path of the TIED repository’s `mcp-server/dist/index.js`.
+Approve the project MCP configuration when prompted, then type `quit` to exit the interactive Agent session. Set `TIED_BASE_PATH` to the client’s absolute `tied-project/` directory. If the server binary is outside the client tree, set `TIED_MCP_BIN` to the absolute path of the TIED repository’s `mcp-server/dist/index.js`.
 
 Confirm the server with a tool such as `yaml_index_read` or `tied_config_get_base_path`, or read the `tied://requirements` resource. The [MCP server README](mcp-server/README.md) documents the full tool surface and configuration.
 
@@ -259,58 +259,55 @@ If Node or the built server is unavailable, use the documented bootstrap and man
 ./bootstrap_without_mcp.sh /path/to/your/project
 ```
 
-Read [using TIED without MCP](tied/docs/using-tied-without-mcp.md) before managing project records by hand.
+Read [using TIED without MCP](tied-bundle/docs/using-tied-without-mcp.md) before managing project records by hand.
 
 ## Tooling and scripts
 
-- `copy_files.sh` — bootstrap a project with the inherited TIED layout.
+- `tied-install.sh` — bootstrap a project with the inherited TIED layout.
 - `bootstrap_without_mcp.sh` — bootstrap and print next steps for non-MCP use.
 - `scripts/run-feature-batch.sh` — delegates to the agentstream batch driver (stable CLI surface; Ruby runner removed Phase **4b**).
 - `scripts/run-feature-batch-agentstream.sh` — `tied agentstream` feature-spec and checklist driver.
 - `@tied/agentstream` — TypeScript pipeline in `mcp-server/packages/agentstream/`; legacy Go path removed Phase **4d** ([tools/agentstream/README.md](tools/agentstream/README.md) redirect stub only).
-- `feature-orchestrator` / `tied` feature commands — feature lifecycle CLI from the same workspace (see [feature-orchestration vocabulary](tied/vocab/feature-orchestration.md)).
-- `tools/bundled-tied-yaml-skill/` — canonical tied-yaml skill source; clients receive `.cursor/skills/tied-yaml/` via `copy_files`.
+- `feature-orchestrator` / `tied` feature commands — feature lifecycle CLI from the same workspace (see [feature-orchestration vocabulary](tied-project/vocab/feature-orchestration.md)).
+- `tools/bundled-tied-yaml-skill/` — canonical tied-yaml skill source; clients receive `.cursor/skills/tied-yaml/` via `tied-install`.
 - `scripts/yaml_tool.sh` and `scripts/lint_yaml.sh` — canonicalize or lint TIED YAML according to the documented edit loop.
-- `scripts/prepare_readme_demo.sh` — bootstrap `tied/` when needed and run the README’s structured YAML query examples.
+- `scripts/prepare_readme_demo.sh` — bootstrap `tied-project/` when needed and run the README’s structured YAML query examples.
 - `mcp-server/` — TypeScript MCP server for TIED indexes, details, traceability, and validation.
 
 ## Where to read next
 
-The [client development index](tied/docs/client-development-index.md) names the Core seven documents for applying TIED:
+The [client development index](tied-bundle/docs/client-development-index.md) names the Core seven documents for applying TIED:
 
 1. [AGENTS.md](AGENTS.md) — repository operating rules.
-2. [Vocabulary routing](tied/vocab/routing.md) — resolve and preload preferred terms.
-3. [Agent requirement implementation checklist](tied/docs/agent-req-implementation-checklist.md) — the executable process.
-4. [Checklist YAML](tied/docs/agent-req-implementation-checklist.yaml) — the trackable copy of that process.
-5. [Processes](tied/docs/processes.md) — definitions for CITDP, LEAP, TDD, validation, and evidence.
-6. [Pseudo-code guide](tied/docs/pseudocode-writing-and-validation.md) — author and validate IMPL behavior contracts.
-7. [CITDP policy and record template](tied/docs/citdp-policy.md) — determine when to persist change analysis.
+2. [Vocabulary routing](tied-project/vocab/routing.md) — resolve and preload preferred terms.
+3. [Agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md) — the executable process.
+4. [Checklist YAML](tied-bundle/docs/agent-req-implementation-checklist.yaml) — the trackable copy of that process.
+5. [Processes](tied-bundle/docs/processes.md) — definitions for CITDP, LEAP, TDD, validation, and evidence.
+6. [Pseudo-code guide](tied-bundle/docs/pseudocode-writing-and-validation.md) — author and validate IMPL behavior contracts.
+7. [CITDP policy and record template](tied-bundle/docs/citdp-policy.md) — determine when to persist change analysis.
 
-For orientation, read [methodology diagrams](tied/docs/methodology-diagrams.md) and the [LEAP guide](tied/docs/LEAP.md). For YAML operations, use the [TIED YAML agent index](tied/docs/tied-yaml-agent-index.md) and the [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) (installed under `.cursor/skills/tied-yaml/` in client projects). Agents should read [AGENTS.md](AGENTS.md) before working in a client project.
+For orientation, read [methodology diagrams](tied-bundle/docs/methodology-diagrams.md) and the [LEAP guide](tied-bundle/docs/LEAP.md). For YAML operations, use the [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and the [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) (installed under `.cursor/skills/tied-yaml/` in client projects). Agents should read [AGENTS.md](AGENTS.md) before working in a client project.
 
 ## Repository layout
 
 ```text
 stdd/
-├── templates/                 # Canonical methodology YAML copied to clients
-├── tied/
-│   ├── docs/                  # Methodology guides and executable checklists
-│   ├── vocab/                 # Source-repository domain vocabulary
-│   └── ...                    # Project indexes and detail data
+├── tied-project/              # Committed project traceability (REQ/ARCH/IMPL, vocab, working/)
+├── tied-bundle/               # Committed methodology corpus in this repo; gitignored on clients
 ├── mcp-server/                # MCP server + npm workspace (cli, agentstream, bootstrap, yaml-cli)
 │   └── packages/agentstream/  # @tied/agentstream — `tied agentstream` implementation
 ├── tools/
-│   ├── bootstrap/             # copy_files engine and client verification gates
-│   ├── bundled-tied-yaml-skill/   # Canonical tied-yaml skill (copied into clients)
+│   ├── bootstrap/             # tied-install engine and client verification gates
+│   ├── bundled-tied-yaml-skill/   # Canonical tied-yaml skill (installed into clients)
 │   └── agentstream/           # Redirect stub only (Go runner removed Phase 4d)
 ├── scripts/                   # Bootstrap, batch, YAML, and analysis utilities
-├── copy_files.sh              # Client bootstrap
+├── tied-install.sh            # Client bootstrap (linked/full)
 ├── bootstrap_without_mcp.sh   # Non-MCP bootstrap
 ├── AGENTS.md                  # Agent operating guide
 └── CHANGELOG.md               # Methodology version history
 ```
 
-Client projects keep project-specific data in `tied/`, while inherited methodology YAML is under `tied/methodology/`. See [copy_files.sh](copy_files.sh) for the exact copied file set.
+Client projects keep project-specific data in `tied-project/`; inherited methodology materializes under gitignored `tied-bundle/`. See [tied-install.sh](tied-install.sh) and `how install-matrix` for paths and flags.
 
 ## Language-specific adaptation
 

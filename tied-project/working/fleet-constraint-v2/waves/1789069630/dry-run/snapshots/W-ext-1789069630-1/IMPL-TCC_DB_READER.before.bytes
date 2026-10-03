@@ -1,0 +1,42 @@
+# IMPL-TCC_DB_READER essence pseudocode
+
+<!-- [IMPL-TCC_DB_READER] [ARCH-MACOS_PERM_REPORT] [REQ-MACOS_PERM_REPORT] — readonly TCC database query with partial-report degradation -->
+
+## RESOLVE_TCC_PATHS
+
+```
+INPUT: env MAC_PERMS_TCC_USER_DB, MAC_PERMS_TCC_SYSTEM_DB (optional overrides)
+OUTPUT: { userPath, systemPath }
+EFFECTS: defaults to ~/Library/Application Support/com.apple.TCC/TCC.db and /Library/Application Support/com.apple.TCC/TCC.db
+```
+
+## OPEN_TCC_READONLY
+
+```
+INPUT: dbPath
+OUTPUT: Database handle OR ReadWarning
+PRE: path is string
+POST: on EACCES/ENOENT return ReadWarning with code DB_UNREADABLE; never throw for expected access denial
+EFFECTS: opens SQLite readonly via better-sqlite3
+```
+
+## QUERY_BY_SERVICE_AND_STATUS
+
+```
+INPUT: db, services[], statusFilter (granted|denied|all)
+OUTPUT: TccRow[]
+PRE: db is open
+POST: rows match service IN services; auth_value filtered by statusFilter
+  granted -> auth_value = 2
+  denied -> auth_value = 0
+  all -> no auth filter
+EFFECTS: SELECT service, client, client_type, auth_value, last_modified, indirect_object_identifier FROM access WHERE service IN (?)
+```
+
+## MERGE_RESULTS
+
+```
+INPUT: userRows[], systemRows[], warnings[]
+OUTPUT: { rows: TccRow[], warnings: Warning[] }
+POST: dedupe key = (service, client, indirect_object_identifier); later duplicate dropped
+```

@@ -1,0 +1,43 @@
+# [IMPL-FILEHASH_DIGEST] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# Summary: Stream SHA-256 hash with timing and truncated display digest.
+
+## HASH_FILE_STREAM
+# [IMPL-FILEHASH_DIGEST] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Stream file bytes through SHA-256 and time the operation.
+
+Contract:
+  INPUT: file_path
+  OUTPUT: size; truncated_digest; elapsed_ms; error
+  PRE: file_path names path on filesystem
+  POST: truncated digest on success
+  EFFECTS: reads file content from disk
+  FAILURE_MODES: NOT_REGULAR_FILE; OPEN_FAILED; READ_FAILED
+
+procedure HASH_FILE_STREAM:
+  Contract:
+    INPUT: file_path
+    OUTPUT: digest_result
+    PRE: file_path provided
+    POST: size and truncated digest when readable regular file
+    EFFECTS: reads bytes via io.Copy to sha256
+    FAILURE_MODES: NOT_REGULAR_FILE; OPEN_FAILED; READ_FAILED
+  START timer
+  CALL Lstat file_path
+  IF not regular file:
+    RETURN error NOT_REGULAR_FILE
+  OPEN file_path
+  COPY stream to sha256 hasher
+  CALL TRUNCATE_DIGEST on full hex
+  RETURN size, truncated_digest, elapsed_ms
+
+## TRUNCATE_DIGEST
+# [IMPL-FILEHASH_DIGEST] [IMPL-FILEHASH_FORMAT] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Convert 64-char hex to first4...last4 display form.
+
+procedure TRUNCATE_DIGEST:
+  Contract:
+    INPUT: full_hex_64
+    OUTPUT: display_digest
+    PRE: len(full_hex_64) == 64
+    POST: returns first4...last4
+  RETURN substring display form

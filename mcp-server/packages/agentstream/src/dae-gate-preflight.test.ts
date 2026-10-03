@@ -81,11 +81,16 @@ describe("dae gate preflight [REQ-TIED_DAE_INCORPORATION]", () => {
     assert.equal(out.stderr, "");
   });
 
-  it("reads enablement from .tied-yaml.yaml dae.agentstream_gate_check", () => {
+  it("reads enablement from tied-project/config.yaml dae.agentstream_gate_check", () => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "dae-gate-"));
+    fs.mkdirSync(path.join(tempDir, "tied-project"), { recursive: true });
     fs.writeFileSync(
-      path.join(tempDir, ".tied-yaml.yaml"),
-      yaml.dump({ dae: { agentstream_gate_check: true } }),
+      path.join(tempDir, "tied-project/config.yaml"),
+      yaml.dump({
+        schema: "tied-project-config.v1",
+        yaml: { scalar_style: "unwrapped" },
+        dae: { agentstream_gate_check: true },
+      }),
     );
     assert.equal(daeAgentstreamGateCheckEnabled(tempDir), true);
   });
@@ -134,7 +139,7 @@ describe("dae gate preflight [REQ-TIED_DAE_INCORPORATION]", () => {
       skipTiedMcpPreflight: false,
     });
     const out = runDaeGatePreflight(cfg, {
-      cliEntry: "/noop/tied",
+      cliEntry: "/noop/tied-project",
       spawn: () => ({
         status: 1,
         stdout: JSON.stringify({ allowed: false, exit_code: 1, reasons: ["blocked"] }),

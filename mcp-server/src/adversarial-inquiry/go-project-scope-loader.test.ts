@@ -12,7 +12,7 @@ const fixtureRoot = path.resolve(
 
 const baseInput = {
   projectRoot: fixtureRoot,
-  tiedBasePath: path.join(fixtureRoot, "tied"),
+  tiedBasePath: path.join(fixtureRoot, "tied-project"),
   requestToken: "REQ-FIXTURE-ADVERSARIAL",
   implToken: "IMPL-FIXTURE-ADVERSARIAL",
   testPath: "internal/divide/divide_test.go",

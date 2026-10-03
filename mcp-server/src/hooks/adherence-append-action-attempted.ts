@@ -5,6 +5,10 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import {
+  listRequestWorkingTokens,
+  resolveWorkingPath,
+} from "../working-root.js";
 
 const ALLOWLIST = new Set([
   "postToolUse",
@@ -49,7 +53,7 @@ function readMarker(record: HookRecord): Record<string, unknown> | null {
   if (!markerPath) {
     const token = tokenFromTurn || inferRequestToken(workspace);
     if (!token) return null;
-    markerPath = path.join(workspace, "working", token, "adherence", "active-turn.json");
+    markerPath = resolveWorkingPath(workspace, token, "adherence", "active-turn.json");
   }
 
   if (!fs.existsSync(markerPath)) return null;
@@ -63,11 +67,13 @@ function readMarker(record: HookRecord): Record<string, unknown> | null {
 
 function inferRequestToken(workspace: string): string | null {
   try {
-    const working = path.join(workspace, "working");
-    if (!fs.existsSync(working)) return null;
-    for (const entry of fs.readdirSync(working)) {
-      if (!entry.startsWith("REQ-")) continue;
-      const markerPath = path.join(working, entry, "adherence", "active-turn.json");
+    for (const entry of listRequestWorkingTokens(workspace)) {
+      const markerPath = resolveWorkingPath(
+        workspace,
+        entry,
+        "adherence",
+        "active-turn.json",
+      );
       if (!fs.existsSync(markerPath)) continue;
       const marker = JSON.parse(fs.readFileSync(markerPath, "utf8")) as Record<string, unknown>;
       const token = marker["request_token"];

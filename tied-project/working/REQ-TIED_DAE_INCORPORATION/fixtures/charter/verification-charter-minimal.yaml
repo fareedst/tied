@@ -1,0 +1,23 @@
+gauntlet:
+  probes:
+    - description: "Code reads clearly without unexplained magic constants"
+      id: "readability"
+      verified_by: "manual"
+record_identity:
+  change_request_id: "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  disjoint_verifier: "required"
+  mutation_cache: true
+  mutation_cache_threshold: 0.75
+  verification_charter: true
+risk_analysis:
+  adversarial_inquiry:
+    counterexamples:
+      - "charter forced on by default"
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "charter-off clients skip plugins"
+    evidence_references:
+      - "fixtures/charter/verification-charter-minimal.yaml"
+    falsification_questions:
+      - "Can gate pass without charter fields?"
+    gate_policy: "advisory"

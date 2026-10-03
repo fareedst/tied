@@ -6,6 +6,7 @@ import { execFileSync } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "./working-root.js";
 
 import type { ResolvedRef } from "./adherence-evidence-resolve.js";
 
@@ -132,7 +133,7 @@ export function activeTurnMarkerPath(
   requestToken: string,
 ): string {
   const token = requestToken.trim();
-  return path.join(workspace.trim(), "working", token, "adherence", "active-turn.json");
+  return resolveWorkingPath(workspace.trim(), token, "adherence", "active-turn.json");
 }
 
 export function writeActiveTurnMarker(

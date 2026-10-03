@@ -1,0 +1,66 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "VALIDATE_GOVERNANCE_SCHEMA_REFERENCES",
+      "line": 9,
+      "token_refs": [
+        "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+        "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "PUBLISH_GATE_PROMOTION_RECORD",
+      "line": 26,
+      "token_refs": [
+        "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+        "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "VALIDATE_GOVERNANCE_SCHEMA_REFERENCES",
+      "branch_lines": [
+        22
+      ],
+      "failure_modes": [
+        "- error missing_path => report lists missing artifact without claiming fleet population",
+        "RETURN validation_report WITH error missing_path FOR schema_entry"
+      ],
+      "references": []
+    },
+    {
+      "block": "PUBLISH_GATE_PROMOTION_RECORD",
+      "branch_lines": [
+        37
+      ],
+      "failure_modes": [
+        "RETURN gate_alignment_report WITH error stage_policy_drift"
+      ],
+      "references": []
+    }
+  ],
+  "diagnostics": []
+}

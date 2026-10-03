@@ -1,0 +1,32 @@
+ledger_disposition: "candidate_requirement"
+proposed_arch_deltas:
+  ARCH-FEAT_IDEMPOTENT_CREATION:
+    add_constraints:
+      - "Create path shares deduplication semantics with execution redelivery at documented integration seams."
+  ARCH-FEAT_TASK_EXECUTION_STATE:
+    add_constraints:
+      - "Redelivery must be detectable via caller-supplied idempotency or attempt key at the execution boundary."
+proposed_impl_deltas:
+  IMPL-FEAT_IDEMPOTENT_CREATE:
+    contract_hints:
+      POST: "Repeat delivery with same key returns existing feature reference without re-locking allocation."
+  IMPL-FEAT_TASK_EXECUTION_STATE:
+    blocks_affected:
+      - "APPEND_EVIDENCE"
+      - "RESUME_EXECUTION"
+    contract_hints:
+      FAILURE_MODES: "DUPLICATE_DELIVERY_RECORDED (non-terminal where applicable)."
+      POST: "Duplicate delivery yields existing outcome reference or explicit duplicate-attempt evidence row."
+      PRE: "Incoming delivery carries optional idempotency_key or attempt_id."
+proposed_req_deltas:
+  REQ-FEAT_IDEMPOTENT_CREATION:
+    add_satisfaction_criteria:
+      - criterion: "Redelivered create requests with the same normalized request key do not allocate a second feature or publish a second manifest."
+  REQ-FEAT_TASK_EXECUTION_RECOVERY:
+    add_satisfaction_criteria:
+      - criterion: "Redelivered execution attempts for the same logical work unit are deduplicated or recorded as duplicate attempts without changing task_id or forking terminal outcome semantics."
+residuality_facet:
+  proof_boundary: "Discovery until W4 duplicate-delivery composition fault"
+  residue_summary: "Second delivery does not fork identity; evidence shows duplicate attempt or existing feature"
+  source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+stressor_id: "S-T01"

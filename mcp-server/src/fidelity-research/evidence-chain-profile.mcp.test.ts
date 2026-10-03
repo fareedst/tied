@@ -57,7 +57,7 @@ describe("evidence_chain_profile_generate MCP binding [REQ-EVIDENCE_CHAIN_PROFIL
     const result = body(
       await generate({
         project_root: "/tmp/wrong-client",
-        tied_base_path: "/tmp/wrong-client/tied",
+        tied_base_path: "/tmp/wrong-client/tied-project",
         profile_depth: "integrated",
       }),
     );

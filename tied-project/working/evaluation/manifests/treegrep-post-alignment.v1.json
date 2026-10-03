@@ -1,0 +1,106 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "post-alignment-exec-treegrep-20260827",
+  "commit": "0995ddd8a5208ce5b2a8e838ff66da02a78b66e4",
+  "environment": {
+    "collection_boundary": "operator-local pinned worktree",
+    "platform": "darwin",
+    "project_root": "/tmp/tied-evidence-treegrep",
+    "tied_base_path": "/tmp/tied-evidence-treegrep/tied"
+  },
+  "command_results": [
+    {
+      "id": "binding-inventory-validate",
+      "command": [
+        "/tmp/tied-evidence-treegrep/.cursor/skills/tied-yaml/scripts/tied-cli.sh",
+        "binding_inventory_validate",
+        "@/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/cli-binding-inventory-validate.json"
+      ],
+      "cwd": "/tmp/tied-evidence-treegrep",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 198,
+      "threshold": "ok=true",
+      "artifacts": [
+        "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/binding-inventory-validate/binding-inventory-validate.stderr.txt",
+        "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/binding-inventory-validate/binding-inventory-validate.stdout.txt"
+      ],
+      "tool_versions": {
+        "node": "v25.9.0"
+      }
+    },
+    {
+      "id": "ruby-test-suite",
+      "command": [
+        "ruby",
+        "-Ilib:test",
+        "-e",
+        "Dir[\"test/**/*_test.rb\"].each { |f| load f }"
+      ],
+      "cwd": "/tmp/tied-evidence-treegrep",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 7828,
+      "threshold": "exit_code=0",
+      "artifacts": [
+        "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/ruby-test-suite/ruby-test-suite.stderr.txt",
+        "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/ruby-test-suite/ruby-test-suite.stdout.txt"
+      ],
+      "tool_versions": {
+        "ruby": "ruby 3.0.3p157 (2021-11-24 revision 3fb7d2cadc) [arm64-darwin21]"
+      }
+    },
+    {
+      "id": "tied-validate-consistency",
+      "command": [
+        "/tmp/tied-evidence-treegrep/.cursor/skills/tied-yaml/scripts/tied-cli.sh",
+        "tied_validate_consistency",
+        "{}"
+      ],
+      "cwd": "/tmp/tied-evidence-treegrep",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 951,
+      "threshold": "ok=true",
+      "artifacts": [
+        "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/tied-validate-consistency/tied-validate-consistency.stderr.txt",
+        "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/tied-validate-consistency/tied-validate-consistency.stdout.txt"
+      ],
+      "tool_versions": {
+        "node": "v25.9.0"
+      }
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "The alignment close-out covers Ruby behavior, composition bindings, and project TIED records.",
+      "risk": "Specification and implementation drift could leave tested behavior unverifiable.",
+      "evidence_method": "Pinned Ruby regression suite plus TIED structural validators.",
+      "command_or_test": "ruby-test-suite; tied-validate-consistency; binding-inventory-validate",
+      "threshold": "All commands exit 0 and validators report ok=true.",
+      "result": "pending",
+      "owner": "operator"
+    }
+  ],
+  "covered_tokens": [
+    "IMPL-MODULE_VALIDATION",
+    "IMPL-QUALITY_EVIDENCE_MANIFEST",
+    "REQ-MODULE_VALIDATION",
+    "REQ-TIED-3.0-ALIGNMENT-SYNC"
+  ],
+  "proof_boundaries": [
+    "Observed executable: pinned Ruby regression suite and UI-free binding validation.",
+    "Observed structural: TIED consistency validation at the pinned worktree.",
+    "This manifest does not prove universal correctness, security, performance, resilience, privacy, or user-facing behavior."
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": [
+      "TIED-3.0-ALIGNMENT-SYNC",
+      "working/TIED-3.0-ALIGNMENT-SYNC/test-strategy.md"
+    ]
+  }
+}

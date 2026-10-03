@@ -1,0 +1,17 @@
+IMPL-TIED_LAYERED_CLIENT_INSTALL:
+  IMPL-TIED_LAYERED_CLIENT_INSTALL:
+    category: "Infrastructure"
+    description: "Node install engine: PARSE_INSTALL_ARGS, layer dispatch, verify-store, doctor, factory wiring."
+    name: "Layered client install implementation"
+    related_decisions:
+      architecture:
+        - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+      requirements:
+        - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      supersedes: []
+    status: "Proposed"
+    traceability:
+      architecture:
+        - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+      requirements:
+        - "REQ-TIED_LAYERED_CLIENT_INSTALL"

@@ -1,0 +1,30 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T21:21:26.246Z",
+  "client_id": "1787603099",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787603099",
+  "sidecar_count": 3,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 3,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 0,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "2b03fa66acbed82e6d19aef6cbfd25e976a85bee3b5d51b4f6dd8de1ff5e3ba3",
+  "rows": [
+    {
+      "file": "IMPL-LISTENING_PORT_CLI_MAIN-pseudocode.md",
+      "classification": "header-only-v2"
+    },
+    {
+      "file": "IMPL-LISTENING_PORT_COLLECT-pseudocode.md",
+      "classification": "header-only-v2"
+    },
+    {
+      "file": "IMPL-LISTENING_PORT_JSON-pseudocode.md",
+      "classification": "header-only-v2"
+    }
+  ]
+}

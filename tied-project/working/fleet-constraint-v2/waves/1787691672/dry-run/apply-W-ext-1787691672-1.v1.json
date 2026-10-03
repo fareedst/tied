@@ -1,0 +1,42 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T21:45:59.532Z",
+  "client_id": "1787691672",
+  "wave_scope": "W-ext-1787691672-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-LAUNCHD_COLLECTOR-pseudocode.md",
+      "impl_token": "IMPL-LAUNCHD_COLLECTOR",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-NETWORK_LISTENER_COLLECTOR-pseudocode.md",
+      "impl_token": "IMPL-NETWORK_LISTENER_COLLECTOR",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-PROCESS_RUNNER-pseudocode.md",
+      "impl_token": "IMPL-PROCESS_RUNNER",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-REPORT_FORMATTER-pseudocode.md",
+      "impl_token": "IMPL-REPORT_FORMATTER",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-SERVICE_REPORT_CLI-pseudocode.md",
+      "impl_token": "IMPL-SERVICE_REPORT_CLI",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "4c486ab27eeee71c9f5bfcb60ae62d00326ffc82bf0ba414c5b161c246f8ecdb",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787691672/dry-run/snapshots/W-ext-1787691672-1"
+}

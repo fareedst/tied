@@ -85,7 +85,7 @@ describe("term-analysis REQ-VOCABULARY_ANALYSIS", () => {
   it("classifies test files via path heuristics", () => {
     assert.strictEqual(classifyFileKind("src/foo.test.ts"), "test");
     assert.strictEqual(classifyFileKind("src/production.ts"), "production");
-    assert.strictEqual(classifyFileKind("tied/methodology/x.ts"), "methodology");
+    assert.strictEqual(classifyFileKind("tied-bundle/x.ts"), "methodology");
   });
 
   it("AST mode ignores comment-only identifiers", () => {

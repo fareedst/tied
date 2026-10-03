@@ -1,0 +1,62 @@
+CITDP-REQ-TIED_WORKING_ARTIFACT_PLACEMENT:
+  change_definition:
+    current_behavior: "Two-folder working split exists in working-root.ts but operators lack one guide for ephemeral vs committed process evidence and tooling scratch."
+    desired_behavior: "Publish working-artifact-placement.md, PROC-WORKING_ARTIFACT_PLACEMENT, vocabulary and index links, layout-aware envelope doc examples."
+    non_goals:
+      - "Enforcement lint for mis-placed artifacts"
+      - "Gitignore collapse or legacy working exceptions migration"
+      - "Repo-wide replacement of all legacy working/ doc strings"
+    success_criteria:
+      - "SC-WAP-GUIDE through SC-WAP-ENVELOPE-DOC satisfied"
+      - "tied_validate_consistency ok"
+  completion_criteria:
+    verification_gate_notes: "Guide and PROC shipped; lint_yaml on new REQ/ARCH detail; tied_validate_consistency ok true."
+  impact_analysis:
+    impl_inventory_notes: "New tied-bundle/docs/working-artifact-placement.md; processes.md PROC; vocab routing; client-development-index; request-evidence-envelope.md path examples; AGENTS.md pointer."
+    modules_or_boundaries: "Methodology documentation only; runtime path resolution unchanged (IMPL-TIED_TWO_FOLDER_LAYOUT)."
+    tied_tokens_affected:
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+    tied_tokens_new:
+      - "ARCH-TIED_WORKING_ARTIFACT_PLACEMENT"
+      - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+    recorded_at: "2026-10-03"
+    title: "Working artifact placement guide"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Agents treat committed qualification JSON as mandatory for every run."
+        - "Envelope doc still shows undivided working/ paths and breaks two-folder clients."
+        - "Guide table diverges from LOCAL_WORKING_PREFIXES and misroutes new gate JSON into tied-project/working."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Gray-zone section documents legacy store gitignore debt without migration scope."
+        - "Guide cites working-root.ts and duplicates classifier prefixes exactly."
+        - "request-evidence-envelope.md examples use tied-project/working paths."
+      evidence_references:
+        - "mcp-server/src/working-root.ts"
+        - "tied-bundle/docs/working-artifact-placement.md"
+        - "tied-project/working/REQ-TIED_WORKING_ARTIFACT_PLACEMENT/evidence/verification-gate-evidence.md"
+      falsification_questions:
+        - "Does any new doc table contradict classifyWorkingRelativePath?"
+        - "Does tied_validate_consistency fail after token registration?"
+        - "Would a sponsor still be unsure where to commit gate receipts?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - description: "Documentation drift from shipped classifier."
+        id: "RISK-WAP-001"
+        likelihood: "Medium"
+        mitigation: "SC-WAP-CLASSIFIER; cite LOCAL_WORKING_PREFIXES in guide."
+        severity: "Medium"
+    summary: "Bounded documentation risk; behavior unchanged."
+  tdd_sequence:
+    summary: "Documentation-only; RED/GREEN code TDD not applicable; verification via doc review, lint_yaml, tied_validate_consistency."
+  test_strategy:
+    summary: "Manual guide review; lint_yaml on REQ/ARCH detail; tied_validate_consistency."

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "adversarial-inquiry-evidence-provenance.v1",
+  "run_id": "w4-refine-pre-impl-2026-09-27",
+  "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+  "phase": "pre_implementation",
+  "sources": [
+    {
+      "kind": "file_path",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w3-outcomes-2026-09-27.md"
+    },
+    {
+      "kind": "file_path",
+      "path": "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/w4-promotion-decisions.md"
+    }
+  ],
+  "generated_by": "refine-plan-w4-manual-obligation-pack"
+}

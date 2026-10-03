@@ -7,6 +7,7 @@ import { createHash } from "node:crypto";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
+import { resolveWorkingPath } from "../working-root.js";
 import { buildRequestEvidenceEnvelope } from "./build.js";
 import { normalizeEnvelope, serializeEnvelope } from "./normalize.js";
 import type {
@@ -24,7 +25,12 @@ function artifactMergeKey(artifact: Pick<EnvelopeArtifact, "kind" | "phase" | "p
 }
 
 function envelopePathFor(projectRoot: string, requestToken: string): string {
-  return path.join(projectRoot, "working", requestToken, "evidence", "request-evidence-envelope.v1.json");
+  return resolveWorkingPath(
+    projectRoot,
+    requestToken,
+    "evidence",
+    "request-evidence-envelope.v1.json",
+  );
 }
 
 function relPath(projectRoot: string, absolute: string): string {

@@ -1,0 +1,47 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T21:45:59.534Z",
+  "client_id": "1787691672",
+  "wave_scope": "W-ext-1787691672-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-LAUNCHD_COLLECTOR-pseudocode.md",
+      "impl_token": "IMPL-LAUNCHD_COLLECTOR",
+      "action": "none",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": []
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-NETWORK_LISTENER_COLLECTOR-pseudocode.md",
+      "impl_token": "IMPL-NETWORK_LISTENER_COLLECTOR",
+      "action": "none",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": []
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-PROCESS_RUNNER-pseudocode.md",
+      "impl_token": "IMPL-PROCESS_RUNNER",
+      "action": "none",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": []
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-REPORT_FORMATTER-pseudocode.md",
+      "impl_token": "IMPL-REPORT_FORMATTER",
+      "action": "none",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": []
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-SERVICE_REPORT_CLI-pseudocode.md",
+      "impl_token": "IMPL-SERVICE_REPORT_CLI",
+      "action": "none",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": []
+    }
+  ],
+  "dry_run_content_hash": "53527191e4eb0ea0e4464858bd27baa7ad4ca2a042020b8214ac8472dd412c5a",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787691672/dry-run/snapshots-constraint-ready/W-ext-1787691672-1"
+}

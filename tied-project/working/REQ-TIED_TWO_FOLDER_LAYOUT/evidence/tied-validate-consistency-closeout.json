@@ -1,0 +1,6 @@
+{
+  "tool": "tied_validate_consistency",
+  "captured_at": "2026-10-03T16:30:00.000Z",
+  "ok": true,
+  "note": "Full MCP response ok:true at plan-close-out refresh; token-level detail omitted for size."
+}

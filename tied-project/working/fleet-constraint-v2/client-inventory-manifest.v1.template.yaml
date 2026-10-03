@@ -1,0 +1,6 @@
+$schema: "working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json"
+clients: []
+manifest_id: "stdd-fleet-inventory-template"
+notes: "Empty client list. aggregate_migration_state and sidecar_counts_by_state must not\nbe inferred from grammar_v2_header audit alone. See docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md.\n"
+schema_version: 1
+updated_at: "2026-09-12T00:00:00Z"

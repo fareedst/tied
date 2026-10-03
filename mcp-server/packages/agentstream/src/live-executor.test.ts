@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 
 import {
+  agentstreamCliEntryFromModule,
   checklistTestdataDirFromModule,
   liveTestdataDirFromModule,
   repoRootFromModule,
@@ -20,10 +21,7 @@ import {
 describe("live executor TS [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
   const liveDir = liveTestdataDirFromModule(import.meta.url);
   const repoRoot = repoRootFromModule(import.meta.url);
-  const entry = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    "index.js",
-  );
+  const entry = agentstreamCliEntryFromModule(import.meta.url);
 
   it("routes control goto via TS live run", () => {
     try {
@@ -55,6 +53,7 @@ describe("live executor TS [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
     const tsRun = execFileSync(process.execPath, [entry, ...baseArgs], {
       encoding: "utf8",
       cwd: repoRoot,
+      env: { ...process.env, AGENTSTREAM_JEV_HARNESS: "0" },
     });
 
     for (const want of ["fake agent processed trigger-special", "fake agent processed rerouted-next"]) {
@@ -132,6 +131,7 @@ describe("live executor TS [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
     ];
     const env = {
       ...process.env,
+      AGENTSTREAM_JEV_HARNESS: "0",
       ...(omitReceipt ? { OMIT_TRACKER_RECEIPT: "1" } : {}),
     };
     let stdout = "";

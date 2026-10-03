@@ -1,0 +1,94 @@
+CITDP-W5-PROMOTION:
+  change_definition:
+    current_behavior: "Residuality pilot W1–W4 complete on PLAN-TIED-RESIDUALITY-ANALYSIS: 25 stressors, classification ledger,\nP0 LEAP (7 rows), P1 defer (7 rows), 27 W4 tests green. Process hooks (checklist sub-procedure,\ncanonical CITDP residuality field, schema lint, tooling REQ) remain NON-CANONICAL scaffolds in the\nfeature plan and working folder. Pilot DoD §7 assessed with documented partials; no written\ncanonical integration recommendation merged into tied/docs yet.\n"
+    desired_behavior: "After refine-plan W5, sponsor-facing promotion menu, DoD checklist, and NON-CANONICAL proposals\nexist under working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/ and evidence/w5-refine-*.md.\nbuild-plan W5 copies approved items into canonical tied/docs and vocab without competing with\nREQ/ARCH/IMPL authority. Default recommendation Adopt (revise) for optional risk-triggered pass.\n"
+    non_goals:
+      - "Canonizing checklist or citdp-policy in refine-plan W5"
+      - "Claiming machine PLAN close-out or universal resilience"
+      - "Executing build-plan W5 promotion copies in refine batch"
+      - "Mutating tied/methodology/"
+      - "Opening residuality tooling REQ/ARCH/IMPL without sponsor SD-W5-TOOLING-REQ"
+    success_criteria:
+      - "Checklist + CITDP NON-CANONICAL scaffolds with promotion gate comment"
+      - "Feature plan §7/§10 planning status updated"
+      - "minimal pre_implementation gate for W5 refine batch"
+      - "pilot/pilot-dod-checklist.md scores 12 DoD items with evidence paths"
+      - "stressor-residue.v1 field-use justification and lint defer rationale"
+      - "w5-promotion/w5-promotion-decisions.md with adopt/defer/reject per W5 candidate"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "PLAN-TIED-RESIDUALITY-ANALYSIS"
+      run_id: "w5-build-minimal-2026-09-27"
+    build_plan_completed: "w5-build-plan-promotion"
+    build_summary_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w5-build-plan-summary.md"
+  impact_analysis:
+    architecture: []
+    documentation:
+      - "docs/tied-residuality-analysis-plan.md"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/"
+    implementation_decisions: []
+    processes:
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-CITDP"
+      - "PROC-VOCABULARY_INDEX"
+    requirements: []
+  record_identity:
+    batch_note: "Refine planning complete; build-plan W5 promoted checklist/vocab/tooling per sponsor-wrap-up-2026-09-27.md."
+    citdp_id: "CITDP-W5-PROMOTION"
+    created_at: "2026-09-27"
+    parent_change_id: "PLAN-TIED-RESIDUALITY-ANALYSIS"
+    status: "closed"
+    title: "W5 promotion — PLAN-TIED-RESIDUALITY-ANALYSIS (refine + build)"
+    updated_at: "2026-09-27"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Partial DoD items (P1, S-T13, V-H01) marketed as universal resilience proof."
+        - "W5 promotion treats pilot worksheets as canonical REQ substitutes."
+      depth_change_waiver:
+        approval: "refine-plan-w5-pre-impl-2026-09-27"
+        expiry: "2026-12-31"
+        owner: "PLAN-TIED-RESIDUALITY-ANALYSIS sponsor"
+        rationale: "Pilot integrated W1–W4 complete; W5 refine is promotion planning docs only — downgrade to minimal per feature plan Batch C refine policy."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "DoD checklist marks partials explicitly; recommendation is adopt_revise not blanket adopt."
+        - "Promotion menu defers tooling REQ and schema lint; hooks marked NON-CANONICAL until build-plan."
+      evidence_references:
+        - "docs/tied-residuality-analysis-plan.md"
+        - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md"
+        - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/w5-promotion-decisions.md"
+      falsification_questions:
+        - "Can promotion scaffolds bypass TDD and composition gates for stack changes?"
+        - "Does optional checklist hook auto-mutate project YAML from unreviewed residues?"
+      gate_policy: "advisory"
+      inquiry_run_id: "not_applicable-w5-build-minimal"
+      prior_depth_tier: "integrated"
+      profile_depth: "minimal"
+      rationale: "W5 build promotes process hooks and bounded MCP validator; gate at minimal with pilot integrated waiver per Batch C policy."
+    residuality_analysis:
+      attach_pattern: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/risk_analysis.residuality_analysis.proposed.yaml"
+      dod_assessment_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md"
+      example_attach_snippet: "# Attach-first — copy under risk_analysis.residuality_analysis in behavior-changing CITDP records.\n# Do not merge full block into tied/docs/citdp-policy.md until policy phase 2.\napplied: true\npilot_change_id: PLAN-TIED-RESIDUALITY-ANALYSIS\nclassification_ledger_ref: working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.jsonl\nproof_boundary: Discovery aid only; runtime claims require executable evidence.\n"
+      promotion_menu_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/w5-promotion-decisions.md"
+      proof_boundary: "Discovery aid only; canonical hooks must preserve REQ/ARCH/IMPL authority."
+      recommendation: "adopt_revise"
+      status: "w5_build_applied"
+      tooling_tokens:
+        - "ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+        - "IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+        - "REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION"
+      validator_tool: "stressor_residue_record_validate"
+    risks:
+      - description: "Over-claiming pilot partials as universal proof"
+        id: "RISK-W5-001"
+        mitigation: "DoD partial markers; adopt_revise not full adopt"
+  test_strategy:
+    summary: "No RED tests in W5 refine. Verification is documentary + minimal pre_implementation gate."
+    w5_refine_verification:
+      - "evidence/w5-refine-outcomes.md"
+      - "pilot/pilot-dod-checklist.md"
+      - "w5-promotion/w5-promotion-decisions.md"

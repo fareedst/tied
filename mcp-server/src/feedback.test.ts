@@ -19,7 +19,7 @@ import {
 
 describe("getFeedbackPath", () => {
   it("returns path ending with feedback.yaml under base [ARCH-FEEDBACK_STORAGE]", () => {
-    const p = getFeedbackPath("/tmp/tied");
+    const p = getFeedbackPath("/tmp/tied-project");
     assert.ok(p.endsWith("feedback.yaml"));
     assert.ok(p.includes("tied"));
   });

@@ -147,11 +147,11 @@ IMPL-* only: set **`essence_pseudocode`** and optionally **`metadata.last_update
 | `essence_pseudocode_path` | string | one of | Path to a UTF-8 file under `TIED_BASE_PATH`; file contents are used as the full body. Must not escape the TIED project tree. |
 | `metadata_last_updated` | object | no | `{ date?, author?, reason? }` merged under `metadata.last_updated` (sub-keys preserved when both sides are objects) |
 
-**`tied-cli.sh` (stdio client):** instead of a huge `essence_pseudocode` string in JSON, set **`TIED_CLI_IMPL_ESSENCE_FILE=/abs/path/body.md`** to load the body from disk, or **`TIED_CLI_IMPL_ESSENCE_STDIN=1`** and pipe/heredoc stdin; the client injects `essence_pseudocode` and drops `essence_pseudocode_path`. At most one of file env and stdin env. See the script header in **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`** (after `copy_files.sh`) or **`tools/bundled-tied-yaml-skill/scripts/tied-cli.sh`** in the TIED source tree. Direct editing of `tied/implementation-decisions/IMPL-*-pseudocode.md` remains valid; then run `tied_validate_consistency`. |
+**`tied-cli.sh` (stdio client):** instead of a huge `essence_pseudocode` string in JSON, set **`TIED_CLI_IMPL_ESSENCE_FILE=/abs/path/body.md`** to load the body from disk, or **`TIED_CLI_IMPL_ESSENCE_STDIN=1`** and pipe/heredoc stdin; the client injects `essence_pseudocode` and drops `essence_pseudocode_path`. At most one of file env and stdin env. See the script header in **`.cursor/skills/tied-yaml/scripts/tied-cli.sh`** (after `tied-install.sh`) or **`tools/bundled-tied-yaml-skill/scripts/tied-cli.sh`** in the TIED source tree. Direct editing of `tied-project/implementation-decisions/IMPL-*-pseudocode.md` remains valid; then run `tied_validate_consistency`. |
 
 ### `citdp_record_write`
 
-Write or replace a CITDP YAML file under **`tied/citdp/`** (basename only, must match `CITDP-*.yaml`). Creates **`citdp/`** if missing.
+Write or replace a CITDP YAML file under **`tied-project/citdp/`** (basename only, must match `CITDP-*.yaml`). Creates **`citdp/`** if missing.
 
 | Param | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -202,8 +202,8 @@ Rename a token across the default TIED rename scope (indexes, details, cross-ref
 | `old_token` | string | yes | Current token ID |
 | `new_token` | string | yes | New token ID (same prefix required) |
 | `dry_run` | boolean | no | Preview changes without writing |
-| `include_markdown` | boolean | no | Also replace in `tied/docs/processes.md` |
-| `extra_globs` | string[] | no | Path globs from client project root (e.g. `./*.md`, `tied/vocab/**/*.md`) |
+| `include_markdown` | boolean | no | Also replace in `tied-bundle/docs/processes.md` |
+| `extra_globs` | string[] | no | Path globs from client project root (e.g. `./*.md`, `tied-project/vocab/**/*.md`) |
 | `extra_extensions` | string[] | no | Extensions expanded to `**/*.{ext}` under client project root (e.g. `swift`) |
 
 ---
@@ -331,7 +331,7 @@ Inspect an existing TIED directory and return a summary.
 
 | Param | Type | Required | Description |
 |-------|------|----------|-------------|
-| `base_path` | string | no | Path to `tied/` directory |
+| `base_path` | string | no | Path to `tied-project/` directory |
 
 ---
 

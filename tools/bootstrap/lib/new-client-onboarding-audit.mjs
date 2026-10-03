@@ -1,14 +1,20 @@
 /**
- * [IMPL-TIED_NEW_CLIENT_ONBOARDING] [ARCH-TIED_NEW_CLIENT_ADHERENCE]
- * [REQ-TIED_NEW_CLIENT_ADHERENCE] [REQ-TIED_SETUP] [IMPL-TIED_FILES]
+ * [IMPL-TIED_NEW_CLIENT_ONBOARDING] [ARCH-TIED_NEW_CLIENT_ADHERENCE] [ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH]
+ * [REQ-TIED_NEW_CLIENT_ADHERENCE] [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH] [REQ-TIED_SETUP] [IMPL-TIED_FILES]
  * How: Fail-closed Layer A audit after bootstrap — spawn run-tied-new-client-audit.mjs from source root.
  */
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { committedWorkingFileRel, resolveCommittedWorkingPath } from "./working-root.mjs";
 
 export function defaultOnboardingAuditReportPath(clientDir) {
-  return path.join(clientDir, "working", "tied-new-client-audit.v1.json");
+  return resolveCommittedWorkingPath(clientDir, "tied-new-client-audit.v1.json");
+}
+
+/** @param {string} clientDir */
+export function defaultOnboardingAuditReportRel(clientDir) {
+  return committedWorkingFileRel(clientDir, "tied-new-client-audit.v1.json");
 }
 
 export function shouldSkipNewClientOnboardingAudit(env = process.env, options = {}) {

@@ -1,0 +1,94 @@
+{
+  "schema_version": "tied-new-client-audit.v1",
+  "generated_at": "2026-10-03T14:21:29.218Z",
+  "client_root": "/Users/fareed/Documents/dev/test/1791037288",
+  "ok": true,
+  "gate_stage": "G4",
+  "with_consistency": false,
+  "install_profile": "linked",
+  "proof_boundary": "onboarding-adherent bootstrap only; not fleet-migrated-client without G3 receipts",
+  "grammar_audit": {
+    "schema_version": "grammar-v2-default-audit.v1",
+    "client_root": "/Users/fareed/Documents/dev/test/1791037288",
+    "template_path": "/Users/fareed/Documents/dev/test/1791037288/tied-bundle/templates/impl-essence-pseudocode-template.md",
+    "smoke_sidecar_path": "/Users/fareed/Documents/dev/chatgpt/stdd/scripts/fixtures/grammar-v2-default-smoke.sidecar.md",
+    "gate_stage": "G4",
+    "dimensions": {
+      "grammar_v2_header": "pass",
+      "bootstrap_enforcement": "pass",
+      "layer_b": {
+        "ok": true,
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "error_count": 0,
+        "diagnostics": []
+      },
+      "layer_c": {
+        "ok": true,
+        "gate_mode_applied": true,
+        "constraint_flow": true
+      },
+      "constraint_flow": true,
+      "legacy_v1_compatibility": {
+        "compatible": true,
+        "classification": "legacy_v1",
+        "sidecar_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/implementation-decisions/IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md"
+      }
+    },
+    "audit": {
+      "ok": true,
+      "dimensions": {
+        "grammar_v2_header": "pass",
+        "bootstrap_enforcement": "pass",
+        "layer_b": {
+          "ok": true
+        },
+        "layer_c": {
+          "ok": true,
+          "gate_mode_applied": true
+        },
+        "constraint_flow_expectation": true,
+        "legacy_v1_compatibility": "pass"
+      }
+    },
+    "ok": true
+  },
+  "consistency": {
+    "skipped": true
+  },
+  "two_folder_layout": {
+    "ok": true,
+    "checks": [
+      {
+        "id": "SC-TFL-NO-LEGACY-TIED-DIR",
+        "ok": true
+      },
+      {
+        "id": "SC-TFL-LEGACY-MARKERS",
+        "ok": true
+      },
+      {
+        "id": "SC-TFL-PROJECT-CONFIG",
+        "ok": true,
+        "detail": "/Users/fareed/Documents/dev/test/1791037288/tied-project/config.yaml"
+      },
+      {
+        "id": "SC-TFL-NO-ROOT-TIED-YAML",
+        "ok": true
+      },
+      {
+        "id": "SC-TFL-BUNDLE-GITIGNORE",
+        "ok": true,
+        "detail": "gitignore:tied-bundle/ (no git repo)"
+      },
+      {
+        "id": "SC-TFL-PROJECT-NOT-IGNORED",
+        "ok": true
+      },
+      {
+        "id": "SC-TFL-INSTALL-CONFIG-SCHEMA",
+        "ok": true
+      }
+    ]
+  },
+  "audit_command": "node scripts/run-tied-new-client-audit.mjs --client-root /Users/fareed/Documents/dev/test/1791037288"
+}

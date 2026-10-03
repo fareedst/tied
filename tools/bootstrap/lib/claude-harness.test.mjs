@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 import { initializeTiedMcpConfig, initializeClaudeMcpConfig } from "./mcp-config.mjs";
 import { installClaudeSkills } from "./skills.mjs";
-import { bootstrapTied } from "./bootstrap.mjs";
+import { installTiedLayers } from "./install-layers-core.mjs";
 import { manifestPaths, TIED_REPO_ROOT } from "./constants.mjs";
 import { assertMcpPrerequisite } from "./mcp-config.mjs";
 import {
@@ -27,9 +27,22 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function tempClient() {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "tied-claude-bootstrap-"));
-  fs.mkdirSync(path.join(root, "tied"), { recursive: true });
-  return root;
+  return fs.mkdtempSync(path.join(os.tmpdir(), "tied-claude-bootstrap-"));
+}
+
+function bootstrapLinkedClient(clientRoot, extra = {}) {
+  const { toolUseProfile, env, ...rest } = extra;
+  installTiedLayers(clientRoot, {
+    store: TIED_REPO_ROOT,
+    mode: "linked",
+    layers: ["db", "mcp", "skills", "methodology"],
+    harness: "both",
+    skipVerify: true,
+    allowSelfInstall: true,
+    env: env ?? process.env,
+    toolUseProfile,
+    ...rest,
+  });
 }
 
 describe("PRESERVE_CURSOR_MCP_INIT [REQ-TIED_CLAUDE_HARNESS]", () => {
@@ -140,7 +153,7 @@ describe("BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS]", () => 
     const before = fs.readFileSync(mcpPath, "utf8");
 
     assertMcpPrerequisite(TIED_REPO_ROOT);
-    bootstrapTied(clientRoot, { env: process.env });
+    bootstrapLinkedClient(clientRoot);
 
     assert.equal(fs.readFileSync(mcpPath, "utf8"), before);
     const tiedCli = path.join(clientRoot, ".claude", "skills", "tied-yaml", "scripts", "tied-cli.sh");
@@ -166,14 +179,14 @@ describe("ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () =
     assert.equal(skills.message, WINDOWS_CLAUDE_SMOKE_FAIL.SKILLS_DIR);
   });
 
-  it("GREEN: passes after bootstrapTied dual-harness install", () => {
+  it("GREEN: passes after tied-install linked dual-harness install", () => {
     const clientRoot = tempClient();
     const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
     fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
     fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
 
     assertMcpPrerequisite(TIED_REPO_ROOT);
-    bootstrapTied(clientRoot, { env: process.env });
+    bootstrapLinkedClient(clientRoot);
 
     const result = assertWindowsBootstrapClaude(clientRoot);
     assert.equal(result.ok, true);
@@ -181,38 +194,22 @@ describe("ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () =
   });
 });
 
-describe("BASE_FILES .tied-yaml.yaml [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] [IMPL-TIED_FILES]", () => {
+describe("BASE_FILES project config [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] [IMPL-TIED_FILES]", () => {
   function bootstrapFreshClient() {
     const clientRoot = tempClient();
     const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
     fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
     fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
     assertMcpPrerequisite(TIED_REPO_ROOT);
-    bootstrapTied(clientRoot, { env: process.env });
+    bootstrapLinkedClient(clientRoot);
     return clientRoot;
   }
 
-  it("creates repo-root .tied-yaml.yaml from templates starter on fresh bootstrap", () => {
+  it("creates tied-project indexes on fresh linked install", () => {
     const clientRoot = bootstrapFreshClient();
-    const stylePath = path.join(clientRoot, ".tied-yaml.yaml");
-    assert.ok(fs.existsSync(stylePath));
-    const text = fs.readFileSync(stylePath, "utf8");
-    assert.doesNotMatch(text, /jev\.agentstream_harness/);
-    assert.doesNotMatch(text, /scalar_style:\s*wrapped/);
+    assert.ok(fs.existsSync(path.join(clientRoot, "tied-project", "requirements.yaml")));
   });
 
-  it("does not overwrite an existing client .tied-yaml.yaml", () => {
-    const clientRoot = tempClient();
-    const stylePath = path.join(clientRoot, ".tied-yaml.yaml");
-    const sentinel = "custom:\n  preserved: true\n";
-    fs.writeFileSync(stylePath, sentinel, "utf8");
-    const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
-    fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
-    fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
-    assertMcpPrerequisite(TIED_REPO_ROOT);
-    bootstrapTied(clientRoot, { env: process.env });
-    assert.equal(fs.readFileSync(stylePath, "utf8"), sentinel);
-  });
 });
 
 describe("CONFIG_SKILLS_REROOT [REQ-TIED_CLAUDE_SKILLS_REROOT]", () => {
@@ -286,7 +283,7 @@ describe("CONFIG_SKILLS_REROOT [REQ-TIED_CLAUDE_SKILLS_REROOT]", () => {
     fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
     fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
     assertMcpPrerequisite(TIED_REPO_ROOT);
-    bootstrapTied(clientRoot, {
+    bootstrapLinkedClient(clientRoot, {
       env: { ...process.env, [SKILLS_REROOT_ENV]: "1" },
     });
     const rerootDir = path.join(clientRoot, "skills");
@@ -296,13 +293,13 @@ describe("CONFIG_SKILLS_REROOT [REQ-TIED_CLAUDE_SKILLS_REROOT]", () => {
     assert.ok(skillsRerootEnabledFromEnv({ [SKILLS_REROOT_ENV]: "1" }));
   });
 
-  it("Windows assert honors re-root layout after bootstrapTied", () => {
+  it("Windows assert honors re-root layout after linked install", () => {
     const clientRoot = tempClient();
     const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
     fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
     fs.writeFileSync(mcpPath, `${JSON.stringify({ mcpServers: {} }, null, 2)}\n`, "utf8");
     assertMcpPrerequisite(TIED_REPO_ROOT);
-    bootstrapTied(clientRoot, {
+    bootstrapLinkedClient(clientRoot, {
       env: { ...process.env, [SKILLS_REROOT_ENV]: "1" },
     });
     const result = assertWindowsBootstrapClaude(clientRoot, { skills_reroot_enabled: true });

@@ -1,0 +1,47 @@
+# [IMPL-VOLUME_REPORT_FORMAT] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT]
+# Render sorted storage records as a human table or stable JSON selected by the CLI flag.
+
+## SELECT_REPORT_FORMAT
+# [IMPL-VOLUME_REPORT_FORMAT] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT] How: route the same storage records to exactly one output serializer based on the JSON flag.
+Contract:
+  INPUT: storage records, JSON flag, output writer
+  PRE: output writer is writable; records use the MountStats contract
+  OUTPUT: success | ReportError
+  POST:
+    success => exactly one serializer writes the requested representation
+    error => the writer error is returned
+  FAILURE_MODES: ReportError
+  EFFECTS: IO
+  TERMINATION: total
+1. IF the JSON flag is enabled: call RENDER_JSON.
+2. ELSE call RENDER_TABLE.
+3. RETURN the serializer result.
+
+## RENDER_TABLE
+# [IMPL-VOLUME_REPORT_FORMAT] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT] How: write a stable header and one aligned row per storage record using binary size units.
+Contract:
+  INPUT: sorted storage records, output writer
+  PRE: output writer is writable
+  OUTPUT: success | ReportError
+  POST: success writes the required columns and one row per record
+  FAILURE_MODES: ReportError
+  EFFECTS: IO
+  TERMINATION: total
+1. Write DEVICE, MOUNT, TYPE, SIZE, USED, AVAIL, and USE% headers.
+2. FOR each record IN storage records: format byte values with readable binary units.
+3. Write one aligned row for the record.
+4. RETURN success or ReportError.
+
+## RENDER_JSON
+# [IMPL-VOLUME_REPORT_FORMAT] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT] How: encode all storage records as one JSON array with explicit stable field names.
+Contract:
+  INPUT: sorted storage records, output writer
+  PRE: output writer is writable
+  OUTPUT: success | ReportError
+  POST: success writes one valid JSON array containing all records
+  FAILURE_MODES: ReportError
+  EFFECTS: IO
+  TERMINATION: total
+1. Map each record to device, mount_point, fs_type, total_bytes, used_bytes, available_bytes, and used_percent fields.
+2. Encode the mapped records as one JSON array.
+3. RETURN success or ReportError.

@@ -1,0 +1,11 @@
+{
+  "run_at": "2026-09-13T21:52:14.276Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-tied-win-diff-1",
+  "partition_wave_id": "W-ext-tied-win-diff-1",
+  "gate_stage": "G3",
+  "receipt_count": 1,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/tied-win-diff/receipts/IMPL-TIED_FILES.receipt.json"
+  ]
+}

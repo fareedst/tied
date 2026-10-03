@@ -33,11 +33,11 @@ describe("tied gate check composition [REQ-TIED_DAE_INCORPORATION]", () => {
     const fixtureRoot = repoRoot;
     const tracker = path.join(
       fixtureRoot,
-      "working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/gate-blocked-minimal.yaml",
+      "tied-project/working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/gate-blocked-minimal.yaml",
     );
     const citdp = path.join(
       fixtureRoot,
-      "working/REQ-TIED_DAE_INCORPORATION/fixtures/citdp/w1-gate-check-minimal.yaml",
+      "tied-project/working/REQ-TIED_DAE_INCORPORATION/fixtures/citdp/w1-gate-check-minimal.yaml",
     );
     const mockGate: GateValidateFn = async () => ({
       allowed: false,
@@ -75,11 +75,11 @@ describe("tied gate check composition [REQ-TIED_DAE_INCORPORATION]", () => {
     const fixtureRoot = repoRoot;
     const tracker = path.join(
       fixtureRoot,
-      "working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/gate-blocked-minimal.yaml",
+      "tied-project/working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/gate-blocked-minimal.yaml",
     );
     const citdp = path.join(
       fixtureRoot,
-      "working/REQ-TIED_DAE_INCORPORATION/fixtures/citdp/w1-gate-check-minimal.yaml",
+      "tied-project/working/REQ-TIED_DAE_INCORPORATION/fixtures/citdp/w1-gate-check-minimal.yaml",
     );
     const mockGate: GateValidateFn = async () => ({ allowed: true });
 

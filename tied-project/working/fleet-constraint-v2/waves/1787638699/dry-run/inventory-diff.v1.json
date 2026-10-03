@@ -1,0 +1,34 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T21:32:28.282Z",
+  "client_id": "1787638699",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787638699",
+  "sidecar_count": 4,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 4,
+    "constraint-enforced-v2": 0,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "08720487ce26eaa26330e7cc96d3b139d0193bcc8b600e5fcd224332f8499016",
+  "rows": [
+    {
+      "file": "IMPL-WININFO_CLI-pseudocode.md",
+      "classification": "constraint-ready-v2"
+    },
+    {
+      "file": "IMPL-WININFO_ENUMERATE-pseudocode.md",
+      "classification": "constraint-ready-v2"
+    },
+    {
+      "file": "IMPL-WININFO_FILTER-pseudocode.md",
+      "classification": "constraint-ready-v2"
+    },
+    {
+      "file": "IMPL-WININFO_RENDER-pseudocode.md",
+      "classification": "constraint-ready-v2"
+    }
+  ]
+}

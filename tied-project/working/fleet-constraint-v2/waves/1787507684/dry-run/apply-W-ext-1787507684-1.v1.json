@@ -1,0 +1,36 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T21:18:01.631Z",
+  "client_id": "1787507684",
+  "wave_scope": "W-ext-1787507684-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_CLI-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_CLI",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_COLLECT-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_COLLECT",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_RENDER-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_RENDER",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_TREE-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_TREE",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "8e90a6dfe2880002de5919e896df534093c059bfd117a435962dbad4d39bde78",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787507684/dry-run/snapshots/W-ext-1787507684-1"
+}

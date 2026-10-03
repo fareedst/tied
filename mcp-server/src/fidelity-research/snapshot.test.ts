@@ -9,7 +9,7 @@ describe("SNAPSHOT_CHANGE REQ-TIED_FIDELITY_RESEARCH", () => {
     const result = snapshotChange({
       manifest: {
         projectRoot: "/tmp/research-project",
-        tiedBasePath: "/tmp/research-project/tied",
+        tiedBasePath: "/tmp/research-project/tied-project",
       },
       changeId: "change-1",
       priorRevision: "abc123",
@@ -33,7 +33,7 @@ describe("SNAPSHOT_CHANGE REQ-TIED_FIDELITY_RESEARCH", () => {
     const result = snapshotChange({
       manifest: {
         projectRoot: "/tmp/research-project",
-        tiedBasePath: "/tmp/research-project/tied",
+        tiedBasePath: "/tmp/research-project/tied-project",
       },
       changeId: "change-1",
       priorRevision: "abc123",

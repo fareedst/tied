@@ -1,0 +1,17 @@
+bootstrap_disposition: "Untouched legacy Active procedure blocks in out-of-scope IMPLs may remain non-parseable for Layer C until next edit with block-level N/A pre-psa-grammar. Full 78-sidecar corpus remediation deferred per plan out-of-scope."
+change_id: "DOC-PSA-PSEUDOCODE-FULL-UPDATE"
+file_scoped_rule: "Changed sidecars submitted to Layer C must pass as whole files under gate_mode. Block-level pre-psa-grammar N/A does not suppress errors inside that submitted file."
+impl_inventory_authority: "working/DOC-PSA-PSEUDOCODE-FULL-UPDATE/tracker.yaml execution_evidence.impl_inventory"
+primary_req: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+scope: "changed_in_scope_impls_only"
+tier_1_remediation:
+  - action: "sidecar_updated"
+    details: "Added gate_mode to CONTROL and ANALYZE_ESSENCE_PSEUDOCODE POST; sidecar uses procedure NAME form throughout"
+    layer_c_report: "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.v1.json"
+    token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+  - action: "template_remediated"
+    details: "Replaced list-item PROCEDURE with procedure UPPER_SNAKE_NAME heading form"
+    path: "templates/impl-essence-pseudocode-template.md"
+tier_2_deferred:
+  - "DEREF_OBLIGATION warnings in untouched sidecars"
+  - "unsupported_syntax in legacy list-style PROCEDURE headings outside impl_inventory"

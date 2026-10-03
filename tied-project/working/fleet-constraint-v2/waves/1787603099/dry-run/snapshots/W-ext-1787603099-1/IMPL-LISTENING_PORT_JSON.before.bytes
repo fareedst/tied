@@ -1,0 +1,29 @@
+# [IMPL-LISTENING_PORT_JSON] [ARCH-LISTENING_PORT_CLI] [REQ-LISTENING_PORT_REPORT]
+# How: Marshals listener slice to JSON envelope on stdout.
+
+TYPE ReportEnvelope
+  DATA listeners []Listener
+  DATA count int
+
+PROC ENCODE_REPORT
+  INPUT: listeners []Listener, writer io.Writer
+  OUTPUT: error or nil
+  PRE: writer non-nil
+  POST: valid JSON object with listeners array and count == len(listeners); trailing newline written
+  EFFECTS: writes bytes to writer (stdout in CLI)
+  FAILURE_MODES: json.Marshal error → return error; writer.Write error → return error
+
+  # How: Build envelope ensuring count matches slice length.
+  envelope := ReportEnvelope{
+    listeners: listeners,
+    count: len(listeners)
+  }
+
+  bytes, err := json.Marshal(envelope)
+  IF err != nil THEN RETURN err
+
+  # How: Append newline for line-oriented tooling (jq, pipelines).
+  bytes := append(bytes, '\n')
+
+  _, err := writer.Write(bytes)
+  RETURN err

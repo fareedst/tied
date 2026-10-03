@@ -903,7 +903,7 @@ if File.file?(File.join(SCRIPT_DIR, '..', 'mcp-server', 'dist', 'cli', 'yaml-can
   style_root = Dir.mktmpdir('tied_yaml_style_cli_')
   style_tied = File.join(style_root, 'tied')
   FileUtils.mkdir_p(style_tied)
-  File.write(File.join(style_root, '.tied-yaml.yaml'), "scalar_style: wrapped\n")
+  File.write(File.join(style_root, 'tied-project/config.yaml'), "scalar_style: wrapped\n")
   wrapped_source = File.join(style_root, 'wrapped.yaml')
   fixture = File.join(SCRIPT_DIR, '..', 'mcp-server', 'test', 'fixtures', 'yaml-style.yaml')
   FileUtils.cp(fixture, wrapped_source)

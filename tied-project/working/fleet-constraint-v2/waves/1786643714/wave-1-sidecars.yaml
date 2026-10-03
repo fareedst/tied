@@ -1,0 +1,10 @@
+client_id: "1786643714"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 2 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-FIBONACCI_CLI"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1786643714/tied/implementation-decisions/IMPL-FIBONACCI_CLI-pseudocode.md"
+  - impl_token: "IMPL-FIBONACCI_GENERATE_SEQUENCE"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1786643714/tied/implementation-decisions/IMPL-FIBONACCI_GENERATE_SEQUENCE-pseudocode.md"
+wave_id: "W-ext-1786643714-1"

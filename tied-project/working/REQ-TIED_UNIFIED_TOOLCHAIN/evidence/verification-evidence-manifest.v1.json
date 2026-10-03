@@ -1,0 +1,85 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "slice3b-close-out-preflight-2026-09-23",
+  "commit": "HEAD",
+  "environment": {
+    "repo": "stdd"
+  },
+  "command_results": [
+    {
+      "id": "adherence-ruby-test",
+      "command": [
+        "ruby",
+        "scripts/test/adherence_append_action_attempted_test.rb"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 1337
+    },
+    {
+      "id": "agentstream-go-test",
+      "command": [
+        "go",
+        "test",
+        "./..."
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/tools/agentstream",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 1157
+    },
+    {
+      "id": "mcp-server-npm-test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 22479
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "Q-UNIFIED-ADHERENCE",
+      "attribute": "adherence_hook_contract",
+      "applicability": "applicable",
+      "rationale": "Ruby bridge contract unchanged during TS hook and reconcile strangler",
+      "evidence_method": "command",
+      "command_or_test": "adherence-ruby-test",
+      "result": "passed"
+    },
+    {
+      "id": "Q-UNIFIED-GO-PARITY",
+      "attribute": "go_agentstream_baseline",
+      "applicability": "applicable",
+      "rationale": "Strangler retains Go default for live executor; baseline must stay green",
+      "evidence_method": "command",
+      "command_or_test": "agentstream-go-test",
+      "result": "passed"
+    },
+    {
+      "id": "Q-UNIFIED-WORKSPACE",
+      "attribute": "npm_workspace_build_test",
+      "applicability": "applicable",
+      "rationale": "Phase 3b slices 2a–2d @tied/agentstream TS strangler and MCP reconcile prefer TS",
+      "evidence_method": "command",
+      "command_or_test": "mcp-server-npm-test",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_UNIFIED_TOOLCHAIN"
+  ],
+  "proof_boundaries": [
+    "phase_3b_ts_strangler_2a_2d_qualified",
+    "go_live_executor_default_until_phase_4",
+    "not_full_go_removal"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

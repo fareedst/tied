@@ -1,0 +1,78 @@
+charter_reference: "docs/tied-methodology-evaluation-framework.md"
+citdp_disposition: "deferred"
+citdp_rationale: "Non-executable documentation-only deliverable in methodology source repo; no runtime behavior change per tied/docs/citdp-policy.md reasonable skip."
+clients:
+  - "indescript"
+  - "nsync"
+  - "panorama"
+  - "treegrep"
+created_at: "2026-08-27"
+deliverable_path: "docs/tied-project-alignment-recommendations.md"
+depth_tier: "minimal"
+evidence_anchor:
+  corpus: "working/evaluation/evaluation-corpus.v1.yaml"
+  cross_client_report: "working/evaluation/phase1-pilot-evidence-chain-report.yaml"
+  pilot_completed_at: "2026-08-27"
+  residual_risks: "working/evaluation/phase1-pilot-residual-risks.yaml"
+  within_repo_report: "working/evaluation/phase1-within-repo-evidence-chain-report.yaml"
+execution_evidence:
+  completed:
+    - "client-handoff-artifacts"
+    - "collect-dri-name"
+    - "draft-sections-ab"
+    - "draft-sections-cd"
+    - "draft-sections-efg"
+    - "e0-publish"
+    - "nsync-conflict-verify"
+    - "plan-refinement"
+    - "refine-gate"
+    - "review-document"
+    - "sponsor-approval"
+    - "training-excerpt"
+  evidence:
+    client_handoff: "working/evaluation/client-remediation-handoffs.yaml"
+    client_repo_mutations: "none"
+    deliverable: "docs/tied-project-alignment-recommendations.md"
+    e0_approved_at: "2026-08-27"
+    nsync_reverification: "confirmed; tied/ is untracked at the pinned commit"
+    nsync_sidecars_at_pinned_commit: 0
+    nsync_sidecars_working_tree: 19
+    publish_status: "e0_approved"
+    shared_dri: "TBD — sponsor assign"
+  implement_gate: "e0_approved_client_handoff_published"
+  pending: []
+  request: "DOCS-TIED-CLIENT-ALIGNMENT-RECOMMENDATIONS"
+gate_policy: "advisory"
+plan_path: "/Users/fareed/.cursor/plans/tied_client_recommendations_d25216f2.plan.md"
+prior_depth_tier: null
+profile_depth: "not_measured"
+request_slug: "DOCS-TIED-CLIENT-ALIGNMENT-RECOMMENDATIONS"
+schema_version: "alignment-recommendations-tracker.v1"
+test_strategy:
+  checks:
+    - "commit_pin_match_corpus"
+    - "link_integrity"
+    - "no_maturity_ranking"
+    - "observed_vs_recommended_labels"
+    - "token_spelling"
+  type: "document_verification"
+validation:
+  document_review:
+    commit_pin_match_corpus: "pass"
+    internal_review: "completed"
+    link_integrity: "pass"
+    no_maturity_ranking: "pass"
+    observed_vs_recommended_labels: "pass"
+    token_spelling: "pass"
+  language_lint: "not_applicable"
+  lint_yaml: "not_applicable"
+  tied_checklist_gate_validate: "skipped_docs_only_minimal_depth"
+  tied_validate_consistency: "pass; read-only repository consistency check"
+vocabulary:
+  preloaded:
+    - "tied/vocab/fidelity-research.md"
+    - "tied/vocab/prompt-composer.md"
+    - "tied/vocab/pseudocode-and-citdp.md"
+    - "tied/vocab/quality-assurance.md"
+  record_required: false
+  validate_at: "review-document"

@@ -1,0 +1,8 @@
+fix(checklist-gate): yaml tied-base from file path; template tokens; fixture 1787603099
+
+Resolve TIED_BASE_PATH from the YAML file's project root when canonicalizing
+client YAML (yaml-style-config + canonicalizer + yaml_tool verbose). Propagate
+REQ/ARCH/IMPL checklist gate enforcement detail files under templates/.
+Align gate/envelope tests and refresh fixture 1787603099 regression manifest.
+Integrated close-out: run-close-out-gates close_out allowed with run_id
+wave8-closeout-20260911; zero blocking envelope gaps.

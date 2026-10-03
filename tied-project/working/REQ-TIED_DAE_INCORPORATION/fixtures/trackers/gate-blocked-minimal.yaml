@@ -1,0 +1,6 @@
+execution_evidence:
+  request: "REQ-TIED_DAE_INCORPORATION"
+steps:
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "test-strategy"

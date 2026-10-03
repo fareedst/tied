@@ -1,6 +1,6 @@
 /**
  * [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR]
- * Parse client `tied/vocab/routing.md` glossary table rows.
+ * Parse client `tied-project/vocab/routing.md` glossary table rows.
  */
 
 export type RoutingRow = {

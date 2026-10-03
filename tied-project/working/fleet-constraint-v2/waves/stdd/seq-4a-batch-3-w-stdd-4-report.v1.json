@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "slice": "Seq-4A-WS-1-S1.4-S1.5-batch-3",
+  "req_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "wave_id": "W-stdd-4",
+  "generated_at": "2026-09-13T03:40:00.000Z",
+  "methodology_pin": "48d1fbb+",
+  "inventory_stdd_before": {
+    "constraint-ready-v2": 73,
+    "constraint-enforced-v2": 20,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_stdd_after": {
+    "constraint-ready-v2": 63,
+    "constraint-enforced-v2": 30,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_delta": {
+    "constraint-ready-v2": -10,
+    "constraint-enforced-v2": 10
+  },
+  "classifier": {
+    "changed": false,
+    "note": "unchanged; bullet-list Contract INPUT lines do not satisfy enforced heuristic — file-level Contract INPUT where added for IMPL-EVIDENCE_CHAIN_PROFILE"
+  },
+  "harness": {
+    "commands": [
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd"
+    ],
+    "g3_aggregate": {
+      "receipt_count": 83,
+      "layer_c_ok_true": 83,
+      "layer_c_ok_false": 0,
+      "wave_w_stdd_4_receipt_count": 10
+    }
+  },
+  "validation": {
+    "pseudocode_analyze_g3": "via fleet-g3-refresh-stdd receipts (gate_mode, typed_flow, constraint_flow true)",
+    "pseudocode_validate": "layer_a/layer_b ok on wave-4 receipts; sidecar-only LEAP (no project YAML index changes)",
+    "tied_validate_consistency": { "ok": true }
+  },
+  "remaining_seq_4a_sidecars": 63,
+  "next_batch": {
+    "wave_id": "W-stdd-5",
+    "wave_list_path": "working/fleet-constraint-v2/waves/stdd/wave-5-sidecars.yaml",
+    "suggested_command": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd (after sidecar LEAP on wave-5 list)"
+  },
+  "impl_dispositions": [
+    {
+      "impl_token": "IMPL-ASYNC_BINDING_VALIDATOR",
+      "sidecar_path": "tied/implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR-pseudocode.md",
+      "annotation_locus": "VALIDATE_BINDING_INVENTORY Contract INPUT rows list where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ASYNC_BINDING_VALIDATOR.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-ASYNC_BOUNDARY_ANALYZER",
+      "sidecar_path": "tied/implementation-decisions/IMPL-ASYNC_BOUNDARY_ANALYZER-pseudocode.md",
+      "annotation_locus": "RUN_ASYNC_BOUNDARY_ANALYSIS Contract INPUT source text where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ASYNC_BOUNDARY_ANALYZER.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-ASYNC_CHECKLIST_DISPOSITIONS",
+      "sidecar_path": "tied/implementation-decisions/IMPL-ASYNC_CHECKLIST_DISPOSITIONS-pseudocode.md",
+      "annotation_locus": "ASYNC_CHECKLIST_DISPOSITIONS_MAIN Contract INPUT impl_pseudocode_set list where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ASYNC_CHECKLIST_DISPOSITIONS.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-ASYNC_CITDP_PROFILE_WIRING",
+      "sidecar_path": "tied/implementation-decisions/IMPL-ASYNC_CITDP_PROFILE_WIRING-pseudocode.md",
+      "annotation_locus": "DERIVE_ASYNC_CITDP_TRIGGERS Contract INPUT composition_bindings list where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ASYNC_CITDP_PROFILE_WIRING.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-ASYNC_REQ_ARCH_GUIDANCE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-ASYNC_REQ_ARCH_GUIDANCE-pseudocode.md",
+      "annotation_locus": "AUTHOR_REQ_ASYNC_CRITERIA Contract INPUT doc_root string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ASYNC_REQ_ARCH_GUIDANCE.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-ASYNC_VOCABULARY",
+      "sidecar_path": "tied/implementation-decisions/IMPL-ASYNC_VOCABULARY-pseudocode.md",
+      "annotation_locus": "PUBLISH_ASYNC_GLOSSARY Contract INPUT source_root string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ASYNC_VOCABULARY.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-EVIDENCE_CHAIN_PROFILE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE-pseudocode.md",
+      "annotation_locus": "file-level Contract INPUT profile_depth string where length (section-style bullets insufficient for classifier)",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-EVIDENCE_CHAIN_PROFILE.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-TIED_VOCABULARY_REFRESH",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md",
+      "annotation_locus": "REFRESH_VOCABULARY Contract INPUT projectRoot string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_VOCABULARY_REFRESH.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-TIED_YAML_CANONICALIZER",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_YAML_CANONICALIZER-pseudocode.md",
+      "annotation_locus": "summary Contract INPUT YAML file path string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_YAML_CANONICALIZER.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-TIED_YAML_STYLE_RESOLVER",
+      "sidecar_path": "tied/implementation-decisions/IMPL-TIED_YAML_STYLE_RESOLVER-pseudocode.md",
+      "annotation_locus": "RESOLVE_YAML_STYLE Contract INPUT tied_base_path string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-TIED_YAML_STYLE_RESOLVER.receipt.json"
+      }
+    }
+  ]
+}

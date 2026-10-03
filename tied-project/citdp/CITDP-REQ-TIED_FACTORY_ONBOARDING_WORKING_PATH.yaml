@@ -1,0 +1,71 @@
+CITDP-REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH:
+  change_definition:
+    current_behavior: "new-client-onboarding-audit.mjs and build-commands _run_new_client_onboarding_audit write tied-new-client-audit.v1.json under repo-root working/, creating stray root working/ on two-folder clients."
+    desired_behavior: "Onboarding receipt uses committedWorkingFileRel (tied-project/working/ on two-folder); bash helper mirrors layout rules; G4 adds warn-only SC-TFL-NO-ROOT-WORKING when both roots exist."
+    non_goals:
+      - "Automated migration of existing disposable test clients"
+      - "Full working-artifact-placement enforcement lint"
+      - "MCP resolveWorkingPath changes"
+    success_criteria:
+      - "SC-FOW-001 through SC-FOW-005 satisfied"
+  completion_criteria:
+    close_out_gate_notes: "run-close-out-gates.mjs close_out with --envelope-blocking --sync-dispositions --reconcile; evidence/closeout-run-close-out-gates-final.json"
+    envelope_path: "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/request-evidence-envelope.v1.json"
+    verification_gate_notes: "Unit tests green; e2e new-tied-client paths updated; tied_validate_consistency ok."
+    verification_tests: "node --test tools/bootstrap/lib/new-client-onboarding-audit.test.mjs; node --test scripts/tied-new-client-audit.test.mjs; bun test mcp-server/src/e2e/new-tied-client.test.ts"
+  impact_analysis:
+    impl_inventory_notes: "tools/bootstrap/lib/new-client-onboarding-audit.mjs; scripts/build-commands.sh; scripts/lib/tied-two-folder-audit.mjs; docs."
+    modules_or_boundaries: "Bootstrap factory onboarding only."
+    tied_tokens_affected:
+      - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+    tied_tokens_new:
+      - "ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH"
+      - "REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-03"
+    title: "Factory onboarding working path"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Bash path rules diverge from committedWorkingFileRel silently."
+        - "Undivided brownfield client loses onboarding receipt when tied-project/working is absent."
+        - "Warn-only SC-TFL-NO-ROOT-WORKING masks a hard layout failure."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "isUndividedWorkingLayout tests cover undivided vs two-folder."
+        - "Node and bash tests assert the same relative report paths."
+        - "SC-TFL-NO-ROOT-WORKING keeps ok true with explicit warning detail."
+      evidence_references:
+        - "scripts/build-commands.sh"
+        - "tools/bootstrap/lib/new-client-onboarding-audit.mjs"
+        - "tools/bootstrap/lib/working-root.mjs"
+      falsification_questions:
+        - "Does factory bootstrap still mkdir repo-root working/ on two-folder clients?"
+        - "Does G4 fail when both working roots exist?"
+        - "Does undivided layout write to working/ at repo root?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - description: "Bash and Node path rules drift."
+        id: "RISK-FOW-002"
+        likelihood: "Medium"
+        mitigation: "SC-FOW-003 tests and shared layout.mjs semantics."
+        severity: "Low"
+      - description: "Undivided layout mis-detected as two-folder."
+        id: "RISK-FOW-001"
+        likelihood: "Low"
+        mitigation: "isUndividedWorkingLayout contract in tests."
+        severity: "Medium"
+    summary: "Factory-only path fix; minimal depth."
+  tdd_sequence:
+    summary: "RED new-client-onboarding-audit.test.mjs; extend tied-new-client-audit.test.mjs for SC-TFL-NO-ROOT-WORKING; GREEN mjs/bash/docs; update e2e paths."
+  test_strategy:
+    summary: "node --test tools/bootstrap/lib/new-client-onboarding-audit.test.mjs; node --test scripts/tied-new-client-audit.test.mjs; bun test mcp-server/src/e2e/new-tied-client.test.ts"

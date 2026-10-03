@@ -17,7 +17,7 @@ development, but clients must consume the version committed here.
 
 ## Client installation
 
-`copy_files.sh` installs the managed skill directories and `prompt-shared/`
+`tied-install.sh` installs the managed skill directories and `prompt-shared/`
 under a client project's `.cursor/skills/`. Prompt-type Task wrappers under
 `.cursor/agents/` (including `plan-refine-build`) are TIED-source development
 artifacts only and are not copied into client projects. The installer refreshes
@@ -33,8 +33,8 @@ without a project-specific rewrite.
 When the Prompt Composer taxonomy or workflow changes:
 
 1. Update the canonical bundle here.
-2. Update `tied/docs/prompt-type-skills.md` and
-   `tied/vocab/prompt-composer.md`.
+2. Update `tied-bundle/docs/prompt-type-skills.md` and
+   `tied-project/vocab/prompt-composer.md`.
 3. Update the linked TIED REQ/ARCH/IMPL records through the TIED YAML tools.
 4. Run the prompt-type static contract and bootstrap tests.
-5. Refresh representative client projects with `copy_files.sh`.
+5. Refresh representative client projects with `tied-install.sh`.

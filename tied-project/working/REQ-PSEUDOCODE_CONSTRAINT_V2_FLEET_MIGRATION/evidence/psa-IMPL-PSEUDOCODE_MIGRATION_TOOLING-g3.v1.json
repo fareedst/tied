@@ -1,0 +1,2944 @@
+{
+  "ok": true,
+  "gate_mode_applied": true,
+  "schema_version": "pseudocode-analysis-report.v1",
+  "grammar_version": "pseudocode-grammar.v2",
+  "analyzer_version": "1.0.0",
+  "proof_boundary": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification. Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification. Phase 3 gate errors apply only to proven typed violations in annotated procedures when typed_gate_errors is true. Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification. Phase 3a constraint gate errors apply only to proven constraint violations in constraint-annotated procedures when constraint_gate_errors is true.",
+  "token": "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+  "input_identity": {
+    "algorithm": "sha256",
+    "hash": "1aec91bd02e1fcbf9d7ee15945fd3657dd2de8e9aca2f8377a52b0b5ff2d4ad8",
+    "byte_length": 13830
+  },
+  "budgets_applied": {
+    "requested": {},
+    "effective": {
+      "max_parse_nodes": 5000,
+      "max_procedures": 256,
+      "max_cfg_blocks_per_procedure": 512,
+      "max_call_graph_edges": 2048,
+      "max_fixed_point_iterations": 32,
+      "max_path_conditions": 64,
+      "max_report_diagnostics": 500,
+      "max_source_bytes": 512000,
+      "max_cfg_join_iterations": 32
+    }
+  },
+  "truncated": false,
+  "diagnostics_truncated": false,
+  "sections": {
+    "parse": {
+      "procedure_count": 11,
+      "parse_node_count": 63,
+      "token_refs": [
+        "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+        "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+      ],
+      "unsupported_syntax_count": 1
+    },
+    "symbols": {
+      "procedures": [
+        "APPLY_CONSTRAINT_READY_ASSIST",
+        "APPLY_FLEET_WAVE_ASSIST",
+        "BUILD_FLEET_INVENTORY",
+        "BUILD_PILOT_INVENTORY",
+        "EMIT_G3_RECEIPT",
+        "EMIT_MIGRATION_RECEIPT",
+        "RECORD_WAVE_STOP_GO",
+        "REFRESH_WAIVER_REGISTRY",
+        "REVERT_MIGRATION_APPLY",
+        "RUN_FLEET_WAVE",
+        "RUN_MIGRATION_DRY_RUN"
+      ],
+      "symbols": [
+        {
+          "name": "ANALYZE",
+          "kind": "local",
+          "declared_line": 25,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "APPEND",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "RECORD_WAVE_STOP_GO"
+        },
+        {
+          "name": "APPLY_CONSTRAINT_READY_ASSIST",
+          "kind": "procedure",
+          "declared_line": 183
+        },
+        {
+          "name": "APPLY_FLEET_WAVE_ASSIST",
+          "kind": "procedure",
+          "declared_line": 151
+        },
+        {
+          "name": "BUILD",
+          "kind": "local",
+          "declared_line": 13,
+          "procedure": "EMIT_MIGRATION_RECEIPT"
+        },
+        {
+          "name": "BUILD",
+          "kind": "local",
+          "declared_line": 14,
+          "procedure": "EMIT_G3_RECEIPT"
+        },
+        {
+          "name": "BUILD_FLEET_INVENTORY",
+          "kind": "procedure",
+          "declared_line": 70
+        },
+        {
+          "name": "BUILD_PILOT_INVENTORY",
+          "kind": "procedure",
+          "declared_line": 9
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 11,
+          "procedure": "REVERT_MIGRATION_APPLY"
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 13,
+          "procedure": "RUN_FLEET_WAVE"
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 30,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 35,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "CLASSIFY",
+          "kind": "local",
+          "declared_line": 13,
+          "procedure": "BUILD_PILOT_INVENTORY"
+        },
+        {
+          "name": "CLASSIFY",
+          "kind": "local",
+          "declared_line": 14,
+          "procedure": "BUILD_FLEET_INVENTORY"
+        },
+        {
+          "name": "CLASSIFY",
+          "kind": "local",
+          "declared_line": 22,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "CLASSIFY",
+          "kind": "local",
+          "declared_line": 24,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "ELSE",
+          "kind": "local",
+          "declared_line": 27,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "EMIT",
+          "kind": "local",
+          "declared_line": 14,
+          "procedure": "BUILD_PILOT_INVENTORY"
+        },
+        {
+          "name": "EMIT",
+          "kind": "local",
+          "declared_line": 15,
+          "procedure": "BUILD_FLEET_INVENTORY"
+        },
+        {
+          "name": "EMIT",
+          "kind": "local",
+          "declared_line": 24,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "EMIT",
+          "kind": "local",
+          "declared_line": 29,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "EMIT_G3_RECEIPT",
+          "kind": "procedure",
+          "declared_line": 87
+        },
+        {
+          "name": "EMIT_MIGRATION_RECEIPT",
+          "kind": "procedure",
+          "declared_line": 37
+        },
+        {
+          "name": "FOR",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "BUILD_PILOT_INVENTORY"
+        },
+        {
+          "name": "FOR",
+          "kind": "local",
+          "declared_line": 13,
+          "procedure": "BUILD_FLEET_INVENTORY"
+        },
+        {
+          "name": "FOR",
+          "kind": "local",
+          "declared_line": 13,
+          "procedure": "REFRESH_WAIVER_REGISTRY"
+        },
+        {
+          "name": "FOR",
+          "kind": "local",
+          "declared_line": 14,
+          "procedure": "RUN_FLEET_WAVE"
+        },
+        {
+          "name": "FOR",
+          "kind": "local",
+          "declared_line": 21,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "FOR",
+          "kind": "local",
+          "declared_line": 23,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "IF",
+          "kind": "local",
+          "declared_line": 14,
+          "procedure": "REFRESH_WAIVER_REGISTRY"
+        },
+        {
+          "name": "IF",
+          "kind": "local",
+          "declared_line": 20,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "IF",
+          "kind": "local",
+          "declared_line": 23,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "LOAD",
+          "kind": "local",
+          "declared_line": 10,
+          "procedure": "RUN_MIGRATION_DRY_RUN"
+        },
+        {
+          "name": "LOAD",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "BUILD_FLEET_INVENTORY"
+        },
+        {
+          "name": "LOAD",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "RUN_FLEET_WAVE"
+        },
+        {
+          "name": "LOAD",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "REFRESH_WAIVER_REGISTRY"
+        },
+        {
+          "name": "LOAD",
+          "kind": "local",
+          "declared_line": 20,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "LOAD",
+          "kind": "local",
+          "declared_line": 22,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "RECORD_WAVE_STOP_GO",
+          "kind": "procedure",
+          "declared_line": 121
+        },
+        {
+          "name": "REFRESH_WAIVER_REGISTRY",
+          "kind": "procedure",
+          "declared_line": 135
+        },
+        {
+          "name": "RESTORE",
+          "kind": "local",
+          "declared_line": 10,
+          "procedure": "REVERT_MIGRATION_APPLY"
+        },
+        {
+          "name": "REVERT_MIGRATION_APPLY",
+          "kind": "procedure",
+          "declared_line": 53
+        },
+        {
+          "name": "RUN_FLEET_WAVE",
+          "kind": "procedure",
+          "declared_line": 104
+        },
+        {
+          "name": "RUN_MIGRATION_DRY_RUN",
+          "kind": "procedure",
+          "declared_line": 25
+        },
+        {
+          "name": "SCAN",
+          "kind": "local",
+          "declared_line": 21,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "VERIFY",
+          "kind": "local",
+          "declared_line": 26,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "VERIFY",
+          "kind": "local",
+          "declared_line": 31,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        },
+        {
+          "name": "WRITE",
+          "kind": "local",
+          "declared_line": 14,
+          "procedure": "EMIT_MIGRATION_RECEIPT"
+        },
+        {
+          "name": "WRITE",
+          "kind": "local",
+          "declared_line": 15,
+          "procedure": "EMIT_G3_RECEIPT"
+        },
+        {
+          "name": "WRITE",
+          "kind": "local",
+          "declared_line": 28,
+          "procedure": "APPLY_FLEET_WAVE_ASSIST"
+        },
+        {
+          "name": "WRITE",
+          "kind": "local",
+          "declared_line": 33,
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST"
+        }
+      ],
+      "defined_calls": [
+        "EMIT_G3_RECEIPT"
+      ],
+      "unresolved_calls": []
+    },
+    "cfg": {
+      "procedures": [
+        {
+          "procedure": "BUILD_PILOT_INVENTORY",
+          "nodes": [
+            {
+              "id": "BUILD_PILOT_INVENTORY::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 9
+            },
+            {
+              "id": "BUILD_PILOT_INVENTORY::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 9
+            },
+            {
+              "id": "BUILD_PILOT_INVENTORY::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 39
+              }
+            },
+            {
+              "id": "BUILD_PILOT_INVENTORY::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 5,
+                "end_line": 13,
+                "end_column": 66
+              }
+            },
+            {
+              "id": "BUILD_PILOT_INVENTORY::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 3,
+                "end_line": 14,
+                "end_column": 55
+              }
+            },
+            {
+              "id": "BUILD_PILOT_INVENTORY::n4",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 15,
+              "span": {
+                "line": 15,
+                "column": 3,
+                "end_line": 15,
+                "end_column": 50
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_PILOT_INVENTORY::entry",
+              "to": "BUILD_PILOT_INVENTORY::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_PILOT_INVENTORY::n1",
+              "to": "BUILD_PILOT_INVENTORY::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_PILOT_INVENTORY::n2",
+              "to": "BUILD_PILOT_INVENTORY::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_PILOT_INVENTORY::n3",
+              "to": "BUILD_PILOT_INVENTORY::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_PILOT_INVENTORY::n4",
+              "to": "BUILD_PILOT_INVENTORY::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_PILOT_INVENTORY::entry",
+            "BUILD_PILOT_INVENTORY::exit",
+            "BUILD_PILOT_INVENTORY::n1",
+            "BUILD_PILOT_INVENTORY::n2",
+            "BUILD_PILOT_INVENTORY::n3",
+            "BUILD_PILOT_INVENTORY::n4"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "RUN_MIGRATION_DRY_RUN",
+          "nodes": [
+            {
+              "id": "RUN_MIGRATION_DRY_RUN::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 10,
+              "span": {
+                "line": 10,
+                "column": 3,
+                "end_line": 10,
+                "end_column": 46
+              }
+            },
+            {
+              "id": "RUN_MIGRATION_DRY_RUN::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 11,
+              "span": {
+                "line": 11,
+                "column": 3,
+                "end_line": 11,
+                "end_column": 57
+              }
+            },
+            {
+              "id": "RUN_MIGRATION_DRY_RUN::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 25
+            },
+            {
+              "id": "RUN_MIGRATION_DRY_RUN::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 25
+            }
+          ],
+          "edges": [
+            {
+              "from": "RUN_MIGRATION_DRY_RUN::entry",
+              "to": "RUN_MIGRATION_DRY_RUN::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_MIGRATION_DRY_RUN::n1",
+              "to": "RUN_MIGRATION_DRY_RUN::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_MIGRATION_DRY_RUN::n2",
+              "to": "RUN_MIGRATION_DRY_RUN::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "RUN_MIGRATION_DRY_RUN::entry",
+            "RUN_MIGRATION_DRY_RUN::exit",
+            "RUN_MIGRATION_DRY_RUN::n1",
+            "RUN_MIGRATION_DRY_RUN::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "EMIT_MIGRATION_RECEIPT",
+          "nodes": [
+            {
+              "id": "EMIT_MIGRATION_RECEIPT::n1",
+              "kind": "statement",
+              "label": "run",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 45
+              }
+            },
+            {
+              "id": "EMIT_MIGRATION_RECEIPT::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 67
+              }
+            },
+            {
+              "id": "EMIT_MIGRATION_RECEIPT::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 3,
+                "end_line": 14,
+                "end_column": 83
+              }
+            },
+            {
+              "id": "EMIT_MIGRATION_RECEIPT::n4",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 15,
+              "span": {
+                "line": 15,
+                "column": 3,
+                "end_line": 15,
+                "end_column": 21
+              }
+            },
+            {
+              "id": "EMIT_MIGRATION_RECEIPT::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 37
+            },
+            {
+              "id": "EMIT_MIGRATION_RECEIPT::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 37
+            }
+          ],
+          "edges": [
+            {
+              "from": "EMIT_MIGRATION_RECEIPT::entry",
+              "to": "EMIT_MIGRATION_RECEIPT::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_MIGRATION_RECEIPT::n1",
+              "to": "EMIT_MIGRATION_RECEIPT::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_MIGRATION_RECEIPT::n2",
+              "to": "EMIT_MIGRATION_RECEIPT::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_MIGRATION_RECEIPT::n3",
+              "to": "EMIT_MIGRATION_RECEIPT::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_MIGRATION_RECEIPT::n4",
+              "to": "EMIT_MIGRATION_RECEIPT::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "EMIT_MIGRATION_RECEIPT::entry",
+            "EMIT_MIGRATION_RECEIPT::exit",
+            "EMIT_MIGRATION_RECEIPT::n1",
+            "EMIT_MIGRATION_RECEIPT::n2",
+            "EMIT_MIGRATION_RECEIPT::n3",
+            "EMIT_MIGRATION_RECEIPT::n4"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "REVERT_MIGRATION_APPLY",
+          "nodes": [
+            {
+              "id": "REVERT_MIGRATION_APPLY::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 10,
+              "span": {
+                "line": 10,
+                "column": 3,
+                "end_line": 10,
+                "end_column": 50
+              }
+            },
+            {
+              "id": "REVERT_MIGRATION_APPLY::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 11,
+              "span": {
+                "line": 11,
+                "column": 3,
+                "end_line": 11,
+                "end_column": 59
+              }
+            },
+            {
+              "id": "REVERT_MIGRATION_APPLY::n3",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 45
+              }
+            },
+            {
+              "id": "REVERT_MIGRATION_APPLY::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 53
+            },
+            {
+              "id": "REVERT_MIGRATION_APPLY::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 53
+            }
+          ],
+          "edges": [
+            {
+              "from": "REVERT_MIGRATION_APPLY::entry",
+              "to": "REVERT_MIGRATION_APPLY::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "REVERT_MIGRATION_APPLY::n1",
+              "to": "REVERT_MIGRATION_APPLY::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "REVERT_MIGRATION_APPLY::n2",
+              "to": "REVERT_MIGRATION_APPLY::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "REVERT_MIGRATION_APPLY::n3",
+              "to": "REVERT_MIGRATION_APPLY::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "REVERT_MIGRATION_APPLY::entry",
+            "REVERT_MIGRATION_APPLY::exit",
+            "REVERT_MIGRATION_APPLY::n1",
+            "REVERT_MIGRATION_APPLY::n2",
+            "REVERT_MIGRATION_APPLY::n3"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_FLEET_INVENTORY",
+          "nodes": [
+            {
+              "id": "BUILD_FLEET_INVENTORY::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 47
+              }
+            },
+            {
+              "id": "BUILD_FLEET_INVENTORY::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 46
+              }
+            },
+            {
+              "id": "BUILD_FLEET_INVENTORY::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 5,
+                "end_line": 14,
+                "end_column": 67
+              }
+            },
+            {
+              "id": "BUILD_FLEET_INVENTORY::n4",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 15,
+              "span": {
+                "line": 15,
+                "column": 3,
+                "end_line": 15,
+                "end_column": 59
+              }
+            },
+            {
+              "id": "BUILD_FLEET_INVENTORY::n5",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 16,
+              "span": {
+                "line": 16,
+                "column": 3,
+                "end_line": 16,
+                "end_column": 53
+              }
+            },
+            {
+              "id": "BUILD_FLEET_INVENTORY::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 70
+            },
+            {
+              "id": "BUILD_FLEET_INVENTORY::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 70
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_FLEET_INVENTORY::entry",
+              "to": "BUILD_FLEET_INVENTORY::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_FLEET_INVENTORY::n1",
+              "to": "BUILD_FLEET_INVENTORY::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_FLEET_INVENTORY::n2",
+              "to": "BUILD_FLEET_INVENTORY::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_FLEET_INVENTORY::n3",
+              "to": "BUILD_FLEET_INVENTORY::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_FLEET_INVENTORY::n4",
+              "to": "BUILD_FLEET_INVENTORY::n5",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_FLEET_INVENTORY::n5",
+              "to": "BUILD_FLEET_INVENTORY::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_FLEET_INVENTORY::entry",
+            "BUILD_FLEET_INVENTORY::exit",
+            "BUILD_FLEET_INVENTORY::n1",
+            "BUILD_FLEET_INVENTORY::n2",
+            "BUILD_FLEET_INVENTORY::n3",
+            "BUILD_FLEET_INVENTORY::n4",
+            "BUILD_FLEET_INVENTORY::n5"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "EMIT_G3_RECEIPT",
+          "nodes": [
+            {
+              "id": "EMIT_G3_RECEIPT::n1",
+              "kind": "statement",
+              "label": "run",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 81
+              }
+            },
+            {
+              "id": "EMIT_G3_RECEIPT::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 3,
+                "end_line": 14,
+                "end_column": 67
+              }
+            },
+            {
+              "id": "EMIT_G3_RECEIPT::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 15,
+              "span": {
+                "line": 15,
+                "column": 3,
+                "end_line": 15,
+                "end_column": 20
+              }
+            },
+            {
+              "id": "EMIT_G3_RECEIPT::n4",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 16,
+              "span": {
+                "line": 16,
+                "column": 3,
+                "end_line": 16,
+                "end_column": 21
+              }
+            },
+            {
+              "id": "EMIT_G3_RECEIPT::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 87
+            },
+            {
+              "id": "EMIT_G3_RECEIPT::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 87
+            }
+          ],
+          "edges": [
+            {
+              "from": "EMIT_G3_RECEIPT::entry",
+              "to": "EMIT_G3_RECEIPT::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_G3_RECEIPT::n1",
+              "to": "EMIT_G3_RECEIPT::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_G3_RECEIPT::n2",
+              "to": "EMIT_G3_RECEIPT::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_G3_RECEIPT::n3",
+              "to": "EMIT_G3_RECEIPT::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "EMIT_G3_RECEIPT::n4",
+              "to": "EMIT_G3_RECEIPT::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "EMIT_G3_RECEIPT::entry",
+            "EMIT_G3_RECEIPT::exit",
+            "EMIT_G3_RECEIPT::n1",
+            "EMIT_G3_RECEIPT::n2",
+            "EMIT_G3_RECEIPT::n3",
+            "EMIT_G3_RECEIPT::n4"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "RUN_FLEET_WAVE",
+          "nodes": [
+            {
+              "id": "RUN_FLEET_WAVE::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 42
+              }
+            },
+            {
+              "id": "RUN_FLEET_WAVE::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 49
+              }
+            },
+            {
+              "id": "RUN_FLEET_WAVE::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 3,
+                "end_line": 14,
+                "end_column": 34
+              }
+            },
+            {
+              "id": "RUN_FLEET_WAVE::n4",
+              "kind": "statement",
+              "label": "CALL EMIT_G3_RECEIPT",
+              "line": 15,
+              "span": {
+                "line": 15,
+                "column": 5,
+                "end_line": 15,
+                "end_column": 24
+              }
+            },
+            {
+              "id": "RUN_FLEET_WAVE::n5",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 16,
+              "span": {
+                "line": 16,
+                "column": 3,
+                "end_line": 16,
+                "end_column": 37
+              }
+            },
+            {
+              "id": "RUN_FLEET_WAVE::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 104
+            },
+            {
+              "id": "RUN_FLEET_WAVE::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 104
+            }
+          ],
+          "edges": [
+            {
+              "from": "RUN_FLEET_WAVE::entry",
+              "to": "RUN_FLEET_WAVE::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_FLEET_WAVE::n1",
+              "to": "RUN_FLEET_WAVE::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_FLEET_WAVE::n2",
+              "to": "RUN_FLEET_WAVE::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_FLEET_WAVE::n3",
+              "to": "RUN_FLEET_WAVE::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_FLEET_WAVE::n4",
+              "to": "RUN_FLEET_WAVE::n5",
+              "kind": "sequential"
+            },
+            {
+              "from": "RUN_FLEET_WAVE::n5",
+              "to": "RUN_FLEET_WAVE::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "RUN_FLEET_WAVE::entry",
+            "RUN_FLEET_WAVE::exit",
+            "RUN_FLEET_WAVE::n1",
+            "RUN_FLEET_WAVE::n2",
+            "RUN_FLEET_WAVE::n3",
+            "RUN_FLEET_WAVE::n4",
+            "RUN_FLEET_WAVE::n5"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "RECORD_WAVE_STOP_GO",
+          "nodes": [
+            {
+              "id": "RECORD_WAVE_STOP_GO::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 67
+              }
+            },
+            {
+              "id": "RECORD_WAVE_STOP_GO::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 28
+              }
+            },
+            {
+              "id": "RECORD_WAVE_STOP_GO::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 121
+            },
+            {
+              "id": "RECORD_WAVE_STOP_GO::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 121
+            }
+          ],
+          "edges": [
+            {
+              "from": "RECORD_WAVE_STOP_GO::entry",
+              "to": "RECORD_WAVE_STOP_GO::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "RECORD_WAVE_STOP_GO::n1",
+              "to": "RECORD_WAVE_STOP_GO::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "RECORD_WAVE_STOP_GO::n2",
+              "to": "RECORD_WAVE_STOP_GO::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "RECORD_WAVE_STOP_GO::entry",
+            "RECORD_WAVE_STOP_GO::exit",
+            "RECORD_WAVE_STOP_GO::n1",
+            "RECORD_WAVE_STOP_GO::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "REFRESH_WAIVER_REGISTRY",
+          "nodes": [
+            {
+              "id": "REFRESH_WAIVER_REGISTRY::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 53
+              }
+            },
+            {
+              "id": "REFRESH_WAIVER_REGISTRY::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 28
+              }
+            },
+            {
+              "id": "REFRESH_WAIVER_REGISTRY::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 5,
+                "end_line": 14,
+                "end_column": 69
+              }
+            },
+            {
+              "id": "REFRESH_WAIVER_REGISTRY::n4",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 15,
+              "span": {
+                "line": 15,
+                "column": 3,
+                "end_line": 15,
+                "end_column": 43
+              }
+            },
+            {
+              "id": "REFRESH_WAIVER_REGISTRY::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 135
+            },
+            {
+              "id": "REFRESH_WAIVER_REGISTRY::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 135
+            }
+          ],
+          "edges": [
+            {
+              "from": "REFRESH_WAIVER_REGISTRY::entry",
+              "to": "REFRESH_WAIVER_REGISTRY::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "REFRESH_WAIVER_REGISTRY::n1",
+              "to": "REFRESH_WAIVER_REGISTRY::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "REFRESH_WAIVER_REGISTRY::n2",
+              "to": "REFRESH_WAIVER_REGISTRY::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "REFRESH_WAIVER_REGISTRY::n3",
+              "to": "REFRESH_WAIVER_REGISTRY::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "REFRESH_WAIVER_REGISTRY::n4",
+              "to": "REFRESH_WAIVER_REGISTRY::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "REFRESH_WAIVER_REGISTRY::entry",
+            "REFRESH_WAIVER_REGISTRY::exit",
+            "REFRESH_WAIVER_REGISTRY::n1",
+            "REFRESH_WAIVER_REGISTRY::n2",
+            "REFRESH_WAIVER_REGISTRY::n3",
+            "REFRESH_WAIVER_REGISTRY::n4"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "nodes": [
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 20,
+              "span": {
+                "line": 20,
+                "column": 3,
+                "end_line": 20,
+                "end_column": 81
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 21,
+              "span": {
+                "line": 21,
+                "column": 3,
+                "end_line": 21,
+                "end_column": 34
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 22,
+              "span": {
+                "line": 22,
+                "column": 5,
+                "end_line": 22,
+                "end_column": 54
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n4",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 23,
+              "span": {
+                "line": 23,
+                "column": 5,
+                "end_line": 23,
+                "end_column": 66
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n5",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 24,
+              "span": {
+                "line": 24,
+                "column": 3,
+                "end_line": 24,
+                "end_column": 51
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n6",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 25,
+              "span": {
+                "line": 25,
+                "column": 3,
+                "end_line": 25,
+                "end_column": 15
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n7",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 26,
+              "span": {
+                "line": 26,
+                "column": 5,
+                "end_line": 26,
+                "end_column": 45
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n8",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 27,
+              "span": {
+                "line": 27,
+                "column": 5,
+                "end_line": 27,
+                "end_column": 34
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n9",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 28,
+              "span": {
+                "line": 28,
+                "column": 7,
+                "end_line": 28,
+                "end_column": 99
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n10",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 29,
+              "span": {
+                "line": 29,
+                "column": 3,
+                "end_line": 29,
+                "end_column": 26
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n11",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 30,
+              "span": {
+                "line": 30,
+                "column": 5,
+                "end_line": 30,
+                "end_column": 55
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::n12",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 31,
+              "span": {
+                "line": 31,
+                "column": 3,
+                "end_line": 31,
+                "end_column": 60
+              }
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 151
+            },
+            {
+              "id": "APPLY_FLEET_WAVE_ASSIST::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 151
+            }
+          ],
+          "edges": [
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::entry",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n1",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n10",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n11",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n11",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n12",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n12",
+              "to": "APPLY_FLEET_WAVE_ASSIST::exit",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n2",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n3",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n4",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n5",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n5",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n6",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n6",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n7",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n7",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n8",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n8",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n9",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_FLEET_WAVE_ASSIST::n9",
+              "to": "APPLY_FLEET_WAVE_ASSIST::n10",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "APPLY_FLEET_WAVE_ASSIST::entry",
+            "APPLY_FLEET_WAVE_ASSIST::exit",
+            "APPLY_FLEET_WAVE_ASSIST::n1",
+            "APPLY_FLEET_WAVE_ASSIST::n10",
+            "APPLY_FLEET_WAVE_ASSIST::n11",
+            "APPLY_FLEET_WAVE_ASSIST::n12",
+            "APPLY_FLEET_WAVE_ASSIST::n2",
+            "APPLY_FLEET_WAVE_ASSIST::n3",
+            "APPLY_FLEET_WAVE_ASSIST::n4",
+            "APPLY_FLEET_WAVE_ASSIST::n5",
+            "APPLY_FLEET_WAVE_ASSIST::n6",
+            "APPLY_FLEET_WAVE_ASSIST::n7",
+            "APPLY_FLEET_WAVE_ASSIST::n8",
+            "APPLY_FLEET_WAVE_ASSIST::n9"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "nodes": [
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 20,
+              "span": {
+                "line": 20,
+                "column": 3,
+                "end_line": 20,
+                "end_column": 16
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 21,
+              "span": {
+                "line": 21,
+                "column": 5,
+                "end_line": 21,
+                "end_column": 97
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n3",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 22,
+              "span": {
+                "line": 22,
+                "column": 3,
+                "end_line": 22,
+                "end_column": 59
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n4",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 23,
+              "span": {
+                "line": 23,
+                "column": 3,
+                "end_line": 23,
+                "end_column": 34
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n5",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 24,
+              "span": {
+                "line": 24,
+                "column": 5,
+                "end_line": 24,
+                "end_column": 73
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n6",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 25,
+              "span": {
+                "line": 25,
+                "column": 5,
+                "end_line": 25,
+                "end_column": 67
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n7",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 26,
+              "span": {
+                "line": 26,
+                "column": 5,
+                "end_line": 26,
+                "end_column": 69
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n8",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 27,
+              "span": {
+                "line": 27,
+                "column": 5,
+                "end_line": 27,
+                "end_column": 92
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n9",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 28,
+              "span": {
+                "line": 28,
+                "column": 5,
+                "end_line": 28,
+                "end_column": 18
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n10",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 29,
+              "span": {
+                "line": 29,
+                "column": 3,
+                "end_line": 29,
+                "end_column": 62
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n11",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 30,
+              "span": {
+                "line": 30,
+                "column": 3,
+                "end_line": 30,
+                "end_column": 15
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n12",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 31,
+              "span": {
+                "line": 31,
+                "column": 5,
+                "end_line": 31,
+                "end_column": 45
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n13",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 32,
+              "span": {
+                "line": 32,
+                "column": 5,
+                "end_line": 32,
+                "end_column": 53
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n14",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 33,
+              "span": {
+                "line": 33,
+                "column": 7,
+                "end_line": 33,
+                "end_column": 81
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n15",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 34,
+              "span": {
+                "line": 34,
+                "column": 3,
+                "end_line": 34,
+                "end_column": 38
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n16",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 35,
+              "span": {
+                "line": 35,
+                "column": 5,
+                "end_line": 35,
+                "end_column": 49
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::n17",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 36,
+              "span": {
+                "line": 36,
+                "column": 3,
+                "end_line": 36,
+                "end_column": 71
+              }
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 183
+            },
+            {
+              "id": "APPLY_CONSTRAINT_READY_ASSIST::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 183
+            }
+          ],
+          "edges": [
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::entry",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n1",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n10",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n11",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n11",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n12",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n12",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n13",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n13",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n14",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n14",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n15",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n15",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n16",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n16",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n17",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n17",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::exit",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n2",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n3",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n4",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n4",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n5",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n5",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n6",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n6",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n7",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n7",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n8",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n8",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n9",
+              "kind": "sequential"
+            },
+            {
+              "from": "APPLY_CONSTRAINT_READY_ASSIST::n9",
+              "to": "APPLY_CONSTRAINT_READY_ASSIST::n10",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "APPLY_CONSTRAINT_READY_ASSIST::entry",
+            "APPLY_CONSTRAINT_READY_ASSIST::exit",
+            "APPLY_CONSTRAINT_READY_ASSIST::n1",
+            "APPLY_CONSTRAINT_READY_ASSIST::n10",
+            "APPLY_CONSTRAINT_READY_ASSIST::n11",
+            "APPLY_CONSTRAINT_READY_ASSIST::n12",
+            "APPLY_CONSTRAINT_READY_ASSIST::n13",
+            "APPLY_CONSTRAINT_READY_ASSIST::n14",
+            "APPLY_CONSTRAINT_READY_ASSIST::n15",
+            "APPLY_CONSTRAINT_READY_ASSIST::n16",
+            "APPLY_CONSTRAINT_READY_ASSIST::n17",
+            "APPLY_CONSTRAINT_READY_ASSIST::n2",
+            "APPLY_CONSTRAINT_READY_ASSIST::n3",
+            "APPLY_CONSTRAINT_READY_ASSIST::n4",
+            "APPLY_CONSTRAINT_READY_ASSIST::n5",
+            "APPLY_CONSTRAINT_READY_ASSIST::n6",
+            "APPLY_CONSTRAINT_READY_ASSIST::n7",
+            "APPLY_CONSTRAINT_READY_ASSIST::n8",
+            "APPLY_CONSTRAINT_READY_ASSIST::n9"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    "call_graph": {
+      "edges": [
+        {
+          "caller": "EMIT_G3_RECEIPT",
+          "callee": "pseudocode_analyze WITH G3 analyze_profile AND program_gate_policy advisory",
+          "kind": "run",
+          "line": 13
+        },
+        {
+          "caller": "EMIT_MIGRATION_RECEIPT",
+          "callee": "pseudocode_analyze WITH analyze_profile",
+          "kind": "run",
+          "line": 12
+        },
+        {
+          "caller": "RUN_FLEET_WAVE",
+          "callee": "EMIT_G3_RECEIPT",
+          "kind": "call",
+          "line": 15
+        }
+      ],
+      "unresolved": [],
+      "truncated": false
+    },
+    "typed_flow": {
+      "procedures_analyzed": 11,
+      "diagnostics": [],
+      "unknowns": [
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for LOAD",
+          "procedure": "RUN_MIGRATION_DRY_RUN",
+          "line": 10,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for RESTORE",
+          "procedure": "REVERT_MIGRATION_APPLY",
+          "line": 10,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CALL",
+          "procedure": "REVERT_MIGRATION_APPLY",
+          "line": 11,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_OPAQUE_EXPR",
+          "message": "RUN target opaque for typed-flow: pseudocode_analyze WITH analyze_profile",
+          "procedure": "EMIT_MIGRATION_RECEIPT",
+          "line": 12,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "BUILD_PILOT_INVENTORY",
+          "line": 12,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for LOAD",
+          "procedure": "BUILD_FLEET_INVENTORY",
+          "line": 12,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for LOAD",
+          "procedure": "RUN_FLEET_WAVE",
+          "line": 12,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for APPEND",
+          "procedure": "RECORD_WAVE_STOP_GO",
+          "line": 12,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for LOAD",
+          "procedure": "REFRESH_WAIVER_REGISTRY",
+          "line": 12,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_OPAQUE_EXPR",
+          "message": "RUN target opaque for typed-flow: pseudocode_analyze WITH G3 analyze_profile AND program_gate_policy advisory",
+          "procedure": "EMIT_G3_RECEIPT",
+          "line": 13,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CLASSIFY",
+          "procedure": "BUILD_PILOT_INVENTORY",
+          "line": 13,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for BUILD",
+          "procedure": "EMIT_MIGRATION_RECEIPT",
+          "line": 13,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "BUILD_FLEET_INVENTORY",
+          "line": 13,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CALL",
+          "procedure": "RUN_FLEET_WAVE",
+          "line": 13,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "REFRESH_WAIVER_REGISTRY",
+          "line": 13,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for EMIT",
+          "procedure": "BUILD_PILOT_INVENTORY",
+          "line": 14,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for WRITE",
+          "procedure": "EMIT_MIGRATION_RECEIPT",
+          "line": 14,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CLASSIFY",
+          "procedure": "BUILD_FLEET_INVENTORY",
+          "line": 14,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for BUILD",
+          "procedure": "EMIT_G3_RECEIPT",
+          "line": 14,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "RUN_FLEET_WAVE",
+          "line": 14,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for IF",
+          "procedure": "REFRESH_WAIVER_REGISTRY",
+          "line": 14,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for EMIT",
+          "procedure": "BUILD_FLEET_INVENTORY",
+          "line": 15,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for LOAD",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 20,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 21,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for SCAN",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 21,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CLASSIFY",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 22,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for LOAD",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 22,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for IF",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 23,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 23,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for EMIT",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 24,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CLASSIFY",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 24,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for ANALYZE",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 25,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for IF",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 26,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 27,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for ELSE",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 27,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for WRITE",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 28,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for ELSE",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 28,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for EMIT",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 29,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CALL",
+          "procedure": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 30,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for FOR",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 32,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for WRITE",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 33,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "TYPED_UNSUPPORTED_SYNTAX",
+          "message": "Opaque assignment RHS for CALL",
+          "procedure": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 35,
+          "proof_boundary": "Typed-flow checks apply only where Tier-2 annotations and structured expressions are present; not runtime execution or complete behavioral verification."
+        }
+      ],
+      "join_iterations_applied": 0
+    },
+    "constraint_language": {
+      "procedures_analyzed": 11,
+      "diagnostics": [],
+      "unknowns": [
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: wave_sidecar_list has ≤10 entries per sub-wave (OD-P3-3)",
+          "procedure": "BUILD_PILOT_INVENTORY",
+          "line": 12,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "summary_missing",
+          "message": "CALL EMIT_G3_RECEIPT lacks procedure summary for interprocedural constraint propagation",
+          "procedure": "RUN_FLEET_WAVE",
+          "line": 15,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: success => no file writes when dry_run true",
+          "procedure": "RUN_MIGRATION_DRY_RUN",
+          "line": 28,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: inventory_diff_path readable",
+          "procedure": "RUN_MIGRATION_DRY_RUN",
+          "line": 28,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: success => no file writes when dry_run true",
+          "procedure": "RUN_MIGRATION_DRY_RUN",
+          "line": 28,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: success => no file writes when dry_run true",
+          "procedure": "RUN_MIGRATION_DRY_RUN",
+          "line": 28,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes gate_mode and constraint_flow",
+          "procedure": "EMIT_MIGRATION_RECEIPT",
+          "line": 40,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes gate_mode and constraint_flow",
+          "procedure": "EMIT_MIGRATION_RECEIPT",
+          "line": 40,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes gate_mode and constraint_flow",
+          "procedure": "EMIT_MIGRATION_RECEIPT",
+          "line": 40,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: success => sidecar bytes match snapshot; advisory receipt constraint_gate_errors_policy is advisory",
+          "procedure": "REVERT_MIGRATION_APPLY",
+          "line": 56,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: snapshot captured before apply",
+          "procedure": "REVERT_MIGRATION_APPLY",
+          "line": 56,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: success => sidecar bytes match snapshot; advisory receipt constraint_gate_errors_policy is advisory",
+          "procedure": "REVERT_MIGRATION_APPLY",
+          "line": 56,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: success => sidecar bytes match snapshot; advisory receipt constraint_gate_errors_policy is advisory",
+          "procedure": "REVERT_MIGRATION_APPLY",
+          "line": 56,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: inventory_manifest_path validates against client-inventory-manifest.v1 schema",
+          "procedure": "BUILD_FLEET_INVENTORY",
+          "line": 73,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes constraint_flow true and typed_flow true",
+          "procedure": "EMIT_G3_RECEIPT",
+          "line": 90,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes constraint_flow true and typed_flow true",
+          "procedure": "EMIT_G3_RECEIPT",
+          "line": 90,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes constraint_flow true and typed_flow true",
+          "procedure": "EMIT_G3_RECEIPT",
+          "line": 90,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate tokenization: wave_id exists in partition; sidecar_list has ≤10 entries when client is stdd",
+          "procedure": "RUN_FLEET_WAVE",
+          "line": 107,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: wave_id completed receipt batch OR blocking gap documented",
+          "procedure": "RECORD_WAVE_STOP_GO",
+          "line": 124,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: wave_id completed receipt batch OR blocking gap documented",
+          "procedure": "RECORD_WAVE_STOP_GO",
+          "line": 124,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: wave_id completed receipt batch OR blocking gap documented",
+          "procedure": "RECORD_WAVE_STOP_GO",
+          "line": 124,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        },
+        {
+          "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+          "message": "Unsupported predicate syntax: registry_path readable",
+          "procedure": "REFRESH_WAIVER_REGISTRY",
+          "line": 138,
+          "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+        }
+      ],
+      "refinements_checked": 0,
+      "refinements_proven": 0,
+      "solver_metadata": {
+        "solver_steps": 1,
+        "summary_depth": 0,
+        "budgets_applied": {
+          "max_parse_nodes": 5000,
+          "max_procedures": 256,
+          "max_cfg_blocks_per_procedure": 512,
+          "max_call_graph_edges": 2048,
+          "max_fixed_point_iterations": 32,
+          "max_path_conditions": 64,
+          "max_report_diagnostics": 500,
+          "max_source_bytes": 512000,
+          "max_cfg_join_iterations": 32,
+          "max_solver_steps": 256,
+          "max_summary_depth": 8,
+          "max_predicate_nodes": 512
+        },
+        "interproc_calls_analyzed": 1,
+        "interproc_facts_propagated": 0
+      },
+      "interproc_enabled": true,
+      "alias_mut_checked": 0,
+      "alias_mut_violations": 0
+    },
+    "obligations": {
+      "decision_tables": [],
+      "path_obligations": []
+    },
+    "traceability": {
+      "block_edges": [
+        {
+          "block": "APPLY_CONSTRAINT_READY_ASSIST",
+          "tokens": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+            "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 183
+        },
+        {
+          "block": "APPLY_FLEET_WAVE_ASSIST",
+          "tokens": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+            "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 151
+        },
+        {
+          "block": "BUILD_FLEET_INVENTORY",
+          "tokens": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 70
+        },
+        {
+          "block": "BUILD_PILOT_INVENTORY",
+          "tokens": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 9
+        },
+        {
+          "block": "EMIT_G3_RECEIPT",
+          "tokens": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 87
+        },
+        {
+          "block": "EMIT_MIGRATION_RECEIPT",
+          "tokens": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 37
+        },
+        {
+          "block": "RECORD_WAVE_STOP_GO",
+          "tokens": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 121
+        },
+        {
+          "block": "REFRESH_WAIVER_REGISTRY",
+          "tokens": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 135
+        },
+        {
+          "block": "REVERT_MIGRATION_APPLY",
+          "tokens": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+            "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 53
+        },
+        {
+          "block": "RUN_FLEET_WAVE",
+          "tokens": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 104
+        },
+        {
+          "block": "RUN_MIGRATION_DRY_RUN",
+          "tokens": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "line": 25
+        }
+      ]
+    },
+    "structural_compat": {
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "ok": true,
+      "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+      "blocks": [
+        {
+          "name": "BUILD_PILOT_INVENTORY",
+          "line": 9,
+          "token_refs": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "RUN_MIGRATION_DRY_RUN",
+          "line": 25,
+          "token_refs": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "EMIT_MIGRATION_RECEIPT",
+          "line": 37,
+          "token_refs": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "REVERT_MIGRATION_APPLY",
+          "line": 53,
+          "token_refs": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+            "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "BUILD_FLEET_INVENTORY",
+          "line": 70,
+          "token_refs": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "EMIT_G3_RECEIPT",
+          "line": 87,
+          "token_refs": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "RUN_FLEET_WAVE",
+          "line": 104,
+          "token_refs": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "RECORD_WAVE_STOP_GO",
+          "line": 121,
+          "token_refs": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "REFRESH_WAIVER_REGISTRY",
+          "line": 135,
+          "token_refs": [
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "APPLY_FLEET_WAVE_ASSIST",
+          "line": 151,
+          "token_refs": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+            "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "DATA_TRANSITION",
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        },
+        {
+          "name": "APPLY_CONSTRAINT_READY_ASSIST",
+          "line": 183,
+          "token_refs": [
+            "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+            "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "contract_fields": [
+            "DATA_TRANSITION",
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE"
+          ]
+        }
+      ],
+      "dependencies": [],
+      "coverage": [
+        {
+          "block": "BUILD_PILOT_INVENTORY",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "RUN_MIGRATION_DRY_RUN",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "EMIT_MIGRATION_RECEIPT",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "REVERT_MIGRATION_APPLY",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "BUILD_FLEET_INVENTORY",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "EMIT_G3_RECEIPT",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "RUN_FLEET_WAVE",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "RECORD_WAVE_STOP_GO",
+          "branch_lines": [],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "REFRESH_WAIVER_REGISTRY",
+          "branch_lines": [
+            148
+          ],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "APPLY_FLEET_WAVE_ASSIST",
+          "branch_lines": [
+            173,
+            175,
+            179
+          ],
+          "failure_modes": [],
+          "references": []
+        },
+        {
+          "block": "APPLY_CONSTRAINT_READY_ASSIST",
+          "branch_lines": [
+            202,
+            208,
+            209,
+            210,
+            212,
+            216
+          ],
+          "failure_modes": [],
+          "references": []
+        }
+      ],
+      "diagnostics": []
+    }
+  },
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "UNRESOLVED_RUN",
+      "message": "RUN target pseudocode_analyze WITH analyze_profile treated as external (not resolved locally)",
+      "line": 12,
+      "block": "EMIT_MIGRATION_RECEIPT",
+      "span": {
+        "line": 12,
+        "column": 3,
+        "end_line": 12,
+        "end_column": 45
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "READ_BEFORE_WRITE",
+      "message": "Possible read-before-write for FOR in REFRESH_WAIVER_REGISTRY",
+      "line": 13,
+      "block": "REFRESH_WAIVER_REGISTRY",
+      "span": {
+        "line": 13,
+        "column": 3,
+        "end_line": 13,
+        "end_column": 28
+      }
+    },
+    {
+      "severity": "info",
+      "code": "UNRESOLVED_RUN",
+      "message": "RUN target pseudocode_analyze WITH G3 analyze_profile AND program_gate_policy advisory treated as external (not resolved locally)",
+      "line": 13,
+      "block": "EMIT_G3_RECEIPT",
+      "span": {
+        "line": 13,
+        "column": 3,
+        "end_line": 13,
+        "end_column": 81
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "READ_BEFORE_WRITE",
+      "message": "Possible read-before-write for IF in APPLY_CONSTRAINT_READY_ASSIST",
+      "line": 20,
+      "block": "APPLY_CONSTRAINT_READY_ASSIST",
+      "span": {
+        "line": 20,
+        "column": 3,
+        "end_line": 20,
+        "end_column": 16
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "READ_BEFORE_WRITE",
+      "message": "Possible read-before-write for FOR in APPLY_FLEET_WAVE_ASSIST",
+      "line": 21,
+      "block": "APPLY_FLEET_WAVE_ASSIST",
+      "span": {
+        "line": 21,
+        "column": 3,
+        "end_line": 21,
+        "end_column": 34
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "READ_BEFORE_WRITE",
+      "message": "Possible read-before-write for FOR in APPLY_CONSTRAINT_READY_ASSIST",
+      "line": 23,
+      "block": "APPLY_CONSTRAINT_READY_ASSIST",
+      "span": {
+        "line": 23,
+        "column": 3,
+        "end_line": 23,
+        "end_column": 34
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "READ_BEFORE_WRITE",
+      "message": "Possible read-before-write for EMIT in APPLY_FLEET_WAVE_ASSIST",
+      "line": 24,
+      "block": "APPLY_FLEET_WAVE_ASSIST",
+      "span": {
+        "line": 24,
+        "column": 3,
+        "end_line": 24,
+        "end_column": 51
+      }
+    },
+    {
+      "severity": "warning",
+      "code": "READ_BEFORE_WRITE",
+      "message": "Possible read-before-write for EMIT in APPLY_CONSTRAINT_READY_ASSIST",
+      "line": 29,
+      "block": "APPLY_CONSTRAINT_READY_ASSIST",
+      "span": {
+        "line": 29,
+        "column": 3,
+        "end_line": 29,
+        "end_column": 62
+      }
+    }
+  ],
+  "unsupported_syntax": [
+    {
+      "construct": "unsupported_statement",
+      "message": "Unsupported statement form: - [IMPL-PSEUDOCODE_MIGRATION_TOOLING] [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE] [REQ-PSEUDOCODE_MIGRATION_TOOLING] [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION] How: Full inventory, G3 wave execution, waiver registry, and stop/go for OD-P4-3 enrolled clients.",
+      "span": {
+        "line": 16,
+        "column": 1,
+        "end_line": 16,
+        "end_column": 263
+      }
+    }
+  ],
+  "unknowns": [
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: wave_sidecar_list has ≤10 entries per sub-wave (OD-P3-3)",
+      "procedure": "BUILD_PILOT_INVENTORY",
+      "line": 12,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "summary_missing",
+      "message": "CALL EMIT_G3_RECEIPT lacks procedure summary for interprocedural constraint propagation",
+      "procedure": "RUN_FLEET_WAVE",
+      "line": 15,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: success => no file writes when dry_run true",
+      "procedure": "RUN_MIGRATION_DRY_RUN",
+      "line": 28,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: inventory_diff_path readable",
+      "procedure": "RUN_MIGRATION_DRY_RUN",
+      "line": 28,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: success => no file writes when dry_run true",
+      "procedure": "RUN_MIGRATION_DRY_RUN",
+      "line": 28,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: success => no file writes when dry_run true",
+      "procedure": "RUN_MIGRATION_DRY_RUN",
+      "line": 28,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes gate_mode and constraint_flow",
+      "procedure": "EMIT_MIGRATION_RECEIPT",
+      "line": 40,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes gate_mode and constraint_flow",
+      "procedure": "EMIT_MIGRATION_RECEIPT",
+      "line": 40,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes gate_mode and constraint_flow",
+      "procedure": "EMIT_MIGRATION_RECEIPT",
+      "line": 40,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: success => sidecar bytes match snapshot; advisory receipt constraint_gate_errors_policy is advisory",
+      "procedure": "REVERT_MIGRATION_APPLY",
+      "line": 56,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: snapshot captured before apply",
+      "procedure": "REVERT_MIGRATION_APPLY",
+      "line": 56,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: success => sidecar bytes match snapshot; advisory receipt constraint_gate_errors_policy is advisory",
+      "procedure": "REVERT_MIGRATION_APPLY",
+      "line": 56,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: success => sidecar bytes match snapshot; advisory receipt constraint_gate_errors_policy is advisory",
+      "procedure": "REVERT_MIGRATION_APPLY",
+      "line": 56,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: inventory_manifest_path validates against client-inventory-manifest.v1 schema",
+      "procedure": "BUILD_FLEET_INVENTORY",
+      "line": 73,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes constraint_flow true and typed_flow true",
+      "procedure": "EMIT_G3_RECEIPT",
+      "line": 90,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes constraint_flow true and typed_flow true",
+      "procedure": "EMIT_G3_RECEIPT",
+      "line": 90,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: sidecar_path exists; analyze_profile includes constraint_flow true and typed_flow true",
+      "procedure": "EMIT_G3_RECEIPT",
+      "line": 90,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate tokenization: wave_id exists in partition; sidecar_list has ≤10 entries when client is stdd",
+      "procedure": "RUN_FLEET_WAVE",
+      "line": 107,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: wave_id completed receipt batch OR blocking gap documented",
+      "procedure": "RECORD_WAVE_STOP_GO",
+      "line": 124,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: wave_id completed receipt batch OR blocking gap documented",
+      "procedure": "RECORD_WAVE_STOP_GO",
+      "line": 124,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: wave_id completed receipt batch OR blocking gap documented",
+      "procedure": "RECORD_WAVE_STOP_GO",
+      "line": 124,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    },
+    {
+      "cause": "CONSTRAINT_UNSUPPORTED_SYNTAX",
+      "message": "Unsupported predicate syntax: registry_path readable",
+      "procedure": "REFRESH_WAIVER_REGISTRY",
+      "line": 138,
+      "proof_boundary": "Constraint-language checks apply only where grammar v2 refinements are authored and within solver budgets; not runtime execution or complete behavioral verification."
+    }
+  ]
+}

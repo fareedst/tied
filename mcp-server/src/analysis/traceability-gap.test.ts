@@ -99,7 +99,7 @@ describe("traceability gap: test file classification [REQ-QUALITY_ASSURANCE_EVID
 
 describe("traceability gap: methodology paths", () => {
   it("detects tied/methodology content", () => {
-    assert.strictEqual(isMethodologyContentPath("tied/methodology/requirements/REQ-X.yaml"), true);
+    assert.strictEqual(isMethodologyContentPath("tied-bundle/requirements/REQ-X.yaml"), true);
   });
 
   it("allows custom markers", () => {

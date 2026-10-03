@@ -1,0 +1,201 @@
+{
+  "change_definition": {
+    "counterexamples": [
+      "Checklist says user at translate-sponsor-intent while glossary defines sponsor",
+      "hinge_field_incomplete blocks under advisory violates OD-3",
+      "New principle inserts sponsor Q&A at reversible step (over-asking)",
+      "strict_approval placeholder emits hinge_field_incomplete",
+      "YAML marker without MD parity fails SC-SAR-003"
+    ],
+    "current_behavior": "Agent-as-instrument and sponsor-as-person are implicit; roles have no vocab rows; reversible/costly taxonomy is fleet-local; RESOLVE has no charter; hinge fields enforced only for three waiver maps; escalation ladder scattered; no failure-mode review prompts; sponsor-vs-TIED disagreement unrouted.",
+    "desired_behavior": "Canonical glossary and principles; checklist parity at five slugs; generalized hinge_field_incomplete diagnostic (warn-only under advisory); R+A+I promoted to templates; bootstrap installs sponsor-agent-relationship doc.",
+    "non_goals": [
+      ".cursor/agents changes",
+      "blocking hinge diagnostic under advisory",
+      "Jev code changes",
+      "new PROC token",
+      "runtime LLM evaluation",
+      "sponsor Q&A at every slug",
+      "tied_verify changes"
+    ],
+    "success_criteria": [
+      "SC-SAR-001",
+      "SC-SAR-002",
+      "SC-SAR-003",
+      "SC-SAR-004",
+      "SC-SAR-005",
+      "SC-SAR-006"
+    ],
+    "unchanged_behavior": [
+      "existing waiver blocking",
+      "IMPL-vs-IMPL contradiction binning",
+      "RED before GREEN",
+      "sponsor default-proceed for reversible planned work",
+      "tied_validate_consistency",
+      "verification-gated status"
+    ]
+  },
+  "completion_criteria": {
+    "pseudocode_structural_validation": "Layer B + Layer C gate_mode pass",
+    "verification": "tied_verify + tied_validate_consistency + pre_implementation/verification/close_out gates allowed: true",
+    "activation": {
+      "phase": "close_out",
+      "run_id": "closeout-sar-2026-10-01-close_out",
+      "request_token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    }
+  },
+  "evidence": {
+    "commands": [
+      "cd mcp-server && bun test src/checklist-validator.test.ts src/e2e/sponsor-agent-relationship-contract.test.ts src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts src/relationship/consequence-ladder.test.ts src/fixture-corpus-regression.test.ts",
+      "cd mcp-server && bunx tsc -b",
+      "ruby scripts/validate_vocab_index.rb"
+    ]
+  },
+  "impact_analysis": {
+    "files": [
+      "mcp-server/src/checklist-validator.ts",
+      "mcp-server/src/relationship/",
+      "templates/requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+      "tied/vocab/sponsor-agent-relationship.md"
+    ],
+    "impl_inventory": [
+      "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    ],
+    "modules": [
+      "bootstrap_propagation",
+      "contract_and_parity_tests",
+      "hinge_field_validation",
+      "principles_and_checklist_text",
+      "relationship_vocabulary",
+      "templates_promotion"
+    ],
+    "tied_tokens_affected": [
+      "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "IMPL-TIED_FILES",
+      "IMPL-TIED_VOCABULARY_REFRESH",
+      "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+      "REQ-TIED_ADVERSARIAL_INQUIRY",
+      "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "REQ-TIED_SETUP",
+      "REQ-TIED_VOCABULARY_OWNERSHIP"
+    ],
+    "tied_tokens_new": [
+      "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+      "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+      "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    ]
+  },
+  "leap_feedback": {
+    "divergences_from_analysis": [],
+    "record_status": "final",
+    "tied_stack_updates_required": []
+  },
+  "record_identity": {
+    "author": "AI Agent",
+    "change_request_id": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+    "checklist_process": "PROC-AGENT_REQ_CHECKLIST",
+    "checklist_version": "agent_req_implementation_checklist 3.0.0",
+    "express_lane": false,
+    "record_status": "complete",
+    "recorded_at": "2026-10-01",
+    "size": "M",
+    "tied_context": {
+      "architecture": [
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ],
+      "implementation": [
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ],
+      "requirements": [
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      ]
+    },
+    "title": "Sponsor-Agent Relationship Layer (instrument vs person operating principles)",
+    "workspace_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "risk_analysis": {
+    "adversarial_inquiry": {
+      "counterexamples": [
+        "Checklist YAML/MD marker drift",
+        "hinge_field_incomplete blocks under advisory",
+        "Placeholder strict_approval without owner"
+      ],
+      "depth_rationale": "Tier C edits checklist gate validator; integrated selected voluntarily.",
+      "depth_tier": "integrated",
+      "disconfirming_observations": [
+        "checklist-validator.test.ts VALIDATE_HINGE_FIELD advisory case",
+        "sponsor-agent-checklist-parity.test.ts green"
+      ],
+      "eligibility_triggers_matched": [],
+      "evidence_references": [
+        "mcp-server/src/checklist-validator.test.ts",
+        "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts"
+      ],
+      "falsification_questions": [
+        "Can parity test pass with MD-only markers?",
+        "Does advisory policy block on hinge_field_incomplete?"
+      ],
+      "gate_policy": "advisory",
+      "integrated_waiver": null,
+      "prior_depth_tier": null,
+      "research_profile": "integrated-agent",
+      "scope": {
+        "impl_tokens": [
+          "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+        ],
+        "paths": [
+          "mcp-server/src/checklist-validator.ts",
+          "tied/docs/agent-req-implementation-checklist.yaml",
+          "tied/vocab/sponsor-agent-relationship.md"
+        ]
+      }
+    },
+    "consequence_ladder": {
+      "open_decisions": [
+        {
+          "default": "accept REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+          "id": "OD-1",
+          "kind": "costly",
+          "status": "accepted"
+        },
+        {
+          "default": "promote R+A+I to templates/",
+          "id": "OD-2",
+          "kind": "costly",
+          "status": "accepted"
+        },
+        {
+          "default": "warn-only under advisory; blocking under strict",
+          "id": "OD-3",
+          "kind": "costly",
+          "status": "accepted"
+        }
+      ]
+    },
+    "evidence_chain_profile": {
+      "profile_depth": "integrated"
+    },
+    "quality_profiles": [
+      "baseline-functional"
+    ],
+    "risks": [
+      {
+        "id": "RISK-SAR-001",
+        "mitigation": "Warn-only under advisory; fixture corpus regression",
+        "name": "hinge_over_block",
+        "severity": "high"
+      }
+    ]
+  },
+  "test_strategy": {
+    "red_before_green": true,
+    "tests": [
+      "mcp-server/src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts",
+      "mcp-server/src/checklist-validator.test.ts",
+      "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts",
+      "mcp-server/src/fixture-corpus-regression.test.ts",
+      "mcp-server/src/relationship/consequence-ladder.test.ts"
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+copy_hygiene: "Operator orchestration for pre-cohort client test per docs/pre-cohort-client-test-grammar-v2-and-evidence.md. No inherited close-out evidence from client REQ trackers; links only."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred:
+      - "client-req-integrated-lifecycle"
+      - "operator-client-bootstrap-audit"
+      - "operator-corpus-registration"
+      - "operator-section-e-live-cohort-row"
+      - "operator-stdd-preflight"
+    gates:
+      pre_implementation:
+        allowed: true
+        evidence_file: "working/PRE-COHORT-CLIENT-TEST/gates/pre_implementation-2026-09-12T01-09-47-399Z.json"
+        run_id: "pre-cohort-prior-work-refine-20260911"
+    master_checklist: ""
+    note: "Execution deferred to operator; this tracker records refine-plan gates only."
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: null
+  request: "PROCESS-PRE-COHORT-CLIENT-TEST"
+linked_req_trackers:
+  - path: "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml"
+    role: "grammar_arm_reference"
+  - path: "working/REQ-REQUEST_EVIDENCE_ENVELOPE/agent-req-implementation-checklist.yaml"
+    role: "envelope_arm_reference"
+prior_work_plan: "docs/pre-client-test-prior-work-plan.md"
+profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  note: "Doc/runbook refinement only. Client-owned REQ-* tracker runs integrated depth during the live test; grammar arm uses REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT proof only."
+request: "PROCESS-PRE-COHORT-CLIENT-TEST"
+run_id: "pre-cohort-refine-20260911"
+source_plan: "docs/pre-cohort-client-test-grammar-v2-and-evidence.md"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+      - "tied/vocab/quality-assurance.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pre-cohort-client-test-grammar-v2-and-evidence.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pre-client-test-prior-work-plan.md"
+      - "docs/pre-cohort-client-test-grammar-v2-and-evidence.md"
+      - "working/PRE-COHORT-CLIENT-TEST/CITDP-PRE-COHORT-CLIENT-TEST.yaml"
+    rationale: "Includes prior-work plan refine (docs/pre-client-test-prior-work-plan.md); CITDP linked_plans and 48d1fbb+ pin updated; run_id records this refine pass."
+    run_id: "pre-cohort-prior-work-refine-20260911"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/evidence-collection-conversation-patterns.md"
+      - "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+      - "tied/docs/request-evidence-envelope.md"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/PRE-COHORT-CLIENT-TEST/CITDP-PRE-COHORT-CLIENT-TEST.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pre-client-test-prior-work-plan.md"
+      - "docs/pre-cohort-client-test-grammar-v2-and-evidence.md"
+    rationale: "Verification is operator-executed per runbook §A–D acceptance criteria; no new stdd RED tests in this refine pass."
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "working/PRE-COHORT-CLIENT-TEST/CITDP-PRE-COHORT-CLIENT-TEST.yaml"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Operator runbook refine at profile_depth minimal; integrated inquiry runs on client REQ tracker during live test."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "docs/pre-cohort-client-test-grammar-v2-and-evidence.md"
+    policy: "no-impl-inventory"
+    rationale: "Process orchestration only; no IMPL pseudo-code changes in this refine pass."
+    slug: "gate-pseudocode-validation"

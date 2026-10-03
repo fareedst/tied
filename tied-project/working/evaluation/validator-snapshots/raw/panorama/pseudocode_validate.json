@@ -1,0 +1,1958 @@
+{
+  "ok": false,
+  "count": 99,
+  "results": {
+    "IMPL-BUILD_SCRIPTS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-BULK_OPS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-CLASS_OVERRIDES": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-COMPARISON_COLORS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-COMPARISON_INDEX": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-CONFIG_DRIVEN_APPEARANCE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-CONFIG_LOADER": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-COPY_ATTRS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-CROSS_PANE_VISIBILITY_CATALOG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-CROSS_PANE_VISIBILITY_ENGINE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-CROSS_PANE_VISIBILITY_UI": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-CURSOR_BOUNDS_CHECK": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-DARK_MODE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-DEMO_SCREENSHOT_PIPELINE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-DIRECTORY_TREE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-DIR_HISTORY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-DISPLAY_FILTER_API": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-DISPLAY_FILTER_ENGINE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-DISPLAY_SPEC_STORE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-EXECUTE_DIALOG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-EXTERNAL_LINKS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILES_API": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILES_CONFIG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILES_CONFIG_COMPLETE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILES_DATA": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILES_UTILS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILE_COLUMN_CONFIG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILE_MANAGER_PAGE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILE_MARKING": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILE_PANE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILE_PREVIEW": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FILE_SEARCH": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FLEX_LAYOUT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-FONT_LOADING": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-GLOBAL_ERROR_BOUNDARY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-HOME_PAGE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-IMAGE_OPTIMIZATION": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-KEYBINDS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-LAYOUT_CALCULATOR": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-LINKED_NAV": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-LOGGER_CONFIG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-LOGGER_MODULE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-LOGGER_TOKENS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MAKE_DIRECTORY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MAKE_DIRECTORY_DIALOG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_API": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_AUTH": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_CONFLICT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_CONNECTOR": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_CREDENTIAL": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_CRUD": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_DEPOT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_DOMAIN_TYPES": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_EVENTS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_EXECUTOR": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_GUI": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": false,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [
+          {
+            "name": "IMPL",
+            "line": 9,
+            "token_refs": [
+              "ARCH-MESH_LAYERED",
+              "IMPL-MESH_GUI",
+              "REQ-MESH_GUI",
+              "REQ-MESH_PLATFORM"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 17,
+            "token_refs": [
+              "ARCH-MESH_LAYERED",
+              "ARCH-WORKSPACE_MESH_BRIDGE",
+              "IMPL-MESH_DEPOT",
+              "IMPL-MESH_GUI",
+              "IMPL-WORKSPACE_MESH_BRIDGE",
+              "REQ-MESH_GUI",
+              "REQ-WORKSPACE_MESH_BRIDGE"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 35,
+            "token_refs": [
+              "ARCH-MESH_LAYERED",
+              "IMPL-MESH_GUI",
+              "REQ-MESH_GUI",
+              "REQ-MESH_SAFETY"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 44,
+            "token_refs": [
+              "ARCH-MESH_LAYERED",
+              "IMPL-MESH_GUI",
+              "REQ-MESH_E2E_RELEASE",
+              "REQ-MESH_GUI"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 53,
+            "token_refs": [
+              "IMPL-MESH_GUI",
+              "REQ-MESH_PLATFORM"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 62,
+            "token_refs": [],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 65,
+            "token_refs": [
+              "ARCH-MESH_LAYERED",
+              "IMPL-MESH_GUI",
+              "IMPL-MESH_SCHEDULE",
+              "REQ-MESH_GUI",
+              "REQ-MESH_SCHEDULE"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 72,
+            "token_refs": [
+              "IMPL-MESH_GUI",
+              "IMPL-MESH_IMPORT_EXPORT",
+              "REQ-MESH_IMPORT_EXPORT"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 80,
+            "token_refs": [
+              "IMPL-MESH_EVENTS",
+              "IMPL-MESH_GUI",
+              "REQ-MESH_MONITORING"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 87,
+            "token_refs": [],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 90,
+            "token_refs": [
+              "IMPL-MESH_GUI",
+              "IMPL-MESH_POLICY",
+              "REQ-MESH_GUI"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 97,
+            "token_refs": [
+              "IMPL-MESH_CRUD",
+              "IMPL-MESH_GUI",
+              "REQ-MESH_CRUD"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 104,
+            "token_refs": [
+              "ARCH-MESH_LAYERED",
+              "IMPL-MESH_DEPOT",
+              "IMPL-MESH_GUI",
+              "REQ-MESH_GUI",
+              "REQ-MESH_PLATFORM"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "IMPL",
+            "line": 112,
+            "token_refs": [],
+            "contract_fields": []
+          }
+        ],
+        "dependencies": [],
+        "coverage": [
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "IMPL",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          }
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 9,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 17,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 35,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 44,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 53,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_BLOCK_TOKEN_LINK",
+            "message": "Block IMPL does not reference IMPL-MESH_GUI.",
+            "line": 62,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 62,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 65,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 72,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 80,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_BLOCK_TOKEN_LINK",
+            "message": "Block IMPL does not reference IMPL-MESH_GUI.",
+            "line": 87,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 87,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 90,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 97,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 104,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_BLOCK_TOKEN_LINK",
+            "message": "Block IMPL does not reference IMPL-MESH_GUI.",
+            "line": 112,
+            "block": "IMPL"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block IMPL is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 112,
+            "block": "IMPL"
+          }
+        ]
+      }
+    },
+    "IMPL-MESH_HARDENING": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_IMPORT_EXPORT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_INVENTORY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_MONITORING": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_PERSISTENCE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_PLANNING": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_POLICY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_RUNTIME": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_SAFETY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_SCHEDULE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_SESSION": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MESH_TOPOLOGY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-METADATA": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-MOUSE_SUPPORT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-NSYNC_COMPARE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-NSYNC_ENGINE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-NSYNC_HASH": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-NSYNC_OPERATIONS": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-NSYNC_STORE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-NSYNC_TYPE_SAFETY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-NSYNC_VERIFY": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-OVERWRITE_PROMPT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-PANE_COMMAND_EXEC": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-PANE_DISPLAY_FILTER_UI": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-PANE_MANAGEMENT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-PANE_REFRESH": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-PERFORMANCE_OPT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-RENAME_DIALOG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-RENAME_REGEX": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": false,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [
+          {
+            "name": "validateRegex",
+            "line": 6,
+            "token_refs": [
+              "ARCH-SEARCH_ENGINE",
+              "IMPL-RENAME_REGEX",
+              "REQ-BULK_FILE_OPS",
+              "REQ-FILE_SEARCH"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "validateRenameBasename",
+            "line": 13,
+            "token_refs": [
+              "IMPL-RENAME_REGEX",
+              "REQ-BULK_FILE_OPS"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "computeRenamedBasename",
+            "line": 19,
+            "token_refs": [
+              "IMPL-RENAME_REGEX",
+              "REQ-BULK_FILE_OPS"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "buildRenameRegexEntries",
+            "line": 26,
+            "token_refs": [
+              "ARCH-BATCH_OPERATIONS",
+              "IMPL-RENAME_REGEX",
+              "REQ-BULK_FILE_OPS"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "bulkRename",
+            "line": 35,
+            "token_refs": [
+              "ARCH-BATCH_OPERATIONS",
+              "ARCH-FILE_OPERATIONS_API",
+              "IMPL-BULK_OPS",
+              "IMPL-RENAME_REGEX",
+              "REQ-BULK_FILE_OPS"
+            ],
+            "contract_fields": []
+          }
+        ],
+        "dependencies": [],
+        "coverage": [
+          {
+            "block": "validateRegex",
+            "branch_lines": [
+              8,
+              10
+            ],
+            "failure_modes": [
+              "IF pattern.length > 500: RETURN { valid: false, error: \"Pattern too long\" }",
+              "TRY new RegExp(pattern) CATCH RETURN { valid: false, error: \"Invalid regex pattern\" }",
+              "IF dangerous nested repetition OR many groups: RETURN { valid: false, error: \"Potentially dangerous regex pattern\" }"
+            ],
+            "references": []
+          },
+          {
+            "block": "validateRenameBasename",
+            "branch_lines": [
+              15,
+              16
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "computeRenamedBasename",
+            "branch_lines": [
+              21,
+              23
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "buildRenameRegexEntries",
+            "branch_lines": [
+              32
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "bulkRename",
+            "branch_lines": [
+              42,
+              44,
+              45,
+              46,
+              47,
+              49
+            ],
+            "failure_modes": [],
+            "references": []
+          }
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block validateRegex is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 6,
+            "block": "validateRegex"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_FAILURE_MODES",
+            "message": "Block validateRegex has an error path without FAILURE_MODES.",
+            "line": 6,
+            "block": "validateRegex"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block validateRenameBasename is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 13,
+            "block": "validateRenameBasename"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block computeRenamedBasename is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 19,
+            "block": "computeRenamedBasename"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block buildRenameRegexEntries is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 26,
+            "block": "buildRenameRegexEntries"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block bulkRename is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 35,
+            "block": "bulkRename"
+          }
+        ]
+      }
+    },
+    "IMPL-RENAME_REGEX_DIALOG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-RESPONSIVE_CLASSES": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-ROOT_LAYOUT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-SORT_FILTER": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-TEST_CONFIG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-TEST_SETUP": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-THEME_INJECTION": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-TOOLBAR_COMPONENT": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-TOOLBAR_CONFIG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-TOUCH_DIALOG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": false,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [
+          {
+            "name": "parseSpecifiedMtime",
+            "line": 29,
+            "token_refs": [
+              "IMPL-FILE_PANE",
+              "IMPL-MOUSE_SUPPORT",
+              "IMPL-TOUCH_DIALOG",
+              "IMPL-TOUCH_MTIME",
+              "IMPL-WORKSPACE_VIEW",
+              "REQ-MOUSE_INTERACTION",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          }
+        ],
+        "dependencies": [],
+        "coverage": [
+          {
+            "block": "parseSpecifiedMtime",
+            "branch_lines": [
+              31,
+              32,
+              37,
+              48
+            ],
+            "failure_modes": [],
+            "references": []
+          }
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block parseSpecifiedMtime is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 29,
+            "block": "parseSpecifiedMtime"
+          }
+        ]
+      }
+    },
+    "IMPL-TOUCH_MTIME": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": false,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [
+          {
+            "name": "resolveTouchBasenames",
+            "line": 6,
+            "token_refs": [
+              "IMPL-TOUCH_MTIME",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "resolveTouchPaths",
+            "line": 12,
+            "token_refs": [
+              "ARCH-TOUCH_MTIME",
+              "IMPL-TOUCH_MTIME",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "resolveAggregateMtime",
+            "line": 24,
+            "token_refs": [
+              "ARCH-TOUCH_MTIME",
+              "IMPL-TOUCH_MTIME",
+              "REQ-CROSS_PANE_COMPARISON",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "getSharedCompareState",
+            "line": 30,
+            "token_refs": [
+              "ARCH-TOUCH_MTIME",
+              "IMPL-TOUCH_MTIME",
+              "REQ-CROSS_PANE_COMPARISON",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "isEarliestLatestModeAvailable",
+            "line": 37,
+            "token_refs": [
+              "IMPL-TOUCH_MTIME",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "resolveTouchMtimeForBasename",
+            "line": 41,
+            "token_refs": [
+              "IMPL-TOUCH_MTIME",
+              "REQ-CROSS_PANE_COMPARISON",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "buildTouchEntries",
+            "line": 49,
+            "token_refs": [
+              "ARCH-TOUCH_MTIME",
+              "IMPL-TOUCH_MTIME",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "setFileMtime",
+            "line": 60,
+            "token_refs": [
+              "IMPL-TOUCH_MTIME",
+              "REQ-FILE_OPERATIONS",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          },
+          {
+            "name": "bulkTouch",
+            "line": 65,
+            "token_refs": [
+              "ARCH-TOUCH_MTIME",
+              "IMPL-TOUCH_MTIME",
+              "REQ-FILE_OPERATIONS",
+              "REQ-TOUCH_MTIME"
+            ],
+            "contract_fields": []
+          }
+        ],
+        "dependencies": [],
+        "coverage": [
+          {
+            "block": "resolveTouchBasenames",
+            "branch_lines": [
+              7,
+              8
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "resolveTouchPaths",
+            "branch_lines": [
+              16,
+              18,
+              19
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "resolveAggregateMtime",
+            "branch_lines": [
+              26,
+              27
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "getSharedCompareState",
+            "branch_lines": [
+              34
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "isEarliestLatestModeAvailable",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "resolveTouchMtimeForBasename",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "buildTouchEntries",
+            "branch_lines": [
+              57
+            ],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "setFileMtime",
+            "branch_lines": [],
+            "failure_modes": [],
+            "references": []
+          },
+          {
+            "block": "bulkTouch",
+            "branch_lines": [
+              73,
+              75,
+              76,
+              78
+            ],
+            "failure_modes": [],
+            "references": []
+          }
+        ],
+        "diagnostics": [
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block resolveTouchBasenames is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 6,
+            "block": "resolveTouchBasenames"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block resolveTouchPaths is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 12,
+            "block": "resolveTouchPaths"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block resolveAggregateMtime is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 24,
+            "block": "resolveAggregateMtime"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block getSharedCompareState is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 30,
+            "block": "getSharedCompareState"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block isEarliestLatestModeAvailable is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 37,
+            "block": "isEarliestLatestModeAvailable"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block resolveTouchMtimeForBasename is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 41,
+            "block": "resolveTouchMtimeForBasename"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block buildTouchEntries is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 49,
+            "block": "buildTouchEntries"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block setFileMtime is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 60,
+            "block": "setFileMtime"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_CONTRACT",
+            "message": "Block bulkTouch is missing contract fields: INPUT, OUTPUT, PRE, POST, EFFECTS.",
+            "line": 65,
+            "block": "bulkTouch"
+          },
+          {
+            "severity": "error",
+            "code": "MISSING_TERMINATION",
+            "message": "Block bulkTouch has open-ended control flow without TERMINATION.",
+            "line": 65,
+            "block": "bulkTouch"
+          }
+        ]
+      }
+    },
+    "IMPL-WORKSPACE_MESH_BRIDGE": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-WORKSPACE_VIEW": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    },
+    "IMPL-YAML_CONFIG": {
+      "ok": true,
+      "result": {
+        "schema_version": "layer-b-pseudocode-validator.v1",
+        "ok": true,
+        "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+        "blocks": [],
+        "dependencies": [],
+        "coverage": [],
+        "diagnostics": []
+      }
+    }
+  }
+}

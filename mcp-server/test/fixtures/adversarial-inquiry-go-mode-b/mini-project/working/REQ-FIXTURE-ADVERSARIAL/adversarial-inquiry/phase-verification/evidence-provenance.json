@@ -15,7 +15,7 @@
       "testClassifiers": [
         "go-test"
       ],
-      "tiedBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/tied",
+      "tiedBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/tied-project",
       "version": "mode-b-fixture"
     },
     "mode": "project",

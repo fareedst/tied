@@ -1,0 +1,27 @@
+# [IMPL-VOLUME_STATS_CALC] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT]
+# Convert filesystem block counters into bounded byte totals and usage percentage.
+
+## CALCULATE_STORAGE_STATS
+# [IMPL-VOLUME_STATS_CALC] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT] How: apply block arithmetic and a zero-capacity guard to produce deterministic storage values.
+Contract:
+  INPUT: blocks, block size, free blocks, available blocks (non-negative counters)
+  PRE: block size is positive or represents an empty/invalid record to be handled safely
+  OUTPUT: total bytes, used bytes, available bytes, usage percentage
+  POST:
+    total bytes equals blocks multiplied by block size when arithmetic is valid
+    used bytes is never negative
+    available bytes equals available blocks multiplied by block size
+    usage percentage is within 0 through 100 when capacity is non-zero, otherwise zero
+  EFFECTS: pure
+  TERMINATION: total
+1. Convert the block size to a non-negative byte multiplier.
+2. Multiply blocks by the multiplier to obtain total bytes.
+3. Multiply free blocks by the multiplier to obtain free bytes.
+4. Multiply available blocks by the multiplier to obtain available bytes.
+5. IF free bytes exceeds total bytes: set used bytes to zero.
+6. ELSE set used bytes to total bytes minus free bytes.
+7. Set capacity denominator to used bytes plus available bytes.
+8. IF the denominator is zero: set usage percentage to zero.
+9. ELSE calculate usage percentage as used bytes divided by the denominator times 100.
+10. IF arithmetic produces a percentage above 100: cap it at 100.
+11. RETURN the calculated storage values.

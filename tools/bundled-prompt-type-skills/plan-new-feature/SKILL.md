@@ -9,7 +9,7 @@ disable-model-invocation: true
 Explicit invocation only (`@plan-new-feature` or caller names `prompt-type: plan-new-feature`).
 
 This skill is the workflow source of truth for client prompt-type invocation.
-`copy_files.sh` installs it under `.cursor/skills/plan-new-feature/`. Task wrappers under
+`tied-install.sh` installs it under `.cursor/skills/plan-new-feature/`. Task wrappers under
 `.cursor/agents/` remain TIED-source development artifacts only.
 [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
 [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
@@ -54,7 +54,7 @@ dispositions and evidence as the authoritative process record.
 ## Outputs
 
 - Resolved sponsor terms; per-task Tracker copy path
-- CITDP analysis (persist `tied/citdp/CITDP-*.yaml` after implementation)
+- CITDP analysis (persist `tied-project/citdp/CITDP-*.yaml` after implementation)
 - Test strategy; RED tests before code
 
 ## Forbidden

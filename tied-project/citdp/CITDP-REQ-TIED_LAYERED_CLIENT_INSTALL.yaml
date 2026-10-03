@@ -1,0 +1,15 @@
+CITDP-REQ-TIED_LAYERED_CLIENT_INSTALL:
+  change_summary: "Add tied-install layered client installer; factory defaults to linked; legacy copy_files preserved."
+  depth_tier: "minimal"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      integrated_waiver:
+        approval: "build-plan waiver recorded"
+        expiry: "2026-12-31"
+        owner: "sponsor"
+        rationale: "Bootstrap/filesystem feature; integrated inquiry deferred to verification close-out if promoted."
+  tied_tokens_affected:
+    - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+    - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+    - "REQ-TIED_LAYERED_CLIENT_INSTALL"

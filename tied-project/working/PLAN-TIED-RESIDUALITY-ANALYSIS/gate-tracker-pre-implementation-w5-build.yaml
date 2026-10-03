@@ -1,0 +1,58 @@
+depth_tier: "minimal"
+execution_evidence:
+  batch: "W5-build-plan-promotion"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  request: "PLAN-TIED-RESIDUALITY-ANALYSIS"
+gate_policy: "advisory"
+note: "tracker_path for tied_checklist_gate_validate pre_implementation — w5-build-plan-promotion"
+profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/vocab/residuality.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sponsor-wrap-up-2026-09-27.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-W5-PROMOTION.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/docs/agent-req-implementation-checklist.yaml"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w5-refine-risk-assessment.md"
+    slug: "risk-assessment"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - kind: "file_path"
+        path: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sub-adversarial-inquiry-pass-w5-refine.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "W5 build gate at minimal depth; bounded validator TDD covered by unit tests."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "mcp-server/src/residuality/stressor-residue-validate.test.ts"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied/implementation-decisions/IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION-pseudocode.md"
+    slug: "gate-pseudocode-validation"

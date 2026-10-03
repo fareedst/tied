@@ -1,0 +1,37 @@
+
+test/jev/context-log-pruner.test.ts:
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING resolveContextLogPruningConfig defaults off [0.05ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING resolveContextLogPruningConfig opt-in via env [0.03ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING SC-PASS-THROUGH ≤30 lines unchanged [0.31ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING 31 lines triggers chunking [0.40ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING splitIntoChunks covers all indices [0.03ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING deterministicChunkDisposition fatal [0.04ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING mergeKeptRegionsWithSurround ±2 [0.02ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING raw_before arm identity [0.04ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING deterministic_only keep all [0.07ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING SC-FALLBACK unavailable [0.13ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING mock Jev drops boilerplate [0.07ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING labeled corpus safety [0.80ms]
+
+src/jev/jev.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide skips when no credentials [0.14ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > redactString masks jv_live keys [0.10ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide posts to /v1/decide with bearer auth [1.11ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide retries once on 502 [51.11ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > resolveJevConfig reads env defaults [0.02ms]
+
+src/jev/shadow-vocab-preload.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > parseRoutingTableMarkdown loads client routing table [0.02ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > matchKeywordGlossaries matches tied agentstream prompt [0.07ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > matchKeywordGlossaries matches adversarial inquiry terms [0.09ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > jevAnswersToGlossaryIds merges choice and nouls [0.03ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows skips Jev without credentials [0.39ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows marks vendor errors as jev_error without agrees inflation (G1) [51.32ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > summarizeShadowAgreement counts jev_errors for strict replay (G1) [0.11ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows records disagreement when Jev diverges [0.20ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > vocabShadowAgrees treats Jev subset of keyword matches as agreement [0.01ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > summarizeShadowAgreement computes rate on invoked logs
+
+ 27 pass
+ 0 fail
+Ran 27 tests across 3 files. [128.00ms]

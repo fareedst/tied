@@ -1,0 +1,18 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T17:40:24.386Z",
+  "client_id": "1787503424",
+  "wave_scope": "W-ext-1787503424-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787503424/tied/implementation-decisions/IMPL-DESKTOP_WINDOW_REPORT-pseudocode.md",
+      "impl_token": "IMPL-DESKTOP_WINDOW_REPORT",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "2f8b74015675c6cc8aa12b46997dc3fad50818598b99fc99c1f0a5bb9577eab3",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787503424/dry-run/snapshots/W-ext-1787503424-1"
+}

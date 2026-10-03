@@ -57,7 +57,7 @@ assert syntax_status.success?, "ruby -c failed: #{syntax_err}"
 puts syntax_out
 
 puts "DEBUG: project_id hash matches pilot tied base"
-expected_project_id = Digest::SHA256.hexdigest(File.expand_path("#{PILOT_ROOT}/tied"))[0, 16]
+expected_project_id = Digest::SHA256.hexdigest(File.expand_path("#{PILOT_ROOT}/tied-project"))[0, 16]
 assert_equal("bd6908f862145619", expected_project_id, "pilot project_id derivation")
 
 fixture_graph = read_json(File.join(FIXTURE_ROOT, "graph.json"))

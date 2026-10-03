@@ -16,16 +16,31 @@ import {
   extractCopyableSidecarTemplate,
   isGateStageG4OrLater,
 } from "../../mcp-server/dist/analysis/pseudocode-grammar-v2-default.js";
+import { resolveTiedLayout } from "../../tools/bootstrap/lib/layout.mjs";
+import { resolveStoreProjectSourceDir } from "../../tools/bootstrap/lib/methodology-bundle.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(__dirname, "..", "..");
 export const SMOKE_SIDECAR_PATH = path.join(REPO_ROOT, "scripts", "fixtures", "grammar-v2-default-smoke.sidecar.md");
-export const LEGACY_SIDECAR_PATH = path.join(
-  REPO_ROOT,
-  "tied",
-  "implementation-decisions",
-  "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md",
-);
+
+const LEGACY_SIDECAR_BASENAME = "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT-pseudocode.md";
+
+/** @param {string} [repoRoot] */
+export function resolveLegacyGrammarSidecarPath(repoRoot = REPO_ROOT) {
+  const root = path.resolve(repoRoot);
+  const candidates = [
+    path.join(root, "tied-bundle", "implementation-decisions", LEGACY_SIDECAR_BASENAME),
+    path.join(resolveStoreProjectSourceDir(root), "implementation-decisions", LEGACY_SIDECAR_BASENAME),
+    path.join(root, "tied", "implementation-decisions", LEGACY_SIDECAR_BASENAME),
+    path.join(root, "templates", "implementation-decisions", LEGACY_SIDECAR_BASENAME),
+  ];
+  for (const p of candidates) {
+    if (fs.existsSync(p)) return p;
+  }
+  return candidates[1];
+}
+
+export const LEGACY_SIDECAR_PATH = resolveLegacyGrammarSidecarPath(REPO_ROOT);
 export const CLIENT_TEMPLATE_REL = path.join("templates", "impl-essence-pseudocode-template.md");
 
 const SMOKE_IMPL_TOKEN = "IMPL-GRAMMAR-V2-SMOKE";
@@ -36,9 +51,12 @@ const SMOKE_KNOWN_TOKENS = [
 ];
 
 export function readClientSidecarTemplate(clientRoot) {
-  const templatePath = path.join(clientRoot, CLIENT_TEMPLATE_REL);
+  const layout = resolveTiedLayout(clientRoot);
+  const bundleTemplate = path.join(layout.templatesDir, "impl-essence-pseudocode-template.md");
+  const legacyTemplate = path.join(clientRoot, CLIENT_TEMPLATE_REL);
+  const templatePath = fs.existsSync(bundleTemplate) ? bundleTemplate : legacyTemplate;
   if (!fs.existsSync(templatePath)) {
-    throw new Error(`Missing client sidecar template: ${templatePath}`);
+    throw new Error(`Missing client sidecar template: ${bundleTemplate} or ${legacyTemplate}`);
   }
   const templateFileBody = fs.readFileSync(templatePath, "utf8");
   return {

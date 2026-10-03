@@ -1,0 +1,19 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T21:52:12.852Z",
+  "client_id": "tied-win-diff",
+  "wave_scope": "W-ext-tied-win-diff-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/tied-win-diff/tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md",
+      "impl_token": "IMPL-TIED_FILES",
+      "action": "none",
+      "classification_before": "header-only-v2",
+      "procedure_gaps": []
+    }
+  ],
+  "dry_run_content_hash": "4f4e6ac6fdd3baeb0a1887e711d628204edb96f27c771ab7fdf1be5411266c2e",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/tied-win-diff/dry-run/snapshots-constraint-ready/W-ext-tied-win-diff-1"
+}

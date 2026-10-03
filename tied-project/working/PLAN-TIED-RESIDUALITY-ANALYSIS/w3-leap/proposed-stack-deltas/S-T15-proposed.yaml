@@ -1,0 +1,18 @@
+ledger_disposition: "candidate_requirement"
+proposed_arch_deltas:
+  ARCH-FEAT_TASK_EXECUTION_STATE:
+    add_constraints:
+      - "IO failure taxonomy mapped to operator-visible reason codes."
+proposed_impl_deltas:
+  IMPL-FEAT_TASK_EXECUTION_STATE:
+    contract_hints:
+      FAILURE_MODES: "STORE_WRITE_FAILED, STORE_UNAVAILABLE (execution path — see S-T03 defer)"
+      POST: "Failed write leaves task non-terminal or failed per policy — never success."
+proposed_req_deltas:
+  REQ-FEAT_TASK_EXECUTION_RECOVERY:
+    add_satisfaction_criteria:
+      - criterion: "Store persistence failures surface as explicit non-success outcomes with deterministic reason — tasks are not marked successful when evidence or state writes fail."
+residuality_facet:
+  residue_summary: "Explicit write failure; task not marked success; ops alert path"
+  source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+stressor_id: "S-T15"

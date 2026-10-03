@@ -17,7 +17,12 @@ import { validateRequestEvidenceEnvelope } from "./validate.js";
 function resolveRepoRoot(): string {
   let dir = process.cwd();
   for (let i = 0; i < 6; i += 1) {
-    if (existsSync(path.join(dir, "tied", "requirements.yaml"))) return dir;
+    if (
+      existsSync(path.join(dir, "tied-project", "requirements.yaml"))
+      || existsSync(path.join(dir, "tied", "requirements.yaml"))
+    ) {
+      return dir;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
@@ -30,7 +35,7 @@ const FIXTURE_ROOT = path.join(
   REPO_ROOT,
   "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099",
 );
-const TIED_BASE_PATH = path.join(REPO_ROOT, "tied");
+const TIED_BASE_PATH = path.join(REPO_ROOT, "tied-project");
 const EXTERNAL_MINIMAL = "/Users/fareed/Documents/dev/test/1788547701";
 const EXTERNAL_INTEGRATED = "/Users/fareed/Documents/dev/test/1787603099";
 const INTEGRATED_TOKEN = "REQ-LISTENING_PORT_REPORT";
@@ -60,7 +65,7 @@ function seedMinimalFixture(tempRoot: string) {
 `,
     "utf8",
   );
-  mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+  mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
 }
 
 function seedIntegratedFixture(tempRoot: string) {
@@ -88,7 +93,7 @@ function seedIntegratedFixture(tempRoot: string) {
       path.join(inquiry, `phase-${phase}`),
     );
   }
-  mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+  mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
 }
 
 describe("request evidence envelope backfill [IMPL-REQUEST_EVIDENCE_ENVELOPE]", () => {
@@ -178,7 +183,7 @@ describe("request evidence envelope backfill [IMPL-REQUEST_EVIDENCE_ENVELOPE]", 
     const result = await backfillRequestEvidenceEnvelope({
       request_token: MINIMAL_TOKEN,
       project_root: tempRoot,
-      tied_base_path: "/tmp/wrong/tied",
+      tied_base_path: "/tmp/wrong/tied-project",
       confirmed_tied_base_path: TIED_BASE_PATH,
     });
     assert.equal(result.ok, false);
@@ -193,7 +198,7 @@ describe("request evidence envelope backfill [IMPL-REQUEST_EVIDENCE_ENVELOPE]", 
     } catch {
       return;
     }
-    const tiedBase = path.join(projectRoot, "tied");
+    const tiedBase = path.join(projectRoot, "tied-project");
     const result = await backfillRequestEvidenceEnvelope({
       request_token: MINIMAL_TOKEN,
       project_root: projectRoot,
@@ -215,7 +220,7 @@ describe("request evidence envelope backfill [IMPL-REQUEST_EVIDENCE_ENVELOPE]", 
     } catch {
       return;
     }
-    const tiedBase = path.join(projectRoot, "tied");
+    const tiedBase = path.join(projectRoot, "tied-project");
     const result = await backfillRequestEvidenceEnvelope({
       request_token: INTEGRATED_TOKEN,
       project_root: projectRoot,

@@ -1,0 +1,149 @@
+CITDP-RESIDUALITY-PILOT-W4-TESTS:
+  change_definition:
+    current_behavior: "W3 P0 LEAP persisted seven stressor facets into pilot REQ/ARCH/IMPL with validated\npseudo-code. Existing unit tests in mcp-server/src/feature-orchestration/ cover baseline\nexecution recovery and idempotent create paths but do not map residuality stressor facets,\nW3 APPEND_EVIDENCE/EVALUATE_DEPENDENCIES/HANDLE_LOCK_TTL blocks, or CONTROLLED_COMPOSITION_FAULT\nbindings. Ten W2 `finding` rows and deferred S-T03 store-unavailable mapping remain\nconfirmation-only until executable tests exist.\n"
+    desired_behavior: "After W4 refine-plan, a documented test strategy maps P0 stressor facets and applicable\n`finding` rows to unit RED targets and UI-free composition faults on queue/worker/store/idempotency\nseams. Holdout validation stressors are scaffolded separately from design stressors.\nbuild-plan W4 adds RED tests (and GREEN production code only in build-plan, not refine-plan)\nfollowing [PROC-TIED_DEV_CYCLE]: unit RED → unit GREEN → composition RED → composition GREEN.\nS-T03 is clarified with split create-path (PUBLISH_FAILED) and execution-path (STORE_WRITE_FAILED\n/ STORE_UNAVAILABLE) composition faults before any optional stack elevation.\n"
+    non_goals:
+      - "Claiming pilot DoD complete or holdout results"
+      - "E2E UI tests for pilot seams (composition-first)"
+      - "Mutating tied/methodology/"
+      - "Production code GREEN in refine-plan W4"
+      - "Promoting P1 deferred rows (S-T09, S-T10, S-T11, S-T16, S-O02, S-O06, S-O07) in W4 batch 1"
+    sponsor_decisions:
+      SD-W4-BATCH-SPLIT: "Single build-plan batch vs split unit vs composition PRs (refine recommends phased sub-batches within one CITDP)"
+      SD-W4-S-T03-EXEC: "Execution-path store unavailable — confirm REQ criterion vs IMPL+composition-only proof (refine default: composition fault + IMPL FAILURE_MODES; LEAP if RED exposes gap)"
+    success_criteria:
+      - "integrated pre_implementation gate for W4 refine batch"
+      - "Parent CITDP W3 LEAP documents W4 entry met"
+      - "pilot/validation-stressors.md holdout scaffold (W4-only per W1 sponsor)"
+      - "pilot/w4-test-strategy.md matrix with stressor_id | test_layer | fault_pattern | tied_refs | proof_boundary"
+      - "Test file scaffolds under mcp-server/src/feature-orchestration/*w4*scaffold*"
+    unchanged_behavior:
+      - "Feature plan governance — residuality discovers; TIED proves via tests"
+      - "W1–W2 discovery artifacts and classification ledger dispositions"
+      - "W3 persisted stack content unless LEAP triggered by failing RED in build-plan W4"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      run_id: "refine-plan-w4-pre-impl-2026-09-27"
+    close_out_gate: "deferred until W4 build-plan verification + pilot DoD items 9–10"
+    pre_implementation_gate: "gate-tracker-pre-implementation-w4.yaml + this CITDP adversarial section"
+    pseudocode_validation: "already passed at W3 build; re-run if LEAP changes IMPL during W4 build"
+    tied_validate_consistency: "required after any W4 build-plan stack mutation"
+    w4_refine_exit:
+      - "evidence/w4-refine-outcomes.md"
+      - "gate-tracker-pre-implementation-w4.yaml"
+      - "linked plan w4-refine-* todos complete; w4-build-plan-tests pending"
+      - "pilot/validation-stressors.md"
+      - "pilot/w4-test-strategy.md"
+  impact_analysis:
+    architecture:
+      - "ARCH-FEAT_IDEMPOTENT_CREATION"
+      - "ARCH-FEAT_TASK_EXECUTION_STATE"
+    behavior_change: true
+    documentation:
+      - "docs/tied-residuality-analysis-plan.md §4 W4 (reference)"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/validation-stressors.md"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/w4-test-strategy.md"
+    implementation_decisions:
+      - "IMPL-FEAT_IDEMPOTENT_CREATE"
+      - "IMPL-FEAT_TASK_EXECUTION_STATE"
+    pilot_scope_tokens:
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+    processes:
+      - "PROC-LEAP"
+      - "PROC-TIED_DEV_CYCLE"
+      - "REQ-MODULE_VALIDATION"
+    residuality_facet_refs:
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w3-exit-w4-handoff.md"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+    tests:
+      - "mcp-server/src/feature-orchestration/execution-state.ts"
+      - "mcp-server/src/feature-orchestration/store.ts"
+      - "mcp-server/src/feature-orchestration/w4-residuality-pilot.composition.test.ts"
+      - "mcp-server/src/feature-orchestration/w4-residuality-pilot.unit.test.ts"
+  leap_feedback:
+    record_status: "w4_build_tests_green"
+    tied_stack_updates_required: "none — code aligned to W3 pseudo-code; no REQ/ARCH/IMPL YAML mutation"
+  record_identity:
+    author: "AI Agent (refine-plan W4)"
+    change_request_id: "PLAN-TIED-RESIDUALITY-ANALYSIS"
+    citdp_id: "CITDP-RESIDUALITY-PILOT-W4-TESTS"
+    date: "2026-09-27"
+    parent_leap_citdp: "CITDP-RESIDUALITY-PILOT-W3-LEAP"
+    parent_plan_citdp: "CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS"
+    plan_reference: "docs/tied-residuality-analysis-plan.md §4 W4"
+    record_status: "verification_pending_close_out"
+    title: "Residuality pilot W4 — executable test strategy and composition faults"
+    wave_scope: "W4"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "stateful-reliability"
+      counterexamples:
+        - "Composition fault tests that invoke UI or claim race-freedom beyond binding exercise"
+        - "Holdout validation stressors reused as design stressors without overlap disclosure"
+        - "Skipping unit module validation before composition for APPEND_EVIDENCE / HANDLE_LOCK_TTL"
+        - "Worksheet or incidence matrix cited as runtime proof without RED/composition evidence"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Refine-plan writes test scaffolds with explicit W4-SCAFFOLD markers and no GREEN production changes"
+        - "S-T03 split documented before stack elevation"
+        - "w4-test-strategy.md maps each row to proof_boundary and test_layer"
+      eligibility_triggers_matched:
+        - "behavior-changing tests on pilot REQs"
+        - "data-integrity-migration"
+        - "persistence / stateful-reliability"
+      evidence_references:
+        - "tied/docs/composition-coverage.md"
+        - "tied/vocab/fidelity-research.md"
+        - "tied/vocab/residuality.md"
+        - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w3-exit-w4-handoff.md"
+        - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/w4-test-strategy.md"
+      falsification_questions:
+        - "Can a discovery finding row become PASS without a named test or composition fault?"
+        - "Does refine-plan W4 implement production GREEN to satisfy scaffolds?"
+      gate_policy: "advisory"
+      inquiry_request_token: "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      inquiry_run_id: "refine-plan-w4-pre-impl-2026-09-27"
+      prior_depth_tier: "integrated"
+      prior_inquiry_run_id: "refine-plan-w3-pre-impl-2026-09-27"
+      profile_depth: "integrated"
+      rationale: "W4 introduces executable proof obligations on elevated pilot stack — integrated depth mandatory; advisory policy until strict eligibility demonstrated."
+      research_profile: "integrated-agent"
+      verification_inquiry_run_id: "build-plan-w2-classification-verification-2026-09-27"
+    residuality_analysis:
+      status: "w4_refine_test_strategy"
+      test_strategy_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/w4-test-strategy.md"
+      validation_stressor_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/validation-stressors.md"
+      w3_handoff: "evidence/w3-exit-w4-handoff.md"
+    risks:
+      - description: "Existing tests pass while new W3 blocks untested — false confidence"
+        id: "RISK-RES-W4-003"
+        likelihood: "High"
+        mitigation: "Dedicated w4 unit scaffold file; build-plan must RED before GREEN on new blocks"
+      - description: "S-T03 execution store mapping ambiguous — wrong layer tested"
+        id: "RISK-RES-W4-001"
+        likelihood: "Medium"
+        mitigation: "SD-W4-S-T03-EXEC; split composition faults; LEAP only on confirmed RED gap"
+      - description: "Unit/composition scope creep includes P1 deferred stressors"
+        id: "RISK-RES-W4-002"
+        likelihood: "Medium"
+        mitigation: "Matrix tags P0 facet vs finding-only vs holdout; P1 explicit out-of-batch"
+  test_strategy:
+    dev_cycle_order:
+      - "unit RED — P0 IMPL blocks and finding confirmation paths"
+      - "unit GREEN — production changes only in build-plan"
+      - "composition RED — CONTROLLED_COMPOSITION_FAULT on store/queue/worker/idempotency seams"
+      - "composition GREEN — wiring and fault injectors"
+      - "holdout — validation-stressors.md scenarios after primary matrix GREEN (pilot DoD item 9)"
+    summary: "Refine-plan W4 documents matrix and scaffolds only. build-plan W4 executes PROC-TIED_DEV_CYCLE\non mcp-server/src/feature-orchestration/ with module validation between unit and composition layers.\n"
+    w4_build_deferred:
+      - "Merge scaffolds into executable RED tests"
+      - "quality_evidence_collect when batch closes"
+      - "verification adversarial inquiry run_id for W4 build"
+    w4_refine_verification:
+      - "evidence/w4-refine-outcomes.md"
+      - "pilot/validation-stressors.md"
+      - "pilot/w4-test-strategy.md"
+      - "pre_implementation gate with gate-tracker-pre-implementation-w4.yaml"

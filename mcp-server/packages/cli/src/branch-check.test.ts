@@ -50,10 +50,11 @@ describe("branch hygiene [REQ-TIED_DAE_INCORPORATION]", () => {
     assert.equal(result.ok, false);
   });
 
-  it("skips when .tied-yaml.yaml sets dae.branch_check false", () => {
+  it("skips when tied-project/config.yaml sets dae.branch_check false", () => {
+    fs.mkdirSync(path.join(tempDir, "tied-project"), { recursive: true });
     fs.writeFileSync(
-      path.join(tempDir, ".tied-yaml.yaml"),
-      "scalar_style: unwrapped\ndae:\n  branch_check: false\n",
+      path.join(tempDir, "tied-project/config.yaml"),
+      "schema: tied-project-config.v1\nyaml:\n  scalar_style: unwrapped\ndae:\n  branch_check: false\n",
     );
     const result = runBranchCheck({
       projectRoot: tempDir,

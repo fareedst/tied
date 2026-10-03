@@ -5,6 +5,7 @@
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "../working-root.js";
 
 import type { EnvelopeArtifact, EnvelopeGap, GatePhase } from "./types.js";
 
@@ -229,7 +230,7 @@ async function readGateReceiptSummaries(
   projectRoot: string,
   requestToken: string,
 ): Promise<GateReceiptSummary[]> {
-  const gatesDir = path.join(projectRoot, "working", requestToken, "gates");
+  const gatesDir = resolveWorkingPath(projectRoot, requestToken, "gates");
   let names: string[] = [];
   try {
     names = (await fs.readdir(gatesDir)).filter((name) => name.endsWith(".json"));
@@ -297,8 +298,8 @@ export async function detectThinLedgerGaps(
   if (completed.length === 0) return [];
 
   const ledgerCandidates = [
-    path.join(projectRoot, "working", requestToken, "gates", "ledger.jsonl"),
-    path.join(projectRoot, "working", requestToken, "adherence", "events.jsonl"),
+    resolveWorkingPath(projectRoot, requestToken, "gates", "ledger.jsonl"),
+    resolveWorkingPath(projectRoot, requestToken, "adherence", "events.jsonl"),
   ];
   let ledgerContents: string | null = null;
   for (const candidate of ledgerCandidates) {

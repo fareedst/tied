@@ -9,13 +9,20 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 import { runGrammarV2DefaultAudit, REPO_ROOT } from "./audit-grammar-v2-default.mjs";
+import { readInstallConfig } from "../../tools/bootstrap/lib/layers/install-config.mjs";
+import { resolveTiedLayout } from "../../tools/bootstrap/lib/layout.mjs";
+import { runTwoFolderLayoutAudit } from "./tied-two-folder-audit.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const SCHEMA_VERSION = "tied-new-client-audit.v1";
 export const PROOF_BOUNDARY =
   "onboarding-adherent bootstrap only; not fleet-migrated-client without G3 receipts";
-export const CLIENT_TEMPLATE_REL = path.join("templates", "impl-essence-pseudocode-template.md");
+export const CLIENT_TEMPLATE_REL = path.join(
+  "tied-bundle",
+  "templates",
+  "impl-essence-pseudocode-template.md",
+);
 export const DEFAULT_AUDIT_COMMAND = "node scripts/run-tied-new-client-audit.mjs";
 
 /**
@@ -26,13 +33,20 @@ export function resolveClientRoot(clientRoot) {
   if (!fs.existsSync(resolved)) {
     throw new Error(`CLIENT_ROOT_INVALID: directory not found: ${resolved}`);
   }
-  const tiedDir = path.join(resolved, "tied");
+  const layout = resolveTiedLayout(resolved);
+  const tiedDir = layout.tiedDir;
   if (!fs.existsSync(tiedDir)) {
-    throw new Error(`CLIENT_ROOT_INVALID: missing tied/ under ${resolved}`);
+    throw new Error(`CLIENT_ROOT_INVALID: missing project TIED dir under ${resolved}`);
   }
-  const templatePath = path.join(resolved, CLIENT_TEMPLATE_REL);
-  if (!fs.existsSync(templatePath)) {
-    throw new Error(`CLIENT_ROOT_INVALID: missing ${CLIENT_TEMPLATE_REL}`);
+  const bundleTemplate = path.join(
+    layout.templatesDir,
+    "impl-essence-pseudocode-template.md",
+  );
+  const legacyTemplate = path.join(resolved, CLIENT_TEMPLATE_REL);
+  if (!fs.existsSync(bundleTemplate) && !fs.existsSync(legacyTemplate)) {
+    throw new Error(
+      `CLIENT_ROOT_INVALID: missing sidecar template (expected ${path.relative(resolved, bundleTemplate)} or ${CLIENT_TEMPLATE_REL})`,
+    );
   }
   return resolved;
 }
@@ -60,16 +74,19 @@ export function buildOnboardingAuditReport(input) {
   }
 
   const grammarOk = input.grammarAudit?.ok === true;
+  const layoutOk = input.twoFolderLayout?.ok !== false;
   return {
     schema_version: SCHEMA_VERSION,
     generated_at: generatedAt,
     client_root: input.clientRoot,
-    ok: grammarOk && consistencyOk,
+    ok: grammarOk && consistencyOk && layoutOk,
     gate_stage: "G4",
     with_consistency: withConsistency,
+    install_profile: input.installProfile ?? "unknown",
     proof_boundary: PROOF_BOUNDARY,
     grammar_audit: input.grammarAudit,
     consistency,
+    two_folder_layout: input.twoFolderLayout ?? { skipped: true },
     audit_command: input.auditCommand ?? DEFAULT_AUDIT_COMMAND,
   };
 }
@@ -87,12 +104,30 @@ export function writeOnboardingAuditReport(reportPath, report) {
  * @param {string} clientRoot
  * @param {{ tiedCliPath?: string; repoRoot?: string }} [options]
  */
+/**
+ * @param {string} clientRoot
+ * @returns {"linked"|"full"|"legacy"|"unknown"}
+ */
+export function resolveInstallProfile(clientRoot) {
+  const manifest = readInstallConfig(clientRoot);
+  if (!manifest) return "legacy";
+  const mode = manifest.mode;
+  if (mode === "linked" || mode === "full") return mode;
+  return "unknown";
+}
+
+export function resolveClientTiedCli(clientRoot, repoRoot = REPO_ROOT) {
+  const clientCli = path.join(clientRoot, ".cursor/skills/tied-yaml/scripts/tied-cli.sh");
+  if (fs.existsSync(clientCli)) {
+    return clientCli;
+  }
+  return path.join(repoRoot, ".cursor/skills/tied-yaml/scripts/tied-cli.sh");
+}
+
 export function runTiedValidateConsistency(clientRoot, options = {}) {
   const repoRoot = options.repoRoot ?? REPO_ROOT;
-  const tiedCli =
-    options.tiedCliPath ??
-    path.join(repoRoot, ".cursor/skills/tied-yaml/scripts/tied-cli.sh");
-  const tiedBase = path.join(path.resolve(clientRoot), "tied");
+  const tiedCli = options.tiedCliPath ?? resolveClientTiedCli(clientRoot, repoRoot);
+  const tiedBase = resolveTiedLayout(path.resolve(clientRoot)).tiedDir;
   if (!fs.existsSync(tiedCli)) {
     return { ok: false, detail: `CONSISTENCY_TOOL_UNAVAILABLE: ${tiedCli}` };
   }
@@ -143,6 +178,10 @@ export function runTiedNewClientAudit(options) {
       runTiedValidateConsistency(clientRoot, { repoRoot: options.repoRoot });
   }
 
+  const installProfile = resolveInstallProfile(clientRoot);
+  const twoFolderLayout =
+    options.runTwoFolderLayout?.(clientRoot) ?? runTwoFolderLayoutAudit(clientRoot);
+
   const report = buildOnboardingAuditReport({
     clientRoot,
     grammarAudit,
@@ -150,6 +189,8 @@ export function runTiedNewClientAudit(options) {
     consistencyResult,
     generatedAt: options.generatedAt,
     auditCommand: options.auditCommand,
+    installProfile,
+    twoFolderLayout,
   });
 
   if (options.reportPath) {

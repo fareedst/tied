@@ -1,0 +1,18 @@
+ledger_disposition: "candidate_requirement"
+proposed_arch_deltas:
+  ARCH-FEAT_TASK_EXECUTION_STATE:
+    add_constraints:
+      - "Max-retry or poison-message policy is explicit and configurable within documented bounds."
+proposed_impl_deltas:
+  IMPL-FEAT_TASK_EXECUTION_STATE:
+    contract_hints:
+      EFFECTS: "Dependents not unlocked on terminal failure."
+      TERMINATION: "Terminal failure after max retries with deterministic reason."
+proposed_req_deltas:
+  REQ-FEAT_TASK_EXECUTION_RECOVERY:
+    add_satisfaction_criteria:
+      - criterion: "After bounded retries are exhausted, task reaches a terminal failed state with stable reason code; dependents remain locked; evidence history is inspectable for operator action."
+residuality_facet:
+  residue_summary: "Terminal failure reason stable; dependents locked; operator can inspect evidence"
+  source_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+stressor_id: "S-T14"

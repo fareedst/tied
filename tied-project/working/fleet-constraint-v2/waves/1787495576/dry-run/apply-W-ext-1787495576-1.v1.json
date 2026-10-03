@@ -1,0 +1,30 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T21:17:53.053Z",
+  "client_id": "1787495576",
+  "wave_scope": "W-ext-1787495576-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_CLI-pseudocode.md",
+      "impl_token": "IMPL-NETIF_CLI",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_DISCOVERY-pseudocode.md",
+      "impl_token": "IMPL-NETIF_DISCOVERY",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_FORMAT-pseudocode.md",
+      "impl_token": "IMPL-NETIF_FORMAT",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "6ea724e1c5943051dfdc060d68312b805be66db596a8d41826010a27363ca318",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787495576/dry-run/snapshots/W-ext-1787495576-1"
+}

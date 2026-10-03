@@ -1,0 +1,384 @@
+excluded_rows: []
+generated_at: "2026-09-10T18:00:00.000Z"
+generator: "request_evidence_envelope_batch_collect"
+generator_version: "1.0.0"
+include_absolute_paths: false
+privacy_tier: "shareable_hashed"
+rows:
+  - artifact_coverage:
+      by_kind:
+        adversarial_inquiry_gate:
+          missing: 0
+          not_applicable: 0
+          present: 4
+          waived: 0
+        adversarial_inquiry_ledger:
+          missing: 0
+          not_applicable: 0
+          present: 4
+          waived: 0
+        adversarial_inquiry_obligation:
+          missing: 0
+          not_applicable: 0
+          present: 4
+          waived: 0
+        adversarial_inquiry_provenance:
+          missing: 0
+          not_applicable: 0
+          present: 4
+          waived: 0
+        checklist_tracker:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        citdp_record:
+          missing: 0
+          not_applicable: 0
+          present: 2
+          waived: 0
+        evidence_chain_profile:
+          missing: 1
+          not_applicable: 0
+          present: 0
+          waived: 0
+        unknown:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+      denominator_kinds: 8
+    client_alias: "1787603099"
+    envelope_artifact: "working/REQ-LISTENING_PORT_REPORT/evidence/request-evidence-envelope.v1.json"
+    envelope_require_mode: "require_envelope"
+    envelope_revision: 1
+    envelope_source: "envelope_file"
+    gap_codes:
+      - "artifact_path_root_projection_rejected"
+      - "evidence_stale"
+      - "expected_artifact_missing"
+      - "finding_unresolved"
+      - "legacy_json_in_json_wrapper"
+      - "provenance_incomplete"
+      - "thin_ledger"
+      - "tracker_dual_write"
+      - "tracker_sparse"
+    request_token: "REQ-LISTENING_PORT_REPORT"
+    status: "included"
+  - artifact_coverage:
+      by_kind:
+        checklist_tracker:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        unspecified:
+          missing: 0
+          not_applicable: 0
+          present: 0
+          waived: 1
+      denominator_kinds: 2
+    client_alias: "1788547701"
+    envelope_artifact: "working/REQ-BT_BATTERY_DISPLAY/evidence/request-evidence-envelope.v1.json"
+    envelope_require_mode: "require_envelope"
+    envelope_revision: 1
+    envelope_source: "envelope_file"
+    gap_codes: []
+    request_token: "REQ-BT_BATTERY_DISPLAY"
+    status: "included"
+  - artifact_coverage:
+      by_kind:
+        adversarial_inquiry_gate:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_ledger:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_obligation:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_provenance:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        checklist_gate_receipt:
+          missing: 0
+          not_applicable: 0
+          present: 4
+          waived: 0
+        checklist_tracker:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        citdp_record:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        request_evidence_envelope:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+      denominator_kinds: 8
+    client_alias: "1789069630"
+    envelope_artifact: "working/REQ-MACOS_PERM_REPORT/evidence/request-evidence-envelope.v1.json"
+    envelope_require_mode: "require_envelope"
+    envelope_revision: 1
+    envelope_source: "envelope_file"
+    gap_codes:
+      - "artifact_path_root_projection_rejected"
+      - "finding_unresolved"
+      - "provenance_incomplete"
+    request_token: "REQ-MACOS_PERM_REPORT"
+    status: "included"
+  - artifact_coverage:
+      by_kind:
+        checklist_gate_receipt:
+          missing: 0
+          not_applicable: 0
+          present: 2
+          waived: 0
+        checklist_tracker:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        citdp_record:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        pseudocode_analysis_report:
+          missing: 1
+          not_applicable: 0
+          present: 0
+          waived: 0
+        request_evidence_envelope:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        unknown:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        unspecified:
+          missing: 0
+          not_applicable: 0
+          present: 0
+          waived: 1
+      denominator_kinds: 7
+    client_alias: "1789087315"
+    envelope_artifact: "working/REQ-DUPCOMPARE/evidence/request-evidence-envelope.v1.json"
+    envelope_require_mode: "require_envelope"
+    envelope_revision: 1
+    envelope_source: "envelope_file"
+    gap_codes:
+      - "evidence_stale"
+      - "expected_artifact_missing"
+    request_token: "REQ-DUPCOMPARE"
+    status: "included"
+  - artifact_coverage:
+      by_kind:
+        adversarial_inquiry_gate:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_ledger:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_obligation:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_provenance:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        checklist_gate_receipt:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        checklist_tracker:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        citdp_record:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        evidence_chain_profile:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        request_evidence_envelope:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        verification_evidence_manifest:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+      denominator_kinds: 10
+    client_alias: "1789136889"
+    envelope_artifact: "working/REQ-TCP_CONNECT_CHECKER/evidence/request-evidence-envelope.v1.json"
+    envelope_require_mode: "require_envelope"
+    envelope_revision: 1
+    envelope_source: "envelope_file"
+    gap_codes:
+      - "evidence_stale"
+    request_token: "REQ-TCP_CONNECT_CHECKER"
+    status: "included"
+  - artifact_coverage:
+      by_kind:
+        adversarial_inquiry_gate:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_ledger:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_obligation:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_provenance:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        checklist_tracker:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        citdp_record:
+          missing: 0
+          not_applicable: 0
+          present: 2
+          waived: 0
+        evidence_chain_profile:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        request_evidence_envelope:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        verification_evidence_manifest:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+      denominator_kinds: 9
+    client_alias: "1789177584"
+    envelope_artifact: "working/REQ-URLFETCH_CLI/evidence/request-evidence-envelope.v1.json"
+    envelope_require_mode: "require_envelope"
+    envelope_revision: 1
+    envelope_source: "envelope_file"
+    gap_codes:
+      - "finding_unresolved"
+    request_token: "REQ-URLFETCH_CLI"
+    status: "included"
+  - artifact_coverage:
+      by_kind:
+        adversarial_inquiry_gate:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_ledger:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_obligation:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        adversarial_inquiry_provenance:
+          missing: 0
+          not_applicable: 0
+          present: 3
+          waived: 0
+        checklist_gate_receipt:
+          missing: 0
+          not_applicable: 0
+          present: 4
+          waived: 0
+        checklist_tracker:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        citdp_record:
+          missing: 0
+          not_applicable: 0
+          present: 2
+          waived: 0
+        evidence_chain_profile:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        pseudocode_analysis_report:
+          missing: 0
+          not_applicable: 0
+          present: 2
+          waived: 0
+        request_evidence_envelope:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        unknown:
+          missing: 0
+          not_applicable: 0
+          present: 1
+          waived: 0
+        verification_evidence_manifest:
+          missing: 1
+          not_applicable: 0
+          present: 1
+          waived: 0
+      denominator_kinds: 12
+    client_alias: "stdd"
+    envelope_artifact: "working/REQ-REQUEST_EVIDENCE_ENVELOPE/evidence/request-evidence-envelope.v1.json"
+    envelope_require_mode: "require_envelope"
+    envelope_revision: 2
+    envelope_source: "envelope_file"
+    gap_codes:
+      - "expected_artifact_missing"
+      - "finding_unresolved"
+    request_token: "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    status: "included"
+schema_version: "envelope-gap-report.v1"
+validation_errors: []

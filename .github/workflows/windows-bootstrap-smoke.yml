@@ -8,14 +8,20 @@ on:
     paths:
       - "tools/bootstrap/**"
       - "scripts/windows-bootstrap-smoke.cmd"
-      - "copy_files.cmd"
+      - "scripts/build-commands.sh"
+      - "tied-install.*"
+      - "*.ps1"
+      - "scripts/*.ps1"
       - "mcp-server/**"
       - ".github/workflows/windows-bootstrap-smoke.yml"
   pull_request:
     paths:
       - "tools/bootstrap/**"
       - "scripts/windows-bootstrap-smoke.cmd"
-      - "copy_files.cmd"
+      - "scripts/build-commands.sh"
+      - "tied-install.*"
+      - "*.ps1"
+      - "scripts/*.ps1"
       - "mcp-server/**"
       - ".github/workflows/windows-bootstrap-smoke.yml"
   workflow_dispatch:
@@ -51,3 +57,13 @@ jobs:
       - name: Run windows-bootstrap-smoke.cmd
         shell: cmd
         run: scripts\windows-bootstrap-smoke.cmd
+
+      - name: tied-install.ps1 linked (PowerShell 7)
+        shell: pwsh
+        run: |
+          $linked = Join-Path $env:RUNNER_TEMP "tied-ps1-linked"
+          New-Item -ItemType Directory -Force -Path $linked | Out-Null
+          ./tied-install.ps1 --mode linked $linked
+          if (-not (Test-Path (Join-Path $linked "tied-bundle\install.json"))) {
+            throw "tied-bundle\install.json missing after tied-install.ps1"
+          }

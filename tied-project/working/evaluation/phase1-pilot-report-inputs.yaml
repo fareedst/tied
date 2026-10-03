@@ -1,0 +1,16 @@
+include_absolute_paths: false
+inputs:
+  - client_alias: "indescript"
+    notes: "Swift client HEAD 76a30600; 115 pseudocode sidecars"
+    profile_path: "profiles/indescript.v1.json"
+  - client_alias: "nsync"
+    notes: "Go client HEAD 07aeca0; tied/ untracked in git; invoke_structural_validators true"
+    profile_path: "profiles/nsync.v1.json"
+  - client_alias: "panorama"
+    notes: "TypeScript client HEAD 595d323; 55 pseudocode sidecars"
+    profile_path: "profiles/panorama.v1.json"
+  - client_alias: "treegrep"
+    notes: "Ruby client HEAD 47f1530; 56 pseudocode sidecars"
+    profile_path: "profiles/treegrep.v1.json"
+mode: "strict"
+schema_version: "evidence-chain-report-inputs.v1"

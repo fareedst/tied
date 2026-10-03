@@ -1,0 +1,67 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T21:18:01.635Z",
+  "client_id": "1787507684",
+  "wave_scope": "W-ext-1787507684-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_CLI-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_CLI",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "INVOKE_COLLECTOR(ctx, opts)",
+          "start_line": 33
+        },
+        {
+          "procedure_name": "RENDER_OUTPUT(forest, opts, stdout)",
+          "start_line": 49
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_COLLECT-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_COLLECT",
+      "action": "none",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": []
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_RENDER-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_RENDER",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "RENDER_TEXT(forest, w)",
+          "start_line": 18
+        },
+        {
+          "procedure_name": "RENDER_JSON(forest, w, pretty)",
+          "start_line": 28
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_TREE-pseudocode.md",
+      "impl_token": "IMPL-ROOTJOBS_TREE",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "BUILD_INDEX(processes)",
+          "start_line": 19
+        },
+        {
+          "procedure_name": "SORT_FOREST(forest)",
+          "start_line": 65
+        }
+      ]
+    }
+  ],
+  "dry_run_content_hash": "48fe120f98b03384bb108cc91ea7b219396c2db9290ae610916fa1a2b9cba189",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787507684/dry-run/snapshots-constraint-ready/W-ext-1787507684-1"
+}

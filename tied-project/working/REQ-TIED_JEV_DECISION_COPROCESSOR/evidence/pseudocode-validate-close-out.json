@@ -1,0 +1,51 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": false,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [],
+  "dependencies": [],
+  "coverage": [],
+  "diagnostics": [
+    {
+      "severity": "error",
+      "code": "HOST_SYNTAX_LEAK",
+      "message": "Host syntax leakage (function_kw) in pseudo-code; use DATA example or // leakage-ok: comment.",
+      "line": 27
+    },
+    {
+      "severity": "error",
+      "code": "HOST_SYNTAX_LEAK",
+      "message": "Host syntax leakage (function_kw) in pseudo-code; use DATA example or // leakage-ok: comment.",
+      "line": 43
+    },
+    {
+      "severity": "error",
+      "code": "HOST_SYNTAX_LEAK",
+      "message": "Host syntax leakage (function_kw) in pseudo-code; use DATA example or // leakage-ok: comment.",
+      "line": 49
+    }
+  ],
+  "leakage": [
+    {
+      "severity": "error",
+      "code": "HOST_SYNTAX_LEAK",
+      "message": "Host syntax leakage (function_kw) in pseudo-code; use DATA example or // leakage-ok: comment.",
+      "line": 27,
+      "pattern": "function_kw"
+    },
+    {
+      "severity": "error",
+      "code": "HOST_SYNTAX_LEAK",
+      "message": "Host syntax leakage (function_kw) in pseudo-code; use DATA example or // leakage-ok: comment.",
+      "line": 43,
+      "pattern": "function_kw"
+    },
+    {
+      "severity": "error",
+      "code": "HOST_SYNTAX_LEAK",
+      "message": "Host syntax leakage (function_kw) in pseudo-code; use DATA example or // leakage-ok: comment.",
+      "line": 49,
+      "pattern": "function_kw"
+    }
+  ]
+}

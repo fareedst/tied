@@ -1,0 +1,22 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T17:49:03.751Z",
+  "client_id": "1789087315",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1789087315",
+  "sidecar_count": 1,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 1,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "ddd568a9bc2707b1ba97d6dfce8f1ff1458f5a40d0a9ee39ce4b1be869fd6b4f",
+  "rows": [
+    {
+      "file": "IMPL-DUPCOMPARE-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    }
+  ]
+}

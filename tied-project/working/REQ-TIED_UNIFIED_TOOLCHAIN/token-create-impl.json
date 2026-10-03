@@ -1,0 +1,5 @@
+{
+  "token": "IMPL-TIED_UNIFIED_TOOLCHAIN",
+  "index_record": "{\"name\":\"Unified TIED toolchain implementation plan\",\"status\":\"Proposed\",\"detail_file\":\"implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml\",\"description\":\"Workspace layout, CLI dispatch, MCP stdio entry, migration hooks, and deprecation switches for Go/Ruby tools.\",\"related_requirements\":[\"REQ-TIED_UNIFIED_TOOLCHAIN\"],\"related_architecture\":[\"ARCH-TIED_UNIFIED_TOOLCHAIN\"],\"essence_pseudocode_path\":\"implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN-pseudocode.md\"}",
+  "detail_record": "{\"IMPL-TIED_UNIFIED_TOOLCHAIN\":{\"name\":\"Unified TIED toolchain implementation plan\",\"status\":\"Proposed\",\"implementation_approach\":{\"summary\":\"Scaffold workspace, unify bootstrap/yaml CLI first, strangler-port agentstream with golden tests, retire legacy after parity.\",\"details\":[\"Preserve mcp-server/dist/index.js as MCP stdio entry until @tied/cli mcp subcommand proven equivalent\",\"tied-cli.sh resolves TIED_MCP_BIN to workspace build output\"]}}}"
+}

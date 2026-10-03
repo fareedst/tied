@@ -1,0 +1,78 @@
+{
+  "schema_version": "seq-8-orchestrator-closeout-report.v1",
+  "generated_at": "2026-09-13T16:08:00.000Z",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "run_id": "fleet-migration-phase4-closeout-20260913",
+  "milestone": "M3_orchestrator_req_closed",
+  "status": "complete",
+  "closeout_plan_seq": "8",
+  "git_context": "diff-or-stage (plan-close-out; no git add/commit)",
+  "steps": {
+    "O3_5a_verification_gate": {
+      "ok": true,
+      "allowed": true,
+      "artifact": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/gates/verification-2026-09-13T16-06-27-240Z.json",
+      "advisory_diagnostics": ["finding_unresolved", "warn_not_success"]
+    },
+    "O3_5b_close_out_gate": {
+      "ok": true,
+      "allowed": true,
+      "artifact": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/gates/close_out-2026-09-13T16-06-27-786Z.json",
+      "advisory_diagnostics": ["finding_unresolved", "warn_not_success"]
+    },
+    "O3_7_tied_verify": {
+      "ok": true,
+      "requirements_set_implemented": ["REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"],
+      "implementation_set_active": ["IMPL-PSEUDOCODE_MIGRATION_TOOLING"],
+      "gate_receipt_ref": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/gates/verification-2026-09-13T16-06-27-240Z.json"
+    },
+    "O3_9_run_close_out_gates": {
+      "ok": true,
+      "merged_decision": { "allowed": true, "gate_allowed": true, "envelope_ok": true, "blocking": false },
+      "envelope": {
+        "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/request-evidence-envelope.v1.json",
+        "blocking_gap_count": 0,
+        "advisory_gap_count": 6
+      },
+      "command": "node tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking --sync-dispositions --reconcile"
+    },
+    "O3_8_tied_validate_consistency": {
+      "ok": true
+    },
+    "psa_hydration_fix": {
+      "note": "Gate hydration expects IMPL-*.v1.json; copied closeout-g3 reports to canonical v1 filenames under pseudocode-analysis/",
+      "paths": [
+        "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/pseudocode-analysis/IMPL-PSEUDOCODE_MIGRATION_TOOLING.v1.json",
+        "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/pseudocode-analysis/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.v1.json"
+      ]
+    },
+    "citdp_unwrap": {
+      "note": "tied_checklist_gate_validate requires unwrapped CITDP body (not top-level CITDP-REQ-* key)"
+    }
+  },
+  "completion_signals": {
+    "machine_close_out": {
+      "pass": true,
+      "verification_gate_allowed": true,
+      "close_out_gate_allowed": true,
+      "envelope_blocking_gaps": 0,
+      "envelope_path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/request-evidence-envelope.v1.json"
+    },
+    "process_contract": {
+      "pass": true,
+      "dual_write": "run-close-out-gates --sync-dispositions",
+      "manifest": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/verification-evidence-manifest.v1.json",
+      "psa_layer_c": "closeout-g3 + canonical v1 hydration copies"
+    },
+    "adherence_ledger": {
+      "pass": true,
+      "reconcile": "tied_adherence_reconcile_run via --reconcile on unified runner"
+    }
+  },
+  "remaining_risks": [
+    "Advisory finding_unresolved / warn_not_success on integrated inquiry (non-blocking under gate_policy advisory)",
+    "M4 exit review and CITDP P4-CLO-C module deferred to seq 9",
+    "Phase 5 refine still blocked until M4"
+  ],
+  "next_recommended": "/build-plan seq 9 — WS-5 P4-H + M4 closeout"
+}

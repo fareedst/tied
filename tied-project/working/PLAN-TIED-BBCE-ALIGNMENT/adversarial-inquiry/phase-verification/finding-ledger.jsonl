@@ -1,0 +1,3 @@
+{"timestamp":"2026-09-27T16:00:00.000Z","finding_id":"w3-b-advisory","severity":"info","message":"Mechanism B review_status pending_human; no blocking hook registered.","proof_boundary":"human_decision","scope":"BBCE-B"}
+{"timestamp":"2026-09-27T16:00:00.000Z","finding_id":"w3-c-distinct","severity":"info","message":"Boundary report schema_version bbce-boundary-violation.v1; traceability_gaps_excluded true.","proof_boundary":"human_decision","scope":"BBCE-C"}
+{"timestamp":"2026-09-27T16:30:00.000Z","finding_id":"w4-d-advisory-flag","severity":"info","message":"bbce_advisory_enforced opt-in; sub-bbce-advisory-verification-pass merged; blocking false at advisory policy.","proof_boundary":"human_decision","scope":"BBCE-D"}

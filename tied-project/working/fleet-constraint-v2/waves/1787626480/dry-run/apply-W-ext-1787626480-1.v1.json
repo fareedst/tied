@@ -1,0 +1,48 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T21:46:50.193Z",
+  "client_id": "1787626480",
+  "wave_scope": "W-ext-1787626480-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-CLI-CMD-pseudocode.md",
+      "impl_token": "IMPL-ARCHIVEINFO-CLI-CMD",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-CONFIG-pseudocode.md",
+      "impl_token": "IMPL-ARCHIVEINFO-CONFIG",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-FORMAT-DETECT-pseudocode.md",
+      "impl_token": "IMPL-ARCHIVEINFO-FORMAT-DETECT",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-FORMAT-OUT-pseudocode.md",
+      "impl_token": "IMPL-ARCHIVEINFO-FORMAT-OUT",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-GLOB-pseudocode.md",
+      "impl_token": "IMPL-ARCHIVEINFO-GLOB",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787626480/tied/implementation-decisions/IMPL-ARCHIVEINFO-READ-pseudocode.md",
+      "impl_token": "IMPL-ARCHIVEINFO-READ",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    }
+  ],
+  "dry_run_content_hash": "45eaf53a9209e3f911680b15527c10ee0ad3fa9baf53662421f1b61df3160a73",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787626480/dry-run/snapshots/W-ext-1787626480-1"
+}

@@ -1,0 +1,14 @@
+
+mcp-server/packages/agentstream/src/jev-harness-preflight.test.ts:
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > is disabled by default [1.57ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > reads enablement from .tied-yaml.yaml jev.agentstream_harness [1.24ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > warns fail-closed when enabled without JEV_API_KEY [0.23ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > live preflight runs mock Jev integration smoke via injected deps [0.16ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: sync preflight hard-stops when harness on and dist missing [0.46ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: live preflight hard-stops when harness on and dist missing [0.66ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: injected deps bypass missing-dist hard stop [0.08ms]
+(pass) jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR] > G2/2C: live-executor belt aborts when harness enabled and gate null [0.10ms]
+
+ 8 pass
+ 0 fail
+Ran 8 tests across 1 file. [31.00ms]

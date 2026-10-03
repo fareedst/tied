@@ -1,0 +1,7 @@
+dae:
+  crap_threshold: 30
+jev:
+  plan_skills: true
+schema: "tied-project-config.v1"
+yaml:
+  scalar_style: "wrapped"

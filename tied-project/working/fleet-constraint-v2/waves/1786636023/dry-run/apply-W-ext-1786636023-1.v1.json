@@ -1,0 +1,18 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T17:40:21.080Z",
+  "client_id": "1786636023",
+  "wave_scope": "W-ext-1786636023-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786636023/tied/implementation-decisions/IMPL-PRIME_PRINTER-pseudocode.md",
+      "impl_token": "IMPL-PRIME_PRINTER",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "a4e0d484f96e4f4e7bbc59a17603c844ac5986afffc4cbf1ea118d1fc2693720",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1786636023/dry-run/snapshots/W-ext-1786636023-1"
+}

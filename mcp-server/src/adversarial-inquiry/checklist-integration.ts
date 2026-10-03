@@ -1,5 +1,6 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { resolveRequestWorkingBase, resolveWorkingPath } from "../working-root.js";
 import { createHash } from "node:crypto";
 
 import { runAdversarialInquiry, type AdversarialInquiryInput, type AdversarialInquiryResult } from "./core.js";
@@ -254,13 +255,19 @@ export function resolveArtifactPaths(input: {
     throw new Error(`INVALID_SCOPE: invalid request token ${input.requestToken}`);
   }
   const repositoryRoot = path.resolve(input.repositoryRoot);
-  const inquiryRoot = path.join(repositoryRoot, "working", requestToken, "adversarial-inquiry");
+  const inquiryRoot = resolveWorkingPath(repositoryRoot, requestToken, "adversarial-inquiry");
   const directory = path.resolve(
     input.artifactRoot
       ?? (input.phase ? path.join(inquiryRoot, `phase-${input.phase}`) : inquiryRoot),
   );
-  const workingRoot = path.join(repositoryRoot, "working");
-  if (!isWithin(workingRoot, directory) || !isWithin(inquiryRoot, directory)) {
+  const localBase = resolveRequestWorkingBase(repositoryRoot, requestToken, "local");
+  const committedBase = resolveRequestWorkingBase(repositoryRoot, requestToken, "committed");
+  const withinRequest =
+    isWithin(localBase, directory)
+    || isWithin(committedBase, directory)
+    || directory === localBase
+    || directory === committedBase;
+  if (!withinRequest || !isWithin(inquiryRoot, directory)) {
     throw new Error(`UNSAFE_ARTIFACT_PATH: ${directory}`);
   }
   return {

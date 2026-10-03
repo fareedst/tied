@@ -19,7 +19,7 @@ describe("CLASSIFY_DECISION_CONSEQUENCE [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP]", 
     assert.equal(
       classifyDecisionConsequence({
         description: "Promote templates",
-        reversibility_evidence: "copy_files.sh refresh",
+        reversibility_evidence: "tied-install.sh refresh",
       }),
       2,
     );

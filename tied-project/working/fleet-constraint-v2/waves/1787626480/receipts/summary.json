@@ -1,0 +1,16 @@
+{
+  "run_at": "2026-09-13T21:46:52.924Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1787626480-1",
+  "partition_wave_id": "W-ext-1787626480-1",
+  "gate_stage": "G3",
+  "receipt_count": 6,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1787626480/receipts/IMPL-ARCHIVEINFO-CLI-CMD.receipt.json",
+    "working/fleet-constraint-v2/waves/1787626480/receipts/IMPL-ARCHIVEINFO-CONFIG.receipt.json",
+    "working/fleet-constraint-v2/waves/1787626480/receipts/IMPL-ARCHIVEINFO-FORMAT-DETECT.receipt.json",
+    "working/fleet-constraint-v2/waves/1787626480/receipts/IMPL-ARCHIVEINFO-FORMAT-OUT.receipt.json",
+    "working/fleet-constraint-v2/waves/1787626480/receipts/IMPL-ARCHIVEINFO-GLOB.receipt.json",
+    "working/fleet-constraint-v2/waves/1787626480/receipts/IMPL-ARCHIVEINFO-READ.receipt.json"
+  ]
+}

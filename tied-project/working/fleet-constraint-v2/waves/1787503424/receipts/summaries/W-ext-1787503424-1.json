@@ -1,0 +1,11 @@
+{
+  "run_at": "2026-09-13T18:01:35.403Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1787503424-1",
+  "partition_wave_id": "W-ext-1787503424-1",
+  "gate_stage": "G3",
+  "receipt_count": 1,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1787503424/receipts/IMPL-DESKTOP_WINDOW_REPORT.receipt.json"
+  ]
+}

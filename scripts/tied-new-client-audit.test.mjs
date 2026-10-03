@@ -12,26 +12,35 @@ import {
   buildOnboardingAuditReport,
   PROOF_BOUNDARY,
   resolveClientRoot,
+  resolveInstallProfile,
   runTiedNewClientAudit,
   SCHEMA_VERSION,
   writeOnboardingAuditReport,
 } from "./lib/tied-new-client-audit.mjs";
+import { writeInstallConfig } from "../tools/bootstrap/lib/layers/install-config.mjs";
+import { writeGitignoreBlock } from "../tools/bootstrap/lib/layers/gitignore-block.mjs";
+import { runTwoFolderLayoutAudit } from "./lib/tied-two-folder-audit.mjs";
+import { execFileSync } from "node:child_process";
 
 function mkMinimalClientRoot(tmp) {
-  fs.mkdirSync(path.join(tmp, "tied"), { recursive: true });
-  fs.mkdirSync(path.join(tmp, "templates"), { recursive: true });
+  fs.mkdirSync(path.join(tmp, "tied-project"), { recursive: true });
+  fs.writeFileSync(path.join(tmp, "tied-project", "requirements.yaml"), "requirements: []\n");
+  fs.mkdirSync(path.join(tmp, "tied-bundle", "templates"), { recursive: true });
   fs.writeFileSync(
-    path.join(tmp, "templates", "impl-essence-pseudocode-template.md"),
+    path.join(tmp, "tied-bundle", "templates", "impl-essence-pseudocode-template.md"),
     "Grammar-Version: v2\n\nPROC PLACEHOLDER()\n  PRE: true\n  POST: true\n  EFFECTS: none\n",
     "utf8",
   );
+  writeGitignoreBlock(tmp);
+  execFileSync("git", ["init"], { cwd: tmp, stdio: "pipe" });
+  execFileSync("git", ["add", "-A"], { cwd: tmp, stdio: "pipe" });
   return tmp;
 }
 
 describe("tied new client audit [REQ-TIED_NEW_CLIENT_ADHERENCE]", () => {
-  it("resolveClientRoot rejects missing tied/", () => {
+  it("resolveClientRoot rejects missing tied-project/", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "nc-audit-"));
-    assert.throws(() => resolveClientRoot(tmp), /CLIENT_ROOT_INVALID.*tied/);
+    assert.throws(() => resolveClientRoot(tmp), /CLIENT_ROOT_INVALID.*project TIED dir/);
   });
 
   it("buildOnboardingAuditReport ok false when grammar audit fails", () => {
@@ -76,12 +85,34 @@ describe("tied new client audit [REQ-TIED_NEW_CLIENT_ADHERENCE]", () => {
         schema_version: "grammar-v2-default-audit.v1",
         gate_stage: "G4",
       }),
+      runTwoFolderLayout: () => ({ ok: true, checks: [] }),
     });
     assert.equal(result.ok, true);
     assert.ok(fs.existsSync(reportPath));
     const written = JSON.parse(fs.readFileSync(reportPath, "utf8"));
     assert.equal(written.schema_version, SCHEMA_VERSION);
     assert.equal(written.grammar_audit.ok, true);
+  });
+
+  it("resolveInstallProfile reads manifest mode [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
+    const tmp = mkMinimalClientRoot(fs.mkdtempSync(path.join(os.tmpdir(), "nc-audit-")));
+    assert.equal(resolveInstallProfile(tmp), "legacy");
+    writeInstallConfig(tmp, {
+      schema: "tied-install.v2",
+      store: "/x",
+      mode: "full",
+      layers: ["db"],
+      harness: "cursor",
+    });
+    assert.equal(resolveInstallProfile(tmp), "full");
+    writeInstallConfig(tmp, {
+      schema: "tied-install.v2",
+      store: "/x",
+      mode: "linked",
+      layers: ["db"],
+      harness: "cursor",
+    });
+    assert.equal(resolveInstallProfile(tmp), "linked");
   });
 
   it("writeOnboardingAuditReport creates parent directories", () => {
@@ -92,5 +123,29 @@ describe("tied new client audit [REQ-TIED_NEW_CLIENT_ADHERENCE]", () => {
       ok: true,
     });
     assert.ok(fs.existsSync(deep));
+  });
+
+  it("SC-TFL-NO-ROOT-WORKING warn-only when both working roots exist [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH]", () => {
+    const tmp = mkMinimalClientRoot(fs.mkdtempSync(path.join(os.tmpdir(), "nc-tfl-warn-")));
+    fs.mkdirSync(path.join(tmp, "tied-project", "working"), { recursive: true });
+    fs.mkdirSync(path.join(tmp, "working"), { recursive: true });
+    const layout = runTwoFolderLayoutAudit(tmp);
+    const warn = layout.checks.find((c) => c.id === "SC-TFL-NO-ROOT-WORKING");
+    assert.ok(warn);
+    assert.equal(warn.ok, true);
+    assert.match(warn.detail ?? "", /hygiene warning/);
+  });
+
+  it("SC-TFL-NO-ROOT-WORKING skipped on undivided layout", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "nc-tfl-und-"));
+    fs.mkdirSync(path.join(tmp, "working"), { recursive: true });
+    fs.mkdirSync(path.join(tmp, "tied-bundle", "templates"), { recursive: true });
+    fs.writeFileSync(
+      path.join(tmp, "tied-bundle", "templates", "impl-essence-pseudocode-template.md"),
+      "Grammar-Version: v2\n\nPROC PLACEHOLDER()\n  PRE: true\n  POST: true\n  EFFECTS: none\n",
+    );
+    const layout = runTwoFolderLayoutAudit(tmp);
+    const warn = layout.checks.find((c) => c.id === "SC-TFL-NO-ROOT-WORKING");
+    assert.equal(warn, undefined);
   });
 });

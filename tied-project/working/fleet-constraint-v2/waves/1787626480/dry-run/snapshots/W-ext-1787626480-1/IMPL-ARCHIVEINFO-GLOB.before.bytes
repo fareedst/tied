@@ -1,0 +1,15 @@
+# [IMPL-ARCHIVEINFO-GLOB] Glob expansion
+# Implements [ARCH-ARCHIVEINFO-MODULES] for [REQ-ARCHIVEINFO-GLOB]
+
+PROCEDURE Expand(cwd string, pattern string) -> []string
+  // [IMPL-ARCHIVEINFO-GLOB] [ARCH-ARCHIVEINFO-MODULES] [REQ-ARCHIVEINFO-GLOB] — doublestar expand regular files only
+  INPUT: cwd, glob pattern
+  PRE: pattern non-empty
+  POST: sorted deduplicated absolute or cwd-relative file paths
+  EFFECTS:
+    matches := doublestar.Glob(pattern, cwd)
+    KEEP only regular files (not directories)
+    dedupe paths
+    sort lexicographically
+    RETURN matches
+  FAILURE_MODES: invalid pattern → empty slice or error per library

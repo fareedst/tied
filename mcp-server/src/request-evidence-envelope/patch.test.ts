@@ -12,7 +12,12 @@ import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
 function resolveRepoRoot(): string {
   let dir = process.cwd();
   for (let i = 0; i < 6; i += 1) {
-    if (existsSync(path.join(dir, "tied", "requirements.yaml"))) return dir;
+    if (
+      existsSync(path.join(dir, "tied-project", "requirements.yaml"))
+      || existsSync(path.join(dir, "tied", "requirements.yaml"))
+    ) {
+      return dir;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
@@ -21,13 +26,13 @@ function resolveRepoRoot(): string {
 }
 
 const REPO_ROOT = resolveRepoRoot();
-const TIED_BASE_PATH = path.join(REPO_ROOT, "tied");
+const TIED_BASE_PATH = path.join(REPO_ROOT, "tied-project");
 const REQUEST_TOKEN = "REQ-ENVELOPE-PATCH-TEST";
 
 function seedWorkingRoot(tempRoot: string): string {
   const working = path.join(tempRoot, "working", REQUEST_TOKEN);
   mkdirSync(working, { recursive: true });
-  mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+  mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
   return working;
 }
 

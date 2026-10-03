@@ -13,6 +13,7 @@ import {
   runNewTiedClientPipeline,
 } from "./lib/new-tied-client-pipeline.mjs";
 import { parseBootstrapToolFlags } from "./lib/client-tool-use-bootstrap.mjs";
+import { parseInstallPassthroughFlags } from "./lib/install-options.mjs";
 
 function usage() {
   sayErr(`usage: new-tied-client.mjs [OPTIONS] [CLIENT_DIR]
@@ -34,24 +35,33 @@ Options:
   --no-agentstream-dry-run    Skip agentstream dry-run during Claude validation
   --with-live-claude        Reserved; live Claude not run in v1 factory
   --full-tools              Enable Jev + DAE starter config + BBCE analysis files
-  --with-jev                Seed jev.plan_skills: true in .tied-yaml.yaml (create or --force-tool-config)
+  --with-jev                Seed jev.plan_skills: true in tied-project/config.yaml (create or --force-tool-config)
   --with-dae                Seed dae.crap_threshold: 30 only (create or --force-tool-config)
   --with-bbce               Copy tied/analysis/ starter files into the client
   --tools jev,dae,bbce      Comma-separated tool flags (same as granular flags)
-  --force-tool-config       Merge tool keys into an existing .tied-yaml.yaml
+  --force-tool-config       Merge tool keys into an existing tied-project/config.yaml
 
 Environment: TIED_REPO_ROOT, TIED_TEST_ROOT, CURSOR_CLI_NAME (default agent),
   TIED_CURSOR_AGENT_CMD (full override; wins over CURSOR_CLI_NAME),
   TIED_BOOTSTRAP_FULL_TOOLS, TIED_BOOTSTRAP_WITH_JEV, TIED_BOOTSTRAP_WITH_DAE,
   TIED_BOOTSTRAP_WITH_BBCE, TIED_BOOTSTRAP_FORCE_TOOL_CONFIG (CLI overrides env),
-  TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1 (same as --with-consistency for Claude validation)`);
+  TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1 (same as --with-consistency for Claude validation)
+
+Install passthrough (forwarded to tied-install):
+  --install-mode linked|full       (env: TIED_INSTALL_MODE)
+  --install-layers db,mcp,...      (env: TIED_INSTALL_LAYERS)
+  --install-harness cursor|claude|both (env: TIED_INSTALL_HARNESS)
+  --methodology-bundle live|pinned (env: TIED_METHODOLOGY_BUNDLE)
+  --doctor-after                   Run tied-install --doctor after install (env: TIED_INSTALL_DOCTOR_AFTER=1)`);
 }
 
 export function parseNewTiedClientArgs(argv, env = process.env) {
   const { profile: toolUseProfile, argv: afterToolFlags } = parseBootstrapToolFlags(argv, env);
-  const args = [...afterToolFlags];
+  const { options: installOptions, remainingArgv } = parseInstallPassthroughFlags(afterToolFlags, env);
+  const args = [...remainingArgv];
   const options = {
     toolUseProfile,
+    installOptions,
     disposable: false,
     sourceRoot: undefined,
     testRoot: undefined,
@@ -175,6 +185,7 @@ function main() {
     },
     env,
     toolUseProfile: parsed.toolUseProfile,
+    installOptions: parsed.installOptions,
   };
 
   if (parsed.disposable) {

@@ -1,0 +1,32 @@
+▶ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ A1 sparse Tracker → tracker_sparse (0.503792ms)
+  ✔ A2 synthetic projection → tracker_not_authoritative (0.051834ms)
+  ✔ A3 missing provenance fields → provenance_incomplete (0.106833ms)
+  ✔ A4 missing activation pairing → activation_pairing_incomplete (0.388875ms)
+  ✔ A5 unresolved finding → finding_unresolved (0.069208ms)
+  ✔ A6 self-reported command success → command_success_unproven (0.046208ms)
+  ✔ A7 stale hash mismatch → evidence_stale (0.0645ms)
+  ✔ A8 placeholder waiver → waiver_invalid (0.097542ms)
+  ✔ A9 pending sub-stub at integrated depth → sub_stub_pending (1.273209ms)
+  ✔ A10 parent completed with pending sub-stub → parent_child_inconsistent (0.149333ms)
+  ✔ A11 valid integrated verification evidence → allowed (0.104625ms)
+  ✔ A12 valid waiver excludes waived obligation only (0.542542ms)
+  ✔ A13 wrong phase receipt → receipt_identity_mismatch:phase (0.101083ms)
+  ✔ A14 verification receipt at close_out → receipt_identity_mismatch:phase (0.082417ms)
+  ✔ A15 dirty post-gate tree → tree_dirty_post_gate (0.10175ms)
+  ✔ A16 depth downgrade without waiver → depth_downgrade_requires_waiver (0.088541ms)
+  ✔ A17 caller cannot subtract auto-required slugs (0.088791ms)
+  ✔ A18 advisory policy still fail-closed without activation at integrated depth (0.043542ms)
+✔ remediation acceptance matrix A1–A18 [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (4.536416ms)
+▶ fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  ✔ runs all 15 corpus cases with expected gate decisions (23.397375ms)
+  ✔ A4 missing pairing rejects with activation_pairing_incomplete (0.138333ms)
+✔ fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] (23.9985ms)
+ℹ tests 20
+ℹ suites 2
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 89.896792

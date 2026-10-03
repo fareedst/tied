@@ -1,0 +1,85 @@
+aggregation_summary:
+  cross_client_structural:
+    compatibility_key: "evidence-chain-profile.v1|integrated"
+    denominator_subcohorts:
+      - fingerprint: "83a20f7f7574881f"
+        n: 4
+        publication_status: "sufficient_for_count_statistics"
+    inputs_accepted: 4
+    report: "working/evaluation/phase1-post-alignment-evidence-chain-report.yaml"
+    unique_project_ids: 4
+  within_repo_structural:
+    compatibility_key: "evidence-chain-profile.v1|integrated"
+    denominator_subcohorts:
+      - fingerprint: "83a20f7f7574881f"
+        n: 8
+        publication_status: "sufficient_for_count_statistics"
+    inputs_accepted: 8
+    limitation: "Temporary pinned-worktree paths produce new path-fallback project IDs, so the aggregator cannot establish same-project identity for baseline/post pairs. Per-client Markdown comparisons are the authoritative pairings."
+    profiles_per_logical_client: 2
+    report: "working/evaluation/phase1-post-alignment-within-repo-evidence-chain-report.yaml"
+    unique_project_ids: 8
+charter_reference: "docs/tied-methodology-evaluation-framework.md"
+clients:
+  - analysis_commit: "0995ddd8a5208ce5b2a8e838ff66da02a78b66e4"
+    client_alias: "treegrep"
+    executable_profile: "working/evaluation/profiles/treegrep-post-alignment-exec.v1.json"
+    residual_risks:
+      - "No binding-inventory.yaml was present under the inspected tied/ path."
+      - "Sidecar supplemental denominator changed from 0 to 56; do not compare sidecar-derived ratios across that boundary."
+    structural_outcome: "Traceability changed to pass; requirements graph has no cycles; implementation graph retains one cycle; fresh executable commands passed."
+    structural_profile: "working/evaluation/profiles/treegrep-post-alignment.v1.json"
+  - analysis_commit: "1798c4424d4ef6ea29ce4b95caee51cc9f1fdc75"
+    client_alias: "nsync"
+    executable_profile: "working/evaluation/profiles/nsync-post-alignment-exec.v1.json"
+    residual_risks:
+      - "Attached manifest commit ddcfaf7 differs from the analysis pin."
+      - "Binding inventory is scoped to 5 rows rather than the full SDK surface."
+      - "Original client worktree had pre-existing local changes; evidence used an isolated pinned worktree."
+    structural_outcome: "Consistency and traceability changed to pass; requirements graph has no cycles; implementation graph retains one cycle."
+    structural_profile: "working/evaluation/profiles/nsync-post-alignment.v1.json"
+  - analysis_commit: "1a79d55f14f6ee842621b1f8f0bff0e703dd0450"
+    client_alias: "indescript"
+    executable_profile: "working/evaluation/profiles/indescript-post-alignment-exec.v1.json"
+    residual_risks:
+      - "Batch strict pseudo-code snapshot returned false while the generated profile row passed."
+      - "No binding-inventory.yaml was present under the inspected tied/ path."
+      - "Proof is scoped to denominator 16 and is not repo-wide behavior evidence."
+      - "The source manifest records a dirty original client environment."
+    structural_outcome: "Traceability remains structurally improved; requirements graph has no cycles; implementation graph retains one cycle; executable commands passed."
+    structural_profile: "working/evaluation/profiles/indescript-post-alignment.v1.json"
+  - analysis_commit: "bc61056fe260bc3831efb5ce7772244339fd1cd6"
+    client_alias: "panorama"
+    executable_profile: "working/evaluation/profiles/panorama-post-alignment-exec.v1.json"
+    residual_risks:
+      - "Attached manifest commit 29224e9 differs from the analysis pin."
+      - "Batch strict pseudo-code snapshot returned false while the generated profile row passed."
+      - "No binding-inventory.yaml was present under the inspected tied/ path."
+    structural_outcome: "Consistency and traceability pass; requirements graph has no cycles; implementation graph retains one cycle."
+    structural_profile: "working/evaluation/profiles/panorama-post-alignment.v1.json"
+evaluation_questions_addressed:
+  - id: "Q4"
+    proof_boundary: "traceability_structure"
+    scope: "structural chain deltas across four TIED clients after scoped TIED 3.0 alignment"
+  - id: "Q6"
+    proof_boundary: "executable_behavior"
+    scope: "separate manifest-attached executable evidence from the manifest-free structural comparison arm"
+generated_at: "2026-08-27"
+phase: 1
+pilot_status: "post_alignment_reprofile_complete"
+profile_generation:
+  executable_manifest_reference: "attached"
+  invoke_structural_validators: true
+  profile_depth: "integrated"
+  structural_input_manifest: "working/evaluation/phase1-post-alignment-report-inputs.yaml"
+  structural_manifest_reference: "absent"
+  within_repo_input_manifest: "working/evaluation/phase1-post-alignment-within-repo-report-inputs.yaml"
+residual_risks:
+  - "All artifacts are operator-local and may contain absolute paths in profile roots or manifest references; shareable exports must retain path privacy."
+  - "No client project YAML or client methodology YAML was mutated during this collection."
+  - "Structural consistency, pseudo-code, traceability, binding, adequacy, and cycle checks do not prove runtime correctness, security, performance, resilience, or user-facing behavior."
+  - "The executable arm is observed quality provenance only and is not ratio-comparable to Phase 1, which had no verification manifest."
+  - "The profile cycle row is false for every post-alignment profile because live validators check both REQ and IMPL graphs; direct requirements-graph JSON reports ok=true and has_cycles=false, while each implementation graph retains one cycle."
+  - "The within-repo v2 report has eight path-fallback project IDs rather than four stable pair identities because evidence was collected in isolated temporary worktrees."
+  - "Vocabulary drift remains not_measured because the vocabulary drift adapter is not configured."
+schema_version: "evaluation-phase-summary.v1"

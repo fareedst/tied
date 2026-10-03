@@ -1,0 +1,26 @@
+{
+  "schema_version": "close-out-gates-summary.v1",
+  "request_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+  "run_id": "jev-harness-dist-2c-20260928",
+  "change_id": "JEV-HARNESS-DIST-2C",
+  "depth_tier": "minimal",
+  "gates": {
+    "pre_implementation": {
+      "allowed": true,
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T01-29-25-116Z.json"
+    },
+    "verification": {
+      "allowed": true,
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-29T01-33-09-346Z.json"
+    },
+    "close_out": {
+      "allowed": true,
+      "path": "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-33-09-656Z.json"
+    }
+  },
+  "tests": {
+    "agentstream_harness": "16 pass",
+    "jev_unit": "71 pass"
+  },
+  "commit": "deferred_to_plan_close_out"
+}

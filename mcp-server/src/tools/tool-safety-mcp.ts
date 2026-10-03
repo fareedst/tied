@@ -3,9 +3,7 @@
  * Read-only tied_jev_tool_safety_evaluate diagnostic over evaluateHarnessToolCall.
  */
 
-import fs from "node:fs";
 import path from "node:path";
-import yaml from "js-yaml";
 import { z } from "zod";
 import {
   evaluateHarnessToolCall,
@@ -14,6 +12,7 @@ import {
 } from "../jev/harness-tool-guard.js";
 import { textContent } from "../types.js";
 import { getBasePath } from "../yaml-loader.js";
+import { readRepoTiedYaml } from "../tied-project-config.js";
 
 let evaluateFnForTests: typeof evaluateHarnessToolCall | undefined;
 
@@ -28,17 +27,9 @@ function resolveProjectRoot(projectRoot?: string): string {
 }
 
 function manifestEnablesHarness(projectRoot: string): boolean {
-  const manifestPath = path.join(projectRoot, ".tied-yaml.yaml");
-  if (!fs.existsSync(manifestPath)) {
-    return false;
-  }
-  try {
-    const doc = yaml.load(fs.readFileSync(manifestPath, "utf8")) as Record<string, unknown>;
-    const jev = doc.jev as Record<string, unknown> | undefined;
-    return jev?.agentstream_harness === true;
-  } catch {
-    return false;
-  }
+  const doc = readRepoTiedYaml(projectRoot);
+  const jev = doc?.jev as Record<string, unknown> | undefined;
+  return jev?.agentstream_harness === true;
 }
 
 export type ToolSafetyDiagnosticResult = {

@@ -1,0 +1,20 @@
+close_out_date: "2026-08-24"
+deferred: []
+deliverables:
+  - "F4 checklist-yaml-md-parity.test.ts"
+  - "G2 npm canonical runner docs (mcp-server/README.md, integration checklist)"
+  - "G2 stdd-repo Go Mode B close_out dogfood (g2-dogfood/replay-g2-stdd-dogfood.sh)"
+  - "G6 post-rebuild MCP tool-catalog smoke (g6-mcp-reload-smoke.sh)"
+  - "H5 header sync (integrated-activation-checklist-enforcement-plan.md)"
+  - "outstanding-work-prioritized-plan.md + CHANGELOG.md close-out"
+  - "P2 doc sync (adversarial-inquiry-activation-recommendation.md)"
+depth_tier: "minimal"
+evidence:
+  g2_dogfood: "working/REQ-TIED_ADVERSARIAL_INQUIRY/g2-dogfood/gate-close_out-result.json (allowed: true)"
+  g6_reload_smoke: "working/BUILD_PLAN_6_HYGIENE/g6-reload-smoke-result.json (66 tools, 6 required)"
+  gate_validate: "dogfood close_out gate via tied-cli tied_checklist_gate_validate"
+  npm_test: "460/460 pass (npm test --prefix mcp-server, 2026-08-24)"
+  tied_validate_consistency: "ok"
+gate_policy: "advisory"
+request: "BUILD_PLAN_6_HYGIENE"
+status: "complete"

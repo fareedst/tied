@@ -1,0 +1,68 @@
+f11:
+  annotation_lines_median: 5
+  authoring_decisions_median: 5
+  gate_pass: true
+  procedures_studied: 6
+  recommendation: "proceed"
+  stop_criteria:
+    annotation_lines_gt_15: false
+    any_sp_failure: false
+    decisions_gt_25: false
+procedures:
+  - annotation_lines: 7
+    authoring_decisions: 7
+    constraint_diagnostics_annotated: 0
+    preservation_pass: true
+    procedure: "INVOKE_COLLECTOR"
+    study_id: "rootjobs-invoke-collector"
+    token: "IMPL-ROOTJOBS_CLI"
+    unknowns_annotated: 11
+    unknowns_copy: 0
+  - annotation_lines: 4
+    authoring_decisions: 4
+    constraint_diagnostics_annotated: 0
+    preservation_pass: true
+    procedure: "LIST_DARWIN_VOLUMES"
+    study_id: "volumestats-discover"
+    token: "IMPL-VOLUMESTATS-DISCOVER"
+    unknowns_annotated: 0
+    unknowns_copy: 0
+  - annotation_lines: 5
+    authoring_decisions: 5
+    constraint_diagnostics_annotated: 0
+    preservation_pass: true
+    procedure: "PARSE_FLAGS"
+    study_id: "rootjobs-parse-flags"
+    token: "IMPL-ROOTJOBS_CLI"
+    unknowns_annotated: 8
+    unknowns_copy: 0
+  - annotation_lines: 5
+    authoring_decisions: 5
+    constraint_diagnostics_annotated: 0
+    preservation_pass: true
+    procedure: "RUN"
+    study_id: "netif-run"
+    token: "IMPL-NETIF_CLI"
+    unknowns_annotated: 6
+    unknowns_copy: 0
+  - annotation_lines: 4
+    authoring_decisions: 4
+    constraint_diagnostics_annotated: 0
+    preservation_pass: true
+    procedure: "RUN_VOLUMESTATS"
+    study_id: "volumestats-run"
+    token: "IMPL-VOLUMESTATS-CLI"
+    unknowns_annotated: 0
+    unknowns_copy: 0
+  - annotation_lines: 6
+    authoring_decisions: 6
+    constraint_diagnostics_annotated: 0
+    preservation_pass: true
+    procedure: "WRITE_TABLE"
+    study_id: "volumestats-report"
+    token: "IMPL-VOLUMESTATS-REPORT"
+    unknowns_annotated: 0
+    unknowns_copy: 0
+request_token: "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE"
+run_at: "2026-09-10T19:28:12.734Z"
+study: "F11-constraint-annotation-burden"

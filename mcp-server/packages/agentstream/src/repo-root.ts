@@ -16,19 +16,19 @@ function walkForChecklist(start: string): string {
     dir = path.dirname(start);
   }
   for (;;) {
-    const candidate = path.join(
-      dir,
-      "tied",
-      "docs",
-      "agent-req-implementation-checklist.yaml",
-    );
-    try {
-      const st = fs.statSync(candidate);
-      if (st.isFile()) {
-        return dir;
+    const candidates = [
+      path.join(dir, "tied-bundle", "docs", "agent-req-implementation-checklist.yaml"),
+      path.join(dir, "tied", "docs", "agent-req-implementation-checklist.yaml"),
+    ];
+    for (const candidate of candidates) {
+      try {
+        const st = fs.statSync(candidate);
+        if (st.isFile()) {
+          return dir;
+        }
+      } catch {
+        /* try next candidate */
       }
-    } catch {
-      /* continue walk */
     }
     const parent = path.dirname(dir);
     if (parent === dir) {

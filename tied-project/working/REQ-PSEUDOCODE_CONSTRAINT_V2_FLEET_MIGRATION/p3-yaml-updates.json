@@ -1,0 +1,193 @@
+{
+  "steps": [
+    {
+      "kind": "detail",
+      "token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "updates": {
+        "description": "Every TIED client repository SHALL migrate through controlled, evidence-backed phases until fleet-migrated-client or a time-bounded migration waiver. Phase 1 establishes product contract and governance schemas. Phase 2 establishes analyzer and template readiness at G1 advisory. Phase 3 validates pilot migration workflow (stdd wave 1 + external scan), REQ-PSEUDOCODE_MIGRATION_TOOLING, G2 receipts, and rollback—without fleet-wide migration or G3 CI defaults.",
+        "related_requirements": {
+          "depends_on": [
+            "REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE",
+            "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+            "REQ-TIED_SETUP"
+          ],
+          "related_to": [
+            "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+            "REQ-REQUEST_EVIDENCE_ENVELOPE",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "supersedes": []
+        },
+        "traceability": {
+          "architecture": ["ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"],
+          "code_annotations": ["REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"],
+          "implementation": [
+            "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "tests": []
+        },
+        "satisfaction_criteria": [
+          {
+            "id": "SC-FLEET-P2-001",
+            "criterion": "ARCH or linked plan references constraint-migration-receipt.v1 with Layer A/B/C, typed_flow, constraint_flow, and unknown_summary fields",
+            "metric": "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE governance_artifacts; working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json; docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md § Evidence schema"
+          },
+          {
+            "id": "SC-FLEET-P2-002",
+            "criterion": "Authoring template demonstrates contract precision and at least one Tier-3 exemplar pattern per OD-P2-5 (≥3 profiles under working/fleet-constraint-v2/exemplars/)",
+            "metric": "templates/impl-essence-pseudocode-template.md; working/fleet-constraint-v2/exemplars/ (contract-only, refinement, alias/mutation)"
+          },
+          {
+            "id": "SC-FLEET-001",
+            "criterion": "Each client migration state defines a falsifiable evidence boundary independent of grammar_v2_header alone",
+            "metric": "REQ and ARCH text plus docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md state machine"
+          },
+          {
+            "id": "SC-FLEET-P2-004",
+            "criterion": "F11 and false-positive thresholds documented, measured, and satisfied; recorded in gate-promotion-stages.v1.yaml G1 prerequisites evidence pointers",
+            "metric": "working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml; working/fleet-constraint-v2/gate-promotion-stages.v1.yaml G1 prerequisites"
+          },
+          {
+            "id": "SC-FLEET-003",
+            "criterion": "Gate promotion stages G0–G4 are documented and linked from REQ/ARCH with OD-2 verification-first blocking for constraint_gate_errors",
+            "metric": "gate-promotion-stages.v1.yaml and Phase 1 plan Annex A align"
+          },
+          {
+            "id": "SC-FLEET-002",
+            "criterion": "Governance ARCH references frozen client-inventory-manifest.v1 and migration-waiver.v1 schema identities",
+            "metric": "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE cross-references working/fleet-constraint-v2/*.v1.* paths"
+          },
+          {
+            "id": "SC-FLEET-004",
+            "criterion": "No satisfaction criterion equates grammar_v2_header pass with fleet-migrated-client",
+            "metric": "Falsification questions in CITDP and REQ satisfaction criteria"
+          },
+          {
+            "id": "SC-FLEET-005",
+            "criterion": "Phase 1–5 exit criteria are traceable from REQ without requiring sidecar migration in Phase 1",
+            "metric": "Grand plan phase exit criteria referenced from REQ rationale and linked plan docs"
+          },
+          {
+            "id": "SC-FLEET-P2-003",
+            "criterion": "Qualification manifest re-baseline at 48d1fbb+ shows green tier A/B gates per Phase 2 definition (zero new gate failures vs baseline; stdd tier B zero regression)",
+            "metric": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json qualification_green; manifest baseline_anchor_commit"
+          },
+          {
+            "id": "SC-FLEET-P2-005",
+            "criterion": "Rollback exercise demonstrates G1 advisory restoration without analyzer code revert (config/receipt-only revert)",
+            "metric": "working/fleet-constraint-v2/rollback-exercise-G1.v1.json; qualification/fleet-g1/rollback-exercise/ receipts"
+          },
+          {
+            "id": "SC-FLEET-P3-001",
+            "criterion": "Pilot inventory manifest instance validates and lists every Phase 3 pilot without header-only migrated inference",
+            "metric": "working/fleet-constraint-v2/client-inventory-manifest.pilots.v1.yaml; docs/pseudocode-constraint-v2-fleet-migration-phase-3-plan.md"
+          },
+          {
+            "id": "SC-FLEET-P3-002",
+            "criterion": "Each in-scope wave sidecar has schema-valid constraint-migration-receipt with gate_stage G2",
+            "metric": "working/fleet-constraint-v2/pilots/stdd/receipts/*.receipt.json"
+          },
+          {
+            "id": "SC-FLEET-P3-003",
+            "criterion": "Migration tooling supports dry-run, apply, receipt emit, and revert with deterministic dry_run_content_hash",
+            "metric": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-pilot-inventory-scan.ts; pilot-migration-workflow.v1.md"
+          },
+          {
+            "id": "SC-FLEET-P3-004",
+            "criterion": "stdd wave 1 completes before external pilot apply commits",
+            "metric": "working/fleet-constraint-v2/pilots/stdd/receipts/summary.json before external apply; OD-P3-1 ordering"
+          },
+          {
+            "id": "SC-FLEET-P3-005",
+            "criterion": "Product tests remain green for pseudocode-only migration commits in pilot scope",
+            "metric": "mcp-server build + harness pilot-p3; no runtime product code changes in Phase 3 wave 1"
+          },
+          {
+            "id": "SC-FLEET-P3-006",
+            "criterion": "G2 verification-blocking exercise and pilot rollback recorded",
+            "metric": "working/fleet-constraint-v2/rollback-exercise-G2-pilots.v1.json"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "detail",
+      "token": "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+      "updates": {
+        "decision": "Phase 3 adds REQ-PSEUDOCODE_MIGRATION_TOOLING, pilot inventory instance stdd-fleet-inventory-pilots-v1, G2 pilot receipts, and rollback-exercise-G2-pilots; program gate_policy remains advisory at orchestrator through Phase 3 exit; OD-2 verification blocking applies to pilot client REQs only.",
+        "governance_artifacts": {
+          "client_inventory_manifest_schema": "working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json",
+          "client_inventory_template": "working/fleet-constraint-v2/client-inventory-manifest.v1.template.yaml",
+          "pilot_inventory_manifest": "working/fleet-constraint-v2/client-inventory-manifest.pilots.v1.yaml",
+          "constraint_migration_receipt_design": "working/fleet-constraint-v2/constraint-migration-receipt.v1.md",
+          "constraint_migration_receipt_example": "working/fleet-constraint-v2/constraint-migration-receipt.v1.example.json",
+          "constraint_migration_receipt_schema": "working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json",
+          "f11_fp_thresholds": "working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml",
+          "gate_promotion_stages": "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml",
+          "migration_waiver_schema": "working/fleet-constraint-v2/migration-waiver.v1.schema.json",
+          "phase_1_plan_doc": "docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md",
+          "phase_2_plan_doc": "docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md",
+          "phase_3_plan_doc": "docs/pseudocode-constraint-v2-fleet-migration-phase-3-plan.md",
+          "pilot_migration_workflow": "working/fleet-constraint-v2/pilots/pilot-migration-workflow.v1.md",
+          "pilot_stdd_g2_receipts_summary": "working/fleet-constraint-v2/pilots/stdd/receipts/summary.json",
+          "qualification_fleet_g1_summary": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json",
+          "rollback_exercise_g1": "working/fleet-constraint-v2/rollback-exercise-G1.v1.json",
+          "rollback_exercise_g2_pilots": "working/fleet-constraint-v2/rollback-exercise-G2-pilots.v1.json",
+          "tier3_exemplars_dir": "working/fleet-constraint-v2/exemplars/"
+        },
+        "traceability": {
+          "code_annotations": ["ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE"],
+          "implementation": [
+            "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+            "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "requirements": [
+            "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+            "REQ-PSEUDOCODE_MIGRATION_TOOLING"
+          ],
+          "tests": []
+        }
+      }
+    },
+    {
+      "kind": "detail",
+      "token": "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+      "updates": {
+        "description": "Orchestrates validation of governance schema references and gate promotion record alignment; Phase 3 migration executable workflow is IMPL-PSEUDOCODE_MIGRATION_TOOLING.",
+        "cross_references": [
+          "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+          "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "REQ-PSEUDOCODE_MIGRATION_TOOLING",
+          "IMPL-PSEUDOCODE_MIGRATION_TOOLING"
+        ]
+      }
+    },
+    {
+      "kind": "detail",
+      "token": "CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "updates": {
+        "change_definition": {
+          "current_behavior": "Phase 2 analyzer/template/receipt readiness persisted; SC-FLEET-P2-001..005 in REQ; G1 advisory; no pilot inventory population or migration tooling REQ.",
+          "desired_behavior": "Phase 3 module complete: SC-FLEET-P3-001..006; REQ-PSEUDOCODE_MIGRATION_TOOLING; pilot inventory instance; stdd wave 1 G2 receipts; external read-only scan; G2 rollback exercise.",
+          "unchanged_behavior": "Program gate_policy advisory at orchestrator through Phase 3 exit; no fleet-wide G3 CI; v1 compatibility.",
+          "non_goals": [
+            "Phase 4 fleet waves",
+            "All stdd sidecars in one wave",
+            "External client apply without owner approval"
+          ],
+          "success_criteria": [
+            "SC-FLEET-P3-001..006 persisted in REQ",
+            "Tracker phase_3_pilot_migration module complete",
+            "tied_validate_consistency passes"
+          ],
+          "falsification_questions": [
+            "Can Phase 3 close with only header-only-v2 updates?",
+            "Can orchestrator REQ substitute for client-owned migration REQ on external pilot?",
+            "Can pilot enforced claims hide truncation in receipts?"
+          ]
+        }
+      }
+    }
+  ]
+}

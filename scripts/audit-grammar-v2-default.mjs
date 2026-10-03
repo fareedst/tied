@@ -6,7 +6,7 @@
  * Usage:
  *   node scripts/audit-grammar-v2-default.mjs [--client-root PATH] [--json-out PATH]
  *
- * When --client-root is omitted, bootstraps a temporary client via copy_files.sh.
+ * When --client-root is omitted, bootstraps a temporary client via tied-install.sh.
  */
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -25,7 +25,7 @@ function usage() {
 
 Options:
   --help           Show this help
-  --client-root    Bootstrapped TIED client root (default: disposable copy_files.sh client)
+  --client-root    Bootstrapped TIED client root (default: disposable tied-install.sh client)
   --json-out       Write the audit JSON report to PATH
 `);
 }
@@ -44,7 +44,7 @@ function parseArgs(argv) {
 
 function bootstrapDisposableClient() {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-grammar-v2-audit-"));
-  const copyScript = path.join(REPO_ROOT, "copy_files.sh");
+  const copyScript = path.join(REPO_ROOT, "tied-install.sh");
   execFileSync("bash", [copyScript, tempDir], { cwd: REPO_ROOT, stdio: "pipe" });
   return { clientRoot: tempDir, disposable: true };
 }

@@ -1,0 +1,16 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#promotion",
+    "PLAN-TIED-BBCE-ALIGNMENT#bbce_advisory_enforced#block"
+  ],
+  "status": "warn",
+  "verdict": "UNRESOLVED",
+  "run_id": "w4-refine-pre-impl-2026-09-27",
+  "phase": "pre_implementation",
+  "note": "W4 refine planning — falsification questions dispositioned in refine-plan-w4-outcomes; verification re-run required at build-plan."
+}

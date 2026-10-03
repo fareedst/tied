@@ -7,6 +7,8 @@ import path from "node:path";
 import yaml from "js-yaml";
 import { jsonSafeAbsolute } from "./paths.mjs";
 import { sayOk, sayWarn, sayErr } from "./console.mjs";
+import { resolveTiedLayout } from "./layout.mjs";
+import { bundleRelativeVerifyPath } from "./methodology-bundle.mjs";
 
 function isUsableDetailFile(value) {
   if (value == null) return false;
@@ -15,7 +17,15 @@ function isUsableDetailFile(value) {
   return trimmed !== "null" && trimmed !== "~";
 }
 
-export function verifyFidelityMethodology(tiedDir, tiedBasePathValue, tiedCliDest) {
+/**
+ * @param {string} verifyRoot
+ * @param {string} tiedBasePathValue
+ * @param {string} tiedCliDest
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyFidelityMethodology(verifyRoot, tiedBasePathValue, tiedCliDest, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
   const required = [
     "methodology/requirements/REQ-TIED_FIDELITY_RESEARCH.yaml",
     "methodology/architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml",
@@ -28,7 +38,7 @@ export function verifyFidelityMethodology(tiedDir, tiedBasePathValue, tiedCliDes
   sayWarn("MUST verify fidelity research methodology artifacts before completion.");
   let missing = 0;
   for (const rel of required) {
-    const p = path.join(tiedDir, rel);
+    const p = path.join(verifyRoot, relPath(rel));
     if (!fs.existsSync(p)) {
       sayErr(`MISSING mandatory fidelity methodology artifact: ${p}`);
       missing = 1;
@@ -42,11 +52,19 @@ export function verifyFidelityMethodology(tiedDir, tiedBasePathValue, tiedCliDes
   sayWarn(
     `CAN run structural validation: TIED_BASE_PATH=${tiedBasePathValue} ${tiedCliDest} tied_validate_consistency.`
   );
-  sayWarn(`CAN run the read-only audit: ${path.join(tiedDir, "docs", "pseudocode-fidelity-audit-agent-prompt.md")} (Stages 0-4).`);
-  sayWarn("CAN refresh methodology vocabulary with: copy_files --merge-vocab /path/to/client.");
+  sayWarn(
+    `CAN run the read-only audit: ${path.join(verifyRoot, relPath("docs/pseudocode-fidelity-audit-agent-prompt.md"))} (Stages 0-4).`,
+  );
+  sayWarn("CAN refresh methodology vocabulary with: tied-install --refresh --merge-vocab /path/to/client.");
 }
 
-export function verifyAdversarialInquiryMethodology(tiedDir) {
+/**
+ * @param {string} verifyRoot
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyAdversarialInquiryMethodology(verifyRoot, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
   const required = [
     "methodology/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml",
     "methodology/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml",
@@ -58,7 +76,7 @@ export function verifyAdversarialInquiryMethodology(tiedDir) {
   sayWarn("MUST verify adversarial inquiry methodology artifacts before completion.");
   let missing = 0;
   for (const rel of required) {
-    const p = path.join(tiedDir, rel);
+    const p = path.join(verifyRoot, relPath(rel));
     if (!fs.existsSync(p)) {
       sayErr(`MISSING mandatory adversarial inquiry methodology artifact: ${p}`);
       missing = 1;
@@ -69,20 +87,39 @@ export function verifyAdversarialInquiryMethodology(tiedDir) {
     throw new Error("ADVERSARIAL_INQUIRY_GATE_FAILED");
   }
   sayOk("MUST verify adversarial inquiry methodology artifacts: complete.");
-  sayWarn(`CAN run the read-only inquiry: ${path.join(tiedDir, "docs", "adversarial-inquiry-adoption.md")}.`);
+  sayWarn(
+    `CAN run the read-only inquiry: ${path.join(verifyRoot, relPath("docs/adversarial-inquiry-adoption.md"))}.`,
+  );
+}
+
+function firstExistingPath(candidates) {
+  for (const p of candidates) {
+    if (fs.existsSync(p)) return p;
+  }
+  return candidates[0];
 }
 
 export function verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest) {
   const tiedSh = path.join(path.dirname(tiedCliDest), "tied.sh");
+  const layout = resolveTiedLayout(projectRoot);
   const required = [
-    { path: path.join(projectRoot, "tied/docs/tied-feature-onboarding.md") },
-    { path: path.join(projectRoot, "tied/constitution.example.yaml") },
-    { path: path.join(projectRoot, "tied/methodology/vocab/feature-orchestration.md") },
-    { path: tiedSh },
+    firstExistingPath([
+      path.join(layout.docsDir, "tied-feature-onboarding.md"),
+      path.join(tiedDir, "docs", "tied-feature-onboarding.md"),
+    ]),
+    firstExistingPath([
+      path.join(layout.tiedDir, "constitution.example.yaml"),
+      path.join(tiedDir, "constitution.example.yaml"),
+    ]),
+    firstExistingPath([
+      path.join(layout.methodVocabDir, "feature-orchestration.md"),
+      path.join(tiedDir, "methodology", "vocab", "feature-orchestration.md"),
+    ]),
+    tiedSh,
   ];
   sayWarn("MUST verify feature orchestration methodology artifacts before completion.");
   let missing = 0;
-  for (const { path: p } of required) {
+  for (const p of required) {
     if (!fs.existsSync(p)) {
       sayErr(`MISSING mandatory feature orchestration artifact: ${p}`);
       missing = 1;
@@ -101,8 +138,10 @@ export function verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tied
 
 const METHODOLOGY_PSEUDOCODE_TOKEN_RE = /\[(REQ|ARCH|IMPL)-([A-Z0-9][A-Z0-9_-]*)\]/gu;
 
-function loadMethodologyIndexKeys(tiedDir, indexName) {
-  const indexPath = path.join(tiedDir, "methodology", `${indexName}.yaml`);
+function loadMethodologyIndexKeys(verifyRoot, indexName, bundleLayout) {
+  const indexPath = bundleLayout
+    ? path.join(verifyRoot, `${indexName}.yaml`)
+    : path.join(verifyRoot, "methodology", `${indexName}.yaml`);
   if (!fs.existsSync(indexPath)) return new Set();
   const data = yaml.load(fs.readFileSync(indexPath, "utf8"));
   if (!data || typeof data !== "object") return new Set();
@@ -110,14 +149,21 @@ function loadMethodologyIndexKeys(tiedDir, indexName) {
 }
 
 // [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] — How: fail closed when inherited methodology pseudo-code references tokens absent from methodology indexes (W4-D6).
-export function verifyMethodologyPseudocodeTokenRefs(tiedDir) {
+/**
+ * @param {string} verifyRoot
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyMethodologyPseudocodeTokenRefs(verifyRoot, options = {}) {
+  const bundleLayout = options.bundleLayout === true;
   sayWarn("MUST verify inherited methodology pseudo-code token references before completion.");
   const indexKeys = {
-    REQ: loadMethodologyIndexKeys(tiedDir, "requirements"),
-    ARCH: loadMethodologyIndexKeys(tiedDir, "architecture-decisions"),
-    IMPL: loadMethodologyIndexKeys(tiedDir, "implementation-decisions"),
+    REQ: loadMethodologyIndexKeys(verifyRoot, "requirements", bundleLayout),
+    ARCH: loadMethodologyIndexKeys(verifyRoot, "architecture-decisions", bundleLayout),
+    IMPL: loadMethodologyIndexKeys(verifyRoot, "implementation-decisions", bundleLayout),
   };
-  const sidecarDir = path.join(tiedDir, "methodology", "implementation-decisions");
+  const sidecarDir = bundleLayout
+    ? path.join(verifyRoot, "implementation-decisions")
+    : path.join(verifyRoot, "methodology", "implementation-decisions");
   if (!fs.existsSync(sidecarDir)) {
     sayErr(`MISSING methodology implementation-decisions directory: ${sidecarDir}`);
     throw new Error("METHODOLOGY_PSEUDOCODE_TOKEN_GATE_FAILED");
@@ -149,18 +195,30 @@ export function verifyMethodologyPseudocodeTokenRefs(tiedDir) {
   sayOk("MUST verify inherited methodology pseudo-code token references: complete.");
 }
 
-export function verifyInheritedDetailFiles(tiedDir, manifestRequired) {
+/**
+ * @param {string} verifyRoot
+ * @param {string[]} manifestRequired
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyInheritedDetailFiles(verifyRoot, manifestRequired, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
   sayWarn("MUST verify inherited methodology detail-file integrity before completion.");
   let missing = 0;
   for (const rel of manifestRequired) {
-    const p = path.join(tiedDir, rel);
+    const p = path.join(verifyRoot, relPath(rel));
     if (!fs.existsSync(p)) {
       sayErr(`MISSING mandatory inherited detail artifact: ${p}`);
       missing = 1;
     }
   }
+  const methodologyPrefix = options.bundleLayout
+    ? path.join(verifyRoot) + path.sep
+    : path.join(verifyRoot, "methodology") + path.sep;
   for (const indexName of ["requirements", "architecture-decisions", "implementation-decisions"]) {
-    const indexPath = path.join(tiedDir, "methodology", `${indexName}.yaml`);
+    const indexPath = options.bundleLayout
+      ? path.join(verifyRoot, `${indexName}.yaml`)
+      : path.join(verifyRoot, "methodology", `${indexName}.yaml`);
     if (!fs.existsSync(indexPath)) continue;
     const data = yaml.load(fs.readFileSync(indexPath, "utf8"));
     if (!data || typeof data !== "object") continue;
@@ -169,8 +227,9 @@ export function verifyInheritedDetailFiles(tiedDir, manifestRequired) {
       const detailFile = rec.detail_file;
       if (!isUsableDetailFile(detailFile)) continue;
       const df = String(detailFile);
-      const resolved = path.join(tiedDir, "methodology", df);
-      const methodologyPrefix = path.join(tiedDir, "methodology") + path.sep;
+      const resolved = options.bundleLayout
+        ? path.join(verifyRoot, df)
+        : path.join(verifyRoot, "methodology", df);
       if (!resolved.startsWith(methodologyPrefix)) {
         sayErr(`INDEX detail_file escapes methodology boundary: ${indexName}.yaml ${token} -> ${df}`);
         missing = 1;
@@ -182,7 +241,7 @@ export function verifyInheritedDetailFiles(tiedDir, manifestRequired) {
         continue;
       }
       if (!fs.existsSync(resolved)) {
-        sayErr(`INDEX detail_file unresolved: ${indexName}.yaml ${token} -> ${path.join(tiedDir, "methodology", df)}`);
+        sayErr(`INDEX detail_file unresolved: ${indexName}.yaml ${token} -> ${resolved}`);
         missing = 1;
       }
     }
@@ -201,5 +260,5 @@ export function tiedCliDestFor(projectRoot, cursorSkillsInstallDir) {
 }
 
 export function tiedBasePathValueFor(projectRoot) {
-  return jsonSafeAbsolute(path.join(projectRoot, "tied"));
+  return jsonSafeAbsolute(resolveTiedLayout(projectRoot).tiedDir);
 }

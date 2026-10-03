@@ -20,7 +20,7 @@ export function readJevApiKeyFromMcpJsonFile(mcpJsonPath: string): string | unde
   }
 }
 
-/** Walk upward from startDir for repo root containing tied/docs/agent-req-implementation-checklist.yaml */
+/** Walk upward from startDir for repo root containing tied-bundle/docs/agent-req-implementation-checklist.yaml */
 export function findRepoRootFromCwd(startDir: string = process.cwd()): string {
   let dir = path.resolve(startDir);
   for (;;) {

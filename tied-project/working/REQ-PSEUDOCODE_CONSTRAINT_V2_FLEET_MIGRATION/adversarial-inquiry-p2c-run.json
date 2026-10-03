@@ -1,0 +1,92 @@
+{
+  "graph": {
+    "projectId": "stdd-fleet-migration-p2c",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P2-001",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "p2c-20260912",
+          "sourceRevision": "p2c-20260912"
+        },
+        "architectureConstraintIds": ["ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE#receipt-schema"]
+      },
+      {
+        "identity": {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P2-003",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "p2c-20260912",
+          "sourceRevision": "p2c-20260912"
+        },
+        "architectureConstraintIds": ["ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE#qualification-green"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE#receipt-schema",
+        "implementationBlockIds": [
+          "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION#VALIDATE_GOVERNANCE_SCHEMA_REFERENCES#block"
+        ]
+      },
+      {
+        "id": "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE#qualification-green",
+        "implementationBlockIds": [
+          "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION#PUBLISH_GATE_PROMOTION_RECORD#block"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION#VALIDATE_GOVERNANCE_SCHEMA_REFERENCES#block",
+          "kind": "block",
+          "name": "VALIDATE_GOVERNANCE_SCHEMA_REFERENCES",
+          "derivation": "content",
+          "revision": "p2c-20260912",
+          "sourceRevision": "p2c-20260912"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION#PUBLISH_GATE_PROMOTION_RECORD#block",
+          "kind": "block",
+          "name": "PUBLISH_GATE_PROMOTION_RECORD",
+          "derivation": "content",
+          "revision": "p2c-20260912",
+          "sourceRevision": "p2c-20260912"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "p2c-20260912",
+    "specification": [
+      {
+        "id": "spec-receipt-arch-ref",
+        "kind": "behavior",
+        "value": "ARCH governance_artifacts reference constraint-migration-receipt.v1 schema and Phase 2 evidence paths",
+        "order": 1
+      },
+      {
+        "id": "spec-qualification-green",
+        "kind": "behavior",
+        "value": "Phase 2 qualification green at 48d1fbb+ documented; does not imply fleet-migrated-client",
+        "order": 2
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": []
+  },
+  "scope": [
+    "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION#VALIDATE_GOVERNANCE_SCHEMA_REFERENCES#block",
+    "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION#PUBLISH_GATE_PROMOTION_RECORD#block"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "run_id": "fleet-migration-phase2-p2c-20260912",
+  "phase": "pre_implementation"
+}

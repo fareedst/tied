@@ -1,0 +1,208 @@
+copy_hygiene: "Layer B sidecar fix follow-up tracker — post-W8 contract precision; do not mutate Wave 8 tracker."
+execution_evidence:
+  close_out_evidence:
+    gates:
+      close_out: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-sidecar-fix-20260911.json"
+    run_id: "layerb-sidecar-fix-20260911"
+    status: "closeout_complete"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sub-pseudocode-static-analysis-pass"
+    - "sub-pseudocode-validation-pass"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+  envelope_path: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    inquiry_waiver:
+      approval: "Layer B sidecar follow-up — sub-adversarial-inquiry-pass not_applicable"
+      policy: "inquiry_not_required_sidecar_only"
+      rationale: "Sidecar-only contract precision post-W8; no behavior change."
+    status: "closeout_complete"
+  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+follow_up_scope:
+  parent_close_out: "docs/adherence-realignment-wave8-close-out.md"
+  parent_commit: "bb73e43"
+  sidecar_blocks_changed:
+    - "HYDRATE_GATE_EVIDENCE_FROM_ACTIVATION"
+    - "HYDRATE_PSEUDOCODE_REPORTS_FROM_DISK"
+    - "VALIDATE_CANONICAL_SLUGS"
+    - "VALIDATE_ENVELOPE_BLOCKING_CROSS_READ"
+    - "VALIDATE_PSEUDOCODE_ANALYSIS_EVIDENCE"
+    - "VALIDATE_PSEUDOCODE_GATE_HISTORY"
+profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  note: "Sidecar-only contract precision; inquiry waived per inquiry_not_required_sidecar_only."
+request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+source_plan: "docs/layerb-sidecar-fix-close-out.md"
+status: "committed"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/docs/ai-principles.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+      - "tied/vocab/routing.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "AGENTS.md"
+        - "tied/docs/ai-principles.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/evidence-collection-conversation-patterns.md"
+      - "docs/layerb-sidecar-fix-close-out.md"
+    rationale: "Post-W8 Layer B sidecar hygiene; close-out with unified runner required; sponsor requested commit with evidence."
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "docs/layerb-sidecar-fix-close-out.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/layerb-sidecar-fix-close-out.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "docs/layerb-sidecar-fix-close-out.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/layerb-sidecar-fix-close-out.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml"
+    rationale: "depth_tier: minimal; gate_policy: advisory; inquiry waiver inquiry_not_required_sidecar_only."
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "docs/layerb-sidecar-fix-close-out.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/layerb-sidecar-fix-close-out.md"
+    rationale: "No production code; validation + PSA refresh + close_out unified runner only."
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "docs/layerb-sidecar-fix-close-out.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+    rationale: "Layer A/B re-run at plan-close-out; mirrors gate-pseudocode-validation evidence."
+    slug: "sub-pseudocode-validation-pass"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/not-applicable-receipt.v1.json"
+    policy: "inquiry_not_required_sidecar_only"
+    rationale: "Minimal depth sidecar-only contract precision; no tied_adversarial_inquiry_run."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/not-applicable-receipt.v1.json"
+      policy: "inquiry_not_required_sidecar_only"
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/psa-IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json"
+    slug: "sub-pseudocode-static-analysis-pass"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/psa-IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.json"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-closeout-gate-result.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-closeout-reconcile-summary.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-sidecar-fix-20260911.json"
+    rationale: "Unified runner + gate receipts written at plan-close-out."
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-closeout-gate-result.json"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-closeout-reconcile-summary.json"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-sidecar-fix-20260911.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+    rationale: "Track layerb validation JSON and follow-up evidence; exclude unrelated REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/* from commit scope."
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+    rationale: "Sidecar delta + tied_validate_consistency ok at close-out."
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message-layerb.txt"
+    policy:
+      commit_deferred: false
+      skill: "plan-close-out"
+      sponsor_override: "commit with evidence"
+    slug: "traceable-commit"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message-layerb.txt"
+      status: "completed"

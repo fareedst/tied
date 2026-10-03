@@ -21,18 +21,18 @@ function tempClient() {
 
 describe("methodology client boundary Phase A [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]", () => {
   it("isStagedMethodologyPath matches tied/methodology prefix only", () => {
-    assert.equal(isStagedMethodologyPath("tied/methodology/requirements/REQ-X.yaml"), true);
-    assert.equal(isStagedMethodologyPath("./tied/methodology/foo.yaml"), true);
-    assert.equal(isStagedMethodologyPath("tied/requirements/REQ-X.yaml"), false);
-    assert.equal(isStagedMethodologyPath("vendor/tied/methodology/x.yaml"), false);
+    assert.equal(isStagedMethodologyPath("tied-bundle/requirements/REQ-X.yaml"), true);
+    assert.equal(isStagedMethodologyPath("./tied-bundle/foo.yaml"), true);
+    assert.equal(isStagedMethodologyPath("tied-project/requirements/REQ-X.yaml"), false);
+    assert.equal(isStagedMethodologyPath("vendor/tied-bundle/x.yaml"), false);
   });
 
   it("findStagedMethodologyPaths returns blocked staged paths", () => {
     const blocked = findStagedMethodologyPaths([
-      "tied/requirements/REQ-A.yaml",
-      "tied/methodology/requirements/REQ-TIED_SETUP.yaml",
+      "tied-project/requirements/REQ-A.yaml",
+      "tied-bundle/requirements/REQ-TIED_SETUP.yaml",
     ]);
-    assert.deepEqual(blocked, ["tied/methodology/requirements/REQ-TIED_SETUP.yaml"]);
+    assert.deepEqual(blocked, ["tied-bundle/requirements/REQ-TIED_SETUP.yaml"]);
   });
 
   it("applyMethodologyReadonlyBootstrapFlag is opt-in and no-ops when flag false", () => {

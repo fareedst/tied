@@ -1,0 +1,13 @@
+{
+  "run_at": "2026-09-13T21:17:53.286Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1787495576-1",
+  "partition_wave_id": "W-ext-1787495576-1",
+  "gate_stage": "G3",
+  "receipt_count": 3,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1787495576/receipts/IMPL-NETIF_CLI.receipt.json",
+    "working/fleet-constraint-v2/waves/1787495576/receipts/IMPL-NETIF_DISCOVERY.receipt.json",
+    "working/fleet-constraint-v2/waves/1787495576/receipts/IMPL-NETIF_FORMAT.receipt.json"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "result": {
+    "schema_version": "binding-inventory-validator.v1",
+    "ok": true,
+    "proof_boundary": "Binding inventory completeness and E2E justification only; this does not prove the runtime behavior of the bound units.",
+    "diagnostics": []
+  }
+}

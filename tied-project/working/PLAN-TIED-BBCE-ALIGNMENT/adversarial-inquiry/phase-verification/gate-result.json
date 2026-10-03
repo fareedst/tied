@@ -1,0 +1,13 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "PLAN-TIED-BBCE-ALIGNMENT#W3-MECHANISMS-B-C",
+    "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#checklist-promotion"
+  ],
+  "status": "warn",
+  "verdict": "UNRELIABLE"
+}

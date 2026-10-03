@@ -1,0 +1,15 @@
+{
+  "profile_depth": "integrated",
+  "project_root": "/tmp/tied-evidence-indescript",
+  "tied_base_path": "/tmp/tied-evidence-indescript/tied",
+  "invoke_structural_validators": true,
+  "run_metadata": {
+    "run_id": "post-alignment-structural-20260827",
+    "commit": "1a79d55f14f6ee842621b1f8f0bff0e703dd0450",
+    "stdd_mcp_commit": "9d3a406f6adbae664b757208778c7c2eecb49f67"
+  },
+  "change_context": {
+    "change_id": "TIED-3.0-ALIGNMENT-SYNC",
+    "comparison_baseline": "phase1-pilot"
+  }
+}

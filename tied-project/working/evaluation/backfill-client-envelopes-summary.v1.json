@@ -1,0 +1,131 @@
+{
+  "schema_version": "backfill-client-envelopes-summary.v1",
+  "generated_at": "2026-09-11T16:14:03.479Z",
+  "dry_run": false,
+  "rows": [
+    {
+      "client_alias": "1787416567",
+      "project_root": "/Users/fareed/Documents/dev/test/1787416567",
+      "request_token": "REQ-VOLUMESTATS-CLI",
+      "had_envelope_before": false,
+      "action": "backfill",
+      "ok": false,
+      "exit_code": 0,
+      "envelope_path": null,
+      "not_applicable_receipt_path": null,
+      "error": ""
+    },
+    {
+      "client_alias": "1787461685",
+      "project_root": "/Users/fareed/Documents/dev/test/1787461685",
+      "request_token": "REQ-BTREPORT-CLI",
+      "had_envelope_before": false,
+      "action": "backfill",
+      "ok": false,
+      "exit_code": 0,
+      "envelope_path": null,
+      "not_applicable_receipt_path": null,
+      "error": ""
+    },
+    {
+      "client_alias": "1787495576",
+      "project_root": "/Users/fareed/Documents/dev/test/1787495576",
+      "request_token": "REQ-NETIF_REPORT",
+      "had_envelope_before": false,
+      "action": "backfill",
+      "ok": false,
+      "exit_code": 0,
+      "envelope_path": null,
+      "not_applicable_receipt_path": null,
+      "error": ""
+    },
+    {
+      "client_alias": "1787503424",
+      "project_root": "/Users/fareed/Documents/dev/test/1787503424",
+      "request_token": "REQ-DESKTOP_WINDOW_REPORT",
+      "had_envelope_before": false,
+      "action": "backfill",
+      "ok": false,
+      "exit_code": 0,
+      "envelope_path": null,
+      "not_applicable_receipt_path": null,
+      "error": ""
+    },
+    {
+      "client_alias": "1787507684",
+      "project_root": "/Users/fareed/Documents/dev/test/1787507684",
+      "request_token": "REQ-ROOTJOBS",
+      "had_envelope_before": false,
+      "action": "backfill",
+      "ok": false,
+      "exit_code": 0,
+      "envelope_path": null,
+      "not_applicable_receipt_path": null,
+      "error": ""
+    },
+    {
+      "client_alias": "1787603099",
+      "project_root": "/Users/fareed/Documents/dev/test/1787603099",
+      "request_token": "REQ-LISTENING_PORT_REPORT",
+      "had_envelope_before": true,
+      "action": "skipped_existing",
+      "ok": true
+    },
+    {
+      "client_alias": "1787638699",
+      "project_root": "/Users/fareed/Documents/dev/test/1787638699",
+      "request_token": "REQ-WININFO_OPEN_WINDOWS",
+      "had_envelope_before": false,
+      "action": "backfill",
+      "ok": false,
+      "exit_code": 0,
+      "envelope_path": null,
+      "not_applicable_receipt_path": null,
+      "error": ""
+    },
+    {
+      "client_alias": "1787691672",
+      "project_root": "/Users/fareed/Documents/dev/test/1787691672",
+      "request_token": "REQ-MACOS_SERVICE_REPORT",
+      "had_envelope_before": false,
+      "action": "backfill",
+      "ok": false,
+      "exit_code": 0,
+      "envelope_path": null,
+      "not_applicable_receipt_path": null,
+      "error": ""
+    },
+    {
+      "client_alias": "1788547701",
+      "project_root": "/Users/fareed/Documents/dev/test/1788547701",
+      "request_token": "REQ-BT_BATTERY_DISPLAY",
+      "had_envelope_before": true,
+      "action": "skipped_existing",
+      "ok": true
+    },
+    {
+      "client_alias": "1789069630",
+      "project_root": "/Users/fareed/Documents/dev/test/1789069630",
+      "request_token": "REQ-MACOS_PERM_REPORT",
+      "had_envelope_before": true,
+      "action": "skipped_existing",
+      "ok": true
+    },
+    {
+      "client_alias": "1789087315",
+      "project_root": "/Users/fareed/Documents/dev/test/1789087315",
+      "request_token": "REQ-DUPCOMPARE",
+      "had_envelope_before": true,
+      "action": "skipped_existing",
+      "ok": true
+    },
+    {
+      "client_alias": "1789136889",
+      "project_root": "/Users/fareed/Documents/dev/test/1789136889",
+      "request_token": "REQ-TCP_CONNECT_CHECKER",
+      "had_envelope_before": true,
+      "action": "skipped_existing",
+      "ok": true
+    }
+  ]
+}

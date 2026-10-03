@@ -5,6 +5,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "../working-root.js";
 
 import fg from "fast-glob";
 
@@ -408,7 +409,7 @@ export function buildClosureJoinReport(input: ClosureJoinBuildInput): ClosureJoi
   };
 
   if (input.persist) {
-    const evidenceDir = path.join(input.project_root, "working", input.req_token, "evidence");
+    const evidenceDir = resolveWorkingPath(input.project_root, input.req_token, "evidence");
     fs.mkdirSync(evidenceDir, { recursive: true });
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     const reportPath = path.join(evidenceDir, `closure-join-${timestamp}.json`);

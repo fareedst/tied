@@ -1,0 +1,24 @@
+{
+  "request_token": "REQ-PSEUDOCODE_PARSER_UNIFICATION",
+  "phases_completed": ["C1", "C2"],
+  "phase_c3": "deferred",
+  "track_b_prerequisite": [
+    "working/evidence-chain/psa-analyze-pilot-off.json",
+    "working/evidence-chain/psa-analyze-pilot-on.json",
+    "working/evidence-chain/psa-analyze-pilot-20260908-summary.json"
+  ],
+  "tests": {
+    "command": "npm test",
+    "cwd": "mcp-server",
+    "exit_code": 0,
+    "passed": 574,
+    "failed": 0
+  },
+  "pseudocode_validate": {
+    "token": "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+    "sidecar": "tied/implementation-decisions/IMPL-PSEUDOCODE_SHARED_PRIMITIVES-pseudocode.md"
+  },
+  "tied_validate_consistency": "ok",
+  "citdp": "tied/citdp/CITDP-REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml",
+  "hard_constraint": "layer-b-pseudocode-validator.v1 golden output preserved"
+}

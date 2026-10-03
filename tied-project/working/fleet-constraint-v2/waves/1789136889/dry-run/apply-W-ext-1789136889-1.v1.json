@@ -1,0 +1,36 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T01:19:34.396Z",
+  "client_id": "1789136889",
+  "wave_scope": "W-ext-1789136889-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_CLI-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_CLI",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_DIAL-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_DIAL",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_PROBE-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_PROBE",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_REPORT-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_REPORT",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "11f406127e3860b6c840f099e531e7a4bccd1191e50b0167c462c58dee0afe5c",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1789136889/dry-run/snapshots/W-ext-1789136889-1"
+}

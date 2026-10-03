@@ -1,0 +1,1 @@
+{"schemaVersion":"adversarial-inquiry-finding.v1","run_id":"w4-refine-pre-impl-2026-09-27","finding_id":"F-W4-001","severity":"info","summary":"Promoting advisory bundle must not enable CI hard fail without separate REQ","disposition":"accepted_risk_waiver","evidence_ref":"working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.yaml"}

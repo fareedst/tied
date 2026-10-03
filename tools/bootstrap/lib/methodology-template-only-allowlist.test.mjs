@@ -11,7 +11,7 @@ import {
 describe("methodology-template-only-allowlist", () => {
   it("documents the four template-only paths from ARCH/PLAN", () => {
     assert.deepEqual([...METHODOLOGY_TEMPLATE_ONLY_PATHS].sort(), [
-      ".tied-yaml.yaml",
+      "tied-project/config.yaml",
       "agent-req-checklist-feat-spawned-phase5.v1.yaml",
       "impl-essence-pseudocode-template.md",
       "processes.md",

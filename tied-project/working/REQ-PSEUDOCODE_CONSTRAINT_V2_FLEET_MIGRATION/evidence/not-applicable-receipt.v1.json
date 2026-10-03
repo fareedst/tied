@@ -1,0 +1,10 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "artifact_kind": "executable_tests",
+  "depth_tier": "integrated",
+  "phases": ["verification", "close_out"],
+  "reason": "Phase 1 policy-only scope per CITDP test_strategy; REQ traceability.tests empty; no RED/GREEN/composition/E2E for governance orchestration IMPL in Phase 1.",
+  "generated_at": "2026-09-12T14:45:00.000Z",
+  "source": "plan-close-out-phase1-fleet-20260912"
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T21:17:53.056Z",
+  "client_id": "1787495576",
+  "wave_scope": "W-ext-1787495576-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_CLI-pseudocode.md",
+      "impl_token": "IMPL-NETIF_CLI",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "MAIN()",
+          "start_line": 93
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_DISCOVERY-pseudocode.md",
+      "impl_token": "IMPL-NETIF_DISCOVERY",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "OS_LISTER.List()",
+          "start_line": 109
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_FORMAT-pseudocode.md",
+      "impl_token": "IMPL-NETIF_FORMAT",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "BUILD_FLAG_LIST(up, loopback)",
+          "start_line": 103
+        }
+      ]
+    }
+  ],
+  "dry_run_content_hash": "03514f15e8ebc7166a3ce5f1e1cea0bd8369bd28a2a80737ea70aac0ab27807e",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787495576/dry-run/snapshots-constraint-ready/W-ext-1787495576-1"
+}

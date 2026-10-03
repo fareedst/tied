@@ -15,14 +15,52 @@ function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null && !Array.isArray(v);
 }
 
+const PROJECT_CONFIG_SCHEMA_V1 = "tied-project-config.v1";
+
+function resolveProjectConfigFile(projectRoot: string): string | undefined {
+  const root = path.resolve(projectRoot);
+  for (const dirName of ["tied-project", "tied"] as const) {
+    const candidate = path.join(root, dirName, "config.yaml");
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  const legacyRoot = path.join(root, ".tied-yaml.yaml");
+  if (fs.existsSync(legacyRoot)) {
+    return legacyRoot;
+  }
+  return undefined;
+}
+
+function flatProjectConfigView(record: Record<string, unknown>): Record<string, unknown> {
+  if (record.schema !== PROJECT_CONFIG_SCHEMA_V1) {
+    return record;
+  }
+  const yamlSection = isRecord(record.yaml) ? record.yaml : {};
+  const flat: Record<string, unknown> = { ...record };
+  if (yamlSection.scalar_style !== undefined) {
+    flat.scalar_style = yamlSection.scalar_style;
+  }
+  if (yamlSection.client_formatter !== undefined) {
+    flat.client_formatter = yamlSection.client_formatter;
+  }
+  delete flat.schema;
+  delete flat.yaml;
+  return flat;
+}
+
+/** Mirror mcp-server tied-project-config.readRepoTiedYaml (no cross-package import). */
 export function readRepoTiedYaml(projectRoot: string): Record<string, unknown> | undefined {
-  const configPath = path.join(projectRoot, ".tied-yaml.yaml");
-  if (!fs.existsSync(configPath)) {
+  const configPath = resolveProjectConfigFile(projectRoot);
+  if (!configPath) {
     return undefined;
   }
   try {
     const raw = yaml.load(fs.readFileSync(configPath, "utf8"));
-    return isRecord(raw) ? raw : undefined;
+    if (!isRecord(raw)) {
+      return undefined;
+    }
+    return flatProjectConfigView(raw);
   } catch {
     return undefined;
   }

@@ -1,0 +1,54 @@
+# [IMPL-ROOTJOBS_COLLECT] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_SNAPSHOT]
+# Summary: Collector interface and gopsutil snapshot with FakeCollector test double; skip unreadable PIDs with DEBUG log.
+
+## COLLECTOR_CONTRACT
+# [IMPL-ROOTJOBS_COLLECT] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_SNAPSHOT]
+# How: Define Process struct and Collector interface for one-shot OS enumeration.
+
+Contract:
+  INPUT: ctx context.Context
+  OUTPUT: []Process with PID, PPID, Name, Command, State
+  DATA: Process{PID, PPID, Name, Command, State}
+  PRE: ctx is non-nil or caller accepts background context
+  POST: Snapshot returns flat slice; error only on total failure
+  EFFECTS: State — read-only OS process table query
+  FAILURE_MODES: SNAPSHOT_TOTAL_FAILURE
+  TERMINATION: total — single pass enumeration
+
+type Process struct { PID, PPID int; Name, Command, State string }
+type Collector interface { Snapshot(ctx) ([]Process, error) }
+type FakeCollector struct { Processes []Process; Err error }
+
+## SNAPSHOT_OS
+# [IMPL-ROOTJOBS_COLLECT] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_SNAPSHOT]
+# How: GopsutilCollector wraps gopsutil process.Processes() on darwin/linux.
+
+procedure SNAPSHOT_OS(ctx):
+  Contract:
+    INPUT: ctx
+    OUTPUT: []Process
+    PRE: gopsutil available on platform
+    POST: each readable process mapped to Process; unreadable skipped
+    EFFECTS: State — OS introspection; Control — append to result slice
+    FAILURE_MODES: SNAPSHOT_TOTAL_FAILURE
+    TERMINATION: total — iterate all PIDs once
+  processes := gopsutil.Processes()
+  FOR each p IN processes:
+    TRY map p to Process via Name(), Cmdline() fallback Name(), Status()
+    ON success: APPEND to result
+    ON unreadable_pid: LOG DEBUG skip; CONTINUE
+  RETURN result
+
+## ON unreadable_pid
+# [IMPL-ROOTJOBS_COLLECT] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_SNAPSHOT]
+# How: Best-effort collect; permission errors skip single PID.
+
+  LOG "DEBUG: skip unreadable PID {pid}: {err}"
+  CONTINUE enumeration
+
+## ON empty
+# [IMPL-ROOTJOBS_COLLECT] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_SNAPSHOT]
+# How: Empty snapshot is valid; return nil slice not error.
+
+  IF no processes readable:
+    RETURN []Process{}, nil

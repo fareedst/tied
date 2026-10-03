@@ -29,7 +29,7 @@ _repo_root="$(cd "${_script_dir}/.." && pwd)"
 : "${test_path:=.}"
 : "${tied_path:=$_repo_root}"
 
-LEAD_CHECKLIST_YAML="${tied_path}/tied/docs/agent-req-implementation-checklist.yaml"
+LEAD_CHECKLIST_YAML="${tied_path}/tied-bundle/docs/agent-req-implementation-checklist.yaml"
 
 usage() {
   cat <<'EOF'

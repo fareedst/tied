@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "PLAN-TIED-RESIDUALITY-ANALYSIS",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "Plan-doc refine/build batch; integrated adversarial inquiry not activated at minimal depth_tier",
+  "generated_at": "2026-09-27T05:00:00.000Z",
+  "source": "plan-close-out"
+}

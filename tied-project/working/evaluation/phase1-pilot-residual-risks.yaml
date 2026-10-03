@@ -1,0 +1,95 @@
+aggregation_summary:
+  cross_client_pilot:
+    client_cohorts: 1
+    compatibility_key: "evidence-chain-profile.v1|integrated"
+    denominator_subcohorts:
+      - fingerprint: "83a20f7f7574881f"
+        n: 4
+        publication_status: "sufficient_for_count_statistics"
+    inputs_accepted: 4
+    unique_project_ids: 4
+  within_repo:
+    inputs_accepted: 8
+    note: "TIED-to-TIED same-repo comparison at HEAD vs historical commit"
+    profiles_per_project_id: 2
+    unique_project_ids: 4
+charter_reference: "docs/tied-methodology-evaluation-framework.md"
+evaluation_questions_addressed:
+  - id: "Q4"
+    proof_boundary: "traceability_structure"
+    scope: "structural chain completeness across four TIED clients at integrated depth"
+  - id: "Q6"
+    limitation: "metrics_opt_in true but no quality manifest attached"
+    proof_boundary: "traceability_structure"
+    scope: "pilot demonstrates repeatable aggregator path; cost arms still require metrics manifest and wall-time collection"
+generated_at: "2026-08-27T04:13:35.154Z"
+insufficient_sample_subcohorts:
+  cross_client_pilot: []
+  fixture_baseline: "all five fixture subcohorts n equals 1"
+methodology_version_variance:
+  note: "All four clients report tied_methodology_version 3.0.0 in generated profiles. Effective coverage still varies by adoption maturity (pseudocode sidecars, git-tracked tied/, validator pass/fail), not by declared version alone."
+  stated_version: "3.0.0"
+operator_pilot:
+  client_count: 4
+  clients:
+    - client_alias: "indescript"
+      coverage_notes: "184 pseudocode sidecars; tied_validate_consistency ok true; traceability_gap ok false"
+      head_commit: "76a3060026c81c4d1e42bcd26aba4a05b16fb246"
+      historical_commit: "140b9a558076150ca54da49a1afc24290d908d6b"
+      historical_label: "first-tied"
+      language: "swift"
+      project_id: "af185e7e62bb1bfb"
+      tied_methodology_version: "3.0.0"
+    - client_alias: "nsync"
+      coverage_notes: "tied/ untracked in git; 0 pseudocode sidecars; tied_validate_consistency ok false"
+      head_commit: "07aeca0fb6326c6d9f30e217e95f6e7e735a94ed"
+      historical_commit: "03a5985482d026d3ff05aac6dafb2b85fe19ae28"
+      historical_label: "head5"
+      language: "go"
+      project_id: "8cc4c7db8ac063e6"
+      tied_methodology_version: "3.0.0"
+    - client_alias: "panorama"
+      coverage_notes: "99 pseudocode sidecars; tied_validate_consistency ok true; traceability_gap ok false"
+      head_commit: "595d323e24e56642d83ed631124a0e14e70ace56"
+      historical_commit: "a3979737fcc1c30310048878c64d3b096fcbd94b"
+      historical_label: "first-tied"
+      language: "typescript"
+      project_id: "d5dba3d9186254ca"
+      tied_methodology_version: "3.0.0"
+    - client_alias: "treegrep"
+      coverage_notes: "tied tracked; tied_validate_consistency ok true; traceability_gap ok false"
+      head_commit: "47f1530ceaebe1e384d3fccc95a879c3bb1b9657"
+      historical_commit: "f69c7d7639ad6d6d274dd06afef69f92864496ec"
+      historical_label: "first-tied"
+      language: "ruby"
+      project_id: "69cb84308c3d6924"
+      tied_methodology_version: "3.0.0"
+phase: 1
+pilot_status: "operator_complete"
+profile_generation:
+  command: "TIED_BASE_PATH=<client>/tied tied-cli.sh evidence_chain_profile_generate with invoke_structural_validators true; historical commits via git checkout"
+  invoke_structural_validators: true
+  manifest_reference: "absent"
+  output_dir: "working/evaluation/profiles/"
+  profile_depth: "integrated"
+report_artifacts:
+  cross_client:
+    input_manifest: "working/evaluation/phase1-pilot-report-inputs.yaml"
+    statistics_markdown: "working/evaluation/phase1-pilot-evidence-chain-report.md"
+    statistics_yaml: "working/evaluation/phase1-pilot-evidence-chain-report.yaml"
+  fixture_baseline:
+    input_manifest: "working/evaluation/phase1-report-inputs.yaml"
+    statistics_yaml: "working/evaluation/phase1-evidence-chain-report.yaml"
+  within_repo:
+    input_manifest: "working/evaluation/phase1-within-repo-report-inputs.yaml"
+    statistics_markdown: "working/evaluation/phase1-within-repo-evidence-chain-report.md"
+    statistics_yaml: "working/evaluation/phase1-within-repo-evidence-chain-report.yaml"
+residual_risks:
+  - "Cross-client count statistics are structural completeness only; they do not prove runtime correctness or defect rates."
+  - "No verification evidence manifest; quality.command_results remains not_measured on all clients."
+  - "nsync tied/ directory is untracked; HEAD and historical profiles reflect working tree state at checkout time."
+  - "Profiles generated from operator-local checkouts; absolute paths appear in profile roots_used (operator_local artifacts only)."
+  - "Structural validator invocation uses current stdd MCP against client tied/ at checked-out commit; not a sealed reproducible container run."
+  - "traceability_gap_report ok false on treegrep, panorama, indescript; nsync additionally fails tied_validate_consistency."
+  - "Vocabulary drift adapter not configured on any client (vocab_resolution not_measured)."
+schema_version: "evaluation-phase-summary.v1"

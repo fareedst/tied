@@ -1,0 +1,93 @@
+{
+  "$schema": "../../constraint-migration-receipt.v1.schema.json",
+  "receipt_meta": {
+    "schema_version": 1,
+    "receipt_id": "receipt-exemplar-alias-mutation-20260912",
+    "generated_at": "2026-09-12T15:00:00Z",
+    "gate_stage": "G1",
+    "program_gate_policy": "advisory"
+  },
+  "pin": {
+    "methodology_pin": "48d1fbb+",
+    "analyzer_build_identity": "pseudocode-analyzer/1.0.0+stdd@b568c98",
+    "manifest_entry_id": "exemplar-alias-mutation"
+  },
+  "subject": {
+    "sidecar_path": "working/fleet-constraint-v2/exemplars/exemplar-alias-mutation.pseudocode.md",
+    "impl_token": "IMPL-FLEET_EXEMPLAR_ALIAS",
+    "input_identity": {
+      "algorithm": "sha256",
+      "hash": "826be32576da891f396bb11018cdbb5ce7c8b57e900c9e8bd38d7089b59b01dd",
+      "byte_length": 920
+    },
+    "grammar_version": "pseudocode-grammar.v2",
+    "annotation_profile": "constraint-ready-v2"
+  },
+  "layer_a": {
+    "applicable": false,
+    "ok": true,
+    "notes": "Layer A skipped for fleet exemplar receipt (no IMPL index record)."
+  },
+  "layer_b": {
+    "ok": true,
+    "validator_schema_version": "layer-b-pseudocode-validator.v1",
+    "blocks_count": 1,
+    "contract_precision": {
+      "active_blocks_with_contract": 1,
+      "active_blocks_missing_pre_or_post": 0,
+      "active_blocks_missing_failure_modes": 0,
+      "active_blocks_missing_data_transition": 0,
+      "active_blocks_missing_termination": 0
+    },
+    "error_count": 0,
+    "warning_count": 0
+  },
+  "layer_c": {
+    "gate_mode": true,
+    "typed_flow": true,
+    "constraint_flow": true,
+    "constraint_gate_errors_policy": "advisory",
+    "ok": true,
+    "analysis_truncated": false,
+    "diagnostics_truncated": false,
+    "error_count": 0,
+    "warning_count": 0,
+    "info_count": 0,
+    "procedure_count": 1,
+    "source_report_schema": "pseudocode-analysis-report.v1"
+  },
+  "constraint": {
+    "ran": true,
+    "procedures_analyzed": 1,
+    "refinements_checked": 1,
+    "refinements_proven": 1,
+    "alias_mut_checked": 1,
+    "alias_mut_violations": 0,
+    "interproc_enabled": false,
+    "budgets_applied": {
+      "max_solver_steps": 256,
+      "max_summary_depth": 8,
+      "max_predicate_nodes": 512
+    },
+    "solver_truncated": false,
+    "solver_truncation_cause": "none",
+    "alias_analysis_truncated": false,
+    "budget_exceeded": false,
+    "constraint_diagnostics_truncated": false
+  },
+  "unknown_summary": {
+    "unknown": 0,
+    "truncated": 0,
+    "unsupported": 0,
+    "prose_only": 0,
+    "budget_exceeded": 0
+  },
+  "constraint_gate_errors": [],
+  "promotion_readiness": {
+    "qualification_green": false,
+    "f11_pass": false,
+    "fp_within_threshold": false,
+    "as_of_phase": "P2-E-exemplar"
+  },
+  "collector_notes": "Live pseudocode_analyze G1 advisory run (P2-E). Exemplar tier: alias-mutation (ALIAS POLICY)."
+}

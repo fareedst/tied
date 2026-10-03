@@ -1,0 +1,19 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T17:40:21.082Z",
+  "client_id": "1786636023",
+  "wave_scope": "W-ext-1786636023-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786636023/tied/implementation-decisions/IMPL-PRIME_PRINTER-pseudocode.md",
+      "impl_token": "IMPL-PRIME_PRINTER",
+      "action": "none",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": []
+    }
+  ],
+  "dry_run_content_hash": "eb9106376fa060a2cca4096627d3cf3bfccc1ccaa0e40bf342806a206ce791af",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1786636023/dry-run/snapshots-constraint-ready/W-ext-1786636023-1"
+}

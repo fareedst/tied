@@ -1,0 +1,30 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T18:26:08.600Z",
+  "client_id": "1787461685",
+  "wave_scope": "W-ext-1787461685-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-CLI-CMD-pseudocode.md",
+      "impl_token": "IMPL-BTREPORT-CLI-CMD",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-REPORT-FORMAT-pseudocode.md",
+      "impl_token": "IMPL-BTREPORT-REPORT-FORMAT",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-SYSTEM-PROFILER-pseudocode.md",
+      "impl_token": "IMPL-BTREPORT-SYSTEM-PROFILER",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    }
+  ],
+  "dry_run_content_hash": "18211529c70b308778de1830a3a9327e7fc3cd8693375e1f0af765549600c68f",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787461685/dry-run/snapshots/W-ext-1787461685-1"
+}

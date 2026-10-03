@@ -1,0 +1,16 @@
+include_absolute_paths: false
+inputs:
+  - client_alias: "indescript-post"
+    notes: "indescript scoped E1-E4 post-alignment structural arm"
+    profile_path: "profiles/indescript-post-alignment.v1.json"
+  - client_alias: "nsync-post"
+    notes: "nsync E4 post-alignment structural arm"
+    profile_path: "profiles/nsync-post-alignment.v1.json"
+  - client_alias: "panorama-post"
+    notes: "panorama E4 post-alignment structural arm"
+    profile_path: "profiles/panorama-post-alignment.v1.json"
+  - client_alias: "treegrep-post"
+    notes: "treegrep E4 post-alignment structural arm"
+    profile_path: "profiles/treegrep-post-alignment.v1.json"
+mode: "strict"
+schema_version: "evidence-chain-report-inputs.v1"

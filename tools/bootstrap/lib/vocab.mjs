@@ -14,10 +14,10 @@ import { sayWarn } from "./console.mjs";
 
 const CLIENT_ROUTING_TEMPLATE = `# Client vocabulary routing index
 
-**Ownership:** Client-owned discovery handoff. TIED methodology vocabulary is refreshed under [\`../methodology/vocab/\`](../methodology/vocab/).
+**Ownership:** Client-owned discovery handoff. TIED methodology vocabulary lives under [\`../../tied-bundle/vocab/\`](../../tied-bundle/vocab/).
 
 **Procedure:**
-1. Read the [TIED methodology routing index](../methodology/vocab/routing.md) for methodology terms.
+1. Read the [TIED methodology routing index](../../tied-bundle/vocab/routing.md) for methodology terms.
 2. Read the client glossary routing table below for product terms.
 3. PRELOAD only the matched glossary for the task.
 4. Use the [client vocabulary catalog](domain-references.md) for cross-topic links.
@@ -26,7 +26,7 @@ const CLIENT_ROUTING_TEMPLATE = `# Client vocabulary routing index
 
 ## TIED methodology vocabulary
 
-Use [\`../methodology/vocab/routing.md\`](../methodology/vocab/routing.md) for TIED layout, process, validation, and tooling concepts. Do not copy methodology terms into client glossaries.
+Use [\`../../tied-bundle/vocab/routing.md\`](../../tied-bundle/vocab/routing.md) for TIED layout, process, validation, and tooling concepts. Do not copy methodology terms into client glossaries.
 
 ## Client glossary routing table
 
@@ -36,7 +36,7 @@ Use [\`../methodology/vocab/routing.md\`](../methodology/vocab/routing.md) for T
 
 ## Ownership
 
-Files under \`tied/vocab/\` are client-owned. Files under \`tied/methodology/vocab/\` are TIED-owned and are replaced during methodology refresh.
+Files under \`tied-project/vocab/\` (or \`tied-project/vocab/\`) are client-owned. Methodology glossaries under \`tied-bundle/vocab/\` are TIED-owned and are replaced during methodology refresh.
 
 ## Alphabetical index
 
@@ -49,7 +49,7 @@ Files under \`tied/vocab/\` are client-owned. Files under \`tied/methodology/voc
 
 const CLIENT_CATALOG_TEMPLATE = `# Client vocabulary catalog
 
-**Scope:** Index of client-owned domain vocabulary. TIED methodology vocabulary is cataloged separately under [\`../methodology/vocab/domain-references.md\`](../methodology/vocab/domain-references.md).
+**Scope:** Index of client-owned domain vocabulary. TIED methodology vocabulary is cataloged separately under [\`../../tied-bundle/vocab/domain-references.md\`](../../tied-bundle/vocab/domain-references.md).
 
 **Procedure:** Read [\`routing.md\`](routing.md) first. Use the methodology catalog for TIED concepts and this catalog for client product concepts.
 
@@ -57,7 +57,7 @@ const CLIENT_CATALOG_TEMPLATE = `# Client vocabulary catalog
 
 ## TIED methodology catalog
 
-The refreshable TIED vocabulary catalog is [\`../methodology/vocab/domain-references.md\`](../methodology/vocab/domain-references.md).
+The refreshable TIED vocabulary catalog is [\`../../tied-bundle/vocab/domain-references.md\`](../../tied-bundle/vocab/domain-references.md).
 
 ## Client canonical glossaries
 
@@ -67,7 +67,7 @@ The refreshable TIED vocabulary catalog is [\`../methodology/vocab/domain-refere
 
 ## Ownership
 
-This catalog and all non-index glossaries in \`tied/vocab/\` are client-owned. The methodology catalog and its linked glossaries are refreshed under \`tied/methodology/vocab/\`.
+This catalog and all non-index glossaries in the project vocab dir are client-owned. The methodology catalog and its linked glossaries are refreshed under \`tied-bundle/vocab/\`.
 
 ## Alphabetical index
 
@@ -104,16 +104,16 @@ export function filterClientBootstrapDoc(source, destination, basename) {
       .join("\n");
   } else if (basename === "prompt-type-skills.md") {
     text = text.replaceAll(
-      "**Vocabulary:** [`tied/vocab/prompt-composer.md`](../vocab/prompt-composer.md)",
+      "**Vocabulary:** [`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md)",
       "**Vocabulary:** Prompt Composer terms are maintained in the TIED source repository and are not installed into clients."
     );
     text = text.replaceAll(
-      "The canonical glossary is\n[`tied/vocab/prompt-composer.md`](../vocab/prompt-composer.md). The following\nterms were recorded for this skill implementation.",
+      "The canonical glossary is\n[`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md). The following\nterms were recorded for this skill implementation.",
       "Prompt Composer terms are recorded here for client skill context; the canonical glossary is maintained in the TIED source repository and is not installed into clients."
     );
     text = text.replaceAll(
-      "1. Update `tied/vocab/prompt-composer.md` for new or renamed concepts.",
-      "1. Update the source-only `tied/vocab/prompt-composer.md` glossary for new or renamed concepts."
+      "1. Update `tied-project/vocab/prompt-composer.md` for new or renamed concepts.",
+      "1. Update the source-only `tied-project/vocab/prompt-composer.md` glossary for new or renamed concepts."
     );
   }
   fs.writeFileSync(destination, text, "utf8");

@@ -79,7 +79,7 @@ def build_markdown(rows, by_day)
   lines << '# CITDP evidence: hook logs and correlation'
   lines << ''
   lines << 'Machine-readable hook events are under `~/.cursor/logs/conv_ruby_treegrep_<UTC-date-segment>_<conversation_id>.yaml` (see `.cursor/hooks/log.rb`).'
-  lines << 'CITDP archives live under [`tied/citdp/`](citdp/). This document ties them together for audits.'
+  lines << 'CITDP archives live under [`tied-project/citdp/`](citdp/). This document ties them together for audits.'
   lines << ''
   lines << '## Regenerate artifacts'
   lines << ''
@@ -149,7 +149,7 @@ def build_markdown(rows, by_day)
 
   lines << '## `postToolUseFailure` vs CITDP “yq multi-document” narrative'
   lines << ''
-  lines << '`postToolUseFailure` in these logs is dominated by **Read/Grep “file not found”** (stale paths, optional docs like `tied/docs/citdp-policy.md`, or tests not yet created).'
+  lines << '`postToolUseFailure` in these logs is dominated by **Read/Grep “file not found”** (stale paths, optional docs like `tied-bundle/docs/citdp-policy.md`, or tests not yet created).'
   lines << 'The **yq multi-file merge** incidents are documented in CITDP `leap_feedback` / `risk_analysis` text; the same narrative appears inside hook transcripts when agents paste CITDP YAML — search a large log for `multi-arg yq` or `mikefarah yq`.'
   lines << ''
   lines << 'Example (session `1b7806e1-047a-4692-bf01-445cbfc2b459`, 2026-03-22):'

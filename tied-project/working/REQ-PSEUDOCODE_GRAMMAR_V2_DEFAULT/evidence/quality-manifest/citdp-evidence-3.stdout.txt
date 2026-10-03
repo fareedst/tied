@@ -1,0 +1,19 @@
+▶ new-tied-client pipeline
+  ✔ uses unix seconds not milliseconds for disposable timestamp [REQ-TIED_SETUP] [IMPL-TIED_FILES] (49.196334ms)
+  ✔ parseNewTiedClientArgs handles disposable and skip flags [IMPL-TIED_FILES] (50.696834ms)
+  ✔ resolveCursorAgentCli prefers cursor when on PATH and honors TIED_CURSOR_AGENT_CMD [IMPL-TIED_FILES] (48.827792ms)
+  ✔ mcp enable step uses resolved Cursor agent CLI [IMPL-TIED_FILES] (48.054834ms)
+  ✔ records pipeline step order via injectable spawn [IMPL-TIED_FILES] (50.588ms)
+✔ new-tied-client pipeline (247.95725ms)
+▶ new-tied-client integration
+  ✔ bootstraps client with lint when MCP and git skipped [REQ-TIED_SETUP] [IMPL-TIED_FILES] (2329.90825ms)
+  ✔ runs disposable CLI with skip flags [IMPL-TIED_FILES] (2348.352416ms)
+✔ new-tied-client integration (4678.375ms)
+ℹ tests 7
+ℹ suites 2
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4990.064667

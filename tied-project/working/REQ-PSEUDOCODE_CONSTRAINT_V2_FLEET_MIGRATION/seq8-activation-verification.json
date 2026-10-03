@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+    "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "run_id": "fleet-migration-phase4-closeout-20260913",
+    "phase": "verification",
+    "scope": [
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006"
+    ],
+    "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c",
+    "artifact_hashes": {
+      "obligation-report.json": "8de8c4455a6bf1dea87b1473629d89b189f95c166eaf7cabf720164557fdc8df",
+      "finding-ledger.jsonl": "b8b7da783c06f3044bba5ff9081d846af6fd0cd23e7034c27994abace86f2c13",
+      "gate-result.json": "5a6742055006fad0b6c1f8f1ca6492bdfc59de5543e846b33e968716f88d39f2",
+      "evidence-provenance.json": "2b5a8bcfd59245e0014750c30982f0a1d65bec6cfd4d9db771bf1167f4815923"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+    "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "run_id": "fleet-migration-phase4-closeout-20260913",
+    "phase": "verification",
+    "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c"
+  }
+}

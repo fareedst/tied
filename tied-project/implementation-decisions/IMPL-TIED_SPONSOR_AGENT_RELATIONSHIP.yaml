@@ -1,0 +1,32 @@
+IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  code_locations:
+    files:
+      - description: "AUDIT_RELATIONSHIP_LAYER_CONTRACT"
+        path: "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts"
+      - description: "Canonical glossary"
+        path: "tied-project/vocab/sponsor-agent-relationship.md"
+      - description: "Checklist marker parity"
+        path: "mcp-server/src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts"
+      - description: "CLASSIFY_DECISION_CONSEQUENCE and ROUTE_SPONSOR_TIED_DISAGREEMENT"
+        path: "mcp-server/src/relationship/consequence-ladder.ts"
+      - description: "validateHingeFields + gate wiring"
+        path: "mcp-server/src/checklist-validator.ts"
+  description: "VALIDATE_HINGE_FIELD in checklist-validator; relationship/consequence-ladder pure helpers; static contract and checklist parity tests; glossary and doc propagation."
+  name: "Sponsor-Agent Relationship Layer implementation"
+  related_decisions:
+    composed_with:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
+    depends_on:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    see_also: []
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    requirements:
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    tests:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts"

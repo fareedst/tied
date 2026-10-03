@@ -1,0 +1,45 @@
+# IMPL-PERM_CATALOG essence pseudocode
+
+<!-- [IMPL-PERM_CATALOG] [ARCH-MACOS_PERM_REPORT] [REQ-MACOS_PERM_REPORT] — maps CLI permission aliases to TCC services and database routing -->
+
+## RESOLVE_ALIASES
+
+<!-- [IMPL-PERM_CATALOG] [ARCH-MACOS_PERM_REPORT] [REQ-MACOS_PERM_REPORT] — resolves sponsor-facing aliases to canonical PermissionEntry records -->
+
+```
+INPUT: optional alias list from CLI (--permission flags)
+OUTPUT: PermissionEntry[] — full catalog or filtered subset
+PRE: each alias when provided must exist in PERMISSION_CATALOG
+POST: unknown alias raises CatalogError with alias name
+EFFECTS: none (pure lookup)
+```
+
+```
+DATA PERMISSION_CATALOG = [
+  { alias: "screen", service: "kTCCServiceScreenCapture", label: "Screen Recording", database: "system" },
+  { alias: "microphone", service: "kTCCServiceMicrophone", label: "Microphone", database: "user" },
+  { alias: "camera", service: "kTCCServiceCamera", label: "Camera", database: "user" },
+  { alias: "accessibility", service: "kTCCServiceAccessibility", label: "Accessibility", database: "system" },
+  { alias: "input-monitoring", service: "kTCCServiceListenEvent", label: "Input Monitoring", database: "system" },
+  { alias: "input-injection", service: "kTCCServicePostEvent", label: "Input Injection", database: "system" },
+  { alias: "full-disk-access", service: "kTCCServiceSystemPolicyAllFiles", label: "Full Disk Access", database: "system" },
+  { alias: "developer-tools", service: "kTCCServiceDeveloperTool", label: "Developer Tools", database: "system" }
+]
+
+IF aliases is empty THEN
+  RETURN PERMISSION_CATALOG
+ELSE
+  FOR EACH alias IN aliases
+    IF alias NOT IN PERMISSION_CATALOG THEN RAISE CatalogError(alias)
+  RETURN filtered entries
+```
+
+## ROUTE_TO_DATABASE
+
+<!-- same token set — groups PermissionEntry by database source for reader -->
+
+```
+INPUT: PermissionEntry[]
+OUTPUT: { user: PermissionEntry[], system: PermissionEntry[] }
+POST: every entry appears in exactly one bucket by entry.database
+```

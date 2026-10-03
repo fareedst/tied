@@ -11,27 +11,41 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 
 | Entry | Platform | Behavior |
 |-------|----------|----------|
-| `copy_files.cmd` | Windows | PATHEXT resolves `copy_files` from neighboring repo |
-| `copy_files.sh` | Unix / Git Bash | Thin wrapper: `exec node tools/bootstrap/copy-files.mjs` |
-| `tools/bootstrap/copy-files.mjs` | All | Direct Node CLI |
+| `tied-install.sh` / `tied-install.cmd` / `tied-install.ps1` | Unix / CMD / PowerShell | **Layered install** (default `--mode linked`); `tied-install-dispatch.mjs` → `install-layers.mjs` |
+| `tools/bootstrap/tied-install-dispatch.mjs` | All | Install dispatch ([RUN_TIED_INSTALL_ENTRYPOINT]) |
+| `tools/bootstrap/install-layers.mjs` | All | Layer engine: `--layers`, `--harness`, `--mode linked\|full`, `--doctor`, `--migrate-layout` |
 
-| `tools/bootstrap/new-tied-client.mjs` | All | Disposable/explicit client factory pipeline |
-| `scripts/new-tied-client.cmd` | Windows | Explicit client dir: bootstrap + lint + MCP + git |
-| `scripts/test-new-tied-client.cmd` | Windows | `--disposable` under `%USERPROFILE%\Documents\dev\test\<unix-seconds>` |
-| `scripts/test-new-claude-tied-client.cmd` | Windows | Claude-first disposable (`--harness claude` + validation receipt) |
-| `scripts/run-tied-claude-client-validation.mjs` | All | Re-run Claude validation on an existing client |
-| `scripts/lint_yaml.cmd` | Windows | `-F tied` lint parity with `lint_yaml.sh` |
-| `test-new-tied-client.cmd` | Windows | Repo-root discoverability shim |
+**Profiles:** `linked` (stubs + MCP bundle env; factory default) vs **`full`** (offline materialized `tied-bundle/`). Brownfield: **`tied-install --migrate-layout`**.
+
+**Operator matrix:** `source scripts/build-commands.sh && how install-matrix` — maps smoke flags (`test-new-tied-client --install-mode full`, layer subsets) to committed vs gitignored paths; see `tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md`.
+
+**CI / pre-push:** `source scripts/build-commands.sh && test-all` runs `test-bootstrap-layered-install` (unit/composition for `tied-install` / layers; [REQ-TIED_LAYERED_CLIENT_INSTALL]). Disposable factory smoke remains `test-new-tied-client` (not in `test-all`).
+
+| `tools/bootstrap/new-tied-client.mjs` | All | Disposable/explicit client factory pipeline (defaults to `tied-install` linked) |
+| `scripts/new-tied-client.cmd` / `.ps1` | Windows | Explicit client dir: bootstrap + lint + MCP + git |
+| `scripts/test-new-tied-client.cmd` / `.ps1` | Windows | `--disposable` under `%USERPROFILE%\Documents\dev\test\<unix-seconds>` |
+| `scripts/test-new-claude-tied-client.cmd` / `.ps1` | Windows | Claude-first disposable (`--harness claude` + validation receipt) |
+| `scripts/validate-claude-tied-client.cmd` / `.ps1` | Windows | Re-run Claude validation on an existing client (`CLIENT_DIR` + optional flags) |
+| `scripts/run-tied-claude-client-validation.mjs` | All | Node backend for validate-claude shims |
+| `scripts/lint_yaml.cmd` / `.ps1` | Windows | `-F tied` lint parity with `lint_yaml.sh` |
+| `tied-install.ps1` | Windows | Same as `tied-install.cmd` |
+| `test-new-tied-client.cmd` / `.ps1` | Windows | Repo-root discoverability shim |
 
 ## Disposable client smoke (Windows)
 
 From the TIED repo:
 
 ```cmd
-scripts\test-new-tied-client
+scripts\test-new-tied-client.cmd
 ```
 
-Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, **G4 new-client onboarding audit** (`working/tied-new-client-audit.v1.json`, [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional ``${CURSOR_CLI_NAME:-agent} mcp enable tied-yaml`` (resolved via `resolveCursorAgentCli`; see env table below), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
+PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\test-new-tied-client.ps1
+```
+
+Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, **G4 new-client onboarding audit** (`tied-project/working/tied-new-client-audit.v1.json` on two-folder clients; undivided brownfield fallback `working/tied-new-client-audit.v1.json` — [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH](../../tied-project/requirements/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml), [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional ``${CURSOR_CLI_NAME:-agent} mcp enable tied-yaml`` (resolved via `resolveCursorAgentCli`; see env table below), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
 
 | Variable | Role |
 |----------|------|
@@ -96,9 +110,9 @@ From the TIED repo on Windows (after `mcp-server` build):
 scripts\windows-bootstrap-smoke.cmd (includes Claude asserts via `tools/bootstrap/assert-windows-bootstrap-claude.mjs` — [REQ-TIED_CLAUDE_BOOTSTRAP_OPS])
 ```
 
-Runs `copy_files.cmd` into a temp client dir, `lint_yaml.cmd -F tied`, and a direct `copy-files.mjs` invoke. Exit code 0 = pass.
+Runs `tied-install.cmd` into a temp client dir, `lint_yaml.cmd -F tied-project`, **`tied-install.cmd --mode linked`**, **`--migrate-layout`** on a legacy fixture, and **`test-new-tied-client.cmd`** with MCP/git/audit skips. Exit code 0 = pass.
 
-**CI:** GitHub Actions workflow `Windows bootstrap smoke` (`.github/workflows/windows-bootstrap-smoke.yml`) runs the same script on `windows-latest` after building `mcp-server`. A green run is the only evidence that may set `WINDOWS_COPY_PROVEN_IN_CI` to `true` in `tools/bootstrap/lib/constants.mjs` (symlink opt-in remains env-driven; copy-default unchanged).
+**CI:** GitHub Actions workflow `Windows bootstrap smoke` (`.github/workflows/windows-bootstrap-smoke.yml`) runs the same script on `windows-latest` after building `mcp-server`, plus a **`pwsh`** step for `tied-install.ps1`. A green run is the only evidence that may set `WINDOWS_COPY_PROVEN_IN_CI` to `true` in `tools/bootstrap/lib/constants.mjs` (symlink opt-in remains env-driven; copy-default unchanged).
 
 Environment: `TIED_REPO_ROOT`, `TIED_TEST_ROOT`, `TIED_CURSOR_AGENT_CMD` (override Cursor agent CLI name).
 
@@ -106,14 +120,14 @@ Environment: `TIED_REPO_ROOT`, `TIED_TEST_ROOT`, `TIED_CURSOR_AGENT_CMD` (overri
 
 ```cmd
 cd C:\dev\my-client-app
-..\dev\tied\copy_files
+..\dev\tied\tied-install.cmd .
 ```
 
 ```bash
-./copy_files.sh /path/to/client
-./copy_files.sh --merge-vocab
-./copy_files.sh --install-methodology-hook /path/to/client
-./copy_files.sh --methodology-readonly --install-methodology-hook /path/to/client  # Unix opt-in chmod
+./tied-install.sh /path/to/client
+./tied-install.sh --merge-vocab
+./tied-install.sh --install-methodology-hook /path/to/client
+./tied-install.sh --methodology-readonly --install-methodology-hook /path/to/client  # Unix opt-in chmod
 ```
 
 ### Client refresh parity gate ([REQ-TIED_CLIENT_REFRESH_PARITY])
@@ -138,7 +152,7 @@ node tools/bootstrap/verify-client-methodology.mjs --strict-refresh /path/to/cli
 
 JSON Schema: `tools/bootstrap/schemas/client-refresh-parity-report.v1.schema.json`. Template-only Parity A skips: `tools/bootstrap/lib/methodology-template-only-allowlist.mjs`.
 
-Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--methodology-readonly` and `--install-methodology-hook` are **opt-in** (not default-on). After hook install, enable with `git config core.hooksPath .githooks`. CI guard recipe: `tied/docs/client-development-index.md` § **methodology-boundary-ci-guard**.
+Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--methodology-readonly` and `--install-methodology-hook` are **opt-in** (not default-on). After hook install, enable with `git config core.hooksPath .githooks`. CI guard recipe: `tied-bundle/docs/client-development-index.md` § **methodology-boundary-ci-guard**.
 
 ## Manifest
 
@@ -148,21 +162,21 @@ Methodology boundary (Phase A, [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]): `--metho
 
 | Artifact | Policy | Source |
 | --- | --- | --- |
-| `.cursorrules`, `AGENTS.md` | Create-if-absent | Repo root (same paths under `templates/` when present) |
-| `.tied-yaml.yaml` | Create-if-absent | `templates/.tied-yaml.yaml` (client-safe starter; not the methodology repo’s dev root file) |
+| `.cursorrules`, `AGENTS.md` | Create-if-absent | Repo root |
+| `tied-project/config.yaml` | Create-if-absent | `tied-bundle/templates/config.yaml` starter when present |
 
-Existing client copies are never overwritten on refresh. Brownfield clients without the file get it on the next bootstrap while the destination path is still absent; see [methodology-migration.md](../tied/docs/methodology-migration.md).
+Existing client copies are never overwritten on refresh. Brownfield clients without the file get it on the next bootstrap while the destination path is still absent; see [methodology-migration.md](../tied-bundle/docs/methodology-migration.md).
 
 ### Optional tool-use flags (`--full-tools`)
 
 | Flag | Effect |
 | --- | --- |
 | `--full-tools` | `--with-jev` + `--with-dae` + `--with-bbce` |
-| `--with-jev` | On create (or with `--force-tool-config`): `jev.plan_skills: true` in `.tied-yaml.yaml` |
+| `--with-jev` | On create (or with `--force-tool-config`): `jev.plan_skills: true` in `tied-project/config.yaml` |
 | `--with-dae` | On create (or force): `dae.crap_threshold: 30` only — never default `dae.branch_check` or `dae.agentstream_gate_check` |
-| `--with-bbce` | Copy `templates/tied/analysis/` starters into client `tied/analysis/` (additive) |
+| `--with-bbce` | Copy `tied-bundle/templates/tied/analysis/` starters into client `tied-project/analysis/` (additive) |
 | `--tools jev,dae,bbce` | Comma-separated granular flags |
-| `--force-tool-config` | Merge tool-related keys into an existing `.tied-yaml.yaml` without replacing unrelated keys |
+| `--force-tool-config` | Merge tool-related keys into an existing `tied-project/config.yaml` without replacing unrelated keys |
 
 Environment mirrors: `TIED_BOOTSTRAP_FULL_TOOLS`, `TIED_BOOTSTRAP_WITH_JEV`, `TIED_BOOTSTRAP_WITH_DAE`, `TIED_BOOTSTRAP_WITH_BBCE`, `TIED_BOOTSTRAP_FORCE_TOOL_CONFIG` (CLI overrides env). **`JEV_API_KEY` is never written by bootstrap** — set in Cursor MCP env after bootstrap.
 
@@ -175,7 +189,7 @@ After the Cursor path (`.cursor/skills/`, create-only `.cursor/mcp.json`), boots
 | Artifact | Policy |
 | --- | --- |
 | `.claude/skills/` | Copy-default Prompt Composer + `tied-yaml` bundles (same inventory as Cursor) |
-| Repo-root `skills/` (optional) | When **`TIED_SKILLS_REROOT=1`**, both Cursor and Claude managed bundles install under **`skills/`** instead of harness-native paths. Default **off**. Requires `windows_copy_proven_in_ci` and [ARCH-TIED_CLAUDE_SKILLS_REROOT](../tied/architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml). See [REQ-TIED_CLAUDE_SKILLS_REROOT](../tied/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml). |
+| Repo-root `skills/` (optional) | When **`TIED_SKILLS_REROOT=1`**, both Cursor and Claude managed bundles install under **`skills/`** instead of harness-native paths. Default **off**. Requires `windows_copy_proven_in_ci` and [ARCH-TIED_CLAUDE_SKILLS_REROOT](../tied-project/architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml). See [REQ-TIED_CLAUDE_SKILLS_REROOT](../tied-project/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml). |
 | Repo-root `.mcp.json` | Create-if-absent or safe-merge **`tied-yaml` only**; sets `TIED_MCP_HARNESS=claude` |
 | `CLAUDE.md` | Optional create-if-absent thin delta pointing at **AGENTS.md** (never replaces Tracker or `tied/` YAML) |
 
@@ -183,13 +197,13 @@ Cursor **create-only** `.cursor/mcp.json` policy is unchanged — existing clien
 
 Contract tests: `node --test tools/bootstrap/lib/claude-harness.test.mjs` (requires built `mcp-server` for MCP prerequisite).
 
-Operator routing (REQ vs FEAT, operating modes): [client-development-index.md](../tied/docs/client-development-index.md) § **Multi-harness entry matrix (Cursor vs Claude Code)**.
+Operator routing (REQ vs FEAT, operating modes): [client-development-index.md](../tied-bundle/docs/client-development-index.md) § **Multi-harness entry matrix (Cursor vs Claude Code)**.
 
-Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied/requirements/REQ-TIED_CLAUDE_HARNESS.yaml) · [ARCH-TIED_CLAUDE_HARNESS](../tied/architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml) · [IMPL-TIED_CLAUDE_HARNESS](../tied/implementation-decisions/IMPL-TIED_CLAUDE_HARNESS.yaml)
+Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied-project/requirements/REQ-TIED_CLAUDE_HARNESS.yaml) · [ARCH-TIED_CLAUDE_HARNESS](../tied-project/architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml) · [IMPL-TIED_CLAUDE_HARNESS](../tied-project/implementation-decisions/IMPL-TIED_CLAUDE_HARNESS.yaml)
 
 ## Layout
 
-- `copy-files.mjs` — bootstrap CLI
+- `install-layers.mjs` — layered install CLI
 - `new-tied-client.mjs` — disposable/explicit client factory
 - `lint-yaml.mjs` — Windows `-F tied` lint backend
 - `lib/bootstrap.mjs` — orchestration
@@ -199,6 +213,6 @@ Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied/requirements/REQ-TIED_CLAUDE_HAR
 - `schemas/client-refresh-parity-report.v1.schema.json` — report envelope
 - `lib/copy-managed.mjs` — attribute-preserving copy + midnight mtime
 - `lib/mcp-config.mjs`, `lib/skills.mjs`, `lib/skills-reroot.mjs`, `lib/claude-md.mjs`, `lib/vocab.mjs`, `lib/docs.mjs`, `lib/verify.mjs`
-- `templates/CLAUDE.md.template` — optional client `CLAUDE.md` source
+- `tied-bundle/templates/CLAUDE.md.template` — optional client `CLAUDE.md` source
 
-Traceability: [REQ-TIED_SETUP](../tied/requirements/REQ-TIED_SETUP.yaml) · [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM](../tied/architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml) · [IMPL-TIED_FILES](../tied/implementation-decisions/IMPL-TIED_FILES.yaml)
+Traceability: [REQ-TIED_SETUP](../tied-project/requirements/REQ-TIED_SETUP.yaml) · [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM](../tied-project/architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml) · [IMPL-TIED_FILES](../tied-project/implementation-decisions/IMPL-TIED_FILES.yaml)

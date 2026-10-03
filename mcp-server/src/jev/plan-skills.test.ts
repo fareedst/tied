@@ -30,12 +30,20 @@ import { allTools } from "../tools/index.js";
 
 function mkProject(jevYaml?: string): string {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "jev-plan-skills-"));
-  fs.mkdirSync(path.join(root, "tied", "vocab"), { recursive: true });
-  fs.mkdirSync(path.join(root, "tied", "methodology", "vocab"), { recursive: true });
+  const tiedBase = path.join(root, "tied-project");
+  fs.mkdirSync(path.join(tiedBase, "vocab"), { recursive: true });
+  fs.mkdirSync(path.join(root, "tied-bundle", "vocab"), { recursive: true });
   if (jevYaml !== undefined) {
-    fs.writeFileSync(path.join(root, ".tied-yaml.yaml"), jevYaml, "utf8");
+    const body = jevYaml.trimStart().startsWith("schema:")
+      ? jevYaml
+      : `schema: tied-project-config.v1\n${jevYaml}`;
+    fs.writeFileSync(path.join(tiedBase, "config.yaml"), body, "utf8");
   }
   return root;
+}
+
+function tiedBasePath(root: string): string {
+  return path.join(root, "tied-project");
 }
 
 const CLIENT_ROUTING = `| Pri | Glossary | Keywords |
@@ -57,7 +65,7 @@ describe("W6 plan-skills config T-CFG", () => {
     assert.equal(cfg.enabled_source, "default_off");
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "client keyword",
       skill: "build-plan",
       env: {},
@@ -100,7 +108,7 @@ describe("W6 plan-skills config T-CFG", () => {
     const root = mkProject("jev:\n  plan_skills: true\n");
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "x",
       skill: "refine-plan",
       env: { JEV_API_KEY: "   " },
@@ -121,7 +129,7 @@ describe("W6 plan-skills config T-CFG", () => {
     const root = mkProject("jev:\n  plan_skills: true\n");
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "x",
       skill: "build-plan",
       env: { JEV_API_KEY: "k" },
@@ -136,7 +144,7 @@ describe("W6 plan-skills config T-CFG", () => {
     const root = mkProject("jev:\n  plan_skills: true\n");
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "x",
       skill: "build-plan",
       env: { JEV_API_KEY: "k", JEV_PLAN_SKILLS_TIMEOUT_MS: "50" },
@@ -159,18 +167,18 @@ describe("W6 merged routing T-RT", () => {
   it("T-RT-02 missing client OK", () => {
     const root = mkProject();
     fs.writeFileSync(
-      path.join(root, "tied", "methodology", "vocab", "routing.md"),
+      path.join(root, "tied-bundle", "vocab", "routing.md"),
       METHOD_ROUTING,
       "utf8",
     );
-    const loaded = loadMergedRoutingBaseline({ tiedBasePath: path.join(root, "tied") });
+    const loaded = loadMergedRoutingBaseline({ tiedBasePath: tiedBasePath(root) });
     assert.equal(loaded.rows.length, 2);
   });
 
   it("T-RT-03 missing methodology diagnostic", () => {
     const root = mkProject();
-    fs.writeFileSync(path.join(root, "tied", "vocab", "routing.md"), CLIENT_ROUTING, "utf8");
-    const loaded = loadMergedRoutingBaseline({ tiedBasePath: path.join(root, "tied") });
+    fs.writeFileSync(path.join(root, "tied-project", "vocab", "routing.md"), CLIENT_ROUTING, "utf8");
+    const loaded = loadMergedRoutingBaseline({ tiedBasePath: tiedBasePath(root) });
     assert.ok(loaded.diagnostics.includes("methodology_routing_missing"));
   });
 
@@ -196,7 +204,7 @@ describe("W6 shadow/evidence T-SH", () => {
     const root = mkProject("jev:\n  plan_skills: true\n");
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "x",
       skill: "plan-close-out",
       record_evidence: true,
@@ -218,7 +226,7 @@ describe("W6 shadow/evidence T-SH", () => {
     const long = "z".repeat(5000);
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: long,
       skill: "build-plan",
       env: {},
@@ -232,7 +240,7 @@ describe("W6 shadow/evidence T-SH", () => {
     fs.mkdirSync(path.join(root, "working", token, "jev", "plan-skills"), { recursive: true });
     await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "x",
       skill: "build-plan",
       record_evidence: false,
@@ -256,7 +264,7 @@ describe("W6 shadow/evidence T-SH", () => {
     let n = 0;
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "method keyword",
       skill: "build-plan",
       env: { JEV_API_KEY: "k" },
@@ -297,7 +305,7 @@ describe("W6 MCP composition T-MCP", () => {
     const root = mkProject();
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "x",
       skill: "debug",
       fetchImpl: async () => {
@@ -309,9 +317,9 @@ describe("W6 MCP composition T-MCP", () => {
 });
 
 function seedMergedRouting(root: string): void {
-  fs.writeFileSync(path.join(root, "tied", "vocab", "routing.md"), CLIENT_ROUTING, "utf8");
+  fs.writeFileSync(path.join(root, "tied-project", "vocab", "routing.md"), CLIENT_ROUTING, "utf8");
   fs.writeFileSync(
-    path.join(root, "tied", "methodology", "vocab", "routing.md"),
+    path.join(root, "tied-bundle", "vocab", "routing.md"),
     METHOD_ROUTING,
     "utf8",
   );
@@ -334,7 +342,7 @@ describe("W6d tiebreak T-TB", () => {
     seedMergedRouting(root);
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "client keyword and method keyword",
       skill: "build-plan",
       shadow_mode: "advisory",
@@ -350,7 +358,7 @@ describe("W6d tiebreak T-TB", () => {
     seedMergedRouting(root);
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "client keyword only",
       skill: "build-plan",
       shadow_mode: "tiebreak",
@@ -366,7 +374,7 @@ describe("W6d tiebreak T-TB", () => {
     seedMergedRouting(root);
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "client keyword and method keyword",
       skill: "refine-plan",
       shadow_mode: "tiebreak",
@@ -382,7 +390,7 @@ describe("W6d tiebreak T-TB", () => {
     seedMergedRouting(root);
     const base = {
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "client keyword and method keyword",
       skill: "build-plan" as const,
       env: { JEV_API_KEY: "k" },
@@ -479,7 +487,7 @@ describe("W6 gate ordering T-GATE", () => {
     const root = mkProject();
     const shadow = await runPlanSkillsShadow({
       projectRoot: root,
-      tiedBasePath: path.join(root, "tied"),
+      tiedBasePath: tiedBasePath(root),
       prompt: "x",
       skill: "build-plan",
       env: {},

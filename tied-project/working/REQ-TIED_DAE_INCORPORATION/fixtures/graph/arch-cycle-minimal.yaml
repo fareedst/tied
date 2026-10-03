@@ -1,0 +1,15 @@
+architecture:
+  ARCH-CYCLE-A:
+    detail_file: "null"
+    name: "Cycle node A"
+    related_decisions:
+      depends_on:
+        - "ARCH-CYCLE-B"
+    status: "Draft"
+  ARCH-CYCLE-B:
+    detail_file: "null"
+    name: "Cycle node B"
+    related_decisions:
+      depends_on:
+        - "ARCH-CYCLE-A"
+    status: "Draft"

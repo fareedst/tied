@@ -35,3 +35,9 @@ export function claudeFixturesDirFromModule(moduleUrl: string): string {
   const here = fileURLToPath(moduleUrl);
   return path.join(path.dirname(here), "..", "fixtures", "claude");
 }
+
+/** Built CLI entry (tsx tests run from src/; exec must use dist/index.js). */
+export function agentstreamCliEntryFromModule(moduleUrl: string): string {
+  const here = fileURLToPath(moduleUrl);
+  return path.join(path.dirname(here), "..", "dist", "index.js");
+}

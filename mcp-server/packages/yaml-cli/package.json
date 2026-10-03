@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node --test dist/*.test.js"
+    "test": "npm run build && npx tsx --test src/**/*.test.ts"
   },
   "engines": {
     "node": ">=18"

@@ -1,0 +1,15 @@
+{
+  "schema_version": "pseudocode-analysis-report.v1",
+  "ok": true,
+  "gate_mode_applied": true,
+  "input_identity": {
+    "algorithm": "sha256",
+    "hash": "4ff1a8e922be7a433f04666925ba5220fb7cbcf21d80a2adc4de7cddb7d07ffd",
+    "byte_length": 13573
+  },
+  "truncated": false,
+  "diagnostic_codes": [],
+  "unknown_causes": [],
+  "budget_truncation": false,
+  "serialization_hash": "c4c77714557276218a69455db98154781254c064d00cf60c62e446c4557ae8a8"
+}

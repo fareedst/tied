@@ -1,0 +1,16 @@
+client_id: "1787691672"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 5 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-LAUNCHD_COLLECTOR"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-LAUNCHD_COLLECTOR-pseudocode.md"
+  - impl_token: "IMPL-NETWORK_LISTENER_COLLECTOR"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-NETWORK_LISTENER_COLLECTOR-pseudocode.md"
+  - impl_token: "IMPL-PROCESS_RUNNER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-PROCESS_RUNNER-pseudocode.md"
+  - impl_token: "IMPL-REPORT_FORMATTER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-REPORT_FORMATTER-pseudocode.md"
+  - impl_token: "IMPL-SERVICE_REPORT_CLI"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787691672/tied/implementation-decisions/IMPL-SERVICE_REPORT_CLI-pseudocode.md"
+wave_id: "W-ext-1787691672-1"

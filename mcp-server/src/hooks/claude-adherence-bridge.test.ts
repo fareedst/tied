@@ -18,6 +18,7 @@ describe("claude adherence bridge composition [REQ-TIED_CLAUDE_ADHERENCE_HOOKS]"
     const ledger = path.join(workspace, "working", token, "adherence", "events.jsonl");
     const markerPath = path.join(workspace, "working", token, "adherence", "active-turn.json");
     fs.mkdirSync(path.dirname(markerPath), { recursive: true });
+    fs.mkdirSync(path.dirname(ledger), { recursive: true });
     fs.writeFileSync(
       markerPath,
       `${JSON.stringify({

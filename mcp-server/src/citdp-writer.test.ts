@@ -114,7 +114,7 @@ describe("writeCitdpRecord", () => {
     }
   });
 
-  it("writes tied/citdp/CITDP-*.yaml with safe top-level key", () => {
+  it("writes tied-project/citdp/CITDP-*.yaml with safe top-level key", () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-citdp-"));
     try {
       process.env.TIED_BASE_PATH = dir;

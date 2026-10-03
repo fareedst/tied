@@ -19,7 +19,7 @@
   },
   "wave_1_client_ids": ["1786636023", "1786637086"],
   "orchestrator_reverify": false,
-  "citdp_module_pointer": "tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb1_tranche_zero_module",
+  "citdp_module_pointer": "tied-project/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml#nb1_tranche_zero_module",
   "plan_doc_pointer": "docs/pseudocode-constraint-v2-fleet-nb1-plan.md",
   "methodology_pin": "48d1fbb+"
 }

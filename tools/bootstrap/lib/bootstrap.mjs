@@ -129,7 +129,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   writeClientVocabHandoffs(path.join(tiedDir, "vocab"));
 
   // [IMPL-TIED_FILES] [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] — BASE_FILES: templates-first via resolveTemplateFile.
-  const tiedYamlDest = path.join(projectRoot, ".tied-yaml.yaml");
+  const tiedYamlDest = path.join(projectRoot, "tied-project/config.yaml");
   const tiedYamlPreExisting = fs.existsSync(tiedYamlDest);
   let baseCopied = 0;
   for (const template of paths.BASE_FILES) {
@@ -187,7 +187,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   for (const f of paths.INDEX_YAML_FILES) {
     const dest = path.join(tiedDir, f);
     if (!fs.existsSync(dest)) {
-      fs.writeFileSync(dest, `# Project ${f} - add project-specific tokens here. Do not edit tied/methodology/.\n{}\n`, "utf8");
+      fs.writeFileSync(dest, `# Project ${f} - add project-specific tokens here. Do not edit tied-bundle/.\n{}\n`, "utf8");
       sayOk(`Created project index ${dest} (empty).`);
       projectCreated += 1;
     }

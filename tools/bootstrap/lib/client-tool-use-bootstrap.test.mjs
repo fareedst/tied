@@ -12,6 +12,8 @@ import {
   applyClientToolUseBootstrapOptions,
 } from "./client-tool-use-bootstrap.mjs";
 import { TIED_REPO_ROOT } from "./constants.mjs";
+import { PROJECT_CONFIG_SCHEMA_V1 } from "./project-config.mjs";
+import { PROJECT_DIR_NAME, resolveTiedLayout } from "./layout.mjs";
 
 describe("parseBootstrapToolFlags [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
   it("maps --full-tools and granular flags", () => {
@@ -51,8 +53,32 @@ describe("applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES]"
     fs.rmSync(tmpDir, { recursive: true, force: true });
   });
 
-  it("merges jev and dae on fresh .tied-yaml.yaml", () => {
-    const yamlPath = path.join(tmpDir, ".tied-yaml.yaml");
+  it("merges jev and dae into tied-project/config.yaml when present", () => {
+    fs.mkdirSync(path.join(tmpDir, PROJECT_DIR_NAME), { recursive: true });
+    const configPath = path.join(tmpDir, PROJECT_DIR_NAME, "config.yaml");
+    fs.writeFileSync(
+      configPath,
+      yaml.dump({
+        schema: PROJECT_CONFIG_SCHEMA_V1,
+        yaml: { scalar_style: "unwrapped" },
+        jev: { plan_skills: false },
+      }),
+      "utf8",
+    );
+    applyClientToolUseBootstrapOptions(
+      tmpDir,
+      { jev: true, dae: true, bbce: false, fullTools: false, forceToolConfig: false },
+      { tiedRepoRoot: TIED_REPO_ROOT, projectConfigPreExisting: false },
+    );
+    const doc = yaml.load(fs.readFileSync(configPath, "utf8"));
+    assert.equal(doc.schema, PROJECT_CONFIG_SCHEMA_V1);
+    assert.equal(doc.jev.plan_skills, true);
+    assert.equal(doc.dae.crap_threshold, 30);
+    assert.equal(doc.yaml.scalar_style, "unwrapped");
+  });
+
+  it("merges jev and dae on fresh tied-project/config.yaml", () => {
+    const yamlPath = path.join(tmpDir, "tied-project/config.yaml");
     fs.writeFileSync(
       yamlPath,
       yaml.dump({ scalar_style: "unwrapped", jev: { plan_skills: false } }),
@@ -72,7 +98,7 @@ describe("applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES]"
   });
 
   it("skips YAML merge when file pre-existed without force", () => {
-    const yamlPath = path.join(tmpDir, ".tied-yaml.yaml");
+    const yamlPath = path.join(tmpDir, "tied-project/config.yaml");
     const sentinel = "custom:\n  kept: true\njev:\n  plan_skills: false\n";
     fs.writeFileSync(yamlPath, sentinel, "utf8");
     applyClientToolUseBootstrapOptions(
@@ -84,7 +110,7 @@ describe("applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES]"
   });
 
   it("force merge preserves unrelated keys", () => {
-    const yamlPath = path.join(tmpDir, ".tied-yaml.yaml");
+    const yamlPath = path.join(tmpDir, "tied-project/config.yaml");
     fs.writeFileSync(
       yamlPath,
       yaml.dump({ custom: { kept: true }, jev: { plan_skills: false } }),
@@ -102,14 +128,15 @@ describe("applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES]"
   });
 
   it("copies BBCE starter files additively", () => {
-    fs.writeFileSync(path.join(tmpDir, ".tied-yaml.yaml"), "scalar_style: unwrapped\n", "utf8");
+    fs.writeFileSync(path.join(tmpDir, "tied-project/config.yaml"), "scalar_style: unwrapped\n", "utf8");
     const { analysisFilesCopied } = applyClientToolUseBootstrapOptions(
       tmpDir,
       { jev: false, dae: false, bbce: true, fullTools: false, forceToolConfig: false },
       { tiedRepoRoot: TIED_REPO_ROOT, tiedYamlPreExisting: false }
     );
     assert.ok(analysisFilesCopied >= 3);
-    assert.ok(fs.existsSync(path.join(tmpDir, "tied", "analysis", "slice-map.yaml")));
-    assert.ok(fs.existsSync(path.join(tmpDir, "tied", "analysis", "README.md")));
+    const { tiedDir } = resolveTiedLayout(tmpDir);
+    assert.ok(fs.existsSync(path.join(tiedDir, "analysis", "slice-map.yaml")));
+    assert.ok(fs.existsSync(path.join(tiedDir, "analysis", "README.md")));
   });
 });

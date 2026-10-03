@@ -1,0 +1,10 @@
+ARCH-TIED_TWO_FOLDER_LAYOUT:
+  ARCH-TIED_TWO_FOLDER_LAYOUT:
+    description: "Committed tied-project holds traceability, vocab, citdp, config, committed working; tied-bundle holds methodology indexes, docs, templates, install.json, local working."
+    name: "Two-folder TIED layout"
+    status: "Planned"
+    traceability:
+      implementation:
+        - "IMPL-TIED_TWO_FOLDER_LAYOUT"
+      requirements:
+        - "REQ-TIED_TWO_FOLDER_LAYOUT"

@@ -12,8 +12,8 @@ import {
 } from "./checklist-parity-helpers.js";
 
 const REPO_ROOT = path.resolve(import.meta.dirname, "../../..");
-const CHECKLIST_YAML = path.join(REPO_ROOT, "tied/docs/agent-req-implementation-checklist.yaml");
-const CHECKLIST_MD = path.join(REPO_ROOT, "tied/docs/agent-req-implementation-checklist.md");
+const CHECKLIST_YAML = path.join(REPO_ROOT, "tied-bundle/docs/agent-req-implementation-checklist.yaml");
+const CHECKLIST_MD = path.join(REPO_ROOT, "tied-bundle/docs/agent-req-implementation-checklist.md");
 
 const RELATIONSHIP_SLUG_MARKERS: Array<{ slug: string; markers: string[] }> = [
   { slug: "translate-sponsor-intent", markers: ["RESOLVE charter", "delegated work envelope"] },

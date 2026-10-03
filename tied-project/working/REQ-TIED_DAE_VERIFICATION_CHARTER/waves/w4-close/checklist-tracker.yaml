@@ -1,0 +1,140 @@
+copy_hygiene: "Wave-scoped W4 close-out tracker for REQ-TIED_DAE_VERIFICATION_CHARTER only; do not inherit parent DAE program evidence."
+description: "W4 charter tools close_out at profile_depth minimal; CITDP verification_charter false (opt-in product defaults unchanged)."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "working/REQ-TIED_DAE_VERIFICATION_CHARTER/waves/w4-close/checklist-tracker.yaml"
+  completed:
+    - "apply-token-comments"
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "persist-implementation-records"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_DAE_VERIFICATION_CHARTER"
+record_identity:
+  citdp_path: "tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  req_token: "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  slice: "w4-close"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/charter-policy.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/disjoint-verifier.ts"
+      - "mcp-server/src/gauntlet-runner.ts"
+      - "mcp-server/src/mutation-cache.ts"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/requirements/REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+    slug: "author-requirement"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/architecture-decisions/ARCH-TIED_DAE_VERIFICATION_CHARTER.yaml"
+    slug: "author-architecture"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_VERIFICATION_CHARTER-pseudocode.md"
+    slug: "resolve-pseudocode"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_VERIFICATION_CHARTER-pseudocode.md"
+    slug: "apply-token-comments"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_VERIFICATION_CHARTER-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_VERIFICATION_CHARTER.yaml"
+    slug: "persist-implementation-records"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/dae/charter-verification.test.ts"
+      - "mcp-server/src/gauntlet-runner.test.ts"
+      - "mcp-server/src/mutation-cache.test.ts"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/mutation-cache.test.ts"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/wave-4-close-2026-09-24.md"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/gauntlet-runner.test.ts"
+      - "mcp-server/src/mutation-cache.test.ts"
+      - "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/wave-4-close-2026-09-24.md"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+      - "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Charter CITDP profile_depth minimal and sub_adversarial_inquiry_pass not_applicable; no integrated inquiry artifacts for W4 close-out."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml"
+        - "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/not-applicable-receipt.v1.json"
+      policy: "minimal-depth-no-inquiry"
+      rationale: "Charter CITDP profile_depth minimal and sub_adversarial_inquiry_pass not_applicable; no integrated inquiry artifacts for W4 close-out."
+      status: "not_applicable"

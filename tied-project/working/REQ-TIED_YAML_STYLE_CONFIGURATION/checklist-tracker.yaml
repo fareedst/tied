@@ -1,0 +1,108 @@
+copy_hygiene: "Working process id — execution_evidence.request = REQ-TIED_YAML_STYLE_CONFIGURATION."
+description: "Minimal tracker for bootstrap `.tied-yaml.yaml` close-out."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-26"
+    deferred: []
+    gates: {}
+    master_checklist: "working/REQ-TIED_YAML_STYLE_CONFIGURATION/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gitignore-close-out-hygiene"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "unit-test-green"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_YAML_STYLE_CONFIGURATION"
+record_identity:
+  change_request_id: "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  citdp_path: "working/REQ-TIED_YAML_STYLE_CONFIGURATION/citdp-inline.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-09-26"
+  req_token: "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  title: "Bootstrap `.tied-yaml.yaml` via copy_files"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/sub-adversarial-inquiry-pass-na.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal bootstrap slice; no integrated inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/sub-adversarial-inquiry-pass-na.md"
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/citdp-inline.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/citdp-inline.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/bootstrap-tied-yaml-yaml-close-out.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/bootstrap-tied-yaml-yaml-close-out.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/claude-harness-test.stdout.txt"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/claude-harness-test.stdout.txt"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/lint-template-tied-yaml.stdout.txt"
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/tied-validate-consistency-summary.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/lint-template-tied-yaml.stdout.txt"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      - "tied/requirements/REQ-TIED_SETUP.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/bootstrap-tied-yaml-yaml-close-out.md"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/bootstrap-tied-yaml-yaml-close-out.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/close-out-gates-2026-09-26.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/close-out-gates-2026-09-26.json"
+      status: "completed"

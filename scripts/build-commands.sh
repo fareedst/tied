@@ -69,7 +69,12 @@ tied_cli() {
 alias tied-cli=tied_cli
 
 lint_tied() {
-  "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  if [[ -d "${root}/tied-project" ]]; then
+    "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied-project -F tied-bundle
+  else
+    "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied
+  fi
 }
 alias lint-tied=lint_tied
 
@@ -79,7 +84,11 @@ lint_reorder() {
 alias lint-reorder=lint_reorder
 
 validate_tied() {
-  local base_path="${TIED_BASE_PATH:-${_BUILD_COMMANDS_REPO_ROOT}/tied}"
+  local default_base="${_BUILD_COMMANDS_REPO_ROOT}/tied-project"
+  if [[ ! -d "$default_base" && -d "${_BUILD_COMMANDS_REPO_ROOT}/tied" ]]; then
+    default_base="${_BUILD_COMMANDS_REPO_ROOT}/tied"
+  fi
+  local base_path="${TIED_BASE_PATH:-$default_base}"
   local mcp_bin="${TIED_MCP_BIN:-${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/dist/index.js}"
   local consistency_args='{"check_pseudocode":true,"check_detail_files":true}'
   TIED_BASE_PATH="$base_path" TIED_MCP_BIN="$mcp_bin" \
@@ -136,7 +145,12 @@ test_tied_cli_smoke() {
   # `tied mcp` is stdio-only (no --help); bootstrap copy-files has no --help flag.
   echo "DEBUG: test-all CLI smoke: verify mcp + bootstrap dispatch targets exist"
   test -f "${root}/mcp-server/dist/index.js"
-  test -f "${root}/tools/bootstrap/copy-files.mjs"
+  test -f "${root}/tools/bootstrap/install-layers.mjs"
+  test -f "${root}/tools/bootstrap/lint-stale-layout.mjs"
+  test -f "${root}/tied-install.sh"
+  test -f "${root}/tied-install.cmd"
+  test -f "${root}/tied-install.ps1"
+  test -f "${root}/tools/bootstrap/tied-install-dispatch.mjs"
   test -f "${root}/mcp-server/packages/yaml-cli/dist/index.js"
   test -f "${root}/mcp-server/packages/agentstream/dist/index.js"
 }
@@ -164,21 +178,73 @@ test_bootstrap_claude_harness() {
 }
 alias test-bootstrap-claude-harness=test_bootstrap_claude_harness
 
+# [REQ-TIED_LAYERED_CLIENT_INSTALL] [IMPL-TIED_LAYERED_CLIENT_INSTALL] Layered tied-install unit/composition tests.
+test_bootstrap_layered_install() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  if [[ ! -f "${root}/mcp-server/dist/index.js" ]]; then
+    echo "DEBUG: test-bootstrap-layered-install: building mcp-server (dist prerequisite)"
+    build_mcp
+  fi
+  echo_exec node --test \
+    "${root}/tools/bootstrap/lib/install-options.test.mjs" \
+    "${root}/tools/bootstrap/lib/layers/install-manifest.test.mjs" \
+    "${root}/tools/bootstrap/lib/layers/mcp-layer.test.mjs" \
+    "${root}/tools/bootstrap/lib/layers/verify-store.test.mjs" \
+    "${root}/tools/bootstrap/lib/layers/store.test.mjs" \
+    "${root}/tools/bootstrap/lib/layers/gitignore-block.test.mjs" \
+    "${root}/tools/bootstrap/lib/layers/skills-linked.test.mjs" \
+    "${root}/tools/bootstrap/install-layers.integration.test.mjs" \
+    "${root}/tools/bootstrap/tied-install-dispatch.test.mjs" \
+    "${root}/tools/bootstrap/windows-shims.test.mjs" \
+    "${root}/tools/bootstrap/lib/lint-stale-layout.test.mjs" \
+    "${root}/tools/bootstrap/lib/layout.test.mjs" \
+    "${root}/tools/bootstrap/lib/migrate-layout.test.mjs" \
+    "${root}/tools/bootstrap/lib/project-config.test.mjs" \
+    "${root}/scripts/tied-new-client-audit.test.mjs"
+}
+alias test-bootstrap-layered-install=test_bootstrap_layered_install
+
+lint_stale_layout() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  echo_exec node "${root}/tools/bootstrap/lint-stale-layout.mjs" "${root}"
+}
+alias lint-stale-layout=lint_stale_layout
+
+check_docs_vocab_links() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  echo_exec node "${root}/tools/bootstrap/lib/check-docs-vocab-links.mjs" "${root}"
+}
+alias check-docs-vocab-links=check_docs_vocab_links
+
+verify_install_matrix_doc() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  echo_exec node "${root}/tools/bootstrap/lib/render-install-resource-matrix.mjs"
+}
+alias verify-install-matrix-doc=verify_install_matrix_doc
+
 test_all() {
   local rc=0
   (
     set -euo pipefail
-    echo "DEBUG: test-all step 1/6: build_mcp"
+    echo "DEBUG: test-all step 1/9: build_mcp"
     build_mcp || exit 1
-    echo "DEBUG: test-all step 2/6: test_mcp"
+    echo "DEBUG: test-all step 2/9: test_mcp"
     test_mcp || exit 1
-    echo "DEBUG: test-all step 3/6: test_tied_cli_smoke"
+    echo "DEBUG: test-all step 3/9: test_bootstrap_layered_install"
+    test_bootstrap_layered_install || exit 1
+    echo "DEBUG: test-all step 4/9: verify_install_matrix_doc"
+    verify_install_matrix_doc || exit 1
+    echo "DEBUG: test-all step 5/9: test_tied_cli_smoke"
     test_tied_cli_smoke || exit 1
-    echo "DEBUG: test-all step 4/6: validate_tied"
+    echo "DEBUG: test-all step 6/9: validate_tied"
     validate_tied || exit 1
-    echo "DEBUG: test-all step 5/6: validate_vocab"
+    echo "DEBUG: test-all step 7/9: validate_vocab"
     validate_vocab || exit 1
-    echo "DEBUG: test-all step 6/6: lint_tied"
+    echo "DEBUG: test-all step 7/9: lint_stale_layout"
+    lint_stale_layout || exit 1
+    echo "DEBUG: test-all step 8/9: check_docs_vocab_links"
+    check_docs_vocab_links || exit 1
+    echo "DEBUG: test-all step 9/9: lint_tied"
     lint_tied || exit 1
     echo "DEBUG: test-all completed successfully"
   ) || rc=$?
@@ -197,23 +263,50 @@ run_close_out_gates() {
 }
 alias run-close-out-gates=run_close_out_gates
 
+_tfl_resolve_committed_tracker_rel() {
+  local token="$1"
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  if [[ -f "${root}/tied-project/working/${token}/checklist-tracker.yaml" ]]; then
+    echo "tied-project/working/${token}/checklist-tracker.yaml"
+  elif [[ -f "${root}/tied-project/working/${token}/checklist-tracker.yaml" ]]; then
+    echo "tied-project/working/${token}/checklist-tracker.yaml"
+  else
+    echo "working/${token}/checklist-tracker.yaml"
+  fi
+}
+
+_tfl_resolve_working_citdp_rel() {
+  local token="$1"
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  if [[ -f "${root}/tied-project/working/${token}/CITDP-${token}.yaml" ]]; then
+    echo "tied-project/working/${token}/CITDP-${token}.yaml"
+  elif [[ -f "${root}/tied-project/working/${token}/CITDP-${token}.yaml" ]]; then
+    echo "tied-project/working/${token}/CITDP-${token}.yaml"
+  elif [[ -f "${root}/working/${token}/CITDP-${token}.yaml" ]]; then
+    echo "working/${token}/CITDP-${token}.yaml"
+  else
+    echo ""
+  fi
+}
+
 close_out_req() {
   local token="${1:?usage: close-out-req REQ-TOKEN [extra run-close-out-gates flags...]}"
   shift
   local root="${_BUILD_COMMANDS_REPO_ROOT}"
-  local tracker="working/${token}/checklist-tracker.yaml"
+  local tracker
+  tracker="$(_tfl_resolve_committed_tracker_rel "${token}")"
   local citdp=""
 
   if [[ ! -f "${root}/${tracker}" ]]; then
     echo "close-out-req: missing tracker: ${root}/${tracker}" >&2
     return 2
   fi
-  if [[ -f "${root}/tied/citdp/CITDP-${token}.yaml" ]]; then
-    citdp="tied/citdp/CITDP-${token}.yaml"
-  elif [[ -f "${root}/working/${token}/CITDP-${token}.yaml" ]]; then
-    citdp="working/${token}/CITDP-${token}.yaml"
+  if [[ -f "${root}/tied-project/citdp/CITDP-${token}.yaml" ]]; then
+    citdp="tied-project/citdp/CITDP-${token}.yaml"
+  elif citdp="$(_tfl_resolve_working_citdp_rel "${token}")" && [[ -n "${citdp}" ]]; then
+    :
   else
-    echo "close-out-req: no CITDP at tied/citdp/CITDP-${token}.yaml or working/${token}/CITDP-${token}.yaml" >&2
+    echo "close-out-req: no CITDP at tied-project/citdp/CITDP-${token}.yaml or committed working CITDP draft" >&2
     return 2
   fi
 
@@ -237,14 +330,22 @@ alias close-out-req=close_out_req
 _run_new_client_onboarding_audit() {
   local source_root="$1"
   local client_dir="$2"
-  local report_path="${client_dir}/working/tied-new-client-audit.v1.json"
+  # [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH] Mirror committedWorkingFileRel / undivided fallback (no Node spawn).
+  local report_path=""
+  if [[ -d "${client_dir}/tied-project/working" ]]; then
+    report_path="${client_dir}/tied-project/working/tied-new-client-audit.v1.json"
+  elif [[ -d "${client_dir}/working" ]]; then
+    report_path="${client_dir}/working/tied-new-client-audit.v1.json"
+  else
+    report_path="${client_dir}/tied-project/working/tied-new-client-audit.v1.json"
+  fi
 
   if [[ "${TIED_SKIP_NEW_CLIENT_AUDIT:-}" == "1" || "${TIED_SKIP_NEW_CLIENT_AUDIT:-}" == "true" ]]; then
     echo "DEBUG: skipping new-client onboarding audit (TIED_SKIP_NEW_CLIENT_AUDIT)"
     return 0
   fi
 
-  mkdir -p "${client_dir}/working"
+  mkdir -p "$(dirname "${report_path}")"
   echo_exec node "${source_root}/scripts/run-tied-new-client-audit.mjs" \
     --client-root "${client_dir}" \
     --json-out "${report_path}"
@@ -459,17 +560,22 @@ EOF
 _how_test() {
   cat <<'EOF'
 Test / verify
-  test-all                   fail-closed: build-mcp, test-mcp, CLI smoke, validate-tied,
-                             validate-vocab, lint-tied (recommended pre-push); errexit
-                             isolated in a subshell (safe after source build-commands.sh)
-  test-mcp                   mcp-server unit/composition tests (includes Tier 1 workspace dist tests)
+  test-all                   fail-closed: build-mcp, test-mcp, test-bootstrap-layered-install,
+                             CLI smoke, validate-tied, validate-vocab, lint-tied (recommended pre-push);
+                             errexit isolated in a subshell (safe after source build-commands.sh)
+  test-mcp                   mcp-server unit/composition tests (includes Tier 1 workspace dist tests,
+                             dist/e2e/new-tied-client.test.js install passthrough)
+  test-bootstrap-layered-install
+                             node --test install-options, layers/*, install-layers.integration,
+                             tied-new-client-audit ([REQ-TIED_LAYERED_CLIENT_INSTALL]; needs mcp dist)
   test-agentstream           @tied/agentstream package tests (frozen oracle fixtures)
   verify-agentstream-parity  bun build + @tied/agentstream test (TS parity vs frozen oracle)
   test-bootstrap-claude-harness
                              node --test tools/bootstrap/lib/claude-harness.test.mjs (8 tests;
                              builds mcp-server if dist missing; [REQ-TIED_CLAUDE_HARNESS])
 
-  Not in test-all: test-new-tied-client, test-tied-feature-*, test-bootstrap-claude-harness
+  Not in test-all: test-new-tied-client (disposable factory), test-tied-feature-*,
+                   test-bootstrap-claude-harness
 EOF
 }
 
@@ -516,7 +622,7 @@ Close-out (REQ checklist gate + evidence envelope)
   run-close-out-gates [flags]   node tools/bootstrap/templates/run-close-out-gates.mjs
                                 (default --project-root = this repo)
   close-out-req REQ-TOKEN [flags]
-                                Preset: working/REQ/checklist-tracker.yaml + tied/citdp/CITDP-REQ.yaml
+                                Preset: working/REQ/checklist-tracker.yaml + tied-project/citdp/CITDP-REQ.yaml
                                 (or working/REQ/CITDP-REQ.yaml), phase close_out, --sync-dispositions
                                 --reconcile --envelope-blocking, UTC run-id
 
@@ -527,31 +633,57 @@ Close-out (REQ checklist gate + evidence envelope)
     node tools/bootstrap/templates/run-close-out-gates.mjs --help
 
   Related: tied-cli request_evidence_envelope_validate, tied_checklist_gate_validate, tied_verify
-  Doc: tied/docs/request-evidence-envelope.md
+  Doc: tied-bundle/docs/request-evidence-envelope.md
 EOF
+}
+
+_how_install_matrix() {
+  cat <<'EOF'
+Layered install resource matrix (committed vs gitignored)
+  how install-matrix             this summary + path to working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md
+  tied-install.sh [OPTS] DIR     default --mode linked (stubs + MCP bundle env)
+  tied-install.cmd / tied-install.ps1   same dispatch on native Windows (CMD / PowerShell)
+  test-new-tied-client           disposable factory via tied-install linked
+  tied-install --migrate-layout  brownfield layout migration (idempotent)
+  tied-install --migrate-layout --store --dry-run   store p6 git mv plan (no mutation)
+  test-new-tied-client --install-mode full
+  test-new-tied-client --install-layers db,mcp,skills,methodology
+  test-new-tied-client --install-harness cursor|claude|both
+  test-new-tied-client --methodology-bundle live|pinned
+  test-new-tied-client --doctor-after
+  Env mirrors: TIED_INSTALL_MODE, TIED_INSTALL_LAYERS, TIED_INSTALL_HARNESS,
+                TIED_METHODOLOGY_BUNDLE, TIED_INSTALL_DOCTOR_AFTER
+EOF
+  echo "  Matrix file: tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md"
+  echo "  verify: verify-install-matrix-doc (layout.mjs key paths)"
 }
 
 _how_smoke() {
   cat <<'EOF'
 Feature-orchestration smoke (disposable clients)
-  new-tied-client DIR [SOURCE]   copy_files.sh + lint + ${CURSOR_CLI_NAME:-agent} mcp enable + git init
+  new-tied-client DIR [SOURCE]   tied-install linked (default) + lint + mcp enable + git init
   test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp>
-                                 copy_files + lint + G4 onboarding audit
+                                 tied-install linked + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git
+                                 install flags: how install-matrix
+                                 brownfield: tied-install --migrate-layout on client root first
                                  skip audit: TIED_SKIP_NEW_CLIENT_AUDIT=1
                                  default test root: ~/Documents/dev/test
   test-new-claude-tied-client    Node disposable --harness claude + validation receipt
   new-claude-tied-client DIR     explicit Claude-first factory (no Cursor mcp enable)
   validate-claude-tied-client DIR  re-run Claude validation only
+                                 Windows: scripts\validate-claude-tied-client.cmd / .ps1
   test-tied-feature-onboarding CLIENT_DIR
   test-tied-feature-lifecycle CLIENT_DIR
 
   Windows (from TIED repo):
-    copy_files.cmd               bootstrap cwd (PATHEXT: copy_files from sibling repo)
-    scripts\test-new-tied-client
-    test-new-tied-client.cmd     repo-root shim for --disposable
-    scripts\test-new-claude-tied-client.cmd   Claude-first disposable factory
-    scripts\lint_yaml.cmd -F tied
+    Git Bash: source scripts/build-commands.sh && test-new-tied-client [flags]
+    CMD: test-new-tied-client.cmd or scripts\test-new-tied-client.cmd
+    PowerShell: .\test-new-tied-client.ps1 or scripts\test-new-tied-client.ps1
+                 (example: powershell -ExecutionPolicy Bypass -File .\test-new-tied-client.ps1)
+    tied-install.cmd / tied-install.ps1   layered install (same Node dispatch as tied-install.sh)
+    scripts\test-new-claude-tied-client.cmd / .ps1   Claude-first disposable factory
+    scripts\lint_yaml.cmd / scripts\lint_yaml.ps1 -F tied
 
   Typical sequence:
     DEMO=$(mktemp -d "${TMPDIR:-/tmp}/tied-feature-demo.XXXXXX")
@@ -564,11 +696,11 @@ EOF
 _how_drivers() {
   cat <<'EOF'
 Related repo scripts (not wrapped here)
-  ./copy_files.sh TARGET       bootstrap TIED into a client project
-  copy_files.cmd               Windows bootstrap (thin Node delegate)
-  node tools/bootstrap/copy-files.mjs   direct cross-platform bootstrap CLI
+  ./tied-install.sh [OPTS] TARGET   bootstrap TIED into a client project (linked default)
+  tied-install.cmd / tied-install.ps1   Windows layered install dispatch
+  node tools/bootstrap/install-layers.mjs   direct cross-platform install CLI
   scripts/lint_yaml.sh FILE    canonicalize/lint one or more YAML paths
-  scripts/lint_yaml.cmd -F tied  Windows tied YAML lint parity
+  scripts/lint_yaml.cmd / scripts/lint_yaml.ps1 -F tied   Windows tied YAML lint parity
   scripts/yaml_semantic_compare.rb
   scripts/analyze_tied_mcp_metrics.rb   offline MCP metrics JSONL analysis
   scripts/tied-post-session.sh CLIENT   post-session metrics + envelope + profile + reconcile
@@ -597,7 +729,7 @@ Environment (this script sets TIED_MCP_COLLECT_METRICS=1 on source)
   AGENTSTREAM                prebuilt agentstream binary for batch drivers
   AGENTSTREAM_TIED_MCP_PREFLIGHT=1   opt-in MCP preflight before live agent turns
 
-Quality matrix: tied/docs/quality-assurance-commands.md
+Quality matrix: tied-bundle/docs/quality-assurance-commands.md
 EOF
 }
 
@@ -638,11 +770,12 @@ how() {
     agentstream|go) _how_agentstream ;;
     close-out|closeout|gates) _how_close_out ;;
     smoke|feature|orchestration) _how_smoke ;;
+    install-matrix|install) _how_install_matrix ;;
     drivers|scripts) _how_drivers ;;
     env|environment) _how_env ;;
     *)
       echo "how: unknown topic: $topic" >&2
-      echo "Topics: all, backup, build, test, tied, vocab, agentstream, close-out, smoke, drivers, env" >&2
+      echo "Topics: all, backup, build, test, tied, vocab, agentstream, close-out, smoke, install-matrix, drivers, env" >&2
       return 2
       ;;
   esac

@@ -19,7 +19,7 @@ describe("plumb audit gate", () => {
 
   beforeEach(() => {
     origCwd = process.cwd();
-    realTiedBasePathAbs = path.join(path.resolve(origCwd, ".."), "tied");
+    realTiedBasePathAbs = path.join(path.resolve(origCwd, ".."), "tied-project");
 
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "plumb-audit-gate-"));
     process.chdir(tempDir);

@@ -1,0 +1,8 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "close_out",
+  "diagnostics": []
+}

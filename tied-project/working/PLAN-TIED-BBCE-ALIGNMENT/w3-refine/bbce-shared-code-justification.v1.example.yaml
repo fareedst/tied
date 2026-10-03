@@ -1,0 +1,19 @@
+blast_radius_summary: "Path resolution shared across agentstream bindings; defect may affect multiple slices."
+change_id: "PLAN-TIED-BBCE-ALIGNMENT"
+consumers:
+  - binding_id: "Claude live driver (W1 replay anchor)"
+  - binding_id: "pipeline→checklist load turns"
+declared_change_surface_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/declared-change-surface-claude-live.v1.yaml"
+local_alternative_considered: "Duplicate path helpers per slice — rejected (BBCE §8 duplication over premature coupling)."
+owning_slice_req: "REQ-TIED_CLAUDE_LIVE_DRIVER"
+proof_boundary: "Justification record is review-gated evidence; does not block LEAP to shared IMPL without explicit waiver."
+review_status: "pending_human"
+scenario_id: "dry-run-paths-ts-touch"
+schema_version: "bbce-shared-code-justification.v1"
+timestamp: "2026-09-27T15:00:00Z"
+trigger:
+  kind: "shared_mechanism_glob"
+  matched_glob: "mcp-server/packages/agentstream/src/paths.ts"
+  touched_paths:
+    - "mcp-server/packages/agentstream/src/paths.ts"
+waiver_ref: null

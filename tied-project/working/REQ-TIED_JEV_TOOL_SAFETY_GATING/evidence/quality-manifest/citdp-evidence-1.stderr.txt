@@ -1,0 +1,108 @@
+
+src/tools/tool-safety-mcp.test.ts:
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING MCP diagnostic > registers tied_jev_tool_safety_evaluate [0.32ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING MCP diagnostic > SC-D-MCP-AUTHORITY: rejects missing workspace [1.88ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING MCP diagnostic > SC-D-MCP-AUTHORITY: no gate allowed or gate_receipt in response [0.53ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING MCP diagnostic > handler returns JSON payload [1.99ms]
+
+src/jev/harness-tool-guard.test.ts:
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-W5-PRESERVED: allows when harness disabled [0.46ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FAST-DENY: blocks destructive pattern before Jev [0.05ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FAST-DENY: safe near miss with rm in path does not hard-block [0.10ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FALLBACK: fail-closed blocks Shell when Jev key missing [0.04ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.73 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FALLBACK: non-2xx Jev response fail-closed [2.10ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 skipped=state_too_large
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FALLBACK: state-too-large skip fail-closed [0.25ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > allows non-blocking tools without key [0.03ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-QUESTIONS: uses Blueprint D answer keys [0.04ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.03 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-THRESHOLDS: combined max blocks at 0.72 [0.15ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.04 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-THRESHOLDS: confirm band uses combined max [0.17ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-THRESHOLDS: allow below 0.45 combined [0.12ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > boundary: combined exactly 0.72 blocks [0.07ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-SCOPE: out of workspace absolute path [0.02ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-SCOPE: not_evaluated without workspace [0.12ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.02 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-TRACE-PRIVACY: redacts secrets from vendor path via redactState in evaluate [0.15ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > resolveHarnessFromEnv reads AGENTSTREAM_JEV_HARNESS [0.01ms]
+
+src/jev/tool-safety-benchmark.test.ts:
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING benchmark > loads corpus with at least 30 rows [0.27ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.04 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.1 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.04 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.03 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.02 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING benchmark > SC-D-BENCH: five arms share one fixture hash [4.41ms]
+
+packages/agentstream/src/jev-harness-live-tool-gate.test.ts:
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > parses agentstream_tool_proposal stream extension [0.07ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > parses assistant tool_use blocks [0.04ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > SC-D-SCOPE: passes workspace into gate evaluate [0.08ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > G3: aborts on block; confirm only when CI/strict env [0.05ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=mock_block
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > runAgent composition > terminates turn when gate blocks Shell proposal in stream [23.81ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=confirm reason=mock_confirm
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > runAgent composition > G3: CI strict aborts turn on confirm decision [17.82ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=allow reason=mock_allow
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > runAgent composition > allows turn when gate allows Shell proposal [18.81ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=allow reason=mock_allow
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > runAgent composition > SC-D-SCOPE: runAgent forwards declared gate workspace into evaluate [21.97ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=block reason=mock_block
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > G4: collectClaudeStreamFromSpawn applies jevToolGate on NDJSON [20.82ms]
+DIAGNOSTIC: jev harness live tool gate: tool=Shell decision=allow reason=mock_allow
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > SC-D-SCOPE: collectClaudeStreamFromSpawn forwards declared gate workspace into evaluate [18.64ms]
+(pass) jev harness live tool gate [REQ-TIED_JEV_TOOL_SAFETY_GATING] > evaluateStreamToolProposal returns diagnostic [0.19ms]
+
+ 33 pass
+ 0 fail
+Ran 33 tests across 4 files. [349.00ms]

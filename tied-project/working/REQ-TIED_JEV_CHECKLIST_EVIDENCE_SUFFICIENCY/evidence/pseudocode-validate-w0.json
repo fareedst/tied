@@ -1,0 +1,234 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "RESOLVE_CHECKLIST_EVIDENCE_SUFFICIENCY_CONFIG",
+      "line": 8,
+      "token_refs": [
+        "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "DERIVE_PRE_GATE_TARGET_SLUGS",
+      "line": 25,
+      "token_refs": [
+        "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "EXTRACT_GATE_EVIDENCE_STATE",
+      "line": 37,
+      "token_refs": [
+        "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "RUN_DETERMINISTIC_EVIDENCE_PRECHECKS",
+      "line": 50,
+      "token_refs": [
+        "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "RUN_JEV_EVIDENCE_SUFFICIENCY_FANOUT",
+      "line": 63,
+      "token_refs": [
+        "ARCH-TIED_JEV_DECISION_COPROCESSOR",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "APPLY_SUFFICIENCY_THRESHOLDS",
+      "line": 75,
+      "token_refs": [
+        "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "EMIT_PRE_GATE_DISPOSITION",
+      "line": 85,
+      "token_refs": [
+        "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "HOOK_CHECKLIST_GATE_VALIDATE",
+      "line": 97,
+      "token_refs": [
+        "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "APPEND_SYSTEM_ONE_DECIDE_TRACE",
+      "line": 109,
+      "token_refs": [
+        "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+        "IMPL-TIED_JEV_DECISION_COPROCESSOR",
+        "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "RESOLVE_CHECKLIST_EVIDENCE_SUFFICIENCY_CONFIG",
+      "branch_lines": [
+        18,
+        19
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "DERIVE_PRE_GATE_TARGET_SLUGS",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "EXTRACT_GATE_EVIDENCE_STATE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "RUN_DETERMINISTIC_EVIDENCE_PRECHECKS",
+      "branch_lines": [
+        58,
+        59
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "RUN_JEV_EVIDENCE_SUFFICIENCY_FANOUT",
+      "branch_lines": [],
+      "failure_modes": [
+        "# [IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] How: three questions substantive noul tokens noul score 1-5; fail-open on jevDecide skip or error."
+      ],
+      "references": []
+    },
+    {
+      "block": "APPLY_SUFFICIENCY_THRESHOLDS",
+      "branch_lines": [],
+      "failure_modes": [
+        "MAP failure kind to remediation_hints"
+      ],
+      "references": []
+    },
+    {
+      "block": "EMIT_PRE_GATE_DISPOSITION",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "HOOK_CHECKLIST_GATE_VALIDATE",
+      "branch_lines": [
+        98,
+        105,
+        107
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "APPEND_SYSTEM_ONE_DECIDE_TRACE",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    }
+  ],
+  "diagnostics": [],
+  "leakage": []
+}

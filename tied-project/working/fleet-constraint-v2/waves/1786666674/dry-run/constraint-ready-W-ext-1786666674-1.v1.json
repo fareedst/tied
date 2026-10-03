@@ -1,0 +1,19 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T17:40:23.326Z",
+  "client_id": "1786666674",
+  "wave_scope": "W-ext-1786666674-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786666674/tied/implementation-decisions/IMPL-SORT_THREE_INTEGERS-pseudocode.md",
+      "impl_token": "IMPL-SORT_THREE_INTEGERS",
+      "action": "none",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": []
+    }
+  ],
+  "dry_run_content_hash": "47a90b1cade8952b7781a0fc4b8da6fbc4ebd3f7d674d6db878f9bb643d9362a",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1786666674/dry-run/snapshots-constraint-ready/W-ext-1786666674-1"
+}

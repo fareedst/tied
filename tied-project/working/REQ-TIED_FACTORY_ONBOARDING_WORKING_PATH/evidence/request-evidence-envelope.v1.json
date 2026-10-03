@@ -1,0 +1,91 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-03T14:14:01.150Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/CITDP-REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml",
+      "content_hash": "sha256:19335511a97717d1ead3d7632a03b18958318345cc40150b80c445036c5ceae7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:d0d484440731a4cf9e164a8819d99f19bc6cf9960eb0c31c93a38c358fca7b32",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:67dc0108bec1d1ac986a66e5b2e856ed758ef31387f289b646e2d51ae881404b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/pre-impl-gate-args.json",
+      "content_hash": "sha256:27e12de720bf96c3ae19d042ee390b9d4fa5445365f30407795902e1f16a4aaf",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/unit-tests.stdout.txt",
+      "content_hash": "sha256:8bbf46d513d6e87c664a931d6a16fc063d6c9495a35ea5985ba2ff377b98bb49",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/CITDP-REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

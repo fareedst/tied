@@ -1,0 +1,36 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T21:17:58.870Z",
+  "client_id": "1787416567",
+  "wave_scope": "W-ext-1787416567-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-CLI-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-CLI",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-DISCOVER-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-DISCOVER",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-REPORT-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-REPORT",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-STATS-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-STATS",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "bfdb384b09f225aeb046ff65d60682f9c67081fd958dbfa4692de2c6917653d6",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787416567/dry-run/snapshots/W-ext-1787416567-1"
+}

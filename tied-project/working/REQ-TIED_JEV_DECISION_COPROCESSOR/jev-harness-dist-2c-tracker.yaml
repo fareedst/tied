@@ -1,0 +1,85 @@
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-28"
+    gates:
+      close_out: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-33-09-656Z.json"
+      pre_implementation: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T01-29-25-116Z.json"
+      verification: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-29T01-33-09-346Z.json"
+    master_checklist: ""
+  completed:
+    - "composition-integration"
+    - "three-way-alignment-unit"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/vocab/agentstream.md"
+      - "tied/vocab/decision-copilot.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C.yaml"
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-close-out-2026-09-28.md"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/agentstream/src/jev-harness-preflight.ts"
+      - "tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C.yaml"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C.yaml"
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C.yaml"
+    policy: "depth_tier minimal — sub-adversarial-inquiry-pass N/A"
+    rationale: "Minimal depth_tier; eligibility §7 triggers unmatched; opt-in harness dist hard stop only."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR-pseudocode.md"
+    slug: "apply-token-comments"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T01-29-25-116Z.json"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-agentstream-2026-09-28.stdout.txt"
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-jev-unit-2026-09-28.stdout.txt"
+    slug: "three-way-alignment-unit"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-agentstream-2026-09-28.stdout.txt"
+        - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-jev-unit-2026-09-28.stdout.txt"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-agentstream-2026-09-28.stdout.txt"
+    slug: "composition-integration"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-agentstream-2026-09-28.stdout.txt"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/g2-dist-2c-close-out-2026-09-28.md"
+    rationale: "plan-close-out 2026-09-28; sponsor commit JEV-HARNESS-DIST-2C"
+    slug: "traceable-commit"

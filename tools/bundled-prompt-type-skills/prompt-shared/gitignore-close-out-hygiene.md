@@ -86,5 +86,5 @@ Include **exactly one** in plan-close-out / checklist close-out handoff:
 
 ## Cross-refs
 
-- [PROC-AGENT_REQ_CHECKLIST](../../../tied/docs/agent-req-implementation-checklist.md) — checklist slug `gitignore-close-out-hygiene`
-- [PROC-COMMIT_MESSAGES](../../../tied/docs/processes.md) — staging at `traceable-commit`
+- [PROC-AGENT_REQ_CHECKLIST](../../../tied-bundle/docs/agent-req-implementation-checklist.md) — checklist slug `gitignore-close-out-hygiene`
+- [PROC-COMMIT_MESSAGES](../../../tied-bundle/docs/processes.md) — staging at `traceable-commit`

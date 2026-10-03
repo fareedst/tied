@@ -1,0 +1,102 @@
+copy_hygiene: "Doc-remainder tracker; not a feature REQ. execution_evidence.request = REQ-TIED_CLAUDE_DOC_REMAINDER."
+description: "Lightweight tracker for doc remainder slices (R1–R8)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-09-24"
+    deferred: []
+    gates:
+      close_out: "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json"
+    master_checklist: "working/REQ-TIED_CLAUDE_DOC_REMAINDER/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "verification-gate"
+  completed_slugs_close_out:
+    - "gitignore-close-out-hygiene"
+    - "sync-tied-stack"
+    - "verification-gate"
+  request: "REQ-TIED_CLAUDE_DOC_REMAINDER"
+record_identity:
+  change_request_id: "REQ-TIED_CLAUDE_DOC_REMAINDER"
+  citdp_path: "working/REQ-TIED_CLAUDE_DOC_REMAINDER/citdp-inline.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-09-24"
+  req_token: "REQ-TIED_CLAUDE_DOC_REMAINDER"
+  title: "Claude comparison doc remainder (R1)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth R6 doc slice; sub-stub not executed."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - ".gitignore"
+    slug: "gitignore-close-out-hygiene"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_CLAUDE_LIVE_DRIVER-pseudocode.md"
+    rationale: "IMPL-TIED_CLAUDE_LIVE_DRIVER sidecar LEAP R7; tied_validate_consistency ok"
+    slug: "sync-tied-stack"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/change-definition-evidence.md"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/test-strategy-evidence.md"
+      status: "completed"

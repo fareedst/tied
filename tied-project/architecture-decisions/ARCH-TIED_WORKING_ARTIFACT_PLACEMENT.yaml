@@ -1,0 +1,15 @@
+ARCH-TIED_WORKING_ARTIFACT_PLACEMENT:
+  alternatives_considered:
+    - description: "Reject commits with gate JSON under tied-project/working/"
+      name: "Enforcement lint for mis-placed files"
+      rejected_because: "Out of scope for initial guide; store legacy exceptions remain"
+  decision: "Documentation-only layer on top of the existing two-folder working split; no second classifier table."
+  description: "Architecture for operator-facing placement policy: one methodology doc (working-artifact-placement.md), one process token, vocabulary rows, and index links. Runtime path resolution remains in RESOLVE_WORKING_ROOT / classifyWorkingRelativePath (IMPL-TIED_TWO_FOLDER_LAYOUT)."
+  name: "Working artifact placement documentation"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_TWO_FOLDER_LAYOUT"
+    requirements:
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+      - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"

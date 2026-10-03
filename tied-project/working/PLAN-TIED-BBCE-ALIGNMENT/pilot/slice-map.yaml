@@ -1,0 +1,48 @@
+bindings:
+  - binding_id: "canonical checklist composition gate"
+    owning_slice_req: "REQ-GOAGENT-AGENT-EXECUTOR"
+    path_globs:
+      - "mcp-server/packages/agentstream/dist/**/*.test.js"
+      - "mcp-server/packages/agentstream/src/**/*.test.ts"
+  - binding_id: "Claude live driver (W1 replay anchor)"
+    owning_slice_req: "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    path_globs:
+      - "mcp-server/packages/agentstream/fixtures/claude/**"
+      - "mcp-server/packages/agentstream/src/claude-driver.ts"
+      - "mcp-server/packages/agentstream/src/claude-stream.ts"
+      - "mcp-server/packages/agentstream/src/live-driver-bind.ts"
+      - "mcp-server/packages/agentstream/src/live-driver-select.ts"
+  - binding_id: "CLI→pipeline build"
+    owning_slice_req: "REQ-GOAGENT-PIPELINE-CHAIN"
+    path_globs:
+      - "mcp-server/packages/agentstream/src/index.ts"
+      - "mcp-server/packages/agentstream/src/pipeline-build.ts"
+      - "mcp-server/packages/agentstream/src/pipeline-route.ts"
+  - binding_id: "control goto → replace remaining"
+    owning_slice_req: "REQ-GOAGENT-CHECKLIST-CONTROL"
+    path_globs:
+      - "mcp-server/packages/agentstream/src/control.ts"
+  - binding_id: "pipeline→checklist load turns"
+    owning_slice_req: "REQ-GOAGENT-YAML-STEP-RENDER"
+    path_globs:
+      - "mcp-server/packages/agentstream/src/checklist-load-turns.ts"
+      - "mcp-server/packages/agentstream/src/tddloop-load.ts"
+  - binding_id: "pipeline→executor run"
+    owning_slice_req: "REQ-GOAGENT-AGENT-EXECUTOR"
+    path_globs:
+      - "mcp-server/packages/agentstream/src/executor-dry-run.ts"
+      - "mcp-server/packages/agentstream/src/executor-run.ts"
+      - "mcp-server/packages/agentstream/src/live-executor.ts"
+  - binding_id: "preload → non-compact HTML"
+    owning_slice_req: "REQ-GOAGENT-YAML-STEP-RENDER"
+    path_globs:
+      - "mcp-server/packages/agentstream/src/htmlformat.ts"
+      - "mcp-server/packages/agentstream/src/run-pipeline-prep.ts"
+change_id: "PLAN-TIED-BBCE-ALIGNMENT"
+encoding_note: "Pilot uses working-folder YAML per binding inventory row in tied/docs/composition-coverage.md § Project inventory (STDD / agentstream). W2 should decide repo-promoted slice map (e.g. tied/analysis/slice-map.yaml) vs CITDP-only declared_change_surface refs.\n"
+schema_version: "bbce-slice-map.v1"
+shared_mechanism_globs:
+  - "mcp-server/packages/agentstream/package.json"
+  - "mcp-server/packages/agentstream/src/checklist-constants.ts"
+  - "mcp-server/packages/agentstream/src/paths.ts"
+  - "mcp-server/packages/agentstream/src/repo-root.ts"

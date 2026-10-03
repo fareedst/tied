@@ -1,0 +1,11 @@
+{
+  "run_at": "2026-09-13T18:01:30.324Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1786666674-1",
+  "partition_wave_id": "W-ext-1786666674-1",
+  "gate_stage": "G3",
+  "receipt_count": 1,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1786666674/receipts/IMPL-SORT_THREE_INTEGERS.receipt.json"
+  ]
+}

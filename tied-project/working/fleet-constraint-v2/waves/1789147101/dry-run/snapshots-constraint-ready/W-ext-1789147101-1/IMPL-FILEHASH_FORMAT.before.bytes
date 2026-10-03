@@ -1,0 +1,51 @@
+# [IMPL-FILEHASH_FORMAT] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# Summary: Columnar stdout formatting for success and error lines.
+
+
+Grammar-Version: v2
+
+## FORMAT_SUCCESS_LINE
+# [IMPL-FILEHASH_FORMAT] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Render success columnar line with elapsed ms.
+
+Contract:
+  INPUT: path; size; digest; elapsed
+  OUTPUT: line_string
+  PRE: digest is truncated hex; elapsed >= 0
+  POST: line matches path width 20, size width 7, digest, elapsed ms
+  EFFECTS: none
+  FAILURE_MODES: none
+
+procedure FORMAT_SUCCESS_LINE:
+  Contract:
+    INPUT: path; size; digest; elapsed
+    OUTPUT: line_string
+    PRE: digest non-empty
+    POST: columnar line with elapsed ms suffix
+  FORMAT path padded 20, size width 7, digest, elapsed ms
+  RETURN line_string
+
+## FORMAT_ERROR_LINE
+# [IMPL-FILEHASH_FORMAT] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Render error columnar line without elapsed column.
+
+procedure FORMAT_ERROR_LINE:
+  Contract:
+    INPUT: path; size; error
+    OUTPUT: line_string
+    PRE: error != nil
+    POST: line with ERROR prefix and no elapsed column
+  FORMAT path padded 20, size width 7, ERROR message
+  RETURN line_string
+
+## TRUNCATE_DIGEST
+# [IMPL-FILEHASH_FORMAT] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Convert 64-char lowercase hex to first4...last4.
+
+procedure TRUNCATE_DIGEST:
+  Contract:
+    INPUT: full_hex
+    OUTPUT: truncated_hex
+    PRE: len(full_hex) == 64
+    POST: first4...last4 form
+  RETURN truncated_hex

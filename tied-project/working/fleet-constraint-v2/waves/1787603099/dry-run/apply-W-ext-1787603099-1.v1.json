@@ -1,0 +1,30 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T21:17:56.110Z",
+  "client_id": "1787603099",
+  "wave_scope": "W-ext-1787603099-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_CLI_MAIN-pseudocode.md",
+      "impl_token": "IMPL-LISTENING_PORT_CLI_MAIN",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_COLLECT-pseudocode.md",
+      "impl_token": "IMPL-LISTENING_PORT_COLLECT",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_JSON-pseudocode.md",
+      "impl_token": "IMPL-LISTENING_PORT_JSON",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "914da7d587e08a3920af0212d82017ada946ed8741642748b555bdf213428068",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787603099/dry-run/snapshots/W-ext-1787603099-1"
+}

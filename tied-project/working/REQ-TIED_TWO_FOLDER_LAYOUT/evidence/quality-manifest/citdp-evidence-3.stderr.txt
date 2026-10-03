@@ -1,0 +1,65 @@
+[1m[36mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun install [0m
+
+$ bun run build
+$ tsc && bun run --workspaces --if-present build
+[1m[36m[1m‹ 2.41s ›[0m [1m‹ 15:29:04 ›[0m[0m[1m[34mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun install [0m
+[1m[36mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run build [0m
+$ tsc && bun run --workspaces --if-present build
+[1m[36m[1m‹ 2.35s ›[0m [1m‹ 15:29:06 ›[0m[0m[1m[34mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run build [0m
+[1m[36mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run test [0m
+$ bun run build && node scripts/run-mcp-tests.mjs
+$ tsc && bun run --workspaces --if-present build
+DIAGNOSTIC: run-mcp-tests — tsx --test (221 files)
+DIAGNOSTIC: run-mcp-tests — node --test (3 CJS files)
+DIAGNOSTIC: run-mcp-tests — replay-jev-context-pruning
+DIAGNOSTIC: context pruning benchmark written /Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json
+[1m[36m[1m‹ 29.70s ›[0m [1m‹ 15:29:36 ›[0m[0m[1m[34mcd -- /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server \&\& bun run test [0m
+[1m[36mnode --test /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/install-options.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/install-manifest.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/mcp-layer.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/verify-store.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/store.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/gitignore-block.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/skills-linked.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/install-layers.integration.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/tied-install-dispatch.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/windows-shims.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/lint-stale-layout.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layout.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/migrate-layout.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/project-config.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/scripts/tied-new-client-audit.test.mjs [0m
+[1m[36m[1m‹ 0.28s ›[0m [1m‹ 15:29:36 ›[0m[0m[1m[34mnode --test /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/install-options.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/install-manifest.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/mcp-layer.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/verify-store.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/store.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/gitignore-block.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/skills-linked.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/install-layers.integration.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/tied-install-dispatch.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/windows-shims.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/lint-stale-layout.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layout.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/migrate-layout.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/project-config.test.mjs /Users/fareed/Documents/dev/chatgpt/stdd/scripts/tied-new-client-audit.test.mjs [0m
+[1m[36mnode /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/render-install-resource-matrix.mjs [0m
+[1m[36m[1m‹ 0.05s ›[0m [1m‹ 15:29:36 ›[0m[0m[1m[34mnode /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/render-install-resource-matrix.mjs [0m
+[1m[36mnode /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/cli/dist/index.js --help [0m
+Usage: tied <subcommand> [args...]
+
+Subcommands:
+  mcp         Start the TIED YAML MCP server on stdio (same as mcp-server/dist/index.js)
+  bootstrap   Copy TIED templates into a client (default: copy-files; use "new-client" for pipeline)
+  install     Layered client install (default linked; see tied-install.sh)
+  yaml        Lint or canonicalize YAML (lint | canonicalize)
+  gate        Checklist gate composition (check — calls tied_checklist_gate_validate)
+  branch      Git branch hygiene vs CITDP/Tracker (check)
+  next        Recommend next checklist slug from Tracker discovery
+  handoff     Validate handoff-shaped phase YAML (validate)
+  agentstream Run agentstream pipeline (TS-only; default ts)
+  help        Show this message
+
+Unknown first arguments are forwarded to feature onboarding (legacy tied bin behavior).
+
+[1m[36m[1m‹ 0.04s ›[0m [1m‹ 15:29:36 ›[0m[0m[1m[34mnode /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/cli/dist/index.js --help [0m
+[1m[36mnode /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/cli/dist/index.js yaml --help [0m
+Usage: tied yaml <lint|canonicalize> [--check] [file ...]
+
+  lint          Fail when files are not in resolved canonical style (--check on canonicalizer)
+  canonicalize  Rewrite each file to canonical style (default yaml_tool.sh lint path)
+
+[1m[36m[1m‹ 0.09s ›[0m [1m‹ 15:29:36 ›[0m[0m[1m[34mnode /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/cli/dist/index.js yaml --help [0m
+[1m[36mnode /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/cli/dist/index.js agentstream --help [0m
+Usage: tied agentstream [agentstream options...]
+
+Phase 4 TS-native (default TIED_AGENTSTREAM_IMPL=ts):
+  --checklist-tracker-preview (with -c / --lead-checklist-yaml)
+  --preview-lead-checklist (with -c; optional bounds, --checklist-var, --lead-checklist-skip-sub)
+  --preview-feature-spec-batch-yaml PATH [-o ORDER]
+  pipeline dry-run: -d with lead checklist (-c), feature batch (-b), -p preload, -o filter
+  adherence-reconcile (subcommand) or standalone --tracker … reconcile flags
+  live checklist run: -c (no preview/dry-run), including --checklist-tracker-yaml tracker mode; extended dry-run shapes (prompts-file, tdd-yaml, verify-session, --non-compact-html, argv after --)
+
+TIED_AGENTSTREAM_IMPL=go was removed in Phase 4d (see phase4c-deprecation-notice.md).
+
+See mcp-server/packages/agentstream/README.md for flags.
+
+[1m[36m[1m‹ 0.10s ›[0m [1m‹ 15:29:36 ›[0m[0m[1m[34mnode /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/packages/cli/dist/index.js agentstream --help [0m
+[1m[36mnode /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lint-stale-layout.mjs /Users/fareed/Documents/dev/chatgpt/stdd [0m
+[1m[36m[1m‹ 0.18s ›[0m [1m‹ 15:29:39 ›[0m[0m[1m[34mnode /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lint-stale-layout.mjs /Users/fareed/Documents/dev/chatgpt/stdd [0m
+[1m[36mnode /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/check-docs-vocab-links.mjs /Users/fareed/Documents/dev/chatgpt/stdd [0m
+[1m[36m[1m‹ 0.05s ›[0m [1m‹ 15:29:39 ›[0m[0m[1m[34mnode /Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/check-docs-vocab-links.mjs /Users/fareed/Documents/dev/chatgpt/stdd [0m

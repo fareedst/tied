@@ -15,6 +15,10 @@ import {
   type GatePhase,
 } from "../checklist-validator.js";
 import { resolveProjectIdentity } from "../project-identity.js";
+import {
+  resolveRequestWorkingBase,
+  resolveWorkingPath,
+} from "../working-root.js";
 import { mapCorpusInventoryString } from "./gap-codes.js";
 import { detectProcessAdherenceGaps } from "./process-adherence-gaps.js";
 import { normalizeEnvelope, serializeEnvelope } from "./normalize.js";
@@ -161,9 +165,8 @@ async function discoverWorkingArtifacts(
   projectRoot: string,
   requestToken: string,
 ): Promise<DiscoveredFile[]> {
-  const workingRoot = path.join(projectRoot, "working", requestToken);
   const discovered: DiscoveredFile[] = [];
-  const inquiryRoot = path.join(workingRoot, "adversarial-inquiry");
+  const inquiryRoot = resolveWorkingPath(projectRoot, requestToken, "adversarial-inquiry");
   let hasPhaseDirs = false;
 
   try {
@@ -206,7 +209,11 @@ async function discoverWorkingArtifacts(
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
 
-  const trackerPath = path.join(workingRoot, "agent-req-implementation-checklist.yaml");
+  const trackerPath = resolveWorkingPath(
+    projectRoot,
+    requestToken,
+    "agent-req-implementation-checklist.yaml",
+  );
   if (await readOptional(trackerPath)) {
     discovered.push({
       absolute: trackerPath,
@@ -218,7 +225,7 @@ async function discoverWorkingArtifacts(
     });
   }
 
-  const citdpWorking = path.join(workingRoot, `CITDP-${requestToken}.yaml`);
+  const citdpWorking = resolveWorkingPath(projectRoot, requestToken, `CITDP-${requestToken}.yaml`);
   if (await readOptional(citdpWorking)) {
     discovered.push({
       absolute: citdpWorking,
@@ -242,7 +249,7 @@ async function discoverWorkingArtifacts(
     });
   }
 
-  const gatesDir = path.join(workingRoot, "gates");
+  const gatesDir = resolveWorkingPath(projectRoot, requestToken, "gates");
   try {
     const gateFiles = await fs.readdir(gatesDir);
     for (const name of gateFiles.filter((item) => item.endsWith(".json"))) {
@@ -260,7 +267,7 @@ async function discoverWorkingArtifacts(
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
 
-  const evidenceDir = path.join(workingRoot, "evidence");
+  const evidenceDir = resolveWorkingPath(projectRoot, requestToken, "evidence");
   try {
     const evidenceEntries = await fs.readdir(evidenceDir, { withFileTypes: true });
     for (const entry of evidenceEntries) {
@@ -285,7 +292,7 @@ async function discoverWorkingArtifacts(
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
 
-  const psaRoot = path.join(workingRoot, "pseudocode-analysis");
+  const psaRoot = resolveWorkingPath(projectRoot, requestToken, "pseudocode-analysis");
   try {
     const psaEntries = await fs.readdir(psaRoot);
     for (const name of psaEntries.filter((item) => item.endsWith(".v1.json"))) {
@@ -305,7 +312,7 @@ async function discoverWorkingArtifacts(
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
 
-  const legacyWrapper = path.join(workingRoot, "citdp-closeout.json");
+  const legacyWrapper = resolveWorkingPath(projectRoot, requestToken, "citdp-closeout.json");
   if (await readOptional(legacyWrapper)) {
     discovered.push({
       absolute: legacyWrapper,
@@ -362,7 +369,6 @@ async function detectGaps(input: {
   corpusInventory?: string[];
 }): Promise<EnvelopeGap[]> {
   const gaps: EnvelopeGap[] = [];
-  const workingRoot = path.join(input.projectRoot, "working", input.requestToken);
 
   for (const inventory of input.corpusInventory ?? []) {
     gaps.push(
@@ -394,8 +400,9 @@ async function detectGaps(input: {
   }
 
   async function readInquiryRunId(phase: GatePhase): Promise<string | null> {
-    const provenancePath = path.join(
-      workingRoot,
+    const provenancePath = resolveWorkingPath(
+      input.projectRoot,
+      input.requestToken,
       "adversarial-inquiry",
       `phase-${phase}`,
       "evidence-provenance.json",
@@ -445,8 +452,9 @@ async function detectGaps(input: {
   }
 
   for (const phase of ["pre_implementation", "verification", "close_out"] as GatePhase[]) {
-    const provenancePath = path.join(
-      workingRoot,
+    const provenancePath = resolveWorkingPath(
+      input.projectRoot,
+      input.requestToken,
       "adversarial-inquiry",
       `phase-${phase}`,
       "evidence-provenance.json",
@@ -476,8 +484,20 @@ async function detectGaps(input: {
       }
     }
 
-    const gatePath = path.join(workingRoot, "adversarial-inquiry", `phase-${phase}`, "gate-result.json");
-    const ledgerPath = path.join(workingRoot, "adversarial-inquiry", `phase-${phase}`, "finding-ledger.jsonl");
+    const gatePath = resolveWorkingPath(
+      input.projectRoot,
+      input.requestToken,
+      "adversarial-inquiry",
+      `phase-${phase}`,
+      "gate-result.json",
+    );
+    const ledgerPath = resolveWorkingPath(
+      input.projectRoot,
+      input.requestToken,
+      "adversarial-inquiry",
+      `phase-${phase}`,
+      "finding-ledger.jsonl",
+    );
     const gateContents = await readOptional(gatePath);
     const ledgerContents = await readOptional(ledgerPath);
     if (gateContents || ledgerContents) {
@@ -535,7 +555,11 @@ async function detectGaps(input: {
     }
   }
 
-  const trackerPath = path.join(workingRoot, "agent-req-implementation-checklist.yaml");
+  const trackerPath = resolveWorkingPath(
+    input.projectRoot,
+    input.requestToken,
+    "agent-req-implementation-checklist.yaml",
+  );
   const trackerContents = await readOptional(trackerPath);
   let trackerDoc: Record<string, unknown> | null = null;
   if (trackerContents) {
@@ -595,11 +619,16 @@ export async function buildRequestEvidenceEnvelope(
   }
 
   const projectRoot = path.resolve(input.project_root);
-  const workingRoot = path.join(projectRoot, "working", input.request_token);
+  const committedBase = resolveRequestWorkingBase(projectRoot, input.request_token, "committed");
+  const localBase = resolveRequestWorkingBase(projectRoot, input.request_token, "local");
   try {
-    await fs.access(workingRoot);
+    await fs.access(committedBase);
   } catch {
-    return { ok: false, stage: "discover", error: "WorkingFolderMissing" };
+    try {
+      await fs.access(localBase);
+    } catch {
+      return { ok: false, stage: "discover", error: "WorkingFolderMissing" };
+    }
   }
 
   const discovered = await discoverWorkingArtifacts(projectRoot, input.request_token);
@@ -662,7 +691,12 @@ export async function buildRequestEvidenceEnvelope(
   });
 
   if (input.output_mode === "file") {
-    const envelopePath = path.join(workingRoot, "evidence", "request-evidence-envelope.v1.json");
+    const envelopePath = resolveWorkingPath(
+      projectRoot,
+      input.request_token,
+      "evidence",
+      "request-evidence-envelope.v1.json",
+    );
     await fs.mkdir(path.dirname(envelopePath), { recursive: true });
     await fs.writeFile(envelopePath, serializeEnvelope(envelope), "utf8");
     return { ok: true, envelope, envelope_path: relPath(projectRoot, envelopePath) };

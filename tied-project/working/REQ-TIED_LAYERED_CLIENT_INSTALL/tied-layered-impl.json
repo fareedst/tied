@@ -1,0 +1,5 @@
+{
+  "token": "IMPL-TIED_LAYERED_CLIENT_INSTALL",
+  "index_record": "{\"category\":\"Infrastructure\",\"description\":\"install-layers.mjs orchestration and tools/bootstrap/lib/layers/* modules.\",\"name\":\"Layered client install implementation\",\"status\":\"Proposed\",\"traceability\":{\"requirements\":[\"REQ-TIED_LAYERED_CLIENT_INSTALL\"],\"architecture\":[\"ARCH-TIED_LAYERED_CLIENT_INSTALL\"]}}",
+  "detail_record": "{\"IMPL-TIED_LAYERED_CLIENT_INSTALL\":{\"category\":\"Infrastructure\",\"description\":\"Node install engine: PARSE_INSTALL_ARGS, layer dispatch, verify-store, doctor, factory wiring.\",\"name\":\"Layered client install implementation\",\"related_decisions\":{\"architecture\":[\"ARCH-TIED_LAYERED_CLIENT_INSTALL\"],\"requirements\":[\"REQ-TIED_LAYERED_CLIENT_INSTALL\"],\"supersedes\":[]},\"status\":\"Proposed\",\"traceability\":{\"requirements\":[\"REQ-TIED_LAYERED_CLIENT_INSTALL\"],\"architecture\":[\"ARCH-TIED_LAYERED_CLIENT_INSTALL\"]}}}"
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T18:25:59.619Z",
+  "client_id": "1786637885",
+  "wave_scope": "W-ext-1786637885-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786637885/tied/implementation-decisions/IMPL-FIRST_N_PRIMES-pseudocode.md",
+      "impl_token": "IMPL-FIRST_N_PRIMES",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786637885/tied/implementation-decisions/IMPL-PRINT_FIRST_FIVE_PRIMES-pseudocode.md",
+      "impl_token": "IMPL-PRINT_FIRST_FIVE_PRIMES",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    }
+  ],
+  "dry_run_content_hash": "8deb02cf9964433c3bd8c686e80f5a1053cb52cb62aabecf86cb18684974f31a",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1786637885/dry-run/snapshots/W-ext-1786637885-1"
+}

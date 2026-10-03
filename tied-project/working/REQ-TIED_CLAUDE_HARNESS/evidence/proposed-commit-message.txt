@@ -1,0 +1,14 @@
+feat(bootstrap): Claude harness parity Phases 0-3
+
+Deliver dual-harness bootstrap (.claude/skills/, repo-root .mcp.json safe merge,
+TIED_MCP_HARNESS metrics), agentstream --harness claude dry-run selection, client
+development-index REQ vs FEAT matrix, and full close-out evidence under
+working/REQ-TIED_CLAUDE_HARNESS/. Operator shell: test-bootstrap-claude-harness,
+close-out-req, run-close-out-gates (scripts/build-commands.sh).
+
+Close-out: envelope blocking gaps 0; bootstrap 8/8; agentstream 41/41.
+
+Deferred: live Claude AgentDriver subprocess automation; integrated MCP adversarial
+inquiry (depth_change_waiver until TypeScript Mode B paths).
+
+REQ-TIED_CLAUDE_HARNESS ARCH-TIED_CLAUDE_HARNESS IMPL-TIED_CLAUDE_HARNESS

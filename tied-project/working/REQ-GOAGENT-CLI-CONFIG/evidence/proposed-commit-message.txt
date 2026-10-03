@@ -1,0 +1,9 @@
+fix(close-out): diff-or-stage envelope hooks, agentstream CLI precedence
+
+SkipTiedMCPPreflightEffective applies CLI-over-env for tied MCP preflight
+([REQ-GOAGENT-CLI-CONFIG]). Envelope patch hooks honor TIED_ENVELOPE_HOOKS=1
+([REQ-REQUEST_EVIDENCE_ENVELOPE]). Checklist gate tests and fixture envelopes
+use authoritative tracker evidence ([REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]).
+Async methodology glossary index hygiene ([REQ-TIED_ASYNC_METHODOLOGY] vocab).
+
+Machine close-out: close_out gate allowed; envelope zero blocking gaps (minimal).

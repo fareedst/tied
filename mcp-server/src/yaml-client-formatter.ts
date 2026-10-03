@@ -117,7 +117,7 @@ exit(result.ok ? 0 : 1)
 }
 
 // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-TIED_YAML_CANONICALIZATION]
-// How: Allow hook targets only under project-owned tiedBasePath and never under tied/methodology/**.
+// How: Allow hook targets only under project-owned tiedBasePath and never under tied-bundle/**.
 export function guardProjectTiedPath(absolutePath: string, tiedBasePath: string): string {
   const normalized = path.resolve(absolutePath);
   const tiedRoot = path.resolve(tiedBasePath);
@@ -136,7 +136,7 @@ export function guardProjectTiedPath(absolutePath: string, tiedBasePath: string)
   if (normalized === methodologyRoot || normalized.startsWith(methodologyPrefix)) {
     throw new YamlClientFormatterError(
       "METHODOLOGY_PATH_FORBIDDEN",
-      `Path ${normalized} is under read-only tied/methodology/.`,
+      `Path ${normalized} is under read-only tied-bundle/.`,
     );
   }
   return normalized;

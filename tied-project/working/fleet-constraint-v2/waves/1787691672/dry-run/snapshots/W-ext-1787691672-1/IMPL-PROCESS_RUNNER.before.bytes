@@ -1,0 +1,14 @@
+// [IMPL-PROCESS_RUNNER] [ARCH-MACOS_SERVICE_REPORT] [REQ-MACOS_SERVICE_REPORT]
+// Spawn subprocess with fixed executable path and argument array; never invoke shell.
+
+PROC RUN_SUBPROCESS(executable, args)
+  PRE: executable is absolute path; args contains no shell metacharacters
+  POST: returns CapturedOutput(stdout, stderr, exitCode) OR SubprocessError
+  EFFECTS: reads bounded stdout/stderr streams up to 4 MiB
+  FAILURE_MODES: executable missing -> SubprocessError.notFound; exit != 0 -> SubprocessError.failed(exitCode)
+
+PROC CAPTURE_OUTPUT(process)
+  PRE: process has stdout pipe
+  POST: returns String truncated at cap with optional truncation warning
+  EFFECTS: reads stream until EOF or cap
+  DATA_TRANSITION: bytes -> UTF-8 String

@@ -1,0 +1,286 @@
+copy_hygiene: "Wave 8 tracker for adherence realignment — W8-D1–D7 implementation and close-out."
+execution_evidence:
+  close_out_evidence:
+    gates:
+      close_out:
+        allowed: true
+        receipt_path: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave8-closeout-gate-result.json"
+        run_id: "wave8-closeout-20260911"
+      verification:
+        allowed: true
+        run_id: "wave8-closeout-20260911"
+    status: "wave8_closeout_complete_pending_git"
+  completed:
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "three-way-alignment-unit"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+profile:
+  assurance_profiles:
+    - "baseline-functional"
+    - "data-integrity-migration"
+    - "stateful-reliability"
+  depth_tier: "integrated"
+  gate_policy: "advisory"
+  note: "Advisory applies only to observed/unresolved inquiry findings; W8-D1–D7 align producers and consumers for dependable unified close-out."
+  research_profile: "read-only research profile"
+request: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+source_plan: "docs/adherence-realignment-wave8-plan.md"
+status: "closeout_pending_commit"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/docs/ai-principles.md"
+      - "tied/vocab/prompt-composer.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+      - "tied/vocab/quality-assurance.md"
+      - "tied/vocab/routing.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "AGENTS.md"
+        - "tied/docs/ai-principles.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/adherence-realignment-wave8-plan.md"
+      - "docs/evidence-collection-conversation-patterns.md"
+    rationale: "Resolved path-dependent adherence, PSA false negative, thin_ledger, profile shell, three completion signals, single completion entrypoint."
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "docs/adherence-realignment-wave8-plan.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/adherence-realignment-wave8-plan.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-wave8-adherence-realignment.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "docs/adherence-realignment-wave8-plan.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/adherence-realignment-wave8-plan.md"
+    rationale: "depth_tier: integrated; gate_policy: advisory; eligibility triggers strict-close-out, methodology-tooling-change, persistence, external-input."
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "docs/adherence-realignment-wave8-plan.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/adherence-realignment-wave8-plan.md"
+      - "mcp-server/src/checklist-gate-evidence-hydration.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "tools/bootstrap/templates/run-close-out-gates.mjs"
+      - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "docs/adherence-realignment-wave8-plan.md"
+        - "mcp-server/src/checklist-gate-evidence-hydration.ts"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/adherence-realignment-wave8-plan.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "docs/adherence-realignment-wave8-plan.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-gate-evidence-hydration.ts"
+      - "mcp-server/src/checklist-validator.ts"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "mcp-server/src/checklist-gate-evidence-hydration.ts"
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/request-evidence-envelope/process-adherence-gaps.test.ts"
+      - "scripts/replay-adherence-fixtures.test.mjs"
+    slug: "unit-test-red"
+    tracking:
+      evidence_refs:
+        - "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+        - "mcp-server/src/checklist-validator.test.ts"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/dist/checklist-gate-evidence-hydration.test.js"
+      - "mcp-server/dist/checklist-validator.test.js"
+      - "mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js"
+      - "scripts/replay-adherence-fixtures.test.mjs"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "mcp-server/dist/checklist-gate-evidence-hydration.test.js"
+        - "mcp-server/dist/checklist-validator.test.js"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/tools/checklist-gate-mcp.test.ts"
+      - "tools/agentstream/checklist/adherence_ledger_test.go"
+      - "tools/agentstream/checklist/traceable_commit_envelope_test.go"
+    slug: "composition-integration"
+    tracking:
+      evidence_refs:
+        - "tools/agentstream/checklist/adherence_ledger_test.go"
+        - "tools/agentstream/checklist/traceable_commit_envelope_test.go"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/dist/checklist-gate-evidence-hydration.test.js"
+      - "mcp-server/dist/checklist-validator.test.js"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-REQUEST_EVIDENCE_ENVELOPE.v1.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "mcp-server/dist/checklist-validator.test.js"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/templates/run-close-out-gates.mjs"
+      - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave8-verification-gate-result.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/templates/run-close-out-gates.mjs"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/wave8-verification-gate-result.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "scripts/replay-adherence-fixtures.mjs"
+      - "scripts/replay-adherence-fixtures.test.mjs"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - "scripts/replay-adherence-fixtures.mjs"
+        - "scripts/replay-adherence-fixtures.test.mjs"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/adherence-realignment-wave8-close-out.md"
+      - "docs/adherence-realignment-wave8-plan.md"
+      - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "docs/adherence-realignment-wave8-plan.md"
+        - "tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "scripts/replay-adherence-fixtures.test.mjs"
+    slug: "three-way-alignment-unit"
+    tracking:
+      evidence_refs:
+        - "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+        - "mcp-server/src/checklist-validator.test.ts"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-wave8-adherence-realignment.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-wave8-adherence-realignment.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message.txt"
+    policy:
+      commit_deferred: false
+      rationale: "Sponsor requested plan-close-out with full evidence and commit."
+      skill: "plan-close-out"
+    slug: "traceable-commit"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/proposed-commit-message.txt"
+      status: "completed"
+wave_deliverables:
+  - evidence_refs:
+      - "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
+      - "mcp-server/src/checklist-gate-evidence-hydration.ts"
+    id: "W8-D1"
+    status: "completed"
+    title: "PSA auto-load for gate validate"
+  - evidence_refs:
+      - "tools/agentstream/checklist/adherence_ledger.go"
+      - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
+    id: "W8-D2"
+    status: "completed"
+    title: "Sync emits outcome_verified ledger rows"
+  - evidence_refs:
+      - "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
+      - "tools/bootstrap/templates/run-close-out-gates.mjs"
+    id: "W8-D3"
+    status: "completed"
+    title: "Profile substance chain"
+  - evidence_refs:
+      - "mcp-server/src/checklist-validator.ts"
+      - "tools/bootstrap/templates/run-close-out-gates.mjs"
+    id: "W8-D4"
+    status: "completed"
+    title: "Single completion entrypoint"
+  - evidence_refs:
+      - "tools/bundled-prompt-type-skills/build-plan/SKILL.md"
+      - "tools/bundled-prompt-type-skills/plan-close-out/SKILL.md"
+    id: "W8-D5"
+    status: "completed"
+    title: "Skill default tightening"
+  - evidence_refs:
+      - "scripts/replay-adherence-fixtures.mjs"
+      - "scripts/replay-adherence-fixtures.test.mjs"
+    id: "W8-D6"
+    status: "completed"
+    title: "Cohort replay regression"
+  - evidence_refs:
+      - "tools/agentstream/checklist/traceable_commit_envelope.go"
+    id: "W8-D7"
+    status: "completed"
+    title: "Promote agentstream enforce default"

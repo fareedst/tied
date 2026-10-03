@@ -10,7 +10,7 @@ describe("RUN_FIRST_SLICE REQ-TIED_FIDELITY_RESEARCH", () => {
     const adapters = {
       resolveManifest: (..._args: unknown[]) => {
         calls.push("manifest");
-        return { ok: true, manifest: { projectRoot: "/p", tiedBasePath: "/p/tied" } };
+        return { ok: true, manifest: { projectRoot: "/p", tiedBasePath: "/p/tied-project" } };
       },
       snapshotChange: (..._args: unknown[]) => {
         calls.push("snapshot");
@@ -47,7 +47,7 @@ describe("RUN_FIRST_SLICE REQ-TIED_FIDELITY_RESEARCH", () => {
     };
 
     const result = runFirstSlice({
-      manifestInput: { projectRoot: "/p", tiedBasePath: "/p/tied" },
+      manifestInput: { projectRoot: "/p", tiedBasePath: "/p/tied-project" },
       change: { id: "change-1" },
       scope: ["IMPL-TIED_FIDELITY_RESEARCH"],
       adapters,

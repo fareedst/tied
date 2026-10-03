@@ -13,6 +13,11 @@ import {
   isMethodologyTemplateOnlyPath,
   METHODOLOGY_TEMPLATE_ONLY_PATHS,
 } from "./methodology-template-only-allowlist.mjs";
+import { resolveTiedLayout } from "./layout.mjs";
+import {
+  resolveStoreDocsDir,
+  resolveStoreMethodologyIndexRoot,
+} from "./methodology-bundle.mjs";
 
 export { METHODOLOGY_TEMPLATE_ONLY_PATHS };
 
@@ -55,8 +60,8 @@ function collectFilesUnder(root, prefix, out) {
  * @param {{ semanticYamlCompare?: boolean }} options
  */
 export function computeParityA(tiedSourceRoot, clientProjectRoot, options = {}) {
-  const templatesDir = path.join(tiedSourceRoot, "templates");
-  const methodologyDir = path.join(clientProjectRoot, "tied", "methodology");
+  const templatesDir = resolveStoreMethodologyIndexRoot(tiedSourceRoot);
+  const methodologyDir = resolveTiedLayout(clientProjectRoot).bundleDir;
   const manifest = loadManifest();
   /** @type {import('./client-refresh-parity-types.js').ParityEntry[]} */
   const entries = [];
@@ -156,8 +161,8 @@ function runSemanticYamlCompareForFile(tiedSourceRoot, templatesDir, methodology
  */
 export function computeParityB(tiedSourceRoot, clientProjectRoot) {
   const manifest = loadManifest();
-  const docsRoot = path.join(tiedSourceRoot, "tied", "docs");
-  const clientDocs = path.join(clientProjectRoot, "tied", "docs");
+  const docsRoot = resolveStoreDocsDir(tiedSourceRoot);
+  const clientDocs = resolveTiedLayout(clientProjectRoot).docsDir;
   /** @type {import('./client-refresh-parity-types.js').ParityEntry[]} */
   const entries = [];
 
@@ -290,9 +295,10 @@ export function runClientRefreshParityGate(tiedSourceRoot, clientProjectRoot, op
       },
     };
 
+    const layout = resolveTiedLayout(clientProjectRoot);
     const reportPath =
       options.reportPath ??
-      path.join(clientProjectRoot, ".tied", "client-refresh-parity-report.json");
+      path.join(layout.reportsDir, "client-refresh-parity-report.json");
     fs.mkdirSync(path.dirname(reportPath), { recursive: true });
     fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 

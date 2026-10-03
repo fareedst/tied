@@ -160,7 +160,7 @@ export function analyze(workspace: string, mcpJsonPath: string): PreflightResult
   if (raw === undefined || raw === null) {
     res.status = Status.Blocked;
     res.errors.push(
-      'mcpServers["tied-yaml"] is missing; add it in .cursor/mcp.json (copy_files.sh installs .cursor/skills/tied-yaml only; it does not create mcp.json)',
+      'mcpServers["tied-yaml"] is missing; add it in .cursor/mcp.json (tied-install.sh installs .cursor/skills/tied-yaml only; it does not create mcp.json)',
     );
     return res;
   }
@@ -220,7 +220,7 @@ export function analyze(workspace: string, mcpJsonPath: string): PreflightResult
     }
   } catch {
     res.warnings.push(
-      "no readable tied/requirements.yaml at TIED_BASE_PATH (greenfield or partial bootstrap)",
+      "no readable tied-project/requirements.yaml at TIED_BASE_PATH (greenfield or partial bootstrap)",
     );
     if (res.status === Status.OK) {
       res.status = Status.Warning;

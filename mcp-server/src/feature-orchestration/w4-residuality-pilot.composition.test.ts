@@ -1,6 +1,6 @@
 /**
  * W4 CONTROLLED_COMPOSITION_FAULT — queue/worker/store/idempotency seams (UI-free).
- * Patterns: tied/docs/composition-coverage.md
+ * Patterns: tied-bundle/docs/composition-coverage.md
  */
 import assert from "node:assert/strict";
 import crypto from "node:crypto";

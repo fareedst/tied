@@ -15,3 +15,9 @@ export function yamlCanonicalizerCliFromYamlCliModule(moduleUrl: string): string
     "yaml-canonicalizer.js",
   );
 }
+
+/** Built @tied/yaml-cli entry (tsx tests run from src/). */
+export function yamlCliEntryFromYamlCliModule(moduleUrl: string): string {
+  const here = fileURLToPath(moduleUrl);
+  return path.join(path.dirname(here), "..", "dist", "index.js");
+}

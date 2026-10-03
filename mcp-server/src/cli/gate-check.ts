@@ -91,7 +91,7 @@ async function main(): Promise<void> {
         allowed: false,
         exit_code: 2,
         error: msg,
-        manual_path: "tied/docs/using-tied-without-mcp.md",
+        manual_path: "tied-bundle/docs/using-tied-without-mcp.md",
       }),
     );
     console.error(`tied gate check: MCP unavailable (${msg})`);

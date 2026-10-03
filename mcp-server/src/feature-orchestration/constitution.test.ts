@@ -67,8 +67,8 @@ describe("ANALYZE_CONSTITUTION_COMPLIANCE REQ-FEAT_CONSTITUTION_COMPLIANCE", () 
     // [IMPL-FEAT_CONSTITUTION_ANALYZER] [ARCH-FEAT_CONSTITUTION_ANALYZER] [REQ-FEAT_CONSTITUTION_COMPLIANCE] — Evaluate rule scope and precedence before implementation.
     const strictConstitution = { ...constitution(), articles: constitution().articles.map((article) => ({ ...article, exceptions: [] })), exceptions: [] };
     const result = analyzeConstitutionCompliance(strictConstitution, [
-      { kind: "requirements", path: "tied/requirements.yaml", data: { traceability: false } },
-      { kind: "citdp", path: "tied/citdp/CITDP-X.yaml", data: { traceability: true } },
+      { kind: "requirements", path: "tied-project/requirements.yaml", data: { traceability: false } },
+      { kind: "citdp", path: "tied-project/citdp/CITDP-X.yaml", data: { traceability: true } },
     ], new Date("2026-08-13T00:00:00.000Z"));
     assert.equal(result.length, 2);
     assert.equal(result.find((item) => item.artifact_path.includes("requirements"))?.blocking, true);

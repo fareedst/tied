@@ -1,0 +1,41 @@
+attractor: "A3"
+baseline:
+  assumptions:
+    - "Publish is atomic from reader perspective"
+  naive_architecture_summary: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md"
+  objective: "No partial manifest publish"
+business_priority: "P0 data-integrity"
+design_response: "PUBLISH_FAILED removes uncommitted reservation per IMPL pseudo-code"
+disposition:
+  status: "unresolved"
+  tied_refs:
+    - "IMPL-FEAT_IDEMPOTENT_CREATE"
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+evidence:
+  limitation: "W4 fault injection required for proof"
+  method: "W1 worksheet S-T08"
+  proof_boundary: "Discovery aid only"
+  references:
+    - "tied/requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml"
+impact_path:
+  bindings:
+    - "store publication"
+  data:
+    - "draft manifest"
+    - "request-key reservation"
+  dependencies:
+    - "ARCH-FEAT_STORE_PERSISTENCE"
+  functions:
+    - "cleanup reservation"
+    - "CREATE_FEATURE_IDEMPOTENTLY"
+  people:
+    - "API client"
+residue:
+  class: "desirable"
+  description: "No readable partial feature; reservation cleaned; retry succeeds"
+schema_version: "stressor-residue.v1"
+stressor:
+  category: "technical"
+  description: "Publish fails after feature id allocated but before manifest fully visible"
+  id: "S-T08"
+validation_stressor: null

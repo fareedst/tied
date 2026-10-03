@@ -19,7 +19,7 @@ function usage(): void {
 
 Options:
   --mcp-server-root PATH   Default: directory containing this CLI (mcp-server/)
-  --source PATH            Default: ../tied/methodology from repo root
+  --source PATH            Default: store methodology corpus (tied-bundle, templates, or tied/methodology)
   --corpus-out PATH        Default: methodology-bundle/corpus under mcp-server root
   --manifest-out PATH      Default: methodology-bundle/methodology-bundle-manifest.v1.json
   --dry-run                Print resolved paths only; do not write

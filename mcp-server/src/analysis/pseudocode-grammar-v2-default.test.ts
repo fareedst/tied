@@ -25,7 +25,12 @@ import {
 } from "./pseudocode-grammar-v2-default.js";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const canonicalTemplatePath = path.join(repoRoot, "templates", "impl-essence-pseudocode-template.md");
+const canonicalTemplatePath = path.join(
+  repoRoot,
+  "tied-bundle",
+  "templates",
+  "impl-essence-pseudocode-template.md",
+);
 
 const LEGACY_TEMPLATE_BODY = `# [IMPL-{TOKEN}] [ARCH-{…}] [REQ-{…}]
 ## Example block
@@ -269,11 +274,16 @@ describe("copy_files bootstrap sidecar template [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAU
   it("copies the canonical template with the v2 header into new client projects [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]", () => {
     // [IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT] [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT] How: Fresh-client bootstrap emits the grammar v2 default without rewriting existing client templates.
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-grammar-v2-default-"));
-    const copyScript = path.join(repoRoot, "copy_files.sh");
+    const copyScript = path.join(repoRoot, "tied-install.sh");
     try {
       execFileSync("bash", [copyScript, tempDir], { cwd: repoRoot, stdio: "pipe" });
 
-      const clientTemplate = path.join(tempDir, "templates", "impl-essence-pseudocode-template.md");
+      const clientTemplate = path.join(
+        tempDir,
+        "tied-bundle",
+        "templates",
+        "impl-essence-pseudocode-template.md",
+      );
       assert.ok(fs.existsSync(clientTemplate), "bootstrap should install the sidecar template");
       const body = fs.readFileSync(clientTemplate, "utf8");
       const copyable = body.split("\n---\n").slice(1).join("\n---\n").trimStart();

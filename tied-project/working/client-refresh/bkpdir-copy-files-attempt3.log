@@ -1,0 +1,93 @@
+Copied tied-yaml Cursor skill into /Users/fareed/Documents/dev/go/bkpdir/.cursor/skills/tied-yaml (from /Users/fareed/Documents/dev/chatgpt/stdd/tools/bundled-tied-yaml-skill).
+Copied prompt-type Cursor skills into /Users/fareed/Documents/dev/go/bkpdir/.cursor/skills (from /Users/fareed/Documents/dev/chatgpt/stdd/tools/bundled-prompt-type-skills).
+Copied Claude skills into /Users/fareed/Documents/dev/go/bkpdir/.claude/skills (copy default).
+Initialized /Users/fareed/Documents/dev/go/bkpdir/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Initialized /Users/fareed/Documents/dev/go/bkpdir/.claude/settings.json PostToolUse tied-adherence-bridge.
+Copied optional CLAUDE.md template into /Users/fareed/Documents/dev/go/bkpdir.
+Copied 0 of 3 base files into /Users/fareed/Documents/dev/go/bkpdir.
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-EVIDENCE_CHAIN_PROFILE.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-MODULE_VALIDATION.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions/ARCH-TIED_STRUCTURE.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-MODULE_VALIDATION.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions/IMPL-TIED_FILES.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements/REQ-FEEDBACK_TO_TIED.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements/REQ-MODULE_VALIDATION.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements/REQ-TIED_FIDELITY_RESEARCH.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements/REQ-TIED_SETUP.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/semantic-tokens.yaml
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/agent-stream-ruby.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/agentstream.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/async-methodology.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/config-discovery.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/domain-references.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/feature-orchestration.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/feedback-to-tied.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/fidelity-research.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/leap-proposal-queue.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/pseudocode-and-citdp.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/quality-assurance.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/tied-methodology.md
+WARNING: Client-modified managed copy detected: /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab/tied-yaml-mcp.md
+Copied 4 of 4 methodology index YAMLs into /Users/fareed/Documents/dev/go/bkpdir/tied/methodology (overwritten).
+Copied 17 of 17 methodology vocabulary file(s) into /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/vocab (overwritten).
+Created 0 of 4 project index file(s) (rest already existed).
+Preserved existing client constitution example /Users/fareed/Documents/dev/go/bkpdir/tied/constitution.example.yaml.
+Copied 0 of 41 methodology doc(s) into /Users/fareed/Documents/dev/go/bkpdir/tied/docs.
+Preserved 41 existing methodology document(s); compare them with /Users/fareed/Documents/dev/chatgpt/stdd/tied/docs and merge applicable changes.
+Preserved existing sidecar template at /Users/fareed/Documents/dev/go/bkpdir/templates/impl-essence-pseudocode-template.md.
+Copied 15 of 15 methodology implementation decision(s) into /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions (overwritten).
+Copied 15 methodology implementation pseudo-code sidecar(s) into /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/implementation-decisions (overwritten).
+Copied 9 of 9 methodology architecture decision(s) into /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/architecture-decisions (overwritten).
+Copied 7 of 7 methodology requirement(s) into /Users/fareed/Documents/dev/go/bkpdir/tied/methodology/requirements (overwritten).
+MUST verify fidelity research methodology artifacts before completion.
+MUST verify fidelity research methodology artifacts: complete.
+CAN run structural validation: TIED_BASE_PATH=/Users/fareed/Documents/dev/go/bkpdir/tied /Users/fareed/Documents/dev/go/bkpdir/.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency.
+CAN run the read-only audit: /Users/fareed/Documents/dev/go/bkpdir/tied/docs/pseudocode-fidelity-audit-agent-prompt.md (Stages 0-4).
+CAN refresh methodology vocabulary with: copy_files --merge-vocab /path/to/client.
+MUST verify adversarial inquiry methodology artifacts before completion.
+MUST verify adversarial inquiry methodology artifacts: complete.
+CAN run the read-only inquiry: /Users/fareed/Documents/dev/go/bkpdir/tied/docs/adversarial-inquiry-adoption.md.
+MUST verify feature orchestration methodology artifacts before completion.
+MUST verify feature orchestration methodology artifacts: complete.
+CAN run onboarding smoke: (cd /Users/fareed/Documents/dev/go/bkpdir && /Users/fareed/Documents/dev/go/bkpdir/.cursor/skills/tied-yaml/scripts/tied.sh init).
+CAN run structural validation: TIED_BASE_PATH=/Users/fareed/Documents/dev/go/bkpdir/tied /Users/fareed/Documents/dev/go/bkpdir/.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency.
+MUST verify inherited methodology detail-file integrity before completion.
+MUST verify inherited methodology detail-file integrity: complete.
+MUST verify inherited methodology pseudo-code token references before completion.
+MUST verify inherited methodology pseudo-code token references: complete.
+DEBUG: CLIENT_REFRESH_PARITY summary methodology_drift=4 doc_drift=16 missing=0 preserved=4
+DEBUG: Parity A drift: architecture-decisions.yaml
+DEBUG: Parity A drift: implementation-decisions.yaml
+DEBUG: Parity A drift: requirements.yaml
+DEBUG: Parity A drift: semantic-tokens.yaml
+DEBUG: Parity B drift: adding-tied-mcp-and-invoking-passes.md
+DEBUG: Parity B drift: agent-preload-contract-template.yaml
+DEBUG: Parity B drift: ai-principles.md
+DEBUG: Parity B drift: agent-req-implementation-checklist.md
+DEBUG: Parity B drift: citdp-policy.md
+CLIENT_REFRESH_PARITY: 4 methodology drift path(s); see /Users/fareed/Documents/dev/go/bkpdir/.tied/client-refresh-parity-report.json
+CLIENT_REFRESH_PARITY_FAILED

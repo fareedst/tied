@@ -57,7 +57,7 @@ describe("runCorpusGrammarV2Audit composition [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-corpus-grammar-replay-"));
     const artifactRel = path.join("working", "evaluation", `grammar-v2-${path.basename(tempDir)}-audit.json`);
     const artifactAbs = path.join(REPO_ROOT, artifactRel);
-    const copyScript = path.join(REPO_ROOT, "copy_files.sh");
+    const copyScript = path.join(REPO_ROOT, "tied-install.sh");
     try {
       execFileSync("bash", [copyScript, tempDir], { cwd: REPO_ROOT, stdio: "pipe" });
       const row = {

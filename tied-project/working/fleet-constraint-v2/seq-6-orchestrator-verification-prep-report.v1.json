@@ -1,0 +1,55 @@
+{
+  "schema_version": "seq-6-orchestrator-verification-prep-report.v1",
+  "generated_at": "2026-09-13T05:13:00.000Z",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "run_id": "fleet-migration-phase4-closeout-20260913",
+  "commit": "b568c983e69c8959be3035e783c2e5b7a8c8a94d",
+  "scope": "WS-3 O3.1-O3.4, O3.6, O3.8 (seq 6); excludes O3.5 gates, O3.7 tied_verify, O3.9 machine close-out",
+  "steps": {
+    "O3_1_pseudocode_validate_analyze_g3": {
+      "ok": true,
+      "artifacts": [
+        "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/pseudocode-analysis/IMPL-PSEUDOCODE_MIGRATION_TOOLING.closeout-g3.v1.json",
+        "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/pseudocode-analysis/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.closeout-g3.v1.json",
+        "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/pseudocode-validate-IMPL-PSEUDOCODE_MIGRATION_TOOLING-closeout-g3.v1.json",
+        "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/pseudocode-validate-IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-closeout-g3.v1.json"
+      ]
+    },
+    "O3_2_quality_evidence_manifest": {
+      "ok": true,
+      "command": "bun test working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts",
+      "exit_code": 0,
+      "artifact": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/verification-evidence-manifest.v1.json"
+    },
+    "O3_3_integrated_activation": {
+      "ok": true,
+      "run_id": "fleet-migration-phase4-closeout-20260913",
+      "phases": {
+        "verification": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-verification/",
+        "close_out": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-close_out/"
+      },
+      "activation_collect_ok": true
+    },
+    "O3_4_envelope_build_validate": {
+      "ok": true,
+      "artifact": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/request-evidence-envelope.v1.json",
+      "fail_on_error_gaps": true,
+      "blocking_gap_count": 0,
+      "advisory_gap_count": 6
+    },
+    "O3_6_tracker_evidence_refs": {
+      "ok": true,
+      "tracker": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/agent-req-implementation-checklist.yaml",
+      "block": "fleet_program_phase_modules.phase_4_closeout"
+    },
+    "O3_8_tied_validate_consistency": {
+      "ok": true
+    }
+  },
+  "deferred": {
+    "O3_5_checklist_gate_validate": "seq 8 after seq 7 M2 EX assert",
+    "O3_7_tied_verify": "after verification gate allowed true",
+    "O3_9_run_close_out_gates": "with /plan-close-out"
+  },
+  "next_recommended": "/build-plan seq 7 — formal M2 EX-01..09 assertion"
+}

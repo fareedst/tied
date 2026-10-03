@@ -1,0 +1,18 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T17:42:04.584Z",
+  "client_id": "1789087315",
+  "wave_scope": "W-ext-1789087315-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789087315/tied/implementation-decisions/IMPL-DUPCOMPARE-pseudocode.md",
+      "impl_token": "IMPL-DUPCOMPARE",
+      "action": "none",
+      "classification_before": "header-only-v2"
+    }
+  ],
+  "dry_run_content_hash": "12b053c9cf1c0504c3316b1b0137454ee0fddaadd13c6d1b8ae46bfaf9584b0f",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1789087315/dry-run/snapshots/W-ext-1789087315-1"
+}

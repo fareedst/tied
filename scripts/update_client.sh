@@ -7,36 +7,36 @@
             # # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP]
             # # How: Bootstrap client tied/ layout, refresh the methodology vocabulary snapshot, preserve the client vocabulary layer, install the tied-yaml skill, and conditionally initialize MCP configuration.
             # #
-            # # copy_files.sh
+            # # tied-install.sh
             # #
             # # Copies the TIED template files from the directory containing this script
-            # # into a target project's `tied/` directory.
+            # # into a target project's `tied-project/` directory.
             # #
             # # Methodology vs project ([PROC-TIED_METHODOLOGY_READONLY]):
-            # #   - Methodology (TIED-owned): Content under tied/methodology/ is from TIED templates/
+            # #   - Methodology (TIED-owned): Content under tied-bundle/ is from TIED templates/
             # #     and is ALWAYS OVERWRITTEN on each run. Clients must not edit these files; they do
             # #     not hold client-specific data. Re-run this script to refresh methodology.
             # #   - Project (client-owned): Index YAMLs and detail dirs at the ROOT of tied/
-            # #     (tied/requirements.yaml, tied/requirements/, etc.) are created only if missing
+            # #     (tied-project/requirements.yaml, tied-project/requirements/, etc.) are created only if missing
             # #     and are NEVER OVERWRITTEN. All client REQ/ARCH/IMPL and tokens live there.
             # #
             # # Creates:
             # #   - Base files (.cursorrules, AGENTS.md) in project root
             # #     (created only if missing; never overwritten. To pick up a newer TIED `AGENTS.md`, delete
             # #     or replace it, then re-run, or copy from the TIED source by hand)
-            # #   - tied/methodology/: index YAMLs, inherited detail files, and methodology vocabulary (always overwritten)
+            # #   - tied-bundle/: index YAMLs, inherited detail files, and methodology vocabulary (always overwritten)
             # #   - tied/: project index YAMLs and requirements/, architecture-decisions/, implementation-decisions/ (create if missing, never overwrite)
-            # #   - Guide .md and tied/docs/ (copy when missing; never overwrite an existing `tied/docs/*.md`).
-            # #     Core guides and schema come from tied/docs/ in the TIED source.
+            # #   - Guide .md and tied-bundle/docs/ (copy when missing; never overwrite an existing `tied-bundle/docs/*.md`).
+            # #     Core guides and schema come from tied-bundle/docs/ in the TIED source.
             # #     `tied-yaml-agent-index.md` is post-processed
-            # #     so links resolve from tied/docs/ (see sed block in the DOCS_TO_COPY loop).
+            # #     so links resolve from tied-bundle/docs/ (see sed block in the DOCS_TO_COPY loop).
             # #   - .cursor/skills/tied-yaml/: Cursor Agent Skill for REQ/ARCH/IMPL YAML via tied-cli.sh
             # #     (from tools/bundled-tied-yaml-skill/ in git; .cursor/skills/tied-yaml only if bundled is missing; overwritten each run).
             # #   - .cursor/skills/: managed prompt-type skills and prompt-shared references
             # #     (from tools/bundled-prompt-type-skills/; managed directories are overwritten each run).
             # #     Installed tied-cli.sh bakes TIED_REPO_ROOT to this TIED source repo for TIED_MCP_BIN default.
-            # #   - tied/methodology/vocab/: TIED-owned methodology glossaries (*.md), refreshed on every run
-            # #   - tied/vocab/: client-owned domain glossaries plus a small routing/catalog handoff (never overwritten when present)
+            # #   - tied-bundle/vocab/: TIED-owned methodology glossaries (*.md), refreshed on every run
+            # #   - tied-project/vocab/: client-owned domain glossaries plus a small routing/catalog handoff (never overwritten when present)
             # #   - Canonical CLI: .cursor/skills/tied-yaml/scripts/tied-cli.sh (use `tree -a` to list .cursor/ or open in the IDE).
             # #   - .cursor/mcp.json: creates mcpServers.tied-yaml with stdio, absolute paths to this TIED
             # #     repo's mcp-server/dist/index.js and the target project's tied/ only when the file is
@@ -53,9 +53,9 @@
             # # Designed for macOS (Bash 3.2+) and Ubuntu (Bash 5.x+).
             # #
             # # Usage:
-            # #   ./copy_files.sh /path/to/project
-            # #   ./copy_files.sh            # copies into the current working directory
-            # #   ./copy_files.sh --merge-vocab /path/to/project
+            # #   ./tied-install.sh /path/to/project
+            # #   ./tied-install.sh            # copies into the current working directory
+            # #   ./tied-install.sh --merge-vocab /path/to/project
             # #     refreshes methodology vocabulary and creates missing client routing/catalog handoffs
 
             # set -euo pipefail
@@ -86,7 +86,7 @@ TARGET_PROJECT_DIR="$(pwd)"
 PASS="${1:-1}"
 #
 TIED_SOURCE="$SCRIPT_DIR/.."
-TIED_BASE="${TARGET_PROJECT_DIR}/tied"
+TIED_BASE="${TARGET_PROJECT_DIR}/tied-project"
 
 if [[ ! -d "${TIED_BASE}" ]]; then
   say_err "Target project TIED directory does not exist: ${TIED_BASE}"
@@ -95,12 +95,12 @@ fi
 
 # (cd "${TIED_SOURCE}/mcp-server" && npm run build)"
 case "$PASS" in
-1) echo_exec "${TIED_SOURCE}/copy_files.sh" "${TARGET_PROJECT_DIR}" && echo_exec ruby "${TIED_SOURCE}/scripts/migrate_vocab_ownership.rb" --fail-on-review "${TARGET_PROJECT_DIR}" ;;
-2) echo_exec ruby "${TIED_SOURCE}/scripts/migrate_vocab_ownership.rb" --apply "${TARGET_PROJECT_DIR}" && echo_exec "${TIED_SOURCE}/copy_files.sh" --merge-vocab "${TARGET_PROJECT_DIR}" && echo_exec "${TIED_SOURCE}/scripts/validate_vocab_index.rb" "${TARGET_PROJECT_DIR}" && TIED_BASE_PATH="${TIED_BASE}" && echo "TIED_BASE_PATH: $TIED_BASE_PATH" && echo_exec "${TARGET_PROJECT_DIR}/.cursor/skills/tied-yaml/scripts/tied-cli.sh" tied_validate_consistency '{}' ;;
+1) echo_exec "${TIED_SOURCE}/tied-install.sh" "${TARGET_PROJECT_DIR}" && echo_exec ruby "${TIED_SOURCE}/scripts/migrate_vocab_ownership.rb" --fail-on-review "${TARGET_PROJECT_DIR}" ;;
+2) echo_exec ruby "${TIED_SOURCE}/scripts/migrate_vocab_ownership.rb" --apply "${TARGET_PROJECT_DIR}" && echo_exec "${TIED_SOURCE}/tied-install.sh" --merge-vocab "${TARGET_PROJECT_DIR}" && echo_exec "${TIED_SOURCE}/scripts/validate_vocab_index.rb" "${TARGET_PROJECT_DIR}" && TIED_BASE_PATH="${TIED_BASE}" && echo "TIED_BASE_PATH: $TIED_BASE_PATH" && echo_exec "${TARGET_PROJECT_DIR}/.cursor/skills/tied-yaml/scripts/tied-cli.sh" tied_validate_consistency '{}' ;;
 esac
 
             # CURSOR_DIR="${TARGET_PROJECT_DIR}/.cursor"
-            # TIED_DIR="${TARGET_PROJECT_DIR}/tied"
+            # TIED_DIR="${TARGET_PROJECT_DIR}/tied-project"
             # METHODOLOGY_DIR="${TIED_DIR}/methodology"
             # # Project dirs (client-owned; never overwritten by this script)
             # IMPL_DECISIONS_DIR="${TIED_DIR}/implementation-decisions"
@@ -400,7 +400,7 @@ esac
             #   say_err "Recovery: re-run this script from a TIED tree that includes tools/bundled-tied-yaml-skill/, or"
             #   say_err "  cp -pR <TIED_repo>/tools/bundled-tied-yaml-skill .cursor/skills/tied-yaml"
             #   say_err "TIED project YAML: use a built mcp-server dist/index.js with TIED_MCP_BIN and"
-            #   say_err "  TIED_BASE_PATH, or follow tied/docs/using-tied-without-mcp.md for the manual workflow."
+            #   say_err "  TIED_BASE_PATH, or follow tied-bundle/docs/using-tied-without-mcp.md for the manual workflow."
             #   exit 1
             # fi
 
@@ -456,7 +456,7 @@ esac
             # # --- Vocabulary ownership boundaries ---
             # # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_VOCABULARY_OWNERSHIP] [PROC-VOCABULARY_INDEX]
             # # How: Keep TIED-owned methodology glossaries in the refreshable methodology snapshot and
-            # # keep client-owned glossaries at tied/vocab/; never copy methodology prose into the client layer.
+            # # keep client-owned glossaries at tied-project/vocab/; never copy methodology prose into the client layer.
             # VOCAB_SRC="${SCRIPT_DIR}/tied/vocab"
             # METHODOLOGY_VOCAB_DEST="${METHODOLOGY_DIR}/vocab"
             # CLIENT_VOCAB_DEST="${TIED_DIR}/vocab"
@@ -488,7 +488,7 @@ esac
             #     text = handle.read()
 
             # # Methodology glossaries keep links to the client-visible docs and optional
-            # # source tools valid after moving one directory deeper into tied/methodology/vocab/.
+            # # source tools valid after moving one directory deeper into tied-bundle/vocab/.
             # if "/methodology/vocab/" in destination:
             #     text = text.replace("](../docs/", "](../../docs/")
             #     text = text.replace("](../../tools/", "](../../../tools/")
@@ -513,16 +513,16 @@ esac
             #     text = "".join(filtered)
             # elif basename == "prompt-type-skills.md":
             #     text = text.replace(
-            #         "**Vocabulary:** [`tied/vocab/prompt-composer.md`](../vocab/prompt-composer.md)",
+            #         "**Vocabulary:** [`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md)",
             #         "**Vocabulary:** Prompt Composer terms are maintained in the TIED source repository and are not installed into clients.",
             #     )
             #     text = text.replace(
-            #         "The canonical glossary is\n[`tied/vocab/prompt-composer.md`](../vocab/prompt-composer.md). The following\nterms were recorded for this skill implementation.",
+            #         "The canonical glossary is\n[`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md). The following\nterms were recorded for this skill implementation.",
             #         "Prompt Composer terms are recorded here for client skill context; the canonical glossary is maintained in the TIED source repository and is not installed into clients.",
             #     )
             #     text = text.replace(
-            #         "1. Update `tied/vocab/prompt-composer.md` for new or renamed concepts.",
-            #         "1. Update the source-only `tied/vocab/prompt-composer.md` glossary for new or renamed concepts.",
+            #         "1. Update `tied-project/vocab/prompt-composer.md` for new or renamed concepts.",
+            #         "1. Update the source-only `tied-project/vocab/prompt-composer.md` glossary for new or renamed concepts.",
             #     )
 
             # with open(destination, "w", encoding="utf-8") as handle:
@@ -562,7 +562,7 @@ esac
 
             # ## Ownership
 
-            # Files under `tied/vocab/` are client-owned. Files under `tied/methodology/vocab/` are TIED-owned and are replaced during methodology refresh.
+            # Files under `tied-project/vocab/` are client-owned. Files under `tied-bundle/vocab/` are TIED-owned and are replaced during methodology refresh.
 
             # ## Alphabetical index
 
@@ -595,7 +595,7 @@ esac
 
             # ## Ownership
 
-            # This catalog and all non-index glossaries in `tied/vocab/` are client-owned. The methodology catalog and its linked glossaries are refreshed under `tied/methodology/vocab/`.
+            # This catalog and all non-index glossaries in `tied-project/vocab/` are client-owned. The methodology catalog and its linked glossaries are refreshed under `tied-bundle/vocab/`.
 
             # ## Alphabetical index
 
@@ -633,10 +633,10 @@ esac
             # say_x_of_y_client "${base_copied}" "${#BASE_FILES[@]}" "Copied ${base_copied} of ${#BASE_FILES[@]} base files into ${TARGET_PROJECT_DIR}."
 
             # # Core methodology (inherited LEAP R+A+I) lives in templates/; guide markdown and reference docs
-            # # are canonical in tied/docs/ in the TIED source.
+            # # are canonical in tied-bundle/docs/ in the TIED source.
             # TEMPLATES_DIR="${SCRIPT_DIR}/templates"
-            # TIED_SOURCE_DIR="${SCRIPT_DIR}/tied"
-            # # --- Methodology: index YAMLs into tied/methodology/ (ALWAYS OVERWRITE) ---
+            # TIED_SOURCE_DIR="${SCRIPT_DIR}/tied-project"
+            # # --- Methodology: index YAMLs into tied-bundle/ (ALWAYS OVERWRITE) ---
             # # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
             # # How: Bootstrap or refresh the client layout while preserving client-owned project YAML and existing vocabulary.
             # #
@@ -702,7 +702,7 @@ esac
             # for f in "${INDEX_YAML_FILES[@]}"; do
             #   dest="${TIED_DIR}/${f}"
             #   if [[ ! -f "${dest}" ]]; then
-            #     printf '# Project %s - add project-specific tokens here. Do not edit tied/methodology/.\n{}\n' "${f}" > "${dest}"
+            #     printf '# Project %s - add project-specific tokens here. Do not edit tied-bundle/.\n{}\n' "${f}" > "${dest}"
             #     say_ok "Created project index ${dest} (empty)."
             #     ((project_created++)) || true
             #   fi
@@ -723,9 +723,9 @@ esac
             #   say_warn "Preserved existing client constitution example ${CONSTITUTION_EXAMPLE_DEST}."
             # fi
 
-            # # Copy methodology docs into client tied/docs/ from canonical TIED source tied/docs/ (referenced by AGENTS.md, processes.md).
+            # # Copy methodology docs into client tied-bundle/docs/ from canonical TIED source tied-bundle/docs/ (referenced by AGENTS.md, processes.md).
             # # The agent-req-implementation-checklist.yaml is the trackable checklist; copy to a unique file per request (see its header).
-            # # CITDP paths in that checklist refer to the client project's tied/citdp/ (client workspace root), not the TIED source repo path.
+            # # CITDP paths in that checklist refer to the client project's tied-project/citdp/ (client workspace root), not the TIED source repo path.
             # # IMPL pseudo-code methodology is centralized in pseudocode-writing-and-validation.md + pseudocode-validation-checklist.yaml below (do not re-add retired split docs to this list).
             # mkdir -p "${TIED_DIR}/docs"
             # DOCS_TO_COPY=(
@@ -779,7 +779,7 @@ esac
             #   src="${TIED_SOURCE_DIR}/docs/${f}"
             #   dest="${TIED_DIR}/docs/${f}"
             #   if [[ ! -f "${src}" ]]; then
-            #     say_err "Missing methodology doc (canonical in TIED repo tied/docs/): ${src}"
+            #     say_err "Missing methodology doc (canonical in TIED repo tied-bundle/docs/): ${src}"
             #     exit 1
             #   fi
             #   ((docs_total++)) || true
@@ -787,10 +787,10 @@ esac
             #     _copy_file "${src}" "${dest}"
             #     # For client copy: post-process index links for paths that assume repo-root layout.
             #     if [[ "${f}" == "tied-yaml-agent-index.md" ]]; then
-            #       # Regenerate: edit canonical ${SCRIPT_DIR}/tied/docs/tied-yaml-agent-index.md, then re-run this script; sed normalizes for client.
+            #       # Regenerate: edit canonical ${SCRIPT_DIR}/tied-bundle/docs/tied-yaml-agent-index.md, then re-run this script; sed normalizes for client.
             #       _tied_yaml_idx_tmp="${dest}.tmp.$$"
             #       sed \
-            #         -e 's|](\.\./tied/docs/using-tied-without-mcp\.md)|](./using-tied-without-mcp.md)|g' \
+            #         -e 's|](\.\./tied-bundle/docs/using-tied-without-mcp\.md)|](./using-tied-without-mcp.md)|g' \
             #         -e 's|](\.\./tied/|](../|g' \
             #         -e 's|](\.\./\.cursor/|](../../.cursor/|g' \
             #         -e 's|](\.\./AGENTS\.md)|](../../AGENTS.md)|g' \
@@ -811,7 +811,7 @@ esac
             #   fi
             # fi
 
-            # # --- Methodology: implementation decision detail files into tied/methodology/ (ALWAYS OVERWRITE) ---
+            # # --- Methodology: implementation decision detail files into tied-bundle/ (ALWAYS OVERWRITE) ---
             # # Empty template subdirs: without nullglob, bash may pass a literal *.yaml path.
             # shopt -s nullglob
             # IMPL_TEMPLATE_DIR="${TEMPLATES_DIR}/implementation-decisions"
@@ -966,7 +966,7 @@ esac
             #   say_ok "MUST verify fidelity research methodology artifacts: complete."
             #   say_warn "CAN run structural validation: TIED_BASE_PATH=${TIED_BASE_PATH_VALUE} ${TIED_CLI_DEST:-${CURSOR_DIR}/skills/tied-yaml/scripts/tied-cli.sh} tied_validate_consistency."
             #   say_warn "CAN run the read-only audit: ${TIED_DIR}/docs/pseudocode-fidelity-audit-agent-prompt.md (Stages 0-4)."
-            #   say_warn "CAN refresh methodology vocabulary with: ./copy_files.sh --merge-vocab /path/to/client."
+            #   say_warn "CAN refresh methodology vocabulary with: ./tied-install.sh --merge-vocab /path/to/client."
             # }
 
             # verify_fidelity_methodology
@@ -976,9 +976,9 @@ esac
             # # How: Require the lightweight onboarding guide, constitution starter, vocabulary, and
             # # executable wrapper before declaring the client feature-orchestration surface installed.
             # FEATURE_ORCHESTRATION_METHODOLOGY_REQUIRED_FILES=(
-            #   "tied/docs/tied-feature-onboarding.md"
+            #   "tied-bundle/docs/tied-feature-onboarding.md"
             #   "tied/constitution.example.yaml"
-            #   "tied/methodology/vocab/feature-orchestration.md"
+            #   "tied-bundle/vocab/feature-orchestration.md"
             #   ".cursor/skills/tied-yaml/scripts/tied.sh"
             # )
 

@@ -1,0 +1,9 @@
+{
+  "request_token": "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY",
+  "phase": "pre_implementation",
+  "sub_procedure": "sub-adversarial-inquiry-pass",
+  "disposition": "not_applicable",
+  "policy": "minimal-depth-no-inquiry",
+  "rationale": "CITDP depth_tier minimal and sub_adversarial_inquiry_pass not_applicable; Phase A mechanical enforcement only.",
+  "recorded_at": "2026-09-24"
+}

@@ -1,0 +1,25 @@
+▶ new-tied-client pipeline
+  ✔ uses unix seconds not milliseconds for disposable timestamp [REQ-TIED_SETUP] [IMPL-TIED_FILES] (67.215875ms)
+  ✔ parseBootstrapToolFlags and parseNewTiedClientArgs handle full-tools [REQ-TIED_SETUP] [IMPL-TIED_FILES] (58.921125ms)
+  ✔ forwards full-tools to copy_files spawn args [IMPL-TIED_FILES] (58.334958ms)
+  ✔ parseNewTiedClientArgs handles disposable and skip flags [IMPL-TIED_FILES] (57.284292ms)
+  ✔ parseNewTiedClientArgs maps claude harness flags [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] (56.096791ms)
+  ✔ resolveCursorAgentCli prefers agent when on PATH and honors TIED_CURSOR_AGENT_CMD and CURSOR_CLI_NAME [IMPL-TIED_FILES] [REQ-TIED_SETUP] (58.266208ms)
+  ✔ mcp enable step uses resolved Cursor agent CLI [IMPL-TIED_FILES] (56.759667ms)
+  ✔ claude harness skips mcp enable and invokes validation after audit [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] [IMPL-TIED_CLAUDE_BOOTSTRAP_OPS] (58.14525ms)
+  ✔ records pipeline step order via injectable spawn [IMPL-TIED_FILES] (58.549459ms)
+✔ new-tied-client pipeline (530.299666ms)
+▶ new-tied-client integration
+  ✔ bootstraps client with lint when MCP and git skipped [REQ-TIED_SETUP] [IMPL-TIED_FILES] (2660.241083ms)
+  ✔ runs disposable CLI with skip flags [IMPL-TIED_FILES] (2526.570458ms)
+  ✔ disposable --full-tools seeds jev, dae, and BBCE starters [REQ-TIED_SETUP] [IMPL-TIED_FILES] (2588.662959ms)
+  ✔ disposable bootstrap sets MCP metrics client to timestamp dir not inherited shell label [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS] [IMPL-TIED_FILES] (245.191916ms)
+✔ new-tied-client integration (8020.829833ms)
+ℹ tests 13
+ℹ suites 2
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8643.490125

@@ -7,6 +7,7 @@ import { describe, it } from "node:test";
 
 import { readOracleFixture } from "./fixture-oracle.js";
 import {
+  agentstreamCliEntryFromModule,
   checklistTestdataDirFromModule,
   repoRootFromModule,
 } from "./paths.js";
@@ -55,10 +56,7 @@ describe("tracker migration preview TS [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
   it("tied agentstream ts entry emits same JSON as frozen oracle for preview flags", () => {
     const def = path.join(testdata, "gate-fixture-checklist.yaml");
     const track = path.join(testdata, "gate-writer-minimal-tracker.yaml");
-    const entry = path.join(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "index.js",
-    );
+    const entry = agentstreamCliEntryFromModule(import.meta.url);
     assert.ok(fs.existsSync(entry), "build @tied/agentstream first");
 
     const tsOut = execFileSync(

@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { resolveProjectIdentity } from "../project-identity.js";
+import { resolveTiedLayout } from "../tied-layout.js";
 import { isMetricsEnabled } from "../usage-metrics.js";
 import {
   projectRootFromTiedBase,
@@ -264,9 +265,18 @@ function defaultStructuralValidators(): StructuralAnalysisInput["validators"] {
 
 export function isForbiddenIntentPath(outputPath: string, projectRoot: string): boolean {
   const resolved = path.resolve(outputPath);
-  const tied = path.resolve(projectRoot, "tied");
-  const methodology = path.join(tied, "methodology");
-  if (resolved === methodology || resolved.startsWith(`${methodology}${path.sep}`)) return true;
+  const layout = resolveTiedLayout(projectRoot);
+  const tied = layout.tiedDir;
+  const legacyMethodology = path.join(tied, "methodology");
+  const bundleMethodology = layout.methodologyIndexRoot;
+  if (
+    resolved === legacyMethodology
+    || resolved.startsWith(`${legacyMethodology}${path.sep}`)
+    || resolved === bundleMethodology
+    || resolved.startsWith(`${bundleMethodology}${path.sep}`)
+  ) {
+    return true;
+  }
   const intentLeaves = [
     "requirements.yaml",
     "architecture-decisions.yaml",
@@ -512,7 +522,7 @@ export function generateEvidenceChainProfile(
     return { ok: false, stage: "scope", error: "InvalidScope" };
   }
 
-  const expectedTied = path.resolve(input.project_root, "tied");
+  const expectedTied = resolveTiedLayout(input.project_root).tiedDir;
   const requestedTied = path.resolve(input.tied_base_path);
   if (input.confirmed_tied_base_path && path.resolve(input.confirmed_tied_base_path) !== requestedTied) {
     return { ok: false, stage: "manifest", error: "WrongTiedBasePath" };
@@ -534,7 +544,7 @@ export function generateEvidenceChainProfile(
   if (!manifest.ok) {
     return { ok: false, stage: "manifest", error: manifest.error };
   }
-  if (requestedTied !== expectedTied) {
+  if (requestedTied !== path.resolve(expectedTied)) {
     return { ok: false, stage: "manifest", error: "WrongTiedBasePath" };
   }
 

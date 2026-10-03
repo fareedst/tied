@@ -7,13 +7,18 @@ export function repoRootFromBootstrapModule(moduleUrl: string): string {
   return path.resolve(path.dirname(here), "../../../..");
 }
 
-export function copyFilesMjsFromBootstrapModule(moduleUrl: string): string {
+export function installLayersMjsFromBootstrapModule(moduleUrl: string): string {
   return path.join(
     repoRootFromBootstrapModule(moduleUrl),
     "tools",
     "bootstrap",
-    "copy-files.mjs",
+    "install-layers.mjs",
   );
+}
+
+/** @deprecated Use installLayersMjsFromBootstrapModule */
+export function copyFilesMjsFromBootstrapModule(moduleUrl: string): string {
+  return installLayersMjsFromBootstrapModule(moduleUrl);
 }
 
 export function newTiedClientMjsFromBootstrapModule(moduleUrl: string): string {

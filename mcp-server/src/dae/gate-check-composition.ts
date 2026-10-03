@@ -1,4 +1,5 @@
 import path from "node:path";
+import { workingPathRelativeToProject } from "../working-root.js";
 
 import type { GatePhase } from "../checklist-validator.js";
 import { runBranchCheck } from "./branch-check.js";
@@ -231,7 +232,7 @@ export function defaultPathsForRequest(
   return {
     trackerPath:
       trackerPath?.trim() ||
-      path.join("working", requestToken, "checklist-tracker.yaml"),
+      workingPathRelativeToProject(projectRoot, requestToken, "checklist-tracker.yaml"),
     citdpPath:
       citdpPath?.trim() ||
       path.join("tied", "citdp", `CITDP-${requestToken}.yaml`),

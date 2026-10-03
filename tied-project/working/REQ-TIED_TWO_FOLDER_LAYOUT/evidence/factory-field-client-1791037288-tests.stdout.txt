@@ -1,0 +1,31 @@
+$ node --import tsx --test 'tests/**/*.test.ts'
+▶ CoreGraphicsProbe integration
+  ✔ T7: returns at least one display with exactly one main (7.366959ms)
+✔ CoreGraphicsProbe integration (7.807459ms)
+▶ runCli
+  ✔ T6: help exits 0 on darwin (0.672791ms)
+  ✔ T6: unsupported platform exits 2 (0.126208ms)
+  ✔ T6: probe error exits 1 (0.089792ms)
+  ✔ T6: prints table from stub probe (0.193541ms)
+✔ runCli (1.784042ms)
+▶ formatJson
+  ✔ T2: emits array with expected fields (0.496792ms)
+✔ formatJson (1.068875ms)
+▶ formatTable
+  ✔ T1: marks main display in table output (0.649917ms)
+✔ formatTable (1.307875ms)
+▶ listDisplays
+  ✔ T3: propagates probe errors (0.664292ms)
+✔ listDisplays (1.308584ms)
+▶ parseCliArgs
+  ✔ T5: parses help and json flags (1.187ms)
+  ✔ T5: unknown flag throws CliUsageError (0.223ms)
+✔ parseCliArgs (2.09075ms)
+▶ platform
+  ✔ T4: assertDarwin rejects non-darwin (0.571542ms)
+  ✔ isDarwin reflects platform string (0.07525ms)
+✔ platform (1.433417ms)
+ℹ tests 12
+ℹ pass 12
+ℹ fail 0
+exit=0

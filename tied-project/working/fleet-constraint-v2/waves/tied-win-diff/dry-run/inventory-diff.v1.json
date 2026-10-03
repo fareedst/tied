@@ -1,0 +1,22 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T21:51:27.163Z",
+  "client_id": "tied-win-diff",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/tied-win-diff",
+  "sidecar_count": 1,
+  "counts_by_state": {
+    "legacy-v1": 1,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 0,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "a0892672d95542cdeb41d9c5424aac239e3290f208fa00a03cbe7f406ad9cc35",
+  "rows": [
+    {
+      "file": "IMPL-TIED_FILES-pseudocode.md",
+      "classification": "legacy-v1"
+    }
+  ]
+}

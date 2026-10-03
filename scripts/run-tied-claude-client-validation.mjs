@@ -7,7 +7,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { REPO_ROOT } from "./lib/audit-grammar-v2-default.mjs";
-import { runClaudeClientValidation } from "../tools/bootstrap/lib/claude-client-validation.mjs";
+import {
+  defaultClaudeClientValidationReportRel,
+  runClaudeClientValidation,
+} from "../tools/bootstrap/lib/claude-client-validation.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -26,7 +29,7 @@ Options:
   --help                 Show this help
   --client-root          Bootstrapped Claude-first client root (required)
   --source-root          TIED repo root (default: parent of scripts/)
-  --json-out             Override report path (default: client/working/tied-claude-client-validation.v1.json)
+  --json-out             Override report path (default: layout-aware committed working root)
   --with-consistency     Run tied_validate_consistency (default off)
   --with-agentstream-dry-run  Run agentstream dry-run (default on)
   --no-agentstream-dry-run      Skip agentstream dry-run

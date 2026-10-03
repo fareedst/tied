@@ -8,6 +8,7 @@ import path from "node:path";
 
 import type { ChecklistGateEvidenceInput, EnvelopeGapEvidence, GatePhase } from "./checklist-validator.js";
 import { getClientProjectRoot } from "./yaml-loader.js";
+import { resolveWorkingPath } from "./working-root.js";
 
 const HYDRATION_PHASES = new Set<GatePhase>(["verification", "close_out"]);
 const HYDRATION_ARTIFACTS = {
@@ -147,10 +148,9 @@ export async function hydratePseudocodeReportsFromDisk(input: {
     return { pseudocodeReports: reports, hydrated, diagnostics };
   }
 
-  const workingRoot = path.join(input.projectRoot, "working", token);
   const scanDirs = [
-    path.join(workingRoot, "pseudocode-analysis"),
-    path.join(workingRoot, "evidence"),
+    resolveWorkingPath(input.projectRoot, token, "pseudocode-analysis"),
+    resolveWorkingPath(input.projectRoot, token, "evidence"),
   ];
 
   for (const dir of scanDirs) {

@@ -1,0 +1,20 @@
+ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH:
+  ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH:
+    consequences:
+      negative:
+        - "Bash and Node layout rules must stay aligned via tests"
+      positive:
+        - "Brownfield undivided clients unchanged"
+        - "No repo-root working/ on fresh two-folder factory clients"
+    decision: "Reuse tools/bootstrap/lib/working-root.mjs committed path resolution in Node onboarding audit; duplicate equivalent bash rules in build-commands without spawning Node."
+    description: "Factory onboarding and bash G4 helpers resolve onboarding audit JSON via the same committed-working contract as claude-client-validation (committedWorkingFileRel / undivided fallback); G4 two-folder audit adds warn-only SC-TFL-NO-ROOT-WORKING."
+    name: "Factory onboarding committed working path"
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-TIED_TWO_FOLDER_LAYOUT"
+      implementation:
+        - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+      requirements:
+        - "REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH"
+  status: "Active"

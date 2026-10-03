@@ -1,7 +1,9 @@
 {
   "provenance": {
     "adapter": "ruby-minitest",
-    "adapterDiagnostics": [],
+    "adapterDiagnostics": [
+      "unsupported_adapter"
+    ],
     "blockScope": [
       "BUILD_PROJECT_INQUIRY_INPUT"
     ],
@@ -15,7 +17,7 @@
       "testClassifiers": [
         "minitest"
       ],
-      "tiedBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project/tied",
+      "tiedBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project/tied-project",
       "version": "mode-b-fixture"
     },
     "mode": "project",
@@ -34,11 +36,10 @@
       "implementationDetail": "0ae238baff2e97f2",
       "implementationPseudocode": "a4df20ee2aed6408",
       "production": "fcfbbfba366c98b5",
-      "productionEvidence": "7b9949cc8d8b72b4",
       "requirementDetail": "5a4d72c3435cc6f5",
       "requirements": "22542a346089ac24",
       "semanticTokens": "84b8e8b1413d12b1",
-      "test": "307521197eebe08f"
+      "test": "f309eba736b767a2"
     },
     "tool_version": "1.0.0"
   },

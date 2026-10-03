@@ -1,0 +1,82 @@
+copy_hygiene: "Process orchestration for Step 7 combined hygiene close-out per docs/pseudocode-grammar-v2-and-hygiene-plan.md §Step 7. No inherited close-out evidence from REQ trackers; links only."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred:
+      - "sub-close-out-evidence-sync"
+      - "sync-tied-stack"
+      - "traceable-commit"
+      - "verification-gate"
+    gates: {}
+    master_checklist: ""
+    note: "Deferred to /plan-close-out on per-REQ trackers; this file tracks refine-only dispositions."
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "working/pseudocode-hygiene-closeout/evidence/request-evidence-envelope.v1.json"
+  request: "PROCESS-PSEUDOCODE_HYGIENE_CLOSEOUT"
+linked_req_trackers:
+  - path: "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml"
+    role: "reconcile"
+  - path: "working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/agent-req-implementation-checklist.yaml"
+    role: "capstone_integrated"
+  - path: "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/agent-req-implementation-checklist-track-c.yaml"
+    role: "minimal_close_out"
+profile:
+  depth_tier: null
+  gate_policy: "advisory"
+  note: "Process-only orchestration across REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT, REQ-PSEUDOCODE_STATIC_ANALYSIS (Track C slice), and REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP. No new IMPL code."
+request: "PROCESS-PSEUDOCODE_HYGIENE_CLOSEOUT"
+run_id: "hygiene-closeout-refine-20260911"
+source_plan: "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "AGENTS.md"
+      - "tied/vocab/fidelity-research.md"
+      - "tied/vocab/pseudocode-and-citdp.md"
+      - "tied/vocab/quality-assurance.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+      - "working/pseudocode-hygiene-closeout/CITDP-combined-hygiene-close-out.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml"
+      - "working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/agent-req-implementation-checklist.yaml"
+      - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/agent-req-implementation-checklist-track-c.yaml"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/pseudocode-hygiene-closeout/CITDP-combined-hygiene-close-out.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/pseudocode-grammar-v2-and-hygiene-plan.md"
+    rationale: "Close-out preflight re-runs only; no new RED tests for process orchestration."
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/gates/gate-verification-result.json"
+      - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-verification-track-c-result.json"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml"
+      - "tied/citdp/CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-track-c-validator-hardening.yaml"
+    slug: "sync-tied-stack"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "working/pseudocode-hygiene-closeout/evidence/proposed-commit-message.txt"
+    slug: "traceable-commit"

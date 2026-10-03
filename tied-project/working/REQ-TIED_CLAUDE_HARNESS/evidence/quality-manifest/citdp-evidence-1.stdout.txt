@@ -1,0 +1,167 @@
+
+> @tied/agentstream@1.0.0 test
+> npm run build && node --test dist/*.test.js dist/red/*.test.js
+
+
+> @tied/agentstream@1.0.0 build
+> tsc
+
+▶ adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ legacy_no_adherence_chain returns stable finding code (2.31125ms)
+  ✔ rendered_without_acknowledgment finding matches TS reconcile (1.013834ms)
+  ✔ tied agentstream impl=ts adherence-reconcile does not forward to Go (113.851875ms)
+✔ adherence reconcile TS [REQ-TIED_UNIFIED_TOOLCHAIN] (117.73875ms)
+▶ @tied/agentstream dispatcher [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ defaults TIED_AGENTSTREAM_IMPL to ts (0.61325ms)
+  ✔ accepts ts impl token (0.098875ms)
+  ✔ documents legacy go reinstall hint for Phase 4d (0.101166ms)
+  ✔ tied agentstream --help exits 0 (114.762041ms)
+  ✔ tied agentstream rejects TIED_AGENTSTREAM_IMPL=go (46.196584ms)
+✔ @tied/agentstream dispatcher [REQ-TIED_UNIFIED_TOOLCHAIN] (162.583792ms)
+▶ harness CLI composition [REQ-TIED_CLAUDE_HARNESS]
+  ✔ binds --harness claude to claude placeholder bin in agentArgv (0.791042ms)
+  ✔ keeps --agent-path override independent of --harness claude (0.122958ms)
+✔ harness CLI composition [REQ-TIED_CLAUDE_HARNESS] (1.431375ms)
+
+--- turn 1/3 (new session) [trigger-special] ---
+session_id=fake-session-trigger-special
+DIAGNOSTIC: agentstream_control goto rerouted-next: SPECIAL: focused RED test passes, but old tests fail after recent changes.
+
+--- turn 2/3 (resume fake-session-trigger-special) [rerouted-next] ---
+session_id=fake-session-rerouted-next
+
+--- turn 1/7 (new session) [session-bootstrap] ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 3/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 4/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 5/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 6/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+
+--- turn 7/7 (resume <session_id_from_previous_turn>) ---
+fatal: not a git repository (or any of the parent directories): .git
+DIAGNOSTIC: fake_tracker_agent hook simulation: wrong exec option symbol: stdin_data
+fatal: not a git repository (or any of the parent directories): .git
+DIAGNOSTIC: fake_tracker_agent hook simulation: wrong exec option symbol: stdin_data
+
+--- turn 1/2 (new session) [step-one] ---
+session_id=fake-tracker-session-step-one
+
+--- turn 2/2 (resume fake-tracker-session-step-one) [step-two] ---
+session_id=fake-tracker-session-step-two
+fatal: not a git repository (or any of the parent directories): .git
+DIAGNOSTIC: fake_tracker_agent hook simulation: wrong exec option symbol: stdin_data
+
+--- turn 1/2 (new session) [step-one] ---
+session_id=fake-tracker-session-step-one
+agentstream: tracker composition failed: missing_receipt for step "step-one"
+▶ live executor TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ routes control goto via TS live run (2832.509416ms)
+  ✔ dry-run with --verify-session matches frozen oracle (60.944375ms)
+  ✔ tracker mode requires receipt before turn N+1 (TS) (2446.518209ms)
+  ✔ tracker mode exits when receipt omitted (TS) (1627.530167ms)
+✔ live executor TS [REQ-TIED_UNIFIED_TOOLCHAIN] (6968.187625ms)
+
+--- turn 1/6 (new session) [session-bootstrap] ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/6 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 3/6 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 4/6 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 5/6 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 6/6 (resume <session_id_from_previous_turn>) [test-strategy] ---
+
+--- turn 1/6 (new session) [session-bootstrap] ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/6 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 3/6 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 4/6 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 5/6 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 6/6 (resume <session_id_from_previous_turn>) [test-strategy] ---
+
+--- turn 1/7 (new session) [session-bootstrap] ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 3/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 4/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 5/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 6/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+
+--- turn 7/7 (resume <session_id_from_previous_turn>) ---
+
+--- turn 1/7 (new session) ---
+dry-run: chained turns use --resume with the session_id from the previous turn; each --feature-spec-batch-yaml record after a prior turn omits --resume (new session). --prompt-file content is prepended on every new session (not a separate turn). An initial --session-id only applies to turn 1.
+
+--- turn 2/7 (resume <session_id_from_previous_turn>) [session-bootstrap] ---
+
+--- turn 3/7 (resume <session_id_from_previous_turn>) [translate-sponsor-intent] ---
+
+--- turn 4/7 (resume <session_id_from_previous_turn>) [change-definition] ---
+
+--- turn 5/7 (resume <session_id_from_previous_turn>) [impact-discovery] ---
+
+--- turn 6/7 (resume <session_id_from_previous_turn>) [risk-assessment] ---
+
+--- turn 7/7 (resume <session_id_from_previous_turn>) [test-strategy] ---
+▶ @tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ oracle freeze records last Go commit (RISK-UNIFIED-007) (0.901709ms)
+  ✔ checklist testdata gate-writer-minimal-tracker references gate fixture (0.292375ms)
+  ✔ TS preview-checklist-tracker JSON matches frozen oracle (69.77575ms)
+  ✔ executor dry-run: TS entry matches frozen oracle for gate fixture (70.936291ms)
+  ✔ executor dry-run: tied agentstream TIED_AGENTSTREAM_IMPL=ts matches frozen oracle (112.114ms)
+  ✔ executor dry-run: --verify-session matches frozen oracle (65.25025ms)
+  ✔ pipeline batch dry-run: TS matches frozen oracle (65.211917ms)
+  ✔ checklist render preview: TS matches frozen oracle (gate fixture) (74.23425ms)
+  ✔ preview feature-spec batch: TS matches frozen oracle (67.186916ms)
+  ✔ tiedpreflight TS analyze returns OK for valid mcp.json layout (0.858875ms)
+✔ @tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN] (527.600459ms)
+▶ SELECT_AGENT_HARNESS [REQ-TIED_CLAUDE_HARNESS]
+  ✔ maps --harness claude to claude profile (0.372667ms)
+  ✔ defaults to cursor when no harness flag (0.052125ms)
+  ✔ does not treat --agent-path as harness selection (0.047125ms)
+  ✔ maps dry-run mode to dry_run profile when --dry-run present (0.084ms)
+✔ SELECT_AGENT_HARNESS [REQ-TIED_CLAUDE_HARNESS] (1.116166ms)
+▶ @tied/agentstream tiedpreflight [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ locates root mcp.json (1.34ms)
+  ✔ locates single subproject mcp.json (0.517666ms)
+  ✔ rejects ambiguous subprojects (0.710583ms)
+  ✔ honors --mcp-json override (0.570708ms)
+  ✔ analyze ok when requirements.yaml exists (0.892208ms)
+  ✔ blocks when TIED_BASE_PATH outside workspace (0.640958ms)
+  ✔ blocks missing tied-yaml entry (0.918208ms)
+  ✔ blocks relative TIED_BASE_PATH (0.427125ms)
+  ✔ warns on greenfield tied without requirements.yaml (0.560333ms)
+  ✔ run locates and analyzes (0.671083ms)
+✔ @tied/agentstream tiedpreflight [REQ-TIED_UNIFIED_TOOLCHAIN] (8.085959ms)
+▶ tracker migration preview TS [REQ-TIED_UNIFIED_TOOLCHAIN]
+  ✔ matches frozen oracle for gate-writer-minimal golden tracker (3.788792ms)
+  ✔ tied agentstream ts entry emits same JSON as frozen oracle for preview flags (67.72825ms)
+  ✔ encodePreviewReport uses trailing newline like Go json.Encoder (0.457042ms)
+✔ tracker migration preview TS [REQ-TIED_UNIFIED_TOOLCHAIN] (72.599125ms)
+ℹ tests 41
+ℹ suites 8
+ℹ pass 41
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7042.150417

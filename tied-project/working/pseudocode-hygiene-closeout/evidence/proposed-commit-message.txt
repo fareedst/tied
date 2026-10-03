@@ -1,0 +1,19 @@
+feat(pseudocode): grammar v2 default, validator hardening, sidecar sweep
+
+Combined Step 7 hygiene close-out (Tracks A + C + B): default Grammar-Version
+v2 for new TIED sidecars; Layer B tokenScan bounds and negated-mutates
+heuristic in pseudocode-shared/validator; normalize-sidecar-block-leads CLI
+with B1–B3 waves and zero leak-risk full-repo audit.
+
+Track B close-out: track-b-verification-20260911, track-b-closeout-20260911;
+6/6 normalize CLI tests; analysis suite 304/305 (plumb-diff preview env flake).
+
+REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+REQ-PSEUDOCODE_STATIC_ANALYSIS
+IMPL-PSEUDOCODE_SHARED_PRIMITIVES
+IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP

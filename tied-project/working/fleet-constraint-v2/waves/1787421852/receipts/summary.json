@@ -1,0 +1,13 @@
+{
+  "run_at": "2026-09-13T18:26:05.973Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1787421852-1",
+  "partition_wave_id": "W-ext-1787421852-1",
+  "gate_stage": "G3",
+  "receipt_count": 3,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1787421852/receipts/IMPL-VOLUME_MOUNT_DISCOVERY.receipt.json",
+    "working/fleet-constraint-v2/waves/1787421852/receipts/IMPL-VOLUME_REPORT_FORMAT.receipt.json",
+    "working/fleet-constraint-v2/waves/1787421852/receipts/IMPL-VOLUME_STATS_CALC.receipt.json"
+  ]
+}

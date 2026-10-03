@@ -1,0 +1,9 @@
+criteria:
+  - description: "pre_implementation gate allowed with Tracker and CITDP on disk"
+    evidence:
+      receipt_path: "working/REQ-TIED_DAE_INCORPORATION/gates/pre_implementation-example.json"
+    id: "gate-pre-implementation"
+    verified_by: "mcp_tool"
+phase: "pre_implementation"
+request_token: "REQ-TIED_DAE_INCORPORATION"
+schema_version: 1

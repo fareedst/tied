@@ -6,8 +6,18 @@ import fs from "node:fs";
 import path from "node:path";
 import { copyFileWithAttributes } from "./copy-managed.mjs";
 import { sayXOfYClient } from "./console.mjs";
+import { BUNDLE_DIR_NAME } from "./layout.mjs";
 
-const TEMPLATE_REL = path.join("tools", "bootstrap", "templates", "CLAUDE.md.template");
+function resolveClaudeMdTemplatePath(tiedRepoRoot) {
+  const candidates = [
+    path.join(tiedRepoRoot, BUNDLE_DIR_NAME, "templates", "CLAUDE.md.template"),
+    path.join(tiedRepoRoot, "tools", "bootstrap", "templates", "CLAUDE.md.template"),
+  ];
+  for (const p of candidates) {
+    if (fs.existsSync(p)) return p;
+  }
+  throw new Error(`Missing CLAUDE.md template (checked: ${candidates.join(", ")})`);
+}
 
 /**
  * @param {string} projectRoot
@@ -15,10 +25,7 @@ const TEMPLATE_REL = path.join("tools", "bootstrap", "templates", "CLAUDE.md.tem
  * @returns {{ action: "installed" | "skipped" }}
  */
 export function installClaudeMdTemplate(projectRoot, tiedRepoRoot) {
-  const src = path.join(tiedRepoRoot, TEMPLATE_REL);
-  if (!fs.existsSync(src)) {
-    throw new Error(`Missing CLAUDE.md template: ${src}`);
-  }
+  const src = resolveClaudeMdTemplatePath(tiedRepoRoot);
   const dest = path.join(projectRoot, "CLAUDE.md");
   if (fs.existsSync(dest)) {
     return { action: "skipped" };

@@ -1,0 +1,25 @@
+{
+  "schema_version": "fleet-leap-layer-b-report.v1",
+  "generated_at": "2026-09-12T18:20:00-07:00",
+  "program": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "phase": "P4",
+  "scope": "stdd sidecars with layer_b.ok false only (layer_c already true)",
+  "tokens": [
+    "IMPL-ASYNC_CHECKLIST_DISPOSITIONS",
+    "IMPL-ASYNC_CITDP_PROFILE_WIRING",
+    "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT",
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  ],
+  "fixes": {
+    "IMPL-ASYNC_CHECKLIST_DISPOSITIONS": ["MISSING_BLOCK_TOKEN_LINK on three sub-procedures"],
+    "IMPL-ASYNC_CITDP_PROFILE_WIRING": ["MISSING_BLOCK_TOKEN_LINK on three sub-procedures", "MISSING_DATA_TRANSITION on DERIVE_ASYNC_CITDP_TRIGGERS"],
+    "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT": ["MISSING_BLOCK_TOKEN_LINK", "MISSING_FAILURE_MODES", "MISSING_DATA_TRANSITION", "MISSING_TERMINATION on active procedures; replaced TBD contracts"],
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT": ["MISSING_DATA_TRANSITION on PARSE_TRACKER_COMPLETION_RECEIPT"]
+  },
+  "post_refresh": {
+    "receipt_count": 83,
+    "layer_b_ok_false": 0,
+    "layer_c_ok_false": 0,
+    "harness": "fleet-g3-refresh-stdd"
+  }
+}

@@ -1,0 +1,3 @@
+WROTE /Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-TIED_FILES.v1.json ok=true gate_mode_applied=true
+WROTE /Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.v1.json ok=true gate_mode_applied=true
+WROTE /Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json ok=true gate_mode_applied=true

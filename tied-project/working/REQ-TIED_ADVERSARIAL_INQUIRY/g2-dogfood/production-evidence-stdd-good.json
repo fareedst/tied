@@ -1,0 +1,17 @@
+[
+  {
+    "id": "stdd-dogfood-production-success",
+    "direction": "production",
+    "statementId": "gotest-9-t.Errorf",
+    "kind": "behavior",
+    "value": "t.Errorf(\"Divide(6, 2) = %d, want 3\", got)",
+    "order": 1,
+    "reliable": true,
+    "source": {
+      "location": "mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/internal/divide/divide.go:10",
+      "line": 10
+    },
+    "provenance": "g2-stdd-dogfood-close-out",
+    "blockRevision": "current"
+  }
+]

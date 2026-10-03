@@ -4,9 +4,9 @@ description: Read and write TIED REQ/ARCH/IMPL YAML records via the tied-yaml CL
 ---
 # TIED YAML Skill
 
-In TIED-**client** checkouts, this skill is installed to **`.cursor/skills/tied-yaml/`** (via `copy_files.sh`). The path **`tools/bundled-tied-yaml-skill/`** exists only in the TIED **source** tree; do not look for it at the project root in client projects. **AGENTS.md** §1 describes the same `tied-cli` / `TIED_MCP_BIN` discovery path.
+In TIED-**client** checkouts, this skill is installed to **`.cursor/skills/tied-yaml/`** (via `tied-install.sh`). The path **`tools/bundled-tied-yaml-skill/`** exists only in the TIED **source** tree; do not look for it at the project root in client projects. **AGENTS.md** §1 describes the same `tied-cli` / `TIED_MCP_BIN` discovery path.
 
-All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.yaml` detail files, and other structured TIED YAML) **must** go through the `tied-yaml` tooling. Direct file edits (`Write`, `StrReplace`, `sed`, etc.) on those paths produce invalid output (unquoted colons, broken indentation, duplicate keys). The tied-yaml server emits safe, schema-conformant YAML every time. **Exception:** the plain-text **pseudo-code sidecar** `tied/implementation-decisions/IMPL-*-pseudocode.md` may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**; or use **`impl_detail_set_essence_pseudocode`** with an inline string, `essence_pseudocode_path`, or **`tied-cli.sh`** with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN` (see the `tied-cli.sh` header). Do not re-encode the sidecar as JSON when a direct edit or file path is simpler. **Preference:** for non-trivial or growing IMPLs, the **sidecar** is the primary artifact (diffable, avoids YAML body pitfalls); a **canonical** hand-authored body template lives at `templates/impl-essence-pseudocode-template.md` (methodology repo) — see `tied/docs/pseudocode-writing-and-validation.md` and `tied/docs/pseudocode-format-and-practices.md`.
+All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.yaml` detail files, and other structured TIED YAML) **must** go through the `tied-yaml` tooling. Direct file edits (`Write`, `StrReplace`, `sed`, etc.) on those paths produce invalid output (unquoted colons, broken indentation, duplicate keys). The tied-yaml server emits safe, schema-conformant YAML every time. **Exception:** the plain-text **pseudo-code sidecar** `tied-project/implementation-decisions/IMPL-*-pseudocode.md` may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**; or use **`impl_detail_set_essence_pseudocode`** with an inline string, `essence_pseudocode_path`, or **`tied-cli.sh`** with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN` (see the `tied-cli.sh` header). Do not re-encode the sidecar as JSON when a direct edit or file path is simpler. **Preference:** for non-trivial or growing IMPLs, the **sidecar** is the primary artifact (diffable, avoids YAML body pitfalls); a **canonical** hand-authored body template lives at `templates/impl-essence-pseudocode-template.md` (methodology repo) — see `tied-bundle/docs/pseudocode-writing-and-validation.md` and `tied-bundle/docs/pseudocode-format-and-practices.md`.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.y
 
 - **Registering `tied-yaml` in Cursor** (`.cursor/mcp.json` / **Settings → MCP**) is for **in-editor** tool calls. It is **optional** for shell use.
 - **`tied-cli.sh`** talks to the **same** server over **stdio** (`node …/dist/index.js`). An empty MCP server list in the IDE does **not** mean `tied-cli.sh` cannot run — it means only that the editor has not loaded that MCP entry (common in CI, sandboxes, or before `agent mcp enable tied-yaml`).
-- **Default MCP binary**: After **`copy_files.sh`**, `tied-cli.sh` bakes **`TIED_REPO_ROOT`** (and thus default **`TIED_MCP_BIN`**) to the TIED repository that ran bootstrap (`…/mcp-server/dist/index.js`). Client projects usually **do not** vendor `mcp-server/` at the project root; rely on the baked path or set **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`** to override.
+- **Default MCP binary**: After **`tied-install.sh`**, `tied-cli.sh` bakes **`TIED_REPO_ROOT`** (and thus default **`TIED_MCP_BIN`**) to the TIED repository that ran bootstrap (`…/mcp-server/dist/index.js`). Client projects usually **do not** vendor `mcp-server/` at the project root; rely on the baked path or set **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`** to override.
 - **Shell alone is not enough:** `tied-cli.sh` in `.cursor/skills/tied-yaml/scripts/` plus Node; setting only **`TIED_MCP_BIN`** in the environment without the script does not provide the JSON-RPC client.
 
 ### Environment overrides
@@ -28,8 +28,9 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
   .cursor/skills/tied-yaml/scripts/tied-cli.sh yaml_index_list_tokens '{"index":"requirements"}'
 ```
 
-- **`TIED_BASE_PATH`** — absolute path to the project’s **`tied/`** directory (defaults to `<client_repo_root>/tied` when unset).
-- **`TIED_REPO_ROOT`** — TIED methodology repository used for **`mcp-server`** (baked by **`copy_files.sh`**; override if the TIED clone moved).
+- **`TIED_BASE_PATH`** — absolute path to the project traceability root (**`tied/`** or **`tied-project/`**; defaults to `<client_repo_root>/tied`, or **`tied-project`** when present).
+- **`TIED_METHOD_ROOT`** — absolute path to the methodology bundle root (**`tied-bundle/`**; defaults to `<client_repo_root>/tied-bundle`). Methodology reads use MCP **`getMethodologyBasePath`** / env **`TIED_METHODOLOGY_BUNDLE_PATH`** when set.
+- **`TIED_REPO_ROOT`** — TIED methodology repository used for **`mcp-server`** (baked by **`tied-install.sh`**; override if the TIED clone moved).
 - **`TIED_MCP_BIN`** — absolute path to **`mcp-server/dist/index.js`** (defaults to `$TIED_REPO_ROOT/mcp-server/dist/index.js`).
 - **`TIED_MCP_COLLECT_METRICS`** — set to `1` or `true` to append local usage metrics JSONL (default **off**). Works for **`tied-cli.sh`** and IDE MCP when the server inherits the same env.
 - **`TIED_MCP_METRICS_PATH`** — optional override; default `~/.cursor/logs/tied-mcp-metrics.jsonl`.
@@ -37,9 +38,9 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
 
 ### Repository YAML scalar style
 
-Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `.tied-yaml.yaml` at the client project root (the parent of `TIED_BASE_PATH`). Resolution precedence is:
+Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `tied-project/config.yaml` at the client project root (the parent of `TIED_BASE_PATH`). Resolution precedence is:
 
-1. repository `.tied-yaml.yaml`;
+1. repository `tied-project/config.yaml`;
 2. global `TIED_YAML_STYLE`;
 3. `$XDG_CONFIG_HOME/tied/yaml-format.yaml`;
 4. `unwrapped` default.
@@ -48,7 +49,7 @@ Repository configuration is authoritative. `wrapped` means double-quoted string 
 
 ### Optional client_formatter hook
 
-Repository `.tied-yaml.yaml` may declare an optional presentation hook:
+Repository `tied-project/config.yaml` may declare an optional presentation hook:
 
 ```yaml
 scalar_style: unwrapped          # optional when file exists; defaults unwrapped if client_formatter present
@@ -58,11 +59,11 @@ client_formatter:
   version: "team-formatter-1.0"  # optional evidence string
 ```
 
-When `client_formatter` is absent, record `styling_status: not_configured` and keep baseline canonical formatting. When present, run the hook explicitly via MCP `tied_client_yaml_styling_apply` or checklist `sub-client-yaml-styling` after baseline canonical bytes exist. MCP writers do **not** auto-invoke the hook. The hook runs with `shell: false` from the client project root on one guarded project-owned `./tied/` path; `tied/methodology/**` is rejected. Acceptance requires post-hook YAML parse, `scripts/yaml_semantic_compare.rb` equivalence against the pre-hook snapshot, and a byte-identical second pass.
+When `client_formatter` is absent, record `styling_status: not_configured` and keep baseline canonical formatting. When present, run the hook explicitly via MCP `tied_client_yaml_styling_apply` or checklist `sub-client-yaml-styling` after baseline canonical bytes exist. MCP writers do **not** auto-invoke the hook. The hook runs with `shell: false` from the client project root on one guarded project-owned `./tied/` path; `tied-bundle/**` is rejected. Acceptance requires post-hook YAML parse, `scripts/yaml_semantic_compare.rb` equivalence against the pre-hook snapshot, and a byte-identical second pass.
 
 ### Do not substitute Python for TIED validation
 
-Do **not** replace `tied-cli.sh` tools (especially **`tied_validate_consistency`**) with ad-hoc **`python3` + PyYAML** parsing when the goal is TIED consistency — that skips schema and graph checks. If neither Node nor a built server is available, follow **`tied/docs/using-tied-without-mcp.md`** for the documented manual project-YAML workflow instead of inventing a parser script.
+Do **not** replace `tied-cli.sh` tools (especially **`tied_validate_consistency`**) with ad-hoc **`python3` + PyYAML** parsing when the goal is TIED consistency — that skips schema and graph checks. If neither Node nor a built server is available, follow **`tied-bundle/docs/using-tied-without-mcp.md`** for the documented manual project-YAML workflow instead of inventing a parser script.
 
 ## The CLI wrapper
 
@@ -81,12 +82,12 @@ All operations use the wrapper script at `.cursor/skills/tied-yaml/scripts/tied-
 | Rule | Action |
 |------|--------|
 | **DO** | Use `tied-cli.sh` for every read and write of TIED **YAML** and structured TIED data (the paths the MCP server manages). |
-| **DO** | For IMPL pseudo-code **body** only, you may edit `tied/implementation-decisions/IMPL-*-pseudocode.md` directly, or set it via `impl_detail_set_essence_pseudocode` / `tied-cli` file or stdin; then `tied_validate_consistency`. |
+| **DO** | For IMPL pseudo-code **body** only, you may edit `tied-project/implementation-decisions/IMPL-*-pseudocode.md` directly, or set it via `impl_detail_set_essence_pseudocode` / `tied-cli` file or stdin; then `tied_validate_consistency`. |
 | **DO NOT** | Use `Write`, `StrReplace`, `apply_patch`, or shell `sed`/`awk` on TIED **YAML** or index files under `tied/` (see **CITDP** and **exception** below). The pseudo-code sidecar `.md` is plain UTF-8, not YAML—MCP/CLI is still available but not mandatory for the body. |
 | **DO NOT** | Use ad-hoc Python YAML parsing instead of **`tied-cli.sh`** / **`tied_validate_consistency`** for TIED consistency checks. |
-| **NEVER** | Edit files under `tied/methodology/` -- that tree is read-only. |
+| **NEVER** | Edit files under `tied-bundle/` -- that tree is read-only. |
 | **Exception** | If no tool supports the operation, document the gap (one line), direct-edit the minimal file, then validate. |
-| **CITDP** | For `tied/citdp/CITDP-*.yaml` records, use MCP tool **`citdp_record_write`** when available; otherwise document the one-line gap, write the minimal CITDP file, then run **`lint_yaml`** per the checklist. |
+| **CITDP** | For `tied-project/citdp/CITDP-*.yaml` records, use MCP tool **`citdp_record_write`** when available; otherwise document the one-line gap, write the minimal CITDP file, then run **`lint_yaml`** per the checklist. |
 
 ## Quick start
 
@@ -133,7 +134,7 @@ All operations use the wrapper script at `.cursor/skills/tied-yaml/scripts/tied-
 | Read entire index or one record | `yaml_index_read` | `index` (required), `token` (optional). **Index rows do not include `essence_pseudocode`;** use `yaml_detail_read` / `yaml_detail_read_many` for IMPL bodies and pseudo-code. |
 | List all tokens | `yaml_index_list_tokens` | `index`; optional `type` for semantic-tokens |
 | Filter by field value | `yaml_index_filter` | `index`, `field`, `value` |
-| Read one detail file | `yaml_detail_read` | `token`. For IMPL, `essence_pseudocode` is merged from `tied/implementation-decisions/IMPL-*-pseudocode.md` when that file exists. |
+| Read one detail file | `yaml_detail_read` | `token`. For IMPL, `essence_pseudocode` is merged from `tied-project/implementation-decisions/IMPL-*-pseudocode.md` when that file exists. |
 | Read many details at once | `yaml_detail_read_many` | `tokens` array or `type` (`requirement`, `architecture`, `implementation`) |
 | List tokens that have detail files | `yaml_detail_list` | `type` |
 
@@ -182,7 +183,7 @@ Re-read after critical writes; on older server builds, merge client-side per `do
 | Backlog views | `tied_backlog` | `view`: `order`, `quick-wins`, `blockers`, or `critical` |
 | Scoped analysis | `tied_scoped_analysis_run` | `mode`: `walk_summary`, `token_scan`, `gap_report`, `impact_preview`, `traceability_gap_report` |
 | Git diff impact | `tied_plumb_diff_impact_preview` | optional `selection`: `staged`, `unstaged`, or `both` |
-| Evidence chain profile | `evidence_chain_profile_generate` | `profile_depth` (`integrated` \| `human_research`); optional `project_root`, `tied_base_path`, `scope`, `change_context`, `output_path`. Read-only. See `tied/docs/evidence-chain-profile.md`. |
+| Evidence chain profile | `evidence_chain_profile_generate` | `profile_depth` (`integrated` \| `human_research`); optional `project_root`, `tied_base_path`, `scope`, `change_context`, `output_path`. Read-only. See `tied-bundle/docs/evidence-chain-profile.md`. |
 
 ```bash
 TIED_BASE_PATH=/absolute/client/tied \
@@ -238,7 +239,7 @@ The token registry is an index like the others. Keep it in sync when you add or 
 | IDE shows no MCP servers | Normal for some environments; **`tied-cli.sh`** still works via **`TIED_MCP_BIN`** + Node — see Prerequisites |
 | "No response from tool" | Check tool name spelling; verify `args_json` is valid JSON |
 | Invalid JSON in `record`/`updates` | Fix quoting -- inner values must be a JSON string, e.g. `"{\"key\":\"val\"}"` |
-| "Methodology" / "read-only" error | You are targeting `tied/methodology/` -- only project YAML is writable |
+| "Methodology" / "read-only" error | You are targeting `tied-bundle/` -- only project YAML is writable |
 | Validation fails after write | Fix via the appropriate MCP write tool; do not direct-edit |
 
 ## TIED data layout
@@ -258,7 +259,7 @@ tied/
 
 ## Additional resources
 
-- **Central index (easiest YAML update paths):** in this repository, [tied/docs/tied-yaml-agent-index.md](../../tied/docs/tied-yaml-agent-index.md) links the skill, MCP runbook, checklist, schema, and payload guidance in one place.
+- **Central index (easiest YAML update paths):** in this repository, [tied-bundle/docs/tied-yaml-agent-index.md](../../tied-bundle/docs/tied-yaml-agent-index.md) links the skill, MCP runbook, checklist, schema, and payload guidance in one place.
 - For the complete catalog of tools with full parameter schemas, see [reference.md](reference.md).
-- For detail file field schemas, read `tied/docs/detail-files-schema.md`.
+- For detail file field schemas, read `tied-bundle/docs/detail-files-schema.md`.
 - For the TIED methodology and agent obligations, read `AGENTS.md` at the repo root.

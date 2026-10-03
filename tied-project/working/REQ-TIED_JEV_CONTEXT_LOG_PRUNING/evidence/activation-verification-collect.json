@@ -1,0 +1,68 @@
+{
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING",
+    "project_id": "stdd",
+    "run_id": "close-out-2026-09-29-graph",
+    "phase": "verification",
+    "scope": ["IMPL-TIED_JEV_CONTEXT_LOG_PRUNING#PRUNE_CONTEXT_LOG#block"],
+    "scope_hash": "5ad4cb69153b57229d19f01867ceaaee63f68397346d50ef3c09457691ffb8a5",
+    "artifact_hashes": {
+      "obligation-report.json": "482748cbd5aacbefd2cc55ba4778521835227d610d184dfcf62d855c66ed852c",
+      "finding-ledger.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gate-result.json": "647c4b77b84e48315d7ecfada5b90167a01ac06bf59f0c26b3dcbf82c5bacaef",
+      "evidence-provenance.json": "e3b4e466324b1bdad9490f10c05cfe0efab1b837df3cd16f3b948eba9fc1650f"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING",
+      "project_id": "stdd",
+      "run_id": "close-out-2026-09-29-graph",
+      "phase": "verification",
+      "scope_hash": "5ad4cb69153b57229d19f01867ceaaee63f68397346d50ef3c09457691ffb8a5",
+      "hash": "482748cbd5aacbefd2cc55ba4778521835227d610d184dfcf62d855c66ed852c",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING",
+      "project_id": "stdd",
+      "run_id": "close-out-2026-09-29-graph",
+      "phase": "verification",
+      "scope_hash": "5ad4cb69153b57229d19f01867ceaaee63f68397346d50ef3c09457691ffb8a5",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING",
+      "project_id": "stdd",
+      "run_id": "close-out-2026-09-29-graph",
+      "phase": "verification",
+      "scope_hash": "5ad4cb69153b57229d19f01867ceaaee63f68397346d50ef3c09457691ffb8a5",
+      "hash": "647c4b77b84e48315d7ecfada5b90167a01ac06bf59f0c26b3dcbf82c5bacaef",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING",
+      "project_id": "stdd",
+      "run_id": "close-out-2026-09-29-graph",
+      "phase": "verification",
+      "scope_hash": "5ad4cb69153b57229d19f01867ceaaee63f68397346d50ef3c09457691ffb8a5",
+      "hash": "e3b4e466324b1bdad9490f10c05cfe0efab1b837df3cd16f3b948eba9fc1650f",
+      "path": "working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_JEV_CONTEXT_LOG_PRUNING",
+    "project_id": "stdd",
+    "run_id": "close-out-2026-09-29-graph",
+    "phase": "verification",
+    "scope": ["IMPL-TIED_JEV_CONTEXT_LOG_PRUNING#PRUNE_CONTEXT_LOG#block"],
+    "scope_hash": "5ad4cb69153b57229d19f01867ceaaee63f68397346d50ef3c09457691ffb8a5"
+  }
+}

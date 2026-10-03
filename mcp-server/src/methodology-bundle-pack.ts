@@ -6,6 +6,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { resolveStoreMethodologySourceDir } from "./tied-layout.js";
 
 export const METHODOLOGY_BUNDLE_MANIFEST_SCHEMA = "methodology-bundle-manifest.v1" as const;
 
@@ -22,9 +23,9 @@ export type MethodologyBundleManifestV1 = {
 };
 
 export type PackMethodologyBundleOptions = {
-  /** Absolute path to tied/methodology/ (corpus source). */
+  /** Absolute path to tied-bundle/ (corpus source). */
   sourceMethodologyDir: string;
-  /** Absolute output directory; receives flat tied/methodology/ contents (bundle runtime root). */
+  /** Absolute output directory; receives flat tied-bundle/ contents (bundle runtime root). */
   corpusOutDir: string;
   /** Absolute path for methodology-bundle-manifest.v1.json (typically beside corpus parent). */
   manifestOutPath: string;
@@ -202,7 +203,7 @@ export function packMethodologyBundle(options: PackMethodologyBundleOptions): Me
  */
 export function defaultSourceMethodologyDir(mcpServerRoot: string): string {
   const repoRoot = path.resolve(mcpServerRoot, "..");
-  return path.join(repoRoot, "tied", "methodology");
+  return resolveStoreMethodologySourceDir(repoRoot);
 }
 
 export function defaultBundleLayout(mcpServerRoot: string): {

@@ -1,0 +1,91 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-25T03:31:54.540Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_DAE_VERIFICATION_CHARTER",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_DAE_VERIFICATION_CHARTER.yaml",
+      "content_hash": "sha256:5d18baf9ec559b3d14eb0c606b334ba697885cd45825b4b8136a6f8905f7ce3e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:445aefa14a74aa50748e6547de24c61c154f20cdce06fe1538f2e7548b668265",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:f821c7527306e0d3cdb7728f2d55ad2abdb66152bac665477d3172497690b086",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-gates-2026-09-24.json",
+      "content_hash": "sha256:75e02ac805e0e119ee10348a34c528d9a032c19fd55eaa11e519b89b60e766a4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/close-out-receipt-2026-09-24.md",
+      "content_hash": "sha256:e2d0a7c0b401697d197fe9047b14990eb86afefab61a47d150973b0343e0fda1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/wave-4-close-2026-09-24.md",
+      "content_hash": "sha256:0e192136816f9470165bbae0ae07cb338ab1d0d0891d1b0de1347a6e51104542",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

@@ -1,0 +1,13 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#promotion",
+    "PLAN-TIED-BBCE-ALIGNMENT#bbce_advisory_enforced#block"
+  ],
+  "status": "warn",
+  "verdict": "UNRESOLVED"
+}

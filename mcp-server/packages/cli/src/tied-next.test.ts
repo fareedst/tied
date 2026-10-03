@@ -26,7 +26,7 @@ describe("tied next [REQ-TIED_DAE_INCORPORATION]", () => {
   it("returns unit-test-red as first pending slug from fixture", () => {
     const fixture = path.join(
       repoRoot,
-      "working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/next-slug-pending.yaml",
+      "tied-project/working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/next-slug-pending.yaml",
     );
     const tracker = loadTrackerFromFile(fixture);
     assert.equal(firstPendingSlugInOrder(tracker), "unit-test-red");
@@ -34,12 +34,12 @@ describe("tied next [REQ-TIED_DAE_INCORPORATION]", () => {
 
   it("golden stdout from temp working copy", () => {
     const projectRoot = tempDir;
-    const working = path.join(projectRoot, "working", "REQ-FIXTURE");
+    const working = path.join(projectRoot, "tied-project", "working", "REQ-FIXTURE");
     fs.mkdirSync(working, { recursive: true });
     fs.copyFileSync(
       path.join(
         repoRoot,
-        "working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/next-slug-pending.yaml",
+        "tied-project/working/REQ-TIED_DAE_INCORPORATION/fixtures/trackers/next-slug-pending.yaml",
       ),
       path.join(working, "checklist-tracker.yaml"),
     );

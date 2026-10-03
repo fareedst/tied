@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { resolveGlobalLocalWorkingPath } from "../working-root.js";
 import { redactState, stateSerializedLength } from "./redact-state.js";
 import type { JevDecideResult, JevQuestions, JevState } from "./types.js";
 
@@ -45,7 +46,11 @@ export function resolveDecideTracePath(env: NodeJS.ProcessEnv = process.env): st
   if (configured) {
     return path.isAbsolute(configured) ? configured : path.join(repoRoot, configured);
   }
-  return path.join(repoRoot, "working/jev-decide-trace/system-one-decide.v1.jsonl");
+  return resolveGlobalLocalWorkingPath(
+    repoRoot,
+    "jev-decide-trace",
+    "system-one-decide.v1.jsonl",
+  );
 }
 
 export function buildSystemOneDecideTraceRecord(input: {

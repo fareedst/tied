@@ -1,0 +1,30 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T18:26:11.231Z",
+  "client_id": "1787461685",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787461685",
+  "sidecar_count": 3,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 3,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "fb738db8a61a4e2c54079fa57d5ba7fa2ce1b25609c66ebc62451114272970e4",
+  "rows": [
+    {
+      "file": "IMPL-BTREPORT-CLI-CMD-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    },
+    {
+      "file": "IMPL-BTREPORT-REPORT-FORMAT-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    },
+    {
+      "file": "IMPL-BTREPORT-SYSTEM-PROFILER-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    }
+  ]
+}

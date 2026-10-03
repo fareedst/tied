@@ -1,0 +1,113 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "grammar-v2-section-e-closeout-20260911",
+  "commit": "d3787ca07272954b03d06ebc4d3ea2e662c8c5d2",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": [
+        "bash",
+        "-lc",
+        "npm run build --prefix mcp-server && node --test mcp-server/dist/analysis/*.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 3182,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-2",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test scripts/corpus-grammar-v2-replay.test.mjs scripts/replay-adherence-fixtures.test.mjs scripts/audit-grammar-v2-default.test.mjs tools/bootstrap/lib/tied-baseline-commit-message.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 617,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-3",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test mcp-server/dist/e2e/new-tied-client.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 5471,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-4",
+      "command": [
+        "bash",
+        "-lc",
+        "node --test scripts/audit-grammar-v2-default.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 607,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-4.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-4.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-5",
+      "command": [
+        "bash",
+        "-lc",
+        "node scripts/audit-grammar-v2-default.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 546,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-5.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/quality-manifest/citdp-evidence-5.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "§E cohort replay and bootstrap baseline",
+      "evidence_method": "command",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+    "IMPL-TIED_FILES",
+    "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+    "REQ-TIED_SETUP"
+  ],
+  "proof_boundaries": [
+    "Command result only; cohort replay is not client close-out"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

@@ -4,6 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "./working-root.js";
 
 import type { DryRunConfig } from "./dry-run-config.js";
 import { trackerRequestTokenFromVars } from "./dry-run-config.js";
@@ -81,9 +82,8 @@ function evaluateTraceableCommitEnvelope(input: {
     const msg = "traceable-commit requires REQUEST checklist var for envelope check";
     return { warn: !enforce, block: enforce, message: msg };
   }
-  const envelopePath = path.join(
+  const envelopePath = resolveWorkingPath(
     input.projectRoot,
-    "working",
     token,
     "evidence",
     "request-evidence-envelope.v1.json",

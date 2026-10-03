@@ -1,0 +1,33 @@
+risk_analysis:
+  residuality_analysis:
+    applied: true
+    baseline_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md"
+    classification_ledger_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.jsonl"
+    dispositions_summary:
+      accepted_residual_risk: 1
+      architecture_constraint: 6
+      candidate_requirement: 8
+      finding: 10
+      not_applicable: 0
+      unresolved: 0
+    gap_list_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/gap-list.md"
+    incidence_matrix_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/incidence-matrix.md"
+    limitations_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/limitations.md"
+    machine_records_count: 4
+    pilot_change_id: "PLAN-TIED-RESIDUALITY-ANALYSIS"
+    pilot_req_tokens:
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+    proof_boundary: "Discovery aid only; runtime claims require executable evidence and verified REQ/ARCH/IMPL stack."
+    recommendation: "adopt_revise"
+    stressor_count: 25
+    validation_stressor_set_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/validation-stressors.md"
+    w3_leap:
+      p0_rows_persisted: 7
+      p1_rows_deferred: 7
+    w4_tests:
+      proof_caveats:
+        - "S-T13 module-local split-claim; scheduler binding future scope"
+        - "V-H01 post-create duplicate storm; not simultaneous lock contention"
+      total_green: 27
+    worksheet_dir: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/worksheets/"

@@ -1,0 +1,56 @@
+CITDP-REQ-TIED_YAML_STYLE_CONFIGURATION:
+  change_definition:
+    current_behavior: "copy_files BASE_FILES copied only `.cursorrules` and `AGENTS.md` from repo root; clients lacked a seeded repository YAML style config file unless operators authored one.\n"
+    desired_behavior: "BASE_FILES includes `.tied-yaml.yaml`; resolveTemplateFile prefers `templates/.tied-yaml.yaml`; create-if-absent at client project root; Windows smoke hard-asserts file; REQ-TIED_SETUP satisfaction criterion documents seed intent.\n"
+    out_of_scope:
+      - "Changing stdd repo-root dev `.tied-yaml.yaml`"
+      - "REQ-TIED_NEW_CLIENT_ADHERENCE schema for this file"
+      - "Retroactive overwrite of existing client `.tied-yaml.yaml`"
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/claude-harness.test.mjs"
+      - "scripts/lint_yaml.sh templates/.tied-yaml.yaml"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "create_if_absent_idempotent"
+      - "templates_starter_not_stdd_dev_root"
+      - "windows_smoke_assert_present"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_FILES"
+    tied_tokens_affected:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  impact_discovery:
+    modules_or_boundaries: "tools/bootstrap/manifest.json, tools/bootstrap/lib/bootstrap.mjs, claude-harness.test.mjs, scripts/windows-bootstrap-smoke.cmd, templates/.tied-yaml.yaml, tied/requirements/REQ-TIED_SETUP.yaml\n"
+  record_identity:
+    change_request_id: "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-09-26"
+    title: "Bootstrap repo-root `.tied-yaml.yaml` from templates starter"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Falling back to stdd repo-root dev `.tied-yaml.yaml` when template missing"
+        - "Overwriting operator-edited client style config on re-bootstrap"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Contract tests assert templates source and preserve sentinel custom content"
+      evidence_references:
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/claude-harness-test.stdout.txt"
+        - "working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does shipped starter contain jev.agentstream_harness or scalar_style wrapped?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    residual_risks:
+      - "Existing clients without file remain absent until create-if-absent path runs (documented in methodology-migration)"
+  test_strategy:
+    summary: "claude-harness BASE_FILES describe block; lint_yaml on templates/.tied-yaml.yaml; tied_validate_consistency after REQ detail edit.\n"

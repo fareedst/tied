@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "claim-review-provenance.v1",
+  "runId": "pilot-from-tied",
+  "requestToken": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+  "sourceRevision": "working",
+  "executionPolicy": "static_only",
+  "commands": [
+    "runClaimsEvidenceReview"
+  ],
+  "artifactHashes": {
+    "ledger": "f3e38a4030d4a290132355cea57980b39366427f0a8062e40931ca3807cb9f22",
+    "report": "0f617c378816144a3d872bc0caf4a192314a7e4578cb033b2eed8b4c8b93a26d",
+    "frozenSurface": "6286c97c1472ee569f972f751e00103b1220e949b6c4b7e5a52b358cbd029f74"
+  }
+}

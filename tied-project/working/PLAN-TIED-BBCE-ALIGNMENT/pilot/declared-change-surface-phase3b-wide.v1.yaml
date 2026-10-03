@@ -1,0 +1,13 @@
+binding_ids:
+  - "CLI→pipeline build"
+  - "pipeline→checklist load turns"
+  - "pipeline→executor run"
+expected_path_globs:
+  - "mcp-server/packages/agentstream/package.json"
+  - "mcp-server/packages/agentstream/README.md"
+  - "mcp-server/packages/agentstream/src/**"
+notes: "Wide declared surface for fbe65e1..d5ea688 agentstream prefix replay — tests calibration when sponsor declares an entire package tree vs narrow slice.\n"
+owning_slice_req: "REQ-GOAGENT-PIPELINE-CHAIN"
+proof_boundary: "diff-scope discipline only — not behavioral correctness"
+scenario_id: "replay-phase3b-strangler-range"
+schema_version: "bbce-declared-change-surface.v1"

@@ -16,7 +16,7 @@ const INSTALLED_HOOK_NAME = "pre-commit";
 export function isStagedMethodologyPath(stagedPath) {
   const normalized = stagedPath.replace(/\\/g, "/").replace(/^\.\//, "");
   return normalized === "tied/methodology"
-    || normalized.startsWith("tied/methodology/");
+    || normalized.startsWith("tied-bundle/");
 }
 
 /**
@@ -62,7 +62,7 @@ function chmodTreeReadOnly(methodologyDir) {
 
 /**
  * @param {string} clientProjectRoot
- * @param {{ methodologyReadonly?: boolean, platform?: string }} options
+ * @param {{ methodologyReadonly?: boolean, platform?: string, methodologyDir?: string }} options
  */
 export function applyMethodologyReadonlyBootstrapFlag(clientProjectRoot, options = {}) {
   const flag = options.methodologyReadonly === true;
@@ -76,7 +76,8 @@ export function applyMethodologyReadonlyBootstrapFlag(clientProjectRoot, options
     );
     return { applied: false, platform: platformKind };
   }
-  const methodologyDir = path.join(clientProjectRoot, "tied", "methodology");
+  const methodologyDir =
+    options.methodologyDir ?? path.join(clientProjectRoot, "tied", "methodology");
   if (!fs.existsSync(methodologyDir)) {
     throw new Error("MISSING_METHODOLOGY_TREE");
   }
@@ -117,7 +118,7 @@ export function installClientHookTemplate(clientProjectRoot, options = {}) {
       "TIED methodology boundary hook (Phase A)",
       "",
       "Enable: git config core.hooksPath .githooks",
-      "Re-run copy_files.sh with --install-methodology-hook to refresh the template.",
+      "Re-run tied-install.sh with --install-methodology-hook to refresh the template.",
       "Policy: [PROC-TIED_METHODOLOGY_READONLY]; MCP loaders remain authoritative for writes.",
       "",
     ].join("\n"),
@@ -129,12 +130,18 @@ export function installClientHookTemplate(clientProjectRoot, options = {}) {
 
 /**
  * @param {string} clientProjectRoot
- * @param {{ methodologyReadonly?: boolean, installMethodologyHook?: boolean, platform?: string }} options
+ * @param {{
+ *   methodologyReadonly?: boolean,
+ *   installMethodologyHook?: boolean,
+ *   platform?: string,
+ *   methodologyDir?: string,
+ * }} options
  */
 export function applyMethodologyClientBoundary(clientProjectRoot, options = {}) {
   const readonly = applyMethodologyReadonlyBootstrapFlag(clientProjectRoot, {
     methodologyReadonly: options.methodologyReadonly,
     platform: options.platform,
+    methodologyDir: options.methodologyDir,
   });
   const hook = installClientHookTemplate(clientProjectRoot, {
     installHook: options.installMethodologyHook,

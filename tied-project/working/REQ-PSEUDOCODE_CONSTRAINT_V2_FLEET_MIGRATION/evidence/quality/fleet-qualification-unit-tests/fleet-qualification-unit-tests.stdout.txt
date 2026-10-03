@@ -1,0 +1,3 @@
+bun test v1.3.9 (cf6cdbbb)
+DEBUG: applied minimal procedure contract IMPL-TEST gaps=1
+TRACE: applyConstraintReady modified=1 skipped_none=0 skipped_manual=0

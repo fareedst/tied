@@ -12,7 +12,7 @@ function read(rel: string): string {
 
 describe("AUDIT_RELATIONSHIP_LAYER_CONTRACT [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP]", () => {
   it("glossary, routing, principles, AGENTS, citdp-policy, manifest, prompt-shared, templates", () => {
-    const glossary = read("tied/vocab/sponsor-agent-relationship.md");
+    const glossary = read("tied-project/vocab/sponsor-agent-relationship.md");
     assert.match(glossary, /\(canonical\)/);
     assert.match(glossary, /\*\*Scope:\*\*/);
     assert.match(glossary, /\*\*Traceability:\*\*/);
@@ -38,13 +38,13 @@ describe("AUDIT_RELATIONSHIP_LAYER_CONTRACT [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
       assert.match(glossary, new RegExp(term, "i"), `glossary missing ${term}`);
     }
 
-    const routing = read("tied/vocab/routing.md");
+    const routing = read("tied-project/vocab/routing.md");
     assert.match(routing, /sponsor-agent-relationship\.md/);
 
-    const domainRefs = read("tied/vocab/domain-references.md");
+    const domainRefs = read("tied-project/vocab/domain-references.md");
     assert.match(domainRefs, /sponsor-agent-relationship\.md/);
 
-    const principles = read("tied/docs/ai-principles.md");
+    const principles = read("tied-bundle/docs/ai-principles.md");
     for (const marker of [
       "RESOLVE charter",
       "reversible choice",
@@ -58,11 +58,11 @@ describe("AUDIT_RELATIONSHIP_LAYER_CONTRACT [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
     const agents = read("AGENTS.md");
     assert.match(agents, /Sponsor–agent relationship/i);
 
-    const citdpPolicy = read("tied/docs/citdp-policy.md");
+    const citdpPolicy = read("tied-bundle/docs/citdp-policy.md");
     assert.match(citdpPolicy, /## Hinge fields/);
     assert.match(citdpPolicy, /hinge_field_incomplete/);
 
-    const relDoc = read("tied/docs/sponsor-agent-relationship.md");
+    const relDoc = read("tied-bundle/docs/sponsor-agent-relationship.md");
     assert.match(relDoc, /```mermaid/);
     assert.match(relDoc, /RP-1/);
     assert.match(relDoc, /RP-2/);
@@ -76,8 +76,8 @@ describe("AUDIT_RELATIONSHIP_LAYER_CONTRACT [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
     const planCitdp = read("tools/bundled-prompt-type-skills/prompt-shared/tied-plan-citdp.md");
     assert.match(planCitdp, /consequence ladder/i);
 
-    assert.ok(fs.existsSync(path.join(REPO_ROOT, "templates/requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml")));
-    assert.ok(fs.existsSync(path.join(REPO_ROOT, "templates/architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml")));
-    assert.ok(fs.existsSync(path.join(REPO_ROOT, "templates/implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml")));
+    assert.ok(fs.existsSync(path.join(REPO_ROOT, "tied-bundle/requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml")));
+    assert.ok(fs.existsSync(path.join(REPO_ROOT, "tied-bundle/architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml")));
+    assert.ok(fs.existsSync(path.join(REPO_ROOT, "tied-bundle/implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml")));
   });
 });

@@ -1,0 +1,12 @@
+feat(tied): complete fleet constraint v2 Phase 5 G4 governance
+
+Wire G4 CI checks, constraint-enforced-v2 bootstrap enforcement, and
+FEAT-spawned integrated envelope policy. Persist CITDP phase_5_module,
+update program plans and fleet evidence; orchestrator REQ stays closed.
+
+REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
+REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE
+IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+
+Evidence: working/fleet-constraint-v2/seq-10-p5-traceable-commit-report.v1.json

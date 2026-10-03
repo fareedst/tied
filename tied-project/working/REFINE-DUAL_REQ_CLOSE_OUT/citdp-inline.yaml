@@ -1,0 +1,31 @@
+CITDP-REFINE-DUAL_REQ_CLOSE_OUT:
+  change_definition:
+    current_behavior: "Linked plan dual_req_close-out_commit exists but underspecifies depth/waiver retention, dual-write gap remediation for LIVE_DRIVER pending slugs, envelope CI-proof hydration for BOOTSTRAP_OPS, staged allowlist/denylist, and plan-close-out vs sponsor commit+push override sequencing.\n"
+    desired_behavior: "Refined plan is executable by plan-close-out then explicit commit+push: MCP LEAP for both REQs, close_out gates with envelope-blocking, tracker/ CHANGELOG sync, strict exclusions, three completion signals handoff.\n"
+    out_of_scope:
+      - "B3 CONFIG_SKILLS_REROOT"
+      - "Committing docs/comparisons/ or fixture envelope noise"
+      - "Re-implementing Windows CI or WINDOWS_COPY_PROVEN_IN_CI code (already on main)"
+      - "Rewriting closed parent REQ-TIED_CLAUDE_HARNESS"
+  impact_discovery:
+    modules_or_boundaries: "tied/requirements/REQ-TIED_CLAUDE_*; tied/citdp/CITDP-REQ-TIED_CLAUDE_*; working/REQ-TIED_CLAUDE_*/checklist-tracker.yaml + evidence envelopes; CHANGELOG.md; .gitignore; run-close-out-gates.mjs\n"
+  risk_assessment:
+    depth_change_waiver: true
+    depth_change_waiver_rationale: "Plan-doc refine only; no RED/code. Child REQs retain their own Mode B minimal inquiry waivers for close_out execution.\n"
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "BOOTSTRAP close_out_evidence.gates.close_out points at envelope JSON not a gate receipt"
+      - "constants.mjs WINDOWS_COPY_PROVEN_IN_CI=true on main while REQ/CITDP/CHANGELOG still say false"
+      - "LIVE_DRIVER Tracker has many pending slug dispositions while program_phase closed and close_out receipts exist (dual-write risk)"
+    evidence_references:
+      - "working/REFINE-DUAL_REQ_CLOSE_OUT/evidence/sub-adversarial-inquiry-pass-na.md"
+      - "working/REFINE-DUAL_REQ_CLOSE_OUT/refine-notes.md"
+      - "~/.cursor/plans/dual_req_close-out_commit_796ef67c.plan.md"
+    gate_policy: "advisory"
+    prior_depth_tier: null
+    profile_depth: "minimal"
+    residual_risks:
+      - "Envelope rebuild may surface process gaps until --sync-dispositions reconciles Tracker"
+      - "Single commit mixes B post-CI LEAP with A hygiene — audit via partitioned commit body"
+  test_strategy:
+    summary: "No new RED for refine-plan; execution validates via tied_validate_consistency and run-close-out-gates.mjs allow+zero blocking gaps."

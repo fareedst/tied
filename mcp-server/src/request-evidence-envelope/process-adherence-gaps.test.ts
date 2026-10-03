@@ -144,7 +144,7 @@ describe("process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5", () => 
         input_hashes: { tracker_hash: "sha256:oldhash", citdp_hash: "sha256:citdp" },
       }),
     );
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
 
     const build = await buildRequestEvidenceEnvelope({
       request_token: requestToken,
@@ -211,7 +211,7 @@ describe("process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5", () => 
       path.join(tempRoot, "working", requestToken, "agent-req-implementation-checklist.yaml"),
       "request: REQ-GATE-DEDUPE\nsteps: []\n",
     );
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
 
     const build = await buildRequestEvidenceEnvelope({
       request_token: requestToken,
@@ -241,7 +241,7 @@ describe("process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5", () => 
     const working = path.join(tempRoot, "working", requestToken);
     mkdirSync(working, { recursive: true });
     writeFileSync(path.join(working, "agent-req-implementation-checklist.yaml"), dualWriteTrackerYaml());
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
 
     const build = await buildRequestEvidenceEnvelope({
       request_token: requestToken,

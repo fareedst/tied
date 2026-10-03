@@ -1,0 +1,95 @@
+aggregation_summary:
+  client_cohorts:
+    - compatibility_key: "evidence-chain-profile.v1|human_research"
+      profile_depth: "human_research"
+      profiles_per_sub_cohort:
+        - client_aliases:
+            - "stdd-human_research"
+          denominator_fingerprint: "07e8a780b9104b22"
+          n: 1
+      sub_cohort_count: 1
+    - compatibility_key: "evidence-chain-profile.v1|integrated"
+      profile_depth: "integrated"
+      profiles_per_sub_cohort:
+        - client_aliases:
+            - "stdd-integrated"
+          denominator_fingerprint: "07e8a780b9104b22"
+          n: 1
+        - client_aliases:
+            - "1787461685-bare"
+          denominator_fingerprint: "437b4f22d6166e9c"
+          n: 1
+        - client_aliases:
+            - "1787461685-reprofile"
+          denominator_fingerprint: "83a20f7f7574881f"
+          n: 1
+        - client_aliases:
+            - "example-manual"
+          denominator_fingerprint: "96f754ae9474bf73"
+          n: 1
+      sub_cohort_count: 4
+  inputs_accepted: 5
+  inputs_excluded: 0
+  validation_errors: 0
+charter_reference: "docs/tied-methodology-evaluation-framework.md"
+command_provenance:
+  command: "node mcp-server/dist/cli/evidence-chain-report.js --inputs phase1-report-inputs.yaml --yaml-out phase1-evidence-chain-report.yaml --markdown-out phase1-evidence-chain-report.md --mode strict --report-version v2"
+  cwd: "working/evaluation"
+  exit_code: 0
+  generator_version: "2.0.0"
+  report_schema_version: "evidence-chain-statistics-report.v2"
+evaluation_questions_addressed:
+  - id: "Q4"
+    proof_boundary: "traceability_structure"
+    scope: "structural chain completeness comparison across TIED fixture cohorts"
+  - id: "Q6"
+    limitation: "metrics_opt_in false; no wall-time or MCP call data"
+    proof_boundary: "traceability_structure"
+    scope: "methodology self-improvement input only; no cost arms in this fixture pass"
+generated_at: "2026-08-27T04:01:35.385Z"
+insufficient_sample_subcohorts:
+  cross_subcohort_ratios_published: false
+  policy: "Do not publish a ratio when any denominator subcohort has n < 2; report insufficient sample instead."
+  subcohorts:
+    - compatibility_key: "evidence-chain-profile.v1|human_research"
+      denominator_fingerprint: "07e8a780b9104b22"
+      n: 1
+      publication_status: "insufficient_sample"
+    - compatibility_key: "evidence-chain-profile.v1|integrated"
+      denominator_fingerprint: "07e8a780b9104b22"
+      n: 1
+      publication_status: "insufficient_sample"
+    - compatibility_key: "evidence-chain-profile.v1|integrated"
+      denominator_fingerprint: "437b4f22d6166e9c"
+      n: 1
+      publication_status: "insufficient_sample"
+    - compatibility_key: "evidence-chain-profile.v1|integrated"
+      denominator_fingerprint: "83a20f7f7574881f"
+      n: 1
+      publication_status: "insufficient_sample"
+    - compatibility_key: "evidence-chain-profile.v1|integrated"
+      denominator_fingerprint: "96f754ae9474bf73"
+      n: 1
+      publication_status: "insufficient_sample"
+operator_pilot:
+  rationale: "Charter Phase 1 step 2 requires an operator to select 3–5 real TIED clients at fixed commits. This pass uses archived evidence-chain fixtures only and does not invent or publish a client list."
+  status: "deferred"
+phase: 1
+report_artifacts:
+  input_manifest: "working/evaluation/phase1-report-inputs.yaml"
+  statistics_markdown: "working/evaluation/phase1-evidence-chain-report.md"
+  statistics_yaml: "working/evaluation/phase1-evidence-chain-report.yaml"
+residual_risks:
+  - "All fixture profiles use archived commits (including local-working-tree and unknown); not fixed production SHAs."
+  - "Hand-built Path B example-profile.json; MCP validators were not run (inherited from profile residual_risks)."
+  - "Inquiry activation depth was not stratified; profiles are structural-completeness fixtures only."
+  - "metrics_opt_in is false on all accepted inputs; MCP usage cost arms (Q5) are not represented."
+  - "Operator pilot with 3–5 real TIED clients at fixed commits remains required before publishable cross-client ratio statistics."
+  - "v2 sub-cohort partition isolates denominator fingerprint mismatches; count-only statistics remain within fingerprint boundaries."
+schema_version: "evaluation-phase-summary.v1"
+status: "fixture_grounded_complete"
+stratification:
+  by_inquiry_activation: "not_measured"
+  by_metrics_opt_in: false
+  by_profile_depth: true
+  notes: "human_research and integrated profiles partition into separate client cohorts. v2 denominator fingerprints further partition integrated inputs into four sub-cohorts. No single rollup was emitted."

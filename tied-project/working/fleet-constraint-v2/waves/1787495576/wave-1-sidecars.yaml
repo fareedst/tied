@@ -1,0 +1,12 @@
+client_id: "1787495576"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 3 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-NETIF_CLI"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_CLI-pseudocode.md"
+  - impl_token: "IMPL-NETIF_DISCOVERY"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_DISCOVERY-pseudocode.md"
+  - impl_token: "IMPL-NETIF_FORMAT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787495576/tied/implementation-decisions/IMPL-NETIF_FORMAT-pseudocode.md"
+wave_id: "W-ext-1787495576-1"

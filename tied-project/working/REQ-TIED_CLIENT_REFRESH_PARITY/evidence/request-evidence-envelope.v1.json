@@ -1,0 +1,168 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-27T14:07:54.988Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_CLIENT_REFRESH_PARITY",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/gates/pre_implementation-2026-09-27T13-49-26-758Z.json",
+      "content_hash": "sha256:d584a8bdff521d2f9aed290b78b2f702d5606ce3743860b3ba754a5623aafd59",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_CLIENT_REFRESH_PARITY.yaml",
+      "content_hash": "sha256:c304269362c884a8b18a5cf8e94f7c31ed382a2458d7fae5e59c212393ac7942",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:bb56b9941ddbfc019365174515376096dec257bc30c3c44e9f653fce46bb65eb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:296fa6a43f65dc5a8a76011723979941ae8415e8b93ecdbbef16b08748f0388e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/bootstrap-lib-tests.txt",
+      "content_hash": "sha256:efbbb40b60fcf6fa603239eb0b600f85628c2751d38276f7404ab65fe3a2ea62",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/compare-yaml-dirs-help.txt",
+      "content_hash": "sha256:78f3ca4603df438cd1be8367f95bd3032020f8f9820bbbf347f5df610fbfb651",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/ruby-compare-dirs-test.txt",
+      "content_hash": "sha256:47185e14cc1b0d1901e4ba6f65fe06abe4dd3b281f3529b3c7717597d1928c94",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/ruby-load-test.txt",
+      "content_hash": "sha256:f9baea08054016ae54ccca80244c9be1220d2c32f655755be4b3918b7cf278d8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-close-out.txt",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-verification-2.txt",
+      "content_hash": "sha256:2a16764f2e37953ef4f534e5069b0416f24670fa2ff96fdae88e035a5489914a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/run-close-out-gates-verification.txt",
+      "content_hash": "sha256:30af73f0c9670e7b76c34c81e020cac46c228b6c1e40bbb1caf71f27905caab9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/tied-validate-consistency-close-out.txt",
+      "content_hash": "sha256:f8c0f6b1aec1df5142c670d2a4ad9529bc0fdb380c0003e6b2cdcf8b3ecbf2d9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/verify-disposable-client.txt",
+      "content_hash": "sha256:addf605b8cb6f55f976718a37a38f73909e3028243d53243ece73ad929a141ad",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

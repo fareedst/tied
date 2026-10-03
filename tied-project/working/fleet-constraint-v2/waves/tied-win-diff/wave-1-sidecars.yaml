@@ -1,0 +1,8 @@
+client_id: "tied-win-diff"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 1 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-TIED_FILES"
+    sidecar_path: "/Users/fareed/Documents/dev/test/tied-win-diff/tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+wave_id: "W-ext-tied-win-diff-1"

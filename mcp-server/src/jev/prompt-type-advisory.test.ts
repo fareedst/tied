@@ -71,6 +71,7 @@ describe("REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory", () => {
     const log = await advisePromptTypes("/build-plan W3", {
       apiKey: "test",
       fetchImpl,
+      traceEnv: { TIED_JEV_DECISION_PROVIDER: "remote" },
     });
     assert.deepEqual(log.heuristic_prompt_types, ["build-plan"]);
     assert.equal(log.jev_prompt_types[0], "question");

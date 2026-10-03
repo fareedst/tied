@@ -1,0 +1,2623 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "scope": [
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006"
+    ],
+    "graph": {
+      "projectId": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "nodes": [
+        {
+          "id": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:production-locus",
+          "kind": "evidence",
+          "revision": "86ca1d498dbb0bbc"
+        },
+        {
+          "id": "evidence:test-locus",
+          "kind": "evidence",
+          "revision": "86ca1d498dbb0bbc"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#BUILD_FLEET_INVENTORY#a6b097d6eb1500a2",
+          "kind": "block",
+          "revision": "5b936d5e2fbde00d"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#BUILD_PILOT_INVENTORY#3a86bdc97c4e8e66",
+          "kind": "block",
+          "revision": "2243e4900008459d"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#EMIT_G3_RECEIPT#877f6d33553980b4",
+          "kind": "block",
+          "revision": "feed62680a6b12a3"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#EMIT_MIGRATION_RECEIPT#0d6de023a00d257c",
+          "kind": "block",
+          "revision": "117ea52af15afb41"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#RECORD_WAVE_STOP_GO#c590eff3629e2879",
+          "kind": "block",
+          "revision": "c7783e6d2fdae37e"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#REFRESH_WAIVER_REGISTRY#1bd8dec53b5196c0",
+          "kind": "block",
+          "revision": "d7aab94824240f61"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#REVERT_MIGRATION_APPLY#bfec220078c68ad1",
+          "kind": "block",
+          "revision": "5f758b3d49ca6944"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#RUN_FLEET_WAVE#92e741c2cee3328f",
+          "kind": "block",
+          "revision": "a1d0cab76f43df19"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#RUN_MIGRATION_DRY_RUN#372f5a02f46f9ad0",
+          "kind": "block",
+          "revision": "c6008170e0697ee3"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+          "kind": "criterion",
+          "revision": "0aff4b68d378c79e"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002",
+          "kind": "criterion",
+          "revision": "9260284c7b230f16"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+          "kind": "criterion",
+          "revision": "8bb611efb6ffc52d"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+          "kind": "criterion",
+          "revision": "e6f6f8747f1968a0"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+          "kind": "criterion",
+          "revision": "08cb77ff859b880b"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006",
+          "kind": "criterion",
+          "revision": "dba6824097ff9ab7"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+          "to": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002",
+          "to": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+          "to": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+          "to": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+          "to": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006",
+          "to": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#BUILD_FLEET_INVENTORY#a6b097d6eb1500a2",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#BUILD_PILOT_INVENTORY#3a86bdc97c4e8e66",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#EMIT_G3_RECEIPT#877f6d33553980b4",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#EMIT_MIGRATION_RECEIPT#0d6de023a00d257c",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#RECORD_WAVE_STOP_GO#c590eff3629e2879",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#REFRESH_WAIVER_REGISTRY#1bd8dec53b5196c0",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#REVERT_MIGRATION_APPLY#bfec220078c68ad1",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#RUN_FLEET_WAVE#92e741c2cee3328f",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+          "to": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#RUN_MIGRATION_DRY_RUN#372f5a02f46f9ad0",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#BUILD_FLEET_INVENTORY#a6b097d6eb1500a2",
+          "to": "evidence:production-locus",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_MIGRATION_TOOLING#BUILD_FLEET_INVENTORY#a6b097d6eb1500a2",
+          "to": "evidence:test-locus",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "0089bf684976af21",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-108",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "00c662db9f85bbf9",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-130",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "00d3c192c88188f4",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-91",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "01ea9c702b4d2397",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-35",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "021c51de4ab86088",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-75",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "02399096fd86fcde",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-24",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "025461a2370ff26f",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-4",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "0451ab3ecc9f29e6",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-117",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "047f8ab410f9c390",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-112",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "08304d02ad339fb3",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-95",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "09783ba370d0c52b",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-10",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "09ddbbad623aa331",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-133",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "0a8b3eaa40ec7164",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-101",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "0c68582dd794c0e5",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-132",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "0d8a9f94349e03c6",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-23",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "0ddebbf9cbe311b2",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-59",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "0f10bb6cb2544b2e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-107",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "0fd3be6715acd13e",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-41",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "108cacb7ae6c874f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-37",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "10947a7f32269d22",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-78",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "10ea1e95da48b42a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-121",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "10ed90298ca63b25",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-123",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "11716f1b3de3ed85",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-110",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "120c49a25f665c09",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-106",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1227f015141291c4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-56",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1272fd1e0de18176",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-141-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:141",
+          "line": 141,
+          "column": 3
+        },
+        "evidenceRefs": [
+          "minitest-141-assert"
+        ]
+      },
+      {
+        "id": "12b19c44d2e3c3a7",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-9",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1419cc8c0cd127eb",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-35",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "14c6622953e8df21",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-104",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "14e2cf9a61023cb9",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-15",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1517914f5fc54be2",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-14",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "163f57f61aa3933c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-31",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "16f00a6164744cb8",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-118",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "170d4cb591ebb215",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-131",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1714f1008ab8f78a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-106",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "18e8748d34b68fa3",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-74",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1924ced5f358bf6e",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-1",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1b3ceb0904955f7f",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-7",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1e97db3d52297a26",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-92",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "1f3d2627dc969878",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-12",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "20c15946dd99e8f5",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-77",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "21e1f2eaf85265f5",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-109",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "238c9ed493477c4d",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-29",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2437b480adf24e45",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-57",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "24920a1350288d9a",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-80",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "25861414e2161f92",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-67-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:67",
+          "line": 67,
+          "column": 1
+        },
+        "evidenceRefs": [
+          "minitest-67-assert"
+        ]
+      },
+      {
+        "id": "25fb3690913d3b79",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-29",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "26c2ac5e5280ed67",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-111",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "284219d731b8a40b",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-10",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "28c3ecc9ed6c4088",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-128",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "28ea5ae4ab595b34",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-15",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2a4d256a0c18642e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-92",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2a76f8c33a392c5b",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-31",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2b91bf00abde5938",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-68",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2ba41c9f5e609f3b",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-99",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2cd80c1a24598293",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-44",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2cdf487f1bea66cd",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-34",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2f21830b22d7f9b1",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-122",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2fdf7f5fcc9b1cf9",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-17",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "30812fb25242b735",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-105",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "31ecbe2d23742770",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-14",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "32dc36260f5f17da",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-111",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "338fd723e5cee74e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-135",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "33c7d82ec1946dc4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-82",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3421c95f5b798c6a",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-8",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3440d7b9d2ad46c6",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-72",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3497a080972b6910",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-53",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "352f37c8a44ba0a9",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-99",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3585db113bada9ab",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-120",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "377b19f4d89ddf0a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-32",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "37811748f78cc86d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-21",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "37cda426f58c21be",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-28",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "39d9d28de21e72d4",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-88",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3b9812d39e6b27c9",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-38",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3c6559478ae77ee7",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-119",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3c79faec2c88b383",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-116",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3e27807b783da464",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-41",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3e347223b80c41c6",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-25",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3e582e9a93e16603",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-90",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3f10e7585a07b2d0",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-101",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3f89a89701bf04b4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-83",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "3fb019933996cf9d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-47",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "417b198b3e2ba280",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-26",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "41f7efbf56a938a0",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-127",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "437b27c42d39f554",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-55",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "43a9fd43f629f456",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-34",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "43f80736ba4c2540",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-96",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "450cfc9390a4074b",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-71",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "45ee1c03ac04826f",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-85",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "468541120447257b",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-54",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "468b8f55219f114c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-64",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "475ef33a76e410f1",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-123",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "486dde2307be69ad",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-66",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "4b1325811468c1ee",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-3",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "4b7034e3d6674791",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-45",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "4e77aaf704c87586",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-134",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "51829187cf9b48f1",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-113",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "51e9769e361cae8b",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-52",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "5393df5387ec72b5",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-89",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "54c232436b945ff2",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-58",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "55b7349a5b2123f6",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-133",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "561e410b3bda887f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-32",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "580f0969b8ecab16",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-24",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "58faef566d983d26",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-132",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "5a4649c5417a9cab",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-79",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "5d729c695621e16b",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-63",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "5e6bd397f4dbf22f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-46",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "5f7e7fccc2770508",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-7",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "604b69da20b806d9",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-43",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "606bc38f8b14f5b9",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-85",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "611696efce07afad",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-62",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "64bfed83c8c7722a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-84",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "6533208003bb1566",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-134",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "6896dd68ca279805",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-119",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "6b53f75f78af737f",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-118-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:118",
+          "line": 118,
+          "column": 5
+        },
+        "evidenceRefs": [
+          "minitest-118-assert"
+        ]
+      },
+      {
+        "id": "6b8119a4f2f2eb7b",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-65",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "6b8d2d21b542f68f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-69",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "6c2c23f8edb9faec",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-9",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7119de87fbb6b547",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-2",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "71984c1a290bab93",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-116",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "71a3a691369541c7",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-50",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7300dbcd245be9fc",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-79-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:79",
+          "line": 79,
+          "column": 3
+        },
+        "evidenceRefs": [
+          "minitest-79-assert"
+        ]
+      },
+      {
+        "id": "74cb5a60f46a9a32",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-68",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7609476a3a27bb39",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-49",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "762a110fd3fe12c3",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-54",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "765e6cbccb47ed83",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-22",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "771808b69031133d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-61",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "77229b9b8fadaa29",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-60",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "783a408e0a8526df",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-67",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "787fc8f9b5b0e169",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-58",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "79828824c061a604",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-21",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7b22fbf061724e25",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-11",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7b6a166d7cb8cdcf",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-51",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7ce1e50927371e36",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-76",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7d74f2c099b0686f",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-6",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7e4804f522224e97",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-48",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7ee4fdf32972e4eb",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-67",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7fbdf477704de584",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-1",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "7fc2712dc22e7bae",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-131",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8304295a6fd46feb",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-91",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "831f562b0999ec88",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-70",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "84650a52282cb0ec",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-2",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "84d46eae7ef17b08",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-56-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:56",
+          "line": 56,
+          "column": 1
+        },
+        "evidenceRefs": [
+          "minitest-56-assert"
+        ]
+      },
+      {
+        "id": "87d4780b2f30365f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-33",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "87f8216124e3d46c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-122",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "88ee41a80dbbbcde",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-113",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8a0ce9db02c9c8de",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-93",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8aa1a448e0bc02a3",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-125",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8ad7870149319b5a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-59",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8b6df9850a8e1df4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-108",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8b6ef9d08ac672e0",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-61",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8ca4eb99a79e65fa",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-8",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "8fbbe085b6f5a043",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-98",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "90072a92284a2c67",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-19",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "902fe3c11a66e0f7",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-98",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "90c17f7ba08701d2",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-110",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9116fa3a4937058f",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-56",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "91c9fbf60ba6ea61",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-44",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "91f10141695b676d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-87",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "92760663c94857b4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-63",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "92ad4a519990b023",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-89",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "92e649332978440d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-30",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "935507500f010555",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-97",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "93c80ad179bb537d",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-71",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "93ef4c15671b61a1",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-130",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "94bdd30b8495a058",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-79",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "97b28fde266d77b3",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-94",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "98f31c7bf7dc73a4",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-18",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9b057fa023cb9286",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-66",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9b349825d1060ed3",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-109",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9b5ce1a653908f0e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-25",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9ccb192be22e200e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-115",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9cdf7aab2302595e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-103",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9d9b943d8dd9c33b",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-40",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9f636510bb265b66",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-28",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a1db13020ad27957",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-22",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a22288fc49fd2664",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-142-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:142",
+          "line": 142,
+          "column": 3
+        },
+        "evidenceRefs": [
+          "minitest-142-assert"
+        ]
+      },
+      {
+        "id": "a2ae8ea5d87d1c4c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-100",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a31192737cc0cfe9",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-60",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a31c76497d71bfdd",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-39",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a4f597309d32d9c5",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-51",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a5b7c8abeee369df",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-81",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a6c066105109a79e",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-143-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:143",
+          "line": 143,
+          "column": 3
+        },
+        "evidenceRefs": [
+          "minitest-143-assert"
+        ]
+      },
+      {
+        "id": "a7033a2022c7786e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-43",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a73a3278c89a994c",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-126",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a77cf1935c061327",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-45",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a869c0c4d0688a98",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-128",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a8c9834826fec2fb",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-127",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "a94f0aa2cf27a8f0",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-5",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "aa0c1f7feff48a30",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-115",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "aa239f7ccac78d49",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-64",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "ad2161badf3f8ffa",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-48",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "ae4d584924408a72",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-39",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "aeee07e32f994a92",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-16",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b007d4afa06c4a66",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-81",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b08e2137f7dcd16f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-102",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b0c27237ee81883d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-16",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b5752700fb044f35",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-20",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b75313a126b378aa",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-120",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b9634d12fe1d7c4c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-90",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b983cfc1761554a0",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-139-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:139",
+          "line": 139,
+          "column": 3
+        },
+        "evidenceRefs": [
+          "minitest-139-assert"
+        ]
+      },
+      {
+        "id": "babd0fb4207c54d8",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-55",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "bb81a7cefed25720",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-105",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "bc2978fcd232943e",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-30",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c04d719fdbd454df",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-27",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c14a43b4a82f4f39",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-104",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c2fdfc4b0e28a126",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-125",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c3c322444e63e3a4",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-42",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c3dc67dc66245544",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-27",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c56bdc93716b0016",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-87",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c5d6bd64b0b5d6a6",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-95",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c5e61494519d4727",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-100",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c675545606a5147e",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-124",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c7cc56e62352a737",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-102",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c8c5147d309b7c2c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-26",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c92107f0ef9e6455",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-46",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c95341b9a6299ce4",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-23",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "cb989b12f32e0601",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-33",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "cc23bc48363bf1db",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-75",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "cceb3e5ddd8039e6",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-135",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "cd9ae87984a5daa1",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-103",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "ce365dcffef9a468",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-94",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "ce818c3926c7527c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-126",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "cf30dc41f40e4a98",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-78",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "cfa5e8df060a8b49",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-40",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d05f50a7ab06f306",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-83",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d14cbc7b43b21845",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-4",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d1e5b0a28ab20f6d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-74",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d2829c95f306371a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-37",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d2aa059fbf9a2cd1",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-3",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d2cf010f73e32fdf",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-50",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d460291507053a5d",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-17",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d572d8aec2776d62",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-53",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d5ff5e2870302b36",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-118",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d64abf1aa6ea72fd",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-96",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d721f565095b1086",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-57",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d86c2a5a47b51860",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-112",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d94ad35586c21280",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-121",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "d9c617e9d43a6587",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-65",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "da5ee09d67db2dcb",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-73",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "da8d4f43c70af1bd",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-38",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "db608386f34ed06f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-97",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "db6a3b6ba900ead3",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-93",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "dd7ed816e3acf7a0",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-13",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "ddda9edc4c7d2588",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-114",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "def1033866bcd935",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-76",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "df24902f88d1f246",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-69",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e070a41cb21be0ce",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-80",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e096b2f6eaff811f",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-117",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e1e957a1ccafe403",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-77",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e2c8ca4677e43798",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-52",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e47f22946479b048",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "minitest-114-assert",
+        "message": "Evidence describes behavior not represented in the specification.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "scripts/build_adversarial_inquiry_from_tied_test.rb.rb:114",
+          "line": 114,
+          "column": 3
+        },
+        "evidenceRefs": [
+          "minitest-114-assert"
+        ]
+      },
+      {
+        "id": "e5c2f0e92b3875d1",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-36",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e6b9e539bbec46de",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-18",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e7077eb8b3110527",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-129",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e7611ea538178bd9",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-19",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e955c2903f612b37",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-70",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "eaec4092487668ac",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-124",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "eb8b92a16f150e57",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-42",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "edc744370c63f5c5",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-107",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "ef48e6d365889ed9",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-5",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f051b7071527f956",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-49",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f28bb3e1c7a05d17",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-36",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f41dc52265ce2517",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-6",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f5438625860ad228",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-129",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f603d7b9c38f6a2a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-72",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f668b0c34aca1de4",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-47",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f7d648675819aab4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-20",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f7d80ba57e329dd1",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-86",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f83957125898b07a",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-84",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f8ed98968870e2b7",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-82",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f92a7f574c59bdc4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-11",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fa8073144271385c",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-88",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fb7e45c8ec28aea4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-86",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fc803ae60f79ce1c",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-62",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fcff83b76eabec93",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-73",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fd210393d435738e",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-114",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fea733d37bbfdf85",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "statement-13",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fece939d7ab9366b",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "statement-12",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRESOLVED",
+  "status": {
+    "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001": "UNRESOLVED",
+    "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002": "UNRESOLVED",
+    "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003": "UNRESOLVED",
+    "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004": "UNRESOLVED",
+    "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005": "UNRESOLVED",
+    "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006": "UNRESOLVED"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRESOLVED",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "run_id": "fleet-migration-phase4-p4c-20260912",
+      "phase": "pre_implementation",
+      "scope": [
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+        "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002"
+      ],
+      "scope_hash": "9d19e32a7d323f9786f4f92a573b336486edcf22a52d839fd6128246795b7ca7",
+      "artifact_hashes": {
+        "obligation-report.json": "16e3fb53b0c023d2758c02007002efe8876a7ab1d0e86607018e54d185926aa2",
+        "finding-ledger.jsonl": "f9437859343a5509b9219217cf143ffdd5eb989c91ef85b2bd4e67f57709485d",
+        "gate-result.json": "5a6742055006fad0b6c1f8f1ca6492bdfc59de5543e846b33e968716f88d39f2",
+        "evidence-provenance.json": "11490d6b681fb0db93503bef262be733ee1f1ba689f563d3e810ea69d88ec592"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+        "run_id": "fleet-migration-phase4-p4c-20260912",
+        "phase": "pre_implementation",
+        "scope_hash": "9d19e32a7d323f9786f4f92a573b336486edcf22a52d839fd6128246795b7ca7",
+        "hash": "16e3fb53b0c023d2758c02007002efe8876a7ab1d0e86607018e54d185926aa2",
+        "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+        "run_id": "fleet-migration-phase4-p4c-20260912",
+        "phase": "pre_implementation",
+        "scope_hash": "9d19e32a7d323f9786f4f92a573b336486edcf22a52d839fd6128246795b7ca7",
+        "hash": "f9437859343a5509b9219217cf143ffdd5eb989c91ef85b2bd4e67f57709485d",
+        "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+        "run_id": "fleet-migration-phase4-p4c-20260912",
+        "phase": "pre_implementation",
+        "scope_hash": "9d19e32a7d323f9786f4f92a573b336486edcf22a52d839fd6128246795b7ca7",
+        "hash": "5a6742055006fad0b6c1f8f1ca6492bdfc59de5543e846b33e968716f88d39f2",
+        "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+        "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+        "run_id": "fleet-migration-phase4-p4c-20260912",
+        "phase": "pre_implementation",
+        "scope_hash": "9d19e32a7d323f9786f4f92a573b336486edcf22a52d839fd6128246795b7ca7",
+        "hash": "11490d6b681fb0db93503bef262be733ee1f1ba689f563d3e810ea69d88ec592",
+        "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  },
+  "mode": "project",
+  "manifest": {
+    "projectRoot": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "tiedBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "version": "mode-b-fixture",
+    "languages": [
+      "ruby"
+    ],
+    "testClassifiers": [
+      "minitest"
+    ],
+    "ignoreRules": []
+  },
+  "diagnostics": [
+    "ambiguous_assertion"
+  ]
+}

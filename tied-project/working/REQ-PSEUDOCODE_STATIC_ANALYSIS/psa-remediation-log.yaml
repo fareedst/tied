@@ -1,0 +1,65 @@
+baseline:
+  gate_mode: true
+  gate_mode_applied: true
+  impl_token: "IMPL-TIED_FILES"
+  input_identity_hash: "4919e52f3276bbb1a478ec93fe32b1698844791128878274b1a69e10392b42fa"
+  layer: "C"
+  legacy_call_grammar:
+    - issue: "Prose CALL bootstrap orchestration in tools/bootstrap/lib/bootstrap.mjs"
+      line: 447
+    - issue: "Qualified CALL IMPL-TIED_VOCABULARY_REFRESH.REFRESH_VOCABULARY(...)"
+      line: 298
+  ok: false
+  sidecar: "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+  unresolved_call_count: 12
+  unresolved_calls:
+    - block: "BOOTSTRAP_TIED"
+      callee: "COPY_FEATURE_ORCHESTRATION_ARTIFACTS"
+    - block: "BOOTSTRAP_TIED"
+      callee: "INITIALIZE_TIED_MCP_CONFIG"
+    - block: "BOOTSTRAP_TIED"
+      callee: "INSTALL_FEATURE_ORCHESTRATION_WRAPPERS"
+    - block: "BOOTSTRAP_TIED"
+      callee: "INSTALL_TIED_YAML_SKILL"
+    - block: "BOOTSTRAP_TIED"
+      callee: "REFRESH_BOOTSTRAP_VOCABULARY"
+    - block: "BOOTSTRAP_TIED"
+      callee: "VERIFY_ADVERSARIAL_INQUIRY_METHODOLOGY"
+    - block: "COPY_FEATURE_ORCHESTRATION_ARTIFACTS"
+      callee: "VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY"
+    - block: "COPY_WITH_ATTRIBUTES"
+      callee: "CALCULATE_SOURCE_DATE_MIDNIGHTS"
+    - block: "COPY_WITH_ATTRIBUTES"
+      callee: "NORMALIZE_COPIED_PATH_TIMESTAMPS"
+    - block: "CREATE_DISPOSABLE_TIED_CLIENT"
+      callee: "RUN_NEW_TIED_CLIENT_PIPELINE"
+    - block: "INSTALL_FEATURE_ORCHESTRATION_WRAPPERS"
+      callee: "PATCH_FEATURE_WRAPPER_REPO_ROOT"
+    - block: "INSTALL_TIED_YAML_SKILL"
+      callee: "PATCH_TIED_CLI_REPO_ROOT"
+  unsupported_syntax_count: 12
+change_id: "DOC-PSA-LAYER-C-CLOSEOUT"
+post_remediation:
+  backfill_exit_code: 0
+  fixes_applied:
+    - "line ~298: CALL IMPL-TIED_VOCABULARY_REFRESH.REFRESH_VOCABULARY → RUN delegation"
+    - "line ~447: prose CALL bootstrap orchestration → RUN tools/bootstrap/lib/bootstrap.mjs"
+    - "procedure reorder (26 procedures, callees before callers)"
+  gate_mode_applied: true
+  impl_token: "IMPL-TIED_FILES"
+  ok: true
+  psa_artifacts:
+    - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.v1.json"
+    - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json"
+    - "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/pseudocode-analysis/IMPL-TIED_FILES.v1.json"
+  unresolved_call_count: 0
+  unsupported_syntax_count: 12
+recorded_at: "2026-09-11"
+remediation_strategy:
+  - "procedure reorder (callees before callers)"
+  - "replace legacy CALL at ~298 with RUN delegation"
+  - "replace legacy CALL at ~447 with RUN tools/bootstrap/lib/bootstrap.mjs"
+request: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+tier_2_deferrals:
+  - "engine two-pass symbol resolution"
+  - "full 78-sidecar corpus"

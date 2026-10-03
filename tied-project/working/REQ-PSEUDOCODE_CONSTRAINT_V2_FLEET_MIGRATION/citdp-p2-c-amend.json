@@ -1,0 +1,155 @@
+{
+  "change_definition": {
+    "current_behavior": "Phase 1 policy, inventory/waiver schemas, and gate promotion stages are persisted in TIED; constraint language is Complete but opt-in; qualification harness was pre-hygiene; template showed v2 header + contract stubs; no stable migration receipt in ARCH; F11 measured only in study panel; SC-FLEET-P2 not in REQ.",
+    "desired_behavior": "Phase 2 module boundary complete in TIED: SC-FLEET-P2-001..005 in REQ; ARCH references constraint-migration-receipt.v1, qualification green at 48d1fbb+, F11/FP/rollback evidence; GRAMMAR_V2_DEFAULT documents constraint-ready-v2 authoring target vs header-only bootstrap; CITDP and Tracker record Phase 2 analyzer and template readiness without fleet sidecar migration.",
+    "unchanged_behavior": "v1 parser compatibility; REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE analyzer semantics unless defect found; Implemented bootstrap for GRAMMAR_V2_DEFAULT until Phase 5; program gate_policy advisory through Phase 2 exit (G1); no blocking fleet CI; OD-P2-7 defer REQ-PSEUDOCODE_MIGRATION_TOOLING split.",
+    "non_goals": [
+      "Phase 3 pilot sidecar migration",
+      "Populated client-inventory-manifest",
+      "Blocking constraint_flow in production CI",
+      "Migration CLI as separate REQ",
+      "Per-client wave assignments or final pilot list"
+    ],
+    "success_criteria": [
+      "SC-FLEET-P2-001..005 persisted in REQ with ARCH cross-references",
+      "CITDP and Tracker extended with Phase 2 module; Phase 1 history preserved",
+      "pre_implementation checklist gate re-validated after CITDP amend (integrated advisory)",
+      "tied_validate_consistency passes after TIED writes",
+      "Phase 2 plan and exit review record req_arch persisted pass"
+    ],
+    "falsification_questions": [
+      "Can Phase 2 be marked complete when only grammar_v2_header passes on the corpus?",
+      "Can qualification be green if truncation is omitted from receipts or counted as pass?",
+      "Does template update imply constraint-enforced-v2 default for new projects before Phase 5?",
+      "Can F11 thresholds be met without re-measurement at fleet pin?",
+      "Can header-only-v2 clients be mislabeled fleet-migrated?",
+      "Can constraint_flow pass with truncation treated as success once enforcement is on?"
+    ]
+  },
+  "completion_criteria": {
+    "activation": {
+      "phase": "pre_implementation",
+      "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "run_id": "fleet-migration-phase2-p2c-20260912"
+    },
+    "checklist_gate": {
+      "dispositions": ["completed", "not_applicable", "pending", "waived"],
+      "fail_closed": true,
+      "phases": ["close_out", "pre_implementation", "verification"]
+    },
+    "proof_boundaries": [
+      "Phase 1 persist proved policy and schema contract documentation only.",
+      "Phase 2 persist proves analyzer/template/receipt readiness at G1 advisory, not fleet migration completeness or runtime enforcement."
+    ]
+  },
+  "impact_analysis": {
+    "impl_inventory": ["IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"],
+    "impl_inventory_notes": "Orchestrator IMPL documents governance validation only; Phase 2 harness and receipt collector remain under qualification working tree per OD-P2-7; no new executable procedures in orchestrator pseudo-code.",
+    "modules_or_boundaries": [
+      {
+        "orchestrator_module": "stdd REQ/ARCH/CITDP; client-owned migration REQs deferred Phase 3+"
+      },
+      {
+        "phase_2_module": "Analyzer and template readiness — qualification, receipts, F11/FP, rollback exercise"
+      },
+      {
+        "policy_module": "Migration states, waivers, gate promotion, supersession prose"
+      },
+      {
+        "schema_module": "client-inventory-manifest.v1, migration-waiver.v1, constraint-migration-receipt.v1"
+      }
+    ],
+    "tied_tokens_affected": [
+      "ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT",
+      "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION"
+    ],
+    "tied_tokens_new": []
+  },
+  "linked_plans": [
+    "docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md",
+    "docs/pseudocode-constraint-v2-fleet-migration-phase-1-plan.md",
+    "docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md"
+  ],
+  "record_identity": {
+    "author": "plan-new-feature P2-C",
+    "change_request_id": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+    "citdp_id": "CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+    "created_at": "2026-09-12",
+    "status": "final",
+    "title": "Fleet constraint-language v2 migration — Phase 2 analyzer and template readiness persist",
+    "updated_at": "2026-09-12"
+  },
+  "risk_analysis": {
+    "adversarial_inquiry": {
+      "assurance_profile": "baseline-functional",
+      "depth_tier": "integrated",
+      "eligibility_triggers_matched": ["CITDP amend Phase 2 module", "strict close-out"],
+      "evidence_references": [
+        "docs/pseudocode-constraint-v2-fleet-migration-phase-2-plan.md",
+        "working/fleet-constraint-v2/phase-2-exit-review.v1.json",
+        "working/fleet-constraint-v2/gate-promotion-stages.v1.yaml",
+        "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json"
+      ],
+      "falsification_questions": [
+        "Can header-only-v2 clients be mislabeled fleet-migrated?",
+        "Can schema templates be mistaken for populated registry?",
+        "Can truncation in receipts be read as qualification pass?"
+      ],
+      "gate_policy": "advisory",
+      "prior_depth_tier": "integrated",
+      "profile_depth": "integrated",
+      "proof_boundary": "Advisory specification-fidelity on Phase 2 readiness artifacts; not fleet migration execution proof.",
+      "rationale": "Phase 2 CITDP amend re-validates integrated pre_implementation gate per OD-7; advisory until Phase 3 blocking program policy.",
+      "research_profile": "integrated-agent"
+    },
+    "quality_profiles": ["baseline-functional", "data-integrity-migration"],
+    "risks": [
+      {
+        "description": "Header pass conflated with fleet-migrated-client",
+        "id": "RISK-FLEET-001",
+        "likelihood": "Medium",
+        "mitigation": "State machine in REQ; SC-FLEET-P2-003 wording; falsification questions",
+        "quality_attribute": "correctness",
+        "severity": "High"
+      },
+      {
+        "description": "Solver truncation read as pass",
+        "id": "RISK-FLEET-P2-TRUNC",
+        "likelihood": "Medium",
+        "mitigation": "Receipt unknown_summary mandatory; SC-FLEET-P2-001",
+        "quality_attribute": "correctness",
+        "severity": "High"
+      },
+      {
+        "description": "Template conflated with Phase 5 enforcement default",
+        "id": "RISK-FLEET-P2-TEMPLATE",
+        "likelihood": "Medium",
+        "mitigation": "SC-GRAMMAR-V2-FLEET-AUTHORING-TARGET; Phase 2 plan state vs proof table",
+        "quality_attribute": "scope-control",
+        "severity": "Medium"
+      }
+    ]
+  },
+  "tdd_sequence": {
+    "order": [
+      "Amend REQ/ARCH/GRAMMAR_V2/IMPL metadata via TIED MCP",
+      "Persist CITDP Phase 2 module amend",
+      "Extend Tracker Phase 2 module steps",
+      "Re-run integrated advisory pre_implementation gate",
+      "tied_validate_consistency and pseudocode_validate on orchestrator IMPL"
+    ],
+    "summary": "Phase 2 P2-C: TIED LEAP persist for analyzer/template readiness; no RED tests for policy/evidence scope."
+  },
+  "test_strategy": {
+    "composition": "not_applicable until Phase 3 migration tooling",
+    "e2e": "not_applicable",
+    "proof_boundaries": [
+      "Qualification green in fleet-g1/summary.json is harness evidence, not fleet population.",
+      "Advisory inquiry observations remain review-gated, not LEAP triggers."
+    ],
+    "regression": "Existing grammar v2 and constraint-language suites unchanged in P2-C.",
+    "summary": "P2-C: tied_validate_consistency, checklist pre_implementation gate, pseudocode_validate on orchestrator sidecar unchanged body."
+  }
+}

@@ -85,11 +85,11 @@ describe("BUILD_PROJECT_INQUIRY_INPUT project orchestrator REQ-TIED_ADVERSARIAL_
     };
     const implPath = path.join(
       projectRoot,
-      "tied/implementation-decisions/IMPL-FIXTURE-ADVERSARIAL.yaml",
+      "tied-project/implementation-decisions/IMPL-FIXTURE-ADVERSARIAL.yaml",
     );
     const pseudocodePath = path.join(
       projectRoot,
-      "tied/implementation-decisions/IMPL-FIXTURE-ADVERSARIAL-pseudocode.md",
+      "tied-project/implementation-decisions/IMPL-FIXTURE-ADVERSARIAL-pseudocode.md",
     );
     const beforeImpl = fs.readFileSync(implPath, "utf8");
     const beforePseudocode = fs.readFileSync(pseudocodePath, "utf8");

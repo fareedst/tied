@@ -1,0 +1,8 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-q:
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    title: "Stage Q rollout — inquiry sub-turn + second pilot"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "integrated"
+      gate_policy: "advisory"

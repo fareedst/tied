@@ -1,0 +1,9 @@
+{
+  "request_token": "REQ-TIED_WORKING_ARTIFACT_PLACEMENT",
+  "phase": "pre_implementation",
+  "sub_procedure": "sub-adversarial-inquiry-pass",
+  "disposition": "not_applicable",
+  "policy": "minimal-depth-no-inquiry",
+  "rationale": "Documentation-only REQ; depth_tier minimal; no integrated adversarial inquiry.",
+  "recorded_at": "2026-10-03"
+}

@@ -1,0 +1,94 @@
+change_definition:
+  current_behavior: "docs/comparisons/jev-for-tied-improvement.md was a coordinator stub (2026-09-26) listing W5 and MCP as Gap; main already ships W5 harness, W6/W6d plan-skills MCP, and safety/metrics caveats were absent.\n"
+  desired_behavior: "Single canonical operator reference with System One model, labeled article vs repo evidence, W1–W6d inventory, correctness audit (G1–G5), opportunity catalog, sponsor policy table, and PLAN handoff.\n"
+  non_goals:
+    - "Integrated adversarial inquiry activation (separate program per sponsor 8B)"
+    - "Live Jev calls mandatory in CI for this pass"
+    - "New REQ/ARCH/IMPL tokens or runtime code fixes in this CITDP"
+  success_criteria:
+    - "Adoption snapshot W1–W6d accurate on main"
+    - "Audit table lists five gaps with grep anchors"
+    - "Opportunity catalog ≥8 rows plus do-not-use list"
+    - "Sponsor decisions S1–S9 recorded"
+    - "tied_validate_consistency ok after persist"
+  unchanged_behavior:
+    - "Deterministic MCP gates and keyword PRELOAD authority (until future gated promotion per S9)"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR Implemented / program CITDP closed"
+evidence:
+  commands:
+    - "rg -n 'Sponsor policy' docs/comparisons/jev-for-tied-improvement.md"
+    - "tied_validate_consistency"
+  evidence_references:
+    - "docs/comparisons/jev-for-tied-improvement.md"
+    - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T00-34-36-678Z.json"
+    - "working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md"
+  proof_boundaries:
+    - "docs_and_citdp_only"
+follow_on_implementation:
+  preload: "gated promotion policy CITDP (S9) after G1 and shadow maturity"
+  primary: "G1 shadow metrics (S1/S8)"
+  w5_production_bundle:
+    - "G2 remains documented fail-open per S2 unless sponsor changes"
+    - "G3 confirm policy CI vs local (S3)"
+    - "G4 Claude jevToolGate parity (S4)"
+impact_analysis:
+  files:
+    - "docs/comparisons/jev-for-tied-improvement.md"
+    - "tied/citdp/CITDP-DOC-JEV-COMPARISON.yaml"
+  tied_tokens_affected:
+    - "ARCH-TIED_JEV_DECISION_COPROCESSOR"
+    - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+    - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  tied_tokens_new: []
+leap_feedback:
+  divergences_from_analysis: "none"
+  record_status: "complete"
+  tied_stack_updates_required: []
+record_identity:
+  change_request_id: "DOC-JEV-COMPARISON-REFRESH"
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  record_status: "complete"
+  recorded_at: "2026-09-28"
+  title: "Canonical Jev/System One comparison doc refresh (W1–W6d audit + opportunity catalog)"
+risk_analysis:
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    close_out_inquiry_waiver: null
+    counterexamples:
+      - "Comparison doc claims production W5 while S2/S3 leave known runtime gaps"
+    depth_change_waiver: null
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "Sponsor table S2–S4 and audit G2–G4 document limits; 4A gates production label"
+    eligibility_triggers_matched: []
+    gate_policy: "advisory"
+    integrated_waiver: null
+    prior_depth_tier: null
+    rationale: "Documentation-only refresh; no runtime or gate activation change."
+    research_profile: "integrated-agent"
+    strict_eligibility_prerequisites: []
+    sub_adversarial_inquiry_pass: "not_applicable"
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  residual_risks:
+    - id: "RISK-DOC-JEV-002"
+      mitigation: "Sponsor table S2–S4; follow-on code CITDP for G1/G3/G4"
+      severity: "medium"
+      summary: "Doc implies production W5 while S2/S3 leave known runtime gaps"
+sponsor_decisions:
+  decisions:
+    S1_shadow_errors: "1C — replay/CI fail on vendor or transport error (G1 fix is next code investment)"
+    S2_missing_dist: "2B — allow unguarded when dist missing; document (no fail-closed on G2 unless sponsor reverses)"
+    S3_confirm_policy: "3C — CI strict on confirm; local log-only default"
+    S4_driver_parity: "4A — Claude and Cursor same Jev tool rules before production W5 sign-off"
+    S5_live_agreement: "7A — live agreement rates tuning baseline only"
+    S6_inquiry_scope: "8B — W4 observation-only; integrated inquiry separate program"
+    S7_article_text: "10A — paraphrase only in repo"
+    S8_next_investment: "G1 shadow metrics"
+    S9_preload_authority: "future gated promotion only; keyword PRELOAD authoritative until then"
+  recorded_at: "2026-09-28"
+  summary_ref: "working/REQ-TIED_JEV_DECISION_COPROCESSOR/sponsor-decisions-doc-jev-2026-09-28.md"
+test_strategy:
+  summary: "Docs-only; no new tests. Verification grep + tied_validate_consistency."

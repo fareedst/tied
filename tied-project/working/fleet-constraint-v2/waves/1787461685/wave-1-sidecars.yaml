@@ -1,0 +1,12 @@
+client_id: "1787461685"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 3 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-BTREPORT-CLI-CMD"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-CLI-CMD-pseudocode.md"
+  - impl_token: "IMPL-BTREPORT-REPORT-FORMAT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-REPORT-FORMAT-pseudocode.md"
+  - impl_token: "IMPL-BTREPORT-SYSTEM-PROFILER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787461685/tied/implementation-decisions/IMPL-BTREPORT-SYSTEM-PROFILER-pseudocode.md"
+wave_id: "W-ext-1787461685-1"

@@ -20,6 +20,7 @@ import {
 } from "./plan-skills-evidence.js";
 import { resolvePlanSkillsConfig, resolvePlanSkillsTimeoutMs } from "./plan-skills-config.js";
 import { PLAN_SKILLS_PROOF_BOUNDARY } from "./plan-skills-types.js";
+import { isPathUnderProjectWorking, workingPathRelativeToProject } from "../working-root.js";
 
 export const MAX_TRIAGE_CASES = 24;
 
@@ -76,9 +77,7 @@ function resolveCasesFromPath(projectRoot: string, casesPath: string): Adversari
   const abs = path.isAbsolute(casesPath)
     ? path.resolve(casesPath)
     : path.resolve(projectRoot, casesPath);
-  const workingAnchor = path.resolve(projectRoot, "working");
-  const rel = path.relative(workingAnchor, abs);
-  if (rel.startsWith("..") || path.isAbsolute(rel)) {
+  if (!isPathUnderProjectWorking(projectRoot, abs)) {
     return { error: "cases_path_must_be_under_working" };
   }
   if (!fs.existsSync(abs)) {
@@ -215,8 +214,8 @@ export function resolveTriageEvidencePath(
   if ("error" in resolved) {
     return resolved;
   }
-  const artifact_relpath = path.join(
-    "working",
+  const artifact_relpath = workingPathRelativeToProject(
+    projectRoot,
     requestToken,
     "jev",
     "plan-skills",

@@ -1,5 +1,7 @@
 import path from "node:path";
 
+import { resolveTiedLayout } from "../tied-layout.js";
+
 export interface ProjectManifestInput {
   projectRoot: string;
   tiedBasePath: string;
@@ -41,7 +43,7 @@ export function resolveProjectManifest(
 
   const projectRoot = path.resolve(input.projectRoot);
   const tiedBasePath = path.resolve(input.tiedBasePath);
-  const expectedTiedBasePath = path.join(projectRoot, "tied");
+  const expectedTiedBasePath = resolveTiedLayout(projectRoot).tiedDir;
 
   if (tiedBasePath !== expectedTiedBasePath) {
     return { ok: false, error: "WrongTiedBasePath" };

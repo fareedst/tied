@@ -1,0 +1,85 @@
+{
+  "$schema": "working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json",
+  "receipt_meta": {
+    "schema_version": 1,
+    "receipt_id": "8fae5d74-f1a3-46d6-8e27-d92c48e1b045",
+    "generated_at": "2026-09-12T15:02:44.238Z",
+    "gate_stage": "G1",
+    "program_gate_policy": "advisory"
+  },
+  "pin": {
+    "methodology_pin": "48d1fbb+",
+    "analyzer_build_identity": "pseudocode-analyzer/1.0.0+stdd@b568c98",
+    "manifest_entry_id": "tier-b-stdd-IMPL-PSEUDOCODE_TYPED_FLOW"
+  },
+  "subject": {
+    "sidecar_path": "tied/implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md",
+    "impl_token": "IMPL-PSEUDOCODE_TYPED_FLOW",
+    "input_identity": {
+      "algorithm": "sha256",
+      "hash": "525155be298e0b949924eb060c3a22658cecc6457b9222f4575c3fbe870d5713",
+      "byte_length": 16619
+    },
+    "grammar_version": "pseudocode-grammar.v1",
+    "annotation_profile": "legacy-v1"
+  },
+  "layer_a": {
+    "applicable": true,
+    "ok": true
+  },
+  "layer_b": {
+    "ok": false,
+    "validator_schema_version": "layer-b-pseudocode-validator.v1",
+    "blocks_count": 17,
+    "contract_precision": {
+      "active_blocks_with_contract": 17,
+      "active_blocks_missing_pre_or_post": 0,
+      "active_blocks_missing_failure_modes": 1,
+      "active_blocks_missing_data_transition": 0,
+      "active_blocks_missing_termination": 0
+    },
+    "error_count": 1,
+    "warning_count": 0
+  },
+  "layer_c": {
+    "gate_mode": true,
+    "typed_flow": true,
+    "constraint_flow": true,
+    "constraint_gate_errors_policy": "advisory",
+    "ok": true,
+    "analysis_truncated": false,
+    "diagnostics_truncated": false,
+    "error_count": 0,
+    "warning_count": 4,
+    "info_count": 3,
+    "procedure_count": 17,
+    "source_report_schema": "pseudocode-analysis-report.v1"
+  },
+  "constraint": {
+    "ran": true,
+    "procedures_analyzed": 17,
+    "refinements_checked": 0,
+    "refinements_proven": 0,
+    "alias_mut_checked": 0,
+    "alias_mut_violations": 0,
+    "solver_truncated": false,
+    "solver_truncation_cause": "none",
+    "alias_analysis_truncated": false,
+    "budget_exceeded": false,
+    "constraint_diagnostics_truncated": false
+  },
+  "unknown_summary": {
+    "unknown": 0,
+    "truncated": 0,
+    "unsupported": 0,
+    "prose_only": 0,
+    "budget_exceeded": 10
+  },
+  "constraint_gate_errors": [],
+  "promotion_readiness": {
+    "qualification_green": true,
+    "f11_pass": false,
+    "fp_within_threshold": false,
+    "as_of_phase": "P2-F-harness"
+  }
+}

@@ -1,0 +1,47 @@
+REQ-TIED_WORKING_ARTIFACT_PLACEMENT:
+  category: "Infrastructure"
+  description: "TIED shall publish operator guidance for classifying and placing working-folder artifacts: committed process evidence under tied-project/working/, regenerable machine evidence under tied-bundle/working/, and tooling scratch paths—aligned with classifyWorkingRelativePath in IMPL-TIED_TWO_FOLDER_LAYOUT."
+  name: "Working artifact placement guide"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Clear envelope path conventions"
+      - "Reduced committed-tree noise"
+      - "Single guide matching the shipped classifier"
+    problems_solved:
+      - "Ambiguous commit vs ignore decisions"
+      - "Legacy working/ path examples in docs"
+      - "No PRELOAD entry for working/evidence placement"
+    why: "Two-folder layout split working roots in code but sponsors and agents lack one readable policy for temporary vs archivable evidence."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+    related_to:
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "[PROC-WORKING_ARTIFACT_PLACEMENT] registered in processes.md."
+      id: "SC-WAP-PROC"
+      metric: "grep processes.md"
+    - criterion: "committed/local working root and process evidence facet in tied-methodology.md."
+      id: "SC-WAP-VOCAB"
+      metric: "vocab review"
+    - criterion: "Guide local patterns match LOCAL_WORKING_PREFIXES in working-root.ts."
+      id: "SC-WAP-CLASSIFIER"
+      metric: "table parity review"
+    - criterion: "Linked from client-development-index and tied-project/vocab/routing.md."
+      id: "SC-WAP-INDEX"
+      metric: "link review"
+    - criterion: "request-evidence-envelope.md examples use tied-project/working layout-aware paths."
+      id: "SC-WAP-ENVELOPE-DOC"
+      metric: "doc review"
+    - criterion: "tied-bundle/docs/working-artifact-placement.md covers tiers, both working roots, tooling scratch, and gray zones."
+      id: "SC-WAP-GUIDE"
+      metric: "doc review"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_WORKING_ARTIFACT_PLACEMENT"
+    implementation:
+      - "IMPL-TIED_TWO_FOLDER_LAYOUT"

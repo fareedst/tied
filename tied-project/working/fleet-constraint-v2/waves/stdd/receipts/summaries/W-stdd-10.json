@@ -1,0 +1,13 @@
+{
+  "run_at": "2026-09-13T04:26:50.609Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-stdd-10",
+  "partition_wave_id": "W-stdd-10",
+  "gate_stage": "G3",
+  "receipt_count": 3,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ATDD-COMPOS-AGENT_STREAM_ARGV.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ATDD-COMPOS-EXPORT_TDD_PROMPTS.receipt.json",
+    "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-ATDD-E2E-AGENT_STREAM.receipt.json"
+  ]
+}

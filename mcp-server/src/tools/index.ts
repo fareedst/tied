@@ -19,8 +19,11 @@ import {
   updateRecord,
   upsertRecord,
   getBasePath,
+  getClientProjectRoot,
+  getMethodologyBasePath,
   type IndexName,
 } from "../yaml-loader.js";
+import { resolveTiedLayout } from "../tied-layout.js";
 import {
   getDetailPath,
   loadDetail,
@@ -352,8 +355,24 @@ export const allTools = [
     handler: async () => {
       const base_path = getBasePath();
       const env_TIED_BASE_PATH = process.env.TIED_BASE_PATH ?? null;
+      const project_root = getClientProjectRoot();
+      const layout = resolveTiedLayout(project_root);
+      const bundle_root = getMethodologyBasePath();
+      const installConfigExists = fs.existsSync(layout.installConfigPath);
       return textContent(
-        JSON.stringify({ base_path, env_TIED_BASE_PATH }, null, 2)
+        JSON.stringify(
+          {
+            base_path,
+            env_TIED_BASE_PATH,
+            project_root,
+            bundle_root,
+            store_root: process.env.TIED_STORE_ROOT ?? null,
+            mode: installConfigExists ? "client" : "store",
+            legacy_project_dir: layout.legacyProjectDir,
+          },
+          null,
+          2,
+        ),
       );
     },
   },
@@ -397,7 +416,7 @@ export const allTools = [
     name: "yaml_index_insert",
     config: {
       description:
-        "Insert a new record into a YAML index. Fails if the token already exists. Record must be a JSON object (nested allowed). Writes to the index file (e.g. tied/requirements.yaml). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Insert a new record into a YAML index. Fails if the token already exists. Record must be a JSON object (nested allowed). Writes to the index file (e.g. tied-project/requirements.yaml). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -689,7 +708,7 @@ export const allTools = [
     name: "impl_detail_set_essence_pseudocode",
     config: {
       description:
-        "Update only IMPL-* detail essence_pseudocode (plus optional metadata.last_updated). The pseudo-code body is written to `tied/implementation-decisions/IMPL-{TOKEN}-pseudocode.md` (not embedded in the detail YAML). Safer than a broad yaml_detail_update for large blobs. Rejects non-IMPL tokens. Provide exactly one of: `essence_pseudocode` (inline string) or `essence_pseudocode_path` (UTF-8 file under TIED_BASE_PATH). Nested metadata follows the same rules as yaml_detail_update (metadata.created preserved; when existing and new metadata.last_updated are both objects, date/author/reason fields merge without clobbering siblings).",
+        "Update only IMPL-* detail essence_pseudocode (plus optional metadata.last_updated). The pseudo-code body is written to `tied-project/implementation-decisions/IMPL-{TOKEN}-pseudocode.md` (not embedded in the detail YAML). Safer than a broad yaml_detail_update for large blobs. Rejects non-IMPL tokens. Provide exactly one of: `essence_pseudocode` (inline string) or `essence_pseudocode_path` (UTF-8 file under TIED_BASE_PATH). Nested metadata follows the same rules as yaml_detail_update (metadata.created preserved; when existing and new metadata.last_updated are both objects, date/author/reason fields merge without clobbering siblings).",
       inputSchema: z.object({
         token: z
           .string()
@@ -800,7 +819,7 @@ export const allTools = [
     name: "citdp_record_write",
     config: {
       description:
-        "Write a CITDP record YAML file under tied/citdp/ (basename CITDP-*.yaml only). record is the inner object (value under the top-level key). Use for persist-citdp-record without direct-editing tied/citdp/.",
+        "Write a CITDP record YAML file under tied-project/citdp/ (basename CITDP-*.yaml only). record is the inner object (value under the top-level key). Use for persist-citdp-record without direct-editing tied-project/citdp/.",
       inputSchema: z.object({
         filename: z
           .string()
@@ -926,17 +945,17 @@ export const allTools = [
     name: "tied_token_rename",
     config: {
       description:
-        "Rename a single semantic token across the TIED tree (default TIED rename scope: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional extra substitution targets under the client project root (parent of TIED base path). Replaces exact old_token string with new_token; modified YAML uses tied-yaml-canonical-v1 atomically. Params: old_token, new_token; optional dry_run, include_markdown (tied/docs/processes.md only), extra_globs (path globs from client project root), extra_extensions (e.g. swift -> **/*.swift). Successful writes report yaml_format metadata. Skips common build/vendor dirs and binary files for extra targets.",
+        "Rename a single semantic token across the TIED tree (default TIED rename scope: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional extra substitution targets under the client project root (parent of TIED base path). Replaces exact old_token string with new_token; modified YAML uses tied-yaml-canonical-v1 atomically. Params: old_token, new_token; optional dry_run, include_markdown (tied-bundle/docs/processes.md only), extra_globs (path globs from client project root), extra_extensions (e.g. swift -> **/*.swift). Successful writes report yaml_format metadata. Skips common build/vendor dirs and binary files for extra targets.",
       inputSchema: z.object({
         old_token: z.string().min(1).describe("Current token ID (e.g. REQ-TIED_SETUP)"),
         new_token: z.string().min(1).describe("New token ID; must not already exist; must have same prefix (REQ-/ARCH-/IMPL-/PROC-)"),
         dry_run: z.boolean().optional().describe("If true, return files_modified and file_renamed that would be changed without writing"),
-        include_markdown: z.boolean().optional().describe("If true, also replace token in tied/docs/processes.md"),
+        include_markdown: z.boolean().optional().describe("If true, also replace token in tied-bundle/docs/processes.md"),
         extra_globs: z
           .array(z.string())
           .optional()
           .describe(
-            "Path globs relative to client project root (parent of TIED base path), e.g. ./*.md, tied/vocab/**/*.md"
+            "Path globs relative to client project root (parent of TIED base path), e.g. ./*.md, tied-project/vocab/**/*.md"
           ),
         extra_extensions: z
           .array(z.string())
@@ -1865,7 +1884,7 @@ export const allTools = [
       description:
         "[REQ-TIED_DAE_INCORPORATION] Compose tied_checklist_gate_validate with Tracker/CITDP paths (same algorithm as `tied gate check` CLI). Returns allowed, exit_code, receipt_path, and reasons.",
       inputSchema: z.object({
-        request_token: z.string().describe("REQ token for default working/ and tied/citdp/ paths."),
+        request_token: z.string().describe("REQ token for default working/ and tied-project/citdp/ paths."),
         phase: z.enum(["pre_implementation", "verification", "close_out"]),
         slug: z.string().optional().describe("When set, prior tracker steps must be terminal."),
         tracker_path: z.string().optional(),

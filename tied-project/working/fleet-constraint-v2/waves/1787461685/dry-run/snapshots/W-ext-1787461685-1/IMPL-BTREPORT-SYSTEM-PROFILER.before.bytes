@@ -1,0 +1,109 @@
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+# Collect Darwin Bluetooth profiler data and convert its line-oriented output into a stable report.
+
+## DATA_AND_BOUNDARIES
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI]
+# Keep process execution injectable and keep parsing independent from operating-system I/O.
+INPUT: execution context, command runner, profiler output
+OUTPUT: report or named collection/parse error
+DATA: command runner, report, controller, devices, current section, current device
+PRE: command runner is available; profiler output is UTF-8 text
+POST: successful output contains a report with every recognized paired device
+EFFECTS: IO at collection boundary; pure parsing after bytes are received
+FAILURE_MODES: command failure, malformed profiler structure, invalid field value
+TERMINATION: total
+
+## COLLECT_SYSTEM_PROFILER
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI]
+# Invoke exactly the native macOS profiler command through the injectable runner.
+INPUT: context, command runner
+OUTPUT: raw profiler text or collection error
+PRE: context and runner are non-null
+POST: success returns stdout from one invocation of system_profiler with SPBluetoothDataType
+EFFECTS: IO, Exn
+FAILURE_MODES: command failure
+TERMINATION: total
+CONTROL: command arguments are system_profiler and SPBluetoothDataType
+1. Call the runner with the context and the fixed profiler arguments.
+2. IF the runner returns an error, RETURN collection error.
+3. RETURN the received stdout.
+
+## PARSE_SYSTEM_PROFILER
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+# Use section and indentation state to build controller and paired-device records.
+INPUT: profiler text
+OUTPUT: report or parse error
+PRE: profiler text is UTF-8 and uses indentation to express nesting
+POST: success returns controller data when present and devices classified by section
+EFFECTS: pure
+FAILURE_MODES: malformed structure, invalid RSSI, invalid required property
+TERMINATION: total
+1. Initialize an empty report and no active section or device.
+2. FOR each non-empty input line:
+   1. Measure indentation and split the line into key and optional value.
+   2. IF the key is Bluetooth Controller, enter controller state.
+   3. ELSE IF the key is Connected or Not Connected, enter the matching device section and clear the active device.
+   4. ELSE IF controller state is active, assign the controller property.
+   5. ELSE IF a device section is active, process the line as a device header or device property according to indentation.
+3. IF a device is active, append it to the report.
+4. IF a required section marker is malformed, RETURN parse error.
+5. RETURN the report.
+
+## PARSE_CONTROLLER_PROPERTY
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI]
+# Map known controller properties and preserve other controller fields.
+INPUT: controller, property key, property value
+OUTPUT: updated controller
+PRE: controller state is active and the property has a key
+POST: known fields are typed and unknown fields remain available as extras
+EFFECTS: pure
+FAILURE_MODES: invalid discoverable value
+TERMINATION: total
+1. IF key is Address, State, or Chipset, assign the corresponding controller field.
+2. IF key is Discoverable, convert On or Off to a boolean.
+3. IF Discoverable has another value, RETURN invalid discoverable error.
+4. ELSE store the key and value in controller extras.
+
+## PARSE_DEVICE_HEADER
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-DEVICE-FILTERS]
+# Start one device for an empty-value name line and carry the active section into its state.
+INPUT: device section, indentation, key, value
+OUTPUT: active device or no device
+PRE: a device section is active
+POST: a valid device header creates a device with the section connection state
+EFFECTS: pure
+FAILURE_MODES: missing device name
+TERMINATION: total
+1. IF the line is more deeply indented than the section and has an empty value, create a device named from the key.
+2. Set the device connection state to connected for Connected, otherwise not_connected.
+3. RETURN the active device.
+4. ELSE RETURN no new device.
+
+## PARSE_DEVICE_PROPERTY
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-DEVICE-FILTERS]
+# Convert known device fields, preserve unknown fields, and distinguish absent RSSI from present RSSI.
+INPUT: active device, property key, property value
+OUTPUT: updated device
+PRE: an active device exists and property value is available
+POST: known fields are normalized; absent RSSI remains nil; unknown fields are in Extra
+EFFECTS: pure
+FAILURE_MODES: invalid RSSI
+TERMINATION: total
+1. IF key is RSSI, parse the value as an integer and assign the optional RSSI.
+2. IF RSSI cannot be parsed, RETURN invalid RSSI error.
+3. IF key is Address, Vendor ID, Product ID, Minor Type, or Firmware Version, assign the matching field.
+4. IF key identifies a serial-number variant, store its variant and value in SerialNumbers.
+5. ELSE store the key and value in Extra.
+
+## FINALIZE_REPORT
+# [IMPL-BTREPORT-SYSTEM-PROFILER] [ARCH-BTREPORT-PLATFORM-ADAPTER] [REQ-BTREPORT-CLI]
+# Close the final active device and stamp collection time without changing parsed device state.
+INPUT: partial report, active device, collection time
+OUTPUT: complete report
+PRE: partial report is initialized
+POST: every parsed device appears once and collected_at is set
+EFFECTS: pure
+TERMINATION: total
+1. IF an active device exists, append it to the report.
+2. Set collected_at to the supplied collection time.
+3. RETURN the complete report.

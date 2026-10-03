@@ -13,6 +13,15 @@ import {
 
 const FIXTURES_DIR = path.join(import.meta.dirname, "..", "fixtures", "record-list-sort");
 
+function writeProjectConfig(projectRoot: string, innerYaml: string): void {
+  const dir = path.join(projectRoot, "tied-project");
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(
+    path.join(dir, "config.yaml"),
+    `schema: tied-project-config.v1\nyaml:\n  ${innerYaml.trim()}\n`,
+  );
+}
+
 function loadFixture(name: string): unknown {
   const text = fs.readFileSync(path.join(FIXTURES_DIR, name), "utf8");
   return yaml.load(text);
@@ -297,16 +306,16 @@ test("preserves implementation_order files list under *_order key REC-ORDERED-KE
 
 test("lint uses repository style from YAML file path when TIED_BASE_PATH points elsewhere REQ-TIED_YAML_STYLE_CONFIGURATION", () => {
   const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-cross-base-"));
-  const tiedBasePath = path.join(projectRoot, "tied");
+  const tiedBasePath = path.join(projectRoot, "tied-project");
   fs.mkdirSync(tiedBasePath);
   fs.writeFileSync(path.join(tiedBasePath, "requirements.yaml"), "{}\n");
   const filePath = path.join(tiedBasePath, "record.yaml");
   const otherRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-other-base-"));
-  const otherTied = path.join(otherRoot, "tied");
+  const otherTied = path.join(otherRoot, "tied-project");
   fs.mkdirSync(otherTied);
   const previousBasePath = process.env.TIED_BASE_PATH;
   try {
-    fs.writeFileSync(path.join(projectRoot, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    writeProjectConfig(projectRoot, "scalar_style: wrapped\n");
     fs.writeFileSync(filePath, "message: hello\n");
     process.env.TIED_BASE_PATH = otherTied;
 
@@ -328,12 +337,13 @@ test("lint uses repository style from YAML file path when TIED_BASE_PATH points 
 
 test("wrapped style quotes strings and preserves typed scalar output REQ-TIED_YAML_STYLE_CONFIGURATION", () => {
   const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-wrapped-"));
-  const tiedBasePath = path.join(projectRoot, "tied");
+  const tiedBasePath = path.join(projectRoot, "tied-project");
   fs.mkdirSync(tiedBasePath);
-  const filePath = path.join(projectRoot, "record.yaml");
+  fs.writeFileSync(path.join(tiedBasePath, "requirements.yaml"), "{}\n");
+  const filePath = path.join(tiedBasePath, "record.yaml");
   const previousBasePath = process.env.TIED_BASE_PATH;
   try {
-    fs.writeFileSync(path.join(projectRoot, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    writeProjectConfig(projectRoot, "scalar_style: wrapped\n");
     fs.writeFileSync(filePath, "message: hello\nflag: false\ncount: 7\nempty: null\n");
     process.env.TIED_BASE_PATH = tiedBasePath;
 
@@ -361,14 +371,15 @@ test("wrapped style quotes strings and preserves typed scalar output REQ-TIED_YA
 
 test("invalid style configuration preserves original bytes REQ-TIED_YAML_STYLE_CONFIGURATION", () => {
   const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-invalid-style-"));
-  const tiedBasePath = path.join(projectRoot, "tied");
+  const tiedBasePath = path.join(projectRoot, "tied-project");
   fs.mkdirSync(tiedBasePath);
-  const filePath = path.join(projectRoot, "record.yaml");
+  fs.writeFileSync(path.join(tiedBasePath, "requirements.yaml"), "{}\n");
+  const filePath = path.join(tiedBasePath, "record.yaml");
   const previousBasePath = process.env.TIED_BASE_PATH;
   const previousStyle = process.env.TIED_YAML_STYLE;
   const original = "message: hello\n";
   try {
-    fs.writeFileSync(path.join(projectRoot, ".tied-yaml.yaml"), "scalar_style: invalid\n");
+    writeProjectConfig(projectRoot, "scalar_style: invalid\n");
     fs.writeFileSync(filePath, original);
     process.env.TIED_BASE_PATH = tiedBasePath;
     process.env.TIED_YAML_STYLE = "wrapped";

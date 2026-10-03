@@ -6,6 +6,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { jsonSafeAbsolute } from "./paths.mjs";
 import { sayOk } from "./console.mjs";
+import { resolveTiedLayout } from "./layout.mjs";
+
+function projectTiedBasePath(projectRoot) {
+  const tiedDir = resolveTiedLayout(projectRoot).tiedDir;
+  fs.mkdirSync(tiedDir, { recursive: true });
+  return tiedDir;
+}
 
 /**
  * [IMPL-TIED_FILES] [IMPL-MCP_USAGE_METRICS] [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]
@@ -86,7 +93,7 @@ export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process
   refreshTiedMcpJson({
     mcpJsonPath: mcpJson,
     tiedMcpIndexJs: mcpServerDist,
-    tiedBasePath: path.join(projectRoot, "tied"),
+    tiedBasePath: projectTiedBasePath(projectRoot),
     collectMetrics,
     metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
     projectBasename,
@@ -109,7 +116,7 @@ export function initializeClaudeMcpConfig(projectRoot, tiedRepoRoot, options = {
   const refreshArgs = {
     mcpJsonPath: mcpJson,
     tiedMcpIndexJs: mcpServerDist,
-    tiedBasePath: path.join(projectRoot, "tied"),
+    tiedBasePath: projectTiedBasePath(projectRoot),
     collectMetrics: env.TIED_MCP_COLLECT_METRICS === "1",
     metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
     projectBasename,

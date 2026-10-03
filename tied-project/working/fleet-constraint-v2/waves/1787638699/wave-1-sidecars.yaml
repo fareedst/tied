@@ -1,0 +1,14 @@
+client_id: "1787638699"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 4 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-WININFO_CLI"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_CLI-pseudocode.md"
+  - impl_token: "IMPL-WININFO_ENUMERATE"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_ENUMERATE-pseudocode.md"
+  - impl_token: "IMPL-WININFO_FILTER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_FILTER-pseudocode.md"
+  - impl_token: "IMPL-WININFO_RENDER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787638699/tied/implementation-decisions/IMPL-WININFO_RENDER-pseudocode.md"
+wave_id: "W-ext-1787638699-1"

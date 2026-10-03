@@ -1,0 +1,14 @@
+client_id: "1787507684"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 4 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-ROOTJOBS_CLI"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_CLI-pseudocode.md"
+  - impl_token: "IMPL-ROOTJOBS_COLLECT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_COLLECT-pseudocode.md"
+  - impl_token: "IMPL-ROOTJOBS_RENDER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_RENDER-pseudocode.md"
+  - impl_token: "IMPL-ROOTJOBS_TREE"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787507684/tied/implementation-decisions/IMPL-ROOTJOBS_TREE-pseudocode.md"
+wave_id: "W-ext-1787507684-1"

@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "dry_run": true,
+  "would_update": [],
+  "requirements_updated": 0,
+  "implementation_updated": 0,
+  "requirements_set_implemented": [],
+  "requirements_set_planned": [],
+  "implementation_set_active": [],
+  "implementation_set_planned": []
+}

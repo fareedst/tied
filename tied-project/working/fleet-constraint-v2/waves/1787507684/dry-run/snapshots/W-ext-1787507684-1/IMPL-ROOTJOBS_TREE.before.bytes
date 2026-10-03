@@ -1,0 +1,72 @@
+# [IMPL-ROOTJOBS_TREE] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_TREE]
+# Summary: Index flat processes, detect roots, attach children, sort forest by PID.
+
+## BUILD_INDEX
+# [IMPL-ROOTJOBS_TREE] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_TREE]
+# How: Build map[int]Process keyed by PID; skip duplicate PIDs keeping first.
+
+Contract:
+  INPUT: []Process flat snapshot
+  OUTPUT: map[int]Process index; duplicate skip count
+  PRE: input may be empty
+  POST: each unique PID appears once; first wins on duplicate
+  EFFECTS: State — index populated
+  FAILURE_MODES: none — duplicates logged only
+  TERMINATION: total — single pass
+
+procedure BUILD_INDEX(processes):
+  index := empty map[int]Process
+  FOR each proc IN processes:
+    IF proc.PID already IN index:
+      LOG "DEBUG: skip duplicate PID {proc.PID}"
+      CONTINUE
+    index[proc.PID] = proc
+  RETURN index
+
+## DETECT_ROOTS
+# [IMPL-ROOTJOBS_TREE] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_TREE]
+# How: Root when PPID <= 1 OR PPID not in index.
+
+procedure DETECT_ROOTS(index):
+  Contract:
+    PRE: index built
+    POST: root candidates identified
+    EFFECTS: Control — classify each process as root or child candidate
+  roots := []
+  FOR each proc IN index:
+    IF proc.PPID <= 1 OR proc.PPID NOT IN index:
+      MARK proc as root candidate
+  RETURN root candidates
+
+## ATTACH_CHILDREN
+# [IMPL-ROOTJOBS_TREE] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_TREE]
+# How: For each process, if PPID in index append to parent Children; else root.
+
+procedure ATTACH_CHILDREN(index):
+  Contract:
+    PRE: index built
+    POST: Forest with nested Node trees; orphan promoted to root
+    EFFECTS: State — Node{Process, Children} graph
+  nodes := map[int]*Node for each PID
+  roots := []*Node
+  FOR each proc IN index:
+    IF proc.PPID IN index AND proc.PPID > 1:
+      APPEND nodes[proc.PID] to nodes[proc.PPID].Children
+    ELSE:
+      APPEND nodes[proc.PID] to roots
+  RETURN Forest{Roots: roots}
+
+## SORT_FOREST
+# [IMPL-ROOTJOBS_TREE] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_TREE]
+# How: Sort roots and each Children slice by PID ascending via slices.SortFunc.
+
+procedure SORT_FOREST(forest):
+  # [IMPL-ROOTJOBS_TREE] [ARCH-ROOTJOBS_MODULES] [REQ-ROOTJOBS_TREE]
+  # How: Apply slices.SortFunc by PID at root and each nested Children level.
+  Contract:
+    POST: roots and every sibling list ordered by PID ascending
+    EFFECTS: State — deterministic ordering for render
+  SORT forest.Roots by PID
+  FOR each node IN forest (recursive):
+    SORT node.Children by PID
+  RETURN forest

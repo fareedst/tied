@@ -1,0 +1,20 @@
+{
+  "canonicalMutation": false,
+  "findings": [],
+  "metadata": {
+    "phase": "pre_implementation",
+    "policy": "advisory",
+    "projectId": "stdd",
+    "run_id": "w4-refine-pre-impl-2026-09-27"
+  },
+  "projectId": "stdd",
+  "proofBoundaries": [
+    "human_decision"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#promotion",
+    "PLAN-TIED-BBCE-ALIGNMENT#bbce_advisory_enforced#block"
+  ]
+}

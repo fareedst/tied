@@ -1,0 +1,80 @@
+change_definition:
+  current_state: "Docs describe Layers A+B only; pseudocode_analyze ok ignores most error diagnostics; gate-pseudocode-validation runs Layer B only."
+  desired_state: "Three complementary layers A/B/C documented; gate_mode fails ok on error diagnostics and truncation; gate-pseudocode-validation invokes Layer C for changed IMPLs from Tracker inventory."
+  success_criteria:
+    - "gate_mode true fails ok on UNRESOLVED_CALL and truncated reports"
+    - "integrated pre_implementation gate passes with real activation evidence"
+    - "Phase 4 engine ships before Phase 3 checklist mandates Layer C"
+    - "tied_validate_consistency passes after LEAP"
+  summary: "Promote pseudo-code static analysis from opt-in documentation to mandatory Layer C pre-RED gate for changed in-scope Active IMPLs; add gate_mode strict ok semantics, grammar v1 author guide, and checklist wiring."
+change_id: "DOC-PSA-PSEUDOCODE-FULL-UPDATE"
+completion_criteria:
+  layer_c_gate_fixture: true
+  tests_pass: true
+  tied_consistency: true
+  vocab_validated: true
+depth_tier: "integrated"
+gate_policy: "advisory"
+impact_analysis:
+  impl_inventory:
+    - changed: true
+      rationale: "gate_mode contract and EMIT_ANALYSIS_REPORT POST update"
+      sidecar: "tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md"
+      token: "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+  modules:
+    - change: "gate_mode, gate_mode_applied, ok derivation"
+      path: "mcp-server/src/analysis/pseudocode-analyzer.ts"
+    - change: "Layer C and grammar construct terms"
+      path: "tied/vocab/"
+    - change: "MCP schema and handler for gate_mode"
+      path: "mcp-server/src/tools/index.ts"
+    - change: "procedure NAME heading remediation"
+      path: "templates/impl-essence-pseudocode-template.md"
+    - change: "three-layer narrative, grammar guide, Layer C checklist"
+      path: "tied/docs/"
+  tied_tokens_affected:
+    - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"
+    - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
+    - "REQ-PSEUDOCODE_PARSER_UNIFICATION"
+    - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+primary_req: "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+prior_depth_tier: null
+risk_analysis:
+  adversarial_inquiry:
+    counterexamples:
+      - "Authors conflate evidence-chain parse-only PSA row with mandatory gate path"
+      - "UNRESOLVED_CALL with ok true before gate_mode ships enables false pass at Layer C gate"
+    depth_tier: "integrated"
+    disconfirming_observations:
+      - "File-scoped rule documented; changed sidecar must pass as whole file"
+      - "Phase 4 unit tests prove gate_mode strict ok before checklist enablement"
+    evidence_references:
+      - "docs/pseudocode-static-analysis-docs-and-gate-plan.md"
+      - "mcp-server/src/analysis/pseudocode-analyzer.test.ts"
+    falsification_questions:
+      - "Can a changed sidecar pass Layer C by block-level pre-psa-grammar N/A inside the submitted file?"
+      - "Does gate_mode fail ok when only error-severity diagnostics are present?"
+    gate_policy: "advisory"
+  risks:
+    - id: "legacy-sidecar-blast-radius"
+      mitigation: "Changed-IMPL scope only; pre-psa-grammar for untouched blocks"
+      severity: "medium"
+    - id: "profile-vs-gate-boundary"
+      mitigation: "Document parse-only live validator unchanged"
+      severity: "medium"
+    - id: "false-pass-before-gate-mode"
+      mitigation: "Phase 4 before Phase 3 execution order"
+      severity: "high"
+test_strategy:
+  commands:
+    - "cd mcp-server && npm test"
+    - "ruby scripts/validate_vocab_index.rb"
+    - "tied_validate_consistency"
+  tdd_order:
+    - "RED pseudocode-analyzer.test.ts gate_mode cases"
+    - "RED pseudocode-analyze-mcp.test.ts gate_mode propagation"
+    - "GREEN analyzer and MCP implementation"
+    - "RED checklist parity for sub-pseudocode-static-analysis-pass"
+    - "GREEN Phase 3 checklist YAML and agent wiring"
+    - "Regression pseudocode_validate golden tests unchanged"
+    - "Gate fixture tied_checklist_gate_validate with Layer C evidence_refs"

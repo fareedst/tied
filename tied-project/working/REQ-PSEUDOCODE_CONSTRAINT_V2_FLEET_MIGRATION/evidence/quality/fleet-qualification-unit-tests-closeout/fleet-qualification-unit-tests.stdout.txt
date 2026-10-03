@@ -1,0 +1,5 @@
+bun test v1.3.9 (cf6cdbbb)
+DEBUG: applied v2 header IMPL-TEST path=tied/implementation-decisions/IMPL-TEST-pseudocode.md
+TRACE: applyPlannedActions modified=1 skipped_none=0
+DEBUG: applied minimal procedure contract IMPL-TEST gaps=1
+TRACE: applyConstraintReady modified=1 skipped_none=0 skipped_manual=0

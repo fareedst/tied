@@ -1,0 +1,7 @@
+{
+  "tool": "tied_validate_consistency",
+  "phase": "P5_traceable_commit_close_out",
+  "run_at": "2026-09-13T17:06:00.000Z",
+  "ok": true,
+  "note": "Replay at plan-close-out seq-10; full MCP result ok=true"
+}

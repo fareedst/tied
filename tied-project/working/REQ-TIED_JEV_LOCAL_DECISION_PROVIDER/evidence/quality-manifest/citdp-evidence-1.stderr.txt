@@ -1,0 +1,229 @@
+
+src/jev/harness-tool-guard.test.ts:
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-W5-PRESERVED: allows when harness disabled [0.25ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FAST-DENY: blocks destructive pattern before Jev
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FAST-DENY: safe near miss with rm in path does not hard-block [0.12ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FALLBACK: fail-closed blocks Shell when Jev key missing [0.02ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=16.54 ok
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-HARNESS-LOCAL: allows Shell when local backend ready without API key [17.59ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=17.12 skipped=local_bridge_failed
+137 |       { tool: "bash", arguments: "npm test" },
+138 |       harnessOn,
+139 |       { apiKey: "k", fetchImpl },
+140 |     );
+141 |     assert.equal(out.decision, "block");
+142 |     assert.equal(out.reason, "jev_error_fail_closed");
+                 ^
+AssertionError: Expected values to be strictly equal:
++ actual - expected
+
++ 'jev_skip_fail_closed'
+- 'jev_error_fail_closed'
+       ^
+
+ generatedMessage: true,
+     actual: "jev_skip_fail_closed",
+   expected: "jev_error_fail_closed",
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/harness-tool-guard.test.ts:142:12
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FALLBACK: non-2xx Jev response fail-closed [18.03ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=0.01 skipped=state_too_large
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-FALLBACK: state-too-large skip fail-closed [0.25ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > allows non-blocking tools without key [0.03ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-QUESTIONS: uses Blueprint D answer keys [0.03ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=17.19 skipped=local_bridge_failed
+179 |       { tool: "bash", arguments: "curl https://example.com" },
+180 |       harnessOn,
+181 |       { apiKey: "k", fetchImpl: mockJevResponse(0.95, 0.2) },
+182 |     );
+183 |     assert.equal(out.decision, "block");
+184 |     assert.equal(out.risk, 0.95);
+                 ^
+AssertionError: Expected values to be strictly equal:
+
+null !== 0.95
+
+ generatedMessage: true,
+     actual: null,
+   expected: 0.95,
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/harness-tool-guard.test.ts:184:12
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-THRESHOLDS: combined max blocks at 0.72 [17.50ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=18.29 skipped=local_bridge_failed
+189 |     const out = await evaluateHarnessToolCall(
+190 |       { tool: "Shell", arguments: "git status" },
+191 |       harnessOn,
+192 |       { apiKey: "k", fetchImpl: mockJevResponse(0.2, 0.55) },
+193 |     );
+194 |     assert.equal(out.decision, "confirm");
+                 ^
+AssertionError: Expected values to be strictly equal:
+
+'block' !== 'confirm'
+
+ generatedMessage: true,
+     actual: "block",
+   expected: "confirm",
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/harness-tool-guard.test.ts:194:12
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-THRESHOLDS: confirm band uses combined max [18.61ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=16.86 skipped=local_bridge_failed
+200 |     const out = await evaluateHarnessToolCall(
+201 |       { tool: "bash", arguments: "bun test" },
+202 |       harnessOn,
+203 |       { apiKey: "k", fetchImpl: mockJevResponse(0.1, 0.2) },
+204 |     );
+205 |     assert.equal(out.decision, "allow");
+                 ^
+AssertionError: Expected values to be strictly equal:
+
+'block' !== 'allow'
+
+ generatedMessage: true,
+     actual: "block",
+   expected: "allow",
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/harness-tool-guard.test.ts:205:12
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-THRESHOLDS: allow below 0.45 combined [17.23ms]
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=17.8 skipped=local_bridge_failed
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > boundary: combined exactly 0.72 blocks [18.04ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-SCOPE: out of workspace absolute path [0.17ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-SCOPE: not_evaluated without workspace
+DEBUG: jev-decide-trace call_site=evaluateHarnessToolCall latency_ms=17.35 skipped=local_bridge_failed
+242 |       harnessOn,
+243 |       { apiKey: "k", fetchImpl },
+244 |     );
+245 |     assert.doesNotMatch(capturedBody, /jv_live_secret123/);
+246 |     assert.doesNotMatch(capturedBody, /\/Users\/me\/secret-project/);
+247 |     assert.match(capturedBody, /DECLARED_WORKSPACE/);
+                 ^
+AssertionError: The input did not match the regular expression /DECLARED_WORKSPACE/. Input:
+
+''
+
+ generatedMessage: true,
+     actual: "",
+   expected: /DECLARED_WORKSPACE/,
+   operator: "match",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/harness-tool-guard.test.ts:247:12
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > SC-D-TRACE-PRIVACY: redacts secrets from vendor path via redactState in evaluate [18.15ms]
+(pass) REQ-TIED_JEV_TOOL_SAFETY_GATING harness guard > resolveHarnessFromEnv reads AGENTSTREAM_JEV_HARNESS [0.09ms]
+
+src/jev/local-client.test.ts:
+(pass) REQ-TIED_JEV_LOCAL_DECISION_PROVIDER local-client > validateJevAnswers rejects out-of-range noul [0.04ms]
+(pass) REQ-TIED_JEV_LOCAL_DECISION_PROVIDER local-client > normalizeLocalBridgeResponse maps success [0.01ms]
+(pass) REQ-TIED_JEV_LOCAL_DECISION_PROVIDER local-client > invokeLocalDecisionBridge uses injected runner [0.06ms]
+(pass) REQ-TIED_JEV_LOCAL_DECISION_PROVIDER local-client > invokeLocalDecisionBridge maps timeout to local_timeout [0.09ms]
+
+src/jev/jev.test.ts:
+DEBUG: jev-decide-trace call_site=jevDecide latency_ms=17.49 skipped=local_bridge_failed
+11 |     const result = await jevDecide("hello", {
+12 |       urgent: { type: "noul", instructions: "Is this urgent?" },
+13 |     }, { apiKey: undefined });
+14 |     assert.equal(result.ok, false);
+15 |     if (!result.ok && result.skipped) {
+16 |       assert.equal(result.reason, "no_credentials");
+                  ^
+AssertionError: Expected values to be strictly equal:
++ actual - expected
+
++ 'local_bridge_failed'
+- 'no_credentials'
+
+ generatedMessage: true,
+     actual: "local_bridge_failed",
+   expected: "no_credentials",
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/jev.test.ts:16:14
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide skips when no credentials [17.78ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > redactString masks jv_live keys [0.06ms]
+DEBUG: jev-decide-trace call_site=jevDecide latency_ms=16.9 skipped=local_bridge_failed
+45 |         apiBase: "https://example.test/api",
+46 |         fetchImpl,
+47 |       },
+48 |     );
+49 | 
+50 |     assert.equal(result.ok, true);
+                ^
+AssertionError: Expected values to be strictly equal:
+
+false !== true
+
+ generatedMessage: true,
+     actual: false,
+   expected: true,
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/jev.test.ts:50:12
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide posts to /v1/decide with bearer auth [17.24ms]
+DEBUG: jev-decide-trace call_site=jevDecide latency_ms=17.36 skipped=local_bridge_failed
+78 |     const result = await jevDecide(
+79 |       "x",
+80 |       { ok: { type: "noul", instructions: "?" } },
+81 |       { apiKey: "k", fetchImpl },
+82 |     );
+83 |     assert.equal(n, 2);
+                ^
+AssertionError: Expected values to be strictly equal:
+
+0 !== 2
+
+ generatedMessage: true,
+     actual: 0,
+   expected: 2,
+   operator: "strictEqual",
+       code: "ERR_ASSERTION"
+
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/jev.test.ts:83:12
+      at processTicksAndRejections (native:7:39)
+(fail) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide retries once on 502 [17.60ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > SC-LOCAL-NO-EGRESS: local provider never calls fetch [15.31ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > resolveJevConfig reads env defaults [0.07ms]
+
+src/jev/decision-provider.test.ts:
+
+# Unhandled error between tests
+-------------------------------
+ 9 |   assessDecisionBackendReady,
+10 |   assessLocalBackendReady,
+11 |   resolveLocalProviderConfig,
+12 | } from "./decision-provider.js";
+13 | 
+14 | describe("REQ-TIED_JEV_LOCAL_DECISION_PROVIDER decision-provider", () => {
+     ^
+NotImplementedError: describe() inside another test() is not yet implemented in Bun. Track the status & thumbs up the issue: https://github.com/oven-sh/bun/issues/5090. Use `bun:test` in the interim.
+ code: "ERR_NOT_IMPLEMENTED"
+
+      at #checkNotInsideTest (node:test:113:26)
+      at checkNotInsideTest (node:test:118:32)
+      at createDescribe (node:test:223:21)
+      at describe (node:test:127:36)
+      at /Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/jev/decision-provider.test.ts:14:1
+      at loadAndEvaluateModule (2:1)
+-------------------------------
+
+
+ 19 pass
+ 9 fail
+ 1 error
+Ran 28 tests across 4 files. [216.00ms]

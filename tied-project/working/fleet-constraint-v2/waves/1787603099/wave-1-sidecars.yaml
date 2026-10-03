@@ -1,0 +1,12 @@
+client_id: "1787603099"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 3 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-LISTENING_PORT_CLI_MAIN"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_CLI_MAIN-pseudocode.md"
+  - impl_token: "IMPL-LISTENING_PORT_COLLECT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_COLLECT-pseudocode.md"
+  - impl_token: "IMPL-LISTENING_PORT_JSON"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787603099/tied/implementation-decisions/IMPL-LISTENING_PORT_JSON-pseudocode.md"
+wave_id: "W-ext-1787603099-1"

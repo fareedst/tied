@@ -1,0 +1,22 @@
+Applied tool-use profile to /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-tool-bootstrap-N43rHS/.tied-yaml.yaml.
+Applied tool-use profile to /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-tool-bootstrap-0WDUYe/.tied-yaml.yaml.
+Copied 3 BBCE analysis starter file(s) into tied/analysis/.
+▶ parseBootstrapToolFlags [REQ-TIED_SETUP] [IMPL-TIED_FILES]
+  ✔ maps --full-tools and granular flags (0.688542ms)
+  ✔ CLI overrides env mirrors (0.080375ms)
+  ✔ parses --tools list case-insensitively (0.531333ms)
+✔ parseBootstrapToolFlags [REQ-TIED_SETUP] [IMPL-TIED_FILES] (1.771458ms)
+▶ applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES]
+  ✔ merges jev and dae on fresh .tied-yaml.yaml (3.151167ms)
+  ✔ skips YAML merge when file pre-existed without force (0.998916ms)
+  ✔ force merge preserves unrelated keys (0.745291ms)
+  ✔ copies BBCE starter files additively (2.316583ms)
+✔ applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES] (7.329042ms)
+ℹ tests 7
+ℹ suites 2
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.843583

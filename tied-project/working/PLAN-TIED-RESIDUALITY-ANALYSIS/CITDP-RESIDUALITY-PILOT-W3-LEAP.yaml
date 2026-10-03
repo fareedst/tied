@@ -1,0 +1,156 @@
+CITDP-RESIDUALITY-PILOT-W3-LEAP:
+  change_definition:
+    current_behavior: "Pilot REQs REQ-FEAT_TASK_EXECUTION_RECOVERY and REQ-FEAT_IDEMPOTENT_CREATION carry Planned status with satisfaction criteria that partially cover\nresiduality discovery gaps (gap-list: 6 gap, 11 partial, 2 ambiguous). W2 classification ledger marks 14 rows as W3 LEAP candidates\n(8 candidate_requirement + 6 architecture_constraint). No behavior-changing stack elevation has been applied; discovery artifacts remain non-authoritative.\n"
+    desired_behavior: "After sponsor approval of a phased row set, apply [PROC-LEAP] to elevate confirmed ledger rows into pilot REQ satisfaction criteria, ARCH constraints,\nand IMPL contract deltas. Stressor/residue IDs remain facet references in traceability metadata only. Harmful residues (e.g. S-T12 duplicate evidence)\nelevate as ARCH/IMPL constraints — never as positive REQ criteria. Project YAML mutation occurs only in build-plan W3 after pseudo-code validation.\n"
+    non_goals:
+      - "Auto-promoting all 14 ledger rows without sponsor trim (default phased P0/P1 proposal only)"
+      - "Elevating S-O03 support UX to positive REQ (accepted_residual_risk — operational only)"
+      - "Mutating tied/methodology/ or opening residuality tooling REQ tokens in this refine batch"
+      - "Persisting proposed diffs to tied/requirements|architecture-decisions|implementation-decisions during refine-plan W3"
+      - "RED tests or production code in refine-plan W3"
+      - "Treating S-T03 execution-path store mapping as resolved without W4 fault split or sponsor decision"
+    sponsor_decisions:
+      SD-W3-ROW-SET: "Accept P0/P1 split — P0 seven rows persisted 2026-09-27"
+      SD-W3-S-T03: "W4 first — no W3 stack elevation"
+      SD-W3-S-T10: "Defer P1 — lock-loss fencing not in batch 1"
+      SD-W3-TRIM: "7 in batch 1 (P0 only)"
+    success_criteria:
+      - "build-plan W3 blocked until SD-W3-ROW-SET and SD-W3-TRIM confirmed"
+      - "integrated pre_implementation gate allowed for W3 refine batch with identity-bound inquiry run_id refine-plan-w3-pre-impl-2026-09-27"
+      - "Per P0 row proposed REQ/ARCH/IMPL deltas under w3-leap/proposed-stack-deltas/ (working only)"
+      - "Separate behavior-changing CITDP record exists (this file) distinct from CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS plan-doc record"
+      - "w3-leap/scope-and-phasing.md lists in/out/deferred rows with sponsor placeholders"
+    unchanged_behavior:
+      - "Feature plan PLAN-TIED-RESIDUALITY-ANALYSIS governance — residuality discovers; TIED owns and proves"
+      - "Finding-only rows (10) and S-O03 accepted_residual_risk — no W3 elevation"
+      - "W1–W2 discovery artifacts and classification ledger dispositions (except sponsor overrides)"
+  completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      run_id: "build-plan-w2-classification-verification-2026-09-27"
+    close_out_gate: "deferred W4+ close_out"
+    lint_yaml: "required on changed project YAML at build-plan W3 only"
+    pre_implementation_gate: "W3 refine batch — gate-tracker-pre-implementation-w3.yaml + this CITDP adversarial section"
+    pseudocode_validation: "required before RED tests in build-plan W3"
+    tied_validate_consistency: "required after build-plan W3 stack persist"
+    w3_refine_exit:
+      - "evidence/w3-refine-outcomes.md"
+      - "linked plan w3-refine-* todos complete; w3-build-plan-leap pending"
+      - "proposed-stack-deltas for default P0 rows"
+      - "scope-and-phasing.md with P0/P1 defaults and sponsor placeholders"
+  impact_analysis:
+    architecture:
+      - "ARCH-FEAT_IDEMPOTENT_CREATION (proposed constraint deltas)"
+      - "ARCH-FEAT_TASK_EXECUTION_STATE (proposed constraint deltas)"
+    behavior_change: true
+    documentation:
+      - "docs/tied-residuality-analysis-plan.md §4 W3 (reference only in refine)"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w3-leap/"
+    implementation_decisions:
+      - "IMPL-FEAT_IDEMPOTENT_CREATE (proposed contract deltas at build-plan)"
+      - "IMPL-FEAT_TASK_EXECUTION_STATE (proposed contract deltas at build-plan)"
+    pilot_scope_tokens:
+      - "REQ-FEAT_IDEMPOTENT_CREATION"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+    processes:
+      - "PROC-CITDP"
+      - "PROC-LEAP"
+      - "PROC-PSEUDOCODE_VALIDATION"
+      - "PROC-TIED_DEV_CYCLE"
+    requirements:
+      - "REQ-FEAT_IDEMPOTENT_CREATION (proposed satisfaction criteria at build-plan)"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY (proposed satisfaction criteria at build-plan)"
+    residuality_facet_refs:
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/gap-list.md"
+  leap_feedback:
+    divergences_from_analysis: "none — refine-plan proposes working scaffolds only"
+    record_status: "w3_build_persisted"
+    tied_stack_updates_required: "applied P0+P1 batches 2026-09-27"
+  record_identity:
+    author: "AI Agent (build-plan W3)"
+    change_request_id: "PLAN-TIED-RESIDUALITY-ANALYSIS"
+    citdp_id: "CITDP-RESIDUALITY-PILOT-W3-LEAP"
+    date: "2026-09-27"
+    parent_plan_citdp: "CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS"
+    plan_reference: "docs/tied-residuality-analysis-plan.md §4 W3"
+    record_status: "open"
+    title: "Residuality pilot W3 — stack elevation via LEAP (behavior-changing batch)"
+    wave_scope: "W3"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "stateful-reliability"
+      counterexamples:
+        - "All 14 rows elevated in one batch without trim — scope explosion vs pilot DoD"
+        - "Harmful residue S-T12 promoted as positive REQ satisfaction criterion"
+        - "Proposed working diff mistaken for canonical stack without build-plan persist gate"
+        - "Worksheet or ledger row applied directly to project YAML without LEAP and sponsor phased approval"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS remains plan-doc; this record is separate behavior-changing identity"
+        - "Refine-plan writes only under working/PLAN-TIED-RESIDUALITY-ANALYSIS/w3-leap/"
+        - "S-T12 proposed delta typed architecture_constraint only"
+        - "scope-and-phasing.md separates P0 core gaps from P1 A5/ops deferrals"
+      eligibility_triggers_matched:
+        - "behavior-changing LEAP on existing pilot REQs"
+        - "data-integrity-migration"
+        - "persistence / stateful-reliability"
+      evidence_references:
+        - "tied/vocab/fidelity-research.md"
+        - "tied/vocab/residuality.md"
+        - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w2-exit-w3-handoff.md"
+        - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+        - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/gap-list.md"
+      falsification_questions:
+        - "Are stressor IDs duplicated as full parallel specifications?"
+        - "Can a harmful residue become a positive REQ without explicit ARCH constraint framing?"
+        - "Does refine-plan W3 mutate canonical project detail YAML?"
+      gate_policy: "advisory"
+      inquiry_request_token: "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      inquiry_run_id: "refine-plan-w3-pre-impl-2026-09-27"
+      prior_depth_tier: "integrated"
+      prior_inquiry_run_id: "refine-plan-w2-pre-impl-2026-09-26"
+      profile_depth: "integrated"
+      rationale: "W3 LEAP batch changes pilot REQ/ARCH/IMPL intent — integrated depth mandatory. Advisory policy; structural UNRESOLVED findings are review-gated until build-plan."
+      research_profile: "integrated-agent"
+      verification_inquiry_run_id: "build-plan-w2-classification-verification-2026-09-27"
+    residuality_analysis:
+      classification_ledger_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+      default_phasing:
+        p0_row_count: 7
+        p1_defer_row_count: 7
+        scope_doc: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w3-leap/scope-and-phasing.md"
+      note: "Facet metadata pattern — each promoted criterion cites stressor_id + ledger disposition; not a second spec authority."
+      status: "w3_build_p0_p1_persisted"
+      w2_handoff: "evidence/w2-exit-w3-handoff.md"
+    risks:
+      - description: "Harmful→positive REQ conflation on constraint rows"
+        id: "RISK-RES-W3-003"
+        likelihood: "Low"
+        mitigation: "Explicit architecture_constraint typing; S-T12 never candidate_requirement"
+      - description: "S-T10 ambiguous — wrong layer (ARCH vs IMPL test) elevated"
+        id: "RISK-RES-W3-002"
+        likelihood: "Medium"
+        mitigation: "SD-W3-S-T10 placeholder; default P1 defer"
+      - description: "Sponsor approves full 14-row batch — LEAP scope exceeds pilot module boundaries"
+        id: "RISK-RES-W3-001"
+        likelihood: "Medium"
+        mitigation: "Default P0=7; P1 defer ops/scale cluster; SD-W3-TRIM placeholder"
+  test_strategy:
+    summary: "Refine-plan W3 has no executable tests. Build-plan W3 must validate pseudo-code, then W4 defines RED/composition faults per elevated criteria."
+    w3_build_deferred:
+      - "pseudocode_validate on changed IMPL blocks"
+      - "unit-test-red mapped to residuality facet stressor_id metadata"
+      - "W4 CONTROLLED_COMPOSITION_FAULT for S-T03 if deferred from W3"
+    w3_refine_verification:
+      - "evidence/w3-refine-outcomes.md"
+      - "pre_implementation gate with gate-tracker-pre-implementation-w3.yaml"
+      - "w3-leap/proposed-stack-deltas/"
+      - "w3-leap/scope-and-phasing.md"
+    w4_handoff:
+      citdp: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-RESIDUALITY-PILOT-W4-TESTS.yaml"
+      refine_outcomes: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/w4-refine-outcomes.md"
+      status: "w4_refine_scaffolded_2026-09-27"
+      test_strategy: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/w4-test-strategy.md"
+      validation_stressors: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/validation-stressors.md"

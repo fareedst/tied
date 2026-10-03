@@ -3,6 +3,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "./working-root.js";
 
 import type { ReconcileInput, ReconcileReport } from "./adherence-reconcile.js";
 import { loadTracker, trackerRequestToken, trackerStepsFromMap, stepDisposition } from "./adherence-reconcile.js";
@@ -58,17 +59,15 @@ function hasNonPendingDisposition(tracker: Record<string, unknown>, slug: string
 
 function manifestPresent(workspace: string, requestToken: string): boolean {
   if (!workspace.trim() || !requestToken.trim()) return false;
-  const manifest = path.join(
+  const manifest = resolveWorkingPath(
     workspace,
-    "working",
     requestToken,
     "evidence",
     "verification-evidence-manifest.v1.json",
   );
   if (fs.existsSync(manifest)) return true;
-  const naReceipt = path.join(
+  const naReceipt = resolveWorkingPath(
     workspace,
-    "working",
     requestToken,
     "evidence",
     "not-applicable-receipt.v1.json",

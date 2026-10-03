@@ -5,7 +5,7 @@
 
 /** @type {readonly string[]} Paths relative to `templates/` root. */
 export const METHODOLOGY_TEMPLATE_ONLY_PATHS = Object.freeze([
-  ".tied-yaml.yaml",
+  "tied-project/config.yaml",
   "agent-req-checklist-feat-spawned-phase5.v1.yaml",
   "impl-essence-pseudocode-template.md",
   "processes.md",

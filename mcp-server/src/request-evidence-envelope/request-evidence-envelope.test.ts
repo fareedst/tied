@@ -7,7 +7,12 @@ import { describe, it } from "node:test";
 function resolveRepoRoot(): string {
   let dir = process.cwd();
   for (let i = 0; i < 6; i += 1) {
-    if (existsSync(path.join(dir, "tied", "requirements.yaml"))) return dir;
+    if (
+      existsSync(path.join(dir, "tied-project", "requirements.yaml"))
+      || existsSync(path.join(dir, "tied", "requirements.yaml"))
+    ) {
+      return dir;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
@@ -27,7 +32,7 @@ const FIXTURE_ROOT = path.join(
   REPO_ROOT,
   "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099",
 );
-const TIED_BASE_PATH = path.join(REPO_ROOT, "tied");
+const TIED_BASE_PATH = path.join(REPO_ROOT, "tied-project");
 const EXTERNAL_FIXTURE = "/Users/fareed/Documents/dev/test/1787603099";
 const REQUEST_TOKEN = "REQ-LISTENING_PORT_REPORT";
 
@@ -58,7 +63,7 @@ function seedFromSnapshots(tempRoot: string) {
       path.join(inquiry, `phase-${phase}`),
     );
   }
-  mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+  mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
 }
 
 describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
@@ -295,8 +300,8 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
       }),
       "utf8",
     );
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
-    const tiedBase = path.join(tempRoot, "tied");
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
+    const tiedBase = path.join(tempRoot, "tied-project");
     const buildArgs = {
       request_token: requestToken,
       project_root: tempRoot,
@@ -323,7 +328,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     const result = await buildRequestEvidenceEnvelope({
       request_token: REQUEST_TOKEN,
       project_root: tempRoot,
-      tied_base_path: "/tmp/wrong/tied",
+      tied_base_path: "/tmp/wrong/tied-project",
       confirmed_tied_base_path: TIED_BASE_PATH,
     });
     assert.equal(result.ok, false);
@@ -345,7 +350,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
       readFileSync(fixtureProvenance, "utf8"),
       "utf8",
     );
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
     const result = await buildRequestEvidenceEnvelope({
       request_token: req,
       project_root: tempRoot,
@@ -366,7 +371,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-profile-gap-"));
     const req = "REQ-EVIDENCE_CHAIN_PROFILE";
     mkdirSync(path.join(tempRoot, "working", req), { recursive: true });
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
     const result = await buildRequestEvidenceEnvelope({
       request_token: req,
       project_root: tempRoot,
@@ -400,7 +405,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
       }),
       "utf8",
     );
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
     const result = await buildRequestEvidenceEnvelope({
       request_token: req,
       project_root: tempRoot,
@@ -422,7 +427,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     } catch {
       return;
     }
-    const tiedBase = path.join(projectRoot, "tied");
+    const tiedBase = path.join(projectRoot, "tied-project");
     const result = await buildRequestEvidenceEnvelope({
       request_token: REQUEST_TOKEN,
       project_root: projectRoot,

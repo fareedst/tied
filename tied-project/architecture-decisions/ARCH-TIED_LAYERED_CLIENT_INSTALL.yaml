@@ -1,0 +1,17 @@
+ARCH-TIED_LAYERED_CLIENT_INSTALL:
+  ARCH-TIED_LAYERED_CLIENT_INSTALL:
+    category: "Infrastructure"
+    description: "Separates committed db layer from gitignored mcp/skills/methodology layers; stub contract preserves skill front matter and store paths. Skills layer uses skills-linked.mjs (linked stubs vs full copy); methodology-view.mjs resolves bundle paths for linked MCP/verify. Install shell shims target tied-install-dispatch.mjs as the single Node entry."
+    name: "Layered client install architecture"
+    related_decisions:
+      depends_on:
+        - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      related_to:
+        - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      supersedes: []
+    status: "Proposed"
+    traceability:
+      implementation:
+        - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+      requirements:
+        - "REQ-TIED_LAYERED_CLIENT_INSTALL"

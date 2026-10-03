@@ -1,0 +1,26 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T18:26:03.467Z",
+  "client_id": "1786643714",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1786643714",
+  "sidecar_count": 2,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 2,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "ff7272528306cad4f8721d2971fb80b7d9c926a5974c4b82d8340b65db3c0719",
+  "rows": [
+    {
+      "file": "IMPL-FIBONACCI_CLI-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    },
+    {
+      "file": "IMPL-FIBONACCI_GENERATE_SEQUENCE-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    }
+  ]
+}

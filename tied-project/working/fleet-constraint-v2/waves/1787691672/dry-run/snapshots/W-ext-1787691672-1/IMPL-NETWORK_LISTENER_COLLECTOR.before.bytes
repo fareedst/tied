@@ -1,0 +1,20 @@
+// [IMPL-NETWORK_LISTENER_COLLECTOR] [ARCH-MACOS_SERVICE_REPORT] [REQ-MACOS_SERVICE_REPORT]
+// Collect and parse TCP LISTEN sockets from lsof output.
+
+PROC COLLECT_NETWORK_LISTENERS(runner)
+  PRE: runner conforms to ProcessRunner protocol
+  POST: returns sorted [NetworkListener] OR ParseError
+  EFFECTS: invokes /usr/sbin/lsof -iTCP -sTCP:LISTEN -P -n via runner
+  DATA_TRANSITION: raw stdout -> validated rows -> NetworkListener models
+  FAILURE_MODES: subprocess failure -> SubprocessError; missing PID -> ParseError
+
+PROC PARSE_LSOF_ROW(line)
+  PRE: line is data row from lsof (not header)
+  POST: returns NetworkListener OR nil if blank
+  EFFECTS: none
+  // Parse NAME field into address + port; protocol always TCP in v1
+
+PROC SORT_NETWORK_LISTENERS(listeners)
+  PRE: listeners is array
+  POST: returns array sorted by port ascending then address ascending
+  EFFECTS: none

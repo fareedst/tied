@@ -11,7 +11,7 @@ describe("ONBOARDING_COMMANDS REQ-FEAT_ONBOARDING_COMMANDS", () => {
     const previousBasePath = process.env.TIED_BASE_PATH;
     delete process.env.TIED_BASE_PATH;
     try {
-    const tiedBase = path.join(root, "tied");
+    const tiedBase = path.join(root, "tied-project");
     const result = dispatchOnboardingCommand(["feature", "new", "Count lines"], {
       project_root: root,
       capabilities: { node: true, mcp: true, feature_orchestrator: true },
@@ -21,7 +21,10 @@ describe("ONBOARDING_COMMANDS REQ-FEAT_ONBOARDING_COMMANDS", () => {
     if (!result.ok) return;
     assert.equal(result.delegate, "FeatureStore.createIdempotently");
     assert.match(result.next_action, /feature build/);
-    assert.equal(fs.readdirSync(path.join(root, "tied", "features")).some((name) => name.startsWith("FEAT-001-")), true);
+    assert.equal(
+      fs.readdirSync(path.join(tiedBase, "features")).some((name) => name.startsWith("FEAT-001-")),
+      true,
+    );
     } finally {
       if (previousBasePath === undefined) delete process.env.TIED_BASE_PATH;
       else process.env.TIED_BASE_PATH = previousBasePath;

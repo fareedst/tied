@@ -1,0 +1,43 @@
+attractor: null
+baseline:
+  assumptions:
+    - "Client-driven retries"
+    - "Durable store once acknowledged"
+  naive_architecture_summary: "See working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md"
+  objective: "Feature orchestration task recovery + idempotent feature creation"
+business_priority: "P0 pilot"
+design_response: "Idempotent handlers + append-only evidence (verify against REQ criteria)"
+disposition:
+  status: "unresolved"
+  tied_refs:
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+    - "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+evidence:
+  limitation: "Not runtime proof until W4"
+  method: "W1 worksheet + gap-list citation"
+  proof_boundary: "Discovery aid only"
+  references:
+    - "tied/requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml"
+    - "tied/requirements/REQ-FEAT_TASK_EXECUTION_RECOVERY.yaml"
+impact_path:
+  bindings:
+    - "queue/worker handoff"
+  data:
+    - "request-key record"
+    - "task evidence history"
+  dependencies:
+    - "ARCH-FEAT_STORE_PERSISTENCE"
+  functions:
+    - "execution state store"
+    - "idempotency index"
+    - "queue consumer"
+  people: []
+residue:
+  class: "desirable"
+  description: "Second attempt observable without corrupting identity"
+schema_version: "stressor-residue.v1"
+stressor:
+  category: "technical"
+  description: "Duplicate delivery of the same task_id or idempotency key"
+  id: "S-T01"
+validation_stressor: null

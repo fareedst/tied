@@ -68,7 +68,7 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
 
     assert.equal(
       paths.directory,
-      path.join(root, "working", TOKENS.req, "adversarial-inquiry"),
+      path.join(root, "tied-bundle", "working", TOKENS.req, "adversarial-inquiry"),
     );
     const phasePaths = resolveArtifactPaths({
       repositoryRoot: root,
@@ -77,7 +77,7 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
     });
     assert.equal(
       phasePaths.directory,
-      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-verification"),
+      path.join(root, "tied-bundle", "working", TOKENS.req, "adversarial-inquiry", "phase-verification"),
     );
     assert.throws(
       () => resolveArtifactPaths({
@@ -276,15 +276,15 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
     assert.notEqual(verification.directory, closeOut.directory);
     assert.equal(
       preImpl.directory,
-      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-pre_implementation"),
+      path.join(root, "tied-bundle", "working", TOKENS.req, "adversarial-inquiry", "phase-pre_implementation"),
     );
     assert.equal(
       verification.directory,
-      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-verification"),
+      path.join(root, "tied-bundle", "working", TOKENS.req, "adversarial-inquiry", "phase-verification"),
     );
     assert.equal(
       closeOut.directory,
-      path.join(root, "working", TOKENS.req, "adversarial-inquiry", "phase-close_out"),
+      path.join(root, "tied-bundle", "working", TOKENS.req, "adversarial-inquiry", "phase-close_out"),
     );
 
     const preGate = fs.readFileSync(preImpl.gateResult, "utf8");
@@ -294,7 +294,7 @@ describe("CHECKLIST_INQUIRY_INTEGRATION [REQ-TIED_ADVERSARIAL_INQUIRY]", () => {
     assert.match(verificationGate, /PASS/);
     assert.equal(fs.readFileSync(preImpl.gateResult, "utf8"), preGate);
 
-    const rootGate = path.join(root, "working", TOKENS.req, "adversarial-inquiry", "gate-result.json");
+    const rootGate = path.join(root, "tied-bundle", "working", TOKENS.req, "adversarial-inquiry", "gate-result.json");
     assert.equal(fs.existsSync(rootGate), false, "phase-scoped persistence must not write root projections [REQ-TIED_ADVERSARIAL_INQUIRY]");
   });
 });

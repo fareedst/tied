@@ -31,19 +31,19 @@ scripts/update_client.sh
 tied/features/
 
 # Local System One decide trace JSONL (operator-only; JEV_DECIDE_TRACE)
-working/jev-decide-trace/
+tied-bundle/working/jev-decide-trace/
 
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
 # Optional live Jev benchmark appendix (mocked CI uses context-pruning-benchmark.v1.json)
-working/**/context-pruning-benchmark-live.v1.json
+tied-bundle/working/**/context-pruning-benchmark-live.v1.json
 # MCP server cwd gate scratch (mirrors working/**/gates receipts; regenerate per local MCP run)
 mcp-server/working/
 # Disposable client demo folders (e.g. REDDIT-CLIENT-<timestamp>)
-working/*-CLIENT-*/
+tied-bundle/working/*-CLIENT-*/
 # Debug close-out probes (tracker-only; not canonical program evidence)
 working/REQ-ENVELOPE_TRACKER_HASH_STABILITY/
-working/**/adversarial-inquiry/
+tied-bundle/working/**/adversarial-inquiry/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/**
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/
@@ -61,12 +61,12 @@ working/**/adversarial-inquiry/
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/**
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/**
-working/**/gate-*.json
+tied-bundle/working/**/gate-*.json
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/gate-result.json
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/gate-result.json
 !working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/gate-result.json
 # Gate receipts and activation collect outputs (regenerate per close-out run)
-working/**/gates/
+tied-bundle/working/**/gates/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/
 !working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/**
 !working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/
@@ -84,25 +84,25 @@ working/**/gates/
 # PSA timestamped gate receipts (regenerate per run-close-out-gates.mjs; keep adversarial gate-result.json via patterns above)
 working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-*-result.json
 # Adherence reconcile output (regenerate per tied_adherence_reconcile_run)
-working/**/adherence-ledger.jsonl
-working/**/adherence/events.jsonl
+tied-bundle/working/**/adherence-ledger.jsonl
+tied-bundle/working/**/adherence/events.jsonl
 # Close-out operator scratch (regenerate per plan-close-out / tied_verify run)
-working/**/gate-ledger.jsonl
-working/**/citdp-doc-*.json
-working/**/citdp-write-payload.json
-working/**/citdp-record-body.json
-working/**/citdp-p*-*.json
+tied-bundle/working/**/gate-ledger.jsonl
+tied-bundle/working/**/citdp-doc-*.json
+tied-bundle/working/**/citdp-write-payload.json
+tied-bundle/working/**/citdp-record-body.json
+tied-bundle/working/**/citdp-p*-*.json
 working/**/tied-create-*.json
 working/**/token-create-*.json
 # MCP tied_token_create_with_detail scratch (exclude per program close-out; DAE program tracks create-*.json intentionally)
-working/**/create-arch.json
-working/**/create-impl.json
-working/**/create-req.json
+tied-bundle/working/**/create-arch.json
+tied-bundle/working/**/create-impl.json
+tied-bundle/working/**/create-req.json
 !working/REQ-TIED_DAE_INCORPORATION/create-arch.json
 !working/REQ-TIED_DAE_INCORPORATION/create-impl.json
 !working/REQ-TIED_DAE_INCORPORATION/create-req.json
-working/**/validate-consistency.json
-working/**/tied-validate-consistency*.json
+tied-bundle/working/**/validate-consistency.json
+tied-bundle/working/**/tied-validate-consistency*.json
 working/**/p*-yaml-updates.json
 working/**/adversarial-inquiry-p*-run.json
 working/**/evidence/quality/**/*.stdout.txt
@@ -111,9 +111,9 @@ working/**/evidence/psa-*.json
 working/**/evidence/pseudocode-validate-*.json
 working/**/doc-*-checklist.yaml
 # Timestamped gate receipts (regenerate via run-*-gates.mjs)
-working/**/pre_implementation-*.json
-working/**/verification-*.json
-working/**/close_out-*.json
+tied-bundle/working/**/pre_implementation-*.json
+tied-bundle/working/**/verification-*.json
+tied-bundle/working/**/close_out-*.json
 !working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-*.json
 !working/REQ-TIED_CLAUDE_HARNESS/gates/pre_implementation-*.json
 !working/REQ-TIED_CLAUDE_HARNESS/gates/verification-*.json
@@ -136,18 +136,18 @@ working/DOC-*/
 # refine-plan session scratch (linked plan lives in ~/.cursor/plans/; not canonical TIED intent)
 working/REFINE-*/
 # MCP gate-args payloads for one-off gate validate runs (regenerate per gate invocation)
-working/**/gate-args*.json
+tied-bundle/working/**/gate-args*.json
 # Layer C pseudo-code static analysis gate reports (regenerate per gate run)
-working/**/pseudocode-analysis/
+tied-bundle/working/**/pseudocode-analysis/
 # Integrated activation collect receipts (regenerate per phase gate; distinct from gate-*.json)
-working/**/activation-*.json
+tied-bundle/working/**/activation-*.json
 # Scoped remediation logs from static-analysis / grammar close-out (regenerate per build)
 working/**/*-remediation-log.yaml
 # tied_verify dry-run and apply receipts (regenerate per verification gate)
-working/**/tied-verify-*.json
+tied-bundle/working/**/tied-verify-*.json
 working/**/g*-dogfood/
-working/client-*/
-working/**/tied-mcp-metrics*.jsonl
+tied-bundle/working/client-*/
+tied-bundle/working/**/tied-mcp-metrics*.jsonl
 working/**/evidence-manifest.json
 # Per-REQ close-out evidence (regenerate via run-close-out-gates.mjs / quality_evidence_collect; local only)
 working/**/evidence/close-out-gates-*.json
@@ -255,7 +255,7 @@ working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml
 # Quality profile gate receipts (regenerate per quality_security_profile_validate)
-working/**/gates/quality-*-profile-result.json
+tied-bundle/working/**/gates/quality-*-profile-result.json
 
 # Evidence-chain command outputs and operator-run profiles (regenerate per tied/docs/evidence-chain-profile.md)
 working/evidence-chain/artifacts/
@@ -405,6 +405,120 @@ working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/finding-ledger.js
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml
 
 # Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out; includes run-phase3-gates.mjs)
+tied-bundle/working/**/run-*-gates.mjs
+tied-bundle/working/**/run-*-gate.mjs
+tied-bundle/working/**/run-phase*-tied-verify.mjs
+# BEGIN TIED LOCAL WORKING (managed)
+tied-bundle/working/**/gates/
+tied-bundle/working/**/adversarial-inquiry/
+tied-bundle/working/**/adherence/
+tied-bundle/working/**/jev/
+tied-bundle/working/**/*-ledger.jsonl
+tied-bundle/working/jev-decide-trace/
+tied-bundle/working/**/context-pruning-benchmark-live.v1.json
+tied-bundle/working/*-CLIENT-*/
+tied-bundle/working/**/gate-*.json
+tied-bundle/working/**/gate-args*.json
+tied-bundle/working/**/activation-*.json
+tied-bundle/working/**/pseudocode-analysis/
+tied-bundle/working/**/*-remediation-log.yaml
+tied-bundle/working/**/tied-verify-*.json
+tied-bundle/working/**/g*-dogfood/
+tied-bundle/working/client-*/
+tied-bundle/working/**/tied-mcp-metrics*.jsonl
+tied-bundle/working/**/adherence-ledger.jsonl
+tied-bundle/working/**/citdp-doc-*.json
+tied-bundle/working/**/citdp-write-payload.json
+tied-bundle/working/**/citdp-record-body.json
+tied-bundle/working/**/citdp-p*-*.json
+tied-bundle/working/**/tied-create-*.json
+tied-bundle/working/**/token-create-*.json
+tied-bundle/working/**/create-arch.json
+tied-bundle/working/**/create-impl.json
+tied-bundle/working/**/create-req.json
+tied-bundle/working/**/validate-consistency.json
+tied-bundle/working/**/tied-validate-consistency*.json
+tied-bundle/working/**/p*-yaml-updates.json
+tied-bundle/working/**/adversarial-inquiry-p*-run.json
+tied-bundle/working/**/pre_implementation-*.json
+tied-bundle/working/**/verification-*.json
+tied-bundle/working/**/close_out-*.json
+tied-bundle/working/**/run-*-gates.mjs
+tied-bundle/working/**/run-*-gate.mjs
+tied-bundle/working/**/run-phase*-tied-verify.mjs
+tied-bundle/working/**/gates/quality-*-profile-result.json
+tied-bundle/working/**/track-*-close-out-evidence.json
+tied-bundle/working/**/run-*-close-out*.mjs
+tied-bundle/working/**/sync-*-close-out*.mjs
+tied-bundle/working/*-close-out-summary.json
+tied-bundle/working/**/evidence/quality/**/*.stdout.txt
+tied-bundle/working/**/evidence/quality/**/*.stderr.txt
+tied-bundle/working/**/evidence/psa-*.json
+tied-bundle/working/**/evidence/pseudocode-validate-*.json
+tied-bundle/working/**/doc-*-checklist.yaml
+tied-bundle/working/**/CITDP-REQ-*-diff-or-stage.yaml
+tied-bundle/working/post-session/
+# END TIED LOCAL WORKING (managed)
+
+# BEGIN TIED UNDIVIDED STORE MIRROR (REQ-TIED_TWO_FOLDER_LAYOUT p6 — remove after git mv)
+working/**/gates/
+working/**/adversarial-inquiry/
+working/**/adherence/
+working/**/jev/
+working/**/*-ledger.jsonl
+working/jev-decide-trace/
+working/**/context-pruning-benchmark-live.v1.json
+working/*-CLIENT-*/
+working/**/gate-*.json
+working/**/gate-args*.json
+working/**/activation-*.json
+working/**/pseudocode-analysis/
+working/**/*-remediation-log.yaml
+working/**/tied-verify-*.json
+working/**/g*-dogfood/
+working/client-*/
+working/**/tied-mcp-metrics*.jsonl
+working/**/adherence-ledger.jsonl
+working/**/citdp-doc-*.json
+working/**/citdp-write-payload.json
+working/**/citdp-record-body.json
+working/**/citdp-p*-*.json
+working/**/tied-create-*.json
+working/**/token-create-*.json
+working/**/create-arch.json
+working/**/create-impl.json
+working/**/create-req.json
+working/**/validate-consistency.json
+working/**/tied-validate-consistency*.json
+working/**/p*-yaml-updates.json
+working/**/adversarial-inquiry-p*-run.json
+working/**/pre_implementation-*.json
+working/**/verification-*.json
+working/**/close_out-*.json
 working/**/run-*-gates.mjs
 working/**/run-*-gate.mjs
 working/**/run-phase*-tied-verify.mjs
+working/**/gates/quality-*-profile-result.json
+working/**/track-*-close-out-evidence.json
+working/**/run-*-close-out*.mjs
+working/**/sync-*-close-out*.mjs
+working/*-close-out-summary.json
+working/**/evidence/quality/**/*.stdout.txt
+working/**/evidence/quality/**/*.stderr.txt
+working/**/evidence/psa-*.json
+working/**/evidence/pseudocode-validate-*.json
+working/**/doc-*-checklist.yaml
+working/**/CITDP-REQ-*-diff-or-stage.yaml
+working/post-session/
+# END TIED UNDIVIDED STORE MIRROR
+# BEGIN TIED INSTALL MANAGED
+.cursor/mcp.json
+.mcp.json
+.cursor/skills/
+.claude/skills/
+tied-bundle/
+CLAUDE.md
+.cursor/hooks.json
+.claude/hooks/
+.claude/settings.json
+# END TIED INSTALL MANAGED

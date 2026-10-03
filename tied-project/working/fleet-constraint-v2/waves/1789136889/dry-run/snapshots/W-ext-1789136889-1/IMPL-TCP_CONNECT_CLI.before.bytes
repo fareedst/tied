@@ -1,0 +1,28 @@
+# [IMPL-TCP_CONNECT_CLI] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]
+
+CLI entry: parse flags, validate targets, run probes, print report, exit.
+
+## MAIN
+
+<!-- [IMPL-TCP_CONNECT_CLI] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]: wires parse, probe, report, and exit code -->
+
+Contract:
+  INPUT: command-line arguments
+  OUTPUT: exit 0 or 1
+  PRE: command-line arguments present
+  POST: exit 0 when all probes OK; exit 1 on usage error or any non-OK probe
+  EFFECTS: writes report to stdout; usage/validation errors to stderr
+  FAILURE_MODES: usage error (exit 1); invalid target (exit 1); non-positive timeout (exit 1); any non-OK probe (exit 1)
+  MESSAGE_CONTRACT: N/A — no message/event delivery
+  RETRY: N/A — single probe pass per invocation
+  IDEMPOTENCY: N/A — operator may re-run; no deduplication obligation
+  TERMINATION: total
+
+procedure MAIN(): # [IMPL-TCP_CONNECT_CLI] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]
+1. PARSE -timeout flag (default 3s)
+2. IF no positional targets THEN print usage to stderr and exit 1
+3. FOR each positional arg validate host:port format
+4. IF timeout <= 0 THEN print error to stderr and exit 1
+5. results := RUN_ALL(root context without cancel, targets, timeout, defaultDialFn)
+6. print FORMAT_LINES(results) to stdout
+7. IF any result status != OK THEN exit 1 ELSE exit 0

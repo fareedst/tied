@@ -1,0 +1,89 @@
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/constraint-ready-classify.test.ts:
+(pass) procedureBodyHasLayerBContract requires Contract with PRE POST EFFECTS [0.55ms]
+(pass) classifySidecarText constraint-ready via procedure Contract rows [0.20ms]
+(pass) classifySidecarText header-only when v2 without contract floor [0.12ms]
+(pass) classifySidecarText constraint-ready with Tier-3 refinement [0.03ms]
+(pass) sidecarHasLegacyCommentContractFloor needs three hash markers or Contract section
+(pass) live IMPL-TIED_FILES sidecar is constraint-ready-v2 under new classifier [0.50ms]
+(pass) live IMPL-MCP_LEAP sidecar meets constraint-ready procedure Contract floor [0.13ms]
+(pass) live IMPL-MCP_FEEDBACK sidecar meets constraint-ready procedure Contract floor [0.20ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-migration-apply.test.ts:
+(pass) planActionForSidecar maps legacy-v1 to insert_grammar_v2_header [0.24ms]
+(pass) planActionForSidecar skips header-only-v2 [0.03ms]
+(pass) insertGrammarV2Header inserts before procedure block [0.06ms]
+(pass) computeDryRunContentHash is stable for same actions [0.09ms]
+(pass) applyPlannedActions writes snapshot and updates legacy sidecar [1.08ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-wave-stop-go.test.ts:
+(pass) buildStopGoRecord go with empty gaps
+(pass) buildStopGoRecord stop requires blocking gaps [0.14ms]
+(pass) appendWaveStopGo appends to file [0.78ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/external-client-scan.test.ts:
+(pass) implTokenFromSidecarFilename strips suffix [0.04ms]
+(pass) splitSidecarBatches respects max_sidecars [0.02ms]
+(pass) buildInventoryDiffV1 stable hash for same rows [0.06ms]
+(pass) renderWaveSidecarListYaml uses absolute sidecar paths [0.05ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/constraint-migration-receipt.test.ts:
+(pass) DEFAULT_G3_FLEET_OPTIONS is advisory constraint gate
+(pass) fleetReceiptContext sets G3 advisory orchestrator fields [0.02ms]
+(pass) buildConstraintMigrationReceipt uses G3 from fleetReceiptContext [13.87ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/stdd-wave-plan.test.ts:
+(pass) dependencyTierForImplToken orders platform before features [0.08ms]
+(pass) filterAndOrderStddSidecars excludes wave tokens and sorts tiers [0.05ms]
+(pass) assignStddWaveNumbers chunks at max 10 per wave [0.20ms]
+(pass) buildStddWavePlan excludes wave 1 and wave 2 tokens [4.09ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-inventory-merge.test.ts:
+(pass) classifySidecarText legacy without v2 header
+(pass) classifySidecarText header-only-v2 [0.03ms]
+(pass) classifySidecarText constraint-ready with refinement
+(pass) classifySidecarText constraint-ready with Layer B procedure Contract [0.04ms]
+(pass) mergeScanIntoClientRow updates counts and aggregate [0.07ms]
+(pass) aggregateMigrationState picks highest present state [0.01ms]
+(pass) classifySidecarText constraint-enforced with INPUT where refinement [0.01ms]
+(pass) aggregateMigrationState prefers constraint-enforced over ready
+(pass) resolveAggregateMigrationState promotes enrolled all-enforced to fleet-migrated-client [0.02ms]
+(pass) resolveAggregateMigrationState keeps constraint-enforced-v2 when not enrolled
+(pass) resolveAggregateMigrationState mixed enforced+ready stays constraint-enforced-v2 when enrolled [0.01ms]
+(pass) mergeScanIntoClientRow sets fleet-migrated-client for enrolled stdd all-enforced scan [0.01ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-constraint-ready-assist.test.ts:
+(pass) listProceduresMissingLayerBContract finds procedure without Contract [0.04ms]
+(pass) planConstraintReadyActionForSidecar maps gap to insert_minimal_procedure_contract [0.03ms]
+(pass) planConstraintReadyActionForSidecar flags legacy INPUT comments without procedure [0.03ms]
+(pass) applyMinimalProcedureContracts inserts stub for first procedure only when second has Contract [0.11ms]
+(pass) applyMinimalProcedureContracts inserts stub after procedure line [0.03ms]
+(pass) applyConstraintReadyPlannedActions snapshots and writes sidecar [0.79ms]
+(pass) computeConstraintReadyDryRunHash is stable [0.04ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/pilot-wave.test.ts:
+(pass) readStddWave1 returns 10 pilot sidecars [0.10ms]
+(pass) readWaveSidecarList parses wave-1 yaml metadata [0.07ms]
+(pass) readWaveSidecarList parses W-stdd-2 sidecar list [0.10ms]
+(pass) fleetWaveEntryToManifestEntry preserves absolute external paths [0.05ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-wave-partition.test.ts:
+(pass) loadFleetWavePartition loads stdd partition [1.79ms]
+(pass) getWaveById returns W-stdd-2 with sidecar list [0.43ms]
+(pass) getWaveById returns W-stdd-stragglers-WS0 with sidecar list [0.34ms]
+(pass) getWaveById throws for unknown wave [0.33ms]
+(pass) validateWaveEntry rejects G3 wave without sidecar_list_path [0.06ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-dashboard-build.test.ts:
+(pass) buildEnrollmentSummary counts enrolled vs not [0.05ms]
+(pass) rollupSidecarsFromManifest sums sidecar states [0.04ms]
+(pass) buildWaveSummary from partition wave_status [0.02ms]
+(pass) buildFleetDashboard integrates stop/go last record id [0.07ms]
+
+working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/fleet-waiver-registry.test.ts:
+(pass) empty registry passes waiver check
+(pass) findExpiredWaivers flags past expires_at on active status [0.12ms]
+
+ 61 pass
+ 0 fail
+Ran 61 tests across 12 files. [61.00ms]

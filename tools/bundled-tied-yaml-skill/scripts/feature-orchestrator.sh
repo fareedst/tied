@@ -9,7 +9,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
-# copy_files.sh replaces this placeholder with the canonical TIED source root.
+# tied-install.sh replaces this placeholder with the canonical TIED source root.
 : "${TIED_REPO_ROOT:=/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR}"
 if [[ "${TIED_REPO_ROOT}" == "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR" ]] \
    && [[ -f "${REPO_ROOT}/mcp-server/dist/feature-orchestration/entry.js" ]]; then

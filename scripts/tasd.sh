@@ -27,13 +27,13 @@
 #
 # Workspace layout (fixed by this driver unless you edit it)
 #   test_path=/Users/fareed/Documents/dev/test/<name>   (working copy for the agent)
-#   tied_path=/Users/fareed/Documents/dev/chatgpt/stdd   (stdd repo; copy_files.sh + checklist source)
-#   copy_files.sh must be run from a checkout that includes tools/bundled-tied-yaml-skill/ so
+#   tied_path=/Users/fareed/Documents/dev/chatgpt/stdd   (stdd repo; tied-install.sh + checklist source)
+#   tied-install.sh must be run from a checkout that includes tools/bundled-tied-yaml-skill/ so
 #   .cursor/skills/tied-yaml (tied-cli.sh) is installed; override tied_path= if your TIED clone is elsewhere.
 #
 # Built-in agentstream options (why they improve the generated turns)
 #
-#   --lead-checklist-yaml "$tied_path/tied/docs/agent-req-implementation-checklist.yaml"
+#   --lead-checklist-yaml "$tied_path/tied-bundle/docs/agent-req-implementation-checklist.yaml"
 #       Pins the canonical executable checklist (REQ implementation flow). Edits to that YAML change
 #       every rendered step body—agents see session-bootstrap, translate-sponsor-intent (when FEATURE_*
 #       placeholders exist), TIED gates, unit-test-red, etc., from one
@@ -177,7 +177,7 @@ tasd () {
     echo_exec \
      git init
     echo_exec \
-     eval "$tied_path/copy_files.sh"
+     eval "$tied_path/tied-install.sh"
     echo_exec \
      git add -A
     echo_exec \
@@ -187,7 +187,7 @@ tasd () {
   echo_exec \
    "${_as_cmd[@]}" \
    -w "$test_path" \
-   --lead-checklist-yaml "$tied_path/tied/docs/agent-req-implementation-checklist.yaml" \
+   --lead-checklist-yaml "$tied_path/tied-bundle/docs/agent-req-implementation-checklist.yaml" \
    --lead-checklist-skip-sub \
    --checklist-var "CHANGE_TITLE=${feat_name}" \
    --checklist-var "FEATURE_GOAL=${feat_goal}" \

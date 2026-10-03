@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "adversarial-inquiry-obligation-report.v1",
+  "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+  "run_id": "w4-refine-pre-impl-2026-09-27",
+  "phase": "pre_implementation",
+  "policy": "advisory",
+  "projectId": "stdd",
+  "scope": [
+    "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#promotion"
+  ],
+  "obligations": [
+    {
+      "id": "bbce-no-locality-as-correctness",
+      "status": "satisfied_by_policy",
+      "evidence_refs": [
+        "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/w4-promotion-decisions.md",
+        "docs/tied-bbce-alignment-plan.md"
+      ]
+    },
+    {
+      "id": "bbce-no-ci-hard-fail-without-req",
+      "status": "satisfied_by_policy",
+      "evidence_refs": [
+        "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.yaml"
+      ]
+    },
+    {
+      "id": "bbce-advisory-verification-callable",
+      "status": "pending_build_plan",
+      "evidence_refs": [
+        "working/PLAN-TIED-BBCE-ALIGNMENT/w4-refine/proposed-bbce-advisory-pass.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Review-gated promotion spec only; not runtime verification."
+}

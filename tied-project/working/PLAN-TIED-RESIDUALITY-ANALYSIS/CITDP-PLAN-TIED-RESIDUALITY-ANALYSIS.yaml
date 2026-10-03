@@ -1,0 +1,174 @@
+CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS:
+  change_definition:
+    current_behavior: "Residuality Theory is documented only as an exploratory comparison in docs/comparisons/residuality-theory-and-tied.md. No canonical methodology feature plan, provisional glossary routing, worksheet contract, candidate schema, or CITDP residuality hook exists."
+    desired_behavior: "A rigorous linked Cursor plan and subsequent docs/tied-residuality-analysis-plan.md define Dual-Loop integration (Residuality Discovery Loop feeding TIED Intent and Evidence Loop), Waves W0–W5, proof boundaries, candidate stressor-residue.v1 schema, pilot scope on REQ-FEAT_TASK_EXECUTION_RECOVERY and REQ-FEAT_IDEMPOTENT_CREATION, and promotion gates that never compete with REQ/ARCH/IMPL authority."
+    non_goals:
+      - "Auto-promoting unreviewed residues into project TIED YAML"
+      - "Claiming antifragility or universal resilience"
+      - "Creating product REQ/ARCH/IMPL tokens for Residuality tooling in W1 refine or discovery batches"
+      - "Executing the full W1 stressor workshop during W1 refine-plan (planning and scaffold only)"
+      - "Mutating methodology YAML under tied/methodology/"
+    success_criteria:
+      - "Authority boundary is explicit: residuality discovers; TIED owns and proves"
+      - "Linked plan plan_residuality_feature_07582e06.plan.md specifies W0–W5 with deliverable paths, dual-loop handoffs, gates, profile depth, schemas, pilot DoD, and 1:1 build-plan todo ↔ feature-plan section map"
+      - "pre_implementation checklist gate allows progression at integrated depth for W1 batch (advisory policy)"
+      - "Provisional residuality vocabulary is RESOLVED and RECORDed in tied/vocab/residuality.md with routing keywords"
+      - "W1 refine-plan expands executable pilot spec (entry/exit, templates, stressor catalog, participant scope) without mutating pilot REQ/ARCH/IMPL YAML"
+  completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      run_id: "build-plan-w4-verification-2026-09-27"
+  impact_analysis:
+    architecture: []
+    documentation:
+      - "docs/comparisons/residuality-theory-and-tied.md (cross-link)"
+      - "docs/tied-residuality-analysis-plan.md (W1 §4/§7/§9/§10 updates for refine-plan 2026-09-27)"
+      - "tied/vocab/residuality.md"
+      - "tied/vocab/routing.md"
+      - "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/ (scaffold templates; workshop content deferred to build-plan W1)"
+    implementation_decisions: []
+    processes:
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-CITDP"
+      - "PROC-LEAP"
+      - "PROC-QUALITY_ASSURANCE"
+      - "PROC-VOCABULARY_INDEX"
+    requirements:
+      - "REQ-FEAT_IDEMPOTENT_CREATION (pilot target only; no mutation this batch)"
+      - "REQ-FEAT_TASK_EXECUTION_RECOVERY (pilot target only; no mutation this batch)"
+  record_identity:
+    batch_a_note: "2026-09-27 plan-doc batch closed at minimal depth (commit f90f871)."
+    build_plan_note: "2026-09-27 build-plan authored docs/tied-residuality-analysis-plan.md; verification gate allowed at minimal depth."
+    citdp_id: "CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS"
+    close_out_note: "Pilot tranche close-out 2026-09-27 (W1–W4, W3 P0/P1 LEAP, P1 composition); W5 tooling REQ deferred to follow-up build-plan."
+    created_at: "2026-09-26"
+    persistence_note: "Working-folder analysis record for refine-plan. Canonical tied/citdp/ persistence deferred until a behavior-changing batch or explicit sponsor persist; citdp-policy skip applies to pure plan-doc authoring except when tooling REQ tokens are created."
+    pilot_tranche_close_out: {}
+    status: "open"
+    title: "Refine-plan W2: Residue classification planning (PLAN-TIED-RESIDUALITY-ANALYSIS)"
+    updated_at: "2026-09-26"
+    w1_refine_note: "2026-09-27 refine-plan W1 batch: integrated depth selection, pilot artifact scaffold, linked-plan w1-* todos; workshop execution deferred to build-plan W1."
+    w1_workshop_note: "2026-09-27 build-plan W1: 25 stressors, worksheets, incidence matrix, gap-list complete."
+    w2_classification_note: "2026-09-27 build-plan W2: 25/25 ledger rows populated; disposition summary in classification-ledger.md; no project YAML mutation."
+    w2_refine_note: "2026-09-26 refine-plan W2 batch: classification ledger scaffold, REQ-aligned ordering, sponsor W2 guidance RECORD; ledger population deferred to build-plan W2."
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "sponsor-wrap-up-2026-09-27"
+        expiry: "2026-12-31"
+        owner: "sponsor"
+        rationale: "PLAN-* envelope InvalidRequestToken waived; W4/P1 verification inquiry pairing advisory per gate_policy; pilot tranche process contract satisfied with typed evidence."
+        referenced_verification_run_id: "build-plan-w4-verification-2026-09-27"
+      counterexamples:
+        - "Antifragility is adopted as a TIED guarantee without evidence boundaries."
+        - "Feature plan treats incidence matrix or stressor worksheet as a second specification authority competing with REQ/ARCH/IMPL."
+        - "Pilot mutates project TIED YAML from unreviewed residues without LEAP classification."
+        - "Validation stressors reused from design set while claiming unfamiliar-stressor proof."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Advisory gate policy keeps UNRESOLVED structural findings as review-gated evidence, not LEAP triggers."
+        - "Comparison doc already states residuality discovers and TIED formalizes; fidelity research forbids silent mutation."
+        - "Quality-assurance residual_risk is explicitly contrasted with residue in provisional vocab."
+        - "W1 refine updates planning artifacts and pilot scaffold only; pilot REQs remain read-only analysis targets."
+      eligibility_triggers_matched:
+        - "data-integrity-migration (idempotent creation, no partial publish)"
+        - "persistence / stateful-reliability (task execution recovery evidence history)"
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/plan_residuality_feature_07582e06.plan.md"
+        - "docs/comparisons/residuality-theory-and-tied.md"
+        - "tied/docs/citdp-policy.md"
+        - "tied/vocab/quality-assurance.md"
+        - "tied/vocab/residuality.md"
+      falsification_questions:
+        - "Can a stressor worksheet replace a REQ satisfaction criterion without review?"
+        - "Does presence of stressor-residue.v1.yaml prove runtime recovery?"
+        - "Would W1 pilot execution against recovery/idempotency REQs require integrated depth?"
+      gate_policy: "advisory"
+      inquiry_request_token: "REQ-FEAT_TASK_EXECUTION_RECOVERY"
+      inquiry_run_id: "refine-plan-w2-pre-impl-2026-09-26"
+      prior_depth_tier: "integrated"
+      prior_inquiry_run_id: "refine-plan-w1-pre-impl-2026-09-27"
+      profile_depth: "integrated"
+      rationale: "W2 classification batch (refine-plan) continues integrated depth on same pilot REQs. Advisory policy; W2 structural inquiry on classification ledger authority boundary. No REQ/ARCH/IMPL mutation until W3 behavior-changing CITDP."
+      research_profile: "integrated-agent"
+      verification_inquiry_run_id: "build-plan-w2-classification-verification-2026-09-27"
+    residuality_analysis:
+      assurance_profiles:
+        - "data-integrity-migration"
+        - "performance-scale-cost"
+        - "stateful-reliability"
+      baseline_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md"
+      classification_ledger_jsonl_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.jsonl"
+      classification_ledger_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/classification-ledger.md"
+      dispositions_summary:
+        accepted_residual_risk: 1
+        architecture_constraint: 6
+        candidate_requirement: 8
+        finding: 10
+        not_applicable: 0
+        unresolved: 0
+        w3_leap_candidate_rows: 14
+      dod_assessment_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/pilot-dod-checklist.md"
+      gap_list_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/gap-list.md"
+      incidence_matrix_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/incidence-matrix.md"
+      note: "Canonical CITDP field remains W5; W1–W2 use working pilot tree only."
+      promotion_menu_ref: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/w5-promotion-decisions.md"
+      status: "w5_promotion_planning"
+      stressor_count: 25
+      w1_batch: "W1 build-plan workshop — 25 stressors, worksheets, incidence matrix, gap-list (2026-09-27)"
+      w2_batch: "W2 build-plan — classification ledger populated 25/25 (2026-09-27)"
+      w2_ordering: "REQ-aligned — recovery cluster, idempotent cluster, cross-cutting"
+      w2_sponsor_flags:
+        attractor_a5: "case-by-case disposition — no blanket bucket"
+        s_t09: "W3 architecture/REQ follow-up candidate — not accepted-risk-only"
+        s_t11_s_t16: "in scope for classification"
+      w4_batch: "W4 build — 27 tests green; verification gate 2026-09-27"
+      w5_refine_note: "2026-09-27 refine-plan W5 — DoD assessed; recommendation adopt_revise; promotion scaffolds under w5-promotion/; build-plan W5 deferred."
+      worksheet_dir: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/worksheets/"
+    risks:
+      - description: "Ambiguous vocabulary conflates residue with residual_risk"
+        id: "RISK-RES-001"
+        likelihood: "Medium"
+        mitigation: "Provisional glossary + plan Refine Outcomes contrasts; VALIDATE before commit"
+      - description: "Build-plan accidentally edits methodology YAML"
+        id: "RISK-RES-003"
+        likelihood: "Low"
+        mitigation: "Guardrail: project docs and tied/vocab only; never tied/methodology/"
+      - description: "Plan over-scopes W5 tooling before pilot evidence"
+        id: "RISK-RES-002"
+        likelihood: "Medium"
+        mitigation: "W5 marked optional/proposed; promotion gate requires pilot DoD"
+      - description: "W1 workshop produces gaps without baseline REQ satisfaction mapping"
+        id: "RISK-RES-W1-001"
+        likelihood: "Medium"
+        mitigation: "gap-list.md must cite REQ satisfaction criteria and ARCH/IMPL tokens read from detail YAML; build-plan checklist enforces"
+      - description: "W2 ledger rows mistaken for approved stack changes"
+        id: "RISK-RES-W2-001"
+        likelihood: "Medium"
+        mitigation: "Scaffold marks unresolved until build-plan W2; W3 requires separate behavior-changing CITDP"
+  test_strategy:
+    deferred_executable_tests:
+      - "W4 CONTROLLED_COMPOSITION_FAULT composition tests"
+      - "W4 unfamiliar validation-stressor set"
+      - "W4 unit contracts under failure for pilot IMPL blocks"
+    matrix_notes: "stateful-reliability and data-integrity-migration for W1 pilot; baseline-functional for Batch A plan-doc (closed)."
+    summary: "W2 build-plan batch has no RED production tests. Verification is documentary plus integrated verification gate with adversarial inquiry pairing (advisory). W2 ledger classifies 25 stressors in REQ-aligned order; W3 requires separate behavior-changing CITDP. W4 defines executable strategies."
+    w1_refine_verification:
+      - "Linked plan w1-* todos and feature plan §4 W1 expansion"
+      - "Pilot scaffold paths exist under working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/"
+      - "pre_implementation gate at integrated depth with gate-tracker-pre-implementation-w1.yaml"
+    w1_workshop_verification:
+      - "25 stressors + worksheets + incidence matrix + gap-list under pilot/"
+      - "verification-phase adversarial inquiry run_id build-plan-w1-workshop-verification-2026-09-27"
+    w2_build_verification:
+      - "evidence/w2-exit-w3-handoff.md"
+      - "pilot/classification-ledger.jsonl mirror"
+      - "pilot/classification-ledger.md all rows disposition + proof_boundary"
+      - "verification gate with gate-tracker-verification-w2.yaml"
+    w2_refine_verification:
+      - "evidence/w1-exit-w2-handoff.md confirms W1 exit"
+      - "evidence/w2-refine-outcomes.md sponsor RECORD"
+      - "pilot/classification-ledger.md scaffold with disposition enum + REQ-aligned cluster order"
+      - "pre_implementation gate at integrated depth with gate-tracker-pre-implementation-w2.yaml"

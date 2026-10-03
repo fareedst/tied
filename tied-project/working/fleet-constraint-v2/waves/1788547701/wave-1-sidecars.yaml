@@ -1,0 +1,10 @@
+client_id: "1788547701"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 2 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-BT_CLI_FORMATTER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1788547701/tied/implementation-decisions/IMPL-BT_CLI_FORMATTER-pseudocode.md"
+  - impl_token: "IMPL-BT_DARWIN_COLLECTOR"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1788547701/tied/implementation-decisions/IMPL-BT_DARWIN_COLLECTOR-pseudocode.md"
+wave_id: "W-ext-1788547701-1"

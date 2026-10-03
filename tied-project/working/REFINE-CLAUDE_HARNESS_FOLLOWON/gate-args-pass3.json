@@ -1,0 +1,56 @@
+{
+  "phase": "pre_implementation",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tracker_path": "working/REFINE-CLAUDE_HARNESS_FOLLOWON/checklist-tracker.yaml",
+  "citdp": {
+    "record_identity": {
+      "change_request_id": "REFINE-CLAUDE_HARNESS_FOLLOWON",
+      "gate_policy": "advisory",
+      "profile_depth": "minimal",
+      "title": "Claude harness follow-on refine pass 3"
+    },
+    "risk_analysis": {
+      "adversarial_inquiry": {
+        "depth_tier": "minimal",
+        "prior_depth_tier": "integrated",
+        "gate_policy": "advisory",
+        "depth_change_waiver": {
+          "approval": "sponsor-advisory-2026-09-23-refine-pass3",
+          "expiry": "2026-12-31",
+          "owner": "program sponsor",
+          "rationale": "Plan-only refine pass 3 reconciling shipped A/B; no production RED."
+        },
+        "eligibility_triggers_matched": ["persistence"],
+        "counterexamples": [
+          "Re-opening full B1→A build-plan when REQs are Implemented",
+          "Flipping windows_copy_proven_in_ci from refine-plan prose alone"
+        ],
+        "falsification_questions": [
+          "Does the linked plan still tell sponsors to run B1 first?",
+          "Does comparison doc contradict windows_copy_proven_in_ci false?"
+        ],
+        "disconfirming_observations": [
+          "Child REQ Trackers program_phase closed",
+          "Comparison doc Post-Phases table updated"
+        ],
+        "evidence_references": [
+          "working/REFINE-CLAUDE_HARNESS_FOLLOWON/refine-notes.md",
+          "docs/comparisons/claude-code-tied-multi-harness-plan.md"
+        ]
+      }
+    },
+    "completion_criteria": {
+      "activation": {
+        "phase": "pre_implementation",
+        "request_token": "REFINE-CLAUDE_HARNESS_FOLLOWON",
+        "run_id": "refine-followon-pass3-2026-09-23"
+      }
+    }
+  },
+  "receipt_persistence": {
+    "request_token": "REFINE-CLAUDE_HARNESS_FOLLOWON",
+    "gates_dir": "working/REFINE-CLAUDE_HARNESS_FOLLOWON/gates",
+    "ledger_path": "working/REFINE-CLAUDE_HARNESS_FOLLOWON/gates/ledger.jsonl",
+    "run_id": "refine-followon-pass3-2026-09-23"
+  }
+}

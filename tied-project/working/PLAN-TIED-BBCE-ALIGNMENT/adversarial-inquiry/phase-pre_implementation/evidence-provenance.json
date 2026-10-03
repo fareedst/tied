@@ -1,0 +1,17 @@
+{
+  "provenance": {
+    "command": "refine-plan-w4-manual-obligation-pack",
+    "phase": "pre_implementation",
+    "proofBoundaries": [
+      "human_decision"
+    ],
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "run_id": "w4-refine-pre-impl-2026-09-27",
+    "scope": [
+      "PLAN-TIED-BBCE-ALIGNMENT#MECH-D#promotion",
+      "PLAN-TIED-BBCE-ALIGNMENT#bbce_advisory_enforced#block"
+    ],
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

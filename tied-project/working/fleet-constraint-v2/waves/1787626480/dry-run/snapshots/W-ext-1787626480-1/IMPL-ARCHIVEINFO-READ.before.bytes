@@ -1,0 +1,30 @@
+# [IMPL-ARCHIVEINFO-READ] Archive reader
+# Implements [ARCH-ARCHIVEINFO-CLI] for [REQ-ARCHIVEINFO-FORMATS], [REQ-ARCHIVEINFO-DISPLAY]
+
+PROCEDURE Read(path string, fmt Format) -> (ArchiveInfo, error)
+  // [IMPL-ARCHIVEINFO-READ] [ARCH-ARCHIVEINFO-CLI] [REQ-ARCHIVEINFO-FORMATS] [REQ-ARCHIVEINFO-DISPLAY] — dispatch by format
+  INPUT: path, detected format
+  PRE: path exists and fmt != Unknown
+  POST: ArchiveInfo with entries populated; stream headers only (no size allocation)
+  EFFECTS:
+    SWITCH fmt:
+      CASE Zip: RETURN readZip(path)
+      CASE Tar: RETURN readTar(path, compressed=false)
+      CASE TarGz: RETURN readTar(path, compressed=true)
+      CASE Gzip: RETURN readGzip(path)
+    DEFAULT: RETURN error
+  FAILURE_MODES: corrupt archive → error; permission denied → error
+
+PROCEDURE readTar(path, compressed)
+  // skip symlink, device, fifo, char entries; include dir and regular file entries
+  FOR each header IN tar reader:
+    IF type not regular AND not directory THEN CONTINUE
+    append EntryInfo from header
+
+PROCEDURE readZip(path)
+  FOR each file IN zip reader:
+    append EntryInfo with method, sizes, mod time
+
+PROCEDURE readGzip(path)
+  // single logical entry named basename without .gz
+  RETURN ArchiveInfo with one EntryInfo

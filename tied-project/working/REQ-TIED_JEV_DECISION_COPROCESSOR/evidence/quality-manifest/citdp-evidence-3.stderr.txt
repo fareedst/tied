@@ -1,0 +1,87 @@
+
+mcp-server/src/jev/harness-tool-guard.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > allows when harness disabled [0.67ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > blocks destructive pattern when harness enabled [0.05ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > fail-closed blocks bash when Jev key missing [0.08ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > allows non-blocking tools without key [0.01ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > jev high risk blocks [0.71ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > matchesDestructivePattern detects rm -rf [0.02ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > resolveHarnessFromEnv reads AGENTSTREAM_JEV_HARNESS [0.03ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W5 harness > adviseContextFilter keeps when harness disabled [0.02ms]
+
+mcp-server/src/jev/prompt-type-advisory.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes detects slash build-plan [0.48ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes preserves explicit sequence order [0.08ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes maps non-tied-plan [0.03ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > heuristicInferPromptTypes avoids bare debug when non-tied-debug named [0.02ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > every leaf type is matchable by an explicit token fixture [0.03ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > advisePromptTypes uses heuristic when Jev skipped [0.23ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > advisePromptTypes records disagreement when Jev primary diverges [0.20ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W3 prompt-type advisory > advisePromptTypes never returns unknown prompt types [0.16ms]
+
+mcp-server/src/jev/adversarial-triage-pilot.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > loads labeled fixture from go-rootjobs-derived cases [0.05ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > classifyTriage maps aligned nouls [0.03ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > classifyTriage maps spec_gap
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > observeAdversarialTriageCase skips without credentials [0.05ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > observeAdversarialTriageCase matches labels when mock Jev aligns [0.18ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > compareObservationToLabels detects boolean mismatch [0.04ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W4 adversarial triage pilot > runAdversarialTriagePilot report schema when Jev skipped [0.04ms]
+
+mcp-server/src/jev/plan-skills.test.ts:
+(pass) W6 plan-skills config T-CFG > T-CFG-01 absent flag → disabled + no fetch path [2.09ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-02 env true/false precedence over yaml [0.35ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-03 invalid env override → off + diagnostic [0.18ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-04 yaml strict boolean true enables [1.50ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-05 malformed yaml flag → off + diagnostic [0.35ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-06 whitespace-only key → configured_no_credentials [0.33ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-07 timeout default and invalid override [0.05ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-08b vendor HTTP error → agrees false and jev_error (G1) [52.03ms]
+(pass) W6 plan-skills config T-CFG > T-CFG-08 timeout → configured_unreachable [53.06ms]
+(pass) W6 merged routing T-RT > T-RT-01..04 merge client+methodology first-wins [0.18ms]
+(pass) W6 merged routing T-RT > T-RT-02 missing client OK [0.34ms]
+(pass) W6 merged routing T-RT > T-RT-03 missing methodology diagnostic [0.25ms]
+(pass) W6 merged routing T-RT > T-RT-05 keyword parity with merged rows [0.04ms]
+(pass) W6 shadow/evidence T-SH > T-SH-01 agrees uses vocabShadowAgrees [0.05ms]
+(pass) W6 shadow/evidence T-SH > T-SH-02 invalid token rejects evidence [0.47ms]
+(pass) W6 shadow/evidence T-SH > T-SH-03 invalid request token rejected for evidence [0.15ms]
+(pass) W6 shadow/evidence T-SH > T-SH-04 truncate flags [0.22ms]
+(pass) W6 shadow/evidence T-SH > T-SH-05 record_evidence false writes zero files [0.50ms]
+(pass) W6 shadow/evidence T-SH > T-SH-06 502 retry then 200 ready [51.54ms]
+(pass) W6 MCP composition T-MCP > T-MCP-01 tools registered in allTools [0.18ms]
+(pass) W6 MCP composition T-MCP > T-MCP-02 status no probe no secret [0.36ms]
+(pass) W6 MCP composition T-MCP > T-MCP-03 invalid skill rejected without fetch [0.32ms]
+(pass) W6d tiebreak T-TB > T-TB-01 advisory mode has no advisory_primary [0.50ms]
+(pass) W6d tiebreak T-TB > T-TB-02 tiebreak with one keyword id → tiebreak_active false [0.40ms]
+(pass) W6d tiebreak T-TB > T-TB-03 tiebreak ambiguous but low confidence → no primary [0.43ms]
+(pass) W6d tiebreak T-TB > T-TB-04 tiebreak active preserves keyword_glossaries vs advisory [0.44ms]
+(pass) W6d triage MCP T-TR > T-TR-01 returns schema v1 [0.86ms]
+(pass) W6d triage MCP T-TR > T-TR-02 skips without key [0.06ms]
+(pass) W6d triage MCP T-TR > T-TR-03 rejects over max cases [0.73ms]
+(pass) W6d evidence T-EV > T-EV-01 triage JSON under contained plan-skills path [0.50ms]
+(pass) W6 gate ordering T-GATE > T-GATE-01 tied_jev_adversarial_triage_pilot registered (W6d) [0.05ms]
+(pass) W6 gate ordering T-GATE > T-GATE-03 triage refuses before pre_implementation gate [0.06ms]
+(pass) W6 gate ordering T-GATE > T-GATE-02 shadow proof_boundary denies gate authority [0.35ms]
+
+mcp-server/src/jev/jev.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide skips when no credentials
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > redactString masks jv_live keys [0.08ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide posts to /v1/decide with bearer auth [0.31ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > jevDecide retries once on 502 [50.64ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR jev client > resolveJevConfig reads env defaults [0.08ms]
+
+mcp-server/src/jev/shadow-vocab-preload.test.ts:
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > parseRoutingTableMarkdown loads client routing table
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > matchKeywordGlossaries matches tied agentstream prompt [0.14ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > matchKeywordGlossaries matches adversarial inquiry terms [0.07ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > jevAnswersToGlossaryIds merges choice and nouls [0.04ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows skips Jev without credentials [0.18ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows marks vendor errors as jev_error without agrees inflation (G1) [51.47ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > summarizeShadowAgreement counts jev_errors for strict replay (G1) [0.31ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > shadowVocabPreloadFromRows records disagreement when Jev diverges [0.27ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > vocabShadowAgrees treats Jev subset of keyword matches as agreement [0.04ms]
+(pass) REQ-TIED_JEV_DECISION_COPROCESSOR W2 shadow routing > summarizeShadowAgreement computes rate on invoked logs
+
+ 71 pass
+ 0 fail
+Ran 71 tests across 6 files. [437.00ms]

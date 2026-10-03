@@ -1,0 +1,106 @@
+{
+  "run_id": "post-alignment-exec-treegrep-20260827",
+  "commit": "0995ddd8a5208ce5b2a8e838ff66da02a78b66e4",
+  "environment": {
+    "project_root": "/tmp/tied-evidence-treegrep",
+    "tied_base_path": "/tmp/tied-evidence-treegrep/tied",
+    "platform": "darwin",
+    "collection_boundary": "operator-local pinned worktree"
+  },
+  "commands": [
+    {
+      "id": "ruby-test-suite",
+      "argv": [
+        "ruby",
+        "-Ilib:test",
+        "-e",
+        "Dir[\"test/**/*_test.rb\"].each { |f| load f }"
+      ],
+      "cwd": "/tmp/tied-evidence-treegrep",
+      "artifact_dir": "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/ruby-test-suite",
+      "timeout_ms": 120000,
+      "max_output_bytes": 1048576,
+      "threshold": "exit_code=0",
+      "tool_version_argv": [
+        "ruby",
+        "--version"
+      ],
+      "tool_version_name": "ruby"
+    },
+    {
+      "id": "tied-validate-consistency",
+      "argv": [
+        "/tmp/tied-evidence-treegrep/.cursor/skills/tied-yaml/scripts/tied-cli.sh",
+        "tied_validate_consistency",
+        "{}"
+      ],
+      "cwd": "/tmp/tied-evidence-treegrep",
+      "environment": {
+        "TIED_BASE_PATH": "/tmp/tied-evidence-treegrep/tied",
+        "TIED_MCP_BIN": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/index.js"
+      },
+      "artifact_dir": "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/tied-validate-consistency",
+      "timeout_ms": 120000,
+      "max_output_bytes": 1048576,
+      "threshold": "ok=true",
+      "tool_version_argv": [
+        "node",
+        "--version"
+      ],
+      "tool_version_name": "node"
+    },
+    {
+      "id": "binding-inventory-validate",
+      "argv": [
+        "/tmp/tied-evidence-treegrep/.cursor/skills/tied-yaml/scripts/tied-cli.sh",
+        "binding_inventory_validate",
+        "@/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/cli-binding-inventory-validate.json"
+      ],
+      "cwd": "/tmp/tied-evidence-treegrep",
+      "environment": {
+        "TIED_BASE_PATH": "/tmp/tied-evidence-treegrep/tied",
+        "TIED_MCP_BIN": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/index.js"
+      },
+      "artifact_dir": "/tmp/tied-evidence-treegrep/working/TIED-3.0-ALIGNMENT-SYNC/evidence-quality/binding-inventory-validate",
+      "timeout_ms": 120000,
+      "max_output_bytes": 1048576,
+      "threshold": "ok=true",
+      "tool_version_argv": [
+        "node",
+        "--version"
+      ],
+      "tool_version_name": "node"
+    }
+  ],
+  "default_timeout_ms": 120000,
+  "default_max_output_bytes": 1048576,
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "The alignment close-out covers Ruby behavior, composition bindings, and project TIED records.",
+      "risk": "Specification and implementation drift could leave tested behavior unverifiable.",
+      "evidence_method": "Pinned Ruby regression suite plus TIED structural validators.",
+      "command_or_test": "ruby-test-suite; tied-validate-consistency; binding-inventory-validate",
+      "threshold": "All commands exit 0 and validators report ok=true.",
+      "result": "pending",
+      "owner": "operator"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED-3.0-ALIGNMENT-SYNC",
+    "REQ-MODULE_VALIDATION",
+    "IMPL-MODULE_VALIDATION",
+    "IMPL-QUALITY_EVIDENCE_MANIFEST"
+  ],
+  "proof_boundaries": [
+    "Observed executable: pinned Ruby regression suite and UI-free binding validation.",
+    "Observed structural: TIED consistency validation at the pinned worktree.",
+    "This manifest does not prove universal correctness, security, performance, resilience, privacy, or user-facing behavior."
+  ],
+  "decision_references": [
+    "TIED-3.0-ALIGNMENT-SYNC",
+    "working/TIED-3.0-ALIGNMENT-SYNC/test-strategy.md"
+  ]
+}

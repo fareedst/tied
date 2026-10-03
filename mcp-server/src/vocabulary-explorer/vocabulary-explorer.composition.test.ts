@@ -31,7 +31,7 @@ describe("vocabulary-explorer composition REQ-VOCABULARY_EXPLORER", () => {
     origCwd = process.cwd();
     origEnv = process.env.TIED_BASE_PATH;
     process.chdir(fixtureRoot);
-    process.env.TIED_BASE_PATH = path.join(fixtureRoot, "tied");
+    process.env.TIED_BASE_PATH = path.join(fixtureRoot, "tied-project");
     clearBasePathCache();
   });
 

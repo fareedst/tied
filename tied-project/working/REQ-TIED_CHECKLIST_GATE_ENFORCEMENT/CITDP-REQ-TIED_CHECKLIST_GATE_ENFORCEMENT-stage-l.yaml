@@ -1,0 +1,8 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l:
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    title: "Stage L controlled-client pilot"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "integrated"
+      gate_policy: "advisory"

@@ -1,0 +1,22 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "generated_at": "2026-10-03T14:14:00.000Z",
+  "request_token": "REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH",
+  "commands": [
+    {
+      "command": "node --test tools/bootstrap/lib/new-client-onboarding-audit.test.mjs",
+      "exit_code": 0,
+      "evidence_path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/unit-tests.stdout.txt"
+    },
+    {
+      "command": "node --test scripts/tied-new-client-audit.test.mjs",
+      "exit_code": 0,
+      "evidence_path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/unit-tests.stdout.txt"
+    },
+    {
+      "command": "cd mcp-server && bun test src/e2e/new-tied-client.test.ts",
+      "exit_code": 0,
+      "evidence_path": "tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/unit-tests.stdout.txt"
+    }
+  ]
+}

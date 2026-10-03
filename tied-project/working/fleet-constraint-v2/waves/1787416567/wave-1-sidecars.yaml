@@ -1,0 +1,14 @@
+client_id: "1787416567"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 4 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-VOLUMESTATS-CLI"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-CLI-pseudocode.md"
+  - impl_token: "IMPL-VOLUMESTATS-DISCOVER"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-DISCOVER-pseudocode.md"
+  - impl_token: "IMPL-VOLUMESTATS-REPORT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-REPORT-pseudocode.md"
+  - impl_token: "IMPL-VOLUMESTATS-STATS"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-STATS-pseudocode.md"
+wave_id: "W-ext-1787416567-1"

@@ -1,0 +1,17 @@
+▶ quality validation MCP bindings [PROC-QUALITY_ASSURANCE]
+  ✔ wires manifest construction through a UI-free handler (0.546333ms)
+  ✔ wires the Layer B pseudo-code validator (5.538667ms)
+  ✔ wires risk-triggered test adequacy validation (0.110458ms)
+  ✔ wires binding inventory validation (0.186209ms)
+  ✔ wires shell-free quality command collection (49.037042ms)
+  ✔ wires command collection directly into manifest generation (39.527083ms)
+  ✔ wires conditional security profile validation (0.156417ms)
+✔ quality validation MCP bindings [PROC-QUALITY_ASSURANCE] (95.691209ms)
+ℹ tests 7
+ℹ suites 1
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 311.140584

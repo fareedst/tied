@@ -1,0 +1,45 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-27T13:41:38.956Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_YAML_COMPARE_RUBY_LOAD",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_YAML_COMPARE_RUBY_LOAD.yaml",
+      "content_hash": "sha256:c32ec656eab114a577d53b0556c3f964097b58875afd11e17b211e6942633262",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "expected_artifact_missing",
+      "artifact_kind": "evidence_chain_profile",
+      "phase": null,
+      "detail": "Integrated depth expects evidence-chain-profile artifact",
+      "severity": "error",
+      "source": "profile-cross-link"
+    }
+  ]
+}

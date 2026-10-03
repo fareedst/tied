@@ -1,0 +1,220 @@
+{
+  "schema_version": "seq-9-m4-p4-h-closeout-report.v1",
+  "status": "complete",
+  "milestone": "M4_phase_4_fully_closed",
+  "purpose": "Phase 4 program closeout — WS-5 P4-H + WS-6 precondition audit (closeout plan Seq 9 S9.0–S9.6)",
+  "closeout_plan_ref": "docs/pseudocode-constraint-v2-fleet-migration-phase-4-closeout-plan.md",
+  "build_plan_seq": "9",
+  "methodology_pin": "48d1fbb+",
+  "run_id": "fleet-migration-phase4-closeout-20260913",
+  "verified_at": "2026-09-13T16:32:49.000Z",
+  "m4_assertion": {
+    "all_ex_pass": true,
+    "handoff_m4_flag": true,
+    "exit_review_phase_4_fully_closed": true,
+    "citdp_closeout_module_final": true,
+    "tracker_phase_4_closeout_complete": true
+  },
+  "criteria": [
+    {
+      "id": "EX-01",
+      "description": "Five OD-P4-3 repos fleet-migrated-client or waiver-documented",
+      "pass": true,
+      "disposition": "cite_seq7_confirm_inventory",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json",
+        "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml",
+        "working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json"
+      ],
+      "details": {
+        "command": "run-harness.sh fleet-inventory (read-only)",
+        "fleet_migrated_client_count": 5,
+        "per_client_aggregate": {
+          "stdd": "fleet-migrated-client",
+          "1789069630": "fleet-migrated-client",
+          "1789136889": "fleet-migrated-client",
+          "1789147101": "fleet-migrated-client",
+          "1789177584": "fleet-migrated-client"
+        }
+      }
+    },
+    {
+      "id": "EX-02",
+      "description": "SC-FLEET-P4-001 inventory falsifiable for enrolled set",
+      "pass": true,
+      "disposition": "cite_seq7",
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json",
+        "working/fleet-constraint-v2/client-inventory-manifest.v1.yaml"
+      ],
+      "details": { "enrolled_phase_4_count": 5 }
+    },
+    {
+      "id": "EX-03",
+      "description": "SC-FLEET-P4-002 completed waves stop/go go",
+      "pass": true,
+      "disposition": "cite_seq5_seq7",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/wave-stop-go.v1.json",
+        "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json",
+        "working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json"
+      ],
+      "details": { "stop_go_record_count": 15, "all_dispositions_go": true }
+    },
+    {
+      "id": "EX-04",
+      "description": "SC-FLEET-P4-003 G3 receipts valid",
+      "pass": true,
+      "disposition": "cite_seq7",
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json"
+      ],
+      "details": { "receipt_counts_by_client": { "stdd": 93, "1789069630": 5, "1789136889": 4, "1789147101": 4, "1789177584": 5 } }
+    },
+    {
+      "id": "EX-05",
+      "description": "SC-FLEET-P4-004 waiver registry — no expired blocking waivers",
+      "pass": true,
+      "disposition": "re_run",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": ["working/fleet-constraint-v2/migration-waiver-registry.v1.yaml"],
+      "details": {
+        "command": "run-fleet-waiver-registry-check.ts",
+        "exit_code": 0,
+        "waiver_count": 0
+      }
+    },
+    {
+      "id": "EX-06",
+      "description": "SC-FLEET-P4-005 client-owned migration REQ gates",
+      "pass": true,
+      "disposition": "cite_handoff_spot_check",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": ["working/fleet-constraint-v2/phase-4-closeout-handoff.v1.json"],
+      "details": { "test_f_all_eight_receipt_paths": true }
+    },
+    {
+      "id": "EX-07",
+      "description": "SC-FLEET-P4-006 dashboard reconciles inventory, receipts, waivers",
+      "pass": true,
+      "disposition": "re_run",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/fleet-dashboard.v1.yaml",
+        "working/fleet-constraint-v2/seq-5-ws4-governance-report.v1.json"
+      ],
+      "details": {
+        "command": "run-harness.sh fleet-dashboard",
+        "generated_at": "2026-09-13T16:32:18.416Z",
+        "enrolled_phase_4_count": 5,
+        "clients_by_aggregate_state_fleet_migrated_client": 5,
+        "wave_summary": { "total_waves": 15, "complete": 15, "halted": 0 },
+        "seq9_remediation": "wave-stop-go.v1.json converted YAML→JSON array so loadWaveStopGoLog accepts harness input (content unchanged)"
+      }
+    },
+    {
+      "id": "EX-08",
+      "description": "F11/FP within f11-fp-thresholds",
+      "pass": true,
+      "disposition": "cite_seq7",
+      "verified_at": "2026-09-13T05:30:00.000Z",
+      "evidence_paths": [
+        "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/f11-fleet-20260912.yaml",
+        "working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml"
+      ],
+      "details": { "fleet_g1_rerun_seq9": false }
+    },
+    {
+      "id": "EX-09",
+      "description": "Doc falsification — no header-only → fleet-migrated inference",
+      "pass": true,
+      "disposition": "re_assert_s9_2",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": [
+        "working/fleet-constraint-v2/phase-4-exit-review.v1.json",
+        "docs/pseudocode-constraint-v2-fleet-migration-phase-4-plan.md"
+      ],
+      "details": {
+        "enrolled_rows_zero_header_only_without_waiver": true,
+        "phase_4_fully_closed_flags_set_in_exit_review": true
+      }
+    },
+    {
+      "id": "EX-10",
+      "description": "tied_validate_consistency after CITDP append",
+      "pass": true,
+      "disposition": "run_after_s9_3",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": ["tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml"],
+      "details": {
+        "lint_yaml": true,
+        "tied_validate_consistency": true,
+        "citdp_run_id": "fleet-migration-phase4-closeout-20260913"
+      }
+    },
+    {
+      "id": "EX-11",
+      "description": "Vocab VALIDATE Phase 4 fleet terms (Touchpoint 3)",
+      "pass": true,
+      "disposition": "validate_s9_5",
+      "verified_at": "2026-09-13T16:32:49.000Z",
+      "evidence_paths": ["tied/vocab/pseudocode-and-citdp.md"],
+      "details": {
+        "record_new_terms": false,
+        "validate_note": "Closeout terms (M2/M3/M4, phase_4_closeout module) align with existing fleet-migrated-client and dual-track rows; drift note updated for M4 complete"
+      }
+    }
+  ],
+  "steps": {
+    "S9_0_bootstrap": {
+      "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+      "vocab_preload": "tied/vocab/pseudocode-and-citdp.md"
+    },
+    "S9_1_ex_matrix": { "ok": true },
+    "S9_2_exit_review_and_plans": { "ok": true },
+    "S9_3_citdp_p4_clo_c": {
+      "ok": true,
+      "tool": "citdp_record_write",
+      "module_key": "phase_4_closeout_module"
+    },
+    "S9_4_tracker": { "ok": true },
+    "S9_5_handoff_and_closeout_plan_status": { "ok": true },
+    "S9_6_ws6_preconditions": { "ok": true }
+  },
+  "ws6_phase_5_entry_preconditions": [
+    { "precondition": "M2 EX-01..EX-09 green for OD-P4-3", "status": "Met", "evidence": "seq-7-m2-ex-assertion-report.v1.json + S9.1 confirmation" },
+    { "precondition": "M3 orchestrator close_out allowed true", "status": "Met", "evidence": "seq-8-orchestrator-closeout-report.v1.json" },
+    { "precondition": "M4 exit review + closeout plan status", "status": "Met", "evidence": "phase-4-exit-review.v1.json refreshed; closeout plan Status Complete" },
+    { "precondition": "CITDP closeout module final", "status": "Met", "evidence": "CITDP phase_4_closeout_module persisted S9.3" },
+    { "precondition": "phase_4_fully_closed true in exit review", "status": "Met", "evidence": "phase-4-exit-review.v1.json" },
+    { "precondition": "Grand plan Next command → Phase 5 refine", "status": "Met", "evidence": "grand plan pointer (Phase 5 plan doc TBD)" },
+    { "precondition": "Dual track legacy fleet vs new-client-only documented", "status": "Met", "evidence": "CITDP closeout module + exit review doc_falsification_audit" }
+  ],
+  "upstream_slice_reports": [
+    "working/fleet-constraint-v2/seq-7-m2-ex-assertion-report.v1.json",
+    "working/fleet-constraint-v2/seq-8-orchestrator-closeout-report.v1.json"
+  ],
+  "completion_signals": {
+    "machine_close_out": {
+      "pass": true,
+      "note": "Orchestrator machine close-out completed seq 8; seq 9 is program M4 governance only — no new orchestrator close_out gate"
+    },
+    "process_contract": {
+      "pass": true,
+      "note": "CITDP P4-CLO-C append + exit review + tracker phase_4_closeout complete per closeout plan"
+    },
+    "adherence_ledger": {
+      "pass": true,
+      "note": "Handoff M4 flag + seq 9 report evidence_refs on tracker step seq-9-m4-p4-h"
+    }
+  },
+  "remaining_risks": [
+    "Phase 5 plan document not authored — grand plan Next command points to /refine-plan when sponsor starts Phase 5",
+    "Non-enrolled manifest clients (~18 header-only-v2) remain out of OD-P4-3 scope"
+  ],
+  "next_recommended": "/refine-plan on docs/pseudocode-constraint-v2-fleet-migration-grand-plan.md (Phase 5 — G4 CI + new-client constraint-enforced-v2 bootstrap)"
+}

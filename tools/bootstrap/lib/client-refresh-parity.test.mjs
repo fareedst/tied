@@ -28,9 +28,9 @@ describe("client-refresh-parity", () => {
     writeFile(root, "templates/requirements.yaml", "{}\n");
 
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "parity-a-client-"));
-    writeFile(client, "tied/methodology/requirements/REQ-A.yaml", "token: a\n");
-    writeFile(client, "tied/methodology/requirements/REQ-B.yaml", "token: changed\n");
-    writeFile(client, "tied/methodology/requirements.yaml", "{}\n");
+    writeFile(client, "tied-bundle/requirements/REQ-A.yaml", "token: a\n");
+    writeFile(client, "tied-bundle/requirements/REQ-B.yaml", "token: changed\n");
+    writeFile(client, "tied-bundle/requirements.yaml", "{}\n");
 
     const parityA = computeParityA(root, client);
     const byPath = Object.fromEntries(parityA.entries.map((e) => [e.relative_path, e.disposition]));
@@ -46,10 +46,10 @@ describe("client-refresh-parity", () => {
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "parity-b-client-"));
     writeFile(
       client,
-      "tied/docs/LEAP.md",
+      "tied-bundle/docs/LEAP.md",
       fs.readFileSync(sourceDoc, "utf8"),
     );
-    writeFile(client, "tied/docs/ai-principles.md", "intentional-drift-for-test\n");
+    writeFile(client, "tied-bundle/docs/ai-principles.md", "intentional-drift-for-test\n");
 
     const parityB = computeParityB(TIED_REPO_ROOT, client);
     const byPath = Object.fromEntries(parityB.entries.map((e) => [e.relative_path, e.disposition]));
@@ -64,7 +64,7 @@ describe("client-refresh-parity", () => {
     writeFile(root, "templates/architecture-decisions.yaml", "{}\n");
     writeFile(root, "templates/implementation-decisions.yaml", "{}\n");
     writeFile(root, "templates/semantic-tokens.yaml", "{}\n");
-    writeFile(root, "tied/docs/ai-principles.md", "doc\n");
+    writeFile(root, "tied-bundle/docs/ai-principles.md", "doc\n");
     fs.mkdirSync(path.join(root, "tools", "bootstrap"), { recursive: true });
     fs.writeFileSync(
       path.join(root, "tools", "bootstrap", "manifest.json"),
@@ -81,12 +81,12 @@ describe("client-refresh-parity", () => {
     );
 
     const client = fs.mkdtempSync(path.join(os.tmpdir(), "parity-run-client-"));
-    writeFile(client, "tied/methodology/requirements/REQ-X.yaml", "x: 9\n");
-    writeFile(client, "tied/methodology/requirements.yaml", "{}\n");
-    writeFile(client, "tied/methodology/architecture-decisions.yaml", "{}\n");
-    writeFile(client, "tied/methodology/implementation-decisions.yaml", "{}\n");
-    writeFile(client, "tied/methodology/semantic-tokens.yaml", "{}\n");
-    writeFile(client, "tied/docs/ai-principles.md", "doc\n");
+    writeFile(client, "tied-bundle/requirements/REQ-X.yaml", "x: 9\n");
+    writeFile(client, "tied-bundle/requirements.yaml", "{}\n");
+    writeFile(client, "tied-bundle/architecture-decisions.yaml", "{}\n");
+    writeFile(client, "tied-bundle/implementation-decisions.yaml", "{}\n");
+    writeFile(client, "tied-bundle/semantic-tokens.yaml", "{}\n");
+    writeFile(client, "tied-bundle/docs/ai-principles.md", "doc\n");
 
     const reportPath = path.join(client, ".tied", "report.json");
     const fail = runClientRefreshParityGate(root, client, { reportPath });

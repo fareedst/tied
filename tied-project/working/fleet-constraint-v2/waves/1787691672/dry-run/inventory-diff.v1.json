@@ -1,0 +1,38 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T21:45:59.344Z",
+  "client_id": "1787691672",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787691672",
+  "sidecar_count": 5,
+  "counts_by_state": {
+    "legacy-v1": 5,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 0,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "697a092ca0f2c0293e933b1feb08eca11331727308c7c1eb00271aa80d00a269",
+  "rows": [
+    {
+      "file": "IMPL-LAUNCHD_COLLECTOR-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-NETWORK_LISTENER_COLLECTOR-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-PROCESS_RUNNER-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-REPORT_FORMATTER-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-SERVICE_REPORT_CLI-pseudocode.md",
+      "classification": "legacy-v1"
+    }
+  ]
+}

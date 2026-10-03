@@ -88,14 +88,14 @@ describe("prompt-type skill bundle", () => {
   it("installs the canonical bundle while preserving unrelated client tooling [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]", () => {
     // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: refresh managed prompt-type directories while preserving unrelated client skills and MCP configuration; prompt-type Task wrappers remain TIED-source development artifacts and are not installed into clients.
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-prompt-skills-"));
-    const copyScript = path.join(repoRoot, "copy_files.sh");
+    const copyScript = path.join(repoRoot, "tied-install.sh");
     try {
-      execFileSync("bash", [copyScript, tempDir], { cwd: repoRoot, stdio: "pipe" });
+      execFileSync("bash", [copyScript, "--mode", "full", tempDir], { cwd: repoRoot, stdio: "pipe" });
 
       const clientSkillRoot = path.join(tempDir, ".cursor", "skills");
       assertSkillContract(clientSkillRoot);
       assert.ok(
-        fs.existsSync(path.join(tempDir, "tied", "docs", "prompt-type-skills.md")),
+        fs.existsSync(path.join(tempDir, "tied-bundle", "docs", "prompt-type-skills.md")),
         "bootstrap should install prompt-type skills documentation"
       );
       assert.equal(
@@ -110,7 +110,7 @@ describe("prompt-type skill bundle", () => {
       fs.writeFileSync(customSkill, "client-only skill\n");
       const mcpBefore = fs.readFileSync(mcpConfig, "utf8");
 
-      execFileSync("bash", [copyScript, tempDir], { cwd: repoRoot, stdio: "pipe" });
+      execFileSync("bash", [copyScript, "--mode", "full", tempDir], { cwd: repoRoot, stdio: "pipe" });
 
       assert.equal(fs.readFileSync(customSkill, "utf8"), "client-only skill\n");
       assert.equal(fs.readFileSync(mcpConfig, "utf8"), mcpBefore);
@@ -138,8 +138,9 @@ describe("prompt-type skill bundle", () => {
     assert.match(copyManaged, /Client-modified managed copy detected/);
     assert.doesNotMatch(copyManaged, /2000-01-01T00:00:00Z/);
     assert.match(copyManaged, /sourceDateMidnightSeconds/);
-    const copyScript = fs.readFileSync(path.join(repoRoot, "copy_files.sh"), "utf8");
-    assert.match(copyScript, /tools\/bootstrap\/copy-files\.mjs/);
+    const copyScript = fs.readFileSync(path.join(repoRoot, "tied-install.sh"), "utf8");
+    assert.match(copyScript, /tools\/bootstrap\/tied-install-dispatch\.mjs/);
+    assert.doesNotMatch(copyScript, /copy-files\.mjs/);
     assert.doesNotMatch(copyScript, /\.cursor\/agents\/"\*\.md/);
   });
 

@@ -32,7 +32,7 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 }
 
 function readRepoTiedYaml(projectRoot: string): Record<string, unknown> | undefined {
-  const configPath = path.join(projectRoot, ".tied-yaml.yaml");
+  const configPath = path.join(projectRoot, "tied-project/config.yaml");
   if (!fs.existsSync(configPath)) {
     return undefined;
   }

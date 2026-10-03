@@ -105,11 +105,16 @@ describe("jev harness preflight [REQ-TIED_JEV_DECISION_COPROCESSOR]", () => {
     assert.equal(out.stderr, "");
   });
 
-  it("reads enablement from .tied-yaml.yaml jev.agentstream_harness", () => {
+  it("reads enablement from tied-project/config.yaml jev.agentstream_harness", () => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "jev-harness-"));
+    fs.mkdirSync(path.join(tempDir, "tied-project"), { recursive: true });
     fs.writeFileSync(
-      path.join(tempDir, ".tied-yaml.yaml"),
-      yaml.dump({ jev: { agentstream_harness: true } }),
+      path.join(tempDir, "tied-project/config.yaml"),
+      yaml.dump({
+        schema: "tied-project-config.v1",
+        yaml: { scalar_style: "unwrapped" },
+        jev: { agentstream_harness: true },
+      }),
     );
     assert.equal(jevAgentstreamHarnessEnabled(tempDir), true);
   });

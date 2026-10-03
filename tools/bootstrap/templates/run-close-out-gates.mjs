@@ -22,10 +22,20 @@ import {
   resolveDepthTier,
   shouldCollectActivation,
 } from "./run-close-out-gates-activation.mjs";
+import { resolveTiedLayout, resolveWorkingRoot } from "../lib/layout.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
 const MCP_DIST = path.join(REPO_ROOT, "mcp-server/dist");
+
+function workingRel(projectRoot, requestToken, kind, ...parts) {
+  const abs = path.join(resolveWorkingRoot(projectRoot, requestToken, kind), ...parts);
+  return path.relative(path.resolve(projectRoot), abs).split(path.sep).join("/");
+}
+
+function resolveTiedBasePath(projectRoot) {
+  return resolveTiedLayout(projectRoot).tiedDir;
+}
 
 function parseArgs(argv) {
   if (argv.includes("--help") || argv.includes("-h")) {
@@ -104,21 +114,19 @@ async function collectQualityManifest(args, citdp) {
   const qualityCollection = await import(
     pathToFileURL(path.join(MCP_DIST, "quality-evidence-collection.js")).href
   );
-  const artifactDir = path.join(
+  const manifestRelativePath = workingRel(
     args.projectRoot,
-    "working",
     args.requestToken,
-    "evidence",
-    "quality-manifest",
-  );
-  mkdirSync(artifactDir, { recursive: true });
-  const runId = args.runId ?? `close-out-${Date.now()}`;
-  const manifestRelativePath = path.join(
-    "working",
-    args.requestToken,
+    "committed",
     "evidence",
     "verification-evidence-manifest.v1.json",
   );
+  const artifactDir = path.join(
+    args.projectRoot,
+    workingRel(args.projectRoot, args.requestToken, "committed", "evidence", "quality-manifest"),
+  );
+  mkdirSync(artifactDir, { recursive: true });
+  const runId = args.runId ?? `close-out-${Date.now()}`;
   const manifest = await qualityCollection.collectVerificationEvidence({
     run_id: runId,
     commit: resolveGitCommit(args.projectRoot),
@@ -156,7 +164,10 @@ function loadCitdpRecord(citdpPath, projectRoot) {
 }
 
 function loadPseudocodeReports(projectRoot, requestToken, citdp) {
-  const psaDir = path.join(projectRoot, "working", requestToken, "pseudocode-analysis");
+  const psaDir = path.join(
+    projectRoot,
+    workingRel(projectRoot, requestToken, "local", "pseudocode-analysis"),
+  );
   if (!existsSync(psaDir)) return {};
   const inventory = citdp?.impact_analysis?.impl_inventory ?? [];
   const implTokens = inventory.map((entry) => (
@@ -190,7 +201,7 @@ async function loadModules() {
 
 function runSyncDispositions(trackerAbsolute, projectRoot, requestToken, runId) {
   const script = path.join(REPO_ROOT, "tools/bootstrap/templates/sync-tracker-dispositions.mjs");
-  const ledgerPath = path.join("working", requestToken, "gates", "ledger.jsonl");
+  const ledgerPath = workingRel(projectRoot, requestToken, "local", "gates", "ledger.jsonl");
   execFileSync(process.execPath, [
     script,
     "--tracker",
@@ -219,15 +230,16 @@ async function generateSubstanceProfile(args, citdp, manifestResult, pseudocodeR
   const liveValidators = await import(
     pathToFileURL(path.join(MCP_DIST, "fidelity-research/live-structural-validators.js")).href
   );
-  const outputPath = path.join(
+  const profileRel = workingRel(
     args.projectRoot,
-    "working",
     args.requestToken,
+    "committed",
     "evidence",
     "evidence-chain-profile.v1.json",
   );
+  const outputPath = path.join(args.projectRoot, profileRel);
   mkdirSync(path.dirname(outputPath), { recursive: true });
-  const tiedBase = path.join(args.projectRoot, "tied");
+  const tiedBase = resolveTiedBasePath(args.projectRoot);
   const tokens = citdp?.impact_analysis?.tied_tokens_affected ?? [args.requestToken];
   const result = profileModule.generateEvidenceChainProfile({
     project_root: args.projectRoot,
@@ -320,8 +332,10 @@ async function main() {
 
   let reconcileResult = { ok: false, skipped: true };
   if (args.reconcile) {
-    const ledgerPath = path.join(args.projectRoot, "working", args.requestToken, "gates", "ledger.jsonl");
-    const gatesDir = path.join(args.projectRoot, "working", args.requestToken, "gates");
+    const ledgerRel = workingRel(args.projectRoot, args.requestToken, "local", "gates", "ledger.jsonl");
+    const gatesRel = workingRel(args.projectRoot, args.requestToken, "local", "gates");
+    const ledgerPath = path.join(args.projectRoot, ledgerRel);
+    const gatesDir = path.join(args.projectRoot, gatesRel);
     reconcileResult = await reconcileRunner.runAdherenceReconcile({
       ledger_path: ledgerPath,
       tracker_path: trackerAbsolute,
@@ -377,7 +391,7 @@ async function main() {
     profileResult = await generateSubstanceProfile(args, citdp, manifestResult, pseudocodeReports);
   }
 
-  const tiedBase = path.join(args.projectRoot, "tied");
+  const tiedBase = resolveTiedBasePath(args.projectRoot);
   const buildResult = await envelopeBuild.buildRequestEvidenceEnvelope({
     request_token: args.requestToken,
     project_root: args.projectRoot,

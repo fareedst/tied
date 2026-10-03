@@ -9,7 +9,7 @@ Assert **Layer A bootstrap** for a **new** TIED client after `copy_files.sh`: G4
 ## When to run
 
 - Immediately after `./copy_files.sh "$CLIENT_ROOT"` on a new repo
-- Automatically after **`test-new-tied-client`** / **`new-tied-client`** via [`scripts/build-commands.sh`](../scripts/build-commands.sh) (report at `working/tied-new-client-audit.v1.json` in the client tree)
+- Automatically after **`test-new-tied-client`** / **`new-tied-client`** via [`scripts/build-commands.sh`](../scripts/build-commands.sh) (report at `tied-project/working/tied-new-client-audit.v1.json` on two-folder clients; undivided brownfield fallback `working/tied-new-client-audit.v1.json`)
 - Before the first behavior-changing product REQ in that client
 - When template or bootstrap policy changes (compare with stdd G4 maintenance cadence)
 
@@ -21,7 +21,7 @@ Audit an existing bootstrapped client:
 
 ```bash
 node scripts/run-tied-new-client-audit.mjs --client-root /path/to/client \
-  --json-out /path/to/client/working/tied-new-client-audit.v1.json
+  --json-out /path/to/client/tied-project/working/tied-new-client-audit.v1.json
 ```
 
 Optional full TIED consistency (may fail on large tooling clients — default off):

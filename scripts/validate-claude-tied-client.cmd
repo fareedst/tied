@@ -9,5 +9,7 @@ if "%~1"=="" (
   echo usage: validate-claude-tied-client.cmd CLIENT_DIR
   exit /b 2
 )
-node "%~dp0run-tied-claude-client-validation.mjs" --client-root "%~1" --with-agentstream-dry-run %*
+set "CLIENT_DIR=%~1"
+shift
+node "%~dp0run-tied-claude-client-validation.mjs" --client-root "%CLIENT_DIR%" --with-agentstream-dry-run %*
 exit /b %ERRORLEVEL%

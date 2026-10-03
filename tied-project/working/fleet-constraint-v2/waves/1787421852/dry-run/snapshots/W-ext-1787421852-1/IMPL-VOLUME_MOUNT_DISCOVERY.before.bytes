@@ -1,0 +1,26 @@
+# [IMPL-VOLUME_MOUNT_DISCOVERY] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT]
+# Discover every mounted filesystem and map it to a storage report record.
+
+## LIST_MOUNTS
+# [IMPL-VOLUME_MOUNT_DISCOVERY] [ARCH-VOLUME_STORAGE_CLI] [REQ-VOLUME_STORAGE_REPORT] How: obtain a non-blocking macOS mount snapshot and map every entry to MountStats.
+Contract:
+  INPUT: none
+  PRE: the macOS filesystem enumeration API is available
+  OUTPUT: list of MountStats | DiscoveryError
+  POST:
+    success => every returned record represents one filesystem from the point-in-time mount snapshot
+    error => no partial result is returned
+  FAILURE_MODES: DiscoveryError
+  EFFECTS: IO
+  TERMINATION: total
+CONTROL: use non-blocking snapshot semantics; preserve enumeration order until final sorting
+1. Request the number of filesystem records needed for a snapshot.
+2. IF the sizing call fails: RETURN DiscoveryError.
+3. Allocate storage for the requested records.
+4. Request the records with non-blocking snapshot behavior.
+5. IF the snapshot call fails: RETURN DiscoveryError.
+6. FOR each filesystem record IN the snapshot: decode device, mount point, and filesystem type.
+7. Convert block counters and block size into storage values.
+8. Append the mapped MountStats record.
+9. Sort records by mount point ascending.
+10. RETURN the sorted records.

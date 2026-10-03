@@ -1,0 +1,8 @@
+client_id: "1786666674"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 1 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-SORT_THREE_INTEGERS"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1786666674/tied/implementation-decisions/IMPL-SORT_THREE_INTEGERS-pseudocode.md"
+wave_id: "W-ext-1786666674-1"

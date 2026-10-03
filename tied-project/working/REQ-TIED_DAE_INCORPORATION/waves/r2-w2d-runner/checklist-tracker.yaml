@@ -1,0 +1,105 @@
+copy_hygiene: "Wave-scoped R2 tracker for W2d post-manifest runner (RISK-DAE-009); parent DAE program context only."
+description: "R2 build-plan slice — automate verification-gate sub-step after quality_evidence_collect_manifest when CITDP diff_scoped_crap true."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "working/REQ-TIED_DAE_INCORPORATION/waves/r2-w2d-runner/checklist-tracker.yaml"
+  completed:
+    - "apply-token-comments"
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "resolve-pseudocode"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_DAE_INCORPORATION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_DAE_INCORPORATION"
+record_identity:
+  citdp_path: "tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  req_token: "REQ-TIED_DAE_INCORPORATION"
+  slice: "r2-w2d-runner"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_DAE_INCORPORATION/RESIDUAL-PLAN.md"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/diff-scoped-crap-hook.ts"
+      - "mcp-server/src/diff-scoped-crap.ts"
+      - "mcp-server/src/quality-evidence-collection.ts"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_INCORPORATION-pseudocode.md"
+    slug: "resolve-pseudocode"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_INCORPORATION-pseudocode.md"
+    slug: "apply-token-comments"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_DAE_INCORPORATION-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/quality-evidence-collection.test.ts"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/quality-evidence-collection.test.ts"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/diff-scoped-crap.test.ts"
+      - "mcp-server/src/quality-evidence-collection.test.ts"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/tools/index.ts"
+      - "working/REQ-TIED_DAE_INCORPORATION/waves/r2-w2d-runner/binding-evidence.md"
+    slug: "composition-integration"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_DAE_INCORPORATION/waves/r2-w2d-runner/binding-evidence.md"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "R2 slice CITDP profile_depth minimal and sub_adversarial_inquiry_pass not_applicable; automation-only W2d hook."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied/citdp/CITDP-REQ-TIED_DAE_INCORPORATION.yaml"
+      policy: "minimal-depth-no-inquiry"
+      rationale: "R2 slice CITDP profile_depth minimal and sub_adversarial_inquiry_pass not_applicable; automation-only W2d hook."
+      status: "not_applicable"

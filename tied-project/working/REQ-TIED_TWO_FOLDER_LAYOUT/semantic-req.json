@@ -1,0 +1,5 @@
+{
+  "index": "semantic-tokens",
+  "token": "REQ-TIED_TWO_FOLDER_LAYOUT",
+  "updates": "{\"type\":\"REQ\",\"name\":\"Two-folder TIED layout\",\"description\":\"tied-project + tied-bundle; no legacy tied/ dir\",\"status\":\"Planned\",\"detail_file\":\"requirements/REQ-TIED_TWO_FOLDER_LAYOUT.yaml\",\"source_index\":\"requirements.yaml\",\"cross_references\":[\"ARCH-TIED_TWO_FOLDER_LAYOUT\",\"ARCH-TIED_PROJECT_CONFIG_OWNERSHIP\",\"IMPL-TIED_TWO_FOLDER_LAYOUT\"]}"
+}

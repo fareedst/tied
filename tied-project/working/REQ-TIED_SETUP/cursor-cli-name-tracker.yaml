@@ -1,0 +1,132 @@
+copy_hygiene: "CURSOR_CLI_NAME slice under REQ-TIED_SETUP; combined close-out hydrates full-tools evidence on this tracker (authoritative for run-close-out-gates)."
+depth_tier: "minimal"
+execution_evidence:
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_SETUP"
+gate_policy: "advisory"
+prior_source_plan: "/Users/fareed/.cursor/plans/cursor_cli_name_env_563cd7b7.plan.md"
+profile_depth: "minimal"
+request: "REQ-TIED_SETUP"
+source_plan: "/Users/fareed/.cursor/plans/bootstrap_combined_close-out_a0b4d717.plan.md"
+status: "close_out_complete"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/change-definition-evidence.md"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/cursor-cli-name-sub-adversarial-na.md"
+      - "working/REQ-TIED_SETUP/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth infra slice; counterexamples recorded in CITDP only."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+    slug: "catalog-pseudocode-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied/implementation-decisions/IMPL-TIED_FILES-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    slug: "sync-tied-stack"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP.yaml"
+      status: "completed"
+  - disposition: "pending"
+    rationale: "Sponsor single combined commit; deferred to human after close-out handoff."
+    slug: "traceable-commit"
+  - disposition: "completed"
+    evidence_refs:
+      - "working/REQ-TIED_SETUP/evidence/sub-close-out-evidence-sync-evidence.md"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "working/REQ-TIED_SETUP/evidence/sub-close-out-evidence-sync-evidence.md"
+      status: "completed"

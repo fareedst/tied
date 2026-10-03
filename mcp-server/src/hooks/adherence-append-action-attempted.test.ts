@@ -20,6 +20,7 @@ describe("adherence append action attempted TS bridge [REQ-TIED_UNIFIED_TOOLCHAI
     ledger = path.join(workspace, "working", token, "adherence", "events.jsonl");
     markerPath = path.join(workspace, "working", token, "adherence", "active-turn.json");
     fs.mkdirSync(path.dirname(markerPath), { recursive: true });
+    fs.mkdirSync(path.dirname(ledger), { recursive: true });
     fs.writeFileSync(
       markerPath,
       `${JSON.stringify({

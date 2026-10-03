@@ -12,11 +12,18 @@ import { assertWindowsBootstrapClaude } from "./assert-windows-bootstrap-claude.
 import { jsonSafeAbsolute } from "./paths.mjs";
 import { skillsRerootEnabledFromEnv, SKILLS_REROOT_ENV } from "./skills-reroot.mjs";
 import { runTiedValidateConsistency } from "../../../scripts/lib/tied-new-client-audit.mjs";
+import { committedWorkingFileRel } from "./working-root.mjs";
 
 export const SCHEMA_VERSION = "tied-claude-client-validation.v1";
 export const PROOF_BOUNDARY =
   "automated Claude bootstrap + stdio MCP smoke; not interactive Claude IDE OAuth or adherence hooks";
-export const DEFAULT_REPORT_REL = path.join("working", "tied-claude-client-validation.v1.json");
+
+export const DEFAULT_REPORT_BASENAME = "tied-claude-client-validation.v1.json";
+
+/** @param {string} clientRoot */
+export function defaultClaudeClientValidationReportRel(clientRoot) {
+  return committedWorkingFileRel(clientRoot, DEFAULT_REPORT_BASENAME);
+}
 
 export const CHECK_ORDER = [
   "mcp_dist_prerequisite",
@@ -309,7 +316,8 @@ export function runClaudeClientValidation(clientDir, sourceRoot, options = {}) {
     options.withClaudeCodeInteractiveSmoke === true ||
     env[CLAUDE_CODE_INTERACTIVE_SMOKE_ENV] === "1";
   const reportPath =
-    options.reportPath ?? path.join(clientRoot, DEFAULT_REPORT_REL);
+    options.reportPath ??
+    path.join(clientRoot, defaultClaudeClientValidationReportRel(clientRoot));
 
   /** @type {object[]} */
   const checks = [];

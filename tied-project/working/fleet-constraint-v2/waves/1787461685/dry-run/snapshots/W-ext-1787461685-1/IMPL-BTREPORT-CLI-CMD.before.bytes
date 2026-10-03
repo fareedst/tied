@@ -1,0 +1,53 @@
+# [IMPL-BTREPORT-CLI-CMD] [ARCH-BTREPORT-PLATFORM-ADAPTER] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+# Orchestrate configuration, collection, filtering, and output while keeping the entry point thin.
+
+## RUN
+# [IMPL-BTREPORT-CLI-CMD] [ARCH-BTREPORT-PLATFORM-ADAPTER] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+# Delegate each stage to a validated module and map failures to stable exit codes.
+INPUT: argv, output writer, error writer, Platform
+OUTPUT: process status code
+PRE: Platform and writers are available
+POST: success writes the requested report and returns 0; usage errors return 2; runtime errors return 1
+EFFECTS: IO, Exn
+FAILURE_MODES: usage/config error, collection error, serialization/write error
+TERMINATION: total
+1. Call ParseAndResolve with argv.
+2. IF configuration fails, write usage diagnostics and RETURN 2.
+3. Collect a report through Platform with a cancellable context.
+4. IF collection fails, write a runtime diagnostic and RETURN 1.
+5. Apply the resolved filters to the report.
+6. IF no-controller is set, remove controller data from the output copy.
+7. Write JSON or text according to the resolved format.
+8. IF writing fails, write a runtime diagnostic and RETURN 1.
+9. RETURN 0.
+
+## PARSE_AND_RESOLVE
+# [IMPL-BTREPORT-CLI-CMD] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI] [REQ-BTREPORT-DEVICE-FILTERS]
+# Resolve defaults, explicit filter flags, output format, and controller visibility.
+INPUT: argv
+OUTPUT: configuration or usage error
+PRE: argv is an ordered list of command-line words
+POST: format defaults to json; no filter defaults to all paired devices; --all overrides other filters
+EFFECTS: pure
+FAILURE_MODES: unknown flag, invalid format, malformed flag value
+TERMINATION: total
+1. Initialize format to json and all visibility flags to their defaults.
+2. Parse format, current, known, nearby, all, and no-controller flags.
+3. IF format is not json or text, RETURN usage error.
+4. IF a flag value is malformed or unknown, RETURN usage error.
+5. IF all is set, retain all override semantics regardless of other filter flags.
+6. RETURN the resolved configuration.
+
+## SELECT_OUTPUT
+# [IMPL-BTREPORT-CLI-CMD] [ARCH-BTREPORT-OUTPUT] [REQ-BTREPORT-CLI]
+# Route the filtered report to the selected stable formatter.
+INPUT: report, resolved format, output writer
+OUTPUT: success or format/write error
+PRE: report is filtered and format is json or text
+POST: exactly one formatter writes the report
+EFFECTS: IO, Exn
+FAILURE_MODES: formatter error
+TERMINATION: total
+1. IF format is json, call WRITE_JSON.
+2. ELSE call WRITE_TEXT.
+3. RETURN the formatter result.

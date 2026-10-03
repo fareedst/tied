@@ -1,0 +1,197 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "cfd5bf6ad98024eb",
+    "scope": [
+      "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+    ],
+    "graph": {
+      "projectId": "cfd5bf6ad98024eb",
+      "nodes": [
+        {
+          "id": "case:CE-001",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-002",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-003",
+          "kind": "case"
+        },
+        {
+          "id": "constraint:constraint-psa-analysis-engine",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:prod-proof-boundary",
+          "kind": "evidence",
+          "revision": "citdp-20260908"
+        },
+        {
+          "id": "evidence:test-path-safety",
+          "kind": "evidence",
+          "revision": "citdp-20260908"
+        },
+        {
+          "id": "evidence:test-proof-boundary",
+          "kind": "evidence",
+          "revision": "citdp-20260908"
+        },
+        {
+          "id": "evidence:test-read-only",
+          "kind": "evidence",
+          "revision": "citdp-20260908"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "kind": "block",
+          "revision": "4aa2bce358521ab8"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_STATIC_ANALYSIS#criterion-1",
+          "kind": "criterion",
+          "revision": "criterion-rev-psa"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-PSEUDOCODE_STATIC_ANALYSIS#criterion-1",
+          "to": "constraint:constraint-psa-analysis-engine",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-psa-analysis-engine",
+          "to": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "to": "evidence:prod-proof-boundary",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "to": "evidence:test-path-safety",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "to": "evidence:test-proof-boundary",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "to": "evidence:test-read-only",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "to": "case:CE-001",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "to": "case:CE-002",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e",
+          "to": "case:CE-003",
+          "kind": "block_case"
+        }
+      ]
+    },
+    "findings": [],
+    "proofBoundaries": [],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "PASS",
+  "status": {
+    "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e": "PASS"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "PASS",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "psa-doc-full-update-verify-20260908",
+      "phase": "verification",
+      "scope": [
+        "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+      ],
+      "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+      "artifact_hashes": {
+        "obligation-report.json": "69656df69b04138f78237958bbc66c463a33bf40ca1c277bcc0b0cc3f2133c04",
+        "finding-ledger.jsonl": "5c66ca5ae13cc71a408f9d7e798dc9496bf0902107698d66213298b624cfaede",
+        "gate-result.json": "bb04e0959855c56ec54db63ff888b7ac9b640c38da6a11894119d96c85083a4a",
+        "evidence-provenance.json": "7e923e9c5eadacd3a68f1f3188205d605a52291db2e617d5184cc32771d1b2ac"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "psa-doc-full-update-verify-20260908",
+        "phase": "verification",
+        "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+        "hash": "69656df69b04138f78237958bbc66c463a33bf40ca1c277bcc0b0cc3f2133c04",
+        "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "psa-doc-full-update-verify-20260908",
+        "phase": "verification",
+        "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+        "hash": "5c66ca5ae13cc71a408f9d7e798dc9496bf0902107698d66213298b624cfaede",
+        "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "psa-doc-full-update-verify-20260908",
+        "phase": "verification",
+        "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+        "hash": "bb04e0959855c56ec54db63ff888b7ac9b640c38da6a11894119d96c85083a4a",
+        "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+        "project_id": "cfd5bf6ad98024eb",
+        "run_id": "psa-doc-full-update-verify-20260908",
+        "phase": "verification",
+        "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+        "hash": "7e923e9c5eadacd3a68f1f3188205d605a52291db2e617d5184cc32771d1b2ac",
+        "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/evidence-provenance.json"
+      }
+    }
+  }
+}

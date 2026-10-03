@@ -7,13 +7,18 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { sayErr } from "./console.mjs";
 
-export function collectYamlFiles(rootDir, relativeDir = "tied") {
-  const base = path.join(rootDir, relativeDir);
-  if (!fs.existsSync(base)) {
-    return [];
-  }
+export function collectYamlFiles(rootDir, relativeDir) {
+  const candidates =
+    relativeDir != null
+      ? [relativeDir]
+      : ["tied-project", "tied"];
   const out = [];
-  walkYaml(base, out);
+  for (const dirName of candidates) {
+    const base = path.join(rootDir, dirName);
+    if (fs.existsSync(base)) {
+      walkYaml(base, out);
+    }
+  }
   return out.sort();
 }
 
@@ -38,7 +43,7 @@ export function lintClientTiedYaml({ clientDir, sourceRoot, nodeExec = process.e
 
   const files = collectYamlFiles(clientDir);
   if (files.length === 0) {
-    sayErr("lint: no .yaml files under tied/ (missing tied/ or empty tree)");
+    sayErr("lint: no .yaml files under tied-project/ or tied/ (missing project tree or empty indexes)");
     return { ok: false, code: 1, step: "lint", fileCount: 0 };
   }
   for (const file of files) {

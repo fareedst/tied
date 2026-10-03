@@ -1,0 +1,23 @@
+# [IMPL-TCP_CONNECT_REPORT] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]
+
+Column-aligned human-readable report lines.
+
+
+Grammar-Version: v2
+
+## FORMAT_LINES
+
+<!-- [IMPL-TCP_CONNECT_REPORT] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]: formats probe results into aligned stdout lines with ms elapsed for every status -->
+
+Contract:
+  INPUT: results slice with one entry per target
+  OUTPUT: one line per result; stable column alignment across batch
+  PRE: results slice with one entry per target
+  POST: one line per result; stable column alignment across batch
+  EFFECTS: computes max address width; pads status to 7 chars; prints elapsed integer ms for all statuses including TIMEOUT
+  TERMINATION: total
+
+procedure FORMAT_LINES(): # [IMPL-TCP_CONNECT_REPORT] [ARCH-TCP_CONNECT_CHECKER] [REQ-TCP_CONNECT_CHECKER]
+1. maxAddr := max length of result.Address in results
+2. FOR each result IN results format line with padded address, status, and ms
+3. RETURN joined lines with newline

@@ -1,0 +1,124 @@
+# Domain vocabulary index (full catalog, on-demand)
+
+> **Primary directory entry:** [`routing.md`](routing.md) (~70 lines). This is the TIED methodology catalog; in clients it is installed under `tied-bundle/vocab/` and reached through the client-owned `tied-project/vocab/routing.md` handoff. Agents MUST read the client handoff first during PRELOAD. Do **not** read this full catalog at bootstrap.
+
+**Scope:** Full on-demand directory for all TIED methodology vocabulary glossaries under the source `tied-project/vocab/` tree (installed in clients under `tied-bundle/vocab/`). Lists priority, scope, and cross-topic notes. This page is an **index only** — canonical terms live in the linked sibling files. Algorithms and step-by-step behavior stay in `tied-project/implementation-decisions/*-pseudocode.md`.
+
+**Checklist path:** [`../docs/agent-req-implementation-checklist.yaml`](../../tied-bundle/docs/agent-req-implementation-checklist.yaml) sets the client handoff as the `VOCAB_INDEX` entry. Agents **CALL** `sub-vocabulary-sync` per [`../docs/processes.md`](../../tied-bundle/docs/processes.md) § `[PROC-VOCABULARY_INDEX]` at **three touchpoints**: **RESOLVE** at prompt intake (`translate-sponsor-intent`, `change-definition`); **PRELOAD** before reading TIED/docs/code (`session-bootstrap`, `impact-discovery`); **VALIDATE** before commit (`traceable-commit`). Inline during work: RESOLVE before naming; RECORD after artifact edits.
+
+**Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md).
+
+**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../../tied-bundle/docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`quality-assurance.md`](quality-assurance.md) · [`fidelity-research.md`](fidelity-research.md) · [`residuality.md`](residuality.md) · [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) · [`prompt-composer.md`](prompt-composer.md) · [`feature-orchestration.md`](feature-orchestration.md) · [`decision-copilot.md`](decision-copilot.md) · [`config-discovery.md`](config-discovery.md)
+
+---
+
+## Directory entry (bootstrap)
+
+| Document | Role |
+|----------|------|
+| [`routing.md`](routing.md) | **Primary** `tied-project/vocab/` entry — keyword → glossary routing for PRELOAD |
+
+---
+
+## Canonical glossaries
+
+| Priority | Document | Scope |
+|----------|----------|-------|
+| 0 | [`domain-references.md`](domain-references.md) | This full catalog (on-demand) |
+| 1 | [`tied-methodology.md`](tied-methodology.md) | TIED layout, semantic tokens, registry atoms and distributed facets, traceability graph, module validation, bootstrap, methodology vs project YAML, PROC-* process names |
+| 2 | [`tied-yaml-mcp.md`](tied-yaml-mcp.md) | TIED YAML MCP server, `tied-cli`, bundled skill, validation/verify/cycles/backlog/scoped analysis |
+| 2b | [`feedback-to-tied.md`](feedback-to-tied.md) | Upstream feedback artifact (`feedback.yaml`) and MCP export |
+| 3 | [`leap-proposal-queue.md`](leap-proposal-queue.md) | Non-canonical LEAP proposals, audit, diff/session import |
+| 4 | [`agentstream.md`](agentstream.md) | **`@tied/agentstream`** (TypeScript default, Phase **4d**): pipeline, checklist, executor, MCP preflight; legacy Go tree removed |
+| 4b | [`agent-stream-ruby.md`](agent-stream-ruby.md) | Historical Ruby ATDD (removed Phase **4b**); `IMPL-ATDD-*` and naming-bridge terms only |
+| 5 | [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) | Domain vocab vs IMPL grammar; three-way alignment; CITDP record naming |
+| 5b | [`quality-assurance.md`](quality-assurance.md) | Quality attributes, assurance profiles, evidence matrices, evidence provenance, proof boundaries, residual-risk decisions, the evidence chain profile, and the evidence chain statistics report |
+| 5c | [`fidelity-research.md`](fidelity-research.md) | Fidelity findings, specification state, origin layer, divergent edge, read-only research profile, finding lifecycle, evidence provenance |
+| 5d | [`prompt-composer.md`](prompt-composer.md) | TIED-source-only Prompt Composer, prompt types, global prompt skills, explicit router, prompt envelope, shared references, and client skill installation; glossary not installed into clients |
+| 5e | [`feature-orchestration.md`](feature-orchestration.md) | Feature manifests, lifecycle, clarification and constitution gates, task graphs, generated views, onboarding, migration, and client publication |
+| 5f | [`async-methodology.md`](async-methodology.md) | Async methodology: seven semantic classes, optional v1 contract rows, REQ/ARCH/IMPL naming bridges, proof boundaries |
+| 5g | [`decision-copilot.md`](decision-copilot.md) | Jev / System One decision coprocessor, shadow routing, noul gates, harness fail-closed blocking, bounded semantic decision engine, decision role taxonomy |
+| 5h | [`residuality.md`](residuality.md) | Residuality Theory stressors, residues, attractors, stressor-residue records, discovery loop |
+| 5i | [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) | BBCE behavioral slices, change locality, declared change surface, boundary violations |
+| 5j | [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) | Sponsor, agent, reviewer roles; instrument vs person branch; agency boundary; hinge fields; consequence ladder; reversible/costly choices |
+| — | [`config-discovery.md`](config-discovery.md) | Planned layered YAML config (stub; `(proposed)` terms) |
+
+---
+
+## Authoring guides (not glossaries)
+
+| Document | Role |
+|----------|------|
+| [`../docs/client-development-index.md`](../../tied-bundle/docs/client-development-index.md) | Minimal named set for CITDP + LEAP + TIED (Core seven, including domain vocabulary) |
+| [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md) | Meta-standard for glossary structure and TIED integration |
+| [`../docs/vocabulary-layer-tied-leap-citdp.md`](../../tied-bundle/docs/vocabulary-layer-tied-leap-citdp.md) | Outreach: Vocab understanding vs TIED intent vs CITDP vs LEAP |
+| [`../docs/tied-domain-vocabulary-research-prompt.md`](../../tied-bundle/docs/tied-domain-vocabulary-research-prompt.md) | Copy-paste agent prompt to author vocab corpora in client repos |
+| [`../docs/pseudocode-writing-and-validation.md`](../../tied-bundle/docs/pseudocode-writing-and-validation.md) | IMPL pseudo-code lifecycle (not domain term registry) |
+| [`../docs/implementation-decisions.md`](../../tied-bundle/docs/implementation-decisions.md) | IMPL grammar vocabulary (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS/…) — distinct from domain vocab |
+
+---
+
+## Cross-topic notes
+
+- **STDD / TIED repository layout:** canonical domain glossaries live at `tied-project/vocab/<topic>.md` (no `-vocabulary` filename suffix). Meta-standard: [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md) § STDD convention. Other TIED client repos may use `docs/*-vocabulary.md` per the replication prompt; this repo uses `tied-project/vocab/`.
+- **`tied agentstream`** / **`@tied/agentstream`** (TypeScript operator CLI) vs historical **agent-stream** (Ruby, removed) vs **run-feature-batch** shell drivers — define once in [`agentstream.md`](agentstream.md) and [`agent-stream-ruby.md`](agent-stream-ruby.md); link from both.
+- **Domain vocabulary** (this tree) vs **IMPL grammar vocabulary** (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS keywords) — define once in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
+- **Pseudo-code Layer C gate** vs **Layer B validation** — `pseudocode_analyze` with `gate_mode: true` is a file-scoped, bounded static-analysis gate after Layer B and before RED tests; `pre-psa-grammar` may classify untouched legacy blocks but does not suppress errors in a changed sidecar submitted to Layer C. Define terms in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md).
+- **Vocabulary layer** / **agent-control layer** — the peer control layer that resolves, preloads, records, and validates domain terms; canonical terms live in [`tied-methodology.md`](tied-methodology.md), while touchpoints are defined by `[PROC-VOCABULARY_INDEX]`.
+- **Registry atoms vs distributed facets vs traceability graph** — **registry atoms** are authoritative token detail, IMPL sidecars, and canonical glossary terms; **distributed facets** are aligned partial views (traceability lists, block leads, code/test comments, working evidence). **Atomized traceability graph** names graph-closure validation; avoid **holographic** or **miniature copy of the whole system** as misleading metaphors. Define once in [`tied-methodology.md`](tied-methodology.md) § Registry atoms and distributed facets.
+- **Prompt Composer / prompt-type skills** — canonical source-only terms for the versioned bundle and explicit router live in [`prompt-composer.md`](prompt-composer.md); distribution behavior for client skills is defined by [ARCH-PROMPT_TYPE_GLOBAL_SKILLS](../architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml) and [IMPL-PROMPT_TYPE_GLOBAL_SKILLS](../implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml). **Explicit skill invocation** (caller names `plan-new-feature`, `refine-plan`, `build-plan`, or `plan-close-out`) is authoritative; optional Jev W6 plan-skills shadow is advisory only — Jev W3 prompt-type suggestions must not override an explicit `@build-plan` or auto-invoke leaf skills ([`decision-copilot.md`](decision-copilot.md) W6 plan-skills adjunct).
+- **YAML canonicalization** / **format metadata** — the canonical domain terms live in [`tied-methodology.md`](tied-methodology.md); MCP-specific `tied_yaml_format` and `yaml_format` terms live in [`tied-yaml-mcp.md`](tied-yaml-mcp.md). The typed `tied-yaml-canonical-v1` profile supersedes double-quoted scalar lint as the default `yaml_tool` behavior while retaining compatibility frontends. The repository scalar-style policy selects `wrapped` or `unwrapped` with repository-over-global precedence.
+- **TIED base path** / **project YAML** vs **methodology YAML** — define once in [`tied-methodology.md`](tied-methodology.md); referenced from [`tied-yaml-mcp.md`](tied-yaml-mcp.md).
+- **Methodology migration** / **client refresh** / **vocabulary merge mode** — a `tied-install.sh` refresh replaces only the inherited `tied-bundle/` snapshot, preserves project YAML and client-owned vocabulary, and uses `--merge-vocab` to add absent glossary files; canonical terms live in [`tied-methodology.md`](tied-methodology.md) and the operational procedure in [`../docs/methodology-migration.md`](../../tied-bundle/docs/methodology-migration.md).
+- **Non-canonical LEAP proposals** (`leap-proposals/`) never mutate project TIED YAML — see [`leap-proposal-queue.md`](leap-proposal-queue.md).
+- **Fidelity research** is read-only against audited projects; candidate findings and case reports belong in the research dataset, while remediation is a separately approved LEAP operation — see [`fidelity-research.md`](fidelity-research.md) and [`../docs/tied-fidelity-research-plan.md`](../../docs/tied-fidelity-research-plan.md).
+- **Adversarial inquiry vs quality-assurance profiles vs pseudo-code validation** — three distinct checklist layers: (1) `[PROC-PSEUDOCODE_VALIDATION]` / `sub-pseudocode-validation-pass` gates IMPL contract structure and traceability without runtime claims; (2) [`quality-assurance.md`](quality-assurance.md) profiles and evidence matrices select risk-triggered assurance depth at `impact-discovery` / `risk-assessment`; (3) [`fidelity-research.md`](fidelity-research.md) adversarial inquiry and `sub-adversarial-inquiry-pass` add obligation mapping, proof-boundary partitioning, finding ledgers, and scoped strict blocking at `verification-gate`. Do not conflate structural pseudo-code PASS with executable fidelity PASS or with human-approved strict status.
+- **Evidence chain profile vs assurance profile vs research profile** — the **evidence chain profile** (`evidence-chain-profile.v1`) is a read-only completeness/provenance artifact. An **assurance profile** selects risk-triggered quality evidence. **Integrated agent profile** and **human research profile** are fidelity research *modes*. **Evidence-chain profile depth** (`integrated` \| `human_research`) only selects how much of the chain one generator run measures. Canonical terms: [`quality-assurance.md`](quality-assurance.md); contrast in [`fidelity-research.md`](fidelity-research.md).
+- **Evidence chain statistics report vs evidence chain profile** — the **evidence chain statistics report** (`evidence-chain-statistics-report.v1`) is a TIED-source offline batch over already-generated profiles. A **client cohort** is a compatibility partition, not a quality **pilot**. A **report input manifest** names artifacts; it is not a **project manifest**. Canonical terms: [`quality-assurance.md`](quality-assurance.md).
+
+---
+
+## Preferred terms vs synonyms (directory entry)
+
+| Preferred | Avoid | Notes |
+|-----------|-------|-------|
+| **routing.md** | `domain-references-routing.md` | Primary `tied-project/vocab/` directory entry; PRELOAD starts here |
+| **routing index** / **Vocab directory routing index** | Domain vocabulary routing index (old title) | Lightweight keyword → glossary table in `routing.md` |
+| **full catalog** / **domain-references.md** (on-demand) | “canonical index read at bootstrap” | This file — Priority table, authoring guides, cross-topic notes only |
+
+---
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| agent-stream | Cross-topic notes |
+| agentstream | Cross-topic notes |
+| client refresh | Cross-topic notes |
+| Domain vocabulary index | Title |
+| domain-references.md | Preferred terms (directory entry) |
+| evidence chain profile | Cross-topic notes |
+| evidence-chain profile depth | Cross-topic notes |
+| evidence chain statistics report | Cross-topic notes |
+| client cohort | Cross-topic notes |
+| report input manifest | Cross-topic notes |
+| full catalog | Preferred terms (directory entry) |
+| gate_mode | Cross-topic notes |
+| Layer C static analysis gate | Cross-topic notes |
+| methodology migration | Cross-topic notes |
+| origin layer | `fidelity-research.md` |
+| proof boundary | `fidelity-research.md` |
+| specification state | `fidelity-research.md` |
+| divergent edge | `fidelity-research.md` |
+| fidelity finding | `fidelity-research.md` |
+| finding lifecycle | `fidelity-research.md` |
+| read-only research profile | `fidelity-research.md` |
+| IMPL grammar vocabulary | Authoring guides |
+| routing index | Preferred terms (directory entry) |
+| routing.md | Directory entry (bootstrap) |
+| sub-vocabulary-sync | Scope |
+| VOCAB_INDEX | Scope |
+| Vocab directory routing index | Preferred terms (directory entry) |
+| agent-control layer | Cross-topic notes |
+| vocabulary layer | Cross-topic notes |
+| vocabulary merge mode | Cross-topic notes |

@@ -1,0 +1,19 @@
+$schema: "working/fleet-constraint-v2/migration-waiver.v1.schema.json"
+expires_at: "2026-12-11T00:00:00Z"
+issued_at: "2026-09-12T00:00:00Z"
+owner: "client-owner@example.com"
+reason: "Illustrative waiver for unknown constraint analysis on one sidecar during Phase 1 schema review.\nReplace with real scope before any operational use.\n"
+remediation_req: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+schema_version: 1
+scope:
+  client_id: "example-client"
+  kind: "sidecar_list"
+  outcome_classes:
+    - "truncation"
+    - "unknown"
+  repository_root: "/path/to/client"
+  sidecar_paths:
+    - "tied/implementation-decisions/IMPL-EXAMPLE-pseudocode.md"
+status: "superseded"
+stdd_audit_note: "Example fixture only — do not treat as active waiver."
+waiver_id: "waiver-example-20260912-001"

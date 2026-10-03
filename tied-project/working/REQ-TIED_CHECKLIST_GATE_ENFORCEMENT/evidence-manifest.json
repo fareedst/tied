@@ -1,0 +1,83 @@
+{
+  "schema_version": "evidence-manifest.v1",
+  "completion_claim": "STDD checklist-gate safeguards reject unsupported evidence and accept valid evidence for acceptance matrix A1–A18, demonstrated by 20 tests across acceptance matrix and fixture corpus regression (2-suite command), 15/15 corpus replay, and phase-specific gate receipts with distinct run_ids (remediation-structural-20260824, remediation-verification-20260824, remediation-close-out-20260824). Verification and close_out checklist gates allowed; close_out adversarial inquiry is advisory status warn with verdict PASS (non-blocking).",
+  "request_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+  "client_alias": "1787603099",
+  "tracker_path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/reliable-evidence-remediation-tracker.yaml",
+  "citdp_path": "tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml",
+  "corpus_manifest_ref": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/corpus-manifest.json",
+  "regression_manifest_ref": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/regression-manifest.json",
+  "gate_receipts": {
+    "pre_implementation": {
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-pre-implementation.json",
+      "allowed": true
+    },
+    "verification": {
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-verification.json",
+      "allowed": true
+    },
+    "close_out": {
+      "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-close_out.json",
+      "allowed": true
+    }
+  },
+  "adversarial_inquiry_runs": [
+    {
+      "phase": "pre_implementation",
+      "run_id": "remediation-structural-20260824",
+      "proof_boundary": "traceability_structure,pseudo_code_structure"
+    },
+    {
+      "phase": "verification",
+      "run_id": "remediation-verification-20260824"
+    },
+    {
+      "phase": "close_out",
+      "run_id": "remediation-close-out-20260824"
+    }
+  ],
+  "test_reports": [
+    {
+      "command": "node --test mcp-server/dist/checklist-remediation-acceptance.test.js mcp-server/dist/fixture-corpus-regression.test.js",
+      "result": "pass",
+      "proof_boundary": "Acceptance matrix A1–A18 + fixture corpus regression (15/15); no checklist-validator or MCP composition suites in this retained artifact."
+    }
+  ],
+  "lint_results": [
+    {
+      "command": "npm run build --prefix mcp-server",
+      "result": "pass"
+    },
+    {
+      "command": "pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT (pre-RED structural)",
+      "result": "pass",
+      "scope": "pre_implementation"
+    },
+    {
+      "command": "pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT (post-test Layer B minimum_gating_rules)",
+      "result": "pass",
+      "scope": "verification",
+      "proof_boundary": "Full block coverage_references mapped to remediation unit/composition/regression tests; require_behavioral_coverage true."
+    }
+  ],
+  "tied_validate_consistency_result": {
+    "ok": true
+  },
+  "tied_verify_result": {
+    "ok": true,
+    "requirements_set_implemented": [
+      "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    ],
+    "implementation_set_active": [
+      "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    ]
+  },
+  "depth_tier": "integrated",
+  "gate_policy": "advisory",
+  "limitations": [
+    "A12, A15, A17 covered by unit tests only; not included in fixture corpus manifest negative cases.",
+    "macOS UI visibility not proven by UI-free gate checks.",
+    "Fixture REQ-LISTENING_PORT_REPORT remains evidence corpus only; not remediated as product deliverable.",
+    "Close_out adversarial inquiry gate-result: status warn, verdict PASS, blocking false — advisory non-blocking; not an unqualified pass."
+  ]
+}

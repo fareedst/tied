@@ -13,6 +13,8 @@ import {
   getClientProjectRoot,
   resolveIndexPath,
   clearBasePathCache,
+  resolveMethodologyRoot,
+  getMethodologyBasePath,
 } from "./yaml-loader.js";
 
 beforeEach(() => {
@@ -22,7 +24,7 @@ beforeEach(() => {
 describe("getBasePath", () => {
   it("returns path under cwd when TIED_BASE_PATH is default [IMPL]", () => {
     const base = getBasePath();
-    assert.ok(base.endsWith("tied") || path.basename(base) === "tied");
+    assert.ok(["tied-project", "tied"].includes(path.basename(base)));
   });
 
   it("uses TIED_BASE_PATH when set", () => {
@@ -39,7 +41,7 @@ describe("getBasePath", () => {
 
   it("getClientProjectRoot returns parent of TIED base path", () => {
     const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-loader-client-"));
-    const tiedDir = path.join(clientRoot, "tied");
+    const tiedDir = path.join(clientRoot, "tied-project");
     fs.mkdirSync(tiedDir, { recursive: true });
     try {
       process.env.TIED_BASE_PATH = tiedDir;
@@ -90,6 +92,70 @@ describe("resolveIndexPath", () => {
       process.chdir(origCwd);
       delete process.env.TIED_BASE_PATH;
       fs.rmSync(dir, { recursive: true });
+    }
+  });
+});
+
+describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
+  it("prefers TIED_METHODOLOGY_BUNDLE_PATH env override", () => {
+    const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-root-"));
+    const tiedDir = path.join(clientRoot, "tied-project");
+    const bundleDir = path.join(clientRoot, "tied-bundle");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.mkdirSync(bundleDir, { recursive: true });
+    fs.writeFileSync(path.join(bundleDir, "requirements.yaml"), "{}\n", "utf8");
+    const override = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-override-"));
+    fs.writeFileSync(path.join(override, "requirements.yaml"), "{}\n", "utf8");
+    try {
+      process.env.TIED_BASE_PATH = tiedDir;
+      process.env.TIED_METHODOLOGY_BUNDLE_PATH = override;
+      clearBasePathCache();
+      assert.strictEqual(resolveMethodologyRoot(), override);
+      assert.strictEqual(getMethodologyBasePath(), override);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      delete process.env.TIED_METHODOLOGY_BUNDLE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
+      fs.rmSync(override, { recursive: true });
+    }
+  });
+
+  it("resolves flattened tied-bundle when install.json and indexes exist", () => {
+    const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-install-"));
+    const tiedDir = path.join(clientRoot, "tied-project");
+    const bundleDir = path.join(clientRoot, "tied-bundle");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.mkdirSync(bundleDir, { recursive: true });
+    fs.writeFileSync(path.join(bundleDir, "requirements.yaml"), "{}\n", "utf8");
+    fs.writeFileSync(
+      path.join(bundleDir, "install.json"),
+      JSON.stringify({ schema: "tied-install.v2", bundle_path: bundleDir }),
+      "utf8",
+    );
+    try {
+      process.env.TIED_BASE_PATH = tiedDir;
+      clearBasePathCache();
+      assert.strictEqual(resolveMethodologyRoot(), bundleDir);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
+    }
+  });
+
+  it("returns null when .linked-methodology-view is present without bundle indexes", () => {
+    const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-legacy-view-"));
+    const tiedDir = path.join(clientRoot, "tied-project");
+    fs.mkdirSync(path.join(tiedDir, ".linked-methodology-view"), { recursive: true });
+    try {
+      process.env.TIED_BASE_PATH = tiedDir;
+      clearBasePathCache();
+      assert.strictEqual(resolveMethodologyRoot(), null);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
     }
   });
 });

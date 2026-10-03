@@ -10,7 +10,7 @@ import { sayWarn, sayXOfYClient } from "./console.mjs";
 
 export function postProcessTiedYamlAgentIndex(dest) {
   let text = fs.readFileSync(dest, "utf8");
-  text = text.replaceAll("](../tied/docs/using-tied-without-mcp.md)", "](./using-tied-without-mcp.md)");
+  text = text.replaceAll("](../tied-bundle/docs/using-tied-without-mcp.md)", "](./using-tied-without-mcp.md)");
   text = text.replaceAll("](../tied/", "](../");
   text = text.replaceAll("](../.cursor/", "](../../.cursor/");
   text = text.replaceAll("](../AGENTS.md)", "](../../AGENTS.md)");
@@ -27,7 +27,7 @@ export function copyDocs(docsToCopy, tiedSourceDir, tiedDir) {
     const src = path.join(tiedSourceDir, "docs", f);
     const dest = path.join(docsDest, f);
     if (!fs.existsSync(src)) {
-      throw new Error(`Missing methodology doc (canonical in TIED repo tied/docs/): ${src}`);
+      throw new Error(`Missing methodology doc (canonical in TIED repo tied-bundle/docs/): ${src}`);
     }
     docsTotal += 1;
     if (!fs.existsSync(dest)) {

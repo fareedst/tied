@@ -1,0 +1,84 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+    "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "run_id": "fleet-migration-phase4-p4c-20260912",
+    "phase": "pre_implementation",
+    "scope": [
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006"
+    ],
+    "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c",
+    "artifact_hashes": {
+      "obligation-report.json": "16e3fb53b0c023d2758c02007002efe8876a7ab1d0e86607018e54d185926aa2",
+      "finding-ledger.jsonl": "f9437859343a5509b9219217cf143ffdd5eb989c91ef85b2bd4e67f57709485d",
+      "gate-result.json": "5a6742055006fad0b6c1f8f1ca6492bdfc59de5543e846b33e968716f88d39f2",
+      "evidence-provenance.json": "11490d6b681fb0db93503bef262be733ee1f1ba689f563d3e810ea69d88ec592"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "run_id": "fleet-migration-phase4-p4c-20260912",
+      "phase": "pre_implementation",
+      "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c",
+      "hash": "16e3fb53b0c023d2758c02007002efe8876a7ab1d0e86607018e54d185926aa2",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "run_id": "fleet-migration-phase4-p4c-20260912",
+      "phase": "pre_implementation",
+      "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c",
+      "hash": "f9437859343a5509b9219217cf143ffdd5eb989c91ef85b2bd4e67f57709485d",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "run_id": "fleet-migration-phase4-p4c-20260912",
+      "phase": "pre_implementation",
+      "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c",
+      "hash": "5a6742055006fad0b6c1f8f1ca6492bdfc59de5543e846b33e968716f88d39f2",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+      "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "run_id": "fleet-migration-phase4-p4c-20260912",
+      "phase": "pre_implementation",
+      "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c",
+      "hash": "11490d6b681fb0db93503bef262be733ee1f1ba689f563d3e810ea69d88ec592",
+      "path": "working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+    "project_id": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "run_id": "fleet-migration-phase4-p4c-20260912",
+    "phase": "pre_implementation",
+    "scope": [
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-001",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-002",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-003",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-004",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-005",
+      "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION#SC-FLEET-P4-006"
+    ],
+    "scope_hash": "04210dfab69690b42e5f77c816e2dea9cbd128e0fc444d1c99ba739d598bf58c"
+  },
+  "diagnostics": []
+}

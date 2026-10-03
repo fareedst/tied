@@ -1,0 +1,24 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T18:26:03.688Z",
+  "client_id": "1788547701",
+  "wave_scope": "W-ext-1788547701-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1788547701/tied/implementation-decisions/IMPL-BT_CLI_FORMATTER-pseudocode.md",
+      "impl_token": "IMPL-BT_CLI_FORMATTER",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1788547701/tied/implementation-decisions/IMPL-BT_DARWIN_COLLECTOR-pseudocode.md",
+      "impl_token": "IMPL-BT_DARWIN_COLLECTOR",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    }
+  ],
+  "dry_run_content_hash": "140801ebf71479f467de6fcd010204072c674427fb03e0b554be64e5b50f25be",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1788547701/dry-run/snapshots/W-ext-1788547701-1"
+}

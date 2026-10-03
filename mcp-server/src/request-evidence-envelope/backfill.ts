@@ -6,6 +6,7 @@
 import { createHash } from "node:crypto";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "../working-root.js";
 
 import yaml from "js-yaml";
 
@@ -93,7 +94,7 @@ export async function resolveCitdpContext(
   projectRoot: string,
   requestToken: string,
 ): Promise<{ record: Record<string, unknown>; citdpPath: string } | null> {
-  const workingDir = path.join(projectRoot, "working", requestToken);
+  const workingDir = resolveWorkingPath(projectRoot, requestToken);
   const candidates: string[] = [
     path.join(workingDir, `CITDP-${requestToken}.yaml`),
     path.join(projectRoot, "tied", "citdp", `CITDP-${requestToken}.yaml`),
@@ -193,7 +194,7 @@ export async function writeNotApplicableReceiptIfNeeded(input: {
     return { path: null, phases: [] };
   }
 
-  const workingRoot = path.join(input.projectRoot, "working", input.requestToken);
+  const workingRoot = resolveWorkingPath(input.projectRoot, input.requestToken);
   const missingPhases: GatePhase[] = [];
   for (const phase of INQUIRY_PHASES) {
     if (!(await phaseHasInquiryArtifacts(workingRoot, phase))) {

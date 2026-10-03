@@ -17,7 +17,7 @@ import {
 } from "./shadow-vocab-preload.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROUTING_PATH = path.join(__dirname, "../../../tied/vocab/routing.md");
+const ROUTING_PATH = path.join(__dirname, "../../../tied-project/vocab/routing.md");
 
 function remoteTraceEnv(): NodeJS.ProcessEnv {
   return { TIED_JEV_DECISION_PROVIDER: "remote" };

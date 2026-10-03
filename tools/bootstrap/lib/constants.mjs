@@ -5,6 +5,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  resolveStoreDocsDir,
+  resolveStoreMethodologyIndexRoot,
+  resolveStoreProjectSourceDir,
+  resolveStoreSidecarTemplatePath,
+  resolveStoreVocabDir,
+} from "./methodology-bundle.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BOOTSTRAP_ROOT = path.resolve(__dirname, "..");
@@ -29,10 +36,19 @@ export function loadManifest() {
 
 export function manifestPaths() {
   const m = loadManifest();
+  let methodologyIndexRoot;
+  try {
+    methodologyIndexRoot = resolveStoreMethodologyIndexRoot(TIED_REPO_ROOT);
+  } catch {
+    methodologyIndexRoot = path.join(TIED_REPO_ROOT, "templates");
+  }
   return {
-    templatesDir: path.join(TIED_REPO_ROOT, "templates"),
-    tiedSourceDir: path.join(TIED_REPO_ROOT, "tied"),
-    vocabSrc: path.join(TIED_REPO_ROOT, "tied", "vocab"),
+    templatesDir: methodologyIndexRoot,
+    methodologyIndexRoot,
+    tiedSourceDir: resolveStoreProjectSourceDir(TIED_REPO_ROOT),
+    storeDocsDir: resolveStoreDocsDir(TIED_REPO_ROOT),
+    storeSidecarTemplatePath: resolveStoreSidecarTemplatePath(TIED_REPO_ROOT),
+    vocabSrc: resolveStoreVocabDir(TIED_REPO_ROOT),
     mcpServerDist: path.join(TIED_REPO_ROOT, "mcp-server", "dist", "index.js"),
     tiedYamlSkillCanonical: path.join(TIED_REPO_ROOT, "tools", "bundled-tied-yaml-skill"),
     tiedYamlSkillDevFallback: path.join(TIED_REPO_ROOT, ".cursor", "skills", "tied-yaml"),

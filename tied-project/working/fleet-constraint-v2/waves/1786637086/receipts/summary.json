@@ -1,0 +1,11 @@
+{
+  "run_at": "2026-09-13T17:48:51.402Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1786637086-1",
+  "partition_wave_id": "W-ext-1786637086-1",
+  "gate_stage": "G3",
+  "receipt_count": 1,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1786637086/receipts/IMPL-FIRST_FIVE_PRIMES.receipt.json"
+  ]
+}

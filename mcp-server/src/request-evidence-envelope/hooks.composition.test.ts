@@ -14,7 +14,12 @@ import { patchRequestEvidenceEnvelope } from "./patch.js";
 function resolveRepoRoot(): string {
   let dir = process.cwd();
   for (let i = 0; i < 6; i += 1) {
-    if (existsSync(path.join(dir, "tied", "requirements.yaml"))) return dir;
+    if (
+      existsSync(path.join(dir, "tied-project", "requirements.yaml"))
+      || existsSync(path.join(dir, "tied", "requirements.yaml"))
+    ) {
+      return dir;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
@@ -23,7 +28,7 @@ function resolveRepoRoot(): string {
 }
 
 const REPO_ROOT = resolveRepoRoot();
-const TIED_BASE_PATH = path.join(REPO_ROOT, "tied");
+const TIED_BASE_PATH = path.join(REPO_ROOT, "tied-project");
 const REQUEST_TOKEN = "REQ-ENVELOPE-HOOK-TEST";
 
 describe("request evidence envelope producer hooks [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
@@ -37,7 +42,7 @@ describe("request evidence envelope producer hooks [REQ-REQUEST_EVIDENCE_ENVELOP
     const gatesDir = path.join(working, "gates");
     const ledgerPath = path.join(working, "adherence-ledger.jsonl");
     mkdirSync(gatesDir, { recursive: true });
-    mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
     writeFileSync(ledgerPath, "", "utf8");
 
     process.env.TIED_ENVELOPE_HOOKS = "0";

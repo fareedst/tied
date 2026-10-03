@@ -53,7 +53,7 @@ describe("new-tied-client pipeline", () => {
     assert.match(output, /ok/);
   });
 
-  it("forwards full-tools to copy_files spawn args [IMPL-TIED_FILES]", () => {
+  it("forwards full-tools to tied-install spawn args [IMPL-TIED_FILES]", () => {
     const output = runBootstrapModuleEval(`
       import { runNewTiedClientPipeline } from "./tools/bootstrap/lib/new-tied-client-pipeline.mjs";
       import path from "node:path";
@@ -95,6 +95,25 @@ describe("new-tied-client pipeline", () => {
       ]);
       if (!parsed.disposable || !parsed.skipLint || !parsed.skipGit) throw new Error("flags missing");
       if (parsed.sourceRoot !== path.resolve("C:\\\\tied")) throw new Error("source root mismatch");
+      console.log("ok");
+    `);
+    assert.match(output, /ok/);
+  });
+
+  it("parseNewTiedClientArgs forwards install passthrough [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
+    const output = runBootstrapModuleEval(`
+      import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";
+      const parsed = parseNewTiedClientArgs([
+        "--install-mode",
+        "full",
+        "--install-layers",
+        "db,mcp",
+        "--doctor-after",
+        "--disposable",
+      ]);
+      if (parsed.installOptions.mode !== "full") throw new Error("mode");
+      if (!parsed.installOptions.doctorAfter) throw new Error("doctor-after");
+      if (parsed.installOptions.layers.join(",") !== "db,mcp") throw new Error("layers");
       console.log("ok");
     `);
     assert.match(output, /ok/);
@@ -251,11 +270,15 @@ describe("new-tied-client pipeline", () => {
       });
       if (!result.ok) throw new Error("pipeline failed");
       if (calls.length < 1) throw new Error("no spawn calls");
-      const copyCall = calls[0];
-      if (!copyCall.cmd.endsWith("copy_files.cmd") && !copyCall.cmd.endsWith("copy_files.sh")) {
-        throw new Error("expected copy_files entry, got " + copyCall.cmd);
+      const installCall = calls[0];
+      const installScript = installCall.cmd.replace(/\\\\/g, "/");
+      if (
+        !installScript.endsWith("tied-install.cmd") &&
+        !installScript.endsWith("tied-install.sh")
+      ) {
+        throw new Error("expected tied-install entry, got " + installCall.cmd);
       }
-      if (copyCall.cwd !== clientDir) throw new Error("copy_files cwd mismatch");
+      if (installCall.cwd !== clientDir) throw new Error("bootstrap install cwd mismatch");
       console.log("ok");
     `);
     assert.match(output, /ok/);
@@ -297,25 +320,26 @@ describe("new-tied-client integration", () => {
         console.error("pipeline failed at", result.step);
         process.exit(result.code ?? 1);
       }
-      if (!fs.existsSync(path.join(clientDir, "tied", "requirements.yaml"))) {
-        throw new Error("requirements.yaml missing");
-      }
-      const sarDoc = path.join(clientDir, "tied", "docs", "sponsor-agent-relationship.md");
-      const sarVocab = path.join(
-        clientDir,
-        "tied",
-        "methodology",
-        "vocab",
-        "sponsor-agent-relationship.md",
-      );
-      if (!fs.existsSync(sarDoc)) throw new Error("missing tied/docs/sponsor-agent-relationship.md");
+      const projectDir = fs.existsSync(path.join(clientDir, "tied-project", "requirements.yaml"))
+        ? "tied-project"
+        : fs.existsSync(path.join(clientDir, "tied", "requirements.yaml"))
+          ? "tied"
+          : null;
+      if (!projectDir) throw new Error("requirements.yaml missing under tied-project/ or tied/");
+      const sarDoc = path.join(clientDir, "tied-bundle", "docs", "sponsor-agent-relationship.md");
+      const sarVocab = path.join(clientDir, "tied-bundle", "vocab", "sponsor-agent-relationship.md");
+      if (!fs.existsSync(sarDoc)) throw new Error("missing tied-bundle/docs/sponsor-agent-relationship.md");
       if (!fs.existsSync(sarVocab)) {
-        throw new Error("missing tied/methodology/vocab/sponsor-agent-relationship.md");
+        throw new Error("missing tied-bundle/vocab/sponsor-agent-relationship.md");
       }
       const yamlFiles = collectYamlFiles(clientDir);
       if (yamlFiles.length === 0) throw new Error("expected tied yaml files");
-      const auditReport = path.join(clientDir, "working", "tied-new-client-audit.v1.json");
-      if (!fs.existsSync(auditReport)) throw new Error("missing onboarding audit report");
+      const auditReportCandidates = [
+        path.join(clientDir, "tied-project", "working", "tied-new-client-audit.v1.json"),
+        path.join(clientDir, "working", "tied-new-client-audit.v1.json"),
+      ];
+      const auditReport = auditReportCandidates.find((p) => fs.existsSync(p));
+      if (!auditReport) throw new Error("missing onboarding audit report");
       const audit = JSON.parse(fs.readFileSync(auditReport, "utf8"));
       if (audit.ok !== true || audit.schema_version !== "tied-new-client-audit.v1") {
         throw new Error("onboarding audit not ok: " + JSON.stringify(audit));
@@ -346,9 +370,20 @@ describe("new-tied-client integration", () => {
     assert.strictEqual(entries.length, 1);
     assert.match(entries[0], /^\d{10}$/, `expected unix-seconds dir, got ${entries[0]}`);
     const clientPath = path.join(testRoot, entries[0]);
-    assert.ok(fs.existsSync(path.join(clientPath, "tied", "requirements.yaml")));
-    const auditReport = path.join(clientPath, "working", "tied-new-client-audit.v1.json");
-    assert.ok(fs.existsSync(auditReport), "expected tied-new-client-audit.v1.json after disposable bootstrap");
+    const projectDir = fs.existsSync(path.join(clientPath, "tied-project", "requirements.yaml"))
+      ? "tied-project"
+      : "tied";
+    assert.ok(fs.existsSync(path.join(clientPath, projectDir, "requirements.yaml")));
+    const auditReportCandidates = [
+      path.join(clientPath, "tied-project", "working", "tied-new-client-audit.v1.json"),
+      path.join(clientPath, "working", "tied-new-client-audit.v1.json"),
+    ];
+    const auditReport = auditReportCandidates.find((p) => fs.existsSync(p));
+    assert.ok(auditReport, "expected tied-new-client-audit.v1.json after disposable bootstrap");
+    assert.ok(
+      !fs.existsSync(path.join(clientPath, "working")),
+      "two-folder disposable client must not have repo-root working/",
+    );
   });
 
   it("disposable --full-tools seeds jev, dae, and BBCE starters [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
@@ -378,11 +413,20 @@ describe("new-tied-client integration", () => {
     assert.strictEqual(output.status, 0, output.stderr || output.stdout);
     const entries = fs.readdirSync(testRoot);
     const clientPath = path.join(testRoot, entries[0]);
-    const yamlText = fs.readFileSync(path.join(clientPath, ".tied-yaml.yaml"), "utf8");
+    const configCandidates = [
+      path.join(clientPath, "tied-project", "config.yaml"),
+      path.join(clientPath, "tied-project/config.yaml"),
+    ];
+    const configPath = configCandidates.find((p) => fs.existsSync(p));
+    assert.ok(configPath, "expected tied-project/config.yaml or legacy tied-project/config.yaml");
+    const yamlText = fs.readFileSync(configPath, "utf8");
     assert.match(yamlText, /plan_skills:\s*true/);
     assert.match(yamlText, /crap_threshold:\s*30/);
     assert.doesNotMatch(yamlText, /agentstream_gate_check/);
-    assert.ok(fs.existsSync(path.join(clientPath, "tied", "analysis", "slice-map.yaml")));
+    const analysisDir = fs.existsSync(path.join(clientPath, "tied-project", "analysis"))
+      ? path.join(clientPath, "tied-project", "analysis")
+      : path.join(clientPath, "tied", "analysis");
+    assert.ok(fs.existsSync(path.join(analysisDir, "slice-map.yaml")));
   });
 
   it("disposable bootstrap sets MCP metrics client to timestamp dir not inherited shell label [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS] [IMPL-TIED_FILES]", () => {

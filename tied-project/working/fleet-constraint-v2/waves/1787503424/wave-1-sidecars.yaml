@@ -1,0 +1,8 @@
+client_id: "1787503424"
+methodology_pin: "48d1fbb+"
+notes: "P4-F read-only scan; 1 project IMPL sidecars (header-only classify).\n"
+schema_version: 1
+sidecars:
+  - impl_token: "IMPL-DESKTOP_WINDOW_REPORT"
+    sidecar_path: "/Users/fareed/Documents/dev/test/1787503424/tied/implementation-decisions/IMPL-DESKTOP_WINDOW_REPORT-pseudocode.md"
+wave_id: "W-ext-1787503424-1"

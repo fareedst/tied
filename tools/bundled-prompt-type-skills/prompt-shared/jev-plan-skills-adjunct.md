@@ -3,16 +3,16 @@
 **Scope:** Advisory vocabulary shadow for the four **explicit** main plan skills only:
 `plan-new-feature`, `refine-plan`, `build-plan`, `plan-close-out`.
 
-**Traceability:** [REQ-TIED_JEV_DECISION_COPROCESSOR](../../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../../../tied/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml)
+**Traceability:** [REQ-TIED_JEV_DECISION_COPROCESSOR](../../../tied-project/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../../../tied-project/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml)
 
 ---
 
 ## When to run
 
-1. Complete normal **RESOLVE** and keyword **PRELOAD** first (client `tied/vocab/routing.md` and methodology routing).
+1. Complete normal **RESOLVE** and keyword **PRELOAD** first (client `tied-project/vocab/routing.md` and methodology routing).
 2. Run this adjunct only when **both** are true:
    - The current skill is one of the four named plan skills above.
-   - Effective configuration enables plan skills (`jev.plan_skills: true` in `.tied-yaml.yaml` or `TIED_JEV_PLAN_SKILLS=1` / `true` in the MCP/CLI process environment).
+   - Effective configuration enables plan skills (`jev.plan_skills: true` in `tied-project/config.yaml` or `TIED_JEV_PLAN_SKILLS=1` / `true` in the MCP/CLI process environment).
 3. Optional diagnostics: `tied_jev_status` (never probes the vendor).
 4. Optional shadow: `tied_jev_vocab_shadow` with bounded `prompt` (and `plan_excerpt` when refining a linked plan).
 5. Optional **tiebreak display** (W6d): pass `shadow_mode: tiebreak` on `tied_jev_vocab_shadow` when the operator wants display-only `advisory_primary` / `recommended_glossary_order`. Default remains `advisory`. Tiebreak never changes which glossaries keyword PRELOAD loaded.

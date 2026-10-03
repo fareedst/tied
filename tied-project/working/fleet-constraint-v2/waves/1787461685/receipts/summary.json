@@ -1,0 +1,13 @@
+{
+  "run_at": "2026-09-13T18:26:08.819Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1787461685-1",
+  "partition_wave_id": "W-ext-1787461685-1",
+  "gate_stage": "G3",
+  "receipt_count": 3,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1787461685/receipts/IMPL-BTREPORT-CLI-CMD.receipt.json",
+    "working/fleet-constraint-v2/waves/1787461685/receipts/IMPL-BTREPORT-REPORT-FORMAT.receipt.json",
+    "working/fleet-constraint-v2/waves/1787461685/receipts/IMPL-BTREPORT-SYSTEM-PROFILER.receipt.json"
+  ]
+}

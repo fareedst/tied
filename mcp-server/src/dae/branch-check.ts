@@ -1,9 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
 import { execFileSync } from "node:child_process";
-import yaml from "js-yaml";
+import path from "node:path";
 
 import { isRecord } from "./yaml-load.js";
+import { readRepoTiedYaml } from "../tied-project-config.js";
 
 /** [IMPL-TIED_DAE_INCORPORATION] [ARCH-TIED_DAE_INCORPORATION] [REQ-TIED_DAE_INCORPORATION] — How: W2a git HEAD vs CITDP/Tracker branch with manifest/CITDP opt-out. */
 
@@ -15,19 +14,6 @@ export type BranchCheckResult = {
   expected?: string;
   reasons: string[];
 };
-
-function readRepoTiedYaml(projectRoot: string): Record<string, unknown> | undefined {
-  const configPath = path.join(projectRoot, ".tied-yaml.yaml");
-  if (!fs.existsSync(configPath)) {
-    return undefined;
-  }
-  try {
-    const raw = yaml.load(fs.readFileSync(configPath, "utf8"));
-    return isRecord(raw) ? raw : undefined;
-  } catch {
-    return undefined;
-  }
-}
 
 export function branchCheckOptOut(projectRoot: string, citdp?: Record<string, unknown>): boolean {
   const repo = readRepoTiedYaml(projectRoot);

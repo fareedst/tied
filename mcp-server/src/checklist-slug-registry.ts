@@ -28,9 +28,14 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function resolveDefaultChecklistPath(): string | undefined {
   let dir = process.cwd();
-  for (let i = 0; i < 8; i += 1) {
-    const candidate = path.join(dir, "tied", "docs", "agent-req-implementation-checklist.yaml");
-    if (existsSync(candidate)) return candidate;
+  for (let i = 0; i < 12; i += 1) {
+    for (const rel of [
+      path.join("tied-bundle", "docs", "agent-req-implementation-checklist.yaml"),
+      path.join("tied", "docs", "agent-req-implementation-checklist.yaml"),
+    ]) {
+      const candidate = path.join(dir, rel);
+      if (existsSync(candidate)) return candidate;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;

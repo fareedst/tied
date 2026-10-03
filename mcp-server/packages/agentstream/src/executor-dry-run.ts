@@ -197,7 +197,7 @@ function tiedPreflightLocateFailure(
       `DIAGNOSTIC: tied-yaml preflight: no .cursor/mcp.json under workspace ${cfg.workspace}\n`,
     );
     lines.push(
-      "DIAGNOSTIC: fix: add tied-yaml under mcpServers in .cursor/mcp.json if you use MCP in Cursor, or pass --mcp-json PATH; copy_files.sh installs .cursor/skills/tied-yaml only (no mcp.json)\n",
+      "DIAGNOSTIC: fix: add tied-yaml under mcpServers in .cursor/mcp.json if you use MCP in Cursor, or pass --mcp-json PATH; tied-install.sh installs .cursor/skills/tied-yaml only (no mcp.json)\n",
     );
     if (cfg.dryRun) {
       lines.push(

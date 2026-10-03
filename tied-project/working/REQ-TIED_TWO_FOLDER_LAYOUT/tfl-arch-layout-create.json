@@ -1,0 +1,5 @@
+{
+  "token": "ARCH-TIED_TWO_FOLDER_LAYOUT",
+  "index_record": "{\"description\":\"Two-folder on-disk layout: tied-project + tied-bundle, working split, flattened bundle, store exception.\",\"name\":\"Two-folder TIED layout\",\"status\":\"Planned\",\"traceability\":{\"requirements\":[\"REQ-TIED_TWO_FOLDER_LAYOUT\"],\"implementation\":[\"IMPL-TIED_TWO_FOLDER_LAYOUT\"]}}",
+  "detail_record": "{\"ARCH-TIED_TWO_FOLDER_LAYOUT\":{\"description\":\"Committed tied-project holds traceability, vocab, citdp, config, committed working; tied-bundle holds methodology indexes, docs, templates, install.json, local working.\",\"name\":\"Two-folder TIED layout\",\"status\":\"Planned\",\"traceability\":{\"requirements\":[\"REQ-TIED_TWO_FOLDER_LAYOUT\"],\"implementation\":[\"IMPL-TIED_TWO_FOLDER_LAYOUT\"]}}}"
+}

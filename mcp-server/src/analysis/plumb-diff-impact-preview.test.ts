@@ -20,7 +20,7 @@ describe("plumb diff impact preview (deterministic)", () => {
   beforeEach(() => {
     origCwd = process.cwd();
     repoRootAbs = REPO_ROOT_ABS;
-    realTiedBasePathAbs = path.join(repoRootAbs, "tied");
+    realTiedBasePathAbs = path.join(repoRootAbs, "tied-project");
 
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-plumb-diff-impact-"));
     process.chdir(tempDir);

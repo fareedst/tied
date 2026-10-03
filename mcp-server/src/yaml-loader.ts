@@ -1,6 +1,6 @@
 /**
  * YAML index loader with path resolution for TIED indexes.
- * Supports methodology/project split [PROC-TIED_METHODOLOGY_READONLY]: when tied/methodology/
+ * Supports methodology/project split [PROC-TIED_METHODOLOGY_READONLY]: when tied-bundle/
  * exists, methodology index is read-only and merged with project index (project overrides);
  * writes go only to project files (tied/ root).
  */
@@ -10,6 +10,12 @@ import path from "node:path";
 import yaml from "js-yaml";
 import { writeCanonicalValueAtomic } from "./yaml-canonicalizer.js";
 import { mergeRecordUpdate } from "./record-merge.js";
+import {
+  BUNDLE_DIR_NAME,
+  LEGACY_PROJECT_DIR_NAME,
+  PROJECT_DIR_NAME,
+  resolveTiedLayout,
+} from "./tied-layout.js";
 
 export type IndexName =
   | "requirements"
@@ -33,14 +39,51 @@ export function clearBasePathCache(): void {
   cachedBasePath = null;
 }
 
+function requirementsIndexAt(tiedDir: string): string {
+  return path.join(tiedDir, INDEX_FILES.requirements);
+}
+
+/** Prefer tied-project/ when legacy tied/ path is missing (two-folder layout). */
+function remapLegacyTiedBasePathIfNeeded(resolved: string): string {
+  const base = path.resolve(resolved);
+  const name = path.basename(base);
+  if (name !== LEGACY_PROJECT_DIR_NAME && name !== PROJECT_DIR_NAME) return base;
+  if (fs.existsSync(requirementsIndexAt(base))) return base;
+  const projectRoot = path.dirname(base);
+  const modern = path.join(projectRoot, PROJECT_DIR_NAME);
+  if (fs.existsSync(requirementsIndexAt(modern))) return modern;
+  return base;
+}
+
+function discoverDefaultBasePath(): string {
+  let dir = process.cwd();
+  for (let depth = 0; depth < 12; depth++) {
+    const modern = path.join(dir, PROJECT_DIR_NAME);
+    const legacy = path.join(dir, LEGACY_PROJECT_DIR_NAME);
+    if (fs.existsSync(requirementsIndexAt(modern))) return modern;
+    if (fs.existsSync(requirementsIndexAt(legacy))) return legacy;
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return path.join(process.cwd(), PROJECT_DIR_NAME);
+}
+
 /**
- * Resolve base path for YAML indexes. Uses TIED_BASE_PATH env; default "tied".
+ * Resolve base path for YAML indexes. Uses TIED_BASE_PATH env; default discovers tied-project/.
  * Resolved relative to process.cwd(). This is the project (writable) root.
  */
 export function getBasePath(): string {
   if (cachedBasePath !== null) return cachedBasePath;
-  const env = process.env.TIED_BASE_PATH ?? "tied";
-  cachedBasePath = path.isAbsolute(env) ? env : path.resolve(process.cwd(), env);
+  const envRaw = process.env.TIED_BASE_PATH?.trim();
+  let resolved: string;
+  if (envRaw) {
+    resolved = path.isAbsolute(envRaw) ? envRaw : path.resolve(process.cwd(), envRaw);
+    resolved = remapLegacyTiedBasePathIfNeeded(resolved);
+  } else {
+    resolved = discoverDefaultBasePath();
+  }
+  cachedBasePath = resolved;
   return cachedBasePath;
 }
 
@@ -56,7 +99,7 @@ export function getClientProjectRoot(): string {
  * Pinned methodology corpus directory (MCP release artifact spike).
  * [IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY] [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]
  * When TIED_METHODOLOGY_BUNDLE_PATH is set to a directory, methodology reads use it
- * instead of tied/methodology/ under TIED_BASE_PATH. Project-only writes unchanged.
+ * instead of tied-bundle/ under TIED_BASE_PATH. Project-only writes unchanged.
  */
 export function resolveBundledMethodologyPath(): string | null {
   const env = process.env.TIED_METHODOLOGY_BUNDLE_PATH;
@@ -67,19 +110,66 @@ export function resolveBundledMethodologyPath(): string | null {
 }
 
 /**
- * Path to methodology directory (tied/methodology/). Null if it does not exist.
- * Methodology is read-only; project data lives at getBasePath() root.
- * Bundled corpus (when env set) takes precedence over the on-disk client tree for reads.
+ * [IMPL-TIED_TWO_FOLDER_LAYOUT] RESOLVE_METHODOLOGY_ROOT — env override, install.json,
+ * flattened tied-bundle/, legacy tied-bundle/, or store templates/corpus; null in store mode.
  */
-export function getMethodologyBasePath(): string | null {
+export function resolveMethodologyRoot(): string | null {
   const bundled = resolveBundledMethodologyPath();
   if (bundled) return bundled;
+
   const base = getBasePath();
+  const projectRoot = path.dirname(base);
+  const layout = resolveTiedLayout(projectRoot);
+
+  const installConfigPath = layout.installConfigPath;
+  if (fs.existsSync(installConfigPath)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(installConfigPath, "utf8")) as {
+        bundle_path?: string;
+      };
+      const fromInstall =
+        typeof raw.bundle_path === "string" && raw.bundle_path.trim()
+          ? raw.bundle_path
+          : layout.bundleDir;
+      if (fs.existsSync(path.join(fromInstall, "requirements.yaml"))) {
+        return fromInstall;
+      }
+    } catch {
+      /* fall through */
+    }
+  }
+
+  const bundleSentinel = path.join(layout.bundleDir, "requirements.yaml");
+  if (fs.existsSync(bundleSentinel)) {
+    return layout.bundleDir;
+  }
+
+  const templatesIndex = path.join(projectRoot, "templates", "requirements.yaml");
+  if (fs.existsSync(templatesIndex)) {
+    return path.join(projectRoot, "templates");
+  }
+
+  const storeBundleIndex = path.join(projectRoot, BUNDLE_DIR_NAME, "requirements.yaml");
+  if (fs.existsSync(storeBundleIndex)) {
+    return path.join(projectRoot, BUNDLE_DIR_NAME);
+  }
+
+  if (fs.existsSync(path.join(base, ".linked-methodology-view"))) {
+    return null;
+  }
+
   const methodologyDir = path.join(base, "methodology");
   if (fs.existsSync(methodologyDir) && fs.statSync(methodologyDir).isDirectory()) {
     return methodologyDir;
   }
   return null;
+}
+
+/**
+ * Path to methodology read root (flattened tied-bundle or legacy tied-bundle/). Null in store mode.
+ */
+export function getMethodologyBasePath(): string | null {
+  return resolveMethodologyRoot();
 }
 
 function loadYamlFile(filePath: string): Record<string, unknown> | null {
@@ -96,7 +186,7 @@ function loadYamlFile(filePath: string): Record<string, unknown> | null {
 }
 
 /**
- * Load methodology index only (tied/methodology/{index}.yaml). Returns null if no methodology dir.
+ * Load methodology index only (tied-bundle/{index}.yaml). Returns null if no methodology dir.
  */
 export function loadMethodologyIndex(index: IndexName): Record<string, unknown> | null {
   const methodologyDir = getMethodologyBasePath();
@@ -152,7 +242,7 @@ export function loadIndex(index: IndexName): Record<string, unknown> | null {
 
 /**
  * True when the token exists in the methodology index (read-only in client).
- * Used to resolve detail file path: methodology tokens read from tied/methodology/... .
+ * Used to resolve detail file path: methodology tokens read from tied-bundle/... .
  */
 export function isTokenInMethodology(index: IndexName, token: string): boolean {
   const data = loadMethodologyIndex(index);

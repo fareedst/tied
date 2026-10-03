@@ -3,9 +3,7 @@
  * How: W2c validate CITDP size, gate_profile, and express_lane charter rules.
  */
 
-import fs from "node:fs";
-import path from "node:path";
-import yaml from "js-yaml";
+import { readRepoTiedYaml } from "./tied-project-config.js";
 
 export const CITDP_SIZES = ["XS", "S", "M", "L", "XL"] as const;
 export type CitdpSize = (typeof CITDP_SIZES)[number];
@@ -20,19 +18,11 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function readDaeConfig(projectRoot: string): Record<string, unknown> | undefined {
-  const configPath = path.join(projectRoot, ".tied-yaml.yaml");
-  if (!fs.existsSync(configPath)) {
+  const raw = readRepoTiedYaml(projectRoot);
+  if (!raw || !isRecord(raw.dae)) {
     return undefined;
   }
-  try {
-    const raw = yaml.load(fs.readFileSync(configPath, "utf8"));
-    if (!isRecord(raw) || !isRecord(raw.dae)) {
-      return undefined;
-    }
-    return raw.dae;
-  } catch {
-    return undefined;
-  }
+  return raw.dae;
 }
 
 function expressLaneCharterAllows(

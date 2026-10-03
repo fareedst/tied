@@ -38,6 +38,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TIED_REPO_ROOT="${TIED_REPO_ROOT:-$(cd "${SCRIPT_DIR}/.." && pwd)}"
+WORKING_PATHS_CLI="${TIED_REPO_ROOT}/tools/bootstrap/lib/working-paths-cli.mjs"
 TIED_TEST_ROOT="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
 TIED_MCP_BIN="${TIED_MCP_BIN:-${TIED_REPO_ROOT}/mcp-server/dist/index.js}"
 ENVELOPE_BATCH_CLI="${TIED_REPO_ROOT}/mcp-server/dist/cli/request-evidence-envelope-batch-collect.js"
@@ -144,7 +145,7 @@ if [[ -z "${CLIENT_ROOT}" || ! -d "${CLIENT_ROOT}" ]]; then
   exit 2
 fi
 
-TIED_BASE="${CLIENT_ROOT}/tied"
+TIED_BASE="${CLIENT_ROOT}/tied-project"
 if [[ ! -d "${TIED_BASE}" ]]; then
   echo "ERROR: missing tied/ under ${CLIENT_ROOT}" >&2
   exit 2
@@ -157,9 +158,9 @@ if [[ ! -f "${TIED_MCP_BIN}" ]]; then
 fi
 
 if [[ ${#REQ_TOKENS[@]} -eq 0 ]]; then
-  while IFS= read -r dir; do
-    REQ_TOKENS+=("$(basename "${dir}")")
-  done < <(find "${CLIENT_ROOT}/working" -maxdepth 1 -type d -name 'REQ-*' 2>/dev/null | sort)
+  while IFS= read -r token; do
+    [[ -n "${token}" ]] && REQ_TOKENS+=("${token}")
+  done < <(node "${WORKING_PATHS_CLI}" list-req-tokens "${CLIENT_ROOT}" 2>/dev/null || true)
 fi
 
 if [[ ${#REQ_TOKENS[@]} -eq 0 ]]; then
@@ -167,7 +168,8 @@ if [[ ${#REQ_TOKENS[@]} -eq 0 ]]; then
 fi
 
 if [[ -z "${OUT_DIR}" ]]; then
-  OUT_DIR="${CLIENT_ROOT}/working/post-session/$(date +%Y%m%dT%H%M%S)"
+  POST_SESSION_BASE="$(node "${WORKING_PATHS_CLI}" post-session-out "${CLIENT_ROOT}")"
+  OUT_DIR="${POST_SESSION_BASE}/$(date +%Y%m%dT%H%M%S)"
 fi
 mkdir -p "${OUT_DIR}"
 
@@ -224,7 +226,7 @@ write_batch_manifest() {
     project_root: "${CLIENT_ROOT}"
     request_token: "${req}"
     envelope_require_mode: require_envelope
-    envelope_artifact: "working/${req}/evidence/request-evidence-envelope.v1.json"
+    envelope_artifact: "$(node "${WORKING_PATHS_CLI}" envelope-artifact "${CLIENT_ROOT}" "${req}")"
     tied_base_path: "${TIED_BASE}"
 EOF
     done
@@ -338,9 +340,9 @@ step_reconcile() {
   reconcile_bin="$(resolve_reconcile_bin)"
   local req
   for req in "${REQ_TOKENS[@]}"; do
-    local ledger="${CLIENT_ROOT}/working/${req}/adherence/events.jsonl"
-    local tracker="${CLIENT_ROOT}/working/${req}/${req}_tracker.yaml"
-    local gates="${CLIENT_ROOT}/working/${req}/gates"
+    local ledger="${CLIENT_ROOT}/$(node "${WORKING_PATHS_CLI}" rel "${CLIENT_ROOT}" "${req}" adherence events.jsonl)"
+    local tracker="${CLIENT_ROOT}/$(node "${WORKING_PATHS_CLI}" rel "${CLIENT_ROOT}" "${req}" "${req}_tracker.yaml")"
+    local gates="${CLIENT_ROOT}/$(node "${WORKING_PATHS_CLI}" rel "${CLIENT_ROOT}" "${req}" gates)"
     local req_dir="${OUT_DIR}/${req}"
     mkdir -p "${req_dir}"
 
@@ -448,7 +450,7 @@ write_summary() {
     echo "Next steps:"
     echo "  ruby ${METRICS_RUBY} --aggregate ${METRICS_FILE} 2>/tmp/tied-mcp-aggregate.yaml"
     echo "  tied_validate_consistency via tied-cli (client project)"
-    echo "  See tied/docs/request-evidence-envelope.md and tied/docs/evidence-chain-profile.md"
+    echo "  See tied-bundle/docs/request-evidence-envelope.md and tied-bundle/docs/evidence-chain-profile.md"
   } >"${summary}"
   cat "${summary}"
 }

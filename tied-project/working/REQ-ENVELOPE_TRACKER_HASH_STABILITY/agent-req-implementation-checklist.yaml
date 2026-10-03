@@ -1,0 +1,8 @@
+execution_evidence:
+  completed:
+    - "capture-failure"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+request: "REQ-ENVELOPE_TRACKER_HASH_STABILITY"

@@ -8,22 +8,22 @@ describe("PROJECT_MANIFEST REQ-TIED_FIDELITY_RESEARCH", () => {
   it("accepts an absolute project root and matching tied base path", () => {
     const result = resolveProjectManifest({
       projectRoot: "/tmp/research-project",
-      tiedBasePath: "/tmp/research-project/tied",
+      tiedBasePath: "/tmp/research-project/tied-project",
       version: "3.0.0",
       languages: ["typescript"],
       testClassifiers: ["node:test"],
-      ignoreRules: ["tied/methodology/**"],
+      ignoreRules: ["tied-bundle/**"],
     });
 
     assert.deepEqual(result, {
       ok: true,
       manifest: {
         projectRoot: "/tmp/research-project",
-        tiedBasePath: "/tmp/research-project/tied",
+        tiedBasePath: "/tmp/research-project/tied-project",
         version: "3.0.0",
         languages: ["typescript"],
         testClassifiers: ["node:test"],
-        ignoreRules: ["tied/methodology/**"],
+        ignoreRules: ["tied-bundle/**"],
       },
     });
   });
@@ -31,7 +31,7 @@ describe("PROJECT_MANIFEST REQ-TIED_FIDELITY_RESEARCH", () => {
   it("rejects a TIED base path outside the project root", () => {
     const result = resolveProjectManifest({
       projectRoot: "/tmp/research-project",
-      tiedBasePath: "/tmp/other-project/tied",
+      tiedBasePath: "/tmp/other-project/tied-project",
       version: "3.0.0",
       languages: ["typescript"],
       testClassifiers: ["node:test"],

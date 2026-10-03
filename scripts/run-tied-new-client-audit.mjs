@@ -26,7 +26,7 @@ function usage() {
 Options:
   --help              Show this help
   --client-root       Bootstrapped TIED client root (required unless --disposable)
-  --disposable        Bootstrap temp client via copy_files.sh then audit (WS-NC-5 smoke)
+  --disposable        Bootstrap temp client via tied-install.sh then audit (WS-NC-5 smoke)
   --json-out          Write tied-new-client-audit.v1 JSON to PATH
   --with-consistency  Run tied_validate_consistency on client tied/ (default off, OD-NC-2)
 `);
@@ -54,8 +54,12 @@ function parseArgs(argv) {
 
 function bootstrapDisposableClient() {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-nc-audit-"));
-  const copyScript = path.join(REPO_ROOT, "copy_files.sh");
-  execFileSync("bash", [copyScript, tempDir], { cwd: REPO_ROOT, stdio: "pipe" });
+  const installScript = path.join(REPO_ROOT, "tied-install.sh");
+  execFileSync(
+    "bash",
+    [installScript, "--mode", "linked", "--harness", "cursor", "--store", REPO_ROOT, tempDir],
+    { cwd: REPO_ROOT, stdio: "pipe" },
+  );
   return { clientRoot: tempDir, disposable: true };
 }
 

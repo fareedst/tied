@@ -1,0 +1,18 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T17:40:22.282Z",
+  "client_id": "1786637086",
+  "wave_scope": "W-ext-1786637086-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786637086/tied/implementation-decisions/IMPL-FIRST_FIVE_PRIMES-pseudocode.md",
+      "impl_token": "IMPL-FIRST_FIVE_PRIMES",
+      "action": "insert_grammar_v2_header",
+      "classification_before": "legacy-v1"
+    }
+  ],
+  "dry_run_content_hash": "d4d1c77d0ecd9e0096e93337cf763b1e9a327664a6577419d8eff40c8bf285ee",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1786637086/dry-run/snapshots/W-ext-1786637086-1"
+}

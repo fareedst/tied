@@ -1,0 +1,18 @@
+// [IMPL-REPORT_FORMATTER] [ARCH-MACOS_SERVICE_REPORT] [REQ-MACOS_SERVICE_REPORT]
+// Format ServiceReport as human text or snake_case JSON.
+
+PROC FORMAT_REPORT(report, format)
+  PRE: report contains collectedAt and warnings array (may be empty)
+  POST: returns non-empty String for text or json format
+  EFFECTS: none (pure)
+  FAILURE_MODES: unknown format -> FormatError
+
+PROC FORMAT_TEXT(report)
+  PRE: report is valid ServiceReport
+  POST: returns aligned multi-section text with optional Warnings block
+  EFFECTS: none
+
+PROC FORMAT_JSON(report)
+  PRE: report is valid ServiceReport
+  POST: returns ISO8601 JSON with snake_case keys
+  EFFECTS: none

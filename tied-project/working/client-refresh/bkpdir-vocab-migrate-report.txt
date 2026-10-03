@@ -1,0 +1,11 @@
+SUMMARY: moved=0 preserved=17 review=10 apply=false
+REVIEW: agent-stream-ruby.md: content differs from TIED methodology glossary; review before moving
+REVIEW: agentstream.md: content differs from TIED methodology glossary; review before moving
+REVIEW: config-discovery.md: content differs from TIED methodology glossary; review before moving
+REVIEW: domain-references.md: routing/catalog handoff is mixed by definition; resolve links manually
+REVIEW: feedback-to-tied.md: content differs from TIED methodology glossary; review before moving
+REVIEW: leap-proposal-queue.md: content differs from TIED methodology glossary; review before moving
+REVIEW: pseudocode-and-citdp.md: content differs from TIED methodology glossary; review before moving
+REVIEW: routing.md: routing/catalog handoff is mixed by definition; resolve links manually
+REVIEW: tied-methodology.md: content differs from TIED methodology glossary; review before moving
+REVIEW: tied-yaml-mcp.md: content differs from TIED methodology glossary; review before moving

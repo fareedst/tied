@@ -1,0 +1,15 @@
+execution_evidence:
+  request: "REQ-TIED_DAE_INCORPORATION"
+steps:
+  - disposition: "completed"
+    slug: "session-bootstrap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "pending"
+    slug: "unit-test-red"
+    tracking:
+      status: "pending"

@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
+import { resolveProjectConfigPathFromTiedBase } from "./tied-project-config.js";
+import { resolveProjectDirName } from "./tied-layout.js";
 
 export const YAML_SCALAR_STYLES = ["unwrapped", "wrapped"] as const;
 export type YamlScalarStyle = (typeof YAML_SCALAR_STYLES)[number];
@@ -42,7 +44,8 @@ export function getDefaultTiedBasePath(): string {
 }
 
 function isTiedProjectRoot(projectRoot: string): boolean {
-  const tiedDir = path.join(projectRoot, "tied");
+  const { dirName } = resolveProjectDirName(projectRoot);
+  const tiedDir = path.join(projectRoot, dirName);
   if (!fs.existsSync(tiedDir) || !fs.statSync(tiedDir).isDirectory()) {
     return false;
   }
@@ -52,12 +55,22 @@ function isTiedProjectRoot(projectRoot: string): boolean {
   );
 }
 
+function isTiedTraceabilityDir(dir: string): boolean {
+  return (
+    fs.existsSync(path.join(dir, "requirements.yaml")) ||
+    fs.existsSync(path.join(dir, "semantic-tokens.yaml"))
+  );
+}
+
 /** Walk upward from a YAML file path to find the client tied directory under a TIED project. */
 export function resolveTiedBasePathForYamlFile(filePath: string): string | undefined {
   let dir = path.dirname(path.resolve(filePath));
   for (;;) {
+    if (isTiedTraceabilityDir(dir)) {
+      return dir;
+    }
     if (isTiedProjectRoot(dir)) {
-      return path.join(dir, "tied");
+      return path.join(dir, resolveProjectDirName(dir).dirName);
     }
     const parent = path.dirname(dir);
     if (parent === dir) {
@@ -118,10 +131,24 @@ function repoConfigRecord(config: unknown, sourcePath: string): Record<string, u
 }
 
 function scalarStyleFromRepoConfig(record: Record<string, unknown>, sourcePath: string): YamlScalarStyle {
+  const yamlSection = record.yaml;
+  if (yamlSection !== null && typeof yamlSection === "object" && !Array.isArray(yamlSection)) {
+    const nested = (yamlSection as Record<string, unknown>).scalar_style;
+    if (nested !== undefined) {
+      return styleFromValue(nested, sourcePath);
+    }
+  }
   const scalarStyle = record.scalar_style;
   if (scalarStyle === undefined) {
     // [REQ-TIED_YAML_STYLE_CONFIGURATION] RISK-STYLE-GATE-006: formatter-only repo config defaults unwrapped.
     if (record.client_formatter !== undefined) {
+      return "unwrapped";
+    }
+    const yamlFormatter =
+      yamlSection !== null && typeof yamlSection === "object" && !Array.isArray(yamlSection)
+        ? (yamlSection as Record<string, unknown>).client_formatter
+        : undefined;
+    if (yamlFormatter !== undefined) {
       return "unwrapped";
     }
     throw new YamlStyleConfigurationError(
@@ -177,18 +204,27 @@ export function validateFormatterDeclaration(formatter: unknown): ClientFormatte
     : { command: command.trim(), args, version };
 }
 
-// [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
-// How: Parse optional client_formatter from repository .tied-yaml.yaml only; absent hook yields not_configured.
+function resolveRepositoryConfigPath(tiedBasePath: string): string | undefined {
+  const resolved = resolveProjectConfigPathFromTiedBase(tiedBasePath);
+  return resolved?.path;
+}
+
+// [IMPL-TIED_TWO_FOLDER_LAYOUT] [IMPL-TIED_YAML_STYLE_RESOLVER] [REQ-TIED_YAML_STYLE_CONFIGURATION]
+// How: Parse client_formatter from project config (tied-project/config.yaml or legacy tied-project/config.yaml).
 export function resolveClientFormatter(
   tiedBasePath: string = getDefaultTiedBasePath(),
 ): ResolvedClientFormatter {
-  const repoConfigPath = path.join(path.dirname(tiedBasePath), ".tied-yaml.yaml");
-  if (!fs.existsSync(repoConfigPath)) {
+  const repoConfigPath = resolveRepositoryConfigPath(tiedBasePath);
+  if (!repoConfigPath) {
     return { styling_status: "not_configured" };
   }
   const record = repoConfigRecord(parseConfigFile(repoConfigPath), repoConfigPath);
   const scalarStyle = scalarStyleFromRepoConfig(record, repoConfigPath);
-  const formatterValue = record.client_formatter;
+  const yamlSection =
+    record.yaml !== null && typeof record.yaml === "object" && !Array.isArray(record.yaml)
+      ? (record.yaml as Record<string, unknown>)
+      : undefined;
+  const formatterValue = record.client_formatter ?? yamlSection?.client_formatter;
   if (formatterValue === undefined) {
     return { styling_status: "not_configured", scalar_style: scalarStyle, config_path: repoConfigPath };
   }
@@ -217,16 +253,17 @@ function globalConfigPath(environment: NodeJS.ProcessEnv): string {
 /**
  * Resolve the repository-wide scalar style.
  *
- * Precedence is repository `.tied-yaml.yaml`, `TIED_YAML_STYLE`, the optional
- * XDG config file, then the unwrapped default. An explicit invalid setting is
- * an error and never falls through to a lower-priority source.
+ * Precedence is repository project config (`tied-project/config.yaml` or legacy
+ * `tied-project/config.yaml`), `TIED_YAML_STYLE`, the optional XDG config file, then the
+ * unwrapped default. An explicit invalid setting is an error and never falls
+ * through to a lower-priority source.
  */
 export function resolveYamlStyle(
   tiedBasePath: string = getDefaultTiedBasePath(),
   environment: NodeJS.ProcessEnv = process.env,
 ): ResolvedYamlStyle {
-  const repoConfigPath = path.join(path.dirname(tiedBasePath), ".tied-yaml.yaml");
-  if (fs.existsSync(repoConfigPath)) {
+  const repoConfigPath = resolveRepositoryConfigPath(tiedBasePath);
+  if (repoConfigPath && fs.existsSync(repoConfigPath)) {
     return {
       scalar_style: styleFromConfig(parseConfigFile(repoConfigPath), repoConfigPath),
       style_source: "repository",

@@ -30,7 +30,7 @@ describe("tied_vocabulary_explorer_run MCP [REQ-VOCABULARY_EXPLORER]", () => {
     origCwd = process.cwd();
     origEnv = process.env.TIED_BASE_PATH;
     process.chdir(fixtureRoot);
-    process.env.TIED_BASE_PATH = path.join(fixtureRoot, "tied");
+    process.env.TIED_BASE_PATH = path.join(fixtureRoot, "tied-project");
     clearBasePathCache();
   });
 
@@ -42,7 +42,7 @@ describe("tied_vocabulary_explorer_run MCP [REQ-VOCABULARY_EXPLORER]", () => {
   });
 
   it("returns vocabulary-explorer.v1 envelope without mutating TIED YAML", async () => {
-    const tiedBefore = fs.readFileSync(path.join(fixtureRoot, "tied/requirements.yaml"), "utf8");
+    const tiedBefore = fs.readFileSync(path.join(fixtureRoot, "tied-project/requirements.yaml"), "utf8");
     const response = await tool("tied_vocabulary_explorer_run").handler({
       min_frequency: 2,
       max_terms: 500,
@@ -57,7 +57,7 @@ describe("tied_vocabulary_explorer_run MCP [REQ-VOCABULARY_EXPLORER]", () => {
     assert.strictEqual(parsed.envelope?.schema, "vocabulary-explorer.v1");
     assert.ok(parsed.envelope?.terms.some((t) => t.display === "widgetHandler"));
     assert.ok(parsed.envelope?.terms.some((t) => t.display === "REQ-TIED_SETUP"));
-    const tiedAfter = fs.readFileSync(path.join(fixtureRoot, "tied/requirements.yaml"), "utf8");
+    const tiedAfter = fs.readFileSync(path.join(fixtureRoot, "tied-project/requirements.yaml"), "utf8");
     assert.strictEqual(tiedAfter, tiedBefore);
   });
 

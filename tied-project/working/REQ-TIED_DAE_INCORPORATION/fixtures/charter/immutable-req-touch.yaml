@@ -1,0 +1,15 @@
+arch_tokens:
+  - "ARCH-EXISTING-FIXTURE"
+human_approval_evidence: null
+immutable_categories:
+  - "Methodology"
+immutable_req_tokens:
+  - "REQ-IMMUTABLE-FIXTURE"
+new_arch_tokens: []
+req_categories:
+  REQ-IMMUTABLE-FIXTURE: "Methodology"
+touch_set:
+  architecture: []
+  implementation: []
+  requirements:
+    - "REQ-IMMUTABLE-FIXTURE"

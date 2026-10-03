@@ -29,7 +29,7 @@ afterEach(() => {
 
 function setupTiedTree(withRequirementDetail: boolean): string {
   clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-rename-"));
-  tempDir = path.join(clientRoot, "tied");
+  tempDir = path.join(clientRoot, "tied-project");
   fs.mkdirSync(tempDir, { recursive: true });
   process.env.TIED_BASE_PATH = tempDir;
 
@@ -190,7 +190,7 @@ REQ-TEST_NEW:
 
     const result = renameSemanticToken("REQ-TEST_OLD", "REQ-TEST_NEW", {
       dryRun: true,
-      extraGlobs: ["./*.md", "tied/vocab/**/*.md"],
+      extraGlobs: ["./*.md", "tied-project/vocab/**/*.md"],
       extraExtensions: ["swift"],
     });
     assert.strictEqual(result.ok, true);

@@ -8,6 +8,13 @@ import yaml from "js-yaml";
 import { copyFileWithAttributes } from "./copy-managed.mjs";
 import { loadManifest } from "./constants.mjs";
 import { sayOk } from "./console.mjs";
+import { BUNDLE_DIR_NAME, resolveTiedLayout } from "./layout.mjs";
+import {
+  loadProjectConfig,
+  PROJECT_CONFIG_SCHEMA_V1,
+  resolveProjectConfigPath,
+  writeProjectConfig,
+} from "./project-config.mjs";
 
 const TOOL_ENV_MAP = {
   fullTools: "TIED_BOOTSTRAP_FULL_TOOLS",
@@ -168,9 +175,32 @@ function mergeToolKeysIntoYamlDoc(doc, profile) {
   return next;
 }
 
-function shouldMutateTiedYaml(profile, tiedYamlPreExisting) {
+/** @param {Record<string, unknown>} record tied-project-config.v1 shape */
+function mergeToolKeysIntoProjectRecord(record, profile) {
+  const next =
+    record && typeof record === "object" && !Array.isArray(record)
+      ? { ...record, yaml: { ...(record.yaml && typeof record.yaml === "object" ? record.yaml : {}) } }
+      : { schema: PROJECT_CONFIG_SCHEMA_V1, yaml: {} };
+  if (next.schema == null) {
+    next.schema = PROJECT_CONFIG_SCHEMA_V1;
+  }
+  if (next.yaml.scalar_style == null) {
+    next.yaml.scalar_style = "unwrapped";
+  }
+  if (profile.jev) {
+    next.jev = { ...(next.jev && typeof next.jev === "object" ? next.jev : {}), plan_skills: true };
+  }
+  if (profile.dae) {
+    next.dae = { ...(next.dae && typeof next.dae === "object" ? next.dae : {}), crap_threshold: 30 };
+    delete next.dae.branch_check;
+    delete next.dae.agentstream_gate_check;
+  }
+  return next;
+}
+
+function shouldMutateProjectConfig(profile, projectConfigPreExisting) {
   if (!profile.jev && !profile.dae) return false;
-  if (!tiedYamlPreExisting) return true;
+  if (!projectConfigPreExisting) return true;
   return profile.forceToolConfig === true;
 }
 
@@ -185,27 +215,51 @@ export function applyClientToolUseBootstrapOptions(projectRoot, profile, context
   }
 
   const tiedRepoRoot = context.tiedRepoRoot;
-  const tiedYamlPath = path.join(projectRoot, ".tied-yaml.yaml");
-  const tiedYamlPreExisting = context.tiedYamlPreExisting === true;
+  const layout = resolveTiedLayout(projectRoot);
+  const configPreExistingAtInstallStart =
+    context.projectConfigPreExisting === true || context.tiedYamlPreExisting === true;
   let yamlUpdated = false;
 
-  if (shouldMutateTiedYaml(profile, tiedYamlPreExisting) && fs.existsSync(tiedYamlPath)) {
-    const raw = fs.readFileSync(tiedYamlPath, "utf8");
-    const doc = yaml.load(raw) ?? {};
-    const merged = mergeToolKeysIntoYamlDoc(doc, profile);
-    fs.writeFileSync(tiedYamlPath, yaml.dump(merged, { lineWidth: -1, noRefs: true }), "utf8");
-    yamlUpdated = true;
-    sayOk(`Applied tool-use profile to ${tiedYamlPath}.`);
+  if (shouldMutateProjectConfig(profile, configPreExistingAtInstallStart)) {
+    const resolvedConfig = resolveProjectConfigPath(projectRoot);
+    if (resolvedConfig?.source === "project-config-v1") {
+      const loaded = loadProjectConfig(projectRoot);
+      const merged = mergeToolKeysIntoProjectRecord(loaded?.record ?? {}, profile);
+      const { configPath } = writeProjectConfig(projectRoot, merged);
+      yamlUpdated = true;
+      sayOk(`Applied tool-use profile to ${configPath}.`);
+    } else if (resolvedConfig?.source === "legacy-root-yaml") {
+      const tiedYamlPath = resolvedConfig.path;
+      const raw = fs.readFileSync(tiedYamlPath, "utf8");
+      const doc = yaml.load(raw) ?? {};
+      const merged = mergeToolKeysIntoYamlDoc(doc, profile);
+      fs.writeFileSync(tiedYamlPath, yaml.dump(merged, { lineWidth: -1, noRefs: true }), "utf8");
+      yamlUpdated = true;
+      sayOk(`Applied tool-use profile to ${tiedYamlPath}.`);
+    } else {
+      const merged = mergeToolKeysIntoProjectRecord(
+        { schema: PROJECT_CONFIG_SCHEMA_V1, yaml: { scalar_style: "unwrapped" } },
+        profile,
+      );
+      const { configPath } = writeProjectConfig(projectRoot, merged);
+      yamlUpdated = true;
+      sayOk(`Applied tool-use profile to ${configPath}.`);
+    }
   }
 
   let analysisFilesCopied = 0;
   if (profile.bbce) {
     const manifest = loadManifest();
     const starterPaths = manifest.ANALYSIS_STARTER_FILES ?? [];
-    const templatesAnalysis = path.join(tiedRepoRoot, "templates", "tied", "analysis");
+    const templatesAnalysisCandidates = [
+      path.join(tiedRepoRoot, BUNDLE_DIR_NAME, "templates", "tied", "analysis"),
+      path.join(tiedRepoRoot, "templates", "tied", "analysis"),
+    ];
+    const templatesAnalysis =
+      templatesAnalysisCandidates.find((p) => fs.existsSync(p)) ?? templatesAnalysisCandidates[0];
     for (const rel of starterPaths) {
       const src = path.join(templatesAnalysis, rel);
-      const dest = path.join(projectRoot, "tied", "analysis", rel);
+      const dest = path.join(layout.tiedDir, "analysis", rel);
       if (!fs.existsSync(src)) {
         throw new Error(`MISSING_ANALYSIS_STARTER: ${src}`);
       }
@@ -217,7 +271,7 @@ export function applyClientToolUseBootstrapOptions(projectRoot, profile, context
       analysisFilesCopied += 1;
     }
     if (analysisFilesCopied > 0) {
-      sayOk(`Copied ${analysisFilesCopied} BBCE analysis starter file(s) into tied/analysis/.`);
+      sayOk(`Copied ${analysisFilesCopied} BBCE analysis starter file(s) into ${layout.tiedDir}/analysis/.`);
     }
   }
 

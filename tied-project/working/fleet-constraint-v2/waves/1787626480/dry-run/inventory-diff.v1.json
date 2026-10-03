@@ -1,0 +1,42 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T21:46:02.389Z",
+  "client_id": "1787626480",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787626480",
+  "sidecar_count": 6,
+  "counts_by_state": {
+    "legacy-v1": 6,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 0,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "9ce17a836f2a11dcf0a144103b0dd6ee25a176feeebfd029748cdc7876ba72be",
+  "rows": [
+    {
+      "file": "IMPL-ARCHIVEINFO-CLI-CMD-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-ARCHIVEINFO-CONFIG-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-ARCHIVEINFO-FORMAT-DETECT-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-ARCHIVEINFO-FORMAT-OUT-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-ARCHIVEINFO-GLOB-pseudocode.md",
+      "classification": "legacy-v1"
+    },
+    {
+      "file": "IMPL-ARCHIVEINFO-READ-pseudocode.md",
+      "classification": "legacy-v1"
+    }
+  ]
+}

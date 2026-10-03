@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "../working-root.js";
 import { execFileSync } from "node:child_process";
 import fg from "fast-glob";
 
@@ -118,12 +119,12 @@ export function discoverTrackerPaths(
   const root = path.resolve(projectRoot);
   if (requestToken?.trim()) {
     const token = requestToken.trim();
-    const primary = path.join(root, "working", token, "checklist-tracker.yaml");
+    const primary = resolveWorkingPath(root, token, "checklist-tracker.yaml");
     const matches: string[] = [];
     if (fs.existsSync(primary)) {
       matches.push(primary);
     }
-    const folder = path.join(root, "working", token);
+    const folder = resolveWorkingPath(root, token);
     if (fs.existsSync(folder)) {
       for (const name of fs.readdirSync(folder)) {
         if (!name.includes("checklist") || !name.endsWith(".yaml")) {
@@ -139,6 +140,8 @@ export function discoverTrackerPaths(
   }
 
   const patterns = [
+    "tied-project/working/*/checklist-tracker.yaml",
+    "tied-project/working/**/*checklist*.yaml",
     "working/*/checklist-tracker.yaml",
     "working/**/*checklist*.yaml",
   ];

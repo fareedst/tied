@@ -1,0 +1,30 @@
+{
+  "schema_version": "apply-diff.v1",
+  "generated_at": "2026-09-13T18:26:05.754Z",
+  "client_id": "1787421852",
+  "wave_scope": "W-ext-1787421852-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787421852/tied/implementation-decisions/IMPL-VOLUME_MOUNT_DISCOVERY-pseudocode.md",
+      "impl_token": "IMPL-VOLUME_MOUNT_DISCOVERY",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787421852/tied/implementation-decisions/IMPL-VOLUME_REPORT_FORMAT-pseudocode.md",
+      "impl_token": "IMPL-VOLUME_REPORT_FORMAT",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787421852/tied/implementation-decisions/IMPL-VOLUME_STATS_CALC-pseudocode.md",
+      "impl_token": "IMPL-VOLUME_STATS_CALC",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2"
+    }
+  ],
+  "dry_run_content_hash": "16660bb80c5aec7d69daeaae9cdff3a17dec37d9dca957dfe4a1f6c6342556fa",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787421852/dry-run/snapshots/W-ext-1787421852-1"
+}

@@ -39,7 +39,7 @@ function item(value: string, source: DefaultSource, corrective_command: string):
 export function resolveLocalDefaults(options: DefaultOptions = {}, environment: NodeJS.ProcessEnv = process.env, projectRoot = process.cwd()): DefaultResolution {
   const root = path.resolve(projectRoot);
   const mcp = choose(options.mcpBin, environment.TIED_MCP_BIN, path.join(root, "mcp-server", "dist", "index.js"));
-  const base = choose(options.basePath, environment.TIED_BASE_PATH, path.join(root, "tied"));
+  const base = choose(options.basePath, environment.TIED_BASE_PATH, path.join(root, "tied-project"));
   const constitution = options.constitution
     ? { value: path.resolve(options.constitution), source: "explicit" as const }
     : { value: path.resolve(path.join(base.value, "constitution.yaml")), source: base.source };
@@ -49,7 +49,11 @@ export function resolveLocalDefaults(options: DefaultOptions = {}, environment: 
   const report: DefaultReport = {
     mcp_bin: item(mcp.value, mcp.source, "npm run build --prefix mcp-server"),
     base_path: item(base.value, base.source, `mkdir -p "${base.value}"`),
-    constitution: item(constitution.value, constitution.source, `cp tied/constitution.example.yaml "${constitution.value}"`),
+    constitution: item(
+      constitution.value,
+      constitution.source,
+      `cp tied-project/constitution.example.yaml "${constitution.value}"`,
+    ),
     feature_directory: item(featureDirectory.value, featureDirectory.source, `mkdir -p "${featureDirectory.value}"`),
     mutating: false,
   };

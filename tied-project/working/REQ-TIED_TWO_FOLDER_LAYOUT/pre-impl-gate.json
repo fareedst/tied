@@ -1,0 +1,14 @@
+{
+  "phase": "pre_implementation",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tracker_path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/checklist-tracker.yaml",
+  "citdp_path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/CITDP-REQ-TIED_TWO_FOLDER_LAYOUT.yaml",
+  "depth_tier": "integrated",
+  "gate_policy": "advisory",
+  "receipt_persistence": {
+    "request_token": "REQ-TIED_TWO_FOLDER_LAYOUT",
+    "gates_dir": "tied-bundle/working/REQ-TIED_TWO_FOLDER_LAYOUT/gates",
+    "ledger_path": "tied-bundle/working/REQ-TIED_TWO_FOLDER_LAYOUT/gates/ledger.jsonl",
+    "run_id": "build-plan-tfl-2026-10-02"
+  }
+}

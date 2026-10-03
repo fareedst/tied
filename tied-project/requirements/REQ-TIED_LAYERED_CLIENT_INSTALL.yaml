@@ -1,0 +1,45 @@
+REQ-TIED_LAYERED_CLIENT_INSTALL:
+  REQ-TIED_LAYERED_CLIENT_INSTALL:
+    category: "Infrastructure"
+    description: "Provide tied-install.sh and install-layers engine with db/mcp/skills/methodology layers; default linked stubs; factory uses linked; copy_files unchanged."
+    name: "Layered TIED client install"
+    priority: "P2"
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+        - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+        - "REQ-TIED_SETUP"
+      related_to:
+        - "REQ-TIED_CLIENT_REFRESH_PARITY"
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "install-layers --legacy-bootstrap resolves to tied-install.cmd on win32."
+        id: "SC-LCI-WINDOWS-LEGACY-CMD"
+        metric: "resolveLegacyBootstrapScript unit test + tied-install.cmd --legacy-bootstrap on Windows smoke"
+      - criterion: "new-tied-client pipeline defaults to tied-install linked with --legacy-bootstrap escape."
+        id: "SC-LCI-FACTORY-LINKED"
+        metric: "new-tied-client-pipeline.mjs + audit install_profile from manifest mode"
+      - criterion: "Operator smoke flags (--install-mode, --legacy-bootstrap, etc.) match install-resource-matrix.md without reading source."
+        id: "SC-LCI-SMOKE-MATRIX"
+        metric: "new-tied-client.mjs help + how install-matrix + install-options tests"
+      - criterion: "Skill surface remains usable when IDE MCP config is absent: file-resolvable stubs and tied-cli over stdio."
+        id: "SC-LCI-NO-MCP-SURFACE"
+        metric: "install-layers tests + doctor subcommand"
+      - criterion: "tied-install linked mode installs harness-local SKILL.md stubs, tied-cli wrappers, and TIED_METHODOLOGY_BUNDLE_PATH in MCP config without local committed methodology tree."
+        id: "SC-LCI-LINKED-DEFAULT"
+        metric: "tools/bootstrap install-layers smoke + mcp.json env assertions"
+      - criterion: "tied-install.sh bootstrapTied behavior unchanged."
+        id: "SC-LCI-LEGACY-COPY"
+        metric: "existing bootstrap tests still pass"
+      - criterion: "Windows install entry points (Git Bash tied-install.sh, tied-install.cmd, tied-install.ps1) delegate to one install dispatch and produce identical tied/.tied-install.json for identical argv."
+        id: "SC-LCI-WINDOWS-ENTRY-TRIPLE"
+        metric: "tools/bootstrap/tied-install-dispatch.test.mjs + windows-shims.test.mjs + windows-bootstrap-smoke linked phases"
+      - criterion: "Windows smoke includes linked tied-install and disposable test-new-tied-client.cmd with documented skip flags."
+        id: "SC-LCI-WINDOWS-SMOKE"
+        metric: "scripts/windows-bootstrap-smoke.cmd phases 4–5 + pwsh tied-install.ps1 step in workflow"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+      implementation:
+        - "IMPL-TIED_LAYERED_CLIENT_INSTALL"

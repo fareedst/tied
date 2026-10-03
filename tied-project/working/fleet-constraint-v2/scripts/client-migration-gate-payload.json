@@ -1,0 +1,46 @@
+{
+  "phase": "verification",
+  "citdp": {
+    "change_definition": {
+      "current_behavior": "Sidecars constraint-ready-v2 pre 4B enforce",
+      "desired_behavior": "constraint-enforced-v2 with G3 layer_c.ok",
+      "falsification_questions": [
+        "Can client claim migration complete without orchestrator G3 receipts?"
+      ],
+      "counterexamples": [
+        "Inventory fleet-migrated-client while layer_c.ok false"
+      ],
+      "disconfirming_observations": [
+        "Receipt summary missing sidecar entry"
+      ],
+      "adversarial_evidence_references": [
+        "working/REQ-PSEUDOCODE_MIGRATION/evidence/pseudocode-g3-manifest.v1.json"
+      ]
+    },
+    "risk_analysis": {
+      "adversarial_inquiry": {
+        "depth_tier": "minimal",
+        "gate_policy": "blocking"
+      }
+    }
+  },
+  "tracker": {
+    "steps": [
+      {
+        "slug": "sub-adversarial-inquiry-pass",
+        "disposition": "not_applicable",
+        "notes": "Documentation-only fleet migration close-out"
+      },
+      {
+        "slug": "verification-gate",
+        "disposition": "completed",
+        "evidence_refs": [
+          {
+            "kind": "file_path",
+            "path": "working/REQ-PSEUDOCODE_MIGRATION/evidence/pseudocode-g3-manifest.v1.json"
+          }
+        ]
+      }
+    ]
+  }
+}

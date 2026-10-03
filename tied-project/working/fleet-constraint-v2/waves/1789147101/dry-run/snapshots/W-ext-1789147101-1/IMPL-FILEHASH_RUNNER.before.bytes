@@ -1,0 +1,53 @@
+# [IMPL-FILEHASH_RUNNER] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# Summary: Orchestrate discover, digest, format; aggregate exit code.
+
+## RUN_ALL_ROOTS
+# [IMPL-FILEHASH_RUNNER] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Discover files, hash each, print columnar lines, write root errors to stderr.
+
+Contract:
+  INPUT: stdout_writer; stderr_writer; root_paths
+  OUTPUT: exit_code
+  DATA: discover_result; file_results
+  PRE: len(root_paths) >= 1
+  POST: every discovered regular file has stdout line; root errors on stderr
+  EFFECTS: writes stdout and stderr
+  FAILURE_MODES: ZERO_ARGS
+
+procedure RUN_ALL_ROOTS:
+  Contract:
+    INPUT: stdout_writer; stderr_writer; root_paths
+    OUTPUT: exit_code
+    PRE: len(root_paths) >= 1
+    POST: every discovered regular file reported on stdout
+    EFFECTS: writes stdout and stderr
+    FAILURE_MODES: ZERO_ARGS
+  IF len(root_paths) == 0:
+    WRITE usage to stderr_writer
+    RETURN exit_code 1
+  CALL discover.Expand WITH root_paths
+  FOR EACH root_error IN discover_result.root_errors:
+    WRITE root_error to stderr_writer
+  FOR EACH immediate_error IN discover_result.immediate_errors:
+    CALL format.ErrorLine AND WRITE to stdout_writer
+  FOR EACH file IN discover_result.files:
+    CALL digest.File WITH file.open_path
+    IF digest_result.err:
+      CALL format.ErrorLine AND WRITE to stdout_writer
+    ELSE:
+      CALL format.SuccessLine AND WRITE to stdout_writer
+  RETURN AGGREGATE_EXIT
+
+## AGGREGATE_EXIT
+# [IMPL-FILEHASH_RUNNER] [ARCH-FILEHASH_MODULES] [REQ-FILEHASH]
+# How: Return exit 1 if any root, immediate, or file hash error occurred.
+
+procedure AGGREGATE_EXIT:
+  Contract:
+    PRE: processing complete for all roots
+    POST: exit 0 iff no errors; else exit 1
+    EFFECTS: none
+    FAILURE_MODES: none
+  IF any root_error OR immediate_error OR digest_error:
+    RETURN exit_code 1
+  RETURN exit_code 0

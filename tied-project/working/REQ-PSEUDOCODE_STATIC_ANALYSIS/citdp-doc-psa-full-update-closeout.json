@@ -1,0 +1,29 @@
+{
+  "change_id": "DOC-PSA-PSEUDOCODE-FULL-UPDATE",
+  "record_identity": {
+    "change_request_id": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+    "title": "PSA Layer C mandatory gate follow-up",
+    "recorded_at": "2026-09-09",
+    "record_status": "implemented",
+    "checklist_process": "[PROC-AGENT_REQ_CHECKLIST]",
+    "checklist_step_completed": "verification-gate-close-out",
+    "workspace_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "completion_criteria": {
+    "activation": {
+      "close_out_run_id": "doc-psa-full-update-closeout-20260909",
+      "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+      "verification_run_id": "doc-psa-full-update-closeout-20260909"
+    },
+    "gate_evidence": {
+      "close_out": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/close_out-2026-09-09T13-59-41-408Z.json"
+    },
+    "verification_gate_notes": "580/580 mcp-server tests; tied_validate_consistency ok; gate_mode Layer C smoke ok; tied_checklist_gate_validate close_out allowed; tied_verify restored REQ Implemented."
+  },
+  "tied_verify": {
+    "close_out_run_id": "doc-psa-full-update-closeout-20260909",
+    "ok": true,
+    "requirements_set_implemented": ["REQ-PSEUDOCODE_STATIC_ANALYSIS"],
+    "implementation_set_active": ["IMPL-PSEUDOCODE_ANALYSIS_ENGINE"]
+  }
+}

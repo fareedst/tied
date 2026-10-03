@@ -6,20 +6,20 @@ import fs from "node:fs";
 import path from "node:path";
 import { copyFileWithAttributes } from "./copy-managed.mjs";
 import { sayXOfYClient } from "./console.mjs";
-
-const SIDECAR_TEMPLATE_REL = path.join("templates", "impl-essence-pseudocode-template.md");
+import { resolveTiedLayout } from "./layout.mjs";
+import { resolveStoreSidecarTemplatePath } from "./methodology-bundle.mjs";
 
 /**
  * @param {string} projectRoot
  * @param {string} tiedRepoRoot
  */
 export function copySidecarTemplate(projectRoot, tiedRepoRoot) {
-  const src = path.join(tiedRepoRoot, SIDECAR_TEMPLATE_REL);
+  const src = resolveStoreSidecarTemplatePath(tiedRepoRoot);
   if (!fs.existsSync(src)) {
     throw new Error(`Missing sidecar template source: ${src}`);
   }
 
-  const destDir = path.join(projectRoot, "templates");
+  const destDir = resolveTiedLayout(projectRoot).templatesDir;
   const dest = path.join(destDir, "impl-essence-pseudocode-template.md");
   fs.mkdirSync(destDir, { recursive: true });
 

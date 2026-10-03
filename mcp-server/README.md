@@ -5,9 +5,9 @@ MCP server that exposes **tools** and **resources** for TIED YAML index files: r
 ## Requirements
 
 - Node.js 18+
-- TIED project with YAML indexes (e.g. `tied/requirements.yaml`) or template repo with the same-named files at root (e.g. `requirements.yaml`)
+- TIED project with YAML indexes (e.g. `tied-project/requirements.yaml`) or template repo with the same-named files at root (e.g. `requirements.yaml`)
 
-**Template vs MCP:** At repo root the index files (e.g. `requirements.yaml`) are templates; in `tied/` they are the project indexes. The root files are minimal and foundational for non-MCP bootstrap (e.g. `copy_files.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, `tied_token_create_with_detail`) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements/REQ-IDENTIFIER.yaml`).
+**Template vs MCP:** At repo root the index files (e.g. `requirements.yaml`) are templates; in `tied/` they are the project indexes. The root files are minimal and foundational for non-MCP bootstrap (e.g. `tied-install.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, `tied_token_create_with_detail`) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements/REQ-IDENTIFIER.yaml`).
 
 ## Install
 
@@ -25,27 +25,27 @@ The MCP server remains in the TIED repo; your project only references it via MCP
 
 ## Tests
 
-Run **`npm test`** from the `mcp-server` directory — this is the **canonical** full-suite runner
-(460 tests as of 2026-08-24, including F4 YAML/MD parity cases). The script builds the server then runs the complete Node
-`node:test` suite (unit, integration, e2e, adversarial-inquiry, feature-orchestration, and
-quality-evidence modules).
+Run **`npm test`** from the `mcp-server` directory — this is the **canonical** full-suite runner.
+The script builds production **`dist/`** (TypeScript tests are excluded from `tsc`), then
+**`scripts/run-mcp-tests.mjs`** runs every **`src/**/*.test.ts`**, **`test/**/*.test.ts`**, and
+**`packages/*/src/**/*.test.ts`** file through **`tsx --test`** (Node’s native test runner on
+TypeScript sources), plus **`test/*.test.cjs`** stdio CLI checks and the Jev context-pruning replay.
 
 **Do not use `bun test` for the full suite:** Bun 1.3.9 hits a nested-test limitation when
-executing the entire `node:test` graph; adversarial-inquiry subset runs under Bun may pass, but
-full-suite verification must use `npm test`. CI and close-out gates should record
+executing the entire `node:test` graph. CI and close-out gates should record
 `npm test --prefix mcp-server` (or `cd mcp-server && npm test`).
 
 The e2e suite (`src/e2e/bootstrap-and-load.test.ts`) bootstraps a temp project with
-`copy_files.sh` and verifies the loader reads requirements and semantic-tokens indexes from the
-copied `tied/` directory.
+`tied-install.sh` and verifies the loader reads requirements and semantic-tokens indexes from the
+copied `tied-project/` directory.
 
 ## Configuration
 
 - **`TIED_BASE_PATH`** (env): Directory containing the YAML index files. Defaults to `tied`. Resolved relative to the process working directory. For a template-only repo with files at project root, set to `.` or the repo root path.
-- **Repository YAML style**: Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `.tied-yaml.yaml` at the project root (the parent of `TIED_BASE_PATH`). Repository configuration overrides the global `TIED_YAML_STYLE` environment variable, which overrides `$XDG_CONFIG_HOME/tied/yaml-format.yaml`; the final default is `unwrapped`.
+- **Repository YAML style**: Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `tied-project/config.yaml` at the project root (the parent of `TIED_BASE_PATH`). Repository configuration overrides the global `TIED_YAML_STYLE` environment variable, which overrides `$XDG_CONFIG_HOME/tied/yaml-format.yaml`; the final default is `unwrapped`.
 - **Scalar style semantics**: `unwrapped` uses plain-when-safe strings. `wrapped` emits double-quoted string scalars only; booleans, numbers, and null remain typed YAML scalars. Invalid explicit configuration fails instead of falling back.
 - **Cross-surface enforcement**: `yaml_tool.sh`, `yaml_tool.sh --sort-lists`, `tied-cli.sh`, and MCP writers use the same resolved style. `tied_yaml_format` and successful write responses expose `scalar_style` and `style_source` in `yaml_format`. Use `yaml_tool.sh --check` for a read-only canonical-style gate.
-- **Optional client_formatter**: declare `client_formatter: {command, args?, version?}` in `.tied-yaml.yaml` for presentation-only post-canonical styling. Use explicit MCP tool `tied_client_yaml_styling_apply` (or checklist `sub-client-yaml-styling`); writers remain baseline-canonical only. Hook acceptance is fail-closed on path escape, methodology paths, invalid YAML, semantic drift, or non-idempotent output.
+- **Optional client_formatter**: declare `client_formatter: {command, args?, version?}` in `tied-project/config.yaml` for presentation-only post-canonical styling. Use explicit MCP tool `tied_client_yaml_styling_apply` (or checklist `sub-client-yaml-styling`); writers remain baseline-canonical only. Hook acceptance is fail-closed on path escape, methodology paths, invalid YAML, semantic drift, or non-idempotent output.
 
 ### Path resolution
 
@@ -78,7 +78,7 @@ Path parameters on tools that accept file paths are resolved by the Node process
 | `tied_config_get_base_path` | Return the effective TIED base path (resolved from TIED_BASE_PATH env or default `tied`) and the raw env value |
 | `get_decisions_for_requirement` | Given a requirement token (e.g. REQ-TIED_SETUP), return all ARCH and IMPL that reference it |
 | `get_requirements_for_decision` | Given a decision token (ARCH-X or IMPL-X), return all REQ it references (and full requirement records) |
-| `yaml_index_insert` | Insert a new record; params: `index`, `token`, `record` (JSON string). Writes to the index file (e.g. `tied/requirements.yaml`). Fails if token already exists. |
+| `yaml_index_insert` | Insert a new record; params: `index`, `token`, `record` (JSON string). Writes to the index file (e.g. `tied-project/requirements.yaml`). Fails if token already exists. |
 | `yaml_index_update` | Update an existing record; merges `updates` into the token row (see merge semantics above). Params: `index`, `token`, `updates` (JSON string). Fails if token does not exist. |
 | `yaml_updates_apply` | Ordered batch of detail/index merges in one process (same merge rules). Params: `steps` (array of detail steps with `kind`, `token`, `updates` object, or index steps with `kind`, `index`, `token`, `updates`), optional `dry_run` (previews `merged_preview` per step, no writes), optional `run_validate_consistency` (default true on write path: runs `tied_validate_consistency` after all steps; writes are not rolled back if validation fails). |
 | `yaml_detail_read` | Read a single detail file by token (REQ-*, ARCH-*, or IMPL-*). Resolves path from index `detail_file` when present (hybrid .md/.yaml). Params: `token`. Returns the detail record; for .md returns `{ _raw_markdown, _format: "markdown" }`. Fails if token invalid or file missing. |
@@ -88,17 +88,17 @@ Path parameters on tools that accept file paths are resolved by the Node process
 | `yaml_detail_update` | Update an existing detail file; merges `updates` into the REQ/ARCH/IMPL record (see merge semantics above). Params: `token`, `updates` (JSON string). Fails if no file. |
 | `impl_detail_set_essence_pseudocode` | IMPL-* only: set `essence_pseudocode` (written to `IMPL-TOKEN-pseudocode.md` beside the detail YAML) and optionally `metadata.last_updated` without touching other detail fields. **Exactly one** of: `essence_pseudocode` (inline string) or `essence_pseudocode_path` (path under `TIED_BASE_PATH` to a UTF-8 file; contents become the body). Optional `metadata_last_updated` object (`date`, `author`, `reason`). For `tied-cli.sh`, the stdio client can set the body from **`TIED_CLI_IMPL_ESSENCE_FILE`** or **stdin** (`TIED_CLI_IMPL_ESSENCE_STDIN=1`) so the args JSON can omit a huge string (see `tools/bundled-tied-yaml-skill/scripts/tied-cli.sh` header). |
 | `yaml_detail_append_implementation_approach_details` | REQ-*, ARCH-*, or IMPL-* detail: append strings to `implementation_approach.details` without replacing the whole array. Params: `token`, `details_lines` (array of strings). |
-| `citdp_record_write` | Write or replace a CITDP record YAML under `tied/citdp/` (e.g. `CITDP-REQ-FOO.yaml`). Params: `filename` (basename only, must match `CITDP-*.yaml`), `record` (JSON string of the **inner** document object, i.e. the value under the top-level key), optional `top_level_key` (default: stem without `.yaml`). Creates `citdp/` if missing. |
+| `citdp_record_write` | Write or replace a CITDP record YAML under `tied-project/citdp/` (e.g. `CITDP-REQ-FOO.yaml`). Params: `filename` (basename only, must match `CITDP-*.yaml`), `record` (JSON string of the **inner** document object, i.e. the value under the top-level key), optional `top_level_key` (default: stem without `.yaml`). Creates `citdp/` if missing. |
 | `tied_verify` | After tests: set passed REQs to `Implemented` and passed IMPLs to `Active`. Defaults **do not** demote other tokens (`set_unpassed_*_to_planned` default false). Params: `passed_requirement_tokens`, `passed_impl_tokens`, optional booleans, optional **`dry_run`** (returns `would_update` without writing; omits tokens whose status would not change—empty list means a no-op write). |
 | `yaml_detail_delete` | Delete a detail YAML file. Params: `token`, optional `sync_index` (default true to clear detail_file in index). |
 | `tied_token_create_with_detail` | Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Params: `token`, `index_record` (JSON string), `detail_record` (JSON string), optional `upsert_index` (default false). Sets `detail_file` on the index automatically. Fails if detail file already exists. |
 | `tied_yaml_format` | Return read-only `tied-yaml-canonical-v1` metadata, including the resolved `scalar_style` and `style_source`. |
 | `tied_client_yaml_styling_apply` | Run optional repository `client_formatter` on one project-owned `./tied/` YAML path. Params: `file_path`. Returns `styling_status` (`configured` \| `not_configured`) and fail-closed errors for path escape, methodology paths, spawn failures, invalid post-hook YAML, semantic drift, or non-idempotent second passes. Does not auto-run during MCP writers. |
-| `tied_token_rename` | Rename a single semantic token across the **default TIED rename scope** (project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional **extra substitution targets** under the **client project root** (parent of `TIED_BASE_PATH`). Params: `old_token`, `new_token` (same prefix required), optional `dry_run`, `include_markdown` (also replace in `tied/docs/processes.md`), `extra_globs` (path globs from client project root, e.g. `./*.md`, `tied/vocab/**/*.md`), `extra_extensions` (e.g. `swift` → `**/*.swift`). Skips `.git`, `node_modules`, `build`, `dist`, `vendor`, `DerivedData` for extra targets; skips binary files. Modified YAML uses tied-yaml-canonical-v1 atomically. Returns `ok`, `files_modified`, `file_renamed`, optional `files_skipped`, `errors`. |
+| `tied_token_rename` | Rename a single semantic token across the **default TIED rename scope** (project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional **extra substitution targets** under the **client project root** (parent of `TIED_BASE_PATH`). Params: `old_token`, `new_token` (same prefix required), optional `dry_run`, `include_markdown` (also replace in `tied-bundle/docs/processes.md`), `extra_globs` (path globs from client project root, e.g. `./*.md`, `tied-project/vocab/**/*.md`), `extra_extensions` (e.g. `swift` → `**/*.swift`). Skips `.git`, `node_modules`, `build`, `dist`, `vendor`, `DerivedData` for extra targets; skips binary files. Modified YAML uses tied-yaml-canonical-v1 atomically. Returns `ok`, `files_modified`, `file_renamed`, optional `files_skipped`, `errors`. |
 | `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
 | `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `tied/feedback.yaml`. Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
 | `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
-| `requirement_list_state_guide` | Client-supplied requirement list walk. First call: non-empty `requirements`; later: `current_state` = `continuation_state`. Returns one requirement object per step until **`id: end_requirement_list`**. For each item, use the agent REQ checklist (e.g. `tied/docs/agent-req-implementation-checklist.md`). See [tied/docs/requirement-list-state-guide-agent-workflow.md](../tied/docs/requirement-list-state-guide-agent-workflow.md). |
+| `requirement_list_state_guide` | Client-supplied requirement list walk. First call: non-empty `requirements`; later: `current_state` = `continuation_state`. Returns one requirement object per step until **`id: end_requirement_list`**. For each item, use the agent REQ checklist (e.g. `tied-bundle/docs/agent-req-implementation-checklist.md`). See [tied-bundle/docs/requirement-list-state-guide-agent-workflow.md](../tied-bundle/docs/requirement-list-state-guide-agent-workflow.md). |
 
 ### Feature orchestration tools
 
@@ -120,12 +120,12 @@ separate from the TIED YAML record tools above and from `tied-cli.sh`:
 
 Use `.cursor/skills/tied-yaml/scripts/tied.sh` for onboarding delegates and
 `.cursor/skills/tied-yaml/scripts/feature-orchestrator.sh` for the standalone
-CLI. The wrappers are baked to the TIED repository that ran `copy_files.sh`;
+CLI. The wrappers are baked to the TIED repository that ran `tied-install.sh`;
 set `TIED_REPO_ROOT` explicitly if that repository moves.
 
 ### Token rename
 
-Use **`tied_token_rename`** to rename a semantic token everywhere in the default TIED rename scope: YAML indexes, detail files (keys, values, list items), and the detail filename. Same prefix is required (e.g. REQ-X → REQ-Y). Use `dry_run: true` to list files that would change; optional `include_markdown` updates `tied/docs/processes.md`. Optional **`extra_globs`** and **`extra_extensions`** search from the **client project root** (parent of `TIED_BASE_PATH`) for additional substitution targets—e.g. root `*.md`, `tied/vocab/**/*.md`, or all `.swift` files. Modified YAML uses the shared repository style atomically. For manual YAML edits, use `yaml_tool.sh --check` or `lint_yaml` per `processes.md` `[PROC-YAML_EDIT_LOOP]`.
+Use **`tied_token_rename`** to rename a semantic token everywhere in the default TIED rename scope: YAML indexes, detail files (keys, values, list items), and the detail filename. Same prefix is required (e.g. REQ-X → REQ-Y). Use `dry_run: true` to list files that would change; optional `include_markdown` updates `tied-bundle/docs/processes.md`. Optional **`extra_globs`** and **`extra_extensions`** search from the **client project root** (parent of `TIED_BASE_PATH`) for additional substitution targets—e.g. root `*.md`, `tied-project/vocab/**/*.md`, or all `.swift` files. Modified YAML uses the shared repository style atomically. For manual YAML edits, use `yaml_tool.sh --check` or `lint_yaml` per `processes.md` `[PROC-YAML_EDIT_LOOP]`.
 
 ### Feedback (report to TIED)
 
@@ -153,7 +153,7 @@ Read-only resources (e.g. for LLM context). Detail files may be YAML or Markdown
 
 ## Cursor Integration
 
-Configure MCP in your **development project** (the project where you ran `copy_files.sh` and have a `tied/` directory). Use your project's MCP config (e.g. `.cursor/mcp.json` in the project, or Cursor Settings → MCP with that project as the workspace).
+Configure MCP in your **development project** (the project where you ran `tied-install.sh` and have a `tied-project/` directory). Use your project's MCP config (e.g. `.cursor/mcp.json` in the project, or Cursor Settings → MCP with that project as the workspace).
 
 **Enable in Cursor (recommended):** From the **client project** root, run `agent mcp enable tied-yaml`. When Cursor prompts you to apply the project MCP configuration, **approve** the update. Type **`quit`** to exit the interactive `agent` session. (The file on disk alone does not always enable the server in the IDE until you do this.)
 
@@ -167,7 +167,7 @@ Configure MCP in your **development project** (the project where you ran `copy_f
       "command": "node",
       "args": ["/path/to/tied/mcp-server/dist/index.js"],
       "env": {
-        "TIED_BASE_PATH": "/path/to/your/project/tied"
+        "TIED_BASE_PATH": "/path/to/your/project/tied-project"
       }
     }
   }
@@ -178,7 +178,7 @@ Configure MCP in your **development project** (the project where you ran `copy_f
 
 Replace `/path/to/tied` and `/path/to/your/project/tied` with your actual paths.
 
-For a full example process of adding the TIED MCP to a project and invoking it in several passes (setup, bootstrap, establish REQ/ARCH/IMPL, maintain), see [tied/docs/adding-tied-mcp-and-invoking-passes.md](../tied/docs/adding-tied-mcp-and-invoking-passes.md).
+For a full example process of adding the TIED MCP to a project and invoking it in several passes (setup, bootstrap, establish REQ/ARCH/IMPL, maintain), see [tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md](../tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md).
 
 ## Run locally
 

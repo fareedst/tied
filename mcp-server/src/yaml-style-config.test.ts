@@ -14,9 +14,15 @@ import {
 
 function makeProject(): { root: string; tied: string } {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "tied-yaml-style-"));
-  const tied = path.join(root, "tied");
+  const tied = path.join(root, "tied-project");
   fs.mkdirSync(tied);
   return { root, tied };
+}
+
+function writeProjectConfig(root: string, body: string): void {
+  const dir = path.join(root, "tied-project");
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "config.yaml"), body);
 }
 
 function withoutStyle(environment: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
@@ -28,7 +34,10 @@ function withoutStyle(environment: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
 test("repository YAML style overrides the global environment", () => {
   const project = makeProject();
   try {
-    fs.writeFileSync(path.join(project.root, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    writeProjectConfig(
+      project.root,
+      "schema: tied-project-config.v1\nyaml:\n  scalar_style: wrapped\n",
+    );
     const resolved = resolveYamlStyle(project.tied, {
       ...process.env,
       TIED_YAML_STYLE: "unwrapped",
@@ -36,7 +45,7 @@ test("repository YAML style overrides the global environment", () => {
     assert.deepEqual(resolved, {
       scalar_style: "wrapped",
       style_source: "repository",
-      config_path: path.join(project.root, ".tied-yaml.yaml"),
+      config_path: path.join(project.root, "tied-project/config.yaml"),
     });
   } finally {
     fs.rmSync(project.root, { recursive: true, force: true });
@@ -93,7 +102,10 @@ test("unconfigured projects default to unwrapped", () => {
 test("invalid explicit repository style fails without fallback", () => {
   const project = makeProject();
   try {
-    fs.writeFileSync(path.join(project.root, ".tied-yaml.yaml"), "scalar_style: invalid\n");
+    writeProjectConfig(
+      project.root,
+      "schema: tied-project-config.v1\nyaml:\n  scalar_style: invalid\n",
+    );
     assert.throws(
       () =>
         resolveYamlStyle(project.tied, {
@@ -103,7 +115,7 @@ test("invalid explicit repository style fails without fallback", () => {
       (error: unknown) =>
         error instanceof YamlStyleConfigurationError &&
         error.message.includes("Invalid scalar_style") &&
-        error.message.includes(".tied-yaml.yaml"),
+        error.message.includes("tied-project/config.yaml"),
     );
   } finally {
     fs.rmSync(project.root, { recursive: true, force: true });
@@ -113,9 +125,9 @@ test("invalid explicit repository style fails without fallback", () => {
 test("formatter-only repository config defaults scalar_style to unwrapped", () => {
   const project = makeProject();
   try {
-    fs.writeFileSync(
-      path.join(project.root, ".tied-yaml.yaml"),
-      "client_formatter:\n  command: scripts/noop.sh\n",
+    writeProjectConfig(
+      project.root,
+      "schema: tied-project-config.v1\nyaml:\n  client_formatter:\n    command: scripts/noop.sh\n",
     );
     const style = resolveYamlStyle(project.tied, {
       ...withoutStyle(process.env),
@@ -135,7 +147,10 @@ test("formatter-only repository config defaults scalar_style to unwrapped", () =
 test("resolveClientFormatter returns not_configured when command absent", () => {
   const project = makeProject();
   try {
-    fs.writeFileSync(path.join(project.root, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    writeProjectConfig(
+      project.root,
+      "schema: tied-project-config.v1\nyaml:\n  scalar_style: wrapped\n",
+    );
     const resolved = resolveClientFormatter(project.tied);
     assert.equal(resolved.styling_status, "not_configured");
     assert.equal(resolved.scalar_style, "wrapped");
@@ -162,7 +177,10 @@ test("tiedBasePathForYamlContext prefers file project over TIED_BASE_PATH", () =
   const other = makeProject();
   try {
     fs.writeFileSync(path.join(project.tied, "requirements.yaml"), "{}\n");
-    fs.writeFileSync(path.join(project.root, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    writeProjectConfig(
+      project.root,
+      "schema: tied-project-config.v1\nyaml:\n  scalar_style: wrapped\n",
+    );
     const yamlPath = path.join(project.tied, "record.yaml");
     fs.writeFileSync(yamlPath, "message: hello\n");
     const previousBasePath = process.env.TIED_BASE_PATH;
@@ -171,7 +189,7 @@ test("tiedBasePathForYamlContext prefers file project over TIED_BASE_PATH", () =
       assert.equal(tiedBasePathForYamlContext(yamlPath), project.tied);
       const resolved = resolveYamlStyle(tiedBasePathForYamlContext(yamlPath));
       assert.equal(resolved.scalar_style, "wrapped");
-      assert.equal(resolved.config_path, path.join(project.root, ".tied-yaml.yaml"));
+      assert.equal(resolved.config_path, path.join(project.root, "tied-project/config.yaml"));
     } finally {
       if (previousBasePath === undefined) delete process.env.TIED_BASE_PATH;
       else process.env.TIED_BASE_PATH = previousBasePath;

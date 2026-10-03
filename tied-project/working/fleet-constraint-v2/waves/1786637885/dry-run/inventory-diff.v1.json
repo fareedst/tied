@@ -1,0 +1,26 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T18:26:01.447Z",
+  "client_id": "1786637885",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1786637885",
+  "sidecar_count": 2,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 2,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "b9f9aea80c7838199b014b5c05f53d02078313dd9f8dbecd81fd804318576689",
+  "rows": [
+    {
+      "file": "IMPL-FIRST_N_PRIMES-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    },
+    {
+      "file": "IMPL-PRINT_FIRST_FIVE_PRIMES-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    }
+  ]
+}

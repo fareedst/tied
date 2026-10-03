@@ -1,0 +1,131 @@
+CITDP-REQ-TIED_TWO_FOLDER_LAYOUT:
+  change_definition:
+    current_behavior: "Legacy clients used top-level tied/ for project YAML and tied/methodology or .linked-methodology-view for methodology; copy_files.* and root .tied-yaml.yaml; root working/ with many gitignore patterns."
+    desired_behavior: "Every client uses tied-project/ (committed traceability, config.yaml, tied-project/working/) and tied-bundle/ (local methodology/docs/templates/install.json); TIED_BASE_PATH points at tied-project/; --migrate-layout hard-cut; copy_files removed; store commits tied-bundle/ corpus and runs MCP in store mode."
+    non_goals:
+      - "Dual-read compatibility with legacy layout without migrate-layout"
+      - "Preserving copy_files.* as an alias"
+      - "Renaming tied-project/ to tied-db/ or dotted dir names"
+    sponsor_decisions:
+      costly_accepted_on_implementation: "Folder names tied-project + tied-bundle; flattened bundle; disjoint two-file config; committed vs local working split; hard-cut LEGACY_LAYOUT_DETECTED; copy_files deleted; store tied-bundle commit exception"
+    success_criteria:
+      - "SC-TFL-CONFIG-TWO-FILES"
+      - "SC-TFL-INVARIANT"
+      - "SC-TFL-LEGACY-REMOVED"
+      - "SC-TFL-MCP-ROOT"
+      - "SC-TFL-MIGRATE"
+      - "SC-TFL-NO-LEGACY-TIED-DIR"
+      - "SC-TFL-SELF-INSTALL-GUARD"
+      - "SC-TFL-STALE-LINT"
+      - "SC-TFL-STORE-SELF-HOSTED"
+      - "SC-TFL-WINDOWS"
+    unchanged_behavior:
+      - "Harness MCP JSON locations (.cursor/mcp.json, .mcp.json)"
+      - "Methodology REQ/ARCH/IMPL tokens remain mandatory via tied-bundle merged view"
+  completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-TIED_TWO_FOLDER_LAYOUT"
+      run_id: "phase8-verify-2026-10-02"
+      scope: []
+    envelope_path: "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required on changed tied-project and tied-bundle YAML"
+    pre_implementation_gate: "Re-run tied_checklist_gate_validate after this CITDP hydrate; build preceded first gate (LEAP)"
+    tied_validate_consistency: "required before close-out"
+    verification_gate_notes: "Blocking at verification-gate; advisory at structural/pre-RED inquiry"
+  evidence:
+    commands:
+      - "npm test --prefix mcp-server"
+      - "source scripts/build-commands.sh && lint_tied"
+      - "source scripts/build-commands.sh && test-all"
+    manifest_reference: "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/verification-evidence-manifest.v1.json"
+    proof_boundaries:
+      - "baseline-functional"
+      - "install/MCP structural parity"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_TWO_FOLDER_LAYOUT"
+    modules_or_boundaries: "Bootstrap install layers; MCP yaml-loader and working-root; agentstream preflight; G4 audit; Windows CI; docs/vocab/templates; project detail path fields"
+    tied_tokens_affected:
+      - "ARCH-TIED_STRUCTURE"
+      - "IMPL-TIED_FILES"
+      - "PROC-TIED_METHODOLOGY_READONLY"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "ARCH-TIED_PROJECT_CONFIG_OWNERSHIP"
+      - "ARCH-TIED_TWO_FOLDER_LAYOUT"
+      - "IMPL-TIED_TWO_FOLDER_LAYOUT"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+    working_path_note: "Committed process artifacts under tied-project/working/{REQ}/; local gate/adversarial/adherence/jev under tied-bundle/working/{REQ}/ (Phase 4+)"
+  leap_feedback:
+    divergences_from_analysis: "Implementation proceeded before PLAN status and pre_implementation gate receipts were refreshed; costly choices recorded as accepted-on-implementation in refine-plan 2026-10-02; project directory name tied-project (not plan-draft tied/)"
+    record_status: "final"
+    tied_stack_updates_required: []
+  record_identity:
+    author: "AI Agent"
+    change_request_id: "REQ-TIED_TWO_FOLDER_LAYOUT"
+    date: "2026-10-02"
+    plan_reference: "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/PLAN.md"
+    record_status: "final"
+    title: "Two-folder TIED layout (tied-project + tied-bundle)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Persistence and config parsing; strict close-out; verification gate blocking"
+      research_profile: "integrated-agent"
+    consequence_ladder:
+      costly:
+        - "Committed vs local working split"
+        - "copy_files.* deleted"
+        - "Flattened tied-bundle bundle root"
+        - "Hard-cut legacy layout"
+        - "Store commits tied-bundle/"
+        - "tied-project + tied-bundle naming"
+        - "tied-project/config.yaml + tied-bundle/install.json disjoint ownership"
+      reversible:
+        - "Dropping mcp.example.json"
+        - "Eliminating .linked-methodology-view"
+        - "install.json JSON format"
+        - "Parity report under tied-bundle/reports/"
+        - "Stub vs symlink materialization"
+    risks:
+      - id: "R1"
+        mitigation: "--migrate-layout; LEGACY_LAYOUT_DETECTED; migration integration test"
+        summary: "Breaking existing clients on old layout"
+      - id: "R10"
+        mitigation: "check-docs-vocab-links; tied-project/vocab link rewrites"
+        summary: "Docs cross-links after tied-bundle/docs move"
+      - id: "R7"
+        mitigation: "lint-stale-layout in test-all"
+        summary: "Stale references in hundreds of files"
+      - id: "R6"
+        mitigation: "resolveWorkingPath / layout.mjs; fixture regeneration"
+        summary: "Evidence path drift (gates, adversarial-inquiry)"
+      - id: "R3"
+        mitigation: "SELF_INSTALL_REFUSED; Phase 6 migration; guard tests"
+        summary: "Store self-install damage"
+      - id: "R5"
+        mitigation: "Store mode disables methodology write overlap warnings"
+        summary: "Store token overlap templates vs project"
+      - id: "R4"
+        mitigation: "Symlink-or-copy; windows-bootstrap-smoke"
+        summary: "Windows symlinks under tied-bundle"
+      - id: "R9"
+        mitigation: "tied-install --mode full"
+        summary: "Offline clients without copy_files"
+      - id: "R2"
+        mitigation: "tied_config_get_base_path reports both roots; tied-install --doctor"
+        summary: "Wrong MCP tree in multi-root workspaces (RISK-010)"
+      - id: "R8"
+        mitigation: "Updated env expectations; preflight off by default"
+        summary: "agentstream preflight false negatives"
+  tdd_sequence:
+    summary: "Phases 0–8: test-all, validate_tied, verification gate, CITDP persist (2026-10-02)"
+  test_strategy:
+    matrix_notes: "See PLAN §9 and phased todo §10; Phase 8 adds full test-all and tied_verify"
+    summary: "RED unit tests for layout, config, working-root, stale lint; composition install→doctor→MCP; integration temp-repo git check-ignore; repo lint_yaml + tied_validate_consistency; E2E test-new-tied-client and Windows smoke"

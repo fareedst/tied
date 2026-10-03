@@ -23,11 +23,15 @@ test("MCP canonical YAML bindings expose the shared format contract", async () =
   // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION] [REQ-MODULE_VALIDATION]
   // How: Make index/detail/token/batch/CITDP/feedback/verification/rename writers return the same format metadata after shared canonical writes.
   const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-canonical-mcp-"));
-  const tiedBasePath = path.join(projectRoot, "tied");
-  fs.mkdirSync(tiedBasePath);
+  const tiedBasePath = path.join(projectRoot, "tied-project");
+  fs.mkdirSync(tiedBasePath, { recursive: true });
+  fs.writeFileSync(path.join(tiedBasePath, "requirements.yaml"), "{}\n");
   const previousBasePath = process.env.TIED_BASE_PATH;
   try {
-    fs.writeFileSync(path.join(projectRoot, ".tied-yaml.yaml"), "scalar_style: wrapped\n");
+    fs.writeFileSync(
+      path.join(tiedBasePath, "config.yaml"),
+      "schema: tied-project-config.v1\nyaml:\n  scalar_style: wrapped\n",
+    );
     process.env.TIED_BASE_PATH = tiedBasePath;
     clearBasePathCache();
     const fixturePath = path.resolve(process.cwd(), "test/fixtures/yaml-style.yaml");

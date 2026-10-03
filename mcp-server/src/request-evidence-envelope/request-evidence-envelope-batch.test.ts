@@ -23,7 +23,12 @@ import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
 function resolveRepoRoot(): string {
   let dir = process.cwd();
   for (let i = 0; i < 6; i += 1) {
-    if (existsSync(path.join(dir, "tied", "requirements.yaml"))) return dir;
+    if (
+      existsSync(path.join(dir, "tied-project", "requirements.yaml"))
+      || existsSync(path.join(dir, "tied", "requirements.yaml"))
+    ) {
+      return dir;
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     dir = parent;
@@ -32,7 +37,7 @@ function resolveRepoRoot(): string {
 }
 
 const REPO_ROOT = resolveRepoRoot();
-const TIED_BASE_PATH = path.join(REPO_ROOT, "tied");
+const TIED_BASE_PATH = path.join(REPO_ROOT, "tied-project");
 const FIXTURE_ROOT = path.join(
   REPO_ROOT,
   "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099",
@@ -71,7 +76,7 @@ function seedFromSnapshots(tempRoot: string) {
       path.join(inquiry, `phase-${phase}`),
     );
   }
-  mkdirSync(path.join(tempRoot, "tied"), { recursive: true });
+  mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
 }
 
 function minimalEnvelope(requestToken: string): RequestEvidenceEnvelope {
@@ -383,7 +388,7 @@ describe("request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOP
           request_token: REQUEST_TOKEN,
           client_alias: "1787603099",
           envelope_require_mode: hasEnvelope ? "require_envelope" : "legacy_infer",
-          tied_base_path: path.join(projectRoot, "tied"),
+          tied_base_path: path.join(projectRoot, "tied-project"),
         },
       ],
       yamlOut: path.join(tempRoot, "external-report.yaml"),

@@ -1,0 +1,85 @@
+{
+  "$schema": "working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json",
+  "receipt_meta": {
+    "schema_version": 1,
+    "receipt_id": "d34365b5-7694-40f4-a8ee-50d0745e7617",
+    "generated_at": "2026-09-13T04:26:33.018Z",
+    "gate_stage": "G3",
+    "program_gate_policy": "advisory"
+  },
+  "pin": {
+    "methodology_pin": "48d1fbb+",
+    "analyzer_build_identity": "pseudocode-analyzer/1.0.0+stdd@b568c98",
+    "manifest_entry_id": "fleet-stdd-W-stdd-3-IMPL-TIED_RESEARCH_RECORDS"
+  },
+  "subject": {
+    "sidecar_path": "tied/implementation-decisions/IMPL-TIED_RESEARCH_RECORDS-pseudocode.md",
+    "impl_token": "IMPL-TIED_RESEARCH_RECORDS",
+    "input_identity": {
+      "algorithm": "sha256",
+      "hash": "8f927b12e70e2c88e1275a9d54c77ae224ca9980c769caf6e770712f5f542c1a",
+      "byte_length": 4216
+    },
+    "grammar_version": "pseudocode-grammar.v2",
+    "annotation_profile": "header-only-v2"
+  },
+  "layer_a": {
+    "applicable": true,
+    "ok": true
+  },
+  "layer_b": {
+    "ok": true,
+    "validator_schema_version": "layer-b-pseudocode-validator.v1",
+    "blocks_count": 0,
+    "contract_precision": {
+      "active_blocks_with_contract": 0,
+      "active_blocks_missing_pre_or_post": 0,
+      "active_blocks_missing_failure_modes": 0,
+      "active_blocks_missing_data_transition": 0,
+      "active_blocks_missing_termination": 0
+    },
+    "error_count": 0,
+    "warning_count": 0
+  },
+  "layer_c": {
+    "gate_mode": true,
+    "typed_flow": true,
+    "constraint_flow": true,
+    "constraint_gate_errors_policy": "advisory",
+    "ok": true,
+    "analysis_truncated": false,
+    "diagnostics_truncated": false,
+    "error_count": 0,
+    "warning_count": 0,
+    "info_count": 0,
+    "procedure_count": 0,
+    "source_report_schema": "pseudocode-analysis-report.v1"
+  },
+  "constraint": {
+    "ran": true,
+    "procedures_analyzed": 0,
+    "refinements_checked": 0,
+    "refinements_proven": 0,
+    "alias_mut_checked": 0,
+    "alias_mut_violations": 0,
+    "solver_truncated": false,
+    "solver_truncation_cause": "none",
+    "alias_analysis_truncated": false,
+    "budget_exceeded": false,
+    "constraint_diagnostics_truncated": false
+  },
+  "unknown_summary": {
+    "unknown": 0,
+    "truncated": 0,
+    "unsupported": 0,
+    "prose_only": 0,
+    "budget_exceeded": 0
+  },
+  "constraint_gate_errors": [],
+  "promotion_readiness": {
+    "qualification_green": false,
+    "f11_pass": false,
+    "fp_within_threshold": false,
+    "as_of_phase": "P4-E-fleet-g3"
+  }
+}

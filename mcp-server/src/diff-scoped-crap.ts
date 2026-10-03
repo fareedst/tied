@@ -6,6 +6,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
+import { readRepoTiedYaml } from "./tied-project-config.js";
+import { resolveWorkingPath } from "./working-root.js";
 
 export type DiffScopedCrapInput = {
   request_token: string;
@@ -121,20 +123,12 @@ export function resolveCrapThreshold(
   }
   if (projectRoot) {
     try {
-      const configPath = path.join(projectRoot, ".tied-yaml.yaml");
-      if (fs.existsSync(configPath)) {
-        const parsed = yaml.load(fs.readFileSync(configPath, "utf8"));
-        if (
-          typeof parsed === "object"
-          && parsed !== null
-          && !Array.isArray(parsed)
-          && typeof (parsed as Record<string, unknown>).dae === "object"
-        ) {
-          const dae = (parsed as Record<string, unknown>).dae as Record<string, unknown>;
-          const t = dae.crap_threshold;
-          if (typeof t === "number" && Number.isFinite(t)) {
-            return t;
-          }
+      const parsed = readRepoTiedYaml(projectRoot);
+      if (parsed && typeof parsed.dae === "object" && parsed.dae !== null) {
+        const dae = parsed.dae as Record<string, unknown>;
+        const t = dae.crap_threshold;
+        if (typeof t === "number" && Number.isFinite(t)) {
+          return t;
         }
       }
     } catch {
@@ -152,9 +146,8 @@ export function writeDiffScopedCrapReport(
     return { ok: true, report };
   }
 
-  const evidenceDir = path.join(
+  const evidenceDir = resolveWorkingPath(
     input.project_root,
-    "working",
     input.request_token,
     "evidence",
   );

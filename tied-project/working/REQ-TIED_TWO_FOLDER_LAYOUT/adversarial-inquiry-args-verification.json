@@ -1,0 +1,67 @@
+{
+  "graph": {
+    "projectId": "stdd",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_TWO_FOLDER_LAYOUT#SC-TFL-INVARIANT",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-1",
+          "sourceRevision": "req-rev-1"
+        },
+        "architectureConstraintIds": ["ARCH-TIED_TWO_FOLDER_LAYOUT#layout"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "ARCH-TIED_TWO_FOLDER_LAYOUT#layout",
+        "implementationBlockIds": ["IMPL-TIED_TWO_FOLDER_LAYOUT#RESOLVE_TIED_LAYOUT#block"]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_TWO_FOLDER_LAYOUT#RESOLVE_TIED_LAYOUT#block",
+          "kind": "block",
+          "name": "RESOLVE_TIED_LAYOUT",
+          "derivation": "content",
+          "revision": "block-rev-1",
+          "sourceRevision": "impl-rev-1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-1",
+    "specification": [
+      {
+        "id": "statement-1",
+        "kind": "behavior",
+        "value": "Resolve tied-project and tied-bundle paths from project root",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-1",
+        "kind": "unit",
+        "value": "mcp-server/src/tied-layout.test.ts and tools/bootstrap/lib/layout.test.mjs pass"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-1",
+        "kind": "source",
+        "value": "tools/bootstrap/lib/layout.mjs and mcp-server/src/tied-layout.ts"
+      }
+    ]
+  },
+  "scope": ["IMPL-TIED_TWO_FOLDER_LAYOUT#RESOLVE_TIED_LAYOUT#block"],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_TWO_FOLDER_LAYOUT",
+  "run_id": "phase8-verify-2026-10-02",
+  "phase": "verification"
+}

@@ -28,8 +28,13 @@ import type { JevDecideResult, JevQuestions } from "./types.js";
 
 function mkProject(jevYaml?: string): string {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "jev-evidence-suff-"));
+  const tiedBase = path.join(root, "tied-project");
+  fs.mkdirSync(tiedBase, { recursive: true });
   if (jevYaml !== undefined) {
-    fs.writeFileSync(path.join(root, ".tied-yaml.yaml"), jevYaml, "utf8");
+    const body = jevYaml.trimStart().startsWith("schema:")
+      ? jevYaml
+      : `schema: tied-project-config.v1\n${jevYaml}`;
+    fs.writeFileSync(path.join(tiedBase, "config.yaml"), body, "utf8");
   }
   return root;
 }
@@ -362,7 +367,7 @@ describe("W2 SC-DECIDE-TRACE", () => {
         traceEnv: {
           JEV_DECIDE_TRACE: "1",
           JEV_DECIDE_TRACE_PATH: tracePath,
-          TIED_BASE_PATH: path.join(traceDir, "tied"),
+          TIED_BASE_PATH: path.join(traceDir, "tied-project"),
         },
       },
       decideFn: mockDecideFromAnswers({

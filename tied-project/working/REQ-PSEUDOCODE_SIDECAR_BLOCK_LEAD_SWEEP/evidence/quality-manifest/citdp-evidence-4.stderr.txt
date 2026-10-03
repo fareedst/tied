@@ -1,0 +1,1 @@
+bash: line 1: pseudocode_validate: command not found

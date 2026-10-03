@@ -1,0 +1,18 @@
+artifacts: []
+canonical_tokens:
+  architecture: []
+  implementations: []
+  requirements: []
+created_at: "2026-09-09T01:34:14.477Z"
+dependencies: []
+feature_id: "FEAT-001"
+history: []
+mode: "greenfield"
+open_questions: []
+revision: 1
+schema_version: "feature-manifest.v1"
+slug: "count-lines"
+status: "draft"
+tasks: []
+title: "Count lines"
+updated_at: "2026-09-09T01:34:14.477Z"

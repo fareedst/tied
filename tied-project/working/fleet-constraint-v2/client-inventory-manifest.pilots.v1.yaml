@@ -1,0 +1,32 @@
+$schema: "working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json"
+clients:
+  - aggregate_migration_state: "constraint-ready-v2"
+    client_id: "stdd"
+    client_migration_req: "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+    last_receipt_path: "working/fleet-constraint-v2/pilots/stdd/receipts/summary.json"
+    methodology_pin: "48d1fbb+"
+    repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+    sidecar_counts_by_state:
+      constraint-enforced-v2: 0
+      constraint-ready-v2: 10
+      header-only-v2: 82
+      legacy-v1: 0
+      unknown-or-mixed: 0
+    updated_at: "2026-09-12T17:00:00Z"
+  - aggregate_migration_state: "header-only-v2"
+    client_id: "1789177584"
+    client_migration_req: "REQ-PSEUDOCODE_MIGRATION_PILOT_1789177584"
+    last_receipt_path: "working/fleet-constraint-v2/pilots/1789177584/dry-run/inventory-diff.v1.json"
+    methodology_pin: "48d1fbb+"
+    repository_root: "/Users/fareed/Documents/dev/test/1789177584"
+    sidecar_counts_by_state:
+      constraint-enforced-v2: 0
+      constraint-ready-v2: 0
+      header-only-v2: 5
+      legacy-v1: 0
+      unknown-or-mixed: 0
+    updated_at: "2026-09-12T17:00:00Z"
+manifest_id: "stdd-fleet-inventory-pilots-v1"
+notes: "Pilot subset only. aggregate_migration_state MUST NOT be inferred from grammar_v2_header alone.\nstdd wave 1 complete for tooling validation; remaining stdd sidecars deferred to later sub-waves.\n"
+schema_version: 1
+updated_at: "2026-09-12T17:00:00Z"

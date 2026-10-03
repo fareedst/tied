@@ -1,0 +1,60 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T01:19:34.399Z",
+  "client_id": "1789136889",
+  "wave_scope": "W-ext-1789136889-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_CLI-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_CLI",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "MAIN()",
+          "start_line": 23
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_DIAL-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_DIAL",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "ATTEMPT_DIAL()",
+          "start_line": 47
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_PROBE-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_PROBE",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "RUN_ALL()",
+          "start_line": 28
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789136889/tied/implementation-decisions/IMPL-TCP_CONNECT_REPORT-pseudocode.md",
+      "impl_token": "IMPL-TCP_CONNECT_REPORT",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "FORMAT_LINES()",
+          "start_line": 19
+        }
+      ]
+    }
+  ],
+  "dry_run_content_hash": "1bfb483fe6b99b4a09d38192a846e56ddd228a9534eed69b2e338f488ac6e433",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1789136889/dry-run/snapshots-constraint-ready/W-ext-1789136889-1"
+}

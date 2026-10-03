@@ -1,0 +1,12 @@
+IMPL-TIED_TWO_FOLDER_LAYOUT:
+  IMPL-TIED_TWO_FOLDER_LAYOUT:
+    description: "Bootstrap layout.mjs + MCP tied-layout.ts; install and MCP path rewrites."
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_TWO_FOLDER_LAYOUT-pseudocode.md"
+    name: "Two-folder TIED layout implementation"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_PROJECT_CONFIG_OWNERSHIP"
+        - "ARCH-TIED_TWO_FOLDER_LAYOUT"
+      requirements:
+        - "REQ-TIED_TWO_FOLDER_LAYOUT"

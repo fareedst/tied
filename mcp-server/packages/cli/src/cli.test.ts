@@ -5,7 +5,7 @@ import { describe, it } from "node:test";
 
 import {
   agentstreamTsEntryFromCliModule,
-  bootstrapCopyFilesEntryFromCliModule,
+  bootstrapInstallLayersEntryFromCliModule,
   bootstrapNewClientEntryFromCliModule,
   mcpStdioEntryFromCliModule,
   onboardingEntryFromCliModule,
@@ -35,7 +35,7 @@ describe("@tied/cli workspace paths [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
   });
 
   it("resolves bootstrap and yaml Phase 2 dispatch targets", () => {
-    assert.ok(fs.existsSync(bootstrapCopyFilesEntryFromCliModule(import.meta.url)));
+    assert.ok(fs.existsSync(bootstrapInstallLayersEntryFromCliModule(import.meta.url)));
     assert.ok(fs.existsSync(bootstrapNewClientEntryFromCliModule(import.meta.url)));
     const yamlCli = yamlCliEntryFromCliModule(import.meta.url);
     assert.ok(fs.existsSync(yamlCli), `expected ${yamlCli} (build yaml-cli workspace)`);

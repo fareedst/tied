@@ -19,7 +19,7 @@ function advancedPaths(): string[] {
     ".cursor/skills/tied-yaml/scripts/tied-cli.sh",
     "TIED YAML MCP",
     "tied agentstream (@tied/agentstream)",
-    "tied/docs/using-tied-without-mcp.md",
+    "tied-bundle/docs/using-tied-without-mcp.md",
   ];
 }
 
@@ -48,7 +48,7 @@ export function dispatchOnboardingCommand(argv: string[], context: OnboardingCon
   }
   if (!defaults.ok && argv[0] !== "feature" && argv[1] !== "new") {
     const fallback = selectOfflinePath(capabilities, root);
-    const offlineDoc = "tied/docs/using-tied-without-mcp.md";
+    const offlineDoc = "tied-bundle/docs/using-tied-without-mcp.md";
     const correctivePath = fallback.command.includes(offlineDoc) ? fallback.command : `see ${offlineDoc}`;
     return {
       ok: false,

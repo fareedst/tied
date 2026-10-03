@@ -4,6 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { resolveWorkingPath } from "./working-root.js";
 
 import { findRepoRootFromPath } from "./repo-root.js";
 import {
@@ -407,13 +408,7 @@ function applyTrackerDefaults(c: DryRunConfig): void {
     if (token !== "") {
       const root = findRepoRootFromPath(c.workspace);
       if (root !== "") {
-        c.adherenceLedger = path.join(
-          root,
-          "working",
-          token,
-          "adherence",
-          "events.jsonl",
-        );
+        c.adherenceLedger = resolveWorkingPath(root, token, "adherence", "events.jsonl");
       }
     }
   }

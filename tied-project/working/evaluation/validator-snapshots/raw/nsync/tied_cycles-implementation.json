@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "result": {
+    "cycles": [
+      [
+        "IMPL-QUALITY_EVIDENCE_COLLECTION",
+        "IMPL-QUALITY_EVIDENCE_MANIFEST",
+        "IMPL-QUALITY_EVIDENCE_COLLECTION"
+      ]
+    ],
+    "has_cycles": true,
+    "ok": false
+  }
+}

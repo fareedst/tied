@@ -1,0 +1,22 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T18:01:33.310Z",
+  "client_id": "1787503424",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787503424",
+  "sidecar_count": 1,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 1,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "f934d7c8d76607ddfc75f09c7fe1376c6bb55a0f98922a2b180d6132ff619f26",
+  "rows": [
+    {
+      "file": "IMPL-DESKTOP_WINDOW_REPORT-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    }
+  ]
+}

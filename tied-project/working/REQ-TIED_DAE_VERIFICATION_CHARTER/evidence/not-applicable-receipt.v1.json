@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_DAE_VERIFICATION_CHARTER",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier for charter close-out (CITDP sub_adversarial_inquiry_pass: not_applicable)",
+  "generated_at": "2026-09-25T02:00:00.000Z",
+  "source": "build-plan-r1"
+}

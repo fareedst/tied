@@ -1,0 +1,30 @@
+// [IMPL-BT_CLI_FORMATTER] [ARCH-BT_BATTERY_CLI] [REQ-BT_BATTERY_DISPLAY]
+// Render connected-device battery snapshot to stdout.
+
+
+Grammar-Version: v2
+
+procedure FORMAT_CLI_TABLE:
+  INPUT: devices: BluetoothDevice[]
+  POST: returns formatted string; empty input yields friendly message only
+  EFFECTS: none (pure formatter)
+
+  IF devices.length === 0 THEN
+    RETURN "No connected Bluetooth devices with battery info found."
+
+  header ← "Bluetooth device batteries (macOS)\n\nNAME              BATTERY  SOURCE\n"
+  rows ← empty list
+
+  FOR EACH device IN devices
+    batteryText ← device.batteryPercent ?? 'N/A'
+    IF batteryText is number THEN batteryText ← batteryText + '%'
+    row ← pad(device.name, 18) + pad(batteryText, 9) + device.batterySource
+    IF device.notes THEN row ← row + "  (" + device.notes + ")"
+    rows.append(row)
+
+  summary ← devices.length + " connected device(s)."
+  RETURN header + join(rows, "\n") + "\n\n" + summary
+
+procedure PAD:
+  INPUT: text, width
+  POST: text padded/truncated to width for column alignment

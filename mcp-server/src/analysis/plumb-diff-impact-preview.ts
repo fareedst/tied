@@ -484,7 +484,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
 
     const detailPathRel = path.relative(projectRootAbs, detailPathAbs).split(path.sep).join("/");
     const rationaleParts: string[] = [];
-    if (!semanticTokens.has(token)) rationaleParts.push("Token not found in `tied/semantic-tokens.yaml` (may be newly introduced).");
+    if (!semanticTokens.has(token)) rationaleParts.push("Token not found in `tied-project/semantic-tokens.yaml` (may be newly introduced).");
     if (!indexRecord) rationaleParts.push("Missing index record in the matching `tied/{requirements|architecture|implementation}.yaml`.");
     if (!exists) rationaleParts.push("Suggested detail file does not exist yet; add it to complete traceability.");
     if (rationaleParts.length === 0) rationaleParts.push("Traceability chain appears present for this token (suggested for review).");

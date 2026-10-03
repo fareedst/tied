@@ -1,0 +1,37 @@
+REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH:
+  REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH:
+    category: "Functional"
+    description: "Align factory onboarding receipt writes (test-new-tied-client, G4 audit) with committed working root tied-project/working/ on two-folder clients; preserve undivided brownfield fallback."
+    name: "Factory onboarding working path"
+    priority: "P2"
+    rationale:
+      benefits:
+        - "G4 warn-only signal when both working roots exist"
+        - "Onboarding receipts match working-artifact-placement policy"
+      problems_solved:
+        - "Bash G4 helper mkdir creates root working/ when report belongs under tied-project/working/"
+        - "Stray repo-root working/ on fresh two-folder clients"
+      why: "After two-folder layout, disposable clients still get repo-root working/ from hardcoded onboarding paths."
+    satisfaction_criteria:
+      - criterion: "_run_new_client_onboarding_audit bash mirrors layout rules without spurious root working mkdir"
+        id: "SC-FOW-003"
+        metric: "scripts/build-commands.sh"
+      - criterion: "Bootstrap README and adherence runbook document two-folder path and undivided fallback"
+        id: "SC-FOW-005"
+        metric: "tools/bootstrap/README.md; docs/pseudocode-new-client-tied-adherence-runbook.md"
+      - criterion: "defaultOnboardingAuditReportPath uses committedWorkingFileRel"
+        id: "SC-FOW-001"
+        metric: "tools/bootstrap/lib/new-client-onboarding-audit.mjs; new-client-onboarding-audit.test.mjs"
+      - criterion: "Node onboarding audit does not mkdir repo-root working/ when report parent is tied-project/working/"
+        id: "SC-FOW-002"
+        metric: "new-client-onboarding-audit.test.mjs"
+      - criterion: "SC-TFL-NO-ROOT-WORKING warn-only when both roots exist on two-folder client"
+        id: "SC-FOW-004"
+        metric: "scripts/lib/tied-two-folder-audit.mjs; tied-new-client-audit.test.mjs"
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH"
+      implementation:
+        - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
+  status: "Implemented"

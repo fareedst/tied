@@ -1,0 +1,5 @@
+{
+  "token": "ARCH-TIED_LAYERED_CLIENT_INSTALL",
+  "index_record": "{\"category\":\"Infrastructure\",\"description\":\"Capability-layer installer architecture: linked stubs vs full materialization; MCP bundle env; install manifest.\",\"name\":\"Layered client install architecture\",\"status\":\"Proposed\",\"traceability\":{\"requirements\":[\"REQ-TIED_LAYERED_CLIENT_INSTALL\"],\"implementation\":[\"IMPL-TIED_LAYERED_CLIENT_INSTALL\"]}}",
+  "detail_record": "{\"ARCH-TIED_LAYERED_CLIENT_INSTALL\":{\"category\":\"Infrastructure\",\"description\":\"Separates committed db layer from gitignored mcp/skills/methodology layers; stub contract preserves skill front matter and store paths.\",\"name\":\"Layered client install architecture\",\"related_decisions\":{\"depends_on\":[\"ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY\"],\"related_to\":[\"ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM\"],\"supersedes\":[]},\"status\":\"Proposed\",\"traceability\":{\"requirements\":[\"REQ-TIED_LAYERED_CLIENT_INSTALL\"],\"implementation\":[\"IMPL-TIED_LAYERED_CLIENT_INSTALL\"]}}}"
+}

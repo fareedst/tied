@@ -1,0 +1,42 @@
+attractor: "A3"
+baseline:
+  assumptions:
+    - "Exclusive request-key lock"
+  naive_architecture_summary: "working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/baseline.md"
+  objective: "Idempotent feature creation under concurrency"
+business_priority: "P0 pilot"
+design_response: "Serialize under request-key lock per ARCH-FEAT_IDEMPOTENT_CREATION"
+disposition:
+  status: "unresolved"
+  tied_refs:
+    - "ARCH-FEAT_IDEMPOTENT_CREATION"
+    - "IMPL-FEAT_IDEMPOTENT_CREATE"
+    - "REQ-FEAT_IDEMPOTENT_CREATION"
+evidence:
+  limitation: "Not runtime proof until W4 composition tests"
+  method: "W1 worksheet + gap-list"
+  proof_boundary: "Discovery aid only"
+  references:
+    - "tied/implementation-decisions/IMPL-FEAT_IDEMPOTENT_CREATE.yaml"
+    - "tied/requirements/REQ-FEAT_IDEMPOTENT_CREATION.yaml"
+impact_path:
+  bindings:
+    - "API/store"
+  data:
+    - "feature manifest"
+    - "request-key index"
+  dependencies:
+    - "lock coordinator"
+  functions:
+    - "CREATE_FEATURE_IDEMPOTENTLY"
+  people:
+    - "API client"
+residue:
+  class: "desirable"
+  description: "Exactly one feature allocated; both callers receive same feature reference"
+schema_version: "stressor-residue.v1"
+stressor:
+  category: "technical"
+  description: "Two concurrent create calls with identical request_key and identical normalized payload"
+  id: "S-T07"
+validation_stressor: null

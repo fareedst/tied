@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "result": {
+    "schema_version": "test-adequacy-validator.v1",
+    "ok": true,
+    "applicable_checks": [],
+    "diagnostics": [],
+    "proof_boundary": "Plan completeness only; this does not run mutation, property, fuzz, flaky, dependency, maintainability, or external-call tests."
+  }
+}

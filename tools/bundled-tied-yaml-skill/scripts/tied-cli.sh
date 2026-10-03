@@ -17,7 +17,7 @@
 # passed via TIED_CLI_ARGS_FILE so they are not subject to OS environment size limits.
 #
 # Environment:
-#   TIED_BASE_PATH  -- absolute path to the tied/ directory (auto-detected if unset)
+  #   TIED_BASE_PATH  -- absolute path to tied-project/ (auto-detected if unset)
 #   TIED_MCP_BIN    -- path to mcp-server/dist/index.js (auto-detected if unset)
 #   TIED_CLI_QUIET_MCP_STDERR -- set to 0 to forward MCP server stderr (default: suppress)
 #   TIED_MCP_COLLECT_METRICS -- set to 1 or true to append usage metrics JSONL (default: off)
@@ -75,8 +75,13 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
 : "${TIED_BASE_PATH:=$REPO_ROOT/tied}"
+if [[ ! -d "${TIED_BASE_PATH}" && -d "${REPO_ROOT}/tied-project" ]]; then
+  TIED_BASE_PATH="${REPO_ROOT}/tied-project"
+fi
+: "${TIED_METHOD_ROOT:=${REPO_ROOT}/tied-bundle}"
+export TIED_METHOD_ROOT
 
-# TIED methodology repository (mcp-server lives here). copy_files.sh replaces the placeholder below
+# TIED methodology repository (mcp-server lives here). tied-install.sh replaces the placeholder below
 # with the absolute TIED source dir used at bootstrap so TIED_MCP_BIN points at that repo's dist/index.js.
 : "${TIED_REPO_ROOT:=/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR}"
 if [[ "${TIED_REPO_ROOT}" == "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR" ]] \

@@ -24,4 +24,4 @@
 2. RED tests before code (TDD).
 3. RECORD vocabulary after tests/code.
 
-**Note:** In `non-tied-*` workflows, skip TIED synchronization steps. Do **not** RECORD vocabulary into `tied/vocab/` or mutate TIED artifacts — see [non-tied-boundary.md](non-tied-boundary.md).
+**Note:** In `non-tied-*` workflows, skip TIED synchronization steps. Do **not** RECORD vocabulary into `tied-project/vocab/` or mutate TIED artifacts — see [non-tied-boundary.md](non-tied-boundary.md).

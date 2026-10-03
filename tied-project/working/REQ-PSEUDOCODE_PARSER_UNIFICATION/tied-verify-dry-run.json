@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "dry_run": true,
+  "would_update": [
+    {
+      "index": "requirements",
+      "token": "REQ-PSEUDOCODE_PARSER_UNIFICATION",
+      "previous_status": "Planned",
+      "next_status": "Implemented"
+    },
+    {
+      "index": "implementation",
+      "token": "IMPL-PSEUDOCODE_SHARED_PRIMITIVES",
+      "previous_status": "Planned",
+      "next_status": "Active"
+    }
+  ],
+  "requirements_updated": 0,
+  "implementation_updated": 0,
+  "requirements_set_implemented": [],
+  "requirements_set_planned": [],
+  "implementation_set_active": [],
+  "implementation_set_planned": []
+}

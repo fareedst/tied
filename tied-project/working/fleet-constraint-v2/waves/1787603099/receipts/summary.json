@@ -1,0 +1,13 @@
+{
+  "run_at": "2026-09-13T21:17:56.335Z",
+  "mode": "fleet-g3-receipts",
+  "wave_id": "W-ext-1787603099-1",
+  "partition_wave_id": "W-ext-1787603099-1",
+  "gate_stage": "G3",
+  "receipt_count": 3,
+  "receipt_paths": [
+    "working/fleet-constraint-v2/waves/1787603099/receipts/IMPL-LISTENING_PORT_CLI_MAIN.receipt.json",
+    "working/fleet-constraint-v2/waves/1787603099/receipts/IMPL-LISTENING_PORT_COLLECT.receipt.json",
+    "working/fleet-constraint-v2/waves/1787603099/receipts/IMPL-LISTENING_PORT_JSON.receipt.json"
+  ]
+}

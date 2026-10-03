@@ -1,0 +1,18 @@
+{
+  "schema_version": "pseudocode-analysis-report.v1",
+  "ok": false,
+  "gate_mode_applied": true,
+  "input_identity": {
+    "algorithm": "sha256",
+    "hash": "1d5bb4680687b2aab30fc508729d14a5ddaa5740e9786ce228a7fa0bfe576708",
+    "byte_length": 5262
+  },
+  "truncated": false,
+  "diagnostic_codes": [
+    "TERMINATION_UNKNOWN",
+    "UNRESOLVED_CALL"
+  ],
+  "unknown_causes": [],
+  "budget_truncation": false,
+  "serialization_hash": "8699e1b014873016f3606956a720342d6e55f8456242ad47882731aa06cacd42"
+}

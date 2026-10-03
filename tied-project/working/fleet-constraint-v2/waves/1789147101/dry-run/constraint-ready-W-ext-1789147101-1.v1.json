@@ -1,0 +1,58 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T01:19:37.042Z",
+  "client_id": "1789147101",
+  "wave_scope": "W-ext-1789147101-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_DIGEST-pseudocode.md",
+      "impl_token": "IMPL-FILEHASH_DIGEST",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "TRUNCATE_DIGEST",
+          "start_line": 39
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_DISCOVER-pseudocode.md",
+      "impl_token": "IMPL-FILEHASH_DISCOVER",
+      "action": "none",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": []
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_FORMAT-pseudocode.md",
+      "impl_token": "IMPL-FILEHASH_FORMAT",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "FORMAT_SUCCESS_LINE",
+          "start_line": 18
+        },
+        {
+          "procedure_name": "FORMAT_ERROR_LINE",
+          "start_line": 31
+        },
+        {
+          "procedure_name": "TRUNCATE_DIGEST",
+          "start_line": 44
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1789147101/tied/implementation-decisions/IMPL-FILEHASH_RUNNER-pseudocode.md",
+      "impl_token": "IMPL-FILEHASH_RUNNER",
+      "action": "none",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": []
+    }
+  ],
+  "dry_run_content_hash": "1f2db808944c8356c1fdcca9662325400d6129a1e1e5c83e0f3c4408346bc689",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1789147101/dry-run/snapshots-constraint-ready/W-ext-1789147101-1"
+}

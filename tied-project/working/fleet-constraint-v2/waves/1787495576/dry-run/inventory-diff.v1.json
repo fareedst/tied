@@ -1,0 +1,30 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T21:21:26.073Z",
+  "client_id": "1787495576",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787495576",
+  "sidecar_count": 3,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 3,
+    "constraint-enforced-v2": 0,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "f60eb2fcff09b7b6abab489770f952ae8d2090e67f98ab42825ed1cb364eb227",
+  "rows": [
+    {
+      "file": "IMPL-NETIF_CLI-pseudocode.md",
+      "classification": "constraint-ready-v2"
+    },
+    {
+      "file": "IMPL-NETIF_DISCOVERY-pseudocode.md",
+      "classification": "constraint-ready-v2"
+    },
+    {
+      "file": "IMPL-NETIF_FORMAT-pseudocode.md",
+      "classification": "constraint-ready-v2"
+    }
+  ]
+}

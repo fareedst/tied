@@ -1,0 +1,14 @@
+{
+  "provenance": {
+    "builder": "build-plan-w4-manual-verification",
+    "command": "tied_adversarial_inquiry_run",
+    "note": "W4 verification: Mechanism D checklist promotion + B/C regression; manual obligation report per integrated advisory policy.",
+    "phase": "verification",
+    "request_token": "PLAN-TIED-BBCE-ALIGNMENT",
+    "run_id": "w4-build-plan-verification-2026-09-27",
+    "source_revision": "w4-mechanism-d-promotion-2026-09-27",
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+    "project_id": "cfd5bf6ad98024eb",
+    "run_id": "psa-doc-full-update-pre-impl-20260908",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+    ],
+    "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+    "artifact_hashes": {
+      "obligation-report.json": "69656df69b04138f78237958bbc66c463a33bf40ca1c277bcc0b0cc3f2133c04",
+      "finding-ledger.jsonl": "5c66ca5ae13cc71a408f9d7e798dc9496bf0902107698d66213298b624cfaede",
+      "gate-result.json": "bb04e0959855c56ec54db63ff888b7ac9b640c38da6a11894119d96c85083a4a",
+      "evidence-provenance.json": "1a5372a92edd404a5ae13f2294f686ffd367fb2fa20c39a28ae7459945adb84b"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "psa-doc-full-update-pre-impl-20260908",
+      "phase": "pre_implementation",
+      "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+      "hash": "69656df69b04138f78237958bbc66c463a33bf40ca1c277bcc0b0cc3f2133c04",
+      "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "psa-doc-full-update-pre-impl-20260908",
+      "phase": "pre_implementation",
+      "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+      "hash": "5c66ca5ae13cc71a408f9d7e798dc9496bf0902107698d66213298b624cfaede",
+      "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "psa-doc-full-update-pre-impl-20260908",
+      "phase": "pre_implementation",
+      "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+      "hash": "bb04e0959855c56ec54db63ff888b7ac9b640c38da6a11894119d96c85083a4a",
+      "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+      "project_id": "cfd5bf6ad98024eb",
+      "run_id": "psa-doc-full-update-pre-impl-20260908",
+      "phase": "pre_implementation",
+      "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4",
+      "hash": "1a5372a92edd404a5ae13f2294f686ffd367fb2fa20c39a28ae7459945adb84b",
+      "path": "working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-PSEUDOCODE_STATIC_ANALYSIS",
+    "project_id": "cfd5bf6ad98024eb",
+    "run_id": "psa-doc-full-update-pre-impl-20260908",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-PSEUDOCODE_ANALYSIS_ENGINE#ANALYZE_ESSENCE_PSEUDOCODE#ccd3592432c0cf4e"
+    ],
+    "scope_hash": "4cf6ef5282744451a14047235d83ba510589172188abb57239dfd04edf0fb0a4"
+  },
+  "diagnostics": []
+}

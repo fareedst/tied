@@ -16,7 +16,7 @@ describe("tied-records REQ-VOCABULARY_ANALYSIS", () => {
 
   beforeEach(() => {
     origEnv = process.env.TIED_BASE_PATH;
-    process.env.TIED_BASE_PATH = path.join(repoRoot, "tied");
+    process.env.TIED_BASE_PATH = path.join(repoRoot, "tied-project");
     clearBasePathCache();
   });
 

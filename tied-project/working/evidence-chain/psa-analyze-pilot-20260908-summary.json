@@ -1,0 +1,12 @@
+{
+  "run_id": "psa-analyze-pilot-20260908",
+  "tokens": ["REQ-EVIDENCE_CHAIN_PROFILE", "REQ-PSEUDOCODE_STATIC_ANALYSIS"],
+  "default_off_artifact": "working/evidence-chain/psa-analyze-pilot-off.json",
+  "opt_in_artifact": "working/evidence-chain/psa-analyze-pilot-on.json",
+  "default_off_analyze_rows": 0,
+  "opt_in_analyze_rows": 1,
+  "opt_in_analyze_status": "observed",
+  "proof_boundary": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.",
+  "mcp_server_tests": "570 passed",
+  "tied_validate_consistency": "ok"
+}

@@ -1,0 +1,20 @@
+risk_analysis:
+  bbce_alignment:
+    analysis_modules:
+      - "mcp-server/src/analysis/bbce-plumb-locality.ts"
+      - "mcp-server/src/analysis/bbce-schemas.ts"
+      - "mcp-server/src/analysis/change-locality-pilot.ts"
+    applied: true
+    checklist_fields:
+      citdp_ref: "risk_analysis.bbce_alignment.declared_change_surface_ref"
+      tracker_optional: "declared_change_surface"
+    declared_change_surface_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/declared-change-surface-claude-live.v1.yaml"
+    locality_evidence_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w2-locality-run.json"
+    longitudinal_jsonl_ref: "working/PLAN-TIED-BBCE-ALIGNMENT/change-locality/w2-locality-events.jsonl"
+    pilot_change_id: "PLAN-TIED-BBCE-ALIGNMENT"
+    plumb_audit_extension: "plumb-audit-gate-log.v2"
+    proof_boundary: "Locality and declared-surface tooling prove diff-scope discipline, not runtime behavior or REQ satisfaction."
+    recommendation: "adopt_revise_advisory"
+    slice_map_ref: "tied/analysis/agentstream-slice-map.yaml"
+    w2_mechanisms:
+      - "declared_change_surface_and_metrics"

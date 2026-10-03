@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "slice": "Seq-4A-WS-1-S1.4-S1.5-batch-5",
+  "req_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "wave_id": "W-stdd-6",
+  "generated_at": "2026-09-13T03:46:00.000Z",
+  "methodology_pin": "48d1fbb+",
+  "inventory_stdd_before": {
+    "constraint-ready-v2": 53,
+    "constraint-enforced-v2": 40,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_stdd_after": {
+    "constraint-ready-v2": 43,
+    "constraint-enforced-v2": 50,
+    "aggregate_migration_state": "constraint-enforced-v2"
+  },
+  "inventory_delta": {
+    "constraint-ready-v2": -10,
+    "constraint-enforced-v2": 10
+  },
+  "classifier": {
+    "changed": false,
+    "note": "unchanged; section-style sidecars use Contract INPUT where on primary fields; procedure-style use per-procedure Contract INPUT where"
+  },
+  "harness": {
+    "commands": [
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd",
+      "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-inventory --apply"
+    ],
+    "g3_aggregate": {
+      "receipt_count": 83,
+      "layer_c_ok_true": 83,
+      "layer_c_ok_false": 0,
+      "wave_w_stdd_6_receipt_count": 10
+    }
+  },
+  "validation": {
+    "pseudocode_analyze_g3": "via fleet-g3-refresh-stdd receipts (gate_mode, typed_flow, constraint_flow true for all wave-6 tokens)",
+    "pseudocode_validate": "layer_a/layer_b ok on wave-6 receipts; sidecar-only LEAP (no project YAML index changes)",
+    "tied_validate_consistency": { "ok": true }
+  },
+  "remaining_seq_4a_sidecars": 43,
+  "next_batch": {
+    "wave_id": "W-stdd-7",
+    "wave_list_path": "working/fleet-constraint-v2/waves/stdd/wave-7-sidecars.yaml",
+    "suggested_command": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g3-refresh-stdd (after sidecar LEAP on wave-7 list)"
+  },
+  "impl_dispositions": [
+    {
+      "impl_token": "IMPL-FEAT_AGENTSTREAM_ADAPTER",
+      "sidecar_path": "tied/implementation-decisions/IMPL-FEAT_AGENTSTREAM_ADAPTER-pseudocode.md",
+      "annotation_locus": "section BUILD_TASK_TURNS and EXECUTE_SCHEDULE Contract INPUT task_entries/turns where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-FEAT_AGENTSTREAM_ADAPTER.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-CHECKLIST-CONTROL",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-CHECKLIST-CONTROL-pseudocode.md",
+      "annotation_locus": "PARSE_CONTROL turn_text; VALIDATE_CONTROL known_slugs; APPLY_CONTROL checklist_turns where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-CHECKLIST-CONTROL.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-CLI-CMD",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-CLI-CMD-pseudocode.md",
+      "annotation_locus": "main Contract INPUT cwd and argv where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-CLI-CMD.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-EXECUTOR",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-EXECUTOR-pseudocode.md",
+      "annotation_locus": "executor_Run Contract INPUT argv where length(argv) > 0",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-EXECUTOR.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-FEATURESPEC",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-FEATURESPEC-pseudocode.md",
+      "annotation_locus": "featurespec_from_yaml and featurespec_Preview Contract INPUT path where length(path) > 0",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-FEATURESPEC.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-LIB-TYPES",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-LIB-TYPES-pseudocode.md",
+      "annotation_locus": "Summary contract Contract INPUT package_root string where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-LIB-TYPES.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT-pseudocode.md",
+      "annotation_locus": "APPLY_TO_TURNS turns where length; FORMAT_NON_COMPACT_HTML part where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-PIPELINE",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-PIPELINE-pseudocode.md",
+      "annotation_locus": "pipeline_Build Contract INPUT in pipeline.Input where length(in.ArgvWords) >= 0",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-PIPELINE.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-TDDLOOP",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-TDDLOOP-pseudocode.md",
+      "annotation_locus": "tddloop_messages Contract INPUT path string where length(path) > 0",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-TDDLOOP.receipt.json"
+      }
+    },
+    {
+      "impl_token": "IMPL-GOAGENT-TEXT-SOURCES",
+      "sidecar_path": "tied/implementation-decisions/IMPL-GOAGENT-TEXT-SOURCES-pseudocode.md",
+      "annotation_locus": "text_sources Contract INPUT argv_words and prompt_file_paths where length",
+      "inventory_state": "constraint-enforced-v2",
+      "g3": {
+        "layer_c_ok": true,
+        "constraint_flow": true,
+        "receipt_path": "working/fleet-constraint-v2/waves/stdd/receipts/IMPL-GOAGENT-TEXT-SOURCES.receipt.json"
+      }
+    }
+  ]
+}

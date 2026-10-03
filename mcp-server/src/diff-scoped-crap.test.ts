@@ -59,6 +59,8 @@ describe("diff-scoped change-risk report [REQ-TIED_DAE_INCORPORATION]", () => {
 
   it("writes report under working/{REQ}/evidence when enabled", () => {
     tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "diff-crap-"));
+    fs.mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
+    fs.mkdirSync(path.join(tempRoot, "working"), { recursive: true });
     const result = writeDiffScopedCrapReport({
       request_token: "REQ-FIXTURE",
       project_root: tempRoot,

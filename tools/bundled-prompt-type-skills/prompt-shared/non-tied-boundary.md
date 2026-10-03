@@ -10,10 +10,10 @@
 
 ## Forbidden — TIED synchronization writes
 
-- Writing or updating project TIED YAML (`tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`, detail files)
+- Writing or updating project TIED YAML (`tied-project/requirements.yaml`, `tied-project/architecture-decisions.yaml`, `tied-project/implementation-decisions.yaml`, `tied-project/semantic-tokens.yaml`, detail files)
 - Editing IMPL pseudo-code sidecars (`IMPL-*-pseudocode.md`)
-- Creating or editing `tied/citdp/CITDP-*.yaml`
-- Recording vocabulary in `tied/vocab/` (RECORD touchpoint)
+- Creating or editing `tied-project/citdp/CITDP-*.yaml`
+- Recording vocabulary in `tied-project/vocab/` (RECORD touchpoint)
 - Creating or editing LEAP proposals (`leap-proposals/`, `tied_leap_proposal_*`)
 - Invoking mutating verification (`tied_verify` with update) or other TIED synchronization that changes tracked state
 - Copying per-task **Tracker** files for TIED checklist execution

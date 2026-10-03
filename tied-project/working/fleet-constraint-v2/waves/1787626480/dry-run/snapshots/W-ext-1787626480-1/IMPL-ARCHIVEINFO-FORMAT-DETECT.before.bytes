@@ -1,0 +1,16 @@
+# [IMPL-ARCHIVEINFO-FORMAT-DETECT] Format detection
+# Implements [ARCH-ARCHIVEINFO-CLI] for [REQ-ARCHIVEINFO-FORMATS]
+
+PROCEDURE Detect(path string) -> Format
+  // [IMPL-ARCHIVEINFO-FORMAT-DETECT] [ARCH-ARCHIVEINFO-CLI] [REQ-ARCHIVEINFO-FORMATS] — extension-first detection
+  INPUT: file path
+  PRE: path non-empty
+  POST: Format enum value
+  EFFECTS:
+    lower := lowercase(path)
+    IF ends with .tar.gz OR .tgz THEN RETURN FormatTarGz
+    IF ends with .zip THEN RETURN FormatZip
+    IF ends with .tar THEN RETURN FormatTar
+    IF ends with .gz AND NOT ends with .tar.gz THEN RETURN FormatGzip
+    RETURN FormatUnknown
+  FAILURE_MODES: unknown extension → FormatUnknown

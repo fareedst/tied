@@ -1,0 +1,21 @@
+{
+  "mode": "project",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied",
+  "impl_token": "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+  "test_path": "scripts/build_adversarial_inquiry_from_tied_test.rb",
+  "production_path": "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/lib/constraint-migration-receipt.ts",
+  "request_token": "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION",
+  "run_id": "fleet-migration-phase4-p4c-20260912",
+  "phase": "pre_implementation",
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "criterion_scope": [
+    "SC-FLEET-P4-001",
+    "SC-FLEET-P4-002",
+    "SC-FLEET-P4-003",
+    "SC-FLEET-P4-004",
+    "SC-FLEET-P4-005",
+    "SC-FLEET-P4-006"
+  ]
+}

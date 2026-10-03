@@ -16,7 +16,16 @@
 import { createHash } from "node:crypto";
 import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import yaml from "js-yaml";
+import { resolveWorkingRoot } from "../lib/layout.mjs";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+function workingRel(projectRoot, requestToken, kind, ...parts) {
+  const abs = path.join(resolveWorkingRoot(projectRoot, requestToken, kind), ...parts);
+  return path.relative(path.resolve(projectRoot), abs).split(path.sep).join("/");
+}
 
 function parseArgs(argv) {
   const get = (flag) => {
@@ -45,13 +54,13 @@ function completedSlugs(tracker) {
   return completed.filter((item) => typeof item === "string" && item.trim());
 }
 
-function defaultEvidenceRefs(requestToken, slug) {
-  const base = `working/${requestToken}/evidence`;
+function defaultEvidenceRefs(projectRoot, requestToken, slug) {
+  const base = workingRel(projectRoot, requestToken, "committed", "evidence");
   if (slug === "verification-gate") {
     return [`${base}/verification-evidence-manifest.v1.json`];
   }
   if (slug === "persist-citdp-record") {
-    return [`working/${requestToken}/CITDP-${requestToken}.yaml`];
+    return [workingRel(projectRoot, requestToken, "committed", `CITDP-${requestToken}.yaml`)];
   }
   return [`${base}/${slug}-evidence.md`];
 }
@@ -100,7 +109,7 @@ function appendOutcomeVerifiedRows({ projectRoot, requestToken, runId, ledgerPat
   }
   slugs.forEach((slug, index) => {
     if (alreadyVerified.has(slug)) return;
-    const refs = defaultEvidenceRefs(requestToken, slug);
+    const refs = defaultEvidenceRefs(projectRoot, requestToken, slug);
     const artifactRef = refs[0];
     const artifactHash = sha256FileOrRef(projectRoot, artifactRef);
     const row = {
@@ -129,7 +138,7 @@ function appendOutcomeVerifiedRows({ projectRoot, requestToken, runId, ledgerPat
   return { ledger_path: ledgerPath, appended_slugs: appended };
 }
 
-function syncTracker(tracker) {
+function syncTracker(tracker, projectRoot) {
   const requestToken = typeof tracker.request === "string"
     ? tracker.request
     : (isRecord(tracker.execution_evidence) ? tracker.execution_evidence.request : "REQ-UNKNOWN");
@@ -151,7 +160,7 @@ function syncTracker(tracker) {
     if (step.tracking.status === "pending" || !step.tracking.status) {
       step.tracking.status = "completed";
       step.disposition = "completed";
-      const refs = defaultEvidenceRefs(String(requestToken), slug);
+      const refs = defaultEvidenceRefs(projectRoot, String(requestToken), slug);
       step.evidence_refs = refs;
       step.tracking.evidence_refs = refs;
       patched.push(slug);
@@ -165,9 +174,12 @@ function main() {
   const tracker = yaml.load(readFileSync(args.trackerPath, "utf8"));
   if (!isRecord(tracker)) throw new Error("invalid tracker yaml");
 
-  const { tracker: updated, patched, requestToken, completedSlugs: slugs } = syncTracker(tracker);
+  const { tracker: updated, patched, requestToken, completedSlugs: slugs } = syncTracker(
+    tracker,
+    args.projectRoot,
+  );
   const ledgerPath = args.ledgerPath
-    ?? path.join("working", String(requestToken), "gates", "ledger.jsonl");
+    ?? workingRel(args.projectRoot, String(requestToken), "local", "gates", "ledger.jsonl");
   const ledgerResult = appendOutcomeVerifiedRows({
     projectRoot: args.projectRoot,
     requestToken: String(requestToken),

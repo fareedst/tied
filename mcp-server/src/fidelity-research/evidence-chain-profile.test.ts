@@ -222,7 +222,7 @@ describe("EMIT_MANUAL_PROFILE_CONTRACT [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
 
 describe("GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
   const projectRoot = "/tmp/stdd-client";
-  const tiedBasePath = "/tmp/stdd-client/tied";
+  const tiedBasePath = "/tmp/stdd-client/tied-project";
 
   it("integrated depth never calls fidelity, binding, or spec adapters", () => {
     const { adapters, calls } = spyAdapters();
@@ -320,7 +320,7 @@ describe("GENERATE_EVIDENCE_CHAIN_PROFILE [REQ-EVIDENCE_CHAIN_PROFILE]", () => {
     const { adapters, calls } = spyAdapters();
     const result = generateEvidenceChainProfile({
       project_root: projectRoot,
-      tied_base_path: "/other/repo/tied",
+      tied_base_path: "/other/repo/tied-project",
       confirmed_tied_base_path: tiedBasePath,
       profile_depth: "integrated",
       adapters,

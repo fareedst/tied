@@ -1,9 +1,0 @@
-# Proposed CITDP attach snippet — W3 Mechanisms B/C (working folder; not canonical tied/citdp until promotion).
-bbce_alignment:
-  applied: w3_mechanisms_b_c_advisory_pilot
-  boundary_violation_report_ref: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w3-boundary-violation-report.json
-  shared_code_justification_ref: working/PLAN-TIED-BBCE-ALIGNMENT/pilot/w3-shared-code-justification.json
-  false_positive_policy_ref: working/PLAN-TIED-BBCE-ALIGNMENT/w3-refine/false-positive-policy.md
-  w3_evidence:
-    build_plan_outcomes_ref: working/PLAN-TIED-BBCE-ALIGNMENT/evidence/build-plan-w3-outcomes-2026-09-27.md
-    jsonl_ref: working/PLAN-TIED-BBCE-ALIGNMENT/change-locality/w3-bc-pilot-events.jsonl

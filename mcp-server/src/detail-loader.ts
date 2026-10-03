@@ -58,7 +58,7 @@ function getDetailBasePathForRead(token: string): string {
 }
 
 /**
- * Resolve filesystem path for reading a detail file. Methodology tokens read from tied/methodology/...;
+ * Resolve filesystem path for reading a detail file. Methodology tokens read from tied-bundle/...;
  * project tokens from tied/... . Uses index detail_file when present (hybrid .md/.yaml);
  * otherwise falls back to {subdir}/{token}.yaml then {subdir}/{token}.md. Returns null if token invalid.
  *
@@ -155,7 +155,7 @@ function writeTiedDetailToDisk(
 export const DETAIL_MARKDOWN_RAW = "_raw_markdown";
 export const DETAIL_FORMAT = "_format";
 
-/** Multi-doc YAML (e.g. tied/methodology/* bundled files): find the document whose top-level key is `token`. */
+/** Multi-doc YAML (e.g. tied-bundle/* bundled files): find the document whose top-level key is `token`. */
 function yamlRecordForToken(raw: string, token: string): Record<string, unknown> | null {
   const docs = yaml.loadAll(raw) as unknown[];
   for (const data of docs) {

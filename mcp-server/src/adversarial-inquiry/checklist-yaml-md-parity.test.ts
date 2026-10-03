@@ -9,11 +9,11 @@ import yaml from "js-yaml";
 const REPO_ROOT = path.resolve(import.meta.dirname, "../../..");
 const CHECKLIST_YAML = path.join(
   REPO_ROOT,
-  "tied/docs/agent-req-implementation-checklist.yaml",
+  "tied-bundle/docs/agent-req-implementation-checklist.yaml",
 );
 const CHECKLIST_MD = path.join(
   REPO_ROOT,
-  "tied/docs/agent-req-implementation-checklist.md",
+  "tied-bundle/docs/agent-req-implementation-checklist.md",
 );
 
 type ChecklistDoc = {

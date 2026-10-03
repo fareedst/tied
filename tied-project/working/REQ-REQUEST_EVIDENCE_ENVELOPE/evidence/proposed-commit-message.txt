@@ -1,0 +1,5 @@
+fix(envelope): guard patch hooks; fail-safe DIAGNOSTIC on patch errors
+
+tryPatchArtifactFile and tryPatchRequestEvidenceEnvelope no-op when
+TIED_ENVELOPE_HOOKS is unset; swallow patch failures with DIAGNOSTIC warns
+(RISK-001). LEAP: TRY_PATCH_* blocks in IMPL-REQUEST_EVIDENCE_ENVELOPE sidecar.

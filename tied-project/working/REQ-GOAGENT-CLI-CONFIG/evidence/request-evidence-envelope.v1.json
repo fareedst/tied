@@ -1,0 +1,212 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-12T00:57:06.709Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-GOAGENT-CLI-CONFIG",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:2ab7f2c2fdd2a8368f5c1c1c574458fdd62e12118492b2aa643d0477789fab07",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-GOAGENT-CLI-CONFIG.yaml",
+      "content_hash": "sha256:995f952d963fab642c66f44e002c921c12afd0efb9efb40d5a8bd4f85be7527e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/CITDP-REQ-GOAGENT-CLI-CONFIG.yaml",
+      "content_hash": "sha256:995f952d963fab642c66f44e002c921c12afd0efb9efb40d5a8bd4f85be7527e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:ff07e93a8bebc24702c16680cc0ce81e18e84775cea76ef3fdb18445191321fd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:e2503d53cfde7796bb0e731519083ef97d13406f03c69b9b9d7be1ffd7619ab3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:99c69f5013be9d3632eb17ecd94239bae6d5f282e2d19306db53b2dfe82e4590",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:e230843d96ffb4a075e53342588302101a721d7e6b9872e63bec798f13c8daf1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/proposed-commit-message.txt",
+      "content_hash": "sha256:72cf098f8836eb0be5aa81de9bc52b65d6f91c3abf8e8b8206b8a584611cf04c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:3d0d1bd3bc46898409c924891e8ee9542dbe4ddbf7f46d33f7e6f7b5adf4a1e7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:7d183f17aa9aaa4b4b364db7e64b548ff16c9e4dce201a831af832fdf7f7d698",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/sub-close-out-evidence-sync-evidence.md",
+      "content_hash": "sha256:7aabb34dfd14cad47451f910b2bc84aebe669ce22daf06493b31ce9100919bfd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:7fd74dd638caae416de1a116ff3983c4db1f30cccb84b9fed57b0ee3257643aa",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:a313f8c7f559fbb656b5699bf9d76494469f7042e5d57f4f9395d3fc1b535109",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:a3e9c0302e3437a74830e98ec6aa82d1e5404d87f3f99e4f27e53b96a1501d17",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:6843599b1414088389978d52ca6501db5b73b4397df76dbd6d8e31f2f449e10f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/user-facing-release-notes-evidence.md",
+      "content_hash": "sha256:3d35e09bf58b0bec6e73df1ca91e83ef5278258800cc3f9e5c2cb49bcd3e94a1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "working/REQ-GOAGENT-CLI-CONFIG/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:dd41b91db29a94babf75f603db7a8eb2354ee87f30c6228da969408d069ef0c9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "working/REQ-GOAGENT-CLI-CONFIG/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:2ab7f2c2fdd2a8368f5c1c1c574458fdd62e12118492b2aa643d0477789fab07",
+    "citdp_path": "working/REQ-GOAGENT-CLI-CONFIG/CITDP-REQ-GOAGENT-CLI-CONFIG.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

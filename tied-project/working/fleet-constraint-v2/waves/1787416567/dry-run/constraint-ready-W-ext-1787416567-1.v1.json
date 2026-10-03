@@ -1,0 +1,88 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T21:17:58.874Z",
+  "client_id": "1787416567",
+  "wave_scope": "W-ext-1787416567-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-CLI-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-CLI",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "PARSE_FLAGS",
+          "start_line": 16
+        },
+        {
+          "procedure_name": "RUN_VOLUMESTATS",
+          "start_line": 24
+        },
+        {
+          "procedure_name": "MAIN",
+          "start_line": 37
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-DISCOVER-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-DISCOVER",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "LIST_DARWIN_VOLUMES",
+          "start_line": 16
+        },
+        {
+          "procedure_name": "NON_DARWIN_DISCOVERY",
+          "start_line": 31
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-REPORT-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-REPORT",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "FORMAT_BYTES",
+          "start_line": 16
+        },
+        {
+          "procedure_name": "WRITE_TABLE",
+          "start_line": 23
+        },
+        {
+          "procedure_name": "WRITE_JSON",
+          "start_line": 32
+        },
+        {
+          "procedure_name": "WRITE_YAML",
+          "start_line": 39
+        }
+      ]
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1787416567/tied/implementation-decisions/IMPL-VOLUMESTATS-STATS-pseudocode.md",
+      "impl_token": "IMPL-VOLUMESTATS-STATS",
+      "action": "insert_minimal_procedure_contract",
+      "classification_before": "constraint-ready-v2",
+      "procedure_gaps": [
+        {
+          "procedure_name": "STATFS_TO_VOLUME_STATS",
+          "start_line": 16
+        },
+        {
+          "procedure_name": "COLLECT_VOLUME_STATS",
+          "start_line": 26
+        }
+      ]
+    }
+  ],
+  "dry_run_content_hash": "c3cba8ca6ad2312241edad1c5383af067cca755fefd83b918822def2f6bf6ace",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1787416567/dry-run/snapshots-constraint-ready/W-ext-1787416567-1"
+}

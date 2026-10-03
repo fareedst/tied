@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 
 import {
+  agentstreamCliEntryFromModule,
   checklistTestdataDirFromModule,
   oracleFixturesDirFromModule,
   repoRootFromModule,
@@ -44,10 +45,7 @@ describe("@tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]", 
   it("TS preview-checklist-tracker JSON matches frozen oracle", () => {
     const def = path.join(testdata, "gate-fixture-checklist.yaml");
     const track = path.join(testdata, "gate-writer-minimal-tracker.yaml");
-    const entry = path.join(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "index.js",
-    );
+    const entry = agentstreamCliEntryFromModule(import.meta.url);
     assert.ok(fs.existsSync(entry));
     const tsOut = execFileSync(
       process.execPath,
@@ -61,10 +59,7 @@ describe("@tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]", 
   function dryRunViaTsEntry(extraArgs: string[] = []): string {
     const ws = fs.mkdtempSync(path.join(os.tmpdir(), "as-dry-ts-"));
     const checklist = path.join(testdata, "gate-fixture-checklist.yaml");
-    const entry = path.join(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "index.js",
-    );
+    const entry = agentstreamCliEntryFromModule(import.meta.url);
     assert.ok(fs.existsSync(entry));
     return execFileSync(
       process.execPath,
@@ -170,10 +165,7 @@ describe("@tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]", 
     const oracle = normalizeDryRunOutput(
       readOracleFixture(import.meta.url, "pipeline-batch-dry-run.txt"),
     );
-    const entry = path.join(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "index.js",
-    );
+    const entry = agentstreamCliEntryFromModule(import.meta.url);
     const tsOut = normalizeDryRunOutput(
       execFileSync(process.execPath, [entry, ...baseArgs], {
         encoding: "utf8",
@@ -186,10 +178,7 @@ describe("@tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]", 
 
   it("checklist render preview: TS matches frozen oracle (gate fixture)", () => {
     const checklist = path.join(testdata, "gate-fixture-checklist.yaml");
-    const entry = path.join(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "index.js",
-    );
+    const entry = agentstreamCliEntryFromModule(import.meta.url);
     const tsOut = execFileSync(
       process.execPath,
       [entry, "-c", checklist, "--preview-lead-checklist", "--lead-checklist-skip-sub"],
@@ -205,10 +194,7 @@ describe("@tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]", 
     const batch = path.join(oracleDir, "feature-batch.yaml");
     assert.ok(fs.existsSync(batch));
     const args = ["--preview-feature-spec-batch-yaml", batch];
-    const entry = path.join(
-      path.dirname(fileURLToPath(import.meta.url)),
-      "index.js",
-    );
+    const entry = agentstreamCliEntryFromModule(import.meta.url);
     const tsOut = execFileSync(process.execPath, [entry, ...args], {
       encoding: "utf8",
       cwd: repoRoot,
@@ -219,7 +205,7 @@ describe("@tied/agentstream frozen oracle parity [REQ-TIED_UNIFIED_TOOLCHAIN]", 
 
   it("tiedpreflight TS analyze returns OK for valid mcp.json layout", () => {
     const w = fs.mkdtempSync(path.join(os.tmpdir(), "tpf-par-"));
-    const tied = path.join(w, "tied");
+    const tied = path.join(w, "tied-project");
     fs.mkdirSync(tied, { recursive: true });
     fs.writeFileSync(path.join(tied, "requirements.yaml"), "requirements: {}\n");
     const cursorDir = path.join(w, ".cursor");

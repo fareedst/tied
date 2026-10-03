@@ -1,0 +1,30 @@
+{
+  "schema_version": "inventory-diff.v1",
+  "generated_at": "2026-09-13T18:26:08.351Z",
+  "client_id": "1787421852",
+  "read_only": true,
+  "repository_root": "/Users/fareed/Documents/dev/test/1787421852",
+  "sidecar_count": 3,
+  "counts_by_state": {
+    "legacy-v1": 0,
+    "header-only-v2": 0,
+    "constraint-ready-v2": 0,
+    "constraint-enforced-v2": 3,
+    "unknown-or-mixed": 0
+  },
+  "dry_run_content_hash": "bf3f4613d022d514566b94f76e1535c0101a5e716091cfa86a77c8ae78f0201e",
+  "rows": [
+    {
+      "file": "IMPL-VOLUME_MOUNT_DISCOVERY-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    },
+    {
+      "file": "IMPL-VOLUME_REPORT_FORMAT-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    },
+    {
+      "file": "IMPL-VOLUME_STATS_CALC-pseudocode.md",
+      "classification": "constraint-enforced-v2"
+    }
+  ]
+}

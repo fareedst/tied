@@ -1,0 +1,135 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-09-25T16:54:49.977Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY",
+    "project_id": "af8451e933f573ec",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied/citdp/CITDP-REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml",
+      "content_hash": "sha256:5e6ca8b4ef4afbf21e0c48e166676af950cdb93497dc12e781502fbef006fc4a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:37006cdb1d0695e6240e50f035e7a56a0cc811cd159a0daaa3c20326cd2666f5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:a7aa23a3511fe809e14dd9ebd79d005ecc13ac81943c6443bfc553959d9af6b0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-gates-2026-09-25.json",
+      "content_hash": "sha256:f37469f642be9be172da1fcfdb00c8e619475b32402089a09de3ec720195bf74",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-receipt-2026-09-24.md",
+      "content_hash": "sha256:2619e6bc3a9a96bb90309226f963e15e27ab6e3289d3b5299a8f7c150a305373",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/close-out-receipt-2026-09-25.md",
+      "content_hash": "sha256:07cdb6114981e7d48da101d0cc3d540b40b283ec3f582a717f2a19e0747d7899",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/g2-pilot-2026-09-25.md",
+      "content_hash": "sha256:0aba0dbf3be3fca402a080a825cf070111032cbc84c420ba4ac22b2d9a3f4c65",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/g3-release-corpus-2026-09-25.md",
+      "content_hash": "sha256:2ba872930dcb5c7e3bd8dce5489483ed72b5cf0b177a969241d8b792e08056a8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/g4-sponsor-signoff-2026-09-25.md",
+      "content_hash": "sha256:e1f3c7bd96b4a93b986e26631fb01f78e636cf54b791444cb269c5ef99a43b94",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/methodology-offline-policy-signoff.v1.json",
+      "content_hash": "sha256:01217e14cac07becf1fb5bf0084f32c7ea38259bf91ef6690a383c8510401e37",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

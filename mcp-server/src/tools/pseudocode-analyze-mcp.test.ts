@@ -38,7 +38,7 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
 
   it("does not mutate project TIED YAML when invoked", async () => {
     // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
-    const tiedBase = path.resolve(import.meta.dirname, "../../../tied");
+    const tiedBase = path.resolve(import.meta.dirname, "../../../tied-project");
     const requirementsPath = path.join(tiedBase, "requirements.yaml");
     const before = fs.readFileSync(requirementsPath, "utf8");
     await handler("pseudocode_analyze")({
@@ -283,7 +283,7 @@ procedure FIXTURE:
 
   it("typed_flow true does not mutate project TIED YAML", async () => {
     // [IMPL-PSEUDOCODE_TYPED_FLOW] [ARCH-PSEUDOCODE_TYPED_FLOW_PASS] [REQ-PSEUDOCODE_TYPED_FLOW]
-    const tiedBase = path.resolve(import.meta.dirname, "../../../tied");
+    const tiedBase = path.resolve(import.meta.dirname, "../../../tied-project");
     const requirementsPath = path.join(tiedBase, "requirements.yaml");
     const before = fs.readFileSync(requirementsPath, "utf8");
     await handler("pseudocode_analyze")({

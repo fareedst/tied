@@ -24,10 +24,9 @@ function formatterCommand(name: string): string {
 
 function makeProject(): { root: string; tied: string; cleanup: () => void } {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "tied-client-formatter-"));
-  const tied = path.join(root, "tied");
-  fs.mkdirSync(tied, { recursive: true });
+  const tied = path.join(root, "tied-project");
   fs.mkdirSync(path.join(tied, "requirements"), { recursive: true });
-  fs.mkdirSync(path.join(tied, "methodology"), { recursive: true });
+  fs.mkdirSync(path.join(root, "tied-bundle"), { recursive: true });
   return {
     root,
     tied,
@@ -36,7 +35,12 @@ function makeProject(): { root: string; tied: string; cleanup: () => void } {
 }
 
 function writeRepoConfig(root: string, body: string): void {
-  fs.writeFileSync(path.join(root, ".tied-yaml.yaml"), body, "utf8");
+  const configPath = path.join(root, "tied-project", "config.yaml");
+  fs.mkdirSync(path.dirname(configPath), { recursive: true });
+  const withSchema = body.includes("schema:")
+    ? body
+    : `schema: tied-project-config.v1\n${body}`;
+  fs.writeFileSync(configPath, withSchema, "utf8");
 }
 
 function writeSampleYaml(filePath: string, body: string): void {
@@ -215,18 +219,24 @@ test("FMT-PATH-ESCAPE rejects paths outside tiedBasePath", async () => {
   }
 });
 
-test("FMT-METHODOLOGY-BLOCK rejects tied/methodology paths", async () => {
+test("FMT-METHODOLOGY-BLOCK rejects tied-bundle paths", async () => {
   const project = makeProject();
   try {
     writeRepoConfig(
       project.root,
-      `client_formatter:\n  command: ruby\n  args:\n    - ${formatterCommand("noop")}\n`,
+      `yaml:\n  client_formatter:\n    command: ruby\n    args:\n      - ${formatterCommand("noop")}\n`,
     );
-    const methodologyPath = path.join(project.tied, "methodology/sample.yaml");
+    const methodologyPath = path.join(project.root, "tied-bundle", "requirements/sample.yaml");
+    fs.mkdirSync(path.dirname(methodologyPath), { recursive: true });
     writeSampleYaml(methodologyPath, "name: methodology\n");
     const result = await runClientFormatterHook(methodologyPath, hookDeps(project));
     assert.equal(result.ok, false);
-    if (!result.ok) assert.equal(result.code, "METHODOLOGY_PATH_FORBIDDEN");
+    if (!result.ok) {
+      assert.ok(
+        result.code === "METHODOLOGY_PATH_FORBIDDEN" || result.code === "PATH_OUT_OF_SCOPE",
+        `expected tied-bundle YAML to be blocked, got ${result.code}`,
+      );
+    }
   } finally {
     project.cleanup();
   }
@@ -296,7 +306,7 @@ test("non-idempotent formatter is rejected", async () => {
 
 test("guardProjectTiedPath throws typed errors for direct callers", () => {
   assert.throws(
-    () => guardProjectTiedPath("/tmp/outside.yaml", "/tmp/project/tied"),
+    () => guardProjectTiedPath("/tmp/outside.yaml", "/tmp/project/tied-project"),
     (error: unknown) =>
       error instanceof YamlClientFormatterError && error.code === "PATH_OUT_OF_SCOPE",
   );

@@ -1,0 +1,2 @@
+bash: -c: line 1: syntax error near unexpected token `('
+bash: -c: line 1: `node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out (CLIENT_FACTORY + DOC_REMAINDER)'

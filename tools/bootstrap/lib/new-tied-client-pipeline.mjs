@@ -14,6 +14,7 @@ import { runClaudeClientValidation } from "./claude-client-validation.mjs";
 import { tiedBaselineCommitMessage } from "./tied-baseline-commit-message.mjs";
 import { skillsRerootEnabledFromEnv } from "./skills-reroot.mjs";
 import { bootstrapToolFlagsToArgv } from "./client-tool-use-bootstrap.mjs";
+import { buildTiedInstallArgv } from "./install-options.mjs";
 
 export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
   const raw = env.TIED_REPO_ROOT;
@@ -52,10 +53,11 @@ export function prepareClientDirectory(clientDir, { disposable = false } = {}) {
 
 function bootstrapEntry(sourceRoot) {
   if (process.platform === "win32") {
-    return path.join(sourceRoot, "copy_files.cmd");
+    return { script: path.join(sourceRoot, "tied-install.cmd"), argv: [] };
   }
-  return path.join(sourceRoot, "copy_files.sh");
+  return { script: path.join(sourceRoot, "tied-install.sh"), argv: [] };
 }
+
 
 function runStep(label, fn) {
   const result = fn();
@@ -117,15 +119,19 @@ export function runNewTiedClientPipeline(options) {
 
   prepareClientDirectory(clientDir, { disposable: options.disposable === true });
 
-  const copyScript = bootstrapEntry(sourceRoot);
+  const { script: copyScript, argv: entryArgv } = bootstrapEntry(sourceRoot);
   if (!fs.existsSync(copyScript)) {
     sayErr(`bootstrap entry not found: ${copyScript}`);
-    return { ok: false, code: 1, step: "copy_files" };
+    return { ok: false, code: 1, step: "tied_install" };
   }
 
-  const bootstrapArgv = bootstrapToolFlagsToArgv(options.toolUseProfile ?? {});
+  const bootstrapArgv = [
+    ...entryArgv,
+    ...buildTiedInstallArgv(sourceRoot, harnessProfile, options.installOptions ?? {}),
+    ...bootstrapToolFlagsToArgv(options.toolUseProfile ?? {}),
+  ];
 
-  let step = runStep("copy_files", () => {
+  let step = runStep("tied_install", () => {
     const result = spawn(copyScript, bootstrapArgv, {
       cwd: clientDir,
       shell: process.platform === "win32",
@@ -136,7 +142,7 @@ export function runNewTiedClientPipeline(options) {
       ok: result.status === 0,
       code: result.status ?? 1,
       stderr: result.stderr,
-      step: "copy_files",
+      step: "tied_install",
     };
   });
   if (!step.ok) {

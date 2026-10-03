@@ -99,7 +99,7 @@ const DEFAULT_TEST: Required<TraceabilityGapTestFileConfig> = {
   ],
 };
 
-const DEFAULT_METHODOLOGY_MARKERS = ["tied/methodology/"];
+const DEFAULT_METHODOLOGY_MARKERS = ["tied-bundle/"];
 const DEFAULT_NON_PRODUCTION_MARKERS = [
   "templates/",
   "/examples/",
@@ -153,8 +153,8 @@ export function isNonProductionContentPath(
 function definitionRefsForToken(token: string, projectRoot: string): string[] {
   const abs = getDetailPath(token);
   if (!abs) {
-    if (token.startsWith("REQ-")) return [`tied/requirements/${token}.yaml`];
-    if (token.startsWith("IMPL-")) return [`tied/implementation-decisions/${token}.yaml`];
+    if (token.startsWith("REQ-")) return [`tied-project/requirements/${token}.yaml`];
+    if (token.startsWith("IMPL-")) return [`tied-project/implementation-decisions/${token}.yaml`];
     return [];
   }
   const rel = path.relative(projectRoot, abs);

@@ -4,6 +4,7 @@ import path from "node:path";
 import yaml from "js-yaml";
 
 import { resolveProjectManifest, type ProjectManifest } from "../fidelity-research/manifest.js";
+import { resolveTiedLayout } from "../tied-layout.js";
 import { detectGoTestClassifier } from "./go-evidence-adapter.js";
 
 type JsonObject = Record<string, unknown>;
@@ -229,7 +230,7 @@ export function resolveModeBManifestProfile(testPath: string): {
 }
 
 function manifestFor(input: ProjectScopeLoaderInput): ProjectManifest | ProjectScopeError {
-  const tiedBasePath = input.tiedBasePath ?? path.join(input.projectRoot, "tied");
+  const tiedBasePath = input.tiedBasePath ?? resolveTiedLayout(input.projectRoot).tiedDir;
   const profile = resolveModeBManifestProfile(input.testPath);
   if ("code" in profile) return profile;
   const result = resolveProjectManifest({
@@ -283,12 +284,13 @@ export async function loadProjectScope(input: ProjectScopeLoaderInput): Promise<
   if (!testFile.ok) return testFile;
   if (!productionFile.ok) return productionFile;
 
+  const tiedDirRel = path.relative(realProjectRoot, manifestValue.tiedBasePath);
   const indexNames = ["requirements", "architecture-decisions", "implementation-decisions", "semantic-tokens"] as const;
   const indexReads = await Promise.all(indexNames.map(async (indexName) => {
-    const relative = `${indexName}.yaml`;
-    const fileResult = await resolveDeclaredFile(realProjectRoot, path.join("tied", relative));
+    const relative = path.join(tiedDirRel, `${indexName}.yaml`);
+    const fileResult = await resolveDeclaredFile(realProjectRoot, relative);
     if (!fileResult.ok) return fileResult;
-    const read = await readFileText(fileResult.filePath, path.join("tied", relative));
+    const read = await readFileText(fileResult.filePath, relative);
     return read.ok ? { ok: true as const, text: read.text } : read;
   }));
   for (const index of indexReads) {
@@ -307,7 +309,7 @@ export async function loadProjectScope(input: ProjectScopeLoaderInput): Promise<
     return error("READ_ERROR", "Unable to load the explicit TIED index set.");
   }
 
-  const tiedBasePath = path.join(realProjectRoot, "tied");
+  const tiedBasePath = manifestValue.tiedBasePath;
   const requirementResult = await readYamlRecord(
     tiedBasePath,
     "requirements",

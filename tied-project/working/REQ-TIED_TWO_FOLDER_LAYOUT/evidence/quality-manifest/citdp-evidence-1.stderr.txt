@@ -1,0 +1,4 @@
+DIAGNOSTIC: run-mcp-tests — tsx --test (221 files)
+DIAGNOSTIC: run-mcp-tests — node --test (3 CJS files)
+DIAGNOSTIC: run-mcp-tests — replay-jev-context-pruning
+DIAGNOSTIC: context pruning benchmark written /Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json

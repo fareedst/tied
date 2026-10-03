@@ -1,0 +1,18 @@
+
+test/jev/context-log-pruner.test.ts:
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING resolveContextLogPruningConfig defaults off [0.26ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING resolveContextLogPruningConfig opt-in via env [0.04ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING SC-PASS-THROUGH ≤30 lines unchanged [0.48ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING 31 lines triggers chunking [1.07ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING splitIntoChunks covers all indices [0.06ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING deterministicChunkDisposition fatal [0.01ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING mergeKeptRegionsWithSurround ±2 [0.02ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING raw_before arm identity [0.05ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING deterministic_only keep all [0.07ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING SC-FALLBACK unavailable [0.50ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING mock Jev drops boilerplate [0.07ms]
+(pass) REQ-TIED_JEV_CONTEXT_LOG_PRUNING labeled corpus safety [1.83ms]
+
+ 12 pass
+ 0 fail
+Ran 12 tests across 1 file. [76.00ms]

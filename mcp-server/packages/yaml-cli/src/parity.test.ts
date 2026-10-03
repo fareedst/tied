@@ -6,14 +6,14 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import { describe, it } from "node:test";
 
-import { yamlCanonicalizerCliFromYamlCliModule } from "./paths.js";
+import {
+  yamlCanonicalizerCliFromYamlCliModule,
+  yamlCliEntryFromYamlCliModule,
+} from "./paths.js";
 
 // [IMPL-TIED_UNIFIED_TOOLCHAIN] [ARCH-TIED_UNIFIED_TOOLCHAIN] [REQ-TIED_YAML_CANONICALIZATION]
 describe("@tied/yaml-cli parity [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
-  const yamlCliEntry = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    "index.js",
-  );
+  const yamlCliEntry = yamlCliEntryFromYamlCliModule(import.meta.url);
 
   it("lint --check matches direct yaml-canonicalizer after canonicalize", () => {
     const canonicalizer = yamlCanonicalizerCliFromYamlCliModule(import.meta.url);

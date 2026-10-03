@@ -42,6 +42,15 @@ export function bootstrapNewClientEntryFromCliModule(moduleUrl: string): string 
   );
 }
 
+export function bootstrapInstallLayersEntryFromCliModule(moduleUrl: string): string {
+  return path.join(
+    repoRootFromCliModule(moduleUrl),
+    "tools",
+    "bootstrap",
+    "install-layers.mjs",
+  );
+}
+
 export function yamlCliEntryFromCliModule(moduleUrl: string): string {
   return path.join(
     workspaceRootFromCliModule(moduleUrl),

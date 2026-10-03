@@ -1,0 +1,26 @@
+{
+  "schema_version": "constraint-ready-diff.v1",
+  "generated_at": "2026-09-13T18:26:01.648Z",
+  "client_id": "1786643714",
+  "wave_scope": "W-ext-1786643714-1",
+  "methodology_pin": "48d1fbb+",
+  "apply_mode": true,
+  "planned_actions": [
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786643714/tied/implementation-decisions/IMPL-FIBONACCI_CLI-pseudocode.md",
+      "impl_token": "IMPL-FIBONACCI_CLI",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2",
+      "procedure_gaps": []
+    },
+    {
+      "sidecar_path": "/Users/fareed/Documents/dev/test/1786643714/tied/implementation-decisions/IMPL-FIBONACCI_GENERATE_SEQUENCE-pseudocode.md",
+      "impl_token": "IMPL-FIBONACCI_GENERATE_SEQUENCE",
+      "action": "none",
+      "classification_before": "constraint-enforced-v2",
+      "procedure_gaps": []
+    }
+  ],
+  "dry_run_content_hash": "d29c62c0b3d78661581c6ee8e9c0b1e2c4f014e79dcbeb6e267640ccaa1e4aba",
+  "snapshot_dir": "working/fleet-constraint-v2/waves/1786643714/dry-run/snapshots-constraint-ready/W-ext-1786643714-1"
+}
