@@ -1,0 +1,24 @@
+{
+  "schema_version": "gitignore-post-closeout-hygiene.v1",
+  "request_token": "REQ-TIED_TWO_FOLDER_LAYOUT",
+  "generated_at": "2026-10-03T16:45:00.000Z",
+  "actions": [
+    {
+      "class": "restore",
+      "reason": "close_out gate run bumped envelope revision/timestamp only",
+      "paths": [
+        "mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/working/REQ-FIXTURE-ADVERSARIAL/evidence/request-evidence-envelope.v1.json",
+        "mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project/working/REQ-FIXTURE-ADVERSARIAL/evidence/request-evidence-envelope.v1.json",
+        "tied-project/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json",
+        "tied-project/working/evaluation/envelope-gap-report.v1.yaml"
+      ]
+    },
+    {
+      "class": "untrack",
+      "reason": "operator-only JEV decide trace belongs in local working; should not be versioned under tied-project/working",
+      "path": "tied-project/working/jev-decide-trace/system-one-decide.v1.jsonl",
+      "gitignore_glob": "tied-project/working/jev-decide-trace/"
+    }
+  ],
+  "gitignore_source": "tools/bootstrap/lib/working-gitignore.mjs EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS"
+}

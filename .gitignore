@@ -32,6 +32,7 @@ tied/features/
 
 # Local System One decide trace JSONL (operator-only; JEV_DECIDE_TRACE)
 tied-bundle/working/jev-decide-trace/
+tied-project/working/jev-decide-trace/
 
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)

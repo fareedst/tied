@@ -14,6 +14,8 @@ export const GITIGNORE_UNDIVIDED_MIRROR_END = "# END TIED UNDIVIDED STORE MIRROR
 export const EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS = [
   ...LOCAL_WORKING_GITIGNORE_GLOBS,
   "tied-bundle/working/jev-decide-trace/",
+  /** Store migration: operator trace was tracked under committed working by mistake. */
+  "tied-project/working/jev-decide-trace/",
   "tied-bundle/working/**/context-pruning-benchmark-live.v1.json",
   "tied-bundle/working/*-CLIENT-*/",
   "tied-bundle/working/**/gate-*.json",
