@@ -1,0 +1,20 @@
+REQ-TIED_GIT_HYGIENE:
+    category: "Tooling"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+      implementation:
+        - "IMPL-TIED_GIT_HYGIENE"
+    description: "Preview-first untracked cleanup and gitignore guidance with guarded apply."
+    name: "Git hygiene MCP"
+    satisfaction_criteria:
+      - criterion: "Apply deletes untracked paths only with exact allowlist"
+        criterion_id: "guarded-apply"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+      implementation:
+        - "IMPL-TIED_GIT_HYGIENE"
+      tests:
+        - "git-hygiene.test.ts"

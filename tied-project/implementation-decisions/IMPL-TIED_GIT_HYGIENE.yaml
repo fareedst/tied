@@ -1,0 +1,18 @@
+IMPL-TIED_GIT_HYGIENE:
+    cross_references:
+      architecture:
+        - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+      implementation: []
+      requirements:
+        - "REQ-TIED_GIT_HYGIENE"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_GIT_HYGIENE-pseudocode.md"
+    implementation_approach:
+      details: []
+      summary: "git-hygiene.ts with bootstrap gitignore bridge"
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-04"
+        reason: "mint"
+    name: "Git hygiene implementation"
+    status: "Planned"

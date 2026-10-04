@@ -1,0 +1,6 @@
+feat(project-operations): add read-only MCP validators and xlate skill
+
+[REQ-TIED_PROJECT_LINT] [ARCH-TIED_PROJECT_LINT_BOUNDARY] [IMPL-TIED_PROJECT_LINT]
+[REQ-TIED_GIT_HYGIENE] [REQ-TIED_SPONSOR_QUESTIONS] [REQ-TIED_XLATE_SKILL]
+
+Close-out: close-out-project-lint-20261004; envelope blocking_gap_count=0.

@@ -12,7 +12,13 @@ import {
   warnModifiedCopyTarget,
 } from "./copy-managed.mjs";
 import { assertMcpPrerequisite, initializeTiedMcpConfig, initializeClaudeMcpConfig } from "./mcp-config.mjs";
-import { copyHooks, installTiedYamlSkill, installPromptTypeSkills, installClaudeSkills } from "./skills.mjs";
+import {
+  copyHooks,
+  installTiedYamlSkill,
+  installXlateSkill,
+  installPromptTypeSkills,
+  installClaudeSkills,
+} from "./skills.mjs";
 import {
   buildSkillsBootstrapOptions,
   resolveSkillsInstallDir,
@@ -113,6 +119,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   const cursorSkillsDir = resolveSkillsInstallDir(projectRoot, "cursor", skillsBootstrap);
   const claudeSkillsDir = resolveSkillsInstallDir(projectRoot, "claude", skillsBootstrap);
   installTiedYamlSkill(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
+  installXlateSkill(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
   installPromptTypeSkills(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
   // [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] — dual harness install after Cursor paths.
   // [IMPL-TIED_CLAUDE_SKILLS_REROOT] [ARCH-TIED_CLAUDE_SKILLS_REROOT] [REQ-TIED_CLAUDE_SKILLS_REROOT]

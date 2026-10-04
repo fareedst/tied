@@ -52,6 +52,7 @@ export function manifestPaths() {
     mcpServerDist: path.join(TIED_REPO_ROOT, "mcp-server", "dist", "index.js"),
     tiedYamlSkillCanonical: path.join(TIED_REPO_ROOT, "tools", "bundled-tied-yaml-skill"),
     tiedYamlSkillDevFallback: path.join(TIED_REPO_ROOT, ".cursor", "skills", "tied-yaml"),
+    xlateSkillCanonical: path.join(TIED_REPO_ROOT, "tools", "bundled-xlate-skill"),
     promptTypeSkillsCanonical: path.join(TIED_REPO_ROOT, "tools", "bundled-prompt-type-skills"),
     hooksSource: path.join(TIED_REPO_ROOT, ".cursor", "hooks.json"),
     marker: m.TIED_CLI_REPO_ROOT_MARKER,

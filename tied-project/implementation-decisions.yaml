@@ -2282,6 +2282,13 @@ IMPL-TIED_FILES:
       - "scripts/analyze_tied_mcp_metrics_test.rb"
       - "scripts/compare_yaml_dirs_test.rb"
       - "scripts/yaml_list_sorter_test.rb"
+IMPL-TIED_GIT_HYGIENE:
+  cross_references:
+    - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+    - "REQ-TIED_GIT_HYGIENE"
+  detail_file: "implementation-decisions/IMPL-TIED_GIT_HYGIENE.yaml"
+  name: "Git hygiene implementation"
+  status: "Active"
 IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture:
@@ -2379,6 +2386,13 @@ IMPL-TIED_PROJECT_IDENTITY:
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_IDENTITY.yaml"
   name: "Project identity pure module"
   status: "Active"
+IMPL-TIED_PROJECT_LINT:
+  cross_references:
+    - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
+    - "REQ-TIED_PROJECT_LINT"
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_LINT.yaml"
+  name: "Project lint implementation"
+  status: "Active"
 IMPL-TIED_RESEARCH_RECORDS:
   code_locations:
     files:
@@ -2418,6 +2432,13 @@ IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
   detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
   name: "Sponsor-Agent Relationship Layer implementation"
   status: "Active"
+IMPL-TIED_SPONSOR_QUESTIONS:
+  cross_references:
+    - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+    - "REQ-TIED_SPONSOR_QUESTIONS"
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_QUESTIONS.yaml"
+  name: "Sponsor questions implementation"
+  status: "Active"
 IMPL-TIED_TWO_FOLDER_LAYOUT:
   description: "Layout resolver, legacy detection, migrate, gitignore v2, config loaders, working-root split."
   detail_file: "implementation-decisions/IMPL-TIED_TWO_FOLDER_LAYOUT.yaml"
@@ -2445,6 +2466,13 @@ IMPL-TIED_VOCABULARY_REFRESH:
     - "REQ-TIED_VOCABULARY_OWNERSHIP"
   detail_file: "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml"
   name: "Vocabulary Ownership Refresh"
+  status: "Active"
+IMPL-TIED_XLATE_SKILL:
+  cross_references:
+    - "ARCH-TIED_XLATE_SKILL_BOUNDARY"
+    - "REQ-TIED_XLATE_SKILL"
+  detail_file: "implementation-decisions/IMPL-TIED_XLATE_SKILL.yaml"
+  name: "Xlate skill implementation"
   status: "Active"
 IMPL-TIED_YAML_CANONICALIZER:
   cross_references:

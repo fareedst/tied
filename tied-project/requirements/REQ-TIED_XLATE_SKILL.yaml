@@ -1,0 +1,23 @@
+REQ-TIED_XLATE_SKILL:
+    category: "Tooling"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_XLATE_SKILL_BOUNDARY"
+      implementation:
+        - "IMPL-TIED_XLATE_SKILL"
+      requirements:
+        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "REQ-VOCABULARY_EXPLORER"
+    description: "Bundled /xlate skill for Touchpoint 1 RESOLVE via bootstrap install."
+    name: "Xlate vocabulary skill"
+    satisfaction_criteria:
+      - criterion: "Skill installs to .cursor/skills/xlate and documents routing RESOLVE"
+        criterion_id: "xlate-install"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_XLATE_SKILL_BOUNDARY"
+      implementation:
+        - "IMPL-TIED_XLATE_SKILL"
+      tests:
+        - "xlate-skill.test.ts"

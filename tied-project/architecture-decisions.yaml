@@ -1882,6 +1882,13 @@ ARCH-TIED_FIDELITY_RESEARCH:
       - "mcp-server/src/fidelity-research/snapshot.test.ts"
       - "mcp-server/src/fidelity-research/specification-state.test.ts"
       - "mcp-server/src/fidelity-research/structural-analysis.test.ts"
+ARCH-TIED_GIT_HYGIENE_SAFETY:
+  cross_references:
+    - "IMPL-TIED_GIT_HYGIENE"
+    - "REQ-TIED_GIT_HYGIENE"
+  detail_file: "architecture-decisions/ARCH-TIED_GIT_HYGIENE_SAFETY.yaml"
+  name: "Git hygiene safety boundary"
+  status: "Planned"
 ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []
@@ -1990,6 +1997,13 @@ ARCH-TIED_PROJECT_IDENTITY:
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_IDENTITY.yaml"
   name: "Shared TIED project identity resolver"
   status: "Accepted"
+ARCH-TIED_PROJECT_LINT_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_PROJECT_LINT"
+    - "REQ-TIED_PROJECT_LINT"
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_LINT_BOUNDARY.yaml"
+  name: "Project lint boundary"
+  status: "Planned"
 ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -2006,6 +2020,13 @@ ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
     - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
   detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
   name: "Sponsor-Agent Relationship Layer architecture"
+  status: "Planned"
+ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_SPONSOR_QUESTIONS"
+    - "REQ-TIED_SPONSOR_QUESTIONS"
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY.yaml"
+  name: "Sponsor questions boundary"
   status: "Planned"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
@@ -2125,6 +2146,13 @@ ARCH-TIED_WORKING_ARTIFACT_PLACEMENT:
       - "IMPL-TIED_TWO_FOLDER_LAYOUT"
     requirements:
       - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+ARCH-TIED_XLATE_SKILL_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_XLATE_SKILL"
+    - "REQ-TIED_XLATE_SKILL"
+  detail_file: "architecture-decisions/ARCH-TIED_XLATE_SKILL_BOUNDARY.yaml"
+  name: "Xlate skill boundary"
+  status: "Planned"
 ARCH-TIED_YAML_CANONICAL_PROFILE:
   cross_references:
     - "ARCH-MODULE_VALIDATION"

@@ -1,0 +1,18 @@
+IMPL-TIED_PROJECT_LINT:
+    cross_references:
+      architecture:
+        - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
+      implementation: []
+      requirements:
+        - "REQ-TIED_PROJECT_LINT"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROJECT_LINT-pseudocode.md"
+    implementation_approach:
+      details: []
+      summary: "project-lint.ts + project-operations-mcp.ts"
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-04"
+        reason: "mint"
+    name: "Project lint implementation"
+    status: "Planned"

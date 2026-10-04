@@ -1,0 +1,19 @@
+IMPL-TIED_SPONSOR_QUESTIONS:
+    cross_references:
+      architecture:
+        - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+      implementation: []
+      requirements:
+        - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+        - "REQ-TIED_SPONSOR_QUESTIONS"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_SPONSOR_QUESTIONS-pseudocode.md"
+    implementation_approach:
+      details: []
+      summary: "sponsor-questions.ts"
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-04"
+        reason: "mint"
+    name: "Sponsor questions implementation"
+    status: "Planned"

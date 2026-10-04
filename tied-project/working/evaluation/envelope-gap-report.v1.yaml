@@ -1,71 +1,11 @@
 schema_version: envelope-gap-report.v1
-generated_at: "2026-09-10T18:00:00.000Z"
+generated_at: '2026-09-10T18:00:00.000Z'
 generator: request_evidence_envelope_batch_collect
 generator_version: 1.0.0
 privacy_tier: shareable_hashed
 include_absolute_paths: false
 rows:
-  - client_alias: "1787603099"
-    request_token: REQ-LISTENING_PORT_REPORT
-    status: included
-    envelope_require_mode: require_envelope
-    envelope_source: envelope_file
-    envelope_artifact: working/REQ-LISTENING_PORT_REPORT/evidence/request-evidence-envelope.v1.json
-    envelope_revision: 1
-    gap_codes:
-      - artifact_path_root_projection_rejected
-      - evidence_stale
-      - expected_artifact_missing
-      - finding_unresolved
-      - legacy_json_in_json_wrapper
-      - provenance_incomplete
-      - thin_ledger
-      - tracker_dual_write
-      - tracker_sparse
-    artifact_coverage:
-      by_kind:
-        adversarial_inquiry_gate:
-          present: 4
-          waived: 0
-          not_applicable: 0
-          missing: 0
-        adversarial_inquiry_ledger:
-          present: 4
-          waived: 0
-          not_applicable: 0
-          missing: 0
-        adversarial_inquiry_obligation:
-          present: 4
-          waived: 0
-          not_applicable: 0
-          missing: 0
-        adversarial_inquiry_provenance:
-          present: 4
-          waived: 0
-          not_applicable: 0
-          missing: 0
-        checklist_tracker:
-          present: 1
-          waived: 0
-          not_applicable: 0
-          missing: 0
-        citdp_record:
-          present: 2
-          waived: 0
-          not_applicable: 0
-          missing: 0
-        unknown:
-          present: 1
-          waived: 0
-          not_applicable: 0
-          missing: 0
-        evidence_chain_profile:
-          present: 0
-          waived: 0
-          not_applicable: 0
-          missing: 1
-      denominator_kinds: 8
-  - client_alias: "1788547701"
+  - client_alias: '1788547701'
     request_token: REQ-BT_BATTERY_DISPLAY
     status: included
     envelope_require_mode: require_envelope
@@ -86,7 +26,7 @@ rows:
           not_applicable: 0
           missing: 0
       denominator_kinds: 2
-  - client_alias: "1789069630"
+  - client_alias: '1789069630'
     request_token: REQ-MACOS_PERM_REPORT
     status: included
     envelope_require_mode: require_envelope
@@ -140,7 +80,7 @@ rows:
           not_applicable: 0
           missing: 0
       denominator_kinds: 8
-  - client_alias: "1789087315"
+  - client_alias: '1789087315'
     request_token: REQ-DUPCOMPARE
     status: included
     envelope_require_mode: require_envelope
@@ -188,7 +128,7 @@ rows:
           not_applicable: 0
           missing: 1
       denominator_kinds: 7
-  - client_alias: "1789136889"
+  - client_alias: '1789136889'
     request_token: REQ-TCP_CONNECT_CHECKER
     status: included
     envelope_require_mode: require_envelope
@@ -250,7 +190,7 @@ rows:
           not_applicable: 0
           missing: 0
       denominator_kinds: 10
-  - client_alias: "1789177584"
+  - client_alias: '1789177584'
     request_token: REQ-URLFETCH_CLI
     status: included
     envelope_require_mode: require_envelope
@@ -380,5 +320,8 @@ rows:
           not_applicable: 0
           missing: 1
       denominator_kinds: 12
-excluded_rows: []
+excluded_rows:
+  - client_alias: '1787603099'
+    request_token: REQ-LISTENING_PORT_REPORT
+    reason: envelope_missing
 validation_errors: []

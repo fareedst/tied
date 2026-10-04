@@ -1,0 +1,18 @@
+IMPL-TIED_XLATE_SKILL:
+    cross_references:
+      architecture:
+        - "ARCH-TIED_XLATE_SKILL_BOUNDARY"
+      implementation: []
+      requirements:
+        - "REQ-TIED_XLATE_SKILL"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_XLATE_SKILL-pseudocode.md"
+    implementation_approach:
+      details: []
+      summary: "tools/bundled-xlate-skill + bootstrap skills.mjs"
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-04"
+        reason: "mint"
+    name: "Xlate skill implementation"
+    status: "Planned"

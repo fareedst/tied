@@ -1,0 +1,11 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "verification",
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "diagnostics": [
+    "missing_completion_activation"
+  ]
+}

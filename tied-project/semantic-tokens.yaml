@@ -796,6 +796,14 @@ ARCH-TIED_FIDELITY_RESEARCH:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_GIT_HYGIENE_SAFETY:
+  cross_references:
+    - "IMPL-TIED_GIT_HYGIENE"
+    - "REQ-TIED_GIT_HYGIENE"
+  description: "Git hygiene safety boundary"
+  name: "Git hygiene safety"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -883,6 +891,14 @@ ARCH-TIED_PROJECT_IDENTITY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_PROJECT_LINT_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_PROJECT_LINT"
+    - "REQ-TIED_PROJECT_LINT"
+  description: "Lint tool boundary"
+  name: "Project lint boundary"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   cross_references:
     - "IMPL-TIED_RESEARCH_RECORDS"
@@ -895,6 +911,14 @@ ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
 ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
   category: "Methodology"
   description: "Sponsor-agent relationship layer"
+ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_SPONSOR_QUESTIONS"
+    - "REQ-TIED_SPONSOR_QUESTIONS"
+  description: "Sponsor questions boundary"
+  name: "Sponsor questions boundary"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "IMPL-TIED_FILES"
@@ -928,6 +952,14 @@ ARCH-TIED_VOCABULARY_LAYERS:
   description: "Separate methodology and client vocabulary trees with explicit handoff indexes."
   name: "Layered Vocabulary Ownership"
   source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-TIED_XLATE_SKILL_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_XLATE_SKILL"
+    - "REQ-TIED_XLATE_SKILL"
+  description: "Xlate install boundary"
+  name: "Xlate skill boundary"
   status: "Active"
   type: "ARCH"
 ARCH-TIED_YAML_CANONICAL_PROFILE:
@@ -1951,6 +1983,14 @@ IMPL-TIED_FILES:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_GIT_HYGIENE:
+  cross_references:
+    - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+    - "REQ-TIED_GIT_HYGIENE"
+  description: "Git hygiene module"
+  name: "Git hygiene implementation"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -2038,6 +2078,14 @@ IMPL-TIED_PROJECT_IDENTITY:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_PROJECT_LINT:
+  cross_references:
+    - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
+    - "REQ-TIED_PROJECT_LINT"
+  description: "Lint module implementation"
+  name: "Project lint implementation"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_RESEARCH_RECORDS:
   cross_references:
     - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
@@ -2050,6 +2098,14 @@ IMPL-TIED_RESEARCH_RECORDS:
 IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
   category: "Methodology"
   description: "Sponsor-agent relationship layer"
+IMPL-TIED_SPONSOR_QUESTIONS:
+  cross_references:
+    - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+    - "REQ-TIED_SPONSOR_QUESTIONS"
+  description: "Sponsor questions module"
+  name: "Sponsor questions implementation"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_UNIFIED_TOOLCHAIN:
   cross_references:
     - "ARCH-TIED_UNIFIED_TOOLCHAIN"
@@ -2070,6 +2126,14 @@ IMPL-TIED_VOCABULARY_REFRESH:
   description: "Refresh methodology vocabulary independently and preserve client vocabulary with report-first migration."
   name: "Vocabulary Ownership Refresh"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_XLATE_SKILL:
+  cross_references:
+    - "ARCH-TIED_XLATE_SKILL_BOUNDARY"
+    - "REQ-TIED_XLATE_SKILL"
+  description: "Xlate bootstrap implementation"
+  name: "Xlate skill implementation"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_YAML_CANONICALIZER:
@@ -3269,6 +3333,14 @@ REQ-TIED_FIDELITY_RESEARCH:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_GIT_HYGIENE:
+  cross_references:
+    - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+    - "IMPL-TIED_GIT_HYGIENE"
+  description: "Git hygiene preview and guarded apply"
+  name: "Git hygiene MCP"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -3353,6 +3425,14 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"
+REQ-TIED_PROJECT_LINT:
+  cross_references:
+    - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
+    - "IMPL-TIED_PROJECT_LINT"
+  description: "MCP read-only project lint aggregation"
+  name: "Project lint MCP"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_RESEARCH_RECORDS:
   cross_references:
     - "ARCH-TIED_RESEARCH_RECORD_BOUNDARY"
@@ -3379,6 +3459,14 @@ REQ-TIED_SETUP:
 REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
   category: "Methodology"
   description: "Sponsor-agent relationship layer"
+REQ-TIED_SPONSOR_QUESTIONS:
+  cross_references:
+    - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+    - "IMPL-TIED_SPONSOR_QUESTIONS"
+  description: "Costly-choice sponsor question extraction"
+  name: "Sponsor questions MCP"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_UNIFIED_TOOLCHAIN:
   category: "Tooling"
   cross_references:
@@ -3401,6 +3489,14 @@ REQ-TIED_VOCABULARY_OWNERSHIP:
   name: "Separate Vocabulary Ownership"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_XLATE_SKILL:
+  cross_references:
+    - "ARCH-TIED_XLATE_SKILL_BOUNDARY"
+    - "IMPL-TIED_XLATE_SKILL"
+  description: "Bundled /xlate vocabulary skill"
+  name: "Xlate skill"
+  status: "Active"
   type: "REQ"
 REQ-TIED_YAML_CANONICALIZATION:
   category: "Functional"

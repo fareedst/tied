@@ -1,0 +1,20 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-TIED_PROJECT_LINT",
+  "generated_at": "2026-10-04T04:50:00.000Z",
+  "commands": [
+    {
+      "id": "project-operations-tests",
+      "command": "cd mcp-server && npm test -- project-operations",
+      "exit_code": 0,
+      "claimed_success": true
+    },
+    {
+      "id": "mcp-server-build",
+      "command": "cd mcp-server && npm run build",
+      "exit_code": 0,
+      "claimed_success": true
+    }
+  ],
+  "proof_boundaries": ["test stdout not archived in close-out handoff"]
+}

@@ -1,0 +1,92 @@
+CITDP-MCP-PROJECT-OPERATIONS:
+  change_definition:
+    current_behavior: "Agents call multiple MCP validators and ad-hoc git inspection; Touchpoint 1 vocab RESOLVE relies on manual @routing.md attachment; no bundled /xlate skill."
+    desired_behavior: "Three read-mostly MCP tools (tied_project_lint, tied_git_hygiene, tied_sponsor_questions) plus bundled xlate skill; git hygiene preview-first with guarded apply; sponsor costly-choice extraction only."
+    non_goals:
+      - "Replace tied_validate_consistency or tied_checklist_gate_validate authority"
+      - "Git commit/stage/reset/checkout or git clean"
+      - "New PROC-* tokens"
+    success_criteria:
+      - "Composition tests register and invoke all three MCP tools"
+      - "Lint and sponsor tools never mutate project TIED YAML"
+      - "Git hygiene apply requires apply true and exact allowed_paths; rejects tracked deletion"
+      - "xlate skill installs to .cursor/skills/xlate via bootstrap"
+      - "tied_validate_consistency passes after token stack"
+    unchanged_behavior:
+      - "tied_validate_consistency remains authoritative for gates"
+      - "Existing validation MCP tools unchanged"
+  completion_criteria:
+    activation:
+      run_id: close-out-project-lint-20261004
+      phase: verification
+      request_token: REQ-TIED_PROJECT_LINT
+    focused_tests: "project-operations/*.test.ts; project-operations-mcp.test.ts; xlate install test"
+    lint: "cd mcp-server && npm test -- project-operations"
+    persist_policy: "persist CITDP to tied-project/citdp/ on close-out"
+    verification: "tied_validate_consistency; tied_verify when gated"
+  impact_analysis:
+    audited_project_mutation: "mcp-server project-operations modules; bootstrap skills; tied-project TIED tokens; vocab routing"
+    files:
+      - "mcp-server/src/project-operations/"
+      - "mcp-server/src/tools/project-operations-mcp.ts"
+      - "tools/bundled-xlate-skill/"
+      - "tools/bootstrap/lib/skills.mjs"
+      - "tied-project/requirements.yaml"
+      - "tied-project/vocab/routing.md"
+    modules:
+      - "project_lint"
+      - "git_hygiene"
+      - "sponsor_questions"
+      - "xlate_skill_bootstrap"
+    tags:
+      - "mcp-project-operations"
+      - "integrated-wave"
+  record_identity:
+    author: "build-plan"
+    batch: "mcp-project-operations-v2"
+    change_request_id: "REQ-TIED_PROJECT_LINT"
+    date: "2026-10-04"
+    record_status: "closed"
+    title: "MCP project operations + xlate skill"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Lint tool writes project YAML silently"
+        - "Git hygiene deletes tracked files without allowlist"
+        - "Sponsor tool treats every Planned REQ as blocking"
+      depth_selected_at: "2026-10-04T00:00:00Z"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Composition tests assert no-write for lint/sponsor"
+        - "Apply path rejects tracked paths and requires exact allowlist"
+      evidence_references:
+        - "tied-project/working/REQ-MCP-PROJECT-OPERATIONS/"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+    risks:
+      - description: "ESM bridge from TS to bootstrap gitignore helpers diverges from bootstrap behavior."
+        id: "RISK-PO-001"
+        likelihood: "Medium"
+        mitigation: "Dedicated parity unit test for managed block idempotence."
+        severity: "Medium"
+      - description: "Mis-attributed TIED_BASE_PATH during MCP writes."
+        id: "RISK-PO-002"
+        likelihood: "Low"
+        mitigation: "tied_config_get_base_path at session start; tests use temp dirs."
+        severity: "High"
+  test_strategy:
+    summary: "RED unit tests per module; composition via allTools.find pattern; bootstrap xlate install assertion; mutation guards on apply."
+    module_validation:
+      - module: "project_lint"
+        boundary: "read-only aggregation under getBasePath()"
+        tests: "project-lint.test.ts"
+      - module: "git_hygiene"
+        boundary: "preview default; apply with allowlist only"
+        tests: "git-hygiene.test.ts"
+      - module: "sponsor_questions"
+        boundary: "library imports only; no MCP recursion"
+        tests: "sponsor-questions.test.ts"
+      - module: "xlate_bootstrap"
+        boundary: "install copies bundled skill"
+        tests: "xlate-skill.test.ts or bootstrap extension"

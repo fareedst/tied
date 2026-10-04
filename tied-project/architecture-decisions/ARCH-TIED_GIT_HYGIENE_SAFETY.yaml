@@ -1,0 +1,20 @@
+ARCH-TIED_GIT_HYGIENE_SAFETY:
+    consequences:
+      negative:
+        - "Bootstrap ESM bridge risk"
+      positive:
+        - "Fail-closed on tracked paths"
+    context: "Filesystem mutation class"
+    cross_references:
+      implementation:
+        - "IMPL-TIED_GIT_HYGIENE"
+      requirements:
+        - "REQ-TIED_GIT_HYGIENE"
+    decision: "Preview default; apply requires explicit allowlist; reject tracked deletion."
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-04"
+        reason: "mint"
+    name: "Git hygiene safety boundary"
+    status: "Planned"

@@ -1,0 +1,21 @@
+REQ-TIED_PROJECT_LINT:
+    category: "Tooling"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
+      implementation:
+        - "IMPL-TIED_PROJECT_LINT"
+    description: "Read-only MCP aggregation of TIED index, consistency, and optional CITDP/pseudocode checks."
+    name: "Project lint MCP"
+    satisfaction_criteria:
+      - criterion: "tied_project_lint never mutates project YAML"
+        criterion_id: "read-only-lint"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
+      implementation:
+        - "IMPL-TIED_PROJECT_LINT"
+      tests:
+        - "project-lint.test.ts"
+        - "project-operations-mcp.test.ts"

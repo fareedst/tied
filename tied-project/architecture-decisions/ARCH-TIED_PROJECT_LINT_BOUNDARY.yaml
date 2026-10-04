@@ -1,0 +1,20 @@
+ARCH-TIED_PROJECT_LINT_BOUNDARY:
+    consequences:
+      negative:
+        - "Must stay read-only"
+      positive:
+        - "Single diagnostic entry point"
+    context: "MCP project operations wave"
+    cross_references:
+      implementation:
+        - "IMPL-TIED_PROJECT_LINT"
+      requirements:
+        - "REQ-TIED_PROJECT_LINT"
+    decision: "Compose existing validators; do not replace tied_validate_consistency authority."
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-04"
+        reason: "mint"
+    name: "Project lint boundary"
+    status: "Planned"

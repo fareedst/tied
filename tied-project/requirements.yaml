@@ -2115,6 +2115,15 @@ REQ-TIED_FIDELITY_RESEARCH:
       method: "Read-only safety checks"
     - coverage: "Manifest, finding lifecycle, specification-state classification, fidelity matrices, promotion, and deterministic rerun."
       method: "Unit tests"
+REQ-TIED_GIT_HYGIENE:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+    - "IMPL-TIED_GIT_HYGIENE"
+  detail_file: "requirements/REQ-TIED_GIT_HYGIENE.yaml"
+  name: "Git hygiene MCP"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []
@@ -2257,6 +2266,15 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   name: "Reviewed operational feedback promotion"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_PROJECT_LINT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
+    - "IMPL-TIED_PROJECT_LINT"
+  detail_file: "requirements/REQ-TIED_PROJECT_LINT.yaml"
+  name: "Project lint MCP"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_RESEARCH_RECORDS:
   category: "Functional"
   cross_references:
@@ -2364,6 +2382,15 @@ REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
   name: "Sponsor-Agent Relationship Layer"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_SPONSOR_QUESTIONS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+    - "IMPL-TIED_SPONSOR_QUESTIONS"
+  detail_file: "requirements/REQ-TIED_SPONSOR_QUESTIONS.yaml"
+  name: "Sponsor questions MCP"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_TWO_FOLDER_LAYOUT:
   category: "Infrastructure"
   description: "Two-folder client layout: committed tied-project traceability store and local tied-bundle methodology/docs; no top-level tied/ after install or migrate."
@@ -2414,6 +2441,15 @@ REQ-TIED_WORKING_ARTIFACT_PLACEMENT:
       - "ARCH-TIED_WORKING_ARTIFACT_PLACEMENT"
     requirements:
       - "REQ-TIED_TWO_FOLDER_LAYOUT"
+REQ-TIED_XLATE_SKILL:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_XLATE_SKILL_BOUNDARY"
+    - "IMPL-TIED_XLATE_SKILL"
+  detail_file: "requirements/REQ-TIED_XLATE_SKILL.yaml"
+  name: "Xlate vocabulary skill"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_YAML_CANONICALIZATION:
   category: "Functional"
   cross_references:

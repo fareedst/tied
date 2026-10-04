@@ -1,0 +1,19 @@
+ARCH-TIED_XLATE_SKILL_BOUNDARY:
+    consequences:
+      negative: []
+      positive:
+        - "Explicit /xlate entry point"
+    context: "Touchpoint 1 vocabulary"
+    cross_references:
+      implementation:
+        - "IMPL-TIED_XLATE_SKILL"
+      requirements:
+        - "REQ-TIED_XLATE_SKILL"
+    decision: "Separate bundled skill mirroring tied-yaml install, not prompt-type bundle."
+    metadata:
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-04"
+        reason: "mint"
+    name: "Xlate skill boundary"
+    status: "Planned"

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **MCP project operations batch close-out ([REQ-TIED_PROJECT_LINT], [REQ-TIED_GIT_HYGIENE], [REQ-TIED_SPONSOR_QUESTIONS], [REQ-TIED_XLATE_SKILL])** — Read-mostly MCP tools (`tied_project_lint`, `tied_git_hygiene`, `tied_sponsor_questions`), bundled `/xlate` skill bootstrap, and integrated `close_out` with inquiry run id `close-out-project-lint-20261004` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-MCP-PROJECT-OPERATIONS/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-TIED_PROJECT_LINT/evidence/request-evidence-envelope.v1.json).
+
 ### Fixed
 
 - **Two-folder layout follow-up ([REQ-TIED_TWO_FOLDER_LAYOUT])** — Slim client install-managed `.gitignore` (no `tied-project/` or legacy LOCAL WORKING blocks; **SC-TFL-CLIENT-GITIGNORE-SLIM** on REQ-TFL); bootstrap gitignore tests and install-layer integration coverage; regenerated install-resource matrix and close-out envelope for staged revision. Co-staged regression pins: adversarial Mode B fixture envelopes, [envelope-gap-report.v1.yaml](tied-project/working/evaluation/envelope-gap-report.v1.yaml), checklist fixture `1787603099`, Jev context-pruning benchmark, Node toolchain quality-manifest captures. Integrated `close_out` re-run with `run_id` `phase8-verify-2026-10-02` (`gate.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/closeout-run-close-out-gates-final.json), [plan-close-out-handoff.md](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/plan-close-out-handoff.md).

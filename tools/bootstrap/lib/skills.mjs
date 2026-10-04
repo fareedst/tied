@@ -64,6 +64,25 @@ function installTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker, skills
   sayWarn(`Copied tied-yaml Cursor skill into ${dest} (from ${src}).`);
 }
 
+function installXlateSkillFrom(projectRoot, src, skillsInstallDir) {
+  const dest = path.join(skillsInstallDir, "xlate");
+  fs.mkdirSync(skillsInstallDir, { recursive: true });
+  copyTreeWithAttributes(src, dest);
+  sayWarn(`Copied xlate Cursor skill into ${dest} (from ${src}).`);
+}
+
+export function installXlateSkill(projectRoot, paths, options = {}) {
+  const { xlateSkillCanonical } = paths;
+  const skillsInstallDir =
+    options.skillsInstallDir ?? path.join(projectRoot, ".cursor", "skills");
+  const srcSkill = path.join(xlateSkillCanonical, "SKILL.md");
+  if (!fs.existsSync(srcSkill)) {
+    sayErr(`ERROR: xlate skill not found at ${xlateSkillCanonical}.`);
+    throw new Error("SKILL_INSTALL_FAILED");
+  }
+  installXlateSkillFrom(projectRoot, xlateSkillCanonical, skillsInstallDir);
+}
+
 export function installTiedYamlSkill(projectRoot, paths, options = {}) {
   const { tiedYamlSkillCanonical, tiedYamlSkillDevFallback, marker } = paths;
   const tiedRepoRoot = paths.tiedRepoRoot ?? paths.TIED_REPO_ROOT;

@@ -1,0 +1,25 @@
+REQ-TIED_SPONSOR_QUESTIONS:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_SPONSOR_QUESTIONS"
+  description: "Extract costly-choice sponsor questions from CITDP hinge fields and LEAP queue."
+  name: "Sponsor questions MCP"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Only rung 3+ decisions become blocking sponsor questions"
+      criterion_id: "costly-only"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_SPONSOR_QUESTIONS"
+    tests:
+      - "sponsor-questions.test.ts"
