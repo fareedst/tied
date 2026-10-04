@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Two-folder layout follow-up ([REQ-TIED_TWO_FOLDER_LAYOUT])** — Slim client install-managed `.gitignore` (no `tied-project/` or legacy LOCAL WORKING blocks; **SC-TFL-CLIENT-GITIGNORE-SLIM** on REQ-TFL); bootstrap gitignore tests and install-layer integration coverage; regenerated install-resource matrix and close-out envelope for staged revision. Co-staged regression pins: adversarial Mode B fixture envelopes, [envelope-gap-report.v1.yaml](tied-project/working/evaluation/envelope-gap-report.v1.yaml), checklist fixture `1787603099`, Jev context-pruning benchmark, Node toolchain quality-manifest captures. Integrated `close_out` re-run with `run_id` `phase8-verify-2026-10-02` (`gate.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/closeout-run-close-out-gates-final.json), [plan-close-out-handoff.md](tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/plan-close-out-handoff.md).
+
 ### Added
 
 - **Node-only controlled TIED toolchain ([REQ-TIED_NODE_TOOLCHAIN_DEFAULT])** — Controlled build, test, shell, and Jev replay entrypoints use Node/npm/npx/tsx; static contract test blocks Bun regression in canonical paths. Minimal `close_out` via `run-close-out-gates.mjs` (`gate.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/request-evidence-envelope.v1.json).

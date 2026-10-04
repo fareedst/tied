@@ -201,6 +201,12 @@ Operator routing (REQ vs FEAT, operating modes): [client-development-index.md](.
 
 Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied-project/requirements/REQ-TIED_CLAUDE_HARNESS.yaml) · [ARCH-TIED_CLAUDE_HARNESS](../tied-project/architecture-decisions/ARCH-TIED_CLAUDE_HARNESS.yaml) · [IMPL-TIED_CLAUDE_HARNESS](../tied-project/implementation-decisions/IMPL-TIED_CLAUDE_HARNESS.yaml)
 
+## Client `.gitignore` (INSTALL MANAGED v2)
+
+`writeGitignoreBlock` ([`lib/layers/gitignore-block.mjs`](lib/layers/gitignore-block.mjs)) always uses **`mergeLocalWorkingGitignoreBlock` profile `client`**: it writes the versioned `# BEGIN TIED INSTALL MANAGED` paths (including `tied-bundle/`, `.cursor/skills/`, `.claude/skills/`, and repo-root `skills/` for optional `TIED_SKILLS_REROOT=1`) and **removes** legacy `# BEGIN TIED LOCAL WORKING` / undivided-store mirror blocks without re-appending them. Refresh and `--migrate-layout` are idempotent on the managed block.
+
+**Store profile** (expanded local-working globs) is reserved for methodology-repo close-out via `collapseLegacyWorkingGitignorePatterns` in [`lib/working-gitignore.mjs`](lib/working-gitignore.mjs); client bootstrap must not call it.
+
 ## Layout
 
 - `install-layers.mjs` — layered install CLI

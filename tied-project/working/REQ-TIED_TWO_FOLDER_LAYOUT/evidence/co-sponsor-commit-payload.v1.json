@@ -1,15 +1,14 @@
 {
   "schema_version": "co-sponsor-commit-payload.v1",
   "request_token": "REQ-TIED_TWO_FOLDER_LAYOUT",
-  "generated_at": "2026-10-03T16:30:00.000Z",
-  "proposed_commit_message": "Complete two-folder TIED layout (tied-project + tied-bundle).\n\nHard-cut legacy tied/ and copy_files; layout helpers, config\nownership, working-root split, store self-migration, stale-layout\nlint, and G4 two-folder audit. Integrated close-out with field\nvalidation on factory client 1791037288 (mac-displays-cli).\n\nREQ-TIED_TWO_FOLDER_LAYOUT · SC-TFL-*",
+  "generated_at": "2026-10-03T19:15:00.000Z",
+  "proposed_commit_message": "fix(bootstrap): slim client gitignore and LEAP TFL satisfaction criteria\n\nClient install-managed gitignore drops tied-project/ and legacy LOCAL\nWORKING blocks (SC-TFL-CLIENT-GITIGNORE-SLIM). REQ-TFL satisfaction\ncriteria aligned with bootstrap behavior; gitignore and install-layer\ntests updated. Regenerated install matrix and close-out envelope for\nstaged revision; co-staged regression pins (fixture envelopes, gap\nreport, checklist manifest, Jev benchmark, Node quality-manifest).\n\nREQ-TIED_TWO_FOLDER_LAYOUT · SC-TFL-CLIENT-GITIGNORE-SLIM",
   "scope_summary": [
-    "tools/bootstrap (layout, migrate, install layers, lint-stale-layout)",
-    "mcp-server (tied-layout, working-root, yaml-loader, fixtures → tied-project/)",
-    "tied-bundle/ methodology corpus (store exception)",
-    "tied-project/ REQ-ARCH-IMPL + CITDP + working evidence",
-    "scripts (G4 audit, build-commands, Windows smoke)",
-    "AGENTS.md, README, CHANGELOG"
+    "tools/bootstrap (working-gitignore, gitignore-block, install-layer tests, README)",
+    "tied-project REQ/ARCH/IMPL-TIED_TWO_FOLDER_LAYOUT (+ satisfaction criteria)",
+    "tied-project/working evidence refresh (closeout JSON, envelope, quality-manifest)",
+    "co-staged regression pins (REQ-TIED_NODE_TOOLCHAIN_DEFAULT, REQ-TIED_CHECKLIST_GATE_ENFORCEMENT, REQ-TIED_JEV_CONTEXT_LOG_PRUNING, evaluation gap report, mcp-server adversarial fixtures)",
+    "CHANGELOG follow-up entry"
   ],
   "close_out_evidence": {
     "gate_json": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/closeout-run-close-out-gates-final.json",

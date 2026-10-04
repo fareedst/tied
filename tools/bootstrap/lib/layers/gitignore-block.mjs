@@ -27,6 +27,7 @@ export const GITIGNORE_MANAGED_PATHS = [
   ".mcp.json",
   ".cursor/skills/",
   ".claude/skills/",
+  "skills/",
   `${BUNDLE_DIR_NAME}/`,
   "CLAUDE.md",
   ".cursor/hooks.json",
@@ -51,8 +52,9 @@ export function writeGitignoreBlock(projectRoot) {
     existing = fs.readFileSync(gitignorePath, "utf8");
   }
 
+  const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const blockRegex = new RegExp(
-    `${GITIGNORE_BLOCK_BEGIN}[\\s\\S]*?${GITIGNORE_BLOCK_END}\\n?`,
+    `${escapeRegExp(GITIGNORE_BLOCK_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_BLOCK_END)}\\n?`,
     "m",
   );
 
@@ -63,7 +65,7 @@ export function writeGitignoreBlock(projectRoot) {
     next = existing.endsWith("\n") || existing.length === 0 ? `${existing}${blockBody}` : `${existing}\n${blockBody}`;
   }
 
-  next = mergeLocalWorkingGitignoreBlock(next, { undividedMirror: false });
+  next = mergeLocalWorkingGitignoreBlock(next, { profile: "client", undividedMirror: false });
   fs.writeFileSync(gitignorePath, next, "utf8");
   return { gitignorePath, paths: GITIGNORE_MANAGED_PATHS };
 }

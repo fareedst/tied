@@ -12,8 +12,40 @@ import { TIED_REPO_ROOT } from "./lib/constants.mjs";
 import { resolveTiedLayout } from "./lib/layout.mjs";
 import { migrateLayout } from "./lib/migrate-layout.mjs";
 import { detectLegacyLayout } from "./lib/layout.mjs";
+import {
+  GITIGNORE_LOCAL_WORKING_BEGIN,
+  GITIGNORE_UNDIVIDED_MIRROR_BEGIN,
+} from "./lib/working-gitignore.mjs";
+import { GITIGNORE_BLOCK_BEGIN } from "./lib/layers/gitignore-block.mjs";
 
 describe("install-layers integration [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
+  it("db layer writes slim install-managed gitignore only [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tied-install-db-gi-"));
+    installTiedLayers(tmp, {
+      storeRoot: TIED_REPO_ROOT,
+      mode: "linked",
+      layers: ["db"],
+      harness: "cursor",
+      skipVerify: true,
+    });
+    const gi = fs.readFileSync(path.join(tmp, ".gitignore"), "utf8");
+    assert.ok(gi.includes(GITIGNORE_BLOCK_BEGIN));
+    assert.ok(gi.includes("tied-bundle/"));
+    assert.ok(gi.includes("skills/"));
+    assert.ok(!gi.includes(GITIGNORE_LOCAL_WORKING_BEGIN));
+    assert.ok(!gi.includes(GITIGNORE_UNDIVIDED_MIRROR_BEGIN));
+    assert.ok(!gi.includes("tied-project/"));
+    installTiedLayers(tmp, {
+      storeRoot: TIED_REPO_ROOT,
+      mode: "linked",
+      layers: ["db"],
+      harness: "cursor",
+      skipVerify: true,
+    });
+    const gi2 = fs.readFileSync(path.join(tmp, ".gitignore"), "utf8");
+    assert.equal(gi, gi2);
+  });
+
   it("linked install writes manifest and gitignored skill stubs", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tied-install-int-"));
     installTiedLayers(tmp, {

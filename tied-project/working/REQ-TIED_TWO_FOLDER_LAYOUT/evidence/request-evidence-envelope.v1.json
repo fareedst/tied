@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-03T15:29:41.511Z",
+    "generated_at": "2026-10-04T02:15:44.224Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -108,7 +108,7 @@
       "kind": "evidence_chain_profile",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:0cb87dab152fdac61a86907a30409853826caf4eb09d9987d9cb77dd4b552942",
+      "content_hash": "sha256:f98c4875c2debc4b4070de4dfabd97e9ca53e8748b554a3e28dc5a3a4267547d",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -130,7 +130,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:56179aaef4635e1e023f4c41fa35baa977c3889680abbf4c5f4bf5bc60f360e6",
+      "content_hash": "sha256:8e89e45ff35782a52d60e163a94d7571dcb741848400fc2340488a1858055865",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -207,7 +207,7 @@
       "kind": "unknown",
       "schema_version": "co-sponsor-commit-payload.v1",
       "path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/co-sponsor-commit-payload.v1.json",
-      "content_hash": "sha256:0c7f69b97569058903c52fc92164634e55a826896e09a4fce1d417cba2da235b",
+      "content_hash": "sha256:9ea9ab9d20748d46c7471425f413ff88fba26674db3c45a31e7776704e47a871",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -273,7 +273,18 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/gitignore-close-out-hygiene-evidence.md",
-      "content_hash": "sha256:c0c865e861ac968d8d72f923775d42529fdf20e15b5b9be36db12560076ffd7d",
+      "content_hash": "sha256:de1dea3064bfd405268d8f8831d38a0cf53e5e8e7be5ad062cae23602a83488c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "gitignore-post-closeout-hygiene.v1",
+      "path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/gitignore-post-closeout-hygiene.v1.json",
+      "content_hash": "sha256:4696a525b42e544715a5ba248f5a140638c09f21257d394c3e38281717892fe2",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -394,7 +405,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/tied-validate-consistency-closeout.json",
-      "content_hash": "sha256:66cc3d209e3048be466826ddcc72991ccf73289b4d9ed70d568356d779cc4435",
+      "content_hash": "sha256:6521dd82555892c4a41fa8a8306e33f6efc329e71bf7acd7d239aabc3a98b24b",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

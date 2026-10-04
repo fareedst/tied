@@ -27,7 +27,8 @@
 | Committed working | `tied-project/working/{REQ}/` (PLAN, tracker, envelope) | db | **C** | — | — | — |
 | Loader files | `AGENTS.md`, `.cursorrules` | db | **C** | create-if-absent | create-if-absent | db only |
 | Constitution example | `tied-project/constitution.example.yaml` | db | **C** | create-if-absent | create-if-absent | db only |
-| Gitignore managed block | `.gitignore` (TIED INSTALL MANAGED v2) | db | **C** | idempotent append | idempotent append | db only |
+| Gitignore managed block | `.gitignore` (TIED INSTALL MANAGED v2 only; no LOCAL WORKING on clients) | db | **C** | idempotent append | idempotent append | db only |
+| Repo-root skills (re-root) | `skills/` when `TIED_SKILLS_REROOT=1` | db | **G** | listed in managed block | listed in managed block | db only |
 | Install config | `tied-bundle/install.json` | manifest | **G** | written (v2) | written | end of run |
 | Cursor MCP config | `.cursor/mcp.json` | mcp | **G** | create/merge + env | create/merge | mcp only |
 | Claude MCP config | `.mcp.json` | mcp | **G** | create/merge + env | create/merge | mcp only |

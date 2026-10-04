@@ -23,7 +23,6 @@ import {
   resolveSkillsInstallDir,
   skillsRerootEnabledFromEnv,
 } from "./skills-reroot.mjs";
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function tempClient() {

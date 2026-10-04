@@ -1,6 +1,6 @@
 {
+  "generated_at": "2026-10-03T19:15:00.000Z",
   "tool": "tied_validate_consistency",
-  "captured_at": "2026-10-03T16:30:00.000Z",
   "ok": true,
-  "note": "Full MCP response ok:true at plan-close-out refresh; token-level detail omitted for size."
+  "note": "Follow-up close-out batch after 621d99f; index and detail validation all valid"
 }

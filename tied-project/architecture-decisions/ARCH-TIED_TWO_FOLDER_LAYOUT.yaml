@@ -1,10 +1,11 @@
 ARCH-TIED_TWO_FOLDER_LAYOUT:
   ARCH-TIED_TWO_FOLDER_LAYOUT:
-    description: "Committed tied-project holds traceability, vocab, citdp, config, committed working; tied-bundle holds methodology indexes, docs, templates, install.json, local working."
-    name: "Two-folder TIED layout"
-    status: "Planned"
+    description: Committed tied-project holds traceability, vocab, citdp, config, committed working; tied-bundle holds methodology indexes, docs, templates, install.json, local working.
+    name: Two-folder TIED layout
+    status: Planned
     traceability:
       implementation:
-        - "IMPL-TIED_TWO_FOLDER_LAYOUT"
+        - IMPL-TIED_TWO_FOLDER_LAYOUT
       requirements:
-        - "REQ-TIED_TWO_FOLDER_LAYOUT"
+        - REQ-TIED_TWO_FOLDER_LAYOUT
+  description: Committed tied-project holds traceability, vocab, citdp, config, committed working; tied-bundle holds methodology indexes, docs, templates, install.json, local working. Client install gitignore uses profile client (INSTALL MANAGED paths only); store close-out may use profile store with expanded local-working globs. Repo-root skills/ is install-managed when TIED_SKILLS_REROOT is used.

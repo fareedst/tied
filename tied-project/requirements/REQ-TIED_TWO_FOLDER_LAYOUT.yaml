@@ -1,52 +1,86 @@
 REQ-TIED_TWO_FOLDER_LAYOUT:
   REQ-TIED_TWO_FOLDER_LAYOUT:
-    category: "Infrastructure"
-    description: "Split TIED clients into tied-project (committed traceability) and tied-bundle (local methodology/docs/templates/install); enforce SC-TFL-NO-LEGACY-TIED-DIR."
-    name: "Two-folder TIED layout"
-    priority: "P1"
+    category: Infrastructure
+    description: Split TIED clients into tied-project (committed traceability) and tied-bundle (local methodology/docs/templates/install); enforce SC-TFL-NO-LEGACY-TIED-DIR.
+    name: Two-folder TIED layout
+    priority: P1
     related_requirements:
       depends_on:
-        - "REQ-TIED_LAYERED_CLIENT_INSTALL"
-        - "REQ-TIED_SETUP"
+        - REQ-TIED_LAYERED_CLIENT_INSTALL
+        - REQ-TIED_SETUP
       related_to:
-        - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
-        - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+        - REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY
+        - REQ-TIED_NEW_CLIENT_ADHERENCE
       supersedes: []
     satisfaction_criteria:
-      - criterion: "--migrate-layout idempotent from legacy fixture."
-        id: "SC-TFL-MIGRATE"
-        metric: "install-layers integration"
-      - criterion: "After install or --migrate-layout, no top-level tied/ directory on clients."
-        id: "SC-TFL-NO-LEGACY-TIED-DIR"
-        metric: "detectLegacyLayout + factory git check"
-      - criterion: "copy_files.* and legacy-bootstrap removed."
-        id: "SC-TFL-LEGACY-REMOVED"
-        metric: "stale lint + audit"
-      - criterion: "Installer refuses storeRoot == projectRoot unless allowSelfInstall."
-        id: "SC-TFL-SELF-INSTALL-GUARD"
-        metric: "guardSelfInstall tests"
-      - criterion: "MCP resolves bundle from TIED_BASE_PATH parent; store mode without install.json."
-        id: "SC-TFL-MCP-ROOT"
-        metric: "yaml-loader + tied_config_get_base_path tests"
-      - criterion: "No stale tied/docs, copy_files, legacy-bootstrap on live surfaces."
-        id: "SC-TFL-STALE-LINT"
-        metric: "lint-stale-layout in test-all"
-      - criterion: "Nothing under tied-project/ gitignored; tied-bundle/ gitignored as one line on clients."
-        id: "SC-TFL-INVARIANT"
-        metric: "install integration git check-ignore"
-      - criterion: "Project config tied-project/config.yaml and install config tied-bundle/install.json with disjoint ownership."
-        id: "SC-TFL-CONFIG-TWO-FILES"
-        metric: "project-config + install-config tests"
-      - criterion: "Source repo commits tied-bundle corpus; store mode MCP."
-        id: "SC-TFL-STORE-SELF-HOSTED"
-        metric: "tied_validate_consistency on store"
-      - criterion: "Symlink-or-copy under tied-bundle; Windows CI green."
-        id: "SC-TFL-WINDOWS"
-        metric: "windows-bootstrap-smoke"
-    status: "Planned"
+      - criterion: --migrate-layout idempotent from legacy fixture.
+        id: SC-TFL-MIGRATE
+        metric: install-layers integration
+      - criterion: After install or --migrate-layout, no top-level tied/ directory on clients.
+        id: SC-TFL-NO-LEGACY-TIED-DIR
+        metric: detectLegacyLayout + factory git check
+      - criterion: copy_files.* and legacy-bootstrap removed.
+        id: SC-TFL-LEGACY-REMOVED
+        metric: stale lint + audit
+      - criterion: Installer refuses storeRoot == projectRoot unless allowSelfInstall.
+        id: SC-TFL-SELF-INSTALL-GUARD
+        metric: guardSelfInstall tests
+      - criterion: MCP resolves bundle from TIED_BASE_PATH parent; store mode without install.json.
+        id: SC-TFL-MCP-ROOT
+        metric: yaml-loader + tied_config_get_base_path tests
+      - criterion: No stale tied/docs, copy_files, legacy-bootstrap on live surfaces.
+        id: SC-TFL-STALE-LINT
+        metric: lint-stale-layout in test-all
+      - criterion: Nothing under tied-project/ gitignored; tied-bundle/ gitignored as one line on clients.
+        id: SC-TFL-INVARIANT
+        metric: install integration git check-ignore
+      - criterion: Project config tied-project/config.yaml and install config tied-bundle/install.json with disjoint ownership.
+        id: SC-TFL-CONFIG-TWO-FILES
+        metric: project-config + install-config tests
+      - criterion: Source repo commits tied-bundle corpus; store mode MCP.
+        id: SC-TFL-STORE-SELF-HOSTED
+        metric: tied_validate_consistency on store
+      - criterion: Symlink-or-copy under tied-bundle; Windows CI green.
+        id: SC-TFL-WINDOWS
+        metric: windows-bootstrap-smoke
+    status: Planned
     traceability:
       architecture:
-        - "ARCH-TIED_PROJECT_CONFIG_OWNERSHIP"
-        - "ARCH-TIED_TWO_FOLDER_LAYOUT"
+        - ARCH-TIED_PROJECT_CONFIG_OWNERSHIP
+        - ARCH-TIED_TWO_FOLDER_LAYOUT
       implementation:
-        - "IMPL-TIED_TWO_FOLDER_LAYOUT"
+        - IMPL-TIED_TWO_FOLDER_LAYOUT
+  satisfaction_criteria:
+    - criterion: --migrate-layout idempotent from legacy fixture.
+      id: SC-TFL-MIGRATE
+      metric: install-layers integration
+    - criterion: After install or --migrate-layout, no top-level tied/ directory on clients.
+      id: SC-TFL-NO-LEGACY-TIED-DIR
+      metric: detectLegacyLayout + factory git check
+    - criterion: Client bootstrap .gitignore is INSTALL MANAGED v2 only (no LOCAL WORKING or UNDIVIDED STORE MIRROR); includes skills/ for TIED_SKILLS_REROOT.
+      id: SC-TFL-CLIENT-GITIGNORE-SLIM
+      metric: gitignore-block + working-gitignore tests
+    - criterion: copy_files.* and legacy-bootstrap removed.
+      id: SC-TFL-LEGACY-REMOVED
+      metric: stale lint + audit
+    - criterion: Installer refuses storeRoot == projectRoot unless allowSelfInstall.
+      id: SC-TFL-SELF-INSTALL-GUARD
+      metric: guardSelfInstall tests
+    - criterion: MCP resolves bundle from TIED_BASE_PATH parent; store mode without install.json.
+      id: SC-TFL-MCP-ROOT
+      metric: yaml-loader + tied_config_get_base_path tests
+    - criterion: No stale tied/docs, copy_files, legacy-bootstrap on live surfaces.
+      id: SC-TFL-STALE-LINT
+      metric: stale lint + audit
+    - criterion: Nothing under tied-project/ gitignored; tied-bundle/ gitignored as one line on clients.
+      id: SC-TFL-INVARIANT
+      metric: install integration git check-ignore
+    - criterion: Project config tied-project/config.yaml and install config tied-bundle/install.json with disjoint ownership.
+      id: SC-TFL-CONFIG-TWO-FILES
+      metric: project-config + install-config tests
+    - criterion: Source repo commits tied-bundle corpus; store mode MCP.
+      id: SC-TFL-STORE-SELF-HOSTED
+      metric: tied_validate_consistency on store
+    - criterion: Symlink-or-copy under tied-bundle; Windows CI green.
+      id: SC-TFL-WINDOWS
+      metric: windows-bootstrap-smoke

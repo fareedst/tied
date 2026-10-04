@@ -9,13 +9,13 @@
   "reconcile": {
     "ok": true,
     "report": {
-      "request_token": "",
+      "request_token": "REQ-TIED_TWO_FOLDER_LAYOUT",
       "findings": [],
       "ledger_rows": 23,
       "read_only": true,
       "process_grade": {
-        "score": 75,
-        "band": "B",
+        "score": 100,
+        "band": "A",
         "dimensions": [
           {
             "name": "tracker_integrity",
@@ -25,11 +25,9 @@
           },
           {
             "name": "verification_manifest",
-            "score": 0,
+            "score": 100,
             "weight": 0.25,
-            "gap_codes": [
-              "expected_artifact_missing"
-            ]
+            "gap_codes": []
           },
           {
             "name": "hash_alignment",
@@ -49,9 +47,7 @@
             "weight": 0.1
           }
         ],
-        "gap_codes": [
-          "expected_artifact_missing"
-        ]
+        "gap_codes": []
       }
     }
   },

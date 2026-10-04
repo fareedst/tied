@@ -87,27 +87,46 @@ export function buildLocalWorkingGitignoreBlock(globs, { undividedMirror = false
   return lines.join("\n");
 }
 
+/** @param {string} literal */
+function escapeRegExp(literal) {
+  return literal.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+const LOCAL_WORKING_BLOCK_REGEX = new RegExp(
+  `${escapeRegExp(GITIGNORE_LOCAL_WORKING_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_LOCAL_WORKING_END)}\\n?`,
+  "m",
+);
+const UNDIVIDED_MIRROR_BLOCK_REGEX = new RegExp(
+  `${escapeRegExp(GITIGNORE_UNDIVIDED_MIRROR_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_UNDIVIDED_MIRROR_END)}\\n?`,
+  "m",
+);
+
+/**
+ * Remove managed LOCAL WORKING and UNDIVIDED STORE MIRROR blocks; preserve other lines.
+ * @param {string} content
+ */
+export function removeLegacyWorkingGitignoreBlocks(content) {
+  return content.replace(UNDIVIDED_MIRROR_BLOCK_REGEX, "").replace(LOCAL_WORKING_BLOCK_REGEX, "");
+}
+
 /**
  * Replace or append the managed local-working block in .gitignore content.
  * @param {string} content
- * @param {{ undividedMirror?: boolean }} options
+ * @param {{ undividedMirror?: boolean, profile?: "client" | "store" }} options
  */
 export function mergeLocalWorkingGitignoreBlock(content, options = {}) {
+  const profile = options.profile ?? "store";
+  if (profile === "client") {
+    return removeLegacyWorkingGitignoreBlocks(content);
+  }
+
   const blockBody = buildLocalWorkingGitignoreBlock(
     EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS,
     options,
   );
-  const blockRegex = new RegExp(
-    `${GITIGNORE_LOCAL_WORKING_BEGIN}[\\s\\S]*?${GITIGNORE_LOCAL_WORKING_END}\\n?`,
-    "m",
-  );
-  const mirrorRegex = new RegExp(
-    `${GITIGNORE_UNDIVIDED_MIRROR_BEGIN}[\\s\\S]*?${GITIGNORE_UNDIVIDED_MIRROR_END}\\n?`,
-    "m",
-  );
-  let next = content.replace(mirrorRegex, "");
+  let next = content.replace(UNDIVIDED_MIRROR_BLOCK_REGEX, "");
   if (next.includes(GITIGNORE_LOCAL_WORKING_BEGIN)) {
-    next = next.replace(blockRegex, blockBody);
+    next = next.replace(LOCAL_WORKING_BLOCK_REGEX, blockBody);
   } else {
     next = next.endsWith("\n") || next.length === 0 ? `${next}${blockBody}` : `${next}\n${blockBody}`;
   }
@@ -189,5 +208,8 @@ export function collapseLegacyWorkingGitignorePatterns(content) {
     }
     out.push(collapseWorkingGitignoreLine(line));
   }
-  return mergeLocalWorkingGitignoreBlock(out.join("\n"), { undividedMirror: true });
+  return mergeLocalWorkingGitignoreBlock(out.join("\n"), {
+    profile: "store",
+    undividedMirror: true,
+  });
 }

@@ -33,7 +33,9 @@ export function installMatrixKeyPaths(repoRoot = REPO_ROOT) {
     `${BUNDLE_DIR_NAME}/install.json`,
     `${BUNDLE_DIR_NAME}/docs/`,
     `${BUNDLE_DIR_NAME}/templates/impl-essence-pseudocode-template.md`,
-    ...GITIGNORE_MANAGED_PATHS.filter((p) => p.startsWith(BUNDLE_DIR_NAME) || p.startsWith(".")),
+    ...GITIGNORE_MANAGED_PATHS.filter(
+      (p) => p.startsWith(BUNDLE_DIR_NAME) || p.startsWith(".") || p === "skills/",
+    ),
     layout.projectConfigPath.replace(repoRoot + path.sep, "").replace(/\\/g, "/"),
   ];
 }

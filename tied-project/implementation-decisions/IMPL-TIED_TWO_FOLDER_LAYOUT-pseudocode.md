@@ -61,11 +61,19 @@ PROCEDURE DETECT_LEGACY_LAYOUT(projectRoot) -> result
 END PROCEDURE
 
 // [IMPL-TIED_TWO_FOLDER_LAYOUT] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT]
-// How: Gitignore v2 — tied-bundle/ line; no tied-project/ entries.
+// How: Gitignore v2 — tied-bundle/, harness paths, optional repo-root skills/; client profile strips legacy LOCAL WORKING blocks.
 PROCEDURE APPLY_GITIGNORE_MANAGED_BLOCK(projectRoot)
   PRE: projectRoot writable
-  POST: managed block lists tied-bundle/ and harness paths only
-  EFFECTS: replaces v1 tied/docs and working patterns
+  POST: INSTALL MANAGED block only; no LOCAL WORKING or UNDIVIDED STORE MIRROR; no tied-project/ entry
+  EFFECTS: replaces v1 paths; mergeLocalWorkingGitignoreBlock with profile client removes legacy blocks
+END PROCEDURE
+
+// [IMPL-TIED_TWO_FOLDER_LAYOUT] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT]
+// How: Store close-out and collapseLegacyWorkingGitignorePatterns use profile store + expanded working globs.
+PROCEDURE MERGE_LOCAL_WORKING_GITIGNORE(content, profile)
+  PRE: profile in {client, store}
+  POST: client removes legacy blocks without append; store maintains expanded local-working block
+  EFFECTS: preserves unrelated lines and ! negations
 END PROCEDURE
 
 // [IMPL-TIED_TWO_FOLDER_LAYOUT] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT]
