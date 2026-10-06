@@ -643,3 +643,36 @@ procedure APPLY_CLIENT_TOOL_USE_PROFILE(projectRoot, toolUseProfile):
   IF bbce: copy manifest ANALYSIS_STARTER_FILES without deleting client files
   RETURN success
 
+
+function CHILD_PROCESS_SPAWN_OPTIONS(options):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: On win32 merge windowsHide true into spawn/spawnSync options so bootstrap subprocesses do not flash console windows.
+  Contract:
+    INPUT: optional SpawnOptions or SpawnSyncOptions partial
+    OUTPUT: options unchanged on non-win32; on win32 shallow copy with windowsHide true
+    PRE: none
+    POST: every bootstrap spawnSync/spawn passes through this helper on Windows
+    EFFECTS: none — pure object merge
+    FAILURE_MODES: none
+    TERMINATION: total
+  IF process.platform is not win32: RETURN options
+  RETURN { ...options, windowsHide: true }
+
+
+function INVOKE_TIED_CLI_MCP_TOOL(projectRoot, storeRoot, toolName, argsJson, env):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
+  # How: Invoke tied-yaml MCP tools via bundled tied-mcp-stdio-client.cjs and store mcp-server/dist without bash tied-cli.sh.
+  Contract:
+    INPUT: client projectRoot; methodology storeRoot; MCP tool name; optional JSON args; optional env overrides
+    OUTPUT: { ok, status, stdout, stderr } from stdio client exit
+    DATA: TIED_BASE_PATH projectRoot/tied-project; TIED_MCP_BIN storeRoot/mcp-server/dist/index.js
+    PRE: clientJs exists under storeRoot tools/bundled-tied-yaml-skill/scripts/tied-mcp-stdio-client.cjs; dist built
+    POST: tool JSON on stdout when ok; non-zero status surfaces stderr
+    EFFECTS: Process — one spawnSync of node client with CHILD_PROCESS_SPAWN_OPTIONS
+    FAILURE_MODES: CLIENT_MISSING; MCP_BIN_MISSING; SPAWN_FAILED; non-zero client exit
+    TERMINATION: total
+  RESOLVE clientJs and mcpBin under storeRoot
+  IF missing client or dist: RETURN ok false with actionable message
+  SPAWN node client with toolName, argsJson, env including TIED_BASE_PATH and TIED_MCP_BIN via CHILD_PROCESS_SPAWN_OPTIONS
+  RETURN parsed result from exit code and stdout/stderr
+

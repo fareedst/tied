@@ -11,6 +11,7 @@ import { TIED_REPO_ROOT } from "./constants.mjs";
 import {
   mergeClaudeAdherenceHooks,
   bridgeScriptPath,
+  bridgeHookCommand,
   TIED_ADHERENCE_BRIDGE_SCRIPT,
 } from "./claude-adherence-hooks.mjs";
 
@@ -28,6 +29,9 @@ describe("mergeClaudeAdherenceHooks [REQ-TIED_CLAUDE_ADHERENCE_HOOKS]", () => {
     const cfg = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
     assert.ok(Array.isArray(cfg.hooks.PostToolUse));
     assert.ok(fs.existsSync(bridgeScriptPath(clientRoot)));
+    const cmd = cfg.hooks.PostToolUse[0].hooks[0].command;
+    assert.ok(String(cmd).includes("claude-adherence-bridge.js"));
+    assert.ok(!String(cmd).includes(TIED_ADHERENCE_BRIDGE_SCRIPT));
   });
 
   it("merge is idempotent", () => {
@@ -58,6 +62,33 @@ describe("mergeClaudeAdherenceHooks [REQ-TIED_CLAUDE_ADHERENCE_HOOKS]", () => {
     const cfg = JSON.parse(fs.readFileSync(path.join(clientRoot, ".claude", "settings.json"), "utf8"));
     assert.equal(cfg.hooks.PostToolUse.length, 2);
     assert.equal(cfg.hooks.PostToolUse[0].hooks[0].command, "echo foreign-hook");
-    assert.ok(String(cfg.hooks.PostToolUse[1].hooks[0].command).includes(TIED_ADHERENCE_BRIDGE_SCRIPT));
+    assert.ok(String(cfg.hooks.PostToolUse[1].hooks[0].command).includes("claude-adherence-bridge.js"));
+  });
+
+  it("upgrades legacy .sh hook command to Node", () => {
+    const clientRoot = tempClient();
+    const legacyPath = bridgeScriptPath(clientRoot);
+    fs.mkdirSync(path.dirname(legacyPath), { recursive: true });
+    fs.writeFileSync(
+      path.join(clientRoot, ".claude", "settings.json"),
+      `${JSON.stringify(
+        {
+          hooks: {
+            PostToolUse: [
+              {
+                matcher: "",
+                hooks: [{ type: "command", command: legacyPath }],
+              },
+            ],
+          },
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    const result = mergeClaudeAdherenceHooks(clientRoot, TIED_REPO_ROOT);
+    assert.equal(result.action, "merged");
+    const cfg = JSON.parse(fs.readFileSync(path.join(clientRoot, ".claude", "settings.json"), "utf8"));
+    assert.equal(cfg.hooks.PostToolUse[0].hooks[0].command, bridgeHookCommand(TIED_REPO_ROOT));
   });
 });

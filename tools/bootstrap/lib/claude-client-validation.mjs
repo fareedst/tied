@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
+import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { assertMcpPrerequisite } from "./mcp-config.mjs";
 import { assertWindowsBootstrapClaude } from "./assert-windows-bootstrap-claude.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
@@ -122,12 +123,16 @@ export function runTiedCliBasePathSmoke(tiedCliPath, clientDir, mcpEnv, spawn = 
   if (!fs.existsSync(tiedCliPath)) {
     return { ok: false, detail: `TIED_CLI_MISSING: ${tiedCliPath}` };
   }
-  const result = spawn("bash", [tiedCliPath, "tied_config_get_base_path", "{}"], {
-    cwd: clientDir,
-    encoding: "utf8",
-    env: { ...process.env, ...mcpEnv },
-    stdio: "pipe",
-  });
+  const result = spawn(
+    "bash",
+    [tiedCliPath, "tied_config_get_base_path", "{}"],
+    childProcessSpawnOptions({
+      cwd: clientDir,
+      encoding: "utf8",
+      env: { ...process.env, ...mcpEnv },
+      stdio: "pipe",
+    }),
+  );
   if (result.error) {
     return { ok: false, detail: String(result.error.message ?? result.error) };
   }
@@ -163,7 +168,11 @@ export function runClaudeCodeInteractiveSmoke(clientDir, spawn = spawnSync) {
   if (!fs.existsSync(mcpPath)) {
     return { ok: false, detail: "MCP_JSON_MISSING" };
   }
-  const which = spawn("which", ["claude"], { encoding: "utf8", stdio: "pipe" });
+  const which = spawn(
+    "which",
+    ["claude"],
+    childProcessSpawnOptions({ encoding: "utf8", stdio: "pipe" }),
+  );
   if (which.status !== 0) {
     return { ok: true, skipped: true, detail: "CLAUDE_CLI_NOT_ON_PATH" };
   }
@@ -183,13 +192,13 @@ export function runClaudeCodeInteractiveSmoke(clientDir, spawn = spawnSync) {
       "--",
       prompt,
     ],
-    {
+    childProcessSpawnOptions({
       cwd: clientDir,
       encoding: "utf8",
       env: process.env,
       stdio: "pipe",
       timeout: 120_000,
-    },
+    }),
   );
   if (result.error) {
     return { ok: false, detail: String(result.error.message ?? result.error) };
@@ -230,12 +239,16 @@ export function runAgentstreamDryRunCheck(clientDir, sourceRoot, spawn = spawnSy
     "--",
     "Reply with exactly: validation-ok",
   ];
-  const result = spawn(process.execPath, args, {
-    cwd: sourceRoot,
-    encoding: "utf8",
-    env: process.env,
-    stdio: "pipe",
-  });
+  const result = spawn(
+    process.execPath,
+    args,
+    childProcessSpawnOptions({
+      cwd: sourceRoot,
+      encoding: "utf8",
+      env: process.env,
+      stdio: "pipe",
+    }),
+  );
   if (result.error) {
     return { ok: false, detail: String(result.error.message ?? result.error) };
   }

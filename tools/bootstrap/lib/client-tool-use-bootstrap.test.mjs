@@ -78,61 +78,73 @@ describe("applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES]"
   });
 
   it("merges jev and dae on fresh tied-project/config.yaml", () => {
-    const yamlPath = path.join(tmpDir, "tied-project/config.yaml");
+    fs.mkdirSync(path.join(tmpDir, PROJECT_DIR_NAME), { recursive: true });
+    const yamlPath = path.join(tmpDir, PROJECT_DIR_NAME, "config.yaml");
     fs.writeFileSync(
       yamlPath,
-      yaml.dump({ scalar_style: "unwrapped", jev: { plan_skills: false } }),
-      "utf8"
+      yaml.dump({
+        schema: PROJECT_CONFIG_SCHEMA_V1,
+        yaml: { scalar_style: "unwrapped" },
+        jev: { plan_skills: false },
+      }),
+      "utf8",
     );
     applyClientToolUseBootstrapOptions(
       tmpDir,
       { jev: true, dae: true, bbce: false, fullTools: false, forceToolConfig: false },
-      { tiedRepoRoot: TIED_REPO_ROOT, tiedYamlPreExisting: false }
+      { tiedRepoRoot: TIED_REPO_ROOT, projectConfigPreExisting: false },
     );
     const doc = yaml.load(fs.readFileSync(yamlPath, "utf8"));
     assert.equal(doc.jev.plan_skills, true);
     assert.equal(doc.dae.crap_threshold, 30);
     assert.equal(doc.dae.branch_check, undefined);
     assert.equal(doc.dae.agentstream_gate_check, undefined);
-    assert.equal(doc.scalar_style, "unwrapped");
+    assert.equal(doc.yaml.scalar_style, "unwrapped");
   });
 
   it("skips YAML merge when file pre-existed without force", () => {
-    const yamlPath = path.join(tmpDir, "tied-project/config.yaml");
+    fs.mkdirSync(path.join(tmpDir, PROJECT_DIR_NAME), { recursive: true });
+    const yamlPath = path.join(tmpDir, PROJECT_DIR_NAME, "config.yaml");
     const sentinel = "custom:\n  kept: true\njev:\n  plan_skills: false\n";
     fs.writeFileSync(yamlPath, sentinel, "utf8");
     applyClientToolUseBootstrapOptions(
       tmpDir,
       { jev: true, dae: false, bbce: false, fullTools: false, forceToolConfig: false },
-      { tiedRepoRoot: TIED_REPO_ROOT, tiedYamlPreExisting: true }
+      { tiedRepoRoot: TIED_REPO_ROOT, projectConfigPreExisting: true },
     );
     assert.equal(fs.readFileSync(yamlPath, "utf8"), sentinel);
   });
 
   it("force merge preserves unrelated keys", () => {
-    const yamlPath = path.join(tmpDir, "tied-project/config.yaml");
+    fs.mkdirSync(path.join(tmpDir, PROJECT_DIR_NAME), { recursive: true });
+    const yamlPath = path.join(tmpDir, PROJECT_DIR_NAME, "config.yaml");
     fs.writeFileSync(
       yamlPath,
-      yaml.dump({ custom: { kept: true }, jev: { plan_skills: false } }),
-      "utf8"
+      yaml.dump({
+        schema: PROJECT_CONFIG_SCHEMA_V1,
+        yaml: { scalar_style: "double_quoted" },
+        jev: { plan_skills: false },
+      }),
+      "utf8",
     );
     applyClientToolUseBootstrapOptions(
       tmpDir,
       { jev: true, dae: true, bbce: false, fullTools: false, forceToolConfig: true },
-      { tiedRepoRoot: TIED_REPO_ROOT, tiedYamlPreExisting: true }
+      { tiedRepoRoot: TIED_REPO_ROOT, projectConfigPreExisting: true },
     );
     const doc = yaml.load(fs.readFileSync(yamlPath, "utf8"));
-    assert.equal(doc.custom.kept, true);
+    assert.equal(doc.yaml.scalar_style, "double_quoted");
     assert.equal(doc.jev.plan_skills, true);
     assert.equal(doc.dae.crap_threshold, 30);
   });
 
   it("copies BBCE starter files additively", () => {
-    fs.writeFileSync(path.join(tmpDir, "tied-project/config.yaml"), "scalar_style: unwrapped\n", "utf8");
+    fs.mkdirSync(path.join(tmpDir, PROJECT_DIR_NAME), { recursive: true });
+    fs.writeFileSync(path.join(tmpDir, PROJECT_DIR_NAME, "config.yaml"), "scalar_style: unwrapped\n", "utf8");
     const { analysisFilesCopied } = applyClientToolUseBootstrapOptions(
       tmpDir,
       { jev: false, dae: false, bbce: true, fullTools: false, forceToolConfig: false },
-      { tiedRepoRoot: TIED_REPO_ROOT, tiedYamlPreExisting: false }
+      { tiedRepoRoot: TIED_REPO_ROOT, projectConfigPreExisting: false },
     );
     assert.ok(analysisFilesCopied >= 3);
     const { tiedDir } = resolveTiedLayout(tmpDir);

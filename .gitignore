@@ -525,4 +525,5 @@ CLAUDE.md
 .cursor/hooks.json
 .claude/hooks/
 .claude/settings.json
+.claude/adherence-bridge.log
 # END TIED INSTALL MANAGED

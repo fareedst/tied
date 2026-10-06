@@ -10,6 +10,7 @@ import { parseParityCliFlags } from "./lib/parity-cli-options.mjs";
 import { parseBootstrapToolFlags } from "./lib/client-tool-use-bootstrap.mjs";
 import { installTiedLayers, refreshInstallFromManifest } from "./lib/install-layers-core.mjs";
 import { TIED_REPO_ROOT } from "./lib/constants.mjs";
+import { resolveStoreRoot } from "./lib/layers/store.mjs";
 import { detectLegacyLayout } from "./lib/layout.mjs";
 import { migrateLayout } from "./lib/migrate-layout.mjs";
 
@@ -23,7 +24,7 @@ Options:
   --layers db,mcp,skills,methodology   Capability layers (default: all)
   --harness cursor|claude|both         Default: both
   --mode linked|full                   Default: linked
-  --store PATH                         TIED store root (default: TIED_REPO_ROOT)
+  --store PATH                         TIED store root (default: env TIED_STORE_ROOT, else mcp.json, else TIED_REPO_ROOT)
   --methodology-bundle live|pinned     Default: live
   --refresh                            Re-run from tied-bundle/install.json
   --doctor                             No-MCP self-test on installed client
@@ -144,7 +145,7 @@ function main() {
       const result = migrateLayout(parsed.target, {
         store: parsed.storeMigrate,
         dryRun: parsed.dryRun,
-        storeRoot: parsed.store ?? TIED_REPO_ROOT,
+        storeRoot: resolveStoreRoot({ store: parsed.store, projectRoot: parsed.target }),
       });
       if (!result.ok) {
         sayErr(result.code ?? "MIGRATE_LAYOUT_FAILED");
@@ -174,7 +175,7 @@ function main() {
       layers: parsed.layers,
       harness: parsed.harness,
       mode: parsed.mode,
-      store: parsed.store ?? TIED_REPO_ROOT,
+      store: parsed.store,
       methodologyBundle: parsed.methodologyBundle,
       doctor: parsed.doctor,
       toolUseProfile: parsed.toolUseProfile,

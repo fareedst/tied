@@ -6,6 +6,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { loadManifest } from "./constants.mjs";
 import { TIED_REPO_ROOT } from "./constants.mjs";
 import { sayWarn, sayErr } from "./console.mjs";
@@ -148,10 +149,14 @@ function runSemanticYamlCompareForFile(tiedSourceRoot, templatesDir, methodology
   if (!fs.existsSync(compareScript)) {
     throw new Error(`CLIENT_REFRESH_PARITY_INTERNAL: missing ${compareScript}`);
   }
-  const result = spawnSync("ruby", [compareScript, leftDir, rightDir], {
-    encoding: "utf8",
-    cwd: tiedSourceRoot,
-  });
+  const result = spawnSync(
+    "ruby",
+    [compareScript, leftDir, rightDir],
+    childProcessSpawnOptions({
+      encoding: "utf8",
+      cwd: tiedSourceRoot,
+    }),
+  );
   return result.status === 0;
 }
 

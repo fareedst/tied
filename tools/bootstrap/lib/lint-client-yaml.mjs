@@ -5,6 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { sayErr } from "./console.mjs";
 
 export function collectYamlFiles(rootDir, relativeDir) {
@@ -47,11 +48,15 @@ export function lintClientTiedYaml({ clientDir, sourceRoot, nodeExec = process.e
     return { ok: false, code: 1, step: "lint", fileCount: 0 };
   }
   for (const file of files) {
-    const result = spawn(nodeExec, [canonicalizer, file], {
-      cwd: clientDir,
-      encoding: "utf8",
-      stdio: "pipe",
-    });
+    const result = spawn(
+      nodeExec,
+      [canonicalizer, file],
+      childProcessSpawnOptions({
+        cwd: clientDir,
+        encoding: "utf8",
+        stdio: "pipe",
+      }),
+    );
     if (result.status !== 0) {
       sayErr(`lint failed: ${file}`);
       if (result.stderr) {

@@ -1,0 +1,21 @@
+ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
+  ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
+    ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
+      consequences:
+        negative:
+          - "README grows; must stay aligned with install-layers behavior"
+        positive:
+          - "Bootstrap README stays thin with cross-link only"
+          - "External client and primary repo paths are both first-class"
+      decision: "Add sibling H2 Primary implementation repository after Getting started with a new client project; extend How to use this repository to three entry paths; cross-link both README sections and tools/bootstrap/README.md."
+      description: "Documentation architecture for dual bootstrap narratives (external client directory vs primary implementation repository) without duplicating layered install mechanics already covered by REQ-TIED_LAYERED_CLIENT_INSTALL."
+      name: "Primary repo README structure"
+      status: "Active"
+      traceability:
+        architecture:
+          - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+        implementation:
+          - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+        requirements:
+          - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+    status: "Active"

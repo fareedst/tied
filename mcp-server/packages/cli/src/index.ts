@@ -66,6 +66,7 @@ function runNodeEntry(entry: string, args: string[]): void {
   const child = spawn(process.execPath, [entry, ...args], {
     stdio: "inherit",
     env: process.env,
+    ...(process.platform === "win32" ? { windowsHide: true as const } : {}),
   });
   child.on("exit", (code, signal) => {
     if (signal) {

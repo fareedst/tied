@@ -2266,6 +2266,17 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   name: "Reviewed operational feedback promotion"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_PRIMARY_REPO_ONBOARDING:
+  category: "Documentation"
+  detail_file: "requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+  name: "Primary implementation repository README onboarding"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
+    implementation:
+      - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
 REQ-TIED_PROJECT_LINT:
   category: "Tooling"
   cross_references:

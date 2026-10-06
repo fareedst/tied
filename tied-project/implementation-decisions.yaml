@@ -2378,6 +2378,16 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
   detail_file: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
   name: "Node-only controlled runner implementation"
   status: "Proposed"
+IMPL-TIED_PRIMARY_REPO_README_CONTENT:
+  detail_file: "implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"
+  name: "Primary repo README content"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
+    requirements:
+      - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
 IMPL-TIED_PROJECT_IDENTITY:
   cross_references:
     - "ARCH-TIED_PROJECT_IDENTITY"

@@ -109,3 +109,34 @@ export function chmodExecutableRecursive(root) {
     }
   }
 }
+
+const SYMLINK_FALLBACK_CODES = new Set(["EPERM", "EACCES", "EINVAL"]);
+
+/**
+ * [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] Linked install: prefer symlink; copy when OS denies symlink creation.
+ * @param {string} source
+ * @param {string} dest
+ */
+export function linkOrMaterializeCopy(source, dest) {
+  if (!fs.existsSync(source)) return;
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  if (fs.existsSync(dest)) {
+    fs.rmSync(dest, { recursive: true, force: true });
+  }
+  const isDir = fs.statSync(source).isDirectory();
+  const linkType = isDir ? "dir" : "file";
+  try {
+    fs.symlinkSync(source, dest, linkType);
+    return;
+  } catch (err) {
+    const code = err && typeof err === "object" && "code" in err ? String(err.code) : "";
+    if (!SYMLINK_FALLBACK_CODES.has(code)) {
+      throw err;
+    }
+    if (isDir) {
+      copyTreeWithAttributes(source, dest);
+    } else {
+      copyFileWithAttributes(source, dest);
+    }
+  }
+}

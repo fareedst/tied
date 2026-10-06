@@ -1,0 +1,22 @@
+{
+  "run_id": "close-out-primary-repo-onboarding-macos-20261005",
+  "phase": "close_out",
+  "request_token": "REQ-TIED_PRIMARY_REPO_ONBOARDING",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  },
+  "reconcile": {
+    "process_grade": {
+      "band": "B",
+      "gap_codes": ["thin_ledger"]
+    }
+  }
+}

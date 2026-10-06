@@ -16,12 +16,49 @@ import {
 } from "../methodology-bundle.mjs";
 
 /**
- * @param {{ store?: string, env?: NodeJS.ProcessEnv }} options
+ * @param {string} projectRoot
+ * @returns {string | null}
+ */
+export function readStoreRootFromProjectMcp(projectRoot) {
+  for (const rel of [".cursor/mcp.json", ".mcp.json"]) {
+    const mcpPath = path.join(projectRoot, rel);
+    if (!fs.existsSync(mcpPath)) continue;
+    try {
+      const cfg = JSON.parse(fs.readFileSync(mcpPath, "utf8"));
+      const raw = cfg?.mcpServers?.["tied-yaml"]?.env?.TIED_STORE_ROOT;
+      if (typeof raw === "string" && raw.trim()) {
+        return path.resolve(raw.trim());
+      }
+    } catch {
+      /* invalid JSON — try next file */
+    }
+  }
+  return null;
+}
+
+/**
+ * @param {{ store?: string, env?: NodeJS.ProcessEnv, projectRoot?: string }} options
  */
 export function resolveStoreRoot(options = {}) {
   const env = options.env ?? process.env;
-  const raw = options.store?.trim() || env.TIED_REPO_ROOT?.trim() || TIED_REPO_ROOT;
-  return path.resolve(raw);
+  let resolved;
+  if (options.store?.trim()) {
+    resolved = path.resolve(options.store.trim());
+  } else if (env.TIED_STORE_ROOT?.trim()) {
+    resolved = path.resolve(env.TIED_STORE_ROOT.trim());
+  } else if (options.projectRoot) {
+    const fromMcp = readStoreRootFromProjectMcp(options.projectRoot);
+    if (fromMcp) {
+      resolved = fromMcp;
+    }
+  }
+  if (!resolved && env.TIED_REPO_ROOT?.trim()) {
+    resolved = path.resolve(env.TIED_REPO_ROOT.trim());
+  }
+  if (!resolved) {
+    resolved = TIED_REPO_ROOT;
+  }
+  return resolved;
 }
 
 /**

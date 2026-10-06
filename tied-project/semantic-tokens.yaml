@@ -877,6 +877,19 @@ ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
   source_index: "architecture-decisions.yaml"
   status: "Proposed"
   type: "ARCH"
+ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
+  cross_references:
+    - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+    - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+  description: "Sibling H2 and cross-link documentation architecture for primary vs external client bootstrap."
+  detail_file: "architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml"
+  metadata:
+    last_updated: "2026-10-04"
+    registered: "2026-10-04"
+  name: "Primary repo README structure"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_PROJECT_IDENTITY:
   cross_references:
     - "IMPL-TIED_PROJECT_IDENTITY"
@@ -2063,6 +2076,19 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
   name: "Node-only controlled runner implementation"
   source_index: "implementation-decisions.yaml"
   status: "Proposed"
+  type: "IMPL"
+IMPL-TIED_PRIMARY_REPO_README_CONTENT:
+  cross_references:
+    - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
+    - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+  description: "README and bootstrap cross-link edit map with VERIFY_DOC_COMMANDS pseudo-code."
+  detail_file: "implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml"
+  metadata:
+    last_updated: "2026-10-04"
+    registered: "2026-10-04"
+  name: "Primary repo README content"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
   type: "IMPL"
 IMPL-TIED_PROJECT_IDENTITY:
   cross_references:
@@ -3424,6 +3450,19 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   name: "Reviewed operational feedback promotion"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_PRIMARY_REPO_ONBOARDING:
+  cross_references:
+    - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
+    - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+  description: "Root README documents primary implementation repo linked install, MCP env, and skills."
+  detail_file: "requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+  metadata:
+    last_updated: "2026-10-04"
+    registered: "2026-10-04"
+  name: "Primary implementation repository README onboarding"
+  source_index: "requirements.yaml"
+  status: "Active"
   type: "REQ"
 REQ-TIED_PROJECT_LINT:
   cross_references:

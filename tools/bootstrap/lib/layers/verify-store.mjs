@@ -5,8 +5,8 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { loadManifest } from "../constants.mjs";
+import { invokeTiedCliMcpTool } from "../tied-cli-invoke.mjs";
 import {
   verifyFidelityMethodology,
   verifyAdversarialInquiryMethodology,
@@ -85,7 +85,7 @@ export function runDoctor(projectRoot, options) {
     throw new Error(`DOCTOR_FAILED: missing tied-cli wrapper ${tiedCli}`);
   }
   const bundlePath = resolveMethodologyBundlePath(
-    options.methodologyBundle,
+    options.methodologyBundle ?? "live",
     options.storeRoot,
     projectRoot,
   );
@@ -93,18 +93,21 @@ export function runDoctor(projectRoot, options) {
     throw new Error(`DOCTOR_FAILED: bundle path missing ${bundlePath}`);
   }
 
-  const result = spawnSync("bash", [tiedCli, "yaml_index_list_tokens", '{"index":"requirements"}'], {
-    cwd: projectRoot,
-    encoding: "utf8",
+  const tiedBasePath = resolveTiedLayout(projectRoot).tiedDir;
+
+  const result = invokeTiedCliMcpTool({
+    projectRoot,
+    storeRoot: options.storeRoot,
+    toolName: "yaml_index_list_tokens",
+    argsJson: '{"index":"requirements"}',
     env: {
-      ...process.env,
-      TIED_BASE_PATH: resolveTiedLayout(projectRoot).tiedDir,
+      TIED_BASE_PATH: tiedBasePath,
       TIED_METHODOLOGY_BUNDLE_PATH: bundlePath,
     },
-    stdio: "pipe",
   });
-  if (result.status !== 0) {
-    sayErr(result.stderr || result.stdout);
+
+  if (!result.ok) {
+    sayErr(result.stderr || result.stdout || "DOCTOR_TIED_CLI_FAILED: no output");
     throw new Error("DOCTOR_TIED_CLI_FAILED");
   }
   sayOk("Doctor: tied-cli yaml_index_list_tokens succeeded with bundle env.");

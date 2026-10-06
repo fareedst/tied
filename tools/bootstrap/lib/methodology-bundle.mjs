@@ -5,6 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { loadManifest } from "./constants.mjs";
+import { linkOrMaterializeCopy } from "./copy-managed.mjs";
 import { BUNDLE_DIR_NAME, resolveTiedLayout } from "./layout.mjs";
 import { isSourceOnlyVocab } from "./vocab.mjs";
 
@@ -91,12 +92,7 @@ export function resolveStoreProjectSourceDir(storeRoot) {
  * @param {string} linkDest
  */
 function linkPath(target, linkDest) {
-  if (!fs.existsSync(target)) return;
-  fs.mkdirSync(path.dirname(linkDest), { recursive: true });
-  if (fs.existsSync(linkDest)) {
-    fs.rmSync(linkDest, { recursive: true, force: true });
-  }
-  fs.symlinkSync(target, linkDest, fs.statSync(target).isDirectory() ? "dir" : "file");
+  linkOrMaterializeCopy(target, linkDest);
 }
 
 /**

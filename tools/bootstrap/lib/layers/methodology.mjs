@@ -7,7 +7,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { manifestPaths } from "../constants.mjs";
 import { isSourceOnlyVocab } from "../vocab.mjs";
-import { copyFileWithAttributes, warnModifiedCopyTarget } from "../copy-managed.mjs";
+import {
+  copyFileWithAttributes,
+  linkOrMaterializeCopy,
+  warnModifiedCopyTarget,
+} from "../copy-managed.mjs";
 import { copyDocs } from "../docs.mjs";
 import { copySidecarTemplate } from "../sidecar-template.mjs";
 import { installClaudeMdTemplate } from "../claude-md.mjs";
@@ -80,10 +84,7 @@ export function installMethodologyLinked(projectRoot, options) {
   const templateDest = path.join(layout.templatesDir, "impl-essence-pseudocode-template.md");
   const storeTemplate = resolveStoreSidecarTemplatePath(options.storeRoot);
   if (fs.existsSync(storeTemplate)) {
-    if (fs.existsSync(templateDest)) {
-      fs.rmSync(templateDest, { force: true });
-    }
-    fs.symlinkSync(storeTemplate, templateDest, "file");
+    linkOrMaterializeCopy(storeTemplate, templateDest);
   } else {
     writeDocRedirectStub(templateDest, storeTemplate, "impl-essence-pseudocode-template.md");
   }

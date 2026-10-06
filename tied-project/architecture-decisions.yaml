@@ -1979,6 +1979,15 @@ ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
   detail_file: "architecture-decisions/ARCH-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
   name: "Node-only controlled runner architecture"
   status: "Proposed"
+ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
+  detail_file: "architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml"
+  name: "Primary repo README structure"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+    requirements:
+      - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
 ARCH-TIED_PROJECT_CONFIG_OWNERSHIP:
   description: "Disjoint project vs install config ownership with single install_defaults overlay."
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_CONFIG_OWNERSHIP.yaml"

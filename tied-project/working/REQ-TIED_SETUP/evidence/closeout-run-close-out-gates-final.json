@@ -1,0 +1,22 @@
+{
+  "run_id": "close-out-bootstrap-spawn-macos-20261005",
+  "phase": "close_out",
+  "request_token": "REQ-TIED_SETUP",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "path": "tied-project/working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  },
+  "reconcile": {
+    "process_grade": {
+      "band": "A",
+      "gap_codes": []
+    }
+  }
+}

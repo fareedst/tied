@@ -1,0 +1,69 @@
+CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI:
+  change_definition:
+    current_behavior: "Bootstrap subprocess spawns on Windows may flash consoles; MCP tool invoke from Node bootstrap paths relied on shell tied-cli or raw spawn without windowsHide."
+    desired_behavior: "Central childProcessSpawnOptions (windowsHide on win32) and invokeTiedCliMcpTool for store verification and bootstrap pipelines without bash."
+    non_goals:
+      - "Replace tied-cli.sh for operator manual use"
+      - "Port build-commands.sh to PowerShell"
+    success_criteria:
+      - "child-process-win and tied-cli-invoke unit tests pass"
+      - "Bootstrap regression matrix and new-tied-client e2e pass"
+  completion_criteria:
+    verification_gate_notes: "Tier A/B/C tests; run-close-out-gates close_out with envelope blocking."
+    envelope_path: "tied-project/working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+    modules_or_boundaries: "tools/bootstrap/lib child-process-win.mjs; tied-cli-invoke.mjs; spawn call sites; verify-store.mjs"
+    tied_tokens_affected:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_SETUP"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-05"
+    status: "implemented"
+    title: "Windows spawn hygiene and Node tied-cli MCP invoke"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "windowsHide breaks subprocess that requires visible console on Windows"
+        - "invokeTiedCliMcpTool points TIED_BASE_PATH at wrong tied-project tree"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "child-process-win.test.mjs asserts windowsHide on win32"
+        - "tied-cli-invoke.test.mjs calls yaml_index_list_tokens against engine store"
+      evidence_references:
+        - "tools/bootstrap/lib/child-process-win.mjs"
+        - "tools/bootstrap/lib/tied-cli-invoke.mjs"
+        - "tied-project/working/REQ-TIED_SETUP/evidence/verification-evidence-manifest.v1.json"
+      falsification_questions:
+        - "Do bootstrap spawns still omit windowsHide on Windows after refactor?"
+        - "Does verify-store still shell out to bash tied-cli on Windows?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Bootstrap subprocess parity; minimal depth."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    summary: "Spawn option regression on Windows; wrong MCP base path."
+  test_strategy:
+    commands:
+      - "node --test tools/bootstrap/lib/child-process-win.test.mjs"
+      - "node --test tools/bootstrap/lib/tied-cli-invoke.test.mjs"
+      - "node --test tools/bootstrap/lib/layers/verify-store.test.mjs"
+      - "node --test tools/bootstrap/lib/new-tied-client-pipeline.test.mjs"
+      - "node --test tools/bootstrap/lib/copy-managed.test.mjs"
+      - "node --test tools/bootstrap/lib/claude-adherence-hooks.test.mjs"
+      - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
+      - "node --test tools/bootstrap/lib/mcp-config.test.mjs"
+      - "node --test tools/bootstrap/tied-install-dispatch.test.mjs"
+      - "node --test tools/bootstrap/install-layers.integration.test.mjs"
+      - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
+    summary: "Unit slice tests plus bootstrap regression and factory e2e."

@@ -1,0 +1,106 @@
+execution_evidence:
+  completed:
+    - change-definition
+    - risk-assessment
+    - test-strategy
+    - author-requirement
+    - author-architecture
+    - persist-implementation-records
+    - gate-pseudocode-validation
+    - sync-tied-stack
+    - verification-gate
+    - gitignore-close-out-hygiene
+  envelope_path: tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json
+  request: REQ-TIED_PRIMARY_REPO_ONBOARDING
+depth_tier: minimal
+gate_policy: advisory
+profile_depth: minimal
+request: REQ-TIED_PRIMARY_REPO_ONBOARDING
+status: close_out_ready
+steps:
+  - slug: change-definition
+    disposition: completed
+    evidence_refs: &ref_0
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/change-definition-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs: &ref_1
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/risk-assessment-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs: &ref_2
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/test-strategy-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
+  - slug: author-requirement
+    disposition: completed
+    evidence_refs: &ref_3
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/author-requirement-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_3
+  - slug: author-architecture
+    disposition: completed
+    evidence_refs: &ref_4
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/author-architecture-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_4
+  - slug: persist-implementation-records
+    disposition: completed
+    evidence_refs: &ref_5
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/persist-implementation-records-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_5
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs: &ref_6
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/gate-pseudocode-validation-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_6
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Minimal depth documentation change; CITDP open-record fields satisfy adversarial contract.
+  - slug: sync-tied-stack
+    disposition: completed
+    evidence_refs: &ref_7
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/sync-tied-stack-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_7
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs: &ref_8
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/verification-evidence-manifest.v1.json
+    tracking:
+      status: completed
+      evidence_refs: *ref_8
+  - slug: gitignore-close-out-hygiene
+    disposition: completed
+    evidence_refs: &ref_9
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/gitignore-close-out-hygiene-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_9
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+      - README.md
+      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json
+    tracking:
+      status: completed
+      evidence_refs:
+        - CHANGELOG.md
+        - README.md
+        - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json

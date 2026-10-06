@@ -18,16 +18,21 @@ import {
 import { loadProjectConfig, writeProjectConfig } from "./project-config.mjs";
 import { writeGitignoreBlock } from "./layers/gitignore-block.mjs";
 import { installTiedLayers } from "./install-layers-core.mjs";
+import { childProcessSpawnOptions } from "./child-process-win.mjs";
 
 /**
  * @param {string} cwd
  */
 function isGitCheckout(cwd) {
-  const r = spawnSync("git", ["rev-parse", "--show-toplevel"], {
-    cwd,
-    encoding: "utf8",
-    stdio: "pipe",
-  });
+  const r = spawnSync(
+    "git",
+    ["rev-parse", "--show-toplevel"],
+    childProcessSpawnOptions({
+      cwd,
+      encoding: "utf8",
+      stdio: "pipe",
+    }),
+  );
   return r.status === 0;
 }
 
@@ -51,11 +56,15 @@ function movePath(projectRoot, fromRel, toRel, opts = {}) {
   }
   fs.mkdirSync(path.dirname(to), { recursive: true });
   if (opts.useGit && isGitCheckout(projectRoot)) {
-    const r = spawnSync("git", ["mv", fromRel, toRel], {
-      cwd: projectRoot,
-      stdio: "pipe",
-      encoding: "utf8",
-    });
+    const r = spawnSync(
+      "git",
+      ["mv", fromRel, toRel],
+      childProcessSpawnOptions({
+        cwd: projectRoot,
+        stdio: "pipe",
+        encoding: "utf8",
+      }),
+    );
     if (r.status === 0) {
       return { moved: true, via: "git" };
     }
@@ -78,7 +87,11 @@ function removePath(projectRoot, rel, opts = {}) {
     return;
   }
   if (opts.useGit && isGitCheckout(projectRoot)) {
-    spawnSync("git", ["rm", "-rf", rel], { cwd: projectRoot, stdio: "pipe" });
+    spawnSync(
+      "git",
+      ["rm", "-rf", rel],
+      childProcessSpawnOptions({ cwd: projectRoot, stdio: "pipe" }),
+    );
     if (!fs.existsSync(abs)) {
       return;
     }

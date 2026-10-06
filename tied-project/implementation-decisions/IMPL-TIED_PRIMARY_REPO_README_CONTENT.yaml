@@ -1,0 +1,20 @@
+IMPL-TIED_PRIMARY_REPO_README_CONTENT:
+  IMPL-TIED_PRIMARY_REPO_README_CONTENT:
+    IMPL-TIED_PRIMARY_REPO_README_CONTENT:
+      description: "Edit root README and bootstrap cross-link; verify documented install and doctor commands manually on Windows."
+      essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"
+      implementation_approach:
+        details:
+          - "README.md"
+          - "tools/bootstrap/README.md"
+        summary: "Documentation-only deliverable mapped to SC-PRI-001 through SC-PRI-005."
+      name: "Primary repo README content"
+      status: "Active"
+      traceability:
+        architecture:
+          - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
+        code_annotations:
+          - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+        requirements:
+          - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+    status: "Active"

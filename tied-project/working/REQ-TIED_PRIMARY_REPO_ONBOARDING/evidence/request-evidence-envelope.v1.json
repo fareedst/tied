@@ -1,0 +1,119 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-06T03:54:07.695Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_PRIMARY_REPO_ONBOARDING",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:e642aa9207bd6a9126a2994bc1eaa18af551f0144f3bd9c66e8666a1b645fcb6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml",
+      "content_hash": "sha256:fc5b3a347ec6dc5808556c9f1281ed854c1a6d282c5051a8616a1555f44737fb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:2f76e75e3ba34122f9a9a02adac4f06df571cf50fd8ffde50407bb988413fcef",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:10522e8a5f7e69e48dedab7d8146af6fb52cd60a756f9632f9142199df9dcf6b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md",
+      "content_hash": "sha256:49f30049acda6e30ec996d130b67f25fc19911ea55d8949f06337a877bb647a9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-verification-replay.md",
+      "content_hash": "sha256:07fdaee4918638e2c6ad750a9bbac39945538a4ac5f5df5894f6a08878779545",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:c569614f3c33075d76cdcd66dbf3f602ba39e317bb898d90562807efaaf9986f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:78bb1b8ac6b7e68fd9e612a1a4febec88f3d212fd8c93d5855d86634ef6c899c",
+    "citdp_path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "tracker_dual_write",
+      "artifact_kind": null,
+      "phase": null,
+      "detail": "execution_evidence.completed slugs without matching non-pending step dispositions: change-definition, risk-assessment, test-strategy, author-requirement, author-architecture, persist-implementation-records, gate-pseudocode-validation, sync-tied-stack, verification-gate, gitignore-close-out-hygiene",
+      "severity": "warn",
+      "source": "dual-write-detector"
+    },
+    {
+      "code": "tracker_sparse",
+      "artifact_kind": null,
+      "phase": null,
+      "detail": "All execution_evidence.completed slugs lack authoritative step dispositions",
+      "severity": "warn",
+      "source": "dual-write-detector"
+    }
+  ]
+}

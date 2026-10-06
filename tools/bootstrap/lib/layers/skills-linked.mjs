@@ -6,7 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { manifestPaths } from "../constants.mjs";
 import { jsonSafeAbsolute, shellScriptRoot } from "../paths.mjs";
-import { chmodExecutableRecursive } from "../copy-managed.mjs";
+import { chmodExecutableRecursive, linkOrMaterializeCopy } from "../copy-managed.mjs";
 import { sayWarn } from "../console.mjs";
 import {
   installClaudeSkills,
@@ -210,10 +210,7 @@ function installLinkedTiedYamlSkill(projectRoot, paths, skillsInstallDir, storeR
 export function writeDocRedirectStub(dest, storeTarget, title) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   if (dest.endsWith(".yaml") && fs.existsSync(storeTarget)) {
-    if (fs.existsSync(dest)) {
-      fs.rmSync(dest, { force: true });
-    }
-    fs.symlinkSync(storeTarget, dest, "file");
+    linkOrMaterializeCopy(storeTarget, dest);
     return;
   }
   const heading = title.replace(/\.md$/, "");

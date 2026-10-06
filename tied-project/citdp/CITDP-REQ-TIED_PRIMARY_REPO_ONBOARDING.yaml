@@ -1,0 +1,73 @@
+CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING:
+  change_definition:
+    current_behavior: "Root README Getting started assumes tied-install targets an external client path; primary-repo pattern is undocumented."
+    desired_behavior: "Dedicated README H2 documents linked install with --store, MCP env, skills stubs, verification, and Windows/Unix entry points."
+    non_goals:
+      - "Rewrite tools/bootstrap/README.md beyond a cross-link"
+      - "Edit methodology stubs under tied-bundle/docs in linked clients"
+      - "Duplicate full MCP tool catalog"
+    success_criteria:
+      - "SC-PRI-001 through SC-PRI-005 satisfied"
+  completion_criteria:
+    verification_gate_notes: "Manual doctor and tied_validate_consistency; README deliverable satisfies REQ satisfaction criteria."
+    envelope_path: "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json"
+  impact_analysis:
+    impl_inventory_notes: "README.md; tools/bootstrap/README.md; tied-project TIED tokens."
+    modules_or_boundaries: "Operator documentation only."
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
+      - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+      - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-04"
+    title: "Primary implementation repo README onboarding"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Reader runs tied-install without --store on empty primary repo and hits wrong default store."
+        - "Reader sets --store to primary repo root and sees SELF_INSTALL_REFUSED without explanation."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "README cites install-layers-core guardSelfInstall and store.mjs resolution order."
+        - "Verification includes install-layers --doctor on Windows."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tools/bootstrap/lib/install-layers-core.mjs"
+        - "tools/bootstrap/lib/layout.mjs"
+        - "README.md"
+      falsification_questions:
+        - "Does README still imply full copy install only?"
+        - "Are MCP env keys missing TIED_STORE_ROOT for linked refresh?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Documentation-only change."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - description: "README drifts from install-layers behavior after bootstrap changes."
+        id: "RISK-PRI-001"
+        likelihood: "Medium"
+        mitigation: "Anchor to install-layers-core.mjs, mcp.mjs, store.mjs; run --doctor during verification."
+        severity: "Medium"
+      - description: "Windows vs Unix command parity gaps."
+        id: "RISK-PRI-002"
+        likelihood: "Low"
+        mitigation: "Document tied-install.ps1 and tied-install.cmd alongside bash."
+        severity: "Low"
+      - description: "Readers conflate TIED store repo with primary implementation repo."
+        id: "RISK-PRI-003"
+        likelihood: "Medium"
+        mitigation: "Two-role diagram and SELF_INSTALL_REFUSED explanation."
+        severity: "Medium"
+    summary: "Doc drift and role confusion; minimal depth."
+  tdd_sequence:
+    summary: "No RED tests; manual command replay per VERIFY_DOC_COMMANDS pseudo-code."
+  test_strategy:
+    summary: "node tools/bootstrap/install-layers.mjs --doctor .; tied_config_get_base_path; tied-cli tied_validate_consistency."

@@ -17,6 +17,8 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 
 **Profiles:** `linked` (stubs + MCP bundle env; factory default) vs **`full`** (offline materialized `tied-bundle/`). Brownfield: **`tied-install --migrate-layout`**.
 
+**Primary implementation repositories** (product repo + `tied-project/` in one tree, separate TIED store): see root [README.md § Primary implementation repository](../../README.md#primary-implementation-repository).
+
 **Operator matrix:** `source scripts/build-commands.sh && how install-matrix` — maps smoke flags (`test-new-tied-client --install-mode full`, layer subsets) to committed vs gitignored paths; see `tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md`.
 
 **CI / pre-push:** `source scripts/build-commands.sh && test-all` runs `test-bootstrap-layered-install` (unit/composition for `tied-install` / layers; [REQ-TIED_LAYERED_CLIENT_INSTALL]). Disposable factory smoke remains `test-new-tied-client` (not in `test-all`).
@@ -64,8 +66,8 @@ Skip flags: `--skip-lint`, `--skip-mcp-enable`, `--skip-git`, `--force-mcp-enabl
 
 On **`bootstrapTied`**, when the MCP server is built:
 
-- Writes `.claude/hooks/tied-adherence-bridge.sh` (calls `mcp-server/dist/cli/claude-adherence-bridge.js`).
-- **Safe-merges** a `PostToolUse` handler into `.claude/settings.json` (foreign hooks preserved; idempotent re-run).
+- Writes `.claude/hooks/tied-adherence-bridge.sh` (Unix manual) and on Windows `.claude/hooks/tied-adherence-bridge.cmd`.
+- **Safe-merges** a `PostToolUse` handler into `.claude/settings.json` using a **Node** command (`node …/claude-adherence-bridge.js`) so Windows does not spawn Git Bash windows for `.sh` hooks; re-run upgrades legacy `.sh` commands (foreign hooks preserved; idempotent re-run).
 - Appends **`action_attempted`** ledger rows only when an **active-turn marker** exists (same contract as Cursor `log.rb` bridge).
 
 Hook log pointer: `.claude/adherence-bridge.log`. CLI pin for fixtures: Claude Code **2.1.273** (see `mcp-server/fixtures/claude/hooks/`).

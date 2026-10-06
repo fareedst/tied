@@ -127,10 +127,11 @@ Records can be wrong. Tests can miss behavior. Structural checks can pass while 
 
 ## How to use this repository
 
-There are two useful starting points:
+There are three useful starting points:
 
 1. **Evaluate TIED** — read this overview, then the [Core seven references](tied-bundle/docs/client-development-index.md), [LEAP guide](tied-bundle/docs/LEAP.md), and [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
-2. **Bootstrap a client** — run `./tied-install.sh` (default linked) against a project; brownfield layouts use `tied-install --migrate-layout`. Then choose the optional MCP or documented non-MCP workflow below.
+2. **Bootstrap an external client directory** — run `./tied-install.sh` (default **linked**) from this **TIED store** checkout against another project path; see [Getting started with a new client project](#getting-started-with-a-new-client-project).
+3. **Bootstrap a primary implementation repository** — your product git repo is also the TIED client (`tied-project/` plus application code); use a separate built **TIED store** checkout and [Primary implementation repository](#primary-implementation-repository).
 
 The TIED repository is the source of the methodology. A client receives its own copy of the layout and can maintain project-specific requirements, decisions, and tokens without changing the inherited methodology.
 
@@ -211,6 +212,8 @@ Notes:
 
 ## Getting started with a new client project
 
+This section is for bootstrapping an **external client directory** from the TIED store checkout. If the client **is** your product repository (code and `tied-project/` in one tree), use [Primary implementation repository](#primary-implementation-repository) instead.
+
 Complete [TIED source repository setup](#tied-source-repository-setup) first. `tied-install` fails without a built MCP server and bootstrap dependencies.
 
 ### 1. Copy the methodology
@@ -235,7 +238,7 @@ Or from repo root: `test-new-tied-client.cmd`. PowerShell: `powershell -Executio
 ..\dev\tied\tied-install.cmd C:\path\to\your\project
 ```
 
-`tied-install` materializes the inherited methodology into the client’s gitignored `tied-bundle/`, creates missing project indexes under `tied-project/`, and installs the bundled [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) to `.cursor/skills/tied-yaml/` when appropriate. It does not overwrite an existing `AGENTS.md` or `.cursorrules`. Brownfield clients: `tied-install --migrate-layout` from the project root.
+`tied-install` creates or refreshes the client layout per `--mode` (**linked** by default: methodology stubs and MCP env pointing at the store; **full**: materialized `tied-bundle/` for offline use). It creates missing project indexes under `tied-project/`, and installs the bundled [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) under `.cursor/skills/tied-yaml/` when appropriate. It does not overwrite an existing `AGENTS.md` or `.cursorrules`. Brownfield clients: `tied-install --migrate-layout` from the project root.
 
 Methodology-owned YAML under `tied-bundle/` is read-only in the client and can be refreshed by running `tied-install.sh` again. Project-owned REQ/ARCH/IMPL indexes and detail files live at the root of the client’s `tied-project/` directory and are not overwritten.
 
@@ -260,6 +263,108 @@ If Node or the built server is unavailable, use the documented bootstrap and man
 ```
 
 Read [using TIED without MCP](tied-bundle/docs/using-tied-without-mcp.md) before managing project records by hand.
+
+## Primary implementation repository
+
+Use this path when **one git repository** holds both your application and TIED project data (`tied-project/`, or legacy `tied/` before `--migrate-layout`). That repo is the **primary implementation repository**. The **TIED store** is a separate checkout of this methodology repository (or a pinned clone such as under `tied_versions/`) with a built MCP server (`mcp-server/dist/index.js`) and bundled skills under `tools/bundled-*`.
+
+```mermaid
+flowchart LR
+  store[TIED_store_checkout]
+  primary[Primary_impl_repo]
+  install[tied_install_linked]
+  mcp[".cursor/mcp.json"]
+  skills[".cursor/skills and .claude/skills"]
+  store --> install
+  primary --> install
+  install --> mcp
+  install --> skills
+  mcp -->|TIED_STORE_ROOT| store
+  mcp -->|TIED_BASE_PATH| tiedProject["tied-project/"]
+```
+
+### Prerequisites
+
+Complete [TIED source repository setup](#tied-source-repository-setup) on the **store** checkout (Node 18+, `mcp-server/dist/index.js`). The primary repo only needs Node for `tied-install` and optional `--doctor`.
+
+### First-time linked install
+
+From the **primary repository root** (the `.` target), point `--store` at the absolute store path. Do **not** use the primary repo path as the store.
+
+**Unix / Git Bash:**
+
+```bash
+/path/to/tied-store/tied-install.sh --mode linked --store /abs/path/to/tied-store .
+```
+
+**Windows** (`tied-install.ps1` and `tied-install.cmd` forward the same flags to the Node dispatcher):
+
+```powershell
+C:\path\to\tied-store\tied-install.ps1 --mode linked --store C:\path\to\tied-store .
+```
+
+```cmd
+C:\path\to\tied-store\tied-install.cmd --mode linked --store C:\path\to\tied-store .
+```
+
+The installer refuses **self-install** and **nested** store/project layouts (`SELF_INSTALL_REFUSED`): the store root must not equal the primary repo root, and neither tree may contain the other. See `guardSelfInstall` in [tools/bootstrap/lib/layout.mjs](tools/bootstrap/lib/layout.mjs).
+
+### Refresh without `--store`
+
+After the first install, `.cursor/mcp.json` (or `.mcp.json`) records `TIED_STORE_ROOT`. From the primary repo root:
+
+```bash
+tied-install --mode linked .
+```
+
+Store resolution order: `--store` → environment `TIED_STORE_ROOT` → MCP config → `TIED_REPO_ROOT` when invoked from the store tree. Details: [tools/bootstrap/lib/layers/store.mjs](tools/bootstrap/lib/layers/store.mjs).
+
+### MCP configuration (linked mode)
+
+Linked install refreshes the `tied-yaml` MCP entry when present: `node` with `args` pointing at `{store}/mcp-server/dist/index.js`, and env keys including:
+
+```json
+"env": {
+  "TIED_BASE_PATH": "C:/path/to/primary/tied-project",
+  "TIED_STORE_ROOT": "C:/path/to/tied-store",
+  "TIED_METHODOLOGY_BUNDLE_PATH": "C:/path/to/primary/tied-bundle"
+}
+```
+
+Use absolute paths. `TIED_BASE_PATH` is set to the resolved project traceability directory (`tied-project/`, or legacy `tied/` until migration). One Cursor window per implementation repo; confirm with MCP `tied_config_get_base_path`. Optional: set `TIED_MCP_BIN` when the server binary is not under the store layout you use. See [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md) and [mcp-server/README.md](mcp-server/README.md).
+
+### Skills (linked stubs)
+
+Linked mode writes **stubs** under `.cursor/skills/` (tied-yaml, prompt-type leaf skills, xlate) and `.claude/skills/`; canonical skill bodies remain in the store (`tools/bundled-tied-yaml-skill/`, `tools/bundled-prompt-type-skills/`, etc.). If a stub points at a missing store path, re-run `tied-install --mode linked` with a valid `--store` or use `--mode full`. Optional IDE flow: `agent mcp enable tied-yaml` from the primary repo root.
+
+### Brownfield layout
+
+If the primary repo still uses legacy `tied/` instead of `tied-project/`, run from the primary root:
+
+```bash
+tied-install --migrate-layout
+```
+
+Then re-run linked install as needed.
+
+### Verify checklist
+
+1. Build the **store** (`mcp-server/dist/index.js`).
+2. First linked install on the primary repo with `--store`.
+3. Open the primary repo in Cursor; approve MCP if prompted.
+4. Call `tied_config_get_base_path` and confirm the project traceability directory.
+5. Run `node tools/bootstrap/install-layers.mjs --doctor .` from the primary root (Node-only; no bash required on Windows).
+6. Optional: `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency`.
+
+For YAML workflows without IDE MCP, see [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and the [client development index](tied-bundle/docs/client-development-index.md) (Core seven).
+
+### Full mode alternative
+
+`tied-install --mode full` materializes methodology under `tied-bundle/` for offline use (larger tree, different refresh tradeoffs). See profiles in [tools/bootstrap/README.md](tools/bootstrap/README.md).
+
+### Methodology development layout
+
+When you work in **this** TIED git repository as the store **and** also track project REQ/ARCH/IMPL here, keep a **separate** store clone for installing into other primary repos. Do not run `tied-install .` with `--store` equal to the same root (self-install refused). A pinned store under `tied_versions/...` while product code lives elsewhere is a normal pattern.
 
 ## Tooling and scripts
 

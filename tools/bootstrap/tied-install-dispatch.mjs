@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { childProcessSpawnOptions } from "./lib/child-process-win.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(__dirname, "../..");
@@ -42,9 +43,11 @@ export function runTiedInstallEntrypoint(argv, options = {}) {
   } = options;
   const { script, argvPrefix } = resolveInstallTarget(repoRoot, fsExists);
   console.error(`DIAGNOSTIC: tied-install dispatch -> ${script}`);
-  const result = spawn(nodeExec, [script, ...argvPrefix, ...argv], {
-    stdio: "inherit",
-  });
+  const result = spawn(
+    nodeExec,
+    [script, ...argvPrefix, ...argv],
+    childProcessSpawnOptions({ stdio: "inherit" }),
+  );
   if (result.error) {
     console.error(`DIAGNOSTIC: CHILD_SPAWN_FAILED ${result.error.message}`);
     return 1;

@@ -15,10 +15,25 @@ import { tiedBaselineCommitMessage } from "./tied-baseline-commit-message.mjs";
 import { skillsRerootEnabledFromEnv } from "./skills-reroot.mjs";
 import { bootstrapToolFlagsToArgv } from "./client-tool-use-bootstrap.mjs";
 import { buildTiedInstallArgv } from "./install-options.mjs";
+import { childProcessSpawnOptions } from "./child-process-win.mjs";
 
 export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
+  const resolvedFallback = path.resolve(fallback);
   const raw = env.TIED_REPO_ROOT;
-  return path.resolve(raw && raw.trim() ? raw : fallback);
+  if (raw && raw.trim()) {
+    const fromEnv = path.resolve(raw.trim());
+    const { script: envBootstrap } = bootstrapEntry(fromEnv);
+    const envBootstrapExists = fs.existsSync(envBootstrap);
+    if (envBootstrapExists) {
+      return fromEnv;
+    }
+    if (fromEnv !== resolvedFallback) {
+      sayWarn(
+        `TIED_REPO_ROOT points to ${fromEnv} but bootstrap entry is missing (${envBootstrap}); using engine repo ${resolvedFallback}`,
+      );
+    }
+  }
+  return resolvedFallback;
 }
 
 export function resolveTestRoot(env = process.env) {
@@ -83,10 +98,18 @@ export function resolveCursorAgentCli(env = process.env, spawn = spawnSync) {
   const preferred = env.CURSOR_CLI_NAME?.trim() || DEFAULT_CURSOR_CLI_NAME;
   const probe = (cmd) => {
     if (process.platform === "win32") {
-      const result = spawn("where.exe", [cmd], { encoding: "utf8", stdio: "pipe" });
+      const result = spawn(
+        "where.exe",
+        [cmd],
+        childProcessSpawnOptions({ encoding: "utf8", stdio: "pipe" }),
+      );
       return result.status === 0;
     }
-    const result = spawn("which", [cmd], { encoding: "utf8", stdio: "pipe" });
+    const result = spawn(
+      "which",
+      [cmd],
+      childProcessSpawnOptions({ encoding: "utf8", stdio: "pipe" }),
+    );
     return result.status === 0;
   };
   const candidates = [...new Set([preferred, "agent", "cursor"])];
@@ -132,12 +155,16 @@ export function runNewTiedClientPipeline(options) {
   ];
 
   let step = runStep("tied_install", () => {
-    const result = spawn(copyScript, bootstrapArgv, {
-      cwd: clientDir,
-      shell: process.platform === "win32",
-      encoding: "utf8",
-      stdio: "pipe",
-    });
+    const result = spawn(
+      copyScript,
+      bootstrapArgv,
+      childProcessSpawnOptions({
+        cwd: clientDir,
+        shell: process.platform === "win32",
+        encoding: "utf8",
+        stdio: "pipe",
+      }),
+    );
     return {
       ok: result.status === 0,
       code: result.status ?? 1,
@@ -206,12 +233,16 @@ export function runNewTiedClientPipeline(options) {
       sayWarn(`Skipping ${mcpEnableLabel} (stdin is not a TTY). Use --force-mcp-enable to run anyway.`);
     } else {
       step = runStep(mcpEnableLabel, () => {
-        const result = spawn(cursorAgentCli, ["mcp", "enable", "tied-yaml"], {
-          cwd: clientDir,
-          shell: true,
-          encoding: "utf8",
-          stdio: "pipe",
-        });
+        const result = spawn(
+          cursorAgentCli,
+          ["mcp", "enable", "tied-yaml"],
+          childProcessSpawnOptions({
+            cwd: clientDir,
+            shell: true,
+            encoding: "utf8",
+            stdio: "pipe",
+          }),
+        );
         if (result.error && result.error.code === "ENOENT") {
           sayErr(
             `${cursorAgentCli} CLI not found on PATH (override with TIED_CURSOR_AGENT_CMD or CURSOR_CLI_NAME)`,
@@ -245,11 +276,15 @@ export function runNewTiedClientPipeline(options) {
     ];
     for (const [cmd, args] of gitSteps) {
       step = runStep(`${cmd} ${args.join(" ")}`, () => {
-        const result = spawn(cmd, args, {
-          cwd: clientDir,
-          encoding: "utf8",
-          stdio: "pipe",
-        });
+        const result = spawn(
+          cmd,
+          args,
+          childProcessSpawnOptions({
+            cwd: clientDir,
+            encoding: "utf8",
+            stdio: "pipe",
+          }),
+        );
         if (result.error && result.error.code === "ENOENT") {
           sayErr("git not found on PATH");
           return { ok: false, code: 127, stderr: "git not found", step: "git" };

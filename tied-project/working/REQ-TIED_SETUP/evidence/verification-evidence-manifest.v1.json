@@ -1,0 +1,47 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-bootstrap-spawn-macos-20261005",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "bootstrap-unit-matrix",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/child-process-win.test.mjs",
+        "tools/bootstrap/lib/tied-cli-invoke.test.mjs",
+        "tools/bootstrap/lib/layers/verify-store.test.mjs",
+        "tools/bootstrap/lib/new-tied-client-pipeline.test.mjs",
+        "tools/bootstrap/lib/copy-managed.test.mjs",
+        "tools/bootstrap/lib/claude-adherence-hooks.test.mjs",
+        "tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs",
+        "tools/bootstrap/lib/mcp-config.test.mjs",
+        "tools/bootstrap/tied-install-dispatch.test.mjs",
+        "tools/bootstrap/install-layers.integration.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "new-tied-client-e2e",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "mcp-server/src/e2e/new-tied-client.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM",
+    "IMPL-TIED_FILES",
+    "REQ-TIED_SETUP",
+    "REQ-TIED_LAYERED_CLIENT_INSTALL"
+  ]
+}

@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { committedWorkingFileRel, resolveCommittedWorkingPath } from "./working-root.mjs";
 
 export function defaultOnboardingAuditReportPath(clientDir) {
@@ -64,11 +65,11 @@ export function runNewClientOnboardingAudit(options) {
   const result = spawn(
     nodeExec,
     [script, "--client-root", clientDir, "--json-out", reportPath],
-    {
+    childProcessSpawnOptions({
       cwd: sourceRoot,
       encoding: "utf8",
       stdio: "pipe",
-    },
+    }),
   );
 
   return {

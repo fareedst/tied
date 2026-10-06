@@ -1,13 +1,13 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-28T14:14:30.827Z",
+    "generated_at": "2026-10-06T03:54:14.261Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
   "identity": {
     "request_token": "REQ-TIED_SETUP",
-    "project_id": "af8451e933f573ec",
+    "project_id": "43c95df716872c5d",
     "depth_tier": "minimal",
     "gate_policy": "advisory",
     "methodology_snapshot_id": "3.0.0"
@@ -17,7 +17,7 @@
     {
       "kind": "not_applicable_receipt",
       "schema_version": "not-applicable-receipt.v1",
-      "path": "working/REQ-TIED_SETUP/evidence/not-applicable-receipt.v1.json",
+      "path": "tied-project/working/REQ-TIED_SETUP/evidence/not-applicable-receipt.v1.json",
       "content_hash": "sha256:20db02043f8f8c27c337fed43428a6e9ae42921d79819ac0a3c8905e586add56",
       "phase": null,
       "status": "present",
@@ -28,8 +28,8 @@
     {
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
-      "path": "working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:0796ee096cd7841d6bdcf66b1d44abd656120474f31a04dcf539746e073a459c",
+      "path": "tied-project/working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:004795111dca6437000d59ff555332d097462c894c8fa68e1f5605154505f6b3",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -39,7 +39,7 @@
     {
       "kind": "unknown",
       "schema_version": null,
-      "path": "working/REQ-TIED_SETUP/evidence/close-out-gates-2026-09-28.json",
+      "path": "tied-project/working/REQ-TIED_SETUP/evidence/close-out-gates-2026-09-28.json",
       "content_hash": "sha256:ebb3ea878916d59b7186d3dc3ae8ad45bcf297a9424e6ef6ae9864d76df0f523",
       "phase": null,
       "status": "present",
@@ -50,12 +50,45 @@
     {
       "kind": "unknown",
       "schema_version": null,
-      "path": "working/REQ-TIED_SETUP/evidence/cursor-cli-name-sub-adversarial-na.md",
+      "path": "tied-project/working/REQ-TIED_SETUP/evidence/close-out-gitignore-hygiene.md",
+      "content_hash": "sha256:26c02e792deca4cff646c7c111ab6c8884bdcbee18219867bd658946b311bbcb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_SETUP/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:ceab254169cf32a60a1709767bc791ef82e39953c55fc64146b058637b051039",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_SETUP/evidence/cursor-cli-name-sub-adversarial-na.md",
       "content_hash": "sha256:66bbe3a2b659efb8e3707103bafadf4b9e13a1987be2d5c72e1de3535a5a34e4",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
         "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-TIED_SETUP/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:ec9bd732b99af7d317345b1f66cf8de39a8154539d18e4d4fbaa49c4ecee74c7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
       ]
     }
   ],

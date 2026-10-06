@@ -28,7 +28,11 @@ export function installTiedLayers(projectRoot, options = {}) {
     throw new Error("UNWRITABLE_DESTINATION");
   }
 
-  const storeRoot = resolveStoreRoot({ store: options.store, env: options.env });
+  const storeRoot = resolveStoreRoot({
+    store: options.store,
+    env: options.env,
+    projectRoot,
+  });
   if (options.allowSelfInstall !== true) {
     guardSelfInstall(projectRoot, storeRoot, { allow: false });
   }

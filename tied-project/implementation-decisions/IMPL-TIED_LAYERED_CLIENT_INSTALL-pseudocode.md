@@ -58,6 +58,14 @@ PROCEDURE VERIFY_STORE_LINKED(projectRoot, storeRoot, bundlePath)
   EFFECTS: returns parity not_applicable_linked (skip client refresh parity exit 1)
 END PROCEDURE
 
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_SETUP]
+// How: Post-install verify may call tied_validate_consistency via INVOKE_TIED_CLI_MCP_TOOL (Node stdio client, windowsHide on win32).
+PROCEDURE VERIFY_STORE_MCP_CONSISTENCY(projectRoot, storeRoot)
+  PRE: tied-project layout present; store MCP dist built
+  POST: invokeTiedCliMcpTool ok when consistency passes
+  EFFECTS: subprocess via CHILD_PROCESS_SPAWN_OPTIONS
+END PROCEDURE
+
 // [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
 // How: Factory passthrough maps new-tied-client flags/env to tied-install argv.
 PROCEDURE BUILD_FACTORY_INSTALL_ARGV(sourceRoot, harnessProfile, installOptions)
