@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-06T03:54:07.695Z",
+    "generated_at": "2026-10-06T03:59:59.958Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -18,7 +18,7 @@
       "kind": "checklist_tracker",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml",
-      "content_hash": "sha256:e642aa9207bd6a9126a2994bc1eaa18af551f0144f3bd9c66e8666a1b645fcb6",
+      "content_hash": "sha256:57f16658c52a8d9419681f5d7f65caa0730538e3a1eb059586b6eb6d308dd726",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -51,7 +51,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:10522e8a5f7e69e48dedab7d8146af6fb52cd60a756f9632f9142199df9dcf6b",
+      "content_hash": "sha256:faaca19f06949d1c00df5969a6cac0f2099aef6061989e45a4c2ad201d843f62",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -94,26 +94,18 @@
   ],
   "cross_links": {
     "tracker_path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml",
-    "tracker_hash": "sha256:78bb1b8ac6b7e68fd9e612a1a4febec88f3d212fd8c93d5855d86634ef6c899c",
+    "tracker_hash": "sha256:23c6aa4c87c8cf137222c58f7610a6dce335a361d9dbe7a72d03378f7c48b483",
     "citdp_path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml",
     "evidence_chain_profile_path": null
   },
   "gaps": [
     {
-      "code": "tracker_dual_write",
+      "code": "thin_ledger",
       "artifact_kind": null,
       "phase": null,
-      "detail": "execution_evidence.completed slugs without matching non-pending step dispositions: change-definition, risk-assessment, test-strategy, author-requirement, author-architecture, persist-implementation-records, gate-pseudocode-validation, sync-tied-stack, verification-gate, gitignore-close-out-hygiene",
+      "detail": "Completed slugs without outcome_verified ledger rows: traceable-commit",
       "severity": "warn",
-      "source": "dual-write-detector"
-    },
-    {
-      "code": "tracker_sparse",
-      "artifact_kind": null,
-      "phase": null,
-      "detail": "All execution_evidence.completed slugs lack authoritative step dispositions",
-      "severity": "warn",
-      "source": "dual-write-detector"
+      "source": "ledger-correlation"
     }
   ]
 }

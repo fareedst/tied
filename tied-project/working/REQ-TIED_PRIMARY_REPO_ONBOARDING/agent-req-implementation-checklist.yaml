@@ -30,6 +30,7 @@ execution_evidence:
     - sync-tied-stack
     - verification-gate
     - gitignore-close-out-hygiene
+    - traceable-commit
   envelope_path: "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json"
   evidence_refs_format: "Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):\n  - kind: manifest_ref\n    path: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n  - kind: gate_receipt\n    path: working/{REQ-TOKEN}/gates/verification-2026-08-24T16-46-08-642Z.json\n  - kind: envelope_ref\n    path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json\n  - kind: file_path\n    path: working/{REQ-TOKEN}/evidence/step-artifact.md\n  - kind: command_evidence\n    claimed_success: true\n    manifest_ref: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n    stdout_ref: working/{REQ-TOKEN}/evidence/stdout.txt\n    exit_code: 0\nLegacy string paths remain accepted; generic prose (e.g. \"tests passed\") is rejected as unresolved_evidence_ref.\n"
   operator_evidence:
@@ -436,6 +437,9 @@ steps:
     references:
       - "tied-bundle/docs/processes.md § [PROC-CITDP] step 4"
     slug: "risk-assessment"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
     tasks:
       - "Apply the eligibility table at docs/integrated-activation-checklist-enforcement-plan.md §7: external input, auth, network, persistence, or strict close-out defaults depth_tier to integrated."
       - "Classify each open decision as reversible choice (proceed on documented default) or costly choice (list as sponsor question with recommended default; surface at end of turn). Record consequence ladder rung for each hinge field on the working CITDP."
@@ -455,7 +459,9 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -492,6 +498,10 @@ steps:
       - "tied-bundle/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase I"
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "verification-gate"
+    disposition: completed
+    evidence_refs:
+      - "README.md"
+      - "tools/bootstrap/README.md"
     tasks:
       - "Build the full fidelity matrix with an executable evidence partition; CALL sub-adversarial-inquiry-pass with phase verification and profile-dependent blocking (strict-eligible only)."
       - "CALL sub-pseudocode-static-analysis-pass when input_identity.hash differs from the pre-RED Layer C report for any changed in-scope IMPL; otherwise cite the existing report path in evidence_refs."
@@ -518,7 +528,10 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "README.md"
+        - "tools/bootstrap/README.md"
   - agentstream_new_session: "true"
     flow:
       branches:
@@ -540,6 +553,9 @@ steps:
       - "tied-bundle/docs/processes.md § [PROC-TIED_DEV_CYCLE] steps 8-9"
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "sync-tied-stack"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
     tasks:
       - "CALL sub-yaml-edit-loop on every changed TIED YAML file."
       - "Confirm final post-style project-owned ./tied/ YAML passed sub-client-yaml-styling (via sub-yaml-edit-loop): lint_yaml, tied_validate_consistency, and yaml_semantic_compare when client_formatter is configured; record styling_status and resolved style policy."
@@ -556,7 +572,9 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
   - flow:
       branches: []
       calls:
@@ -604,6 +622,9 @@ steps:
       - "tied-bundle/docs/processes.md § [PROC-CITDP] step 1"
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "change-definition"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
     tasks:
       - "Deliverable production code and automated tests are out of scope for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only."
       - "Optional BBCE (Mechanism A, W2+ advisory): when sponsor requests change-locality discipline, record on the per-request Tracker optional field declared_change_surface (inline object or path ref) with behavior, owning_slice_req, expected_path_globs, public_behavioral_boundary, expected_tests, anticipated_shared_deps — schema bbce-declared-change-surface.v1; example tied/analysis/examples/declared-change-surface.v1.example.yaml. Advisory only — not a checklist hard blocker (W4 promotion)."
@@ -623,7 +644,9 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
   - flow:
       branches: []
       calls:
@@ -672,6 +695,9 @@ steps:
       - "tied-bundle/docs/processes.md § [PROC-CITDP] step 5"
       - "tied-bundle/docs/processes.md § [PROC-TEST_STRATEGY]"
     slug: "test-strategy"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
     tasks:
       - "Add RED contracts for tied_adversarial_inquiry_run, deterministic obligation-report.json/gate-result.json/evidence-provenance.json, append-only finding-ledger.jsonl, bounded paths, canonical-YAML immutability, and strict human approval before changing production or checklist behavior."
       - "Build test matrix (Test name, IMPL block ref, REQ token, Token comments, Testability)."
@@ -689,7 +715,9 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
   - flow:
       branches:
         - action: "Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions"
@@ -805,6 +833,11 @@ steps:
       - "tied-bundle/docs/processes.md § [PROC-COMMIT_MESSAGES]"
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "traceable-commit"
+    disposition: completed
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "README.md"
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json"
     tasks:
       - "Advisory diff-scoped change-risk report at traceable-commit when CITDP diff_scoped_crap is true and crap_block is false: warn in commit body if threshold exceeded (same report path convention as verification-gate); do not block commit on change-risk score alone when crap_block is false."
       - "CALL sub-close-out-evidence-sync before close-out gates: never write execution_evidence.completed without matching step dispositions in the same pass (tracker_dual_write is a process gap)."
@@ -824,7 +857,11 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "README.md"
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json"
   - flow:
       branches: []
       calls:
@@ -843,6 +880,9 @@ steps:
       - "tied-bundle/docs/processes.md § [PROC-YAML_DB_OPERATIONS]"
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "author-architecture"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml"
     tasks:
       - "Agent preload contract (ARCH-locked): After material ARCH/REQ decisions exist, create or update ./tied/agent-preload-contract.yaml (agentstream and batch runners use this file when present). Base it on ./tied-bundle/docs/agent-preload-contract-template.yaml when YAML indexes live at the repo root (TIED source layout, no ./tied/ subtree). Populate from locked REQ+ARCH, for example session_bootstrap_docs paths, tied_paths.TIED_BASE_PATH, and implementation_contract fields the ARCH decision fixes (language/stack hints, high-level target_source_paths if ARCH names roots); set active_user_intent.checklist_step_id if useful. A generic or empty preload is not a substitute for REQ+ARCH-bounded system definition; do not treat it as authoritative for implementation before REQ and ARCH exist. If this pass only adjusted cross-references and did not change stack, layout, or other constants, state in the step output that ./tied/agent-preload-contract.yaml was not refreshed."
       - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied/ (direct-edit exception only with one-line logged gap per .cursor/skills/tied-yaml/SKILL.md)."
@@ -862,7 +902,9 @@ steps:
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml"
   - flow:
       branches: []
       calls:
@@ -880,6 +922,9 @@ steps:
       - "tied-bundle/docs/semantic-tokens.md § Token Creation Requirements"
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "author-requirement"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
     tasks:
       - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied/ (after tied-cli.sh writes; for direct-edit exceptions only, run lint_yaml on that absolute path inside sub-yaml-edit-loop—never raw multi-argument `yq` pretty-print on multiple paths in one process; see processes.md [PROC-YAML_EDIT_LOOP])."
       - "Create or update REQ detail via tied-cli.sh yaml_detail_create / yaml_detail_update (prefer yaml_detail_read then small updates) at ./tied-project/requirements/REQ-{TOKEN}.yaml per ./tied-bundle/docs/detail-files-schema.md § REQ (or detail-files-schema.md at template root)."
@@ -897,7 +942,9 @@ steps:
         - "sub-leap-micro-cycle"
         - "sync-tied-stack"
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
   - flow:
       branches: []
       calls:
@@ -915,6 +962,9 @@ steps:
       - "tied-bundle/docs/pseudocode-validation-checklist.yaml"
       - "tied-bundle/docs/pseudocode-writing-and-validation.md"
     slug: "gate-pseudocode-validation"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"
     tasks:
       - "Async adversarial inquiry binding (W2 checklist text only): when depth_tier is integrated and async_in_scope: true, document request for four bounded cases at pre_implementation — timeout without FAILURE_MODE, double AWAIT on non-idempotent DATA, missing ordering between SEND and AWAIT, retry without duplicate protection. Do not silently run inquiry; W3 owns MCP activation. async_in_scope alone never authorizes inquiry."
       - "CALL sub-adversarial-inquiry-pass with phase pre_implementation and blocking false; this pass makes no runtime claim — it only checks structural and contract completeness after depth selection."
@@ -933,7 +983,9 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"
   - flow:
       branches: []
       calls:
@@ -1143,6 +1195,9 @@ steps:
       - "tied-bundle/docs/processes.md § [PROC-GITIGNORE_CLOSE_OUT]"
       - "tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md"
     slug: "gitignore-close-out-hygiene"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md"
     tasks:
       - "Apply [PROC-GITIGNORE_CLOSE_OUT] per gitignore-close-out-hygiene.md."
       - "Apply unstaged .gitignore pattern additions using repository comment-block conventions, or record propose-only items in handoff when ambiguous."
@@ -1156,7 +1211,9 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md"
   - flow:
       branches: []
       calls:
@@ -1207,6 +1264,9 @@ steps:
       - "tied-bundle/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i"
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "persist-implementation-records"
+    disposition: completed
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml"
     tasks:
       - "Agent preload contract (IMPL-locked): Refresh tied/agent-preload-contract.yaml (same template sources as author-architecture) using IMPL-anchored data—e.g. code_locations into implementation_contract.target_source_paths, test or harness paths if derivable from IMPL detail, citdp_artifact_paths per project CITDP policy, language/test_framework when known. Set or clear discovery_already_done fields only from quick checks or already-known TIED state (do not re-scan the whole repo; keep preload narrow). If this step was verify-only for IMPL, still reconcile the preload if earlier steps may have left path or stack lists stale."
       - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied/."
@@ -1222,7 +1282,9 @@ steps:
       retry_count: "0"
       returned_from: []
       state_history: []
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml"
 sub_procedures:
   - flow:
       return_to: "caller"
