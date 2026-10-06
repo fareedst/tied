@@ -11,12 +11,12 @@
   "envelope": {
     "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json",
     "blocking_gap_count": 0,
-    "advisory_gap_count": 0
+    "advisory_gap_count": 1
   },
   "reconcile": {
     "process_grade": {
-      "band": "B",
-      "gap_codes": ["thin_ledger"]
+      "band": "A",
+      "gap_codes": []
     }
   }
 }
