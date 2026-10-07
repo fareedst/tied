@@ -1,0 +1,1 @@
+Phase 2 unit tests (2026-10-07 build-plan): 24 pass — feedback-source-normalization.test.ts, feedback-promotion.test.ts, feedback-capture.test.ts; batch-5-mcp.test.ts composition pass.

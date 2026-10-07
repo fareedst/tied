@@ -1,0 +1,3 @@
+Add Kaizen Phase 2 source normalization (REQ-KAIZEN-SOURCE-NORMALIZATION).
+
+Shared inference module for observation kind and feedback entry type across capture and operational adapters; integrated close_out with zero blocking envelope gaps.

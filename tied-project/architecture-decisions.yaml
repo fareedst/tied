@@ -1181,6 +1181,23 @@ ARCH-KAIZEN_OBSERVATION_CAPTURE:
   detail_file: "architecture-decisions/ARCH-KAIZEN_OBSERVATION_CAPTURE.yaml"
   name: "Kaizen observation capture architecture"
   status: "Active"
+ARCH-KAIZEN_SOURCE_NORMALIZATION:
+  constraints:
+    - constraint: "Adapter privacy tier when present must be operator_local in Phases 1-2"
+    - constraint: "Caller feedback entry type always wins over kind inference"
+    - constraint: "Single shared inference module for capture and operational_add"
+  cross_references:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+    implementation:
+      - "IMPL-KAIZEN_SOURCE_NORMALIZATION"
+    requirements:
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+      - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+  detail_file: "architecture-decisions/ARCH-KAIZEN_SOURCE_NORMALIZATION.yaml"
+  name: "Kaizen source normalization architecture"
+  status: "Planned"
 ARCH-LEAP_PROPOSAL_QUEUE:
   alternatives_considered:
     - cons:

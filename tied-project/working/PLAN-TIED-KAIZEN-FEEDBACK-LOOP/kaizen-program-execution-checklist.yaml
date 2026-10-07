@@ -1,0 +1,326 @@
+# Kaizen feedback loop — program execution checklist (central orchestrator)
+#
+# Purpose: One resume surface for Phases 0–7 after sponsor batch approval (2026-10-07).
+# Each behavior-changing phase still runs its own per-REQ copy of
+# tied-bundle/docs/agent-req-implementation-checklist.yaml under working/{REQ-TOKEN}/.
+#
+# This file is NOT the refine-pass tracker. Refine documentation steps live in
+# checklist-tracker.yaml (request PLAN-TIED-KAIZEN-FEEDBACK-LOOP, doc-only pass).
+
+schema_version: kaizen-program-execution.v1
+last_updated: "2026-10-07T16:00:00-07:00"
+
+program:
+  label: Kaizen loop capability (Phases 0–7)
+  program_request: PLAN-TIED-KAIZEN-FEEDBACK-LOOP
+  linked_plan: docs/tied-kaizen-feedback-loop-plan.md
+  vocabulary_preload:
+    - tied-project/vocab/feedback-to-tied.md
+    - tied-project/vocab/leap-proposal-queue.md
+    - tied-project/vocab/quality-assurance.md
+  refine_pass_tracker: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/checklist-tracker.yaml
+  citdp_plan: tied-project/citdp/CITDP-PLAN-TIED-KAIZEN-FEEDBACK-LOOP.yaml
+
+program_phase: in_progress
+# ready_to_execute | in_progress | closed | paused_sponsor_hinge
+
+execution_authority:
+  mode: sponsor_pre_approved_batch
+  sponsor_statement: >
+    Entire linked plan is approved for execution when initiated; agents may proceed
+    through Phases 1–7 under recorded policy without re-asking closed hinges.
+  recorded_at: "2026-10-07"
+  evidence_ref:
+    kind: file_path
+    path: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sponsor-decisions-evidence.md
+
+  pre_approved_hinges:
+    upstream_transport_phase_1_2:
+      decision: local_append_receipt_export_only
+      blocks_until_changed: Phase 3 outbox and any upstream transport port
+    privacy_tier_default:
+      decision: operator_local
+      blocks_until_changed: shareable_hashed or forbidden_export in production paths
+    feedback_entry_type_shape:
+      decision: three_enum_values_plus_observation_kind
+      blocks_until_changed: fourth persisted feedback entry type
+
+  reversible_choices_proceed_without_ask:
+    - operational observation recorded before cause claims
+    - feedback analysis appends facets; never overwrites observation text
+    - empty or missing inputs use unknown, not_measured, or not_applicable
+    - trends use named counts and denominators; no universal score
+    - Phase 5 reuses ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY; no second queue
+    - digest cites promotion status and LEAP status; no stored accepted or deferred status
+    - depth_tier for each phase defaults integrated when external input or persistence matches (see phase_defaults)
+
+  sponsor_interrupt_only_when:
+    - hinge reopen via explicit sponsor change request and CITDP update
+    - integrated_waiver for depth below integrated on Phase 1+ (owner, expiry, rationale required)
+    - Phase 3 transport recipient, channel, or webhook scope
+    - shareable_hashed export with named redaction owner and expiry
+    - fourth feedback entry type or breaking schema version
+    - Phase 7 pilot promotion into methodology (separate TIED change)
+    - stop criteria triggered (privacy incident, notification overload, transport loss, unresolvable classification)
+    - agency boundary: canonical REQ/ARCH/IMPL intent beyond delegated envelope
+
+  do_not_re_ask:
+    - the three 2026-10-07 costly choices while pre_approved_hinges remain in force
+    - Kaizen vocabulary RESOLVE rows in feedback-to-tied.md for terms already mapped in the linked plan Refine table
+    - whether Phase 0 naming pass is required (complete via refine pass)
+
+flow_control:
+  notation:
+    - symbol: GOTO
+      meaning: Jump to program step id; update current_step in this file
+    - symbol: CALL
+      meaning: Run a child workflow (plan-new-feature, build-plan, plan-close-out) then RETURN
+    - symbol: LOOP
+      meaning: Repeat child checklist until verification-gate and traceable-commit complete for that phase REQ
+  ordering: strict_sequential_phases
+  parallel_phases_allowed: false
+
+resume_protocol:
+  summary: >
+    Read this file first. Set current_step from program_phase and phase status.
+    Never restart a closed phase unless LEAP scope change requires it.
+  steps:
+    - id: R1
+      action: Call tied_config_get_base_path; must equal this repo tied-project/
+    - id: R2
+      action: PRELOAD vocabulary_preload glossaries
+    - id: R3
+      action: Read linked_plan Implement section for selected phase module boundaries
+    - id: R4
+      action: IF phase.status is complete THEN GOTO next pending phase program step
+    - id: R5
+      action: IF phase.status is in_progress THEN open phase.phase_tracker and GOTO session-bootstrap on that tracker
+    - id: R6
+      action: IF phase.status is pending THEN run CALL plan-new-feature for that phase only
+    - id: R7
+      action: On child traceable-commit complete, set phase.status complete and persist phase close_out evidence path
+
+current_step: P4-initiate
+# Updated by executor when a phase closes or pauses
+
+phase_defaults:
+  depth_tier: integrated
+  depth_tier_waiver_token: integrated_waiver
+  depth_inheritance_from_refine_pass: forbidden
+  gate_policy: advisory
+  research_profile: integrated-agent
+  assurance_profile: baseline-functional
+  per_phase_checklist_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+  child_working_root_pattern: tied-project/working/{REQ-TOKEN}/
+
+phases:
+  - phase_id: 0
+    module: Contract and vocabulary
+    status: complete
+    req_token: null
+    proof: Refine pass; docs/tied-kaizen-feedback-loop-plan.md and feedback-to-tied.md aligned
+    phase_tracker: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/checklist-tracker.yaml
+    exit_criteria:
+      - three sponsor hinges recorded with dated approval
+      - Implement section forbids inheriting minimal depth into Phase 1
+
+  - phase_id: 1
+    module: Observation capture
+    status: complete
+    req_token: REQ-KAIZEN-OBSERVATION-CAPTURE
+    suggested_req_prefix: REQ-KAIZEN-OBSERVATION-CAPTURE
+    phase_tracker: tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/checklist-tracker.yaml
+    owns:
+      - additive local append
+      - receipt
+      - idempotency
+      - privacy tier operator_local at capture
+    leaves_alone:
+      - feedback analysis
+      - upstream transport
+      - promotion bridge
+    exit_evidence:
+      - unit tests valid incomplete malformed duplicate redacted idempotent retry
+      - persistence atomic write and restart
+      - receipt without required cause claim
+    program_steps:
+      - id: P1-initiate
+        disposition: complete
+        action: CALL plan-new-feature scope Phase 1 only; mint REQ/ARCH/IMPL; copy per_phase_checklist_template to phase_tracker
+      - id: P1-implement
+        disposition: complete
+        action: LOOP agent checklist through verification-gate; depth_tier integrated unless integrated_waiver on CITDP
+      - id: P1-close
+        disposition: complete
+        action: CALL plan-close-out; set phase_id 1 status complete; current_step P2-initiate
+
+  - phase_id: 2
+    module: Source normalization
+    status: complete
+    req_token: REQ-KAIZEN-SOURCE-NORMALIZATION
+    suggested_req_prefix: REQ-KAIZEN-SOURCE-NORMALIZATION
+    phase_tracker: tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/checklist-tracker.yaml
+    refine_plan:
+      completed_at: "2026-10-07"
+      evidence: tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/PLAN.md
+    owns:
+      - observation kind on adapters
+      - workflow workaround baseline refs
+      - caller-supplied feedback entry type wins
+    leaves_alone:
+      - raw observation text
+      - analysis facets
+    exit_evidence:
+      - source fixtures incident metric test failure user report
+      - provenance and privacy rejection
+      - composition tests per adapter binding
+    program_steps:
+      - id: P2-initiate
+        disposition: complete
+        action: CALL plan-new-feature scope Phase 2 only
+      - id: P2-implement
+        disposition: complete
+        action: LOOP agent checklist through verification-gate
+      - id: P2-close
+        disposition: complete
+        action: CALL plan-close-out; set phase_id 2 status complete; current_step P4-initiate
+
+  - phase_id: 3
+    module: Outbox and notification policy
+    status: deferred_until_sponsor_hinge
+    req_token: null
+    suggested_req_prefix: REQ-KAIZEN-FEEDBACK-OUTBOX
+    phase_tracker: null
+    deferral_reason: pre_approved_hinges.upstream_transport_phase_1_2 blocks transport until separate hinge reopen
+    owns:
+      - retry state
+      - notification policy behind transport port
+    sponsor_gate_before_start: upstream transport scope and recipients
+    program_steps:
+      - id: P3-initiate
+        disposition: blocked
+        action: IF hinge reopen recorded on CITDP THEN CALL plan-new-feature else GOTO P4-initiate without ask
+      - id: P3-implement
+        disposition: blocked
+        action: LOOP agent checklist through verification-gate
+      - id: P3-close
+        disposition: blocked
+        action: CALL plan-close-out; current_step P4-initiate
+
+  - phase_id: 4
+    module: Feedback analysis
+    status: pending
+    req_token: null
+    suggested_req_prefix: REQ-KAIZEN-FEEDBACK-ANALYSIS
+    phase_tracker: null
+    owns:
+      - read-only grouping
+      - denominators
+      - versioned feedback digest projection
+    leaves_alone:
+      - source entries
+      - project YAML
+    exit_evidence:
+      - golden fixtures recurrence denominator mismatch missing evidence incompatible cohorts empty window rerun identity
+    program_steps:
+      - id: P4-initiate
+        disposition: pending
+        action: CALL plan-new-feature scope Phase 4 only
+      - id: P4-implement
+        disposition: pending
+        action: LOOP agent checklist through verification-gate
+      - id: P4-close
+        disposition: pending
+        action: CALL plan-close-out; current_step P5-initiate
+
+  - phase_id: 5
+    module: Review bridge
+    status: pending
+    req_token: null
+    suggested_req_prefix: REQ-KAIZEN-REVIEW-BRIDGE
+    phase_tracker: null
+    owns:
+      - digest findings to existing ids
+      - createReviewedLeapProposal path
+    leaves_alone:
+      - second promotion mechanism
+      - automatic canonical YAML write
+    exit_evidence:
+      - review required reject approve canonical-write attempt stale evidence proposal link
+    program_steps:
+      - id: P5-initiate
+        disposition: pending
+        action: CALL plan-new-feature scope Phase 5 only
+      - id: P5-implement
+        disposition: pending
+        action: LOOP agent checklist through verification-gate
+      - id: P5-close
+        disposition: pending
+        action: CALL plan-close-out; current_step P6-initiate
+
+  - phase_id: 6
+    module: Outcome loop
+    status: pending
+    req_token: null
+    suggested_req_prefix: REQ-KAIZEN-OUTCOME-LOOP
+    phase_tracker: null
+    owns:
+      - baseline
+      - follow-up window
+      - outcome observation
+      - evidence links
+    exit_evidence:
+      - missing baseline inconclusive regression to analysis evidence-link integrity
+    program_steps:
+      - id: P6-initiate
+        disposition: pending
+        action: CALL plan-new-feature scope Phase 6 only
+      - id: P6-implement
+        disposition: pending
+        action: LOOP agent checklist through verification-gate
+      - id: P6-close
+        disposition: pending
+        action: CALL plan-close-out; current_step P7-initiate
+
+  - phase_id: 7
+    module: Pilot
+    status: pending
+    req_token: null
+    suggested_req_prefix: REQ-KAIZEN-FEEDBACK-PILOT
+    phase_tracker: null
+    owns:
+      - named cohort metrics denominators stop criteria
+    leaves_alone:
+      - treating pilot volume as methodology change
+    exit_evidence:
+      - pilot metrics with denominators; stop criteria documented
+    promotion_rule: pilot stays analysis evidence until separate sponsor-approved TIED change
+    program_steps:
+      - id: P7-initiate
+        disposition: pending
+        action: CALL plan-new-feature scope Phase 7 only
+      - id: P7-implement
+        disposition: pending
+        action: LOOP agent checklist through verification-gate
+      - id: P7-close
+        disposition: pending
+        action: CALL plan-close-out; set program_phase closed; current_step EXIT
+
+recovery:
+  incomplete_child_tracker:
+    action: Resume at child phase_tracker execution_evidence.completed last slug; do not reset program_phase
+  leap_after_phase_close:
+    action: Reopen only affected phase status in_progress; GOTO that phase P{n}-implement
+  wrong_tied_base_path:
+    action: Stop; fix .cursor/mcp.json TIED_BASE_PATH; do not write project YAML
+  vocabulary_drift:
+    action: RECORD in feedback-to-tied.md; VALIDATE at phase traceable-commit only
+  phase_3_skipped_by_policy:
+    action: Expected until transport hinge reopen; sequence P2-close goes to P4-initiate
+
+execution_evidence:
+  program_started_at: null
+  program_closed_at: null
+  phases_completed: [0]
+  last_session_handoff: null
+  envelope_path: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/kaizen-program-envelope.v1.json

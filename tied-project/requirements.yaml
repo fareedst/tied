@@ -1266,6 +1266,52 @@ REQ-KAIZEN-OBSERVATION-CAPTURE:
       - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
     tests:
       - "feedback-capture.test.ts"
+REQ-KAIZEN-SOURCE-NORMALIZATION:
+  category: "Functional"
+  detail_file: "requirements/REQ-KAIZEN-SOURCE-NORMALIZATION.yaml"
+  name: "Kaizen Phase 2 source normalization"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Caller entry_type always wins"
+      - "Shared module prevents capture vs operational_add drift"
+      - "user_report friction not auto feature_request"
+    problems_solved:
+      - "Dual inference paths"
+      - "Missing observation kind on operational entries"
+    why: "Phase 2 aligns operational adapters and capture on one inference table for observation kind and feedback entry type."
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    related_to:
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Non-operator_local privacy rejected when declared on adapter payload"
+      metric: "feedback-source-normalization.test.ts"
+    - criterion: "normalizeOperationalSource and capture share resolveFeedbackEntryType"
+      metric: "Unit tests green"
+    - criterion: "Provenance fields preserved on operational entries"
+      metric: "feedback-promotion tests"
+    - criterion: "user_report with qualifier maps to methodology_improvement not feature_request"
+      metric: "feedback-promotion.test.ts"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-KAIZEN_SOURCE_NORMALIZATION"
+    code_annotations:
+      - "ARCH-KAIZEN_SOURCE_NORMALIZATION"
+      - "IMPL-KAIZEN_SOURCE_NORMALIZATION"
+      - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+    implementation:
+      - "IMPL-KAIZEN_SOURCE_NORMALIZATION"
+    tests:
+      - "batch-5-mcp.test.ts"
+      - "feedback-capture.test.ts"
+      - "feedback-promotion.test.ts"
+      - "feedback-source-normalization.test.ts"
 REQ-LEAP_PROPOSAL_QUEUE:
   category: "Functional"
   detail_file: "requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml"

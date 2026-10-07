@@ -1,0 +1,36 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "pre_implementation",
+  "timestamp": "2026-10-07T22:41:42.180Z",
+  "allowed": false,
+  "diagnostics": [
+    "pending_required_step:translate-sponsor-intent",
+    "pending_required_step:risk-assessment",
+    "pending_required_step:change-definition",
+    "pending_required_step:test-strategy",
+    "pending_required_step:session-bootstrap",
+    "pending_required_step:impact-discovery",
+    "missing_required_step:sub-adversarial-inquiry-pass"
+  ],
+  "depth": "minimal",
+  "input_hashes": {
+    "tracker_hash": "sha256:03d6d53aaab647f3488400c10f2a64ca8ee5ec5a937c2f1b8a63f97190e414af",
+    "citdp_hash": "sha256:c1eef32472e09a942e39aa6bf59ac73c7acf624f97f34fcc02ae03d924999c3b"
+  },
+  "gate_result": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "minimal",
+    "phase": "pre_implementation",
+    "diagnostics": [
+      "pending_required_step:translate-sponsor-intent",
+      "pending_required_step:risk-assessment",
+      "pending_required_step:change-definition",
+      "pending_required_step:test-strategy",
+      "pending_required_step:session-bootstrap",
+      "pending_required_step:impact-discovery",
+      "missing_required_step:sub-adversarial-inquiry-pass"
+    ]
+  }
+}

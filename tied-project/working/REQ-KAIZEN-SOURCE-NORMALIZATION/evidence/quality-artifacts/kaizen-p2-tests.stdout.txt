@@ -1,0 +1,71 @@
+▶ classifyEvidenceRef [IMPL-KAIZEN_OBSERVATION_CAPTURE]
+  ✔ accepts URI and path refs (0.491416ms)
+  ✔ rejects generic prose (0.043833ms)
+✔ classifyEvidenceRef [IMPL-KAIZEN_OBSERVATION_CAPTURE] (1.460167ms)
+▶ captureOperationalObservation kind inference [REQ-KAIZEN-SOURCE-NORMALIZATION]
+  ✔ infers bug_report from failed_test kind when entry_type omitted (3.959ms)
+  ✔ caller entry_type overrides kind inference (1.130416ms)
+✔ captureOperationalObservation kind inference [REQ-KAIZEN-SOURCE-NORMALIZATION] (5.173625ms)
+▶ captureOperationalObservation valid minimal [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ appends entry and returns receipt without promotion fields (0.931292ms)
+✔ captureOperationalObservation valid minimal [REQ-KAIZEN-OBSERVATION-CAPTURE] (0.974791ms)
+▶ captureOperationalObservation incomplete [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ rejects missing title or description (0.42425ms)
+✔ captureOperationalObservation incomplete [REQ-KAIZEN-OBSERVATION-CAPTURE] (0.517333ms)
+▶ captureOperationalObservation malformed [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ rejects bad privacy tier and entry type (0.639292ms)
+✔ captureOperationalObservation malformed [REQ-KAIZEN-OBSERVATION-CAPTURE] (0.696208ms)
+▶ captureOperationalObservation idempotent retry [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ returns one entry and idempotent_replay on retry (0.972125ms)
+✔ captureOperationalObservation idempotent retry [REQ-KAIZEN-OBSERVATION-CAPTURE] (1.013042ms)
+▶ captureOperationalObservation evidence refs [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ partitions validated and rejected refs on receipt (1.236833ms)
+✔ captureOperationalObservation evidence refs [REQ-KAIZEN-OBSERVATION-CAPTURE] (1.2695ms)
+▶ captureOperationalObservation persistence [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ survives reload after write (0.875833ms)
+✔ captureOperationalObservation persistence [REQ-KAIZEN-OBSERVATION-CAPTURE] (0.907417ms)
+▶ buildCaptureReceipt [IMPL-KAIZEN_OBSERVATION_CAPTURE]
+  ✔ echoes observation kind or unknown (0.043583ms)
+✔ buildCaptureReceipt [IMPL-KAIZEN_OBSERVATION_CAPTURE] (0.063084ms)
+▶ feedback promotion [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]
+  ✔ normalizes all source metadata and rejects missing evidence (0.809333ms)
+  ✔ groups duplicates without deleting original entries (0.155083ms)
+  ✔ [REQ-KAIZEN-SOURCE-NORMALIZATION] user_report stays methodology_improvement with other qualifier (0.148167ms)
+  ✔ requires review and creates only non-canonical proposals (1.927667ms)
+✔ feedback promotion [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] (3.717166ms)
+▶ inferFeedbackEntryTypeFromObservationKind [IMPL-KAIZEN_SOURCE_NORMALIZATION]
+  ✔ maps defect-like kinds to bug_report (0.500792ms)
+  ✔ maps friction kinds to methodology_improvement (0.065792ms)
+✔ inferFeedbackEntryTypeFromObservationKind [IMPL-KAIZEN_SOURCE_NORMALIZATION] (1.192041ms)
+▶ resolveFeedbackEntryType [REQ-KAIZEN-SOURCE-NORMALIZATION]
+  ✔ caller entry_type always wins over kind inference (0.078084ms)
+  ✔ infers bug_report when entry_type omitted and kind is failed_test (0.035625ms)
+  ✔ defaults to methodology_improvement when both omitted (0.0355ms)
+✔ resolveFeedbackEntryType [REQ-KAIZEN-SOURCE-NORMALIZATION] (0.231416ms)
+▶ source_type default kinds [REQ-KAIZEN-SOURCE-NORMALIZATION]
+  ✔ fixture table: incident, test_failure, metric, user_report (0.06025ms)
+✔ source_type default kinds [REQ-KAIZEN-SOURCE-NORMALIZATION] (0.102833ms)
+▶ privacy tier at adapter boundary [REQ-KAIZEN-SOURCE-NORMALIZATION]
+  ✔ rejects shareable_hashed when declared (0.066292ms)
+  ✔ allows omitted tier (0.052083ms)
+✔ privacy tier at adapter boundary [REQ-KAIZEN-SOURCE-NORMALIZATION] (0.176333ms)
+▶ other_qualifier for user_report friction [REQ-KAIZEN-SOURCE-NORMALIZATION]
+  ✔ requires qualifier when kind is other (0.083667ms)
+✔ other_qualifier for user_report friction [REQ-KAIZEN-SOURCE-NORMALIZATION] (0.121291ms)
+▶ Batch 5 MCP composition [REQ-TIED_RESEARCH_RECORDS]
+  ✔ binds research records to the external dataset boundary (1.793667ms)
+✔ Batch 5 MCP composition [REQ-TIED_RESEARCH_RECORDS] (2.275834ms)
+▶ Batch 5 kaizen capture MCP composition [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ binds tied_feedback_capture_observation to local append and receipt (3.534583ms)
+✔ Batch 5 kaizen capture MCP composition [REQ-KAIZEN-OBSERVATION-CAPTURE] (3.600959ms)
+▶ Batch 5 feedback MCP composition [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]
+  ✔ binds source capture and requires review before proposal creation (1.446709ms)
+✔ Batch 5 feedback MCP composition [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] (1.511292ms)
+ℹ tests 27
+ℹ suites 18
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 501.9075

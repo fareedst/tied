@@ -1,0 +1,22 @@
+ARCH-KAIZEN_SOURCE_NORMALIZATION:
+  ARCH-KAIZEN_SOURCE_NORMALIZATION:
+    constraints:
+      - constraint: "Adapter privacy tier when present must be operator_local in Phases 1-2"
+      - constraint: "Caller feedback entry type always wins over kind inference"
+      - constraint: "Single shared inference module for capture and operational_add"
+    cross_references:
+      architecture:
+        - "ARCH-FEEDBACK_STORAGE"
+      implementation:
+        - "IMPL-KAIZEN_SOURCE_NORMALIZATION"
+      requirements:
+        - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+        - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+        - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    name: "Kaizen source normalization architecture"
+    rationale:
+      decisions:
+        - "Additive workflow/workaround/baseline_ref on context only"
+        - "feedback-source-normalization.ts as pure inference boundary"
+      why: "Prevent drift between point-of-work capture and operational source adapters while preserving provenance."
+    status: "Planned"

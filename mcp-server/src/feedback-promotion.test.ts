@@ -28,7 +28,11 @@ describe("feedback promotion [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]", () => {
   it("normalizes all source metadata and rejects missing evidence", () => {
     const result = normalizeOperationalSource(source);
     assert.equal(result.ok, true);
-    if (result.ok) assert.equal(result.entry.promotion_status, "promotion_pending");
+    if (result.ok) {
+      assert.equal(result.entry.promotion_status, "promotion_pending");
+      assert.equal(result.entry.type, "bug_report");
+      assert.equal(result.entry.context?.observation_kind, "incident");
+    }
     const missing = normalizeOperationalSource({ ...source, evidence_links: [] });
     assert.equal(missing.ok, false);
     if (!missing.ok) assert.equal(missing.error, "MissingEvidence");
@@ -43,6 +47,26 @@ describe("feedback promotion [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]", () => {
     const grouped = groupDuplicateFeedback(second.entry, [first.entry]);
     assert.equal(grouped.kind, "duplicate");
     assert.equal(grouped.entry.duplicate_group, first.entry.duplicate_group);
+  });
+
+  it("[REQ-KAIZEN-SOURCE-NORMALIZATION] user_report stays methodology_improvement with other qualifier", () => {
+    const friction: OperationalSource = {
+      source_type: "user_report",
+      source_id: "ur-1",
+      affected_feature: "FEAT-UX",
+      severity: "low",
+      evidence_links: ["note://1"],
+      occurred_at: "2026-08-13T10:00:00.000Z",
+      title: "Confusing docs",
+      description: "Could not find the checklist",
+      payload: { other_qualifier: "user_report" },
+    };
+    const result = normalizeOperationalSource(friction);
+    assert.equal(result.ok, true);
+    if (result.ok) {
+      assert.equal(result.entry.type, "methodology_improvement");
+      assert.equal(result.entry.context?.observation_kind, "other");
+    }
   });
 
   it("requires review and creates only non-canonical proposals", () => {

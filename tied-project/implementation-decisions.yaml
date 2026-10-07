@@ -1242,6 +1242,34 @@ IMPL-KAIZEN_OBSERVATION_CAPTURE:
   detail_file: "implementation-decisions/IMPL-KAIZEN_OBSERVATION_CAPTURE.yaml"
   name: "Kaizen observation capture implementation"
   status: "Active"
+IMPL-KAIZEN_SOURCE_NORMALIZATION:
+  code_locations:
+    files:
+      - description: "Capture adapter consumer"
+        path: "mcp-server/src/feedback-capture.ts"
+      - description: "Operational adapter consumer"
+        path: "mcp-server/src/feedback-promotion.ts"
+      - description: "Phase 2 contract tests"
+        path: "mcp-server/src/feedback-source-normalization.test.ts"
+      - description: "Shared kind and entry type inference"
+        path: "mcp-server/src/feedback-source-normalization.ts"
+  cross_references:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-KAIZEN_SOURCE_NORMALIZATION"
+    implementation:
+      - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+    requirements:
+      - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+  detail_file: "implementation-decisions/IMPL-KAIZEN_SOURCE_NORMALIZATION.yaml"
+  implementation_approach:
+    details:
+      - "normalizeOperationalSource applies privacy and other_qualifier gates"
+      - "resolveFeedbackEntryType centralizes kind to type mapping"
+    summary: "feedback-source-normalization.ts imported by capture and promotion paths"
+  name: "Kaizen source normalization implementation"
+  status: "Planned"
 IMPL-MCP_FEEDBACK_TOOLS:
   code_locations:
     files:

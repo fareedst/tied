@@ -4,6 +4,15 @@ import {
   type LeapProposal,
 } from "./analysis/leap-proposal-queue.js";
 import type { FeedbackEntry } from "./feedback.js";
+import {
+  extractAdditiveContext,
+  readCallerEntryTypeFromPayload,
+  readObservationKindFromPayload,
+  readPrivacyTierFromPayload,
+  rejectNonOperatorLocalPrivacy,
+  resolveFeedbackEntryType,
+  validateOtherQualifierRequired,
+} from "./feedback-source-normalization.js";
 
 // [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]
 // Normalizes operational feedback, groups duplicates, and gates non-canonical LEAP proposal creation on human review.
@@ -42,7 +51,14 @@ export interface OperationalFeedbackEntry extends Omit<FeedbackEntry, "context">
   promotion_status: PromotionStatus;
 }
 
-export type FeedbackPromotionError = "InvalidSource" | "MissingEvidence" | "DuplicateConflict" | "ReviewRequired" | "CanonicalWriteAttempt";
+export type FeedbackPromotionError =
+  | "InvalidSource"
+  | "MissingEvidence"
+  | "DuplicateConflict"
+  | "ReviewRequired"
+  | "CanonicalWriteAttempt"
+  | "InvalidPrivacyTier"
+  | "MissingOtherQualifier";
 
 function stableGroup(source: Pick<OperationalSource, "source_type" | "affected_feature" | "title" | "description" | "evidence_links" | "proposed_req">): string {
   return `fg-${crypto
@@ -59,10 +75,10 @@ function stableGroup(source: Pick<OperationalSource, "source_type" | "affected_f
     .slice(0, 16)}`;
 }
 
-// [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] — Maps supported operational sources to the existing feedback entry contract.
+// [IMPL-TIED_FEEDBACK_PROMOTION] [IMPL-KAIZEN_SOURCE_NORMALIZATION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [ARCH-KAIZEN_SOURCE_NORMALIZATION] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] [REQ-KAIZEN-SOURCE-NORMALIZATION] — Maps supported operational sources to the existing feedback entry contract.
 export function normalizeOperationalSource(
   source: OperationalSource,
-): { ok: true; entry: OperationalFeedbackEntry } | { ok: false; error: "InvalidSource" | "MissingEvidence" } {
+): { ok: true; entry: OperationalFeedbackEntry } | { ok: false; error: FeedbackPromotionError } {
   if (
     !OPERATIONAL_SOURCE_TYPES.includes(source.source_type) ||
     !source.source_id?.trim() ||
@@ -77,16 +93,37 @@ export function normalizeOperationalSource(
   if (!Array.isArray(source.evidence_links) || source.evidence_links.length === 0 || source.evidence_links.some((link) => !link.trim())) {
     return { ok: false, error: "MissingEvidence" };
   }
+  const privacyCheck = rejectNonOperatorLocalPrivacy(readPrivacyTierFromPayload(source.payload));
+  if (!privacyCheck.ok) return { ok: false, error: privacyCheck.error };
+
+  const observationKind = readObservationKindFromPayload(source.payload, source.source_type);
+  const otherCheck = validateOtherQualifierRequired(observationKind, source.payload);
+  if (!otherCheck.ok) return { ok: false, error: otherCheck.error };
+
+  const callerType = readCallerEntryTypeFromPayload(source.payload);
+  const { entryType } = resolveFeedbackEntryType({
+    callerEntryType: callerType,
+    observationKind,
+  });
+  const additive = extractAdditiveContext(source.payload);
+  const context: Record<string, unknown> = {
+    ...(source.payload ?? {}),
+    observation_kind: observationKind,
+    ...(additive.workflow ? { workflow: additive.workflow } : {}),
+    ...(additive.workaround ? { workaround: additive.workaround } : {}),
+    ...(additive.baseline_ref ? { baseline_ref: additive.baseline_ref } : {}),
+  };
+
   const id = `fb-op-${crypto.createHash("sha256").update(`${source.source_type}:${source.source_id}`).digest("hex").slice(0, 16)}`;
   return {
     ok: true,
     entry: {
       id,
-      type: source.source_type === "user_report" ? "feature_request" : "bug_report",
+      type: entryType,
       title: source.title.trim(),
       description: source.description.trim(),
       created_at: source.occurred_at,
-      context: source.payload,
+      context,
       source_type: source.source_type,
       source_id: source.source_id.trim(),
       affected_feature: source.affected_feature.trim(),

@@ -484,6 +484,15 @@ ARCH-KAIZEN_OBSERVATION_CAPTURE:
   source_index: "architecture-decisions.yaml"
   status: "Planned"
   type: "ARCH"
+ARCH-KAIZEN_SOURCE_NORMALIZATION:
+  cross_references:
+    - "IMPL-KAIZEN_SOURCE_NORMALIZATION"
+    - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+  description: "Shared inference for observation kind and feedback entry type"
+  detail_file: "architecture-decisions/ARCH-KAIZEN_SOURCE_NORMALIZATION.yaml"
+  name: "Kaizen source normalization architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
 ARCH-LEAP_PROPOSAL_QUEUE:
   cross_references:
     - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
@@ -1548,6 +1557,15 @@ IMPL-KAIZEN_OBSERVATION_CAPTURE:
   source_index: "implementation-decisions.yaml"
   status: "Planned"
   type: "IMPL"
+IMPL-KAIZEN_SOURCE_NORMALIZATION:
+  cross_references:
+    - "ARCH-KAIZEN_SOURCE_NORMALIZATION"
+    - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+  description: "feedback-source-normalization.ts shared by capture and operational adapters"
+  detail_file: "implementation-decisions/IMPL-KAIZEN_SOURCE_NORMALIZATION.yaml"
+  name: "Kaizen source normalization implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
 IMPL-MCP_FEEDBACK_TOOLS:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
@@ -3054,6 +3072,15 @@ REQ-KAIZEN-OBSERVATION-CAPTURE:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-KAIZEN-SOURCE-NORMALIZATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-KAIZEN_SOURCE_NORMALIZATION"
+    - "IMPL-KAIZEN_SOURCE_NORMALIZATION"
+  detail_file: "requirements/REQ-KAIZEN-SOURCE-NORMALIZATION.yaml"
+  name: "Kaizen Phase 2 source normalization"
+  source_index: "requirements.yaml"
+  status: "Active"
 REQ-LEAP_PROPOSAL_QUEUE:
   category: "Functional"
   cross_references:

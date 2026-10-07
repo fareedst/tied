@@ -8,6 +8,8 @@
 
 **Planning decisions (Kaizen loop):** Sponsor-approved costly choices for the first behavior-changing phases (local append/export only, default **privacy tier** `operator_local`, three **feedback entry types** plus additive **observation kind**) are recorded in [`../../docs/tied-kaizen-feedback-loop-plan.md`](../../docs/tied-kaizen-feedback-loop-plan.md) (2026-10-07). They bound REQ scope; they are not store fields.
 
+**Program execution checklist:** Central orchestrator for Phases 0–7 after batch approval—resume, phase status, and sponsor-interrupt boundaries—at [`../working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml`](../working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml). Each phase still uses a per-REQ copy of the agent implementation checklist under `working/{REQ-TOKEN}/`.
+
 Privacy tier, idempotency key, proof boundary, client cohort, and denominator fingerprint stay in [`quality-assurance.md`](quality-assurance.md). LEAP proposal status values stay in [`leap-proposal-queue.md`](leap-proposal-queue.md): `pending`, `approved`, `rejected`, `applied`.
 
 ---
@@ -76,7 +78,8 @@ Normative background for the **Kaizen loop** label. Planning detail: [`../../doc
 | Feedback analysis | analysis digest | `(proposed) feedback-analysis.v1` | `(proposed) analysis export` | `(proposed) feedback analyzer` |
 | Entry identifier | feedback id | `entries[].id` | returned by add | `fb-{timestamp}-{random}` pattern |
 | Entry type | feedback entry type | `entries[].type` | add param `type` | `FeedbackType` |
-| Observation kind | observation kind | `(proposed) entries[].observation_kind` | `(proposed) capture param` | `(proposed) ObservationKind` |
+| Observation kind | observation kind | `(proposed) entries[].observation_kind` | capture / operational adapter param | `(proposed) ObservationKind` |
+| Source normalization | kind and entry type inference | `context.observation_kind`, workflow/workaround/baseline_ref on operational context | `tied_feedback_operational_add`, `tied_feedback_capture_observation` | `resolveFeedbackEntryType`, `defaultObservationKindFromSourceType` in `feedback-source-normalization.ts` |
 | Promotion status | promotion status | `entries[].promotion_status` | promotion result | `PromotionStatus` |
 | Local capture receipt | receipt | returned by capture; not a second store | `tied_feedback_capture_observation` | `buildCaptureReceipt()` |
 | Optional context | context | `entries[].context` | add param `context` | `Record<string, unknown>` |
