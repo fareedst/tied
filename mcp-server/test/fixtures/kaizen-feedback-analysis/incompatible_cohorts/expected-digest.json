@@ -1,0 +1,10 @@
+{
+  "inputs": {
+    "entries": 1,
+    "excluded": 1
+  },
+  "excluded": [
+    { "id": "fb-inc-2", "reason": "incompatible_cohort" }
+  ],
+  "diagnostics": { "error": "IncompatibleCohort" }
+}

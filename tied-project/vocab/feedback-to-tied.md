@@ -75,7 +75,7 @@ Normative background for the **Kaizen loop** label. Planning detail: [`../../doc
 | Capture observation | point-of-work capture | `entries[]` append + receipt | `tied_feedback_capture_observation` | `captureOperationalObservation()` |
 | Export feedback | export report | markdown or json string | `tied_feedback_export` | export helpers in `feedback.ts` |
 | Immediate feedback event | point-of-work event | `(proposed) feedback-event.v1` | `(proposed) event transport` | `(proposed) observation adapter` |
-| Feedback analysis | analysis digest | `(proposed) feedback-analysis.v1` | `(proposed) analysis export` | `(proposed) feedback analyzer` |
+| Feedback analysis | analysis digest | `feedback-analysis.v1` | `(proposed) tied_feedback_analysis_digest` | `buildFeedbackDigest` in `feedback-analysis.ts` |
 | Entry identifier | feedback id | `entries[].id` | returned by add | `fb-{timestamp}-{random}` pattern |
 | Entry type | feedback entry type | `entries[].type` | add param `type` | `FeedbackType` |
 | Observation kind | observation kind | `(proposed) entries[].observation_kind` | capture / operational adapter param | `(proposed) ObservationKind` |

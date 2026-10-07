@@ -1,0 +1,18 @@
+▶ feedback-analysis golden fixtures [REQ-KAIZEN-FEEDBACK-ANALYSIS]
+  ✔ fixture: recurrence_duplicate_groups (9.84175ms)
+  ✔ fixture: denominator_mismatch (1.032375ms)
+  ✔ fixture: missing_evidence_manifest (0.743375ms)
+  ✔ fixture: incompatible_cohorts (1.044541ms)
+  ✔ fixture: empty_analysis_window (0.855708ms)
+  ✔ fixture: identical_rerun_identity (0.678ms)
+  ✔ fixture: identical_rerun_identity — stable projection_hash across two runs (1.008125ms)
+  ✔ store immutability — feedback.yaml unchanged after buildFeedbackDigest (0.686458ms)
+✔ feedback-analysis golden fixtures [REQ-KAIZEN-FEEDBACK-ANALYSIS] (16.4815ms)
+ℹ tests 8
+ℹ suites 1
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.7025

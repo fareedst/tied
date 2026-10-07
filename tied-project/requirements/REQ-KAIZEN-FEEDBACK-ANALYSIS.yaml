@@ -1,0 +1,54 @@
+REQ-KAIZEN-FEEDBACK-ANALYSIS:
+  REQ-KAIZEN-FEEDBACK-ANALYSIS:
+    REQ-KAIZEN-FEEDBACK-ANALYSIS:
+      category: "Functional"
+      name: "Kaizen Phase 4 feedback analysis"
+      non_goals:
+        - "Canonical REQ/ARCH/IMPL YAML writes from analysis"
+        - "Review bridge or LEAP proposal creation (Phase 5)"
+        - "Upstream transport or notification (Phase 3 deferred)"
+      priority: "P1"
+      rationale:
+        benefits:
+          - "Denominator-aware trends with explicit unknown and excluded counts"
+          - "Deterministic grouping and recurrence without overwriting observations"
+          - "Versioned machine-readable digest for human review"
+        problems_solved:
+          - "Feedback store growth without analysis projection"
+          - "Silent comparison across incompatible client cohorts"
+        why: "Phase 4 read-only feedback analysis prepares review-ready digests from local entries and operational evidence."
+      related_requirements:
+        depends_on:
+          - "REQ-FEEDBACK_TO_TIED"
+          - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+          - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+          - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+        related_to:
+          - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+        supersedes: []
+      satisfaction_criteria:
+        - criterion: "Digest cites promotion_status and LEAP status from existing boundary; no new stored accepted or deferred status on entries"
+          metric: "Digest schema tests; no YAML writer in analysis module"
+        - criterion: "Digest projection is read-only; feedback.yaml entries unchanged after analysis run"
+          metric: "feedback-analysis.test.ts immutability assertions"
+        - criterion: "Empty or missing metric values surface as unknown, not_measured, or not_applicable"
+          metric: "Fixture assertions on impact and inputs blocks"
+        - criterion: "Golden fixtures cover recurrence, denominator mismatch, missing evidence, incompatible cohorts, empty window, identical rerun identity"
+          metric: "feedback-analysis.test.ts fixture suite"
+        - criterion: "Only compatible schema and denominator_fingerprint cohorts compare; incompatible inputs excluded with reason"
+          metric: "Unit tests for compatibility_key and denominator_fingerprint gates"
+      status: "Planned"
+      traceability:
+        architecture:
+          - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+        code_annotations:
+          - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+          - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+        implementation:
+          - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+        tests:
+          - "feedback-analysis.test.ts"
+      validation_criteria:
+        - coverage: "Read-only digest projection and golden fixture matrix"
+          method: "Unit tests; optional MCP export binding at build-plan"

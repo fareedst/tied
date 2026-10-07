@@ -1,0 +1,23 @@
+{
+  "schema_version": "feedback-analysis.v1",
+  "inputs": {
+    "entries": 3,
+    "excluded": 0,
+    "unknown": 0
+  },
+  "observations": {
+    "by_kind": {
+      "waiting": 2,
+      "rework": 1
+    },
+    "recurrence": [
+      { "duplicate_group": "dg-wait-ci", "count": 2, "numerator_label": "observations_in_dg-wait-ci" },
+      { "duplicate_group": "dg-rework-lint", "count": 1, "numerator_label": "observations_in_dg-rework-lint" }
+    ]
+  },
+  "impact": {
+    "numerator": 3,
+    "denominator": "not_measured",
+    "unknown": 0
+  }
+}

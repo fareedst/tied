@@ -1,0 +1,40 @@
+{
+  "entries": [
+    {
+      "id": "fb-rec-1",
+      "type": "methodology_improvement",
+      "title": "Waiting on CI",
+      "description": "Queue blocked merge.",
+      "created_at": "2026-06-01T10:00:00.000Z",
+      "occurred_at": "2026-06-01T10:00:00.000Z",
+      "privacy_tier": "operator_local",
+      "capture_schema_version": "feedback-capture.v1",
+      "duplicate_group": "dg-wait-ci",
+      "context": { "observation_kind": "waiting" }
+    },
+    {
+      "id": "fb-rec-2",
+      "type": "methodology_improvement",
+      "title": "Waiting on CI again",
+      "description": "Same queue delay.",
+      "created_at": "2026-06-02T11:00:00.000Z",
+      "occurred_at": "2026-06-02T11:00:00.000Z",
+      "privacy_tier": "operator_local",
+      "capture_schema_version": "feedback-capture.v1",
+      "duplicate_group": "dg-wait-ci",
+      "context": { "observation_kind": "waiting" }
+    },
+    {
+      "id": "fb-rec-3",
+      "type": "methodology_improvement",
+      "title": "Rework lint fixes",
+      "description": "Fixed lint twice.",
+      "created_at": "2026-06-03T12:00:00.000Z",
+      "occurred_at": "2026-06-03T12:00:00.000Z",
+      "privacy_tier": "operator_local",
+      "capture_schema_version": "feedback-capture.v1",
+      "duplicate_group": "dg-rework-lint",
+      "context": { "observation_kind": "rework" }
+    }
+  ]
+}

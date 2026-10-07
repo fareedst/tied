@@ -1,0 +1,46 @@
+IMPL-KAIZEN_FEEDBACK_ANALYSIS:
+  IMPL-KAIZEN_FEEDBACK_ANALYSIS:
+    IMPL-KAIZEN_FEEDBACK_ANALYSIS:
+      code_locations:
+        files:
+          - description: "Golden fixture contract tests"
+            path: "mcp-server/src/feedback-analysis.test.ts"
+          - description: "Phase 4 exit evidence fixtures"
+            path: "mcp-server/test/fixtures/kaizen-feedback-analysis/"
+          - description: "Read-only digest projection"
+            path: "mcp-server/src/feedback-analysis.ts"
+      cross_references:
+        architecture:
+          - "ARCH-FEEDBACK_STORAGE"
+          - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+        implementation:
+          - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+          - "IMPL-KAIZEN_SOURCE_NORMALIZATION"
+          - "IMPL-TIED_FEEDBACK_PROMOTION"
+        requirements:
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      essence_pseudocode_path: "implementation-decisions/IMPL-KAIZEN_FEEDBACK_ANALYSIS-pseudocode.md"
+      implementation_approach:
+        details:
+          - "buildFeedbackDigest as primary entry; projectFeedbackDigestMarkdown for human briefing"
+          - "Golden fixtures under mcp-server/test/fixtures/kaizen-feedback-analysis/"
+          - "Optional MCP tied_feedback_analysis_digest at build-plan composition layer"
+        summary: "feedback-analysis.ts loads entries read-only, selects cohort-compatible window, groups duplicates, computes denominators, emits feedback-analysis.v1 digest with stable projection hash."
+      name: "Kaizen feedback analysis implementation"
+      status: "Planned"
+      traceability:
+        architecture:
+          - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+        code_annotations:
+          - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+          - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+        requirements:
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+        tests:
+          - "feedback-analysis.test.ts"
+  metadata:
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-10-07"
+      reason: "Phase 4 plan-new-feature pseudo-code"

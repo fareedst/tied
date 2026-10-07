@@ -1,0 +1,6 @@
+{
+  "diagnostics": { "error": "DenominatorMismatch" },
+  "impact": {
+    "mismatch_reason": "denominator_mismatch"
+  }
+}

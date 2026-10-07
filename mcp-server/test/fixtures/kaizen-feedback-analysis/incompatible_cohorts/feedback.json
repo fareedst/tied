@@ -1,0 +1,27 @@
+{
+  "entries": [
+    {
+      "id": "fb-inc-1",
+      "type": "methodology_improvement",
+      "title": "Local capture",
+      "description": "Operator local tier.",
+      "created_at": "2026-05-01T08:00:00.000Z",
+      "occurred_at": "2026-05-01T08:00:00.000Z",
+      "privacy_tier": "operator_local",
+      "capture_schema_version": "feedback-capture.v1",
+      "duplicate_group": "dg-local",
+      "context": { "observation_kind": "waiting" }
+    },
+    {
+      "id": "fb-inc-2",
+      "type": "methodology_improvement",
+      "title": "Legacy unknown tier",
+      "description": "Missing privacy tier defaults unknown key.",
+      "created_at": "2026-05-02T08:00:00.000Z",
+      "occurred_at": "2026-05-02T08:00:00.000Z",
+      "capture_schema_version": "feedback-capture.v1",
+      "duplicate_group": "dg-legacy",
+      "context": { "observation_kind": "other" }
+    }
+  ]
+}

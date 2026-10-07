@@ -1,0 +1,29 @@
+ARCH-KAIZEN_FEEDBACK_ANALYSIS:
+  ARCH-KAIZEN_FEEDBACK_ANALYSIS:
+    ARCH-KAIZEN_FEEDBACK_ANALYSIS:
+      constraints:
+        - constraint: "Analysis must not append, update, or delete feedback.yaml entries"
+        - constraint: "Analysis must not write project REQ/ARCH/IMPL YAML or invoke canonical LEAP apply"
+        - constraint: "Missing numerators or denominators use unknown, not_measured, or not_applicable"
+        - constraint: "Only cohorts with matching compatibility_key and denominator_fingerprint may be aggregated"
+      cross_references:
+        architecture:
+          - "ARCH-FEEDBACK_STORAGE"
+          - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+        implementation:
+          - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+        requirements:
+          - "REQ-FEEDBACK_TO_TIED"
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+          - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+          - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+          - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+      name: "Kaizen feedback analysis architecture"
+      rationale:
+        decisions:
+          - "feedback-analysis.ts as pure read-only projector over loaded entries"
+          - "feedback-analysis.v1 schema with compatibility_key and denominator_fingerprint"
+          - "Markdown briefing derived from same canonical digest object"
+          - "Reuse duplicate_group from promotion for recurrence; do not rewrite entry text"
+        why: "Isolate read-only digest projection from capture, normalization, and promotion boundaries."
+      status: "Planned"

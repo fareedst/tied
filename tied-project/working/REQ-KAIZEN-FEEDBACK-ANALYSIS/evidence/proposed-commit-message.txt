@@ -1,0 +1,3 @@
+Add Kaizen Phase 4 feedback analysis (REQ-KAIZEN-FEEDBACK-ANALYSIS).
+
+Read-only feedback digest projection with denominators, cohort compatibility, and golden fixtures; integrated close_out with zero blocking envelope gaps.

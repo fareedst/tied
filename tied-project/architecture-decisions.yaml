@@ -1172,6 +1172,21 @@ ARCH-GOAGENT-YAML-STEPS:
     requirements:
       - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
+ARCH-KAIZEN_FEEDBACK_ANALYSIS:
+  cross_references:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    implementation:
+      - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+    requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+      - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+  detail_file: "architecture-decisions/ARCH-KAIZEN_FEEDBACK_ANALYSIS.yaml"
+  name: "Kaizen feedback analysis architecture"
+  status: "Planned"
 ARCH-KAIZEN_OBSERVATION_CAPTURE:
   cross_references:
     implementation:

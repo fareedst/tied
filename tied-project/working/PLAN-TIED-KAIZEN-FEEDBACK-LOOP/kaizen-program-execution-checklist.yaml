@@ -8,7 +8,7 @@
 # checklist-tracker.yaml (request PLAN-TIED-KAIZEN-FEEDBACK-LOOP, doc-only pass).
 
 schema_version: kaizen-program-execution.v1
-last_updated: "2026-10-07T16:00:00-07:00"
+last_updated: "2026-10-07T16:45:00-07:00"
 
 program:
   label: Kaizen loop capability (Phases 0–7)
@@ -100,8 +100,61 @@ resume_protocol:
     - id: R7
       action: On child traceable-commit complete, set phase.status complete and persist phase close_out evidence path
 
-current_step: P4-initiate
+current_step: P5-initiate
 # Updated by executor when a phase closes or pauses
+
+# Next agent: read agent_handoff first, then resume_protocol R1–R6 for Phase 5.
+agent_handoff:
+  updated_at: "2026-10-07T16:45:00-07:00"
+  intent: >
+    Continue Kaizen program without pausing for closed hinges. Phase 3 transport
+    stays deferred until a future explicit hinge reopen. Phase 4 feedback analysis
+    is closed; run Phase 5 review bridge through plan-close-out then advance to
+    Phases 6–7 while sponsor stop criteria do not trigger.
+  next_session:
+    program_step: P5-initiate
+    phase_id: 5
+    suggested_req_token: REQ-KAIZEN-REVIEW-BRIDGE
+    workflow_sequence:
+      - CALL plan-new-feature — scope Phase 5 only; mint REQ/ARCH/IMPL; copy checklist template to working/{REQ-TOKEN}/
+      - refine-plan — only if Phase 5 CITDP/plan gaps remain before RED
+      - build-plan — TDD through verification-gate; depth_tier integrated (default)
+      - plan-close-out — evidence sync, close_out gates, CHANGELOG, git commit (Phase 5 paths only)
+    linked_plan_anchor: docs/tied-kaizen-feedback-loop-plan.md — Implement § Later phases, Phase 4 row and exit evidence
+    preload:
+      - tied-project/vocab/feedback-to-tied.md
+      - tied-project/vocab/leap-proposal-queue.md
+      - tied-project/vocab/quality-assurance.md
+    do_not:
+      - Re-ask 2026-10-07 costly choices or transport policy (see sponsor_confirmations)
+      - Start Phase 3 without hinge reopen on CITDP
+      - Restart Phase 1–2 unless LEAP drift requires it
+    may_proceed_without_ask:
+      - Phases 4 → 5 → 6 → 7 in strict order after each phase close_out commit
+      - integrated depth and advisory gate_policy per phase_defaults
+  sponsor_confirmations:
+    transport_hinge_2026_10_07_followup:
+      decision: keep_closed_finish_phases_4_through_7
+      recorded_at: "2026-10-07"
+      meaning: >
+        Finish analysis, review bridge, outcome loop, and pilot on local/export
+        only; reopen upstream transport only when sponsor names recipient and channel.
+      evidence: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sponsor-decisions-evidence.md
+  implementation_commits:
+    phase_1:
+      git: 229ab6b
+      req_token: REQ-KAIZEN-OBSERVATION-CAPTURE
+      close_out: tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/closeout-run-close-out-gates-final.json
+    phase_2:
+      git: c4cc94f
+      req_token: REQ-KAIZEN-SOURCE-NORMALIZATION
+      close_out: tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/closeout-run-close-out-gates-final.json
+    phase_4:
+      git: 77612bd
+      req_token: REQ-KAIZEN-FEEDBACK-ANALYSIS
+      close_out: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json
+  optional_doc_commit:
+    note: Plan/vocab bundle still uncommitted per evidence/commit-pass-handoff.md — not blocking Phase 4
 
 phase_defaults:
   depth_tier: integrated
@@ -128,6 +181,8 @@ phases:
     module: Observation capture
     status: complete
     req_token: REQ-KAIZEN-OBSERVATION-CAPTURE
+    proof_commit: 229ab6b
+    close_out_evidence: tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/closeout-run-close-out-gates-final.json
     suggested_req_prefix: REQ-KAIZEN-OBSERVATION-CAPTURE
     phase_tracker: tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/checklist-tracker.yaml
     owns:
@@ -158,6 +213,8 @@ phases:
     module: Source normalization
     status: complete
     req_token: REQ-KAIZEN-SOURCE-NORMALIZATION
+    proof_commit: c4cc94f
+    close_out_evidence: tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/closeout-run-close-out-gates-final.json
     suggested_req_prefix: REQ-KAIZEN-SOURCE-NORMALIZATION
     phase_tracker: tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/checklist-tracker.yaml
     refine_plan:
@@ -188,6 +245,7 @@ phases:
   - phase_id: 3
     module: Outbox and notification policy
     status: deferred_until_sponsor_hinge
+    sponsor_decision_2026_10_07: "keep_closed — proceed Phases 4–7; do not CALL plan-new-feature for Phase 3"
     req_token: null
     suggested_req_prefix: REQ-KAIZEN-FEEDBACK-OUTBOX
     phase_tracker: null
@@ -209,10 +267,13 @@ phases:
 
   - phase_id: 4
     module: Feedback analysis
-    status: pending
-    req_token: null
+    status: complete
+    next_for_agent: false
+    req_token: REQ-KAIZEN-FEEDBACK-ANALYSIS
+    proof_commit: 77612bd
+    close_out_evidence: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json
     suggested_req_prefix: REQ-KAIZEN-FEEDBACK-ANALYSIS
-    phase_tracker: null
+    phase_tracker: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/checklist-tracker.yaml
     owns:
       - read-only grouping
       - denominators
@@ -224,18 +285,19 @@ phases:
       - golden fixtures recurrence denominator mismatch missing evidence incompatible cohorts empty window rerun identity
     program_steps:
       - id: P4-initiate
-        disposition: pending
+        disposition: complete
         action: CALL plan-new-feature scope Phase 4 only
       - id: P4-implement
-        disposition: pending
+        disposition: complete
         action: LOOP agent checklist through verification-gate
       - id: P4-close
-        disposition: pending
+        disposition: complete
         action: CALL plan-close-out; current_step P5-initiate
 
   - phase_id: 5
     module: Review bridge
     status: pending
+    next_for_agent: true
     req_token: null
     suggested_req_prefix: REQ-KAIZEN-REVIEW-BRIDGE
     phase_tracker: null
@@ -321,6 +383,6 @@ recovery:
 execution_evidence:
   program_started_at: null
   program_closed_at: null
-  phases_completed: [0]
-  last_session_handoff: null
+  phases_completed: [0, 1, 2, 4]
+  last_session_handoff: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/agent-resume-handoff.md
   envelope_path: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/kaizen-program-envelope.v1.json

@@ -1,0 +1,164 @@
+CITDP-REQ-KAIZEN-FEEDBACK-ANALYSIS:
+  record_identity:
+    title: Kaizen Phase 4 feedback analysis
+    change_request_id: REQ-KAIZEN-FEEDBACK-ANALYSIS
+    author: plan-new-feature
+    date: '2026-10-07'
+    record_status: implementation
+    batch: kaizen-phase-4
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: not_measured
+    implementation_depth_tier: integrated
+  change_definition:
+    current_behavior: >
+      Feedback entries append locally via capture and operational adapters with
+      promotion grouping helpers, but there is no deterministic read-only digest
+      projection with denominators, cohort compatibility, or versioned
+      feedback-analysis.v1 export for human review.
+    desired_behavior: >
+      A feedback-analysis module loads entries read-only, selects compatible
+      cohorts by compatibility_key and denominator_fingerprint, groups
+      duplicates for recurrence, computes named numerators and denominators with
+      explicit unknown and excluded counts, cites promotion_status and LEAP
+      status from existing boundaries, and emits a stable-projection digest plus
+      optional Markdown briefing without mutating feedback.yaml or project TIED
+      YAML.
+    unchanged_behavior:
+      - tied_feedback_add, tied_feedback_capture_observation, tied_feedback_export
+      - groupDuplicateFeedback and createReviewedLeapProposal review boundary
+      - Phase 1–2 capture and normalization contracts
+      - No upstream transport (Phase 3 deferred)
+    non_goals:
+      - Canonical REQ/ARCH/IMPL writes from analysis
+      - Review bridge or automatic LEAP proposal creation (Phase 5)
+      - Outcome loop baselines (Phase 6)
+      - Universal scoring or hidden rate without denominators
+    success_criteria:
+      - >-
+        Golden fixtures pass for recurrence, denominator mismatch, missing
+        evidence, incompatible cohorts, empty window, identical rerun identity
+      - >-
+        Immutability tests prove feedback store unchanged after digest build
+      - >-
+        Digest schema_version feedback-analysis.v1 matches linked plan contract
+  impact_analysis:
+    modules:
+      - feedback-analysis (proposed)
+      - feedback (read load path)
+      - feedback-promotion (read-only status helpers)
+    files:
+      - mcp-server/src/feedback-analysis.ts (proposed)
+      - mcp-server/src/feedback-analysis.test.ts (proposed)
+      - mcp-server/test/fixtures/kaizen-feedback-analysis/ (proposed)
+      - mcp-server/src/feedback.ts (read-only consumer)
+      - mcp-server/src/feedback-promotion.ts (status cite only)
+    depends_on:
+      - REQ-KAIZEN-OBSERVATION-CAPTURE
+      - REQ-KAIZEN-SOURCE-NORMALIZATION
+      - REQ-FEEDBACK_TO_TIED
+      - REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION
+    tags:
+      - kaizen-phase-4
+      - integrated
+    tied_tokens_new:
+      - REQ-KAIZEN-FEEDBACK-ANALYSIS
+      - ARCH-KAIZEN_FEEDBACK_ANALYSIS
+      - IMPL-KAIZEN_FEEDBACK_ANALYSIS
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: integrated
+      gate_policy: advisory
+      assurance_profile: baseline-functional
+      research_profile: integrated-agent
+      prior_depth_tier: null
+      depth_selected_at: '2026-10-07T16:30:00-07:00'
+      eligibility_triggers_matched:
+        - external input via loaded feedback entries
+        - persistence of digest artifact as export (not store mutation)
+      rationale: >
+        Phase 4 reads persisted feedback and projects analysis output; default
+        integrated depth per kaizen program phase_defaults; advisory gate until
+        build-plan verification.
+      counterexamples:
+        - Analysis appends facets that overwrite observation title or description
+        - Incompatible cohorts merged into one rate without exclusion
+        - Digest implies canonical methodology approval
+        - Denominator mismatch silently normalized to 100%
+        - Second promotion mechanism introduced inside analysis
+      falsification_questions:
+        - Do immutability tests hash feedback.yaml before and after run?
+        - Does empty window fixture return explicit not_measured/unknown counts?
+        - Is projection_hash stable across identical reruns?
+      close_out_inquiry_waiver:
+        owner: sponsor
+        expiry: '2026-12-31'
+        rationale: >
+          Phase 4 verification run kaizen-p4-verify-20261007 covers feedback-analysis
+          fixtures and immutability; separate close_out adversarial inquiry receipt not
+          collected under advisory gate_policy.
+        approval: kaizen-program-pre-approved-batch-2026-10-07
+        referenced_verification_run_id: kaizen-p4-verify-20261007
+      disconfirming_observations:
+        - Any write path from feedback-analysis.ts to feedback.yaml or tied-project YAML
+        - RED tests green before implementation lands (build-plan scope)
+      evidence_references:
+        - docs/tied-kaizen-feedback-loop-plan.md
+        - tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/CITDP-REQ-KAIZEN-FEEDBACK-ANALYSIS.yaml
+        - tied-project/implementation-decisions/IMPL-KAIZEN_FEEDBACK_ANALYSIS-pseudocode.md
+        - tied-bundle/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/adversarial-inquiry/phase-pre_implementation/obligation-report.json
+    risks:
+      - id: RISK-KFA-001
+        description: Analysis mutates source entries or promotion_status
+        severity: High
+        likelihood: Medium
+        mitigation: Read-only module boundary; immutability tests in fixture suite
+      - id: RISK-KFA-002
+        description: Cohort compatibility mis-keyed causing false recurrence
+        severity: Medium
+        likelihood: Medium
+        mitigation: Golden incompatible_cohort fixture; explicit excluded reasons
+      - id: RISK-KFA-003
+        description: Denominator mismatch hidden as comparable trend
+        severity: High
+        likelihood: Medium
+        mitigation: denominator_mismatch fixture; impact.mismatch_reason in digest
+      - id: RISK-KFA-004
+        description: Digest conflates review decision with new stored promotion enum
+        severity: Medium
+        likelihood: Low
+        mitigation: Schema tests; reuse reportPromotionStatus read-only
+  test_strategy:
+    summary: >
+      Unit tests with golden JSON fixtures under
+      mcp-server/test/fixtures/kaizen-feedback-analysis/; RED at build-plan;
+      optional MCP export composition in build-plan; no E2E.
+    fixtures:
+      - name: recurrence_duplicate_groups
+        theme: duplicate_group recurrence counts and stable group ids
+      - name: denominator_mismatch
+        theme: manifest fingerprint differs from cohort; mismatch_reason set
+      - name: missing_evidence_manifest
+        theme: manifest_ref absent; excluded or unknown inputs counted
+      - name: incompatible_cohorts
+        theme: mixed compatibility_key; excluded with incompatible_cohort
+      - name: empty_analysis_window
+        theme: zero entries in window; explicit empty counts not_measured
+      - name: identical_rerun_identity
+        theme: two runs same inputs yield identical projection_hash
+      - name: store_immutability
+        theme: feedback.yaml hash unchanged after buildFeedbackDigest
+    module_validation:
+      - module: feedback-analysis
+        boundary: read-only projection
+        tests: feedback-analysis.test.ts
+    proof_boundary: Does not prove product correctness or authorize canonical TIED changes
+  completion_criteria:
+    activation:
+      run_id: kaizen-p4-preimpl-20261007
+      phase: pre_implementation
+      request_token: REQ-KAIZEN-FEEDBACK-ANALYSIS
+    persist_policy: Persist to tied-project/citdp/ at close-out after build-plan
+    focused_tests: feedback-analysis.test.ts
+    lint: npx tsc -b in mcp-server
+    verification: tied_validate_consistency; integrated close_out gates after build-plan

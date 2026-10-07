@@ -1247,6 +1247,41 @@ REQ-GOAGENT-YAML-STEP-RENDER:
       method: "Manual fixture comparison"
     - coverage: "tools/agentstream/checklist/checklist_test.go"
       method: "Unit tests"
+REQ-KAIZEN-FEEDBACK-ANALYSIS:
+  category: "Functional"
+  detail_file: "requirements/REQ-KAIZEN-FEEDBACK-ANALYSIS.yaml"
+  name: "Kaizen Phase 4 feedback analysis"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic rerun identity"
+      - "Named counts and recurrence for review"
+      - "Versioned feedback-analysis.v1 digest"
+    problems_solved:
+      - "Incomparable cohorts merged silently"
+      - "Noisy issue dumps without grouping"
+    why: "Phase 4 projects read-only feedback digests with deterministic grouping, denominators, and cohort compatibility without mutating source entries or canonical TIED YAML."
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+      - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    related_to:
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+    code_annotations:
+      - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+      - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+    implementation:
+      - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+    tests:
+      - "feedback-analysis.test.ts"
 REQ-KAIZEN-OBSERVATION-CAPTURE:
   category: "Functional"
   detail_file: "requirements/REQ-KAIZEN-OBSERVATION-CAPTURE.yaml"

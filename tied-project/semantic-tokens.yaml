@@ -473,6 +473,15 @@ ARCH-GOAGENT-YAML-STEPS:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-KAIZEN_FEEDBACK_ANALYSIS:
+  cross_references:
+    - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+    - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+  detail_file: "architecture-decisions/ARCH-KAIZEN_FEEDBACK_ANALYSIS.yaml"
+  name: "Kaizen feedback analysis architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Planned"
+  type: "ARCH"
 ARCH-KAIZEN_OBSERVATION_CAPTURE:
   cross_references:
     - "ARCH-FEEDBACK_STORAGE"
@@ -1546,6 +1555,15 @@ IMPL-GOAGENT-TEXT-SOURCES:
   name: "text package prompt file and argv turns"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-KAIZEN_FEEDBACK_ANALYSIS:
+  cross_references:
+    - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+    - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+  detail_file: "implementation-decisions/IMPL-KAIZEN_FEEDBACK_ANALYSIS.yaml"
+  name: "Kaizen feedback analysis implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
   type: "IMPL"
 IMPL-KAIZEN_OBSERVATION_CAPTURE:
   cross_references:
@@ -3059,6 +3077,16 @@ REQ-GOAGENT-YAML-STEP-RENDER:
   name: "TDD loop and lead checklist YAML step renderers"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-KAIZEN-FEEDBACK-ANALYSIS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+    - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+  detail_file: "requirements/REQ-KAIZEN-FEEDBACK-ANALYSIS.yaml"
+  name: "Kaizen Phase 4 feedback analysis"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"
 REQ-KAIZEN-OBSERVATION-CAPTURE:
   category: "Functional"

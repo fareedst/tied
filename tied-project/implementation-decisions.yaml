@@ -1232,6 +1232,19 @@ IMPL-GOAGENT-TEXT-SOURCES:
       - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
       - "text_test.go"
+IMPL-KAIZEN_FEEDBACK_ANALYSIS:
+  cross_references:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+    implementation:
+      - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+    requirements:
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+  detail_file: "implementation-decisions/IMPL-KAIZEN_FEEDBACK_ANALYSIS.yaml"
+  name: "Kaizen feedback analysis implementation"
+  status: "Active"
 IMPL-KAIZEN_OBSERVATION_CAPTURE:
   cross_references:
     architecture:

@@ -1,0 +1,12 @@
+{
+  "inputs": {
+    "entries": 0,
+    "excluded": 1
+  },
+  "impact": {
+    "numerator": "unknown",
+    "denominator": "not_measured",
+    "unknown": 1
+  },
+  "diagnostics": { "error": "EmptyWindow" }
+}
