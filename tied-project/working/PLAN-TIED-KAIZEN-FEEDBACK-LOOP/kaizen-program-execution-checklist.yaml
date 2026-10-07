@@ -150,7 +150,7 @@ agent_handoff:
       req_token: REQ-KAIZEN-SOURCE-NORMALIZATION
       close_out: tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/closeout-run-close-out-gates-final.json
     phase_4:
-      git: 77612bd
+      git: 2fbc3f2
       req_token: REQ-KAIZEN-FEEDBACK-ANALYSIS
       close_out: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json
   optional_doc_commit:
@@ -270,7 +270,7 @@ phases:
     status: complete
     next_for_agent: false
     req_token: REQ-KAIZEN-FEEDBACK-ANALYSIS
-    proof_commit: 77612bd
+    proof_commit: 2fbc3f2
     close_out_evidence: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json
     suggested_req_prefix: REQ-KAIZEN-FEEDBACK-ANALYSIS
     phase_tracker: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/checklist-tracker.yaml

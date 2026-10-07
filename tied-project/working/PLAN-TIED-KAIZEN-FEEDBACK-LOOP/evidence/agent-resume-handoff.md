@@ -11,7 +11,7 @@
 | 1 | complete | REQ-KAIZEN-OBSERVATION-CAPTURE | 229ab6b | `working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/closeout-run-close-out-gates-final.json` |
 | 2 | complete | REQ-KAIZEN-SOURCE-NORMALIZATION | c4cc94f | `working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/closeout-run-close-out-gates-final.json` |
 | 3 | **deferred** | — | — | Transport hinge **closed** (see below) |
-| 4 | complete | REQ-KAIZEN-FEEDBACK-ANALYSIS | 77612bd | `working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json` |
+| 4 | complete | REQ-KAIZEN-FEEDBACK-ANALYSIS | 2fbc3f2 | `working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json` |
 
 ## Sponsor — transport hinge (2026-10-07 follow-up)
 
