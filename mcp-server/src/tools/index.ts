@@ -43,6 +43,10 @@ import {
   buildReportSnippet,
   type FeedbackType,
 } from "../feedback.js";
+import {
+  captureOperationalObservation,
+  normalizeCaptureInput,
+} from "../feedback-capture.js";
 import { renameSemanticToken } from "../token-rename.js";
 import { parseRecordOrYaml } from "../parse-content.js";
 import {
@@ -1122,6 +1126,59 @@ export const allTools = [
       const output =
         args.format === "json" ? exportJson(data.entries) : exportMarkdown(data.entries);
       return textContent(output);
+    },
+  },
+  {
+    name: "tied_feedback_capture_observation",
+    config: {
+      description:
+        "Point-of-work capture for Kaizen Phase 1: operator_local privacy, idempotent append, structured receipt. Does not replace tied_feedback_add.",
+      inputSchema: z.object({
+        event: z
+          .record(z.unknown())
+          .optional()
+          .describe("feedback-event.v1-shaped object (client, observation, evidence, delivery)"),
+        privacy_tier: z.string().optional(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        idempotency_key: z.string().optional(),
+        occurred_at: z.string().optional(),
+        observation_kind: z.string().optional(),
+        entry_type: z
+          .enum(["feature_request", "bug_report", "methodology_improvement"])
+          .optional(),
+        evidence_refs: z.array(z.string()).optional(),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      event?: Record<string, unknown>;
+      privacy_tier?: string;
+      title?: string;
+      description?: string;
+      idempotency_key?: string;
+      occurred_at?: string;
+      observation_kind?: string;
+      entry_type?: FeedbackType;
+      evidence_refs?: string[];
+      base_path?: string;
+    }) => {
+      const raw: Record<string, unknown> = args.event ?? {
+        privacy_tier: args.privacy_tier,
+        title: args.title,
+        description: args.description,
+        idempotency_key: args.idempotency_key,
+        occurred_at: args.occurred_at,
+        observation_kind: args.observation_kind,
+        entry_type: args.entry_type,
+        evidence_refs: args.evidence_refs,
+      };
+      const normalized = normalizeCaptureInput(raw);
+      if ("error" in normalized) {
+        return textContent(JSON.stringify({ ok: false, error: normalized.error }, null, 2));
+      }
+      const result = captureOperationalObservation(normalized, args.base_path);
+      return textContent(JSON.stringify(result, null, 2));
     },
   },
   {

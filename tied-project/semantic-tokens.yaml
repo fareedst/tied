@@ -473,6 +473,17 @@ ARCH-GOAGENT-YAML-STEPS:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-KAIZEN_OBSERVATION_CAPTURE:
+  cross_references:
+    - "ARCH-FEEDBACK_STORAGE"
+    - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+    - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+  description: "Capture module beside feedback storage; receipt without promotion fields"
+  detail_file: "architecture-decisions/ARCH-KAIZEN_OBSERVATION_CAPTURE.yaml"
+  name: "Kaizen observation capture architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Planned"
+  type: "ARCH"
 ARCH-LEAP_PROPOSAL_QUEUE:
   cross_references:
     - "IMPL-MCP_LEAP_PROPOSAL_QUEUE"
@@ -1526,6 +1537,16 @@ IMPL-GOAGENT-TEXT-SOURCES:
   name: "text package prompt file and argv turns"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-KAIZEN_OBSERVATION_CAPTURE:
+  cross_references:
+    - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+    - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+  description: "feedback-capture.ts and tied_feedback_capture_observation MCP tool"
+  detail_file: "implementation-decisions/IMPL-KAIZEN_OBSERVATION_CAPTURE.yaml"
+  name: "Kaizen observation capture implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
   type: "IMPL"
 IMPL-MCP_FEEDBACK_TOOLS:
   cross_references:
@@ -3018,6 +3039,18 @@ REQ-GOAGENT-YAML-STEP-RENDER:
     last_updated: "2026-03-30"
     registered: "2026-03-27"
   name: "TDD loop and lead checklist YAML step renderers"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-KAIZEN-OBSERVATION-CAPTURE:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEEDBACK_STORAGE"
+    - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+    - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+  description: "Local capture with receipt, idempotency, operator_local privacy"
+  detail_file: "requirements/REQ-KAIZEN-OBSERVATION-CAPTURE.yaml"
+  name: "Kaizen Phase 1 point-of-work observation capture"
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"

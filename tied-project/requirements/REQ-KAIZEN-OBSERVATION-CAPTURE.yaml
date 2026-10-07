@@ -1,0 +1,45 @@
+REQ-KAIZEN-OBSERVATION-CAPTURE:
+  REQ-KAIZEN-OBSERVATION-CAPTURE:
+    category: "Functional"
+    name: "Kaizen Phase 1 point-of-work observation capture"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Additive capture envelope in entry context"
+        - "Deterministic retry via idempotency key"
+        - "Receipt distinct from promotion status"
+      problems_solved:
+        - "No capture-time privacy tier gate for operator_local-only policy"
+        - "No idempotency key or structured receipt on feedback append"
+      why: "Phase 1 of the Kaizen loop needs local point-of-work capture with receipt and idempotency at operator_local privacy without upstream transport."
+    related_requirements:
+      depends_on:
+        - "REQ-FEEDBACK_TO_TIED"
+      related_to:
+        - "REQ-FEEDBACK_TO_TIED"
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "MCP tied_feedback_capture_observation appends one entry per idempotency key and returns a receipt"
+        metric: "Unit and composition tests green"
+      - criterion: "Only privacy tier operator_local is accepted at capture"
+        metric: "Tests reject shareable_hashed and forbidden_export"
+      - criterion: "Receipt excludes promotion status and LEAP fields"
+        metric: "Tests assert absence"
+      - criterion: "tied_feedback_add behavior unchanged"
+        metric: "feedback.test.ts regression green"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+      code_annotations:
+        - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+        - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+        - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+      implementation:
+        - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+      tests:
+        - "batch-5-mcp.test.ts"
+        - "feedback-capture.test.ts"
+    validation_criteria:
+      - coverage: "Capture module and MCP binding"
+        method: "Unit and composition tests"

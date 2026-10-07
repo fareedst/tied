@@ -1172,6 +1172,15 @@ ARCH-GOAGENT-YAML-STEPS:
     requirements:
       - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
+ARCH-KAIZEN_OBSERVATION_CAPTURE:
+  cross_references:
+    implementation:
+      - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+    requirements:
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+  detail_file: "architecture-decisions/ARCH-KAIZEN_OBSERVATION_CAPTURE.yaml"
+  name: "Kaizen observation capture architecture"
+  status: "Active"
 ARCH-LEAP_PROPOSAL_QUEUE:
   alternatives_considered:
     - cons:

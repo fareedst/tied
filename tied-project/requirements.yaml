@@ -1247,6 +1247,25 @@ REQ-GOAGENT-YAML-STEP-RENDER:
       method: "Manual fixture comparison"
     - coverage: "tools/agentstream/checklist/checklist_test.go"
       method: "Unit tests"
+REQ-KAIZEN-OBSERVATION-CAPTURE:
+  category: "Functional"
+  detail_file: "requirements/REQ-KAIZEN-OBSERVATION-CAPTURE.yaml"
+  name: "Kaizen Phase 1 point-of-work observation capture"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+    implementation:
+      - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+    tests:
+      - "feedback-capture.test.ts"
 REQ-LEAP_PROPOSAL_QUEUE:
   category: "Functional"
   detail_file: "requirements/REQ-LEAP_PROPOSAL_QUEUE.yaml"

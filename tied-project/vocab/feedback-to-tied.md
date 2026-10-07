@@ -41,6 +41,7 @@ Privacy tier, idempotency key, proof boundary, client cohort, and denominator fi
 | **innovation** | Kaizen (alone) | Changes what is possible (major redesign, new capability). Distinct from the **Kaizen loop**, which learns how to run the resulting system better; innovation may establish a new **baseline** |
 | **tied_feedback_add** | feedback add | MCP tool name |
 | **tied_feedback_export** | feedback dump | MCP tool name |
+| **tied_feedback_capture_observation** | capture observation | MCP tool name (Kaizen Phase 1 point-of-work capture) |
 
 ---
 
@@ -69,6 +70,7 @@ Normative background for the **Kaizen loop** label. Planning detail: [`../../doc
 |---------|--------------|---------|----------|-------------|
 | Feedback store | feedback file | `tied/feedback.yaml` | — | `getFeedbackPath()` |
 | Add feedback | add entry | `entries[]` append | `tied_feedback_add` | `appendEntry()` |
+| Capture observation | point-of-work capture | `entries[]` append + receipt | `tied_feedback_capture_observation` | `captureOperationalObservation()` |
 | Export feedback | export report | markdown or json string | `tied_feedback_export` | export helpers in `feedback.ts` |
 | Immediate feedback event | point-of-work event | `(proposed) feedback-event.v1` | `(proposed) event transport` | `(proposed) observation adapter` |
 | Feedback analysis | analysis digest | `(proposed) feedback-analysis.v1` | `(proposed) analysis export` | `(proposed) feedback analyzer` |
@@ -76,7 +78,7 @@ Normative background for the **Kaizen loop** label. Planning detail: [`../../doc
 | Entry type | feedback entry type | `entries[].type` | add param `type` | `FeedbackType` |
 | Observation kind | observation kind | `(proposed) entries[].observation_kind` | `(proposed) capture param` | `(proposed) ObservationKind` |
 | Promotion status | promotion status | `entries[].promotion_status` | promotion result | `PromotionStatus` |
-| Local capture receipt | receipt | returned by capture; not a second store | `(proposed) capture result` | `(proposed) capture receipt` |
+| Local capture receipt | receipt | returned by capture; not a second store | `tied_feedback_capture_observation` | `buildCaptureReceipt()` |
 | Optional context | context | `entries[].context` | add param `context` | `Record<string, unknown>` |
 
 ---
@@ -106,6 +108,7 @@ entries:
 |------|---------|
 | `tied_feedback_add` | Validate and append one entry; returns `ok`, `id`, `created_at` |
 | `tied_feedback_export` | Format all entries as markdown or json |
+| `tied_feedback_capture_observation` | Phase 1 point-of-work capture with `operator_local` privacy, idempotency, and structured **receipt** |
 
 ---
 

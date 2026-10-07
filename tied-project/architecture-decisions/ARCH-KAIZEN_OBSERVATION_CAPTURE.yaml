@@ -1,0 +1,22 @@
+ARCH-KAIZEN_OBSERVATION_CAPTURE:
+  ARCH-KAIZEN_OBSERVATION_CAPTURE:
+    constraints:
+      - constraint: "No upstream transport or notification delivery in capture path"
+      - constraint: "Phase 1 accepts only operator_local privacy tier at capture"
+      - constraint: "Receipt must not expose promotion_status or LEAP status names"
+    cross_references:
+      architecture:
+        - "ARCH-FEEDBACK_STORAGE"
+      implementation:
+        - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+      requirements:
+        - "REQ-FEEDBACK_TO_TIED"
+        - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+    name: "Kaizen observation capture architecture"
+    rationale:
+      decisions:
+        - "Capture module sits beside feedback.ts; shared load and atomic write"
+        - "Idempotency scoped per TIED base path"
+        - "Receipt is return value only; not a second store"
+      why: "Separate point-of-work capture from legacy append and promotion paths while reusing feedback.yaml storage."
+    status: "Planned"

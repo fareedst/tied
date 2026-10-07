@@ -1,0 +1,74 @@
+CITDP-REQ-KAIZEN-OBSERVATION-CAPTURE:
+  record_identity:
+    title: "Kaizen Phase 1 observation capture"
+    change_request_id: "REQ-KAIZEN-OBSERVATION-CAPTURE"
+    author: "build-plan"
+    date: "2026-10-07"
+    record_status: "closed"
+    batch: "kaizen-phase-1"
+  change_definition:
+    current_behavior: "appendEntry and tied_feedback_add validate type/title/description only; no idempotency, receipt, or capture-time privacy gate."
+    desired_behavior: "tied_feedback_capture_observation performs point-of-work capture with operator_local privacy, idempotent append, structured receipt, additive entry metadata."
+    unchanged_behavior:
+      - "tied_feedback_add and tied_feedback_export semantics"
+      - "normalizeOperationalSource and promotion module"
+    non_goals:
+      - "Upstream transport and notification delivery"
+      - "Observation kind closed-set validation (Phase 2)"
+      - "Kind to entry_type inference (Phase 2)"
+    success_criteria:
+      - "feedback-capture.test.ts contract themes green"
+      - "MCP composition test for tied_feedback_capture_observation"
+      - "feedback.test.ts regression green"
+  impact_analysis:
+    modules:
+      - "feedback-capture"
+    files:
+      - "mcp-server/src/feedback-capture.ts"
+      - "mcp-server/src/feedback-capture.test.ts"
+      - "mcp-server/src/feedback.ts"
+      - "mcp-server/src/tools/index.ts"
+    tags:
+      - "kaizen-phase-1"
+      - "integrated"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      research_profile: "integrated-agent"
+      prior_depth_tier: null
+      depth_selected_at: "2026-10-07T22:30:00-07:00"
+      counterexamples:
+        - "Receipt exposes promotion_status or LEAP status"
+        - "Same idempotency_key creates two entries"
+        - "shareable_hashed tier accepted at capture"
+      disconfirming_observations:
+        - "Unit tests assert receipt field absence and idempotent replay"
+        - "Privacy rejection tests for non-operator_local tiers"
+    risks:
+      - id: "RISK-KOC-001"
+        description: "Capture API conflates receipt with promotion status"
+        severity: "Medium"
+        likelihood: "Medium"
+        mitigation: "Receipt schema and tests exclude promotion fields"
+      - id: "RISK-KOC-002"
+        description: "Wrong TIED_BASE_PATH during MCP writes"
+        severity: "High"
+        likelihood: "Low"
+        mitigation: "tied_config_get_base_path at session start; tests use temp dirs"
+  test_strategy:
+    summary: "Unit tests for capture module; MCP composition; no E2E."
+    module_validation:
+      - module: "feedback-capture"
+        boundary: "local append + receipt only"
+        tests: "feedback-capture.test.ts"
+  completion_criteria:
+    activation:
+      run_id: kaizen-p1-verify-20261007
+      phase: verification
+      request_token: REQ-KAIZEN-OBSERVATION-CAPTURE
+    focused_tests: "feedback-capture.test.ts; feedback.test.ts; batch-5-mcp.test.ts"
+    lint: "npx tsc -b in mcp-server"
+    verification: "tied_validate_consistency; tied_verify with verification gate"
+    persist_policy: "persist CITDP to tied-project/citdp/ on close-out"

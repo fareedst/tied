@@ -1,0 +1,67 @@
+▶ classifyEvidenceRef [IMPL-KAIZEN_OBSERVATION_CAPTURE]
+  ✔ accepts URI and path refs (0.474834ms)
+  ✔ rejects generic prose (0.0465ms)
+✔ classifyEvidenceRef [IMPL-KAIZEN_OBSERVATION_CAPTURE] (1.013458ms)
+▶ captureOperationalObservation valid minimal [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ appends entry and returns receipt without promotion fields (4.084958ms)
+✔ captureOperationalObservation valid minimal [REQ-KAIZEN-OBSERVATION-CAPTURE] (4.14675ms)
+▶ captureOperationalObservation incomplete [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ rejects missing title or description (0.184458ms)
+✔ captureOperationalObservation incomplete [REQ-KAIZEN-OBSERVATION-CAPTURE] (0.238625ms)
+▶ captureOperationalObservation malformed [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ rejects bad privacy tier and entry type (0.33625ms)
+✔ captureOperationalObservation malformed [REQ-KAIZEN-OBSERVATION-CAPTURE] (0.396ms)
+▶ captureOperationalObservation idempotent retry [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ returns one entry and idempotent_replay on retry (1.63875ms)
+✔ captureOperationalObservation idempotent retry [REQ-KAIZEN-OBSERVATION-CAPTURE] (1.709792ms)
+▶ captureOperationalObservation evidence refs [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ partitions validated and rejected refs on receipt (1.403625ms)
+✔ captureOperationalObservation evidence refs [REQ-KAIZEN-OBSERVATION-CAPTURE] (1.454ms)
+▶ captureOperationalObservation persistence [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ survives reload after write (1.126375ms)
+✔ captureOperationalObservation persistence [REQ-KAIZEN-OBSERVATION-CAPTURE] (1.17725ms)
+▶ buildCaptureReceipt [IMPL-KAIZEN_OBSERVATION_CAPTURE]
+  ✔ echoes observation kind or unknown (0.109667ms)
+✔ buildCaptureReceipt [IMPL-KAIZEN_OBSERVATION_CAPTURE] (0.177292ms)
+▶ getFeedbackPath
+  ✔ returns path ending with feedback.yaml under base [ARCH-FEEDBACK_STORAGE] (0.555375ms)
+✔ getFeedbackPath (1.1715ms)
+▶ loadFeedback
+  ✔ returns { entries: [] } when file does not exist [IMPL-MCP_FEEDBACK_TOOLS] (1.130375ms)
+  ✔ loads existing entries from YAML file (1.508292ms)
+  ✔ returns { entries: [] } for invalid or empty file (0.675125ms)
+✔ loadFeedback (3.417417ms)
+▶ appendEntry
+  ✔ creates file and appends entry with id and created_at [REQ-FEEDBACK_TO_TIED] (2.182709ms)
+  ✔ rejects invalid type (0.188916ms)
+  ✔ rejects empty title (0.367958ms)
+  ✔ rejects empty description (0.290917ms)
+  ✔ includes optional context in entry (1.095041ms)
+✔ appendEntry (4.305167ms)
+▶ exportMarkdown
+  ✔ formats entries with title, description, type [REQ-FEEDBACK_TO_TIED] (0.134625ms)
+  ✔ returns placeholder when entries empty (0.042167ms)
+✔ exportMarkdown (0.62625ms)
+▶ exportJson
+  ✔ returns valid JSON array of entries (0.0415ms)
+✔ exportJson (0.06ms)
+▶ buildReportSnippet
+  ✔ includes type, title, description and optional context (0.057208ms)
+✔ buildReportSnippet (0.074833ms)
+▶ Batch 5 MCP composition [REQ-TIED_RESEARCH_RECORDS]
+  ✔ binds research records to the external dataset boundary (1.180041ms)
+✔ Batch 5 MCP composition [REQ-TIED_RESEARCH_RECORDS] (1.6815ms)
+▶ Batch 5 kaizen capture MCP composition [REQ-KAIZEN-OBSERVATION-CAPTURE]
+  ✔ binds tied_feedback_capture_observation to local append and receipt (2.877375ms)
+✔ Batch 5 kaizen capture MCP composition [REQ-KAIZEN-OBSERVATION-CAPTURE] (2.925959ms)
+▶ Batch 5 feedback MCP composition [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]
+  ✔ binds source capture and requires review before proposal creation (1.19775ms)
+✔ Batch 5 feedback MCP composition [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] (1.251584ms)
+ℹ tests 25
+ℹ suites 17
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 548.646667

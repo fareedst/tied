@@ -19,6 +19,14 @@ export interface FeedbackEntry {
   description: string;
   context?: Record<string, unknown>;
   created_at: string;
+  /** [REQ-KAIZEN-OBSERVATION-CAPTURE] Stable retry key for point-of-work capture */
+  idempotency_key?: string;
+  /** [REQ-KAIZEN-OBSERVATION-CAPTURE] When the observation occurred (optional) */
+  occurred_at?: string;
+  /** [REQ-KAIZEN-OBSERVATION-CAPTURE] Privacy tier recorded at capture */
+  privacy_tier?: string;
+  /** [REQ-KAIZEN-OBSERVATION-CAPTURE] Capture envelope schema version */
+  capture_schema_version?: string;
   source_type?: "incident" | "metric" | "test_failure" | "user_report";
   source_id?: string;
   affected_feature?: string;

@@ -1232,6 +1232,16 @@ IMPL-GOAGENT-TEXT-SOURCES:
       - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
       - "text_test.go"
+IMPL-KAIZEN_OBSERVATION_CAPTURE:
+  cross_references:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+    requirements:
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+  detail_file: "implementation-decisions/IMPL-KAIZEN_OBSERVATION_CAPTURE.yaml"
+  name: "Kaizen observation capture implementation"
+  status: "Active"
 IMPL-MCP_FEEDBACK_TOOLS:
   code_locations:
     files:

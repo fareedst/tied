@@ -41,6 +41,31 @@ describe("Batch 5 MCP composition [REQ-TIED_RESEARCH_RECORDS]", () => {
   });
 });
 
+// [IMPL-KAIZEN_OBSERVATION_CAPTURE] [ARCH-KAIZEN_OBSERVATION_CAPTURE] [REQ-KAIZEN-OBSERVATION-CAPTURE]
+describe("Batch 5 kaizen capture MCP composition [REQ-KAIZEN-OBSERVATION-CAPTURE]", () => {
+  it("binds tied_feedback_capture_observation to local append and receipt", async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "batch-5-kaizen-"));
+    try {
+      const response = await tool("tied_feedback_capture_observation").handler({
+        privacy_tier: "operator_local",
+        title: "Blocked on export",
+        description: "Export step failed validation.",
+        idempotency_key: "compose-key-1",
+        base_path: root,
+      } as never);
+      const parsed = JSON.parse(response.content[0].text) as {
+        ok: boolean;
+        receipt?: { feedback_id: string; notification_disposition: string };
+      };
+      assert.equal(parsed.ok, true);
+      assert.ok(parsed.receipt?.feedback_id);
+      assert.equal(parsed.receipt?.notification_disposition, "not_configured");
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+});
+
 // [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] — Composition binds operational feedback capture to existing feedback and reviewed LEAP queue surfaces.
 describe("Batch 5 feedback MCP composition [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]", () => {
   it("binds source capture and requires review before proposal creation", async () => {

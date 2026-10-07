@@ -1,0 +1,37 @@
+IMPL-KAIZEN_OBSERVATION_CAPTURE:
+  IMPL-KAIZEN_OBSERVATION_CAPTURE:
+    code_locations:
+      files:
+        - description: "Capture, idempotency, receipt"
+          path: "mcp-server/src/feedback-capture.ts"
+        - description: "Phase 1 contract tests"
+          path: "mcp-server/src/feedback-capture.test.ts"
+        - description: "tied_feedback_capture_observation handler"
+          path: "mcp-server/src/tools/index.ts"
+    cross_references:
+      architecture:
+        - "ARCH-FEEDBACK_STORAGE"
+        - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+      requirements:
+        - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+    implementation_approach:
+      details:
+        - "BUILD_CAPTURE_RECEIPT maps entry without promotion fields"
+        - "CAPTURE_OPERATIONAL_OBSERVATION validates privacy, dedupes, appends, returns receipt"
+        - "FIND_ENTRY_BY_IDEMPOTENCY_KEY scans entries"
+      summary: "feedback-capture.ts module; MCP tool tied_feedback_capture_observation; additive FeedbackEntry fields in feedback.ts"
+    name: "Kaizen observation capture implementation"
+    status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+      - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+    code_annotations:
+      - "ARCH-KAIZEN_OBSERVATION_CAPTURE"
+      - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+    requirements:
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+    tests:
+      - "batch-5-mcp.test.ts"
+      - "feedback-capture.test.ts"

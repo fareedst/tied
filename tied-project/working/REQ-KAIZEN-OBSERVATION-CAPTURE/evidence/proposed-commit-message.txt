@@ -1,0 +1,3 @@
+Add Kaizen Phase 1 observation capture (REQ-KAIZEN-OBSERVATION-CAPTURE).
+
+Introduces tied_feedback_capture_observation with operator_local privacy, idempotent append, and structured receipt; closes integrated verification and program Phase 1.
