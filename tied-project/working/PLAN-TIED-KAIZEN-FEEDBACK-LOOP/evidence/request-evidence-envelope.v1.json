@@ -1,0 +1,256 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-07T22:14:10.038Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "PLAN-TIED-KAIZEN-FEEDBACK-LOOP",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "tied-bundle/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/gates/pre_implementation-2026-10-07T22-00-04-432Z.json",
+      "content_hash": "sha256:ac951b20019de68f4d34ff65291392d9aa670d8ccb2e354f3342fcdf1015fcea",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "tied-bundle/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/gates/verification-2026-10-07T22-00-04-829Z.json",
+      "content_hash": "sha256:97a1eb36b1f788ffef7f3e8be68ccf56032a892f6fcbc59c76eff5d4b51827d7",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:30b7c38a40f252ce3aee6ddb73b01f6dbd96fc9825efc433a8fba33eb68e6835",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:d027862a54d1d0ff3b50e74c43913fe60cccae39f6a2b76158bd6e473afeb5d9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:aa68dca386973effe24641aa4b079a84e1e5423fb4d763294dbd69c474ca7b1e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/commit-pass-handoff.md",
+      "content_hash": "sha256:de5e0c790c0a865de1b1358347a8d52c58992198ecaac4468fa2a1fa2beab5a7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/doc-only-not-applicable-evidence.md",
+      "content_hash": "sha256:492144fa5fdc4678652ca6464511f09cac6f5c096091facce46faa750c35304a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:d9c2d01e9bb0e888b36fbb5634d35b6c4900bc39c63d457f9a6c4a2fd47d730e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:d0c4c0c16aaa77495f0fd4f43eea62ec758f6f06d408dcde3d2d895499d4184a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/kaizen-article-xlate-evidence.md",
+      "content_hash": "sha256:3fdabb9d0f0f7b1be57fe90a282e79f7d9b6cac7f35b3ff5ae385d7af63c45d3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:33d7a907e41a047a61f583eb4c81ea39481df165d22efcc167b8494aef672b4b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/promotion-status-stack-note.md",
+      "content_hash": "sha256:1d2ad4852f9332f4f94a213df72c54c03226707314d530ab62cfd27ac1ac59e7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:94a9f5e6e8ef7a9ded5df1b519daca1d9519088c84cde715e2807d545a7b9305",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:16573396908c8cc4c648c3446755d1b3b368df63d82cfc014b79f4d072d658ed",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sponsor-decisions-evidence.md",
+      "content_hash": "sha256:bd3b5cf74d88d594a4b441d0208890ad45be1258d956fd3f1c242c6d1ec8162a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sponsor-kaizen-principles-evidence.md",
+      "content_hash": "sha256:123e6683e758e4208456cc67a17fcaff59e14e5e1c6d5e4702cfc20fab207740",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:cf9dfe8af51c7a2ba00649996983649fbce37cd46f59a8526177f98db7a53634",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:b4c9442e7a5c9940bf4e0a58bd093b0b52cac9bf34d5c89e2bdf4672503e1079",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:2ec4fbc87a0152d5683efaddd3d1241fbe290d6d995a6649e11192a43ff4b207",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:752646413c3cd8fb1060dc2a220b2f19d6a9a322b26cdec188f2740cfb50993f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:189f11b41cb9d2aa2fa66fb4c79b2dddcc66dee662cf1d3f582cde2542f6b0df",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

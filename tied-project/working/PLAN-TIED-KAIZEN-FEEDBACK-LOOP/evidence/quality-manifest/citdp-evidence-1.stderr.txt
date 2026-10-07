@@ -1,0 +1,1 @@
+bash: line 1: Read-only: command not found

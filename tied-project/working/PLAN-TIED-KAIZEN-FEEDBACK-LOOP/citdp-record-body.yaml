@@ -1,0 +1,114 @@
+  change_definition:
+    current_behavior: "The linked Kaizen plan used review words that collide with promotion status and LEAP status, did not record depth inheritance or the open sponsor choices, and lacked sponsor-article distinctions for correction versus countermeasure and innovation versus Kaizen loop until the supplemental principles pass."
+    desired_behavior: "The linked plan, feedback glossary, Tracker, and documentation CITDP use one naming bridge, align Sponsor Kaizen principles with correction and innovation terms, clarify digest review outcome labels, and record the three costly choices as dated sponsor decisions."
+    non_goals:
+      - "Application code, automated tests, or runtime behavior changes"
+      - "Editing feedback.ts, feedback-promotion.ts, or requirement status"
+      - "Git stage, commit, or push"
+      - "New project REQ, ARCH, or IMPL records or semantic tokens"
+      - "Selecting a transport, retention period, or fourth feedback entry type"
+    success_criteria:
+      - "Phase 1 is recorded as unable to inherit this pass's minimal depth."
+      - "Receipt and digest sketches avoid promotion or LEAP accepted wording collisions."
+      - "Sponsor Kaizen principles, correction, and innovation appear in the linked plan and feedback-to-tied.md without new storage enums."
+      - "The CITDP is persisted through citdp_record_write with tied_tokens_new empty."
+      - "The linked plan and feedback-to-tied.md use observation kind, promotion status, and LEAP status without a second status enum."
+      - "The three costly choices are recorded as 2026-10-07 sponsor decisions: local append and export only, privacy tier operator_local, and three feedback entry types plus observation kind."
+    unchanged_behavior: "tied_feedback_add, tied_feedback_export, normalizeOperationalSource, duplicate grouping, and reviewed proposal creation keep their current behavior."
+  evidence:
+    commands:
+      - "Read-only comparison of the linked plan with feedback.ts and feedback-promotion.ts"
+      - "TIED MCP tied_checklist_gate_validate at pre_implementation and verification"
+      - "TIED MCP tied_validate_consistency"
+    manifest_reference: "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/request-evidence-envelope.v1.json"
+    proof_boundaries:
+      - "docs_vocab_and_citdp_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code is in scope. Neighborhood read included IMPL-MCP_FEEDBACK_TOOLS and IMPL-TIED_FEEDBACK_PROMOTION."
+    modules_or_boundaries: "Linked plan, feedback glossary, committed working folder, documentation CITDP. Runtime feedback modules are read-only."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION remains Planned while its ARCH and IMPL are Active. Status reconciliation is deferred to a later verification-gated pass."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-KAIZEN-FEEDBACK-LOOP"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "not_measured"
+    recorded_at: "2026-10-07"
+    title: "TIED Kaizen feedback loop plan refinement"
+  risk_analysis:
+    abuse_cases: []
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "A coherent plan can still describe a loop the repository does not implement."
+        - "Active promotion code can coexist with a requirement record whose status is still Planned."
+        - "Recorded sponsor decisions can still be read as authorization to implement Phase 1."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any edit under mcp-server/src/feedback.ts or feedback-promotion.ts in this pass."
+        - "Any new project REQ, ARCH, or IMPL token created by this pass."
+        - "Any sentence that treats accepted or deferred as a stored promotion status."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/tied-kaizen-feedback-loop-plan.md"
+        - "tied-project/vocab/feedback-to-tied.md"
+        - "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/kaizen-article-xlate-evidence.md"
+        - "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/promotion-status-stack-note.md"
+        - "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/risk-assessment-evidence.md"
+        - "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sponsor-kaizen-principles-evidence.md"
+      falsification_questions:
+        - "Does every new storage word in the exchange sketches match promotion status, LEAP status, or an explicitly proposed field?"
+        - "Does the Implement section forbid inheriting depth_tier minimal into Phase 1?"
+        - "Does the vocabulary avoid using workaround as the name of a countermeasure?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "This pass edits a planning document and a glossary. It does not accept external input, authenticate, open a network transport, or persist observations. Phase 1 of the future capability matches external input and persistence and must select depth again."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Read-only plan, glossary, and TIED consistency checks"
+        evidence_method: "Committed process evidence plus machine validation"
+        limitation: "Does not prove the feedback loop, runtime behavior, privacy enforcement, or product correctness."
+        owner: "agent"
+        rationale: "The deliverable is a refined plan, glossary rows, a Tracker, and a CITDP record."
+        result: "pass"
+        risk: "Collapsed status names or inherited minimal depth"
+        threshold: "No new REQ/ARCH/IMPL tokens; no blocking TIED consistency errors; costly choices recorded as dated sponsor decisions"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: false
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-07"
+      owner: "next plan-new-feature session"
+      summary: "A later session can still start implementation from the narrative without reselecting depth. The three costly choices are recorded and still do not authorize Phase 1."
+    risks:
+      - "Recorded sponsor decisions could be treated as implementation authorization."
+      - "Review words in the plan could be implemented as a second promotion status."
+      - "This pass's minimal depth could be copied into Phase 1."
+    scenarios:
+      - "Depth inheritance into a persistence and external-input change"
+      - "Documentation-only proof boundary"
+      - "Name collision between digest review status and promotion status"
+  sponsor_decisions:
+    feedback_entry_type_enum: "three_types_plus_observation_kind"
+    privacy_tier_default: "operator_local"
+    recorded_at: "2026-10-07"
+    summary: "Sponsor approved local append and export only, privacy tier operator_local until a named owner and expiry exist for shareable_hashed, and three feedback entry types with observation kind beside them."
+    upstream_transport: "local_append_and_export_only"
+  test_strategy:
+    matrix_notes: "Static documentation checks for this pass. The future phase matrix is in the linked plan and is not executed here."
+    summary: "Verify naming alignment, empty token delta, and TIED consistency. Do not add application tests in this pass."
