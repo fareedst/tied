@@ -2,7 +2,7 @@
 
 Request: `PLAN-TIED-KAIZEN-FEEDBACK-LOOP`
 
-Advisory classification only. `.gitignore` was not edited. Nothing was staged or committed.
+**2026-10-08:** Added `mcp-server/.gitignore` entry `tied-project/`; removed ephemeral `mcp-server/tied-project/` tree from wrong-root MCP runs. Prior rows below remain valid for `tied-bundle/working/`.
 
 | Path | Class | Git treatment |
 |---|---|---|
