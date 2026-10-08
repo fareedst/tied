@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "outcome": "regressed",
+  "regression_routing_required": true,
+  "regression_route": "feedback_analysis",
+  "observation_group": "dg-checkout-latency",
+  "entry_id": "fb-outcome-lead",
+  "baseline_ref": "baseline://cm-checkout-latency",
+  "requirements_yaml_unchanged": true
+}

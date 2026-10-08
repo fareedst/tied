@@ -1232,6 +1232,15 @@ IMPL-GOAGENT-TEXT-SOURCES:
       - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
       - "text_test.go"
+IMPL-KAIZEN-OUTCOME-LOOP:
+  cross_references:
+    architecture:
+      - "ARCH-KAIZEN-OUTCOME-LOOP"
+    requirements:
+      - "REQ-KAIZEN-OUTCOME-LOOP"
+  detail_file: "implementation-decisions/IMPL-KAIZEN-OUTCOME-LOOP.yaml"
+  name: "Kaizen outcome loop implementation"
+  status: "Active"
 IMPL-KAIZEN-REVIEW-BRIDGE:
   cross_references:
     architecture:

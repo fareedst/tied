@@ -1,0 +1,98 @@
+{
+  "graph": {
+    "projectId": "stdd-kaizen-p6",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-OUTCOME-LOOP#no-canonical-reopen",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-p6",
+          "sourceRevision": "p6-src"
+        },
+        "architectureConstraintIds": ["arch-p6-no-reopen"]
+      },
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-OUTCOME-LOOP#baseline-required",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-p6b",
+          "sourceRevision": "p6-src"
+        },
+        "architectureConstraintIds": ["arch-p6-baseline"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-p6-no-reopen",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+        ]
+      },
+      {
+        "id": "arch-p6-baseline",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+          "kind": "block",
+          "name": "RUN_OUTCOME_LOOP",
+          "derivation": "content",
+          "revision": "block-rev-p6",
+          "sourceRevision": "p6-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+          "kind": "block",
+          "name": "RESOLVE_BASELINE_FOR_ENTRY",
+          "derivation": "content",
+          "revision": "block-rev-p6b",
+          "sourceRevision": "p6-src"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-p6",
+    "specification": [
+      {
+        "id": "p6-spec-no-reopen",
+        "kind": "behavior",
+        "value": "Outcome loop never reopens or mutates canonical REQ/ARCH/IMPL YAML status.",
+        "order": 1
+      },
+      {
+        "id": "p6-spec-baseline",
+        "kind": "behavior",
+        "value": "Measured outcomes without baseline fail with MissingBaseline before feedback.yaml write.",
+        "order": 2
+      },
+      {
+        "id": "p6-spec-regression",
+        "kind": "behavior",
+        "value": "Regressed outcome returns analysis routing facet only.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": []
+  },
+  "scope": [
+    "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+    "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+  "phase": "pre_implementation",
+  "run_id": "kaizen-p6-preimpl-20261007"
+}

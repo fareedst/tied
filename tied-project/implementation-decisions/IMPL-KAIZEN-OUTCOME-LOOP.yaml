@@ -1,0 +1,39 @@
+IMPL-KAIZEN-OUTCOME-LOOP:
+  IMPL-KAIZEN-OUTCOME-LOOP:
+    code_locations:
+      files:
+        - description: "Baseline, window, outcome persist, regression routing"
+          path: "mcp-server/src/feedback-outcome-loop.ts"
+        - description: "Outcome loop golden fixture tests"
+          path: "mcp-server/src/feedback-outcome-loop.test.ts"
+        - description: "Phase 6 exit evidence fixtures"
+          path: "mcp-server/test/fixtures/kaizen-outcome-loop/"
+    cross_references:
+      architecture:
+        - "ARCH-KAIZEN-OUTCOME-LOOP"
+        - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+      implementation:
+        - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+        - "IMPL-MCP_FEEDBACK_TOOLS"
+      requirements:
+        - "REQ-KAIZEN-OUTCOME-LOOP"
+    essence_pseudocode_path: "implementation-decisions/IMPL-KAIZEN-OUTCOME-LOOP-pseudocode.md"
+    implementation_approach:
+      details:
+        - "Golden fixtures under mcp-server/test/fixtures/kaizen-outcome-loop/"
+        - "Optional build-plan hook to read latest outcome into digest countermeasures"
+        - "RUN_OUTCOME_LOOP as primary entry"
+      summary: "feedback-outcome-loop.ts records outcome observations against baselines within follow-up windows and routes regression to analysis without canonical reopen."
+    name: "Kaizen outcome loop implementation"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-KAIZEN-OUTCOME-LOOP"
+      code_annotations:
+        - "ARCH-KAIZEN-OUTCOME-LOOP"
+        - "IMPL-KAIZEN-OUTCOME-LOOP"
+        - "REQ-KAIZEN-OUTCOME-LOOP"
+      requirements:
+        - "REQ-KAIZEN-OUTCOME-LOOP"
+      tests:
+        - "feedback-outcome-loop.test.ts"

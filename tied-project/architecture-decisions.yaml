@@ -1172,6 +1172,15 @@ ARCH-GOAGENT-YAML-STEPS:
     requirements:
       - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
+ARCH-KAIZEN-OUTCOME-LOOP:
+  cross_references:
+    implementation:
+      - "IMPL-KAIZEN-OUTCOME-LOOP"
+    requirements:
+      - "REQ-KAIZEN-OUTCOME-LOOP"
+  detail_file: "architecture-decisions/ARCH-KAIZEN-OUTCOME-LOOP.yaml"
+  name: "Kaizen outcome loop architecture"
+  status: "Planned"
 ARCH-KAIZEN-REVIEW-BRIDGE:
   cross_references:
     architecture:

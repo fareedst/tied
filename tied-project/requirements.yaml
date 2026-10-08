@@ -1301,6 +1301,19 @@ REQ-KAIZEN-OBSERVATION-CAPTURE:
       - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
     tests:
       - "feedback-capture.test.ts"
+REQ-KAIZEN-OUTCOME-LOOP:
+  category: "Functional"
+  detail_file: "requirements/REQ-KAIZEN-OUTCOME-LOOP.yaml"
+  name: "Kaizen Phase 6 outcome loop"
+  priority: "P1"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-KAIZEN-OUTCOME-LOOP"
+    implementation:
+      - "IMPL-KAIZEN-OUTCOME-LOOP"
+    tests:
+      - "feedback-outcome-loop.test.ts"
 REQ-KAIZEN-REVIEW-BRIDGE:
   category: "Functional"
   detail_file: "requirements/REQ-KAIZEN-REVIEW-BRIDGE.yaml"

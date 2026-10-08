@@ -1,0 +1,118 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "A",
+      "id": "2eadc0c91e09b983",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p6-spec-no-reopen"
+    },
+    {
+      "direction": "A",
+      "id": "7c0adccc39d16eaa",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p6-spec-baseline"
+    },
+    {
+      "direction": "B",
+      "id": "7c9cf048d8cd8779",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p6-spec-regression"
+    },
+    {
+      "direction": "B",
+      "id": "b8f01c136b2513d2",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p6-spec-baseline"
+    },
+    {
+      "direction": "B",
+      "id": "dbda5dbb3089c172",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p6-spec-no-reopen"
+    },
+    {
+      "direction": "A",
+      "id": "df021109ae0bc932",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p6-spec-regression"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-KAIZEN-OUTCOME-LOOP#baseline-required",
+        "kind": "criterion_constraint",
+        "to": "constraint:arch-p6-baseline"
+      },
+      {
+        "from": "REQ-KAIZEN-OUTCOME-LOOP#no-canonical-reopen",
+        "kind": "criterion_constraint",
+        "to": "constraint:arch-p6-no-reopen"
+      },
+      {
+        "from": "constraint:arch-p6-baseline",
+        "kind": "constraint_block",
+        "to": "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002"
+      },
+      {
+        "from": "constraint:arch-p6-no-reopen",
+        "kind": "constraint_block",
+        "to": "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:arch-p6-baseline",
+        "kind": "constraint"
+      },
+      {
+        "id": "constraint:arch-p6-no-reopen",
+        "kind": "constraint"
+      },
+      {
+        "id": "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+        "kind": "block",
+        "revision": "block-rev-p6b"
+      },
+      {
+        "id": "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+        "kind": "block",
+        "revision": "block-rev-p6"
+      },
+      {
+        "id": "REQ-KAIZEN-OUTCOME-LOOP#baseline-required",
+        "kind": "criterion",
+        "revision": "criterion-rev-p6b"
+      },
+      {
+        "id": "REQ-KAIZEN-OUTCOME-LOOP#no-canonical-reopen",
+        "kind": "criterion",
+        "revision": "criterion-rev-p6"
+      }
+    ],
+    "projectId": "stdd-kaizen-p6"
+  },
+  "projectId": "stdd-kaizen-p6",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+    "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+    "project_id": "stdd-kaizen-p6",
+    "run_id": "kaizen-p6-verify-20261007",
+    "phase": "verification",
+    "scope": [
+      "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+      "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+    ],
+    "scope_hash": "215bfd85da16908c909d876909e2dfe5a28ba59094e035e2ead79ea26a688f39",
+    "artifact_hashes": {
+      "obligation-report.json": "1f016341e9ae486fa96bbeed5bd898d4cf2eaca33ee60f1d2294475ad736fe2c",
+      "finding-ledger.jsonl": "9c6fbc4aa18191d96364388dbcf3d8bc81ce560f431aee364b5db5bb2e03aeaf",
+      "gate-result.json": "875cc8616c6bcce45e6a5949dc8721b2ddf3f53270bd05107dc2cff34567bbb9",
+      "evidence-provenance.json": "06afba6329fa1e4171627f72524642d7bb26593e970038a2218ba669e9f2a59b"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+      "project_id": "stdd-kaizen-p6",
+      "run_id": "kaizen-p6-verify-20261007",
+      "phase": "verification",
+      "scope_hash": "215bfd85da16908c909d876909e2dfe5a28ba59094e035e2ead79ea26a688f39",
+      "hash": "1f016341e9ae486fa96bbeed5bd898d4cf2eaca33ee60f1d2294475ad736fe2c",
+      "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+      "project_id": "stdd-kaizen-p6",
+      "run_id": "kaizen-p6-verify-20261007",
+      "phase": "verification",
+      "scope_hash": "215bfd85da16908c909d876909e2dfe5a28ba59094e035e2ead79ea26a688f39",
+      "hash": "9c6fbc4aa18191d96364388dbcf3d8bc81ce560f431aee364b5db5bb2e03aeaf",
+      "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+      "project_id": "stdd-kaizen-p6",
+      "run_id": "kaizen-p6-verify-20261007",
+      "phase": "verification",
+      "scope_hash": "215bfd85da16908c909d876909e2dfe5a28ba59094e035e2ead79ea26a688f39",
+      "hash": "875cc8616c6bcce45e6a5949dc8721b2ddf3f53270bd05107dc2cff34567bbb9",
+      "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+      "project_id": "stdd-kaizen-p6",
+      "run_id": "kaizen-p6-verify-20261007",
+      "phase": "verification",
+      "scope_hash": "215bfd85da16908c909d876909e2dfe5a28ba59094e035e2ead79ea26a688f39",
+      "hash": "06afba6329fa1e4171627f72524642d7bb26593e970038a2218ba669e9f2a59b",
+      "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+    "project_id": "stdd-kaizen-p6",
+    "run_id": "kaizen-p6-verify-20261007",
+    "phase": "verification",
+    "scope": [
+      "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+      "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+    ],
+    "scope_hash": "215bfd85da16908c909d876909e2dfe5a28ba59094e035e2ead79ea26a688f39"
+  },
+  "diagnostics": []
+}

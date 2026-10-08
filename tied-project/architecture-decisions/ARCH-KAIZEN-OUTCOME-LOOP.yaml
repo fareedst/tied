@@ -1,0 +1,24 @@
+ARCH-KAIZEN-OUTCOME-LOOP:
+  ARCH-KAIZEN-OUTCOME-LOOP:
+    constraints:
+      - constraint: "evidence_links must integrity-check against baseline and entry evidence for measured outcomes"
+      - constraint: "follow_up_window bounds observed_at; violations fail closed"
+      - constraint: "Measured outcomes require resolved baseline_ref unless outcome is not_measured with explicit waiver"
+      - constraint: "Outcome observations append only to feedback entry context; no canonical TIED YAML writes"
+      - constraint: "Regression routing targets feedback analysis rerun; must not reopen canonical requirements"
+    cross_references:
+      architecture:
+        - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+      implementation:
+        - "IMPL-KAIZEN-OUTCOME-LOOP"
+      requirements:
+        - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+        - "REQ-KAIZEN-OUTCOME-LOOP"
+    name: "Kaizen outcome loop architecture"
+    rationale:
+      decisions:
+        - "feedback-outcome-loop.ts orchestrates baseline, window, evidence validation, and append-only persist"
+        - "outcome-observation.v1 schema stored under entry.context.outcome_observations"
+        - "Regression returns structured facet for buildFeedbackDigest rerun; separate from LEAP canonical apply"
+      why: "Measure countermeasures against baselines without conflating correction, reopen, or digest projection with canonical intent."
+    status: "Planned"

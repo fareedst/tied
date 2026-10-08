@@ -1,0 +1,17 @@
+{
+  "provenance": {
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "pre_implementation",
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+    "run_id": "kaizen-p6-preimpl-20261007",
+    "scope": [
+      "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+      "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+    ],
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

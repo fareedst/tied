@@ -1,0 +1,9 @@
+{
+  "entry_id": "fb-outcome-lead",
+  "payload": {
+    "entry_id": "fb-outcome-lead",
+    "outcome": "improved",
+    "observed_at": "2026-09-15T12:00:00.000Z",
+    "evidence_links": ["orphan://no-anchor"]
+  }
+}

@@ -1,6 +1,6 @@
 # Agent resume handoff — Kaizen program
 
-**Updated:** 2026-10-07  
+**Updated:** 2026-10-08  
 **Orchestrator:** [`kaizen-program-execution-checklist.yaml`](../kaizen-program-execution-checklist.yaml) (`agent_handoff` block)
 
 ## Completions (do not redo)
@@ -13,21 +13,22 @@
 | 3 | **deferred** | — | — | Transport hinge **closed** (see below) |
 | 4 | complete | REQ-KAIZEN-FEEDBACK-ANALYSIS | b9a092f | `working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json` |
 | 5 | complete | REQ-KAIZEN-REVIEW-BRIDGE | 8437712 | `working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/closeout-run-close-out-gates-final.json` |
+| 6 | complete | REQ-KAIZEN-OUTCOME-LOOP | *(this close-out commit)* | `working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json` |
 
 ## Sponsor — transport hinge (2026-10-07 follow-up)
 
-**Decision:** Keep upstream transport closed; finish **Phases 6–7** on local append + export only. Do **not** start Phase 3 until sponsor records a hinge reopen (recipient + channel on CITDP).
+**Decision:** Keep upstream transport closed; finish **Phase 7** on local append + export only. Do **not** start Phase 3 until sponsor records a hinge reopen (recipient + channel on CITDP).
 
-## Next step — Phase 6 plan-new-feature only (start here)
+## Next step — Phase 7 plan-new-feature (start here)
 
-- **Program step:** `P6-initiate` — **do not run build-plan until REQ/ARCH/IMPL exist**
-- **Suggested REQ:** `REQ-KAIZEN-OUTCOME-LOOP`
-- **Workflow:** **`plan-new-feature`** (Phase 6 only) → later `build-plan` → `plan-close-out`
-- **Verification (Phase 5, closed):** `run_id=kaizen-p5-verify-20261007`; 9/9 `feedback-review-bridge.test.ts`; integrated `close_out` `run_id=kaizen-p5-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**)
+- **Program step:** `P7-initiate` — Phase 6 closed (`kaizen-p6-close-20261007`, verification `kaizen-p6-verify-20261007`, 9/9 tests)
+- **REQ (suggested):** `REQ-KAIZEN-FEEDBACK-PILOT`
+- **Workflow:** **`plan-new-feature`** (Phase 7 only) → later `build-plan` → `plan-close-out`
+- **Do not:** Start Phase 7 `build-plan` in the same session as Phase 6 close-out unless sponsor directs.
 
 ## Run without pausing (unless stop criteria)
 
-After Phase 6 plan-new-feature, continue **build-plan → close-out** for Phase 6, then Phase 7. Skip Phase 3 unless hinge reopen is recorded.
+After Phase 7 plan-new-feature, continue **build-plan → close-out** for Phase 7. Skip Phase 3 unless hinge reopen is recorded.
 
 **Preload:** `feedback-to-tied.md`, `leap-proposal-queue.md`, `quality-assurance.md`  
 **Preflight:** `tied_config_get_base_path` → this repo’s `tied-project/`

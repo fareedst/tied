@@ -1,0 +1,34 @@
+{
+  "runs": [
+    {
+      "entry_id": "fb-outcome-lead",
+      "payload": {
+        "entry_id": "fb-outcome-lead",
+        "outcome": "improved",
+        "observed_at": "2026-09-10T10:00:00.000Z",
+        "evidence_links": ["baseline://cm-checkout-latency"]
+      },
+      "expected": { "ok": true, "outcome": "improved" }
+    },
+    {
+      "entry_id": "fb-outcome-lead",
+      "payload": {
+        "entry_id": "fb-outcome-lead",
+        "outcome": "unchanged",
+        "observed_at": "2026-09-12T11:00:00.000Z",
+        "evidence_links": ["incident://inc-100"]
+      },
+      "expected": { "ok": true, "outcome": "unchanged" }
+    },
+    {
+      "entry_id": "fb-outcome-lead",
+      "payload": {
+        "entry_id": "fb-outcome-lead",
+        "outcome": "not_measured",
+        "observed_at": "2026-09-14T09:00:00.000Z",
+        "not_measured_waiver": true
+      },
+      "expected": { "ok": true, "outcome": "not_measured" }
+    }
+  ]
+}

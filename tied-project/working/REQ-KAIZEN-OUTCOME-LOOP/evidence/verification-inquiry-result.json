@@ -1,0 +1,315 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-kaizen-p6",
+    "scope": [
+      "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+      "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+    ],
+    "graph": {
+      "projectId": "stdd-kaizen-p6",
+      "nodes": [
+        {
+          "id": "constraint:arch-p6-baseline",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-p6-no-reopen",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-p6-outcome-prod",
+          "kind": "evidence",
+          "revision": "p6-src"
+        },
+        {
+          "id": "evidence:loci-p6-outcome-tests",
+          "kind": "evidence",
+          "revision": "p6-src"
+        },
+        {
+          "id": "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+          "kind": "block",
+          "revision": "block-rev-p6b"
+        },
+        {
+          "id": "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+          "kind": "block",
+          "revision": "block-rev-p6"
+        },
+        {
+          "id": "REQ-KAIZEN-OUTCOME-LOOP#baseline-required",
+          "kind": "criterion",
+          "revision": "criterion-rev-p6b"
+        },
+        {
+          "id": "REQ-KAIZEN-OUTCOME-LOOP#no-canonical-reopen",
+          "kind": "criterion",
+          "revision": "criterion-rev-p6"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-KAIZEN-OUTCOME-LOOP#baseline-required",
+          "to": "constraint:arch-p6-baseline",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-KAIZEN-OUTCOME-LOOP#no-canonical-reopen",
+          "to": "constraint:arch-p6-no-reopen",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-p6-baseline",
+          "to": "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-p6-no-reopen",
+          "to": "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+          "to": "evidence:loci-p6-outcome-prod",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+          "to": "evidence:loci-p6-outcome-tests",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "0d3c826082243d7f",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "p6-spec-regression",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.ts:routeRegressionToAnalysis"
+        },
+        "evidenceRefs": [
+          "p6-prod-outcome-loop"
+        ]
+      },
+      {
+        "id": "31d43d5c46a18916",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p6-spec-no-reopen",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.test.ts:store_immutability"
+        },
+        "evidenceRefs": [
+          "p6-test-no-reopen"
+        ]
+      },
+      {
+        "id": "495391e9b34b5b8b",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p6-spec-no-reopen",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.test.ts:store_immutability"
+        },
+        "evidenceRefs": [
+          "p6-test-no-reopen"
+        ]
+      },
+      {
+        "id": "4ea0a1d6316e8561",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p6-spec-regression",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.test.ts:regression_to_analysis"
+        },
+        "evidenceRefs": [
+          "p6-test-regression"
+        ]
+      },
+      {
+        "id": "5c08ed4760615491",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p6-spec-baseline",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.test.ts:missing_baseline"
+        },
+        "evidenceRefs": [
+          "p6-test-missing-baseline"
+        ]
+      },
+      {
+        "id": "68875c998e11cb30",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p6-spec-baseline",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.test.ts:missing_baseline"
+        },
+        "evidenceRefs": [
+          "p6-test-missing-baseline"
+        ]
+      },
+      {
+        "id": "885103d3bd6621b2",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "p6-spec-baseline",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.ts:resolveBaselineForEntry"
+        },
+        "evidenceRefs": [
+          "p6-prod-baseline"
+        ]
+      },
+      {
+        "id": "8b81337dc4b7d295",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p6-spec-regression",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.test.ts:regression_to_analysis"
+        },
+        "evidenceRefs": [
+          "p6-test-regression"
+        ]
+      },
+      {
+        "id": "c59e43307b6153b3",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "p6-spec-regression",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-outcome-loop.ts:routeRegressionToAnalysis"
+        },
+        "evidenceRefs": [
+          "p6-prod-outcome-loop"
+        ]
+      },
+      {
+        "id": "dbda5dbb3089c172",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "p6-spec-no-reopen",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002": "REVIEW",
+    "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002",
+      "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+      "project_id": "stdd-kaizen-p6",
+      "run_id": "kaizen-p6-verify-20261007",
+      "phase": "verification",
+      "scope": [
+        "IMPL-KAIZEN-OUTCOME-LOOP#RUN_OUTCOME_LOOP#p6plan0001",
+        "IMPL-KAIZEN-OUTCOME-LOOP#RESOLVE_BASELINE_FOR_ENTRY#p6plan0002"
+      ],
+      "scope_hash": "38b20d9f2bcec7853745e496ef19e394b13ac83a87ce03404c40ace571766310",
+      "artifact_hashes": {
+        "obligation-report.json": "1f016341e9ae486fa96bbeed5bd898d4cf2eaca33ee60f1d2294475ad736fe2c",
+        "finding-ledger.jsonl": "9c6fbc4aa18191d96364388dbcf3d8bc81ce560f431aee364b5db5bb2e03aeaf",
+        "gate-result.json": "875cc8616c6bcce45e6a5949dc8721b2ddf3f53270bd05107dc2cff34567bbb9",
+        "evidence-provenance.json": "06afba6329fa1e4171627f72524642d7bb26593e970038a2218ba669e9f2a59b"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+        "project_id": "stdd-kaizen-p6",
+        "run_id": "kaizen-p6-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "38b20d9f2bcec7853745e496ef19e394b13ac83a87ce03404c40ace571766310",
+        "hash": "1f016341e9ae486fa96bbeed5bd898d4cf2eaca33ee60f1d2294475ad736fe2c",
+        "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+        "project_id": "stdd-kaizen-p6",
+        "run_id": "kaizen-p6-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "38b20d9f2bcec7853745e496ef19e394b13ac83a87ce03404c40ace571766310",
+        "hash": "9c6fbc4aa18191d96364388dbcf3d8bc81ce560f431aee364b5db5bb2e03aeaf",
+        "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+        "project_id": "stdd-kaizen-p6",
+        "run_id": "kaizen-p6-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "38b20d9f2bcec7853745e496ef19e394b13ac83a87ce03404c40ace571766310",
+        "hash": "875cc8616c6bcce45e6a5949dc8721b2ddf3f53270bd05107dc2cff34567bbb9",
+        "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-OUTCOME-LOOP",
+        "project_id": "stdd-kaizen-p6",
+        "run_id": "kaizen-p6-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "38b20d9f2bcec7853745e496ef19e394b13ac83a87ce03404c40ace571766310",
+        "hash": "06afba6329fa1e4171627f72524642d7bb26593e970038a2218ba669e9f2a59b",
+        "path": "tied-bundle/working/REQ-KAIZEN-OUTCOME-LOOP/adversarial-inquiry/phase-verification/evidence-provenance.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+REQ-KAIZEN-OUTCOME-LOOP:
+  REQ-KAIZEN-OUTCOME-LOOP:
+    category: "Functional"
+    name: "Kaizen Phase 6 outcome loop"
+    non_goals:
+      - "Automatic reopen or status mutation on canonical REQ/ARCH/IMPL YAML"
+      - "Pilot promotion or universal improvement score (Phase 7)"
+      - "Upstream transport (Phase 3 deferred)"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Evidence links validated before persisting outcome facets"
+        - "Follow-up outcome observations recorded against baselines with proof boundaries"
+        - "Regression routes back to feedback analysis without canonical reopen"
+      problems_solved:
+        - "Digest countermeasures stuck at outcome not_measured"
+        - "No follow-up window or baseline guard on improvement claims"
+      why: "Phase 6 closes the Kaizen loop by measuring countermeasures against baselines while keeping canonical TIED authority separate."
+    related_requirements:
+      depends_on:
+        - "REQ-FEEDBACK_TO_TIED"
+        - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+        - "REQ-KAIZEN-REVIEW-BRIDGE"
+        - "REQ-KAIZEN-SOURCE-NORMALIZATION"
+      related_to:
+        - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+        - "REQ-KAIZEN-REVIEW-BRIDGE"
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "Follow-up window bounds enforced on observed_at"
+        metric: "follow_up_window fixtures"
+      - criterion: "Inconclusive outcome allowed with baseline and insufficient evidence"
+        metric: "inconclusive_insufficient_evidence fixture"
+      - criterion: "Missing baseline blocks measured outcomes before feedback.yaml write"
+        metric: "missing_baseline fixture"
+      - criterion: "Orphan evidence links rejected for measured outcomes"
+        metric: "evidence_link_integrity fixture"
+      - criterion: "Project TIED YAML unchanged after outcome loop operations"
+        metric: "store_immutability fixture"
+      - criterion: "Regressed outcome returns analysis routing without REQ reopen"
+        metric: "regression_to_analysis fixture"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-KAIZEN-OUTCOME-LOOP"
+      code_annotations:
+        - "ARCH-KAIZEN-OUTCOME-LOOP"
+        - "IMPL-KAIZEN-OUTCOME-LOOP"
+        - "REQ-KAIZEN-OUTCOME-LOOP"
+      implementation:
+        - "IMPL-KAIZEN-OUTCOME-LOOP"
+      tests:
+        - "feedback-outcome-loop.test.ts"
+    validation_criteria:
+      - coverage: "Outcome loop golden matrix"
+        method: "Unit tests; optional MCP binding at build-plan"

@@ -100,27 +100,27 @@ resume_protocol:
     - id: R7
       action: On child traceable-commit complete, set phase.status complete and persist phase close_out evidence path
 
-current_step: P6-initiate
+current_step: P7-initiate
 # Updated by executor when a phase closes or pauses
 
-# Next agent: read agent_handoff first, then resume_protocol R1–R6 for Phase 6 (do not skip Phase 6 plan-new-feature).
+# Next agent: read agent_handoff first, then resume_protocol R1–R6 for Phase 7 (plan-new-feature only — do not start build-plan in close-out session).
 agent_handoff:
-  updated_at: "2026-10-07T23:59:00-07:00"
+  updated_at: "2026-10-08T00:30:00-07:00"
   intent: >
     Continue Kaizen program without pausing for closed hinges. Phase 3 transport
-    stays deferred until a future explicit hinge reopen. Phase 5 review bridge
-    is closed; next is Phase 6 outcome loop via plan-new-feature only (do not
-    start build-plan until Phase 6 REQ/ARCH/IMPL exist).
+    stays deferred until a future explicit hinge reopen. Phase 6 outcome loop
+    is closed; next is Phase 7 pilot via plan-new-feature only (do not start
+    build-plan until Phase 7 REQ/ARCH/IMPL exist).
   next_session:
-    program_step: P6-initiate
-    phase_id: 6
-    suggested_req_token: REQ-KAIZEN-OUTCOME-LOOP
+    program_step: P7-initiate
+    phase_id: 7
+    suggested_req_token: REQ-KAIZEN-FEEDBACK-PILOT
     workflow_sequence:
-      - CALL plan-new-feature — scope Phase 6 only; mint REQ/ARCH/IMPL; copy checklist template to working/{REQ-TOKEN}/
-      - refine-plan — only if Phase 6 CITDP/plan gaps remain before RED
+      - CALL plan-new-feature — scope Phase 7 only; mint REQ/ARCH/IMPL; copy checklist template to working/{REQ-TOKEN}/
+      - refine-plan — only if Phase 7 CITDP/plan gaps remain before RED
       - build-plan — deferred until plan-new-feature completes
-      - plan-close-out — after Phase 6 verification-gate (not in this session)
-    linked_plan_anchor: docs/tied-kaizen-feedback-loop-plan.md — Implement § Later phases, Phase 4 row and exit evidence
+      - plan-close-out — after Phase 7 verification-gate (not in this session)
+    linked_plan_anchor: docs/tied-kaizen-feedback-loop-plan.md — Implement § Later phases, Phase 7 row and exit evidence
     preload:
       - tied-project/vocab/feedback-to-tied.md
       - tied-project/vocab/leap-proposal-queue.md
@@ -153,6 +153,14 @@ agent_handoff:
       git: b9a092f
       req_token: REQ-KAIZEN-FEEDBACK-ANALYSIS
       close_out: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json
+    phase_5:
+      git: 8437712
+      req_token: REQ-KAIZEN-REVIEW-BRIDGE
+      close_out: tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/closeout-run-close-out-gates-final.json
+    phase_6:
+      git: pending
+      req_token: REQ-KAIZEN-OUTCOME-LOOP
+      close_out: tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json
   optional_doc_commit:
     note: Plan/vocab bundle still uncommitted per evidence/commit-pass-handoff.md — not blocking Phase 4
 
@@ -324,11 +332,13 @@ phases:
 
   - phase_id: 6
     module: Outcome loop
-    status: pending
-    next_for_agent: true
-    req_token: null
+    status: complete
+    next_for_agent: false
+    req_token: REQ-KAIZEN-OUTCOME-LOOP
+    proof_commit: pending
+    close_out_evidence: tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json
     suggested_req_prefix: REQ-KAIZEN-OUTCOME-LOOP
-    phase_tracker: null
+    phase_tracker: tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/checklist-tracker.yaml
     owns:
       - baseline
       - follow-up window
@@ -338,18 +348,19 @@ phases:
       - missing baseline inconclusive regression to analysis evidence-link integrity
     program_steps:
       - id: P6-initiate
-        disposition: pending
+        disposition: complete
         action: CALL plan-new-feature scope Phase 6 only
       - id: P6-implement
-        disposition: pending
+        disposition: complete
         action: LOOP agent checklist through verification-gate
       - id: P6-close
-        disposition: pending
+        disposition: complete
         action: CALL plan-close-out; current_step P7-initiate
 
   - phase_id: 7
     module: Pilot
     status: pending
+    next_for_agent: true
     req_token: null
     suggested_req_prefix: REQ-KAIZEN-FEEDBACK-PILOT
     phase_tracker: null
@@ -386,6 +397,6 @@ recovery:
 execution_evidence:
   program_started_at: null
   program_closed_at: null
-  phases_completed: [0, 1, 2, 4]
+  phases_completed: [0, 1, 2, 4, 5, 6]
   last_session_handoff: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/agent-resume-handoff.md
   envelope_path: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/kaizen-program-envelope.v1.json

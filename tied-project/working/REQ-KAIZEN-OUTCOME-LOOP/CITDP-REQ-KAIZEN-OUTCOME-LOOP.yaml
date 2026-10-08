@@ -1,0 +1,160 @@
+CITDP-REQ-KAIZEN-OUTCOME-LOOP:
+  record_identity:
+    title: Kaizen Phase 6 outcome loop
+    change_request_id: REQ-KAIZEN-OUTCOME-LOOP
+    author: plan-new-feature
+    date: '2026-10-07'
+    record_status: implementation
+    batch: kaizen-phase-6
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: not_measured
+    implementation_depth_tier: integrated
+  change_definition:
+    current_behavior: >
+      Phase 4 digest countermeasures always emit outcome not_measured. Phase 2
+      may store baseline_ref on operational context but no module records follow-up
+      outcome observations, validates follow-up windows, checks evidence links, or
+      routes regression back to feedback analysis.
+    desired_behavior: >
+      An outcome-loop module records outcome observations (improved, unchanged,
+      regressed, inconclusive, not_measured) against a resolved baseline within a
+      follow-up window, validates evidence link integrity, persists append-only
+      outcome facets on feedback entries, and returns regression routing for digest
+      rerun without reopening canonical requirements.
+    unchanged_behavior:
+      - buildFeedbackDigest read-only projection unless build-plan extends countermeasure outcome read path
+      - createReviewedLeapProposal and review bridge (Phase 5)
+      - Automatic canonical REQ/ARCH/IMPL reopen or status mutation (explicit non-goal)
+      - Phase 3 transport deferred; local append and export only
+    non_goals:
+      - Automatic reopen or status change on canonical requirements.yaml entries
+      - Upstream transport (Phase 3 closed)
+      - Universal improvement score or pilot promotion (Phase 7)
+      - Mutating original operational observation prose
+    success_criteria:
+      - >-
+        Golden fixtures pass for missing baseline, inconclusive, regression routing
+        to analysis, evidence-link integrity, and valid outcome transitions
+      - >-
+        follow-up window violations return FollowUpWindowNotOpen or FollowUpWindowClosed
+      - >-
+        feedback.yaml append-only outcome_observations; project TIED YAML unchanged
+  impact_analysis:
+    modules:
+      - feedback-outcome-loop (proposed)
+      - feedback-analysis (optional countermeasure outcome read at build-plan)
+      - feedback-source-normalization (baseline_ref on context)
+      - feedback.ts (atomic append delegate)
+    files:
+      - mcp-server/src/feedback-outcome-loop.ts (proposed)
+      - mcp-server/src/feedback-outcome-loop.test.ts (proposed)
+      - mcp-server/test/fixtures/kaizen-outcome-loop/ (proposed)
+      - mcp-server/src/feedback-analysis.ts (optional read integration)
+    depends_on:
+      - REQ-KAIZEN-FEEDBACK-ANALYSIS
+      - REQ-KAIZEN-REVIEW-BRIDGE
+      - REQ-KAIZEN-SOURCE-NORMALIZATION
+      - REQ-FEEDBACK_TO_TIED
+    tags:
+      - kaizen-phase-6
+      - integrated
+    tied_tokens_new:
+      - REQ-KAIZEN-OUTCOME-LOOP
+      - ARCH-KAIZEN-OUTCOME-LOOP
+      - IMPL-KAIZEN-OUTCOME-LOOP
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: integrated
+      gate_policy: advisory
+      assurance_profile: baseline-functional
+      research_profile: integrated-agent
+      prior_depth_tier: integrated
+      depth_selected_at: '2026-10-07T17:05:00-07:00'
+      eligibility_triggers_matched:
+        - persistence via feedback.yaml outcome facet append
+        - external outcome payload with evidence_links
+      rationale: >
+        Phase 6 persists follow-up observations and validates evidence boundaries;
+        integrated depth per kaizen program phase_defaults; advisory gate until
+        build-plan verification.
+      counterexamples:
+        - Outcome loop sets requirements.yaml status to Planned or reopens REQ
+        - Regression path writes canonical YAML without separate sponsor workflow
+        - Missing baseline still records improved outcome
+        - Evidence link orphan accepted for regressed outcome
+        - Follow-up window ignored for inconclusive recording
+      falsification_questions:
+        - Does missing_baseline fixture fail before feedback.yaml write?
+        - Does regressed fixture include regression_routing without REQ status change?
+        - Does evidence_link_integrity fixture reject orphan refs?
+      disconfirming_observations:
+        - Any yaml_index_update from outcome-loop module
+        - RED tests green before implementation lands (build-plan scope)
+      close_out_inquiry_waiver:
+        owner: sponsor
+        expiry: '2026-12-31'
+        rationale: >
+          Phase 6 verification run kaizen-p6-verify-20261007 covers outcome-loop
+          golden fixtures and store immutability; separate close_out adversarial
+          inquiry receipt not collected under advisory gate_policy.
+        approval: kaizen-program-pre-approved-batch-2026-10-07
+        referenced_verification_run_id: kaizen-p6-verify-20261007
+      evidence_references:
+        - docs/tied-kaizen-feedback-loop-plan.md
+        - tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/CITDP-REQ-KAIZEN-OUTCOME-LOOP.yaml
+        - tied-project/implementation-decisions/IMPL-KAIZEN-OUTCOME-LOOP-pseudocode.md
+    risks:
+      - id: RISK-KOL-001
+        description: Outcome recording mutates canonical requirement status
+        severity: High
+        likelihood: Low
+        mitigation: Explicit non-goal; immutability tests on tied-project YAML
+      - id: RISK-KOL-002
+        description: Improved outcome recorded without baseline
+        severity: High
+        likelihood: Medium
+        mitigation: RESOLVE_BASELINE_FOR_ENTRY; missing_baseline fixture
+      - id: RISK-KOL-003
+        description: Regression routing mistaken for LEAP or canonical reopen
+        severity: Medium
+        likelihood: Medium
+        mitigation: ROUTE_REGRESSION_TO_ANALYSIS returns analysis facet only
+  test_strategy:
+    summary: >
+      Unit tests with golden JSON fixtures under
+      mcp-server/test/fixtures/kaizen-outcome-loop/; RED at build-plan; optional
+      MCP tied_feedback_outcome_record composition; no E2E.
+    fixtures:
+      - name: missing_baseline
+        theme: improved/unchanged/regressed without baseline returns MissingBaseline
+      - name: inconclusive_insufficient_evidence
+        theme: baseline present, weak links → inconclusive inside window
+      - name: outcome_transitions
+        theme: improved, unchanged, not_measured paths persist valid records
+      - name: regression_to_analysis
+        theme: regressed outcome returns regression_routing; no REQ reopen
+      - name: evidence_link_integrity
+        theme: orphan or blank evidence_links rejected
+      - name: follow_up_window_closed
+        theme: observed_at after window.end returns FollowUpWindowClosed
+      - name: follow_up_window_not_open
+        theme: observed_at before window.start returns FollowUpWindowNotOpen
+      - name: store_immutability
+        theme: tied-project requirements/architecture/implementation YAML unchanged
+    module_validation:
+      - module: feedback-outcome-loop
+        boundary: baseline, window, outcome persist, regression routing only
+        tests: feedback-outcome-loop.test.ts
+    proof_boundary: >-
+      Does not prove service restoration equals improvement; correction without
+      baseline may remain not_measured at digest layer until outcome recorded
+  completion_criteria:
+    activation:
+      run_id: kaizen-p6-preimpl-20261007
+      phase: pre_implementation
+      request_token: REQ-KAIZEN-OUTCOME-LOOP
+    persist_policy: Persist to tied-project/citdp/ at close-out after build-plan
+    focused_tests: feedback-outcome-loop.test.ts
+    lint: npx tsc -b in mcp-server
+    verification: tied_validate_consistency; integrated close_out gates after build-plan

@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "outcome": "inconclusive",
+  "baseline_ref": "baseline://cm-checkout-latency",
+  "observation_persisted": true
+}
