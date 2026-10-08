@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { TIED_REPO_ROOT } from "../constants.mjs";
+import { loadStandaloneClientSkills } from "../client-skills-catalog.mjs";
 import { resolveTiedLayout } from "../layout.mjs";
 import {
   materializeLinkedMethodologyBundle,
@@ -96,6 +97,10 @@ export function checkStoreReachable(storeRoot) {
   ];
 
   resolveStoreMethodologyIndexRoot(storeRoot);
+
+  for (const entry of loadStandaloneClientSkills(storeRoot)) {
+    required.push(entry.storeDir);
+  }
 
   const missing = required.filter((p) => !fs.existsSync(p));
   if (missing.length > 0) {

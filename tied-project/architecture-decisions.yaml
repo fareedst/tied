@@ -1844,6 +1844,13 @@ ARCH-TIED_CLAUDE_SKILLS_REROOT:
   detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml"
   name: "Skills re-root architecture"
   status: "Active"
+ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  cross_references:
+    - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
+  name: "Client bootstrap skills catalog"
+  status: "Planned"
 ARCH-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
@@ -2206,6 +2213,13 @@ ARCH-TIED_TWO_FOLDER_LAYOUT:
       - "IMPL-TIED_TWO_FOLDER_LAYOUT"
     requirements:
       - "REQ-TIED_TWO_FOLDER_LAYOUT"
+ARCH-TIED_UNBLOCK_SKILL_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_UNBLOCK_SKILL"
+    - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  detail_file: "architecture-decisions/ARCH-TIED_UNBLOCK_SKILL_BOUNDARY.yaml"
+  name: "Unblock skill boundary"
+  status: "Planned"
 ARCH-TIED_UNIFIED_TOOLCHAIN:
   description: "npm/pnpm workspace packaging MCP, agentstream, bootstrap, and YAML CLIs under one build; umbrella CLI subcommands; stdio MCP unchanged; strangler migration from Go/Ruby."
   detail_file: "architecture-decisions/ARCH-TIED_UNIFIED_TOOLCHAIN.yaml"

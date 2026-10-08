@@ -3466,6 +3466,17 @@ REQ-TIED_CLAUDE_SKILLS_REROOT:
     registered: "2026-09-24"
   name: "Optional repo-root skills re-root"
   source_index: "requirements.yaml"
+REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  cross_references:
+    - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
+    - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    - "IMPL-TIED_UNBLOCK_SKILL"
+  description: "Manifest-driven standalone skill install via tied-install"
+  name: "Client bootstrap skills"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_CLIENT_REFRESH_PARITY:
   category: "Functional"
   cross_references:

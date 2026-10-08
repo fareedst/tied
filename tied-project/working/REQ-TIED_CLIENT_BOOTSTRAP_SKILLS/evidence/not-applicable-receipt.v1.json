@@ -1,0 +1,10 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": ["close_out", "pre_implementation", "verification"],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier (bootstrap file copy/stub only)",
+  "generated_at": "2026-10-08T04:50:00.000Z",
+  "source": "plan-close-out"
+}

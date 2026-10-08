@@ -1,0 +1,12 @@
+schema_version: verification-evidence-manifest.v1
+request_token: REQ-TIED_CLIENT_BOOTSTRAP_SKILLS
+recorded_at: '2026-10-08T21:45:00-07:00'
+commands:
+- slug: unit-test-green
+  command: node --test tools/bootstrap/lib/client-skills-catalog.test.mjs
+  exit_code: 0
+  claimed_success: true
+- slug: composition-integration
+  command: cd mcp-server && npm test -- client-bootstrap-skills
+  exit_code: 0
+  claimed_success: true

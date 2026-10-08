@@ -5,6 +5,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { TIED_REPO_ROOT } from "./constants.mjs";
 import {
   copyTreeWithAttributes,
   copyFileWithAttributes,
@@ -13,6 +14,10 @@ import {
 } from "./copy-managed.mjs";
 import { shellScriptRoot } from "./paths.mjs";
 import { sayWarn, sayErr } from "./console.mjs";
+import {
+  installStandaloneSkillsCopy,
+  loadStandaloneClientSkills,
+} from "./client-skills-catalog.mjs";
 
 function skillIsComplete(src) {
   return fs.existsSync(path.join(src, "scripts", "tied-cli.sh"));
@@ -64,23 +69,18 @@ function installTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker, skills
   sayWarn(`Copied tied-yaml Cursor skill into ${dest} (from ${src}).`);
 }
 
-function installXlateSkillFrom(projectRoot, src, skillsInstallDir) {
-  const dest = path.join(skillsInstallDir, "xlate");
-  fs.mkdirSync(skillsInstallDir, { recursive: true });
-  copyTreeWithAttributes(src, dest);
-  sayWarn(`Copied xlate Cursor skill into ${dest} (from ${src}).`);
-}
-
 export function installXlateSkill(projectRoot, paths, options = {}) {
-  const { xlateSkillCanonical } = paths;
+  const tiedRepoRoot = paths.tiedRepoRoot ?? paths.TIED_REPO_ROOT ?? TIED_REPO_ROOT;
+  void projectRoot;
   const skillsInstallDir =
     options.skillsInstallDir ?? path.join(projectRoot, ".cursor", "skills");
-  const srcSkill = path.join(xlateSkillCanonical, "SKILL.md");
-  if (!fs.existsSync(srcSkill)) {
-    sayErr(`ERROR: xlate skill not found at ${xlateSkillCanonical}.`);
+  try {
+    loadStandaloneClientSkills(tiedRepoRoot);
+  } catch {
+    sayErr(`ERROR: standalone client skills not found under ${tiedRepoRoot}.`);
     throw new Error("SKILL_INSTALL_FAILED");
   }
-  installXlateSkillFrom(projectRoot, xlateSkillCanonical, skillsInstallDir);
+  installStandaloneSkillsCopy(tiedRepoRoot, skillsInstallDir);
 }
 
 export function installTiedYamlSkill(projectRoot, paths, options = {}) {
@@ -220,6 +220,7 @@ export function installClaudeSkills(projectRoot, paths, options = {}) {
     throw new Error("SKILL_INSTALL_FAILED");
   }
   installedPaths.push(path.join(skillsInstallDir, "tied-yaml"));
+  installStandaloneSkillsCopy(tiedRepoRoot, skillsInstallDir);
   if (useUnixSymlink) {
     sayWarn(
       `Symlinked Claude prompt-type skills into ${skillsInstallDir} (tied-yaml copied for TIED_REPO_ROOT patch).`

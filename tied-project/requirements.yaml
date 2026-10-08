@@ -2156,6 +2156,17 @@ REQ-TIED_CLAUDE_SKILLS_REROOT:
   name: "Optional repo-root skills re-root"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
+    - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    - "IMPL-TIED_UNBLOCK_SKILL"
+  detail_file: "requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
+  name: "Client bootstrap skills distribution"
+  priority: "P1"
+  status: "Planned"
 REQ-TIED_CLIENT_REFRESH_PARITY:
   category: "Functional"
   cross_references:

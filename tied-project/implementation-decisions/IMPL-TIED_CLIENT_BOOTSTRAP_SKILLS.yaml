@@ -1,0 +1,18 @@
+IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    implementation: []
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS-pseudocode.md"
+  implementation_approach:
+    details: []
+    summary: "manifest.json BUNDLED_STANDALONE_CLIENT_SKILLS + tools/bootstrap/lib/client-skills-catalog.mjs wired into skills.mjs, skills-linked.mjs, bootstrap.mjs, store.mjs, assert-windows-bootstrap-claude.mjs"
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-08"
+      reason: "mint"
+  name: "Client bootstrap skills implementation"
+  status: "Planned"

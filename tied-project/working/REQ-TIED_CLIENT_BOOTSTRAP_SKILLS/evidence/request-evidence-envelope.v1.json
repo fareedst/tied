@@ -1,0 +1,355 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-08T04:44:20.350Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml",
+      "content_hash": "sha256:3da1c463a4e63a4965d8395d0a01706c7ec8a7f6c5c22d312aac5afcdf98b891",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:dac53d6f43edbf3fb080b96c1de967fd6e5de5ee59edf96b91c7ccbf59ec4f09",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:1962cff9b6465f79fd4a0de41fc08f6e4514e1e434804d74485019e8a47c78fe",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:8c95c87178a621f0f9422ff4508df525b66e1c7492ffa2891c3ecb4e5178ca2d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:c712b4d471b9f99d958441c3df81ce73f5bfbbe7ed7e229bd8f04a2e67e896da",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:e7c85011c01bbc1cb3f666e9819e136f5d8ffeec38c742541f0a06e434663dd0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/build-plan-evidence.md",
+      "content_hash": "sha256:048fa993138d57aee4b8e5fbac68c1a0ca4ce2e972fb05c26451895127db2a99",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:2efe1facc79b278218298ac17e25d734eade3c458aa7215fba431eb6ed4961c5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:263b5988c8831e955d70fd3214e34e5f74f13d5f44fb1192a463d25b203521b5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/close-out-waiver-evidence.md",
+      "content_hash": "sha256:c6a32d883e6997a16e5040e8a04bf06d0dc1adcf44fe2076858d6500cc5c9b7c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:ac84a2e06a6b12203ab6ee254688b5a51a398fa8576e4503d7acd7e2574dcc47",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:6e561cf50b45b35ae847faf483ad7756812bef19aa6fb4be9ebe0b1b853b2b92",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:2b32d3b1e4d7a20effce67ac0ead14027167a91f3cbae7891a1bacf0996e3a8d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:8234712fa8ff8df791c09241def9d61c30b37c8eefee49d7e9fac2305ab8885d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:1e19967bb823a91aa6e2660cd87edf22bbc5372169c20993ecefe8939e7747f5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:68b2aa984fa73fd5fba8a596c253f1203e788e3b88539b77e4630ae8d76b4447",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:281bb4fb23c883161bc950ebd3c22c1d12320381b6525e8e95e03e720f63b33d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:5a56e1710a0e4f7432dd4ffa19ff516d94b0bee30adede0694333660334b4302",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:e897708f0775132b583df812c1db0e090a8f24c809ed254b26cebc054de079b5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/sub-adversarial-inquiry-pass-na.md",
+      "content_hash": "sha256:35d34deca468e646494d3c9c8a1e18f89a036c1c22aa54ce1e7a35aea479a3cb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:bdcf2e920c3dabbb288c096844239b1d34c60efe3f8e3e497ac8a186c022b538",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:34e63f2965b2e3d74661202d6b858dd13c706eb8c87106d4112fb2a60d7e2be2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:40e7f5893ced9a03f3d79b7578dc91e34d72833078b9457661abac15d8051e1a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/three-way-alignment-unit-evidence.md",
+      "content_hash": "sha256:7919fe93ae983ddaf33beed5fe446d5df4f0fc217ce4d223acc64152c206261f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:bfb957a601f453fbf50691640f50cb6c5f081cccd3444fae09acd07f61869108",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:aeb6acffe59ea2a34a5350ebfbc805607884b980c196500dd3af96fca82e780a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:11f7cc06c4c7ba0ff6d1b018cc9a838657546857cbd89ebf74d95a7c516b3fed",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:c14906107d5bea182424d81ecd9f97d99906c454b660fe3e18c16a975e14c9b3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:4855970aa560f535cbd523702191eb884a6e157115139c0170306e8a9a9bb7f6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

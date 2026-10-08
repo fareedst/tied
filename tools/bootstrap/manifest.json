@@ -29,6 +29,10 @@
     "prompt-type-router"
   ],
   "PROMPT_TYPE_SHARED_DIR": "prompt-shared",
+  "BUNDLED_STANDALONE_CLIENT_SKILLS": [
+    { "skillName": "xlate", "storeDir": "tools/bundled-xlate-skill" },
+    { "skillName": "unblock", "storeDir": "tools/bundled-unblock-skill" }
+  ],
   "SOURCE_ONLY_VOCAB_BASENAMES": ["prompt-composer.md"],
   "DOCS_TO_COPY": [
     "adding-tied-mcp-and-invoking-passes.md",

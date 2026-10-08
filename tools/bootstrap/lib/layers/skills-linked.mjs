@@ -9,9 +9,13 @@ import { jsonSafeAbsolute, shellScriptRoot } from "../paths.mjs";
 import { chmodExecutableRecursive, linkOrMaterializeCopy } from "../copy-managed.mjs";
 import { sayWarn } from "../console.mjs";
 import {
+  installStandaloneSkillsCopy,
+  installStandaloneSkillsLinkedStub,
+} from "../client-skills-catalog.mjs";
+import { buildSkillStubBody, writeSkillStub } from "../skill-stub.mjs";
+import {
   installClaudeSkills,
   installTiedYamlSkill,
-  installXlateSkill,
   installPromptTypeSkills,
 } from "../skills.mjs";
 import {
@@ -20,58 +24,12 @@ import {
 } from "../skills-reroot.mjs";
 import { WINDOWS_COPY_PROVEN_IN_CI } from "../constants.mjs";
 
-/**
- * @param {string} text
- */
-export function extractYamlFrontMatter(text) {
-  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
-  if (!match) return "";
-  return `---\n${match[1].trimEnd()}\n---\n`;
-}
-
-/**
- * @param {string} storeRoot
- * @param {string} relativePath
- */
-export function storeAbsPath(storeRoot, relativePath) {
-  return path.join(storeRoot, relativePath);
-}
-
-/**
- * @param {{ storeRoot: string, skillName: string, storeSkillRel: string, sharedHint?: string }} opts
- */
-export function buildSkillStubBody(opts) {
-  const skillPath = storeAbsPath(opts.storeRoot, opts.storeSkillRel);
-  const lines = [
-    "",
-    `# ${opts.skillName}`,
-    "",
-    "Read and follow the canonical skill at:",
-    "",
-    `\`${skillPath}/SKILL.md\``,
-    "",
-  ];
-  if (opts.sharedHint) {
-    lines.push(opts.sharedHint, "");
-  }
-  lines.push(
-    "If that store path is missing, re-run `tied-install.sh --refresh` from your TIED store or use `--mode full`.",
-    "",
-  );
-  return lines.join("\n");
-}
-
-/**
- * @param {string} destSkillMd
- * @param {string} sourceSkillMd
- * @param {string} stubBody
- */
-export function writeSkillStub(destSkillMd, sourceSkillMd, stubBody) {
-  const source = fs.readFileSync(sourceSkillMd, "utf8");
-  const front = extractYamlFrontMatter(source);
-  fs.mkdirSync(path.dirname(destSkillMd), { recursive: true });
-  fs.writeFileSync(destSkillMd, `${front}${stubBody}`, "utf8");
-}
+export {
+  extractYamlFrontMatter,
+  storeAbsPath,
+  buildSkillStubBody,
+  writeSkillStub,
+} from "../skill-stub.mjs";
 
 /**
  * @param {string} wrapperPath
@@ -113,14 +71,14 @@ export function installSkillsLinked(projectRoot, options) {
     const cursorSkillsDir = resolveSkillsInstallDir(projectRoot, "cursor", skillsBootstrap);
     installLinkedPromptTypeSkills(projectRoot, paths, cursorSkillsDir, options.storeRoot);
     installLinkedTiedYamlSkill(projectRoot, paths, cursorSkillsDir, options.storeRoot);
-    installLinkedXlateSkill(projectRoot, paths, cursorSkillsDir, options.storeRoot);
+    installStandaloneSkillsLinkedStub(options.storeRoot, cursorSkillsDir);
   }
 
   if (harness === "claude" || harness === "both") {
     const claudeSkillsDir = resolveSkillsInstallDir(projectRoot, "claude", skillsBootstrap);
     installLinkedPromptTypeSkills(projectRoot, paths, claudeSkillsDir, options.storeRoot);
     installLinkedTiedYamlSkill(projectRoot, paths, claudeSkillsDir, options.storeRoot);
-    installLinkedXlateSkill(projectRoot, paths, claudeSkillsDir, options.storeRoot);
+    installStandaloneSkillsLinkedStub(options.storeRoot, claudeSkillsDir);
   }
 }
 
@@ -160,20 +118,6 @@ function installLinkedPromptTypeSkills(projectRoot, paths, skillsInstallDir, sto
   }
   chmodExecutableRecursive(skillsInstallDir);
   sayWarn(`Wrote linked prompt-type skill stubs into ${skillsInstallDir}.`);
-}
-
-function installLinkedXlateSkill(_projectRoot, paths, skillsInstallDir, storeRoot) {
-  const { xlateSkillCanonical } = paths;
-  const dest = path.join(skillsInstallDir, "xlate");
-  fs.mkdirSync(dest, { recursive: true });
-  const srcSkill = path.join(xlateSkillCanonical, "SKILL.md");
-  const body = buildSkillStubBody({
-    storeRoot,
-    skillName: "xlate",
-    storeSkillRel: path.join("tools", "bundled-xlate-skill"),
-  });
-  writeSkillStub(path.join(dest, "SKILL.md"), srcSkill, body);
-  sayWarn(`Wrote linked xlate skill stub into ${dest}.`);
 }
 
 function installLinkedTiedYamlSkill(projectRoot, paths, skillsInstallDir, storeRoot) {
@@ -238,7 +182,7 @@ export function installSkillsFull(projectRoot, paths, options) {
   if (harness === "cursor" || harness === "both") {
     const cursorSkillsDir = resolveSkillsInstallDir(projectRoot, "cursor", skillsBootstrap);
     installTiedYamlSkill(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
-    installXlateSkill(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
+    installStandaloneSkillsCopy(options.storeRoot, cursorSkillsDir);
     installPromptTypeSkills(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
   }
   if (harness === "claude" || harness === "both") {

@@ -1,0 +1,43 @@
+REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "IMPL-TIED_UNBLOCK_SKILL"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_SPONSOR_QUESTIONS"
+      - "REQ-TIED_XLATE_SKILL"
+  description: "Manifest-driven tied-install distribution of standalone bundled skills with Cursor/Claude and full/linked parity."
+  name: "Client bootstrap skills distribution"
+  satisfaction_criteria:
+    - criterion: "checkStoreReachable requires each standalone bundled storeDir"
+      criterion_id: "store-reachability"
+    - criterion: "claudeManagedInventoryComplete requires standalone skills"
+      criterion_id: "inventory-assert"
+    - criterion: "Full bootstrap installs standalone skills under Claude skills dir"
+      criterion_id: "claude-full-standalone"
+    - criterion: "Full bootstrap installs standalone skills under Cursor skills dir"
+      criterion_id: "cursor-full-standalone"
+    - criterion: "Linked bootstrap stubs all standalone skills for both harnesses"
+      criterion_id: "linked-standalone-stubs"
+    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate and unblock"
+      criterion_id: "standalone-manifest"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "IMPL-TIED_UNBLOCK_SKILL"
+    tests:
+      - "client-bootstrap-skills.test.ts"
+      - "client-skills-catalog.test.mjs"
+      - "xlate-skill.test.ts"

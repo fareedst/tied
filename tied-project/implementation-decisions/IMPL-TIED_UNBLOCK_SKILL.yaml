@@ -1,0 +1,18 @@
+IMPL-TIED_UNBLOCK_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
+    implementation: []
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_UNBLOCK_SKILL-pseudocode.md"
+  implementation_approach:
+    details: []
+    summary: "tools/bundled-unblock-skill/SKILL.md registered via shared standalone installer"
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-08"
+      reason: "mint"
+  name: "Unblock skill bootstrap"
+  status: "Planned"

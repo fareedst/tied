@@ -5,6 +5,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { assertStandaloneSkillsInventory } from "./client-skills-catalog.mjs";
 
 /** Fail messages aligned with working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/phase0/windows_smoke_assert_list.md */
 export const WINDOWS_CLAUDE_SMOKE_FAIL = {
@@ -27,7 +28,10 @@ export function claudeManagedInventoryComplete(smokeClientRoot, skillsRootOverri
   const tiedCli = path.join(skillsRoot, "tied-yaml", "scripts", "tied-cli.sh");
   const buildPlan = path.join(skillsRoot, "build-plan", "SKILL.md");
   const shared = path.join(skillsRoot, "prompt-shared");
-  return fs.existsSync(tiedCli) && fs.existsSync(buildPlan) && fs.existsSync(shared);
+  if (!fs.existsSync(tiedCli) || !fs.existsSync(buildPlan) || !fs.existsSync(shared)) {
+    return false;
+  }
+  return assertStandaloneSkillsInventory(skillsRoot);
 }
 
 function resolveSmokeSkillsRoot(smokeClientRoot, assertOptions = {}) {

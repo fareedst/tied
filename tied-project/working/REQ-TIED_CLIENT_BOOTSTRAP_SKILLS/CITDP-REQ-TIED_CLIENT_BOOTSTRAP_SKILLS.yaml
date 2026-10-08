@@ -1,0 +1,76 @@
+CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  change_definition:
+    current_behavior: "Bootstrap special-cases xlate only; unblock not installed; Claude full omits standalone skills; inventory asserts omit standalone manifest."
+    desired_behavior: "manifest BUNDLED_STANDALONE_CLIENT_SKILLS drives copy and linked stubs on Cursor and Claude full and linked; tests enforce managed inventory."
+    non_goals:
+      - "MCP tied_sponsor_questions behavior changes"
+      - "Prompt-type skill procedure changes"
+    success_criteria:
+      - "linked stubs for both standalone skills on both harnesses"
+      - "standalone-manifest in manifest.json"
+      - "tied_validate_consistency passes"
+      - "unblock and xlate under .cursor/skills and .claude/skills after full bootstrap"
+  completion_criteria:
+    focused_tests: "tools/bootstrap/lib/client-skills-catalog.test.mjs; mcp-server/src/e2e/client-bootstrap-skills.test.ts"
+    persist_policy: "persist CITDP on close-out"
+    verification: "tied_validate_consistency; tied_verify when gated"
+  impact_analysis:
+    files:
+      - "tools/bootstrap/lib/assert-windows-bootstrap-claude.mjs"
+      - "tools/bootstrap/lib/client-skills-catalog.mjs"
+      - "tools/bootstrap/lib/layers/skills-linked.mjs"
+      - "tools/bootstrap/lib/layers/store.mjs"
+      - "tools/bootstrap/lib/skills.mjs"
+      - "tools/bootstrap/manifest.json"
+      - "tools/bundled-unblock-skill/"
+    modules:
+      - "client_skills_catalog"
+      - "standalone_skill_install"
+    tags:
+      - "bootstrap-skills"
+  record_identity:
+    author: "build-plan"
+    change_request_id: "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    date: "2026-10-08"
+    record_status: "closed"
+    title: "Client bootstrap skills distribution"
+    closed_at: "2026-10-08"
+    close_out_run_id: "bootstrap-cbs-close-20261008"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      counterexamples:
+        - "Manifest lists skill but storeDir missing — install silently skips unblock"
+        - "Linked stub points at wrong store path after tied-install from foreign store"
+        - "Claude full path omits standalone copy while Cursor full includes it"
+        - "Inventory assert passes without checking YAML name: field in SKILL.md"
+      disconfirming_observations:
+        - "client-skills-catalog.test.mjs throws when bundled-unblock-skill absent"
+        - "client-bootstrap-skills.test.ts asserts .claude/skills/unblock/SKILL.md after installClaudeSkills"
+      falsification_questions:
+        - "Does linked mode write stubs for both harnesses when harness is both?"
+        - "Does checkStoreReachable fail if any standalone storeDir is missing?"
+      evidence_references:
+        - "tools/bootstrap/lib/client-skills-catalog.mjs"
+        - "tools/bootstrap/lib/client-skills-catalog.test.mjs"
+        - "mcp-server/src/e2e/client-bootstrap-skills.test.ts"
+        - "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/sub-adversarial-inquiry-pass-na.md"
+        - "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/not-applicable-receipt.v1.json"
+      close_out_inquiry_waiver:
+        owner: "sponsor"
+        expiry: "2026-12-31"
+        rationale: >
+          Minimal depth bootstrap install; catalog and e2e tests satisfy advisory close_out without
+          adversarial inquiry phase artifacts.
+        approval: "reversible-choice-manifest-catalog-2026-10-07"
+        referenced_verification_run_id: "bootstrap-cbs-close-20261008"
+    risks:
+      - description: "Manifest drift when adding skills"
+        id: "RISK-CBS-002"
+        mitigation: "Catalog loader and tests iterate manifest entries"
+      - description: "Skills reroot hides skills from default path asserts"
+        id: "RISK-CBS-001"
+        mitigation: "Harness tests cover reroot where applicable"
+  test_strategy:
+    summary: "RED then GREEN catalog and e2e tests; extend Claude managed inventory assert."

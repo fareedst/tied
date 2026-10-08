@@ -1,0 +1,20 @@
+ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  consequences:
+    negative: []
+    positive:
+      - "Adding a standalone skill is manifest-only"
+      - "Install parity is test-enforced"
+  context: "tied-install.sh skills layer"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  decision: "Standalone bundled client skills are listed in bootstrap manifest.json and installed via client-skills-catalog.mjs for copy (full) and skill-stub (linked) on Cursor and Claude harnesses."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-08"
+      reason: "mint"
+  name: "Client bootstrap skills catalog"
+  status: "Planned"

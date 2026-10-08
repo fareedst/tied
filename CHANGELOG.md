@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Client bootstrap skills ([REQ-TIED_CLIENT_BOOTSTRAP_SKILLS], [ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS], [IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS], [IMPL-TIED_UNBLOCK_SKILL])** — `manifest.json` `BUNDLED_STANDALONE_CLIENT_SKILLS` drives install of bundled **xlate** and **unblock** skills via `client-skills-catalog.mjs` on Cursor and Claude (`--mode full` copy and `--mode linked` stubs). Tests: `client-skills-catalog.test.mjs`, `client-bootstrap-skills.test.ts`. Close-out `run_id=bootstrap-cbs-close-20261008` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [plan-close-out-handoff.md](tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/plan-close-out-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/closeout-run-close-out-gates-final.json).
+
 - **Kaizen MCP composition wiring ([REQ-KAIZEN-FEEDBACK-MCP-WIRING], [ARCH-KAIZEN-FEEDBACK-MCP-WIRING], [IMPL-KAIZEN-FEEDBACK-MCP-WIRING])** — MCP tools `tied_feedback_analysis_digest`, `tied_feedback_review_bridge`, `tied_feedback_outcome_record`, and `tied_feedback_pilot_run` delegate to Phase 4–7 modules via `kaizen-feedback-mcp-handlers.ts`. Composition tests in `kaizen-feedback-mcp-composition.test.ts` (4/4).
 
 ### Fixed

@@ -2093,6 +2093,13 @@ IMPL-TIED_CLAUDE_SKILLS_REROOT:
   detail_file: "implementation-decisions/IMPL-TIED_CLAUDE_SKILLS_REROOT.yaml"
   name: "Skills re-root implementation"
   status: "Active"
+IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS:
+  cross_references:
+    - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
+  name: "Client bootstrap skills implementation"
+  status: "Planned"
 IMPL-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     architecture:
@@ -2546,6 +2553,13 @@ IMPL-TIED_TWO_FOLDER_LAYOUT:
       - "ARCH-TIED_TWO_FOLDER_LAYOUT"
     requirements:
       - "REQ-TIED_TWO_FOLDER_LAYOUT"
+IMPL-TIED_UNBLOCK_SKILL:
+  cross_references:
+    - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
+    - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  detail_file: "implementation-decisions/IMPL-TIED_UNBLOCK_SKILL.yaml"
+  name: "Unblock skill bootstrap"
+  status: "Planned"
 IMPL-TIED_UNIFIED_TOOLCHAIN:
   description: "Workspace layout, CLI dispatch, MCP stdio entry, migration hooks, and deprecation switches for Go/Ruby tools."
   detail_file: "implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml"
