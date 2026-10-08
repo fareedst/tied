@@ -2,7 +2,9 @@
 
 Request: `PLAN-TIED-KAIZEN-FEEDBACK-LOOP`
 
-This refine pass and the sponsor Kaizen principles supplemental pass **do not commit**. A later **`plan-close-out`** session should stage and commit the bundle below.
+**Completed:** 2026-10-08 via `traceable-commit` (see `traceable-commit-evidence.md`). Bundle below was the intended scope; implementation phases committed separately under per-REQ close-outs.
+
+Historical note: earlier refine passes did not commit; this entry closes the planning request after program EXIT.
 
 ## Intended commit scope
 

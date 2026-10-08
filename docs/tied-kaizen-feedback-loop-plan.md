@@ -528,15 +528,15 @@ Phase 7 promotion rule: pilot results stay analysis evidence until a separate sp
 
 ### Handoff
 
-**Resume here (2026-10-08):** Phases **1–2, 4–6 are implemented and committed** (see orchestrator `implementation_commits`). **Phase 3 (transport) is deferred** — sponsor confirmed finishing **Phase 7** on local/export only. **Next agent step:** `P7-initiate` → **`plan-new-feature` for Phase 7 only** (suggested `REQ-KAIZEN-FEEDBACK-PILOT`).
+**Status (2026-10-08):** **Program closed** — Phases **1–2 and 4–7** are implemented and committed (orchestrator `implementation_commits` in [`kaizen-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml)). **Phase 3 (transport) remains deferred** until sponsor records hinge reopen (recipient + channel on CITDP). This linked plan request **`PLAN-TIED-KAIZEN-FEEDBACK-LOOP`** is **closed** after doc/traceable-commit alignment with that implementation; no further program phases unless sponsor reopens Phase 3 or starts new scope.
 
 | Resource | Purpose |
 | --- | --- |
-| [`kaizen-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml) | `agent_handoff`, `current_step`, phase status |
-| [`agent-resume-handoff.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/agent-resume-handoff.md) | One-page completions + Phase 4 workflow |
-| [`PLAN.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/PLAN.md) | Working-folder status summary |
+| [`kaizen-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml) | `program_phase: closed`, `current_step: EXIT`, phase commits |
+| [`agent-resume-handoff.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/agent-resume-handoff.md) | Runtime handoff; Phase 3 deferral |
+| [`PLAN.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/PLAN.md) | Working-folder summary |
 
-PRELOAD [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md); confirm `tied_config_get_base_path` before MCP writes. Each phase: `build-plan` → `plan-close-out` (evidence + commit) → advance orchestrator. Continue **5 → 6 → 7** without pausing for closed hinges unless stop criteria fire.
+PRELOAD [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md) for Kaizen vocabulary. Confirm `tied_config_get_base_path` before MCP writes. **Optional follow-ups (not this request):** Phase 3 outbox, MCP wrappers for analysis/review/outcome/pilot, methodology promotion of pilot results.
 
 ## Phase 2 refine pass (source normalization)
 

@@ -1,4 +1,6 @@
 node_modules/
 dist/
+# Wrong-root MCP runs (TIED_BASE_PATH mispointed at mcp-server/)
+tied-project/
 methodology-bundle/corpus/
 methodology-bundle/methodology-bundle-manifest.v1.json

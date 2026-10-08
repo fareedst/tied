@@ -164,8 +164,9 @@ agent_handoff:
       git: 10a28e6
       req_token: REQ-KAIZEN-FEEDBACK-PILOT
       close_out: tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/closeout-run-close-out-gates-final.json
-  optional_doc_commit:
-    note: Plan/vocab bundle still uncommitted per evidence/commit-pass-handoff.md — not blocking Phase 4
+  planning_request_close_out:
+    status: complete
+    note: traceable-commit for PLAN-TIED-KAIZEN-FEEDBACK-LOOP aligns linked plan with program EXIT; see evidence/traceable-commit-evidence.md
 
 phase_defaults:
   depth_tier: integrated

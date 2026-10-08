@@ -50,13 +50,10 @@ entry_points:
     start_at: session-bootstrap
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred:
-      - unified close-out deferred; traceable-commit remains pending
-      - >-
-        commit bundle staged in plan-close-out pass per evidence/commit-pass-handoff.md (includes sponsor Kaizen
-        principles alignment)
+    date: "2026-10-08"
+    deferred: []
     gates: {}
+    planning_request_traceable_commit: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/traceable-commit-evidence.md
     master_checklist: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/checklist-tracker.yaml
   completed:
     - change-definition
@@ -70,6 +67,7 @@ execution_evidence:
     - translate-sponsor-intent
     - persist-citdp-record
     - verification-gate
+    - traceable-commit
   envelope_path: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -1435,12 +1433,15 @@ steps:
     title: Commit per PROC-COMMIT_MESSAGES; no push unless asked
     tracking:
       consideration_before_proceeding: >-
-        sub-vocabulary-sync (VALIDATE) passed or immature-client deferral noted; commit created; format per
-        PROC-COMMIT_MESSAGES; tokens in body/footer.
+        sub-vocabulary-sync (VALIDATE) passed; commit created 2026-10-08; format per PROC-COMMIT_MESSAGES; planning
+        request aligned to implemented program EXIT.
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs:
+        - kind: file_path
+          path: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/traceable-commit-evidence.md
   - flow:
       branches: []
       calls:

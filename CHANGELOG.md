@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Kaizen linked plan request closed (`PLAN-TIED-KAIZEN-FEEDBACK-LOOP`)** — Updated [`docs/tied-kaizen-feedback-loop-plan.md`](docs/tied-kaizen-feedback-loop-plan.md) handoff to **program EXIT** (Phases 1–2, 4–7 implemented; Phase 3 transport deferred). Refine tracker `traceable-commit` completed; orchestrator records `planning_request_close_out`. Hygiene: ignore/remove wrong-root `mcp-server/tied-project/` from misconfigured MCP runs.
+
 ### Added
 
 - **Kaizen Phase 7 feedback pilot ([REQ-KAIZEN-FEEDBACK-PILOT], [ARCH-KAIZEN-FEEDBACK-PILOT], [IMPL-KAIZEN-FEEDBACK-PILOT])** — `feedback-kaizen-pilot.ts` resolves named pilot cohorts, emits denominator-aware catalog metrics, evaluates documented stop criteria (transport-linked criteria `not_applicable` while Phase 3 deferred), and surfaces `analysis_only` promotion_rule on every report without canonical YAML writes. Integrated `close_out` with `run_id=kaizen-p7-close-20261007` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, adherence band **A**). Verification `run_id=kaizen-p7-verify-20261007` (8/8 module tests). Kaizen program orchestrator `program_phase: closed`, `current_step: EXIT`; **Phase 3 transport remains deferred**. Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/closeout-run-close-out-gates-final.json), [request-evidence-envelope.v1.json](tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/request-evidence-envelope.v1.json).

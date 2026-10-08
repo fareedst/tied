@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-07T22:14:10.038Z",
+    "generated_at": "2026-10-08T00:57:14.889Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -51,11 +51,22 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:d027862a54d1d0ff3b50e74c43913fe60cccae39f6a2b76158bd6e473afeb5d9",
+      "content_hash": "sha256:9ef1c2e27adbae68915ef00e034b027264c0dc2932fc969074077028d2fc20c1",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
         "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/agent-resume-handoff.md",
+      "content_hash": "sha256:2a952f9e83d689dcd41d62dc55f715380e6c7dda1fdb19cba611a3c5b241faf3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
       ]
     },
     {
@@ -126,6 +137,17 @@
     },
     {
       "kind": "unknown",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/kaizen-program-envelope.v1.json",
+      "content_hash": "sha256:5dd659055c81fc2bc7e8a6d78ea94d83124acb69f1299598670b054f657f2814",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/persist-citdp-record-evidence.md",
       "content_hash": "sha256:33d7a907e41a047a61f583eb4c81ea39481df165d22efcc167b8494aef672b4b",
@@ -172,7 +194,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sponsor-decisions-evidence.md",
-      "content_hash": "sha256:bd3b5cf74d88d594a4b441d0208890ad45be1258d956fd3f1c242c6d1ec8162a",
+      "content_hash": "sha256:12a657810638cdfb94f70e621374128daec51cd8ffa1ed5d322e786532fae560",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
