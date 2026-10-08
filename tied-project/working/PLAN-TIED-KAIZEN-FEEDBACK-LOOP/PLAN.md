@@ -5,7 +5,7 @@ Linked plan: [`docs/tied-kaizen-feedback-loop-plan.md`](../../../docs/tied-kaize
 ## Program status (2026-10-07)
 
 **Orchestrator:** [`kaizen-program-execution-checklist.yaml`](./kaizen-program-execution-checklist.yaml)  
-**Current step:** `P7-initiate` — **Pilot (Phase 7)** — Phase 6 closed; next: **`plan-new-feature` for Phase 7 only** (do not start build-plan in close-out session)  
+**Current step:** `EXIT` — **Program closed** (Phases 0–2 and 4–7 complete on local/export evidence)  
 **Agent entry:** [`evidence/agent-resume-handoff.md`](./evidence/agent-resume-handoff.md)
 
 | Phase | Module | Status |
@@ -17,17 +17,15 @@ Linked plan: [`docs/tied-kaizen-feedback-loop-plan.md`](../../../docs/tied-kaize
 | 4 | Feedback analysis | complete — `b9a092f`, REQ-KAIZEN-FEEDBACK-ANALYSIS |
 | 5 | Review bridge | complete — `8437712`, REQ-KAIZEN-REVIEW-BRIDGE |
 | 6 | Outcome loop | complete — `REQ-KAIZEN-OUTCOME-LOOP`; close_out `kaizen-p6-close-20261007` |
-| 7 | Pilot | pending — next `plan-new-feature` (`REQ-KAIZEN-FEEDBACK-PILOT`) |
+| 7 | Pilot | complete — `REQ-KAIZEN-FEEDBACK-PILOT`; close_out `kaizen-p7-close-20261007` (8/8 tests) |
 
-**Transport hinge (sponsor 2026-10-07):** Finish Phases 6–7 without upstream delivery; Phase 3 waits for explicit reopen (recipient + channel).
+**Transport hinge (sponsor 2026-10-07):** Phases 6–7 finished without upstream delivery; Phase 3 waits for explicit reopen (recipient + channel).
 
 ## Next agent — do this first
 
-1. Read `kaizen-program-execution-checklist.yaml` → `agent_handoff` and `resume_protocol`.
-2. PRELOAD vocab listed in `agent_handoff.next_session.preload`.
-3. Read linked plan **Implement → Later phases**, Phase 7 row and exit evidence.
-4. **`plan-new-feature`** — Phase 7 only → mint `REQ-KAIZEN-FEEDBACK-PILOT` (suggested), ARCH/IMPL, CITDP, per-REQ checklist under `working/REQ-KAIZEN-FEEDBACK-PILOT/`.
-5. Do **not** start `build-plan` for Phase 7 in the same session unless sponsor directs continuation.
+1. Read `kaizen-program-execution-checklist.yaml` → `agent_handoff` (program at `EXIT`).
+2. **Phase 3 only** if sponsor reopens transport hinge on CITDP — otherwise no further Kaizen program phases without new sponsor scope.
+3. Pilot promotion to methodology remains a **separate** sponsor-approved TIED change (not implied by Phase 7 close-out).
 
 Refine documentation passes (Phase 0, Phase 2 refine) are historical; see refine tracker in this folder. Optional doc commit: [`evidence/commit-pass-handoff.md`](./evidence/commit-pass-handoff.md).
 

@@ -1,0 +1,18 @@
+▶ feedback-kaizen-pilot golden fixtures [REQ-KAIZEN-FEEDBACK-PILOT]
+  ✔ fixture: named_metrics_denominators (19.570625ms)
+  ✔ fixture: stop_criteria_triggered_privacy (1.585958ms)
+  ✔ fixture: stop_criteria_clear (1.460458ms)
+  ✔ fixture: transport_criteria_not_applicable (1.092917ms)
+  ✔ fixture: incompatible_cohort_size (1.218958ms)
+  ✔ fixture: denominator_mismatch_stop (2.03725ms)
+  ✔ fixture: promotion_rule_on_report (1.07825ms)
+  ✔ fixture: store_immutability — feedback.yaml unchanged after pilot run (2.121083ms)
+✔ feedback-kaizen-pilot golden fixtures [REQ-KAIZEN-FEEDBACK-PILOT] (31.012541ms)
+ℹ tests 8
+ℹ suites 1
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 179.014208

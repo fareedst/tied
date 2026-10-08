@@ -1,0 +1,15 @@
+{
+  "spec": {
+    "cohort_id": "pilot-privacy-halt",
+    "cohort": {
+      "compatibility_key": "feedback-capture.v1|operator_local"
+    },
+    "named_metrics": ["observations_captured"],
+    "stop_criteria_policy": {
+      "halt_on_trigger": true,
+      "classification_ambiguity_threshold": 99
+    },
+    "transport_phase_status": "deferred_closed"
+  },
+  "pilot_incident_signals": ["privacy_incident"]
+}

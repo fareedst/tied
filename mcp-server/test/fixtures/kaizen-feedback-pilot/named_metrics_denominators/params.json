@@ -1,0 +1,20 @@
+{
+  "spec": {
+    "cohort_id": "pilot-local-alpha",
+    "cohort": {
+      "compatibility_key": "feedback-capture.v1|operator_local",
+      "min_entries": 1
+    },
+    "named_metrics": [
+      "observations_captured",
+      "recurrence_groups",
+      "countermeasures_with_outcome",
+      "promotion_pending_rate"
+    ],
+    "stop_criteria_policy": {
+      "halt_on_trigger": false,
+      "classification_ambiguity_threshold": 99
+    },
+    "transport_phase_status": "deferred_closed"
+  }
+}

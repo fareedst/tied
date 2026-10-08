@@ -1232,6 +1232,15 @@ IMPL-GOAGENT-TEXT-SOURCES:
       - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
       - "text_test.go"
+IMPL-KAIZEN-FEEDBACK-PILOT:
+  cross_references:
+    architecture:
+      - "ARCH-KAIZEN-FEEDBACK-PILOT"
+    requirements:
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+  detail_file: "implementation-decisions/IMPL-KAIZEN-FEEDBACK-PILOT.yaml"
+  name: "Kaizen feedback pilot implementation"
+  status: "Active"
 IMPL-KAIZEN-OUTCOME-LOOP:
   cross_references:
     architecture:

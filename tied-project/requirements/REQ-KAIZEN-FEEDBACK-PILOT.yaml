@@ -1,0 +1,53 @@
+REQ-KAIZEN-FEEDBACK-PILOT:
+  category: "Functional"
+  name: "Kaizen Phase 7 feedback pilot"
+  non_goals:
+    - "Canonical REQ/ARCH/IMPL promotion from pilot report"
+    - "Treating pilot volume or thresholds as methodology change"
+    - "Upstream transport (Phase 3 deferred)"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Analysis-only evidence until separate sponsor TIED change"
+      - "Documented stop criteria evaluation before expanding scope"
+      - "Named cohort metrics with explicit denominators for local Kaizen operation"
+    problems_solved:
+      - "No bounded pilot envelope over digest and outcome facets"
+      - "Risk of conflating pilot volume with methodology success"
+    why: "Phase 7 closes the Kaizen program with a read-only pilot module that measures loop operation without promoting capability."
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      - "REQ-KAIZEN-OUTCOME-LOOP"
+      - "REQ-KAIZEN-REVIEW-BRIDGE"
+    related_to:
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      - "REQ-KAIZEN-OUTCOME-LOOP"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "feedback.yaml and project TIED YAML unchanged after pilot run"
+      metric: "store_immutability fixture"
+    - criterion: "Pilot report lists named metrics with numerator, denominator, unknown, and excluded counts"
+      metric: "named_metrics_denominators fixture"
+    - criterion: "privacy_incident signal can trigger halt per policy"
+      metric: "stop_criteria_triggered_privacy fixture"
+    - criterion: "promotion_rule analysis_evidence_until_separate_sponsor_tied_change on every report"
+      metric: "promotion_rule_on_report fixture"
+    - criterion: "Stop criteria documented and evaluated; transport-linked criteria not_applicable when Phase 3 deferred"
+      metric: "transport_criteria_not_applicable fixture"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-KAIZEN-FEEDBACK-PILOT"
+    code_annotations:
+      - "ARCH-KAIZEN-FEEDBACK-PILOT"
+      - "IMPL-KAIZEN-FEEDBACK-PILOT"
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+    implementation:
+      - "IMPL-KAIZEN-FEEDBACK-PILOT"
+    tests:
+      - "feedback-kaizen-pilot.test.ts"
+  validation_criteria:
+    - coverage: "Pilot golden matrix"
+      method: "Unit tests; optional MCP export at build-plan"

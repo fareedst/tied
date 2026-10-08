@@ -1,0 +1,21 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [
+    "warn_not_success",
+    "finding_unresolved"
+  ],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/gates/verification-2026-10-08T00-40-13-552Z.json",
+    "hash": "sha256:9e1047dfef96a94ab4403bfe4c5e7f88c0e1769f6ebbc3f05563f7227cac175a"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "spec": {
+    "cohort_id": "pilot-transport-deferred",
+    "cohort": {
+      "compatibility_key": "feedback-capture.v1|operator_local"
+    },
+    "named_metrics": ["observations_captured"],
+    "stop_criteria_policy": {
+      "halt_on_trigger": false
+    },
+    "transport_phase_status": "deferred_closed"
+  }
+}

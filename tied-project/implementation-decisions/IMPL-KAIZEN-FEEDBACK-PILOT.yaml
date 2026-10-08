@@ -1,0 +1,38 @@
+IMPL-KAIZEN-FEEDBACK-PILOT:
+  code_locations:
+    files:
+      - description: "Phase 7 exit evidence fixtures"
+        path: "mcp-server/test/fixtures/kaizen-feedback-pilot/"
+      - description: "Pilot cohort, metrics, stop criteria, report"
+        path: "mcp-server/src/feedback-kaizen-pilot.ts"
+      - description: "Pilot golden fixture tests"
+        path: "mcp-server/src/feedback-kaizen-pilot.test.ts"
+  cross_references:
+    architecture:
+      - "ARCH-KAIZEN-FEEDBACK-PILOT"
+      - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+    implementation:
+      - "IMPL-KAIZEN-OUTCOME-LOOP"
+      - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+    requirements:
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+  essence_pseudocode_path: "implementation-decisions/IMPL-KAIZEN-FEEDBACK-PILOT-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Delegates buildFeedbackDigest read-only"
+      - "Golden fixtures under mcp-server/test/fixtures/kaizen-feedback-pilot/"
+      - "RUN_KAIZEN_FEEDBACK_PILOT as primary entry"
+    summary: "feedback-kaizen-pilot.ts evaluates a named cohort, emits denominator-aware metrics and stop criteria on feedback-pilot.v1 without store or canonical YAML mutation."
+  name: "Kaizen feedback pilot implementation"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-KAIZEN-FEEDBACK-PILOT"
+    code_annotations:
+      - "ARCH-KAIZEN-FEEDBACK-PILOT"
+      - "IMPL-KAIZEN-FEEDBACK-PILOT"
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+    requirements:
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+    tests:
+      - "feedback-kaizen-pilot.test.ts"

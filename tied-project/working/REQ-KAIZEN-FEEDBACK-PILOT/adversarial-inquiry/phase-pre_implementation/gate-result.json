@@ -1,0 +1,13 @@
+{
+  "blocking": false,
+  "diagnostics": [],
+  "policy": "advisory",
+  "proofBoundary": "human_decision",
+  "schemaVersion": "adversarial-inquiry-gate.v1",
+  "scope": [
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001"
+  ],
+  "status": "warn",
+  "verdict": "UNRESOLVED"
+}

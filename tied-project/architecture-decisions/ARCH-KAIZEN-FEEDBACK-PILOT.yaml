@@ -1,0 +1,23 @@
+ARCH-KAIZEN-FEEDBACK-PILOT:
+  constraints:
+    - constraint: "Named metrics must expose numerator, denominator, unknown, and excluded; no universal score"
+    - constraint: "Pilot orchestration is read-only on feedback store and project TIED YAML"
+    - constraint: "promotion_rule on report forbids implying methodology change from pilot volume"
+    - constraint: "Stop criteria evaluation is mandatory; transport-linked criteria not_applicable when Phase 3 deferred"
+  cross_references:
+    architecture:
+      - "ARCH-KAIZEN-OUTCOME-LOOP"
+      - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+    implementation:
+      - "IMPL-KAIZEN-FEEDBACK-PILOT"
+    requirements:
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+  name: "Kaizen feedback pilot architecture"
+  rationale:
+    decisions:
+      - "feedback-kaizen-pilot.ts composes digest metrics and stop criteria into feedback-pilot.v1"
+      - "Pilot cohort is a named CohortSelector with comparability bounds"
+      - "Separate sponsor TIED change required for capability promotion"
+    why: "Bound local pilot measurement without conflating analysis evidence with methodology adoption."
+  status: "Planned"

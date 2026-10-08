@@ -1,0 +1,89 @@
+{
+  "graph": {
+    "projectId": "stdd-kaizen-p7",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-FEEDBACK-PILOT#no-methodology-promotion",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-p7",
+          "sourceRevision": "p7-src"
+        },
+        "architectureConstraintIds": ["arch-p7-no-promotion"]
+      },
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-FEEDBACK-PILOT#metrics-denominators",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-p7b",
+          "sourceRevision": "p7-src"
+        },
+        "architectureConstraintIds": ["arch-p7-denominators"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-p7-no-promotion",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001"
+        ]
+      },
+      {
+        "id": "arch-p7-denominators",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+          "kind": "block",
+          "name": "BUILD_PILOT_REPORT",
+          "derivation": "content",
+          "revision": "block-rev-p7",
+          "sourceRevision": "p7-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+          "kind": "block",
+          "name": "BUILD_NAMED_PILOT_METRICS",
+          "derivation": "content",
+          "revision": "block-rev-p7b",
+          "sourceRevision": "p7-src"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-p7",
+    "specification": [
+      {
+        "id": "p7-spec-no-promotion",
+        "kind": "behavior",
+        "value": "Pilot report promotion_rule forbids methodology change from pilot volume; no canonical YAML mutation.",
+        "order": 1
+      },
+      {
+        "id": "p7-spec-denominators",
+        "kind": "behavior",
+        "value": "Named metrics expose numerator, denominator, unknown, and excluded counts.",
+        "order": 2
+      },
+      {
+        "id": "p7-spec-stop",
+        "kind": "behavior",
+        "value": "Stop criteria evaluation includes privacy_incident; transport criteria not_applicable when Phase 3 deferred.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": []
+  }
+}

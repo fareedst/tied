@@ -1172,6 +1172,15 @@ ARCH-GOAGENT-YAML-STEPS:
     requirements:
       - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
+ARCH-KAIZEN-FEEDBACK-PILOT:
+  cross_references:
+    implementation:
+      - "IMPL-KAIZEN-FEEDBACK-PILOT"
+    requirements:
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+  detail_file: "architecture-decisions/ARCH-KAIZEN-FEEDBACK-PILOT.yaml"
+  name: "Kaizen feedback pilot architecture"
+  status: "Planned"
 ARCH-KAIZEN-OUTCOME-LOOP:
   cross_references:
     implementation:

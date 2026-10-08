@@ -1,0 +1,45 @@
+{
+  "schema_version": "feedback-pilot.v1",
+  "cohort_id": "pilot-local-alpha",
+  "entry_count": 3,
+  "promotion_rule": "analysis_evidence_until_separate_sponsor_tied_change",
+  "proof_boundary": "pilot_volume_not_methodology_change",
+  "metrics": [
+    {
+      "metric_id": "observations_captured",
+      "numerator": 3,
+      "denominator": 3,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    },
+    {
+      "metric_id": "recurrence_groups",
+      "numerator": 2,
+      "denominator": 3,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    },
+    {
+      "metric_id": "countermeasures_with_outcome",
+      "numerator": 1,
+      "denominator": 2,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    },
+    {
+      "metric_id": "promotion_pending_rate",
+      "numerator": 2,
+      "denominator": 3,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    }
+  ],
+  "stop_criteria": {
+    "any_triggered": false,
+    "halted": false
+  }
+}

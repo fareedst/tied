@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "id": "fb-transport-1",
+      "type": "methodology_improvement",
+      "title": "Deferred transport pilot",
+      "description": "Local export only.",
+      "created_at": "2026-06-01T10:00:00.000Z",
+      "occurred_at": "2026-06-01T10:00:00.000Z",
+      "privacy_tier": "operator_local",
+      "capture_schema_version": "feedback-capture.v1",
+      "duplicate_group": "dg-transport",
+      "context": { "observation_kind": "process" }
+    }
+  ]
+}

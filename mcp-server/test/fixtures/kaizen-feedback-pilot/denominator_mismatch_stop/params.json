@@ -1,0 +1,18 @@
+{
+  "spec": {
+    "cohort_id": "pilot-denom-mismatch",
+    "cohort": {
+      "compatibility_key": "feedback-capture.v1|operator_local",
+      "denominator_fingerprint": "cohort_fp_alpha"
+    },
+    "named_metrics": ["observations_captured"],
+    "stop_criteria_policy": {
+      "halt_on_trigger": false
+    },
+    "transport_phase_status": "deferred_closed"
+  },
+  "denominator_manifest": {
+    "manifest_ref": "manifests/denominator-a.json",
+    "denominator_fingerprint": "cohort_fp_beta"
+  }
+}

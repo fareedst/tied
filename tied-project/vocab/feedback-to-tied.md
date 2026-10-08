@@ -34,6 +34,10 @@ Privacy tier, idempotency key, proof boundary, client cohort, and denominator fi
 | **outcome observation** | success metric (alone) | Follow-up evidence comparing a countermeasure with its baseline; may be improved, unchanged, regressed, inconclusive, or not measured |
 | **feedback digest** | report (alone) | Versioned client-to-TIED analysis projection that references source feedback without replacing it |
 | **outcome loop** | success loop (alone) | Phase 6 follow-up: **baseline**, **follow-up window**, **outcome observation**, evidence links; regression routes to **feedback analysis** without reopening canonical requirements |
+| **feedback pilot** | beta rollout (alone), GA (for Kaizen) | Phase 7 bounded evaluation: **pilot cohort**, **named metrics** with denominators, **stop criteria**; emits `feedback-pilot.v1` analysis evidence only |
+| **pilot cohort** | user group (alone) | Named comparable subset of feedback entries selected by **compatibility_key** and optional client ids with min/max size bounds |
+| **stop criteria** | kill switch (alone) | Documented halt conditions for the pilot (privacy incident, notification overload, transport loss, classification ambiguity); transport-linked criteria **not_applicable** while Phase 3 transport is deferred |
+| **pilot metrics** | KPI dashboard (alone) | Closed-catalog metric rows with numerator, denominator, unknown, and excluded counts; no universal score |
 | **follow-up window** | measurement period (alone) | ISO8601 bounds for when an **outcome observation** may be recorded against a **countermeasure** |
 | **review bridge** | promotion bridge (alone) | Phase 5 handoff from digest `observation_group` to existing entry ids and `createReviewedLeapProposal`; no second queue |
 | **proposal link** | leap id (alone) | Non-canonical queue entry id returned after reviewed approve path |
@@ -85,6 +89,7 @@ Normative background for the **Kaizen loop** label. Planning detail: [`../../doc
 | Observation kind | observation kind | `(proposed) entries[].observation_kind` | capture / operational adapter param | `(proposed) ObservationKind` |
 | Source normalization | kind and entry type inference | `context.observation_kind`, workflow/workaround/baseline_ref on operational context | `tied_feedback_operational_add`, `tied_feedback_capture_observation` | `resolveFeedbackEntryType`, `defaultObservationKindFromSourceType` in `feedback-source-normalization.ts` |
 | Outcome loop | outcome observation record | `context.outcome_observations[]` outcome-observation.v1 | `(proposed) tied_feedback_outcome_record` | `RUN_OUTCOME_LOOP` in `feedback-outcome-loop.ts` |
+| Feedback pilot | pilot report | `(proposed) feedback-pilot.v1` export artifact | `(proposed) tied_feedback_pilot_run` | `RUN_KAIZEN_FEEDBACK_PILOT` in `feedback-kaizen-pilot.ts` |
 | Promotion status | promotion status | `entries[].promotion_status` | promotion result | `PromotionStatus` |
 | Local capture receipt | receipt | returned by capture; not a second store | `tied_feedback_capture_observation` | `buildCaptureReceipt()` |
 | Optional context | context | `entries[].context` | add param `context` | `Record<string, unknown>` |

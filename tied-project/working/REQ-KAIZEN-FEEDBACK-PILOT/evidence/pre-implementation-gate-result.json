@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/gates/pre_implementation-2026-10-08T00-33-04-008Z.json",
+    "hash": "sha256:da25133749d19abed4d97b8bdea98fcdc3727806669bbea977adfdf7d7655b51"
+  }
+}

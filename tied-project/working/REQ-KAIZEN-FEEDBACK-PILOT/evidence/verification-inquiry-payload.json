@@ -1,0 +1,182 @@
+{
+  "graph": {
+    "projectId": "stdd-kaizen-p7",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-FEEDBACK-PILOT#no-methodology-promotion",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-p7",
+          "sourceRevision": "p7-src"
+        },
+        "architectureConstraintIds": ["arch-p7-no-promotion"]
+      },
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-FEEDBACK-PILOT#metrics-denominators",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-p7b",
+          "sourceRevision": "p7-src"
+        },
+        "architectureConstraintIds": ["arch-p7-denominators"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-p7-no-promotion",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+          "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003"
+        ]
+      },
+      {
+        "id": "arch-p7-denominators",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+          "kind": "block",
+          "name": "BUILD_PILOT_REPORT",
+          "derivation": "content",
+          "revision": "block-rev-p7",
+          "sourceRevision": "p7-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+          "kind": "block",
+          "name": "BUILD_NAMED_PILOT_METRICS",
+          "derivation": "content",
+          "revision": "block-rev-p7b",
+          "sourceRevision": "p7-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003",
+          "kind": "block",
+          "name": "RUN_KAIZEN_FEEDBACK_PILOT",
+          "derivation": "content",
+          "revision": "block-rev-p7c",
+          "sourceRevision": "p7-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-p7-pilot-tests",
+        "blockId": "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003",
+        "kind": "test",
+        "location": "mcp-server/src/feedback-kaizen-pilot.test.ts",
+        "sourceRevision": "p7-src"
+      },
+      {
+        "id": "loci-p7-pilot-prod",
+        "blockId": "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003",
+        "kind": "production",
+        "location": "mcp-server/src/feedback-kaizen-pilot.ts",
+        "sourceRevision": "p7-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-p7",
+    "specification": [
+      {
+        "id": "p7-spec-no-promotion",
+        "kind": "behavior",
+        "value": "Pilot report promotion_rule forbids methodology change from pilot volume; no canonical YAML mutation.",
+        "order": 1
+      },
+      {
+        "id": "p7-spec-denominators",
+        "kind": "behavior",
+        "value": "Named metrics expose numerator, denominator, unknown, and excluded counts.",
+        "order": 2
+      },
+      {
+        "id": "p7-spec-stop",
+        "kind": "behavior",
+        "value": "Stop criteria evaluation includes privacy_incident; transport criteria not_applicable when Phase 3 deferred.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "p7-test-promotion-rule",
+        "statementId": "p7-spec-no-promotion",
+        "kind": "behavior",
+        "value": "promotion_rule_on_report fixture asserts analysis_only promotion_rule",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-p7",
+        "source": { "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:promotion_rule_on_report" }
+      },
+      {
+        "id": "p7-test-denominators",
+        "statementId": "p7-spec-denominators",
+        "kind": "behavior",
+        "value": "named_metrics_denominators fixture checks catalog metric rows",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-p7b",
+        "source": { "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:named_metrics_denominators" }
+      },
+      {
+        "id": "p7-test-stop-privacy",
+        "statementId": "p7-spec-stop",
+        "kind": "behavior",
+        "value": "stop_criteria_triggered_privacy fixture halts on privacy_incident signal",
+        "order": 3,
+        "reliable": true,
+        "blockRevision": "block-rev-p7c",
+        "source": { "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:stop_criteria_triggered_privacy" }
+      },
+      {
+        "id": "p7-test-store",
+        "statementId": "p7-spec-no-promotion",
+        "kind": "behavior",
+        "value": "store_immutability fixture leaves feedback.yaml unchanged",
+        "order": 4,
+        "reliable": true,
+        "blockRevision": "block-rev-p7c",
+        "source": { "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:store_immutability" }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "p7-prod-report",
+        "statementId": "p7-spec-no-promotion",
+        "kind": "behavior",
+        "value": "buildPilotReport sets analysis_evidence promotion_rule and proof_boundary",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-p7",
+        "source": { "location": "mcp-server/src/feedback-kaizen-pilot.ts:buildPilotReport" }
+      },
+      {
+        "id": "p7-prod-metrics",
+        "statementId": "p7-spec-denominators",
+        "kind": "behavior",
+        "value": "buildNamedPilotMetrics maps closed catalog metrics with denominators",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-p7b",
+        "source": { "location": "mcp-server/src/feedback-kaizen-pilot.ts:buildNamedPilotMetrics" }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+    "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003"
+  ]
+}

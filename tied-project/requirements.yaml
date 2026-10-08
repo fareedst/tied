@@ -1282,6 +1282,15 @@ REQ-KAIZEN-FEEDBACK-ANALYSIS:
       - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
     tests:
       - "feedback-analysis.test.ts"
+REQ-KAIZEN-FEEDBACK-PILOT:
+  cross_references:
+    architecture:
+      - "ARCH-KAIZEN-FEEDBACK-PILOT"
+    implementation:
+      - "IMPL-KAIZEN-FEEDBACK-PILOT"
+  detail_file: "requirements/REQ-KAIZEN-FEEDBACK-PILOT.yaml"
+  name: "Kaizen Phase 7 feedback pilot"
+  status: "Implemented"
 REQ-KAIZEN-OBSERVATION-CAPTURE:
   category: "Functional"
   detail_file: "requirements/REQ-KAIZEN-OBSERVATION-CAPTURE.yaml"

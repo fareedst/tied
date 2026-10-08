@@ -1,0 +1,118 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "A",
+      "id": "11aec65d1e6ee24a",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p7-spec-stop"
+    },
+    {
+      "direction": "B",
+      "id": "14567f8e96af30f5",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p7-spec-stop"
+    },
+    {
+      "direction": "A",
+      "id": "26f4064a34f1a9e3",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p7-spec-denominators"
+    },
+    {
+      "direction": "B",
+      "id": "6bbeb97d6bdd51c7",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p7-spec-denominators"
+    },
+    {
+      "direction": "B",
+      "id": "9479576989ee86c6",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p7-spec-no-promotion"
+    },
+    {
+      "direction": "A",
+      "id": "9b21301f8de18c37",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p7-spec-no-promotion"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-KAIZEN-FEEDBACK-PILOT#metrics-denominators",
+        "kind": "criterion_constraint",
+        "to": "constraint:arch-p7-denominators"
+      },
+      {
+        "from": "REQ-KAIZEN-FEEDBACK-PILOT#no-methodology-promotion",
+        "kind": "criterion_constraint",
+        "to": "constraint:arch-p7-no-promotion"
+      },
+      {
+        "from": "constraint:arch-p7-denominators",
+        "kind": "constraint_block",
+        "to": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002"
+      },
+      {
+        "from": "constraint:arch-p7-no-promotion",
+        "kind": "constraint_block",
+        "to": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:arch-p7-denominators",
+        "kind": "constraint"
+      },
+      {
+        "id": "constraint:arch-p7-no-promotion",
+        "kind": "constraint"
+      },
+      {
+        "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+        "kind": "block",
+        "revision": "block-rev-p7b"
+      },
+      {
+        "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+        "kind": "block",
+        "revision": "block-rev-p7"
+      },
+      {
+        "id": "REQ-KAIZEN-FEEDBACK-PILOT#metrics-denominators",
+        "kind": "criterion",
+        "revision": "criterion-rev-p7b"
+      },
+      {
+        "id": "REQ-KAIZEN-FEEDBACK-PILOT#no-methodology-promotion",
+        "kind": "criterion",
+        "revision": "criterion-rev-p7"
+      }
+    ],
+    "projectId": "stdd-kaizen-p7"
+  },
+  "projectId": "stdd-kaizen-p7",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001"
+  ]
+}

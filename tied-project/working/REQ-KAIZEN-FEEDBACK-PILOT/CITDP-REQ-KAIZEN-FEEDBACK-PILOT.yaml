@@ -1,0 +1,157 @@
+CITDP-REQ-KAIZEN-FEEDBACK-PILOT:
+  record_identity:
+    title: Kaizen Phase 7 feedback pilot
+    change_request_id: REQ-KAIZEN-FEEDBACK-PILOT
+    author: plan-new-feature
+    date: '2026-10-07'
+    record_status: implementation
+    batch: kaizen-phase-7
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: not_measured
+    implementation_depth_tier: integrated
+  change_definition:
+    current_behavior: >
+      Phases 4–6 provide read-only digest projection, review bridge, and outcome loop
+      facets, but no bounded pilot module names a comparable cohort, emits denominator-aware
+      pilot metrics, or documents stop criteria evaluation for local/export-only operation.
+    desired_behavior: >
+      A feedback-pilot module resolves a named pilot cohort, composes closed-catalog named
+      metrics with numerators and denominators from digest and outcome data, evaluates
+      documented stop criteria (with transport-related criteria not_applicable while Phase 3
+      is deferred), and emits feedback-pilot.v1 analysis evidence without methodology promotion.
+    unchanged_behavior:
+      - buildFeedbackDigest read-only semantics and store immutability (Phase 4)
+      - Review bridge and LEAP queue (Phase 5)
+      - Outcome loop append-only facets (Phase 6)
+      - Phase 3 transport deferred; local append and export only
+    non_goals:
+      - Treating pilot volume or metric thresholds as methodology change or REQ promotion
+      - Canonical REQ/ARCH/IMPL YAML writes from pilot orchestration
+      - Upstream transport or notification delivery (Phase 3 closed)
+      - Universal improvement score or maturity index
+    success_criteria:
+      - >-
+        Golden fixtures pass for named metrics with denominators, stop criteria triggered
+        and clear paths, transport criteria not_applicable under deferred transport,
+        incompatible cohort rejection, and store immutability
+      - >-
+        Stop criteria documented in report: privacy_incident, notification_overload,
+        transport_loss, classification_ambiguity_unresolved
+      - >-
+        promotion_rule analysis_evidence_until_separate_sponsor_tied_change on every report
+  impact_analysis:
+    modules:
+      - feedback-kaizen-pilot (proposed)
+      - feedback-analysis (read-only digest delegate)
+      - feedback-outcome-loop (read outcome facets for metrics)
+    files:
+      - mcp-server/src/feedback-kaizen-pilot.ts (proposed)
+      - mcp-server/src/feedback-kaizen-pilot.test.ts (proposed)
+      - mcp-server/test/fixtures/kaizen-feedback-pilot/ (proposed)
+    depends_on:
+      - REQ-KAIZEN-FEEDBACK-ANALYSIS
+      - REQ-KAIZEN-OUTCOME-LOOP
+      - REQ-KAIZEN-REVIEW-BRIDGE
+      - REQ-FEEDBACK_TO_TIED
+    tags:
+      - kaizen-phase-7
+      - integrated
+    tied_tokens_new:
+      - REQ-KAIZEN-FEEDBACK-PILOT
+      - ARCH-KAIZEN-FEEDBACK-PILOT
+      - IMPL-KAIZEN-FEEDBACK-PILOT
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: integrated
+      gate_policy: advisory
+      assurance_profile: baseline-functional
+      research_profile: integrated-agent
+      prior_depth_tier: integrated
+      depth_selected_at: '2026-10-07T17:30:00-07:00'
+      eligibility_triggers_matched:
+        - persistence-adjacent read of feedback store and optional pilot report write
+        - external pilot spec and incident signals in evaluation inputs
+      rationale: >
+        Phase 7 evaluates bounded pilot metrics and stop criteria over operational feedback;
+        integrated depth per kaizen program phase_defaults; advisory gate until build-plan verification.
+      counterexamples:
+        - Pilot report auto-promotes methodology or updates semantic-tokens.yaml
+        - Pilot volume alone marks REQ Implemented without separate sponsor change
+        - Stop criteria ignored when privacy_incident signal present
+        - Metrics emitted without denominators or with silent universal score
+        - Transport stop criteria block local-only pilot when Phase 3 deferred
+      falsification_questions:
+        - Does stop_criteria_triggered fixture halt before implying promotion?
+        - Does store_immutability fixture show tied-project YAML unchanged?
+        - Are notification_overload and transport_loss not_applicable when transport deferred?
+      disconfirming_observations:
+        - Any yaml_index_update from feedback-kaizen-pilot module
+        - RED tests green before implementation lands (build-plan scope)
+      close_out_inquiry_waiver:
+        owner: sponsor
+        expiry: '2026-12-31'
+        rationale: >
+          Phase 7 verification run kaizen-p7-verify-20261007 covers feedback-pilot
+          golden fixtures and store immutability; separate close_out adversarial
+          inquiry receipt not collected under advisory gate_policy.
+        approval: kaizen-program-pre-approved-batch-2026-10-07
+        referenced_verification_run_id: kaizen-p7-verify-20261007
+      evidence_references:
+        - docs/tied-kaizen-feedback-loop-plan.md
+        - tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/CITDP-REQ-KAIZEN-FEEDBACK-PILOT.yaml
+        - tied-project/implementation-decisions/IMPL-KAIZEN-FEEDBACK-PILOT-pseudocode.md
+    risks:
+      - id: RISK-KFP-001
+        description: Pilot results mistaken for methodology promotion
+        severity: High
+        likelihood: Medium
+        mitigation: Explicit promotion_rule on report; non-goal in REQ; immutability tests
+      - id: RISK-KFP-002
+        description: Metrics without denominators mislead sponsor
+        severity: High
+        likelihood: Medium
+        mitigation: Named metric catalog requires denominator fields; golden fixtures
+      - id: RISK-KFP-003
+        description: Stop criteria not evaluated under deferred transport
+        severity: Medium
+        likelihood: Low
+        mitigation: not_applicable status for transport-linked criteria; fixture coverage
+  test_strategy:
+    summary: >
+      Unit tests with golden JSON fixtures under
+      mcp-server/test/fixtures/kaizen-feedback-pilot/; RED at build-plan; optional MCP
+      export binding; no E2E.
+    fixtures:
+      - name: named_metrics_denominators
+        theme: each catalog metric exposes numerator, denominator, unknown, excluded
+      - name: stop_criteria_triggered_privacy
+        theme: privacy_incident signal triggers halt per policy
+      - name: stop_criteria_clear
+        theme: no signals; all applicable criteria clear
+      - name: transport_criteria_not_applicable
+        theme: notification_overload and transport_loss not_applicable when Phase 3 deferred
+      - name: incompatible_cohort_size
+        theme: below min_entries returns IncompatibleCohort
+      - name: denominator_mismatch_stop
+        theme: digest DenominatorMismatch surfaces stop criterion or error
+      - name: promotion_rule_on_report
+        theme: every report includes analysis_only promotion_rule
+      - name: store_immutability
+        theme: feedback.yaml and tied-project YAML unchanged after pilot run
+    module_validation:
+      - module: feedback-kaizen-pilot
+        boundary: read-only store, metrics, stop criteria, report emit only
+        tests: feedback-kaizen-pilot.test.ts
+    proof_boundary: >-
+      Pilot measures local Kaizen loop operation; does not prove production transport
+      reliability while Phase 3 remains deferred
+  completion_criteria:
+    activation:
+      run_id: kaizen-p7-preimpl-20261007
+      phase: pre_implementation
+      request_token: REQ-KAIZEN-FEEDBACK-PILOT
+    persist_policy: Persist to tied-project/citdp/ at close-out after build-plan
+    focused_tests: feedback-kaizen-pilot.test.ts
+    lint: npx tsc -b in mcp-server
+    verification: tied_validate_consistency; integrated close_out gates after build-plan

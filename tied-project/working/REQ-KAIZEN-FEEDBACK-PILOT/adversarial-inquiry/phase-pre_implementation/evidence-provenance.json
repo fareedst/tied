@@ -1,0 +1,17 @@
+{
+  "provenance": {
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "pre_implementation",
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "request_token": "REQ-KAIZEN-FEEDBACK-PILOT",
+    "run_id": "kaizen-p7-preimpl-20261007",
+    "scope": [
+      "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+      "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001"
+    ],
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

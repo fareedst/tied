@@ -1,0 +1,12 @@
+{
+  "spec": {
+    "cohort_id": "pilot-too-small",
+    "cohort": {
+      "compatibility_key": "feedback-capture.v1|operator_local",
+      "min_entries": 5
+    },
+    "named_metrics": ["observations_captured"],
+    "stop_criteria_policy": {},
+    "transport_phase_status": "deferred_closed"
+  }
+}

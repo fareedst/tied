@@ -1,0 +1,13 @@
+{
+  "stop_criteria": {
+    "any_triggered": true,
+    "halted": false,
+    "criteria": [
+      { "criterion_id": "privacy_incident", "status": "clear" },
+      { "criterion_id": "notification_overload", "status": "not_applicable", "detail": "transport_deferred" },
+      { "criterion_id": "transport_loss", "status": "not_applicable", "detail": "transport_deferred" },
+      { "criterion_id": "classification_ambiguity_unresolved", "status": "clear" },
+      { "criterion_id": "denominator_incompatible", "status": "triggered", "detail": "digest_denominator_mismatch" }
+    ]
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-kaizen-p7",
+    "scope": [
+      "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+      "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+      "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003"
+    ],
+    "graph": {
+      "projectId": "stdd-kaizen-p7",
+      "nodes": [
+        {
+          "id": "constraint:arch-p7-denominators",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-p7-no-promotion",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-p7-pilot-prod",
+          "kind": "evidence",
+          "revision": "p7-src"
+        },
+        {
+          "id": "evidence:loci-p7-pilot-tests",
+          "kind": "evidence",
+          "revision": "p7-src"
+        },
+        {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+          "kind": "block",
+          "revision": "block-rev-p7b"
+        },
+        {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+          "kind": "block",
+          "revision": "block-rev-p7"
+        },
+        {
+          "id": "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003",
+          "kind": "block",
+          "revision": "block-rev-p7c"
+        },
+        {
+          "id": "REQ-KAIZEN-FEEDBACK-PILOT#metrics-denominators",
+          "kind": "criterion",
+          "revision": "criterion-rev-p7b"
+        },
+        {
+          "id": "REQ-KAIZEN-FEEDBACK-PILOT#no-methodology-promotion",
+          "kind": "criterion",
+          "revision": "criterion-rev-p7"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-KAIZEN-FEEDBACK-PILOT#metrics-denominators",
+          "to": "constraint:arch-p7-denominators",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-KAIZEN-FEEDBACK-PILOT#no-methodology-promotion",
+          "to": "constraint:arch-p7-no-promotion",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-p7-denominators",
+          "to": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-p7-no-promotion",
+          "to": "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-p7-no-promotion",
+          "to": "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003",
+          "to": "evidence:loci-p7-pilot-prod",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003",
+          "to": "evidence:loci-p7-pilot-tests",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "14567f8e96af30f5",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "p7-spec-stop",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "55ea6ca24490a997",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-no-promotion",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:store_immutability"
+        },
+        "evidenceRefs": [
+          "p7-test-store"
+        ]
+      },
+      {
+        "id": "639899ae14928f17",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-stop",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:stop_criteria_triggered_privacy"
+        },
+        "evidenceRefs": [
+          "p7-test-stop-privacy"
+        ]
+      },
+      {
+        "id": "77629c809a3fe14b",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "p7-spec-denominators",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.ts:buildNamedPilotMetrics"
+        },
+        "evidenceRefs": [
+          "p7-prod-metrics"
+        ]
+      },
+      {
+        "id": "9bf79a5e84cc32a2",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "p7-spec-denominators",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.ts:buildNamedPilotMetrics"
+        },
+        "evidenceRefs": [
+          "p7-prod-metrics"
+        ]
+      },
+      {
+        "id": "9fd6ec2ab63f9507",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-no-promotion",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:store_immutability"
+        },
+        "evidenceRefs": [
+          "p7-test-store"
+        ]
+      },
+      {
+        "id": "aaf666f17e42585e",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-denominators",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:named_metrics_denominators"
+        },
+        "evidenceRefs": [
+          "p7-test-denominators"
+        ]
+      },
+      {
+        "id": "b2aa681c0e4720f4",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-no-promotion",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:promotion_rule_on_report"
+        },
+        "evidenceRefs": [
+          "p7-test-promotion-rule"
+        ]
+      },
+      {
+        "id": "bc0e0e155e0ff7f9",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-denominators",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:named_metrics_denominators"
+        },
+        "evidenceRefs": [
+          "p7-test-denominators"
+        ]
+      },
+      {
+        "id": "e4cb346df3233e40",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-stop",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:stop_criteria_triggered_privacy"
+        },
+        "evidenceRefs": [
+          "p7-test-stop-privacy"
+        ]
+      },
+      {
+        "id": "e51fd21838d06aa4",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "p7-spec-no-promotion",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.ts:buildPilotReport"
+        },
+        "evidenceRefs": [
+          "p7-prod-report"
+        ]
+      },
+      {
+        "id": "f1271fb616010a9b",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "p7-spec-no-promotion",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/feedback-kaizen-pilot.test.ts:store_immutability"
+        },
+        "evidenceRefs": [
+          "p7-test-store"
+        ]
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002": "REVIEW",
+    "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001": "REVIEW",
+    "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+      "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+      "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-KAIZEN-FEEDBACK-PILOT",
+      "project_id": "stdd-kaizen-p7",
+      "run_id": "kaizen-p7-verify-20261007",
+      "phase": "verification",
+      "scope": [
+        "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_PILOT_REPORT#p7plan0001",
+        "IMPL-KAIZEN-FEEDBACK-PILOT#BUILD_NAMED_PILOT_METRICS#p7plan0002",
+        "IMPL-KAIZEN-FEEDBACK-PILOT#RUN_KAIZEN_FEEDBACK_PILOT#p7plan0003"
+      ],
+      "scope_hash": "1c792fcd9384952adf0c00f42a03018872d7b347d4ce6d02873944b56e95fedc",
+      "artifact_hashes": {
+        "obligation-report.json": "75e1acac260821dea1ccc9f904056066acaa38c11cdfe23feb569bf4e64e20bd",
+        "finding-ledger.jsonl": "a598153502f7a4c7ef80f26ca89b76bbdc003db8e126b18575d62ce558b102cd",
+        "gate-result.json": "a3066ab69e1402cbdcc35e345ee2a2c2dda00bf92338b5a690e987b4eff8df4b",
+        "evidence-provenance.json": "ba87b51b65e826b7a32a9d98e17d995c25a4feb7c9fd21cdd47012a9a35dce2e"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-PILOT",
+        "project_id": "stdd-kaizen-p7",
+        "run_id": "kaizen-p7-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "1c792fcd9384952adf0c00f42a03018872d7b347d4ce6d02873944b56e95fedc",
+        "hash": "75e1acac260821dea1ccc9f904056066acaa38c11cdfe23feb569bf4e64e20bd",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-PILOT",
+        "project_id": "stdd-kaizen-p7",
+        "run_id": "kaizen-p7-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "1c792fcd9384952adf0c00f42a03018872d7b347d4ce6d02873944b56e95fedc",
+        "hash": "a598153502f7a4c7ef80f26ca89b76bbdc003db8e126b18575d62ce558b102cd",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-PILOT",
+        "project_id": "stdd-kaizen-p7",
+        "run_id": "kaizen-p7-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "1c792fcd9384952adf0c00f42a03018872d7b347d4ce6d02873944b56e95fedc",
+        "hash": "a3066ab69e1402cbdcc35e345ee2a2c2dda00bf92338b5a690e987b4eff8df4b",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-PILOT",
+        "project_id": "stdd-kaizen-p7",
+        "run_id": "kaizen-p7-verify-20261007",
+        "phase": "verification",
+        "scope_hash": "1c792fcd9384952adf0c00f42a03018872d7b347d4ce6d02873944b56e95fedc",
+        "hash": "ba87b51b65e826b7a32a9d98e17d995c25a4feb7c9fd21cdd47012a9a35dce2e",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-PILOT/adversarial-inquiry/phase-verification/evidence-provenance.json"
+      }
+    }
+  }
+}
