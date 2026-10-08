@@ -8,7 +8,7 @@
 # checklist-tracker.yaml (request PLAN-TIED-KAIZEN-FEEDBACK-LOOP, doc-only pass).
 
 schema_version: kaizen-program-execution.v1
-last_updated: "2026-10-07T17:45:00-07:00"
+last_updated: "2026-10-08T18:30:00-07:00"
 
 program:
   label: Kaizen loop capability (Phases 0–7)
@@ -105,12 +105,16 @@ current_step: EXIT
 
 # Program Phases 0–2 and 4–7 complete; Phase 3 deferred until transport hinge reopen.
 agent_handoff:
-  updated_at: "2026-10-07T17:45:00-07:00"
+  updated_at: "2026-10-08T18:30:00-07:00"
   intent: >
     Kaizen feedback loop program (Phases 0–7 batch) is closed on local/export
     pilot evidence. Phase 3 outbox/transport remains deferred until sponsor
-    names recipient and channel and updates CITDP. Do not treat pilot metrics
-    as methodology promotion without a separate sponsor-approved TIED change.
+    names recipient and channel and updates CITDP. MCP composition for Phases
+    4–7 (REQ-KAIZEN-FEEDBACK-MCP-WIRING, 77b5ae6) is implemented locally but
+    not part of the closed program phases; run plan-close-out on that REQ for
+    integrated gate envelope parity. Fourteen commits on main are unpushed.
+    Do not treat pilot metrics as methodology promotion without a separate
+    sponsor-approved TIED change.
   next_session:
     program_step: EXIT
     phase_id: null
@@ -118,6 +122,7 @@ agent_handoff:
     suggested_req_token: null
     workflow_sequence:
       - IF Phase 3 hinge reopen on CITDP THEN CALL plan-new-feature for Phase 3 only
+      - IF REQ-KAIZEN-FEEDBACK-MCP-WIRING close-out incomplete THEN CALL plan-close-out on that REQ only (program stays EXIT)
       - IF LEAP drift on closed phase THEN recovery.leap_after_phase_close
     linked_plan_anchor: docs/tied-kaizen-feedback-loop-plan.md — Implement § Later phases, Phase 7 row and exit evidence
     preload:
@@ -167,6 +172,20 @@ agent_handoff:
   planning_request_close_out:
     status: complete
     note: traceable-commit for PLAN-TIED-KAIZEN-FEEDBACK-LOOP aligns linked plan with program EXIT; see evidence/traceable-commit-evidence.md
+  post_program_follow_up:
+    req_token: REQ-KAIZEN-FEEDBACK-MCP-WIRING
+    status: closed
+    git_implementation: 77b5ae6
+    close_out_run_id: kaizen-kmcp-close-20261008
+    close_out_evidence: tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/closeout-run-close-out-gates-final.json
+    working_plan: tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/plan-close-out-handoff.md
+    pending:
+      - push to origin when sponsor asks
+      - optional REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION index reconcile
+      - Phase 3 transport (program hinge)
+    publish:
+      local_commits_ahead_of_origin: 14
+      push: deferred_by_sponsor
 
 phase_defaults:
   depth_tier: integrated

@@ -4,7 +4,7 @@ CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING:
     change_request_id: REQ-KAIZEN-FEEDBACK-MCP-WIRING
     author: plan-new-feature
     date: "2026-10-07"
-    record_status: plan
+    record_status: closed
     refined_at: "2026-10-08"
     batch: kaizen-mcp-composition
     depth_tier: integrated
@@ -79,6 +79,15 @@ CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING:
       disconfirming_observations:
         - Composition tests use temp dirs and assert ok/error shapes only at build-plan
         - Pseudo-code sets canonicalWrite and storeMutation false on all four handlers
+      close_out_inquiry_waiver:
+        owner: sponsor
+        expiry: "2026-12-31"
+        rationale: >
+          Pre_implementation inquiry kaizen-kmcp-preimpl-20261007 covers composition MCP surface;
+          build-plan verification (4/4 composition tests, tsc -b) satisfies advisory close_out without
+          a second phase-close_out adversarial receipt.
+        approval: kaizen-program-pre-approved-batch-2026-10-07
+        referenced_verification_run_id: kaizen-kmcp-close-20261008
     risks:
       - id: RISK-KMCP-001
         description: Handler duplicates module logic and drifts from unit tests

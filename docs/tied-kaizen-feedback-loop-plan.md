@@ -1,11 +1,11 @@
 # TIED Kaizen feedback loop: from work observations to system improvement
 
-**Status:** Refined planning document. Phase 1 capture and Phase 2 source normalization are implemented; Phases 3–7 are not.  
-**Request:** `PLAN-TIED-KAIZEN-FEEDBACK-LOOP`  
-**Latest pass:** `refine-plan` for **Phase 2** (`REQ-KAIZEN-SOURCE-NORMALIZATION`). `depth_tier: integrated` for the Phase 2 capability scope. `gate_policy: advisory`. Evidence-chain **profile depth** is `not_measured` for documentation edits.  
-**Scope:** Name the loop, bound phased implementation, record sponsor decisions (2026-10-07), and refine Phase 2 source normalization before `plan-new-feature`.  
-**Last updated:** 2026-10-07 (Phase 2 refine-plan)  
-**Phase 2 working folder:** [`PLAN.md`](../tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/PLAN.md) · [`checklist-tracker.yaml`](../tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/checklist-tracker.yaml) · [`CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION.yaml`](../tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION.yaml)
+**Status:** **Program closed** on local/export pilot evidence (orchestrator `EXIT`). Phases **1–2 and 4–7** are implemented and committed locally (**14 commits** ahead of `origin/main`; publish deferred). **Phase 3** (outbox/transport) remains **deferred** until sponsor hinge reopen. **Post-program:** MCP composition for Phases 4–7 closed in [`REQ-KAIZEN-FEEDBACK-MCP-WIRING`](../tied-project/requirements/REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml) (`77b5ae6`, close-out `kaizen-kmcp-close-20261008`).  
+**Request:** `PLAN-TIED-KAIZEN-FEEDBACK-LOOP` (planning request **closed** — `7c91e7b`)  
+**Latest pass:** `refine-plan` — align linked plan and orchestrator with checked-in implementation (2026-10-08).  
+**Scope:** Historical naming and phase contract; execution handoff lives in the orchestrator and per-REQ working folders.  
+**Last updated:** 2026-10-08 (post-implementation refine-plan)  
+**MCP wiring (composition):** [`PLAN.md`](../tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/PLAN.md) · [`build-plan-evidence.md`](../tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/build-plan-evidence.md)
 **Program execution checklist (Phases 0–7):** [`kaizen-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml) — central resume surface after sponsor batch approval (2026-10-07); one phase per `plan-new-feature` with its own per-REQ tracker copy.  
 **Refine-pass tracker (documentation only):** [`checklist-tracker.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/checklist-tracker.yaml)  
 **Commit handoff:** [`commit-pass-handoff.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/commit-pass-handoff.md) (separate `plan-close-out` pass)  
@@ -251,7 +251,13 @@ A change is an improvement only when an **outcome observation** can be compared 
 
 The requirement record [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION](../tied-project/requirements/REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION.yaml) still says `Planned`. The architecture, the implementation decision, and `feedback-promotion.ts` are already present. This plan does not edit that status. A later verification-gated pass can reconcile it.
 
-These capabilities support collection and a review boundary. They are not yet a **Kaizen loop**. There is no **observation kind**, no **receipt** distinct from the add result, no **feedback digest**, and no **outcome observation**.
+Phases **1–2 and 4–7** (see orchestrator `implementation_commits`) add **observation kind**, point-of-work **receipt**, read-only **feedback digest**, review bridge, **outcome observation**, and pilot reporting on `feedback.yaml` — still **local/export-first** (Phase 3 transport deferred). MCP tools: `tied_feedback_capture_observation` (Phase 1) plus `tied_feedback_analysis_digest`, `tied_feedback_review_bridge`, `tied_feedback_outcome_record`, and `tied_feedback_pilot_run` ([REQ-KAIZEN-FEEDBACK-MCP-WIRING](../tied-project/requirements/REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml)).
+
+Remaining gaps versus the full narrative in this plan:
+
+- **Notification policy** and upstream delivery (Phase 3) — not implemented while transport hinge is closed.
+- **Operational promotion REQ index** — [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION](../tied-project/requirements/REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION.yaml) may still read `Planned` while ARCH/IMPL and Phase 5 bridge code are active; reconcile via verification-gated pass when sponsored.
+- **Methodology promotion** — pilot volume and local evidence do not promote the capability into methodology without a separate sponsor-approved TIED change.
 
 ### Questions the current shape does not answer
 
@@ -536,9 +542,20 @@ Phase 7 promotion rule: pilot results stay analysis evidence until a separate sp
 | [`agent-resume-handoff.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/agent-resume-handoff.md) | Runtime handoff; Phase 3 deferral |
 | [`PLAN.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/PLAN.md) | Working-folder summary |
 
-PRELOAD [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md) for Kaizen vocabulary. Confirm `tied_config_get_base_path` before MCP writes. **Optional follow-ups (not this request):** Phase 3 outbox, MCP wrappers for analysis/review/outcome/pilot, methodology promotion of pilot results.
+PRELOAD [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md) for Kaizen vocabulary. Confirm `tied_config_get_base_path` before MCP writes. **Follow-ups (outside closed program request):**
+
+| Item | State | Notes |
+| --- | --- | --- |
+| Phase 3 outbox / transport | **Deferred** | Hinge reopen on CITDP (recipient + channel) |
+| MCP composition (Phases 4–7) | **Implemented locally** | `77b5ae6`; four tools + 4/4 composition tests |
+| `REQ-KAIZEN-FEEDBACK-MCP-WIRING` close-out | **Closed** | `kaizen-kmcp-close-20261008`; [closeout-run-close-out-gates-final.json](../tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/closeout-run-close-out-gates-final.json) |
+| Publish to remote | **Deferred** | 14 commits on `main` not pushed (sponsor policy) |
+| Pilot → methodology | **Not authorized** | Separate TIED change |
+| REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION status | **Open hygiene** | Verification-gated reconcile when sponsored |
 
 ## Phase 2 refine pass (source normalization)
+
+**Historical (implemented `c4cc94f`).** Subsection kept as contract reference; do not treat as pending work.
 
 **Request (planning):** `REQ-KAIZEN-SOURCE-NORMALIZATION`  
 **Pass:** `refine-plan` only — no REQ/ARCH/IMPL tokens, no runtime change, no commit.  

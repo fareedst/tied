@@ -2,11 +2,18 @@
 
 Linked plan: [`docs/tied-kaizen-feedback-loop-plan.md`](../../../docs/tied-kaizen-feedback-loop-plan.md)
 
-## Program status (2026-10-08)
+## Program status (2026-10-08, refine-plan)
 
 **Orchestrator:** [`kaizen-program-execution-checklist.yaml`](./kaizen-program-execution-checklist.yaml)  
 **Current step:** `EXIT` — **Program closed** (Phases 0–2 and 4–7 complete on local/export evidence)  
-**Agent entry:** [`evidence/agent-resume-handoff.md`](./evidence/agent-resume-handoff.md)
+**Agent entry:** [`evidence/agent-resume-handoff.md`](./evidence/agent-resume-handoff.md)  
+**Local git:** `main` is **14 commits** ahead of `origin/main` (Kaizen program + MCP wiring + doc close-out); **push deferred**.
+
+### Post-program MCP composition
+
+| REQ | Commit | Status |
+| --- | --- | --- |
+| [REQ-KAIZEN-FEEDBACK-MCP-WIRING](../REQ-KAIZEN-FEEDBACK-MCP-WIRING/PLAN.md) | `77b5ae6` + close-out | Four MCP tools; composition **4/4**; close-out `kaizen-kmcp-close-20261008` |
 
 | Phase | Module | Status |
 | --- | --- | --- |
@@ -23,9 +30,11 @@ Linked plan: [`docs/tied-kaizen-feedback-loop-plan.md`](../../../docs/tied-kaize
 
 ## Next agent — do this first
 
-1. Read `kaizen-program-execution-checklist.yaml` → `agent_handoff` (program at `EXIT`).
-2. **Phase 3 only** if sponsor reopens transport hinge on CITDP — otherwise no further Kaizen program phases without new sponsor scope.
-3. Pilot promotion to methodology remains a **separate** sponsor-approved TIED change (not implied by Phase 7 close-out).
+1. Read `kaizen-program-execution-checklist.yaml` → `agent_handoff` and `post_program_follow_up` (program at `EXIT`).
+2. **Phase 3 only** if sponsor reopens transport hinge on CITDP — otherwise no further Kaizen **program** phases without new sponsor scope.
+3. **`plan-close-out` for `REQ-KAIZEN-FEEDBACK-MCP-WIRING`** if integrated verification/close-out gates are required — does not reopen the program orchestrator.
+4. Pilot promotion to methodology remains a **separate** sponsor-approved TIED change (not implied by Phase 7 close-out).
+5. **Push** only when sponsor explicitly asks (currently deferred).
 
 **Planning request:** `PLAN-TIED-KAIZEN-FEEDBACK-LOOP` traceable-commit closed (see refine tracker `traceable-commit` and [`evidence/traceable-commit-evidence.md`](./evidence/traceable-commit-evidence.md)). Refine passes (Phase 0, Phase 2 refine) are historical.
 

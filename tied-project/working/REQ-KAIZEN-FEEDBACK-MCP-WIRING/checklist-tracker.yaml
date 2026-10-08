@@ -1182,6 +1182,7 @@ steps:
       - flag-insufficient-specs complete (or waived with note) so contradictions are assessed on the same IMPL set.
     references: []
     slug: flag-contradictory-specs
+    disposition: not_applicable
     tasks:
       - >-
         CALL flag-async-contradictions when async_in_scope: true: AWAIT without Promise OUTPUT or Async in EFFECTS when
@@ -1209,7 +1210,10 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: not_applicable
+      evidence_refs:
+        - kind: file_path
+          path: tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/close-out-waiver-evidence.md
   - flow:
       branches: []
       calls:
@@ -1314,6 +1318,7 @@ steps:
       - tied-bundle/docs/pseudocode-writing-and-validation.md#composition-and-e2e-expansion
       - tied-bundle/docs/vocabulary-index-analysis-and-standards.md
     slug: end-to-end-ui
+    disposition: not_applicable
     tasks:
       - >-
         Confirm IMPL detail has testability e2e_only, e2e_only_reason (named platform constraint), and E2E-only boundary
@@ -1336,7 +1341,10 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: not_applicable
+      evidence_refs:
+        - kind: file_path
+          path: tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/close-out-waiver-evidence.md
   - flow:
       branches:
         - action: >-

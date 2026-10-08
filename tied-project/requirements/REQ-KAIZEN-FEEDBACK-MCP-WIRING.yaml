@@ -41,7 +41,7 @@ REQ-KAIZEN-FEEDBACK-MCP-WIRING:
             metric: "MCP composition test; no canonical YAML write"
           - criterion: "tied_feedback_review_bridge delegates to runDigestReviewBridge with digest JSON and review decision"
             metric: "MCP composition test; store immutability preserved"
-        status: "Planned"
+        status: "Implemented"
         traceability:
           architecture:
             - "ARCH-FEEDBACK_STORAGE"

@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-08T01:06:26.148Z",
+    "generated_at": "2026-10-08T03:41:12.935Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -69,7 +69,7 @@
       "kind": "citdp_record",
       "schema_version": null,
       "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml",
-      "content_hash": "sha256:ca753b3c4ea89561e85fbabe1bf5bfa8cf1ac6789f2c8a3c6e8905ba08072c14",
+      "content_hash": "sha256:5774d70bc1643b929a8f9c6a978cd5b65c79c1f1522afe91b518c41e7482a0ff",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -77,10 +77,21 @@
       ]
     },
     {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:8394cfc4d01386a62550826aede20d25ea0b954a455a890df1b308c96af14176",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:b8e30641dbb6f172dc8adcf13bc59ec9b8ef9ac8e297ad450abbfa65421ab2fc",
+      "content_hash": "sha256:f53c87323350df8c57e63614d5a142c5145175675c6cc8a568199a3921ed05b2",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -90,8 +101,96 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/build-plan-evidence.md",
+      "content_hash": "sha256:0d0954874bfe1736d10303ff4dbe27c96c557d433ffee456c299af2b62b83a09",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/change-definition-evidence.md",
       "content_hash": "sha256:739e9bfcb35f7ce4ee545fcbfc3fd75ac2012efd0f1c35d6419deef447ea900d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/close-out-waiver-evidence.md",
+      "content_hash": "sha256:089e24c74f22afcb066ec05ad3920a43a4496d0341283f866ef368f84a701687",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -114,6 +213,50 @@
       "schema_version": null,
       "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/gate-pseudocode-validation-evidence.md",
       "content_hash": "sha256:83fce1f264ba1393af07071b4c751193826ac1bff5df14ea58c23fe87aa3d12b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:ee161eb8122c60b4fdfaac1adc6ba54646dea6352a5a169f0dea80a992d89fe2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -167,6 +310,28 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/refine-plan-evidence.md",
+      "content_hash": "sha256:cc063d3db368c066021fa46895282129f92fb649d30aace51b7072ced413bb16",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/risk-assessment-evidence.md",
       "content_hash": "sha256:9fae1869d6c6a7e30ede6948093bc0d8648a8aee1f061eb13a1011bee051ed10",
       "phase": null,
@@ -200,8 +365,52 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/sub-adversarial-inquiry-pass-evidence.md",
       "content_hash": "sha256:eed22078a2a05f6507d86f9903c6267a79c9decf910accced3793d14f56d2486",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/sub-close-out-evidence-sync-evidence.md",
+      "content_hash": "sha256:1de15a3fdfa6431610740b74ce4a8e97de9b6982efc9beaaaf2101ed6964f1f5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -222,8 +431,63 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:a61dfe2921b467fe01baf5fbf5d90e7f8037ab23daae958c28d8f5a72023af69",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/translate-sponsor-intent-evidence.md",
       "content_hash": "sha256:491734264d037408cc0be839dc96b21647d00507864d02a806d4dacdca823422",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/unit-code-green-evidence.md",
+      "content_hash": "sha256:eaa9bef2d64a9615c3756a94ad56631ac0a1261cbcc810b4911eb382f6699a43",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:3969a01546efebf266cd049578ad700afabaa5f09d810bc2528f1c2dde3488c3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:12ce3f882570f80e7da90925fa1db03452c5d09a20d29e8c797fde41e38540ac",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:bb860f6437fbded2a24dff6b6cac74761b8d5aad7f459dee9a3db413300c4d11",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -235,17 +499,9 @@
     "tracker_path": null,
     "tracker_hash": null,
     "citdp_path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml",
-    "evidence_chain_profile_path": null
+    "evidence_chain_profile_path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/evidence-chain-profile.v1.json"
   },
   "gaps": [
-    {
-      "code": "expected_artifact_missing",
-      "artifact_kind": "evidence_chain_profile",
-      "phase": null,
-      "detail": "Integrated depth expects evidence-chain-profile artifact",
-      "severity": "error",
-      "source": "profile-cross-link"
-    },
     {
       "code": "finding_unresolved",
       "artifact_kind": "adversarial_inquiry_gate",

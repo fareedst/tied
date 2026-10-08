@@ -1,6 +1,6 @@
 # REQ-KAIZEN-FEEDBACK-MCP-WIRING — Kaizen MCP composition (Phases 4–7)
 
-**Status (2026-10-08):** **Implemented** — four MCP tools registered; composition tests 4/4; committed locally (publish deferred).
+**Status (2026-10-08):** **Closed** — four MCP tools registered; composition tests 4/4; integrated close-out `kaizen-kmcp-close-20261008` ([plan-close-out-handoff.md](./plan-close-out-handoff.md)). Publish deferred (no push).
 
 **Program context:** Kaizen orchestrator **EXIT**; Phases 4–7 library modules shipped. This REQ is the **composition layer** deferred in each phase CITDP.
 
