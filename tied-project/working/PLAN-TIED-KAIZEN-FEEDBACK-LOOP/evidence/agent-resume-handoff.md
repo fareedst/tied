@@ -5,7 +5,7 @@
 | Phase | Status | REQ | Commit | Close-out evidence |
 | --- | --- | --- | --- | --- |
 | 6 | complete | REQ-KAIZEN-OUTCOME-LOOP | c8a84fa | `working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json` |
-| 7 | complete | REQ-KAIZEN-FEEDBACK-PILOT | pending-close-out-commit | `working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/closeout-run-close-out-gates-final.json` |
+| 7 | complete | REQ-KAIZEN-FEEDBACK-PILOT | 10a28e6 | `working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/closeout-run-close-out-gates-final.json` |
 
 **Orchestrator:** `program_phase: closed`, `current_step: EXIT`, `phases_completed: [0, 1, 2, 4, 5, 6, 7]`.
 

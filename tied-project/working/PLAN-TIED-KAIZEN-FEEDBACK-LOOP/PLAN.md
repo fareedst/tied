@@ -15,7 +15,7 @@ Linked plan: [`docs/tied-kaizen-feedback-loop-plan.md`](../../../docs/tied-kaize
 | 2 | Source normalization | complete — `c4cc94f`, REQ-KAIZEN-SOURCE-NORMALIZATION |
 | 3 | Outbox / transport | **deferred** (hinge closed) |
 | 4 | Feedback analysis | complete — `b9a092f`, REQ-KAIZEN-FEEDBACK-ANALYSIS |
-| 5 | Review bridge | complete — `8437712`, REQ-KAIZEN-REVIEW-BRIDGE |
+| 5 | Review bridge | complete — `73efd6f`, REQ-KAIZEN-REVIEW-BRIDGE |
 | 6 | Outcome loop | complete — `REQ-KAIZEN-OUTCOME-LOOP`; close_out `kaizen-p6-close-20261007` |
 | 7 | Pilot | complete — `REQ-KAIZEN-FEEDBACK-PILOT`; close_out `kaizen-p7-close-20261007` (8/8 tests) |
 
