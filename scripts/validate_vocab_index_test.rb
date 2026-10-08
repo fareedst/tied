@@ -47,6 +47,25 @@ class ValidateVocabIndexTest < Minitest::Test
     end
   end
 
+  def test_in_document_fragment_links_do_not_crash_or_flag_missing_paths
+    Dir.mktmpdir do |root|
+      vocab_dir = File.join(root, "tied-project", "vocab")
+      FileUtils.mkdir_p(vocab_dir)
+      file = "extra.md"
+      File.write(File.join(vocab_dir, "routing.md"), layered_routing(file, "Extra"))
+      File.write(File.join(vocab_dir, "domain-references.md"), layered_catalog(file, "Extra"))
+      glossary = canonical_glossary("extra term").sub(
+        "## Canonical terms",
+        "## Canonical terms\nSee [Kaizen principles](#kaizen-principles-sponsor-article).\n"
+      )
+      File.write(File.join(vocab_dir, file), glossary)
+
+      errors = VocabularyIndexValidator.new(root).validate
+
+      refute errors.any? { |error| error.include?("links to missing path") && error.include?("#") }
+    end
+  end
+
   def test_layered_methodology_and_client_indexes_are_validated_independently
     Dir.mktmpdir do |root|
       methodology = File.join(root, "tied", "methodology", "vocab")

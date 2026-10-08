@@ -5,6 +5,66 @@ generator_version: 1.0.0
 privacy_tier: shareable_hashed
 include_absolute_paths: false
 rows:
+  - client_alias: '1787603099'
+    request_token: REQ-LISTENING_PORT_REPORT
+    status: included
+    envelope_require_mode: require_envelope
+    envelope_source: envelope_file
+    envelope_artifact: working/REQ-LISTENING_PORT_REPORT/evidence/request-evidence-envelope.v1.json
+    envelope_revision: 1
+    gap_codes:
+      - artifact_path_root_projection_rejected
+      - evidence_stale
+      - expected_artifact_missing
+      - finding_unresolved
+      - legacy_json_in_json_wrapper
+      - provenance_incomplete
+      - thin_ledger
+      - tracker_dual_write
+      - tracker_sparse
+    artifact_coverage:
+      by_kind:
+        adversarial_inquiry_gate:
+          present: 4
+          waived: 0
+          not_applicable: 0
+          missing: 0
+        adversarial_inquiry_ledger:
+          present: 4
+          waived: 0
+          not_applicable: 0
+          missing: 0
+        adversarial_inquiry_obligation:
+          present: 4
+          waived: 0
+          not_applicable: 0
+          missing: 0
+        adversarial_inquiry_provenance:
+          present: 4
+          waived: 0
+          not_applicable: 0
+          missing: 0
+        checklist_tracker:
+          present: 1
+          waived: 0
+          not_applicable: 0
+          missing: 0
+        citdp_record:
+          present: 2
+          waived: 0
+          not_applicable: 0
+          missing: 0
+        unknown:
+          present: 1
+          waived: 0
+          not_applicable: 0
+          missing: 0
+        evidence_chain_profile:
+          present: 0
+          waived: 0
+          not_applicable: 0
+          missing: 1
+      denominator_kinds: 8
   - client_alias: '1788547701'
     request_token: REQ-BT_BATTERY_DISPLAY
     status: included
@@ -320,8 +380,5 @@ rows:
           not_applicable: 0
           missing: 1
       denominator_kinds: 12
-excluded_rows:
-  - client_alias: '1787603099'
-    request_token: REQ-LISTENING_PORT_REPORT
-    reason: envelope_missing
+excluded_rows: []
 validation_errors: []

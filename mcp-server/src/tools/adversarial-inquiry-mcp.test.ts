@@ -242,7 +242,7 @@ describe("tied_adversarial_inquiry_run composition [REQ-TIED_ADVERSARIAL_INQUIRY
       "architecture-decisions.yaml",
       "implementation-decisions.yaml",
       "semantic-tokens.yaml",
-    ].map((name) => path.join(projectRoot, "tied", name));
+    ].map((name) => path.join(projectRoot, "tied-project", name));
     const before = tiedFiles.map((filePath) => fs.readFileSync(filePath, "utf8"));
 
     const good = parse(await handler(modeBFixture("case-good")));
@@ -280,7 +280,7 @@ describe("tied_adversarial_inquiry_run composition [REQ-TIED_ADVERSARIAL_INQUIRY
       "architecture-decisions.yaml",
       "implementation-decisions.yaml",
       "semantic-tokens.yaml",
-    ].map((name) => path.join(projectRoot, "tied", name));
+    ].map((name) => path.join(projectRoot, "tied-project", name));
     const before = tiedFiles.map((filePath) => fs.readFileSync(filePath, "utf8"));
 
     const good = parse(await handler(goFixture("case-good")));

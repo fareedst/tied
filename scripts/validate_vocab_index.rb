@@ -144,8 +144,10 @@ class VocabularyIndexValidator
   def validate_links
     Dir.glob(File.join(@vocab_root, "*.md")).flat_map do |source|
       read(source).scan(/\]\(([^)]+)\)/).filter_map do |match|
-        target = match.first.split("#", 2).first.split("?", 2).first
-        next if target.empty? || target.start_with?("#", "//") || target.match?(/\A[a-z][a-z0-9+.-]*:/i)
+        raw = match.first
+        target = raw.split("#", 2).first.to_s.split("?", 2).first.to_s
+        next if target.empty? || raw.start_with?("#") || target.start_with?("//") ||
+                target.match?(/\A[a-z][a-z0-9+.-]*:/i)
 
         resolved = File.expand_path(target, File.dirname(source))
         "#{relative(source)} links to missing path #{target}" unless File.exist?(resolved)

@@ -9,5 +9,5 @@
     "REQ-FIXTURE-ADVERSARIAL#divide-success"
   ],
   "status": "warn",
-  "verdict": "RELIABLE_INCOMPLETE"
+  "verdict": "UNRESOLVED"
 }

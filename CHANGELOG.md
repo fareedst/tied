@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Kaizen MCP composition wiring ([REQ-KAIZEN-FEEDBACK-MCP-WIRING], [ARCH-KAIZEN-FEEDBACK-MCP-WIRING], [IMPL-KAIZEN-FEEDBACK-MCP-WIRING])** — MCP tools `tied_feedback_analysis_digest`, `tied_feedback_review_bridge`, `tied_feedback_outcome_record`, and `tied_feedback_pilot_run` delegate to Phase 4–7 modules via `kaizen-feedback-mcp-handlers.ts`. Composition tests in `kaizen-feedback-mcp-composition.test.ts` (4/4).
 
+### Fixed
+
+- **Post-program hygiene (2026-10-08)** — Adversarial MCP composition tests assert TIED index immutability under `tied-project/` ([REQ-TIED_ADVERSARIAL_INQUIRY], two-folder layout). Vocab link validator ignores in-document `#fragment` anchors ([PROC-VOCABULARY_INDEX]). Removed temporary debug ingest from `claude-adherence-bridge` ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS]). Refreshed adversarial mode-b fixtures, checklist gate fixture `1787603099` regression manifest, JEV context-pruning benchmark, and envelope gap report batch row. Evidence: [post-closeout-hygiene-20261008-evidence.md](tied-project/working/evaluation/post-closeout-hygiene-20261008-evidence.md).
+
 ### Changed
 
 - **`REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION` stack reconcile** — Requirement detail status aligned to **`Implemented`** (index already matched); traceability tests cite `feedback-promotion.test.ts` and Batch 5 MCP composition. Evidence: [promotion-status-reconcile-evidence.md](tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/promotion-status-reconcile-evidence.md). Phase 3 transport reaffirmed closed (Option A).

@@ -18,21 +18,6 @@ export function appendHookLogLine(logPath: string, summary: Record<string, unkno
 
 export function runClaudeAdherenceBridgeFromStdin(payloadText: string, argv: string[]): number {
   try {
-    // #region agent log
-    fetch("http://127.0.0.1:7735/ingest/5a02c39b-61ea-4499-97c4-1b28393b57f6", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "238aaa" },
-      body: JSON.stringify({
-        sessionId: "238aaa",
-        location: "claude-adherence-bridge.ts:runClaudeAdherenceBridgeFromStdin",
-        message: "bridge invoked via node",
-        data: { platform: process.platform, argv0: argv[0] ?? null },
-        timestamp: Date.now(),
-        hypothesisId: "A",
-        runId: "pre-fix",
-      }),
-    }).catch(() => {});
-    // #endregion
     let projectDir = process.env.CLAUDE_PROJECT_DIR?.trim() ?? "";
     const args = [...argv];
     while (args.length > 0) {
