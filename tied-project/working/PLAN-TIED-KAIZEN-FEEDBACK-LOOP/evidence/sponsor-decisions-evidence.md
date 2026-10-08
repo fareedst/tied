@@ -29,3 +29,15 @@ After Phase 2 close-out, sponsor confirmed:
 | When to reopen Phase 3? | When sponsor records a **hinge reopen** on CITDP with named **recipient** and **channel** |
 
 Recorded on: [`kaizen-program-execution-checklist.yaml`](../kaizen-program-execution-checklist.yaml) (`agent_handoff.sponsor_confirmations`).
+
+## Reaffirmation — Phase 3 (2026-10-08)
+
+Sponsor reviewed Phase 3 options (transport / notification / outbox) and chose **Option A — keep Phase 3 closed**.
+
+| Question | Answer |
+| --- | --- |
+| Reopen Phase 3 (`REQ-KAIZEN-FEEDBACK-OUTBOX`) or add upstream delivery? | **No** — remain on local append, receipt, export, and MCP tools only |
+| Notification policy / outbox / webhook work? | **Deferred** until an explicit future hinge reopen (recipient + channel on CITDP) |
+| Privacy for this decision | Unchanged — **`operator_local`** default; no `shareable_hashed` without separate owner + expiry |
+
+Agents: do not CALL `plan-new-feature` for Phase 3 unless sponsor submits a new change request that reopens the transport hinge.

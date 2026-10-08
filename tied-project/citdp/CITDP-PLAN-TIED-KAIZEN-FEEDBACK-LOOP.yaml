@@ -30,7 +30,7 @@ CITDP-PLAN-TIED-KAIZEN-FEEDBACK-LOOP:
     tied_tokens_affected: []
     tied_tokens_new: []
   leap_feedback:
-    divergences_from_analysis: "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION remains Planned while its ARCH and IMPL are Active. Status reconciliation is deferred to a later verification-gated pass."
+    divergences_from_analysis: "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION index/detail reconciled to Implemented (2026-10-08); see working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/promotion-status-reconcile-evidence.md."
     record_status: "complete"
     tied_stack_updates_required: []
   record_identity:

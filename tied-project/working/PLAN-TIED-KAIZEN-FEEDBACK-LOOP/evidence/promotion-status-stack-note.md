@@ -1,9 +1,9 @@
 # Promotion record status note
 
-REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION is `Planned` in the requirements index.
+**Updated 2026-10-08:** Stack reconcile complete.
 
-ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY is Active. IMPL-TIED_FEEDBACK_PROMOTION is Active. `mcp-server/src/feedback-promotion.ts` implements normalization, duplicate grouping, and reviewed proposal creation.
+`REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION` is **`Implemented`** in both the requirements index and detail file. **ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY** and **IMPL-TIED_FEEDBACK_PROMOTION** remain **Active**. Implementation: `mcp-server/src/feedback-promotion.ts` (+ Kaizen review bridge delegation).
 
-This refine pass does not change requirement status. Status edits on a verification-gated project belong to `tied_verify`, not a hand edit.
+Evidence: [promotion-status-reconcile-evidence.md](./promotion-status-reconcile-evidence.md).
 
-A later phase that touches promotion should carry this mismatch through LEAP if the sponsor wants the index status to match the Active implementation.
+Phase 3 transport remains closed (Option A, 2026-10-08).

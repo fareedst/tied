@@ -28,7 +28,7 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
     - criterion: "Duplicate grouping is deterministic and does not merge or delete original feedback entries."
     - criterion: "Feedback entries retain source type, affected feature, severity, evidence links, duplicate group, proposed REQ, and promotion status."
     - criterion: "Promotion requires explicit human review and never automatically writes project REQ, ARCH, or IMPL YAML."
-  status: "Planned"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -39,7 +39,9 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
     requirements:
       - "REQ-FEEDBACK_TO_TIED"
       - "REQ-LEAP_PROPOSAL_QUEUE"
-    tests: []
+    tests:
+      - "mcp-server/src/feedback-promotion.test.ts"
+      - "mcp-server/src/tools/batch-5-mcp.test.ts"
   validation_criteria:
     - coverage: "Incident, metric, test-failure, and user-report adapter bindings to feedback and LEAP proposal surfaces"
       method: "Composition tests"

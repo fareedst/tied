@@ -137,6 +137,13 @@ agent_handoff:
       - Phases 4 → 5 → 6 → 7 in strict order after each phase close_out commit
       - integrated depth and advisory gate_policy per phase_defaults
   sponsor_confirmations:
+    transport_hinge_2026_10_08_reaffirm:
+      decision: option_a_keep_phase_3_closed
+      recorded_at: "2026-10-08"
+      meaning: >
+        Sponsor reaffirmed local/export-only Kaizen loop; no outbox, upstream transport,
+        or notification-policy implementation until explicit hinge reopen on CITDP.
+      evidence: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/sponsor-decisions-evidence.md
     transport_hinge_2026_10_07_followup:
       decision: keep_closed_finish_phases_4_through_7
       recorded_at: "2026-10-07"
@@ -181,8 +188,7 @@ agent_handoff:
     working_plan: tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/plan-close-out-handoff.md
     pending:
       - push to origin when sponsor asks
-      - optional REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION index reconcile
-      - Phase 3 transport (program hinge)
+      - Phase 3 transport (program hinge; Option A reaffirmed 2026-10-08)
     publish:
       local_commits_ahead_of_origin: 14
       push: deferred_by_sponsor

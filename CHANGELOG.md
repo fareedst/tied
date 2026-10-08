@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION` stack reconcile** — Requirement detail status aligned to **`Implemented`** (index already matched); traceability tests cite `feedback-promotion.test.ts` and Batch 5 MCP composition. Evidence: [promotion-status-reconcile-evidence.md](tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/promotion-status-reconcile-evidence.md). Phase 3 transport reaffirmed closed (Option A).
+
 - **Kaizen MCP wiring close-out (`REQ-KAIZEN-FEEDBACK-MCP-WIRING`)** — Integrated close-out `run_id=kaizen-kmcp-close-20261008` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Program orchestrator `post_program_follow_up.status: closed`. Linked plan and [`kaizen-program-execution-checklist.yaml`](tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml) updated for post-program state. Evidence: [closeout-run-close-out-gates-final.json](tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/closeout-run-close-out-gates-final.json).
 
 - **Kaizen linked plan request closed (`PLAN-TIED-KAIZEN-FEEDBACK-LOOP`)** — Updated [`docs/tied-kaizen-feedback-loop-plan.md`](docs/tied-kaizen-feedback-loop-plan.md) handoff to **program EXIT** (Phases 1–2, 4–7 implemented; Phase 3 transport deferred). Refine tracker `traceable-commit` completed; orchestrator records `planning_request_close_out`. Hygiene: ignore/remove wrong-root `mcp-server/tied-project/` from misconfigured MCP runs.

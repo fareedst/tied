@@ -1,0 +1,19 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [
+    "missing_or_unsuccessful_inquiry_receipt",
+    "missing_expected_identity",
+    "missing_activation_artifacts"
+  ],
+  "evidence_hydrated": [
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/gates/verification-2026-10-08T03-53-48-063Z.json",
+    "hash": "sha256:d9880b554aa58b2c6023985681de04c7eac445b4657df13cb818675e38768dba"
+  }
+}

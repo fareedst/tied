@@ -551,7 +551,7 @@ PRELOAD [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md) for K
 | `REQ-KAIZEN-FEEDBACK-MCP-WIRING` close-out | **Closed** | `kaizen-kmcp-close-20261008`; [closeout-run-close-out-gates-final.json](../tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/closeout-run-close-out-gates-final.json) |
 | Publish to remote | **Deferred** | 14 commits on `main` not pushed (sponsor policy) |
 | Pilot → methodology | **Not authorized** | Separate TIED change |
-| REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION status | **Open hygiene** | Verification-gated reconcile when sponsored |
+| REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION status | **Reconciled** | Detail `Implemented` + tests (2026-10-08); see promotion-status-reconcile-evidence.md |
 
 ## Phase 2 refine pass (source normalization)
 
