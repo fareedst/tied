@@ -2166,7 +2166,7 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   detail_file: "requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
   name: "Client bootstrap skills distribution"
   priority: "P1"
-  status: "Planned"
+  status: "Implemented"
 REQ-TIED_CLIENT_REFRESH_PARITY:
   category: "Functional"
   cross_references:

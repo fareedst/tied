@@ -29,7 +29,7 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
       criterion_id: "linked-standalone-stubs"
     - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate and unblock"
       criterion_id: "standalone-manifest"
-  status: "Planned"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"

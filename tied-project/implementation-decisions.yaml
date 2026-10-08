@@ -2099,7 +2099,7 @@ IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS:
     - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
   name: "Client bootstrap skills implementation"
-  status: "Planned"
+  status: "Active"
 IMPL-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     architecture:
@@ -2559,7 +2559,7 @@ IMPL-TIED_UNBLOCK_SKILL:
     - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
   detail_file: "implementation-decisions/IMPL-TIED_UNBLOCK_SKILL.yaml"
   name: "Unblock skill bootstrap"
-  status: "Planned"
+  status: "Active"
 IMPL-TIED_UNIFIED_TOOLCHAIN:
   description: "Workspace layout, CLI dispatch, MCP stdio entry, migration hooks, and deprecation switches for Go/Ruby tools."
   detail_file: "implementation-decisions/IMPL-TIED_UNIFIED_TOOLCHAIN.yaml"

@@ -31,40 +31,38 @@ CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   record_identity:
     author: "build-plan"
     change_request_id: "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+    close_out_run_id: "bootstrap-cbs-close-20261008"
+    closed_at: "2026-10-08"
     date: "2026-10-08"
     record_status: "closed"
     title: "Client bootstrap skills distribution"
-    closed_at: "2026-10-08"
-    close_out_run_id: "bootstrap-cbs-close-20261008"
   risk_analysis:
     adversarial_inquiry:
-      depth_tier: "minimal"
-      gate_policy: "advisory"
+      close_out_inquiry_waiver:
+        approval: "reversible-choice-manifest-catalog-2026-10-07"
+        expiry: "2026-12-31"
+        owner: "sponsor"
+        rationale: "Minimal depth bootstrap install; catalog and e2e tests satisfy advisory close_out without adversarial inquiry phase artifacts.\n"
+        referenced_verification_run_id: "bootstrap-cbs-close-20261008"
       counterexamples:
-        - "Manifest lists skill but storeDir missing — install silently skips unblock"
-        - "Linked stub points at wrong store path after tied-install from foreign store"
         - "Claude full path omits standalone copy while Cursor full includes it"
         - "Inventory assert passes without checking YAML name: field in SKILL.md"
+        - "Linked stub points at wrong store path after tied-install from foreign store"
+        - "Manifest lists skill but storeDir missing — install silently skips unblock"
+      depth_tier: "minimal"
       disconfirming_observations:
-        - "client-skills-catalog.test.mjs throws when bundled-unblock-skill absent"
         - "client-bootstrap-skills.test.ts asserts .claude/skills/unblock/SKILL.md after installClaudeSkills"
-      falsification_questions:
-        - "Does linked mode write stubs for both harnesses when harness is both?"
-        - "Does checkStoreReachable fail if any standalone storeDir is missing?"
+        - "client-skills-catalog.test.mjs throws when bundled-unblock-skill absent"
       evidence_references:
+        - "mcp-server/src/e2e/client-bootstrap-skills.test.ts"
+        - "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/sub-adversarial-inquiry-pass-na.md"
         - "tools/bootstrap/lib/client-skills-catalog.mjs"
         - "tools/bootstrap/lib/client-skills-catalog.test.mjs"
-        - "mcp-server/src/e2e/client-bootstrap-skills.test.ts"
-        - "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/sub-adversarial-inquiry-pass-na.md"
-        - "tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/not-applicable-receipt.v1.json"
-      close_out_inquiry_waiver:
-        owner: "sponsor"
-        expiry: "2026-12-31"
-        rationale: >
-          Minimal depth bootstrap install; catalog and e2e tests satisfy advisory close_out without
-          adversarial inquiry phase artifacts.
-        approval: "reversible-choice-manifest-catalog-2026-10-07"
-        referenced_verification_run_id: "bootstrap-cbs-close-20261008"
+      falsification_questions:
+        - "Does checkStoreReachable fail if any standalone storeDir is missing?"
+        - "Does linked mode write stubs for both harnesses when harness is both?"
+      gate_policy: "advisory"
     risks:
       - description: "Manifest drift when adding skills"
         id: "RISK-CBS-002"

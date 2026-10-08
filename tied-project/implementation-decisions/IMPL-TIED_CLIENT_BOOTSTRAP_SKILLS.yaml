@@ -15,4 +15,4 @@ IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS:
       date: "2026-10-08"
       reason: "mint"
   name: "Client bootstrap skills implementation"
-  status: "Planned"
+  status: "Active"
