@@ -1,0 +1,48 @@
+{
+  "schema_version": "feedback-analysis.v1",
+  "client_cohort": {
+    "compatibility_key": "kaizen-review-bridge-fixture",
+    "denominator_fingerprint": "not_measured",
+    "analysis_window": { "start": "2026-06-01T00:00:00.000Z", "end": "2026-07-01T00:00:00.000Z" }
+  },
+  "inputs": {
+    "manifest_ref": null,
+    "entries": 2,
+    "excluded": 0,
+    "unknown": 0
+  },
+  "observations": {
+    "by_kind": { "incident": 2 },
+    "duplicate_groups": [
+      {
+        "duplicate_group": "dg-checkout",
+        "member_ids": ["fb-op-lead", "fb-op-dup"],
+        "first_seen": "2026-08-13T10:00:00.000Z"
+      }
+    ],
+    "recurrence": [
+      {
+        "duplicate_group": "dg-checkout",
+        "count": 2,
+        "numerator_label": "observations_in_dg-checkout"
+      }
+    ]
+  },
+  "impact": {
+    "numerator": 2,
+    "denominator": "not_measured",
+    "unknown": 0
+  },
+  "findings": [
+    {
+      "observation_group": "dg-checkout",
+      "hypothesis": "Checkout outage",
+      "confidence": "medium",
+      "proof_boundary": "fixture",
+      "promotion_status": "promotion_pending"
+    }
+  ],
+  "countermeasures": [],
+  "review": { "decision": "deferred_review", "reviewer": null },
+  "excluded": []
+}

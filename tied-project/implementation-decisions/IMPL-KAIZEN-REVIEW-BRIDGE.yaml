@@ -1,0 +1,40 @@
+IMPL-KAIZEN-REVIEW-BRIDGE:
+  IMPL-KAIZEN-REVIEW-BRIDGE:
+    IMPL-KAIZEN-REVIEW-BRIDGE:
+      code_locations:
+        files:
+          - description: "Digest finding to LEAP proposal handoff"
+            path: "mcp-server/src/feedback-review-bridge.ts"
+          - description: "Phase 5 exit evidence fixtures"
+            path: "mcp-server/test/fixtures/kaizen-review-bridge/"
+          - description: "Review bridge golden fixture tests"
+            path: "mcp-server/src/feedback-review-bridge.test.ts"
+      cross_references:
+        architecture:
+          - "ARCH-KAIZEN-REVIEW-BRIDGE"
+          - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+        implementation:
+          - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+          - "IMPL-TIED_FEEDBACK_PROMOTION"
+        requirements:
+          - "REQ-KAIZEN-REVIEW-BRIDGE"
+      essence_pseudocode_path: "implementation-decisions/IMPL-KAIZEN-REVIEW-BRIDGE-pseudocode.md"
+      implementation_approach:
+        details:
+          - "Delegate BRIDGE_CREATE_REVIEWED_LEAP_PROPOSAL to createReviewedLeapProposal"
+          - "Golden fixtures under mcp-server/test/fixtures/kaizen-review-bridge/"
+          - "RUN_DIGEST_REVIEW_BRIDGE as primary entry"
+        summary: "feedback-review-bridge.ts resolves digest findings to entry ids, validates review and freshness, appends non-canonical proposals through existing queue only."
+      name: "Kaizen review bridge implementation"
+      status: "Planned"
+      traceability:
+        architecture:
+          - "ARCH-KAIZEN-REVIEW-BRIDGE"
+        code_annotations:
+          - "ARCH-KAIZEN-REVIEW-BRIDGE"
+          - "IMPL-KAIZEN-REVIEW-BRIDGE"
+          - "REQ-KAIZEN-REVIEW-BRIDGE"
+        requirements:
+          - "REQ-KAIZEN-REVIEW-BRIDGE"
+        tests:
+          - "feedback-review-bridge.test.ts"

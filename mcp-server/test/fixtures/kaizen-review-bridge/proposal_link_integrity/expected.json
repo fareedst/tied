@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "review_outcome": "approved",
+  "leap_hints_feedback_id": "fb-op-lead",
+  "leap_hints_member_ids": ["fb-op-lead", "fb-op-dup"],
+  "proposal_link_required": true
+}

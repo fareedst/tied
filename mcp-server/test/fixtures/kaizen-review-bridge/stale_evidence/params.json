@@ -1,0 +1,12 @@
+{
+  "observation_group": "dg-checkout",
+  "review_context": {
+    "projection_hash": "deadbeefdeadbeef"
+  },
+  "review": {
+    "reviewer": "human@example.test",
+    "decision": "create_proposal",
+    "rationale": "Stale anchor should block",
+    "evidence_links": ["incident://inc-42"]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "graph": {
+    "projectId": "stdd-kaizen-p5",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-REVIEW-BRIDGE#no-canonical-write",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-p5",
+          "sourceRevision": "p5-src"
+        },
+        "architectureConstraintIds": ["arch-p5-no-canonical"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-p5-no-canonical",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001",
+          "kind": "block",
+          "name": "RUN_DIGEST_REVIEW_BRIDGE",
+          "derivation": "content",
+          "revision": "block-rev-p5",
+          "sourceRevision": "p5-src"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-p5",
+    "specification": [
+      {
+        "id": "p5-spec-no-canonical",
+        "kind": "behavior",
+        "value": "Review bridge rejects canonicalWrite and does not mutate project TIED YAML.",
+        "order": 1
+      },
+      {
+        "id": "p5-spec-stale",
+        "kind": "behavior",
+        "value": "Stale projection_hash blocks proposal append.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": []
+  },
+  "scope": [
+    "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+  "phase": "pre_implementation",
+  "run_id": "kaizen-p5-preimpl-20261007"
+}

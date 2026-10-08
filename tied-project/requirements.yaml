@@ -1301,6 +1301,30 @@ REQ-KAIZEN-OBSERVATION-CAPTURE:
       - "IMPL-KAIZEN_OBSERVATION_CAPTURE"
     tests:
       - "feedback-capture.test.ts"
+REQ-KAIZEN-REVIEW-BRIDGE:
+  category: "Functional"
+  detail_file: "requirements/REQ-KAIZEN-REVIEW-BRIDGE.yaml"
+  name: "Kaizen Phase 5 review bridge"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      - "REQ-LEAP_PROPOSAL_QUEUE"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    related_to:
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-KAIZEN-REVIEW-BRIDGE"
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    implementation:
+      - "IMPL-KAIZEN-REVIEW-BRIDGE"
+    tests:
+      - "feedback-review-bridge.test.ts"
 REQ-KAIZEN-SOURCE-NORMALIZATION:
   category: "Functional"
   detail_file: "requirements/REQ-KAIZEN-SOURCE-NORMALIZATION.yaml"

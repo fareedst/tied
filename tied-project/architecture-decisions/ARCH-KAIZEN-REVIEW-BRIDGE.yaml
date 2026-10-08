@@ -1,0 +1,28 @@
+ARCH-KAIZEN-REVIEW-BRIDGE:
+  ARCH-KAIZEN-REVIEW-BRIDGE:
+    ARCH-KAIZEN-REVIEW-BRIDGE:
+      constraints:
+        - constraint: "Bridge must not write project REQ/ARCH/IMPL YAML or mutate feedback.yaml entries"
+        - constraint: "Canonical write attempts fail closed with CanonicalWriteAttempt"
+        - constraint: "Digest findings reference observation_group equal to duplicate_group; no synthetic entry ids"
+        - constraint: "Only the existing leap-proposals queue may receive appended non-canonical proposals"
+        - constraint: "Optional projection_hash anchor must match current digest or review is StaleEvidence"
+      cross_references:
+        architecture:
+          - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+          - "ARCH-LEAP_PROPOSAL_QUEUE"
+          - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+        implementation:
+          - "IMPL-KAIZEN-REVIEW-BRIDGE"
+        requirements:
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+          - "REQ-KAIZEN-REVIEW-BRIDGE"
+          - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+      name: "Kaizen review bridge architecture"
+      rationale:
+        decisions:
+          - "feedback-review-bridge.ts orchestrates digest finding resolution and delegates promotion to createReviewedLeapProposal"
+          - "proposal_link returned to caller; canonical apply remains separate TIED YAML workflow"
+          - "Reuses ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY; no second queue"
+        why: "Connect Phase 4 digest findings to existing reviewed promotion boundary without duplicating governance surfaces."
+      status: "Planned"

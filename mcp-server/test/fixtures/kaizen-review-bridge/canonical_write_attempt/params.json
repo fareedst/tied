@@ -1,0 +1,10 @@
+{
+  "observation_group": "dg-checkout",
+  "canonicalWrite": true,
+  "review": {
+    "reviewer": "human@example.test",
+    "decision": "create_proposal",
+    "rationale": "Attempt canonical apply",
+    "evidence_links": ["incident://inc-42"]
+  }
+}

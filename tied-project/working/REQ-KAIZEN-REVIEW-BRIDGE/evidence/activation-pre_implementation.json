@@ -1,0 +1,72 @@
+{
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+    "project_id": "stdd-kaizen-p5",
+    "run_id": "kaizen-p5-preimpl-20261007",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+    ],
+    "scope_hash": "534441f1b067356de269611e78bf29a4f6ecf729c693283b4f825c68e7eaca27",
+    "artifact_hashes": {
+      "obligation-report.json": "85b57a418088e84ad42c0dbe19e6c32723902d54ca943e0832908f6c6c631994",
+      "finding-ledger.jsonl": "cba70b9373c2e2b560a70290bd168f5622c8d63b95137f6952343546c052ce4e",
+      "gate-result.json": "6147cbc6364e8ec575dbb70773d75a97135f1baebccf4a68dceb4c2fcefd4b65",
+      "evidence-provenance.json": "0cbfe69e874a6f99fa062eafc90456655c5dc499cf23e8358d72d63e531712b8"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+      "project_id": "stdd-kaizen-p5",
+      "run_id": "kaizen-p5-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "534441f1b067356de269611e78bf29a4f6ecf729c693283b4f825c68e7eaca27",
+      "hash": "85b57a418088e84ad42c0dbe19e6c32723902d54ca943e0832908f6c6c631994",
+      "path": "tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+      "project_id": "stdd-kaizen-p5",
+      "run_id": "kaizen-p5-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "534441f1b067356de269611e78bf29a4f6ecf729c693283b4f825c68e7eaca27",
+      "hash": "cba70b9373c2e2b560a70290bd168f5622c8d63b95137f6952343546c052ce4e",
+      "path": "tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+      "project_id": "stdd-kaizen-p5",
+      "run_id": "kaizen-p5-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "534441f1b067356de269611e78bf29a4f6ecf729c693283b4f825c68eaca27",
+      "hash": "6147cbc6364e8ec575dbb70773d75a97135f1baebccf4a68dceb4c2fcefd4b65",
+      "path": "tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+      "project_id": "stdd-kaizen-p5",
+      "run_id": "kaizen-p5-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "534441f1b067356de269611e78bf29a4f6ecf729c693283b4f825c68e7eaca27",
+      "hash": "0cbfe69e874a6f99fa062eafc90456655c5dc499cf23e8358d72d63e531712b8",
+      "path": "tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+    "project_id": "stdd-kaizen-p5",
+    "run_id": "kaizen-p5-preimpl-20261007",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+    ],
+    "scope_hash": "534441f1b067356de269611e78bf29a4f6ecf729c693283b4f825c68e7eaca27"
+  }
+}

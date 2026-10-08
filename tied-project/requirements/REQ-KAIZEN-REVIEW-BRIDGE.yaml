@@ -1,0 +1,59 @@
+REQ-KAIZEN-REVIEW-BRIDGE:
+  REQ-KAIZEN-REVIEW-BRIDGE:
+    REQ-KAIZEN-REVIEW-BRIDGE:
+      category: "Functional"
+      name: "Kaizen Phase 5 review bridge"
+      non_goals:
+        - "Automatic canonical REQ/ARCH/IMPL YAML write from review"
+        - "Outcome loop baselines (Phase 6)"
+        - "Second promotion mechanism or parallel LEAP queue"
+        - "Upstream transport (Phase 3 deferred)"
+      priority: "P1"
+      rationale:
+        benefits:
+          - "Digest findings linked to existing feedback entry ids before review"
+          - "Single non-canonical queue path via createReviewedLeapProposal"
+          - "Stale digest evidence blocked from authorizing proposals"
+        problems_solved:
+          - "No structured guard against canonical write attempts from bridge"
+          - "Reviewers must manually correlate digest groups to entry ids"
+        why: "Phase 5 connects read-only feedback analysis to the existing human-reviewed LEAP proposal boundary without mutating canonical TIED YAML."
+      related_requirements:
+        depends_on:
+          - "REQ-FEEDBACK_TO_TIED"
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+          - "REQ-LEAP_PROPOSAL_QUEUE"
+          - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+        related_to:
+          - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+          - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+        supersedes: []
+      satisfaction_criteria:
+        - criterion: "Approve path appends non-canonical proposal via createReviewedLeapProposal with proposal_link"
+          metric: "approve_create_proposal and proposal_link_integrity fixtures"
+        - criterion: "canonicalWrite attempt fails with CanonicalWriteAttempt before queue IO"
+          metric: "canonical_write_attempt fixture"
+        - criterion: "feedback.yaml and project TIED YAML unchanged after bridge operations"
+          metric: "store_immutability fixture"
+        - criterion: "Finding observation_group resolves to existing member entry ids from digest duplicate_groups"
+          metric: "resolve_finding fixture; InvalidFinding on unknown group"
+        - criterion: "projection_hash mismatch returns StaleEvidence"
+          metric: "stale_evidence fixture"
+        - criterion: "Reject and incomplete review return ReviewRequired without queue mutation"
+          metric: "review_required and reject_decision fixtures"
+      status: "Planned"
+      traceability:
+        architecture:
+          - "ARCH-KAIZEN-REVIEW-BRIDGE"
+          - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+        code_annotations:
+          - "ARCH-KAIZEN-REVIEW-BRIDGE"
+          - "IMPL-KAIZEN-REVIEW-BRIDGE"
+          - "REQ-KAIZEN-REVIEW-BRIDGE"
+        implementation:
+          - "IMPL-KAIZEN-REVIEW-BRIDGE"
+        tests:
+          - "feedback-review-bridge.test.ts"
+      validation_criteria:
+        - coverage: "Digest-to-queue review bridge golden matrix"
+          method: "Unit tests; optional MCP binding at build-plan"

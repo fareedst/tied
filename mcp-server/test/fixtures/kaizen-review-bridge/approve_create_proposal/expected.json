@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "review_outcome": "approved",
+  "lead_entry_id": "fb-op-lead",
+  "member_ids": ["fb-op-lead", "fb-op-dup"],
+  "promotion_status": "proposal_created",
+  "queue_count_delta": 1,
+  "proposal_non_canonical": true
+}

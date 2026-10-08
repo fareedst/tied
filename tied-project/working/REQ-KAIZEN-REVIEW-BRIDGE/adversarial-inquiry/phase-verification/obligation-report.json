@@ -1,0 +1,112 @@
+{
+  "canonicalMutation": false,
+  "findings": [
+    {
+      "direction": "B",
+      "id": "2486318f937bc499",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p5-spec-proposal-link"
+    },
+    {
+      "direction": "B",
+      "id": "30134eb74846680b",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p5-spec-no-canonical"
+    },
+    {
+      "direction": "A",
+      "id": "9bb959a0ffaafe49",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p5-spec-no-canonical"
+    },
+    {
+      "direction": "A",
+      "id": "c12f0b35789161c3",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p5-spec-proposal-link"
+    },
+    {
+      "direction": "A",
+      "id": "c6a3ea53d0fcf667",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p5-spec-stale"
+    },
+    {
+      "direction": "B",
+      "id": "f50de5fd70b4afed",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "p5-spec-stale"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "REQ-KAIZEN-REVIEW-BRIDGE#no-canonical-write",
+        "kind": "criterion_constraint",
+        "to": "constraint:arch-p5-no-canonical"
+      },
+      {
+        "from": "REQ-KAIZEN-REVIEW-BRIDGE#stale-evidence",
+        "kind": "criterion_constraint",
+        "to": "constraint:arch-p5-stale"
+      },
+      {
+        "from": "constraint:arch-p5-no-canonical",
+        "kind": "constraint_block",
+        "to": "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+      },
+      {
+        "from": "constraint:arch-p5-stale",
+        "kind": "constraint_block",
+        "to": "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "constraint:arch-p5-no-canonical",
+        "kind": "constraint"
+      },
+      {
+        "id": "constraint:arch-p5-stale",
+        "kind": "constraint"
+      },
+      {
+        "id": "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001",
+        "kind": "block",
+        "revision": "block-rev-p5"
+      },
+      {
+        "id": "REQ-KAIZEN-REVIEW-BRIDGE#no-canonical-write",
+        "kind": "criterion",
+        "revision": "criterion-rev-p5"
+      },
+      {
+        "id": "REQ-KAIZEN-REVIEW-BRIDGE#stale-evidence",
+        "kind": "criterion",
+        "revision": "criterion-rev-p5-stale"
+      }
+    ],
+    "projectId": "stdd-kaizen-p5"
+  },
+  "projectId": "stdd-kaizen-p5",
+  "proofBoundaries": [
+    "semantic_fidelity"
+  ],
+  "readOnly": true,
+  "schemaVersion": "adversarial-inquiry-report.v1",
+  "scope": [
+    "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+  ]
+}

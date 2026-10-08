@@ -1172,6 +1172,21 @@ ARCH-GOAGENT-YAML-STEPS:
     requirements:
       - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
+ARCH-KAIZEN-REVIEW-BRIDGE:
+  cross_references:
+    architecture:
+      - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+      - "ARCH-LEAP_PROPOSAL_QUEUE"
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    implementation:
+      - "IMPL-KAIZEN-REVIEW-BRIDGE"
+    requirements:
+      - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+      - "REQ-KAIZEN-REVIEW-BRIDGE"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+  detail_file: "architecture-decisions/ARCH-KAIZEN-REVIEW-BRIDGE.yaml"
+  name: "Kaizen review bridge architecture"
+  status: "Planned"
 ARCH-KAIZEN_FEEDBACK_ANALYSIS:
   cross_references:
     architecture:

@@ -1,0 +1,26 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "request_token": "PLAN-TIED-KAIZEN-FEEDBACK-LOOP",
+  "role": "program_orchestrator",
+  "master_checklist": "tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml",
+  "linked_plan": "docs/tied-kaizen-feedback-loop-plan.md",
+  "execution_authority": {
+    "mode": "sponsor_pre_approved_batch",
+    "recorded_at": "2026-10-07"
+  },
+  "resume_entry": {
+    "read_first": "kaizen-program-execution-checklist.yaml",
+    "current_step_field": "current_step",
+    "phase_status_field": "phases[].status"
+  },
+  "child_envelopes": [
+    {
+      "req_token": "REQ-KAIZEN-OBSERVATION-CAPTURE",
+      "phase_id": 1,
+      "status": "complete",
+      "envelope_path": "tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/request-evidence-envelope.v1.json",
+      "citdp_path": "tied-project/citdp/CITDP-REQ-KAIZEN-OBSERVATION-CAPTURE.yaml",
+      "closed_at": "2026-10-07"
+    }
+  ]
+}

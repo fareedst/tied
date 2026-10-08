@@ -1,0 +1,16 @@
+{
+  "provenance": {
+    "command": "tied_adversarial_inquiry_run",
+    "phase": "pre_implementation",
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "request_token": "REQ-KAIZEN-REVIEW-BRIDGE",
+    "run_id": "kaizen-p5-preimpl-20261007",
+    "scope": [
+      "IMPL-KAIZEN-REVIEW-BRIDGE#RUN_DIGEST_REVIEW_BRIDGE#p5plan0001"
+    ],
+    "tool_version": "1.0.0"
+  },
+  "schemaVersion": "adversarial-inquiry-provenance.v1"
+}

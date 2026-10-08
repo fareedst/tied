@@ -1,0 +1,19 @@
+▶ feedback-review-bridge golden fixtures [REQ-KAIZEN-REVIEW-BRIDGE]
+  ✔ fixture: review_required (1.469125ms)
+  ✔ fixture: reject_decision (1.272667ms)
+  ✔ fixture: approve_create_proposal (1.813834ms)
+  ✔ fixture: canonical_write_attempt (0.57975ms)
+  ✔ fixture: stale_evidence (0.624333ms)
+  ✔ fixture: proposal_link_integrity (1.242125ms)
+  ✔ InvalidFinding when observation_group is unknown (0.120834ms)
+  ✔ store immutability — feedback.yaml and tied-project sample YAML unchanged (2.008625ms)
+  ✔ fresh projection_hash anchor matches digest and allows approve (0.595084ms)
+✔ feedback-review-bridge golden fixtures [REQ-KAIZEN-REVIEW-BRIDGE] (10.310708ms)
+ℹ tests 9
+ℹ suites 1
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 114.722583

@@ -473,6 +473,16 @@ ARCH-GOAGENT-YAML-STEPS:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-KAIZEN-REVIEW-BRIDGE:
+  cross_references:
+    - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    - "IMPL-KAIZEN-REVIEW-BRIDGE"
+    - "REQ-KAIZEN-REVIEW-BRIDGE"
+  detail_file: "architecture-decisions/ARCH-KAIZEN-REVIEW-BRIDGE.yaml"
+  name: "Kaizen review bridge architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Planned"
+  type: "ARCH"
 ARCH-KAIZEN_FEEDBACK_ANALYSIS:
   cross_references:
     - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
@@ -1555,6 +1565,15 @@ IMPL-GOAGENT-TEXT-SOURCES:
   name: "text package prompt file and argv turns"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-KAIZEN-REVIEW-BRIDGE:
+  cross_references:
+    - "ARCH-KAIZEN-REVIEW-BRIDGE"
+    - "REQ-KAIZEN-REVIEW-BRIDGE"
+  detail_file: "implementation-decisions/IMPL-KAIZEN-REVIEW-BRIDGE.yaml"
+  name: "Kaizen review bridge implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
   type: "IMPL"
 IMPL-KAIZEN_FEEDBACK_ANALYSIS:
   cross_references:
@@ -3099,6 +3118,16 @@ REQ-KAIZEN-OBSERVATION-CAPTURE:
   name: "Kaizen Phase 1 point-of-work observation capture"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-KAIZEN-REVIEW-BRIDGE:
+  category: "Functional"
+  cross_references:
+    - "ARCH-KAIZEN-REVIEW-BRIDGE"
+    - "IMPL-KAIZEN-REVIEW-BRIDGE"
+  detail_file: "requirements/REQ-KAIZEN-REVIEW-BRIDGE.yaml"
+  name: "Kaizen Phase 5 review bridge"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"
 REQ-KAIZEN-SOURCE-NORMALIZATION:
   category: "Functional"

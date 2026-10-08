@@ -1232,6 +1232,19 @@ IMPL-GOAGENT-TEXT-SOURCES:
       - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
       - "text_test.go"
+IMPL-KAIZEN-REVIEW-BRIDGE:
+  cross_references:
+    architecture:
+      - "ARCH-KAIZEN-REVIEW-BRIDGE"
+      - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
+    implementation:
+      - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+      - "IMPL-TIED_FEEDBACK_PROMOTION"
+    requirements:
+      - "REQ-KAIZEN-REVIEW-BRIDGE"
+  detail_file: "implementation-decisions/IMPL-KAIZEN-REVIEW-BRIDGE.yaml"
+  name: "Kaizen review bridge implementation"
+  status: "Active"
 IMPL-KAIZEN_FEEDBACK_ANALYSIS:
   cross_references:
     architecture:

@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "review_outcome": "rejected",
+  "lead_entry_id": "fb-op-lead",
+  "member_ids": ["fb-op-lead", "fb-op-dup"],
+  "promotion_status": "promotion_pending",
+  "queue_count_delta": 0
+}

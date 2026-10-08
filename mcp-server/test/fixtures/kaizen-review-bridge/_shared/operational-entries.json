@@ -1,0 +1,31 @@
+[
+  {
+    "id": "fb-op-lead",
+    "type": "bug_report",
+    "title": "Checkout outage",
+    "description": "Checkout returned errors",
+    "created_at": "2026-08-13T10:00:00.000Z",
+    "source_type": "incident",
+    "source_id": "inc-42",
+    "affected_feature": "FEAT-CHECKOUT",
+    "severity": "high",
+    "evidence_links": ["incident://inc-42"],
+    "duplicate_group": "dg-checkout",
+    "promotion_status": "promotion_pending",
+    "proposed_req": "REQ-FEAT_CHECKOUT_RELIABILITY"
+  },
+  {
+    "id": "fb-op-dup",
+    "type": "bug_report",
+    "title": "Checkout outage again",
+    "description": "Same checkout errors",
+    "created_at": "2026-08-14T11:00:00.000Z",
+    "source_type": "incident",
+    "source_id": "inc-43",
+    "affected_feature": "FEAT-CHECKOUT",
+    "severity": "high",
+    "evidence_links": ["incident://inc-43"],
+    "duplicate_group": "dg-checkout",
+    "promotion_status": "duplicate"
+  }
+]

@@ -33,6 +33,8 @@ Privacy tier, idempotency key, proof boundary, client cohort, and denominator fi
 | **baseline** | before metric (alone) | The prior condition an **outcome observation** compares with a countermeasure |
 | **outcome observation** | success metric (alone) | Follow-up evidence comparing a countermeasure with its baseline; may be improved, unchanged, regressed, inconclusive, or not measured |
 | **feedback digest** | report (alone) | Versioned client-to-TIED analysis projection that references source feedback without replacing it |
+| **review bridge** | promotion bridge (alone) | Phase 5 handoff from digest `observation_group` to existing entry ids and `createReviewedLeapProposal`; no second queue |
+| **proposal link** | leap id (alone) | Non-canonical queue entry id returned after reviewed approve path |
 | **receipt** | ack (alone) | Immediate local response from point-of-work capture. It confirms the append; it does not notify anyone and it does not authorize a change |
 | **notification policy** | alert all | Rule for whether an observation is surfaced immediately, queued, or suppressed |
 | **promotion status** | review status (alone) | Exact feedback-entry values: `promotion_pending`, `proposal_created`, `canonical_ready`, `rejected`, `duplicate` |

@@ -1,0 +1,60 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "kaizen-p5-verify-20261007",
+  "commit": "working-tree",
+  "environment": { "node": "local", "os": "darwin" },
+  "command_results": [
+    {
+      "id": "kaizen-p5-tests",
+      "command": ["npx", "tsx", "--test", "src/feedback-review-bridge.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/quality-artifacts/kaizen-p5-tests.stdout.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/quality-artifacts/kaizen-p5-tsc.stderr.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "feedback-review-bridge-golden-fixtures",
+      "attribute": "Digest-to-queue review bridge golden matrix",
+      "applicability": "applicable",
+      "rationale": "Phase 5 integrated depth unit module validation",
+      "evidence_method": "unit tests",
+      "command_or_test": "kaizen-p5-tests",
+      "result": "passed"
+    },
+    {
+      "id": "mcp-review-bridge-composition",
+      "attribute": "MCP tied_feedback_review_bridge binding",
+      "applicability": "not_applicable",
+      "rationale": "Optional per CITDP; local bridge API only",
+      "evidence_method": "CITDP test strategy",
+      "result": "not_applicable"
+    },
+    {
+      "id": "e2e",
+      "attribute": "E2E UI",
+      "applicability": "not_applicable",
+      "rationale": "Pure unit bridge module",
+      "evidence_method": "CITDP test strategy",
+      "result": "not_applicable"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-KAIZEN-REVIEW-BRIDGE",
+    "IMPL-KAIZEN-REVIEW-BRIDGE",
+    "REQ-KAIZEN-REVIEW-BRIDGE"
+  ],
+  "proof_boundaries": [
+    "Does not prove sponsor approved canonical methodology apply or Phase 6 outcome loop"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": [
+      "tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/CITDP-REQ-KAIZEN-REVIEW-BRIDGE.yaml"
+    ]
+  }
+}

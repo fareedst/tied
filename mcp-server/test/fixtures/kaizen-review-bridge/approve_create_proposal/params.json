@@ -1,0 +1,9 @@
+{
+  "observation_group": "dg-checkout",
+  "review": {
+    "reviewer": "human@example.test",
+    "decision": "create_proposal",
+    "rationale": "Evidence supports a reliability requirement",
+    "evidence_links": ["incident://inc-42"]
+  }
+}

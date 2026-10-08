@@ -162,7 +162,13 @@ export interface ReviewDecision {
 // [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] — Creates a distinct non-canonical proposal only after explicit human review.
 export function createReviewedLeapProposal(
   entry: OperationalFeedbackEntry,
-  options: { projectRoot: string; review?: ReviewDecision; canonicalWrite?: boolean },
+  options: {
+    projectRoot: string;
+    review?: ReviewDecision;
+    canonicalWrite?: boolean;
+    /** Merged into leap_hints after standard promotion fields (review-bridge digest anchor). */
+    leap_hints_extra?: Record<string, unknown>;
+  },
 ): { ok: true; proposal: LeapProposal } | { ok: false; error: "ReviewRequired" | "CanonicalWriteAttempt" } {
   if (options.canonicalWrite) return { ok: false, error: "CanonicalWriteAttempt" };
   const review = options.review;
@@ -190,6 +196,7 @@ export function createReviewedLeapProposal(
       proposed_req: entry.proposed_req,
       evidence_links: [...entry.evidence_links],
       review,
+      ...(options.leap_hints_extra ?? {}),
     },
   });
   return { ok: true, proposal };

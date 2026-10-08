@@ -1,11 +1,13 @@
 # TIED Kaizen feedback loop: from work observations to system improvement
 
-**Status:** Refined planning document. The loop is not implemented.  
+**Status:** Refined planning document. Phase 1 capture and Phase 2 source normalization are implemented; Phases 3–7 are not.  
 **Request:** `PLAN-TIED-KAIZEN-FEEDBACK-LOOP`  
-**This pass:** `refine-plan`. `depth_tier: minimal`. `gate_policy: advisory`. Evidence-chain **profile depth** is `not_measured`.  
-**Scope:** Name the loop, bound the first later implementation, and record sponsor decisions on the three costly choices (2026-10-07).  
-**Last updated:** 2026-10-07 (sponsor decisions)  
-**Tracker:** [`checklist-tracker.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/checklist-tracker.yaml)  
+**Latest pass:** `refine-plan` for **Phase 2** (`REQ-KAIZEN-SOURCE-NORMALIZATION`). `depth_tier: integrated` for the Phase 2 capability scope. `gate_policy: advisory`. Evidence-chain **profile depth** is `not_measured` for documentation edits.  
+**Scope:** Name the loop, bound phased implementation, record sponsor decisions (2026-10-07), and refine Phase 2 source normalization before `plan-new-feature`.  
+**Last updated:** 2026-10-07 (Phase 2 refine-plan)  
+**Phase 2 working folder:** [`PLAN.md`](../tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/PLAN.md) · [`checklist-tracker.yaml`](../tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/checklist-tracker.yaml) · [`CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION.yaml`](../tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION.yaml)
+**Program execution checklist (Phases 0–7):** [`kaizen-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml) — central resume surface after sponsor batch approval (2026-10-07); one phase per `plan-new-feature` with its own per-REQ tracker copy.  
+**Refine-pass tracker (documentation only):** [`checklist-tracker.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/checklist-tracker.yaml)  
 **Commit handoff:** [`commit-pass-handoff.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/commit-pass-handoff.md) (separate `plan-close-out` pass)  
 **CITDP:** [`CITDP-PLAN-TIED-KAIZEN-FEEDBACK-LOOP.yaml`](../tied-project/citdp/CITDP-PLAN-TIED-KAIZEN-FEEDBACK-LOOP.yaml)
 
@@ -526,9 +528,75 @@ Phase 7 promotion rule: pilot results stay analysis evidence until a separate sp
 
 ### Handoff
 
-When implementation is authorized, the next session starts at `plan-new-feature` for the selected phase. It re-runs RESOLVE and PRELOAD from [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md), writes that phase’s CITDP, and confirms the TIED base path before any project YAML write.
+**Resume here (2026-10-07):** Phases **1–2 are implemented and committed** (`229ab6b`, `c4cc94f`). **Phase 3 (transport) is deferred** — sponsor confirmed finishing **Phases 4–7** first on local/export only. **Next agent step:** `P4-initiate` → **`plan-new-feature` for Phase 4 only** (suggested `REQ-KAIZEN-FEEDBACK-ANALYSIS`).
 
-Until that handoff, this document is a bounded proposal.
+| Resource | Purpose |
+| --- | --- |
+| [`kaizen-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml) | `agent_handoff`, `current_step`, phase status |
+| [`agent-resume-handoff.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/agent-resume-handoff.md) | One-page completions + Phase 4 workflow |
+| [`PLAN.md`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/PLAN.md) | Working-folder status summary |
+
+PRELOAD [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md); confirm `tied_config_get_base_path` before MCP writes. Each phase: `build-plan` → `plan-close-out` (evidence + commit) → advance orchestrator. Continue **5 → 6 → 7** without pausing for closed hinges unless stop criteria fire.
+
+## Phase 2 refine pass (source normalization)
+
+**Request (planning):** `REQ-KAIZEN-SOURCE-NORMALIZATION`  
+**Pass:** `refine-plan` only — no REQ/ARCH/IMPL tokens, no runtime change, no commit.  
+**Depends on:** Phase 1 [REQ-KAIZEN-OBSERVATION-CAPTURE](../tied-project/requirements/REQ-KAIZEN-OBSERVATION-CAPTURE.yaml) (closed).  
+**Program step:** `P2-initiate` on [`kaizen-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml).
+
+### Refine — Phase 2
+
+Touchpoint 1 RESOLVE for adapter normalization (distinct from Phase 1 point-of-work capture):
+
+| Input surface | Canonical module | Notes |
+|---|---|---|
+| `tied_feedback_operational_add` | **operational source** adapter | Today: `normalizeOperationalSource` in `feedback-promotion.ts` |
+| `tied_feedback_capture_observation` | **point-of-work capture** | Phase 1; Phase 2 aligns **entry type** inference when `entry_type` omitted |
+| `source_type` incident / metric / test_failure / user_report | Maps to default **observation kind** | Provenance fields (`source_id`, `evidence_links`, `occurred_at`) preserved |
+| Caller `entry_type` | **feedback entry type** | Always wins over kind inference (sponsor policy) |
+| Kind-only capture or adapter payload | **observation kind** inference → **feedback entry type** | See table below |
+| `workflow`, `workaround`, `baseline_ref` on payload | Additive context on the entry | Does not overwrite observation text or analysis facets |
+
+**Kind → entry type when caller omits `entry_type`** (unchanged from program plan):
+
+| **observation kind** | **feedback entry type** |
+|---|---|
+| `defect`, `failed_test`, `deployment_failure`, `incident` | `bug_report` |
+| all other known kinds | `methodology_improvement` |
+
+**Default kind from `source_type` when payload omits kind** (Phase 2 contract proposal):
+
+| `source_type` | default **observation kind** | notes |
+|---|---|---|
+| `incident` | `incident` | |
+| `test_failure` | `failed_test` | |
+| `metric` | `missing_information` | caller may supply a narrower kind |
+| `user_report` | `other` | requires `other_qualifier` on payload (e.g. `user_report`) so friction stays explicit, not auto-**feature_request** |
+
+**Delegated envelope for this pass:** May edit this section, [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md) bridge rows, and `tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/`. May not change `feedback.yaml` runtime behavior or mint tokens.
+
+**Depth:** `minimal` for this refine-plan pass; **`implementation_depth_tier: integrated`** for the Phase 2 REQ (external operational input and persistence). Forbidden: inheriting this pass’s `minimal` depth into `build-plan` without reselecting integrated.
+
+### Plan — Phase 2
+
+| | |
+|---|---|
+| **Current** | `user_report` → `feature_request`; other sources → `bug_report`; no shared inference with capture; no `observation_kind` / workflow / workaround / baseline on operational entries |
+| **Desired** | Shared `feedback-source-normalization` (proposed) exports kind inference and entry-type resolution; `normalizeOperationalSource` and capture both consume it; operational entries carry additive context; privacy tier rejected unless `operator_local` when tier is present on adapter payload |
+| **Unchanged** | Phase 1 receipt and idempotency; promotion boundary; local-only transport policy for Phases 1–2 |
+| **Non-goals** | Analysis/digest, outbox, changing raw observation prose, fourth entry type |
+| **Success** | Fixture table in working CITDP; RED tests listed before code; composition coverage for MCP operational_add |
+
+Impact neighborhood: `feedback-promotion.ts`, `feedback-capture.ts`, `tools/index.ts`, tests listed in working CITDP. New tokens deferred to `plan-new-feature`: `[REQ-KAIZEN-SOURCE-NORMALIZATION]`, `[ARCH-KAIZEN_SOURCE_NORMALIZATION]`, `[IMPL-KAIZEN_SOURCE_NORMALIZATION]`.
+
+### Implement — Phase 2 (this pass)
+
+Do not write production code from this subsection. Do not start `unit-test-red`.
+
+**Next authorized session:** `plan-new-feature` or `build-plan` for Phase 2 only — mint tokens, author IMPL pseudo-code with block token comments, run `pre_implementation` gate with integrated activation, then RED tests per working [`test-strategy-evidence.md`](../tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/test-strategy-evidence.md).
+
+**Exit evidence (unchanged from module table):** source fixtures (incident, metric, test_failure, user_report), provenance and privacy rejection, composition tests per adapter binding; a **user report** may remain a friction **operational observation** without becoming a **feature_request** by default.
 
 ## Risks and safeguards
 
