@@ -13,7 +13,7 @@
 | 3 | **deferred** | — | — | Transport hinge **closed** (see below) |
 | 4 | complete | REQ-KAIZEN-FEEDBACK-ANALYSIS | b9a092f | `working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/closeout-run-close-out-gates-final.json` |
 | 5 | complete | REQ-KAIZEN-REVIEW-BRIDGE | 8437712 | `working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/closeout-run-close-out-gates-final.json` |
-| 6 | complete | REQ-KAIZEN-OUTCOME-LOOP | *(this close-out commit)* | `working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json` |
+| 6 | complete | REQ-KAIZEN-OUTCOME-LOOP | c8a84fa | `working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json` |
 
 ## Sponsor — transport hinge (2026-10-07 follow-up)
 

@@ -158,7 +158,7 @@ agent_handoff:
       req_token: REQ-KAIZEN-REVIEW-BRIDGE
       close_out: tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/closeout-run-close-out-gates-final.json
     phase_6:
-      git: pending
+      git: c8a84fa
       req_token: REQ-KAIZEN-OUTCOME-LOOP
       close_out: tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json
   optional_doc_commit:
@@ -335,7 +335,7 @@ phases:
     status: complete
     next_for_agent: false
     req_token: REQ-KAIZEN-OUTCOME-LOOP
-    proof_commit: pending
+    proof_commit: c8a84fa
     close_out_evidence: tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/evidence/closeout-run-close-out-gates-final.json
     suggested_req_prefix: REQ-KAIZEN-OUTCOME-LOOP
     phase_tracker: tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/checklist-tracker.yaml
