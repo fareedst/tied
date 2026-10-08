@@ -1,0 +1,136 @@
+CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING:
+  record_identity:
+    title: Kaizen Phases 4–7 MCP composition wiring
+    change_request_id: REQ-KAIZEN-FEEDBACK-MCP-WIRING
+    author: plan-new-feature
+    date: "2026-10-07"
+    record_status: plan
+    refined_at: "2026-10-08"
+    batch: kaizen-mcp-composition
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: not_measured
+    implementation_depth_tier: integrated
+  change_definition:
+    current_behavior: >
+      feedback-analysis.ts, feedback-review-bridge.ts, feedback-outcome-loop.ts, and
+      feedback-kaizen-pilot.ts ship with unit tests, but agents must import TypeScript
+      directly. Phase 4–7 CITDP records deferred optional MCP composition to build-plan.
+    desired_behavior: >
+      Four MCP tools expose digest analysis, review bridge, outcome record, and pilot run
+      with JSON request/response, optional base_path, and thin handlers in tools/index.ts
+      that delegate to the existing modules without new store semantics or canonical TIED
+      YAML writes.
+    unchanged_behavior:
+      - Phase 4–7 module logic and unit test suites
+      - tied_feedback_add, tied_feedback_export, tied_feedback_capture_observation, tied_feedback_operational_add, tied_feedback_promote
+      - feedback.yaml schema and append semantics from capture/add paths
+    non_goals:
+      - Reimplementing digest, bridge, outcome, or pilot algorithms in handlers
+      - Canonical REQ/ARCH/IMPL YAML mutation from MCP
+      - Upstream transport (Phase 3 deferred)
+    success_criteria:
+      - Four tools registered and discoverable via allTools
+      - Composition tests bind each handler to module behavior on temp base_path
+      - feedback.yaml immutability preserved for digest and pilot paths
+  impact_analysis:
+    modules:
+      - tools/index.ts (MCP registration)
+      - feedback-analysis (delegate)
+      - feedback-review-bridge (delegate)
+      - feedback-outcome-loop (delegate)
+      - feedback-kaizen-pilot (delegate)
+    files:
+      - mcp-server/src/tools/index.ts
+      - mcp-server/src/tools/kaizen-feedback-mcp-composition.test.ts (proposed)
+      - mcp-server/src/tools/batch-5-mcp.test.ts (pattern reference)
+    depends_on:
+      - REQ-KAIZEN-FEEDBACK-ANALYSIS
+      - REQ-KAIZEN-REVIEW-BRIDGE
+      - REQ-KAIZEN-OUTCOME-LOOP
+      - REQ-KAIZEN-FEEDBACK-PILOT
+      - REQ-FEEDBACK_TO_TIED
+    tags:
+      - kaizen-mcp-composition
+      - integrated
+    tied_tokens_new:
+      - REQ-KAIZEN-FEEDBACK-MCP-WIRING
+      - ARCH-KAIZEN-FEEDBACK-MCP-WIRING
+      - IMPL-KAIZEN-FEEDBACK-MCP-WIRING
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: integrated
+      gate_policy: advisory
+      assurance_profile: baseline-functional
+      research_profile: integrated-agent
+      prior_depth_tier: null
+      depth_selected_at: "2026-10-07T18:00:00-07:00"
+      eligibility_triggers_matched:
+        - external input via MCP JSON args and loaded feedback entries
+        - persistence paths on outcome loop and review approve delegation
+      rationale: >
+        Composition layer exposes persisted feedback and LEAP queue boundaries to agents;
+        integrated depth per sponsor; advisory until build-plan verification.
+      counterexamples:
+        - Handler rewrites feedback entry title during digest call
+        - MCP tool accepts canonicalWrite true and mutates project YAML
+        - Digest tool silently drops denominator mismatch exclusions
+        - Review bridge bypasses StaleEvidence on projection_hash mismatch
+      disconfirming_observations:
+        - Composition tests use temp dirs and assert ok/error shapes only at build-plan
+        - Pseudo-code sets canonicalWrite and storeMutation false on all four handlers
+    risks:
+      - id: RISK-KMCP-001
+        description: Handler duplicates module logic and drifts from unit tests
+        severity: High
+        likelihood: Medium
+        mitigation: Thin delegate-only pseudo-code; composition tests assert module outcomes
+      - id: RISK-KMCP-002
+        description: Wrong base_path causes cross-project feedback reads
+        severity: High
+        likelihood: Low
+        mitigation: RESOLVE_PROJECT_ROOT mirrors capture; tests pass explicit base_path
+      - id: RISK-KMCP-003
+        description: Review bridge MCP conflated with tied_feedback_promote
+        severity: Medium
+        likelihood: Low
+        mitigation: Separate tool names in vocab; bridge pseudo-code cites runDigestReviewBridge only
+  test_strategy:
+    summary: >
+      RED composition tests in kaizen-feedback-mcp-composition.test.ts at build-plan;
+      reuse batch-5-mcp.test.ts patterns; module unit tests remain authoritative; no E2E.
+    module_validation:
+      - module: kaizen-feedback-mcp-composition
+        boundary: MCP handler → Phase 4–7 module entrypoints
+        tests: kaizen-feedback-mcp-composition.test.ts
+    fixtures:
+      - name: digest_minimal_cohort
+        theme: tied_feedback_analysis_digest returns ok and feedback-analysis.v1 schema_version
+        seed: mcp-server/test/fixtures/kaizen-feedback-analysis/recurrence_duplicate_groups/
+      - name: review_bridge_review_required
+        theme: tied_feedback_review_bridge returns ReviewRequired without queue write
+        seed: digest from analysis fixture or inline minimal feedback-analysis.v1
+      - name: outcome_outside_window
+        theme: tied_feedback_outcome_record returns OutsideFollowUpWindow or equivalent
+        seed: mcp-server/test/fixtures/kaizen-outcome-loop/ (follow_up_window theme)
+      - name: pilot_invalid_cohort
+        theme: tied_feedback_pilot_run returns InvalidPilotCohort or cohort size error
+        seed: mcp-server/test/fixtures/kaizen-feedback-pilot/incompatible_cohort_size/
+    build_plan_close_out:
+      commit: sponsor_requested
+      persist_citdp: tied-project/citdp/CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml
+      composition_test_file: mcp-server/src/tools/kaizen-feedback-mcp-composition.test.ts
+    mutation_matrix:
+      tied_feedback_analysis_digest: read_only_feedback_yaml
+      tied_feedback_review_bridge: read_mostly; leap_queue_on_approve_only
+      tied_feedback_outcome_record: append_outcome_observations_on_entry_context
+      tied_feedback_pilot_run: read_only_feedback_yaml; optional report_out_path export
+  completion_criteria:
+    activation:
+      run_id: kaizen-kmcp-preimpl-20261007
+      phase: pre_implementation
+      request_token: REQ-KAIZEN-FEEDBACK-MCP-WIRING
+    focused_tests: kaizen-feedback-mcp-composition.test.ts (build-plan)
+    lint: npx tsc -b in mcp-server (build-plan)
+    verification: tied_validate_consistency; tied_verify after build-plan
+    persist_policy: persist CITDP to tied-project/citdp/ on close-out

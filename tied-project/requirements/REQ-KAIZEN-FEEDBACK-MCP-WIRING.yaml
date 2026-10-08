@@ -1,0 +1,62 @@
+REQ-KAIZEN-FEEDBACK-MCP-WIRING:
+  REQ-KAIZEN-FEEDBACK-MCP-WIRING:
+    REQ-KAIZEN-FEEDBACK-MCP-WIRING:
+      REQ-KAIZEN-FEEDBACK-MCP-WIRING:
+        category: "Functional"
+        name: "Kaizen Phases 4–7 MCP composition wiring"
+        non_goals:
+          - "New feedback store semantics or canonical REQ/ARCH/IMPL YAML writes from MCP handlers"
+          - "Reimplementing digest, review bridge, outcome loop, or pilot logic in handlers"
+          - "Upstream transport or notification (Phase 3 deferred)"
+        priority: "P1"
+        rationale:
+          benefits:
+            - "Agents invoke Kaizen analysis, review bridge, outcome loop, and pilot via MCP without TypeScript imports"
+            - "Optional base_path aligns with existing feedback tools"
+            - "Thin JSON envelopes mirror Phase 1–2 feedback MCP patterns"
+          problems_solved:
+            - "CITDP deferred optional MCP composition at each phase build-plan"
+            - "Phases 4–7 modules exist with unit tests but no MCP discovery surface"
+          why: "Single composition-layer requirement wires four MCP tools to existing feedback-analysis, feedback-review-bridge, feedback-outcome-loop, and feedback-kaizen-pilot modules."
+        related_requirements:
+          depends_on:
+            - "REQ-FEEDBACK_TO_TIED"
+            - "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+            - "REQ-KAIZEN-FEEDBACK-PILOT"
+            - "REQ-KAIZEN-OUTCOME-LOOP"
+            - "REQ-KAIZEN-REVIEW-BRIDGE"
+            - "REQ-MCP_USAGE_METRICS"
+          related_to:
+            - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+            - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+          supersedes: []
+        satisfaction_criteria:
+          - criterion: "Handlers registered in mcp-server/src/tools/index.ts and discoverable via allTools"
+            metric: "batch composition tests mirror batch-5-mcp.test.ts capture pattern"
+          - criterion: "tied_feedback_analysis_digest returns feedback-analysis.v1 digest JSON without mutating feedback.yaml"
+            metric: "MCP composition test; buildFeedbackDigest delegation"
+          - criterion: "tied_feedback_outcome_record delegates to runOutcomeLoop with outcome-observation payload"
+            metric: "MCP composition test; context.outcome_observations append only when module allows"
+          - criterion: "tied_feedback_pilot_run delegates to runKaizenFeedbackPilot and returns feedback-pilot.v1 report"
+            metric: "MCP composition test; no canonical YAML write"
+          - criterion: "tied_feedback_review_bridge delegates to runDigestReviewBridge with digest JSON and review decision"
+            metric: "MCP composition test; store immutability preserved"
+        status: "Planned"
+        traceability:
+          architecture:
+            - "ARCH-FEEDBACK_STORAGE"
+            - "ARCH-KAIZEN-FEEDBACK-MCP-WIRING"
+          code_annotations:
+            - "ARCH-KAIZEN-FEEDBACK-MCP-WIRING"
+            - "IMPL-KAIZEN-FEEDBACK-MCP-WIRING"
+            - "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+          implementation:
+            - "IMPL-KAIZEN-FEEDBACK-MCP-WIRING"
+            - "IMPL-MCP_FEEDBACK_TOOLS"
+          tests:
+            - "batch-5-mcp.test.ts"
+            - "kaizen-feedback-mcp-composition.test.ts"
+        validation_criteria:
+          - coverage: "MCP handler binding to existing Kaizen modules Phases 4–7"
+            method: "Composition tests in mcp-server; unit modules remain primary validation"
+  status: "Implemented"

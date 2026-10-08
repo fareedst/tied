@@ -1,0 +1,291 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "RESOLVE_PROJECT_ROOT",
+      "line": 19,
+      "token_refs": [
+        "ARCH-FEEDBACK_STORAGE",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "LOAD_FEEDBACK_FOR_MCP",
+      "line": 33,
+      "token_refs": [
+        "ARCH-FEEDBACK_STORAGE",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "REQ-FEEDBACK_TO_TIED",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "LOAD_ENTRIES_BY_ID",
+      "line": 45,
+      "token_refs": [
+        "ARCH-FEEDBACK_STORAGE",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST",
+      "line": 59,
+      "token_refs": [
+        "ARCH-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-KAIZEN_FEEDBACK_ANALYSIS",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "REQ-KAIZEN-FEEDBACK-ANALYSIS",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "MCP_HANDLER_TIED_FEEDBACK_REVIEW_BRIDGE",
+      "line": 78,
+      "token_refs": [
+        "ARCH-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-KAIZEN-REVIEW-BRIDGE",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+        "REQ-KAIZEN-REVIEW-BRIDGE"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "MCP_HANDLER_TIED_FEEDBACK_OUTCOME_RECORD",
+      "line": 96,
+      "token_refs": [
+        "ARCH-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-KAIZEN-OUTCOME-LOOP",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+        "REQ-KAIZEN-OUTCOME-LOOP"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN",
+      "line": 114,
+      "token_refs": [
+        "ARCH-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-KAIZEN-FEEDBACK-PILOT",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+        "REQ-KAIZEN-FEEDBACK-PILOT"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    },
+    {
+      "name": "REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS",
+      "line": 131,
+      "token_refs": [
+        "ARCH-FEEDBACK_STORAGE",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+      ],
+      "contract_fields": [
+        "DATA",
+        "DATA_TRANSITION",
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE",
+        "TERMINATION"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "caller": "LOAD_ENTRIES_BY_ID",
+      "callee": "LOAD_FEEDBACK_FOR_MCP",
+      "line": 55
+    },
+    {
+      "caller": "MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST",
+      "callee": "RESOLVE_PROJECT_ROOT",
+      "line": 70
+    },
+    {
+      "caller": "MCP_HANDLER_TIED_FEEDBACK_REVIEW_BRIDGE",
+      "callee": "RESOLVE_PROJECT_ROOT",
+      "line": 90
+    },
+    {
+      "caller": "MCP_HANDLER_TIED_FEEDBACK_REVIEW_BRIDGE",
+      "callee": "LOAD_ENTRIES_BY_ID",
+      "line": 91
+    },
+    {
+      "caller": "MCP_HANDLER_TIED_FEEDBACK_OUTCOME_RECORD",
+      "callee": "RESOLVE_PROJECT_ROOT",
+      "line": 108
+    },
+    {
+      "caller": "MCP_HANDLER_TIED_FEEDBACK_OUTCOME_RECORD",
+      "callee": "LOAD_ENTRIES_BY_ID",
+      "line": 109
+    },
+    {
+      "caller": "MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN",
+      "callee": "RESOLVE_PROJECT_ROOT",
+      "line": 126
+    }
+  ],
+  "coverage": [
+    {
+      "block": "RESOLVE_PROJECT_ROOT",
+      "branch_lines": [
+        29
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "LOAD_FEEDBACK_FOR_MCP",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "LOAD_ENTRIES_BY_ID",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST",
+      "branch_lines": [
+        73,
+        75
+      ],
+      "failure_modes": [
+        "OUTPUT: JSON { ok, digest?, projection_hash?, markdown?, error? }",
+        "IF NOT result.ok: RETURN JSON text content { ok: false, error: result.error }"
+      ],
+      "references": []
+    },
+    {
+      "block": "MCP_HANDLER_TIED_FEEDBACK_REVIEW_BRIDGE",
+      "branch_lines": [
+        89
+      ],
+      "failure_modes": [
+        "# How: Parse digest object; load entries map; delegate runDigestReviewBridge; return proposal_link or structured error.",
+        "IF digest missing or not object: RETURN { ok: false, error: InvalidArgsJson }"
+      ],
+      "references": []
+    },
+    {
+      "block": "MCP_HANDLER_TIED_FEEDBACK_OUTCOME_RECORD",
+      "branch_lines": [
+        107
+      ],
+      "failure_modes": [
+        "IF payload or follow_up_window invalid: RETURN { ok: false, error: InvalidArgsJson }"
+      ],
+      "references": []
+    },
+    {
+      "block": "MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN",
+      "branch_lines": [
+        125
+      ],
+      "failure_modes": [
+        "OUTPUT: JSON { ok, report?, stop_criteria?, error? }",
+        "IF spec invalid: RETURN { ok: false, error: InvalidArgsJson }"
+      ],
+      "references": []
+    },
+    {
+      "block": "REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS",
+      "branch_lines": [],
+      "failure_modes": [],
+      "references": []
+    }
+  ],
+  "diagnostics": [],
+  "leakage": []
+}

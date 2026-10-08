@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+    "project_id": "stdd-kaizen-kmcp",
+    "run_id": "kaizen-kmcp-preimpl-20261007",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003"
+    ],
+    "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+    "artifact_hashes": {
+      "obligation-report.json": "3cd019116060a927a1352d4bbddbb9940f642968bdbf7b4dd478810661a4d338",
+      "finding-ledger.jsonl": "ddc2d8d5729910f76ac06352c701009af1d737e66a0c73031ead9a1dcbacc628",
+      "gate-result.json": "89b80b8f76ea85f7e856e6a26c20f1e879955d7a6be399e17d3d7f513ce82d4b",
+      "evidence-provenance.json": "5d888bef003c97a1ce76ae36fbaa4aa975fe8b9aa75dc805444ce5999b732117"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+      "project_id": "stdd-kaizen-kmcp",
+      "run_id": "kaizen-kmcp-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+      "hash": "3cd019116060a927a1352d4bbddbb9940f642968bdbf7b4dd478810661a4d338",
+      "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+      "project_id": "stdd-kaizen-kmcp",
+      "run_id": "kaizen-kmcp-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+      "hash": "ddc2d8d5729910f76ac06352c701009af1d737e66a0c73031ead9a1dcbacc628",
+      "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+      "project_id": "stdd-kaizen-kmcp",
+      "run_id": "kaizen-kmcp-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+      "hash": "89b80b8f76ea85f7e856e6a26c20f1e879955d7a6be399e17d3d7f513ce82d4b",
+      "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+      "project_id": "stdd-kaizen-kmcp",
+      "run_id": "kaizen-kmcp-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+      "hash": "5d888bef003c97a1ce76ae36fbaa4aa975fe8b9aa75dc805444ce5999b732117",
+      "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+    "project_id": "stdd-kaizen-kmcp",
+    "run_id": "kaizen-kmcp-preimpl-20261007",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003"
+    ],
+    "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e"
+  },
+  "diagnostics": []
+}

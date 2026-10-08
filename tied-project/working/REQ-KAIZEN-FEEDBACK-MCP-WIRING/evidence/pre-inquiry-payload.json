@@ -1,0 +1,133 @@
+{
+  "graph": {
+    "projectId": "stdd-kaizen-kmcp",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-FEEDBACK-MCP-WIRING#no-canonical-yaml-write",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-kmcp-1",
+          "sourceRevision": "kmcp-src"
+        },
+        "architectureConstraintIds": ["arch-kmcp-no-canonical"]
+      },
+      {
+        "identity": {
+          "id": "REQ-KAIZEN-FEEDBACK-MCP-WIRING#thin-delegate",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-kmcp-2",
+          "sourceRevision": "kmcp-src"
+        },
+        "architectureConstraintIds": ["arch-kmcp-delegate"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-kmcp-no-canonical",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+          "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002"
+        ]
+      },
+      {
+        "id": "arch-kmcp-delegate",
+        "implementationBlockIds": [
+          "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+          "kind": "block",
+          "name": "MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST",
+          "derivation": "content",
+          "revision": "block-rev-kmcp-1",
+          "sourceRevision": "kmcp-pseudo"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+          "kind": "block",
+          "name": "MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN",
+          "derivation": "content",
+          "revision": "block-rev-kmcp-2",
+          "sourceRevision": "kmcp-pseudo"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003",
+          "kind": "block",
+          "name": "REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS",
+          "derivation": "content",
+          "revision": "block-rev-kmcp-3",
+          "sourceRevision": "kmcp-pseudo"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-kmcp-pseudo",
+        "blockId": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003",
+        "kind": "specification",
+        "location": "tied-project/implementation-decisions/IMPL-KAIZEN-FEEDBACK-MCP-WIRING-pseudocode.md",
+        "sourceRevision": "kmcp-pseudo"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-kmcp-1",
+    "specification": [
+      {
+        "id": "kmcp-spec-no-canonical",
+        "kind": "behavior",
+        "value": "All four MCP handlers keep canonicalWrite and storeMutation false; no project TIED YAML mutation.",
+        "order": 1
+      },
+      {
+        "id": "kmcp-spec-delegate",
+        "kind": "behavior",
+        "value": "Handlers delegate to buildFeedbackDigest, runDigestReviewBridge, runOutcomeLoop, and runKaizenFeedbackPilot without reimplemented logic.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "kmcp-test-pseudo",
+        "statementId": "kmcp-spec-no-canonical",
+        "kind": "behavior",
+        "value": "pseudocode_validate gate_mode on IMPL-KAIZEN-FEEDBACK-MCP-WIRING POST clauses",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-kmcp-1",
+        "source": {
+          "location": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/pseudocode-validate-result.json"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "kmcp-prod-planned",
+        "statementId": "kmcp-spec-delegate",
+        "kind": "behavior",
+        "value": "Planned composition tests in kaizen-feedback-mcp-composition.test.ts at build-plan",
+        "order": 1,
+        "reliable": false,
+        "blockRevision": "block-rev-kmcp-3",
+        "source": {
+          "location": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml:test_strategy"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+    "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+    "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003"
+  ]
+}

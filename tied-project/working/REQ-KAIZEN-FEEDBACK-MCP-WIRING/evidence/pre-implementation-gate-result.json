@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/gates/pre_implementation-2026-10-08T01-06-12-273Z.json",
+    "hash": "sha256:cfc364382b0741d7d232975638ff70f712915ed637ba2ede9fa5fa482078970e"
+  }
+}

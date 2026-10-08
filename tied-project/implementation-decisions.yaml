@@ -1232,6 +1232,10 @@ IMPL-GOAGENT-TEXT-SOURCES:
       - "REQ-GOAGENT-TEXT-SOURCES"
     tests:
       - "text_test.go"
+IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
+  detail_file: "implementation-decisions/IMPL-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
+  name: "Kaizen feedback MCP handler wiring"
+  status: "Active"
 IMPL-KAIZEN-FEEDBACK-PILOT:
   cross_references:
     architecture:

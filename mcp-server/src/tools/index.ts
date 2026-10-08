@@ -47,6 +47,12 @@ import {
   captureOperationalObservation,
   normalizeCaptureInput,
 } from "../feedback-capture.js";
+import {
+  handleTiedFeedbackAnalysisDigest,
+  handleTiedFeedbackOutcomeRecord,
+  handleTiedFeedbackPilotRun,
+  handleTiedFeedbackReviewBridge,
+} from "../kaizen-feedback-mcp-handlers.js";
 import { renameSemanticToken } from "../token-rename.js";
 import { parseRecordOrYaml } from "../parse-content.js";
 import {
@@ -1278,6 +1284,86 @@ export const allTools = [
         promotion_status: reportPromotionStatus(entry, result.ok ? result.proposal : undefined),
       }, null, 2));
     },
+  },
+  {
+    name: "tied_feedback_analysis_digest",
+    config: {
+      description:
+        "Kaizen Phase 4: build a read-only feedback-analysis.v1 digest from local feedback.yaml (delegates to buildFeedbackDigest).",
+      inputSchema: z.object({
+        cohort: z.record(z.unknown()).describe("CohortSelector — requires compatibility_key"),
+        window: z.record(z.unknown()).optional(),
+        denominator_manifest: z.record(z.unknown()).optional(),
+        require_manifest_ref: z.boolean().optional(),
+        include_markdown: z.boolean().optional().default(true),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      cohort: Record<string, unknown>;
+      window?: Record<string, unknown>;
+      denominator_manifest?: Record<string, unknown>;
+      require_manifest_ref?: boolean;
+      include_markdown?: boolean;
+      base_path?: string;
+    }) => textContent(JSON.stringify(handleTiedFeedbackAnalysisDigest(args), null, 2)),
+  },
+  {
+    name: "tied_feedback_review_bridge",
+    config: {
+      description:
+        "Kaizen Phase 5: resolve a digest observation_group to feedback entries and apply reviewed LEAP handoff (delegates to runDigestReviewBridge).",
+      inputSchema: z.object({
+        digest: z.record(z.unknown()).describe("feedback-analysis.v1 digest object"),
+        observation_group: z.string().min(1),
+        review: z.record(z.unknown()).optional(),
+        review_context: z.record(z.unknown()).optional(),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      digest: Record<string, unknown>;
+      observation_group: string;
+      review?: Record<string, unknown>;
+      review_context?: Record<string, unknown>;
+      base_path?: string;
+    }) => textContent(JSON.stringify(handleTiedFeedbackReviewBridge(args), null, 2)),
+  },
+  {
+    name: "tied_feedback_outcome_record",
+    config: {
+      description:
+        "Kaizen Phase 6: record an outcome observation against baseline and follow-up window (delegates to runOutcomeLoop).",
+      inputSchema: z.object({
+        payload: z.record(z.unknown()).describe("OutcomeObservationPayload — entry_id required"),
+        follow_up_window: z.record(z.unknown()),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      payload: Record<string, unknown>;
+      follow_up_window: Record<string, unknown>;
+      base_path?: string;
+    }) => textContent(JSON.stringify(handleTiedFeedbackOutcomeRecord(args), null, 2)),
+  },
+  {
+    name: "tied_feedback_pilot_run",
+    config: {
+      description:
+        "Kaizen Phase 7: run a bounded feedback pilot cohort and return feedback-pilot.v1 metrics (delegates to runKaizenFeedbackPilot).",
+      inputSchema: z.object({
+        spec: z.record(z.unknown()).describe("PilotSpec object"),
+        pilot_incident_signals: z.array(z.string()).optional(),
+        report_out_path: z.string().optional(),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      spec: Record<string, unknown>;
+      pilot_incident_signals?: string[];
+      report_out_path?: string;
+      base_path?: string;
+    }) => textContent(JSON.stringify(handleTiedFeedbackPilotRun(args), null, 2)),
   },
   {
     name: "tied_verify",

@@ -1,0 +1,58 @@
+IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
+  IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
+    IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
+      IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
+        code_locations:
+          files:
+            - description: "Existing digest module (delegate target)"
+              path: "mcp-server/src/feedback-analysis.ts"
+            - description: "Existing outcome loop module (delegate target)"
+              path: "mcp-server/src/feedback-outcome-loop.ts"
+            - description: "Existing pilot module (delegate target)"
+              path: "mcp-server/src/feedback-kaizen-pilot.ts"
+            - description: "Existing review bridge module (delegate target)"
+              path: "mcp-server/src/feedback-review-bridge.ts"
+            - description: "Four Kaizen MCP tool registrations and thin handlers"
+              path: "mcp-server/src/tools/index.ts"
+            - description: "MCP composition tests binding handlers to modules"
+              path: "mcp-server/src/tools/kaizen-feedback-mcp-composition.test.ts"
+        cross_references:
+          architecture:
+            - "ARCH-FEEDBACK_STORAGE"
+            - "ARCH-KAIZEN-FEEDBACK-MCP-WIRING"
+          implementation:
+            - "IMPL-KAIZEN-FEEDBACK-PILOT"
+            - "IMPL-KAIZEN-OUTCOME-LOOP"
+            - "IMPL-KAIZEN-REVIEW-BRIDGE"
+            - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
+            - "IMPL-MCP_FEEDBACK_TOOLS"
+          requirements:
+            - "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+        essence_pseudocode_path: "implementation-decisions/IMPL-KAIZEN-FEEDBACK-MCP-WIRING-pseudocode.md"
+        implementation_approach:
+          details:
+            - "tied_feedback_analysis_digest: zod args, map base_path to projectRoot, call buildFeedbackDigest, return JSON digest and optional markdown"
+            - "tied_feedback_outcome_record: parse outcome payload, call runOutcomeLoop"
+            - "tied_feedback_pilot_run: parse pilot spec, call runKaizenFeedbackPilot"
+            - "tied_feedback_review_bridge: parse digest JSON, call runDigestReviewBridge with loaded entries map"
+          summary: "Thin MCP handlers in tools/index.ts delegate to Phase 4–7 modules; composition tests prove binding without UI."
+        name: "Kaizen feedback MCP handler wiring"
+        status: "Planned"
+        traceability:
+          architecture:
+            - "ARCH-KAIZEN-FEEDBACK-MCP-WIRING"
+          code_annotations:
+            - "ARCH-KAIZEN-FEEDBACK-MCP-WIRING"
+            - "IMPL-KAIZEN-FEEDBACK-MCP-WIRING"
+            - "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+          requirements:
+            - "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+          tests:
+            - "batch-5-mcp.test.ts"
+            - "kaizen-feedback-mcp-composition.test.ts"
+  metadata:
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-10-07"
+      reason: "Initial MCP composition pseudo-code for Phases 4–7"
+  status: "Active"

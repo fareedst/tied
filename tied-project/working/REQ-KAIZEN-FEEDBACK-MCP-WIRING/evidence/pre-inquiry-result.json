@@ -1,0 +1,257 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-kaizen-kmcp",
+    "scope": [
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003"
+    ],
+    "graph": {
+      "projectId": "stdd-kaizen-kmcp",
+      "nodes": [
+        {
+          "id": "constraint:arch-kmcp-delegate",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-kmcp-no-canonical",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-kmcp-pseudo",
+          "kind": "evidence",
+          "revision": "kmcp-pseudo"
+        },
+        {
+          "id": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+          "kind": "block",
+          "revision": "block-rev-kmcp-1"
+        },
+        {
+          "id": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+          "kind": "block",
+          "revision": "block-rev-kmcp-2"
+        },
+        {
+          "id": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003",
+          "kind": "block",
+          "revision": "block-rev-kmcp-3"
+        },
+        {
+          "id": "REQ-KAIZEN-FEEDBACK-MCP-WIRING#no-canonical-yaml-write",
+          "kind": "criterion",
+          "revision": "criterion-rev-kmcp-1"
+        },
+        {
+          "id": "REQ-KAIZEN-FEEDBACK-MCP-WIRING#thin-delegate",
+          "kind": "criterion",
+          "revision": "criterion-rev-kmcp-2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-KAIZEN-FEEDBACK-MCP-WIRING#no-canonical-yaml-write",
+          "to": "constraint:arch-kmcp-no-canonical",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-KAIZEN-FEEDBACK-MCP-WIRING#thin-delegate",
+          "to": "constraint:arch-kmcp-delegate",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-kmcp-delegate",
+          "to": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-kmcp-no-canonical",
+          "to": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-kmcp-no-canonical",
+          "to": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003",
+          "to": "evidence:loci-kmcp-pseudo",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "2ea56de6cc2d9e02",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "kmcp-spec-no-canonical",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "4170b22829491a0d",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "kmcp-spec-delegate",
+        "message": "Evidence is marked unreliable.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml:test_strategy"
+        },
+        "evidenceRefs": [
+          "kmcp-prod-planned"
+        ]
+      },
+      {
+        "id": "610c075fbd2f931d",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "kmcp-spec-delegate",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml:test_strategy"
+        },
+        "evidenceRefs": [
+          "kmcp-prod-planned"
+        ]
+      },
+      {
+        "id": "c718be1ba432ea83",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "kmcp-spec-no-canonical",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/pseudocode-validate-result.json"
+        },
+        "evidenceRefs": [
+          "kmcp-test-pseudo"
+        ]
+      },
+      {
+        "id": "cd02abda65b2f71d",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "kmcp-spec-delegate",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/CITDP-REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml:test_strategy"
+        },
+        "evidenceRefs": [
+          "kmcp-prod-planned"
+        ]
+      },
+      {
+        "id": "dbbc08d39fb0076a",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "kmcp-spec-delegate",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001": "REVIEW",
+    "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002": "REVIEW",
+    "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+      "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+      "project_id": "stdd-kaizen-kmcp",
+      "run_id": "kaizen-kmcp-preimpl-20261007",
+      "phase": "pre_implementation",
+      "scope": [
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_ANALYSIS_DIGEST#kmcp0001",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#MCP_HANDLER_TIED_FEEDBACK_PILOT_RUN#kmcp0002",
+        "IMPL-KAIZEN-FEEDBACK-MCP-WIRING#REGISTER_KAIZEN_FEEDBACK_MCP_TOOLS#kmcp0003"
+      ],
+      "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+      "artifact_hashes": {
+        "obligation-report.json": "3cd019116060a927a1352d4bbddbb9940f642968bdbf7b4dd478810661a4d338",
+        "finding-ledger.jsonl": "ddc2d8d5729910f76ac06352c701009af1d737e66a0c73031ead9a1dcbacc628",
+        "gate-result.json": "89b80b8f76ea85f7e856e6a26c20f1e879955d7a6be399e17d3d7f513ce82d4b",
+        "evidence-provenance.json": "5d888bef003c97a1ce76ae36fbaa4aa975fe8b9aa75dc805444ce5999b732117"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+        "project_id": "stdd-kaizen-kmcp",
+        "run_id": "kaizen-kmcp-preimpl-20261007",
+        "phase": "pre_implementation",
+        "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+        "hash": "3cd019116060a927a1352d4bbddbb9940f642968bdbf7b4dd478810661a4d338",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+        "project_id": "stdd-kaizen-kmcp",
+        "run_id": "kaizen-kmcp-preimpl-20261007",
+        "phase": "pre_implementation",
+        "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+        "hash": "ddc2d8d5729910f76ac06352c701009af1d737e66a0c73031ead9a1dcbacc628",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+        "project_id": "stdd-kaizen-kmcp",
+        "run_id": "kaizen-kmcp-preimpl-20261007",
+        "phase": "pre_implementation",
+        "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+        "hash": "89b80b8f76ea85f7e856e6a26c20f1e879955d7a6be399e17d3d7f513ce82d4b",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-KAIZEN-FEEDBACK-MCP-WIRING",
+        "project_id": "stdd-kaizen-kmcp",
+        "run_id": "kaizen-kmcp-preimpl-20261007",
+        "phase": "pre_implementation",
+        "scope_hash": "d325c399d97cd43efd12022301ad537a49a7bfef65ca44e8571885088e1a860e",
+        "hash": "5d888bef003c97a1ce76ae36fbaa4aa975fe8b9aa75dc805444ce5999b732117",
+        "path": "tied-bundle/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  }
+}

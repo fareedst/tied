@@ -52,6 +52,10 @@ Privacy tier, idempotency key, proof boundary, client cohort, and denominator fi
 | **tied_feedback_add** | feedback add | MCP tool name |
 | **tied_feedback_export** | feedback dump | MCP tool name |
 | **tied_feedback_capture_observation** | capture observation | MCP tool name (Kaizen Phase 1 point-of-work capture) |
+| **tied_feedback_analysis_digest** | analysis digest MCP | MCP tool name (Kaizen Phase 4 feedback analysis) |
+| **tied_feedback_review_bridge** | review bridge MCP | MCP tool name (Kaizen Phase 5 digest review handoff) |
+| **tied_feedback_outcome_record** | outcome record MCP | MCP tool name (Kaizen Phase 6 outcome loop) |
+| **tied_feedback_pilot_run** | pilot run MCP | MCP tool name (Kaizen Phase 7 feedback pilot) |
 
 ---
 
@@ -83,13 +87,14 @@ Normative background for the **Kaizen loop** label. Planning detail: [`../../doc
 | Capture observation | point-of-work capture | `entries[]` append + receipt | `tied_feedback_capture_observation` | `captureOperationalObservation()` |
 | Export feedback | export report | markdown or json string | `tied_feedback_export` | export helpers in `feedback.ts` |
 | Immediate feedback event | point-of-work event | `(proposed) feedback-event.v1` | `(proposed) event transport` | `(proposed) observation adapter` |
-| Feedback analysis | analysis digest | `feedback-analysis.v1` | `(proposed) tied_feedback_analysis_digest` | `buildFeedbackDigest` in `feedback-analysis.ts` |
+| Feedback analysis | analysis digest | `feedback-analysis.v1` | `tied_feedback_analysis_digest` | `buildFeedbackDigest` in `feedback-analysis.ts` |
 | Entry identifier | feedback id | `entries[].id` | returned by add | `fb-{timestamp}-{random}` pattern |
 | Entry type | feedback entry type | `entries[].type` | add param `type` | `FeedbackType` |
 | Observation kind | observation kind | `(proposed) entries[].observation_kind` | capture / operational adapter param | `(proposed) ObservationKind` |
 | Source normalization | kind and entry type inference | `context.observation_kind`, workflow/workaround/baseline_ref on operational context | `tied_feedback_operational_add`, `tied_feedback_capture_observation` | `resolveFeedbackEntryType`, `defaultObservationKindFromSourceType` in `feedback-source-normalization.ts` |
-| Outcome loop | outcome observation record | `context.outcome_observations[]` outcome-observation.v1 | `(proposed) tied_feedback_outcome_record` | `RUN_OUTCOME_LOOP` in `feedback-outcome-loop.ts` |
-| Feedback pilot | pilot report | `(proposed) feedback-pilot.v1` export artifact | `(proposed) tied_feedback_pilot_run` | `RUN_KAIZEN_FEEDBACK_PILOT` in `feedback-kaizen-pilot.ts` |
+| Outcome loop | outcome observation record | `context.outcome_observations[]` outcome-observation.v1 | `tied_feedback_outcome_record` | `runOutcomeLoop` in `feedback-outcome-loop.ts` |
+| Feedback pilot | pilot report | `feedback-pilot.v1` export artifact | `tied_feedback_pilot_run` | `runKaizenFeedbackPilot` in `feedback-kaizen-pilot.ts` |
+| Review bridge | digest review handoff | non-canonical proposal link | `tied_feedback_review_bridge` | `runDigestReviewBridge` in `feedback-review-bridge.ts` |
 | Promotion status | promotion status | `entries[].promotion_status` | promotion result | `PromotionStatus` |
 | Local capture receipt | receipt | returned by capture; not a second store | `tied_feedback_capture_observation` | `buildCaptureReceipt()` |
 | Optional context | context | `entries[].context` | add param `context` | `Record<string, unknown>` |
@@ -122,6 +127,10 @@ entries:
 | `tied_feedback_add` | Validate and append one entry; returns `ok`, `id`, `created_at` |
 | `tied_feedback_export` | Format all entries as markdown or json |
 | `tied_feedback_capture_observation` | Phase 1 point-of-work capture with `operator_local` privacy, idempotency, and structured **receipt** |
+| `tied_feedback_analysis_digest` | Phase 4 read-only **feedback digest** (`feedback-analysis.v1`) from local entries |
+| `tied_feedback_review_bridge` | Phase 5 **review bridge** from digest `observation_group` to reviewed LEAP proposal path |
+| `tied_feedback_outcome_record` | Phase 6 **outcome loop** record (`outcome-observation.v1`) with baseline and follow-up window |
+| `tied_feedback_pilot_run` | Phase 7 bounded **feedback pilot** report (`feedback-pilot.v1`) with stop criteria |
 
 ---
 

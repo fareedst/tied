@@ -1282,6 +1282,12 @@ REQ-KAIZEN-FEEDBACK-ANALYSIS:
       - "IMPL-KAIZEN_FEEDBACK_ANALYSIS"
     tests:
       - "feedback-analysis.test.ts"
+REQ-KAIZEN-FEEDBACK-MCP-WIRING:
+  category: "Functional"
+  detail_file: "requirements/REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
+  name: "Kaizen Phases 4–7 MCP composition wiring"
+  priority: "P1"
+  status: "Implemented"
 REQ-KAIZEN-FEEDBACK-PILOT:
   cross_references:
     architecture:

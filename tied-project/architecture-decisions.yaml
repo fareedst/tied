@@ -1172,6 +1172,10 @@ ARCH-GOAGENT-YAML-STEPS:
     requirements:
       - "REQ-GOAGENT-YAML-STEP-RENDER"
     tests: []
+ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
+  detail_file: "architecture-decisions/ARCH-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
+  name: "Kaizen feedback MCP composition architecture"
+  status: "Planned"
 ARCH-KAIZEN-FEEDBACK-PILOT:
   cross_references:
     implementation:

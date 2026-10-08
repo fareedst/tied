@@ -473,6 +473,14 @@ ARCH-GOAGENT-YAML-STEPS:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
+  cross_references:
+    - "ARCH-FEEDBACK_STORAGE"
+    - "IMPL-KAIZEN-FEEDBACK-MCP-WIRING"
+    - "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+  description: "Thin MCP handler boundary for Phase 4–7 Kaizen modules"
+  detail_file: "architecture-decisions/ARCH-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
+  name: "Kaizen feedback MCP composition architecture"
 ARCH-KAIZEN-REVIEW-BRIDGE:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -1566,6 +1574,15 @@ IMPL-GOAGENT-TEXT-SOURCES:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-KAIZEN-FEEDBACK-MCP-WIRING:
+  cross_references:
+    - "ARCH-FEEDBACK_STORAGE"
+    - "ARCH-KAIZEN-FEEDBACK-MCP-WIRING"
+    - "IMPL-MCP_FEEDBACK_TOOLS"
+    - "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+  description: "Four MCP tools delegating to feedback-analysis, review-bridge, outcome-loop, pilot modules"
+  detail_file: "implementation-decisions/IMPL-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
+  name: "Kaizen feedback MCP handler wiring"
 IMPL-KAIZEN-REVIEW-BRIDGE:
   cross_references:
     - "ARCH-KAIZEN-REVIEW-BRIDGE"
@@ -3107,6 +3124,16 @@ REQ-KAIZEN-FEEDBACK-ANALYSIS:
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"
+REQ-KAIZEN-FEEDBACK-MCP-WIRING:
+  category: "Functional"
+  cross_references:
+    - "ARCH-FEEDBACK_STORAGE"
+    - "ARCH-KAIZEN-FEEDBACK-MCP-WIRING"
+    - "IMPL-KAIZEN-FEEDBACK-MCP-WIRING"
+    - "IMPL-MCP_FEEDBACK_TOOLS"
+  description: "MCP tools for digest, review bridge, outcome loop, and pilot without TypeScript imports"
+  detail_file: "requirements/REQ-KAIZEN-FEEDBACK-MCP-WIRING.yaml"
+  name: "Kaizen Phases 4–7 MCP composition wiring"
 REQ-KAIZEN-OBSERVATION-CAPTURE:
   category: "Functional"
   cross_references:

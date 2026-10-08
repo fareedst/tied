@@ -1,0 +1,28 @@
+ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
+  ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
+    ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
+      ARCH-KAIZEN-FEEDBACK-MCP-WIRING:
+        constraints:
+          - constraint: "Analysis and pilot paths remain read-only on feedback.yaml unless underlying module explicitly persists (outcome loop context append only)"
+          - constraint: "Handlers must not write project REQ/ARCH/IMPL YAML indexes or detail files"
+          - constraint: "JSON request/response at MCP boundary; optional base_path resolves TIED project root like Phase 1–2 feedback tools"
+          - constraint: "MCP handlers must delegate to existing Phase 4–7 modules; no duplicated business logic in index.ts"
+        cross_references:
+          architecture:
+            - "ARCH-FEEDBACK_STORAGE"
+            - "ARCH-KAIZEN-REVIEW-BRIDGE"
+            - "ARCH-KAIZEN_FEEDBACK_ANALYSIS"
+          implementation:
+            - "IMPL-KAIZEN-FEEDBACK-MCP-WIRING"
+            - "IMPL-MCP_FEEDBACK_TOOLS"
+          requirements:
+            - "REQ-FEEDBACK_TO_TIED"
+            - "REQ-KAIZEN-FEEDBACK-MCP-WIRING"
+        name: "Kaizen feedback MCP composition architecture"
+        rationale:
+          decisions:
+            - "Composition tests colocated with batch-5-mcp.test.ts or dedicated kaizen-feedback-mcp-composition.test.ts"
+            - "Extend ARCH-FEEDBACK_STORAGE MCP catalog without changing storage schema"
+            - "Four tool names from feedback-to-tied.md naming bridge"
+          why: "Expose validated Kaizen modules through the same MCP surface agents already use for capture and export."
+        status: "Planned"

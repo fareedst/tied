@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Kaizen MCP composition wiring ([REQ-KAIZEN-FEEDBACK-MCP-WIRING], [ARCH-KAIZEN-FEEDBACK-MCP-WIRING], [IMPL-KAIZEN-FEEDBACK-MCP-WIRING])** — MCP tools `tied_feedback_analysis_digest`, `tied_feedback_review_bridge`, `tied_feedback_outcome_record`, and `tied_feedback_pilot_run` delegate to Phase 4–7 modules via `kaizen-feedback-mcp-handlers.ts`. Composition tests in `kaizen-feedback-mcp-composition.test.ts` (4/4).
+
 ### Changed
 
 - **Kaizen linked plan request closed (`PLAN-TIED-KAIZEN-FEEDBACK-LOOP`)** — Updated [`docs/tied-kaizen-feedback-loop-plan.md`](docs/tied-kaizen-feedback-loop-plan.md) handoff to **program EXIT** (Phases 1–2, 4–7 implemented; Phase 3 transport deferred). Refine tracker `traceable-commit` completed; orchestrator records `planning_request_close_out`. Hygiene: ignore/remove wrong-root `mcp-server/tied-project/` from misconfigured MCP runs.
