@@ -1,0 +1,42 @@
+{
+  "phase": "verification",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "vocab-a4a-verify-20261009"
+  },
+  "reconcile": {
+    "ok": false,
+    "skipped": true
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/verification-evidence-manifest.v1.json"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 1,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

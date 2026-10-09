@@ -149,10 +149,16 @@ REQ-TIED_FIDELITY_RESEARCH:
       - "IMPL-TIED_FIDELITY_RESEARCH"
 REQ-TIED_SETUP:
   category: "Functional"
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_FILES"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership."
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
     last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+      reason: "Methodology seed; layered vocabulary ownership and refresh behavior"
   name: "TIED Methodology Setup"
   priority: "P0"
   related_requirements:
@@ -162,9 +168,12 @@ REQ-TIED_SETUP:
   status: "Implemented"
   traceability:
     architecture:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
       - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
     implementation:
       - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
 REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
   category: "Methodology"
   cross_references:
@@ -177,3 +186,23 @@ REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
   name: "Sponsor-Agent Relationship Layer"
   priority: "P1"
   status: "Planned"
+REQ-TIED_VOCABULARY_OWNERSHIP:
+  category: "Infrastructure"
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "TIED clients separate refreshable methodology vocabulary from durable client-owned vocabulary while preserving one agent-friendly discovery entry point."
+  detail_file: "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml"
+  name: "Separate Vocabulary Ownership"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+    implementation:
+      - "IMPL-TIED_VOCABULARY_REFRESH"

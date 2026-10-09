@@ -1,0 +1,441 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-09T15:06:21.790Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_VOCABULARY_OWNERSHIP",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "standard",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:032f4bc86f2aa269ee49bcfa53bebd6c595771783e932060e978c0d57a69bf18",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:4758155135cf9cfb454d17c9d116a6d16c522e6784854a31ba6043098d2c55a6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:06315d172878be8b3ea8dad0acdc55e491e9ee9c1a03fc3cc84ca24d92c2ab56",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:a5efb9adb2fd3f199f173889bf567b5e4d5c894acb24024d19c9ec09c5010420",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/bootstrap-unit-test.stdout.txt",
+      "content_hash": "sha256:e753acf0decad7a4cedcdeca38dcf8ce895ae4a943fdc7ca90f6b36b358cd0f1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:7d2b4758b31d0a2632dcc964ac8c51f0836eec8f157b2579c854ae11f38d9da2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:d02241ec02a2587269cf9e2d4d3e226d5a93759bc70b18da29720af642fcc794",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:7d2925649e8c9282a18e033e695070f808b38cfb8884ede18e927198bb5371d7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:c29dfd43d465994b632e06776d93ee5dcaba33bf1fdf5c993b337ccedb0ea784",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:16d2e29ced456aabd7f4fa61cf0cc1a6d9971a1fd00862efa99cc91edef4ecf8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:fcd07c56700a52ab38dace13b9d123ddcf02d2e696625746e2d095a09493b128",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/mcp-build.stdout.txt",
+      "content_hash": "sha256:70dba4c4e4d0fe1b6a2e8a31c81cf0bb29a6d66199726eff7d5ae9a6fe49de79",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/minimal-adversarial-inquiry-pass.md",
+      "content_hash": "sha256:568d31d76335a9ac2f4428a5d510cb2cf30e603ed2d6598a7aeb8885e9be7b9f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/npm-test.stdout.txt",
+      "content_hash": "sha256:e18b280c48d933078670d3d26e860ab84dadd6545031f7f9b22fd6ead6fe524e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "parity-a-store-self-check.v1",
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/parity-a-report.json",
+      "content_hash": "sha256:839cc909c64bc0700faa87119cebaf0d72e3361cd1227f726b967f2ac71de6ed",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/parity-a-summary.stdout.txt",
+      "content_hash": "sha256:873e0ec6acd2fc3eb95c481740ce186a107b93fabccf1140912c24ac5dedceed",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/parity-a.stdout.txt",
+      "content_hash": "sha256:d7e0b17769daab1d099a57f43409eb4e048269dc6388ab2e169b4e8110d10e44",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:260f4d3efe52679007f4936a0d1eb2e89b9f0b1dbbac4e4c6ecb01f87486b60c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:33391de08d76551d10e3054b1ad4877c992eea7969c1b71dded2b62aebf52c7d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/pseudocode-validate-IMPL-TIED_FILES.json",
+      "content_hash": "sha256:db0170961d0e6d3613de4a7e982a23bc4f5521e045416ba4fceb689461f299aa",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:fc18f96d5fd3948dff1b43845c9f8f784806341a4e36b97f4714b9f00d4cb189",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:db3a7a6a8229e6810eed7d5b68ef59ef026cbe2a39d82f006128de4d132317c4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:efa2f942f4db898425f0e77b6e7050be298bbebef244e3f01c029ee0e03b53d1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/sub-close-out-evidence-sync-evidence.md",
+      "content_hash": "sha256:dd1ed3049c011245e20ad159c463b22d06abc63480affca03d1e381ad6e45d39",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:68b26fef134dddd4ab54946e96d68833fd6db066fb44d9ec96e8405e5ce1b46b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:9d577e11f65e89c3e3ec53d252d64e7c72075da0704ec841913934c210cae954",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:2981aceea5b97f1951224af0f581f6b6680e9dae0b8d2aadae33db9f090f4c36",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/three-way-alignment-unit-evidence.md",
+      "content_hash": "sha256:f7c285884e90e9fbb4205124a694e724c3ce5966c2c4c62194cc9dc672d1d48d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/tied-validate-consistency-summary.json",
+      "content_hash": "sha256:748b2c29ae1b588a0202e20e75fb27999e08049b16d570c071388ca202c5b743",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:d145e76e85423ae581a98633eaba0eb207dcdbf1144562297f026c1c4df48f47",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:013935cc2ae24b32c695401fc3025fbe058245e02299ddc2a43cf816c2af8d79",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:8b1201049d59d0556029769de6d118505e5882dc625487d46bb0cbf45e25d63f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:97a5a4b5d12f23eb3ca875718ac5fbb26563a1d850601a1bc295531c31d1e001",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/verification-gate-run.stdout.txt",
+      "content_hash": "sha256:11c49a42118778e2ac1c65c3a12fc1c5b1d48ee5ce258f04f33b5694439c5073",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/yaml-tool-check.stdout.txt",
+      "content_hash": "sha256:a22c2b659de35e80e90e08355941943054a3fbe26592005c4bfd8e92d1180558",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:afcaecaf5ee9127e33191d9180816660ed107372fbfae1daeb19aad19f4b8ba0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:d0cf2d2d80432fac6e123d2d34dcc04102f46d37e9b35dfd41f196d00d91f6a2",
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "expected_artifact_missing",
+      "artifact_kind": "pseudocode_analysis_report",
+      "phase": null,
+      "detail": "IMPL inventory requires pseudocode-analysis reports for: IMPL-TIED_FILES, IMPL-TIED_VOCABULARY_REFRESH",
+      "severity": "warn",
+      "source": "psa-expectation"
+    }
+  ]
+}

@@ -155,6 +155,27 @@ procedure VERIFY_ADVERSARIAL_INQUIRY_METHODOLOGY(projectRoot):
   RETURN success
 
 
+procedure VERIFY_VOCABULARY_OWNERSHIP_METHODOLOGY(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP] [ARCH-TIED_VOCABULARY_LAYERS] [IMPL-TIED_VOCABULARY_REFRESH]
+  # How: Fail closed unless manifest-listed vocabulary ownership REQ/ARCH/IMPL records and the refresh pseudo-code sidecar are present under the refreshed methodology snapshot.
+  Contract:
+    INPUT: projectRoot; VOCABULARY_OWNERSHIP_METHODOLOGY_REQUIRED_FILES from bootstrap manifest
+    OUTPUT: success diagnostics or non-zero failure with missing paths
+    DATA: client methodology vocabulary ownership records and pseudo-code sidecar
+    CONTROL: require every manifest-listed artifact; validation is read-only
+    PRE: methodology refresh has completed and projectRoot/tied or tied-bundle is readable
+    POST: all four vocabulary ownership artifacts exist and are readable, or bootstrap exits non-zero with an actionable missing-artifact diagnostic
+    EFFECTS: File I/O — reads file existence and permissions; Diagnostics — emits completion or failure guidance
+    FAILURE_MODES: REQUIRED_ARTIFACT_MISSING; REQUIRED_ARTIFACT_UNREADABLE; VOCABULARY_OWNERSHIP_GATE_FAILED
+    DATA_TRANSITION: unknown vocabulary package→verified complete|verified incomplete; client files unchanged
+    TERMINATION: total — finite required artifact list
+  FOR each required vocabulary ownership artifact from manifest:
+    IF artifact is absent or unreadable:
+      report missing path and corrective command
+      RETURN non-zero
+  RETURN success
+
+
 procedure VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-FEAT_ADOPTION_GUIDANCE] [IMPL-FEAT_ONBOARDING_COMMANDS] [ARCH-FEAT_ONBOARDING_BOUNDARY] [REQ-FEAT_ONBOARDING_COMMANDS]
   # How: Fail closed when the fresh-client orchestration contract is incomplete and report the exact wrapper, documentation, constitution, vocabulary, and build recovery paths.

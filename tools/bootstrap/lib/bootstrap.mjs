@@ -32,6 +32,7 @@ import { copyDocs, copyConstitutionExample } from "./docs.mjs";
 import {
   verifyFidelityMethodology,
   verifyAdversarialInquiryMethodology,
+  verifyVocabularyOwnershipMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
   verifyMethodologyPseudocodeTokenRefs,
@@ -258,6 +259,7 @@ export function bootstrapTied(projectRoot, options = {}) {
 
   verifyFidelityMethodology(tiedDir, tiedBasePathValue, tiedCliDest);
   verifyAdversarialInquiryMethodology(tiedDir);
+  verifyVocabularyOwnershipMethodology(tiedDir);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
   verifyInheritedDetailFiles(tiedDir, paths.INHERITED_DETAIL_REQUIRED);
   verifyMethodologyPseudocodeTokenRefs(tiedDir);

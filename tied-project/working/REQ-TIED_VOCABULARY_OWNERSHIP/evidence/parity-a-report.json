@@ -1,0 +1,479 @@
+{
+  "schema_version": "parity-a-store-self-check.v1",
+  "generated_at": "2026-10-09T15:02:32.776Z",
+  "source_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "client_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "parity_a": {
+    "label": "templates_vs_methodology",
+    "entries": [
+      {
+        "relative_path": "agent-req-checklist-feat-spawned-phase5.v1.yaml",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      },
+      {
+        "relative_path": "architecture-decisions.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "5913d45a7bf725a0c3e611327502aefb081eca76b7e428b69f474c7454fa755e",
+        "client_sha256": "5913d45a7bf725a0c3e611327502aefb081eca76b7e428b69f474c7454fa755e"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "d1d94e9353c94e66ef67e44a100ef08796a786e7d5fa634ea09fd8c978d9fce4",
+        "client_sha256": "d1d94e9353c94e66ef67e44a100ef08796a786e7d5fa634ea09fd8c978d9fce4"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-EVIDENCE_CHAIN_PROFILE.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "3c1c39bb98ef4f5ba3d9722bb3533a6befff482b64f7682f7b1c256c456c3277",
+        "client_sha256": "3c1c39bb98ef4f5ba3d9722bb3533a6befff482b64f7682f7b1c256c456c3277"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "3ca39a3ca1e7abd36c1b2dc2df878a7c8fd6d9827b11a8df25f4556aaf1cb966",
+        "client_sha256": "3ca39a3ca1e7abd36c1b2dc2df878a7c8fd6d9827b11a8df25f4556aaf1cb966"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-MODULE_VALIDATION.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "ff0ffe014cc8f02848090c0952b25c8dfc0e1a32f3b1b577828a21e14a47b23c",
+        "client_sha256": "ff0ffe014cc8f02848090c0952b25c8dfc0e1a32f3b1b577828a21e14a47b23c"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "139e36bae652eba777dd7944f154504b6512960d589c7ea0eb403ef274a2d1fc",
+        "client_sha256": "139e36bae652eba777dd7944f154504b6512960d589c7ea0eb403ef274a2d1fc"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "55f668317f1e5d4007455c10167cc6ae11225bc7eb469e9be7bcaafe9f8a88b1",
+        "client_sha256": "55f668317f1e5d4007455c10167cc6ae11225bc7eb469e9be7bcaafe9f8a88b1"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "f2825db94ff8c443dbb269ed3ebaa86c83952ecf162deb4ecbdec5464aba545d",
+        "client_sha256": "f2825db94ff8c443dbb269ed3ebaa86c83952ecf162deb4ecbdec5464aba545d"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "2e1dfb47c6c00ea4a48f65f13564c232c45db66cba649c02bc75fe82c873d803",
+        "client_sha256": "2e1dfb47c6c00ea4a48f65f13564c232c45db66cba649c02bc75fe82c873d803"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "f7e442ce4be8cbbb40abb085f214c688d0ae46cba49efdd2a32fc52de92e7f0c",
+        "client_sha256": "f7e442ce4be8cbbb40abb085f214c688d0ae46cba49efdd2a32fc52de92e7f0c"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "b51052b459f5ae4fb23b0c05b9387531533538f349dee4ff9d38fd8788b6c0d1",
+        "client_sha256": "b51052b459f5ae4fb23b0c05b9387531533538f349dee4ff9d38fd8788b6c0d1"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_STRUCTURE.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "97b136fa351964fff4c08a79260796e0fb0c4b624c681cf7075f88e263744d3b",
+        "client_sha256": "97b136fa351964fff4c08a79260796e0fb0c4b624c681cf7075f88e263744d3b"
+      },
+      {
+        "relative_path": "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "929210e75a20eda72d774f4f58f36a8243643dcd8e1642a14435e2585b1471a3",
+        "client_sha256": "929210e75a20eda72d774f4f58f36a8243643dcd8e1642a14435e2585b1471a3"
+      },
+      {
+        "relative_path": "impl-essence-pseudocode-template.md",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      },
+      {
+        "relative_path": "implementation-decisions.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "0fc06fd3caea2a75dcef3a47b86a1d9c1301d402c9a3ead59df698811f5b368f",
+        "client_sha256": "0fc06fd3caea2a75dcef3a47b86a1d9c1301d402c9a3ead59df698811f5b368f"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8ebe95bcfed1e3e1f570001354e1364a89920a4872e19e31a2c95eb71478e5cb",
+        "client_sha256": "8ebe95bcfed1e3e1f570001354e1364a89920a4872e19e31a2c95eb71478e5cb"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8707de1c028f69acbec72a6f876b313021e7fa42fc262ee604300db78f13af34",
+        "client_sha256": "8707de1c028f69acbec72a6f876b313021e7fa42fc262ee604300db78f13af34"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "5e04904e63a38abc02840e356b2a112d37aa50992d5b29eda9601d8203889f6b",
+        "client_sha256": "5e04904e63a38abc02840e356b2a112d37aa50992d5b29eda9601d8203889f6b"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "63c3adaec1da30a055f3f39733e0ea912e23bd7f54355cad93957d98a38386ef",
+        "client_sha256": "63c3adaec1da30a055f3f39733e0ea912e23bd7f54355cad93957d98a38386ef"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "92f708504223d98213c3020a3ba74a3cd6120a394a01126ad59f7feffe0391bd",
+        "client_sha256": "92f708504223d98213c3020a3ba74a3cd6120a394a01126ad59f7feffe0391bd"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-MODULE_VALIDATION.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "92cec5f47643e604f9c2d4be8d2d52e1a3b875a249dfe35d05a42cccc244abcd",
+        "client_sha256": "92cec5f47643e604f9c2d4be8d2d52e1a3b875a249dfe35d05a42cccc244abcd"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "92443ac26941720167ac5ecc675bb8726250d18ac7e6da150e7e52b1b64a6339",
+        "client_sha256": "92443ac26941720167ac5ecc675bb8726250d18ac7e6da150e7e52b1b64a6339"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "cbebd5c740b5b33ec1e04b5bf5c9608aea0a7afd9f96d4f291abffb3224677ed",
+        "client_sha256": "cbebd5c740b5b33ec1e04b5bf5c9608aea0a7afd9f96d4f291abffb3224677ed"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "42ff29604086245d34d66fdc60533a43b3a04bac6c415a1f1a0d8615053dd484",
+        "client_sha256": "42ff29604086245d34d66fdc60533a43b3a04bac6c415a1f1a0d8615053dd484"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "1186c4554b293391930c0fce4c375516cc8288a5ad40d901a9c1223c52eab0c0",
+        "client_sha256": "1186c4554b293391930c0fce4c375516cc8288a5ad40d901a9c1223c52eab0c0"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a17f5fd5e9eaa56f4d37a3abc547d7bec33684c596350559d50bbae028335061",
+        "client_sha256": "a17f5fd5e9eaa56f4d37a3abc547d7bec33684c596350559d50bbae028335061"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "0dfa29b83039b269c186fa588fe757a4c339b249c342547006548a32de92e239",
+        "client_sha256": "0dfa29b83039b269c186fa588fe757a4c339b249c342547006548a32de92e239"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "fb9a86bde5549525730ad809f917b10499f3bf9e86fc06e3b9e48d9cf6f31607",
+        "client_sha256": "fb9a86bde5549525730ad809f917b10499f3bf9e86fc06e3b9e48d9cf6f31607"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "6819d002db0adb62d007ef3a59a3e800806416d69bd29e901608bf46c86b8f9f",
+        "client_sha256": "6819d002db0adb62d007ef3a59a3e800806416d69bd29e901608bf46c86b8f9f"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "ec49ef9b0db38f387ea3b975cfb3638edffc9377765921ce5c0ba3761d4c13d3",
+        "client_sha256": "ec49ef9b0db38f387ea3b975cfb3638edffc9377765921ce5c0ba3761d4c13d3"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "84f1aac5b94b865762965d867448185a697a47223c960ff26e0e1094c107519b",
+        "client_sha256": "84f1aac5b94b865762965d867448185a697a47223c960ff26e0e1094c107519b"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "31dfa42877edb29a01643ed2f03a73df9f59c54f05a45901c393da3703a7c4e7",
+        "client_sha256": "31dfa42877edb29a01643ed2f03a73df9f59c54f05a45901c393da3703a7c4e7"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "6b409cce5d184e6a13338892b2fa0f23762721a4b693e693d870c8c9b7872c25",
+        "client_sha256": "6b409cce5d184e6a13338892b2fa0f23762721a4b693e693d870c8c9b7872c25"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "2de43db388a98bc74f253e7cc3baf49ae95209e21e25d8cc70473ea6dd114b33",
+        "client_sha256": "2de43db388a98bc74f253e7cc3baf49ae95209e21e25d8cc70473ea6dd114b33"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "dbdade894079ffd2c9e521b616e2e4479f05e354124ecff991b4ac3d03f382df",
+        "client_sha256": "dbdade894079ffd2c9e521b616e2e4479f05e354124ecff991b4ac3d03f382df"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "077f93bbe4fa825be2ee7bacb43ca34a2fdcd940eab430ef452921e3a7c675ea",
+        "client_sha256": "077f93bbe4fa825be2ee7bacb43ca34a2fdcd940eab430ef452921e3a7c675ea"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "decc944d7900373a12e3828e8a0ed966df55e849d97139fe0be55cd2de3cf2a7",
+        "client_sha256": "decc944d7900373a12e3828e8a0ed966df55e849d97139fe0be55cd2de3cf2a7"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "5061789ee48a672b8e520d7e77b4ad262f27443b4991a72f46ee35ed2a57aeff",
+        "client_sha256": "5061789ee48a672b8e520d7e77b4ad262f27443b4991a72f46ee35ed2a57aeff"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "ab149f34d969f09451b1a933a3dfcb4a57d111dc2496873262f16530dcd0e302",
+        "client_sha256": "ab149f34d969f09451b1a933a3dfcb4a57d111dc2496873262f16530dcd0e302"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "2b4646722d3e2b550d224a7fe3bab32079026a5ab4a09be3cd488ef584b65767",
+        "client_sha256": "2b4646722d3e2b550d224a7fe3bab32079026a5ab4a09be3cd488ef584b65767"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "3eac0c399402c84124c8956aad03409c049c39f0120ea2975d1137afc720cfc7",
+        "client_sha256": "3eac0c399402c84124c8956aad03409c049c39f0120ea2975d1137afc720cfc7"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "e404b1fcf3762ff4e7a3dd39dd788c0206042c643c69590731f7e344a9b49889",
+        "client_sha256": "e404b1fcf3762ff4e7a3dd39dd788c0206042c643c69590731f7e344a9b49889"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8d4ecf4bb9c515042ce58be92a5ddd95e8bad201a9f16793673ed50e495c6797",
+        "client_sha256": "8d4ecf4bb9c515042ce58be92a5ddd95e8bad201a9f16793673ed50e495c6797"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "eac017dd27704885c5fd8f8af0841019be6e76fca11ca42c0f7106798e7046d5",
+        "client_sha256": "eac017dd27704885c5fd8f8af0841019be6e76fca11ca42c0f7106798e7046d5"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FILES-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "5295dd0627d47f002712c486892da5bb37089a27038419ffdf7d2da6e89e71eb",
+        "client_sha256": "5295dd0627d47f002712c486892da5bb37089a27038419ffdf7d2da6e89e71eb"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_FILES.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "9ca087ef4e15fcd2560fb51425ff259aeaa289a399706e65940bf6fafd4a4d61",
+        "client_sha256": "9ca087ef4e15fcd2560fb51425ff259aeaa289a399706e65940bf6fafd4a4d61"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a4c050ed4e55484e5cae8c488e958fe467eade2779e3c983f0bdc954539f38df",
+        "client_sha256": "a4c050ed4e55484e5cae8c488e958fe467eade2779e3c983f0bdc954539f38df"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a1359b6ac13ab311fa42a6a5ea88a1b98e6ce436a2681fdb94fdacd4363107c6",
+        "client_sha256": "a1359b6ac13ab311fa42a6a5ea88a1b98e6ce436a2681fdb94fdacd4363107c6"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "f8f324510936fce6b4c6877d88fc62ff6487ec407bbd08020482aee7f86e0412",
+        "client_sha256": "f8f324510936fce6b4c6877d88fc62ff6487ec407bbd08020482aee7f86e0412"
+      },
+      {
+        "relative_path": "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8ec9dd95aced7cb52eb3b8aa395764d0410bce181fa33823d9d66a7a29b064db",
+        "client_sha256": "8ec9dd95aced7cb52eb3b8aa395764d0410bce181fa33823d9d66a7a29b064db"
+      },
+      {
+        "relative_path": "implementation-decisions/STALE-INHERITED-pseudocode.md",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "6bdb06cd9866b45a68cb15466536550ae0e5f6b3c754e3513c428a0ada2a250b",
+        "client_sha256": "6bdb06cd9866b45a68cb15466536550ae0e5f6b3c754e3513c428a0ada2a250b"
+      },
+      {
+        "relative_path": "implementation-decisions/STALE-INHERITED.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "390231e38c91542e8cf10071341bc105cec21006d2c747d76a14464a18994834",
+        "client_sha256": "390231e38c91542e8cf10071341bc105cec21006d2c747d76a14464a18994834"
+      },
+      {
+        "relative_path": "processes.md",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      },
+      {
+        "relative_path": "requirements.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "e4ee95d7d9a7099125bb5eb6e61c7b5f8544dadcf2a4f0b612d1cd1ebb3057d4",
+        "client_sha256": "e4ee95d7d9a7099125bb5eb6e61c7b5f8544dadcf2a4f0b612d1cd1ebb3057d4"
+      },
+      {
+        "relative_path": "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "39832cb6e08661309f3f39b100d75238b40ef40fd30b1ff673dababa92e78d21",
+        "client_sha256": "39832cb6e08661309f3f39b100d75238b40ef40fd30b1ff673dababa92e78d21"
+      },
+      {
+        "relative_path": "requirements/REQ-FEEDBACK_TO_TIED.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "11941b28849db5adb302ce5256a70cfe56a10ffcacd8b1feaef045bd38c82a1f",
+        "client_sha256": "11941b28849db5adb302ce5256a70cfe56a10ffcacd8b1feaef045bd38c82a1f"
+      },
+      {
+        "relative_path": "requirements/REQ-MODULE_VALIDATION.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "8fb06a59dfdb9eeb5145c122228766190334981c6807cd1391c678f3112f936b",
+        "client_sha256": "8fb06a59dfdb9eeb5145c122228766190334981c6807cd1391c678f3112f936b"
+      },
+      {
+        "relative_path": "requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "d6fa244b530cb3dad1352087737b495c7afef947da66cecce392b0e4b11c5b7a",
+        "client_sha256": "d6fa244b530cb3dad1352087737b495c7afef947da66cecce392b0e4b11c5b7a"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "239bf3f72d9c690a3d06d0dc1d2190b30a2a72f2032401a2d9175038f7550844",
+        "client_sha256": "239bf3f72d9c690a3d06d0dc1d2190b30a2a72f2032401a2d9175038f7550844"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "59405908ac905dad8b4b34869a8027c7403f9748e00ac0b14b9e8637d57d7f6e",
+        "client_sha256": "59405908ac905dad8b4b34869a8027c7403f9748e00ac0b14b9e8637d57d7f6e"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "15243a56e9c9105f6cfb1264fd4b5f6f99fd0ccc6162b87a7ad1a4078fb0609d",
+        "client_sha256": "15243a56e9c9105f6cfb1264fd4b5f6f99fd0ccc6162b87a7ad1a4078fb0609d"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_SETUP.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "a6556353d8bfd520b6cea74647fb2b0b1fdbb04976559dc23eb4c8d405e8ba57",
+        "client_sha256": "a6556353d8bfd520b6cea74647fb2b0b1fdbb04976559dc23eb4c8d405e8ba57"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "dfc6b5273a7c39ce20600f0aff205f3e2d0c1fd8b44480c5551e72d1ff18cd8e",
+        "client_sha256": "dfc6b5273a7c39ce20600f0aff205f3e2d0c1fd8b44480c5551e72d1ff18cd8e"
+      },
+      {
+        "relative_path": "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "3dfa9151c21fdcf6bb40e764349a699ead50973a8909e72e893e84ec1e1db2f5",
+        "client_sha256": "3dfa9151c21fdcf6bb40e764349a699ead50973a8909e72e893e84ec1e1db2f5"
+      },
+      {
+        "relative_path": "semantic-tokens.yaml",
+        "disposition": "matched",
+        "compare_mode": "sha256",
+        "source_sha256": "5a8beabbec2c94b9d55a2d1f89e3ed65f28e9284d5fc52c4c401346a0dd7a785",
+        "client_sha256": "5a8beabbec2c94b9d55a2d1f89e3ed65f28e9284d5fc52c4c401346a0dd7a785"
+      },
+      {
+        "relative_path": "tied-project/config.yaml",
+        "disposition": "preserved_by_policy",
+        "notes": "METHODOLOGY_TEMPLATE_ONLY allowlist"
+      }
+    ]
+  },
+  "summary": {
+    "methodology_drift_count": 0,
+    "doc_drift_count": 0,
+    "missing_count": 0,
+    "preserved_by_policy_count": 4,
+    "total_entries": 67
+  }
+}

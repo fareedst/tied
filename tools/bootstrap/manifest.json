@@ -87,6 +87,12 @@
     "docs/pseudocode-fidelity-audit-agent-prompt.md",
     "vocab/fidelity-research.md"
   ],
+  "VOCABULARY_OWNERSHIP_METHODOLOGY_REQUIRED_FILES": [
+    "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml",
+    "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml",
+    "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml",
+    "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md"
+  ],
   "ADVERSARIAL_INQUIRY_METHODOLOGY_REQUIRED_FILES": [
     "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml",
     "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml",

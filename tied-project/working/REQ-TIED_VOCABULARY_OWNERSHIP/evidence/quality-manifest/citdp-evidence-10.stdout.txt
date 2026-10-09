@@ -1,0 +1,20 @@
+Run options: --seed 32845
+
+# Running:
+
+..F..
+
+Finished in 0.061102s, 81.8304 runs/s, 114.5625 assertions/s.
+
+  1) Failure:
+ValidateVocabIndexTest#test_repository_vocabulary_indexes_are_consistent [scripts/validate_vocab_index_test.rb:16]:
+tied-project/vocab/project-operations-mcp.md is missing canonical title
+tied-project/vocab/project-operations-mcp.md is missing traceability
+tied-project/vocab/project-operations-mcp.md is missing See also
+tied-project/vocab/project-operations-mcp.md is missing alphabetical index
+project-operations-mcp.md is missing from domain-references.md
+tied-project/vocab/behavior-bounded-change-engineering.md links to missing path ../../docs/comparisons/tied-vs-behavior-bounded-change-engineering.md
+tied-project/vocab/residuality.md links to missing path ../../docs/comparisons/residuality-theory-and-tied.md.
+Expected ["tied-project/vocab/project-operations-mcp.md is missing canonical title", "tied-project/vocab/project-operations-mcp.md is missing traceability", "tied-project/vocab/project-operations-mcp.md is missing See also", "tied-project/vocab/project-operations-mcp.md is missing alphabetical index", "project-operations-mcp.md is missing from domain-references.md", "tied-project/vocab/behavior-bounded-change-engineering.md links to missing path ../../docs/comparisons/tied-vs-behavior-bounded-change-engineering.md", "tied-project/vocab/residuality.md links to missing path ../../docs/comparisons/residuality-theory-and-tied.md"] to be empty.
+
+5 runs, 7 assertions, 1 failures, 0 errors, 0 skips

@@ -539,6 +539,46 @@ describe("e2e: bootstrap and load", () => {
       "tied-install.sh should copy the fidelity audit prompt"
     );
 
+    // [REQ-TIED_VOCABULARY_OWNERSHIP] [ARCH-TIED_VOCABULARY_LAYERS] [IMPL-TIED_VOCABULARY_REFRESH]
+    // How: Shipped methodology indexes and detail files must include the vocabulary ownership stack (A4a closure).
+    const vocabularyOwnershipPaths = [
+      path.join(bundleDir, "requirements", "REQ-TIED_VOCABULARY_OWNERSHIP.yaml"),
+      path.join(bundleDir, "architecture-decisions", "ARCH-TIED_VOCABULARY_LAYERS.yaml"),
+      path.join(bundleDir, "implementation-decisions", "IMPL-TIED_VOCABULARY_REFRESH.yaml"),
+      path.join(
+        bundleDir,
+        "implementation-decisions",
+        "IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md",
+      ),
+    ];
+    for (const p of vocabularyOwnershipPaths) {
+      assert.ok(fs.existsSync(p), `methodology bundle should ship vocabulary ownership artifact ${p}`);
+    }
+    const bundleReqYaml = fs.readFileSync(path.join(bundleDir, "requirements.yaml"), "utf8");
+    const bundleArchYaml = fs.readFileSync(
+      path.join(bundleDir, "architecture-decisions.yaml"),
+      "utf8",
+    );
+    const bundleImplYaml = fs.readFileSync(
+      path.join(bundleDir, "implementation-decisions.yaml"),
+      "utf8",
+    );
+    assert.match(
+      bundleReqYaml,
+      /^REQ-TIED_VOCABULARY_OWNERSHIP:/m,
+      "bundle requirements.yaml should index REQ-TIED_VOCABULARY_OWNERSHIP",
+    );
+    assert.match(
+      bundleArchYaml,
+      /^ARCH-TIED_VOCABULARY_LAYERS:/m,
+      "bundle architecture-decisions.yaml should index ARCH-TIED_VOCABULARY_LAYERS",
+    );
+    assert.match(
+      bundleImplYaml,
+      /^IMPL-TIED_VOCABULARY_REFRESH:/m,
+      "bundle implementation-decisions.yaml should index IMPL-TIED_VOCABULARY_REFRESH",
+    );
+
   });
 
   it("initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]", () => {

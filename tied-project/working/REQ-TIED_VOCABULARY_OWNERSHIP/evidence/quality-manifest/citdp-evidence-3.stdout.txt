@@ -1,0 +1,20 @@
+
+> @tied/mcp@1.0.0 build
+> tsc && npm run build --workspaces --if-present
+
+
+> @tied/agentstream@1.0.0 build
+> tsc
+
+
+> @tied/bootstrap@1.0.0 build
+> tsc
+
+
+> @tied/cli@1.0.0 build
+> tsc
+
+
+> @tied/yaml-cli@1.0.0 build
+> tsc
+

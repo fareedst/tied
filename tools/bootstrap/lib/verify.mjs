@@ -9,6 +9,7 @@ import { jsonSafeAbsolute } from "./paths.mjs";
 import { sayOk, sayWarn, sayErr } from "./console.mjs";
 import { resolveTiedLayout } from "./layout.mjs";
 import { bundleRelativeVerifyPath } from "./methodology-bundle.mjs";
+import { loadManifest } from "./constants.mjs";
 
 function isUsableDetailFile(value) {
   if (value == null) return false;
@@ -90,6 +91,31 @@ export function verifyAdversarialInquiryMethodology(verifyRoot, options = {}) {
   sayWarn(
     `CAN run the read-only inquiry: ${path.join(verifyRoot, relPath("docs/adversarial-inquiry-adoption.md"))}.`,
   );
+}
+
+/**
+ * @param {string} verifyRoot
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyVocabularyOwnershipMethodology(verifyRoot, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
+  const requiredRel = loadManifest().VOCABULARY_OWNERSHIP_METHODOLOGY_REQUIRED_FILES ?? [];
+  sayWarn("MUST verify vocabulary ownership methodology artifacts before completion.");
+  let missing = 0;
+  for (const rel of requiredRel) {
+    const legacyRel = rel.startsWith("methodology/") ? rel : `methodology/${rel}`;
+    const p = path.join(verifyRoot, relPath(legacyRel));
+    if (!fs.existsSync(p)) {
+      sayErr(`MISSING mandatory vocabulary ownership methodology artifact: ${p}`);
+      missing = 1;
+    }
+  }
+  if (missing) {
+    sayErr("Vocabulary ownership methodology verification failed; client bootstrap is incomplete.");
+    throw new Error("VOCABULARY_OWNERSHIP_GATE_FAILED");
+  }
+  sayOk("MUST verify vocabulary ownership methodology artifacts: complete.");
 }
 
 function firstExistingPath(candidates) {

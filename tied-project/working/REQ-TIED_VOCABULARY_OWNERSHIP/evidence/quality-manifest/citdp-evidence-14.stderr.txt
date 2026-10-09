@@ -1,0 +1,1 @@
+bash: line 1: yaml_index_validate: command not found

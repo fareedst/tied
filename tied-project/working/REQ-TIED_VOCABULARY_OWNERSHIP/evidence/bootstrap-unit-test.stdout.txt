@@ -1,0 +1,420 @@
+▶ childProcessSpawnOptions [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM]
+  ✔ passes through on non-win32 (1.049833ms)
+  ✔ sets windowsHide on win32 (0.080958ms)
+✔ childProcessSpawnOptions [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] (1.7215ms)
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-adh-hooks-HDm5IZ/.claude/settings.json PostToolUse tied-adherence-bridge.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-adh-hooks-TZjFFY/.claude/settings.json PostToolUse tied-adherence-bridge.
+Merged /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-adh-hooks-m6l7eE/.claude/settings.json PostToolUse tied-adherence-bridge (foreign hooks preserved).
+Upgraded /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-adh-hooks-L9E8u6/.claude/settings.json PostToolUse tied-adherence-bridge to Node hook command.
+▶ mergeClaudeAdherenceHooks [REQ-TIED_CLAUDE_ADHERENCE_HOOKS]
+  ✔ creates settings.json and hook shell when absent (1.778291ms)
+  ✔ merge is idempotent (0.958792ms)
+  ✔ preserves foreign PostToolUse hooks (0.770875ms)
+  ✔ upgrades legacy .sh hook command to Node (0.799959ms)
+✔ mergeClaudeAdherenceHooks [REQ-TIED_CLAUDE_ADHERENCE_HOOKS] (5.490834ms)
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-syGHzH/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-syGHzH/.claude/skills/unblock.
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-syGHzH/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-syGHzH/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-0U0JeF/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-0U0JeF/.claude/skills/unblock.
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-0U0JeF/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-0U0JeF/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-wTt0FM/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-wTt0FM/.claude/skills/unblock.
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-wTt0FM/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-wTt0FM/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-4N4NhN/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-4N4NhN/.claude/skills/unblock.
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-4N4NhN/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-4N4NhN/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-FPFdm4/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-FPFdm4/.claude/skills/unblock.
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-FPFdm4/.claude/skills (copy default).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-validation-FPFdm4/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+▶ buildClaudeClientValidationReport [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ uses tied-claude-client-validation.v1 schema_version (1.587875ms)
+✔ buildClaudeClientValidationReport [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (2.160958ms)
+▶ assertMcpJsonHarnessContract [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ passes when harness and TIED_BASE_PATH match client tied/ (22.771792ms)
+  ✔ fails when TIED_MCP_HARNESS is not claude (18.327958ms)
+✔ assertMcpJsonHarnessContract [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (41.200916ms)
+▶ runClaudeCodeInteractiveSmoke [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ skips when claude CLI is not on PATH (17.025292ms)
+  ✔ passes when claude returns expected base_path (17.091125ms)
+✔ runClaudeCodeInteractiveSmoke [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (34.218166ms)
+▶ runClaudeClientValidation fail-fast [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ stops after mcp_json failure without tied-cli smoke (24.960125ms)
+  ✔ honors reroot tied-cli path when skills reroot enabled (0.665125ms)
+  ✔ records check order constants aligned with implementation (0.038458ms)
+✔ runClaudeClientValidation fail-fast [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (25.820792ms)
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-KsAso7/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Merged /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-ipxhHE/.mcp.json mcpServers.tied-yaml (safe merge; foreign servers preserved).
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-tKnEvd/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-YtSEwG/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-YtSEwG/.claude/skills/unblock.
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-YtSEwG/.claude/skills (copy default).
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CZFwpX/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CZFwpX/.claude/skills/unblock.
+Copied Claude skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CZFwpX/.claude/skills (copy default).
+Copied 3 of 3 base files.
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/tied-project/requirements.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/tied-project/architecture-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/tied-project/implementation-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/tied-project/semantic-tokens.yaml (empty).
+Created 4 project index file(s).
+Created client constitution example.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Refreshed /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.mcp.json with linked methodology bundle env.
+Wrote linked prompt-type skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.cursor/skills.
+Wrote linked tied-yaml skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.cursor/skills/tied-yaml.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.cursor/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.cursor/skills/unblock.
+Wrote linked prompt-type skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.claude/skills.
+Wrote linked tied-yaml skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.claude/skills/tied-yaml.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.claude/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.claude/skills/unblock.
+Copied optional CLAUDE.md template into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1KG10M/.claude/settings.json PostToolUse tied-adherence-bridge.
+Layered TIED install complete (linked, layers=db,mcp,skills,methodology).
+Copied 3 of 3 base files.
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/tied-project/requirements.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/tied-project/architecture-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/tied-project/implementation-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/tied-project/semantic-tokens.yaml (empty).
+Created 4 project index file(s).
+Created client constitution example.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Refreshed /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.mcp.json with linked methodology bundle env.
+Wrote linked prompt-type skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.cursor/skills.
+Wrote linked tied-yaml skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.cursor/skills/tied-yaml.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.cursor/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.cursor/skills/unblock.
+Wrote linked prompt-type skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.claude/skills.
+Wrote linked tied-yaml skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.claude/skills/tied-yaml.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.claude/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.claude/skills/unblock.
+Copied optional CLAUDE.md template into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-CSsieU/.claude/settings.json PostToolUse tied-adherence-bridge.
+Layered TIED install complete (linked, layers=db,mcp,skills,methodology).
+Copied 3 of 3 base files.
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/tied-project/requirements.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/tied-project/architecture-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/tied-project/implementation-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/tied-project/semantic-tokens.yaml (empty).
+Created 4 project index file(s).
+Created client constitution example.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Refreshed /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.mcp.json with linked methodology bundle env.
+Wrote linked prompt-type skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.cursor/skills.
+Wrote linked tied-yaml skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.cursor/skills/tied-yaml.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.cursor/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.cursor/skills/unblock.
+Wrote linked prompt-type skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.claude/skills.
+Wrote linked tied-yaml skill stubs into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.claude/skills/tied-yaml.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.claude/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.claude/skills/unblock.
+Copied optional CLAUDE.md template into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-N5U0ic/.claude/settings.json PostToolUse tied-adherence-bridge.
+Layered TIED install complete (linked, layers=db,mcp,skills,methodology).
+Copied 3 of 3 base files.
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-GWwoJt/tied-project/requirements.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-GWwoJt/tied-project/architecture-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-GWwoJt/tied-project/implementation-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-GWwoJt/tied-project/semantic-tokens.yaml (empty).
+Created 4 project index file(s).
+Created client constitution example.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-GWwoJt/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Refreshed /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-GWwoJt/.mcp.json with linked methodology bundle env.
+Copied 3 of 3 base files.
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-f3bm24/tied-project/requirements.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-f3bm24/tied-project/architecture-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-f3bm24/tied-project/implementation-decisions.yaml (empty).
+Created project index /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-f3bm24/tied-project/semantic-tokens.yaml (empty).
+Created 4 project index file(s).
+Created client constitution example.
+Initialized /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-f3bm24/.mcp.json mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=claude).
+Refreshed /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-f3bm24/.mcp.json with linked methodology bundle env.
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1SJ1X2/.claude/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1SJ1X2/.claude/skills/unblock.
+Symlinked Claude prompt-type skills into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-claude-bootstrap-1SJ1X2/.claude/skills (tied-yaml copied for TIED_REPO_ROOT patch).
+▶ PRESERVE_CURSOR_MCP_INIT [REQ-TIED_CLAUDE_HARNESS]
+  ✔ does not mutate existing .cursor/mcp.json (create-only policy) (1.275167ms)
+✔ PRESERVE_CURSOR_MCP_INIT [REQ-TIED_CLAUDE_HARNESS] (1.892583ms)
+▶ INITIALIZE_CLAUDE_MCP_CONFIG [REQ-TIED_CLAUDE_HARNESS]
+  ✔ creates repo-root .mcp.json with tied-yaml and TIED_MCP_HARNESS=claude when absent (1.517292ms)
+  ✔ merges tied-yaml only when foreign servers exist (1.287417ms)
+  ✔ noop when tied-yaml already present (0.7305ms)
+✔ INITIALIZE_CLAUDE_MCP_CONFIG [REQ-TIED_CLAUDE_HARNESS] (3.716209ms)
+▶ INSTALL_CLAUDE_SKILLS [REQ-TIED_CLAUDE_HARNESS]
+  ✔ copy-default installs bundled prompt-type and tied-yaml skills under .claude/skills/ (20.090291ms)
+  ✔ preserves unrelated skills already under .claude/skills/ (17.246959ms)
+✔ INSTALL_CLAUDE_SKILLS [REQ-TIED_CLAUDE_HARNESS] (37.541542ms)
+▶ BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS]
+  ✔ orchestration installs Claude artifacts and preserves existing .cursor/mcp.json (31.987875ms)
+✔ BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS] (32.076334ms)
+▶ ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ RED: fails when .claude/skills and repo-root .mcp.json are absent (0.265292ms)
+  ✔ GREEN: passes after tied-install linked dual-harness install (30.227ms)
+✔ ASSERT_WINDOWS_BOOTSTRAP_CLAUDE [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (30.583417ms)
+▶ BASE_FILES project config [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] [IMPL-TIED_FILES]
+  ✔ creates tied-project indexes on fresh linked install (16.882584ms)
+✔ BASE_FILES project config [REQ-TIED_SETUP] [REQ-TIED_YAML_STYLE_CONFIGURATION] [IMPL-TIED_FILES] (16.9335ms)
+▶ CONFIG_SKILLS_REROOT [REQ-TIED_CLAUDE_SKILLS_REROOT]
+  ✔ default resolves harness-native skills dirs (0.150709ms)
+  ✔ RED: rejects re-root without Windows copy proof (0.228834ms)
+  ✔ RED: rejects re-root without ARCH decision file (0.134583ms)
+  ✖ GREEN: installs Claude managed inventory under repo-root skills/ when re-root enabled (0.185875ms)
+  ✖ bootstrap with TIED_SKILLS_REROOT=1 places Cursor skills under repo-root skills/ (3.254042ms)
+  ✖ Windows assert honors re-root layout after linked install (3.442583ms)
+✖ CONFIG_SKILLS_REROOT [REQ-TIED_CLAUDE_SKILLS_REROOT] (7.51175ms)
+▶ GATE_SYMLINK_ON_WINDOWS_PROOF [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]
+  ✔ RED: rejects symlink opt-in without CI Windows copy proof (0.188667ms)
+  ✔ GREEN: allows Unix symlink opt-in when windows_copy_proven_in_ci is true (3.777834ms)
+✔ GATE_SYMLINK_ON_WINDOWS_PROOF [REQ-TIED_CLAUDE_BOOTSTRAP_OPS] (4.021209ms)
+CLIENT_REFRESH_PARITY: client tied/ directory missing
+▶ client-refresh-parity
+  ✔ Parity A: matched, drifted, and allowlist preserved_by_policy (2.914ms)
+  ✖ Parity B: matched and drifted DOCS_TO_COPY hashes (0.444167ms)
+  ✖ runClientRefreshParityGate: methodology drift exit 1; report-only exit 0 (4.417042ms)
+✖ client-refresh-parity (8.442208ms)
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-copy-jS0brJ/.cursor/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-copy-jS0brJ/.cursor/skills/unblock.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-stub-VveBu9/.claude/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-stub-VveBu9/.claude/skills/unblock.
+▶ client-skills-catalog [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]
+  ✔ loadStandaloneClientSkills returns xlate and unblock (2.179584ms)
+  ✔ installStandaloneSkillsCopy places SKILL.md files (9.398ms)
+  ✔ installStandaloneSkillsLinkedStub references store paths (1.4835ms)
+  ✔ assertStandaloneSkillsInventory false when skill missing (0.562792ms)
+✔ client-skills-catalog [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS] (14.309666ms)
+Applied tool-use profile to /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-tool-bootstrap-16EQd1/tied-project/config.yaml.
+Applied tool-use profile to /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-tool-bootstrap-XRBhee/tied-project/config.yaml.
+Applied tool-use profile to /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-tool-bootstrap-J9zvaI/tied-project/config.yaml.
+Copied 3 BBCE analysis starter file(s) into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-tool-bootstrap-HuKGBU/tied-project/analysis/.
+▶ parseBootstrapToolFlags [REQ-TIED_SETUP] [IMPL-TIED_FILES]
+  ✔ maps --full-tools and granular flags (0.539375ms)
+  ✔ CLI overrides env mirrors (0.107916ms)
+  ✔ parses --tools list case-insensitively (0.705375ms)
+✔ parseBootstrapToolFlags [REQ-TIED_SETUP] [IMPL-TIED_FILES] (2.427375ms)
+▶ applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES]
+  ✔ merges jev and dae into tied-project/config.yaml when present (4.708083ms)
+  ✔ merges jev and dae on fresh tied-project/config.yaml (1.533ms)
+  ✔ skips YAML merge when file pre-existed without force (0.825375ms)
+  ✔ force merge preserves unrelated keys (1.5865ms)
+  ✔ copies BBCE starter files additively (4.375208ms)
+✔ applyClientToolUseBootstrapOptions [REQ-TIED_SETUP] [IMPL-TIED_FILES] (13.226125ms)
+▶ copy-managed warnModifiedCopyTarget
+  ✔ does not warn on directory nodes with non-midnight mtime when files are normalized (3.959ms)
+✔ copy-managed warnModifiedCopyTarget (4.539875ms)
+▶ linkOrMaterializeCopy [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM]
+  ✔ copies file when symlink raises EPERM (1.065292ms)
+✔ linkOrMaterializeCopy [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] (1.141167ms)
+▶ install-options [REQ-TIED_LAYERED_CLIENT_INSTALL]
+  ✔ installOptionsFromEnv reads TIED_INSTALL_* mirrors (0.9315ms)
+  ✔ parseInstallPassthroughFlags merges CLI over env (0.095ms)
+  ✔ buildTiedInstallArgv defaults linked harness from profile (0.079708ms)
+✔ install-options [REQ-TIED_LAYERED_CLIENT_INSTALL] (1.634583ms)
+▶ resolveTiedLayout
+  ✔ uses tied-project and tied-bundle when present (0.927541ms)
+  ✔ falls back to legacy tied/ when tied-project absent (0.273667ms)
+  ✔ resolveWorkingRoot splits committed vs local (0.471584ms)
+✔ resolveTiedLayout (2.259958ms)
+▶ detectLegacyLayout
+  ✔ flags top-level tied/ when modern layout expected (1.119167ms)
+  ✔ passes when only tied-project exists (0.343125ms)
+✔ detectLegacyLayout (1.562292ms)
+▶ guardSelfInstall
+  ✔ refuses projectRoot equal to storeRoot (0.450375ms)
+  ✔ allows when allow flag set (0.224833ms)
+✔ guardSelfInstall (2.214208ms)
+▶ lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]
+  ✔ flags planted copy_files reference on live surface (2.039458ms)
+  ✔ allowlists migration history file (1.229541ms)
+✔ lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT] (3.880208ms)
+▶ resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]
+  ✔ uses timestamp basename under dev/test when shell has stdd-dev (0.568416ms)
+  ✔ uses ten-digit basename even outside dev/test path (0.1015ms)
+  ✔ honors explicit env override for named project dirs (0.057417ms)
+  ✔ falls back to basename when env unset on named project dirs (0.055917ms)
+✔ resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS] (1.435834ms)
+▶ methodology-bundle [REQ-TIED_TWO_FOLDER_LAYOUT]
+  ✔ resolveStoreMethodologyIndexRoot finds templates corpus in TIED store (0.554917ms)
+  ✔ materializeLinkedMethodologyBundle writes under tied-bundle only (7.01225ms)
+  ✔ resolveStoreMethodologyIndexRoot prefers templates over empty tied/methodology (2.021084ms)
+✔ methodology-bundle [REQ-TIED_TWO_FOLDER_LAYOUT] (10.280167ms)
+Applied read-only permissions under /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-mcb-rqDalL/tied/methodology (--methodology-readonly).
+Installed /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/tied-mcb-F6mz6y/.githooks/pre-commit; enable with: git config core.hooksPath .githooks
+▶ methodology client boundary Phase A [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY]
+  ✔ isStagedMethodologyPath matches tied/methodology prefix only (0.534834ms)
+  ✔ findStagedMethodologyPaths returns blocked staged paths (0.8485ms)
+  ✔ applyMethodologyReadonlyBootstrapFlag is opt-in and no-ops when flag false (1.190875ms)
+  ✔ applyMethodologyReadonlyBootstrapFlag chmods tree on Unix when flag true (1.238ms)
+  ✖ installClientHookTemplate rejects staged tied/methodology paths via shell hook (106.400042ms)
+✖ methodology client boundary Phase A [REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY] (111.002292ms)
+▶ methodology-template-only-allowlist
+  ✔ documents the four template-only paths from ARCH/PLAN (1.033584ms)
+  ✔ matches allowlisted relative paths (0.095667ms)
+✔ methodology-template-only-allowlist (1.71425ms)
+▶ migrateLayout [REQ-TIED_TWO_FOLDER_LAYOUT]
+  ✔ migrates legacy tied/ + root working/ to two-folder layout (43.273625ms)
+  ✔ store dry-run returns planned commands without mutating (1.053125ms)
+✔ migrateLayout [REQ-TIED_TWO_FOLDER_LAYOUT] (44.914709ms)
+▶ new-client onboarding audit paths [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH]
+  ✔ defaultOnboardingAuditReportPath uses tied-project/working on two-folder layout (1.805583ms)
+  ✔ defaultOnboardingAuditReportPath uses repo-root working/ on undivided layout (0.444208ms)
+  ✔ runNewClientOnboardingAudit does not create repo-root working/ on two-folder layout (0.69525ms)
+✔ new-client onboarding audit paths [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH] (4.039834ms)
+TIED_REPO_ROOT points to /Users/fareed/Documents/dev/chatgpt/stdd/C:\nonexistent-stale-tied-repo-for-test but bootstrap entry is missing (/Users/fareed/Documents/dev/chatgpt/stdd/C:\nonexistent-stale-tied-repo-for-test/tied-install.sh); using engine repo /Users/fareed/Documents/dev/chatgpt/stdd
+✔ resolveSourceRoot ignores stale TIED_REPO_ROOT when bootstrap entry is missing (0.909166ms)
+✔ resolveSourceRoot honors TIED_REPO_ROOT when bootstrap entry exists (0.066625ms)
+▶ resolveProjectConfigPath
+  ✔ prefers tied-project/config.yaml over legacy root file (1.610167ms)
+  ✔ falls back to legacy .tied-yaml.yaml for store layout (1.105917ms)
+✔ resolveProjectConfigPath (3.412792ms)
+▶ loadProjectConfig + ownership
+  ✔ normalizes legacy yaml to v1 record shape (0.169417ms)
+  ✔ CONFIG_KEY_OWNERSHIP_VIOLATION when install holds jev (0.214625ms)
+  ✔ mergeTiedConfig overlays install_defaults with install actual (0.080625ms)
+  ✔ writeProjectConfig creates tied-project/config.yaml (2.922625ms)
+✔ loadProjectConfig + ownership (3.543958ms)
+▶ tiedBaselineCommitMessage [REQ-TIED_SETUP]
+  ✔ includes methodology version from AGENTS.md (0.631625ms)
+✔ tiedBaselineCommitMessage [REQ-TIED_SETUP] (1.125667ms)
+▶ invokeTiedCliMcpTool [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM]
+  ✔ yaml_index_list_tokens succeeds against engine store (390.507916ms)
+✔ invokeTiedCliMcpTool [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] (391.115083ms)
+MUST verify vocabulary ownership methodology artifacts before completion.
+MISSING mandatory vocabulary ownership methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-vocab-verify-IvkOEG/methodology/architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml
+MISSING mandatory vocabulary ownership methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-vocab-verify-IvkOEG/methodology/implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml
+MISSING mandatory vocabulary ownership methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-vocab-verify-IvkOEG/methodology/implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md
+Vocabulary ownership methodology verification failed; client bootstrap is incomplete.
+MUST verify inherited methodology pseudo-code token references before completion.
+MISSING methodology index token IMPL-TIED_FILES referenced in methodology/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+MISSING methodology index token ARCH-MISSING_BOOTSTRAP_TOKEN referenced in methodology/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+MISSING methodology index token REQ-TIED_SETUP referenced in methodology/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+Methodology pseudo-code token reference verification failed; client bootstrap is incomplete.
+MUST verify inherited methodology pseudo-code token references before completion.
+MUST verify inherited methodology pseudo-code token references: complete.
+▶ verifyVocabularyOwnershipMethodology [REQ-TIED_VOCABULARY_OWNERSHIP]
+  ✔ throws VOCABULARY_OWNERSHIP_GATE_FAILED when a manifest artifact is missing (1.63275ms)
+✔ verifyVocabularyOwnershipMethodology [REQ-TIED_VOCABULARY_OWNERSHIP] (2.184166ms)
+▶ verifyMethodologyPseudocodeTokenRefs [REQ-TIED_SETUP]
+  ✔ fails deterministically when a sidecar references a missing ARCH token (3.260458ms)
+  ✔ passes when referenced methodology tokens exist in indexes (1.169125ms)
+✔ verifyMethodologyPseudocodeTokenRefs [REQ-TIED_SETUP] (4.507417ms)
+✔ collapseWorkingGitignoreLine remaps local gate globs (0.785833ms)
+✔ mergeLocalWorkingGitignoreBlock adds undivided mirror for store profile (0.335709ms)
+✔ client profile removes legacy blocks without appending (0.163125ms)
+▶ working-root.mjs
+  ✔ classifies gate artifacts as local (0.485291ms)
+  ✔ resolveWorkingPath uses bundle for local when divided (1.525125ms)
+✔ working-root.mjs (2.6375ms)
+ℹ tests 98
+ℹ suites 38
+ℹ pass 92
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 563.482084
+
+✖ failing tests:
+
+test at tools/bootstrap/lib/claude-harness.test.mjs:259:3
+✖ GREEN: installs Claude managed inventory under repo-root skills/ when re-root enabled (0.185875ms)
+  Error: REROOT_WITHOUT_ARCH
+      at resolveSkillsInstallDir (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/skills-reroot.mjs:60:11)
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/claude-harness.test.mjs:261:23)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:831:7)
+
+test at tools/bootstrap/lib/claude-harness.test.mjs:279:3
+✖ bootstrap with TIED_SKILLS_REROOT=1 places Cursor skills under repo-root skills/ (3.254042ms)
+  Error: REROOT_WITHOUT_ARCH
+      at resolveSkillsInstallDir (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/skills-reroot.mjs:60:11)
+      at installSkillsLinked (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/skills-linked.mjs:71:29)
+      at installTiedLayers (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/install-layers-core.mjs:73:7)
+      at bootstrapLinkedClient (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/claude-harness.test.mjs:34:3)
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/claude-harness.test.mjs:285:5)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+
+test at tools/bootstrap/lib/claude-harness.test.mjs:295:3
+✖ Windows assert honors re-root layout after linked install (3.442583ms)
+  Error: REROOT_WITHOUT_ARCH
+      at resolveSkillsInstallDir (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/skills-reroot.mjs:60:11)
+      at installSkillsLinked (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/layers/skills-linked.mjs:71:29)
+      at installTiedLayers (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/install-layers-core.mjs:73:7)
+      at bootstrapLinkedClient (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/claude-harness.test.mjs:34:3)
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/claude-harness.test.mjs:301:5)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+
+test at tools/bootstrap/lib/client-refresh-parity.test.mjs:42:3
+✖ Parity B: matched and drifted DOCS_TO_COPY hashes (0.444167ms)
+  AssertionError [ERR_ASSERTION]: LEAP.md must exist in TIED source
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/client-refresh-parity.test.mjs:44:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1619:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tools/bootstrap/lib/client-refresh-parity.test.mjs:60:3
+✖ runClientRefreshParityGate: methodology drift exit 1; report-only exit 0 (4.417042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/client-refresh-parity.test.mjs:93:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tools/bootstrap/lib/methodology-client-boundary.test.mjs:62:3
+✖ installClientHookTemplate rejects staged tied/methodology paths via shell hook (106.400042ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/lib/methodology-client-boundary.test.mjs:76:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }

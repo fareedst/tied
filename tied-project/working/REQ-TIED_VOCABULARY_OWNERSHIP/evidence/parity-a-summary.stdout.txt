@@ -1,0 +1,33 @@
+{
+  "four": [
+    {
+      "relative_path": "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml",
+      "disposition": "matched",
+      "compare_mode": "sha256",
+      "source_sha256": "929210e75a20eda72d774f4f58f36a8243643dcd8e1642a14435e2585b1471a3",
+      "client_sha256": "929210e75a20eda72d774f4f58f36a8243643dcd8e1642a14435e2585b1471a3"
+    },
+    {
+      "relative_path": "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md",
+      "disposition": "matched",
+      "compare_mode": "sha256",
+      "source_sha256": "f8f324510936fce6b4c6877d88fc62ff6487ec407bbd08020482aee7f86e0412",
+      "client_sha256": "f8f324510936fce6b4c6877d88fc62ff6487ec407bbd08020482aee7f86e0412"
+    },
+    {
+      "relative_path": "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml",
+      "disposition": "matched",
+      "compare_mode": "sha256",
+      "source_sha256": "8ec9dd95aced7cb52eb3b8aa395764d0410bce181fa33823d9d66a7a29b064db",
+      "client_sha256": "8ec9dd95aced7cb52eb3b8aa395764d0410bce181fa33823d9d66a7a29b064db"
+    },
+    {
+      "relative_path": "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml",
+      "disposition": "matched",
+      "compare_mode": "sha256",
+      "source_sha256": "3dfa9151c21fdcf6bb40e764349a699ead50973a8909e72e893e84ec1e1db2f5",
+      "client_sha256": "3dfa9151c21fdcf6bb40e764349a699ead50973a8909e72e893e84ec1e1db2f5"
+    }
+  ],
+  "methodology_drift": 0
+}

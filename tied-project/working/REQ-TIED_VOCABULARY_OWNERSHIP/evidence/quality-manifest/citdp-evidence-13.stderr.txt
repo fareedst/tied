@@ -1,0 +1,1 @@
+bash: line 1: tied_verify: command not found

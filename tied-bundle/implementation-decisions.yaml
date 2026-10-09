@@ -372,3 +372,10 @@ IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
   detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
   name: "Sponsor-Agent Relationship Layer implementation"
   status: "Planned"
+IMPL-TIED_VOCABULARY_REFRESH:
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml"
+  name: "Vocabulary Ownership Refresh"
+  status: "Active"

@@ -855,6 +855,50 @@ steps:
       status: "pending"
   - flow:
       branches: []
+      calls: []
+      next: "evidence-inventory"
+    goals: "Lock git revision and scope tokens for brownfield intent elevation before matrix work (PROC-BROWNFIELD_INTENT_ELEVATION)."
+    slug: "brownfield-baseline-lock"
+    title: "Brownfield baseline lock"
+  - flow:
+      branches: []
+      calls: []
+      next: "evidence-adjudication"
+    goals: "Inventory code, sidecar, deploy, and test sources per adoption batch."
+    slug: "evidence-inventory"
+    title: "Evidence inventory"
+  - flow:
+      branches: []
+      calls: []
+      next: "req-intent-promotion"
+    goals: "Assign matrix dispositions; sponsor approval required for approved rows."
+    slug: "evidence-adjudication"
+    title: "Evidence adjudication"
+  - flow:
+      branches: []
+      calls:
+        - "sub-yaml-edit-loop"
+      next: "arch-boundary-promotion"
+    goals: "Promote approved matrix rows into REQ satisfaction_criteria only."
+    slug: "req-intent-promotion"
+    title: "REQ intent promotion"
+  - flow:
+      branches: []
+      calls:
+        - "sub-yaml-edit-loop"
+      next: "brownfield-closure"
+    goals: "Promote approved boundary claims into ARCH and binding inventories."
+    slug: "arch-boundary-promotion"
+    title: "ARCH boundary promotion"
+  - flow:
+      branches: []
+      calls: []
+      next: "author-requirement"
+    goals: "Close brownfield intent elevation with matrix metrics and validation receipt."
+    slug: "brownfield-closure"
+    title: "Brownfield closure"
+  - flow:
+      branches: []
       calls:
         - "sub-vocabulary-sync"
         - "sub-yaml-edit-loop"

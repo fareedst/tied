@@ -220,3 +220,10 @@ ARCH-TIED_STRUCTURE:
       - "IMPL-TIED_FILES"
     requirements:
       - "REQ-TIED_SETUP"
+ARCH-TIED_VOCABULARY_LAYERS:
+  category: "Structural"
+  cross_references:
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml"
+  name: "Layered Vocabulary Ownership"
+  status: "Active"

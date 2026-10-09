@@ -1,0 +1,41 @@
+Run options: --seed 5284
+
+# Running:
+
+EE
+
+Finished in 0.001053s, 1899.3353 runs/s, 0.0000 assertions/s.
+
+  1) Error:
+MigrateVocabOwnershipTest#test_report_only_detects_mixed_files_without_mutating_client:
+Errno::ENOENT: No such file or directory @ rb_sysopen - /Users/fareed/Documents/dev/chatgpt/stdd/tied/vocab/tied-methodology.md
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1394:in `initialize'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1394:in `open'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1394:in `copy_file'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:504:in `copy_file'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:423:in `block in cp'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1577:in `block in fu_each_src_dest'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1593:in `fu_each_src_dest0'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1575:in `fu_each_src_dest'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:422:in `cp'
+    scripts/migrate_vocab_ownership_test.rb:20:in `block in test_report_only_detects_mixed_files_without_mutating_client'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/3.0.0/tmpdir.rb:96:in `mktmpdir'
+    scripts/migrate_vocab_ownership_test.rb:16:in `test_report_only_detects_mixed_files_without_mutating_client'
+
+  2) Error:
+MigrateVocabOwnershipTest#test_apply_moves_exact_methodology_files_and_preserves_client_files:
+Errno::ENOENT: No such file or directory @ rb_sysopen - /Users/fareed/Documents/dev/chatgpt/stdd/tied/vocab/tied-methodology.md
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1394:in `initialize'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1394:in `open'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1394:in `copy_file'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:504:in `copy_file'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:423:in `block in cp'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1577:in `block in fu_each_src_dest'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1593:in `fu_each_src_dest0'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:1575:in `fu_each_src_dest'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/gems/3.0.0/gems/fileutils-1.6.0/lib/fileutils.rb:422:in `cp'
+    scripts/migrate_vocab_ownership_test.rb:40:in `block in test_apply_moves_exact_methodology_files_and_preserves_client_files'
+    /Users/fareed/.rbenv/versions/3.0.3/lib/ruby/3.0.0/tmpdir.rb:96:in `mktmpdir'
+    scripts/migrate_vocab_ownership_test.rb:36:in `test_apply_moves_exact_methodology_files_and_preserves_client_files'
+
+2 runs, 0 assertions, 0 failures, 2 errors, 0 skips

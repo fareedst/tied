@@ -110,6 +110,19 @@ ARCH-TIED_STRUCTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_VOCABULARY_LAYERS:
+  cross_references:
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  description: "Separate refreshable methodology vocabulary from durable client vocabulary layers."
+  detail_file: "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml"
+  metadata:
+    last_updated: "2026-08-19"
+    registered: "2026-08-19"
+  name: "Layered Vocabulary Ownership"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 IMPL-EVIDENCE_CHAIN_PROFILE:
   cross_references:
     - "ARCH-EVIDENCE_CHAIN_PROFILE"
@@ -331,6 +344,19 @@ IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
   name: "Sponsor-Agent Relationship Layer implementation"
   source_index: "implementation-decisions.yaml"
   status: "Planned"
+  type: "IMPL"
+IMPL-TIED_VOCABULARY_REFRESH:
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  description: "Bootstrap refresh for layered methodology and client vocabulary ownership."
+  detail_file: "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml"
+  metadata:
+    last_updated: "2026-08-19"
+    registered: "2026-08-19"
+  name: "Vocabulary Ownership Refresh"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
   type: "IMPL"
 PROC-BUILD_PIPELINE_VALIDATION:
   cross_references:
@@ -640,11 +666,13 @@ REQ-TIED_SETUP:
   category: "Core Functional"
   cross_references:
     - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_VOCABULARY_LAYERS"
     - "IMPL-TIED_FILES"
-  description: "TIED methodology setup and client bootstrap"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "TIED methodology setup and client bootstrap with layered vocabulary ownership"
   detail_file: "requirements/REQ-TIED_SETUP.yaml"
   metadata:
-    last_updated: "2026-04-21"
+    last_updated: "2026-08-19"
     registered: "2025-11-08"
   name: "TIED Methodology Setup"
   source_index: "requirements.yaml"
@@ -660,4 +688,17 @@ REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
   name: "Sponsor-Agent Relationship Layer"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_VOCABULARY_OWNERSHIP:
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "Separate refreshable methodology vocabulary from durable client-owned vocabulary."
+  detail_file: "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml"
+  metadata:
+    last_updated: "2026-08-19"
+    registered: "2026-08-19"
+  name: "Separate Vocabulary Ownership"
+  source_index: "requirements.yaml"
+  status: "Active"
   type: "REQ"

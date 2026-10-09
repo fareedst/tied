@@ -10,6 +10,7 @@ import { invokeTiedCliMcpTool } from "../tied-cli-invoke.mjs";
 import {
   verifyFidelityMethodology,
   verifyAdversarialInquiryMethodology,
+  verifyVocabularyOwnershipMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
   verifyMethodologyPseudocodeTokenRefs,
@@ -48,6 +49,7 @@ export function runPostInstallVerification(projectRoot, options) {
   if (options.mode === "full") {
     verifyFidelityMethodology(bundlePath, tiedBasePathValue, tiedCliDest, verifyOpts);
     verifyAdversarialInquiryMethodology(bundlePath, verifyOpts);
+    verifyVocabularyOwnershipMethodology(bundlePath, verifyOpts);
     verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
     const manifest = loadManifest();
     verifyInheritedDetailFiles(bundlePath, manifest.INHERITED_DETAIL_REQUIRED ?? [], verifyOpts);
@@ -67,6 +69,7 @@ export function runPostInstallVerification(projectRoot, options) {
 
   verifyFidelityMethodology(bundlePath, tiedBasePathValue, tiedCliDest, verifyOpts);
   verifyAdversarialInquiryMethodology(bundlePath, verifyOpts);
+  verifyVocabularyOwnershipMethodology(bundlePath, verifyOpts);
   verifyInheritedDetailFiles(bundlePath, loadManifest().INHERITED_DETAIL_REQUIRED ?? [], verifyOpts);
   verifyMethodologyPseudocodeTokenRefs(bundlePath, verifyOpts);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);

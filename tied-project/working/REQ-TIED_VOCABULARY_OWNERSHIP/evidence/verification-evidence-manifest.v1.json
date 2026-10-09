@@ -1,0 +1,37 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "vocab-a4a-close-20261009",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "bootstrap-vocab-verify-unit",
+      "command": ["node", "--test", "tools/bootstrap/lib/verify.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "mcp-full-suite",
+      "command": ["npm", "test", "--prefix", "mcp-server"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "tied-validate-consistency",
+      "command": ["tied_validate_consistency"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_VOCABULARY_OWNERSHIP",
+    "ARCH-TIED_VOCABULARY_LAYERS",
+    "IMPL-TIED_VOCABULARY_REFRESH",
+    "IMPL-TIED_FILES",
+    "REQ-TIED_SETUP"
+  ]
+}

@@ -8,7 +8,30 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import yaml from "js-yaml";
 
-import { verifyMethodologyPseudocodeTokenRefs } from "./verify.mjs";
+import {
+  verifyMethodologyPseudocodeTokenRefs,
+  verifyVocabularyOwnershipMethodology,
+} from "./verify.mjs";
+
+describe("verifyVocabularyOwnershipMethodology [REQ-TIED_VOCABULARY_OWNERSHIP]", () => {
+  it("throws VOCABULARY_OWNERSHIP_GATE_FAILED when a manifest artifact is missing", () => {
+    const tiedDir = fs.mkdtempSync(path.join(os.tmpdir(), "bootstrap-vocab-verify-"));
+    const methodologyDir = path.join(tiedDir, "methodology");
+    fs.mkdirSync(path.join(methodologyDir, "requirements"), { recursive: true });
+    fs.mkdirSync(path.join(methodologyDir, "architecture-decisions"), { recursive: true });
+    fs.mkdirSync(path.join(methodologyDir, "implementation-decisions"), { recursive: true });
+    fs.writeFileSync(
+      path.join(methodologyDir, "requirements", "REQ-TIED_VOCABULARY_OWNERSHIP.yaml"),
+      "REQ-TIED_VOCABULARY_OWNERSHIP:\n  name: stub\n",
+      "utf8",
+    );
+
+    assert.throws(
+      () => verifyVocabularyOwnershipMethodology(tiedDir),
+      /VOCABULARY_OWNERSHIP_GATE_FAILED/,
+    );
+  });
+});
 
 describe("verifyMethodologyPseudocodeTokenRefs [REQ-TIED_SETUP]", () => {
   it("fails deterministically when a sidecar references a missing ARCH token", () => {

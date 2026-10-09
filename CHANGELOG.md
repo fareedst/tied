@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Vocabulary ownership methodology bundle (A4a) ([REQ-TIED_VOCABULARY_OWNERSHIP], [ARCH-TIED_VOCABULARY_LAYERS], [IMPL-TIED_VOCABULARY_REFRESH])** — Promoted REQ/ARCH/IMPL vocabulary stack and sidecar into store `tied-bundle/`, synced bundle `REQ-TIED_SETUP` cross-refs, added `VOCABULARY_OWNERSHIP_METHODOLOGY_REQUIRED_FILES` manifest gate with `verifyVocabularyOwnershipMethodology`, and extended bootstrap E2E assertions. Close-out `run_id=vocab-a4a-close-20261009` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Evidence: [plan-close-out-handoff.md](tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/plan-close-out-handoff.md), [closeout-run-close-out-gates-final.json](tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/closeout-run-close-out-gates-final.json).
+
 - **Post-program hygiene (2026-10-08)** — Adversarial MCP composition tests assert TIED index immutability under `tied-project/` ([REQ-TIED_ADVERSARIAL_INQUIRY], two-folder layout). Vocab link validator ignores in-document `#fragment` anchors ([PROC-VOCABULARY_INDEX]). Removed temporary debug ingest from `claude-adherence-bridge` ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS]). Refreshed adversarial mode-b fixtures, checklist gate fixture `1787603099` regression manifest, JEV context-pruning benchmark, and envelope gap report batch row. Evidence: [post-closeout-hygiene-20261008-evidence.md](tied-project/working/evaluation/post-closeout-hygiene-20261008-evidence.md).
 
 ### Changed
