@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "requirements_updated": 1,
+  "implementation_updated": 2,
+  "requirements_set_implemented": [
+    "REQ-TIED_VOCABULARY_OWNERSHIP"
+  ],
+  "requirements_set_planned": [],
+  "implementation_set_active": [
+    "IMPL-TIED_FILES",
+    "IMPL-TIED_VOCABULARY_REFRESH"
+  ],
+  "implementation_set_planned": [],
+  "yaml_format": {
+    "profile_id": "tied-yaml-canonical-v1",
+    "scalar_style": "wrapped",
+    "style_source": "repository",
+    "recursive_key_order": "case-insensitive-primary locale-independent lexical with original-value tie-break",
+    "ordered_list_key_pattern": "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*",
+    "string_list_rule": "sort all-string lists except ordered-list keys",
+    "record_list_rule": "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
+    "scalar_policy": "preserve string, boolean, number, and null types",
+    "opaque_block_policy": "preserve block-scalar bodies and IMPL pseudo-code sidecars"
+  },
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/gates/verification-2026-10-09T15-37-14-064Z.json",
+    "hash": "sha256:b3a94f89e23faeb017b75a7446ba79e7df1f01493475226002c343c9db57f3fb"
+  }
+}
