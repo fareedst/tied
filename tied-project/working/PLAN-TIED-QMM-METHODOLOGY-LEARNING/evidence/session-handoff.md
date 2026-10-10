@@ -1,19 +1,21 @@
 # session-handoff — PLAN-TIED-QMM-METHODOLOGY-LEARNING
 
-**Updated:** 2026-10-10 — W2 implement complete (traceable-commit `d0e1b99`)
+**Updated:** 2026-10-10 (W3 traceable-commit)  
+**Program phase:** `in_progress` · **`current_wave: W3`** (implement **complete**) · next program wave **W4** when sponsored
 
 ## Resume here
 
-1. **Program:** [`docs/tied-qmm-methodology-learning-plan.md`](../../../docs/tied-qmm-methodology-learning-plan.md) — **current_wave W3** (Kaizen bridge) when sponsor continues
-2. **W2 record:** [`../../REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/PLAN.md`](../../REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/PLAN.md)
-3. **MCP:** `tied_methodology_conformance_effectiveness_pair`
+1. **Program plan:** [`docs/tied-qmm-methodology-learning-plan.md`](../../../docs/tied-qmm-methodology-learning-plan.md) — W4 cohort readouts
+2. **Orchestrator:** [`../qmm-program-execution-checklist.yaml`](../qmm-program-execution-checklist.yaml) — W3 `status: complete`
+3. **REQ close-out record:** [`../../REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/traceable-commit-evidence.md`](../../REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/traceable-commit-evidence.md)
 
-## Delivered (W2)
+## W3 deliverable (committed)
 
-- Pairing module + MCP + CITDP-scoped gate hook
-- Integrated gates: pre_implementation, verification, **close_out** allowed
-- Commit `d0e1b99` with envelope validate (0 blocking gaps) and traceable-commit evidence
+- MCP `tied_methodology_kaizen_experiment_bridge` (draft-only; no store write on bridge)
+- Integrated gates + `tied_verify` on `REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE`
+- `close_out` + envelope validate (`fail_on_error_gaps`: 0 blocking)
 
-## Next (program)
+## Do not
 
-- W3 plan-new-feature when sponsor prioritizes Loop 2 Kaizen bridge
+- Auto-bridge on capture, digest, or `tied_feedback_review_bridge`
+- Write experiments store inside bridge MCP

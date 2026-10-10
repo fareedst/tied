@@ -1419,6 +1419,15 @@ ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
   detail_file: "architecture-decisions/ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml"
   name: "Methodology pairing architecture"
   status: "Accepted"
+ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  cross_references:
+    implementation:
+      - "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    requirements:
+      - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+  detail_file: "architecture-decisions/ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
+  name: "Kaizen methodology bridge architecture"
+  status: "Accepted"
 ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
   detail_file: "architecture-decisions/ARCH-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
   name: "Methodology learning experiment storage"

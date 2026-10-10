@@ -7,7 +7,7 @@
 # W0 is documentation-only. W1 implements the comparison "Strategic suggestion" in full.
 
 schema_version: qmm-program-execution.v1
-last_updated: "2026-10-10T10:50:00-07:00"
+last_updated: "2026-10-10T11:15:00-07:00"
 
 program:
   label: QMM Loop 3 methodology learning (W0–W6)
@@ -31,7 +31,7 @@ program:
 program_phase: in_progress
 # proposed | ready_to_execute | in_progress | closed | paused_sponsor_hinge
 
-current_wave: W2
+current_wave: W3
 
 execution_authority:
   mode: approved_full
@@ -50,12 +50,19 @@ execution_authority:
   w2_plan_only_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-plan-only-20261010.md
   w2_implement_authorized_at: "2026-10-10T10:50:00-07:00"
   w2_implement_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-implement-20261010.md
+  w3_scope: implement
+  w3_plan_only_authorized_at: "2026-10-10T11:10:00-07:00"
+  w3_plan_only_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w3-plan-only-20261010.md
+  w3_implement_authorized_at: "2026-10-10T13:05:00-07:00"
+  w3_implement_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w3-implement-20261010.md
   w0_authority: complete
   pre_approved_hinges:
     storage_shape: compose_existing_stores
     w1_implement_depth_tier: integrated
     w2_implement_depth_tier: integrated
     w2_pairing_enforcement: gate_blocking_verification_close_out_citdp_scoped
+    w3_bridge_trigger: explicit_mcp_only_no_auto_create
+    w3_implement_depth_tier: integrated
     canonical_promotion: leap_plus_sponsor_methodology_change
     cross_client_readout: operator_local_until_owner_named
     kaizen_phase3: deferred
@@ -150,7 +157,7 @@ waves:
 
   W2:
     title: Conformance–effectiveness pairing for methodology changes
-    status: in_progress
+    status: complete
     plan_only_status: complete
     implement_status: complete
     implement_req: REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
@@ -208,9 +215,8 @@ waves:
       - W2 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers
       - successful pre_implementation gate
     notes: >
-      Plan-only complete; w2_scope implement authorized 2026-10-10. Next build-plan: mint REQ stack,
-      integrated CITDP, pass implement pre_implementation, then pairing MCP and CITDP-scoped
-      gate-blocking on verification/close_out. Gate-blocking is costly; must not apply globally.
+      W2 implement complete (2026-10-10). Pairing MCP + CITDP-scoped gate-blocking delivered under
+      REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING. Gate-blocking remains CITDP-scoped only.
     depends_on:
       - W1
     exit_criteria_summary:
@@ -220,11 +226,72 @@ waves:
 
   W3:
     title: Loop 2 Kaizen bridge to Loop 3 experiments
-    status: planned
+    status: complete
+    plan_only_status: complete
+    implement_status: complete
+    implement_req: REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
+    implement_working_entry: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/PLAN.md
     depth_tier_default: integrated
-    child_linked_plan: null
+    gate_policy_default: per_citdp
+    child_linked_plan: docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md
+    child_working_entry: tied-project/working/PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE/PLAN.md
+    child_plan_status: authored
+    documentation_citdp: tied-project/citdp/CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE.yaml
+    future_req: REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
+    plan_only_checklist:
+      - id: w3-child-linked-plan
+        label: Author docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md
+        status: complete
+      - id: w3-working-folder
+        label: Create PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE working folder
+        status: complete
+      - id: w3-plan-citdp
+        label: Persist CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE
+        status: complete
+      - id: w3-plan-only-gate
+        label: Record pre_implementation gate attempt (expect not allowed for RED)
+        status: complete
+      - id: w3-orchestrator-reconcile
+        label: Reconcile W2 complete and W3 plan-only fields
+        status: complete
+    implement_checklist:
+      - id: w3-req-tracker
+        label: Copy fresh Tracker to working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/
+        status: complete
+      - id: w3-req-citdp
+        label: Persist CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE (integrated, per_citdp)
+        status: complete
+      - id: w3-pre-implementation-gate
+        label: pre_implementation allowed on implement CITDP + REQ Tracker
+        status: complete
+        evidence_ref: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/pre_implementation-gate-result.json
+      - id: w3-verification-gate
+        label: verification allowed + tied_verify on implement REQ
+        status: complete
+        evidence_ref: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-gate-result.json
+      - id: w3-close-out-gate
+        label: close_out allowed after traceable-commit
+        status: complete
+        evidence_ref: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/close_out-gate-result.json
+      - id: w3-b1-b3
+        label: TDD batches B1–B3 per child plan §10
+        status: complete
+    entry_requires:
+      - sponsor execution_authority naming W3 scope
+      - W3 child linked plan
+      - W3 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml
+      - W3 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers
+      - successful pre_implementation gate
+    notes: >
+      W3 implement verification closed 2026-10-10 (integrated activation + tied_verify on
+      REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE). close_out and program wave complete pending sponsor
+      traceable-commit. Explicit MCP only — no auto-create on methodology_improvement capture.
     depends_on:
       - W1
+    exit_criteria_summary:
+      - REQ/ARCH/IMPL with bridge tests and integrated gates
+      - Composition proves bridge does not write methodology-experiments.yaml
+      - Demo feedback → bridge → explicit upsert
 
   W4:
     title: Client cohort evidence-chain readouts for methodology experiments
@@ -260,9 +327,5 @@ waves:
     status: deferred
 
 agent_handoff: |
-  Program phase in_progress; current_wave W2. w2_scope implement authorized (2026-10-10).
-  Resume: docs/tied-qmm-w2-conformance-effectiveness-plan.md; implement entry
-  working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/ (create on build-plan).
-  Authority: evidence/sponsor-authority-w2-implement-20261010.md
-  Session handoff: evidence/session-handoff.md
-  Do not start RED until fresh REQ Tracker + integrated implement CITDP pass pre_implementation.
+  Program phase in_progress; W3 complete (2026-10-10 traceable-commit). Next: W4 when sponsored.
+  MCP: tied_methodology_kaizen_experiment_bridge. Session handoff: evidence/session-handoff.md

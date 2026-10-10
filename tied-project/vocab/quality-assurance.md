@@ -74,6 +74,10 @@
 | methodology effectiveness readout | methodology outcome readout, effectiveness evidence | **methodology outcome observation** row plus **proof boundary** for a methodology change; not implied by **gate_decided** alone ([NON_IMPLICATION_RULE]). | `METHODOLOGY_EFFECTIVENESS_READOUT` |
 | conformance–effectiveness pairing | methodology pairing, PAIR conformance effectiveness | Explicit link between conformance and effectiveness artifacts with closed **pairing disposition** (`paired`, `effectiveness_not_measured`, `conformance_only_trap`, `waived`). | `CONFORMANCE_EFFECTIVENESS_PAIRING` |
 | pairing disposition | pairing status, trap disposition | Closed enum on a pairing report determining whether verification/close_out may proceed for CITDP-scoped methodology-surface changes. | `PAIRING_DISPOSITION` |
+| Kaizen → methodology bridge | kaizen experiment bridge, loop2 loop3 bridge | Program label for explicit MCP path from **bridge-eligible feedback** to a **methodology learning experiment draft**; not a second Kaizen program and not auto-bridge on capture. | `KAIZEN_METHODOLOGY_BRIDGE` |
+| bridge-eligible feedback | methodology feedback for bridge | Feedback entry with `type: methodology_improvement` (primary filter); optional **observation kind** allowlist in implement CITDP. | `BRIDGE_ELIGIBLE_FEEDBACK` |
+| explicit bridge invocation | bridge call, manual bridge | Sponsor/agent-initiated MCP call to build a draft; fail-closed when feedback ineligible; distinct from **review bridge** → LEAP. | `EXPLICIT_BRIDGE_INVOCATION` |
+| methodology learning experiment draft | experiment draft, bridge output | In-memory or response payload shaped as **methodology-learning-experiment.v1** without persisting `methodology-experiments.yaml` on bridge invocation. | `METHODOLOGY_LEARNING_EXPERIMENT_DRAFT` |
 
 ## Profile applicability
 

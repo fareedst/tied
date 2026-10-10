@@ -1,0 +1,20 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps",
+    "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/pseudocode-analysis/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.v1.json:IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+    "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json:IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/gates/verification-2026-10-10T20-09-31-095Z.json",
+    "hash": "sha256:4d7e774fa667f699d234711a8e0ffd2ccc8dce59071a1dd887fbc7a402fed5ca"
+  }
+}

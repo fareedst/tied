@@ -114,6 +114,27 @@ export function validateMethodologyLearningExperimentObject(
     pushMissing(diagnostics, "privacy_tier", "privacy_tier");
   }
 
+  const sourceRefs = record.source_feedback_refs;
+  if (sourceRefs !== undefined) {
+    if (!Array.isArray(sourceRefs) || sourceRefs.length === 0) {
+      diagnostics.push({
+        code: "INVALID_INPUT",
+        message: "source_feedback_refs must be a non-empty array when present",
+        path: "source_feedback_refs",
+      });
+    } else {
+      for (let i = 0; i < sourceRefs.length; i++) {
+        if (!nonEmptyString(sourceRefs[i])) {
+          diagnostics.push({
+            code: "INVALID_INPUT",
+            message: "source_feedback_refs entries must be non-empty strings",
+            path: `source_feedback_refs[${i}]`,
+          });
+        }
+      }
+    }
+  }
+
   const outcome = record.methodology_outcome_observation;
   if (outcome !== undefined) {
     if (!isRecord(outcome)) {

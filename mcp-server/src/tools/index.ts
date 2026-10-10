@@ -79,6 +79,7 @@ import { validateStressorResidueRecord } from "../residuality/stressor-residue-v
 import { validateMethodologyLearningExperiment } from "../methodology-learning-experiment/validate.js";
 import { pairFromExperimentId } from "../methodology-conformance-effectiveness-pairing/resolve.js";
 import { pairConformanceEffectiveness } from "../methodology-conformance-effectiveness-pairing/pair.js";
+import { runMethodologyKaizenExperimentBridge } from "../methodology-kaizen-experiment-bridge/bridge.js";
 import {
   listMethodologyLearningExperiments,
   upsertMethodologyLearningExperiment,
@@ -2907,6 +2908,39 @@ export const allTools = [
         ok: false,
         diagnostics: [{ code: "INVALID_INPUT", message: "Provide experiment_id or record" }],
       }, null, 2));
+    },
+  },
+  {
+    name: "tied_methodology_kaizen_experiment_bridge",
+    config: {
+      description:
+        "Explicit Kaizen → methodology bridge: validate bridge-eligible feedback and return a draft methodology-learning-experiment.v1 without writing methodology-experiments.yaml.",
+      inputSchema: z.object({
+        feedback_ids: z.array(z.string()).optional(),
+        observation_group: z.string().optional(),
+        digest: z.record(z.unknown()).optional(),
+        digest_projection_hash: z.string().optional(),
+        production_system_surface: z.string().optional(),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      feedback_ids?: string[];
+      observation_group?: string;
+      digest?: Record<string, unknown>;
+      digest_projection_hash?: string;
+      production_system_surface?: string;
+      base_path?: string;
+    }) => {
+      const report = runMethodologyKaizenExperimentBridge({
+        feedback_ids: args.feedback_ids,
+        observation_group: args.observation_group,
+        digest: args.digest as Parameters<typeof runMethodologyKaizenExperimentBridge>[0]["digest"],
+        digest_projection_hash: args.digest_projection_hash,
+        production_system_surface: args.production_system_surface,
+        base_path: args.base_path,
+      });
+      return textContent(JSON.stringify(report, null, 2));
     },
   },
   {

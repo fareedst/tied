@@ -1647,6 +1647,32 @@ REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
       - "methodology-conformance-effectiveness-pairing.mcp.test.ts"
       - "pair.test.ts"
       - "pairing-gate.test.ts"
+REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
+  name: "Kaizen to methodology experiment bridge"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  satisfaction_criteria:
+    - criterion: "Bridge-eligible feedback mapping"
+      metric: "bridge unit tests pass"
+    - criterion: "Explicit bridge MCP returns draft only"
+      metric: "bridge MCP tests pass"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    implementation:
+      - "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    tests:
+      - "bridge.test.ts"
+      - "methodology-kaizen-experiment-bridge.mcp.test.ts"
 REQ-METHODOLOGY-LEARNING-EXPERIMENT:
   category: "Functional"
   detail_file: "requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"

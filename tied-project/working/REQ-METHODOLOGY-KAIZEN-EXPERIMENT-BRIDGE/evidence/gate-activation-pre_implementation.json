@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+    "project_id": "stdd-mkeb-w3",
+    "run_id": "mkeb-preimpl-20261010",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002"
+    ],
+    "scope_hash": "cd6237d1d4133a6da0def2aa2b5774ded1451ae8c346a86b8a1e7b273581c2a4",
+    "artifact_hashes": {
+      "obligation-report.json": "8e9f8d68e34a01b80accc108d05f52d19666d988ce8b0f4c64501b3b3609252e",
+      "finding-ledger.jsonl": "fe9c7b7242fac50a81ae076ef48612b51123fbd80b20efb9104e7228dfa2641b",
+      "gate-result.json": "9f94840e0cf8cb6fbca65211a78c0c5bae5cea09ca747709aa818c580e8a0da5",
+      "evidence-provenance.json": "4e6f87e8512ffc36b19c3b54fb8ea242f73b3c5f9fd6987fbbb84f64124a0b8f"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "project_id": "stdd-mkeb-w3",
+      "run_id": "mkeb-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "cd6237d1d4133a6da0def2aa2b5774ded1451ae8c346a86b8a1e7b273581c2a4",
+      "hash": "8e9f8d68e34a01b80accc108d05f52d19666d988ce8b0f4c64501b3b3609252e",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "project_id": "stdd-mkeb-w3",
+      "run_id": "mkeb-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "cd6237d1d4133a6da0def2aa2b5774ded1451ae8c346a86b8a1e7b273581c2a4",
+      "hash": "fe9c7b7242fac50a81ae076ef48612b51123fbd80b20efb9104e7228dfa2641b",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "project_id": "stdd-mkeb-w3",
+      "run_id": "mkeb-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "cd6237d1d4133a6da0def2aa2b5774ded1451ae8c346a86b8a1e7b273581c2a4",
+      "hash": "9f94840e0cf8cb6fbca65211a78c0c5bae5cea09ca747709aa818c580e8a0da5",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "project_id": "stdd-mkeb-w3",
+      "run_id": "mkeb-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "cd6237d1d4133a6da0def2aa2b5774ded1451ae8c346a86b8a1e7b273581c2a4",
+      "hash": "4e6f87e8512ffc36b19c3b54fb8ea242f73b3c5f9fd6987fbbb84f64124a0b8f",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+    "project_id": "stdd-mkeb-w3",
+    "run_id": "mkeb-preimpl-20261010",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002"
+    ],
+    "scope_hash": "cd6237d1d4133a6da0def2aa2b5774ded1451ae8c346a86b8a1e7b273581c2a4"
+  },
+  "diagnostics": []
+}

@@ -1,0 +1,164 @@
+{
+  "graph": {
+    "projectId": "stdd-mkeb-w3",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#draft-no-write",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mkeb1",
+          "sourceRevision": "mkeb-src"
+        },
+        "architectureConstraintIds": ["arch-mkeb-bridge"]
+      },
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#explicit-mcp-only",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mkeb2",
+          "sourceRevision": "mkeb-src"
+        },
+        "architectureConstraintIds": ["arch-mkeb-mcp"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-mkeb-bridge",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+          "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#BUILD_EXPERIMENT_DRAFT_FROM_FEEDBACK#mkeb0001"
+        ]
+      },
+      {
+        "id": "arch-mkeb-mcp",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#BUILD_EXPERIMENT_DRAFT_FROM_FEEDBACK#mkeb0001",
+          "kind": "block",
+          "name": "BUILD_EXPERIMENT_DRAFT_FROM_FEEDBACK",
+          "derivation": "content",
+          "revision": "block-rev-mkeb1",
+          "sourceRevision": "mkeb-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+          "kind": "block",
+          "name": "RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE",
+          "derivation": "content",
+          "revision": "block-rev-mkeb2",
+          "sourceRevision": "mkeb-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+          "kind": "block",
+          "name": "MCP_TOOL_SURFACE",
+          "derivation": "content",
+          "revision": "block-rev-mkeb3",
+          "sourceRevision": "mkeb-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-mkeb-unit",
+        "blockId": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.test.ts",
+        "sourceRevision": "mkeb-src"
+      },
+      {
+        "id": "loci-mkeb-mcp",
+        "blockId": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-kaizen-experiment-bridge/methodology-kaizen-experiment-bridge.mcp.test.ts",
+        "sourceRevision": "mkeb-src"
+      },
+      {
+        "id": "loci-mkeb-prod",
+        "blockId": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.ts",
+        "sourceRevision": "mkeb-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-mkeb2",
+    "specification": [
+      {
+        "id": "mkeb-spec-no-store-write",
+        "kind": "behavior",
+        "value": "Bridge MCP returns draft only; methodology-experiments.yaml unchanged on bridge call.",
+        "order": 1
+      },
+      {
+        "id": "mkeb-spec-eligibility",
+        "kind": "behavior",
+        "value": "Only methodology_improvement feedback rows are bridge-eligible; stale digest_projection_hash rejected.",
+        "order": 2
+      },
+      {
+        "id": "mkeb-spec-explicit",
+        "kind": "behavior",
+        "value": "No auto-bridge on capture, digest, or review_bridge; explicit tied_methodology_kaizen_experiment_bridge only.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "mkeb-test-unit",
+        "statementId": "mkeb-spec-eligibility",
+        "kind": "behavior",
+        "value": "bridge.test.ts covers eligibility and stale hash",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mkeb2",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.test.ts"
+        }
+      },
+      {
+        "id": "mkeb-test-mcp",
+        "statementId": "mkeb-spec-no-store-write",
+        "kind": "behavior",
+        "value": "MCP test asserts experiments store unchanged",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mkeb3",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/methodology-kaizen-experiment-bridge.mcp.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "mkeb-prod-bridge",
+        "statementId": "mkeb-spec-no-store-write",
+        "kind": "behavior",
+        "value": "runMethodologyKaizenExperimentBridge read-only stores",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mkeb2",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.ts"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+    "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003"
+  ]
+}

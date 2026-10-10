@@ -1,0 +1,31 @@
+# Non-normative pilot — feedback → bridge draft → explicit upsert (W3 implement tests)
+schema_version: methodology-kaizen-bridge-pilot.v0-draft
+feedback_ref:
+  id: "fb-w3-bridge-pilot-20261010-001"
+  type: methodology_improvement
+  title: "Checklist gate blocks RED before hypothesis declared"
+  description: "Operators skip methodology_hypothesis step; bridge should surface as Loop 3 experiment intent."
+bridge_request:
+  tool: tied_methodology_kaizen_experiment_bridge
+  feedback_ids:
+    - "fb-w3-bridge-pilot-20261010-001"
+  digest_projection_hash: null
+  observation_group: null
+draft_experiment:
+  schema_version: methodology-learning-experiment.v1
+  experiment_id: null
+  source_feedback_refs:
+    - "fb-w3-bridge-pilot-20261010-001"
+  methodology_hypothesis: "Checklist gate blocks RED before hypothesis declared — Operators skip methodology_hypothesis step; bridge should surface as Loop 3 experiment intent."
+  methodology_baseline:
+    metric_rows:
+      - name: bridge_pilot_baseline
+        value: not_measured
+  methodology_outcome_observation: null
+  privacy_tier: operator_local
+  production_system_surface: checklist_step
+  proof_boundary: "Bridge draft only; proves eligibility and field mapping — not hypothesis truth or methodology effectiveness."
+explicit_upsert_after_review:
+  tool: tied_methodology_learning_experiment_upsert
+  pattern_experiment_id: "mle-demo-20261010-001"
+  note: "Caller assigns experiment_id after review; bridge must not write methodology-experiments.yaml."

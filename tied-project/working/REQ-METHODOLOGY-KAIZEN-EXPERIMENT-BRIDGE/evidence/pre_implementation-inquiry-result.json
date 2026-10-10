@@ -1,0 +1,309 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-mkeb-w3",
+    "scope": [
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002"
+    ],
+    "graph": {
+      "projectId": "stdd-mkeb-w3",
+      "nodes": [
+        {
+          "id": "constraint:arch-mkeb-bridge",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-mkeb-mcp",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-mkeb-mcp",
+          "kind": "evidence",
+          "revision": "mkeb-src"
+        },
+        {
+          "id": "evidence:loci-mkeb-prod",
+          "kind": "evidence",
+          "revision": "mkeb-src"
+        },
+        {
+          "id": "evidence:loci-mkeb-unit",
+          "kind": "evidence",
+          "revision": "mkeb-src"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#BUILD_EXPERIMENT_DRAFT_FROM_FEEDBACK#mkeb0001",
+          "kind": "block",
+          "revision": "block-rev-mkeb1"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+          "kind": "block",
+          "revision": "block-rev-mkeb3"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+          "kind": "block",
+          "revision": "block-rev-mkeb2"
+        },
+        {
+          "id": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#draft-no-write",
+          "kind": "criterion",
+          "revision": "criterion-rev-mkeb1"
+        },
+        {
+          "id": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#explicit-mcp-only",
+          "kind": "criterion",
+          "revision": "criterion-rev-mkeb2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#draft-no-write",
+          "to": "constraint:arch-mkeb-bridge",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#explicit-mcp-only",
+          "to": "constraint:arch-mkeb-mcp",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-mkeb-bridge",
+          "to": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#BUILD_EXPERIMENT_DRAFT_FROM_FEEDBACK#mkeb0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-mkeb-bridge",
+          "to": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-mkeb-mcp",
+          "to": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+          "to": "evidence:loci-mkeb-mcp",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+          "to": "evidence:loci-mkeb-prod",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+          "to": "evidence:loci-mkeb-unit",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "3d74f3044931bc8d",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mkeb-spec-eligibility",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.test.ts"
+        },
+        "evidenceRefs": [
+          "mkeb-test-unit"
+        ]
+      },
+      {
+        "id": "46ddb43270641ee0",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "mkeb-spec-eligibility",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "478f616a26e1d7e2",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "mkeb-spec-explicit",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9a04dd9fb335925c",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mkeb-spec-no-store-write",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/methodology-kaizen-experiment-bridge.mcp.test.ts"
+        },
+        "evidenceRefs": [
+          "mkeb-test-mcp"
+        ]
+      },
+      {
+        "id": "9fec5eaa2ae07f5c",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mkeb-spec-no-store-write",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/methodology-kaizen-experiment-bridge.mcp.test.ts"
+        },
+        "evidenceRefs": [
+          "mkeb-test-mcp"
+        ]
+      },
+      {
+        "id": "a13e2a7414eb2bfe",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mkeb-spec-no-store-write",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.ts"
+        },
+        "evidenceRefs": [
+          "mkeb-prod-bridge"
+        ]
+      },
+      {
+        "id": "bc0fd8aeda18a7f9",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "mkeb-spec-explicit",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c86f75dacda74ec0",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mkeb-spec-eligibility",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.test.ts"
+        },
+        "evidenceRefs": [
+          "mkeb-test-unit"
+        ]
+      },
+      {
+        "id": "dbce16f94fbbb8e9",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mkeb-spec-no-store-write",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-kaizen-experiment-bridge/methodology-kaizen-experiment-bridge.mcp.test.ts"
+        },
+        "evidenceRefs": [
+          "mkeb-test-mcp"
+        ]
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003": "REVIEW",
+    "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003",
+      "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "project_id": "stdd-mkeb-w3",
+      "run_id": "mkeb-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope": [
+        "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#RUN_METHODOLOGY_KAIZEN_EXPERIMENT_BRIDGE#mkeb0002",
+        "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE#MCP_TOOL_SURFACE#mkeb0003"
+      ],
+      "scope_hash": "99eb59c61842966cb3ccc430f1e7048fb0e594a1f79d6daf966b938bbc3a8c68",
+      "artifact_hashes": {
+        "obligation-report.json": "8e9f8d68e34a01b80accc108d05f52d19666d988ce8b0f4c64501b3b3609252e",
+        "finding-ledger.jsonl": "fe9c7b7242fac50a81ae076ef48612b51123fbd80b20efb9104e7228dfa2641b",
+        "gate-result.json": "9f94840e0cf8cb6fbca65211a78c0c5bae5cea09ca747709aa818c580e8a0da5",
+        "evidence-provenance.json": "4e6f87e8512ffc36b19c3b54fb8ea242f73b3c5f9fd6987fbbb84f64124a0b8f"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "project_id": "stdd-mkeb-w3",
+        "run_id": "mkeb-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "99eb59c61842966cb3ccc430f1e7048fb0e594a1f79d6daf966b938bbc3a8c68",
+        "hash": "8e9f8d68e34a01b80accc108d05f52d19666d988ce8b0f4c64501b3b3609252e",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "project_id": "stdd-mkeb-w3",
+        "run_id": "mkeb-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "99eb59c61842966cb3ccc430f1e7048fb0e594a1f79d6daf966b938bbc3a8c68",
+        "hash": "fe9c7b7242fac50a81ae076ef48612b51123fbd80b20efb9104e7228dfa2641b",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "project_id": "stdd-mkeb-w3",
+        "run_id": "mkeb-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "99eb59c61842966cb3ccc430f1e7048fb0e594a1f79d6daf966b938bbc3a8c68",
+        "hash": "9f94840e0cf8cb6fbca65211a78c0c5bae5cea09ca747709aa818c580e8a0da5",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "project_id": "stdd-mkeb-w3",
+        "run_id": "mkeb-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "99eb59c61842966cb3ccc430f1e7048fb0e594a1f79d6daf966b938bbc3a8c68",
+        "hash": "4e6f87e8512ffc36b19c3b54fb8ea242f73b3c5f9fd6987fbbb84f64124a0b8f",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  }
+}

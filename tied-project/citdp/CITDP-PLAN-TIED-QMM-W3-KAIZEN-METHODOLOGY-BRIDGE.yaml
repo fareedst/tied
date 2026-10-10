@@ -1,0 +1,108 @@
+CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE:
+  change_definition:
+    current_behavior: "W1 delivers methodology learning experiment records and MCP upsert/list; Kaizen capture and digest exist but no explicit bridge from methodology_improvement feedback to experiment drafts."
+    desired_behavior: "W3 child linked plan, working folder, plan-only Tracker, and documentation CITDP define RESOLVE, explicit MCP bridge contract (draft-only, no store write on bridge), field mapping, test strategy, and implement handoff that forbids inheriting minimal depth."
+    non_goals:
+      - "Application code, automated tests, or MCP runtime changes"
+      - "Auto-bridge on capture, digest, or review_bridge"
+      - "Editing tied-bundle methodology YAML"
+      - "Git stage, commit, or push unless sponsor plan-close-out"
+      - "New project REQ, ARCH, or IMPL records or semantic tokens"
+    success_criteria:
+      - "Child plan docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md contains sections 0-13 including bridge path table and implement batches."
+      - "CITDP persisted with tied_tokens_new empty."
+      - "Explicit-trigger policy documented; bridge does not write methodology-experiments.yaml."
+      - "Implement section records REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE must not inherit this pass minimal depth."
+      - "Orchestrator records W3 plan-only fields and W2 complete; current_wave W3 after plan-only exit."
+    unchanged_behavior: "Kaizen capture/digest/review_bridge/outcome loop, W1 experiment MCP, W2 pairing MCP, and LEAP queue keep current behavior."
+  evidence:
+    commands:
+      - "Read-only review of child plan against parent program W3 section"
+      - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
+    manifest_reference: null
+    proof_boundaries:
+      - "docs_and_working_folder_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code in scope. Neighborhood read included feedback.ts, feedback-analysis.ts, methodology-learning-experiment modules read-only."
+    modules_or_boundaries: "Child linked plan, committed working folder, documentation CITDP, program orchestrator W3 fields."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "not_measured"
+    recorded_at: "2026-10-10"
+    title: "QMM W3 Kaizen methodology bridge child linked plan (plan-only)"
+  risk_analysis:
+    abuse_cases: []
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Silent auto-bridge on methodology_improvement capture promotes unreviewed experiments."
+        - "Bridge write on invocation duplicates or bypasses W1 upsert idempotency."
+        - "Plan-only w3_scope misread as implement authorization."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any edit under mcp-server/src/methodology-kaizen-experiment-bridge in this pass."
+        - "Any new REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE index row created in this pass."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md"
+        - "tied-project/working/PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE/evidence/resolve-evidence.md"
+        - "tied-project/working/PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE/evidence/risk-assessment-evidence.md"
+      falsification_questions:
+        - "Does any sentence authorize auto-bridge on capture or review_bridge?"
+        - "Does the child plan forbid inheriting minimal depth into implement?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Plan-only documentation pass. Implement pass with persistence/MCP must select integrated depth again."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Read-only plan and working folder review"
+        evidence_method: "Committed process evidence"
+        limitation: "Does not prove bridge MCP or draft mapping correctness."
+        owner: "agent"
+        rationale: "Deliverable is child plan and documentation CITDP."
+        result: "pass"
+        risk: "Authority misread as implement"
+        threshold: "No new REQ/ARCH/IMPL tokens; bridge contract documented"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: false
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-10"
+      owner: "next W3 implement build-plan session"
+      summary: "Implement must affirm explicit-trigger hinge and pass pre_implementation before RED."
+    risks:
+      - "Auto-hook regression on Kaizen paths if bridge wired globally."
+      - "Minimal depth copied into REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE CITDP."
+      - "Stale digest hash accepted without rejection in implement."
+    scenarios:
+      - "Unreviewed experiment promotion via bridge write"
+      - "Depth inheritance into MCP change"
+      - "Documentation-only proof boundary"
+  sponsor_decisions:
+    bridge_trigger_default: "explicit_mcp_only_no_auto_create"
+    recorded_at: "2026-10-10"
+    summary: "Sponsor confirmed explicit MCP bridge only; future REQ slug REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE."
+    w3_implement_depth_default: "integrated"
+    w3_mode: "plan_only"
+  test_strategy:
+    matrix_notes: "Static documentation checks only. Implement matrix in child plan section 5."
+    summary: "Verify bridge path table, field mapping §0.3, and empty token delta. No application tests in plan-only pass."

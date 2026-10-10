@@ -1580,6 +1580,15 @@ IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
       - "methodology-conformance-effectiveness-pairing.mcp.test.ts"
       - "pair.test.ts"
       - "pairing-gate.test.ts"
+IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  cross_references:
+    architecture:
+      - "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    requirements:
+      - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+  detail_file: "implementation-decisions/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
+  name: "Kaizen methodology bridge implementation"
+  status: "Active"
 IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
   detail_file: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
   essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md"

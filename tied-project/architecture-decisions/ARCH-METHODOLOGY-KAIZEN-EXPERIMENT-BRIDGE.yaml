@@ -1,0 +1,15 @@
+ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+    consequences:
+      negative:
+        - "Extra step before upsert"
+      positive:
+        - "Explicit sponsor/agent trigger"
+    cross_references:
+      implementation:
+        - "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+      requirements:
+        - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    decision: "Read-only bridge module plus MCP tied_methodology_kaizen_experiment_bridge; compose feedback store and W1 validate/upsert; no auto-hook on capture or review_bridge."
+    name: "Kaizen methodology bridge architecture"
+    status: "Accepted"

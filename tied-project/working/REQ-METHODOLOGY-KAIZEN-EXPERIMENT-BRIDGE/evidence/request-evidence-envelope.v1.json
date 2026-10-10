@@ -1,0 +1,638 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-10T20:15:04.550Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "integrated",
+    "gate_policy": "per_citdp",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:8580e536200039f308c3d87ea497428a24fc8c86f1c4aff76ef265df9c5c4139",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:8580e536200039f308c3d87ea497428a24fc8c86f1c4aff76ef265df9c5c4139",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:8580e536200039f308c3d87ea497428a24fc8c86f1c4aff76ef265df9c5c4139",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "content_hash": "sha256:3809266e00764fdc3ba61a99edaf1ec93881544e006c9332e968c10a975767e7",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:3809266e00764fdc3ba61a99edaf1ec93881544e006c9332e968c10a975767e7",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:3809266e00764fdc3ba61a99edaf1ec93881544e006c9332e968c10a975767e7",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:8e9f8d68e34a01b80accc108d05f52d19666d988ce8b0f4c64501b3b3609252e",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:8e9f8d68e34a01b80accc108d05f52d19666d988ce8b0f4c64501b3b3609252e",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:8e9f8d68e34a01b80accc108d05f52d19666d988ce8b0f4c64501b3b3609252e",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:6f1a61fc534fe8fe3cc79e4486abe33e7389eac45ddd1005da74892d57c4088f",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:4e6f87e8512ffc36b19c3b54fb8ea242f73b3c5f9fd6987fbbb84f64124a0b8f",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:ea695df677a8a9cd2898030809ff48d85cdfcd908dbda61078d012dc4c03c887",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:673877b34c4d9a9c1a946d3995a59caba888a2c549214d35894080fb02b7f7b1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "pseudocode_analysis_report",
+      "schema_version": "pseudocode-analysis-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/pseudocode-analysis/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.v1.json",
+      "content_hash": "sha256:472e224734477cd7dabecd6495a240337aa95141ca405cc376a4010423c309e7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ]
+    },
+    {
+      "kind": "pseudocode_analysis_report",
+      "schema_version": "pseudocode-analysis-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json",
+      "content_hash": "sha256:fc1a94eda0e205662a80250996f4e8eab6c590c3bb592f2bcb4b9b8c05f46fb1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:ac98a6cb2c2e5714ee258f50e51f011b5a3ea8ac7c893996890ed62ca41ec0de",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:2694192364ec36e4a835c9b8f1585e66050659d2bf0b5e891456ebe6f674ac6a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:fed6c5904042bd499b006067c8581ee622e4de666c7ec295dcdd47418a1f333b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:73ecdffdf5ea808f5fa4e048748ed488f15f3872e097b8c263f2485412c7df72",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/bootstrap-tracker.mjs",
+      "content_hash": "sha256:1b834ea0fd0967531b5a3e6a040dbdc1a9c7a70c8fa20d96997fd21549953d7e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:ca9a13c631fc50a49699badf739e62d82e0d2747f86d1a6e4fd555fb79734cdd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:e906d6428cf51e6d75688a56066b21df5ce812e701e685f43d92bfd3e4083194",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/close_out-gate-result.json",
+      "content_hash": "sha256:dbebef845852a20066bf950a5a2d25147a3964eb9345a89ba944c871e87ef14b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/close_out-inquiry-result.json",
+      "content_hash": "sha256:99e5d8a51e539e5253eefb9c79bce83ffef920f34477abc0176a45f795bf4752",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:6b37ce2e83e98b5bbdf7905ad7af2c10a8a214c2aeb7e3043990220e815e10e3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/finalize-verification-prep.mjs",
+      "content_hash": "sha256:dedc1fbcb3622686b1bfae4d80d32d92dbc81b47425ea043a6d482b5228fe7ba",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/gate-activation-close_out.json",
+      "content_hash": "sha256:35b3a4350d00ad1be9cc17ffdf038c5b59a789429a255934b2a943bb106e784f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/gate-activation-pre_implementation.json",
+      "content_hash": "sha256:dbac74eb3585b8072f43800168f42290d76a5d7b28e4d9989738d337bac608ae",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/gate-activation-verification.json",
+      "content_hash": "sha256:871fa1ca2c00ff0317f161c87f812128586227d9362daece37c54de58bc3e0cb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:9b417ddcc817cd22830ae456212a22f6eca4da7fbc97040e71c2cd21ad0285eb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:4dd1f20a7fc4e60bfb9941ec6f1953bf9d79954008edfafec72fec979e17de8f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:37aa3f428c748d3f02473a9dc79f13d8b1ae677eca38516e471d6ec58f484b86",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:194de0d07ae244bc9bd001fa84b198f4d8929deec1b9eccc939d6262eafc3eea",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:066afb9592b84a8bb8aeacd71ad92535519849688ef7665d312a7275b0a3356d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/pre_implementation-inquiry-result.json",
+      "content_hash": "sha256:bf68d44b13cc8387f4ef214c0610158046bc993434677124545f360098af7b58",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/pre-implementation-inquiry-payload.json",
+      "content_hash": "sha256:d0f0d7e10a77e5db148d878f8498ff07d6267589454946b4becb3cd04ede42a0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:3c767026ba100928692af7e0c63840cf9d494a0e1c9d89f2c53ea3e6e1744dfe",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:1bb2f016a79a2281fd0c155604a6d746c4e1eec74543f0bce9a2cb9031a57a39",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/run-activation-gates.mjs",
+      "content_hash": "sha256:5793994702cda8eda116ff378ed0ee2d683efd9c10a0f9203d74e75cdb3fbd5d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/run-close-out-gate.mjs",
+      "content_hash": "sha256:8a9c5b43bcf892cfa85d38356620341c592bba1c4730804ac5f9263b999b6cd3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/run-verification-gate-only.mjs",
+      "content_hash": "sha256:518c86a403baf5fc9ede3b93a44ba151b7bfd9a088ed09c1be3a6937da858888",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:3befa27b7d60111a63e7139a7d4a4988b0aa20f1a0279a61d99b0213688e0dcd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:b3b61abf761d60f928bc42ac2d195bd802c6def751e83797c9cad888acc77778",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:aa0459dee655eb3fd190b35de622c3f29c7d79e59fa39235c8a7df0e554cde80",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:163c094b9dc848259d0f549828a2d61ac580eb9dc7a5eebc1610e8fc12886276",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/tied-verify-result.json",
+      "content_hash": "sha256:d05b668b6907294fbeff62f64926a331b7b8e7b86c2a0587d9359132c121b884",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:b95c893cc97715a7db6179b3db2edf86e21da11c45c48ba239fdb7c7149e8a1b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:9224af5c3520dd3545fabb8d5321854e839e4d896fd381f80ffbc7781d8df450",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:116185956f4bfc6ef588f00642cbde6a355b6202277bbba3602be41a1576b4ab",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:f337fe5a3f96cf574b713c1832b20e5d3f444591bda930ca23bdad24fbd7bcae",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:1dd63ca2db7e1181a52a3169149bd8648b3665f935f89a4a3854c575a1ec95bd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-gate-result.json",
+      "content_hash": "sha256:bf3c34613b445cb115e4566cb5fa2a314f3c3163372736bc745898c0d32a634a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-inquiry-result.json",
+      "content_hash": "sha256:7269a803789d3864006ea46245ab2e0060617b6ed19397e567c423548109aaa5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:6bdca6f7a7acf79ff6f04b681895af58a3d6689544c9516eb29a263bc3e9f492",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": []
+}

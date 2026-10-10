@@ -1,0 +1,69 @@
+CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  change_definition:
+    current_behavior: "Kaizen feedback and W1 experiments coexist without explicit bridge from methodology_improvement to experiment drafts."
+    desired_behavior: "MCP tied_methodology_kaizen_experiment_bridge returns validated draft shape; no store write on bridge; optional source_feedback_refs on v1 records."
+    non_goals:
+      - "Auto-bridge on capture, digest, or review_bridge"
+      - "Bridge writing methodology-experiments.yaml"
+      - "tied-bundle edits"
+    success_criteria:
+      - "bridge.test.ts and methodology-kaizen-experiment-bridge.mcp.test.ts green"
+      - "Composition proves experiments file unchanged on bridge call"
+      - "Explicit upsert path documented in MCP test"
+    unchanged_behavior:
+      - "Kaizen capture/digest/review_bridge"
+      - "W2 pairing MCP"
+  impact_analysis:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    files:
+      - "mcp-server/src/methodology-kaizen-experiment-bridge/"
+      - "mcp-server/src/methodology-learning-experiment/validate.ts"
+      - "mcp-server/src/tools/index.ts"
+    tied_tokens_new:
+      - "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+      - "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+      - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+  record_identity:
+    author: "build-plan"
+    change_request_id: "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    date: "2026-10-10"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    implementation_depth_tier: "integrated"
+    prior_depth_tier: "minimal"
+    profile_depth: "integrated"
+    record_status: "implementation"
+    title: "W3 Kaizen methodology experiment bridge implement"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Bridge writes experiment store on invocation"
+        - "Auto-hook on methodology_improvement capture"
+        - "Stale digest hash accepted"
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "mcp_write_surface"
+        - "external_input"
+      gate_policy: "per_citdp"
+      prior_depth_tier: "minimal"
+      rationale: "New MCP surface reading feedback store; explicit external input boundary."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "completed"
+    quality_profiles:
+      - "baseline-functional"
+      - "external-input-security"
+    risks:
+      - description: "Silent auto-bridge regression"
+        id: "RISK-MKEB-001"
+        likelihood: "Low"
+        mitigation: "Composition test asserts store unchanged"
+        severity: "High"
+  sponsor_decisions:
+    bridge_trigger: "explicit_mcp_only_no_auto_create"
+    w3_implement_depth_tier: "integrated"
+  test_strategy:
+    matrix_notes: "Unit plus MCP composition; no E2E UI."
+    summary: "Eligibility, draft mapping, stale hash, no store write, explicit upsert compose."
