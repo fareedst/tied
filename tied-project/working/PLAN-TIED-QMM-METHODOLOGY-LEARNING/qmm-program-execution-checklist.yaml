@@ -152,7 +152,7 @@ waves:
     title: Conformance–effectiveness pairing for methodology changes
     status: in_progress
     plan_only_status: complete
-    implement_status: authorized
+    implement_status: complete
     implement_req: REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
     implement_working_entry: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/PLAN.md
     depth_tier_default: integrated

@@ -22,4 +22,6 @@
 
 ## Commit
 
-*(Updated after `git commit` below.)*
+**Commit:** `d0e1b99` — feat(tied): deliver QMM W2 conformance–effectiveness pairing stack (74 files).
+
+Excluded from commit: `tmp/w2-*-token.json` (local MCP token scratch).
