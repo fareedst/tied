@@ -33,6 +33,7 @@ import {
   verifyFidelityMethodology,
   verifyAdversarialInquiryMethodology,
   verifyVocabularyOwnershipMethodology,
+  verifyPromptTypeMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
   verifyMethodologyPseudocodeTokenRefs,
@@ -260,6 +261,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   verifyFidelityMethodology(tiedDir, tiedBasePathValue, tiedCliDest);
   verifyAdversarialInquiryMethodology(tiedDir);
   verifyVocabularyOwnershipMethodology(tiedDir);
+  verifyPromptTypeMethodology(tiedDir);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
   verifyInheritedDetailFiles(tiedDir, paths.INHERITED_DETAIL_REQUIRED);
   verifyMethodologyPseudocodeTokenRefs(tiedDir);

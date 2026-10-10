@@ -10,8 +10,24 @@ import yaml from "js-yaml";
 
 import {
   verifyMethodologyPseudocodeTokenRefs,
+  verifyPromptTypeMethodology,
   verifyVocabularyOwnershipMethodology,
 } from "./verify.mjs";
+
+describe("verifyPromptTypeMethodology [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE]", () => {
+  it("throws PROMPT_TYPE_GATE_FAILED when a manifest artifact is missing", () => {
+    const tiedDir = fs.mkdtempSync(path.join(os.tmpdir(), "bootstrap-prompt-verify-"));
+    const methodologyDir = path.join(tiedDir, "methodology");
+    fs.mkdirSync(path.join(methodologyDir, "requirements"), { recursive: true });
+    fs.writeFileSync(
+      path.join(methodologyDir, "requirements", "REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"),
+      "REQ-PROMPT_TYPE_GLOBAL_SKILLS:\n  name: stub\n",
+      "utf8",
+    );
+
+    assert.throws(() => verifyPromptTypeMethodology(tiedDir), /PROMPT_TYPE_GATE_FAILED/);
+  });
+});
 
 describe("verifyVocabularyOwnershipMethodology [REQ-TIED_VOCABULARY_OWNERSHIP]", () => {
   it("throws VOCABULARY_OWNERSHIP_GATE_FAILED when a manifest artifact is missing", () => {

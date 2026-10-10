@@ -1,0 +1,333 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-09T16:39:31.858Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
+  },
+  "identity": {
+    "request_token": "REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "standard",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:6e79bd2da0d7a0f886efae98b643fdef53206368b13fd68135415a6bc8fb0c9c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/citdp/CITDP-REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE.yaml",
+      "content_hash": "sha256:499b628cff835553819dd056045f3289956c75b6598a7291de172cd2b1fb2fe2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/CITDP-REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE.yaml",
+      "content_hash": "sha256:ce8c939aaedf88dc08e4499e446cb5d1929884b3c1ad7f032ee986c13639c749",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:02d9fd5051b70da2f7aa6ce8f0b8183f3b34c10783fa98fa343991e4afed3162",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:63bccbbe1ce70217e626d3d8b0c905a039d152b48c1f06dbdec36d8c24fd8e93",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/bootstrap-unit-test.stdout.txt",
+      "content_hash": "sha256:710f65689e1c30c4336a93a88d36b526a3ec1b2e302912d4330cbfb19dd09ab6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:d244d3cffb9f8423b998f222a30c00f21a13abede1b53acd72c4f5fd0e9e1ac5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/closeout-run-close-out-gates.json",
+      "content_hash": "sha256:c16adcb62f699849c321671acea67ddb05e5ef017edc159dbc1451376eab83f7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:f9516160f01c313bd654da4f013023afdd335d4d3ece2dd065a9b46e64d7cbc8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:f7237114748ffd3785cd11ecdfe127745a7302ebee6a7ff2a98e8f5f96ee5a54",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:53c740d7bbd3e86bf52b636f059ab79a08ff9824e9209f2ec338ba2f40267e8d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:cc6d49293b878871a6e2558e0c729f33c4de64a661149fb786670acf5c2936b8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/npm-test.stdout.txt",
+      "content_hash": "sha256:dc95ff62ff4d215d9ca4d6f786d6c7184a3c1ebd33c03132c2fd87e967aca6a9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "parity-a-store-self-check.v1",
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/parity-a-report.json",
+      "content_hash": "sha256:d7bf73f52340a95898293b1b8cadf17782fdfc2b19bce4f8fd63a8dc51a78ca5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:3a98acb7aac047375c4c57678913adf0526e04277b0c73fa64c55da93b335975",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:7950bbcc3b78eeb3a2aee93bd4889cac12a4274aeffa42cdac7dba4b51b297cd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:4dce4aaa72815dd7403615c73edfe23f4d0e5083cee117e1fb8845d48d33e9d5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:fefdb245645947de6678e21e98dde18876220313061757836ab0591ba036bf9c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:8baf6949e7d7a5187d74e644386883b2bec9f59ab65689ced5e9c6e3d60b6945",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:3fc11327c173753454f232fdefa77dabc0771472d7b481fd3df4efcefa982681",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:01dfe457d333de3392530dafbb1ace4659a96bdcb15b786dfe128dc9260d8ead",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/tied-validate-consistency-summary.json",
+      "content_hash": "sha256:5113be93e92ede33b9dd21989136f09af5e04752a5a8c637cf8b9afc7058ca71",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:bb8729c48ee205f95c1095b1b08abdf0507a05ffa6182d846c98e58c2c783509",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:b85d6b427c097eee176986d92d6d24497feec6632979263c87319aad203eff8c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:eb00f362c881f930f0b999ed1da6db9b0552a6bfaf72e5ed295fd309401ade37",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:a094f2924e7b5b1b8d6c18eefb7a42221e5c2ba4bc29460763b8e490117dcd4a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:92da0f17340a8811dae35b0c25e812ab6f77e3ebcabd79fd871282a6745ce906",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:9df3b5f58a34f3b99aa27b5c4beec8d0566504e768316c317cc915686e092b8f",
+    "citdp_path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/CITDP-REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

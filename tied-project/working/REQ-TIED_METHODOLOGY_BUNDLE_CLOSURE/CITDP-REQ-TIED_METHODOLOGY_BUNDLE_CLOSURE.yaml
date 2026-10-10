@@ -1,0 +1,79 @@
+CITDP-REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
+  change_definition:
+    current_behavior_prior: "After A4a vocabulary promotion, fleet clients still fail tied_validate_consistency when merged methodology detail YAML references tokens absent from shipped tied-bundle indexes (REQ-PROMPT_TYPE_GLOBAL_SKILLS; IMPL-FEAT_ORCHESTRATION_COMMANDS). ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET detail exists under tied-bundle/ without an architecture index row."
+    desired_behavior: "Promote GLOBAL and SUBAGENT prompt-type R+A+I stacks into tied-bundle/, index ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET, LEAP-trim non-methodology FEAT see_also from IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT, and enforce a manifest-driven bootstrap gate plus a minimal-client consistency regression test."
+    non_goals:
+      - "Hand-edit client tied-bundle/ after refresh"
+      - "Mirror promoted tokens into client tied-project/requirements/"
+      - "Promote Batch FEAT lifecycle tokens into methodology"
+    success_criteria:
+      - "Minimal-client fixture (empty project indexes + live tied-bundle): validateConsistency ok true with zero methodology detail ref_issues"
+      - "Parity A matched for eight promoted relative paths"
+      - "PROMPT_TYPE_METHODOLOGY_REQUIRED_FILES manifest + verifyPromptTypeMethodology wired like vocabulary ownership"
+    unchanged_behavior:
+      - "Client project YAML remains store-free of fleet-only tokens"
+      - "Store merged view tied_validate_consistency remains ok true"
+  leap_feedback:
+    divergences_from_analysis: "Checklist gate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT see_also referenced IMPL-FEAT_ORCHESTRATION_COMMANDS as methodology-adjacent; close-out LEAP-trimmed that cross-ref in bundle and project rather than promoting the FEAT orchestration stack. A4b promoted eight prompt-type R+A+I artifacts into tied-bundle/, indexed ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET, added PROMPT_TYPE_METHODOLOGY_REQUIRED_FILES / verifyPromptTypeMethodology (parallel to A4a vocabulary manifest), methodology-bundle-consistency.test.ts for detail-ref walk, and IMPL-TIED_FILES VERIFY_PROMPT_TYPE_METHODOLOGY pseudo-code block for bootstrap call order. A4a sidecar note: vocabulary ownership pseudo-code remains authoritative for seed/refresh; prompt-type promotion does not duplicate that narrative."
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT see_also trim (bundle + project)"
+      - "IMPL-TIED_FILES essence_pseudocode VERIFY_PROMPT_TYPE_METHODOLOGY"
+      - "tied-bundle/ prompt-type detail files and index rows (git add -f)"
+      - "tools/bootstrap manifest + verify.mjs PROMPT_TYPE gate"
+  record_identity:
+    change_request_id: "REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_step_completed: "persist-citdp-record"
+    recorded_at: "2026-10-09"
+    title: "A4b methodology bundle reference closure"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  record_status: "complete"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Index rows copy store-fleet cross_references and reintroduce client failures"
+        - "Promoting IMPL-FEAT_ORCHESTRATION_COMMANDS into methodology instead of trimming see_also"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "A4a vocabulary rows already present in tied-bundle/requirements.yaml"
+        - "Pre-promote repro: empty project indexes + TIED_METHODOLOGY_BUNDLE_PATH=tied-bundle yields exactly two detail ref_issues"
+      evidence_references:
+        - "mcp-server/src/consistency-validator.ts"
+        - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+        - "mcp-server/src/e2e/methodology-bundle-consistency.test.ts"
+        - "tools/bootstrap/lib/verify.mjs"
+      falsification_questions:
+        - "Does bootstrap pass when a manifest-listed prompt-type sidecar is deleted?"
+        - "Does minimal-client validateConsistency still report detail ref_issues after promotion?"
+      gate_policy: "standard"
+      profile_depth: "minimal"
+    consequence_ladder:
+      costly:
+        - "Promoting entire FEAT orchestration stack into methodology — rejected; use see_also trim"
+      reversible:
+        - "Add ARCH-BBCE index row only"
+        - "Copy prompt-type detail files and index rows from tied-project into tied-bundle"
+        - "Remove IMPL-FEAT_ORCHESTRATION_COMMANDS from checklist gate see_also (bundle + project)"
+  test_strategy:
+    evidence_results:
+      - artifact: "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/bootstrap-unit-test.stdout.txt"
+        command: "node --test tools/bootstrap/lib/verify.test.mjs"
+        result: "pass"
+      - artifact: "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/closeout-run-close-out-gates-final.json"
+        command: "run-close-out-gates.mjs --phase close_out"
+        result: "merged_decision.allowed=true"
+      - artifact: "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/npm-test.stdout.txt"
+        command: "npm test --prefix mcp-server"
+        result: "pass (1513/1513)"
+      - artifact: "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/tied-validate-consistency-summary.json"
+        command: "tied_validate_consistency"
+        result: "ok true"
+    green:
+      - "npm test --prefix mcp-server (1513 pass); node --test tools/bootstrap/lib/verify.test.mjs"
+      - "Parity A store self-check: eight promoted paths matched (parity-a-report.json)"
+      - "tied_validate_consistency on store + minimal fixture ok true"
+    red_first:
+      - "bootstrap-and-load.test.ts: assert REQ/ARCH/IMPL PROMPT_TYPE_* keys in installed bundle indexes"
+      - "mcp-server e2e: minimal-client validateConsistency fails with exactly two detail ref_issues before promote"
+      - "verify.test.mjs: missing one PROMPT_TYPE manifest path throws PROMPT_TYPE_GATE_FAILED"

@@ -1,208 +1,273 @@
 REQ-EVIDENCE_CHAIN_PROFILE:
-  category: "Functional"
-  description: "Produce a versioned read-only evidence-chain-profile.v1 artifact that reports completeness, provenance, denominators, and proof boundaries."
-  detail_file: "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml"
-  name: "Evidence chain profile"
-  priority: "P1"
+  category: Functional
+  description: Produce a versioned read-only evidence-chain-profile.v1 artifact that reports completeness, provenance, denominators,
+    and proof boundaries.
+  detail_file: requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml
+  name: Evidence chain profile
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-      - "REQ-TIED_FIDELITY_RESEARCH"
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - REQ-TIED_FIDELITY_RESEARCH
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-EVIDENCE_CHAIN_PROFILE"
+    - ARCH-EVIDENCE_CHAIN_PROFILE
     implementation:
-      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - IMPL-EVIDENCE_CHAIN_PROFILE
 REQ-FEEDBACK_TO_TIED:
-  category: "Functional"
-  detail_file: "requirements/REQ-FEEDBACK_TO_TIED.yaml"
+  category: Functional
+  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-  name: "Feedback to TIED (Feature Requests, Bug Reports, Methodology)"
-  priority: "P1"
+      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
+  priority: P1
   related_requirements:
     depends_on: []
     related_to:
-      - "REQ-TIED_SETUP"
+    - REQ-TIED_SETUP
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-FEEDBACK_STORAGE"
+    - ARCH-FEEDBACK_STORAGE
     implementation:
-      - "IMPL-MCP_FEEDBACK_TOOLS"
+    - IMPL-MCP_FEEDBACK_TOOLS
 REQ-MODULE_VALIDATION:
-  category: "Functional"
-  detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
+  category: Functional
+  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-  name: "Independent Module Validation Before Integration"
-  priority: "P0"
+      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+  name: Independent Module Validation Before Integration
+  priority: P0
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+    - REQ-TIED_SETUP
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-MODULE_VALIDATION"
+    - ARCH-MODULE_VALIDATION
     implementation:
-      - "IMPL-MODULE_VALIDATION"
+    - IMPL-MODULE_VALIDATION
 REQ-QUALITY_ASSURANCE_EVIDENCE:
-  category: "Non-Functional"
+  category: Non-Functional
   cross_references:
-    - "ARCH-QUALITY_ASSURANCE_PROFILES"
-    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
-  description: "Every behavior-changing change selects applicable quality attributes from a bounded risk profile and records reproducible evidence, limitations, and accepted residual risk without imposing irrelevant checks."
-  detail_file: "requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml"
-  name: "Risk-triggered quality assurance evidence"
-  priority: "P0"
+  - ARCH-QUALITY_ASSURANCE_PROFILES
+  - IMPL-QUALITY_EVIDENCE_MANIFEST
+  description: Every behavior-changing change selects applicable quality attributes from a bounded risk profile and records
+    reproducible evidence, limitations, and accepted residual risk without imposing irrelevant checks.
+  detail_file: requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml
+  name: Risk-triggered quality assurance evidence
+  priority: P0
   related_requirements:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
-      - "REQ-TIED_SETUP"
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_SETUP
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - ARCH-QUALITY_ASSURANCE_PROFILES
     implementation:
-      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+    - IMPL-QUALITY_EVIDENCE_MANIFEST
 REQ-TIED_ADVERSARIAL_INQUIRY:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
-    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
-    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
-  description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."
-  detail_file: "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
+  - ARCH-TIED_ADVERSARIAL_INQUIRY
+  - IMPL-TIED_ADVERSARIAL_INQUIRY
+  - IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
+  description: Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural
+    presence as semantic or runtime proof.
+  detail_file: requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed for bounded adversarial inquiry and fidelity evidence"
-  name: "Adversarial inquiry for obligation and fidelity evidence"
-  priority: "P0"
+      reason: Methodology seed for bounded adversarial inquiry and fidelity evidence
+  name: Adversarial inquiry for obligation and fidelity evidence
+  priority: P0
   related_requirements:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-      - "REQ-TIED_FIDELITY_RESEARCH"
+    - REQ-MODULE_VALIDATION
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - REQ-TIED_FIDELITY_RESEARCH
     related_to:
-      - "REQ-TIED_SETUP"
+    - REQ-TIED_SETUP
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - ARCH-TIED_ADVERSARIAL_INQUIRY
     implementation:
-      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
-      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    - IMPL-TIED_ADVERSARIAL_INQUIRY
+    - IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
-  category: "Tooling"
+  category: Tooling
   cross_references:
-    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
-  detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
+  - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+  detail_file: requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed for shared checklist evidence gate (composed_with sponsor-agent hinge validation)"
-  name: "Machine-enforced checklist evidence gates"
-  priority: "P1"
+      reason: Methodology seed for shared checklist evidence gate (composed_with sponsor-agent hinge validation)
+  name: Machine-enforced checklist evidence gates
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - REQ-TIED_ADVERSARIAL_INQUIRY
     related_to:
-      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
     supersedes: []
-  status: "Active"
+  status: Active
   traceability:
     architecture:
-      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
     implementation:
-      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
 REQ-TIED_FIDELITY_RESEARCH:
-  category: "Functional"
-  detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"
+  category: Functional
+  detail_file: requirements/REQ-TIED_FIDELITY_RESEARCH.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed for read-only fidelity and defect-origin research; procedure: tied/docs/tied-fidelity-research.md"
-  name: "TIED Fidelity Research"
-  priority: "P1"
+      reason: 'Methodology seed for read-only fidelity and defect-origin research; procedure: tied/docs/tied-fidelity-research.md'
+  name: TIED Fidelity Research
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
-      - "REQ-TIED_SETUP"
+    - REQ-MODULE_VALIDATION
+    - REQ-TIED_SETUP
     related_to:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_FIDELITY_RESEARCH"
+    - ARCH-TIED_FIDELITY_RESEARCH
     implementation:
-      - "IMPL-TIED_FIDELITY_RESEARCH"
+    - IMPL-TIED_FIDELITY_RESEARCH
 REQ-TIED_SETUP:
-  category: "Functional"
+  category: Functional
   cross_references:
-    - "ARCH-TIED_STRUCTURE"
-    - "ARCH-TIED_VOCABULARY_LAYERS"
-    - "IMPL-TIED_FILES"
-    - "IMPL-TIED_VOCABULARY_REFRESH"
-  description: "Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership."
-  detail_file: "requirements/REQ-TIED_SETUP.yaml"
+  - ARCH-TIED_STRUCTURE
+  - ARCH-TIED_VOCABULARY_LAYERS
+  - IMPL-TIED_FILES
+  - IMPL-TIED_VOCABULARY_REFRESH
+  description: Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership.
+  detail_file: requirements/REQ-TIED_SETUP.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed; layered vocabulary ownership and refresh behavior"
-  name: "TIED Methodology Setup"
-  priority: "P0"
+      reason: Methodology seed; layered vocabulary ownership and refresh behavior
+  name: TIED Methodology Setup
+  priority: P0
   related_requirements:
     depends_on: []
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
-      - "ARCH-TIED_STRUCTURE"
-      - "ARCH-TIED_VOCABULARY_LAYERS"
+    - ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM
+    - ARCH-TIED_STRUCTURE
+    - ARCH-TIED_VOCABULARY_LAYERS
     implementation:
-      - "IMPL-TIED_FILES"
-      - "IMPL-TIED_VOCABULARY_REFRESH"
+    - IMPL-TIED_FILES
+    - IMPL-TIED_VOCABULARY_REFRESH
 REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  category: "Methodology"
+  category: Methodology
   cross_references:
-    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
-    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    - "REQ-TIED_SETUP"
-    - "REQ-TIED_VOCABULARY_OWNERSHIP"
-  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer"
-  priority: "P1"
-  status: "Planned"
+  - ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP
+  - IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP
+  - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  - REQ-TIED_SETUP
+  - REQ-TIED_VOCABULARY_OWNERSHIP
+  detail_file: requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml
+  name: Sponsor-Agent Relationship Layer
+  priority: P1
+  status: Planned
 REQ-TIED_VOCABULARY_OWNERSHIP:
-  category: "Infrastructure"
+  category: Infrastructure
   cross_references:
-    - "ARCH-TIED_VOCABULARY_LAYERS"
-    - "IMPL-TIED_VOCABULARY_REFRESH"
-  description: "TIED clients separate refreshable methodology vocabulary from durable client-owned vocabulary while preserving one agent-friendly discovery entry point."
-  detail_file: "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml"
-  name: "Separate Vocabulary Ownership"
-  priority: "P1"
+  - ARCH-TIED_VOCABULARY_LAYERS
+  - IMPL-TIED_VOCABULARY_REFRESH
+  description: TIED clients separate refreshable methodology vocabulary from durable client-owned vocabulary while preserving
+    one agent-friendly discovery entry point.
+  detail_file: requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml
+  name: Separate Vocabulary Ownership
+  priority: P1
   related_requirements:
     depends_on:
-      - "REQ-TIED_SETUP"
+    - REQ-TIED_SETUP
     related_to: []
     supersedes: []
-  status: "Implemented"
+  status: Implemented
   traceability:
     architecture:
-      - "ARCH-TIED_VOCABULARY_LAYERS"
+    - ARCH-TIED_VOCABULARY_LAYERS
     implementation:
-      - "IMPL-TIED_VOCABULARY_REFRESH"
+    - IMPL-TIED_VOCABULARY_REFRESH
+REQ-PROMPT_TYPE_GLOBAL_SKILLS:
+  category: Tooling
+  cross_references:
+  - ARCH-PROMPT_TYPE_GLOBAL_SKILLS
+  - IMPL-PROMPT_TYPE_GLOBAL_SKILLS
+  - REQ-TIED_SETUP
+  description: The TIED methodology repository shall provide a versioned prompt-type skill bundle that can be installed into
+    TIED client projects for consistent ongoing development workflows.
+  detail_file: requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+  metadata:
+    created:
+      author: AI Agent
+      date: '2026-08-12'
+    last_updated:
+      author: AI Agent
+      date: '2026-08-13'
+      reason: Replace triple-colon payload delimiter with invocation remainder and linked plan
+  name: Global Prompt-Type Skills
+  priority: P1
+  status: Implemented
+REQ-PROMPT_TYPE_SUBAGENT:
+  category: Tooling
+  description: TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf
+    prompt types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not
+    Task wrappers.
+  detail_file: requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml
+  metadata:
+    created:
+      author: AI Agent
+      date: '2026-08-12'
+    last_updated:
+      author: AI Agent
+      date: '2026-08-13'
+      reason: Replace triple-colon payload delimiter with invocation remainder and linked plan
+  name: Prompt-Type Subagents
+  priority: P1
+  related_requirements:
+    depends_on:
+    - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+    - REQ-TIED_SETUP
+    related_to: []
+    supersedes: []
+  status: Implemented
+  traceability:
+    architecture:
+    - ARCH-PROMPT_TYPE_SUBAGENT
+    code_annotations:
+    - ARCH-PROMPT_TYPE_SUBAGENT
+    - IMPL-PROMPT_TYPE_SUBAGENT
+    - REQ-PROMPT_TYPE_SUBAGENT
+    implementation:
+    - IMPL-PROMPT_TYPE_SUBAGENT
+    tests:
+    - mcp-server/src/e2e/prompt-type-subagent.test.ts
+  validation_criteria:
+  - coverage: Frontmatter and activation policy
+    method: Static contract test
+  - coverage: Workflow gates and parent return contract
+    method: Static contract test
+  - coverage: TIED traceability
+    method: tied_validate_consistency

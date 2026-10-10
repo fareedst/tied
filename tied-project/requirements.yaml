@@ -1527,6 +1527,94 @@ REQ-MCP_USAGE_METRICS:
       method: "Ruby smoke test"
     - coverage: "usage-metrics module and wrapToolHandler"
       method: "Unit tests"
+REQ-MESSAGING-AUDIT-SUCCESS:
+  category: "Functional"
+  detail_file: null
+  name: "Success-path audit for atomic start"
+  priority: "P1"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-AUDIT-SUCCESS-PATH"
+    implementation: []
+    tests: []
+REQ-MESSAGING-CONTACT-START:
+  category: "Functional"
+  detail_file: null
+  name: "Directed group contact start permission"
+  priority: "P0"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-CONVERSATION-START-AUTH"
+    implementation: []
+    tests: []
+REQ-MESSAGING-CONTEXT-REFERENCE:
+  category: "Functional"
+  detail_file: null
+  name: "Context reference shape validation"
+  priority: "P1"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-EXTERNAL-CONTEXT"
+    implementation: []
+    tests: []
+REQ-MESSAGING-GROUP-CONVERSATION:
+  category: "Functional"
+  detail_file: null
+  name: "Two-sided GROUP conversation aggregate"
+  priority: "P0"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-CONVERSATION-AGGREGATE"
+    implementation: []
+    tests: []
+REQ-MESSAGING-GROUP-SCOPE:
+  category: "Functional"
+  detail_file: null
+  name: "Messaging group scope invariants"
+  priority: "P0"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-GROUP-MEMBERSHIP-PERSISTENCE"
+    implementation: []
+    tests: []
+REQ-MESSAGING-MEMBERSHIP-ACTIVE:
+  category: "Functional"
+  detail_file: null
+  name: "Active group membership gate"
+  priority: "P0"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-GROUP-MEMBERSHIP-PERSISTENCE"
+    implementation: []
+    tests: []
+REQ-MESSAGING-MESSAGE-IMMUTABLE:
+  category: "Functional"
+  detail_file: null
+  name: "Immutable first message append"
+  priority: "P0"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-IMMUTABLE-MESSAGE"
+    implementation: []
+    tests: []
+REQ-MESSAGING-PARTICIPANT-MATERIALIZE:
+  category: "Functional"
+  detail_file: null
+  name: "Starter-only thread participant materialization"
+  priority: "P0"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-MESSAGING-CONVERSATION-AGGREGATE"
+    implementation: []
+    tests: []
 REQ-MODULE_VALIDATION:
   category: "Functional"
   detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
@@ -2364,6 +2452,17 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
       - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
     implementation:
       - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+    - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    - "IMPL-TIED_FILES"
+  description: "Shipped tied-bundle indexes and detail YAML must be self-consistent so clients pass tied_validate_consistency without store-only project tokens."
+  detail_file: "requirements/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE.yaml"
+  name: "Methodology bundle reference closure"
+  priority: "P0"
+  status: "Implemented"
 REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   category: "Methodology"
   cross_references:

@@ -93,6 +93,16 @@
     "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml",
     "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md"
   ],
+  "PROMPT_TYPE_METHODOLOGY_REQUIRED_FILES": [
+    "requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml",
+    "architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml",
+    "implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml",
+    "implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md",
+    "requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml",
+    "architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml",
+    "implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml",
+    "implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT-pseudocode.md"
+  ],
   "ADVERSARIAL_INQUIRY_METHODOLOGY_REQUIRED_FILES": [
     "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml",
     "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml",

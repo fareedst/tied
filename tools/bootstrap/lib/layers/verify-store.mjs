@@ -11,6 +11,7 @@ import {
   verifyFidelityMethodology,
   verifyAdversarialInquiryMethodology,
   verifyVocabularyOwnershipMethodology,
+  verifyPromptTypeMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
   verifyMethodologyPseudocodeTokenRefs,
@@ -50,6 +51,7 @@ export function runPostInstallVerification(projectRoot, options) {
     verifyFidelityMethodology(bundlePath, tiedBasePathValue, tiedCliDest, verifyOpts);
     verifyAdversarialInquiryMethodology(bundlePath, verifyOpts);
     verifyVocabularyOwnershipMethodology(bundlePath, verifyOpts);
+    verifyPromptTypeMethodology(bundlePath, verifyOpts);
     verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
     const manifest = loadManifest();
     verifyInheritedDetailFiles(bundlePath, manifest.INHERITED_DETAIL_REQUIRED ?? [], verifyOpts);
@@ -70,6 +72,7 @@ export function runPostInstallVerification(projectRoot, options) {
   verifyFidelityMethodology(bundlePath, tiedBasePathValue, tiedCliDest, verifyOpts);
   verifyAdversarialInquiryMethodology(bundlePath, verifyOpts);
   verifyVocabularyOwnershipMethodology(bundlePath, verifyOpts);
+  verifyPromptTypeMethodology(bundlePath, verifyOpts);
   verifyInheritedDetailFiles(bundlePath, loadManifest().INHERITED_DETAIL_REQUIRED ?? [], verifyOpts);
   verifyMethodologyPseudocodeTokenRefs(bundlePath, verifyOpts);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);

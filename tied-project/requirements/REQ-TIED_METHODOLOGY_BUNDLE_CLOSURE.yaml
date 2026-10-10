@@ -1,0 +1,39 @@
+REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
+  REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
+    category: "Functional"
+    description: "Every REQ, ARCH, and IMPL token referenced from shipped tied-bundle index and detail YAML must resolve within methodology bundle indexes so TIED clients pass tied_validate_consistency and tied_project_lint after tied-install refresh without adding store-only tokens to client project YAML."
+    name: "Methodology bundle reference closure"
+    priority: "P0"
+    rationale:
+      benefits:
+        - "Deterministic client consistency after refresh"
+        - "Manifest-driven bootstrap gates for promoted stacks"
+      problems_solved:
+        - "Client validation fails after bundle refresh"
+        - "Methodology detail files reference tokens missing from bundle indexes"
+      why: "Fleet clients inherit only tied-bundle methodology plus their own project YAML; dangling detail references fail consistency while the store merged view can still pass."
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+        - "REQ-TIED_SETUP"
+      related_to:
+        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+        - "REQ-TIED_VOCABULARY_OWNERSHIP"
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET is indexed in tied-bundle architecture-decisions.yaml."
+      - criterion: "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT no longer see_also references store-only IMPL-FEAT_ORCHESTRATION_COMMANDS in bundle and project copies."
+      - criterion: "Minimal-client fixture with empty project indexes and TIED_METHODOLOGY_BUNDLE_PATH pointing at refreshed tied-bundle reports tied_validate_consistency ok true with zero methodology detail ref_issues."
+      - criterion: "PROMPT_TYPE GLOBAL and SUBAGENT R+A+I stacks ship in tied-bundle with index rows and PROMPT_TYPE_METHODOLOGY_REQUIRED_FILES bootstrap gate."
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLIENT_REFRESH_PARITY"
+        - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      implementation:
+        - "IMPL-TIED_FILES"
+      tests:
+        - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+        - "mcp-server/src/e2e/methodology-bundle-consistency.test.ts"
+        - "tools/bootstrap/lib/verify.test.mjs"
+  status: "Implemented"

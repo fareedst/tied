@@ -3573,6 +3573,14 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"
+REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
+  cross_references:
+    - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    - "IMPL-TIED_FILES"
+  description: "Shipped tied-bundle detail and index references resolve within methodology indexes for client consistency."
+  name: "Methodology bundle reference closure"
+  source_index: "requirements.yaml"
+  type: "REQ"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "ARCH-TIED_NEW_CLIENT_ADHERENCE"

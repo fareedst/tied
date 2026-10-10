@@ -1,229 +1,335 @@
 ARCH-EVIDENCE_CHAIN_PROFILE:
   cross_references:
-    - "ARCH-QUALITY_ASSURANCE_PROFILES"
-    - "REQ-EVIDENCE_CHAIN_PROFILE"
-  decision: "Add a dedicated read-only evidence-chain-profile.v1 schema and depth-gated orchestrator that composes existing fidelity and quality adapters without calling runFirstSlice wholesale."
-  detail_file: "architecture-decisions/ARCH-EVIDENCE_CHAIN_PROFILE.yaml"
-  name: "Evidence chain profile architecture"
+  - ARCH-QUALITY_ASSURANCE_PROFILES
+  - REQ-EVIDENCE_CHAIN_PROFILE
+  decision: Add a dedicated read-only evidence-chain-profile.v1 schema and depth-gated orchestrator that composes existing
+    fidelity and quality adapters without calling runFirstSlice wholesale.
+  detail_file: architecture-decisions/ARCH-EVIDENCE_CHAIN_PROFILE.yaml
+  name: Evidence chain profile architecture
   related_decisions:
     depends_on:
-      - "ARCH-QUALITY_ASSURANCE_PROFILES"
-      - "ARCH-TIED_FIDELITY_RESEARCH"
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - ARCH-TIED_FIDELITY_RESEARCH
     informs:
-      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - IMPL-EVIDENCE_CHAIN_PROFILE
     see_also: []
-  status: "Accepted"
+  status: Accepted
   traceability:
     implementation:
-      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    - IMPL-EVIDENCE_CHAIN_PROFILE
     requirements:
-      - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - REQ-EVIDENCE_CHAIN_PROFILE
 ARCH-FEEDBACK_STORAGE:
   cross_references:
-    - "REQ-FEEDBACK_TO_TIED"
-  detail_file: "architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml"
+  - REQ-FEEDBACK_TO_TIED
+  detail_file: architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-  name: "Feedback Storage for TIED Reporting"
+      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+  name: Feedback Storage for TIED Reporting
   related_decisions:
     depends_on:
-      - "REQ-FEEDBACK_TO_TIED"
+    - REQ-FEEDBACK_TO_TIED
     informs:
-      - "IMPL-MCP_FEEDBACK_TOOLS"
+    - IMPL-MCP_FEEDBACK_TOOLS
     see_also: []
-  status: "Active"
+  status: Active
   traceability:
     implementation:
-      - "IMPL-MCP_FEEDBACK_TOOLS"
+    - IMPL-MCP_FEEDBACK_TOOLS
     requirements:
-      - "REQ-FEEDBACK_TO_TIED"
+    - REQ-FEEDBACK_TO_TIED
 ARCH-MODULE_VALIDATION:
   cross_references:
-    - "REQ-MODULE_VALIDATION"
-  detail_file: "architecture-decisions/ARCH-MODULE_VALIDATION.yaml"
+  - REQ-MODULE_VALIDATION
+  detail_file: architecture-decisions/ARCH-MODULE_VALIDATION.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-  name: "Module Validation Strategy"
+      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+  name: Module Validation Strategy
   related_decisions:
     depends_on:
-      - "REQ-MODULE_VALIDATION"
+    - REQ-MODULE_VALIDATION
     informs:
-      - "IMPL-MODULE_VALIDATION"
+    - IMPL-MODULE_VALIDATION
     see_also: []
-  status: "Active"
+  status: Active
   traceability:
     implementation:
-      - "IMPL-MODULE_VALIDATION"
+    - IMPL-MODULE_VALIDATION
     requirements:
-      - "REQ-MODULE_VALIDATION"
+    - REQ-MODULE_VALIDATION
 ARCH-QUALITY_ASSURANCE_PROFILES:
   cross_references:
-    - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-  detail_file: "architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml"
-  name: "Risk-triggered quality assurance profiles and evidence boundary"
+  - REQ-QUALITY_ASSURANCE_EVIDENCE
+  detail_file: architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml
+  name: Risk-triggered quality assurance profiles and evidence boundary
   related_decisions:
     depends_on:
-      - "ARCH-MODULE_VALIDATION"
-      - "ARCH-TIED_STRUCTURE"
+    - ARCH-MODULE_VALIDATION
+    - ARCH-TIED_STRUCTURE
     informs:
-      - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
-      - "IMPL-QUALITY_BINDING_INVENTORY"
-      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
-      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
-      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
-      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
-      - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
-      - "IMPL-QUALITY_TEST_ADEQUACY"
+    - IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
+    - IMPL-QUALITY_BINDING_INVENTORY
+    - IMPL-QUALITY_EVIDENCE_COLLECTION
+    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+    - IMPL-QUALITY_EVIDENCE_MANIFEST
+    - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+    - IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
+    - IMPL-QUALITY_TEST_ADEQUACY
     see_also: []
-  status: "Active"
+  status: Active
   traceability:
     code_annotations:
-      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - ARCH-QUALITY_ASSURANCE_PROFILES
     implementation:
-      - "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
-      - "IMPL-QUALITY_BINDING_INVENTORY"
-      - "IMPL-QUALITY_EVIDENCE_COLLECTION"
-      - "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
-      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
-      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
-      - "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
-      - "IMPL-QUALITY_TEST_ADEQUACY"
+    - IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
+    - IMPL-QUALITY_BINDING_INVENTORY
+    - IMPL-QUALITY_EVIDENCE_COLLECTION
+    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+    - IMPL-QUALITY_EVIDENCE_MANIFEST
+    - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+    - IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
+    - IMPL-QUALITY_TEST_ADEQUACY
     requirements:
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-      - "mcp-server/src/analysis/binding-inventory.test.ts"
-      - "mcp-server/src/analysis/pseudocode-validator.test.ts"
-      - "mcp-server/src/analysis/traceability-gap.test.ts"
-      - "mcp-server/src/quality-adequacy.test.ts"
-      - "mcp-server/src/quality-command-runner.test.ts"
-      - "mcp-server/src/quality-evidence-collection.test.ts"
-      - "mcp-server/src/quality-evidence.test.ts"
-      - "mcp-server/src/quality-security.test.ts"
-      - "mcp-server/src/tools/quality-validation-mcp.test.ts"
-      - "pilot/webhook-inbox/test/webhook-inbox.test.mjs"
+    - mcp-server/src/analysis/binding-inventory.test.ts
+    - mcp-server/src/analysis/pseudocode-validator.test.ts
+    - mcp-server/src/analysis/traceability-gap.test.ts
+    - mcp-server/src/quality-adequacy.test.ts
+    - mcp-server/src/quality-command-runner.test.ts
+    - mcp-server/src/quality-evidence-collection.test.ts
+    - mcp-server/src/quality-evidence.test.ts
+    - mcp-server/src/quality-security.test.ts
+    - mcp-server/src/tools/quality-validation-mcp.test.ts
+    - pilot/webhook-inbox/test/webhook-inbox.test.mjs
 ARCH-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
-    - "REQ-TIED_ADVERSARIAL_INQUIRY"
-  description: "Separate canonical TIED intent from deterministic obligation projections, fidelity evidence, executable assurance, and review-gated status decisions."
-  detail_file: "architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml"
+  - REQ-TIED_ADVERSARIAL_INQUIRY
+  description: Separate canonical TIED intent from deterministic obligation projections, fidelity evidence, executable assurance,
+    and review-gated status decisions.
+  detail_file: architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed for bounded adversarial inquiry and fidelity evidence"
-  name: "Read-only obligation graph and evidence gate boundary"
+      reason: Methodology seed for bounded adversarial inquiry and fidelity evidence
+  name: Read-only obligation graph and evidence gate boundary
   related_decisions:
     depends_on:
-      - "ARCH-MODULE_VALIDATION"
-      - "ARCH-QUALITY_ASSURANCE_PROFILES"
-      - "ARCH-TIED_FIDELITY_RESEARCH"
+    - ARCH-MODULE_VALIDATION
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - ARCH-TIED_FIDELITY_RESEARCH
     informs:
-      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
-      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    - IMPL-TIED_ADVERSARIAL_INQUIRY
+    - IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
     see_also: []
-  status: "Active"
+  status: Active
   traceability:
     implementation:
-      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
-      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+    - IMPL-TIED_ADVERSARIAL_INQUIRY
+    - IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
     requirements:
-      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    - REQ-TIED_ADVERSARIAL_INQUIRY
 ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   cross_references:
-    - "ARCH-TIED_STRUCTURE"
-    - "IMPL-TIED_FILES"
-    - "REQ-TIED_SETUP"
-  detail_file: "architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml"
+  - ARCH-TIED_STRUCTURE
+  - IMPL-TIED_FILES
+  - REQ-TIED_SETUP
+  detail_file: architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed for cross-platform bootstrap; procedure: tools/bootstrap/README.md"
-  name: "Cross-platform TIED bootstrap engine"
+      reason: 'Methodology seed for cross-platform bootstrap; procedure: tools/bootstrap/README.md'
+  name: Cross-platform TIED bootstrap engine
   related_decisions:
     depends_on:
-      - "ARCH-TIED_STRUCTURE"
-      - "REQ-TIED_SETUP"
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
     informs:
-      - "IMPL-TIED_FILES"
+    - IMPL-TIED_FILES
     see_also: []
-  status: "Active"
+  status: Active
   traceability:
     implementation:
-      - "IMPL-TIED_FILES"
+    - IMPL-TIED_FILES
     requirements:
-      - "REQ-TIED_SETUP"
+    - REQ-TIED_SETUP
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
-    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-  detail_file: "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+  - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+  detail_file: architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed for shared checklist evidence gate"
-  name: "Shared checklist evidence gate boundary"
+      reason: Methodology seed for shared checklist evidence gate
+  name: Shared checklist evidence gate boundary
   related_decisions:
     depends_on:
-      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - ARCH-TIED_ADVERSARIAL_INQUIRY
     informs:
-      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
-      - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
-  status: "Active"
+    - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
+    - IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP
+  status: Active
   traceability:
     implementation:
-      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
     requirements:
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
 ARCH-TIED_FIDELITY_RESEARCH:
   cross_references:
-    - "REQ-TIED_FIDELITY_RESEARCH"
-  detail_file: "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml"
+  - REQ-TIED_FIDELITY_RESEARCH
+  detail_file: architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed for read-only fidelity research; procedure: tied/docs/tied-fidelity-research.md"
-  name: "Read-Only Fidelity Research Boundary"
+      reason: 'Methodology seed for read-only fidelity research; procedure: tied/docs/tied-fidelity-research.md'
+  name: Read-Only Fidelity Research Boundary
   related_decisions:
     depends_on:
-      - "ARCH-MODULE_VALIDATION"
-      - "ARCH-TIED_STRUCTURE"
+    - ARCH-MODULE_VALIDATION
+    - ARCH-TIED_STRUCTURE
     informs:
-      - "IMPL-TIED_FIDELITY_RESEARCH"
+    - IMPL-TIED_FIDELITY_RESEARCH
     see_also:
-      - "ARCH-QUALITY_ASSURANCE_PROFILES"
-  status: "Active"
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+  status: Active
   traceability:
     implementation:
-      - "IMPL-TIED_FIDELITY_RESEARCH"
+    - IMPL-TIED_FIDELITY_RESEARCH
     requirements:
-      - "REQ-TIED_FIDELITY_RESEARCH"
+    - REQ-TIED_FIDELITY_RESEARCH
 ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
   cross_references:
-    - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
-  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
-  name: "Sponsor-Agent Relationship Layer architecture"
-  status: "Planned"
+  - REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
+  detail_file: architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml
+  name: Sponsor-Agent Relationship Layer architecture
+  status: Planned
 ARCH-TIED_STRUCTURE:
   cross_references:
-    - "REQ-TIED_SETUP"
-  detail_file: "architecture-decisions/ARCH-TIED_STRUCTURE.yaml"
+  - REQ-TIED_SETUP
+  detail_file: architecture-decisions/ARCH-TIED_STRUCTURE.yaml
   metadata:
     last_updated:
-      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
-  name: "TIED Project Structure"
+      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
+  name: TIED Project Structure
   related_decisions:
     depends_on:
-      - "REQ-TIED_SETUP"
+    - REQ-TIED_SETUP
     informs:
-      - "IMPL-TIED_FILES"
+    - IMPL-TIED_FILES
     see_also: []
-  status: "Active"
+  status: Active
   traceability:
     implementation:
-      - "IMPL-TIED_FILES"
+    - IMPL-TIED_FILES
     requirements:
-      - "REQ-TIED_SETUP"
+    - REQ-TIED_SETUP
 ARCH-TIED_VOCABULARY_LAYERS:
-  category: "Structural"
+  category: Structural
   cross_references:
-    - "REQ-TIED_VOCABULARY_OWNERSHIP"
-  detail_file: "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml"
-  name: "Layered Vocabulary Ownership"
-  status: "Active"
+  - REQ-TIED_VOCABULARY_OWNERSHIP
+  detail_file: architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml
+  name: Layered Vocabulary Ownership
+  status: Active
+ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
+  cross_references:
+  - IMPL-PROMPT_TYPE_GLOBAL_SKILLS
+  - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+  description: A tracked hybrid bundle keeps canonical prompt skills in the TIED repository and installs them into each client’s
+    local Cursor skill directory.
+  detail_file: architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+  metadata:
+    created:
+      author: AI Agent
+      date: '2026-08-12'
+    last_updated:
+      author: AI Agent
+      date: '2026-08-13'
+      reason: Name invocation remainder and linked plan as skill payloads
+  name: Hybrid Prompt-Type Skill Bundle
+  status: Active
+ARCH-PROMPT_TYPE_SUBAGENT:
+  alternatives_considered:
+  - cons:
+    - Adds a repository-specific orchestration entry to client tooling
+    name: Install the agent in every client
+    pros:
+    - Uniform Task availability
+    rejected_reason: Client projects receive the canonical skill; this Task wrapper is intentionally TIED-source scoped.
+  - cons:
+    - Cannot perform Implement
+    name: Keep the stub readonly
+    pros:
+    - Limits mutation risk
+    rejected_reason: The selected full workflow requires writable execution.
+  - cons:
+    - Duplicates the canonical workflow and drifts
+    name: Paste the entire skill into the agent
+    pros:
+    - More self-contained prompt
+    rejected_reason: The wrapper should reference the canonical skill and repeat only clean-context-critical boundaries.
+  cross_references:
+  - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+  - REQ-PROMPT_TYPE_SUBAGENT
+  description: Project-scoped Cursor Task wrappers delegate explicitly to each canonical leaf prompt-type skill; plan-refine-build
+    sequences three leaf Task children using invocation remainder then linked plans.
+  detail_file: architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml
+  implementation_approach:
+    details:
+    - Each wrapper repeats only the bootstrap, gates, safety boundary, and return contract needed by a clean subagent context;
+      source-only wrappers are not client-managed copies and no client refresh is performed.
+    - Prompt-type Task wrappers live under .cursor/agents/ in the TIED source repository only; tied-install.sh installs skills,
+      not agents, into client projects.
+    - Static contract tests validate frontmatter, workflow gates, and required prompt clauses for all 13 leaf wrappers without
+      attempting runtime LLM evaluation.
+    - The canonical workflow remains tools/bundled-prompt-type-skills/<prompt-type>/SKILL.md for each leaf.
+    summary: Keep each agent file as a thin TIED-source Task wrapper with explicit activation, type-specific readonly, foreground
+      execution, canonical skill delegation, and a structured parent handoff; client projects use skills instead.
+  metadata:
+    created:
+      author: AI Agent
+      date: '2026-08-12'
+    last_updated:
+      author: AI Agent
+      date: '2026-08-13'
+      reason: Name invocation remainder and linked plan as agent payloads
+  name: Prompt-Type Task Subagent Boundary
+  rationale:
+    benefits:
+    - Explicit delegation keeps the skill as the single workflow source.
+    - Static validation makes the agent contract reviewable and deterministic.
+    - Writable foreground execution supports sequential TIED gates.
+    problems_solved:
+    - A stub body does not define the workflow or handoff evidence.
+    - Missing contract tests allow activation and safety drift.
+    - readonly true prevents the required Implement phase.
+    why: Cursor custom subagents start with isolated context and do not reliably include a separately named skill from a one-line
+      body.
+  related_decisions:
+    depends_on:
+    - ARCH-PROMPT_TYPE_GLOBAL_SKILLS
+    informs:
+    - IMPL-PROMPT_TYPE_SUBAGENT
+    see_also:
+    - ARCH-TIED_STRUCTURE
+    - IMPL-TIED_FILES
+    supersedes: []
+  status: Active
+  traceability:
+    code_annotations:
+    - ARCH-PROMPT_TYPE_SUBAGENT
+    - IMPL-PROMPT_TYPE_SUBAGENT
+    - REQ-PROMPT_TYPE_SUBAGENT
+    implementation:
+    - IMPL-PROMPT_TYPE_SUBAGENT
+    requirements:
+    - REQ-PROMPT_TYPE_SUBAGENT
+    tests:
+    - mcp-server/src/e2e/prompt-type-subagent.test.ts
+ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET:
+  cross_references: []
+  description: Optional BBCE slice ownership paste-in snippet (methodology corpus).
+  detail_file: architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml
+  metadata:
+    status: snippet_only
+    title: Optional BBCE slice ownership sections (paste-in snippet)
+  name: BBCE slice ownership snippet
+  status: Active

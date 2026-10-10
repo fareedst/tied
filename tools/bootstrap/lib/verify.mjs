@@ -97,6 +97,27 @@ export function verifyAdversarialInquiryMethodology(verifyRoot, options = {}) {
  * @param {string} verifyRoot
  * @param {{ bundleLayout?: boolean }} [options]
  */
+export function verifyPromptTypeMethodology(verifyRoot, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
+  const requiredRel = loadManifest().PROMPT_TYPE_METHODOLOGY_REQUIRED_FILES ?? [];
+  sayWarn("MUST verify prompt-type methodology artifacts before completion.");
+  let missing = 0;
+  for (const rel of requiredRel) {
+    const legacyRel = rel.startsWith("methodology/") ? rel : `methodology/${rel}`;
+    const p = path.join(verifyRoot, relPath(legacyRel));
+    if (!fs.existsSync(p)) {
+      sayErr(`MISSING mandatory prompt-type methodology artifact: ${p}`);
+      missing = 1;
+    }
+  }
+  if (missing) {
+    sayErr("Prompt-type methodology verification failed; client bootstrap is incomplete.");
+    throw new Error("PROMPT_TYPE_GATE_FAILED");
+  }
+  sayOk("MUST verify prompt-type methodology artifacts: complete.");
+}
+
 export function verifyVocabularyOwnershipMethodology(verifyRoot, options = {}) {
   const relPath = (rel) =>
     options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;

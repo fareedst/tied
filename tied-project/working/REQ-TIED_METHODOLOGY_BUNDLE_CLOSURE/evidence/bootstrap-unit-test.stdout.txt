@@ -1,0 +1,39 @@
+MUST verify prompt-type methodology artifacts before completion.
+MISSING mandatory prompt-type methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-prompt-verify-K8ifLy/methodology/architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+MISSING mandatory prompt-type methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-prompt-verify-K8ifLy/methodology/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+MISSING mandatory prompt-type methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-prompt-verify-K8ifLy/methodology/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md
+MISSING mandatory prompt-type methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-prompt-verify-K8ifLy/methodology/requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml
+MISSING mandatory prompt-type methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-prompt-verify-K8ifLy/methodology/architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml
+MISSING mandatory prompt-type methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-prompt-verify-K8ifLy/methodology/implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml
+MISSING mandatory prompt-type methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-prompt-verify-K8ifLy/methodology/implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT-pseudocode.md
+Prompt-type methodology verification failed; client bootstrap is incomplete.
+MUST verify vocabulary ownership methodology artifacts before completion.
+MISSING mandatory vocabulary ownership methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-vocab-verify-eaTiHi/methodology/architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml
+MISSING mandatory vocabulary ownership methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-vocab-verify-eaTiHi/methodology/implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml
+MISSING mandatory vocabulary ownership methodology artifact: /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/bootstrap-vocab-verify-eaTiHi/methodology/implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH-pseudocode.md
+Vocabulary ownership methodology verification failed; client bootstrap is incomplete.
+MUST verify inherited methodology pseudo-code token references before completion.
+MISSING methodology index token IMPL-TIED_FILES referenced in methodology/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+MISSING methodology index token ARCH-MISSING_BOOTSTRAP_TOKEN referenced in methodology/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+MISSING methodology index token REQ-TIED_SETUP referenced in methodology/implementation-decisions/IMPL-TIED_FILES-pseudocode.md
+Methodology pseudo-code token reference verification failed; client bootstrap is incomplete.
+MUST verify inherited methodology pseudo-code token references before completion.
+MUST verify inherited methodology pseudo-code token references: complete.
+▶ verifyPromptTypeMethodology [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE]
+  ✔ throws PROMPT_TYPE_GATE_FAILED when a manifest artifact is missing (2.405916ms)
+✔ verifyPromptTypeMethodology [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE] (3.003417ms)
+▶ verifyVocabularyOwnershipMethodology [REQ-TIED_VOCABULARY_OWNERSHIP]
+  ✔ throws VOCABULARY_OWNERSHIP_GATE_FAILED when a manifest artifact is missing (0.603958ms)
+✔ verifyVocabularyOwnershipMethodology [REQ-TIED_VOCABULARY_OWNERSHIP] (0.657833ms)
+▶ verifyMethodologyPseudocodeTokenRefs [REQ-TIED_SETUP]
+  ✔ fails deterministically when a sidecar references a missing ARCH token (3.131708ms)
+  ✔ passes when referenced methodology tokens exist in indexes (1.904458ms)
+✔ verifyMethodologyPseudocodeTokenRefs [REQ-TIED_SETUP] (5.126958ms)
+ℹ tests 4
+ℹ suites 3
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 86.288541

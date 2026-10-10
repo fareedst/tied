@@ -579,6 +579,25 @@ describe("e2e: bootstrap and load", () => {
       "bundle implementation-decisions.yaml should index IMPL-TIED_VOCABULARY_REFRESH",
     );
 
+    // [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_SUBAGENT]
+    const promptTypePaths = [
+      path.join(bundleDir, "requirements", "REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"),
+      path.join(bundleDir, "requirements", "REQ-PROMPT_TYPE_SUBAGENT.yaml"),
+      path.join(bundleDir, "architecture-decisions", "ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml"),
+      path.join(bundleDir, "architecture-decisions", "ARCH-PROMPT_TYPE_SUBAGENT.yaml"),
+      path.join(bundleDir, "implementation-decisions", "IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml"),
+      path.join(bundleDir, "implementation-decisions", "IMPL-PROMPT_TYPE_SUBAGENT.yaml"),
+    ];
+    for (const p of promptTypePaths) {
+      assert.ok(fs.existsSync(p), `methodology bundle should ship prompt-type artifact ${p}`);
+    }
+    assert.match(bundleReqYaml, /^REQ-PROMPT_TYPE_GLOBAL_SKILLS:/m);
+    assert.match(bundleReqYaml, /^REQ-PROMPT_TYPE_SUBAGENT:/m);
+    assert.match(bundleArchYaml, /^ARCH-PROMPT_TYPE_GLOBAL_SKILLS:/m);
+    assert.match(bundleArchYaml, /^ARCH-PROMPT_TYPE_SUBAGENT:/m);
+    assert.match(bundleImplYaml, /^IMPL-PROMPT_TYPE_GLOBAL_SKILLS:/m);
+    assert.match(bundleImplYaml, /^IMPL-PROMPT_TYPE_SUBAGENT:/m);
+
   });
 
   it("initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]", () => {

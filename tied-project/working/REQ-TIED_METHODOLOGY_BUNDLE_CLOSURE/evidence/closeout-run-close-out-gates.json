@@ -1,0 +1,175 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "methodology-a4b-close-20261009"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "translate-sponsor-intent",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/translate-sponsor-intent-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "unit-test-red",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/unit-test-red-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "unit-test-green",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/unit-test-green-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "composition-integration",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/composition-integration-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "verification-gate",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/verification-evidence-manifest.v1.json\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sync-tied-stack",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/sync-tied-stack-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "change-definition",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/change-definition-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "test-strategy",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/test-strategy-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "session-bootstrap",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/session-bootstrap-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "impact-discovery",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/impact-discovery-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "resolve-pseudocode",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/resolve-pseudocode-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "persist-implementation-records",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/persist-implementation-records-evidence.md\""
+          }
+        }
+      ],
+      "ledger_rows": 16,
+      "read_only": true,
+      "process_grade": {
+        "score": 69,
+        "band": "C",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 100,
+            "weight": 0.2,
+            "gap_codes": []
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": true,
+    "envelope_ok": false,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "path": "tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 1,
+    "advisory_gap_count": 1,
+    "diagnostics": [
+      "envelope_blocking_gap:not_applicable_receipt_missing"
+    ]
+  }
+}

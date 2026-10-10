@@ -96,8 +96,7 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
     depends_on:
       - "IMPL-TIED_ADVERSARIAL_INQUIRY"
       - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
-    see_also:
-      - "IMPL-FEAT_ORCHESTRATION_COMMANDS"
+    see_also: []
   status: "Active"
   testability: "unit"
   traceability:

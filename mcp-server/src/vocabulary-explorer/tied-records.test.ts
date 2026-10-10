@@ -38,7 +38,11 @@ describe("tied-records REQ-VOCABULARY_ANALYSIS", () => {
     const catalog = loadTiedRecordCatalog();
     const meth = catalog.records.find((r) => r.ownership === "methodology_only");
     if (meth) {
-      assert.ok(meth.token.startsWith("REQ-") || meth.token.startsWith("IMPL-"));
+      assert.ok(
+        meth.token.startsWith("REQ-")
+          || meth.token.startsWith("ARCH-")
+          || meth.token.startsWith("IMPL-"),
+      );
     }
   });
 
