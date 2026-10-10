@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Proposed — W1 plan-only** (child linked plan authored; **no W1 implement authority**) |
+| **Status** | **Implement complete** (2026-10-10) — `REQ-METHODOLOGY-LEARNING-EXPERIMENT`; gates under `tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/` |
 | **Change ID** | `PLAN-TIED-QMM-W1-METHODOLOGY-PDSA` |
 | **Parent program** | [`PLAN-TIED-QMM-METHODOLOGY-LEARNING`](tied-qmm-methodology-learning-plan.md) |
 | **Future REQ** | `REQ-METHODOLOGY-LEARNING-EXPERIMENT` (implement pass only — not minted in plan-only) |
@@ -17,6 +17,8 @@
 **Planning-artifact disclaimer:** This document and its plan-only CITDP do **not** create project REQ/ARCH/IMPL tokens, do **not** add MCP tools or persistence, and do **not** authorize edits to methodology YAML under `tied-bundle/` in clients. The behavior-changing capability runs under `REQ-METHODOLOGY-LEARNING-EXPERIMENT` with its own per-REQ Tracker, integrated CITDP, gates, and traceable-commit.
 
 **Agency boundary:** Recording **execution_authority** for W1 **plan-only** in the program orchestrator names sponsor intent to author this child plan; it does **not** authorize RED tests, MCP changes, or canonical methodology promotion.
+
+**Program exit:** Parent QMM program **closed** 2026-10-10; **W6 waived** at exit; Kaizen Phase 3 unchanged (**deferred**).
 
 ---
 

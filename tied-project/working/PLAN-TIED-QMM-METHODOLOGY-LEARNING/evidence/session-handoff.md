@@ -1,21 +1,28 @@
 # session-handoff — PLAN-TIED-QMM-METHODOLOGY-LEARNING
 
-**Updated:** 2026-10-10 (W3 traceable-commit)  
-**Program phase:** `in_progress` · **`current_wave: W3`** (implement **complete**) · next program wave **W4** when sponsored
+**Updated:** 2026-10-10 (program **closed**; W6 **waived_at_program_close**)  
+**Program phase:** `closed` · **current_step:** `EXIT` · **current_wave:** `W6` (waived)
 
 ## Resume here
 
-1. **Program plan:** [`docs/tied-qmm-methodology-learning-plan.md`](../../../docs/tied-qmm-methodology-learning-plan.md) — W4 cohort readouts
-2. **Orchestrator:** [`../qmm-program-execution-checklist.yaml`](../qmm-program-execution-checklist.yaml) — W3 `status: complete`
-3. **REQ close-out record:** [`../../REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/traceable-commit-evidence.md`](../../REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/traceable-commit-evidence.md)
+1. Read [`doc-reconcile-evidence.md`](./doc-reconcile-evidence.md) for the cross-artifact hygiene record.
+2. **Commits:** W5 implement **`e9e56a8`**; program close + hygiene in follow-on commit (this session).
+3. **Kaizen Phase 3:** still **deferred** on the closed Kaizen program — QMM W6 waiver is **not** Phase 3 transport.
 
-## W3 deliverable (committed)
+## Wave snapshot
 
-- MCP `tied_methodology_kaizen_experiment_bridge` (draft-only; no store write on bridge)
-- Integrated gates + `tied_verify` on `REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE`
-- `close_out` + envelope validate (`fail_on_error_gaps`: 0 blocking)
+| Wave | Status | REQ |
+| --- | --- | --- |
+| W0–W5 | complete | See orchestrator `implement_req` per wave |
+| W6 | waived_at_program_close | Optional QMM transport wave — not executed |
+| Backlog | deferred | SPC, DORA, universal DMAIC |
 
-## Do not
+## Orchestrator index
 
-- Auto-bridge on capture, digest, or `tied_feedback_review_bridge`
-- Write experiments store inside bridge MCP
+[`qmm-program-execution-checklist.yaml`](../qmm-program-execution-checklist.yaml) registers implement gate receipts for W1, W2, W3, W4, W5.
+
+## Out of scope without new CITDP
+
+- Kaizen Phase 3 implement / outbox transport  
+- Canonical `tied-bundle/` methodology promotion  
+- `git push` (sponsor when ready)

@@ -1,0 +1,212 @@
+{
+  "graph": {
+    "projectId": "stdd-w4-evidence-chain-report",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-EVIDENCE_CHAIN_REPORT#operator-local-paths",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-ecr1",
+          "sourceRevision": "w4-ecr-src"
+        },
+        "architectureConstraintIds": ["arch-ecr-privacy"]
+      },
+      {
+        "identity": {
+          "id": "REQ-EVIDENCE_CHAIN_REPORT#cohort-partition",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-ecr2",
+          "sourceRevision": "w4-ecr-src"
+        },
+        "architectureConstraintIds": ["arch-ecr-cohort"]
+      },
+      {
+        "identity": {
+          "id": "REQ-EVIDENCE_CHAIN_REPORT#no-coerce-zero",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-ecr3",
+          "sourceRevision": "w4-ecr-src"
+        },
+        "architectureConstraintIds": ["arch-ecr-validate"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-ecr-privacy",
+        "implementationBlockIds": [
+          "IMPL-EVIDENCE_CHAIN_REPORT#RESOLVE_INPUT_IDENTITY#ecr0001",
+          "IMPL-EVIDENCE_CHAIN_REPORT#RUN_EVIDENCE_CHAIN_REPORT_CLI#ecr0004"
+        ]
+      },
+      {
+        "id": "arch-ecr-cohort",
+        "implementationBlockIds": [
+          "IMPL-EVIDENCE_CHAIN_REPORT#PARTITION_CLIENT_COHORTS#ecr0002",
+          "IMPL-EVIDENCE_CHAIN_REPORT#PARTITION_SUBCOHORTS#ecr0005"
+        ]
+      },
+      {
+        "id": "arch-ecr-validate",
+        "implementationBlockIds": [
+          "IMPL-EVIDENCE_CHAIN_REPORT#VALIDATE_PROFILE_ARTIFACT#ecr0003",
+          "IMPL-EVIDENCE_CHAIN_REPORT#GENERATE_EVIDENCE_CHAIN_REPORT#ecr0006"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-EVIDENCE_CHAIN_REPORT#RESOLVE_INPUT_IDENTITY#ecr0001",
+          "kind": "block",
+          "name": "RESOLVE_INPUT_IDENTITY",
+          "derivation": "content",
+          "revision": "block-rev-ecr1",
+          "sourceRevision": "w4-ecr-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-EVIDENCE_CHAIN_REPORT#PARTITION_CLIENT_COHORTS#ecr0002",
+          "kind": "block",
+          "name": "PARTITION_CLIENT_COHORTS",
+          "derivation": "content",
+          "revision": "block-rev-ecr2",
+          "sourceRevision": "w4-ecr-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-EVIDENCE_CHAIN_REPORT#VALIDATE_PROFILE_ARTIFACT#ecr0003",
+          "kind": "block",
+          "name": "VALIDATE_PROFILE_ARTIFACT",
+          "derivation": "content",
+          "revision": "block-rev-ecr3",
+          "sourceRevision": "w4-ecr-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-EVIDENCE_CHAIN_REPORT#RUN_EVIDENCE_CHAIN_REPORT_CLI#ecr0004",
+          "kind": "block",
+          "name": "RUN_EVIDENCE_CHAIN_REPORT_CLI",
+          "derivation": "content",
+          "revision": "block-rev-ecr4",
+          "sourceRevision": "w4-ecr-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-EVIDENCE_CHAIN_REPORT#PARTITION_SUBCOHORTS#ecr0005",
+          "kind": "block",
+          "name": "PARTITION_SUBCOHORTS",
+          "derivation": "content",
+          "revision": "block-rev-ecr5",
+          "sourceRevision": "w4-ecr-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-EVIDENCE_CHAIN_REPORT#GENERATE_EVIDENCE_CHAIN_REPORT#ecr0006",
+          "kind": "block",
+          "name": "GENERATE_EVIDENCE_CHAIN_REPORT",
+          "derivation": "content",
+          "revision": "block-rev-ecr6",
+          "sourceRevision": "w4-ecr-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-ecr-unit",
+        "blockId": "IMPL-EVIDENCE_CHAIN_REPORT#GENERATE_EVIDENCE_CHAIN_REPORT#ecr0006",
+        "kind": "test",
+        "location": "mcp-server/src/fidelity-research/evidence-chain-report.test.ts",
+        "sourceRevision": "w4-ecr-src"
+      },
+      {
+        "id": "loci-ecr-cli",
+        "blockId": "IMPL-EVIDENCE_CHAIN_REPORT#RUN_EVIDENCE_CHAIN_REPORT_CLI#ecr0004",
+        "kind": "test",
+        "location": "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts",
+        "sourceRevision": "w4-ecr-src"
+      },
+      {
+        "id": "loci-ecr-prod",
+        "blockId": "IMPL-EVIDENCE_CHAIN_REPORT#GENERATE_EVIDENCE_CHAIN_REPORT#ecr0006",
+        "kind": "production",
+        "location": "mcp-server/src/fidelity-research/evidence-chain-report.ts",
+        "sourceRevision": "w4-ecr-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-ecr6",
+    "specification": [
+      {
+        "id": "ecr-spec-privacy",
+        "kind": "behavior",
+        "value": "Default operator_local emits artifact_ref basenames only; no absolute client paths unless include_absolute_paths is true.",
+        "order": 1
+      },
+      {
+        "id": "ecr-spec-cohort",
+        "kind": "behavior",
+        "value": "Partition by schema_version|profile_depth; v2 splits denominator subcohorts by fingerprint without cross-rollup.",
+        "order": 2
+      },
+      {
+        "id": "ecr-spec-strict",
+        "kind": "behavior",
+        "value": "strict mode writes no outputs on rejection; partial excludes bad inputs without coercing missing evidence to zero.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "ecr-test-unit",
+        "statementId": "ecr-spec-cohort",
+        "kind": "behavior",
+        "value": "Unit matrix covers mixed integrated/human_research cohorts and v2 denominator fingerprints.",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-ecr6",
+        "source": {
+          "location": "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"
+        }
+      },
+      {
+        "id": "ecr-test-cli",
+        "statementId": "ecr-spec-strict",
+        "kind": "behavior",
+        "value": "CLI composition tests exit codes and YAML/Markdown agreement.",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-ecr4",
+        "source": {
+          "location": "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "ecr-prod-gen",
+        "statementId": "ecr-spec-privacy",
+        "kind": "behavior",
+        "value": "generateEvidenceChainReport read-only; no profile generation or project YAML mutation.",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-ecr6",
+        "source": {
+          "location": "mcp-server/src/fidelity-research/evidence-chain-report.ts"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-EVIDENCE_CHAIN_REPORT#GENERATE_EVIDENCE_CHAIN_REPORT#ecr0006",
+    "IMPL-EVIDENCE_CHAIN_REPORT#RUN_EVIDENCE_CHAIN_REPORT_CLI#ecr0004"
+  ]
+}

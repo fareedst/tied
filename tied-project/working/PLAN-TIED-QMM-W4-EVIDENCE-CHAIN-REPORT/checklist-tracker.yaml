@@ -1,0 +1,99 @@
+citdp:
+  path: null
+  reason: "Plan-only W4 pass does not mint a new report REQ or mutate the existing product stack."
+  status: "deferred"
+depth_tier: "minimal"
+execution_authority:
+  implementation_authority: "superseded_by_sponsor_implement_20261010"
+  implement_tracker: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/implement-checklist-tracker.yaml"
+  prior_w1_w3_receipts_are_activation_evidence: false
+  scope: "plan-only"
+  superseded_by: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w4-implement-20261010.md"
+future_gate_contracts:
+  close_out:
+    required:
+      - "costly-choice disposition"
+      - "deterministic reports with explicit proof boundaries"
+      - "fresh verification and close_out gate receipts"
+      - "request evidence envelope"
+      - "verification evidence manifest"
+      - "vocabulary VALIDATE"
+  pre_implementation:
+    required:
+      - "fresh authoritative tracker"
+      - "fresh identity-bound activation evidence when integrated eligibility applies"
+      - "implement CITDP with independent profile_depth, depth_tier, and gate_policy"
+      - "sponsor authority naming w4_scope implement"
+      - "successful W4-specific pre_implementation gate"
+      - "token-commented IMPL/pseudocode validation for confirmed gaps"
+  verification:
+    required:
+      - "deterministic rerun comparison"
+      - "fresh verification-phase activation evidence when integrated eligibility applies"
+      - "path-privacy checks"
+      - "tied_validate_consistency when project TIED records are touched"
+      - "tied_verify"
+      - "unit and CLI test receipts"
+      - "v1 and v2 fixture reports"
+future_implementation_defaults:
+  depth_tier: "integrated"
+  gate_policy: "per_citdp"
+  requires_fresh_identity_bound_activation: true
+gate:
+  activation: "non_activation"
+  allowed: false
+  diagnostic: "malformed_citdp:adversarial_inquiry"
+  phase: "pre_implementation"
+  reason: "Expected plan-only result from tied_checklist_gate_validate; no implement CITDP or activation evidence exists, so this result cannot authorize RED, code, verification, or close-out."
+  status: "attempted_not_allowed"
+gate_policy: "advisory"
+profile_depth: "integrated"
+purpose: "W4 plan-only Tracker; not an implementation or RED-test Tracker."
+refine_pass: 1
+refine_pass_date: "2026-10-10"
+request: "PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT"
+schema_version: "qmm-w4-plan-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "in_progress"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-w4-evidence-chain-report-plan.md"
+    id: "resolve"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/PLAN.md"
+    id: "change-definition-impact-risk-test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml"
+    id: "tracker-and-orchestrator-alignment"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-w4-evidence-chain-report-plan.md"
+    id: "future-evidence-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/checklist-tracker.yaml"
+    id: "plan-only-pre-implementation-gate"
+    outcome: "allowed:false; non-activation; not reusable for implementation"
+  - disposition: "not_applicable"
+    id: "product-tied-records"
+    rationale: "Existing REQ/ARCH/IMPL stack is reused; product TIED mutation is explicitly out of scope."
+  - disposition: "not_applicable"
+    id: "implementation"
+    rationale: "W4 is plan-only; no RED tests, runtime code, or implementation authority."
+  - disposition: "pending"
+    id: "verification"
+    rationale: "Future implementation phase only; concrete evidence contract is recorded above."
+  - disposition: "pending"
+    id: "close-out"
+    rationale: "Future implementation phase only; concrete evidence contract is recorded above."
+  - disposition: "pending"
+    id: "vocabulary-validate"
+    rationale: "Final VALIDATE occurs before an authorized implementation commit; no new terms were recorded."

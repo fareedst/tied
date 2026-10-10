@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Implement authorized** (2026-10-10); plan-only evidence under [`PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/`](../tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/); sponsor [`sponsor-authority-w5-implement-20261010.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w5-implement-20261010.md) |
+| **Status** | **Implement complete (local proof)** (2026-10-10) — `REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT`; traceable-commit **`e9e56a8`**; implement gates under `tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/` (plan-only receipts remain under `PLAN-TIED-QMM-W5-…/evidence/` — non-activation) |
 | **Change ID** | `PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT` |
 | **Parent program** | [`docs/tied-qmm-methodology-learning-plan.md`](tied-qmm-methodology-learning-plan.md) § W5 |
 | **Working entry** | [`tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/PLAN.md`](../tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/PLAN.md) |
@@ -18,6 +18,8 @@
 **Implement pass (authorized 2026-10-10):** enrollment contract (optional schema/helpers), prompt-skill/shared-doc alignment, extended tests/demos, integrated gates on implement REQ — see [`sponsor-authority-w5-implement-20261010.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w5-implement-20261010.md).
 
 Plan-only CITDP does **not** authorize RED, MCP behavior changes, or prompt-skill contract edits in clients. No edits to committed methodology YAML under `tied-bundle/` without separate sponsor scope.
+
+**Program exit:** Parent QMM program **closed** 2026-10-10; **W6 waived** at exit; Kaizen Phase 3 unchanged (**deferred**).
 
 **Agency boundary:** Plan-only gate receipts and this plan do **not** bypass implement **`pre_implementation`** or integrated adversarial inquiry when persistence/MCP triggers match.
 

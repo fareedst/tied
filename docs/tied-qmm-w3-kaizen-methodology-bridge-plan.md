@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | **W3 implement in progress** — MCP + tests landed; integrated verification gate pending |
+| **Status** | **Implement complete** (2026-10-10) — `REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE`; explicit MCP bridge only |
 | **Change ID** | `PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE` |
 | **Parent program** | [`PLAN-TIED-QMM-METHODOLOGY-LEARNING`](tied-qmm-methodology-learning-plan.md) |
 | **Future REQ** | `REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE` (implement pass only — not minted in plan-only) |
@@ -19,6 +19,8 @@
 **Agency boundary:** **`w3_scope: implement`** (orchestrator) authorizes **build-plan** to mint the REQ stack and deliver bridge MCP. It does **not** bypass implement **`pre_implementation`** or integrated adversarial inquiry when triggers match. Plan-only gate receipts are **not** reusable for implement.
 
 **Sponsor choice (confirmed):** **Explicit MCP bridge only** — no auto-create on `methodology_improvement` capture.
+
+**Program exit:** Parent QMM program **closed** 2026-10-10; **W6 waived** at exit; Kaizen Phase 3 unchanged (**deferred**).
 
 ---
 

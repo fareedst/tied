@@ -1,0 +1,18 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/gates/verification-2026-10-10T20-37-11-352Z.json",
+    "hash": "sha256:6868dcfc223a50c34dbe53d08723544b8400ca708c0417af461fed58de1dce37"
+  }
+}

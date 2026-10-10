@@ -4,16 +4,16 @@ purpose: "W0 documentation-only refine-plan tracker; not a behavior-changing REQ
 refine_pass: 2
 refine_pass_date: "2026-10-10"
 source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: in_progress
+status: complete
 depth_tier: minimal
 gate_policy: advisory
 execution_authority:
   mode: approved_full
-  evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md
+  evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md
 citdp:
-  status: deferred
-  reason: "Pure documentation refinement; no behavior, product TIED token, or runtime evidence changes."
-  path: null
+  status: complete
+  path: tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml
+  reason: "Program closed; W6 waived; doc reconcile complete."
 gate:
   phase: pre_implementation
   status: attempted_not_allowed

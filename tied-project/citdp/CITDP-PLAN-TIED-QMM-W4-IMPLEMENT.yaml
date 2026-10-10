@@ -1,0 +1,119 @@
+CITDP-PLAN-TIED-QMM-W4-IMPLEMENT:
+  change_definition:
+    current_behavior: >-
+      Evidence-chain statistics report CLI and tests exist; QMM W4 lacks reconciled demonstrations, working evidence,
+      and wave close-out under the program envelope.
+    desired_behavior: >-
+      W4 implement pass reconciles `[REQ-EVIDENCE_CHAIN_REPORT]` stack against the child plan, runs existing and
+      gap-closing tests, produces deterministic v1/v2 cohort readouts with privacy proof, and closes with
+      verification/close_out gates without minting a new report REQ.
+    non_goals:
+      - Mint duplicate REQ/ARCH/IMPL report tokens
+      - Live client discovery or repository traversal
+      - Project YAML mutation, finding-ledger append, case promotion
+      - Maturity score, universal ranking, SPC/DORA, derived-value averaging
+      - shareable_hashed export without named owner and expiry
+      - tied-bundle methodology edits
+    success_criteria:
+      - Unit and CLI tests for evidence-chain-report pass; gaps fixed only with LEAP-aligned TIED updates
+      - W4 demonstration matrix evidenced under working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/evidence/
+      - operator_local outputs show basenames only; Markdown matches authoritative YAML
+      - tied_verify and tied_validate_consistency pass when project TIED touched
+      - Orchestrator W4 implement_status complete with wave close-out receipts
+    unchanged_behavior: Profile generation, W1 experiment MCP, W2/W3 deliverables, and opt-in metrics remain independent.
+  impact_analysis:
+    depends_on:
+      - REQ-EVIDENCE_CHAIN_REPORT
+      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
+    files:
+      - mcp-server/src/fidelity-research/evidence-chain-report.ts
+      - mcp-server/src/cli/evidence-chain-report.ts
+      - mcp-server/src/fidelity-research/evidence-chain-report.test.ts
+      - mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts
+      - tied-project/working/evidence-chain/
+      - tied-project/working/evaluation/
+    tied_tokens_affected:
+      - REQ-EVIDENCE_CHAIN_REPORT
+      - ARCH-EVIDENCE_CHAIN_REPORT
+      - IMPL-EVIDENCE_CHAIN_REPORT
+    tied_tokens_new: []
+  record_identity:
+    author: refine-plan
+    change_request_id: PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT
+    date: '2026-10-10'
+    depth_tier: integrated
+    gate_policy: per_citdp
+    implementation_depth_tier: integrated
+    prior_depth_tier: minimal
+    profile_depth: integrated
+    record_status: complete
+    title: QMM W4 evidence-chain cohort readouts implement
+  risk_analysis:
+    abuse_cases:
+      - malformed-oversized-input
+      - path-traversal-file-access
+      - secret-sensitive-data
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      counterexamples:
+        - Absolute client paths leak into default operator_local report output.
+        - Incompatible cohorts rolled up because denominator fingerprints differ.
+        - Missing or malformed profile inputs coerced to zero counts.
+        - Plan-only gate receipt reused as W4 implement activation.
+      depth_tier: integrated
+      disconfirming_observations:
+        - Generated Markdown contains statistics absent from authoritative YAML.
+        - strict mode writes outputs when any input is rejected.
+        - Intent TIED YAML mutated by report CLI.
+      eligibility_triggers_matched:
+        - external_input
+        - cli_boundary
+      evidence_references:
+        - docs/tied-qmm-w4-evidence-chain-report-plan.md
+        - tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w4-implement-20261010.md
+        - tied-project/citdp/CITDP-REQ-EVIDENCE_CHAIN_REPORT.yaml
+      falsification_questions:
+        - Does default output ever include absolute filesystem paths?
+        - Do v2 subcohorts ever merge incompatible denominator fingerprints?
+        - Are W1–W3 receipts cited as W4 activation evidence?
+      gate_policy: per_citdp
+      prior_depth_tier: minimal
+      rationale: >-
+        CLI reads external profile artifacts and manifests; path privacy and malformed-input handling are
+        security-adjacent.
+      research_profile: integrated-agent
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: completed
+    quality_profiles:
+      - baseline-functional
+      - external-input-security
+    risks:
+      - description: Silent cross-cohort rollup
+        id: RISK-W4-001
+        likelihood: Low
+        mitigation: Unit tests for compatibility_key and denominator fingerprint partition
+        severity: High
+      - description: Path privacy regression
+        id: RISK-W4-002
+        likelihood: Medium
+        mitigation: CLI composition tests for operator_local basenames
+        severity: High
+  sponsor_decisions:
+    privacy_default: operator_local
+    recorded_at: '2026-10-10'
+    w4_implement_depth_tier: integrated
+    w4_scope: implement
+  test_strategy:
+    batches:
+      - 'Batch 1: LEAP reconcile REQ/ARCH/IMPL/sidecar/tests vs child plan'
+      - 'Batch 2: RED→GREEN only for confirmed gaps; preserve existing unit/CLI matrix'
+      - 'Batch 3: Deterministic demonstrations, tied_verify, consistency, vocabulary VALIDATE, close-out'
+    matrix_notes: >-
+      Reuse evidence-chain-report unit and CLI tests; add W4 demo fixtures under working/evidence-chain or evaluation as
+      needed.
+    summary: TDD on gaps only; composition for CLI; no E2E UI.
+  completion_criteria:
+    activation:
+      run_id: w4-ecr-closeout-20261010
+      phase: close_out
+      request_token: REQ-EVIDENCE_CHAIN_REPORT

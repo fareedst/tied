@@ -1,0 +1,102 @@
+CITDP-PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT:
+  change_definition:
+    current_behavior: "The evidence-chain report stack exists; the QMM program lacked a W4 child plan defining cohort readouts, privacy, and gate evidence."
+    desired_behavior: "W4 child linked plan, working folder, plan-only Tracker, and documentation CITDP define RESOLVE, demonstration matrix, independent profile/depth/gate dimensions, and implement handoff that forbids inheriting minimal depth."
+    non_goals:
+      - "Application code, automated tests, or runtime changes in the plan-only pass"
+      - "Minting a second report requirement or mutating existing REQ/ARCH/IMPL records in plan-only"
+      - "Client-root traversal, finding-ledger append, or tied-bundle edits"
+      - "Git stage, commit, or push unless sponsor plan-close-out"
+    success_criteria:
+      - "Child plan docs/tied-qmm-w4-evidence-chain-report-plan.md authored with authority, contracts, and demonstration matrix."
+      - "Plan-only Tracker records non-activation pre_implementation gate."
+      - "Orchestrator records w4_scope plan-only then sponsor implement authority separately."
+      - "Implement section records integrated depth must not inherit plan-only minimal without prior_depth_tier."
+    unchanged_behavior: "Existing evidence-chain report CLI/module, W1–W3 program deliverables, and profile generation remain unchanged in plan-only pass."
+  evidence:
+    commands:
+      - "Read-only review of child plan against parent program W4 section"
+      - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
+    manifest_reference: null
+    proof_boundaries:
+      - "docs_and_working_folder_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code mutation in plan-only scope. Neighborhood read of evidence-chain-report modules read-only."
+    modules_or_boundaries: "Child linked plan, committed working folder, documentation CITDP, program orchestrator W4 fields."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    recorded_at: "2026-10-10"
+    title: "QMM W4 evidence-chain readouts child linked plan (plan-only)"
+  risk_analysis:
+    abuse_cases: []
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Plan-only w4_scope misread as implement authorization."
+        - "W1–W3 gate receipts reused as W4 activation evidence."
+        - "Cross-cohort rollup despite incompatible schema_version or profile_depth."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any runtime edit under mcp-server/src/fidelity-research/evidence-chain-report in plan-only pass."
+        - "Any new REQ-EVIDENCE_CHAIN_REPORT index mutation in plan-only pass."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/tied-qmm-w4-evidence-chain-report-plan.md"
+        - "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/PLAN.md"
+        - "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/checklist-tracker.yaml"
+      falsification_questions:
+        - "Does any plan-only sentence authorize RED or runtime code?"
+        - "Does the child plan forbid inheriting minimal depth into implement?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Plan-only documentation pass. Implement pass must select integrated depth again with fresh activation."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Read-only plan and working folder review"
+        evidence_method: "Committed process evidence"
+        limitation: "Does not prove cohort report behavior."
+        owner: "agent"
+        rationale: "Deliverable is child plan and documentation CITDP."
+        result: "pass"
+        risk: "Authority misread as implement"
+        threshold: "No product TIED mutation in plan-only pass"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: false
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-10"
+      owner: "W4 implement build-plan session"
+      summary: "Implement must pass pre_implementation with fresh integrated activation before RED."
+    risks:
+      - "Minimal depth copied into implement CITDP."
+      - "Prior wave receipts treated as W4 activation."
+    scenarios:
+      - "Documentation-only proof boundary"
+      - "Depth inheritance into CLI/report work"
+  sponsor_decisions:
+    recorded_at: "2026-10-10"
+    summary: "Plan-only authored; implement requires separate sponsor authority."
+    w4_mode: "plan_only"
+  test_strategy:
+    matrix_notes: "Static documentation checks only. Implement matrix in child plan."
+    summary: "Verify RESOLVE map, gate contracts, and empty token delta in plan-only pass."

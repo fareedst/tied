@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-10-10T20:33:39.297Z",
+  "runs": [
+    {
+      "label": "w4-v1-mixed-cohorts",
+      "exit_code": 0,
+      "yaml_sha256": "278e7d5f1484f9513766dbcfc004a623f942deb1811c3b7bffcdddf96a1692c1",
+      "markdown_sha256": "e2a67081e8ca902838faf4256646ab45cc2c6fdec9e406a4deed29e5241e5fdd",
+      "operator_local_no_absolute_paths": true,
+      "stderr": ""
+    },
+    {
+      "label": "w4-v2-denominator-subcohorts",
+      "exit_code": 0,
+      "yaml_sha256": "25379af333595fb5344c8dd8b674f48bf3bfdea26de4144dbc6738ca935a487c",
+      "markdown_sha256": "acde3017a6315e340b147f39c13ae99e180e4351e11831ef23b403dc3469b0ac",
+      "operator_local_no_absolute_paths": true,
+      "stderr": ""
+    }
+  ]
+}

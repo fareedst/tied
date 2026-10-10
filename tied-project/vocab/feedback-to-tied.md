@@ -56,6 +56,8 @@ Privacy tier, idempotency key, proof boundary, client cohort, and denominator fi
 | **tied_feedback_review_bridge** | review bridge MCP | MCP tool name (Kaizen Phase 5 digest review handoff) |
 | **tied_feedback_outcome_record** | outcome record MCP | MCP tool name (Kaizen Phase 6 outcome loop) |
 | **tied_feedback_pilot_run** | pilot run MCP | MCP tool name (Kaizen Phase 7 feedback pilot) |
+| **waived_at_program_close** | skipped, cancelled (alone) | QMM program exit disposition for an optional wave (e.g. W6) not executed; distinct from backlog **defer** |
+| **deferred** (Kaizen Phase 3) | waived (for Phase 3 alone) | Closed Kaizen program keeps Phase 3 transport **deferred** until a **separate** Kaizen hinge reopen — not the same as QMM W6 **waived_at_program_close** |
 
 ---
 

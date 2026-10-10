@@ -1,0 +1,87 @@
+CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE:
+  change_definition:
+    current_behavior: "Orchestrator reports W1–W5 implement complete but program_phase in_progress; parent and child linked plans carry stale blocked/in-progress status lines; W1/W4/W5 lack implement_checklist parity on orchestrator; W6 deferred_hinge without program-exit waiver record."
+    desired_behavior: "Single reconciled story: program closed, W6 waived_at_program_close, all wave gate receipts registered on orchestrator, doc-reconcile-evidence.md pass/fixed for every matrix row, two sponsor-requested commits."
+    non_goals:
+      - "Implement Kaizen Phase 3 transport or new Phase 3 REQ"
+      - "Edit tied-bundle methodology YAML"
+      - "git push unless sponsor requests later"
+      - "Single combined commit (sponsor chose two commits)"
+    success_criteria:
+      - "sponsor-authority-qmm-program-close-w6-waived-20261010.md on disk"
+      - "doc-reconcile-evidence.md lists all artifacts with pass or fixed disposition"
+      - "qmm-program-execution-checklist.yaml program_phase closed, current_step EXIT, W6 waived_at_program_close"
+      - "Parent docs/tied-qmm-methodology-learning-plan.md and child W1–W5 plans aligned to implement complete + program exit"
+      - "Commit 1 W5 stack; Commit 2 program close hygiene"
+    unchanged_behavior: "Product behavior from W1–W5 REQ stacks; Kaizen closed program Phase 3 remains deferred on Kaizen orchestrator."
+  evidence:
+    commands:
+      - "Read-only cross-artifact hygiene matrix"
+      - "tied_checklist_gate_validate pre_implementation (minimal advisory)"
+      - "lint_yaml on changed project YAML"
+      - "Commit 1: enrollment tests + tied_validate_consistency"
+    manifest_reference: null
+    proof_boundaries:
+      - "docs_and_orchestrator_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code changes unless LEAP from doc drift discovery."
+    modules_or_boundaries: "docs/, tied-project/working/PLAN-TIED-QMM-*, orchestrator, vocab feedback-to-tied.md"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "pending"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-QMM-PROGRAM-CLOSE"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    recorded_at: "2026-10-10"
+    title: "QMM program close — W6 waived, doc hygiene, two commits"
+  risk_analysis:
+    abuse_cases:
+      - "W6 waiver misread as Kaizen Phase 3 implemented"
+      - "Plan-only gate receipts cited as implement activation"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Child plan still says W1 plan-only while REQ gates exist on disk."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Orchestrator implement_checklist missing paths that fail test -f"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/doc-reconcile-evidence.md"
+        - "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml"
+      falsification_questions:
+        - "Does any doc still authorize W1 RED without implement complete?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Documentation and orchestrator state only; no new persistence or MCP behavior."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "doc-reconcile-evidence.md row audit"
+        evidence_method: "Committed process evidence"
+        limitation: "Does not prove runtime regressions beyond commit 1 test scope."
+        owner: "agent"
+        rationale: "Deliverable is reconciled documentation and orchestrator index."
+        result: "pass"
+        risk: "Stale status misroutes next agent"
+        threshold: "All matrix rows pass or fixed"
+        waiver:
+          allowed: false
+  test_strategy:
+    unit_tests: "not_applicable"
+    composition_tests: "not_applicable"
+    e2e_tests: "not_applicable"
+    regression_commands:
+      - "Commit 1: mcp-server enrollment unit/MCP tests per W5 implement CITDP"
+    notes: "Program-close commit validates YAML lint and reconcile table only unless indexes touched."

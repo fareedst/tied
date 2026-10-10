@@ -1,0 +1,264 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-10T20:39:23.365Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-EVIDENCE_CHAIN_REPORT",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "integrated",
+    "gate_policy": "per_citdp",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:3b03cdf76861f462637e89a187d9f7ecf873cbafe150f9fc6561d4b4edc237d8",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:3b03cdf76861f462637e89a187d9f7ecf873cbafe150f9fc6561d4b4edc237d8",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:3b03cdf76861f462637e89a187d9f7ecf873cbafe150f9fc6561d4b4edc237d8",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "content_hash": "sha256:9d3c120249b4130227b05179468284188fda1e8e4d1943e06d591241fda4557f",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:17a5098a2ac543e9a72477acc97b5a9d98627575fac1c7d1a943df86993fe4f3",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:9d3c120249b4130227b05179468284188fda1e8e4d1943e06d591241fda4557f",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:beb3f23fc84d6ad6198261460fd21e4dd9874243332bd33dad169d1a2a1cff06",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:beb3f23fc84d6ad6198261460fd21e4dd9874243332bd33dad169d1a2a1cff06",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:beb3f23fc84d6ad6198261460fd21e4dd9874243332bd33dad169d1a2a1cff06",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:2a9877ca718cc43298f2637d00f084955f9a1ad2fcb9b389896a8c6a8ae3b2c2",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:660e8b14dab3fec8198ed359883de67117c613c3e7a603496dc9b3018446c651",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-EVIDENCE_CHAIN_REPORT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:38d659ad29aeb4c7846ff8c51cb0a0af54f721c4cf9936ff10318fe9af4394f8",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:e3d75bdf4370701d18560cc7217cfa9c681bff0fe682a5242e70d8e069927203",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:4b4e9aeb6d2c249ea030833a1758ca1d9498dd4e886dd11b1547b3b513ac46d0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/close_out-gate-result.json",
+      "content_hash": "sha256:1180ba90e2c73b4d237ea054b2eda9d6bf55a4874d63d17f93078ec1a87c1d0c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:26fda71ae12e776649b970e7861486915399ccfd9d9bbe30852eef857fd06c25",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/tied-verify-result.json",
+      "content_hash": "sha256:b30dac690bc7be09c49f50007d0e04023f585fd2230ca68614b5c82e80fbb4a0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:a6b2c37d26dacfa1b0f29285d592702005f544ba4758de156aeed7d8980637e5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/verification-gate-result.json",
+      "content_hash": "sha256:9d6614ca5751d66804eabe918d3055fd438d31fe8a3f595ddb6518614b7fe972",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:6b8293dda5f73d3dad05916d487e0476f61e204868734c1cba998457f77d9749",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": []
+}

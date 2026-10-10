@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | **W2 implement in progress** — B1–B3 code/tests landed; integrated gates/close-out pending |
+| **Status** | **Implement complete** (2026-10-10) — `REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING`; close_out: `tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/close_out-gate-result.json` |
 | **Change ID** | `PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS` |
 | **Parent program** | [`PLAN-TIED-QMM-METHODOLOGY-LEARNING`](tied-qmm-methodology-learning-plan.md) |
 | **Future REQ** | `REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING` (implement pass only — not minted in plan-only) |
@@ -22,6 +22,8 @@
 **Non-implication (QA vocab):** `gate_decided` / checklist gate pass does **not** prove **methodology effectiveness readout**; W2 pairing makes that gap explicit and fail-closed only when CITDP scope + trap disposition apply.
 
 **Inconclusive ≠ trap:** W1 demo `methodology_outcome_observation.value: inconclusive` with a recorded row and `proof_boundary` can satisfy **paired** (linked readout exists); **conformance_only_trap** is conformance evidence without a typed outcome link or with **generic prose** refs only.
+
+**Program exit:** Parent QMM program **closed** 2026-10-10; **W6 waived** at exit; Kaizen Phase 3 unchanged (**deferred**).
 
 ---
 

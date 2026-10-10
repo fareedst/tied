@@ -546,7 +546,7 @@ PRELOAD [`feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md) for K
 
 | Item | State | Notes |
 | --- | --- | --- |
-| Phase 3 outbox / transport | **Deferred** | Hinge reopen on CITDP (recipient + channel) |
+| Phase 3 outbox / transport | **Deferred** | Hinge reopen on CITDP (recipient + channel); QMM program **W6 waived_at_program_close** (2026-10-10) ≠ Phase 3 implemented — see [`tied-qmm-methodology-learning-plan.md`](tied-qmm-methodology-learning-plan.md) |
 | MCP composition (Phases 4–7) | **Implemented locally** | `77b5ae6`; four tools + 4/4 composition tests |
 | `REQ-KAIZEN-FEEDBACK-MCP-WIRING` close-out | **Closed** | `kaizen-kmcp-close-20261008`; [closeout-run-close-out-gates-final.json](../tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/closeout-run-close-out-gates-final.json) |
 | Publish to remote | **Deferred** | 14 commits on `main` not pushed (sponsor policy) |

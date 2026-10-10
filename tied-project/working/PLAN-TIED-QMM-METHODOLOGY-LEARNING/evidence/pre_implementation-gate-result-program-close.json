@@ -1,0 +1,13 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "recorded_at": "2026-10-10T23:25:00-07:00",
+  "request_token": "PLAN-TIED-QMM-PROGRAM-CLOSE",
+  "interpretation": "Program-close documentation pass; minimal advisory gate allows W5 commit and doc hygiene.",
+  "tracker_path": "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/program-close-checklist-tracker.yaml",
+  "citdp_path": "tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml"
+}

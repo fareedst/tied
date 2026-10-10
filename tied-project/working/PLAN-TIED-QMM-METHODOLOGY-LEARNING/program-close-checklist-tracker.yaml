@@ -1,0 +1,40 @@
+schema_version: qmm-program-close-tracker.v1
+request: PLAN-TIED-QMM-PROGRAM-CLOSE
+purpose: "Program close — W6 waived, doc hygiene, two commits (minimal advisory)."
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: in_progress
+depth_tier: minimal
+gate_policy: advisory
+execution_authority:
+  mode: approved_full
+  evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md
+citdp:
+  status: complete
+  path: tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml
+gate:
+  phase: pre_implementation
+  status: pending
+steps:
+  - id: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml
+  - id: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md
+  - id: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml
+  - id: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: "Minimal documentation-only program close; counterexamples recorded in CITDP adversarial_inquiry."
+  - id: gate-pseudocode-validation
+    disposition: not_applicable
+    policy: no-impl-pseudocode-mutation
+    rationale: "Program close does not change IMPL essence_pseudocode; W5 product stack already validated."

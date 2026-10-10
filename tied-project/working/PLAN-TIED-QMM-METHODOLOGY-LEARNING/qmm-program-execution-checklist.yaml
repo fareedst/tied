@@ -1,331 +1,422 @@
-# QMM methodology learning — program execution checklist (central orchestrator)
-#
-# Purpose: One resume surface for waves W0–W6 after sponsor approves execution.
-# Each behavior-changing wave runs its own per-REQ copy of
-# tied-bundle/docs/agent-req-implementation-checklist.yaml under working/{REQ-TOKEN}/.
-#
-# W0 is documentation-only. W1 implements the comparison "Strategic suggestion" in full.
-
-schema_version: qmm-program-execution.v1
-last_updated: "2026-10-10T11:15:00-07:00"
-
-program:
-  label: QMM Loop 3 methodology learning (W0–W6)
-  program_request: PLAN-TIED-QMM-METHODOLOGY-LEARNING
-  linked_plan: docs/tied-qmm-methodology-learning-plan.md
-  source_analysis: docs/comparisons/qmm-kaizen-vs-tied.md
-  refine_tracker: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/checklist-tracker.yaml
-  vocabulary_preload:
-    - tied-project/vocab/feedback-to-tied.md
-    - tied-project/vocab/quality-assurance.md
-    - tied-project/vocab/leap-proposal-queue.md
-    - tied-project/vocab/pseudocode-and-citdp.md
-    - tied-project/vocab/sponsor-agent-relationship.md
-  citdp_plan: null  # populate when W0 plan-close-out persists CITDP-PLAN-TIED-QMM-METHODOLOGY-LEARNING.yaml
-  citdp_status: deferred
-  citdp_status_reason: "W0 is documentation-only; no behavior-changing REQ/CITDP pair exists."
-  pre_implementation_gate: attempted_w0_not_allowed
-  pre_implementation_gate_reason: "W0 gate call returned allowed:false (deferred CITDP). W1 requires full CITDP + per-REQ Tracker before RED."
-  w0_refine_pass: 2
-
-program_phase: in_progress
-# proposed | ready_to_execute | in_progress | closed | paused_sponsor_hinge
-
-current_wave: W3
-
+agent_handoff: "Program closed 2026-10-10; W1–W5 implement complete; W6 waived_at_program_close (Kaizen Phase 3 unchanged/deferred).\nSession handoff: evidence/session-handoff.md\nDoc reconcile: evidence/doc-reconcile-evidence.md\n"
+current_step: "EXIT"
+current_wave: "W6"
+program_closed_at: "2026-10-10T23:30:00-07:00"
+program_phase: "closed"
 execution_authority:
-  mode: approved_full
-  sponsor_statement: >
-    Full W0 program execution authority; W1 implement complete; W2 implement authorized: build-plan on
-    docs/tied-qmm-w2-conformance-effectiveness-plan.md for REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-    (RED, MCP, integrated CITDP, CITDP-scoped gate-blocking on verification/close_out, B1–B3).
-    Canonical tied-bundle methodology edits remain out of scope.
-  recorded_at: "2026-10-10T10:50:00-07:00"
-  evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md
-  w1_scope: implement
-  w1_implement_authorized_at: "2026-10-10T09:56:00-07:00"
-  w1_implement_evidence_ref: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/PLAN.md
-  w2_scope: implement
-  w2_plan_only_authorized_at: "2026-10-10T10:45:00-07:00"
-  w2_plan_only_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-plan-only-20261010.md
-  w2_implement_authorized_at: "2026-10-10T10:50:00-07:00"
-  w2_implement_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-implement-20261010.md
-  w3_scope: implement
-  w3_plan_only_authorized_at: "2026-10-10T11:10:00-07:00"
-  w3_plan_only_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w3-plan-only-20261010.md
-  w3_implement_authorized_at: "2026-10-10T13:05:00-07:00"
-  w3_implement_evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w3-implement-20261010.md
-  w0_authority: complete
+  evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md"
+  mode: "approved_full"
   pre_approved_hinges:
-    storage_shape: compose_existing_stores
-    w1_implement_depth_tier: integrated
-    w2_implement_depth_tier: integrated
-    w2_pairing_enforcement: gate_blocking_verification_close_out_citdp_scoped
-    w3_bridge_trigger: explicit_mcp_only_no_auto_create
-    w3_implement_depth_tier: integrated
-    canonical_promotion: leap_plus_sponsor_methodology_change
-    cross_client_readout: operator_local_until_owner_named
-    kaizen_phase3: deferred
+    canonical_promotion: "leap_plus_sponsor_methodology_change"
+    cross_client_readout: "operator_local_until_owner_named"
+    kaizen_phase3: "deferred"
+    storage_shape: "compose_existing_stores"
+    w1_implement_depth_tier: "integrated"
+    w2_implement_depth_tier: "integrated"
+    w2_pairing_enforcement: "gate_blocking_verification_close_out_citdp_scoped"
+    w3_bridge_trigger: "explicit_mcp_only_no_auto_create"
+    w3_implement_depth_tier: "integrated"
+    w5_enrollment_enforcement: "assist_citdp_scoped_gate_blocking_only"
+    w5_implement_depth_tier: "integrated"
+    w5_prompt_skill_contract: "advisory_enrollment_steps_default"
+  recorded_at: "2026-10-10T10:50:00-07:00"
   sponsor_interrupt_only_when:
-    - hinge reopen via explicit sponsor change request and CITDP update
-    - canonical promotion into tied-bundle methodology without separate methodology change request
-    - shareable_hashed cross-client export without named redaction owner and expiry
-    - integrated_waiver for depth below integrated on W1+ persistence/MCP (owner, expiry, rationale)
-    - agency boundary canonical REQ/ARCH/IMPL intent beyond delegated envelope
-
+    - "agency boundary canonical REQ/ARCH/IMPL intent beyond delegated envelope"
+    - "canonical promotion into tied-bundle methodology without separate methodology change request"
+    - "hinge reopen via explicit sponsor change request and CITDP update"
+    - "integrated_waiver for depth below integrated on W1+ persistence/MCP (owner, expiry, rationale)"
+    - "shareable_hashed cross-client export without named redaction owner and expiry"
+  program_close_authority_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md"
+  sponsor_statement: "Full W0 program execution authority; W1–W5 implement complete; program closed 2026-10-10 with W6 waived_at_program_close (not Kaizen Phase 3 transport). Canonical tied-bundle methodology edits remain out of scope.\n"
+  w0_authority: "complete"
+  w1_implement_authorized_at: "2026-10-10T09:56:00-07:00"
+  w1_implement_evidence_ref: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/PLAN.md"
+  w1_scope: "implement"
+  w2_implement_authorized_at: "2026-10-10T10:50:00-07:00"
+  w2_implement_evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-implement-20261010.md"
+  w2_plan_only_authorized_at: "2026-10-10T10:45:00-07:00"
+  w2_plan_only_evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-plan-only-20261010.md"
+  w2_scope: "implement"
+  w3_implement_authorized_at: "2026-10-10T13:05:00-07:00"
+  w3_implement_evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w3-implement-20261010.md"
+  w3_plan_only_authorized_at: "2026-10-10T11:10:00-07:00"
+  w3_plan_only_evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w3-plan-only-20261010.md"
+  w3_scope: "implement"
+  w4_implement_authority_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w4-implement-20261010.md"
+  w4_implement_citdp: "tied-project/citdp/CITDP-PLAN-TIED-QMM-W4-IMPLEMENT.yaml"
+  w4_implement_tracker: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/implement-checklist-tracker.yaml"
+  w4_plan_only_evidence_ref: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/checklist-tracker.yaml"
+  w4_scope: "implement"
+  w5_implement_authority_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w5-implement-20261010.md"
+  w5_implement_authorized_at: "2026-10-10T15:41:00-07:00"
+  w5_implement_citdp: "tied-project/citdp/CITDP-REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
+  w5_implement_evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w5-implement-20261010.md"
+  w5_implement_tracker: "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/checklist-tracker.yaml"
+  w5_plan_only_evidence_ref: "tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/checklist-tracker.yaml"
+  w5_scope: "implement"
 flow_control:
   notation:
-    - symbol: GOTO
-      meaning: Jump to wave id; update current_wave in this file
-    - symbol: CALL
-      meaning: Run child workflow (plan-new-feature, build-plan, plan-close-out) then RETURN
-  ordering: strict_sequential_waves_unless_sponsor_reorders
-
+    - meaning: "Jump to wave id; update current_wave in this file"
+      symbol: "GOTO"
+    - meaning: "Run child workflow (plan-new-feature, build-plan, plan-close-out) then RETURN"
+      symbol: "CALL"
+  ordering: "strict_sequential_waves_unless_sponsor_reorders"
+last_updated: "2026-10-10T23:30:00-07:00"
+program:
+  citdp_plan: "tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml"
+  citdp_status: "complete"
+  citdp_status_reason: "Program-close documentation pass; W6 waived at exit."
+  program_close_tracker: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/program-close-checklist-tracker.yaml"
+  label: "QMM Loop 3 methodology learning (W0–W6)"
+  linked_plan: "docs/tied-qmm-methodology-learning-plan.md"
+  pre_implementation_gate: "attempted_w0_not_allowed"
+  pre_implementation_gate_reason: "W0 gate call returned allowed:false (deferred CITDP). W1 requires full CITDP + per-REQ Tracker before RED."
+  program_request: "PLAN-TIED-QMM-METHODOLOGY-LEARNING"
+  refine_tracker: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/checklist-tracker.yaml"
+  source_analysis: "docs/comparisons/qmm-kaizen-vs-tied.md"
+  vocabulary_preload:
+    - "tied-project/vocab/feedback-to-tied.md"
+    - "tied-project/vocab/leap-proposal-queue.md"
+    - "tied-project/vocab/prompt-composer.md"
+    - "tied-project/vocab/pseudocode-and-citdp.md"
+    - "tied-project/vocab/quality-assurance.md"
+    - "tied-project/vocab/sponsor-agent-relationship.md"
+  w0_refine_pass: 2
+schema_version: "qmm-program-execution.v1"
 waves:
-  W0:
-    title: Program charter and RESOLVE
-    status: complete
-    depth_tier_default: minimal
-    gate_policy_default: advisory
-    child_linked_plan: docs/tied-qmm-methodology-learning-plan.md
-    exit_criteria:
-      - linked plan and orchestrator on disk
-      - RESOLVE table matches comparison Touchpoint 1
-      - W1 marked as first implementation with separate child plan pending
-    checklist:
-      - id: w0-resolve
-        label: RESOLVE sponsor QMM terms to TIED vocabulary
-        status: complete
-      - id: w0-wave-table
-        label: Author W0–W6 and backlog wave table
-        status: complete
-      - id: w0-orchestrator
-        label: Author qmm-program-execution-checklist.yaml
-        status: complete
-      - id: w0-refine-pass-2
-        label: Refine-plan pass 2 — disposition key, W1 skeleton, test strategy, gate attempt
-        status: complete
-      - id: w0-sponsor-authority
-        label: Sponsor records execution_authority block (see linked plan §0.8)
-        status: complete
-        evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md
-      - id: w0-plan-close-out
-        label: Optional plan-close-out for W0 doc batch
-        status: pending
-
-  W1:
-    title: Strategic suggestion — methodology PDSA (full)
-    status: complete
-    plan_only_status: complete
-    implement_status: complete
-    depth_tier_default: integrated
-    gate_policy_default: per_citdp
-    child_linked_plan: docs/tied-qmm-w1-methodology-pdsa-plan.md
-    child_working_entry: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/PLAN.md
-    child_plan_status: authored
-    documentation_citdp: tied-project/citdp/CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA.yaml
-    future_req: REQ-METHODOLOGY-LEARNING-EXPERIMENT
-    plan_only_checklist:
-      - id: w1-child-linked-plan
-        label: Author docs/tied-qmm-w1-methodology-pdsa-plan.md per parent section 5.1
-        status: complete
-      - id: w1-working-folder
-        label: Create PLAN-TIED-QMM-W1-METHODOLOGY-PDSA working folder
-        status: complete
-      - id: w1-plan-citdp
-        label: Persist CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA
-        status: complete
-      - id: w1-plan-only-gate
-        label: Record pre_implementation gate attempt (expect not allowed for RED)
-        status: complete
-    entry_requires:
-      - sponsor execution_authority naming W1 scope
-      - W1 child linked plan
-      - W1 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml
-      - W1 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers
-      - successful pre_implementation gate
-    notes: >
-      Next sponsor-requested deliverable is the W1 linked plan and per-wave checklist only.
-      Implements hypothesis, baseline, countermeasure promotion path, outcome observation,
-      cohort readout hooks, and rule reversal — without strategic non-goals (scores, SPC charts, DORA).
-    depends_on:
-      - W0
-    exit_criteria_summary:
-      - W1 REQ/ARCH/IMPL with tests and integrated gates as applicable
-      - End-to-end methodology learning experiment on stdd working evidence
-      - tied_validate_consistency pass for project YAML touched
-
-  W2:
-    title: Conformance–effectiveness pairing for methodology changes
-    status: complete
-    plan_only_status: complete
-    implement_status: complete
-    implement_req: REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-    implement_working_entry: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/PLAN.md
-    depth_tier_default: integrated
-    gate_policy_default: per_citdp
-    child_linked_plan: docs/tied-qmm-w2-conformance-effectiveness-plan.md
-    child_working_entry: tied-project/working/PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS/PLAN.md
-    child_plan_status: authored
-    documentation_citdp: tied-project/citdp/CITDP-PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS.yaml
-    future_req: REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-    plan_only_checklist:
-      - id: w2-child-linked-plan
-        label: Author docs/tied-qmm-w2-conformance-effectiveness-plan.md
-        status: complete
-      - id: w2-working-folder
-        label: Create PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS working folder
-        status: complete
-      - id: w2-plan-citdp
-        label: Persist CITDP-PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS
-        status: complete
-      - id: w2-plan-only-gate
-        label: Record pre_implementation gate attempt (expect not allowed for RED)
-        status: complete
-      - id: w2-implement-authority
-        label: Sponsor extends w2_scope implement (refine-plan 2026-10-10)
-        status: complete
-        evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-implement-20261010.md
-    implement_checklist:
-      - id: w2-req-tracker
-        label: Copy fresh Tracker to working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/
-        status: complete
-      - id: w2-req-citdp
-        label: Persist CITDP-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING (integrated, per_citdp)
-        status: complete
-      - id: w2-pre-implementation-gate
-        label: pre_implementation allowed on implement CITDP + REQ Tracker
-        status: complete
-        evidence_ref: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/pre_implementation-gate-result.json
-      - id: w2-verification-gate
-        label: verification allowed + tied_verify on implement REQ
-        status: complete
-        evidence_ref: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/verification-gate-result.json
-      - id: w2-close-out-gate
-        label: close_out allowed after traceable-commit
-        status: complete
-        evidence_ref: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/close_out-gate-result.json
-      - id: w2-b1-b3
-        label: TDD batches B1–B3 per child plan §10
-        status: complete
-    entry_requires:
-      - sponsor execution_authority naming W2 scope
-      - W2 child linked plan
-      - W2 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml
-      - W2 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers
-      - successful pre_implementation gate
-    notes: >
-      W2 implement complete (2026-10-10). Pairing MCP + CITDP-scoped gate-blocking delivered under
-      REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING. Gate-blocking remains CITDP-scoped only.
-    depends_on:
-      - W1
-    exit_criteria_summary:
-      - REQ/ARCH/IMPL with pairing tests and integrated gates
-      - Scoped gate-blocking proven by composition test
-      - Paired demo on mle-demo-20261010-001 plus trap fixture
-
-  W3:
-    title: Loop 2 Kaizen bridge to Loop 3 experiments
-    status: complete
-    plan_only_status: complete
-    implement_status: complete
-    implement_req: REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
-    implement_working_entry: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/PLAN.md
-    depth_tier_default: integrated
-    gate_policy_default: per_citdp
-    child_linked_plan: docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md
-    child_working_entry: tied-project/working/PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE/PLAN.md
-    child_plan_status: authored
-    documentation_citdp: tied-project/citdp/CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE.yaml
-    future_req: REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
-    plan_only_checklist:
-      - id: w3-child-linked-plan
-        label: Author docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md
-        status: complete
-      - id: w3-working-folder
-        label: Create PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE working folder
-        status: complete
-      - id: w3-plan-citdp
-        label: Persist CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE
-        status: complete
-      - id: w3-plan-only-gate
-        label: Record pre_implementation gate attempt (expect not allowed for RED)
-        status: complete
-      - id: w3-orchestrator-reconcile
-        label: Reconcile W2 complete and W3 plan-only fields
-        status: complete
-    implement_checklist:
-      - id: w3-req-tracker
-        label: Copy fresh Tracker to working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/
-        status: complete
-      - id: w3-req-citdp
-        label: Persist CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE (integrated, per_citdp)
-        status: complete
-      - id: w3-pre-implementation-gate
-        label: pre_implementation allowed on implement CITDP + REQ Tracker
-        status: complete
-        evidence_ref: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/pre_implementation-gate-result.json
-      - id: w3-verification-gate
-        label: verification allowed + tied_verify on implement REQ
-        status: complete
-        evidence_ref: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-gate-result.json
-      - id: w3-close-out-gate
-        label: close_out allowed after traceable-commit
-        status: complete
-        evidence_ref: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/close_out-gate-result.json
-      - id: w3-b1-b3
-        label: TDD batches B1–B3 per child plan §10
-        status: complete
-    entry_requires:
-      - sponsor execution_authority naming W3 scope
-      - W3 child linked plan
-      - W3 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml
-      - W3 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers
-      - successful pre_implementation gate
-    notes: >
-      W3 implement verification closed 2026-10-10 (integrated activation + tied_verify on
-      REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE). close_out and program wave complete pending sponsor
-      traceable-commit. Explicit MCP only — no auto-create on methodology_improvement capture.
-    depends_on:
-      - W1
-    exit_criteria_summary:
-      - REQ/ARCH/IMPL with bridge tests and integrated gates
-      - Composition proves bridge does not write methodology-experiments.yaml
-      - Demo feedback → bridge → explicit upsert
-
-  W4:
-    title: Client cohort evidence-chain readouts for methodology experiments
-    status: planned
-    depth_tier_default: integrated
-    child_linked_plan: null
-    depends_on:
-      - W1
-
-  W5:
-    title: Prompt-type and gate-policy production-system enrollment
-    status: planned
-    depth_tier_default: integrated
-    child_linked_plan: null
-    depends_on:
-      - W1
-      - W2
-      - W3
-      - W4
-
-  W6:
-    title: Optional Kaizen Phase 3 transport (hinge reopen only)
-    status: deferred_hinge
-    linked_kaizen_plan: docs/tied-kaizen-feedback-loop-plan.md
-    notes: Does not block W1–W5 local proof.
-
   backlog:
-    title: Comparison deferrals (non-goals for strategic core)
     items:
-      - spc_control_charts_in_tied_core
-      - dora_ingestion_in_tied_index
-      - universal_dmaic_six_sigma
-    status: deferred
-
-agent_handoff: |
-  Program phase in_progress; W3 complete (2026-10-10 traceable-commit). Next: W4 when sponsored.
-  MCP: tied_methodology_kaizen_experiment_bridge. Session handoff: evidence/session-handoff.md
+      - "dora_ingestion_in_tied_index"
+      - "spc_control_charts_in_tied_core"
+      - "universal_dmaic_six_sigma"
+    status: "deferred"
+    title: "Comparison deferrals (non-goals for strategic core)"
+  W0:
+    checklist:
+      - evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md"
+        id: "w0-sponsor-authority"
+        label: "Sponsor records execution_authority block (see linked plan §0.8)"
+        status: "complete"
+      - id: "w0-orchestrator"
+        label: "Author qmm-program-execution-checklist.yaml"
+        status: "complete"
+      - id: "w0-plan-close-out"
+        label: "Optional plan-close-out for W0 doc batch"
+        status: "complete"
+      - id: "w0-refine-pass-2"
+        label: "Refine-plan pass 2 — disposition key, W1 skeleton, test strategy, gate attempt"
+        status: "complete"
+      - id: "w0-resolve"
+        label: "RESOLVE sponsor QMM terms to TIED vocabulary"
+        status: "complete"
+      - id: "w0-wave-table"
+        label: "Author W0–W6 and backlog wave table"
+        status: "complete"
+    child_linked_plan: "docs/tied-qmm-methodology-learning-plan.md"
+    depth_tier_default: "minimal"
+    exit_criteria:
+      - "linked plan and orchestrator on disk"
+      - "RESOLVE table matches comparison Touchpoint 1"
+      - "W1 marked as first implementation with separate child plan pending"
+    gate_policy_default: "advisory"
+    status: "complete"
+    title: "Program charter and RESOLVE"
+  W1:
+    child_linked_plan: "docs/tied-qmm-w1-methodology-pdsa-plan.md"
+    child_plan_status: "authored"
+    child_working_entry: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/PLAN.md"
+    depends_on:
+      - "W0"
+    depth_tier_default: "integrated"
+    documentation_citdp: "tied-project/citdp/CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA.yaml"
+    entry_requires:
+      - "sponsor execution_authority naming W1 scope"
+      - "successful pre_implementation gate"
+      - "W1 child linked plan"
+      - "W1 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers"
+      - "W1 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml"
+    exit_criteria_summary:
+      - "End-to-end methodology learning experiment on stdd working evidence"
+      - "tied_validate_consistency pass for project YAML touched"
+      - "W1 REQ/ARCH/IMPL with tests and integrated gates as applicable"
+    future_req: "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    gate_policy_default: "per_citdp"
+    implement_checklist:
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/close_out-gate-result.json"
+        id: "w1-close-out-gate"
+        label: "close_out allowed after traceable-commit"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json"
+        id: "w1-pre-implementation-gate"
+        label: "pre_implementation allowed on implement CITDP + REQ Tracker"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/verification-gate-result.json"
+        id: "w1-verification-gate"
+        label: "verification allowed + tied_verify on implement REQ"
+        status: "complete"
+    implement_req: "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    implement_status: "complete"
+    implement_working_entry: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/PLAN.md"
+    notes: "W1 implement complete 2026-10-10 under REQ-METHODOLOGY-LEARNING-EXPERIMENT (integrated gates, local proof).\n"
+    plan_only_checklist:
+      - id: "w1-child-linked-plan"
+        label: "Author docs/tied-qmm-w1-methodology-pdsa-plan.md per parent section 5.1"
+        status: "complete"
+      - id: "w1-plan-citdp"
+        label: "Persist CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA"
+        status: "complete"
+      - id: "w1-plan-only-gate"
+        label: "Record pre_implementation gate attempt (expect not allowed for RED)"
+        status: "complete"
+      - id: "w1-working-folder"
+        label: "Create PLAN-TIED-QMM-W1-METHODOLOGY-PDSA working folder"
+        status: "complete"
+    plan_only_status: "complete"
+    status: "complete"
+    title: "Strategic suggestion — methodology PDSA (full)"
+  W2:
+    child_linked_plan: "docs/tied-qmm-w2-conformance-effectiveness-plan.md"
+    child_plan_status: "authored"
+    child_working_entry: "tied-project/working/PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS/PLAN.md"
+    depends_on:
+      - "W1"
+    depth_tier_default: "integrated"
+    documentation_citdp: "tied-project/citdp/CITDP-PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS.yaml"
+    entry_requires:
+      - "sponsor execution_authority naming W2 scope"
+      - "successful pre_implementation gate"
+      - "W2 child linked plan"
+      - "W2 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers"
+      - "W2 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml"
+    exit_criteria_summary:
+      - "Paired demo on mle-demo-20261010-001 plus trap fixture"
+      - "REQ/ARCH/IMPL with pairing tests and integrated gates"
+      - "Scoped gate-blocking proven by composition test"
+    future_req: "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    gate_policy_default: "per_citdp"
+    implement_checklist:
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/close_out-gate-result.json"
+        id: "w2-close-out-gate"
+        label: "close_out allowed after traceable-commit"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/pre_implementation-gate-result.json"
+        id: "w2-pre-implementation-gate"
+        label: "pre_implementation allowed on implement CITDP + REQ Tracker"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/verification-gate-result.json"
+        id: "w2-verification-gate"
+        label: "verification allowed + tied_verify on implement REQ"
+        status: "complete"
+      - id: "w2-b1-b3"
+        label: "TDD batches B1–B3 per child plan §10"
+        status: "complete"
+      - id: "w2-req-citdp"
+        label: "Persist CITDP-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING (integrated, per_citdp)"
+        status: "complete"
+      - id: "w2-req-tracker"
+        label: "Copy fresh Tracker to working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/"
+        status: "complete"
+    implement_req: "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    implement_status: "complete"
+    implement_working_entry: "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/PLAN.md"
+    notes: "W2 implement complete (2026-10-10). Pairing MCP + CITDP-scoped gate-blocking delivered under REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING. Gate-blocking remains CITDP-scoped only.\n"
+    plan_only_checklist:
+      - evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w2-implement-20261010.md"
+        id: "w2-implement-authority"
+        label: "Sponsor extends w2_scope implement (refine-plan 2026-10-10)"
+        status: "complete"
+      - id: "w2-child-linked-plan"
+        label: "Author docs/tied-qmm-w2-conformance-effectiveness-plan.md"
+        status: "complete"
+      - id: "w2-plan-citdp"
+        label: "Persist CITDP-PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS"
+        status: "complete"
+      - id: "w2-plan-only-gate"
+        label: "Record pre_implementation gate attempt (expect not allowed for RED)"
+        status: "complete"
+      - id: "w2-working-folder"
+        label: "Create PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS working folder"
+        status: "complete"
+    plan_only_status: "complete"
+    status: "complete"
+    title: "Conformance–effectiveness pairing for methodology changes"
+  W3:
+    child_linked_plan: "docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md"
+    child_plan_status: "authored"
+    child_working_entry: "tied-project/working/PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE/PLAN.md"
+    depends_on:
+      - "W1"
+    depth_tier_default: "integrated"
+    documentation_citdp: "tied-project/citdp/CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE.yaml"
+    entry_requires:
+      - "sponsor execution_authority naming W3 scope"
+      - "successful pre_implementation gate"
+      - "W3 child linked plan"
+      - "W3 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers"
+      - "W3 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml"
+    exit_criteria_summary:
+      - "Composition proves bridge does not write methodology-experiments.yaml"
+      - "Demo feedback → bridge → explicit upsert"
+      - "REQ/ARCH/IMPL with bridge tests and integrated gates"
+    future_req: "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    gate_policy_default: "per_citdp"
+    implement_checklist:
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/close_out-gate-result.json"
+        id: "w3-close-out-gate"
+        label: "close_out allowed after traceable-commit"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/pre_implementation-gate-result.json"
+        id: "w3-pre-implementation-gate"
+        label: "pre_implementation allowed on implement CITDP + REQ Tracker"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-gate-result.json"
+        id: "w3-verification-gate"
+        label: "verification allowed + tied_verify on implement REQ"
+        status: "complete"
+      - id: "w3-b1-b3"
+        label: "TDD batches B1–B3 per child plan §10"
+        status: "complete"
+      - id: "w3-req-citdp"
+        label: "Persist CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE (integrated, per_citdp)"
+        status: "complete"
+      - id: "w3-req-tracker"
+        label: "Copy fresh Tracker to working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/"
+        status: "complete"
+    implement_req: "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    implement_status: "complete"
+    implement_working_entry: "tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/PLAN.md"
+    notes: "W3 implement verification closed 2026-10-10 (integrated activation + tied_verify on REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE). close_out and program wave complete pending sponsor traceable-commit. Explicit MCP only — no auto-create on methodology_improvement capture.\n"
+    plan_only_checklist:
+      - id: "w3-child-linked-plan"
+        label: "Author docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md"
+        status: "complete"
+      - id: "w3-orchestrator-reconcile"
+        label: "Reconcile W2 complete and W3 plan-only fields"
+        status: "complete"
+      - id: "w3-plan-citdp"
+        label: "Persist CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE"
+        status: "complete"
+      - id: "w3-plan-only-gate"
+        label: "Record pre_implementation gate attempt (expect not allowed for RED)"
+        status: "complete"
+      - id: "w3-working-folder"
+        label: "Create PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE working folder"
+        status: "complete"
+    plan_only_status: "complete"
+    status: "complete"
+    title: "Loop 2 Kaizen bridge to Loop 3 experiments"
+  W4:
+    child_linked_plan: "docs/tied-qmm-w4-evidence-chain-report-plan.md"
+    child_plan_status: "authored"
+    child_working_entry: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/PLAN.md"
+    depends_on:
+      - "W1"
+    depth_tier_default: "integrated"
+    future_implementation_requires:
+      - "fresh identity-bound activation evidence when integrated eligibility applies"
+      - "fresh per-REQ Authoritative Tracker"
+      - "implement CITDP with independent profile_depth, depth_tier, and gate_policy"
+      - "sponsor authority naming w4_scope implement"
+      - "successful pre_implementation gate"
+    gate_policy_default: "per_citdp"
+    implement_checklist:
+      - evidence_ref: "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/close_out-gate-result.json"
+        id: "w4-close-out-gate"
+        label: "close_out allowed after traceable-commit"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/pre_implementation-gate-result.json"
+        id: "w4-pre-implementation-gate"
+        label: "pre_implementation allowed on implement CITDP + REQ Tracker"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/verification-gate-result.json"
+        id: "w4-verification-gate"
+        label: "verification allowed + tied_verify on REQ-EVIDENCE_CHAIN_REPORT"
+        status: "complete"
+    implement_req: "REQ-EVIDENCE_CHAIN_REPORT"
+    implement_status: "complete"
+    implement_working_entry: "tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/PLAN.md"
+    notes: "W4 implement complete 2026-10-10. Reuses REQ-EVIDENCE_CHAIN_REPORT stack with wave demonstrations and integrated gates.\n"
+    plan_only_depth_tier: "minimal"
+    plan_only_gate: "attempted_not_allowed_non_activation"
+    plan_only_gate_policy: "advisory"
+    plan_only_status: "complete"
+    plan_only_tracker: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/checklist-tracker.yaml"
+    profile_depth_default: "integrated"
+    status: "complete"
+    title: "Client cohort evidence-chain readouts for methodology experiments"
+  W5:
+    child_linked_plan: "docs/tied-qmm-w5-prompt-type-gate-enrollment-plan.md"
+    child_plan_status: "authored"
+    child_working_entry: "tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/PLAN.md"
+    depends_on:
+      - "W1"
+      - "W2"
+      - "W3"
+      - "W4"
+    depth_tier_default: "integrated"
+    documentation_citdp: "tied-project/citdp/CITDP-PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT.yaml"
+    entry_requires:
+      - "sponsor execution_authority naming W5 scope implement"
+      - "successful pre_implementation gate on implement CITDP + per-REQ Tracker"
+      - "W5 child linked plan"
+      - "W5 CITDP with independently selected profile_depth, depth_tier, gate_policy, and risk triggers"
+      - "W5 per-REQ Tracker copied from tied-bundle/docs/agent-req-implementation-checklist.yaml"
+    exit_criteria_summary:
+      - "Enrollment demos or documented effectiveness_not_measured per under-covered surface"
+      - "REQ/ARCH/IMPL with enrollment helper/MCP and integrated gates"
+      - "Prompt-shared alignment with contract tests when shared docs change"
+    future_req: "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    gate_policy_default: "per_citdp"
+    implement_authority_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w5-implement-20261010.md"
+    implement_citdp: "tied-project/citdp/CITDP-REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
+    implement_req: "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    implement_status: "complete"
+    implement_checklist:
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/close_out-gate-result.json"
+        id: "w5-close-out-gate"
+        label: "close_out allowed after traceable-commit"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/pre_implementation-gate-result.json"
+        id: "w5-pre-implementation-gate"
+        label: "pre_implementation allowed on implement CITDP + REQ Tracker"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/verification-gate-result.json"
+        id: "w5-verification-gate"
+        label: "verification allowed + tied_verify on implement REQ"
+        status: "complete"
+      - evidence_ref: "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/traceable-commit-evidence.md"
+        id: "w5-traceable-commit"
+        label: "W5 implement traceable-commit (commit e9e56a8)"
+        status: "complete"
+    implement_working_entry: "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/PLAN.md"
+    notes: "W5 implement complete 2026-10-10; traceable-commit e9e56a8. B4 prompt-shared advisory, B5 enrollment+pairing demos, B6 integrated gates and tied_verify on REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.\n"
+    plan_only_checklist:
+      - id: "w5-child-linked-plan"
+        label: "Author docs/tied-qmm-w5-prompt-type-gate-enrollment-plan.md"
+        status: "complete"
+      - id: "w5-orchestrator-reconcile"
+        label: "Reconcile W1–W4 complete and W5 plan-only fields"
+        status: "complete"
+      - id: "w5-plan-citdp"
+        label: "Persist CITDP-PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT"
+        status: "complete"
+      - id: "w5-plan-only-gate"
+        label: "Record pre_implementation gate attempt (expect not allowed for RED)"
+        status: "complete"
+      - id: "w5-working-folder"
+        label: "Create PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT working folder"
+        status: "complete"
+    plan_only_depth_tier: "minimal"
+    plan_only_gate: "attempted_not_allowed_non_activation"
+    plan_only_gate_policy: "advisory"
+    plan_only_status: "complete"
+    plan_only_tracker: "tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/checklist-tracker.yaml"
+    profile_depth_default: "integrated"
+    status: "complete"
+    title: "Prompt-type and gate-policy production-system enrollment"
+  W6:
+    disposition_at_program_close: "waived_at_program_close"
+    linked_kaizen_plan: "docs/tied-kaizen-feedback-loop-plan.md"
+    notes: "Waived at QMM program close 2026-10-10. Kaizen Phase 3 transport remains deferred on the closed Kaizen program until a separate hinge reopen — not conflated with this waiver."
+    status: "waived_at_program_close"
+    title: "Optional Kaizen Phase 3 transport (waived at program exit)"

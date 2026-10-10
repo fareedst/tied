@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Ready to execute** — W0 charter complete (2026-10-10); W1 implement gated until sponsor extends authority |
+| **Status** | **Program closed** (2026-10-10) — W1–W5 implement complete; **W6 waived** at program exit |
 | **Change ID** | `PLAN-TIED-QMM-METHODOLOGY-LEARNING` |
 | **Priority** | P1 (methodology learning — Loop 3 closure per QMM comparison) |
 | **Owner** | Canonical TIED source repository (`stdd`) |
@@ -10,12 +10,12 @@
 | **Frozen study** | [`prompts/2026-10-10-1-qmm.md`](../prompts/2026-10-10-1-qmm.md) |
 | **Program orchestrator** | [`tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml) |
 | **Working entry** | [`tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/PLAN.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/PLAN.md) |
-| **Last updated** | 2026-10-10 (refine-plan pass 2) |
+| **Last updated** | 2026-10-10 (program close — W6 waived) |
 | **Refine tracker** | [`checklist-tracker.yaml`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/checklist-tracker.yaml) |
 
 **Planning-artifact disclaimer:** This document and its orchestrator do **not** create project REQ/ARCH/IMPL tokens, do **not** change checklist gate behavior, and do **not** authorize edits to methodology YAML under `tied-bundle/` in the client (or the committed methodology corpus in the TIED store). Each behavior-changing wave runs its own `plan-new-feature` (or `build-plan` when a child linked plan already exists) with per-REQ Tracker, CITDP, gates, and traceable-commit.
 
-**Program control state:** `program_phase: ready_to_execute`, `current_wave: W0`, `execution_authority.mode: approved_full` ([`evidence/sponsor-authority-20261010.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md)). W1 plan-only child plan is authored; **W1 implement** (`REQ-METHODOLOGY-LEARNING-EXPERIMENT`, RED, MCP) remains **not authorized** until sponsor extends `execution_authority` with explicit implement scope and W1 entry evidence passes gates.
+**Program control state:** `program_phase: closed`, `current_step: EXIT`, `current_wave: W6` (waived), `execution_authority.mode: approved_full`. Program close authority: [`sponsor-authority-qmm-program-close-w6-waived-20261010.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md). Reconciliation index: [`doc-reconcile-evidence.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/doc-reconcile-evidence.md).
 
 ### Delegated work envelope (this refine pass)
 
@@ -124,7 +124,7 @@ flowchart TB
 | 2 | Pilot depth: `minimal` doc vs `integrated` for first persistence/MCP wave | W1 behavior-changing batch defaults **`integrated`** | **Costly:** W1 risk-assessment; any waiver needs owner, expiry, rationale, and approval |
 | 3 | Canonical promotion path for a winning methodology rule | LEAP queue + explicit sponsor methodology change | **Costly:** W1/W5 sponsor decision |
 | 4 | Cross-client readouts | **Report input manifest** + **privacy tier** `operator_local` until export owner named | **Costly:** W4; no `shareable_hashed` export without owner and expiry |
-| 5 | Kaizen Phase 3 transport | **Out of W1**; optional **W6** on hinge reopen only | **Costly:** separate sponsor change request |
+| 5 | Kaizen Phase 3 transport | **Waived at QMM program close** (2026-10-10); Kaizen program Phase 3 still **deferred** | **Costly:** separate Kaizen hinge reopen for transport |
 
 Reversible planning defaults are adopted without further sponsor questioning: keep W0 documentation-only; keep Loop 2 Phase 3 deferred; keep SPC, DORA, and universal DMAIC outside the strategic core; require a separate W1 child plan; and use local, privacy-bounded working evidence until a later owner/expiry decision changes that boundary. The five hinges above remain sponsor-owned costly choices.
 
@@ -238,12 +238,12 @@ Each wave **CALL**s a child workflow, then **RETURN**s to the orchestrator. A wa
 | Wave | Goal | Depth (default) | Child plan / REQ | Status |
 | --- | --- | --- | --- | --- |
 | **W0** | Program charter: this linked plan + orchestrator + RESOLVE | minimal | *(this document)* | **Complete** |
-| **W1** | **Strategic suggestion (proposed):** methodology PDSA — hypothesis, baseline, countermeasure promotion path, outcome observation, cohort readout hooks, rule reversal | integrated (proposed default; reselect in W1 CITDP) | [`docs/tied-qmm-w1-methodology-pdsa-plan.md`](tied-qmm-w1-methodology-pdsa-plan.md) — **plan-only authored**; implement: `REQ-METHODOLOGY-LEARNING-EXPERIMENT` | **Planned — implement blocked until sponsor extends authority** |
-| **W2** | Conformance–effectiveness pairing for methodology changes (adherence + verification readout; avoid “conformance trap”) | integrated | [`docs/tied-qmm-w2-conformance-effectiveness-plan.md`](tied-qmm-w2-conformance-effectiveness-plan.md) — implement complete; REQ: `REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING` | **Complete** |
-| **W3** | Bridge Loop 2 → Loop 3 (explicit MCP from Kaizen feedback to methodology experiment **draft**; no auto-bridge on capture) | integrated | [`docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md`](tied-qmm-w3-kaizen-methodology-bridge-plan.md) — **plan-only authored** (2026-10-10); future REQ: `REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE` | **Planned — implement blocked until `w3_scope: implement`** |
-| **W4** | Cohort-level methodology experiment readouts (**evidence-chain statistics report**, **client cohort**, **privacy tier**) | integrated | TBD | Planned |
-| **W5** | Prompt-type / checklist / gate-policy **production system** surfaces enrolled in the same PDSA contract | integrated | TBD | Planned |
-| **W6** | *(Optional)* Kaizen **Phase 3 transport** if sponsor reopens hinge — not required for Loop 3 core | integrated | [`tied-kaizen-feedback-loop-plan.md`](tied-kaizen-feedback-loop-plan.md) Phase 3 | **Deferred hinge** |
+| **W1** | Methodology PDSA — hypothesis, baseline, countermeasure, outcome observation, cohort hooks, rule reversal | integrated | [`docs/tied-qmm-w1-methodology-pdsa-plan.md`](tied-qmm-w1-methodology-pdsa-plan.md) · `REQ-METHODOLOGY-LEARNING-EXPERIMENT` | **Complete** |
+| **W2** | Conformance–effectiveness pairing for methodology changes | integrated | [`docs/tied-qmm-w2-conformance-effectiveness-plan.md`](tied-qmm-w2-conformance-effectiveness-plan.md) · `REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING` | **Complete** |
+| **W3** | Kaizen → Loop 3 bridge (explicit MCP only) | integrated | [`docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md`](tied-qmm-w3-kaizen-methodology-bridge-plan.md) · `REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE` | **Complete** |
+| **W4** | Cohort-level methodology experiment readouts | integrated | [`docs/tied-qmm-w4-evidence-chain-report-plan.md`](tied-qmm-w4-evidence-chain-report-plan.md) · `REQ-EVIDENCE_CHAIN_REPORT` | **Complete** |
+| **W5** | Prompt-type / gate-policy / assurance **production-system enrollment** | integrated | [`docs/tied-qmm-w5-prompt-type-gate-enrollment-plan.md`](tied-qmm-w5-prompt-type-gate-enrollment-plan.md) · `REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT` | **Complete** (commit `e9e56a8`) |
+| **W6** | Optional Kaizen Phase 3 transport (QMM wave) | integrated | [`tied-kaizen-feedback-loop-plan.md`](tied-kaizen-feedback-loop-plan.md) Phase 3 | **Waived at program close** |
 | **Backlog** | SPC charts, DORA ingestion, universal DMAIC, Six Sigma tooling | — | Explicit **non-goals** unless new REQ | **Deferred** |
 
 ### W0 — Documentation and orchestrator
@@ -409,12 +409,12 @@ Every behavior-changing wave:
 
 ---
 
-## 7. Agent entry — do this first
+## 7. Agent entry — program closed
 
-1. Read [`qmm-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml) → `current_wave` and `program_phase`.
-2. **If `program_phase: proposed`:** finish W0 sponsor items; do **not** start W1 implementation without execution authority.
-3. **For W1 planning (requested next):** author child linked plan + wave checklist from §5 **W1**; use `plan-new-feature` only after sponsor approves W1 scope.
-4. PRELOAD glossaries in orchestrator `vocabulary_preload` before reading TIED YAML or source for any wave.
+1. Read [`qmm-program-execution-checklist.yaml`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml) → `program_phase: closed`, `current_step: EXIT`.
+2. Resume from [`session-handoff.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/session-handoff.md) and [`doc-reconcile-evidence.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/doc-reconcile-evidence.md).
+3. **W6** is **waived_at_program_close** on this program only; Kaizen Phase 3 transport remains **deferred** until a separate Kaizen reopen.
+4. New Loop 3 work requires a **new** sponsor program or scoped REQ — do not extend this orchestrator without CITDP.
 
 ---
 
@@ -429,12 +429,9 @@ Every behavior-changing wave:
 
 ---
 
-## 9. Sponsor next steps
+## 9. Program closure (2026-10-10)
 
-1. Review W0 plan, disposition key (§0), and open hinges (§0.4).
-2. Record **execution authority** using §0.8 template in the orchestrator (name W1 **plan-only** vs **implement** scope).
-3. Request **W1 child linked plan** using §5.1 section skeleton (checklist + per-REQ working folder).
-4. Optional: run **`plan-close-out`** for the W0 documentation batch when ready to commit.
+Loop 3 deliverable for this program: **waves W1–W5** (local proof on `stdd`). **W6 waived** at exit per [`sponsor-authority-qmm-program-close-w6-waived-20261010.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md). W5 implement traceable-commit: **`e9e56a8`**. Optional follow-up: Kaizen Phase 3 transport only via **separate** Kaizen program hinge reopen.
 
 ### Costly choices (sponsor-owned before W1 `pre_implementation`)
 
