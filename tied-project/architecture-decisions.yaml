@@ -1437,6 +1437,16 @@ ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
       - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
     requirements:
       - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  cross_references:
+    implementation:
+      - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    requirements:
+      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+  decision: "Read-only enrollment validator module plus MCP; compose W1 validate; no global gate hook"
+  detail_file: "architecture-decisions/ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
+  name: "Production-system enrollment architecture"
+  status: "Accepted"
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
     - cons:

@@ -1599,6 +1599,20 @@ IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
       - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
     requirements:
       - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  code_locations:
+    files:
+      - path: "mcp-server/src/methodology-production-system-enrollment/validate.ts"
+      - path: "mcp-server/src/tools/index.ts"
+  cross_references:
+    architecture:
+      - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    requirements:
+      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+  detail_file: "implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT-pseudocode.md"
+  name: "Production-system enrollment implementation"
+  status: "Active"
 IMPL-MODULE_VALIDATION:
   code_locations:
     files:

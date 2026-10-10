@@ -1,0 +1,40 @@
+{
+  "schema_version": "w5-enrollment-demonstration-summary.v1",
+  "generated_at": "2026-10-10T22:50:59.787Z",
+  "privacy_tier": "operator_local",
+  "proof_boundary": "Enrollment validator reports only; not effectiveness or pairing disposition.",
+  "fixture": "w5-enrollment-surfaces.yaml",
+  "cases_passed": 3,
+  "runs": [
+    {
+      "id": "w5-demo-prompt-type",
+      "enrollment_ok": true,
+      "enrollment_disposition": "enrolled",
+      "pairing_ok": true,
+      "pairing_disposition": "paired",
+      "pairing_expected": "paired",
+      "pairing_match": true,
+      "operator_local_no_absolute_paths": true
+    },
+    {
+      "id": "w5-demo-assurance",
+      "enrollment_ok": true,
+      "enrollment_disposition": "enrolled",
+      "pairing_ok": true,
+      "pairing_disposition": "effectiveness_not_measured",
+      "pairing_expected": "effectiveness_not_measured",
+      "pairing_match": true,
+      "operator_local_no_absolute_paths": true
+    },
+    {
+      "id": "w5-demo-gate-policy",
+      "enrollment_ok": true,
+      "enrollment_disposition": "enrolled",
+      "pairing_ok": true,
+      "pairing_disposition": "paired",
+      "pairing_expected": "paired",
+      "pairing_match": true,
+      "operator_local_no_absolute_paths": true
+    }
+  ]
+}

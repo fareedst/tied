@@ -1,0 +1,31 @@
+REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+    category: "Functional"
+    name: "Production-system surface enrollment"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Composes W1 experiment store and W2 pairing"
+      problems_solved:
+        - "Prompt-type and assurance-profile edits lack PDSA enrollment path"
+      why: "QMM W5 production-system surface enrollment contract"
+    related_requirements:
+      depends_on:
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      related_to:
+        - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    satisfaction_criteria:
+      - criterion: "Enrollment MCP validate tool"
+        metric: "MCP and unit tests green"
+      - criterion: "surface_ref required for non-checklist_step enrollment surfaces"
+        metric: "Validator diagnostics covered by tests"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      implementation:
+        - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      tests:
+        - "methodology-production-system-enrollment.mcp.test.ts"
+        - "methodology-production-system-enrollment.test.ts"

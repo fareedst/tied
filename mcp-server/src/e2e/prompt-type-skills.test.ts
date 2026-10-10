@@ -45,6 +45,7 @@ const SHARED_REFERENCES = [
   "non-tied-boundary.md",
   "guiding-vocab.md",
   "jev-plan-skills-adjunct.md",
+  "methodology-surface-enrollment-advisory.md",
 ] as const;
 
 const repoRoot = path.resolve(process.cwd(), "..");
@@ -183,5 +184,24 @@ describe("prompt-type skill bundle", () => {
     const planCloseOut = fs.readFileSync(path.join(bundleRoot, "plan-close-out", "SKILL.md"), "utf8");
     assert.match(planCloseOut, /close_out/);
     assert.match(planCloseOut, /jev-plan-skills-adjunct\.md/);
+  });
+
+  it("documents advisory methodology surface enrollment on plan skills [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]", () => {
+    const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
+    const advisory = fs.readFileSync(
+      path.join(bundleRoot, "prompt-shared", "methodology-surface-enrollment-advisory.md"),
+      "utf8",
+    );
+    assert.match(advisory, /tied_methodology_production_system_enrollment_validate/);
+    assert.match(advisory, /surface_ref/);
+    assert.match(advisory, /proof boundary/i);
+
+    const planCitdp = fs.readFileSync(path.join(bundleRoot, "prompt-shared", "tied-plan-citdp.md"), "utf8");
+    assert.match(planCitdp, /methodology-surface-enrollment-advisory\.md/);
+
+    for (const skill of ["plan-new-feature", "build-plan"] as const) {
+      const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
+      assert.match(content, /methodology-surface-enrollment-advisory\.md/);
+    }
   });
 });

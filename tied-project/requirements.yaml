@@ -1694,6 +1694,37 @@ REQ-METHODOLOGY-LEARNING-EXPERIMENT:
       - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
     implementation:
       - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
+  name: "Production-system surface enrollment"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Composes W1 store and W2 pairing without global gate hooks"
+    problems_solved:
+      - "Non-checklist production surfaces lack experiment enrollment procedure"
+    why: "W5 Loop 3 enrollment for prompt-type, assurance profile, and gate_policy surfaces"
+  related_requirements:
+    depends_on:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    related_to:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+  satisfaction_criteria:
+    - criterion: "Enrollment validator and MCP"
+      metric: "Unit and MCP tests pass"
+    - criterion: "surface_ref rules for under-covered surfaces"
+      metric: "Fixtures for prompt_type_workflow, assurance_profile, gate_policy pass"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    implementation:
+      - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    tests:
+      - "methodology-production-system-enrollment.mcp.test.ts"
+      - "methodology-production-system-enrollment.test.ts"
 REQ-MODULE_VALIDATION:
   category: "Functional"
   detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"

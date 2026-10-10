@@ -1,0 +1,18 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/gates/verification-2026-10-10T22-57-09-881Z.json",
+    "hash": "sha256:827917d725e13171169710f3c34eb7b1d4093816c15ac83e026eb1b2fa2c9c07"
+  }
+}

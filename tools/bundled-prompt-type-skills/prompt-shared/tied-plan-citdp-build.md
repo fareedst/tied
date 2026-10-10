@@ -6,6 +6,7 @@
 2. Copy a per-task **Tracker** from `tied-bundle/docs/agent-req-implementation-checklist.yaml` (see its header).
 3. Read task-relevant IMPL pseudo-code (`./tied-project/implementation-decisions/IMPL-*-pseudocode.md` in scope from impact discovery).
 4. Perform CITDP **analysis** (`change-definition`, impact, **`risk-assessment`**, **`test-strategy`**). Persist `tied-project/citdp/CITDP-*.yaml` **after** implementation (see **Change records** / `citdp-policy.md`).
+   For prompt-type, gate-policy, or assurance-profile methodology surfaces, apply [methodology-surface-enrollment-advisory.md](methodology-surface-enrollment-advisory.md) alongside the Tracker (advisory only).
    During impact discovery, select and record `profile_depth` and `gate_policy`
    independently from research and assurance profiles. At **`risk-assessment`**, apply the
    eligibility table (`docs/integrated-activation-checklist-enforcement-plan.md` §7): when

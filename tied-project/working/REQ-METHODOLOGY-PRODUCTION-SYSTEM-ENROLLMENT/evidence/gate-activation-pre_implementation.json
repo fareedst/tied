@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+    "project_id": "stdd-w5-enrollment",
+    "run_id": "mpse-preimpl-20261010",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#MCP_TOOL_SURFACE#mpse0002",
+      "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT#mpse0001"
+    ],
+    "scope_hash": "0d22dc9c9f5af3f15114ceec62ca3f8611f571dd0afe0af4ccfce21068c323ed",
+    "artifact_hashes": {
+      "obligation-report.json": "15b60553397657f195513e600a88640f8752104e29bb515023b100cac0685cb5",
+      "finding-ledger.jsonl": "01578fce689446476526b2974a3de6096a8418f9ea4ba4b780bb1808ed95b55d",
+      "gate-result.json": "1f2427ecdc50c15b62dc30608b79ff703d319e6390dd6927f6ce1221a33e5c0f",
+      "evidence-provenance.json": "7a9c9fbd6099a2f4be348d918bf4f1c6951a602600cd89fed616c8f79aad4f0b"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "project_id": "stdd-w5-enrollment",
+      "run_id": "mpse-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "0d22dc9c9f5af3f15114ceec62ca3f8611f571dd0afe0af4ccfce21068c323ed",
+      "hash": "15b60553397657f195513e600a88640f8752104e29bb515023b100cac0685cb5",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "project_id": "stdd-w5-enrollment",
+      "run_id": "mpse-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "0d22dc9c9f5af3f15114ceec62ca3f8611f571dd0afe0af4ccfce21068c323ed",
+      "hash": "01578fce689446476526b2974a3de6096a8418f9ea4ba4b780bb1808ed95b55d",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "project_id": "stdd-w5-enrollment",
+      "run_id": "mpse-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "0d22dc9c9f5af3f15114ceec62ca3f8611f571dd0afe0af4ccfce21068c323ed",
+      "hash": "1f2427ecdc50c15b62dc30608b79ff703d319e6390dd6927f6ce1221a33e5c0f",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "project_id": "stdd-w5-enrollment",
+      "run_id": "mpse-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "0d22dc9c9f5af3f15114ceec62ca3f8611f571dd0afe0af4ccfce21068c323ed",
+      "hash": "7a9c9fbd6099a2f4be348d918bf4f1c6951a602600cd89fed616c8f79aad4f0b",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+    "project_id": "stdd-w5-enrollment",
+    "run_id": "mpse-preimpl-20261010",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#MCP_TOOL_SURFACE#mpse0002",
+      "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT#mpse0001"
+    ],
+    "scope_hash": "0d22dc9c9f5af3f15114ceec62ca3f8611f571dd0afe0af4ccfce21068c323ed"
+  },
+  "diagnostics": []
+}

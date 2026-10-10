@@ -1,0 +1,49 @@
+CITDP-REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  change_definition:
+    current_behavior: "W1 accepts four production_system_surface values but lacks enrollment procedure and surface_ref rules for non-checklist surfaces."
+    desired_behavior: "Enrollment validator and MCP enforce surface_ref for prompt_type_workflow, assurance_profile, and gate_policy; compose W1 validate and W2 pairing without global hooks."
+    non_goals:
+      - "Global gate blocking for all prompt-type edits"
+      - "Mandatory prompt-skill contract gates without separate LEAP"
+      - "tied-bundle methodology edits"
+    success_criteria:
+      - "Demonstrations for three enrollment surfaces under W5 working evidence"
+      - "tied_verify passes for REQ/ARCH/IMPL tokens"
+      - "Unit and MCP enrollment tests green"
+    unchanged_behavior:
+      - "W1 upsert/list semantics"
+      - "W2 pairing gate remains CITDP-scoped only"
+  impact_analysis:
+    depends_on:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    files:
+      - "mcp-server/src/methodology-learning-experiment/validate.ts"
+      - "mcp-server/src/methodology-production-system-enrollment/"
+    tied_tokens_affected:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    tied_tokens_new:
+      - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+  record_identity:
+    change_request_id: "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    date: "2026-10-10"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    prior_depth_tier: "minimal"
+    profile_depth: "integrated"
+    record_status: "complete"
+    title: "W5 production-system enrollment implement"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "integrated"
+      eligibility_triggers_matched:
+        - "mcp_surface"
+        - "persistence"
+      gate_policy: "per_citdp"
+      prior_depth_tier: "minimal"
+      sub_adversarial_inquiry_pass: "required_when_eligibility_triggers"
+  test_strategy:
+    summary: "Unit enrollment matrix plus MCP parity; W1 surface_ref structural check when present."

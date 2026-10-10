@@ -1,0 +1,28 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [
+    "missing_required_step:sub-adversarial-inquiry-pass",
+    "invalid_slug:resolve",
+    "invalid_slug:change-definition-impact-risk-test-strategy",
+    "invalid_slug:tracker-and-orchestrator-alignment",
+    "invalid_slug:future-evidence-contracts",
+    "invalid_slug:plan-only-pre-implementation-gate",
+    "invalid_slug:product-tied-records",
+    "invalid_slug:implementation",
+    "invalid_slug:verification",
+    "invalid_slug:close-out",
+    "invalid_slug:vocabulary-validate",
+    "invalid_slug"
+  ],
+  "recorded_at": "2026-10-10T13:55:00-07:00",
+  "request_token": "PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT",
+  "gate_receipt": {
+    "path": "tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/gates/pre_implementation-2026-10-10T20-54-28-613Z.json",
+    "hash": "sha256:3333df22bbbeaf07ca9ecb1b19d6817763492a39150045062559a44e2587832c"
+  },
+  "interpretation": "Plan-only documentation pass; gate blocks RED/implement progression (expected). Not a blocker for doc-only close-out."
+}

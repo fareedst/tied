@@ -31,6 +31,8 @@ files and the implementation pseudo-code.
 | **caller git context** | auto git | Pasted git preamble or untracked path list; no agent-initiated git in plan-close-out |
 | **advisory close-out step** | blocking gate | Required procedure with handoff evidence; explicit N/A when clean |
 | **prompt-shared bundle** | shared skill docs | Direct one-level Markdown references used by leaf skills |
+| **surface enrollment contract** | enrollment helper, PDSA hook | Normative when/how to open or update a Loop 3 methodology experiment for non-`checklist_step` production surfaces (prompt types, assurance profiles, experiment `gate_policy` category); MCP assist + advisory skill steps; gate-blocking only when implement CITDP declares link · [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT](../requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml) |
+| **surface_ref** | surface id, prompt surface id | Optional field on methodology learning experiment records identifying the enrolled surface (leaf **prompt type** id, assurance profile id, or CITDP id depending on `production_system_surface`); required by enrollment validator for `prompt_type_workflow`, `assurance_profile`, and `gate_policy` surfaces · [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT](../requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml) |
 | **TIED applicability boundary** | inferred TIED mode | Explicit choice of full TIED, TIED-client-local, or minimal workflow |
 | **TIED-client-local development** | non-TIED project | Development that reads context but intentionally avoids TIED synchronization |
 | **canonical bundle** | personal source | Git-tracked source under `tools/bundled-prompt-type-skills/` |
@@ -102,6 +104,8 @@ unknown or ambiguous input.
 | prompt envelope | Preferred terms vs synonyms |
 | Prompt Composer | Preferred terms vs synonyms |
 | prompt-shared bundle | Preferred terms vs synonyms |
+| surface enrollment contract | Preferred terms vs synonyms |
+| surface_ref | Preferred terms vs synonyms |
 | prompt type | Preferred terms vs synonyms |
 | prompt-type sequence dispatch | Pseudo-code block names |
 | prompt-type sequence subagent | Preferred terms vs synonyms |

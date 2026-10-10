@@ -77,6 +77,7 @@ import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { validateStressorResidueRecord } from "../residuality/stressor-residue-validate.js";
 import { validateMethodologyLearningExperiment } from "../methodology-learning-experiment/validate.js";
+import { validateProductionSystemEnrollment } from "../methodology-production-system-enrollment/validate.js";
 import { pairFromExperimentId } from "../methodology-conformance-effectiveness-pairing/resolve.js";
 import { pairConformanceEffectiveness } from "../methodology-conformance-effectiveness-pairing/pair.js";
 import { runMethodologyKaizenExperimentBridge } from "../methodology-kaizen-experiment-bridge/bridge.js";
@@ -2825,6 +2826,20 @@ export const allTools = [
     },
     handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
       return textContent(JSON.stringify(validateMethodologyLearningExperiment(args), null, 2));
+    },
+  },
+  {
+    name: "tied_methodology_production_system_enrollment_validate",
+    config: {
+      description:
+        "Validate methodology learning experiment enrollment for non-checklist_step production surfaces (surface_ref rules for prompt_type_workflow, assurance_profile, gate_policy). Composes W1 structural validation; read-only.",
+      inputSchema: z.object({
+        record: z.record(z.unknown()).optional(),
+        yaml_text: z.string().optional(),
+      }),
+    },
+    handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
+      return textContent(JSON.stringify(validateProductionSystemEnrollment(args), null, 2));
     },
   },
   {

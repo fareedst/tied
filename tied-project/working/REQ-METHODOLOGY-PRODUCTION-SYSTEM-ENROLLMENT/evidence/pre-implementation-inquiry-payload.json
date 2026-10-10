@@ -1,0 +1,140 @@
+{
+  "graph": {
+    "projectId": "stdd-w5-enrollment",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#surface-ref-rules",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mpse1",
+          "sourceRevision": "mpse-src"
+        },
+        "architectureConstraintIds": ["arch-mpse-enroll"]
+      },
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#mcp-parity",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mpse2",
+          "sourceRevision": "mpse-src"
+        },
+        "architectureConstraintIds": ["arch-mpse-mcp"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-mpse-enroll",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT#mpse0001"
+        ]
+      },
+      {
+        "id": "arch-mpse-mcp",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#MCP_TOOL_SURFACE#mpse0002"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT#mpse0001",
+          "kind": "block",
+          "name": "VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT",
+          "derivation": "content",
+          "revision": "block-rev-mpse1",
+          "sourceRevision": "mpse-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#MCP_TOOL_SURFACE#mpse0002",
+          "kind": "block",
+          "name": "MCP_TOOL_SURFACE",
+          "derivation": "content",
+          "revision": "block-rev-mpse2",
+          "sourceRevision": "mpse-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-mpse-test",
+        "blockId": "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT#mpse0001",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.test.ts",
+        "sourceRevision": "mpse-src"
+      },
+      {
+        "id": "loci-mpse-validate-prod",
+        "blockId": "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT#mpse0001",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-production-system-enrollment/validate.ts",
+        "sourceRevision": "mpse-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-mpse1",
+    "specification": [
+      {
+        "id": "mpse-spec-surface-ref",
+        "kind": "behavior",
+        "value": "Enrollment validator requires surface_ref for prompt_type_workflow, assurance_profile, and gate_policy.",
+        "order": 1
+      },
+      {
+        "id": "mpse-spec-mcp",
+        "kind": "behavior",
+        "value": "MCP tied_methodology_production_system_enrollment_validate matches unit validate.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "mpse-test-enroll",
+        "statementId": "mpse-spec-surface-ref",
+        "kind": "behavior",
+        "value": "prompt_type_workflow requires valid surface_ref",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mpse1",
+        "source": {
+          "location": "mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.test.ts:prompt_type_workflow requires valid surface_ref"
+        }
+      },
+      {
+        "id": "mpse-test-mcp",
+        "statementId": "mpse-spec-mcp",
+        "kind": "behavior",
+        "value": "MCP handler returns enrolled disposition",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mpse2",
+        "source": {
+          "location": "mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.mcp.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "mpse-prod-validate",
+        "statementId": "mpse-spec-surface-ref",
+        "kind": "behavior",
+        "value": "validateProductionSystemEnrollmentObject composes W1 structural validate",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mpse1",
+        "source": {
+          "location": "mcp-server/src/methodology-production-system-enrollment/validate.ts:validateProductionSystemEnrollmentObject"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#VALIDATE_PRODUCTION_SYSTEM_ENROLLMENT#mpse0001",
+    "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT#MCP_TOOL_SURFACE#mpse0002"
+  ]
+}

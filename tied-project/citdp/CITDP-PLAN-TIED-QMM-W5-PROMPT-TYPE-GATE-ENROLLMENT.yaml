@@ -1,0 +1,103 @@
+CITDP-PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT:
+  change_definition:
+    current_behavior: "W1 accepts four production_system_surface values but demos skew checklist_step; prompt-type skills lack experiment enrollment procedure; W2 pairing works when methodology_surface_experiment_link is present."
+    desired_behavior: "W5 child linked plan, working folder, plan-only Tracker, and documentation CITDP define RESOLVE (dual gate_policy), surface enrollment contract sketch, test strategy, implement handoff, and forbid inheriting minimal depth into implement."
+    non_goals:
+      - "Application code, automated tests, or MCP runtime changes in plan-only pass"
+      - "Editing tied-bundle methodology YAML"
+      - "Git stage, commit, or push unless sponsor plan-close-out"
+      - "Global gate blocking for all prompt-type edits"
+      - "Minting REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT index rows in plan-only"
+    success_criteria:
+      - "Child plan docs/tied-qmm-w5-prompt-type-gate-enrollment-plan.md authored with sections 0-13."
+      - "Implement section records integrated depth must not inherit plan-only minimal without prior_depth_tier."
+      - "Orchestrator records W5 plan-only fields; W1-W4 complete."
+      - "Plan-only Tracker records non-activation pre_implementation gate."
+    unchanged_behavior: "W1 experiment MCP, W2 pairing, W3 bridge, W4 report CLI, and prompt-type install mechanics remain unchanged in plan-only pass."
+  evidence:
+    commands:
+      - "Read-only review of child plan against parent program W5 section"
+      - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
+    manifest_reference: null
+    proof_boundaries:
+      - "docs_and_working_folder_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code mutation in plan-only scope. Read-only neighborhood: methodology-learning-experiment, prompt-type-skills, checklist-validator."
+    modules_or_boundaries: "Child linked plan, committed working folder, documentation CITDP, program orchestrator W5 fields."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    recorded_at: "2026-10-10"
+    title: "QMM W5 prompt-type and gate-policy enrollment child linked plan (plan-only)"
+  risk_analysis:
+    abuse_cases: []
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "CITDP gate_policy conflated with experiment surface gate_policy label."
+        - "Plan-only w5_scope misread as implement authorization."
+        - "W1-W4 gate receipts reused as W5 activation evidence."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any prompt-type skill mandatory global gate without implement CITDP scope."
+        - "Any runtime edit under mcp-server/src/methodology-learning-experiment in plan-only pass."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/tied-qmm-w5-prompt-type-gate-enrollment-plan.md"
+        - "tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/checklist-tracker.yaml"
+        - "tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/PLAN.md"
+      falsification_questions:
+        - "Does any plan-only sentence authorize RED or runtime code?"
+        - "Does the child plan forbid inheriting minimal depth into implement?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Plan-only documentation pass. Implement pass must select integrated depth again with fresh activation."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Read-only plan and working folder review"
+        evidence_method: "Committed process evidence"
+        limitation: "Does not prove enrollment MCP behavior."
+        owner: "agent"
+        rationale: "Deliverable is child plan and documentation CITDP."
+        result: "pass"
+        risk: "Authority misread as implement"
+        threshold: "No product TIED mutation in plan-only pass"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: false
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-10"
+      owner: "W5 implement build-plan session"
+      summary: "Implement must pass pre_implementation with fresh integrated activation before RED."
+    risks:
+      - "Dual gate_policy namespace confusion in tests or docs."
+      - "Minimal depth copied into implement CITDP."
+    scenarios:
+      - "Depth inheritance into enrollment MCP work"
+      - "Documentation-only proof boundary"
+  sponsor_decisions:
+    recorded_at: "2026-10-10"
+    summary: "Plan-only authored via build-plan; implement requires separate sponsor authority."
+    w5_mode: "plan_only"
+  test_strategy:
+    matrix_notes: "Static documentation checks only. Implement matrix in child plan §6."
+    summary: "Verify RESOLVE map, gate contracts, and empty token delta in plan-only pass."

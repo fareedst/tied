@@ -1,0 +1,27 @@
+IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+    code_locations:
+      files:
+        - path: "mcp-server/src/methodology-production-system-enrollment/constants.ts"
+        - path: "mcp-server/src/methodology-production-system-enrollment/validate.ts"
+        - path: "mcp-server/src/tools/index.ts"
+    cross_references:
+      architecture:
+        - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      requirements:
+        - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT-pseudocode.md"
+    implementation_approach:
+      details:
+        - "Optional surface_ref on W1 records; enrollment layer enforces for three surfaces"
+      summary: "validate.ts plus tied_methodology_production_system_enrollment_validate MCP tool"
+    name: "Production-system enrollment implementation"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      requirements:
+        - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      tests:
+        - "methodology-production-system-enrollment.mcp.test.ts"
+        - "methodology-production-system-enrollment.test.ts"

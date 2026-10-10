@@ -1,0 +1,107 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-10T20:54:28.617Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "w5-ptge-preimpl-20261010",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "persistGateDecisionReceipt"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/gates/pre_implementation-2026-10-10T20-54-28-613Z.json",
+      "content_hash": "sha256:3333df22bbbeaf07ca9ecb1b19d6817763492a39150045062559a44e2587832c",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "agent-adherence-event.v1",
+      "path": "working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/gate-ledger.jsonl",
+      "content_hash": "sha256:2f8a3e6464c2686ffd05fc6a7870f7dfd248f975429db3613d26b4353b45198e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:62bb04dc1fd4c765d1f45a6d7b095576b9732db53e7f0bc0aecf576fa6638765",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/run-plan-only-pre-implementation-gate.mjs",
+      "content_hash": "sha256:0ec22161cdc3209768d1c82743e9d46d9e607f3934aff62d2f72b61e568d6c2f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:c646605b0a16b96e6fb4ff31fa710ee96cfae36657d383eca34805ed32dc211d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:c688e21def16ebe89cae45f821528db59ae7b2409c304f227733b64f15006b6b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "expected_artifact_missing",
+      "artifact_kind": "evidence_chain_profile",
+      "phase": null,
+      "detail": "Integrated depth expects evidence-chain-profile artifact",
+      "severity": "error",
+      "source": "profile-cross-link"
+    }
+  ]
+}

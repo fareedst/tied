@@ -1,0 +1,638 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-10T22:59:29.163Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "integrated",
+    "gate_policy": "per_citdp",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:f924eced3b28f96b81f6120504ff38436acaf0edc8eec6408b1c5c4ae9750272",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:f924eced3b28f96b81f6120504ff38436acaf0edc8eec6408b1c5c4ae9750272",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:f924eced3b28f96b81f6120504ff38436acaf0edc8eec6408b1c5c4ae9750272",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "content_hash": "sha256:483841003a2632fb1c1954c753764fe1548bb8fc2a05218a059c8f8f70dd427f",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:483841003a2632fb1c1954c753764fe1548bb8fc2a05218a059c8f8f70dd427f",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:483841003a2632fb1c1954c753764fe1548bb8fc2a05218a059c8f8f70dd427f",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:15b60553397657f195513e600a88640f8752104e29bb515023b100cac0685cb5",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:15b60553397657f195513e600a88640f8752104e29bb515023b100cac0685cb5",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:15b60553397657f195513e600a88640f8752104e29bb515023b100cac0685cb5",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:0476245afb070792c79e2eb4a1aa83bb59d9c683e6349d7dbb3be15adae1d987",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:7a9c9fbd6099a2f4be348d918bf4f1c6951a602600cd89fed616c8f79aad4f0b",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:305b5afb2a46201c5ae5909146cbc88883fe1b9a68c2826f0a5d860370d5df49",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:fcab84aa196e41cdf4bd88335845aab0d65b94f478edb41f1d75a08cdde17260",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:a8b5d86e4ed232998cabe061cbc797df031b8535d5dbb7c02d6d731b4b9993ad",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:9fe4c28e91cdd4ccc1be4ea7cb5fec610d6d3bbf3d82f0fb086bb80f741fccfe",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:d6b46b4666a9edcb8ddf37ae2b93d88ef8d125a1a39d09cb239f3e768c537e57",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:d9fc5a661e732d97d611baa0abb7d6a8582b05ca6a8951c461112b42a26e4ffc",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/bootstrap-tracker.mjs",
+      "content_hash": "sha256:ae35498f75434c485d1a28d6213a43e5cb0e08558793f0c26f45e6112408d196",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:9f7cc25d4e0c247862809760c73ac41b67c9cb357ba438f884535931e912244b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:1098ded63f8b035163f299497c2c5a32a4ccb15a495d1999b223cec5c24c4f0c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/close_out-gate-result.json",
+      "content_hash": "sha256:635bcd125427f5b4640bd0d38d2fa9c048062117d7130d9fc80e82cfd1118778",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/close_out-inquiry-result.json",
+      "content_hash": "sha256:8255299080a129856a65639ec6c57eb999edde24ca5a7d5bf936d52ad1ea65cb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:701ced68a13106abbb37feed8de0db29e9f0b9dd33cf9781ad4265951f7d209c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/dismiss-advisory-inquiry-findings.mjs",
+      "content_hash": "sha256:cf40b3455e9af508a508a906c1fcc016eff9a03658982f8d8f5e7a584c33c2e4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/finalize-envelope-reconcile.mjs",
+      "content_hash": "sha256:89ece76a857b6f5718ff15544db8afa2c07a253e1d3bfcc2e280f1a96cd7f23a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/finalize-verification-tracker.mjs",
+      "content_hash": "sha256:1f23cabb6bb25405467d9400b77b548bb391200d7fc751d7ed9e0cb1dee46b3e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/gate-activation-close_out.json",
+      "content_hash": "sha256:3bbf8c2173c47b589dcefcc75abc83953a23bbd041a45bd1643687dd241a87a5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/gate-activation-pre_implementation.json",
+      "content_hash": "sha256:b835a781bf8652ac99b21e3e1ffef25a5e3da71f9c11e33add3ac2f977d94952",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/gate-activation-verification.json",
+      "content_hash": "sha256:801ee67adc6ad0946872dc1ce195d5febceeece7ce0f542f926c647cf53e125e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/gate-ledger.jsonl",
+      "content_hash": "sha256:7b1e85f6e9277d18ea5700e8c2db66db976ced91bd679b5329bc4d55e4233f71",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:ccb608b80d765843ee60ee458d96709f955d5f49e5e624919c67d25e1410f9e2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:53b73e010ce901df6bc7600672d35c923d829dad9896d89f750207d881f3b1f0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:a9aa2774b411d1615c3a5862b095d0211a356e2c577349f560955a2aa7c1e389",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:ded75740578d2c9d4876f1390487cc34a3cf8e7780582d756bffa39ab813ed80",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:e675687b417ab66643444d0778e7f402818455e4c890eac3114060fb88bbdc05",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/pre_implementation-inquiry-result.json",
+      "content_hash": "sha256:89b5299f6d902915a924eecc9f35ade2bc7e54914877589f22f3d72513043471",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/pre-implementation-inquiry-payload.json",
+      "content_hash": "sha256:3bcef04de41b89542e1619bf64097892f0078b882f3d9d72fb53228d72a577ac",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/prompt-shared-enrollment-advisory-evidence.md",
+      "content_hash": "sha256:76611d034925bb5bf506ddcf161d8204c1ae0449dc6574c072a744e201b50a33",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:2bceda9027b28ed6437611ce3aefd98eeabe0187c013158441fd9aa95b8ecac0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:3d36bcd261b12bbf9ec183f43bac3b087ac9f27f01c2faf93ac101407553ecc5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/run-activation-gates.mjs",
+      "content_hash": "sha256:7ecdf45ff01eeda232d0b44d503cfe5c646d892d5670e96a406d8353b85aacff",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:8152e000883a13a9e1db0d0594745f02d219aa608f35f83ec02629428f4decf0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:0a98f0b58da5736342f30daab9a3af626ff2ee2c4ad4408222696adceb015617",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:9af5a0afa29c32fc456b4ca422447673306395c03665680d699b8e360ad250d0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:4d052a5e93b0a0d6da3fec6f120c4bf80e0160181c6982e07fad2cf3441b236d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/tied-verify-result.json",
+      "content_hash": "sha256:8de06df5de3b863e02fd2f253480ff2203813478d2f5ab580e7030b229c34bb5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:448a95af55cdec7edd16da2184854cbe21af0023a78fef2810b75ce77d8866c3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:6e64f6deb657c18e2f113eeabf9f1d1a5c9f9c29405bd031bb9f12dd4de1661a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:a0896aef1b241aec8195e959b8e0a079613a732a84801a507447c4e49e15433f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:5a7ea27435d0d47d4fd46e48a34af51f01e8e78de973033e2f4bed021676bed9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:065eff488512d5a27ab825f20e7edd6dc6e06a7159ba5e96e62b2ff18a8d17b1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/verification-gate-result.json",
+      "content_hash": "sha256:a054e7846b9595bed2f79fc3540ff31d3565b0b61d8316c6166ca7dfc2768997",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/verification-inquiry-result.json",
+      "content_hash": "sha256:d21db219cc66105ec34abf3ab88255e0b6056dcf632923b391d9a468ce705c2d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:095b13e3c105b5f54b82c6a9a10d0927840f7efeac61e06672914a3439259b07",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": "tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": []
+}

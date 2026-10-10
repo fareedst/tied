@@ -155,6 +155,15 @@ export function validateMethodologyLearningExperimentObject(
     }
   }
 
+  const surfaceRef = record.surface_ref;
+  if (surfaceRef !== undefined && !nonEmptyString(surfaceRef)) {
+    diagnostics.push({
+      code: "INVALID_INPUT",
+      message: "surface_ref must be a non-empty string when present",
+      path: "surface_ref",
+    });
+  }
+
   const reversal = record.rule_reversal;
   if (reversal !== undefined) {
     if (!isRecord(reversal)) {
