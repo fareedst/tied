@@ -194,6 +194,10 @@ waves:
         label: verification allowed + tied_verify on implement REQ
         status: complete
         evidence_ref: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/verification-gate-result.json
+      - id: w2-close-out-gate
+        label: close_out allowed after traceable-commit
+        status: complete
+        evidence_ref: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/close_out-gate-result.json
       - id: w2-b1-b3
         label: TDD batches B1–B3 per child plan §10
         status: complete
