@@ -1,0 +1,94 @@
+CITDP-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
+  change_definition:
+    current_behavior: "Checklist gates do not enforce methodology effectiveness readout for scoped methodology-surface changes; no pairing MCP."
+    desired_behavior: "Pairing MCP and CITDP-scoped gate hook block verification/close_out on conformance_only_trap."
+    methodology_surface_experiment_link:
+      conformance_evidence_refs:
+        - kind: "gate_receipt"
+          path: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json"
+      experiment_id: "mle-demo-20261010-001"
+      production_system_surface: "checklist_step"
+    non_goals:
+      - "Global gate policy change"
+      - "SPC/DORA"
+      - "tied-bundle edits"
+    success_criteria:
+      - "Demo mle-demo-20261010-001 pairs with typed refs"
+      - "Gate composition blocks trap fixture"
+      - "Pairing unit and MCP tests green"
+    unchanged_behavior:
+      - "tied-bundle methodology read-only"
+      - "Unlinked REQ gate behavior"
+      - "W1 experiment store semantics"
+  impact_analysis:
+    depends_on:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    files:
+      - "mcp-server/src/checklist-validator.ts"
+      - "mcp-server/src/methodology-conformance-effectiveness-pairing/"
+    impl_inventory:
+      - "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    modules:
+      - "checklist-validator"
+      - "methodology-conformance-effectiveness-pairing"
+    tied_tokens_affected:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new:
+      - "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+      - "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+  record_identity:
+    author: "build-plan"
+    change_request_id: "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    date: "2026-10-10"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    implementation_depth_tier: "integrated"
+    prior_depth_tier: "minimal"
+    profile_depth: "integrated"
+    record_status: "implementation"
+    title: "W2 methodology conformance-effectiveness pairing implement"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Generic prose refs satisfy pairing"
+        - "Global hook blocks unlinked REQs"
+        - "Trap passes close_out"
+      depth_selected_at: "2026-10-10T10:55:00-07:00"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "composition test fails trap block"
+        - "paired demo fails with typed refs"
+      eligibility_triggers_matched:
+        - "gate_behavior_change"
+        - "mcp_write_surface"
+        - "persistence"
+      evidence_references:
+        - "docs/tied-qmm-w2-conformance-effectiveness-plan.md"
+        - "mcp-server/src/methodology-conformance-effectiveness-pairing/pairing-gate.test.ts"
+      falsification_questions:
+        - "Does any unlinked REQ see methodology_pairing_blocked?"
+        - "Does trap disposition allow close_out?"
+      gate_policy: "per_citdp"
+      prior_depth_tier: "minimal"
+      rationale: "MCP plus CITDP-scoped gate-blocking on verification/close_out."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "pending_build_plan_close_out"
+    quality_profiles:
+      - "baseline-functional"
+      - "external-input-security"
+    risks:
+      - description: "Global gate regression"
+        id: "RISK-MCEP-001"
+        likelihood: "Low"
+        mitigation: "methodology_surface_experiment_link required on CITDP"
+        severity: "High"
+  sponsor_decisions:
+    pairing_enforcement: "gate_blocking_verification_close_out_citdp_scoped"
+    w2_implement_depth_tier: "integrated"
+  test_strategy:
+    matrix_notes: "No E2E UI; composition only."
+    summary: "Unit pairing tests; MCP pair tool; gate composition for trap and paired demo."

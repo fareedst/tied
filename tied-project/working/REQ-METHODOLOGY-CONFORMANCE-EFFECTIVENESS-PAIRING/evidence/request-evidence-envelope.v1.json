@@ -1,0 +1,198 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-10T17:56:43.469Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 17
+  },
+  "identity": {
+    "request_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "mcep-closeout-20261010",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "tied_adversarial_inquiry_run"
+    },
+    {
+      "run_id": "mcep-preimpl-20261010",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "tied_adversarial_inquiry_run"
+    },
+    {
+      "run_id": "mcep-verify-20261010",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "tied_adversarial_inquiry_run"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:b8d234e6ce8601b264a28195a68045b3462b30335b8956f76bd9199ae62bdc0c",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:b8d234e6ce8601b264a28195a68045b3462b30335b8956f76bd9199ae62bdc0c",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:b8d234e6ce8601b264a28195a68045b3462b30335b8956f76bd9199ae62bdc0c",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": "adversarial-inquiry-finding.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "content_hash": "sha256:11c6339a203fbd204378e675c4eadee0f676148b2eb50457d05c5269de516cc1",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": "adversarial-inquiry-finding.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:11c6339a203fbd204378e675c4eadee0f676148b2eb50457d05c5269de516cc1",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": "adversarial-inquiry-finding.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:11c6339a203fbd204378e675c4eadee0f676148b2eb50457d05c5269de516cc1",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:ef725d0421d90d5e307f670d93c07eb487106e5d00d48912fc1c280efad4028e",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:ef725d0421d90d5e307f670d93c07eb487106e5d00d48912fc1c280efad4028e",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:ef725d0421d90d5e307f670d93c07eb487106e5d00d48912fc1c280efad4028e",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:27ad8866b684da53f4bb2405ac1a3bb5369cf19bf166888f6bdb696c7f654fea",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:f16c5ddfeb3e6f153e0108e10bbd3d5d2c0b8049643d2cabb61058a32938c06b",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:a132677fb82f294369587fe923fcb07bfb702d6705961a64601a1816ef224801",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/citdp/CITDP-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml",
+      "content_hash": "sha256:486a9947a22f53402b51e712f9022b75bfbb27c77464a33ec70cb929ef8358ba",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": "evidence-chain-profile.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:673877b34c4d9a9c1a946d3995a59caba888a2c549214d35894080fb02b7f7b1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "traceability_structure"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/checklist-tracker.yaml",
+    "tracker_hash": null,
+    "citdp_path": "tied-project/citdp/CITDP-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml",
+    "evidence_chain_profile_path": "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": []
+}

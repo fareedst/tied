@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+    "project_id": "stdd-mcep-w2",
+    "run_id": "mcep-closeout-20261010",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#MCP_TOOL_SURFACE#mcep0004",
+      "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#METHODOLOGY_SURFACE_PAIRING_GATE#mcep0003",
+      "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_CONFORMANCE_EFFECTIVENESS#mcep0001"
+    ],
+    "scope_hash": "269bfe8f3782edb412b5a42d5e6b30a1ce3f383dbc5e30b85cf8cee83e847164",
+    "artifact_hashes": {
+      "obligation-report.json": "ef725d0421d90d5e307f670d93c07eb487106e5d00d48912fc1c280efad4028e",
+      "finding-ledger.jsonl": "8699ca72553c35ab069bc015de246836f9f9fbf814ff4ba234839bf821e2618b",
+      "gate-result.json": "a00a2aceed6e46066de7a6e03792384f11a175b077c19127d4ff61fb9974f4d0",
+      "evidence-provenance.json": "27ad8866b684da53f4bb2405ac1a3bb5369cf19bf166888f6bdb696c7f654fea"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "project_id": "stdd-mcep-w2",
+      "run_id": "mcep-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "269bfe8f3782edb412b5a42d5e6b30a1ce3f383dbc5e30b85cf8cee83e847164",
+      "hash": "ef725d0421d90d5e307f670d93c07eb487106e5d00d48912fc1c280efad4028e",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "project_id": "stdd-mcep-w2",
+      "run_id": "mcep-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "269bfe8f3782edb412b5a42d5e6b30a1ce3f383dbc5e30b85cf8cee83e847164",
+      "hash": "8699ca72553c35ab069bc015de246836f9f9fbf814ff4ba234839bf821e2618b",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "project_id": "stdd-mcep-w2",
+      "run_id": "mcep-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "269bfe8f3782edb412b5a42d5e6b30a1ce3f383dbc5e30b85cf8cee83e847164",
+      "hash": "a00a2aceed6e46066de7a6e03792384f11a175b077c19127d4ff61fb9974f4d0",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "project_id": "stdd-mcep-w2",
+      "run_id": "mcep-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "269bfe8f3782edb412b5a42d5e6b30a1ce3f383dbc5e30b85cf8cee83e847164",
+      "hash": "27ad8866b684da53f4bb2405ac1a3bb5369cf19bf166888f6bdb696c7f654fea",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+    "project_id": "stdd-mcep-w2",
+    "run_id": "mcep-closeout-20261010",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#MCP_TOOL_SURFACE#mcep0004",
+      "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#METHODOLOGY_SURFACE_PAIRING_GATE#mcep0003",
+      "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_CONFORMANCE_EFFECTIVENESS#mcep0001"
+    ],
+    "scope_hash": "269bfe8f3782edb412b5a42d5e6b30a1ce3f383dbc5e30b85cf8cee83e847164"
+  },
+  "diagnostics": []
+}

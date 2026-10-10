@@ -1,0 +1,10 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [
+    "missing_required_step:sub-adversarial-inquiry-pass"
+  ]
+}

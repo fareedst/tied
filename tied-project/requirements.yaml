@@ -1615,6 +1615,38 @@ REQ-MESSAGING-PARTICIPANT-MATERIALIZE:
       - "ARCH-MESSAGING-CONVERSATION-AGGREGATE"
     implementation: []
     tests: []
+REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml"
+  name: "Methodology conformance–effectiveness pairing"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "CITDP-scoped pairing reports and gate hook"
+    problems_solved:
+      - "Gate pass without linked effectiveness readout"
+    why: "Close QMM conformance trap for methodology-surface changes"
+  related_requirements:
+    depends_on:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  satisfaction_criteria:
+    - criterion: "MCP pair tool and gate composition"
+      metric: "MCP and pairing-gate tests pass"
+    - criterion: "Pairing dispositions and trap detection"
+      metric: "Unit tests pass"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    implementation:
+      - "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    tests:
+      - "methodology-conformance-effectiveness-pairing.mcp.test.ts"
+      - "pair.test.ts"
+      - "pairing-gate.test.ts"
 REQ-METHODOLOGY-LEARNING-EXPERIMENT:
   category: "Functional"
   detail_file: "requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"

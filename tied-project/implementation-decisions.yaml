@@ -1552,6 +1552,34 @@ IMPL-MCP_USAGE_METRICS:
     tests:
       - "analyze_tied_mcp_metrics_test.rb"
       - "usage-metrics.test.ts"
+IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
+  code_locations:
+    files:
+      - path: "mcp-server/src/methodology-conformance-effectiveness-pairing/pair.ts"
+      - path: "mcp-server/src/methodology-conformance-effectiveness-pairing/pairing-gate.ts"
+      - path: "mcp-server/src/tools/index.ts"
+  cross_references:
+    architecture:
+      - "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    requirements:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+  detail_file: "implementation-decisions/IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING-pseudocode.md"
+  implementation_approach:
+    details:
+      - "CITDP methodology_surface_experiment_link triggers hook only"
+    summary: "pair.ts, resolve.ts, pairing-gate.ts; MCP tied_methodology_conformance_effectiveness_pair; checklist gate composition."
+  name: "Methodology pairing implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    requirements:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    tests:
+      - "methodology-conformance-effectiveness-pairing.mcp.test.ts"
+      - "pair.test.ts"
+      - "pairing-gate.test.ts"
 IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
   detail_file: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
   essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md"

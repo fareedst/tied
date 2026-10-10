@@ -239,7 +239,7 @@ Each wave **CALL**s a child workflow, then **RETURN**s to the orchestrator. A wa
 | --- | --- | --- | --- | --- |
 | **W0** | Program charter: this linked plan + orchestrator + RESOLVE | minimal | *(this document)* | **Complete** |
 | **W1** | **Strategic suggestion (proposed):** methodology PDSA — hypothesis, baseline, countermeasure promotion path, outcome observation, cohort readout hooks, rule reversal | integrated (proposed default; reselect in W1 CITDP) | [`docs/tied-qmm-w1-methodology-pdsa-plan.md`](tied-qmm-w1-methodology-pdsa-plan.md) — **plan-only authored**; implement: `REQ-METHODOLOGY-LEARNING-EXPERIMENT` | **Planned — implement blocked until sponsor extends authority** |
-| **W2** | Conformance–effectiveness pairing for methodology changes (adherence + verification readout; avoid “conformance trap”) | integrated | TBD per W1 LEAP | Planned |
+| **W2** | Conformance–effectiveness pairing for methodology changes (adherence + verification readout; avoid “conformance trap”) | integrated | [`docs/tied-qmm-w2-conformance-effectiveness-plan.md`](tied-qmm-w2-conformance-effectiveness-plan.md) — plan-only complete; **`w2_scope: implement`** (2026-10-10); REQ: `REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING` | **In progress — build-plan implement pending** |
 | **W3** | Bridge Loop 2 → Loop 3 (operational observations that imply methodology rules; digest → methodology experiment) | integrated | TBD | Planned |
 | **W4** | Cohort-level methodology experiment readouts (**evidence-chain statistics report**, **client cohort**, **privacy tier**) | integrated | TBD | Planned |
 | **W5** | Prompt-type / checklist / gate-policy **production system** surfaces enrolled in the same PDSA contract | integrated | TBD | Planned |

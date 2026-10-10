@@ -69,6 +69,11 @@
 | envelope gap | missing artifact gap, coverage gap | Explicit expected-but-missing or anomalous row in envelope `gaps[]` with a stable diagnostic code; distinct from a **fidelity finding**. | `ENVELOPE_GAP` |
 | not applicable receipt | N/A receipt, intentional skip receipt | `not-applicable-receipt.v1.json` proving intentional skip at minimal depth instead of silent absence. | `NOT_APPLICABLE_RECEIPT` |
 | envelope gap report | batch gap report, artifact coverage report | Batch artifact `envelope-gap-report.v1.yaml` measuring per-kind present/waived/N/A/missing counts with explicit denominators; comparable arm to **evidence chain statistics report**; never a maturity score. | `ENVELOPE_GAP_REPORT` |
+| conformance trap | gate-only success, checklist pass without outcome | Methodology-surface change where **methodology conformance evidence** exists without a linked **methodology effectiveness readout**; distinct from an **inconclusive** paired outcome row. | `CONFORMANCE_TRAP` |
+| methodology conformance evidence | gate evidence, adherence evidence for methodology | Typed refs (`gate_receipt`, `envelope_ref`, `manifest_ref`, `file_path`) tying checklist/adherence receipts to a methodology learning experiment; rejects **generic prose ref**. | `METHODOLOGY_CONFORMANCE_EVIDENCE` |
+| methodology effectiveness readout | methodology outcome readout, effectiveness evidence | **methodology outcome observation** row plus **proof boundary** for a methodology change; not implied by **gate_decided** alone ([NON_IMPLICATION_RULE]). | `METHODOLOGY_EFFECTIVENESS_READOUT` |
+| conformance–effectiveness pairing | methodology pairing, PAIR conformance effectiveness | Explicit link between conformance and effectiveness artifacts with closed **pairing disposition** (`paired`, `effectiveness_not_measured`, `conformance_only_trap`, `waived`). | `CONFORMANCE_EFFECTIVENESS_PAIRING` |
+| pairing disposition | pairing status, trap disposition | Closed enum on a pairing report determining whether verification/close_out may proceed for CITDP-scoped methodology-surface changes. | `PAIRING_DISPOSITION` |
 
 ## Profile applicability
 

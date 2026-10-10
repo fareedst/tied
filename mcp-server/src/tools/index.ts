@@ -77,6 +77,8 @@ import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { validateStressorResidueRecord } from "../residuality/stressor-residue-validate.js";
 import { validateMethodologyLearningExperiment } from "../methodology-learning-experiment/validate.js";
+import { pairFromExperimentId } from "../methodology-conformance-effectiveness-pairing/resolve.js";
+import { pairConformanceEffectiveness } from "../methodology-conformance-effectiveness-pairing/pair.js";
 import {
   listMethodologyLearningExperiments,
   upsertMethodologyLearningExperiment,
@@ -2851,6 +2853,60 @@ export const allTools = [
     handler: async (args: { base_path?: string }) => {
       const data = listMethodologyLearningExperiments(args.base_path);
       return textContent(JSON.stringify(data, null, 2));
+    },
+  },
+  {
+    name: "tied_methodology_conformance_effectiveness_pair",
+    config: {
+      description:
+        "Read-only conformance–effectiveness pairing report for a methodology learning experiment (trap, paired, not_measured, waived). Does not mutate stores.",
+      inputSchema: z.object({
+        experiment_id: z.string().optional(),
+        record: z.record(z.unknown()).optional(),
+        conformance_evidence_refs: z.array(z.unknown()).optional(),
+        process_grade_gap_documented: z.boolean().optional(),
+        waiver: z
+          .object({
+            owner: z.string().optional(),
+            expiry: z.string().optional(),
+            rationale: z.string().optional(),
+          })
+          .optional(),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      experiment_id?: string;
+      record?: Record<string, unknown>;
+      conformance_evidence_refs?: unknown[];
+      process_grade_gap_documented?: boolean;
+      waiver?: { owner?: string; expiry?: string; rationale?: string };
+      base_path?: string;
+    }) => {
+      if (args.experiment_id) {
+        return textContent(JSON.stringify(pairFromExperimentId({
+          experiment_id: args.experiment_id,
+          conformance_evidence_refs: args.conformance_evidence_refs,
+          process_grade_gap_documented: args.process_grade_gap_documented,
+          waiver: args.waiver,
+          base_path: args.base_path,
+        }), null, 2));
+      }
+      if (args.record) {
+        const outcome = args.record.methodology_outcome_observation;
+        return textContent(JSON.stringify(pairConformanceEffectiveness({
+          conformance_evidence_refs: args.conformance_evidence_refs,
+          methodology_outcome_observation: outcome as Record<string, unknown> | null | undefined,
+          experiment_proof_boundary:
+            typeof args.record.proof_boundary === "string" ? args.record.proof_boundary : undefined,
+          process_grade_gap_documented: args.process_grade_gap_documented,
+          waiver: args.waiver,
+        }), null, 2));
+      }
+      return textContent(JSON.stringify({
+        ok: false,
+        diagnostics: [{ code: "INVALID_INPUT", message: "Provide experiment_id or record" }],
+      }, null, 2));
     },
   },
   {

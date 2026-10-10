@@ -1404,6 +1404,21 @@ ARCH-MCP_USAGE_METRICS:
       - "REQ-MCP_USAGE_METRICS"
     tests:
       - "usage-metrics.test.ts"
+ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
+  consequences:
+    negative:
+      - "Gate-blocking blast radius if linkage misconfigured"
+    positive:
+      - "Explicit trap disposition"
+  cross_references:
+    implementation:
+      - "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    requirements:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+  decision: "Pure pairing module plus CITDP-scoped gate hook on verification/close_out; MCP read-only pair tool; compose W1 experiment store."
+  detail_file: "architecture-decisions/ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml"
+  name: "Methodology pairing architecture"
+  status: "Accepted"
 ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
   detail_file: "architecture-decisions/ARCH-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
   name: "Methodology learning experiment storage"

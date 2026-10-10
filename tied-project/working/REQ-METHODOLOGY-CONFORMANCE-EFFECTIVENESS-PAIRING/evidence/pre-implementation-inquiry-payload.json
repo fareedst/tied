@@ -1,0 +1,176 @@
+{
+  "graph": {
+    "projectId": "stdd-mcep-w2",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#pair-disposition",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mcep1",
+          "sourceRevision": "mcep-src"
+        },
+        "architectureConstraintIds": ["arch-mcep-pair"]
+      },
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#citdp-gate-hook",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mcep2",
+          "sourceRevision": "mcep-src"
+        },
+        "architectureConstraintIds": ["arch-mcep-gate"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-mcep-pair",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_CONFORMANCE_EFFECTIVENESS#mcep0001",
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_FROM_EXPERIMENT_ID#mcep0002"
+        ]
+      },
+      {
+        "id": "arch-mcep-gate",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#METHODOLOGY_SURFACE_PAIRING_GATE#mcep0003",
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#MCP_TOOL_SURFACE#mcep0004"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_CONFORMANCE_EFFECTIVENESS#mcep0001",
+          "kind": "block",
+          "name": "PAIR_CONFORMANCE_EFFECTIVENESS",
+          "derivation": "content",
+          "revision": "block-rev-mcep1",
+          "sourceRevision": "mcep-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_FROM_EXPERIMENT_ID#mcep0002",
+          "kind": "block",
+          "name": "PAIR_FROM_EXPERIMENT_ID",
+          "derivation": "content",
+          "revision": "block-rev-mcep2",
+          "sourceRevision": "mcep-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#METHODOLOGY_SURFACE_PAIRING_GATE#mcep0003",
+          "kind": "block",
+          "name": "METHODOLOGY_SURFACE_PAIRING_GATE",
+          "derivation": "content",
+          "revision": "block-rev-mcep3",
+          "sourceRevision": "mcep-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#MCP_TOOL_SURFACE#mcep0004",
+          "kind": "block",
+          "name": "MCP_TOOL_SURFACE",
+          "derivation": "content",
+          "revision": "block-rev-mcep4",
+          "sourceRevision": "mcep-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-mcep-tests",
+        "blockId": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_CONFORMANCE_EFFECTIVENESS#mcep0001",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-conformance-effectiveness-pairing/pair.test.ts",
+        "sourceRevision": "mcep-src"
+      },
+      {
+        "id": "loci-mcep-gate-test",
+        "blockId": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#METHODOLOGY_SURFACE_PAIRING_GATE#mcep0003",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-conformance-effectiveness-pairing/pairing-gate.test.ts",
+        "sourceRevision": "mcep-src"
+      },
+      {
+        "id": "loci-mcep-pair-prod",
+        "blockId": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_CONFORMANCE_EFFECTIVENESS#mcep0001",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-conformance-effectiveness-pairing/pair.ts",
+        "sourceRevision": "mcep-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-mcep1",
+    "specification": [
+      {
+        "id": "mcep-spec-trap",
+        "kind": "behavior",
+        "value": "conformance_only_trap when conformance refs present without outcome link.",
+        "order": 1
+      },
+      {
+        "id": "mcep-spec-citdp",
+        "kind": "behavior",
+        "value": "Gate hook blocks verification/close_out only when CITDP carries methodology_surface_experiment_link.",
+        "order": 2
+      },
+      {
+        "id": "mcep-spec-mcp",
+        "kind": "behavior",
+        "value": "MCP tied_methodology_conformance_effectiveness_pair returns PairingReport without store writes.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "mcep-test-trap",
+        "statementId": "mcep-spec-trap",
+        "kind": "behavior",
+        "value": "pair disposition conformance_only_trap",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mcep1",
+        "source": {
+          "location": "mcp-server/src/methodology-conformance-effectiveness-pairing/pair.test.ts"
+        }
+      },
+      {
+        "id": "mcep-test-gate",
+        "statementId": "mcep-spec-citdp",
+        "kind": "behavior",
+        "value": "validateMethodologySurfacePairingGate blocks trap",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mcep3",
+        "source": {
+          "location": "mcp-server/src/methodology-conformance-effectiveness-pairing/pairing-gate.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "mcep-prod-pair",
+        "statementId": "mcep-spec-trap",
+        "kind": "behavior",
+        "value": "pairConformanceEffectiveness implements trap and paired paths",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mcep1",
+        "source": {
+          "location": "mcp-server/src/methodology-conformance-effectiveness-pairing/pair.ts"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#PAIR_CONFORMANCE_EFFECTIVENESS#mcep0001",
+    "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#METHODOLOGY_SURFACE_PAIRING_GATE#mcep0003",
+    "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING#MCP_TOOL_SURFACE#mcep0004"
+  ]
+}

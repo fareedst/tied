@@ -11,6 +11,7 @@ import {
   loadCanonicalChecklistSlugs,
   PSEUDOCODE_GATE_SLUG,
 } from "./checklist-slug-registry.js";
+import { validateMethodologySurfacePairingGate } from "./methodology-conformance-effectiveness-pairing/pairing-gate.js";
 
 export type GatePhase = "pre_implementation" | "verification" | "close_out";
 export type AdversarialDepth = "minimal" | "integrated" | "strict_candidate";
@@ -1059,6 +1060,8 @@ export type ChecklistGateEvidenceInput = {
   };
   /** W5b charter compliance table inputs (author-architecture / risk-assessment). */
   charterCompliance?: CharterComplianceInput;
+  /** Optional TIED base path for methodology pairing gate (tests). */
+  methodologyPairingBasePath?: string;
 };
 
 const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
@@ -1540,6 +1543,15 @@ export function validateChecklistGate(input: {
     if (mutationCacheBlocksVerification(mutationReport)) {
       diagnostics.push(`mutation_cache_below_threshold:${mutationReport.score}`);
     }
+  }
+
+  const methodologyPairingResult = validateMethodologySurfacePairingGate({
+    citdp: input.citdp,
+    phase: input.phase,
+    basePath: input.evidence?.methodologyPairingBasePath,
+  });
+  if (!methodologyPairingResult.ok) {
+    diagnostics.push(...methodologyPairingResult.diagnostics);
   }
 
   const minimalWaiverResult = validateMinimalWaiver({ citdp: input.citdp });

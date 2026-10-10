@@ -1,0 +1,13 @@
+# Non-normative pilot — conformance_only_trap fixture for W2 implement tests
+schema_version: methodology-conformance-effectiveness-pairing-report.v0-draft
+experiment_id: "mle-trap-pilot-20261010-001"
+disposition: conformance_only_trap
+ok: false
+proof_boundary: "Pilot only; proves trap detection when gate receipt exists without typed outcome link."
+methodology_conformance_evidence_refs:
+  - kind: gate_receipt
+    path: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json
+methodology_outcome_observation: null
+diagnostics:
+  - code: missing_outcome_link
+    message: "Gate/adherence evidence present; no satisfiable methodology outcome observation row."

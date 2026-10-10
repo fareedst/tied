@@ -1,0 +1,20 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "close_out",
+  "diagnostics": [],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps",
+    "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/pseudocode-analysis/IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.v1.json:IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+    "tied-bundle/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json:IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/gates/close_out-2026-10-10T17-56-43-484Z.json",
+    "hash": "sha256:a09d79fe01cf5df879fe6ccc63f0539b442f0e2a085a459a6e4b17657a1bfeab"
+  }
+}
