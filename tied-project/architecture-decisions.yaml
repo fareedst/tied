@@ -257,6 +257,15 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
       - "REQ-GOAGENT-AGENT-EXECUTOR"
     tests:
       - "agent_stream_e2e_test.rb"
+ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET:
+  cross_references: []
+  description: "Optional BBCE slice ownership paste-in snippet (methodology corpus)."
+  detail_file: "architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml"
+  metadata:
+    status: "snippet_only"
+    title: "Optional BBCE slice ownership sections (paste-in snippet)"
+  name: "BBCE slice ownership snippet"
+  status: "Active"
 ARCH-CONFIG_DISCOVERY_LAYERING:
   alternatives_considered:
     - cons:
@@ -1395,6 +1404,15 @@ ARCH-MCP_USAGE_METRICS:
       - "REQ-MCP_USAGE_METRICS"
     tests:
       - "usage-metrics.test.ts"
+ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
+  detail_file: "architecture-decisions/ARCH-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
+  name: "Methodology learning experiment storage"
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+    requirements:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
     - cons:

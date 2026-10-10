@@ -1615,6 +1615,27 @@ REQ-MESSAGING-PARTICIPANT-MATERIALIZE:
       - "ARCH-MESSAGING-CONVERSATION-AGGREGATE"
     implementation: []
     tests: []
+REQ-METHODOLOGY-LEARNING-EXPERIMENT:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
+  name: "Methodology learning experiment (Loop 3 PDSA)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+  satisfaction_criteria:
+    - criterion: "Experiments persist under tied-project/methodology-experiments.yaml"
+      metric: "tied_methodology_learning_experiment_upsert and list round-trip"
+    - criterion: "Validators accept methodology-learning-experiment.v1 records"
+      metric: "tied_methodology_learning_experiment_validate returns ok for fixture"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+    implementation:
+      - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
 REQ-MODULE_VALIDATION:
   category: "Functional"
   detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"

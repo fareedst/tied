@@ -1552,6 +1552,16 @@ IMPL-MCP_USAGE_METRICS:
     tests:
       - "analyze_tied_mcp_metrics_test.rb"
       - "usage-metrics.test.ts"
+IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
+  detail_file: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md"
+  name: "Methodology learning experiment MCP and validators"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+    requirements:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
 IMPL-MODULE_VALIDATION:
   code_locations:
     files:

@@ -1,0 +1,22 @@
+▶ methodology learning experiment MCP [REQ-METHODOLOGY-LEARNING-EXPERIMENT]
+  ✔ registers validate, upsert, list tools (0.360917ms)
+  ✔ upsert and list via MCP handlers (3.121875ms)
+✔ methodology learning experiment MCP [REQ-METHODOLOGY-LEARNING-EXPERIMENT] (3.954333ms)
+▶ methodology learning experiment validate [REQ-METHODOLOGY-LEARNING-EXPERIMENT]
+  ✔ accepts minimal valid record (0.447792ms)
+  ✔ rejects wrong schema_version (0.057459ms)
+  ✔ rejects missing experiment_id (0.048375ms)
+  ✔ requires exactly one of record or yaml_text (0.07925ms)
+  ✔ parses yaml_text (1.183167ms)
+✔ methodology learning experiment validate [REQ-METHODOLOGY-LEARNING-EXPERIMENT] (2.334791ms)
+▶ methodology learning experiment store [REQ-METHODOLOGY-LEARNING-EXPERIMENT]
+  ✔ upserts and lists experiments in temp base path (2.904125ms)
+✔ methodology learning experiment store [REQ-METHODOLOGY-LEARNING-EXPERIMENT] (2.956208ms)
+ℹ tests 8
+ℹ suites 3
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 501.634042

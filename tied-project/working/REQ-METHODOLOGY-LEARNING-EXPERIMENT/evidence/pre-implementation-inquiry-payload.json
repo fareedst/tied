@@ -1,0 +1,199 @@
+{
+  "graph": {
+    "projectId": "stdd-mle-w1",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-LEARNING-EXPERIMENT#validate-record-shape",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mle1",
+          "sourceRevision": "mle-src"
+        },
+        "architectureConstraintIds": ["arch-mle-validate"]
+      },
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-LEARNING-EXPERIMENT#persist-experiments",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mle2",
+          "sourceRevision": "mle-src"
+        },
+        "architectureConstraintIds": ["arch-mle-store"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-mle-validate",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001"
+        ]
+      },
+      {
+        "id": "arch-mle-store",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+          "kind": "block",
+          "name": "VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT",
+          "derivation": "content",
+          "revision": "block-rev-mle1",
+          "sourceRevision": "mle-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+          "kind": "block",
+          "name": "UPSERT_METHODOLOGY_LEARNING_EXPERIMENT",
+          "derivation": "content",
+          "revision": "block-rev-mle2",
+          "sourceRevision": "mle-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#LIST_METHODOLOGY_LEARNING_EXPERIMENTS#mleplan0003",
+          "kind": "block",
+          "name": "LIST_METHODOLOGY_LEARNING_EXPERIMENTS",
+          "derivation": "content",
+          "revision": "block-rev-mle3",
+          "sourceRevision": "mle-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004",
+          "kind": "block",
+          "name": "MCP_TOOL_SURFACE",
+          "derivation": "content",
+          "revision": "block-rev-mle4",
+          "sourceRevision": "mle-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-mle-tests",
+        "blockId": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.test.ts",
+        "sourceRevision": "mle-src"
+      },
+      {
+        "id": "loci-mle-validate-prod",
+        "blockId": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-learning-experiment/validate.ts",
+        "sourceRevision": "mle-src"
+      },
+      {
+        "id": "loci-mle-store-prod",
+        "blockId": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-learning-experiment/store.ts",
+        "sourceRevision": "mle-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-mle1",
+    "specification": [
+      {
+        "id": "mle-spec-schema",
+        "kind": "behavior",
+        "value": "Validator rejects wrong schema_version and requires experiment_id, hypothesis, proof_boundary, privacy_tier.",
+        "order": 1
+      },
+      {
+        "id": "mle-spec-upsert",
+        "kind": "behavior",
+        "value": "Upsert refuses invalid records and writes methodology-experiments.yaml atomically.",
+        "order": 2
+      },
+      {
+        "id": "mle-spec-mcp",
+        "kind": "behavior",
+        "value": "MCP validate, upsert, and list tools register and round-trip a record.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "mle-test-valid",
+        "statementId": "mle-spec-schema",
+        "kind": "behavior",
+        "value": "accepts minimal valid record",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mle1",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.test.ts:accepts minimal valid record"
+        }
+      },
+      {
+        "id": "mle-test-upsert",
+        "statementId": "mle-spec-upsert",
+        "kind": "behavior",
+        "value": "upserts and lists experiments in temp base path",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mle2",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.test.ts:upserts and lists"
+        }
+      },
+      {
+        "id": "mle-test-mcp",
+        "statementId": "mle-spec-mcp",
+        "kind": "behavior",
+        "value": "upsert and list via MCP handlers",
+        "order": 3,
+        "reliable": true,
+        "blockRevision": "block-rev-mle4",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.mcp.test.ts:upsert and list via MCP handlers"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "mle-prod-validate",
+        "statementId": "mle-spec-schema",
+        "kind": "behavior",
+        "value": "validateMethodologyLearningExperimentObject enforces enums and required fields",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mle1",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/validate.ts:validateMethodologyLearningExperimentObject"
+        }
+      },
+      {
+        "id": "mle-prod-upsert",
+        "statementId": "mle-spec-upsert",
+        "kind": "behavior",
+        "value": "upsertMethodologyLearningExperiment validates before atomic write",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mle2",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/store.ts:upsertMethodologyLearningExperiment"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004"
+  ]
+}

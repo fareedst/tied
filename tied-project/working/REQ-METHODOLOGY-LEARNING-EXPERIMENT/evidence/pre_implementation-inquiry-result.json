@@ -1,0 +1,330 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-mle-w1",
+    "scope": [
+      "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004",
+      "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+      "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001"
+    ],
+    "graph": {
+      "projectId": "stdd-mle-w1",
+      "nodes": [
+        {
+          "id": "constraint:arch-mle-store",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-mle-validate",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-mle-store-prod",
+          "kind": "evidence",
+          "revision": "mle-src"
+        },
+        {
+          "id": "evidence:loci-mle-tests",
+          "kind": "evidence",
+          "revision": "mle-src"
+        },
+        {
+          "id": "evidence:loci-mle-validate-prod",
+          "kind": "evidence",
+          "revision": "mle-src"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#LIST_METHODOLOGY_LEARNING_EXPERIMENTS#mleplan0003",
+          "kind": "block",
+          "revision": "block-rev-mle3"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004",
+          "kind": "block",
+          "revision": "block-rev-mle4"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+          "kind": "block",
+          "revision": "block-rev-mle2"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+          "kind": "block",
+          "revision": "block-rev-mle1"
+        },
+        {
+          "id": "REQ-METHODOLOGY-LEARNING-EXPERIMENT#persist-experiments",
+          "kind": "criterion",
+          "revision": "criterion-rev-mle2"
+        },
+        {
+          "id": "REQ-METHODOLOGY-LEARNING-EXPERIMENT#validate-record-shape",
+          "kind": "criterion",
+          "revision": "criterion-rev-mle1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-METHODOLOGY-LEARNING-EXPERIMENT#persist-experiments",
+          "to": "constraint:arch-mle-store",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-METHODOLOGY-LEARNING-EXPERIMENT#validate-record-shape",
+          "to": "constraint:arch-mle-validate",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-mle-store",
+          "to": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-mle-store",
+          "to": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-mle-validate",
+          "to": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+          "to": "evidence:loci-mle-store-prod",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+          "to": "evidence:loci-mle-tests",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+          "to": "evidence:loci-mle-validate-prod",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "0ca0f57ff5d91d02",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "mle-spec-mcp",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2981537abbf07d25",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mle-spec-schema",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.test.ts:accepts minimal valid record"
+        },
+        "evidenceRefs": [
+          "mle-test-valid"
+        ]
+      },
+      {
+        "id": "49c17bf76df8ace5",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mle-spec-schema",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/validate.ts:validateMethodologyLearningExperimentObject"
+        },
+        "evidenceRefs": [
+          "mle-prod-validate"
+        ]
+      },
+      {
+        "id": "64b45c73aeec3a82",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mle-spec-upsert",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.test.ts:upserts and lists"
+        },
+        "evidenceRefs": [
+          "mle-test-upsert"
+        ]
+      },
+      {
+        "id": "7f31f5a9615e7a90",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mle-spec-upsert",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.test.ts:upserts and lists"
+        },
+        "evidenceRefs": [
+          "mle-test-upsert"
+        ]
+      },
+      {
+        "id": "8d4d7d5a517c991d",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mle-spec-upsert",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/store.ts:upsertMethodologyLearningExperiment"
+        },
+        "evidenceRefs": [
+          "mle-prod-upsert"
+        ]
+      },
+      {
+        "id": "a0b432a0596dd724",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mle-spec-upsert",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/store.ts:upsertMethodologyLearningExperiment"
+        },
+        "evidenceRefs": [
+          "mle-prod-upsert"
+        ]
+      },
+      {
+        "id": "d03d1495bb86c4ac",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mle-spec-mcp",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.mcp.test.ts:upsert and list via MCP handlers"
+        },
+        "evidenceRefs": [
+          "mle-test-mcp"
+        ]
+      },
+      {
+        "id": "e39981abaa016601",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mle-spec-mcp",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-experiment/methodology-learning-experiment.mcp.test.ts:upsert and list via MCP handlers"
+        },
+        "evidenceRefs": [
+          "mle-test-mcp"
+        ]
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004": "REVIEW",
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002": "REVIEW",
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004",
+      "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+      "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+      "project_id": "stdd-mle-w1",
+      "run_id": "mle-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope": [
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#VALIDATE_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0001",
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#UPSERT_METHODOLOGY_LEARNING_EXPERIMENT#mleplan0002",
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT#MCP_TOOL_SURFACE#mleplan0004"
+      ],
+      "scope_hash": "68b0a5c729290e05d50612e534f0a9bd218e796a12a1fb0b8c6d8d18a6b0a726",
+      "artifact_hashes": {
+        "obligation-report.json": "79055eea7236e972ab9e19a0b85e58eac50ea1912d5e186a17eb67b55695ee08",
+        "finding-ledger.jsonl": "abad0ecf8ca1f2cd93c9b738489b2f3d703d49f2017a0c4b30f60897063b52aa",
+        "gate-result.json": "5399e689039561267c7ce0899fafc2d591281dd1c42c01cd4b5bed8cbd054b50",
+        "evidence-provenance.json": "ce598571a9ab083177fbd32e7896262c778112cc957c712951d1cd257a456821"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "project_id": "stdd-mle-w1",
+        "run_id": "mle-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "68b0a5c729290e05d50612e534f0a9bd218e796a12a1fb0b8c6d8d18a6b0a726",
+        "hash": "79055eea7236e972ab9e19a0b85e58eac50ea1912d5e186a17eb67b55695ee08",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "project_id": "stdd-mle-w1",
+        "run_id": "mle-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "68b0a5c729290e05d50612e534f0a9bd218e796a12a1fb0b8c6d8d18a6b0a726",
+        "hash": "abad0ecf8ca1f2cd93c9b738489b2f3d703d49f2017a0c4b30f60897063b52aa",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "project_id": "stdd-mle-w1",
+        "run_id": "mle-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "68b0a5c729290e05d50612e534f0a9bd218e796a12a1fb0b8c6d8d18a6b0a726",
+        "hash": "5399e689039561267c7ce0899fafc2d591281dd1c42c01cd4b5bed8cbd054b50",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "project_id": "stdd-mle-w1",
+        "run_id": "mle-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "68b0a5c729290e05d50612e534f0a9bd218e796a12a1fb0b8c6d8d18a6b0a726",
+        "hash": "ce598571a9ab083177fbd32e7896262c778112cc957c712951d1cd257a456821",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  }
+}

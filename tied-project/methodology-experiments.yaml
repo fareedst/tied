@@ -1,0 +1,24 @@
+experiments:
+  - experiment_id: "mle-demo-20261010-001"
+    methodology_baseline:
+      metric_rows:
+        - name: "outcome_observation_recorded_within_14d"
+          value: "not_measured"
+      snapshot_at: "2026-10-01T00:00:00Z"
+    methodology_hypothesis: "Declaring methodology hypothesis before pre_implementation increases outcome observation rate."
+    methodology_outcome_observation:
+      evidence_refs:
+        - "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/change-definition-evidence.md"
+      recorded_at: "2026-10-10T12:00:00Z"
+      value: "inconclusive"
+    privacy_tier: "operator_local"
+    production_system_surface: "checklist_step"
+    proof_boundary: "Demonstrates validate/upsert/list lifecycle on stdd; does not prove hypothesis."
+    rule_countermeasure_ref:
+      kind: "working_checklist_patch"
+      path: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/pilot/checklist-hypothesis-step.yaml"
+    rule_reversal:
+      applied: false
+      rationale: "W2 pairing pending."
+    schema_version: "methodology-learning-experiment.v1"
+    surface_ref: "agent-req-implementation-checklist.yaml#methodology-hypothesis-declare"

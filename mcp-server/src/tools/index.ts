@@ -76,6 +76,11 @@ import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { validateStressorResidueRecord } from "../residuality/stressor-residue-validate.js";
+import { validateMethodologyLearningExperiment } from "../methodology-learning-experiment/validate.js";
+import {
+  listMethodologyLearningExperiments,
+  upsertMethodologyLearningExperiment,
+} from "../methodology-learning-experiment/store.js";
 import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
 import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
 import { buildClosureJoinReportAsync } from "../analysis/closure-join-report.js";
@@ -2803,6 +2808,49 @@ export const allTools = [
     },
     handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
       return textContent(JSON.stringify(validateStressorResidueRecord(args), null, 2));
+    },
+  },
+  {
+    name: "tied_methodology_learning_experiment_validate",
+    config: {
+      description:
+        "Validate methodology-learning-experiment.v1 YAML records for Loop 3 PDSA shape (hypothesis, baseline, outcome, proof_boundary). Structural check only; does not prove effectiveness.",
+      inputSchema: z.object({
+        record: z.record(z.unknown()).optional(),
+        yaml_text: z.string().optional(),
+      }),
+    },
+    handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
+      return textContent(JSON.stringify(validateMethodologyLearningExperiment(args), null, 2));
+    },
+  },
+  {
+    name: "tied_methodology_learning_experiment_upsert",
+    config: {
+      description:
+        "Validate and upsert a methodology learning experiment record into tied-project/methodology-experiments.yaml under the TIED base path.",
+      inputSchema: z.object({
+        record: z.record(z.unknown()),
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: { record: Record<string, unknown>; base_path?: string }) => {
+      const result = upsertMethodologyLearningExperiment(args.record, args.base_path);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_methodology_learning_experiment_list",
+    config: {
+      description:
+        "List methodology learning experiment records from tied-project/methodology-experiments.yaml.",
+      inputSchema: z.object({
+        base_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: { base_path?: string }) => {
+      const data = listMethodologyLearningExperiments(args.base_path);
+      return textContent(JSON.stringify(data, null, 2));
     },
   },
   {

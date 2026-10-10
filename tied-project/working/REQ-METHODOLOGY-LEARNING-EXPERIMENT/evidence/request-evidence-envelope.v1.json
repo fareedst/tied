@@ -1,0 +1,525 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-10T17:24:07.834Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:5399e689039561267c7ce0899fafc2d591281dd1c42c01cd4b5bed8cbd054b50",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:5399e689039561267c7ce0899fafc2d591281dd1c42c01cd4b5bed8cbd054b50",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:abad0ecf8ca1f2cd93c9b738489b2f3d703d49f2017a0c4b30f60897063b52aa",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:c3e184061bbe05d0d11348474a65286f2c0f09b5081c0426f85d72e3f63f63dd",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:79055eea7236e972ab9e19a0b85e58eac50ea1912d5e186a17eb67b55695ee08",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:79055eea7236e972ab9e19a0b85e58eac50ea1912d5e186a17eb67b55695ee08",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:ce598571a9ab083177fbd32e7896262c778112cc957c712951d1cd257a456821",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:cdc9c28b7de293a7a00f37519e1daf260902bb770f2bb42df425e2068f505142",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:f1d9d0307890e117a494016b198b1736d30c9b1d7dd44e70bb3a3b298fa05391",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "pseudocode_analysis_report",
+      "schema_version": "pseudocode-analysis-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/pseudocode-analysis/IMPL-METHODOLOGY-LEARNING-EXPERIMENT.v1.json",
+      "content_hash": "sha256:2255b14bd13f0721b4246ee39f91339dfab2f98e694ac32dc6c179b89d9daa06",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:b807cc57937e3c319ba63b09ab5754b6e4328a5fc95f044ebe0d6430470d5cb6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:448088a6ef1575b4b58362877e3c77f80cde4af0f4239ac64e1994856716ec4b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:591ab0babe49e4ed6afb5dab9ea5d730f6e3360213a34a99036d0dff32086919",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:0501ec188aeb44dbe82512e873ffe3e90d4b6b9b75ed68554c8c2ff13e135b30",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:527071fbdd98720b1df14f87851ad02b874d79b6b38a33150fde97a9a94cb7a4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:da2982563c278a734a016235ec64e7f1dc57800f79f93cebfdefe6742fd5619c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/close_out-gate-result.json",
+      "content_hash": "sha256:10ffc8ad06e3f23c8db85c711e54064085fc74e52c92094b01910a463687331a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:3a51f9bf186ef1d2a7981c35e1b270c82a3c9eb101c2597288207369511aca00",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/gate-activation-pre_implementation.json",
+      "content_hash": "sha256:724f933148430180b760b64b4c6bfc6ff25b40067b02bb25c44e620143198823",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/gate-activation-verification.json",
+      "content_hash": "sha256:dbec4bb4a0e9bbda4575380d31bcdd2ac2ed8ce61805d6315529c23ae892393a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/gate-pre-implementation-evidence.md",
+      "content_hash": "sha256:7e311d3d9925dddbab666d891673eb71aa201d34401b0d2034a06f83577bbaa7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:03f879e515f4cf237fabaaf644ffeb1e2d09e03dfaafca3bbf83220b4b65e1a1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:67df6d3283acf3942ef184702441fbf649815b3141eca38995403dbd5ad99de5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:e3000770703523ed1641d829456e10c7b88928d458782b7249c53150c22e7850",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:1ce668cd97710b265a97be5afe0fec750f57f1813f728a868174fb19cb49e1c3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-inquiry-result.json",
+      "content_hash": "sha256:440b2d4055999a7ac9742f7e3a13ef23020cd18c783962eff7712ece1d6bcd81",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre-implementation-inquiry-payload.json",
+      "content_hash": "sha256:52547fc9693e1150e11c629abf2eaeb43be6b5538905b0efa339fe8aeb808a45",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pseudocode-validate-result.json",
+      "content_hash": "sha256:f84ec719fe100ce1d361d0eb6d204c21fd4c6dc08718041890cc712115502fa0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:c78ed7109ce8407e64eb6807389415034a38933f3a33dcd7f7c496fef73fbdbe",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:c30739ccbfc60475e351692a87542abf9ed81ed4c36714f2d2b570282ffd3bc2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/run-activation-gates.mjs",
+      "content_hash": "sha256:077c9f37738cf3c56a685d1ad2b56d26586eb71575f279e9485936da1392798b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:ae32a54dcc478e41af262dba0a9a18daf5f5c0f308ee7b74a63205d5b9784b1f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:42d084bf8e4b9dd15142429d19fb25797e1fdb39a25bb169eb852d73e3dee3c5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:c7de69344abfd439f662a47f981b82f3e4f4673d0ea7755e85d10d6273fa5104",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:97946c455db6f64904a86d9b3ef554053af33e13d8047f233679fb14529ed803",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/tied-verify-result.json",
+      "content_hash": "sha256:9062b11261b6eb9477bd67c7dd5b82386c129f35939a4d7fa0e8286418b0ea7c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:43a547bbe536fa6e1c07002cc37557d373bcbd7f9e1145541e84c7e81ba0a8af",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:187760b848b96437ed4f7ab480a23384df69a1170bda8273fdf576af06e000e6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:c3b15484c1dfc193c29d8f3396dfbdb80aa0b8c8c704b1a08d9281ce030783e7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:db9c3bbbbd7284f6cbcdd5d928ed218e45d6d5edbc9a1883c1d34000863df190",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/verification-gate-result.json",
+      "content_hash": "sha256:b38a1da8367f19b053bae7671643d2504a7390ea62c83c2866e2c19144475a46",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/verification-inquiry-result.json",
+      "content_hash": "sha256:34e75f75dc7414d5b01611db9fde79381826084582d0b65734ae9c3336f75a05",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": [
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "finding_unresolved",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "pre_implementation",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "verification",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+# Non-normative example — methodology learning experiment record (W1 hinge #1 spike)
+# Schema is proposed for REQ-METHODOLOGY-LEARNING-EXPERIMENT; not enforced by runtime in plan-only pass.
+
+schema_version: methodology-learning-experiment.v0-proposed
+experiment_id: mle-example-20261010-001
+
+production_system_surface: checklist_step
+surface_ref: agent-req-implementation-checklist.yaml#methodology-hypothesis-declare
+
+methodology_hypothesis: >
+  Requiring an explicit methodology hypothesis before pre_implementation increases
+  the rate of methodology outcome observations within 14 days for production-system changes.
+
+methodology_baseline:
+  snapshot_at: "2026-10-01T00:00:00Z"
+  gate_receipt_refs: []
+  metric_rows:
+    - name: outcome_observation_recorded_within_14d
+      value: not_measured
+      proof_boundary: baseline_window_not_collected_in_plan_only
+
+rule_countermeasure_ref:
+  kind: working_checklist_patch
+  path: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/pilot/checklist-hypothesis-step.yaml
+
+methodology_outcome_observation:
+  value: inconclusive
+  recorded_at: "2026-10-10T12:00:00Z"
+  evidence_refs:
+    - tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/change-definition-evidence.md
+
+proof_boundary: >
+  Validates record shape and lifecycle documentation only; does not prove the hypothesis.
+
+privacy_tier: operator_local
+cohort_hook: null
+
+rule_reversal:
+  applied: false
+  rationale: Pilot window too short; W2 conformance-effectiveness pairing pending.

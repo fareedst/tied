@@ -1,0 +1,15 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "close_out",
+  "diagnostics": [
+    "pending_required_step:traceable-commit"
+  ],
+  "envelope_ok": true,
+  "envelope_path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/request-evidence-envelope.v1.json",
+  "blocking_gap_count": 0,
+  "advisory_gap_count": 3,
+  "note": "Machine envelope validate pass (fail_on_error_gaps). Checklist gate blocked only on traceable-commit until sponsor requests commit."
+}

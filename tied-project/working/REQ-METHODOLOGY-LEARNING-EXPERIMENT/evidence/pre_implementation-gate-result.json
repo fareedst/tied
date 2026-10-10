@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/gates/pre_implementation-2026-10-10T17-12-42-620Z.json",
+    "hash": "sha256:ee6eab5bc166c7579e317ffa103e922e91121624dc67cb3b13c17083d109a9f1"
+  }
+}

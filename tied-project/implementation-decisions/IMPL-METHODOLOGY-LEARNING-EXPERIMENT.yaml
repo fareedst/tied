@@ -1,0 +1,33 @@
+IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
+  IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
+    code_locations:
+      files:
+        - path: "mcp-server/src/methodology-learning-experiment/store.ts"
+        - path: "mcp-server/src/methodology-learning-experiment/validate.ts"
+        - path: "mcp-server/src/tools/index.ts"
+    cross_references:
+      architecture:
+        - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+      requirements:
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md"
+    implementation_approach:
+      details:
+        - "Atomic upsert to methodology-experiments.yaml"
+        - "Structural validator for methodology-learning-experiment.v1"
+      summary: "methodology-learning-experiment validate + store modules; MCP tools tied_methodology_learning_experiment_*"
+    name: "Methodology learning experiment MCP and validators"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+      code_annotations:
+        - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+        - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      requirements:
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      tests:
+        - "methodology-learning-experiment.mcp.test.ts"
+        - "methodology-learning-experiment.test.ts"
+  status: "Implemented"

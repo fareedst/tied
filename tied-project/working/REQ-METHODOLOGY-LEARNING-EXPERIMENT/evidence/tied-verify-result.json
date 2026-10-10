@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "requirements_updated": 1,
+  "implementation_updated": 1,
+  "requirements_set_implemented": [
+    "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  ],
+  "requirements_set_planned": [],
+  "implementation_set_active": [
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+  ],
+  "implementation_set_planned": [],
+  "yaml_format": {
+    "profile_id": "tied-yaml-canonical-v1",
+    "scalar_style": "wrapped",
+    "style_source": "repository",
+    "recursive_key_order": "case-insensitive-primary locale-independent lexical with original-value tie-break",
+    "ordered_list_key_pattern": "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*",
+    "string_list_rule": "sort all-string lists except ordered-list keys",
+    "record_list_rule": "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
+    "scalar_policy": "preserve string, boolean, number, and null types",
+    "opaque_block_policy": "preserve block-scalar bodies and IMPL pseudo-code sidecars"
+  },
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/gates/verification-2026-10-10T17-12-29-383Z.json",
+    "hash": "sha256:30c3c8ab6041f494455777c669396c5ab0174afa26660d662ff32c16f2e0dbc1"
+  },
+  "status_mutation_receipt": true
+}

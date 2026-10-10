@@ -1,0 +1,97 @@
+CITDP-REQ-METHODOLOGY-LEARNING-EXPERIMENT:
+  record_identity:
+    title: Methodology learning experiment (W1 implement)
+    change_request_id: REQ-METHODOLOGY-LEARNING-EXPERIMENT
+    author: build-plan
+    date: "2026-10-10"
+    record_status: implementation
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: integrated
+    implementation_depth_tier: integrated
+  change_definition:
+    current_behavior: >
+      Methodology rule changes are not uniformly logged as PDSA experiments with
+      hypothesis, baseline, outcome, and reversal fields.
+    desired_behavior: >
+      Validate methodology-learning-experiment.v1 records and persist them via MCP
+      to tied-project/methodology-experiments.yaml with list/upsert/validate tools.
+    unchanged_behavior:
+      - Kaizen feedback MCP and feedback.yaml semantics
+      - Checklist gate enforcement defaults
+      - Methodology YAML under tied-bundle (read-only in clients)
+    non_goals:
+      - Control charts, DORA, universal scores
+      - Canonical promotion of checklist steps in W1
+    success_criteria:
+      - Unit and MCP tests green
+      - One end-to-end demo record on stdd tied-project base
+  impact_analysis:
+    modules:
+      - methodology-learning-experiment
+    files:
+      - mcp-server/src/methodology-learning-experiment/
+      - mcp-server/src/tools/index.ts
+    tied_tokens_new:
+      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
+      - ARCH-METHODOLOGY-LEARNING-EXPERIMENT
+      - IMPL-METHODOLOGY-LEARNING-EXPERIMENT
+    tied_tokens_affected:
+      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
+      - ARCH-METHODOLOGY-LEARNING-EXPERIMENT
+      - IMPL-METHODOLOGY-LEARNING-EXPERIMENT
+    impl_inventory:
+      - IMPL-METHODOLOGY-LEARNING-EXPERIMENT
+    depends_on:
+      - REQ-FEEDBACK_TO_TIED
+  risk_analysis:
+    quality_profiles:
+      - baseline-functional
+    adversarial_inquiry:
+      depth_tier: integrated
+      gate_policy: advisory
+      assurance_profile: baseline-functional
+      research_profile: integrated-agent
+      prior_depth_tier: null
+      depth_selected_at: "2026-10-10T09:58:00-07:00"
+      eligibility_triggers_matched:
+        - persistence
+        - mcp_write_surface
+      rationale: >
+        W1 implement adds persistence and MCP write tools; integrated depth required.
+      counterexamples:
+        - Validator accepts records missing proof_boundary
+        - Upsert writes without validation
+      close_out_inquiry_waiver:
+        owner: sponsor
+        expiry: "2026-12-31"
+        rationale: >
+          W1 slice focuses on schema + store + MCP; verification may collect full
+          adversarial activation artifacts before close_out.
+        approval: w1-implement-build-plan-2026-10-10
+        referenced_verification_run_id: mle-verify-20261010
+      disconfirming_observations:
+        - Edit tied-bundle methodology YAML in this change
+    risks:
+      - id: RISK-MLE-001
+        description: Record shape diverges from child linked plan
+        severity: Medium
+        likelihood: Low
+        mitigation: Shared schema_version constant and example pilot
+  test_strategy:
+    summary: Unit validate/store; MCP composition; demo upsert on stdd base.
+    proof_boundary: Does not prove methodology effectiveness
+  evidence:
+    commands:
+      - cd mcp-server && npm run build
+      - cd mcp-server && node --import tsx --test src/methodology-learning-experiment/*.test.ts
+    proof_boundaries:
+      - command result only
+  completion_criteria:
+    activation:
+      run_id: mle-close-out-20261010
+      phase: close_out
+      request_token: REQ-METHODOLOGY-LEARNING-EXPERIMENT
+    focused_tests: methodology-learning-experiment.test.ts; methodology-learning-experiment.mcp.test.ts
+    lint: npm run build in mcp-server
+    verification: tied_validate_consistency for touched project YAML
