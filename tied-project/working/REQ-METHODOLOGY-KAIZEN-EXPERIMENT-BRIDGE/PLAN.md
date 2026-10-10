@@ -1,6 +1,6 @@
 # REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
 
-**Status:** verification complete — close_out optional (2026-10-10)  
+**Status:** complete — traceable-commit `ab5a760` (2026-10-10)  
 **Child program plan:** [`docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md`](../../../docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md)  
 **CITDP:** [`CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml`](../../citdp/CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml)  
 **MCP:** `tied_methodology_kaizen_experiment_bridge`
@@ -12,5 +12,5 @@
 
 ## Next
 
-- Sponsor: `close_out` gate + traceable-commit when wave/program close-out is desired
 - Optional: seed `methodology_improvement` in `tied-project/feedback.yaml` for live demo
+- Program: W4 per `docs/tied-qmm-methodology-learning-plan.md` when sponsored

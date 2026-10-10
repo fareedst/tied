@@ -21,6 +21,6 @@
 
 ## Commit
 
-**Commit:** _(record hash after `git commit`)_
+**Commit:** `ab5a760` — feat(tied): deliver QMM W3 Kaizen methodology experiment bridge stack (76 files).
 
-Excluded from commit: `tmp/w2-*-token.json`, `tmp/w3-*` scratch if present.
+Excluded from commit: `tmp/` (local MCP token scratch).
