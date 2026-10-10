@@ -1,7 +1,7 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-10T17:24:07.834Z",
+    "generated_at": "2026-10-10T17:25:50.029Z",
     "generator": "request_evidence_envelope_build",
     "revision": 1
   },
@@ -119,7 +119,7 @@
       "kind": "evidence_chain_profile",
       "schema_version": null,
       "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:f1d9d0307890e117a494016b198b1736d30c9b1d7dd44e70bb3a3b298fa05391",
+      "content_hash": "sha256:e4c0f6fd4113db70f8866566f72f9a8d85f935dccf0d06155b584feb709ed5db",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -141,7 +141,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:b807cc57937e3c319ba63b09ab5754b6e4328a5fc95f044ebe0d6430470d5cb6",
+      "content_hash": "sha256:0e64af59da94eb5f7fb68e0d6788360aeac3cf0cb27cbff14542e70788431cc6",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -417,6 +417,17 @@
       "schema_version": null,
       "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/tied-verify-result.json",
       "content_hash": "sha256:9062b11261b6eb9477bd67c7dd5b82386c129f35939a4d7fa0e8286418b0ea7c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:5a03077feb1c856ad3481620ecd780e2aec1bff4de507259b152ea651ffdd67a",
       "phase": null,
       "status": "present",
       "proof_boundaries": [

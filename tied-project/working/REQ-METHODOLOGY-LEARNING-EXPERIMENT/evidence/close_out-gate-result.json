@@ -1,15 +1,14 @@
 {
-  "allowed": false,
-  "ok": false,
-  "blocking": true,
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
   "depth": "integrated",
   "phase": "close_out",
-  "diagnostics": [
-    "pending_required_step:traceable-commit"
-  ],
+  "diagnostics": [],
   "envelope_ok": true,
   "envelope_path": "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/request-evidence-envelope.v1.json",
   "blocking_gap_count": 0,
   "advisory_gap_count": 3,
-  "note": "Machine envelope validate pass (fail_on_error_gaps). Checklist gate blocked only on traceable-commit until sponsor requests commit."
+  "commit_ref": "aaec3ea",
+  "note": "Close_out gate pass after traceable-commit; re-run without --sync-dispositions if ledger lags tracker."
 }

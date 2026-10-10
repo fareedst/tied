@@ -21,7 +21,7 @@ Sponsor invoked **build-plan W1 implement** — `execution_authority.w1_scope: i
 | --- | --- |
 | pre_implementation | **pass** — [`evidence/pre_implementation-gate-result.json`](./evidence/pre_implementation-gate-result.json) |
 | verification | **pass** — [`evidence/verification-gate-result.json`](./evidence/verification-gate-result.json); `tied_verify` ok |
-| close_out | **envelope pass** — machine close-out ok; gate blocked on `traceable-commit` until sponsor commit — [`evidence/close_out-gate-result.json`](./evidence/close_out-gate-result.json) |
+| close_out | **pass** — commit `aaec3ea`; [`evidence/close_out-gate-result.json`](./evidence/close_out-gate-result.json) |
 
 ## CITDP
 

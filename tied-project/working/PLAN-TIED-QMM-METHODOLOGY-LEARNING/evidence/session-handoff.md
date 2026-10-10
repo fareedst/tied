@@ -1,11 +1,11 @@
 # session-handoff — PLAN-TIED-QMM-METHODOLOGY-LEARNING
 
-**Updated:** 2026-10-10 — W1 implement core; verification pass; close_out envelope sync pass (commit pending)
+**Updated:** 2026-10-10 — W1 implement committed (`aaec3ea`); close_out gate pass; orchestrator W1 implement complete
 
 ## Resume here
 
 1. **Program orchestrator:** [`../qmm-program-execution-checklist.yaml`](../qmm-program-execution-checklist.yaml) — `program_phase: in_progress`, `current_wave: W1`.
-2. **W1 implement REQ:** [`../../REQ-METHODOLOGY-LEARNING-EXPERIMENT/PLAN.md`](../../REQ-METHODOLOGY-LEARNING-EXPERIMENT/PLAN.md) — B1–B3 done; envelope sync done; **next:** sponsor `traceable-commit`, then mark W1 `implement_status: complete` in orchestrator.
+2. **W1 implement REQ:** [`../../REQ-METHODOLOGY-LEARNING-EXPERIMENT/PLAN.md`](../../REQ-METHODOLOGY-LEARNING-EXPERIMENT/PLAN.md) — **complete** (`aaec3ea`); optional follow-up: push branch, W2 planning.
 3. **Authority:** `execution_authority.mode: approved_full`, `w1_scope: implement` — [`sponsor-authority-20261010.md`](./sponsor-authority-20261010.md).
 4. **Child plan (context):** [`docs/tied-qmm-w1-methodology-pdsa-plan.md`](../../../../docs/tied-qmm-w1-methodology-pdsa-plan.md) · [`../../PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/PLAN.md`](../../PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/PLAN.md).
 

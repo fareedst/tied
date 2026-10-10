@@ -102,7 +102,7 @@ waves:
     title: Strategic suggestion — methodology PDSA (full)
     status: in_progress
     plan_only_status: complete
-    implement_status: in_progress
+    implement_status: complete
     depth_tier_default: integrated
     gate_policy_default: per_citdp
     child_linked_plan: docs/tied-qmm-w1-methodology-pdsa-plan.md
