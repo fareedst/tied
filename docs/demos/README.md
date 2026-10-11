@@ -17,6 +17,7 @@ Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ token
 | Readout | Prompt | Client |
 | --- | --- | --- |
 | [PROMPT-GF-01 @ 1791731617](trial-readout-PROMPT-GF-01-1791731617.md) | [PROMPT-GF-01](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-01) | `/Users/fareed/Documents/dev/test/1791731617` |
+| [PROMPT-GF-02 @ 1791739774](trial-readout-PROMPT-GF-02-1791739774.md) | [PROMPT-GF-02](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-02) | `/Users/fareed/Documents/dev/test/1791739774` |
 
 ## Disposition legend (TIED catalog)
 

@@ -228,6 +228,7 @@ Build one publishable library package in this repo (TypeScript or Python—pick 
 | Prompt | Client | Readout |
 | --- | --- | --- |
 | PROMPT-GF-01 | `1791731617` | [trial-readout-PROMPT-GF-01-1791731617.md](trial-readout-PROMPT-GF-01-1791731617.md) |
+| PROMPT-GF-02 | `1791739774` | [trial-readout-PROMPT-GF-02-1791739774.md](trial-readout-PROMPT-GF-02-1791739774.md) |
 
 ## Related references
 
