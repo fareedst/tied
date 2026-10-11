@@ -8,6 +8,15 @@ Human-readable catalogs for picking small programs and TIED-shaped build exercis
 | --- | --- |
 | [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) | Algorithmic resilience (ENV/DATA/CON/STATE/ALG/ADV); may be built without full TIED stack |
 | [TIED compact demo tool catalog](catalog-tied-compact-tools.md) | TIED traceability, TDD, composition, **Kaizen loop**, **methodology learning experiment**, explicit **proof boundaries** |
+| [Greenfield plan-new-feature prompt catalog](catalog-greenfield-plan-new-feature-prompts.md) | Plain-language `@plan-new-feature` trial prompts for `test-new-tied-client` clients (facilitator grading maps to `TIED-DEMO-*`) |
+
+## Trial readouts (facilitator)
+
+Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ tokens.
+
+| Readout | Prompt | Client |
+| --- | --- | --- |
+| [PROMPT-GF-01 @ 1791731617](trial-readout-PROMPT-GF-01-1791731617.md) | [PROMPT-GF-01](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-01) | `/Users/fareed/Documents/dev/test/1791731617` |
 
 ## Disposition legend (TIED catalog)
 

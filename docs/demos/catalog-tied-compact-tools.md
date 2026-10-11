@@ -8,7 +8,7 @@
 | **Last updated** | 2026-10-11 |
 | **CITDP posture** | **Defer persist** — documentation-only slice; no product behavior or project YAML traceability impact. Skip rationale: non-executable docs under `docs/demos/` only. |
 | **Adversarial depth** | `minimal` (documentation) |
-| **Related catalogs** | [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) · [TIED feature demo](../tied-feature-demo.md) · [Client development index](../../tied-bundle/docs/client-development-index.md) |
+| **Related catalogs** | [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) · [Greenfield plan-new-feature prompts](catalog-greenfield-plan-new-feature-prompts.md) · [TIED feature demo](../tied-feature-demo.md) · [Client development index](../../tied-bundle/docs/client-development-index.md) |
 
 ---
 
@@ -245,10 +245,11 @@ Vocabulary anchors: [feedback-to-tied](../../tied-project/vocab/feedback-to-tied
 
 ## Promoting an idea to implementation
 
-1. Open a scoped REQ in the target client’s `tied-project/` (not in this catalog body).
+1. Bootstrap **`test-new-tied-client`**, then paste a plain-language trial prompt from [catalog-greenfield-plan-new-feature-prompts.md](catalog-greenfield-plan-new-feature-prompts.md) (`PROMPT-GF-NN` ↔ `TIED-DEMO-NN`) into **`@plan-new-feature`**—or open a scoped REQ manually in `tied-project/`.
 2. Copy [agent implementation checklist](../../tied-bundle/docs/agent-req-implementation-checklist.yaml) to `working/{REQ-TOKEN}/`.
 3. Build the **compact TIED demo tool** with strict TDD + composition ordering per `[PROC-TIED_DEV_CYCLE]`.
 4. Optional disposable client under `$TIED_TEST_ROOT` — operator pattern only; not required for catalog authorship.
+5. Score the session with the **multi-faceted grading** table in either catalog; keep **proof boundaries** explicit per dimension.
 
 ---
 
