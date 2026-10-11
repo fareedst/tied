@@ -1,0 +1,18 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-49-08-265Z.json",
+    "hash": "sha256:58e8f634f2f4c01971f10e837889e68a48f1fea2f24709e04d7c7d86e54fa991"
+  }
+}

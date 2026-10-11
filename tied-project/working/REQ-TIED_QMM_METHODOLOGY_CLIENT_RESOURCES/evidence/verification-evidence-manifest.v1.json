@@ -1,0 +1,39 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "qmm-closeout-20261010",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "bootstrap-qmm-verify-unit",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/verify.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "stdout_ref": "tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/bootstrap-unit-test.stdout.txt"
+    },
+    {
+      "id": "mcp-full-suite",
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "stdout_ref": "tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/npm-test.stdout.txt"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+    "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST",
+    "IMPL-TIED_FILES"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+  "artifact_kind": "pseudocode_static_analysis",
+  "depth_tier": "integrated",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "No Layer C PSA delta required for corpus-only bundle promotion close-out",
+  "generated_at": "2026-10-11T03:45:17.454Z",
+  "source": "hydrate-tracker-evidence"
+}

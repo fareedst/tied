@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+    "project_id": "stdd-qmm-bundle-phase1-pre-implementation",
+    "run_id": "qmm-closeout-20261010",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-TIED_FILES#VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY#qmmplan0002",
+      "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001"
+    ],
+    "scope_hash": "f5808c57cff0d8a96c5aff62912258e6b297fd2b57d7fa5ac16b22781637fff7",
+    "artifact_hashes": {
+      "obligation-report.json": "f336b17f43fa2e49943430fe07d337ebaea177e427c028c6fc4de3e7b99ac41b",
+      "finding-ledger.jsonl": "c67ec7ec9286101510d4332e62c89782a226b459d3cb8d2639a86d4f3ef2bc7f",
+      "gate-result.json": "2800f6635b68706e5d1b314bf5067a2e5e6fd929c62b43eebdf0f0c956693f4a",
+      "evidence-provenance.json": "bc27ef8ae9c7e9914c7399b14b370a5ca0cbe1c2e6755371a07f415e22384e02"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+      "project_id": "stdd-qmm-bundle-phase1-pre-implementation",
+      "run_id": "qmm-closeout-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "f5808c57cff0d8a96c5aff62912258e6b297fd2b57d7fa5ac16b22781637fff7",
+      "hash": "f336b17f43fa2e49943430fe07d337ebaea177e427c028c6fc4de3e7b99ac41b",
+      "path": "tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+      "project_id": "stdd-qmm-bundle-phase1-pre-implementation",
+      "run_id": "qmm-closeout-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "f5808c57cff0d8a96c5aff62912258e6b297fd2b57d7fa5ac16b22781637fff7",
+      "hash": "c67ec7ec9286101510d4332e62c89782a226b459d3cb8d2639a86d4f3ef2bc7f",
+      "path": "tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+      "project_id": "stdd-qmm-bundle-phase1-pre-implementation",
+      "run_id": "qmm-closeout-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "f5808c57cff0d8a96c5aff62912258e6b297fd2b57d7fa5ac16b22781637fff7",
+      "hash": "2800f6635b68706e5d1b314bf5067a2e5e6fd929c62b43eebdf0f0c956693f4a",
+      "path": "tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+      "project_id": "stdd-qmm-bundle-phase1-pre-implementation",
+      "run_id": "qmm-closeout-20261010",
+      "phase": "pre_implementation",
+      "scope_hash": "f5808c57cff0d8a96c5aff62912258e6b297fd2b57d7fa5ac16b22781637fff7",
+      "hash": "bc27ef8ae9c7e9914c7399b14b370a5ca0cbe1c2e6755371a07f415e22384e02",
+      "path": "tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+    "project_id": "stdd-qmm-bundle-phase1-pre-implementation",
+    "run_id": "qmm-closeout-20261010",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-TIED_FILES#VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY#qmmplan0002",
+      "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001"
+    ],
+    "scope_hash": "f5808c57cff0d8a96c5aff62912258e6b297fd2b57d7fa5ac16b22781637fff7"
+  },
+  "diagnostics": []
+}

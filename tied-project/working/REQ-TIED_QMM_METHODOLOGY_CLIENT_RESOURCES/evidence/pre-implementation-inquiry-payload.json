@@ -1,0 +1,141 @@
+{
+  "graph": {
+    "projectId": "stdd-qmm-bundle-phase1",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES#manifest-gates",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-qmm1",
+          "sourceRevision": "qmm-src"
+        },
+        "architectureConstraintIds": ["arch-qmm-manifest"]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES#bundle-graph",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-qmm2",
+          "sourceRevision": "qmm-src"
+        },
+        "architectureConstraintIds": ["arch-qmm-consistency"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-qmm-manifest",
+        "implementationBlockIds": [
+          "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001",
+          "IMPL-TIED_FILES#VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY#qmmplan0002"
+        ]
+      },
+      {
+        "id": "arch-qmm-consistency",
+        "implementationBlockIds": [
+          "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001",
+          "kind": "block",
+          "name": "VERIFY_QMM_METHODOLOGY",
+          "derivation": "content",
+          "revision": "block-rev-qmm1",
+          "sourceRevision": "qmm-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_FILES#VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY#qmmplan0002",
+          "kind": "block",
+          "name": "VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY",
+          "derivation": "content",
+          "revision": "block-rev-qmm2",
+          "sourceRevision": "qmm-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-verify-test",
+        "blockId": "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001",
+        "kind": "test",
+        "location": "tools/bootstrap/lib/verify.test.mjs",
+        "sourceRevision": "qmm-src"
+      },
+      {
+        "id": "loci-bundle-consistency",
+        "blockId": "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001",
+        "kind": "test",
+        "location": "mcp-server/src/e2e/methodology-bundle-consistency.test.ts",
+        "sourceRevision": "qmm-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-qmm1",
+    "specification": [
+      {
+        "id": "qmm-spec-gate",
+        "kind": "behavior",
+        "value": "Bootstrap doctor fails closed when a manifest-listed QMM artifact is missing from methodology layout.",
+        "order": 1
+      },
+      {
+        "id": "qmm-spec-consistency",
+        "kind": "behavior",
+        "value": "Minimal-client validateConsistency returns ok true with zero methodology detail ref_issues after promotion.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "qmm-test-verify",
+        "statementId": "qmm-spec-gate",
+        "kind": "behavior",
+        "value": "verifyQmmMethodology throws QMM_METHODOLOGY_GATE_FAILED on partial fixture",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-qmm1",
+        "source": {
+          "location": "tools/bootstrap/lib/verify.test.mjs:verifyQmmMethodology"
+        }
+      },
+      {
+        "id": "qmm-test-consistency",
+        "statementId": "qmm-spec-consistency",
+        "kind": "behavior",
+        "value": "methodology bundle consistency e2e passes",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-qmm1",
+        "source": {
+          "location": "mcp-server/src/e2e/methodology-bundle-consistency.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "qmm-prod-verify",
+        "statementId": "qmm-spec-gate",
+        "kind": "behavior",
+        "value": "verifyQmmMethodology reads QMM_METHODOLOGY_REQUIRED_FILES from manifest",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-qmm1",
+        "source": {
+          "location": "tools/bootstrap/lib/verify.mjs:verifyQmmMethodology"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_FILES#VERIFY_QMM_METHODOLOGY#qmmplan0001",
+    "IMPL-TIED_FILES#VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY#qmmplan0002"
+  ]
+}

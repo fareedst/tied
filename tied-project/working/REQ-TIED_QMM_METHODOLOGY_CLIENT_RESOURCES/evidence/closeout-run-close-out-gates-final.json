@@ -1,0 +1,249 @@
+{
+  "phase": "close_out",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": false,
+    "reason": "collect",
+    "run_id": "qmm-closeout-20261010"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+      "findings": [
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/close_out-2026-10-11T03-44-10-024Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:7df4fe68c76587ede2ad15bb4d0b1cd90cd733808036145446d30229b8072d75",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/close_out-2026-10-11T03-45-17-951Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:cfaea00c89e430c991a7885f2032603a73b2f2be3e8430e098737ed77c3c167c",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/close_out-2026-10-11T03-49-08-305Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:cfaea00c89e430c991a7885f2032603a73b2f2be3e8430e098737ed77c3c167c",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/pre_implementation-2026-10-11T03-41-19-455Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:401f7e5eda237b64dbb6afd943c89176afa2518b4dacc5071ec2a6ec4639f82d",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/pre_implementation-2026-10-11T03-42-07-952Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:401f7e5eda237b64dbb6afd943c89176afa2518b4dacc5071ec2a6ec4639f82d",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/pre_implementation-2026-10-11T03-45-17-908Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:eb2c02b21315a2b726a605e172dc9b50f9a5b8257f18169332bd389980a3be2c",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/pre_implementation-2026-10-11T03-49-08-256Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:eb2c02b21315a2b726a605e172dc9b50f9a5b8257f18169332bd389980a3be2c",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-41-19-463Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:efeae3bfdb7877bfd43c8a3b12564a39f7ea275988ef916b7fd0ecf38b1c964a",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-42-07-960Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:efeae3bfdb7877bfd43c8a3b12564a39f7ea275988ef916b7fd0ecf38b1c964a",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-43-39-979Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:70156f161e46b9dbab8416d854a8d042a34ff09df31d47bd98aad075032f16c5",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-43-39-983Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:70156f161e46b9dbab8416d854a8d042a34ff09df31d47bd98aad075032f16c5",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-45-17-916Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:cee3f2ee7956c2118513bcfdfbe9fdab54de22c589b5befb7aa6ed89c685f756",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-45-17-921Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:cee3f2ee7956c2118513bcfdfbe9fdab54de22c589b5befb7aa6ed89c685f756",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-45-54-167Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:cee3f2ee7956c2118513bcfdfbe9fdab54de22c589b5befb7aa6ed89c685f756",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-45-54-171Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:cee3f2ee7956c2118513bcfdfbe9fdab54de22c589b5befb7aa6ed89c685f756",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-49-08-265Z.json",
+            "stored_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "current_tracker_hash": "sha256:66dc603a94419b85aa20405011aef89b7d13e14bc305bbfe73e031b4a60aba38",
+            "stored_citdp_hash": "sha256:cee3f2ee7956c2118513bcfdfbe9fdab54de22c589b5befb7aa6ed89c685f756",
+            "current_citdp_hash": "sha256:141a4b9c61113634b3711e58e339e493cb43b70ad1ec269513f1b49c1c39b9f1"
+          }
+        }
+      ],
+      "ledger_rows": 20,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 2,
+    "diagnostics": []
+  }
+}

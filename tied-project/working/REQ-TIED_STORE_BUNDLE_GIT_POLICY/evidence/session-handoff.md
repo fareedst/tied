@@ -1,8 +1,8 @@
 # Session handoff — REQ-TIED_STORE_BUNDLE_GIT_POLICY
 
-**Updated:** 2026-10-11 ( **plan-close-out** + **traceable-commit** prep — no git commit per skill)  
+**Updated:** 2026-10-11 ( **plan-close-out** + **traceable-commit** )  
 **Depth:** minimal · **gate_policy:** default  
-**Phase:** EXIT — machine close-out pass · **commit:** sponsor-deferred (see `proposed-commit-message.txt`)
+**Phase:** EXIT — machine close-out pass · **commit:** **`63880649`** (`feat(bootstrap): store git profile for tied-bundle corpus and local working`)
 
 ## Completion signals
 
@@ -48,7 +48,7 @@ node tools/bootstrap/templates/run-close-out-gates.mjs \
 
 - **[PROC-GITIGNORE_CLOSE_OUT]:** **N/A** — intentional track surface; no new ephemeral ignore patterns.
 - **Vocab VALIDATE (Touchpoint 3):** Store asymmetric git terms align with `tied-project/vocab/tied-methodology.md` and install matrix row; no new client vocab rows required.
-- **Proposed commit:** [`proposed-commit-message.txt`](./proposed-commit-message.txt) — stage and commit when sponsor asks (plan-close-out does not run `git add` / `git commit`).
+- **Traceable-commit:** **`63880649`** on `main` (local). **`git push`** when sponsor wants origin updated.
 
 ## Remaining risks
 

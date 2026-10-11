@@ -16,12 +16,23 @@ CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
     title: "Phase 1 QMM client bundle promotion"
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   record_status: "complete"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
+      run_id: "qmm-closeout-20261010"
+  impact_analysis:
+    tied_tokens_affected:
+      - "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
+      - "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST"
+      - "IMPL-TIED_FILES"
   risk_analysis:
     adversarial_inquiry:
       depth_tier: "integrated"
-      gate_policy: "per_citdp"
+      gate_policy: "advisory"
       profile_depth: "integrated"
       methodology_surface_change_class: "none"
+      rationale: "Corpus-only bundle promotion; inquiry findings are review-gated evidence, not effectiveness claims."
     consequence_ladder:
       costly:
         - "Omit git add -f on gitignored tied-bundle detail files at traceable-commit"

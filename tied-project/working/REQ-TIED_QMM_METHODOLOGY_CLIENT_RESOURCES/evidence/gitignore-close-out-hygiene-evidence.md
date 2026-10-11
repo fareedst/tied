@@ -8,8 +8,9 @@
 - **Force-add (`git add -f`):** gitignored `tied-bundle/` detail files listed in `QMM_METHODOLOGY_REQUIRED_FILES`, `QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES`, plus minted `REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES` and `ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST` bundle details.
 - **Exclude from commit:** adversarial-inquiry fixture envelope churn, checklist gate regression manifest drift, JEV context-pruning benchmark live output.
 
-## Phase 2 preconditions (not in this commit)
+## Phase 2 (d2) — cohort export bundle (2026-10-10)
 
-- Promote `REQ-METHODOLOGY-LEARNING-COHORT-EXPORT` stack when sponsor authorizes phase-2 bundle pass.
-- Resolve `REQ-REQUEST_EVIDENCE_ENVELOPE` `depends_on` (promote, LEAP trim, or documented waiver) before cohort bundle consistency is fleet-blocking.
-- Append `QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES` in `manifest.json` (currently `[]`).
+- **Envelope graph strategy:** [`envelope-graph-strategy-phase2.md`](./envelope-graph-strategy-phase2.md) — store keeps `depends_on` on `REQ-REQUEST_EVIDENCE_ENVELOPE`; bundle copy moves envelope REQ to `related_to` + `metadata.bundle_graph_note`.
+- **Promotion:** `node tools/bootstrap/scripts/promote-qmm-phase2-cohort-bundle.mjs`
+- **Manifest:** `QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES` lists cohort export R+A+I + pseudo-code sidecar.
+- **Bootstrap:** `verifyQmmCohortExportMethodology` in doctor chain.

@@ -70,6 +70,8 @@ execution_evidence:
     - persist-implementation-records
     - sub-adversarial-inquiry-pass
     - verification-gate
+    - persist-citdp-record
+    - traceable-commit
   envelope_path: tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -409,7 +411,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_0
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/translate-sponsor-intent-evidence.md
     disposition: completed
+    evidence_refs: *ref_0
   - agentstream_new_session: 'true'
     flow:
       branches: []
@@ -497,7 +502,10 @@ steps:
         - three-way-alignment-unit
       state_history: []
       status: completed
+      evidence_refs: &ref_1
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/unit-test-red-evidence.md
     disposition: completed
+    evidence_refs: *ref_1
   - flow:
       branches:
         - action: CALL sub-leap-micro-cycle; do not silently diverge
@@ -560,7 +568,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_2
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/unit-test-green-evidence.md
     disposition: completed
+    evidence_refs: *ref_2
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -626,7 +637,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_3
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/composition-integration-evidence.md
     disposition: completed
+    evidence_refs: *ref_3
   - agentstream_new_session: 'true'
     flow:
       branches: []
@@ -685,7 +699,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_4
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/risk-assessment-evidence.md
     disposition: completed
+    evidence_refs: *ref_4
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -805,7 +822,17 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_5
+        - kind: manifest_ref
+          path: tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/verification-evidence-manifest.v1.json
+        - kind: gate_receipt
+          path: tied-bundle/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/gates/verification-2026-10-11T03-49-08-265Z.json
+        - kind: envelope_ref
+          path: tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/request-evidence-envelope.v1.json
+        - kind: file_path
+          path: tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/verification-gate-result.json
     disposition: completed
+    evidence_refs: *ref_5
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -872,7 +899,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_6
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/sync-tied-stack-evidence.md
     disposition: completed
+    evidence_refs: *ref_6
   - flow:
       branches: []
       calls:
@@ -986,7 +1016,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_7
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/change-definition-evidence.md
     disposition: completed
+    evidence_refs: *ref_7
   - flow:
       branches: []
       calls:
@@ -1106,7 +1139,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_8
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/test-strategy-evidence.md
     disposition: completed
+    evidence_refs: *ref_8
   - flow:
       branches:
         - action: Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions
@@ -1227,7 +1263,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_9
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/session-bootstrap-evidence.md
     disposition: completed
+    evidence_refs: *ref_9
   - flow:
       branches:
         - action: >-
@@ -1349,7 +1388,11 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_10
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/session-handoff.md
+    disposition: completed
+    evidence_refs: *ref_10
   - flow:
       branches: []
       calls:
@@ -1589,7 +1632,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_11
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/gate-pseudocode-validation-evidence.md
     disposition: completed
+    evidence_refs: *ref_11
   - flow:
       branches: []
       calls:
@@ -1767,7 +1813,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_12
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/impact-discovery-evidence.md
     disposition: completed
+    evidence_refs: *ref_12
   - flow:
       branches: []
       calls: []
@@ -1882,7 +1931,10 @@ steps:
         - sync-tied-stack
       state_history: []
       status: completed
+      evidence_refs: &ref_13
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/resolve-pseudocode-evidence.md
     disposition: completed
+    evidence_refs: *ref_13
   - flow:
       branches:
         - action: Fix and repeat sub-yaml-edit-loop step
@@ -1944,7 +1996,12 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_14
+        - tied-project/citdp/CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml
+        - tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/persist-citdp-record-evidence.md
+    disposition: completed
+    evidence_refs: *ref_14
   - flow:
       branches: []
       calls: []
@@ -2095,7 +2152,19 @@ steps:
       returned_from: []
       state_history: []
       status: completed
+      evidence_refs: &ref_15
+        - >-
+          tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/persist-implementation-records-evidence.md
     disposition: completed
+    evidence_refs: *ref_15
+  - slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: completed
+      evidence_refs: &ref_16
+        - >-
+          tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/sub-adversarial-inquiry-pass-evidence.md
+    disposition: completed
+    evidence_refs: *ref_16
 sub_procedures:
   - flow:
       return_to: caller
