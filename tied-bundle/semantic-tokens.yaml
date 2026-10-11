@@ -939,3 +939,24 @@ ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
   source_index: architecture-decisions.yaml
   status: Active
   type: ARCH
+REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  cross_references: []
+  description: Promoted REQ-METHODOLOGY-LEARNING-COHORT-EXPORT (phase-2 QMM cohort export bundle)
+  name: REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
+  source_index: requirements.yaml
+  status: Active
+  type: REQ
+ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  cross_references: []
+  description: Promoted ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT (phase-2 QMM cohort export bundle)
+  name: ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT
+  source_index: architecture-decisions.yaml
+  status: Active
+  type: ARCH
+IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  cross_references: []
+  description: Promoted IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT (phase-2 QMM cohort export bundle)
+  name: IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT
+  source_index: implementation-decisions.yaml
+  status: Active
+  type: IMPL

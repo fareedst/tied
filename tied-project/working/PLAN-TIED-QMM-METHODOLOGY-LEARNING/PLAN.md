@@ -30,7 +30,7 @@ Linked plan: [`docs/tied-qmm-methodology-learning-plan.md`](../../../docs/tied-q
 | **(b)** Kaizen Phase 3 transport | deferred | Separate Kaizen program hinge |
 | **(c)** `shareable_hashed` cohort export | **implement complete** | MCP + tests; traceable-commit **`9b093ed2`** · [`docs/tied-qmm-followon-c-methodology-cohort-export-plan.md`](../../../docs/tied-qmm-followon-c-methodology-cohort-export-plan.md) |
 | **(d)** Fleet QMM/QA bundle promotion (phase 1) | **complete** | Traceable-commit **`c735e310`** · [`REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES`](../REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/PLAN.md) — six stacks + manifest gates |
-| **(d2)** Cohort export bundle promotion (phase 2) | **deferred** | After **(d)** commit + envelope `depends_on` strategy; manifest key `QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES` reserved empty |
+| **(d2)** Cohort export bundle promotion (phase 2) | **implement complete** (uncommitted) | Envelope graph trim + `promote-qmm-phase2-cohort-bundle.mjs`; manifest `QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES`; see [`envelope-graph-strategy-phase2.md`](../REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/envelope-graph-strategy-phase2.md) |
 
 ## Next agent
 

@@ -36,6 +36,7 @@ import {
   verifyPromptTypeMethodology,
   verifyQmmMethodology,
   verifyQaEvidenceChainMethodology,
+  verifyQmmCohortExportMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
   verifyMethodologyPseudocodeTokenRefs,
@@ -266,6 +267,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   verifyPromptTypeMethodology(tiedDir);
   verifyQmmMethodology(tiedDir);
   verifyQaEvidenceChainMethodology(tiedDir);
+  verifyQmmCohortExportMethodology(tiedDir);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
   verifyInheritedDetailFiles(tiedDir, paths.INHERITED_DETAIL_REQUIRED);
   verifyMethodologyPseudocodeTokenRefs(tiedDir);

@@ -646,3 +646,12 @@ IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
       - REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE
     tests:
       - methodology-surface-experiment-gate.test.ts
+IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  cross_references:
+    architecture:
+      - ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT
+    requirements:
+      - REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
+  detail_file: implementation-decisions/IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml
+  name: Methodology learning cohort export implementation
+  status: Active

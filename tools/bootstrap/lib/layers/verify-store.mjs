@@ -14,6 +14,7 @@ import {
   verifyPromptTypeMethodology,
   verifyQmmMethodology,
   verifyQaEvidenceChainMethodology,
+  verifyQmmCohortExportMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
   verifyMethodologyPseudocodeTokenRefs,
@@ -56,6 +57,7 @@ export function runPostInstallVerification(projectRoot, options) {
     verifyPromptTypeMethodology(bundlePath, verifyOpts);
     verifyQmmMethodology(bundlePath, verifyOpts);
     verifyQaEvidenceChainMethodology(bundlePath, verifyOpts);
+    verifyQmmCohortExportMethodology(bundlePath, verifyOpts);
     verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
     const manifest = loadManifest();
     verifyInheritedDetailFiles(bundlePath, manifest.INHERITED_DETAIL_REQUIRED ?? [], verifyOpts);
@@ -79,6 +81,7 @@ export function runPostInstallVerification(projectRoot, options) {
   verifyPromptTypeMethodology(bundlePath, verifyOpts);
   verifyQmmMethodology(bundlePath, verifyOpts);
   verifyQaEvidenceChainMethodology(bundlePath, verifyOpts);
+  verifyQmmCohortExportMethodology(bundlePath, verifyOpts);
   verifyInheritedDetailFiles(bundlePath, loadManifest().INHERITED_DETAIL_REQUIRED ?? [], verifyOpts);
   verifyMethodologyPseudocodeTokenRefs(bundlePath, verifyOpts);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);

@@ -13,6 +13,7 @@ import {
   verifyPromptTypeMethodology,
   verifyQmmMethodology,
   verifyQaEvidenceChainMethodology,
+  verifyQmmCohortExportMethodology,
   verifyVocabularyOwnershipMethodology,
 } from "./verify.mjs";
 
@@ -43,6 +44,24 @@ describe("verifyQmmMethodology [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES]", () 
     );
 
     assert.throws(() => verifyQmmMethodology(tiedDir), /QMM_METHODOLOGY_GATE_FAILED/);
+  });
+});
+
+describe("verifyQmmCohortExportMethodology [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES]", () => {
+  it("throws QMM_COHORT_EXPORT_METHODOLOGY_GATE_FAILED when a manifest artifact is missing", () => {
+    const tiedDir = fs.mkdtempSync(path.join(os.tmpdir(), "bootstrap-qmm-cohort-verify-"));
+    const methodologyDir = path.join(tiedDir, "methodology");
+    fs.mkdirSync(path.join(methodologyDir, "requirements"), { recursive: true });
+    fs.writeFileSync(
+      path.join(methodologyDir, "requirements", "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"),
+      "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:\n  name: stub\n",
+      "utf8",
+    );
+
+    assert.throws(
+      () => verifyQmmCohortExportMethodology(tiedDir),
+      /QMM_COHORT_EXPORT_METHODOLOGY_GATE_FAILED/,
+    );
   });
 });
 

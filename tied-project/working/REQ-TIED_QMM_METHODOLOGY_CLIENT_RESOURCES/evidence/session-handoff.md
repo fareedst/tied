@@ -30,11 +30,12 @@ Six REQ families + minted closure REQ/ARCH; manifest keys `QMM_METHODOLOGY_REQUI
 - **Phase 2 (d2):** **implement complete (uncommitted)** — [envelope-graph-strategy-phase2.md](./envelope-graph-strategy-phase2.md); `promote-qmm-phase2-cohort-bundle.mjs`; manifest + `verifyQmmCohortExportMethodology`. Store cohort REQ keeps `depends_on` on envelope; bundle copy omits envelope index edges + trims pseudo-code token comments.
 - **Gate receipt hygiene:** Older receipts in `tied-bundle/working/.../gates/` from cwd miswrites under `mcp-server/tied-project/...` may be pruned manually; authoritative close-out receipt is `close_out-2026-10-11T03-49-08-305Z.json`.
 
-## Git / traceable-commit (2026-10-10)
+## Git / traceable-commit
 
-- **Commit:** **`c735e310`** — `feat(tied): promote QMM phase-1 methodology into tied-bundle` (59 files; 26 `git add -f` bundle detail paths).
-- **Follow-on:** **`ff3cacda`** — CHANGELOG + program PLAN reconcile.
-- Close-out evidence (Tracker gates, activation script, handoff) **uncommitted** until sponsor requests traceable-commit.
+- **Promotion:** **`c735e310`** — `feat(tied): promote QMM phase-1 methodology into tied-bundle`.
+- **CHANGELOG reconcile:** **`ff3cacda`**.
+- **Close-out evidence:** **`aa437b0e`** — `docs(qmm): persist phase-1 close-out evidence and gate receipts` (tracker, envelope, activation replay, `run-close-out-gates.mjs`).
+- **Store git policy (related program):** **`63880649`** — [REQ-TIED_STORE_BUNDLE_GIT_POLICY](../REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/session-handoff.md).
 
 ## PLAN follow-on (c)
 

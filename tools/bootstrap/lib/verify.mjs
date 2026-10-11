@@ -168,6 +168,34 @@ export function verifyQaEvidenceChainMethodology(verifyRoot, options = {}) {
   sayOk("MUST verify QA evidence-chain methodology artifacts: complete.");
 }
 
+/**
+ * @param {string} verifyRoot
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyQmmCohortExportMethodology(verifyRoot, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
+  const requiredRel = loadManifest().QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES ?? [];
+  if (requiredRel.length === 0) {
+    return;
+  }
+  sayWarn("MUST verify QMM cohort export methodology artifacts before completion.");
+  let missing = 0;
+  for (const rel of requiredRel) {
+    const legacyRel = rel.startsWith("methodology/") ? rel : `methodology/${rel}`;
+    const p = path.join(verifyRoot, relPath(legacyRel));
+    if (!fs.existsSync(p)) {
+      sayErr(`MISSING mandatory QMM cohort export methodology artifact: ${p}`);
+      missing = 1;
+    }
+  }
+  if (missing) {
+    sayErr("QMM cohort export methodology verification failed; client bootstrap is incomplete.");
+    throw new Error("QMM_COHORT_EXPORT_METHODOLOGY_GATE_FAILED");
+  }
+  sayOk("MUST verify QMM cohort export methodology artifacts: complete.");
+}
+
 export function verifyVocabularyOwnershipMethodology(verifyRoot, options = {}) {
   const relPath = (rel) =>
     options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;

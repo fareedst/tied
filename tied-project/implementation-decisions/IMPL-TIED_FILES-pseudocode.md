@@ -218,6 +218,29 @@ procedure VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY(projectRoot):
   RETURN success
 
 
+procedure VERIFY_QMM_COHORT_EXPORT_METHODOLOGY(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES] [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT] [ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT] [IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT]
+  # How: Fail closed unless manifest-listed phase-2 cohort export R+A+I records and pseudo-code sidecar are present under the refreshed methodology snapshot (bundle graph trim does not omit these artifacts).
+  Contract:
+    INPUT: projectRoot; QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES from bootstrap manifest
+    OUTPUT: success diagnostics or non-zero failure with missing paths
+    DATA: client methodology cohort export records and pseudo-code sidecar
+    CONTROL: require every manifest-listed artifact; validation is read-only; skip when manifest key is empty
+    PRE: methodology refresh has completed and projectRoot/tied or tied-bundle is readable
+    POST: all phase-2 cohort export artifacts exist and are readable, or bootstrap exits non-zero with an actionable missing-artifact diagnostic
+    EFFECTS: File I/O — reads file existence and permissions; Diagnostics — emits completion or failure guidance
+    FAILURE_MODES: REQUIRED_ARTIFACT_MISSING; REQUIRED_ARTIFACT_UNREADABLE; QMM_COHORT_EXPORT_METHODOLOGY_GATE_FAILED
+    DATA_TRANSITION: unknown cohort export package→verified complete|verified incomplete; client files unchanged
+    TERMINATION: total — finite required artifact list
+  FOR each required cohort export artifact from manifest:
+    IF manifest list is empty:
+      RETURN success
+    IF artifact is absent or unreadable:
+      report missing path and corrective command
+      RETURN non-zero
+  RETURN success
+
+
 procedure VERIFY_VOCABULARY_OWNERSHIP_METHODOLOGY(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP] [ARCH-TIED_VOCABULARY_LAYERS] [IMPL-TIED_VOCABULARY_REFRESH]
   # How: Fail closed unless manifest-listed vocabulary ownership REQ/ARCH/IMPL records and the refresh pseudo-code sidecar are present under the refreshed methodology snapshot.
@@ -680,6 +703,7 @@ procedure BOOTSTRAP_TIED(projectRoot):
   CALL VERIFY_PROMPT_TYPE_METHODOLOGY(projectRoot)
   CALL VERIFY_QMM_METHODOLOGY(projectRoot)
   CALL VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY(projectRoot)
+  CALL VERIFY_QMM_COHORT_EXPORT_METHODOLOGY(projectRoot)
   CALL VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY(projectRoot)
   CALL VERIFY_INHERITED_DETAIL_FILES(projectRoot)
   CALL VERIFY_METHODOLOGY_PSEUDOCODE_TOKEN_REFS(projectRoot)

@@ -1,0 +1,36 @@
+REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
+    category: Functional
+    name: Methodology learning cohort export
+    priority: P1
+    rationale:
+      benefits:
+        - Explicit manifest inputs without client discovery
+      problems_solved:
+        - No bounded export path from experiments to cohort statistics
+      why: >-
+        Join W1 experiment identity to W4 client cohort partitions under shareable_hashed redaction for cross-client
+        methodology learning readouts.
+    related_requirements:
+      depends_on:
+        - REQ-EVIDENCE_CHAIN_REPORT
+        - REQ-METHODOLOGY-LEARNING-EXPERIMENT
+      related_to:
+        - REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
+    satisfaction_criteria:
+      - criterion: Manifest and policy gate
+        metric: Stable diagnostics for invalid manifest, policy expiry, and non-exportable privacy tier
+      - criterion: Shareable output
+        metric: No absolute paths or forbidden score fields in export YAML
+    status: In Progress
+    traceability:
+      architecture:
+        - ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT
+      implementation:
+        - IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT
+      tests:
+        - mcp-server/src/methodology-learning-cohort-export/
+    metadata:
+      bundle_graph_note: >-
+        Fleet bundle graph: REQ-REQUEST_EVIDENCE_ENVELOPE is related_to only (store depends_on retained). Optional
+        envelope batch coupling at runtime in full clients.

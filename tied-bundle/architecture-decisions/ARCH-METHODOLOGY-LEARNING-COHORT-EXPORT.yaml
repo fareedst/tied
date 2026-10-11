@@ -1,0 +1,39 @@
+ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT:
+    binding_inventory:
+      - callee: "evaluateExportPolicy"
+        effect: "pure policy"
+        order: "3"
+        trigger: "resolved experiments"
+      - callee: "generateEvidenceChainStatisticsReport"
+        effect: "read profiles write temp report"
+        order: "4"
+        trigger: "profile paths"
+      - callee: "redactForShareableHashed"
+        effect: "pure transform"
+        order: "5"
+        trigger: "W4 report"
+      - callee: "resolveExperimentsFromStore"
+        effect: "read W1 store"
+        order: "2"
+        trigger: "validated manifest"
+      - callee: "validateCohortExportManifest"
+        effect: "read-only validation"
+        order: "1"
+        trigger: "MCP request"
+    cross_references:
+      implementation:
+        - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+      requirements:
+        - "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    decision: "Validate methodology-cohort-export-manifest.v1, resolve W1 experiments read-only, enforce export policy hinges, compose W4 report generator on explicit profile paths, apply shareable_hashed redaction, emit methodology-learning-cohort-export.v1 with stable diagnostics."
+    modules:
+      - "export manifest validator"
+      - "export policy gate"
+      - "MCP façade"
+      - "metadata renderer"
+      - "shareable redactor"
+      - "W1 experiment resolver"
+      - "W4 report adapter"
+    name: "Methodology learning cohort export architecture"
+    status: "Accepted"

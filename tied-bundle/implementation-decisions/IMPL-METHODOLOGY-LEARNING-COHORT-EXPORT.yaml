@@ -1,0 +1,20 @@
+IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT:
+    code_locations:
+      files:
+        - path: "mcp-server/src/methodology-learning-cohort-export/"
+    cross_references:
+      architecture:
+        - "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT"
+      requirements:
+        - "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT-pseudocode.md"
+    implementation_approach:
+      details:
+        - "Reuse W4 generateEvidenceChainStatisticsReport; reuse batch-collect forbidden score key set"
+      summary: "Module-per-boundary under mcp-server/src/methodology-learning-cohort-export/ with unit and MCP composition tests."
+    name: "Methodology learning cohort export implementation"
+    status: "In Progress"
+    traceability:
+      tests:
+        - "mcp-server/src/methodology-learning-cohort-export/run.test.ts"

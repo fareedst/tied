@@ -169,5 +169,10 @@
     "implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT.yaml",
     "implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT-pseudocode.md"
   ],
-  "QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES": []
+  "QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES": [
+    "requirements/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml",
+    "architecture-decisions/ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT-pseudocode.md"
+  ]
 }

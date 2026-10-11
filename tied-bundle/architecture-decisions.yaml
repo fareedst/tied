@@ -429,3 +429,12 @@ ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
       - IMPL-TIED_FILES
     requirements:
       - REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES
+ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  cross_references:
+    implementation:
+      - IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT
+    requirements:
+      - REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
+  detail_file: architecture-decisions/ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml
+  name: Methodology learning cohort export architecture
+  status: Accepted

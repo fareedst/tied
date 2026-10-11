@@ -1,8 +1,8 @@
 REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
   REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
     category: "Functional"
-    description: "Fleet TIED clients inherit phase-1 QMM and QA evidence-chain methodology corpus via tied-bundle refresh; satisfaction is manifest-listed bootstrap gates plus minimal-client tied_validate_consistency with zero methodology ref_issues for promoted tokens."
-    name: "QMM methodology client resources (phase 1 bundle promotion)"
+    description: "Fleet TIED clients inherit phase-1 QMM, W4 QA evidence-chain, and phase-2 cohort export methodology corpus via tied-bundle refresh; satisfaction is manifest-listed bootstrap gates plus minimal-client tied_validate_consistency with zero methodology ref_issues for promoted tokens."
+    name: "QMM methodology client resources (fleet bundle promotion)"
     priority: "P0"
     rationale:
       benefits:
@@ -25,8 +25,8 @@ REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
         metric: "verify.test.mjs and bootstrap-and-load.test.ts pass"
       - criterion: "Phase-1 six REQ families indexed in tied-bundle with detail files and semantic-token closure"
         metric: "methodology-bundle-consistency.test.ts ok true"
-      - criterion: "QMM_COHORT_EXPORT manifest key reserved; cohort stack not required in phase 1"
-        metric: "manifest.json documents phase-2 key only"
+      - criterion: "Phase-2 cohort export stack enforced via verifyQmmCohortExportMethodology"
+        metric: "QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES populated; bundle graph trim for REQ-REQUEST_EVIDENCE_ENVELOPE"
     status: "In Progress"
     traceability:
       architecture:

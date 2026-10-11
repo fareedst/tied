@@ -1,0 +1,1 @@
+# stale inherited sidecar
