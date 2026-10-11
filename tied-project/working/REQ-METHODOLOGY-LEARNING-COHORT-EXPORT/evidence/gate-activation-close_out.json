@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+    "project_id": "stdd-mlce-followon-c",
+    "run_id": "mlce-closeout-20261010",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001"
+    ],
+    "scope_hash": "8f77c8dfed634656dab29fb7db2f68ead70d2a010e0295326b113e84d2574fbc",
+    "artifact_hashes": {
+      "obligation-report.json": "736d1bbb19b2f752937a75aa716b6444435c4ebde34463cd60e596e9dbcbe0de",
+      "finding-ledger.jsonl": "114730628b8f230c765cc63ab919a2f3b841c14d99f785c8f0c18e85f227542b",
+      "gate-result.json": "32d59741c91b7d68476d7d13c23850e85a54ec6583623ce2a20583ac4148390a",
+      "evidence-provenance.json": "b113fde58e50515a414ce5b55b13f8795c3975b848227ba21c10282bdb5ff75b"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "project_id": "stdd-mlce-followon-c",
+      "run_id": "mlce-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "8f77c8dfed634656dab29fb7db2f68ead70d2a010e0295326b113e84d2574fbc",
+      "hash": "736d1bbb19b2f752937a75aa716b6444435c4ebde34463cd60e596e9dbcbe0de",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "project_id": "stdd-mlce-followon-c",
+      "run_id": "mlce-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "8f77c8dfed634656dab29fb7db2f68ead70d2a010e0295326b113e84d2574fbc",
+      "hash": "114730628b8f230c765cc63ab919a2f3b841c14d99f785c8f0c18e85f227542b",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "project_id": "stdd-mlce-followon-c",
+      "run_id": "mlce-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "8f77c8dfed634656dab29fb7db2f68ead70d2a010e0295326b113e84d2574fbc",
+      "hash": "32d59741c91b7d68476d7d13c23850e85a54ec6583623ce2a20583ac4148390a",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "project_id": "stdd-mlce-followon-c",
+      "run_id": "mlce-closeout-20261010",
+      "phase": "close_out",
+      "scope_hash": "8f77c8dfed634656dab29fb7db2f68ead70d2a010e0295326b113e84d2574fbc",
+      "hash": "b113fde58e50515a414ce5b55b13f8795c3975b848227ba21c10282bdb5ff75b",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+    "project_id": "stdd-mlce-followon-c",
+    "run_id": "mlce-closeout-20261010",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001"
+    ],
+    "scope_hash": "8f77c8dfed634656dab29fb7db2f68ead70d2a010e0295326b113e84d2574fbc"
+  },
+  "diagnostics": []
+}

@@ -1,0 +1,622 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-11T02:45:14.070Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "run-close_out",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-pre_implementation",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "run-verification",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "request_evidence_envelope_build"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/gate-result.json",
+      "content_hash": "sha256:32d59741c91b7d68476d7d13c23850e85a54ec6583623ce2a20583ac4148390a",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "content_hash": "sha256:98017c68090cdb61956d53315367f36205e6ece3fd8a17f7af7f44a815cd70b9",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_gate",
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/gate-result.json",
+      "content_hash": "sha256:32d59741c91b7d68476d7d13c23850e85a54ec6583623ce2a20583ac4148390a",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "content_hash": "sha256:114730628b8f230c765cc63ab919a2f3b841c14d99f785c8f0c18e85f227542b",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "content_hash": "sha256:114730628b8f230c765cc63ab919a2f3b841c14d99f785c8f0c18e85f227542b",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_ledger",
+      "schema_version": null,
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "content_hash": "sha256:114730628b8f230c765cc63ab919a2f3b841c14d99f785c8f0c18e85f227542b",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "content_hash": "sha256:736d1bbb19b2f752937a75aa716b6444435c4ebde34463cd60e596e9dbcbe0de",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "content_hash": "sha256:736d1bbb19b2f752937a75aa716b6444435c4ebde34463cd60e596e9dbcbe0de",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_obligation",
+      "schema_version": "adversarial-inquiry-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "content_hash": "sha256:736d1bbb19b2f752937a75aa716b6444435c4ebde34463cd60e596e9dbcbe0de",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "content_hash": "sha256:b113fde58e50515a414ce5b55b13f8795c3975b848227ba21c10282bdb5ff75b",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "content_hash": "sha256:f535f3406d54b7869a08e1dc50653eb0f5cc92f3b0599a0feab035c290e9f7a5",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "adversarial_inquiry_provenance",
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "content_hash": "sha256:4708025ae98d2d18486764d0e49df91250f2aeb1ec6bd60ccda665350d8bf235",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "provenance_identity"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml",
+      "content_hash": "sha256:2e72260c0842cbeef9a5e6d100adde38ddd26ca0b50290107d8b3bf36e5c9711",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:65a354848ff7d1b06e2682641ac747e5f593b8954e766467733e95a2baeef1af",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "pseudocode_analysis_report",
+      "schema_version": "pseudocode-analysis-report.v1",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/pseudocode-analysis/IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT.v1.json",
+      "content_hash": "sha256:ccafbc440122e9b8f7757a5b90b35c839e92ccedfe66a53780f9f6183f85388f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:96da3abba7b2f35ea5df31b04735f2b2a1634f6bf8a0ecc88fc0378af3e29215",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/apply-token-comments-evidence.md",
+      "content_hash": "sha256:4498130ab8d37e38c0f83106207f54a4b9a8e8cd15972657ab76506f93deb27c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/author-architecture-evidence.md",
+      "content_hash": "sha256:1f2fb900ac91db4569621884a1ac07ba76c9b35f495ceb3251bc4d085cc066b6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/author-requirement-evidence.md",
+      "content_hash": "sha256:2e740e9197155a5c41318198274bd6a0c82f3fe7d0f59680a1f32293ad79d066",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/bootstrap-tracker.mjs",
+      "content_hash": "sha256:c2135c58d337fb03026a21c3837d1894a7115d00c1b7eb85803cefe7b38b1d62",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/catalog-pseudocode-contracts-evidence.md",
+      "content_hash": "sha256:93f035ea81a37dbde58557a19065de38955801643ae2a24e2a4e5d63670fa431",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:80f148e197ed189482af1a2669ebdbb815b620961f1eabd490306ad3f9714a47",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/close_out-gate-result.json",
+      "content_hash": "sha256:9717073d97918df329d0e784bad0e56fe5ec34af9180ff1599ffa20d9466e7c9",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/close_out-inquiry-result.json",
+      "content_hash": "sha256:066dd24ce19e7377ec062c239aa573b3da14bbcdd3f2fcb57301953b0b388654",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/composition-integration-evidence.md",
+      "content_hash": "sha256:8c2efa3da52c5f84f085015c6736049f51bdb3348b4e16f2b22a390517bf7759",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/gate-activation-close_out.json",
+      "content_hash": "sha256:4a1565f6df079af629e79774141d9bd5757f7e183d5bf9bdf1b4425ea80edd4c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/gate-activation-pre_implementation.json",
+      "content_hash": "sha256:72d4afba1055872a3cf78745a4cee123ff3d56729e1bb15af6439da9502d5f20",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/gate-activation-verification.json",
+      "content_hash": "sha256:d896b4525703dfcc09e6f1cbdc9365bf1593e99b5f4bb301d5d5117d7356690d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:d5214541b7207352dfe74f3fcf19f60fd8fd7016adc581a4d298f0b457ce3dec",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:3400ce8c81a8c41b2b993ebf91f13d860d49fb902c26aba03471541dd5ed7101",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/mlce-dogfood-manifest.v1.yaml",
+      "content_hash": "sha256:f8ca1e6b507be1b36cf9858148079c5e5697404bf6709fa789212a1b9a8b582a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:2783c4c961bd21eb998b1d8ecb14f05abac061165ac6fc91b5c365f4f4c7f41a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:a50e7b5304f3cba0169df4370211eef031b0bb252c0fa1814fd2b26083a06d8b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/pre_implementation-inquiry-result.json",
+      "content_hash": "sha256:9d564aaab47ebdbe938a5c7b5642d72dfd88a615d093ceac40b04f5a28c3396c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/pre-implementation-inquiry-payload.json",
+      "content_hash": "sha256:5c20c8efdda2b2712a481d5c2a88595d5f5edd0388abeed0554220e435d9ad5c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:2af599d59d6e76d1394f45a7f67fec7a36e118984f003397e56eb99a3f133054",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:f1cb50970abe4fdb9a92d7bc2b938c25bd647d73b351ce968959db19beaac385",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/run-activation-gates.mjs",
+      "content_hash": "sha256:10a11c24bf10b83afe66d330d7dd6f06b1445cae5257f10f5a7a66da34194a5a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:8baed1f149459bf0e660329ff350184175b83ebf9d603a812bdc2bc3466244ba",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/session-handoff.md",
+      "content_hash": "sha256:2df1d6af32ee88a56af4ac5e31e56a67326707da73c4bf7731b7c0b63d8cbbd5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:8bb8d7496eb9657150d33c3427b65e863c242ff1da47713e56ca57c410de2e59",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/sub-vocabulary-sync-evidence.md",
+      "content_hash": "sha256:21dcf8b50d8c8e756c5a5b5d62e154e1ddbf3da1b2d028df14ed34cc9efc1fbc",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:7895f11f2e4823660220b6e505cd84b0be974574bec48d5bc592653533fb1673",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/tied-verify-result.json",
+      "content_hash": "sha256:7872380e363b3558e816fdd9f970422a71a2675bfccf6ad3ea5b7fbad9978e2e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:3076365676444e64849fdd67750a946780594a3cf241036a3d7338e059e30eb6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:8f5d8cb5e696352a17a7bb93e647ef71e9eef7751974ae9328fb18cf08766f4b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:d08f716222c94937cf86a851767b9aec2a397d58a09400106ccff5f8016f3b99",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:456840101b7378940e8071ad9a355b39aa999d1cac16132b2912f6ce5900675d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:991834138e1f22a2c42f74c62845c356efebd2f7b588cf05146a39e886f1700b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/verification-gate-result.json",
+      "content_hash": "sha256:e9b59267a78588ec1fc3bce3967f1814a83b7b6ced481d0e1b567b31c15ea99b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/verification-inquiry-result.json",
+      "content_hash": "sha256:df4f388cf1c79e03e2da4392bb0ec9fa417be1cbd8252d12002e760a72f3306e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml",
+    "evidence_chain_profile_path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/evidence-chain-profile.v1.json"
+  },
+  "gaps": [
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "close_out",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "code": "finding_unresolved",
+      "artifact_kind": "adversarial_inquiry_gate",
+      "phase": "verification",
+      "detail": "warn_not_success",
+      "severity": "warn",
+      "source": "A5"
+    }
+  ]
+}

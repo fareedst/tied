@@ -26,7 +26,7 @@ pass proves Loop 3 discipline (hypothesis + baseline), not methodology effective
 | --- | --- |
 | Is follow-on **(a)** done? | **Yes** for scoped REQ — gates green, **`d641081`** on `main` (local, ahead of origin). |
 | What ships? | CITDP-scoped **pre-implementation experiment gate** when `methodology_surface_change_class` is non-`none`; W2 verification/close_out pairing **unchanged**. |
-| What is left? | Optional `git push`; Kaizen follow-on **(b)** / shareable_hashed **(c)** remain **out of scope**. |
+| What is left? | Optional `git push`; **(b)** Phase 3 **deferred**; **(c)** shareable_hashed cohort export **authorized** — separate plan/REQ ([authority](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-followon-c-shareable-hashed-20261010.md)). |
 | Program parent | QMM W1–W5 program **closed**; follow-on **(a)** is post-program Loop 3 habit enforcement, not a W6 reopen. |
 
 The linked working plan and this child plan are committed rationale. Machine

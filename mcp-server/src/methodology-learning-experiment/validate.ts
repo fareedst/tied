@@ -112,6 +112,12 @@ export function validateMethodologyLearningExperimentObject(
 
   if (!nonEmptyString(record.privacy_tier)) {
     pushMissing(diagnostics, "privacy_tier", "privacy_tier");
+  } else if (record.privacy_tier !== "operator_local" && record.privacy_tier !== "shareable_hashed") {
+    diagnostics.push({
+      code: "INVALID_ENUM",
+      message: "privacy_tier must be operator_local or shareable_hashed",
+      path: "privacy_tier",
+    });
   }
 
   const sourceRefs = record.source_feedback_refs;

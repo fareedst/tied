@@ -23,6 +23,10 @@
 
 ## Out of scope without new CITDP
 
-- Kaizen Phase 3 implement / outbox transport  
+- Kaizen Phase 3 implement / outbox transport (**deferred** 2026-10-10)  
 - Canonical `tied-bundle/` methodology promotion  
 - `git push` (sponsor when ready)
+
+## Follow-on (c) — authorized
+
+Cross-client **`shareable_hashed`** cohort export for **methodology learning experiments**: [`sponsor-authority-followon-c-shareable-hashed-20261010.md`](./sponsor-authority-followon-c-shareable-hashed-20261010.md). **Plan-only complete** — [`PLAN-TIED-QMM-FOLLOWON-C`](../../PLAN-TIED-QMM-FOLLOWON-C/PLAN.md). **Implement complete** — [`REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/session-handoff.md`](../../REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/session-handoff.md) · child plan [`docs/tied-qmm-followon-c-methodology-cohort-export-plan.md`](../../../../docs/tied-qmm-followon-c-methodology-cohort-export-plan.md).

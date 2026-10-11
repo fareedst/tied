@@ -1,0 +1,33 @@
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'partial',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: true
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: '.cohort-export-w4-report.yaml',
+  markdown_out: '.cohort-export-w4-report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+TRACE: [IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT] wrote export {
+  yamlOut: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/mlce-ok-I7zMDI/cohort-export.yaml'
+}
+▶ RUN_METHODOLOGY_LEARNING_COHORT_EXPORT [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT]
+  ✔ rejects operator_local experiment privacy tier [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT] (3.878416ms)
+  ✔ emits shareable export for shareable_hashed experiment and redacts project_id [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT] (9.517167ms)
+  ✔ parse manifest rejects path escape [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT] (0.061417ms)
+✔ RUN_METHODOLOGY_LEARNING_COHORT_EXPORT [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT] (13.912ms)
+ℹ tests 3
+ℹ suites 1
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 112.619292

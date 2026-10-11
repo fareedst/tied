@@ -1,0 +1,158 @@
+{
+  "graph": {
+    "projectId": "stdd-mlce-followon-c",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT#export-policy",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mlce1",
+          "sourceRevision": "mlce-src"
+        },
+        "architectureConstraintIds": ["arch-mlce-policy"]
+      },
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT#shareable-redaction",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mlce2",
+          "sourceRevision": "mlce-src"
+        },
+        "architectureConstraintIds": ["arch-mlce-redact"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-mlce-policy",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002"
+        ]
+      },
+      {
+        "id": "arch-mlce-redact",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+          "kind": "block",
+          "name": "EVALUATE_EXPORT_POLICY",
+          "derivation": "content",
+          "revision": "block-rev-mlce2",
+          "sourceRevision": "mlce-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+          "kind": "block",
+          "name": "REDACT_SHAREABLE_HASHED",
+          "derivation": "content",
+          "revision": "block-rev-mlce3",
+          "sourceRevision": "mlce-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001",
+          "kind": "block",
+          "name": "RUN_METHODOLOGY_LEARNING_COHORT_EXPORT",
+          "derivation": "content",
+          "revision": "block-rev-mlce1",
+          "sourceRevision": "mlce-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-mlce-policy-test",
+        "blockId": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-learning-cohort-export/run.test.ts",
+        "sourceRevision": "mlce-src"
+      },
+      {
+        "id": "loci-mlce-redact-test",
+        "blockId": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-learning-cohort-export/run.test.ts",
+        "sourceRevision": "mlce-src"
+      },
+      {
+        "id": "loci-mlce-run-prod",
+        "blockId": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-learning-cohort-export/run.ts",
+        "sourceRevision": "mlce-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-mlce2",
+    "specification": [
+      {
+        "id": "mlce-spec-policy",
+        "kind": "behavior",
+        "value": "operator_local experiment records block export with privacy_tier_not_exportable.",
+        "order": 1
+      },
+      {
+        "id": "mlce-spec-redact",
+        "kind": "behavior",
+        "value": "shareable_hashed export hashes project_id and omits absolute paths.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "mlce-test-policy",
+        "statementId": "mlce-spec-policy",
+        "kind": "behavior",
+        "value": "rejects operator_local experiment privacy tier",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mlce2",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.test.ts:rejects operator_local"
+        }
+      },
+      {
+        "id": "mlce-test-redact",
+        "statementId": "mlce-spec-redact",
+        "kind": "behavior",
+        "value": "emits shareable export for shareable_hashed experiment",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mlce3",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.test.ts:emits shareable export"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "mlce-prod-run",
+        "statementId": "mlce-spec-redact",
+        "kind": "behavior",
+        "value": "runMethodologyLearningCohortExport orchestrates validators and W4 adapter",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mlce1",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.ts:runMethodologyLearningCohortExport"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001",
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003"
+  ]
+}

@@ -85,6 +85,7 @@ import {
   listMethodologyLearningExperiments,
   upsertMethodologyLearningExperiment,
 } from "../methodology-learning-experiment/store.js";
+import { runMethodologyLearningCohortExport } from "../methodology-learning-cohort-export/run.js";
 import { validateEssencePseudocode } from "../analysis/pseudocode-validator.js";
 import { analyzeEssencePseudocode } from "../analysis/pseudocode-analyzer.js";
 import { buildClosureJoinReportAsync } from "../analysis/closure-join-report.js";
@@ -2869,6 +2870,39 @@ export const allTools = [
     handler: async (args: { base_path?: string }) => {
       const data = listMethodologyLearningExperiments(args.base_path);
       return textContent(JSON.stringify(data, null, 2));
+    },
+  },
+  {
+    name: "tied_methodology_learning_cohort_export_run",
+    config: {
+      description:
+        "Run methodology learning cohort export: validate manifest, resolve W1 experiments, compose W4 report, emit shareable_hashed export YAML.",
+      inputSchema: z.object({
+        manifest_path: z.string().optional(),
+        manifest: z.record(z.unknown()).optional(),
+        yaml_out: z.string(),
+        base_path: z.string().optional(),
+        cwd: z.string().optional(),
+        project_root: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      manifest_path?: string;
+      manifest?: Record<string, unknown>;
+      yaml_out: string;
+      base_path?: string;
+      cwd?: string;
+      project_root?: string;
+    }) => {
+      const result = runMethodologyLearningCohortExport({
+        manifestPath: args.manifest_path,
+        manifest: args.manifest,
+        yamlOut: args.yaml_out,
+        basePath: args.base_path,
+        cwd: args.cwd,
+        projectRoot: args.project_root,
+      });
+      return textContent(JSON.stringify(result, null, 2));
     },
   },
   {

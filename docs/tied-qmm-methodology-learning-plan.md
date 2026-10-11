@@ -439,7 +439,7 @@ Loop 3 deliverable for this program: **waves W1–W5** (local proof on `stdd`). 
 | --- | --- | --- | --- |
 | **(a)** Pre-implementation experiment gate habit | [`REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE`](../tied-project/requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml) · [`docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md`](tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md) | **Implement complete** — integrated `close_out`, envelope `blocking_gap_count=0` | **`d641081`** · [session-handoff](../tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/evidence/session-handoff.md) |
 | **(b)** Kaizen Phase 3 transport | Kaizen program | **Deferred** | Not authorized by QMM close |
-| **(c)** Shareable hashed cohort export | — | **Deferred** | Non-goal for (a) |
+| **(c)** Shareable hashed cohort export | [`REQ-METHODOLOGY-LEARNING-COHORT-EXPORT`](../tied-project/requirements/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml) · [`docs/tied-qmm-followon-c-methodology-cohort-export-plan.md`](tied-qmm-followon-c-methodology-cohort-export-plan.md) | **Implement complete** — integrated `close_out`, envelope `blocking_gap_count=0` | [session-handoff](../tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/session-handoff.md) · [`sponsor-authority-followon-c-shareable-hashed-20261010.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-followon-c-shareable-hashed-20261010.md) |
 
 This follow-on table is **status translation only** (`/xlate`); it does not reopen the closed program orchestrator.
 
@@ -450,5 +450,5 @@ This follow-on table is **status translation only** (`/xlate`); it does not reop
 | Methodology PDSA storage shape | Compose existing stores first | W1 CITDP + sponsor |
 | W1 `depth_tier` below integrated | Not pre-approved for persistence/MCP | Owner, expiry, rationale in CITDP |
 | Canonical rule promotion | LEAP + explicit methodology change request | Sponsor + methodology owner |
-| Cross-client export tier | `operator_local` until owner named | W4 + privacy owner |
+| Cross-client export tier | **`shareable_hashed` authorized** for methodology experiment cohort export (2026-10-10); owner + expiry at follow-on **(c)** implement CITDP | W4 + privacy owner |
 | Kaizen Phase 3 transport | W6 only on hinge reopen | Separate change request |

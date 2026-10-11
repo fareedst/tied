@@ -1,0 +1,292 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-mlce-followon-c",
+    "scope": [
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001"
+    ],
+    "graph": {
+      "projectId": "stdd-mlce-followon-c",
+      "nodes": [
+        {
+          "id": "constraint:arch-mlce-policy",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-mlce-redact",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-mlce-policy-test",
+          "kind": "evidence",
+          "revision": "mlce-src"
+        },
+        {
+          "id": "evidence:loci-mlce-redact-test",
+          "kind": "evidence",
+          "revision": "mlce-src"
+        },
+        {
+          "id": "evidence:loci-mlce-run-prod",
+          "kind": "evidence",
+          "revision": "mlce-src"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+          "kind": "block",
+          "revision": "block-rev-mlce2"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+          "kind": "block",
+          "revision": "block-rev-mlce3"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001",
+          "kind": "block",
+          "revision": "block-rev-mlce1"
+        },
+        {
+          "id": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT#export-policy",
+          "kind": "criterion",
+          "revision": "criterion-rev-mlce1"
+        },
+        {
+          "id": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT#shareable-redaction",
+          "kind": "criterion",
+          "revision": "criterion-rev-mlce2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT#export-policy",
+          "to": "constraint:arch-mlce-policy",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT#shareable-redaction",
+          "to": "constraint:arch-mlce-redact",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-mlce-policy",
+          "to": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-mlce-redact",
+          "to": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+          "to": "evidence:loci-mlce-policy-test",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+          "to": "evidence:loci-mlce-redact-test",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001",
+          "to": "evidence:loci-mlce-run-prod",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "0427fca7877ba5c9",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mlce-spec-redact",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.ts:runMethodologyLearningCohortExport"
+        },
+        "evidenceRefs": [
+          "mlce-prod-run"
+        ]
+      },
+      {
+        "id": "1636f804457c7e14",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mlce-spec-policy",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.test.ts:rejects operator_local"
+        },
+        "evidenceRefs": [
+          "mlce-test-policy"
+        ]
+      },
+      {
+        "id": "18a43a86d359ad1f",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mlce-spec-redact",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.test.ts:emits shareable export"
+        },
+        "evidenceRefs": [
+          "mlce-test-redact"
+        ]
+      },
+      {
+        "id": "42c9282a2f7f77f7",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mlce-spec-redact",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.test.ts:emits shareable export"
+        },
+        "evidenceRefs": [
+          "mlce-test-redact"
+        ]
+      },
+      {
+        "id": "5af87a4b6fa7f023",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "mlce-spec-policy",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "89f0355f84304735",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mlce-spec-redact",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.ts:runMethodologyLearningCohortExport"
+        },
+        "evidenceRefs": [
+          "mlce-prod-run"
+        ]
+      },
+      {
+        "id": "8a2d262243e46621",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mlce-spec-redact",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-learning-cohort-export/run.ts:runMethodologyLearningCohortExport"
+        },
+        "evidenceRefs": [
+          "mlce-prod-run"
+        ]
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002": "REVIEW",
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003": "REVIEW",
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003",
+      "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "project_id": "stdd-mlce-followon-c",
+      "run_id": "mlce-verify-20261010",
+      "phase": "verification",
+      "scope": [
+        "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#RUN_METHODOLOGY_LEARNING_COHORT_EXPORT#mlceplan0001",
+        "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#EVALUATE_EXPORT_POLICY#mlceplan0002",
+        "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT#REDACT_SHAREABLE_HASHED#mlceplan0003"
+      ],
+      "scope_hash": "401c19ede732231b3352ff6d318db49a8329f4bbb4eb32faaeebd0150411aa6b",
+      "artifact_hashes": {
+        "obligation-report.json": "736d1bbb19b2f752937a75aa716b6444435c4ebde34463cd60e596e9dbcbe0de",
+        "finding-ledger.jsonl": "114730628b8f230c765cc63ab919a2f3b841c14d99f785c8f0c18e85f227542b",
+        "gate-result.json": "32d59741c91b7d68476d7d13c23850e85a54ec6583623ce2a20583ac4148390a",
+        "evidence-provenance.json": "4708025ae98d2d18486764d0e49df91250f2aeb1ec6bd60ccda665350d8bf235"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "project_id": "stdd-mlce-followon-c",
+        "run_id": "mlce-verify-20261010",
+        "phase": "verification",
+        "scope_hash": "401c19ede732231b3352ff6d318db49a8329f4bbb4eb32faaeebd0150411aa6b",
+        "hash": "736d1bbb19b2f752937a75aa716b6444435c4ebde34463cd60e596e9dbcbe0de",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "project_id": "stdd-mlce-followon-c",
+        "run_id": "mlce-verify-20261010",
+        "phase": "verification",
+        "scope_hash": "401c19ede732231b3352ff6d318db49a8329f4bbb4eb32faaeebd0150411aa6b",
+        "hash": "114730628b8f230c765cc63ab919a2f3b841c14d99f785c8f0c18e85f227542b",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "project_id": "stdd-mlce-followon-c",
+        "run_id": "mlce-verify-20261010",
+        "phase": "verification",
+        "scope_hash": "401c19ede732231b3352ff6d318db49a8329f4bbb4eb32faaeebd0150411aa6b",
+        "hash": "32d59741c91b7d68476d7d13c23850e85a54ec6583623ce2a20583ac4148390a",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "project_id": "stdd-mlce-followon-c",
+        "run_id": "mlce-verify-20261010",
+        "phase": "verification",
+        "scope_hash": "401c19ede732231b3352ff6d318db49a8329f4bbb4eb32faaeebd0150411aa6b",
+        "hash": "4708025ae98d2d18486764d0e49df91250f2aeb1ec6bd60ccda665350d8bf235",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/adversarial-inquiry/phase-verification/evidence-provenance.json"
+      }
+    }
+  }
+}

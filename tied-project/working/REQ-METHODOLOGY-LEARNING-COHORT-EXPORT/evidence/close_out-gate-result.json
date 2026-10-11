@@ -1,0 +1,21 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "close_out",
+  "diagnostics": [
+    "warn_not_success"
+  ],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps",
+    "tied-bundle/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/pseudocode-analysis/IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT.v1.json:IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/gates/close_out-2026-10-11T02-45-04-664Z.json",
+    "hash": "sha256:4a38733e3fd089513390cc50959a3e34b34490dbb193ad587e6bca8611520ed4"
+  }
+}

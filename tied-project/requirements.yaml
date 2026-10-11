@@ -1585,6 +1585,31 @@ REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
     tests:
       - "bridge.test.ts"
       - "methodology-kaizen-experiment-bridge.mcp.test.ts"
+REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
+  name: "Methodology learning cohort export"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    related_to:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+  satisfaction_criteria:
+    - criterion: "Explicit manifest export"
+      metric: "tied_methodology_learning_cohort_export_run returns shareable_hashed artifact"
+    - criterion: "W4 non-regression"
+      metric: "Composes generateEvidenceChainStatisticsReport without profile generation"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    implementation:
+      - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    tests:
+      - "methodology-learning-cohort-export/*.test.ts"
 REQ-METHODOLOGY-LEARNING-EXPERIMENT:
   category: "Functional"
   detail_file: "requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"

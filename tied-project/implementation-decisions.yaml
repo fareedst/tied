@@ -1589,6 +1589,15 @@ IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
   detail_file: "implementation-decisions/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
   name: "Kaizen methodology bridge implementation"
   status: "Active"
+IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  cross_references:
+    architecture:
+      - "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    requirements:
+      - "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+  detail_file: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
+  name: "Methodology learning cohort export implementation"
+  status: "Active"
 IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
   detail_file: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
   essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md"

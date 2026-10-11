@@ -8,7 +8,7 @@
 
 1. Optional: **`git push`** when sponsor wants origin updated (branch was ahead of `origin/main` after commit).
 2. Optional: re-run **`tied_adherence_reconcile_run`** if program rollup needs adherence band after manifest ordering fix.
-3. Next Loop 3 scope (Kaizen **(b)**, shareable_hashed **(c)**): **new** sponsor CITDP — not this REQ.
+3. Follow-on **(c)** **`shareable_hashed`** cohort export: **sponsor authorized** 2026-10-10 — [`sponsor-authority-followon-c-shareable-hashed-20261010.md`](../../PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-followon-c-shareable-hashed-20261010.md); start with **`/plan-new-feature`**, not this REQ. Kaizen **(b)** remains **deferred**.
 
 ## Completion signals
 
@@ -48,8 +48,12 @@ Replay: `node tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/run-c
 
 **Traceable-commit:** **`d641081`** on `main` (local). Exclude untracked `tmp/` from any future staging. **No push** unless sponsor asks.
 
+## Sponsor decisions (recorded)
+
+**2026-10-10 `/unblock`:** Kaizen Phase 3 **(b)** — **remain deferred**. Follow-on **(c)** — **shareable_hashed** cross-client methodology experiment cohort export **authorized** (owner/expiry at implement CITDP). Detail: [`sponsor-decisions-evidence.md`](./sponsor-decisions-evidence.md).
+
 ## Explicit non-goals (unchanged)
 
-- Kaizen Phase 3 **(b)** / shareable_hashed **(c)**
+- Kaizen Phase 3 **(b)** — **deferred 2026-10-10** / shareable_hashed **(c)** — **authorized** for methodology experiment cohort export; implement via new follow-on **(c)** REQ (not **(a)**)
 - Global path-based class inference or REQ-wide hook
 - Edits to read-only `tied-bundle/` methodology YAML

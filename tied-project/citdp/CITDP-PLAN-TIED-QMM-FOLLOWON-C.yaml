@@ -1,0 +1,200 @@
+CITDP-PLAN-TIED-QMM-FOLLOWON-C:
+  change_definition:
+    current_behavior: "W1 methodology-learning experiments remain operator-local and W4 reports consume explicit evidence-chain profile manifests; no bounded path joins experiment identity, profile artifacts, client cohorts, and shareable redaction."
+    desired_behavior: "A future authorized implementation accepts an explicit methodology cohort export manifest, resolves W1 experiments, composes existing W4 client-cohort and denominator-subcohort reporting, applies shareable_hashed redaction, and emits stable diagnostics and policy metadata."
+    methodology_surface_change_class: "none"
+    non_goals:
+      - "Finding-ledger append or case promotion"
+      - "Kaizen Phase 3 transport"
+      - "Live client discovery or repository traversal"
+      - "Maturity scores, ranking, SPC, or DORA"
+      - "Project YAML mutation or canonical tied-bundle promotion"
+      - "UI or E2E"
+      - "W2 effectiveness claim from cohort export"
+      - "W4 v1 redesign"
+    proof_boundary: "Plan-only evidence proves planning completeness only. Future export evidence proves declared-input resolution, compatible cohort partitioning, stable diagnostics, and shareable redaction for declared inputs; it does not prove methodology effectiveness, representativeness, maturity, ranking, transport, or discovery."
+    success_criteria:
+      - "Child plan defines explicit manifest, module contracts, independent validation, and binding inventory."
+      - "Plan-only gate attempt is persisted as non-activation and cannot authorize RED."
+      - "Privacy boundary forbids absolute paths, source trees, raw operator-local data, and forbidden fields in shareable output."
+      - "Stable diagnostics cover invalid manifest, missing experiment, incompatible cohort, forbidden field, policy expiry/owner, and output safety."
+    unchanged_behavior:
+      - "tied_verify as methodology effectiveness authority"
+      - "W1 validation and W2 conformance/effectiveness pairing"
+      - "W4 compatibility-key and denominator-fingerprint partitioning"
+      - "W4 v1 defaults and byte stability"
+  completion_criteria:
+    activation: null
+    future_implementation:
+      - "Fresh implement Tracker/CITDP and identity-bound evidence"
+      - "Independent module validation and binding inventory"
+      - "pre_implementation allowed:true before RED"
+      - "Verification/close_out gates, envelope, vocabulary VALIDATE, and tied_validate_consistency"
+    plan_only:
+      - "Canonical-derived Tracker has no inherited completion or activation evidence"
+      - "Child plan and working PLAN exist"
+      - "Plan-only CITDP is persisted"
+      - "pre_implementation gate receipt is allowed:false and activation:non_activation"
+    status: "plan_only_non_activation"
+  evidence:
+    commands:
+      - "Read-only review of sponsor authority, W1 methodology experiment records, W4 report plan/module, and shareable_hashed envelope batch patterns"
+      - "tied_checklist_gate_validate at pre_implementation with plan-only Tracker/CITDP; expected allowed false"
+      - "tied_jev_status and advisory tied_jev_vocab_shadow; shadow is not gate evidence"
+    manifest_reference: null
+    proof_boundaries:
+      - "future_cohort_partition_only"
+      - "future_declared_input_resolution"
+      - "future_shareable_redaction_only"
+      - "plan_only_documentation"
+  impact_analysis:
+    binding_inventory_fields:
+      - "arguments"
+      - "callee"
+      - "effect"
+      - "failure_behavior"
+      - "ordering"
+      - "trigger"
+    binding_inventory_required: true
+    modules_or_boundaries:
+      - "Deterministic metadata/diagnostic renderer"
+      - "Export manifest validator"
+      - "Export policy gate"
+      - "Shareable redactor"
+      - "Thin MCP/CLI façade"
+      - "W1 experiment resolver"
+      - "W4 report adapter"
+    read_only_neighborhood:
+      - "mcp-server/src/fidelity-research/evidence-chain-report.ts"
+      - "mcp-server/src/methodology-learning-experiment/"
+      - "mcp-server/src/request-evidence-envelope/batch-collect.ts"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  quality_evidence_matrix:
+    - applicability: "applicable"
+      attribute: "baseline-functional"
+      command_or_test: "Read-only artifact review"
+      evidence_method: "Committed plan and CITDP review"
+      limitation: "Does not prove runtime behavior"
+      owner: "agent"
+      proof_boundary: "plan_only_documentation"
+      rationale: "Plan completeness and future module/test contract review"
+      result: "pass"
+      threshold: "All required plan sections and future gates are explicit"
+    - applicability: "applicable_to_future_implementation"
+      attribute: "regulated-privacy"
+      command_or_test: "Future unit/composition privacy matrix"
+      evidence_method: "Future redaction and forbidden-field tests"
+      limitation: "Not executed in plan-only pass"
+      owner: "sponsor"
+      proof_boundary: "future_shareable_redaction_only"
+      rationale: "Shareable_hashed export crosses a privacy boundary"
+      result: "not_run"
+      threshold: "No absolute paths, source trees, forbidden fields, or raw operator-local identity"
+  quality_profiles:
+    - "baseline-functional"
+    - "data-integrity-migration"
+    - "external-input-security"
+    - "regulated-privacy"
+  record_identity:
+    change_request_id: "PLAN-TIED-QMM-FOLLOWON-C"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    plan_only: true
+    profile_depth: "integrated"
+    recorded_at: "2026-10-10"
+    title: "QMM follow-on (c) methodology learning cohort export plan-only"
+  risk_analysis:
+    abuse_cases:
+      - "malformed-oversized-input"
+      - "path-traversal-file-access"
+      - "replay-duplicate"
+      - "secret-sensitive-data"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Absolute paths or forbidden score/ranking fields emitted in shareable output."
+        - "Cohort export described as methodology effectiveness evidence."
+        - "Plan-only gate receipt reused as future implementation activation."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any plan-only gate returns or is represented as activation allowed:true."
+        - "Any product token or runtime file changes during plan-only pass."
+        - "Any stable diagnostic is replaced with a free-form message only."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/tied-qmm-followon-c-methodology-cohort-export-plan.md"
+        - "tied-project/working/PLAN-TIED-QMM-FOLLOWON-C/checklist-tracker.yaml"
+        - "tied-project/working/PLAN-TIED-QMM-FOLLOWON-C/PLAN.md"
+        - "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-followon-c-shareable-hashed-20261010.md"
+      falsification_questions:
+        - "Can a future implementation discover clients or traverse repositories without an explicit manifest row?"
+        - "Can any export claim W2 effectiveness or bypass W2 pairing?"
+        - "Does shareable_hashed output contain an absolute path, source tree, raw operator-local identity, or forbidden field?"
+        - "Does the child plan authorize any product REQ/ARCH/IMPL write, RED test, or runtime code?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      not_applicable_rationale: "No runtime, test, or product TIED behavior is changed in plan-only scope."
+      prior_depth_tier: null
+      rationale: "This pass changes only planning artifacts; future implementation accepts external manifests and emits privacy-sensitive artifacts, so it must reselect integrated depth."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - description: "Incompatible experiments or denominator populations are merged."
+        id: "RISK-QMM-C-003"
+        likelihood: "Low"
+        mitigation: "Reuse W4 compatibility keys and v2 denominator fingerprints; partition and diagnose."
+        severity: "High"
+      - description: "Plan-only gate or Jev shadow is misread as implement activation."
+        id: "RISK-QMM-C-001"
+        likelihood: "Medium"
+        mitigation: "Persist explicit non_activation and allowed:false receipt; require fresh implement Tracker/CITDP and identity-bound evidence."
+        severity: "High"
+      - description: "Shareable output leaks absolute paths, source trees, forbidden fields, or raw operator-local identity."
+        id: "RISK-QMM-C-002"
+        likelihood: "Medium"
+        mitigation: "Future redactor tests, owner/expiry hinge, stable privacy diagnostics, and no absolute paths by construction."
+        severity: "High"
+  sponsor_decisions:
+    kaizen_phase3_transport: "deferred"
+    pilot: "stdd_until_broadened"
+    privacy_tier: "shareable_hashed"
+    product_tied_minting: "deferred_to_authorized_implement_pass"
+    proof_boundary: "Cohort partition and redaction only; W2/tied_verify remain effectiveness authority."
+    redaction_owner:
+      approval: "authorized"
+      evidence_path: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-followon-c-shareable-hashed-20261010.md"
+      expiry: "2027-10-10"
+      owner: "sponsor"
+      review_status: "resolved_for_plan_and_future_scoped_implementation"
+  test_strategy:
+    future_sequence:
+      - "binding inventory then RED composition tests"
+      - "composition wiring and W4 regression"
+      - "pseudo-code Layers A/B/C and gate_mode before RED"
+      - "RED unit tests and independent module validation"
+      - "verification, tied_verify, consistency, envelope, and close_out"
+    module_validation_required: true
+    no_e2e: true
+    no_e2e_reason: "No UI boundary; façade bindings are composition-testable."
+    stable_diagnostics:
+      - "duplicate_experiment"
+      - "forbidden_field"
+      - "incompatible_cohort_key"
+      - "invalid_experiment_record"
+      - "invalid_manifest"
+      - "invalid_profile_artifact"
+      - "missing_experiment"
+      - "missing_profile_artifact"
+      - "output_path_forbidden"
+      - "pilot_scope_violation"
+      - "privacy_policy_expired"
+      - "privacy_tier_not_exportable"
+      - "redaction_owner_missing"
+      - "w4_report_failure"
+    summary: "Plan-only contract and risk strategy; future TDD is RED unit tests, independent module validation, RED binding tests, composition, W4 regression, verification, and close_out."

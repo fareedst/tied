@@ -1,0 +1,12 @@
+schema_version: methodology-cohort-export-manifest.v1
+privacy_tier: shareable_hashed
+policy:
+  redaction_owner: sponsor
+  expiry: "2027-10-10"
+  pilot: stdd
+report_mode: partial
+report_version: v1
+experiments:
+  - experiment_id: mle-demo-cohort-export-20261010
+    profile_paths:
+      - tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/evidence/evidence-chain-profile.v1.json

@@ -1428,6 +1428,15 @@ ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
   detail_file: "architecture-decisions/ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
   name: "Kaizen methodology bridge architecture"
   status: "Accepted"
+ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  cross_references:
+    implementation:
+      - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    requirements:
+      - "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+  detail_file: "architecture-decisions/ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
+  name: "Methodology learning cohort export architecture"
+  status: "Accepted"
 ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
   detail_file: "architecture-decisions/ARCH-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
   name: "Methodology learning experiment storage"

@@ -1,0 +1,32 @@
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] loaded report input manifest {
+  mode: 'partial',
+  include_absolute_paths: false,
+  input_count: 1,
+  cli_mode_override: true
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] aggregated client cohort counts {
+  compatibility_key: 'evidence-chain-profile.v1|integrated',
+  profile_count: 1,
+  unique_project_id_count: 1
+}
+DEBUG: [IMPL-EVIDENCE_CHAIN_REPORT] wrote statistics report {
+  yaml_out: '.cohort-export-w4-report.yaml',
+  markdown_out: '.cohort-export-w4-report.md',
+  cohort_count: 1,
+  report_version: 'evidence-chain-statistics-report.v1'
+}
+TRACE: [IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT] wrote export {
+  yamlOut: '/var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/mlce-mcp-N62DDu/cohort-export.yaml'
+}
+▶ methodology learning cohort export MCP [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT]
+  ✔ registers tied_methodology_learning_cohort_export_run (0.321334ms)
+  ✔ runs export via MCP handler for shareable_hashed experiment (12.020666ms)
+✔ methodology learning cohort export MCP [REQ-METHODOLOGY-LEARNING-COHORT-EXPORT] (12.779708ms)
+ℹ tests 2
+ℹ suites 1
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 422.878125

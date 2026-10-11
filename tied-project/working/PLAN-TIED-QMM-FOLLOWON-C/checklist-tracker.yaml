@@ -1,0 +1,215 @@
+copy_hygiene: "Derived from the canonical agent-req-implementation-checklist.yaml; plan-only execution evidence is cleared and no implementation evidence is inherited."
+description: "Per-request plan-only Tracker for QMM follow-on (c). This copy records refine/CITDP readiness only; it is not an implementation or RED-test Tracker."
+citdp:
+  path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-C.yaml"
+  reason: "Plan-only follow-on (c) cohort export contract; no product REQ minted."
+  status: "complete"
+depth_tier: "minimal"
+execution_authority:
+  prior_qmm_receipts_are_activation_evidence: false
+  scope: "plan-only"
+  next_authorized_prompt: "plan-new-feature or build-plan on child linked plan with REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+future_gate_contracts:
+  close_out:
+    required:
+      - "fresh verification and close_out gate receipts"
+      - "request evidence envelope with fail_on_error_gaps"
+      - "sub-close-out-evidence-sync"
+      - "vocabulary VALIDATE at traceable-commit"
+      - "privacy and shareable_hashed evidence for export boundary"
+  pre_implementation:
+    required:
+      - "fresh authoritative tracker under working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/"
+      - "fresh identity-bound activation evidence at structural and pre_implementation phases"
+      - "IMPL sidecar with PROC-IMPL_PSEUDOCODE_TOKENS and Layer C gate_mode clean"
+      - "implement CITDP with depth_tier integrated and gate_policy per_citdp"
+      - "sponsor authority hinge fields unchanged or re-confirmed"
+      - "successful pre_implementation gate before RED"
+  verification:
+    required:
+      - "fresh verification-phase activation evidence"
+      - "tied_verify and tied_validate_consistency where REQ requires"
+      - "W2 pairing unchanged at verification"
+future_implementation_defaults:
+  depth_tier: "integrated"
+  gate_policy: "per_citdp"
+  profile_depth: "integrated"
+  requires_fresh_identity_bound_activation: true
+gate:
+  activation: "non_activation"
+  allowed: false
+  diagnostic: "plan_only_minimal_depth"
+  phase: "pre_implementation"
+  reason: "Plan-only pass; no implement CITDP, pseudo-code, RED tests, or identity-bound activation evidence. Minimal-depth allowed:true from the canonical checklist is not implement activation and cannot authorize RED, code, verification, or close_out."
+  status: "attempted_not_allowed"
+  authoritative_receipt_path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-C/evidence/pre_implementation-gate-result.json"
+gate_policy: "advisory"
+profile_depth: "integrated"
+purpose: "Follow-on (c) plan-only Tracker; not an implementation or RED-test Tracker."
+refine_pass: 2
+refine_pass_date: "2026-10-10"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred:
+      - "Future implementation verification, envelope, manifest, and close_out evidence"
+    gates: {}
+    master_checklist: ""
+  completed:
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "persist-citdp-record"
+  envelope_path: "working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    status: "not_run"
+  request: "PLAN-TIED-QMM-FOLLOWON-C"
+feedback_loops:
+  composition_and_e2e: "Future binding gaps return to IMPL pseudo-code before composition; no E2E is planned."
+  leap: "Future divergence follows IMPL -> ARCH -> REQ; no product stack exists in this plan-only pass."
+  specification: "Contract ambiguity returns to the child plan before RED."
+  validation_and_sync: "Future failures route to the owning checklist step."
+  vocabulary: "RESOLVE -> PRELOAD -> RECORD -> VALIDATE; plan-only RECORD/VALIDATE is deferred for future product names."
+gate_contract:
+  depth_selection_before_inquiry: true
+  fail_closed: true
+  loop_back_invalidates_downstream_evidence: true
+  phases:
+    - "pre_implementation"
+    - "verification"
+    - "close_out"
+  required_artifacts:
+    - "evidence-provenance.json"
+    - "finding-ledger.jsonl"
+    - "gate-result.json"
+    - "obligation-report.json"
+name: "agent_req_implementation_checklist"
+process_token: "[PROC-AGENT_REQ_CHECKLIST]"
+record_identity:
+  change_request_id: "PLAN-TIED-QMM-FOLLOWON-C"
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "integrated"
+  methodology_surface_change_class: "none"
+  plan_only: true
+  title: "QMM follow-on (c) methodology learning cohort export plan-only"
+risk_and_test_strategy:
+  proof_boundary: "Declared-input resolution, compatible cohort partitioning, stable diagnostics, and shareable redaction only; no W2 methodology effectiveness claim."
+  quality_profiles:
+    - "baseline-functional"
+    - "external-input-security"
+    - "data-integrity-migration"
+    - "regulated-privacy"
+  future_implement_depth_tier: "integrated"
+  future_implement_gate_policy: "per_citdp"
+  no_e2e_reason: "No UI boundary; future façade bindings are composition-testable."
+source_document: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "complete"
+steps:
+  - id: "session-bootstrap"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-C/PLAN.md"
+  - id: "translate-sponsor-intent"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-followon-c-methodology-cohort-export-plan.md"
+  - id: "change-definition"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-followon-c-methodology-cohort-export-plan.md"
+  - id: "impact-discovery"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-followon-c-methodology-cohort-export-plan.md"
+  - id: "risk-assessment"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-C.yaml"
+  - id: "test-strategy"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-followon-c-methodology-cohort-export-plan.md"
+  - id: "persist-citdp-record"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-C.yaml"
+  - id: "pre-implementation-gate"
+    disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-C/evidence/pre_implementation-gate-result.json"
+    outcome: "allowed:false; non-activation; not reusable for implementation"
+  - id: "author-requirement"
+    disposition: "not_applicable"
+    rationale: "Future implement REQ is explicitly deferred; no product token minting in plan-only."
+  - id: "author-architecture"
+    disposition: "not_applicable"
+    rationale: "Future ARCH is explicitly deferred; module contracts are planning evidence only."
+  - id: "persist-implementation-records"
+    disposition: "not_applicable"
+    policy: "plan-only-no-product-records"
+    rationale: "Future IMPL sidecar and product records are explicitly deferred."
+    tracking:
+      status: "not_applicable"
+      policy: "plan-only-no-product-records"
+      rationale: "No product IMPL pseudo-code or implementation records are authorized in plan-only scope."
+  - id: "gate-pseudocode-validation"
+    disposition: "not_applicable"
+    policy: "plan-only-no-product-records"
+    rationale: "No product IMPL pseudo-code exists in plan-only scope."
+    tracking:
+      status: "not_applicable"
+      policy: "plan-only-no-product-records"
+      rationale: "Future IMPL pseudo-code validation is a build-plan prerequisite."
+  - id: "unit-test-red"
+    disposition: "not_applicable"
+    policy: "plan-only-no-tests"
+    rationale: "No RED tests are authorized in plan-only scope."
+    tracking:
+      status: "not_applicable"
+      policy: "plan-only-no-tests"
+      rationale: "Future implementation must write RED unit tests after pseudo-code validation."
+  - id: "unit-test-green"
+    disposition: "not_applicable"
+    policy: "plan-only-no-code"
+    rationale: "No runtime code is authorized in plan-only scope."
+    tracking:
+      status: "not_applicable"
+      policy: "plan-only-no-code"
+      rationale: "Future implementation only."
+  - id: "composition-integration"
+    disposition: "not_applicable"
+    policy: "plan-only-no-composition"
+    rationale: "Binding inventory is authored for future work; composition code is deferred."
+    tracking:
+      status: "not_applicable"
+      policy: "plan-only-no-composition"
+      rationale: "Future implementation must write RED binding tests before composition code."
+  - id: "sub-adversarial-inquiry-pass"
+    disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Plan-only documentation pass has no runtime scope or activation evidence; future integrated implementation must run phase-specific inquiry."
+    tracking:
+      status: "not_applicable"
+      policy: "minimal-depth-no-inquiry"
+      rationale: "CITDP depth_tier minimal and sub_adversarial_inquiry_pass not_applicable; documentation-only plan pass."
+  - id: "end-to-end-ui"
+    disposition: "not_applicable"
+    rationale: "No UI boundary exists."
+  - id: "verification-gate"
+    disposition: "pending"
+    rationale: "Future implement verification requires fresh integrated evidence."
+  - id: "traceable-commit"
+    disposition: "pending"
+    rationale: "No automatic stage or commit; future commit requires vocabulary VALIDATE."
