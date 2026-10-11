@@ -14,11 +14,11 @@ It does not create feature REQ/ARCH/IMPL tokens, mutate project YAML, or authori
 branch/worktree actions. Each implementation batch is a separate TIED change request
 and must create or update its own traceability stack before code or tests are written.
 
-**Vocabulary:** Provisional terms are recorded in [`tied/vocab/feature-orchestration.md`](../../tied/vocab/feature-orchestration.md).
+**Vocabulary:** Provisional terms are recorded in [`tied-project/vocab/feature-orchestration.md`](../../tied-project/vocab/feature-orchestration.md).
 Batch 0 confirms naming bridges and registers semantic tokens.
 
 **This refinement:** Documentation and vocabulary only. CITDP persistence for this
-refinement is intentionally skipped per [`tied/docs/citdp-policy.md`](../../tied/docs/citdp-policy.md)
+refinement is intentionally skipped per [`tied-bundle/docs/citdp-policy.md`](../../tied-bundle/docs/citdp-policy.md)
 (non-behavior-changing docs). Behavior-changing batches persist CITDP after implementation.
 
 ---
@@ -55,7 +55,7 @@ refinement is intentionally skipped per [`tied/docs/citdp-policy.md`](../../tied
 | `tied-cli.sh` / TIED YAML MCP | Project REQ/ARCH/IMPL CRUD, validation, verify | Feature lifecycle orchestration |
 | `agentstream` | Turn pipeline, **feature-spec batch**, checklist render, dry-run | Feature manifest storage |
 | Future **feature orchestration CLI** (`tied init`, `tied feature …`) | Product UX for manifests, lifecycle, views | `tied-cli.sh` |
-| **Feature manifest** (`tied/features/…/feature.yaml`) | Orchestration index + lifecycle | Fidelity **project manifest** ([`fidelity-research.md`](../../tied/vocab/fidelity-research.md)) |
+| **Feature manifest** (`tied-project/features/…/feature.yaml`) | Orchestration index + lifecycle | Fidelity **project manifest** ([`fidelity-research.md`](../../tied-project/vocab/fidelity-research.md)) |
 
 ### Contract for every batch
 
@@ -89,7 +89,7 @@ only through `tied_verify` after tests — never by hand ([PROC-TIED_VERIFICATIO
 | `initial-specs.yaml` | Legacy **feature-spec batch** input | Migrate in Batch 6; see README example `prompts/initial-specs.yaml` |
 | `tied feature` commands | **feature orchestration CLI** | Separate orchestration binary; not `tied-cli.sh` |
 
-Full glossary: [`tied/vocab/feature-orchestration.md`](../../tied/vocab/feature-orchestration.md).
+Full glossary: [`tied-project/vocab/feature-orchestration.md`](../../tied-project/vocab/feature-orchestration.md).
 
 ### Resolved sponsor decisions
 
@@ -118,11 +118,11 @@ Batch 1–2, and the exact separate binary name is selected at Batch 1 start.
 
 | Item | Value |
 |------|-------|
-| Checklist spine | [PROC-AGENT_REQ_CHECKLIST] — [`agent-req-implementation-checklist.md`](../../tied/docs/agent-req-implementation-checklist.md) |
-| Per-batch Tracker | Copy [`agent-req-implementation-checklist.yaml`](../../tied/docs/agent-req-implementation-checklist.yaml) to a working folder at batch start (header instructions) |
-| CITDP policy | [`citdp-policy.md`](../../tied/docs/citdp-policy.md) — persist after each behavior-changing batch |
-| CITDP template | [`citdp-record-template.yaml`](../../tied/docs/citdp-record-template.yaml) |
-| YAML mutation index | [`tied-yaml-agent-index.md`](../../tied/docs/tied-yaml-agent-index.md) |
+| Checklist spine | [PROC-AGENT_REQ_CHECKLIST] — [`agent-req-implementation-checklist.md`](../../tied-bundle/docs/agent-req-implementation-checklist.md) |
+| Per-batch Tracker | Copy [`agent-req-implementation-checklist.yaml`](../../tied-bundle/docs/agent-req-implementation-checklist.yaml) to a working folder at batch start (header instructions) |
+| CITDP policy | [`citdp-policy.md`](../../tied-bundle/docs/citdp-policy.md) — persist after each behavior-changing batch |
+| CITDP template | [`citdp-record-template.yaml`](../../tied-bundle/docs/citdp-record-template.yaml) |
+| YAML mutation index | [`tied-yaml-agent-index.md`](../../tied-bundle/docs/tied-yaml-agent-index.md) |
 | Roadmap refinement CITDP | **Skipped** (docs-only per policy) |
 
 ### CITDP vs narrative items
@@ -130,7 +130,7 @@ Batch 1–2, and the exact separate binary name is selected at Batch 1 start.
 | Artifact | Type | When |
 |----------|------|------|
 | This roadmap | Narrative plan | Planning reference; not a CITDP substitute |
-| `CITDP-FEAT-ORCH-BATCH-{N}` | CITDP record | After Batch N implementation ([`citdp-policy.md`](../../tied/docs/citdp-policy.md) default) |
+| `CITDP-FEAT-ORCH-BATCH-{N}` | CITDP record | After Batch N implementation ([`citdp-policy.md`](../../tied-bundle/docs/citdp-policy.md) default) |
 | `leap-proposals/` entries | LEAP proposal queue | Out-of-scope recommendations during any batch |
 | Batch REQ/ARCH/IMPL stack | TIED traceability | Before RED tests for that batch |
 
@@ -190,19 +190,19 @@ validation.
 
 Implementation should extend, not duplicate, these existing components:
 
-- `tied/requirements.yaml`,
-  `tied/architecture-decisions.yaml`, and
-  `tied/implementation-decisions.yaml` are the canonical traceability graph.
+- `tied-project/requirements.yaml`,
+  `tied-project/architecture-decisions.yaml`, and
+  `tied-project/implementation-decisions.yaml` are the canonical traceability graph.
 - IMPL pseudo-code sidecars and
-  `tied/docs/pseudocode-writing-and-validation.md` already provide contracts,
+  `tied-bundle/docs/pseudocode-writing-and-validation.md` already provide contracts,
   symbol checks, dependency checks, and LEAP alignment.
-- `tied/docs/agent-req-implementation-checklist.md` already defines the
+- `tied-bundle/docs/agent-req-implementation-checklist.md` already defines the
   governed implementation sequence.
 - `tools/agentstream` already supports **feature-spec batch**, checklist turns,
   resume, dry-run, and controlled loop-backs ([REQ-GOAGENT-FEATURESPEC-BATCH]).
 - The TIED YAML MCP already provides structured CRUD, traceability queries,
   validation, token rename, backlog, cycles, and analysis
-  ([`tied-yaml-agent-index.md`](../../tied/docs/tied-yaml-agent-index.md)).
+  ([`tied-yaml-agent-index.md`](../../tied-bundle/docs/tied-yaml-agent-index.md)).
 - CITDP, LEAP proposals, feedback storage, fidelity research, quality profiles,
   binding inventories, and evidence manifests already provide building
   blocks for later lifecycle features.
@@ -307,7 +307,7 @@ reject illegal transitions without partial writes.
   `tied-yaml` CRUD client.
 - A compatibility contract for reading older manifests and rejecting unsupported
   schema versions deterministically.
-- Glossary confirmation in [`feature-orchestration.md`](../../tied/vocab/feature-orchestration.md).
+- Glossary confirmation in [`feature-orchestration.md`](../../tied-project/vocab/feature-orchestration.md).
 
 **Exit criteria**
 
@@ -337,7 +337,7 @@ stable. End-to-end lifecycle enforcement waits for Batch 2 gates.
 
 **Logical modules**
 
-1. **Feature store** — `tied/features/<feature-id>/` persistence, locking, idempotent create.
+1. **Feature store** — `tied-project/features/<feature-id>/` persistence, locking, idempotent create.
 2. **Orchestration commands** — specify, refine, plan, tasks, verify, close out.
 3. **Orchestration MCP** — parallel tool surface; delegates YAML to TIED YAML MCP.
 4. **Deferred Git integration** — branch/worktree support is outside the initial
@@ -345,7 +345,7 @@ stable. End-to-end lifecycle enforcement waits for Batch 2 gates.
 
 **Work required**
 
-- Add feature-level storage: `tied/features/<feature-id>/feature.yaml`.
+- Add feature-level storage: `tied-project/features/<feature-id>/feature.yaml`.
 - Implement feature creation with deterministic numbering and slug generation.
 - Make creation idempotent for the same explicit request key; define collision/locking
   for concurrent creators.
@@ -364,7 +364,7 @@ stable. End-to-end lifecycle enforcement waits for Batch 2 gates.
 ```text
 tied feature new "Real-time chat system"
   -> FEAT-003
-  -> tied/features/FEAT-003-chat-system/feature.yaml
+  -> tied-project/features/FEAT-003-chat-system/feature.yaml
   -> open clarification list
   -> linked REQ placeholder
 ```
@@ -626,7 +626,7 @@ validation behavior.
 - Provide sensible local defaults for the MCP binary, TIED base path,
   project constitution, and feature directory.
 - Preserve the existing explicit MCP and manual/offline workflows
-  ([`using-tied-without-mcp.md`](../../tied/docs/using-tied-without-mcp.md)).
+  ([`using-tied-without-mcp.md`](../../tied-bundle/docs/using-tied-without-mcp.md)).
 - Add a concise quickstart for new users and a full advanced reference.
 - Add readiness diagnostics that explain the exact missing prerequisite.
 - Add migration guidance from legacy `prompts/initial-specs.yaml` (or equivalent
@@ -827,7 +827,7 @@ roadmap-only tokens:
 Before implementation of Batch 0, run `plan-new-feature` for the foundation work,
 create feature-specific REQ/ARCH/IMPL records, and register tokens through the
 TIED YAML MCP or `tied-cli`. Before each later batch, update the affected stack
-through LEAP when the contract changes. Persist `tied/citdp/CITDP-FEAT-ORCH-BATCH-{N}.yaml`
+through LEAP when the contract changes. Persist `tied-project/citdp/CITDP-FEAT-ORCH-BATCH-{N}.yaml`
 after each behavior-changing batch (risks, test strategy, evidence provenance,
 divergences, residual-risk decisions).
 
@@ -865,7 +865,7 @@ The roadmap is complete when a developer can:
 
 | Gate | Status |
 |------|--------|
-| Refine (vocab RESOLVE/RECORD) | **Complete** — [`feature-orchestration.md`](../../tied/vocab/feature-orchestration.md) |
+| Refine (vocab RESOLVE/RECORD) | **Complete** — [`feature-orchestration.md`](../../tied-project/vocab/feature-orchestration.md) |
 | Plan (CITDP analysis for roadmap) | **Complete** — batch table, test strategy, risks in this document |
 | Roadmap document | **Ready** — this revision |
 | Batch 0 REQ/ARCH/IMPL stack | **Complete** — four chains registered and verification-gated |
@@ -896,7 +896,7 @@ paths; it does not add lifecycle/scheduler/view/research/feedback redesign,
 canonical promotion, or Git mutation.
 
 Batch 6 evidence and the per-request tracker are recorded at
-`tied/citdp/CITDP-FEAT-ORCH-BATCH-6.yaml` and
+`tied-project/citdp/CITDP-FEAT-ORCH-BATCH-6.yaml` and
 `working/feature-orchestration-batch-6/REQ-FEAT-ORCH-BATCH-6_tracker.yaml`.
 
 **Remaining risks:** distributed filesystem stress testing, stronger
@@ -911,8 +911,8 @@ cross-platform lock hardening, and Git integration remain deferred follow-up wor
 - Added batch overview table with CITDP IDs and anticipated token families.
 - Added logical **modules** per P0 batch; proof-boundary table in §6.
 - Linked MCP-first, verification-gated, and YAML index references throughout.
-- Recorded vocabulary in [`tied/vocab/feature-orchestration.md`](../../tied/vocab/feature-orchestration.md);
-  updated [`routing.md`](../../tied/vocab/routing.md).
+- Recorded vocabulary in [`tied-project/vocab/feature-orchestration.md`](../../tied-project/vocab/feature-orchestration.md);
+  updated [`routing.md`](../../tied-project/vocab/routing.md).
 - Clarified `initial-specs.yaml` example path and fidelity **project manifest** distinction.
 - Recorded the six sponsor decisions; deferred Git integration beyond the initial
   Batch 1 delivery and selected a separate orchestration binary.

@@ -12,12 +12,12 @@
 - [`adversarial-inquiry-activation-recommendation.md`](adversarial-inquiry-activation-recommendation.md) — maturity model and operating contract
 - [`adversarial-inquiry-checklist-integration-plan.md`](adversarial-inquiry-checklist-integration-plan.md) — step mapping (Batches 5–6)
 - [`adversarial-inquiry-checklist-integration-checklist.md`](adversarial-inquiry-checklist-integration-checklist.md) — Part H activation pilots (**H5 shipped** 2026-08-24, client `1787507684`)
-- [`tied/vocab/fidelity-research.md`](../tied/vocab/fidelity-research.md) — **integrated activation evidence**, **activation artifact pairing**, **checklist evidence gate**, **prior depth tier**, **depth-change waiver**, **close-out inquiry waiver**, **phase-aware slug set**
+- [`tied-project/vocab/fidelity-research.md`](../tied-project/vocab/fidelity-research.md) — **integrated activation evidence**, **activation artifact pairing**, **checklist evidence gate**, **prior depth tier**, **depth-change waiver**, **close-out inquiry waiver**, **phase-aware slug set**
 
 **Working artifacts (Batch 2 planning):**
 
 - Tracker: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_batch2_tracker.yaml`
-- CITDP draft: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2-draft.yaml` (**deferred persist** — `tied/citdp/` after Slice 1 implementation)
+- CITDP draft: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2-draft.yaml` (**deferred persist** — `tied-project/citdp/` after Slice 1 implementation)
 - Gate evidence: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-pre-implementation.json` (must be raw `tied_checklist_gate_validate` output)
 
 ---
@@ -26,7 +26,7 @@
 
 ### Refine gate (RESOLVE)
 
-Sponsor terms resolved to canonical vocabulary ([`fidelity-research.md`](../tied/vocab/fidelity-research.md), [`quality-assurance.md`](../tied/vocab/quality-assurance.md), [`prompt-composer.md`](../tied/vocab/prompt-composer.md)):
+Sponsor terms resolved to canonical vocabulary ([`fidelity-research.md`](../tied-project/vocab/fidelity-research.md), [`quality-assurance.md`](../tied-project/vocab/quality-assurance.md), [`prompt-composer.md`](../tied-project/vocab/prompt-composer.md)):
 
 | Term | Resolution |
 |------|------------|
@@ -42,7 +42,7 @@ Sponsor terms resolved to canonical vocabulary ([`fidelity-research.md`](../tied
 | **phase-aware slug set** | Auto-required Tracker slugs derived inside the validator; caller slugs union only. |
 | **linked plan** | This document; refined in place by refine-plan. |
 
-**Vocabulary RECORD/VALIDATE:** Pass 2 RECORD added **prior depth tier**, **depth-change waiver**, **close-out inquiry waiver**, and **phase-aware slug set** to `tied/vocab/fidelity-research.md`. VALIDATE against this plan, Tracker, and CITDP draft (no commit this pass).
+**Vocabulary RECORD/VALIDATE:** Pass 2 RECORD added **prior depth tier**, **depth-change waiver**, **close-out inquiry waiver**, and **phase-aware slug set** to `tied-project/vocab/fidelity-research.md`. VALIDATE against this plan, Tracker, and CITDP draft (no commit this pass).
 
 **Ambiguity accepted (unchanged):** Collector helper name (`tied_checklist_activation_collect`) remains provisional until MCP registration; manual assembly remains the supported path until Slice 2.
 
@@ -118,8 +118,8 @@ Pass 1 `gate-pre-implementation.json` is **invalidated**: it added `profile_dept
 
 ### CITDP Plan gate
 
-- **Batch 1** canonical CITDP: `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml` (complete).
-- **Batch 2** draft CITDP: working path above. Persist to `tied/citdp/` is **deferred** until Slice 1 behavior-changing implementation (`persist-citdp-record` / [citdp-policy.md](../tied/docs/citdp-policy.md)).
+- **Batch 1** canonical CITDP: `tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml` (complete).
+- **Batch 2** draft CITDP: working path above. Persist to `tied-project/citdp/` is **deferred** until Slice 1 behavior-changing implementation (`persist-citdp-record` / [citdp-policy.md](../tied-bundle/docs/citdp-policy.md)).
 - **Canonical TIED YAML:** no REQ/ARCH/IMPL mutation this refine-plan pass. Slice 1 build-plan LEAPs `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` pseudo-code first.
 - **Pre-implementation gate:** see refreshed `gate-pre-implementation.json` (`allowed: true`, `depth: minimal`).
 
@@ -161,7 +161,7 @@ When `risk_analysis.adversarial_inquiry.depth_tier` is **`integrated`** (or **`s
 
 | Layer | Artifact | Role |
 |-------|----------|------|
-| REQ | `tied/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml` | Satisfaction criteria |
+| REQ | `tied-project/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml` | Satisfaction criteria |
 | IMPL | `IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` | `VALIDATE_ACTIVATION_PAIRING`, `VALIDATE_CHECKLIST_GATE` |
 | Validator | `mcp-server/src/checklist-validator.ts` | Pure functions; optional `requiredStepSlugs`; pairing when `activation` supplied |
 | MCP | `tied_checklist_gate_validate` | Read-only gate tool |
@@ -189,13 +189,13 @@ When `risk_analysis.adversarial_inquiry.depth_tier` is **`integrated`** (or **`s
 - `strict_candidate` requires pairing at verification/close_out.
 - Template includes `prior_depth_tier`, `integrated_waiver`, and `close_out_inquiry_waiver` fields.
 
-Evidence: `mcp-server/src/checklist-validator.ts`, `checklist-validator.test.ts`, `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2.yaml`.
+Evidence: `mcp-server/src/checklist-validator.ts`, `checklist-validator.test.ts`, `tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-batch2.yaml`.
 
 ### 4.2 Agent ergonomics (Phase C — Slice 2) — **Shipped**
 
 - `tied_checklist_activation_collect` MCP/CLI helper assembles gate-ready activation from phase dirs.
 
-Evidence: `mcp-server/src/tools/index.ts`, `checklist-activation-collect.test.ts`, `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml`.
+Evidence: `mcp-server/src/tools/index.ts`, `checklist-activation-collect.test.ts`, `tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml`.
 
 ### 4.3 Adoption proof (Phase G — Slice 3 / H5) — **Shipped** (2026-08-24, client `1787507684`)
 
@@ -209,7 +209,7 @@ Evidence: `working/client-1787507684-activation-audit/`, `CITDP-REQ-ROOTJOBS` cl
 - Warn-only `minimal_depth_missing_waiver` when `eligibility_triggers_matched` is non-empty, `depth_tier` is `minimal`, and `integrated_waiver` is incomplete.
 - Distinct from fail-closed `depth_downgrade_requires_waiver`; advisory `gate_policy` does not block on this diagnostic alone.
 
-Evidence: `mcp-server/src/checklist-validator.ts`, `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml`.
+Evidence: `mcp-server/src/checklist-validator.ts`, `tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml`.
 
 ---
 
@@ -232,7 +232,7 @@ Evidence: `mcp-server/src/checklist-validator.ts`, `tied/citdp/CITDP-REQ-TIED_CH
 
 | # | Deliverable | Status |
 |---|-------------|--------|
-| A1 | Integrated depth eligibility in `tied/docs/citdp-policy.md` | **Shipped** |
+| A1 | Integrated depth eligibility in `tied-bundle/docs/citdp-policy.md` | **Shipped** |
 | A2 | CITDP template `prior_depth_tier`, `integrated_waiver`, `close_out_inquiry_waiver` | **Slice 1** (moved from “planned later”) |
 | A3 | High-risk minimal warn in validator | **Shipped** (Slice A3, 2026-08-24) |
 | A4 | Prompt-shared depth recording text | **Shipped** (verify on change) |
@@ -256,7 +256,7 @@ Evidence: `mcp-server/src/checklist-validator.ts`, `tied/citdp/CITDP-REQ-TIED_CH
 | C1 | `tied_checklist_activation_collect` MCP tool | Assemble `{ receipt, artifacts, expected }` from disk + optional metrics |
 | C2 | `tied-cli.sh` wrapper | Offline parity |
 | C3 | Composition test | inquiry → collect → gate → `allowed: true` |
-| C4 | Runbook in `tied/vocab/tied-yaml-mcp.md` | Metrics + collect + validate sequence |
+| C4 | Runbook in `tied-project/vocab/tied-yaml-mcp.md` | Metrics + collect + validate sequence |
 
 **Acceptance:** Same contract as manual assembly; mismatching `run_id` fails closed.
 
@@ -402,10 +402,10 @@ For `strict_candidate`, apply the same auto set **only** at `verification` and `
 
 ### 13.2 Files in Slice 1
 
-- `tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` (LEAP first)
+- `tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` (LEAP first)
 - `mcp-server/src/checklist-validator.ts` and `checklist-validator.test.ts`
 - `mcp-server/src/tools/checklist-gate-mcp.test.ts` if diagnostics surface through MCP
-- `tied/docs/citdp-record-template.yaml` (A2 fields)
+- `tied-bundle/docs/citdp-record-template.yaml` (A2 fields)
 
 Not Slice 1: new MCP collect tool, prompt-skill prose rewrites beyond a one-line diagnostic mention, H5 client replay.
 

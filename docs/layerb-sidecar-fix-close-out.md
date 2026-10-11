@@ -38,7 +38,7 @@
 | **post-W8 sidecar hash drift** | Sidecar changed after Wave 8 commit; PSA Layer C and envelope must refresh before close_out | pseudocode-and-citdp.md — **Layer C gate_mode** |
 | **three completion signals** | **Machine close-out**, **process contract**, **adherence ledger** — never conflated in handoff | [`completion-signals-handoff.md`](../tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md) |
 
-**PRELOAD:** `tied/vocab/prompt-composer.md`, `tied/vocab/pseudocode-and-citdp.md`, `tied/vocab/quality-assurance.md`  
+**PRELOAD:** `tied-project/vocab/prompt-composer.md`, `tied-project/vocab/pseudocode-and-citdp.md`, `tied-project/vocab/quality-assurance.md`  
 **VALIDATE:** Terms reconciled to §13.2 and Wave 8 template; no new glossary files required.
 
 ---
@@ -51,7 +51,7 @@
 
 | Artifact | Path | Current state |
 |---|---|---|
-| Sidecar delta | `tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` | Uncommitted; Layer B green |
+| Sidecar delta | `tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` | Uncommitted; Layer B green |
 | Validation evidence | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json` | Present; refresh at plan-close-out |
 | Tracker | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist-layerb-sidecar-fix.yaml` | `planning_refine_complete` at refine-plan |
 | CITDP | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml` | `record_status: draft` |
@@ -86,7 +86,7 @@ flowchart TD
 | Wave 8 close-out (parent) | `docs/adherence-realignment-wave8-close-out.md` |
 | Tracker (follow-up) | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist-layerb-sidecar-fix.yaml` |
 | CITDP (finalize at close-out) | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-layerb-sidecar-fix.yaml` |
-| IMPL sidecar | `tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` |
+| IMPL sidecar | `tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` |
 | Layer B validation evidence | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/layerb-sidecar-fix-20260911-validation.json` |
 | PSA Layer C (authoritative) | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json` |
 | PSA evidence (dual path) | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/psa-IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.json` |
@@ -174,7 +174,7 @@ If any **blocking** machine or process signal fails, label handoff **incomplete*
 ### Phase 0 — Bootstrap
 
 1. Preface `Observing AI principles!`; PRELOAD vocab per §0.
-2. Call **`tied_config_get_base_path`** — must resolve to `/Users/fareed/Documents/dev/chatgpt/stdd/tied/`.
+2. Call **`tied_config_get_base_path`** — must resolve to `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/`.
 3. Confirm uncommitted diff is **only** the sidecar (+ follow-up working artifacts).
 
 **Gitignore hygiene:** Track `layerb-sidecar-fix-20260911-validation.json`. Leave unrelated untracked `working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/*` out of scope.
@@ -191,7 +191,7 @@ Re-run and persist fresh receipts (update evidence JSON):
 node -e "
 const fs=require('fs');
 const {validateEssencePseudocode}=require('./mcp-server/dist/analysis/pseudocode-validator.js');
-const pc=fs.readFileSync('tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md','utf8');
+const pc=fs.readFileSync('tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md','utf8');
 const r=validateEssencePseudocode({token:'IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT',pseudocode:pc});
 if(!r.ok) process.exit(1);
 console.log('ok');

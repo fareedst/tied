@@ -29,15 +29,15 @@ flowchart LR
 ### 1. Create a safe migration boundary
 
 - Make a branch, tag, or separate worktree snapshot before touching the client.
-- Create a unique per-request Tracker from [agent-req-implementation-checklist.md](../tied/docs/agent-req-implementation-checklist.md).
+- Create a unique per-request Tracker from [agent-req-implementation-checklist.md](../tied-bundle/docs/agent-req-implementation-checklist.md).
 - Record the client root, absolute `TIED_BASE_PATH`, commit, .NET SDK, solution/projects, test framework, analyzers, and exact `dotnet restore`, `dotnet build`, and `dotnet test` commands.
-- Bootstrap TIED non-destructively with [methodology-migration.md](../tied/docs/methodology-migration.md).
+- Bootstrap TIED non-destructively with [methodology-migration.md](../tied-bundle/docs/methodology-migration.md).
 - Preserve project YAML, customized documentation, and existing `.cursor/mcp.json`; keep `tied/methodology/` read-only.
 - Verify the effective base path before any project-YAML write.
 
 ### 2. Resolve vocabulary and define the change
 
-- PRELOAD the matched glossaries from [routing.md](../tied/vocab/routing.md), especially methodology, TIED YAML MCP, pseudo-code/CITDP, quality assurance, and fidelity research.
+- PRELOAD the matched glossaries from [routing.md](../tied-project/vocab/routing.md), especially methodology, TIED YAML MCP, pseudo-code/CITDP, quality assurance, and fidelity research.
 - Add a client domain glossary only for genuinely new C# domain concepts.
 - Use RESOLVE and RECORD to choose one preferred term for each module, boundary, dependency, state, and externally visible behavior.
 - Persist a CITDP record for this behavior-changing brownfield adoption.
@@ -58,8 +58,8 @@ flowchart LR
 
 ### 4. Translate one module into canonical TIED records
 
-- Apply Track C from [pseudocode-writing-and-validation.md](../tied/docs/pseudocode-writing-and-validation.md): read tests and C# code, author the `IMPL-*-pseudocode.md` sidecar, then align comments.
-- Use [impl-pseudocode-from-code-agent-prompt.md](../tied/docs/impl-pseudocode-from-code-agent-prompt.md) as the working procedure.
+- Apply Track C from [pseudocode-writing-and-validation.md](../tied-bundle/docs/pseudocode-writing-and-validation.md): read tests and C# code, author the `IMPL-*-pseudocode.md` sidecar, then align comments.
+- Use [impl-pseudocode-from-code-agent-prompt.md](../tied-bundle/docs/impl-pseudocode-from-code-agent-prompt.md) as the working procedure.
 - Define module boundaries, interfaces, contracts, dependencies, invariants, and validation criteria before integration, satisfying `[REQ-MODULE_VALIDATION]` and `[IMPL-MODULE_VALIDATION]`.
 - Author or approve project `[REQ-*]`, `[ARCH-*]`, and `[IMPL-*]` records only after vocabulary resolution.
 - Register every token and cross-reference the REQ → ARCH → IMPL stack.
@@ -132,11 +132,11 @@ flowchart LR
 
 ## Authoritative references
 
-- [TIED client development index](../tied/docs/client-development-index.md)
-- [Agent requirement implementation checklist](../tied/docs/agent-req-implementation-checklist.md)
-- [TIED methodology migration](../tied/docs/methodology-migration.md)
-- [IMPL pseudo-code writing and validation](../tied/docs/pseudocode-writing-and-validation.md)
-- [CITDP policy](../tied/docs/citdp-policy.md)
-- [Composition coverage](../tied/docs/composition-coverage.md)
+- [TIED client development index](../tied-bundle/docs/client-development-index.md)
+- [Agent requirement implementation checklist](../tied-bundle/docs/agent-req-implementation-checklist.md)
+- [TIED methodology migration](../tied-bundle/docs/methodology-migration.md)
+- [IMPL pseudo-code writing and validation](../tied-bundle/docs/pseudocode-writing-and-validation.md)
+- [CITDP policy](../tied-bundle/docs/citdp-policy.md)
+- [Composition coverage](../tied-bundle/docs/composition-coverage.md)
 - [TIED fidelity research plan](tied-fidelity-research-plan.md)
 - [TIED vocabulary layer](vocabulary-layer-tied-leap-citdp.md)

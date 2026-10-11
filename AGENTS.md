@@ -136,7 +136,7 @@ CITDP uses `depth_tier: minimal` or higher:
   token presence, or TIED consistency as feature activation evidence. Integrated
   activation requires the matching inquiry metric and all four artifacts.
 
-**Working folders:** For commit vs ignore placement of PLAN, envelope, gates, and scratch paths, read `tied-bundle/docs/working-artifact-placement.md` (`[PROC-WORKING_ARTIFACT_PLACEMENT]`). Committed rationale lives under `tied-project/working/`; regenerable machine evidence under `tied-bundle/working/`.
+**Working folders:** For commit vs ignore placement of PLAN, envelope, gates, and scratch paths, read `tied-bundle/docs/working-artifact-placement.md` (`[PROC-WORKING_ARTIFACT_PLACEMENT]`). Committed rationale lives under `tied-project/working/`; regenerable machine evidence under `tied-bundle/working/`. In the **TIED store repo**, root `working/` is a **symlink alias** to `tied-project/working/` — see `tied-project/working/README.md`. Prefer **`tied-project/working/`** in new links and edits so brownfield clients without the alias do not split orchestrators.
 
 ### 3.4 After Completing Work
 - [ ] `semantic-tokens.yaml` reflects every token referenced in code/tests/docs

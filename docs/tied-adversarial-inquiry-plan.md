@@ -67,13 +67,13 @@ pseudo-code sidecars and domain vocabulary remain plain-text artifacts.
 Related plans and controls:
 
 - [`tied-fidelity-research-plan.md`](tied-fidelity-research-plan.md)
-- [`pseudocode-fidelity-audit-agent-prompt.md`](../tied/docs/pseudocode-fidelity-audit-agent-prompt.md)
-- [`pseudocode-writing-and-validation.md`](../tied/docs/pseudocode-writing-and-validation.md)
-- [`composition-coverage.md`](../tied/docs/composition-coverage.md)
-- [`agent-req-implementation-checklist.md`](../tied/docs/agent-req-implementation-checklist.md)
-- [`processes.md`](../tied/docs/processes.md)
-- [`quality-assurance.md`](../tied/vocab/quality-assurance.md)
-- [`fidelity-research.md`](../tied/vocab/fidelity-research.md)
+- [`pseudocode-fidelity-audit-agent-prompt.md`](../tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md)
+- [`pseudocode-writing-and-validation.md`](../tied-bundle/docs/pseudocode-writing-and-validation.md)
+- [`composition-coverage.md`](../tied-bundle/docs/composition-coverage.md)
+- [`agent-req-implementation-checklist.md`](../tied-bundle/docs/agent-req-implementation-checklist.md)
+- [`processes.md`](../tied-bundle/docs/processes.md)
+- [`quality-assurance.md`](../tied-project/vocab/quality-assurance.md)
+- [`fidelity-research.md`](../tied-project/vocab/fidelity-research.md)
 
 ---
 

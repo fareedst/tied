@@ -11,7 +11,7 @@ second process token or workflow.
 ## Checklist integration
 
 Adversarial inquiry extends the canonical agent requirement implementation checklist
-(`tied/docs/agent-req-implementation-checklist.yaml`) through existing step slugs and
+(`tied-bundle/docs/agent-req-implementation-checklist.yaml`) through existing step slugs and
 `sub-adversarial-inquiry-pass` — no parallel workflow.
 
 | Step slug | Integration role |
@@ -36,7 +36,7 @@ Adversarial inquiry extends the canonical agent requirement implementation check
 | `persist-citdp-record` | Pilot evidence when gate policy is strict-candidate or strict-approved |
 | `sub-adversarial-inquiry-pass` | Binds the five IMPL checklist blocks behind one CALL |
 
-Full step-by-step table: [`tied/vocab/fidelity-research.md`](../tied/vocab/fidelity-research.md) § Checklist integration.
+Full step-by-step table: [`tied-project/vocab/fidelity-research.md`](../tied-project/vocab/fidelity-research.md) § Checklist integration.
 
 ## Three independent dimensions
 

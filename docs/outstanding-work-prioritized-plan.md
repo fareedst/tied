@@ -21,9 +21,9 @@ required for planning-only edits to this document.
 
 ## 0. Refinement gates (RESOLVE)
 
-Sponsor terms resolved against [`fidelity-research.md`](../tied/vocab/fidelity-research.md),
-[`quality-assurance.md`](../tied/vocab/quality-assurance.md), and
-[`prompt-composer.md`](../tied/vocab/prompt-composer.md):
+Sponsor terms resolved against [`fidelity-research.md`](../tied-project/vocab/fidelity-research.md),
+[`quality-assurance.md`](../tied-project/vocab/quality-assurance.md), and
+[`prompt-composer.md`](../tied-project/vocab/prompt-composer.md):
 
 | Term | Resolution |
 |------|------------|
@@ -93,7 +93,7 @@ contracts only — master roadmap Phase 5 is complete).
 - ~~Live stdd-repo dogfood close_out inquiry~~ — `working/REQ-TIED_ADVERSARIAL_INQUIRY/g2-dogfood/replay-g2-stdd-dogfood.sh`
 - ~~Operator MCP reload smoke (G6-class)~~ — `working/BUILD_PLAN_6_HYGIENE/g6-mcp-reload-smoke.sh`
 
-**Note:** G2 code may exist as uncommitted working-tree changes; trackers and `tied/citdp/` are
+**Note:** G2 code may exist as uncommitted working-tree changes; trackers and `tied-project/citdp/` are
 source of truth for close-out claims.
 
 ---
@@ -102,11 +102,11 @@ source of truth for close-out claims.
 
 | Build-plan | Tracker path | Status | CITDP | Notes |
 |------------|--------------|--------|-------|-------|
-| 1 — A3 | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_sliceA3_tracker.yaml` | **Shipped** — `complete`, close_out 2026-08-24 | `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml` | Gates: `gate-sliceA3-{pre_implementation,verification,close_out}.json` |
-| 2 — Strict pilots | `working/REQ-TIED_ADVERSARIAL_INQUIRY/REQ-TIED_ADVERSARIAL_INQUIRY_sliceS_tracker.yaml` | **Shipped** — `complete`, close_out 2026-08-24 | `tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml` | Pilot: `working/client-1787416567-strict-pilot/` |
-| 3 — Go Mode B | `working/REQ-TIED_ADVERSARIAL_INQUIRY/REQ-TIED_ADVERSARIAL_INQUIRY_sliceG2_tracker.yaml` | **Shipped** — `complete`, close_out 2026-08-24 | `tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG2.yaml` | Dogfood + G6 smoke 2026-08-24 |
-| 4 — Canonicalization | `working/REQ-TIED_YAML_CANONICALIZATION/REQ-TIED_YAML_CANONICALIZATION_record-aware_tracker.yaml` | **Shipped** — close_out 2026-08-24 | `tied/citdp/CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware.yaml` | Prerequisite for Build-plan 5 (shipped) |
-| 5 — Styling Slice 2 | `working/REQ-TIED_YAML_STYLING_GATES/REQ-TIED_YAML_STYLING_GATES_tracker.yaml` | **Shipped** — `implemented`, close_out 2026-08-24 | `tied/citdp/CITDP-REQ-TIED_YAML_STYLING_GATES.yaml` | Gates: `gate-{pre-implementation-slice2,verification-slice2,close_out-result}.json`; 441/441 npm tests |
+| 1 — A3 | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT_sliceA3_tracker.yaml` | **Shipped** — `complete`, close_out 2026-08-24 | `tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml` | Gates: `gate-sliceA3-{pre_implementation,verification,close_out}.json` |
+| 2 — Strict pilots | `working/REQ-TIED_ADVERSARIAL_INQUIRY/REQ-TIED_ADVERSARIAL_INQUIRY_sliceS_tracker.yaml` | **Shipped** — `complete`, close_out 2026-08-24 | `tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml` | Pilot: `working/client-1787416567-strict-pilot/` |
+| 3 — Go Mode B | `working/REQ-TIED_ADVERSARIAL_INQUIRY/REQ-TIED_ADVERSARIAL_INQUIRY_sliceG2_tracker.yaml` | **Shipped** — `complete`, close_out 2026-08-24 | `tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG2.yaml` | Dogfood + G6 smoke 2026-08-24 |
+| 4 — Canonicalization | `working/REQ-TIED_YAML_CANONICALIZATION/REQ-TIED_YAML_CANONICALIZATION_record-aware_tracker.yaml` | **Shipped** — close_out 2026-08-24 | `tied-project/citdp/CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware.yaml` | Prerequisite for Build-plan 5 (shipped) |
+| 5 — Styling Slice 2 | `working/REQ-TIED_YAML_STYLING_GATES/REQ-TIED_YAML_STYLING_GATES_tracker.yaml` | **Shipped** — `implemented`, close_out 2026-08-24 | `tied-project/citdp/CITDP-REQ-TIED_YAML_STYLING_GATES.yaml` | Gates: `gate-{pre-implementation-slice2,verification-slice2,close_out-result}.json`; 441/441 npm tests |
 | 6 — Hygiene | `working/BUILD_PLAN_6_HYGIENE/BUILD_PLAN_6_hygiene_tracker.yaml` | **Shipped** — close-out 2026-08-24 | Deferred (doc/test-only) | All items including G6 + G2 dogfood |
 
 ---
@@ -163,7 +163,7 @@ Dotted arrows = optional hygiene (shipped 2026-08-24). **Sequence complete.**
 - **Deliverables:** `minimal_depth_missing_waiver` warn diagnostic; `eligibility_triggers_matched`
   CITDP field; parent plan §4.1–4.4 and §11 reconciled.
 - **Evidence:** `mcp-server/src/checklist-validator.ts`, `checklist-validator.test.ts`,
-  `tied/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml`,
+  `tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3.yaml`,
   `integrated-activation-checklist-enforcement-plan.md` §4.4.
 
 ### Build-plan 2 — Strict-approved pilots (shipped 2026-08-24)
@@ -187,7 +187,7 @@ Dotted arrows = optional hygiene (shipped 2026-08-24). **Sequence complete.**
 
 - **Deliverables:** Record-list registry, TS + Ruby sort alignment, REQ LEAP, CITDP persist.
 - **Evidence:** `yaml-canonicalizer.test.ts` (17/17), `yaml_list_sorter_test.rb`,
-  `tied/citdp/CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware.yaml`,
+  `tied-project/citdp/CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware.yaml`,
   `tied_validate_consistency` ok.
 
 ### Build-plan 5 — Client YAML styling hook (Slice 2) (shipped 2026-08-24)
@@ -198,7 +198,7 @@ Dotted arrows = optional hygiene (shipped 2026-08-24). **Sequence complete.**
 - **Evidence:** `mcp-server/src/yaml-client-formatter.ts`, `yaml-client-formatter.test.ts`,
   `tools/yaml-client-styling-mcp.test.ts`, `mcp-server/fixtures/client-formatter/`,
   `mcp-server/src/tools/index.ts` (MCP tool), `checklist-yaml-styling-contract.test.ts`,
-  `tied/citdp/CITDP-REQ-TIED_YAML_STYLING_GATES.yaml`,
+  `tied-project/citdp/CITDP-REQ-TIED_YAML_STYLING_GATES.yaml`,
   `working/REQ-TIED_YAML_STYLING_GATES/gate-close_out-result.json`, 441/441 npm tests pass,
   `tied_validate_consistency` ok.
 - **Acceptance met:** `pseudocode_validate` on new IMPL blocks; no automatic hook invocation inside
@@ -229,7 +229,7 @@ Run when sponsor bandwidth allows; **none block sequence completion.**
 |------|-----------|
 | Client `1787503424` integrated replay | Superseded by H5 (`1787507684`); retroactive upgrade not required |
 | Universal integrated depth | Policy choice per CITDP; not mandated globally |
-| Batch 2 + Build-plans 1–5 re-implementation | Trackers and `tied/citdp/` are source of truth |
+| Batch 2 + Build-plans 1–5 re-implementation | Trackers and `tied-project/citdp/` are source of truth |
 | `tied/methodology/**` edits | `[PROC-TIED_METHODOLOGY_READONLY]` |
 | Reopening deferred-stats Phases 1–5 | Master roadmap complete; only orchestrator wiring excluded |
 

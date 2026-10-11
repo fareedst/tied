@@ -2,9 +2,9 @@
 
 **Scope:** Methodology-side **planning and sponsor gate** for the **third** non-enrolled client batch after **NB-2 tranche one** complete. **No migration execution** in this document.
 
-**Canonical program:** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) · **Prior batch:** [`pseudocode-constraint-v2-fleet-nb2-plan.md`](pseudocode-constraint-v2-fleet-nb2-plan.md) · **CITDP:** [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION`](../tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) `nb3_tranche_two_module` · **Tracker:** [`working/fleet-constraint-v2/NB-3-tranche-two-agent-req-implementation-checklist.yaml`](../working/fleet-constraint-v2/NB-3-tranche-two-agent-req-implementation-checklist.yaml)
+**Canonical program:** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) · **Prior batch:** [`pseudocode-constraint-v2-fleet-nb2-plan.md`](pseudocode-constraint-v2-fleet-nb2-plan.md) · **CITDP:** [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) `nb3_tranche_two_module` · **Tracker:** [`working/fleet-constraint-v2/NB-3-tranche-two-agent-req-implementation-checklist.yaml`](../working/fleet-constraint-v2/NB-3-tranche-two-agent-req-implementation-checklist.yaml)
 
-**TIED batch REQ:** [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO](../tied/requirements/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml) (Draft) · **Orchestrator:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) remains **closed** — do not re-run `close_out`.
+**TIED batch REQ:** [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml) (Draft) · **Orchestrator:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) remains **closed** — do not re-run `close_out`.
 
 ### Artifact index (NB-3)
 
@@ -18,10 +18,10 @@
 | Inventory (program) | [`working/fleet-constraint-v2/client-inventory-manifest.v1.yaml`](../working/fleet-constraint-v2/client-inventory-manifest.v1.yaml) | Wave-3 selection + post-wave rollup |
 | G3 harness design | [`working/fleet-constraint-v2/p4-d-g3-harness-design.v1.md`](../working/fleet-constraint-v2/p4-d-g3-harness-design.v1.md) | `fleet-g3-wave` CLI contract for `/build-plan` |
 | Program status snapshot | [`working/fleet-constraint-v2/program-status.v1.yaml`](../working/fleet-constraint-v2/program-status.v1.yaml) | Rolling counts; update after NB-3-G |
-| IMPL orchestration pseudo-code | [`IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION`](../tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md) | `RECORD_NB3_ACCEPTANCE`, `SELECT_NB3_WAVE_THREE_CLIENTS` |
+| IMPL orchestration pseudo-code | [`IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION`](../tied-project/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md) | `RECORD_NB3_ACCEPTANCE`, `SELECT_NB3_WAVE_THREE_CLIENTS` |
 | NB-2 script parity (build-plan) | [`scripts/fleet-nb2-orchestration.test.mjs`](../scripts/fleet-nb2-orchestration.test.mjs), [`scripts/run-nb2-*`](../scripts/) | Extend pattern for `run-nb3-*`, `fleet-nb3-orchestration.test.mjs` |
 
-**Traceability tokens:** [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO](../tied/requirements/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.yaml)
+**Traceability tokens:** [REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO.yaml) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied-project/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied-project/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.yaml)
 
 ---
 

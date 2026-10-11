@@ -266,6 +266,17 @@ ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET:
     title: "Optional BBCE slice ownership sections (paste-in snippet)"
   name: "BBCE slice ownership snippet"
   status: "Active"
+ARCH-CHECKLIST-PROCESS-REVIEW:
+  cross_references:
+    - "REQ-CHECKLIST-PROCESS-REVIEW"
+  detail_file: "architecture-decisions/ARCH-CHECKLIST-PROCESS-REVIEW.yaml"
+  name: "Checklist process review doc architecture"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-CHECKLIST-PROCESS-REVIEW"
+    requirements:
+      - "REQ-CHECKLIST-PROCESS-REVIEW"
 ARCH-CONFIG_DISCOVERY_LAYERING:
   alternatives_considered:
     - cons:

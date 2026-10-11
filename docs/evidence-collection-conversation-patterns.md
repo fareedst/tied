@@ -4,7 +4,7 @@
 **Scope:** Cross-client evidence cohort, methodology-repo dogfood, TIED checklist / prompt-type conversation paths, and Wave 7 conversation-adherence measurement  
 **Primary tokens:** `[REQ-REQUEST_EVIDENCE_ENVELOPE]`, `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[REQ-QUALITY_ASSURANCE_EVIDENCE]`, `[REQ-EVIDENCE_CHAIN_PROFILE]`, `[PROC-AGENT_REQ_CHECKLIST]`  
 **Parent plans:** [`methodology-closeout-integrity-plan.md`](methodology-closeout-integrity-plan.md) (Waves 1–4), [`process-adherence-evidence-grade-plan.md`](process-adherence-evidence-grade-plan.md) (Wave 5)  
-**Related:** [`request-evidence-envelope.md`](../tied/docs/request-evidence-envelope.md), [`conversation-analysis-tools.md`](../tied/docs/conversation-analysis-tools.md)
+**Related:** [`request-evidence-envelope.md`](../tied-bundle/docs/request-evidence-envelope.md), [`conversation-analysis-tools.md`](../tied-bundle/docs/conversation-analysis-tools.md)
 
 ---
 
@@ -115,7 +115,7 @@ This document is an **implementation-ready plan**, not an implementation authori
 | **agentstream hard block** | Optional W7-D4 flag refusing `traceable-commit` turn progression when envelope path missing or blocking gaps present |
 | **Tier 1–4 evidence** | Collection-rate taxonomy in §1 — Tier 3 (manifest, profile, PSA) is the primary Wave 6–7 gap cluster |
 
-Vocabulary touchpoints: preload `tied/vocab/prompt-composer.md`, `tied/vocab/quality-assurance.md`, `tied/vocab/fidelity-research.md`, `tied/vocab/pseudocode-and-citdp.md` before implementation.
+Vocabulary touchpoints: preload `tied-project/vocab/prompt-composer.md`, `tied-project/vocab/quality-assurance.md`, `tied-project/vocab/fidelity-research.md`, `tied-project/vocab/pseudocode-and-citdp.md` before implementation.
 
 ---
 
@@ -229,7 +229,7 @@ Skills, CHANGELOG entries, and parent handoffs must distinguish these. **“Impl
 
 ## 4. Conversation patterns by checklist slug
 
-This section maps **checklist steps** from [`agent-req-implementation-checklist.yaml`](../tied/docs/agent-req-implementation-checklist.yaml) to **typical agent conversation behavior**, **evidence produced**, and **gaps when the step is skipped or performed superficially**.
+This section maps **checklist steps** from [`agent-req-implementation-checklist.yaml`](../tied-bundle/docs/agent-req-implementation-checklist.yaml) to **typical agent conversation behavior**, **evidence produced**, and **gaps when the step is skipped or performed superficially**.
 
 ### 4.1 Bootstrap and planning phase
 
@@ -288,7 +288,7 @@ Sub-stubs are the **atomic conversation units** agents should RETURN from. Skipp
 
 | Sub-stub | Invoked from | Intended tool / script conversation | Primary artifacts |
 |---|---|---|---|
-| `sub-vocabulary-sync` | Most steps (RESOLVE/RECORD/PRELOAD/VALIDATE) | Read/edit `tied/vocab/*.md` | Vocab files (not envelope-indexed) |
+| `sub-vocabulary-sync` | Most steps (RESOLVE/RECORD/PRELOAD/VALIDATE) | Read/edit `tied-project/vocab/*.md` | Vocab files (not envelope-indexed) |
 | `sub-yaml-edit-loop` | TIED mutation steps | tied-cli → lint_yaml → tied_validate_consistency | TIED YAML |
 | `sub-pseudocode-validation-pass` | `gate-pseudocode-validation`, `verification-gate` | `pseudocode_validate` MCP | Validation output (often chat-only) |
 | `sub-pseudocode-static-analysis-pass` | Same | `pseudocode_analyze` with `gate_mode: true` | `working/{REQ}/pseudocode-analysis/{IMPL}.v1.json` |
@@ -421,8 +421,8 @@ go test ./tools/agentstream/checklist/... -run TestCanonicalChecklist_stepMarker
 
 | ID | Deliverable | Primary files | Slice | Status |
 |---|---|---|---|---|
-| **W7-D1** | **Transcript scoring rubric** — executable CLI emitting `conversation-adherence-report.v1.yaml` scoring seven hypothesis dimensions (below) with explicit denominators; read-only, not a gate | `scripts/conversation-adherence-score.mjs`, `scripts/lib/conversation-adherence-dimensions.mjs`, `scripts/conversation-adherence-score.test.mjs`, `tied/docs/conversation-analysis-tools.md` | A | **Shipped** — 881 stdd sessions scored; `/dev/test` transcript replay partial (§10.3) |
-| **W7-D2** | **Operator backfill runbook** — document + batch script wrapping `request_evidence_envelope_backfill` for tracker-only `/dev/test` clients | `tied/docs/request-evidence-envelope.md`, `scripts/backfill-client-envelopes.mjs` | B | **Shipped** — operator run attempted; most tracker-only rows lacked artifacts for envelope creation (§10.3) |
+| **W7-D1** | **Transcript scoring rubric** — executable CLI emitting `conversation-adherence-report.v1.yaml` scoring seven hypothesis dimensions (below) with explicit denominators; read-only, not a gate | `scripts/conversation-adherence-score.mjs`, `scripts/lib/conversation-adherence-dimensions.mjs`, `scripts/conversation-adherence-score.test.mjs`, `tied-bundle/docs/conversation-analysis-tools.md` | A | **Shipped** — 881 stdd sessions scored; `/dev/test` transcript replay partial (§10.3) |
+| **W7-D2** | **Operator backfill runbook** — document + batch script wrapping `request_evidence_envelope_backfill` for tracker-only `/dev/test` clients | `tied-bundle/docs/request-evidence-envelope.md`, `scripts/backfill-client-envelopes.mjs` | B | **Shipped** — operator run attempted; most tracker-only rows lacked artifacts for envelope creation (§10.3) |
 | **W7-D3** | **Evaluation corpus adoption** — register all mature cohort rows with `envelope_require_mode: require_envelope`; produce before/after `envelope-gap-report.v1.yaml` | `working/evaluation/evaluation-corpus.v1.yaml`, `working/evaluation/envelope-gap-report.v1.yaml` | B | **Shipped** — 12 `/dev/test` rows + gap report |
 | **W7-D4** | **Agentstream envelope pilot** — warn when `traceable-commit` approached without envelope path; opt-in `--enforce-envelope` hard block | `tools/agentstream/checklist/traceable_commit_envelope.go`, `tools/agentstream/cmd/agentstream/main.go`, tests | C | **Shipped** — warn default; `--enforce-envelope` opt-in |
 | **W7-D5** | **PSA gate hydration** — when envelope lists `expected_artifact_missing` for PSA and tracker claims `gate-pseudocode-validation` completed, gate fails until report hydrated or waived | `mcp-server/src/checklist-validator.ts`, `mcp-server/src/checklist-gate-evidence-hydration.ts`, tests | C | **Shipped** — unit tests green; verification gate blocked until PSA refresh at close-out |

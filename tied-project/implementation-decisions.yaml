@@ -324,6 +324,18 @@ IMPL-ATDD-E2E-AGENT_STREAM:
       - "REQ-ATDD-E2E-AGENT_STREAM"
     tests:
       - "agent_stream_e2e_test.rb (upstream atdd)"
+IMPL-CHECKLIST-PROCESS-REVIEW:
+  cross_references:
+    - "ARCH-CHECKLIST-PROCESS-REVIEW"
+    - "REQ-CHECKLIST-PROCESS-REVIEW"
+  detail_file: "implementation-decisions/IMPL-CHECKLIST-PROCESS-REVIEW.yaml"
+  name: "Checklist process review doc delivery"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-CHECKLIST-PROCESS-REVIEW"
+    requirements:
+      - "REQ-CHECKLIST-PROCESS-REVIEW"
 IMPL-EVIDENCE_CHAIN_PROFILE:
   cross_references:
     - "ARCH-EVIDENCE_CHAIN_PROFILE"

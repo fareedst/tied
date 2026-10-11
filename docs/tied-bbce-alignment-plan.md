@@ -1,6 +1,6 @@
 # TIED Behavior-Bounded Change Engineering Alignment Plan
 
-**Status:** **Program closed (2026-09-27)** — W0–W4 executed at integrated/advisory pilot; traceable-commit `21ff5d4`; plan-close-out evidence `working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-gates-2026-09-27.json` (close_out gate allowed; envelope waiver). Strict/blocking enforcement and canonical `tied/citdp/` persistence remain deferred.
+**Status:** **Program closed (2026-09-27)** — W0–W4 executed at integrated/advisory pilot; traceable-commit `21ff5d4`; plan-close-out evidence `working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-gates-2026-09-27.json` (close_out gate allowed; envelope waiver). Strict/blocking enforcement and canonical `tied-project/citdp/` persistence remain deferred.
 
 **Change ID:** `PLAN-TIED-BBCE-ALIGNMENT`
 
@@ -17,7 +17,7 @@
 - [BBCE and TIED — tracked excerpt](bbce-and-tied-excerpt.md) — git-tracked summary; full synthesis local at `docs/comparisons/tied-vs-behavior-bounded-change-engineering.md` (gitignored)
 - [bbce-mechanisms-for-tied-improvement.md](comparisons/bbce-mechanisms-for-tied-improvement.md) — Current/Partial/Gap + mechanisms A–D
 - [Behavior-Bounded-Change-Engineering-BBCE.md](methodologies/Behavior-Bounded-Change-Engineering-BBCE.md) — in-repo BBCE source
-- [tied/vocab/behavior-bounded-change-engineering.md](../tied/vocab/behavior-bounded-change-engineering.md) — provisional glossary (routing **5i**)
+- [tied-project/vocab/behavior-bounded-change-engineering.md](../tied-project/vocab/behavior-bounded-change-engineering.md) — provisional glossary (routing **5i**)
 - [tied-residuality-analysis-plan.md](tied-residuality-analysis-plan.md) — wave/gate structure exemplar; residuality = stressor discovery vs BBCE = change locality
 - **Working CITDP:** `working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml`
 - **Linked Cursor plan:** `bbce_to_tied_alignment_df9407d6.plan.md`
@@ -28,7 +28,7 @@
 
 ### Resolved sponsor terms
 
-See linked Cursor plan §0 and `tied/vocab/behavior-bounded-change-engineering.md` — **behavioral slice**, **owning slice**, **public behavioral boundary**, **declared change surface**, **change locality**, **blast radius**, **boundary crossing**, **shared mechanism**, **agent context locality**.
+See linked Cursor plan §0 and `tied-project/vocab/behavior-bounded-change-engineering.md` — **behavioral slice**, **owning slice**, **public behavioral boundary**, **declared change surface**, **change locality**, **blast radius**, **boundary crossing**, **shared mechanism**, **agent context locality**.
 
 ### Authority integration (non-negotiable)
 
@@ -61,7 +61,7 @@ record locality / blast-radius metrics     CITDP + working evidence until promot
 
 ### Vocabulary RECORD/VALIDATE status
 
-- **RECORD (W0):** `tied/vocab/behavior-bounded-change-engineering.md` + routing **5i**.
+- **RECORD (W0):** `tied-project/vocab/behavior-bounded-change-engineering.md` + routing **5i**.
 - **VALIDATE:** At sponsor `traceable-commit`; forbid conflating slice with module in glossary and docs.
 
 ### Adversarial inquiry (W0)
@@ -119,7 +119,7 @@ domain vocabulary (shared)
 - **Full comparison:** `docs/comparisons/tied-vs-behavior-bounded-change-engineering.md` (gitignored).
 - **Mechanisms guide:** `docs/comparisons/bbce-mechanisms-for-tied-improvement.md` (gitignored).
 - **This feature plan** and **tracked excerpt** `docs/bbce-and-tied-excerpt.md`.
-- **Provisional vocabulary:** `tied/vocab/behavior-bounded-change-engineering.md` + routing **5i**.
+- **Provisional vocabulary:** `tied-project/vocab/behavior-bounded-change-engineering.md` + routing **5i**.
 - **Working CITDP:** `working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml`.
 
 ### Gaps vs desired hooks (post–W3)
@@ -151,7 +151,7 @@ domain vocabulary (shared)
 
 ### W1 — Pilot metrics (executed 2026-09-27)
 
-- **Target:** Composition bindings in `tied/docs/composition-coverage.md` for `@tied/agentstream`.
+- **Target:** Composition bindings in `tied-bundle/docs/composition-coverage.md` for `@tied/agentstream`.
 - **Deliverables:** `mcp-server/src/analysis/change-locality-pilot.ts`, `working/PLAN-TIED-BBCE-ALIGNMENT/pilot/*`, `locality-run.json` (git replay scenarios).
 - **Exit evidence:** Unit tests pass; integrated adversarial inquiry + verification gates at advisory; slice/JSONL recommendations in `pilot/limitations.md`.
 - **Proof boundary:** Metrics only — not REQ satisfaction.
@@ -228,7 +228,7 @@ See [bbce-mechanisms-for-tied-improvement.md](comparisons/bbce-mechanisms-for-ti
 ### Now (working record)
 
 - `working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml` with `risk_analysis.bbce_alignment.applied: planned`.
-- Canonical `tied/citdp/` persistence deferred until behavior-changing batch.
+- Canonical `tied-project/citdp/` persistence deferred until behavior-changing batch.
 
 ### Future attach field (candidate — not canonical in W0)
 
@@ -282,7 +282,7 @@ risk_analysis:
 
 1. **Push** `main` when ready (ahead of origin); no pending program commit.
 2. **Future backlog (separate authorization):** draft **REQ for optional BBCE strict enforcement** (blocking locality/CI — sponsor backlog 2026-09-27); MCP B/C wrapper; Jev/agent context locality; esbuild tests in default npm test; strict CI on locality.
-3. **Advisory bundle (approved, rule B):** Default **`bbce_advisory_enforced: true`** when the change adds a new REQ or updates any ARCH detail; default **`false`** for existing-REQ bug fixes with no ARCH changes. Canonical attach: `tied/citdp/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml`. ARCH help: template + `tied/docs/arch-bbce-slice-ownership-guide.md`.
+3. **Advisory bundle (approved, rule B):** Default **`bbce_advisory_enforced: true`** when the change adds a new REQ or updates any ARCH detail; default **`false`** for existing-REQ bug fixes with no ARCH changes. Canonical attach: `tied-project/citdp/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml`. ARCH help: template + `tied-bundle/docs/arch-bbce-slice-ownership-guide.md`.
 4. **Git:** Sponsor held push (2026-09-27) until evidence paths reviewed; then push when ready.
 
 **Do not:** treat advisory hooks as blocking gates; mandate vertical-slice folders; commit gitignored full comparison synthesis without sponsor intent.
@@ -295,7 +295,7 @@ risk_analysis:
 - [x] `docs/comparisons/bbce-mechanisms-for-tied-improvement.md`
 - [x] `docs/tied-bbce-alignment-plan.md`
 - [x] `docs/bbce-and-tied-excerpt.md`
-- [x] `tied/vocab/behavior-bounded-change-engineering.md` + routing **5i**
+- [x] `tied-project/vocab/behavior-bounded-change-engineering.md` + routing **5i**
 - [x] Working CITDP updated; gate receipts for verification (+ close_out at minimal)
 - [x] `tied_validate_consistency` pass (record in build-plan handoff)
 

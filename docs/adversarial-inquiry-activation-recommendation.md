@@ -147,7 +147,7 @@ A call without all four bounded artifacts (or valid phase-dir pairing) is incomp
   evidence adapter with realpath confinement; fixture verification at
   `mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/`; tracker
   `working/REQ-TIED_ADVERSARIAL_INQUIRY/REQ-TIED_ADVERSARIAL_INQUIRY_sliceG2_tracker.yaml`;
-  CITDP `tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG2.yaml`; 441/441 npm tests pass.
+  CITDP `tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceG2.yaml`; 441/441 npm tests pass.
 - ~~Run strict eligibility and human-approval pilots.~~ **Shipped (2026-08-24):** client
   `1787416567` strict-approved pilot with runbook at
   `working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh`;

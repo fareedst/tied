@@ -55,7 +55,7 @@ flowchart TB
 - **Controlled agent and team behavior**: The ordered checklist ([agent-req-implementation-checklist.yaml](agent-req-implementation-checklist.yaml)) gives a repeatable session shape—especially valuable when AI agents implement features in batches.
 - **Test design up front**: risk-assessment–test-strategy force risk thinking and a test matrix before the heavy coding loop.
 - **Composable quality**: Unit TDD (S09), composition tests (composition-integration), then E2E only where justified (end-to-end-ui)—matches [implementation-order.md](implementation-order.md).
-- **Recoverable history**: persist-citdp-record CITDP records (when policy requires them—see `tied/docs/citdp-policy.md` after `copy_files.sh`) document what changed and why.
+- **Recoverable history**: persist-citdp-record CITDP records (when policy requires them—see `tied-bundle/docs/citdp-policy.md` after `copy_files.sh`) document what changed and why.
 
 ---
 
@@ -65,7 +65,7 @@ flowchart TB
 - **Learning curve**: Teams must learn tokens, YAML layout, MCP workflows (typical for TIED projects), and the RED–GREEN–REFACTOR–SYNC loop.
 - **Tooling dependency**: Validating and mutating project TIED YAML often assumes the **TIED MCP server**, `lint_yaml`, and `tied_validate_consistency`; workflows degrade if those are skipped or misconfigured.
 - **Documentation maintenance**: TIED only pays off if verification-gate–sync-tied-stack are taken seriously; otherwise YAML becomes **documentation rot**—worse than no docs because it misleads.
-- **Overkill for tiny spikes**: Throwaway experiments may not warrant full CITDP persistence; project policy (`tied/docs/citdp-policy.md`) governs when to create vs skip records.
+- **Overkill for tiny spikes**: Throwaway experiments may not warrant full CITDP persistence; project policy (`tied-bundle/docs/citdp-policy.md`) governs when to create vs skip records.
 
 ---
 
@@ -90,12 +90,12 @@ Think of **TIED** like labeled rooms in a building: every important decision has
 **Tradeoffs:**
 
 - **Velocity vs safety:** Documentation-first TDD is slower than prototype-first. For disposable spikes, teams may intentionally run a **subset** of steps; that is a process choice, not a failure—provided someone documents the risk.
-- **CITDP record overhead:** Not every one-line fix needs a full CITDP file. Client projects should follow **`tied/docs/citdp-policy.md`** (copied with methodology; see checklist references) for when to persist vs skip persist-citdp-record.
+- **CITDP record overhead:** Not every one-line fix needs a full CITDP file. Client projects should follow **`tied-bundle/docs/citdp-policy.md`** (copied with methodology; see checklist references) for when to persist vs skip persist-citdp-record.
 - **MCP as gatekeeper:** Direct edits to `tied/*.yaml` bypassing MCP where tools exist violate the intended workflow and often break consistency; experts should enforce MCP-first or document one-line exceptions per [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md).
 - **LEAP requires discipline:** If developers skip updating IMPL when behavior changes, LEAP cannot help—the process becomes token theater.
 - **Critique of “documentation-first”:** In fast product discovery, you may **prototype first**, then **backfill** REQ/ARCH/IMPL and tests in one LEAP-aware pass. The checklist still applies; the entry point may emphasize change-definition–impact-discovery from observed behavior rather than greenfield intent.
 
-**Related deep dives:** [LEAP.md](LEAP.md), [pseudocode-writing-and-validation.md](../tied/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i) (three-way alignment and phases A–I), [methodology-diagrams.md](methodology-diagrams.md). After `copy_files.sh`, the same content also lives under `tied/docs/` in client projects.
+**Related deep dives:** [LEAP.md](LEAP.md), [pseudocode-writing-and-validation.md](../tied-bundle/docs/pseudocode-writing-and-validation.md#three-way-alignment-and-phases-a-through-i) (three-way alignment and phases A–I), [methodology-diagrams.md](methodology-diagrams.md). After `copy_files.sh`, the same content also lives under `tied-bundle/docs/` in client projects.
 
 ---
 
@@ -203,7 +203,7 @@ Canonical definitions, tasks, and branches live in **[agent-req-implementation-c
 | [methodology-diagrams.md](methodology-diagrams.md) | Traceability stack, TDD loop, CITDP, YAML edit loop |
 | [LEAP.md](LEAP.md) | Why IMPL-first reasoning matters for humans and agents |
 | [implementation-order.md](implementation-order.md) | Mandatory implementation order |
-| `tied/docs/citdp-policy.md` | When to create vs skip a CITDP record (client path after `copy_files.sh`) |
+| `tied-bundle/docs/citdp-policy.md` | When to create vs skip a CITDP record (client path after `copy_files.sh`) |
 
 ---
 

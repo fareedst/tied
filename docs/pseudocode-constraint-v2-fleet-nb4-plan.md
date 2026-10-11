@@ -2,9 +2,9 @@
 
 **Scope:** Methodology-side **planning and sponsor gate** for the **fourth and final** non-enrolled client batch after **NB-3 tranche two** complete. **No migration execution** in this document until sponsor acceptance and `/build-plan`.
 
-**Canonical program:** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) · **Completion + grading:** [`pseudocode-constraint-v2-fleet-completion-plan.md`](pseudocode-constraint-v2-fleet-completion-plan.md) · **Prior batch:** [`pseudocode-constraint-v2-fleet-nb3-plan.md`](pseudocode-constraint-v2-fleet-nb3-plan.md) · **CITDP:** [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION`](../tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) `nb4_tranche_final_module` · **Tracker:** [`working/fleet-constraint-v2/NB-4-tranche-final-agent-req-implementation-checklist.yaml`](../working/fleet-constraint-v2/NB-4-tranche-final-agent-req-implementation-checklist.yaml)
+**Canonical program:** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) · **Completion + grading:** [`pseudocode-constraint-v2-fleet-completion-plan.md`](pseudocode-constraint-v2-fleet-completion-plan.md) · **Prior batch:** [`pseudocode-constraint-v2-fleet-nb3-plan.md`](pseudocode-constraint-v2-fleet-nb3-plan.md) · **CITDP:** [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) `nb4_tranche_final_module` · **Tracker:** [`working/fleet-constraint-v2/NB-4-tranche-final-agent-req-implementation-checklist.yaml`](../working/fleet-constraint-v2/NB-4-tranche-final-agent-req-implementation-checklist.yaml)
 
-**TIED batch REQ:** [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL](../tied/requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml) (Draft) · **Orchestrator:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) remains **closed** — do not re-run `close_out`.
+**TIED batch REQ:** [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml) (Draft) · **Orchestrator:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) remains **closed** — do not re-run `close_out`.
 
 ### Artifact index (NB-4)
 
@@ -20,10 +20,10 @@
 | Per-request tracker | [`working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/agent-req-implementation-checklist.yaml`](../working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/agent-req-implementation-checklist.yaml) | Batch REQ envelope |
 | G3 harness design | [`working/fleet-constraint-v2/p4-d-g3-harness-design.v1.md`](../working/fleet-constraint-v2/p4-d-g3-harness-design.v1.md) | `fleet-g3-wave` CLI contract |
 | Program status snapshot | [`working/fleet-constraint-v2/program-status.v1.yaml`](../working/fleet-constraint-v2/program-status.v1.yaml) | Update after NB-4-G |
-| IMPL orchestration pseudo-code | [`IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION`](../tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md) | `RECORD_NB4_ACCEPTANCE`, `SELECT_NB4_WAVE_FOUR_CLIENTS` |
+| IMPL orchestration pseudo-code | [`IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION`](../tied-project/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md) | `RECORD_NB4_ACCEPTANCE`, `SELECT_NB4_WAVE_FOUR_CLIENTS` |
 | NB-3 script parity (build-plan) | [`scripts/fleet-nb3-orchestration.test.mjs`](../scripts/fleet-nb3-orchestration.test.mjs), [`scripts/run-nb3-*`](../scripts/) | Extend to `run-nb4-*`, `fleet-nb4-orchestration.test.mjs` |
 
-**Traceability tokens:** [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL](../tied/requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.yaml)
+**Traceability tokens:** [REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL.yaml) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied-project/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied-project/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.yaml)
 
 ---
 

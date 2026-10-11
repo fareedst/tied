@@ -1,0 +1,5 @@
+rg: —: No such file or directory (os error 2)
+rg: legacy: No such file or directory (os error 2)
+rg: path: No such file or directory (os error 2)
+rg: hotspot: No such file or directory (os error 2)
+rg: survey: No such file or directory (os error 2)

@@ -4,14 +4,14 @@
 **Change ID:** `DOC-PSA-PSEUDOCODE-FULL-UPDATE`  
 **Priority:** P1  
 **Owner:** TIED methodology repository (`stdd`)  
-**Traceability:** [REQ-PSEUDOCODE_STATIC_ANALYSIS](tied/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml), [REQ-PSEUDOCODE_PARSER_UNIFICATION](tied/requirements/REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml), [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE](tied/architecture-decisions/ARCH-PSEUDOCODE_ANALYSIS_PIPELINE.yaml), [IMPL-PSEUDOCODE_ANALYSIS_ENGINE](tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml)
+**Traceability:** [REQ-PSEUDOCODE_STATIC_ANALYSIS](tied-project/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml), [REQ-PSEUDOCODE_PARSER_UNIFICATION](tied-project/requirements/REQ-PSEUDOCODE_PARSER_UNIFICATION.yaml), [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE](tied-project/architecture-decisions/ARCH-PSEUDOCODE_ANALYSIS_PIPELINE.yaml), [IMPL-PSEUDOCODE_ANALYSIS_ENGINE](tied-project/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE.yaml)
 
 **Scope boundary:** The original PSA engine is already implemented and has a completed
 `REQ-PSEUDOCODE_STATIC_ANALYSIS` CITDP/Tracker. This plan is a follow-up change to
 promote PSA from opt-in documentation to a mandatory pre-RED gate; the existing
 close-out evidence is baseline context, not evidence for this follow-up.
 
-**Canonical terminology:** **Layer A** = `tied_validate_consistency` (TIED traceability). **Layer B** = `pseudocode_validate` + [pseudocode-validation-checklist.yaml](tied/docs/pseudocode-validation-checklist.yaml). **Layer C** = `pseudocode_analyze` with `gate_mode: true` + [pseudocode-static-analysis-checklist.yaml](tied/docs/pseudocode-static-analysis-checklist.yaml) (new). **Gate path** = mandatory Layer C at `gate-pseudocode-validation` for changed in-scope Active project IMPLs. **Profile path** = optional `invoke_pseudocode_analyze` on `evidence_chain_profile_generate` (parse-only live validator today).
+**Canonical terminology:** **Layer A** = `tied_validate_consistency` (TIED traceability). **Layer B** = `pseudocode_validate` + [pseudocode-validation-checklist.yaml](tied-bundle/docs/pseudocode-validation-checklist.yaml). **Layer C** = `pseudocode_analyze` with `gate_mode: true` + [pseudocode-static-analysis-checklist.yaml](tied-bundle/docs/pseudocode-static-analysis-checklist.yaml) (new). **Gate path** = mandatory Layer C at `gate-pseudocode-validation` for changed in-scope Active project IMPLs. **Profile path** = optional `invoke_pseudocode_analyze` on `evidence_chain_profile_generate` (parse-only live validator today).
 
 ---
 
@@ -39,7 +39,7 @@ This pass resolves ambiguities and makes the plan implementation-ready. **No cod
 7. **Full sidecar corpus remediation is out of close-out scope.** Tier 1 fixes apply to **changed in-scope** IMPLs and fixture/template representatives; untouched legacy Active blocks use `pre-psa-grammar` per block until next edit. Bootstrap waiver documented in remediation log — not a gate bypass for changed IMPLs.
 8. **`tied_checklist_gate_validate` needs no schema change** for Layer C. It validates step disposition + non-empty `evidence_refs` for `completed` steps; agents attach report paths. Optional follow-up: machine-validate report JSON `ok` (not required for this change).
 9. **Evidence-chain live validator path stays parse-only** unless a separate follow-on extends `pseudocodeAnalyze` in [live-structural-validators.ts](mcp-server/src/fidelity-research/live-structural-validators.ts). Mandatory gate uses full default pass list via MCP/`tied-cli.sh` — do not conflate the two proof boundaries.
-10. **Extend `[PROC-PSEUDOCODE_VALIDATION]`** in [processes.md](tied/docs/processes.md); **no new PROC token**.
+10. **Extend `[PROC-PSEUDOCODE_VALIDATION]`** in [processes.md](tied-bundle/docs/processes.md); **no new PROC token**.
 11. **CITDP persistence deferred** until `build-plan` execution; reference `DOC-PSA-PSEUDOCODE-FULL-UPDATE` in PR and Tracker. Sketch retained in § CITDP below.
 12. **`depth_tier: integrated`** — mandatory pre_implementation gate wiring, checklist enforcement, engine contract change, and doc/vocab pass justify integrated tracking (not minimal).
 
@@ -47,10 +47,10 @@ This pass resolves ambiguities and makes the plan implementation-ready. **No cod
 `pseudocode-and-citdp`, `quality-assurance`, and `fidelity-research` glossaries.
 Pass 1 already RECORDed Layer C terms (`Layer C static analysis gate`, `gate_mode`,
 `pre-psa-grammar`, `file-scoped analysis input`) in
-[pseudocode-and-citdp.md](tied/vocab/pseudocode-and-citdp.md) plus routing row 5 and
-[domain-references.md](tied/vocab/domain-references.md) cross-topic notes. Phase 0
+[pseudocode-and-citdp.md](tied-project/vocab/pseudocode-and-citdp.md) plus routing row 5 and
+[domain-references.md](tied-project/vocab/domain-references.md) cross-topic notes. Phase 0
 build still RECORDs grammar-construct rows (`SWITCH`/`CASE`, `CALL UPPER_SNAKE(...)`,
-etc.) when [pseudocode-grammar.v1.md](tied/docs/pseudocode-grammar.v1.md) lands.
+etc.) when [pseudocode-grammar.v1.md](tied-bundle/docs/pseudocode-grammar.v1.md) lands.
 VALIDATE (`ruby scripts/validate_vocab_index.rb`) is a build/close-out responsibility.
 
 **TIED status (verified 2026-09-08 pass 2):**
@@ -143,7 +143,7 @@ Structural rows mapped in [structural-analysis.ts](mcp-server/src/fidelity-resea
 
 ### Checklist gate — Layer B only; no PSA evidence schema
 
-`gate-pseudocode-validation` calls `sub-pseudocode-validation-pass` only ([agent-req-implementation-checklist.yaml](tied/docs/agent-req-implementation-checklist.yaml) ~885–901). No `sub-pseudocode-static-analysis-pass` stub exists yet.
+`gate-pseudocode-validation` calls `sub-pseudocode-validation-pass` only ([agent-req-implementation-checklist.yaml](tied-bundle/docs/agent-req-implementation-checklist.yaml) ~885–901). No `sub-pseudocode-static-analysis-pass` stub exists yet.
 
 `mcp-server/src/checklist-validator.ts` — `INTEGRATED_REQUIRED_SLUGS.pre_implementation` includes `gate-pseudocode-validation` (line 51). `validateTracker` requires `completed` steps to have non-empty `evidence_refs` (lines 305–306); **does not** parse pseudocode report contents.
 
@@ -164,7 +164,7 @@ Template line 45 uses `- PROCEDURE: UPPER_SNAKE_NAME` — **unsupported** for CF
 
 ### In scope
 
-- New author docs: [tied/docs/pseudocode-grammar.v1.md](tied/docs/pseudocode-grammar.v1.md), [tied/docs/pseudocode-static-analysis-checklist.yaml](tied/docs/pseudocode-static-analysis-checklist.yaml)
+- New author docs: [tied-bundle/docs/pseudocode-grammar.v1.md](tied-bundle/docs/pseudocode-grammar.v1.md), [tied-bundle/docs/pseudocode-static-analysis-checklist.yaml](tied-bundle/docs/pseudocode-static-analysis-checklist.yaml)
 - Shared doc/vocab/checklist updates (Phase 0–2, 3 prose/YAML)
 - **`gate_mode` on analyzer + MCP** with TDD tests **before** checklist enablement
 - Extend `[PROC-PSEUDOCODE_VALIDATION]` in processes.md and writing guide (three layers)
@@ -207,7 +207,7 @@ Template line 45 uses `- PROCEDURE: UPPER_SNAKE_NAME` — **unsupported** for CF
 | Aspect | Current | Desired |
 |--------|---------|---------|
 | Validation layers | A + B documented; C opt-in | A + B + **mandatory C** at pre-RED for changed Active IMPLs |
-| Author grammar | Scattered in writing guide; no v1 spec | Canonical [pseudocode-grammar.v1.md](tied/docs/pseudocode-grammar.v1.md) |
+| Author grammar | Scattered in writing guide; no v1 spec | Canonical [pseudocode-grammar.v1.md](tied-bundle/docs/pseudocode-grammar.v1.md) |
 | Gate checklist | Layer B YAML only | Layer C YAML + sub-stub wired to agent checklist |
 | `pseudocode_analyze` `ok` | Ignores most errors | `gate_mode: true` → strict pass/fail for checklist |
 | REQ status | Planned | Active with mandatory-gate satisfaction criterion |
@@ -218,10 +218,10 @@ Template line 45 uses `- PROCEDURE: UPPER_SNAKE_NAME` — **unsupported** for CF
 |------------------|--------|
 | `mcp-server/src/analysis/pseudocode-analyzer.ts` | `gate_mode`, `gate_mode_applied`, ok derivation |
 | `mcp-server/src/tools/index.ts` | MCP schema + handler |
-| `tied/docs/*` pseudocode + processes + checklist YAML/MD | Three-layer narrative, gate tasks |
-| `tied/vocab/*` | Layer C terms, routing keywords |
+| `tied-bundle/docs/*` pseudocode + processes + checklist YAML/MD | Three-layer narrative, gate tasks |
+| `tied-project/vocab/*` | Layer C terms, routing keywords |
 | `templates/impl-essence-pseudocode-template.md` | Procedure heading remediation |
-| `tied/requirements/`, `architecture-decisions/` | Status + criteria via MCP |
+| `tied-project/requirements/`, `architecture-decisions/` | Status + criteria via MCP |
 | Project sidecars (subset) | Tier 1 grammar fixes for changed IMPLs |
 
 ### risk_analysis
@@ -279,7 +279,7 @@ phase0 → phase1 → phase2 → phase4 (TDD gate_mode) → phase3 (enable manda
 
 ## Phase 0 — Bootstrap and vocabulary
 
-PRELOAD [tied/vocab/pseudocode-and-citdp.md](tied/vocab/pseudocode-and-citdp.md).
+PRELOAD [tied-project/vocab/pseudocode-and-citdp.md](tied-project/vocab/pseudocode-and-citdp.md).
 
 **Already RECORDed (pass 1 — do not duplicate):** routing row 5 keywords; Layer C
 terms in pseudocode-and-citdp; domain-references cross-topic note for Layer A/B/C
@@ -295,7 +295,7 @@ vs runtime/test proof.
 
 ## Phase 1 — Grammar guide
 
-Create [tied/docs/pseudocode-grammar.v1.md](tied/docs/pseudocode-grammar.v1.md) from parser ([pseudocode-parser.ts](mcp-server/src/analysis/pseudocode-parser.ts)), IR/budgets ([pseudocode-ir.ts](mcp-server/src/analysis/pseudocode-ir.ts)), fixture [minimal-branches.pseudocode.md](mcp-server/src/analysis/fixtures/pseudocode-analysis/minimal-branches.pseudocode.md).
+Create [tied-bundle/docs/pseudocode-grammar.v1.md](tied-bundle/docs/pseudocode-grammar.v1.md) from parser ([pseudocode-parser.ts](mcp-server/src/analysis/pseudocode-parser.ts)), IR/budgets ([pseudocode-ir.ts](mcp-server/src/analysis/pseudocode-ir.ts)), fixture [minimal-branches.pseudocode.md](mcp-server/src/analysis/fixtures/pseudocode-analysis/minimal-branches.pseudocode.md).
 
 Required sections: scope, supported syntax, unsupported → `unsupported_syntax[]`, author patterns (named procedures, CALL/RUN), budgets/truncation, reading reports, gate expectations (link Phase 3 checklist).
 
@@ -307,10 +307,10 @@ Required sections: scope, supported syntax, unsupported → `unsupported_syntax[
 
 Single narrative pass updating:
 
-- [pseudocode-writing-and-validation.md](tied/docs/pseudocode-writing-and-validation.md) — three layers; `#layer-c-static-analysis-gate`; replace stale "does not share a parser" with shared-primitives wording ([pseudocode-shared.ts](mcp-server/src/analysis/pseudocode-shared.ts))
-- [pseudocode-format-and-practices.md](tied/docs/pseudocode-format-and-practices.md) — §6 three layers; §6a grammar link
-- [client-development-index.md](tied/docs/client-development-index.md) — Core seven row 6 + optional grammar read
-- [processes.md](tied/docs/processes.md) § `[PROC-PSEUDOCODE_VALIDATION]` — Layer C activities, artifacts under `working/{REQ-TOKEN}/pseudocode-analysis/`
+- [pseudocode-writing-and-validation.md](tied-bundle/docs/pseudocode-writing-and-validation.md) — three layers; `#layer-c-static-analysis-gate`; replace stale "does not share a parser" with shared-primitives wording ([pseudocode-shared.ts](mcp-server/src/analysis/pseudocode-shared.ts))
+- [pseudocode-format-and-practices.md](tied-bundle/docs/pseudocode-format-and-practices.md) — §6 three layers; §6a grammar link
+- [client-development-index.md](tied-bundle/docs/client-development-index.md) — Core seven row 6 + optional grammar read
+- [processes.md](tied-bundle/docs/processes.md) § `[PROC-PSEUDOCODE_VALIDATION]` — Layer C activities, artifacts under `working/{REQ-TOKEN}/pseudocode-analysis/`
 - Migration/QA/MCP/skill/template surfaces per original plan file list
 
 ---
@@ -327,7 +327,7 @@ Single narrative pass updating:
 3. Add `gate_mode_applied: boolean` to successful reports (backward-compatible
    optional field). Existing `AnalyzeInputError` and MCP input-error shapes
    remain unchanged and do not claim that gate mode was applied.
-4. Update [IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md](tied/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md) `EMIT_ANALYSIS_REPORT` POST for `gate_mode`
+4. Update [IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md](tied-project/implementation-decisions/IMPL-PSEUDOCODE_ANALYSIS_ENGINE-pseudocode.md) `EMIT_ANALYSIS_REPORT` POST for `gate_mode`
 
 ### TDD tests (RED before GREEN)
 
@@ -350,7 +350,7 @@ cd mcp-server && npm run build && npm test
 
 **Precondition:** Phase 4 GREEN.
 
-### 3a. New checklist — [pseudocode-static-analysis-checklist.yaml](tied/docs/pseudocode-static-analysis-checklist.yaml)
+### 3a. New checklist — [pseudocode-static-analysis-checklist.yaml](tied-bundle/docs/pseudocode-static-analysis-checklist.yaml)
 
 Mirror Layer B structure:
 
@@ -383,7 +383,7 @@ Note: `abstract` in default MCP pass list is **recommended**; gate minimum rules
 
 ### 3c. Checklist contract tests
 
-1. Add `sub-pseudocode-static-analysis-pass` under `sub_procedures` in checklist YAML with a mirrored `### sub-pseudocode-static-analysis-pass` section in [agent-req-implementation-checklist.md](tied/docs/agent-req-implementation-checklist.md) (same pattern as `sub-pseudocode-validation-pass`).
+1. Add `sub-pseudocode-static-analysis-pass` under `sub_procedures` in checklist YAML with a mirrored `### sub-pseudocode-static-analysis-pass` section in [agent-req-implementation-checklist.md](tied-bundle/docs/agent-req-implementation-checklist.md) (same pattern as `sub-pseudocode-validation-pass`).
 2. Extend [checklist-yaml-styling-contract.test.ts](mcp-server/src/checklist-yaml-styling-contract.test.ts) (or add a sibling test) asserting:
    - `gate-pseudocode-validation` tasks include `CALL sub-pseudocode-static-analysis-pass`
    - new sub-stub `invoked_by` includes `gate-pseudocode-validation` (and `verification-gate` when hash differs)
@@ -502,13 +502,13 @@ exception is valid inside that submitted file.
 | PSA reports | `working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json` |
 | Remediation log | `working/DOC-PSA-PSEUDOCODE-FULL-UPDATE/psa-remediation-log.yaml` |
 
-Copy source: [tied/docs/agent-req-implementation-checklist.yaml](tied/docs/agent-req-implementation-checklist.yaml)
+Copy source: [tied-bundle/docs/agent-req-implementation-checklist.yaml](tied-bundle/docs/agent-req-implementation-checklist.yaml)
 
 ---
 
 ## File touch summary
 
-**New:** `docs/pseudocode-static-analysis-docs-and-gate-plan.md` (this file), `tied/docs/pseudocode-grammar.v1.md`, `tied/docs/pseudocode-static-analysis-checklist.yaml`, `working/DOC-PSA-PSEUDOCODE-FULL-UPDATE/*`
+**New:** `docs/pseudocode-static-analysis-docs-and-gate-plan.md` (this file), `tied-bundle/docs/pseudocode-grammar.v1.md`, `tied-bundle/docs/pseudocode-static-analysis-checklist.yaml`, `working/DOC-PSA-PSEUDOCODE-FULL-UPDATE/*`
 
 **Updated docs/vocab/checklist:** per Phase 0–3 lists in original draft
 

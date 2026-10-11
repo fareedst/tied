@@ -398,6 +398,7 @@ For orientation, read [methodology diagrams](tied-bundle/docs/methodology-diagra
 ```text
 stdd/
 ├── tied-project/              # Committed project traceability (REQ/ARCH/IMPL, vocab, working/)
+├── working/                   # Symlink → tied-project/working/ (legacy path alias; canonical prefix is tied-project/working/)
 ├── tied-bundle/               # Committed methodology corpus in this repo; gitignored on clients
 ├── mcp-server/                # MCP server + npm workspace (cli, agentstream, bootstrap, yaml-cli)
 │   └── packages/agentstream/  # @tied/agentstream — `tied agentstream` implementation

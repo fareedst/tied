@@ -20,7 +20,7 @@ BBCE supplies change-footprint discipline on codebases TIED already specifies; T
 | **change locality** | Ratio of files changed inside owning slice vs total files changed (BBCE §25) |
 | **blast radius** | Propagation of defect or change beyond the originating slice (BBCE §24) |
 
-**Not** the same as TIED **module** (`[REQ-MODULE_VALIDATION]`) — module is validation boundary; slice is change-ownership unit. See `tied/vocab/behavior-bounded-change-engineering.md`.
+**Not** the same as TIED **module** (`[REQ-MODULE_VALIDATION]`) — module is validation boundary; slice is change-ownership unit. See `tied-project/vocab/behavior-bounded-change-engineering.md`.
 
 ## Mechanisms (A — partial/current through W2)
 

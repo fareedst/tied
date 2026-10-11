@@ -1,0 +1,105 @@
+CITDP-PLAN-CHECKLIST-PROCESS-REVIEW:
+  change_definition:
+    current_behavior: "Checklist and process documentation are spread across tied-bundle/docs, docs/, tied-project/working/, navigation surfaces, and legacy path aliases; closure status, inbound references, and authority roles are not uniformly reconciled before cleanup."
+    desired_behavior: "A refined plan-only program defines a repeatable review method, phased deliverables, deletion safety gates, and an implement handoff that mints generic docs without mutating canonical checklist semantics in the first pass."
+    non_goals:
+      - "Replacing [PROC-AGENT_REQ_CHECKLIST] or adding a parallel implementation workflow"
+      - "Hard-deleting docs or plans during plan-only refine"
+      - "Editing read-only tied-bundle methodology YAML in phase 1"
+      - "Retroactive integrated adversarial inquiry for plan-only documentation"
+      - "Minting REQ-CHECKLIST-PROCESS-REVIEW during plan-only refine"
+    success_criteria:
+      - "Linked Cursor plan and docs/checklist-process-review-plan.md target spec agreed after sponsor approval"
+      - "Committed working folder PLAN-CHECKLIST-PROCESS-REVIEW with PLAN, Tracker, and documentation CITDP"
+      - "Phased program separates deliverable authoring, inventory/review execution, bounded cleanup, and methodology-surface follow-ons"
+      - "Test strategy and validation commands documented before build-plan phase 1"
+    unchanged_behavior: "[PROC-AGENT_REQ_CHECKLIST] remains machine source of step order; per-request Trackers remain execution authority; tied-bundle methodology stays read-only in the client."
+  evidence:
+    commands:
+      - "Read-only review of linked plan checklist-process-review against working-artifact-placement and AGENTS navigation"
+      - "TIED MCP tied_checklist_gate_validate at pre_implementation for plan-only CITDP"
+    manifest_reference: null
+    proof_boundaries:
+      - "docs_and_working_folder_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code mutation in plan-only scope. Neighborhood read-only: agent-req-implementation-checklist md/yaml pair, processes.md, bootstrap manifest.json."
+    modules_or_boundaries: "Documentation corpus, committed working plans, CITDP inbound references, navigation indexes."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-CHECKLIST-PROCESS-REVIEW"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-10"
+    title: "Active checklist and process review (plan-only)"
+  risk_analysis:
+    abuse_cases:
+      - "Deletion hides unresolved status contradictions instead of recording disposition"
+      - "Review checklist mistaken for mandatory implementation workflow on every REQ"
+      - "Plan-only gate receipt reused to authorize canonical checklist step changes without methodology-surface enrollment"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Closed plan deleted while CITDP still references its PLAN path."
+        - "Markdown mirror edited without YAML checklist update, breaking parity."
+        - "tied/docs path left in navigation after inventory claims zero legacy references."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any tied-bundle checklist YAML edited during plan-only refine."
+        - "Any hard delete executed before inbound reference sweep evidence exists."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/PLAN.md"
+        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/checklist-tracker.yaml"
+        - "/Users/fareed/.cursor/plans/checklist-process-review_c5da706c.plan.md"
+      falsification_questions:
+        - "Does the refined plan forbid parallel implementation workflow replacement?"
+        - "Are deletion batches explicitly separated from deliverable authoring?"
+        - "Are methodology-surface changes routed to plan-new-feature with enrollment?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Plan-only documentation and process design. Inventory execution and cleanup batches select depth independently when authorized."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Read-only plan and working folder review"
+        evidence_method: "Committed process evidence"
+        limitation: "Does not prove inventory completeness or zero-reference deletion."
+        owner: "agent"
+        rationale: "Deliverable is refined plan and documentation CITDP."
+        result: "pass"
+        risk: "Authority misread as bulk cleanup authorization"
+        threshold: "No deletion or canonical checklist mutation in plan-only pass"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      evidence_path: "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/residual-risk-plan-only.md"
+      expiry: "2027-04-10"
+      owner: "sponsor"
+      summary: "Inventory size and ambiguous lifecycle labels may defer cleanup; active handoffs (async W2, bootstrap detail-file, fidelity pilot, residuality close-out, QMM follow-ons) must stay non-delete until reconciled."
+    risks:
+      - description: "Costly canonical process rewrite bundled into phase 1 doc deliverables"
+        mitigation: "Phase 1 limited to generic plan + checklist markdown; methodology-surface changes require separate Tracker"
+    scenarios:
+      - "Operator runs review checklist and marks delete-candidate without reference sweep"
+  tdd_sequence:
+    summary: "Phase 1 implement (authorized later): no product RED unless optional link/parity automation is scoped; cleanup batches may add contract tests for reference invariants."
+  test_strategy:
+    matrix_notes: "Operator-executed validation during review passes; phase 1 deliverables are prose checklists unless build-plan adds tooling."
+    summary: "Reference sweeps (rg), check_docs_vocab_links, tied_project_lint, tied_validate_consistency after any project YAML touch, checklist YAML/Markdown parity tests when canonical pair changes, vocabulary VALIDATE at traceable-commit."

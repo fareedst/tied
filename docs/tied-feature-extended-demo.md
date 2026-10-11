@@ -199,7 +199,7 @@ new_result=$(
 )
 FEATURE_ID="$(jq -er '.result.manifest.feature_id' <<<"$new_result")"
 FEATURE_SLUG="$(jq -er '.result.manifest.slug' <<<"$new_result")"
-MANIFEST="$DEMO/tied/features/$FEATURE_ID-$FEATURE_SLUG/feature.yaml"
+MANIFEST="$DEMO/tied-project/features/$FEATURE_ID-$FEATURE_SLUG/feature.yaml"
 echo_exec jq -er '.result.manifest' <<<"$new_result" > "$MANIFEST"
 echo "FEATURE_ID="$FEATURE_ID""
 echo "FEATURE_SLUG="$FEATURE_SLUG""

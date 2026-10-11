@@ -118,7 +118,7 @@ tied init
     ".cursor/skills/tied-yaml/scripts/tied-cli.sh",
     "TIED YAML MCP",
     "tools/agentstream",
-    "tied/docs/using-tied-without-mcp.md"
+    "tied-bundle/docs/using-tied-without-mcp.md"
   ],
   "mutated_configuration": false
 }
@@ -163,7 +163,7 @@ echo "$yaml" | yq .result.manifest.feature_id
     ".cursor/skills/tied-yaml/scripts/tied-cli.sh",
     "TIED YAML MCP",
     "tools/agentstream",
-    "tied/docs/using-tied-without-mcp.md"
+    "tied-bundle/docs/using-tied-without-mcp.md"
   ],
   "mutated_configuration": false
 }
@@ -172,7 +172,7 @@ echo "$yaml" | yq .result.manifest.feature_id
 tied feature build "$FEATURE_ID"
 ```
 
-Expected: `tied init` reports the resolved `tied/` and `tied/features/`
+Expected: `tied init` reports the resolved `tied/` and `tied-project/features/`
 paths without persisting configuration; `feature new` creates `FEAT-001`;
 `feature build` reports the readiness/task/view/agentstream delegation path.
 The staged onboarding adapter currently accepts the feature identifier as the
@@ -187,7 +187,7 @@ echo_exec node "$ONBOARD" init
 ```
 
 Expected: an actionable readiness diagnostic points to
-`tied/docs/using-tied-without-mcp.md`, and `mutated_configuration` remains
+`tied-bundle/docs/using-tied-without-mcp.md`, and `mutated_configuration` remains
 `false`.
 
 Prove idempotency and the distinct brownfield mode through the MCP surface:

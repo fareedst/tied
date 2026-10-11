@@ -92,7 +92,7 @@ Read-only slug diff between checklist definition and an existing Tracker — **n
 
 ```bash
 agentstream \
-  -c tied/docs/agent-req-implementation-checklist.yaml \
+  -c tied-bundle/docs/agent-req-implementation-checklist.yaml \
   --checklist-tracker-preview working/REQ-EXAMPLE/REQ-EXAMPLE_tracker.yaml
 ```
 

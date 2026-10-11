@@ -15,7 +15,7 @@ Three tracks address pseudocode fidelity gaps exposed by Wave 8 / Layer B close-
 |----------|-------|-------|---------|
 | **P0** | **A — Grammar v2 for new TIED projects** | Bootstrap + policy + cohort | Every **new** client project sidecar declares `Grammar-Version: v2` by default |
 | **P1** | **C — Validator hardening** | `pseudocode-shared.ts`, `pseudocode-validator.ts` | Layer B scans block-leads on the **owning** procedure; fewer false positives |
-| **P2** | **B — Sidecar comment-placement sweep** | 89 sidecars in `tied/implementation-decisions/` | All procedure block-leads **inside** procedure bodies |
+| **P2** | **B — Sidecar comment-placement sweep** | 89 sidecars in `tied-project/implementation-decisions/` | All procedure block-leads **inside** procedure bodies |
 
 **Sequencing:** A first (top priority) → C before/at start of B → B in phased waves.
 
@@ -27,7 +27,7 @@ Three tracks address pseudocode fidelity gaps exposed by Wave 8 / Layer B close-
 
 **Sponsor intent resolved:** Track A is a **new-project-only grammar v2 default** at the TIED template/bootstrap boundary. It is not a global parser-default change, a mass migration, or activation of `constraint_flow`. Existing headerless sidecars remain **legacy-v1 compatible**. Track C remains validator hardening, and Track B remains the later sidecar comment-placement sweep.
 
-The chosen traceability stack is a new **[REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]** with **[ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT]** and **[IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]**. This does not extend the completed **[REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]**. The domain vocabulary record in [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) records **grammar v2**, **grammar version boundary**, **new-project grammar v2 default**, **grammar_v2_header audit dimension**, and the three UPPER_SNAKE block names.
+The chosen traceability stack is a new **[REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]** with **[ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT]** and **[IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT]**. This does not extend the completed **[REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE]**. The domain vocabulary record in [`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md) records **grammar v2**, **grammar version boundary**, **new-project grammar v2 default**, **grammar_v2_header audit dimension**, and the three UPPER_SNAKE block names.
 
 ### Refine disposition
 
@@ -37,7 +37,7 @@ The chosen traceability stack is a new **[REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT]** w
 
 ## CITDP Plan gate — integrated advisory design
 
-The persisted CITDP record is [`tied/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml`](../tied/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml). It records:
+The persisted CITDP record is [`tied-project/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml). It records:
 
 - `depth_tier: integrated`, `profile_depth: integrated`, and `gate_policy: advisory`, independently from the `baseline-functional` and `data-integrity-migration` assurance profiles.
 - Change definition, unchanged behavior, non-goals, falsification questions, and risks for header generation, legacy preservation, proof-boundary separation, and Track A scope control.
@@ -84,13 +84,13 @@ flowchart LR
 
 | Metric | Count |
 |--------|-------|
-| Sidecar files (`tied/implementation-decisions/`) | 89 |
+| Sidecar files (`tied-project/implementation-decisions/`) | 89 |
 | Procedures with internal block-leads | ~236 |
 | Inter-procedure `# [IMPL-…]` leak risk | ~54 |
 
 Root cause: [`scanProcedureBlocks`](mcp-server/src/analysis/pseudocode-shared.ts) uses half-open `[procedure_line, next_procedure_line)` — inter-procedure comments attach to the **previous** block; comments **above** `procedure` are invisible.
 
-**Grammar v2 today:** Opt-in via `Grammar-Version: v2` ([`tied/docs/pseudocode-grammar.v2.md`](../tied/docs/pseudocode-grammar.v2.md)). Migration guide keeps **v1 as default** for new sidecars ([`pseudocode-grammar-v2-migration.md`](../tied/docs/pseudocode-grammar-v2-migration.md) §Template note). **Policy change required for Track A.**
+**Grammar v2 today:** Opt-in via `Grammar-Version: v2` ([`tied-bundle/docs/pseudocode-grammar.v2.md`](../tied-bundle/docs/pseudocode-grammar.v2.md)). Migration guide keeps **v1 as default** for new sidecars ([`pseudocode-grammar-v2-migration.md`](../tied-bundle/docs/pseudocode-grammar-v2-migration.md) §Template note). **Policy change required for Track A.**
 
 ---
 
@@ -112,11 +112,11 @@ When a sponsor creates a **new TIED client project** (`copy_files.sh` or disposa
 |----|-------------|---------------|
 | A1 | REQ/ARCH/IMPL — new client projects default grammar v2 | New `REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT`, `ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT`, and `IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT` |
 | A2 | Template default — `Grammar-Version: v2` | [`templates/impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md) |
-| A3 | Authoring docs — flip “new project” default | [`pseudocode-grammar-v2-migration.md`](../tied/docs/pseudocode-grammar-v2-migration.md), [`pseudocode-writing-and-validation.md`](../tied/docs/pseudocode-writing-and-validation.md), [`client-development-index.md`](../tied/docs/client-development-index.md) |
-| A4 | Checklist gate — expect v2 header on new project IMPLs | [`agent-req-implementation-checklist.yaml`](../tied/docs/agent-req-implementation-checklist.yaml); optional Layer B SHAPE-007 |
+| A3 | Authoring docs — flip “new project” default | [`pseudocode-grammar-v2-migration.md`](../tied-bundle/docs/pseudocode-grammar-v2-migration.md), [`pseudocode-writing-and-validation.md`](../tied-bundle/docs/pseudocode-writing-and-validation.md), [`client-development-index.md`](../tied-bundle/docs/client-development-index.md) |
+| A4 | Checklist gate — expect v2 header on new project IMPLs | [`agent-req-implementation-checklist.yaml`](../tied-bundle/docs/agent-req-implementation-checklist.yaml); optional Layer B SHAPE-007 |
 | A5 | Evaluation cohort — `grammar_v2_header` dimension | `working/evaluation/evaluation-corpus.v1.yaml`; [`evidence-collection-conversation-patterns.md`](evidence-collection-conversation-patterns.md) §14 |
 | A6 | Disposable client smoke | `scripts/audit-grammar-v2-default.mjs` (new) or extend replay fixtures |
-| A7 | Vocab RECORD | [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) |
+| A7 | Vocab RECORD | [`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md) |
 
 ### Phases
 
@@ -192,7 +192,7 @@ Fix Layer B false positives/negatives without breaking D13 parser isolation.
 
 **Sponsor intent resolved:** Track B is a **stdd hygiene sidecar edit** that moves procedure **block-lead comments** inside procedure bodies for **author clarity** and **literal-copy alignment**. It generalizes the manual pattern from [`layerb-sidecar-fix-close-out.md`](layerb-sidecar-fix-close-out.md). Track C already **accepts** external and inter-procedure leads for Layer B validation; Track B is still required because validator tolerance does not fix author-visible placement or three-way alignment.
 
-The traceability stack is **[REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]** with **[ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]** and **[IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]**. Vocabulary is recorded in [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md): **sidecar block-lead sweep**, **external block-lead**, **inter-procedure block-lead leak**, **block-lead inventory**, and UPPER_SNAKE blocks `SCAN_BLOCK_LEAD_PLACEMENT`, `NORMALIZE_EXTERNAL_BLOCK_LEAD`, `NORMALIZE_INTER_PROCEDURE_BLOCK_LEAD`, `APPLY_WAVE_SWEEP`, `SYNC_AUTHORING_GUIDANCE`.
+The traceability stack is **[REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]** with **[ARCH-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]** and **[IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]**. Vocabulary is recorded in [`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md): **sidecar block-lead sweep**, **external block-lead**, **inter-procedure block-lead leak**, **block-lead inventory**, and UPPER_SNAKE blocks `SCAN_BLOCK_LEAD_PLACEMENT`, `NORMALIZE_EXTERNAL_BLOCK_LEAD`, `NORMALIZE_INTER_PROCEDURE_BLOCK_LEAD`, `APPLY_WAVE_SWEEP`, `SYNC_AUTHORING_GUIDANCE`.
 
 **Non-goals (explicit):**
 
@@ -205,7 +205,7 @@ The traceability stack is **[REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP]** with **[
 
 ### CITDP Plan gate — integrated advisory design
 
-Persisted CITDP: [`tied/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml`](../tied/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml).
+Persisted CITDP: [`tied-project/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml).
 
 - `depth_tier: integrated`, `profile_depth: integrated`, `gate_policy: advisory` — independent from `baseline-functional` and `data-integrity-migration` assurance profiles.
 - Module boundaries: detection (aligned with `isBlockLeadCommentLine` / tokenScan bounds), external normalization, inter-procedure normalization, wave orchestration, B4 doc/template sync.
@@ -234,7 +234,7 @@ All procedure block-leads **inside** procedure bodies (matches Layer B close-out
 
 | Metric | Count |
 |--------|-------|
-| Sidecar files (`tied/implementation-decisions/`) | 90 (+1 new Track B IMPL sidecar = 91 total) |
+| Sidecar files (`tied-project/implementation-decisions/`) | 90 (+1 new Track B IMPL sidecar = 91 total) |
 | Sidecars with external and/or inter-procedure leak patterns | 29 |
 | External-only block-leads (detected) | 73 |
 | Inter-procedure block-lead leaks (detected) | 95 |
@@ -251,7 +251,7 @@ Detection aligns with [`pseudocode-shared.ts`](../mcp-server/src/analysis/pseudo
 | `--write` | Apply edits in place (requires explicit wave or file list) |
 | `--wave B1\|B2\|B3` | Restrict to plan wave file list |
 | `--files path…` | Explicit sidecar paths (override wave) |
-| `--root tied/implementation-decisions` | Sidecar root (default) |
+| `--root tied-project/implementation-decisions` | Sidecar root (default) |
 | `--output path.json` | Optional inventory output path (default stdout) |
 | `--dry-run` | With `--write`, emit diffs without disk mutation |
 
@@ -269,15 +269,15 @@ Detection aligns with [`pseudocode-shared.ts`](../mcp-server/src/analysis/pseudo
 |------|-------|-------|---------------|
 | **B1** | Pilot — checklist, envelope, quality | 5 | `IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT`, `IMPL-REQUEST_EVIDENCE_ENVELOPE`, `IMPL-QUALITY_PSEUDOCODE_VALIDATOR`, `IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER`, `IMPL-QUALITY_BINDING_INVENTORY` |
 | **B2** | MCP, pseudocode engine, agentstream core | 25 | `IMPL-PSEUDOCODE_ANALYSIS_ENGINE`, `IMPL-PSEUDOCODE_SHARED_PRIMITIVES`, `IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE`, `IMPL-PSEUDOCODE_TYPED_FLOW`, `IMPL-PSEUDOCODE_GRAMMAR_V2_DEFAULT`, `IMPL-TIED_YAML_CANONICALIZER`, `IMPL-TIED_YAML_STYLE_RESOLVER`, `IMPL-TIED_FILES`, `IMPL-MCP_LEAP_PROPOSAL_QUEUE`, `IMPL-MCP_FEEDBACK_TOOLS`, `IMPL-MCP_USAGE_METRICS`, `IMPL-GOAGENT-PIPELINE`, `IMPL-GOAGENT-EXECUTOR`, `IMPL-GOAGENT-CHECKLIST`, `IMPL-GOAGENT-FEATURESPEC`, `IMPL-GOAGENT-NON-COMPACT-HTML-FORMAT`, `IMPL-TIED_ADVERSARIAL_INQUIRY`, `IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST`, `IMPL-TIED_CLAIMS_EVIDENCE_REVIEW`, `IMPL-EVIDENCE_CHAIN_PROFILE`, `IMPL-EVIDENCE_CHAIN_REPORT`, `IMPL-PROMPT_TYPE_GLOBAL_SKILLS`, `IMPL-PROMPT_TYPE_SUBAGENT`, `IMPL-VOCABULARY_ANALYSIS`, `IMPL-FEAT_ORCHESTRATION_MCP` |
-| **B3** | Remaining sidecars (excl. B1/B2 and `IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP`) | 60 | All other `IMPL-*-pseudocode.md` under `tied/implementation-decisions/` |
-| **B4** | Template + format guide sync | docs | [`pseudocode-format-and-practices.md`](../tied/docs/pseudocode-format-and-practices.md), [`impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md) |
+| **B3** | Remaining sidecars (excl. B1/B2 and `IMPL-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP`) | 60 | All other `IMPL-*-pseudocode.md` under `tied-project/implementation-decisions/` |
+| **B4** | Template + format guide sync | docs | [`pseudocode-format-and-practices.md`](../tied-bundle/docs/pseudocode-format-and-practices.md), [`impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md) |
 
 **Per-file gate:** `pseudocode_validate` ok for owning IMPL token. **Per-wave gate:** `--check` inventory zero for wave scope; `tied_validate_consistency` after each B1–B3 wave. Commit wave inventory JSON alongside sidecar diffs.
 
 ### Pass criteria
 
 - Full-repo audit: 0 external-only leads, 0 inter-procedure leaks after B3.
-- [`pseudocode-format-and-practices.md`](../tied/docs/pseudocode-format-and-practices.md) mandates internal placement for new/changed procedures (B4).
+- [`pseudocode-format-and-practices.md`](../tied-bundle/docs/pseudocode-format-and-practices.md) mandates internal placement for new/changed procedures (B4).
 - Track C analysis tests remain green; no validator regressions.
 
 ### Track B risks
@@ -305,7 +305,7 @@ Sponsor procedure source: Cursor plan `combined_hygiene_close-out_1da331ae.plan.
 
 **Sponsor intent resolved:** Step 7 is a **combined hygiene close-out** — finish machine and process gates for Track B (integrated), minimal `close_out` for Track C (inquiry waived), reconcile Track A (already machine-closed), then one CHANGELOG narrative and **one** `proposed-commit-message.txt` spanning A + C + B. **Do not** `git add`, `git commit`, or `git push` during close-out preparation.
 
-**Vocabulary** (RECORD in [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md)): **combined hygiene close-out**, **capstone envelope** (Track B integrated `request-evidence-envelope.v1.json` with verification + close_out inquiry runs), **single combined commit** (one feat message; `commit_deferred: true` in handoff).
+**Vocabulary** (RECORD in [`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md)): **combined hygiene close-out**, **capstone envelope** (Track B integrated `request-evidence-envelope.v1.json` with verification + close_out inquiry runs), **single combined commit** (one feat message; `commit_deferred: true` in handoff).
 
 **Non-goals (explicit):**
 
@@ -321,9 +321,9 @@ Sponsor procedure source: Cursor plan `combined_hygiene_close-out_1da331ae.plan.
 
 | Track | Priority | REQ (primary) | Authoritative Tracker | CITDP | Close-out role |
 |-------|----------|---------------|----------------------|-------|------------------|
-| **A** | P0 | [`REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT`](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) | [`working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml`](../working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml) | [`tied/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml`](../tied/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) | **Reconcile only** — machine close-out already done; retire stale per-track proposed commit text |
-| **C** | P1 | [`REQ-PSEUDOCODE_STATIC_ANALYSIS`](../tied/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml) (validator slice) | [`working/REQ-PSEUDOCODE_STATIC_ANALYSIS/agent-req-implementation-checklist-track-c.yaml`](../working/REQ-PSEUDOCODE_STATIC_ANALYSIS/agent-req-implementation-checklist-track-c.yaml) | Draft → persist: [`working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml`](../working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml) → `tied/citdp/CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-track-c-validator-hardening.yaml` (or project naming per `citdp_record_write`) | **Minimal** `close_out` — `depth_tier: minimal`, waiver `inquiry_not_required_validator_only`; verification receipt already `allowed: true` |
-| **B** | P2 | [`REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP`](../tied/requirements/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) | [`working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/agent-req-implementation-checklist.yaml`](../working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/agent-req-implementation-checklist.yaml) | [`tied/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml`](../tied/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) | **Capstone** — integrated verification + close_out inquiry, gates, **`--envelope-blocking`** unified runner, **capstone envelope** |
+| **A** | P0 | [`REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT`](../tied-project/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) | [`working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml`](../working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/agent-req-implementation-checklist.yaml) | [`tied-project/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) | **Reconcile only** — machine close-out already done; retire stale per-track proposed commit text |
+| **C** | P1 | [`REQ-PSEUDOCODE_STATIC_ANALYSIS`](../tied-project/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml) (validator slice) | [`working/REQ-PSEUDOCODE_STATIC_ANALYSIS/agent-req-implementation-checklist-track-c.yaml`](../working/REQ-PSEUDOCODE_STATIC_ANALYSIS/agent-req-implementation-checklist-track-c.yaml) | Draft → persist: [`working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml`](../working/REQ-PSEUDOCODE_STATIC_ANALYSIS/CITDP-track-c-validator-hardening.yaml) → `tied-project/citdp/CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-track-c-validator-hardening.yaml` (or project naming per `citdp_record_write`) | **Minimal** `close_out` — `depth_tier: minimal`, waiver `inquiry_not_required_validator_only`; verification receipt already `allowed: true` |
+| **B** | P2 | [`REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP`](../tied-project/requirements/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) | [`working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/agent-req-implementation-checklist.yaml`](../working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/agent-req-implementation-checklist.yaml) | [`tied-project/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml) | **Capstone** — integrated verification + close_out inquiry, gates, **`--envelope-blocking`** unified runner, **capstone envelope** |
 
 **Process orchestration Tracker (no IMPL):** [`working/pseudocode-hygiene-closeout/agent-req-implementation-checklist.yaml`](../working/pseudocode-hygiene-closeout/agent-req-implementation-checklist.yaml) — references the three REQ trackers above; owns Step 7 refine/close-out checklist dispositions only.
 
@@ -340,8 +340,8 @@ Sponsor procedure source: Cursor plan `combined_hygiene_close-out_1da331ae.plan.
 Persisted product CITDPs remain authoritative per track. Step 7 adds a **non-product process addendum** only:
 
 - **Draft (refine):** [`working/pseudocode-hygiene-closeout/CITDP-combined-hygiene-close-out.yaml`](../working/pseudocode-hygiene-closeout/CITDP-combined-hygiene-close-out.yaml) — documents orchestration, single-commit policy, per-track persist paths, and proof boundaries. **Not** a fourth product CITDP; do not conflate with `[REQ-*]` tokens.
-- **Track C persist path (close-out):** finalize validator-hardening draft into `tied/citdp/` via `citdp_record_write` + `lint_yaml`; record waiver `close_out_inquiry_waiver: inquiry_not_required_validator_only` on the persisted record (already in draft).
-- **Track B:** use existing [`CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP`](../tied/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml); optional **wave note** in CITDP body at close-out citing combined commit + capstone envelope run_id (append-only LEAP-safe note, not behavior change).
+- **Track C persist path (close-out):** finalize validator-hardening draft into `tied-project/citdp/` via `citdp_record_write` + `lint_yaml`; record waiver `close_out_inquiry_waiver: inquiry_not_required_validator_only` on the persisted record (already in draft).
+- **Track B:** use existing [`CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP.yaml); optional **wave note** in CITDP body at close-out citing combined commit + capstone envelope run_id (append-only LEAP-safe note, not behavior change).
 - **Track A:** no CITDP mutation unless envelope hash reconciliation fails after B sidecar edits.
 
 **Profile summary:**
@@ -395,7 +395,7 @@ If any **blocking** gate or envelope gap remains, label work **incomplete**.
 | Risk | Mitigation |
 |------|------------|
 | Verification activation reused from pre_implementation | New run_ids per phase; collect activation per `phase-{verification,close_out}/` |
-| Track C CITDP never persisted | Explicit close-out step: draft → `tied/citdp/` + lint |
+| Track C CITDP never persisted | Explicit close-out step: draft → `tied-project/citdp/` + lint |
 | Stale Track A commit message misleads reviewers | Combined message supersedes; cross-link hygiene plan Step 7 |
 | `# [REQ\|ARCH\|IMPL]-` detection limit | Document non-blocking: multi-line `# How:` above procedures may remain visually external |
 | Pre-existing Layer B diagnostics on individual sidecars | Not introduced by sweep; list in handoff if still present |

@@ -283,12 +283,12 @@ TIED does not remove human responsibility. It concentrates human responsibility 
 
 - [TIED Value Proposition Matrix](tied-value-proposition-matrix.md)
 - [Vocabulary layer, TIED, LEAP, and CITDP](vocabulary-layer-tied-leap-citdp.md)
-- [TIED fidelity research methodology](../tied/docs/tied-fidelity-research.md)
-- [Client development index](../tied/docs/client-development-index.md)
-- [TIED processes](../tied/docs/processes.md)
-- [Implementation decisions and pseudo-code](../tied/docs/implementation-decisions.md)
-- [LEAP: Logic Elevation And Propagation](../tied/docs/LEAP.md)
-- [Quality evidence manifest](../tied/docs/quality-evidence-manifest.md)
+- [TIED fidelity research methodology](../tied-bundle/docs/tied-fidelity-research.md)
+- [Client development index](../tied-bundle/docs/client-development-index.md)
+- [TIED processes](../tied-bundle/docs/processes.md)
+- [Implementation decisions and pseudo-code](../tied-bundle/docs/implementation-decisions.md)
+- [LEAP: Logic Elevation And Propagation](../tied-bundle/docs/LEAP.md)
+- [Quality evidence manifest](../tied-bundle/docs/quality-evidence-manifest.md)
 
 ---
 

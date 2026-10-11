@@ -2,9 +2,9 @@
 
 **Purpose:** Methodology-side **policy and tooling** so every TIED **client** can reach **`fleet-migrated-client`** (grammar v2 + in-scope constraint gates). This repo holds **program** truth—not per-client migration history.
 
-**Foundation:** [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md) (Tracks A/C/B). **Grammar authoring:** [`tied/docs/pseudocode-grammar.v2.md`](../tied/docs/pseudocode-grammar.v2.md).
+**Foundation:** [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md) (Tracks A/C/B). **Grammar authoring:** [`tied-bundle/docs/pseudocode-grammar.v2.md`](../tied-bundle/docs/pseudocode-grammar.v2.md).
 
-**TIED:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) (orchestrator **closed**) · [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml) (continuous ops) · [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) (G4 bootstrap) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · vocab [`pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) § fleet constraint v2 migration.
+**TIED:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) (orchestrator **closed**) · [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml) (continuous ops) · [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied-project/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) (G4 bootstrap) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied-project/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · vocab [`pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md) § fleet constraint v2 migration.
 
 ---
 
@@ -26,7 +26,7 @@
 
 **Standing intent:** Continuing Track B after NB-1/NB-2 close-out uses each batch plan’s **“Default if silent”** roster and exclusion rules unless the sponsor explicitly defers the whole tranche. Plan table rows that say “no work if silent” for batch authorization are superseded for **ongoing program execution** by this policy when prior acceptance established Track B continuation.
 
-**Cross-reference:** [`tied/docs/ai-principles.md`](../tied/docs/ai-principles.md) § Sponsor default-proceed (planned development). General taxonomy: [`tied/vocab/sponsor-agent-relationship.md`](../tied/vocab/sponsor-agent-relationship.md) (**reversible choice** / **costly choice**).
+**Cross-reference:** [`tied-bundle/docs/ai-principles.md`](../tied-bundle/docs/ai-principles.md) § Sponsor default-proceed (planned development). General taxonomy: [`tied-project/vocab/sponsor-agent-relationship.md`](../tied-project/vocab/sponsor-agent-relationship.md) (**reversible choice** / **costly choice**).
 
 ---
 
@@ -43,7 +43,7 @@
 
 **Track B (not enrolled):** **18/18** **fleet-migrated-client** as of 2026-09-13 (including **`tied-win-diff`** migrated post-NB-4 on sponsor request; wave `W-ext-tied-win-diff-1`). G4 CI validates stdd bootstrap and enrolled regression; per-client proof remains G3 receipts + client `working/REQ-PSEUDOCODE_MIGRATION/gates/`.
 
-**NB-1 (tranche zero):** **Complete** (2026-09-13) — five wave-1 clients; machine close-out [`REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO`](../tied/requirements/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml). Plan: [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md).
+**NB-1 (tranche zero):** **Complete** (2026-09-13) — five wave-1 clients; machine close-out [`REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO`](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO.yaml). Plan: [`pseudocode-constraint-v2-fleet-nb1-plan.md`](pseudocode-constraint-v2-fleet-nb1-plan.md).
 
 **Next batch — NB-4 (Track B final tranche):** Complete — see **Completed batch — NB-4** below.
 
@@ -75,7 +75,7 @@
 
 ## Continuous maintenance (always)
 
-**Primary:** [G4 maintenance runbook](pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md) · [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml)
+**Primary:** [G4 maintenance runbook](pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md) · [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml)
 
 ```bash
 node scripts/run-fleet-g4-maintenance.mjs
@@ -99,7 +99,7 @@ On success, updates [`program-status.v1.yaml`](../working/fleet-constraint-v2/pr
 
 ## New TIED clients (post–Track B)
 
-**Primary:** [New client adherence runbook](pseudocode-new-client-tied-adherence-runbook.md) · [REQ-TIED_NEW_CLIENT_ADHERENCE](../tied/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml) · [Program plan](pseudocode-new-client-tied-adherence-plan.md)
+**Primary:** [New client adherence runbook](pseudocode-new-client-tied-adherence-runbook.md) · [REQ-TIED_NEW_CLIENT_ADHERENCE](../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml) · [Program plan](pseudocode-new-client-tied-adherence-plan.md)
 
 After `copy_files.sh` on a **new** client repo:
 
@@ -145,7 +145,7 @@ Checks: bootstrap enforcement, stale waivers, **enrolled_track_regression** (5 r
 
 **Not critical for TIED development:** This clone is fleet **inventory / qualification coverage only**. stdd methodology, MCP, and analyzer work do **not** depend on tied-win-diff pseudo-code fidelity. Do not treat its sidecar as canonical `IMPL-TIED_FILES` essence.
 
-**Fleet tied-win-diff bypass** (see [`pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) § tied-win-diff qualification client):
+**Fleet tied-win-diff bypass** (see [`pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md) § tied-win-diff qualification client):
 
 - Default excluded from NB-2..NB-4 batches; post-NB-4 one-off wave without orchestrator reopen.
 - G3 uses a **v2 stub** sidecar; full pre-fleet body archived in the client repo only.

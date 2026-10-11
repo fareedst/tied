@@ -95,7 +95,7 @@ flowchart TB
 | single completion entrypoint | Gate validate at verification/close_out always builds/refreshes envelope and merges blocking decision | W8-D4 |
 | dependable close-out | All three completion signals pass under default skill invocation without operator flags | Wave 8 acceptance |
 
-**PRELOAD:** `tied/vocab/prompt-composer.md`, `tied/vocab/quality-assurance.md`, `tied/vocab/pseudocode-and-citdp.md`  
+**PRELOAD:** `tied-project/vocab/prompt-composer.md`, `tied-project/vocab/quality-assurance.md`, `tied-project/vocab/pseudocode-and-citdp.md`  
 **VALIDATE:** Terms above reconciled to plan deliverables and corpus rows; no new glossary files required.
 
 ---

@@ -1,0 +1,39 @@
+IMPL-CHECKLIST-PROCESS-REVIEW:
+  code_locations:
+    files:
+      - description: "Generic review procedure"
+        path: "docs/checklist-process-review-plan.md"
+      - description: "Reusable review worksheet"
+        path: "docs/checklist-process-review-checklist.md"
+  cross_references:
+    - "ARCH-CHECKLIST-PROCESS-REVIEW"
+    - "REQ-CHECKLIST-PROCESS-REVIEW"
+  decision: "Author and commit the two phase-1 markdown deliverables; no runtime, checklist YAML, or deletion in this REQ."
+  implementation_approach:
+    details:
+      - "Write checklist doc from A–J outline"
+      - "Write plan doc from linked plan sections"
+    summary: "Documentation-only delivery per IMPL pseudo-code."
+  metadata:
+    created:
+      author: "agent"
+      date: "2026-10-10"
+  name: "Checklist process review doc delivery"
+  rationale:
+    benefits:
+      - "Reusable audit template"
+    problems_solved:
+      - "Missing operator runbook"
+    why: "Implement linked plan phase 1 only."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-CHECKLIST-PROCESS-REVIEW"
+    code_annotations: []
+    requirements:
+      - "REQ-CHECKLIST-PROCESS-REVIEW"
+    tests: []
+  validation_evidence:
+    - date: "2026-10-10"
+      notes: "docs/checklist-process-review-*.md shipped"
+      result: "pass"

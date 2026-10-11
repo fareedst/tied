@@ -90,9 +90,9 @@ methodology_publication:
   bootstrap_coverage: "mcp-server/src/e2e/bootstrap-and-load.test.ts"
   client_artifacts:
     - "REQ/ARCH/IMPL methodology templates and pseudo-code sidecar"
-    - "tied/docs/pseudocode-fidelity-audit-agent-prompt.md"
-    - "tied/docs/tied-fidelity-research.md"
-    - "tied/vocab/fidelity-research.md"
+    - "tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md"
+    - "tied-bundle/docs/tied-fidelity-research.md"
+    - "tied-project/vocab/fidelity-research.md"
   client_consistency: "pass with pre-existing legacy seed-detail exemptions"
   runtime_distribution: "not included; methodology publication supplies contracts and procedure, not a client runtime adapter"
   status: "complete"
@@ -117,7 +117,7 @@ quality_profiles:
     rationale: "Finding lifecycle transitions and deterministic reruns are stateful workflows."
 task:
   base_path_confirmed: "/Users/fareed/Documents/dev/chatgpt/stdd/tied"
-  canonical_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  canonical_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   created: "2026-08-09"
   id: "TIED_FIDELITY_RESEARCH_FIRST_SLICE_2026-08-09"
   implementation_freeze: false
@@ -126,13 +126,13 @@ task:
   title: "TIED fidelity research first vertical slice"
 vocabulary:
   preload:
-    - "tied/vocab/fidelity-research.md"
-    - "tied/vocab/leap-proposal-queue.md"
-    - "tied/vocab/pseudocode-and-citdp.md"
-    - "tied/vocab/quality-assurance.md"
-    - "tied/vocab/tied-methodology.md"
-    - "tied/vocab/tied-yaml-mcp.md"
-  recorded_file: "tied/vocab/fidelity-research.md"
+    - "tied-project/vocab/fidelity-research.md"
+    - "tied-project/vocab/leap-proposal-queue.md"
+    - "tied-project/vocab/pseudocode-and-citdp.md"
+    - "tied-project/vocab/quality-assurance.md"
+    - "tied-project/vocab/tied-methodology.md"
+    - "tied-project/vocab/tied-yaml-mcp.md"
+  recorded_file: "tied-project/vocab/fidelity-research.md"
   routing_updated: true
   term_map:
     divergent_edge: "First failed translation edge."

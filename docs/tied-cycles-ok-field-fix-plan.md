@@ -30,7 +30,7 @@ This pass resolves ambiguities and makes the plan implementation-ready. No code 
 4. **`depth_tier: minimal`** for implementation tracking — additive MCP field, no algorithm or bootstrap behavior change.
 5. **CITDP persistence deferred** for build execution under operational fix policy; reference `FIX-TIED_CYCLES_OK_FIELD` in PR and Panorama handoff only.
 
-**Vocabulary RECORD/VALIDATE:** Terms above recorded in this plan; no new glossary file required. Cross-reference `[PROC-TIED_DEPENDENCY_GRAPH]`, `[REQ-EVIDENCE_CHAIN_PROFILE]`, and `tied/vocab/tied-yaml-mcp.md` at doc update time.
+**Vocabulary RECORD/VALIDATE:** Terms above recorded in this plan; no new glossary file required. Cross-reference `[PROC-TIED_DEPENDENCY_GRAPH]`, `[REQ-EVIDENCE_CHAIN_PROFILE]`, and `tied-project/vocab/tied-yaml-mcp.md` at doc update time.
 
 ---
 
@@ -91,7 +91,7 @@ For the default `graph: "requirements"` parameter, `ok` reflects requirement-gra
 - Update MCP tool `description` string to mention `ok`.
 - New contract test file `mcp-server/src/tools/tied-cycles-mcp.test.ts` plus **registration in `mcp-server/package.json`** `test` script (tools tests are explicitly listed, not globbed).
 - Extend `mcp-server/src/fidelity-research/evidence-chain-profile.mcp.test.ts` with explicit `tied_cycles` structural-row assertion (regression guard).
-- Update `tools/bundled-tied-yaml-skill/reference.md`, `tied/vocab/tied-yaml-mcp.md`, and `CHANGELOG.md`.
+- Update `tools/bundled-tied-yaml-skill/reference.md`, `tied-project/vocab/tied-yaml-mcp.md`, and `CHANGELOG.md`.
 
 ### Out of scope
 
@@ -160,7 +160,7 @@ Run tests from `mcp-server/` (`npm test` cwd). Repo base path is `../tied` relat
 |---|------|-------|--------------|------------|
 | 1 | Zero cycles — requirements | `useRepoTiedBase()` | `{}` or `{ graph: "requirements" }` | `typeof parsed.ok === "boolean"`; `parsed.has_cycles === false`; `parsed.cycles.length === 0`; **`parsed.ok === true`** |
 | 2 | Zero cycles — implementation | `useRepoTiedBase()` | `{ graph: "implementation" }` | Same `ok`/`has_cycles`/`cycles` invariants |
-| 3 | Non-empty cycles — requirements | Temp dir; write minimal `tied/requirements.yaml` with `REQ-CYCLE-A` → `depends_on: [REQ-CYCLE-B]` and `REQ-CYCLE-B` → `depends_on: [REQ-CYCLE-A]` | `{ graph: "requirements" }` | `parsed.has_cycles === true`; `parsed.cycles.length > 0`; **`parsed.ok === false`** |
+| 3 | Non-empty cycles — requirements | Temp dir; write minimal `tied-project/requirements.yaml` with `REQ-CYCLE-A` → `depends_on: [REQ-CYCLE-B]` and `REQ-CYCLE-B` → `depends_on: [REQ-CYCLE-A]` | `{ graph: "requirements" }` | `parsed.has_cycles === true`; `parsed.cycles.length > 0`; **`parsed.ok === false`** |
 | 4 | Derivation invariant | Either setup from #1 or #3 | Same | **`parsed.ok === !parsed.has_cycles`** |
 | 5 | Backward compatibility | #1 setup | `{}` | `Array.isArray(parsed.cycles)`; `typeof parsed.has_cycles === "boolean"` (existing keys unchanged) |
 
@@ -320,7 +320,7 @@ Replace `<repo-root>` with absolute path to `stdd`.
    | `has_cycles` | boolean | `true` when `cycles.length > 0` |
    | `ok` | boolean | Pass/fail for the selected graph: `ok === !has_cycles` |
 
-2. **`tied/vocab/tied-yaml-mcp.md`** — extend MCP catalog note for `tied_cycles`: structural tools expose **`ok`** as pass/fail; for `tied_cycles`, `ok === !has_cycles` for the requested `graph` scope.
+2. **`tied-project/vocab/tied-yaml-mcp.md`** — extend MCP catalog note for `tied_cycles`: structural tools expose **`ok`** as pass/fail; for `tied_cycles`, `ok === !has_cycles` for the requested `graph` scope.
 
 3. **`CHANGELOG.md`** — entry under MCP tools: `tied_cycles` now includes `ok` aligned with `has_cycles` for evidence-chain / E4 structural parity.
 
@@ -354,7 +354,7 @@ Before marking complete, executor must satisfy:
 | TIED consistency | `tied-cli.sh tied_validate_consistency` with `TIED_BASE_PATH=<repo>/tied` | `ok: true` |
 | Docs | Phase 4 files | Response shape documented |
 
-**Tracker (create at build time):** copy `tied/docs/agent-req-implementation-checklist.yaml` to  
+**Tracker (create at build time):** copy `tied-bundle/docs/agent-req-implementation-checklist.yaml` to  
 `working/FIX-TIED_CYCLES_OK_FIELD/tracker-20260827.yaml`  
 and record steps: RED contract tests → GREEN handler → profile regression → docs → verification.
 
@@ -383,7 +383,7 @@ Executed in Panorama repo after consuming fixed TIED version (`copy_files.sh` / 
 - `working/TIED-3.0-ALIGNMENT-SYNC/e4-structural-comparison.v1.json`
 - `working/TIED-3.0-ALIGNMENT-SYNC/evidence-chain-profile-e4-post.v1.json`
 - `working/TIED-3.0-ALIGNMENT-SYNC/e0-pilot-baseline-reference.v1.json`
-- `tied/citdp/CITDP-TIED-3.0-ALIGNMENT-SYNC.yaml`
+- `tied-project/citdp/CITDP-TIED-3.0-ALIGNMENT-SYNC.yaml`
 
 **Panorama MCP target check:** confirm `tied_config_get_base_path` before writes ([AGENTS.md](../AGENTS.md)).
 
@@ -423,7 +423,7 @@ flowchart TD
 - [ ] `evidence-chain-profile.mcp.test.js` asserts `tied_cycles` structural row `ok: true`
 - [ ] `npm test` in `mcp-server/` passes
 - [ ] `tied-cli.sh tied_cycles '{}'` returns `ok: true` on methodology repo
-- [ ] Bundled skill reference and `tied/vocab/tied-yaml-mcp.md` updated
+- [ ] Bundled skill reference and `tied-project/vocab/tied-yaml-mcp.md` updated
 - [ ] `CHANGELOG.md` updated
 - [ ] `tied_validate_consistency` passes on repo `tied/`
 - [ ] Panorama notified to execute Phase 6 on pinned TIED version

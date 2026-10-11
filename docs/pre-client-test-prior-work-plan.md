@@ -13,12 +13,12 @@ The next **client cohort test** is graded on two independent arms:
 
 | Arm | Primary proof | Shipped stdd tokens / surfaces |
 |-----|---------------|--------------------------------|
-| **Grammar v2** | New-project bootstrap declares `Grammar-Version: v2` | [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml), `scripts/audit-grammar-v2-default.mjs`, §14 in [`evidence-collection-conversation-patterns.md`](evidence-collection-conversation-patterns.md) |
-| **Evidence** | Integrated client `REQ-*` close-out with zero blocking envelope gaps | [REQ-REQUEST_EVIDENCE_ENVELOPE](../tied/requirements/REQ-REQUEST_EVIDENCE_ENVELOPE.yaml), [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../tied/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml), Wave 6 profile/manifest/PSA expectations |
+| **Grammar v2** | New-project bootstrap declares `Grammar-Version: v2` | [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied-project/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml), `scripts/audit-grammar-v2-default.mjs`, §14 in [`evidence-collection-conversation-patterns.md`](evidence-collection-conversation-patterns.md) |
+| **Evidence** | Integrated client `REQ-*` close-out with zero blocking envelope gaps | [REQ-REQUEST_EVIDENCE_ENVELOPE](../tied-project/requirements/REQ-REQUEST_EVIDENCE_ENVELOPE.yaml), [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../tied-project/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml), Wave 6 profile/manifest/PSA expectations |
 
 **Prior to starting the client test**, work splits into **stdd readiness** (once per methodology pin) and **operator setup** (corpus row + bootstrap). **During** the test, the client tree owns the evidence arm (Tracker, inquiry, gates, envelope).
 
-Vocabulary: preload [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) (grammar v2, `grammar_v2_header audit dimension`) and [`tied/vocab/quality-assurance.md`](../tied/vocab/quality-assurance.md) (evaluation corpus, comparable arms, proof boundary). Process-only label **prior-work plan** names this document’s S/O/D sequencing (not a new glossary entry).
+Vocabulary: preload [`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md) (grammar v2, `grammar_v2_header audit dimension`) and [`tied-project/vocab/quality-assurance.md`](../tied-project/vocab/quality-assurance.md) (evaluation corpus, comparable arms, proof boundary). Process-only label **prior-work plan** names this document’s S/O/D sequencing (not a new glossary entry).
 
 ---
 
@@ -34,7 +34,7 @@ Vocabulary: preload [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudoc
 | **O-items** | Before bootstrap | Operator (gitignored corpus + client tree) | [Operator prior work](#operator-prior-work--before-client-bootstrap) |
 | **D-items** | After baseline client commit | Client `working/{REQ}/` integrated Tracker | [During the client test](#during-the-client-test-evidence-arm--not-prior-but-graded) |
 
-Vocabulary aligns with existing records in [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) and [`tied/vocab/quality-assurance.md`](../tied/vocab/quality-assurance.md). No new glossary terms required.
+Vocabulary aligns with existing records in [`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md) and [`tied-project/vocab/quality-assurance.md`](../tied-project/vocab/quality-assurance.md). No new glossary terms required.
 
 ### Refine disposition
 
@@ -155,7 +155,7 @@ Post-session (envelope batch; grammar audit when corpus row expects it):
 scripts/tied-post-session.sh {client_id} --corpus working/evaluation/evaluation-corpus.v1.yaml
 ```
 
-Details: runbook §D and [`tied/docs/request-evidence-envelope.md`](../tied/docs/request-evidence-envelope.md).
+Details: runbook §D and [`tied-bundle/docs/request-evidence-envelope.md`](../tied-bundle/docs/request-evidence-envelope.md).
 
 ---
 

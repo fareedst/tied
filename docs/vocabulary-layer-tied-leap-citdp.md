@@ -1,6 +1,6 @@
 # A vocabulary layer before requirements
 
-Requirements, architecture, and implementation specs are the right place to lock behavior—but they are a heavy place to *start* a conversation. In TIED projects we add a **domain vocabulary layer** under `tied/vocab/`: short glossaries where we agree on names and distinctions first. TIED, CITDP, and LEAP then formalize and keep that language honest as code changes.
+Requirements, architecture, and implementation specs are the right place to lock behavior—but they are a heavy place to *start* a conversation. In TIED projects we add a **domain vocabulary layer** under `tied-project/vocab/`: short glossaries where we agree on names and distinctions first. TIED, CITDP, and LEAP then formalize and keep that language honest as code changes.
 
 ---
 
@@ -62,7 +62,7 @@ Most project glossaries describe the system after it exists. Ours is meant to be
 | Rarely tied to builds | Feeds pseudo-code block names, REQ criteria, Help/docs |
 | Synonyms left informal | One **preferred term** per concept; others marked avoid/legacy |
 
-Files live at `tied/vocab/<topic>.md`. The index [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) lists every glossary and **cross-topic** notes—short relation graphs for features that span modules. When that full index grows large, agents bootstrap from [`tied/vocab/routing.md`](../tied/vocab/routing.md) (~70 lines) and PRELOAD only matched glossaries.
+Files live at `tied-project/vocab/<topic>.md`. The index [`tied-project/vocab/domain-references.md`](../tied-project/vocab/domain-references.md) lists every glossary and **cross-topic** notes—short relation graphs for features that span modules. When that full index grows large, agents bootstrap from [`tied-project/vocab/routing.md`](../tied-project/vocab/routing.md) (~70 lines) and PRELOAD only matched glossaries.
 
 Algorithms stay out of the glossaries on purpose. Step-by-step logic belongs in IMPL `essence_pseudocode`; the glossary only holds stable names and relationships so refactors do not rewrite the product dictionary every week.
 
@@ -74,7 +74,7 @@ TIED is our traceability stack: requirements, architecture decisions, implementa
 
 | TIED layer | Role | What vocabulary contributes |
 |---|---|---|
-| REQ | Intent — what and why | Satisfaction criteria cite `tied/vocab/*.md` paths alongside behavior |
+| REQ | Intent — what and why | Satisfaction criteria cite `tied-project/vocab/*.md` paths alongside behavior |
 | ARCH | Intent — structural how | Module and boundary names match glossary preferred terms |
 | IMPL pseudo-code | Intent — operational how | Block names reuse glossary terms (`LOAD_QUEUE`, `PARSE_AND_RESOLVE`, …) |
 | Tests + code | Proof of intent | Block lead comments copy the same words from pseudo-code |
@@ -85,7 +85,7 @@ If pseudo-code uses three different words for one idea, tests and REQ criteria s
 
 ## How vocabulary feeds CITDP
 
-**CITDP** (Change Impact and Test Design Procedure) is structured analysis *before* code: current vs desired behavior, non-goals, impact, risks, and test strategy. Records land in `tied/citdp/CITDP-*.yaml`.
+**CITDP** (Change Impact and Test Design Procedure) is structured analysis *before* code: current vs desired behavior, non-goals, impact, risks, and test strategy. Records land in `tied-project/citdp/CITDP-*.yaml`.
 
 Vocabulary helps CITDP in three practical ways:
 
@@ -118,7 +118,7 @@ Vocabulary fits LEAP because names are intentionally **thin and stable**:
 
 ## Four touchpoints (humans and agents)
 
-Whether you are discussing a feature in chat or an agent is executing the implementation checklist, the same four modes apply (`sub-vocabulary-sync` in the agent checklist; `[PROC-VOCABULARY_INDEX]` in `tied/docs/processes.md`):
+Whether you are discussing a feature in chat or an agent is executing the implementation checklist, the same four modes apply (`sub-vocabulary-sync` in the agent checklist; `[PROC-VOCABULARY_INDEX]` in `tied-bundle/docs/processes.md`):
 
 | Mode | When | What to do |
 |---|---|---|
@@ -131,7 +131,7 @@ Whether you are discussing a feature in chat or an agent is executing the implem
 
 ## A simple workflow for day-to-day discussion
 
-1. Open [`tied/vocab/routing.md`](../tied/vocab/routing.md).
+1. Open [`tied-project/vocab/routing.md`](../tied-project/vocab/routing.md).
 2. Match your topic to one or two glossaries; open only those.
 3. Agree preferred terms, distinctions, and relations **there**—that is the *understanding* step, not a long REQ draft.
 4. When behavior must become testable, formalize in REQ/ARCH/IMPL using those exact terms—that is the *intent* step.
@@ -146,12 +146,12 @@ You do not need to read every glossary every time. The routing index, full index
 
 **VOCAB is ontology-adjacent, not an ontology.** Closest formal cousin is **SKOS** (preferred/alt labels, concept schemes), not **OWL/RDF** with axioms and a reasoner.
 
-| Ontology world | Domain vocabulary (`tied/vocab/`) |
+| Ontology world | Domain vocabulary (`tied-project/vocab/`) |
 |---|---|
 | Shared conceptualization of a domain | Yes — product domain named before specs |
 | Classes / individuals / typed properties | No — Markdown terms + tables + prose links |
 | `skos:prefLabel` / `altLabel` | Preferred term vs Avoid/synonym tables |
-| Concept scheme / modules | Federated `tied/vocab/<topic>.md` + index (+ routing when large) |
+| Concept scheme / modules | Federated `tied-project/vocab/<topic>.md` + index (+ routing when large) |
 | Object properties / graph edges | Cross-topic notes (informal) |
 | Multi-surface lexicalization | Naming bridges (UI / YAML / CLI / code) |
 | OWL axioms, open-world, reasoner | Intentionally absent |
@@ -165,11 +165,11 @@ An ontology asks “what exists and what follows?”; VOCAB asks “when we say 
 
 - [TIED value proposition matrix](tied-value-proposition-matrix.md) — reader-oriented map from vocabulary through executable evidence
 - [Certified TIED workflows thesis](tied-certified-workflows-thesis.md) — how approved vocabulary and REQ meaning reduce downstream review
-- [Vocabulary index analysis and standards](../tied/docs/vocabulary-index-analysis-and-standards.md) — corpus structure, governance, agent touchpoints
-- [Client development index](../tied/docs/client-development-index.md) — one-page map of TIED, CITDP, LEAP, and tooling
-- [LEAP overview](../tied/docs/LEAP.md) — why IMPL-first stack sync beats hunting source files
+- [Vocabulary index analysis and standards](../tied-bundle/docs/vocabulary-index-analysis-and-standards.md) — corpus structure, governance, agent touchpoints
+- [Client development index](../tied-bundle/docs/client-development-index.md) — one-page map of TIED, CITDP, LEAP, and tooling
+- [LEAP overview](../tied-bundle/docs/LEAP.md) — why IMPL-first stack sync beats hunting source files
 - [TIED domain vocabulary research prompt](tied-domain-vocabulary-research-prompt.md) — copy-paste prompt to replicate the pattern in another repo
 
 ---
 
-*Context: TIED methodology repository. Paths above are relative to the project root. Product clients inherit the same process via `copy_files.sh` and grow their own `tied/vocab/` corpora.*
+*Context: TIED methodology repository. Paths above are relative to the project root. Product clients inherit the same process via `copy_files.sh` and grow their own `tied-project/vocab/` corpora.*

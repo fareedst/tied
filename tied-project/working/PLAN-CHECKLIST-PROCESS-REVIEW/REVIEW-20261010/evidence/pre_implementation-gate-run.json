@@ -1,0 +1,42 @@
+{
+  "phase": "pre_implementation",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "no_run_id",
+    "run_id": null
+  },
+  "reconcile": {
+    "ok": false,
+    "skipped": true
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/verification-evidence-manifest.v1.json"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": true,
+    "envelope_ok": false,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json",
+    "diagnostics": [
+      "envelope_schema_invalid:identity.request_token"
+    ]
+  }
+}

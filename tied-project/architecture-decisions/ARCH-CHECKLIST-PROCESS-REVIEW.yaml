@@ -1,0 +1,37 @@
+ARCH-CHECKLIST-PROCESS-REVIEW:
+  alternatives_considered:
+    - cons:
+        - "Conflicts with every-REQ mandate"
+      name: "Embed review steps in agent-req-implementation-checklist"
+      pros:
+        - "Single file"
+      rejected_reason: "Explicit non-goal—review is episodic, not per-REQ mandatory."
+  cross_references:
+    - "REQ-CHECKLIST-PROCESS-REVIEW"
+  decision: "Publish phase-1 operator documentation under docs/ as a generic review plan plus reusable checklist; keep canonical checklist authority in tied-bundle and execution authority in per-REQ Trackers."
+  implementation_approach:
+    details:
+      - "docs/checklist-process-review-checklist.md worksheet"
+      - "docs/checklist-process-review-plan.md procedure"
+    summary: "Two committed markdown deliverables; optional working-folder evidence in later phases."
+  metadata:
+    created:
+      author: "agent"
+      date: "2026-10-10"
+  name: "Checklist process review doc architecture"
+  rationale:
+    benefits:
+      - "Clear authority stack"
+      - "Phased blast radius"
+    problems_solved:
+      - "Parallel process instructions"
+      - "Unsafe cleanup"
+    why: "Separates repeatable audit procedure from implementation workflow machinery."
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-CHECKLIST-PROCESS-REVIEW"
+    requirements:
+      - "REQ-CHECKLIST-PROCESS-REVIEW"
+    tests: []

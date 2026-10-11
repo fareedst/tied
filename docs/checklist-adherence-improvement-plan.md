@@ -27,7 +27,7 @@
 | outcome_verified event | Adherence ledger row (`event_class: outcome_verified`) appended after successful ref resolution; records `artifact_ref` + `artifact_hash` per resolved ref |
 | manifest ref | `evidence_refs[]` entry pointing to a file with `schema_version: verification-evidence-manifest.v1`; all `command_results[].exit_code` must be `0` |
 
-Vocabulary ownership and names are defined in `tied/vocab/agentstream.md`, `tied/vocab/fidelity-research.md`, and `tied/vocab/quality-assurance.md`. No new REQ/ARCH/IMPL token is required for this plan: the producer behavior completes the existing machine-enforced checklist evidence contract; the evidence-chain blocks extend `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`. Stages G–L are complete; optional integrations remain deferred.
+Vocabulary ownership and names are defined in `tied-project/vocab/agentstream.md`, `tied-project/vocab/fidelity-research.md`, and `tied-project/vocab/quality-assurance.md`. No new REQ/ARCH/IMPL token is required for this plan: the producer behavior completes the existing machine-enforced checklist evidence contract; the evidence-chain blocks extend `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]`. Stages G–L are complete; optional integrations remain deferred.
 
 ### Depth and gate policy
 
@@ -57,7 +57,7 @@ Raw `tied_checklist_gate_validate` output for `phase: pre_implementation` with t
 - `allowed: true`, `blocking: false`, `depth: minimal`, `diagnostics: []`
 - Receipt: `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-stage-h-refine-pre-implementation.json`
 - At minimal depth the gate auto-requires only `sub-adversarial-inquiry-pass` (as `not_applicable` with policy/rationale); pending implementation steps such as `unit-test-red` are out of scope for this documentation-only pass and do not block pre-implementation progression.
-- Vocabulary RECORD/VALIDATE: Stage H terms in §0 recorded in `tied/vocab/agentstream.md` and `tied/vocab/quality-assurance.md`; no new REQ/ARCH/IMPL token required.
+- Vocabulary RECORD/VALIDATE: Stage H terms in §0 recorded in `tied-project/vocab/agentstream.md` and `tied-project/vocab/quality-assurance.md`; no new REQ/ARCH/IMPL token required.
 
 ## 1. Current state and confirmed gap
 
@@ -174,7 +174,7 @@ A lead-checklist run can still advance on a valid receipt without proving that o
 
 ### 3.1 Checklist definition versus Authoritative Tracker
 
-The canonical file `tied/docs/agent-req-implementation-checklist.yaml` is the checklist definition. A generated per-request Tracker is the mutable state artifact.
+The canonical file `tied-bundle/docs/agent-req-implementation-checklist.yaml` is the checklist definition. A generated per-request Tracker is the mutable state artifact.
 
 The Tracker uses a top-level `steps` collection containing one unique row for every executable main step and every gate-governed sub-procedure. In particular, `sub-adversarial-inquiry-pass` must be materialized as a state row even though its procedure body remains under `sub_procedures` in the definition.
 
@@ -311,7 +311,7 @@ Before each checklist turn in `tools/agentstream/cmd/agentstream/main.go`:
 2. **Receipt hardening** — extend `agentstream_tracker` with binding fields (§3.2); parse from `FinalText` only.
 3. **Evidence ref resolution** — when disposition is `completed`, resolve each `evidence_refs[]` entry:
    - **File path** → must exist; hash recorded in `outcome_verified`.
-   - **Manifest reference** → must match `verification-evidence-manifest.v1` (`tied/docs/quality-evidence-manifest.md`); `exit_code != 0` rejected.
+   - **Manifest reference** → must match `verification-evidence-manifest.v1` (`tied-bundle/docs/quality-evidence-manifest.md`); `exit_code != 0` rejected.
    - **Generic prose** ("tests passed") → reject at writer or pre-gate validator.
    Reuse gate helpers: `validateCommandEvidence`, `validateProvenanceComplete`, `validateEvidenceFreshness` in `mcp-server/src/checklist-validator.ts`.
 4. **Gate and status receipts** — persist raw `tied_checklist_gate_validate` JSON to `working/{REQ-TOKEN}/gates/{phase}-{timestamp}.json` with input Tracker/CITDP hash; persist `tied_verify` dry_run/apply result with `previous_status` → `next_status` map and gate receipt pointer; reconciliation compares ledger `status_mutated` rows to canonical TIED YAML indexes.
@@ -336,7 +336,7 @@ Before each checklist turn in `tools/agentstream/cmd/agentstream/main.go`:
 | Gate/status receipts | Persist gate and verify decisions | extend `mcp-server/src/verify.ts`, gate callers | `verify.test.ts` fixtures and durable receipts — **done** (Stage J) |
 | Procedure and operator docs | Define Tracker path, receipt contract, adherence ledger, migration | `tools/agentstream/README.md`, this plan | Static contract tests — Stage F partial |
 | TIED logic | Producer + evidence-chain Active blocks | `[IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]` pseudo-code sidecar/detail | `pseudocode_validate`, `tied_validate_consistency` |
-| Vocabulary | RECORD adherence ledger and event-class terms | `tied/vocab/agentstream.md`, `tied/vocab/quality-assurance.md` | `[PROC-VOCABULARY_INDEX]` VALIDATE |
+| Vocabulary | RECORD adherence ledger and event-class terms | `tied-project/vocab/agentstream.md`, `tied-project/vocab/quality-assurance.md` | `[PROC-VOCABULARY_INDEX]` VALIDATE |
 
 No UI boundary exists; E2E is not required. The fake `cursor agent` subprocess test is a process-composition test, not UI E2E.
 
@@ -393,7 +393,7 @@ Go-emitted Tracker fixtures consumed by TypeScript `validateChecklistGate` and `
 - `tools/agentstream/checklist/tracker_receipt.go`: binding fields + `ValidateReceiptBinding`
 - `tools/agentstream/cmd/agentstream/main.go` `handleTrackerTurn`: binding before `ApplyTrackerDisposition`; **no evidence ref resolution yet**
 - `tools/agentstream/checklist/evidence_resolve.go`: **does not exist** (planned in IMPL pseudo-code only)
-- Pseudo-code `RESOLVE_EVIDENCE_REFS` exists in `tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md`
+- Pseudo-code `RESOLVE_EVIDENCE_REFS` exists in `tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md`
 
 **Tests (RED → GREEN, committed):**
 
@@ -461,7 +461,7 @@ type ResolvedRef struct {
 func ResolveEvidenceRefs(receipt CompletionReceipt, workspace string) ([]ResolvedRef, error)
 ```
 
-Reuse manifest shape from `tied/docs/quality-evidence-manifest.md`. Failure modes align with IMPL pseudo-code: `unresolved_evidence_ref`, `manifest_exit_nonzero`, `missing_artifact`.
+Reuse manifest shape from `tied-bundle/docs/quality-evidence-manifest.md`. Failure modes align with IMPL pseudo-code: `unresolved_evidence_ref`, `manifest_exit_nonzero`, `missing_artifact`.
 
 #### New ledger method: `AppendOutcomeVerified`
 

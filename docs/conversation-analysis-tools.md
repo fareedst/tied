@@ -66,7 +66,7 @@ ruby scripts/dedupe_transcript_yaml.rb --keep-backup ~/.cursor/logs/conv_someid.
 
 **Purpose:** Stream through TIED MCP usage metrics JSONL (default `~/.cursor/logs/tied-mcp-metrics.jsonl` when **`TIED_MCP_COLLECT_METRICS=1`**), emit one YAML report per file on **stdout** (tool counts, client split, durations, failures, top arg signatures). With **`--aggregate`**, also writes a merged summary YAML to **stderr**.
 
-Enable collection: set **`TIED_MCP_COLLECT_METRICS=1`** in `.cursor/mcp.json` `env` (IDE MCP) and/or export before **`tied-cli.sh`**. See **`mcp-server/README.md`** and **`tied/vocab/tied-yaml-mcp.md`**.
+Enable collection: set **`TIED_MCP_COLLECT_METRICS=1`** in `.cursor/mcp.json` `env` (IDE MCP) and/or export before **`tied-cli.sh`**. See **`mcp-server/README.md`** and **`tied-project/vocab/tied-yaml-mcp.md`**.
 
 **Signature coverage proof boundary:** Per-file and aggregate `top_signatures`
 are bounded to `50` rows and include `signature_coverage` with `bound`,
@@ -239,7 +239,7 @@ ruby scripts/extract_queries.rb export.yaml
 
 ## Docs build: `citdp_hook_log_evidence_build.rb`
 
-**Purpose:** From repo root, regenerate CITDP ↔ hook-log correlation artifacts under `docs/` (markdown table + TSV), using `tied/citdp/CITDP-*.yaml` and optional `~/.cursor/logs/conv_ruby_treegrep_*.yaml`.
+**Purpose:** From repo root, regenerate CITDP ↔ hook-log correlation artifacts under `docs/` (markdown table + TSV), using `tied-project/citdp/CITDP-*.yaml` and optional `~/.cursor/logs/conv_ruby_treegrep_*.yaml`.
 
 **Flags:** None.
 
@@ -262,6 +262,6 @@ See generated [`docs/citdp-evidence-hook-log-correlation.md`](citdp-evidence-hoo
 | `tied-post-session.sh` | Chains metrics, envelope gap report, evidence-chain profile, reconcile for one `/dev/test` client |
 | `analyze_hook_log.rb`, `extract_*.rb` (except `extract_queries`) | Hook YAML (`conv_*.yaml`) |
 | `extract_queries.rb` | Full transcript YAML with `<user_query>` tags |
-| `citdp_hook_log_evidence_build.rb` | Repo `tied/citdp/` + optional hook glob on disk |
+| `citdp_hook_log_evidence_build.rb` | Repo `tied-project/citdp/` + optional hook glob on disk |
 
 Run `ruby scripts/<name>.rb --help` for the canonical option list.

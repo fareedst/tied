@@ -1,6 +1,6 @@
 # Fleet constraint v2 — completion plan (Track B + grading)
 
-**Purpose:** Historical plan for Track B migration batches (NB-1..NB-4) and **ongoing G4 grading**. Track B migration is **complete**; active ops are [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml).
+**Purpose:** Historical plan for Track B migration batches (NB-1..NB-4) and **ongoing G4 grading**. Track B migration is **complete**; active ops are [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml).
 
 **Canonical program:** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) · **G4 ops:** [`pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md`](pseudocode-constraint-v2-fleet-g4-maintenance-runbook.md) · **Hygiene / tracks:** [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md)
 
@@ -67,4 +67,4 @@ NB batch sections remain in git history and [`pseudocode-constraint-v2-fleet-nb*
 
 ## Traceability
 
-[REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml) · [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) (closed)
+[REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml) · [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) (closed)

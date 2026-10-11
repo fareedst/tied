@@ -28,7 +28,7 @@ Tests and shipped code are evidence of observed behavior. They are not automatic
 
 This plan uses the canonical terms:
 
-- **Domain vocabulary:** preferred names and naming bridges in `tied/vocab/`.
+- **Domain vocabulary:** preferred names and naming bridges in `tied-project/vocab/`.
 - **IMPL pseudo-code:** the language-agnostic `essence_pseudocode` behavior specification.
 - **Three-way alignment:** IMPL block lead ↔ test locus ↔ production locus.
 - **CITDP record:** the change-analysis record for current, desired, unchanged, and non-goal behavior.
@@ -79,7 +79,7 @@ The integrated profile should use warn-only behavior by default. Strict blocking
 
 ### 3.3 Human research profile
 
-The human profile uses the complete stages in this document and the read-only stages 0–4 of `tied/docs/pseudocode-fidelity-audit-agent-prompt.md`:
+The human profile uses the complete stages in this document and the read-only stages 0–4 of `tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md`:
 
 - complete block inventory;
 - bidirectional pseudo-code/code/test matrices;
@@ -245,7 +245,7 @@ Every result must state its proof boundary. Structural success is not runtime co
 
 ### Phase D — Run the pseudo-code fidelity audit
 
-Use `tied/docs/pseudocode-fidelity-audit-agent-prompt.md` for one IMPL set or module boundary at a time.
+Use `tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md` for one IMPL set or module boundary at a time.
 
 Stages 0–4 are read-only:
 
@@ -414,14 +414,14 @@ Only after this slice is reviewed should the project add cross-project aggregati
 
 ## References
 
-- [`tied/docs/pseudocode-fidelity-audit-agent-prompt.md`](../tied/docs/pseudocode-fidelity-audit-agent-prompt.md)
-- [`tied/docs/pseudocode-writing-and-validation.md`](../tied/docs/pseudocode-writing-and-validation.md)
-- [`tied/docs/agent-req-implementation-checklist.md`](../tied/docs/agent-req-implementation-checklist.md)
-- [`tied/docs/composition-coverage.md`](../tied/docs/composition-coverage.md)
-- [`tied/docs/citdp-policy.md`](../tied/docs/citdp-policy.md)
+- [`tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md`](../tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md)
+- [`tied-bundle/docs/pseudocode-writing-and-validation.md`](../tied-bundle/docs/pseudocode-writing-and-validation.md)
+- [`tied-bundle/docs/agent-req-implementation-checklist.md`](../tied-bundle/docs/agent-req-implementation-checklist.md)
+- [`tied-bundle/docs/composition-coverage.md`](../tied-bundle/docs/composition-coverage.md)
+- [`tied-bundle/docs/citdp-policy.md`](../tied-bundle/docs/citdp-policy.md)
 - [`docs/scoped-analysis-and-ignore.md`](scoped-analysis-and-ignore.md)
 - [`docs/plumb-audit-gate.md`](plumb-audit-gate.md)
 - [`docs/conversation-analysis-tools.md`](conversation-analysis-tools.md)
-- [`tied/docs/client-development-index.md`](../tied/docs/client-development-index.md)
+- [`tied-bundle/docs/client-development-index.md`](../tied-bundle/docs/client-development-index.md)
 
 This plan uses existing `[PROC-VOCABULARY_INDEX]`, `[PROC-CITDP]`, `[PROC-LEAP]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-PSEUDOCODE_VALIDATION]`, `[PROC-TEST_STRATEGY]`, `[PROC-TOKEN_AUDIT]`, `[PROC-TOKEN_VALIDATION]`, and `[REQ-MODULE_VALIDATION]` obligations. No new semantic token is introduced by this planning document.

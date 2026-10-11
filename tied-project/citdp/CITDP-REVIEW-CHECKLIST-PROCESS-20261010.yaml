@@ -1,0 +1,101 @@
+CITDP-REVIEW-CHECKLIST-PROCESS-20261010:
+  change_definition:
+    current_behavior: "Phase 1 operator docs exist, but the repository has no recorded inventory, lifecycle classification, or disposition ledger for checklist/process documentation."
+    desired_behavior: "Phase 2 produces a committed findings ledger and filled worksheet evidence under tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/REVIEW-20261010/ without deletions or canonical checklist mutation."
+    non_goals:
+      - "Phase 3 cleanup or hard deletes"
+      - "Phase 4 methodology-surface enrollment"
+      - "New REQ tokens or IMPL pseudo-code changes"
+      - "Editing read-only tied-bundle checklist YAML"
+    success_criteria:
+      - "Inventory covers canonical spine, docs/ plan clusters, tied-project/working orchestrators, and navigation surfaces"
+      - "Contradictions and efficiency findings recorded with dispositions (no delete-candidate without rg sweep)"
+      - "Default non-delete register honored for async W2, bootstrap detail-file, fidelity, residuality, and QMM follow-on handoffs"
+    unchanged_behavior: "[PROC-AGENT_REQ_CHECKLIST] remains machine authority; docs/checklist-process-review-*.md unchanged except cross-links if added later."
+  evidence:
+    commands:
+      - "rg -c 'tied/docs' docs/*.md — legacy path hotspot survey"
+      - "Manual worksheet sections A–H in review-worksheet-filled.md"
+      - "tied_project_lint and close-out envelope at minimal advisory depth"
+    manifest_reference: null
+    proof_boundaries:
+      - "inventory_and_findings_only"
+      - "no_reference_proof_deletion"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL mutation. Read-only inventory of docs and working folders."
+    modules_or_boundaries: "Documentation corpus and committed working plans only."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REVIEW-CHECKLIST-PROCESS-20261010"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-10"
+    title: "Checklist/process review phase 2 inventory (20261010)"
+    parent_program: "PLAN-CHECKLIST-PROCESS-REVIEW"
+  risk_analysis:
+    abuse_cases:
+      - "Inventory pass mistaken for delete authorization"
+      - "Ambiguous plans marked delete-candidate without reference sweep"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Phase 2 removes docs still linked from AGENTS.md or CITDP paths"
+        - "Review worksheet replaces per-REQ Tracker execution"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any hard delete in phase 2"
+        - "Any tied-bundle checklist YAML edit attributed to this review id"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/REVIEW-20261010/inventory-findings-ledger.md"
+        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/REVIEW-20261010/review-worksheet-filled.md"
+        - "docs/checklist-process-review-plan.md"
+      falsification_questions:
+        - "Are all delete-candidates deferred to phase 3 with rg proof?"
+        - "Is the default non-delete register explicit for open program handoffs?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Read-only inventory at minimal depth; no product code or integrated inquiry."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Inventory passes and rg legacy-path survey"
+        evidence_method: "Committed findings ledger"
+        limitation: "Cluster-level docs/ inventory; not zero-reference deletion proof."
+        owner: "agent"
+        rationale: "Phase 2 deliverable is disposition ledger without cleanup."
+        result: "pass"
+        risk: "Inventory mistaken for delete authorization"
+        threshold: "Zero hard deletes and zero tied-bundle checklist edits"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      evidence_path: "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/REVIEW-20261010/evidence/residual-risk-phase2.md"
+      expiry: "2027-04-10"
+      owner: "sponsor"
+      summary: "Inventory is cluster-level for large docs/ corpus; per-file disposition may need phase 3 batches. Legacy tied/docs links remain navigation hazards until updated."
+    risks:
+      - description: "Dual working/ roots (repo root vs tied-project/working/) confuse operators"
+        mitigation: "Record CPR-F02; cite working-artifact-placement in phase 3 path updates"
+  test_strategy:
+    matrix_notes: "No unit RED. Optional check_docs_vocab_links deferred — phase 2 did not edit navigation indexes."
+    summary: "rg legacy-path survey; manual worksheet; tied_project_lint; run-close-out-gates.mjs at close_out with envelope-blocking."
+  tdd_sequence:
+    summary: "Not applicable — documentation inventory only."

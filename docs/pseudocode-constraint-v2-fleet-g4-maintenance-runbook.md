@@ -1,6 +1,6 @@
 # Fleet G4 maintenance — operator runbook
 
-**REQ:** [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml) · **Program:** [pseudocode-constraint-v2-fleet-program.md](pseudocode-constraint-v2-fleet-program.md)
+**REQ:** [REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE](../tied-project/requirements/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE.yaml) · **Program:** [pseudocode-constraint-v2-fleet-program.md](pseudocode-constraint-v2-fleet-program.md)
 
 ## Purpose
 
@@ -58,10 +58,10 @@ working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh fleet-g
 | Last maintenance OK | program-status + last-run receipt |
 | Enrolled cohort fleet-migrated | G4 `enrolled_track_regression` check |
 | Full Track B inventory | Manifest + wave receipts (separate audit) |
-| `tied-win-diff` | [fleet tied-win-diff bypass](../tied/vocab/pseudocode-and-citdp.md) — not enrolled regression |
+| `tied-win-diff` | [fleet tied-win-diff bypass](../tied-project/vocab/pseudocode-and-citdp.md) — not enrolled regression |
 
 ## Non-goals
 
 - GitHub Actions (sponsor decision: local runbook only)
-- Reopen [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) close_out
+- Reopen [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) close_out
 - NB-5 or new migration tranches

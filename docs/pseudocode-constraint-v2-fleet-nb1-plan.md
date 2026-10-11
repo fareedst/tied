@@ -2,9 +2,9 @@
 
 **Scope:** Methodology-side **planning and sponsor gate** for the first **non-enrolled** client batch. **No migration execution** in this document.
 
-**Canonical program:** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) · **Grand plan:** [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md) (pointer only) · **CITDP:** [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION`](../tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) `nb1_tranche_zero_module` · **Tracker:** [`working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml`](../working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml)
+**Canonical program:** [`pseudocode-constraint-v2-fleet-program.md`](pseudocode-constraint-v2-fleet-program.md) · **Grand plan:** [`pseudocode-constraint-v2-fleet-migration-grand-plan.md`](pseudocode-constraint-v2-fleet-migration-grand-plan.md) (pointer only) · **CITDP:** [`CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION`](../tied-project/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) `nb1_tranche_zero_module` · **Tracker:** [`working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml`](../working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml)
 
-**TIED orchestrator:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) remains **closed** — do not re-run `close_out` or reopen without sponsor.
+**TIED orchestrator:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) remains **closed** — do not re-run `close_out` or reopen without sponsor.
 
 ### Artifact index (NB-1)
 
@@ -17,9 +17,9 @@
 | Inventory (program) | [`working/fleet-constraint-v2/client-inventory-manifest.v1.yaml`](../working/fleet-constraint-v2/client-inventory-manifest.v1.yaml) | Wave selection + post-wave rollup source |
 | G3 harness design | [`working/fleet-constraint-v2/p4-d-g3-harness-design.v1.md`](../working/fleet-constraint-v2/p4-d-g3-harness-design.v1.md) | `fleet-g3-wave` CLI contract for `/build-plan` |
 | Program status snapshot | [`working/fleet-constraint-v2/program-status.v1.yaml`](../working/fleet-constraint-v2/program-status.v1.yaml) | Rolling counts; update after NB-1-G |
-| IMPL orchestration pseudo-code | [`IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION`](../tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md) | `RECORD_OD_P5_2_ACCEPTANCE`, `SELECT_NB1_WAVE_ONE_CLIENTS` |
+| IMPL orchestration pseudo-code | [`IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION`](../tied-project/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md) | `RECORD_OD_P5_2_ACCEPTANCE`, `SELECT_NB1_WAVE_ONE_CLIENTS` |
 
-**Traceability tokens:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.yaml)
+**Traceability tokens:** [REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml) · [ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE](../tied-project/architecture-decisions/ARCH-PSEUDOCODE_FLEET_MIGRATION_GOVERNANCE.yaml) · [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied-project/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION.yaml)
 
 ---
 
@@ -137,7 +137,7 @@ client repo (per wave-1 client)
 | Criterion | Verification |
 |-----------|--------------|
 | NB-1 plan on disk with executable steps + falsification | This file |
-| CITDP `nb1_tranche_zero_module` populated | `tied/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml` |
+| CITDP `nb1_tranche_zero_module` populated | `tied-project/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION.yaml` |
 | Tracker copy with `execution_evidence.request: NB-1-TRACK-B-TRANCHE-ZERO` | `NB-1-tranche-zero-agent-req-implementation-checklist.yaml` |
 | OD-P5-2 schema + template committed under `working/fleet-constraint-v2/` | Files exist; template validates against schema |
 | IMPL blocks `RECORD_OD_P5_2_ACCEPTANCE`, `SELECT_NB1_WAVE_ONE_CLIENTS` with token comments | IMPL sidecar + `pseudocode_validate` |
@@ -203,7 +203,7 @@ All must be true before linking `/build-plan` to this doc:
 - CITDP `nb1_tranche_zero_module` + pre-implementation slice YAML
 - Tracker copy with `execution_evidence.request: NB-1-TRACK-B-TRANCHE-ZERO`
 - OD-P5-2 acceptance JSON schema + template
-- IMPL pseudo-code: `RECORD_OD_P5_2_ACCEPTANCE`, `SELECT_NB1_WAVE_ONE_CLIENTS` on [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md)
+- IMPL pseudo-code: `RECORD_OD_P5_2_ACCEPTANCE`, `SELECT_NB1_WAVE_ONE_CLIENTS` on [IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION](../tied-project/implementation-decisions/IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION-pseudocode.md)
 - Pre-implementation gate receipt under `working/fleet-constraint-v2/NB-1/gates/`
 
 **Operator checks (refine pass, no RED tests yet):**

@@ -1,0 +1,58 @@
+CITDP-REQ-CHECKLIST-PROCESS-REVIEW:
+  change_definition:
+    current_behavior: "No generic operator procedure exists for repository-wide checklist/process review and dependency-safe cleanup."
+    desired_behavior: "Phase 1 ships docs/checklist-process-review-plan.md and docs/checklist-process-review-checklist.md under REQ-CHECKLIST-PROCESS-REVIEW."
+    non_goals:
+      - "Canonical checklist or gate semantics changes"
+      - "Inventory execution or deletions in phase 1"
+      - "Runtime code or RED tests"
+    success_criteria:
+      - "SC-CPR-CHECKLIST"
+      - "SC-CPR-NONREPLACEMENT"
+      - "SC-CPR-PLAN"
+    unchanged_behavior: "[PROC-AGENT_REQ_CHECKLIST] remains authoritative for per-REQ implementation."
+  impact_analysis:
+    impl_inventory_notes: "Two new docs under docs/; TIED REQ/ARCH/IMPL tokens; working folder Tracker."
+    modules_or_boundaries: "Documentation only."
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - "ARCH-CHECKLIST-PROCESS-REVIEW"
+      - "IMPL-CHECKLIST-PROCESS-REVIEW"
+      - "REQ-CHECKLIST-PROCESS-REVIEW"
+  leap_feedback:
+    divergences_from_analysis: "Program phases 2–3 (inventory + doc path batches) executed under PLAN-CHECKLIST-PROCESS-REVIEW; no canonical checklist YAML edits."
+    record_status: "recorded"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-CHECKLIST-PROCESS-REVIEW"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-10"
+    title: "Checklist and process review operator docs (phase 1)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Phase 1 pass deletes closed plans still referenced by CITDP"
+        - "Review checklist added as mandatory step on every REQ"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any file deletion in phase 1"
+        - "Any tied-bundle checklist YAML edit in this REQ"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/checklist-process-review-checklist.md"
+        - "docs/checklist-process-review-plan.md"
+      falsification_questions:
+        - "Are phases 2–4 explicitly out of scope for this build?"
+        - "Do deliverables disclaim replacement of [PROC-AGENT_REQ_CHECKLIST]?"
+      gate_policy: "advisory"
+      rationale: "Documentation-only minimal depth."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - description: "Operators conflate review program with implementation checklist"
+        mitigation: "Prominent non-replacement section in both docs"
+  test_strategy:
+    matrix_notes: "No unit RED; composition/E2E not applicable."
+    summary: "Manual satisfaction review; tied_validate_consistency after TIED mutations; optional check_docs_vocab_links if navigation links added."

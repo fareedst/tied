@@ -19,7 +19,7 @@ Residuality supplies architectural questions under stress; TIED owns, implements
 | Residue | What remains after the stressor (desirable or accidental) |
 | Stressor-residue claim | Bounded claim to test: after stressor S, property R holds or becomes observable |
 
-**Not** the same as TIED **residual risk** (risk after controls). See `tied/vocab/residuality.md`.
+**Not** the same as TIED **residual risk** (risk after controls). See `tied-project/vocab/residuality.md`.
 
 ## Pilot mapping (W3–W4)
 

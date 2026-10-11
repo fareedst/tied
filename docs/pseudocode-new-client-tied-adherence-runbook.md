@@ -1,6 +1,6 @@
 # New TIED client adherence — operator runbook
 
-**REQ:** [REQ-TIED_NEW_CLIENT_ADHERENCE](../tied/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml) · **Plan:** [pseudocode-new-client-tied-adherence-plan.md](pseudocode-new-client-tied-adherence-plan.md) · **Fleet program:** [pseudocode-constraint-v2-fleet-program.md](pseudocode-constraint-v2-fleet-program.md)
+**REQ:** [REQ-TIED_NEW_CLIENT_ADHERENCE](../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml) · **Plan:** [pseudocode-new-client-tied-adherence-plan.md](pseudocode-new-client-tied-adherence-plan.md) · **Fleet program:** [pseudocode-constraint-v2-fleet-program.md](pseudocode-constraint-v2-fleet-program.md)
 
 ## Purpose
 

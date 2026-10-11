@@ -10,7 +10,7 @@
 
 **Current delivery boundary:** W0–W1 (T0) delivered the vocabulary, REQ/ARCH guidance, optional v1 grammar rows, structural fixture corpus, and legacy compatibility coverage. W2 delivered the checklist catalog/contradiction dispositions, `async_in_scope` Tracker field, checklist MD/YAML updates, tests, and reference-pilot rehearsal. The W2 CITDP is `in_progress`, its Tracker execution evidence is empty, and no authoritative W2 `pre_implementation`, verification, or close-out receipt is present. These artifacts establish structural implementation evidence, not wave close-out or runtime concurrency proof.
 
-**Related work:** [REQ-PSEUDOCODE_TYPED_FLOW](../tied/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml), [REQ-PSEUDOCODE_STATIC_ANALYSIS](../tied/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml), [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../tied/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml), [REQ-QUALITY_ASSURANCE_EVIDENCE](../tied/requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml), [methodology-closeout-integrity-plan.md](methodology-closeout-integrity-plan.md), [pseudocode-format-and-practices.md](../tied/docs/pseudocode-format-and-practices.md), [agent-req-implementation-checklist.md](../tied/docs/agent-req-implementation-checklist.md) § `catalog-pseudocode-contracts`, [composition-coverage.md](../tied/docs/composition-coverage.md)
+**Related work:** [REQ-PSEUDOCODE_TYPED_FLOW](../tied-project/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml), [REQ-PSEUDOCODE_STATIC_ANALYSIS](../tied-project/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml), [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../tied-project/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml), [REQ-QUALITY_ASSURANCE_EVIDENCE](../tied-project/requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml), [methodology-closeout-integrity-plan.md](methodology-closeout-integrity-plan.md), [pseudocode-format-and-practices.md](../tied-bundle/docs/pseudocode-format-and-practices.md), [agent-req-implementation-checklist.md](../tied-bundle/docs/agent-req-implementation-checklist.md) § `catalog-pseudocode-contracts`, [composition-coverage.md](../tied-bundle/docs/composition-coverage.md)
 
 ---
 
@@ -64,7 +64,7 @@ This plan sequences **seven numbered waves (W0–W6)**: six core capability wave
 
 ### Vocabulary RECORD/VALIDATE status
 
-Terms above are **RESOLVE**d against preloaded glossaries (`async-methodology`, `pseudocode-and-citdp`, `quality-assurance`, `prompt-composer`). W0 **RECORD** is present in the methodology-owned `tied/vocab/async-methodology.md`, routing, and domain-reference entries; `copy_files.sh` remains the client refresh boundary. This refinement introduces no new vocabulary. The read-only TIED consistency check passed; pre-commit vocabulary **VALIDATE** remains a later commit responsibility.
+Terms above are **RESOLVE**d against preloaded glossaries (`async-methodology`, `pseudocode-and-citdp`, `quality-assurance`, `prompt-composer`). W0 **RECORD** is present in the methodology-owned `tied-project/vocab/async-methodology.md`, routing, and domain-reference entries; `copy_files.sh` remains the client refresh boundary. This refinement introduces no new vocabulary. The read-only TIED consistency check passed; pre-commit vocabulary **VALIDATE** remains a later commit responsibility.
 
 ### Decisions needing sponsor input
 
@@ -139,7 +139,7 @@ The goal is not to turn TIED into a concurrency verifier. The goal is to make **
 4. **CITDP triggers and evidence matrix** — Deterministic candidate triggers plus a documented profile disposition for `stateful-reliability` (or a dedicated async profile); adversarial cases for retry/timeout/ordering only when activated.
 5. **Static analysis / typed-flow hooks** — Layer C diagnostics for async boundary consistency (Promise OUTPUT vs AWAIT, missing Async in EFFECTS, CALL across async boundary).
 6. **Composition patterns** — Binding inventory columns and examples for async seams; fault-injection rows for ordering and timeout faults.
-7. **Vocabulary glossary** — `tied/vocab/async-methodology.md` with RESOLVE/RECORD terms bridging domain language and IMPL grammar.
+7. **Vocabulary glossary** — `tied-project/vocab/async-methodology.md` with RESOLVE/RECORD terms bridging domain language and IMPL grammar.
 
 ### Non-goals
 
@@ -157,9 +157,9 @@ The goal is not to turn TIED into a concurrency verifier. The goal is to make **
 
 | Location | Async support today |
 |----------|---------------------|
-| [implementation-decisions.md](../tied/docs/implementation-decisions.md) § Preferred vocabulary | `AWAIT`; `Promise` in OUTPUT; `Async` in EFFECTS; `SEND` for message-style async |
-| [pseudocode-format-and-practices.md](../tied/docs/pseudocode-format-and-practices.md) §4 | Same keywords; TERMINATION for open-ended wait |
-| [pseudocode-and-citdp.md](../tied/vocab/pseudocode-and-citdp.md) | `AWAIT` / `Promise` cataloged under IMPL grammar keywords |
+| [implementation-decisions.md](../tied-bundle/docs/implementation-decisions.md) § Preferred vocabulary | `AWAIT`; `Promise` in OUTPUT; `Async` in EFFECTS; `SEND` for message-style async |
+| [pseudocode-format-and-practices.md](../tied-bundle/docs/pseudocode-format-and-practices.md) §4 | Same keywords; TERMINATION for open-ended wait |
+| [pseudocode-and-citdp.md](../tied-project/vocab/pseudocode-and-citdp.md) | `AWAIT` / `Promise` cataloged under IMPL grammar keywords |
 | SHAPE-003..006 | No async-specific shape checks |
 | Layer C (`pseudocode_analyze`) | Generic CFG/call-graph; typed-flow can type `Promise` if annotated — no async ordering pass |
 
@@ -179,7 +179,7 @@ The goal is not to turn TIED into a concurrency verifier. The goal is to make **
 | Artifact | Async hook |
 |----------|------------|
 | `stateful-reliability` assurance profile | Retry, recovery, concurrency, restart behavior |
-| [quality-assurance.md](../tied/vocab/quality-assurance.md) | Profile definition for stateful-reliability |
+| [quality-assurance.md](../tied-project/vocab/quality-assurance.md) | Profile definition for stateful-reliability |
 | Adversarial inquiry (integrated) | Retry, concurrency, timeout, ordering cases when depth tier applies |
 | Profile selection | **Manual / impact-discovery** — not auto-triggered by `Async` in pseudocode |
 
@@ -187,7 +187,7 @@ The goal is not to turn TIED into a concurrency verifier. The goal is to make **
 
 | Artifact | Async hook |
 |----------|------------|
-| [composition-coverage.md](../tied/docs/composition-coverage.md) | Binding kinds include event listener, IPC/message channel; `ordering` column required |
+| [composition-coverage.md](../tied-bundle/docs/composition-coverage.md) | Binding kinds include event listener, IPC/message channel; `ordering` column required |
 | `binding_inventory_validate` | Validates row completeness; no async-specific semantics |
 | STDD inventory examples | Mostly sync CLI/pipeline bindings |
 
@@ -195,8 +195,8 @@ The goal is not to turn TIED into a concurrency verifier. The goal is to make **
 
 | Capability | Async relevance |
 |------------|-----------------|
-| [REQ-PSEUDOCODE_TYPED_FLOW](../tied/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml) | Can annotate `Promise of T` on OUTPUT; no async sequencing rules yet |
-| [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml) | Future interleaving/refinement predicates — dependency for advanced ordering |
+| [REQ-PSEUDOCODE_TYPED_FLOW](../tied-project/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml) | Can annotate `Promise of T` on OUTPUT; no async sequencing rules yet |
+| [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml) | Future interleaving/refinement predicates — dependency for advanced ordering |
 | Cross-IMPL collision (Layer B) | Sync vs async DATA — **reactive**, not async-scheduled |
 
 ### 3.6 Summary diagram
@@ -226,9 +226,9 @@ flowchart LR
 
 ### 3.7 Verified repository boundaries
 
-- Existing linked records are project-owned at `tied/requirements/`, `tied/architecture-decisions/`, and `tied/implementation-decisions/`; the referenced tokens currently include `[REQ-PSEUDOCODE_TYPED_FLOW]` (`In Progress`), `[REQ-PSEUDOCODE_STATIC_ANALYSIS]`, `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, and `[REQ-QUALITY_ASSURANCE_EVIDENCE]`.
-- Existing source guides are `tied/docs/requirements.md`, `tied/docs/architecture-decisions.md`, `tied/docs/implementation-decisions.md`, `tied/docs/pseudocode-format-and-practices.md`, `tied/docs/composition-coverage.md`, and `tied/docs/agent-req-implementation-checklist.md`. The exact checklist slugs used by this plan are `catalog-pseudocode-contracts`, `flag-contradictory-specs`, `gate-pseudocode-validation`, `composition-integration`, and `sub-vocabulary-sync`.
-- The canonical methodology vocabulary source is `tied/vocab/` in this repository. Client refresh places it under client `tied/methodology/vocab/`; client-owned vocabulary remains client `tied/vocab/`. There is no `tied/methodology/vocab/routing.md` in this source tree, so this plan does not cite that client snapshot as a source path.
+- Existing linked records are project-owned at `tied-project/requirements/`, `tied-project/architecture-decisions/`, and `tied-project/implementation-decisions/`; the referenced tokens currently include `[REQ-PSEUDOCODE_TYPED_FLOW]` (`In Progress`), `[REQ-PSEUDOCODE_STATIC_ANALYSIS]`, `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, and `[REQ-QUALITY_ASSURANCE_EVIDENCE]`.
+- Existing source guides are `tied-bundle/docs/requirements.md`, `tied-bundle/docs/architecture-decisions.md`, `tied-bundle/docs/implementation-decisions.md`, `tied-bundle/docs/pseudocode-format-and-practices.md`, `tied-bundle/docs/composition-coverage.md`, and `tied-bundle/docs/agent-req-implementation-checklist.md`. The exact checklist slugs used by this plan are `catalog-pseudocode-contracts`, `flag-contradictory-specs`, `gate-pseudocode-validation`, `composition-integration`, and `sub-vocabulary-sync`.
+- The canonical methodology vocabulary source is `tied-project/vocab/` in this repository. Client refresh places it under client `tied/methodology/vocab/`; client-owned vocabulary remains client `tied-project/vocab/`. There is no `tied/methodology/vocab/routing.md` in this source tree, so this plan does not cite that client snapshot as a source path.
 - `templates/impl-essence-pseudocode-template.md`, `tied/agent-preload-contract.yaml`, `mcp-server/src/analysis/binding-inventory.ts`, and `tools/agentstream/` exist. W0–W2 async token/detail records, fixture corpus, checklist helpers/tests, and pilot artifacts are present in the current tree. `mcp-server/src/analysis/fixtures/async-boundary/`, W3–W5 token/detail records, and W6 preload changes remain future/deferred.
 - `methodology-closeout-integrity-plan.md` exists at `docs/methodology-closeout-integrity-plan.md`; its status header says implemented, while its body retains typed-flow dependency language. Wave 4 therefore requires reconciliation evidence, not an assumption based on the heading.
 
@@ -239,7 +239,7 @@ flowchart LR
 | **W0** | `REQ-ASYNC_REQ_ARCH_TEMPLATES` → `ARCH-ASYNC_REQ_ARCH_CONTRACT` → `IMPL-ASYNC_VOCABULARY` + `IMPL-ASYNC_REQ_ARCH_GUIDANCE` | **Delivered:** glossary/routing and REQ/ARCH guidance are registered in project TIED records | W0 docs, vocabulary, indexes, details, and token payloads are present; no runtime behavior |
 | **W1** | `REQ-ASYNC_PSEUDOCODE_CONTRACTS` → `ARCH-ASYNC_CONTRACT_GRAMMAR` → `IMPL-ASYNC_PSEUDOCODE_GRAMMAR` | **Delivered:** 14 positive/negative fixtures plus legacy no-async corpus; targeted fixture suite passes | Grammar docs/template and fixture artifacts are present; no Layer C analyzer |
 | **W2** | `REQ-ASYNC_CHECKLIST_CATALOG` → `ARCH-ASYNC_CHECKLIST_INTEGRATION` → `IMPL-ASYNC_CHECKLIST_DISPOSITIONS` | **Implemented in working tree:** checklist catalog, contradiction routing, `async_in_scope`, tests, and GOAGENT reference-pilot rehearsal; close-out evidence is absent | Project indexes, checklist docs/YAML, source/tests, and pilot artifacts are present |
-| **W3** | `REQ-ASYNC_CITDP_TRIGGERS` → `ARCH-ASYNC_CITDP_EVIDENCE` → `IMPL-ASYNC_CITDP_PROFILE_WIRING` | CITDP trigger/disposition fixtures, evidence matrix, inquiry activation receipts; **consumes** `async_in_scope` from Tracker | Project indexes plus per-request `tied/citdp/` only after authorization |
+| **W3** | `REQ-ASYNC_CITDP_TRIGGERS` → `ARCH-ASYNC_CITDP_EVIDENCE` → `IMPL-ASYNC_CITDP_PROFILE_WIRING` | CITDP trigger/disposition fixtures, evidence matrix, inquiry activation receipts; **consumes** `async_in_scope` from Tracker | Project indexes plus per-request `tied-project/citdp/` only after authorization |
 | **W4** | `REQ-ASYNC_BOUNDARY_ANALYSIS` → `ARCH-ASYNC_ANALYSIS_PASS` → `IMPL-ASYNC_BOUNDARY_ANALYZER` | `mcp-server/src/analysis/` unit fixtures, Layer C reports, MCP composition wiring | Project indexes plus analyzer source/tests; async fixtures are future additions |
 | **W5** | `REQ-ASYNC_COMPOSITION_INVENTORY` → `ARCH-ASYNC_COMPOSITION_BINDING` → `IMPL-ASYNC_BINDING_VALIDATOR` | Binding inventory and UI-free composition fault tests | Project indexes plus `mcp-server/src/analysis/binding-inventory.ts` and composition docs |
 | **W6** (optional) | — (preload/tooling only; no new REQ/ARCH/IMPL umbrella tokens) | Agent preload and scoped-analysis preview | `tied/agent-preload-contract.yaml`, `tools/agentstream/` checklist render |
@@ -256,15 +256,15 @@ For every future wave, the implementation record must point to the owning archit
 
 **Deliverables:**
 
-- Methodology glossary: `tied/vocab/async-methodology.md` in this source repository, with entries in the source routing/catalog. `copy_files.sh` later refreshes it to client `tied/methodology/vocab/`; it is not client-owned here.
-- REQ authoring guidance in `tied/docs/requirements.md` and the applicable detail-file schema/template surface: **Async acceptance criteria** covering await sequencing, delivery, cancellation, timeout, retry/idempotency, shared DATA, and termination/open wait.
-- ARCH authoring guidance in `tied/docs/architecture-decisions.md`: **Async architecture decisions** covering concurrency model, message versus promise boundary, backpressure, failure propagation, and ownership of shared DATA.
+- Methodology glossary: `tied-project/vocab/async-methodology.md` in this source repository, with entries in the source routing/catalog. `copy_files.sh` later refreshes it to client `tied/methodology/vocab/`; it is not client-owned here.
+- REQ authoring guidance in `tied-bundle/docs/requirements.md` and the applicable detail-file schema/template surface: **Async acceptance criteria** covering await sequencing, delivery, cancellation, timeout, retry/idempotency, shared DATA, and termination/open wait.
+- ARCH authoring guidance in `tied-bundle/docs/architecture-decisions.md`: **Async architecture decisions** covering concurrency model, message versus promise boundary, backpressure, failure propagation, and ownership of shared DATA.
 - A naming bridge from each semantic class to the eventual REQ/ARCH/IMPL token and pseudo-code block name. No final token is registered until the wave is authorized.
-- Routing keywords in the canonical source `tied/vocab/routing.md`: `async`, `await`, `promise`, `concurrency`, `IPC`, `event listener`, `timeout`, `cancellation`, `retry`, `idempotency`, `shared DATA`, `open wait`.
+- Routing keywords in the canonical source `tied-project/vocab/routing.md`: `async`, `await`, `promise`, `concurrency`, `IPC`, `event listener`, `timeout`, `cancellation`, `retry`, `idempotency`, `shared DATA`, `open wait`.
 
 **Ownership boundary:** W0 owns vocabulary and authoring guidance. It does not change checklist execution, CITDP profiles, analyzer behavior, binding validation, or client project YAML.
 
-**Entry gate:** Sponsor terms are resolved; D1–D5 defaults are accepted or explicitly changed; the exact authoring insertion points in `tied/docs/requirements.md`, `tied/docs/architecture-decisions.md`, and `tied/docs/detail-files-schema.md` are named.
+**Entry gate:** Sponsor terms are resolved; D1–D5 defaults are accepted or explicitly changed; the exact authoring insertion points in `tied-bundle/docs/requirements.md`, `tied-bundle/docs/architecture-decisions.md`, and `tied-bundle/docs/detail-files-schema.md` are named.
 
 **Exit gate:** (1) all seven semantic classes have a preferred term, definition, example, and non-claim; (2) REQ/ARCH guidance requires either criteria or explicit N/A rationale; (3) source/client vocabulary ownership is unambiguous; (4) links and glossary indexes validate; (5) no checklist, CITDP, analyzer, or project YAML behavior changed.
 
@@ -413,7 +413,7 @@ flowchart TD
 
 **Objective:** Layer C catches **structural** async mismatches before RED tests.
 
-**Dependency:** [REQ-PSEUDOCODE_TYPED_FLOW](../tied/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml) Phase 3 implementation and verification must be closed for the relevant typed-flow scope. Its current project status is `In Progress`, so this dependency is **not satisfied by this plan**. [methodology-closeout-integrity-plan.md](methodology-closeout-integrity-plan.md) is marked close-out complete, but its text also says typed-flow promotion remains blocked until its Layer C work; verify the authoritative gate receipt and reconcile that wording before authorizing Wave 4.
+**Dependency:** [REQ-PSEUDOCODE_TYPED_FLOW](../tied-project/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml) Phase 3 implementation and verification must be closed for the relevant typed-flow scope. Its current project status is `In Progress`, so this dependency is **not satisfied by this plan**. [methodology-closeout-integrity-plan.md](methodology-closeout-integrity-plan.md) is marked close-out complete, but its text also says typed-flow promotion remains blocked until its Layer C work; verify the authoritative gate receipt and reconcile that wording before authorizing Wave 4.
 
 **Proposed analyzer pass: `async_boundary` (opt-in → promote to gate)**
 
@@ -469,7 +469,7 @@ flowchart TD
 - When retry or at-least-once delivery is declared, idempotency/deduplication evidence is required.
 - Inventory validation reports missing fields; it does not certify runtime ordering, delivery, or race-freedom.
 
-**Documentation:** Expand [composition-coverage.md](../tied/docs/composition-coverage.md) with async seam examples (IPC, event emitter, subprocess stdout stream).
+**Documentation:** Expand [composition-coverage.md](../tied-bundle/docs/composition-coverage.md) with async seam examples (IPC, event emitter, subprocess stdout stream).
 
 **Fault injection (`CONTROLLED_COMPOSITION_FAULT`):**
 
@@ -497,7 +497,7 @@ flowchart TD
 
 **Defer** until W0–W5 stable.
 
-**Status:** Advisory/optional. W6 must not be a dependency of T0 or of correctness claims. Its entry gate includes a client-refresh compatibility check because canonical source vocabulary is installed under client `tied/methodology/vocab/`, while client-owned vocabulary remains under client `tied/vocab/`.
+**Status:** Advisory/optional. W6 must not be a dependency of T0 or of correctness claims. Its entry gate includes a client-refresh compatibility check because canonical source vocabulary is installed under client `tied/methodology/vocab/`, while client-owned vocabulary remains under client `tied-project/vocab/`.
 
 ---
 
@@ -566,7 +566,7 @@ TIED methodology should catch or flag these common async documentation mistakes.
 
 ## 5. REQ / ARCH / IMPL token proposals
 
-**Registration status:** W0–W2 tokens in the tables below are **registered** in project TIED indexes and detail files (`tied/requirements.yaml`, `tied/architecture-decisions.yaml`, `tied/implementation-decisions.yaml`, `tied/semantic-tokens.yaml`). W3–W6 tokens remain **proposals** until separately authorized and registered via `tied_token_create_with_detail`; do not cite W3–W6 names as existing TIED records.
+**Registration status:** W0–W2 tokens in the tables below are **registered** in project TIED indexes and detail files (`tied-project/requirements.yaml`, `tied-project/architecture-decisions.yaml`, `tied-project/implementation-decisions.yaml`, `tied-project/semantic-tokens.yaml`). W3–W6 tokens remain **proposals** until separately authorized and registered via `tied_token_create_with_detail`; do not cite W3–W6 names as existing TIED records.
 
 ### Requirement tokens
 
@@ -656,8 +656,8 @@ Methodology enhancement: explicit async comprehension across REQ, ARCH, IMPL, ch
 
 | Area | Impact |
 |------|--------|
-| `tied/docs/*` | Requirements/architecture guidance, checklist, pseudo-code format, composition-coverage, processes |
-| `tied/vocab/*` | Methodology-owned async glossary in this source repository |
+| `tied-bundle/docs/*` | Requirements/architecture guidance, checklist, pseudo-code format, composition-coverage, processes |
+| `tied-project/vocab/*` | Methodology-owned async glossary in this source repository |
 | `templates/` | `impl-essence-pseudocode-template.md` and any exact authoring-template surface confirmed at entry |
 | `mcp-server/src/analysis/` | New async_boundary pass (Wave 4) |
 | MCP tools | binding_inventory_validate, pseudocode_analyze, checklist gate |
@@ -703,7 +703,7 @@ This matrix separates evidence for the plan from evidence required after a wave 
 |---|---|---|---|
 | Referenced paths | W0–W2 records, docs, source/tests, fixture corpus, and pilot artifacts resolve; W3–W6 future paths are labeled | Recheck all changed links at each wave close-out | Plan/TIED owner; no client methodology edits |
 | Token relationships | Four TIED indexes validate; `tied_validate_consistency` returns `ok: true`; W0–W2 records resolve | Run the same validators after any TIED mutation and before close-out | TIED YAML owner |
-| Vocabulary ownership | Source `tied/vocab/` glossary, routing, and catalog entries exist; no new terms added in this refinement | Run vocabulary **VALIDATE** at traceable-commit; client refresh remains a separate check | Vocabulary owner |
+| Vocabulary ownership | Source `tied-project/vocab/` glossary, routing, and catalog entries exist; no new terms added in this refinement | Run vocabulary **VALIDATE** at traceable-commit; client refresh remains a separate check | Vocabulary owner |
 | Async semantic coverage | Seven classes and proof boundary are in the glossary/manifest; 14 fixtures plus legacy corpus pass targeted tests | Preserve positive/negative/N/A coverage when W3+ changes the contract | REQ/ARCH/IMPL authors |
 | Legacy compatibility | Targeted fixture and checklist tests pass; sync-only catalog behavior remains covered | Run broader regression before W2 close-out and each later wave | Pseudocode/checklist owners |
 | CITDP activation | W2 CITDP exists but is `in_progress`; no inquiry run; current pre-implementation gate validation is `allowed: false` with sparse Tracker and incomplete integrated pairing | Enrich W2 Tracker/CITDP and obtain an authoritative allowed gate before close-out; W3 must own inquiry activation | CITDP/checklist owner |
@@ -718,20 +718,20 @@ T0 changes live in the **canonical TIED source repository** (`stdd`). Clients re
 
 | Path | W0 / W1 | Change type |
 |------|---------|-------------|
-| `tied/vocab/async-methodology.md` | W0 | **Create** — methodology glossary |
-| `tied/vocab/routing.md` | W0 | **Modify** — async keyword routes |
-| `tied/vocab/domain-references.md` | W0 | **Modify** — index entry for async glossary |
-| `tied/docs/requirements.md` | W0 | **Modify** — async acceptance criteria guidance |
-| `tied/docs/architecture-decisions.md` | W0 | **Modify** — async architecture decision prompts |
-| `tied/docs/detail-files-schema.md` | W0 | **Modify** — optional async criteria fields (if schema extension approved) |
-| `tied/docs/pseudocode-format-and-practices.md` | W1 | **Modify** — optional async contract rows |
-| `tied/docs/implementation-decisions.md` | W1 | **Modify** — preferred vocabulary / SHAPE guidance |
+| `tied-project/vocab/async-methodology.md` | W0 | **Create** — methodology glossary |
+| `tied-project/vocab/routing.md` | W0 | **Modify** — async keyword routes |
+| `tied-project/vocab/domain-references.md` | W0 | **Modify** — index entry for async glossary |
+| `tied-bundle/docs/requirements.md` | W0 | **Modify** — async acceptance criteria guidance |
+| `tied-bundle/docs/architecture-decisions.md` | W0 | **Modify** — async architecture decision prompts |
+| `tied-bundle/docs/detail-files-schema.md` | W0 | **Modify** — optional async criteria fields (if schema extension approved) |
+| `tied-bundle/docs/pseudocode-format-and-practices.md` | W1 | **Modify** — optional async contract rows |
+| `tied-bundle/docs/implementation-decisions.md` | W1 | **Modify** — preferred vocabulary / SHAPE guidance |
 | `templates/impl-essence-pseudocode-template.md` | W1 | **Modify** — optional async section |
-| `tied/requirements.yaml` + `tied/requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml` (+ W0/W1 child REQ details) | W0/W1 | **Create** — token registration |
-| `tied/architecture-decisions.yaml` + `tied/architecture-decisions/ARCH-ASYNC_*.yaml` | W0/W1 | **Create** |
-| `tied/implementation-decisions.yaml` + `tied/implementation-decisions/IMPL-ASYNC_*.yaml` | W0/W1 | **Create** |
-| `tied/implementation-decisions/IMPL-ASYNC_*-pseudocode.md` | W0/W1 | **Create** — sidecar pseudo-code |
-| `tied/semantic-tokens.yaml` | W0/W1 | **Modify** — register approved tokens |
+| `tied-project/requirements.yaml` + `tied-project/requirements/REQ-TIED_ASYNC_METHODOLOGY.yaml` (+ W0/W1 child REQ details) | W0/W1 | **Create** — token registration |
+| `tied-project/architecture-decisions.yaml` + `tied-project/architecture-decisions/ARCH-ASYNC_*.yaml` | W0/W1 | **Create** |
+| `tied-project/implementation-decisions.yaml` + `tied-project/implementation-decisions/IMPL-ASYNC_*.yaml` | W0/W1 | **Create** |
+| `tied-project/implementation-decisions/IMPL-ASYNC_*-pseudocode.md` | W0/W1 | **Create** — sidecar pseudo-code |
+| `tied-project/semantic-tokens.yaml` | W0/W1 | **Modify** — register approved tokens |
 | `working/REQ-TIED_ASYNC_METHODOLOGY/` | T0/W2 | **Present** — T0 and W2 Trackers, CITDP, fixtures, token payloads, and pilot artifacts |
 | `working/REQ-TIED_ASYNC_METHODOLOGY/pilot/` | T0/W2 | **Present** — reference pilot before/after-T0/after-W2 artifacts (see §9) |
 
@@ -739,13 +739,13 @@ T0 changes live in the **canonical TIED source repository** (`stdd`). Clients re
 
 | Path | Deferred to | Reason |
 |------|-------------|--------|
-| `tied/docs/agent-req-implementation-checklist.md` / `.yaml` | W2 (**delivered**) | Checklist catalog/contradiction dispositions and `async_in_scope`; deeper CITDP wiring remains W3 |
-| `tied/citdp/*` | W3 | CITDP trigger wiring; W2’s in-progress CITDP remains under `working/` |
+| `tied-bundle/docs/agent-req-implementation-checklist.md` / `.yaml` | W2 (**delivered**) | Checklist catalog/contradiction dispositions and `async_in_scope`; deeper CITDP wiring remains W3 |
+| `tied-project/citdp/*` | W3 | CITDP trigger wiring; W2’s in-progress CITDP remains under `working/` |
 | `mcp-server/src/analysis/*` | W4 | Layer C `async_boundary` pass |
 | `mcp-server/src/analysis/binding-inventory.ts` | W5 | Async binding columns |
 | `tied/agent-preload-contract.yaml`, `tools/agentstream/` | W6 | Agent preload (optional) |
 | Client `tied/methodology/` trees | Post-`copy_files.sh` refresh | Read-only in clients; refreshed from source, not edited in this plan |
-| Client `tied/vocab/` (project-owned) | Per-client RECORD | Not part of this methodology source tranche |
+| Client `tied-project/vocab/` (project-owned) | Per-client RECORD | Not part of this methodology source tranche |
 
 **Client refresh expectation after T0/W2 reconciliation:** Run `copy_files.sh` on a pilot client only as a separately authorized refresh check; verify `tied/methodology/vocab/async-methodology.md` and updated docs appear under the client snapshot. W3–W6 analyzer, CITDP wiring, composition, and preload behavior remain deferred.
 
@@ -785,7 +785,7 @@ Aligned with `[PROC-TIED_DEV_CYCLE]` and `[PROC-AGENT_REQ_CHECKLIST]`. The imple
 
 **Do not start W4 until:**
 
-- [REQ-PSEUDOCODE_TYPED_FLOW](../tied/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml) Phase 3 implementation and verification are closed for the required typed scope; its current index status is `In Progress`.
+- [REQ-PSEUDOCODE_TYPED_FLOW](../tied-project/requirements/REQ-PSEUDOCODE_TYPED_FLOW.yaml) Phase 3 implementation and verification are closed for the required typed scope; its current index status is `In Progress`.
 - [methodology-closeout-integrity-plan.md](methodology-closeout-integrity-plan.md) has an authoritative reconciled Layer C gate receipt. Its header says close-out is implemented, but the body still contains typed-flow blocking language; do not treat the document title alone as evidence.
 - W3 has selected the async analyzer depth and gate policy; W4 is not a default consequence of declaring `Async`.
 
@@ -827,7 +827,7 @@ Aligned with `[PROC-TIED_DEV_CYCLE]` and `[PROC-AGENT_REQ_CHECKLIST]`. The imple
 
 ### Reference pilot (current structural rehearsal)
 
-The current **reference pilot** is a structural rehearsal, not a close-out proof. Primary target: **[IMPL-GOAGENT-EXECUTOR](../tied/implementation-decisions/IMPL-GOAGENT-EXECUTOR-pseudocode.md)** subprocess stream-json executor (`REQ-GOAGENT-AGENT-EXECUTOR`, `ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON`). Secondary target for message/async-handler semantics: **[IMPL-MCP_LEAP_PROPOSAL_QUEUE](../tied/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md)** MCP async tool handlers.
+The current **reference pilot** is a structural rehearsal, not a close-out proof. Primary target: **[IMPL-GOAGENT-EXECUTOR](../tied-project/implementation-decisions/IMPL-GOAGENT-EXECUTOR-pseudocode.md)** subprocess stream-json executor (`REQ-GOAGENT-AGENT-EXECUTOR`, `ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON`). Secondary target for message/async-handler semantics: **[IMPL-MCP_LEAP_PROPOSAL_QUEUE](../tied-project/implementation-decisions/IMPL-MCP_LEAP_PROPOSAL_QUEUE-pseudocode.md)** MCP async tool handlers.
 
 | Pilot aspect | Before (today) | After T0 (documentation) | After W2 (rehearsal; not close-out) |
 |---|---|---|---|

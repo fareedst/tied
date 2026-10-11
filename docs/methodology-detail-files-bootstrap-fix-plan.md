@@ -26,7 +26,7 @@ After a four-prompt deploy, `tied_validate_consistency` reported `ok: false` on 
 
 ### Root cause and current behavior
 
-1. **Feedback stack never promoted to `templates/`** — full records live in the TIED source repo project layer (`stdd/tied/requirements/`, `architecture-decisions/`, `implementation-decisions/`) but were not copied into `templates/` for client inheritance. Indexes in `templates/*.yaml` already reference these tokens with `detail_file: "null"`.
+1. **Feedback stack never promoted to `templates/`** — full records live in the TIED source repo project layer (`stdd/tied-project/requirements/`, `architecture-decisions/`, `implementation-decisions/`) but were not copied into `templates/` for client inheritance. Indexes in `templates/*.yaml` already reference these tokens with `detail_file: "null"`.
 
 2. **Legacy index seed pattern** — bootstrap-critical tokens (`REQ-TIED_SETUP`, `REQ-MODULE_VALIDATION`) use `detail_file: "null"` in index YAML while detail files exist on disk under `templates/requirements/`. `copy_files.sh` copies files and indexes independently; nothing reconciles paths.
 
@@ -70,10 +70,10 @@ After a four-prompt deploy, `tied_validate_consistency` reported `ok: false` on 
 
 Existing Implemented records in `stdd/tied/`:
 
-- `tied/requirements/REQ-FEEDBACK_TO_TIED.yaml`
-- `tied/architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml`
-- `tied/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml`
-- `tied/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md`
+- `tied-project/requirements/REQ-FEEDBACK_TO_TIED.yaml`
+- `tied-project/architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml`
+- `tied-project/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml`
+- `tied-project/implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md`
 
 ### Actions
 
@@ -175,7 +175,7 @@ Add unit tests in the existing MCP suite for sentinel variants, real paths, meth
 
 **Priority:** P1 — operators need a single migration anchor.
 
-Update canonical docs in `tied/docs/` (existing clients receive these only when missing; customized copies require deliberate comparison and merge):
+Update canonical docs in `tied-bundle/docs/` (existing clients receive these only when missing; customized copies require deliberate comparison and merge):
 
 1. **`methodology-migration.md`** — new subsection **“Feedback token packaging status”** (mirror “Quality-token packaging status” and “Evidence-chain profile packaging status”):
    - `[REQ-FEEDBACK_TO_TIED]`, `[ARCH-FEEDBACK_STORAGE]`, `[IMPL-MCP_FEEDBACK_TOOLS]`
@@ -185,7 +185,7 @@ Update canonical docs in `tied/docs/` (existing clients receive these only when 
 
 3. **`client-development-index.md`** — note that post-bootstrap `tied_validate_consistency` should pass on an empty project tree.
 
-4. **`tied/vocab/feedback-to-tied.md`** — verify the source-only glossary links and its methodology routing entry; do not install the source-only Prompt Composer glossary into clients.
+4. **`tied-project/vocab/feedback-to-tied.md`** — verify the source-only glossary links and its methodology routing entry; do not install the source-only Prompt Composer glossary into clients.
 
 ---
 
@@ -224,7 +224,7 @@ Track this behavior-changing source-repository work using `[PROC-AGENT_REQ_CHECK
 ### Required workflow and gates
 
 1. **Refine:** resolve “inherited detail,” “usable path,” “sentinel,” “methodology-first,” and “project fallback” as the canonical meanings above; record new methodology vocabulary only if a new concept is introduced. Validate vocabulary before commit.
-2. **Plan:** copy the canonical Tracker to a unique working path such as `working/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY_<timestamp>.yaml`; perform CITDP change-definition, impact, risk-assessment, and test-strategy. Persist `tied/citdp/CITDP-REQ-*.yaml` after implementation as required by policy.
+2. **Plan:** copy the canonical Tracker to a unique working path such as `working/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY_<timestamp>.yaml`; perform CITDP change-definition, impact, risk-assessment, and test-strategy. Persist `tied-project/citdp/CITDP-REQ-*.yaml` after implementation as required by policy.
 3. **Risk profile:** select `depth_tier: integrated` because the change alters bootstrap filesystem behavior, inherited/project boundaries, and consistency validation. Record gate policy independently (fail closed for missing or escaping artifacts); research and assurance profiles must remain separate fields. Integrated inquiry artifacts and identity-bound activation are required before implementation/verification if the project’s inquiry policy activates.
 4. **Documentation first:** author/update the REQ→ARCH→IMPL stack and IMPL pseudo-code before tests or code. Every changed Active pseudo-code block has literal `[IMPL-*] [ARCH-*] [REQ-*]` lead comments plus PRE/POST/EFFECTS and applicable FAILURE_MODES/DATA_TRANSITION/TERMINATION. Run `pseudocode_validate` and Layer A consistency checks before RED tests.
 5. **Unit TDD:** write failing tests first for sentinel classification, validator index reporting, `listDetailTokens()` sentinel exclusion, methodology-first reads, project fallback, and project-only write rejection. Then implement the smallest GREEN changes and run TypeScript build/tests after each iteration.
@@ -255,7 +255,7 @@ flowchart TD
 - **Do not** copy feedback detail files into client **project** YAML — violates methodology/project separation and duplicates tokens.
 - **Do not** hand-edit `tied/methodology/` in clients — fix templates and re-run `copy_files.sh`.
 - Promoted feedback records may reference tests/code that exist only in the TIED source repo; trim inherited detail traceability to methodology-relevant paths only.
-- Re-running `copy_files.sh` overwrites `tied/methodology/**` from templates; project YAML and client vocabulary are preserved per [methodology-migration.md](../tied/docs/methodology-migration.md) bootstrap preservation matrix. Existing `tied/docs/*.md` and `.cursor/mcp.json` have separate copy-when-missing/byte-preservation rules.
+- Re-running `copy_files.sh` overwrites `tied/methodology/**` from templates; project YAML and client vocabulary are preserved per [methodology-migration.md](../tied-bundle/docs/methodology-migration.md) bootstrap preservation matrix. Existing `tied-bundle/docs/*.md` and `.cursor/mcp.json` have separate copy-when-missing/byte-preservation rules.
 - A detail path must be resolved relative to the selected methodology base and remain within it; do not silently accept an absolute path or `..` escape.
 - Do not interpret a passing loader fallback as proof that the inherited index is correct: the validator’s index scan and bootstrap gate must agree on usable paths.
 - `listDetailTokens()` remains project-base-only in this change. Treat methodology enumeration as a separately specified enhancement, not an implicit consequence of fallback support.
@@ -264,9 +264,9 @@ flowchart TD
 
 ## Related documents
 
-- [methodology-migration.md](../tied/docs/methodology-migration.md) — client refresh procedure and preservation matrix
+- [methodology-migration.md](../tied-bundle/docs/methodology-migration.md) — client refresh procedure and preservation matrix
 - [checklist-adherence-improvement-plan.md](checklist-adherence-improvement-plan.md) — checklist enforcement context (client `1787691672` pilot)
 - [integrated-activation-checklist-enforcement-plan.md](integrated-activation-checklist-enforcement-plan.md) — integrated activation gates
 - `copy_files.sh` — bootstrap and methodology overwrite logic
 - `mcp-server/src/consistency-validator.ts` — `tied_validate_consistency` implementation
-- `tied/vocab/feedback-to-tied.md` — feedback domain vocabulary
+- `tied-project/vocab/feedback-to-tied.md` — feedback domain vocabulary

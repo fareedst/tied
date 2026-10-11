@@ -1,0 +1,48 @@
+REQ-CHECKLIST-PROCESS-REVIEW:
+  category: "Functional"
+  description: "Ship generic operator documentation—a repeatable review plan and reusable checklist—for auditing active checklists and process docs without replacing [PROC-AGENT_REQ_CHECKLIST] or authorizing ad-hoc deletion."
+  metadata:
+    created:
+      author: "agent"
+      date: "2026-10-10"
+    last_validated:
+      author: "agent"
+      date: "2026-10-11"
+      notes: "Close-out run_id=cpr-closeout-20261011; program phases 2–3 doc batches included in commit bundle"
+      result: "pass"
+  name: "Checklist and process review operator docs"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Explicit non-goals protecting canonical workflow"
+      - "Fixture-based drift patterns"
+      - "Phased review and cleanup"
+    problems_solved:
+      - "Deletion without reference proof"
+      - "No single repeatable review procedure"
+      - "Unclear authority between plans, Trackers, and canonical checklist"
+    why: "The repository plan/checklist corpus is large; operators need a dependency-safe review method before cleanup."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "docs/checklist-process-review-checklist.md provides sections A–J with sign-off fields."
+      id: "SC-CPR-CHECKLIST"
+    - criterion: "docs/checklist-process-review-plan.md defines scope, authority, phases, deletion gates, validation commands, cadence, and known drift patterns."
+      id: "SC-CPR-PLAN"
+    - criterion: "Documents state they do not replace [PROC-AGENT_REQ_CHECKLIST] or mandate review on every REQ."
+      id: "SC-CPR-NONREPLACEMENT"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-CHECKLIST-PROCESS-REVIEW"
+    code_annotations: []
+    implementation:
+      - "IMPL-CHECKLIST-PROCESS-REVIEW"
+    tests: []
+  validation_criteria:
+    - coverage: "Phase 1 deliverables only"
+      method: "Manual doc review against satisfaction criteria"

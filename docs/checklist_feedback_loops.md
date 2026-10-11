@@ -2,7 +2,7 @@
 
 **TIED Methodology Version**: 3.0.0
 
-This page explains how the [agent requirement implementation checklist](../tied/docs/agent-req-implementation-checklist.md) governs agent behavior. The executable tracker remains the source for step order, branching, completion markers, and loop-back bookkeeping; this page explains the purpose and benefit of each phase without reproducing that tracker.
+This page explains how the [agent requirement implementation checklist](../tied-bundle/docs/agent-req-implementation-checklist.md) governs agent behavior. The executable tracker remains the source for step order, branching, completion markers, and loop-back bookkeeping; this page explains the purpose and benefit of each phase without reproducing that tracker.
 
 ## The agent’s operating pattern
 
@@ -10,7 +10,7 @@ Every change follows the same conversational discipline:
 
 1. **Acknowledge and orient.** Read the governing guidance and state the active change and checklist phase.
 2. **Resolve language.** Map developer or sponsor wording to one preferred domain term before interpreting the request.
-3. **Preload context.** Read [`tied/vocab/routing.md`](../tied/vocab/routing.md), match task keywords, and open only the relevant glossaries before reading TIED records, source, or tests.
+3. **Preload context.** Read [`tied-project/vocab/routing.md`](../tied-project/vocab/routing.md), match task keywords, and open only the relevant glossaries before reading TIED records, source, or tests.
 4. **Work through the gate.** Report the phase outcome and its evidence; do not silently skip a gate.
 5. **Record and validate.** Capture new concepts as they appear, then validate vocabulary and traceability before commit.
 6. **Loop back honestly.** If evidence contradicts the current intent, return to the appropriate earlier phase instead of patching around the contradiction.

@@ -5,8 +5,8 @@ Copy everything in the **Prompt** section below into a new Cursor (or other TIED
 **Purpose:** Research existing code, tests, and docs; author one or more **canonical domain vocabulary** files plus an **index** (and a lightweight **routing** index when the full index grows large); wire light TIED cross-links. Vocabulary makes IMPL `essence_pseudocode` **precise, comparable, and traceable**—not a substitute for implementing features.
 
 **Reference implementations:**
-- **TIED methodology repo (stdd):** [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) + [`tied/vocab/routing.md`](../tied/vocab/routing.md)
-- **Mature product client (Indescript):** large federated corpus under `tied/vocab/` with routing index for bootstrap when the full index exceeds agent-context comfort
+- **TIED methodology repo (stdd):** [`tied-project/vocab/domain-references.md`](../tied-project/vocab/domain-references.md) + [`tied-project/vocab/routing.md`](../tied-project/vocab/routing.md)
+- **Mature product client (Indescript):** large federated corpus under `tied-project/vocab/` with routing index for bootstrap when the full index exceeds agent-context comfort
 
 ---
 
@@ -15,22 +15,22 @@ Copy everything in the **Prompt** section below into a new Cursor (or other TIED
 | Placeholder | Example (TIED / agentstream) | Your target repo |
 |-------------|------------------------------|------------------|
 | `{PROJECT}` | `stdd` / `acme` | _e.g. `acme`_ |
-| `{INDEX_PATH}` | `tied/vocab/domain-references.md` | usually `tied/vocab/domain-references.md` |
-| `{ROUTING_PATH}` | `tied/vocab/routing.md` | create when the full index grows large |
-| `{VOCAB_DIR}` | `tied/vocab/` | usually `tied/vocab/` |
-| `{DOMAIN_SEEDS}` | See **Domain seeds** below | REQ clusters from `tied/requirements.yaml` |
+| `{INDEX_PATH}` | `tied-project/vocab/domain-references.md` | usually `tied-project/vocab/domain-references.md` |
+| `{ROUTING_PATH}` | `tied-project/vocab/routing.md` | create when the full index grows large |
+| `{VOCAB_DIR}` | `tied-project/vocab/` | usually `tied-project/vocab/` |
+| `{DOMAIN_SEEDS}` | See **Domain seeds** below | REQ clusters from `tied-project/requirements.yaml` |
 
 ### Domain seeds (TIED methodology — use as a model for `{DOMAIN_SEEDS}`)
 
 Group work by cohesive subsystems that already have REQ/ARCH/IMPL clusters:
 
-1. **TIED methodology layout** — project vs methodology YAML, semantic tokens, module validation ([`tied/vocab/tied-methodology.md`](../tied/vocab/tied-methodology.md))
-2. **TIED YAML MCP / tied-cli** — base path, validation, verify, cycles ([`tied/vocab/tied-yaml-mcp.md`](../tied/vocab/tied-yaml-mcp.md))
-3. **Feedback to TIED** — `feedback.yaml`, export ([`tied/vocab/feedback-to-tied.md`](../tied/vocab/feedback-to-tied.md))
-4. **LEAP proposal queue** — non-canonical proposals, audit ([`tied/vocab/leap-proposal-queue.md`](../tied/vocab/leap-proposal-queue.md))
-5. **agentstream** — **`tied agentstream`**, pipeline, turns, checklist render ([`tied/vocab/agentstream.md`](../tied/vocab/agentstream.md))
-6. **agent-stream (historical Ruby)** — removed operator path; `IMPL-ATDD-*` terms ([`tied/vocab/agent-stream-ruby.md`](../tied/vocab/agent-stream-ruby.md))
-7. **Pseudo-code & CITDP** — domain vocab vs IMPL grammar; three-way alignment ([`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md))
+1. **TIED methodology layout** — project vs methodology YAML, semantic tokens, module validation ([`tied-project/vocab/tied-methodology.md`](../tied-project/vocab/tied-methodology.md))
+2. **TIED YAML MCP / tied-cli** — base path, validation, verify, cycles ([`tied-project/vocab/tied-yaml-mcp.md`](../tied-project/vocab/tied-yaml-mcp.md))
+3. **Feedback to TIED** — `feedback.yaml`, export ([`tied-project/vocab/feedback-to-tied.md`](../tied-project/vocab/feedback-to-tied.md))
+4. **LEAP proposal queue** — non-canonical proposals, audit ([`tied-project/vocab/leap-proposal-queue.md`](../tied-project/vocab/leap-proposal-queue.md))
+5. **agentstream** — **`tied agentstream`**, pipeline, turns, checklist render ([`tied-project/vocab/agentstream.md`](../tied-project/vocab/agentstream.md))
+6. **agent-stream (historical Ruby)** — removed operator path; `IMPL-ATDD-*` terms ([`tied-project/vocab/agent-stream-ruby.md`](../tied-project/vocab/agent-stream-ruby.md))
+7. **Pseudo-code & CITDP** — domain vocab vs IMPL grammar; three-way alignment ([`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md))
 
 For a product client, replace these seeds with *product* subsystems (UI surfaces, config keys, CLI flags, domain models) that already have REQ/ARCH/IMPL clusters.
 
@@ -47,7 +47,7 @@ You are working in a **TIED client repository** (methodology under `tied/`, proj
 
 ## Why this matters for TIED IMPL pseudo-code
 
-IMPL `essence_pseudocode` is the **most critical traceability artifact** ([PROC-IMPL_PSEUDOCODE_TOKENS], `tied/docs/pseudocode-writing-and-validation.md`). It must be:
+IMPL `essence_pseudocode` is the **most critical traceability artifact** ([PROC-IMPL_PSEUDOCODE_TOKENS], `tied-bundle/docs/pseudocode-writing-and-validation.md`). It must be:
 
 - **Language-agnostic** — TIED procedural vocabulary (Contract, INPUT, OUTPUT, DATA, CONTROL, `procedure UPPER_SNAKE`, IF/ELSE, ON error, AWAIT), **not** pasted host-language source.
 - **Block-named with stable identifiers** — logical blocks use **UPPER_SNAKE** names (e.g. `LOAD_QUEUE`, `DATA_FENCE_WRAP`) that should **match** terms defined in your domain vocabulary.
@@ -59,13 +59,13 @@ IMPL `essence_pseudocode` is the **most critical traceability artifact** ([PROC-
 Read before writing vocabulary:
 
 - `AGENTS.md` (session bootstrap)
-- `tied/docs/ai-principles.md`
-- `tied/docs/implementation-decisions.md` — § **Preferred vocabulary for essence_pseudocode**
-- `tied/docs/pseudocode-writing-and-validation.md` — language-agnostic rule, block format, validation
-- `tied/docs/vocabulary-index-analysis-and-standards.md` — structure and governance standards
-- `templates/impl-essence-pseudocode-template.md` (if present) or an existing `tied/implementation-decisions/*-pseudocode.md` sidecar in this repo
+- `tied-bundle/docs/ai-principles.md`
+- `tied-bundle/docs/implementation-decisions.md` — § **Preferred vocabulary for essence_pseudocode**
+- `tied-bundle/docs/pseudocode-writing-and-validation.md` — language-agnostic rule, block format, validation
+- `tied-bundle/docs/vocabulary-index-analysis-and-standards.md` — structure and governance standards
+- `templates/impl-essence-pseudocode-template.md` (if present) or an existing `tied-project/implementation-decisions/*-pseudocode.md` sidecar in this repo
 
-**Reference example (TIED methodology):** Index [`tied/vocab/domain-references.md`](tied/vocab/domain-references.md); routing [`tied/vocab/routing.md`](tied/vocab/routing.md); glossaries such as `tied/vocab/agentstream.md`, `tied/vocab/tied-yaml-mcp.md`, `tied/vocab/leap-proposal-queue.md`. REQ criteria should cite glossary paths **and** pseudo-code block names together.
+**Reference example (TIED methodology):** Index [`tied-project/vocab/domain-references.md`](tied-project/vocab/domain-references.md); routing [`tied-project/vocab/routing.md`](tied-project/vocab/routing.md); glossaries such as `tied-project/vocab/agentstream.md`, `tied-project/vocab/tied-yaml-mcp.md`, `tied-project/vocab/leap-proposal-queue.md`. REQ criteria should cite glossary paths **and** pseudo-code block names together.
 
 ---
 
@@ -106,7 +106,7 @@ Create **`{ROUTING_PATH}`** (~70–100 lines) with:
 
 ### Per-domain vocabulary (one or more files)
 
-Suggested path pattern: **`{VOCAB_DIR}<domain>.md`** (TIED convention: glossaries under `tied/vocab/` **without** a `-vocabulary` suffix; stay consistent within a repo).
+Suggested path pattern: **`{VOCAB_DIR}<domain>.md`** (TIED convention: glossaries under `tied-project/vocab/` **without** a `-vocabulary` suffix; stay consistent within a repo).
 
 Each file should include:
 
@@ -194,12 +194,12 @@ This checklist confirms the **pattern** the prompt produces. The TIED methodolog
 
 | Acceptance item | TIED (stdd) status |
 |-----------------|------------------|
-| Index lists all vocabulary files | [`tied/vocab/domain-references.md`](../tied/vocab/domain-references.md) |
-| Routing index for bootstrap | [`tied/vocab/routing.md`](../tied/vocab/routing.md) |
-| Each glossary: scope, synonyms, concepts, index | e.g. [`tied/vocab/agentstream.md`](../tied/vocab/agentstream.md), [`tied/vocab/leap-proposal-queue.md`](../tied/vocab/leap-proposal-queue.md) |
+| Index lists all vocabulary files | [`tied-project/vocab/domain-references.md`](../tied-project/vocab/domain-references.md) |
+| Routing index for bootstrap | [`tied-project/vocab/routing.md`](../tied-project/vocab/routing.md) |
+| Each glossary: scope, synonyms, concepts, index | e.g. [`tied-project/vocab/agentstream.md`](../tied-project/vocab/agentstream.md), [`tied-project/vocab/leap-proposal-queue.md`](../tied-project/vocab/leap-proposal-queue.md) |
 | Glossary ↔ UPPER_SNAKE blocks | e.g. `LOAD_QUEUE` in leap-proposal-queue vocab / IMPL |
 | Vocabulary thin; IMPL owns behavior | Glossaries point to IMPL pseudo-code sidecars |
-| Standards + process | [`tied/docs/vocabulary-index-analysis-and-standards.md`](../tied/docs/vocabulary-index-analysis-and-standards.md), `[PROC-VOCABULARY_INDEX]` |
+| Standards + process | [`tied-bundle/docs/vocabulary-index-analysis-and-standards.md`](../tied-bundle/docs/vocabulary-index-analysis-and-standards.md), `[PROC-VOCABULARY_INDEX]` |
 
 ### Sample pseudo-code alignment (TIED)
 

@@ -32,14 +32,14 @@ must not be collapsed into a single cross-project judgment.
 
 ### Governing TIED references
 
-- [`tied/docs/ai-principles.md`](../tied/docs/ai-principles.md) — documentation-first flow, LEAP, module validation, and evidence obligations.
-- [`tied/docs/implementation-decisions.md`](../tied/docs/implementation-decisions.md) — IMPL pseudo-code grammar and contract precision.
-- [`tied/docs/pseudocode-writing-and-validation.md`](../tied/docs/pseudocode-writing-and-validation.md) — pseudo-code validation and three-way alignment.
-- [`tied/docs/composition-coverage.md`](../tied/docs/composition-coverage.md) — binding inventories, composition evidence, and E2E boundaries.
-- [`tied/docs/evidence-chain-profile.md`](../tied/docs/evidence-chain-profile.md) — profile depths, denominators, and proof boundaries.
-- [`tied/vocab/quality-assurance.md`](../tied/vocab/quality-assurance.md) — quality evidence, provenance, and risk-triggered assurance.
-- [`tied/vocab/fidelity-research.md`](../tied/vocab/fidelity-research.md) — read-only research, finding lifecycle, and inquiry activation.
-- [`tied/docs/agent-req-implementation-checklist.md`](../tied/docs/agent-req-implementation-checklist.md) — approved remediation sequencing.
+- [`tied-bundle/docs/ai-principles.md`](../tied-bundle/docs/ai-principles.md) — documentation-first flow, LEAP, module validation, and evidence obligations.
+- [`tied-bundle/docs/implementation-decisions.md`](../tied-bundle/docs/implementation-decisions.md) — IMPL pseudo-code grammar and contract precision.
+- [`tied-bundle/docs/pseudocode-writing-and-validation.md`](../tied-bundle/docs/pseudocode-writing-and-validation.md) — pseudo-code validation and three-way alignment.
+- [`tied-bundle/docs/composition-coverage.md`](../tied-bundle/docs/composition-coverage.md) — binding inventories, composition evidence, and E2E boundaries.
+- [`tied-bundle/docs/evidence-chain-profile.md`](../tied-bundle/docs/evidence-chain-profile.md) — profile depths, denominators, and proof boundaries.
+- [`tied-project/vocab/quality-assurance.md`](../tied-project/vocab/quality-assurance.md) — quality evidence, provenance, and risk-triggered assurance.
+- [`tied-project/vocab/fidelity-research.md`](../tied-project/vocab/fidelity-research.md) — read-only research, finding lifecycle, and inquiry activation.
+- [`tied-bundle/docs/agent-req-implementation-checklist.md`](../tied-bundle/docs/agent-req-implementation-checklist.md) — approved remediation sequencing.
 
 ## B. Evidence method and proof boundaries
 
@@ -84,10 +84,10 @@ boundary. The profiles also report vocabulary drift as `not_measured`.
 | Human audit note | A supplemental observation bounded by its command/path provenance | A machine-validated result when provenance is absent |
 
 These boundaries implement
-[REQ-EVIDENCE_CHAIN_PROFILE](../tied/requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml),
-[REQ-EVIDENCE_CHAIN_REPORT](../tied/requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml),
-[REQ-QUALITY_ASSURANCE_EVIDENCE](../tied/requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml),
-and [REQ-TIED_FIDELITY_RESEARCH](../tied/requirements/REQ-TIED_FIDELITY_RESEARCH.yaml).
+[REQ-EVIDENCE_CHAIN_PROFILE](../tied-project/requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml),
+[REQ-EVIDENCE_CHAIN_REPORT](../tied-project/requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml),
+[REQ-QUALITY_ASSURANCE_EVIDENCE](../tied-project/requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml),
+and [REQ-TIED_FIDELITY_RESEARCH](../tied-project/requirements/REQ-TIED_FIDELITY_RESEARCH.yaml).
 
 ## C. Shared TIED 3.0 alignment themes
 
@@ -97,7 +97,7 @@ dependency for remediation, not by client quality.
 ### 1. Repair the specification stack with LEAP
 
 When tests or code differ from approved IMPL pseudo-code, use
-[PROC-LEAP](../tied/docs/processes.md) to update IMPL first, then ARCH and REQ
+[PROC-LEAP](../tied-bundle/docs/processes.md) to update IMPL first, then ARCH and REQ
 when the intended scope changes. Do not silently encode a discovered behavior
 only in code or tests.
 
@@ -107,7 +107,7 @@ New and changed Active procedure blocks should declare `INPUT`, `OUTPUT`,
 `PRE`, `POST`, and `EFFECTS`. Add `FAILURE_MODES` for fallible outcomes,
 `DATA_TRANSITION` for mutable state, and `TERMINATION` for loops, recursion, or
 open-ended waits. These are the SHAPE-003 through SHAPE-006 checks in
-[PROC-PSEUDOCODE_VALIDATION](../tied/docs/processes.md).
+[PROC-PSEUDOCODE_VALIDATION](../tied-bundle/docs/processes.md).
 
 ### 3. Make pseudo-code sidecars discoverable and complete
 
@@ -121,17 +121,17 @@ reproducible evidence from a pinned commit.
 Every logical pseudo-code block needs a block-lead comment naming the applicable
 REQ, ARCH, and IMPL tokens and explaining how the block implements them. Copy
 that lead literally into the corresponding test and production locations under
-[PROC-IMPL_PSEUDOCODE_TOKENS](../tied/docs/processes.md) and
-[PROC-IMPL_CODE_TEST_SYNC](../tied/docs/processes.md).
+[PROC-IMPL_PSEUDOCODE_TOKENS](../tied-bundle/docs/processes.md) and
+[PROC-IMPL_CODE_TEST_SYNC](../tied-bundle/docs/processes.md).
 
 ### 5. Validate modules before integrating them
 
 Identify module boundaries, interfaces, contracts, edge cases, and failure
 paths before integration. Validate each module independently with appropriate
 unit and contract tests, then add integration coverage. This is the obligation
-in [REQ-MODULE_VALIDATION](../tied/requirements/REQ-MODULE_VALIDATION.yaml)
-and its [ARCH-MODULE_VALIDATION](../tied/architecture-decisions/ARCH-MODULE_VALIDATION.yaml)
-and [IMPL-MODULE_VALIDATION](../tied/implementation-decisions/IMPL-MODULE_VALIDATION.yaml)
+in [REQ-MODULE_VALIDATION](../tied-project/requirements/REQ-MODULE_VALIDATION.yaml)
+and its [ARCH-MODULE_VALIDATION](../tied-project/architecture-decisions/ARCH-MODULE_VALIDATION.yaml)
+and [IMPL-MODULE_VALIDATION](../tied-project/implementation-decisions/IMPL-MODULE_VALIDATION.yaml)
 records.
 
 ### 6. Inventory and prove bindings at composition level
@@ -145,7 +145,7 @@ replace composition evidence.
 ### 7. Use vocabulary as an agent-control layer
 
 For each approved remediation, use
-[PROC-VOCABULARY_INDEX](../tied/docs/processes.md) at its three touchpoints:
+[PROC-VOCABULARY_INDEX](../tied-bundle/docs/processes.md) at its three touchpoints:
 `RESOLVE` sponsor terms, `PRELOAD` routed glossaries before reading project
 artifacts, and `RECORD` new names. Perform `VALIDATE` before commit. Keep
 methodology vocabulary and client vocabulary under their respective ownership
@@ -154,17 +154,17 @@ boundaries.
 ### 8. Attach executable evidence provenance
 
 Select applicable quality attributes using
-[PROC-QUALITY_ASSURANCE](../tied/docs/processes.md), collect declared commands
+[PROC-QUALITY_ASSURANCE](../tied-bundle/docs/processes.md), collect declared commands
 with `quality_evidence_collect_manifest`, and attach the resulting manifest to
 `evidence_chain_profile_generate`. Preserve command identity, environment,
 tool versions, thresholds, exit codes, and artifact references under
-[PROC-QUALITY_EVIDENCE_PROVENANCE](../tied/docs/processes.md).
+[PROC-QUALITY_EVIDENCE_PROVENANCE](../tied-bundle/docs/processes.md).
 
 ### 9. Treat `tied_verify` as policy-dependent
 
 None of the four clients is treated as verification-gated by this pilot plan.
 Use `tied_verify` only where the client explicitly enables
-[PROC-TIED_VERIFICATION_GATED](../tied/docs/processes.md). When enabled, derive
+[PROC-TIED_VERIFICATION_GATED](../tied-bundle/docs/processes.md). When enabled, derive
 status from test results rather than editing status by hand.
 
 ### 10. Re-profile after each remediation tranche
@@ -220,7 +220,7 @@ be rechecked when the corresponding remediation tracker opens.
   Acceptance: `traceability_gap_report` improves; every composition-testable
   row has a UI-free composition test.
 - **P2 — Risk-triggered inquiry:** For shell and remote boundaries, run
-  integrated [REQ-TIED_ADVERSARIAL_INQUIRY](../tied/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml)
+  integrated [REQ-TIED_ADVERSARIAL_INQUIRY](../tied-project/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml)
   inquiry with explicit scope and bounded phase artifacts. Acceptance:
   paired inquiry metric and four identity-bound artifacts, or a documented
   advisory result and residual risk.
@@ -369,7 +369,7 @@ their original command provenance.
   row. Acceptance: sidecar paths resolve, block leads are present, and strict
   pseudo-code validation passes for changed blocks.
 - **P0 — Reconcile CITDP policy:** Align `docs/citdp/` guidance with
-  [`tied/docs/citdp-policy.md`](../tied/docs/citdp-policy.md). Acceptance:
+  [`tied-bundle/docs/citdp-policy.md`](../tied-bundle/docs/citdp-policy.md). Acceptance:
   behavior-changing work has a CITDP record or an intentional, policy-backed
   skip; docs do not imply a conflicting lifecycle.
 - **P0 — Contract precision:** Add `EFFECTS` and applicable Layer-B clauses to
@@ -419,15 +419,15 @@ flowchart TD
 ## F. Completion checklist for approved remediation
 
 - [ ] Resolve sponsor language and preload only matched glossaries under
-  [PROC-VOCABULARY_INDEX](../tied/docs/processes.md).
+  [PROC-VOCABULARY_INDEX](../tied-bundle/docs/processes.md).
 - [ ] Record new domain terms in the client-owned vocabulary layer and validate
   names before commit.
 - [ ] Keep `tied/methodology/` read-only; write only project-owned TIED YAML.
 - [ ] Update IMPL pseudo-code before tests or code when intent or flow changes.
 - [ ] Give every pseudo-code block its required token comment under
-  [PROC-IMPL_PSEUDOCODE_TOKENS](../tied/docs/processes.md).
+  [PROC-IMPL_PSEUDOCODE_TOKENS](../tied-bundle/docs/processes.md).
 - [ ] Add failing unit tests before production code, then validate modules
-  independently under [REQ-MODULE_VALIDATION](../tied/requirements/REQ-MODULE_VALIDATION.yaml).
+  independently under [REQ-MODULE_VALIDATION](../tied-project/requirements/REQ-MODULE_VALIDATION.yaml).
 - [ ] Add failing UI-free composition tests before binding/wiring code.
 - [ ] Use E2E only for a named platform constraint and retain the justification.
 - [ ] Run `lint_yaml` on changed TIED YAML and the language-specific lint/test
@@ -438,7 +438,7 @@ flowchart TD
 - [ ] Attach a verification evidence manifest before making executable quality
   claims in an evidence-chain profile.
 - [ ] Run `tied_verify` only when the client’s policy enables
-  [PROC-TIED_VERIFICATION_GATED](../tied/docs/processes.md).
+  [PROC-TIED_VERIFICATION_GATED](../tied-bundle/docs/processes.md).
 - [ ] Run a scoped adversarial inquiry when its requirement or risk trigger
   applies; persist only the bounded artifacts under the request working tree.
 - [ ] Re-profile at a pinned commit and record residual risks.
@@ -498,7 +498,7 @@ repository details.
 - **Verification-gated policy:** None of the four clients is assumed to enable
   it; `tied_verify` remains optional and policy-dependent.
 - **Indescript inquiry:** Integrated inquiry is recommended at P2 for
-  shell/remote boundaries under [REQ-TIED_ADVERSARIAL_INQUIRY](../tied/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml).
+  shell/remote boundaries under [REQ-TIED_ADVERSARIAL_INQUIRY](../tied-project/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml).
 - **Training reuse:** The redacted excerpt above may be copied into methodology
   training documents after internal review.
 

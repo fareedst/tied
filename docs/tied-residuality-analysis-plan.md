@@ -15,7 +15,7 @@
 **Related work:**
 
 - [Residuality Theory and TIED — tracked excerpt](residuality-theory-and-tied-excerpt.md) — git-tracked summary; full synthesis local at `docs/comparisons/residuality-theory-and-tied.md` (gitignored)
-- [tied/vocab/residuality.md](../tied/vocab/residuality.md) — provisional glossary (RECORD)
+- [tied-project/vocab/residuality.md](../tied-project/vocab/residuality.md) — provisional glossary (RECORD)
 - [tied-adversarial-inquiry-plan.md](tied-adversarial-inquiry-plan.md) — falsification / authority tone (§1)
 - [tied-async-methodology-plan.md](tied-async-methodology-plan.md) — wave and gate structure exemplar
 - **Tracker:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/agent-req-implementation-checklist.yaml`
@@ -72,7 +72,7 @@ baseline / naïve architecture       vocabulary
 
 ### Vocabulary RECORD/VALIDATE status
 
-- **RESOLVE:** Sponsor and comparison terms mapped to preferred terms in `tied/vocab/residuality.md` (Touchpoint 1).
+- **RESOLVE:** Sponsor and comparison terms mapped to preferred terms in `tied-project/vocab/residuality.md` (Touchpoint 1).
 - **RECORD:** Provisional glossary + routing row 5h present; no new semantic tokens beyond planning Change ID in this batch.
 - **PRELOAD:** `residuality.md`, `quality-assurance.md`, `fidelity-research.md` for authority-boundary work.
 - **VALIDATE:** Deferred to traceable-commit on the plan-doc batch; build-plan must not introduce conflating names (residue vs residual_risk, matrix vs quality evidence matrix).
@@ -154,7 +154,7 @@ flowchart LR
 ### What exists today
 
 - **Comparison synthesis:** [docs/comparisons/residuality-theory-and-tied.md](comparisons/residuality-theory-and-tied.md) documents dual-loop fit, existing TIED hooks (module validation, quality evidence, fidelity research, CITDP profiles, LEAP), and pilot-oriented mappings to task recovery and idempotent creation REQs.
-- **Provisional vocabulary:** [tied/vocab/residuality.md](../tied/vocab/residuality.md) with routing row **5h** in [tied/vocab/routing.md](../tied/vocab/routing.md).
+- **Provisional vocabulary:** [tied-project/vocab/residuality.md](../tied-project/vocab/residuality.md) with routing row **5h** in [tied-project/vocab/routing.md](../tied-project/vocab/routing.md).
 - **Working analysis record:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/CITDP-PLAN-TIED-RESIDUALITY-ANALYSIS.yaml` with `risk_analysis.residuality_analysis.status: planned_section`.
 - **This feature plan** (build-plan deliverable) — normative roadmap for W0–W5.
 
@@ -164,7 +164,7 @@ flowchart LR
 - No canonical **CITDP field** `risk_analysis.residuality_analysis` in policy (candidate snippet only in §6).
 - No stable **lint/validate** for `stressor-residue.v1`.
 - No dedicated residuality tooling REQ/ARCH/IMPL (optional W5 only if validators/CLI/MCP need durable contracts).
-- **Touchpoints to wire at promotion (W5):** [tied/docs/processes.md](../tied/docs/processes.md), [tied/docs/citdp-policy.md](../tied/docs/citdp-policy.md), [tied/docs/composition-coverage.md](../tied/docs/composition-coverage.md) (`CONTROLLED_COMPOSITION_FAULT`), [tied/docs/agent-req-implementation-checklist.md](../tied/docs/agent-req-implementation-checklist.md).
+- **Touchpoints to wire at promotion (W5):** [tied-bundle/docs/processes.md](../tied-bundle/docs/processes.md), [tied-bundle/docs/citdp-policy.md](../tied-bundle/docs/citdp-policy.md), [tied-bundle/docs/composition-coverage.md](../tied-bundle/docs/composition-coverage.md) (`CONTROLLED_COMPOSITION_FAULT`), [tied-bundle/docs/agent-req-implementation-checklist.md](../tied-bundle/docs/agent-req-implementation-checklist.md).
 
 ### Unresolved theory / provenance questions (from comparison)
 
@@ -181,14 +181,14 @@ Normative wave specs. Depth and gate policy per batch are summarized in §10.
 
 - **Goal:** Usable language without premature canonization.
 - **Depth:** `minimal` (documentation/vocab only).
-- **Entry:** Comparison synthesis accepted; `tied/vocab/residuality.md` seeded.
+- **Entry:** Comparison synthesis accepted; `tied-project/vocab/residuality.md` seeded.
 - **Actions:**
   1. Keep multi-account comparison + provenance in the comparison doc.
-  2. Maintain provisional terms in `tied/vocab/residuality.md` + routing keywords (row 5h).
+  2. Maintain provisional terms in `tied-project/vocab/residuality.md` + routing keywords (row 5h).
   3. Define minimum worksheet fields: Stressor, Impact Path, Residue, Business Priority, Design Response (§5).
   4. Define candidate machine-readable record `stressor-residue.v1` extending the worksheet (§5).
   5. List unresolved theory/provenance questions in §0/§3.
-- **Deliverables:** `tied/vocab/residuality.md`; feature plan §5 embeds; optional `working/PLAN-TIED-RESIDUALITY-ANALYSIS/schemas/stressor-residue.v1.example.yaml` (deferred until W1 if not copied).
+- **Deliverables:** `tied-project/vocab/residuality.md`; feature plan §5 embeds; optional `working/PLAN-TIED-RESIDUALITY-ANALYSIS/schemas/stressor-residue.v1.example.yaml` (deferred until W1 if not copied).
 - **TIED loop handoff:** Vocabulary only — no REQ/ARCH/IMPL writes. Discovery supplies terms; TIED owns promotion at W3/W5.
 - **Exit evidence:** Term map, worksheet contract, candidate schema sketch, unresolved list in feature plan.
 - **Does not:** Create residuality REQ/ARCH/IMPL tokens; edit methodology YAML.
@@ -244,8 +244,8 @@ Normative wave specs. Depth and gate policy per batch are summarized in §10.
 - **Depth:** Tooling batch `integrated` + `advisory` (build-plan W5, 2026-09-27).
 - **Status (2026-09-27):** **build-plan W5** (`w5-build-plan-promotion`) **complete** — sponsor SD-W5-* in `evidence/sponsor-wrap-up-2026-09-27.md`.
 - **Promoted:**
-  1. Glossary `tied/vocab/residuality.md` (Adopt revise; pilot pointer).
-  2. Checklist `sub-residuality-analysis-pass` in `tied/docs/agent-req-implementation-checklist.md` + `.yaml`.
+  1. Glossary `tied-project/vocab/residuality.md` (Adopt revise; pilot pointer).
+  2. Checklist `sub-residuality-analysis-pass` in `tied-bundle/docs/agent-req-implementation-checklist.md` + `.yaml`.
   3. CITDP **attach-first** — `risk_analysis.residuality_analysis` pattern in `working/PLAN-TIED-RESIDUALITY-ANALYSIS/w5-promotion/risk_analysis.residuality_analysis.proposed.yaml` + `CITDP-W5-PROMOTION.yaml` (no full merge into `citdp-policy.md`).
   4. Tooling `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / `[ARCH-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / `[IMPL-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` + MCP `stressor_residue_record_validate`.
 - **TIED loop handoff:** W5 promotes **process hooks**; it does not retroactively canonize W1 worksheets as REQ substitutes.
@@ -305,7 +305,7 @@ disposition:
 
 ### Composition fault binding notes (W4)
 
-Use existing [CONTROLLED_COMPOSITION_FAULT](../tied/docs/composition-coverage.md) patterns against pilot seams:
+Use existing [CONTROLLED_COMPOSITION_FAULT](../tied-bundle/docs/composition-coverage.md) patterns against pilot seams:
 
 - **Ordering** — queue/worker delivery vs processing order for task recovery and idempotent create paths.
 - **Timeout** — side effect committed before client observes timeout.
@@ -430,7 +430,7 @@ Observed residues and attractors remain **research/working artifacts** until cla
 
 - **depth_tier / profile_depth:** `minimal`
 - **gate_policy:** `advisory`
-- **Deliverables:** This feature plan; cross-link from comparison doc; confirm routing row 5h; provisional vocab already in `tied/vocab/residuality.md`.
+- **Deliverables:** This feature plan; cross-link from comparison doc; confirm routing row 5h; provisional vocab already in `tied-project/vocab/residuality.md`.
 - **Does not:** Open product REQ/ARCH/IMPL tokens for residuality tooling; run W1 pilot; claim pilot DoD.
 
 ### Batch B — W1–W4 pilot (separate authorization)
@@ -497,7 +497,7 @@ Invalidate downstream Tracker dispositions and re-run `tied_checklist_gate_valid
 ### Recommended next steps
 
 1. **Optional:** Machine PLAN close-out envelope when sponsor ends waiver pattern (`request-evidence-envelope-waiver.v1.json`).
-2. **Optional:** Phase 2 merge of residuality attach snippet into `tied/docs/citdp-policy.md` when policy owners approve.
+2. **Optional:** Phase 2 merge of residuality attach snippet into `tied-bundle/docs/citdp-policy.md` when policy owners approve.
 
 ---
 

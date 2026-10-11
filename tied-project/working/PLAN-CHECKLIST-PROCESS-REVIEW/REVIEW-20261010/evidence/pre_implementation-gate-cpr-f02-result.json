@@ -1,0 +1,14 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "recorded_at": "2026-10-10T22:20:00-07:00",
+  "request_token": "REQ-CHECKLIST-PROCESS-REVIEW",
+  "batch_id": "CPR-F02",
+  "citdp_path": "tied-project/citdp/CITDP-REVIEW-CHECKLIST-PROCESS-20261010.yaml",
+  "tracker_path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/REVIEW-20261010/phase-3-cpr-f02-tracker.yaml",
+  "interpretation": "Phase 3 CPR-F02 navigation callouts; no deletes or YAML mutation."
+}

@@ -1,0 +1,85 @@
+citdp:
+  path: "tied-project/citdp/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml"
+  reason: "Plan-only checklist/process review program; no product REQ or deletion authority."
+  status: "complete"
+depth_tier: "minimal"
+execution_authority:
+  scope: "plan-only"
+  next_authorized_prompt: "build-plan phase 3 cleanup batch after sponsor scope"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Plan-only Tracker for PLAN-CHECKLIST-PROCESS-REVIEW; not inventory execution or cleanup."
+refine_pass: 1
+refine_pass_date: "2026-10-10"
+request: "PLAN-CHECKLIST-PROCESS-REVIEW"
+schema_version: "checklist-process-review-plan-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "phase_3_cpr_f01_f03_complete"
+future_gate_contracts:
+  pre_implementation:
+    required:
+      - "Fresh REQ-CHECKLIST-PROCESS-REVIEW Tracker if product token minted at build-plan"
+      - "Sponsor approval of linked plan before docs/checklist-process-review-*.md authoring"
+  verification:
+    required:
+      - "check_docs_vocab_links and tied_project_lint when docs/navigation change"
+      - "tied_validate_consistency only if project YAML mutated"
+  close_out:
+    required:
+      - "Per-phase envelope when implement REQ closes; not required for plan-only refine"
+future_implementation_phases:
+  phase_1_deliverables:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    scope: "Add docs/checklist-process-review-plan.md and docs/checklist-process-review-checklist.md only"
+  phase_2_inventory_review:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    scope: "Execute review passes using deliverables; produce findings ledger under working folder"
+  phase_3_cleanup_batches:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    scope: "Bounded delete-candidate batches with reference-proof evidence per batch"
+  phase_4_methodology_surface:
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    scope: "Only if review recommends canonical checklist step or gate_policy changes; separate plan-new-feature"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "/Users/fareed/.cursor/plans/checklist-process-review_c5da706c.plan.md"
+    id: "session-bootstrap"
+    notes: "Refine pass 1 RESOLVE and phased program recorded in linked plan."
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml"
+    id: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/residual-risk-plan-only.md"
+    id: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml"
+    id: "test-strategy"
+    notes: "Documented in CITDP test_strategy and linked plan Test strategy section."
+  - disposition: "not_applicable"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth uses CITDP counterexamples and not-applicable receipt; no tied_adversarial_inquiry_run."
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/pre_implementation-gate-result.json"
+    id: "gate-pseudocode-validation"
+    notes: "Plan-only pre_implementation gate; allowed true at minimal depth."
+  - disposition: "pending"
+    id: "author-requirement"
+    rationale: "REQ-CHECKLIST-PROCESS-REVIEW minted on authorized build-plan phase 1 only."
+  - disposition: "not_applicable"
+    id: "unit-test-red"
+    rationale: "Plan-only; no RED in refine pass."

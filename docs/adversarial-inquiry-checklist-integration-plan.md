@@ -13,7 +13,7 @@ before any box there is checked.
 
 **Parent plan:** [`tied-adversarial-inquiry-plan.md`](tied-adversarial-inquiry-plan.md) § P0.4, § 8 Batch 4–6
 **Adoption guide:** [`adversarial-inquiry-adoption.md`](adversarial-inquiry-adoption.md)
-**Checklist (canonical):** [`tied/docs/agent-req-implementation-checklist.yaml`](../tied/docs/agent-req-implementation-checklist.yaml) · [`tied/docs/agent-req-implementation-checklist.md`](../tied/docs/agent-req-implementation-checklist.md)
+**Checklist (canonical):** [`tied-bundle/docs/agent-req-implementation-checklist.yaml`](../tied-bundle/docs/agent-req-implementation-checklist.yaml) · [`tied-bundle/docs/agent-req-implementation-checklist.md`](../tied-bundle/docs/agent-req-implementation-checklist.md)
 **Working copy (trackable):** [`working/REQ-TIED_ADVERSARIAL_INQUIRY/agent-req-implementation-checklist.yaml`](../working/REQ-TIED_ADVERSARIAL_INQUIRY/agent-req-implementation-checklist.yaml)
 **Authoritative completion tracking (strictly followed):** [`adversarial-inquiry-checklist-integration-checklist.md`](adversarial-inquiry-checklist-integration-checklist.md)
 
@@ -25,8 +25,8 @@ before any box there is checked.
 
 The implementation (MCP tool `tied_adversarial_inquiry_run`, modules under
 `mcp-server/src/adversarial-inquiry/`, vocabulary in
-`tied/vocab/fidelity-research.md`) provides the **tooling layer**. The
-canonical checklist in `tied/docs/agent-req-implementation-checklist.yaml`
+`tied-project/vocab/fidelity-research.md`) provides the **tooling layer**. The
+canonical checklist in `tied-bundle/docs/agent-req-implementation-checklist.yaml`
 now carries the bounded profile, artifact, proof-boundary, and strict-gate
 guidance for this slice.
 
@@ -42,7 +42,7 @@ Low-risk work receives bounded manual questions. High-risk or profile-triggered 
 
 | Layer | Implemented in this change | Checklist after integration | Remaining gap |
 |---|---|---|---|
-| Vocabulary | `tied/vocab/fidelity-research.md` (adversarial case, proof boundary, strict eligibility, negative control, obligation graph, etc.) | Routing and checklist preloading reference the glossary | Broader domain adoption remains risk-triggered |
+| Vocabulary | `tied-project/vocab/fidelity-research.md` (adversarial case, proof boundary, strict eligibility, negative control, obligation graph, etc.) | Routing and checklist preloading reference the glossary | Broader domain adoption remains risk-triggered |
 | Analysis tooling | `mcp-server/src/adversarial-inquiry/*`, MCP `tied_adversarial_inquiry_run` | Checklist integration invokes the read-only analyzer for declared scope | Runtime assurance remains bounded and profile-triggered |
 | Quality assurance | Manual profiles/matrix in `impact-discovery` | Research, assurance, and gate dimensions remain separate | Specialized profiles require their own evidence |
 | Findings / LEAP | `workflow.ts` append-only ledger; review-gated design in ARCH/IMPL | Findings remain observed until review and route only through existing owners | Confirmed findings still require human adjudication |
@@ -83,7 +83,7 @@ Several checklist steps already encode **manual** adversarial-adjacent behavior:
 4. **LEAP is review-gated** — `observed` findings do not trigger stack edits; only **confirmed** findings after adjudication may route to LEAP.
 5. **Proof boundaries stay separate** — traceability structure, pseudo-code structure, semantic fidelity, executable behavior, and human decision must never be conflated in task outcomes or commit messages.
 6. **Risk-triggered depth** — not universal ceremony on every REQ; record N/A with rationale when a profile or depth tier does not apply.
-7. **Methodology placement** — checklist changes live in `tied/docs/` (installed into clients by `copy_files.sh`); do not fork per-feature checklists in project YAML.
+7. **Methodology placement** — checklist changes live in `tied-bundle/docs/` (installed into clients by `copy_files.sh`); do not fork per-feature checklists in project YAML.
 
 ---
 
@@ -187,7 +187,7 @@ Define a table (in this plan’s implementation phase, persisted in vocab or CIT
 | `human-research` | Yes (full) | Yes at multiple phases | Warn-only |
 | `strict-candidate` | Yes | Yes | Yes when `validateStrictEligibility` passes |
 
-Source profiles: `tied/vocab/quality-assurance.md`. Depth selection occurs at `impact-discovery` and is confirmed at `risk-assessment`.
+Source profiles: `tied-project/vocab/quality-assurance.md`. Depth selection occurs at `impact-discovery` and is confirmed at `risk-assessment`.
 
 ### 5.4 Per-request artifact paths
 
@@ -226,7 +226,7 @@ Every block requires token comments per `[PROC-IMPL_PSEUDOCODE_TOKENS]`.
 | Process-token decision and rationale | This section; checklist integration remains owned by `[PROC-AGENT_REQ_CHECKLIST]` |
 | Risk-depth matrix (draft) | This doc § 5.3 → promote to `fidelity-research.md` or `quality-assurance.md` |
 | Sub-procedure IMPL pseudo-code | `IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md` |
-| CITDP analysis update | `tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml` (Batch 4 scope section) |
+| CITDP analysis update | `tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml` (Batch 4 scope section) |
 
 **Gate:** Pseudo-code structural validation; TIED YAML validation; no checklist YAML changes yet.
 
@@ -238,8 +238,8 @@ Every block requires token comments per `[PROC-IMPL_PSEUDOCODE_TOKENS]`.
 
 | File | Action |
 |---|---|
-| `tied/docs/agent-req-implementation-checklist.yaml` | Add tasks per § 4; add sub-procedure; bump `version` / `last_updated`; update slug table in markdown |
-| `tied/docs/agent-req-implementation-checklist.md` | Mirror step tasks and document the checklist-owned sub-procedure |
+| `tied-bundle/docs/agent-req-implementation-checklist.yaml` | Add tasks per § 4; add sub-procedure; bump `version` / `last_updated`; update slug table in markdown |
+| `tied-bundle/docs/agent-req-implementation-checklist.md` | Mirror step tasks and document the checklist-owned sub-procedure |
 | `working/REQ-TIED_ADVERSARIAL_INQUIRY/agent-req-implementation-checklist.yaml` | Track implementation progress with completion markers |
 
 **Gate:**
@@ -264,9 +264,9 @@ Every block requires token comments per `[PROC-IMPL_PSEUDOCODE_TOKENS]`.
 
 | File | Action |
 |---|---|
-| `tied/vocab/routing.md` | Add row (~5c): keywords `adversarial inquiry`, `obligation graph`, `proof boundary`, `strict eligibility`, `negative control`, `finding ledger` → `fidelity-research.md` |
-| `tied/vocab/fidelity-research.md` | Add § “Checklist integration” cross-referencing step slugs and sub-procedure |
-| `tied/vocab/domain-references.md` | Cross-topic note: adversarial inquiry vs quality-assurance profiles vs pseudo-code validation |
+| `tied-project/vocab/routing.md` | Add row (~5c): keywords `adversarial inquiry`, `obligation graph`, `proof boundary`, `strict eligibility`, `negative control`, `finding ledger` → `fidelity-research.md` |
+| `tied-project/vocab/fidelity-research.md` | Add § “Checklist integration” cross-referencing step slugs and sub-procedure |
+| `tied-project/vocab/domain-references.md` | Cross-topic note: adversarial inquiry vs quality-assurance profiles vs pseudo-code validation |
 
 **Gate:** `[PROC-VOCABULARY_INDEX]` VALIDATE passes at `traceable-commit` for all new terms.
 
@@ -422,16 +422,16 @@ Batches 5–6 complete when § Phase 4–5 gates pass and pilot evidence is reco
 |---|---|
 | Parent adversarial inquiry plan | [`docs/tied-adversarial-inquiry-plan.md`](tied-adversarial-inquiry-plan.md) |
 | Client adoption guide | [`docs/adversarial-inquiry-adoption.md`](adversarial-inquiry-adoption.md) |
-| REQ | [`tied/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml) |
-| ARCH | [`tied/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml) |
-| IMPL | [`tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml) |
-| IMPL pseudo-code | [`tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md`](../tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md) |
-| Fidelity vocabulary | [`tied/vocab/fidelity-research.md`](../tied/vocab/fidelity-research.md) |
-| Quality assurance vocabulary | [`tied/vocab/quality-assurance.md`](../tied/vocab/quality-assurance.md) |
-| Agent checklist (executable) | [`tied/docs/agent-req-implementation-checklist.yaml`](../tied/docs/agent-req-implementation-checklist.yaml) |
-| Agent checklist (prose) | [`tied/docs/agent-req-implementation-checklist.md`](../tied/docs/agent-req-implementation-checklist.md) |
+| REQ | [`tied-project/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied-project/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml) |
+| ARCH | [`tied-project/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied-project/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml) |
+| IMPL | [`tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml) |
+| IMPL pseudo-code | [`tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md`](../tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY-pseudocode.md) |
+| Fidelity vocabulary | [`tied-project/vocab/fidelity-research.md`](../tied-project/vocab/fidelity-research.md) |
+| Quality assurance vocabulary | [`tied-project/vocab/quality-assurance.md`](../tied-project/vocab/quality-assurance.md) |
+| Agent checklist (executable) | [`tied-bundle/docs/agent-req-implementation-checklist.yaml`](../tied-bundle/docs/agent-req-implementation-checklist.yaml) |
+| Agent checklist (prose) | [`tied-bundle/docs/agent-req-implementation-checklist.md`](../tied-bundle/docs/agent-req-implementation-checklist.md) |
 | MCP adversarial inquiry module | [`mcp-server/src/adversarial-inquiry/`](../mcp-server/src/adversarial-inquiry/) |
-| CITDP record | [`tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml) |
+| CITDP record | [`tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml`](../tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml) |
 
 ---
 

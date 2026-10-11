@@ -10,10 +10,10 @@ implemented." Check a box only after running the cited verification command/test
 this session and recording the result inline using the [evidence format](#evidence-recording-format)
 below. If a box cannot be verified, leave it unchecked and say why.
 
-**Governing tokens:** [`REQ-TIED_ADVERSARIAL_INQUIRY`](../tied/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml) ·
-[`ARCH-TIED_ADVERSARIAL_INQUIRY`](../tied/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml) ·
-[`IMPL-TIED_ADVERSARIAL_INQUIRY`](../tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml) ·
-[`IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST`](../tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml)
+**Governing tokens:** [`REQ-TIED_ADVERSARIAL_INQUIRY`](../tied-project/requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml) ·
+[`ARCH-TIED_ADVERSARIAL_INQUIRY`](../tied-project/architecture-decisions/ARCH-TIED_ADVERSARIAL_INQUIRY.yaml) ·
+[`IMPL-TIED_ADVERSARIAL_INQUIRY`](../tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml) ·
+[`IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST`](../tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml)
 
 **Parent plan (design/history, do not edit its checkboxes without also updating here):**
 [`adversarial-inquiry-checklist-integration-plan.md`](adversarial-inquiry-checklist-integration-plan.md)
@@ -21,7 +21,7 @@ below. If a box cannot be verified, leave it unchecked and say why.
 **No second checklist / no second process token:** This file tracks completion status
 only. It does not replace `[PROC-AGENT_REQ_CHECKLIST]`; every remaining item below is
 executed **through** the existing checklist steps in
-`tied/docs/agent-req-implementation-checklist.yaml` (and its `.md` mirror), per the
+`tied-bundle/docs/agent-req-implementation-checklist.yaml` (and its `.md` mirror), per the
 non-negotiable design constraint in the parent plan §3.
 
 **Mandatory order applies to every remaining item:** IMPL pseudo-code (if a block
@@ -57,7 +57,7 @@ Use the table above instead of a single "8 of 21" figure — **7 §4 steps are p
 
 ```bash
 rg -i 'adversarial|fidelity-research|sub-adversarial-inquiry-pass|proof.boundary|obligation.inventory|counterexample|fault.injection|command provenance' \
-  tied/docs/agent-req-implementation-checklist.yaml \
+  tied-bundle/docs/agent-req-implementation-checklist.yaml \
   --glob '!**/methodology/**'
 ```
 
@@ -77,7 +77,7 @@ Example:
 Evidence (2026-08-22): go test ./checklist/ -run TestCanonicalChecklist_adversarialInquiryStepTaskCoverage/session-bootstrap → pass; marker "fidelity-research.md" found
 ```
 
-For YAML edits, also note: `lint_yaml tied/docs/agent-req-implementation-checklist.yaml → pass`.
+For YAML edits, also note: `lint_yaml tied-bundle/docs/agent-req-implementation-checklist.yaml → pass`.
 
 ---
 
@@ -106,25 +106,25 @@ Each item was re-run 2026-08-22, not assumed from prior notes.
   Evidence (2026-08-22): `bunx tsc -b` in `mcp-server` → exit 0, no diagnostics.
 
 - [x] **A6. Batch 4 adversarial-inquiry task text exists at 7 partial §4 steps + `persist-citdp-record`.**
-  Confirmed present (grepped `tied/docs/agent-req-implementation-checklist.yaml`):
+  Confirmed present (grepped `tied-bundle/docs/agent-req-implementation-checklist.yaml`):
   `translate-sponsor-intent`, `impact-discovery`, `risk-assessment`, `test-strategy`,
   `composition-integration`, `verification-gate`, `sync-tied-stack`, `persist-citdp-record`.
   **Not complete for §4:** the 11 zero-coverage §4 slugs (Part B1–B12) and §4 gaps at the 7 partial
   steps (Part B0, D, E). Do not treat A6 as "§4 complete."
 
 - [x] **A7. Vocabulary routing row exists for the fidelity-research glossary.**
-  Evidence (2026-08-22): `tied/vocab/routing.md` row `5c` → `fidelity-research.md`, keywords include
+  Evidence (2026-08-22): `tied-project/vocab/routing.md` row `5c` → `fidelity-research.md`, keywords include
   "adversarial inquiry, obligation graph, gate policy, finding lifecycle, ... case reports, fidelity audit".
 
 - [x] **A8. Fidelity-research glossary defines the adversarial-inquiry-checklist naming bridge terms.**
-  Evidence (2026-08-22): `tied/vocab/fidelity-research.md` — "project-input inquiry", "strict eligibility",
+  Evidence (2026-08-22): `tied-project/vocab/fidelity-research.md` — "project-input inquiry", "strict eligibility",
   "bounded assurance", "controlled fault", "assurance profile", "gate policy", "bounded working
   artifact", "human strict approval" rows present with naming-bridge entries and pseudo-code
   block-name mappings to `[IMPL-TIED_ADVERSARIAL_INQUIRY]`.
   **Gap:** no "Checklist integration" subsection yet (Part E4).
 
 - [x] **A9. CITDP records exist for the implemented scope.**
-  Evidence (2026-08-22): `tied/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml`,
+  Evidence (2026-08-22): `tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY.yaml`,
   `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml`,
   `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_MODE_B.yaml` all present and readable.
   `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml` `record_status: "complete"` — but note
@@ -133,7 +133,7 @@ Each item was re-run 2026-08-22, not assumed from prior notes.
   This checklist supersedes that scope statement going forward.
 
 - [x] **A10. IMPL pseudo-code for checklist integration is complete and token-commented.**
-  Evidence (2026-08-22): `tied/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md` —
+  Evidence (2026-08-22): `tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md` —
   5 blocks (`SELECT_ADVERSARIAL_INQUIRY_DEPTH`, `MAP_ADVERSARIAL_OBLIGATIONS`,
   `EVALUATE_ADVERSARIAL_FINDINGS`, `ROUTE_UNRESOLVED_CRITICAL_FINDINGS`,
   `PERSIST_WORKING_ARTIFACTS`), each with full PRE/POST/EFFECTS/FAILURE_MODES/DATA_TRANSITION/
@@ -202,7 +202,7 @@ Complete B0 **before** treating Parts D/E augmentations as done (D/E extend the 
 
 Each row is a task-string addition to that step's `tasks:` list (YAML) and the mirrored prose in
 `agent-req-implementation-checklist.md`. Edit the checklist YAML/MD directly (not TIED detail records);
-run `lint_yaml tied/docs/agent-req-implementation-checklist.yaml` after YAML edits.
+run `lint_yaml tied-bundle/docs/agent-req-implementation-checklist.yaml` after YAML edits.
 
 **RED-first rule:** For each row, first add/extend
 `TestCanonicalChecklist_adversarialInquiryStepTaskCoverage` in
@@ -248,8 +248,8 @@ in the evidence line — do not skip TS coverage because the helper name differs
 
 - [x] **B14. YAML/MD parity for Part B0 + B (manual gate until F4 exists).**
   For each slug touched in B0/B, diff the adversarial-related task bullets between
-  `tied/docs/agent-req-implementation-checklist.yaml` and
-  `tied/docs/agent-req-implementation-checklist.md`; record `parity ok` or list drift in the evidence line.
+  `tied-bundle/docs/agent-req-implementation-checklist.yaml` and
+  `tied-bundle/docs/agent-req-implementation-checklist.md`; record `parity ok` or list drift in the evidence line.
   Do not rely on B13 alone — Go tests read YAML only.
   Evidence (2026-08-22): manual comparison of all B0/B adversarial task bullets in canonical YAML and Markdown → pass; parity ok.
 
@@ -275,7 +275,7 @@ C4.3 tests **policy/eligibility**, not a non-existent `phase` parameter on `eval
   "Mandatory for Batch 4 close-out; tracked in checklist Part C." (F3 tracks the edit.)
   Evidence (2026-08-22): parent plan §5.2 inspection → pass; optional-future-extension framing is retired.
 
-- [x] **C2. Add `sub_procedures` entry** to `tied/docs/agent-req-implementation-checklist.yaml`:
+- [x] **C2. Add `sub_procedures` entry** to `tied-bundle/docs/agent-req-implementation-checklist.yaml`:
   - `slug: sub-adversarial-inquiry-pass`
   - `flow.return_to: caller`
   - `invoked_by:` `gate-pseudocode-validation`, `flag-insufficient-specs`, `flag-contradictory-specs`,
@@ -372,11 +372,11 @@ into checklist task text. **Depends on Part B0.4 and B0.5** for the same slugs.
   Verify: manual read-through; section absent today.
   Evidence (2026-08-22): adoption document read-through → pass; integration section and final step table present.
 
-- [x] **E4. `tied/vocab/fidelity-research.md`** — Add "Checklist integration" subsection (parent Phase 2):
+- [x] **E4. `tied-project/vocab/fidelity-research.md`** — Add "Checklist integration" subsection (parent Phase 2):
   cross-reference step slugs and `sub-adversarial-inquiry-pass`. **Unblocks E3. Do before E3.**
   Evidence (2026-08-22): glossary read-through → pass; checklist integration subsection present.
 
-- [x] **E5. `tied/vocab/domain-references.md`** — Add cross-topic note: adversarial inquiry vs
+- [x] **E5. `tied-project/vocab/domain-references.md`** — Add cross-topic note: adversarial inquiry vs
   quality-assurance profiles vs pseudo-code validation (parent Phase 2). Can run in parallel with E4.
   Evidence (2026-08-22): domain-reference read-through → pass; cross-topic note present.
 
@@ -390,7 +390,7 @@ into checklist task text. **Depends on Part B0.4 and B0.5** for the same slugs.
   `unit-test-red` GOTO targets in "Dynamic checklist control" (parent Phase 3; non-normative driver hints).
   Evidence (2026-08-22): README inspection → pass; blocking-finding GOTO guidance present.
 
-- [x] **E8. `tied/docs/agent-preload-contract-template.yaml`** — Add optional `adversarial_inquiry_scope`
+- [x] **E8. `tied-bundle/docs/agent-preload-contract-template.yaml`** — Add optional `adversarial_inquiry_scope`
   field; document population at `persist-implementation-records` (IMPL-locked) per template convention.
   Evidence (2026-08-22): preload contract inspection → pass; optional scope field and population guidance present.
 
@@ -496,7 +496,7 @@ flowchart TD
 - [x] **G8. CITDP close-out for Batches 5–6 / Parts B–E** — Extend
   `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml` with a `divergences_from_analysis` /
   `tied_stack_updates_required` entry **or** add `CITDP-REQ-TIED_ADVERSARIAL_INQUIRY_BATCH5_6.yaml`
-  per `tied/docs/citdp-policy.md`. Record which path was chosen in evidence.
+  per `tied-bundle/docs/citdp-policy.md`. Record which path was chosen in evidence.
   Evidence (2026-08-22): existing checklist CITDP record inspected → pass; `leap_feedback.divergences_from_analysis`
   records Batches 5–6 and `tied_stack_updates_required: []`, so the existing record was extended in place.
 
@@ -596,4 +596,4 @@ expected reason.
 5. **`sync-tied-stack`:** Already satisfies §4 LEAP review-gating; no Part B row unless LEAP finds drift.
 6. **Working copy:** Optional progress markers live in
    `working/REQ-TIED_ADVERSARIAL_INQUIRY/agent-req-implementation-checklist.yaml`; canonical edits land in
-   `tied/docs/` only after review per parent plan §6 Phase 1 gate.
+   `tied-bundle/docs/` only after review per parent plan §6 Phase 1 gate.

@@ -42,7 +42,7 @@ Accepted operating decisions:
 Operating contract: `depth_tier: minimal`, `gate_policy: advisory`, and
 evidence-chain `profile_depth: not_measured`. This is a docs-only pass with no
 inquiry activation claim. CITDP persistence is skipped under
-[`tied/docs/citdp-policy.md`](../tied/docs/citdp-policy.md) because the change
+[`tied-bundle/docs/citdp-policy.md`](../tied-bundle/docs/citdp-policy.md) because the change
 is non-executable documentation and vocabulary only; the per-request Tracker
 records that rationale at
 `working/evaluation/charter-refine-plan-20260826.yaml`.
@@ -136,7 +136,7 @@ Non-TIED repos enter the corpus as **control projects**. Comparisons are **strat
 | Different repos, same TIED version | Client cohort under one `compatibility_key` | Evidence chain statistics report v1/v2 |
 | Same repo, different tool usage | Metrics on vs off, inquiry integrated vs minimal | MCP usage JSONL + `analyze_tied_mcp_metrics.rb` |
 
-Two evidence chain profiles are comparable only when `schema_version`, `profile_depth`, and ratio **denominators** align ([tied/docs/evidence-chain-profile.md](../tied/docs/evidence-chain-profile.md) § Comparison rules). v2 adds **denominator fingerprint** sub-cohorts when denominators differ within a cohort.
+Two evidence chain profiles are comparable only when `schema_version`, `profile_depth`, and ratio **denominators** align ([tied-bundle/docs/evidence-chain-profile.md](../tied-bundle/docs/evidence-chain-profile.md) § Comparison rules). v2 adds **denominator fingerprint** sub-cohorts when denominators differ within a cohort.
 
 ---
 
@@ -168,7 +168,7 @@ Capabilities grouped by **proof boundary** — what each can and cannot establis
 | `quality_evidence_collect_manifest` | MCP / CLI | Declared commands ran; provenance captured | Full quality bar met |
 | `evidence_chain_profile_generate` | MCP / CLI | Chain completeness with denominators and proof boundaries | Universal maturity |
 | `evidence-chain-report` CLI | `mcp-server/dist/cli/evidence-chain-report.js` | Multi-client **count statistics** within compatible cohorts | Cross-cohort ranking |
-| Path B manual profile | [tied/docs/evidence-chain-profile.md](../tied/docs/evidence-chain-profile.md) | Documented assumptions when MCP validators unavailable | Validator results not run |
+| Path B manual profile | [tied-bundle/docs/evidence-chain-profile.md](../tied-bundle/docs/evidence-chain-profile.md) | Documented assumptions when MCP validators unavailable | Validator results not run |
 
 Fixtures and golden reports: `working/evidence-chain/`, `working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/`.
 
@@ -178,11 +178,11 @@ Fixtures and golden reports: `working/evidence-chain/`, `working/REQ-DEFERRED_ST
 
 | Surface | Location | Proves | Does not prove |
 |---------|----------|--------|----------------|
-| Fidelity research plan + vocab | [docs/tied-fidelity-research-plan.md](tied-fidelity-research-plan.md), [tied/vocab/fidelity-research.md](../tied/vocab/fidelity-research.md) | Taxonomy, study design, control samples | Automated cross-project stats (partially implemented) |
+| Fidelity research plan + vocab | [docs/tied-fidelity-research-plan.md](tied-fidelity-research-plan.md), [tied-project/vocab/fidelity-research.md](../tied-project/vocab/fidelity-research.md) | Taxonomy, study design, control samples | Automated cross-project stats (partially implemented) |
 | `tied_adversarial_inquiry_run` | MCP | Obligation graph, findings, gate results (when activated) | Methodology superiority |
 | `tied_checklist_gate_validate` | MCP | Tracker/CITDP/activation evidence contracts | Developer productivity |
 | `tied_adherence_reconcile_run` | MCP | Ledger vs Tracker vs gate consistency | Checklist was followed in intent |
-| Pseudo-code fidelity audit prompt | [tied/docs/pseudocode-fidelity-audit-agent-prompt.md](../tied/docs/pseudocode-fidelity-audit-agent-prompt.md) | Bidirectional block-level analysis (human/agent) | Scale without adjudication |
+| Pseudo-code fidelity audit prompt | [tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md](../tied-bundle/docs/pseudocode-fidelity-audit-agent-prompt.md) | Bidirectional block-level analysis (human/agent) | Scale without adjudication |
 | Controlled fixtures | e.g. `mcp-server/test/fixtures/adversarial-inquiry-*` | Regression of analysis tooling | Real-world defect rates |
 
 **Non-TIED use:** Not applicable without TIED artifacts. Historical proxy: manual case study using git blame, test diffs, and issue links.
@@ -194,7 +194,7 @@ Fixtures and golden reports: `working/evidence-chain/`, `working/REQ-DEFERRED_ST
 | MCP usage metrics | `TIED_MCP_COLLECT_METRICS=1` → JSONL; [scripts/analyze_tied_mcp_metrics.rb](../scripts/analyze_tied_mcp_metrics.rb) | Tool adoption, duration, failure rate, client attribution | Outcome quality |
 | Feedback export | `tied_feedback_export`, `tied/feedback.yaml` | Declared pain points and improvement ideas | Representative sample |
 | LEAP proposal queue | [docs/leap-proposal-queue.md](leap-proposal-queue.md) | Reviewed promotion candidates | Accepted improvements |
-| CITDP records | `tied/citdp/CITDP-*.yaml` | Change analysis audit trail | Analysis was correct |
+| CITDP records | `tied-project/citdp/CITDP-*.yaml` | Change analysis audit trail | Analysis was correct |
 | Checklist adherence ledger | `agent-adherence-event.v1` JSONL | Lifecycle event sequence with hashes | Agent understood instructions |
 | Conversation/hook analysis | [docs/conversation-analysis-tools.md](conversation-analysis-tools.md) | Session patterns, tool use from Cursor hooks | Causal impact on defects |
 | `agentstream` dry-run / pipeline | `tools/agentstream` | Checklist rendering, turn structure | Production outcomes |
@@ -390,7 +390,7 @@ Improvements must cite **which question (Q1–Q6)** and **which proof boundary**
 
 ## Principles
 
-These govern collection, interpretation, and acting on results. They align with [tied/docs/ai-principles.md](../tied/docs/ai-principles.md), quality-assurance vocabulary, and fidelity-research vocabulary.
+These govern collection, interpretation, and acting on results. They align with [tied-bundle/docs/ai-principles.md](../tied-bundle/docs/ai-principles.md), quality-assurance vocabulary, and fidelity-research vocabulary.
 
 ### 1. Proof boundaries are never conflated
 
@@ -474,13 +474,13 @@ Reject changes that improve a metric by **weakening** a proof boundary (e.g. tre
 | Document | Role in evaluation |
 |----------|-------------------|
 | [tied-fidelity-research-plan.md](tied-fidelity-research-plan.md) | Defect-origin study design, taxonomy, control samples |
-| [tied/docs/evidence-chain-profile.md](../tied/docs/evidence-chain-profile.md) | Per-client chain measurement and comparison rules |
+| [tied-bundle/docs/evidence-chain-profile.md](../tied-bundle/docs/evidence-chain-profile.md) | Per-client chain measurement and comparison rules |
 | [scoped-analysis-and-ignore.md](scoped-analysis-and-ignore.md) | Roots, ignore patterns, traceability gap CI |
 | [conversation-analysis-tools.md](conversation-analysis-tools.md) | Agent/session behavioral signals |
 | [tied-improvement-roadmap.md](tied-improvement-roadmap.md) | Product/orchestration improvements; Batch 5 research records |
 | [tied-value-proposition-matrix.md](tied-value-proposition-matrix.md) | Hypothesis map for what each layer should prove |
-| [quality-assurance.md](../tied/vocab/quality-assurance.md) | Cohort, manifest, and statistics vocabulary |
-| [tied/docs/citdp-policy.md](../tied/docs/citdp-policy.md) | Policy permitting a CITDP skip for non-executable documentation-only changes |
+| [quality-assurance.md](../tied-project/vocab/quality-assurance.md) | Cohort, manifest, and statistics vocabulary |
+| [tied-bundle/docs/citdp-policy.md](../tied-bundle/docs/citdp-policy.md) | Policy permitting a CITDP skip for non-executable documentation-only changes |
 | [docs/leap-proposal-queue.md](leap-proposal-queue.md) | Reviewed, non-canonical route for methodology improvement proposals |
 | [tied-project-alignment-recommendations.md](tied-project-alignment-recommendations.md) | E0-approved per-client alignment actions and proof-boundary labels from the Phase 1 pilot |
 | [working/evaluation/client-remediation-handoffs.yaml](../working/evaluation/client-remediation-handoffs.yaml) | Operator handoff for human execution of E1–E4 in each client repo |

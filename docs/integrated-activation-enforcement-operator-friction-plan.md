@@ -131,7 +131,7 @@ parent Slice 1 tracker.
 | 0.2 | **Derive `activation.expected` at the gate boundary** from `activation.receipt` when `expected` is omitted; never infer missing receipt fields | `validateChecklistGate` / MCP handler | Gate accepts a complete receipt+artifacts payload without hand-authored `expected`; incomplete receipt remains a failure |
 | 0.3 | **Minimal sub-stub disposition rule:** if `depth_tier === 'minimal'` and phase slugs include sub-adversarial callers, require sub-stub `not_applicable` or `waived` with rationale — **`pending` fails** at any gate phase | `validateTracker` | RED: minimal fixture with pending sub-stub → `pending_required_step:sub-adversarial-inquiry-pass` |
 | 0.4 | **Parent–child slug consistency (integrated):** if any auto-required slug is `completed`, `sub-adversarial-inquiry-pass` cannot be `pending` | `validateTracker` extension | Integrated fixture with completed `gate-pseudocode-validation` + pending sub-stub → fail |
-| 0.5 | **CITDP template hygiene:** document null/omit for unused waivers; never `~` in examples | `tied/docs/citdp-record-template.yaml`, `citdp-policy.md` | Template lint or doc review |
+| 0.5 | **CITDP template hygiene:** document null/omit for unused waivers; never `~` in examples | `tied-bundle/docs/citdp-record-template.yaml`, `citdp-policy.md` | Template lint or doc review |
 
 **Tests:** extend `checklist-validator.test.ts`; add fixture using 1787507684 waiver shape.
 
@@ -196,7 +196,7 @@ before inquiry (activation omitted), plus malformed-supplied-activation rejectio
 |---|-------------|---------|
 | 3.1 | `tied_checklist_activation_collect` | Inputs: `request_token`, `phase`, `run_id`, optional `project_root`; reads phase artifact dir + metrics; outputs `{ receipt, artifacts, expected }` |
 | 3.2 | `tied-cli.sh` wrapper | Same contract |
-| 3.3 | Runbook | `tied/vocab/tied-yaml-mcp.md` + §8 operator checklist in parent plan |
+| 3.3 | Runbook | `tied-project/vocab/tied-yaml-mcp.md` + §8 operator checklist in parent plan |
 | 3.4 | Composition test | inquiry → collect → gate → `allowed: true` using 1787507684 layout |
 
 **Acceptance:** After phase persistence lands, the 1787507684 replay may use
@@ -341,8 +341,8 @@ These criteria are program goals, not prerequisites for the first handoff:
 |----------|--------|
 | [`adversarial-inquiry-adoption.md`](adversarial-inquiry-adoption.md) | § Gate pairing: `activation.expected` auto-derive; phase artifact layout; CITDP upgrade sequence |
 | [`integrated-activation-checklist-enforcement-plan.md`](integrated-activation-checklist-enforcement-plan.md) | Cross-link this plan; add 1787507684 to motivation |
-| [`tied/vocab/fidelity-research.md`](../tied/vocab/fidelity-research.md) | RECORD/VALIDATE: **phase artifact directory**, **activation expected identity**, **placeholder waiver** |
-| `tied/docs/citdp-record-template.yaml` | Null omitted waivers; `prior_depth_tier` examples |
+| [`tied-project/vocab/fidelity-research.md`](../tied-project/vocab/fidelity-research.md) | RECORD/VALIDATE: **phase artifact directory**, **activation expected identity**, **placeholder waiver** |
+| `tied-bundle/docs/citdp-record-template.yaml` | Null omitted waivers; `prior_depth_tier` examples |
 | Prompt-type skills | One paragraph: integrated path requires inquiry plus the checklist evidence gate, not checklist markers alone |
 
 ---

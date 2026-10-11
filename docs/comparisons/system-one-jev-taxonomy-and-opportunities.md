@@ -4,8 +4,8 @@
 | --- | --- |
 | **Purpose** | Comprehensive reference taxonomy of System One (Jev) decision models, underlying decision algebra, and systematic mapping to existing LLM tasks across TIED agent workflows. |
 | **Audience** | AI agent developers, TIED systems architects, and harness engineers designing fast, bounded judgment layers. |
-| **Traceability** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
-| **Related Docs** | [`docs/comparisons/jev-for-tied-improvement.md`](jev-for-tied-improvement.md) · [`docs/comparisons/system-one-jev-vs-laya.md`](system-one-jev-vs-laya.md) · [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md) · [`working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md`](../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md) |
+| **Traceability** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) |
+| **Related Docs** | [`docs/comparisons/jev-for-tied-improvement.md`](jev-for-tied-improvement.md) · [`docs/comparisons/system-one-jev-vs-laya.md`](system-one-jev-vs-laya.md) · [`tied-project/vocab/decision-copilot.md`](../../tied-project/vocab/decision-copilot.md) · [`working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md`](../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md) |
 | **Status** | Canonical reference (2026-09-29) |
 
 ---
@@ -686,7 +686,7 @@ To preserve system integrity, the architectural boundary between probabilistic S
 | **Synthesizing IMPL Pseudo-code** | Authoring `essence_pseudocode` requires multi-layered architectural reasoning and language grammar. | Frontier generative LLM (Claude/GPT) with human review. |
 | **Authoring Production Code or Tests** | Complex programming requires long-sequence token generation and syntax construction. | Frontier LLM via strict TDD inner loop. |
 | **Exact Token Graph Consistency** | Token cross-reference validation is pure relational graph traversal and exact string matching. | Deterministic graph validation (`tied_validate_consistency`). |
-| **Overriding Keyword PRELOAD by Default** | Changing active vocabulary must be an explicit, audited human/product decision, not an invisible model flip. | Deterministic `tied/vocab/routing.md` table; Jev used in shadow/advisory mode only. |
+| **Overriding Keyword PRELOAD by Default** | Changing active vocabulary must be an explicit, audited human/product decision, not an invisible model flip. | Deterministic `tied-project/vocab/routing.md` table; Jev used in shadow/advisory mode only. |
 | **Mathematical or Semver Calculations** | Neural classifiers cannot perform rigorous arithmetic or semantic version comparisons. | Deterministic code (`semver` library, integer math). |
 
 ---

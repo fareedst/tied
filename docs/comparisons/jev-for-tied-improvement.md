@@ -7,8 +7,8 @@
 | **Comprehensive taxonomy & opportunities** | [`system-one-jev-taxonomy-and-opportunities.md`](system-one-jev-taxonomy-and-opportunities.md) (40-role decision taxonomy, 6-operator algebra, 27 verbs, systematic LLM task mapping) |
 | **Jev vs Laya (hosted vs self-hosted)** | [`system-one-jev-vs-laya.md`](system-one-jev-vs-laya.md) |
 | **Program coordinator** | Executable waves, gates, and evidence live in [`working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md`](../../working/REQ-TIED_JEV_DECISION_COPROCESSOR/PLAN.md). |
-| **Preferred vocabulary** | [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md) |
-| **TIED stack (reference only)** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) — **Implemented** (2026-09-26); this doc does not mint new tokens. |
+| **Preferred vocabulary** | [`tied-project/vocab/decision-copilot.md`](../../tied-project/vocab/decision-copilot.md) |
+| **TIED stack (reference only)** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) — **Implemented** (2026-09-26); this doc does not mint new tokens. |
 | **Last updated** | 2026-09-28 (G2/S2 missing-dist hard stop **2C**; prior doc refresh `DOC-JEV-COMPARISON-REFRESH`) |
 
 ---
@@ -19,7 +19,7 @@
 | --- | --- | --- |
 | Primary asset | Semantic DB + deterministic MCP gates + checklist receipts | Fast **typed** judgments (`choice` / `score` / `noul`) in one parallel pass |
 | Agent contract | Checklist + tokens + YAML MCP writes | Millisecond **decision coprocessor**; optional **block** on risky tools when W5 harness is enabled |
-| Routing | Keyword **PRELOAD** from `tied/vocab/routing.md` | **Shadow** / advisory glossary picks — never replaces PRELOAD without an explicit product decision |
+| Routing | Keyword **PRELOAD** from `tied-project/vocab/routing.md` | **Shadow** / advisory glossary picks — never replaces PRELOAD without an explicit product decision |
 | Proof | `tied_checklist_gate_validate`, inquiry four-artifact activation | Observation logs, redacted replay JSONL, plan-skill evidence under `working/` |
 
 **Compose-don't-fork:** Jev does not replace `tied_checklist_gate_validate`, `pseudocode_analyze`, `tied_validate_consistency`, integrated adversarial inquiry activation, or authoritative YAML MCP writes.
@@ -222,7 +222,7 @@ Sequence **5** (G2–G4) is complete for the documented sponsor policies; callin
 
 ## Sponsor policy decisions (2026-09-28)
 
-Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCESSOR]. Persisted: [`tied/citdp/CITDP-DOC-JEV-COMPARISON.yaml`](../../tied/citdp/CITDP-DOC-JEV-COMPARISON.yaml).
+Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCESSOR]. Persisted: [`tied-project/citdp/CITDP-DOC-JEV-COMPARISON.yaml`](../../tied-project/citdp/CITDP-DOC-JEV-COMPARISON.yaml).
 
 | ID | Topic | Decision | Plain effect |
 | --- | --- | --- | --- |
@@ -240,7 +240,7 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 
 ## Blueprint C follow-on (checklist evidence sufficiency)
 
-**Child REQ:** [`REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY`](../../tied/requirements/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) — opt-in **pre-gate** (Pattern 11 + 5) that may block gate submission when checklist evidence is superficial; **never** sets gate `allowed` or emits a gate receipt.
+**Child REQ:** [`REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY`](../../tied-project/requirements/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY.yaml) — opt-in **pre-gate** (Pattern 11 + 5) that may block gate submission when checklist evidence is superficial; **never** sets gate `allowed` or emits a gate receipt.
 
 | Surface | Path |
 | --- | --- |
@@ -254,7 +254,7 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 
 ## Blueprint D follow-on (harness tool safety gating)
 
-**Child REQ:** [`REQ-TIED_JEV_TOOL_SAFETY_GATING`](../../tied/requirements/REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml) — hardens the **existing W5** live harness with Blueprint D question ids, workspace scope signals, expanded deterministic fast-deny, five-arm benchmark, and one read-only diagnostic MCP. **Fail-closed** for enabled `bash`/`Shell` when Jev is unavailable (contrast Blueprint C fail-open).
+**Child REQ:** [`REQ-TIED_JEV_TOOL_SAFETY_GATING`](../../tied-project/requirements/REQ-TIED_JEV_TOOL_SAFETY_GATING.yaml) — hardens the **existing W5** live harness with Blueprint D question ids, workspace scope signals, expanded deterministic fast-deny, five-arm benchmark, and one read-only diagnostic MCP. **Fail-closed** for enabled `bash`/`Shell` when Jev is unavailable (contrast Blueprint C fail-open).
 
 | Surface | Path |
 | --- | --- |
@@ -270,7 +270,7 @@ Binding for follow-on implementation CITDPs under [REQ-TIED_JEV_DECISION_COPROCE
 
 ## Local decision provider follow-on
 
-**Child REQ:** [`REQ-TIED_JEV_LOCAL_DECISION_PROVIDER`](../../tied/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) — optional **local subprocess bridge** (`laya_mlx`) on the existing **`jevDecide`** API with env **`TIED_JEV_DECISION_PROVIDER`** (`remote` default, `local`, `auto`). **`local`** never calls the remote HTTP API; **`auto`** applies **`TIED_JEV_LOCAL_FALLBACK`** (`skip` default). Harness blocking uses **`decisionBackendReady`** (remote key or absolute **`TIED_JEV_LOCAL_BRIDGE`**) instead of **`hasApiKey`** alone.
+**Child REQ:** [`REQ-TIED_JEV_LOCAL_DECISION_PROVIDER`](../../tied-project/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) — optional **local subprocess bridge** (`laya_mlx`) on the existing **`jevDecide`** API with env **`TIED_JEV_DECISION_PROVIDER`** (`remote` default, `local`, `auto`). **`local`** never calls the remote HTTP API; **`auto`** applies **`TIED_JEV_LOCAL_FALLBACK`** (`skip` default). Harness blocking uses **`decisionBackendReady`** (remote key or absolute **`TIED_JEV_LOCAL_BRIDGE`**) instead of **`hasApiKey`** alone.
 
 | Surface | Path |
 | --- | --- |

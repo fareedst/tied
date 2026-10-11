@@ -4,8 +4,8 @@
 | --- | --- |
 | **Purpose** | Permanent reference comparing the two System One decision models used or planned in TIED: **Jev** (closed, hosted) and **Laya** (open weights, self-hosted), including limits, when to use either or both, and repo integration gaps. |
 | **Audience** | TIED implementers, harness engineers, and operators choosing `remote` vs `local` decision backends. |
-| **Traceability (reference only)** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) · [REQ-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) · [ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied/architecture-decisions/ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) · [IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied/implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) — **no new tokens** in this doc. |
-| **Related docs** | [`jev-for-tied-improvement.md`](jev-for-tied-improvement.md) · [`system-one-jev-taxonomy-and-opportunities.md`](system-one-jev-taxonomy-and-opportunities.md) · [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md) |
+| **Traceability (reference only)** | [REQ-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [ARCH-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/architecture-decisions/ARCH-TIED_JEV_DECISION_COPROCESSOR.yaml) · [IMPL-TIED_JEV_DECISION_COPROCESSOR](../../tied-project/implementation-decisions/IMPL-TIED_JEV_DECISION_COPROCESSOR.yaml) · [REQ-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied-project/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) · [ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied-project/architecture-decisions/ARCH-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) · [IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied-project/implementation-decisions/IMPL-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml) — **no new tokens** in this doc. |
+| **Related docs** | [`jev-for-tied-improvement.md`](jev-for-tied-improvement.md) · [`system-one-jev-taxonomy-and-opportunities.md`](system-one-jev-taxonomy-and-opportunities.md) · [`tied-project/vocab/decision-copilot.md`](../../tied-project/vocab/decision-copilot.md) |
 | **Sources** | **Laya docs** — ConvAI Innovations documentation site (README-deferred sections: inference, limits, hooks, staged adoption, benchmarks). **Jev vendor** — TypeSafe Jev API docs and System One article patterns cited in sibling docs. **Repo** — `mcp-server/src/jev/*`, bridge script, child REQ plans under `working/`. |
 | **Status / date** | Canonical reference (2026-09-30) |
 
@@ -174,7 +174,7 @@ Neither Jev nor Laya may:
 
 - Set checklist gate **`allowed`**, emit gate receipts, or replace **`tied_checklist_gate_validate`** authority.
 - Write or mutate TIED YAML via MCP on their own.
-- Replace keyword **PRELOAD** from **`tied/vocab/routing.md`** without an explicit product decision.
+- Replace keyword **PRELOAD** from **`tied-project/vocab/routing.md`** without an explicit product decision.
 - Generate IMPL pseudo-code or prose checklists.
 
 **Threshold policy** remains **code-owned**, pinned per **model + checkpoint + dtype + provider path**. Changing **`JEV_MODEL`**, Laya checkpoint, or MLX vs CUDA is a **Pattern 33–34** contract-testing event.
@@ -189,7 +189,7 @@ Neither Jev nor Laya may:
 | Local subprocess client | Implemented — [`local-client.ts`](../../mcp-server/src/jev/local-client.ts) |
 | Bridge script | **Stub** — [`jev-local-laya-mlx-bridge.py`](../../mcp-server/scripts/jev-local-laya-mlx-bridge.py) returns fixed **0.5** answers until real MLX inference lands |
 
-**Follow-ups for [REQ-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml)** (not fixed in this doc):
+**Follow-ups for [REQ-TIED_JEV_LOCAL_DECISION_PROVIDER](../../tied-project/requirements/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER.yaml)** (not fixed in this doc):
 
 1. **Context length:** **`laya-mlx`** ~**512-token** context vs **`DEFAULT_JEV_MAX_STATE_CHARS = 120_000`** — requires trimming or Laya **`predict_long`** before local blocking gates trust full excerpts.
 2. **Score shape:** Laya **`score`** returns a **level index**; **`validateJevAnswers`** requires **`score ∈ [0, 1]`** — bridge must normalize (e.g. divide by max level) or extend validation for local backend.
@@ -226,7 +226,7 @@ Real MLX smoke: **`JEV_LOCAL_MLX_SMOKE=1`** only (not CI).
 | **Staged adoption** | Laya rollout: observe → shadow → promote (*Laya docs*). |
 | **Jev-compatible wire protocol** | Shared `/v1/systemone` shape so **`jevDecide`** maps stay provider-agnostic (*Repo*). |
 
-Preferred vocabulary authority: [`tied/vocab/decision-copilot.md`](../../tied/vocab/decision-copilot.md).
+Preferred vocabulary authority: [`tied-project/vocab/decision-copilot.md`](../../tied-project/vocab/decision-copilot.md).
 
 ---
 

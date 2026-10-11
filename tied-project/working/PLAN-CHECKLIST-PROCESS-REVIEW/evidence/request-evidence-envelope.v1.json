@@ -1,0 +1,89 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-11T05:13:43.873Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "PLAN-CHECKLIST-PROCESS-REVIEW",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml",
+      "content_hash": "sha256:e55cb6294e898a1c0049ddb2553833dcc12a086b7d0c549e48b86e187d4b90ce",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:963631a28fdd55cd72e24f8f3836a7cd7ef0206d57a7e8a20beb4434ca63ef30",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:6876cf86542c5d6636cdf50bdd600ad54c0c93d392829c0e213e8f07a026dbab",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/residual-risk-plan-only.md",
+      "content_hash": "sha256:65ae21510242a81d951f796506d6de02bc0066460762ca088d49b3c136a4a909",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/session-handoff.md",
+      "content_hash": "sha256:b8c0c119b104b764b26337f64abeabb08c791697c280a5be8c3f27c3b94f6dbd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": [
+    {
+      "code": "not_applicable_receipt_missing",
+      "artifact_kind": null,
+      "phase": null,
+      "detail": "Minimal depth without not-applicable-receipt",
+      "severity": "error",
+      "source": "depth-contract"
+    }
+  ]
+}

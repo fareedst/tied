@@ -1,0 +1,113 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-11T14:39:58.536Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-CHECKLIST-PROCESS-REVIEW",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:5526685b96935743416aebd1247d085bde45a260a0328465ef6d33f7628c993d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/CITDP-REQ-CHECKLIST-PROCESS-REVIEW.yaml",
+      "content_hash": "sha256:01ed14a43db0074c6003c0439e31d32244f203c979c7ce6b650f5aebc6d4fbef",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/not-applicable-receipt-sub-adversarial-inquiry.v1.json",
+      "content_hash": "sha256:f7922e13bee8fbcce98b777f165a2316e9946cf78a81b8ea75857cb6fe977e97",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:665fdf95bc7a5a96924e408d7ed1d230c279015088f65d84abd7c202af43f159",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:5e9090703662b925ec1bce75bada31043fa95e086359f0ff6a68ad0966d78b24",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/session-handoff.md",
+      "content_hash": "sha256:a043b4f66ebdebc2e64d56109632715cb02ec6807fa6b767ff9c830071138d9d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:69cddc3e8360a79f8bed1a5e2b01473ee7f4202fdff8199c9854eb0351c2fa93",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:084991de6b6d6243c75c96bbe3d9621bbbb9816cd0fcf526a994379fd318140a",
+    "citdp_path": "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/CITDP-REQ-CHECKLIST-PROCESS-REVIEW.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

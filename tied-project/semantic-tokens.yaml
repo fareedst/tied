@@ -92,6 +92,12 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-CHECKLIST-PROCESS-REVIEW:
+  description: "Phase 1 operator docs program"
+  name: "Checklist process review"
+  source_index: "ARCH index"
+  status: "Active"
+  type: "ARCH"
 ARCH-CONFIG_DISCOVERY_LAYERING:
   cross_references:
     - "ARCH-GOAGENT-CLI"
@@ -1217,6 +1223,12 @@ IMPL-ATDD-E2E-AGENT_STREAM:
     registered: "2026-03-24"
   name: "run_agent_stream run_stream loop; testability e2e_only per docs/run-agent-stream-impl-e2e.md"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-CHECKLIST-PROCESS-REVIEW:
+  description: "Phase 1 operator docs program"
+  name: "Checklist process review"
+  source_index: "IMPL index"
   status: "Active"
   type: "IMPL"
 IMPL-EVIDENCE_CHAIN_PROFILE:
@@ -2808,6 +2820,12 @@ REQ-ATDD-E2E-AGENT_STREAM:
     registered: "2026-03-24"
   name: "E2E agent subprocess stream-json harness with session resume"
   source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-CHECKLIST-PROCESS-REVIEW:
+  description: "Phase 1 operator docs program"
+  name: "Checklist process review"
+  source_index: "REQ index"
   status: "Active"
   type: "REQ"
 REQ-CONFIG_DISCOVERY_LOCAL_LAYER:

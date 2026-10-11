@@ -39,7 +39,7 @@
 | **merged_decision** | Unified runner output merging gate `allowed` with envelope blocking gaps (`merged_decision.allowed`); authoritative after W8-D4 | quality-assurance.md — **single completion entrypoint** |
 | **three completion signals** | **Machine close-out**, **process contract**, **adherence ledger** — never conflated in handoff | [`completion-signals-handoff.md`](../tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md) |
 
-**PRELOAD:** `tied/vocab/prompt-composer.md`, `tied/vocab/quality-assurance.md`, `tied/vocab/pseudocode-and-citdp.md`, `tied/vocab/fidelity-research.md`  
+**PRELOAD:** `tied-project/vocab/prompt-composer.md`, `tied-project/vocab/quality-assurance.md`, `tied-project/vocab/pseudocode-and-citdp.md`, `tied-project/vocab/fidelity-research.md`  
 **VALIDATE:** Terms reconciled to Wave 8 deliverables and §12 Wave 7 template; no new glossary files required.
 
 ---
@@ -91,7 +91,7 @@ flowchart LR
 | Tracker (expand in Phase 1) | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist-wave8-adherence-realignment.yaml` |
 | CITDP (finalize in Phase 5) | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-wave8-adherence-realignment.yaml` |
 | Wave 7 tracker (commit context) | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-checklist-wave7-conversation-adherence.yaml` |
-| IMPL sidecar | `tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` |
+| IMPL sidecar | `tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` |
 | PSA Layer C output | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/` |
 | Envelope | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json` |
 | Verification manifest | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/verification-evidence-manifest.v1.json` |
@@ -231,7 +231,7 @@ Update `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/agent-req-implementation-che
 
 #### 1b. IMPL pseudo-code and validation
 
-- Confirm W8 blocks in `tied/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` (`hydratePseudocodeReportsFromDisk`, merged envelope cross-read).
+- Confirm W8 blocks in `tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md` (`hydratePseudocodeReportsFromDisk`, merged envelope cross-read).
 - Run **`pseudocode_validate`** on changed sidecars.
 - Run **`tied_validate_consistency`**.
 
@@ -358,7 +358,7 @@ node tools/bootstrap/templates/run-close-out-gates.mjs \
   --project-root /Users/fareed/Documents/dev/test/1789147101 \
   --request-token REQ-FILEHASH \
   --tracker-path working/REQ-FILEHASH/agent-req-implementation-checklist.yaml \
-  --citdp-path tied/citdp/CITDP-REQ-FILEHASH.yaml \
+  --citdp-path tied-project/citdp/CITDP-REQ-FILEHASH.yaml \
   --phase close_out \
   --envelope-blocking --sync-dispositions --reconcile
 ```

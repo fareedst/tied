@@ -1,6 +1,6 @@
 tracker:
   name: "TIED improvement roadmap refinement"
-  source_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
+  source_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   plan: "docs/tied-improvement-roadmap.md"
   scope: "Documentation-only refinement of the implementation roadmap; no feature code or project TIED YAML mutation."
   vocabulary:
@@ -32,7 +32,7 @@ tracker:
       reason: "No new TIED token, implementation pseudo-code, source, test, or project YAML was authored."
   citdp:
     status: deferred
-    reason: "The roadmap edit is non-executable documentation. Persist a CITDP record for each behavior-changing implementation batch under tied/citdp/."
+    reason: "The roadmap edit is non-executable documentation. Persist a CITDP record for each behavior-changing implementation batch under tied-project/citdp/."
   validation:
     roadmap_lint: "pass; no IDE diagnostics"
     tracker_lint: "pass; no IDE diagnostics"

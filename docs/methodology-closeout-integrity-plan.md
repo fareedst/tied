@@ -44,7 +44,7 @@ accepted decisions:
   `[REQ-QUALITY_ASSURANCE_EVIDENCE]` remains the proof-boundary owner.
 - **CITDP timing:** each wave gets its own CITDP before RED tests and after
   the plan is approved; the final persisted CITDP is produced at
-  `persist-citdp-record` per `tied/docs/citdp-policy.md`. This refinement does
+  `persist-citdp-record` per `tied-bundle/docs/citdp-policy.md`. This refinement does
   not create a premature final CITDP.
 - **Gate status:** the required `pre_implementation` gate is **not yet
   satisfied** for this plan because no wave-specific CITDP or identity-bound
@@ -96,7 +96,7 @@ effective severity from this matrix.
 | gate auto-hydration | `tied_checklist_gate_validate` loads phase artifact paths from activation and runs A3/A5 validators without requiring callers to pass optional `evidence` |
 | envelope blocking | Close-out requires envelope `gaps[]` with zero `severity: error` entries (or documented waiver per gap code) |
 | slug compression | Invented or shortened checklist slugs (e.g. `author-implementation`) substituting for the canonical IMPL pseudo-code chain |
-| canonical slug registry | Validated set of checklist step slugs from `tied/docs/agent-req-implementation-checklist.yaml`; unknown slugs rejected at gate |
+| canonical slug registry | Validated set of checklist step slugs from `tied-bundle/docs/agent-req-implementation-checklist.yaml`; unknown slugs rejected at gate |
 | Layer C artifact | `working/{REQ-TOKEN}/pseudocode-analysis/{IMPL-TOKEN}.v1.json` from `pseudocode_analyze` with `gate_mode: true` |
 | PSA gate pass | Report satisfies PSA-GATE-001..004: `ok: true`, `gate_mode_applied: true`, no error diagnostics, no undocumented truncation |
 | advisory finding policy | Inquiry findings with `lifecycle: observed` or gate `verdict: UNRESOLVED` are review evidence; under advisory policy they must not block progression **only when** policy is honored consistently in gate and envelope |
@@ -104,7 +104,7 @@ effective severity from this matrix.
 | procedure-aware discovery | Shared block-name extraction from sidecars via PSA `scanProcedureBlocks`, not first `##` heading alone |
 | bootstrap packaging gap | Methodology files copied to clients reference tokens absent from client methodology indexes |
 
-Vocabulary touchpoints: preload `tied/vocab/pseudocode-and-citdp.md`, `tied/vocab/quality-assurance.md`, `tied/vocab/fidelity-research.md` before implementation.
+Vocabulary touchpoints: preload `tied-project/vocab/pseudocode-and-citdp.md`, `tied-project/vocab/quality-assurance.md`, `tied-project/vocab/fidelity-research.md` before implementation.
 
 ---
 
@@ -184,8 +184,8 @@ flowchart LR
 |---|---|---|
 | W1-D1 | **Gate evidence auto-hydration** — When `activation.artifacts` present at `verification`/`close_out`, load phase `gate-result.json`, `finding-ledger.jsonl`, `evidence-provenance.json` and run `validateProvenanceComplete` + `validateFindingDisposition` unconditionally | `mcp-server/src/checklist-validator.ts`, MCP tool wrapper |
 | W1-D2 | **Advisory policy semantics** — Honor `gate_policy: advisory` in finding disposition: advisory → non-blocking diagnostics; strict → blocking | `checklist-validator.ts`, tests |
-| W1-D3 | **Envelope blocking mode** — Add `fail_on_error_gaps: true` to envelope validate; document in `tied/docs/request-evidence-envelope.md` | `mcp-server/src/request-evidence-envelope/` |
-| W1-D4 | **Unified close-out contract** — Update `plan-close-out` skill, `tied/docs/processes.md`, `[PROC-AGENT_REQ_CHECKLIST]` close-out step: completion = gate `allowed` **AND** envelope zero error gaps (or waiver registry entry per gap code) | `.cursor/skills/plan-close-out/`, docs |
+| W1-D3 | **Envelope blocking mode** — Add `fail_on_error_gaps: true` to envelope validate; document in `tied-bundle/docs/request-evidence-envelope.md` | `mcp-server/src/request-evidence-envelope/` |
+| W1-D4 | **Unified close-out contract** — Update `plan-close-out` skill, `tied-bundle/docs/processes.md`, `[PROC-AGENT_REQ_CHECKLIST]` close-out step: completion = gate `allowed` **AND** envelope zero error gaps (or waiver registry entry per gap code) | `.cursor/skills/plan-close-out/`, docs |
 | W1-D5 | **Synthetic tracker rejection** — At `verification`/`close_out`, reject in-memory trackers unless loaded from authoritative file path (extend A2 beyond explicit markers) | `checklist-validator.ts` |
 | W1-D6 | **Canonical gate runner template** — Publish `tools/bootstrap/templates/run-close-out-gates.mjs` (or extend existing remediation runner) using `derivePhaseAwareSlugs`, authoritative tracker file, full evidence hydration, envelope build+validate | `tools/bootstrap/`, docs |
 
@@ -396,7 +396,7 @@ Each CITDP records `depth_tier: integrated`, `gate_policy: advisory`,
 required phase gate/replay commands. A missing CITDP is a planning blocker,
 not a reason to reuse a prior stage record.
 
-Minimum CITDP fields per wave (in addition to `tied/docs/citdp-record-template.yaml`):
+Minimum CITDP fields per wave (in addition to `tied-bundle/docs/citdp-record-template.yaml`):
 
 | Field | Requirement |
 |---|---|

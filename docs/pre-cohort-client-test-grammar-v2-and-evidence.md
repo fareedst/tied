@@ -11,8 +11,8 @@
 
 **Sponsor intent resolved:** The next **client cohort test** grades two **comparable arms** on the same disposable or `/dev/test` client without rollup scoring:
 
-1. **Grammar v2 arm (Track A)** — proves **new-project bootstrap policy** for `Grammar-Version: v2` via [`REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT`](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) and the audit CLI ([`evidence-collection-conversation-patterns.md`](evidence-collection-conversation-patterns.md) §14).
-2. **Evidence arm (Wave 6–8)** — proves **integrated request evidence** for a **client-owned** `REQ-*` via checklist gates, adversarial inquiry (when `depth_tier: integrated`), and [`request-evidence-envelope.v1.json`](../tied/docs/request-evidence-envelope.md) with **blocking error gaps = 0**.
+1. **Grammar v2 arm (Track A)** — proves **new-project bootstrap policy** for `Grammar-Version: v2` via [`REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT`](../tied-project/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) and the audit CLI ([`evidence-collection-conversation-patterns.md`](evidence-collection-conversation-patterns.md) §14).
+2. **Evidence arm (Wave 6–8)** — proves **integrated request evidence** for a **client-owned** `REQ-*` via checklist gates, adversarial inquiry (when `depth_tier: integrated`), and [`request-evidence-envelope.v1.json`](../tied-bundle/docs/request-evidence-envelope.md) with **blocking error gaps = 0**.
 
 **Proof boundaries (must not conflate):**
 
@@ -23,7 +23,7 @@
 | **Gate `allowed: true`** | Checklist dispositions satisfy phase contract | Envelope blocking gaps zero unless `--envelope-blocking` also passes |
 | **Layer C `gate_mode: true`** | Static analysis gate on scoped IMPL pseudo-code | Full behavioral test coverage |
 
-Vocabulary is aligned with [`tied/vocab/quality-assurance.md`](../tied/vocab/quality-assurance.md) (**evaluation corpus**, **comparable arms**, **proof boundary**) and [`tied/vocab/pseudocode-and-citdp.md`](../tied/vocab/pseudocode-and-citdp.md) (**grammar v2**, **grammar_v2_header audit dimension**). No new glossary terms required for this runbook.
+Vocabulary is aligned with [`tied-project/vocab/quality-assurance.md`](../tied-project/vocab/quality-assurance.md) (**evaluation corpus**, **comparable arms**, **proof boundary**) and [`tied-project/vocab/pseudocode-and-citdp.md`](../tied-project/vocab/pseudocode-and-citdp.md) (**grammar v2**, **grammar_v2_header audit dimension**). No new glossary terms required for this runbook.
 
 ### Refine disposition
 
@@ -54,19 +54,19 @@ Vocabulary is aligned with [`tied/vocab/quality-assurance.md`](../tied/vocab/qua
 
 | Token / artifact | Role in this test |
 |------------------|------------------|
-| [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) | Grammar arm satisfaction criteria + audit dimensions |
-| [REQ-REQUEST_EVIDENCE_ENVELOPE](../tied/requirements/REQ-REQUEST_EVIDENCE_ENVELOPE.yaml) | Envelope build/validate/patch; close-out blocking mode |
-| [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../tied/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) | `pre_implementation`, `verification`, `close_out` gates |
-| [REQ-EVIDENCE_CHAIN_PROFILE](../tied/requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml) | Wave 6 `evidence-chain-profile.v1.json` expectation at integrated depth |
-| [REQ-PSEUDOCODE_STATIC_ANALYSIS](../tied/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml) | Layer C PSA under `working/{REQ}/pseudocode-analysis/` |
-| [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE](../tied/requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml) | Context only; **not** required activated for v2 header grade |
+| [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied-project/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) | Grammar arm satisfaction criteria + audit dimensions |
+| [REQ-REQUEST_EVIDENCE_ENVELOPE](../tied-project/requirements/REQ-REQUEST_EVIDENCE_ENVELOPE.yaml) | Envelope build/validate/patch; close-out blocking mode |
+| [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../tied-project/requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) | `pre_implementation`, `verification`, `close_out` gates |
+| [REQ-EVIDENCE_CHAIN_PROFILE](../tied-project/requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml) | Wave 6 `evidence-chain-profile.v1.json` expectation at integrated depth |
+| [REQ-PSEUDOCODE_STATIC_ANALYSIS](../tied-project/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml) | Layer C PSA under `working/{REQ}/pseudocode-analysis/` |
+| [REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE](../tied-project/requirements/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml) | Context only; **not** required activated for v2 header grade |
 
 **Related plans (cross-read, do not duplicate):**
 
 - [`pre-client-test-prior-work-plan.md`](pre-client-test-prior-work-plan.md) — S/O/D prior-work gates and pin rule (Refine gate authoritative for sequencing)
 - [`pseudocode-grammar-v2-and-hygiene-plan.md`](pseudocode-grammar-v2-and-hygiene-plan.md) — Tracks A/C/B sequencing; Step 7 hygiene close-out complete (`48d1fbb+`)
 - [`layerb-sidecar-fix-close-out.md`](layerb-sidecar-fix-close-out.md) — Layer B SHAPE context for validator hardening (Track C)
-- [`docs/tied-async-methodology-plan.md`](tied-async-methodology-plan.md) — Only if client REQ introduces async boundaries (preload [`tied/vocab/async-methodology.md`](../tied/vocab/async-methodology.md))
+- [`docs/tied-async-methodology-plan.md`](tied-async-methodology-plan.md) — Only if client REQ introduces async boundaries (preload [`tied-project/vocab/async-methodology.md`](../tied-project/vocab/async-methodology.md))
 
 **Test strategy (operator-executed, no new stdd RED in this refine):**
 
@@ -87,7 +87,7 @@ Vocabulary is aligned with [`tied/vocab/quality-assurance.md`](../tied/vocab/qua
 
 | Arm | Proves | Does **not** prove |
 |-----|--------|-------------------|
-| **Evidence** ([`request-evidence-envelope.md`](../tied/docs/request-evidence-envelope.md)) | Tracker, inquiry (integrated), verification + close_out gates **`allowed: true`**, envelope **`blocking_gaps: 0`**, manifest/profile/PSA as required by depth | Grammar v2 bootstrap policy |
+| **Evidence** ([`request-evidence-envelope.md`](../tied-bundle/docs/request-evidence-envelope.md)) | Tracker, inquiry (integrated), verification + close_out gates **`allowed: true`**, envelope **`blocking_gaps: 0`**, manifest/profile/PSA as required by depth | Grammar v2 bootstrap policy |
 | **Grammar v2** (§14, `REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT`) | Template copyable body has `Grammar-Version: v2`; audit JSON with **independent** dimensions | Client REQ close-out, mass v2 migration |
 
 Tracks A/C/B are **shipped in stdd** at **`48d1fbb+`**. The next client test is mostly **operator + client tree** work; stdd needs only light preflight (see [`pre-client-test-prior-work-plan.md`](pre-client-test-prior-work-plan.md)).
@@ -235,7 +235,7 @@ node scripts/audit-grammar-v2-default.mjs \
 3. **Pass:** `audit.ok: true` and `dimensions.grammar_v2_header: pass` (plus independent `layer_b`, `layer_c`, `legacy_v1_compatibility` in JSON). Schema: `grammar-v2-default-audit.v1` ([`scripts/lib/audit-grammar-v2-default.mjs`](../scripts/lib/audit-grammar-v2-default.mjs)).
 4. Confirm client template preamble: `Grammar-Version: v2` as first non-comment line after H1 ([`templates/impl-essence-pseudocode-template.md`](../templates/impl-essence-pseudocode-template.md) in client tree).
 
-**Scope:** Track A grades **new-project template/bootstrap**, not v2 on every old sidecar. New `IMPL-*-pseudocode.md` should come from the v2 template; run `pseudocode_validate` and Layer C with `gate_mode: true`, `constraint_flow: false` per checklist ([`pseudocode-writing-and-validation.md`](../tied/docs/pseudocode-writing-and-validation.md)).
+**Scope:** Track A grades **new-project template/bootstrap**, not v2 on every old sidecar. New `IMPL-*-pseudocode.md` should come from the v2 template; run `pseudocode_validate` and Layer C with `gate_mode: true`, `constraint_flow: false` per checklist ([`pseudocode-writing-and-validation.md`](../tied-bundle/docs/pseudocode-writing-and-validation.md)).
 
 **Timing:** Run **§C before or in parallel with** client REQ implementation, but **do not** wait for close_out — header grade is bootstrap-bound.
 
@@ -250,7 +250,7 @@ Standard **integrated** path for the client’s own `REQ-*` (authoritative Track
 | **Pre_implementation** | CITDP + Tracker; pseudo-code validation gates; **`tied_checklist_gate_validate`** `allowed: true`; inquiry + **activation collect** when `depth_tier: integrated` | MCP / `tied-cli`; PSA pre-RED |
 | **Implementation** | RED→GREEN per Tracker; PSA Layer C artifacts under `working/{REQ}/pseudocode-analysis/` | Tests reference `[REQ-*]` tokens |
 | **Verification** | Gate `phase: verification` with activation; **`allowed: true`**; manifest/profile gaps addressed or waived per policy | `tied_checklist_gate_validate` |
-| **Close_out** | `run-close-out-gates.mjs` with `--envelope-blocking --sync-dispositions --reconcile`; envelope **`blocking_gaps: 0`** | [`request-evidence-envelope.md`](../tied/docs/request-evidence-envelope.md) |
+| **Close_out** | `run-close-out-gates.mjs` with `--envelope-blocking --sync-dispositions --reconcile`; envelope **`blocking_gaps: 0`** | [`request-evidence-envelope.md`](../tied-bundle/docs/request-evidence-envelope.md) |
 
 **Wave 6 integrated expectations (warn → blocking under process-strict):**
 
@@ -284,9 +284,9 @@ Repeat-cohort automation shipped in stdd (2026-09-11 §E build); operator §A–
 
 | Item | Status | Token home |
 |------|--------|------------|
-| Extend `replay-adherence-fixtures.mjs` / `tied-post-session.sh` for `grammar_v2_header_expect: pass` | **Shipped** — `scripts/lib/corpus-grammar-v2-replay.mjs`, tests in `scripts/corpus-grammar-v2-replay.test.mjs` | [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) |
+| Extend `replay-adherence-fixtures.mjs` / `tied-post-session.sh` for `grammar_v2_header_expect: pass` | **Shipped** — `scripts/lib/corpus-grammar-v2-replay.mjs`, tests in `scripts/corpus-grammar-v2-replay.test.mjs` | [REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT](../tied-project/requirements/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT.yaml) |
 | Fix `plumb-diff-impact-preview` test flake | **Shipped** — optional `tied_base_path` on impact preview | Analysis module |
-| Bootstrap baseline commit `TIED {version}` | **Shipped** — `tools/bootstrap/lib/tied-baseline-commit-message.mjs`, `build-commands.sh` | [REQ-TIED_SETUP](../tied/requirements/REQ-TIED_SETUP.yaml) |
+| Bootstrap baseline commit `TIED {version}` | **Shipped** — `tools/bootstrap/lib/tied-baseline-commit-message.mjs`, `build-commands.sh` | [REQ-TIED_SETUP](../tied-project/requirements/REQ-TIED_SETUP.yaml) |
 | `MISSING_GRAMMAR_V2_HEADER` policy flag | Deferred in hygiene plan | — |
 
 ---

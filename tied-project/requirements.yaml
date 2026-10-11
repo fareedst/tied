@@ -320,6 +320,17 @@ REQ-ATDD-E2E-AGENT_STREAM:
   validation_criteria:
     - coverage: "test/e2e/agent_stream_e2e_test.rb"
       method: "E2E tests with stub agent on PATH (upstream atdd)"
+REQ-CHECKLIST-PROCESS-REVIEW:
+  category: "Functional"
+  detail_file: "requirements/REQ-CHECKLIST-PROCESS-REVIEW.yaml"
+  name: "Checklist and process review operator docs"
+  priority: "P2"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-CHECKLIST-PROCESS-REVIEW"
+    implementation:
+      - "IMPL-CHECKLIST-PROCESS-REVIEW"
 REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   category: "Functional"
   detail_file: "requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml"
