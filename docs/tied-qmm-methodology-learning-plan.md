@@ -433,6 +433,16 @@ Every behavior-changing wave:
 
 Loop 3 deliverable for this program: **waves W1–W5** (local proof on `stdd`). **W6 waived** at exit per [`sponsor-authority-qmm-program-close-w6-waived-20261010.md`](../tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md). W5 implement traceable-commit: **`e9e56a8`**. Optional follow-up: Kaizen Phase 3 transport only via **separate** Kaizen program hinge reopen.
 
+### Post-program follow-on (outside W0–W6 orchestrator)
+
+| Track | REQ / plan | Status (2026-10-10) | Commit / evidence |
+| --- | --- | --- | --- |
+| **(a)** Pre-implementation experiment gate habit | [`REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE`](../tied-project/requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml) · [`docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md`](tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md) | **Implement complete** — integrated `close_out`, envelope `blocking_gap_count=0` | **`d641081`** · [session-handoff](../tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/evidence/session-handoff.md) |
+| **(b)** Kaizen Phase 3 transport | Kaizen program | **Deferred** | Not authorized by QMM close |
+| **(c)** Shareable hashed cohort export | — | **Deferred** | Non-goal for (a) |
+
+This follow-on table is **status translation only** (`/xlate`); it does not reopen the closed program orchestrator.
+
 ### Costly choices (sponsor-owned before W1 `pre_implementation`)
 
 | Hinge | Default in this plan | Change authority |

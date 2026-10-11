@@ -24,7 +24,7 @@ REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
         metric: "pre_implementation allows without link"
       - criterion: "W2 non-regression"
         metric: "verification and close_out pairing unchanged"
-    status: "In Progress"
+    status: "Implemented"
     traceability:
       architecture:
         - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"

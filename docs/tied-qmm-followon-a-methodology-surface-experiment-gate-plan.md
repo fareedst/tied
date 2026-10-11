@@ -2,9 +2,9 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | **Plan-only refined** (2026-10-10, refine pass 2) |
-| **Change ID** | `PLAN-TIED-QMM-FOLLOWON-A` |
-| **Future REQ** | `REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE` (implement pass only) |
+| **Status** | **Implement complete** (2026-10-10) — machine `close_out` pass; traceable-commit **`d641081`** |
+| **Change ID** | `PLAN-TIED-QMM-FOLLOWON-A` (plan-only) · implement REQ **`REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE`** |
+| **Implement entry** | [`tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/PLAN.md`](../tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/PLAN.md) · handoff [`session-handoff.md`](../tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/evidence/session-handoff.md) |
 | **Parent program** | [`docs/tied-qmm-methodology-learning-plan.md`](tied-qmm-methodology-learning-plan.md) (closed) |
 | **Working entry** | [`tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/PLAN.md`](../tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/PLAN.md) |
 | **Documentation CITDP** | [`tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml`](../tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml) |
@@ -14,10 +14,20 @@
 
 ## Status and authority
 
-This is the refined child plan for `REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE`.
-It is a planning handoff only: no production code, product REQ/ARCH/IMPL
-records, semantic-token registry rows, RED tests, or runtime gate behavior are
-authorized by this document.
+This document remains the **refined child plan** for `REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE`.
+It was **plan-only** through refine pass 2 (2026-10-10). The **authorized implement pass**
+completed the same day: R/A/I stack, runtime module, checklist seam, integrated gates,
+and `close_out` (`run_id=mseg-closeout-20261010`). **Proof boundary unchanged:** pre-implementation
+pass proves Loop 3 discipline (hypothesis + baseline), not methodology effectiveness (W2 authority).
+
+### `/xlate` — sponsor status (2026-10-10)
+
+| Sponsor question | Canonical answer |
+| --- | --- |
+| Is follow-on **(a)** done? | **Yes** for scoped REQ — gates green, **`d641081`** on `main` (local, ahead of origin). |
+| What ships? | CITDP-scoped **pre-implementation experiment gate** when `methodology_surface_change_class` is non-`none`; W2 verification/close_out pairing **unchanged**. |
+| What is left? | Optional `git push`; Kaizen follow-on **(b)** / shareable_hashed **(c)** remain **out of scope**. |
+| Program parent | QMM W1–W5 program **closed**; follow-on **(a)** is post-program Loop 3 habit enforcement, not a W6 reopen. |
 
 The linked working plan and this child plan are committed rationale. Machine
 gates, inquiry artifacts, ledgers, and receipts belong under the local
@@ -283,5 +293,5 @@ RECORDed, the implement Tracker/CITDP is valid, pseudo-code gates pass, and
   are executable.
 - Integrated inquiry uses identity-bound phase artifacts and bounded paths.
 - Working artifacts follow the two-root placement policy.
-- No implementation completion is claimed by this plan.
+- Implement acceptance for `REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE` is recorded in the REQ working handoff and CHANGELOG `[Unreleased]`; this child plan document is not re-run for close-out.
 

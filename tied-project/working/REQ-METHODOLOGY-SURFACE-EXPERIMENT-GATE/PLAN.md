@@ -3,8 +3,11 @@
 | Field | Value |
 | --- | --- |
 | **REQ** | `REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE` |
+| **Status** | **Implement complete** (2026-10-10) · index **`Implemented`** · close_out `run_id=mseg-closeout-20261010` |
+| **Commit** | **`d641081`** |
 | **Child plan** | [`docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md`](../../../docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md) |
+| **Parent program** | QMM W1–W5 **closed** — follow-on **(a)** is post-program habit gate ([`PLAN-TIED-QMM-METHODOLOGY-LEARNING/PLAN.md`](../PLAN-TIED-QMM-METHODOLOGY-LEARNING/PLAN.md)) |
 | **Sponsor authority** | [`../PLAN-TIED-QMM-FOLLOWON-A/evidence/sponsor-authority-followon-a-implement-20261010.md`](../PLAN-TIED-QMM-FOLLOWON-A/evidence/sponsor-authority-followon-a-implement-20261010.md) |
-| **CITDP** | [`CITDP-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml`](./CITDP-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml) (working copy mirrors `tied-project/citdp/`) |
+| **CITDP** | [`tied-project/citdp/CITDP-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml`](../../citdp/CITDP-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml) |
 
-Unit/composition for `methodology-surface-experiment-gate` and checklist composition are implemented; **`pre_implementation`**, **`verification`**, and **`close_out`** gates have receipts under `evidence/`. **Git commit** is the remaining operator step — see [`evidence/session-handoff.md`](./evidence/session-handoff.md).
+Runtime module, checklist seam, unit/composition tests, and integrated **`pre_implementation`**, **`verification`**, **`close_out`**, and **`tied_verify`** receipts live under `evidence/`. Resume: [`evidence/session-handoff.md`](./evidence/session-handoff.md).

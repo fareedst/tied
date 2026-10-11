@@ -22,8 +22,16 @@ Linked plan: [`docs/tied-qmm-methodology-learning-plan.md`](../../../docs/tied-q
 | W6 | waived_at_program_close | Not Kaizen Phase 3 implement |
 | Backlog | deferred | Comparison non-goals |
 
+### Post-program follow-on (Loop 3 habit)
+
+| Item | Status | Notes |
+| --- | --- | --- |
+| **(a)** `REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE` | **complete** | Pre-impl experiment gate; commit **`d641081`** · [`docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md`](../../../docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md) |
+| **(b)** Kaizen Phase 3 transport | deferred | Separate Kaizen program hinge |
+| **(c)** `shareable_hashed` cohort export | deferred | Out of follow-on (a) scope |
+
 ## Next agent
 
 1. Read [`evidence/session-handoff.md`](./evidence/session-handoff.md).
-2. Do **not** treat the program as `in_progress` — new Loop 3 scope needs a new sponsor CITDP.
+2. Do **not** treat the program as `in_progress` — new Loop 3 scope needs a new sponsor CITDP (follow-on **(a)** is **complete**; see table above).
 3. Kaizen Phase 3 transport: **deferred** on Kaizen program; QMM W6 **waived** at this program's exit.

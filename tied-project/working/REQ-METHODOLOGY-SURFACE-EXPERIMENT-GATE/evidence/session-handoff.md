@@ -1,13 +1,14 @@
 # session-handoff — REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE
 
-**Updated:** 2026-10-10 (post **plan-close-out**)  
+**Updated:** 2026-10-10 (post **plan-close-out** + **traceable-commit**)  
 **Program:** QMM follow-on **(a)** · **depth:** integrated · **gate_policy:** per_citdp (inquiry **advisory** via CITDP `risk_analysis.adversarial_inquiry.gate_policy`)  
-**Phase:** **close-out machine pass complete** · **git commit pending** (operator)
+**Phase:** **EXIT** — machine close-out pass · **commit** **`d641081`** (`feat(mcp): add methodology surface experiment pre-impl gate`)
 
 ## Resume here
 
-1. **Stage and commit** follow-on (a) implement tree (exclude `tmp/` unless intentional). Proposed message below.
-2. After commit, optional: `tied_verify` refresh if policy requires post-commit status.
+1. Optional: **`git push`** when sponsor wants origin updated (branch was ahead of `origin/main` after commit).
+2. Optional: re-run **`tied_adherence_reconcile_run`** if program rollup needs adherence band after manifest ordering fix.
+3. Next Loop 3 scope (Kaizen **(b)**, shareable_hashed **(c)**): **new** sponsor CITDP — not this REQ.
 
 ## Completion signals
 
@@ -43,22 +44,9 @@ Replay: `node tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/run-c
 - Four **warn**-severity `finding_unresolved` gaps (pre_implementation + close_out) under advisory inquiry policy; do not treat as blocking.
 - Proof boundary unchanged: pre-implementation pass proves **Loop 3 discipline**, not methodology effectiveness.
 
-## Proposed commit message
-
-```
-feat(mcp): add methodology surface experiment pre-impl gate
-
-Require CITDP methodology_surface_experiment_link and W1 record before
-pre_implementation when surface change class is non-none; W2 pairing unchanged.
-
-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE
-ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE
-IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE
-```
-
 ## Git / commit
 
-Working tree still **uncommitted** — sponsor chooses scope (exclude `tmp/`). **No push** unless asked.
+**Traceable-commit:** **`d641081`** on `main` (local). Exclude untracked `tmp/` from any future staging. **No push** unless sponsor asks.
 
 ## Explicit non-goals (unchanged)
 

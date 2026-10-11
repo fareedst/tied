@@ -136,6 +136,8 @@ tied-bundle/working/**/close_out-*.json
 working/DOC-*/
 # refine-plan session scratch (linked plan lives in ~/.cursor/plans/; not canonical TIED intent)
 working/REFINE-*/
+# Repo-root operator scratch (token-create / gate-args dumps; prefer tied-bundle/working/)
+tmp/
 # MCP gate-args payloads for one-off gate validate runs (regenerate per gate invocation)
 tied-bundle/working/**/gate-args*.json
 # Layer C pseudo-code static analysis gate reports (regenerate per gate run)
