@@ -26,6 +26,8 @@
 | stop criterion | stopping rule, abort threshold | A measurable condition that pauses or rolls back a pilot or gate. | `PILOT_STOP_CRITERION` |
 | test adequacy | test sufficiency, test strength | Risk-relative confidence that selected tests exercise meaningful behavior, boundaries, and failure modes. | `TEST_ADEQUACY` |
 | proof boundary | quality proof, validation guarantee | The explicit claim limit for one evidence source; it states what the evidence does and does not establish. | `PROOF_BOUNDARY` |
+| methodology surface experiment gate | pre-impl experiment gate, surface gate | Pre-implementation gate evidence proves Loop 3 discipline (persisted experiment + hypothesis + baseline), not methodology effectiveness; W2 + `tied_verify` remain effectiveness authority. | `METHODOLOGY_SURFACE_EXPERIMENT_GATE` |
+| methodology surface change class | surface change class | Explicit CITDP enum triggering the pre-implementation experiment gate; no path inference. | `METHODOLOGY_SURFACE_CHANGE_CLASS` |
 | abuse case | security scenario, attack case | A named external-input misuse or failure scenario that requires executable evidence or an owned waiver. | `ABUSE_CASE` |
 | accepted risk | risk acceptance, waived obligation | A deliberate residual-risk decision with rationale, accountable owner, and expiry. | `ACCEPTED_RISK` |
 | quality command declaration | quality command, verification command | A bounded argv, working directory, limits, and artifact destination used to collect executable evidence. | `QUALITY_COMMAND_DECLARATION` |

@@ -1447,6 +1447,16 @@ ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
   detail_file: "architecture-decisions/ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
   name: "Production-system enrollment architecture"
   status: "Accepted"
+ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+  cross_references:
+    implementation:
+      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    requirements:
+      - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+  decision: "Four modules: change-class reader, W1 store adapter, pre_implementation validator, checklist composition; no global hook; no path inference; surface gate runs immediately before W2 pairing hook at pre_implementation only."
+  detail_file: "architecture-decisions/ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml"
+  name: "Methodology surface experiment gate architecture"
+  status: "Accepted"
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
     - cons:

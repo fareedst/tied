@@ -12,6 +12,7 @@ import {
   PSEUDOCODE_GATE_SLUG,
 } from "./checklist-slug-registry.js";
 import { validateMethodologySurfacePairingGate } from "./methodology-conformance-effectiveness-pairing/pairing-gate.js";
+import { validateMethodologySurfaceExperimentGate } from "./methodology-surface-experiment-gate/gate.js";
 
 export type GatePhase = "pre_implementation" | "verification" | "close_out";
 export type AdversarialDepth = "minimal" | "integrated" | "strict_candidate";
@@ -1062,6 +1063,8 @@ export type ChecklistGateEvidenceInput = {
   charterCompliance?: CharterComplianceInput;
   /** Optional TIED base path for methodology pairing gate (tests). */
   methodologyPairingBasePath?: string;
+  /** Optional TIED base path for methodology surface experiment gate (tests). */
+  methodologySurfaceExperimentBasePath?: string;
 };
 
 const IMPL_TOKEN_RE = /^IMPL-[A-Z0-9][A-Z0-9_-]*$/u;
@@ -1543,6 +1546,18 @@ export function validateChecklistGate(input: {
     if (mutationCacheBlocksVerification(mutationReport)) {
       diagnostics.push(`mutation_cache_below_threshold:${mutationReport.score}`);
     }
+  }
+
+  const surfaceExperimentBasePath =
+    input.evidence?.methodologySurfaceExperimentBasePath ??
+    input.evidence?.methodologyPairingBasePath;
+  const methodologySurfaceExperimentResult = validateMethodologySurfaceExperimentGate({
+    citdp: input.citdp,
+    phase: input.phase,
+    basePath: surfaceExperimentBasePath,
+  });
+  if (!methodologySurfaceExperimentResult.ok) {
+    diagnostics.push(...methodologySurfaceExperimentResult.diagnostics);
   }
 
   const methodologyPairingResult = validateMethodologySurfacePairingGate({

@@ -25,3 +25,14 @@
 | `feedback-to-tied.md` | — | waived_at_program_close vs deferred | vocab RECORD | fixed |
 
 Gate path spot-check (`allowed` where JSON present): W1–W5 implement REQ folders — all `test -f` on `pre_implementation-gate-result.json`, `verification-gate-result.json`, `close_out-gate-result.json` **pass** (2026-10-10).
+
+### Follow-up pass (same day)
+
+| Artifact | Disposition |
+| --- | --- |
+| `working/PLAN-TIED-QMM-W1…W3/PLAN.md` | fixed — implement complete + parent closed banners |
+| `working/PLAN-TIED-QMM-W4/PLAN.md` | fixed — implement complete (removed stale failed pre_impl narrative) |
+| `working/PLAN-TIED-QMM-W5/PLAN.md` | fixed — implement complete + `e9e56a8` |
+| `working/REQ-*/PLAN.md` (W1–W5 REQs) | fixed — QMM program closed one-liner; added `REQ-EVIDENCE_CHAIN_REPORT/PLAN.md` |
+| `program-evidence-registry.v1.yaml` | pass — machine rollup of gate paths + `allowed` snapshots |
+| `docs/comparisons/qmm-kaizen-vs-tied.md` Related docs | fixed — program closed wording |

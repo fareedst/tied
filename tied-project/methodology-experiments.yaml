@@ -22,3 +22,18 @@ experiments:
       rationale: "W2 pairing pending."
     schema_version: "methodology-learning-experiment.v1"
     surface_ref: "agent-req-implementation-checklist.yaml#methodology-hypothesis-declare"
+  - experiment_id: "mle-gate-habit-demo-20261010"
+    methodology_baseline:
+      metric_rows:
+        - name: "pre_impl_link_declared"
+          value: "not_measured"
+      snapshot_at: "2026-10-10T00:00:00Z"
+    methodology_hypothesis: "Requiring W1 experiment link before pre_implementation increases declared hypothesis coverage on checklist_step changes."
+    privacy_tier: "operator_local"
+    production_system_surface: "checklist_step"
+    proof_boundary: "Dogfood for REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE; structural gate only."
+    rule_reversal:
+      applied: false
+      rationale: "Follow-on A implement pass."
+    schema_version: "methodology-learning-experiment.v1"
+    surface_ref: "agent-req-implementation-checklist.yaml#methodology-surface-experiment-gate"

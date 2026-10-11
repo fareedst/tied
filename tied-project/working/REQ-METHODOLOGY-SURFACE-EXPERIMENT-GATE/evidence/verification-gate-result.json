@@ -1,0 +1,20 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps",
+    "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/pseudocode-analysis/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE.v1.json:IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+    "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json:IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/gates/verification-2026-10-11T01-41-07-754Z.json",
+    "hash": "sha256:2257c3f465fc49db785081bdde200eebffd7bf47603955e8e0d3f4739f33987e"
+  }
+}

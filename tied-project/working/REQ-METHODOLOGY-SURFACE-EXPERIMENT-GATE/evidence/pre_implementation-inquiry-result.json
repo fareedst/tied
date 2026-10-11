@@ -1,0 +1,334 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-mseg-followon-a",
+    "scope": [
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004"
+    ],
+    "graph": {
+      "projectId": "stdd-mseg-followon-a",
+      "nodes": [
+        {
+          "id": "constraint:arch-mseg-class",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-mseg-gate",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-mseg-class-prod",
+          "kind": "evidence",
+          "revision": "mseg-src"
+        },
+        {
+          "id": "evidence:loci-mseg-gate-prod",
+          "kind": "evidence",
+          "revision": "mseg-src"
+        },
+        {
+          "id": "evidence:loci-mseg-tests",
+          "kind": "evidence",
+          "revision": "mseg-src"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005",
+          "kind": "block",
+          "revision": "block-rev-mseg5"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+          "kind": "block",
+          "revision": "block-rev-mseg1"
+        },
+        {
+          "id": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+          "kind": "block",
+          "revision": "block-rev-mseg4"
+        },
+        {
+          "id": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE#legacy-none",
+          "kind": "criterion",
+          "revision": "criterion-rev-mseg2"
+        },
+        {
+          "id": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE#pre-impl-discipline",
+          "kind": "criterion",
+          "revision": "criterion-rev-mseg1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE#legacy-none",
+          "to": "constraint:arch-mseg-class",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE#pre-impl-discipline",
+          "to": "constraint:arch-mseg-gate",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-mseg-class",
+          "to": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-mseg-gate",
+          "to": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+          "to": "evidence:loci-mseg-class-prod",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+          "to": "evidence:loci-mseg-gate-prod",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+          "to": "evidence:loci-mseg-tests",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "1279509d1a805df9",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mseg-spec-block",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.ts:validateMethodologySurfaceExperimentGate"
+        },
+        "evidenceRefs": [
+          "mseg-prod-gate"
+        ]
+      },
+      {
+        "id": "1ae63d363e8ae6df",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mseg-spec-block",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.ts:validateMethodologySurfaceExperimentGate"
+        },
+        "evidenceRefs": [
+          "mseg-prod-gate"
+        ]
+      },
+      {
+        "id": "32da5cc864dbc690",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "mseg-spec-compose",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "6f73e60ca04dcd73",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mseg-spec-legacy",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/change-class.ts:readMethodologySurfaceChangeClass"
+        },
+        "evidenceRefs": [
+          "mseg-prod-class"
+        ]
+      },
+      {
+        "id": "968f1bc50ddfb7f8",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mseg-spec-compose",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts:blocks pre_implementation on missing link"
+        },
+        "evidenceRefs": [
+          "mseg-test-compose"
+        ]
+      },
+      {
+        "id": "97c538868fecd258",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mseg-spec-legacy",
+        "message": "Evidence belongs to a different block revision.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/change-class.ts:readMethodologySurfaceChangeClass"
+        },
+        "evidenceRefs": [
+          "mseg-prod-class"
+        ]
+      },
+      {
+        "id": "99f664978c5a8634",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mseg-spec-block",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts:blocks when class non-none without link"
+        },
+        "evidenceRefs": [
+          "mseg-test-block"
+        ]
+      },
+      {
+        "id": "a7d5fa5f6f9e444c",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mseg-spec-compose",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts:blocks pre_implementation on missing link"
+        },
+        "evidenceRefs": [
+          "mseg-test-compose"
+        ]
+      },
+      {
+        "id": "c4167c1d6916a76d",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "mseg-spec-legacy",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/change-class.ts:readMethodologySurfaceChangeClass"
+        },
+        "evidenceRefs": [
+          "mseg-prod-class"
+        ]
+      },
+      {
+        "id": "e73375685199d0d8",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "mseg-spec-legacy",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts:allows pre_implementation when class absent"
+        },
+        "evidenceRefs": [
+          "mseg-test-legacy"
+        ]
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005": "REVIEW",
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001": "REVIEW",
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "project_id": "stdd-mseg-followon-a",
+      "run_id": "mseg-preimpl-20261010",
+      "phase": "pre_implementation",
+      "scope": [
+        "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+        "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+        "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005"
+      ],
+      "scope_hash": "c4fc9f7cec673ddeb2bb440884266d0c76fd28d9a9d7db795c56a43b4efe3e15",
+      "artifact_hashes": {
+        "obligation-report.json": "8702b738776f95d0b361e50177633649a7c7be0d00f0cf7e226c6d20b235beb2",
+        "finding-ledger.jsonl": "0ccba3ebb055f5a6f0319c0178a5f92800a5730f5b2d63355f83aa01709461ba",
+        "gate-result.json": "91439706d7ff5d9c93262d4f5723d6ae26ea19b9ead97f0ec7a678a498e47e4d",
+        "evidence-provenance.json": "6c9c817ea3af441dc61e55e81d9a27b82ef663527ea81c061f260619fd4d7db6"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "project_id": "stdd-mseg-followon-a",
+        "run_id": "mseg-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "c4fc9f7cec673ddeb2bb440884266d0c76fd28d9a9d7db795c56a43b4efe3e15",
+        "hash": "8702b738776f95d0b361e50177633649a7c7be0d00f0cf7e226c6d20b235beb2",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "project_id": "stdd-mseg-followon-a",
+        "run_id": "mseg-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "c4fc9f7cec673ddeb2bb440884266d0c76fd28d9a9d7db795c56a43b4efe3e15",
+        "hash": "0ccba3ebb055f5a6f0319c0178a5f92800a5730f5b2d63355f83aa01709461ba",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "project_id": "stdd-mseg-followon-a",
+        "run_id": "mseg-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "c4fc9f7cec673ddeb2bb440884266d0c76fd28d9a9d7db795c56a43b4efe3e15",
+        "hash": "91439706d7ff5d9c93262d4f5723d6ae26ea19b9ead97f0ec7a678a498e47e4d",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "project_id": "stdd-mseg-followon-a",
+        "run_id": "mseg-preimpl-20261010",
+        "phase": "pre_implementation",
+        "scope_hash": "c4fc9f7cec673ddeb2bb440884266d0c76fd28d9a9d7db795c56a43b4efe3e15",
+        "hash": "6c9c817ea3af441dc61e55e81d9a27b82ef663527ea81c061f260619fd4d7db6",
+        "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  }
+}

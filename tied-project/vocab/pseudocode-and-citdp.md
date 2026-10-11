@@ -28,6 +28,9 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **block lead comment** | header comment | First comment on each block; literal-copy to tests/code |
 | **three-way alignment** | sync | IMPL block lead ↔ test comment ↔ code comment |
 | **UPPER_SNAKE block name** | procedure name (ambiguous) | Preferred **domain** term becomes block identifier |
+| **methodology surface change class** (`methodology_surface_change_class`) | change type inference | CITDP `change_definition` enum: `checklist_step`, `prompt_type_workflow`, `gate_policy`, `assurance_profile`, `none`; absent treated as legacy `none` |
+| **pre-implementation experiment gate** | global methodology hook | Fail-closed `pre_implementation` validator when class is non-`none`; requires W1 link + hypothesis + baseline |
+| **methodology surface experiment gate** | surface gate | Runtime module + checklist composition before W2 pairing at `pre_implementation` only |
 | **CITDP record** | citdp file | `tied-project/citdp/CITDP-*.yaml` |
 | **per-request checklist copy** | checklist yaml | Never run completion against canonical checklist in `tied-bundle/docs/` |
 | **vocabulary layer** | glossary-only documentation, terminology notes (alone) | Peer agent-control layer that resolves, preloads, records, and validates canonical domain terms; see [`tied-methodology.md`](tied-methodology.md) |
@@ -36,6 +39,8 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **block-lead bracket format** | token comment line | Exact pattern: `[IMPL-*] [ARCH-*] [REQ-*]` then `How: …` (IMPL, ARCH, REQ order when all three appear) |
 | **contract precision** | precise contracts, extended contract | Active-block PRE/POST/EFFECTS (+ FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable); Layer B SHAPE-003..006 |
 | **binding inventory** | glue list (alone) | Trigger→callee→arguments→effect table; see [`../docs/composition-coverage.md`](../../tied-bundle/docs/composition-coverage.md) and [`tied-methodology.md`](tied-methodology.md) |
+| **methodology surface change class** | surface change type, change class | CITDP field `change_definition.methodology_surface_change_class`: `checklist_step`, `prompt_type_workflow`, `gate_policy`, `assurance_profile`, or `none`; absent treated as legacy `none` ([REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE](../requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml)) |
+| **pre-implementation experiment gate** | methodology surface experiment gate, surface gate | Fail-closed `pre_implementation` checklist hook requiring W1 link + hypothesis/baseline when class is non-`none`; distinct from W2 verification pairing ([REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE](../requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml)) |
 | **composition evidence** | E2E covers wiring | UI-free composition test proving a binding before integration |
 | **SHAPE-003** | — | Schema check: Active procedure blocks declare PRE, POST, EFFECTS |
 | **SHAPE-004** | — | Schema check: FAILURE_MODES closed set when errors are possible |

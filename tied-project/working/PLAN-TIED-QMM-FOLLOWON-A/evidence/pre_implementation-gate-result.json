@@ -1,0 +1,26 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [
+    "missing_not_applicable_policy_or_rationale:sub-adversarial-inquiry-pass",
+    "invalid_slug:resolve",
+    "invalid_slug:change-definition-impact-risk-test-strategy",
+    "invalid_slug:future-evidence-contracts",
+    "invalid_slug:plan-only-pre-implementation-gate",
+    "invalid_slug:product-tied-records",
+    "invalid_slug:implementation",
+    "invalid_slug:verification",
+    "invalid_slug:close-out",
+    "missing_counterexamples",
+    "missing_falsification_questions",
+    "missing_disconfirming_observations",
+    "missing_adversarial_evidence_references"
+  ],
+  "recorded_at": "2026-10-10T17:34:00-07:00",
+  "request_token": "PLAN-TIED-QMM-FOLLOWON-A",
+  "citdp_path": "tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml",
+  "interpretation": "Plan-only documentation pass; authoritative checklist gate rejects custom plan-tracker slugs and lacks implement Tracker/CITDP. Gate blocks RED/implement progression (expected). Not a blocker for doc-only refine close-out. Re-run with working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/ authoritative Tracker after sponsor implement authority."
+}

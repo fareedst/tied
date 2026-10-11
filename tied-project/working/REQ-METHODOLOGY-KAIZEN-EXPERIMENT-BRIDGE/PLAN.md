@@ -1,5 +1,7 @@
 # REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
 
+**QMM program:** closed (2026-10-10); W6 waived at exit.
+
 **Status:** complete — traceable-commit `ab5a760` (2026-10-10)  
 **Child program plan:** [`docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md`](../../../docs/tied-qmm-w3-kaizen-methodology-bridge-plan.md)  
 **CITDP:** [`CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml`](../../citdp/CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml)  

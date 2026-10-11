@@ -5,7 +5,7 @@
 
 ## Resume here
 
-1. Read [`doc-reconcile-evidence.md`](./doc-reconcile-evidence.md) for the cross-artifact hygiene record.
+1. Read [`doc-reconcile-evidence.md`](./doc-reconcile-evidence.md) and optional machine index [`program-evidence-registry.v1.yaml`](./program-evidence-registry.v1.yaml).
 2. **Commits:** W5 implement **`e9e56a8`**; program close + hygiene in follow-on commit (this session).
 3. **Kaizen Phase 3:** still **deferred** on the closed Kaizen program — QMM W6 waiver is **not** Phase 3 transport.
 

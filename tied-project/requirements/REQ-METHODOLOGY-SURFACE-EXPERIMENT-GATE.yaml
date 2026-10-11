@@ -1,0 +1,37 @@
+REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+  REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+    category: "Functional"
+    name: "Methodology surface experiment gate"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Pre-implementation Loop 3 discipline before RED"
+      problems_solved:
+        - "Unlinked methodology-surface CITDPs reach RED without W1 experiment"
+      why: "Require persisted experiment with hypothesis and baseline when methodology_surface_change_class is non-none"
+    related_requirements:
+      depends_on:
+        - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+        - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      related_to:
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    satisfaction_criteria:
+      - criterion: "Blocking when class non-none"
+        metric: "Stable diagnostics for missing link, store, hypothesis, baseline"
+      - criterion: "Legacy when class absent or none"
+        metric: "pre_implementation allows without link"
+      - criterion: "W2 non-regression"
+        metric: "verification and close_out pairing unchanged"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      implementation:
+        - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      tests:
+        - "methodology-surface-experiment-gate/*.test.ts"
+  traceability:
+    tests:
+      - "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts"

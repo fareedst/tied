@@ -2,6 +2,8 @@
 
 Linked plan: [`docs/tied-qmm-w2-conformance-effectiveness-plan.md`](../../../docs/tied-qmm-w2-conformance-effectiveness-plan.md)
 
+**QMM program:** closed (2026-10-10); W6 waived at exit — no open wave blockers on this REQ.
+
 ## Status (2026-10-10 build-plan)
 
 | Batch | Scope | Status |

@@ -1,7 +1,7 @@
 # REQ-METHODOLOGY-LEARNING-EXPERIMENT — W1 implement
 
 Linked plan: [`docs/tied-qmm-w1-methodology-pdsa-plan.md`](../../../docs/tied-qmm-w1-methodology-pdsa-plan.md)  
-Parent program: [`PLAN-TIED-QMM-METHODOLOGY-LEARNING`](../PLAN-TIED-QMM-METHODOLOGY-LEARNING/PLAN.md)
+Parent program: [`PLAN-TIED-QMM-METHODOLOGY-LEARNING`](../PLAN-TIED-QMM-METHODOLOGY-LEARNING/PLAN.md) — **QMM program closed** (2026-10-10); W6 waived at exit.
 
 ## Authority (2026-10-10)
 

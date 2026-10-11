@@ -1,0 +1,108 @@
+schema_version: qmm-program-evidence-registry.v1
+program_request: PLAN-TIED-QMM-METHODOLOGY-LEARNING
+program_phase: closed
+program_closed_at: '2026-10-10'
+program_close_commit: 4a49452
+generated_at: '2026-10-10T23:32:18.556Z'
+waves:
+  - wave: W0
+    implement_req: null
+    disposition: n/a
+    traceable_commit: null
+    evidence:
+      pre_implementation_gate: null
+      verification_gate: null
+      close_out_gate: null
+      tied_verify: null
+      traceable_commit_evidence: null
+  - wave: W1
+    implement_req: REQ-METHODOLOGY-LEARNING-EXPERIMENT
+    disposition: implement_complete
+    traceable_commit: aaec3ea
+    evidence:
+      pre_implementation_gate:
+        path: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json
+        allowed: true
+      verification_gate:
+        path: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/verification-gate-result.json
+        allowed: true
+      close_out_gate:
+        path: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/close_out-gate-result.json
+        allowed: true
+      tied_verify: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/tied-verify-result.json
+      traceable_commit_evidence: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/traceable-commit-evidence.md
+  - wave: W2
+    implement_req: REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
+    disposition: implement_complete
+    traceable_commit: d0e1b99
+    evidence:
+      pre_implementation_gate:
+        path: >-
+          tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/pre_implementation-gate-result.json
+        allowed: true
+      verification_gate:
+        path: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/verification-gate-result.json
+        allowed: true
+      close_out_gate:
+        path: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/close_out-gate-result.json
+        allowed: true
+      tied_verify: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/tied-verify-result.json
+      traceable_commit_evidence: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/traceable-commit-evidence.md
+  - wave: W3
+    implement_req: REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
+    disposition: implement_complete
+    traceable_commit: ab5a760
+    evidence:
+      pre_implementation_gate:
+        path: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/pre_implementation-gate-result.json
+        allowed: true
+      verification_gate:
+        path: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/verification-gate-result.json
+        allowed: true
+      close_out_gate:
+        path: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/close_out-gate-result.json
+        allowed: true
+      tied_verify: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/tied-verify-result.json
+      traceable_commit_evidence: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/traceable-commit-evidence.md
+  - wave: W4
+    implement_req: REQ-EVIDENCE_CHAIN_REPORT
+    disposition: implement_complete
+    traceable_commit: null
+    evidence:
+      pre_implementation_gate:
+        path: tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/pre_implementation-gate-result.json
+        allowed: true
+      verification_gate:
+        path: tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/verification-gate-result.json
+        allowed: true
+      close_out_gate:
+        path: tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/close_out-gate-result.json
+        allowed: true
+      tied_verify: tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/tied-verify-result.json
+      traceable_commit_evidence: tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/evidence/traceable-commit-evidence.md
+  - wave: W5
+    implement_req: REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
+    disposition: implement_complete
+    traceable_commit: e9e56a8
+    evidence:
+      pre_implementation_gate:
+        path: tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/pre_implementation-gate-result.json
+        allowed: true
+      verification_gate:
+        path: tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/verification-gate-result.json
+        allowed: true
+      close_out_gate:
+        path: tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/close_out-gate-result.json
+        allowed: true
+      tied_verify: tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/tied-verify-result.json
+      traceable_commit_evidence: tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/traceable-commit-evidence.md
+  - wave: W6
+    implement_req: null
+    disposition: waived_at_program_close
+    traceable_commit: null
+    evidence:
+      pre_implementation_gate: null
+      verification_gate: null
+      close_out_gate: null
+      tied_verify: null
+      traceable_commit_evidence: null

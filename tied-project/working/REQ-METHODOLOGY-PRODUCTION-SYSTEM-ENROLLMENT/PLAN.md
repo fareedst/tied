@@ -2,6 +2,8 @@
 
 W5 implement — production-system surface enrollment.
 
+**QMM program:** closed (2026-10-10); W6 waived at exit.
+
 | Field | Value |
 | --- | --- |
 | Child program plan | [`docs/tied-qmm-w5-prompt-type-gate-enrollment-plan.md`](../../../../docs/tied-qmm-w5-prompt-type-gate-enrollment-plan.md) |

@@ -1,0 +1,78 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+    "project_id": "stdd-mseg-followon-a",
+    "run_id": "mseg-verify-20261010",
+    "phase": "verification",
+    "scope": [
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004"
+    ],
+    "scope_hash": "9e1fc9a08cf9df0e9645966a120e12ee7201704460c27f31d084f84c31926985",
+    "artifact_hashes": {
+      "obligation-report.json": "8702b738776f95d0b361e50177633649a7c7be0d00f0cf7e226c6d20b235beb2",
+      "finding-ledger.jsonl": "59f4fa395848ff989dff5c4d7431dfc3e24f8977e7c13f8ecea7d523c14fe079",
+      "gate-result.json": "91439706d7ff5d9c93262d4f5723d6ae26ea19b9ead97f0ec7a678a498e47e4d",
+      "evidence-provenance.json": "398090fb82f396ce99c1ff92810f2e517fb765898fecef0015d5304bc1177ef9"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "project_id": "stdd-mseg-followon-a",
+      "run_id": "mseg-verify-20261010",
+      "phase": "verification",
+      "scope_hash": "9e1fc9a08cf9df0e9645966a120e12ee7201704460c27f31d084f84c31926985",
+      "hash": "8702b738776f95d0b361e50177633649a7c7be0d00f0cf7e226c6d20b235beb2",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "project_id": "stdd-mseg-followon-a",
+      "run_id": "mseg-verify-20261010",
+      "phase": "verification",
+      "scope_hash": "9e1fc9a08cf9df0e9645966a120e12ee7201704460c27f31d084f84c31926985",
+      "hash": "59f4fa395848ff989dff5c4d7431dfc3e24f8977e7c13f8ecea7d523c14fe079",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "project_id": "stdd-mseg-followon-a",
+      "run_id": "mseg-verify-20261010",
+      "phase": "verification",
+      "scope_hash": "9e1fc9a08cf9df0e9645966a120e12ee7201704460c27f31d084f84c31926985",
+      "hash": "91439706d7ff5d9c93262d4f5723d6ae26ea19b9ead97f0ec7a678a498e47e4d",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "project_id": "stdd-mseg-followon-a",
+      "run_id": "mseg-verify-20261010",
+      "phase": "verification",
+      "scope_hash": "9e1fc9a08cf9df0e9645966a120e12ee7201704460c27f31d084f84c31926985",
+      "hash": "398090fb82f396ce99c1ff92810f2e517fb765898fecef0015d5304bc1177ef9",
+      "path": "tied-bundle/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+    "project_id": "stdd-mseg-followon-a",
+    "run_id": "mseg-verify-20261010",
+    "phase": "verification",
+    "scope": [
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+      "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004"
+    ],
+    "scope_hash": "9e1fc9a08cf9df0e9645966a120e12ee7201704460c27f31d084f84c31926985"
+  },
+  "diagnostics": []
+}

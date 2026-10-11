@@ -1,0 +1,105 @@
+CITDP-PLAN-TIED-QMM-FOLLOWON-A:
+  change_definition:
+    current_behavior: "W2 pairing returns early at pre_implementation; unlinked methodology-surface work can reach RED without a W1 experiment record."
+    desired_behavior: "Child linked plan and working folder define explicit methodology_surface_change_class, pre-implementation experiment gate contract, W2 non-regression, and implement handoff without authorizing RED or product tokens in plan-only."
+    non_goals:
+      - "Application code, automated tests, or runtime gate behavior in plan-only pass"
+      - "Editing tied-bundle methodology YAML"
+      - "Global REQ hook or path-based auto-detection"
+      - "Kaizen Phase 3 transport or shareable_hashed cohort export"
+      - "Minting REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE in plan-only"
+    success_criteria:
+      - "Child plan docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md with RESOLVE, scope, modules, gates, and handoff blockers."
+      - "Implement posture documented as integrated depth with per_citdp gate_policy and identity-bound activation."
+      - "Plan-only Tracker records non-activation pre_implementation gate attempt."
+    unchanged_behavior: "W2 verification/close_out pairing, outcome timing, trap dispositions, and absent/none class legacy behavior remain unchanged in plan-only pass."
+  evidence:
+    commands:
+      - "Read-only review of child plan against parent QMM program follow-on (a)"
+      - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
+    manifest_reference: null
+    proof_boundaries:
+      - "docs_and_working_folder_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code mutation in plan-only scope. Read-only neighborhood: checklist-validator, methodology-learning-experiment store, methodology-conformance-effectiveness-pairing."
+    modules_or_boundaries: "Classifier, W1 store adapter, pre-implementation validator, checklist composition seam; W2 pairing seam unchanged."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-QMM-FOLLOWON-A"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "integrated"
+    recorded_at: "2026-10-10"
+    title: "QMM follow-on (a) methodology-surface experiment gate (plan-only)"
+  risk_analysis:
+    abuse_cases:
+      - "Pre-implementation pass misread as methodology effectiveness proof"
+      - "Silent path inference blocks unrelated REQ work"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Class absent but operators treat file paths as implicit methodology-surface change."
+        - "Plan-only gate receipt reused as implement activation evidence."
+        - "W2 trap bypassed because pre_implementation passed without verification pairing."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any product REQ/ARCH/IMPL index row minted without sponsor implement authority."
+        - "Any runtime edit under mcp-server/src/checklist-validator in plan-only pass."
+      eligibility_triggers_matched:
+        - "gate_behavior_change"
+        - "persistence"
+      evidence_references:
+        - "docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md"
+        - "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/checklist-tracker.yaml"
+        - "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/PLAN.md"
+      falsification_questions:
+        - "Does any plan-only sentence authorize RED or runtime code?"
+        - "Does the child plan forbid global hooks and path inference?"
+        - "Is W2 still authoritative at verification and close_out?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Plan-only documentation pass. Implement pass must select integrated depth again with fresh activation."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Read-only plan and working folder review"
+        evidence_method: "Committed process evidence"
+        limitation: "Does not prove pre-implementation gate runtime behavior."
+        owner: "agent"
+        rationale: "Deliverable is child plan and documentation CITDP."
+        result: "pass"
+        risk: "Authority misread as implement"
+        threshold: "No product TIED mutation in plan-only pass"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: "false"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      evidence_path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/evidence/sponsor-authority-followon-a-implement-20261010.md"
+      expiry: "2027-04-10"
+      owner: "sponsor"
+      summary: "Accepted residual: pre-implementation gate proves discipline only, not effectiveness; W2 pairing remains authoritative. Costly hinges affirmed via sponsor-authority-followon-a-implement-20261010.md (default-proceed)."
+    risks:
+      - description: "False positive blocking if auto-detection enabled without sponsor approval"
+        mitigation: "Default explicit class only; auto-detect off"
+    scenarios:
+      - "CITDP declares checklist_step class without link before pre_implementation"
+  tdd_sequence:
+    summary: "Deferred to implement pass: RED unit then composition; no E2E."
+  test_strategy:
+    matrix_notes: "Unit and composition contracts documented in child plan; not executed in plan-only."
+    summary: "Classifier, store adapter, pre-impl validator, checklist seam, W2 regression."

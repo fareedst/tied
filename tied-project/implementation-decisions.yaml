@@ -1613,6 +1613,27 @@ IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
   essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT-pseudocode.md"
   name: "Production-system enrollment implementation"
   status: "Active"
+IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+  cross_references:
+    architecture:
+      - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    requirements:
+      - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+  detail_file: "implementation-decisions/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Reuse W2 link extractor semantics"
+    summary: "methodology-surface-experiment-gate module; checklist-validator composition before W2 pairing."
+  name: "Methodology surface experiment gate implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    requirements:
+      - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    tests:
+      - "methodology-surface-experiment-gate.test.ts"
 IMPL-MODULE_VALIDATION:
   code_locations:
     files:

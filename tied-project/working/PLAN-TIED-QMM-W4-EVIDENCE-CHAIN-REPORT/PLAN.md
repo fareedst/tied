@@ -2,9 +2,9 @@
 
 ## Status
 
-**Implement authorized** (2026-10-10) — sponsor records `w4_scope: implement`. Execute via
-[`implement-checklist-tracker.yaml`](./implement-checklist-tracker.yaml) and
-[`CITDP-PLAN-TIED-QMM-W4-IMPLEMENT.yaml`](../../citdp/CITDP-PLAN-TIED-QMM-W4-IMPLEMENT.yaml).
+**Implement complete** (2026-10-10) — parent QMM program **closed**; W6 **waived_at_program_close**.  
+**Product REQ:** `REQ-EVIDENCE_CHAIN_REPORT` — gates under `tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/`; wave close-out signals under `evidence/traceable-commit-evidence.md` (no separate REQ-level traceable-commit file).  
+**Trackers:** plan-only [`checklist-tracker.yaml`](./checklist-tracker.yaml) vs implement [`implement-checklist-tracker.yaml`](./implement-checklist-tracker.yaml).
 
 | Field | Value |
 | --- | --- |
@@ -45,7 +45,7 @@ Forbidden:
 
 Integrated `pre_implementation` requires fresh identity-bound activation evidence when eligibility triggers match; run `sub-adversarial-inquiry-pass` before RED if the gate blocks.
 
-**Latest gate attempt (2026-10-10):** `allowed: false` — tracker sparse, pending `risk-assessment` / `gate-pseudocode-validation`, missing `sub-adversarial-inquiry-pass`, `activation_pairing_incomplete`. Receipt: [`evidence/pre_implementation-gate-result.json`](./evidence/pre_implementation-gate-result.json).
+**Implement gate receipts (authoritative):** REQ folder — see orchestrator W4 `implement_checklist`. Plan-only `pre_implementation` attempt remains non-activation only.
 
 ## Implement batches
 

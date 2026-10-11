@@ -1,0 +1,17 @@
+{
+  "run_id": "mseg-closeout-20261010",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 4
+  },
+  "gate_diagnostics_advisory": [
+    "warn_not_success",
+    "finding_unresolved"
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "graph": {
+    "projectId": "stdd-mseg-followon-a",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE#pre-impl-discipline",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mseg1",
+          "sourceRevision": "mseg-src"
+        },
+        "architectureConstraintIds": ["arch-mseg-gate"]
+      },
+      {
+        "identity": {
+          "id": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE#legacy-none",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-mseg2",
+          "sourceRevision": "mseg-src"
+        },
+        "architectureConstraintIds": ["arch-mseg-class"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-mseg-gate",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004"
+        ]
+      },
+      {
+        "id": "arch-mseg-class",
+        "implementationBlockIds": [
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+          "kind": "block",
+          "name": "READ_METHODOLOGY_SURFACE_CHANGE_CLASS",
+          "derivation": "content",
+          "revision": "block-rev-mseg1",
+          "sourceRevision": "mseg-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+          "kind": "block",
+          "name": "VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE",
+          "derivation": "content",
+          "revision": "block-rev-mseg4",
+          "sourceRevision": "mseg-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005",
+          "kind": "block",
+          "name": "METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION",
+          "derivation": "content",
+          "revision": "block-rev-mseg5",
+          "sourceRevision": "mseg-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-mseg-tests",
+        "blockId": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+        "kind": "test",
+        "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts",
+        "sourceRevision": "mseg-src"
+      },
+      {
+        "id": "loci-mseg-gate-prod",
+        "blockId": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-surface-experiment-gate/gate.ts",
+        "sourceRevision": "mseg-src"
+      },
+      {
+        "id": "loci-mseg-class-prod",
+        "blockId": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+        "kind": "production",
+        "location": "mcp-server/src/methodology-surface-experiment-gate/change-class.ts",
+        "sourceRevision": "mseg-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "block-rev-mseg4",
+    "specification": [
+      {
+        "id": "mseg-spec-legacy",
+        "kind": "behavior",
+        "value": "Absent or none methodology_surface_change_class allows pre_implementation without link.",
+        "order": 1
+      },
+      {
+        "id": "mseg-spec-block",
+        "kind": "behavior",
+        "value": "Non-none class requires link, store row, W1 validation, and non-empty methodology_baseline.",
+        "order": 2
+      },
+      {
+        "id": "mseg-spec-compose",
+        "kind": "behavior",
+        "value": "validateChecklistGate invokes surface experiment gate before W2 pairing at pre_implementation.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "mseg-test-legacy",
+        "statementId": "mseg-spec-legacy",
+        "kind": "behavior",
+        "value": "allows pre_implementation when class absent",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mseg4",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts:allows pre_implementation when class absent"
+        }
+      },
+      {
+        "id": "mseg-test-block",
+        "statementId": "mseg-spec-block",
+        "kind": "behavior",
+        "value": "blocks when class non-none without link",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mseg4",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts:blocks when class non-none without link"
+        }
+      },
+      {
+        "id": "mseg-test-compose",
+        "statementId": "mseg-spec-compose",
+        "kind": "behavior",
+        "value": "blocks pre_implementation on missing link before W2 pairing runs",
+        "order": 3,
+        "reliable": true,
+        "blockRevision": "block-rev-mseg5",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts:blocks pre_implementation on missing link"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "mseg-prod-gate",
+        "statementId": "mseg-spec-block",
+        "kind": "behavior",
+        "value": "validateMethodologySurfaceExperimentGate enforces link and baseline at pre_implementation",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "block-rev-mseg4",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/gate.ts:validateMethodologySurfaceExperimentGate"
+        }
+      },
+      {
+        "id": "mseg-prod-class",
+        "statementId": "mseg-spec-legacy",
+        "kind": "behavior",
+        "value": "readMethodologySurfaceChangeClass treats absent as legacy",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "block-rev-mseg1",
+        "source": {
+          "location": "mcp-server/src/methodology-surface-experiment-gate/change-class.ts:readMethodologySurfaceChangeClass"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#READ_METHODOLOGY_SURFACE_CHANGE_CLASS#msegplan0001",
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#VALIDATE_METHODOLOGY_SURFACE_PRE_IMPLEMENTATION_GATE#msegplan0004",
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE#METHODOLOGY_SURFACE_EXPERIMENT_GATE_COMPOSITION#msegplan0005"
+  ]
+}

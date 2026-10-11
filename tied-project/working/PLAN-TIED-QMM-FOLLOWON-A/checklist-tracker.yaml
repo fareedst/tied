@@ -1,0 +1,93 @@
+citdp:
+  path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml"
+  reason: "Plan-only follow-on (a) pass documents pre-implementation experiment gate contract; no product REQ minted."
+  status: "complete"
+depth_tier: "minimal"
+execution_authority:
+  implementation_authority: "sponsor_default_proceed_20261010"
+  sponsor_authority_path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/evidence/sponsor-authority-followon-a-implement-20261010.md"
+  prior_qmm_receipts_are_activation_evidence: false
+  scope: "plan-only"
+  next_authorized_prompt: "plan-new-feature or build-plan on child linked plan"
+future_gate_contracts:
+  close_out:
+    required:
+      - "costly-choice disposition recorded"
+      - "dogfood demo experiment and gate receipts"
+      - "fresh verification and close_out gate receipts"
+      - "request evidence envelope with fail_on_error_gaps"
+      - "sub-close-out-evidence-sync"
+      - "vocabulary VALIDATE at traceable-commit"
+      - "W2 pairing disposition not conformance_only_trap"
+  pre_implementation:
+    required:
+      - "fresh authoritative tracker under working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/"
+      - "fresh identity-bound activation evidence at structural and pre_implementation phases"
+      - "IMPL sidecar with PROC-IMPL_PSEUDOCODE_TOKENS and Layer C gate_mode clean"
+      - "implement CITDP with depth_tier integrated and gate_policy per_citdp"
+      - "sponsor authority for costly trigger, auto-detection, and in-flight choices"
+      - "successful pre_implementation gate before RED"
+  verification:
+    required:
+      - "fresh verification-phase activation evidence"
+      - "tied_verify and tied_validate_consistency"
+      - "W2 pairing unchanged at verification"
+future_implementation_defaults:
+  depth_tier: "integrated"
+  gate_policy: "per_citdp"
+  requires_fresh_identity_bound_activation: true
+gate:
+  activation: "non_activation"
+  allowed: false
+  diagnostic: "plan_only_minimal_depth"
+  phase: "pre_implementation"
+  reason: "Expected plan-only result from tied_checklist_gate_validate; no implement CITDP, pseudo-code, RED tests, or activation evidence exist, so this result cannot authorize RED, code, verification, or close_out."
+  status: "attempted_not_allowed"
+gate_policy: "advisory"
+profile_depth: "integrated"
+purpose: "Follow-on (a) plan-only Tracker; not an implementation or RED-test Tracker."
+refine_pass: 2
+refine_pass_date: "2026-10-10"
+request: "PLAN-TIED-QMM-FOLLOWON-A"
+schema_version: "qmm-followon-a-plan-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "complete"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md"
+    id: "resolve"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/PLAN.md"
+    id: "change-definition-impact-risk-test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md"
+    id: "future-evidence-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml"
+    id: "persist-citdp-record"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/evidence/pre_implementation-gate-result.json"
+    id: "plan-only-pre-implementation-gate"
+    outcome: "allowed:false; non-activation; not reusable for implementation"
+  - disposition: "not_applicable"
+    id: "product-tied-records"
+    rationale: "Future REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE minted only on authorized implement pass."
+  - disposition: "not_applicable"
+    id: "implementation"
+    rationale: "Follow-on (a) plan-only; no RED tests, runtime code, or implementation authority."
+  - disposition: "pending"
+    id: "verification"
+    rationale: "Future implementation phase only; evidence contract recorded in future_gate_contracts."
+  - disposition: "pending"
+    id: "close-out"
+    rationale: "Future implementation phase only; envelope and W2 pairing required at close_out."

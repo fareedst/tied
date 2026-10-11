@@ -1,0 +1,1 @@
+mcp-server npm run build && node scripts/run-mcp-tests.mjs — methodology-surface-experiment-gate and pairing-gate tests passed (full MCP suite exit 0).

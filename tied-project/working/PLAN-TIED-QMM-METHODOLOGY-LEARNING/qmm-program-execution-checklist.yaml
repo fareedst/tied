@@ -67,6 +67,7 @@ program:
   citdp_status: "complete"
   citdp_status_reason: "Program-close documentation pass; W6 waived at exit."
   program_close_tracker: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/program-close-checklist-tracker.yaml"
+  program_evidence_registry: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/program-evidence-registry.v1.yaml"
   label: "QMM Loop 3 methodology learning (W0–W6)"
   linked_plan: "docs/tied-qmm-methodology-learning-plan.md"
   pre_implementation_gate: "attempted_w0_not_allowed"
