@@ -1,0 +1,33 @@
+IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+  code_locations:
+    files:
+      - path: "mcp-server/src/checklist-validator.ts"
+      - path: "mcp-server/src/methodology-surface-experiment-gate/change-class.ts"
+      - path: "mcp-server/src/methodology-surface-experiment-gate/gate.ts"
+  IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+    code_locations:
+      files:
+        - path: "mcp-server/src/checklist-validator.ts"
+        - path: "mcp-server/src/methodology-surface-experiment-gate/"
+    cross_references:
+      architecture:
+        - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      requirements:
+        - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE-pseudocode.md"
+    implementation_approach:
+      details:
+        - "Shared extractMethodologySurfaceExperimentLink with W2 pairing-gate"
+      summary: "Classifier, link extraction, W1 load/validate, pre_impl gate, checklist composition."
+    name: "Methodology surface experiment gate implementation"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      requirements:
+        - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      tests:
+        - "methodology-surface-experiment-gate/*.test.ts"
+  traceability:
+    tests:
+      - "mcp-server/src/methodology-surface-experiment-gate/gate.test.ts"

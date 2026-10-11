@@ -28,10 +28,12 @@ Linked plan: [`docs/tied-qmm-methodology-learning-plan.md`](../../../docs/tied-q
 | --- | --- | --- |
 | **(a)** `REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE` | **complete** | Pre-impl experiment gate; commit **`d641081`** · [`docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md`](../../../docs/tied-qmm-followon-a-methodology-surface-experiment-gate-plan.md) |
 | **(b)** Kaizen Phase 3 transport | deferred | Separate Kaizen program hinge |
-| **(c)** `shareable_hashed` cohort export | **plan complete** (refine pass 2) | [`docs/tied-qmm-followon-c-methodology-cohort-export-plan.md`](../../../docs/tied-qmm-followon-c-methodology-cohort-export-plan.md) · [`PLAN-TIED-QMM-FOLLOWON-C`](../PLAN-TIED-QMM-FOLLOWON-C/PLAN.md) — implement pending |
+| **(c)** `shareable_hashed` cohort export | **implement complete** | MCP + tests; traceable-commit **`9b093ed2`** · [`docs/tied-qmm-followon-c-methodology-cohort-export-plan.md`](../../../docs/tied-qmm-followon-c-methodology-cohort-export-plan.md) |
+| **(d)** Fleet QMM/QA bundle promotion (phase 1) | **traceable-commit pending** | [`REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES`](../REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/PLAN.md) — six W1–W5 + follow-on **(a)** + W4 stacks in `tied-bundle/`; bootstrap `QMM_*` / `QA_EVIDENCE_CHAIN_*` gates |
+| **(d2)** Cohort export bundle promotion (phase 2) | **deferred** | After **(d)** commit + envelope `depends_on` strategy; manifest key `QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES` reserved empty |
 
 ## Next agent
 
 1. Read [`evidence/session-handoff.md`](./evidence/session-handoff.md).
-2. Follow-on **(a)** and **(c)** are **implement complete** on `stdd`; follow-on **(b)** remains deferred.
+2. Follow-on **(a)** and **(c)** are **implement complete** on `stdd`; **(d)** phase-1 bundle promotion lands via traceable-commit; **(d2)** phase-2 cohort corpus remains deferred.
 3. Kaizen Phase 3 transport: **deferred** on Kaizen program; QMM W6 **waived** at this program's exit.

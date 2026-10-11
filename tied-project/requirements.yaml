@@ -2623,6 +2623,25 @@ REQ-TIED_PROJECT_LINT:
   name: "Project lint MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
+  category: "Functional"
+  detail_file: "requirements/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml"
+  name: "QMM methodology client resources (phase 1 bundle promotion)"
+  priority: "P0"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST"
+      - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_FILES"
 REQ-TIED_RESEARCH_RECORDS:
   category: "Functional"
   cross_references:

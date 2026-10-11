@@ -1,0 +1,26 @@
+IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+    code_locations:
+      files:
+        - path: "mcp-server/src/methodology-kaizen-experiment-bridge/bridge.ts"
+        - path: "mcp-server/src/tools/index.ts"
+    cross_references:
+      architecture:
+        - "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+      requirements:
+        - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    essence_pseudocode_path: "implementation-decisions/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE-pseudocode.md"
+    implementation_approach:
+      details:
+        - "No write to methodology-experiments.yaml on bridge invocation"
+      summary: "bridge.ts draft builder; MCP registration; optional source_feedback_refs on v1 validator."
+    name: "Kaizen methodology bridge implementation"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+      requirements:
+        - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+      tests:
+        - "bridge.test.ts"
+        - "methodology-kaizen-experiment-bridge.mcp.test.ts"

@@ -11,6 +11,8 @@ import yaml from "js-yaml";
 import {
   verifyMethodologyPseudocodeTokenRefs,
   verifyPromptTypeMethodology,
+  verifyQmmMethodology,
+  verifyQaEvidenceChainMethodology,
   verifyVocabularyOwnershipMethodology,
 } from "./verify.mjs";
 
@@ -26,6 +28,39 @@ describe("verifyPromptTypeMethodology [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE]", ()
     );
 
     assert.throws(() => verifyPromptTypeMethodology(tiedDir), /PROMPT_TYPE_GATE_FAILED/);
+  });
+});
+
+describe("verifyQmmMethodology [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES]", () => {
+  it("throws QMM_METHODOLOGY_GATE_FAILED when a manifest artifact is missing", () => {
+    const tiedDir = fs.mkdtempSync(path.join(os.tmpdir(), "bootstrap-qmm-verify-"));
+    const methodologyDir = path.join(tiedDir, "methodology");
+    fs.mkdirSync(path.join(methodologyDir, "requirements"), { recursive: true });
+    fs.writeFileSync(
+      path.join(methodologyDir, "requirements", "REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"),
+      "REQ-METHODOLOGY-LEARNING-EXPERIMENT:\n  name: stub\n",
+      "utf8",
+    );
+
+    assert.throws(() => verifyQmmMethodology(tiedDir), /QMM_METHODOLOGY_GATE_FAILED/);
+  });
+});
+
+describe("verifyQaEvidenceChainMethodology [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES]", () => {
+  it("throws QA_EVIDENCE_CHAIN_METHODOLOGY_GATE_FAILED when a manifest artifact is missing", () => {
+    const tiedDir = fs.mkdtempSync(path.join(os.tmpdir(), "bootstrap-qa-chain-verify-"));
+    const methodologyDir = path.join(tiedDir, "methodology");
+    fs.mkdirSync(path.join(methodologyDir, "requirements"), { recursive: true });
+    fs.writeFileSync(
+      path.join(methodologyDir, "requirements", "REQ-EVIDENCE_CHAIN_REPORT.yaml"),
+      "REQ-EVIDENCE_CHAIN_REPORT:\n  name: stub\n",
+      "utf8",
+    );
+
+    assert.throws(
+      () => verifyQaEvidenceChainMethodology(tiedDir),
+      /QA_EVIDENCE_CHAIN_METHODOLOGY_GATE_FAILED/,
+    );
   });
 });
 

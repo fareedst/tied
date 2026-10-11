@@ -176,6 +176,48 @@ procedure VERIFY_PROMPT_TYPE_METHODOLOGY(projectRoot):
   RETURN success
 
 
+procedure VERIFY_QMM_METHODOLOGY(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES] [REQ-METHODOLOGY-LEARNING-EXPERIMENT] [REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING] [REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE] [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT] [REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE]
+  # How: Fail closed unless manifest-listed phase-1 QMM methodology R+A+I records and pseudo-code sidecars are present under the refreshed methodology snapshot.
+  Contract:
+    INPUT: projectRoot; QMM_METHODOLOGY_REQUIRED_FILES from bootstrap manifest
+    OUTPUT: success diagnostics or non-zero failure with missing paths
+    DATA: client methodology QMM records and pseudo-code sidecars
+    CONTROL: require every manifest-listed artifact; validation is read-only
+    PRE: methodology refresh has completed and projectRoot/tied or tied-bundle is readable
+    POST: all QMM phase-1 artifacts exist and are readable, or bootstrap exits non-zero with an actionable missing-artifact diagnostic
+    EFFECTS: File I/O — reads file existence and permissions; Diagnostics — emits completion or failure guidance
+    FAILURE_MODES: REQUIRED_ARTIFACT_MISSING; REQUIRED_ARTIFACT_UNREADABLE; QMM_METHODOLOGY_GATE_FAILED
+    DATA_TRANSITION: unknown QMM package→verified complete|verified incomplete; client files unchanged
+    TERMINATION: total — finite required artifact list
+  FOR each required QMM artifact from manifest:
+    IF artifact is absent or unreadable:
+      report missing path and corrective command
+      RETURN non-zero
+  RETURN success
+
+
+procedure VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY(projectRoot):
+  # [IMPL-TIED_FILES] [ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES] [REQ-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [IMPL-EVIDENCE_CHAIN_REPORT]
+  # How: Fail closed unless manifest-listed W4 evidence-chain report R+A+I records and pseudo-code sidecar are present under the refreshed methodology snapshot.
+  Contract:
+    INPUT: projectRoot; QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES from bootstrap manifest
+    OUTPUT: success diagnostics or non-zero failure with missing paths
+    DATA: client methodology evidence-chain report records and pseudo-code sidecar
+    CONTROL: require every manifest-listed artifact; validation is read-only
+    PRE: methodology refresh has completed and projectRoot/tied or tied-bundle is readable
+    POST: all W4 QA evidence-chain artifacts exist and are readable, or bootstrap exits non-zero with an actionable missing-artifact diagnostic
+    EFFECTS: File I/O — reads file existence and permissions; Diagnostics — emits completion or failure guidance
+    FAILURE_MODES: REQUIRED_ARTIFACT_MISSING; REQUIRED_ARTIFACT_UNREADABLE; QA_EVIDENCE_CHAIN_METHODOLOGY_GATE_FAILED
+    DATA_TRANSITION: unknown W4 package→verified complete|verified incomplete; client files unchanged
+    TERMINATION: total — finite required artifact list
+  FOR each required QA evidence-chain artifact from manifest:
+    IF artifact is absent or unreadable:
+      report missing path and corrective command
+      RETURN non-zero
+  RETURN success
+
+
 procedure VERIFY_VOCABULARY_OWNERSHIP_METHODOLOGY(projectRoot):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP] [ARCH-TIED_VOCABULARY_LAYERS] [IMPL-TIED_VOCABULARY_REFRESH]
   # How: Fail closed unless manifest-listed vocabulary ownership REQ/ARCH/IMPL records and the refresh pseudo-code sidecar are present under the refreshed methodology snapshot.
@@ -636,6 +678,8 @@ procedure BOOTSTRAP_TIED(projectRoot):
   CALL VERIFY_ADVERSARIAL_INQUIRY_METHODOLOGY(projectRoot)
   CALL VERIFY_VOCABULARY_OWNERSHIP_METHODOLOGY(projectRoot)
   CALL VERIFY_PROMPT_TYPE_METHODOLOGY(projectRoot)
+  CALL VERIFY_QMM_METHODOLOGY(projectRoot)
+  CALL VERIFY_QA_EVIDENCE_CHAIN_METHODOLOGY(projectRoot)
   CALL VERIFY_FEATURE_ORCHESTRATION_METHODOLOGY(projectRoot)
   CALL VERIFY_INHERITED_DETAIL_FILES(projectRoot)
   CALL VERIFY_METHODOLOGY_PSEUDOCODE_TOKEN_REFS(projectRoot)

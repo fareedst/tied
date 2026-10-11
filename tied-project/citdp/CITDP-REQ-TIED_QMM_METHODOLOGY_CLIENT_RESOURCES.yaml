@@ -1,0 +1,35 @@
+CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
+  change_definition:
+    current_behavior_prior: "Phase-1 QMM and W4 REQ-EVIDENCE_CHAIN_REPORT stacks exist in store tied-project/ only; fleet minimal clients fail to inherit tokens and bootstrap lacks QMM_METHODOLOGY_REQUIRED_FILES gates."
+    desired_behavior: "Promote six phase-1 REQ families into tied-bundle/, add manifest verifyQmmMethodology and verifyQaEvidenceChainMethodology, extend IMPL-TIED_FILES pseudo-code, and pass minimal-client validateConsistency with zero methodology ref_issues."
+    non_goals:
+      - "Phase-2 cohort export promotion (gated on sponsor traceable-commit)"
+      - "Promote REQ-REQUEST_EVIDENCE_ENVELOPE while Planned"
+    success_criteria:
+      - "QMM_METHODOLOGY_REQUIRED_FILES and QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES enforced at bootstrap doctor"
+      - "methodology-bundle-consistency.test.ts ok true on store tied-bundle"
+      - "npm test --prefix mcp-server and verify.test.mjs pass"
+  record_identity:
+    change_request_id: "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    recorded_at: "2026-10-10"
+    title: "Phase 1 QMM client bundle promotion"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  record_status: "complete"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "integrated"
+      gate_policy: "per_citdp"
+      profile_depth: "integrated"
+      methodology_surface_change_class: "none"
+    consequence_ladder:
+      costly:
+        - "Omit git add -f on gitignored tied-bundle detail files at traceable-commit"
+      reversible:
+        - "Bundle-only LEAP trim of REQ-MCP_USAGE_METRICS and store-only closure deps from bundle graph"
+  test_strategy:
+    red_first:
+      - "verify.test.mjs throws QMM_METHODOLOGY_GATE_FAILED and QA_EVIDENCE_CHAIN_METHODOLOGY_GATE_FAILED on partial fixtures"
+    green:
+      - "npm test --prefix mcp-server; node --test tools/bootstrap/lib/verify.test.mjs"
+      - "tied_validate_consistency ok true on store merged view"

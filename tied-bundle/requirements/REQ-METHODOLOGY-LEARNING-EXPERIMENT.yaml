@@ -1,0 +1,31 @@
+REQ-METHODOLOGY-LEARNING-EXPERIMENT:
+  REQ-METHODOLOGY-LEARNING-EXPERIMENT:
+    category: "Functional"
+    name: "Methodology learning experiment (Loop 3 PDSA)"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Compose Kaizen and evidence-chain machinery for Loop 3"
+      problems_solved:
+        - "Methodology changes lack uniform hypothesis/baseline/outcome records"
+      why: "Close QMM Loop 3 gap by logging methodology rule changes as PDSA experiments"
+    related_requirements:
+      depends_on:
+        - "REQ-FEEDBACK_TO_TIED"
+      related_to:
+        - "REQ-FEEDBACK_TO_TIED"
+    satisfaction_criteria:
+      - criterion: "Persistence and list MCP tools"
+        metric: "upsert/list composition tests pass"
+      - criterion: "Validators accept methodology-learning-experiment.v1 records"
+        metric: "Unit and MCP validate tests pass"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+      implementation:
+        - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+      tests:
+        - "methodology-learning-experiment.mcp.test.ts"
+        - "methodology-learning-experiment.test.ts"
+  status: "Implemented"

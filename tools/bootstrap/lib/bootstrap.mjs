@@ -34,6 +34,8 @@ import {
   verifyAdversarialInquiryMethodology,
   verifyVocabularyOwnershipMethodology,
   verifyPromptTypeMethodology,
+  verifyQmmMethodology,
+  verifyQaEvidenceChainMethodology,
   verifyFeatureOrchestrationMethodology,
   verifyInheritedDetailFiles,
   verifyMethodologyPseudocodeTokenRefs,
@@ -262,6 +264,8 @@ export function bootstrapTied(projectRoot, options = {}) {
   verifyAdversarialInquiryMethodology(tiedDir);
   verifyVocabularyOwnershipMethodology(tiedDir);
   verifyPromptTypeMethodology(tiedDir);
+  verifyQmmMethodology(tiedDir);
+  verifyQaEvidenceChainMethodology(tiedDir);
   verifyFeatureOrchestrationMethodology(projectRoot, tiedDir, tiedBasePathValue, tiedCliDest);
   verifyInheritedDetailFiles(tiedDir, paths.INHERITED_DETAIL_REQUIRED);
   verifyMethodologyPseudocodeTokenRefs(tiedDir);

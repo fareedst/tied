@@ -1,28 +1,31 @@
 IMPL-EVIDENCE_CHAIN_PROFILE:
   cross_references:
-  - ARCH-EVIDENCE_CHAIN_PROFILE
-  - IMPL-QUALITY_EVIDENCE_MANIFEST
-  - IMPL-TIED_FIDELITY_RESEARCH
-  - REQ-EVIDENCE_CHAIN_PROFILE
+    - ARCH-EVIDENCE_CHAIN_PROFILE
+    - IMPL-QUALITY_EVIDENCE_MANIFEST
+    - IMPL-TIED_FIDELITY_RESEARCH
+    - REQ-EVIDENCE_CHAIN_PROFILE
   detail_file: implementation-decisions/IMPL-EVIDENCE_CHAIN_PROFILE.yaml
   implementation_approach:
     details:
-    - Do not call runFirstSlice or runFidelityResearchPilot
-    - Extend opt-in usage metrics with hashed project_id and profile_depth
-    - Reuse resolveProjectManifest, runStructuralAnalysis, auditImplFidelity, analyzeBindingEvidence, and analyzeSpecificationState
-    summary: Implement generateEvidenceChainProfile with injectable real adapters, normalizeEvidenceChainProfile, MCP tool
+      - Do not call runFirstSlice or runFidelityResearchPilot
+      - Extend opt-in usage metrics with hashed project_id and profile_depth
+      - >-
+        Reuse resolveProjectManifest, runStructuralAnalysis, auditImplFidelity, analyzeBindingEvidence, and
+        analyzeSpecificationState
+    summary: >-
+      Implement generateEvidenceChainProfile with injectable real adapters, normalizeEvidenceChainProfile, MCP tool
       evidence_chain_profile_generate, and a manual profile contract.
   name: Evidence chain profile orchestrator
   status: Active
   traceability:
     architecture:
-    - ARCH-EVIDENCE_CHAIN_PROFILE
+      - ARCH-EVIDENCE_CHAIN_PROFILE
     requirements:
-    - REQ-EVIDENCE_CHAIN_PROFILE
+      - REQ-EVIDENCE_CHAIN_PROFILE
 IMPL-MCP_FEEDBACK_TOOLS:
   cross_references:
-  - ARCH-FEEDBACK_STORAGE
-  - REQ-FEEDBACK_TO_TIED
+    - ARCH-FEEDBACK_STORAGE
+    - REQ-FEEDBACK_TO_TIED
   detail_file: implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml
   metadata:
     last_updated:
@@ -31,19 +34,19 @@ IMPL-MCP_FEEDBACK_TOOLS:
   related_decisions:
     depends_on: []
     see_also:
-    - ARCH-FEEDBACK_STORAGE
-    - REQ-FEEDBACK_TO_TIED
+      - ARCH-FEEDBACK_STORAGE
+      - REQ-FEEDBACK_TO_TIED
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-FEEDBACK_STORAGE
+      - ARCH-FEEDBACK_STORAGE
     requirements:
-    - REQ-FEEDBACK_TO_TIED
+      - REQ-FEEDBACK_TO_TIED
 IMPL-MODULE_VALIDATION:
   cross_references:
-  - ARCH-MODULE_VALIDATION
-  - REQ-MODULE_VALIDATION
+    - ARCH-MODULE_VALIDATION
+    - REQ-MODULE_VALIDATION
   detail_file: implementation-decisions/IMPL-MODULE_VALIDATION.yaml
   metadata:
     last_updated:
@@ -52,19 +55,19 @@ IMPL-MODULE_VALIDATION:
   related_decisions:
     depends_on: []
     see_also:
-    - ARCH-MODULE_VALIDATION
-    - REQ-MODULE_VALIDATION
+      - ARCH-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-MODULE_VALIDATION
+      - ARCH-MODULE_VALIDATION
     requirements:
-    - REQ-MODULE_VALIDATION
+      - REQ-MODULE_VALIDATION
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK.yaml
   name: Authenticated webhook inbox pilot
   related_decisions:
@@ -74,19 +77,19 @@ IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   status: Active
   traceability:
     architecture:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
+      - IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK
     requirements:
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - pilot/webhook-inbox/test/webhook-inbox.test.mjs
+      - pilot/webhook-inbox/test/webhook-inbox.test.mjs
 IMPL-QUALITY_BINDING_INVENTORY:
   cross_references:
-  - ARCH-MODULE_VALIDATION
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - REQ-MODULE_VALIDATION
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-MODULE_VALIDATION
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - REQ-MODULE_VALIDATION
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_BINDING_INVENTORY.yaml
   name: Quality binding inventory validator
   related_decisions:
@@ -96,97 +99,97 @@ IMPL-QUALITY_BINDING_INVENTORY:
   status: Active
   traceability:
     architecture:
-    - ARCH-MODULE_VALIDATION
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-MODULE_VALIDATION
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_BINDING_INVENTORY
+      - IMPL-QUALITY_BINDING_INVENTORY
     requirements:
-    - REQ-MODULE_VALIDATION
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-MODULE_VALIDATION
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - mcp-server/src/analysis/binding-inventory.test.ts
-    - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - mcp-server/src/analysis/binding-inventory.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
 IMPL-QUALITY_EVIDENCE_COLLECTION:
   cross_references:
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
-  - IMPL-QUALITY_EVIDENCE_MANIFEST
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+    - IMPL-QUALITY_EVIDENCE_MANIFEST
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_EVIDENCE_COLLECTION.yaml
   name: Command-to-manifest evidence collector
   related_decisions:
     depends_on:
-    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
-    - IMPL-QUALITY_EVIDENCE_MANIFEST
+      - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+      - IMPL-QUALITY_EVIDENCE_MANIFEST
     see_also: []
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_EVIDENCE_COLLECTION
+      - IMPL-QUALITY_EVIDENCE_COLLECTION
     requirements:
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - mcp-server/src/quality-command-runner.test.ts
-    - mcp-server/src/quality-evidence-collection.test.ts
-    - mcp-server/src/quality-evidence.test.ts
-    - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - mcp-server/src/quality-command-runner.test.ts
+      - mcp-server/src/quality-evidence-collection.test.ts
+      - mcp-server/src/quality-evidence.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
 IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER:
   cross_references:
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - IMPL-QUALITY_EVIDENCE_COLLECTION
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - IMPL-QUALITY_EVIDENCE_COLLECTION
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER.yaml
   name: Quality evidence command runner
   related_decisions:
     composed_with:
-    - IMPL-QUALITY_EVIDENCE_COLLECTION
+      - IMPL-QUALITY_EVIDENCE_COLLECTION
     depends_on: []
     see_also: []
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+      - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
     requirements:
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - mcp-server/src/quality-command-runner.test.ts
-    - mcp-server/src/quality-evidence-collection.test.ts
-    - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - mcp-server/src/quality-command-runner.test.ts
+      - mcp-server/src/quality-evidence-collection.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
 IMPL-QUALITY_EVIDENCE_MANIFEST:
   cross_references:
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - IMPL-QUALITY_EVIDENCE_COLLECTION
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - IMPL-QUALITY_EVIDENCE_COLLECTION
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml
   name: Verification evidence manifest generation
   related_decisions:
     depends_on:
-    - IMPL-QUALITY_EVIDENCE_COLLECTION
+      - IMPL-QUALITY_EVIDENCE_COLLECTION
     see_also: []
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_EVIDENCE_MANIFEST
+      - IMPL-QUALITY_EVIDENCE_MANIFEST
     requirements:
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - mcp-server/src/quality-evidence-collection.test.ts
-    - mcp-server/src/quality-evidence.test.ts
-    - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - mcp-server/src/quality-evidence-collection.test.ts
+      - mcp-server/src/quality-evidence.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
 IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
   cross_references:
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - PROC-PSEUDOCODE_VALIDATION
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - PROC-PSEUDOCODE_VALIDATION
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml
   name: Layer B pseudo-code validator
   related_decisions:
@@ -196,18 +199,18 @@ IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
   status: Active
   traceability:
     architecture:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+      - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
     requirements:
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - mcp-server/src/analysis/pseudocode-validator.test.ts
-    - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - mcp-server/src/analysis/pseudocode-validator.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
 IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
   cross_references:
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_SECURITY_PROFILE_VALIDATION.yaml
   name: External-input security profile validation
   related_decisions:
@@ -217,19 +220,19 @@ IMPL-QUALITY_SECURITY_PROFILE_VALIDATION:
   status: Active
   traceability:
     architecture:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
+      - IMPL-QUALITY_SECURITY_PROFILE_VALIDATION
     requirements:
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - mcp-server/src/quality-security.test.ts
-    - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - mcp-server/src/quality-security.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
 IMPL-QUALITY_TEST_ADEQUACY:
   cross_references:
-  - ARCH-QUALITY_ASSURANCE_PROFILES
-  - PROC-TEST_ADEQUACY
-  - REQ-QUALITY_ASSURANCE_EVIDENCE
+    - ARCH-QUALITY_ASSURANCE_PROFILES
+    - PROC-TEST_ADEQUACY
+    - REQ-QUALITY_ASSURANCE_EVIDENCE
   detail_file: implementation-decisions/IMPL-QUALITY_TEST_ADEQUACY.yaml
   name: Risk-triggered test adequacy validator
   related_decisions:
@@ -239,19 +242,20 @@ IMPL-QUALITY_TEST_ADEQUACY:
   status: Active
   traceability:
     architecture:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
+      - ARCH-QUALITY_ASSURANCE_PROFILES
     code_annotations:
-    - IMPL-QUALITY_TEST_ADEQUACY
+      - IMPL-QUALITY_TEST_ADEQUACY
     requirements:
-    - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - REQ-QUALITY_ASSURANCE_EVIDENCE
     tests:
-    - mcp-server/src/quality-adequacy.test.ts
-    - mcp-server/src/tools/quality-validation-mcp.test.ts
+      - mcp-server/src/quality-adequacy.test.ts
+      - mcp-server/src/tools/quality-validation-mcp.test.ts
 IMPL-TIED_ADVERSARIAL_INQUIRY:
   cross_references:
-  - ARCH-TIED_ADVERSARIAL_INQUIRY
-  - REQ-TIED_ADVERSARIAL_INQUIRY
-  description: Implement deterministic read-only obligation mapping, bidirectional fidelity verdicts, adapter boundaries,
+    - ARCH-TIED_ADVERSARIAL_INQUIRY
+    - REQ-TIED_ADVERSARIAL_INQUIRY
+  description: >-
+    Implement deterministic read-only obligation mapping, bidirectional fidelity verdicts, adapter boundaries,
     finding/gate projections, and bounded assurance eligibility.
   detail_file: implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY.yaml
   metadata:
@@ -260,27 +264,28 @@ IMPL-TIED_ADVERSARIAL_INQUIRY:
   name: Obligation graph, fidelity engine, and assurance gate
   related_decisions:
     depends_on:
-    - IMPL-MODULE_VALIDATION
-    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
-    - IMPL-QUALITY_EVIDENCE_MANIFEST
-    - IMPL-QUALITY_TEST_ADEQUACY
-    - IMPL-TIED_FIDELITY_RESEARCH
+      - IMPL-MODULE_VALIDATION
+      - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+      - IMPL-QUALITY_EVIDENCE_MANIFEST
+      - IMPL-QUALITY_TEST_ADEQUACY
+      - IMPL-TIED_FIDELITY_RESEARCH
     see_also:
-    - IMPL-QUALITY_BINDING_INVENTORY
+      - IMPL-QUALITY_BINDING_INVENTORY
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-TIED_ADVERSARIAL_INQUIRY
+      - ARCH-TIED_ADVERSARIAL_INQUIRY
     requirements:
-    - REQ-TIED_ADVERSARIAL_INQUIRY
+      - REQ-TIED_ADVERSARIAL_INQUIRY
 IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   cross_references:
-  - ARCH-TIED_ADVERSARIAL_INQUIRY
-  - PROC-AGENT_REQ_CHECKLIST
-  - REQ-TIED_ADVERSARIAL_INQUIRY
-  description: Extend real checklist slugs and compose the registered inquiry tool with bounded working artifact persistence
-    and scoped human-approved strict status.
+    - ARCH-TIED_ADVERSARIAL_INQUIRY
+    - PROC-AGENT_REQ_CHECKLIST
+    - REQ-TIED_ADVERSARIAL_INQUIRY
+  description: >-
+    Extend real checklist slugs and compose the registered inquiry tool with bounded working artifact persistence and
+    scoped human-approved strict status.
   detail_file: implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml
   metadata:
     last_updated:
@@ -288,45 +293,46 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   name: Adversarial inquiry checklist integration and evidence artifacts
   related_decisions:
     depends_on:
-    - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
-    - IMPL-QUALITY_EVIDENCE_MANIFEST
-    - IMPL-TIED_ADVERSARIAL_INQUIRY
-    - IMPL-TIED_FIDELITY_RESEARCH
+      - IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER
+      - IMPL-QUALITY_EVIDENCE_MANIFEST
+      - IMPL-TIED_ADVERSARIAL_INQUIRY
+      - IMPL-TIED_FIDELITY_RESEARCH
     see_also:
-    - IMPL-QUALITY_TEST_ADEQUACY
-    - PROC-LEAP
+      - IMPL-QUALITY_TEST_ADEQUACY
+      - PROC-LEAP
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-TIED_ADVERSARIAL_INQUIRY
+      - ARCH-TIED_ADVERSARIAL_INQUIRY
     requirements:
-    - REQ-TIED_ADVERSARIAL_INQUIRY
+      - REQ-TIED_ADVERSARIAL_INQUIRY
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
-  - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
-  - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+    - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
+    - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
   detail_file: implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml
   metadata:
     last_updated:
-      reason: Methodology seed for shared checklist evidence gate (index only; pseudo-code sidecar stays in methodology repo
+      reason: >-
+        Methodology seed for shared checklist evidence gate (index only; pseudo-code sidecar stays in methodology repo
         project YAML)
   name: Checklist, CITDP, and activation validator
   related_decisions:
     depends_on:
-    - IMPL-TIED_ADVERSARIAL_INQUIRY
+      - IMPL-TIED_ADVERSARIAL_INQUIRY
     informs:
-    - IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP
+      - IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP
   status: Active
   traceability:
     architecture:
-    - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
     requirements:
-    - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
 IMPL-TIED_FIDELITY_RESEARCH:
   cross_references:
-  - ARCH-TIED_FIDELITY_RESEARCH
-  - REQ-TIED_FIDELITY_RESEARCH
+    - ARCH-TIED_FIDELITY_RESEARCH
+    - REQ-TIED_FIDELITY_RESEARCH
   detail_file: implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml
   metadata:
     last_updated:
@@ -334,22 +340,22 @@ IMPL-TIED_FIDELITY_RESEARCH:
   name: Fidelity Research First Vertical Slice
   related_decisions:
     depends_on:
-    - IMPL-MODULE_VALIDATION
-    - IMPL-TIED_FILES
+      - IMPL-MODULE_VALIDATION
+      - IMPL-TIED_FILES
     see_also:
-    - IMPL-QUALITY_BINDING_INVENTORY
-    - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
+      - IMPL-QUALITY_BINDING_INVENTORY
+      - IMPL-QUALITY_PSEUDOCODE_VALIDATOR
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-TIED_FIDELITY_RESEARCH
+      - ARCH-TIED_FIDELITY_RESEARCH
     requirements:
-    - REQ-TIED_FIDELITY_RESEARCH
+      - REQ-TIED_FIDELITY_RESEARCH
 IMPL-TIED_FILES:
   cross_references:
-  - ARCH-TIED_STRUCTURE
-  - REQ-TIED_SETUP
+    - ARCH-TIED_STRUCTURE
+    - REQ-TIED_SETUP
   detail_file: implementation-decisions/IMPL-TIED_FILES.yaml
   metadata:
     last_updated:
@@ -358,36 +364,36 @@ IMPL-TIED_FILES:
   related_decisions:
     depends_on: []
     see_also:
-    - ARCH-TIED_STRUCTURE
-    - REQ-TIED_SETUP
+      - ARCH-TIED_STRUCTURE
+      - REQ-TIED_SETUP
     supersedes: []
   status: Active
   traceability:
     architecture:
-    - ARCH-TIED_STRUCTURE
+      - ARCH-TIED_STRUCTURE
     requirements:
-    - REQ-TIED_SETUP
+      - REQ-TIED_SETUP
     tests:
-    - mcp-server/src/e2e/bootstrap-and-load.test.ts
+      - mcp-server/src/e2e/bootstrap-and-load.test.ts
 IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
   cross_references:
-  - ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP
-  - REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
+    - ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP
+    - REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
   detail_file: implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml
   name: Sponsor-Agent Relationship Layer implementation
   status: Planned
 IMPL-TIED_VOCABULARY_REFRESH:
   cross_references:
-  - ARCH-TIED_VOCABULARY_LAYERS
-  - REQ-TIED_VOCABULARY_OWNERSHIP
+    - ARCH-TIED_VOCABULARY_LAYERS
+    - REQ-TIED_VOCABULARY_OWNERSHIP
   detail_file: implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml
   name: Vocabulary Ownership Refresh
   status: Active
 IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
   cross_references:
-  - ARCH-PROMPT_TYPE_GLOBAL_SKILLS
-  - IMPL-TIED_FILES
-  - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+    - ARCH-PROMPT_TYPE_GLOBAL_SKILLS
+    - IMPL-TIED_FILES
+    - REQ-PROMPT_TYPE_GLOBAL_SKILLS
   description: Canonical prompt-type skills bundle under tools and deterministic client installation through tied-install.sh.
   detail_file: implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml
   metadata:
@@ -403,55 +409,94 @@ IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
 IMPL-PROMPT_TYPE_SUBAGENT:
   code_locations:
     files:
-    - description: Project-scoped Cursor Task subagent prompt wrappers for the 13 leaf prompt types
-      path: .cursor/agents/
-    - description: Static frontmatter, prompt contract, and TIED-source wrapper tests
-      path: mcp-server/src/e2e/prompt-type-subagent.test.ts
+      - description: Project-scoped Cursor Task subagent prompt wrappers for the 13 leaf prompt types
+        path: .cursor/agents/
+      - description: Static frontmatter, prompt contract, and TIED-source wrapper tests
+        path: mcp-server/src/e2e/prompt-type-subagent.test.ts
   cross_references:
-  - ARCH-PROMPT_TYPE_SUBAGENT
-  - REQ-PROMPT_TYPE_GLOBAL_SKILLS
-  - REQ-PROMPT_TYPE_SUBAGENT
-  description: Thin foreground Cursor Task wrappers for all 13 leaf prompt types in the TIED source repository, plus a plan-refine-build
-    sequencer that Task-launches those three leaves in order using invocation remainder then linked plans.
+    - ARCH-PROMPT_TYPE_SUBAGENT
+    - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+    - REQ-PROMPT_TYPE_SUBAGENT
+  description: >-
+    Thin foreground Cursor Task wrappers for all 13 leaf prompt types in the TIED source repository, plus a
+    plan-refine-build sequencer that Task-launches those three leaves in order using invocation remainder then linked
+    plans.
   detail_file: implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml
-  essence_pseudocode: "# [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]\n# Summary: Validate\
-    \ the explicit-only writable plan-new-feature Task wrapper and its clean-context workflow contract.\n\nContract:\n  INPUT:\
-    \ agent_markdown; canonical_skill_markdown; test_contract\n  PRE: agent_markdown is readable; canonical_skill_markdown\
-    \ exists; test_contract names required clauses\n  OUTPUT: pass or contract_violation diagnostics\n  POST: pass means frontmatter,\
-    \ delegation, workflow gates, safety boundary, and parent handoff contract are present\n  FAILURE_MODES: missing_agent;\
-    \ invalid_frontmatter; invalid_activation; missing_skill_reference; missing_gate; missing_safety_boundary; missing_return_contract\n\
-    \  DATA: frontmatter; prompt_body; required_clauses\n  EFFECTS: IO\n  TERMINATION: total\n\nprocedure VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT(agent_markdown,\
-    \ canonical_skill_markdown, test_contract):\n  # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]\
-    \ — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical plan-new-feature skill.\n\
-    \  Contract:\n    INPUT: agent_markdown; canonical_skill_markdown; test_contract\n    PRE: all inputs are readable text\n\
-    \    OUTPUT: pass or contract_violation diagnostics\n    POST: pass means each required frontmatter and body clause is\
-    \ present\n    FAILURE_MODES: invalid_frontmatter; invalid_activation; missing_skill_reference; missing_gate; missing_safety_boundary;\
-    \ missing_return_contract\n    EFFECTS: IO\n    TERMINATION: total\n  PARSE frontmatter from agent_markdown\n  CHECK name\
-    \ equals plan-new-feature\n  CHECK readonly equals false\n  CHECK is_background equals false\n  CHECK description contains\
-    \ positive and negative activation guidance\n  CHECK description excludes proactive activation language\n  CHECK prompt_body\
-    \ references tools/bundled-prompt-type-skills/plan-new-feature/SKILL.md\n  CHECK prompt_body orders Refine before Plan\
-    \ before Implement\n  CHECK prompt_body blocks Plan until ambiguity is cleared\n  CHECK prompt_body blocks code until\
-    \ token-commented IMPL pseudo-code and test strategy exist\n  CHECK prompt_body forbids clipboard and automatic Git mutation\n\
-    \  CHECK prompt_body requires explicit TIED applicability and parent-visible validation evidence\n  RETURN pass or diagnostics\n\
-    \nprocedure REPORT_PROMPT_TYPE_SUBAGENT_RESULT(execution_evidence):\n  # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT]\
-    \ [REQ-PROMPT_TYPE_SUBAGENT] — How: return auditable workflow evidence to the parent without overstating completion.\n\
-    \  Contract:\n    INPUT: execution_evidence\n    PRE: execution_evidence records completed gates and validation outcomes\n\
-    \    OUTPUT: parent_handoff\n    POST: parent_handoff names resolved terms, Tracker, CITDP status, tests, validation,\
-    \ and remaining risks\n    EFFECTS: pure\n    TERMINATION: total\n  INCLUDE resolved terms and vocabulary status\n  INCLUDE\
-    \ per-request Tracker path\n  INCLUDE CITDP path or deferred status\n  INCLUDE tests and validation results\n  INCLUDE\
-    \ remaining risks and blocked gates\n  IF verification-gate or tied_validate_consistency failed:\n    MARK completion\
-    \ as incomplete\n  RETURN parent_handoff\n"
+  essence_pseudocode: >
+    # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
+
+    # Summary: Validate the explicit-only writable plan-new-feature Task wrapper and its clean-context workflow
+    contract.
+
+
+    Contract:
+      INPUT: agent_markdown; canonical_skill_markdown; test_contract
+      PRE: agent_markdown is readable; canonical_skill_markdown exists; test_contract names required clauses
+      OUTPUT: pass or contract_violation diagnostics
+      POST: pass means frontmatter, delegation, workflow gates, safety boundary, and parent handoff contract are present
+      FAILURE_MODES: missing_agent; invalid_frontmatter; invalid_activation; missing_skill_reference; missing_gate; missing_safety_boundary; missing_return_contract
+      DATA: frontmatter; prompt_body; required_clauses
+      EFFECTS: IO
+      TERMINATION: total
+
+    procedure VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT(agent_markdown, canonical_skill_markdown, test_contract):
+      # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical plan-new-feature skill.
+      Contract:
+        INPUT: agent_markdown; canonical_skill_markdown; test_contract
+        PRE: all inputs are readable text
+        OUTPUT: pass or contract_violation diagnostics
+        POST: pass means each required frontmatter and body clause is present
+        FAILURE_MODES: invalid_frontmatter; invalid_activation; missing_skill_reference; missing_gate; missing_safety_boundary; missing_return_contract
+        EFFECTS: IO
+        TERMINATION: total
+      PARSE frontmatter from agent_markdown
+      CHECK name equals plan-new-feature
+      CHECK readonly equals false
+      CHECK is_background equals false
+      CHECK description contains positive and negative activation guidance
+      CHECK description excludes proactive activation language
+      CHECK prompt_body references tools/bundled-prompt-type-skills/plan-new-feature/SKILL.md
+      CHECK prompt_body orders Refine before Plan before Implement
+      CHECK prompt_body blocks Plan until ambiguity is cleared
+      CHECK prompt_body blocks code until token-commented IMPL pseudo-code and test strategy exist
+      CHECK prompt_body forbids clipboard and automatic Git mutation
+      CHECK prompt_body requires explicit TIED applicability and parent-visible validation evidence
+      RETURN pass or diagnostics
+
+    procedure REPORT_PROMPT_TYPE_SUBAGENT_RESULT(execution_evidence):
+      # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: return auditable workflow evidence to the parent without overstating completion.
+      Contract:
+        INPUT: execution_evidence
+        PRE: execution_evidence records completed gates and validation outcomes
+        OUTPUT: parent_handoff
+        POST: parent_handoff names resolved terms, Tracker, CITDP status, tests, validation, and remaining risks
+        EFFECTS: pure
+        TERMINATION: total
+      INCLUDE resolved terms and vocabulary status
+      INCLUDE per-request Tracker path
+      INCLUDE CITDP path or deferred status
+      INCLUDE tests and validation results
+      INCLUDE remaining risks and blocked gates
+      IF verification-gate or tied_validate_consistency failed:
+        MARK completion as incomplete
+      RETURN parent_handoff
   implementation_approach:
     details:
-    - Description is explicit-only and includes neighboring prompt-type exclusions without proactive activation language.
-    - Each body directly names the canonical skill, vocabulary preload, type-specific gates, forbidden operations, and return
-      evidence.
-    - Frontmatter sets is_background false; readonly is false for implementing and close-out wrappers and true for question
-      and other.
-    - Prompt-type Task wrappers remain under .cursor/agents/ in the TIED source repository only; tied-install.sh installs
-      skills, not agents, into client projects.
-    - Static contract tests parse frontmatter and assert required clauses for each TIED-source wrapper.
-    summary: Validate and maintain one TIED-source agent per leaf prompt type whose prompt delegates to the canonical skill,
+      - >-
+        Description is explicit-only and includes neighboring prompt-type exclusions without proactive activation
+        language.
+      - >-
+        Each body directly names the canonical skill, vocabulary preload, type-specific gates, forbidden operations, and
+        return evidence.
+      - >-
+        Frontmatter sets is_background false; readonly is false for implementing and close-out wrappers and true for
+        question and other.
+      - >-
+        Prompt-type Task wrappers remain under .cursor/agents/ in the TIED source repository only; tied-install.sh
+        installs skills, not agents, into client projects.
+      - Static contract tests parse frontmatter and assert required clauses for each TIED-source wrapper.
+    summary: >-
+      Validate and maintain one TIED-source agent per leaf prompt type whose prompt delegates to the canonical skill,
       carries clean-context gates and parent handoff requirements, while client projects use skills instead.
   metadata:
     created:
@@ -468,34 +513,136 @@ IMPL-PROMPT_TYPE_SUBAGENT:
   name: Prompt-Type Task Subagent Contract
   rationale:
     benefits:
-    - Deterministic contract coverage for a Markdown agent definition.
-    - Parent agents receive auditable completion evidence.
-    - Single workflow source remains the bundled plan-new-feature skill.
+      - Deterministic contract coverage for a Markdown agent definition.
+      - Parent agents receive auditable completion evidence.
+      - Single workflow source remains the bundled plan-new-feature skill.
     problems_solved:
-    - The absence of tests permits contract drift.
-    - The one-line body is not a reliable skill include.
-    - The readonly stub cannot implement.
-    why: The Task wrapper must preserve the canonical skill workflow while making write permissions, safety gates, and parent-visible
-      evidence explicit in an isolated context.
+      - The absence of tests permits contract drift.
+      - The one-line body is not a reliable skill include.
+      - The readonly stub cannot implement.
+    why: >-
+      The Task wrapper must preserve the canonical skill workflow while making write permissions, safety gates, and
+      parent-visible evidence explicit in an isolated context.
   related_decisions:
     composed_with: []
     depends_on:
-    - IMPL-PROMPT_TYPE_GLOBAL_SKILLS
-    - IMPL-TIED_FILES
+      - IMPL-PROMPT_TYPE_GLOBAL_SKILLS
+      - IMPL-TIED_FILES
     see_also:
-    - ARCH-PROMPT_TYPE_SUBAGENT
-    - REQ-PROMPT_TYPE_SUBAGENT
+      - ARCH-PROMPT_TYPE_SUBAGENT
+      - REQ-PROMPT_TYPE_SUBAGENT
     supersedes: []
   status: Active
   testability: unit
   traceability:
     architecture:
-    - ARCH-PROMPT_TYPE_SUBAGENT
+      - ARCH-PROMPT_TYPE_SUBAGENT
     code_annotations:
-    - ARCH-PROMPT_TYPE_SUBAGENT
-    - IMPL-PROMPT_TYPE_SUBAGENT
-    - REQ-PROMPT_TYPE_SUBAGENT
+      - ARCH-PROMPT_TYPE_SUBAGENT
+      - IMPL-PROMPT_TYPE_SUBAGENT
+      - REQ-PROMPT_TYPE_SUBAGENT
     requirements:
-    - REQ-PROMPT_TYPE_SUBAGENT
+      - REQ-PROMPT_TYPE_SUBAGENT
     tests:
-    - mcp-server/src/e2e/prompt-type-subagent.test.ts
+      - mcp-server/src/e2e/prompt-type-subagent.test.ts
+IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
+  detail_file: implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT.yaml
+  essence_pseudocode_path: implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md
+  name: Methodology learning experiment MCP and validators
+  status: Active
+  traceability:
+    architecture:
+      - ARCH-METHODOLOGY-LEARNING-EXPERIMENT
+    requirements:
+      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
+IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
+  code_locations:
+    files:
+      - path: mcp-server/src/methodology-conformance-effectiveness-pairing/pair.ts
+      - path: mcp-server/src/methodology-conformance-effectiveness-pairing/pairing-gate.ts
+      - path: mcp-server/src/tools/index.ts
+  cross_references:
+    architecture:
+      - ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
+    requirements:
+      - REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
+  detail_file: implementation-decisions/IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml
+  essence_pseudocode_path: implementation-decisions/IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING-pseudocode.md
+  implementation_approach:
+    details:
+      - CITDP methodology_surface_experiment_link triggers hook only
+    summary: >-
+      pair.ts, resolve.ts, pairing-gate.ts; MCP tied_methodology_conformance_effectiveness_pair; checklist gate
+      composition.
+  name: Methodology pairing implementation
+  status: Active
+  traceability:
+    architecture:
+      - ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
+    requirements:
+      - REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
+    tests:
+      - methodology-conformance-effectiveness-pairing.mcp.test.ts
+      - pair.test.ts
+      - pairing-gate.test.ts
+IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  cross_references:
+    architecture:
+      - ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
+    requirements:
+      - REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
+  detail_file: implementation-decisions/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml
+  name: Kaizen methodology bridge implementation
+  status: Active
+IMPL-EVIDENCE_CHAIN_REPORT:
+  cross_references:
+    - ARCH-EVIDENCE_CHAIN_REPORT
+    - REQ-EVIDENCE_CHAIN_PROFILE
+    - REQ-EVIDENCE_CHAIN_REPORT
+  detail_file: implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT.yaml
+  implementation_approach:
+    details:
+      - AGGREGATE_COHORT_STATISTICS emits count-only named statistics
+      - PARTITION_CLIENT_COHORTS uses schema_version and profile_depth
+      - strict writes no report files on any rejected input
+      - VALIDATE_PROFILE_ARTIFACT rejects maturity and score keys
+    summary: >-
+      Read-only batch aggregator and CLI consume profile artifacts through a manifest and emit deterministic YAML and
+      Markdown.
+  name: Evidence chain statistics report aggregator
+  status: Active
+IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  code_locations:
+    files:
+      - path: mcp-server/src/methodology-production-system-enrollment/validate.ts
+      - path: mcp-server/src/tools/index.ts
+  cross_references:
+    architecture:
+      - ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
+    requirements:
+      - REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
+  detail_file: implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml
+  essence_pseudocode_path: implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT-pseudocode.md
+  name: Production-system enrollment implementation
+  status: Active
+IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+  cross_references:
+    architecture:
+      - ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE
+    requirements:
+      - REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE
+  detail_file: implementation-decisions/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml
+  essence_pseudocode_path: implementation-decisions/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE-pseudocode.md
+  implementation_approach:
+    details:
+      - Reuse W2 link extractor semantics
+    summary: methodology-surface-experiment-gate module; checklist-validator composition before W2 pairing.
+  name: Methodology surface experiment gate implementation
+  status: Active
+  traceability:
+    architecture:
+      - ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE
+    requirements:
+      - REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE
+    tests:
+      - methodology-surface-experiment-gate.test.ts

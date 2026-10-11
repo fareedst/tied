@@ -1,0 +1,15 @@
+ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
+  ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
+    consequences:
+      negative:
+        - "Not yet cross-client cohort readout (program W4)"
+      positive:
+        - "Single project-local store for Loop 3 experiments on stdd"
+    cross_references:
+      implementation:
+        - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+      requirements:
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    decision: "Store validated methodology learning experiments in tied-project/methodology-experiments.yaml under TIED base path; compose with feedback.yaml for future envelope spike (B)."
+    name: "Methodology learning experiment storage"
+    status: "Accepted"

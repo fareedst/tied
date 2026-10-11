@@ -1,0 +1,28 @@
+ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
+  ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
+    cross_references:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "IMPL-TIED_FILES"
+      - "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
+    decision: "Versioned bootstrap manifest keys list required tied-bundle paths for QMM methodology stacks (phase 1) and QA evidence-chain report stack (W4); phase-2 cohort export uses a reserved key not enforced until sponsor traceable-commit."
+    implementation_approach:
+      details:
+        - "QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES lists REQ-EVIDENCE_CHAIN_REPORT stack only"
+        - "QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES reserved empty or documented stub for phase 2"
+        - "QMM_METHODOLOGY_REQUIRED_FILES lists W1/W2/W3/W5 and follow-on surface-gate R+A+I artifacts"
+      summary: "Parallel ARCH to A4b prompt-type manifest closure; read-only verify at bootstrap doctor."
+    name: "Client methodology resource manifest (QMM and QA evidence chain)"
+    rationale:
+      benefits:
+        - "Single manifest source for fleet QMM corpus proof"
+      problems_solved:
+        - "Manual checklist cannot prove bundle completeness"
+      why: "Operators need fail-closed gates matching PROMPT_TYPE_METHODOLOGY_REQUIRED_FILES pattern."
+    status: "Active"
+    traceability:
+      implementation:
+        - "IMPL-TIED_FILES"
+      requirements:
+        - "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
+      tests:
+        - "tools/bootstrap/lib/verify.test.mjs"

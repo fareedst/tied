@@ -118,6 +118,56 @@ export function verifyPromptTypeMethodology(verifyRoot, options = {}) {
   sayOk("MUST verify prompt-type methodology artifacts: complete.");
 }
 
+/**
+ * @param {string} verifyRoot
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyQmmMethodology(verifyRoot, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
+  const requiredRel = loadManifest().QMM_METHODOLOGY_REQUIRED_FILES ?? [];
+  sayWarn("MUST verify QMM methodology artifacts before completion.");
+  let missing = 0;
+  for (const rel of requiredRel) {
+    const legacyRel = rel.startsWith("methodology/") ? rel : `methodology/${rel}`;
+    const p = path.join(verifyRoot, relPath(legacyRel));
+    if (!fs.existsSync(p)) {
+      sayErr(`MISSING mandatory QMM methodology artifact: ${p}`);
+      missing = 1;
+    }
+  }
+  if (missing) {
+    sayErr("QMM methodology verification failed; client bootstrap is incomplete.");
+    throw new Error("QMM_METHODOLOGY_GATE_FAILED");
+  }
+  sayOk("MUST verify QMM methodology artifacts: complete.");
+}
+
+/**
+ * @param {string} verifyRoot
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyQaEvidenceChainMethodology(verifyRoot, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
+  const requiredRel = loadManifest().QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES ?? [];
+  sayWarn("MUST verify QA evidence-chain methodology artifacts before completion.");
+  let missing = 0;
+  for (const rel of requiredRel) {
+    const legacyRel = rel.startsWith("methodology/") ? rel : `methodology/${rel}`;
+    const p = path.join(verifyRoot, relPath(legacyRel));
+    if (!fs.existsSync(p)) {
+      sayErr(`MISSING mandatory QA evidence-chain methodology artifact: ${p}`);
+      missing = 1;
+    }
+  }
+  if (missing) {
+    sayErr("QA evidence-chain methodology verification failed; client bootstrap is incomplete.");
+    throw new Error("QA_EVIDENCE_CHAIN_METHODOLOGY_GATE_FAILED");
+  }
+  sayOk("MUST verify QA evidence-chain methodology artifacts: complete.");
+}
+
 export function verifyVocabularyOwnershipMethodology(verifyRoot, options = {}) {
   const relPath = (rel) =>
     options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;

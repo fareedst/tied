@@ -1,5 +1,5 @@
 /**
- * [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE] [IMPL-TIED_FILES] [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY]
+ * [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE] [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES] [IMPL-TIED_FILES] [ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY]
  * Minimal-client consistency: empty project indexes + store tied-bundle must validate clean.
  */
 import assert from "node:assert/strict";
@@ -12,8 +12,8 @@ import { afterEach, beforeEach, describe, it } from "node:test";
 import { validateConsistency } from "../consistency-validator.js";
 import { clearBasePathCache } from "../yaml-loader.js";
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const bundleRoot = path.join(repoRoot, "tied-bundle");
+const storeRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const bundleRoot = path.join(storeRoot, "tied-bundle");
 
 function writeEmptyProjectIndexes(dir: string): void {
   fs.mkdirSync(dir, { recursive: true });
@@ -57,6 +57,26 @@ describe("methodology bundle consistency [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE]",
     assert.equal(report.ok, true, JSON.stringify(report.detail_files, null, 2));
     for (const detail of Object.values(report.detail_files ?? {})) {
       assert.equal(detail.ref_issues?.length ?? 0, 0, detail.token);
+    }
+  });
+
+  it("indexes phase-1 QMM and W4 QA stacks in methodology bundle [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES]", () => {
+    const phase1ReqTokens = [
+      "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+      "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "REQ-EVIDENCE_CHAIN_REPORT",
+      "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+    ];
+    const reqYaml = fs.readFileSync(path.join(bundleRoot, "requirements.yaml"), "utf8");
+    for (const token of phase1ReqTokens) {
+      assert.match(reqYaml, new RegExp(`^${token}:`, "m"), `bundle requirements.yaml missing ${token}`);
+      assert.ok(
+        fs.existsSync(path.join(bundleRoot, "requirements", `${token}.yaml`)),
+        `missing detail ${token}.yaml`,
+      );
     }
   });
 });

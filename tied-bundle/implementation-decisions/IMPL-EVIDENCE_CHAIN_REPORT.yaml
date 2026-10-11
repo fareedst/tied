@@ -1,0 +1,63 @@
+IMPL-EVIDENCE_CHAIN_REPORT:
+  code_locations:
+    files:
+      - description: "CLI composition tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts"
+      - description: "Offline CLI entry"
+        path: "mcp-server/src/cli/evidence-chain-report.ts"
+      - description: "Read-only aggregator module"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.ts"
+      - description: "Unit tests"
+        path: "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"
+    functions:
+      - description: "Report orchestrator"
+        file: "mcp-server/src/fidelity-research/evidence-chain-report.ts"
+        name: "generateEvidenceChainStatisticsReport"
+  cross_references:
+    - "ARCH-EVIDENCE_CHAIN_REPORT"
+    - "PROC-EVIDENCE_CHAIN"
+    - "REQ-EVIDENCE_CHAIN_PROFILE"
+    - "REQ-EVIDENCE_CHAIN_REPORT"
+  implementation_approach:
+    details:
+      - "AGGREGATE_COHORT_STATISTICS emits count-only named statistics"
+      - "CLI --report-version v2 selects GENERATE_EVIDENCE_CHAIN_REPORT_V2; default v1 byte-stable"
+      - "Cohorts remain schema/depth keyed; incompatible denominators are retained as explicit residual risks instead of being silently combined."
+      - "Failed reruns remove stale generated report files before input validation; Markdown includes a dedicated validation-errors section."
+      - "PARTITION_CLIENT_COHORTS uses schema_version and profile_depth"
+      - "strict writes no report files on any rejected input"
+      - "The report CLI is source-repository-only: build mcp-server with npm ci and npm run build before invoking dist/cli/evidence-chain-report.js."
+      - "v2 emits denominator_subcohort_count per sub-cohort"
+      - "v2 PARTITION_SUBCOHORTS splits by denominator_fingerprint inside compatibility_key"
+      - "VALIDATE_PROFILE_ARTIFACT rejects maturity and score keys"
+    summary: "Read-only batch aggregator and CLI consume profile artifacts through a manifest and emit deterministic v1 or v2 YAML and Markdown."
+  metadata:
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-23"
+      reason: "Phase 3a: v2 denominator fingerprint sub-cohort pseudo-code"
+  name: "Evidence chain statistics report aggregator"
+  rationale:
+    benefits:
+      - "Clear fail modes for strict versus partial"
+      - "Deterministic reruns"
+    problems_solved:
+      - "No aggregator symbols or contracts"
+    why: "Report logic must be specified in IMPL pseudo-code before RED tests."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-EVIDENCE_CHAIN_REPORT"
+    code_annotations:
+      - "IMPL-EVIDENCE_CHAIN_REPORT"
+    requirements:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+    tests:
+      - "mcp-server/src/fidelity-research/evidence-chain-report.cli.test.ts"
+      - "mcp-server/src/fidelity-research/evidence-chain-report.test.ts"

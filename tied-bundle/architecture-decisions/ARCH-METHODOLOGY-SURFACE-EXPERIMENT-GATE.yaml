@@ -1,0 +1,25 @@
+ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+  ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+    binding_inventory:
+      - callee: "validateMethodologySurfaceExperimentGate"
+        effect: "read-only diagnostics"
+        order: "before validateMethodologySurfacePairingGate"
+        trigger: "validateChecklistGate pre_implementation"
+    consequences:
+      negative:
+        - "Misconfigured class blocks pre_implementation"
+      positive:
+        - "Explicit Loop 3 gate without changing W2 verification authority"
+    cross_references:
+      implementation:
+        - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      requirements:
+        - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    decision: "Classifier reads methodology_surface_change_class from CITDP only; W1 adapter loads experiment by id; pre_impl validator enforces link and hypothesis/baseline when class non-none; checklist composition inserts validateMethodologySurfaceExperimentGate before validateMethodologySurfacePairingGate."
+    modules:
+      - "change-class classifier"
+      - "checklist composition seam"
+      - "pre_implementation validator"
+      - "W1 store adapter"
+    name: "Methodology surface experiment gate architecture"
+    status: "Accepted"

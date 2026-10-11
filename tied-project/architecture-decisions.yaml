@@ -1922,6 +1922,15 @@ ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
   name: "Client bootstrap skills catalog"
   status: "Planned"
+ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST.yaml"
+  name: "Client methodology resource manifest (QMM and QA evidence chain)"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_FILES"
+    requirements:
+      - "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
 ARCH-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"

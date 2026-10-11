@@ -1,0 +1,36 @@
+REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
+  category: Functional
+  description: Fleet TIED clients inherit phase-1 QMM and QA evidence-chain methodology corpus via tied-bundle refresh; satisfaction is manifest-listed bootstrap gates plus minimal-client tied_validate_consistency with zero methodology ref_issues for promoted tokens.
+  name: QMM methodology client resources (phase 1 bundle promotion)
+  priority: P0
+  rationale:
+    benefits:
+      - Manifest-enforced QMM and W4 QA stacks after tied-install refresh
+      - Same bundle-promotion pattern as A4a vocabulary and A4b prompt-type closure
+    problems_solved:
+      - Store-only QMM tokens invisible to minimal clients
+      - No bootstrap gate for methodology-learning or evidence-chain report stacks
+    why: Completed QMM program deliverables must ship in committed tied-bundle for fleet inheritance without re-implementing MCP behavior.
+  related_requirements:
+    depends_on:
+      - REQ-TIED_SETUP
+    related_to:
+      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
+      - REQ-EVIDENCE_CHAIN_REPORT
+  satisfaction_criteria:
+    - criterion: Phase-1 six REQ families indexed in tied-bundle with detail files and semantic-token closure
+      metric: methodology-bundle-consistency.test.ts ok true
+    - criterion: Bootstrap doctor runs verifyQmmMethodology and verifyQaEvidenceChainMethodology without gate failures
+      metric: verify.test.mjs and bootstrap-and-load.test.ts pass
+    - criterion: QMM_COHORT_EXPORT manifest key reserved; cohort stack not required in phase 1
+      metric: manifest.json documents phase-2 key only
+  status: In Progress
+  traceability:
+    architecture:
+      - ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST
+    implementation:
+      - IMPL-TIED_FILES
+    tests:
+      - tools/bootstrap/lib/verify.test.mjs
+      - mcp-server/src/e2e/methodology-bundle-consistency.test.ts
+      - mcp-server/src/e2e/bootstrap-and-load.test.ts

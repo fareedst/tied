@@ -303,12 +303,12 @@ describe("e2e: bootstrap and load", () => {
       "Methodology should include the evidence chain profile pseudo-code sidecar"
     );
     assert.ok(
-      !("REQ-EVIDENCE_CHAIN_REPORT" in data),
-      "Copied methodology must not inherit source-only REQ-EVIDENCE_CHAIN_REPORT [REQ-EVIDENCE_CHAIN_REPORT]"
+      "REQ-EVIDENCE_CHAIN_REPORT" in data,
+      "Copied methodology should inherit REQ-EVIDENCE_CHAIN_REPORT after phase-1 QMM promotion [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES]"
     );
     assert.ok(
-      !fs.existsSync(path.join(bundleDir, "requirements", "REQ-EVIDENCE_CHAIN_REPORT.yaml")),
-      "Methodology must not include the statistics report requirement"
+      fs.existsSync(path.join(bundleDir, "requirements", "REQ-EVIDENCE_CHAIN_REPORT.yaml")),
+      "Methodology should include the statistics report requirement detail [REQ-EVIDENCE_CHAIN_REPORT]"
     );
     assert.ok(
       fs.existsSync(path.join(bundleDir, "vocab", "feature-orchestration.md")),
@@ -597,6 +597,24 @@ describe("e2e: bootstrap and load", () => {
     assert.match(bundleArchYaml, /^ARCH-PROMPT_TYPE_SUBAGENT:/m);
     assert.match(bundleImplYaml, /^IMPL-PROMPT_TYPE_GLOBAL_SKILLS:/m);
     assert.match(bundleImplYaml, /^IMPL-PROMPT_TYPE_SUBAGENT:/m);
+
+    // [REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES] phase-1 QMM + W4 QA corpus
+    const qmmPaths = [
+      path.join(bundleDir, "requirements", "REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"),
+      path.join(bundleDir, "requirements", "REQ-EVIDENCE_CHAIN_REPORT.yaml"),
+      path.join(
+        bundleDir,
+        "implementation-decisions",
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md",
+      ),
+      path.join(bundleDir, "implementation-decisions", "IMPL-EVIDENCE_CHAIN_REPORT-pseudocode.md"),
+    ];
+    for (const p of qmmPaths) {
+      assert.ok(fs.existsSync(p), `methodology bundle should ship QMM artifact ${p}`);
+    }
+    assert.match(bundleReqYaml, /^REQ-METHODOLOGY-LEARNING-EXPERIMENT:/m);
+    assert.match(bundleReqYaml, /^REQ-EVIDENCE_CHAIN_REPORT:/m);
+    assert.match(bundleReqYaml, /^REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:/m);
 
   });
 

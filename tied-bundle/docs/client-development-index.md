@@ -37,6 +37,10 @@ Use these **nicknames** in tickets, PRs, and agent prompts.
 
 Quality assurance references: [quality-assurance-commands.md](quality-assurance-commands.md), [quality-evidence-manifest.md](quality-evidence-manifest.md), [quality-assurance-pilot.md](quality-assurance-pilot.md), [composition-coverage.md](composition-coverage.md), and [evidence-chain-profile.md](evidence-chain-profile.md) (`evidence_chain_profile_generate`, Path B manual, and the TIED-source offline **evidence chain statistics report** CLI).
 
+**Inherited after refresh (phase 1 QMM corpus):** methodology indexes and detail files for Loop 3 **methodology learning experiment**, **conformance–effectiveness pairing**, **Kaizen→methodology bridge**, **production-system enrollment**, and **methodology surface experiment gate** (`QMM_METHODOLOGY_REQUIRED_FILES` bootstrap gate). **W4 QA batch report** stack (`REQ-EVIDENCE_CHAIN_REPORT`, `QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES`) documents cohort statistics from existing profiles; MCP/CLI behavior ships in rebuilt `mcp-server/dist`, not in YAML alone.
+
+**Not inherited until later promotion:** **methodology learning cohort export** (`QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES`, phase 2 — sponsor **traceable-commit** gate) and **request evidence envelope** (`REQ-REQUEST_EVIDENCE_ENVELOPE`, still store-only while Planned).
+
 **Session pairing**: read **Rules** and [ai-principles.md](ai-principles.md) (**Principles**) together at bootstrap — Principles expands the same mandates in checklist form.
 
 ---

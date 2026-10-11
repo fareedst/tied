@@ -1,6 +1,10 @@
 {
   "TIED_CLI_REPO_ROOT_MARKER": "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR",
-  "BASE_FILES": [".cursorrules", "AGENTS.md", "tied-project/config.yaml"],
+  "BASE_FILES": [
+    ".cursorrules",
+    "AGENTS.md",
+    "tied-project/config.yaml"
+  ],
   "ANALYSIS_STARTER_FILES": [
     "README.md",
     "slice-map.yaml",
@@ -30,10 +34,18 @@
   ],
   "PROMPT_TYPE_SHARED_DIR": "prompt-shared",
   "BUNDLED_STANDALONE_CLIENT_SKILLS": [
-    { "skillName": "xlate", "storeDir": "tools/bundled-xlate-skill" },
-    { "skillName": "unblock", "storeDir": "tools/bundled-unblock-skill" }
+    {
+      "skillName": "xlate",
+      "storeDir": "tools/bundled-xlate-skill"
+    },
+    {
+      "skillName": "unblock",
+      "storeDir": "tools/bundled-unblock-skill"
+    }
   ],
-  "SOURCE_ONLY_VOCAB_BASENAMES": ["prompt-composer.md"],
+  "SOURCE_ONLY_VOCAB_BASENAMES": [
+    "prompt-composer.md"
+  ],
   "DOCS_TO_COPY": [
     "adding-tied-mcp-and-invoking-passes.md",
     "agent-preload-contract-template.yaml",
@@ -128,5 +140,34 @@
     "implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS-pseudocode.md",
     "implementation-decisions/IMPL-MODULE_VALIDATION.yaml",
     "implementation-decisions/IMPL-MODULE_VALIDATION-pseudocode.md"
-  ]
+  ],
+  "QMM_METHODOLOGY_REQUIRED_FILES": [
+    "requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml",
+    "architecture-decisions/ARCH-METHODOLOGY-LEARNING-EXPERIMENT.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-LEARNING-EXPERIMENT-pseudocode.md",
+    "requirements/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml",
+    "architecture-decisions/ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING-pseudocode.md",
+    "requirements/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml",
+    "architecture-decisions/ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE-pseudocode.md",
+    "requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml",
+    "architecture-decisions/ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT-pseudocode.md",
+    "requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml",
+    "architecture-decisions/ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml",
+    "implementation-decisions/IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE-pseudocode.md"
+  ],
+  "QA_EVIDENCE_CHAIN_METHODOLOGY_REQUIRED_FILES": [
+    "requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml",
+    "architecture-decisions/ARCH-EVIDENCE_CHAIN_REPORT.yaml",
+    "implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT.yaml",
+    "implementation-decisions/IMPL-EVIDENCE_CHAIN_REPORT-pseudocode.md"
+  ],
+  "QMM_COHORT_EXPORT_METHODOLOGY_REQUIRED_FILES": []
 }

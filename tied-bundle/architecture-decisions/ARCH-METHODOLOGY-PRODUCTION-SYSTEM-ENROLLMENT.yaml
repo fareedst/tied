@@ -1,0 +1,15 @@
+ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+    consequences:
+      negative:
+        - "Operators may confuse CITDP gate_policy with experiment surface gate_policy"
+      positive:
+        - "Typed surface_ref for under-covered W1 surfaces"
+    cross_references:
+      implementation:
+        - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      requirements:
+        - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    decision: "Separate enrollment validator composes W1 structural validation; MCP read-only; W2 pairing unchanged."
+    name: "Production-system enrollment architecture"
+    status: "Accepted"
