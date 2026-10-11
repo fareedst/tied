@@ -1,0 +1,15 @@
+IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
+  IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
+    blocks:
+      - "APPLY_STORE_GITIGNORE_PROFILE"
+      - "ASSERT_NO_TRACKED_LOCAL_WORKING"
+      - "MIGRATE_TRACKED_LOCAL_WORKING"
+    description: "applyStoreGitignoreProfile, migrate tracked local working, assert zero tracked tied-bundle/working; collapseLegacyWorkingGitignorePatterns uses undividedMirror false."
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_STORE_BUNDLE_GIT_POLICY-pseudocode.md"
+    name: "Store bundle git policy implementation"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_STORE_BUNDLE_GIT_POLICY"
+      requirements:
+        - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"

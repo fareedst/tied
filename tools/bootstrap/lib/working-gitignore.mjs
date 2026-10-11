@@ -9,6 +9,18 @@ export const GITIGNORE_LOCAL_WORKING_END = "# END TIED LOCAL WORKING (managed)";
 export const GITIGNORE_UNDIVIDED_MIRROR_BEGIN =
   "# BEGIN TIED UNDIVIDED STORE MIRROR (REQ-TIED_TWO_FOLDER_LAYOUT p6 — remove after git mv)";
 export const GITIGNORE_UNDIVIDED_MIRROR_END = "# END TIED UNDIVIDED STORE MIRROR";
+export const GITIGNORE_STORE_LOCAL_WORKING_BEGIN =
+  "# BEGIN TIED STORE LOCAL WORKING (managed)";
+export const GITIGNORE_STORE_LOCAL_WORKING_END = "# END TIED STORE LOCAL WORKING (managed)";
+/** Matches {@link GITIGNORE_BLOCK_BEGIN} in gitignore-block.mjs (avoid import cycle). */
+const GITIGNORE_INSTALL_MANAGED_BEGIN = "# BEGIN TIED INSTALL MANAGED";
+const GITIGNORE_INSTALL_MANAGED_END = "# END TIED INSTALL MANAGED";
+
+/** @type {readonly string[]} Whole-root store local working ignore (not client install block). */
+export const STORE_LOCAL_WORKING_GITIGNORE_GLOBS = [
+  "tied-bundle/working/",
+  "tied-bundle/install.json",
+];
 
 /** @type {readonly string[]} Expanded local-only globs (divided clients + store tied-bundle/working). */
 export const EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS = [
@@ -100,13 +112,102 @@ const UNDIVIDED_MIRROR_BLOCK_REGEX = new RegExp(
   `${escapeRegExp(GITIGNORE_UNDIVIDED_MIRROR_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_UNDIVIDED_MIRROR_END)}\\n?`,
   "m",
 );
+const STORE_LOCAL_WORKING_BLOCK_REGEX = new RegExp(
+  `${escapeRegExp(GITIGNORE_STORE_LOCAL_WORKING_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_STORE_LOCAL_WORKING_END)}\\n?`,
+  "m",
+);
+const INSTALL_MANAGED_BLOCK_REGEX = new RegExp(
+  `${escapeRegExp(GITIGNORE_INSTALL_MANAGED_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_INSTALL_MANAGED_END)}\\n?`,
+  "m",
+);
 
 /**
  * Remove managed LOCAL WORKING and UNDIVIDED STORE MIRROR blocks; preserve other lines.
  * @param {string} content
  */
 export function removeLegacyWorkingGitignoreBlocks(content) {
-  return content.replace(UNDIVIDED_MIRROR_BLOCK_REGEX, "").replace(LOCAL_WORKING_BLOCK_REGEX, "");
+  return content
+    .replace(UNDIVIDED_MIRROR_BLOCK_REGEX, "")
+    .replace(LOCAL_WORKING_BLOCK_REGEX, "")
+    .replace(STORE_LOCAL_WORKING_BLOCK_REGEX, "");
+}
+
+/**
+ * @param {{ undividedMirror?: boolean }} [options]
+ */
+export function buildStoreLocalWorkingGitignoreBlock(options = {}) {
+  const lines = [
+    GITIGNORE_STORE_LOCAL_WORKING_BEGIN,
+    ...STORE_LOCAL_WORKING_GITIGNORE_GLOBS,
+    GITIGNORE_STORE_LOCAL_WORKING_END,
+    "",
+  ];
+  if (options.undividedMirror) {
+    lines.push(GITIGNORE_UNDIVIDED_MIRROR_BEGIN);
+    for (const g of STORE_LOCAL_WORKING_GITIGNORE_GLOBS) {
+      lines.push(undividedMirrorGlob(g));
+    }
+    lines.push(GITIGNORE_UNDIVIDED_MIRROR_END, "");
+  }
+  return lines.join("\n");
+}
+
+/**
+ * @param {string} line
+ */
+function isStandaloneStoreLocalWorkingIgnoreLine(line) {
+  const trimmed = line.trim();
+  if (!trimmed || trimmed.startsWith("#")) {
+    return false;
+  }
+  if (trimmed.startsWith("!")) {
+    return (
+      trimmed.includes("tied-bundle/working/") ||
+      (trimmed.startsWith("!working/") && !trimmed.startsWith("!working/evaluation"))
+    );
+  }
+  if (trimmed === "tied-bundle/") {
+    return true;
+  }
+  if (trimmed.startsWith("tied-bundle/working")) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Remove tied-bundle/ from INSTALL MANAGED only (store profile); client block unchanged when applied separately.
+ * @param {string} content
+ */
+export function stripTiedBundleFromInstallManagedBlock(content) {
+  return content.replace(INSTALL_MANAGED_BLOCK_REGEX, (block) => {
+    const lines = block.split("\n").filter((line) => line.trim() !== "tied-bundle/");
+    return lines.join("\n");
+  });
+}
+
+/**
+ * [IMPL-TIED_STORE_BUNDLE_GIT_POLICY] [REQ-TIED_STORE_BUNDLE_GIT_POLICY]
+ * Idempotent store .gitignore: STORE LOCAL WORKING block, no legacy LOCAL WORKING / UNDIVIDED, no tied-bundle/ in INSTALL MANAGED.
+ * @param {string} content
+ */
+export function applyStoreGitignoreProfile(content) {
+  let next = removeLegacyWorkingGitignoreBlocks(content);
+  const filtered = next
+    .split("\n")
+    .filter((line) => !isStandaloneStoreLocalWorkingIgnoreLine(line));
+  next = filtered.join("\n");
+  next = stripTiedBundleFromInstallManagedBlock(next);
+  const storeBlock = buildStoreLocalWorkingGitignoreBlock({ undividedMirror: false });
+  if (next.includes(GITIGNORE_STORE_LOCAL_WORKING_BEGIN)) {
+    next = next.replace(STORE_LOCAL_WORKING_BLOCK_REGEX, storeBlock);
+  } else if (INSTALL_MANAGED_BLOCK_REGEX.test(next)) {
+    next = next.replace(INSTALL_MANAGED_BLOCK_REGEX, `${storeBlock}$&`);
+  } else {
+    next =
+      next.endsWith("\n") || next.length === 0 ? `${next}${storeBlock}` : `${next}\n${storeBlock}`;
+  }
+  return next;
 }
 
 /**
@@ -202,14 +303,12 @@ export function collapseLegacyWorkingGitignorePatterns(content) {
   for (const line of lines) {
     if (
       line.includes(GITIGNORE_LOCAL_WORKING_BEGIN) ||
-      line.includes(GITIGNORE_UNDIVIDED_MIRROR_BEGIN)
+      line.includes(GITIGNORE_UNDIVIDED_MIRROR_BEGIN) ||
+      line.includes(GITIGNORE_STORE_LOCAL_WORKING_BEGIN)
     ) {
       continue;
     }
     out.push(collapseWorkingGitignoreLine(line));
   }
-  return mergeLocalWorkingGitignoreBlock(out.join("\n"), {
-    profile: "store",
-    undividedMirror: true,
-  });
+  return applyStoreGitignoreProfile(out.join("\n"));
 }

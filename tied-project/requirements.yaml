@@ -2758,6 +2758,43 @@ REQ-TIED_SPONSOR_QUESTIONS:
   name: "Sponsor questions MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_STORE_BUNDLE_GIT_POLICY:
+  category: "Infrastructure"
+  description: "Align TIED store repo git policy with two-folder model — track tied-bundle corpus except working/ and install.json; remove client-style whole-tree tied-bundle/ ignore; migrate tracked local working to fixtures or committed project evidence."
+  detail_file: "requirements/REQ-TIED_STORE_BUNDLE_GIT_POLICY.yaml"
+  name: "Store bundle git policy"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+      - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "CI green; migration inventory documents moved pins."
+      id: "SC-SBGP-FIXTURE-PARITY"
+      metric: "test-all"
+    - criterion: "git ls-files tied-bundle/working is empty."
+      id: "SC-SBGP-ZERO-TRACKED-LOCAL"
+      metric: "store-gitignore-policy invariant test"
+    - criterion: "Managed STORE LOCAL WORKING block; INSTALL MANAGED without tied-bundle/ line; no UNDIVIDED MIRROR."
+      id: "SC-SBGP-STORE-PROFILE"
+      metric: "working-gitignore + store-gitignore-policy tests"
+    - criterion: "tied-bundle/docs/ai-principles.md not ignored; corpus trackable."
+      id: "SC-SBGP-CORPUS-VISIBLE"
+      metric: "git check-ignore test"
+    - criterion: "WAP + install matrix + asymmetric git docs updated."
+      id: "SC-SBGP-DOCS"
+      metric: "doc review"
+    - criterion: "writeGitignoreBlock client behavior unchanged."
+      id: "SC-SBGP-CLIENT-PARITY"
+      metric: "gitignore-block.test.mjs"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_BUNDLE_GIT_POLICY"
+    implementation:
+      - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
 REQ-TIED_TWO_FOLDER_LAYOUT:
   category: "Infrastructure"
   description: "Two-folder client layout: committed tied-project traceability store and local tied-bundle methodology/docs; no top-level tied/ after install or migrate."

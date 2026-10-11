@@ -1,0 +1,16 @@
+ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
+  ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
+    decisions:
+      - id: "AD-SBGP-ASYMMETRIC-GIT"
+        summary: "Store and client differ on tied-bundle/ git tracking while sharing runtime local working root."
+      - id: "AD-SBGP-STORE-LOCAL-PROFILE"
+        summary: "Dedicated STORE LOCAL WORKING managed block replaces granular holes and UNDIVIDED MIRROR on store repo."
+    description: "Store git tracks tied-bundle corpus except whole-root working/ and install.json; clients keep INSTALL MANAGED whole tied-bundle/ ignore; runtime MCP writes unchanged under tied-bundle/working/."
+    name: "Store bundle git policy architecture"
+    status: "In Progress"
+    traceability:
+      implementation:
+        - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
+      requirements:
+        - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
+  status: "Active"

@@ -207,7 +207,7 @@ Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied-project/requirements/REQ-TIED_CL
 
 `writeGitignoreBlock` ([`lib/layers/gitignore-block.mjs`](lib/layers/gitignore-block.mjs)) always uses **`mergeLocalWorkingGitignoreBlock` profile `client`**: it writes the versioned `# BEGIN TIED INSTALL MANAGED` paths (including `tied-bundle/`, `.cursor/skills/`, `.claude/skills/`, and repo-root `skills/` for optional `TIED_SKILLS_REROOT=1`) and **removes** legacy `# BEGIN TIED LOCAL WORKING` / undivided-store mirror blocks without re-appending them. Refresh and `--migrate-layout` are idempotent on the managed block.
 
-**Store profile** (expanded local-working globs) is reserved for methodology-repo close-out via `collapseLegacyWorkingGitignorePatterns` in [`lib/working-gitignore.mjs`](lib/working-gitignore.mjs); client bootstrap must not call it.
+**Store profile** — `applyStoreGitignoreProfile` / `collapseLegacyWorkingGitignorePatterns` in [`lib/working-gitignore.mjs`](lib/working-gitignore.mjs) merge `# BEGIN TIED STORE LOCAL WORKING (managed)` (`tied-bundle/working/`, `tied-bundle/install.json`) and remove the client-only `tied-bundle/` INSTALL MANAGED line. Operator entry: [`scripts/apply-store-gitignore-profile.mjs`](scripts/apply-store-gitignore-profile.mjs). Client bootstrap must keep using `writeGitignoreBlock` only.
 
 ## Layout
 

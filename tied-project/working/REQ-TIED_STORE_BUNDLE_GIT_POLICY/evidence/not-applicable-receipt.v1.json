@@ -1,0 +1,11 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_STORE_BUNDLE_GIT_POLICY",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": ["close_out", "pre_implementation", "verification"],
+  "reason": "Minimal depth uses CITDP counterexamples; no tied_adversarial_inquiry_run.",
+  "policy": "minimal-depth-no-inquiry",
+  "generated_at": "2026-10-11T04:30:00.000Z",
+  "source": "plan-close-out-store-policy"
+}

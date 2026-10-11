@@ -1,0 +1,26 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "close_out",
+  "run_id": "layerb-sidecar-fix-20260911",
+  "activation_ok": null,
+  "diagnostics": [],
+  "gate": {
+    "allowed": true,
+    "diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 6,
+    "path": "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  }
+}

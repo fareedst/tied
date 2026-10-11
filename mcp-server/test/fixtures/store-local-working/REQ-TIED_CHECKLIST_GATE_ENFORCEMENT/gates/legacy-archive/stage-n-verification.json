@@ -1,0 +1,16 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "verification",
+  "timestamp": "2026-08-25T18:44:19.040Z",
+  "allowed": true,
+  "diagnostics": [],
+  "depth": "integrated",
+  "gate_result": {
+    "allowed": true,
+    "ok": true,
+    "blocking": false,
+    "depth": "integrated",
+    "phase": "verification",
+    "diagnostics": []
+  }
+}

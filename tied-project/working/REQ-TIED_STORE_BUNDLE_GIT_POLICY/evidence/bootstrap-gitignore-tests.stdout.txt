@@ -1,0 +1,17 @@
+✔ gitignore block is idempotent and client profile is install-managed only (1.389833ms)
+✔ writeGitignoreBlock strips legacy LOCAL WORKING blocks on refresh (0.4995ms)
+✔ managed skills/ entry is honored by git check-ignore (45.003667ms)
+✔ applyStoreGitignoreProfile is idempotent and removes client tied-bundle/ install line (0.808666ms)
+✔ temp git repo: corpus trackable, local working ignored (102.635458ms)
+✔ store repo invariant: no tracked paths under tied-bundle/working (16.895667ms)
+✔ collapseWorkingGitignoreLine remaps local gate globs (0.579333ms)
+✔ applyStoreGitignoreProfile uses whole-root store local working without undivided mirror (0.205875ms)
+✔ client profile removes legacy blocks without appending (0.099ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 190.242333

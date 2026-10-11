@@ -68,6 +68,7 @@ describe("methodology bundle consistency [REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE]",
       "REQ-EVIDENCE_CHAIN_REPORT",
       "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
       "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
       "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
     ];
     const reqYaml = fs.readFileSync(path.join(bundleRoot, "requirements.yaml"), "utf8");

@@ -1,0 +1,11 @@
+{
+  "phase": "verification",
+  "run_id": "wave8-closeout-20260911",
+  "allowed": true,
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  }
+}

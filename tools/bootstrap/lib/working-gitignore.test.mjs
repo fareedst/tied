@@ -1,9 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
+  applyStoreGitignoreProfile,
   collapseWorkingGitignoreLine,
   mergeLocalWorkingGitignoreBlock,
   GITIGNORE_LOCAL_WORKING_BEGIN,
+  GITIGNORE_STORE_LOCAL_WORKING_BEGIN,
   GITIGNORE_UNDIVIDED_MIRROR_BEGIN,
   undividedMirrorGlob,
 } from "./working-gitignore.mjs";
@@ -19,14 +21,11 @@ test("collapseWorkingGitignoreLine remaps local gate globs", () => {
   );
 });
 
-test("mergeLocalWorkingGitignoreBlock adds undivided mirror for store profile", () => {
-  const merged = mergeLocalWorkingGitignoreBlock("# root\n", {
-    profile: "store",
-    undividedMirror: true,
-  });
-  assert.ok(merged.includes(GITIGNORE_LOCAL_WORKING_BEGIN));
-  assert.ok(merged.includes("tied-bundle/working/**/gates/"));
-  assert.ok(merged.includes("working/**/gates/"));
+test("applyStoreGitignoreProfile uses whole-root store local working without undivided mirror", () => {
+  const merged = applyStoreGitignoreProfile("# root\n");
+  assert.ok(merged.includes(GITIGNORE_STORE_LOCAL_WORKING_BEGIN));
+  assert.ok(merged.includes("tied-bundle/working/"));
+  assert.ok(!merged.includes(GITIGNORE_UNDIVIDED_MIRROR_BEGIN));
   assert.equal(undividedMirrorGlob("tied-bundle/working/**/jev/"), "working/**/jev/");
 });
 

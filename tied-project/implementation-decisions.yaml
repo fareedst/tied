@@ -2637,6 +2637,17 @@ IMPL-TIED_SPONSOR_QUESTIONS:
   detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_QUESTIONS.yaml"
   name: "Sponsor questions implementation"
   status: "Active"
+IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
+  description: "applyStoreGitignoreProfile, migrate tracked local working, assert zero tracked tied-bundle/working; collapseLegacyWorkingGitignorePatterns uses undividedMirror false."
+  detail_file: "implementation-decisions/IMPL-TIED_STORE_BUNDLE_GIT_POLICY.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_STORE_BUNDLE_GIT_POLICY-pseudocode.md"
+  name: "Store bundle git policy implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_BUNDLE_GIT_POLICY"
+    requirements:
+      - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
 IMPL-TIED_TWO_FOLDER_LAYOUT:
   description: "Layout resolver, legacy detection, migrate, gitignore v2, config loaders, working-root split."
   detail_file: "implementation-decisions/IMPL-TIED_TWO_FOLDER_LAYOUT.yaml"

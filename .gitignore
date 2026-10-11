@@ -31,79 +31,24 @@ scripts/update_client.sh
 tied/features/
 
 # Local System One decide trace JSONL (operator-only; JEV_DECIDE_TRACE)
-tied-bundle/working/jev-decide-trace/
 tied-project/working/jev-decide-trace/
 
 # Ephemeral working/ generated evidence — not canonical TIED intent
 # (tied/vocab/fidelity-research.md, quality-assurance.md; keep locally under working/)
 # Optional live Jev benchmark appendix (mocked CI uses context-pruning-benchmark.v1.json)
-tied-bundle/working/**/context-pruning-benchmark-live.v1.json
 # MCP server cwd gate scratch (mirrors working/**/gates receipts; regenerate per local MCP run)
 mcp-server/working/
 # Disposable client demo folders (e.g. REDDIT-CLIENT-<timestamp>)
-tied-bundle/working/*-CLIENT-*/
 # Debug close-out probes (tracker-only; not canonical program evidence)
 working/REQ-ENVELOPE_TRACKER_HASH_STABILITY/
-tied-bundle/working/**/adversarial-inquiry/
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/**
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/**
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/**
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/**
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/**
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/**
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/**
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/**
-tied-bundle/working/**/gate-*.json
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/gate-result.json
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/gate-result.json
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/gate-result.json
 # Gate receipts and activation collect outputs (regenerate per close-out run)
-tied-bundle/working/**/gates/
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/**
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/**
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/
-!working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/**
-!working/REQ-TIED_CLAUDE_HARNESS/gates/
-!working/REQ-TIED_CLAUDE_HARNESS/gates/**
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/**
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/**
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/**
 # PSA timestamped gate receipts (regenerate per run-close-out-gates.mjs; keep adversarial gate-result.json via patterns above)
 working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-*-result.json
 # Adherence reconcile output (regenerate per tied_adherence_reconcile_run)
-tied-bundle/working/**/adherence-ledger.jsonl
-tied-bundle/working/**/adherence/events.jsonl
 # Close-out operator scratch (regenerate per plan-close-out / tied_verify run)
-tied-bundle/working/**/gate-ledger.jsonl
-tied-bundle/working/**/citdp-doc-*.json
-tied-bundle/working/**/citdp-write-payload.json
-tied-bundle/working/**/citdp-record-body.json
-tied-bundle/working/**/citdp-p*-*.json
 working/**/tied-create-*.json
 working/**/token-create-*.json
 # MCP tied_token_create_with_detail scratch (exclude per program close-out; DAE program tracks create-*.json intentionally)
-tied-bundle/working/**/create-arch.json
-tied-bundle/working/**/create-impl.json
-tied-bundle/working/**/create-req.json
-!working/REQ-TIED_DAE_INCORPORATION/create-arch.json
-!working/REQ-TIED_DAE_INCORPORATION/create-impl.json
-!working/REQ-TIED_DAE_INCORPORATION/create-req.json
-tied-bundle/working/**/validate-consistency.json
-tied-bundle/working/**/tied-validate-consistency*.json
 working/**/p*-yaml-updates.json
 working/**/adversarial-inquiry-p*-run.json
 working/**/evidence/quality/**/*.stdout.txt
@@ -112,26 +57,6 @@ working/**/evidence/psa-*.json
 working/**/evidence/pseudocode-validate-*.json
 working/**/doc-*-checklist.yaml
 # Timestamped gate receipts (regenerate via run-*-gates.mjs)
-tied-bundle/working/**/pre_implementation-*.json
-tied-bundle/working/**/verification-*.json
-tied-bundle/working/**/close_out-*.json
-!working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-*.json
-!working/REQ-TIED_CLAUDE_HARNESS/gates/pre_implementation-*.json
-!working/REQ-TIED_CLAUDE_HARNESS/gates/verification-*.json
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-*.json
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-*.json
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-*.json
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-*.json
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-*.json
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/verification-*.json
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/close_out-*.json
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/pre_implementation-*.json
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/verification-*.json
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/**
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/close_out-*.json
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/pre_implementation-*.json
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/verification-*.json
 # Build-plan change-ID scratch (tracker, CITDP, gate receipts, remediation — regenerate per build-plan)
 working/DOC-*/
 # refine-plan session scratch (linked plan lives in ~/.cursor/plans/; not canonical TIED intent)
@@ -139,126 +64,25 @@ working/REFINE-*/
 # Repo-root operator scratch (token-create / gate-args dumps; prefer tied-bundle/working/)
 tmp/
 # MCP gate-args payloads for one-off gate validate runs (regenerate per gate invocation)
-tied-bundle/working/**/gate-args*.json
 # Layer C pseudo-code static analysis gate reports (regenerate per gate run)
-tied-bundle/working/**/pseudocode-analysis/
 # Integrated activation collect receipts (regenerate per phase gate; distinct from gate-*.json)
-tied-bundle/working/**/activation-*.json
 # Scoped remediation logs from static-analysis / grammar close-out (regenerate per build)
 working/**/*-remediation-log.yaml
 # tied_verify dry-run and apply receipts (regenerate per verification gate)
-tied-bundle/working/**/tied-verify-*.json
 working/**/g*-dogfood/
-tied-bundle/working/client-*/
-tied-bundle/working/**/tied-mcp-metrics*.jsonl
 working/**/evidence-manifest.json
 # Per-REQ close-out evidence (regenerate via run-close-out-gates.mjs / quality_evidence_collect; local only)
 working/**/evidence/close-out-gates-*.json
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/close-out-gates-g1-g3-g4-2026-09-28.json
 working/**/evidence/quality-manifest/
 working/**/evidence/*-evidence.md
 working/**/evidence/not-applicable-receipt.v1.json
 working/**/evidence/proposed-commit-message.txt
 working/**/evidence/evidence-chain-profile.v1.json
 working/**/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_CLAUDE_HARNESS/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_CLAUDE_HARNESS/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_CLAUDE_HARNESS/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-close-out-payload.json
-!working/REQ-TIED_CLAUDE_HARNESS/evidence/gate-verify-payload.json
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/evidence-chain-profile.v1.json
-!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/evidence-chain-profile.v1.json
-!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/
-!working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/**
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/evidence-chain-profile.v1.json
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/**
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/**
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/close_out-*.json
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/tied-verify-result.json
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/tied-verify-payload.json
-!working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/activation-collect-close_out.json
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/**
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/**
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/**
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/pseudocode-analysis/
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/pseudocode-analysis/**
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/agent-req-implementation-checklist.yaml
-!working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/plan-close-out-handoff.md
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/verification-evidence-manifest.v1.json
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/evidence-chain-profile.v1.json
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/co5-sponsor-commit-payload.v1.json
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/**
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/**
-!working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/close_out-*.json
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/gate-pseudocode-validation-evidence.md
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/doc-jev-laya-comparison-*
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/**
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-*.json
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-*.json
-!working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-*.json
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/verification-evidence-manifest.v1.json
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/sub-close-out-evidence-sync-evidence.md
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/evidence/request-evidence-envelope-waiver.v1.json
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/**
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/close_out-*.json
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/pre_implementation-*.json
-!working/PLAN-TIED-RESIDUALITY-ANALYSIS/gates/verification-*.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/verification-evidence-manifest.v1.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/sub-close-out-evidence-sync-evidence.md
-!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-gates-2026-09-27.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope.v1.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope-waiver.v1.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/evidence/close-out-activation-collect.json
-!working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json
-!working/REQ-TIED_SETUP/evidence/not-applicable-receipt.v1.json
-!working/REQ-TIED_SETUP/evidence/close-out-gates-2026-09-28.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/gates/
-!working/PLAN-TIED-BBCE-ALIGNMENT/gates/**
-!working/PLAN-TIED-BBCE-ALIGNMENT/gates/close_out-*.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/gates/pre_implementation-*.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/gates/verification-*.json
-!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/
-!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-close_out/**
-!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification-w4/
-!working/PLAN-TIED-BBCE-ALIGNMENT/adversarial-inquiry/phase-verification-w4/**
 working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml
 # Quality profile gate receipts (regenerate per quality_security_profile_validate)
-tied-bundle/working/**/gates/quality-*-profile-result.json
 
 # Evidence-chain command outputs and operator-run profiles (regenerate per tied/docs/evidence-chain-profile.md)
 working/evidence-chain/artifacts/
@@ -278,15 +102,6 @@ working/*-close-out-summary.json
 
 # Controlled fixture corpus + golden evidence-chain inputs (keep tracked)
 working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-*
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/
-!working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/**
-!working/evidence-chain/report-inputs-v2-golden.yaml
-!working/evidence-chain/client-1787461685-bare.v1.json
-!working/evidence-chain/client-1787461685-reprofile.v1.json
-!working/evidence-chain/example-profile.json
-!working/evidence-chain/example-report-inputs.yaml
-!working/evidence-chain/stdd-integrated.json
-!working/evidence-chain/stdd-human_research.json
 working/evaluation
 mcp-server/explorer.html
 
@@ -299,7 +114,6 @@ working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/pilot/
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/snapshots/
 # Phase 3 sweep (run-phase3.ts): per-entry reports; keep aggregate summary trackable
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/phase3/*
-!working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/phase3/summary.json
 # Stray analyzer sweep reports outside pilot/phase3/ dirs (defensive)
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/**/*.regression-false.report.json
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/**/*.typed-true.report.json
@@ -310,10 +124,8 @@ working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/metrics/compare-summary.json
 # Constraint-language qualification — per-entry reports (regenerate via run-constraint-*.ts)
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/baseline/*.report.json
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/pilot/*
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/pilot/summary.json
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/snapshots/
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/phase-gate/*
-!working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/phase-gate/summary.json
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.regression-off.report.json
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.constraint-true.report.json
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/**/*.constraint-gate-errors.report.json
@@ -321,7 +133,6 @@ working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/qualification/metrics/compare-constra
 # Fleet Phase 2 G1 qualification (P2-F) — per-entry receipts/reports ephemeral
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/receipts/
 working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/reports/
-!working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/fleet-g1/summary.json
 # Fleet constraint v2 wave dry-run byte snapshots (regenerate per apply dry-run)
 working/fleet-constraint-v2/**/dry-run/
 working/fleet-constraint-v2/**/dry-run/snapshots/
@@ -332,67 +143,6 @@ tied-project/working/fleet-constraint-v2/**/dry-run/snapshots-constraint-ready/
 working/fleet-constraint-v2/scripts/*-payload.json
 # Fleet program — inventory/governance yaml only in git; not client wave history (regenerate locally)
 working/fleet-constraint-v2/**
-!working/fleet-constraint-v2/program-status.v1.yaml
-!working/fleet-constraint-v2/doc-consolidation-commit-report.v1.json
-!working/fleet-constraint-v2/client-inventory-manifest.v1.yaml
-!working/fleet-constraint-v2/client-inventory-manifest.v1.template.yaml
-!working/fleet-constraint-v2/client-inventory-manifest.v1.schema.json
-!working/fleet-constraint-v2/client-inventory-manifest.pilots.v1.yaml
-!working/fleet-constraint-v2/fleet-dashboard.v1.yaml
-!working/fleet-constraint-v2/fleet-dashboard.v1.schema.json
-!working/fleet-constraint-v2/fleet-wave-partition.v1.yaml
-!working/fleet-constraint-v2/fleet-wave-partition.v1.schema.json
-!working/fleet-constraint-v2/gate-promotion-stages.v1.yaml
-!working/fleet-constraint-v2/migration-waiver-registry.v1.yaml
-!working/fleet-constraint-v2/migration-waiver-registry.v1.schema.json
-!working/fleet-constraint-v2/f11-fp-thresholds.v1.yaml
-!working/fleet-constraint-v2/constraint-migration-receipt.v1.schema.json
-!working/fleet-constraint-v2/constraint-migration-receipt.v1.example.json
-!working/fleet-constraint-v2/od-p5-2-acceptance.v1.schema.json
-!working/fleet-constraint-v2/od-p5-2-acceptance.v1.template.json
-!working/fleet-constraint-v2/od-p5-2-acceptance.v1.json
-!working/fleet-constraint-v2/od-nb2-acceptance.v1.schema.json
-!working/fleet-constraint-v2/od-nb2-acceptance.v1.template.json
-!working/fleet-constraint-v2/od-nb2-acceptance.v1.json
-!working/fleet-constraint-v2/NB-2-tranche-one-agent-req-implementation-checklist.yaml
-!working/fleet-constraint-v2/NB-2-citdp-pre-implementation.v1.yaml
-!working/fleet-constraint-v2/NB-2/
-!working/fleet-constraint-v2/NB-2/**
-!working/fleet-constraint-v2/od-nb3-acceptance.v1.schema.json
-!working/fleet-constraint-v2/od-nb3-acceptance.v1.template.json
-!working/fleet-constraint-v2/od-nb3-acceptance.v1.json
-!working/fleet-constraint-v2/NB-3-tranche-two-agent-req-implementation-checklist.yaml
-!working/fleet-constraint-v2/NB-3-citdp-pre-implementation.v1.yaml
-!working/fleet-constraint-v2/NB-3/
-!working/fleet-constraint-v2/NB-3/**
-!working/fleet-constraint-v2/od-nb4-acceptance.v1.schema.json
-!working/fleet-constraint-v2/od-nb4-acceptance.v1.template.json
-!working/fleet-constraint-v2/od-nb4-acceptance.v1.json
-!working/fleet-constraint-v2/NB-4-tranche-final-agent-req-implementation-checklist.yaml
-!working/fleet-constraint-v2/NB-4-citdp-pre-implementation.v1.yaml
-!working/fleet-constraint-v2/NB-4/
-!working/fleet-constraint-v2/NB-4/**
-!working/fleet-constraint-v2/fleet-g4-maintenance-run.v1.schema.json
-!working/fleet-constraint-v2/G4-citdp-pre-implementation.v1.yaml
-!working/fleet-constraint-v2/G4-maintenance-agent-req-implementation-checklist.yaml
-!working/fleet-constraint-v2/g4-maintenance/
-!working/fleet-constraint-v2/g4-maintenance/**
-!working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/
-!working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/**
-!working/REQ-TIED_NEW_CLIENT_ADHERENCE/
-!working/REQ-TIED_NEW_CLIENT_ADHERENCE/**
-!working/fleet-constraint-v2/NB-1-tranche-zero-agent-req-implementation-checklist.yaml
-!working/fleet-constraint-v2/NB-1-citdp-pre-implementation.v1.yaml
-!working/fleet-constraint-v2/NB-1/
-!working/fleet-constraint-v2/NB-1/**
-!working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/
-!working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/**
-!working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/
-!working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/**
-!working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/
-!working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/**
-!working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/
-!working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/**
 # Client migration stubs and orchestrator working folder (evidence belongs in client repos)
 working/REQ-PSEUDOCODE_MIGRATION_CLIENT_*/
 working/REQ-PSEUDOCODE_MIGRATION_PILOT_*/
@@ -411,118 +161,16 @@ working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/finding-ledger.js
 working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml
 
 # Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out; includes run-phase3-gates.mjs)
-tied-bundle/working/**/run-*-gates.mjs
-tied-bundle/working/**/run-*-gate.mjs
-tied-bundle/working/**/run-phase*-tied-verify.mjs
-# BEGIN TIED LOCAL WORKING (managed)
-tied-bundle/working/**/gates/
-tied-bundle/working/**/adversarial-inquiry/
-tied-bundle/working/**/adherence/
-tied-bundle/working/**/jev/
-tied-bundle/working/**/*-ledger.jsonl
-tied-bundle/working/jev-decide-trace/
-tied-bundle/working/**/context-pruning-benchmark-live.v1.json
-tied-bundle/working/*-CLIENT-*/
-tied-bundle/working/**/gate-*.json
-tied-bundle/working/**/gate-args*.json
-tied-bundle/working/**/activation-*.json
-tied-bundle/working/**/pseudocode-analysis/
-tied-bundle/working/**/*-remediation-log.yaml
-tied-bundle/working/**/tied-verify-*.json
-tied-bundle/working/**/g*-dogfood/
-tied-bundle/working/client-*/
-tied-bundle/working/**/tied-mcp-metrics*.jsonl
-tied-bundle/working/**/adherence-ledger.jsonl
-tied-bundle/working/**/citdp-doc-*.json
-tied-bundle/working/**/citdp-write-payload.json
-tied-bundle/working/**/citdp-record-body.json
-tied-bundle/working/**/citdp-p*-*.json
-tied-bundle/working/**/tied-create-*.json
-tied-bundle/working/**/token-create-*.json
-tied-bundle/working/**/create-arch.json
-tied-bundle/working/**/create-impl.json
-tied-bundle/working/**/create-req.json
-tied-bundle/working/**/validate-consistency.json
-tied-bundle/working/**/tied-validate-consistency*.json
-tied-bundle/working/**/p*-yaml-updates.json
-tied-bundle/working/**/adversarial-inquiry-p*-run.json
-tied-bundle/working/**/pre_implementation-*.json
-tied-bundle/working/**/verification-*.json
-tied-bundle/working/**/close_out-*.json
-tied-bundle/working/**/run-*-gates.mjs
-tied-bundle/working/**/run-*-gate.mjs
-tied-bundle/working/**/run-phase*-tied-verify.mjs
-tied-bundle/working/**/gates/quality-*-profile-result.json
-tied-bundle/working/**/track-*-close-out-evidence.json
-tied-bundle/working/**/run-*-close-out*.mjs
-tied-bundle/working/**/sync-*-close-out*.mjs
-tied-bundle/working/*-close-out-summary.json
-tied-bundle/working/**/evidence/quality/**/*.stdout.txt
-tied-bundle/working/**/evidence/quality/**/*.stderr.txt
-tied-bundle/working/**/evidence/psa-*.json
-tied-bundle/working/**/evidence/pseudocode-validate-*.json
-tied-bundle/working/**/doc-*-checklist.yaml
-tied-bundle/working/**/CITDP-REQ-*-diff-or-stage.yaml
-tied-bundle/working/post-session/
-# END TIED LOCAL WORKING (managed)
 
-# BEGIN TIED UNDIVIDED STORE MIRROR (REQ-TIED_TWO_FOLDER_LAYOUT p6 — remove after git mv)
-working/**/gates/
-working/**/adversarial-inquiry/
-working/**/adherence/
-working/**/jev/
-working/**/*-ledger.jsonl
-working/jev-decide-trace/
-working/**/context-pruning-benchmark-live.v1.json
-working/*-CLIENT-*/
-working/**/gate-*.json
-working/**/gate-args*.json
-working/**/activation-*.json
-working/**/pseudocode-analysis/
-working/**/*-remediation-log.yaml
-working/**/tied-verify-*.json
-working/**/g*-dogfood/
-working/client-*/
-working/**/tied-mcp-metrics*.jsonl
-working/**/adherence-ledger.jsonl
-working/**/citdp-doc-*.json
-working/**/citdp-write-payload.json
-working/**/citdp-record-body.json
-working/**/citdp-p*-*.json
-working/**/tied-create-*.json
-working/**/token-create-*.json
-working/**/create-arch.json
-working/**/create-impl.json
-working/**/create-req.json
-working/**/validate-consistency.json
-working/**/tied-validate-consistency*.json
-working/**/p*-yaml-updates.json
-working/**/adversarial-inquiry-p*-run.json
-working/**/pre_implementation-*.json
-working/**/verification-*.json
-working/**/close_out-*.json
-working/**/run-*-gates.mjs
-working/**/run-*-gate.mjs
-working/**/run-phase*-tied-verify.mjs
-working/**/gates/quality-*-profile-result.json
-working/**/track-*-close-out-evidence.json
-working/**/run-*-close-out*.mjs
-working/**/sync-*-close-out*.mjs
-working/*-close-out-summary.json
-working/**/evidence/quality/**/*.stdout.txt
-working/**/evidence/quality/**/*.stderr.txt
-working/**/evidence/psa-*.json
-working/**/evidence/pseudocode-validate-*.json
-working/**/doc-*-checklist.yaml
-working/**/CITDP-REQ-*-diff-or-stage.yaml
-working/post-session/
-# END TIED UNDIVIDED STORE MIRROR
+# BEGIN TIED STORE LOCAL WORKING (managed)
+tied-bundle/working/
+tied-bundle/install.json
+# END TIED STORE LOCAL WORKING (managed)
 # BEGIN TIED INSTALL MANAGED
 .cursor/mcp.json
 .mcp.json
 .cursor/skills/
 .claude/skills/
-tied-bundle/
 CLAUDE.md
 .cursor/hooks.json
 .claude/hooks/

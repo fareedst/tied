@@ -2202,6 +2202,16 @@ ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY.yaml"
   name: "Sponsor questions boundary"
   status: "Planned"
+ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
+  description: "Store git tracks tied-bundle corpus except whole-root working/ and install.json; clients keep INSTALL MANAGED whole tied-bundle/ ignore; runtime MCP writes unchanged under tied-bundle/working/."
+  detail_file: "architecture-decisions/ARCH-TIED_STORE_BUNDLE_GIT_POLICY.yaml"
+  name: "Store bundle git policy architecture"
+  status: "In Progress"
+  traceability:
+    implementation:
+      - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
+    requirements:
+      - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - cons:

@@ -41,6 +41,7 @@
 | Methodology vocab | `tied-bundle/vocab/*.md` | methodology | **G** | stub/symlink from store `tied-project/vocab` | **Copy** | methodology only |
 | Sidecar template | `tied-bundle/templates/impl-essence-pseudocode-template.md` | methodology | **G** | **Stub** | **Copy** | methodology only |
 | Local working evidence | `tied-bundle/working/**` (gates, adversarial-inquiry, …) | — | **G** | — | — | — |
+| **Store repo git (asymmetric)** | **Store:** methodology corpus under `tied-bundle/` **C**; `tied-bundle/working/**` + `tied-bundle/install.json` **G** (STORE LOCAL WORKING block). **Client:** whole `tied-bundle/` tree **G** via INSTALL MANAGED v2 (unchanged). | methodology | **C** / **G** | — | — | — |
 | Parity report (full) | `tied-bundle/reports/client-refresh-parity-report.json` | methodology | **G** | — | written | full mode |
 
 **Removed (SC-TFL-LEGACY-REMOVED):** root `templates/`, top-level `tied/`, `copy_files.*`, `--legacy-bootstrap`, `TIED_BOOTSTRAP_LEGACY`, `.tied-yaml.yaml`, `tied/.tied-install.json`, `.linked-methodology-view/`.

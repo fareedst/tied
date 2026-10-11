@@ -1,0 +1,377 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-11T04:30:08.851Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "REQ-TIED_STORE_BUNDLE_GIT_POLICY",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "default",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [],
+  "artifacts": [
+    {
+      "kind": "checklist_tracker",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:39b57719e60a0ff4ecafcf9043984324ef341c4c6d8e57f1d31a56a35e6c1b07",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ]
+    },
+    {
+      "kind": "citdp_record",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/CITDP-REQ-TIED_STORE_BUNDLE_GIT_POLICY.yaml",
+      "content_hash": "sha256:c475366b0ec0cea0bb7b7243ed41825037fa8188f686e33c407fbe6f3849e90c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:564db5eaca7b384c5f07755f9766c37ab0c41cceee067d86ab9e34724cde0277",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:ee3923a1d2ffb62ee359931f0ea0542bbaa265edc6957ff011f28ba0d4faffc5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/bootstrap-gitignore-tests.stdout.txt",
+      "content_hash": "sha256:c8343d6e9330d3f2829dbe93950cf7428de9f7f56ebf72ac9fc1827356a06b85",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/change-definition-evidence.md",
+      "content_hash": "sha256:9ae175615a2b9aca7411b75dce1f1d7fe0d87648a6e79b26218f7e8d607620f5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/closeout-run-close-out-gates-final.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/fixture-corpus-regression.stdout.txt",
+      "content_hash": "sha256:154901f61a776a8134debfb6252bb4884d44ea14d976d9a39d5dac97599cab87",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/gate-pseudocode-validation-evidence.md",
+      "content_hash": "sha256:8909dffaee312a400b168d6590945796f6186fbe056880b71527f22c647eda7d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/gitignore-close-out-hygiene-evidence.md",
+      "content_hash": "sha256:aae4f18ea1c0cf2ba498ada5dbe4516172932bb4db473a288aaa0b24dbb4db9e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/impact-discovery-evidence.md",
+      "content_hash": "sha256:479dc9db9eaaddcce2720c08fc3d70e996bd3f14e8262c042edcb2ee28c2e2f7",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "migration-inventory.v1",
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/migration-inventory.v1.json",
+      "content_hash": "sha256:8f2b53fc965fcecd8f1f78201dfea1cfb1b95ca04b063aa18a21fb102bdc0348",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/persist-citdp-record-evidence.md",
+      "content_hash": "sha256:77a27cdb92d83a5981a8885e3287c830825cda406c18e57bd329aa14aeead85d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/persist-implementation-records-evidence.md",
+      "content_hash": "sha256:905a9be2936f2f3854754556e40abbed9186c8e71d1aeea0b32cb89a6c77737d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/pre_implementation-gate-result.json",
+      "content_hash": "sha256:49b6446527a2861ba8da73d7acec12ca9678719a7b3518d349fd27d8aeb852fb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/proposed-commit-message.txt",
+      "content_hash": "sha256:b8ffb5025ec71c4f15472cb153d1b4982d95f96783d9d69b77cc4e548a447ebd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/resolve-pseudocode-evidence.md",
+      "content_hash": "sha256:afdb16c83825e3efd5c3d169b259573e30f30858e4e425dcea3c97934645a9d1",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/risk-assessment-evidence.md",
+      "content_hash": "sha256:cd1ad959ad212d596dedf52f64bf7412eb72e4698f046cb4f42002815763cf05",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/session-bootstrap-evidence.md",
+      "content_hash": "sha256:91d92a41f2cd2af91c2a25d1d7ee375c47d59e26f2b3d13896348749a6e13453",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/session-handoff.md",
+      "content_hash": "sha256:e25eded2d1ec476244bc817165caa8b9e103c32ae248ef3ce89f9f8a3ba1bf1f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "content_hash": "sha256:31f1ff4b13288ab66f60903c6da6d939bb17bd3104c27373310f14314f2f785c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/sub-close-out-evidence-sync-evidence.md",
+      "content_hash": "sha256:4ce132fccfa8fc41fd988a3e7d2ea852c460f38470d4a19c21c4cc4bab287ba3",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/sync-tied-stack-evidence.md",
+      "content_hash": "sha256:d8fc2e5664dd027a36306124cd0f401d58b467b0224c104e58e91f73e7e9ff79",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/test-strategy-evidence.md",
+      "content_hash": "sha256:24577a0c24ad23ba5c54caa8a19284f01fe0adbd9cb21149d1c02694ef38ea7d",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/tied-verify-result.json",
+      "content_hash": "sha256:24645e2836af9952c2cecbf79fd94c2eec3dd9511a096a4c55638f8b719296ea",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/traceable-commit-evidence.md",
+      "content_hash": "sha256:f2b1c19c1c42de528a7dcc72f29e04d8d27bc03113a4a5e1bd19a881c659001f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:3c6870f3e69db73e6b658bd1cf6973b44d3d95fc5b972224ff2108d7d3c8ef2b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/unit-test-green-evidence.md",
+      "content_hash": "sha256:b40fff4401df150ea23b7145f6ce6f5e54023292a7a8bd435cb3e624a115a759",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/unit-test-red-evidence.md",
+      "content_hash": "sha256:a70bbce88b346681f72e20808aa075c86a8b4cb80c97a356796ace29b58fcb81",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/verification-gate-evidence.md",
+      "content_hash": "sha256:73833aaf978f6d7d9eca73c59ced9746dffbdfcd6a63f4975ddf53be28da3a5c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/verification-gate-result.json",
+      "content_hash": "sha256:31925fc79b1da6c521c4f81884b7a589ab290324a60b96472c57224f6f9287d0",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/verification-evidence-manifest.v1.json",
+      "content_hash": "sha256:f922f1cf5b36105785eeff4016ea5001384eb76e1488fe0c720c5212370dfa3c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:3ca5d8b413baf4898ab17ee0ea2bb9f4e6c3e419c295d1e53704a9a67d717d5a",
+    "citdp_path": "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/CITDP-REQ-TIED_STORE_BUNDLE_GIT_POLICY.yaml",
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

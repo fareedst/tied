@@ -1,0 +1,5 @@
+feat(bootstrap): store git profile for tied-bundle corpus and local working
+
+Align TIED store repo gitignore with asymmetric tracking: commit methodology
+corpus under tied-bundle/ while ignoring tied-bundle/working/ and install.json.
+Migrate indexed local-working pins to mcp-server test fixtures and add policy tests.

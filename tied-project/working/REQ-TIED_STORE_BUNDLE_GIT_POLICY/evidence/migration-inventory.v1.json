@@ -1,0 +1,1435 @@
+{
+  "schema_version": "migration-inventory.v1",
+  "request_token": "REQ-TIED_STORE_BUNDLE_GIT_POLICY",
+  "moved_count": 238,
+  "moves": [
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-verification/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-close_out-cl-closeout-20260910-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-close_out-cl-closeout-20260910-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-pre_implementation-cl-pre-impl-20260910-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-pre_implementation-cl-pre-impl-20260910-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-verification-cl-verify-20260910-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/gates/gate-verification-cl-verify-20260910-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/close_out-2026-09-14T00-08-01-200Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/close_out-2026-09-14T00-08-01-200Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/gate-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/gate-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/pre_implementation-2026-09-14T00-08-01-200Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/pre_implementation-2026-09-14T00-08-01-200Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/verification-2026-09-14T00-08-01-200Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/gates/verification-2026-09-14T00-08-01-200Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/gate-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/gate-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-a-sponsor-block-2026-09-13.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-a-sponsor-block-2026-09-13.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-phase2-build-plan-2026-09-13.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-phase2-build-plan-2026-09-13.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-phase2-remediation-2026-09-13.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/nb1-phase2-remediation-2026-09-13.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-30-58-784Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-30-58-784Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-31-22-743Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-31-22-743Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-39-14-992Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-39-14-992Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-43-41-853Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-43-41-853Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-43-55-041Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-2026-09-13T17-43-55-041Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-refine-20260913.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/pre_implementation-refine-20260913.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/verification-2026-09-13T17-35-35-891Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/verification-2026-09-13T17-35-35-891Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/verification-2026-09-13T17-35-55-611Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/gates/verification-2026-09-13T17-35-55-611Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/gates/close_out-2026-09-13T18-31-40-025Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/gates/close_out-2026-09-13T18-31-40-025Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/gates/gate-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/gates/gate-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/adversarial-inquiry/phase-verification/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-close_out-doc-psa-lc-closeout-20260911-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-close_out-doc-psa-lc-closeout-20260911-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-pre_implementation-doc-psa-lc-pre-20260911-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-pre_implementation-doc-psa-lc-pre-20260911-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-verification-doc-psa-lc-verify-20260911-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-PSEUDOCODE_STATIC_ANALYSIS/gates/gate-verification-doc-psa-lc-verify-20260911-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_ASYNC_METHODOLOGY/gate-tracker-pre-implementation.yaml",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_ASYNC_METHODOLOGY/gate-tracker-pre-implementation.yaml",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY/gate-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY/gate-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY/gates/close_out-2026-08-26T16-09-28-720Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY/gates/close_out-2026-08-26T16-09-28-720Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/events.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/events.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-events-stage-q.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-events-stage-q.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-events.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-events.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-evidence-stage-q.txt",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-evidence-stage-q.txt",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-evidence.txt",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/pilot-evidence.txt",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/wave8-pre-implementation-refine.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adherence/wave8-pre-implementation-refine.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-verification/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-adherence-chain-close-out.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gate-adherence-chain-close-out.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-pre-implementation-refine.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-pre-implementation-refine.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-sidecar-fix-20260911.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/layerb-sidecar-fix-20260911.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/gate-build-plan-close_out.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/gate-build-plan-close_out.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/gate-build-plan-pre_implementation.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/gate-build-plan-pre_implementation.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/gate-build-plan-verification.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/gate-build-plan-verification.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/pre_implementation-2026-08-25T16-46-08-642Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/pre_implementation-2026-08-25T16-46-08-642Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-m-pre-implementation.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-m-pre-implementation.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-m-verification.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-m-verification.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-n-pre-implementation.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-n-pre-implementation.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-n-verification.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-n-verification.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-o-pre-implementation.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-o-pre-implementation.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-o-verification.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-o-verification.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-p-pre-implementation.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-p-pre-implementation.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-p-verification.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-p-verification.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-q-pre-implementation.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-q-pre-implementation.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-q-verification.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/stage-q-verification.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-2026-08-25T16-46-20-144Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-2026-08-25T16-46-20-144Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-2026-08-25T17-10-22-521Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-2026-08-25T17-10-22-521Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-stage-k-20260825.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-stage-k-20260825.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-stage-l-20260825.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-stage-l-20260825.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-stage-l-pilot-20260825.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/legacy-archive/verification-stage-l-pilot-20260825.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pilot-stage-q/verification-stage-q-pilot-20260825.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pilot-stage-q/verification-stage-q-pilot-20260825.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pilot/verification-stage-l-pilot-20260825.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/pilot/verification-stage-l-pilot-20260825.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-close_out-20260910.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-close_out-20260910.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-pre-implementation-build.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-pre-implementation-build.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-pre-implementation-refine.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-pre-implementation-refine.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-verification-20260910.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave5-verification-20260910.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave7-verification-20260911.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave7-verification-20260911.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-closeout-20260911.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-closeout-20260911.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-pre-implementation-refine.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-pre-implementation-refine.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-verification-20260911.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/gates/wave8-verification-20260911.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.v1.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.v1.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-REQUEST_EVIDENCE_ENVELOPE.v1.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-REQUEST_EVIDENCE_ENVELOPE.v1.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_ADVERSARIAL_INQUIRY.v1.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_ADVERSARIAL_INQUIRY.v1.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.v1.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.v1.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.v1.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_FILES.v1.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/pseudocode-analysis/IMPL-TIED_FILES.v1.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-2026-09-24T17-25-52-156Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/close_out-2026-09-24T17-25-52-156Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-2026-09-24T04-48-48-713Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-2026-09-24T04-48-48-713Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-latest.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/gates/pre_implementation-latest.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/pre_implementation-refine-pre-impl-2026-09-24T19-11-41-232Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_DOC_REMAINDER/gates/pre_implementation-refine-pre-impl-2026-09-24T19-11-41-232Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-2026-09-24T00-24-49-744Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-2026-09-24T00-24-49-744Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-2026-09-24T00-45-13-037Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/close_out-2026-09-24T00-45-13-037Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/pre-implementation-2026-09-23.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/pre-implementation-2026-09-23.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/pre_implementation-2026-09-24T00-07-19-541Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/pre_implementation-2026-09-24T00-07-19-541Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-23-slice2.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-23-slice2.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-24T00-07-12-786Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-24T00-07-12-786Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-24T00-24-55-509Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/verification-2026-09-24T00-24-55-509Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_HARNESS/gates/verification-phase2-2026-09-23.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_HARNESS/gates/verification-phase2-2026-09-23.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T02-52-41-879Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T02-52-41-879Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T17-25-43-137Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-2026-09-24T17-25-43-137Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-latest.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/close_out-latest.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-2026-09-24T02-40-23-882Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-2026-09-24T02-40-23-882Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-2026-09-24T04-48-49-025Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-2026-09-24T04-48-49-025Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-latest.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/pre_implementation-latest.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-2026-09-24T02-42-48-910Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-2026-09-24T02-42-48-910Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-latest.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_LIVE_DRIVER/gates/verification-latest.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/close_out-2026-09-24T18-05-51-997Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/close_out-2026-09-24T18-05-51-997Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_CLAUDE_SKILLS_REROOT/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/adversarial-inquiry/phase-verification/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-02-45-270Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-02-45-270Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-03-32-477Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-26T22-03-32-477Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-15-25-641Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-15-25-641Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-16-44-774Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-16-44-774Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-17-30-000Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-28T02-17-30-000Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-01-10-143Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-01-10-143Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-01-36-269Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-01-36-269Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-01-889Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-01-889Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-40-275Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-40-275Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-51-936Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-02-51-936Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-33-09-656Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-09-29T01-33-09-656Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-10-01T03-13-05-528Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-10-01T03-13-05-528Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-10-01T03-13-49-260Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/close_out-2026-10-01T03-13-49-260Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/gate-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/gate-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-19-199Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-19-199Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-45-257Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-26T22-02-45-257Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T02-07-53-746Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T02-07-53-746Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T02-08-20-287Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T02-08-20-287Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-05-619Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-05-619Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-13-046Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-13-046Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-34-023Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-05-34-023Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-18-501Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-18-501Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-42-572Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-42-572Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-48-756Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-28T03-07-48-756Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T00-34-30-030Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T00-34-30-030Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T00-34-36-678Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T00-34-36-678Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T01-29-25-116Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/pre_implementation-2026-09-29T01-29-25-116Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-19-205Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-19-205Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-45-263Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-26T22-02-45-263Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-22-24-291Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-22-24-291Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-24-05-118Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T01-24-05-118Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-08-50-561Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-08-50-561Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-09-06-467Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-09-06-467Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-09-44-655Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-28T03-09-44-655Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-29T01-33-09-346Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_DECISION_COPROCESSOR/gates/verification-2026-09-29T01-33-09-346Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/adversarial-inquiry/phase-verification/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/adversarial-inquiry/phase-verification/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/close_out-2026-09-30T17-12-03-616Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/close_out-2026-09-30T17-12-03-616Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/close_out-2026-09-30T17-12-11-620Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/close_out-2026-09-30T17-12-11-620Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_JEV_TOOL_SAFETY_GATING/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/close_out-2026-09-14T00-08-01-199Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/close_out-2026-09-14T00-08-01-199Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/gate-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/gate-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/pre_implementation-2026-09-14T00-08-01-198Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/pre_implementation-2026-09-14T00-08-01-198Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/verification-2026-09-14T00-08-01-199Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_NEW_CLIENT_ADHERENCE/gates/verification-2026-09-14T00-08-01-199Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/gate-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/gate-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/obligation-report.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/adversarial-inquiry/phase-verification/obligation-report.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/gate-pre_implementation-closeout-sar-2026-10-01.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/gate-pre_implementation-closeout-sar-2026-10-01.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/gate-verification-closeout-sar-2026-10-01.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/gate-verification-closeout-sar-2026-10-01.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/ledger.jsonl",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/ledger.jsonl",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/pre_implementation-2026-10-01T20-00-57-190Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/pre_implementation-2026-10-01T20-00-57-190Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/pre_implementation-2026-10-01T20-01-24-899Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/pre_implementation-2026-10-01T20-01-24-899Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/pre_implementation-2026-10-01T20-01-52-613Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/pre_implementation-2026-10-01T20-01-52-613Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/verification-2026-10-01T20-01-25-824Z.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/gates/verification-2026-10-01T20-01-25-824Z.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/pseudocode-analysis/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.v1.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/pseudocode-analysis/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.v1.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-VOCABULARY_EXPLORER/gates/activation-collect-close_out.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-VOCABULARY_EXPLORER/gates/activation-collect-close_out.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-VOCABULARY_EXPLORER/gates/activation-collect-verification.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-VOCABULARY_EXPLORER/gates/activation-collect-verification.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    },
+    {
+      "from": "tied-bundle/working/REQ-VOCABULARY_EXPLORER/gates/quality-security-profile-result.json",
+      "to": "mcp-server/test/fixtures/store-local-working/REQ-VOCABULARY_EXPLORER/gates/quality-security-profile-result.json",
+      "reason": "git-tracked local working pin → fixture corpus",
+      "consumer_refs": []
+    }
+  ]
+}

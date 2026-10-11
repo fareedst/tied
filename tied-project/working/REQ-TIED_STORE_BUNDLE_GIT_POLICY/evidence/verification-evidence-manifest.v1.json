@@ -1,0 +1,51 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-store-policy-2026-10-11",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "bootstrap-gitignore-tests",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/working-gitignore.test.mjs",
+        "tools/bootstrap/lib/store-gitignore-policy.test.mjs",
+        "tools/bootstrap/lib/layers/gitignore-block.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/bootstrap-gitignore-tests.stdout.txt"
+      ]
+    },
+    {
+      "id": "fixture-corpus-regression",
+      "command": [
+        "npx",
+        "tsx",
+        "--test",
+        "src/fixture-corpus-regression.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/fixture-corpus-regression.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [],
+  "covered_tokens": [
+    "REQ-TIED_STORE_BUNDLE_GIT_POLICY",
+    "ARCH-TIED_STORE_BUNDLE_GIT_POLICY",
+    "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
+  ],
+  "proof_boundaries": ["baseline-functional", "store git profile"],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

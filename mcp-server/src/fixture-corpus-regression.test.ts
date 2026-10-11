@@ -15,6 +15,7 @@ import {
   writeRegressionManifest,
 } from "./fixture-corpus-regression.js";
 import { resolveWorkingPath } from "./working-root.js";
+import { seedStoreLocalWorkingFromFixtures } from "../test/lib/seed-store-local-working-fixtures.mjs";
 
 const REQUEST_TOKEN = "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT";
 
@@ -51,6 +52,8 @@ function loadAdversarialInquiryRuns(root: string) {
 
 describe("fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () => {
   it("runs all 17 corpus cases with expected gate decisions", () => {
+    const root = path.resolve(import.meta.dirname, "../..");
+    seedStoreLocalWorkingFromFixtures(root, REQUEST_TOKEN);
     const manifest = loadCorpusManifest();
     const cases = [...manifest.negative_cases, manifest.positive_case];
     assert.equal(cases.length, 17);
@@ -73,7 +76,6 @@ describe("fixture corpus regression [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () =
       // non-git environment
     }
 
-    const root = path.resolve(import.meta.dirname, "../..");
     writeRegressionManifest(results, root, {
       stddRevision,
       gateReceipts: loadGateReceipts(root),
