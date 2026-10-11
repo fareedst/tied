@@ -32,7 +32,7 @@ Six REQ families + minted closure REQ/ARCH; manifest keys `QMM_METHODOLOGY_REQUI
 
 ## Git / traceable-commit (2026-10-10)
 
-- **`git add -f`:** all manifest-listed `tied-bundle/` QMM + W4 detail/sidecar paths + minted closure REQ/ARCH bundle details.
+- **Commit:** **`c735e310`** — `feat(tied): promote QMM phase-1 methodology into tied-bundle` (59 files; 26 `git add -f` bundle detail paths).
 - **`tied_git_hygiene`:** plan_close_out preview; excluded fixture envelopes, checklist regression manifest, JEV benchmark churn.
 
 ## PLAN follow-on (c)
