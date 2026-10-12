@@ -1,0 +1,141 @@
+schema_version: langgraph-p2-implement-tracker.v1
+request: PLAN-TIED-LG-P2-EVIDENCE
+purpose: P2 implement Tracker; integrated close-out 2026-10-12.
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: machine_close_out_complete
+depth_tier: integrated
+gate_policy: per_citdp
+citdp:
+  status: persisted
+  path: tied-project/citdp/CITDP-PLAN-TIED-LG-P2-EVIDENCE.yaml
+execution_evidence:
+  request: PLAN-TIED-LG-P2-EVIDENCE
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - sub-adversarial-inquiry-pass
+    - unit-test-red
+    - unit-test-green
+    - composition-integration
+    - gate-pseudocode-validation
+    - sync-tied-stack
+    - verification-gate
+    - traceable-commit
+  pending: []
+  close_out_evidence:
+    date: "2026-10-12"
+    deferred: []
+    gates:
+      close_out: tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/closeout-run-close-out-gates.json
+      verification: tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/closeout-run-verification-gates.json
+    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+steps:
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs: &ref_0
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/risk-assessment-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs: &ref_1
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/test-strategy-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs: &ref_2
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/sub-adversarial-inquiry-pass-evidence.md
+    rationale: Close-out inquiry re-run p2-closeout-pre-impl-20261012 (PASS).
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
+  - slug: gate-pseudocode-validation
+    disposition: completed
+    policy: no-impl-pseudocode-in-scope
+    rationale: P2 pilot wiring; design authority is linked plan + phased spec § Phase 2.
+    evidence_refs: &ref_3
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/gate-pseudocode-validation-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_3
+  - slug: sync-tied-stack
+    disposition: completed
+    policy: pilot-local-no-tied-token-change
+    rationale: No project REQ/ARCH/IMPL records are introduced by P2.
+    evidence_refs: &ref_4
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/sync-tied-stack-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_4
+  - slug: unit-test-red
+    disposition: completed
+    evidence_refs: &ref_5
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/unit-test-red-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_5
+  - slug: unit-test-green
+    disposition: completed
+    evidence_refs: &ref_6
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/unit-test-green-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_6
+  - slug: composition-integration
+    disposition: completed
+    evidence_refs: &ref_7
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/composition-integration-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_7
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs: &ref_8
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/verification-evidence-manifest.v1.json
+    tracking:
+      status: completed
+      evidence_refs: *ref_8
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/traceable-commit-evidence.md
+    tracking:
+      status: completed
+      evidence_refs:
+        - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/traceable-commit-evidence.md
+  - slug: session-bootstrap
+    disposition: completed
+    evidence_refs: &ref_9
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/session-bootstrap-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_9
+  - slug: translate-sponsor-intent
+    disposition: completed
+    evidence_refs: &ref_10
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/translate-sponsor-intent-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_10
+  - slug: change-definition
+    disposition: completed
+    evidence_refs: &ref_11
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/change-definition-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_11
+  - slug: impact-discovery
+    disposition: completed
+    evidence_refs: &ref_12
+      - tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/impact-discovery-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_12

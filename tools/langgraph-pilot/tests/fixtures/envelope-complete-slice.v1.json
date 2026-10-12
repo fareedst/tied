@@ -1,0 +1,24 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-12T18:00:00.000Z",
+    "generator": "fixture",
+    "revision": 1
+  },
+  "identity": {
+    "request_token": "PLAN-TIED-LG-P2-EVIDENCE-FIXTURE",
+    "project_id": "fixture-project",
+    "depth_tier": "integrated",
+    "gate_policy": "advisory"
+  },
+  "artifacts": [],
+  "cross_links": {},
+  "gaps": [
+    {
+      "code": "advisory_note",
+      "severity": "warn",
+      "detail": "Synthetic complete slice — warnings allowed",
+      "source": "fixture"
+    }
+  ]
+}

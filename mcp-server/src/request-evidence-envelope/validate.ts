@@ -14,6 +14,7 @@ import type {
   ValidateRequestEvidenceEnvelopeInput,
   ValidateRequestEvidenceEnvelopeResult,
 } from "./types.js";
+import { isValidWorkingRequestToken } from "../working-request-token.js";
 import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
 
 const FORBIDDEN_FIELDS = ["maturity_score", "maturity", "ranking", "client_rank"];
@@ -41,7 +42,8 @@ function validateShape(envelope: RequestEvidenceEnvelope): string[] {
   if (envelope.schema_version !== ENVELOPE_SCHEMA_VERSION) {
     diagnostics.push("envelope_schema_invalid:schema_version");
   }
-  if (!envelope.identity?.request_token?.startsWith("REQ-")) {
+  const requestToken = envelope.identity?.request_token;
+  if (!requestToken || !isValidWorkingRequestToken(requestToken)) {
     diagnostics.push("envelope_schema_invalid:identity.request_token");
   }
   if (!envelope.envelope_meta?.generator) {

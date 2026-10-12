@@ -1,0 +1,87 @@
+schema_version: langgraph-program-execution.v1
+current_wave: P1
+program_phase: P1_authorized
+last_updated: "2026-10-12T08:51:00-07:00"
+program:
+  program_request: PLAN-TIED-LANGGRAPH-ORCHESTRATION
+  linked_plan: docs/langgraph/tied-langgraph-orchestration-plan.md
+  program_evidence_registry: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/program-evidence-registry.v1.yaml
+  citdp_plan: tied-project/citdp/CITDP-PLAN-TIED-LANGGRAPH-ORCHESTRATION.yaml
+  refine_tracker: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/checklist-tracker.yaml
+execution_authority:
+  p0_enrollment_complete_at: "2026-10-12T04:15:00-07:00"
+  p0_enrollment_evidence_ref: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/charter.md
+  p1_implement_authorized_at: "2026-10-12T08:51:00-07:00"
+  p1_implement_evidence_ref: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md
+  sponsor_interrupt_only_when:
+    - "agency boundary canonical REQ/ARCH/IMPL intent beyond program charter"
+    - "canonical promotion into tied-bundle methodology without separate methodology change request"
+    - "hinge reopen via explicit sponsor change request and CITDP update"
+    - "integrated_waiver for depth below integrated on P1+ persistence/MCP without owner, expiry, rationale"
+flow_control:
+  notation:
+    - meaning: "Jump to wave id"
+      symbol: GOTO
+    - meaning: "Run build-plan or plan-close-out then RETURN"
+      symbol: CALL
+  ordering: strict_sequential_P0_through_P7_unless_sponsor_reorders
+waves:
+  P0:
+    title: Charter and program enrollment
+    mode: plan_only
+    depth_tier: minimal
+    gate_policy: advisory
+    child_folder: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION
+    status: complete
+    exit_gate: p0_enrollment_complete
+  P1:
+    title: Scaffold and MCP adapter
+    mode: implement
+    depth_tier_default: integrated
+    gate_policy_default: per_citdp
+    child_folder: tied-project/working/PLAN-TIED-LG-P1-SCAFFOLD
+    status: scaffold_complete
+    implement_authority_ref: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md
+    entry_requires:
+      - "sponsor-authority-p1-scaffold artifact"
+      - "child CITDP + Tracker"
+      - "pre_implementation gate on P1 scope"
+  P2:
+    title: Evidence wiring
+    mode: implement
+    depth_tier_default: integrated
+    gate_policy_default: per_citdp
+    child_folder: tied-project/working/PLAN-TIED-LG-P2-EVIDENCE
+    linked_plan: docs/langgraph/plan-tied-lg-p2-evidence-wiring.md
+    status: implement_close_out_complete
+    entry_requires:
+      - "P1 scaffold_complete"
+      - "child CITDP + plan Tracker"
+      - "plan pre_implementation gate receipt"
+  P3:
+    title: TDD subgraph
+    mode: implement
+    child_folder: tied-project/working/PLAN-TIED-LG-P3-TDD
+    fixture_client: /Users/fareed/Documents/dev/test/1791767366
+    status: pending
+  P4:
+    title: Acceptance gate
+    mode: implement
+    child_folder: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE
+    status: pending
+  P5:
+    title: Checklist slice
+    mode: implement
+    child_folder: tied-project/working/PLAN-TIED-LG-P5-CHECKLIST
+    status: pending
+  P6:
+    title: Multi-task
+    mode: implement
+    child_folder: tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK
+    status: pending
+  P7:
+    title: Evaluation and convergence
+    mode: plan_and_readout
+    evidence: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/phase-7-convergence.md
+    status: pending
+agent_handoff: "P2 implement + machine close-out complete; P3 TDD subgraph next. See tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/session-handoff.md"

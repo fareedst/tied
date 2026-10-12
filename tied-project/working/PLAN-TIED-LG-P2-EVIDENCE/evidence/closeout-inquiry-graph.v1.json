@@ -1,0 +1,79 @@
+{
+  "graph": {
+    "projectId": "stdd-project",
+    "criteria": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P2-EVIDENCE#criterion-p2-closeout",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        },
+        "architectureConstraintIds": ["constraint-p2-closeout"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-p2-closeout",
+        "implementationBlockIds": ["PLAN-TIED-LG-P2-EVIDENCE#PILOT#closeout"]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P2-EVIDENCE#PILOT#closeout",
+          "kind": "block",
+          "name": "PILOT",
+          "derivation": "content",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "rev1",
+    "specification": [
+      {
+        "id": "stmt-p2-closeout-1",
+        "kind": "behavior",
+        "value": "Pilot tests lock envelope gap routing, ledger, and staleness with mocked MCP",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-p2-1",
+        "direction": "test",
+        "statementId": "stmt-p2-closeout-1",
+        "kind": "behavior",
+        "value": "Pilot tests lock envelope gap routing, ledger, and staleness with mocked MCP",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tests/test_envelope_routing.py:1" },
+        "provenance": "p2-closeout-inquiry",
+        "blockRevision": "rev1"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-p2-1",
+        "direction": "production",
+        "statementId": "stmt-p2-closeout-1",
+        "kind": "behavior",
+        "value": "Pilot tests lock envelope gap routing, ledger, and staleness with mocked MCP",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tied_langgraph/routing.py:1" },
+        "provenance": "p2-closeout-inquiry",
+        "blockRevision": "rev1"
+      }
+    ]
+  },
+  "scope": ["PLAN-TIED-LG-P2-EVIDENCE#PILOT#closeout"],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "PLAN-TIED-LG-P2-EVIDENCE"
+}

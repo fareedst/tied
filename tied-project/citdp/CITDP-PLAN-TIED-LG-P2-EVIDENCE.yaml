@@ -1,0 +1,116 @@
+CITDP-PLAN-TIED-LG-P2-EVIDENCE:
+  change_definition:
+    current_behavior: "P1 pilot can ping MCP and checkpoint JSON; graph does not build/validate request evidence envelopes or route on envelope gaps."
+    desired_behavior: "Verification nodes invoke envelope build/validate MCP tools; run ledger v1 records observations; conditional edges route on gap severity; staleness stub invalidates stale evidence commits."
+    non_goals:
+      - "Fixture client implement (P3)"
+      - "Live MCP in CI (mock JSON-RPC only in default CI path)"
+      - "TDD subgraph RED/GREEN (P3)"
+      - "tied-bundle methodology YAML edits"
+      - "Weakening envelope gate-blocking for throughput"
+    success_criteria:
+      - "Fixture envelope in tests/fixtures validates with 0 error-severity gaps"
+      - "langgraph-run-ledger.v1.json documented and used by ledger module"
+      - "P2 implement pre_implementation gate before RED (separate from plan-only receipt)"
+      - "Unit tests cover gap routing and staleness stub with mocked MCP"
+    unchanged_behavior: "P1 ping graph and read-only MCP allowlist remain; agentstream default executor unchanged."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: close_out
+      project_id: stdd-project
+      request_token: PLAN-TIED-LG-P2-EVIDENCE
+      run_id: p2-closeout-closeout-20261012
+      scope: []
+      scope_hash: "~"
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - verification
+        - close_out
+  evidence:
+    commands:
+      - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
+      - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase verification --run-id p2-closeout-verification-20261012"
+      - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out --envelope-blocking --run-id p2-closeout-closeout-20261012"
+      - "tied_validate_consistency"
+    manifest_reference: null
+    proof_boundaries:
+      - "fixture_envelope_not_fixture_client"
+      - "pilot_tree_mock_mcp"
+  impact_analysis:
+    impl_inventory_notes: "Extends tools/langgraph-pilot; no new REQ/ARCH/IMPL tokens unless sponsor later mints REQ-LANGGRAPH-*"
+    modules_or_boundaries:
+      - "tools/langgraph-pilot/tests/fixtures/"
+      - "tools/langgraph-pilot/tied_langgraph/envelope.py"
+      - "tools/langgraph-pilot/tied_langgraph/graphs/project.py"
+      - "tools/langgraph-pilot/tied_langgraph/ledger.py"
+      - "tools/langgraph-pilot/tied_langgraph/policies/staleness.py"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "machine_close_out_complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LG-P2-EVIDENCE"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    prior_depth_tier: null
+    profile_depth: "integrated"
+    recorded_at: "2026-10-12"
+    title: "LangGraph program P2 evidence envelope wiring (refined plan)"
+  risk_analysis:
+    abuse_cases:
+      - "envelope-build-with-wrong-request-token"
+      - "false-continue-on-error-gap"
+      - "ledger-path-traversal"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Graph routes continue when validate reports error-severity gaps."
+        - "Ledger writes outside run_directory."
+        - "Plan-only pre_implementation receipt reused at P2 RED without implement gate."
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "CI invokes live request_evidence_envelope_validate against stdd tied-project without mock."
+        - "Staleness stub accepts mismatched candidate_commit silently."
+      eligibility_triggers_matched:
+        - "external_input"
+        - "persistence"
+      evidence_references:
+        - "docs/langgraph/plan-tied-lg-p2-evidence-wiring.md"
+        - "docs/langgraph/tied-langgraph-orchestration-plan.md"
+        - "tied-bundle/docs/request-evidence-envelope.md"
+        - "tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/risk-assessment-evidence.md"
+        - "tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      falsification_questions:
+        - "Are envelope MCP calls mocked in CI?"
+        - "Does gap routing fail closed on error severity?"
+      gate_policy: "per_citdp"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Envelope MCP I/O and ledger persistence trigger integrated defaults."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "completed"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-12"
+      owner: "P3 TDD subgraph wave"
+      summary: "P2 does not prove RED/GREEN or fixture REQ implement."
+    risks:
+      - "Blocking validate policy misconfigured in pilot"
+      - "Envelope schema drift vs MCP tool payloads"
+    scenarios:
+      - "Synthetic complete slice vs incomplete envelope"
+      - "Warning-only gaps vs error gaps"
+  sponsor_decisions:
+    blocking_validate_default: "reversible — pilot may start advisory validate until Phase 4 hardening"
+    program_sequential_authority: "P1 scaffold_complete enables P2 plan; implement via build-plan"
+  test_strategy:
+    matrix_notes: "Ledger, envelope, routing, staleness, and mocked composition tests; live MCP deferred."
+    summary: "Fresh integrated implement gate before RED; module validation before composition; fixture envelope must have zero error gaps."

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "langgraph-run-ledger.v1.json",
+  "title": "LangGraph pilot run ledger v1",
+  "type": "object",
+  "required": ["schema_version", "run_id", "request_token", "observations"],
+  "properties": {
+    "schema_version": { "const": "langgraph-run-ledger.v1" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "request_token": { "type": "string", "minLength": 1 },
+    "candidate_commit": { "type": ["string", "null"] },
+    "envelope_path": { "type": ["string", "null"] },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["tool", "commit", "exit_code", "artifact_path", "sha256"],
+        "properties": {
+          "tool": { "type": "string" },
+          "commit": { "type": ["string", "null"] },
+          "exit_code": { "type": "integer" },
+          "artifact_path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

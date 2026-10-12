@@ -74,6 +74,32 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     assert.ok(result.diagnostics.some((item) => item.startsWith("envelope_schema_invalid")));
   });
 
+  it("accepts PLAN-* working request tokens in envelope identity", async () => {
+    const envelope: RequestEvidenceEnvelope = {
+      schema_version: ENVELOPE_SCHEMA_VERSION,
+      envelope_meta: { generated_at: "2026-01-01T00:00:00Z", generator: "test", revision: 1 },
+      identity: {
+        request_token: "PLAN-TIED-LG-P2-EVIDENCE",
+        project_id: "abc",
+        depth_tier: "integrated",
+        gate_policy: "per_citdp",
+        methodology_snapshot_id: "3.0.0",
+      },
+      runs: [],
+      artifacts: [],
+      cross_links: {
+        tracker_path: null,
+        tracker_hash: null,
+        citdp_path: null,
+        evidence_chain_profile_path: null,
+      },
+      gaps: [],
+    };
+    const result = await validateRequestEvidenceEnvelope({ envelope });
+    assert.equal(result.ok, true);
+    assert.ok(!result.diagnostics.some((item) => item === "envelope_schema_invalid:identity.request_token"));
+  });
+
   it("W1-D3 fail_on_error_gaps blocks when severity:error gaps present", async () => {
     const envelope: RequestEvidenceEnvelope = {
       schema_version: ENVELOPE_SCHEMA_VERSION,
