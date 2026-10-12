@@ -1,7 +1,7 @@
 schema_version: langgraph-program-execution.v1
-current_wave: P1
-program_phase: P1_authorized
-last_updated: "2026-10-12T08:51:00-07:00"
+current_wave: P4
+program_phase: P3_close_out_complete
+last_updated: "2026-10-12T12:00:00-07:00"
 program:
   program_request: PLAN-TIED-LANGGRAPH-ORCHESTRATION
   linked_plan: docs/langgraph/tied-langgraph-orchestration-plan.md
@@ -54,6 +54,7 @@ waves:
     child_folder: tied-project/working/PLAN-TIED-LG-P2-EVIDENCE
     linked_plan: docs/langgraph/plan-tied-lg-p2-evidence-wiring.md
     status: implement_close_out_complete
+    exit_commit: "1bbd9245"
     entry_requires:
       - "P1 scaffold_complete"
       - "child CITDP + plan Tracker"
@@ -63,7 +64,8 @@ waves:
     mode: implement
     child_folder: tied-project/working/PLAN-TIED-LG-P3-TDD
     fixture_client: /Users/fareed/Documents/dev/test/1791767366
-    status: pending
+    linked_plan: docs/langgraph/plan-tied-lg-p3-tdd-subgraph.md
+    status: implement_close_out_complete
   P4:
     title: Acceptance gate
     mode: implement
@@ -84,4 +86,4 @@ waves:
     mode: plan_and_readout
     evidence: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/phase-7-convergence.md
     status: pending
-agent_handoff: "P2 implement + machine close-out complete; P3 TDD subgraph next. See tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/session-handoff.md"
+agent_handoff: "P3 implement + close-out complete; proceed P4 acceptance or sponsor git commit. See tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/session-handoff.md"

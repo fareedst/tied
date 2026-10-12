@@ -1,0 +1,117 @@
+CITDP-PLAN-TIED-LG-P3-TDD:
+  change_definition:
+    current_behavior: "P2 pilot integrates envelope gaps and run ledger; TDD is documented only — tdd_red.py is a stub with no subgraph."
+    desired_behavior: "Single-task TDD subgraph executes RED/GREEN/REFACTOR with ValidRedEvidence before implement; ledger records test observations; test-weakening heuristics and optional TDD waiver; hermetic composition proves fail→pass."
+    non_goals:
+      - "Ad-hoc edits to fixture client tied-project YAML"
+      - "P4 verification/acceptance subgraph"
+      - "P5 checklist slice end-to-end"
+      - "Weakening RED or envelope gate-blocking for demos"
+    success_criteria:
+      - "Hermetic composition test RED→GREEN with ledger artifact refs"
+      - "ImplementAllowed blocked unless ValidRedEvidence"
+      - "P3 implement pre_implementation gate before RED (separate from plan-only receipt)"
+      - "pytest green for policy, subgraph (mocked), and hermetic composition"
+    unchanged_behavior: "P2 envelope routing, staleness, and mocked MCP CI path remain; agentstream default executor unchanged."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "close_out"
+      project_id: "stdd-project"
+      request_token: "PLAN-TIED-LG-P3-TDD"
+      run_id: "p3-closeout-closeout-20261012"
+      scope: []
+      scope_hash: "~"
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "verification"
+  evidence:
+    commands:
+      - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
+    manifest_reference: null
+    proof_boundaries:
+      - "charter_fixture_optional_integration"
+      - "hermetic_tdd_mini_repo_default_ci"
+      - "pilot_tree_no_fixture_tied_writes"
+  impact_analysis:
+    impl_inventory_notes: "Extends tools/langgraph-pilot; no new REQ/ARCH/IMPL unless sponsor mints REQ-LANGGRAPH-*"
+    modules_or_boundaries:
+      - "tools/langgraph-pilot/tests/fixtures/tdd-mini-repo/"
+      - "tools/langgraph-pilot/tied_langgraph/graphs/task_tdd.py"
+      - "tools/langgraph-pilot/tied_langgraph/policies/tdd_red.py"
+      - "tools/langgraph-pilot/tied_langgraph/policies/test_weakening.py"
+      - "tools/langgraph-pilot/tied_langgraph/runners/"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "machine_close_out_complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LG-P3-TDD"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    prior_depth_tier: null
+    profile_depth: "integrated"
+    recorded_at: "2026-10-12"
+    title: "LangGraph program P3 TDD subgraph (refined plan)"
+  risk_analysis:
+    abuse_cases:
+      - "implement-without-valid-red"
+      - "subprocess-cwd-escape"
+      - "test-weakening-without-waiver"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Plan-only pre_implementation receipt reused at P3 RED without implement gate."
+        - "Skipped tests without ledger waiver still accept GREEN."
+        - "Subgraph advances to GREEN when RED was a syntax error."
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "CI requires LANGGRAPH_FIXTURE_CLIENT_ROOT for default pytest job."
+        - "Runner executes tests outside declared cwd."
+      eligibility_triggers_matched:
+        - "external_input"
+        - "persistence"
+      evidence_references:
+        - "docs/langgraph/plan-tied-lg-p3-tdd-subgraph.md"
+        - "docs/langgraph/tied-langgraph-orchestration-plan.md"
+        - "docs/tools/langgraph-evidence-driven-software-engineering.md"
+        - "tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/risk-assessment-evidence.md"
+        - "tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      falsification_questions:
+        - "Does invalid RED ever enable implement?"
+        - "Is charter fixture required for default CI?"
+      gate_policy: "per_citdp"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Subprocess test I/O and ledger persistence trigger integrated defaults."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "completed"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-12"
+      owner: "P4 acceptance gate wave"
+      summary: "P3 does not prove verification subgraph or MCP checklist gate receipts."
+    risks:
+      - "Invalid RED classified as valid"
+      - "Hermetic mini-repo diverges from charter fixture behavior"
+    scenarios:
+      - "Syntax error masquerading as assertion failure"
+      - "Optional integration skipped in CI"
+  test_strategy:
+    composition_tests:
+      - "Hermetic tdd-mini-repo RED→GREEN with ledger observations"
+    integration_tests:
+      - "Optional charter fixture when LANGGRAPH_FIXTURE_CLIENT_ROOT set"
+    unit_tests:
+      - "runner adapter subprocess contract"
+      - "task_tdd subgraph with mock runner"
+      - "tdd_red classification matrix"
+      - "test_weakening heuristics"

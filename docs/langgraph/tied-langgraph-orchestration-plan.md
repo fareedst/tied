@@ -253,6 +253,8 @@ Committed rationale (if tokens added later): `tied-project/working/PLAN-TIED-LAN
 
 ### Phase 3 — Single-task TDD subgraph
 
+**Linked plan (refined):** [plan-tied-lg-p3-tdd-subgraph.md](./plan-tied-lg-p3-tdd-subgraph.md) · Working folder: `tied-project/working/PLAN-TIED-LG-P3-TDD/`.
+
 **Goal:** Executable RED → GREEN → REFACTOR with **ValidRedEvidence** before implement allowed.
 
 **Tasks:**

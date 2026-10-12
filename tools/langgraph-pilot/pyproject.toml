@@ -25,3 +25,6 @@ include = ["tied_langgraph*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+markers = [
+  "integration: optional live fixture client (LANGGRAPH_FIXTURE_CLIENT_ROOT)",
+]

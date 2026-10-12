@@ -88,3 +88,24 @@ def append_observation(
 
     ledger_path.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return observation
+
+
+def set_tdd_waiver(
+    *,
+    run_directory: Path,
+    ledger_filename: str,
+    scope: str,
+    reason: str,
+    sponsor_flag: bool,
+) -> dict[str, Any]:
+    """Record an explicit TDD waiver on the run ledger."""
+    run_directory.mkdir(parents=True, exist_ok=True)
+    ledger_path = run_directory / ledger_filename
+    ledger = load_ledger(ledger_path)
+    ledger["tdd_waiver"] = {
+        "scope": scope,
+        "reason": reason,
+        "sponsor_flag": sponsor_flag,
+    }
+    ledger_path.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return ledger["tdd_waiver"]

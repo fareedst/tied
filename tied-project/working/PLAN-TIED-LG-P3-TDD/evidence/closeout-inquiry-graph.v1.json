@@ -1,0 +1,79 @@
+{
+  "graph": {
+    "projectId": "stdd-project",
+    "criteria": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P3-TDD#criterion-p3-closeout",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        },
+        "architectureConstraintIds": ["constraint-p3-closeout"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-p3-closeout",
+        "implementationBlockIds": ["PLAN-TIED-LG-P3-TDD#PILOT#tdd_subgraph"]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P3-TDD#PILOT#tdd_subgraph",
+          "kind": "block",
+          "name": "PILOT",
+          "derivation": "content",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "rev1",
+    "specification": [
+      {
+        "id": "stmt-p3-closeout-1",
+        "kind": "behavior",
+        "value": "TDD subgraph requires ValidRedEvidence before implement; hermetic mini-repo proves RED to GREEN with ledger observations",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-p3-1",
+        "direction": "test",
+        "statementId": "stmt-p3-closeout-1",
+        "kind": "behavior",
+        "value": "TDD subgraph requires ValidRedEvidence before implement; hermetic mini-repo proves RED to GREEN with ledger observations",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tests/test_tdd_hermetic_composition.py:1" },
+        "provenance": "p3-closeout-inquiry",
+        "blockRevision": "rev1"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-p3-1",
+        "direction": "production",
+        "statementId": "stmt-p3-closeout-1",
+        "kind": "behavior",
+        "value": "TDD subgraph requires ValidRedEvidence before implement; hermetic mini-repo proves RED to GREEN with ledger observations",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tied_langgraph/graphs/task_tdd.py:1" },
+        "provenance": "p3-closeout-inquiry",
+        "blockRevision": "rev1"
+      }
+    ]
+  },
+  "scope": ["PLAN-TIED-LG-P3-TDD#PILOT#tdd_subgraph"],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "PLAN-TIED-LG-P3-TDD"
+}
