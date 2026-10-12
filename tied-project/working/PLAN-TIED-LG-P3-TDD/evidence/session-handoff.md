@@ -1,10 +1,10 @@
 # Session handoff — PLAN-TIED-LG-P3-TDD
 
-**Updated:** 2026-10-12 (`@build-plan` close-out)
+**Updated:** 2026-10-12 (machine close-out + **traceable-commit**)
 
 ## Status
 
-P3 **implement** and **machine close-out** complete. **Git commit not performed** — proposed message below; sponsor may run explicit `git commit` or amend traceable-commit after staging.
+P3 **implement**, **machine close-out**, and **traceable-commit** are complete. Git: **`ebda93d5`** on `main` (not pushed unless sponsor requests).
 
 ## Completion signals
 
@@ -14,13 +14,13 @@ P3 **implement** and **machine close-out** complete. **Git commit not performed*
 | **Process contract** | pass — tracker dual-write, manifest, profile; slug evidence on disk |
 | **Adherence ledger** | pass — reconcile ok; process_grade **B** band (stale pre_impl gate receipts; non-blocking) |
 
-Receipts: [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) · [closeout-run-verification-gates.json](./closeout-run-verification-gates.json) · [traceable-commit-evidence.md](./traceable-commit-evidence.md) (proposed commit only)
+Receipts: [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) · [closeout-run-verification-gates.json](./closeout-run-verification-gates.json) · [traceable-commit-evidence.md](./traceable-commit-evidence.md)
 
-## Shipped (uncommitted)
+## Shipped (commit `ebda93d5`)
 
 - `tools/langgraph-pilot/` — TDD subgraph, policies, hermetic composition (27 pytest, 1 skipped)
 - P3 working folder + [CITDP-PLAN-TIED-LG-P3-TDD.yaml](../../../citdp/CITDP-PLAN-TIED-LG-P3-TDD.yaml)
-- LangGraph docs; program checklist P3 → `implement_close_out_complete`
+- [plan-tied-lg-p3-tdd-subgraph.md](../../../../docs/langgraph/plan-tied-lg-p3-tdd-subgraph.md); program checklist P3 → `implement_close_out_complete`
 
 ## Remaining risks
 
@@ -30,5 +30,5 @@ Receipts: [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.jso
 
 ## Next agent
 
-1. Sponsor **git commit** when ready (see proposed message in parent turn).
-2. **`@build-plan`** / program wave **P4** acceptance subgraph per [langgraph-program-execution-checklist.yaml](../../PLAN-TIED-LANGGRAPH-ORCHESTRATION/langgraph-program-execution-checklist.yaml).
+1. **`@build-plan`** on **P4** when sponsor authorizes (program checklist).
+2. Optional: **`git push`** when sponsor wants remote updated.

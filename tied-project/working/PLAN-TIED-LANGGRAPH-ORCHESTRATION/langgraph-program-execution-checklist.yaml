@@ -66,6 +66,7 @@ waves:
     fixture_client: /Users/fareed/Documents/dev/test/1791767366
     linked_plan: docs/langgraph/plan-tied-lg-p3-tdd-subgraph.md
     status: implement_close_out_complete
+    exit_commit: "ebda93d5"
   P4:
     title: Acceptance gate
     mode: implement
