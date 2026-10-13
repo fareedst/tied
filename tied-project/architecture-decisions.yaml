@@ -2233,6 +2233,32 @@ ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_RESEARCH_RECORD_BOUNDARY.yaml"
   name: "External research record boundary"
   status: "Active"
+ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL:
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_SOURCE_GRAPH_MAP"
+      - "IMPL-TIED_SOURCE_GRAPH_REFRESH"
+      - "IMPL-TIED_SOURCE_GRAPH_TRAVERSE"
+    requirements:
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+  decisions:
+    - id: "evidence-not-authority"
+      rationale: "Matrix code_graph rows stay observed until sponsor approval."
+      status: "accepted"
+      title: "Graph output is not REQ authority"
+    - id: "regenerable-index"
+      rationale: "Local cache is not canonical TIED YAML."
+      status: "accepted"
+      title: "Index lives under .tied/source-graph"
+    - id: "ts-js-slice1"
+      rationale: "Compiler API static extract; tree-sitter expansion deferred with proof boundary."
+      status: "accepted"
+      title: "TS/JS static analysis slice 1"
+  description: "Evidence-only graph index; regenerable cache; static analysis proof boundaries."
+  detail_file: "architecture-decisions/ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL.yaml"
+  name: "Source Graph Evidence Model"
+  status: "Active"
 ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP:
   cross_references:
     - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"

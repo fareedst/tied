@@ -1,0 +1,11 @@
+REQ-TIED_SOURCE_GRAPH_COMPREHENSION:
+  acceptance_criteria:
+    - "All SC-SGC-* criteria met with tests green"
+  description: "Phase 2 slice 1 structural comprehension MCP tools."
+  rationale:
+    benefits:
+      - "Map/trace/freshness receipts linkable as code_graph rows"
+    problems_solved:
+      - "Missing deterministic graph evidence for brownfield matrices"
+      - "Repeated manual repo orientation"
+    why: "Accelerate impact discovery without substituting TIED authority."

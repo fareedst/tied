@@ -2802,6 +2802,36 @@ REQ-TIED_SETUP:
       method: "Manual verification"
     - coverage: "All index files have corresponding detail directories with proper naming"
       method: "Structure validation"
+REQ-TIED_SOURCE_GRAPH_COMPREHENSION:
+  category: "Functional"
+  description: "Native TS/JS static source graph: refresh, map, trace, freshness—evidence only."
+  detail_file: "requirements/REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml"
+  name: "Source Graph Comprehension (Phase 2 slice 1)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "SC-SGC-ENROLL — REQ/ARCH/IMPL/PROC enrolled."
+    - criterion: "SC-SGC-FRESHNESS — Stale index diagnostic."
+    - criterion: "SC-SGC-MAP — Map clusters returned."
+    - criterion: "SC-SGC-NO-MUTATION — No tied-project YAML writes from graph MCP."
+    - criterion: "SC-SGC-REFRESH — Index build with content hash."
+    - criterion: "SC-SGC-TESTS — Unit and composition tests pass."
+    - criterion: "SC-SGC-TRACE — Caller/callee trace on fixtures."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL"
+    implementation:
+      - "IMPL-TIED_SOURCE_GRAPH_MAP"
+      - "IMPL-TIED_SOURCE_GRAPH_REFRESH"
+      - "IMPL-TIED_SOURCE_GRAPH_TRAVERSE"
+    tests:
+      - "mcp-server/src/source-graph/*.test.ts"
 REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
   category: "Methodology"
   cross_references:

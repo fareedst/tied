@@ -2666,6 +2666,56 @@ IMPL-TIED_RESEARCH_RECORDS:
     tests:
       - "mcp-server/src/research-records.test.ts"
       - "mcp-server/src/tools/batch-5-mcp.test.ts"
+IMPL-TIED_SOURCE_GRAPH_MAP:
+  code_locations:
+    files:
+      - description: "buildSourceGraphMap"
+        path: "mcp-server/src/source-graph/index-builder.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+  description: "Directory cluster map from index."
+  detail_file: "implementation-decisions/IMPL-TIED_SOURCE_GRAPH_MAP.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_SOURCE_GRAPH_MAP-pseudocode.md"
+  name: "Source Graph Map"
+  status: "Active"
+IMPL-TIED_SOURCE_GRAPH_REFRESH:
+  code_locations:
+    files:
+      - description: "Index builder"
+        path: "mcp-server/src/source-graph/index-builder.ts"
+      - description: "MCP handlers"
+        path: "mcp-server/src/source-graph/mcp-handlers.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+  description: "Build source-graph-index.v1 and freshness checks."
+  detail_file: "implementation-decisions/IMPL-TIED_SOURCE_GRAPH_REFRESH.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_SOURCE_GRAPH_REFRESH-pseudocode.md"
+  name: "Source Graph Refresh and Freshness"
+  status: "Active"
+IMPL-TIED_SOURCE_GRAPH_TRAVERSE:
+  code_locations:
+    files:
+      - description: "traceSourceGraphSymbol"
+        path: "mcp-server/src/source-graph/index-builder.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+  description: "Caller/callee traversal on call edges."
+  detail_file: "implementation-decisions/IMPL-TIED_SOURCE_GRAPH_TRAVERSE.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_SOURCE_GRAPH_TRAVERSE-pseudocode.md"
+  name: "Source Graph Symbol Trace"
+  status: "Active"
 IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP:
   cross_references:
     - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"

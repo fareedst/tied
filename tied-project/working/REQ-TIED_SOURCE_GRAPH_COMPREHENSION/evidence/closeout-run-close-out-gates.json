@@ -1,0 +1,51 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "sgc-closeout-2026-10-13"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "findings": [
+        {
+          "code": "legacy_no_adherence_chain",
+          "detail": {
+            "ledger_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/gates/ledger.jsonl"
+          }
+        }
+      ],
+      "ledger_rows": 0,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "gap_codes": ["thin_ledger"]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

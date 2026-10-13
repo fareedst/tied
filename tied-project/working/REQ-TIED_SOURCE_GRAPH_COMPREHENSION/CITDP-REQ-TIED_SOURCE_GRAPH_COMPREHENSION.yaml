@@ -1,0 +1,185 @@
+CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION:
+  change_definition:
+    current_behavior: "TIED impact discovery relies on scoped analysis, manual search, and fidelity structural helpers; there is no native deterministic source graph (refresh, map, symbol traversal, freshness) in mcp-server comparable to Trail-Code/Graft orientation tools. Phase 1 brownfield intent elevation is complete and accepts matrix rows with source_type code_graph only as vocabulary—no graph producer exists."
+    desired_behavior: "Phase 2 (slice 1) enrolls [REQ-TIED_SOURCE_GRAPH_COMPREHENSION], [ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL], modular [IMPL-TIED_SOURCE_GRAPH_*] slices, and [PROC-TIED_SOURCE_GRAPH_COMPREHENSION]; implements native TypeScript tree-sitter-backed refresh, repository map, symbol caller/callee traversal, and freshness receipts under mcp-server—report-only evidence, no project TIED YAML mutation, no checklist gate authority, no REQ promotion from graph output."
+    non_goals:
+      - "Replacing TIED vocabulary PRELOAD or checklist gate decisions"
+      - "LLM summaries, Trail brain sync, or GitHub App telemetry in slice 1"
+      - "graft ask/grep/skeleton/blast-radius in slice 1 (later modular slices after module validation)"
+      - "External @nanonets/graft runtime dependency as authority path (compose-only reference)"
+      - "Automatic promotion of graph observations into REQ/ARCH without sponsor matrix adjudication"
+    success_criteria:
+      - "SC-SGC-ENROLL — Project REQ/ARCH/IMPL(+slices)/PROC enrolled with cross-links to Phase 1 [PROC-BROWNFIELD_INTENT_ELEVATION] and docs/comparisons/tied-vs-trail-code.md"
+      - "SC-SGC-REFRESH — Deterministic refresh builds/regenerates a versioned local index with content hash and explicit proof boundaries (static analysis limits)"
+      - "SC-SGC-MAP — Map API returns directory clusters, file/symbol counts, and hub metadata for a bounded repo root"
+      - "SC-SGC-TRACE — Trace API returns caller/callee edges for a resolved symbol id within configured depth"
+      - "SC-SGC-FRESHNESS — Freshness check compares index revision to working tree hash and emits advisory diagnostics"
+      - "SC-SGC-NO-MUTATION — All MCP tools on graph path do not write tied-project/*.yaml indexes or detail files"
+      - "SC-SGC-TESTS — Unit tests on fixture mini-repos; composition tests for MCP registration; no-mutation regression"
+    unchanged_behavior:
+      - "[REQ-TIED_BROWNFIELD_INTENT_ELEVATION] validator and matrix contract"
+      - "Existing tied_scoped_analysis_run and structural-analysis proof-boundary patterns"
+      - "Methodology read-only tied-bundle/ boundary"
+  completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+      run_id: null
+      scope: []
+    envelope_path: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
+    tied_validate_consistency: "required"
+    verification_gate_notes: "npm test --prefix mcp-server source-graph; tied_validate_consistency; pre_implementation + verification checklist gates"
+  evidence:
+    commands:
+      - "npm test --prefix mcp-server -- source-graph"
+      - "npm run lint:ts --prefix mcp-server"
+    manifest_reference: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+    proof_boundaries:
+      - "static-analysis-only"
+      - "read-only-tied-yaml"
+      - "regenerable-local-index"
+  impact_analysis:
+    modules_or_boundaries: "New mcp-server/src/source-graph/* module; tools/index.ts registration; optional tied-project/vocab source-graph terms; cross-link brownfield matrix source_type code_graph; gitignored .tied/source-graph cache layout per ARCH"
+    tied_tokens_new:
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+      - "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL"
+      - "IMPL-TIED_SOURCE_GRAPH_REFRESH"
+      - "IMPL-TIED_SOURCE_GRAPH_MAP"
+      - "IMPL-TIED_SOURCE_GRAPH_TRAVERSE"
+      - "PROC-TIED_SOURCE_GRAPH_COMPREHENSION"
+    tied_tokens_affected:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+      - "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+    sponsor_costly_choices:
+      C2:
+        choice: "native_graph_in_mcp_server"
+        inherited_from: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+        confirmed_at: "2026-10-13"
+        note: "Implement graph in mcp-server; Trail/Graft remains comparison and optional external compose only."
+      C3:
+        choice: "one_umbrella_req_modular_impl"
+        inherited_from: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+        confirmed_at: "2026-10-13"
+        note: "Single REQ with IMPL-TIED_SOURCE_GRAPH_* slices validated independently before integration."
+      C4:
+        choice: "typescript_javascript_first"
+        confirmed_at: "2026-10-13"
+        sponsor_unblock_at: "2026-10-13"
+        note: "Slice 1 languages: TS/JS via tree-sitter; additional grammars deferred with explicit ARCH proof boundaries."
+      C5:
+        choice: "freshness_advisory_default"
+        confirmed_at: "2026-10-13"
+        sponsor_unblock_at: "2026-10-13"
+        note: "Stale index diagnostics are advisory at verification unless sponsor later authorizes blocking (separate costly choice)."
+  record_identity:
+    change_request_id: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+    recorded_at: "2026-10-13"
+    title: "Native source-graph comprehension (Phase 2 slice 1)"
+    record_status: "implemented"
+  parent_program:
+    linked_plan: "tied_comprehension_phases_79fbed92.plan.md"
+    phase_1_request: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+    phase_1_entry_evidence:
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/verification-evidence-manifest.v1.json"
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/dogfood-validation-receipt.json"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Graph traversal output treated as REQ authority without matrix disposition approved"
+        - "Stale index used for impact discovery without freshness diagnostic"
+        - "Dynamic dispatch or generated code invisible to static graph but presented as complete blast radius"
+        - "Graph MCP handler writes project requirements.yaml during refresh"
+        - "Slice 1 scope creep imports LLM enrichment and sends source to external providers silently"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "No-mutation test fails if yaml_index_update invoked from graph MCP path"
+        - "Freshness diagnostic fires when fixture file changes after index build"
+        - "Matrix row with source_type code_graph remains observed until sponsor approval"
+      evidence_references:
+        - "docs/comparisons/tied-vs-trail-code.md"
+        - "mcp-server/src/fidelity-research/structural-analysis.ts"
+        - "tied-bundle/docs/brownfield-intent-elevation.md"
+        - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/intent-elevation-matrix.md"
+      falsification_questions:
+        - "Does any graph tool mutate tied-project/*.yaml on disk?"
+        - "Can freshness pass while indexed content hash disagrees with working tree?"
+        - "Does graph output auto-advance checklist gates without tied_checklist_gate_validate?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      research_profile: "read-only-research"
+      rationale: "Slice 1 is local filesystem indexing and read-only MCP evidence; regenerable cache is not canonical TIED intent; no auth/network/LLM in slice 1; integrated inquiry deferred unless scope adds provider egress or blocking freshness gates"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "read-only-tied-yaml"
+        command_or_test: "source-graph no-mutation unit test"
+        evidence_method: "automated"
+        result: "passed"
+        rationale: "Preserve TIED YAML write isolation alongside graph cache writes"
+        risk: "accidental index mutation during refresh"
+        threshold: "graph MCP path never calls yaml_index_* / yaml_detail_*"
+        owner: "build-plan"
+        limitation: "Does not prove immutability of all non-YAML project files"
+      - applicability: "applicable"
+        attribute: "static-analysis-only"
+        command_or_test: "source-graph fixture traversal tests"
+        evidence_method: "automated"
+        result: "passed"
+        rationale: "Graph is evidence with explicit static limits"
+        risk: "overstated reachability"
+        threshold: "ARCH documents dynamic dispatch and generated-code proof boundaries"
+        owner: "build-plan"
+        limitation: "Does not prove runtime behavior"
+  test_strategy:
+    summary: "Strict TDD per IMPL slice: RED unit tests for refresh hash + index schema, map aggregation, symbol trace depth limits, freshness mismatch; composition tests for MCP tool registration and receipt shape; enroll TIED stack before GREEN integration; verification gate + tied_validate_consistency."
+    matrix:
+      - name: "refresh-build-index"
+        kind: unit
+        impl_block: "REFRESH_SOURCE_GRAPH_INDEX"
+        req: "IMPL-TIED_SOURCE_GRAPH_REFRESH"
+        red: "unchanged tree rebuilds same index hash"
+        green: "file content change changes index revision"
+      - name: "map-repo-clusters"
+        kind: unit
+        impl_block: "BUILD_SOURCE_GRAPH_MAP"
+        req: "IMPL-TIED_SOURCE_GRAPH_MAP"
+        red: "empty fixture returns structured empty map"
+        green: "fixture repo returns stable cluster counts"
+      - name: "trace-symbol-edges"
+        kind: unit
+        impl_block: "TRACE_SOURCE_GRAPH_SYMBOL"
+        req: "IMPL-TIED_SOURCE_GRAPH_TRAVERSE"
+        red: "unknown symbol id returns diagnostic not throw"
+        green: "fixture import/call edges match golden JSON"
+      - name: "freshness-mismatch"
+        kind: unit
+        impl_block: "CHECK_SOURCE_GRAPH_FRESHNESS"
+        req: "IMPL-TIED_SOURCE_GRAPH_REFRESH"
+        red: "stale index reports advisory diagnostic"
+        green: "fresh index reports ok receipt"
+      - name: "mcp-no-yaml-mutation"
+        kind: unit
+        impl_block: "SOURCE_GRAPH_MCP_HANDLERS"
+        req: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+        red: "refresh MCP touches requirements.yaml mtime"
+        green: "invoke graph tools; project indexes unchanged"
+      - name: "mcp-composition-registration"
+        kind: composition
+        impl_block: "SOURCE_GRAPH_MCP_HANDLERS"
+        req: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+        red: "tools missing from index"
+        green: "tied_source_graph_* handlers return schema_version receipts"
+  tdd_sequence:
+    - "Enroll REQ/ARCH/IMPL slices/PROC via tied-cli/MCP"
+    - "IMPL essence_pseudocode sidecars with [PROC-IMPL_PSEUDOCODE_TOKENS] on every block"
+    - "Unit RED → GREEN per slice (refresh → map → traverse)"
+    - "Composition RED → GREEN for MCP handlers"
+    - "Docs + vocab RECORD (code_graph, structural comprehension)"
+    - "Verification gate + tied_validate_consistency + envelope"

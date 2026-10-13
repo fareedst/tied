@@ -1,0 +1,4 @@
+IMPL-TIED_SOURCE_GRAPH_TRAVERSE:
+  implementation_approach: "Bounded depth traversal on calls edges in index."
+  proof_boundaries:
+    - "Misses dynamic dispatch"

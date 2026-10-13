@@ -2696,6 +2696,16 @@ PROC-TIED_METHODOLOGY_READONLY:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+PROC-TIED_SOURCE_GRAPH_COMPREHENSION:
+  cross_references:
+    - "PROC-BROWNFIELD_INTENT_ELEVATION"
+    - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+  description: "When to run graph MCP tools and link receipts to brownfield matrix code_graph rows."
+  detail_file: "null"
+  name: "Source Graph Comprehension Process"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
 PROC-TIED_VERIFICATION_GATED:
   cross_references:
     - "PROC-TIED_DEV_CYCLE"

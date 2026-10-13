@@ -1,0 +1,5 @@
+ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL:
+  constraints:
+    - "Freshness advisory by default (C5)"
+    - "No project TIED YAML mutation from graph MCP path"
+  description: "Architecture for native source graph evidence."

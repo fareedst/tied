@@ -1,0 +1,90 @@
+schema_version: checklist-tracker.v1
+name: sgc-build-plan-verification-gate
+request_token: REQ-TIED_SOURCE_GRAPH_COMPREHENSION
+depth_tier: minimal
+gate_policy: advisory
+brownfield_intent_elevation:
+  mode: report_only
+execution_evidence:
+  request: REQ-TIED_SOURCE_GRAPH_COMPREHENSION
+  envelope_path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+  completed:
+    - session-bootstrap
+    - author-requirement
+    - author-architecture
+    - persist-implementation-records
+    - unit-test-red
+    - unit-test-green
+    - composition-integration
+    - risk-assessment
+    - verification-gate
+state_history: []
+steps:
+  - slug: session-bootstrap
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/source-graph/index-builder.ts
+  - slug: author-requirement
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/requirements/REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
+  - slug: author-architecture
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/architecture-decisions/ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL.yaml
+  - slug: persist-implementation-records
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_SOURCE_GRAPH_REFRESH.yaml
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_SOURCE_GRAPH_MAP.yaml
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_SOURCE_GRAPH_TRAVERSE.yaml
+  - slug: unit-test-red
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/source-graph/source-graph.test.ts
+  - slug: unit-test-green
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/source-graph/source-graph.test.ts
+  - slug: composition-integration
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/source-graph/source-graph-composition.test.ts
+  - slug: risk-assessment
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
+  - slug: sub-adversarial-inquiry-pass
+    kind: sub_procedure
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: "Slice 1 local read-only graph indexing; minimal depth per CITDP."
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/not-applicable-receipt.v1.json
+  - slug: verification-gate
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: gate_receipt
+        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/gates/verification-2026-10-13T16-02-28-811Z.json
+      - kind: manifest_ref
+        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json

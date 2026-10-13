@@ -1,0 +1,4 @@
+IMPL-TIED_SOURCE_GRAPH_MAP:
+  implementation_approach: "Aggregate index files/symbols/edges by directory."
+  proof_boundaries:
+    - "Map is derived view only"

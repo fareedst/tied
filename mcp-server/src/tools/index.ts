@@ -76,6 +76,12 @@ import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { brownfieldIntentEvidenceValidate } from "../brownfield-intent-evidence/intent-elevation.js";
+import {
+  tiedSourceGraphFreshness,
+  tiedSourceGraphMap,
+  tiedSourceGraphRefresh,
+  tiedSourceGraphTrace,
+} from "../source-graph/mcp-handlers.js";
 import { validateStressorResidueRecord } from "../residuality/stressor-residue-validate.js";
 import { validateMethodologyLearningExperiment } from "../methodology-learning-experiment/validate.js";
 import { validateProductionSystemEnrollment } from "../methodology-production-system-enrollment/validate.js";
@@ -2855,6 +2861,69 @@ export const allTools = [
           2,
         ),
       );
+    },
+  },
+  {
+    name: "tied_source_graph_refresh",
+    config: {
+      description:
+        "Build or refresh a local source-graph index (TypeScript/JavaScript static analysis) and return a receipt with map summary. Does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        index_rel_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: { repo_root: string; index_rel_path?: string }) => {
+      return textContent(JSON.stringify(await tiedSourceGraphRefresh(args), null, 2));
+    },
+  },
+  {
+    name: "tied_source_graph_map",
+    config: {
+      description:
+        "Return repository map clusters from the source-graph index (refresh implied). Evidence-only; does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        index_rel_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: { repo_root: string; index_rel_path?: string }) => {
+      return textContent(JSON.stringify(await tiedSourceGraphMap(args), null, 2));
+    },
+  },
+  {
+    name: "tied_source_graph_trace",
+    config: {
+      description:
+        "Trace caller/callee symbol edges for a symbol_id within the source-graph index. Evidence-only; does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        symbol_id: z.string(),
+        depth: z.number().int().min(1).max(4).optional(),
+        index_rel_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      symbol_id: string;
+      depth?: number;
+      index_rel_path?: string;
+    }) => {
+      return textContent(JSON.stringify(await tiedSourceGraphTrace(args), null, 2));
+    },
+  },
+  {
+    name: "tied_source_graph_freshness",
+    config: {
+      description:
+        "Compare live repo content hash to the source-graph index (advisory stale diagnostics). Does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        index_rel_path: z.string().optional(),
+      }),
+    },
+    handler: async (args: { repo_root: string; index_rel_path?: string }) => {
+      return textContent(JSON.stringify(await tiedSourceGraphFreshness(args), null, 2));
     },
   },
   {
