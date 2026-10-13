@@ -1,0 +1,21 @@
+schema_version: intent-elevation.v1
+baseline_revision: abc123def
+scope_tokens:
+  - REQ-TIED_BROWNFIELD_INTENT_ELEVATION
+  - ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL
+rows:
+  - row_id: "1"
+    claim: Validator returns receipt without YAML writes
+    source_type: test
+    location: mcp-server/src/brownfield-intent-evidence
+    disposition: approved
+    confidence: high
+    proof_boundary: Does not prove all Markdown edge cases
+    promotion_target: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
+  - row_id: "2"
+    claim: Observed behavior from legacy module
+    source_type: code
+    location: legacy/mod.rs
+    disposition: observed
+    confidence: medium
+    proof_boundary: Static read only

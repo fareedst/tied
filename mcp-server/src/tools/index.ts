@@ -75,6 +75,7 @@ import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
+import { brownfieldIntentEvidenceValidate } from "../brownfield-intent-evidence/intent-elevation.js";
 import { validateStressorResidueRecord } from "../residuality/stressor-residue-validate.js";
 import { validateMethodologyLearningExperiment } from "../methodology-learning-experiment/validate.js";
 import { validateProductionSystemEnrollment } from "../methodology-production-system-enrollment/validate.js";
@@ -2798,6 +2799,61 @@ export const allTools = [
     handler: async (args: { rows: unknown[] }) => {
       return textContent(
         JSON.stringify(validateBindingInventory(args.rows as Parameters<typeof validateBindingInventory>[0]), null, 2),
+      );
+    },
+  },
+  {
+    name: "brownfield_intent_evidence_validate",
+    config: {
+      description:
+        "Validate brownfield intent-elevation matrices (Markdown table or intent-elevation.v1 YAML) with disposition and promotion rules. Report-only by default; emits diagnostics and a validation receipt without mutating project TIED YAML.",
+      inputSchema: z.object({
+        markdown_text: z.string().optional(),
+        yaml_text: z.string().optional(),
+        matrix_path: z.string().optional(),
+        baseline_revision: z.string().optional(),
+        scope_tokens: z.array(z.string()).optional(),
+        mode: z.enum(["report_only", "pilot", "strict"]).optional(),
+        scoped_analysis_evidence_id: z.string().optional(),
+        claims_review_evidence_id: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      markdown_text?: string;
+      yaml_text?: string;
+      matrix_path?: string;
+      baseline_revision?: string;
+      scope_tokens?: string[];
+      mode?: "report_only" | "pilot" | "strict";
+      scoped_analysis_evidence_id?: string;
+      claims_review_evidence_id?: string;
+    }) => {
+      let markdown_text = args.markdown_text;
+      let yaml_text = args.yaml_text;
+      if (args.matrix_path && !markdown_text && !yaml_text) {
+        const { readFile } = await import("node:fs/promises");
+        const raw = await readFile(args.matrix_path, "utf8");
+        if (args.matrix_path.endsWith(".yaml") || args.matrix_path.endsWith(".yml")) {
+          yaml_text = raw;
+        } else {
+          markdown_text = raw;
+        }
+      }
+      return textContent(
+        JSON.stringify(
+          brownfieldIntentEvidenceValidate({
+            markdown_text,
+            yaml_text,
+            matrix_path: args.matrix_path,
+            baseline_revision: args.baseline_revision,
+            scope_tokens: args.scope_tokens,
+            mode: args.mode,
+            scoped_analysis_evidence_id: args.scoped_analysis_evidence_id,
+            claims_review_evidence_id: args.claims_review_evidence_id,
+          }),
+          null,
+          2,
+        ),
       );
     },
   },

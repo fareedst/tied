@@ -154,6 +154,42 @@ Active
 
 ---
 
+## `[PROC-BROWNFIELD_INTENT_ELEVATION]` Brownfield intent elevation
+
+### Purpose
+Reverse-document legacy code into an **evidence-to-intent matrix**, adjudicate dispositions (`observed`, `approved`, `unresolved`, `rejected`), and machine-validate closure **without** treating observed behavior as approved REQ/ARCH intent or mutating project YAML from the validator path.
+
+### Scope
+TIED client brownfield adoption and store features that ship `brownfield_intent_evidence_validate`. Distinct from **Track C** (IMPL sidecars only) and from **Phase 2** structural source-graph comprehension (evidence only).
+
+### Token references
+- `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]`, `[ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL]`, `[IMPL-TIED_BROWNFIELD_VALIDATION]`
+- `[PROC-AGENT_REQ_CHECKLIST]` brownfield slugs (`brownfield-baseline-lock` … `brownfield-closure`)
+- `[REQ-TIED_FIDELITY_RESEARCH]`, `[REQ-TIED_CLAIMS_EVIDENCE_REVIEW]` — optional evidence inputs
+
+### Status
+Active
+
+### Checklist entry points
+| Audience | Start | Brownfield slugs |
+| --- | --- | --- |
+| **Store feature build** (ship validator) | `session-bootstrap` → `author-requirement` | Mark `brownfield-*` **not_applicable** until the tool exists |
+| **Client legacy adoption** | `brownfield-baseline-lock` when Tracker `brownfield_intent_elevation.mode` is `pilot` or `strict` | Full sub-flow through `brownfield-closure`, then `author-requirement` for REQ enrichment from **approved** rows |
+
+### Modes (`brownfield_intent_elevation.mode`)
+- **`report_only` (default)** — run validator when a matrix is present; record receipt; non-blocking at verification
+- **`pilot` / `strict`** — execute the six-step brownfield sub-flow **before** `author-requirement`; `strict` may set blocking when matrix validation fails (sponsor-gated costly choice)
+
+### Artifacts and tools
+- Working matrix: `tied-project/working/{REQ-TOKEN}/evidence/intent-elevation-matrix.md` (template under `tied-bundle/templates/`)
+- Validation: `brownfield_intent_evidence_validate` (report-only default)
+- Promotion: human-gated checklist steps `req-intent-promotion`, `arch-boundary-promotion` only
+
+### Narrative spec
+See [brownfield-intent-elevation.md](brownfield-intent-elevation.md).
+
+---
+
 ## `[PROC-QUALITY_ASSURANCE]` Risk-triggered quality assurance
 
 ### Purpose

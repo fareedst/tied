@@ -1,0 +1,53 @@
+schema_version: checklist-tracker.v1
+name: bfie-refine-plan-pre-implementation-gate
+request_token: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
+depth_tier: minimal
+gate_policy: advisory
+brownfield_intent_elevation:
+  mode: report_only
+execution_evidence:
+  request: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+state_history: []
+steps:
+  - slug: session-bootstrap
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: translate-sponsor-intent
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: change-definition
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: impact-discovery
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: risk-assessment
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: test-strategy
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: sub-adversarial-inquiry-pass
+    kind: sub_procedure
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: "Phase 1 report-only validator; minimal depth; counterexamples recorded in CITDP."

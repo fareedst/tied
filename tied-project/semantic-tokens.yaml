@@ -783,6 +783,16 @@ ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
+  cross_references:
+    - "IMPL-TIED_BROWNFIELD_VALIDATION"
+    - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+  description: "Matrix dispositions and proof boundaries; observed vs approved authority."
+  detail_file: "architecture-decisions/ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL.yaml"
+  name: "Brownfield Evidence Model"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -2093,6 +2103,16 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_BROWNFIELD_VALIDATION:
+  cross_references:
+    - "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL"
+    - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+  description: "brownfield_intent_evidence_validate MCP and normalize/validate module."
+  detail_file: "implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION.yaml"
+  name: "Brownfield Intent Evidence Validation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -2442,6 +2462,16 @@ PROC-AGENT_REQ_CHECKLIST:
     reason: "Align with templates; source_index processes.md [PROC-AGENT_REQ_CHECKLIST]"
     registered: "2026-03-24T00:00:00.000Z"
   name: "Agent requirement implementation checklist"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-BROWNFIELD_INTENT_ELEVATION:
+  cross_references:
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+  description: "Checklist choreography for baseline lock through closure and report-only validation modes."
+  detail_file: "null"
+  name: "Brownfield Intent Elevation Process"
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
@@ -3591,6 +3621,18 @@ REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
     last_updated: "2026-08-25"
     registered: "2026-08-25"
   name: "Bootstrap inherited detail-file integrity"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL"
+    - "IMPL-TIED_BROWNFIELD_VALIDATION"
+    - "PROC-BROWNFIELD_INTENT_ELEVATION"
+  description: "Evidence matrix to adjudicated intent with report-only validation."
+  detail_file: "requirements/REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+  name: "Brownfield Intent Elevation (Phase 1)"
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"

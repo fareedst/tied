@@ -2237,6 +2237,13 @@ REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
       - "ARCH-TIED_STRUCTURE"
     implementation:
       - "IMPL-TIED_FILES"
+REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
+  category: "Functional"
+  description: "Close the evidence-to-intent matrix loop with report-only machine validation and checklist integration without conflating observed code with approved REQ/ARCH intent."
+  detail_file: "requirements/REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+  name: "Brownfield Intent Elevation (Phase 1)"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   category: "Tooling"
   cross_references:

@@ -1,0 +1,99 @@
+schema_version: checklist-tracker.v1
+name: bfie-build-plan-verification-gate
+request_token: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
+depth_tier: minimal
+gate_policy: advisory
+brownfield_intent_elevation:
+  mode: report_only
+  entry_points:
+    store_feature_build: session-bootstrap → author-requirement (New requirement); brownfield-* slugs not_applicable until validator exists
+    client_legacy_adoption: brownfield-baseline-lock … brownfield-closure when mode is pilot or strict, then author-requirement
+execution_evidence:
+  request: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
+  envelope_path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/request-evidence-envelope.v1.json
+  completed:
+    - session-bootstrap
+    - author-requirement
+    - author-architecture
+    - persist-implementation-records
+    - unit-test-red
+    - unit-test-green
+    - composition-integration
+    - risk-assessment
+    - verification-gate
+state_history: []
+steps:
+  - slug: session-bootstrap
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/brownfield-intent-evidence/intent-elevation.ts
+  - slug: author-requirement
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/requirements/REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: author-architecture
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/architecture-decisions/ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL.yaml
+  - slug: persist-implementation-records
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION.yaml
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION-pseudocode.md
+  - slug: unit-test-red
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/brownfield-intent-evidence/intent-elevation.test.ts
+  - slug: unit-test-green
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/brownfield-intent-evidence/intent-elevation.test.ts
+  - slug: composition-integration
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/brownfield-intent-evidence/brownfield-intent-evidence-composition.test.ts
+  - slug: brownfield-baseline-lock
+    kind: main
+    disposition: not_applicable
+    rationale: Store feature build; validator shipped before client adoption sub-flow.
+  - slug: brownfield-closure
+    kind: main
+    disposition: not_applicable
+    rationale: report_only mode for this REQ build tranche.
+  - slug: risk-assessment
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+  - slug: sub-adversarial-inquiry-pass
+    kind: sub_procedure
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Phase 1 report-only validator; minimal depth per CITDP.
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/not-applicable-receipt.v1.json
+  - slug: verification-gate
+    kind: main
+    disposition: completed
+    evidence_refs:
+      - kind: gate_receipt
+        path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/gates/verification-2026-10-13T14-48-13-146Z.json
+      - kind: manifest_ref
+        path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/verification-evidence-manifest.v1.json

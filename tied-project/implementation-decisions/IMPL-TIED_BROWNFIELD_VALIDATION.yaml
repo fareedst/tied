@@ -1,0 +1,21 @@
+IMPL-TIED_BROWNFIELD_VALIDATION:
+  code_locations:
+    files:
+      - description: "brownfield_intent_evidence_validate registration"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Normalize, validate, and MCP receipt builder"
+        path: "mcp-server/src/brownfield-intent-evidence/intent-elevation.ts"
+    functions:
+      - description: "MCP handler entry"
+        file: "mcp-server/src/brownfield-intent-evidence/intent-elevation.ts"
+        name: "brownfieldIntentEvidenceValidate"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+  description: "Report-only validator for intent-elevation.v1 artifacts."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION-pseudocode.md"
+  name: "Brownfield Intent Evidence Validation"
+  status: "Active"

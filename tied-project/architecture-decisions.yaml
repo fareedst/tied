@@ -1865,6 +1865,11 @@ ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   detail_file: "architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml"
   name: "Cross-platform TIED bootstrap engine"
   status: "Active"
+ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
+  description: "Observed vs approved dispositions, proof boundaries, and matrix as evidence artifact (not REQ authority)."
+  detail_file: "architecture-decisions/ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL.yaml"
+  name: "Brownfield Evidence Model"
+  status: "Active"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"

@@ -47,6 +47,15 @@ Each matrix row carries:
 
 ---
 
+## Checklist entry points
+
+| Audience | Start | Brownfield slugs |
+| --- | --- | --- |
+| **Store feature build** (this repo ships the validator) | `session-bootstrap` → `author-requirement` | Mark `brownfield-*` **not_applicable** until the MCP tool exists |
+| **Client legacy adoption** | `brownfield-baseline-lock` when Tracker `brownfield_intent_elevation.mode` is `pilot` or `strict` | Full sub-flow below, then `author-requirement` to enrich REQ from **approved** rows |
+
+Executable checklist YAML lists brownfield steps **before** `author-requirement` in file order—that ordering targets **adoption**, not the store’s first-time token authoring path.
+
 ## Checklist sub-flow (before project YAML mutation)
 
 When `brownfield_intent_elevation.mode` is `pilot` or `strict` (see per-request Tracker metadata), run **before** `author-requirement`:

@@ -42,6 +42,9 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 | **methodology surface change class** | surface change type, change class | CITDP field `change_definition.methodology_surface_change_class`: `checklist_step`, `prompt_type_workflow`, `gate_policy`, `assurance_profile`, or `none`; absent treated as legacy `none` ([REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE](../requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml)) |
 | **pre-implementation experiment gate** | methodology surface experiment gate, surface gate | Fail-closed `pre_implementation` checklist hook requiring W1 link + hypothesis/baseline when class is non-`none`; distinct from W2 verification pairing ([REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE](../requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml)) |
 | **composition evidence** | E2E covers wiring | UI-free composition test proving a binding before integration |
+| **intent elevation** | reverse REQ from code (alone) | Sponsor-adjudicated promotion from **evidence matrix** to REQ/ARCH; distinct from Track C sidecars · [PROC-BROWNFIELD_INTENT_ELEVATION](../../tied-bundle/docs/processes.md) |
+| **evidence matrix (intent elevation)** | intent table (alone) | Rows with dispositions and **proof boundaries**; validated by `brownfield_intent_evidence_validate` (report-only default) |
+| **report-only validation** | soft validate | Validator emits diagnostics + receipt; does not write project TIED indexes or promote rows |
 | **SHAPE-003** | — | Schema check: Active procedure blocks declare PRE, POST, EFFECTS |
 | **SHAPE-004** | — | Schema check: FAILURE_MODES closed set when errors are possible |
 | **SHAPE-005** | — | Schema check: DATA_TRANSITION when mutable DATA or State effects |

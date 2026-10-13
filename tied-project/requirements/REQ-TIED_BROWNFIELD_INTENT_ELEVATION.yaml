@@ -1,0 +1,39 @@
+REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
+  category: "Functional"
+  description: "Phase 1 brownfield intent elevation: matrix dispositions, report-only validation, checklist modes."
+  name: "Brownfield Intent Elevation (Phase 1)"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Explicit proof boundaries per row."
+      - "Markdown/YAML parity with validation receipts."
+    problems_solved:
+      - "No machine-checkable matrix closure before REQ enrichment."
+      - "Observed behavior mistaken for approved requirements."
+    why: "Legacy adoption needs adjudicated promotion from evidence without Track C sidecars becoming product intent."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to:
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "SC-BFIE-CHECKLIST — brownfield_intent_elevation.mode branches pilot/strict vs report_only."
+    - criterion: "SC-BFIE-CONTRACT — intent-elevation.v1 Markdown/YAML parity documented."
+    - criterion: "SC-BFIE-ENROLL — REQ/ARCH/IMPL/PROC enrolled in tied-project."
+    - criterion: "SC-BFIE-TESTS — unit and composition tests cover normalize, promotion rules, and no-mutation."
+    - criterion: "SC-BFIE-VALIDATE — brownfield_intent_evidence_validate is report-only and emits receipts."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL"
+    implementation:
+      - "IMPL-TIED_BROWNFIELD_VALIDATION"
+    tests:
+      - "mcp-server/src/brownfield-intent-evidence/*.test.ts"
+  validation_criteria:
+    - coverage: "MCP handler registration and no YAML mutation."
+      method: "Composition tests"
+    - coverage: "Normalize, disposition, baseline, promotion rules."
+      method: "Unit tests"

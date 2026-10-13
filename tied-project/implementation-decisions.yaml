@@ -2133,6 +2133,11 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
   name: "Adversarial inquiry checklist integration and evidence artifacts"
   status: "Active"
+IMPL-TIED_BROWNFIELD_VALIDATION:
+  description: "Normalize intent-elevation matrices and expose brownfield_intent_evidence_validate MCP tool."
+  detail_file: "implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION.yaml"
+  name: "Brownfield Intent Evidence Validation"
+  status: "Active"
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"

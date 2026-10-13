@@ -1,0 +1,23 @@
+ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_BROWNFIELD_VALIDATION"
+    requirements:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+  decisions:
+    - id: "markdown-yaml-parity"
+      rationale: "Normalize hash stable across representations; alias keys promotion_target and REQ/ARCH target."
+      status: "accepted"
+      title: "Markdown table columns equivalent to intent-elevation.v1 YAML keys"
+    - id: "observed-vs-approved"
+      rationale: "Only approved disposition rows may carry promotion targets; validator enforces."
+      status: "accepted"
+      title: "Observed code is not approved intent"
+    - id: "report-only-default"
+      rationale: "Promotion remains human-gated checklist steps req-intent-promotion and arch-boundary-promotion."
+      status: "accepted"
+      title: "Validation receipts do not mutate project YAML"
+  description: "Evidence matrix model, disposition discipline, and authority boundaries for brownfield intent elevation."
+  name: "Brownfield Evidence Model"
+  status: "Active"
