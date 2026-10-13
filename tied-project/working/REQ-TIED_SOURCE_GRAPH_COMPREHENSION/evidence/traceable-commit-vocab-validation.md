@@ -2,7 +2,7 @@
 
 **Request:** `REQ-TIED_SOURCE_GRAPH_COMPREHENSION`  
 **Date:** 2026-10-13  
-**Commit (slice 1):** **`5a47378f`** · **Commit (index path LEAP):** see handoff after traceable-commit
+**Commit (slice 1):** **`5a47378f`** · **Commit (index path LEAP):** **`fd55b4d6`** (2026-10-13)
 
 ## Vocab touchpoint 3 (VALIDATE) — index path LEAP pass
 

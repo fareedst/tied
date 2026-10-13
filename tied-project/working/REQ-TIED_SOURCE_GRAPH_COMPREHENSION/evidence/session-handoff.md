@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-13 (full-tree **plan-close-out** — index path LEAP)  
 **Depth:** minimal · **gate_policy:** advisory  
-**Phase:** slice 1 **close_out complete** (refreshed) · **traceable-commit:** **pending** (prior `5a47378f`) · **REQ status:** **Implemented**
+**Phase:** slice 1 **close_out complete** (refreshed) · **traceable-commit:** **`fd55b4d6`** (index path LEAP; prior slice `5a47378f`) · **REQ status:** **Implemented**
 
 **Program:** Brownfield comprehension Phase 2 — parent [`tied_comprehension_phases_79fbed92.plan.md`](file:///Users/fareed/.cursor/plans/tied_comprehension_phases_79fbed92.plan.md)  
 **Working PLAN:** [`../PLAN.md`](../PLAN.md)  

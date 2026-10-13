@@ -16,12 +16,9 @@ BFIE close_out replay: **pass** (dogfood evidence envelope sync; prior traceable
 
 **N/A** — [`evidence/git-hygiene-receipt-2026-10-13.md`](evidence/git-hygiene-receipt-2026-10-13.md)
 
-## traceable-commit (sponsor)
+## traceable-commit
 
-1. Review [`evidence/proposed-commit-message.txt`](evidence/proposed-commit-message.txt)
-2. Stage per [`evidence/git-hygiene-receipt-2026-10-13.md`](evidence/git-hygiene-receipt-2026-10-13.md) — **exclude** gitignored regenerable envelopes
-3. Touchpoint 3 vocab VALIDATE on staged names
-4. Commit; update handoff **traceable-commit** hash and [`traceable-commit-vocab-validation.md`](evidence/traceable-commit-vocab-validation.md)
+**Done:** **`fd55b4d6`** — vocab VALIDATE in [`traceable-commit-vocab-validation.md`](evidence/traceable-commit-vocab-validation.md).
 
 **Optional split:** (1) SGC index path + fixture, (2) BFIE dogfood + hygiene pins only.
 
