@@ -12,7 +12,7 @@
 
 **Status:** Approved for this repository (sponsor 2026-09-27). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
 
-**See also:** [`routing.md`](routing.md) (row **5i**) · [`tied-methodology.md`](tied-methodology.md) · [`quality-assurance.md`](quality-assurance.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`residuality.md`](residuality.md) (contrast) · [`../../docs/bbce-and-tied-excerpt.md`](../../docs/bbce-and-tied-excerpt.md) · full synthesis (gitignored locally) [`../../docs/comparisons/tied-vs-behavior-bounded-change-engineering.md`](../../docs/comparisons/tied-vs-behavior-bounded-change-engineering.md) · source [`../../docs/methodologies/Behavior-Bounded-Change-Engineering-BBCE.md`](../../docs/methodologies/Behavior-Bounded-Change-Engineering-BBCE.md)
+**See also:** [`routing.md`](routing.md) (row **5i**) · [`tied-methodology.md`](tied-methodology.md) · [`quality-assurance.md`](quality-assurance.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`residuality.md`](residuality.md) (contrast) · [`../../docs/bbce-and-tied-excerpt.md`](../../docs/bbce-and-tied-excerpt.md) (tracked excerpt; optional local full synthesis under `docs/comparisons/` per `.gitignore`) · source [`../../docs/methodologies/Behavior-Bounded-Change-Engineering-BBCE.md`](../../docs/methodologies/Behavior-Bounded-Change-Engineering-BBCE.md)
 
 ---
 

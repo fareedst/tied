@@ -1,21 +1,23 @@
 # Session handoff — REQ-TIED_BROWNFIELD_INTENT_ELEVATION
 
-**Updated:** 2026-10-13 (after **plan-close-out** + **traceable-commit** prep)  
+**Updated:** 2026-10-13 (after **build-plan** optional dogfood on linked comprehension plan)  
 **Depth:** minimal · **gate_policy:** advisory  
 **Phase:** **close_out complete** · **traceable-commit:** **`a2be105e`**
 
-**Linked plan:** [`tied_comprehension_phases_79fbed92.plan.md`](file:///Users/fareed/.cursor/plans/tied_comprehension_phases_79fbed92.plan.md)
+**Linked plan:** [`tied_comprehension_phases_79fbed92.plan.md`](file:///Users/fareed/.cursor/plans/tied_comprehension_phases_79fbed92.plan.md)  
+**Refine evidence:** [`refine-plan-2026-10-13-pass2.md`](refine-plan-2026-10-13-pass2.md)  
+**Dogfood evidence:** [`build-plan-dogfood-2026-10-13.md`](build-plan-dogfood-2026-10-13.md) · matrix [`intent-elevation-matrix.md`](intent-elevation-matrix.md) · receipt [`dogfood-validation-receipt.json`](dogfood-validation-receipt.json)
 
 ## What this change is
 
 Phase 1 closes the **brownfield intent-elevation** loop: evidence matrix (Markdown/YAML) → dispositions → **report-only** `brownfield_intent_evidence_validate` → checklist mode branching—without conflating **observed** code with **approved** REQ/ARCH intent.
 
-**Phase 2** (Graft-like source graph) remains **deferred** (separate enrollment).
+**Phase 2** slice 1 **built** under separate REQ — see [`REQ-TIED_SOURCE_GRAPH_COMPREHENSION`](../../REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/session-handoff.md).
 
 ## Resume here
 
-1. Optional dogfood: author `evidence/intent-elevation-matrix.md` and invoke MCP validator.
-2. **Phase 2** source-graph enrollment (separate REQ tranche) when sponsor prioritizes.
+1. **traceable-commit:** co-stage dogfood evidence with SGC index-path LEAP — see [`REQ-TIED_SOURCE_GRAPH_COMPREHENSION/plan-close-out-handoff.md`](../../REQ-TIED_SOURCE_GRAPH_COMPREHENSION/plan-close-out-handoff.md) and SGC [`evidence/proposed-commit-message.txt`](../../REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/proposed-commit-message.txt).
+2. Phase 2 tranche 2 (search/skeleton/blast) — new CITDP cycle when enrolled.
 
 ## TIED stack status
 

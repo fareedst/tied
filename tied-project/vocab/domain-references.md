@@ -8,7 +8,7 @@
 
 **Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md).
 
-**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../../tied-bundle/docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`quality-assurance.md`](quality-assurance.md) · [`fidelity-research.md`](fidelity-research.md) · [`residuality.md`](residuality.md) · [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) · [`prompt-composer.md`](prompt-composer.md) · [`feature-orchestration.md`](feature-orchestration.md) · [`decision-copilot.md`](decision-copilot.md) · [`config-discovery.md`](config-discovery.md)
+**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../../tied-bundle/docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`project-operations-mcp.md`](project-operations-mcp.md) · [`operating-environment-externalities.md`](operating-environment-externalities.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`quality-assurance.md`](quality-assurance.md) · [`fidelity-research.md`](fidelity-research.md) · [`residuality.md`](residuality.md) · [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) · [`prompt-composer.md`](prompt-composer.md) · [`feature-orchestration.md`](feature-orchestration.md) · [`decision-copilot.md`](decision-copilot.md) · [`config-discovery.md`](config-discovery.md)
 
 ---
 
@@ -27,6 +27,8 @@
 | 0 | [`domain-references.md`](domain-references.md) | This full catalog (on-demand) |
 | 1 | [`tied-methodology.md`](tied-methodology.md) | TIED layout, semantic tokens, registry atoms and distributed facets, traceability graph, module validation, bootstrap, methodology vs project YAML, PROC-* process names |
 | 2 | [`tied-yaml-mcp.md`](tied-yaml-mcp.md) | TIED YAML MCP server, `tied-cli`, bundled skill, validation/verify/cycles/backlog/scoped analysis |
+| 2c | [`project-operations-mcp.md`](project-operations-mcp.md) | Project lint, git hygiene, sponsor questions MCP tools; `/xlate` and `/unblock` skills |
+| 2e | [`operating-environment-externalities.md`](operating-environment-externalities.md) | OEE: external workflows, compatibility ledger, operating-environment dependency management |
 | 2b | [`feedback-to-tied.md`](feedback-to-tied.md) | Upstream feedback artifact (`feedback.yaml`) and MCP export |
 | 3 | [`leap-proposal-queue.md`](leap-proposal-queue.md) | Non-canonical LEAP proposals, audit, diff/session import |
 | 4 | [`agentstream.md`](agentstream.md) | **`@tied/agentstream`** (TypeScript default, Phase **4d**): pipeline, checklist, executor, MCP preflight; legacy Go tree removed |

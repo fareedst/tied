@@ -39,7 +39,7 @@ CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION:
       - "read-only-tied-yaml"
       - "regenerable-local-index"
   impact_analysis:
-    modules_or_boundaries: "New mcp-server/src/source-graph/* module; tools/index.ts registration; optional tied-project/vocab source-graph terms; cross-link brownfield matrix source_type code_graph; gitignored .tied/source-graph cache layout per ARCH"
+    modules_or_boundaries: "New mcp-server/src/source-graph/* module; tools/index.ts registration; optional tied-project/vocab source-graph terms; cross-link brownfield matrix source_type code_graph; regenerable index under tied-bundle/reports/source-graph per ARCH"
     tied_tokens_new:
       - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
       - "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL"

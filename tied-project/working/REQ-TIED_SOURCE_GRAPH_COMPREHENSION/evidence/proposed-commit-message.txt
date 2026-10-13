@@ -1,0 +1,17 @@
+fix(source-graph): default index under tied-bundle/reports; close-out evidence
+
+Move regenerable source-graph-index.v1 default from .tied/ to
+tied-bundle/reports/source-graph/ (ARCH regenerable-index, IMPL refresh).
+Update mini-repo fixture golden, CITDP/PLAN, and BFIE matrix row 4 (observed).
+
+REQ-TIED_SOURCE_GRAPH_COMPREHENSION
+ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL
+IMPL-TIED_SOURCE_GRAPH_REFRESH
+
+Co-staged: BFIE optional dogfood evidence, SGC working handoff/gates,
+close-out hygiene pins (adversarial fixture envelopes, checklist fixture
+stdd_revision, JEV context-pruning benchmark, envelope-gap-report refresh).
+
+Replay: verification run_id=sgc-verification-2026-10-13-index-path;
+close_out run_id=sgc-closeout-2026-10-13 (merged_decision.allowed=true,
+envelope blocking_gap_count=0). Methodology tied-bundle quote churn reverted.

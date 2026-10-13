@@ -1,5 +1,5 @@
 IMPL-TIED_SOURCE_GRAPH_REFRESH:
-  implementation_approach: "TypeScript compiler API scan of TS/JS files; SHA-256 content hash; JSON index under .tied/source-graph/."
+  implementation_approach: "TypeScript compiler API scan of TS/JS files; SHA-256 content hash; JSON index under tied-bundle/reports/source-graph/."
   proof_boundaries:
     - "No tied-project YAML writes"
     - "Static analysis only"

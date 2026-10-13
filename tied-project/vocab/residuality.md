@@ -6,7 +6,7 @@
 
 **Status:** Promoted glossary (W5 build-plan) — VALIDATE at commit per `[PROC-VOCABULARY_INDEX]`. Machine validation: `[REQ-RESIDUALITY_STRESSOR_RECORD_VALIDATION]` / `stressor_residue_record_validate`.
 
-**See also:** [`routing.md`](routing.md) · [`quality-assurance.md`](quality-assurance.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`fidelity-research.md`](fidelity-research.md) · [`../../docs/residuality-theory-and-tied-excerpt.md`](../../docs/residuality-theory-and-tied-excerpt.md) · full synthesis (may be gitignored locally) [`../../docs/comparisons/residuality-theory-and-tied.md`](../../docs/comparisons/residuality-theory-and-tied.md)
+**See also:** [`routing.md`](routing.md) · [`quality-assurance.md`](quality-assurance.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`fidelity-research.md`](fidelity-research.md) · [`../../docs/residuality-theory-and-tied-excerpt.md`](../../docs/residuality-theory-and-tied-excerpt.md) (tracked excerpt; optional local full synthesis under `docs/comparisons/` per `.gitignore`)
 
 **Pilot evidence:** `working/PLAN-TIED-RESIDUALITY-ANALYSIS/pilot/` (25 stressors, classification ledger, W4 tests).
 

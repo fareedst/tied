@@ -4,7 +4,7 @@ Grammar-Version: v2
 
 ## REFRESH_SOURCE_GRAPH_INDEX
 
-- [IMPL-TIED_SOURCE_GRAPH_REFRESH] [ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL] [REQ-TIED_SOURCE_GRAPH_COMPREHENSION] Scan TS/JS files, build symbols/edges, persist source-graph-index.v1 JSON under .tied/source-graph/.
+- [IMPL-TIED_SOURCE_GRAPH_REFRESH] [ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL] [REQ-TIED_SOURCE_GRAPH_COMPREHENSION] Scan TS/JS files, build symbols/edges, persist source-graph-index.v1 JSON under tied-bundle/reports/source-graph/.
 - Contract:
   - INPUT: repo_root, optional index_rel_path, optional glob
   - PRE: repo_root exists and is readable

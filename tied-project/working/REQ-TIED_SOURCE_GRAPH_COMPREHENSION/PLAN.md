@@ -29,7 +29,7 @@ Phase 1 entry criteria are met: verification manifest and dogfood validator rece
 | --- | --- |
 | **source graph** | Deterministic tree-sitter symbol index + edges (refresh, map, trace, freshness) |
 | **code_graph** | Matrix `source_type` for rows citing graph MCP receipts—always **observed** until sponsor **approved** |
-| **regenerable index** | Gitignored `.tied/source-graph/` (or working-local path per ARCH)—not canonical TIED YAML |
+| **regenerable index** | Default under `tied-bundle/reports/source-graph/` per ARCH—local cache, not canonical TIED YAML |
 | **slice 1** | refresh + map + symbol traversal + freshness only |
 
 **Reversible defaults (C4–C5 recorded in CITDP):** TS/JS first; freshness diagnostics **advisory** at verification.

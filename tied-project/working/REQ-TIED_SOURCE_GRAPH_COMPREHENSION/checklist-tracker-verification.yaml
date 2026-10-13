@@ -23,68 +23,80 @@ steps:
   - slug: session-bootstrap
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/source-graph/index-builder.ts
+    evidence_refs: &ref_0
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/session-bootstrap-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
   - slug: author-requirement
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: tied-project/requirements/REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
+    evidence_refs: &ref_1
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-requirement-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
   - slug: author-architecture
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: tied-project/architecture-decisions/ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL.yaml
+    evidence_refs: &ref_2
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-architecture-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
   - slug: persist-implementation-records
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_SOURCE_GRAPH_REFRESH.yaml
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_SOURCE_GRAPH_MAP.yaml
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_SOURCE_GRAPH_TRAVERSE.yaml
+    evidence_refs: &ref_3
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/persist-implementation-records-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_3
   - slug: unit-test-red
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/source-graph/source-graph.test.ts
+    evidence_refs: &ref_4
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-red-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_4
   - slug: unit-test-green
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/source-graph/source-graph.test.ts
+    evidence_refs: &ref_5
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-green-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_5
   - slug: composition-integration
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/source-graph/source-graph-composition.test.ts
+    evidence_refs: &ref_6
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/composition-integration-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_6
   - slug: risk-assessment
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
+    evidence_refs: &ref_7
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/risk-assessment-evidence.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_7
   - slug: sub-adversarial-inquiry-pass
     kind: sub_procedure
     disposition: not_applicable
     policy: minimal-depth-no-inquiry
-    rationale: "Slice 1 local read-only graph indexing; minimal depth per CITDP."
+    rationale: Slice 1 local read-only graph indexing; minimal depth per CITDP.
     evidence_refs:
       - kind: file_path
         path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/not-applicable-receipt.v1.json
   - slug: verification-gate
     kind: main
     disposition: completed
-    evidence_refs:
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/gates/verification-2026-10-13T16-02-28-811Z.json
-      - kind: manifest_ref
-        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json
+    evidence_refs: &ref_8
+      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json
+    tracking:
+      status: completed
+      evidence_refs: *ref_8

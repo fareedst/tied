@@ -1,0 +1,50 @@
+{
+  "schema_version": "brownfield-intent-evidence-receipt.v1",
+  "ok": true,
+  "blocking": false,
+  "mode": "report_only",
+  "proof_boundary": "Structural matrix validation only; does not prove runtime behavior or promote rows to project YAML.",
+  "baseline_revision": "6f3accc86b46882c86c4cedc8364ac32b824ae5f",
+  "matrix_normalize_hash": "3ec0d30e1450b20bd5f4afe3ebbc89f639f2b7a2388f59a9079fbb12b83ecd6e",
+  "diagnostics": [],
+  "normalized": {
+    "schema_version": "intent-elevation.v1",
+    "baseline_revision": "6f3accc86b46882c86c4cedc8364ac32b824ae5f",
+    "scope_tokens": [
+      "REQ-TIED_BROWNFIELD_INTENT_ELEVATION",
+      "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL",
+      "IMPL-TIED_BROWNFIELD_VALIDATION"
+    ],
+    "rows": [
+      {
+        "row_id": "1",
+        "claim": "`brownfield_intent_evidence_validate` MCP tool is registered and returns a structured receipt on valid input",
+        "source_type": "test",
+        "location": "mcp-server/src/brownfield-intent-evidence/brownfield-intent-evidence-composition.test.ts",
+        "disposition": "observed",
+        "confidence": "high",
+        "proof_boundary": "Does not prove production MCP wiring in every IDE host"
+      },
+      {
+        "row_id": "2",
+        "claim": "Validate path does not mutate `tied-project/requirements.yaml` mtime",
+        "source_type": "test",
+        "location": "mcp-server/src/brownfield-intent-evidence/brownfield-intent-evidence-composition.test.ts",
+        "disposition": "observed",
+        "confidence": "high",
+        "proof_boundary": "Does not prove immutability of all project YAML files or detail dirs"
+      },
+      {
+        "row_id": "3",
+        "claim": "Markdown matrix tables normalize to the same internal model as intent-elevation.v1 YAML for equivalent rows",
+        "source_type": "code",
+        "location": "mcp-server/src/brownfield-intent-evidence",
+        "disposition": "observed",
+        "confidence": "medium",
+        "proof_boundary": "Does not prove parity for every Markdown authoring edge case"
+      }
+    ]
+  },
+  "validator_version": "1.0.0",
+  "evidence_refs": {}
+}

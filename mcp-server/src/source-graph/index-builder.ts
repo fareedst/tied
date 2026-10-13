@@ -20,7 +20,7 @@ import {
   type SourceGraphTraceView,
 } from "./types.js";
 
-const DEFAULT_INDEX_REL = ".tied/source-graph/source-graph-index.v1.json";
+const DEFAULT_INDEX_REL = "tied-bundle/reports/source-graph/source-graph-index.v1.json";
 
 function hashContent(parts: string[]): string {
   return createHash("sha256").update(parts.join("\0")).digest("hex");
@@ -123,7 +123,7 @@ export async function refreshSourceGraphIndex(input: {
   const files = await fg(pattern, {
     cwd: repoRoot,
     absolute: true,
-    ignore: ["**/node_modules/**", "**/dist/**", "**/.tied/**"],
+    ignore: ["**/node_modules/**", "**/dist/**", "**/tied-bundle/reports/source-graph/**"],
   });
 
   const relFiles = files.map((f) => path.relative(repoRoot, f).replace(/\\/g, "/")).sort();
@@ -249,7 +249,7 @@ export async function checkSourceGraphFreshness(input: {
   const files = await fg(pattern, {
     cwd: repoRoot,
     absolute: true,
-    ignore: ["**/node_modules/**", "**/dist/**", "**/.tied/**"],
+    ignore: ["**/node_modules/**", "**/dist/**", "**/tied-bundle/reports/source-graph/**"],
   });
   const contentParts: string[] = [];
   for (const abs of files.sort()) {

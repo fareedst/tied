@@ -1,5 +1,6 @@
 schema_version: checklist-tracker.v1
 name: bfie-refine-plan-pre-implementation-gate
+refine_pass: "2026-10-13-pass2"
 request_token: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
 depth_tier: minimal
 gate_policy: advisory
@@ -46,6 +47,7 @@ steps:
     disposition: completed
     evidence_refs:
       - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
+      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/refine-plan-2026-10-13-pass2.md
   - slug: sub-adversarial-inquiry-pass
     kind: sub_procedure
     disposition: not_applicable

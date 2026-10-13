@@ -2250,7 +2250,7 @@ ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL:
     - id: "regenerable-index"
       rationale: "Local cache is not canonical TIED YAML."
       status: "accepted"
-      title: "Index lives under .tied/source-graph"
+      title: "Index lives under tied-bundle/reports/source-graph"
     - id: "ts-js-slice1"
       rationale: "Compiler API static extract; tree-sitter expansion deferred with proof boundary."
       status: "accepted"
