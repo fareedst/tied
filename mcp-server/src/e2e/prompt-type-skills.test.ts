@@ -9,6 +9,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import yaml from "js-yaml";
 
 const LEAF_SKILLS = [
   "plan-new-feature",
@@ -50,7 +51,34 @@ const SHARED_REFERENCES = [
 
 const repoRoot = path.resolve(process.cwd(), "..");
 
+function extractYamlFrontMatter(text: string): string {
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+  assert.ok(match, "SKILL.md must begin with YAML frontmatter");
+  return match[1];
+}
+
+function assertFrontMatterParses(root: string): void {
+  // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: strict YAML parse of frontmatter so Cursor and linked stubs accept every skill.
+  for (const skillDir of SKILL_DIRS) {
+    const skillPath = path.join(root, skillDir, "SKILL.md");
+    const content = fs.readFileSync(skillPath, "utf8");
+    const front = extractYamlFrontMatter(content);
+    let parsed: unknown;
+    try {
+      parsed = yaml.load(front);
+    } catch (error) {
+      assert.fail(`${skillDir}/SKILL.md frontmatter is not valid YAML: ${String(error)}`);
+    }
+    assert.ok(parsed && typeof parsed === "object" && !Array.isArray(parsed), `${skillDir} frontmatter must be a mapping`);
+    const record = parsed as Record<string, unknown>;
+    assert.equal(record.name, skillDir, `${skillDir} frontmatter name must match directory`);
+    assert.equal(typeof record.description, "string", `${skillDir} description must be a YAML string`);
+    assert.equal(record["disable-model-invocation"], true, `${skillDir} must set disable-model-invocation: true`);
+  }
+}
+
 function assertSkillContract(root: string): void {
+  assertFrontMatterParses(root);
   // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: verify exact names, explicit-only frontmatter, direct shared-link resolution, and bounded file size before distribution.
   for (const skillDir of SKILL_DIRS) {
     const skillPath = path.join(root, skillDir, "SKILL.md");
@@ -122,6 +150,20 @@ describe("prompt-type skill bundle", () => {
           "utf8"
         )
       );
+    } finally {
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    }
+  });
+
+  it("linked install stubs have parseable frontmatter [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-prompt-skills-linked-"));
+    const copyScript = path.join(repoRoot, "tied-install.sh");
+    try {
+      execFileSync("bash", [copyScript, tempDir], { cwd: repoRoot, stdio: "pipe" });
+      const clientSkillRoot = path.join(tempDir, ".cursor", "skills");
+      assertSkillContract(clientSkillRoot);
+      const stub = fs.readFileSync(path.join(clientSkillRoot, "debug", "SKILL.md"), "utf8");
+      assert.match(stub, /Read and follow the canonical skill at:/);
     } finally {
       fs.rmSync(tempDir, { recursive: true, force: true });
     }

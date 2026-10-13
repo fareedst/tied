@@ -1,0 +1,126 @@
+{
+  "phase": "close_out",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "inquiry_waiver",
+    "run_id": "pt-yaml-fm-closeout-2026-10-13"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+      "findings": [
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/close_out-2026-09-10T16-21-50-045Z.json",
+            "stored_tracker_hash": "sha256:1e1fb0705820fe4de4c413643d1184ef3c8e7e9605ff61b8c2dfd307c8d96254",
+            "current_tracker_hash": "sha256:bd0f69cfe2348db9eef80597e02ac56af572c0f9612b2f2635a5132d60a69c9d",
+            "stored_citdp_hash": "sha256:7160e6b2e0528392bd72227b9cb367c2acd98bb8c996dddc502dc0d74d12ea2e",
+            "current_citdp_hash": "sha256:67489492cba2407444b400c4b4bac50306a5a2f9eb496aaae30a597d27a21b25"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/pre_implementation-2026-09-10T16-21-50-043Z.json",
+            "stored_tracker_hash": "sha256:e3cd5f860d7a22ed2711c574c7a48bd7548271cb9ed1da397e11f650b88565ac",
+            "current_tracker_hash": "sha256:bd0f69cfe2348db9eef80597e02ac56af572c0f9612b2f2635a5132d60a69c9d",
+            "stored_citdp_hash": "sha256:7160e6b2e0528392bd72227b9cb367c2acd98bb8c996dddc502dc0d74d12ea2e",
+            "current_citdp_hash": "sha256:67489492cba2407444b400c4b4bac50306a5a2f9eb496aaae30a597d27a21b25"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/verification-2026-09-10T16-21-50-045Z.json",
+            "stored_tracker_hash": "sha256:7d8a7a524f57539e010a5ef034356347b591bb2335d5e6c307038594ee774e9d",
+            "current_tracker_hash": "sha256:bd0f69cfe2348db9eef80597e02ac56af572c0f9612b2f2635a5132d60a69c9d",
+            "stored_citdp_hash": "sha256:7160e6b2e0528392bd72227b9cb367c2acd98bb8c996dddc502dc0d74d12ea2e",
+            "current_citdp_hash": "sha256:67489492cba2407444b400c4b4bac50306a5a2f9eb496aaae30a597d27a21b25"
+          }
+        }
+      ],
+      "ledger_rows": 7,
+      "read_only": true,
+      "process_grade": {
+        "score": 63,
+        "band": "C",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 0,
+            "weight": 0.25,
+            "gap_codes": [
+              "expected_artifact_missing"
+            ]
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "expected_artifact_missing",
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_citdp_commands"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": false,
+    "envelope_ok": false,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": false,
+    "blocking": true,
+    "diagnostics": [
+      "malformed_citdp:adversarial_inquiry"
+    ],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": false,
+    "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 1,
+    "advisory_gap_count": 0,
+    "diagnostics": [
+      "envelope_blocking_gap:expected_artifact_missing"
+    ]
+  }
+}

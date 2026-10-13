@@ -201,7 +201,9 @@ TIED-source development artifacts and are not installed by `tied-install.sh`.
 Every leaf has:
 
 - exact directory and frontmatter `name` matching the prompt type;
-- third-person positive and negative activation description;
+- third-person positive and negative activation description (double-quote the
+  `description` scalar when it contains `:` so frontmatter stays valid YAML for
+  Cursor and linked install stubs);
 - `disable-model-invocation: true`;
 - invocation-remainder and, where applicable, linked-plan inputs;
 - applicable TIED or TIED-client-local boundary;
@@ -262,6 +264,7 @@ The static and bootstrap validation covers the acceptance contract:
 - Frontmatter `name` matches each directory, including
   `ammend-commit`.
 - Every skill has `disable-model-invocation: true`.
+- Every `SKILL.md` frontmatter parses as valid YAML (static tests use `js-yaml`).
 - Every `SKILL.md` is below 500 lines; the largest is 64 lines.
 - All direct `../prompt-shared/*.md` links resolve in both source and installed layouts.
 - Forbidden clipboard commands appear only in explicit forbidden-operation

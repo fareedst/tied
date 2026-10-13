@@ -1,0 +1,17 @@
+▶ prompt-type skill bundle
+  ✔ validates the tracked canonical bundle [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] (5.023417ms)
+  ✔ installs the canonical bundle while preserving unrelated client tooling [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] (564.167ms)
+  ✔ linked install stubs have parseable frontmatter [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-TIED_LAYERED_CLIENT_INSTALL] (221.44675ms)
+  ✔ uses attribute-preserving copy invocations for managed bootstrap artifacts [REQ-TIED_SETUP] [IMPL-TIED_FILES] (0.232875ms)
+  ✔ preserves prompt-type workflow-specific contracts [REQ-PROMPT_TYPE_GLOBAL_SKILLS] (0.351833ms)
+  ✔ links Jev plan-skills adjunct on four main plan skills only [REQ-TIED_JEV_DECISION_COPROCESSOR] (0.176333ms)
+  ✔ documents advisory methodology surface enrollment on plan skills [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] (0.160458ms)
+✔ prompt-type skill bundle (792.145083ms)
+ℹ tests 7
+ℹ suites 1
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 901.126083

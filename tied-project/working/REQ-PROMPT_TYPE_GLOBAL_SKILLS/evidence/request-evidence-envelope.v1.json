@@ -1,30 +1,23 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-01T20:02:40.104Z",
-    "generator": "request_evidence_envelope_patch",
+    "generated_at": "2026-10-13T23:55:13.767Z",
+    "generator": "request_evidence_envelope_build",
     "revision": 1
   },
   "identity": {
     "request_token": "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
-    "project_id": "af8451e933f573ec",
-    "depth_tier": "integrated",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
     "gate_policy": "advisory",
     "methodology_snapshot_id": "3.0.0"
   },
-  "runs": [
-    {
-      "run_id": "closeout-sar-2026-10-01-verification",
-      "phase": "verification",
-      "started_at": null,
-      "generator": "evidence_chain_profile_generate"
-    }
-  ],
+  "runs": [],
   "artifacts": [
     {
       "kind": "checklist_gate_receipt",
       "schema_version": null,
-      "path": "working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-close_out-result.json",
+      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-close_out-result.json",
       "content_hash": "sha256:87a3b6f8293cc84e7a1c04fa06a66831699e4b467e573492194bbf4f80bb3754",
       "phase": "close_out",
       "status": "present",
@@ -35,7 +28,7 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": null,
-      "path": "working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-pre_implementation-result.json",
+      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-pre_implementation-result.json",
       "content_hash": "sha256:7c50fd20710690ac888472c0431b981d8edc06c84cd1f699965b7a826f043202",
       "phase": "pre_implementation",
       "status": "present",
@@ -46,7 +39,7 @@
     {
       "kind": "checklist_gate_receipt",
       "schema_version": null,
-      "path": "working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-verification-result.json",
+      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-verification-result.json",
       "content_hash": "sha256:9dca6d543dd4be94f50169c5eac97b1fe27002d14e1effac51af16b139c81810",
       "phase": "verification",
       "status": "present",
@@ -57,8 +50,8 @@
     {
       "kind": "checklist_tracker",
       "schema_version": null,
-      "path": "working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml",
-      "content_hash": "sha256:0ccf89af75dae6cba8ffedeb49004f8e5ec2f7731f69215a2f2adf04858277ad",
+      "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml",
+      "content_hash": "sha256:17b92da0fbbd850f76c498669f047580f65191d5c5783ec18cf54bb66835c381",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -66,21 +59,21 @@
       ]
     },
     {
-      "kind": "citdp_record",
-      "schema_version": null,
-      "path": "tied/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml",
-      "content_hash": "sha256:484142f6850303260fc4069bdf1657c93888b80137bda84ef49ec3797d26e834",
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:2c1bf5fa8f430079dceb88d6187a63856905df72b9991e24e5f28155f53e7429",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
-        "citdp_snapshot_only"
+        "artifact_presence_only"
       ]
     },
     {
-      "kind": "evidence_chain_profile",
-      "schema_version": "evidence-chain-profile.v1",
-      "path": "working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/evidence-chain-profile.v1.json",
-      "content_hash": "sha256:a18caded6be2f9ad3494e8ca86bdd90d55d7fb08cdc24178f5d3a054e52b05ce",
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:16768e6f288e169170e4e4ddd7ab7d78bff51e6ccca6d158c46879badb02aab8",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -89,19 +82,10 @@
     }
   ],
   "cross_links": {
-    "tracker_path": "working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml",
-    "tracker_hash": "sha256:e90531e20a0998da4a56f34728a1dbd632dcb73cd16ee6f76832fffcdb092b04",
+    "tracker_path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml",
+    "tracker_hash": "sha256:f211255644d7c9e69b9871842574065f5617a41e81ae0356fbe48cbc6981c68c",
     "citdp_path": null,
     "evidence_chain_profile_path": null
   },
-  "gaps": [
-    {
-      "code": "expected_artifact_missing",
-      "artifact_kind": "evidence_chain_profile",
-      "phase": null,
-      "detail": "Integrated depth expects evidence-chain-profile artifact",
-      "severity": "error",
-      "source": "profile-cross-link"
-    }
-  ]
+  "gaps": []
 }

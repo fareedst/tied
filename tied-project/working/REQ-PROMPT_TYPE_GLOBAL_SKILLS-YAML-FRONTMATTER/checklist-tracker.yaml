@@ -1,0 +1,81 @@
+execution_evidence:
+  completed:
+    - change-definition
+    - risk-assessment
+    - test-strategy
+    - persist-implementation-records
+    - sync-tied-stack
+    - verification-gate
+    - gitignore-close-out-hygiene
+    - traceable-commit
+  envelope_path: tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/request-evidence-envelope.v1.json
+  request: REQ-PROMPT_TYPE_GLOBAL_SKILLS
+depth_tier: minimal
+gate_policy: advisory
+profile_depth: minimal
+request: REQ-PROMPT_TYPE_GLOBAL_SKILLS
+scope: "Defect fix — YAML-safe prompt-type SKILL frontmatter for Cursor parsing."
+status: close_out_ready
+steps:
+  - slug: change-definition
+    disposition: completed
+    evidence_refs: &ref_citdp
+      - tied-project/citdp/CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER.yaml
+    tracking:
+      status: completed
+      evidence_refs: *ref_citdp
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs: *ref_citdp
+    tracking:
+      status: completed
+      evidence_refs: *ref_citdp
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs: *ref_citdp
+    tracking:
+      status: completed
+      evidence_refs: *ref_citdp
+  - slug: persist-implementation-records
+    disposition: completed
+    evidence_refs: &ref_impl
+      - tied-project/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_impl
+  - slug: sync-tied-stack
+    disposition: completed
+    evidence_refs: &ref_req
+      - tied-project/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+    tracking:
+      status: completed
+      evidence_refs: *ref_req
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Bootstrap/static bundle fix; depth_tier minimal.
+  - slug: verification-gate
+    disposition: completed
+    evidence_refs: &ref_tests
+      - tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/evidence/prompt-type-skills-test.stdout.txt
+      - tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/evidence/skills-linked-test.stdout.txt
+      - tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/evidence/tied-validate-consistency-2026-10-13.json
+    tracking:
+      status: completed
+      evidence_refs: *ref_tests
+  - slug: gitignore-close-out-hygiene
+    disposition: completed
+    evidence_refs: &ref_gitignore
+      - tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/evidence/client-remediation.md
+    tracking:
+      status: completed
+      evidence_refs: *ref_gitignore
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs: &ref_commit
+      - CHANGELOG.md
+      - tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/evidence/closeout-run-close-out-gates.json
+      - tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER/evidence/proposed-commit-message.txt
+    tracking:
+      status: completed
+      evidence_refs: *ref_commit

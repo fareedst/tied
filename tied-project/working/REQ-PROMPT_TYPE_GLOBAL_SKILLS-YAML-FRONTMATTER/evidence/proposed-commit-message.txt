@@ -1,0 +1,5 @@
+Fix prompt-type SKILL frontmatter YAML for Cursor parsing.
+
+Unquoted description colons broke five leaf skills after tied-install;
+quote all bundle descriptions and gate frontmatter with js-yaml in e2e
+and linked-stub bootstrap tests. LEAP REQ-PROMPT_TYPE_GLOBAL_SKILLS.

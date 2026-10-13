@@ -1,0 +1,61 @@
+CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER:
+  change_definition:
+    summary: "Quote prompt-type SKILL.md description frontmatter and gate YAML parse in bootstrap tests so Cursor accepts all skills after tied-install."
+    current_behavior_prior: "Five leaf skills used unquoted description scalars containing colons; strict YAML parsers failed; Cursor reported skill parse errors on many clients."
+    desired_behavior: "All 14 canonical SKILL.md files have parseable frontmatter; e2e and bootstrap tests enforce js-yaml parse on bundle, full install, and linked stubs."
+    success_criteria:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts passes including linked install case"
+      - "tools/bootstrap/lib/layers/skills-linked.test.mjs stub parse loop passes"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS satisfaction criterion for YAML-safe frontmatter"
+    non_goals:
+      - "Cursor IDE parser changes"
+      - "Automatic client git commits"
+    references:
+      - "tools/bundled-prompt-type-skills/"
+      - "tied-project/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+  completion_criteria:
+    verification_gate_notes: "prompt-type-skills e2e and skills-linked unit tests; tied_validate_consistency ok."
+    envelope_path: "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/request-evidence-envelope.v1.json"
+  impact_analysis:
+    modules_or_boundaries: "Canonical prompt-type bundle; bootstrap linked stubs; static contract tests; prompt-type-skills documentation."
+    impl_inventory_notes: "Double-quoted description on all SKILL.md; assertFrontMatterParses in prompt-type-skills.test.ts; skills-linked.test.mjs writeSkillStub loop."
+    tied_tokens_affected:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-13"
+    title: "Prompt-type SKILL YAML frontmatter parse fix"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Quoting descriptions breaks Cursor activation text or truncates Unicode em dashes."
+        - "Linked stubs strip frontmatter and only full-mode clients get the fix."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "assertFrontMatterParses uses js-yaml on canonical bundle and post-install trees."
+        - "writeSkillStub copies source frontmatter verbatim per skill-stub.mjs."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tools/bundled-prompt-type-skills/debug/SKILL.md"
+        - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+        - "tools/bootstrap/lib/skill-stub.mjs"
+      falsification_questions:
+        - "Do any SKILL.md descriptions still parse as non-string YAML?"
+        - "Does linked install omit quoted frontmatter on the five previously failing skills?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Static bundle and bootstrap tests only; no runtime auth or network surface."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    summary: "Mis-quoted YAML or stale client stubs without refresh."
+  test_strategy:
+    summary: "Static js-yaml frontmatter parse; integration tied-install full and linked; bootstrap stub test."
+    matrix_notes: "Unit/static: frontmatter parse all SKILL_DIRS. Integration: tied-install.sh temp client. E2E UI: N/A."
+    integration_commands:
+      - command: "cd mcp-server && npx tsx --test src/e2e/prompt-type-skills.test.ts"
+        notes: "Bundle, full install, linked stub parse contract."
+      - command: "cd tools/bootstrap && node --test lib/layers/skills-linked.test.mjs"
+        notes: "Linked stub frontmatter loop."

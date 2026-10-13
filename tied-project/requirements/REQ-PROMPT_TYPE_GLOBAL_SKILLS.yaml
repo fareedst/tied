@@ -7,8 +7,8 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
       date: "2026-08-12"
     last_updated:
       author: "AI Agent"
-      date: "2026-09-10"
-      reason: "Add close-out gitignore hygiene satisfaction criterion"
+      date: "2026-10-13"
+      reason: "YAML-safe skill frontmatter close-out"
   name: "Global Prompt-Type Skills"
   priority: "P1"
   rationale:
@@ -32,6 +32,7 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. plan-new-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
     - criterion: "The bundle and bootstrap behavior are covered by deterministic static and integration tests."
     - criterion: "The canonical TIED repository contains all 13 prompt-type leaf skills, one prompt-type router, and all direct shared references."
+    - criterion: "Every canonical and installed prompt-type SKILL.md frontmatter parses as valid YAML (mapping with string description and disable-model-invocation true); description scalars that contain colons are double-quoted so Cursor and strict loaders accept linked stubs and full copies."
   status: "Implemented"
   traceability:
     architecture:

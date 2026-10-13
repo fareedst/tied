@@ -75,6 +75,7 @@ procedure VALIDATE_PROMPT_TYPE_SKILL_CONTRACT(root):
   CHECK inventory paths exist
   CHECK every SKILL.md name matches its directory
   CHECK every SKILL.md declares disable-model-invocation true
+  CHECK every SKILL.md frontmatter parses as YAML mapping with string description
   CHECK every direct ../prompt-shared link resolves
   CHECK every SKILL.md is below 500 lines
   CHECK no SKILL.md uses a triple-colon payload delimiter

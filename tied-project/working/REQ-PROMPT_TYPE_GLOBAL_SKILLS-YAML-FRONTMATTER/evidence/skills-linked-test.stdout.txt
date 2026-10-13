@@ -1,0 +1,11 @@
+✔ stub front matter matches source skill (0.668125ms)
+✔ stub body names existing store skill path (0.126583ms)
+✔ linked stubs preserve parseable frontmatter for every prompt-type skill (7.591791ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.458125
