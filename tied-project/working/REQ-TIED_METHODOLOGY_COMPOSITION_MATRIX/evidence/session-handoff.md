@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-13 (after **`build-plan`** full 37/37 mechanism fill verification)  
 **Depth:** minimal · **gate_policy:** advisory  
-**Phase:** **close_out complete** · **prior traceable-commit:** **`9ddaef0c`** · **delta uncommitted**
+**Phase:** **close_out complete** · **traceable-commit:** **`acfe0f01`** (full mechanism fill; follows **`9ddaef0c`** skeleton)
 
 **Linked plan:** [`methodology_composition_matrix_fd80b58a.plan.md`](file:///Users/fareed/.cursor/plans/methodology_composition_matrix_fd80b58a.plan.md)  
 **Close-out handoff:** [`../plan-close-out-handoff.md`](../plan-close-out-handoff.md)  
