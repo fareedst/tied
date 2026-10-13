@@ -5,7 +5,7 @@
 **Updated:** 2026-10-12  
 **Scope:** Methodology documentation + pilot working folder — **not** a `[REQ-*]` enrollment  
 **TIED base path (stdd):** `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` — re-run `tied_config_get_base_path` before MCP writes.  
-**Traceable commit:** `6a9c600f` (see CHANGELOG `[Unreleased]`)
+**Traceable commit:** `aa261d32` (see CHANGELOG `[Unreleased]`)
 
 ---
 
@@ -39,7 +39,7 @@
 | TIED YAML tokens / MCP validators | Spec §14 evolution only — **still open** |
 | `tied_validate_consistency` after enrollment | N/A — no index mutations |
 | ~~`@plan-close-out` / traceable-commit~~ | **Done** — docs-only partial close-out |
-| ~~Git commit (OEE scope)~~ | **Done** @ `6a9c600f` |
+| ~~Git commit (OEE scope)~~ | **Done** @ `aa261d32` |
 | Copy to a **client application** repo | Next program should duplicate `OEE-{SLUG}/` for real integrators/operators |
 
 ---
