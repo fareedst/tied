@@ -62,6 +62,8 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | Situation | Start at | Also open |
 | --- | --- | --- |
 | New requirement | **Checklist** → `session-bootstrap` | **Pseudo-code** Track A; project YAML indexes below |
+| Proposed concept (impact, risks, costs before costly work) | [**Concept impact inquiry**](../../docs/tied-concept-impact-inquiry.md) | RESOLVE via **Vocabulary**; escalate to **Checklist** / CITDP when sponsor proceeds |
+| External workflows, integrators, undocumented ops behavior (brownfield externalities) | [**Operating environment externalities**](../../docs/tied-operating-environment-externalities.md) | **Vocabulary** `operating-environment-externalities.md`; BBCE + brownfield intent elevation; then **Checklist** / CITDP |
 | Change existing behavior | **Checklist** → `change-definition` | **Processes** § `[PROC-CITDP]`; **Change records** |
 | Upgrade TIED methodology | **methodology-migration.md** → Phase 0 | **Rules**, refreshed TIED YAML MCP, and the per-request Tracker |
 | TIED already updated; code/tests lag | [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md) (**TIED-first**) | **Checklist** with verify-only REQ/ARCH/IMPL steps |
