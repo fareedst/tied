@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-13 (after **plan-close-out** + **traceable-commit** prep)  
 **Depth:** minimal · **gate_policy:** advisory  
-**Phase:** **close_out complete** — ready for sponsor **git commit** (not committed by plan-close-out)
+**Phase:** **close_out complete** · **traceable-commit:** **`a2be105e`**
 
 **Linked plan:** [`tied_comprehension_phases_79fbed92.plan.md`](file:///Users/fareed/.cursor/plans/tied_comprehension_phases_79fbed92.plan.md)
 
@@ -14,8 +14,8 @@ Phase 1 closes the **brownfield intent-elevation** loop: evidence matrix (Markdo
 
 ## Resume here
 
-1. **Sponsor commit** — stage implementation + working evidence; use proposed commit message below (or amend scope).
-2. Optional dogfood: author `evidence/intent-elevation-matrix.md` and invoke MCP validator.
+1. Optional dogfood: author `evidence/intent-elevation-matrix.md` and invoke MCP validator.
+2. **Phase 2** source-graph enrollment (separate REQ tranche) when sponsor prioritizes.
 
 ## TIED stack status
 
@@ -68,16 +68,4 @@ C1 report-only · C2 native graph Phase 2 · C3 umbrella REQ — see CITDP `leap
 npm test --prefix mcp-server -- brownfield-intent-evidence
 node tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/run-close-out-gates.mjs
 # MCP: tied_validate_consistency
-```
-
-## Proposed commit message (do not commit until sponsor asks)
-
-```
-feat(tied): add brownfield intent-elevation validator (Phase 1)
-
-Enroll REQ/ARCH/IMPL/PROC for report-only evidence-matrix validation
-without promoting observed code to approved intent; MCP handler + tests.
-
-REQ-TIED_BROWNFIELD_INTENT_ELEVATION ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL
-IMPL-TIED_BROWNFIELD_VALIDATION PROC-BROWNFIELD_INTENT_ELEVATION
 ```
