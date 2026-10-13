@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-13 (plan-close-out refresh **piwi-closeout-tier-bc-2026-10-13** — CHANGELOG/handoff aligned with SC-PIWI-DOCS met)  
 **Depth:** minimal · **gate_policy:** advisory  
-**Phase:** plan-close-out refresh complete · **traceable-commit:** **`814c2281`**
+**Phase:** plan-close-out refresh complete · **traceable-commit:** **`e8e47dcf`**
 
 **Close-out plan:** [piwi_close-out_refresh_a62e9034.plan.md](file:///Users/fareed/.cursor/plans/piwi_close-out_refresh_a62e9034.plan.md) · **Handoff:** [plan-close-out-handoff.md](../plan-close-out-handoff.md)
 
@@ -112,7 +112,7 @@ Ordered checklist for the next sponsor/agent pass. Item 1 completed in this hand
 | 2 | **Unified close-out** — envelope-blocking + reconcile | **done** | Wrapper delegates to bootstrap template; see `closeout-run-close-out-gates.json` |
 | 3 | **Fixture repair** — prune on `1791739774` | **done** (no-op) | Dry-run and `--write` report 0 duplicates |
 | 4 | **Tier B/C docs** — grep `tied-bundle/docs/` + `.cursor/agents/`; extend `check-docs-vocab-links.mjs` for mislabeled client links | **done** | build-plan `piwi-tier-bc-2026-10-12` |
-| 5 | **Traceable-commit** — stage implementation + TIED YAML + docs + `.gitignore`; vocab VALIDATE (Touchpoint 3); commit via `evidence/proposed-commit-message.txt` | **done** | **`814c2281`** (2026-10-13) |
+| 5 | **Traceable-commit** — stage implementation + TIED YAML + docs + `.gitignore`; vocab VALIDATE (Touchpoint 3); commit via `evidence/proposed-commit-message.txt` | **done** | **`e8e47dcf`** (2026-10-13) |
 
 ## Commands cheat sheet
 

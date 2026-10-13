@@ -56,4 +56,4 @@ steps:
       - kind: command_evidence
         claimed_success: true
         exit_code: 0
-        stdout_ref: "git commit 814c2281"
+        stdout_ref: "git commit e8e47dcf"
