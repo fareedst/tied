@@ -13,6 +13,9 @@ docs/comparisons/*
 !docs/comparisons/jev-for-tied-improvement.md
 !docs/comparisons/system-one-jev-taxonomy-and-opportunities.md
 !docs/comparisons/system-one-jev-vs-laya.md
+!docs/comparisons/methodology-composition-matrix.md
+!docs/comparisons/qmm-kaizen-vs-tied.md
+!docs/comparisons/tied-vs-well-known-methodologies.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

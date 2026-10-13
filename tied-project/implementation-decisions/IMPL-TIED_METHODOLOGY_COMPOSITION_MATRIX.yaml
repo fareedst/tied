@@ -1,0 +1,48 @@
+IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+    code_locations:
+      files:
+        - description: "Primary deliverable matrix §0–§3"
+          path: "docs/comparisons/methodology-composition-matrix.md"
+        - description: "Primary QMM matrix cross-link"
+          path: "docs/comparisons/qmm-kaizen-vs-tied.md"
+        - description: "Related docs cross-link"
+          path: "docs/comparisons/tied-vs-well-known-methodologies.md"
+      functions: []
+    cross_references:
+      - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    decision: "Edit markdown and comparison cross-links; validate row inventory and TIED consistency; no production code."
+    implementation_approach:
+      details:
+        - "Copy disposition and center-of-gravity from source tables with evidence_refs anchors."
+        - "Leave mechanism columns blank or _TBD_."
+      summary: "Author methodology-composition-matrix.md; patch two sibling comparison docs; lint project YAML; tied_validate_consistency."
+    metadata:
+      created:
+        author: "build-plan"
+        date: "2026-10-13"
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-13"
+        reason: "Initial creation"
+    name: "Methodology composition matrix implementation"
+    rationale:
+      benefits:
+        - "Token-linked maintenance of comparison surface"
+      problems_solved:
+        - "Untracked outreach matrix"
+      why: "Docs-only satisfaction path per minimal depth CITDP deferral."
+    related_decisions:
+      depends_on: []
+      see_also: []
+      supersedes: []
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      code_annotations: []
+      requirements:
+        - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      tests: []
+  status: "Active"

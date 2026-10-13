@@ -979,6 +979,9 @@ ARCH-TIED_LAYERED_CLIENT_INSTALL:
   source_index: "architecture-decisions.yaml"
   status: "Proposed"
   type: "ARCH"
+ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  description: "Architecture for docs/comparisons methodology composition matrix"
+  type: "architecture"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
@@ -2306,6 +2309,9 @@ IMPL-TIED_LAYERED_CLIENT_INSTALL:
   source_index: "implementation-decisions.yaml"
   status: "Proposed"
   type: "IMPL"
+IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  description: "Markdown-only implementation for methodology composition matrix"
+  type: "implementation"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
     - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
@@ -3844,6 +3850,9 @@ REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   name: "Methodology bundle reference closure"
   source_index: "requirements.yaml"
   type: "REQ"
+REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  description: "Methodology composition matrix outreach doc (QMM loop × method)"
+  type: "requirement"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "ARCH-TIED_NEW_CLIENT_ADHERENCE"

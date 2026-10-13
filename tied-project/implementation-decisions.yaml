@@ -2574,6 +2574,18 @@ IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   detail_file: "implementation-decisions/IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
   name: "Methodology client boundary implementation"
   status: "Active"
+IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  cross_references:
+    - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  detail_file: "implementation-decisions/IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml"
+  name: "Methodology composition matrix implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    requirements:
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
     architecture:

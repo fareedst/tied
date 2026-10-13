@@ -2588,6 +2588,23 @@ REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   name: "Methodology client boundary program"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  category: "Functional"
+  description: "Maintain sponsor-facing QMM loop × method composition matrix under docs/comparisons/methodology-composition-matrix.md with prefilled dispositions and blank TIED mechanism columns for sponsor fill-in."
+  detail_file: "requirements/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml"
+  name: "Methodology composition matrix"
+  priority: "P2"
+  related_requirements:
+    depends_on: []
+    related_to:
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    implementation:
+      - "IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   category: "Functional"
   cross_references:

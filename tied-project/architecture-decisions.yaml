@@ -2148,6 +2148,17 @@ ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY.yaml"
   name: "Methodology client boundary architecture"
   status: "Active"
+ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  cross_references:
+    - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  detail_file: "architecture-decisions/ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml"
+  name: "Methodology composition matrix architecture"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    requirements:
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     architecture:

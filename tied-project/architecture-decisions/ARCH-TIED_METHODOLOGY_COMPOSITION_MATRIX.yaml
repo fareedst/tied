@@ -1,0 +1,38 @@
+ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+  ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
+    cross_references:
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    decision: "Store the composition matrix as a standalone outreach markdown file under docs/comparisons/, derived from qmm-kaizen-vs-tied.md and tied-vs-well-known-methodologies.md; no runtime, generator, or tied-bundle/ methodology edits in v1."
+    implementation_approach:
+      details:
+        - "Cross-link from existing comparison docs only; defer client-development-index visibility."
+        - "§1 expands multi-loop methods once per assigned QMM loop (27 rows)."
+        - "§2 one row per adjacent framework with Loop(s) column (10 rows)."
+      summary: "Two markdown tables (§1 loop×method, §2 adjacent frameworks) share column schema; mechanism columns are sponsor-owned placeholders."
+    metadata:
+      created:
+        author: "build-plan"
+        date: "2026-10-13"
+      last_updated:
+        author: "build-plan"
+        date: "2026-10-13"
+        reason: "Initial creation"
+    name: "Methodology composition matrix architecture"
+    rationale:
+      benefits:
+        - "Clear proof boundary: structure and traceability only"
+      problems_solved:
+        - "Scope creep into MCP resources or bundle merges"
+      why: "Keep sponsor composition work in the same sibling-comparison doc family without merging into Layer C methodology YAML."
+    related_decisions:
+      depends_on: []
+      informs: []
+      see_also: []
+    status: "Active"
+    traceability:
+      code_annotations: []
+      implementation:
+        - "IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      requirements:
+        - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      tests: []

@@ -1,0 +1,50 @@
+change_definition:
+  current_behavior: "Comparison docs lack a single loop × method matrix with TIED mechanism columns."
+  desired_behavior: "Standalone methodology-composition-matrix.md with 27 §1 rows and 10 §2 rows; mechanism cells blank."
+  non_goals:
+    - "Generator or MCP resource"
+    - "Mechanism-cell completion in v1"
+    - "Methodology-bundle edits"
+  success_criteria:
+    - "Cross-links from two comparison docs"
+    - "Doc exists with enumerated row inventory"
+    - "Project TIED traceability validates"
+  unchanged_behavior: "Existing comparison claims; no runtime behavior."
+impact_analysis:
+  tied_tokens_new:
+    - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    - "IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+record_identity:
+  change_request_id: "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  recorded_at: "2026-10-13"
+  title: "Methodology composition matrix (docs-only)"
+risk_analysis:
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    counterexamples:
+      - "Broken relative link turns evidence_refs into unsupported claim"
+      - "Composable label without proof-boundary note reads as equivalence"
+      - "Filled mechanism cell mistaken for sponsor acceptance"
+      - "Grouped SAFe/LeSS/Nexus row makes exact inventory unverifiable"
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "Certification wording or methodology-bundle edit"
+      - "Row count differs from 27/10"
+      - "tied_validate_consistency fails after project YAML writes"
+      - "Unrecognized disposition or empty evidence_refs"
+    eligibility_triggers_matched: []
+    evidence_references:
+      - ".cursor/plans/methodology_composition_matrix_fd80b58a.plan.md"
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/PLAN.md"
+    falsification_questions:
+      - "Are mechanism cells blank or _TBD_ only?"
+      - "Can a reviewer count exactly 27 §1 and 10 §2 rows?"
+      - "Do links resolve from docs/comparisons/?"
+      - "Does every row have one allowed disposition and evidence_refs?"
+    gate_policy: "advisory"
+    prior_depth_tier: null
+    rationale: "Non-executable documentation; bounded evidence in linked plan refine pass 2."
+    research_profile: "not_applicable"
+test_strategy:
+  summary: "Row count, link resolution, lint_yaml, tied_validate_consistency; no unit/E2E."

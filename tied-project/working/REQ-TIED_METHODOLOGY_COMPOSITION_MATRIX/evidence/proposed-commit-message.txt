@@ -1,0 +1,3 @@
+Add methodology composition matrix outreach doc and TIED traceability.
+
+Deliver sponsor-facing loop × method matrix (27+10 rows) with cross-links from existing QMM and well-known comparison docs; enroll project REQ/ARCH/IMPL and close-out evidence under working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.
