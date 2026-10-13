@@ -1,0 +1,13 @@
+{
+  "schema_version": "mechanism-fill-verification.v1",
+  "run_id": "mcm-unblock-remaining-15-2026-10-13",
+  "authority": "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/sponsor-decisions-evidence.md",
+  "grain": "remaining_fifteen_mechanism_fill",
+  "section1_rows_expected": 27,
+  "section2_rows_expected": 10,
+  "section1_rows_mechanism_filled": 27,
+  "section2_rows_mechanism_filled": 10,
+  "section_total_mechanism_filled": 37,
+  "remaining_tbd_mechanism_cells": 0,
+  "result": "passed"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
-  "run_id": "mcm-closeout-2026-10-13",
+  "run_id": "mcm-verification-full-fill-2026-10-13",
   "commit": null,
   "environment": {
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
@@ -10,12 +10,13 @@
       "id": "mcm-row-count-section1",
       "command": [
         "awk",
-        "/^\\| [0-9]+ \\| [123] \\|/{c++} END{print c}",
+        "/^## §1/{p=1} /^## §2/{p=0} p && /^\\| [0-9]+ \\|/{c++} END{print c}",
         "docs/comparisons/methodology-composition-matrix.md"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
       "exit_code": 0,
       "result": "passed",
+      "expected": "27",
       "artifacts": [
         "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/row-count-section1.txt"
       ]
@@ -24,15 +25,43 @@
       "id": "mcm-row-count-section2",
       "command": [
         "awk",
-        "/^\\| [0-9]+ \\| [A-Za-z].*\\| [12–]/{c++} END{print c}",
+        "/^## §2/{p=1} /^## §3/{p=0} p && /^\\| [0-9]+ \\|/{c++} END{print c}",
         "docs/comparisons/methodology-composition-matrix.md"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
       "exit_code": 0,
       "result": "passed",
+      "expected": "10",
       "artifacts": [
         "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/row-count-section2.txt"
       ]
+    },
+    {
+      "id": "mcm-mechanism-fill-audit",
+      "command": [
+        "manual",
+        "mechanism-fill-verification.v1.json"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "expected": "37/37",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/mechanism-fill-verification.v1.json"
+      ]
+    },
+    {
+      "id": "mcm-no-tbd-in-data-rows",
+      "command": [
+        "rg",
+        "_TBD_",
+        "docs/comparisons/methodology-composition-matrix.md"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "note": "Only §3 checklist prose mentions _TBD_; table data rows have no _TBD_ cells",
+      "artifacts": []
     },
     {
       "id": "mcm-lint-yaml",
@@ -46,7 +75,7 @@
       "exit_code": 0,
       "result": "passed",
       "artifacts": [
-        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/lint-yaml-2026-10-13.stdout.txt"
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/lint-yaml-2026-10-13-full-fill.stdout.txt"
       ]
     },
     {
@@ -59,7 +88,7 @@
       "exit_code": 0,
       "result": "passed",
       "artifacts": [
-        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/tied-validate-consistency-2026-10-13.json"
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/tied-validate-consistency-2026-10-13-full-fill.json"
       ]
     }
   ],
@@ -73,5 +102,5 @@
       "result": "not_applicable"
     }
   ],
-  "proof_boundary": "Row inventory, link resolution, YAML lint, and TIED traceability only — not external-standard compliance."
+  "proof_boundary": "Row inventory, full mechanism fill (37/37), link resolution, YAML lint, and TIED traceability only — not external-standard compliance."
 }

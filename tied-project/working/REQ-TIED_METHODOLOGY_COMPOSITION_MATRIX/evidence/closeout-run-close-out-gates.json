@@ -4,7 +4,7 @@
   "activation_collect": {
     "skipped": true,
     "reason": "minimal_depth",
-    "run_id": "mcm-closeout-2026-10-13"
+    "run_id": "mcm-closeout-full-fill-2026-10-13"
   },
   "reconcile": {
     "ok": true,
