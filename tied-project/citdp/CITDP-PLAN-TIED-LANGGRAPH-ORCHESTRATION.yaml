@@ -1,0 +1,112 @@
+CITDP-PLAN-TIED-LANGGRAPH-ORCHESTRATION:
+  change_definition:
+    current_behavior: "LangGraph orchestration exists as draft docs only; no program working folder, orchestrator, or persisted program CITDP."
+    desired_behavior: "P0 enrollment under tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/ with charter, orchestrator, plan-only Tracker through test-strategy, and gate receipts; P1 gated separately."
+    non_goals:
+      - "tools/langgraph-pilot/ application code or pytest in P0"
+      - "Editing tied-bundle methodology YAML or gate semantics"
+      - "Git commit unless sponsor plan-close-out"
+      - "Completing stdd REQ-BOUNDED_WORKER_POOL implementation in this pass"
+    success_criteria:
+      - "Orchestrator records p0_enrollment_complete_at with p1_implement_authorized_at null"
+      - "Charter documents fixture client 1791767366 and dual-track stdd REQ retention"
+      - "CITDP tied_tokens_new empty for this program enrollment"
+      - "pre_implementation gate receipt stored under tied-bundle/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/gates/"
+    unchanged_behavior: "Checklist gates, agentstream default executor, and existing product REQs except documented stdd BOUNDED_WORKER_POOL retention."
+  evidence:
+    commands:
+      - "tied_checklist_gate_validate phase pre_implementation"
+      - "tied_project_lint"
+      - "tied_validate_consistency"
+    manifest_reference: null
+    proof_boundaries:
+      - "docs_and_working_folder_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code execution in P0. Pre-existing stdd REQ/ARCH/IMPL-BOUNDED_WORKER_POOL retained per sponsor for future port."
+    modules_or_boundaries: "docs/langgraph, program working folder, tied-project/citdp program record."
+    tied_tokens_affected:
+      - "REQ-BOUNDED_WORKER_POOL"
+      - "ARCH-BOUNDED_WORKER_POOL"
+      - "IMPL-BOUNDED_WORKER_POOL"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "Sponsor overrode refine-plan scope hygiene revert; stdd BOUNDED_WORKER_POOL stack kept for future completion."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LANGGRAPH-ORCHESTRATION"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "not_measured"
+    recorded_at: "2026-10-12"
+    title: "LangGraph orchestration program P0 enrollment (plan-only)"
+  risk_analysis:
+    abuse_cases: []
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Plan-only p0_enrollment_complete misread as P1 scaffold authorization."
+        - "Stdd REQ-BOUNDED_WORKER_POOL records mistaken for LangGraph runtime ground truth without fixture TIED_BASE_PATH."
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Any tools/langgraph-pilot/ code committed during P0 enrollment."
+        - "Pilot MCP writes with TIED_BASE_PATH pointing at stdd while executing fixture-phase tests."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/langgraph/tied-langgraph-orchestration-plan.md"
+        - "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/charter.md"
+        - "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/risk-assessment-evidence.md"
+        - "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/scope-hygiene-evidence.md"
+      falsification_questions:
+        - "Does charter separate stdd deferred port from fixture implement REQ?"
+        - "Does orchestrator leave p1_implement_authorized_at null after P0?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Plan-only program enrollment. P1 scaffold must select integrated depth independently."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Read-only plan and working folder review"
+        evidence_method: "Committed process evidence"
+        limitation: "Does not prove LangGraph MCP adapter or pilot graphs."
+        owner: "agent"
+        rationale: "Deliverable is program charter and documentation CITDP."
+        result: "pass"
+        risk: "Authority misread as implement"
+        threshold: "Program CITDP persisted; tied_tokens_new empty"
+        waiver:
+          expiry: null
+          owner: null
+          reason: null
+          required: false
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-12"
+      owner: "P1 build-plan with sponsor-authority-p1-scaffold artifact"
+      summary: "P1 must pass integrated pre_implementation before RED or pilot code."
+    risks:
+      - "Minimal depth copied into P1 child CITDP without prior_depth_tier."
+      - "Dual-track REQ confusion between stdd port and fixture client."
+    scenarios:
+      - "Plan-only authority boundary"
+      - "Fixture TIED_BASE_PATH mismatch"
+  sponsor_decisions:
+    recorded_at: "2026-10-12"
+    fixture_client_id: "1791767366"
+    fixture_implement_req: "REQ-BOUNDED_WORKER_POOL"
+    hitl_default: "autonomous_obligation_cycles_post_hoc_audit"
+    p1_implement_depth_default: "integrated"
+    p0_mode: "plan_only"
+    runtime_spine: "python_langgraph_pilot"
+    stdd_bounded_worker_pool: "retain_for_future_completion"
+    summary: "Sponsor build-plan P0 enrollment; keep stdd BOUNDED_WORKER_POOL stack for future port; LangGraph phases 3-7 use fixture client; program CITDP required."
+  test_strategy:
+    matrix_notes: "P0 static checks only. Pilot pytest matrix deferred to P1 CITDP."
+    summary: "Gate validate, project lint, TIED consistency; no application tests in P0."

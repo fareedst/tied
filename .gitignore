@@ -81,6 +81,8 @@ working/**/evidence/not-applicable-receipt.v1.json
 working/**/evidence/proposed-commit-message.txt
 working/**/evidence/evidence-chain-profile.v1.json
 working/**/evidence/request-evidence-envelope.v1.json
+# Regenerable envelope index under committed working root (mirror root working/ rule)
+tied-project/working/**/evidence/request-evidence-envelope.v1.json
 working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)
 working/**/CITDP-REQ-*-diff-or-stage.yaml

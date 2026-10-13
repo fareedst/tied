@@ -92,6 +92,19 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-BOUNDED_WORKER_POOL:
+  cross_references:
+    - "IMPL-BOUNDED_WORKER_POOL"
+    - "REQ-BOUNDED_WORKER_POOL"
+  description: "Stdd traceability stack for bounded worker pool; implementation deferred; LangGraph fixture uses client 1791767366."
+  detail_file: "architecture-decisions/ARCH-BOUNDED_WORKER_POOL.yaml"
+  metadata:
+    last_updated: "2026-10-12"
+    registered: "2026-10-12"
+  name: "Bounded Worker Pool Architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "In Progress"
+  type: "ARCH"
 ARCH-CHECKLIST-PROCESS-REVIEW:
   description: "Phase 1 operator docs program"
   name: "Checklist process review"
@@ -1224,6 +1237,19 @@ IMPL-ATDD-E2E-AGENT_STREAM:
   name: "run_agent_stream run_stream loop; testability e2e_only per docs/run-agent-stream-impl-e2e.md"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-BOUNDED_WORKER_POOL:
+  cross_references:
+    - "ARCH-BOUNDED_WORKER_POOL"
+    - "REQ-BOUNDED_WORKER_POOL"
+  description: "Stdd IMPL placeholder; code paths reference fixture client layout for future port."
+  detail_file: "implementation-decisions/IMPL-BOUNDED_WORKER_POOL.yaml"
+  metadata:
+    last_updated: "2026-10-12"
+    registered: "2026-10-12"
+  name: "Worker Pool Algorithms"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
   type: "IMPL"
 IMPL-CHECKLIST-PROCESS-REVIEW:
   description: "Phase 1 operator docs program"
@@ -2821,6 +2847,20 @@ REQ-ATDD-E2E-AGENT_STREAM:
   name: "E2E agent subprocess stream-json harness with session resume"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-BOUNDED_WORKER_POOL:
+  category: "Functional"
+  cross_references:
+    - "ARCH-BOUNDED_WORKER_POOL"
+    - "IMPL-BOUNDED_WORKER_POOL"
+  description: "Port/reference stack retained in stdd for future completion; executable proof on fixture client 1791767366."
+  detail_file: "requirements/REQ-BOUNDED_WORKER_POOL.yaml"
+  metadata:
+    last_updated: "2026-10-12"
+    registered: "2026-10-12"
+  name: "Bounded Worker Pool Library"
+  source_index: "requirements.yaml"
+  status: "In Progress"
   type: "REQ"
 REQ-CHECKLIST-PROCESS-REVIEW:
   description: "Phase 1 operator docs program"

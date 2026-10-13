@@ -324,6 +324,18 @@ IMPL-ATDD-E2E-AGENT_STREAM:
       - "REQ-ATDD-E2E-AGENT_STREAM"
     tests:
       - "agent_stream_e2e_test.rb (upstream atdd)"
+IMPL-BOUNDED_WORKER_POOL:
+  cross_references:
+    - "ARCH-BOUNDED_WORKER_POOL"
+    - "REQ-BOUNDED_WORKER_POOL"
+  detail_file: "implementation-decisions/IMPL-BOUNDED_WORKER_POOL.yaml"
+  name: "Worker Pool Algorithms"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-BOUNDED_WORKER_POOL"
+    requirements:
+      - "REQ-BOUNDED_WORKER_POOL"
 IMPL-CHECKLIST-PROCESS-REVIEW:
   cross_references:
     - "ARCH-CHECKLIST-PROCESS-REVIEW"

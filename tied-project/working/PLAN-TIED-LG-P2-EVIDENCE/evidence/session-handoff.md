@@ -1,44 +1,36 @@
 # Session handoff — PLAN-TIED-LG-P2-EVIDENCE
 
-**Updated:** 2026-10-12 (`@plan-close-out`)
+**Updated:** 2026-10-12 (`@plan-close-out` + **traceable-commit**)
 
-## Machine close-out
+## Status
 
-Integrated close-out completed for LangGraph P2 evidence wiring (pilot-local; no new REQ/ARCH/IMPL tokens).
+P2 **implement**, **machine close-out**, and **traceable-commit** are complete. Git: **`1bbd9245`** on `main` (not pushed unless sponsor requests).
 
-### Completion signals
+## Completion signals
 
-- **Machine close-out:** pass — gate `close_out` allowed=true; envelope validate fail_on_error_gaps=true blocking_gaps=0; envelope path=`tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/request-evidence-envelope.v1.json`
-- **Process contract:** pass — dual-write=clear after slug evidence stubs + tracker repair; manifest=present (`verification-evidence-manifest.v1.json`); PSA Layer C=n/a (no IMPL inventory); profile=present (`evidence-chain-profile.v1.json`)
-- **Adherence ledger:** pass — reconcile process_grade=band D (stale pre_impl gate receipts documented; non-blocking for merged close-out); thin_ledger=clear after sync rows
+| Signal | Result |
+| --- | --- |
+| **Machine close-out** | pass — `close_out` allowed=true; envelope `blocking_gaps=0` → [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json) |
+| **Process contract** | pass — manifest, profile, tracker dual-write; slug evidence on disk |
+| **Adherence ledger** | pass — reconcile ok; process_grade **D** (stale pre_impl gate receipts; non-blocking) |
 
-Receipt: [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) · Verification pass: [closeout-run-verification-gates.json](./closeout-run-verification-gates.json)
+Receipts: [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) · [closeout-run-verification-gates.json](./closeout-run-verification-gates.json) · [traceable-commit-evidence.md](./traceable-commit-evidence.md)
 
-### Remaining risks
+## Shipped (commit `1bbd9245`)
 
-- **P3 TDD subgraph** and fixture client implement remain out of scope.
-- **traceable-commit** completed 2026-10-12 (this commit); push still sponsor-initiated.
-- Pre-impl gate receipts in ledger predate final tracker hash (reconcile finding `gate_without_current_evidence`); fresh close_out gate allowed=true.
+- `tools/langgraph-pilot/` — ledger, envelope adapter, routing, staleness, 16 pytest (mock MCP)
+- P2 working folder + [CITDP-PLAN-TIED-LG-P2-EVIDENCE.yaml](../../../citdp/CITDP-PLAN-TIED-LG-P2-EVIDENCE.yaml)
+- LangGraph docs under `docs/langgraph/` and `docs/tools/langgraph-evidence-driven-software-engineering.md`
+- [REQ-REQUEST_EVIDENCE_ENVELOPE] validate accepts **PLAN-*** tokens
+- CHANGELOG [Unreleased] P2 bullet
 
-## Deliverables (no git commit in this skill)
+## Remaining risks
 
-- CHANGELOG [Unreleased] P2 entry
-- Gitignore: `tools/langgraph-pilot/.gitignore` includes `*.egg-info/`
-- `tied_validate_consistency`: ok
+- **P3** TDD subgraph + fixture client still out of scope.
+- Pre-impl gate receipts in `tied-bundle/working/.../gates/` predate final tracker hash (`gate_without_current_evidence` in reconcile report).
+- Adversarial inquiry artifacts live under **gitignored** `tied-bundle/working/` (regenerate locally from documented `run_id`s if needed).
 
-## Proposed commit message
+## Next agent
 
-```
-feat(langgraph-pilot): P2 evidence envelope wiring and machine close-out
-
-Add ledger, envelope MCP adapter, gap routing, staleness policy, and tests
-under tools/langgraph-pilot/. Close out PLAN-TIED-LG-P2-EVIDENCE with
-integrated gates (run_id p2-closeout-closeout-20261012) and envelope
-blocking_gap_count=0. Accept PLAN-* tokens in envelope schema validate.
-
-Exclude .venv/ and *.egg-info/ from pilot tree.
-```
-
-## Next
-
-`@build-plan` on **PLAN-TIED-LG-P3-TDD** when sponsor authorizes P3, or sponsor **traceable-commit** for this wave.
+1. **`@build-plan`** on **PLAN-TIED-LG-P3-TDD** when sponsor authorizes P3 (program checklist: [langgraph-program-execution-checklist.yaml](../../PLAN-TIED-LANGGRAPH-ORCHESTRATION/langgraph-program-execution-checklist.yaml)).
+2. Optional: **`git push`** when sponsor wants remote updated.

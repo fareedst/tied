@@ -1,0 +1,43 @@
+REQ-BOUNDED_WORKER_POOL:
+  REQ-BOUNDED_WORKER_POOL:
+    category: "Functional"
+    metadata:
+      created:
+        author: "AI Agent"
+        date: "2026-10-12"
+      last_updated:
+        author: "AI Agent"
+        date: "2026-10-12"
+        reason: "Initial REQ for bounded worker pool"
+    name: "Bounded Worker Pool Library"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Predictable concurrency"
+        - "Traceable completions"
+      problems_solved:
+        - "Lost task outcomes after failure or cancel"
+        - "Unbounded parallelism"
+      why: "Provide reusable in-process task scheduling with bounded concurrency and observable outcomes."
+    related_requirements:
+      depends_on:
+        - "REQ-MODULE_VALIDATION"
+      related_to: []
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "At most N worker invocations run concurrently for configured N"
+      - criterion: "cancel and close behaviors per worker-pool vocabulary"
+      - criterion: "Every scheduled taskId reaches exactly one terminal settlement"
+      - criterion: "FIFO start order among non-cancelled queued tasks"
+      - criterion: "Task result promises match ledger settlements"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-BOUNDED_WORKER_POOL"
+      implementation:
+        - "IMPL-BOUNDED_WORKER_POOL"
+      tests:
+        - "completion-ledger.test.ts"
+        - "scheduler.test.ts"
+        - "worker-pool.integration.test.ts"
+        - "worker-pool.test.ts"

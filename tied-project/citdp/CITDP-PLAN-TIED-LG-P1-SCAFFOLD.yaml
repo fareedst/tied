@@ -1,0 +1,85 @@
+CITDP-PLAN-TIED-LG-P1-SCAFFOLD:
+  change_definition:
+    current_behavior: "No tools/langgraph-pilot package; MCP cannot be invoked from LangGraph Python scaffold."
+    desired_behavior: "Phase 1 pilot tree importable with MCP adapter (read-only smoke tools), RunState v0, ping graph, SQLite checkpoint, pytest with mocked MCP."
+    non_goals:
+      - "Fixture client 1791767366 implement or REQ-BOUNDED_WORKER_POOL product completion in stdd"
+      - "tied-bundle methodology YAML edits"
+      - "Gate weakening for demo throughput"
+      - "CI blocking job until Phase 4 unless sponsor sets p1_ci_blocking"
+    success_criteria:
+      - "pytest green under tools/langgraph-pilot/tests/"
+      - "README documents uv/pip install and optional live MCP smoke"
+      - "P1 pre_implementation gate receipt stored under tied-bundle/working/PLAN-TIED-LG-P1-SCAFFOLD/gates/"
+    unchanged_behavior: "Agentstream default executor; existing product REQs except pilot tree addition."
+  evidence:
+    commands:
+      - "cd tools/langgraph-pilot && uv run pytest"
+      - "tied_checklist_gate_validate phase pre_implementation"
+      - "tied_validate_consistency"
+    manifest_reference: null
+    proof_boundaries:
+      - "pilot_tree_and_tests"
+      - "mock_mcp_in_ci"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code layer for pilot; design authority is phased spec §7 Phase 1."
+    modules_or_boundaries: "tools/langgraph-pilot only."
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LG-P1-SCAFFOLD"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    prior_depth_tier: "minimal"
+    profile_depth: "integrated"
+    recorded_at: "2026-10-12"
+    title: "LangGraph program P1 scaffold and MCP adapter"
+  risk_analysis:
+    abuse_cases:
+      - "subprocess-invocation-unexpected-command"
+      - "checkpoint-path-escape"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Live MCP invoked in CI against production tied-project without mock."
+        - "Checkpoint SQLite created outside designated run directory."
+        - "P0 program pre_implementation receipt reused as P1 activation."
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "pytest imports pilot without mock and spawns node."
+        - "mcp_client calls tools outside read-only allowlist in default config."
+      eligibility_triggers_matched:
+        - "persistence"
+        - "external_input"
+      evidence_references:
+        - "docs/langgraph/tied-langgraph-orchestration-plan.md"
+        - "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md"
+        - "tied-project/working/PLAN-TIED-LG-P1-SCAFFOLD/evidence/risk-assessment-evidence.md"
+        - "tied-project/working/PLAN-TIED-LG-P1-SCAFFOLD/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      falsification_questions:
+        - "Are CI tests isolated from live MCP subprocess?"
+        - "Is run_directory mandatory for checkpoint persistence in tests?"
+      gate_policy: "per_citdp"
+      prior_depth_tier: "minimal"
+      rationale: "MCP subprocess and SQLite persistence trigger integrated defaults per charter."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "completed"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-12"
+      owner: "P2 evidence wiring wave"
+      summary: "Scaffold does not prove envelope or TDD subgraph behavior."
+    risks:
+      - "TIED_BASE_PATH mismatch on optional live smoke"
+      - "LangGraph version drift vs docs"
+    scenarios:
+      - "Mock-only CI vs operator live smoke"
+  sponsor_decisions:
+    authority_path: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md"
+    p1_scope: "implement_scaffold_mcp_adapter"

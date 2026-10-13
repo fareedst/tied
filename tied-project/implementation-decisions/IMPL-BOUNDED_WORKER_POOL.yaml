@@ -1,0 +1,40 @@
+IMPL-BOUNDED_WORKER_POOL:
+  IMPL-BOUNDED_WORKER_POOL:
+    code_locations:
+      files:
+        - description: "Public facade"
+          path: "src/worker-pool/worker-pool.ts"
+        - description: "Queue, slots, pump"
+          path: "src/worker-pool/scheduler.ts"
+        - description: "Settlement state machine"
+          path: "src/worker-pool/completion-ledger.ts"
+    cross_references:
+      - "ARCH-BOUNDED_WORKER_POOL"
+      - "REQ-BOUNDED_WORKER_POOL"
+    implementation_approach:
+      details:
+        - "completion-ledger.ts"
+        - "errors.ts"
+        - "scheduler.ts"
+        - "worker-pool.ts"
+      summary: "TypeScript modules under src/worker-pool with Vitest TDD."
+    metadata:
+      created:
+        author: "AI Agent"
+        date: "2026-10-12"
+      last_updated:
+        author: "AI Agent"
+        date: "2026-10-12"
+        reason: "Initial IMPL"
+    name: "Worker Pool Algorithms"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-BOUNDED_WORKER_POOL"
+      requirements:
+        - "REQ-BOUNDED_WORKER_POOL"
+      tests:
+        - "src/worker-pool/completion-ledger.test.ts"
+        - "src/worker-pool/scheduler.test.ts"
+        - "src/worker-pool/worker-pool.integration.test.ts"
+        - "src/worker-pool/worker-pool.test.ts"

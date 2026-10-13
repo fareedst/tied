@@ -1,0 +1,26 @@
+ARCH-BOUNDED_WORKER_POOL:
+  ARCH-BOUNDED_WORKER_POOL:
+    cross_references:
+      - "REQ-BOUNDED_WORKER_POOL"
+    decision: "Separate CompletionLedger, Scheduler (queue and slots), Worker interface, and WorkerPool facade."
+    implementation_approach:
+      details:
+        - "Abort via AbortController per task"
+        - "Cancellation terminal before late worker settlement"
+        - "Slot counter distinct from ledger terminal state"
+      summary: "Ledger owns settlements; Scheduler owns queue, slots, and pump; WorkerPool owns closed flag and public API."
+    metadata:
+      created:
+        author: "AI Agent"
+        date: "2026-10-12"
+      last_updated:
+        author: "AI Agent"
+        date: "2026-10-12"
+        reason: "Initial ARCH"
+    name: "Worker Pool Module Boundaries"
+    status: "Accepted"
+    traceability:
+      implementation:
+        - "IMPL-BOUNDED_WORKER_POOL"
+      requirements:
+        - "REQ-BOUNDED_WORKER_POOL"

@@ -320,6 +320,27 @@ REQ-ATDD-E2E-AGENT_STREAM:
   validation_criteria:
     - coverage: "test/e2e/agent_stream_e2e_test.rb"
       method: "E2E tests with stub agent on PATH (upstream atdd)"
+REQ-BOUNDED_WORKER_POOL:
+  category: "Functional"
+  detail_file: "requirements/REQ-BOUNDED_WORKER_POOL.yaml"
+  name: "Bounded Worker Pool Library"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+    related_to: []
+    supersedes: []
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-BOUNDED_WORKER_POOL"
+    implementation:
+      - "IMPL-BOUNDED_WORKER_POOL"
+    tests:
+      - "completion-ledger.test.ts"
+      - "scheduler.test.ts"
+      - "worker-pool.integration.test.ts"
+      - "worker-pool.test.ts"
 REQ-CHECKLIST-PROCESS-REVIEW:
   category: "Functional"
   detail_file: "requirements/REQ-CHECKLIST-PROCESS-REVIEW.yaml"

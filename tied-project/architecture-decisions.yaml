@@ -266,6 +266,17 @@ ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET:
     title: "Optional BBCE slice ownership sections (paste-in snippet)"
   name: "BBCE slice ownership snippet"
   status: "Active"
+ARCH-BOUNDED_WORKER_POOL:
+  cross_references:
+    - "REQ-BOUNDED_WORKER_POOL"
+  detail_file: "architecture-decisions/ARCH-BOUNDED_WORKER_POOL.yaml"
+  name: "Worker Pool Module Boundaries"
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-BOUNDED_WORKER_POOL"
+    requirements:
+      - "REQ-BOUNDED_WORKER_POOL"
 ARCH-CHECKLIST-PROCESS-REVIEW:
   cross_references:
     - "REQ-CHECKLIST-PROCESS-REVIEW"

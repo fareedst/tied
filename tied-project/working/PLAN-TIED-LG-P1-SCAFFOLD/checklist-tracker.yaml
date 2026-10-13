@@ -1,0 +1,36 @@
+schema_version: langgraph-p1-implement-tracker.v1
+request: PLAN-TIED-LG-P1-SCAFFOLD
+purpose: "P1 scaffold implement Tracker; integrated depth; pilot-local code only."
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: in_progress
+depth_tier: integrated
+gate_policy: per_citdp
+citdp:
+  status: persisted
+  path: tied-project/citdp/CITDP-PLAN-TIED-LG-P1-SCAFFOLD.yaml
+execution_evidence:
+  request: PLAN-TIED-LG-P1-SCAFFOLD
+  completed:
+    - risk-assessment
+    - sub-adversarial-inquiry-pass
+    - gate-pseudocode-validation
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+steps:
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-TIED-LG-P1-SCAFFOLD/evidence/risk-assessment-evidence.md
+  - slug: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-bundle/working/PLAN-TIED-LG-P1-SCAFFOLD/adversarial-inquiry/phase-pre_implementation/gate-result.json
+  - slug: gate-pseudocode-validation
+    disposition: not_applicable
+    policy: no-impl-pseudocode-in-scope
+    rationale: "Phase 1 pilot scaffold; no IMPL essence_pseudocode layer—spec §7 is design authority."
