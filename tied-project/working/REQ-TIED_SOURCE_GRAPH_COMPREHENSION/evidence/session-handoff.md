@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-13 (plan-close-out slice 1)  
 **Depth:** minimal · **gate_policy:** advisory  
-**Phase:** slice 1 **close_out complete** · **REQ status:** **Implemented** (`tied_verify`)
+**Phase:** slice 1 **close_out complete** · **traceable-commit:** **`f5377751`** · **REQ status:** **Implemented** (`tied_verify`)
 
 **Program:** Brownfield comprehension Phase 2 — parent [`tied_comprehension_phases_79fbed92.plan.md`](file:///Users/fareed/.cursor/plans/tied_comprehension_phases_79fbed92.plan.md)  
 **Linked plan:** [`tied_source_graph_comprehension_phase2.plan.md`](file:///Users/fareed/.cursor/plans/tied_source_graph_comprehension_phase2.plan.md)  
@@ -36,7 +36,7 @@ BFIE matrix rows **4–6** (`source_type: code_graph`, observed) in [`../../REQ-
 
 ## Resume
 
-- **Commit:** sponsor-requested only — see [`traceable-commit-vocab-validation.md`](traceable-commit-vocab-validation.md) + proposed message in CHANGELOG [Unreleased].
+- **Commit:** **`f5377751`** — see [`traceable-commit-vocab-validation.md`](traceable-commit-vocab-validation.md).
 - **Phase 2 tranche 2:** enroll new slice in parent program plan before ask/grep/skeleton/blast.
 
 ## Commands

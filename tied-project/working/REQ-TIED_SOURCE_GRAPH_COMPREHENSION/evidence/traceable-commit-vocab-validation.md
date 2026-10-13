@@ -2,7 +2,7 @@
 
 **Request:** `REQ-TIED_SOURCE_GRAPH_COMPREHENSION`  
 **Date:** 2026-10-13  
-**Commit:** traceable-commit in progress (git-hygiene preview 2026-10-13)
+**Commit:** **`f5377751`** (2026-10-13)
 
 ## Vocab touchpoint 3 (VALIDATE)
 
