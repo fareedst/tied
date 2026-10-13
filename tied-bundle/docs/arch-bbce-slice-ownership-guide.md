@@ -6,7 +6,7 @@
 
 ## Quick path
 
-1. Open the paste-in template: [`templates/architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml`](../../templates/architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml) (repo root; copied to clients via methodology refresh for structure only).
+1. Open the paste-in template: [`ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml`](../architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml) (repo root; copied to clients via methodology refresh for structure only).
 2. Copy the optional YAML sections into your **project** ARCH detail under `tied-project/architecture-decisions/`.
 3. Point `slice_map_ref` at your slice map if you maintain one (see [`tied/analysis/README.md`](../analysis/README.md)).
 

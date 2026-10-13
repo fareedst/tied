@@ -1,0 +1,15 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "verification",
+  "diagnostics": [],
+  "hydration_diagnostics": [
+    "hydration_envelope_gaps_missing"
+  ],
+  "gate_receipt": {
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/gates/verification-2026-10-13T04-49-27-997Z.json",
+    "hash": "sha256:fb31c06a74ca011e436f435825e0ca2b071c4550ea91c6762d9796c999190dec"
+  }
+}

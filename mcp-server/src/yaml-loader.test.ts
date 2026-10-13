@@ -8,6 +8,7 @@ import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
+import yaml from "js-yaml";
 import {
   getBasePath,
   getClientProjectRoot,
@@ -15,6 +16,11 @@ import {
   clearBasePathCache,
   resolveMethodologyRoot,
   getMethodologyBasePath,
+  insertRecord,
+  updateRecord,
+  upsertRecord,
+  loadIndex,
+  loadProjectIndex,
 } from "./yaml-loader.js";
 
 beforeEach(() => {
@@ -137,6 +143,97 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
       process.env.TIED_BASE_PATH = tiedDir;
       clearBasePathCache();
       assert.strictEqual(resolveMethodologyRoot(), bundleDir);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
+    }
+  });
+
+  function seedTwoFolderClient(): { clientRoot: string; tiedDir: string; bundleDir: string } {
+    const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-write-iso-"));
+    const tiedDir = path.join(clientRoot, "tied-project");
+    const bundleDir = path.join(clientRoot, "tied-bundle");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.mkdirSync(bundleDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(bundleDir, "implementation-decisions.yaml"),
+      yaml.dump({
+        "IMPL-METH-A": { name: "Methodology A", status: "Active" },
+        "IMPL-METH-B": { name: "Methodology B", status: "Active" },
+      }),
+      "utf8",
+    );
+    fs.writeFileSync(path.join(bundleDir, "requirements.yaml"), "{}\n", "utf8");
+    fs.writeFileSync(path.join(tiedDir, "implementation-decisions.yaml"), "{}\n", "utf8");
+    process.env.TIED_BASE_PATH = tiedDir;
+    clearBasePathCache();
+    return { clientRoot, tiedDir, bundleDir };
+  }
+
+  function countImplIndexTokens(tiedDir: string): number {
+    const raw = fs.readFileSync(path.join(tiedDir, "implementation-decisions.yaml"), "utf8");
+    const data = yaml.load(raw) as Record<string, unknown>;
+    return Object.keys(data).filter((k) => k.startsWith("IMPL-")).length;
+  }
+
+  it("insertRecord writes only the new project token [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const { clientRoot, tiedDir } = seedTwoFolderClient();
+    try {
+      const result = insertRecord("implementation", "IMPL-CLIENT-NEW", {
+        name: "Client only",
+        status: "Active",
+      });
+      assert.strictEqual(result.ok, true);
+      assert.strictEqual(countImplIndexTokens(tiedDir), 1);
+      const merged = loadIndex("implementation");
+      assert.ok(merged && merged["IMPL-CLIENT-NEW"]);
+      assert.ok(merged && merged["IMPL-METH-A"]);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
+    }
+  });
+
+  it("insertRecord rejects methodology token name collision [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const { clientRoot, tiedDir } = seedTwoFolderClient();
+    try {
+      const result = insertRecord("implementation", "IMPL-METH-A", {
+        name: "Should not insert",
+        status: "Active",
+      });
+      assert.strictEqual(result.ok, false);
+      assert.strictEqual(countImplIndexTokens(tiedDir), 0);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
+    }
+  });
+
+  it("updateRecord promotes one override row for methodology-only token [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const { clientRoot, tiedDir } = seedTwoFolderClient();
+    try {
+      const result = updateRecord("implementation", "IMPL-METH-A", { status: "Deprecated" });
+      assert.strictEqual(result.ok, true);
+      assert.strictEqual(countImplIndexTokens(tiedDir), 1);
+      const project = loadProjectIndex("implementation");
+      assert.ok(project?.["IMPL-METH-A"]);
+      assert.strictEqual((project?.["IMPL-METH-A"] as { status?: string }).status, "Deprecated");
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
+    }
+  });
+
+  it("upsertRecord does not materialize full methodology index [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const { clientRoot, tiedDir } = seedTwoFolderClient();
+    try {
+      const result = upsertRecord("implementation", "IMPL-METH-B", { status: "Template" });
+      assert.strictEqual(result.ok, true);
+      assert.strictEqual(countImplIndexTokens(tiedDir), 1);
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();

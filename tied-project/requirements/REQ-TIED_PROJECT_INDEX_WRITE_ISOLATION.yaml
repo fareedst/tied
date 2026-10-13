@@ -1,0 +1,44 @@
+REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  category: "Infrastructure"
+  description: "Project TIED index files must contain only client-added or intentional override rows; MCP index mutations must not persist inherited methodology index rows."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-12"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-12"
+      reason: "Align detail with index and tied_verify"
+  name: "Project index write isolation"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Clear override vs duplicate semantics"
+      - "Slim committed project indexes"
+    problems_solved:
+      - "Index pollution on greenfield clients"
+      - "Misleading traceability after duplication"
+    why: "First MCP index mutation currently serializes the merged methodology+project map into tied-project/ indexes, polluting client repos."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+    related_to:
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Agent-facing tied-yaml guidance names tied-project/ writable boundary and merged read vs project write."
+      id: "SC-PIWI-DOCS"
+      metric: "doc link checks + vocab"
+    - criterion: "Given non-empty methodology index and empty project index, yaml_index_insert for one new token writes exactly that token to the project index file."
+      id: "SC-PIWI-INSERT-ONE"
+      metric: "yaml-loader index write isolation tests"
+    - criterion: "tied_validate_consistency reports methodology_index_duplicated_in_project for identical methodology copies in project indexes until repaired."
+      id: "SC-PIWI-DUP-DETECT"
+      metric: "consistency-validator + prune script"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    implementation:
+      - "IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION"

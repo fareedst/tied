@@ -1,0 +1,52 @@
+IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  code_locations:
+    files:
+      - description: "Duplication detection"
+        path: "mcp-server/src/consistency-validator.ts"
+      - description: "Index write isolation"
+        path: "mcp-server/src/yaml-loader.ts"
+      - description: "Repair script"
+        path: "scripts/prune-project-index-methodology-duplicates.mjs"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+  implementation_approach:
+    details:
+      - "insertRecord/updateRecord/upsertRecord use loadProjectIndex for writes"
+      - "update promotes single override row from methodology snapshot"
+    summary: "mutateProjectIndex in yaml-loader; consistency ref_issue; prune script; doc/vocab updates."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-12"
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-12"
+      reason: "Initial creation"
+  name: "Project index write isolation implementation"
+  rationale:
+    benefits:
+      - "Isolated writes"
+      - "Prune + validator"
+    problems_solved:
+      - "Merged view written to disk"
+    why: "Implement project-only index persistence and repair tooling."
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-TIED_FILES"
+    see_also: []
+    supersedes: []
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    code_annotations:
+      - "IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    requirements:
+      - "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    tests:
+      - "yaml-loader.test.ts REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"

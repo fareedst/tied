@@ -1,0 +1,18 @@
+▶ checkDocsVocabLinks [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]
+  ✔ includes live agent doc surfaces in scan roots (0.530542ms)
+  ✔ flags broken link under tied-bundle/docs (1.784208ms)
+  ✔ accepts resolvable relative link under tied-bundle/docs (1.127459ms)
+✔ checkDocsVocabLinks [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION] (4.234791ms)
+▶ lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]
+  ✔ flags planted copy_files reference on live surface (3.121917ms)
+  ✔ includes tied-bundle/docs on live surfaces (0.191375ms)
+  ✔ allowlists migration history file (1.1665ms)
+✔ lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT] (5.304042ms)
+ℹ tests 6
+ℹ suites 2
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 80.5855

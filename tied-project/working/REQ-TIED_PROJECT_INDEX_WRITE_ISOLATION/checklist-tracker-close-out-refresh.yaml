@@ -1,0 +1,59 @@
+# Focused Tracker for plan-close-out refresh after piwi-tier-bc-2026-10-12 (SC-PIWI-DOCS met in code; CHANGELOG/handoff drift).
+# Authoritative for pre_implementation on this slice; close_out replay uses close-out-tracker.yaml via run-close-out-gates.mjs.
+copy_hygiene: >-
+  Loop-back: prior close_out (piwi-closeout-2026-10-12) remains valid for loader/prune; invalidate only narrative claims
+  (CHANGELOG SC-PIWI-DOCS partial) until this refresh completes unified close-out with run_id piwi-closeout-tier-bc-2026-10-13.
+description: >
+  REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION — align close-out artifacts (CHANGELOG, proposed commit, envelope, completion signals)
+  with Tier B/C implementation. depth_tier minimal · gate_policy advisory · no new REQ tokens · no git commit in plan-close-out.
+execution_evidence:
+  request: REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION
+  run_id: piwi-closeout-tier-bc-2026-10-13
+  envelope_path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/request-evidence-envelope.v1.json
+  completed:
+    - session-bootstrap
+    - change-definition
+    - risk-assessment
+    - test-strategy
+    - gitignore-close-out-hygiene
+    - sub-close-out-evidence-sync
+  close_out_evidence:
+    date: null
+    deferred:
+      - traceable-commit (sponsor)
+    gates: {}
+steps:
+  - slug: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
+  - slug: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
+  - slug: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Evidence-only close-out refresh; no behavior change; CITDP counterexamples unchanged.
+  - slug: gitignore-close-out-hygiene
+    disposition: completed
+    rationale: No new ephemeral patterns beyond prior close-out; N/A recorded in plan-close-out-handoff.
+  - slug: sub-close-out-evidence-sync
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/closeout-run-close-out-gates.json
+  - slug: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - kind: command_evidence
+        claimed_success: true
+        exit_code: 0
+        stdout_ref: "git commit 814c2281"

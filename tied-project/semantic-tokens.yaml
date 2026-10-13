@@ -1019,6 +1019,9 @@ ARCH-TIED_PROJECT_IDENTITY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  description: "Project index write isolation architecture"
+  type: "architecture"
 ARCH-TIED_PROJECT_LINT_BOUNDARY:
   cross_references:
     - "IMPL-TIED_PROJECT_LINT"
@@ -2333,6 +2336,9 @@ IMPL-TIED_PROJECT_IDENTITY:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  description: "Project index write isolation implementation"
+  type: "implementation"
 IMPL-TIED_PROJECT_LINT:
   cross_references:
     - "ARCH-TIED_PROJECT_LINT_BOUNDARY"
@@ -3832,6 +3838,9 @@ REQ-TIED_PRIMARY_REPO_ONBOARDING:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  description: "Project index write isolation requirement"
+  type: "requirement"
 REQ-TIED_PROJECT_LINT:
   cross_references:
     - "ARCH-TIED_PROJECT_LINT_BOUNDARY"

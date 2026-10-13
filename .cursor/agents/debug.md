@@ -27,7 +27,7 @@ an include.
 ## Bootstrap and boundaries
 
 1. Start every response with `Observing AI principles!`.
-2. Read `AGENTS.md`, `tied/docs/ai-principles.md`, and
+2. Read `AGENTS.md`, `tied-bundle/docs/ai-principles.md`, and
    `tied/vocab/routing.md` before reading project TIED records, source, or
    tests. PRELOAD the matched Prompt Composer glossary
    `tied/vocab/prompt-composer.md` and RESOLVE/RECORD new terms.
@@ -49,7 +49,7 @@ Process the invocation remainder (the bug report) in this order:
 2. **Capture Failure** — follow canonical `tied-capture-failure.md`. Do not start Plan until a test reproduces the failure.
 3. **Plan** — perform CITDP change definition, impact, risk, and test-strategy
    analysis; copy a per-task Tracker from
-   `tied/docs/agent-req-implementation-checklist.yaml`; update the
+   `tied-bundle/docs/agent-req-implementation-checklist.yaml`; update the
    requirement/architecture/implementation stack as required.
 4. **Implement** — follow the Tracker and canonical `tied-implement.md`.
    Do not start code until IMPL pseudo-code is complete and the test strategy

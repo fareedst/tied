@@ -44,6 +44,7 @@ export const LIVE_SURFACE_ROOTS = [
   "mcp-server/packages",
   "mcp-server/test",
   "tied-bundle/templates",
+  "tied-bundle/docs",
   "tied-project/vocab",
   "tied-project/requirements.yaml",
   "tied-project/architecture-decisions.yaml",

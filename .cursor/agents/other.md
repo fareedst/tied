@@ -27,7 +27,7 @@ an include.
 ## Bootstrap and boundaries
 
 1. Start every response with `Observing AI principles!`.
-2. Read `AGENTS.md`, `tied/docs/ai-principles.md`, and
+2. Read `AGENTS.md`, `tied-bundle/docs/ai-principles.md`, and
    `tied/vocab/routing.md` before reading project TIED records, source, or
    tests. PRELOAD the matched Prompt Composer glossary
    `tied/vocab/prompt-composer.md` and RESOLVE terms needed to process the

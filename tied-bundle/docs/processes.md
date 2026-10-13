@@ -258,7 +258,7 @@ Active
 3. **Refresh methodology**: Re-run `tied-install.sh` from the TIED repo to update `tied-bundle/`; it overwrites only methodology files. Project YAML is unchanged.
 
 ### Artifacts & Metrics
-- **Artifacts** — `tied-bundle/` (read-only in client); project index and detail files under `tied/`.
+- **Artifacts** — `tied-bundle/` (read-only in client); project index and detail files under `tied-project/`.
 - **Success Metrics** — Methodology can be refreshed without losing project data; agents and MCP write only to project YAML.
 
 ---
@@ -477,7 +477,7 @@ procedure SORT_QUALIFYING_LIST_GROUPS(paths, sort_keys=false):
 
 **MCP partial updates on nested maps** — `yaml_detail_update` / `yaml_index_update` payloads that include only part of `metadata` or `traceability` can **replace the whole nested object** and drop siblings such as `metadata.created`. **Read → merge locally → write → re-read** the affected token (detail and index when both change); restore vanished audit fields with one corrective update before treating the edit as complete. Runbook: `docs/yaml-update-mcp-runbook.md` §2.1.
 
-1. **Edit** — Create or modify the YAML file (index or detail) under `tied/` or other TIED-related paths (e.g. `tied-project/citdp/*.yaml` as defined by the project).
+1. **Edit** — Create or modify the YAML file (index or detail) under `tied-project/` (indexes and detail dirs) or other TIED-related paths (e.g. `tied-project/citdp/*.yaml` as defined by the project).
 2. **Validate and pretty-print** — Run `scripts/yaml_tool.sh <file>` or `lint_yaml <file>` (or multiple paths in one invocation). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
 
    **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files). Lists under keys matching `order` / `*_order` / `order_*` / `*_order_*` are left in document order. Add **`--sort-keys`** to also sort sibling map keys at every indent level.
@@ -892,7 +892,7 @@ Use imperative, present tense. Include motivation for the change and how it diff
 
 ### TIED and commit messages
 
-When a commit implements or touches a specific requirement or decision, you may reference TIED tokens in the body or footer (e.g. `REQ-SIDE_PANEL_TAGS_TREE`, `ARCH-*`, `IMPL-*`). This is optional but encouraged for traceability. Commit format is defined here; for token discipline in code and docs see [AGENTS.md](../AGENTS.md) and [tied-bundle/docs/ai-principles.md](docs/ai-principles.md).
+When a commit implements or touches a specific requirement or decision, you may reference TIED tokens in the body or footer (e.g. `REQ-SIDE_PANEL_TAGS_TREE`, `ARCH-*`, `IMPL-*`). This is optional but encouraged for traceability. Commit format is defined here; for token discipline in code and docs see [AGENTS.md](../AGENTS.md) and [ai-principles.md](ai-principles.md).
 
 ### Artifacts & Metrics
 - **Artifacts**: Commit history; optionally generated changelog.

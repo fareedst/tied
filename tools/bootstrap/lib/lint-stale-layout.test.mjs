@@ -6,7 +6,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
-import { lintStaleLayoutReferences } from "./lint-stale-layout.mjs";
+import { lintStaleLayoutReferences, LIVE_SURFACE_ROOTS } from "./lint-stale-layout.mjs";
 
 describe("lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
   it("flags planted copy_files reference on live surface", () => {
@@ -16,6 +16,10 @@ describe("lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
     const result = lintStaleLayoutReferences(root, { roots: ["README.md", "tools"] });
     assert.equal(result.ok, false);
     assert.ok(result.findings.some((f) => f.patternId === "copy_files"));
+  });
+
+  it("includes tied-bundle/docs on live surfaces", () => {
+    assert.ok(LIVE_SURFACE_ROOTS.includes("tied-bundle/docs"));
   });
 
   it("allowlists migration history file", () => {

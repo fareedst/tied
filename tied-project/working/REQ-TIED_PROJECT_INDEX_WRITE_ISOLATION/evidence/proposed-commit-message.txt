@@ -1,0 +1,21 @@
+feat(tied): isolate MCP project index writes and agent doc corpus
+
+Persist only client-added or override rows in tied-project/*.yaml index
+files; merged methodology read stays read-only on disk. Add advisory
+methodology_index_duplicated_in_project consistency scan and prune CLI.
+
+Tier B/C (SC-PIWI-DOCS): refresh live agent surfaces (tied-bundle/docs,
+.cursor/agents, AGENTS.md, bundled tied-yaml skill); expand bootstrap
+check-docs-vocab-links scan roots and lint-stale-layout LIVE_SURFACE_ROOTS
+(incl. tied-bundle/docs) with unit tests.
+
+REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION
+ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION
+IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION
+
+Co-staged: adversarial fixture envelope revisions, checklist gate fixture
+stdd_revision pin, JEV context-pruning benchmark metadata refresh.
+
+BREAKING CHANGE: MCP index insert/update no longer writes inherited
+methodology rows into project indexes; polluted clients should run
+scripts/prune-project-index-methodology-duplicates.mjs or repair indexes.

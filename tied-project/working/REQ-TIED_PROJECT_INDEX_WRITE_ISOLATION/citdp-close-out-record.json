@@ -1,0 +1,40 @@
+{
+  "change_definition": {
+    "desired_behavior": "Project index writes persist only client keys; merged read stays read-only; pollution detectable and prunable"
+  },
+  "completion_criteria": {
+    "activation": {
+      "phase": "verification",
+      "request_token": "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION",
+      "run_id": "piwi-closeout-2026-10-12"
+    },
+    "record_status": "complete"
+  },
+  "risk_analysis": {
+    "adversarial_inquiry": {
+      "counterexamples": [
+        "updateRecord on empty project still serializes merged map if loader regresses",
+        "prune --write deletes intentional override when JSON compare false-negative"
+      ],
+      "depth_tier": "minimal",
+      "disconfirming_observations": [
+        "yaml-loader isolation tests pass without writing methodology keys",
+        "tied_validate_consistency ok after token create"
+      ],
+      "evidence_references": [
+        "mcp-server/src/yaml-loader.test.ts",
+        "mcp-server/src/yaml-loader.ts",
+        "mcp-server/src/consistency-validator.ts",
+        "scripts/prune-project-index-methodology-duplicates.mjs"
+      ],
+      "falsification_questions": [
+        "Does insertRecord on empty project index still write only one key after fix?",
+        "Does validator emit methodology_index_duplicated_in_project for identical copies?"
+      ],
+      "gate_policy": "advisory",
+      "inquiry_policy": "advisory"
+    },
+    "depth_tier": "minimal",
+    "gate_policy": "advisory"
+  }
+}

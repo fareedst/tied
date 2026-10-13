@@ -60,8 +60,8 @@ Read during **session-bootstrap** alongside the skill; these do not replace `tie
 
 | Topic | Document |
 |--------|----------|
-| Domain vocabulary (**PRELOAD** before reading TIED/resources) | Client handoff [`tied-project/vocab/routing.md`](../vocab/routing.md) → methodology route [`tied-bundle/vocab/routing.md`](../methodology/vocab/routing.md), then matched glossaries; standards [`tied-bundle/docs/vocabulary-index-analysis-and-standards.md`](vocabulary-index-analysis-and-standards.md); matching full catalogs on-demand |
-| Token registry and guide | [`tied-project/semantic-tokens.yaml`](../semantic-tokens.yaml), [`tied-bundle/docs/semantic-tokens.md`](semantic-tokens.md) |
+| Domain vocabulary (**PRELOAD** before reading TIED/resources) | Client handoff [`../../tied-project/vocab/routing.md`](../../tied-project/vocab/routing.md) → methodology route [`../vocab/routing.md`](../vocab/routing.md), then matched glossaries; standards [`vocabulary-index-analysis-and-standards.md`](vocabulary-index-analysis-and-standards.md); matching full catalogs on-demand |
+| Token registry and guide | [`../../tied-project/semantic-tokens.yaml`](../../tied-project/semantic-tokens.yaml), [`semantic-tokens.md`](semantic-tokens.md) |
 | IMPL pseudo-code and `[PROC-IMPL_PSEUDOCODE_TOKENS]` | [`tied-bundle/docs/implementation-decisions.md`](implementation-decisions.md) |
 | AI principles and ordering | [`ai-principles.md`](./ai-principles.md) |
 

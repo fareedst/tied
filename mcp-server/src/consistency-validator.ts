@@ -7,6 +7,8 @@ import path from "node:path";
 import fs from "node:fs";
 import {
   loadIndex,
+  loadMethodologyIndex,
+  loadProjectIndex,
   listTokens,
   validateIndex,
   getBasePath,
@@ -117,7 +119,7 @@ export function extractTokensFromText(text: string): { req: string[]; arch: stri
 }
 
 export interface TokenReferenceIssue {
-  kind: "missing_reference" | "orphan_detail";
+  kind: "missing_reference" | "orphan_detail" | "methodology_index_duplicated_in_project";
   token: string;
   referenced_by?: string;
   referenced_token?: string;
@@ -493,6 +495,29 @@ export function validateConsistency(options: ValidateConsistencyOptions = {}): C
     });
     report.ontology_issues = ontology.issues;
     if (!ontology.ok) report.ok = false;
+  }
+
+  // [IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION] [ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION] [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]
+  // Advisory warning: identical methodology row copied into project index (pollution); override rows that differ are kept.
+  for (const name of TIED_INDEX_NAMES) {
+    const meth = loadMethodologyIndex(name);
+    const proj = loadProjectIndex(name);
+    if (!meth || !proj) continue;
+    for (const token of Object.keys(proj)) {
+      if (token.startsWith("#")) continue;
+      if (!(token in meth)) continue;
+      const pVal = proj[token];
+      const mVal = meth[token];
+      if (typeof pVal !== "object" || pVal === null) continue;
+      if (typeof mVal !== "object" || mVal === null) continue;
+      if (JSON.stringify(pVal) === JSON.stringify(mVal)) {
+        report.token_references.push({
+          kind: "methodology_index_duplicated_in_project",
+          token,
+          index: name,
+        });
+      }
+    }
   }
 
   return report;

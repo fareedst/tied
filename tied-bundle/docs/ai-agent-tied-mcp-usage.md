@@ -15,7 +15,7 @@
 - **On MCP errors**: follow the runbook failure playbook (fix JSON in `record`/`updates`, narrow scope, retry)—do **not** silently fall back to direct file edit on the same path.
 - **`tied-bundle/`** is read-only in client projects; when MCP rejects a methodology write, do not “fix” it with `Write`.
 
-- The TIED **database** (YAML indexes and detail files under `tied/` or `TIED_BASE_PATH`) **controls and directs** the creation of code and tests.
+- The TIED **database** (YAML indexes and detail files under **`tied-project/`** or **`TIED_BASE_PATH`**) **controls and directs** the creation of code and tests.
 - **All code of significance is created in TIED first**: requirements (REQ), then architecture (ARCH) and implementation (IMPL) decisions, with full traceability. Only then is it implemented in source and tests using **TDD**.
 - The flow is: **TIED data → tests → code**. TIED is the source of truth for intent; tests and code realize it.
 
@@ -27,7 +27,7 @@
 
 ### 1.2 Preload samples, hook logs, and workspace path
 
-- **Re-ground the TIED base path every session** — Call `tied_config_get_base_path` (or rely on a correctly configured `TIED_BASE_PATH` for the **active** workspace). Treat absolute `tied/` paths in pasted `agent_preload` YAML, demo snapshots, or copied checklist text as **hints only** if they might refer to another clone or repo.
+- **Re-ground the TIED base path every session** — Call `tied_config_get_base_path` (or rely on a correctly configured `TIED_BASE_PATH` for the **active** workspace). Treat absolute **`tied-project/`** (or legacy **`tied/`**) paths in pasted `agent_preload` YAML, demo snapshots, or copied checklist text as **hints only** if they might refer to another clone or repo.
 - **Hook export YAML is not the TIED database** — Files such as `~/.cursor/logs/conv_*.yaml` are Cursor hook/conversation exports (large root-level lists and block scalars). Do not patch or rewrite them with IDE tools as if they were project TIED YAML; use offline tooling to shrink or analyze them (e.g. `scripts/dedupe_transcript_yaml.rb` in this repository). For a full catalog of Ruby preprocessors, metrics, and extractors, see [conversation-analysis-tools.md](conversation-analysis-tools.md). YAML-looking lines inside transcript `text` fields are **string payload**, not live R/A/I records; confusing layers causes invalid YAML (see [conversation-log-yaml-structure-and-agent-difficulties.md](conversation-log-yaml-structure-and-agent-difficulties.md)).
 - **Avoid redundant discovery** — When bootstrap or preload already recorded paths and MCP batch reads, skip repeating the same Grep/`yaml_detail_read_many` work; it adds noise without improving YAML safety.
 
@@ -36,7 +36,7 @@
 ## 2. Primary interface: TIED MCP server
 
 - **Use the TIED MCP server as the primary way to read and write TIED data** for the project.
-- **Avoid direct edits to `tied/**/*.yaml` for writes;** use MCP write tools so the server can emit valid YAML (e.g. values with colons are quoted correctly).
+- **Avoid direct edits to `tied-project/**/*.yaml` for writes;** use MCP write tools so the server can emit valid YAML (e.g. values with colons are quoted correctly). Index writes must not persist the merged methodology view—only project keys.
 - **IMPL pseudo-code sidecar (`tied-project/implementation-decisions/IMPL-*-pseudocode.md`)** is **plain UTF-8 text** (not YAML). It may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**, or updated via **`impl_detail_set_essence_pseudocode`** (inline, **`essence_pseudocode_path`**, or **`tied-cli`** with **`TIED_CLI_IMPL_ESSENCE_FILE`** / stdin). Prefer those over constructing huge JSON-escaped strings when possible ([pseudocode-writing-and-validation.md § Mechanics](pseudocode-writing-and-validation.md#mechanics-editing-the-sidecar-mcp-and-cli)).
 - **Hard rule (project-owned YAML only)**: Do not use IDE `apply_patch` / `Write` on project index or **detail** `*.yaml` under the TIED base path when a tool in § 2 covers the operation. If MCP errors, follow the failure playbook in [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md); do not silently switch to direct file edit on those YAML files.
 - Prefer **MCP tools** for:
@@ -52,7 +52,7 @@
 
 ## 3. When direct file access is allowed
 
-- **Direct read/write of TIED files** (e.g. under `tied/` or the path reported by `tied_config_get_base_path`) is **allowed only when**:
+- **Direct read/write of TIED files** (e.g. under **`tied-project/`** or the path reported by `tied_config_get_base_path`) is **allowed only when**:
   - No MCP tool or resource exists that can perform the needed operation, or
   - The operation is one-off or exploratory and will be replaced by MCP usage once a tool exists.
 - When you use direct file access:

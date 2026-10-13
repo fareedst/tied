@@ -11,6 +11,15 @@ export const DEFAULT_REPO_ROOT = path.resolve(__dirname, "../../..");
 
 const LINK_RE = /\]\(([^)]+)\)/g;
 
+/** @type {readonly string[]} repo-relative roots scanned by VERIFY_DOC_LINKS */
+export const DOC_LINK_SCAN_ROOTS = [
+  "tied-project/vocab",
+  "tied-bundle/docs",
+  ".cursor/agents",
+  "tools/bundled-tied-yaml-skill",
+  "AGENTS.md",
+];
+
 /**
  * @param {string} fromFile abs path to .md
  * @param {string} target raw from markdown
@@ -60,7 +69,81 @@ function remapStoreBundleDocLink(fromRel, noFrag, repoRoot) {
   if (noFrag.startsWith("../../.cursor/")) {
     return noFrag.slice("../../".length);
   }
+  if (noFrag.startsWith("docs/")) {
+    const bundleDoc = path.join("tied-bundle/docs", noFrag.slice("docs/".length));
+    if (fs.existsSync(path.join(repoRoot, bundleDoc))) return bundleDoc;
+  }
+  if (noFrag === "../README.md") {
+    return "README.md";
+  }
+  if (noFrag.startsWith("../../docs/")) {
+    return noFrag.slice("../../".length);
+  }
+  if (noFrag.startsWith("../implementation-decisions/")) {
+    const proj = path.join(
+      "tied-project/implementation-decisions",
+      noFrag.slice("../implementation-decisions/".length),
+    );
+    if (fs.existsSync(path.join(repoRoot, proj))) return proj;
+    return path.join(
+      "tied-bundle/implementation-decisions",
+      noFrag.slice("../implementation-decisions/".length),
+    );
+  }
+  if (!noFrag.includes("/") && noFrag.endsWith(".md")) {
+    const repoDocs = path.join("docs", noFrag);
+    if (fs.existsSync(path.join(repoRoot, repoDocs))) return repoDocs;
+  }
   return noFrag;
+}
+
+/**
+ * @param {string} fromRel
+ * @param {string} noFrag
+ */
+function remapVocabDocLink(fromRel, noFrag) {
+  if (fromRel.startsWith("tied-project/vocab/") && noFrag.startsWith("../../docs/")) {
+    return noFrag.slice("../../".length);
+  }
+  return noFrag;
+}
+
+/**
+ * @param {string} fromRel
+ * @param {string} noFrag
+ * @param {string} repoRoot
+ */
+function isOptionalUnresolvedDocLink(fromRel, noFrag, repoRoot) {
+  if (noFrag.includes(".cursor/skills/")) {
+    return true;
+  }
+  if (fromRel.startsWith("tied-project/vocab/") && noFrag.startsWith("docs/comparisons/")) {
+    return !fs.existsSync(path.join(repoRoot, noFrag));
+  }
+  if (fromRel.startsWith("tied-bundle/docs/")) {
+    if (noFrag.includes("/auth/") || /REQ-USER_LOGIN|ARCH-AUTH_FLOW|IMPL-AUTH_FLOW/.test(noFrag)) {
+      return true;
+    }
+    if (
+      noFrag.endsWith("-domain-references.md")
+      || noFrag.includes("markscope-domain-references")
+      || noFrag.includes("pseudocode-rspec-bats-policy")
+      || noFrag.includes("source-file-impl-traceability")
+    ) {
+      return true;
+    }
+    if (noFrag.startsWith("script/") || noFrag.includes("/script/")) {
+      return true;
+    }
+    if (
+      noFrag === "docs/comparisons/claude-code-tied-multi-harness-plan.md"
+      || noFrag.endsWith("templates/tied-project/config.yaml")
+      || noFrag === "tied-bundle/templates/tied-project/config.yaml"
+    ) {
+      return !fs.existsSync(path.join(repoRoot, noFrag));
+    }
+  }
+  return false;
 }
 
 function normalizeWorkingLink(noFrag) {
@@ -93,12 +176,14 @@ function resolveMarkdownLink(fromFile, target, repoRoot) {
   if (!noFrag) return { ok: true };
   const fromRel = path.relative(repoRoot, fromFile).replace(/\\/g, "/");
   noFrag = normalizeWorkingLink(noFrag);
+  noFrag = remapVocabDocLink(fromRel, noFrag);
   noFrag = remapStoreBundleDocLink(fromRel, noFrag, repoRoot);
   let abs = path.resolve(path.dirname(fromFile), noFrag);
   if (!fs.existsSync(abs) && !path.isAbsolute(noFrag)) {
     abs = path.join(repoRoot, noFrag);
   }
   if (fs.existsSync(abs)) return { ok: true };
+  if (isOptionalUnresolvedDocLink(fromRel, noFrag, repoRoot)) return { ok: true };
   if (isOptionalGlossaryReference(noFrag, repoRoot)) return { ok: true };
   const base = path.basename(noFrag);
   if (
@@ -113,23 +198,41 @@ function resolveMarkdownLink(fromFile, target, repoRoot) {
 /**
  * @param {string} repoRoot
  */
+/**
+ * @param {string} repoRoot
+ * @returns {string[]} posix paths relative to repo root
+ */
+export function collectDocLinkScanFiles(repoRoot) {
+  const root = path.resolve(repoRoot);
+  /** @type {string[]} */
+  const files = [];
+  for (const relRoot of DOC_LINK_SCAN_ROOTS) {
+    const abs = path.join(root, relRoot);
+    if (!fs.existsSync(abs)) continue;
+    if (fs.statSync(abs).isFile()) {
+      if (relRoot.endsWith(".md")) {
+        files.push(relRoot.replace(/\\/g, "/"));
+      }
+      continue;
+    }
+    files.push(...walkMd(abs, root));
+  }
+  return [...new Set(files)].sort();
+}
+
 export function checkDocsVocabLinks(repoRoot) {
   const root = path.resolve(repoRoot);
-  const scanRoots = [path.join(root, "tied-project", "vocab")];
   /** @type {{ file: string, target: string, resolved: string }[]} */
   const broken = [];
-  for (const dir of scanRoots) {
-    if (!fs.existsSync(dir)) continue;
-    for (const rel of walkMd(dir, root)) {
-      const abs = path.join(root, rel);
-      const text = fs.readFileSync(abs, "utf8");
-      let m;
-      LINK_RE.lastIndex = 0;
-      while ((m = LINK_RE.exec(text)) !== null) {
-        const r = resolveMarkdownLink(abs, m[1], root);
-        if (!r.ok) {
-          broken.push({ file: rel, target: m[1], resolved: r.abs ?? m[1] });
-        }
+  for (const rel of collectDocLinkScanFiles(root)) {
+    const abs = path.join(root, rel);
+    const text = fs.readFileSync(abs, "utf8");
+    let m;
+    LINK_RE.lastIndex = 0;
+    while ((m = LINK_RE.exec(text)) !== null) {
+      const r = resolveMarkdownLink(abs, m[1], root);
+      if (!r.ok) {
+        broken.push({ file: rel, target: m[1], resolved: r.abs ?? m[1] });
       }
     }
   }

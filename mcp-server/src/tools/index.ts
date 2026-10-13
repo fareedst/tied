@@ -437,7 +437,7 @@ export const allTools = [
     name: "yaml_index_insert",
     config: {
       description:
-        "Insert a new record into a YAML index. Fails if the token already exists. Record must be a JSON object (nested allowed). Writes to the index file (e.g. tied-project/requirements.yaml). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Insert a new record into a YAML index. Fails if the token already exists. Record must be a JSON object (nested allowed). Writes to the index file (e.g. tied-project/requirements.yaml). Prefer this over editing tied-project/*.yaml directly (merged read, project write); the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -467,7 +467,7 @@ export const allTools = [
     name: "yaml_index_update",
     config: {
       description:
-        "Update an existing record in a YAML index by merging the given fields into the token row. Top-level keys replace scalars/arrays as usual; nested objects metadata, traceability, related_requirements, related_decisions, rationale, and implementation_approach are merged one level with the existing row (partial metadata preserves metadata.created; when metadata.last_updated is an object on both sides, its sub-keys merge one level). Fails if the token does not exist. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Update an existing record in a YAML index by merging the given fields into the token row. Top-level keys replace scalars/arrays as usual; nested objects metadata, traceability, related_requirements, related_decisions, rationale, and implementation_approach are merged one level with the existing row (partial metadata preserves metadata.created; when metadata.last_updated is an object on both sides, its sub-keys merge one level). Fails if the token does not exist. Prefer this over editing tied-project/*.yaml directly (merged read, project write); the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         index: INDEX_ENUM.describe(
           "Which YAML index: requirements, architecture, implementation, or semantic-tokens"
@@ -680,7 +680,7 @@ export const allTools = [
     name: "yaml_detail_create",
     config: {
       description:
-        "Create a new detail YAML file. Token must be REQ-*, ARCH-*, or IMPL-*. Record is the JSON object for the single top-level key. Fails if file already exists or token invalid. Optionally syncs index detail_file (sync_index: true). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Create a new detail YAML file. Token must be REQ-*, ARCH-*, or IMPL-*. Record is the JSON object for the single top-level key. Fails if file already exists or token invalid. Optionally syncs index detail_file (sync_index: true). Prefer this over editing tied-project/*.yaml directly (merged read, project write); the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID (e.g. REQ-NEW_FEATURE)"),
         record: z.string().describe("JSON or YAML string of the detail record object"),
@@ -706,7 +706,7 @@ export const allTools = [
     name: "yaml_detail_update",
     config: {
       description:
-        "Update an existing REQ/ARCH/IMPL detail YAML by merging updates into the record under the token key. Top-level keys replace scalars/arrays as usual; nested objects metadata, traceability, related_requirements, related_decisions, rationale, and implementation_approach are merged one level with existing values (partial metadata preserves metadata.created; when metadata.last_updated is an object on both sides, its sub-keys merge one level). Fails if no detail file exists. Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons). For IMPL-only essence_pseudocode churn, consider impl_detail_set_essence_pseudocode.",
+        "Update an existing REQ/ARCH/IMPL detail YAML by merging updates into the record under the token key. Top-level keys replace scalars/arrays as usual; nested objects metadata, traceability, related_requirements, related_decisions, rationale, and implementation_approach are merged one level with existing values (partial metadata preserves metadata.created; when metadata.last_updated is an object on both sides, its sub-keys merge one level). Fails if no detail file exists. Prefer this over editing tied-project/*.yaml directly (merged read, project write); the server emits valid YAML (e.g. quoting values with colons). For IMPL-only essence_pseudocode churn, consider impl_detail_set_essence_pseudocode.",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID of the detail file to update"),
         updates: z.string().describe("JSON or YAML string of key-value pairs to merge into the detail record"),
@@ -898,7 +898,7 @@ export const allTools = [
     name: "tied_token_create_with_detail",
     config: {
       description:
-        "Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Writes the index (requirements, architecture-decisions, or implementation-decisions) and the corresponding detail file. Fails if detail file already exists. Set upsert_index true to merge into existing index record. For IMPL tokens, detail_record should follow the TIED v3.0.0 canonical schema (see implementation-decisions.md). Prefer this over editing tied/*.yaml directly; the server emits valid YAML (e.g. quoting values with colons).",
+        "Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Writes the index (requirements, architecture-decisions, or implementation-decisions) and the corresponding detail file. Fails if detail file already exists. Set upsert_index true to merge into existing index record. For IMPL tokens, detail_record should follow the TIED v3.0.0 canonical schema (see implementation-decisions.md). Prefer this over editing tied-project/*.yaml directly (merged read, project write); the server emits valid YAML (e.g. quoting values with colons).",
       inputSchema: z.object({
         token: z.string().min(1).describe("Token ID (REQ-*, ARCH-*, or IMPL-*)"),
         index_record: z.string().describe("JSON or YAML string of the index record (e.g. name, status, cross_references). detail_file is set automatically."),

@@ -2646,6 +2646,32 @@ REQ-TIED_PRIMARY_REPO_ONBOARDING:
       - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
     implementation:
       - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  category: "Infrastructure"
+  cross_references:
+    - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+    - "REQ-TIED_TWO_FOLDER_LAYOUT"
+  description: "Project TIED index files must contain only client-added or intentional override rows; MCP index mutations must not persist inherited methodology index rows."
+  detail_file: "requirements/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+  name: "Project index write isolation"
+  priority: "P1"
+  satisfaction_criteria:
+    - criterion: "Agent-facing tied-yaml guidance names tied-project/ writable boundary and merged read vs project write."
+      id: "SC-PIWI-DOCS"
+      metric: "doc link checks + vocab"
+    - criterion: "Given non-empty methodology index and empty project index, yaml_index_insert for one new token writes exactly that token to the project index file."
+      id: "SC-PIWI-INSERT-ONE"
+      metric: "yaml-loader index write isolation tests"
+    - criterion: "tied_validate_consistency reports methodology_index_duplicated_in_project for identical methodology copies in project indexes until repaired."
+      id: "SC-PIWI-DUP-DETECT"
+      metric: "consistency-validator + prune script"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    implementation:
+      - "IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION"
 REQ-TIED_PROJECT_LINT:
   category: "Tooling"
   cross_references:

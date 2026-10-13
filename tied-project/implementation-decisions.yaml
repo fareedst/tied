@@ -2608,6 +2608,21 @@ IMPL-TIED_PROJECT_IDENTITY:
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_IDENTITY.yaml"
   name: "Project identity pure module"
   status: "Active"
+IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  cross_references:
+    - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    - "IMPL-TIED_FILES"
+    - "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+  name: "Project index write isolation implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    code_annotations:
+      - "IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    requirements:
+      - "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"
 IMPL-TIED_PROJECT_LINT:
   cross_references:
     - "ARCH-TIED_PROJECT_LINT_BOUNDARY"

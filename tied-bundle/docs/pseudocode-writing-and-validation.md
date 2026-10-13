@@ -247,7 +247,7 @@ Some repos mechanically extract test NORM lines into Markdown. That does **not**
 - **Node.js >= 18** on `PATH`.
 - Built TIED **mcp-server**: `npm install && npm run build --prefix mcp-server` in a TIED clone.
 - **`TIED_MCP_BIN`**: absolute path to `mcp-server/dist/index.js`.
-- **`TIED_BASE_PATH`**: absolute path to **this** project’s **`tied/`** directory.
+- **`TIED_BASE_PATH`**: absolute path to **this** project’s **`tied-project/`** directory (legacy **`tied/`** alias still supported).
 - **CLI:** `.cursor/skills/tied-yaml/scripts/tied-cli.sh` (see [AGENTS.md](../../AGENTS.md)).
 
 ### Efficient workflow

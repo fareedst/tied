@@ -1,6 +1,6 @@
 ---
 name: TIED Pseudocode Standardization
-overview: Standalone recommendations for TIED clients—canonical sidecar model, a copy-paste pseudocode template, preferred vocabulary, validation layers, block token rules, machine vs hand ownership, and what to leave project-specific. Pairs with the full TIED writing guide; see `tied/docs` link below.
+overview: Standalone recommendations for TIED clients—canonical sidecar model, a copy-paste pseudocode template, preferred vocabulary, validation layers, block token rules, machine vs hand ownership, and what to leave project-specific. Pairs with the full TIED writing guide; see [`tied-bundle/docs/pseudocode-writing-and-validation.md`](pseudocode-writing-and-validation.md).
 todos: []
 isProject: false
 ---
@@ -204,4 +204,4 @@ flowchart LR
 
 ## 11. Using this plan elsewhere
 
-To adopt in another repository: copy **§1–§10** into that project’s internal standards or `tied/docs`, and copy **[`templates/impl-essence-pseudocode-template.md`](../../templates/impl-essence-pseudocode-template.md)** (or vendor the same file under your tree); replace `{TOKEN}` examples with the project’s naming; add any project-specific H2 rule or script names in a **short** local preface. Keep methodology **process token** names if the project follows TIED.
+To adopt in another repository: copy **§1–§10** into that project’s internal standards or `tied-bundle/docs`, and copy **[`templates/impl-essence-pseudocode-template.md`](../../templates/impl-essence-pseudocode-template.md)** (or vendor the same file under your tree); replace `{TOKEN}` examples with the project’s naming; add any project-specific H2 rule or script names in a **short** local preface. Keep methodology **process token** names if the project follows TIED.

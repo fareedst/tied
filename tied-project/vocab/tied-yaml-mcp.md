@@ -19,11 +19,14 @@
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |
 | **activation collect** | gate JSON assembly, hand-built activation | `tied_checklist_activation_collect` — read-only assembly of `{ receipt, artifacts, expected }` from phase artifact dirs |
-| **TIED base path** | repo root, workspace | Absolute path to **`tied/`** directory; `tied_config_get_base_path` confirms |
+| **TIED base path** | repo root, workspace | Absolute path to **`tied-project/`** (modern) or legacy **`tied/`**; `tied_config_get_base_path` confirms writable project root |
 | **client project root** | repo root (alone), workspace | Directory containing **`tied/`**; parent of **TIED base path**; anchor for `tied_token_rename` `extra_globs` / `extra_extensions` |
 | **default TIED rename scope** | yaml rename | Built-in `tied_token_rename` targets: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames |
 | **extra substitution targets** | extra files, glob rename | Client-repo files outside default TIED rename scope; selected via `extra_globs` and `extra_extensions` on `tied_token_rename` |
 | **project YAML write** | any yaml under tied | MCP writes **only** project indexes/detail dirs; never `tied-bundle/` |
+| **project index write isolation** | merged write bleed, full-index materialization | Index mutations persist **only** keys touched in `tied-project/{requirements,architecture-decisions,implementation-decisions,semantic-tokens}.yaml`; never the merged methodology ∪ project map |
+| **methodology index duplication** | index pollution, duplicated methodology row | Identical copy of an inherited methodology index row in a project index file; prune candidate; not an **override row** |
+| **override row** | project override, intentional collision | Single project index row for a token that **differs** from methodology (by design); one key on disk |
 | **merged view** | full yaml read | Methodology + project for read/validate; writes target project only |
 | **consistency validation** | lint only | `tied_validate_consistency` — graph + schema, not just YAML syntax |
 | **MCP config preservation** | MCP config refresh, MCP config merge | `tied-install.sh` creates `.cursor/mcp.json` only when absent; an existing file remains byte-for-byte unchanged |

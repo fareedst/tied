@@ -171,6 +171,11 @@ export const STALE_LAYOUT_ALLOWLIST = [
     reason: "documented migration history",
   },
   {
+    glob: "tied-bundle/docs/**",
+    patternIds: ["root_templates", "tied_methodology", "copy_files", "copy_files_mjs"],
+    reason: "methodology doc corpus cites bundled templates/ and migration vocabulary by design",
+  },
+  {
     glob: "tied-bundle/**/IMPL-TIED_FILES*.md",
     reason: "superseded bootstrap IMPL history",
   },

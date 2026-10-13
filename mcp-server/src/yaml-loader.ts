@@ -445,6 +445,42 @@ export function getWritableIndexPath(index: IndexName): string {
   return path.join(base, fileName);
 }
 
+/** Copy on-disk project index map only (never methodology rows). */
+function cloneProjectIndexMap(index: IndexName): Record<string, unknown> {
+  const project = loadProjectIndex(index);
+  if (!project) return {};
+  return { ...project };
+}
+
+/** Persist project index file; creates base directory when missing. */
+function writeProjectIndexMap(
+  index: IndexName,
+  data: Record<string, unknown>
+): { ok: true } | { ok: false; error: string } {
+  const filePath = getWritableIndexPath(index);
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  // [IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION] [ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION] [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]
+  // How: Write only the project index map; never serialize merged methodology ∪ project view.
+  return writeCanonicalValueAtomic(filePath, data);
+}
+
+function projectIndexHasToken(data: Record<string, unknown>, token: string): boolean {
+  const val = data[token];
+  return typeof val === "object" && val !== null;
+}
+
+function mergedRecordForToken(
+  index: IndexName,
+  token: string
+): Record<string, unknown> | null {
+  const merged = loadIndex(index);
+  if (!merged) return null;
+  const val = merged[token];
+  if (typeof val !== "object" || val === null) return null;
+  return val as Record<string, unknown>;
+}
+
 /**
  * Insert a new record. Fails if the token already exists or file cannot be written.
  * Creates the index file (and base directory) if it does not exist.
@@ -455,19 +491,13 @@ export function insertRecord(
   record: Record<string, unknown>
 ): { ok: true } | { ok: false; error: string } {
   try {
-    const filePath = getWritableIndexPath(index);
-    const data = loadIndex(index) ?? {};
-    if (token in data) return { ok: false, error: `Token already exists: ${token}` };
-    if (typeof data[token] === "object" && data[token] !== null)
+    const project = cloneProjectIndexMap(index);
+    if (projectIndexHasToken(project, token))
       return { ok: false, error: `Token already exists: ${token}` };
-    data[token] = record;
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
-    // How: Resolve repository scalar style through the shared canonical writer and return one format contract.
-    const writeResult = writeCanonicalValueAtomic(filePath, data);
-    if (!writeResult.ok) return writeResult;
-    return writeResult;
+    if (isTokenInMethodology(index, token))
+      return { ok: false, error: `Token already exists: ${token}` };
+    project[token] = record;
+    return writeProjectIndexMap(index, project);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };
@@ -484,20 +514,11 @@ export function updateRecord(
   updates: Record<string, unknown>
 ): { ok: true } | { ok: false; error: string } {
   try {
-    const filePath = getWritableIndexPath(index);
-    const data = loadIndex(index);
-    if (!data || !(token in data))
-      return { ok: false, error: `Token not found: ${token}` };
-    const existing = data[token];
-    if (typeof existing !== "object" || existing === null)
-      return { ok: false, error: `Token is not a record: ${token}` };
-    const merged = mergeRecordUpdate(existing as Record<string, unknown>, updates);
-    data[token] = merged;
-    // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
-    // How: Resolve repository scalar style through the shared canonical writer and return one format contract.
-    const writeResult = writeCanonicalValueAtomic(filePath, data);
-    if (!writeResult.ok) return writeResult;
-    return writeResult;
+    const existing = mergedRecordForToken(index, token);
+    if (!existing) return { ok: false, error: `Token not found: ${token}` };
+    const project = cloneProjectIndexMap(index);
+    project[token] = mergeRecordUpdate(existing, updates);
+    return writeProjectIndexMap(index, project);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };
@@ -515,21 +536,16 @@ export function upsertRecord(
   record: Record<string, unknown>
 ): { ok: true } | { ok: false; error: string } {
   try {
-    const filePath = getWritableIndexPath(index);
-    const data = loadIndex(index) ?? {};
-    const existing = data[token];
-    if (typeof existing === "object" && existing !== null) {
-      data[token] = mergeRecordUpdate(existing as Record<string, unknown>, record);
+    const project = cloneProjectIndexMap(index);
+    const existing = mergedRecordForToken(index, token);
+    if (existing) {
+      project[token] = mergeRecordUpdate(existing, record);
     } else {
-      data[token] = record;
+      if (isTokenInMethodology(index, token))
+        return { ok: false, error: `Token already exists: ${token}` };
+      project[token] = record;
     }
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION] [REQ-MODULE_VALIDATION]
-    // How: Resolve repository scalar style through the shared canonical writer and return one format contract.
-    const writeResult = writeCanonicalValueAtomic(filePath, data);
-    if (!writeResult.ok) return writeResult;
-    return writeResult;
+    return writeProjectIndexMap(index, project);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     return { ok: false, error: message };

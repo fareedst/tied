@@ -1,0 +1,24 @@
+ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION:
+  description: "Separate merged read model from project-only write model; detect methodology index duplication in project indexes."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-12"
+    last_updated:
+      author: "session-handoff"
+      date: "2026-10-12"
+      reason: "ARCH parity with REQ/IMPL after verification"
+  name: "Project index write isolation architecture"
+  rationale:
+    benefits:
+      - "Predictable project index shape"
+      - "Validator signal for pollution"
+    problems_solved:
+      - "Full-index materialization on insert/update/upsert"
+    why: "Writers must not treat loadIndex() output as the on-disk project index payload."
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+    requirements:
+      - "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"

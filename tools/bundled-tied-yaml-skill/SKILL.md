@@ -28,7 +28,7 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
   .cursor/skills/tied-yaml/scripts/tied-cli.sh yaml_index_list_tokens '{"index":"requirements"}'
 ```
 
-- **`TIED_BASE_PATH`** — absolute path to the project traceability root (**`tied/`** or **`tied-project/`**; defaults to `<client_repo_root>/tied`, or **`tied-project`** when present).
+- **`TIED_BASE_PATH`** — absolute path to the project traceability root (**`tied-project/`** preferred; legacy **`tied/`** alias; defaults to `<client_repo_root>/tied-project` when present, else **`tied`**).
 - **`TIED_METHOD_ROOT`** — absolute path to the methodology bundle root (**`tied-bundle/`**; defaults to `<client_repo_root>/tied-bundle`). Methodology reads use MCP **`getMethodologyBasePath`** / env **`TIED_METHODOLOGY_BUNDLE_PATH`** when set.
 - **`TIED_REPO_ROOT`** — TIED methodology repository used for **`mcp-server`** (baked by **`tied-install.sh`**; override if the TIED clone moved).
 - **`TIED_MCP_BIN`** — absolute path to **`mcp-server/dist/index.js`** (defaults to `$TIED_REPO_ROOT/mcp-server/dist/index.js`).
@@ -83,7 +83,7 @@ All operations use the wrapper script at `.cursor/skills/tied-yaml/scripts/tied-
 |------|--------|
 | **DO** | Use `tied-cli.sh` for every read and write of TIED **YAML** and structured TIED data (the paths the MCP server manages). |
 | **DO** | For IMPL pseudo-code **body** only, you may edit `tied-project/implementation-decisions/IMPL-*-pseudocode.md` directly, or set it via `impl_detail_set_essence_pseudocode` / `tied-cli` file or stdin; then `tied_validate_consistency`. |
-| **DO NOT** | Use `Write`, `StrReplace`, `apply_patch`, or shell `sed`/`awk` on TIED **YAML** or index files under `tied/` (see **CITDP** and **exception** below). The pseudo-code sidecar `.md` is plain UTF-8, not YAML—MCP/CLI is still available but not mandatory for the body. |
+| **DO NOT** | Use `Write`, `StrReplace`, `apply_patch`, or shell `sed`/`awk` on TIED **YAML** or index files under **`tied-project/`** (legacy clients may still use `tied/` as an alias; see **CITDP** and **exception** below). The pseudo-code sidecar `.md` is plain UTF-8, not YAML—MCP/CLI is still available but not mandatory for the body. |
 | **DO NOT** | Use ad-hoc Python YAML parsing instead of **`tied-cli.sh`** / **`tied_validate_consistency`** for TIED consistency checks. |
 | **NEVER** | Edit files under `tied-bundle/` -- that tree is read-only. |
 | **Exception** | If no tool supports the operation, document the gap (one line), direct-edit the minimal file, then validate. |
