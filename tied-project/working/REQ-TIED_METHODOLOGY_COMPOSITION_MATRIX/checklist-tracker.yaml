@@ -144,8 +144,17 @@ steps:
       status: completed
       evidence_refs: *ref_8
     disposition: completed
-  - slug: traceable-commit
-    status: pending
+  - evidence_refs:
+      - CHANGELOG.md
+      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md
+    slug: traceable-commit
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs:
+        - CHANGELOG.md
+        - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md
+    disposition: completed
 version: 3.0.0
 working_artifacts:
   committed_root: tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/
