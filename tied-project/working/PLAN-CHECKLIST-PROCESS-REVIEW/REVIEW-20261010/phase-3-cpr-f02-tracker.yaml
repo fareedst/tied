@@ -4,9 +4,12 @@ citdp:
   status: "complete"
 depth_tier: "minimal"
 execution_authority:
-  scope: "phase-3-cleanup-cpr-f02"
-  parent_program: "PLAN-CHECKLIST-PROCESS-REVIEW"
   batch_id: "CPR-F02"
+  parent_program: "PLAN-CHECKLIST-PROCESS-REVIEW"
+  scope: "phase-3-cleanup-cpr-f02"
+execution_evidence:
+  envelope_path: "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-CHECKLIST-PROCESS-REVIEW"
 gate_policy: "advisory"
 profile_depth: "minimal"
 purpose: "Phase 3 Tracker — dual working/ root navigation callouts."
@@ -14,9 +17,6 @@ request: "REQ-CHECKLIST-PROCESS-REVIEW"
 schema_version: "checklist-process-review-phase3-tracker.v1"
 source_template: "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/checklist-tracker.yaml"
 status: "phase_3_cpr_f02_complete"
-execution_evidence:
-  request: "REQ-CHECKLIST-PROCESS-REVIEW"
-  envelope_path: "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json"
 steps:
   - disposition: "completed"
     evidence_refs:
@@ -55,11 +55,11 @@ steps:
   - disposition: "completed"
     evidence_refs:
       - kind: "file_path"
-        path: "tied-project/working/README.md"
+        path: "AGENTS.md"
       - kind: "file_path"
         path: "README.md"
       - kind: "file_path"
-        path: "AGENTS.md"
+        path: "tied-project/working/README.md"
     id: "traceable-commit"
     notes: "commit_deferred until sponsor close-out."
   - disposition: "completed"

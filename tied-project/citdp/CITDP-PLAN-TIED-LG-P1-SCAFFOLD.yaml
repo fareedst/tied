@@ -3,14 +3,14 @@ CITDP-PLAN-TIED-LG-P1-SCAFFOLD:
     current_behavior: "No tools/langgraph-pilot package; MCP cannot be invoked from LangGraph Python scaffold."
     desired_behavior: "Phase 1 pilot tree importable with MCP adapter (read-only smoke tools), RunState v0, ping graph, SQLite checkpoint, pytest with mocked MCP."
     non_goals:
-      - "Fixture client 1791767366 implement or REQ-BOUNDED_WORKER_POOL product completion in stdd"
-      - "tied-bundle methodology YAML edits"
-      - "Gate weakening for demo throughput"
       - "CI blocking job until Phase 4 unless sponsor sets p1_ci_blocking"
+      - "Fixture client 1791767366 implement or REQ-BOUNDED_WORKER_POOL product completion in stdd"
+      - "Gate weakening for demo throughput"
+      - "tied-bundle methodology YAML edits"
     success_criteria:
+      - "P1 pre_implementation gate receipt stored under tied-bundle/working/PLAN-TIED-LG-P1-SCAFFOLD/gates/"
       - "pytest green under tools/langgraph-pilot/tests/"
       - "README documents uv/pip install and optional live MCP smoke"
-      - "P1 pre_implementation gate receipt stored under tied-bundle/working/PLAN-TIED-LG-P1-SCAFFOLD/gates/"
     unchanged_behavior: "Agentstream default executor; existing product REQs except pilot tree addition."
   evidence:
     commands:
@@ -19,8 +19,8 @@ CITDP-PLAN-TIED-LG-P1-SCAFFOLD:
       - "tied_validate_consistency"
     manifest_reference: null
     proof_boundaries:
-      - "pilot_tree_and_tests"
       - "mock_mcp_in_ci"
+      - "pilot_tree_and_tests"
   impact_analysis:
     impl_inventory_notes: "No IMPL pseudo-code layer for pilot; design authority is phased spec §7 Phase 1."
     modules_or_boundaries: "tools/langgraph-pilot only."
@@ -40,21 +40,21 @@ CITDP-PLAN-TIED-LG-P1-SCAFFOLD:
     title: "LangGraph program P1 scaffold and MCP adapter"
   risk_analysis:
     abuse_cases:
-      - "subprocess-invocation-unexpected-command"
       - "checkpoint-path-escape"
+      - "subprocess-invocation-unexpected-command"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Live MCP invoked in CI against production tied-project without mock."
         - "Checkpoint SQLite created outside designated run directory."
+        - "Live MCP invoked in CI against production tied-project without mock."
         - "P0 program pre_implementation receipt reused as P1 activation."
       depth_tier: "integrated"
       disconfirming_observations:
-        - "pytest imports pilot without mock and spawns node."
         - "mcp_client calls tools outside read-only allowlist in default config."
+        - "pytest imports pilot without mock and spawns node."
       eligibility_triggers_matched:
-        - "persistence"
         - "external_input"
+        - "persistence"
       evidence_references:
         - "docs/langgraph/tied-langgraph-orchestration-plan.md"
         - "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md"
@@ -76,8 +76,8 @@ CITDP-PLAN-TIED-LG-P1-SCAFFOLD:
       owner: "P2 evidence wiring wave"
       summary: "Scaffold does not prove envelope or TDD subgraph behavior."
     risks:
-      - "TIED_BASE_PATH mismatch on optional live smoke"
       - "LangGraph version drift vs docs"
+      - "TIED_BASE_PATH mismatch on optional live smoke"
     scenarios:
       - "Mock-only CI vs operator live smoke"
   sponsor_decisions:

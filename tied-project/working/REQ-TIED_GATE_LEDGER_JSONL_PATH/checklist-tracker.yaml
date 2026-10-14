@@ -1,0 +1,181 @@
+citdp:
+  deferred: true
+  persisted: false
+  rationale: "Hygiene fix under existing gate-enforcement tokens; inline CITDP only."
+depth_tier: "minimal"
+dispositions:
+  allowed:
+    - "completed"
+    - "not_applicable"
+    - "pending"
+    - "waived"
+  completed_requires_evidence: true
+execution_evidence:
+  close_out_evidence:
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  evidence_refs:
+    - kind: "file_path"
+      path: "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/citdp-inline-deferred.yaml"
+    - kind: "file_path"
+      path: "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
+  request: "REQ-TIED_GATE_LEDGER_JSONL_PATH"
+gate_policy: "advisory"
+loop_back_policy: "If ledger path policy or P3 evidence layout changes, re-run verification and close_out gates."
+methodology_surface_change_class: "none"
+profile_depth: "minimal"
+request: "REQ-TIED_GATE_LEDGER_JSONL_PATH"
+scope: "Rename P3 gate ledger to .jsonl; MCP JSONL path guard; co-staged YAML styling pass."
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/change-definition-evidence.md"
+    slug: "change-definition"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal hygiene scope; no integrated adversarial inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    status: "not_applicable"
+    tracking:
+      consideration_before_proceeding: "Bounded fix; inquiry not activated."
+      policy: "minimal-depth-no-inquiry"
+      rationale: "depth_tier minimal."
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
+    rationale: "No new REQ/ARCH index tokens."
+    slug: "author-requirement"
+    status: "not_applicable"
+    tracking:
+      rationale: "Fix extends existing REQ-TIED_CHECKLIST_GATE_ENFORCEMENT."
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
+    rationale: "No new ARCH token."
+    slug: "author-architecture"
+    status: "not_applicable"
+    tracking:
+      rationale: "No ARCH change."
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+      - "tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+    slug: "persist-implementation-records"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT-pseudocode.md"
+        - "tied-project/implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/adherence-ledger.test.ts"
+    slug: "unit-test-red"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "mcp-server/src/adherence-ledger.test.ts"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
+    rationale: "No composition wiring in this change."
+    slug: "composition-integration"
+    status: "not_applicable"
+    tracking:
+      rationale: "Unit-level MCP helper only."
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/proposed-commit-message.txt"
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/session-handoff.md"
+    slug: "traceable-commit"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/proposed-commit-message.txt"
+        - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/session-handoff.md"
+      status: "completed"
+version: "3.0.0"
+working_artifacts:
+  committed_root: "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/"
+  local_root: "tied-bundle/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/"
+  proof_boundary: "JSONL path guard, P3 ledger rename, lint_yaml tied-project, adherence-ledger tests."

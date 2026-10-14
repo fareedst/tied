@@ -1,67 +1,67 @@
-schema_version: qmm-w1-plan-only-tracker.v1
-request: PLAN-TIED-QMM-W1-METHODOLOGY-PDSA
-purpose: "W1 plan-only build-plan tracker; not REQ-METHODOLOGY-LEARNING-EXPERIMENT implement tracker."
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: complete
-depth_tier: minimal
-gate_policy: advisory
-execution_authority:
-  mode: approved_partial
-  scope: w1_plan_only
-  evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml
 citdp:
-  status: persisted
-  path: tied-project/citdp/CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA.yaml
+  path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA.yaml"
+  status: "persisted"
+depth_tier: "minimal"
+execution_authority:
+  evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml"
+  mode: "approved_partial"
+  scope: "w1_plan_only"
 gate:
-  phase: pre_implementation
-  status: attempted_not_allowed_for_red
   allowed: false
-  diagnostic: malformed_citdp:adversarial_inquiry
+  diagnostic: "malformed_citdp:adversarial_inquiry"
+  evidence_ref: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/gate-pre-implementation-evidence.md"
+  phase: "pre_implementation"
   reason: "Expected plan-only outcome; W1 implement requires REQ CITDP with integrated adversarial block before RED."
-  evidence_ref: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/gate-pre-implementation-evidence.md
+  status: "attempted_not_allowed_for_red"
+gate_policy: "advisory"
+purpose: "W1 plan-only build-plan tracker; not REQ-METHODOLOGY-LEARNING-EXPERIMENT implement tracker."
+request: "PLAN-TIED-QMM-W1-METHODOLOGY-PDSA"
+schema_version: "qmm-w1-plan-only-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "complete"
 steps:
-  - id: resolve
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/resolve-evidence.md
-  - id: change-definition-impact-risk-test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/resolve-evidence.md"
+    id: "resolve"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: docs/tied-qmm-w1-methodology-pdsa-plan.md
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/change-definition-evidence.md
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/risk-assessment-evidence.md
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/test-strategy-evidence.md
-  - id: author-child-linked-plan
-    disposition: completed
+      - kind: "file_path"
+        path: "docs/tied-qmm-w1-methodology-pdsa-plan.md"
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/change-definition-evidence.md"
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/risk-assessment-evidence.md"
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/test-strategy-evidence.md"
+    id: "change-definition-impact-risk-test-strategy"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: docs/tied-qmm-w1-methodology-pdsa-plan.md
-  - id: working-folder
-    disposition: completed
+      - kind: "file_path"
+        path: "docs/tied-qmm-w1-methodology-pdsa-plan.md"
+    id: "author-child-linked-plan"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/PLAN.md
-  - id: product-tied-records
-    disposition: not_applicable
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/PLAN.md"
+    id: "working-folder"
+  - disposition: "not_applicable"
+    id: "product-tied-records"
     rationale: "Plan-only forbids REQ/ARCH/IMPL mint."
-  - id: implementation
-    disposition: not_applicable
+  - disposition: "not_applicable"
+    id: "implementation"
     rationale: "W1 implement gated on separate execution_authority scope."
-  - id: verification
-    disposition: not_applicable
+  - disposition: "not_applicable"
+    id: "verification"
     rationale: "No runtime behavior changed."
-  - id: persist-citdp-record
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA.yaml
-  - id: pre-implementation-gate
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA.yaml"
+    id: "persist-citdp-record"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/gate-pre-implementation-evidence.md
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/gate-pre-implementation-evidence.md"
+    id: "pre-implementation-gate"

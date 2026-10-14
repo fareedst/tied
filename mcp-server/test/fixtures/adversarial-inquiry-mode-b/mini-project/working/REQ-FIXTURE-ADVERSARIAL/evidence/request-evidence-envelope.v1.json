@@ -1,9 +1,9 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-13T17:00:43.604Z",
+    "generated_at": "2026-10-14T00:38:17.794Z",
     "generator": "request_evidence_envelope_patch",
-    "revision": 2846
+    "revision": 2882
   },
   "identity": {
     "request_token": "REQ-FIXTURE-ADVERSARIAL",

@@ -5,10 +5,10 @@ citdp:
 depth_tier: "minimal"
 execution_authority:
   implementation_authority: "sponsor_default_proceed_20261010"
-  sponsor_authority_path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/evidence/sponsor-authority-followon-a-implement-20261010.md"
+  next_authorized_prompt: "plan-new-feature or build-plan on child linked plan"
   prior_qmm_receipts_are_activation_evidence: false
   scope: "plan-only"
-  next_authorized_prompt: "plan-new-feature or build-plan on child linked plan"
+  sponsor_authority_path: "tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/evidence/sponsor-authority-followon-a-implement-20261010.md"
 future_gate_contracts:
   close_out:
     required:

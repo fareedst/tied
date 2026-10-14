@@ -8,59 +8,59 @@ CITDP-REQ-TIED_STORE_BUNDLE_GIT_POLICY:
     sponsor_decisions:
       costly_accepted_on_implementation: "Full migration of git-tracked tied-bundle/working in this REQ"
     success_criteria:
-      - SC-SBGP-STORE-PROFILE
-      - SC-SBGP-ZERO-TRACKED-LOCAL
-      - SC-SBGP-FIXTURE-PARITY
-      - SC-SBGP-CLIENT-PARITY
-      - SC-SBGP-DOCS
-      - SC-SBGP-CORPUS-VISIBLE
+      - "SC-SBGP-CLIENT-PARITY"
+      - "SC-SBGP-CORPUS-VISIBLE"
+      - "SC-SBGP-DOCS"
+      - "SC-SBGP-FIXTURE-PARITY"
+      - "SC-SBGP-STORE-PROFILE"
+      - "SC-SBGP-ZERO-TRACKED-LOCAL"
   completion_criteria:
-    envelope_path: tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/request-evidence-envelope.v1.json
-    lint_yaml: required on changed tied-project YAML
-    tied_validate_consistency: required before close-out
+    envelope_path: "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required on changed tied-project YAML"
+    tied_validate_consistency: "required before close-out"
   impact_analysis:
     modules_or_boundaries: "tools/bootstrap working-gitignore; root .gitignore; fixture corpus; checklist regression seed"
     tied_tokens_new:
-      - REQ-TIED_STORE_BUNDLE_GIT_POLICY
-      - ARCH-TIED_STORE_BUNDLE_GIT_POLICY
-      - IMPL-TIED_STORE_BUNDLE_GIT_POLICY
+      - "ARCH-TIED_STORE_BUNDLE_GIT_POLICY"
+      - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
+      - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
   record_identity:
-    change_request_id: REQ-TIED_STORE_BUNDLE_GIT_POLICY
+    change_request_id: "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
     checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
     recorded_at: "2026-10-10"
-    title: Store bundle git policy
-    workspace_root: /Users/fareed/Documents/dev/chatgpt/stdd
-  record_status: complete
+    title: "Store bundle git policy"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  record_status: "complete"
   risk_analysis:
     adversarial_inquiry:
-      depth_tier: minimal
-      gate_policy: default
-      profile_depth: minimal
-      methodology_surface_change_class: none
-      rationale: Infrastructure gitignore and index migration; no integrated inquiry activation.
       counterexamples:
-        - Whole tied-bundle/ still ignored on store so methodology corpus never commits
-        - tied-bundle/working/ remains indexed after migration
-      falsification_questions:
-        - Does git check-ignore block tied-bundle/docs/ai-principles.md after profile apply?
-        - Can client writeGitignoreBlock drop tied-bundle/ line?
+        - "tied-bundle/working/ remains indexed after migration"
+        - "Whole tied-bundle/ still ignored on store so methodology corpus never commits"
+      depth_tier: "minimal"
       disconfirming_observations:
-        - store-gitignore-policy temp-repo test tracks corpus and ignores local working
-        - git ls-files tied-bundle/working length zero after migration script
+        - "git ls-files tied-bundle/working length zero after migration script"
+        - "store-gitignore-policy temp-repo test tracks corpus and ignores local working"
       evidence_references:
-        - tools/bootstrap/lib/store-gitignore-policy.test.mjs
-        - tools/bootstrap/lib/working-gitignore.test.mjs
-        - tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/migration-inventory.v1.json
-        - mcp-server/test/lib/seed-store-local-working-fixtures.mjs
-      sub_adversarial_inquiry_pass: not_applicable
+        - "mcp-server/test/lib/seed-store-local-working-fixtures.mjs"
+        - "tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/migration-inventory.v1.json"
+        - "tools/bootstrap/lib/store-gitignore-policy.test.mjs"
+        - "tools/bootstrap/lib/working-gitignore.test.mjs"
+      falsification_questions:
+        - "Can client writeGitignoreBlock drop tied-bundle/ line?"
+        - "Does git check-ignore block tied-bundle/docs/ai-principles.md after profile apply?"
+      gate_policy: "default"
+      methodology_surface_change_class: "none"
+      profile_depth: "minimal"
+      rationale: "Infrastructure gitignore and index migration; no integrated inquiry activation."
+      sub_adversarial_inquiry_pass: "not_applicable"
     consequence_ladder:
-      reversible:
-        - Re-run apply-store-gitignore-profile.mjs if .gitignore drifts
       costly:
-        - Losing fixture pins without updating regression consumers
+        - "Losing fixture pins without updating regression consumers"
+      reversible:
+        - "Re-run apply-store-gitignore-profile.mjs if .gitignore drifts"
   test_strategy:
-    red_first:
-      - store-gitignore-policy invariant fails before migration
     green:
-      - node --test tools/bootstrap/lib/store-gitignore-policy.test.mjs
-      - fixture-corpus-regression with seed-store-local-working-fixtures
+      - "fixture-corpus-regression with seed-store-local-working-fixtures"
+      - "node --test tools/bootstrap/lib/store-gitignore-policy.test.mjs"
+    red_first:
+      - "store-gitignore-policy invariant fails before migration"

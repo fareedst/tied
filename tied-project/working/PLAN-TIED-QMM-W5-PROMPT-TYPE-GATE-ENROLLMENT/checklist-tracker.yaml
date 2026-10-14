@@ -5,8 +5,8 @@ citdp:
 depth_tier: "minimal"
 execution_authority:
   implementation_authority: "deferred_until_w5_scope_implement"
-  scope: "plan-only"
   prior_w1_w4_receipts_are_activation_evidence: false
+  scope: "plan-only"
 future_gate_contracts:
   close_out:
     required:

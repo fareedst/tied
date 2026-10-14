@@ -1,132 +1,122 @@
 CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
-  record_identity:
-    title: Methodology learning cohort export (QMM follow-on c)
-    change_request_id: REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
-    author: build-plan
-    date: "2026-10-10"
-    record_status: implementation
-    depth_tier: integrated
-    gate_policy: per_citdp
-    profile_depth: integrated
-    implementation_depth_tier: integrated
-    prior_depth_tier: minimal
   change_definition:
-    current_behavior: >
-      W1 methodology-learning experiments remain operator-local by default; W4 reports
-      consume explicit profile manifests. No bounded path joins experiment identity,
-      W4 cohort partitions, and shareable_hashed redaction.
-    desired_behavior: >
-      Accept methodology-cohort-export-manifest.v1, resolve W1 experiments, compose
-      existing W4 client-cohort reporting, apply shareable_hashed redaction, and emit
-      stable diagnostics and policy metadata via MCP.
-    methodology_surface_change_class: none
-    proof_boundary: >
-      Declared-input resolution, compatible cohort partitioning, stable diagnostics,
-      and shareable redaction only; W2/tied_verify remain methodology effectiveness authority.
-    unchanged_behavior:
-      - tied_verify as methodology effectiveness authority
-      - W1 validation and W2 conformance/effectiveness pairing
-      - W4 compatibility-key and denominator-fingerprint partitioning
-      - W4 v1 defaults and byte stability
+    current_behavior: "W1 methodology-learning experiments remain operator-local by default; W4 reports consume explicit profile manifests. No bounded path joins experiment identity, W4 cohort partitions, and shareable_hashed redaction.\n"
+    desired_behavior: "Accept methodology-cohort-export-manifest.v1, resolve W1 experiments, compose existing W4 client-cohort reporting, apply shareable_hashed redaction, and emit stable diagnostics and policy metadata via MCP.\n"
+    methodology_surface_change_class: "none"
     non_goals:
-      - Kaizen Phase 3 transport
-      - Live client discovery or repository traversal
-      - W2 effectiveness claims from export output
-      - UI or E2E
+      - "Kaizen Phase 3 transport"
+      - "Live client discovery or repository traversal"
+      - "UI or E2E"
+      - "W2 effectiveness claims from export output"
+    proof_boundary: "Declared-input resolution, compatible cohort partitioning, stable diagnostics, and shareable redaction only; W2/tied_verify remain methodology effectiveness authority.\n"
     success_criteria:
-      - Unit and MCP composition tests green
-      - shareable_hashed stdd dogfood manifest export succeeds
-      - Integrated gates and envelope at verification/close_out
-  impact_analysis:
-    modules:
-      - methodology-learning-cohort-export
-    files:
-      - mcp-server/src/methodology-learning-cohort-export/
-      - mcp-server/src/tools/index.ts
-      - mcp-server/src/methodology-learning-experiment/validate.ts
-    tied_tokens_new:
-      - REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
-      - ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT
-      - IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT
-    tied_tokens_affected:
-      - REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
-      - ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT
-      - IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT
-    impl_inventory:
-      - IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT
-    depends_on:
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-      - REQ-EVIDENCE_CHAIN_REPORT
-  risk_analysis:
-    quality_profiles:
-      - baseline-functional
-      - data-integrity-migration
-      - external-input-security
-      - regulated-privacy
-    adversarial_inquiry:
-      depth_tier: integrated
-      gate_policy: advisory
-      assurance_profile: baseline-functional
-      research_profile: integrated-agent
-      prior_depth_tier: minimal
-      eligibility_triggers_matched:
-        - persistence
-        - mcp_write_surface
-        - external_input
-      rationale: >
-        Export accepts external manifests, reads persistence-backed W1 records,
-        and emits privacy-sensitive shareable_hashed artifacts.
-      counterexamples:
-        - operator_local records exported without explicit tier rejection
-        - Absolute paths or raw project_id in shareable output
-        - Export described as W2 methodology effectiveness evidence
-      disconfirming_observations:
-        - Unit tests assert privacy_tier_not_exportable for operator_local
-        - Serialized export contains no absolute path segments
-      falsification_questions:
-        - Can export traverse outside declared profile paths?
-        - Can incompatible cohort keys be merged silently?
-    risks:
-      - id: RISK-MLCE-001
-        description: Shareable output leaks paths or raw identity
-        severity: High
-        likelihood: Medium
-        mitigation: Redactor tests, policy gate, hashed project_id
-      - id: RISK-MLCE-002
-        description: Plan-only gate receipt reused as activation
-        severity: High
-        likelihood: Low
-        mitigation: Fresh implement Tracker/CITDP and identity-bound inquiry
-  sponsor_decisions:
-    redaction_owner: sponsor
-    policy_expiry: "2027-10-10"
-    pilot: stdd
-    privacy_tier: shareable_hashed
-    authority_path: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-followon-c-shareable-hashed-20261010.md
-    kaizen_phase3_transport: deferred
-  test_strategy:
-    summary: RED unit tests; MCP composition; stdd dogfood manifest; W4 regression via adapter.
-    no_e2e: true
-    no_e2e_reason: Façade bindings are composition-testable without UI.
-    stable_diagnostics:
-      - invalid_manifest
-      - missing_experiment
-      - privacy_tier_not_exportable
-      - privacy_policy_expired
-      - w4_report_failure
-  evidence:
-    commands:
-      - cd mcp-server && npm run build
-      - cd mcp-server && node --import tsx --test src/methodology-learning-cohort-export/run.test.ts
-      - cd mcp-server && node --import tsx --test src/methodology-learning-cohort-export/methodology-learning-cohort-export.mcp.test.ts
-    proof_boundaries:
-      - command result only
-      - cohort_partition_and_redaction_only
+      - "Integrated gates and envelope at verification/close_out"
+      - "shareable_hashed stdd dogfood manifest export succeeds"
+      - "Unit and MCP composition tests green"
+    unchanged_behavior:
+      - "tied_verify as methodology effectiveness authority"
+      - "W1 validation and W2 conformance/effectiveness pairing"
+      - "W4 compatibility-key and denominator-fingerprint partitioning"
+      - "W4 v1 defaults and byte stability"
   completion_criteria:
     activation:
-      run_id: mlce-closeout-20261010
-      phase: close_out
-      request_token: REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
-    focused_tests: methodology-learning-cohort-export/run.test.ts; methodology-learning-cohort-export.mcp.test.ts
-    lint: npm run build in mcp-server
-    verification: tied_verify and tied_validate_consistency for touched project YAML
+      phase: "close_out"
+      request_token: "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+      run_id: "mlce-closeout-20261010"
+    focused_tests: "methodology-learning-cohort-export/run.test.ts; methodology-learning-cohort-export.mcp.test.ts"
+    lint: "npm run build in mcp-server"
+    verification: "tied_verify and tied_validate_consistency for touched project YAML"
+  evidence:
+    commands:
+      - "cd mcp-server && node --import tsx --test src/methodology-learning-cohort-export/methodology-learning-cohort-export.mcp.test.ts"
+      - "cd mcp-server && node --import tsx --test src/methodology-learning-cohort-export/run.test.ts"
+      - "cd mcp-server && npm run build"
+    proof_boundaries:
+      - "cohort_partition_and_redaction_only"
+      - "command result only"
+  impact_analysis:
+    depends_on:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    files:
+      - "mcp-server/src/methodology-learning-cohort-export/"
+      - "mcp-server/src/methodology-learning-experiment/validate.ts"
+      - "mcp-server/src/tools/index.ts"
+    impl_inventory:
+      - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    modules:
+      - "methodology-learning-cohort-export"
+    tied_tokens_affected:
+      - "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT"
+      - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+      - "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    tied_tokens_new:
+      - "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT"
+      - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+      - "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+  record_identity:
+    author: "build-plan"
+    change_request_id: "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    date: "2026-10-10"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    implementation_depth_tier: "integrated"
+    prior_depth_tier: "minimal"
+    profile_depth: "integrated"
+    record_status: "implementation"
+    title: "Methodology learning cohort export (QMM follow-on c)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Absolute paths or raw project_id in shareable output"
+        - "Export described as W2 methodology effectiveness evidence"
+        - "operator_local records exported without explicit tier rejection"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Serialized export contains no absolute path segments"
+        - "Unit tests assert privacy_tier_not_exportable for operator_local"
+      eligibility_triggers_matched:
+        - "external_input"
+        - "mcp_write_surface"
+        - "persistence"
+      falsification_questions:
+        - "Can export traverse outside declared profile paths?"
+        - "Can incompatible cohort keys be merged silently?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Export accepts external manifests, reads persistence-backed W1 records, and emits privacy-sensitive shareable_hashed artifacts.\n"
+      research_profile: "integrated-agent"
+    quality_profiles:
+      - "baseline-functional"
+      - "data-integrity-migration"
+      - "external-input-security"
+      - "regulated-privacy"
+    risks:
+      - description: "Plan-only gate receipt reused as activation"
+        id: "RISK-MLCE-002"
+        likelihood: "Low"
+        mitigation: "Fresh implement Tracker/CITDP and identity-bound inquiry"
+        severity: "High"
+      - description: "Shareable output leaks paths or raw identity"
+        id: "RISK-MLCE-001"
+        likelihood: "Medium"
+        mitigation: "Redactor tests, policy gate, hashed project_id"
+        severity: "High"
+  sponsor_decisions:
+    authority_path: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-followon-c-shareable-hashed-20261010.md"
+    kaizen_phase3_transport: "deferred"
+    pilot: "stdd"
+    policy_expiry: "2027-10-10"
+    privacy_tier: "shareable_hashed"
+    redaction_owner: "sponsor"
+  test_strategy:
+    no_e2e: true
+    no_e2e_reason: "Façade bindings are composition-testable without UI."
+    stable_diagnostics:
+      - "invalid_manifest"
+      - "missing_experiment"
+      - "privacy_policy_expired"
+      - "privacy_tier_not_exportable"
+      - "w4_report_failure"
+    summary: "RED unit tests; MCP composition; stdd dogfood manifest; W4 regression via adapter."

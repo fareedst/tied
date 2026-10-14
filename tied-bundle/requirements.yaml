@@ -1,497 +1,478 @@
 REQ-EVIDENCE_CHAIN_PROFILE:
-  category: Functional
-  description: >-
-    Produce a versioned read-only evidence-chain-profile.v1 artifact that reports completeness, provenance,
-    denominators, and proof boundaries.
-  detail_file: requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml
-  name: Evidence chain profile
-  priority: P1
+  category: "Functional"
+  description: "Produce a versioned read-only evidence-chain-profile.v1 artifact that reports completeness, provenance, denominators, and proof boundaries."
+  detail_file: "requirements/REQ-EVIDENCE_CHAIN_PROFILE.yaml"
+  name: "Evidence chain profile"
+  priority: "P1"
   related_requirements:
     depends_on:
-      - REQ-QUALITY_ASSURANCE_EVIDENCE
-      - REQ-TIED_FIDELITY_RESEARCH
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
     related_to: []
     supersedes: []
-  status: Implemented
+  status: "Implemented"
   traceability:
     architecture:
-      - ARCH-EVIDENCE_CHAIN_PROFILE
+      - "ARCH-EVIDENCE_CHAIN_PROFILE"
     implementation:
-      - IMPL-EVIDENCE_CHAIN_PROFILE
-REQ-FEEDBACK_TO_TIED:
-  category: Functional
-  detail_file: requirements/REQ-FEEDBACK_TO_TIED.yaml
-  metadata:
-    last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
-  name: Feedback to TIED (Feature Requests, Bug Reports, Methodology)
-  priority: P1
-  related_requirements:
-    depends_on: []
-    related_to:
-      - REQ-TIED_SETUP
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-FEEDBACK_STORAGE
-    implementation:
-      - IMPL-MCP_FEEDBACK_TOOLS
-REQ-MODULE_VALIDATION:
-  category: Functional
-  detail_file: requirements/REQ-MODULE_VALIDATION.yaml
-  metadata:
-    last_updated:
-      reason: 'Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml'
-  name: Independent Module Validation Before Integration
-  priority: P0
-  related_requirements:
-    depends_on:
-      - REQ-TIED_SETUP
-    related_to: []
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-MODULE_VALIDATION
-    implementation:
-      - IMPL-MODULE_VALIDATION
-REQ-QUALITY_ASSURANCE_EVIDENCE:
-  category: Non-Functional
-  cross_references:
-    - ARCH-QUALITY_ASSURANCE_PROFILES
-    - IMPL-QUALITY_EVIDENCE_MANIFEST
-  description: >-
-    Every behavior-changing change selects applicable quality attributes from a bounded risk profile and records
-    reproducible evidence, limitations, and accepted residual risk without imposing irrelevant checks.
-  detail_file: requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml
-  name: Risk-triggered quality assurance evidence
-  priority: P0
-  related_requirements:
-    depends_on:
-      - REQ-MODULE_VALIDATION
-      - REQ-TIED_SETUP
-    related_to: []
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-QUALITY_ASSURANCE_PROFILES
-    implementation:
-      - IMPL-QUALITY_EVIDENCE_MANIFEST
-REQ-TIED_ADVERSARIAL_INQUIRY:
-  category: Functional
-  cross_references:
-    - ARCH-TIED_ADVERSARIAL_INQUIRY
-    - IMPL-TIED_ADVERSARIAL_INQUIRY
-    - IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
-  description: >-
-    Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural
-    presence as semantic or runtime proof.
-  detail_file: requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml
-  metadata:
-    last_updated:
-      reason: Methodology seed for bounded adversarial inquiry and fidelity evidence
-  name: Adversarial inquiry for obligation and fidelity evidence
-  priority: P0
-  related_requirements:
-    depends_on:
-      - REQ-MODULE_VALIDATION
-      - REQ-QUALITY_ASSURANCE_EVIDENCE
-      - REQ-TIED_FIDELITY_RESEARCH
-    related_to:
-      - REQ-TIED_SETUP
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-TIED_ADVERSARIAL_INQUIRY
-    implementation:
-      - IMPL-TIED_ADVERSARIAL_INQUIRY
-      - IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST
-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
-  category: Tooling
-  cross_references:
-    - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
-    - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
-  detail_file: requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml
-  metadata:
-    last_updated:
-      reason: Methodology seed for shared checklist evidence gate (composed_with sponsor-agent hinge validation)
-  name: Machine-enforced checklist evidence gates
-  priority: P1
-  related_requirements:
-    depends_on:
-      - REQ-TIED_ADVERSARIAL_INQUIRY
-    related_to:
-      - REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
-    supersedes: []
-  status: Active
-  traceability:
-    architecture:
-      - ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT
-    implementation:
-      - IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT
-REQ-TIED_FIDELITY_RESEARCH:
-  category: Functional
-  detail_file: requirements/REQ-TIED_FIDELITY_RESEARCH.yaml
-  metadata:
-    last_updated:
-      reason: >-
-        Methodology seed for read-only fidelity and defect-origin research; procedure:
-        tied/docs/tied-fidelity-research.md
-  name: TIED Fidelity Research
-  priority: P1
-  related_requirements:
-    depends_on:
-      - REQ-MODULE_VALIDATION
-      - REQ-TIED_SETUP
-    related_to:
-      - REQ-QUALITY_ASSURANCE_EVIDENCE
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-TIED_FIDELITY_RESEARCH
-    implementation:
-      - IMPL-TIED_FIDELITY_RESEARCH
-REQ-TIED_SETUP:
-  category: Functional
-  cross_references:
-    - ARCH-TIED_STRUCTURE
-    - ARCH-TIED_VOCABULARY_LAYERS
-    - IMPL-TIED_FILES
-    - IMPL-TIED_VOCABULARY_REFRESH
-  description: Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership.
-  detail_file: requirements/REQ-TIED_SETUP.yaml
-  metadata:
-    last_updated:
-      reason: Methodology seed; layered vocabulary ownership and refresh behavior
-  name: TIED Methodology Setup
-  priority: P0
-  related_requirements:
-    depends_on: []
-    related_to: []
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM
-      - ARCH-TIED_STRUCTURE
-      - ARCH-TIED_VOCABULARY_LAYERS
-    implementation:
-      - IMPL-TIED_FILES
-      - IMPL-TIED_VOCABULARY_REFRESH
-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
-  category: Methodology
-  cross_references:
-    - ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP
-    - IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP
-    - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
-    - REQ-TIED_SETUP
-    - REQ-TIED_VOCABULARY_OWNERSHIP
-  detail_file: requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml
-  name: Sponsor-Agent Relationship Layer
-  priority: P1
-  status: Planned
-REQ-TIED_VOCABULARY_OWNERSHIP:
-  category: Infrastructure
-  cross_references:
-    - ARCH-TIED_VOCABULARY_LAYERS
-    - IMPL-TIED_VOCABULARY_REFRESH
-  description: >-
-    TIED clients separate refreshable methodology vocabulary from durable client-owned vocabulary while preserving one
-    agent-friendly discovery entry point.
-  detail_file: requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml
-  name: Separate Vocabulary Ownership
-  priority: P1
-  related_requirements:
-    depends_on:
-      - REQ-TIED_SETUP
-    related_to: []
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-TIED_VOCABULARY_LAYERS
-    implementation:
-      - IMPL-TIED_VOCABULARY_REFRESH
-REQ-PROMPT_TYPE_GLOBAL_SKILLS:
-  category: Tooling
-  cross_references:
-    - ARCH-PROMPT_TYPE_GLOBAL_SKILLS
-    - IMPL-PROMPT_TYPE_GLOBAL_SKILLS
-    - REQ-TIED_SETUP
-  description: >-
-    The TIED methodology repository shall provide a versioned prompt-type skill bundle that can be installed into TIED
-    client projects for consistent ongoing development workflows.
-  detail_file: requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml
-  metadata:
-    created:
-      author: AI Agent
-      date: '2026-08-12'
-    last_updated:
-      author: AI Agent
-      date: '2026-08-13'
-      reason: Replace triple-colon payload delimiter with invocation remainder and linked plan
-  name: Global Prompt-Type Skills
-  priority: P1
-  status: Implemented
-REQ-PROMPT_TYPE_SUBAGENT:
-  category: Tooling
-  description: >-
-    TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt
-    types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not Task
-    wrappers.
-  detail_file: requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml
-  metadata:
-    created:
-      author: AI Agent
-      date: '2026-08-12'
-    last_updated:
-      author: AI Agent
-      date: '2026-08-13'
-      reason: Replace triple-colon payload delimiter with invocation remainder and linked plan
-  name: Prompt-Type Subagents
-  priority: P1
-  related_requirements:
-    depends_on:
-      - REQ-PROMPT_TYPE_GLOBAL_SKILLS
-      - REQ-TIED_SETUP
-    related_to: []
-    supersedes: []
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-PROMPT_TYPE_SUBAGENT
-    code_annotations:
-      - ARCH-PROMPT_TYPE_SUBAGENT
-      - IMPL-PROMPT_TYPE_SUBAGENT
-      - REQ-PROMPT_TYPE_SUBAGENT
-    implementation:
-      - IMPL-PROMPT_TYPE_SUBAGENT
-    tests:
-      - mcp-server/src/e2e/prompt-type-subagent.test.ts
-  validation_criteria:
-    - coverage: Frontmatter and activation policy
-      method: Static contract test
-    - coverage: Workflow gates and parent return contract
-      method: Static contract test
-    - coverage: TIED traceability
-      method: tied_validate_consistency
-REQ-METHODOLOGY-LEARNING-EXPERIMENT:
-  category: Functional
-  detail_file: requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml
-  name: Methodology learning experiment (Loop 3 PDSA)
-  priority: P1
-  related_requirements:
-    depends_on:
-      - REQ-FEEDBACK_TO_TIED
-    related_to:
-      - REQ-FEEDBACK_TO_TIED
-  satisfaction_criteria:
-    - criterion: Experiments persist under tied-project/methodology-experiments.yaml
-      metric: tied_methodology_learning_experiment_upsert and list round-trip
-    - criterion: Validators accept methodology-learning-experiment.v1 records
-      metric: tied_methodology_learning_experiment_validate returns ok for fixture
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-METHODOLOGY-LEARNING-EXPERIMENT
-    implementation:
-      - IMPL-METHODOLOGY-LEARNING-EXPERIMENT
-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
-  category: Functional
-  detail_file: requirements/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml
-  name: Methodology conformance–effectiveness pairing
-  priority: P1
-  rationale:
-    benefits:
-      - CITDP-scoped pairing reports and gate hook
-    problems_solved:
-      - Gate pass without linked effectiveness readout
-    why: Close QMM conformance trap for methodology-surface changes
-  related_requirements:
-    depends_on:
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
-    related_to:
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-  satisfaction_criteria:
-    - criterion: MCP pair tool and gate composition
-      metric: MCP and pairing-gate tests pass
-    - criterion: Pairing dispositions and trap detection
-      metric: Unit tests pass
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-    implementation:
-      - IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-    tests:
-      - methodology-conformance-effectiveness-pairing.mcp.test.ts
-      - pair.test.ts
-      - pairing-gate.test.ts
-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
-  category: Functional
-  detail_file: requirements/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml
-  name: Kaizen to methodology experiment bridge
-  priority: P1
-  related_requirements:
-    depends_on:
-      - REQ-FEEDBACK_TO_TIED
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-    related_to:
-      - REQ-FEEDBACK_TO_TIED
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-  satisfaction_criteria:
-    - criterion: Bridge-eligible feedback mapping
-      metric: bridge unit tests pass
-    - criterion: Explicit bridge MCP returns draft only
-      metric: bridge MCP tests pass
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
-    implementation:
-      - IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
-    tests:
-      - bridge.test.ts
-      - methodology-kaizen-experiment-bridge.mcp.test.ts
+      - "IMPL-EVIDENCE_CHAIN_PROFILE"
 REQ-EVIDENCE_CHAIN_REPORT:
-  category: Functional
-  detail_file: requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml
-  name: Evidence chain statistics report
-  priority: P1
+  category: "Functional"
+  detail_file: "requirements/REQ-EVIDENCE_CHAIN_REPORT.yaml"
+  name: "Evidence chain statistics report"
+  priority: "P1"
   rationale:
     benefits:
-      - Explicit cohorts, statuses, and path privacy
-      - Read-only TIED-side batch report
+      - "Explicit cohorts, statuses, and path privacy"
+      - "Read-only TIED-side batch report"
     problems_solved:
-      - Incompatible depths and denominators must not be mixed into one rollup
-      - Profile generation is one-client and explicitly excludes cross-project aggregation
-    why: >-
-      Operators need deterministic multi-client statistics from already-generated evidence-chain-profile.v1 artifacts
-      without collapsing proof boundaries or inventing a maturity score.
+      - "Incompatible depths and denominators must not be mixed into one rollup"
+      - "Profile generation is one-client and explicitly excludes cross-project aggregation"
+    why: "Operators need deterministic multi-client statistics from already-generated evidence-chain-profile.v1 artifacts without collapsing proof boundaries or inventing a maturity score."
   related_requirements:
     depends_on:
-      - REQ-EVIDENCE_CHAIN_PROFILE
+      - "REQ-EVIDENCE_CHAIN_PROFILE"
     related_to:
-      - REQ-QUALITY_ASSURANCE_EVIDENCE
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
     supersedes: []
   satisfaction_criteria:
-    - criterion: Aggregator never reads or mutates client repositories or project YAML
-      metric: Only explicit profile artifacts and the caller-selected report directory
-    - criterion: Forbidden maturity and score fields are rejected
-      metric: MalformedProfile on those keys
-    - criterion: Incompatible schema_version or profile_depth partitions into separate client cohorts
-      metric: No cross-cohort numeric rollup
-    - criterion: Missing evidence stays observed, not_measured, unknown, or not_applicable
-      metric: Never converted to zero
-    - criterion: Offline CLI consumes a report input manifest and emits byte-stable YAML plus Markdown
-      metric: Same inputs and clock yield identical report.yaml and report.md
-  status: Implemented
-REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
-  category: Functional
-  detail_file: requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml
-  name: Production-system surface enrollment
-  priority: P1
-  rationale:
-    benefits:
-      - Composes W1 store and W2 pairing without global gate hooks
-    problems_solved:
-      - Non-checklist production surfaces lack experiment enrollment procedure
-    why: W5 Loop 3 enrollment for prompt-type, assurance profile, and gate_policy surfaces
-  related_requirements:
-    depends_on:
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-      - REQ-PROMPT_TYPE_GLOBAL_SKILLS
-    related_to:
-      - REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-  satisfaction_criteria:
-    - criterion: Enrollment validator and MCP
-      metric: Unit and MCP tests pass
-    - criterion: surface_ref rules for under-covered surfaces
-      metric: Fixtures for prompt_type_workflow, assurance_profile, gate_policy pass
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
-    implementation:
-      - IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
-    tests:
-      - methodology-production-system-enrollment.mcp.test.ts
-      - methodology-production-system-enrollment.test.ts
-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
-  category: Functional
-  detail_file: requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml
-  name: Methodology surface experiment gate
-  priority: P1
-  rationale:
-    benefits:
-      - Pre-implementation Loop 3 discipline before RED
-    problems_solved:
-      - Unlinked methodology-surface CITDPs reach RED without W1 experiment
-    why: Require persisted experiment with hypothesis and baseline when methodology_surface_change_class is non-none
-  related_requirements:
-    depends_on:
-      - REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-      - REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
-      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
-    related_to:
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE
-    implementation:
-      - IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE
-    tests:
-      - checklist-validator methodology surface gate composition
-      - methodology-surface-experiment-gate.test.ts
-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
-  category: Functional
-  detail_file: requirements/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml
-  name: QMM methodology client resources (phase 1 bundle promotion)
-  priority: P0
-  related_requirements:
-    depends_on:
-      - REQ-TIED_SETUP
-    related_to:
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-      - REQ-EVIDENCE_CHAIN_REPORT
-  status: In Progress
-  traceability:
-    architecture:
-      - ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST
-    implementation:
-      - IMPL-TIED_FILES
-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
-  category: Functional
-  detail_file: requirements/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml
-  name: Methodology learning cohort export
-  priority: P1
-  related_requirements:
-    depends_on:
-      - REQ-EVIDENCE_CHAIN_REPORT
-      - REQ-METHODOLOGY-LEARNING-EXPERIMENT
-    related_to:
-      - REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
-  satisfaction_criteria:
-    - criterion: Explicit manifest export
-      metric: tied_methodology_learning_cohort_export_run returns shareable_hashed artifact
-    - criterion: W4 non-regression
-      metric: Composes generateEvidenceChainStatisticsReport without profile generation
-  status: Implemented
-  traceability:
-    architecture:
-      - ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT
-    implementation:
-      - IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT
-    tests:
-      - methodology-learning-cohort-export/*.test.ts
+    - criterion: "Aggregator never reads or mutates client repositories or project YAML"
+      metric: "Only explicit profile artifacts and the caller-selected report directory"
+    - criterion: "Forbidden maturity and score fields are rejected"
+      metric: "MalformedProfile on those keys"
+    - criterion: "Incompatible schema_version or profile_depth partitions into separate client cohorts"
+      metric: "No cross-cohort numeric rollup"
+    - criterion: "Missing evidence stays observed, not_measured, unknown, or not_applicable"
+      metric: "Never converted to zero"
+    - criterion: "Offline CLI consumes a report input manifest and emits byte-stable YAML plus Markdown"
+      metric: "Same inputs and clock yield identical report.yaml and report.md"
+  status: "Implemented"
+REQ-FEEDBACK_TO_TIED:
+  category: "Functional"
+  detail_file: "requirements/REQ-FEEDBACK_TO_TIED.yaml"
   metadata:
-    bundle_graph_note: >-
-      Fleet bundle graph: REQ-REQUEST_EVIDENCE_ENVELOPE is related_to only (store depends_on retained). Optional
-      envelope batch coupling at runtime in full clients.
+    last_updated:
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "Feedback to TIED (Feature Requests, Bug Reports, Methodology)"
+  priority: "P1"
+  related_requirements:
+    depends_on: []
+    related_to:
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-FEEDBACK_STORAGE"
+    implementation:
+      - "IMPL-MCP_FEEDBACK_TOOLS"
+REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml"
+  name: "Methodology conformance–effectiveness pairing"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "CITDP-scoped pairing reports and gate hook"
+    problems_solved:
+      - "Gate pass without linked effectiveness readout"
+    why: "Close QMM conformance trap for methodology-surface changes"
+  related_requirements:
+    depends_on:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  satisfaction_criteria:
+    - criterion: "MCP pair tool and gate composition"
+      metric: "MCP and pairing-gate tests pass"
+    - criterion: "Pairing dispositions and trap detection"
+      metric: "Unit tests pass"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    implementation:
+      - "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+    tests:
+      - "methodology-conformance-effectiveness-pairing.mcp.test.ts"
+      - "pair.test.ts"
+      - "pairing-gate.test.ts"
+REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
+  name: "Kaizen to methodology experiment bridge"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  satisfaction_criteria:
+    - criterion: "Bridge-eligible feedback mapping"
+      metric: "bridge unit tests pass"
+    - criterion: "Explicit bridge MCP returns draft only"
+      metric: "bridge MCP tests pass"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    implementation:
+      - "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+    tests:
+      - "bridge.test.ts"
+      - "methodology-kaizen-experiment-bridge.mcp.test.ts"
+REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
+  metadata:
+    bundle_graph_note: "Fleet bundle graph: REQ-REQUEST_EVIDENCE_ENVELOPE is related_to only (store depends_on retained). Optional envelope batch coupling at runtime in full clients."
+  name: "Methodology learning cohort export"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+    related_to:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+  satisfaction_criteria:
+    - criterion: "Explicit manifest export"
+      metric: "tied_methodology_learning_cohort_export_run returns shareable_hashed artifact"
+    - criterion: "W4 non-regression"
+      metric: "Composes generateEvidenceChainStatisticsReport without profile generation"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    implementation:
+      - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
+    tests:
+      - "methodology-learning-cohort-export/*.test.ts"
+REQ-METHODOLOGY-LEARNING-EXPERIMENT:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
+  name: "Methodology learning experiment (Loop 3 PDSA)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+  satisfaction_criteria:
+    - criterion: "Experiments persist under tied-project/methodology-experiments.yaml"
+      metric: "tied_methodology_learning_experiment_upsert and list round-trip"
+    - criterion: "Validators accept methodology-learning-experiment.v1 records"
+      metric: "tied_methodology_learning_experiment_validate returns ok for fixture"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+    implementation:
+      - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
+  name: "Production-system surface enrollment"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Composes W1 store and W2 pairing without global gate hooks"
+    problems_solved:
+      - "Non-checklist production surfaces lack experiment enrollment procedure"
+    why: "W5 Loop 3 enrollment for prompt-type, assurance profile, and gate_policy surfaces"
+  related_requirements:
+    depends_on:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    related_to:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+  satisfaction_criteria:
+    - criterion: "Enrollment validator and MCP"
+      metric: "Unit and MCP tests pass"
+    - criterion: "surface_ref rules for under-covered surfaces"
+      metric: "Fixtures for prompt_type_workflow, assurance_profile, gate_policy pass"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    implementation:
+      - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+    tests:
+      - "methodology-production-system-enrollment.mcp.test.ts"
+      - "methodology-production-system-enrollment.test.ts"
+REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
+  category: "Functional"
+  detail_file: "requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml"
+  name: "Methodology surface experiment gate"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Pre-implementation Loop 3 discipline before RED"
+    problems_solved:
+      - "Unlinked methodology-surface CITDPs reach RED without W1 experiment"
+    why: "Require persisted experiment with hypothesis and baseline when methodology_surface_change_class is non-none"
+  related_requirements:
+    depends_on:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    implementation:
+      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    tests:
+      - "checklist-validator methodology surface gate composition"
+      - "methodology-surface-experiment-gate.test.ts"
+REQ-MODULE_VALIDATION:
+  category: "Functional"
+  detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed; procedure: tied/docs/agent-req-implementation-checklist.yaml"
+  name: "Independent Module Validation Before Integration"
+  priority: "P0"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-MODULE_VALIDATION"
+    implementation:
+      - "IMPL-MODULE_VALIDATION"
+REQ-PROMPT_TYPE_GLOBAL_SKILLS:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-TIED_SETUP"
+  description: "The TIED methodology repository shall provide a versioned prompt-type skill bundle that can be installed into TIED client projects for consistent ongoing development workflows."
+  detail_file: "requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
+  name: "Global Prompt-Type Skills"
+  priority: "P1"
+  status: "Implemented"
+REQ-PROMPT_TYPE_SUBAGENT:
+  category: "Tooling"
+  description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not Task wrappers."
+  detail_file: "requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-08-12"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-08-13"
+      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
+  name: "Prompt-Type Subagents"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+    code_annotations:
+      - "ARCH-PROMPT_TYPE_SUBAGENT"
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    implementation:
+      - "IMPL-PROMPT_TYPE_SUBAGENT"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+  validation_criteria:
+    - coverage: "Frontmatter and activation policy"
+      method: "Static contract test"
+    - coverage: "Workflow gates and parent return contract"
+      method: "Static contract test"
+    - coverage: "TIED traceability"
+      method: "tied_validate_consistency"
+REQ-QUALITY_ASSURANCE_EVIDENCE:
+  category: "Non-Functional"
+  cross_references:
+    - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+  description: "Every behavior-changing change selects applicable quality attributes from a bounded risk profile and records reproducible evidence, limitations, and accepted residual risk without imposing irrelevant checks."
+  detail_file: "requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml"
+  name: "Risk-triggered quality assurance evidence"
+  priority: "P0"
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    implementation:
+      - "IMPL-QUALITY_EVIDENCE_MANIFEST"
+REQ-TIED_ADVERSARIAL_INQUIRY:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+    - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+  description: "Provide bounded, read-only obligation mapping and bidirectional fidelity evidence without treating structural presence as semantic or runtime proof."
+  detail_file: "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for bounded adversarial inquiry and fidelity evidence"
+  name: "Adversarial inquiry for obligation and fidelity evidence"
+  priority: "P0"
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to:
+      - "REQ-TIED_SETUP"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_ADVERSARIAL_INQUIRY"
+    implementation:
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY"
+      - "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for shared checklist evidence gate (composed_with sponsor-agent hinge validation)"
+  name: "Machine-enforced checklist evidence gates"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+    related_to:
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+REQ-TIED_FIDELITY_RESEARCH:
+  category: "Functional"
+  detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed for read-only fidelity and defect-origin research; procedure: tied/docs/tied-fidelity-research.md"
+  name: "TIED Fidelity Research"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    implementation:
+      - "IMPL-TIED_FIDELITY_RESEARCH"
+REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
+  category: "Functional"
+  detail_file: "requirements/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml"
+  name: "QMM methodology client resources (phase 1 bundle promotion)"
+  priority: "P0"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-EVIDENCE_CHAIN_REPORT"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST"
+    implementation:
+      - "IMPL-TIED_FILES"
+REQ-TIED_SETUP:
+  category: "Functional"
+  cross_references:
+    - "ARCH-TIED_STRUCTURE"
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_FILES"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "Deterministic TIED bootstrap with methodology vocabulary refresh and durable client vocabulary ownership."
+  detail_file: "requirements/REQ-TIED_SETUP.yaml"
+  metadata:
+    last_updated:
+      reason: "Methodology seed; layered vocabulary ownership and refresh behavior"
+  name: "TIED Methodology Setup"
+  priority: "P0"
+  related_requirements:
+    depends_on: []
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+      - "ARCH-TIED_STRUCTURE"
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+    implementation:
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_VOCABULARY_REFRESH"
+REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
+  category: "Methodology"
+  cross_references:
+    - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_SETUP"
+    - "REQ-TIED_VOCABULARY_OWNERSHIP"
+  detail_file: "requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml"
+  name: "Sponsor-Agent Relationship Layer"
+  priority: "P1"
+  status: "Planned"
+REQ-TIED_VOCABULARY_OWNERSHIP:
+  category: "Infrastructure"
+  cross_references:
+    - "ARCH-TIED_VOCABULARY_LAYERS"
+    - "IMPL-TIED_VOCABULARY_REFRESH"
+  description: "TIED clients separate refreshable methodology vocabulary from durable client-owned vocabulary while preserving one agent-friendly discovery entry point."
+  detail_file: "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml"
+  name: "Separate Vocabulary Ownership"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to: []
+    supersedes: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_VOCABULARY_LAYERS"
+    implementation:
+      - "IMPL-TIED_VOCABULARY_REFRESH"

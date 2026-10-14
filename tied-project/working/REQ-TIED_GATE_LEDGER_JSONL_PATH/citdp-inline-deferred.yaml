@@ -1,0 +1,44 @@
+change_definition:
+  current_behavior: "P3 committed gate ledger used gate-ledger.v1.yaml with JSONL body; lint_yaml -F tied-project fails. MCP accepts any ledger_path extension."
+  desired_behavior: "P3 ledger is gate-ledger.jsonl; assertJsonlLedgerPath rejects .yaml/.yml and requires .jsonl before append."
+  non_goals:
+    - "Migrating all historical ledgers"
+    - "New REQ/ARCH index tokens"
+  success_criteria:
+    - "adherence-ledger unit tests pass"
+    - "lint_yaml -F tied-project passes"
+  unchanged_behavior: "JSONL event schema agent-adherence-event.v1 unchanged."
+impact_analysis:
+  tied_tokens_touched:
+    - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+record_identity:
+  change_request_id: "REQ-TIED_GATE_LEDGER_JSONL_PATH"
+  recorded_at: "2026-10-13"
+  title: "Gate adherence ledger JSONL path guard and P3 rename"
+risk_analysis:
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    counterexamples:
+      - "Guard rejects valid custom extension used by legacy tooling"
+      - "Renamed ledger breaks reconcile scripts still pointing at .yaml path"
+      - "P3 source.path mismatch misread as hash corruption"
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "lint_yaml still fails on tied-project after rename"
+      - "appendGateDecided succeeds with .yaml path after guard"
+    eligibility_triggers_matched: []
+    evidence_references:
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
+      - "mcp-server/src/adherence-ledger.test.ts"
+    falsification_questions:
+      - "Does lint_yaml -F tied-project pass?"
+      - "Do adherence-ledger tests reject .yaml ledger_path?"
+      - "Is P3 gate-ledger.v1.yaml absent from git?"
+    gate_policy: "advisory"
+    prior_depth_tier: null
+    rationale: "Hygiene fix; bounded MCP writer guard; no checklist behavior change."
+    research_profile: "not_applicable"
+test_strategy:
+  summary: "adherence-ledger.test.ts; lint_yaml tied-project; optional tied_validate_consistency."

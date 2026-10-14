@@ -1,61 +1,61 @@
-schema_version: langgraph-program-evidence-registry.v1
-program_request: PLAN-TIED-LANGGRAPH-ORCHESTRATION
-program_phase: P1_authorized
 generated_at: "2026-10-12T08:51:00-07:00"
+program_phase: "P1_authorized"
+program_request: "PLAN-TIED-LANGGRAPH-ORCHESTRATION"
+schema_version: "langgraph-program-evidence-registry.v1"
 waves:
-  - wave: P0
-    implement_req: null
-    disposition: enrollment_complete
-    traceable_commit: null
+  - disposition: "enrollment_complete"
     evidence:
-      pre_implementation_gate:
-        path: tied-bundle/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/gates/pre_implementation-2026-10-12T04-12-14-197Z.json
-        allowed: true
-      verification_gate: null
       close_out_gate: null
-  - wave: P1
-    implement_req: null
-    disposition: scaffold_complete
-    evidence:
-      sponsor_authority:
-        path: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md
-        recorded: "2026-10-12"
       pre_implementation_gate:
-        path: tied-bundle/working/PLAN-TIED-LG-P1-SCAFFOLD/gates/pre_implementation-2026-10-12T15-59-05-597Z.json
         allowed: true
+        path: "tied-bundle/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/gates/pre_implementation-2026-10-12T04-12-14-197Z.json"
+      verification_gate: null
+    implement_req: null
+    traceable_commit: null
+    wave: "P0"
+  - disposition: "pending"
+    evidence: {}
+    implement_req: "REQ-BOUNDED_WORKER_POOL"
+    wave: "P3"
+  - disposition: "pending"
+    evidence: {}
+    implement_req: "REQ-BOUNDED_WORKER_POOL"
+    wave: "P4"
+  - disposition: "pending"
+    evidence: {}
+    implement_req: "REQ-BOUNDED_WORKER_POOL"
+    wave: "P5"
+  - disposition: "pending"
+    evidence: {}
+    implement_req: "REQ-BOUNDED_WORKER_POOL"
+    wave: "P6"
+  - disposition: "pending"
+    evidence: {}
+    implement_req: "REQ-BOUNDED_WORKER_POOL"
+    wave: "P7"
+  - disposition: "plan_enrolled"
+    evidence:
+      close_out_gate: null
+      linked_plan: "docs/langgraph/plan-tied-lg-p2-evidence-wiring.md"
+      pre_implementation_gate:
+        allowed: true
+        label: "plan_only"
+        path: "tied-bundle/working/PLAN-TIED-LG-P2-EVIDENCE/gates/pre_implementation-2026-10-12T17-42-59-046Z.json"
+      verification_gate: null
+    implement_req: null
+    wave: "P2"
+  - disposition: "scaffold_complete"
+    evidence:
+      close_out_gate: null
+      pre_implementation_gate:
+        allowed: true
+        path: "tied-bundle/working/PLAN-TIED-LG-P1-SCAFFOLD/gates/pre_implementation-2026-10-12T15-59-05-597Z.json"
       pytest:
         command: "cd tools/langgraph-pilot && .venv/bin/pytest -q"
         result: "4 passed"
+      sponsor_authority:
+        path: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md"
+        recorded: "2026-10-12"
       verification_gate: null
-      close_out_gate: null
-  - wave: P2
     implement_req: null
-    disposition: plan_enrolled
-    evidence:
-      linked_plan: docs/langgraph/plan-tied-lg-p2-evidence-wiring.md
-      pre_implementation_gate:
-        path: tied-bundle/working/PLAN-TIED-LG-P2-EVIDENCE/gates/pre_implementation-2026-10-12T17-42-59-046Z.json
-        allowed: true
-        label: plan_only
-      verification_gate: null
-      close_out_gate: null
-  - wave: P3
-    implement_req: REQ-BOUNDED_WORKER_POOL
-    disposition: pending
-    evidence: {}
-  - wave: P4
-    implement_req: REQ-BOUNDED_WORKER_POOL
-    disposition: pending
-    evidence: {}
-  - wave: P5
-    implement_req: REQ-BOUNDED_WORKER_POOL
-    disposition: pending
-    evidence: {}
-  - wave: P6
-    implement_req: REQ-BOUNDED_WORKER_POOL
-    disposition: pending
-    evidence: {}
-  - wave: P7
-    implement_req: REQ-BOUNDED_WORKER_POOL
-    disposition: pending
-    evidence: {}
+    wave: "P1"

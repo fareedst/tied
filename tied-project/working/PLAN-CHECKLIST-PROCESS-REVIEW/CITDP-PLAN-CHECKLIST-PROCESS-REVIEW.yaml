@@ -1,6 +1,4 @@
-# Working mirror — canonical documentation CITDP is:
-# tied-project/citdp/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml
 canonical_citdp_path: "tied-project/citdp/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml"
-status: "superseded_by_canonical_citdp"
 refine_pass: 1
 refine_pass_date: "2026-10-10"
+status: "superseded_by_canonical_citdp"

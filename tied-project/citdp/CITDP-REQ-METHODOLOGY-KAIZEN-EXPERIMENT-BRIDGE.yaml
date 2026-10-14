@@ -40,13 +40,13 @@ CITDP-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Bridge writes experiment store on invocation"
         - "Auto-hook on methodology_improvement capture"
+        - "Bridge writes experiment store on invocation"
         - "Stale digest hash accepted"
       depth_tier: "integrated"
       eligibility_triggers_matched:
-        - "mcp_write_surface"
         - "external_input"
+        - "mcp_write_surface"
       gate_policy: "per_citdp"
       prior_depth_tier: "minimal"
       rationale: "New MCP surface reading feedback store; explicit external input boundary."

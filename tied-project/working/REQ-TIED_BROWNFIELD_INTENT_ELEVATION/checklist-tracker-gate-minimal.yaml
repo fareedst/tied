@@ -1,55 +1,55 @@
-schema_version: checklist-tracker.v1
-name: bfie-refine-plan-pre-implementation-gate
-refine_pass: "2026-10-13-pass2"
-request_token: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
-depth_tier: minimal
-gate_policy: advisory
 brownfield_intent_elevation:
-  mode: report_only
+  mode: "report_only"
+depth_tier: "minimal"
 execution_evidence:
-  request: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  request: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+gate_policy: "advisory"
+name: "bfie-refine-plan-pre-implementation-gate"
+refine_pass: "2026-10-13-pass2"
+request_token: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+schema_version: "checklist-tracker.v1"
 state_history: []
 steps:
-  - slug: session-bootstrap
-    kind: main
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
-  - slug: translate-sponsor-intent
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+    kind: "main"
+    slug: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
-  - slug: change-definition
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+    kind: "main"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
-  - slug: impact-discovery
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+    kind: "main"
+    slug: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
-  - slug: risk-assessment
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+    kind: "main"
+    slug: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
-  - slug: test-strategy
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+    kind: "main"
+    slug: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml
-      - tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/refine-plan-2026-10-13-pass2.md
-  - slug: sub-adversarial-inquiry-pass
-    kind: sub_procedure
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION.yaml"
+      - "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/refine-plan-2026-10-13-pass2.md"
+    kind: "main"
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    kind: "sub_procedure"
+    policy: "minimal-depth-no-inquiry"
     rationale: "Phase 1 report-only validator; minimal depth; counterexamples recorded in CITDP."
+    slug: "sub-adversarial-inquiry-pass"

@@ -3,14 +3,14 @@ CITDP-PLAN-CHECKLIST-PROCESS-REVIEW:
     current_behavior: "Checklist and process documentation are spread across tied-bundle/docs, docs/, tied-project/working/, navigation surfaces, and legacy path aliases; closure status, inbound references, and authority roles are not uniformly reconciled before cleanup."
     desired_behavior: "A refined plan-only program defines a repeatable review method, phased deliverables, deletion safety gates, and an implement handoff that mints generic docs without mutating canonical checklist semantics in the first pass."
     non_goals:
-      - "Replacing [PROC-AGENT_REQ_CHECKLIST] or adding a parallel implementation workflow"
-      - "Hard-deleting docs or plans during plan-only refine"
       - "Editing read-only tied-bundle methodology YAML in phase 1"
-      - "Retroactive integrated adversarial inquiry for plan-only documentation"
+      - "Hard-deleting docs or plans during plan-only refine"
       - "Minting REQ-CHECKLIST-PROCESS-REVIEW during plan-only refine"
+      - "Replacing [PROC-AGENT_REQ_CHECKLIST] or adding a parallel implementation workflow"
+      - "Retroactive integrated adversarial inquiry for plan-only documentation"
     success_criteria:
-      - "Linked Cursor plan and docs/checklist-process-review-plan.md target spec agreed after sponsor approval"
       - "Committed working folder PLAN-CHECKLIST-PROCESS-REVIEW with PLAN, Tracker, and documentation CITDP"
+      - "Linked Cursor plan and docs/checklist-process-review-plan.md target spec agreed after sponsor approval"
       - "Phased program separates deliverable authoring, inventory/review execution, bounded cleanup, and methodology-surface follow-ons"
       - "Test strategy and validation commands documented before build-plan phase 1"
     unchanged_behavior: "[PROC-AGENT_REQ_CHECKLIST] remains machine source of step order; per-request Trackers remain execution authority; tied-bundle methodology stays read-only in the client."
@@ -40,8 +40,8 @@ CITDP-PLAN-CHECKLIST-PROCESS-REVIEW:
   risk_analysis:
     abuse_cases:
       - "Deletion hides unresolved status contradictions instead of recording disposition"
-      - "Review checklist mistaken for mandatory implementation workflow on every REQ"
       - "Plan-only gate receipt reused to authorize canonical checklist step changes without methodology-surface enrollment"
+      - "Review checklist mistaken for mandatory implementation workflow on every REQ"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
@@ -52,17 +52,17 @@ CITDP-PLAN-CHECKLIST-PROCESS-REVIEW:
       depth_change_waiver: null
       depth_tier: "minimal"
       disconfirming_observations:
-        - "Any tied-bundle checklist YAML edited during plan-only refine."
         - "Any hard delete executed before inbound reference sweep evidence exists."
+        - "Any tied-bundle checklist YAML edited during plan-only refine."
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/PLAN.md"
-        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/checklist-tracker.yaml"
         - "/Users/fareed/.cursor/plans/checklist-process-review_c5da706c.plan.md"
+        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/checklist-tracker.yaml"
+        - "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/PLAN.md"
       falsification_questions:
-        - "Does the refined plan forbid parallel implementation workflow replacement?"
         - "Are deletion batches explicitly separated from deliverable authoring?"
         - "Are methodology-surface changes routed to plan-new-feature with enrollment?"
+        - "Does the refined plan forbid parallel implementation workflow replacement?"
       gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null

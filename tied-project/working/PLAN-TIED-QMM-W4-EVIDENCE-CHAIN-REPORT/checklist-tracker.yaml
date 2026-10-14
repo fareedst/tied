@@ -4,8 +4,8 @@ citdp:
   status: "deferred"
 depth_tier: "minimal"
 execution_authority:
-  implementation_authority: "superseded_by_sponsor_implement_20261010"
   implement_tracker: "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/implement-checklist-tracker.yaml"
+  implementation_authority: "superseded_by_sponsor_implement_20261010"
   prior_w1_w3_receipts_are_activation_evidence: false
   scope: "plan-only"
   superseded_by: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-w4-implement-20261010.md"

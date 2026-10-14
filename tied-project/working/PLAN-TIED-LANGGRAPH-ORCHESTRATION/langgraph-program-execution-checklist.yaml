@@ -1,18 +1,10 @@
-schema_version: langgraph-program-execution.v1
-current_wave: P4
-program_phase: P3_close_out_complete
-last_updated: "2026-10-12T12:00:00-07:00"
-program:
-  program_request: PLAN-TIED-LANGGRAPH-ORCHESTRATION
-  linked_plan: docs/langgraph/tied-langgraph-orchestration-plan.md
-  program_evidence_registry: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/program-evidence-registry.v1.yaml
-  citdp_plan: tied-project/citdp/CITDP-PLAN-TIED-LANGGRAPH-ORCHESTRATION.yaml
-  refine_tracker: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/checklist-tracker.yaml
+agent_handoff: "P3 implement + close-out complete; proceed P4 acceptance or sponsor git commit. See tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/session-handoff.md"
+current_wave: "P4"
 execution_authority:
   p0_enrollment_complete_at: "2026-10-12T04:15:00-07:00"
-  p0_enrollment_evidence_ref: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/charter.md
+  p0_enrollment_evidence_ref: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/charter.md"
   p1_implement_authorized_at: "2026-10-12T08:51:00-07:00"
-  p1_implement_evidence_ref: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md
+  p1_implement_evidence_ref: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md"
   sponsor_interrupt_only_when:
     - "agency boundary canonical REQ/ARCH/IMPL intent beyond program charter"
     - "canonical promotion into tied-bundle methodology without separate methodology change request"
@@ -21,70 +13,78 @@ execution_authority:
 flow_control:
   notation:
     - meaning: "Jump to wave id"
-      symbol: GOTO
+      symbol: "GOTO"
     - meaning: "Run build-plan or plan-close-out then RETURN"
-      symbol: CALL
-  ordering: strict_sequential_P0_through_P7_unless_sponsor_reorders
+      symbol: "CALL"
+  ordering: "strict_sequential_P0_through_P7_unless_sponsor_reorders"
+last_updated: "2026-10-12T12:00:00-07:00"
+program:
+  citdp_plan: "tied-project/citdp/CITDP-PLAN-TIED-LANGGRAPH-ORCHESTRATION.yaml"
+  linked_plan: "docs/langgraph/tied-langgraph-orchestration-plan.md"
+  program_evidence_registry: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/program-evidence-registry.v1.yaml"
+  program_request: "PLAN-TIED-LANGGRAPH-ORCHESTRATION"
+  refine_tracker: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/checklist-tracker.yaml"
+program_phase: "P3_close_out_complete"
+schema_version: "langgraph-program-execution.v1"
 waves:
   P0:
-    title: Charter and program enrollment
-    mode: plan_only
-    depth_tier: minimal
-    gate_policy: advisory
-    child_folder: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION
-    status: complete
-    exit_gate: p0_enrollment_complete
+    child_folder: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION"
+    depth_tier: "minimal"
+    exit_gate: "p0_enrollment_complete"
+    gate_policy: "advisory"
+    mode: "plan_only"
+    status: "complete"
+    title: "Charter and program enrollment"
   P1:
-    title: Scaffold and MCP adapter
-    mode: implement
-    depth_tier_default: integrated
-    gate_policy_default: per_citdp
-    child_folder: tied-project/working/PLAN-TIED-LG-P1-SCAFFOLD
-    status: scaffold_complete
-    implement_authority_ref: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md
+    child_folder: "tied-project/working/PLAN-TIED-LG-P1-SCAFFOLD"
+    depth_tier_default: "integrated"
     entry_requires:
-      - "sponsor-authority-p1-scaffold artifact"
       - "child CITDP + Tracker"
       - "pre_implementation gate on P1 scope"
+      - "sponsor-authority-p1-scaffold artifact"
+    gate_policy_default: "per_citdp"
+    implement_authority_ref: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/sponsor-authority-p1-scaffold-20261012.md"
+    mode: "implement"
+    status: "scaffold_complete"
+    title: "Scaffold and MCP adapter"
   P2:
-    title: Evidence wiring
-    mode: implement
-    depth_tier_default: integrated
-    gate_policy_default: per_citdp
-    child_folder: tied-project/working/PLAN-TIED-LG-P2-EVIDENCE
-    linked_plan: docs/langgraph/plan-tied-lg-p2-evidence-wiring.md
-    status: implement_close_out_complete
-    exit_commit: "1bbd9245"
+    child_folder: "tied-project/working/PLAN-TIED-LG-P2-EVIDENCE"
+    depth_tier_default: "integrated"
     entry_requires:
-      - "P1 scaffold_complete"
       - "child CITDP + plan Tracker"
+      - "P1 scaffold_complete"
       - "plan pre_implementation gate receipt"
+    exit_commit: "1bbd9245"
+    gate_policy_default: "per_citdp"
+    linked_plan: "docs/langgraph/plan-tied-lg-p2-evidence-wiring.md"
+    mode: "implement"
+    status: "implement_close_out_complete"
+    title: "Evidence wiring"
   P3:
-    title: TDD subgraph
-    mode: implement
-    child_folder: tied-project/working/PLAN-TIED-LG-P3-TDD
-    fixture_client: /Users/fareed/Documents/dev/test/1791767366
-    linked_plan: docs/langgraph/plan-tied-lg-p3-tdd-subgraph.md
-    status: implement_close_out_complete
+    child_folder: "tied-project/working/PLAN-TIED-LG-P3-TDD"
     exit_commit: "ebda93d5"
+    fixture_client: "/Users/fareed/Documents/dev/test/1791767366"
+    linked_plan: "docs/langgraph/plan-tied-lg-p3-tdd-subgraph.md"
+    mode: "implement"
+    status: "implement_close_out_complete"
+    title: "TDD subgraph"
   P4:
-    title: Acceptance gate
-    mode: implement
-    child_folder: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE
-    status: pending
+    child_folder: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE"
+    mode: "implement"
+    status: "pending"
+    title: "Acceptance gate"
   P5:
-    title: Checklist slice
-    mode: implement
-    child_folder: tied-project/working/PLAN-TIED-LG-P5-CHECKLIST
-    status: pending
+    child_folder: "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST"
+    mode: "implement"
+    status: "pending"
+    title: "Checklist slice"
   P6:
-    title: Multi-task
-    mode: implement
-    child_folder: tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK
-    status: pending
+    child_folder: "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK"
+    mode: "implement"
+    status: "pending"
+    title: "Multi-task"
   P7:
-    title: Evaluation and convergence
-    mode: plan_and_readout
-    evidence: tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/phase-7-convergence.md
-    status: pending
-agent_handoff: "P3 implement + close-out complete; proceed P4 acceptance or sponsor git commit. See tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/session-handoff.md"
+    evidence: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/phase-7-convergence.md"
+    mode: "plan_and_readout"
+    status: "pending"
+    title: "Evaluation and convergence"

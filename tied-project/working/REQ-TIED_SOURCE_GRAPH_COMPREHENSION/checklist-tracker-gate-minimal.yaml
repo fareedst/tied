@@ -1,54 +1,54 @@
-schema_version: checklist-tracker.v1
-name: sgc-refine-plan-pre-implementation-gate
-refine_pass: "2026-10-13-phase2"
-request_token: REQ-TIED_SOURCE_GRAPH_COMPREHENSION
-depth_tier: minimal
-gate_policy: advisory
 brownfield_intent_elevation:
-  mode: report_only
+  mode: "report_only"
+depth_tier: "minimal"
 execution_evidence:
-  request: REQ-TIED_SOURCE_GRAPH_COMPREHENSION
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  request: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+gate_policy: "advisory"
+name: "sgc-refine-plan-pre-implementation-gate"
+refine_pass: "2026-10-13-phase2"
+request_token: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+schema_version: "checklist-tracker.v1"
 state_history: []
 steps:
-  - slug: session-bootstrap
-    kind: main
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
-  - slug: translate-sponsor-intent
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml"
+    kind: "main"
+    slug: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - docs/comparisons/tied-vs-trail-code.md
-  - slug: change-definition
-    kind: main
-    disposition: completed
+      - "docs/comparisons/tied-vs-trail-code.md"
+    kind: "main"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
-  - slug: impact-discovery
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml"
+    kind: "main"
+    slug: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/PLAN.md
-  - slug: risk-assessment
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/PLAN.md"
+    kind: "main"
+    slug: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
-  - slug: test-strategy
-    kind: main
-    disposition: completed
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml"
+    kind: "main"
+    slug: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml
-  - slug: sub-adversarial-inquiry-pass
-    kind: sub_procedure
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml"
+    kind: "main"
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    kind: "sub_procedure"
+    policy: "minimal-depth-no-inquiry"
     rationale: "Local read-only graph indexing; counterexamples in CITDP; no integrated activation in slice 1."
+    slug: "sub-adversarial-inquiry-pass"

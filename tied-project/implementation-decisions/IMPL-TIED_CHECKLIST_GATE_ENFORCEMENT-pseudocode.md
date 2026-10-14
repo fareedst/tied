@@ -575,6 +575,20 @@ procedure RESOLVE_EVIDENCE_REFS(receipt, project_root):
   RETURN resolved_refs for outcome_verified ledger append
   NOTE: Stage P trigger (2026-08-25): shared TS gate accepts non-empty evidence_refs without filesystem resolution; Go producer remains authoritative resolver at write time; TS Option B validateTrackerEvidenceRefs deferred unless gate-time hardening required
 
+procedure ASSERT_JSONL_LEDGER_PATH(ledger_path):
+# [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_WORKING_ARTIFACT_PLACEMENT] — How: reject YAML extensions on agent-adherence-event.v1 append targets so committed working evidence is not scanned as YAML.
+  Contract:
+  INPUT: ledger_path from receipt_persistence or gate append caller
+  PRE: ledger_path is non-empty
+  OUTPUT: validated path or error
+  POST: path ends with .jsonl and does not end with .yaml or .yml
+  FAILURE_MODES: ledger_path_required, ledger_path_yaml_extension_forbidden, ledger_path_must_end_with_jsonl
+  TERMINATION: total
+  IF ledger_path blank: RETURN ledger_path_required
+  IF ledger_path ends with .yaml or .yml: RETURN ledger_path_yaml_extension_forbidden
+  IF ledger_path does not end with .jsonl: RETURN ledger_path_must_end_with_jsonl
+  RETURN success
+
 procedure PERSIST_GATE_DECISION_RECEIPT(gate_result, input_hashes, gates_dir):
 # [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] — How: persist raw checklist evidence gate decision with input Tracker/CITDP hash for reconciliation.
   Contract:
@@ -590,6 +604,7 @@ procedure PERSIST_GATE_DECISION_RECEIPT(gate_result, input_hashes, gates_dir):
   IF tracker_hash or citdp_hash missing: RETURN missing_input_hash
   path := gates_dir/{phase}-{timestamp}.json
   WRITE gate_result and input_hashes atomically to path
+  CALL ASSERT_JSONL_LEDGER_PATH(ledger_path) before append
   APPEND gate_decided adherence event with artifact_ref path and gate_receipt_hash
   RETURN path, gate_receipt_hash
 
@@ -607,6 +622,7 @@ procedure PERSIST_STATUS_MUTATION_RECEIPT(verify_result, gate_receipt_ref, ledge
   TERMINATION: total
   IF verify_result would_update is empty: RETURN verify_no_op
   IF mutation applied AND gate_receipt_ref missing: RETURN missing_gate_receipt_ref
+  CALL ASSERT_JSONL_LEDGER_PATH(ledger_path) before append
   APPEND status_mutated event with previous/next map and gate_receipt_ref
   RETURN success
 

@@ -1,102 +1,111 @@
-schema_version: checklist-tracker.v1
-name: sgc-build-plan-verification-gate
-request_token: REQ-TIED_SOURCE_GRAPH_COMPREHENSION
-depth_tier: minimal
-gate_policy: advisory
 brownfield_intent_elevation:
-  mode: report_only
+  mode: "report_only"
+depth_tier: "minimal"
 execution_evidence:
-  request: REQ-TIED_SOURCE_GRAPH_COMPREHENSION
-  envelope_path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/request-evidence-envelope.v1.json
   completed:
-    - session-bootstrap
-    - author-requirement
-    - author-architecture
-    - persist-implementation-records
-    - unit-test-red
-    - unit-test-green
-    - composition-integration
-    - risk-assessment
-    - verification-gate
+    - "author-architecture"
+    - "author-requirement"
+    - "composition-integration"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+gate_policy: "advisory"
+name: "sgc-build-plan-verification-gate"
+request_token: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+schema_version: "checklist-tracker.v1"
 state_history: []
 steps:
-  - slug: session-bootstrap
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_0
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/session-bootstrap-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_0
-  - slug: author-requirement
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_1
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-requirement-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_1
-  - slug: author-architecture
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_2
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-architecture-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_2
-  - slug: persist-implementation-records
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_3
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/persist-implementation-records-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_3
-  - slug: unit-test-red
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_4
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-red-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_4
-  - slug: unit-test-green
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_5
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-green-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_5
-  - slug: composition-integration
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_6
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/composition-integration-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_6
-  - slug: risk-assessment
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_7
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/risk-assessment-evidence.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_7
-  - slug: sub-adversarial-inquiry-pass
-    kind: sub_procedure
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: Slice 1 local read-only graph indexing; minimal depth per CITDP.
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/not-applicable-receipt.v1.json
-  - slug: verification-gate
-    kind: main
-    disposition: completed
-    evidence_refs: &ref_8
-      - tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/session-bootstrap-evidence.md"
+    kind: "main"
+    slug: "session-bootstrap"
     tracking:
-      status: completed
-      evidence_refs: *ref_8
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-requirement-evidence.md"
+    kind: "main"
+    slug: "author-requirement"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-requirement-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-architecture-evidence.md"
+    kind: "main"
+    slug: "author-architecture"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/author-architecture-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/persist-implementation-records-evidence.md"
+    kind: "main"
+    slug: "persist-implementation-records"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/persist-implementation-records-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-red-evidence.md"
+    kind: "main"
+    slug: "unit-test-red"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-green-evidence.md"
+    kind: "main"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/composition-integration-evidence.md"
+    kind: "main"
+    slug: "composition-integration"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/composition-integration-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/risk-assessment-evidence.md"
+    kind: "main"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/not-applicable-receipt.v1.json"
+    kind: "sub_procedure"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Slice 1 local read-only graph indexing; minimal depth per CITDP."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+    kind: "main"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"

@@ -1,0 +1,6 @@
+fix(gate-ledger): enforce JSONL paths and canonicalize staged YAML
+
+Reject .yaml/.yml adherence ledger paths in MCP append helpers so
+lint_yaml no longer hits JSONL masquerading as YAML; rename P3
+gate-ledger.v1.yaml to gate-ledger.jsonl. Co-stage methodology and
+working YAML styling normalization (~153 files) with fixture pin updates.

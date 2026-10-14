@@ -1,162 +1,161 @@
 citdp:
   deferred: true
   persisted: false
-  rationale: >-
-    Non-executable documentation change with no behavior under test; analysis is recorded in the linked Cursor plan and
-    committed PLAN.md.
-depth_tier: minimal
+  rationale: "Non-executable documentation change with no behavior under test; analysis is recorded in the linked Cursor plan and committed PLAN.md."
+depth_tier: "minimal"
 dispositions:
   allowed:
-    - completed
-    - not_applicable
-    - pending
-    - waived
+    - "completed"
+    - "not_applicable"
+    - "pending"
+    - "waived"
   completed_requires_evidence: true
 execution_evidence:
   close_out_evidence:
     deferred: []
     gates: {}
-    master_checklist: ''
+    master_checklist: ""
   completed:
-    - author-architecture
-    - author-requirement
-    - change-definition
-    - impact-discovery
-    - persist-implementation-records
-    - risk-assessment
-    - test-strategy
-    - translate-sponsor-intent
-    - verification-gate
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "impact-discovery"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "verification-gate"
   evidence_refs:
-    - kind: file_path
-      path: .cursor/plans/methodology_composition_matrix_fd80b58a.plan.md
-    - kind: file_path
-      path: tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/citdp-inline-deferred.yaml
-    - kind: file_path
-      path: tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/PLAN.md
-  request: REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX
-gate_policy: advisory
-loop_back_policy: >-
-  If scope, depth, gate policy, row grain, or disposition vocabulary changes, clear downstream dispositions/evidence and
-  re-run the pre_implementation gate.
-methodology_surface_change_class: none
-profile_depth: minimal
-request: REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX
-scope: Docs-only sponsor-facing methodology composition matrix; no production behavior.
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+    - kind: "file_path"
+      path: ".cursor/plans/methodology_composition_matrix_fd80b58a.plan.md"
+    - kind: "file_path"
+      path: "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/citdp-inline-deferred.yaml"
+    - kind: "file_path"
+      path: "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/PLAN.md"
+  request: "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+gate_policy: "advisory"
+loop_back_policy: "If scope, depth, gate policy, row grain, or disposition vocabulary changes, clear downstream dispositions/evidence and re-run the pre_implementation gate."
+methodology_surface_change_class: "none"
+profile_depth: "minimal"
+request: "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+scope: "Docs-only sponsor-facing methodology composition matrix; no production behavior."
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
 steps:
-  - evidence_refs: &ref_0
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/translate-sponsor-intent-evidence.md
-    slug: translate-sponsor-intent
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_0
-    disposition: completed
-  - evidence_refs: &ref_1
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/change-definition-evidence.md
-    slug: change-definition
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_1
-    disposition: completed
-  - evidence_refs: &ref_2
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/impact-discovery-evidence.md
-    slug: impact-discovery
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_2
-    disposition: completed
-  - evidence_refs: &ref_3
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/risk-assessment-evidence.md
-    slug: risk-assessment
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_3
-    disposition: completed
-  - evidence_refs: &ref_4
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/test-strategy-evidence.md
-    slug: test-strategy
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_4
-    disposition: completed
-  - disposition: not_applicable
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/PLAN.md
-    policy: minimal-depth-no-inquiry
-    rationale: >-
-      Minimal-depth documentation-only scope; bounded counterexamples, falsification questions, and disconfirming
-      observations are recorded in the linked plan instead of invoking inquiry tooling.
-    slug: sub-adversarial-inquiry-pass
-    status: not_applicable
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+    status: "completed"
     tracking:
-      consideration_before_proceeding: >-
-        Minimal-depth bounded evidence is recorded; inquiry tooling is not activated for this non-executable
-        documentation scope.
-      policy: minimal-depth-no-inquiry
-      rationale: >-
-        CITDP depth_tier minimal and sub_adversarial_inquiry_pass is not applicable to this non-executable documentation
-        scope.
-      status: not_applicable
-  - evidence_refs: &ref_5
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/author-requirement-evidence.md
-    slug: author-requirement
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_5
-    disposition: completed
-  - evidence_refs: &ref_6
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/author-architecture-evidence.md
-    slug: author-architecture
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_6
-    disposition: completed
-  - evidence_refs: &ref_7
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/persist-implementation-records-evidence.md
-    slug: persist-implementation-records
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_7
-    disposition: completed
-  - rationale: No production behavior or executable test target in the docs-only refinement.
-    slug: unit-test-red
-    status: not_applicable
-  - rationale: No production behavior or executable test target in the docs-only refinement.
-    slug: unit-test-green
-    status: not_applicable
-  - rationale: No runtime binding or composition code.
-    slug: composition-integration
-    status: not_applicable
-  - evidence_refs: &ref_8
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/verification-evidence-manifest.v1.json
-    slug: verification-gate
-    status: completed
-    tracking:
-      status: completed
-      evidence_refs: *ref_8
-    disposition: completed
-  - evidence_refs:
-      - CHANGELOG.md
-      - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md
-    slug: traceable-commit
-    status: completed
-    tracking:
-      status: completed
       evidence_refs:
-        - CHANGELOG.md
-        - tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md
-    disposition: completed
-version: 3.0.0
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/change-definition-evidence.md"
+    slug: "change-definition"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/PLAN.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal-depth documentation-only scope; bounded counterexamples, falsification questions, and disconfirming observations are recorded in the linked plan instead of invoking inquiry tooling."
+    slug: "sub-adversarial-inquiry-pass"
+    status: "not_applicable"
+    tracking:
+      consideration_before_proceeding: "Minimal-depth bounded evidence is recorded; inquiry tooling is not activated for this non-executable documentation scope."
+      policy: "minimal-depth-no-inquiry"
+      rationale: "CITDP depth_tier minimal and sub_adversarial_inquiry_pass is not applicable to this non-executable documentation scope."
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/author-requirement-evidence.md"
+    slug: "author-requirement"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/author-requirement-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/author-architecture-evidence.md"
+    slug: "author-architecture"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/author-architecture-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/persist-implementation-records-evidence.md"
+    slug: "persist-implementation-records"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/persist-implementation-records-evidence.md"
+      status: "completed"
+  - rationale: "No production behavior or executable test target in the docs-only refinement."
+    slug: "unit-test-red"
+    status: "not_applicable"
+  - rationale: "No production behavior or executable test target in the docs-only refinement."
+    slug: "unit-test-green"
+    status: "not_applicable"
+  - rationale: "No runtime binding or composition code."
+    slug: "composition-integration"
+    status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md"
+    slug: "traceable-commit"
+    status: "completed"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/session-handoff.md"
+      status: "completed"
+version: "3.0.0"
 working_artifacts:
-  committed_root: tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/
-  local_root: tied-bundle/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/
-  proof_boundary: Structure, links, row inventory, YAML syntax, vocabulary, and TIED traceability only.
+  committed_root: "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/"
+  local_root: "tied-bundle/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/"
+  proof_boundary: "Structure, links, row inventory, YAML syntax, vocabulary, and TIED traceability only."

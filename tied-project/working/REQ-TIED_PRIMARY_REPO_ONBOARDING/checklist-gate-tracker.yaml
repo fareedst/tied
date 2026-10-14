@@ -1,103 +1,119 @@
+depth_tier: "minimal"
 execution_evidence:
   completed:
-    - change-definition
-    - risk-assessment
-    - test-strategy
-    - author-requirement
-    - author-architecture
-    - persist-implementation-records
-    - gate-pseudocode-validation
-    - sync-tied-stack
-    - verification-gate
-    - gitignore-close-out-hygiene
-    - traceable-commit
-  envelope_path: tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json
-  request: REQ-TIED_PRIMARY_REPO_ONBOARDING
-depth_tier: minimal
-gate_policy: advisory
-profile_depth: minimal
-request: REQ-TIED_PRIMARY_REPO_ONBOARDING
-status: close_out_ready
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "gitignore-close-out-hygiene"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "traceable-commit"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+gate_policy: "advisory"
+profile_depth: "minimal"
+request: "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+status: "close_out_ready"
 steps:
-  - slug: change-definition
-    disposition: completed
-    evidence_refs: &ref_citdp_work
-      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: *ref_citdp_work
-  - slug: risk-assessment
-    disposition: completed
-    evidence_refs: *ref_citdp_work
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: *ref_citdp_work
-  - slug: test-strategy
-    disposition: completed
-    evidence_refs: *ref_citdp_work
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: *ref_citdp_work
-  - slug: author-requirement
-    disposition: completed
-    evidence_refs: &ref_req
-      - tied-project/requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+    slug: "author-requirement"
     tracking:
-      status: completed
-      evidence_refs: *ref_req
-  - slug: author-architecture
-    disposition: completed
-    evidence_refs: &ref_arch
-      - tied-project/architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml"
+    slug: "author-architecture"
     tracking:
-      status: completed
-      evidence_refs: *ref_arch
-  - slug: persist-implementation-records
-    disposition: completed
-    evidence_refs: &ref_impl
-      - tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml
+      evidence_refs:
+        - "tied-project/architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml"
+    slug: "persist-implementation-records"
     tracking:
-      status: completed
-      evidence_refs: *ref_impl
-  - slug: gate-pseudocode-validation
-    disposition: completed
-    evidence_refs: &ref_pseudo
-      - tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"
+    slug: "gate-pseudocode-validation"
     tracking:
-      status: completed
-      evidence_refs: *ref_pseudo
-  - slug: sub-adversarial-inquiry-pass
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: Minimal depth documentation change; CITDP open-record fields satisfy adversarial contract.
-  - slug: sync-tied-stack
-    disposition: completed
-    evidence_refs: &ref_citdp_persist
-      - tied-project/citdp/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth documentation change; CITDP open-record fields satisfy adversarial contract."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+    slug: "sync-tied-stack"
     tracking:
-      status: completed
-      evidence_refs: *ref_citdp_persist
-  - slug: verification-gate
-    disposition: completed
-    evidence_refs: &ref_verify
-      - README.md
-      - tools/bootstrap/README.md
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "README.md"
+      - "tools/bootstrap/README.md"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: *ref_verify
-  - slug: gitignore-close-out-hygiene
-    disposition: completed
-    evidence_refs: &ref_gitignore
-      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md
+      evidence_refs:
+        - "README.md"
+        - "tools/bootstrap/README.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md"
+    slug: "gitignore-close-out-hygiene"
     tracking:
-      status: completed
-      evidence_refs: *ref_gitignore
-  - slug: traceable-commit
-    disposition: completed
-    evidence_refs: &ref_commit
-      - CHANGELOG.md
-      - README.md
-      - tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "README.md"
+      - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json"
+    slug: "traceable-commit"
     tracking:
-      status: completed
-      evidence_refs: *ref_commit
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "README.md"
+        - "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json"
+      status: "completed"

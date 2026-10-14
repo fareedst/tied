@@ -14,6 +14,20 @@ CITDP-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
       - "Legacy absent/none class unchanged"
       - "Stable blocking diagnostics when link/store missing"
       - "Unit and composition tests green"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      run_id: "mseg-closeout-20261010"
+    focused_tests: "methodology-surface-experiment-gate/gate.test.ts"
+    lint: "npm run build in mcp-server"
+    verification: "tied_verify and tied_validate_consistency for touched project YAML"
+  evidence:
+    commands:
+      - "cd mcp-server && node --import tsx --test src/methodology-surface-experiment-gate/gate.test.ts"
+      - "cd mcp-server && npm run build"
+    proof_boundaries:
+      - "command result only"
   impact_analysis:
     depends_on:
       - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
@@ -21,16 +35,16 @@ CITDP-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
     files:
       - "mcp-server/src/checklist-validator.ts"
       - "mcp-server/src/methodology-surface-experiment-gate/"
+    impl_inventory:
+      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+    tied_tokens_affected:
+      - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+      - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
     tied_tokens_new:
       - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
       - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
       - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-    tied_tokens_affected:
-      - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-      - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-    impl_inventory:
-      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
   record_identity:
     author: "build-plan"
     change_request_id: "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
@@ -83,17 +97,3 @@ CITDP-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
   test_strategy:
     matrix_notes: "No E2E; UI-free composition only."
     summary: "Unit TDD for classifier, store, validator; composition for checklist seam; W2 regression."
-  evidence:
-    commands:
-      - cd mcp-server && npm run build
-      - cd mcp-server && node --import tsx --test src/methodology-surface-experiment-gate/gate.test.ts
-    proof_boundaries:
-      - command result only
-  completion_criteria:
-    activation:
-      run_id: mseg-closeout-20261010
-      phase: close_out
-      request_token: REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE
-    focused_tests: methodology-surface-experiment-gate/gate.test.ts
-    lint: npm run build in mcp-server
-    verification: tied_verify and tied_validate_consistency for touched project YAML

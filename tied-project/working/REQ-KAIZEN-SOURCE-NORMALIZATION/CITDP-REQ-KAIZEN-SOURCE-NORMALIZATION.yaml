@@ -1,198 +1,145 @@
 CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION:
-  record_identity:
-    title: Kaizen Phase 2 source normalization
-    change_request_id: REQ-KAIZEN-SOURCE-NORMALIZATION
-    author: refine-plan
-    date: '2026-10-07'
-    record_status: implementation
-    batch: kaizen-phase-2
-    depth_tier: integrated
-    gate_policy: advisory
-    profile_depth: not_measured
-    implementation_depth_tier: integrated
   change_definition:
-    current_behavior: >
-      normalizeOperationalSource maps user_report to feature_request and other
-      operational sources to bug_report without observation_kind, workflow,
-      workaround, or baseline refs. captureOperationalObservation accepts
-      optional observation_kind but defaults entry_type to
-      methodology_improvement when omitted, without kind-based inference.
-      Operational adapters do not share one inference table with capture.
-    desired_behavior: >
-      One shared normalization module maps operational source_type to default
-      observation_kind, infers feedback entry type from observation kind when
-      the caller omits entry_type (caller type always wins), persists additive
-      context fields (workflow, workaround, baseline_ref), keeps source
-      provenance, and rejects non-operator_local privacy at adapter boundaries.
-      user_report remains a friction observation (methodology_improvement by
-      default), not an automatic feature_request.
-    unchanged_behavior:
-      - tied_feedback_add and tied_feedback_export
-      - Phase 1 capture receipt shape and idempotency semantics
-      - groupDuplicateFeedback and createReviewedLeapProposal review boundary
-      - No upstream transport (Phases 1–2 sponsor decision)
+    current_behavior: "normalizeOperationalSource maps user_report to feature_request and other operational sources to bug_report without observation_kind, workflow, workaround, or baseline refs. captureOperationalObservation accepts optional observation_kind but defaults entry_type to methodology_improvement when omitted, without kind-based inference. Operational adapters do not share one inference table with capture.\n"
+    desired_behavior: "One shared normalization module maps operational source_type to default observation_kind, infers feedback entry type from observation kind when the caller omits entry_type (caller type always wins), persists additive context fields (workflow, workaround, baseline_ref), keeps source provenance, and rejects non-operator_local privacy at adapter boundaries. user_report remains a friction observation (methodology_improvement by default), not an automatic feature_request.\n"
     non_goals:
-      - Feedback analysis, digest projection, or promotion workflow changes
-      - >-
-        Closed-set validation of every observation kind value (validate known
-        kinds; unknown passes as stored string for analysis)
-      - Rewriting raw observation title/description text
-      - Fourth feedback entry type or shareable_hashed export paths
+      - "Closed-set validation of every observation kind value (validate known kinds; unknown passes as stored string for analysis)"
+      - "Feedback analysis, digest projection, or promotion workflow changes"
+      - "Fourth feedback entry type or shareable_hashed export paths"
+      - "Rewriting raw observation title/description text"
     success_criteria:
-      - >-
-        Fixtures for incident, metric, test_failure, and user_report with
-        provenance preserved
-      - >-
-        Tests lock caller-supplied entry_type override and kind-to-type
-        inference table
-      - >-
-        Composition tests for tied_feedback_operational_add and capture paths
-        using shared inference
-      - >-
-        Privacy rejection when adapter payload declares a non-operator_local
-        tier
-  impact_analysis:
-    modules:
-      - feedback-source-normalization (proposed shared module)
-      - feedback-promotion
-      - feedback-capture
-    files:
-      - mcp-server/src/feedback-promotion.ts
-      - mcp-server/src/feedback-capture.ts
-      - mcp-server/src/feedback.ts
-      - mcp-server/src/tools/index.ts
-      - mcp-server/src/feedback-promotion.test.ts
-      - mcp-server/src/feedback-capture.test.ts
-      - mcp-server/src/feedback-source-normalization.ts (proposed)
-      - mcp-server/src/feedback-source-normalization.test.ts (proposed)
-    depends_on:
-      - REQ-KAIZEN-OBSERVATION-CAPTURE
-      - REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION
-      - REQ-FEEDBACK_TO_TIED
-    tags:
-      - kaizen-phase-2
-      - integrated
-    tied_tokens_new:
-      - REQ-KAIZEN-SOURCE-NORMALIZATION (at plan-new-feature)
-      - ARCH-KAIZEN_SOURCE_NORMALIZATION (at plan-new-feature)
-      - IMPL-KAIZEN_SOURCE_NORMALIZATION (at plan-new-feature)
-  risk_analysis:
-    adversarial_inquiry:
-      depth_tier: integrated
-      gate_policy: advisory
-      assurance_profile: baseline-functional
-      research_profile: integrated-agent
-      prior_depth_tier: null
-      depth_selected_at: '2026-10-07T15:45:00-07:00'
-      eligibility_triggers_matched: []
-      rationale: >
-        This refine-plan pass edits planning artifacts only. Phase 2
-        implementation matches external input and persistence; plan-new-feature
-        must select depth_tier integrated (see
-        record_identity.implementation_depth_tier) before RED tests.
-      counterexamples:
-        - user_report still stored as feature_request by default
-        - >-
-          Capture and operational_add infer different entry types for the same
-          kind
-        - Adapter strips evidence_links or source_id provenance
-        - >-
-          Refine pass minimal depth inherited into implementation without
-          reselection
-      falsification_questions:
-        - >-
-          Does the linked plan forbid inheriting this pass minimal depth into
-          build-plan?
-        - >-
-          Do fixture tables specify caller entry_type override vs kind
-          inference?
-        - Is user_report default explicitly not feature_request?
-      close_out_inquiry_waiver:
-        owner: sponsor
-        expiry: '2026-12-31'
-        rationale: >
-          Phase 2 verification run kaizen-p2-verify-20261007 covers shared
-          inference tests; separate close_out adversarial inquiry receipt not
-          collected under advisory gate_policy.
-        approval: kaizen-program-pre-approved-batch-2026-10-07
-        referenced_verification_run_id: kaizen-p2-verify-20261007
-      disconfirming_observations:
-        - Any production code change under mcp-server/src in this refine pass
-        - REQ/ARCH/IMPL tokens minted before plan-new-feature
-      evidence_references:
-        - docs/tied-kaizen-feedback-loop-plan.md
-        - >-
-          tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION.yaml
-        - >-
-          tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/test-strategy-evidence.md
-        - mcp-server/src/feedback-promotion.ts
-    risks:
-      - id: RISK-KSN-001
-        description: Dual inference paths between capture and operational_add drift
-        severity: High
-        likelihood: Medium
-        mitigation: Single shared module imported by both paths; contract tests
-      - id: RISK-KSN-002
-        description: Kind inference misclassifies feature intent as methodology_improvement
-        severity: Medium
-        likelihood: Medium
-        mitigation: >-
-          Caller may always supply entry_type; document override in REQ
-          satisfaction criteria
-      - id: RISK-KSN-003
-        description: >-
-          Breaking change to existing operational_add consumers expecting
-          user_report → feature_request
-        severity: Medium
-        likelihood: High
-        mitigation: >-
-          Treat as desired contract change per sponsor policy; update tests and
-          LEAP note in REQ
-  test_strategy:
-    summary: >
-      Unit tests for shared inference and normalizeOperationalSource; extend
-      capture tests for kind-only entry_type inference; composition test for
-      tied_feedback_operational_add; no E2E.
-    fixtures:
-      - name: incident_high_severity
-        source_type: incident
-        expect_kind: incident
-        expect_type_when_omitted: bug_report
-      - name: test_failure_ci
-        source_type: test_failure
-        expect_kind: failed_test
-        expect_type_when_omitted: bug_report
-      - name: metric_threshold
-        source_type: metric
-        expect_kind: missing_information
-        expect_type_when_omitted: methodology_improvement
-      - name: user_report_friction
-        source_type: user_report
-        expect_kind: other
-        expect_type_when_omitted: methodology_improvement
-        notes: >-
-          other requires qualifier in payload.observation_kind or
-          payload.other_qualifier
-      - name: caller_override_feature
-        entry_type: feature_request
-        observation_kind: waiting
-        expect_type: feature_request
-    module_validation:
-      - module: feedback-source-normalization
-        boundary: pure inference + operational source shape
-        tests: feedback-source-normalization.test.ts
-      - module: feedback-promotion adapter binding
-        boundary: normalizeOperationalSource + MCP operational_add
-        tests: feedback-promotion.test.ts; batch-5-mcp.test.ts
-    proof_boundary: Does not select countermeasures or prove product correctness
+      - "Composition tests for tied_feedback_operational_add and capture paths using shared inference"
+      - "Fixtures for incident, metric, test_failure, and user_report with provenance preserved"
+      - "Privacy rejection when adapter payload declares a non-operator_local tier"
+      - "Tests lock caller-supplied entry_type override and kind-to-type inference table"
+    unchanged_behavior:
+      - "groupDuplicateFeedback and createReviewedLeapProposal review boundary"
+      - "No upstream transport (Phases 1–2 sponsor decision)"
+      - "Phase 1 capture receipt shape and idempotency semantics"
+      - "tied_feedback_add and tied_feedback_export"
   completion_criteria:
     activation:
-      run_id: kaizen-p2-verify-20261007
-      phase: verification
-      request_token: REQ-KAIZEN-SOURCE-NORMALIZATION
-    persist_policy: Persist to tied-project/citdp/ at close-out
-    focused_tests: >-
-      feedback-source-normalization.test.ts; feedback-promotion.test.ts;
-      feedback-capture.test.ts; batch-5-mcp.test.ts
-    lint: npx tsc -b in mcp-server
-    verification: tied_validate_consistency; integrated close_out gates
+      phase: "verification"
+      request_token: "REQ-KAIZEN-SOURCE-NORMALIZATION"
+      run_id: "kaizen-p2-verify-20261007"
+    focused_tests: "feedback-source-normalization.test.ts; feedback-promotion.test.ts; feedback-capture.test.ts; batch-5-mcp.test.ts"
+    lint: "npx tsc -b in mcp-server"
+    persist_policy: "Persist to tied-project/citdp/ at close-out"
+    verification: "tied_validate_consistency; integrated close_out gates"
+  impact_analysis:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+      - "REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION"
+    files:
+      - "mcp-server/src/feedback-capture.test.ts"
+      - "mcp-server/src/feedback-capture.ts"
+      - "mcp-server/src/feedback-promotion.test.ts"
+      - "mcp-server/src/feedback-promotion.ts"
+      - "mcp-server/src/feedback-source-normalization.test.ts (proposed)"
+      - "mcp-server/src/feedback-source-normalization.ts (proposed)"
+      - "mcp-server/src/feedback.ts"
+      - "mcp-server/src/tools/index.ts"
+    modules:
+      - "feedback-capture"
+      - "feedback-promotion"
+      - "feedback-source-normalization (proposed shared module)"
+    tags:
+      - "integrated"
+      - "kaizen-phase-2"
+    tied_tokens_new:
+      - "ARCH-KAIZEN_SOURCE_NORMALIZATION (at plan-new-feature)"
+      - "IMPL-KAIZEN_SOURCE_NORMALIZATION (at plan-new-feature)"
+      - "REQ-KAIZEN-SOURCE-NORMALIZATION (at plan-new-feature)"
+  record_identity:
+    author: "refine-plan"
+    batch: "kaizen-phase-2"
+    change_request_id: "REQ-KAIZEN-SOURCE-NORMALIZATION"
+    date: "2026-10-07"
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    implementation_depth_tier: "integrated"
+    profile_depth: "not_measured"
+    record_status: "implementation"
+    title: "Kaizen Phase 2 source normalization"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "kaizen-program-pre-approved-batch-2026-10-07"
+        expiry: "2026-12-31"
+        owner: "sponsor"
+        rationale: "Phase 2 verification run kaizen-p2-verify-20261007 covers shared inference tests; separate close_out adversarial inquiry receipt not collected under advisory gate_policy.\n"
+        referenced_verification_run_id: "kaizen-p2-verify-20261007"
+      counterexamples:
+        - "Adapter strips evidence_links or source_id provenance"
+        - "Capture and operational_add infer different entry types for the same kind"
+        - "Refine pass minimal depth inherited into implementation without reselection"
+        - "user_report still stored as feature_request by default"
+      depth_selected_at: "2026-10-07T15:45:00-07:00"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Any production code change under mcp-server/src in this refine pass"
+        - "REQ/ARCH/IMPL tokens minted before plan-new-feature"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/tied-kaizen-feedback-loop-plan.md"
+        - "mcp-server/src/feedback-promotion.ts"
+        - "tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION.yaml"
+        - "tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/test-strategy-evidence.md"
+      falsification_questions:
+        - "Do fixture tables specify caller entry_type override vs kind inference?"
+        - "Does the linked plan forbid inheriting this pass minimal depth into build-plan?"
+        - "Is user_report default explicitly not feature_request?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      rationale: "This refine-plan pass edits planning artifacts only. Phase 2 implementation matches external input and persistence; plan-new-feature must select depth_tier integrated (see record_identity.implementation_depth_tier) before RED tests.\n"
+      research_profile: "integrated-agent"
+    risks:
+      - description: "Breaking change to existing operational_add consumers expecting user_report → feature_request"
+        id: "RISK-KSN-003"
+        likelihood: "High"
+        mitigation: "Treat as desired contract change per sponsor policy; update tests and LEAP note in REQ"
+        severity: "Medium"
+      - description: "Dual inference paths between capture and operational_add drift"
+        id: "RISK-KSN-001"
+        likelihood: "Medium"
+        mitigation: "Single shared module imported by both paths; contract tests"
+        severity: "High"
+      - description: "Kind inference misclassifies feature intent as methodology_improvement"
+        id: "RISK-KSN-002"
+        likelihood: "Medium"
+        mitigation: "Caller may always supply entry_type; document override in REQ satisfaction criteria"
+        severity: "Medium"
+  test_strategy:
+    fixtures:
+      - entry_type: "feature_request"
+        expect_type: "feature_request"
+        name: "caller_override_feature"
+        observation_kind: "waiting"
+      - expect_kind: "failed_test"
+        expect_type_when_omitted: "bug_report"
+        name: "test_failure_ci"
+        source_type: "test_failure"
+      - expect_kind: "incident"
+        expect_type_when_omitted: "bug_report"
+        name: "incident_high_severity"
+        source_type: "incident"
+      - expect_kind: "missing_information"
+        expect_type_when_omitted: "methodology_improvement"
+        name: "metric_threshold"
+        source_type: "metric"
+      - expect_kind: "other"
+        expect_type_when_omitted: "methodology_improvement"
+        name: "user_report_friction"
+        notes: "other requires qualifier in payload.observation_kind or payload.other_qualifier"
+        source_type: "user_report"
+    module_validation:
+      - boundary: "normalizeOperationalSource + MCP operational_add"
+        module: "feedback-promotion adapter binding"
+        tests: "feedback-promotion.test.ts; batch-5-mcp.test.ts"
+      - boundary: "pure inference + operational source shape"
+        module: "feedback-source-normalization"
+        tests: "feedback-source-normalization.test.ts"
+    proof_boundary: "Does not select countermeasures or prove product correctness"
+    summary: "Unit tests for shared inference and normalizeOperationalSource; extend capture tests for kind-only entry_type inference; composition test for tied_feedback_operational_add; no E2E.\n"

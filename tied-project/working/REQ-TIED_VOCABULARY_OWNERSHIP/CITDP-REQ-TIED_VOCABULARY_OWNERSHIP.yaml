@@ -118,22 +118,22 @@ CITDP-REQ-TIED_VOCABULARY_OWNERSHIP:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     adversarial_inquiry:
-      depth_tier: "minimal"
-      gate_policy: "standard"
-      profile_depth: "not_measured"
       counterexamples:
         - "Bundle promotion copies client-only cross-refs into methodology indexes."
         - "Manifest gate lists paths that bootstrap never materializes to clients."
+      depth_tier: "minimal"
       disconfirming_observations:
         - "bootstrap-and-load.test.ts asserts vocabulary ownership artifacts in installed tied-bundle/."
         - "verifyVocabularyOwnershipMethodology reads VOCABULARY_OWNERSHIP_METHODOLOGY_REQUIRED_FILES at runtime."
-      falsification_questions:
-        - "Does REQ-TIED_SPONSOR_AGENT_RELATIONSHIP still reference a missing REQ-TIED_VOCABULARY_OWNERSHIP detail under tied-bundle/?"
-        - "Can bootstrap complete when a manifest-listed vocabulary artifact is deleted?"
       evidence_references:
         - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
         - "tools/bootstrap/lib/verify.mjs"
         - "tools/bootstrap/manifest.json"
+      falsification_questions:
+        - "Can bootstrap complete when a manifest-listed vocabulary artifact is deleted?"
+        - "Does REQ-TIED_SPONSOR_AGENT_RELATIONSHIP still reference a missing REQ-TIED_VOCABULARY_OWNERSHIP detail under tied-bundle/?"
+      gate_policy: "standard"
+      profile_depth: "not_measured"
     residual_risk:
       expiry: "2026-09-30"
       owner: "AI Agent"

@@ -1,19 +1,18 @@
-# [REQ-TIED_BROWNFIELD_INTENT_ELEVATION] Authoritative minimal close-out tracker (not full master checklist).
 execution_evidence:
-  request: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
   envelope_path: "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
 steps:
-  - slug: "sub-adversarial-inquiry-pass"
-    disposition: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/not-applicable-receipt.v1.json"
     policy: "minimal-depth-no-inquiry"
     rationale: "depth_tier minimal; Phase 1 report-only validator per CITDP."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/not-applicable-receipt.v1.json
-  - slug: "traceable-commit"
-    disposition: "completed"
-    evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/traceable-commit-vocab-validation.md
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/gates/verification-2026-10-13T14-48-13-146Z.json
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/traceable-commit-vocab-validation.md"
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/gates/verification-2026-10-13T14-48-13-146Z.json"
+    slug: "traceable-commit"

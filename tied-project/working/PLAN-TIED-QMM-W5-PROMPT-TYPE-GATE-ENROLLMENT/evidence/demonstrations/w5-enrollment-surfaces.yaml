@@ -1,16 +1,16 @@
-schema_version: w5-enrollment-demo.v1
-privacy_tier: operator_local
-proof_boundary: Enrollment validator reports only; not effectiveness or pairing disposition.
 cases:
-  - id: w5-demo-prompt-type
-    production_system_surface: prompt_type_workflow
-    surface_ref: build-plan
-    experiment_id: w5-demo-prompt-type-001
-  - id: w5-demo-assurance
-    production_system_surface: assurance_profile
-    surface_ref: baseline-functional
-    experiment_id: w5-demo-assurance-001
-  - id: w5-demo-gate-policy
-    production_system_surface: gate_policy
-    surface_ref: per_citdp-demo-ref
-    experiment_id: w5-demo-gate-policy-001
+  - experiment_id: "w5-demo-assurance-001"
+    id: "w5-demo-assurance"
+    production_system_surface: "assurance_profile"
+    surface_ref: "baseline-functional"
+  - experiment_id: "w5-demo-gate-policy-001"
+    id: "w5-demo-gate-policy"
+    production_system_surface: "gate_policy"
+    surface_ref: "per_citdp-demo-ref"
+  - experiment_id: "w5-demo-prompt-type-001"
+    id: "w5-demo-prompt-type"
+    production_system_surface: "prompt_type_workflow"
+    surface_ref: "build-plan"
+privacy_tier: "operator_local"
+proof_boundary: "Enrollment validator reports only; not effectiveness or pairing disposition."
+schema_version: "w5-enrollment-demo.v1"

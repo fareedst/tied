@@ -44,9 +44,9 @@ CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE:
       assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
       counterexamples:
-        - "Silent auto-bridge on methodology_improvement capture promotes unreviewed experiments."
         - "Bridge write on invocation duplicates or bypasses W1 upsert idempotency."
         - "Plan-only w3_scope misread as implement authorization."
+        - "Silent auto-bridge on methodology_improvement capture promotes unreviewed experiments."
       depth_change_waiver: null
       depth_tier: "minimal"
       disconfirming_observations:
@@ -94,9 +94,9 @@ CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE:
       - "Minimal depth copied into REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE CITDP."
       - "Stale digest hash accepted without rejection in implement."
     scenarios:
-      - "Unreviewed experiment promotion via bridge write"
       - "Depth inheritance into MCP change"
       - "Documentation-only proof boundary"
+      - "Unreviewed experiment promotion via bridge write"
   sponsor_decisions:
     bridge_trigger_default: "explicit_mcp_only_no_auto_create"
     recorded_at: "2026-10-10"

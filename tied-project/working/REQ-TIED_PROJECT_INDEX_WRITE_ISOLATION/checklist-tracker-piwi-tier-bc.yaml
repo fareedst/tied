@@ -1,69 +1,63 @@
-# Focused Tracker slice for SC-PIWI-DOCS Tier B/C carry-forward (piwi-tier-bc-2026-10-12).
-# Full checklist template remains checklist-tracker.yaml; use this file for pre_implementation gate on the doc sweep only.
-copy_hygiene: >-
-  Loop-back from prior close-out: do not treat close_out gates as SC-PIWI-DOCS completion until this slice passes
-  verification-gate and session-handoff marks SC-PIWI-DOCS met.
-description: >
-  Carry-forward on REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION — complete SC-PIWI-DOCS (Tier B agent markdown + Tier C bootstrap lint).
-  depth_tier minimal · gate_policy advisory · no new REQ tokens (sponsor piwi_only).
+copy_hygiene: "Loop-back from prior close-out: do not treat close_out gates as SC-PIWI-DOCS completion until this slice passes verification-gate and session-handoff marks SC-PIWI-DOCS met."
+description: "Carry-forward on REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION — complete SC-PIWI-DOCS (Tier B agent markdown + Tier C bootstrap lint). depth_tier minimal · gate_policy advisory · no new REQ tokens (sponsor piwi_only).\n"
 execution_evidence:
-  request: REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION
-  run_id: piwi-tier-bc-2026-10-12
-  envelope_path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/request-evidence-envelope.v1.json
-  completed:
-    - session-bootstrap
-    - impact-discovery
-    - change-definition
-    - risk-assessment
-    - test-strategy
-    - gate-pseudocode-validation
-    - unit-test-red
-    - unit-test-green
-    - verification-gate
   close_out_evidence:
     date: null
     deferred:
-      - close_out replay until SC-PIWI-DOCS met and verification-gate re-run
+      - "close_out replay until SC-PIWI-DOCS met and verification-gate re-run"
     gates: {}
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"
+  run_id: "piwi-tier-bc-2026-10-12"
 steps:
-  - slug: change-definition
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
-  - slug: risk-assessment
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
-  - slug: test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
-  - slug: sub-adversarial-inquiry-pass
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: Docs and bootstrap lint only; CITDP depth_tier minimal with counterexamples in working CITDP.
-  - slug: gate-pseudocode-validation
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Docs and bootstrap lint only; CITDP depth_tier minimal with counterexamples in working CITDP."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION-pseudocode.md
-  - slug: unit-test-red
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tools/bootstrap/lib/check-docs-vocab-links.test.mjs
-  - slug: unit-test-green
-    disposition: completed
+      - kind: "file_path"
+        path: "tools/bootstrap/lib/check-docs-vocab-links.test.mjs"
+    slug: "unit-test-red"
+  - disposition: "completed"
     evidence_refs:
-      - kind: command_evidence
-        claimed_success: true
+      - claimed_success: true
         exit_code: 0
-        stdout_ref: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/piwi-tier-bc-bootstrap-tests.txt
-  - slug: verification-gate
-    disposition: completed
+        kind: "command_evidence"
+        stdout_ref: "tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/piwi-tier-bc-bootstrap-tests.txt"
+    slug: "unit-test-green"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tools/bootstrap/lib/check-docs-vocab-links.mjs
+      - kind: "file_path"
+        path: "tools/bootstrap/lib/check-docs-vocab-links.mjs"
+    slug: "verification-gate"

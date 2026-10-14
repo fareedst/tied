@@ -13,6 +13,7 @@ import {
   ADHERENCE_EVENT_SCHEMA_VERSION,
   appendGateDecided,
   appendStatusMutated,
+  assertJsonlLedgerPath,
 } from "./adherence-ledger.js";
 
 function readLastLedgerRow(ledgerPath: string): Record<string, unknown> {
@@ -20,6 +21,22 @@ function readLastLedgerRow(ledgerPath: string): Record<string, unknown> {
   assert.ok(lines.length > 0, "ledger must have rows");
   return JSON.parse(lines[lines.length - 1]!) as Record<string, unknown>;
 }
+
+describe("assertJsonlLedgerPath [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_WORKING_ARTIFACT_PLACEMENT]", () => {
+  it("rejects YAML extensions on adherence ledger paths", () => {
+    assert.throws(
+      () => assertJsonlLedgerPath("tied-project/working/REQ/evidence/gate-ledger.v1.yaml"),
+      /ledger_path_yaml_extension_forbidden/,
+    );
+  });
+
+  it("requires .jsonl suffix", () => {
+    assert.throws(
+      () => assertJsonlLedgerPath("tied-project/working/REQ/evidence/gate-ledger.txt"),
+      /ledger_path_must_end_with_jsonl/,
+    );
+  });
+});
 
 describe("appendGateDecided [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]", () => {
   it("appends gate_decided row with artifact_ref and artifact_hash", () => {

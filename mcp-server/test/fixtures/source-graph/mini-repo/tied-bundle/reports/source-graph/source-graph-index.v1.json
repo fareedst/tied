@@ -2,7 +2,7 @@
   "schema_version": "source-graph-index.v1",
   "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/source-graph/mini-repo",
   "content_hash": "10bfa79b8d9a89bdc4e21f303e50e3da330e26d27cdcf03e659c839a2c6144ab",
-  "built_at": "2026-10-13T17:00:43.238Z",
+  "built_at": "2026-10-14T00:38:17.704Z",
   "language_scope": [
     "typescript",
     "javascript"

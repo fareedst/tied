@@ -3,16 +3,16 @@ change_definition:
   desired_behavior: "The W1 child linked plan, working folder, plan-only Tracker, and documentation CITDP define RESOLVE, delegated envelope, record shape, test strategy, demonstration narrative, LEAP path, and implement handoff that forbids inheriting minimal depth."
   non_goals:
     - "Application code, automated tests, or runtime behavior changes"
-    - "New project REQ, ARCH, or IMPL records or semantic tokens"
-    - "MCP tool additions or feedback.yaml behavior changes"
-    - "Git stage, commit, or push unless sponsor plan-close-out"
     - "Editing tied-bundle methodology YAML"
+    - "Git stage, commit, or push unless sponsor plan-close-out"
+    - "MCP tool additions or feedback.yaml behavior changes"
+    - "New project REQ, ARCH, or IMPL records or semantic tokens"
   success_criteria:
     - "Child plan docs/tied-qmm-w1-methodology-pdsa-plan.md contains all parent program section 5.1 sections."
-    - "Implement section records that REQ-METHODOLOGY-LEARNING-EXPERIMENT must not inherit this pass minimal depth."
-    - "Storage spike order and minimum record fields documented for hinge number one."
-    - "Orchestrator records W1 plan-only execution_authority and child_plan_status authored."
     - "CITDP persisted with tied_tokens_new empty."
+    - "Implement section records that REQ-METHODOLOGY-LEARNING-EXPERIMENT must not inherit this pass minimal depth."
+    - "Orchestrator records W1 plan-only execution_authority and child_plan_status authored."
+    - "Storage spike order and minimum record fields documented for hinge number one."
   unchanged_behavior: "Kaizen MCP tools, feedback.yaml, checklist gates, and LEAP queue keep current behavior."
 evidence:
   commands:
@@ -53,11 +53,11 @@ risk_analysis:
     eligibility_triggers_matched: []
     evidence_references:
       - "docs/tied-qmm-w1-methodology-pdsa-plan.md"
-      - "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/risk-assessment-evidence.md"
       - "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/resolve-evidence.md"
+      - "tied-project/working/PLAN-TIED-QMM-W1-METHODOLOGY-PDSA/evidence/risk-assessment-evidence.md"
     falsification_questions:
-      - "Does the child plan forbid inheriting minimal depth into implement?"
       - "Does any sentence authorize tied-bundle methodology edit without separate sponsor scope?"
+      - "Does the child plan forbid inheriting minimal depth into implement?"
     gate_policy: "advisory"
     integrated_waiver: null
     prior_depth_tier: null
@@ -88,17 +88,17 @@ risk_analysis:
     owner: "next W1 implement plan-new-feature session"
     summary: "Implement must re-open hinges and pass pre_implementation before RED."
   risks:
-    - "Plan-only authority misread as implement authorization."
     - "Minimal depth copied into REQ-METHODOLOGY-LEARNING-EXPERIMENT CITDP."
+    - "Plan-only authority misread as implement authorization."
   scenarios:
-    - "Documentation-only proof boundary"
     - "Depth inheritance into persistence change"
+    - "Documentation-only proof boundary"
 sponsor_decisions:
   recorded_at: "2026-10-10"
-  summary: "Sponsor requested W1 plan-only build-plan; future REQ slug REQ-METHODOLOGY-LEARNING-EXPERIMENT; program hinges default to parent plan section 0.4."
-  w1_mode: "plan_only"
   storage_shape_default: "compose_existing_stores"
+  summary: "Sponsor requested W1 plan-only build-plan; future REQ slug REQ-METHODOLOGY-LEARNING-EXPERIMENT; program hinges default to parent plan section 0.4."
   w1_implement_depth_default: "integrated"
+  w1_mode: "plan_only"
 test_strategy:
   matrix_notes: "Static documentation checks only. Implement matrix in child plan section 5."
   summary: "Verify naming, record shape, and empty token delta. No application tests in plan-only pass."

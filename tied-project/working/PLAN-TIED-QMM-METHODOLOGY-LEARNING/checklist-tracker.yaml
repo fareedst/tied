@@ -1,61 +1,61 @@
-schema_version: qmm-refine-plan-tracker.v1
-request: PLAN-TIED-QMM-METHODOLOGY-LEARNING
+citdp:
+  path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml"
+  reason: "Program closed; W6 waived; doc reconcile complete."
+  status: "complete"
+depth_tier: "minimal"
+execution_authority:
+  evidence_ref: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md"
+  mode: "approved_full"
+gate:
+  allowed: false
+  diagnostic: "malformed_citdp:adversarial_inquiry"
+  phase: "pre_implementation"
+  reason: "Expected W0 outcome — deferred CITDP is not a behavior-changing pair; W1 must pass before RED."
+  status: "attempted_not_allowed"
+gate_policy: "advisory"
 purpose: "W0 documentation-only refine-plan tracker; not a behavior-changing REQ tracker."
 refine_pass: 2
 refine_pass_date: "2026-10-10"
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: complete
-depth_tier: minimal
-gate_policy: advisory
-execution_authority:
-  mode: approved_full
-  evidence_ref: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-qmm-program-close-w6-waived-20261010.md
-citdp:
-  status: complete
-  path: tied-project/citdp/CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE.yaml
-  reason: "Program closed; W6 waived; doc reconcile complete."
-gate:
-  phase: pre_implementation
-  status: attempted_not_allowed
-  allowed: false
-  diagnostic: malformed_citdp:adversarial_inquiry
-  reason: "Expected W0 outcome — deferred CITDP is not a behavior-changing pair; W1 must pass before RED."
+request: "PLAN-TIED-QMM-METHODOLOGY-LEARNING"
+schema_version: "qmm-refine-plan-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "complete"
 steps:
-  - id: resolve
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: docs/tied-qmm-methodology-learning-plan.md
-  - id: change-definition-impact-risk-test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "docs/tied-qmm-methodology-learning-plan.md"
+    id: "resolve"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: docs/tied-qmm-methodology-learning-plan.md
-  - id: tracker-and-orchestrator-alignment
-    disposition: completed
+      - kind: "file_path"
+        path: "docs/tied-qmm-methodology-learning-plan.md"
+    id: "change-definition-impact-risk-test-strategy"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml
-  - id: refine-plan-pass-2
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml"
+    id: "tracker-and-orchestrator-alignment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: docs/tied-qmm-methodology-learning-plan.md
-      - kind: note
+      - kind: "file_path"
+        path: "docs/tied-qmm-methodology-learning-plan.md"
+      - kind: "note"
         path: "§0 disposition key, §0.8 authority template, §5.1 W1 skeleton, §6.1 test strategy"
-  - id: product-tied-records
-    disposition: not_applicable
+    id: "refine-plan-pass-2"
+  - disposition: "not_applicable"
+    id: "product-tied-records"
     rationale: "W0 explicitly forbids product REQ/ARCH/IMPL creation or edits."
-  - id: implementation
-    disposition: not_applicable
+  - disposition: "not_applicable"
+    id: "implementation"
     rationale: "W0 is documentation-only and does not authorize W1."
-  - id: verification
-    disposition: not_applicable
+  - disposition: "not_applicable"
+    id: "verification"
     rationale: "No runtime behavior or product TIED YAML changed."
-  - id: sponsor-authority
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/evidence/sponsor-authority-20261010.md"
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-QMM-METHODOLOGY-LEARNING/qmm-program-execution-checklist.yaml"
+    id: "sponsor-authority"

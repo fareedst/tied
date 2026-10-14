@@ -1,6 +1,4 @@
-# Working mirror — canonical documentation CITDP is:
-# tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml
 canonical_citdp_path: "tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml"
-status: "superseded_by_canonical_citdp"
 refine_pass: 2
 refine_pass_date: "2026-10-10"
+status: "superseded_by_canonical_citdp"

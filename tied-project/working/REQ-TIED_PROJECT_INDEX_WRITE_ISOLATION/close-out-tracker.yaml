@@ -1,11 +1,10 @@
-# [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION] Authoritative minimal close-out tracker (not full master checklist).
 execution_evidence:
-  request: "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"
   envelope_path: "tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION"
 steps:
-  - slug: "sub-adversarial-inquiry-pass"
-    disposition: "not_applicable"
-    policy: "minimal-depth-no-inquiry"
-    rationale: "depth_tier minimal; loader unit tests and consistency scan satisfy obligation surface per CITDP."
+  - disposition: "not_applicable"
     evidence_refs:
       - "tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "depth_tier minimal; loader unit tests and consistency scan satisfy obligation surface per CITDP."
+    slug: "sub-adversarial-inquiry-pass"

@@ -1,24 +1,20 @@
-case_id: w5-demo-assurance
+case_id: "w5-demo-assurance"
 enrollment:
-  schema_version: methodology-production-system-enrollment-validator.v1
-  ok: true
-  proof_boundary: >-
-    Enrollment completeness for non-checklist_step production surfaces; composes W1 structural
-    validation; does not prove methodology effectiveness or checklist gate pass.
-  enrollment_disposition: enrolled
-  production_system_surface: assurance_profile
   diagnostics: []
+  enrollment_disposition: "enrolled"
+  ok: true
+  production_system_surface: "assurance_profile"
+  proof_boundary: "Enrollment completeness for non-checklist_step production surfaces; composes W1 structural validation; does not prove methodology effectiveness or checklist gate pass."
+  schema_version: "methodology-production-system-enrollment-validator.v1"
   structural:
-    schema_version: methodology-learning-experiment-validator.v1
-    ok: true
-    proof_boundary: >-
-      Structural validation and persistence lifecycle only; does not prove methodology
-      effectiveness.
     diagnostics: []
-pairing_scenario: effectiveness_not_measured_documented
+    ok: true
+    proof_boundary: "Structural validation and persistence lifecycle only; does not prove methodology effectiveness."
+    schema_version: "methodology-learning-experiment-validator.v1"
 pairing:
-  schema_version: methodology-conformance-effectiveness-pairing-report.v1
-  ok: true
-  disposition: effectiveness_not_measured
-  proof_boundary: Enrollment validator reports only; not effectiveness or pairing disposition.
   diagnostics: []
+  disposition: "effectiveness_not_measured"
+  ok: true
+  proof_boundary: "Enrollment validator reports only; not effectiveness or pairing disposition."
+  schema_version: "methodology-conformance-effectiveness-pairing-report.v1"
+pairing_scenario: "effectiveness_not_measured_documented"

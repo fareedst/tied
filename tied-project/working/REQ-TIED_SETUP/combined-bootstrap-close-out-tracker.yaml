@@ -1,92 +1,106 @@
-authoritative_product_tracker: tied-project/working/REQ-TIED_SETUP/combined-bootstrap-close-out-tracker.yaml
-combined_close_out_run_id: close-out-bootstrap-spawn-macos-20261005
-copy_hygiene: Close-out tracker for win-spawn + tied-cli invoke slice on REQ-TIED_SETUP.
-depth_tier: minimal
+authoritative_product_tracker: "tied-project/working/REQ-TIED_SETUP/combined-bootstrap-close-out-tracker.yaml"
+combined_close_out_run_id: "close-out-bootstrap-spawn-macos-20261005"
+copy_hygiene: "Close-out tracker for win-spawn + tied-cli invoke slice on REQ-TIED_SETUP."
+depth_tier: "minimal"
 execution_evidence:
   completed:
-    - change-definition
-    - risk-assessment
-    - test-strategy
-    - gate-pseudocode-validation
-    - sub-adversarial-inquiry-pass
-    - verification-gate
-    - gitignore-close-out-hygiene
-    - sync-tied-stack
-    - persist-citdp-record
-  envelope_path: tied-project/working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json
-  request: REQ-TIED_SETUP
-gate_policy: advisory
-profile_depth: minimal
-request: REQ-TIED_SETUP
-status: close_out_ready
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "gitignore-close-out-hygiene"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "sub-adversarial-inquiry-pass"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_SETUP"
+gate_policy: "advisory"
+profile_depth: "minimal"
+request: "REQ-TIED_SETUP"
+status: "close_out_ready"
 steps:
-  - slug: change-definition
-    disposition: completed
-    evidence_refs: &ref_citdp
-      - tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml
-    tracking:
-      status: completed
-      evidence_refs: *ref_citdp
-  - slug: risk-assessment
-    disposition: completed
-    evidence_refs: *ref_citdp
-    tracking:
-      status: completed
-      evidence_refs: *ref_citdp
-  - slug: test-strategy
-    disposition: completed
-    evidence_refs: *ref_citdp
-    tracking:
-      status: completed
-      evidence_refs: *ref_citdp
-  - slug: sub-adversarial-inquiry-pass
-    disposition: completed
-    policy: minimal-depth-no-inquiry
-    rationale: Minimal depth bootstrap spawn slice.
-    evidence_refs: *ref_citdp
-    tracking:
-      status: completed
-      evidence_refs: *ref_citdp
-  - slug: gate-pseudocode-validation
-    disposition: completed
-    evidence_refs: *ref_citdp
-    tracking:
-      status: completed
-      evidence_refs: *ref_citdp
-  - slug: verification-gate
-    disposition: completed
-    evidence_refs: &ref_manifest
-      - tied-project/working/REQ-TIED_SETUP/evidence/verification-evidence-manifest.v1.json
-    tracking:
-      status: completed
-      evidence_refs: *ref_manifest
-  - slug: gitignore-close-out-hygiene
-    disposition: completed
-    evidence_refs: &ref_gitignore
-      - tied-project/working/REQ-TIED_SETUP/evidence/close-out-gitignore-hygiene.md
-    tracking:
-      status: completed
-      evidence_refs: *ref_gitignore
-  - slug: sync-tied-stack
-    disposition: completed
-    evidence_refs: *ref_citdp
-    tracking:
-      status: completed
-      evidence_refs: *ref_citdp
-  - slug: persist-citdp-record
-    disposition: completed
-    evidence_refs: &ref_persist
-      - tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml
-    tracking:
-      status: completed
-      evidence_refs: *ref_persist
-  - slug: traceable-commit
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - CHANGELOG.md
-      - tied-project/working/REQ-TIED_SETUP/evidence/closeout-run-close-out-gates-final.json
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+    slug: "change-definition"
     tracking:
-      status: completed
       evidence_refs:
-        - CHANGELOG.md
-        - tied-project/working/REQ-TIED_SETUP/evidence/closeout-run-close-out-gates-final.json
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth bootstrap spawn slice."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SETUP/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SETUP/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SETUP/evidence/close-out-gitignore-hygiene.md"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SETUP/evidence/close-out-gitignore-hygiene.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "tied-project/working/REQ-TIED_SETUP/evidence/closeout-run-close-out-gates-final.json"
+    slug: "traceable-commit"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+        - "tied-project/working/REQ-TIED_SETUP/evidence/closeout-run-close-out-gates-final.json"
+      status: "completed"

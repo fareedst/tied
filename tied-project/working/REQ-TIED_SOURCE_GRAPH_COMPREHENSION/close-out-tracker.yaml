@@ -1,19 +1,18 @@
-# [REQ-TIED_SOURCE_GRAPH_COMPREHENSION] Authoritative minimal close-out tracker (slice 1).
 execution_evidence:
-  request: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
   envelope_path: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
 steps:
-  - slug: "sub-adversarial-inquiry-pass"
-    disposition: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/not-applicable-receipt.v1.json"
     policy: "minimal-depth-no-inquiry"
     rationale: "depth_tier minimal; slice 1 read-only graph evidence per CITDP."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/not-applicable-receipt.v1.json
-  - slug: "traceable-commit"
-    disposition: "completed"
-    evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/traceable-commit-vocab-validation.md
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/gates/verification-2026-10-13T16-02-28-811Z.json
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/traceable-commit-vocab-validation.md"
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/gates/verification-2026-10-13T16-02-28-811Z.json"
+    slug: "traceable-commit"

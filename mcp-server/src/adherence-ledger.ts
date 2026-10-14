@@ -24,10 +24,23 @@ export type StatusMutationEntry = {
   next_status: string;
 };
 
-function appendLedgerRow(ledgerPath: string, row: Record<string, unknown>): void {
-  if (!ledgerPath.trim()) {
+/** JSONL adherence ledgers must not use YAML extensions (lint_yaml scans *.yaml). */
+export function assertJsonlLedgerPath(ledgerPath: string): void {
+  const trimmed = ledgerPath.trim();
+  if (!trimmed) {
     throw new Error("ledger_path_required");
   }
+  const lower = trimmed.toLowerCase();
+  if (lower.endsWith(".yaml") || lower.endsWith(".yml")) {
+    throw new Error("ledger_path_yaml_extension_forbidden");
+  }
+  if (!lower.endsWith(".jsonl")) {
+    throw new Error("ledger_path_must_end_with_jsonl");
+  }
+}
+
+function appendLedgerRow(ledgerPath: string, row: Record<string, unknown>): void {
+  assertJsonlLedgerPath(ledgerPath);
   mkdirSync(dirname(ledgerPath), { recursive: true });
   appendFileSync(ledgerPath, `${JSON.stringify(row)}\n`, "utf8");
 }

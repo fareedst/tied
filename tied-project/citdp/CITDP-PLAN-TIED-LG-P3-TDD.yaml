@@ -100,11 +100,11 @@ CITDP-PLAN-TIED-LG-P3-TDD:
       owner: "P4 acceptance gate wave"
       summary: "P3 does not prove verification subgraph or MCP checklist gate receipts."
     risks:
-      - "Invalid RED classified as valid"
       - "Hermetic mini-repo diverges from charter fixture behavior"
+      - "Invalid RED classified as valid"
     scenarios:
-      - "Syntax error masquerading as assertion failure"
       - "Optional integration skipped in CI"
+      - "Syntax error masquerading as assertion failure"
   test_strategy:
     composition_tests:
       - "Hermetic tdd-mini-repo RED→GREEN with ledger observations"

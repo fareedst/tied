@@ -1,3 +1,2 @@
-# Working-only checklist patch reference for W1 demonstration (not canonical PROC).
-step_id: methodology-hypothesis-declare
-summary: Declare methodology_hypothesis before pre_implementation RED for production-system changes.
+step_id: "methodology-hypothesis-declare"
+summary: "Declare methodology_hypothesis before pre_implementation RED for production-system changes."

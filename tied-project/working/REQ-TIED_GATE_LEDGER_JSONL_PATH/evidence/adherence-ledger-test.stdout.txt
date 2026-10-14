@@ -1,0 +1,4 @@
+cd mcp-server && node --import tsx --test src/adherence-ledger.test.ts
+ℹ tests 4
+ℹ pass 4
+ℹ fail 0

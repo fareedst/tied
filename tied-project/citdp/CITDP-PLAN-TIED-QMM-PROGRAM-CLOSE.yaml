@@ -3,23 +3,23 @@ CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE:
     current_behavior: "Orchestrator reports W1–W5 implement complete but program_phase in_progress; parent and child linked plans carry stale blocked/in-progress status lines; W1/W4/W5 lack implement_checklist parity on orchestrator; W6 deferred_hinge without program-exit waiver record."
     desired_behavior: "Single reconciled story: program closed, W6 waived_at_program_close, all wave gate receipts registered on orchestrator, doc-reconcile-evidence.md pass/fixed for every matrix row, two sponsor-requested commits."
     non_goals:
-      - "Implement Kaizen Phase 3 transport or new Phase 3 REQ"
       - "Edit tied-bundle methodology YAML"
       - "git push unless sponsor requests later"
+      - "Implement Kaizen Phase 3 transport or new Phase 3 REQ"
       - "Single combined commit (sponsor chose two commits)"
     success_criteria:
-      - "sponsor-authority-qmm-program-close-w6-waived-20261010.md on disk"
-      - "doc-reconcile-evidence.md lists all artifacts with pass or fixed disposition"
-      - "qmm-program-execution-checklist.yaml program_phase closed, current_step EXIT, W6 waived_at_program_close"
-      - "Parent docs/tied-qmm-methodology-learning-plan.md and child W1–W5 plans aligned to implement complete + program exit"
       - "Commit 1 W5 stack; Commit 2 program close hygiene"
+      - "doc-reconcile-evidence.md lists all artifacts with pass or fixed disposition"
+      - "Parent docs/tied-qmm-methodology-learning-plan.md and child W1–W5 plans aligned to implement complete + program exit"
+      - "qmm-program-execution-checklist.yaml program_phase closed, current_step EXIT, W6 waived_at_program_close"
+      - "sponsor-authority-qmm-program-close-w6-waived-20261010.md on disk"
     unchanged_behavior: "Product behavior from W1–W5 REQ stacks; Kaizen closed program Phase 3 remains deferred on Kaizen orchestrator."
   evidence:
     commands:
+      - "Commit 1: enrollment tests + tied_validate_consistency"
+      - "lint_yaml on changed project YAML"
       - "Read-only cross-artifact hygiene matrix"
       - "tied_checklist_gate_validate pre_implementation (minimal advisory)"
-      - "lint_yaml on changed project YAML"
-      - "Commit 1: enrollment tests + tied_validate_consistency"
     manifest_reference: null
     proof_boundaries:
       - "docs_and_orchestrator_only"
@@ -41,8 +41,8 @@ CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE:
     title: "QMM program close — W6 waived, doc hygiene, two commits"
   risk_analysis:
     abuse_cases:
-      - "W6 waiver misread as Kaizen Phase 3 implemented"
       - "Plan-only gate receipts cited as implement activation"
+      - "W6 waiver misread as Kaizen Phase 3 implemented"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
@@ -79,9 +79,9 @@ CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE:
         waiver:
           allowed: false
   test_strategy:
-    unit_tests: "not_applicable"
     composition_tests: "not_applicable"
     e2e_tests: "not_applicable"
+    notes: "Program-close commit validates YAML lint and reconcile table only unless indexes touched."
     regression_commands:
       - "Commit 1: mcp-server enrollment unit/MCP tests per W5 implement CITDP"
-    notes: "Program-close commit validates YAML lint and reconcile table only unless indexes touched."
+    unit_tests: "not_applicable"

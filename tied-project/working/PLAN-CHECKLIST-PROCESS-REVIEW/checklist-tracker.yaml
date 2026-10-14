@@ -4,18 +4,12 @@ citdp:
   status: "complete"
 depth_tier: "minimal"
 execution_authority:
-  scope: "plan-only"
   next_authorized_prompt: "build-plan phase 3 cleanup batch after sponsor scope"
-gate_policy: "advisory"
-profile_depth: "minimal"
-purpose: "Plan-only Tracker for PLAN-CHECKLIST-PROCESS-REVIEW; not inventory execution or cleanup."
-refine_pass: 1
-refine_pass_date: "2026-10-10"
-request: "PLAN-CHECKLIST-PROCESS-REVIEW"
-schema_version: "checklist-process-review-plan-tracker.v1"
-source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
-status: "phase_3_cpr_f01_f03_complete"
+  scope: "plan-only"
 future_gate_contracts:
+  close_out:
+    required:
+      - "Per-phase envelope when implement REQ closes; not required for plan-only refine"
   pre_implementation:
     required:
       - "Fresh REQ-CHECKLIST-PROCESS-REVIEW Tracker if product token minted at build-plan"
@@ -24,9 +18,6 @@ future_gate_contracts:
     required:
       - "check_docs_vocab_links and tied_project_lint when docs/navigation change"
       - "tied_validate_consistency only if project YAML mutated"
-  close_out:
-    required:
-      - "Per-phase envelope when implement REQ closes; not required for plan-only refine"
 future_implementation_phases:
   phase_1_deliverables:
     depth_tier: "minimal"
@@ -44,6 +35,15 @@ future_implementation_phases:
     depth_tier: "integrated"
     gate_policy: "per_citdp"
     scope: "Only if review recommends canonical checklist step or gate_policy changes; separate plan-new-feature"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Plan-only Tracker for PLAN-CHECKLIST-PROCESS-REVIEW; not inventory execution or cleanup."
+refine_pass: 1
+refine_pass_date: "2026-10-10"
+request: "PLAN-CHECKLIST-PROCESS-REVIEW"
+schema_version: "checklist-process-review-plan-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "phase_3_cpr_f01_f03_complete"
 steps:
   - disposition: "completed"
     evidence_refs:

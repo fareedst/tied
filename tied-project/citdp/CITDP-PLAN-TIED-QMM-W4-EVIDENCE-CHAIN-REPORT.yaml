@@ -4,14 +4,14 @@ CITDP-PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT:
     desired_behavior: "W4 child linked plan, working folder, plan-only Tracker, and documentation CITDP define RESOLVE, demonstration matrix, independent profile/depth/gate dimensions, and implement handoff that forbids inheriting minimal depth."
     non_goals:
       - "Application code, automated tests, or runtime changes in the plan-only pass"
-      - "Minting a second report requirement or mutating existing REQ/ARCH/IMPL records in plan-only"
       - "Client-root traversal, finding-ledger append, or tied-bundle edits"
       - "Git stage, commit, or push unless sponsor plan-close-out"
+      - "Minting a second report requirement or mutating existing REQ/ARCH/IMPL records in plan-only"
     success_criteria:
       - "Child plan docs/tied-qmm-w4-evidence-chain-report-plan.md authored with authority, contracts, and demonstration matrix."
-      - "Plan-only Tracker records non-activation pre_implementation gate."
-      - "Orchestrator records w4_scope plan-only then sponsor implement authority separately."
       - "Implement section records integrated depth must not inherit plan-only minimal without prior_depth_tier."
+      - "Orchestrator records w4_scope plan-only then sponsor implement authority separately."
+      - "Plan-only Tracker records non-activation pre_implementation gate."
     unchanged_behavior: "Existing evidence-chain report CLI/module, W1–W3 program deliverables, and profile generation remain unchanged in plan-only pass."
   evidence:
     commands:
@@ -42,19 +42,19 @@ CITDP-PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT:
       assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
       counterexamples:
+        - "Cross-cohort rollup despite incompatible schema_version or profile_depth."
         - "Plan-only w4_scope misread as implement authorization."
         - "W1–W3 gate receipts reused as W4 activation evidence."
-        - "Cross-cohort rollup despite incompatible schema_version or profile_depth."
       depth_change_waiver: null
       depth_tier: "minimal"
       disconfirming_observations:
-        - "Any runtime edit under mcp-server/src/fidelity-research/evidence-chain-report in plan-only pass."
         - "Any new REQ-EVIDENCE_CHAIN_REPORT index mutation in plan-only pass."
+        - "Any runtime edit under mcp-server/src/fidelity-research/evidence-chain-report in plan-only pass."
       eligibility_triggers_matched: []
       evidence_references:
         - "docs/tied-qmm-w4-evidence-chain-report-plan.md"
-        - "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/PLAN.md"
         - "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/checklist-tracker.yaml"
+        - "tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/PLAN.md"
       falsification_questions:
         - "Does any plan-only sentence authorize RED or runtime code?"
         - "Does the child plan forbid inheriting minimal depth into implement?"
@@ -91,8 +91,8 @@ CITDP-PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT:
       - "Minimal depth copied into implement CITDP."
       - "Prior wave receipts treated as W4 activation."
     scenarios:
-      - "Documentation-only proof boundary"
       - "Depth inheritance into CLI/report work"
+      - "Documentation-only proof boundary"
   sponsor_decisions:
     recorded_at: "2026-10-10"
     summary: "Plan-only authored; implement requires separate sponsor authority."

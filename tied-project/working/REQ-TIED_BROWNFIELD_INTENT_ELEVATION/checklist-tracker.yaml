@@ -21,12 +21,12 @@ execution_evidence:
     master_checklist: ""
   completed: []
   envelope_path: "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/request-evidence-envelope.v1.json"
-  request: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
   evidence_refs_format: "Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):\n  - kind: manifest_ref\n    path: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n  - kind: gate_receipt\n    path: working/{REQ-TOKEN}/gates/verification-2026-08-24T16-46-08-642Z.json\n  - kind: envelope_ref\n    path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json\n  - kind: file_path\n    path: working/{REQ-TOKEN}/evidence/step-artifact.md\n  - kind: command_evidence\n    claimed_success: true\n    manifest_ref: working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json\n    stdout_ref: working/{REQ-TOKEN}/evidence/stdout.txt\n    exit_code: 0\nLegacy string paths remain accepted; generic prose (e.g. \"tests passed\") is rejected as unresolved_evidence_ref.\n"
   operator_evidence:
     integrated_pilot_template: "depth_tier: integrated\ngate_policy: advisory\nprior_depth_tier: null\nphase_artifact_dir: working/{REQ-TOKEN}/adversarial-inquiry/phase-{phase}/  # authoritative\ncollect: tied_checklist_activation_collect request_token, phase, run_id, project_root\ngate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)\nchecklist: docs/integrated-activation-checklist-enforcement-plan.md §8\n"
     limitation: "Replace {REQ-TOKEN} and {phase}; prefer collect when phase dirs exist; see §8 for pre_implementation, verification, and close_out sequence."
     status: "not_run"
+  request: "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
 feedback_loops:
   composition_and_e2e: "Missing implementation coverage returns to the specification path before evidence is accepted."
   leap: "Implementation evidence updates IMPL first, then tests and code, with ARCH/REQ updates when scope changes."

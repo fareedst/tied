@@ -3,6 +3,8 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
     block_name: "VALIDATE_CHECKLIST_GATE"
   code_locations:
     files:
+      - description: "Append-only agent-adherence-event.v1 ledger with JSONL path guard"
+        path: "mcp-server/src/adherence-ledger.ts"
       - description: "Append-only agent-adherence-event.v1 ledger writer (Stage G instruction_rendered)"
         path: "tools/agentstream/checklist/adherence_ledger.go"
       - description: "Atomic Tracker disposition writer and loop-back invalidation"

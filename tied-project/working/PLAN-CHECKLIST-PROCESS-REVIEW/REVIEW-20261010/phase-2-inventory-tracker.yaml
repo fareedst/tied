@@ -4,8 +4,11 @@ citdp:
   status: "complete"
 depth_tier: "minimal"
 execution_authority:
-  scope: "phase-2-inventory"
   parent_program: "PLAN-CHECKLIST-PROCESS-REVIEW"
+  scope: "phase-2-inventory"
+execution_evidence:
+  envelope_path: "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-CHECKLIST-PROCESS-REVIEW"
 gate_policy: "advisory"
 profile_depth: "minimal"
 purpose: "Phase 2 Tracker for REVIEW-CHECKLIST-PROCESS-20261010."
@@ -13,9 +16,6 @@ request: "REQ-CHECKLIST-PROCESS-REVIEW"
 schema_version: "checklist-process-review-phase2-tracker.v1"
 source_template: "tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/checklist-tracker.yaml"
 status: "phase_2_complete"
-execution_evidence:
-  request: "REQ-CHECKLIST-PROCESS-REVIEW"
-  envelope_path: "tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json"
 steps:
   - disposition: "completed"
     evidence_refs:

@@ -17,22 +17,22 @@ CITDP-PLAN-TIED-LG-P2-EVIDENCE:
   completion_criteria:
     activation:
       artifact_hashes: {}
-      phase: close_out
-      project_id: stdd-project
-      request_token: PLAN-TIED-LG-P2-EVIDENCE
-      run_id: p2-closeout-closeout-20261012
+      phase: "close_out"
+      project_id: "stdd-project"
+      request_token: "PLAN-TIED-LG-P2-EVIDENCE"
+      run_id: "p2-closeout-closeout-20261012"
       scope: []
       scope_hash: "~"
     checklist_gate:
       fail_closed: true
       phases:
-        - verification
-        - close_out
+        - "close_out"
+        - "verification"
   evidence:
     commands:
       - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
-      - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase verification --run-id p2-closeout-verification-20261012"
       - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out --envelope-blocking --run-id p2-closeout-closeout-20261012"
+      - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase verification --run-id p2-closeout-verification-20261012"
       - "tied_validate_consistency"
     manifest_reference: null
     proof_boundaries:
