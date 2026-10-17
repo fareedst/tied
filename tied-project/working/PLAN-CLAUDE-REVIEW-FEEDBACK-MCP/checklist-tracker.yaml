@@ -1,0 +1,36 @@
+execution_evidence:
+  request: "PLAN-CLAUDE-REVIEW-FEEDBACK-MCP"
+steps:
+  - slug: "translate-sponsor-intent"
+    disposition: "completed"
+    evidence_refs:
+      - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+  - slug: "change-definition"
+    disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
+  - slug: "impact-discovery"
+    disposition: "completed"
+    evidence_refs:
+      - "tied-project/vocab/feedback-to-tied.md"
+  - slug: "risk-assessment"
+    disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
+  - slug: "test-strategy"
+    disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
+  - slug: "sub-adversarial-inquiry-pass"
+    disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Local feedback append; minimal depth; no integrated inquiry activation."
+  - slug: "gate-pseudocode-validation"
+    disposition: "not_applicable"
+    policy: "no-impl-pseudocode-change"
+    rationale: "No IMPL essence_pseudocode or production code mutation in scope."
+  - slug: "verification-gate"
+    disposition: "completed"
+    evidence_refs:
+      - "tied-project/feedback.yaml"
+      - "fb-mvclklsa-t5gzbo"

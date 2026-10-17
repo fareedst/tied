@@ -1,0 +1,2 @@
+{"schema_version":"leap-proposal-audit.v1","timestamp":"2026-10-17T16:41:21.621Z","action":"add","proposal_id":"lp-2026-10-17T16-41-21-621Z-441a8fc5136b","status_after":"pending","detail":{"kind":"manual"}}
+{"schema_version":"leap-proposal-audit.v1","timestamp":"2026-10-17T17:18:23.799Z","action":"approve","proposal_id":"lp-2026-10-17T16-41-21-621Z-441a8fc5136b","status_after":"approved","detail":{"note":"Sponsor /unblock 2026-10-17: approve Claude comparison methodology_improvement bridge proposal."}}

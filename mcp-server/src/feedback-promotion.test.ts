@@ -8,8 +8,11 @@ import {
   groupDuplicateFeedback,
   normalizeOperationalSource,
   reportPromotionStatus,
+  resolvePromotionAffectedFeature,
+  resolvePromotionEvidenceLinks,
   type OperationalSource,
 } from "./feedback-promotion.js";
+import type { FeedbackEntry } from "./feedback.js";
 
 const source: OperationalSource = {
   source_type: "incident",
@@ -95,6 +98,45 @@ describe("feedback promotion [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION]", () => {
         assert.equal(created.proposal.leap_hints?.feedback_id, result.entry.id);
       }
       assert.equal(reportPromotionStatus(result.entry, created.ok ? created.proposal : undefined), "proposal_created");
+    } finally {
+      fs.rmSync(projectRoot, { recursive: true, force: true });
+    }
+  });
+
+  it("[REQ-FEEDBACK_TO_TIED] methodology_improvement uses context evidence_links for LEAP hints", () => {
+    const entry: FeedbackEntry = {
+      id: "fb-mvclklsa-t5gzbo",
+      type: "methodology_improvement",
+      title: "Compose review layers",
+      description: "Outreach discovery",
+      created_at: "2026-10-17T16:14:49.930Z",
+      context: {
+        evidence_links: ["docs/comparisons/claude-code-team-code-review-vs-tied.md"],
+        observation_kind: "discovery",
+      },
+    };
+    assert.deepEqual(resolvePromotionEvidenceLinks(entry), [
+      "docs/comparisons/claude-code-team-code-review-vs-tied.md",
+    ]);
+    assert.equal(resolvePromotionAffectedFeature(entry), "TIED-METHODOLOGY");
+    const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), "feedback-promotion-"));
+    try {
+      const created = createReviewedLeapProposal(entry as never, {
+        projectRoot,
+        review: {
+          reviewer: "sponsor",
+          decision: "create_proposal",
+          rationale: "Queue phased methodology work",
+          evidence_links: ["docs/comparisons/claude-code-team-code-review-vs-tied.md"],
+        },
+      });
+      assert.equal(created.ok, true);
+      if (created.ok) {
+        assert.deepEqual(created.proposal.leap_hints?.evidence_links, [
+          "docs/comparisons/claude-code-team-code-review-vs-tied.md",
+        ]);
+        assert.equal(created.proposal.leap_hints?.affected_feature, "TIED-METHODOLOGY");
+      }
     } finally {
       fs.rmSync(projectRoot, { recursive: true, force: true });
     }

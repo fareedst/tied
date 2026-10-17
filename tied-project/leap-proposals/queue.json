@@ -1,0 +1,42 @@
+{
+  "schema_version": "leap-proposal-queue.v1",
+  "proposals": [
+    {
+      "kind": "manual",
+      "title": "Reviewed feedback: Compose Anthropic-style review layers into TIED (Claude Code comparison)",
+      "summary": "Upstream methodology improvement derived from docs/comparisons/claude-code-team-code-review-vs-tied.md (2026-10-17). External study: Anthropic \"Solving code review at Anthropic\" (Oct 2026) — compose-don't-replace; do not treat PR bots or article metrics as TIED authority.\n\nGaps called out in TIED core today:\n- Review convergence: round cap, diff-only re-review, repeated-finding suppression — ad hoc in skills, not checklist/MCP receipts (matrix disposition: Gap).\n- Path-scoped review guidance (REVIEW.md-style) — not a standard TIED pattern (client-owned optional).\n- Risk-tier human approval automation — intent aligns via assurance profiles / depth_tier / consequence ladder; no shipped classifier for approver touchpoints (Gap automation).\n\nRecommended phased improvements (recommendations only; each behavior-changing phase needs its own sponsor REQ/CITDP):\n- Phase 1 (Loop 1): Pre-handoff verification charter — executable checks + evidence before PR/commit (doc-first).\n- Phase 2 (Loop 1): Risk-tier playbook mapping assurance profiles and depth_tier to human review attention (advisory; never auto-approve costly choices).\n- Phase 3 (Loop 2): Review convergence policy — round cap, diff-only re-review, class-level fixes; measure via operational observations.\n- Phase 4 (Loop 3): Incident/revert evaluation corpus with explicit denominators and stop criteria (compose closed QMM machinery).\n- Phase 5 (Composable): Client DevOps appendix for PR/CI/release fields — client-owned, not TIED core.\n\nExplicit non-adoptions preserved: mandatory finding voter gate, zero-human merge for costly paths, PR-only workflow replacing LEAP/checklist, merge queue/flags as TIED core.\n\nNext routing: Kaizen analysis digest / Loop 3 experiment bridge when sponsor promotes; optional matrix row for PR-centric review remains deferred (REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX).",
+      "source": {
+        "type": "manual"
+      },
+      "suggested_leap_order": "req",
+      "leap_hints": {
+        "feedback_id": "fb-mvclklsa-t5gzbo",
+        "affected_feature": "TIED-METHODOLOGY",
+        "evidence_links": [
+          "docs/comparisons/claude-code-team-code-review-vs-tied.md",
+          "docs/comparisons/methodology-composition-matrix.md"
+        ],
+        "review": {
+          "reviewer": "sponsor",
+          "decision": "create_proposal",
+          "rationale": "Outreach discovery from Claude Code team review comparison; queue LEAP proposal for phased compose-don't-replace improvements (each behavior-changing phase still needs its own REQ/CITDP).",
+          "evidence_links": [
+            "docs/comparisons/claude-code-team-code-review-vs-tied.md",
+            "docs/comparisons/methodology-composition-matrix.md",
+            "tied-project/feedback.yaml"
+          ]
+        },
+        "digest_projection_hash": "8561ece57efd07c4",
+        "member_ids": [
+          "fb-mvclklsa-t5gzbo"
+        ]
+      },
+      "id": "lp-2026-10-17T16-41-21-621Z-441a8fc5136b",
+      "status": "approved",
+      "non_canonical": true,
+      "created_at": "2026-10-17T16:41:21.621Z",
+      "updated_at": "2026-10-17T17:18:23.798Z",
+      "approval_note": "Sponsor /unblock 2026-10-17: approve Claude comparison methodology_improvement bridge proposal."
+    }
+  ]
+}

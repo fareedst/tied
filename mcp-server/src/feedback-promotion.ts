@@ -159,6 +159,32 @@ export interface ReviewDecision {
   evidence_links: string[];
 }
 
+function stringLinks(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((link): link is string => typeof link === "string" && Boolean(link.trim()))
+    .map((link) => link.trim());
+}
+
+/** [IMPL-KAIZEN-REVIEW-BRIDGE] [REQ-FEEDBACK_TO_TIED] — methodology_improvement rows store evidence_links under context. */
+export function resolvePromotionEvidenceLinks(
+  entry: Pick<FeedbackEntry, "evidence_links" | "context">,
+): string[] {
+  const top = stringLinks(entry.evidence_links);
+  if (top.length > 0) return top;
+  const ctx = entry.context;
+  if (ctx && typeof ctx === "object") return stringLinks(ctx.evidence_links);
+  return [];
+}
+
+export function resolvePromotionAffectedFeature(
+  entry: Pick<FeedbackEntry, "affected_feature" | "type">,
+): string {
+  if (entry.affected_feature?.trim()) return entry.affected_feature.trim();
+  if (entry.type === "methodology_improvement") return "TIED-METHODOLOGY";
+  return entry.type;
+}
+
 // [IMPL-TIED_FEEDBACK_PROMOTION] [ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY] [REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION] — Creates a distinct non-canonical proposal only after explicit human review.
 export function createReviewedLeapProposal(
   entry: OperationalFeedbackEntry,
@@ -192,9 +218,9 @@ export function createReviewedLeapProposal(
     suggested_leap_order: "req",
     leap_hints: {
       feedback_id: entry.id,
-      affected_feature: entry.affected_feature,
+      affected_feature: resolvePromotionAffectedFeature(entry),
       proposed_req: entry.proposed_req,
-      evidence_links: [...entry.evidence_links],
+      evidence_links: resolvePromotionEvidenceLinks(entry),
       review,
       ...(options.leap_hints_extra ?? {}),
     },
