@@ -51,14 +51,14 @@
 | **Snapshot** | **Done** — comparison doc [compose snapshot](../../../../docs/comparisons/claude-code-team-code-review-vs-tied.md#compose-status-snapshot) + pending table |
 | **Resolve** | **Done** — **review convergence**, **comparison compose snapshot** in [`quality-assurance.md`](../../../vocab/quality-assurance.md); RESOLVE header points to RECORD |
 | **Index** | **Done** — [`client-development-index.md`](../../../../tied-bundle/docs/client-development-index.md) Quick read + scenario; [`routing.md`](../../../vocab/routing.md) keywords |
-| **Pending (commit)** | **Done** — **`0c44c428`** (59 files; phases 4–5 + Kaizen + snapshot) |
+| **Pending (commit)** | **Done** — traceable commit on `main` (59 files; phases 4–5 + Kaizen + snapshot; `git log -1`) |
 
 ## Sponsor next steps
 
-1. ~~**Commit**~~ **Done** — **`0c44c428`**; push when sponsor asks (`main` ahead 1).
+1. ~~**Commit**~~ **Done** — push when sponsor asks (`main` ahead 1; `git log -1`).
 2. Optional **`plan-close-out`** per phase REQ for full envelope parity (Phase **5** close-out **not_run** yet).
 3. Kaizen store loop on **`fb-mvclklsa-t5gzbo`** **Done** (2026-10-17) — digest + bridge + **`mle-claude-compose-20261017-001`**; pilot [`kaizen-feedback-pilot-report-fb-mvclklsa.v1.json`](./kaizen-feedback-pilot-report-fb-mvclklsa.v1.json); outcome **`inconclusive`** (`oo-mvcz428b-h50pjv`) via [`kaizen-outcome-record-result-fb-mvclklsa.v1.json`](./kaizen-outcome-record-result-fb-mvclklsa.v1.json) (compose + pilot evidence; effectiveness **not measured**).
-4. Deferred: methodology-composition-matrix row for PR-centric review.
+4. ~~Deferred: methodology-composition-matrix row for PR-centric review.~~ **Done** — [methodology-composition-matrix.md §2 row 11](../../../../docs/comparisons/methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks) (2026-10-17).
 
 ## Related orchestrators
 

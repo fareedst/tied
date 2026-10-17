@@ -196,7 +196,7 @@ At **outreach (2026-10-17 publish)**, phases were **recommendations only**. **Su
 
 | Phase | Loop | Theme | Outcome | Proof boundary | TIED implementation (compose) |
 | --- | --- | --- | --- | --- | --- |
-| **0** | — | This comparison doc + matrix sibling link | Published outreach | Doc review only | Outreach doc + [matrix sibling link](methodology-composition-matrix.md); feedback **`fb-mvclklsa-t5gzbo`** in store |
+| **0** | — | This comparison doc + matrix sibling link | Published outreach | Doc review only | Outreach doc + [matrix §2 row 11](methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks); feedback **`fb-mvclklsa-t5gzbo`** in store |
 | **1** | Loop 1 | **Pre-handoff verification charter** | Short guide: executable checks, fresh-context review, evidence before PR/commit | Documentation first; no new MCP authority | **Implemented** — [pre-handoff-verification-charter.md](../../tied-bundle/docs/pre-handoff-verification-charter.md) · [REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER](../../tied-project/requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml) |
 | **2** | Loop 1 | **Risk-tier playbook for sponsors** | Relate assurance profiles and `depth_tier` to human review attention and hinge fields | Advisory mapping only; never auto-approve costly choices | **Implemented** — [sponsor-risk-tier-playbook.md](../../tied-bundle/docs/sponsor-risk-tier-playbook.md) · [REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK](../../tied-project/requirements/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml) |
 | **3** | Loop 2 | **Review convergence** | Round cap, diff-only re-review, class-level fixes, repeated-finding suppression | Measure via operational observations and outcome baselines | **Implemented** — [review-convergence-policy.md](../../tied-bundle/docs/review-convergence-policy.md) · [REQ-TIED_REVIEW_CONVERGENCE_POLICY](../../tied-project/requirements/REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml) |
@@ -213,7 +213,7 @@ Cross-link phases 4–5 to [TIED improvement roadmap](../tied-improvement-roadma
 | --- | --- |
 | **Git commit wave** | Sponsor — compose artifacts, indexes, `feedback.yaml`, `methodology-experiments.yaml`, Kaizen evidence, this doc |
 | **Per-phase `plan-close-out`** | Optional envelope parity per phase REQ (e.g. phase **5** close-out may be **not_run**) |
-| **Matrix row (deferred)** | New Loop 2 “PR-centric / agent code review” row in [methodology-composition-matrix.md](methodology-composition-matrix.md) — sponsor review; tracked by `REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX`; sibling link only today |
+| **Matrix row** | **Done** — §2 **row 11** “PR-centric agent code review (Anthropic team model)” in [methodology-composition-matrix.md](methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks); tracked by `REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX`; sponsor review of mechanism cells still applies |
 | **Path-scoped `REVIEW.md` standard** | Client-owned optional pattern — not delivered in compose |
 | **Core automation gaps** | Convergence MCP/checklist receipts; merge-approver classifier — still **Gap** vs article |
 | **Measured effectiveness** | Evaluation-corpus population, operational review metrics — outcome **`inconclusive`** on feedback row |

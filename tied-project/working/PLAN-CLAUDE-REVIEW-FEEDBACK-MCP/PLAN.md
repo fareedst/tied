@@ -112,4 +112,4 @@ Comparison doc [§7 phased table](../../../docs/comparisons/claude-code-team-cod
 - Commit comparison compose slice (feedback store already committed; Phase **4–5** + indexes may be unstaged).
 - ~~`tied_feedback_analysis_digest` / Loop 3 bridge~~ **Done** (2026-10-17) — **`mle-claude-compose-20261017-001`**; evidence under [`evidence/`](./evidence/).
 - `plan-close-out` per phase REQ for envelope-blocking parity (Phase **5** close-out **not_run**).
-- Deferred matrix row for PR-centric review.
+- Matrix §2 row 11 for PR-centric review — **done** ([methodology-composition-matrix.md](../../../docs/comparisons/methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks)).
