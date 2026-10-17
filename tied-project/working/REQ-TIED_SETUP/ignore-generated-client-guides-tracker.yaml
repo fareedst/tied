@@ -8,7 +8,7 @@ gate_policy: "advisory"
 profile_depth: "minimal"
 request: "REQ-TIED_SETUP"
 source_plan: "/Users/fareed/.cursor/plans/ignore_generated_client_guides_52754496.plan.md"
-status: "close_out_pending"
+status: "close_out_complete"
 steps:
   - disposition: "completed"
     evidence_refs:
@@ -74,5 +74,30 @@ steps:
     evidence_refs:
       - ".gitignore"
     slug: "gitignore-close-out-hygiene"
-  - disposition: "pending"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "CHANGELOG.md"
     slug: "traceable-commit"
+execution_evidence:
+  completed:
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "sub-adversarial-inquiry-pass"
+    - "catalog-pseudocode-contracts"
+    - "gate-pseudocode-validation"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "verification-gate"
+    - "persist-citdp-record"
+    - "gitignore-close-out-hygiene"
+    - "traceable-commit"
+  close_out_evidence:
+    date: "2026-10-16"
+    gates:
+      close_out: "close-out-ignore-generated-guides-2026-10-16"
+    status: "complete"
