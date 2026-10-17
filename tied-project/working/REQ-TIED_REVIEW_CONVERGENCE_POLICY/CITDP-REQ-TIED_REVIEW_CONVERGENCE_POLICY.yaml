@@ -1,0 +1,81 @@
+CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY:
+  change_definition:
+    current_behavior: "Review convergence norms (round cap, diff-only re-review, repeated-finding suppression) appear in comparison doc, feedback entry, and ad hoc skills—not as one installable Loop 2 policy."
+    desired_behavior: "One methodology policy under tied-bundle/docs with four policy sections, Kaizen measurement guidance, and cross-links to Phase 1 charter and Phase 2 playbook; no new MCP gate authority."
+    non_goals:
+      - "Checklist MCP receipts for round cap or mandatory Bugbot gates"
+      - "Path-scoped REVIEW.md standard"
+      - "Phases 4-5 of Claude comparison"
+    success_criteria:
+      - "CITDP persisted under tied-project/citdp/; REQ/ARCH/IMPL Implemented"
+      - "client-development-index.md Quick read links policy"
+      - "pre_implementation, verification, and close_out gates allowed at minimal depth"
+      - "review-convergence-policy-doc.test.mjs green"
+      - "review-convergence-policy.md exists with proof boundary and policy sections"
+    unchanged_behavior: "Checklist gates, tied_verify, and DAE charter unchanged."
+  evidence:
+    commands:
+      - "node --test review-convergence-policy-doc.test.mjs"
+      - "run-close-out-gates.mjs --phase verification|close_out --envelope-blocking"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "documentation_and_install_surface_only"
+      - "does_not_prove_review_round_compliance_in_client_repos"
+  impact_analysis:
+    impl_inventory_notes: "Doc file + index link + bootstrap test; IMPL pseudo-code sidecar."
+    modules_or_boundaries: "tied-bundle/docs/ (methodology corpus)."
+    tied_tokens_affected:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    tied_tokens_new:
+      - "ARCH-TIED_REVIEW_CONVERGENCE_POLICY"
+      - "IMPL-TIED_REVIEW_CONVERGENCE_POLICY"
+      - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+  record_identity:
+    change_request_id: "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-17"
+    title: "Review convergence policy (Claude comparison Phase 3)"
+  risk_analysis:
+    abuse_cases:
+      - "Repeated-finding suppression used to ignore legitimate security findings"
+      - "Round cap misread as enforced MCP limit blocking merges"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Policy omits costly-choice escalation at round cap."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Agents stop all review before behavior is verified green."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+        - "tied-project/feedback.yaml"
+      falsification_questions:
+        - "Does policy defer MCP receipts to future REQs?"
+        - "Is Kaizen operational observation path explicit?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Docs-only Loop 2 advisory policy."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "review-convergence-policy-doc.test.mjs"
+        evidence_method: "unit test"
+        evidence_ref: "close-out-2026-10-17-review-convergence"
+        limitation: "Does not measure rounds-to-merge in production."
+        owner: "agent"
+        rationale: "File presence and section markers."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    approach: "Doc contract test; no production MCP changes."
+    cases:
+      - "Client development index links policy"
+      - "Policy file exists under tied-bundle/docs"
+      - "tied_validate_consistency after token mint"

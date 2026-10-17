@@ -2761,6 +2761,43 @@ REQ-TIED_RESEARCH_RECORDS:
   name: "Structured research records and freshness"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_REVIEW_CONVERGENCE_POLICY:
+  category: "Methodology"
+  description: "Loop 2 methodology policy for review round cap, diff-only re-review, class-level fixes, and repeated-finding suppression; Kaizen measurement path; no new MCP gate authority."
+  detail_file: "requirements/REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Phase 3 review convergence policy close-out"
+  name: "Review convergence policy (Claude comparison Phase 3)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Single installable policy on tied-install refresh"
+    problems_solved:
+      - "Review convergence norms scattered in comparison and skills"
+    why: "Compose Anthropic-style review convergence without PR-bot authority."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md links policy"
+      id: "SC-INDEX-LINK"
+    - criterion: "review-convergence-policy-doc.test.mjs passes"
+      id: "SC-POLICY-TEST"
+    - criterion: "review-convergence-policy.md includes proof boundary and four policy sections"
+      id: "SC-POLICY-DOC"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_REVIEW_CONVERGENCE_POLICY"
+    implementation:
+      - "IMPL-TIED_REVIEW_CONVERGENCE_POLICY"
 REQ-TIED_SETUP:
   category: "Functional"
   cross_references:

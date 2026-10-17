@@ -50,6 +50,7 @@ When informal **high** tier aligns with **`depth_tier: integrated`**, expect **`
 
 ## Related docs
 
+- [Review convergence policy](review-convergence-policy.md) — Phase 3 multi-round review norms ([REQ-TIED_REVIEW_CONVERGENCE_POLICY](../../tied-project/requirements/REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml))
 - [Pre-handoff verification charter](pre-handoff-verification-charter.md) — Phase 1 executable checks ([REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER](../../tied-project/requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml))
 - [Sponsor–agent relationship (methodology)](sponsor-agent-relationship.md) — consequence ladder diagram
 - [Client development index](client-development-index.md) — scenario entry

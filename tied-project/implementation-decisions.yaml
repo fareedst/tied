@@ -2687,6 +2687,22 @@ IMPL-TIED_RESEARCH_RECORDS:
     tests:
       - "mcp-server/src/research-records.test.ts"
       - "mcp-server/src/tools/batch-5-mcp.test.ts"
+IMPL-TIED_REVIEW_CONVERGENCE_POLICY:
+  approach: "Edit tied-bundle/docs/review-convergence-policy.md and client-development-index link; verify with review-convergence-policy-doc.test.mjs."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_REVIEW_CONVERGENCE_POLICY"
+    requirements:
+      - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+  detail_file: "implementation-decisions/IMPL-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_REVIEW_CONVERGENCE_POLICY-pseudocode.md"
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Phase 3 close-out"
+  name: "Review convergence policy doc maintenance"
+  status: "Implemented"
 IMPL-TIED_SOURCE_GRAPH_MAP:
   code_locations:
     files:

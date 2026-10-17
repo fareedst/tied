@@ -1,0 +1,9 @@
+IMPL-TIED_REVIEW_CONVERGENCE_POLICY:
+  approach: "Doc + index + bootstrap test."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_REVIEW_CONVERGENCE_POLICY-pseudocode.md"
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Review convergence policy doc maintenance"
+  status: "Implemented"

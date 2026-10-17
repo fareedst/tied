@@ -56,6 +56,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | **Sponsor–agent roles** | [sponsor-agent-relationship.md](sponsor-agent-relationship.md) | Consequence ladder, hinge fields, over-asking / instrumentalizing spot checks; pairs with **Vocabulary** row 5j. |
 | **Pre-handoff charter** | [pre-handoff-verification-charter.md](pre-handoff-verification-charter.md) | Before PR/commit/handoff: executable checks and evidence (Loop 1; doc-only—no new MCP authority). |
 | **Sponsor risk-tier playbook** | [sponsor-risk-tier-playbook.md](sponsor-risk-tier-playbook.md) | Map assurance profile and `depth_tier` to sponsor/reviewer attention (Loop 1 Phase 2; advisory—never auto-approve costly choices). |
+| **Review convergence policy** | [review-convergence-policy.md](review-convergence-policy.md) | Multi-round review norms: round cap, diff-only re-review, class-level fixes, repeated-finding suppression (Loop 2 Phase 3; measure via operational observations). |
 
 ---
 

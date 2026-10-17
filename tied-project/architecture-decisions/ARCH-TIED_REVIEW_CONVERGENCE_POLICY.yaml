@@ -1,0 +1,8 @@
+ARCH-TIED_REVIEW_CONVERGENCE_POLICY:
+  decision: "Canonical policy under tied-bundle/docs/review-convergence-policy.md."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Review convergence policy documentation topology"
+  status: "Implemented"

@@ -2253,6 +2253,26 @@ ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_RESEARCH_RECORD_BOUNDARY.yaml"
   name: "External research record boundary"
   status: "Active"
+ARCH-TIED_REVIEW_CONVERGENCE_POLICY:
+  consequences:
+    negative:
+      - "Round cap may be misread as hard MCP limit without proof boundary"
+    positive:
+      - "Clients receive policy on tied-install refresh"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_REVIEW_CONVERGENCE_POLICY"
+    requirements:
+      - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+  decision: "Canonical policy in tied-bundle/docs/review-convergence-policy.md; client-development-index Quick read; bootstrap test; cross-link Phase 1 charter and Phase 2 playbook; no runtime module."
+  detail_file: "architecture-decisions/ARCH-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+  metadata:
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Phase 3 close-out"
+  name: "Review convergence policy documentation topology"
+  status: "Implemented"
 ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL:
   cross_references:
     architecture: []

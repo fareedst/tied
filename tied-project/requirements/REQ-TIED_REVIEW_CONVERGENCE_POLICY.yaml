@@ -1,0 +1,11 @@
+REQ-TIED_REVIEW_CONVERGENCE_POLICY:
+  category: "Methodology"
+  description: "Documented Loop 2 norms for multi-round agent/human review."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+      reason: "Claude comparison Phase 3; upstream feedback fb-mvclklsa-t5gzbo"
+  name: "Review convergence policy (Claude comparison Phase 3)"
+  priority: "P2"
+  status: "Implemented"

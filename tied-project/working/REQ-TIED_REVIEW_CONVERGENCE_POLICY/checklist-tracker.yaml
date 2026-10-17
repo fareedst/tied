@@ -1,0 +1,167 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_REVIEW_CONVERGENCE_POLICY; Phase 3 doc-only policy."
+description: "Tracker for review convergence policy (Claude comparison Phase 3)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-10-17"
+    deferred: []
+    gates:
+      close_out: "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/request-evidence-envelope.v1.json"
+      verification: "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/request-evidence-envelope.v1.json"
+    master_checklist: "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+record_identity:
+  change_request_id: "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+  citdp_path: "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-17"
+  req_token: "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+  title: "Review convergence policy (Claude comparison Phase 3)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/PLAN.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/docs/review-convergence-policy.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-bundle/docs/review-convergence-policy.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/review-convergence-policy-doc.test.mjs"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/review-convergence-policy-doc.test.mjs"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Doc-only Phase 3 policy; minimal depth."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_REVIEW_CONVERGENCE_POLICY-pseudocode.md"
+    policy: "doc-only-no-runtime-pseudocode"
+    rationale: "IMPL sidecar documents doc paths only."
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_REVIEW_CONVERGENCE_POLICY-pseudocode.md"
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/docs/review-convergence-policy.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "tied-bundle/docs/review-convergence-policy.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/review-convergence-policy-doc.test.mjs"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/review-convergence-policy-doc.test.mjs"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/verification-evidence-manifest.v1.json"
+      - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/closeout-run-close-out-gates.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/closeout-run-close-out-gates-verification.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+      - "tied-project/architecture-decisions/ARCH-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+      - "tied-project/implementation-decisions/IMPL-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "N/A"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - "N/A"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/closeout-run-close-out-gates.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
