@@ -6,7 +6,7 @@
 | **Depth** | `profile_depth` / `depth_tier`: **minimal** · `gate_policy`: **advisory** |
 | **Profiles** | `research_profile`: read-only · `assurance_profile`: baseline-functional · `eligibility_triggers_matched`: [] |
 | **Source** | [Claude Code team code review × TIED](../../../docs/comparisons/claude-code-team-code-review-vs-tied.md) |
-| **Status** | Implemented (feedback appended); build-plan re-verify 2026-10-17 |
+| **Status** | Implemented (feedback appended); refine-plan **phase 3** (DAE + Plan) 2026-10-17 |
 | **Feedback id** | `fb-mvclklsa-t5gzbo` |
 
 ---
@@ -17,6 +17,22 @@
 - **Vocabulary PRELOAD:** [feedback-to-tied.md](../../vocab/feedback-to-tied.md) — `tied_feedback_add`, `methodology_improvement`, **observation kind** `discovery`.
 - **Consequence ladder:** **Reversible choice** — append local `feedback.yaml`; **costly choices** (MCP authority, checklist receipts for review convergence) remain future REQs.
 - **Ambiguity:** Resolved — single umbrella entry; git commit only on sponsor request.
+
+---
+
+## Plan process tools (refine-plan phase 3 — DAE)
+
+| Check | Result |
+| --- | --- |
+| `tied-project/config.yaml` `dae.crap_threshold` | **30** (CRAP adjunct inactive — CITDP has no `diff_scoped_crap`) |
+| BBCE | **not_applicable** — Tracker/CITDP do not reference BBCE |
+| `tied_gate_check` `pre_implementation` (phase 3 pass) | **allowed: true** |
+| `tied_gate_check` `verification` (phase 3 pass) | **allowed: true** |
+| `tied_jev_vocab_shadow` (`jev.plan_skills: true`) | **keyword_glossaries:** `feedback-to-tied`; service **locally_skipped** (advisory only) |
+
+**Skill boundary:** Phase 3 stops before **Implement** — no second `tied_feedback_add`, no code/TIED index writes.
+
+**Comparison doc Phase 3 (review convergence)** is a **separate** behavior-changing track (`plan-new-feature` + future REQ); this PLAN-token scope remains the single feedback append only.
 
 ---
 
@@ -58,6 +74,22 @@ Full record: [CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml](./CITDP-PLAN-CLAUDE-RE
 ### Build-plan pass (2026-10-17)
 
 Idempotent execute: skipped second append; re-ran `tied_gate_check` (`pre_implementation` + `verification` → **allowed**); `tied_feedback_export` markdown confirms `fb-mvclklsa-t5gzbo`. No code/tests/TIED index writes. **Close-out deferred** (minimal PLAN scope).
+
+### Refine-plan phase 3 (2026-10-17)
+
+Plan-process-tools + CITDP refresh only: `tied_gate_check` both phases **allowed**; export (json) still exactly one entry `fb-mvclklsa-t5gzbo`; CITDP evidence commands aligned to `tied_gate_check`. **Implement section unchanged** (duplicate-append guard holds).
+
+### Comparison compose handoff (2026-10-17 · `main` @ `0d0a3b99`)
+
+LEAP **`lp-2026-10-17T16-41-21-621Z-441a8fc5136b`** is **applied** (`project_root`: `tied-project/`). Behavior-changing comparison phases **1–3** are **Implemented** (doc-first; no new MCP gate authority):
+
+| Phase | REQ | Deliverable |
+| --- | --- | --- |
+| 1 | [REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER](../REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md) | [pre-handoff-verification-charter.md](../../../tied-bundle/docs/pre-handoff-verification-charter.md) |
+| 2 | [REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK](../REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/PLAN.md) | [sponsor-risk-tier-playbook.md](../../../tied-bundle/docs/sponsor-risk-tier-playbook.md) |
+| 3 | [REQ-TIED_REVIEW_CONVERGENCE_POLICY](../REQ-TIED_REVIEW_CONVERGENCE_POLICY/PLAN.md) | [review-convergence-policy.md](../../../tied-bundle/docs/review-convergence-policy.md) |
+
+Comparison doc [§7 phased table](../../../docs/comparisons/claude-code-team-code-review-vs-tied.md#7-phased-approach-to-improving-tied-recommendations-only) updated with compose status. **Phase 4** (incident/revert evaluation corpus) remains **`plan-new-feature`** when authorized. **Do not** call `tied_feedback_add` again for this PLAN token.
 
 ---
 

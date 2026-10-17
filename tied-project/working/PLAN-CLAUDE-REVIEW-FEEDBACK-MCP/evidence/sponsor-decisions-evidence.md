@@ -11,6 +11,8 @@ Recorded from **`/unblock`** (ask-first session) **2026-10-17**.
 
 **Executed 2026-10-17:** `tied_leap_proposal_approve` on `lp-2026-10-17T16-41-21-621Z-441a8fc5136b` (`project_root`: `tied-project/`).
 
-**Phase 1 selected (2026-10-17):** **`plan-new-feature`** → **[REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER](../REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md)** (pre-handoff verification charter, doc-first).
+**Phase 1 selected (2026-10-17):** **`plan-new-feature`** → **[REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER](../REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md)** (pre-handoff verification charter, doc-first) — **Implemented**.
 
-**Not decided:** Phases 2–5; machine close-out / envelope for PLAN token.
+**Phases 2–3 (2026-10-17):** **`plan-new-feature`** → **[REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK](../REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/PLAN.md)** and **[REQ-TIED_REVIEW_CONVERGENCE_POLICY](../REQ-TIED_REVIEW_CONVERGENCE_POLICY/PLAN.md)** — **Implemented** on **`main`** @ **`0d0a3b99`**.
+
+**Not decided:** Phase 4–5; machine close-out / envelope for PLAN token.

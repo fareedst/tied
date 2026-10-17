@@ -1,6 +1,6 @@
 CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP:
   change_definition:
-    current_behavior: "Comparison doc docs/comparisons/claude-code-team-code-review-vs-tied.md published; tied-project/feedback.yaml holds one methodology_improvement entry (fb-mvclklsa-t5gzbo) appended via MCP."
+    current_behavior: "Comparison doc docs/comparisons/claude-code-team-code-review-vs-tied.md published with phases 1–3 compose status; tied-project/feedback.yaml holds one methodology_improvement entry (fb-mvclklsa-t5gzbo) appended via MCP; LEAP lp-2026-10-17T16-41-21-621Z-441a8fc5136b applied for phases 1–3 doc slices."
     desired_behavior: "One consolidated methodology_improvement entry appended via MCP tied_feedback_add with evidence links to the comparison doc; report_snippet returned for upstream triage."
     non_goals:
       - "Minting REQ/ARCH/IMPL for Anthropic-style PR review layers"
@@ -15,8 +15,9 @@ CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP:
   evidence:
     commands:
       - "tied_config_get_base_path"
-      - "tied_checklist_gate_validate phase pre_implementation and verification"
-      - "tied_feedback_add and tied_feedback_export format markdown"
+      - "tied_gate_check phase pre_implementation and verification (tracker_path + citdp_path)"
+      - "tied_feedback_add (once) and tied_feedback_export format json"
+      - "tied_jev_vocab_shadow refine-plan phase plan-process-tools (advisory; optional)"
     proof_boundaries:
       - "local_feedback_store_only"
       - "does_not_prove_downstream_promotion_or_loop3_experiment"
