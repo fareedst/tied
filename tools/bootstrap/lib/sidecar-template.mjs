@@ -7,7 +7,10 @@ import path from "node:path";
 import { copyFileWithAttributes } from "./copy-managed.mjs";
 import { sayXOfYClient } from "./console.mjs";
 import { resolveTiedLayout } from "./layout.mjs";
-import { resolveStoreSidecarTemplatePath } from "./methodology-bundle.mjs";
+import {
+  resolveStoreMethodologyTemplatePath,
+  resolveStoreSidecarTemplatePath,
+} from "./methodology-bundle.mjs";
 
 /**
  * @param {string} projectRoot
@@ -31,4 +34,38 @@ export function copySidecarTemplate(projectRoot, tiedRepoRoot) {
 
   sayXOfYClient(0, 1, `Preserved existing sidecar template at ${dest}.`);
   return { copied: 0, total: 1 };
+}
+
+/**
+ * @param {string} projectRoot
+ * @param {string} tiedRepoRoot
+ * @param {string[]} basenames
+ */
+export function copyMethodologyTemplates(projectRoot, tiedRepoRoot, basenames) {
+  if (!basenames?.length) {
+    return { copied: 0, total: 0 };
+  }
+
+  const destDir = resolveTiedLayout(projectRoot).templatesDir;
+  fs.mkdirSync(destDir, { recursive: true });
+
+  let copied = 0;
+  let total = 0;
+  for (const basename of basenames) {
+    const src = resolveStoreMethodologyTemplatePath(tiedRepoRoot, basename);
+    if (!fs.existsSync(src)) {
+      throw new Error(`Missing methodology template source: ${src}`);
+    }
+    total += 1;
+    const dest = path.join(destDir, basename);
+    if (!fs.existsSync(dest)) {
+      copyFileWithAttributes(src, dest);
+      copied += 1;
+      sayXOfYClient(copied, total, `Copied methodology template into ${dest}.`);
+    } else {
+      sayXOfYClient(copied, total, `Preserved existing methodology template at ${dest}.`);
+    }
+  }
+
+  return { copied, total };
 }

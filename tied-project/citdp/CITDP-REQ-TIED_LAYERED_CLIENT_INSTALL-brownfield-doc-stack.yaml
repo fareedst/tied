@@ -1,0 +1,62 @@
+CITDP-REQ-TIED_LAYERED_CLIENT_INSTALL-brownfield-doc-stack:
+  change_definition:
+    current_behavior: "Linked installs stub DOCS_TO_COPY entries but omit brownfield-intent-elevation.md, working-artifact-placement.md, and the brownfield matrix template; processes.md links 404 on fresh clients."
+    desired_behavior: "manifest.json allowlists install those docs and template under tied-bundle/ only; factory clients do not auto-seed tied-project/working/{REQ}/ comprehension trees."
+    non_goals:
+      - "Copy full tied-bundle/docs tree"
+      - "Enroll store-only REQ-TIED_BROWNFIELD_INTENT_ELEVATION detail into client tied-bundle indexes"
+      - "Relocate committed comprehension from tied-project/working/"
+    success_criteria:
+      - "brownfield-client-doc-stack-contract.test.ts passes"
+      - "new-tied-client integration asserts docs, template, and no REQ-* working subdirs"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+      - "ARCH-TIED_TWO_FOLDER_LAYOUT"
+    implementation_decisions:
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+    requirements:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+  record_identity:
+    citdp_id: "CITDP-REQ-TIED_LAYERED_CLIENT_INSTALL-brownfield-doc-stack"
+    created_at: "2026-10-17"
+    status: "implemented"
+    title: "Brownfield methodology docs and matrix template on client install"
+    updated_at: "2026-10-17"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Brownfield guides land under tied-project/ instead of refreshable tied-bundle/docs/."
+        - "DOCS_TO_COPY bloat copies entire docs tree and breaks refresh semantics."
+        - "Install copies comprehension placeholders into tied-project/working/REQ-*/ on factory clients."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Manifest contract test asserts allowlist basenames only."
+        - "new-tied-client integration rejects REQ-* directories under tied-project/working/."
+      evidence_references:
+        - "mcp-server/src/e2e/brownfield-client-doc-stack-contract.test.ts"
+        - "mcp-server/src/e2e/new-tied-client.test.ts"
+        - "tools/bootstrap/manifest.json"
+      falsification_questions:
+        - "Could copyMethodologyTemplates overwrite client-edited templates?"
+        - "Does linked install still omit matrix template when only DOCS_TO_COPY grows?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "minimal"
+      rationale: "Manifest allowlist and copy-when-missing bootstrap; no auth/network/persistence."
+      research_profile: "integrated-agent"
+    risks:
+      - description: "Conflating tied-bundle methodology with tied-project comprehension"
+        id: "RISK-BFDS-001"
+        likelihood: "Low"
+        mitigation: "Two-folder table in plan; path-scoped tests; PROC-TIED_METHODOLOGY_READONLY in IMPL pseudo-code"
+  test_strategy:
+    e2e_only: []
+    integration:
+      - "new-tied-client.test.ts linked pipeline"
+    unit:
+      - "brownfield-client-doc-stack-contract.test.ts"

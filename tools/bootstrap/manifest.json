@@ -46,12 +46,16 @@
   "SOURCE_ONLY_VOCAB_BASENAMES": [
     "prompt-composer.md"
   ],
+  "METHODOLOGY_TEMPLATES_TO_COPY": [
+    "brownfield-evidence-to-intent-matrix.md"
+  ],
   "DOCS_TO_COPY": [
     "adding-tied-mcp-and-invoking-passes.md",
     "agent-preload-contract-template.yaml",
     "ai-principles.md",
     "agent-req-implementation-checklist.md",
     "architecture-decisions.md",
+    "brownfield-intent-elevation.md",
     "citdp-policy.md",
     "sponsor-agent-relationship.md",
     "citdp-record-template.yaml",
@@ -86,6 +90,7 @@
     "tied-first-implementation-procedure.md",
     "tied-yaml-agent-index.md",
     "using-tied-without-mcp.md",
+    "working-artifact-placement.md",
     "vocabulary-index-analysis-and-standards.md",
     "tied-domain-vocabulary-research-prompt.md",
     "vocabulary-layer-tied-leap-citdp.md"

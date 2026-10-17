@@ -43,7 +43,7 @@ import {
   tiedCliDestFor,
   tiedBasePathValueFor,
 } from "./verify.mjs";
-import { copySidecarTemplate } from "./sidecar-template.mjs";
+import { copyMethodologyTemplates, copySidecarTemplate } from "./sidecar-template.mjs";
 import { installClaudeMdTemplate } from "./claude-md.mjs";
 import { mergeClaudeAdherenceHooks } from "./claude-adherence-hooks.mjs";
 import { applyMethodologyClientBoundary } from "./methodology-client-boundary.mjs";
@@ -220,6 +220,7 @@ export function bootstrapTied(projectRoot, options = {}) {
 
   copyDocs(paths.DOCS_TO_COPY, tiedSourceDir, tiedDir);
   copySidecarTemplate(projectRoot, TIED_REPO_ROOT);
+  copyMethodologyTemplates(projectRoot, TIED_REPO_ROOT, paths.METHODOLOGY_TEMPLATES_TO_COPY ?? []);
 
   const implTemplateDir = resolveTemplateDir(templatesDir, TIED_REPO_ROOT, "implementation-decisions");
   const implResult = copyDetailFiles(

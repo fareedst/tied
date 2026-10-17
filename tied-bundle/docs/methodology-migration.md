@@ -159,6 +159,8 @@ The one-client **evidence chain profile** generator records are promoted into th
 
 `tied-bundle/docs/evidence-chain-profile.md` is now in `DOCS_TO_COPY` (copy-when-missing). A fresh client whose `client-development-index.md` links that guide also receives the guide. Existing client docs stay authoritative until a human compares and merges them.
 
+`tied-bundle/docs/brownfield-intent-elevation.md` and `tied-bundle/docs/working-artifact-placement.md` are in `DOCS_TO_COPY` (copy-when-missing). The brownfield matrix template `tied-bundle/templates/brownfield-evidence-to-intent-matrix.md` installs via `METHODOLOGY_TEMPLATES_TO_COPY`. Comprehension artifacts (maps, matrices, envelopes) stay under committed `tied-project/working/{REQ-TOKEN}/`; install does not auto-seed those trees on factory clients.
+
 `[REQ-EVIDENCE_CHAIN_REPORT]`, `[ARCH-EVIDENCE_CHAIN_REPORT]`, and `[IMPL-EVIDENCE_CHAIN_REPORT]` stay **source-repository-only**. Clients generate profiles locally and invoke the TIED-source CLI for batch statistics; they do not inherit aggregator tokens. Refresh still overwrites `tied-bundle/**`, preserves project YAML and client vocab, copies missing `tied-bundle/docs/*.md`, and does not silently rewrite an existing `.cursor/mcp.json`. Review the baked MCP binary path separately when the TIED clone moves.
 
 ## Phase 3 — TIED data and pseudo-code compatibility

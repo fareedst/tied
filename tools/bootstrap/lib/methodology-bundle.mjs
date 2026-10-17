@@ -44,16 +44,19 @@ export function resolveStoreDocsDir(storeRoot) {
  * @param {string} storeRoot
  */
 export function resolveStoreSidecarTemplatePath(storeRoot) {
-  const bundleTpl = path.join(
-    storeRoot,
-    BUNDLE_DIR_NAME,
-    "templates",
-    "impl-essence-pseudocode-template.md",
-  );
+  return resolveStoreMethodologyTemplatePath(storeRoot, "impl-essence-pseudocode-template.md");
+}
+
+/**
+ * @param {string} storeRoot
+ * @param {string} basename
+ */
+export function resolveStoreMethodologyTemplatePath(storeRoot, basename) {
+  const bundleTpl = path.join(storeRoot, BUNDLE_DIR_NAME, "templates", basename);
   if (fs.existsSync(bundleTpl)) {
     return bundleTpl;
   }
-  return path.join(storeRoot, "templates", "impl-essence-pseudocode-template.md");
+  return path.join(storeRoot, "templates", basename);
 }
 
 /**

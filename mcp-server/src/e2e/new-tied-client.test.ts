@@ -332,6 +332,28 @@ describe("new-tied-client integration", () => {
       if (!fs.existsSync(sarVocab)) {
         throw new Error("missing tied-bundle/vocab/sponsor-agent-relationship.md");
       }
+      for (const doc of ["brownfield-intent-elevation.md", "working-artifact-placement.md"]) {
+        const p = path.join(clientDir, "tied-bundle", "docs", doc);
+        if (!fs.existsSync(p)) throw new Error("missing tied-bundle/docs/" + doc);
+      }
+      const matrixTpl = path.join(
+        clientDir,
+        "tied-bundle",
+        "templates",
+        "brownfield-evidence-to-intent-matrix.md",
+      );
+      if (!fs.existsSync(matrixTpl)) {
+        throw new Error("missing tied-bundle/templates/brownfield-evidence-to-intent-matrix.md");
+      }
+      const committedWorking = path.join(clientDir, "tied-project", "working");
+      if (fs.existsSync(committedWorking)) {
+        for (const name of fs.readdirSync(committedWorking)) {
+          const full = path.join(committedWorking, name);
+          if (fs.statSync(full).isDirectory() && /^REQ-/.test(name)) {
+            throw new Error("factory must not auto-seed REQ working trees: " + name);
+          }
+        }
+      }
       const yamlFiles = collectYamlFiles(clientDir);
       if (yamlFiles.length === 0) throw new Error("expected tied yaml files");
       const auditReportCandidates = [

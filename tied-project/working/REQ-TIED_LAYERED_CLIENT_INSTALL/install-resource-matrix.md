@@ -39,7 +39,7 @@
 | Methodology corpus | `tied-bundle/requirements.yaml`, detail dirs, indexes (flattened) | methodology | **G** | symlink/stub/copy | **Copy** | methodology only |
 | Methodology docs | `tied-bundle/docs/**` | methodology | **G** | **Stub** → store | **Copy** | methodology only |
 | Methodology vocab | `tied-bundle/vocab/*.md` | methodology | **G** | stub/symlink from store `tied-project/vocab` | **Copy** | methodology only |
-| Sidecar template | `tied-bundle/templates/impl-essence-pseudocode-template.md` | methodology | **G** | **Stub** | **Copy** | methodology only |
+| Methodology templates | `tied-bundle/templates/impl-essence-pseudocode-template.md`, `tied-bundle/templates/brownfield-evidence-to-intent-matrix.md` (manifest `METHODOLOGY_TEMPLATES_TO_COPY` + sidecar) | methodology | **G** | **Stub** | **Copy** (copy-when-missing) | methodology only |
 | Local working evidence | `tied-bundle/working/**` (gates, adversarial-inquiry, …) | — | **G** | — | — | — |
 | **Store repo git (asymmetric)** | **Store:** methodology corpus under `tied-bundle/` **C**; `tied-bundle/working/**` + `tied-bundle/install.json` **G** (STORE LOCAL WORKING block). **Client:** whole `tied-bundle/` tree **G** via INSTALL MANAGED v2 (unchanged). | methodology | **C** / **G** | — | — | — |
 | Parity report (full) | `tied-bundle/reports/client-refresh-parity-report.json` | methodology | **G** | — | written | full mode |

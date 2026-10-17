@@ -13,7 +13,7 @@ import {
   warnModifiedCopyTarget,
 } from "../copy-managed.mjs";
 import { copyDocs } from "../docs.mjs";
-import { copySidecarTemplate } from "../sidecar-template.mjs";
+import { copyMethodologyTemplates, copySidecarTemplate } from "../sidecar-template.mjs";
 import { installClaudeMdTemplate } from "../claude-md.mjs";
 import { copyHooks } from "../skills.mjs";
 import { mergeClaudeAdherenceHooks } from "../claude-adherence-hooks.mjs";
@@ -28,7 +28,7 @@ import {
   materializeLinkedMethodologyBundle,
   resolveStoreDocsDir,
   resolveStoreMethodologyIndexRoot,
-  resolveStoreSidecarTemplatePath,
+  resolveStoreMethodologyTemplatePath,
   resolveStoreVocabDir,
 } from "../methodology-bundle.mjs";
 
@@ -81,12 +81,18 @@ export function installMethodologyLinked(projectRoot, options) {
   }
 
   fs.mkdirSync(layout.templatesDir, { recursive: true });
-  const templateDest = path.join(layout.templatesDir, "impl-essence-pseudocode-template.md");
-  const storeTemplate = resolveStoreSidecarTemplatePath(options.storeRoot);
-  if (fs.existsSync(storeTemplate)) {
-    linkOrMaterializeCopy(storeTemplate, templateDest);
-  } else {
-    writeDocRedirectStub(templateDest, storeTemplate, "impl-essence-pseudocode-template.md");
+  const linkedTemplateBasenames = [
+    "impl-essence-pseudocode-template.md",
+    ...(paths.METHODOLOGY_TEMPLATES_TO_COPY ?? []),
+  ];
+  for (const basename of linkedTemplateBasenames) {
+    const templateDest = path.join(layout.templatesDir, basename);
+    const storeTemplate = resolveStoreMethodologyTemplatePath(options.storeRoot, basename);
+    if (fs.existsSync(storeTemplate)) {
+      linkOrMaterializeCopy(storeTemplate, templateDest);
+    } else {
+      writeDocRedirectStub(templateDest, storeTemplate, basename);
+    }
   }
 
   const hooksSource = path.join(options.storeRoot, ".cursor", "hooks.json");
@@ -140,6 +146,7 @@ export function installMethodologyFull(projectRoot, options) {
 
   copyDocs(paths.DOCS_TO_COPY, storeDocsRoot, layout.bundleDir);
   copySidecarTemplate(projectRoot, storeRoot);
+  copyMethodologyTemplates(projectRoot, storeRoot, paths.METHODOLOGY_TEMPLATES_TO_COPY ?? []);
 
   for (const sub of ["implementation-decisions", "architecture-decisions", "requirements"]) {
     copyDetailFiles(path.join(storeIndexRoot, sub), path.join(bundleDir, sub));

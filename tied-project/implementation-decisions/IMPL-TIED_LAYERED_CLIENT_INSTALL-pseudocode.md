@@ -88,4 +88,14 @@ PROCEDURE RESOLVE_LEGACY_BOOTSTRAP_SCRIPT(repoRoot, platform)
   PRE: repoRoot is store checkout
   POST: absolute path to tied-install.cmd on win32 else tied-install.sh
 END PROCEDURE
+
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_TWO_FOLDER_LAYOUT] [PROC-TIED_METHODOLOGY_READONLY]
+// How: Manifest allowlists install methodology docs into tied-bundle/docs and templates into tied-bundle/templates only; no tied-project/working/{REQ}/ comprehension seed on factory clients.
+PROCEDURE INSTALL_METHODOLOGY_DOC_AND_TEMPLATE_ALLOWLIST(projectRoot, storeRoot, mode)
+  PRE: manifest.json defines DOCS_TO_COPY and METHODOLOGY_TEMPLATES_TO_COPY
+  POST: linked stubs or full copy-when-missing for allowlisted basenames under client tied-bundle/
+  EFFECTS: processes.md sibling links (brownfield guide, working-artifact-placement) resolve locally
+  FAILURE_MODES: STORE_DOC_OR_TEMPLATE_MISSING
+  DATA_TRANSITION: DOCS_TO_COPY → tied-bundle/docs/; sidecar + METHODOLOGY_TEMPLATES_TO_COPY → tied-bundle/templates/
+END PROCEDURE
 ```
