@@ -11,3 +11,5 @@
 **Proof boundary:** Request envelope gitignored; committed close-out receipts + tracker dual-write.
 
 **Tokens:** REQ-TIED_CLIENT_DEVOPS_APPENDIX, ARCH-TIED_CLIENT_DEVOPS_APPENDIX, IMPL-TIED_CLIENT_DEVOPS_APPENDIX.
+
+**Commit:** `576125ec` on `main`.

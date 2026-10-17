@@ -61,7 +61,7 @@
 
 ## Sponsor next steps
 
-1. **Commit** — traceable-commit this session (close-out evidence slice); push when sponsor asks.
+1. ~~**Commit**~~ **Done** — **`576125ec`** (close-out evidence slice); push when sponsor asks (`main` ahead 3).
 2. ~~Optional **`plan-close-out`** per phase REQ~~ Phases **1–5** REQ close-outs **pass** where run; umbrella PLAN token close-out **pass** (2026-10-17).
 3. Kaizen store loop on **`fb-mvclklsa-t5gzbo`** **Done** (2026-10-17) — digest + bridge + **`mle-claude-compose-20261017-001`**; pilot [`kaizen-feedback-pilot-report-fb-mvclklsa.v1.json`](./kaizen-feedback-pilot-report-fb-mvclklsa.v1.json); outcome **`inconclusive`** (`oo-mvcz428b-h50pjv`) via [`kaizen-outcome-record-result-fb-mvclklsa.v1.json`](./kaizen-outcome-record-result-fb-mvclklsa.v1.json) (compose + pilot evidence; effectiveness **not measured**).
 4. ~~Deferred: methodology-composition-matrix row for PR-centric review.~~ **Done** — [methodology-composition-matrix.md §2 row 11](../../../../docs/comparisons/methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks) (2026-10-17).

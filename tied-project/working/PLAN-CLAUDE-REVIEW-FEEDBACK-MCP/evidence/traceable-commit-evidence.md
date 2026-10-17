@@ -9,3 +9,5 @@
 **Proof boundary:** Envelope + not-applicable receipt remain gitignored per `.gitignore`; committed artifacts are handoffs, trackers, CHANGELOG, and gate receipt JSON.
 
 **Tokens:** PLAN-CLAUDE-REVIEW-FEEDBACK-MCP; upstream feedback `fb-mvclklsa-t5gzbo` (no re-append).
+
+**Commit:** `576125ec` on `main`.
