@@ -50,10 +50,12 @@ entry_points:
     start_at: session-bootstrap
 execution_evidence:
   close_out_evidence:
-    date: null
+    date: '2026-10-17'
     deferred: []
-    gates: {}
-    master_checklist: ''
+    gates:
+      close_out: tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/evidence/run-close-out-gates-close-out-r2.txt
+    master_checklist: tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/agent-req-implementation-checklist.yaml
+    ship_commit: 166338c1,919436fe,478d2c69
   completed:
     - change-definition
     - composition-integration
@@ -68,6 +70,7 @@ execution_evidence:
     - unit-test-green
     - unit-test-red
     - verification-gate
+    - traceable-commit
   envelope_path: working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -1368,7 +1371,11 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_traceable_commit
+        - tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/plan-close-out-handoff.md
+    disposition: completed
+    evidence_refs: *ref_traceable_commit
   - flow:
       branches: []
       calls:

@@ -11,11 +11,15 @@
 
 ### Traceable-commit
 
+**Push:** not requested (local only).
+
 | Commit | Hash | Scope |
 | --- | --- | --- |
 | Feature | `166338c1` | Brownfield manifest + bootstrap + tests + TIED + PLAN-CLOSE-OUT |
 | Hygiene pins | `919436fe` | Fixture/evidence drift |
-| CHANGELOG | (see latest `docs:` commit on branch) | Unreleased entry + SHAs |
+| CHANGELOG + handoff | `fa31bc54`, `478d2c69` | Unreleased entry, SHAs, this handoff |
+
+Checklist slug `traceable-commit`: **completed** (evidence ref: this file).
 
 ### Gitignore hygiene ([PROC-GITIGNORE_CLOSE_OUT])
 
