@@ -34,11 +34,12 @@ TIED optimizes **intent traceability and proof before and during implementation*
 | **Feedback store** | **`fb-mvclklsa-t5gzbo`** — `comparison_status: compose_implemented`; [`tied-project/feedback.yaml`](../../tied-project/feedback.yaml) |
 | **LEAP** | **`lp-2026-10-17T16-41-21-621Z-441a8fc5136b`** — **applied** (`project_root`: `tied-project/`) |
 | **§7 phases 1–5** | **Implemented** (methodology docs + REQ/ARCH/IMPL); index in [§7 table](#7-phased-approach-to-improving-tied-recommendations-only) |
+| **Path-scoped `REVIEW.md`** | **Implemented** — [REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE](../../tied-project/requirements/REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE.yaml) (post-compose learning #2; client opt-in) |
 | **Loop 3 experiment** | **`mle-claude-compose-20261017-001`** — [`methodology-experiments.yaml`](../../tied-project/methodology-experiments.yaml); outcome **`not_measured`** at experiment record |
 | **Kaizen local chain** | Digest → bridge → pilot → outcome observation **`inconclusive`** on feedback row; evidence under [`PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence`](../../tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/) |
 | **Orchestrator** | [`PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/PLAN.md`](../../tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/PLAN.md) · [`session-handoff.md`](../../tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/session-handoff.md) |
 
-**Honest limits after compose:** Pre-handoff charter, risk-tier playbook, review convergence policy, incident/revert eval corpus guide, and client DevOps appendix are **operator guidance**. They do **not** by themselves add deterministic checklist/MCP receipts for convergence, ship risk-tier **automation**, or make path-scoped `REVIEW.md` a standard TIED pattern. Effectiveness remains **`inconclusive` / `not_measured`** until operational denominators (evaluation-corpus rows, review observations) exist.
+**Honest limits after compose:** Pre-handoff charter, risk-tier playbook, review convergence policy, incident/revert eval corpus guide, client DevOps appendix, and path-scoped review guidance are **operator guidance**. They do **not** by themselves add deterministic checklist/MCP receipts for convergence, ship risk-tier **automation**, or **auto-install** path-scoped `REVIEW.md` in every client. Effectiveness remains **`inconclusive` / `not_measured`** until operational denominators (evaluation-corpus rows, review observations) exist.
 
 **Starting-state sections:** [Touchpoint 1 — RESOLVE](#touchpoint-1--resolve-article--tied-vocabulary) and [Primary layer matrix](#primary-layer-matrix-article-layer-by-layer) remain the **2026-10-17 outreach map** unless annotated in-row; use this snapshot for **what shipped** since publish.
 
@@ -79,7 +80,7 @@ Analysis content only at outreach; **post-compose RECORD:** **review convergence
 
 | Article term | TIED analogue | Notes |
 | --- | --- | --- |
-| `CLAUDE.md` / `REVIEW.md` | [AGENTS.md](../../AGENTS.md), client [routing.md](../../tied-project/vocab/routing.md), optional path-scoped **review guidance** | Review-guidance pattern is **not** yet standard in TIED |
+| `CLAUDE.md` / `REVIEW.md` | [AGENTS.md](../../AGENTS.md), client [routing.md](../../tied-project/vocab/routing.md), [path-scoped review guidance](../../tied-bundle/docs/path-scoped-review-guidance.md) | Global load via AGENTS; **optional** path-scoped **`REVIEW.md`** / `tied-project/review/` documented (client-owned) |
 | Pre-PR verification | Checklist pre-RED / **pre_implementation** gate, `[PROC-TIED_DEV_CYCLE]`, pseudocode validation | Lifecycle anchor is REQ slice, not PR |
 | AI PR review | Integrated **adversarial inquiry** or separately invoked local review (e.g. Bugbot skill) | Not a hosted PR product or TIED authority |
 | Blocking findings | `tied_checklist_gate_validate`, open inquiry findings, verification manifest gaps | Deterministic MCP gates |
@@ -174,7 +175,7 @@ flowchart TB
 Outreach list at publish; **§7 compose** status in [snapshot](#compose-status-snapshot).
 
 1. **Executable verification before handoff** — **Delivered (phase 1)** — [pre-handoff-verification-charter.md](../../tied-bundle/docs/pre-handoff-verification-charter.md); client development index cross-links as indexes refresh.
-2. **Path-scoped review guidance** — **Still open (client-owned)** — `REVIEW.md` pattern as optional `tied-project/review/` or module stubs; not methodology YAML.
+2. **Path-scoped review guidance** — **Delivered (post-compose)** — [path-scoped-review-guidance.md](../../tied-bundle/docs/path-scoped-review-guidance.md) + example templates; client opt-in under `tied-project/review/` or adjacent **`REVIEW.md`** ([REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE](../../tied-project/requirements/REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE.yaml)).
 3. **Risk-scaled human touchpoints** — **Delivered (phase 2)** — [sponsor-risk-tier-playbook.md](../../tied-bundle/docs/sponsor-risk-tier-playbook.md); advisory only; never auto-approve costly choices.
 4. **Reviewer improvement loop** — **Partially exercised** — **`fb-mvclklsa-t5gzbo`** → Kaizen digest/pilot/outcome + **`mle-claude-compose-20261017-001`**; populate [incident-revert evaluation corpus](../../tied-bundle/docs/incident-revert-evaluation-corpus.md) rows for measured Loop 3 readouts.
 5. **Convergence policy** — **Delivered (phase 3)** — [review-convergence-policy.md](../../tied-bundle/docs/review-convergence-policy.md); Bugbot skill aligns; optional future **prompt-shared** adjunct not shipped.
@@ -202,6 +203,7 @@ At **outreach (2026-10-17 publish)**, phases were **recommendations only**. **Su
 | **3** | Loop 2 | **Review convergence** | Round cap, diff-only re-review, class-level fixes, repeated-finding suppression | Measure via operational observations and outcome baselines | **Implemented** — [review-convergence-policy.md](../../tied-bundle/docs/review-convergence-policy.md) · [REQ-TIED_REVIEW_CONVERGENCE_POLICY](../../tied-project/requirements/REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml) |
 | **4** | Loop 3 | **Incident/revert evaluation corpus** | Add confirmed post-merge failures and false-positive cases to bounded evaluation corpus | Pilot with explicit denominators, provenance, stop criteria | **Implemented** — [incident-revert-evaluation-corpus.md](../../tied-bundle/docs/incident-revert-evaluation-corpus.md) · [REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS](../../tied-project/requirements/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml) |
 | **5** | Composable | **Client DevOps integration appendix** | Document PR fields for tests, risk, rollback; CI/release client-owned | Client-layer guidance, not TIED core | **Implemented** — [client-devops-integration-appendix.md](../../tied-bundle/docs/client-devops-integration-appendix.md) · [REQ-TIED_CLIENT_DEVOPS_APPENDIX](../../tied-project/requirements/REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml) |
+| **6** | Composable | **Path-scoped review guidance** | Optional `REVIEW.md` / `tied-project/review/` client map | Client-owned prose; not MCP authority | **Implemented** — [path-scoped-review-guidance.md](../../tied-bundle/docs/path-scoped-review-guidance.md) · [REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE](../../tied-project/requirements/REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE.yaml) |
 
 Cross-link phases 4–5 to [TIED improvement roadmap](../tied-improvement-roadmap.md) (feature orchestration close-out) and the closed QMM Loop 3 program—avoid duplicating Batch 0–6 scope.
 
@@ -211,15 +213,15 @@ Cross-link phases 4–5 to [TIED improvement roadmap](../tied-improvement-roadma
 
 | Item | Status |
 | --- | --- |
-| **Git commit wave** | Sponsor — compose artifacts, indexes, `feedback.yaml`, `methodology-experiments.yaml`, Kaizen evidence, this doc |
-| **Per-phase `plan-close-out`** | Optional envelope parity per phase REQ (e.g. phase **5** close-out may be **not_run**) |
+| **Git commit wave** | **Done** — compose on `main` (`71444cdc` phases 4–5 + Kaizen + snapshot; `9170d018` matrix §2 row 11); close-out traceable-commit (`576125ec`, `2e293343`); branch **ahead 4** — push when sponsor asks |
+| **Machine `plan-close-out`** | **Done** — phases **1–3**, **5**: committed `closeout-run-close-out-gates.json` under each phase REQ working folder; phase **4**: **pass** per [session-handoff](../../tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/session-handoff.md) (`run_id=close-out-2026-10-17-incident-revert-corpus`); umbrella **PLAN-CLAUDE-REVIEW-FEEDBACK-MCP** **pass** (`run_id=close-out-2026-10-17-plan-claude-review-feedback-mcp`) |
 | **Matrix row** | **Done** — §2 **row 11** “PR-centric agent code review (Anthropic team model)” in [methodology-composition-matrix.md](methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks); tracked by `REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX`; sponsor review of mechanism cells still applies |
-| **Path-scoped `REVIEW.md` standard** | Client-owned optional pattern — not delivered in compose |
-| **Core automation gaps** | Convergence MCP/checklist receipts; merge-approver classifier — still **Gap** vs article |
+| **Path-scoped `REVIEW.md` standard** | **Done** — [path-scoped-review-guidance.md](../../tied-bundle/docs/path-scoped-review-guidance.md); templates under `tied-bundle/templates/`; client copies optional |
+| **Core automation gaps** | Convergence MCP/checklist receipts; merge-approver classifier — still **Gap** vs article (future behavior needs its own REQ/CITDP per §7) |
 | **Measured effectiveness** | Evaluation-corpus population, operational review metrics — outcome **`inconclusive`** on feedback row |
 | **Kaizen Phase 3 transport** | Program hinge **closed** (outbox deferred) — distinct from comparison “phase 3” convergence policy |
 
-**Done since outreach:** **`tied_feedback_add`** → **`fb-mvclklsa-t5gzbo`**; LEAP **applied**; phases **1–5** **Implemented**; Kaizen digest / pilot / outcome on local store.
+**Done since outreach:** **`tied_feedback_add`** → **`fb-mvclklsa-t5gzbo`**; LEAP **applied**; phases **1–5** **Implemented**; Kaizen digest / pilot / outcome on local store; git + machine close-out wave on **`main`** (see table above).
 
 ---
 

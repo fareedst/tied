@@ -1,0 +1,37 @@
+REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
+  category: "Methodology"
+  description: "Client-owned optional path-scoped REVIEW.md and tied-project/review/ guidance; no new MCP gate authority."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Path-scoped review guidance (Claude comparison post-compose)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Installable guide and copy-paste templates via tied-install refresh"
+    problems_solved:
+      - "REVIEW.md-style guidance not documented as optional TIED client pattern"
+    why: "Compose Anthropic-style path-scoped review context without PR-bot or MCP gate authority."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md Quick read links path-scoped-review-guidance.md"
+      id: "SC-INDEX-LINK"
+    - criterion: "path-scoped-review-guidance-doc.test.mjs passes"
+      id: "SC-GUIDE-TEST"
+    - criterion: "path-scoped-review-guidance.md includes proof boundary and layout patterns"
+      id: "SC-GUIDE-DOC"
+    - criterion: "path-scoped-REVIEW.v1.example.md and tied-project-review-index.v1.example.md ship under tied-bundle/templates"
+      id: "SC-TEMPLATE-EXAMPLES"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+    implementation:
+      - "IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE"

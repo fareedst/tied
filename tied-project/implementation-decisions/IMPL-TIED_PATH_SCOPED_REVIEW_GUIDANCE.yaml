@@ -1,0 +1,14 @@
+IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
+  approach: "Doc + templates + index + bootstrap test."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+    requirements:
+      - "REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE-pseudocode.md"
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Path-scoped review guidance doc maintenance"
+  status: "Implemented"

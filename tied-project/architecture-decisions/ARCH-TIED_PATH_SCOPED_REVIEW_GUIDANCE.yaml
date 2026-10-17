@@ -1,0 +1,11 @@
+ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
+  cross_references:
+    requirements:
+      - "REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+  decision: "Canonical guide under tied-bundle/docs/path-scoped-review-guidance.md plus example templates under tied-bundle/templates/; client copies into tied-project/ or module paths."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Path-scoped review guidance documentation topology"
+  status: "Implemented"

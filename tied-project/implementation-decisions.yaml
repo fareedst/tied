@@ -2615,6 +2615,17 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
   detail_file: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
   name: "Node-only controlled runner implementation"
   status: "Proposed"
+IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
+  approach: "Doc + templates + index + bootstrap test."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+    requirements:
+      - "REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+  detail_file: "implementation-decisions/IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE-pseudocode.md"
+  name: "Path-scoped review guidance doc maintenance"
+  status: "Implemented"
 IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
   cross_references:
     architecture:

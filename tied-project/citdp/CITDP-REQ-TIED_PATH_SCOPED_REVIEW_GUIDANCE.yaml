@@ -1,0 +1,52 @@
+CITDP-REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
+  change_definition:
+    current_behavior: "Claude comparison listed path-scoped REVIEW.md as client-owned optional pattern with no installable TIED guide."
+    desired_behavior: "One methodology guide, two example templates, client index link, bootstrap doc test; client opt-in copy to tied-project/review/ or module REVIEW.md."
+    non_goals:
+      - "Auto-seeding tied-project/review/ on tied-install"
+      - "Mandatory path-scoped review for all clients"
+      - "MCP gate authority or PR-bot products"
+    success_criteria:
+      - "path-scoped-review-guidance-doc.test.mjs green"
+      - "pre_implementation and verification gates allowed at minimal depth"
+      - "REQ/ARCH/IMPL Implemented; CITDP persisted"
+    unchanged_behavior: "Global AGENTS.md and checklist gates unchanged."
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/path-scoped-review-guidance-doc.test.mjs"
+      - "tied_gate_check pre_implementation and verification"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "client_owned_review_prose_not_tied_core"
+      - "documentation_and_template_only"
+  impact_analysis:
+    impl_inventory_notes: "Doc + templates + index + bootstrap test; IMPL pseudo-code sidecar."
+    modules_or_boundaries: "tied-bundle/docs/ and tied-bundle/templates/."
+    tied_tokens_affected:
+      - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+    tied_tokens_new:
+      - "ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+      - "IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+      - "REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+  record_identity:
+    change_request_id: "REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-17"
+    title: "Path-scoped REVIEW.md guidance (Claude comparison post-compose)"
+  risk_analysis:
+    abuse_cases:
+      - "Path guidance contradicts global AGENTS without sponsor REQ"
+      - "REVIEW.md treated as substitute for tied_checklist_gate_validate"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      rationale: "Doc-only client-owned pattern; no production code mutation."
+      sub_adversarial_inquiry_pass: "not_applicable"
+  test_strategy:
+    approach: "Bootstrap doc contract test; gate tools at minimal depth."
+    cases:
+      - "Client development index Quick read link"
+      - "Guide markers and templates present"

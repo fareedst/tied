@@ -59,6 +59,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | **Review convergence policy** | [review-convergence-policy.md](review-convergence-policy.md) | Multi-round review norms: round cap, diff-only re-review, class-level fixes, repeated-finding suppression (Loop 2 Phase 3; measure via operational observations). |
 | **Incident/revert eval corpus** | [incident-revert-evaluation-corpus.md](incident-revert-evaluation-corpus.md) | Loop 3 guide for bounded `evaluation-corpus.v1` rows (incidents, reverts, review false positives) with denominators and pilot stop criteria (Phase 4; no new MCP authority). |
 | **Client DevOps appendix** | [client-devops-integration-appendix.md](client-devops-integration-appendix.md) | Client-owned PR/CI/release field guidance composing with Phases 1–4 (Phase 5; not TIED core authority). |
+| **Path-scoped review guidance** | [path-scoped-review-guidance.md](path-scoped-review-guidance.md) | Optional `REVIEW.md` / `tied-project/review/` client pattern (post-compose; not TIED core authority). |
 | **Claude review comparison** | [claude-code-team-code-review-vs-tied.md](../../docs/comparisons/claude-code-team-code-review-vs-tied.md) | Outreach map + [compose snapshot](../../docs/comparisons/claude-code-team-code-review-vs-tied.md#compose-status-snapshot) for Anthropic PR-review layers × TIED (Phases 1–5 guides; store **`fb-mvclklsa-t5gzbo`**). |
 
 ---

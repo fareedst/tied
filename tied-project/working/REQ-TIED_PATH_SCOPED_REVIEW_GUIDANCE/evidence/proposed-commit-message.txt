@@ -1,0 +1,14 @@
+docs(tied): path-scoped REVIEW.md guidance (Claude compose learning #2)
+
+Add optional client-owned path-scoped REVIEW.md patterns under tied-bundle/docs,
+example templates, bootstrap doc test, and REQ/ARCH/IMPL + CITDP stack. Update
+comparison compose snapshot and CHANGELOG. Doc-only; no MCP gate authority.
+
+Feedback fb-mvclklsa-t5gzbo · LEAP lp-2026-10-17T16-41-21-621Z-441a8fc5136b (applied)
+
+REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE
+ARCH-TIED_PATH_SCOPED_REVIEW_GUIDANCE
+IMPL-TIED_PATH_SCOPED_REVIEW_GUIDANCE
+CITDP-REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE
+
+Evidence: tied-project/working/REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE/evidence/git-hygiene-receipt-2026-10-17.md
