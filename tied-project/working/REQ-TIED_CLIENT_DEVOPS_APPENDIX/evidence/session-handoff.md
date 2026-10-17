@@ -16,30 +16,46 @@
 
 **Proof boundary:** Client-owned PR/CI/release fields; **not** TIED core authority; **no** new MCP gates.
 
-## Completion signals
+### Completion signals
 
-| Signal | Status |
+- **Machine close-out:** **pass** — gate `close_out` `allowed=true`; envelope validate `fail_on_error_gaps=true` `blocking_gaps=0`; envelope path=`tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/request-evidence-envelope.v1.json`; summary=[`closeout-run-close-out-gates.json`](./closeout-run-close-out-gates.json) (`run_id=close-out-2026-10-17-client-devops-appendix-final`, `merged_decision.allowed=true`)
+- **Process contract:** **pass** — tracker dual-write through `sub-close-out-evidence-sync`; manifest=[`verification-evidence-manifest.v1.json`](./verification-evidence-manifest.v1.json); PSA Layer C **n/a**; profile **minimal** / advisory
+- **Adherence ledger:** **pass** — reconcile `process_grade` band **A** ([`closeout-run-close-out-gates.json`](./closeout-run-close-out-gates.json)); reconcile note: one stale `completed_with_unresolved_evidence` on manifest path (artifact present on disk after collect)
+
+## Plan process tools (plan-close-out adjunct)
+
+| Check | Result |
 | --- | --- |
-| **Machine close-out** | **not_run** — minimal doc slice; verification only (no `run-close-out-gates.mjs` envelope replay this session) |
-| **Process contract** | **pass** — tracker through **`verification-gate`** and **`persist-citdp-record`**; doc test **3/3** green |
-| **Adherence ledger** | **not_run** — thin slice; optional at **`plan-close-out`** |
+| `dae.crap_threshold` | **30** — CRAP adjunct inactive (CITDP has no `diff_scoped_crap`) |
+| BBCE | **not_applicable** |
+| `tied_gate_check` `close_out` | **allowed: true** |
+| `tied_validate_consistency` | **ok: true** |
 
 ## Gates (this session)
 
 | Phase | Result |
 | --- | --- |
-| `tied_gate_check` `pre_implementation` | **allowed: true** |
-| `tied_gate_check` `verification` | **allowed: true** |
-| `tied_validate_consistency` | **ok: true** |
+| `tied_gate_check` `pre_implementation` | **allowed: true** (build-plan) |
+| `tied_gate_check` `verification` | **allowed: true** (build-plan) |
+| `tied_gate_check` `close_out` | **allowed: true** (plan-close-out) |
+| `run-close-out-gates.mjs` | **merged_decision.allowed=true** |
 
 ## Evidence index
 
+- [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json)
+- [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json)
+- [not-applicable-receipt.v1.json](./not-applicable-receipt.v1.json)
+- [verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json)
 - [verification-gate-evidence.md](./verification-gate-evidence.md)
 - [unit-test-green-evidence.md](./unit-test-green-evidence.md)
 - [sync-tied-stack-evidence.md](./sync-tied-stack-evidence.md)
 - [translate-sponsor-intent-evidence.md](./translate-sponsor-intent-evidence.md)
 - [PLAN.md](../PLAN.md)
 - [checklist-tracker.yaml](../checklist-tracker.yaml)
+
+## Gitignore close-out hygiene
+
+**N/A** — no new ephemeral patterns; existing `working/` and gate receipt conventions cover local `quality-manifest/` command transcripts.
 
 ## Do not
 
@@ -49,13 +65,11 @@
 
 ## Sponsor next steps
 
-1. **Git commit** — large unstaged tree (Phases **4–5**, indexes, CHANGELOG); no commit this session unless requested.
-2. Optional **`plan-close-out`** on **REQ-TIED_CLIENT_DEVOPS_APPENDIX** for envelope-blocking parity (like Phases **2–3**).
-3. Optional Kaizen **`tied_feedback_analysis_digest`** on **`fb-mvclklsa-t5gzbo`** when promoting to Loop 3 (separate from doc compose).
-4. Optional matrix row “PR-centric review” — still **deferred** per comparison doc.
+1. ~~**Git commit**~~ **Done** — traceable-commit close-out evidence + CHANGELOG (2026-10-17).
+2. ~~Optional umbrella close-out for **`PLAN-CLAUDE-REVIEW-FEEDBACK-MCP`**~~ **Done** — `run_id=close-out-2026-10-17-plan-claude-review-feedback-mcp` (`merged_decision.allowed=true`).
 
 ## Parent program pointer
 
-Claude outreach compose track: [`PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/session-handoff.md`](../../PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/session-handoff.md) (Phases **1–5** complete on doc evidence).
+Claude outreach compose track: [`PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/session-handoff.md`](../../PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/session-handoff.md) (Phase **5** + umbrella PLAN machine close-out **pass**).
 
 Kaizen program remains **`EXIT`** — do not confuse with comparison Phase numbers: [`PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml`](../../PLAN-TIED-KAIZEN-FEEDBACK-LOOP/kaizen-program-execution-checklist.yaml).

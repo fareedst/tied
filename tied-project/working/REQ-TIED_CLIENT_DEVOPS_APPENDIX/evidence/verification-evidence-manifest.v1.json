@@ -1,0 +1,54 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-2026-10-17-client-devops-appendix",
+  "commit": "working-tree",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 108,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "CITDP quality profile matrix",
+      "evidence_method": "command",
+      "command_or_test": "client-devops-integration-appendix-doc.test.mjs",
+      "threshold": "test green",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_CLIENT_DEVOPS_APPENDIX",
+    "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  ],
+  "proof_boundaries": [
+    "client_owned_ci_not_tied_core",
+    "documentation_and_template_only"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  },
+  "diff_scoped_crap_hook": {
+    "skipped": true,
+    "reason": "diff_scoped_crap_disabled"
+  }
+}

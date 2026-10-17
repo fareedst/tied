@@ -2,19 +2,28 @@ copy_hygiene: "execution_evidence.request = REQ-TIED_CLIENT_DEVOPS_APPENDIX; Cla
 description: "Tracker for client DevOps integration appendix."
 execution_evidence:
   close_out_evidence:
-    date: null
+    date: "2026-10-17"
     deferred: []
-    gates: {}
+    gates:
+      close_out: "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/request-evidence-envelope.v1.json"
+      verification: "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/request-evidence-envelope.v1.json"
+    master_checklist: "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/checklist-tracker.yaml"
   completed:
     - "change-definition"
+    - "gitignore-close-out-hygiene"
     - "impact-discovery"
+    - "persist-citdp-record"
     - "risk-assessment"
     - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
     - "sync-tied-stack"
     - "test-strategy"
+    - "traceable-commit"
     - "translate-sponsor-intent"
     - "unit-test-green"
     - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/request-evidence-envelope.v1.json"
   request: "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
 record_identity:
   change_request_id: "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
@@ -31,54 +40,138 @@ risk_snapshot:
 steps:
   - disposition: "completed"
     evidence_refs:
+      - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
       - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/translate-sponsor-intent-evidence.md"
     slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
     slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/vocab/feedback-to-tied.md"
+      - "tied-bundle/docs/client-devops-integration-appendix.md"
     slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-bundle/docs/client-devops-integration-appendix.md"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
     slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+      - "tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
     slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
+      status: "completed"
   - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/not-applicable-receipt.v1.json"
     policy: "minimal-depth-no-inquiry"
     rationale: "Doc-only Phase 5 appendix; minimal depth."
     slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
   - disposition: "not_applicable"
     evidence_refs:
       - "tied-project/implementation-decisions/IMPL-TIED_CLIENT_DEVOPS_APPENDIX-pseudocode.md"
     policy: "doc-only-no-runtime-pseudocode"
     slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_CLIENT_DEVOPS_APPENDIX-pseudocode.md"
+      status: "not_applicable"
   - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/session-bootstrap-evidence.md"
     slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/session-bootstrap-evidence.md"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/unit-test-green-evidence.md"
+      - "tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
     slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
+      - "tied-project/requirements/REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
       - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/sync-tied-stack-evidence.md"
     slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "CHANGELOG.md"
-    slug: "user-facing-release-notes"
-  - disposition: "completed"
-    evidence_refs:
-      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/verification-gate-evidence.md"
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/closeout-run-close-out-gates.json"
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/verification-evidence-manifest.v1.json"
     slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
   - disposition: "completed"
     evidence_refs:
       - "tied-project/citdp/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
     slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - ".gitignore"
+    policy: "plan-close-out-no-git-read"
+    rationale: "No new ephemeral patterns required; existing working/ and gate blocks cover local receipts."
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - ".gitignore"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/closeout-run-close-out-gates.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/traceable-commit-evidence.md"
+    slug: "traceable-commit"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/traceable-commit-evidence.md"
+      status: "completed"

@@ -6,7 +6,7 @@
 | **Depth** | `profile_depth` / `depth_tier`: **minimal** · `gate_policy`: **advisory** |
 | **Profiles** | `research_profile`: read-only · `assurance_profile`: baseline-functional · `eligibility_triggers_matched`: [] |
 | **Source** | [Claude Code team code review × TIED](../../../docs/comparisons/claude-code-team-code-review-vs-tied.md) |
-| **Status** | Implemented (feedback appended); refine-plan **phase 3** (DAE + Plan) 2026-10-17 |
+| **Status** | Closed — feedback appended; comparison Phases **1–5** compose; machine **`close_out`** **pass** 2026-10-17 |
 | **Feedback id** | `fb-mvclklsa-t5gzbo` |
 
 ---
@@ -95,15 +95,24 @@ Comparison doc [§7 phased table](../../../docs/comparisons/claude-code-team-cod
 
 ---
 
+## Plan process tools (plan-close-out — DAE + gates)
+
+| Check | Result |
+| --- | --- |
+| `dae.crap_threshold` | **30** — CRAP adjunct inactive (CITDP has no `diff_scoped_crap`) |
+| BBCE | **not_applicable** |
+| `tied_gate_check` `close_out` | **allowed: true** |
+| `tied_validate_consistency` | **ok: true** |
+
 ## Completion signals (sponsor handoff)
 
 | Signal | Status |
 | --- | --- |
-| **Machine close-out** | **not_run** — PLAN-token local feedback; no `request_evidence_envelope_validate` or `close_out` gate required for append scope. Verification gate **allowed** at minimal depth. |
-| **Process contract** | **pass** — Tracker slugs through `verification-gate` **completed**; export confirms entry id. |
-| **Adherence ledger** | **not_run** — thin PLAN scope; no reconcile required before optional commit. |
+| **Machine close-out** | **pass** — `run_id=close-out-2026-10-17-plan-claude-review-feedback-mcp`; gate + envelope blocking gaps **0** ([`evidence/closeout-run-close-out-gates.json`](./evidence/closeout-run-close-out-gates.json)) |
+| **Process contract** | **pass** — dual-write tracker; verification manifest **n/a** (MCP tool-only CITDP) |
+| **Adherence ledger** | **pass** — reconcile band **B** / `thin_ledger` (minimal umbrella PLAN) |
 
-**Remaining:** Sponsor decision on git commit for Phases **1–5** deliverables + working folders (see [`evidence/session-handoff.md`](./evidence/session-handoff.md)).
+Handoff: [`evidence/session-handoff.md`](./evidence/session-handoff.md).
 
 ---
 

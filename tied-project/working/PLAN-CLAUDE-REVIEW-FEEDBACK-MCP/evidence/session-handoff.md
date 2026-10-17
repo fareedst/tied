@@ -9,7 +9,7 @@
 | **Feedback store** | **`fb-mvclklsa-t5gzbo`** in [`tied-project/feedback.yaml`](../../../feedback.yaml) (committed earlier; **`tied_feedback_add`** duplicate guard **on**) |
 | **LEAP bridge** | **`lp-2026-10-17T16-41-21-621Z-441a8fc5136b`** — **`applied`** |
 | **Comparison Phases 1–5** | **Implemented** (methodology docs + REQ/ARCH/IMPL per phase) |
-| **PLAN-token close-out** | Machine **`close_out`** **not_run** (append-only PLAN scope) |
+| **PLAN-token close-out** | Machine **`close_out`** **pass** (2026-10-17) |
 
 ## Phase map (Claude comparison §7)
 
@@ -34,9 +34,15 @@
 
 | Signal | Status |
 | --- | --- |
-| **Machine close-out** | **not_run** |
-| **Process contract** | **pass** for feedback append; Phases **1–5** doc deliverables on disk (uncommitted batch) |
-| **Adherence ledger** | **not_run** |
+| **Machine close-out** | **pass** — gate `close_out` `allowed=true`; envelope validate `fail_on_error_gaps=true` `blocking_gaps=0`; envelope path=`tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/request-evidence-envelope.v1.json`; summary=[`closeout-run-close-out-gates.json`](./closeout-run-close-out-gates.json) (`run_id=close-out-2026-10-17-plan-claude-review-feedback-mcp`, `merged_decision.allowed=true`) |
+| **Process contract** | **pass** — tracker dual-write through `sub-close-out-evidence-sync`; manifest **n/a** (CITDP MCP tool commands only; no argv collect); PSA Layer C **n/a**; profile **minimal** / advisory |
+| **Adherence ledger** | **pass** — reconcile `process_grade` band **B** ([`closeout-run-close-out-gates.json`](./closeout-run-close-out-gates.json)); `thin_ledger` + `legacy_no_adherence_chain` (expected at minimal PLAN scope) |
+
+## Evidence index (close-out)
+
+- [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json)
+- [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json)
+- [not-applicable-receipt.v1.json](./not-applicable-receipt.v1.json)
 
 ## Do not
 
@@ -55,8 +61,8 @@
 
 ## Sponsor next steps
 
-1. ~~**Commit**~~ **Done** — push when sponsor asks (`main` ahead 1; `git log -1`).
-2. Optional **`plan-close-out`** per phase REQ for full envelope parity (Phase **5** close-out **not_run** yet).
+1. **Commit** — traceable-commit this session (close-out evidence slice); push when sponsor asks.
+2. ~~Optional **`plan-close-out`** per phase REQ~~ Phases **1–5** REQ close-outs **pass** where run; umbrella PLAN token close-out **pass** (2026-10-17).
 3. Kaizen store loop on **`fb-mvclklsa-t5gzbo`** **Done** (2026-10-17) — digest + bridge + **`mle-claude-compose-20261017-001`**; pilot [`kaizen-feedback-pilot-report-fb-mvclklsa.v1.json`](./kaizen-feedback-pilot-report-fb-mvclklsa.v1.json); outcome **`inconclusive`** (`oo-mvcz428b-h50pjv`) via [`kaizen-outcome-record-result-fb-mvclklsa.v1.json`](./kaizen-outcome-record-result-fb-mvclklsa.v1.json) (compose + pilot evidence; effectiveness **not measured**).
 4. ~~Deferred: methodology-composition-matrix row for PR-centric review.~~ **Done** — [methodology-composition-matrix.md §2 row 11](../../../../docs/comparisons/methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks) (2026-10-17).
 

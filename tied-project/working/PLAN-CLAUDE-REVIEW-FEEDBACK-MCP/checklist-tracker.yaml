@@ -1,36 +1,136 @@
+copy_hygiene: "execution_evidence.request = PLAN-CLAUDE-REVIEW-FEEDBACK-MCP; umbrella compose + feedback store."
+description: "Tracker for Claude comparison feedback MCP append and compose program close-out."
 execution_evidence:
+  close_out_evidence:
+    date: "2026-10-17"
+    deferred: []
+    gates:
+      close_out: "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/request-evidence-envelope.v1.json"
+      verification: "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/request-evidence-envelope.v1.json"
+    master_checklist: "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "sub-close-out-evidence-sync"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/request-evidence-envelope.v1.json"
   request: "PLAN-CLAUDE-REVIEW-FEEDBACK-MCP"
+record_identity:
+  change_request_id: "PLAN-CLAUDE-REVIEW-FEEDBACK-MCP"
+  citdp_path: "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-17"
+  req_token: "PLAN-CLAUDE-REVIEW-FEEDBACK-MCP"
+  title: "Claude Code comparison feedback + compose umbrella"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
 steps:
-  - slug: "translate-sponsor-intent"
-    disposition: "completed"
+  - disposition: "completed"
     evidence_refs:
       - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
-  - slug: "change-definition"
-    disposition: "completed"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
-  - slug: "impact-discovery"
-    disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/vocab/feedback-to-tied.md"
-  - slug: "risk-assessment"
-    disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-project/vocab/feedback-to-tied.md"
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
-  - slug: "test-strategy"
-    disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
-  - slug: "sub-adversarial-inquiry-pass"
-    disposition: "not_applicable"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP.yaml"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/not-applicable-receipt.v1.json"
     policy: "minimal-depth-no-inquiry"
     rationale: "Local feedback append; minimal depth; no integrated inquiry activation."
-  - slug: "gate-pseudocode-validation"
-    disposition: "not_applicable"
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "not_applicable"
     policy: "no-impl-pseudocode-change"
-    rationale: "No IMPL essence_pseudocode or production code mutation in scope."
-  - slug: "verification-gate"
-    disposition: "completed"
+    rationale: "No IMPL essence_pseudocode or production code mutation in PLAN-token scope."
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
     evidence_refs:
-      - "tied-project/feedback.yaml"
       - "fb-mvclklsa-t5gzbo"
+      - "tied-project/feedback.yaml"
+      - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/closeout-run-close-out-gates.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - ".gitignore"
+    policy: "plan-close-out-no-git-read"
+    rationale: "No new ephemeral patterns; existing working/ and gate receipts cover local manifests."
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - ".gitignore"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/closeout-run-close-out-gates.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/traceable-commit-evidence.md"
+    slug: "traceable-commit"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/traceable-commit-evidence.md"
+      status: "completed"
