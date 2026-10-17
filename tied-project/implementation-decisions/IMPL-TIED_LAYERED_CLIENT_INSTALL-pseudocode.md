@@ -37,7 +37,7 @@ END PROCEDURE
 // How: Idempotent managed gitignore paths for gitignored install artifacts.
 PROCEDURE APPLY_GITIGNORE_MANAGED_BLOCK(projectRoot)
   PRE: projectRoot writable
-  POST: marker-delimited block lists mcp/skills/methodology/docs/manifest paths
+  POST: marker-delimited block lists mcp/skills/methodology/docs/manifest paths plus BASE_FILES agent loaders AGENTS.md and .cursorrules
   EFFECTS: append or replace TIED INSTALL MANAGED section in .gitignore
 END PROCEDURE
 

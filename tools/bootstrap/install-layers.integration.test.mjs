@@ -32,6 +32,8 @@ describe("install-layers integration [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     assert.ok(gi.includes(GITIGNORE_BLOCK_BEGIN));
     assert.ok(gi.includes("tied-bundle/"));
     assert.ok(gi.includes("skills/"));
+    assert.ok(gi.includes("AGENTS.md"));
+    assert.ok(gi.includes(".cursorrules"));
     assert.ok(!gi.includes(GITIGNORE_LOCAL_WORKING_BEGIN));
     assert.ok(!gi.includes(GITIGNORE_UNDIVIDED_MIRROR_BEGIN));
     assert.ok(!gi.includes("tied-project/"));

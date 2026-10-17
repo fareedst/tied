@@ -15,3 +15,4 @@ ARCH-TIED_LAYERED_CLIENT_INSTALL:
         - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
       requirements:
         - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+  description: "Separates committed db layer from gitignored mcp/skills/methodology layers; create-if-absent BASE_FILES agent loaders (AGENTS.md, .cursorrules) remain local-only via INSTALL MANAGED gitignore. Stub contract preserves skill front matter and store paths. Skills layer uses skills-linked.mjs (linked stubs vs full copy); methodology-view.mjs resolves bundle paths for linked MCP/verify. Install shell shims target tied-install-dispatch.mjs as the single Node entry."

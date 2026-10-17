@@ -1,0 +1,78 @@
+copy_hygiene: "Slice for ignore-generated-client-guides plan; cleared inherited close-out evidence."
+depth_tier: "minimal"
+execution_evidence:
+  completed: []
+  envelope_path: "working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_SETUP"
+gate_policy: "advisory"
+profile_depth: "minimal"
+request: "REQ-TIED_SETUP"
+source_plan: "/Users/fareed/.cursor/plans/ignore_generated_client_guides_52754496.plan.md"
+status: "close_out_pending"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/docs/ai-principles.md"
+      - "tied-project/vocab/tied-methodology.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml#impact_analysis"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml#risk_analysis"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml#test_strategy"
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Bootstrap gitignore slice; profile_depth minimal."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_LAYERED_CLIENT_INSTALL-pseudocode.md"
+      - "tied-project/implementation-decisions/IMPL-TIED_TWO_FOLDER_LAYOUT-pseudocode.md"
+    slug: "catalog-pseudocode-contracts"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_LAYERED_CLIENT_INSTALL-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/layers/gitignore-block.test.mjs"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/layers/gitignore-block.test.mjs"
+      - "tools/bootstrap/install-layers.integration.test.mjs"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "command_evidence"
+        claimed_success: true
+        stdout_ref: "node --test tools/bootstrap/lib/layers/gitignore-block.test.mjs tools/bootstrap/install-layers.integration.test.mjs"
+        exit_code: 0
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
+    slug: "persist-citdp-record"
+  - disposition: "not_applicable"
+    policy: "no-new-gitignore-patterns"
+    rationale: "No repo-root .gitignore changes; working/** and evidence paths already covered by existing Ephemeral working block."
+    evidence_refs:
+      - ".gitignore"
+    slug: "gitignore-close-out-hygiene"
+  - disposition: "pending"
+    slug: "traceable-commit"

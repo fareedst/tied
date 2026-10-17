@@ -48,6 +48,8 @@ REQ-TIED_SETUP:
       metric: "tools/bootstrap/manifest.json supplies DOCS_TO_COPY, skill dirs, and verify artifact paths"
     - criterion: "Bootstrap MCP enable resolves Cursor agent CLI via CURSOR_CLI_NAME default agent with TIED_CURSOR_AGENT_CMD override"
       metric: "resolveCursorAgentCli behavior covered in mcp-server/src/e2e/new-tied-client.test.ts"
+    - criterion: "Client INSTALL MANAGED gitignore excludes create-if-absent BASE_FILES agent loaders from factory git init"
+      metric: "GITIGNORE_MANAGED_PATHS lists AGENTS.md and .cursorrules; gitignore-block and install-layers integration tests green"
     - criterion: "copy_files --merge-vocab adds absent client glossary basenames without overwriting existing client vocabulary"
       metric: "Existing client glossary contents remain unchanged while missing canonical client-facing glossaries are added"
     - criterion: "copy_files installs the canonical prompt-type skill bundle into client .cursor/skills/ and does not create client .cursor/agents/ wrappers"

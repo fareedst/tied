@@ -1,0 +1,25 @@
+{
+  "run_id": "close-out-ignore-generated-guides-2026-10-16",
+  "request_token": "REQ-TIED_SETUP",
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "path": "tied-project/working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  },
+  "reconcile": {
+    "process_grade": {
+      "band": "A",
+      "score": 94
+    }
+  },
+  "citdp": "tied-project/citdp/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml",
+  "tracker": "tied-project/working/REQ-TIED_SETUP/ignore-generated-client-guides-tracker.yaml"
+}

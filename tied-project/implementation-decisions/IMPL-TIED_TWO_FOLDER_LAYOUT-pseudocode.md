@@ -64,7 +64,7 @@ END PROCEDURE
 // How: Gitignore v2 — tied-bundle/, harness paths, optional repo-root skills/; client profile strips legacy LOCAL WORKING blocks.
 PROCEDURE APPLY_GITIGNORE_MANAGED_BLOCK(projectRoot)
   PRE: projectRoot writable
-  POST: INSTALL MANAGED block only; no LOCAL WORKING or UNDIVIDED STORE MIRROR; no tied-project/ entry
+  POST: INSTALL MANAGED block only; no LOCAL WORKING or UNDIVIDED STORE MIRROR; no tied-project/ entry; includes AGENTS.md and .cursorrules for create-if-absent BASE_FILES
   EFFECTS: replaces v1 paths; mergeLocalWorkingGitignoreBlock with profile client removes legacy blocks
 END PROCEDURE
 

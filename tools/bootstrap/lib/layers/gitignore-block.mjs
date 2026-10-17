@@ -30,6 +30,8 @@ export const GITIGNORE_MANAGED_PATHS = [
   "skills/",
   `${BUNDLE_DIR_NAME}/`,
   "CLAUDE.md",
+  "AGENTS.md",
+  ".cursorrules",
   ".cursor/hooks.json",
   ".claude/hooks/",
   ".claude/settings.json",

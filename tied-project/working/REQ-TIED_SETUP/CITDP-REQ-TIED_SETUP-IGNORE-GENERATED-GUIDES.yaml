@@ -1,0 +1,53 @@
+CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES:
+  change_definition:
+    current_behavior: "GITIGNORE_MANAGED_PATHS ignores MCP/skills/bundle/CLAUDE harness paths only; AGENTS.md and .cursorrules from BASE_FILES remain trackable after git init in factory clients."
+    desired_behavior: "INSTALL MANAGED v2 block lists AGENTS.md and .cursorrules; git check-ignore succeeds; bootstrap unit/integration tests green."
+    non_goals:
+      - "Store applyStoreGitignoreProfile changes"
+      - "tied-project/config.yaml or methodology corpus git policy"
+    success_criteria:
+      - "Fresh db-layer install .gitignore contains AGENTS.md and .cursorrules inside managed block"
+      - "writeGitignoreBlock idempotent"
+    unchanged_behavior:
+      - "Brownfield tracked AGENTS.md unchanged until operator removes from index"
+      - "GITIGNORE_BLOCK_VERSION remains 2"
+  impact_analysis:
+    blast_radius: "All clients on refresh/migrate invoking writeGitignoreBlock"
+    modules_or_boundaries: "tools/bootstrap/lib/layers/gitignore-block.mjs, install db layer"
+    tied_tokens_affected:
+      - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+      - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+      - "IMPL-TIED_TWO_FOLDER_LAYOUT"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+  profile:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "AGENTS.md listed in block but negation rule elsewhere un-ignores it"
+        - "Paths use wrong casing so git check-ignore fails on case-sensitive filesystems"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "gitignore-block.test.mjs loops GITIGNORE_MANAGED_PATHS — missing entries fail before integration"
+      evidence_references:
+        - "tools/bootstrap/install-layers.integration.test.mjs"
+        - "tools/bootstrap/lib/layers/gitignore-block.mjs"
+        - "tools/bootstrap/lib/layers/gitignore-block.test.mjs"
+      falsification_questions:
+        - "Does idempotent rewrite drop new paths on second writeGitignoreBlock?"
+        - "Does the managed block omit AGENTS.md while tests only assert skills/?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      rationale: "Bootstrap gitignore path list only; no auth, network, or new persistence."
+    risks:
+      - id: "tracked-agents-md-brownfield"
+        mitigation: "Ignore rules apply on next install; already-tracked files stay until git rm --cached"
+        reversibility: "reversible"
+        severity: "low"
+  test_strategy:
+    integration:
+      - "install-layers.integration.test.mjs db layer .gitignore content"
+    unit:
+      - "gitignore-block.test.mjs asserts paths and git check-ignore for AGENTS.md and .cursorrules"

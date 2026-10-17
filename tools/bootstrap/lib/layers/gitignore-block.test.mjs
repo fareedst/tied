@@ -58,3 +58,12 @@ test("managed skills/ entry is honored by git check-ignore", () => {
   execSync("git init", { cwd: dir, stdio: "ignore" });
   execSync("git check-ignore skills/tied-yaml", { cwd: dir });
 });
+
+test("managed BASE_FILES agent loaders are honored by git check-ignore [REQ-TIED_SETUP]", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-gitignore-agents-"));
+  writeGitignoreBlock(dir);
+  fs.writeFileSync(path.join(dir, "AGENTS.md"), "# agents\n");
+  fs.writeFileSync(path.join(dir, ".cursorrules"), "# rules\n");
+  execSync("git init", { cwd: dir, stdio: "ignore" });
+  execSync("git check-ignore AGENTS.md .cursorrules", { cwd: dir });
+});
