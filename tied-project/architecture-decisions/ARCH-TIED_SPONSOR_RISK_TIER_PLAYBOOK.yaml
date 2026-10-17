@@ -1,0 +1,22 @@
+ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  consequences:
+    negative:
+      - "Informal tiers may be misread as auto-merge policy without proof boundary"
+    positive:
+      - "Clients receive playbook on tied-install refresh"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    requirements:
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  decision: "Canonical playbook lives in tied-bundle/docs/sponsor-risk-tier-playbook.md; client-development-index Quick read; bootstrap test; cross-link pre-handoff charter; no runtime module."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Phase 2 doc playbook close-out"
+  name: "Sponsor risk-tier playbook documentation topology"
+  status: "Implemented"

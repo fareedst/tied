@@ -1,0 +1,40 @@
+REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  category: "Methodology"
+  description: "Advisory methodology playbook relating assurance profiles and CITDP depth_tier to human review attention; distinct from pre-handoff executable checks."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+      reason: "Claude comparison Phase 2 from applied LEAP lp-2026-10-17T16-41-21-621Z-441a8fc5136b"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Phase 2 doc playbook; verification and close_out gates allowed"
+  name: "Sponsor risk-tier playbook (Claude comparison Phase 2)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Single installable playbook refreshed via tied-install"
+    problems_solved:
+      - "Risk-scaled human touchpoints scattered across comparison and vocab"
+    why: "Compose external low/med/high review tiers with TIED assurance profiles without auto-approve costly choices."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md links playbook"
+      id: "SC-INDEX-LINK"
+    - criterion: "sponsor-risk-tier-playbook-doc.test.mjs passes"
+      id: "SC-PLAYBOOK-TEST"
+    - criterion: "sponsor-risk-tier-playbook.md includes proof boundary and review attention map"
+      id: "SC-PLAYBOOK-DOC"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    implementation:
+      - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"

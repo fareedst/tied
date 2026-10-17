@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP](../requirements/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml) · [ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP](../architecture-decisions/ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml) · [IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP](../implementation-decisions/IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP.yaml)
 
-**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`decision-copilot.md`](decision-copilot.md) · [`../docs/sponsor-agent-relationship.md`](../../tied-bundle/docs/sponsor-agent-relationship.md)
+**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`decision-copilot.md`](decision-copilot.md) · [`../docs/sponsor-agent-relationship.md`](../../tied-bundle/docs/sponsor-agent-relationship.md) · [**sponsor risk-tier playbook**](../../tied-bundle/docs/sponsor-risk-tier-playbook.md) ([REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK](../requirements/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml)) — advisory map from assurance profile / `depth_tier` to reviewer attention (Phase 2; not auto-merge)
 
 ---
 

@@ -1,0 +1,18 @@
+IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  approach: "Edit tied-bundle/docs/sponsor-risk-tier-playbook.md and client-development-index link; verify with sponsor-risk-tier-playbook-doc.test.mjs."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    requirements:
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK-pseudocode.md"
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Playbook doc + bootstrap test verified at close-out"
+  name: "Sponsor risk-tier playbook doc maintenance"
+  status: "Implemented"

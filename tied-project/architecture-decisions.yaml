@@ -2293,6 +2293,15 @@ ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY.yaml"
   name: "Sponsor questions boundary"
   status: "Planned"
+ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    requirements:
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  name: "Sponsor risk-tier playbook documentation topology"
+  status: "Implemented"
 ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
   description: "Store git tracks tied-bundle corpus except whole-root working/ and install.json; clients keep INSTALL MANAGED whole tied-bundle/ ignore; runtime MCP writes unchanged under tied-bundle/working/."
   detail_file: "architecture-decisions/ARCH-TIED_STORE_BUNDLE_GIT_POLICY.yaml"

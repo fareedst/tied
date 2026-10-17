@@ -2895,6 +2895,32 @@ REQ-TIED_SPONSOR_QUESTIONS:
   name: "Sponsor questions MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  category: "Methodology"
+  description: "Advisory playbook mapping assurance profiles and depth_tier to sponsor review attention; doc-only."
+  detail_file: "requirements/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  name: "Sponsor risk-tier playbook (Claude comparison Phase 2)"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md links playbook"
+      id: "SC-INDEX-LINK"
+    - criterion: "sponsor-risk-tier-playbook-doc.test.mjs passes"
+      id: "SC-PLAYBOOK-TEST"
+    - criterion: "sponsor-risk-tier-playbook.md includes proof boundary and review attention map"
+      id: "SC-PLAYBOOK-DOC"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    implementation:
+      - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
 REQ-TIED_STORE_BUNDLE_GIT_POLICY:
   category: "Infrastructure"
   description: "Align TIED store repo git policy with two-folder model — track tied-bundle corpus except working/ and install.json; remove client-style whole-tree tied-bundle/ ignore; migrate tracked local working to fixtures or committed project evidence."

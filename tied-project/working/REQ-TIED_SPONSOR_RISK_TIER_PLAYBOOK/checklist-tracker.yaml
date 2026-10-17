@@ -1,0 +1,167 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK; Phase 2 doc-only playbook."
+description: "Minimal tracker for sponsor risk-tier playbook (Claude comparison Phase 2)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-10-17"
+    deferred: []
+    gates:
+      close_out: "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/request-evidence-envelope.v1.json"
+      verification: "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/request-evidence-envelope.v1.json"
+    master_checklist: "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+record_identity:
+  change_request_id: "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  citdp_path: "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-17"
+  req_token: "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  title: "Sponsor risk-tier playbook (Claude comparison Phase 2)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/PLAN.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/docs/sponsor-risk-tier-playbook.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-bundle/docs/sponsor-risk-tier-playbook.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/sponsor-risk-tier-playbook-doc.test.mjs"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/sponsor-risk-tier-playbook-doc.test.mjs"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Doc-only Phase 2 playbook; minimal depth."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK-pseudocode.md"
+    policy: "doc-only-no-runtime-pseudocode"
+    rationale: "IMPL sidecar documents doc paths only."
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK-pseudocode.md"
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/docs/sponsor-risk-tier-playbook.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "tied-bundle/docs/sponsor-risk-tier-playbook.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/sponsor-risk-tier-playbook-doc.test.mjs"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/sponsor-risk-tier-playbook-doc.test.mjs"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/verification-evidence-manifest.v1.json"
+      - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/closeout-run-close-out-gates.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+      - "tied-project/architecture-decisions/ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+      - "tied-project/implementation-decisions/IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - ".gitignore"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - ".gitignore"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/closeout-run-close-out-gates.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/closeout-run-close-out-gates.json"
+      status: "completed"

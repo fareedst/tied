@@ -2752,6 +2752,15 @@ IMPL-TIED_SPONSOR_QUESTIONS:
   detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_QUESTIONS.yaml"
   name: "Sponsor questions implementation"
   status: "Active"
+IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    requirements:
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  name: "Sponsor risk-tier playbook doc maintenance"
+  status: "Implemented"
 IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
   description: "applyStoreGitignoreProfile, migrate tracked local working, assert zero tracked tied-bundle/working; collapseLegacyWorkingGitignorePatterns uses undividedMirror false."
   detail_file: "implementation-decisions/IMPL-TIED_STORE_BUNDLE_GIT_POLICY.yaml"

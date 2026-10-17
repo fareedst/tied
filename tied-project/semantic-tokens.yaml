@@ -1073,6 +1073,16 @@ ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY:
   name: "Sponsor questions boundary"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  cross_references:
+    - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  description: "Playbook under tied-bundle/docs with index link and bootstrap test"
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  name: "Sponsor risk-tier playbook documentation topology"
+  source_index: "architecture-decisions.yaml"
+  status: "Implemented"
+  type: "ARCH"
 ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
   cross_references: []
   description: "Store commits tied-bundle corpus; clients gitignore whole tree"
@@ -2412,6 +2422,16 @@ IMPL-TIED_SPONSOR_QUESTIONS:
   description: "Sponsor questions module"
   name: "Sponsor questions implementation"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  cross_references:
+    - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  description: "Maintain sponsor-risk-tier-playbook.md and bootstrap test"
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  name: "Sponsor risk-tier playbook doc maintenance"
+  source_index: "implementation-decisions.yaml"
+  status: "Implemented"
   type: "IMPL"
 IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
   cross_references: []
@@ -3980,6 +4000,17 @@ REQ-TIED_SPONSOR_QUESTIONS:
   description: "Costly-choice sponsor question extraction"
   name: "Sponsor questions MCP"
   status: "Active"
+  type: "REQ"
+REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  cross_references:
+    - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  description: "Advisory mapping of assurance profiles and depth_tier to sponsor attention"
+  detail_file: "requirements/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  name: "Sponsor risk-tier playbook (Claude comparison Phase 2)"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_STORE_BUNDLE_GIT_POLICY:
   cross_references: []

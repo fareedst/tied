@@ -1,0 +1,80 @@
+CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
+  change_definition:
+    current_behavior: "Risk-scaled human touchpoints are described in comparison docs and sponsor–agent vocabulary but not as a single installable playbook tying assurance profiles and depth_tier to reviewer attention."
+    desired_behavior: "One methodology playbook under tied-bundle/docs with advisory mapping tables, hinge-field reminders, and cross-links to Phase 1 pre-handoff charter; no new MCP authority."
+    non_goals:
+      - "Automated risk classification or merge automation"
+      - "Mandatory PR-bot or zero-human merge paths"
+      - "Phases 3-5 of Claude comparison"
+    success_criteria:
+      - "Bootstrap test asserts playbook markers (SC-PLAYBOOK-TEST)"
+      - "CITDP persisted under tied-project/citdp/; REQ/ARCH/IMPL Implemented"
+      - "client-development-index.md links the playbook; Phase 1 charter cross-linked"
+      - "pre_implementation gate allowed; verification and close_out gates allowed at close-out"
+      - "sponsor-risk-tier-playbook.md exists with proof boundary and review attention map"
+    unchanged_behavior: "Checklist gates, tied_verify, DAE charter opt-in, and consequence ladder semantics unchanged."
+  evidence:
+    commands:
+      - "node --test sponsor-risk-tier-playbook-doc.test.mjs"
+      - "run-close-out-gates.mjs --phase verification|close_out --envelope-blocking"
+      - "tied_checklist_gate_validate pre_implementation"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "documentation_and_install_surface_only"
+      - "does_not_prove_sponsor_compliance_in_client_repos"
+  impact_analysis:
+    impl_inventory_notes: "Doc file + index link + one bootstrap test; IMPL pseudo-code sidecar for doc paths only."
+    modules_or_boundaries: "tied-bundle/docs/ (methodology corpus refreshed by tied-install)."
+    tied_tokens_affected:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    tied_tokens_new:
+      - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+      - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  record_identity:
+    change_request_id: "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-17"
+    title: "Sponsor risk-tier playbook (Claude comparison Phase 2)"
+  risk_analysis:
+    abuse_cases:
+      - "Playbook read as mandatory auto-merge policy for low tier"
+      - "Playbook replaces integrated inquiry or gate receipts at high tier"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Playbook omits costly-choice non-auto-approve boundary."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Sponsors skip high-tier human review because prose lacks hinge-field table."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+        - "tied-bundle/docs/pre-handoff-verification-charter.md"
+      falsification_questions:
+        - "Does the playbook defer classifiers and MCP changes to future REQs?"
+        - "Is Phase 1 charter cross-linked as complementary?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Docs-only Loop 1 advisory mapping; no integrated inquiry triggers."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "sponsor-risk-tier-playbook-doc.test.mjs"
+        evidence_method: "unit test"
+        limitation: "Does not validate sponsor behavior in production."
+        owner: "agent"
+        rationale: "File presence and section markers."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    approach: "Doc contract test then content; no production MCP changes."
+    cases:
+      - "Client development index links playbook"
+      - "Playbook file exists under tied-bundle/docs"
+      - "tied_validate_consistency after token mint"

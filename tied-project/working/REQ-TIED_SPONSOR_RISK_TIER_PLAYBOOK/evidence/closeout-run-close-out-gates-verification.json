@@ -1,0 +1,42 @@
+{
+  "phase": "verification",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "close-out-2026-10-17-sponsor-risk-tier"
+  },
+  "reconcile": {
+    "ok": false,
+    "skipped": true
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/verification-evidence-manifest.v1.json"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}
