@@ -2659,6 +2659,31 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   name: "Reviewed operational feedback promotion"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  category: "Methodology"
+  description: "Short methodology guide for executable checks and evidence before PR/commit/handoff; documentation first with no new MCP authority."
+  detail_file: "requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  name: "Pre-handoff verification charter (Claude comparison Phase 1)"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  satisfaction_criteria:
+    - criterion: "Bootstrap test asserts charter section markers"
+      id: "SC-CHARTER-TEST"
+    - criterion: "Charter doc shipped under tied-bundle/docs with proof boundary and check list"
+      id: "SC-CHARTER-DOC"
+    - criterion: "Client development index links the charter"
+      id: "SC-INDEX-LINK"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    implementation:
+      - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
 REQ-TIED_PRIMARY_REPO_ONBOARDING:
   category: "Documentation"
   detail_file: "requirements/REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml"

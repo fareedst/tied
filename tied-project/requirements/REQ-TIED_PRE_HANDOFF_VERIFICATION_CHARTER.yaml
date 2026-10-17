@@ -1,0 +1,38 @@
+REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  category: "Methodology"
+  description: "Methodology documentation listing executable checks and evidence before PR/commit/agent handoff; distinct from opt-in DAE verification charter tooling."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Phase 1 doc charter; verification and close_out gates allowed"
+  name: "Pre-handoff verification charter (Claude comparison Phase 1)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Single charter refreshed to clients via tied-install"
+    problems_solved:
+      - "Pre-handoff norms scattered across AGENTS, index, and prompt-shared"
+    why: "Compose Anthropic-style pre-handoff verification norms without new MCP authority (comparison Phase 1)."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_DAE_VERIFICATION_CHARTER"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md links charter in Quick reads"
+      id: "SC-INDEX-LINK"
+    - criterion: "pre-handoff-charter-doc.test.mjs passes"
+      id: "SC-CHARTER-TEST"
+    - criterion: "pre-handoff-verification-charter.md includes proof boundary and executable checks"
+      id: "SC-CHARTER-DOC"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    implementation:
+      - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"

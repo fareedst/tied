@@ -1005,6 +1005,16 @@ ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
   source_index: "architecture-decisions.yaml"
   status: "Proposed"
   type: "ARCH"
+ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  cross_references:
+    - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  description: "Charter under tied-bundle/docs; index link; bootstrap test"
+  detail_file: "architecture-decisions/ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  name: "Pre-handoff verification charter documentation topology"
+  source_index: "architecture-decisions.yaml"
+  status: "Implemented"
+  type: "ARCH"
 ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
   cross_references:
     - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
@@ -2334,6 +2344,16 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
   name: "Node-only controlled runner implementation"
   source_index: "implementation-decisions.yaml"
   status: "Proposed"
+  type: "IMPL"
+IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  cross_references:
+    - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  description: "Edit charter doc and client-development-index; bootstrap test"
+  detail_file: "implementation-decisions/IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  name: "Pre-handoff verification charter doc maintenance"
+  source_index: "implementation-decisions.yaml"
+  status: "Implemented"
   type: "IMPL"
 IMPL-TIED_PRIMARY_REPO_README_CONTENT:
   cross_references:
@@ -3885,6 +3905,16 @@ REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   name: "Reviewed operational feedback promotion"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  cross_references:
+    - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  description: "Methodology doc for executable pre-handoff checks; no new MCP authority"
+  detail_file: "requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  name: "Pre-handoff verification charter (Claude comparison Phase 1)"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_PRIMARY_REPO_ONBOARDING:
   cross_references:

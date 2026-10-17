@@ -2607,6 +2607,15 @@ IMPL-TIED_NODE_TOOLCHAIN_DEFAULT:
   detail_file: "implementation-decisions/IMPL-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
   name: "Node-only controlled runner implementation"
   status: "Proposed"
+IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    requirements:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  detail_file: "implementation-decisions/IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  name: "Pre-handoff verification charter doc maintenance"
+  status: "Implemented"
 IMPL-TIED_PRIMARY_REPO_README_CONTENT:
   detail_file: "implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT.yaml"
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PRIMARY_REPO_README_CONTENT-pseudocode.md"

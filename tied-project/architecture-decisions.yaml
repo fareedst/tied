@@ -2182,6 +2182,15 @@ ARCH-TIED_NODE_TOOLCHAIN_DEFAULT:
   detail_file: "architecture-decisions/ARCH-TIED_NODE_TOOLCHAIN_DEFAULT.yaml"
   name: "Node-only controlled runner architecture"
   status: "Proposed"
+ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    requirements:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  detail_file: "architecture-decisions/ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  name: "Pre-handoff verification charter documentation topology"
+  status: "Implemented"
 ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
   detail_file: "architecture-decisions/ARCH-TIED_PRIMARY_REPO_README_STRUCTURE.yaml"
   name: "Primary repo README structure"

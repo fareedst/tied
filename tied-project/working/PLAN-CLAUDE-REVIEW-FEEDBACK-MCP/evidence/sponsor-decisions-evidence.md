@@ -11,4 +11,6 @@ Recorded from **`/unblock`** (ask-first session) **2026-10-17**.
 
 **Executed 2026-10-17:** `tied_leap_proposal_approve` on `lp-2026-10-17T16-41-21-621Z-441a8fc5136b` (`project_root`: `tied-project/`).
 
-**Not decided this session:** Which comparison **phase** (1–5) becomes the first REQ; machine close-out / envelope for PLAN token.
+**Phase 1 selected (2026-10-17):** **`plan-new-feature`** → **[REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER](../REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md)** (pre-handoff verification charter, doc-first).
+
+**Not decided:** Phases 2–5; machine close-out / envelope for PLAN token.

@@ -1,0 +1,167 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER; Phase 1 doc-only charter."
+description: "Minimal tracker for pre-handoff verification charter (Claude comparison Phase 1)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-10-17"
+    deferred: []
+    gates:
+      close_out: "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json"
+      verification: "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json"
+    master_checklist: "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+record_identity:
+  change_request_id: "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  citdp_path: "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-17"
+  req_token: "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  title: "Pre-handoff verification charter (Claude comparison Phase 1)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      - "tied-project/leap-proposals/queue.json"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/pre-handoff-charter-doc.test.mjs"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/pre-handoff-charter-doc.test.mjs"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Doc-only Phase 1 charter; minimal depth; no integrated inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER-pseudocode.md"
+    policy: "doc-only-no-runtime-pseudocode"
+    rationale: "IMPL sidecar documents doc paths only; no executable pseudo-code blocks."
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER-pseudocode.md"
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/docs/pre-handoff-verification-charter.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "tied-bundle/docs/pre-handoff-verification-charter.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/pre-handoff-charter-doc.test.mjs"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/pre-handoff-charter-doc.test.mjs"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/verification-evidence-manifest.v1.json"
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/closeout-run-close-out-gates.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+      - "tied-project/architecture-decisions/ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+      - "tied-project/implementation-decisions/IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - ".gitignore"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - ".gitignore"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/closeout-run-close-out-gates.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/closeout-run-close-out-gates.json"
+      status: "completed"

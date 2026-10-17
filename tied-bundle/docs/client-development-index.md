@@ -54,6 +54,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | **Build order** | [implementation-order.md](implementation-order.md) | One-page mandatory sequence (also inside **Processes** § `[PROC-TIED_DEV_CYCLE]`). |
 | **Working artifact placement** | [working-artifact-placement.md](working-artifact-placement.md) | Commit vs ignore: `tied-project/working/` vs `tied-bundle/working/` vs tooling scratch. |
 | **Sponsor–agent roles** | [sponsor-agent-relationship.md](sponsor-agent-relationship.md) | Consequence ladder, hinge fields, over-asking / instrumentalizing spot checks; pairs with **Vocabulary** row 5j. |
+| **Pre-handoff charter** | [pre-handoff-verification-charter.md](pre-handoff-verification-charter.md) | Before PR/commit/handoff: executable checks and evidence (Loop 1; doc-only—no new MCP authority). |
 
 ---
 

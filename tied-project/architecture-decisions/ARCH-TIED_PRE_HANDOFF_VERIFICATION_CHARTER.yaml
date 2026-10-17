@@ -1,0 +1,22 @@
+ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  consequences:
+    negative:
+      - "Store and client copies can drift until refresh"
+    positive:
+      - "Clients receive charter on tied-install refresh"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    requirements:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  decision: "Canonical charter lives in tied-bundle/docs/pre-handoff-verification-charter.md; client-development-index Quick reads link; bootstrap test guards section markers; no runtime module."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+    last_updated:
+      author: "plan-close-out"
+      date: "2026-10-17"
+      reason: "Phase 1 doc charter close-out"
+  name: "Pre-handoff verification charter documentation topology"
+  status: "Implemented"

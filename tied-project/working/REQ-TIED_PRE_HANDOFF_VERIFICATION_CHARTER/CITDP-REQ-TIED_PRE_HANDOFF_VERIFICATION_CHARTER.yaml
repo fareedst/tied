@@ -1,0 +1,77 @@
+CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
+  change_definition:
+    current_behavior: "Executable pre-PR/pre-commit norms are scattered across AGENTS.md, client development index, and prompt-shared completion signals; Claude comparison Phase 1 recommends a single pre-handoff charter (doc-first)."
+    desired_behavior: "One methodology charter doc under tied-bundle/docs with cross-links from client development index; operators have a checklist of executable checks and evidence before handoff without new MCP authority."
+    non_goals:
+      - "Extending REQ-TIED_DAE_VERIFICATION_CHARTER opt-in tooling"
+      - "Mandatory PR-bot or merge automation"
+      - "Phases 2-5 of Claude comparison"
+    success_criteria:
+      - "pre-handoff-verification-charter.md exists with proof boundary and check list sections"
+      - "client-development-index.md links the charter"
+      - "Bootstrap test asserts charter markers"
+      - "REQ/ARCH/IMPL Planned→Implemented with tied_validate_consistency pass"
+    unchanged_behavior: "Checklist gates, tied_verify, and DAE charter opt-in defaults unchanged."
+  evidence:
+    commands:
+      - "tied_gate_check pre_implementation"
+      - "node --test pre-handoff-charter-doc.test.mjs"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "documentation_and_install_surface_only"
+      - "does_not_prove_pr_review_effectiveness"
+  impact_analysis:
+    impl_inventory_notes: "Doc file + index link + one bootstrap test; optional IMPL pseudo-code sidecar for doc maintenance only."
+    modules_or_boundaries: "tied-bundle/docs/ (methodology corpus refreshed by tied-install)."
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  record_identity:
+    change_request_id: "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-17"
+    title: "Pre-handoff verification charter (Claude comparison Phase 1)"
+  risk_analysis:
+    abuse_cases:
+      - "Charter mistaken for new MCP gate authority"
+      - "Charter duplicates DAE verification charter scope"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Charter omits proof boundary and reads as mandatory merge policy."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Operators skip tests because charter is prose-only without executable check list."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+        - "tied-project/leap-proposals/queue.json"
+      falsification_questions:
+        - "Does the charter explicitly defer MCP/gate changes to future REQs?"
+        - "Is DAE opt-in charter cross-linked as separate?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Docs-only Loop 1 product-quality guidance; no integrated inquiry triggers."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "pre-handoff-charter-doc.test.mjs"
+        evidence_method: "unit test"
+        limitation: "Does not validate operator compliance in client repos."
+        owner: "agent"
+        rationale: "File presence and section markers."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    approach: "Doc contract test then content; no production MCP changes."
+    cases:
+      - "Charter file exists under tied-bundle/docs"
+      - "Client development index links charter"
+      - "tied_validate_consistency after token mint"
