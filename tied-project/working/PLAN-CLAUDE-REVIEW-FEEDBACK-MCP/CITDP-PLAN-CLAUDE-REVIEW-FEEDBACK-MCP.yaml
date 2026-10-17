@@ -3,24 +3,24 @@ CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP:
     current_behavior: "Comparison doc docs/comparisons/claude-code-team-code-review-vs-tied.md published with phases 1–3 compose status; tied-project/feedback.yaml holds one methodology_improvement entry (fb-mvclklsa-t5gzbo) appended via MCP; LEAP lp-2026-10-17T16-41-21-621Z-441a8fc5136b applied for phases 1–3 doc slices."
     desired_behavior: "One consolidated methodology_improvement entry appended via MCP tied_feedback_add with evidence links to the comparison doc; report_snippet returned for upstream triage."
     non_goals:
-      - "Minting REQ/ARCH/IMPL for Anthropic-style PR review layers"
       - "Behavior changes to mcp-server feedback module or checklist gates"
       - "Committing feedback.yaml unless sponsor requests"
       - "Matrix row for PR-centric review (deferred per REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX)"
+      - "Minting REQ/ARCH/IMPL for Anthropic-style PR review layers"
     success_criteria:
-      - "tied_feedback_add returns ok, id, created_at, report_snippet"
-      - "tied-project/feedback.yaml contains exactly one new methodology_improvement entry"
       - "pre_implementation and verification checklist gates allowed at minimal depth"
+      - "tied-project/feedback.yaml contains exactly one new methodology_improvement entry"
+      - "tied_feedback_add returns ok, id, created_at, report_snippet"
     unchanged_behavior: "[REQ-FEEDBACK_TO_TIED] appendEntry validation; Kaizen bridge eligibility unchanged; comparison doc remains outreach-only."
   evidence:
     commands:
       - "tied_config_get_base_path"
-      - "tied_gate_check phase pre_implementation and verification (tracker_path + citdp_path)"
       - "tied_feedback_add (once) and tied_feedback_export format json"
+      - "tied_gate_check phase pre_implementation and verification (tracker_path + citdp_path)"
       - "tied_jev_vocab_shadow refine-plan phase plan-process-tools (advisory; optional)"
     proof_boundaries:
-      - "local_feedback_store_only"
       - "does_not_prove_downstream_promotion_or_loop3_experiment"
+      - "local_feedback_store_only"
   impact_analysis:
     impl_inventory_notes: "No IMPL pseudo-code or production code mutation."
     modules_or_boundaries: "tied-project/feedback.yaml (project-owned store)."
@@ -36,13 +36,13 @@ CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP:
     title: "Record Claude Code comparison as methodology_improvement feedback"
   risk_analysis:
     abuse_cases:
-      - "Feedback body treated as enacted methodology policy without sponsor REQ"
       - "Anthropic-reported metrics copied as TIED targets without experiment denominators"
+      - "Feedback body treated as enacted methodology policy without sponsor REQ"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Empty description appended without gap list or phase boundaries."
         - "context omits evidence_links so digest cannot trace source doc."
+        - "Empty description appended without gap list or phase boundaries."
       depth_tier: "minimal"
       disconfirming_observations:
         - "Hand-edited feedback.yaml bypassing MCP canonical writer."
@@ -51,8 +51,8 @@ CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP:
         - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
         - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/PLAN.md"
       falsification_questions:
-        - "Does the entry preserve compose-don't-replace and explicit non-adoptions?"
         - "Are recommended phases labeled recommendations-only?"
+        - "Does the entry preserve compose-don't-replace and explicit non-adoptions?"
       gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null
@@ -64,15 +64,15 @@ CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP:
         attribute: "baseline-functional"
         command_or_test: "tied_feedback_export markdown after append"
         evidence_method: "MCP tool output"
+        evidence_ref: "fb-mvclklsa-t5gzbo"
         limitation: "Does not validate sponsor promotion or Kaizen bridge."
         owner: "agent"
         rationale: "Feedback store append with export confirmation."
         result: "pass"
-        evidence_ref: "fb-mvclklsa-t5gzbo"
         threshold: "export lists new entry id"
   test_strategy:
     approach: "Tool verification only; no RED tests."
     cases:
+      - "Export includes new entry title and type methodology_improvement"
       - "Gate pre_implementation allowed at minimal depth"
       - "tied_feedback_add succeeds on empty feedback store"
-      - "Export includes new entry title and type methodology_improvement"
