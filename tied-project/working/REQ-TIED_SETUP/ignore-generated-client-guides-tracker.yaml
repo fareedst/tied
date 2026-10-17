@@ -1,7 +1,27 @@
 copy_hygiene: "Slice for ignore-generated-client-guides plan; cleared inherited close-out evidence."
 depth_tier: "minimal"
 execution_evidence:
-  completed: []
+  close_out_evidence:
+    date: "2026-10-16"
+    gates:
+      close_out: "close-out-ignore-generated-guides-2026-10-16"
+    status: "complete"
+  completed:
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "sub-adversarial-inquiry-pass"
+    - "catalog-pseudocode-contracts"
+    - "gate-pseudocode-validation"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "verification-gate"
+    - "persist-citdp-record"
+    - "gitignore-close-out-hygiene"
+    - "traceable-commit"
   envelope_path: "working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json"
   request: "REQ-TIED_SETUP"
 gate_policy: "advisory"
@@ -25,11 +45,11 @@ steps:
     slug: "change-definition"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml#impact_analysis"
+      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
     slug: "impact-discovery"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml#risk_analysis"
+      - "tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
     slug: "risk-assessment"
   - disposition: "completed"
     evidence_refs:
@@ -79,25 +99,3 @@ steps:
       - kind: "file_path"
         path: "CHANGELOG.md"
     slug: "traceable-commit"
-execution_evidence:
-  completed:
-    - "session-bootstrap"
-    - "translate-sponsor-intent"
-    - "change-definition"
-    - "impact-discovery"
-    - "risk-assessment"
-    - "test-strategy"
-    - "sub-adversarial-inquiry-pass"
-    - "catalog-pseudocode-contracts"
-    - "gate-pseudocode-validation"
-    - "unit-test-red"
-    - "unit-test-green"
-    - "verification-gate"
-    - "persist-citdp-record"
-    - "gitignore-close-out-hygiene"
-    - "traceable-commit"
-  close_out_evidence:
-    date: "2026-10-16"
-    gates:
-      close_out: "close-out-ignore-generated-guides-2026-10-16"
-    status: "complete"
