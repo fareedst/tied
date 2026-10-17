@@ -1,0 +1,81 @@
+CITDP-REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  change_definition:
+    current_behavior: "Loop 3 incident/revert/false-positive guidance appears in comparison doc and review-convergence cross-refs—not as one installable evaluation-corpus guide."
+    desired_behavior: "One methodology guide under tied-bundle/docs, example evaluation-corpus rows template, client index link, and bootstrap doc test; no new MCP gate authority."
+    non_goals:
+      - "Automatic incident ingestion MCP or mandatory PR-bot evaluators"
+      - "Matrix row for PR-centric review"
+      - "Phase 5 client DevOps appendix"
+      - "Reopening closed QMM W6 or Batch 0-6 scope"
+    success_criteria:
+      - "CITDP persisted under tied-project/citdp/; REQ/ARCH/IMPL Implemented"
+      - "client-development-index.md Quick read links guide"
+      - "incident-revert-eval-corpus-doc.test.mjs green"
+      - "incident-revert-evaluation-corpus.md exists with proof boundary and case-kind sections"
+      - "pre_implementation, verification, and close_out gates allowed at minimal depth"
+    unchanged_behavior: "Checklist gates, tied_verify defaults, and Kaizen transport deferrals unchanged."
+  evidence:
+    commands:
+      - "node --test incident-revert-eval-corpus-doc.test.mjs"
+      - "run-close-out-gates.mjs --phase verification|close_out --envelope-blocking"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "documentation_and_template_only"
+      - "does_not_prove_production_incident_rates"
+  impact_analysis:
+    impl_inventory_notes: "Doc + template + index + bootstrap test; IMPL pseudo-code sidecar."
+    modules_or_boundaries: "tied-bundle/docs/ and tied-bundle/templates/ (methodology corpus)."
+    tied_tokens_affected:
+      - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+    tied_tokens_new:
+      - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+      - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+      - "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  record_identity:
+    change_request_id: "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-17"
+    title: "Incident/revert evaluation corpus (Claude comparison Phase 4)"
+  risk_analysis:
+    abuse_cases:
+      - "Corpus rows promoted to experiments without sponsor REQ"
+      - "Raw revert counts copied as methodology targets without denominators"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Guide omits stop criteria or privacy tier guidance."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Operators treat example template as production client data."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+        - "tied-project/feedback.yaml"
+      falsification_questions:
+        - "Are confirmed findings distinguished from historical proxies?"
+        - "Does guide forbid W6 QMM reopen?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Docs-only Loop 3 advisory guide."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "incident-revert-eval-corpus-doc.test.mjs"
+        evidence_method: "unit test"
+        evidence_ref: "close-out-2026-10-17-incident-revert-corpus"
+        limitation: "Does not validate live incident capture."
+        owner: "agent"
+        rationale: "File presence, markers, and template schema."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    approach: "Doc contract test; no production MCP changes."
+    cases:
+      - "Client development index links guide"
+      - "Example template includes post_merge_incident and review_false_positive rows"
+      - "Guide file exists under tied-bundle/docs"

@@ -1,0 +1,32 @@
+REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  category: "Methodology"
+  description: "Loop 3 guide for confirmed post-merge failures and review false positives in evaluation-corpus.v1; pilot denominators and stop criteria; no new MCP authority."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+      reason: "Claude comparison Phase 4; upstream feedback fb-mvclklsa-t5gzbo"
+  name: "Incident/revert evaluation corpus (Claude comparison Phase 4)"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+    related_to:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md Quick read links guide"
+      id: "SC-INDEX-LINK"
+    - criterion: "Example evaluation-corpus rows template ships under tied-bundle/templates"
+      id: "SC-TEMPLATE-EXAMPLE"
+    - criterion: "incident-revert-eval-corpus-doc.test.mjs passes"
+      id: "SC-GUIDE-TEST"
+    - criterion: "incident-revert-evaluation-corpus.md includes proof boundary and case-kind sections"
+      id: "SC-GUIDE-DOC"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    implementation:
+      - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"

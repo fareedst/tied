@@ -1,0 +1,18 @@
+# Example PR / handoff field block for TIED client repos (not production data).
+# [REQ-TIED_CLIENT_DEVOPS_APPENDIX] Claude comparison Phase 5.
+schema_version: "client-pr-handoff-fields.v1"
+req_tokens:
+  - "REQ-EXAMPLE"
+depth_tier: "integrated"
+risk_tier_informative: "medium"
+tests_evidence:
+  - command: "npm test"
+    exit_code: 0
+    manifest_ref: "working/REQ-EXAMPLE/evidence/verification-evidence-manifest.v1.json"
+gate_receipts:
+  pre_implementation: "working/REQ-EXAMPLE/gates/pre_implementation-2026-10-17T00-00-00-000Z.json"
+  verification: "working/REQ-EXAMPLE/gates/verification-2026-10-17T00-00-00-000Z.json"
+rollback_plan: "Revert commit <sha>; disable feature flag example-flag if staged release was used."
+staged_release:
+  feature_flag: "example-flag"
+  notes: "Client-owned; not a TIED index field."

@@ -46,7 +46,7 @@
 | 4 | REQ/ARCH/IMPL + semantic tokens | **Done** (**Implemented**) |
 | 5 | `tied-project/citdp/CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml` | **Done** |
 | 6 | `CHANGELOG.md` Unreleased entry | **Done** |
-| 7 | Git commit (sponsor-requested) | **Open** |
+| 7 | Git commit (sponsor-requested) | **Done** (`0d0a3b99` on `main`) |
 
 ## Non-goals
 
@@ -74,6 +74,21 @@
 
 **Done:** Policy doc, index, Phase 1/2 cross-links, bootstrap test green; `request_evidence_envelope_backfill` + not-applicable receipt; verification and close_out gates (`run_id=close-out-2026-10-17-review-convergence`, `merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **B** / `thin_ledger`); CITDP persisted; REQ/ARCH/IMPL **Implemented**; CHANGELOG Unreleased entry.
 
-**Deferred:** Phases 4–5 (separate plan-new-feature REQs); git commit when sponsor requests.
+**Deferred:** Phases 4–5 (separate plan-new-feature REQs).
 
 **Evidence:** [closeout-run-close-out-gates.json](./evidence/closeout-run-close-out-gates.json), [closeout-run-close-out-gates-verification.json](./evidence/closeout-run-close-out-gates-verification.json), [request-evidence-envelope.v1.json](./evidence/request-evidence-envelope.v1.json), [session-handoff.md](./evidence/session-handoff.md).
+
+## Build-plan replay (2026-10-17)
+
+Idempotent **`build-plan`** — no RED/GREEN or TIED index writes; LEAP proposal status unchanged.
+
+| Step | Result |
+| --- | --- |
+| `tied_config_get_base_path` | `.../stdd/tied-project` |
+| `tied_gate_check` `pre_implementation` | **allowed: true** |
+| `review-convergence-policy-doc.test.mjs` | **pass** |
+| `tied_gate_check` `verification` | **allowed: true** |
+| `tied_validate_consistency` | **pass** (no Phase 3 regressions) |
+| REQ/ARCH/IMPL status | **Implemented** (unchanged) |
+
+Unified **close_out** already recorded (`run_id=close-out-2026-10-17-review-convergence`); this pass does not re-run envelope replay. Detail: [build-plan-replay-2026-10-17.md](./evidence/build-plan-replay-2026-10-17.md).

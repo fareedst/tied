@@ -1,0 +1,14 @@
+IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  approach: "Doc + template + index + bootstrap test."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    requirements:
+      - "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS-pseudocode.md"
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Incident/revert evaluation corpus doc maintenance"
+  status: "Implemented"

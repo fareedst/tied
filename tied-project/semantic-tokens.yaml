@@ -929,6 +929,16 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
   name: "Git hygiene safety"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  cross_references:
+    - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    - "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  description: "Guide and example template under tied-bundle"
+  detail_file: "architecture-decisions/ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
+  name: "Incident/revert evaluation corpus documentation topology"
+  source_index: "architecture-decisions.yaml"
+  status: "Implemented"
+  type: "ARCH"
 ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -2288,6 +2298,16 @@ IMPL-TIED_GIT_HYGIENE:
   description: "Git hygiene module"
   name: "Git hygiene implementation"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  cross_references:
+    - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    - "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  description: "Doc contract test, template, and index link"
+  detail_file: "implementation-decisions/IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
+  name: "Incident/revert evaluation corpus doc maintenance"
+  source_index: "implementation-decisions.yaml"
+  status: "Implemented"
   type: "IMPL"
 IMPL-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
@@ -3850,6 +3870,17 @@ REQ-TIED_GIT_HYGIENE:
   description: "Git hygiene preview and guarded apply"
   name: "Git hygiene MCP"
   status: "Active"
+  type: "REQ"
+REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  cross_references:
+    - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    - "REQ-TIED_REVIEW_CONVERGENCE_POLICY"
+  description: "Loop 3 guide for bounded evaluation-corpus.v1 incident/revert/false-positive rows"
+  detail_file: "requirements/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
+  name: "Incident/revert evaluation corpus (Claude comparison Phase 4)"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:

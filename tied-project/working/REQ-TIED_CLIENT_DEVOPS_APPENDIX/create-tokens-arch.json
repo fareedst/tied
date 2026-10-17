@@ -1,0 +1,5 @@
+{
+  "token": "ARCH-TIED_CLIENT_DEVOPS_APPENDIX",
+  "index_record": "{\"name\":\"Client DevOps appendix documentation topology\",\"status\":\"Implemented\"}",
+  "detail_record": "{\"name\":\"Client DevOps appendix documentation topology\",\"status\":\"Implemented\",\"decision\":\"Canonical appendix under tied-bundle/docs/client-devops-integration-appendix.md plus example PR fields template under tied-bundle/templates/.\",\"metadata\":{\"created\":{\"author\":\"plan-new-feature\",\"date\":\"2026-10-17\"}},\"cross_references\":{\"requirements\":[\"REQ-TIED_CLIENT_DEVOPS_APPENDIX\"]}}"
+}

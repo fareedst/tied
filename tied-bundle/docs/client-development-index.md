@@ -57,6 +57,9 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | **Pre-handoff charter** | [pre-handoff-verification-charter.md](pre-handoff-verification-charter.md) | Before PR/commit/handoff: executable checks and evidence (Loop 1; doc-only—no new MCP authority). |
 | **Sponsor risk-tier playbook** | [sponsor-risk-tier-playbook.md](sponsor-risk-tier-playbook.md) | Map assurance profile and `depth_tier` to sponsor/reviewer attention (Loop 1 Phase 2; advisory—never auto-approve costly choices). |
 | **Review convergence policy** | [review-convergence-policy.md](review-convergence-policy.md) | Multi-round review norms: round cap, diff-only re-review, class-level fixes, repeated-finding suppression (Loop 2 Phase 3; measure via operational observations). |
+| **Incident/revert eval corpus** | [incident-revert-evaluation-corpus.md](incident-revert-evaluation-corpus.md) | Loop 3 guide for bounded `evaluation-corpus.v1` rows (incidents, reverts, review false positives) with denominators and pilot stop criteria (Phase 4; no new MCP authority). |
+| **Client DevOps appendix** | [client-devops-integration-appendix.md](client-devops-integration-appendix.md) | Client-owned PR/CI/release field guidance composing with Phases 1–4 (Phase 5; not TIED core authority). |
+| **Claude review comparison** | [claude-code-team-code-review-vs-tied.md](../../docs/comparisons/claude-code-team-code-review-vs-tied.md) | Outreach map + [compose snapshot](../../docs/comparisons/claude-code-team-code-review-vs-tied.md#compose-status-snapshot) for Anthropic PR-review layers × TIED (Phases 1–5 guides; store **`fb-mvclklsa-t5gzbo`**). |
 
 ---
 
@@ -71,6 +74,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | Upgrade TIED methodology | **methodology-migration.md** → Phase 0 | **Rules**, refreshed TIED YAML MCP, and the per-request Tracker |
 | TIED already updated; code/tests lag | [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md) (**TIED-first**) | **Checklist** with verify-only REQ/ARCH/IMPL steps |
 | Bug fix | **Checklist** → `session-bootstrap` | Add REQ at `author-requirement` if missing |
+| Anthropic-style review compose (charters, convergence, eval corpus, DevOps appendix) | **Claude review comparison** → [compose snapshot](../../docs/comparisons/claude-code-team-code-review-vs-tied.md#compose-status-snapshot) | Quick reads: pre-handoff charter, risk-tier playbook, review convergence, incident/revert corpus, client DevOps appendix; **Vocabulary** `review convergence` in [quality-assurance.md](../../tied-project/vocab/quality-assurance.md) |
 | Fidelity research | **tied-fidelity-research.md** | Read-only stages 0–4 audit; preserve evidence; promote only after adjudication |
 | New staged feature | **tied-feature-onboarding.md** → `tied init` | `.cursor/skills/tied-yaml/scripts/tied.sh feature new`; use the feature-orchestration MCP tools for lifecycle work |
 | Tests/code diverged from IMPL | **Pseudo-code** § LEAP micro-cycle | **Processes** § `[PROC-LEAP]`; checklist `sub-leap-micro-cycle` |

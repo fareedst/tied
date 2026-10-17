@@ -1,0 +1,11 @@
+ARCH-TIED_CLIENT_DEVOPS_APPENDIX:
+  cross_references:
+    requirements:
+      - "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
+  decision: "Canonical appendix under tied-bundle/docs/client-devops-integration-appendix.md plus example PR fields template under tied-bundle/templates/."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Client DevOps appendix documentation topology"
+  status: "Implemented"

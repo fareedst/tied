@@ -1,0 +1,56 @@
+{
+  "base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project",
+  "record": {
+    "experiment_id": "mle-claude-compose-20261017-001",
+    "schema_version": "methodology-learning-experiment.v1",
+    "source_feedback_refs": ["fb-mvclklsa-t5gzbo"],
+    "methodology_hypothesis": "Doc-first compose of Claude comparison Phases 1–5 (pre-handoff charter, risk-tier playbook, review convergence policy, incident/revert eval corpus, client DevOps appendix) improves sponsor-visible review-layer guidance without expanding MCP gate authority.",
+    "methodology_baseline": {
+      "snapshot_at": "2026-10-17T16:14:49.930Z",
+      "metric_rows": [
+        {
+          "name": "comparison_phases_recommended",
+          "value": "5"
+        },
+        {
+          "name": "comparison_phases_compose_implemented",
+          "value": "5"
+        },
+        {
+          "name": "leap_proposal_status",
+          "value": "applied"
+        }
+      ]
+    },
+    "methodology_outcome_observation": {
+      "value": "not_measured",
+      "recorded_at": "2026-10-17T21:30:00Z",
+      "evidence_refs": [
+        "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-analysis-digest-fb-mvclklsa.v1.json",
+        "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-loop3-bridge-report-fb-mvclklsa.v1.json",
+        "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+      ]
+    },
+    "proof_boundary": "Records Kaizen digest + Loop 3 bridge after doc compose; does not prove methodology effectiveness or operational review metrics.",
+    "privacy_tier": "operator_local",
+    "production_system_surface": "gate_policy",
+    "surface_ref": "claude-comparison-compose-phases-1-5",
+    "digest_projection_hash": "8561ece57efd07c4",
+    "observation_group": "singleton:fb-mvclklsa-t5gzbo",
+    "rule_countermeasure_ref": {
+      "kind": "methodology_doc_compose",
+      "leap_proposal_id": "lp-2026-10-17T16-41-21-621Z-441a8fc5136b",
+      "paths": [
+        "tied-bundle/docs/pre-handoff-verification-charter.md",
+        "tied-bundle/docs/sponsor-risk-tier-playbook.md",
+        "tied-bundle/docs/review-convergence-policy.md",
+        "tied-bundle/docs/incident-revert-evaluation-corpus.md",
+        "tied-bundle/docs/client-devops-integration-appendix.md"
+      ]
+    },
+    "rule_reversal": {
+      "applied": false,
+      "rationale": "Outcome observation deferred; compose deliverables on disk pending sponsor commit wave."
+    }
+  }
+}

@@ -1949,6 +1949,10 @@ ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
   name: "Client bootstrap skills catalog"
   status: "Planned"
+ARCH-TIED_CLIENT_DEVOPS_APPENDIX:
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+  name: "Client DevOps appendix documentation topology"
+  status: "Implemented"
 ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST.yaml"
   name: "Client methodology resource manifest (QMM and QA evidence chain)"
@@ -2081,6 +2085,10 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
   detail_file: "architecture-decisions/ARCH-TIED_GIT_HYGIENE_SAFETY.yaml"
   name: "Git hygiene safety boundary"
   status: "Planned"
+ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  detail_file: "architecture-decisions/ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
+  name: "Incident/revert evaluation corpus documentation topology"
+  status: "Implemented"
 ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []

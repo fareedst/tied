@@ -1,0 +1,81 @@
+CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX:
+  change_definition:
+    current_behavior: "Claude comparison Phase 5 (client DevOps appendix) remained recommendations-only; PR/CI/release compose guidance not installable."
+    desired_behavior: "One client-layer appendix under tied-bundle/docs, example PR handoff fields template, client index link, bootstrap doc test; no new MCP gate authority."
+    non_goals:
+      - "Merge queues, feature flags, or CI products as TIED core index fields"
+      - "Matrix row for PR-centric review"
+      - "Kaizen Phase 3 transport reopen"
+      - "Mandatory PR-bot voters or zero-human merge"
+    success_criteria:
+      - "CITDP persisted under tied-project/citdp/; REQ/ARCH/IMPL Implemented"
+      - "client-development-index.md Quick read links appendix"
+      - "client-devops-integration-appendix-doc.test.mjs green"
+      - "client-devops-integration-appendix.md exists with proof boundary and PR handoff sections"
+      - "pre_implementation and verification gates allowed at minimal depth"
+    unchanged_behavior: "Checklist gates, tied_verify defaults, and Kaizen transport deferrals unchanged."
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
+      - "tied_gate_check pre_implementation and verification"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "documentation_and_template_only"
+      - "client_owned_ci_not_tied_core"
+  impact_analysis:
+    impl_inventory_notes: "Doc + template + index + bootstrap test; IMPL pseudo-code sidecar."
+    modules_or_boundaries: "tied-bundle/docs/ and tied-bundle/templates/ (methodology corpus)."
+    tied_tokens_affected:
+      - "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+    tied_tokens_new:
+      - "ARCH-TIED_CLIENT_DEVOPS_APPENDIX"
+      - "IMPL-TIED_CLIENT_DEVOPS_APPENDIX"
+      - "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
+  record_identity:
+    change_request_id: "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-17"
+    title: "Client DevOps integration appendix (Claude comparison Phase 5)"
+  risk_analysis:
+    abuse_cases:
+      - "Client CI treated as substitute for checklist MCP gates"
+      - "PR field template copied with production secrets"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Appendix omits client-owned proof boundary."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Operators paste absolute paths into shareable PR templates."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
+        - "tied-project/feedback.yaml"
+      falsification_questions:
+        - "Does appendix forbid TIED core ownership of pipelines?"
+        - "Are Phases 1–4 cross-linked?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Docs-only client DevOps advisory appendix."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "client-devops-integration-appendix-doc.test.mjs"
+        evidence_method: "unit test"
+        evidence_ref: "close-out-2026-10-17-client-devops-appendix"
+        limitation: "Does not validate live CI wiring."
+        owner: "agent"
+        rationale: "File presence, markers, and template schema."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    approach: "Doc contract test; no production MCP changes."
+    cases:
+      - "Client development index links appendix"
+      - "Example template includes tests_evidence and rollback_plan"
+      - "Guide cites REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS compose row"

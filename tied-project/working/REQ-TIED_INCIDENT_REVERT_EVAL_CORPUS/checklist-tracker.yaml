@@ -1,0 +1,126 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS; Phase 4 doc-only guide."
+description: "Tracker for incident/revert evaluation corpus (Claude comparison Phase 4)."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "user-facing-release-notes"
+  envelope_path: "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+record_identity:
+  change_request_id: "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  citdp_path: "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/CITDP-REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-17"
+  req_token: "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  title: "Incident/revert evaluation corpus (Claude comparison Phase 4)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/change-definition-evidence.md"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Doc-only Phase 4 guide; minimal depth."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS-pseudocode.md"
+    policy: "doc-only-no-runtime-pseudocode"
+    rationale: "IMPL sidecar documents doc paths only."
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/sync-tied-stack-evidence.md"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/sync-tied-stack-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/user-facing-release-notes-evidence.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/user-facing-release-notes-evidence.md"
+      status: "completed"
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "verification-gate"
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "persist-citdp-record"
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "sub-close-out-evidence-sync"

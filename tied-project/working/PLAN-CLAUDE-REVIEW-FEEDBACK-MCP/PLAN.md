@@ -88,8 +88,10 @@ LEAP **`lp-2026-10-17T16-41-21-621Z-441a8fc5136b`** is **applied** (`project_roo
 | 1 | [REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER](../REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/PLAN.md) | [pre-handoff-verification-charter.md](../../../tied-bundle/docs/pre-handoff-verification-charter.md) |
 | 2 | [REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK](../REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/PLAN.md) | [sponsor-risk-tier-playbook.md](../../../tied-bundle/docs/sponsor-risk-tier-playbook.md) |
 | 3 | [REQ-TIED_REVIEW_CONVERGENCE_POLICY](../REQ-TIED_REVIEW_CONVERGENCE_POLICY/PLAN.md) | [review-convergence-policy.md](../../../tied-bundle/docs/review-convergence-policy.md) |
+| 4 | [REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS](../REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/PLAN.md) | [incident-revert-evaluation-corpus.md](../../../tied-bundle/docs/incident-revert-evaluation-corpus.md) |
+| 5 | [REQ-TIED_CLIENT_DEVOPS_APPENDIX](../REQ-TIED_CLIENT_DEVOPS_APPENDIX/PLAN.md) | [client-devops-integration-appendix.md](../../../tied-bundle/docs/client-devops-integration-appendix.md) |
 
-Comparison doc [§7 phased table](../../../docs/comparisons/claude-code-team-code-review-vs-tied.md#7-phased-approach-to-improving-tied-recommendations-only) updated with compose status. **Phase 4** (incident/revert evaluation corpus) remains **`plan-new-feature`** when authorized. **Do not** call `tied_feedback_add` again for this PLAN token.
+Comparison doc [§7 phased table](../../../docs/comparisons/claude-code-team-code-review-vs-tied.md#7-phased-approach-to-improving-tied-recommendations-only) updated with compose status. Phases **1–5** delivered under applied LEAP **`lp-2026-10-17T16-41-21-621Z-441a8fc5136b`**. **Do not** call `tied_feedback_add` again for this PLAN token.
 
 ---
 
@@ -101,12 +103,13 @@ Comparison doc [§7 phased table](../../../docs/comparisons/claude-code-team-cod
 | **Process contract** | **pass** — Tracker slugs through `verification-gate` **completed**; export confirms entry id. |
 | **Adherence ledger** | **not_run** — thin PLAN scope; no reconcile required before optional commit. |
 
-**Remaining:** Sponsor decision on committing `tied-project/feedback.yaml` + this working folder.
+**Remaining:** Sponsor decision on git commit for Phases **1–5** deliverables + working folders (see [`evidence/session-handoff.md`](./evidence/session-handoff.md)).
 
 ---
 
 ## Optional follow-ups (sponsor)
 
-- Commit `tied-project/feedback.yaml` and working folder if the store should track field feedback.
-- `tied_feedback_analysis_digest` / methodology Kaizen bridge when promoting to Loop 3.
-- `plan-new-feature` for any behavior-changing phase (1–5).
+- Commit comparison compose slice (feedback store already committed; Phase **4–5** + indexes may be unstaged).
+- ~~`tied_feedback_analysis_digest` / Loop 3 bridge~~ **Done** (2026-10-17) — **`mle-claude-compose-20261017-001`**; evidence under [`evidence/`](./evidence/).
+- `plan-close-out` per phase REQ for envelope-blocking parity (Phase **5** close-out **not_run**).
+- Deferred matrix row for PR-centric review.

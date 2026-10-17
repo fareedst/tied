@@ -1,0 +1,26 @@
+{
+  "schema_version": "methodology-kaizen-experiment-bridge.v1",
+  "ok": true,
+  "draft": {
+    "schema_version": "methodology-learning-experiment.v1",
+    "source_feedback_refs": [
+      "fb-mvclklsa-t5gzbo"
+    ],
+    "methodology_hypothesis": "Compose Anthropic-style review layers into TIED (Claude Code comparison) — Upstream methodology improvement derived from docs/comparisons/claude-code-team-code-review-vs-tied.md (2026-10-17). External study: Anthropic \"Solving code review at Anthropic\" (Oct 2026) — compose-don't-replace; do not treat PR bots or article metrics as TIED authority.\n\nGaps called out in TIED core today:\n- Review convergence: round cap, diff-only re-review, repeated-finding suppression — ad hoc in skills, not checklist/MCP receipts (matrix disposition: Gap).\n- Path-scoped review guidance (REVIEW.md-style) — not a standard TIED pattern (client-owned optional).\n- Risk-tier human approval automation — intent aligns via assurance profiles / depth_tier / consequence ladder; no shipped classifier for approver touchpoints (Gap automation).\n\nRecommended phased improvements (recommendations only; each behavior-changing phase needs its own sponsor REQ/CITDP):\n- Phase 1 (Loop 1): Pre-handoff verification charter — executable checks + evidence before PR/commit (doc-first).\n- Phase 2 (Loop 1): Risk-tier playbook mapping assurance profiles and depth_tier to human review attention (advisory; never auto-approve costly choices).\n- Phase 3 (Loop 2): Review convergence policy — round cap, diff-only re-review, class-level fixes; measure via operational observations.\n- Phase 4 (Loop 3): Incident/revert evaluation corpus with explicit denominators and stop criteria (compose closed QMM machinery).\n- Phase 5 (Composable): Client DevOps appendix for PR/CI/release fields — client-owned, not TIED core.\n\nExplicit non-adoptions preserved: mandatory finding voter gate, zero-human merge for costly paths, PR-only workflow replacing LEAP/checklist, merge queue/flags as TIED core.\n\nNext routing: Kaizen analysis digest / Loop 3 experiment bridge when sponsor promotes; optional matrix row for PR-centric review remains deferred (REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX).",
+    "methodology_baseline": {
+      "metric_rows": [
+        {
+          "name": "bridge_default_baseline",
+          "value": "not_measured"
+        }
+      ]
+    },
+    "proof_boundary": "Bridge draft and eligibility only; does not prove hypothesis truth, methodology effectiveness, or persist experiments.",
+    "privacy_tier": "operator_local",
+    "production_system_surface": "gate_policy",
+    "observation_group": "singleton:fb-mvclklsa-t5gzbo",
+    "digest_projection_hash": "8561ece57efd07c4"
+  },
+  "proof_boundary": "Bridge draft and eligibility only; does not prove hypothesis truth, methodology effectiveness, or persist experiments.",
+  "diagnostics": []
+}

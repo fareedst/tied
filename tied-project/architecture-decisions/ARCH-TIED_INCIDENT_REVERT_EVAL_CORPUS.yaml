@@ -1,0 +1,11 @@
+ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  cross_references:
+    requirements:
+      - "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+  decision: "Canonical guide under tied-bundle/docs/incident-revert-evaluation-corpus.md plus example template under tied-bundle/templates/."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+  name: "Incident/revert evaluation corpus documentation topology"
+  status: "Implemented"

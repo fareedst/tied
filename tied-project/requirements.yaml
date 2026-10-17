@@ -2369,6 +2369,13 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   name: "Client bootstrap skills distribution"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CLIENT_DEVOPS_APPENDIX:
+  category: "Methodology"
+  description: "Client-owned PR/CI/release field guidance composing with Claude comparison Phases 1–4; no new MCP gate authority."
+  detail_file: "requirements/REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+  name: "Client DevOps integration appendix (Claude comparison Phase 5)"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_CLIENT_REFRESH_PARITY:
   category: "Functional"
   cross_references:
@@ -2488,6 +2495,18 @@ REQ-TIED_GIT_HYGIENE:
   detail_file: "requirements/REQ-TIED_GIT_HYGIENE.yaml"
   name: "Git hygiene MCP"
   priority: "P1"
+  status: "Implemented"
+REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  category: "Methodology"
+  description: "Loop 3 guide and example template for bounded evaluation-corpus.v1 rows (incidents, reverts, review false positives)."
+  detail_file: "requirements/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
+  metadata:
+    last_updated:
+      author: "plan-new-feature"
+      date: "2026-10-17"
+      reason: "Phase 4 close-out"
+  name: "Incident/revert evaluation corpus (Claude comparison Phase 4)"
+  priority: "P2"
   status: "Implemented"
 REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:

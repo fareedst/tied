@@ -1,0 +1,23 @@
+{
+  "base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project",
+  "follow_up_window": {
+    "start": "2026-10-17T16:14:49.930Z",
+    "end": "2027-04-17T23:59:59.000Z"
+  },
+  "payload": {
+    "entry_id": "fb-mvclklsa-t5gzbo",
+    "outcome": "inconclusive",
+    "observed_at": "2026-10-17T22:35:00.000Z",
+    "insufficient_evidence": true,
+    "evidence_links": [
+      "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-pilot-report-fb-mvclklsa.v1.json",
+      "tied-project/methodology-experiments.yaml#mle-claude-compose-20261017-001"
+    ],
+    "baseline": {
+      "baseline_ref": "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-analysis-digest-fb-mvclklsa.v1.json",
+      "captured_at": "2026-10-17T16:14:49.930Z"
+    },
+    "countermeasure_ref": "mle-claude-compose-20261017-001",
+    "observation_group": "singleton:fb-mvclklsa-t5gzbo"
+  }
+}

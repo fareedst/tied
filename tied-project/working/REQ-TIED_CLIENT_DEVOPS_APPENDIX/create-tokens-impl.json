@@ -1,0 +1,5 @@
+{
+  "token": "IMPL-TIED_CLIENT_DEVOPS_APPENDIX",
+  "index_record": "{\"name\":\"Client DevOps appendix doc maintenance\",\"status\":\"Implemented\"}",
+  "detail_record": "{\"name\":\"Client DevOps appendix doc maintenance\",\"status\":\"Implemented\",\"approach\":\"Doc + template + index + bootstrap test.\",\"essence_pseudocode_path\":\"implementation-decisions/IMPL-TIED_CLIENT_DEVOPS_APPENDIX-pseudocode.md\",\"metadata\":{\"created\":{\"author\":\"plan-new-feature\",\"date\":\"2026-10-17\"}},\"cross_references\":{\"requirements\":[\"REQ-TIED_CLIENT_DEVOPS_APPENDIX\"],\"architecture\":[\"ARCH-TIED_CLIENT_DEVOPS_APPENDIX\"]}}"
+}

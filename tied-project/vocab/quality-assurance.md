@@ -80,6 +80,8 @@
 | bridge-eligible feedback | methodology feedback for bridge | Feedback entry with `type: methodology_improvement` (primary filter); optional **observation kind** allowlist in implement CITDP. | `BRIDGE_ELIGIBLE_FEEDBACK` |
 | explicit bridge invocation | bridge call, manual bridge | Sponsor/agent-initiated MCP call to build a draft; fail-closed when feedback ineligible; distinct from **review bridge** → LEAP. | `EXPLICIT_BRIDGE_INVOCATION` |
 | methodology learning experiment draft | experiment draft, bridge output | In-memory or response payload shaped as **methodology-learning-experiment.v1** without persisting `methodology-experiments.yaml` on bridge invocation. | `METHODOLOGY_LEARNING_EXPERIMENT_DRAFT` |
+| review convergence | review round cap, diff-only re-review, repeated-finding suppression | Loop 2 norms for multi-round agent/human review: cap rounds, re-review diffs only, class-level fixes, suppress duplicate findings. Documented in [review-convergence-policy.md](../../tied-bundle/docs/review-convergence-policy.md); measure via **operational observation** and **outcome observation**—not MCP gate receipts unless a future REQ adds them. Distinct from PR-bot “clean PR” metrics. | `REVIEW_CONVERGENCE` |
+| comparison compose snapshot | outreach map, post-compose status | Layered record that §7 doc-first deliverables shipped while RESOLVE/layer matrix may remain the **outreach map** unless row-annotated; authoritative progression in `feedback.yaml` (`comparison_status`) and [Claude comparison § snapshot](../../docs/comparisons/claude-code-team-code-review-vs-tied.md#compose-status-snapshot). | `COMPARISON_COMPOSE_SNAPSHOT` |
 
 ## Profile applicability
 

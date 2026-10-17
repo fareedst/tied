@@ -2220,6 +2220,10 @@ IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS:
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
   name: "Client bootstrap skills implementation"
   status: "Active"
+IMPL-TIED_CLIENT_DEVOPS_APPENDIX:
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+  name: "Client DevOps appendix doc maintenance"
+  status: "Implemented"
 IMPL-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     architecture:
@@ -2506,6 +2510,10 @@ IMPL-TIED_GIT_HYGIENE:
   detail_file: "implementation-decisions/IMPL-TIED_GIT_HYGIENE.yaml"
   name: "Git hygiene implementation"
   status: "Active"
+IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
+  detail_file: "implementation-decisions/IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
+  name: "Incident/revert evaluation corpus doc maintenance"
+  status: "Implemented"
 IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture:

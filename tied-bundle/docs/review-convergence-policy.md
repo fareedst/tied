@@ -49,7 +49,7 @@ This policy is **normative prose** for humans and agents. Future REQs may add **
 | Same finding text **twice** without new code change | Classify as **process** or **tooling** noise; capture **`methodology_improvement`** or **operational observation** via **`tied_feedback_capture_observation`** when Kaizen Phase 1+ is enabled |
 | Bot + human duplicate on same hunk | Keep **one** canonical finding; link duplicates in handoff prose |
 | “Nit” rounds after behavior is green | Stop at **round cap**; sponsor decides accept vs follow-up REQ |
-| False positive from automated review | Route to Loop 3 **feedback analysis** / evaluation corpus (Phase 4 REQ)—do not patch code to silence reviewer |
+| False positive from automated review | Route to Loop 3 **feedback analysis** / [incident-revert evaluation corpus](incident-revert-evaluation-corpus.md) ([REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS](../../tied-project/requirements/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml))—do not patch code to silence reviewer |
 
 ---
 

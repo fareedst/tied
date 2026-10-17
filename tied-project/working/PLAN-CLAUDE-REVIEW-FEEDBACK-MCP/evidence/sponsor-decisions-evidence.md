@@ -15,4 +15,6 @@ Recorded from **`/unblock`** (ask-first session) **2026-10-17**.
 
 **Phases 2–3 (2026-10-17):** **`plan-new-feature`** → **[REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK](../REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/PLAN.md)** and **[REQ-TIED_REVIEW_CONVERGENCE_POLICY](../REQ-TIED_REVIEW_CONVERGENCE_POLICY/PLAN.md)** — **Implemented** on **`main`** @ **`0d0a3b99`**.
 
-**Not decided:** Phase 4–5; machine close-out / envelope for PLAN token.
+**Phase 4 (2026-10-17):** **`plan-new-feature`** → **[REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS](../REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/PLAN.md)** — **Implemented**.
+
+**Not decided:** Phase 5; machine close-out / envelope for PLAN token.

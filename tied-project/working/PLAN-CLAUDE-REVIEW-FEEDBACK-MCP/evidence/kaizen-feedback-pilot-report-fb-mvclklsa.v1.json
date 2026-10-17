@@ -1,0 +1,70 @@
+{
+  "schema_version": "feedback-pilot.v1",
+  "cohort_id": "claude-compose-fb-mvclklsa",
+  "entry_count": 1,
+  "metrics": [
+    {
+      "metric_id": "observations_captured",
+      "numerator": 1,
+      "denominator": 1,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    },
+    {
+      "metric_id": "recurrence_groups",
+      "numerator": 1,
+      "denominator": 1,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    },
+    {
+      "metric_id": "countermeasures_with_outcome",
+      "numerator": 0,
+      "denominator": 1,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    },
+    {
+      "metric_id": "promotion_pending_rate",
+      "numerator": 0,
+      "denominator": 1,
+      "unknown": 0,
+      "excluded": 0,
+      "status": "measured"
+    }
+  ],
+  "stop_criteria": {
+    "criteria": [
+      {
+        "criterion_id": "privacy_incident",
+        "status": "clear"
+      },
+      {
+        "criterion_id": "notification_overload",
+        "status": "not_applicable",
+        "detail": "transport_deferred"
+      },
+      {
+        "criterion_id": "transport_loss",
+        "status": "not_applicable",
+        "detail": "transport_deferred"
+      },
+      {
+        "criterion_id": "classification_ambiguity_unresolved",
+        "status": "clear"
+      },
+      {
+        "criterion_id": "denominator_incompatible",
+        "status": "clear"
+      }
+    ],
+    "any_triggered": false,
+    "halted": false
+  },
+  "promotion_rule": "analysis_evidence_until_separate_sponsor_tied_change",
+  "proof_boundary": "pilot_volume_not_methodology_change",
+  "digest_projection_hash": "b2ee5650048f0b87"
+}

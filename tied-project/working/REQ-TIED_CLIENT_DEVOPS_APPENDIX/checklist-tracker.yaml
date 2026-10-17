@@ -1,0 +1,84 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_CLIENT_DEVOPS_APPENDIX; Claude comparison Phase 5."
+description: "Tracker for client DevOps integration appendix."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "user-facing-release-notes"
+  request: "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
+record_identity:
+  change_request_id: "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
+  citdp_path: "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-17"
+  req_token: "REQ-TIED_CLIENT_DEVOPS_APPENDIX"
+  title: "Client DevOps integration appendix (Claude comparison Phase 5)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/vocab/feedback-to-tied.md"
+    slug: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+    slug: "test-strategy"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Doc-only Phase 5 appendix; minimal depth."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_CLIENT_DEVOPS_APPENDIX-pseudocode.md"
+    policy: "doc-only-no-runtime-pseudocode"
+    slug: "gate-pseudocode-validation"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/sync-tied-stack-evidence.md"
+    slug: "sync-tied-stack"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/verification-gate-evidence.md"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
+    slug: "persist-citdp-record"

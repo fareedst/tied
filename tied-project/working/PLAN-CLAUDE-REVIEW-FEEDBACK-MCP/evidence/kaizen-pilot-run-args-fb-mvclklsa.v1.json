@@ -1,0 +1,26 @@
+{
+  "base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project",
+  "pilot_incident_signals": [],
+  "report_out_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-pilot-report-fb-mvclklsa.v1.json",
+  "spec": {
+    "cohort_id": "claude-compose-fb-mvclklsa",
+    "cohort": {
+      "compatibility_key": "feedback-capture.v1|operator_local",
+      "min_entries": 1,
+      "max_entries": 1
+    },
+    "named_metrics": [
+      "observations_captured",
+      "recurrence_groups",
+      "countermeasures_with_outcome",
+      "promotion_pending_rate"
+    ],
+    "stop_criteria_policy": {
+      "halt_on_trigger": false,
+      "classification_ambiguity_threshold": 99,
+      "notification_overload_threshold": 99,
+      "transport_loss_threshold": 99
+    },
+    "transport_phase_status": "deferred_closed"
+  }
+}

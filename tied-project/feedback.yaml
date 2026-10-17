@@ -1,11 +1,33 @@
 entries:
-  - context:
-      comparison_status: "outreach_analysis"
+  - capture_schema_version: "feedback-capture.v1"
+    context:
+      comparison_status: "compose_implemented"
+      compose_phase_status:
+        "1": "implemented"
+        "2": "implemented"
+        "3": "implemented"
+        "4": "implemented"
+        "5": "implemented"
       evidence_links:
         - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
         - "docs/comparisons/methodology-composition-matrix.md"
+        - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-analysis-digest-fb-mvclklsa.v1.json"
       external_study_url: "https://claude.dev/blog/solving-code-review-at-anthropic/"
+      kaizen_digest_projection_hash: "8561ece57efd07c4"
+      leap_proposal_applied: "lp-2026-10-17T16-41-21-621Z-441a8fc5136b"
+      methodology_experiment_id: "mle-claude-compose-20261017-001"
       observation_kind: "discovery"
+      outcome_observations:
+        - baseline_ref: "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-analysis-digest-fb-mvclklsa.v1.json"
+          countermeasure_ref: "mle-claude-compose-20261017-001"
+          evidence_links:
+            - "tied-project/methodology-experiments.yaml#mle-claude-compose-20261017-001"
+            - "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-pilot-report-fb-mvclklsa.v1.json"
+          observation_id: "oo-mvcz428b-h50pjv"
+          observed_at: "2026-10-17T22:35:00.000Z"
+          outcome: "inconclusive"
+          recorded_at: "2026-10-17T22:33:52.715Z"
+          schema_version: "outcome-observation.v1"
       recommended_phases:
         - 1
         - 2
@@ -14,7 +36,9 @@ entries:
         - 5
       tied_version: "3.0.0"
     created_at: "2026-10-17T16:14:49.930Z"
-    description: "Upstream methodology improvement derived from docs/comparisons/claude-code-team-code-review-vs-tied.md (2026-10-17). External study: Anthropic \"Solving code review at Anthropic\" (Oct 2026) — compose-don't-replace; do not treat PR bots or article metrics as TIED authority.\n\nGaps called out in TIED core today:\n- Review convergence: round cap, diff-only re-review, repeated-finding suppression — ad hoc in skills, not checklist/MCP receipts (matrix disposition: Gap).\n- Path-scoped review guidance (REVIEW.md-style) — not a standard TIED pattern (client-owned optional).\n- Risk-tier human approval automation — intent aligns via assurance profiles / depth_tier / consequence ladder; no shipped classifier for approver touchpoints (Gap automation).\n\nRecommended phased improvements (recommendations only; each behavior-changing phase needs its own sponsor REQ/CITDP):\n- Phase 1 (Loop 1): Pre-handoff verification charter — executable checks + evidence before PR/commit (doc-first).\n- Phase 2 (Loop 1): Risk-tier playbook mapping assurance profiles and depth_tier to human review attention (advisory; never auto-approve costly choices).\n- Phase 3 (Loop 2): Review convergence policy — round cap, diff-only re-review, class-level fixes; measure via operational observations.\n- Phase 4 (Loop 3): Incident/revert evaluation corpus with explicit denominators and stop criteria (compose closed QMM machinery).\n- Phase 5 (Composable): Client DevOps appendix for PR/CI/release fields — client-owned, not TIED core.\n\nExplicit non-adoptions preserved: mandatory finding voter gate, zero-human merge for costly paths, PR-only workflow replacing LEAP/checklist, merge queue/flags as TIED core.\n\nNext routing: Kaizen analysis digest / Loop 3 experiment bridge when sponsor promotes; optional matrix row for PR-centric review remains deferred (REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX)."
+    description: "Upstream methodology improvement derived from docs/comparisons/claude-code-team-code-review-vs-tied.md (2026-10-17). External study: Anthropic \"Solving code review at Anthropic\" (Oct 2026) — compose-don't-replace; do not treat PR bots or article metrics as TIED authority.\n\nGaps called out in TIED core today:\n- Review convergence: round cap, diff-only re-review, repeated-finding suppression — ad hoc in skills, not checklist/MCP receipts (matrix disposition: Gap).\n- Path-scoped review guidance (REVIEW.md-style) — not a standard TIED pattern (client-owned optional).\n- Risk-tier human approval automation — intent aligns via assurance profiles / depth_tier / consequence ladder; no shipped classifier for approver touchpoints (Gap automation).\n\nRecommended phased improvements (recommendations only; each behavior-changing phase needs its own sponsor REQ/CITDP):\n- Phase 1 (Loop 1): Pre-handoff verification charter — executable checks + evidence before PR/commit (doc-first).\n- Phase 2 (Loop 1): Risk-tier playbook mapping assurance profiles and depth_tier to human review attention (advisory; never auto-approve costly choices).\n- Phase 3 (Loop 2): Review convergence policy — round cap, diff-only re-review, class-level fixes; measure via operational observations.\n- Phase 4 (Loop 3): Incident/revert evaluation corpus with explicit denominators and stop criteria (compose closed QMM machinery).\n- Phase 5 (Composable): Client DevOps appendix for PR/CI/release fields — client-owned, not TIED core.\n\nExplicit non-adoptions preserved: mandatory finding voter gate, zero-human merge for costly paths, PR-only workflow replacing LEAP/checklist, merge queue/flags as TIED core.\n\nStore promotion (2026-10-17): Kaizen digest projection 8561ece57efd07c4; Loop 3 experiment mle-claude-compose-20261017-001; optional matrix row for PR-centric review remains deferred (REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX)."
     id: "fb-mvclklsa-t5gzbo"
+    privacy_tier: "operator_local"
+    promotion_status: "canonical_ready"
     title: "Compose Anthropic-style review layers into TIED (Claude Code comparison)"
     type: "methodology_improvement"
