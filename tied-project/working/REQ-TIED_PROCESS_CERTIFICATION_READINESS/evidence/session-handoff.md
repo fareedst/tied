@@ -46,26 +46,19 @@
 
 ---
 
-## Working tree (not in PCR commit)
+## Workspace (2026-10-18)
 
-Unstaged hygiene / unrelated pins (optional separate commit or `@clear-workspace`):
+Regenerable pins restored via `@clear-workspace`; EASAR Slice 6 on **`aa4422df`**. This commit pins PCR handoff + git-hygiene receipts only.
 
-- `mcp-server/test/fixtures/adversarial-inquiry-*/.../request-evidence-envelope.v1.json`
-- `tied-bundle/reports/source-graph/` + mini-repo fixture index
-- `tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/regression-manifest.json`
-- `tied-project/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json`
-- `tied-project/working/evaluation/envelope-gap-report.v1.yaml`
-
-**Branch:** `main` — **19 commits** ahead of `origin/main` (push when sponsor ready).
+**Branch:** `main` — ahead of `origin/main` (includes PCR `75f41a15`, EASAR Slice 6, hygiene docs).
 
 ---
 
 ## Next steps (optional)
 
-1. **`git push`** — publish `75f41a15` and prior local commits.
-2. **`@clear-workspace`** — triage unstaged hygiene files (commit or discard).
-3. **Methodology-learning experiment upsert** — CITDP advisory; only if enrolling MCP surface in Loop 3.
-4. **Stages 6 & 8** — external human appraisal (out of repo scope).
+1. **`git push`** — publish local `main`.
+2. **Methodology-learning experiment upsert** — CITDP advisory; only if enrolling MCP surface in Loop 3.
+3. **Stages 6 & 8** — external human appraisal (out of repo scope).
 
 ---
 
