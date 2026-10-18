@@ -44,3 +44,27 @@ Each dimension uses `LOW` | `MEDIUM` | `HIGH` | `UNKNOWN` with observation/evide
 - Selector output is **advisory** for checklist/gate authority in v1; it does not auto-activate checklist steps or change assurance profiles.
 - `UNKNOWN` on criticality or security dimensions must not be treated as `LOW` in selector rules or tests.
 - Composition matrix proof boundary applies: no ISO/CMMI certification, behavioral equivalence, or universal method superiority claims.
+
+---
+
+## Alphabetical index
+
+| Term | Section |
+| --- | --- |
+| checkpoint reassessment | Terms |
+| context profile | Terms |
+| context profile dimensions (v1) | Context profile dimensions (v1) |
+| concurrency | Context profile dimensions (v1) |
+| coupling | Context profile dimensions (v1) |
+| criticality | Context profile dimensions (v1) |
+| deterministic practice selection | Terms |
+| dogfood (CASE pilot) | Terms |
+| environmental | Context profile dimensions (v1) |
+| method-effectiveness readout | Terms |
+| observability | Context profile dimensions (v1) |
+| practice contract | Terms |
+| proof boundaries | Proof boundaries |
+| rate of change | Context profile dimensions (v1) |
+| reversibility | Context profile dimensions (v1) |
+| security | Context profile dimensions (v1) |
+| uncertainty | Context profile dimensions (v1) |

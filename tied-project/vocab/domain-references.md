@@ -8,7 +8,7 @@
 
 **Standards:** [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md).
 
-**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../../tied-bundle/docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`project-operations-mcp.md`](project-operations-mcp.md) · [`operating-environment-externalities.md`](operating-environment-externalities.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`quality-assurance.md`](quality-assurance.md) · [`fidelity-research.md`](fidelity-research.md) · [`residuality.md`](residuality.md) · [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) · [`prompt-composer.md`](prompt-composer.md) · [`feature-orchestration.md`](feature-orchestration.md) · [`decision-copilot.md`](decision-copilot.md) · [`config-discovery.md`](config-discovery.md)
+**See also:** [`routing.md`](routing.md) (primary entry / PRELOAD) · [`../docs/client-development-index.md`](../../tied-bundle/docs/client-development-index.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`project-operations-mcp.md`](project-operations-mcp.md) · [`operating-environment-externalities.md`](operating-environment-externalities.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`agentstream.md`](agentstream.md) · [`agent-stream-ruby.md`](agent-stream-ruby.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [`quality-assurance.md`](quality-assurance.md) · [`fidelity-research.md`](fidelity-research.md) · [`residuality.md`](residuality.md) · [`behavior-bounded-change-engineering.md`](behavior-bounded-change-engineering.md) · [`context-adaptive-engineering.md`](context-adaptive-engineering.md) · [`prompt-composer.md`](prompt-composer.md) · [`feature-orchestration.md`](feature-orchestration.md) · [`decision-copilot.md`](decision-copilot.md) · [`config-discovery.md`](config-discovery.md)
 
 ---
 
@@ -30,6 +30,7 @@
 | 2c | [`project-operations-mcp.md`](project-operations-mcp.md) | Project lint, git hygiene, sponsor questions MCP tools; `/xlate` and `/unblock` skills |
 | 2e | [`operating-environment-externalities.md`](operating-environment-externalities.md) | OEE: external workflows, compatibility ledger, operating-environment dependency management |
 | 2f | [`easar-recovery.md`](easar-recovery.md) | EASAR Mode C, recovery engagement, Stage 7 validation cases, receipt schemas, `[PROC-EASAR_RECOVERY]` |
+| 2g | [`context-adaptive-engineering.md`](context-adaptive-engineering.md) | CASE / EDSE practice layer, practice contracts, context profiles, deterministic selection, reassessment receipts, method-effectiveness readout, `[PROC-CONTEXT_ADAPTIVE_PRACTICE]` |
 | 2b | [`feedback-to-tied.md`](feedback-to-tied.md) | Upstream feedback artifact (`feedback.yaml`) and MCP export |
 | 3 | [`leap-proposal-queue.md`](leap-proposal-queue.md) | Non-canonical LEAP proposals, audit, diff/session import |
 | 4 | [`agentstream.md`](agentstream.md) | **`@tied/agentstream`** (TypeScript default, Phase **4d**): pipeline, checklist, executor, MCP preflight; legacy Go tree removed |
@@ -78,6 +79,7 @@
 - **Adversarial inquiry vs quality-assurance profiles vs pseudo-code validation** — three distinct checklist layers: (1) `[PROC-PSEUDOCODE_VALIDATION]` / `sub-pseudocode-validation-pass` gates IMPL contract structure and traceability without runtime claims; (2) [`quality-assurance.md`](quality-assurance.md) profiles and evidence matrices select risk-triggered assurance depth at `impact-discovery` / `risk-assessment`; (3) [`fidelity-research.md`](fidelity-research.md) adversarial inquiry and `sub-adversarial-inquiry-pass` add obligation mapping, proof-boundary partitioning, finding ledgers, and scoped strict blocking at `verification-gate`. Do not conflate structural pseudo-code PASS with executable fidelity PASS or with human-approved strict status.
 - **Evidence chain profile vs assurance profile vs research profile** — the **evidence chain profile** (`evidence-chain-profile.v1`) is a read-only completeness/provenance artifact. An **assurance profile** selects risk-triggered quality evidence. **Integrated agent profile** and **human research profile** are fidelity research *modes*. **Evidence-chain profile depth** (`integrated` \| `human_research`) only selects how much of the chain one generator run measures. Canonical terms: [`quality-assurance.md`](quality-assurance.md); contrast in [`fidelity-research.md`](fidelity-research.md).
 - **Evidence chain statistics report vs evidence chain profile** — the **evidence chain statistics report** (`evidence-chain-statistics-report.v1`) is a TIED-source offline batch over already-generated profiles. A **client cohort** is a compatibility partition, not a quality **pilot**. A **report input manifest** names artifacts; it is not a **project manifest**. Canonical terms: [`quality-assurance.md`](quality-assurance.md).
+- **Context-adaptive practice layer vs TIED checklist authority** — CASE/EDSE **practice contracts** and **deterministic practice selection** emit advisory receipts in v1; they do not auto-activate checklist steps or replace assurance profiles. **Method-effectiveness readout** stays separate from product-quality scores. Canonical terms: [`context-adaptive-engineering.md`](context-adaptive-engineering.md); first dogfood ties to [`easar-recovery.md`](easar-recovery.md).
 
 ---
 
@@ -125,5 +127,10 @@
 | VOCAB_INDEX | Scope |
 | Vocab directory routing index | Preferred terms (directory entry) |
 | agent-control layer | Cross-topic notes |
+| CASE | `context-adaptive-engineering.md` |
+| context profile | `context-adaptive-engineering.md` |
+| context-adaptive-engineering.md | Canonical glossaries |
+| deterministic practice selection | `context-adaptive-engineering.md` |
+| practice contract | `context-adaptive-engineering.md` |
 | vocabulary layer | Cross-topic notes |
 | vocabulary merge mode | Cross-topic notes |
