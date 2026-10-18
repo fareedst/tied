@@ -1,8 +1,8 @@
 # Session handoff — REQ-TIED_EASAR_RECOVERY
 
-**Updated:** 2026-10-18 (program close-out complete; commit deferred)  
+**Updated:** 2026-10-18 (traceable-commit **done** `e02716de`)  
 **Depth:** integrated · **gate_policy:** advisory · **engagement:** `easar_full` · **BFIE mode:** `pilot`  
-**Phase:** MVP slices **0–4** + **close_out** complete · **traceable-commit:** pending sponsor
+**Phase:** MVP slices **0–4** + **close_out** complete · **traceable-commit:** **done** (`e02716de`)
 
 **Linked plan:** [`req-tied_easar_recovery_17decacf.plan.md`](file:///Users/fareed/.cursor/plans/req-tied_easar_recovery_17decacf.plan.md)  
 **Program plan:** [../PLAN.md](../PLAN.md)  
@@ -17,7 +17,7 @@ MVP scope: **slices 0–4** only (slices 5–6 deferred per sponsor C2).
 
 ## Resume here
 
-1. Sponsor **`traceable-commit`** — use proposed commit message below; do not re-run close_out unless artifacts drift.
+1. ~~Sponsor **`traceable-commit`**~~ **Done** — `e02716de` on `main` (2026-10-18); do not re-run close_out unless artifacts drift.
 2. Optional child plans for EASAR slices **5–6** (SWE-QA corpus, portable export).
 
 ## TIED stack status
@@ -66,14 +66,9 @@ Write-up: [close-out-gate.md](./close-out-gate.md)
 | SC-EASAR-GATES | **done** (pre_implementation + Slices 1–4 verification + close_out) |
 | SC-EASAR-TESTS | **done** |
 
-## Proposed commit message (plan-close-out; not committed)
+## Traceable commit
 
-```text
-Enroll Mode C EASAR MVP with receipt MCP tools and integrated program close-out.
-
-Compose brownfield, graph, claims, and inquiry under REQ-TIED_EASAR_RECOVERY
-(slices 0–4) with easar_full engagement facet and versioned working receipts.
-```
+**Hash:** `e02716de` — `feat(mcp): enroll Mode C EASAR MVP receipts`
 
 ## Commands
 
