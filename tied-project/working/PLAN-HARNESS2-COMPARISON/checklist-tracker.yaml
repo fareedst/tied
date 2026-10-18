@@ -1,0 +1,76 @@
+citdp:
+  path: tied-project/citdp/CITDP-PLAN-HARNESS2-COMPARISON.yaml
+  reason: Documentation-only Harness² × TIED comparison; no product REQ.
+  status: complete
+depth_tier: minimal
+gate_policy: advisory
+profile_depth: minimal
+purpose: Plan-only Tracker for PLAN-HARNESS2-COMPARISON.
+refine_pass: 1
+refine_pass_date: "2026-10-18"
+request: PLAN-HARNESS2-COMPARISON
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: build_complete_verification_passed
+steps:
+  - id: session-bootstrap
+    disposition: completed
+    notes: PRELOAD quality-assurance, agentstream, tied-methodology; snapshot verified.
+  - id: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: /Users/fareed/.cursor/plans/harness2_tied_comparison_7b2be9c8.plan.md
+  - id: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-HARNESS2-COMPARISON.yaml
+  - id: impact-discovery
+    disposition: completed
+    notes: docs/comparisons/ and working folder only.
+  - id: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-HARNESS2-COMPARISON.yaml
+  - id: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-HARNESS2-COMPARISON.yaml
+      - kind: file_path
+        path: tied-project/working/PLAN-HARNESS2-COMPARISON/evidence/doc-verification-2026-10-18.md
+      - kind: gate_receipt
+        path: tied-project/working/PLAN-HARNESS2-COMPARISON/gates/verification-2026-10-18T15-36-14-709Z.json
+  - id: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Minimal depth; CITDP counterexamples only.
+  - id: author-requirement
+    disposition: not_applicable
+  - id: gate-pseudocode-validation
+    disposition: completed
+    notes: Doc-only; no IMPL mutation; pre_implementation gate anchor.
+    evidence_refs:
+      - kind: gate_receipt
+        path: tied-project/working/PLAN-HARNESS2-COMPARISON/gates/pre_implementation-2026-10-18-refine-plan.json
+  - id: three-way-alignment-unit
+    disposition: not_applicable
+  - id: unit-test-red
+    disposition: not_applicable
+  - id: unit-test-green
+    disposition: not_applicable
+  - id: composition-integration
+    disposition: not_applicable
+  - id: end-to-end-ui
+    disposition: not_applicable
+  - id: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-HARNESS2-COMPARISON.yaml
+      - kind: file_path
+        path: docs/comparisons/tied-vs-harness2.md
+  - id: traceable-commit
+    disposition: pending
+    notes: Sponsor-requested commit only; deliverable whitelisted in .gitignore.

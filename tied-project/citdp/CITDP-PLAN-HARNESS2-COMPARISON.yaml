@@ -1,0 +1,91 @@
+CITDP-PLAN-HARNESS2-COMPARISON:
+  change_definition:
+    current_behavior: No in-repository Harness² comparison document; methodology composition matrix has no Harness² row.
+    desired_behavior: Single outreach comparison Markdown under docs/comparisons/ with disposition matrix, authority boundary, bounded compose recommendations, and explicit proof boundary—without importing Harness² or minting REQ/ARCH/IMPL.
+    non_goals:
+      - Import or vendor Harness² into the stdd repository
+      - Modify @tied/agentstream production code in this request
+      - Add checklist or MCP gate authority derived from Harness² selection/judging
+      - Mint new semantic tokens or edit semantic-tokens.yaml
+      - Edit methodology-composition-matrix.md without a separate sponsor-approved promotion
+    success_criteria:
+      - docs/comparisons/tied-vs-harness2.md matches sibling comparison structure
+      - External benchmark claims labeled Harness²-reported; no TIED outcome claims
+      - Relative links resolve from docs/comparisons/
+      - CITDP and gate receipt stored under tied-project/working/PLAN-HARNESS2-COMPARISON/
+    unchanged_behavior: TIED REQ→ARCH→IMPL stack, MCP writes, and checklist gates remain authoritative; Harness² is external study input only.
+  evidence:
+    commands:
+      - Read-only review of Harness² snapshot under /Users/fareed/Downloads/harness2-main
+      - Documentation verification per refine-plan test strategy
+    manifest_reference: null
+    proof_boundaries:
+      - docs_and_working_folder_only
+      - harness2_reported_metrics_not_tied_outcomes
+  impact_analysis:
+    impl_inventory_notes: 'No IMPL pseudo-code. Read-only TIED anchors: ARCH/IMPL checklist gate enforcement, agentstream README and vocab.'
+    modules_or_boundaries: docs/comparisons/; optional tied-project/working/PLAN-HARNESS2-COMPARISON/
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: complete
+    tied_stack_updates_required: []
+  implementation_notes:
+    deliverable: docs/comparisons/tied-vs-harness2.md
+    completed_at: "2026-10-18"
+    scope: documentation_only
+  record_identity:
+    change_request_id: PLAN-HARNESS2-COMPARISON
+    depth_tier: minimal
+    gate_policy: advisory
+    profile_depth: minimal
+    recorded_at: "2026-10-18"
+    title: Harness² × TIED comparison (documentation-only)
+  risk_analysis:
+    abuse_cases:
+      - README benchmark gains cited as TIED improvement targets
+      - Harness² blind selection presented as replacing tied_checklist_gate_validate
+      - Domain library resume semantics copied without contamination safeguards
+    adversarial_inquiry:
+      assurance_profile: baseline-functional
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - Comparison doc introduces REQ-* tokens without plan-new-feature
+        - Absolute Downloads paths committed as if reproducible for all readers
+      depth_change_waiver: null
+      depth_tier: minimal
+      disconfirming_observations:
+        - Any tied-project index YAML mutated during doc-only pass
+        - Harness² code copied into stdd tree
+      eligibility_triggers_matched: []
+      evidence_references:
+        - /Users/fareed/.cursor/plans/harness2_tied_comparison_7b2be9c8.plan.md
+        - tied-project/working/PLAN-HARNESS2-COMPARISON/checklist-tracker.yaml
+        - docs/comparisons/tied-vs-harness2.md
+        - tied-project/working/PLAN-HARNESS2-COMPARISON/gates/verification-2026-10-18T15-36-14-709Z.json
+      falsification_questions:
+        - Does every score delta in the doc carry Harness²-reported labeling?
+        - Are compose recommendations explicitly subordinate to TIED gates?
+      gate_policy: advisory
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: Documentation-only; external snapshot read-only; no auth/network/persistence in deliverable.
+      research_profile: read-only
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: not_applicable
+    quality_evidence_matrix:
+      - applicability: applicable
+        attribute: baseline-functional
+        command_or_test: Markdown link and claim-label review
+        evidence_method: Committed comparison doc + working folder receipts
+        limitation: Does not prove Harness² effectiveness for TIED clients
+        owner: agent
+        rationale: Deliverable is analysis documentation
+  test_strategy:
+    documentation_only: true
+    verification_commands:
+      - git diff --name-only scope guard
+      - Relative link check from docs/comparisons/tied-vs-harness2.md
+      - Claim-label grep audit
+    unit_tests: not_applicable
