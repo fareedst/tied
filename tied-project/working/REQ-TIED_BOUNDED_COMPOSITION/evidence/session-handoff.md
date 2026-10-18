@@ -13,6 +13,8 @@
 
 **TIED_BASE_PATH:** `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project`
 
+**Workspace (clear-workspace 2026-10-18):** BC tree **clean** (commits `aeb9be67`, `406fca55`). Residual untracked upstream only — [git-hygiene-receipt-2026-10-18-clear-workspace.md](./git-hygiene-receipt-2026-10-18-clear-workspace.md).
+
 ---
 
 ## Finished this session
