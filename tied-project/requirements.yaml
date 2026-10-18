@@ -2242,7 +2242,7 @@ REQ-TIED_BOUNDED_COMPOSITION:
   detail_file: "requirements/REQ-TIED_BOUNDED_COMPOSITION.yaml"
   name: "TIED bounded composition"
   priority: "P1"
-  status: "Planned"
+  status: "Implemented"
 REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
   category: "Functional"
   description: "Close the evidence-to-intent matrix loop with report-only machine validation and checklist integration without conflating observed code with approved REQ/ARCH intent."

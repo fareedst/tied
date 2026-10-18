@@ -1,12 +1,12 @@
-# traceable-commit — REQ-TIED_BOUNDED_COMPOSITION (prepared)
+# traceable-commit — REQ-TIED_BOUNDED_COMPOSITION
 
-**Date:** 2026-10-18 · Phase B completes sponsor commit.
+**Date:** 2026-10-18 · **Status:** **complete**
 
 | Check | Result |
 | --- | --- |
-| bounded-composition tests | 45/45 plan-close-out replay |
+| bounded-composition tests | 45/45 |
 | `npx tsc -b` (mcp-server) | pass |
 | `tied_validate_consistency` | pass |
-| Close-out envelope | target `blocking_gap_count=0` |
-
-Commit deferred until Phase B staging confirmed.
+| Close-out envelope | `blocking_gap_count=0` — [closeout-run-close-out-gates-post-commit.json](./closeout-run-close-out-gates-post-commit.json) |
+| `tied_verify` | REQ Implemented; six IMPL Active |
+| **Commit** | **`aeb9be67`** |

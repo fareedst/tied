@@ -1,4 +1,4 @@
-copy_hygiene: Refine pass 2 — plan-close-out PLAN-CLOSE-OUT.md + test-strategy-close-out.md; execute via @plan-close-out.
+copy_hygiene: Program closed — plan-close-out complete; machine close_out allowed; commit aeb9be67.
 depth_tier: integrated
 gate_policy: advisory
 profile_depth: integrated
@@ -28,14 +28,12 @@ execution_evidence:
       run_id: bc-verify-20261018
       status: allowed
     close_out:
-      receipt: tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/gates/close_out-2026-10-18T17-04-34-691Z.json
-      run_id: bc-closeout-20261018
-      status: blocked_traceable_commit_pending
+      receipt: tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/closeout-run-close-out-gates-post-commit.json
+      run_id: bc-closeout-post-commit-20261018
+      status: allowed
   close_out_evidence:
     date: '2026-10-18'
-    deferred:
-      - traceable-commit until sponsor requests commit
-      - close_out gate allowed after traceable-commit
+    deferred: []
     gates:
       verification: tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/verification-gate-result-slice5.json
       close_out: tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/close_out-gate-result-slice5.json
@@ -56,6 +54,7 @@ execution_evidence:
     - verification-gate
     - persist-citdp-record
     - sub-close-out-evidence-sync
+    - traceable-commit
   operator_evidence:
     integrated_pilot_template: 'phase_artifact_dir: tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-{phase}/'
     limitation: >-
@@ -197,8 +196,11 @@ steps:
         path: tied-project/citdp/CITDP-REQ-TIED_BOUNDED_COMPOSITION.yaml
     notes: Slice 5 persist after verification gate.
   - id: traceable-commit
-    disposition: pending
-    notes: Sponsor-requested commit only; blocks close_out until completed.
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/traceable-commit-evidence.md
+    notes: Commit aeb9be67 — BC wave traceable-commit 2026-10-18.
   - id: sub-close-out-evidence-sync
     disposition: completed
     evidence_refs:
@@ -312,3 +314,10 @@ steps:
         - tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/sub-close-out-evidence-sync-evidence.md
     disposition: completed
     evidence_refs: *ref_14
+  - slug: traceable-commit
+    tracking:
+      status: completed
+      evidence_refs: &ref_15
+        - tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/traceable-commit-evidence.md
+    disposition: completed
+    evidence_refs: *ref_15
