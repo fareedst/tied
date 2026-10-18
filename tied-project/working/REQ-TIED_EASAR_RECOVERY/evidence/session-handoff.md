@@ -19,13 +19,12 @@
 | --- | --- | --- |
 | MVP slices 0–4 + close_out | Enrolled stack + receipt MCPs | **Committed** `e02716de` (+ handoff pin `a5521f19`) |
 | Slice 5 (Stage 7) | Validation corpus + `tied_easar_validation_suite_run` | **Committed** `7d62523a` |
-| Slice 6 | Portable `recovery/` export | **Verified** — [slice6-verification-gate.md](./slice6-verification-gate.md) · `run_id=easar-slice6-verify-20261019` |
+| Slice 6 | Portable `recovery/` export | **Committed** `aa4422df` — [slice6-verification-gate.md](./slice6-verification-gate.md) · `run_id=easar-slice6-verify-20261019` |
 
 ## Resume here
 
-1. **Traceable commit** — stage Slice 6 code + evidence when ready (export module, gates, CITDP sync).
-2. Optional **LEAP program re-close** — only if sponsor wants envelope refreshed for Slices 5–6 (costly; not required for slice verification pass).
-3. Optional **`git push`** — local commits until published.
+1. Optional **LEAP program re-close** — only if sponsor wants envelope refreshed for Slices 5–6 (costly; not required for slice verification pass).
+2. Optional **`git push`** — branch ahead of origin (includes `aa4422df`).
 
 Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts drift.
 
@@ -95,7 +94,7 @@ Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts 
 | SC-EASAR-ENROLL … SC-EASAR-TESTS | **done** (MVP commit) |
 | SC-EASAR-GATES | **done** (+ Slice 5 verification receipt) |
 | SC-EASAR-VALIDATION | **done** (`7d62523a`) |
-| SC-EASAR-EXPORT | **done** (Slice 6 gate; commit pending) |
+| SC-EASAR-EXPORT | **done** (`aa4422df`) |
 
 ## Commits
 
@@ -104,6 +103,7 @@ Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts 
 | `e02716de` | MVP slices 0–4 + close_out |
 | `a5521f19` | Handoff pin for MVP traceable-commit |
 | `7d62523a` | Slice 5 validation corpus + LEAP SC-EASAR-VALIDATION |
+| `aa4422df` | Slice 6 portable export + verification gate + CITDP LEAP |
 
 ## Commands
 
@@ -117,7 +117,7 @@ cd mcp-server && npx tsc -b
 
 ## Remaining risks
 
-- Slice **5–6** code/evidence largely **uncommitted** after PCR commit `75f41a15` — next step is **traceable commit** for EASAR Slice 6 wave.
+- Slice **6** committed as `aa4422df`; **push** to origin when ready (branch ahead).
 - Advisory inquiry warns on verification gates (Slices 1–6 and MVP close_out) — non-blocking under `gate_policy: advisory`.
 - Optional **program LEAP re-close** for envelope refresh — costly; not required for slice verification.
 - Local `tied-bundle/working/…/adversarial-inquiry/` is gitignored; committed gate receipts use identity-bound hashes.
