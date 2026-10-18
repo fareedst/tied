@@ -1,12 +1,13 @@
 # Session handoff — REQ-TIED_EASAR_RECOVERY
 
-**Updated:** 2026-10-18 (Slice **5** traceable-commit **`7d62523a`**)  
+**Updated:** 2026-10-19 (Slice **6** refine-plan)  
 **Depth:** integrated · **gate_policy:** advisory · **engagement:** `easar_full` · **BFIE mode:** `pilot`  
-**Phase:** MVP slices **0–5** committed · program **close_out** (MVP) **unchanged** · Slice 5 verification **done**
+**Phase:** MVP slices **0–5** committed · Slice **6** plan **refined** (build pending) · program **close_out** (MVP) **unchanged**
 
 **Linked plan:** [`req-tied_easar_recovery_17decacf.plan.md`](file:///Users/fareed/.cursor/plans/req-tied_easar_recovery_17decacf.plan.md)  
 **Program plan:** [../PLAN.md](../PLAN.md)  
 **Slice 5 authority:** [slice5-e2e-plan.md](./slice5-e2e-plan.md)  
+**Slice 6 authority:** [slice6-e2e-plan.md](./slice6-e2e-plan.md)  
 **CITDP (persisted, MVP):** [../../../citdp/CITDP-REQ-TIED_EASAR_RECOVERY.yaml](../../../citdp/CITDP-REQ-TIED_EASAR_RECOVERY.yaml)  
 **Methodology:** [docs/methodologies/evidence-assured-software-architecture-recovery.md](../../../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7
 
@@ -18,12 +19,12 @@
 | --- | --- | --- |
 | MVP slices 0–4 + close_out | Enrolled stack + receipt MCPs | **Committed** `e02716de` (+ handoff pin `a5521f19`) |
 | Slice 5 (Stage 7) | Validation corpus + `tied_easar_validation_suite_run` | **Committed** `7d62523a` |
-| Slice 6 | Portable `recovery/` export | Deferred |
+| Slice 6 | Portable `recovery/` export | **Refined** — [slice6-e2e-plan.md](./slice6-e2e-plan.md) |
 
 ## Resume here
 
-1. Optional **`@refine-plan slice 6`** — portable export adapter (EASAR §7.6 item 6).
-2. Optional **LEAP program re-close** — only if sponsor wants envelope/CITDP refreshed for Slice 5 (costly; not required for slice verification pass).
+1. **`@build-plan` Slice 6** — portable export adapter per [slice6-e2e-plan.md](./slice6-e2e-plan.md) (EASAR §7.6 item 6).
+2. Optional **LEAP program re-close** — only if sponsor wants envelope/CITDP refreshed for Slices 5–6 (costly; not required for slice verification pass).
 3. Optional **`git push`** — Slice 5 commit is local until published.
 
 Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts drift.
@@ -102,5 +103,5 @@ npm run build --prefix mcp-server
 
 - Slice 5 code/evidence **not on origin** until `git push` (local commit `7d62523a`).
 - Advisory inquiry warns on verification gates (Slices 1–5 and MVP close_out) — non-blocking.
-- **Slice 6** export and optional **program re-close** remain sponsor choices.
+- Slice **6** implementation and optional **program re-close** remain sponsor choices (plan refined; code not started).
 - Local `tied-bundle/working/…/adversarial-inquiry/` is gitignored; committed gate receipts use identity-bound hashes.
