@@ -23,6 +23,7 @@ describe("classifyWorkingRelativePath", () => {
     assert.equal(classifyWorkingRelativePath("adherence/events.jsonl"), "local");
     assert.equal(classifyWorkingRelativePath("adherence"), "local");
     assert.equal(classifyWorkingRelativePath("adversarial-inquiry"), "local");
+    assert.equal(classifyWorkingRelativePath("trajectories/run-a/summary.json"), "local");
   });
 
   it("routes PLAN and tracker to committed", () => {

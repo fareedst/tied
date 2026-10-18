@@ -50,6 +50,12 @@
 
 ---
 
+## Bounded composition (client-owned driver)
+
+| Concept | Symbol / block | Notes |
+|---------|----------------|-------|
+| Client-owned AgentDriver seam | `BIND_CLIENT_AGENT_DRIVER` | Injectable driver factory; built-in `cursor`, `claude`, `dry_run` unchanged; external executors require OEE ref (C2 deferral). `[REQ-TIED_BOUNDED_COMPOSITION]` `[IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM]` |
+
 ## Naming bridge: operator surface vs historical stacks
 
 | Concept | Preferred (TypeScript) | Historical | Driver script |

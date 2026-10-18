@@ -1,0 +1,11 @@
+{
+  "refine_pass": 2,
+  "refine_target": "plan-close-out",
+  "linked_plan": "bc_plan-close-out_b022e4b3.plan.md",
+  "phase": "pre_implementation",
+  "allowed": true,
+  "blocking_diagnostics": [],
+  "gate_receipt_note": "Build pre_implementation activation bc-preimpl-20261018 stands; refine pass 2 re-validates Tracker/CITDP for plan-close-out scope only.",
+  "activation": "tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/gate-activation-pre_implementation.json",
+  "next_command": "@plan-close-out per tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/PLAN-CLOSE-OUT.md"
+}

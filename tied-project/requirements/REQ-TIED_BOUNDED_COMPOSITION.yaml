@@ -1,0 +1,66 @@
+REQ-TIED_BOUNDED_COMPOSITION:
+  category: "Functional"
+  description: "Default-off, TIED-native bounded composition: pilot budgets, local trajectory evidence, read-only divergence analysis, explicit lesson drafts, advisory shadow comparison, and injectable AgentDriver seam—subordinate to checklist gates and verification-gated status."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-18"
+      reason: "Slice 0 contract mint"
+  name: "TIED bounded composition"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Draft-only Kaizen routing"
+      - "Explicit proof boundaries and operator-local raw trajectories"
+      - "Preserves tied_checklist_gate_validate authority"
+    problems_solved:
+      - "Agentstream injectable seam not formalized in TIED"
+      - "No pilot-budget or trajectory manifest contract"
+      - "No read-only divergence or advisory shadow path"
+    why: "Promote Harness²-inspired composition opportunities from comparison docs into opt-in modules without vendoring Harness² or changing gate authority."
+  related_requirements:
+    depends_on:
+      - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+    related_to:
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "SC-BC-BUDGET — pilot-budget.v1 validates opt-in budgets with explicit stop criteria and accounting formula only for R=4k/P=3k."
+      id: "SC-BC-BUDGET"
+    - criterion: "SC-BC-DIV — deterministic read-only divergence reports without TIED YAML or finding-ledger writes."
+      id: "SC-BC-DIV"
+    - criterion: "SC-BC-DRIVER — injectable AgentDriver seam; built-in cursor/claude/dry_run unchanged."
+      id: "SC-BC-DRIVER"
+    - criterion: "SC-BC-LESSON — draft-only feedback, vocabulary, and experiment outputs unless operator bridge invoked."
+      id: "SC-BC-LESSON"
+    - criterion: "SC-BC-SHADOW — shadow-comparison.v1 advisory with selection_authority none."
+      id: "SC-BC-SHADOW"
+    - criterion: "SC-BC-TRAJ — trajectory manifests and local trajectories/ placement; no unrestricted bodies in committed envelope."
+      id: "SC-BC-TRAJ"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BOUNDED_COMPOSITION"
+    code_annotations:
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    implementation:
+      - "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM"
+      - "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS"
+      - "IMPL-TIED_BOUNDED_LESSON_DISTILLATION"
+      - "IMPL-TIED_BOUNDED_PILOT_BUDGET"
+      - "IMPL-TIED_BOUNDED_SHADOW_COMPARISON"
+      - "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE"
+    tests: []
+  validation_criteria:
+    - coverage: "Each IMPL module validated independently before integration per REQ-MODULE_VALIDATION."
+      method: "Unit and composition tests"

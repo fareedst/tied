@@ -1,0 +1,155 @@
+{
+  "graph": {
+    "projectId": "stdd-bc-s0",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-BUDGET",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "bc-crit-budget",
+          "sourceRevision": "bc-s0"
+        },
+        "architectureConstraintIds": ["arch-bc-budget"]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-TRAJ",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "bc-crit-traj",
+          "sourceRevision": "bc-s0"
+        },
+        "architectureConstraintIds": ["arch-bc-traj"]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-DIV",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "bc-crit-div",
+          "sourceRevision": "bc-s0"
+        },
+        "architectureConstraintIds": ["arch-bc-div"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "arch-bc-budget",
+        "implementationBlockIds": [
+          "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001"
+        ]
+      },
+      {
+        "id": "arch-bc-traj",
+        "implementationBlockIds": [
+          "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002"
+        ]
+      },
+      {
+        "id": "arch-bc-div",
+        "implementationBlockIds": [
+          "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+          "kind": "block",
+          "name": "VALIDATE_PILOT_BUDGET",
+          "derivation": "content",
+          "revision": "bc-block-budget",
+          "sourceRevision": "bc-s0"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+          "kind": "block",
+          "name": "CAPTURE_TRAJECTORY_MANIFEST",
+          "derivation": "content",
+          "revision": "bc-block-traj",
+          "sourceRevision": "bc-s0"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+          "kind": "block",
+          "name": "ANALYZE_TRAJECTORY_DIVERGENCE",
+          "derivation": "content",
+          "revision": "bc-block-div",
+          "sourceRevision": "bc-s0"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-bc-budget-pseudo",
+        "blockId": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+        "kind": "production",
+        "location": "tied-project/implementation-decisions/IMPL-TIED_BOUNDED_PILOT_BUDGET-pseudocode.md",
+        "sourceRevision": "bc-s0"
+      },
+      {
+        "id": "loci-bc-traj-pseudo",
+        "blockId": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+        "kind": "production",
+        "location": "tied-project/implementation-decisions/IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE-pseudocode.md",
+        "sourceRevision": "bc-s0"
+      },
+      {
+        "id": "loci-bc-div-pseudo",
+        "blockId": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+        "kind": "production",
+        "location": "tied-project/implementation-decisions/IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS-pseudocode.md",
+        "sourceRevision": "bc-s0"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "bc-block-budget",
+    "specification": [
+      {
+        "id": "bc-spec-budget",
+        "kind": "behavior",
+        "value": "Default-off pilot-budget.v1 validation with explicit stop criteria.",
+        "order": 1
+      },
+      {
+        "id": "bc-spec-traj",
+        "kind": "behavior",
+        "value": "Compact trajectory manifest with operator-local raw placement.",
+        "order": 2
+      },
+      {
+        "id": "bc-spec-div",
+        "kind": "behavior",
+        "value": "Read-only divergence report without TIED YAML mutation.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": [
+      {
+        "id": "bc-prod-budget",
+        "statementId": "bc-spec-budget",
+        "kind": "behavior",
+        "value": "VALIDATE_PILOT_BUDGET contract in sidecar",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "bc-block-budget",
+        "source": {
+          "location": "tied-project/implementation-decisions/IMPL-TIED_BOUNDED_PILOT_BUDGET-pseudocode.md:VALIDATE_PILOT_BUDGET"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+    "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003"
+  ]
+}

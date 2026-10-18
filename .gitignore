@@ -17,6 +17,7 @@ docs/comparisons/*
 !docs/comparisons/methodology-composition-matrix.md
 !docs/comparisons/qmm-kaizen-vs-tied.md
 !docs/comparisons/tied-vs-well-known-methodologies.md
+!docs/comparisons/tied-vs-harness2.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

@@ -2133,6 +2133,30 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   detail_file: "implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST.yaml"
   name: "Adversarial inquiry checklist integration and evidence artifacts"
   status: "Active"
+IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM:
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM.yaml"
+  name: "Bounded agentstream driver seam"
+  status: "Planned"
+IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS:
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS.yaml"
+  name: "Bounded divergence analysis"
+  status: "Planned"
+IMPL-TIED_BOUNDED_LESSON_DISTILLATION:
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_LESSON_DISTILLATION.yaml"
+  name: "Bounded lesson distillation"
+  status: "Planned"
+IMPL-TIED_BOUNDED_PILOT_BUDGET:
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_PILOT_BUDGET.yaml"
+  name: "Bounded pilot budget validation"
+  status: "Planned"
+IMPL-TIED_BOUNDED_SHADOW_COMPARISON:
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_SHADOW_COMPARISON.yaml"
+  name: "Bounded shadow comparison"
+  status: "Planned"
+IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE:
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE.yaml"
+  name: "Bounded trajectory evidence"
+  status: "Planned"
 IMPL-TIED_BROWNFIELD_VALIDATION:
   description: "Normalize intent-elevation matrices and expose brownfield_intent_evidence_validate MCP tool."
   detail_file: "implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION.yaml"

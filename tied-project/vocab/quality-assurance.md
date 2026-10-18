@@ -23,6 +23,8 @@
 | waiver | exception, risk acceptance | A time-bounded approval to accept a known unmet or non-applicable obligation. | `QUALITY_WAIVER` |
 | owner/expiry | accountable owner, review expiry | The person or role accountable for an evidence gap or waiver and the date it must be revisited. | `RISK_OWNER_EXPIRY` |
 | pilot | controlled trial, evaluation cohort | A bounded application of a candidate gate before canonical promotion. | `ASSURANCE_PILOT` |
+| pilot budget | bounded pilot budget, multi-run budget | Versioned `pilot-budget.v1` opt-in contract (k, mode, seed, namespace, cost ceiling, stop criteria) for Harness²-inspired composition without effectiveness claims. | `VALIDATE_PILOT_BUDGET` |
+| trajectory evidence | trajectory manifest, bounded trajectory | Compact manifest plus operator-local raw `trajectories/` layout; not unrestricted prompt bodies in committed envelope. | `CAPTURE_TRAJECTORY_MANIFEST` |
 | stop criterion | stopping rule, abort threshold | A measurable condition that pauses or rolls back a pilot or gate. | `PILOT_STOP_CRITERION` |
 | test adequacy | test sufficiency, test strength | Risk-relative confidence that selected tests exercise meaningful behavior, boundaries, and failure modes. | `TEST_ADEQUACY` |
 | proof boundary | quality proof, validation guarantee | The explicit claim limit for one evidence source; it states what the evidence does and does not establish. | `PROOF_BOUNDARY` |

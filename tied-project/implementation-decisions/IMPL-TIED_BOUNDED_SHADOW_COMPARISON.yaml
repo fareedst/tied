@@ -1,0 +1,37 @@
+IMPL-TIED_BOUNDED_SHADOW_COMPARISON:
+  code_locations:
+    files:
+      - description: "RUN_SHADOW_COMPARISON implementation (planned)"
+        path: "mcp-server/src/bounded-composition/shadow-comparison.ts"
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_BOUNDED_SHADOW_COMPARISON-pseudocode.md"
+  implementation_approach:
+    details:
+      - "No checklist gate authority"
+      - "RED unit tests before production code"
+    summary: "Implement RUN_SHADOW_COMPARISON per sidecar; default-off opt-in; pure module first."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-18"
+      reason: "Slice 0 contract mint"
+  name: "Bounded shadow comparison"
+  related_decisions:
+    depends_on:
+      - "IMPL-MODULE_VALIDATION"
+    see_also: []
+    supersedes: []
+  status: "Planned"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BOUNDED_COMPOSITION"
+    code_annotations:
+      - "IMPL-TIED_BOUNDED_SHADOW_COMPARISON"
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    requirements:
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    tests:
+      - "mcp-server/src/bounded-composition/shadow_comparison.test.ts"

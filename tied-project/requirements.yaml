@@ -2237,6 +2237,12 @@ REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
       - "ARCH-TIED_STRUCTURE"
     implementation:
       - "IMPL-TIED_FILES"
+REQ-TIED_BOUNDED_COMPOSITION:
+  category: "Functional"
+  detail_file: "requirements/REQ-TIED_BOUNDED_COMPOSITION.yaml"
+  name: "TIED bounded composition"
+  priority: "P1"
+  status: "Planned"
 REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
   category: "Functional"
   description: "Close the evidence-to-intent matrix loop with report-only machine validation and checklist integration without conflating observed code with approved REQ/ARCH intent."

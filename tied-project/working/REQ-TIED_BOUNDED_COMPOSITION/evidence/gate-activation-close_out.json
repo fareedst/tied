@@ -1,0 +1,84 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+    "project_id": "stdd-bc-verify",
+    "run_id": "bc-closeout-20261018",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006",
+      "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+      "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+      "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+      "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+      "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002"
+    ],
+    "scope_hash": "23c41ddf67a9b1052588ae1466fe433d4bccd0972d1ad4fd29a31729a9d0e322",
+    "artifact_hashes": {
+      "obligation-report.json": "d30e74f0a315c2e1b7ab9459e281cf843b14e3a14795b43caf388604b096ee8d",
+      "finding-ledger.jsonl": "fa761f29d7f860cefb274c0db95dfae6cc05dd48127bf9808a3340cc6309f9ce",
+      "gate-result.json": "baa2a5d21e202c11692acccb8314620cd732f096190241086b4e09b8b1a75ea5",
+      "evidence-provenance.json": "4e47ec7580bae7278e65d720a70e7a735bf18571d607ae2b42c04be0cca13007"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+      "project_id": "stdd-bc-verify",
+      "run_id": "bc-closeout-20261018",
+      "phase": "close_out",
+      "scope_hash": "23c41ddf67a9b1052588ae1466fe433d4bccd0972d1ad4fd29a31729a9d0e322",
+      "hash": "d30e74f0a315c2e1b7ab9459e281cf843b14e3a14795b43caf388604b096ee8d",
+      "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-close_out/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+      "project_id": "stdd-bc-verify",
+      "run_id": "bc-closeout-20261018",
+      "phase": "close_out",
+      "scope_hash": "23c41ddf67a9b1052588ae1466fe433d4bccd0972d1ad4fd29a31729a9d0e322",
+      "hash": "fa761f29d7f860cefb274c0db95dfae6cc05dd48127bf9808a3340cc6309f9ce",
+      "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+      "project_id": "stdd-bc-verify",
+      "run_id": "bc-closeout-20261018",
+      "phase": "close_out",
+      "scope_hash": "23c41ddf67a9b1052588ae1466fe433d4bccd0972d1ad4fd29a31729a9d0e322",
+      "hash": "baa2a5d21e202c11692acccb8314620cd732f096190241086b4e09b8b1a75ea5",
+      "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-close_out/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+      "project_id": "stdd-bc-verify",
+      "run_id": "bc-closeout-20261018",
+      "phase": "close_out",
+      "scope_hash": "23c41ddf67a9b1052588ae1466fe433d4bccd0972d1ad4fd29a31729a9d0e322",
+      "hash": "4e47ec7580bae7278e65d720a70e7a735bf18571d607ae2b42c04be0cca13007",
+      "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+    "project_id": "stdd-bc-verify",
+    "run_id": "bc-closeout-20261018",
+    "phase": "close_out",
+    "scope": [
+      "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006",
+      "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+      "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+      "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+      "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+      "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002"
+    ],
+    "scope_hash": "23c41ddf67a9b1052588ae1466fe433d4bccd0972d1ad4fd29a31729a9d0e322"
+  },
+  "diagnostics": []
+}

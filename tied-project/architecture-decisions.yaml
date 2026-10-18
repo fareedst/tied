@@ -1865,6 +1865,10 @@ ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   detail_file: "architecture-decisions/ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM.yaml"
   name: "Cross-platform TIED bootstrap engine"
   status: "Active"
+ARCH-TIED_BOUNDED_COMPOSITION:
+  detail_file: "architecture-decisions/ARCH-TIED_BOUNDED_COMPOSITION.yaml"
+  name: "Bounded composition architecture"
+  status: "Active"
 ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
   description: "Observed vs approved dispositions, proof boundaries, and matrix as evidence artifact (not REQ authority)."
   detail_file: "architecture-decisions/ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL.yaml"

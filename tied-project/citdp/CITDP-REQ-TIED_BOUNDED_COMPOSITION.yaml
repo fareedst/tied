@@ -1,0 +1,209 @@
+CITDP-REQ-TIED_BOUNDED_COMPOSITION:
+  change_definition:
+    current_behavior: "Harness²-inspired bounded composition opportunities in docs/comparisons/tied-vs-harness2.md are Recommendation-only. The repository has no default-off pilot-budget schema, local trajectory manifest layout, read-only divergence analyzer, explicit lesson-draft distillation, advisory shadow comparison, or formalized injectable AgentDriver seam beyond partial agentstream/feature-orchestration wiring."
+    desired_behavior: "Six opt-in, TIED-native modules under mcp-server/src/bounded-composition/ (and agentstream seam alignment) with token-commented IMPL sidecars, envelope artifact kinds, local raw trajectories under tied-bundle/working/{REQ-TOKEN}/trajectories/, compact manifests/reports in committed working roots, explicit draft-only Kaizen/experiment routing, advisory shadow reports with selection_authority none, and injectable client-owned AgentDriver contract—subordinate to checklist gates, tied_verify, and sponsor costly-choice authority."
+    non_goals:
+      - "Vendor or import Harness²; reproduce Harness² benchmark score claims as TIED outcomes"
+      - "Ship OpenCode/Codex or other concrete external executor binaries in the methodology repo"
+      - "Automatic IMPL/REQ mutation, LEAP from shadow/divergence tools, or gate authority for blind selection"
+      - "Edit docs/comparisons/methodology-composition-matrix.md in this request"
+      - "Live external subprocess proof in CI/E2E (operator smoke only)"
+    success_criteria:
+      - "SC-BC-BUDGET — pilot-budget.v1 validates k/mode/seed/namespace/ceilings/stop criteria; R=4k/P=3k documented as accounting formula only"
+      - "SC-BC-TRAJ — trajectory manifest + local placement; no unrestricted prompt bodies in committed envelope"
+      - "SC-BC-DIV — deterministic read-only divergence report; no finding-ledger or YAML writes"
+      - "SC-BC-LESSON — draft-only feedback/vocab/experiment outputs; explicit operator bridge calls only"
+      - "SC-BC-SHADOW — shadow-comparison.v1 advisory; selection_authority none; gate regression test"
+      - "SC-BC-DRIVER — injectable AgentDriver seam; cursor/claude/dry_run unchanged; task-graph adapter composition green"
+      - "SC-BC-CLOSE — binding inventory, integrated inquiry artifacts, envelope fail_on_error_gaps, tied_verify, tied_validate_consistency"
+    unchanged_behavior:
+      - "tied_checklist_gate_validate authority and fail-closed defaults when bounded tools not invoked"
+      - "Existing agentstream cursor/claude/dry_run profiles and legacy feature-spec ordering"
+      - "Methodology tied-bundle/ read-only in client installs"
+      - "Verification-gated REQ/IMPL status via tied_verify only"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_BOUNDED_COMPOSITION"
+      run_id: "bc-closeout-20261018"
+    verification_activation:
+      phase: "verification"
+      request_token: "REQ-TIED_BOUNDED_COMPOSITION"
+      run_id: "bc-verify-20261018"
+    pre_implementation_activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_BOUNDED_COMPOSITION"
+      run_id: "bc-preimpl-20261018"
+    envelope_blocking: "fail_on_error_gaps true at plan-close-out"
+    envelope_path: "tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/request-evidence-envelope.v1.json"
+    focused_tests: "mcp-server/src/bounded-composition/**/*.test.ts; agentstream-adapter composition tests; request-evidence-envelope gap tests"
+    lint: "npx tsc -b (repo TS) + npm test in mcp-server and @tied/agentstream as scoped"
+    verification: "tied_validate_consistency; tied_checklist_gate_validate pre_implementation|verification|close_out with integrated activation when depth_tier integrated"
+  evidence:
+    commands:
+      - "node --import tsx --test mcp-server/src/bounded-composition/**/*.test.ts"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "default_off_opt_in_only"
+      - "harness2_mechanics_not_effectiveness_claims"
+      - "shadow_and_divergence_advisory_not_gate_authority"
+      - "raw_trajectories_operator_local"
+  impact_analysis:
+    depends_on:
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_FIDELITY_RESEARCH"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-GOAGENT-AGENT-EXECUTOR"
+      - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+      - "REQ-MODULE_VALIDATION"
+    files:
+      - "mcp-server/src/bounded-composition/"
+      - "mcp-server/src/working-root.ts"
+      - "mcp-server/src/request-evidence-envelope/"
+      - "mcp-server/src/feature-orchestration/agentstream-adapter.ts"
+      - "mcp-server/packages/agentstream/src/live-driver-bind.ts"
+      - "mcp-server/packages/agentstream/src/harness-select.ts"
+      - "mcp-server/packages/agentstream/src/live-driver-select.ts"
+      - "mcp-server/src/tools/index.ts"
+      - "tied-project/vocab/quality-assurance.md"
+      - "tied-project/vocab/fidelity-research.md"
+      - "tied-project/vocab/agentstream.md"
+      - "docs/comparisons/tied-vs-harness2.md"
+    impl_inventory:
+      - "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE"
+      - "IMPL-TIED_BOUNDED_PILOT_BUDGET"
+      - "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS"
+      - "IMPL-TIED_BOUNDED_LESSON_DISTILLATION"
+      - "IMPL-TIED_BOUNDED_SHADOW_COMPARISON"
+      - "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM"
+    modules_or_boundaries: "Pure bounded-composition modules; thin MCP/CLI wrappers; per-request committed working tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/; local trajectories tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/trajectories/"
+    tied_tokens_new:
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+      - "ARCH-TIED_BOUNDED_COMPOSITION"
+      - "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE"
+      - "IMPL-TIED_BOUNDED_PILOT_BUDGET"
+      - "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS"
+      - "IMPL-TIED_BOUNDED_LESSON_DISTILLATION"
+      - "IMPL-TIED_BOUNDED_SHADOW_COMPARISON"
+      - "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM"
+  leap_feedback:
+    sponsor_costly_choices:
+      C1:
+        choice: "methodology_composition_matrix_harness2_row"
+        status: "deferred"
+        default: "no_matrix_edit_in_this_request"
+        note: "Separate sponsor approval after implementation snapshot in tied-vs-harness2.md only."
+      C2:
+        choice: "concrete_external_executor_adapter"
+        status: "deferred"
+        default: "injectable_descriptor_only_with_oee_ref"
+        note: "No OpenCode/Codex in methodology repo; client-owned follow-on."
+      C3:
+        choice: "regulated_privacy_assurance_profile"
+        status: "reversible_default"
+        default: "applicable_pending_trajectory_content_review"
+        note: "Confirm after trajectory redaction rules are fixed in IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE."
+    tied_stack_updates_required: []
+  parent_program:
+    upstream_analysis: "PLAN-HARNESS2-COMPARISON"
+    comparison_doc: "docs/comparisons/tied-vs-harness2.md"
+    linked_cursor_plan: "bounded_composition_37d0f09c.plan.md"
+  record_identity:
+    author: "refine-plan"
+    change_request_id: "REQ-TIED_BOUNDED_COMPOSITION"
+    date: "2026-10-18"
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    implementation_depth_tier: "integrated"
+    profile_depth: "integrated"
+    prior_depth_tier: null
+    record_status: "implemented-verification-passed"
+    refine_plan_pass: 1
+    refine_plan_pass_date: "2026-10-18"
+    title: "Harness²-inspired bounded composition (default-off, TIED-native)"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "integrated"
+      gate_policy: "advisory"
+      counterexamples:
+        - "Divergence or shadow tool appends finding-ledger or passes pre_implementation gate without checklist evidence"
+        - "Lesson distiller silently upserts feedback.yaml or methodology-experiments.yaml"
+        - "Trajectory manifest embeds secrets into committed envelope"
+        - "AgentDriver injection bypasses dry-run/live parity or mutates tracker dispositions"
+      falsification_questions:
+        - "Can shadow output change tied_checklist_gate_validate allowed?"
+        - "Does envelope discovery accept stale manifest hash without gap code?"
+        - "Does budget validator accept k=0 or missing stop criteria?"
+      disconfirming_observations:
+        - "Unit tests assert no canonical YAML write from analyzer/distiller/shadow modules"
+        - "Shadow report schema requires selection_authority none and gate_authority_unchanged true"
+      eligibility_triggers_matched:
+        - "persistence_local_trajectories"
+        - "mcp_tool_surface"
+        - "external_process_boundary_agentstream"
+        - "privacy_sensitive_artifacts"
+        - "cost_retry_timeout_behavior"
+      rationale: "Adds persistence, executor/model boundaries, privacy-tier artifacts, and pilot cost ceilings; integrated depth required per eligibility table."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "required_at_build_slice0_pre_red"
+    quality_profiles:
+      - "baseline-functional"
+      - "ai-enabled"
+      - "performance-scale-cost"
+      - "stateful-reliability"
+      - "external-input-security"
+      - "regulated-privacy"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        evidence_method: "Unit RED/GREEN per module; binding_inventory_validate"
+      - applicability: "applicable"
+        attribute: "ai-enabled"
+        evidence_method: "Advisory-only shadow/divergence; no model-in-loop gate authority"
+      - applicability: "applicable"
+        attribute: "performance-scale-cost"
+        evidence_method: "Budget ceiling and stop criteria validation tests"
+      - applicability: "pending_review"
+        attribute: "regulated-privacy"
+        evidence_method: "Redaction tests on trajectory summaries; operator_local default"
+        rationale: "Confirm after trajectory content policy in sidecar PRE/POST"
+  test_strategy:
+    module_first: true
+    pseudocode_gate: "pseudocode_validate + pseudocode_analyze gate_mode true on all six IMPL sidecars before RED"
+    composition_before_e2e: true
+    e2e_ui: false
+    tdd_sequence:
+      - "Slice 0 — TIED mint + vocab naming bridges + structural inquiry + pre_implementation gate"
+      - "Slice 1 — pilot budget + working-root trajectories + envelope artifact kinds"
+      - "Slice 2 — trajectory manifest + divergence analyzer"
+      - "Slice 3 — lesson distiller + shadow comparison"
+      - "Slice 4 — AgentDriver seam + agentstream-adapter composition"
+      - "Slice 5 — MCP registration + binding inventory + verification/close_out"
+  methodology_surface:
+    advisory_note: "New MCP tools and envelope kinds are methodology-surface; Slice 0 upsert methodology-learning experiment when build-plan links CITDP methodology_surface_experiment."
+    surfaces_touched:
+      - "mcp_tool_surface"
+      - "request_evidence_envelope_artifact_kinds"
+  plan_close_out:
+    refine_pass: 2
+    refine_pass_date: "2026-10-18"
+    linked_plan: "tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/PLAN-CLOSE-OUT.md"
+    run_ids:
+      plan_close_out: "bc-plan-close-out-20261018"
+      post_commit: "bc-closeout-post-commit-20261018"
+    phases:
+      - "Phase A — LEAP stack mint, canonical evidence, CHANGELOG, handoffs (no commit)"
+      - "Phase B — traceable-commit + close_out replay + tied_verify update"
+    machine_close_out:
+      phase_a: "partial until traceable-commit slug complete"
+      phase_b: "pass when merged_decision.allowed true and envelope blocking_gap_count 0"
+    adherence_target: "band A after canonical evidence + REQ detail on disk"
+    staging_excludes:
+      - "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/ unless sponsor opts in"
+      - "unrelated repo drift (other REQ working trees, source-graph pins)"

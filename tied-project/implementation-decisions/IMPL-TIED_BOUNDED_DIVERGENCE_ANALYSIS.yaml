@@ -1,0 +1,37 @@
+IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS:
+  code_locations:
+    files:
+      - description: "ANALYZE_TRAJECTORY_DIVERGENCE implementation (planned)"
+        path: "mcp-server/src/bounded-composition/divergence-analysis.ts"
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS-pseudocode.md"
+  implementation_approach:
+    details:
+      - "No checklist gate authority"
+      - "RED unit tests before production code"
+    summary: "Implement ANALYZE_TRAJECTORY_DIVERGENCE per sidecar; default-off opt-in; pure module first."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-18"
+      reason: "Slice 0 contract mint"
+  name: "Bounded divergence analysis"
+  related_decisions:
+    depends_on:
+      - "IMPL-MODULE_VALIDATION"
+    see_also: []
+    supersedes: []
+  status: "Planned"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BOUNDED_COMPOSITION"
+    code_annotations:
+      - "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS"
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    requirements:
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    tests:
+      - "mcp-server/src/bounded-composition/divergence_analysis.test.ts"

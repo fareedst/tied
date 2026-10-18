@@ -87,6 +87,8 @@ implementation decisions and pseudo-code for the research tooling.
 | Evidence provenance | `evidence-provenance` | Deterministic commands, revisions, hashes, and artifact references. |
 | Research dataset | `research-dataset` / `researchDataset` | Append-only findings, duplicate links, and case reports emitted outside audited project YAML. |
 | Integrated activation evidence | `activation-evidence` | Paired metric and artifact evidence used to classify integrated activation. |
+| Bounded divergence report | `divergence-report` / `ANALYZE_TRAJECTORY_DIVERGENCE` | Read-only contrast artifact from trajectory manifests; advisory proof boundary; no finding-ledger writes. `[REQ-TIED_BOUNDED_COMPOSITION]` |
+| Advisory shadow comparison | `shadow-comparison.v1` / `RUN_SHADOW_COMPARISON` | Opt-in candidate contrast with `selection_authority: none`; never mutates checklist gates. `[REQ-TIED_BOUNDED_COMPOSITION]` |
 | Activation artifact pairing | `activation-artifact-pairing` | Completeness check joining the inquiry metric to the four bounded artifacts. |
 | Authoritative Tracker | `checklist-tracker.v1` | Per-request `steps` state consumed directly by `validateChecklistGate`; `execution_evidence.completed` is compatibility-only. |
 | Tracker disposition | `tracker-disposition` | Machine-checked disposition and evidence contract for one checklist step. |

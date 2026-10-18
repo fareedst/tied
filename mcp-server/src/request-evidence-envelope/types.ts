@@ -27,6 +27,11 @@ export type ArtifactKind =
   | "capability_profile"
   | "assessor_agreement"
   | "adaptive_effectiveness"
+  | "bounded_pilot_budget"
+  | "bounded_trajectory_manifest"
+  | "bounded_divergence_report"
+  | "bounded_lesson_draft_report"
+  | "bounded_shadow_comparison_report"
   | "unknown";
 
 export type ArtifactStatus = "present" | "not_applicable" | "expected_missing" | "stale_projection";

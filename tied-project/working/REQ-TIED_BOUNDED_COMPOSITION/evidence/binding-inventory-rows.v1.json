@@ -1,0 +1,79 @@
+[
+  {
+    "id": "BC-BUDGET->TRAJ",
+    "trigger": "validatePilotBudget returns ok",
+    "callee": "captureTrajectoryManifest",
+    "arguments": "pilot-budget.v1 document and bounded opt-in context",
+    "effect": "trajectory manifest records budget identity and run provenance",
+    "ordering": "budget validation completes before manifest capture",
+    "failure_behavior": "invalid budget or opt-in failure rejects manifest promotion",
+    "composition_test": "mcp-server/src/bounded-composition/bounded-envelope-discovery.test.ts",
+    "e2e_only": false
+  },
+  {
+    "id": "BC-TRAJ->ENVELOPE",
+    "trigger": "bounded artifact filenames classified for envelope build",
+    "callee": "classifyBoundedEvidenceFilename / request-evidence-envelope build",
+    "arguments": "manifest and budget artifact kinds under working root",
+    "effect": "envelope discovery includes bounded artifact kinds without raw trajectory bodies",
+    "ordering": "manifest on disk before envelope normalization",
+    "failure_behavior": "wrong base path or stale hash surfaces gap codes",
+    "composition_test": "mcp-server/src/bounded-composition/bounded-envelope-discovery.test.ts",
+    "e2e_only": false
+  },
+  {
+    "id": "BC-MANIFEST->DIV",
+    "trigger": "paired trajectory manifests supplied",
+    "callee": "analyzeTrajectoryDivergence",
+    "arguments": "manifest pair and request token containment",
+    "effect": "read-only divergence report with stable contrast rows",
+    "ordering": "manifest capture before analyzer invocation",
+    "failure_behavior": "missing provenance or stale manifest returns explicit errors",
+    "composition_test": "mcp-server/src/bounded-composition/trajectory-divergence-composition.test.ts",
+    "e2e_only": false
+  },
+  {
+    "id": "BC-DIV->LESSON",
+    "trigger": "divergence report available",
+    "callee": "distillTrajectoryLessons",
+    "arguments": "divergence report hash and eligibility flags",
+    "effect": "draft-only lesson outputs without canonical YAML writes",
+    "ordering": "divergence analysis before distillation",
+    "failure_behavior": "stale report hash or ineligible input refuses silent write",
+    "composition_test": "mcp-server/src/bounded-composition/lesson-shadow-composition.test.ts",
+    "e2e_only": false
+  },
+  {
+    "id": "BC-MANIFEST->SHADOW",
+    "trigger": "shadow opt-in and budget ceiling allow comparison",
+    "callee": "runShadowComparison",
+    "arguments": "candidate manifests and anonymization policy",
+    "effect": "shadow-comparison.v1 advisory report with selection_authority none",
+    "ordering": "manifests captured before shadow run",
+    "failure_behavior": "budget exhaustion or schema violation rejects report",
+    "composition_test": "mcp-server/src/bounded-composition/lesson-shadow-composition.test.ts",
+    "e2e_only": false
+  },
+  {
+    "id": "BC-SCHEDULE->DRIVER",
+    "trigger": "bounded schedule executor invoked",
+    "callee": "buildScheduleExecutorFromBoundDriver / bindLiveExecutor",
+    "arguments": "task graph turns and injectable AgentDriver descriptor",
+    "effect": "driver outcomes mapped per turn without bypassing dry-run parity",
+    "ordering": "driver bind before schedule execution",
+    "failure_behavior": "invalid OEE/descriptor or live approval missing fails closed",
+    "composition_test": "mcp-server/src/bounded-composition/agentstream-seam-composition.test.ts",
+    "e2e_only": false
+  },
+  {
+    "id": "BC-DRIVER->PROVENANCE",
+    "trigger": "schedule execution completes or fails",
+    "callee": "executeBoundedScheduleToTrajectory / captureTrajectoryManifest",
+    "arguments": "driver session refs and schedule outcome metadata",
+    "effect": "trajectory manifest carries harness/adapter provenance",
+    "ordering": "driver turns complete before manifest promotion",
+    "failure_behavior": "failed driver outcome stops dependents without manifest promotion",
+    "composition_test": "mcp-server/src/bounded-composition/agentstream-seam-composition.test.ts",
+    "e2e_only": false
+  }
+]

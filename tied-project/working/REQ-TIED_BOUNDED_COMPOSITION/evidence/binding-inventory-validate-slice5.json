@@ -1,0 +1,6 @@
+{
+  "schema_version": "binding-inventory-validator.v1",
+  "ok": true,
+  "proof_boundary": "Binding inventory completeness, async seam column presence, and E2E justification only; this proves binding exercised in test design—not runtime ordering, delivery guarantees, cancellation propagation, or race-freedom.",
+  "diagnostics": []
+}

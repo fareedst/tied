@@ -1,0 +1,43 @@
+ARCH-TIED_BOUNDED_COMPOSITION:
+  cross_references:
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  decision: "Implement six default-off modules under mcp-server/src/bounded-composition/ with local raw trajectories under tied-bundle/working/{REQ-TOKEN}/trajectories/, compact manifests/reports in committed working roots, draft-only downstream routing, advisory shadow outputs, and injectable AgentDriver seam—never checklist gate authority."
+  implementation_approach:
+    details:
+      - "C2 deferral: descriptor + OEE ref only for external executors"
+      - "Default-off unless budget/manifest/shadow flags set"
+      - "Privacy tier operator_local by default"
+    summary: "Pure modules plus thin MCP wrappers; envelope artifact kinds; agentstream adapter alignment."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-18"
+      reason: "Slice 0 contract mint"
+  name: "Bounded composition architecture"
+  rationale:
+    benefits:
+      - "Operator opt-in"
+      - "Reuse envelope, feedback, and experiment bridges"
+    problems_solved:
+      - "Implicit gate authority from comparison tooling"
+      - "Unbounded multi-run evidence"
+    why: "Conservative TIED-native boundary from tied-vs-harness2.md without Harness² vendoring or automatic IMPL mutation."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_FIDELITY_RESEARCH"
+    informs: []
+    see_also:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM"
+      - "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS"
+      - "IMPL-TIED_BOUNDED_LESSON_DISTILLATION"
+      - "IMPL-TIED_BOUNDED_PILOT_BUDGET"
+      - "IMPL-TIED_BOUNDED_SHADOW_COMPARISON"
+      - "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE"
+    requirements:
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    tests: []

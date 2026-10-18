@@ -1,0 +1,41 @@
+IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM:
+  code_locations:
+    files:
+      - description: "BIND_CLIENT_AGENT_DRIVER implementation (planned)"
+        path: "mcp-server/packages/agentstream/src/live-driver-bind.ts"
+      - description: "Task graph adapter composition (planned)"
+        path: "mcp-server/src/feature-orchestration/agentstream-adapter.ts"
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-FEAT_AGENTSTREAM_ADAPTER"
+    - "REQ-GOAGENT-AGENT-EXECUTOR"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM-pseudocode.md"
+  implementation_approach:
+    details:
+      - "No checklist gate authority"
+      - "RED unit tests before production code"
+    summary: "Implement BIND_CLIENT_AGENT_DRIVER per sidecar; default-off opt-in; pure module first."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-18"
+      reason: "Slice 0 contract mint"
+  name: "Bounded agentstream driver seam"
+  related_decisions:
+    depends_on:
+      - "IMPL-MODULE_VALIDATION"
+    see_also: []
+    supersedes: []
+  status: "Planned"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BOUNDED_COMPOSITION"
+    code_annotations:
+      - "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM"
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    requirements:
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    tests:
+      - "mcp-server/src/feature-orchestration/agentstream-adapter.test.ts"

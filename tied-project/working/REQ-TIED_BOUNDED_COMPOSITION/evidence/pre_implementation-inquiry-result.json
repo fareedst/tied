@@ -1,0 +1,273 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-bc-s0",
+    "scope": [
+      "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+      "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+      "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002"
+    ],
+    "graph": {
+      "projectId": "stdd-bc-s0",
+      "nodes": [
+        {
+          "id": "constraint:arch-bc-budget",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-bc-div",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-bc-traj",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-bc-budget-pseudo",
+          "kind": "evidence",
+          "revision": "bc-s0"
+        },
+        {
+          "id": "evidence:loci-bc-div-pseudo",
+          "kind": "evidence",
+          "revision": "bc-s0"
+        },
+        {
+          "id": "evidence:loci-bc-traj-pseudo",
+          "kind": "evidence",
+          "revision": "bc-s0"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+          "kind": "block",
+          "revision": "bc-block-div"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+          "kind": "block",
+          "revision": "bc-block-budget"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+          "kind": "block",
+          "revision": "bc-block-traj"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-BUDGET",
+          "kind": "criterion",
+          "revision": "bc-crit-budget"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-DIV",
+          "kind": "criterion",
+          "revision": "bc-crit-div"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-TRAJ",
+          "kind": "criterion",
+          "revision": "bc-crit-traj"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-BUDGET",
+          "to": "constraint:arch-bc-budget",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-DIV",
+          "to": "constraint:arch-bc-div",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-TRAJ",
+          "to": "constraint:arch-bc-traj",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-bc-budget",
+          "to": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-bc-div",
+          "to": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-bc-traj",
+          "to": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+          "to": "evidence:loci-bc-div-pseudo",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+          "to": "evidence:loci-bc-budget-pseudo",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+          "to": "evidence:loci-bc-traj-pseudo",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "81eec3d82e8e7348",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "bc-spec-traj",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "89a349964da72b07",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "bc-spec-div",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "b234211e429f7360",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "bc-spec-budget",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "tied-project/implementation-decisions/IMPL-TIED_BOUNDED_PILOT_BUDGET-pseudocode.md:VALIDATE_PILOT_BUDGET"
+        },
+        "evidenceRefs": [
+          "bc-prod-budget"
+        ]
+      },
+      {
+        "id": "f60aa2c7a0824db1",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "bc-spec-traj",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "f6ea51f3a7511214",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "bc-spec-budget",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fd668263d104eb49",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "bc-spec-div",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRESOLVED",
+  "status": {
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003": "UNRESOLVED",
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001": "UNRESOLVED",
+    "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002": "UNRESOLVED"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+      "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+      "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRESOLVED",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+      "project_id": "stdd-bc-s0",
+      "run_id": "bc-preimpl-20261018",
+      "phase": "pre_implementation",
+      "scope": [
+        "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+        "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+        "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003"
+      ],
+      "scope_hash": "3ff8f709e8fdc833c7d8f2b9311137e31117d3cd48eb18bf95d47a934d50b016",
+      "artifact_hashes": {
+        "obligation-report.json": "e03f10ff6ce228b5fa9009b9b77d89b9e31481aae69058748ca2aa1922bf53e0",
+        "finding-ledger.jsonl": "8e5a2e64e2fd28f565fa438776a25f2bda7e2353492e2a10c92256adffddf8b4",
+        "gate-result.json": "75021793c1d7733c57fc1cd1bdb6cf29138f8a7fbb83a3c00a99beca72018726",
+        "evidence-provenance.json": "60b851cd9cefe7d96dc9005ed926262104d28049cdd4e27648430527304c0d22"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-s0",
+        "run_id": "bc-preimpl-20261018",
+        "phase": "pre_implementation",
+        "scope_hash": "3ff8f709e8fdc833c7d8f2b9311137e31117d3cd48eb18bf95d47a934d50b016",
+        "hash": "e03f10ff6ce228b5fa9009b9b77d89b9e31481aae69058748ca2aa1922bf53e0",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-s0",
+        "run_id": "bc-preimpl-20261018",
+        "phase": "pre_implementation",
+        "scope_hash": "3ff8f709e8fdc833c7d8f2b9311137e31117d3cd48eb18bf95d47a934d50b016",
+        "hash": "8e5a2e64e2fd28f565fa438776a25f2bda7e2353492e2a10c92256adffddf8b4",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-s0",
+        "run_id": "bc-preimpl-20261018",
+        "phase": "pre_implementation",
+        "scope_hash": "3ff8f709e8fdc833c7d8f2b9311137e31117d3cd48eb18bf95d47a934d50b016",
+        "hash": "75021793c1d7733c57fc1cd1bdb6cf29138f8a7fbb83a3c00a99beca72018726",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-s0",
+        "run_id": "bc-preimpl-20261018",
+        "phase": "pre_implementation",
+        "scope_hash": "3ff8f709e8fdc833c7d8f2b9311137e31117d3cd48eb18bf95d47a934d50b016",
+        "hash": "60b851cd9cefe7d96dc9005ed926262104d28049cdd4e27648430527304c0d22",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  }
+}

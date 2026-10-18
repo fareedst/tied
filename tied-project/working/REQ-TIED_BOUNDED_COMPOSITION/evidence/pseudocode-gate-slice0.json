@@ -1,0 +1,276 @@
+{
+  "date": "2026-10-18",
+  "gate_mode": true,
+  "results": {
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET": {
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "ok": true,
+      "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+      "blocks": [
+        {
+          "name": "VALIDATE_PILOT_BUDGET",
+          "line": 21,
+          "token_refs": [
+            "ARCH-TIED_BOUNDED_COMPOSITION",
+            "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+            "REQ-TIED_BOUNDED_COMPOSITION"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE",
+            "TERMINATION"
+          ]
+        }
+      ],
+      "dependencies": [],
+      "coverage": [
+        {
+          "block": "VALIDATE_PILOT_BUDGET",
+          "branch_lines": [
+            31,
+            32,
+            33,
+            34,
+            35
+          ],
+          "failure_modes": [
+            "OUTPUT: normalized pilot budget | error InvalidPilotBudget | error OptInRequired | error DuplicateNamespace",
+            "IF bounded_composition opt-in flag is false: RETURN error OptInRequired",
+            "IF schema_version is not pilot-budget.v1: RETURN error InvalidPilotBudget",
+            "IF k <= 0 OR mode not in {parallel, sequential}: RETURN error InvalidPilotBudget",
+            "IF seed missing OR run_namespace missing OR cost_ceiling missing OR stop_criteria missing: RETURN error InvalidPilotBudget",
+            "IF run_namespace duplicates an active namespace for the same request_token: RETURN error DuplicateNamespace"
+          ],
+          "references": []
+        }
+      ],
+      "diagnostics": [],
+      "leakage": []
+    },
+    "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE": {
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "ok": true,
+      "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+      "blocks": [
+        {
+          "name": "CAPTURE_TRAJECTORY_MANIFEST",
+          "line": 22,
+          "token_refs": [
+            "ARCH-TIED_BOUNDED_COMPOSITION",
+            "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+            "REQ-TIED_BOUNDED_COMPOSITION"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE",
+            "TERMINATION"
+          ]
+        }
+      ],
+      "dependencies": [],
+      "coverage": [
+        {
+          "block": "CAPTURE_TRAJECTORY_MANIFEST",
+          "branch_lines": [
+            32,
+            34,
+            35
+          ],
+          "failure_modes": [
+            "OUTPUT: manifest artifact descriptor | error WrongBasePath | error PrivacyRedactionFailure | error MissingProvenance",
+            "IF tied base path != intended project tied-project: RETURN error WrongBasePath",
+            "IF redaction fails: RETURN error PrivacyRedactionFailure",
+            "IF required provenance ref missing: RETURN error MissingProvenance"
+          ],
+          "references": []
+        }
+      ],
+      "diagnostics": [],
+      "leakage": []
+    },
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS": {
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "ok": true,
+      "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+      "blocks": [
+        {
+          "name": "ANALYZE_TRAJECTORY_DIVERGENCE",
+          "line": 20,
+          "token_refs": [
+            "ARCH-TIED_BOUNDED_COMPOSITION",
+            "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+            "REQ-TIED_BOUNDED_COMPOSITION"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE",
+            "TERMINATION"
+          ]
+        }
+      ],
+      "dependencies": [],
+      "coverage": [
+        {
+          "block": "ANALYZE_TRAJECTORY_DIVERGENCE",
+          "branch_lines": [
+            30,
+            31
+          ],
+          "failure_modes": [
+            "OUTPUT: divergence report descriptor | error StaleManifest | error RequestScopeViolation",
+            "FOR EACH manifest: IF request_token mismatch: RETURN error RequestScopeViolation",
+            "IF any manifest stale: RETURN error StaleManifest"
+          ],
+          "references": []
+        }
+      ],
+      "diagnostics": [],
+      "leakage": []
+    },
+    "IMPL-TIED_BOUNDED_LESSON_DISTILLATION": {
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "ok": true,
+      "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+      "blocks": [
+        {
+          "name": "DISTILL_TRAJECTORY_LESSONS",
+          "line": 20,
+          "token_refs": [
+            "ARCH-TIED_BOUNDED_COMPOSITION",
+            "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+            "REQ-TIED_BOUNDED_COMPOSITION"
+          ],
+          "contract_fields": [
+            "DATA_TRANSITION",
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE",
+            "TERMINATION"
+          ]
+        }
+      ],
+      "dependencies": [],
+      "coverage": [
+        {
+          "block": "DISTILL_TRAJECTORY_LESSONS",
+          "branch_lines": [
+            31,
+            32,
+            33
+          ],
+          "failure_modes": [
+            "OUTPUT: lesson draft bundle | error StaleReport | error IneligibleInput",
+            "IF report hash != context.expected_report_hash: RETURN error StaleReport",
+            "IF report ineligible or missing required contrast rows: RETURN error IneligibleInput",
+            "IF duplicate group already recorded for same stable identity: RETURN error DuplicateSuppressed"
+          ],
+          "references": []
+        }
+      ],
+      "diagnostics": [],
+      "leakage": []
+    },
+    "IMPL-TIED_BOUNDED_SHADOW_COMPARISON": {
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "ok": true,
+      "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+      "blocks": [
+        {
+          "name": "RUN_SHADOW_COMPARISON",
+          "line": 20,
+          "token_refs": [
+            "ARCH-TIED_BOUNDED_COMPOSITION",
+            "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+            "REQ-TIED_BOUNDED_COMPOSITION"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE",
+            "TERMINATION"
+          ]
+        }
+      ],
+      "dependencies": [],
+      "coverage": [
+        {
+          "block": "RUN_SHADOW_COMPARISON",
+          "branch_lines": [
+            30,
+            31
+          ],
+          "failure_modes": [
+            "OUTPUT: shadow-comparison report descriptor | error OptInRequired | error BudgetExhausted",
+            "IF shadow opt-in false: RETURN error OptInRequired",
+            "IF pilot budget stop criteria or cost ceiling exhausted: RETURN error BudgetExhausted"
+          ],
+          "references": []
+        }
+      ],
+      "diagnostics": [],
+      "leakage": []
+    },
+    "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM": {
+      "schema_version": "layer-b-pseudocode-validator.v1",
+      "ok": true,
+      "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+      "blocks": [
+        {
+          "name": "BIND_CLIENT_AGENT_DRIVER",
+          "line": 20,
+          "token_refs": [
+            "ARCH-TIED_BOUNDED_COMPOSITION",
+            "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+            "REQ-TIED_BOUNDED_COMPOSITION"
+          ],
+          "contract_fields": [
+            "EFFECTS",
+            "FAILURE_MODES",
+            "INPUT",
+            "OUTPUT",
+            "POST",
+            "PRE",
+            "TERMINATION"
+          ]
+        }
+      ],
+      "dependencies": [],
+      "coverage": [
+        {
+          "block": "BIND_CLIENT_AGENT_DRIVER",
+          "branch_lines": [
+            26,
+            30,
+            31,
+            32
+          ],
+          "failure_modes": [
+            "OUTPUT: bound driver session | error InvalidDriverContract | error LiveExternalNotApproved",
+            "IF live external execution requested without operator approval: RETURN error LiveExternalNotApproved"
+          ],
+          "references": []
+        }
+      ],
+      "diagnostics": [],
+      "leakage": []
+    }
+  }
+}

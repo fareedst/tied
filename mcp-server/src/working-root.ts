@@ -17,6 +17,7 @@ export const LOCAL_WORKING_PREFIXES = [
   "adherence/",
   "jev/",
   "pseudocode-analysis/",
+  "trajectories/",
 ] as const;
 
 /**

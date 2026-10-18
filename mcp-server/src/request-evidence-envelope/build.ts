@@ -35,6 +35,7 @@ import type {
 } from "./types.js";
 import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
 
+import { classifyBoundedEvidenceFilename } from "../bounded-composition/envelope-artifact-kind.js";
 import { isValidWorkingRequestToken } from "../working-request-token.js";
 const PHASE_DIR_RE = /^phase-(pre_implementation|verification|close_out)$/u;
 const INQUIRY_ARTIFACTS = [
@@ -285,6 +286,10 @@ async function discoverWorkingArtifacts(
       else if (name.includes("capability-profile")) kind = "capability_profile";
       else if (name.includes("assessor-agreement")) kind = "assessor_agreement";
       else if (name.includes("adaptive-effectiveness")) kind = "adaptive_effectiveness";
+      else {
+        const boundedKind = classifyBoundedEvidenceFilename(name);
+        if (boundedKind) kind = boundedKind;
+      }
       discovered.push({
         absolute,
         relative: relPath(projectRoot, absolute),

@@ -783,6 +783,14 @@ ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_BOUNDED_COMPOSITION:
+  cross_references:
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  description: "Six default-off modules under mcp-server/src/bounded-composition/"
+  detail_file: "architecture-decisions/ARCH-TIED_BOUNDED_COMPOSITION.yaml"
+  name: "Bounded composition architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
 ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
   cross_references:
     - "IMPL-TIED_BROWNFIELD_VALIDATION"
@@ -2197,6 +2205,54 @@ IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM:
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM.yaml"
+  name: "Bounded Agentstream seam"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS:
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS.yaml"
+  name: "Bounded divergence analysis"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+IMPL-TIED_BOUNDED_LESSON_DISTILLATION:
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_LESSON_DISTILLATION.yaml"
+  name: "Bounded lesson distillation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+IMPL-TIED_BOUNDED_PILOT_BUDGET:
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_PILOT_BUDGET.yaml"
+  name: "Bounded pilot budget validation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+IMPL-TIED_BOUNDED_SHADOW_COMPARISON:
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_SHADOW_COMPARISON.yaml"
+  name: "Bounded shadow comparison"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE:
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  detail_file: "implementation-decisions/IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE.yaml"
+  name: "Bounded trajectory evidence"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
 IMPL-TIED_BROWNFIELD_VALIDATION:
   cross_references:
     - "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL"
@@ -3890,6 +3946,14 @@ REQ-TIED_BOOTSTRAP_DETAIL_INTEGRITY:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_BOUNDED_COMPOSITION:
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+  description: "Default-off bounded composition modules (Harness²-inspired)"
+  detail_file: "requirements/REQ-TIED_BOUNDED_COMPOSITION.yaml"
+  name: "TIED bounded composition"
+  source_index: "requirements.yaml"
+  status: "Planned"
 REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
   category: "Functional"
   cross_references:

@@ -1,0 +1,37 @@
+IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE:
+  code_locations:
+    files:
+      - description: "CAPTURE_TRAJECTORY_MANIFEST implementation (planned)"
+        path: "mcp-server/src/bounded-composition/trajectory-manifest.ts"
+  cross_references:
+    - "ARCH-TIED_BOUNDED_COMPOSITION"
+    - "REQ-TIED_BOUNDED_COMPOSITION"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE-pseudocode.md"
+  implementation_approach:
+    details:
+      - "No checklist gate authority"
+      - "RED unit tests before production code"
+    summary: "Implement CAPTURE_TRAJECTORY_MANIFEST per sidecar; default-off opt-in; pure module first."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-18"
+      reason: "Slice 0 contract mint"
+  name: "Bounded trajectory evidence"
+  related_decisions:
+    depends_on:
+      - "IMPL-MODULE_VALIDATION"
+    see_also: []
+    supersedes: []
+  status: "Planned"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-TIED_BOUNDED_COMPOSITION"
+    code_annotations:
+      - "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE"
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    requirements:
+      - "REQ-TIED_BOUNDED_COMPOSITION"
+    tests:
+      - "mcp-server/src/bounded-composition/trajectory_evidence.test.ts"

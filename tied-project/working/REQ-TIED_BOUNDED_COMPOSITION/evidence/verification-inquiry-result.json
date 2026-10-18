@@ -1,0 +1,355 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-bc-verify",
+    "scope": [
+      "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006",
+      "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+      "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+      "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+      "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+      "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002"
+    ],
+    "graph": {
+      "projectId": "stdd-bc-verify",
+      "nodes": [
+        {
+          "id": "constraint:arch-bc-budget",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-bc-div",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-bc-driver",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-bc-lesson",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-bc-shadow",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:arch-bc-traj",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:loci-bc-budget-test",
+          "kind": "evidence",
+          "revision": "bc-s5"
+        },
+        {
+          "id": "evidence:loci-bc-div-test",
+          "kind": "evidence",
+          "revision": "bc-s5"
+        },
+        {
+          "id": "evidence:loci-bc-driver-test",
+          "kind": "evidence",
+          "revision": "bc-s5"
+        },
+        {
+          "id": "evidence:loci-bc-lesson-test",
+          "kind": "evidence",
+          "revision": "bc-s5"
+        },
+        {
+          "id": "evidence:loci-bc-shadow-test",
+          "kind": "evidence",
+          "revision": "bc-s5"
+        },
+        {
+          "id": "evidence:loci-bc-traj-test",
+          "kind": "evidence",
+          "revision": "bc-s5"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006",
+          "kind": "block",
+          "revision": "bc-block-driver"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+          "kind": "block",
+          "revision": "bc-block-div"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+          "kind": "block",
+          "revision": "bc-block-lesson"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+          "kind": "block",
+          "revision": "bc-block-budget"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+          "kind": "block",
+          "revision": "bc-block-shadow"
+        },
+        {
+          "id": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+          "kind": "block",
+          "revision": "bc-block-traj"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-BUDGET",
+          "kind": "criterion",
+          "revision": "bc-crit-budget"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-DIV",
+          "kind": "criterion",
+          "revision": "bc-crit-div"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-DRIVER",
+          "kind": "criterion",
+          "revision": "bc-crit-driver"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-LESSON",
+          "kind": "criterion",
+          "revision": "bc-crit-lesson"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-SHADOW",
+          "kind": "criterion",
+          "revision": "bc-crit-shadow"
+        },
+        {
+          "id": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-TRAJ",
+          "kind": "criterion",
+          "revision": "bc-crit-traj"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-BUDGET",
+          "to": "constraint:arch-bc-budget",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-DIV",
+          "to": "constraint:arch-bc-div",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-DRIVER",
+          "to": "constraint:arch-bc-driver",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-LESSON",
+          "to": "constraint:arch-bc-lesson",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-SHADOW",
+          "to": "constraint:arch-bc-shadow",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_BOUNDED_COMPOSITION#SC-BC-TRAJ",
+          "to": "constraint:arch-bc-traj",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:arch-bc-budget",
+          "to": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-bc-div",
+          "to": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-bc-driver",
+          "to": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-bc-lesson",
+          "to": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-bc-shadow",
+          "to": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:arch-bc-traj",
+          "to": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006",
+          "to": "evidence:loci-bc-driver-test",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+          "to": "evidence:loci-bc-div-test",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+          "to": "evidence:loci-bc-lesson-test",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+          "to": "evidence:loci-bc-budget-test",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+          "to": "evidence:loci-bc-shadow-test",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+          "to": "evidence:loci-bc-traj-test",
+          "kind": "block_evidence"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "affc9845966d7e70",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "bc-spec-close",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/bounded-composition/*.test.ts"
+        },
+        "evidenceRefs": [
+          "bc-test-suite"
+        ]
+      },
+      {
+        "id": "ffa05531f249e527",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "bc-spec-close",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRESOLVED",
+  "status": {
+    "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006": "UNRESOLVED",
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003": "UNRESOLVED",
+    "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004": "UNRESOLVED",
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001": "UNRESOLVED",
+    "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005": "UNRESOLVED",
+    "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002": "UNRESOLVED"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006",
+      "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+      "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+      "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+      "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+      "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRESOLVED",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+      "project_id": "stdd-bc-verify",
+      "run_id": "bc-verify-20261018",
+      "phase": "verification",
+      "scope": [
+        "IMPL-TIED_BOUNDED_PILOT_BUDGET#VALIDATE_PILOT_BUDGET#bcplan0001",
+        "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE#CAPTURE_TRAJECTORY_MANIFEST#bcplan0002",
+        "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS#ANALYZE_TRAJECTORY_DIVERGENCE#bcplan0003",
+        "IMPL-TIED_BOUNDED_LESSON_DISTILLATION#DISTILL_TRAJECTORY_LESSONS#bcplan0004",
+        "IMPL-TIED_BOUNDED_SHADOW_COMPARISON#RUN_SHADOW_COMPARISON#bcplan0005",
+        "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM#BIND_CLIENT_AGENT_DRIVER#bcplan0006"
+      ],
+      "scope_hash": "df783630e14c5deabfc94f3e0af9dfc5c1d16cd70d215536297717fd128828ed",
+      "artifact_hashes": {
+        "obligation-report.json": "d30e74f0a315c2e1b7ab9459e281cf843b14e3a14795b43caf388604b096ee8d",
+        "finding-ledger.jsonl": "d1ed12d09ba008ec1929bf6acd7d987095426502f2b90fa46789911ab6b2d633",
+        "gate-result.json": "d2ebec4746c5852d9ebd6c7126182e4adcaea146d8d2f1f6211e68d6111a2188",
+        "evidence-provenance.json": "521353a83e457afb99d3aed46cfc6484b12aa79d6bef1e3989dfbbbf5114d4b6"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-verify",
+        "run_id": "bc-verify-20261018",
+        "phase": "verification",
+        "scope_hash": "df783630e14c5deabfc94f3e0af9dfc5c1d16cd70d215536297717fd128828ed",
+        "hash": "d30e74f0a315c2e1b7ab9459e281cf843b14e3a14795b43caf388604b096ee8d",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-verify",
+        "run_id": "bc-verify-20261018",
+        "phase": "verification",
+        "scope_hash": "df783630e14c5deabfc94f3e0af9dfc5c1d16cd70d215536297717fd128828ed",
+        "hash": "d1ed12d09ba008ec1929bf6acd7d987095426502f2b90fa46789911ab6b2d633",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-verify",
+        "run_id": "bc-verify-20261018",
+        "phase": "verification",
+        "scope_hash": "df783630e14c5deabfc94f3e0af9dfc5c1d16cd70d215536297717fd128828ed",
+        "hash": "d2ebec4746c5852d9ebd6c7126182e4adcaea146d8d2f1f6211e68d6111a2188",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_BOUNDED_COMPOSITION",
+        "project_id": "stdd-bc-verify",
+        "run_id": "bc-verify-20261018",
+        "phase": "verification",
+        "scope_hash": "df783630e14c5deabfc94f3e0af9dfc5c1d16cd70d215536297717fd128828ed",
+        "hash": "521353a83e457afb99d3aed46cfc6484b12aa79d6bef1e3989dfbbbf5114d4b6",
+        "path": "tied-bundle/working/REQ-TIED_BOUNDED_COMPOSITION/adversarial-inquiry/phase-verification/evidence-provenance.json"
+      }
+    }
+  }
+}

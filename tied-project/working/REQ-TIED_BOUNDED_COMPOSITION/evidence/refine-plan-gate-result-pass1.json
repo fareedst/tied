@@ -1,0 +1,14 @@
+{
+  "refine_pass": 1,
+  "phase": "pre_implementation",
+  "allowed": false,
+  "expected_at_refine_boundary": true,
+  "blocking_diagnostics": [
+    "pending_required_step:sub-adversarial-inquiry-pass",
+    "pending_required_step:gate-pseudocode-validation",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete"
+  ],
+  "gate_receipt": "tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/gates/pre_implementation-2026-10-18T16-33-14-555Z.json",
+  "next_unblock": "build-plan Slice 0 — mint REQ/ARCH/IMPL sidecars, pseudocode gate, structural adversarial inquiry, then re-run pre_implementation gate"
+}
