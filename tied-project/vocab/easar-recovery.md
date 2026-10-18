@@ -4,7 +4,7 @@
 
 **Traceability:** `[REQ-TIED_EASAR_RECOVERY]` · `[ARCH-TIED_EASAR_ARTIFACT_MODEL]` · `[IMPL-TIED_EASAR_RECEIPTS]` · `[PROC-EASAR_RECOVERY]` · methodology [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7
 
-**Status:** Slice 5 Stage 7 validation corpus on disk (2026-10-18); Slice 6 portable export plan refined (2026-10-19). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
+**Status:** Slices 5–6 complete (2026-10-18): validation corpus + portable export manifest verified (`easar-slice6-verify-20261019`). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
 
 **See also:** [`routing.md`](routing.md) (row **2f**) · [`quality-assurance.md`](quality-assurance.md) (grading / evaluation corpus contrast) · [`fidelity-research.md`](fidelity-research.md) (adversarial inquiry vs claims review) · [`tied-methodology.md`](tied-methodology.md)
 
@@ -41,7 +41,7 @@
 
 | Term | Definition | TIED preferred name |
 | --- | --- | --- |
-| **Portable export adapter** | Read-only serializer from §6.1 canonical paths to §6.2 layout | MCP `tied_easar_recovery_export_build` (planned); IMPL `RUN_EASAR_RECOVERY_EXPORT_V1` |
+| **Portable export adapter** | Read-only serializer from §6.1 canonical paths to §6.2 layout | MCP `tied_easar_recovery_export_build`; IMPL `RUN_EASAR_RECOVERY_EXPORT_V1` |
 | **Export tree** | Materialized `recovery/` directory for external auditors | Default under `tied-bundle/working/{REQ}/recovery-export/` — **gitignored** |
 | **Manifest gaps** | Explicit unmapped §6.2 slots in export receipt | `gaps[]` on `recovery-export-manifest.v1.json` — not blocking completeness gate |
 

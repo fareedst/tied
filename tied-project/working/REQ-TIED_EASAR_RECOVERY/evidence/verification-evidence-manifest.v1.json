@@ -1,7 +1,7 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
-  "run_id": "easar-slice5-verify-20261018",
-  "commit": "a5521f1981fe6c199fdbecfee5e5d39f519b0708",
+  "run_id": "easar-slice6-verify-20261019",
+  "commit": "75f41a153e1ba4ff209c87d190d4cf1c76f08d60",
   "environment": {
     "node": "v25.9.0",
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
@@ -54,6 +54,17 @@
       "artifacts": [
         "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/validation-cases.v1.yaml",
         "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/validation-results.v1.json"
+      ]
+    },
+    {
+      "id": "easar-slice6-unit",
+      "command": ["npm", "test", "--prefix", "mcp-server", "--", "easar-receipts", "recovery-export"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/recovery-export-manifest.v1.json",
+        "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/recovery-portable-map.v1.yaml"
       ]
     }
   ],
@@ -155,6 +166,26 @@
       "rationale": "Distinct verification run_id easar-slice5-verify-20261018 paired at gate",
       "evidence_method": "tied_adversarial_inquiry_run",
       "command_or_test": "tied-project/working/REQ-TIED_EASAR_RECOVERY/gates/verification-2026-10-18T04-32-48-412Z.json",
+      "result": "passed",
+      "owner": "sub-adversarial-inquiry-pass"
+    },
+    {
+      "id": "easar-s6-export-manifest",
+      "attribute": "recovery-export-manifest.v1",
+      "applicability": "applicable",
+      "rationale": "Slice 6 SC-EASAR-EXPORT dogfood manifest + portable map",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "easar-s6-integrated-inquiry",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Distinct verification run_id easar-slice6-verify-20261019 paired at gate",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/",
       "result": "passed",
       "owner": "sub-adversarial-inquiry-pass"
     }

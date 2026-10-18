@@ -1,0 +1,200 @@
+{
+  "graph": {
+    "projectId": "stdd-easar",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EASAR_RECOVERY#SC-EASAR-EXPORT",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "a0577125535361c5",
+          "sourceRevision": "easar-s6-src"
+        },
+        "architectureConstraintIds": ["constraint:arch-easar-export"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint:arch-easar-export",
+        "implementationBlockIds": [
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_RECOVERY_EXPORT_MANIFEST_V1#5472a2e4daf516b4",
+          "IMPL-TIED_EASAR_RECEIPTS#RUN_EASAR_RECOVERY_EXPORT_V1#42b753f0bbc049e2",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_RECOVERY_EXPORT_MCP#7e399539f74287bd"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_RECOVERY_EXPORT_MANIFEST_V1#5472a2e4daf516b4",
+          "kind": "block",
+          "name": "BUILD_RECOVERY_EXPORT_MANIFEST_V1",
+          "derivation": "content",
+          "revision": "2922c6d3f0a12add",
+          "sourceRevision": "easar-s6-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#RUN_EASAR_RECOVERY_EXPORT_V1#42b753f0bbc049e2",
+          "kind": "block",
+          "name": "RUN_EASAR_RECOVERY_EXPORT_V1",
+          "derivation": "content",
+          "revision": "44a49e8a43a9b5a2",
+          "sourceRevision": "easar-s6-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_RECOVERY_EXPORT_MCP#7e399539f74287bd",
+          "kind": "block",
+          "name": "BUILD_EASAR_RECOVERY_EXPORT_MCP",
+          "derivation": "content",
+          "revision": "b287362aff202bb9",
+          "sourceRevision": "easar-s6-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-s6-export-unit",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_RECOVERY_EXPORT_MANIFEST_V1#5472a2e4daf516b4",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts",
+        "sourceRevision": "easar-s6-src"
+      },
+      {
+        "id": "loci-s6-export-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_RECOVERY_EXPORT_MANIFEST_V1#5472a2e4daf516b4",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/recovery-export-v1.ts:buildRecoveryExportManifestV1",
+        "sourceRevision": "easar-s6-src"
+      },
+      {
+        "id": "loci-s6-run-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#RUN_EASAR_RECOVERY_EXPORT_V1#42b753f0bbc049e2",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/recovery-export-v1.ts:runEasarRecoveryExportV1",
+        "sourceRevision": "easar-s6-src"
+      },
+      {
+        "id": "loci-s6-mcp-test",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_RECOVERY_EXPORT_MCP#7e399539f74287bd",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/recovery-export-mcp.test.ts",
+        "sourceRevision": "easar-s6-src"
+      },
+      {
+        "id": "loci-s6-mcp-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_RECOVERY_EXPORT_MCP#7e399539f74287bd",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/recovery-export-mcp.ts:buildEasarRecoveryExport",
+        "sourceRevision": "easar-s6-src"
+      },
+      {
+        "id": "loci-s6-manifest-evidence",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_RECOVERY_EXPORT_MANIFEST_V1#5472a2e4daf516b4",
+        "kind": "test",
+        "location": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/recovery-export-manifest.v1.json",
+        "sourceRevision": "easar-s6-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "b287362aff202bb9",
+    "specification": [
+      {
+        "id": "s6-spec-manifest",
+        "kind": "behavior",
+        "value": "recovery-export-manifest.v1 is export_only with gaps[] and errors[] for missing required sources.",
+        "order": 1
+      },
+      {
+        "id": "s6-spec-readonly",
+        "kind": "behavior",
+        "value": "Export adapter copies or transforms canonical working evidence only; no tied-project/*.yaml index mutation.",
+        "order": 2
+      },
+      {
+        "id": "s6-spec-mcp",
+        "kind": "behavior",
+        "value": "MCP tied_easar_recovery_export_build writes manifest when manifest_output_path set.",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "s6-test-map",
+        "statementId": "s6-spec-manifest",
+        "kind": "behavior",
+        "value": "buildRecoveryExportManifestV1 produces stable content_hash and documented gaps",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "2922c6d3f0a12add",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts"
+        }
+      },
+      {
+        "id": "s6-test-reflex-transform",
+        "statementId": "s6-spec-manifest",
+        "kind": "behavior",
+        "value": "reflexionToVerificationReportExport keeps export_only and no ledger merge",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "2922c6d3f0a12add",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts"
+        }
+      },
+      {
+        "id": "s6-test-mcp",
+        "statementId": "s6-spec-mcp",
+        "kind": "behavior",
+        "value": "buildEasarRecoveryExport writes manifest under project root",
+        "order": 3,
+        "reliable": true,
+        "blockRevision": "b287362aff202bb9",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/recovery-export-mcp.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "s6-prod-run",
+        "statementId": "s6-spec-readonly",
+        "kind": "behavior",
+        "value": "runEasarRecoveryExportV1 orchestrates transforms without yaml index writes",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "44a49e8a43a9b5a2",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/recovery-export-v1.ts:runEasarRecoveryExportV1"
+        }
+      },
+      {
+        "id": "s6-prod-mcp",
+        "statementId": "s6-spec-mcp",
+        "kind": "behavior",
+        "value": "buildEasarRecoveryExport calls run export path and optional manifest write",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "b287362aff202bb9",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/recovery-export-mcp.ts:buildEasarRecoveryExport"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_RECOVERY_EXPORT_MANIFEST_V1#5472a2e4daf516b4",
+    "IMPL-TIED_EASAR_RECEIPTS#RUN_EASAR_RECOVERY_EXPORT_V1#42b753f0bbc049e2",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_RECOVERY_EXPORT_MCP#7e399539f74287bd"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "run_id": "easar-slice6-verify-20261019",
+  "phase": "verification"
+}

@@ -1,8 +1,8 @@
 {
   "schema_version": "source-graph-index.v1",
   "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
-  "content_hash": "42f5ed82f745a897d35c9c10e92a71f627451cdf435b8f0e19e333a77121beb4",
-  "built_at": "2026-10-18T07:10:36.457Z",
+  "content_hash": "3c23ccd8ba3ae29d2c32cb7506536f520f6879e10a95f1c7679dd2a5d73fa0f3",
+  "built_at": "2026-10-18T08:50:50.352Z",
   "language_scope": [
     "typescript",
     "javascript"
@@ -2428,6 +2428,13 @@
       "file": "mcp-server/packages/cli/src/paths.ts",
       "kind": "function",
       "name": "branchCheckCliEntryFromCliModule",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/packages/cli/src/paths.ts#processCertificationCliEntryFromCliModule",
+      "file": "mcp-server/packages/cli/src/paths.ts",
+      "kind": "function",
+      "name": "processCertificationCliEntryFromCliModule",
       "exported": true
     },
     {
@@ -7303,6 +7310,13 @@
       "exported": false
     },
     {
+      "symbol_id": "mcp-server/src/cli/process-certification-cli.ts#main",
+      "file": "mcp-server/src/cli/process-certification-cli.ts",
+      "kind": "function",
+      "name": "main",
+      "exported": false
+    },
+    {
       "symbol_id": "mcp-server/src/cli/request-evidence-envelope-backfill.ts#flagValue",
       "file": "mcp-server/src/cli/request-evidence-envelope-backfill.ts",
       "kind": "function",
@@ -8294,6 +8308,83 @@
       "file": "mcp-server/src/easar-receipts/inventory-v1.ts",
       "kind": "function",
       "name": "buildInventoryV1FromWalkSummary",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildEasarRecoveryExport",
+      "file": "mcp-server/src/easar-receipts/recovery-export-mcp.ts",
+      "kind": "function",
+      "name": "buildEasarRecoveryExport",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#stableHash",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "stableHash",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#fileContentHash",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "fileContentHash",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#isRecord",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#parseRecoveryPortableMapV1",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "parseRecoveryPortableMapV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#loadRecoveryPortableMapFromFile",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "loadRecoveryPortableMapFromFile",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#reflexionToVerificationReportExport",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "reflexionToVerificationReportExport",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#markdownExcerptFromPlan",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "markdownExcerptFromPlan",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#resolveCanonicalAbsolute",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "resolveCanonicalAbsolute",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#applyRecoveryTransform",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "applyRecoveryTransform",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "file": "mcp-server/src/easar-receipts/recovery-export-v1.ts",
+      "kind": "function",
+      "name": "buildRecoveryExportManifestV1",
       "exported": true
     },
     {
@@ -12424,6 +12515,181 @@
       "file": "mcp-server/src/parse-content.ts",
       "kind": "function",
       "name": "parseRecordOrYaml",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#isRecord",
+      "file": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#runAdaptiveEffectivenessExperimentV1",
+      "file": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts",
+      "kind": "function",
+      "name": "runAdaptiveEffectivenessExperimentV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#validateExperimentFixtureV1",
+      "file": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts",
+      "kind": "function",
+      "name": "validateExperimentFixtureV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#dimensionRating",
+      "file": "mcp-server/src/process-certification-readiness/capability-model.ts",
+      "kind": "function",
+      "name": "dimensionRating",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#evaluateCapabilityProfileV1",
+      "file": "mcp-server/src/process-certification-readiness/capability-model.ts",
+      "kind": "function",
+      "name": "evaluateCapabilityProfileV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#isRecord",
+      "file": "mcp-server/src/process-certification-readiness/conformance-engine.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evidencePresent",
+      "file": "mcp-server/src/process-certification-readiness/conformance-engine.ts",
+      "kind": "function",
+      "name": "evidencePresent",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evaluateConformanceMatrixV1",
+      "file": "mcp-server/src/process-certification-readiness/conformance-engine.ts",
+      "kind": "function",
+      "name": "evaluateConformanceMatrixV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#isRecord",
+      "file": "mcp-server/src/process-certification-readiness/independent-assessment.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#validateIndependentAssessmentRecordV1",
+      "file": "mcp-server/src/process-certification-readiness/independent-assessment.ts",
+      "kind": "function",
+      "name": "validateIndependentAssessmentRecordV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#loadIndependentAssessmentRecordFromFile",
+      "file": "mcp-server/src/process-certification-readiness/independent-assessment.ts",
+      "kind": "function",
+      "name": "loadIndependentAssessmentRecordFromFile",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#buildAssessorAgreementReportV1",
+      "file": "mcp-server/src/process-certification-readiness/independent-assessment.ts",
+      "kind": "function",
+      "name": "buildAssessorAgreementReportV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#matrixPasses",
+      "file": "mcp-server/src/process-certification-readiness/readiness-report.ts",
+      "kind": "function",
+      "name": "matrixPasses",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#capabilityPasses",
+      "file": "mcp-server/src/process-certification-readiness/readiness-report.ts",
+      "kind": "function",
+      "name": "capabilityPasses",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#composeCertifiabilityReadinessV1",
+      "file": "mcp-server/src/process-certification-readiness/readiness-report.ts",
+      "kind": "function",
+      "name": "composeCertifiabilityReadinessV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#generateAssessorPackV1",
+      "file": "mcp-server/src/process-certification-readiness/readiness-report.ts",
+      "kind": "function",
+      "name": "generateAssessorPackV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#sha256Clauses",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "sha256Clauses",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "findForbiddenRollupKeys",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateEdseProcessSpecV1",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "validateEdseProcessSpecV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso12207MappingV1",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "validateIso12207MappingV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso330xxCapabilityModelV1",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "validateIso330xxCapabilityModelV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateConformanceCatalogV1",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "validateConformanceCatalogV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "loadProcessCertificationBundleV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#defaultBundleRoot",
+      "file": "mcp-server/src/process-certification-readiness/spec-loader.ts",
+      "kind": "function",
+      "name": "defaultBundleRoot",
       "exported": true
     },
     {
@@ -24415,6 +24681,11 @@
       "kind": "imports"
     },
     {
+      "from_symbol_id": "mcp-server/packages/cli/src/index.ts#processCertificationCliEntryFromCliModule",
+      "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#processCertificationCliEntryFromCliModule",
+      "kind": "imports"
+    },
+    {
       "from_symbol_id": "mcp-server/packages/cli/src/index.ts#gateCheckCliEntryFromCliModule",
       "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#gateCheckCliEntryFromCliModule",
       "kind": "imports"
@@ -24581,6 +24852,16 @@
     },
     {
       "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
+      "to_symbol_id": "mcp-server/packages/cli/src/index.ts#runNodeEntry",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
+      "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#processCertificationCliEntryFromCliModule",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/cli/src/index.ts#main",
       "to_symbol_id": "mcp-server/packages/cli/src/index.ts#printHelp",
       "kind": "calls"
     },
@@ -24671,6 +24952,11 @@
     },
     {
       "from_symbol_id": "mcp-server/packages/cli/src/paths.ts#branchCheckCliEntryFromCliModule",
+      "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#workspaceRootFromCliModule",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/cli/src/paths.ts#processCertificationCliEntryFromCliModule",
       "to_symbol_id": "mcp-server/packages/cli/src/paths.ts#workspaceRootFromCliModule",
       "kind": "calls"
     },
@@ -37780,6 +38066,11 @@
       "kind": "calls"
     },
     {
+      "from_symbol_id": "mcp-server/src/cli/process-certification-cli.ts#processCertificationMcpTools",
+      "to_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#processCertificationMcpTools",
+      "kind": "imports"
+    },
+    {
       "from_symbol_id": "mcp-server/src/cli/request-evidence-envelope-backfill.ts#backfillRequestEvidenceEnvelope",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/backfill.ts#backfillRequestEvidenceEnvelope",
       "kind": "imports"
@@ -40717,6 +41008,206 @@
     {
       "from_symbol_id": "mcp-server/src/easar-receipts/inventory-v1.ts#buildInventoryV1FromWalkSummary",
       "to_symbol_id": "mcp-server/src/easar-receipts/inventory-v1.ts#stableHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.test.ts#it",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.test.ts#buildEasarRecoveryExport",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildEasarRecoveryExport",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.test.ts#RECOVERY_PORTABLE_MAP_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#RECOVERY_PORTABLE_MAP_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#getClientProjectRoot",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#tryPatchArtifactFile",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#tryPatchArtifactFile",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildRecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#loadRecoveryPortableMapFromFile",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#loadRecoveryPortableMapFromFile",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#RECOVERY_EXPORT_MANIFEST_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#RECOVERY_EXPORT_MANIFEST_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#RecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#RecoveryExportManifestV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildEasarRecoveryExport",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildEasarRecoveryExport",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#loadRecoveryPortableMapFromFile",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildEasarRecoveryExport",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildEasarRecoveryExport",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#tryPatchArtifactFile",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#it",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#REFLEXION_REPORT_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/reflexion-report-v1.ts#REFLEXION_REPORT_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#ReflexionReportV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/reflexion-report-v1.ts#ReflexionReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#buildRecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#loadRecoveryPortableMapFromFile",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#loadRecoveryPortableMapFromFile",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#parseRecoveryPortableMapV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#parseRecoveryPortableMapV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#RECOVERY_EXPORT_MANIFEST_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#RECOVERY_EXPORT_MANIFEST_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#RECOVERY_PORTABLE_MAP_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#RECOVERY_PORTABLE_MAP_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.test.ts#reflexionToVerificationReportExport",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#reflexionToVerificationReportExport",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#createHash",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:crypto.ts#createHash",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#ReflexionReportV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/reflexion-report-v1.ts#ReflexionReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#stableHash",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:crypto.ts#createHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#fileContentHash",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:crypto.ts#createHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#parseRecoveryPortableMapV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#parseRecoveryPortableMapV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#parseRecoveryPortableMapV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#loadRecoveryPortableMapFromFile",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#parseRecoveryPortableMapV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#applyRecoveryTransform",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#resolveCanonicalAbsolute",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#applyRecoveryTransform",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#markdownExcerptFromPlan",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#applyRecoveryTransform",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#reflexionToVerificationReportExport",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#applyRecoveryTransform",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#fileContentHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#applyRecoveryTransform",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#fileContentHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#buildRecoveryExportManifestV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-v1.ts#stableHash",
       "kind": "calls"
     },
     {
@@ -51675,6 +52166,646 @@
       "kind": "calls"
     },
     {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.test.ts#runAdaptiveEffectivenessExperimentV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#runAdaptiveEffectivenessExperimentV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#ADAPTIVE_EFFECTIVENESS_REPORT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ADAPTIVE_EFFECTIVENESS_REPORT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#AdaptiveEffectivenessReportV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#AdaptiveEffectivenessReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#ValidationDiagnostic",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ValidationDiagnostic",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#validateExperimentFixtureV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.test.ts#evaluateCapabilityProfileV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#evaluateCapabilityProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.test.ts#defaultBundleRoot",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#defaultBundleRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.test.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.test.ts#EdseProcessRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EdseProcessRecordV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#CAPABILITY_DIMENSION_IDS",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CAPABILITY_DIMENSION_IDS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#CAPABILITY_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CAPABILITY_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#PROOF_BOUNDARY_NON_CERT",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#PROOF_BOUNDARY_NON_CERT",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#CapabilityProfileV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#CapabilityProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#EdseProcessRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EdseProcessRecordV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#Iso330xxCapabilityModelV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#Iso330xxCapabilityModelV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#ValidationDiagnostic",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ValidationDiagnostic",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#dimensionRating",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#dimensionRating",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#evaluateCapabilityProfileV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#dimensionRating",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/composition.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/composition.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/composition.test.ts#defaultBundleRoot",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#defaultBundleRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/composition.test.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.test.ts#evaluateConformanceMatrixV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evaluateConformanceMatrixV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.test.ts#defaultBundleRoot",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#defaultBundleRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.test.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.test.ts#EdseProcessRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EdseProcessRecordV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#CONFORMANCE_MATRIX_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CONFORMANCE_MATRIX_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#EDSE_CLAUSE_IDS",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#EDSE_CLAUSE_IDS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#PROOF_BOUNDARY_NON_CERT",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#PROOF_BOUNDARY_NON_CERT",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#ConformanceCatalogV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ConformanceCatalogV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#ConformanceMatrixV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ConformanceMatrixV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#EdseProcessRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EdseProcessRecordV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#ValidationDiagnostic",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ValidationDiagnostic",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evidencePresent",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evaluateConformanceMatrixV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evidencePresent",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.test.ts#buildAssessorAgreementReportV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#buildAssessorAgreementReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.test.ts#loadIndependentAssessmentRecordFromFile",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#loadIndependentAssessmentRecordFromFile",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#ASSESSOR_AGREEMENT_REPORT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ASSESSOR_AGREEMENT_REPORT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#INDEPENDENT_ASSESSMENT_RECORD_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#INDEPENDENT_ASSESSMENT_RECORD_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#PROOF_BOUNDARY_NON_CERT",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#PROOF_BOUNDARY_NON_CERT",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#AssessorAgreementReportV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#AssessorAgreementReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#IndependentAssessmentRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#IndependentAssessmentRecordV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#ValidationDiagnostic",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ValidationDiagnostic",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#validateIndependentAssessmentRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#loadIndependentAssessmentRecordFromFile",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#validateIndependentAssessmentRecordV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/process-certification.mcp.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/process-certification.mcp.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/process-certification.mcp.test.ts#allTools",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#evaluateCapabilityProfileV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#evaluateCapabilityProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#evaluateConformanceMatrixV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evaluateConformanceMatrixV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#composeCertifiabilityReadinessV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#composeCertifiabilityReadinessV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#generateAssessorPackV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#generateAssessorPackV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#defaultBundleRoot",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#defaultBundleRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.test.ts#EdseProcessRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EdseProcessRecordV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#ASSESSOR_PACK_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ASSESSOR_PACK_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#CERTIFIABILITY_READINESS_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CERTIFIABILITY_READINESS_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#READINESS_STATE_GAPS",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#READINESS_STATE_GAPS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#READINESS_STATE_READY",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#READINESS_STATE_READY",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#AdaptiveEffectivenessReportV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#AdaptiveEffectivenessReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#AssessorAgreementReportV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#AssessorAgreementReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#AssessorPackV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#AssessorPackV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#CapabilityProfileV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#CapabilityProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#CertifiabilityReadinessV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#CertifiabilityReadinessV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#ConformanceMatrixV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ConformanceMatrixV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#ValidationDiagnostic",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ValidationDiagnostic",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#composeCertifiabilityReadinessV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#matrixPasses",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#composeCertifiabilityReadinessV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#capabilityPasses",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.test.ts#it",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.test.ts#defaultBundleRoot",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#defaultBundleRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.test.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.test.ts#validateEdseProcessSpecV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateEdseProcessSpecV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.test.ts#validateIso330xxCapabilityModelV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso330xxCapabilityModelV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#CONFORMANCE_CATALOG_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CONFORMANCE_CATALOG_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#EDSE_CLAUSE_IDS",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#EDSE_CLAUSE_IDS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#EDSE_PROCESS_SPEC_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#EDSE_PROCESS_SPEC_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#FORBIDDEN_ROLLUP_KEYS",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#FORBIDDEN_ROLLUP_KEYS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#ISO_12207_MAPPING_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ISO_12207_MAPPING_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#ISO_330XX_CAPABILITY_MODEL_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ISO_330XX_CAPABILITY_MODEL_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#ConformanceCatalogV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ConformanceCatalogV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#EdseProcessSpecV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EdseProcessSpecV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#Iso12207MappingV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#Iso12207MappingV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#Iso330xxCapabilityModelV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#Iso330xxCapabilityModelV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#ValidationDiagnostic",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ValidationDiagnostic",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateEdseProcessSpecV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateEdseProcessSpecV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateEdseProcessSpecV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#sha256Clauses",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateEdseProcessSpecV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso12207MappingV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso330xxCapabilityModelV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso330xxCapabilityModelV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#findForbiddenRollupKeys",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateConformanceCatalogV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateConformanceCatalogV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateEdseProcessSpecV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#readYaml",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso12207MappingV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#readYaml",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateIso330xxCapabilityModelV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#readYaml",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#validateConformanceCatalogV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#readYaml",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ADAPTIVE_EFFECTIVENESS_REPORT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ADAPTIVE_EFFECTIVENESS_REPORT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ASSESSOR_AGREEMENT_REPORT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ASSESSOR_AGREEMENT_REPORT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ASSESSOR_PACK_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ASSESSOR_PACK_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#CAPABILITY_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CAPABILITY_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#CERTIFIABILITY_READINESS_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CERTIFIABILITY_READINESS_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#CONFORMANCE_CATALOG_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CONFORMANCE_CATALOG_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#CONFORMANCE_MATRIX_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#CONFORMANCE_MATRIX_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EDSE_PROCESS_RECORD_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#EDSE_PROCESS_RECORD_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EDSE_PROCESS_SPEC_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#EDSE_PROCESS_SPEC_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#INDEPENDENT_ASSESSMENT_RECORD_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#INDEPENDENT_ASSESSMENT_RECORD_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ISO_12207_MAPPING_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ISO_12207_MAPPING_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#ISO_330XX_CAPABILITY_MODEL_SCHEMA",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ISO_330XX_CAPABILITY_MODEL_SCHEMA",
+      "kind": "imports"
+    },
+    {
       "from_symbol_id": "mcp-server/src/project-identity.composition.test.ts#afterEach",
       "to_symbol_id": "mcp-server/src/node:test.ts#afterEach",
       "kind": "imports"
@@ -56705,6 +57836,11 @@
       "kind": "imports"
     },
     {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#buildEasarRecoveryExport",
+      "to_symbol_id": "mcp-server/src/easar-receipts/recovery-export-mcp.ts#buildEasarRecoveryExport",
+      "kind": "imports"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tools/index.ts#tiedSourceGraphFreshness",
       "to_symbol_id": "mcp-server/src/source-graph/mcp-handlers.ts#tiedSourceGraphFreshness",
       "kind": "imports"
@@ -57060,6 +58196,11 @@
       "kind": "imports"
     },
     {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#processCertificationMcpTools",
+      "to_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#processCertificationMcpTools",
+      "kind": "imports"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tools/index.ts#checklistEvidenceSufficiencyTools",
       "to_symbol_id": "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts#checklistEvidenceSufficiencyTools",
       "kind": "imports"
@@ -57212,6 +58353,66 @@
     {
       "from_symbol_id": "mcp-server/src/tools/leap-proposal-mcp.test.ts#allTools",
       "to_symbol_id": "mcp-server/src/tools/index.ts#allTools",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#z",
+      "to_symbol_id": "mcp-server/src/tools/zod.ts#z",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#textContent",
+      "to_symbol_id": "mcp-server/src/types.ts#textContent",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#runAdaptiveEffectivenessExperimentV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/adaptive-experiment.ts#runAdaptiveEffectivenessExperimentV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#evaluateCapabilityProfileV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/capability-model.ts#evaluateCapabilityProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#evaluateConformanceMatrixV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/conformance-engine.ts#evaluateConformanceMatrixV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#buildAssessorAgreementReportV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#buildAssessorAgreementReportV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#loadIndependentAssessmentRecordFromFile",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/independent-assessment.ts#loadIndependentAssessmentRecordFromFile",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#composeCertifiabilityReadinessV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#composeCertifiabilityReadinessV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#generateAssessorPackV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/readiness-report.ts#generateAssessorPackV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#defaultBundleRoot",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#defaultBundleRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#loadProcessCertificationBundleV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/spec-loader.ts#loadProcessCertificationBundleV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#EdseProcessRecordV1",
+      "to_symbol_id": "mcp-server/src/process-certification-readiness/types.ts#EdseProcessRecordV1",
       "kind": "imports"
     },
     {
@@ -74896,6 +76097,7 @@
     "mcp-server/src/cli/handoff-validate.ts",
     "mcp-server/src/cli/methodology-bundle-pack.ts",
     "mcp-server/src/cli/plumb-audit-gate.ts",
+    "mcp-server/src/cli/process-certification-cli.ts",
     "mcp-server/src/cli/request-evidence-envelope-backfill.ts",
     "mcp-server/src/cli/request-evidence-envelope-batch-collect.ts",
     "mcp-server/src/cli/request-evidence-envelope-patch.ts",
@@ -74956,6 +76158,10 @@
     "mcp-server/src/easar-receipts/inventory-receipt-mcp.test.ts",
     "mcp-server/src/easar-receipts/inventory-receipt-mcp.ts",
     "mcp-server/src/easar-receipts/inventory-v1.ts",
+    "mcp-server/src/easar-receipts/recovery-export-mcp.test.ts",
+    "mcp-server/src/easar-receipts/recovery-export-mcp.ts",
+    "mcp-server/src/easar-receipts/recovery-export-v1.test.ts",
+    "mcp-server/src/easar-receipts/recovery-export-v1.ts",
     "mcp-server/src/easar-receipts/reflexion-choreography.test.ts",
     "mcp-server/src/easar-receipts/reflexion-report-mcp.test.ts",
     "mcp-server/src/easar-receipts/reflexion-report-mcp.ts",
@@ -75165,6 +76371,22 @@
     "mcp-server/src/ontology-rules.ts",
     "mcp-server/src/parse-content.test.ts",
     "mcp-server/src/parse-content.ts",
+    "mcp-server/src/process-certification-readiness/adaptive-experiment.test.ts",
+    "mcp-server/src/process-certification-readiness/adaptive-experiment.ts",
+    "mcp-server/src/process-certification-readiness/capability-model.test.ts",
+    "mcp-server/src/process-certification-readiness/capability-model.ts",
+    "mcp-server/src/process-certification-readiness/composition.test.ts",
+    "mcp-server/src/process-certification-readiness/conformance-engine.test.ts",
+    "mcp-server/src/process-certification-readiness/conformance-engine.ts",
+    "mcp-server/src/process-certification-readiness/constants.ts",
+    "mcp-server/src/process-certification-readiness/independent-assessment.test.ts",
+    "mcp-server/src/process-certification-readiness/independent-assessment.ts",
+    "mcp-server/src/process-certification-readiness/process-certification.mcp.test.ts",
+    "mcp-server/src/process-certification-readiness/readiness-report.test.ts",
+    "mcp-server/src/process-certification-readiness/readiness-report.ts",
+    "mcp-server/src/process-certification-readiness/spec-loader.test.ts",
+    "mcp-server/src/process-certification-readiness/spec-loader.ts",
+    "mcp-server/src/process-certification-readiness/types.ts",
     "mcp-server/src/project-identity.composition.test.ts",
     "mcp-server/src/project-identity.test.ts",
     "mcp-server/src/project-identity.ts",
@@ -75236,6 +76458,7 @@
     "mcp-server/src/tools/jev-plan-skills-tools.ts",
     "mcp-server/src/tools/kaizen-feedback-mcp-composition.test.ts",
     "mcp-server/src/tools/leap-proposal-mcp.test.ts",
+    "mcp-server/src/tools/process-certification-mcp-tools.ts",
     "mcp-server/src/tools/project-operations-mcp.test.ts",
     "mcp-server/src/tools/project-operations-mcp.ts",
     "mcp-server/src/tools/pseudocode-analyze-mcp.test.ts",

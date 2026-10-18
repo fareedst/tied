@@ -165,3 +165,46 @@ procedure BUILD_EASAR_VALIDATION_RESULTS_MCP:
   CALL parseValidationCasesV1
   CALL runEasarValidationSuiteV1
   RETURN suite_result
+
+## Portable export (Stage 9)
+
+procedure BUILD_RECOVERY_EXPORT_MANIFEST_V1:
+  # [IMPL-TIED_EASAR_RECEIPTS] [ARCH-TIED_EASAR_ARTIFACT_MODEL] [REQ-TIED_EASAR_RECOVERY]
+  # How: Load recovery-portable-map.v1.yaml; apply read-only transforms; emit recovery-export-manifest.v1 with gaps[].
+  Contract:
+    INPUT: map, map_path, project_root, working_root
+    OUTPUT: manifest_or_error
+    PRE: map schema_version recovery-portable-map.v1; request_token matches
+    POST: export_only true; documented_gaps copied; errors[] for missing required sources
+    EFFECTS: optional IO when output_dir set (gitignored export tree)
+    FAILURE_MODES: map_file_missing; request_token_map_mismatch; source_missing
+    TERMINATION: total
+  RETURN manifest_or_error
+
+procedure RUN_EASAR_RECOVERY_EXPORT_V1:
+  # [IMPL-TIED_EASAR_RECEIPTS] [REQ-TIED_EASAR_RECOVERY]
+  # How: Orchestrate slot transforms including deferred from_manifest_receipt for manifest.yaml.
+  Contract:
+    INPUT: build_manifest_input, optional output_dir
+    OUTPUT: manifest_and_written_files
+    PRE: primary slots processed before from_manifest_receipt
+    POST: stable content_hash; no tied-project/*.yaml index mutation
+    EFFECTS: read-only canonical sources; write portable tree only under output_dir
+    FAILURE_MODES: transform_failed; manifest_draft_missing
+    TERMINATION: total
+  CALL BUILD_RECOVERY_EXPORT_MANIFEST_V1
+  RETURN manifest_and_written_files
+
+procedure BUILD_EASAR_RECOVERY_EXPORT_MCP:
+  # [IMPL-TIED_EASAR_RECEIPTS] [REQ-TIED_EASAR_RECOVERY]
+  # How: MCP wrapper tied_easar_recovery_export_build; optional manifest_output_path + envelope patch.
+  Contract:
+    INPUT: request_token, map_path, project_root, working_root, output_dir, manifest_output_path
+    OUTPUT: export_result
+    PRE: map request_token matches input request_token
+    POST: recovery-export-manifest.v1 written when manifest_output_path set
+    EFFECTS: IO; envelope patch same discipline as validation MCP
+    FAILURE_MODES: map_load_failed; export_build_failed
+    TERMINATION: total
+  CALL RUN_EASAR_RECOVERY_EXPORT_V1
+  RETURN export_result

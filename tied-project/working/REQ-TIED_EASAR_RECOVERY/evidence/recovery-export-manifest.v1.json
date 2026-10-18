@@ -1,0 +1,68 @@
+{
+  "schema_version": "recovery-export-manifest.v1",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "map_path": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/recovery-portable-map.v1.yaml",
+  "git_rev": "75f41a15",
+  "export_only": true,
+  "entries": [
+    {
+      "portable_path": "inventory.json",
+      "canonical_source": "evidence/inventory.v1.json",
+      "transform": "copy_json",
+      "content_hash": "f8516c3bb9e41d9c4ba41562e4728c4a6d2d2ee1a9c5712d555ebfddeff48d77",
+      "source_kind": "committed"
+    },
+    {
+      "portable_path": "evaluation/validation-cases.yaml",
+      "canonical_source": "evidence/validation-cases.v1.yaml",
+      "transform": "copy_yaml",
+      "content_hash": "ef4048c088ed85ad66d16bc2da7c7ebeecd16088a7bf40955490f36264bb770b",
+      "source_kind": "committed"
+    },
+    {
+      "portable_path": "evaluation/validation-results.json",
+      "canonical_source": "evidence/validation-results.v1.json",
+      "transform": "copy_json",
+      "content_hash": "0e11bc65974c774980ec57e231007e15ffe48df27aec3f397e0a808e8a1d253d",
+      "source_kind": "committed"
+    },
+    {
+      "portable_path": "evaluation/verification-report.json",
+      "canonical_source": "evidence/reflexion-report.v1.json",
+      "transform": "reflexion_to_verification_report",
+      "content_hash": "8241e2f167102769f4d3b50b1ca5c04809c556839293d71ccb6213d2db99861e",
+      "source_kind": "committed"
+    },
+    {
+      "portable_path": "scope.md",
+      "canonical_source": "PLAN.md",
+      "transform": "markdown_excerpt",
+      "content_hash": "712feb9903e44e312f3746aa588dbcd90ac2b1233426f233bf1dfa4f81af507b",
+      "source_kind": "committed"
+    },
+    {
+      "portable_path": "structure.json",
+      "canonical_source": "tied-bundle/reports/source-graph/source-graph-index.v1.json",
+      "transform": "copy_json",
+      "content_hash": "4c0e4f52d8f080b2d4eca518ac8f893c5f1b62c8d6d319b4c8b1c74d0b47f1fc",
+      "source_kind": "regenerable"
+    },
+    {
+      "portable_path": "manifest.yaml",
+      "canonical_source": "generated-from-manifest-receipt",
+      "transform": "from_manifest_receipt",
+      "content_hash": "7ed4d92cfc519f159ed93d454da60140004ba7cc463acd3ada5537c93f2f0e58",
+      "source_kind": "committed"
+    }
+  ],
+  "gaps": [
+    "component-catalog.yaml",
+    "behavior-catalog.yaml",
+    "claims.jsonl",
+    "grade-report.json",
+    "docs/methodologies/",
+    "evaluation/evidence.jsonl"
+  ],
+  "errors": [],
+  "content_hash": "780e3572f2baffeb2b874c41b6b0f7a07e9a70ae918cc5a751ce00370228c6b6"
+}

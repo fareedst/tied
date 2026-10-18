@@ -81,6 +81,7 @@ import { buildEasarCodeGraphMatrixReceipt } from "../easar-receipts/graph-matrix
 import { buildEasarClaimMatrixMap } from "../easar-receipts/claim-matrix-map-mcp.js";
 import { buildEasarReflexionReport } from "../easar-receipts/reflexion-report-mcp.js";
 import { runEasarValidationSuiteMcp } from "../easar-receipts/validation-results-mcp.js";
+import { buildEasarRecoveryExport } from "../easar-receipts/recovery-export-mcp.js";
 import {
   tiedSourceGraphFreshness,
   tiedSourceGraphMap,
@@ -3005,6 +3006,43 @@ export const allTools = [
       min_cases?: number;
     }) => {
       const result = runEasarValidationSuiteMcp(args);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_easar_recovery_export_build",
+    config: {
+      description:
+        "Build [REQ-TIED_EASAR_RECOVERY] Stage 9 recovery-export-manifest.v1.json from recovery-portable-map.v1.yaml (read-only portable adapter). Optional gitignored output_dir for materialized recovery/ tree.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token (e.g. REQ-TIED_EASAR_RECOVERY)."),
+        map_path: z.string().describe("Repo-relative path to recovery-portable-map.v1.yaml."),
+        project_root: z.string().optional().describe("Client project root; defaults from TIED layout."),
+        working_root: z
+          .string()
+          .optional()
+          .describe("Repo-relative working folder; defaults to tied-project/working/{request_token}."),
+        git_rev: z.string().optional().describe("Pin git revision in manifest."),
+        output_dir: z
+          .string()
+          .optional()
+          .describe("Optional gitignored directory for portable recovery/ tree materialization."),
+        manifest_output_path: z
+          .string()
+          .optional()
+          .describe("Repo-relative or absolute path to write recovery-export-manifest.v1.json."),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      map_path: string;
+      project_root?: string;
+      working_root?: string;
+      git_rev?: string;
+      output_dir?: string;
+      manifest_output_path?: string;
+    }) => {
+      const result = buildEasarRecoveryExport(args);
       return textContent(JSON.stringify(result, null, 2));
     },
   },

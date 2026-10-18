@@ -26,6 +26,7 @@ REQ-TIED_EASAR_RECOVERY:
     satisfaction_criteria:
       - criterion: "SC-EASAR-CLAIMS — claim.id maps to matrix row numbers."
       - criterion: "SC-EASAR-ENROLL — REQ/ARCH/IMPL/PROC tokens enrolled with depends_on links."
+      - criterion: "SC-EASAR-EXPORT — recovery-portable-map.v1.yaml and recovery-export-manifest.v1.json read-only Stage 9 adapter with documented gaps."
       - criterion: "SC-EASAR-GATES — integrated phase-aware inquiry gates per slice."
       - criterion: "SC-EASAR-GRAPH — matrix code_graph rows cite graph freshness and trace ids."
       - criterion: "SC-EASAR-INV — inventory.v1.json receipt from scoped analysis."

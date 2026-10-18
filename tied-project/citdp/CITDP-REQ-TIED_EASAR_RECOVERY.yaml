@@ -1,17 +1,17 @@
 CITDP-REQ-TIED_EASAR_RECOVERY:
   change_definition:
     current_behavior: "EASAR methodology is documented in docs/methodologies/evidence-assured-software-architecture-recovery.md §7, but there is no umbrella [REQ-TIED_EASAR_RECOVERY], no [PROC-EASAR_RECOVERY] composition token, and no versioned receipts for inventory.v1.json or reflexion-report.v1. Brownfield Mode B ([PROC-BROWNFIELD_INTENT_ELEVATION]) and Track C sidecars work in isolation; source graph (Phase 2 slice 1), claims review, adversarial inquiry, and request evidence envelope exist as separate REQs without Mode C orchestration or engagement facet on the Tracker."
-    desired_behavior: "Mode C recovery engagement composes existing REQs via [PROC-EASAR_RECOVERY]: MVP slices 1–4 deliver inventory.v1.json, matrix code_graph receipt linkage, claims/matrix choreography with unified claim id ↔ matrix # mapping, and reflexion-report.v1 synthesis—under integrated depth with phase-aware inquiry gates. Tracker keeps brownfield_intent_elevation.mode and adds engagement: easar_full without duplicating checklist authority."
+    desired_behavior: "Mode C recovery engagement composes existing REQs via [PROC-EASAR_RECOVERY]: slices 1–6 deliver inventory, graph receipt, claims map, reflexion, validation corpus, and read-only portable export manifest—under integrated depth with phase-aware inquiry gates. Tracker keeps brownfield_intent_elevation.mode and adds engagement: easar_full without duplicating checklist authority."
     non_goals:
       - "Blocking 85/100 portable rubric without sponsor costly choice"
       - "Merging adversarial finding-ledger.jsonl with claims-review ledgers"
       - "Multi-language source graph beyond current TS/JS static index"
-      - "Portable recovery/ export serializer (slice 6) in first cycle"
       - "Replacing [PROC-AGENT_REQ_CHECKLIST] with a parallel full checklist"
       - "Repo-root recovery/ tree as git source of truth"
-      - "SWE-QA validation task bank (EASAR slice 5 / Stage 7) in first cycle"
+      - "Blocking export completeness for full EASAR §6.2 tree without documented gaps[]"
     success_criteria:
       - "SC-EASAR-CLAIMS — claim.id ↔ matrix # mapping documented and tested; claims output under working/{REQ}/claims-evidence-review/"
+      - "SC-EASAR-EXPORT — recovery-portable-map.v1.yaml + recovery-export-manifest.v1.json read-only Stage 9 adapter with documented gaps"
       - "SC-EASAR-ENROLL — REQ/ARCH/IMPL/PROC tokens enrolled; depends_on links to BFIE, SGC, CER, fidelity, inquiry, envelope REQs"
       - "SC-EASAR-GATES — integrated pre_implementation + per-slice verification gates with identity-bound activation (or governed waivers only)"
       - "SC-EASAR-GRAPH — matrix code_graph rows cite graph freshness + trace ids; BFIE validator allows proof type (code_graph already in intent-elevation.ts)"
@@ -20,6 +20,7 @@ CITDP-REQ-TIED_EASAR_RECOVERY:
       - "SC-EASAR-REFLEX — reflexion-report.v1.json (or export-only adapter) separates ARCH detail divergence from adversarial ledger"
       - "SC-EASAR-TESTS — RED unit/composition per slice; no slice N+1 until slice N gate + receipt complete"
       - "SC-EASAR-TRACKER — checklist-tracker documents mode + engagement: easar_full; gate fixtures accept facet when mode is pilot or strict"
+      - "SC-EASAR-VALIDATION — validation-cases.v1.yaml and validation-results.v1.json with deterministic graders (Stage 7)"
     unchanged_behavior:
       - "[REQ-TIED_BROWNFIELD_INTENT_ELEVATION] report-only validator and disposition rules"
       - "[REQ-TIED_SOURCE_GRAPH_COMPREHENSION] read-only graph MCP path"
@@ -40,7 +41,7 @@ CITDP-REQ-TIED_EASAR_RECOVERY:
         - "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1"
     envelope_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/request-evidence-envelope.v1.json"
     tied_validate_consistency: "required"
-    verification_gate_notes: "MVP slices 0–4 verified; close_out inquiry run_id easar-close-out-20261018; request_evidence_envelope_validate fail_on_error_gaps at program close-out"
+    verification_gate_notes: "Slices 0–6 verified (slice 6 run_id easar-slice6-verify-20261019); program close_out easar-close-out-20261018 unchanged unless sponsor LEAP re-close"
   evidence:
     commands:
       - "npm run lint:ts --prefix mcp-server"
@@ -93,7 +94,7 @@ CITDP-REQ-TIED_EASAR_RECOVERY:
     change_request_id: "REQ-TIED_EASAR_RECOVERY"
     record_status: "persisted"
     recorded_at: "2026-10-18"
-    title: "Evidence-Assured Software Architecture Recovery — Mode C MVP (slices 1–4)"
+    title: "Evidence-Assured Software Architecture Recovery — Mode C MVP (slices 1–6)"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
@@ -144,6 +145,8 @@ CITDP-REQ-TIED_EASAR_RECOVERY:
     - "Slice 2 — matrix code_graph receipt linkage tests (extends source-graph + BFIE)"
     - "Slice 3 — claims id ↔ matrix # + PROC sequencing tests"
     - "Slice 4 — reflexion-report.v1 + dogfood inquiry on stdd subset"
+    - "Slice 5 — validation corpus + slice verification gate"
+    - "Slice 6 — portable export manifest + slice verification gate"
     - "Verification + close_out gates; persist citdp record"
   test_strategy:
     matrix:
@@ -177,3 +180,9 @@ CITDP-REQ-TIED_EASAR_RECOVERY:
         name: "inventory-mcp-registration"
         red: "receipt path registered in envelope producer list"
         req: "IMPL-TIED_EASAR_RECEIPTS"
+      - green: "recovery-export-manifest.v1 with stable hash and gaps[]"
+        impl_block: "BUILD_RECOVERY_EXPORT_MANIFEST_V1"
+        kind: "unit"
+        name: "recovery-export-manifest-v1"
+        red: "portable map transforms copy canonical working evidence read-only"
+        req: "REQ-TIED_EASAR_RECOVERY"

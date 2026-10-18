@@ -1,0 +1,38 @@
+schema_version: recovery-portable-map.v1
+request_token: REQ-TIED_EASAR_RECOVERY
+documented_gaps:
+  - component-catalog.yaml
+  - behavior-catalog.yaml
+  - claims.jsonl
+  - grade-report.json
+  - docs/methodologies/
+  - evaluation/evidence.jsonl
+slots:
+  - portable_path: inventory.json
+    canonical_source: evidence/inventory.v1.json
+    transform: copy_json
+    required: true
+  - portable_path: evaluation/validation-cases.yaml
+    canonical_source: evidence/validation-cases.v1.yaml
+    transform: copy_yaml
+    required: true
+  - portable_path: evaluation/validation-results.json
+    canonical_source: evidence/validation-results.v1.json
+    transform: copy_json
+    required: true
+  - portable_path: evaluation/verification-report.json
+    canonical_source: evidence/reflexion-report.v1.json
+    transform: reflexion_to_verification_report
+    required: true
+  - portable_path: scope.md
+    canonical_source: PLAN.md
+    transform: markdown_excerpt
+    required: true
+  - portable_path: manifest.yaml
+    canonical_source: generated-from-manifest-receipt
+    transform: from_manifest_receipt
+    required: true
+  - portable_path: structure.json
+    canonical_source: tied-bundle/reports/source-graph/source-graph-index.v1.json
+    transform: copy_json
+    required: false

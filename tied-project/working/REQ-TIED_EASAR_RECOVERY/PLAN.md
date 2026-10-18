@@ -23,7 +23,7 @@
 | 3 | 4 claims choreography | **done** (verification `allowed: true`) | [claim-matrix-map.v1.json](evidence/claim-matrix-map.v1.json) · [slice3 verification gate](evidence/slice3-verification-gate.md) · `run_id=easar-slice3-verify-20261018` |
 | 4 | 6 reflexion | **done** (verification `allowed: true`) | [reflexion-report.v1.json](evidence/reflexion-report.v1.json) · [slice4 verification gate](evidence/slice4-verification-gate.md) · `run_id=easar-slice4-verify-20261018` |
 | 5 | 7 validation corpus | **done** (verification `allowed: true`) | [validation-cases.v1.yaml](evidence/validation-cases.v1.yaml) · [validation-results.v1.json](evidence/validation-results.v1.json) · [slice5 verification gate](evidence/slice5-verification-gate.md) · `run_id=easar-slice5-verify-20261018` |
-| 6 | 9 portable export | **refined** (build pending) | [slice6-e2e-plan.md](evidence/slice6-e2e-plan.md) · inquiry `run_id=easar-slice6-verify-20261019` |
+| 6 | 9 portable export | **done** (verification `allowed: true`) | [slice6-e2e-plan.md](evidence/slice6-e2e-plan.md) · [slice6 verification gate](evidence/slice6-verification-gate.md) · `run_id=easar-slice6-verify-20261019` |
 | Close-out | Program gates + CITDP persist | **done** | [close-out gate](evidence/close-out-gate.md) · `run_id=easar-close-out-20261018` |
 
 ## Dogfood target
