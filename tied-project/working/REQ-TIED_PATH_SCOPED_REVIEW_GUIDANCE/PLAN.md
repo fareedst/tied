@@ -33,4 +33,3 @@
 - Proposed commit: [evidence/proposed-commit-message.txt](./evidence/proposed-commit-message.txt)
 - **Gitignore hygiene ([PROC-GITIGNORE_CLOSE_OUT]):** N/A — no new ignore patterns (see receipt).
 - **Machine close-out:** deferred (optional for this doc slice).
-- **Traceable-commit:** **`387478be`** (2026-10-17).
