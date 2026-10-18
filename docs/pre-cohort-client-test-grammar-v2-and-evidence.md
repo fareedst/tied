@@ -176,9 +176,11 @@ Copy [`working/evaluation/evaluation-corpus.v1.template.yaml`](../working/evalua
 Optional baseline gap report:
 
 ```bash
+cd mcp-server
 npm run request-evidence-envelope-batch-collect -- \
-  --corpus ../working/evaluation/evaluation-corpus.v1.yaml \
-  --yaml-out ../working/evaluation/envelope-gap-report.v1.yaml
+  --corpus tied-project/working/evaluation/evaluation-corpus.v1.yaml \
+  --yaml-out tied-project/working/evaluation/envelope-gap-report.v1.yaml \
+  --project-root ..
 ```
 
 **Cohort automation:** When `grammar_v2_header_expect: pass`, [`scripts/replay-adherence-fixtures.mjs`](../scripts/replay-adherence-fixtures.mjs) runs [`audit-grammar-v2-default.mjs`](audit-grammar-v2-default.mjs) against `project_root`, writes `grammar_v2_audit_artifact`, and fails replay if `audit.ok` is false or `dimensions.grammar_v2_header` is not `pass`. [`scripts/tied-post-session.sh`](tied-post-session.sh) with `--corpus` runs the same check via [`run-corpus-grammar-v2-audit.mjs`](run-corpus-grammar-v2-audit.mjs) (skip with `--skip-grammar-v2`). Rows with `not_measured` still replay **close_out gates only**.

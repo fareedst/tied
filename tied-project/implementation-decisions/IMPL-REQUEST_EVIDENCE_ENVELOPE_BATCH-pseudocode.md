@@ -30,7 +30,7 @@ Contract:
 - PROCEDURE: COLLECT_ENVELOPE_GAP_REPORT
   - 1. LOAD_BATCH_ROWS from manifest, corpus extension, or inline rows
   - 2. FOR each row CALL RESOLVE_ENVELOPE_FOR_ROW
-  - 3. IF envelope file exists THEN VALIDATE_REQUEST_EVIDENCE_ENVELOPE and COMPUTE_ARTIFACT_COVERAGE
+  - 3. IF envelope file exists THEN VALIDATE_REQUEST_EVIDENCE_ENVELOPE (permissive for gap report: use normalized envelope when returned even if strict validate would block); IF shape unreadable THEN envelope_source envelope_file with envelope_schema_invalid gap; ELSE COMPUTE_ARTIFACT_COVERAGE
   - 4. ELSE IF legacy_infer THEN BUILD_REQUEST_EVIDENCE_ENVELOPE read-only and tag legacy_inferred
   - 5. ELSE IF require_envelope THEN append excluded row with envelope_missing
   - 6. EMIT envelope-gap-report.v1.yaml with gap_codes[] and artifact_coverage.by_kind denominators

@@ -53,9 +53,11 @@ After Slice 5 pilot, `/dev/test/*` rows use `require_envelope` (fail-closed when
 Batch collect:
 
 ```bash
+cd mcp-server
 npm run request-evidence-envelope-batch-collect -- \
-  --corpus ../working/evaluation/evaluation-corpus.v1.yaml \
-  --yaml-out ../working/evaluation/envelope-gap-report.v1.yaml
+  --corpus tied-project/working/evaluation/evaluation-corpus.v1.yaml \
+  --yaml-out tied-project/working/evaluation/envelope-gap-report.v1.yaml \
+  --project-root ..
 ```
 
 ## Validate

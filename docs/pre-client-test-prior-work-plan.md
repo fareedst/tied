@@ -129,9 +129,11 @@ These steps do **not** modify stdd; they must exist before the graded client tre
 Optional baseline gap scan (does not substitute for close_out):
 
 ```bash
+cd mcp-server
 npm run request-evidence-envelope-batch-collect -- \
-  --corpus ../working/evaluation/evaluation-corpus.v1.yaml \
-  --yaml-out ../working/evaluation/envelope-gap-report.v1.yaml
+  --corpus tied-project/working/evaluation/evaluation-corpus.v1.yaml \
+  --yaml-out tied-project/working/evaluation/envelope-gap-report.v1.yaml \
+  --project-root ..
 ```
 
 **Operator gate:** O1–O2 complete **before** O3; O4 immediately after bootstrap; O5 before or in parallel with client REQ work (header grade is bootstrap-bound, not close_out-bound).

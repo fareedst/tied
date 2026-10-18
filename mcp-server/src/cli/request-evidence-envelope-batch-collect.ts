@@ -30,6 +30,7 @@ function usage(): string {
     "Usage: request-evidence-envelope-batch-collect (--manifest PATH | --corpus PATH) --yaml-out PATH [--project-root PATH] [--privacy-tier shareable_hashed|operator_local] [--include-absolute-paths]",
     "",
     "Collect envelope gap coverage across batch rows or evaluation-corpus extension rows.",
+    "When --project-root is the repo root, pass corpus and yaml-out paths relative to that root (e.g. tied-project/working/evaluation/...); do not prefix --yaml-out with ..",
   ].join("\n");
 }
 

@@ -34,7 +34,7 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
       - "node --test dist/request-evidence-envelope/*.test.js (35/35 pass)"
       - "node working/REQ-REQUEST_EVIDENCE_ENVELOPE/run-close-out-gates.mjs"
       - "npm run request-evidence-envelope-backfill -- --project-root PATH --request-token REQ-TOKEN"
-      - "npm run request-evidence-envelope-batch-collect -- --corpus ../working/evaluation/evaluation-corpus.v1.yaml --yaml-out ../working/evaluation/envelope-gap-report.v1.yaml"
+      - "cd mcp-server && npm run request-evidence-envelope-batch-collect -- --corpus tied-project/working/evaluation/evaluation-corpus.v1.yaml --yaml-out tied-project/working/evaluation/envelope-gap-report.v1.yaml --project-root .."
       - "npm test --prefix mcp-server"
     proof_boundaries:
       - "Backfill writes envelope and optional not-applicable receipt only; inner artifacts unchanged"

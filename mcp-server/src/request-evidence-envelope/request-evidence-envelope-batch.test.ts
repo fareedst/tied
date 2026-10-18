@@ -230,6 +230,43 @@ describe("request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOP
     assert.ok((row?.artifact_coverage.denominator_kinds ?? 0) > 0);
   });
 
+  it("tags envelope_file when on-disk envelope fails shape validation", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-batch-invalid-shape-"));
+    const requestToken = "REQ-INVALID-SHAPE-ENVELOPE";
+    const evidenceDir = path.join(tempRoot, "working", requestToken, "evidence");
+    mkdirSync(evidenceDir, { recursive: true });
+    writeFileSync(
+      path.join(evidenceDir, "request-evidence-envelope.v1.json"),
+      JSON.stringify({
+        schema_version: "request-evidence-envelope.v1",
+        envelope_meta: { generated_at: GENERATED_AT, generator: "test", revision: "not-a-number" },
+        identity: { request_token: requestToken },
+        artifacts: [],
+        gaps: [],
+      }),
+      "utf8",
+    );
+    const outPath = path.join(tempRoot, "report.yaml");
+    const result = await collectEnvelopeGapReport({
+      rows: [
+        {
+          project_root: tempRoot,
+          request_token: requestToken,
+          client_alias: "invalid-shape",
+          envelope_require_mode: "require_envelope",
+        },
+      ],
+      yamlOut: outPath,
+      defaultTiedBasePath: TIED_BASE_PATH,
+      now: GENERATED_AT,
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.report.rows[0]?.envelope_source, "envelope_file");
+    assert.ok(result.report.rows[0]?.gap_codes.includes("envelope_schema_invalid"));
+    assert.ok(result.report.validation_errors.some((item) => item.includes("envelope_schema_invalid")));
+  });
+
   it("uses existing envelope file when present", async () => {
     const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-batch-present-"));
     const requestToken = "REQ-PRESENT-ENVELOPE";

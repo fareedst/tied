@@ -297,7 +297,7 @@ async function resolveEnvelopeForRow(
   generatedAtIso: string,
 ): Promise<
   | { ok: true; envelope: RequestEvidenceEnvelope; source: "envelope_file" | "legacy_inferred"; envelopePath: string }
-  | { ok: false; reason: string; gapCodes: string[] }
+  | { ok: false; reason: string; gapCodes: string[]; envelopePath?: string }
 > {
   const projectRoot = path.resolve(row.project_root);
   const tiedBasePath = row.tied_base_path ?? path.join(projectRoot, "tied");
@@ -310,14 +310,16 @@ async function resolveEnvelopeForRow(
       envelope_path: envelopeRel,
       project_root: projectRoot,
     });
-    if (!validation.ok || !validation.envelope) {
-      return {
-        ok: false,
-        reason: "envelope_schema_invalid",
-        gapCodes: ["envelope_schema_invalid"],
-      };
+    // Gap reports are read-only classification: use normalized envelope when present even if strict validate would block.
+    if (validation.envelope) {
+      return { ok: true, envelope: validation.envelope, source: "envelope_file", envelopePath: envelopeRel };
     }
-    return { ok: true, envelope: validation.envelope, source: "envelope_file", envelopePath: envelopeRel };
+    return {
+      ok: false,
+      reason: "envelope_schema_invalid",
+      gapCodes: ["envelope_schema_invalid"],
+      envelopePath: envelopeRel,
+    };
   }
 
   if (requireMode === "require_envelope") {
@@ -402,12 +404,16 @@ export async function collectEnvelopeGapReport(
         continue;
       }
       validationErrors.push(`${clientAlias}/${row.request_token}: ${resolved.reason}`);
+      const envelopePathOnDisk = resolved.envelopePath;
       includedRows.push({
         client_alias: clientAlias,
         request_token: row.request_token,
         status: "included",
         envelope_require_mode: requireMode,
-        envelope_source: "missing",
+        envelope_source: envelopePathOnDisk ? "envelope_file" : "missing",
+        envelope_artifact: envelopePathOnDisk
+          ? artifactRef(envelopePathOnDisk, includeAbsolutePaths, projectRoot)
+          : undefined,
         gap_codes: resolved.gapCodes,
         artifact_coverage: { by_kind: {}, denominator_kinds: 0 },
       });

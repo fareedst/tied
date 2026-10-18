@@ -493,9 +493,11 @@ node scripts/backfill-client-envelopes.mjs \
   --corpus working/evaluation/evaluation-corpus.v1.yaml \
   --summary-out working/evaluation/backfill-client-envelopes-summary.v1.json
 
+cd mcp-server
 npm run request-evidence-envelope-batch-collect -- \
-  --corpus working/evaluation/evaluation-corpus.v1.yaml \
-  --yaml-out working/evaluation/envelope-gap-report.v1.yaml
+  --corpus tied-project/working/evaluation/evaluation-corpus.v1.yaml \
+  --yaml-out tied-project/working/evaluation/envelope-gap-report.v1.yaml \
+  --project-root ..
 
 # Gate receipts (Wave 7 tracker)
 node working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/run-wave7-gates.mjs              # pre_implementation → allowed: true
