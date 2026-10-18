@@ -1,8 +1,8 @@
 {
   "schema_version": "source-graph-index.v1",
   "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
-  "content_hash": "35ffd0f4981cd7ce46ac02093f633e18b446c1274474aa5f20d1363a02cf0605",
-  "built_at": "2026-10-18T04:21:08.545Z",
+  "content_hash": "89e20c0180a61728f4bdc055b59d8d3c52092e1a712f5cb6fe2322cb7fc39c11",
+  "built_at": "2026-10-18T06:05:11.583Z",
   "language_scope": [
     "typescript",
     "javascript"
@@ -7499,6 +7499,125 @@
       "exported": false
     },
     {
+      "symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#loadSeedPracticeLibrary",
+      "file": "mcp-server/src/context-adaptive/composition.test.ts",
+      "kind": "function",
+      "name": "loadSeedPracticeLibrary",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts#toolHandler",
+      "file": "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts",
+      "kind": "function",
+      "name": "toolHandler",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/contracts.ts#isRecord",
+      "file": "mcp-server/src/context-adaptive/contracts.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/contracts.ts#levelList",
+      "file": "mcp-server/src/context-adaptive/contracts.ts",
+      "kind": "function",
+      "name": "levelList",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/contracts.ts#validatePracticeContractV1",
+      "file": "mcp-server/src/context-adaptive/contracts.ts",
+      "kind": "function",
+      "name": "validatePracticeContractV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "file": "mcp-server/src/context-adaptive/contracts.ts",
+      "kind": "function",
+      "name": "loadPracticeLibraryV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/contracts.ts#dfs",
+      "file": "mcp-server/src/context-adaptive/contracts.ts",
+      "kind": "function",
+      "name": "dfs",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/eval-link.ts#buildMethodEffectivenessRefsV1",
+      "file": "mcp-server/src/context-adaptive/eval-link.ts",
+      "kind": "function",
+      "name": "buildMethodEffectivenessRefsV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/profile.ts#isRecord",
+      "file": "mcp-server/src/context-adaptive/profile.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "file": "mcp-server/src/context-adaptive/profile.ts",
+      "kind": "function",
+      "name": "validateContextProfileV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/profile.ts#applicabilityMatches",
+      "file": "mcp-server/src/context-adaptive/profile.ts",
+      "kind": "function",
+      "name": "applicabilityMatches",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/reassess.ts#riskIncreased",
+      "file": "mcp-server/src/context-adaptive/reassess.ts",
+      "kind": "function",
+      "name": "riskIncreased",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "file": "mcp-server/src/context-adaptive/reassess.ts",
+      "kind": "function",
+      "name": "reassessContextV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "file": "mcp-server/src/context-adaptive/selector.ts",
+      "kind": "function",
+      "name": "hashStable",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/selector.ts#passesApplicability",
+      "file": "mcp-server/src/context-adaptive/selector.ts",
+      "kind": "function",
+      "name": "passesApplicability",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "file": "mcp-server/src/context-adaptive/selector.ts",
+      "kind": "function",
+      "name": "selectPracticesDeterministicV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectionReceiptHash",
+      "file": "mcp-server/src/context-adaptive/selector.ts",
+      "kind": "function",
+      "name": "selectionReceiptHash",
+      "exported": true
+    },
+    {
       "symbol_id": "mcp-server/src/dae/branch-check.ts#branchCheckOptOut",
       "file": "mcp-server/src/dae/branch-check.ts",
       "kind": "function",
@@ -8203,6 +8322,104 @@
       "file": "mcp-server/src/easar-receipts/reflexion-report-v1.ts",
       "kind": "function",
       "name": "buildReflexionReportV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#isRecord",
+      "file": "mcp-server/src/easar-receipts/validation-cases-v1.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#isGrader",
+      "file": "mcp-server/src/easar-receipts/validation-cases-v1.ts",
+      "kind": "function",
+      "name": "isGrader",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "file": "mcp-server/src/easar-receipts/validation-cases-v1.ts",
+      "kind": "function",
+      "name": "validateValidationCasesDocument",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#parseValidationCasesYaml",
+      "file": "mcp-server/src/easar-receipts/validation-cases-v1.ts",
+      "kind": "function",
+      "name": "parseValidationCasesYaml",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#resolveGitRev",
+      "file": "mcp-server/src/easar-receipts/validation-results-mcp.ts",
+      "kind": "function",
+      "name": "resolveGitRev",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
+      "file": "mcp-server/src/easar-receipts/validation-results-mcp.ts",
+      "kind": "function",
+      "name": "runEasarValidationSuiteMcp",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#stableHash",
+      "file": "mcp-server/src/easar-receipts/validation-results-v1.ts",
+      "kind": "function",
+      "name": "stableHash",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#buildValidationResultsV1",
+      "file": "mcp-server/src/easar-receipts/validation-results-v1.ts",
+      "kind": "function",
+      "name": "buildValidationResultsV1",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#resolveProjectPath",
+      "file": "mcp-server/src/easar-receipts/validation-suite.ts",
+      "kind": "function",
+      "name": "resolveProjectPath",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#readJsonFile",
+      "file": "mcp-server/src/easar-receipts/validation-suite.ts",
+      "kind": "function",
+      "name": "readJsonFile",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#getByDotPath",
+      "file": "mcp-server/src/easar-receipts/validation-suite.ts",
+      "kind": "function",
+      "name": "getByDotPath",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#loadMcpToolNames",
+      "file": "mcp-server/src/easar-receipts/validation-suite.ts",
+      "kind": "function",
+      "name": "loadMcpToolNames",
+      "exported": false
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "file": "mcp-server/src/easar-receipts/validation-suite.ts",
+      "kind": "function",
+      "name": "gradeValidationCase",
+      "exported": true
+    },
+    {
+      "symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#runEasarValidationSuiteV1",
+      "file": "mcp-server/src/easar-receipts/validation-suite.ts",
+      "kind": "function",
+      "name": "runEasarValidationSuiteV1",
       "exported": true
     },
     {
@@ -38283,6 +38500,461 @@
       "kind": "calls"
     },
     {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#it",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#reassessContextV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#CONTEXT_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#CONTEXT_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#PRACTICE_CONTRACT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#PRACTICE_CONTRACT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/composition.test.ts#loadSeedPracticeLibrary",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts#it",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts#allTools",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts#FIXTURE_PRACTICES",
+      "to_symbol_id": "mcp-server/src/context-adaptive/fixtures.ts#FIXTURE_PRACTICES",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts#CONTEXT_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#CONTEXT_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.test.ts#it",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.test.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.test.ts#validatePracticeContractV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#validatePracticeContractV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.test.ts#FIXTURE_PRACTICES",
+      "to_symbol_id": "mcp-server/src/context-adaptive/fixtures.ts#FIXTURE_PRACTICES",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.test.ts#PRACTICE_CONTRACT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#PRACTICE_CONTRACT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#PRACTICE_CONTRACT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#PRACTICE_CONTRACT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#PRACTICE_LIBRARY_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#PRACTICE_LIBRARY_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#DimensionLevel",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#DimensionLevel",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#DIMENSION_LEVELS",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#DIMENSION_LEVELS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#validatePracticeContractV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#validatePracticeContractV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#validatePracticeContractV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#levelList",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#validatePracticeContractV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#dfs",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#dfs",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#dfs",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#it",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#buildMethodEffectivenessRefsV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/eval-link.ts#buildMethodEffectivenessRefsV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#FIXTURE_PRACTICES",
+      "to_symbol_id": "mcp-server/src/context-adaptive/fixtures.ts#FIXTURE_PRACTICES",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.test.ts#CONTEXT_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#CONTEXT_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/eval-link.ts#SelectionReceiptV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#SelectionReceiptV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/fixtures.ts#PRACTICE_CONTRACT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#PRACTICE_CONTRACT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/fixtures.ts#PracticeContractV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#PracticeContractV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.test.ts#it",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.test.ts#applicabilityMatches",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#applicabilityMatches",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.test.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.test.ts#CONTEXT_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#CONTEXT_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.ts#CONTEXT_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#CONTEXT_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.ts#PROFILE_DIMENSIONS",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#PROFILE_DIMENSIONS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.ts#DimensionLevel",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#DimensionLevel",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.ts#DIMENSION_LEVELS",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#DIMENSION_LEVELS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.ts#ValidationDiagnostic",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#ValidationDiagnostic",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#it",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#FIXTURE_PRACTICES",
+      "to_symbol_id": "mcp-server/src/context-adaptive/fixtures.ts#FIXTURE_PRACTICES",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#reassessContextV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.test.ts#CONTEXT_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#CONTEXT_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#ContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#ContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#SelectionReceiptV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#SelectionReceiptV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#hashStable",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#selectionReceiptHash",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectionReceiptHash",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#riskIncreased",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectionReceiptHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#it",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#FIXTURE_PRACTICES",
+      "to_symbol_id": "mcp-server/src/context-adaptive/fixtures.ts#FIXTURE_PRACTICES",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#selectionReceiptHash",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectionReceiptHash",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.test.ts#CONTEXT_PROFILE_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#CONTEXT_PROFILE_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#createHash",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:crypto.ts#createHash",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#SELECTION_RECEIPT_SCHEMA",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#SELECTION_RECEIPT_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#SELECTOR_PROOF_BOUNDARY",
+      "to_symbol_id": "mcp-server/src/context-adaptive/constants.ts#SELECTOR_PROOF_BOUNDARY",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#PracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#PracticeLibraryV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#PracticeContractV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#PracticeContractV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#ContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#ContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#applicabilityMatches",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#applicabilityMatches",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "to_symbol_id": "mcp-server/src/context-adaptive/node:crypto.ts#createHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#passesApplicability",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#applicabilityMatches",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#passesApplicability",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#trySelect",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectionReceiptHash",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#hashStable",
+      "kind": "calls"
+    },
+    {
       "from_symbol_id": "mcp-server/src/dae/branch-check.ts#execFileSync",
       "to_symbol_id": "mcp-server/src/dae/node:child_process.ts#execFileSync",
       "kind": "imports"
@@ -40140,6 +40812,351 @@
     {
       "from_symbol_id": "mcp-server/src/easar-receipts/reflexion-report-v1.ts#synthesizeReflexionReportV1FromInputs",
       "to_symbol_id": "mcp-server/src/easar-receipts/reflexion-report-v1.ts#buildReflexionReportV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.test.ts#it",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.test.ts#VALIDATION_CASES_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#VALIDATION_CASES_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.test.ts#VALIDATION_GRADERS",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#VALIDATION_GRADERS",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.test.ts#parseValidationCasesYaml",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#parseValidationCasesYaml",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.test.ts#validateValidationCasesDocument",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#isGrader",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#isRecord",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#parseValidationCasesYaml",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#validateValidationCasesDocument",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.test.ts#it",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.test.ts#runEasarValidationSuiteMcp",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.test.ts#VALIDATION_RESULTS_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#VALIDATION_RESULTS_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#execSync",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:child_process.ts#execSync",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#getClientProjectRoot",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#tryPatchArtifactFile",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#tryPatchArtifactFile",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#parseValidationCasesYaml",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#parseValidationCasesYaml",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#VALIDATION_RESULTS_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#VALIDATION_RESULTS_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#ValidationResultsV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#ValidationResultsV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#runEasarValidationSuiteV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#resolveGitRev",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:child_process.ts#execSync",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getClientProjectRoot",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#parseValidationCasesYaml",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#runEasarValidationSuiteV1",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#resolveGitRev",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#tryPatchArtifactFile",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#createHash",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:crypto.ts#createHash",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#ValidationGrader",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#ValidationGrader",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#stableHash",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:crypto.ts#createHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#buildValidationResultsV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#stableHash",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.test.ts#describe",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#describe",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.test.ts#it",
+      "to_symbol_id": "mcp-server/src/easar-receipts/node:test.ts#it",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.test.ts#VALIDATION_CASES_V1_SCHEMA",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#VALIDATION_CASES_V1_SCHEMA",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.test.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.test.ts#runEasarValidationSuiteV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#runEasarValidationSuiteV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#validateEasarEngagementFacet",
+      "to_symbol_id": "mcp-server/src/easar-receipts/engagement-facet.ts#validateEasarEngagementFacet",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#ValidationCaseV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#ValidationCaseV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#ValidationCasesDocumentV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-cases-v1.ts#ValidationCasesDocumentV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#buildValidationResultsV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#buildValidationResultsV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#ValidationResultsV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#ValidationResultsV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#ValidationTaskResultV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#ValidationTaskResultV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#loadMcpToolNames",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#resolveProjectPath",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#resolveProjectPath",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#readJsonFile",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#getByDotPath",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#resolveProjectPath",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#loadMcpToolNames",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#resolveProjectPath",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#resolveProjectPath",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#readJsonFile",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#getByDotPath",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/engagement-facet.ts#validateEasarEngagementFacet",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#String",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#runEasarValidationSuiteV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#loadMcpToolNames",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#runEasarValidationSuiteV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#gradeValidationCase",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/easar-receipts/validation-suite.ts#runEasarValidationSuiteV1",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-v1.ts#buildValidationResultsV1",
       "kind": "calls"
     },
     {
@@ -55303,6 +56320,36 @@
       "kind": "imports"
     },
     {
+      "from_symbol_id": "mcp-server/src/tools/context-adaptive-mcp-tools.ts#z",
+      "to_symbol_id": "mcp-server/src/tools/zod.ts#z",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/context-adaptive-mcp-tools.ts#textContent",
+      "to_symbol_id": "mcp-server/src/types.ts#textContent",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/context-adaptive-mcp-tools.ts#loadPracticeLibraryV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/contracts.ts#loadPracticeLibraryV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/context-adaptive-mcp-tools.ts#validateContextProfileV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/profile.ts#validateContextProfileV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/context-adaptive-mcp-tools.ts#selectPracticesDeterministicV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/context-adaptive-mcp-tools.ts#reassessContextV1",
+      "to_symbol_id": "mcp-server/src/context-adaptive/reassess.ts#reassessContextV1",
+      "kind": "imports"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tools/impl-pseudocode-mcp.test.ts#describe",
       "to_symbol_id": "mcp-server/src/tools/node:test.ts#describe",
       "kind": "imports"
@@ -55645,6 +56692,11 @@
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#buildEasarReflexionReport",
       "to_symbol_id": "mcp-server/src/easar-receipts/reflexion-report-mcp.ts#buildEasarReflexionReport",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#runEasarValidationSuiteMcp",
+      "to_symbol_id": "mcp-server/src/easar-receipts/validation-results-mcp.ts#runEasarValidationSuiteMcp",
       "kind": "imports"
     },
     {
@@ -55995,6 +57047,11 @@
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#jevPlanSkillsTools",
       "to_symbol_id": "mcp-server/src/tools/jev-plan-skills-tools.ts#jevPlanSkillsTools",
+      "kind": "imports"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#contextAdaptiveMcpTools",
+      "to_symbol_id": "mcp-server/src/tools/context-adaptive-mcp-tools.ts#contextAdaptiveMcpTools",
       "kind": "imports"
     },
     {
@@ -73842,6 +74899,20 @@
     "mcp-server/src/cli/vocabulary-explorer.ts",
     "mcp-server/src/cli/yaml-canonicalizer.ts",
     "mcp-server/src/consistency-validator.ts",
+    "mcp-server/src/context-adaptive/composition.test.ts",
+    "mcp-server/src/context-adaptive/constants.ts",
+    "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts",
+    "mcp-server/src/context-adaptive/contracts.test.ts",
+    "mcp-server/src/context-adaptive/contracts.ts",
+    "mcp-server/src/context-adaptive/eval-link.test.ts",
+    "mcp-server/src/context-adaptive/eval-link.ts",
+    "mcp-server/src/context-adaptive/fixtures.ts",
+    "mcp-server/src/context-adaptive/profile.test.ts",
+    "mcp-server/src/context-adaptive/profile.ts",
+    "mcp-server/src/context-adaptive/reassess.test.ts",
+    "mcp-server/src/context-adaptive/reassess.ts",
+    "mcp-server/src/context-adaptive/selector.test.ts",
+    "mcp-server/src/context-adaptive/selector.ts",
     "mcp-server/src/dae/branch-check.ts",
     "mcp-server/src/dae/charter-verification.test.ts",
     "mcp-server/src/dae/gate-check-composition.ts",
@@ -73884,6 +74955,13 @@
     "mcp-server/src/easar-receipts/reflexion-report-mcp.test.ts",
     "mcp-server/src/easar-receipts/reflexion-report-mcp.ts",
     "mcp-server/src/easar-receipts/reflexion-report-v1.ts",
+    "mcp-server/src/easar-receipts/validation-cases-v1.test.ts",
+    "mcp-server/src/easar-receipts/validation-cases-v1.ts",
+    "mcp-server/src/easar-receipts/validation-results-mcp.test.ts",
+    "mcp-server/src/easar-receipts/validation-results-mcp.ts",
+    "mcp-server/src/easar-receipts/validation-results-v1.ts",
+    "mcp-server/src/easar-receipts/validation-suite.test.ts",
+    "mcp-server/src/easar-receipts/validation-suite.ts",
     "mcp-server/src/feature-orchestration/agentstream-adapter.test.ts",
     "mcp-server/src/feature-orchestration/agentstream-adapter.ts",
     "mcp-server/src/feature-orchestration/checklist-spawn-policy.ts",
@@ -74147,6 +75225,7 @@
     "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.test.ts",
     "mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts",
     "mcp-server/src/tools/checklist-gate-mcp.test.ts",
+    "mcp-server/src/tools/context-adaptive-mcp-tools.ts",
     "mcp-server/src/tools/impl-pseudocode-mcp.test.ts",
     "mcp-server/src/tools/index.ts",
     "mcp-server/src/tools/jev-plan-skills-tools.ts",

@@ -313,7 +313,7 @@ rows:
     envelope_require_mode: require_envelope
     envelope_source: envelope_file
     envelope_artifact: working/REQ-REQUEST_EVIDENCE_ENVELOPE/evidence/request-evidence-envelope.v1.json
-    envelope_revision: 2
+    envelope_revision: 3
     gap_codes:
       - expected_artifact_missing
       - finding_unresolved
@@ -355,7 +355,7 @@ rows:
           not_applicable: 0
           missing: 0
         evidence_chain_profile:
-          present: 1
+          present: 2
           waived: 0
           not_applicable: 0
           missing: 0
