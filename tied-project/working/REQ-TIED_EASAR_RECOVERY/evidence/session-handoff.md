@@ -1,87 +1,106 @@
 # Session handoff — REQ-TIED_EASAR_RECOVERY
 
-**Updated:** 2026-10-18 (traceable-commit **done** `e02716de`)  
+**Updated:** 2026-10-18 (Slice **5** traceable-commit **pending hash pin** below)  
 **Depth:** integrated · **gate_policy:** advisory · **engagement:** `easar_full` · **BFIE mode:** `pilot`  
-**Phase:** MVP slices **0–4** + **close_out** complete · **traceable-commit:** **done** (`e02716de`)
+**Phase:** MVP slices **0–5** committed · program **close_out** (MVP) **unchanged** · Slice 5 verification **done**
 
 **Linked plan:** [`req-tied_easar_recovery_17decacf.plan.md`](file:///Users/fareed/.cursor/plans/req-tied_easar_recovery_17decacf.plan.md)  
 **Program plan:** [../PLAN.md](../PLAN.md)  
-**CITDP (persisted):** [../../../citdp/CITDP-REQ-TIED_EASAR_RECOVERY.yaml](../../../citdp/CITDP-REQ-TIED_EASAR_RECOVERY.yaml)  
+**Slice 5 authority:** [slice5-e2e-plan.md](./slice5-e2e-plan.md)  
+**CITDP (persisted, MVP):** [../../../citdp/CITDP-REQ-TIED_EASAR_RECOVERY.yaml](../../../citdp/CITDP-REQ-TIED_EASAR_RECOVERY.yaml)  
 **Methodology:** [docs/methodologies/evidence-assured-software-architecture-recovery.md](../../../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7
 
-## What this change is
+## What this program is
 
-**Mode C EASAR** umbrella enrollment and MVP receipt library in the **stdd** store: compose BFIE, source graph, claims review, fidelity, adversarial inquiry, and request envelope tooling under `[PROC-EASAR_RECOVERY]`.
+**Mode C EASAR** in the **stdd** store: BFIE, source graph, claims review, inquiry, and envelope tooling under `[PROC-EASAR_RECOVERY]`, with versioned receipts under `tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/`.
 
-MVP scope: **slices 0–4** only (slices 5–6 deferred per sponsor C2).
+| Wave | Scope | Git |
+| --- | --- | --- |
+| MVP slices 0–4 + close_out | Enrolled stack + receipt MCPs | **Committed** `e02716de` (+ handoff pin `a5521f19`) |
+| Slice 5 (Stage 7) | Validation corpus + `tied_easar_validation_suite_run` | **Uncommitted** working tree |
+| Slice 6 | Portable `recovery/` export | Deferred |
 
 ## Resume here
 
-1. ~~Sponsor **`traceable-commit`**~~ **Done** — `e02716de` on `main` (2026-10-18); do not re-run close_out unless artifacts drift.
-2. Optional child plans for EASAR slices **5–6** (SWE-QA corpus, portable export).
+1. **`traceable-commit`** — stage only Slice 5 / EASAR-related paths (exclude unrelated drift: JEV benchmark re-run, path-scoped PLAN, envelope-gap-report unless intentionally bundled).
+2. Optional **`@refine-plan slice 6`** — portable export adapter (EASAR §7.6 item 6).
+3. Optional **LEAP program re-close** — only if sponsor wants envelope/CITDP refreshed for Slice 5 (costly; not required for slice verification pass).
+
+Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts drift.
 
 ## TIED stack status
 
 | Token | Status |
 | --- | --- |
-| **REQ-TIED_EASAR_RECOVERY** | **Implemented** (via `tied_verify` close_out) |
+| **REQ-TIED_EASAR_RECOVERY** | **Implemented** (MVP `tied_verify` close_out); **SC-EASAR-VALIDATION** added in detail YAML (Slice 5 LEAP — re-verify optional) |
 | **ARCH-TIED_EASAR_ARTIFACT_MODEL** | Active |
-| **IMPL-TIED_EASAR_RECEIPTS** | Active |
-| **PROC-EASAR_RECOVERY** | Enrolled · [processes.md](../../../../tied-bundle/docs/processes.md) § + [easar-recovery.md](../../../vocab/easar-recovery.md) |
+| **IMPL-TIED_EASAR_RECEIPTS** | Active (+ Stage 7 pseudo-code blocks) |
+| **PROC-EASAR_RECOVERY** | Enrolled · [easar-recovery.md](../../../vocab/easar-recovery.md) |
 
-**Close-out Tracker:** [../gate-tracker-close-out.yaml](../gate-tracker-close-out.yaml)  
-**Program Tracker (sparse):** [../checklist-tracker.yaml](../checklist-tracker.yaml)
+**Trackers:** [gate-tracker-close-out.yaml](../gate-tracker-close-out.yaml) · [gate-tracker-slice5-verification.yaml](../gate-tracker-slice5-verification.yaml) · [checklist-tracker.yaml](../checklist-tracker.yaml)
 
 ## Gate receipts
 
 | Phase | Allowed | Artifact / notes |
 | --- | --- | --- |
-| `pre_implementation` | **yes** | [../gates/pre_implementation-2026-10-18T02-15-41-747Z.json](../gates/pre_implementation-2026-10-18T02-15-41-747Z.json) |
-| `verification` (Slices 1–4) | **yes** | per-slice gates under [../gates/](../gates/) |
-| `close_out` | **yes** | [../gates/close_out-2026-10-18T04-17-44-799Z.json](../gates/close_out-2026-10-18T04-17-44-799Z.json) · `run_id=easar-close-out-20261018` |
-
-Write-up: [close-out-gate.md](./close-out-gate.md)
+| `pre_implementation` | **yes** | [pre_implementation-2026-10-18T02-15-41-747Z.json](../gates/pre_implementation-2026-10-18T02-15-41-747Z.json) |
+| `verification` Slices 1–4 | **yes** | [../gates/](../gates/) (2026-10-18 verification series) |
+| `verification` Slice 5 | **yes** | [verification-2026-10-18T04-32-48-412Z.json](../gates/verification-2026-10-18T04-32-48-412Z.json) · `run_id=easar-slice5-verify-20261018` · [slice5-verification-gate.md](./slice5-verification-gate.md) |
+| `close_out` (MVP) | **yes** | [close_out-2026-10-18T04-17-44-799Z.json](../gates/close_out-2026-10-18T04-17-44-799Z.json) · `run_id=easar-close-out-20261018` — **not invalidated** by Slice 5 |
 
 ### Completion signals
 
-- **Machine close-out:** **pass** — gate `close_out` `allowed=true`; envelope validate `fail_on_error_gaps=true` `blocking_gaps=0`; path=`tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/request-evidence-envelope.v1.json`; summary=[closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) (`run_id=easar-close-out-20261018`, `merged_decision.allowed=true`)
-- **Process contract:** **pass** — [gate-tracker-close-out.yaml](../gate-tracker-close-out.yaml) dual-write; manifest=[verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json); PSA Layer C=[pseudocode-analysis/IMPL-TIED_EASAR_RECEIPTS.v1.json](../pseudocode-analysis/IMPL-TIED_EASAR_RECEIPTS.v1.json); profile=[evidence-chain-profile.v1.json](./evidence-chain-profile.v1.json)
-- **Adherence ledger:** **pass** — reconcile `process_grade` band **A** ([closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json))
+**Program MVP close_out (committed baseline)**
 
-## Gitignore close-out hygiene
+- **Machine close-out:** **pass** — [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) (`merged_decision.allowed=true`, envelope blocking gaps 0 at close_out time)
+- **Process contract:** **pass** — close-out tracker dual-write; [verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json) (extended locally for Slice 5)
+- **Adherence ledger:** **pass** — band **A** at MVP close_out
 
-**N/A** — `tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/` remains under existing `tied-bundle/working/` ignore; committed evidence lives under `tied-project/working/REQ-TIED_EASAR_RECOVERY/`.
+**Slice 5 verification (uncommitted)**
+
+- **Machine verification:** **pass** — Slice 5 gate `allowed=true` (advisory `warn_not_success`, `finding_unresolved`)
+- **Process contract:** **pass** — dogfood [validation-cases.v1.yaml](./validation-cases.v1.yaml) → [validation-results.v1.json](./validation-results.v1.json) (**8/8** pass); manifest rows `easar-s5-*`
+- **Program envelope re-close:** **deferred** — gitignored `request-evidence-envelope.v1.json` not re-validated with blocking gaps for Slice 5
+
+## Slice 5 deliverables (Stage 7)
+
+| Artifact | Path |
+| --- | --- |
+| Cases | [validation-cases.v1.yaml](./validation-cases.v1.yaml) |
+| Results | [validation-results.v1.json](./validation-results.v1.json) |
+| MCP | `tied_easar_validation_suite_run` · `mcp-server/src/easar-receipts/validation-*.ts` |
+| Inquiry | [sub-adversarial-inquiry-pass-slice5-verification.md](./sub-adversarial-inquiry-pass-slice5-verification.md) |
 
 ## Satisfaction criteria (snapshot)
 
 | ID | Status |
 | --- | --- |
-| SC-EASAR-ENROLL | **done** |
-| SC-EASAR-TRACKER | **done** |
-| SC-EASAR-INV | **done** |
-| SC-EASAR-GRAPH | **done** |
-| SC-EASAR-CLAIMS | **done** |
-| SC-EASAR-REFLEX | **done** |
-| SC-EASAR-PROC | **done** |
-| SC-EASAR-GATES | **done** (pre_implementation + Slices 1–4 verification + close_out) |
-| SC-EASAR-TESTS | **done** |
+| SC-EASAR-ENROLL … SC-EASAR-TESTS | **done** (MVP commit) |
+| SC-EASAR-GATES | **done** (+ Slice 5 verification receipt) |
+| SC-EASAR-VALIDATION | **done** on disk · **pending commit** |
 
-## Traceable commit
+## Commits
 
-**Hash:** `e02716de` — `feat(mcp): enroll Mode C EASAR MVP receipts`
+| Hash | Scope |
+| --- | --- |
+| `e02716de` | MVP slices 0–4 + close_out |
+| `a5521f19` | Handoff pin for MVP traceable-commit |
+| *(pending)* | Slice 5 validation corpus + LEAP SC |
 
 ## Commands
 
 ```bash
-npm test --prefix mcp-server -- easar-receipts claims-evidence-review source-graph checklist-validator
+npm test --prefix mcp-server -- easar-receipts validation claims-evidence-review source-graph checklist-validator
 npm run build --prefix mcp-server
 # tied_validate_consistency
+# tied-cli tied_easar_validation_suite_run '{ "request_token": "REQ-TIED_EASAR_RECOVERY", "cases_path": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/validation-cases.v1.yaml", "output_path": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/validation-results.v1.json", "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd" }'
 ```
 
 **TIED MCP base path:** `tied-project/` (store repo).
 
 ## Remaining risks
 
-- Advisory inquiry diagnostics (`warn_not_success`, `finding_unresolved`) on close_out gate — non-blocking under advisory policy.
-- Slices **5–6** (validation corpus, portable export) out of scope until child plans.
-- Local `tied-bundle/working/` inquiry artifacts are gitignored; gate pairing uses identity-bound hashes in committed receipts.
+- Slice 5 code/evidence **not on origin** until traceable-commit.
+- Advisory inquiry warns on verification gates (Slices 1–5 and MVP close_out) — non-blocking.
+- **Slice 6** export and optional **program re-close** remain sponsor choices.
+- Local `tied-bundle/working/…/adversarial-inquiry/` is gitignored; committed gate receipts use identity-bound hashes.

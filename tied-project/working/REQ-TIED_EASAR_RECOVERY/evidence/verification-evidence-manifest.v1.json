@@ -1,7 +1,7 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
-  "run_id": "easar-slice4-verify-20261018",
-  "commit": "f1ef04ec73a810d13f433b7c4b394cbe9402b666",
+  "run_id": "easar-slice5-verify-20261018",
+  "commit": "a5521f1981fe6c199fdbecfee5e5d39f519b0708",
   "environment": {
     "node": "v25.9.0",
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
@@ -43,6 +43,17 @@
       "result": "passed",
       "artifacts": [
         "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/reflexion-report.v1.json"
+      ]
+    },
+    {
+      "id": "easar-slice5-unit",
+      "command": ["npm", "test", "--prefix", "mcp-server", "--", "easar-receipts", "validation"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/validation-cases.v1.yaml",
+        "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/validation-results.v1.json"
       ]
     }
   ],
@@ -124,6 +135,26 @@
       "rationale": "Distinct verification run_id easar-slice4-verify-20261018 paired at gate",
       "evidence_method": "tied_adversarial_inquiry_run",
       "command_or_test": "tied-project/working/REQ-TIED_EASAR_RECOVERY/gates/verification-2026-10-18T03-57-03-468Z.json",
+      "result": "passed",
+      "owner": "sub-adversarial-inquiry-pass"
+    },
+    {
+      "id": "easar-s5-validation-corpus",
+      "attribute": "validation-results.v1",
+      "applicability": "applicable",
+      "rationale": "Slice 5 SC-EASAR-VALIDATION dogfood suite (8/8 pass)",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/easar-receipts/validation-suite.test.ts",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "easar-s5-integrated-inquiry",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Distinct verification run_id easar-slice5-verify-20261018 paired at gate",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "tied-project/working/REQ-TIED_EASAR_RECOVERY/gates/verification-2026-10-18T04-32-48-412Z.json",
       "result": "passed",
       "owner": "sub-adversarial-inquiry-pass"
     }

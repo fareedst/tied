@@ -29,6 +29,7 @@
 | 2 | [`tied-yaml-mcp.md`](tied-yaml-mcp.md) | TIED YAML MCP server, `tied-cli`, bundled skill, validation/verify/cycles/backlog/scoped analysis |
 | 2c | [`project-operations-mcp.md`](project-operations-mcp.md) | Project lint, git hygiene, sponsor questions MCP tools; `/xlate` and `/unblock` skills |
 | 2e | [`operating-environment-externalities.md`](operating-environment-externalities.md) | OEE: external workflows, compatibility ledger, operating-environment dependency management |
+| 2f | [`easar-recovery.md`](easar-recovery.md) | EASAR Mode C, recovery engagement, Stage 7 validation cases, receipt schemas, `[PROC-EASAR_RECOVERY]` |
 | 2b | [`feedback-to-tied.md`](feedback-to-tied.md) | Upstream feedback artifact (`feedback.yaml`) and MCP export |
 | 3 | [`leap-proposal-queue.md`](leap-proposal-queue.md) | Non-canonical LEAP proposals, audit, diff/session import |
 | 4 | [`agentstream.md`](agentstream.md) | **`@tied/agentstream`** (TypeScript default, Phase **4d**): pipeline, checklist, executor, MCP preflight; legacy Go tree removed |
@@ -102,6 +103,8 @@
 | evidence chain profile | Cross-topic notes |
 | evidence-chain profile depth | Cross-topic notes |
 | evidence chain statistics report | Cross-topic notes |
+| EASAR recovery | `easar-recovery.md` |
+| easar-recovery.md | Canonical glossaries |
 | client cohort | Cross-topic notes |
 | report input manifest | Cross-topic notes |
 | full catalog | Preferred terms (directory entry) |

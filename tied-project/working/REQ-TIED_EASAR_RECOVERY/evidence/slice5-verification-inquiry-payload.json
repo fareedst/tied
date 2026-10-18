@@ -1,0 +1,11 @@
+{
+  "scope": [
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_VALIDATION_CASES_V1#5ef883efe944a0f8",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_VALIDATION_RESULTS_MCP#c0437590071828a1"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "run_id": "easar-slice5-verify-20261018",
+  "phase": "verification"
+}

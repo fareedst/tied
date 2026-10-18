@@ -1,0 +1,66 @@
+{
+  "schema_version": "validation-results.v1",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "git_rev": "e02716de",
+  "cases_path": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/validation-cases.v1.yaml",
+  "evidence_refs": [
+    "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/claim-matrix-map.v1.json",
+    "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json",
+    "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json",
+    "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/reflexion-report.v1.json"
+  ],
+  "tasks": [
+    {
+      "task_id": "inv-schema-version",
+      "grader": "receipt_field",
+      "pass": true,
+      "evidence_ref": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json"
+    },
+    {
+      "task_id": "inv-request-token",
+      "grader": "receipt_field",
+      "pass": true,
+      "evidence_ref": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json"
+    },
+    {
+      "task_id": "graph-matrix-freshness-run",
+      "grader": "receipt_field",
+      "pass": true,
+      "evidence_ref": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json"
+    },
+    {
+      "task_id": "claim-map-schema",
+      "grader": "receipt_field",
+      "pass": true,
+      "evidence_ref": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/claim-matrix-map.v1.json"
+    },
+    {
+      "task_id": "reflexion-export-only",
+      "grader": "receipt_field",
+      "pass": true,
+      "evidence_ref": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/reflexion-report.v1.json"
+    },
+    {
+      "task_id": "engagement-facet-mode-guard",
+      "grader": "engagement_facet",
+      "pass": true,
+      "detail": "easar_full_requires_pilot_or_strict_mode",
+      "evidence_ref": "mcp-server/src/easar-receipts/engagement-facet.ts"
+    },
+    {
+      "task_id": "mcp-inventory-tool",
+      "grader": "mcp_tool_registry",
+      "pass": true,
+      "evidence_ref": "mcp-server/src/tools/index.ts"
+    },
+    {
+      "task_id": "source-graph-index-schema",
+      "grader": "source_graph_trace",
+      "pass": true,
+      "evidence_ref": "tied-bundle/reports/source-graph/source-graph-index.v1.json"
+    }
+  ],
+  "pass_count": 8,
+  "fail_count": 0,
+  "content_hash": "9d660336d3db1324bec69f6ec0bf069e0d7c56f045a4015e7714fcd701f655ba"
+}

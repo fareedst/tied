@@ -32,6 +32,7 @@ REQ-TIED_EASAR_RECOVERY:
       - criterion: "SC-EASAR-PROC — PROC-EASAR_RECOVERY sequences existing slugs without duplicating full checklist."
       - criterion: "SC-EASAR-REFLEX — reflexion-report.v1.json export-only synthesis."
       - criterion: "SC-EASAR-TRACKER — engagement easar_full accepted when mode is pilot or strict."
+      - criterion: "SC-EASAR-VALIDATION — validation-cases.v1.yaml and validation-results.v1.json with deterministic graders (Stage 7)."
     status: "Implemented"
     traceability:
       architecture:

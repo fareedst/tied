@@ -80,6 +80,7 @@ import { buildEasarInventoryReceipt } from "../easar-receipts/inventory-receipt-
 import { buildEasarCodeGraphMatrixReceipt } from "../easar-receipts/graph-matrix-receipt-mcp.js";
 import { buildEasarClaimMatrixMap } from "../easar-receipts/claim-matrix-map-mcp.js";
 import { buildEasarReflexionReport } from "../easar-receipts/reflexion-report-mcp.js";
+import { runEasarValidationSuiteMcp } from "../easar-receipts/validation-results-mcp.js";
 import {
   tiedSourceGraphFreshness,
   tiedSourceGraphMap,
@@ -2968,6 +2969,40 @@ export const allTools = [
       output_path?: string;
     }) => {
       const result = buildEasarReflexionReport(args);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_easar_validation_suite_run",
+    config: {
+      description:
+        "Run [REQ-TIED_EASAR_RECOVERY] Stage 7 validation-cases.v1 graders (deterministic, read-only) and emit validation-results.v1.json. Optional write under tied-project/working/{REQ}/evidence/.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token (e.g. REQ-TIED_EASAR_RECOVERY)."),
+        cases_path: z.string().describe("Repo-relative path to validation-cases.v1.yaml."),
+        project_root: z.string().optional().describe("Client project root; defaults from TIED layout."),
+        git_rev: z.string().optional().describe("Pin git revision in results; defaults to HEAD."),
+        evidence_refs: z
+          .array(z.string())
+          .optional()
+          .describe("Optional committed receipt paths cross-linked in results."),
+        output_path: z
+          .string()
+          .optional()
+          .describe("Repo-relative or absolute path to write validation-results.v1.json."),
+        min_cases: z.number().int().min(1).optional().describe("Minimum case count (default 8)."),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      cases_path: string;
+      project_root?: string;
+      git_rev?: string;
+      evidence_refs?: string[];
+      output_path?: string;
+      min_cases?: number;
+    }) => {
+      const result = runEasarValidationSuiteMcp(args);
       return textContent(JSON.stringify(result, null, 2));
     },
   },

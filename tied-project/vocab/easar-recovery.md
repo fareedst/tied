@@ -1,8 +1,12 @@
-# EASAR recovery (Mode C)
+# EASAR recovery (Mode C) (canonical)
 
-**Purpose:** Domain vocabulary for Evidence-Assured Software Architecture Recovery engagements in TIED clients. Methodology bridge: [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md).
+**Scope:** Domain vocabulary for Evidence-Assured Software Architecture Recovery (EASAR) Mode C engagements in TIED clients. Terms **do not** replace REQ/ARCH/IMPL authority.
 
-**Tokens:** `[REQ-TIED_EASAR_RECOVERY]`, `[ARCH-TIED_EASAR_ARTIFACT_MODEL]`, `[IMPL-TIED_EASAR_RECEIPTS]`, `[PROC-EASAR_RECOVERY]`.
+**Traceability:** `[REQ-TIED_EASAR_RECOVERY]` · `[ARCH-TIED_EASAR_ARTIFACT_MODEL]` · `[IMPL-TIED_EASAR_RECEIPTS]` · `[PROC-EASAR_RECOVERY]` · methodology [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7
+
+**Status:** Slice 5 Stage 7 validation corpus on disk (2026-10-18). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
+
+**See also:** [`routing.md`](routing.md) (row **2f**) · [`quality-assurance.md`](quality-assurance.md) (grading / evaluation corpus contrast) · [`fidelity-research.md`](fidelity-research.md) (adversarial inquiry vs claims review) · [`tied-methodology.md`](tied-methodology.md)
 
 ---
 
@@ -26,6 +30,20 @@
 | Code graph matrix receipt | `code-graph-matrix-receipt.v1` | Stage 2 row ↔ graph freshness/trace |
 | Claim matrix map | `claim-matrix-map.v1` | Stage 4 `claim.id` ↔ matrix `#` |
 | Reflexion report | `reflexion-report.v1` | Stage 6 export-only ARCH ↔ graph divergence synthesis |
+| Validation cases | `validation-cases.v1.yaml` | Stage 7 SWE-QA-aligned comprehension tasks (bounded dogfood) |
+| Validation results | `validation-results.v1.json` | Stage 7 grader outcomes + evidence refs (not a blocking scorecard) |
+
+---
+
+## Stage 7 terms
+
+| Term | Definition | TIED preferred name |
+| --- | --- | --- |
+| **Validation case** | Independent assessment task with structured oracle | Row in `validation-cases.v1.yaml` |
+| **Grader** | Deterministic checker (graph trace, receipt field, test path) | `grader` field — not LLM-as-judge in Slice 5 MVP |
+| **Validation suite run** | Execute all cases for one repo revision | MCP `tied_easar_validation_suite_run` |
+
+**Distinction:** `evaluation-corpus.v1.yaml` rows index **envelope gap batch collect** across clients; they are **not** EASAR Stage 7 validation cases.
 
 ---
 
@@ -34,3 +52,17 @@
 - Repo-root `recovery/` as source of truth
 - Merging adversarial `finding-ledger.jsonl` with claims-review ledgers
 - Promoting `observed` matrix rows to REQ without sponsor promotion slugs
+
+---
+
+## Alphabetical index
+
+| Term | Section |
+| --- | --- |
+| claim registry | Terms (EASAR §7.4 map) |
+| evaluation ledger | Terms (EASAR §7.4 map) |
+| grader | Stage 7 terms |
+| grading | Terms (EASAR §7.4 map) |
+| recovery engagement (Mode C) | Terms (EASAR §7.4 map) |
+| validation case | Stage 7 terms |
+| validation suite run | Stage 7 terms |

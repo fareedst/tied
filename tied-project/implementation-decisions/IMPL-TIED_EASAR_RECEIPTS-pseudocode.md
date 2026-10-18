@@ -120,3 +120,48 @@ procedure BUILD_EASAR_REFLEXION_REPORT_MCP:
     TERMINATION: total
   CALL buildReflexionReportV1
   RETURN reflexion_result
+
+## Validation corpus (Stage 7)
+
+procedure BUILD_VALIDATION_CASES_V1:
+  # [IMPL-TIED_EASAR_RECEIPTS] [ARCH-TIED_EASAR_ARTIFACT_MODEL] [REQ-TIED_EASAR_RECOVERY]
+  # How: Parse validation-cases.v1.yaml into normalized cases with grader enum validation.
+  Contract:
+    INPUT: cases_document
+    OUTPUT: cases_or_error
+    PRE: schema_version validation-cases.v1; each case has task_id, grader, inputs, expected
+    POST: minimum case count and grader ids from allowed set
+    EFFECTS: pure
+    FAILURE_MODES: invalid_grader; duplicate_task_id; schema_mismatch
+    TERMINATION: total
+  RETURN cases_or_error
+
+procedure RUN_EASAR_VALIDATION_SUITE_V1:
+  # [IMPL-TIED_EASAR_RECEIPTS] [ARCH-TIED_EASAR_ARTIFACT_MODEL] [REQ-TIED_EASAR_RECOVERY]
+  # How: Execute deterministic graders read-only against repo_root; no LLM judges.
+  Contract:
+    INPUT: cases, repo_root, git_rev, evidence_refs
+    OUTPUT: validation_results_v1
+    PRE: cases validated; repo_root exists
+    POST: validation-results.v1 with per-task pass/fail and stable content_hash
+    EFFECTS: read-only IO for graders
+    FAILURE_MODES: missing_receipt; grader_error
+    TERMINATION: total
+  FOR EACH case IN cases
+    CALL gradeValidationCase
+  RETURN validation_results_v1
+
+procedure BUILD_EASAR_VALIDATION_RESULTS_MCP:
+  # [IMPL-TIED_EASAR_RECEIPTS] [REQ-TIED_EASAR_RECOVERY]
+  # How: MCP wrapper loading cases YAML then RUN_EASAR_VALIDATION_SUITE_V1; optional write.
+  Contract:
+    INPUT: request_token, cases_path, project_root
+    OUTPUT: suite_result
+    PRE: optional output_path under working evidence
+    POST: validation-results.v1 written when output_path set; envelope patch same discipline as inventory MCP
+    EFFECTS: IO
+    FAILURE_MODES: cases_load_failed; suite_failed
+    TERMINATION: total
+  CALL parseValidationCasesV1
+  CALL runEasarValidationSuiteV1
+  RETURN suite_result
