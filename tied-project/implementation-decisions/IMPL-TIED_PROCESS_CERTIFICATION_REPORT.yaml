@@ -1,0 +1,24 @@
+IMPL-TIED_PROCESS_CERTIFICATION_REPORT:
+  IMPL-TIED_PROCESS_CERTIFICATION_REPORT:
+    IMPL-TIED_PROCESS_CERTIFICATION_REPORT:
+      code_locations:
+        files:
+          - path: "mcp-server/src/process-certification-readiness/readiness-report.test.ts"
+          - path: "mcp-server/src/process-certification-readiness/readiness-report.ts"
+      cross_references:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+      essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_REPORT-pseudocode.md"
+      implementation_approach:
+        summary: "Compose certifiability-readiness.v1 and assessor-pack.v1 with proof boundaries."
+      name: "Certifiability readiness report composer"
+      status: "In Progress"
+      traceability:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+        tests:
+          - "readiness-report.test.ts"

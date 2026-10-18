@@ -1,0 +1,61 @@
+schema_version: edse-process-spec.v1
+spec_version: 1.0.0
+proof_boundary: conformance-not-capability-not-product
+content_hash: 07029fe28dead27c82e3c346261d81fea1d3f437059ee4f7fb0fb61f791d9d2f
+clauses:
+  - id: EDSE-001
+    title: Context characterization
+    normative_summary: Characterize operational context before practice selection.
+    evidence_obligations:
+      - context_profile_record
+    evaluation_procedure: Verify context profile artifact exists and is validated.
+    pass_rule: context_profile_record present
+    limitations: Does not assert product quality.
+  - id: EDSE-002
+    title: Practice selection
+    normative_summary: Select practices deterministically with advisory receipts.
+    evidence_obligations:
+      - selection_receipt
+    evaluation_procedure: Verify selection receipt references validated library.
+    pass_rule: selection_receipt present
+    limitations: Advisory only; not checklist authority.
+  - id: EDSE-003
+    title: Engineering execution
+    normative_summary: Execute implementation via documented TDD cycle.
+    evidence_obligations:
+      - test_evidence
+    evaluation_procedure: Verify test references exist for changed modules.
+    pass_rule: test_evidence present
+    limitations: Conformance does not imply capability.
+  - id: EDSE-004
+    title: Evidence management
+    normative_summary: Maintain request evidence envelope artifacts.
+    evidence_obligations:
+      - envelope_artifact
+    evaluation_procedure: Verify envelope or gap record exists.
+    pass_rule: envelope_artifact present
+    limitations: Read-only composition.
+  - id: EDSE-005
+    title: Verification
+    normative_summary: Run verification gates before status promotion.
+    evidence_obligations:
+      - gate_receipt
+    evaluation_procedure: Verify checklist gate receipt when declared.
+    pass_rule: gate_receipt present
+    limitations: Gate pass is not certification.
+  - id: EDSE-006
+    title: Process adaptation
+    normative_summary: Reassess context when material change detected.
+    evidence_obligations:
+      - reassessment_receipt
+    evaluation_procedure: Verify reassessment receipt when adaptation declared.
+    pass_rule: reassessment_receipt present or adaptation_not_declared
+    limitations: Observational adaptation only.
+  - id: EDSE-007
+    title: Continuous improvement
+    normative_summary: Record methodology learning experiments when surface touched.
+    evidence_obligations:
+      - learning_experiment_link
+    evaluation_procedure: Verify experiment link when MCP surface changed.
+    pass_rule: learning_experiment_link present or surface_unchanged
+    limitations: Does not prove organizational maturity.

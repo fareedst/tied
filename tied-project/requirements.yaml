@@ -2789,6 +2789,12 @@ REQ-TIED_PRIMARY_REPO_ONBOARDING:
       - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
     implementation:
       - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
+REQ-TIED_PROCESS_CERTIFICATION_READINESS:
+  category: "Functional"
+  detail_file: "requirements/REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
+  name: "EDSE process certification readiness"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION:
   category: "Infrastructure"
   cross_references:

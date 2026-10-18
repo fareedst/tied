@@ -93,3 +93,12 @@ export function branchCheckCliEntryFromCliModule(moduleUrl: string): string {
   return path.join(workspaceRootFromCliModule(moduleUrl), "dist", "cli", "branch-check.js");
 }
 
+export function processCertificationCliEntryFromCliModule(moduleUrl: string): string {
+  return path.join(
+    workspaceRootFromCliModule(moduleUrl),
+    "dist",
+    "cli",
+    "process-certification-cli.js",
+  );
+}
+

@@ -2240,6 +2240,10 @@ ARCH-TIED_PRIMARY_REPO_README_STRUCTURE:
       - "IMPL-TIED_PRIMARY_REPO_README_CONTENT"
     requirements:
       - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+ARCH-TIED_PROCESS_CERTIFICATION_READINESS:
+  detail_file: "architecture-decisions/ARCH-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
+  name: "Process certification readiness architecture"
+  status: "Active"
 ARCH-TIED_PROJECT_CONFIG_OWNERSHIP:
   description: "Disjoint project vs install config ownership with single install_defaults overlay."
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_CONFIG_OWNERSHIP.yaml"

@@ -2686,6 +2686,30 @@ IMPL-TIED_PRIMARY_REPO_README_CONTENT:
       - "ARCH-TIED_PRIMARY_REPO_README_STRUCTURE"
     requirements:
       - "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE:
+  detail_file: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE.yaml"
+  name: "Adaptive effectiveness experiment"
+  status: "Active"
+IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY:
+  detail_file: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY.yaml"
+  name: "Seven-dimension capability profiler"
+  status: "Active"
+IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE:
+  detail_file: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE.yaml"
+  name: "Clause conformance engine"
+  status: "Active"
+IMPL-TIED_PROCESS_CERTIFICATION_INDEPENDENT:
+  detail_file: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_INDEPENDENT.yaml"
+  name: "Independent assessor validation"
+  status: "Active"
+IMPL-TIED_PROCESS_CERTIFICATION_REPORT:
+  detail_file: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_REPORT.yaml"
+  name: "Certifiability readiness report composer"
+  status: "Active"
+IMPL-TIED_PROCESS_CERTIFICATION_SPEC:
+  detail_file: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_SPEC.yaml"
+  name: "EDSE spec loader and validator"
+  status: "Active"
 IMPL-TIED_PROJECT_IDENTITY:
   cross_references:
     - "ARCH-TIED_PROJECT_IDENTITY"

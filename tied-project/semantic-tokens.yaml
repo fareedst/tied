@@ -2799,6 +2799,16 @@ PROC-LEAP:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+PROC-PROCESS_CERTIFICATION_READINESS:
+  cross_references:
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+  description: "Read-only MCP/CLI certifiability evaluation composing EDSE spec, conformance, capability, independent assessment, and adaptive experiment artifacts."
+  detail_file: "null"
+  name: "Process certification readiness orchestration"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
 PROC-PROJECT_SURVEY_AND_SETUP:
   cross_references:
     - "ARCH-TIED_STRUCTURE"

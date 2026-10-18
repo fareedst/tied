@@ -21,6 +21,12 @@ export type ArtifactKind =
   | "not_applicable_receipt"
   | "request_evidence_envelope"
   | "pseudocode_analysis_report"
+  | "certifiability_readiness"
+  | "assessor_pack"
+  | "conformance_matrix"
+  | "capability_profile"
+  | "assessor_agreement"
+  | "adaptive_effectiveness"
   | "unknown";
 
 export type ArtifactStatus = "present" | "not_applicable" | "expected_missing" | "stale_projection";

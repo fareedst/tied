@@ -1,0 +1,10 @@
+{
+  "schema_version": "independent-assessment-record.v1",
+  "assessor_id": "assessor-alpha",
+  "author_or_implementer_ids": ["implementer-1"],
+  "independence_attestation": "I am independent from the implementation team.",
+  "findings": [
+    { "id": "F-001", "disposition": "agree", "note": "Conformance matrix present" },
+    { "id": "F-002", "disposition": "disagree", "note": "Capability dimension gap noted" }
+  ]
+}

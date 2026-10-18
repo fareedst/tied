@@ -1,0 +1,20 @@
+{
+  "schema_version": "edse-process-record.v1",
+  "spec_content_hash": "07029fe28dead27c82e3c346261d81fea1d3f437059ee4f7fb0fb61f791d9d2f",
+  "evidence": {
+    "context_profile_record": "fixtures/context-profile.json",
+    "selection_receipt": "fixtures/selection-receipt.json",
+    "test_evidence": ["mcp-server/src/process-certification-readiness/spec-loader.test.ts"],
+    "envelope_artifact": "working/evidence/request-evidence-envelope.v1.json",
+    "gate_receipt": "working/gates/pre_implementation.json",
+    "reassessment_receipt": "fixtures/reassessment.json",
+    "learning_experiment_link": "methodology-learning/experiment-link.json",
+    "capability_context_characterization": true,
+    "capability_practice_selection": true,
+    "capability_engineering_execution": true,
+    "capability_evidence_management": true,
+    "capability_verification": true,
+    "capability_process_adaptation": true,
+    "capability_continuous_improvement": true
+  }
+}

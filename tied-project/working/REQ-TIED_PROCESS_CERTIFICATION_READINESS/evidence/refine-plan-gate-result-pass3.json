@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-18",
+  "refine_pass": 3,
+  "phase": "pre_implementation",
+  "depth_tier": "integrated",
+  "gate_policy": "advisory",
+  "allowed": false,
+  "exit_code": 1,
+  "request_token": "REQ-TIED_PROCESS_CERTIFICATION_READINESS",
+  "diagnostics": [
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete"
+  ],
+  "interpretation": "Re-gate at pre_implementation blocked because tied-bundle/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/adversarial-inquiry/phase-pre_implementation/ is not present on disk. Build-phase receipt remains authoritative for product work: pre-implementation-gate-result.json (allowed true, 2026-10-18). Refine pass 3 is plan-close-out scoped (docs/evidence/gates only); proceed to @plan-close-out using close_out unified runner — do not re-open build-plan slices.",
+  "authoritative_build_receipt": "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/pre-implementation-gate-result.json",
+  "tracker": "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/checklist-tracker-plan-close-out-refine.yaml",
+  "linked_plan": "pcr_plan-close-out_c266c7bc.plan.md"
+}

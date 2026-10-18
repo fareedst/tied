@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-18",
+  "gate_mode": true,
+  "all_ok": false,
+  "results": [
+    {
+      "token": "IMPL-TIED_PROCESS_CERTIFICATION_SPEC",
+      "ok": false,
+      "diagnostics": [
+        "MISSING_BLOCK_TOKEN_LINK",
+        "HOST_SYNTAX_LEAK",
+        "HOST_SYNTAX_LEAK"
+      ]
+    },
+    {
+      "token": "IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE",
+      "ok": false,
+      "diagnostics": [
+        "MISSING_BLOCK_TOKEN_LINK",
+        "HOST_SYNTAX_LEAK",
+        "HOST_SYNTAX_LEAK"
+      ]
+    },
+    {
+      "token": "IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY",
+      "ok": false,
+      "diagnostics": [
+        "MISSING_BLOCK_TOKEN_LINK",
+        "HOST_SYNTAX_LEAK",
+        "HOST_SYNTAX_LEAK"
+      ]
+    },
+    {
+      "token": "IMPL-TIED_PROCESS_CERTIFICATION_INDEPENDENT",
+      "ok": false,
+      "diagnostics": [
+        "MISSING_BLOCK_TOKEN_LINK",
+        "MISSING_BLOCK_TOKEN_LINK",
+        "HOST_SYNTAX_LEAK"
+      ]
+    },
+    {
+      "token": "IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE",
+      "ok": false,
+      "diagnostics": [
+        "MISSING_BLOCK_TOKEN_LINK",
+        "HOST_SYNTAX_LEAK",
+        "HOST_SYNTAX_LEAK"
+      ]
+    },
+    {
+      "token": "IMPL-TIED_PROCESS_CERTIFICATION_REPORT",
+      "ok": false,
+      "diagnostics": [
+        "MISSING_BLOCK_TOKEN_LINK",
+        "MISSING_BLOCK_TOKEN_LINK",
+        "HOST_SYNTAX_LEAK"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY:
+  IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY:
+    IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY:
+      code_locations:
+        files:
+          - path: "mcp-server/src/process-certification-readiness/capability-model.test.ts"
+          - path: "mcp-server/src/process-certification-readiness/capability-model.ts"
+      cross_references:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+      essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY-pseudocode.md"
+      implementation_approach:
+        summary: "Per-dimension capability-profile.v1 without aggregate scores."
+      name: "Seven-dimension capability profiler"
+      status: "In Progress"
+      traceability:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+        tests:
+          - "capability-model.test.ts"

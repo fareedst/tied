@@ -1,0 +1,10 @@
+{
+  "schema_version": "independent-assessment-record.v1",
+  "assessor_id": "assessor-beta",
+  "author_or_implementer_ids": ["implementer-2"],
+  "independence_attestation": "Independent attestation signed.",
+  "findings": [
+    { "id": "F-001", "disposition": "agree" },
+    { "id": "F-002", "disposition": "agree" }
+  ]
+}

@@ -1,0 +1,32 @@
+ARCH-TIED_PROCESS_CERTIFICATION_READINESS:
+  ARCH-TIED_PROCESS_CERTIFICATION_READINESS:
+    cross_references:
+      implementation:
+        - "IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_INDEPENDENT"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_REPORT"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_SPEC"
+      requirements:
+        - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+    decisions:
+      - id: "no-rollup-capability"
+        rationale: "Capability dimensions are independent; aggregate scores forbidden."
+        status: "accepted"
+        title: "Per-dimension capability only"
+      - id: "non-certifying-outputs"
+        rationale: "Outputs use ready_for_external_appraisal; never certified or compliance_guaranteed."
+        status: "accepted"
+        title: "Non-certification invariant"
+      - id: "read-only-tied"
+        rationale: "Readiness tools must not mutate project TIED YAML or checklist authority."
+        status: "accepted"
+        title: "Read-only composition surface"
+      - id: "reference-mapping-only"
+        rationale: "12207 crosswalk is reference_mapping_only without compliance claims."
+        status: "accepted"
+        title: "Reference mapping boundary"
+    description: "Artifact boundaries for EDSE certifiability readiness layer."
+    name: "Process certification readiness architecture"
+    status: "Active"

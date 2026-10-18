@@ -1,0 +1,24 @@
+IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE:
+  IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE:
+    IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE:
+      code_locations:
+        files:
+          - path: "mcp-server/src/process-certification-readiness/conformance-engine.test.ts"
+          - path: "mcp-server/src/process-certification-readiness/conformance-engine.ts"
+      cross_references:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+      essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE-pseudocode.md"
+      implementation_approach:
+        summary: "Deterministic EDSE-001…007 conformance matrix from catalog and process record."
+      name: "Clause conformance engine"
+      status: "In Progress"
+      traceability:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+        tests:
+          - "conformance-engine.test.ts"

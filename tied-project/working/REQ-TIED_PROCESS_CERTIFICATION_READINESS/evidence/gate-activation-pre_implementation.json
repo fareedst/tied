@@ -1,0 +1,50 @@
+{
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_PROCESS_CERTIFICATION_READINESS",
+    "project_id": "stdd-pcr-structural",
+    "run_id": "pcr-structural-pre-impl-20261018",
+    "phase": "pre_implementation",
+    "scope": [
+      "IMPL-TIED_PROCESS_CERTIFICATION_SPEC#LOAD_PROCESS_CERTIFICATION_BUNDLE_V1#pcr-structural-rev-1",
+      "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#COMPOSE_CERTIFIABILITY_READINESS_V1#pcr-structural-rev-1"
+    ],
+    "scope_hash": "5018dacf43d426a8f9668fd42cfffd5b918715bdfcfed91912c691f740a62cc1",
+    "artifact_hashes": {
+      "obligation-report.json": "4a34f75dc5eea3f5b8377c280cfeb963d76d707c79fc9a8096e34337df975813",
+      "finding-ledger.jsonl": "dbce0b34ba06ec9a3b52954982d1fb3d9a57e4c622701c8fd04a59a1971c88b3",
+      "gate-result.json": "7697b1ae0daf1c08b55f339fd4019d94f824174646085089d2560dc0f810fdc1",
+      "evidence-provenance.json": "8d178cc8e276b776eb1a20fe4ac691db7cc38f280486089c29b485f8f186d7f9"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "hash": "4a34f75dc5eea3f5b8377c280cfeb963d76d707c79fc9a8096e34337df975813"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "hash": "dbce0b34ba06ec9a3b52954982d1fb3d9a57e4c622701c8fd04a59a1971c88b3"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "hash": "7697b1ae0daf1c08b55f339fd4019d94f824174646085089d2560dc0f810fdc1"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "hash": "8d178cc8e276b776eb1a20fe4ac691db7cc38f280486089c29b485f8f186d7f9"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_PROCESS_CERTIFICATION_READINESS",
+    "project_id": "stdd-pcr-structural",
+    "run_id": "pcr-structural-pre-impl-20261018",
+    "phase": "pre_implementation",
+    "scope_hash": "5018dacf43d426a8f9668fd42cfffd5b918715bdfcfed91912c691f740a62cc1",
+    "scope": [
+      "IMPL-TIED_PROCESS_CERTIFICATION_SPEC#LOAD_PROCESS_CERTIFICATION_BUNDLE_V1#pcr-structural-rev-1",
+      "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#COMPOSE_CERTIFIABILITY_READINESS_V1#pcr-structural-rev-1"
+    ]
+  }
+}

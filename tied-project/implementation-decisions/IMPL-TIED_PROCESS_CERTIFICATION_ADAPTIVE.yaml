@@ -1,0 +1,24 @@
+IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE:
+  IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE:
+    IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE:
+      code_locations:
+        files:
+          - path: "mcp-server/src/process-certification-readiness/adaptive-experiment.test.ts"
+          - path: "mcp-server/src/process-certification-readiness/adaptive-experiment.ts"
+      cross_references:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+      essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE-pseudocode.md"
+      implementation_approach:
+        summary: "Fixture-grounded fixed, rule-selected, adaptive arms with held-out provenance."
+      name: "Adaptive effectiveness experiment"
+      status: "In Progress"
+      traceability:
+        architecture:
+          - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+        requirements:
+          - "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+        tests:
+          - "adaptive-experiment.test.ts"

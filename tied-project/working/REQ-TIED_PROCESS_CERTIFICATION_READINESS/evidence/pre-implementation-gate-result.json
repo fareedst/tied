@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/gates/pre_implementation-2026-10-18T07-50-15-126Z.json"
+  },
+  "date": "2026-10-18"
+}

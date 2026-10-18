@@ -279,6 +279,12 @@ async function discoverWorkingArtifacts(
       else if (name.includes("verification-evidence-manifest")) kind = "verification_evidence_manifest";
       else if (name.includes("not-applicable-receipt")) kind = "not_applicable_receipt";
       else if (name.includes("evidence-chain-profile")) kind = "evidence_chain_profile";
+      else if (name.includes("certifiability-readiness")) kind = "certifiability_readiness";
+      else if (name.includes("assessor-pack")) kind = "assessor_pack";
+      else if (name.includes("conformance-matrix")) kind = "conformance_matrix";
+      else if (name.includes("capability-profile")) kind = "capability_profile";
+      else if (name.includes("assessor-agreement")) kind = "assessor_agreement";
+      else if (name.includes("adaptive-effectiveness")) kind = "adaptive_effectiveness";
       discovered.push({
         absolute,
         relative: relPath(projectRoot, absolute),

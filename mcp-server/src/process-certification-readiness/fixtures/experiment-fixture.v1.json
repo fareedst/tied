@@ -1,0 +1,28 @@
+{
+  "schema_version": "adaptive-experiment-fixture.v1",
+  "min_cases_per_arm": 2,
+  "cases": [
+    {
+      "case_id": "train-1",
+      "perturbation": "concurrency_hazard",
+      "fixed_receipt_hash": "fixed-a",
+      "rule_selected_receipt_hash": "rule-a",
+      "adaptive_receipt_hash": "adapt-a"
+    },
+    {
+      "case_id": "train-2",
+      "perturbation": "irreversible_op",
+      "fixed_receipt_hash": "fixed-b",
+      "rule_selected_receipt_hash": "rule-b",
+      "adaptive_receipt_hash": "adapt-b"
+    },
+    {
+      "case_id": "held-1",
+      "held_out": true,
+      "perturbation": "undocumented_behavior",
+      "fixed_receipt_hash": "fixed-h",
+      "rule_selected_receipt_hash": "rule-h",
+      "adaptive_receipt_hash": "adapt-h"
+    }
+  ]
+}

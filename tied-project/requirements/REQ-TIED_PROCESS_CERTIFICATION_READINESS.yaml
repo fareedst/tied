@@ -1,0 +1,48 @@
+REQ-TIED_PROCESS_CERTIFICATION_READINESS:
+  REQ-TIED_PROCESS_CERTIFICATION_READINESS:
+    category: "Functional"
+    description: "Read-only certifiability readiness layer for EDSE (spec, mappings, conformance, capability, independent assessment, adaptive experiments, assessor packs)."
+    name: "EDSE process certification readiness"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Assessor-ready machine evidence without claiming certification."
+        - "Composes CASE/gate/envelope evidence read-only."
+      problems_solved:
+        - "No independent assessor agreement or bounded adaptive-effectiveness harness."
+        - "No versioned EDSE spec or executable clause conformance in repo."
+      why: "Implement certification-of-workflows stages 1-5 and 7 per linked plan."
+    related_requirements:
+      depends_on:
+        - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+        - "REQ-MODULE_VALIDATION"
+        - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+        - "REQ-TIED_ADVERSARIAL_INQUIRY"
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      related_to: []
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "SC-PCR-ADAPT — three-arm fixture experiment without superiority claim."
+      - criterion: "SC-PCR-CAP — seven dimensions reported separately."
+      - criterion: "SC-PCR-COMPOSE — readiness report + MCP/CLI + envelope kinds."
+      - criterion: "SC-PCR-CONF — deterministic conformance matrix from catalog."
+      - criterion: "SC-PCR-HANDOFF — assessor pack; stages 6/8 documented external."
+      - criterion: "SC-PCR-IND — independence failures and assessor disagreement covered."
+      - criterion: "SC-PCR-MAP — 12207 and capability model validate; reference_mapping_only; no rollup scores."
+      - criterion: "SC-PCR-SPEC — edse-process-spec.v1 pinned with EDSE-001…007."
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_PROCESS_CERTIFICATION_READINESS"
+      implementation:
+        - "IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_INDEPENDENT"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_REPORT"
+        - "IMPL-TIED_PROCESS_CERTIFICATION_SPEC"
+      tests:
+        - "mcp-server/src/process-certification-readiness/**/*.test.ts"

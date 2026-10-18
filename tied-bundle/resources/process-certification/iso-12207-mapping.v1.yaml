@@ -1,0 +1,13 @@
+schema_version: iso-12207-mapping.v1
+reference_mapping_only: true
+proof_boundary: reference-mapping-not-compliance
+mappings:
+  - edse_clause: EDSE-001
+    iso_12207_process_ref: "6.4.2"
+    rationale: Context establishment aligns with life-cycle concept exploration (reference only).
+  - edse_clause: EDSE-003
+    iso_12207_process_ref: "6.4.4"
+    rationale: Implementation practices crosswalk (reference only).
+  - edse_clause: EDSE-005
+    iso_12207_process_ref: "6.4.9"
+    rationale: Verification crosswalk (reference only).

@@ -1,0 +1,17 @@
+schema_version: iso-330xx-capability-model.v1
+proof_boundary: per-dimension-only-no-rollup
+dimensions:
+  - id: context_characterization
+    label: Context characterization
+  - id: practice_selection
+    label: Practice selection
+  - id: engineering_execution
+    label: Engineering execution
+  - id: evidence_management
+    label: Evidence management
+  - id: verification
+    label: Verification
+  - id: process_adaptation
+    label: Process adaptation
+  - id: continuous_improvement
+    label: Continuous improvement

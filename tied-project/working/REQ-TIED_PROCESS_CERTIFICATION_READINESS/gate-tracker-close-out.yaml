@@ -1,0 +1,85 @@
+depth_tier: integrated
+execution_evidence:
+  completed:
+    - gate-pseudocode-validation
+    - gitignore-close-out-hygiene
+    - persist-citdp-record
+    - risk-assessment
+    - sub-adversarial-inquiry-pass
+    - sub-close-out-evidence-sync
+    - traceable-commit
+    - user-facing-release-notes
+    - verification-gate
+  envelope_path: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/request-evidence-envelope.v1.json
+  request: REQ-TIED_PROCESS_CERTIFICATION_READINESS
+gate_policy: advisory
+name: pcr-program-close-out-gate
+request_token: REQ-TIED_PROCESS_CERTIFICATION_READINESS
+schema_version: checklist-tracker.v1
+steps:
+  - disposition: completed
+    evidence_refs: &ref_0
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/risk-assessment-evidence.md
+    slug: risk-assessment
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
+  - disposition: completed
+    evidence_refs: &ref_1
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/sub-adversarial-inquiry-pass-evidence.md
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - disposition: completed
+    evidence_refs: &ref_2
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/gate-pseudocode-validation-evidence.md
+    slug: gate-pseudocode-validation
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
+  - disposition: completed
+    evidence_refs: &ref_3
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/verification-evidence-manifest.v1.json
+    slug: verification-gate
+    tracking:
+      status: completed
+      evidence_refs: *ref_3
+  - disposition: completed
+    evidence_refs: &ref_4
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/traceable-commit-evidence.md
+    policy: build-plan-close-out-commit-deferred
+    rationale: Sponsor runs traceable-commit separately; build-plan close-out prepares evidence only.
+    slug: traceable-commit
+    tracking:
+      status: completed
+      evidence_refs: *ref_4
+  - disposition: completed
+    evidence_refs: &ref_5
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/sub-close-out-evidence-sync-evidence.md
+    slug: sub-close-out-evidence-sync
+    tracking:
+      status: completed
+      evidence_refs: *ref_5
+  - disposition: completed
+    evidence_refs: &ref_6
+      - >-
+        tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml
+    slug: persist-citdp-record
+    tracking:
+      status: completed
+      evidence_refs: *ref_6
+  - disposition: completed
+    evidence_refs: &ref_7
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/gitignore-close-out-hygiene-evidence.md
+    slug: gitignore-close-out-hygiene
+    tracking:
+      status: completed
+      evidence_refs: *ref_7
+  - disposition: completed
+    evidence_refs: &ref_8
+      - tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/user-facing-release-notes-evidence.md
+    slug: user-facing-release-notes
+    tracking:
+      status: completed
+      evidence_refs: *ref_8

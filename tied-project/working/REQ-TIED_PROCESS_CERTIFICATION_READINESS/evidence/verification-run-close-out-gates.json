@@ -1,0 +1,52 @@
+{
+  "phase": "verification",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": false,
+    "reason": "collect",
+    "run_id": "pcr-verify-20261018"
+  },
+  "reconcile": {
+    "ok": false,
+    "skipped": true
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/verification-evidence-manifest.v1.json"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": false,
+    "gate_allowed": false,
+    "envelope_ok": true,
+    "blocking": true
+  },
+  "gate": {
+    "allowed": false,
+    "blocking": true,
+    "diagnostics": [
+      "psa_missing:IMPL-TIED_PROCESS_CERTIFICATION_SPEC",
+      "psa_missing:IMPL-TIED_PROCESS_CERTIFICATION_CONFORMANCE",
+      "psa_missing:IMPL-TIED_PROCESS_CERTIFICATION_CAPABILITY",
+      "psa_missing:IMPL-TIED_PROCESS_CERTIFICATION_INDEPENDENT",
+      "psa_missing:IMPL-TIED_PROCESS_CERTIFICATION_ADAPTIVE",
+      "psa_missing:IMPL-TIED_PROCESS_CERTIFICATION_REPORT",
+      "pseudocode_analysis_incomplete",
+      "finding_unresolved",
+      "warn_not_success"
+    ],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 1,
+    "advisory_gap_count": 6,
+    "diagnostics": []
+  }
+}

@@ -172,6 +172,7 @@ import { collectEnvelopeGapReport } from "../request-evidence-envelope/batch-col
 import { backfillRequestEvidenceEnvelope } from "../request-evidence-envelope/backfill.js";
 import { jevPlanSkillsTools } from "./jev-plan-skills-tools.js";
 import { contextAdaptiveMcpTools } from "./context-adaptive-mcp-tools.js";
+import { processCertificationMcpTools } from "./process-certification-mcp-tools.js";
 import {
   checklistEvidenceSufficiencyTools,
   hookChecklistGateEvidenceSufficiencyPreGate,
@@ -3977,6 +3978,7 @@ export const allTools = [
   },
   ...jevPlanSkillsTools,
   ...contextAdaptiveMcpTools,
+  ...processCertificationMcpTools,
   ...checklistEvidenceSufficiencyTools,
   ...toolSafetyMcpTools,
   ...projectOperationsMcpTools,

@@ -11,6 +11,7 @@ import {
   bootstrapInstallLayersEntryFromCliModule,
   bootstrapNewClientEntryFromCliModule,
   branchCheckCliEntryFromCliModule,
+  processCertificationCliEntryFromCliModule,
   gateCheckCliEntryFromCliModule,
   handoffValidateCliEntryFromCliModule,
   mcpStdioEntryFromCliModule,
@@ -28,6 +29,7 @@ Subcommands:
   install     Layered client install (default linked; see tied-install.sh)
   yaml        Lint or canonicalize YAML (lint | canonicalize)
   gate        Checklist gate composition (check — calls tied_checklist_gate_validate)
+  certification  Process certification readiness tools (spec-validate, …)
   branch      Git branch hygiene vs CITDP/Tracker (check)
   next        Recommend next checklist slug from Tracker discovery
   handoff     Validate handoff-shaped phase YAML (validate)
@@ -151,6 +153,11 @@ function main(): void {
     }
     printHelp();
     process.exit(action === undefined ? 1 : 2);
+  }
+
+  if (subcommand === "certification") {
+    runNodeEntry(processCertificationCliEntryFromCliModule(import.meta.url), rest);
+    return;
   }
 
   if (subcommand === undefined) {

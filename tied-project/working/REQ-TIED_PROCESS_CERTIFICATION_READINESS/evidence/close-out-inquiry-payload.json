@@ -1,0 +1,104 @@
+{
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_PROCESS_CERTIFICATION_READINESS",
+  "run_id": "pcr-close-out-20261018",
+  "phase": "close_out",
+  "scope": [
+    "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#COMPOSE_CERTIFIABILITY_READINESS_V1#pcr-closeout-rev-1",
+    "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#GENERATE_ASSESSOR_PACK_V1#pcr-closeout-rev-1",
+    "IMPL-TIED_PROCESS_CERTIFICATION_SPEC#LOAD_PROCESS_CERTIFICATION_BUNDLE_V1#pcr-closeout-rev-1"
+  ],
+  "graph": {
+    "projectId": "stdd-pcr-closeout",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-REQUEST_EVIDENCE_ENVELOPE#close-out-blocking",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "pcr-closeout-criterion-rev-1",
+          "sourceRevision": "pcr-closeout-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-pcr-envelope-closeout"]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_PROCESS_CERTIFICATION_READINESS#SC-PCR-HANDOFF",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "pcr-closeout-criterion-rev-1",
+          "sourceRevision": "pcr-closeout-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-pcr-handoff-closeout"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-pcr-envelope-closeout",
+        "implementationBlockIds": [
+          "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#COMPOSE_CERTIFIABILITY_READINESS_V1#pcr-closeout-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-pcr-handoff-closeout",
+        "implementationBlockIds": [
+          "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#GENERATE_ASSESSOR_PACK_V1#pcr-closeout-rev-1",
+          "IMPL-TIED_PROCESS_CERTIFICATION_SPEC#LOAD_PROCESS_CERTIFICATION_BUNDLE_V1#pcr-closeout-rev-1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#COMPOSE_CERTIFIABILITY_READINESS_V1#pcr-closeout-rev-1",
+          "kind": "block",
+          "name": "COMPOSE_CERTIFIABILITY_READINESS_V1",
+          "derivation": "content",
+          "revision": "pcr-closeout-rev-1",
+          "sourceRevision": "pcr-closeout-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_PROCESS_CERTIFICATION_REPORT#GENERATE_ASSESSOR_PACK_V1#pcr-closeout-rev-1",
+          "kind": "block",
+          "name": "GENERATE_ASSESSOR_PACK_V1",
+          "derivation": "content",
+          "revision": "pcr-closeout-rev-1",
+          "sourceRevision": "pcr-closeout-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_PROCESS_CERTIFICATION_SPEC#LOAD_PROCESS_CERTIFICATION_BUNDLE_V1#pcr-closeout-rev-1",
+          "kind": "block",
+          "name": "LOAD_PROCESS_CERTIFICATION_BUNDLE_V1",
+          "derivation": "content",
+          "revision": "pcr-closeout-rev-1",
+          "sourceRevision": "pcr-closeout-source-rev-1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "pcr-closeout-rev-1",
+    "specification": [
+      {
+        "id": "spec-envelope-blocking",
+        "kind": "behavior",
+        "value": "Close-out requires request-evidence-envelope validation with fail_on_error_gaps",
+        "order": 1
+      },
+      {
+        "id": "spec-external-stages",
+        "kind": "behavior",
+        "value": "Stages 6 and 8 remain documented future human-owned external appraisal",
+        "order": 2
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": []
+  }
+}

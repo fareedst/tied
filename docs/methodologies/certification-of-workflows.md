@@ -356,3 +356,20 @@ Being certified means an authorized, independent body has evaluated an identifie
 I would make certifiability an architectural objective from the first version, then pursue formal recognition once its usefulness is demonstrated.
 
 The strongest long-term direction is an evidence-driven software engineering process that is independently assessable, continuously improvable, and capable of demonstrating when its context-dependent choices are effective. That would extend established process-assessment ideas into an area where AI-first engineering creates both new opportunities and new assurance challenges.
+
+## Repository implementation status (2026-10-18)
+
+**Request:** `[REQ-TIED_PROCESS_CERTIFICATION_READINESS]` — machine-assessable certifiability foundation in the TIED store (read-only MCP/CLI; no `certified` claims).
+
+| Stage | Status in repo | Notes |
+| --- | --- | --- |
+| 1 — Versioned EDSE process spec | **Implemented** | `tied-bundle/resources/process-certification/edse-process-spec.v1.yaml` (EDSE-001…007, content hash) |
+| 2 — 12207 mapping + 330xx-style model | **Implemented** | `iso-12207-mapping.v1.yaml` (`reference_mapping_only`); `iso-330xx-capability-model.v1.yaml` (seven dimensions, no rollup) |
+| 3 — Conformance catalog + engine | **Implemented** | `conformance-catalog.v1.yaml`; `mcp-server/src/process-certification-readiness/conformance-engine.ts` |
+| 4 — Independent assessment + agreement | **Implemented** | File-based `independent-assessment-record.v1`; assessor agreement report (C2) |
+| 5 — Adaptive effectiveness experiment | **Implemented** | Fixture-grounded fixed / rule-selected / adaptive arms (C1); observational proof boundary only |
+| 6 — External process appraisal | **Future / human-owned** | Out of scope for automated certification claims |
+| 7 — Readiness + assessor pack | **Implemented** | `certifiability-readiness.v1`, `assessor-pack.v1`; envelope artifact kinds registered |
+| 8 — Formal certification scheme | **Future / human-owned** | Requires accredited body and scheme outside this repository |
+
+Stages 6 and 8 remain explicit external handoff milestones; passing in-repo readiness checks means **`ready_for_external_appraisal`**, not certified or ISO/CMMI compliant.
