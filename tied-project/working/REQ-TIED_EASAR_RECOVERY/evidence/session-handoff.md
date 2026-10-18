@@ -1,6 +1,6 @@
 # Session handoff — REQ-TIED_EASAR_RECOVERY
 
-**Updated:** 2026-10-18 (Slice **5** traceable-commit **pending hash pin** below)  
+**Updated:** 2026-10-18 (Slice **5** traceable-commit **`7d62523a`**)  
 **Depth:** integrated · **gate_policy:** advisory · **engagement:** `easar_full` · **BFIE mode:** `pilot`  
 **Phase:** MVP slices **0–5** committed · program **close_out** (MVP) **unchanged** · Slice 5 verification **done**
 
@@ -17,14 +17,14 @@
 | Wave | Scope | Git |
 | --- | --- | --- |
 | MVP slices 0–4 + close_out | Enrolled stack + receipt MCPs | **Committed** `e02716de` (+ handoff pin `a5521f19`) |
-| Slice 5 (Stage 7) | Validation corpus + `tied_easar_validation_suite_run` | **Uncommitted** working tree |
+| Slice 5 (Stage 7) | Validation corpus + `tied_easar_validation_suite_run` | **Committed** `7d62523a` |
 | Slice 6 | Portable `recovery/` export | Deferred |
 
 ## Resume here
 
-1. **`traceable-commit`** — stage only Slice 5 / EASAR-related paths (exclude unrelated drift: JEV benchmark re-run, path-scoped PLAN, envelope-gap-report unless intentionally bundled).
-2. Optional **`@refine-plan slice 6`** — portable export adapter (EASAR §7.6 item 6).
-3. Optional **LEAP program re-close** — only if sponsor wants envelope/CITDP refreshed for Slice 5 (costly; not required for slice verification pass).
+1. Optional **`@refine-plan slice 6`** — portable export adapter (EASAR §7.6 item 6).
+2. Optional **LEAP program re-close** — only if sponsor wants envelope/CITDP refreshed for Slice 5 (costly; not required for slice verification pass).
+3. Optional **`git push`** — Slice 5 commit is local until published.
 
 Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts drift.
 
@@ -56,7 +56,7 @@ Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts 
 - **Process contract:** **pass** — close-out tracker dual-write; [verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json) (extended locally for Slice 5)
 - **Adherence ledger:** **pass** — band **A** at MVP close_out
 
-**Slice 5 verification (uncommitted)**
+**Slice 5 verification (`7d62523a`)**
 
 - **Machine verification:** **pass** — Slice 5 gate `allowed=true` (advisory `warn_not_success`, `finding_unresolved`)
 - **Process contract:** **pass** — dogfood [validation-cases.v1.yaml](./validation-cases.v1.yaml) → [validation-results.v1.json](./validation-results.v1.json) (**8/8** pass); manifest rows `easar-s5-*`
@@ -77,7 +77,7 @@ Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts 
 | --- | --- |
 | SC-EASAR-ENROLL … SC-EASAR-TESTS | **done** (MVP commit) |
 | SC-EASAR-GATES | **done** (+ Slice 5 verification receipt) |
-| SC-EASAR-VALIDATION | **done** on disk · **pending commit** |
+| SC-EASAR-VALIDATION | **done** (`7d62523a`) |
 
 ## Commits
 
@@ -85,7 +85,7 @@ Do **not** re-run MVP `close_out` (`easar-close-out-20261018`) unless artifacts 
 | --- | --- |
 | `e02716de` | MVP slices 0–4 + close_out |
 | `a5521f19` | Handoff pin for MVP traceable-commit |
-| *(pending)* | Slice 5 validation corpus + LEAP SC |
+| `7d62523a` | Slice 5 validation corpus + LEAP SC-EASAR-VALIDATION |
 
 ## Commands
 
@@ -100,7 +100,7 @@ npm run build --prefix mcp-server
 
 ## Remaining risks
 
-- Slice 5 code/evidence **not on origin** until traceable-commit.
+- Slice 5 code/evidence **not on origin** until `git push` (local commit `7d62523a`).
 - Advisory inquiry warns on verification gates (Slices 1–5 and MVP close_out) — non-blocking.
 - **Slice 6** export and optional **program re-close** remain sponsor choices.
 - Local `tied-bundle/working/…/adversarial-inquiry/` is gitignored; committed gate receipts use identity-bound hashes.
