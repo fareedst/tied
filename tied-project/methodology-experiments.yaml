@@ -38,6 +38,21 @@ experiments:
     source_feedback_refs:
       - "fb-mvclklsa-t5gzbo"
     surface_ref: "claude-comparison-compose-phases-1-5"
+  - experiment_id: "cae-easar-pilot-20261018"
+    methodology_baseline:
+      arm: "A_fixed_PROC-EASAR_RECOVERY"
+      snapshot_at: "2026-10-18T05:00:00Z"
+    methodology_hypothesis: "Rule-selected CASE overlay is observable alongside fixed EASAR baseline on comparable receipts."
+    methodology_outcome_observation:
+      recorded_at: "2026-10-18T22:30:00Z"
+      value: "inconclusive"
+    privacy_tier: "operator_local"
+    production_system_surface: "prompt_type_workflow"
+    proof_boundary: "Observational pilot; conformance pairing does not imply effectiveness."
+    rule_reversal:
+      applied: false
+      rationale: "v1 advisory selector only"
+    schema_version: "methodology-learning-experiment.v1"
   - experiment_id: "mle-demo-20261010-001"
     methodology_baseline:
       metric_rows:

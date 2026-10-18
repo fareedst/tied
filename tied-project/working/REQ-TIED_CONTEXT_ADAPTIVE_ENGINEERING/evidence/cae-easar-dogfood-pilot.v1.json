@@ -1,0 +1,81 @@
+{
+  "schema_version": "cae-easar-dogfood-pilot.v1",
+  "experiment_id": "cae-easar-pilot-20261018",
+  "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+  "proof_boundary": "Observational pilot only; no causal improvement claim from one run.",
+  "baseline_arm": {
+    "arm": "A_fixed_PROC-EASAR_RECOVERY",
+    "practices": [
+      "PROC-EASAR_RECOVERY"
+    ],
+    "easar_refs": {
+      "inventory": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json",
+      "code_graph": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json",
+      "claim_matrix": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/claim-matrix-map.v1.json"
+    }
+  },
+  "selected_arm": {
+    "arm": "B_rule_selected_overlay",
+    "selection_receipt": {
+      "schema_version": "selection-receipt.v1",
+      "context_hash": "1bb2d535e620172103838eb06c4643c5f07cdd832902514d4a4698de06ea1035",
+      "library_version": "a925e755054e83cb3e9d1c0a48e90b6d68ac9183a574408d63b16ba1716af2aa",
+      "selected_practice_ids": [
+        "PRACTICE-PSEUDOCODE-FIRST",
+        "PRACTICE-STRICT-TDD",
+        "PRACTICE-INTEGRATED-INQUIRY"
+      ],
+      "rejected_practice_ids": [
+        {
+          "id": "PRACTICE-COMPOSITION-BEFORE-E2E",
+          "rule_id": "applicability"
+        },
+        {
+          "id": "PRACTICE-LOW-CRITICALITY-ONLY",
+          "rule_id": "applicability"
+        },
+        {
+          "id": "PRACTICE-METHODOLOGY-LEARNING-PILOT",
+          "rule_id": "applicability"
+        },
+        {
+          "id": "PRACTICE-MODULE-VALIDATION",
+          "rule_id": "applicability"
+        },
+        {
+          "id": "PRACTICE-REQUEST-EVIDENCE-ENVELOPE",
+          "rule_id": "applicability"
+        },
+        {
+          "id": "PRACTICE-EASAR-RECOVERY-SLICE",
+          "rule_id": "missing_prerequisite"
+        }
+      ],
+      "matched_rules": [
+        "selected:PRACTICE-PSEUDOCODE-FIRST",
+        "selected:PRACTICE-STRICT-TDD",
+        "selected:PRACTICE-INTEGRATED-INQUIRY"
+      ],
+      "proof_boundary": "Deterministic rule-ordered selection; advisory only — not checklist authority."
+    },
+    "method_effectiveness_refs": {
+      "schema_version": "method-effectiveness-refs.v1",
+      "selection_receipt_hash": "1bb2d535e620172103838eb06c4643c5f07cdd832902514d4a4698de06ea1035",
+      "conformance_refs": [
+        "gate:pre_implementation/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      ],
+      "proof_boundary": "Observational pilot only; conformance success does not imply effectiveness."
+    },
+    "easar_refs": {
+      "inventory": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json",
+      "code_graph": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json",
+      "claim_matrix": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/claim-matrix-map.v1.json"
+    }
+  },
+  "metrics": {
+    "selection_overhead_ms": null,
+    "reassessment_count": 0,
+    "pairing_disposition": "paired"
+  },
+  "methodology_learning_experiment_path": "tied-project/methodology-experiments.yaml"
+}

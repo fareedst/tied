@@ -171,6 +171,7 @@ import { collectChecklistActivation } from "../checklist-activation-collect.js";
 import { collectEnvelopeGapReport } from "../request-evidence-envelope/batch-collect.js";
 import { backfillRequestEvidenceEnvelope } from "../request-evidence-envelope/backfill.js";
 import { jevPlanSkillsTools } from "./jev-plan-skills-tools.js";
+import { contextAdaptiveMcpTools } from "./context-adaptive-mcp-tools.js";
 import {
   checklistEvidenceSufficiencyTools,
   hookChecklistGateEvidenceSufficiencyPreGate,
@@ -3975,6 +3976,7 @@ export const allTools = [
     },
   },
   ...jevPlanSkillsTools,
+  ...contextAdaptiveMcpTools,
   ...checklistEvidenceSufficiencyTools,
   ...toolSafetyMcpTools,
   ...projectOperationsMcpTools,

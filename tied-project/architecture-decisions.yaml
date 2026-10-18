@@ -1970,6 +1970,10 @@ ARCH-TIED_CLIENT_REFRESH_PARITY:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_REFRESH_PARITY.yaml"
   name: "Client refresh parity proof boundary"
   status: "Active"
+ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+  detail_file: "architecture-decisions/ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
+  name: "Context-adaptive artifact model"
+  status: "Active"
 ARCH-TIED_DAE_INCORPORATION:
   cross_references:
     - "ARCH-TIED_UNIFIED_TOOLCHAIN"

@@ -1,0 +1,13 @@
+IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS:
+  IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS:
+    code_locations:
+      files:
+        - path: "mcp-server/src/context-adaptive/reassess.ts"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS-pseudocode.md"
+    name: "Checkpoint reassessment comparator"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"

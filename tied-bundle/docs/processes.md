@@ -190,6 +190,29 @@ See [brownfield-intent-elevation.md](brownfield-intent-elevation.md).
 
 ---
 
+## `[PROC-CONTEXT_ADAPTIVE_PRACTICE]` Context-adaptive practice orchestration (CASE v1)
+
+### Purpose
+Compose **opt-in** MCP practice validation, profile normalization, deterministic selection, reassessment, and method-effectiveness linking around existing TIED checklist and gate authority—without a parallel mega-checklist or default activation.
+
+### Scope
+Engagements where sponsors invoke `context_adaptive_*` MCP tools explicitly. Selector output is **advisory**; `[PROC-AGENT_REQ_CHECKLIST]` and gate fail-closed behavior remain authoritative when tools are not invoked.
+
+### Token references
+- `[REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING]`, `[ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING]`, `IMPL-TIED_CONTEXT_ADAPTIVE_*`
+- Seed `PRACTICE-*` contracts under `tied-bundle/resources/context-adaptive/practices/` mapped to existing `PROC-*` slugs and MCP tools (see program [PLAN.md](../../tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/PLAN.md))
+
+### Checklist choreography (references only)
+1. CITDP + context profile + practice library load — no silent TIED YAML mutation
+2. Deterministic selection receipt + evidence obligations — hard constraints before preferences
+3. Checkpoint reassessment → existing CITDP/gate/LEAP paths on changed risk
+4. Method-effectiveness readout via methodology-learning + conformance–effectiveness pairing (observational dogfood; no causal claim from one run)
+
+### Narrative spec
+See [context-adaptive-software-engineering.md](../../docs/methodologies/context-adaptive-software-engineering.md) and [context-adaptive-engineering.md](../../tied-project/vocab/context-adaptive-engineering.md).
+
+---
+
 ## `[PROC-EASAR_RECOVERY]` Evidence-Assured Software Architecture Recovery (Mode C)
 
 ### Purpose

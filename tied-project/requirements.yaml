@@ -2391,6 +2391,12 @@ REQ-TIED_CLIENT_REFRESH_PARITY:
   name: "Client refresh methodology and doc parity gate"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+  category: "Functional"
+  detail_file: "requirements/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
+  name: "Context-adaptive practice layer (CASE v1)"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_DAE_INCORPORATION:
   category: "Methodology"
   cross_references:

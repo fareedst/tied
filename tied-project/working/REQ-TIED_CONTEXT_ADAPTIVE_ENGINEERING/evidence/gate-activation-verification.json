@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+    "project_id": "stdd-cae-verify",
+    "run_id": "cae-verify-20261018",
+    "phase": "verification",
+    "scope": [
+      "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE#VALIDATE_CONTEXT_PROFILE_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS#REASSESS_CONTEXT_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-verify-rev-1"
+    ],
+    "scope_hash": "cf34847f79c98be0f3bbfc935caa9a7b207e02cf189f718f6b0225cdaa5d6594",
+    "artifact_hashes": {
+      "obligation-report.json": "972ed67e312f47540cc615db2d826143040041b290e7923f962e7884a364d96f",
+      "finding-ledger.jsonl": "c02096eb388ced20557c22bce488b98f9c90e2bf33a27ff4840a7df2d6db78ae",
+      "gate-result.json": "a431a671d764f1e644ddeb2f8edaef99c7cc521b3f520b96c1c374e0a17a2a93",
+      "evidence-provenance.json": "64c0ed99d80cc711cd301434a23409cf59dff02677503fc65c0e9a713dede186"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+      "project_id": "stdd-cae-verify",
+      "run_id": "cae-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "cf34847f79c98be0f3bbfc935caa9a7b207e02cf189f718f6b0225cdaa5d6594",
+      "hash": "972ed67e312f47540cc615db2d826143040041b290e7923f962e7884a364d96f",
+      "path": "tied-bundle/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+      "project_id": "stdd-cae-verify",
+      "run_id": "cae-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "cf34847f79c98be0f3bbfc935caa9a7b207e02cf189f718f6b0225cdaa5d6594",
+      "hash": "c02096eb388ced20557c22bce488b98f9c90e2bf33a27ff4840a7df2d6db78ae",
+      "path": "tied-bundle/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+      "project_id": "stdd-cae-verify",
+      "run_id": "cae-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "cf34847f79c98be0f3bbfc935caa9a7b207e02cf189f718f6b0225cdaa5d6594",
+      "hash": "a431a671d764f1e644ddeb2f8edaef99c7cc521b3f520b96c1c374e0a17a2a93",
+      "path": "tied-bundle/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+      "project_id": "stdd-cae-verify",
+      "run_id": "cae-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "cf34847f79c98be0f3bbfc935caa9a7b207e02cf189f718f6b0225cdaa5d6594",
+      "hash": "64c0ed99d80cc711cd301434a23409cf59dff02677503fc65c0e9a713dede186",
+      "path": "tied-bundle/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+    "project_id": "stdd-cae-verify",
+    "run_id": "cae-verify-20261018",
+    "phase": "verification",
+    "scope": [
+      "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE#VALIDATE_CONTEXT_PROFILE_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS#REASSESS_CONTEXT_V1#cae-verify-rev-1",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-verify-rev-1"
+    ],
+    "scope_hash": "cf34847f79c98be0f3bbfc935caa9a7b207e02cf189f718f6b0225cdaa5d6594"
+  },
+  "diagnostics": []
+}

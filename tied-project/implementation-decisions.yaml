@@ -2235,6 +2235,26 @@ IMPL-TIED_CLIENT_REFRESH_PARITY:
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_REFRESH_PARITY.yaml"
   name: "Client refresh parity gate implementation"
   status: "Active"
+IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS.yaml"
+  name: "Context-adaptive practice contracts"
+  status: "Active"
+IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK:
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK.yaml"
+  name: "Method effectiveness eval link"
+  status: "Active"
+IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE:
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE.yaml"
+  name: "Context profile validator"
+  status: "Active"
+IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS:
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS.yaml"
+  name: "Checkpoint reassessment"
+  status: "Active"
+IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR:
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR.yaml"
+  name: "Deterministic practice selector"
+  status: "Active"
 IMPL-TIED_DAE_INCORPORATION:
   cross_references:
     - "ARCH-TIED_DAE_INCORPORATION"

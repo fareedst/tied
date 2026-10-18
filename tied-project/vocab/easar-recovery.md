@@ -4,7 +4,7 @@
 
 **Traceability:** `[REQ-TIED_EASAR_RECOVERY]` · `[ARCH-TIED_EASAR_ARTIFACT_MODEL]` · `[IMPL-TIED_EASAR_RECEIPTS]` · `[PROC-EASAR_RECOVERY]` · methodology [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7
 
-**Status:** Slice 5 Stage 7 validation corpus on disk (2026-10-18). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
+**Status:** Slice 5 Stage 7 validation corpus on disk (2026-10-18); Slice 6 portable export plan refined (2026-10-19). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
 
 **See also:** [`routing.md`](routing.md) (row **2f**) · [`quality-assurance.md`](quality-assurance.md) (grading / evaluation corpus contrast) · [`fidelity-research.md`](fidelity-research.md) (adversarial inquiry vs claims review) · [`tied-methodology.md`](tied-methodology.md)
 
@@ -32,6 +32,18 @@
 | Reflexion report | `reflexion-report.v1` | Stage 6 export-only ARCH ↔ graph divergence synthesis |
 | Validation cases | `validation-cases.v1.yaml` | Stage 7 SWE-QA-aligned comprehension tasks (bounded dogfood) |
 | Validation results | `validation-results.v1.json` | Stage 7 grader outcomes + evidence refs (not a blocking scorecard) |
+| Recovery export manifest | `recovery-export-manifest.v1.json` | Stage 9 read-only map receipt (canonical → portable); not a git `recovery/` root |
+| Portable map | `recovery-portable-map.v1.yaml` | Machine table of §6.2 paths, transforms, and documented gaps |
+
+---
+
+## Stage 9 export terms
+
+| Term | Definition | TIED preferred name |
+| --- | --- | --- |
+| **Portable export adapter** | Read-only serializer from §6.1 canonical paths to §6.2 layout | MCP `tied_easar_recovery_export_build` (planned); IMPL `RUN_EASAR_RECOVERY_EXPORT_V1` |
+| **Export tree** | Materialized `recovery/` directory for external auditors | Default under `tied-bundle/working/{REQ}/recovery-export/` — **gitignored** |
+| **Manifest gaps** | Explicit unmapped §6.2 slots in export receipt | `gaps[]` on `recovery-export-manifest.v1.json` — not blocking completeness gate |
 
 ---
 
@@ -61,8 +73,11 @@
 | --- | --- |
 | claim registry | Terms (EASAR §7.4 map) |
 | evaluation ledger | Terms (EASAR §7.4 map) |
+| export tree | Stage 9 export terms |
 | grader | Stage 7 terms |
 | grading | Terms (EASAR §7.4 map) |
+| manifest gaps | Stage 9 export terms |
+| portable export adapter | Stage 9 export terms |
 | recovery engagement (Mode C) | Terms (EASAR §7.4 map) |
 | validation case | Stage 7 terms |
 | validation suite run | Stage 7 terms |

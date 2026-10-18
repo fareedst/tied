@@ -1,0 +1,45 @@
+REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+  REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+    category: "Functional"
+    description: "Optional opt-in practice contracts, context profiles, deterministic selection, reassessment, and method-effectiveness readout around existing TIED controls."
+    name: "Context-adaptive practice layer (CASE v1)"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Deterministic selection receipts for methodology learning pilots."
+        - "Rule-selected practice overlay without replacing TIED checklist authority."
+      problems_solved:
+        - "CASE research not executable in MCP."
+        - "No versioned practice library bound to TIED PROC/tools."
+      why: "Adopt evidence-backed CASE subset per working plan; EASAR dogfood path."
+    related_requirements:
+      depends_on:
+        - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+        - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+        - "REQ-MODULE_VALIDATION"
+        - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+        - "REQ-TIED_ADVERSARIAL_INQUIRY"
+        - "REQ-TIED_EASAR_RECOVERY"
+      related_to: []
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "SC-CAE-CONTRACTS — practice-contract.v1 library validated."
+      - criterion: "SC-CAE-DOGFOOD — EASAR baseline vs rule-selected pilot without causal claim."
+      - criterion: "SC-CAE-MCP — read-only context_adaptive MCP tools."
+      - criterion: "SC-CAE-PROFILE — UNKNOWN criticality never treated as LOW."
+      - criterion: "SC-CAE-REASSESS — immutable snapshots and explicit loop-back actions."
+      - criterion: "SC-CAE-REGRESS — existing gate/EASAR/envelope suites remain green."
+      - criterion: "SC-CAE-SELECT — deterministic selection-receipt.v1."
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      implementation:
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
+      tests:
+        - "mcp-server/src/context-adaptive/*.test.ts"

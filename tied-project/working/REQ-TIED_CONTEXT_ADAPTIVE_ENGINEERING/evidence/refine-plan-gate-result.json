@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-17",
+  "refine_pass": 2,
+  "phase": "pre_implementation",
+  "depth": "integrated",
+  "allowed": false,
+  "blocking": true,
+  "diagnostics": [
+    "tracker_sparse",
+    "pending_required_step:sub-adversarial-inquiry-pass",
+    "missing_required_step:gate-pseudocode-validation",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete"
+  ],
+  "interpretation": "Expected refine-plan boundary at integrated depth. build-plan Slice 0 must run structural sub-adversarial-inquiry-pass, persist four activation artifacts, complete gate-pseudocode-validation after TIED mint, then re-gate pre_implementation before unit-test-red.",
+  "payload_ref": "/tmp/cae-gate-payload.json"
+}

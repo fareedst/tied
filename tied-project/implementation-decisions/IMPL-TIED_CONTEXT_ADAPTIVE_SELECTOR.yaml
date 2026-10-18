@@ -1,0 +1,23 @@
+IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR:
+  IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR:
+    code_locations:
+      files:
+        - path: "mcp-server/src/context-adaptive/selector.test.ts"
+        - path: "mcp-server/src/context-adaptive/selector.ts"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR-pseudocode.md"
+    implementation_approach:
+      summary: "Rule-ordered deterministic selection producing selection-receipt.v1"
+    name: "Deterministic practice selector"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      tests:
+        - "selector.test.ts"

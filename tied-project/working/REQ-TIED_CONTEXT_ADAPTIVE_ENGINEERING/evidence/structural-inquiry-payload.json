@@ -1,0 +1,76 @@
+{
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+  "run_id": "cae-structural-pre-impl-20261018",
+  "phase": "pre_implementation",
+  "scope": [
+    "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-structural-rev-1",
+    "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-structural-rev-1"
+  ],
+  "graph": {
+    "projectId": "stdd-cae-structural",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING#SC-CAE-SELECT",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "cae-criterion-rev-1",
+          "sourceRevision": "cae-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-cae-select"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-cae-select",
+        "implementationBlockIds": [
+          "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-structural-rev-1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-structural-rev-1",
+          "kind": "block",
+          "name": "SELECT_PRACTICES_DETERMINISTIC_V1",
+          "derivation": "content",
+          "revision": "cae-structural-rev-1",
+          "sourceRevision": "cae-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-structural-rev-1",
+          "kind": "block",
+          "name": "VALIDATE_PRACTICE_CONTRACT_V1",
+          "derivation": "content",
+          "revision": "cae-structural-rev-1",
+          "sourceRevision": "cae-source-rev-1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "cae-structural-rev-1",
+    "specification": [
+      {
+        "id": "spec-unknown-not-low",
+        "kind": "behavior",
+        "value": "UNKNOWN criticality must not be treated as LOW during selection",
+        "order": 1
+      },
+      {
+        "id": "spec-read-only-mcp",
+        "kind": "behavior",
+        "value": "context_adaptive tools must not mutate project TIED YAML",
+        "order": 2
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": []
+  }
+}

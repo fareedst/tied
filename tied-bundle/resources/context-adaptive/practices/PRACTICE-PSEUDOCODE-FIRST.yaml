@@ -1,0 +1,8 @@
+schema_version: practice-contract.v1
+id: PRACTICE-PSEUDOCODE-FIRST
+name: Pseudocode-first validation
+applicability:
+  criticality: ["MEDIUM", "HIGH", "UNKNOWN"]
+tied_binding:
+  proc: PROC-PSEUDOCODE_VALIDATION
+  tool: pseudocode_validate

@@ -1,0 +1,23 @@
+IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE:
+  IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE:
+    code_locations:
+      files:
+        - path: "mcp-server/src/context-adaptive/profile.test.ts"
+        - path: "mcp-server/src/context-adaptive/profile.ts"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE-pseudocode.md"
+    implementation_approach:
+      summary: "Validate and normalize context-profile.v1; preserve UNKNOWN dimensions"
+    name: "Context profile validator"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      tests:
+        - "profile.test.ts"

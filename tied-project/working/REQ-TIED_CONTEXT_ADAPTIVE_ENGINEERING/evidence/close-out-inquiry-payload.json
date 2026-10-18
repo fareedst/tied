@@ -1,0 +1,126 @@
+{
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING",
+  "run_id": "cae-close-out-20261018",
+  "phase": "close_out",
+  "scope": [
+    "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-closeout-rev-1",
+    "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-closeout-rev-1",
+    "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-closeout-rev-1"
+  ],
+  "graph": {
+    "projectId": "stdd-cae-closeout",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING#SC-CAE-MCP",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "cae-closeout-criterion-rev-1",
+          "sourceRevision": "cae-closeout-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-cae-mcp-closeout"]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING#SC-CAE-DOGFOOD",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "cae-closeout-criterion-rev-1",
+          "sourceRevision": "cae-closeout-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-cae-dogfood-closeout"]
+      },
+      {
+        "identity": {
+          "id": "REQ-REQUEST_EVIDENCE_ENVELOPE#close-out-blocking",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "cae-closeout-criterion-rev-1",
+          "sourceRevision": "cae-closeout-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-cae-envelope-closeout"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-cae-mcp-closeout",
+        "implementationBlockIds": [
+          "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-closeout-rev-1",
+          "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-closeout-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-cae-dogfood-closeout",
+        "implementationBlockIds": [
+          "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-closeout-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-cae-envelope-closeout",
+        "implementationBlockIds": [
+          "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-closeout-rev-1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-closeout-rev-1",
+          "kind": "block",
+          "name": "VALIDATE_PRACTICE_CONTRACT_V1",
+          "derivation": "content",
+          "revision": "cae-closeout-rev-1",
+          "sourceRevision": "cae-closeout-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-closeout-rev-1",
+          "kind": "block",
+          "name": "SELECT_PRACTICES_DETERMINISTIC_V1",
+          "derivation": "content",
+          "revision": "cae-closeout-rev-1",
+          "sourceRevision": "cae-closeout-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-closeout-rev-1",
+          "kind": "block",
+          "name": "BUILD_METHOD_EFFECTIVENESS_REFS_V1",
+          "derivation": "content",
+          "revision": "cae-closeout-rev-1",
+          "sourceRevision": "cae-closeout-source-rev-1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "cae-closeout-rev-1",
+    "specification": [
+      {
+        "id": "spec-closeout-read-only",
+        "kind": "behavior",
+        "value": "context_adaptive MCP tools must not mutate project TIED YAML at close_out",
+        "order": 1
+      },
+      {
+        "id": "spec-closeout-envelope",
+        "kind": "behavior",
+        "value": "Machine close-out requires envelope validate with zero blocking gaps when armed",
+        "order": 2
+      },
+      {
+        "id": "spec-closeout-proc-advisory",
+        "kind": "behavior",
+        "value": "PROC-CONTEXT_ADAPTIVE_PRACTICE documents advisory orchestration only",
+        "order": 3
+      }
+    ],
+    "testEvidence": [],
+    "productionEvidence": []
+  }
+}

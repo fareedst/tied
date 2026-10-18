@@ -1,0 +1,61 @@
+copy_hygiene: "Refine-plan pass 3 tracker for @plan-close-out execution plan only; not authoritative for product RED. Authoritative close-out gate input is gate-tracker-close-out.yaml (created at implement)."
+depth_tier: "integrated"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred:
+      - "sub-close-out-evidence-sync"
+      - "traceable-commit"
+    gates: {}
+    master_checklist: ""
+  completed:
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "risk-assessment"
+    - "test-strategy"
+  envelope_path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    linked_cursor_plan: ".cursor/plans/cae_plan-close-out_222bebd8.plan.md"
+    refine_pass: 3
+    status: "close_out_plan_refined"
+  request: "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+gate_policy: "advisory"
+name: "context-adaptive-close-out-plan-refine-tracker"
+profile_depth: "integrated"
+refine_pass: 3
+refine_pass_date: "2026-10-18"
+request_token: "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+state_history:
+  - at: "2026-10-18"
+    note: "refine-plan pass 3 — linked plan-close-out; CITDP close_out criteria; gate-tracker-close-out authoring spec"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/session-handoff.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: ".cursor/plans/cae_plan-close-out_222bebd8.plan.md"
+    id: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
+    id: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/test-strategy.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/refine-plan-pass-3-close-out.md"
+    id: "test-strategy"
+  - disposition: "pending"
+    id: "sub-close-out-evidence-sync"
+    rationale: "@plan-close-out implement — run-close-out-gates.mjs"
+  - disposition: "pending"
+    id: "traceable-commit"
+    rationale: "Deferred to sponsor @traceable-commit after plan-close-out"

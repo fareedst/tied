@@ -1,0 +1,25 @@
+IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
+  IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
+    code_locations:
+      files:
+        - path: "mcp-server/src/context-adaptive/contracts.test.ts"
+        - path: "mcp-server/src/context-adaptive/contracts.ts"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS-pseudocode.md"
+    implementation_approach:
+      details:
+        - "Closed practice-contract.v1 schema validation and library loader"
+      summary: "Validate and load versioned practice contracts with compatibility graph checks"
+    name: "Context-adaptive practice contracts"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      tests:
+        - "contracts.test.ts"

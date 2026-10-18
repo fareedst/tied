@@ -1,0 +1,27 @@
+ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+  ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+    cross_references:
+      implementation:
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    decisions:
+      - id: "advisory-selector"
+        rationale: "Selector output is advisory; checklist and gate authority unchanged in v1."
+        status: "accepted"
+        title: "No default checklist activation from selection receipts"
+      - id: "deterministic-receipts"
+        rationale: "Identical inputs must produce identical selection-receipt.v1 bytes."
+        status: "accepted"
+        title: "Deterministic selector and immutable reassessment snapshots"
+      - id: "read-only-mcp"
+        rationale: "context_adaptive tools must not mutate project TIED YAML."
+        status: "accepted"
+        title: "Read-only MCP surface by default"
+    description: "Artifact and authority boundary for CASE practice layer in TIED."
+    name: "Context-adaptive artifact model"
+    status: "Active"

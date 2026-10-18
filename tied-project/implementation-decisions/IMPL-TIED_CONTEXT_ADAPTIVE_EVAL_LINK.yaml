@@ -1,0 +1,13 @@
+IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK:
+  IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK:
+    code_locations:
+      files:
+        - path: "mcp-server/src/context-adaptive/eval-link.ts"
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK-pseudocode.md"
+    name: "Method effectiveness evaluation link adapter"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      requirements:
+        - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"

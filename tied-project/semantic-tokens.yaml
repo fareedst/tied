@@ -889,6 +889,20 @@ ARCH-TIED_CLIENT_REFRESH_PARITY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+  cross_references:
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
+    - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+  description: "Authority boundary and versioned artifact model for CASE v1 layer."
+  detail_file: "architecture-decisions/ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
+  name: "Context-adaptive artifact model"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_DAE_VERIFICATION_CHARTER:
   cross_references:
     - "IMPL-TIED_DAE_VERIFICATION_CHARTER"
@@ -2256,6 +2270,56 @@ IMPL-TIED_CLIENT_REFRESH_PARITY:
   source_index: "implementation-decisions.yaml"
   status: "Implemented"
   type: "IMPL"
+IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
+  cross_references:
+    - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+  description: "practice-contract.v1 loader and validator."
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS.yaml"
+  name: "Context-adaptive practice contracts"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
+  type: "IMPL"
+IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK:
+  cross_references:
+    - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+  description: "Links selection receipts to conformance refs with observational proof boundary."
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK.yaml"
+  name: "Method effectiveness eval link"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
+  type: "IMPL"
+IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE:
+  cross_references:
+    - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+  description: "context-profile.v1 validation and applicability matching."
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE.yaml"
+  name: "Context profile validator"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
+  type: "IMPL"
+IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS:
+  cross_references:
+    - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+  description: "Profile snapshot compare and reassessment-receipt.v1."
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS.yaml"
+  name: "Checkpoint reassessment"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
+  type: "IMPL"
+IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR:
+  cross_references:
+    - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+  description: "Rule-ordered selection producing selection-receipt.v1."
+  detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR.yaml"
+  name: "Deterministic practice selector"
+  source_index: "implementation-decisions.yaml"
+  status: "In Progress"
+  type: "IMPL"
 IMPL-TIED_DAE_VERIFICATION_CHARTER:
   cross_references:
     - "ARCH-TIED_DAE_VERIFICATION_CHARTER"
@@ -2602,6 +2666,17 @@ PROC-COMMIT_MESSAGES:
     last_updated: "2026-03-03T00:00:00.000Z"
     registered: "2026-03-03T00:00:00.000Z"
   name: "Commit message format and guidelines"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-CONTEXT_ADAPTIVE_PRACTICE:
+  cross_references:
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "PROC-TIED_DEV_CYCLE"
+    - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+  description: "Opt-in advisory practice selection via MCP; composes existing checklist slugs and tools without a parallel mega-checklist."
+  detail_file: "null"
+  name: "Context-adaptive practice orchestration"
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
@@ -3868,6 +3943,21 @@ REQ-TIED_CLIENT_REFRESH_PARITY:
   name: "Client refresh methodology and doc parity gate"
   source_index: "requirements.yaml"
   status: "Implemented"
+  type: "REQ"
+REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
+  cross_references:
+    - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
+    - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
+    - "PROC-CONTEXT_ADAPTIVE_PRACTICE"
+  description: "Optional opt-in practice contracts, profiles, deterministic selection, reassessment, and method-effectiveness readout."
+  detail_file: "requirements/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
+  name: "Context-adaptive practice layer (CASE v1)"
+  source_index: "requirements.yaml"
+  status: "In Progress"
   type: "REQ"
 REQ-TIED_DAE_VERIFICATION_CHARTER:
   cross_references:

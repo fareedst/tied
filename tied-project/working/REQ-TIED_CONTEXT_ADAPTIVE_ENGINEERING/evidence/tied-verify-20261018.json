@@ -1,0 +1,28 @@
+{
+  "schema_version": "tied-verify-run.v1",
+  "recorded_at": "2026-10-18T05:35:10Z",
+  "phase": "verification",
+  "run_id": "cae-verify-20261018",
+  "gate_receipt": "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/gates/verification-2026-10-18T05-35-10-716Z.json",
+  "passed_requirement_tokens": ["REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"],
+  "passed_impl_tokens": [
+    "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS",
+    "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE",
+    "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR",
+    "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS",
+    "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK"
+  ],
+  "result": {
+    "ok": true,
+    "requirements_set_implemented": ["REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"],
+    "implementation_set_active": [
+      "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS",
+      "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
+    ],
+    "status_mutation_receipt": true
+  },
+  "tests": "node --import tsx --test mcp-server/src/context-adaptive/*.test.ts — 23/23 pass"
+}
