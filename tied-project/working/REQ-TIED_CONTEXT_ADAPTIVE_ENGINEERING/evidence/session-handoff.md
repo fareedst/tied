@@ -2,7 +2,7 @@
 
 **Updated:** 2026-10-18 (post-`@plan-close-out`)  
 **Depth:** `integrated` · **gate_policy:** `advisory` · **Activation:** opt-in MCP only (v1)  
-**Program phase:** **Slices 0–5 complete** · **machine close-out complete** · **`@traceable-commit` pending**
+**Program phase:** **Slices 0–5 complete** · **traceable-commit** **`11f68054`**
 
 **Linked Cursor plan:** `context-adaptive-tied_8292d200.plan.md` · **Close-out plan:** `.cursor/plans/cae_plan-close-out_222bebd8.plan.md`  
 **Program plan:** [../PLAN.md](../PLAN.md)  
@@ -72,4 +72,4 @@ Refs: ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING, IMPL-TIED_CONTEXT_ADAPTIVE_*,
 PROC-CONTEXT_ADAPTIVE_PRACTICE
 ```
 
-**Next:** `@traceable-commit` with staged files per [traceable-commit-evidence.md](./traceable-commit-evidence.md).
+**Commit:** `11f68054` — [traceable-commit-evidence.md](./traceable-commit-evidence.md)

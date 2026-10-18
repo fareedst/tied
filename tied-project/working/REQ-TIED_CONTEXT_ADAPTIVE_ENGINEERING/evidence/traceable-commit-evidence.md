@@ -1,6 +1,8 @@
 # traceable-commit — REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING (prepared)
 
-**Prepared:** 2026-10-18 · **Commit:** deferred (`@traceable-commit`)
+**Committed:** 2026-10-18  
+**Hash:** `11f68054`  
+**Subject:** `feat(mcp): context-adaptive practice layer v1 (CASE)`
 
 ## Pre-commit validation (expected)
 
