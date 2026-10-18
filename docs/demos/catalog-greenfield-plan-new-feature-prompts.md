@@ -232,6 +232,7 @@ Build one publishable library package in this repo (TypeScript or Python—pick 
 | PROMPT-GF-25 | `1791754135` | [trial-readout-PROMPT-GF-25-1791754135.md](trial-readout-PROMPT-GF-25-1791754135.md) |
 | PROMPT-GF-09 | `1791767366` | [trial-readout-PROMPT-GF-09-1791767366.md](trial-readout-PROMPT-GF-09-1791767366.md) |
 | PROMPT-GF-03 | `1792315611` | [trial-readout-PROMPT-GF-03-1792315611.md](trial-readout-PROMPT-GF-03-1792315611.md) |
+| PROMPT-GF-11 | `1792344147` | [trial-readout-PROMPT-GF-11-1792344147.md](trial-readout-PROMPT-GF-11-1792344147.md) |
 
 ## Related references
 
