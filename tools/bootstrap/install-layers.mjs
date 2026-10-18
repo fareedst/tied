@@ -27,6 +27,7 @@ Options:
   --store PATH                         TIED store root (default: env TIED_STORE_ROOT, else mcp.json, else TIED_REPO_ROOT)
   --methodology-bundle live|pinned     Default: live
   --refresh                            Re-run from tied-bundle/install.json
+  --allow-self-install                 Allow install when project root equals store root
   --doctor                             No-MCP self-test on installed client
   --migrate-layout                     Brownfield layout migration (idempotent)
   --store                              With --migrate-layout --dry-run: print store git mv plan (p6)
@@ -51,6 +52,7 @@ export function parseInstallLayersArgs(argv, env = process.env) {
   let store;
   let methodologyBundle = "live";
   let refresh = false;
+  let allowSelfInstall = false;
   let doctor = false;
   let migrateLayoutFlag = false;
   let storeMigrate = false;
@@ -84,6 +86,9 @@ export function parseInstallLayersArgs(argv, env = process.env) {
       args.splice(0, 2);
     } else if (flag === "--refresh") {
       refresh = true;
+      args.shift();
+    } else if (flag === "--allow-self-install") {
+      allowSelfInstall = true;
       args.shift();
     } else if (flag === "--doctor") {
       doctor = true;
@@ -125,6 +130,7 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     store,
     methodologyBundle,
     refresh,
+    allowSelfInstall,
     doctor,
     migrateLayout: migrateLayoutFlag,
     storeMigrate,
@@ -187,6 +193,7 @@ function main() {
       parityGateReportOnly: parsed.parityGateReportOnly,
       semanticYamlCompare: parsed.semanticYamlCompare,
       parityReport: parsed.parityReport,
+      allowSelfInstall: parsed.allowSelfInstall,
       env: process.env,
     };
 

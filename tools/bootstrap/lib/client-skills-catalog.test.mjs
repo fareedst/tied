@@ -15,21 +15,25 @@ import {
 } from "./client-skills-catalog.mjs";
 
 describe("client-skills-catalog [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]", () => {
-  it("loadStandaloneClientSkills returns xlate and unblock", () => {
+  it("loadStandaloneClientSkills returns xlate, unblock, handoff, clear-workspace", () => {
     const entries = loadStandaloneClientSkills(TIED_REPO_ROOT);
-    assert.equal(entries.length, 2);
+    assert.equal(entries.length, 4);
     const names = entries.map((e) => e.skillName).sort();
-    assert.deepEqual(names, ["unblock", "xlate"]);
+    assert.deepEqual(names, ["clear-workspace", "handoff", "unblock", "xlate"]);
   });
 
   it("installStandaloneSkillsCopy places SKILL.md files", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "standalone-copy-"));
     const skillsDir = path.join(tmp, ".cursor", "skills");
     installStandaloneSkillsCopy(TIED_REPO_ROOT, skillsDir);
-    for (const name of ["xlate", "unblock"]) {
+    for (const name of ["xlate", "unblock", "handoff", "clear-workspace"]) {
       const skillPath = path.join(skillsDir, name, "SKILL.md");
       assert.ok(fs.existsSync(skillPath), name);
     }
+    const handoff = fs.readFileSync(path.join(skillsDir, "handoff", "SKILL.md"), "utf8");
+    assert.match(handoff, /\/handoff/);
+    const clearWs = fs.readFileSync(path.join(skillsDir, "clear-workspace", "SKILL.md"), "utf8");
+    assert.match(clearWs, /\/clear-workspace/);
     fs.rmSync(tmp, { recursive: true, force: true });
   });
 

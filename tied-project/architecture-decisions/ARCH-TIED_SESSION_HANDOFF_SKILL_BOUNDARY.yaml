@@ -1,0 +1,14 @@
+ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY:
+  consequences:
+    negative: []
+    positive:
+      - "Shorter skill picker name avoids conflating with evidence files"
+  context: "Chat continuity between Cursor sessions"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_SESSION_HANDOFF_SKILL"
+    requirements:
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
+  decision: "Standalone /handoff skill; invoke name handoff; persisted log session-handoff.md; not plan-close-out."
+  name: "Handoff skill boundary"
+  status: "Planned"

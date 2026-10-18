@@ -10,16 +10,20 @@ import { claudeManagedInventoryComplete } from "../../../tools/bootstrap/lib/ass
 
 const repoRoot = path.resolve(import.meta.dirname, "../../..");
 
-// [IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS] [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]
+// [IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS] [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS] [REQ-TIED_SESSION_HANDOFF_SKILL] [REQ-TIED_CLEAR_WORKSPACE_SKILL]
 describe("client bootstrap standalone skills [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]", () => {
-  it("installStandaloneSkillsCopy installs xlate and unblock under Cursor skills dir", () => {
+  it("installStandaloneSkillsCopy installs standalone skills under Cursor skills dir", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "cbs-cursor-"));
     const skillsDir = path.join(tmp, ".cursor", "skills");
     installStandaloneSkillsCopy(repoRoot, skillsDir);
     const xlate = fs.readFileSync(path.join(skillsDir, "xlate", "SKILL.md"), "utf8");
     const unblock = fs.readFileSync(path.join(skillsDir, "unblock", "SKILL.md"), "utf8");
+    const handoff = fs.readFileSync(path.join(skillsDir, "handoff", "SKILL.md"), "utf8");
+    const clearWorkspace = fs.readFileSync(path.join(skillsDir, "clear-workspace", "SKILL.md"), "utf8");
     assert.match(xlate, /\/xlate/);
     assert.match(unblock, /\/unblock/);
+    assert.match(handoff, /\/handoff/);
+    assert.match(clearWorkspace, /\/clear-workspace/);
     fs.rmSync(tmp, { recursive: true, force: true });
   });
 

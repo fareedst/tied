@@ -1,8 +1,11 @@
-schema_version: practice-contract.v1
-id: PRACTICE-REQUEST-EVIDENCE-ENVELOPE
-name: Request evidence envelope
 applicability:
-  observability: ["LOW", "MEDIUM", "UNKNOWN"]
+  observability:
+    - "LOW"
+    - "MEDIUM"
+    - "UNKNOWN"
+id: "PRACTICE-REQUEST-EVIDENCE-ENVELOPE"
+name: "Request evidence envelope"
+schema_version: "practice-contract.v1"
 tied_binding:
-  proc: REQ-REQUEST_EVIDENCE_ENVELOPE
-  tool: request_evidence_envelope_validate
+  proc: "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  tool: "request_evidence_envelope_validate"

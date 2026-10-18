@@ -1,0 +1,79 @@
+CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL:
+  change_definition:
+    current_behavior_prior: "Operators manually chain tied_git_hygiene, plan-close-out, and traceable-commit checklist steps without a single explicit skill; git hygiene receipts and close-out sequencing vary by working folder."
+    desired_behavior: "Standalone clear-workspace skill routes to git hygiene MCP, plan-close-out workflow, and traceable-commit prep as merited; shared clear-workspace-routing.md in prompt-shared; no automatic git commit; suggests handoff when not commit-ready."
+    non_goals:
+      - "New MCP tools or prompt-type leaf skills"
+      - "Automatic git commit or push"
+      - "Replacing checklist gate authority"
+    success_criteria:
+      - "bundled-clear-workspace-skill/SKILL.md and clear-workspace-routing.md exist"
+      - "manifest.json lists skillName clear-workspace"
+      - "Bootstrap tests assert /clear-workspace marker"
+      - "tied_validate_consistency ok after YAML mint"
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/client-skills-catalog.test.mjs"
+      - "cd mcp-server && npm test -- client-bootstrap-skills"
+      - "cd mcp-server && npm test -- prompt-type-skills"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "orchestration_prose_and_bootstrap_only"
+      - "does_not_prove_git_hygiene_apply_safety"
+  impact_analysis:
+    impl_inventory_notes: "SKILL.md + clear-workspace-routing.md + manifest; reuses tied_git_hygiene and plan-close-out boundaries."
+    modules_or_boundaries: "tools/bundled-clear-workspace-skill/; tools/bundled-prompt-type-skills/prompt-shared/"
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - "ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY"
+      - "IMPL-TIED_CLEAR_WORKSPACE_SKILL"
+      - "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+  record_identity:
+    change_request_id: "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-18"
+    title: "Clear-workspace orchestrator skill"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Clear-workspace performs unprompted git commit"
+      - "Routing doc bypasses close_out gate authority"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "SKILL.md omits Forbidden table and auto-commits on close-out green."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "prompt-type-skills test drops clear-workspace-routing.md reference."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md"
+        - "tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md"
+      falsification_questions:
+        - "Does routing defer commit to sponsor explicit request?"
+        - "Is tied_git_hygiene apply gated on allowlist?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Orchestration prose; reuses existing MCP; minimal depth."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "client-skills-catalog.test.mjs"
+        evidence_method: "unit test"
+        limitation: "Does not run full clear-workspace skill in live IDE."
+        owner: "agent"
+        rationale: "Four standalone skills including clear-workspace."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    approach: "Catalog + e2e install; prompt-type-skills SHARED_REFERENCES includes routing doc."
+    cases:
+      - "loadStandaloneClientSkills includes clear-workspace"
+      - "prompt-type-skills references clear-workspace-routing.md"
+      - "tied_validate_consistency after token mint"

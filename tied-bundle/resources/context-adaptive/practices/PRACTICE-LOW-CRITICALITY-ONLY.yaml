@@ -1,6 +1,7 @@
-schema_version: practice-contract.v1
-id: PRACTICE-LOW-CRITICALITY-ONLY
-name: Low criticality waiver path
 applicability:
-  criticality: ["LOW"]
-proof_boundary: Must not apply when criticality is UNKNOWN.
+  criticality:
+    - "LOW"
+id: "PRACTICE-LOW-CRITICALITY-ONLY"
+name: "Low criticality waiver path"
+proof_boundary: "Must not apply when criticality is UNKNOWN."
+schema_version: "practice-contract.v1"

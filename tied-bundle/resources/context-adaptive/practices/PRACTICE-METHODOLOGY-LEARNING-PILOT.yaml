@@ -1,10 +1,13 @@
-schema_version: practice-contract.v1
-id: PRACTICE-METHODOLOGY-LEARNING-PILOT
-name: Methodology learning pilot pairing
 applicability:
-  rate_of_change: ["MEDIUM", "HIGH", "UNKNOWN"]
+  rate_of_change:
+    - "HIGH"
+    - "MEDIUM"
+    - "UNKNOWN"
+id: "PRACTICE-METHODOLOGY-LEARNING-PILOT"
+name: "Methodology learning pilot pairing"
 prerequisites:
-  - PRACTICE-REQUEST-EVIDENCE-ENVELOPE
+  - "PRACTICE-REQUEST-EVIDENCE-ENVELOPE"
+schema_version: "practice-contract.v1"
 tied_binding:
-  proc: REQ-METHODOLOGY-LEARNING-EXPERIMENT
-  tool: tied_methodology_conformance_effectiveness_pair
+  proc: "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+  tool: "tied_methodology_conformance_effectiveness_pair"

@@ -1,0 +1,12 @@
+REQ-TIED_CLEAR_WORKSPACE_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_CLEAR_WORKSPACE_SKILL"
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_GIT_HYGIENE"
+  description: "Standalone orchestrator for workspace hygiene and close-out sequencing."
+  name: "Clear-workspace skill"
+  status: "Planned"

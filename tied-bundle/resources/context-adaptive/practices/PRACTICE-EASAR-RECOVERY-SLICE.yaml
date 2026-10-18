@@ -1,10 +1,14 @@
-schema_version: practice-contract.v1
-id: PRACTICE-EASAR-RECOVERY-SLICE
-name: EASAR recovery slice dogfood
 applicability:
-  environmental: ["HIGH", "UNKNOWN"]
-  uncertainty: ["HIGH", "UNKNOWN"]
+  environmental:
+    - "HIGH"
+    - "UNKNOWN"
+  uncertainty:
+    - "HIGH"
+    - "UNKNOWN"
+id: "PRACTICE-EASAR-RECOVERY-SLICE"
+name: "EASAR recovery slice dogfood"
 prerequisites:
-  - PRACTICE-MODULE-VALIDATION
+  - "PRACTICE-MODULE-VALIDATION"
+schema_version: "practice-contract.v1"
 tied_binding:
-  proc: PROC-EASAR_RECOVERY
+  proc: "PROC-EASAR_RECOVERY"

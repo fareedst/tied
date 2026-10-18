@@ -1,7 +1,9 @@
-schema_version: practice-contract.v1
-id: PRACTICE-COMPOSITION-BEFORE-E2E
-name: Composition tests before MCP wiring
 applicability:
-  coupling: ["HIGH", "UNKNOWN"]
+  coupling:
+    - "HIGH"
+    - "UNKNOWN"
+id: "PRACTICE-COMPOSITION-BEFORE-E2E"
+name: "Composition tests before MCP wiring"
 prerequisites:
-  - PRACTICE-MODULE-VALIDATION
+  - "PRACTICE-MODULE-VALIDATION"
+schema_version: "practice-contract.v1"

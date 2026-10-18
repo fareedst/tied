@@ -1,8 +1,8 @@
 {
   "schema_version": "source-graph-index.v1",
   "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
-  "content_hash": "89e20c0180a61728f4bdc055b59d8d3c52092e1a712f5cb6fe2322cb7fc39c11",
-  "built_at": "2026-10-18T06:05:11.583Z",
+  "content_hash": "42f5ed82f745a897d35c9c10e92a71f627451cdf435b8f0e19e333a77121beb4",
+  "built_at": "2026-10-18T07:10:36.457Z",
   "language_scope": [
     "typescript",
     "javascript"
@@ -53202,6 +53202,11 @@
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#collectEnvelopeGapReport",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#resolveEnvelopeForRow",
+      "kind": "calls"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#collectEnvelopeGapReport",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#artifactRef",
       "kind": "calls"
     },
     {

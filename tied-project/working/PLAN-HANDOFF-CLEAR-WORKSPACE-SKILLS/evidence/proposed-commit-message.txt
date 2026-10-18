@@ -1,0 +1,14 @@
+feat(tied): add handoff and clear-workspace standalone skills
+
+Register handoff (/handoff, session-handoff.md log) and clear-workspace
+orchestrator (git hygiene, plan-close-out, traceable-commit prep) in bootstrap
+manifest; hydrate CITDP gate shape and minimal close-out for both REQs.
+
+Includes collateral working-tree updates (fixtures, source-graph index, context-
+adaptive practice YAML touches, pre-handoff charter link) in the same tranche.
+
+REQ-TIED_SESSION_HANDOFF_SKILL REQ-TIED_CLEAR_WORKSPACE_SKILL
+ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY
+IMPL-TIED_SESSION_HANDOFF_SKILL IMPL-TIED_CLEAR_WORKSPACE_SKILL
+
+Close-out: handoff-close-out-2026-10-18-r2, clear-ws-close-out-2026-10-18

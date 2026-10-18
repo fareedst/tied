@@ -1,7 +1,10 @@
-schema_version: practice-contract.v1
-id: PRACTICE-STRICT-TDD
-name: Strict TDD unit cycle
 applicability:
-  criticality: ["MEDIUM", "HIGH", "UNKNOWN"]
+  criticality:
+    - "HIGH"
+    - "MEDIUM"
+    - "UNKNOWN"
+id: "PRACTICE-STRICT-TDD"
+name: "Strict TDD unit cycle"
+schema_version: "practice-contract.v1"
 tied_binding:
-  proc: PROC-TIED_DEV_CYCLE
+  proc: "PROC-TIED_DEV_CYCLE"

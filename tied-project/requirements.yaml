@@ -2358,6 +2358,33 @@ REQ-TIED_CLAUDE_SKILLS_REROOT:
   name: "Optional repo-root skills re-root"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CLEAR_WORKSPACE_SKILL:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_CLEAR_WORKSPACE_SKILL"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_GIT_HYGIENE"
+  description: "Orchestrator skill for git hygiene, plan-close-out, and traceable-commit prep as merited."
+  detail_file: "requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+  name: "Clear-workspace skill"
+  satisfaction_criteria:
+    - criterion: "Skill installs as clear-workspace with shared routing doc"
+      criterion_id: "clear-workspace-install"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_CLEAR_WORKSPACE_SKILL"
+    tests:
+      - "client-bootstrap-skills.test.ts"
+      - "client-skills-catalog.test.mjs"
+      - "prompt-type-skills.test.ts"
 REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   category: "Tooling"
   cross_references:
@@ -2865,6 +2892,31 @@ REQ-TIED_REVIEW_CONVERGENCE_POLICY:
       - "ARCH-TIED_REVIEW_CONVERGENCE_POLICY"
     implementation:
       - "IMPL-TIED_REVIEW_CONVERGENCE_POLICY"
+REQ-TIED_SESSION_HANDOFF_SKILL:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_SESSION_HANDOFF_SKILL"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  description: "Bundled /handoff skill for chat continuity; evidence log session-handoff.md."
+  detail_file: "requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml"
+  name: "Handoff skill"
+  satisfaction_criteria:
+    - criterion: "Skill installs as handoff and documents session-handoff.md log path"
+      criterion_id: "handoff-install"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_SESSION_HANDOFF_SKILL"
+    tests:
+      - "client-bootstrap-skills.test.ts"
+      - "client-skills-catalog.test.mjs"
 REQ-TIED_SETUP:
   category: "Functional"
   cross_references:

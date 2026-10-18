@@ -1,9 +1,11 @@
-schema_version: practice-contract.v1
-id: PRACTICE-INTEGRATED-INQUIRY
-name: Integrated adversarial inquiry
 applicability:
-  criticality: ["HIGH", "UNKNOWN"]
+  criticality:
+    - "HIGH"
+    - "UNKNOWN"
+id: "PRACTICE-INTEGRATED-INQUIRY"
+name: "Integrated adversarial inquiry"
 prerequisites:
-  - PRACTICE-STRICT-TDD
+  - "PRACTICE-STRICT-TDD"
+schema_version: "practice-contract.v1"
 tied_binding:
-  proc: REQ-TIED_ADVERSARIAL_INQUIRY
+  proc: "REQ-TIED_ADVERSARIAL_INQUIRY"

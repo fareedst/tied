@@ -41,6 +41,14 @@
     {
       "skillName": "unblock",
       "storeDir": "tools/bundled-unblock-skill"
+    },
+    {
+      "skillName": "handoff",
+      "storeDir": "tools/bundled-session-handoff-skill"
+    },
+    {
+      "skillName": "clear-workspace",
+      "storeDir": "tools/bundled-clear-workspace-skill"
     }
   ],
   "SOURCE_ONLY_VOCAB_BASENAMES": [

@@ -142,10 +142,28 @@ function readTiedVersionFromAgents(projectRoot, storeRoot) {
  */
 export function refreshInstallFromManifest(projectRoot, options = {}) {
   const prior = readInstallManifest(projectRoot);
+  const storeRoot = resolveStoreRoot({
+    store: options.store,
+    env: options.env,
+    projectRoot,
+  });
+  const project = path.resolve(projectRoot);
+  const store = path.resolve(storeRoot);
   if (!prior) {
+    if (project === store) {
+      sayOk("No tied-bundle/install.json (gitignored on store); running linked self-refresh.");
+      return installTiedLayers(projectRoot, {
+        ...options,
+        store: storeRoot,
+        allowSelfInstall: true,
+        skipVerify: options.skipVerify ?? true,
+        refresh: true,
+      });
+    }
     sayErr("No tied-bundle/install.json (or legacy install manifest) — run a full install first.");
     throw new Error("INSTALL_MANIFEST_MISSING");
   }
+  const storeSelf = project === store;
   return installTiedLayers(projectRoot, {
     ...options,
     store: options.store ?? prior.store,
@@ -153,6 +171,8 @@ export function refreshInstallFromManifest(projectRoot, options = {}) {
     harness: options.harness ?? prior.harness,
     methodologyBundle: options.methodologyBundle ?? prior.methodology_bundle,
     layers: options.layers ?? prior.layers ?? ALL_LAYERS,
+    allowSelfInstall: options.allowSelfInstall === true || storeSelf,
+    skipVerify: storeSelf ? (options.skipVerify ?? true) : options.skipVerify,
     refresh: true,
   });
 }

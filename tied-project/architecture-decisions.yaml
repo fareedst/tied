@@ -1942,6 +1942,16 @@ ARCH-TIED_CLAUDE_SKILLS_REROOT:
   detail_file: "architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml"
   name: "Skills re-root architecture"
   status: "Active"
+ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_CLEAR_WORKSPACE_SKILL"
+    requirements:
+      - "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+      - "REQ-TIED_GIT_HYGIENE"
+  detail_file: "architecture-decisions/ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY.yaml"
+  name: "Clear-workspace skill boundary"
+  status: "Active"
 ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS:
   cross_references:
     - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
@@ -2303,6 +2313,16 @@ ARCH-TIED_REVIEW_CONVERGENCE_POLICY:
       reason: "Phase 3 close-out"
   name: "Review convergence policy documentation topology"
   status: "Implemented"
+ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_SESSION_HANDOFF_SKILL"
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
+  detail_file: "architecture-decisions/ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY.yaml"
+  name: "Handoff skill boundary"
+  status: "Active"
 ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL:
   cross_references:
     architecture: []

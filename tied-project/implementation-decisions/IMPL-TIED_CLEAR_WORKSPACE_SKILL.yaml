@@ -1,0 +1,13 @@
+IMPL-TIED_CLEAR_WORKSPACE_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY"
+    requirements:
+      - "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLEAR_WORKSPACE_SKILL-pseudocode.md"
+  implementation_approach:
+    details: []
+    summary: "bundled-clear-workspace-skill plus prompt-shared/clear-workspace-routing.md"
+  name: "Clear-workspace skill bootstrap"
+  status: "Active"

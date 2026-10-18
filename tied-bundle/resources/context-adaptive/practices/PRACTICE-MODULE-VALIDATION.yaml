@@ -1,9 +1,12 @@
-schema_version: practice-contract.v1
-id: PRACTICE-MODULE-VALIDATION
-name: Independent module validation
 applicability:
-  coupling: ["MEDIUM", "HIGH", "UNKNOWN"]
+  coupling:
+    - "HIGH"
+    - "MEDIUM"
+    - "UNKNOWN"
+id: "PRACTICE-MODULE-VALIDATION"
+name: "Independent module validation"
 prerequisites:
-  - PRACTICE-STRICT-TDD
+  - "PRACTICE-STRICT-TDD"
+schema_version: "practice-contract.v1"
 tied_binding:
-  proc: REQ-MODULE_VALIDATION
+  proc: "REQ-MODULE_VALIDATION"

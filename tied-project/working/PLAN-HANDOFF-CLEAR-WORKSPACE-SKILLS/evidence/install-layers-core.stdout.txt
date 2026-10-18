@@ -1,0 +1,12 @@
+No tied-bundle/install.json (or legacy install manifest) — run a full install first.
+▶ refreshInstallFromManifest [REQ-TIED_LAYERED_CLIENT_INSTALL]
+  ✔ throws INSTALL_MANIFEST_MISSING for client dir without manifest (1.009917ms)
+✔ refreshInstallFromManifest [REQ-TIED_LAYERED_CLIENT_INSTALL] (1.460958ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 77.636375

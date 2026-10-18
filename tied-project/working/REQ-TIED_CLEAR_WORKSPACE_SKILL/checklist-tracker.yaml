@@ -1,0 +1,160 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_CLEAR_WORKSPACE_SKILL; clear-workspace orchestrator."
+description: "Minimal tracker — clear-workspace skill + routing doc + bootstrap tests."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-10-18"
+    deferred: []
+    gates:
+      close_out: "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/evidence/request-evidence-envelope.v1.json"
+      verification: "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/evidence/request-evidence-envelope.v1.json"
+    master_checklist: "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+record_identity:
+  change_request_id: "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+  citdp_path: "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-18"
+  req_token: "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+  title: "Clear-workspace orchestrator skill"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/PLAN.md"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/test-strategy.md"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Orchestration prose; minimal depth."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_CLEAR_WORKSPACE_SKILL-pseudocode.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bundled-clear-workspace-skill/SKILL.md"
+      - "tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md"
+    slug: "session-bootstrap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    slug: "author-requirement"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/architecture-decisions/ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY.yaml"
+    slug: "author-architecture"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    slug: "persist-implementation-records"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/build-plan-evidence.md"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/client-skills-catalog.stdout.txt"
+      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/prompt-type-skills.stdout.txt"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/prompt-type-skills.stdout.txt"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      status: "completed"
+  - disposition: "pending"
+    evidence_refs:
+      - ".gitignore"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

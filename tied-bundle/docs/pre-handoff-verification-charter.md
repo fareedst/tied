@@ -30,7 +30,7 @@ Run what applies to the change; skip rows with proof **n/a** and say why in the 
 | **TIED consistency** | Project TIED YAML or tokens touched | `tied_validate_consistency` clean |
 | **YAML lint** | Index/detail YAML edited | `lint_yaml` on changed files |
 | **Checklist gate** | TIED-tracked REQ | `tied_gate_check` or validated `pre_implementation` / `verification` receipt for depth |
-| **Completion signals** | Claiming “done” or “ready to commit” | Separate **machine close-out**, **process contract**, **adherence ledger** ([completion-signals-handoff](../tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md) in store; clients: prompt-shared after install) |
+| **Completion signals** | Claiming “done” or “ready to commit” | Separate **machine close-out**, **process contract**, **adherence ledger** ([completion-signals-handoff](../../tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md) in store; clients: prompt-shared after install) |
 
 **Fresh-context review:** For large or high-risk diffs, prefer a **new session** (or `/session-handoff` when installed) so review is not only “same thread fatigue.”
 

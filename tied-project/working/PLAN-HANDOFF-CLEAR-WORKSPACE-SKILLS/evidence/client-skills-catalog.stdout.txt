@@ -1,0 +1,22 @@
+Copied standalone skill xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-copy-41oMjD/.cursor/skills/xlate.
+Copied standalone skill unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-copy-41oMjD/.cursor/skills/unblock.
+Copied standalone skill handoff into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-copy-41oMjD/.cursor/skills/handoff.
+Copied standalone skill clear-workspace into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-copy-41oMjD/.cursor/skills/clear-workspace.
+Wrote linked standalone skill stub xlate into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-stub-U3PBK3/.claude/skills/xlate.
+Wrote linked standalone skill stub unblock into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-stub-U3PBK3/.claude/skills/unblock.
+Wrote linked standalone skill stub handoff into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-stub-U3PBK3/.claude/skills/handoff.
+Wrote linked standalone skill stub clear-workspace into /var/folders/yh/87t3kcg50_l108hdt9tgc8pr0000gp/T/standalone-stub-U3PBK3/.claude/skills/clear-workspace.
+▶ client-skills-catalog [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]
+  ✔ loadStandaloneClientSkills returns xlate, unblock, handoff, clear-workspace (1.431542ms)
+  ✔ installStandaloneSkillsCopy places SKILL.md files (4.00975ms)
+  ✔ installStandaloneSkillsLinkedStub references store paths (1.596ms)
+  ✔ assertStandaloneSkillsInventory false when skill missing (0.179042ms)
+✔ client-skills-catalog [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS] (7.749667ms)
+ℹ tests 4
+ℹ suites 1
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.770333

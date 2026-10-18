@@ -1,0 +1,14 @@
+ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY:
+  consequences:
+    negative: []
+    positive:
+      - "Single invoke surface for common close-out chain"
+  context: "Operator workspace hygiene and close-out sequencing"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_CLEAR_WORKSPACE_SKILL"
+    requirements:
+      - "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+  decision: "Orchestrator delegates to tied_git_hygiene, plan-close-out workflow, and traceable-commit prep; no unprompted commit."
+  name: "Clear-workspace skill boundary"
+  status: "Planned"

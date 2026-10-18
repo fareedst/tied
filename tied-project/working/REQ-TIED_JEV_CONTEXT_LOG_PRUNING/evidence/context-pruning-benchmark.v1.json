@@ -3,7 +3,7 @@
   "meta": {
     "fixture_hash": "b2e3a1d627c30703630c94a222d5c97beaeece5fe284c3ce4180e8fc660fe9e3",
     "fixture_path": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/fixtures/context-pruning/labeled-corpus.jsonl",
-    "git_rev": "de4175671bc43da21a8fab2445e70fbd4861e9a3",
+    "git_rev": "c07f92e626c5e29572b681ebd73fcb0ff8cb3aa3",
     "JEV_MODEL": "jev-1.13.0",
     "thresholds": {
       "passThroughLines": 30,
@@ -12,14 +12,14 @@
       "boilerplate": 0.6
     },
     "mode": "mocked",
-    "timestamp": "2026-10-18T06:05:35.475Z"
+    "timestamp": "2026-10-18T07:11:03.707Z"
   },
   "arms": {
     "raw_before": {
       "per_fixture": [
         {
           "fixture_id": "fatal-tail-0",
-          "elapsed_ms": 0.1393330000000077,
+          "elapsed_ms": 0.11729200000000617,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 36,
@@ -43,7 +43,7 @@
         },
         {
           "fixture_id": "fatal-tail-1",
-          "elapsed_ms": 0.006666999999993095,
+          "elapsed_ms": 0.006540999999998576,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 36,
@@ -67,7 +67,7 @@
         },
         {
           "fixture_id": "fatal-tail-2",
-          "elapsed_ms": 0.004457999999999629,
+          "elapsed_ms": 0.00533300000000736,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 36,
@@ -91,7 +91,7 @@
         },
         {
           "fixture_id": "fatal-tail-3",
-          "elapsed_ms": 0.005458000000004404,
+          "elapsed_ms": 0.0037500000000108002,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 36,
@@ -115,7 +115,7 @@
         },
         {
           "fixture_id": "fatal-tail-4",
-          "elapsed_ms": 0.006624999999999659,
+          "elapsed_ms": 0.006749999999996703,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 36,
@@ -139,7 +139,7 @@
         },
         {
           "fixture_id": "tsc-0",
-          "elapsed_ms": 0.004542000000000712,
+          "elapsed_ms": 0.004084000000005972,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 33,
@@ -163,7 +163,7 @@
         },
         {
           "fixture_id": "tsc-1",
-          "elapsed_ms": 0.004083999999991761,
+          "elapsed_ms": 0.0038750000000078444,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 33,
@@ -187,7 +187,7 @@
         },
         {
           "fixture_id": "tsc-2",
-          "elapsed_ms": 0.0036249999999995453,
+          "elapsed_ms": 0.004125000000001933,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 33,
@@ -211,7 +211,7 @@
         },
         {
           "fixture_id": "tsc-3",
-          "elapsed_ms": 0.0049999999999954525,
+          "elapsed_ms": 0.0037080000000031532,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 33,
@@ -235,7 +235,7 @@
         },
         {
           "fixture_id": "tsc-4",
-          "elapsed_ms": 0.005459000000001879,
+          "elapsed_ms": 0.0049169999999918446,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 33,
@@ -259,7 +259,7 @@
         },
         {
           "fixture_id": "boiler-0",
-          "elapsed_ms": 0.005708999999995967,
+          "elapsed_ms": 0.004832999999990761,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 40,
@@ -283,7 +283,7 @@
         },
         {
           "fixture_id": "boiler-1",
-          "elapsed_ms": 0.0027499999999918145,
+          "elapsed_ms": 0.002375000000000682,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 40,
@@ -307,7 +307,7 @@
         },
         {
           "fixture_id": "boiler-2",
-          "elapsed_ms": 0.002207999999995991,
+          "elapsed_ms": 0.0029169999999965057,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 40,
@@ -331,7 +331,7 @@
         },
         {
           "fixture_id": "boiler-3",
-          "elapsed_ms": 0.003167000000004805,
+          "elapsed_ms": 0.0020000000000095497,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 40,
@@ -355,7 +355,7 @@
         },
         {
           "fixture_id": "boiler-4",
-          "elapsed_ms": 0.002250000000003638,
+          "elapsed_ms": 0.0019580000000019027,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 40,
@@ -379,54 +379,6 @@
         },
         {
           "fixture_id": "ctx-req-short-0",
-          "elapsed_ms": 0.002041999999988775,
-          "metrics": {
-            "arm": "raw_before",
-            "input_lines": 20,
-            "output_lines": 20,
-            "input_bytes": 309,
-            "output_bytes": 309,
-            "input_chars": 309,
-            "output_chars": 309,
-            "estimated_tokens_in": 78,
-            "estimated_tokens_out": 78,
-            "pass_through": true,
-            "chunk_count": 0,
-            "jev_calls": 0,
-            "jev_skipped_chunks": 0,
-            "jev_latency_ms_total": 0,
-            "jev_latency_ms_p95": 0,
-            "chunks_kept": 0,
-            "chunks_dropped": 0
-          },
-          "output_bytes": 309
-        },
-        {
-          "fixture_id": "ctx-req-short-1",
-          "elapsed_ms": 0.0020409999999912998,
-          "metrics": {
-            "arm": "raw_before",
-            "input_lines": 20,
-            "output_lines": 20,
-            "input_bytes": 309,
-            "output_bytes": 309,
-            "input_chars": 309,
-            "output_chars": 309,
-            "estimated_tokens_in": 78,
-            "estimated_tokens_out": 78,
-            "pass_through": true,
-            "chunk_count": 0,
-            "jev_calls": 0,
-            "jev_skipped_chunks": 0,
-            "jev_latency_ms_total": 0,
-            "jev_latency_ms_p95": 0,
-            "chunks_kept": 0,
-            "chunks_dropped": 0
-          },
-          "output_bytes": 309
-        },
-        {
-          "fixture_id": "ctx-req-short-2",
           "elapsed_ms": 0.0018749999999982947,
           "metrics": {
             "arm": "raw_before",
@@ -450,8 +402,56 @@
           "output_bytes": 309
         },
         {
+          "fixture_id": "ctx-req-short-1",
+          "elapsed_ms": 0.0016669999999976426,
+          "metrics": {
+            "arm": "raw_before",
+            "input_lines": 20,
+            "output_lines": 20,
+            "input_bytes": 309,
+            "output_bytes": 309,
+            "input_chars": 309,
+            "output_chars": 309,
+            "estimated_tokens_in": 78,
+            "estimated_tokens_out": 78,
+            "pass_through": true,
+            "chunk_count": 0,
+            "jev_calls": 0,
+            "jev_skipped_chunks": 0,
+            "jev_latency_ms_total": 0,
+            "jev_latency_ms_p95": 0,
+            "chunks_kept": 0,
+            "chunks_dropped": 0
+          },
+          "output_bytes": 309
+        },
+        {
+          "fixture_id": "ctx-req-short-2",
+          "elapsed_ms": 0.0016250000000042064,
+          "metrics": {
+            "arm": "raw_before",
+            "input_lines": 20,
+            "output_lines": 20,
+            "input_bytes": 309,
+            "output_bytes": 309,
+            "input_chars": 309,
+            "output_chars": 309,
+            "estimated_tokens_in": 78,
+            "estimated_tokens_out": 78,
+            "pass_through": true,
+            "chunk_count": 0,
+            "jev_calls": 0,
+            "jev_skipped_chunks": 0,
+            "jev_latency_ms_total": 0,
+            "jev_latency_ms_p95": 0,
+            "chunks_kept": 0,
+            "chunks_dropped": 0
+          },
+          "output_bytes": 309
+        },
+        {
           "fixture_id": "boundary-29",
-          "elapsed_ms": 0.003084000000001197,
+          "elapsed_ms": 0.003166999999990594,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 29,
@@ -475,7 +475,7 @@
         },
         {
           "fixture_id": "boundary-30",
-          "elapsed_ms": 0.003333999999995285,
+          "elapsed_ms": 0.00216700000000003,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 30,
@@ -499,7 +499,7 @@
         },
         {
           "fixture_id": "boundary-31-fatal",
-          "elapsed_ms": 0.002041999999988775,
+          "elapsed_ms": 0.0018340000000023338,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 31,
@@ -523,7 +523,7 @@
         },
         {
           "fixture_id": "boundary-31-boiler",
-          "elapsed_ms": 0.0024999999999977263,
+          "elapsed_ms": 0.002249999999989427,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 31,
@@ -547,7 +547,7 @@
         },
         {
           "fixture_id": "json-tool-0",
-          "elapsed_ms": 0.002125000000006594,
+          "elapsed_ms": 0.001958999999999378,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 34,
@@ -571,7 +571,7 @@
         },
         {
           "fixture_id": "json-tool-1",
-          "elapsed_ms": 0.001999999999995339,
+          "elapsed_ms": 0.0027089999999958536,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 34,
@@ -595,7 +595,7 @@
         },
         {
           "fixture_id": "json-tool-2",
-          "elapsed_ms": 0.0019580000000019027,
+          "elapsed_ms": 0.001958999999999378,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 34,
@@ -619,7 +619,7 @@
         },
         {
           "fixture_id": "json-tool-3",
-          "elapsed_ms": 0.002041999999988775,
+          "elapsed_ms": 0.0019169999999917309,
           "metrics": {
             "arm": "raw_before",
             "input_lines": 34,
@@ -655,7 +655,7 @@
       "per_fixture": [
         {
           "fixture_id": "fatal-tail-0",
-          "elapsed_ms": 0.08941699999999742,
+          "elapsed_ms": 0.08308300000000202,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 36,
@@ -679,7 +679,7 @@
         },
         {
           "fixture_id": "fatal-tail-1",
-          "elapsed_ms": 0.031999999999996476,
+          "elapsed_ms": 0.03129200000000765,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 36,
@@ -703,7 +703,7 @@
         },
         {
           "fixture_id": "fatal-tail-2",
-          "elapsed_ms": 0.024583000000006905,
+          "elapsed_ms": 0.02145899999999301,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 36,
@@ -727,7 +727,7 @@
         },
         {
           "fixture_id": "fatal-tail-3",
-          "elapsed_ms": 0.009999999999990905,
+          "elapsed_ms": 0.009542000000010376,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 36,
@@ -751,7 +751,7 @@
         },
         {
           "fixture_id": "fatal-tail-4",
-          "elapsed_ms": 0.007792000000009125,
+          "elapsed_ms": 0.007499999999993179,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 36,
@@ -775,7 +775,7 @@
         },
         {
           "fixture_id": "tsc-0",
-          "elapsed_ms": 0.007042000000012649,
+          "elapsed_ms": 0.019540999999989594,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 33,
@@ -799,7 +799,7 @@
         },
         {
           "fixture_id": "tsc-1",
-          "elapsed_ms": 0.006916000000003919,
+          "elapsed_ms": 0.009292000000002076,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 33,
@@ -823,7 +823,7 @@
         },
         {
           "fixture_id": "tsc-2",
-          "elapsed_ms": 0.007417000000003782,
+          "elapsed_ms": 0.006915999999989708,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 33,
@@ -847,7 +847,7 @@
         },
         {
           "fixture_id": "tsc-3",
-          "elapsed_ms": 0.006084000000001311,
+          "elapsed_ms": 0.006624999999999659,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 33,
@@ -871,7 +871,7 @@
         },
         {
           "fixture_id": "tsc-4",
-          "elapsed_ms": 0.0229580000000027,
+          "elapsed_ms": 0.0061249999999972715,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 33,
@@ -895,7 +895,7 @@
         },
         {
           "fixture_id": "boiler-0",
-          "elapsed_ms": 0.008249999999989654,
+          "elapsed_ms": 0.007917000000006169,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 40,
@@ -919,7 +919,7 @@
         },
         {
           "fixture_id": "boiler-1",
-          "elapsed_ms": 0.006500000000002615,
+          "elapsed_ms": 0.006999999999990791,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 40,
@@ -943,7 +943,7 @@
         },
         {
           "fixture_id": "boiler-2",
-          "elapsed_ms": 0.02029100000000028,
+          "elapsed_ms": 0.006040999999996188,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 40,
@@ -967,7 +967,7 @@
         },
         {
           "fixture_id": "boiler-3",
-          "elapsed_ms": 0.010165999999998121,
+          "elapsed_ms": 0.0143330000000077,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 40,
@@ -991,7 +991,7 @@
         },
         {
           "fixture_id": "boiler-4",
-          "elapsed_ms": 0.005791999999999575,
+          "elapsed_ms": 0.007000000000005002,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 40,
@@ -1015,7 +1015,7 @@
         },
         {
           "fixture_id": "ctx-req-short-0",
-          "elapsed_ms": 0.0029590000000041528,
+          "elapsed_ms": 0.003290999999990163,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 20,
@@ -1039,7 +1039,7 @@
         },
         {
           "fixture_id": "ctx-req-short-1",
-          "elapsed_ms": 0.0037499999999965894,
+          "elapsed_ms": 0.002042000000002986,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 20,
@@ -1063,7 +1063,7 @@
         },
         {
           "fixture_id": "ctx-req-short-2",
-          "elapsed_ms": 0.0017500000000012506,
+          "elapsed_ms": 0.0016669999999976426,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 20,
@@ -1087,7 +1087,7 @@
         },
         {
           "fixture_id": "boundary-29",
-          "elapsed_ms": 0.0025420000000053733,
+          "elapsed_ms": 0.0024999999999977263,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 29,
@@ -1111,7 +1111,7 @@
         },
         {
           "fixture_id": "boundary-30",
-          "elapsed_ms": 0.002208000000010202,
+          "elapsed_ms": 0.0030000000000001137,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 30,
@@ -1135,7 +1135,7 @@
         },
         {
           "fixture_id": "boundary-31-fatal",
-          "elapsed_ms": 0.012083000000004063,
+          "elapsed_ms": 0.01141700000000867,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 31,
@@ -1159,7 +1159,7 @@
         },
         {
           "fixture_id": "boundary-31-boiler",
-          "elapsed_ms": 0.005916999999996619,
+          "elapsed_ms": 0.006624999999999659,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 31,
@@ -1183,7 +1183,7 @@
         },
         {
           "fixture_id": "json-tool-0",
-          "elapsed_ms": 0.006166000000007443,
+          "elapsed_ms": 0.004958000000002016,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 34,
@@ -1207,7 +1207,7 @@
         },
         {
           "fixture_id": "json-tool-1",
-          "elapsed_ms": 0.00491600000000858,
+          "elapsed_ms": 0.05158299999999372,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 34,
@@ -1231,7 +1231,7 @@
         },
         {
           "fixture_id": "json-tool-2",
-          "elapsed_ms": 0.004582999999996673,
+          "elapsed_ms": 0.004958999999999492,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 34,
@@ -1255,7 +1255,7 @@
         },
         {
           "fixture_id": "json-tool-3",
-          "elapsed_ms": 0.003959000000008928,
+          "elapsed_ms": 0.006083000000003835,
           "metrics": {
             "arm": "deterministic_only",
             "input_lines": 34,
@@ -1291,7 +1291,7 @@
       "per_fixture": [
         {
           "fixture_id": "fatal-tail-0",
-          "elapsed_ms": 0.3937080000000037,
+          "elapsed_ms": 0.3492079999999902,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 36,
@@ -1315,7 +1315,7 @@
         },
         {
           "fixture_id": "fatal-tail-1",
-          "elapsed_ms": 0.03733400000000131,
+          "elapsed_ms": 0.03279099999998891,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 36,
@@ -1339,7 +1339,7 @@
         },
         {
           "fixture_id": "fatal-tail-2",
-          "elapsed_ms": 0.02599999999999625,
+          "elapsed_ms": 0.025249999999999773,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 36,
@@ -1363,7 +1363,7 @@
         },
         {
           "fixture_id": "fatal-tail-3",
-          "elapsed_ms": 0.02112499999999784,
+          "elapsed_ms": 0.03912499999999852,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 36,
@@ -1387,7 +1387,7 @@
         },
         {
           "fixture_id": "fatal-tail-4",
-          "elapsed_ms": 0.03437500000001137,
+          "elapsed_ms": 0.016999999999995907,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 36,
@@ -1411,7 +1411,7 @@
         },
         {
           "fixture_id": "tsc-0",
-          "elapsed_ms": 0.15500000000000114,
+          "elapsed_ms": 0.13212500000000205,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 33,
@@ -1435,7 +1435,7 @@
         },
         {
           "fixture_id": "tsc-1",
-          "elapsed_ms": 0.01520800000000122,
+          "elapsed_ms": 0.013999999999995794,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 33,
@@ -1459,7 +1459,7 @@
         },
         {
           "fixture_id": "tsc-2",
-          "elapsed_ms": 0.013750000000001705,
+          "elapsed_ms": 0.012792000000004577,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 33,
@@ -1483,7 +1483,7 @@
         },
         {
           "fixture_id": "tsc-3",
-          "elapsed_ms": 0.014041000000005965,
+          "elapsed_ms": 0.013334000000000401,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 33,
@@ -1507,7 +1507,7 @@
         },
         {
           "fixture_id": "tsc-4",
-          "elapsed_ms": 0.013249999999999318,
+          "elapsed_ms": 0.012416000000001759,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 33,
@@ -1531,7 +1531,7 @@
         },
         {
           "fixture_id": "boiler-0",
-          "elapsed_ms": 0.018000000000000682,
+          "elapsed_ms": 0.01841699999999946,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 40,
@@ -1555,7 +1555,7 @@
         },
         {
           "fixture_id": "boiler-1",
-          "elapsed_ms": 0.01591600000000426,
+          "elapsed_ms": 0.015292000000002304,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 40,
@@ -1579,7 +1579,7 @@
         },
         {
           "fixture_id": "boiler-2",
-          "elapsed_ms": 0.015833000000000652,
+          "elapsed_ms": 0.01433299999999349,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 40,
@@ -1603,7 +1603,7 @@
         },
         {
           "fixture_id": "boiler-3",
-          "elapsed_ms": 0.0143330000000077,
+          "elapsed_ms": 0.014416999999994573,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 40,
@@ -1627,7 +1627,7 @@
         },
         {
           "fixture_id": "boiler-4",
-          "elapsed_ms": 0.01520800000000122,
+          "elapsed_ms": 0.014833999999993353,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 40,
@@ -1651,7 +1651,7 @@
         },
         {
           "fixture_id": "ctx-req-short-0",
-          "elapsed_ms": 0.0014169999999893435,
+          "elapsed_ms": 0.001333000000002471,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 20,
@@ -1675,30 +1675,6 @@
         },
         {
           "fixture_id": "ctx-req-short-1",
-          "elapsed_ms": 0.001125000000001819,
-          "metrics": {
-            "arm": "pruner_jev_off",
-            "input_lines": 20,
-            "output_lines": 20,
-            "input_bytes": 309,
-            "output_bytes": 309,
-            "input_chars": 309,
-            "output_chars": 309,
-            "estimated_tokens_in": 78,
-            "estimated_tokens_out": 78,
-            "pass_through": true,
-            "chunk_count": 0,
-            "jev_calls": 0,
-            "jev_skipped_chunks": 0,
-            "jev_latency_ms_total": 0,
-            "jev_latency_ms_p95": 0,
-            "chunks_kept": 0,
-            "chunks_dropped": 0
-          },
-          "output_bytes": 309
-        },
-        {
-          "fixture_id": "ctx-req-short-2",
           "elapsed_ms": 0.001082999999994172,
           "metrics": {
             "arm": "pruner_jev_off",
@@ -1722,8 +1698,32 @@
           "output_bytes": 309
         },
         {
+          "fixture_id": "ctx-req-short-2",
+          "elapsed_ms": 0.0019169999999917309,
+          "metrics": {
+            "arm": "pruner_jev_off",
+            "input_lines": 20,
+            "output_lines": 20,
+            "input_bytes": 309,
+            "output_bytes": 309,
+            "input_chars": 309,
+            "output_chars": 309,
+            "estimated_tokens_in": 78,
+            "estimated_tokens_out": 78,
+            "pass_through": true,
+            "chunk_count": 0,
+            "jev_calls": 0,
+            "jev_skipped_chunks": 0,
+            "jev_latency_ms_total": 0,
+            "jev_latency_ms_p95": 0,
+            "chunks_kept": 0,
+            "chunks_dropped": 0
+          },
+          "output_bytes": 309
+        },
+        {
           "fixture_id": "boundary-29",
-          "elapsed_ms": 0.0036670000000071923,
+          "elapsed_ms": 0.0017909999999972115,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 29,
@@ -1747,7 +1747,7 @@
         },
         {
           "fixture_id": "boundary-30",
-          "elapsed_ms": 0.0017500000000012506,
+          "elapsed_ms": 0.0015839999999940346,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 30,
@@ -1771,7 +1771,7 @@
         },
         {
           "fixture_id": "boundary-31-fatal",
-          "elapsed_ms": 0.01387499999999875,
+          "elapsed_ms": 0.013334000000000401,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 31,
@@ -1795,7 +1795,7 @@
         },
         {
           "fixture_id": "boundary-31-boiler",
-          "elapsed_ms": 0.012249999999994543,
+          "elapsed_ms": 0.011959000000004494,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 31,
@@ -1819,7 +1819,7 @@
         },
         {
           "fixture_id": "json-tool-0",
-          "elapsed_ms": 0.015500000000002956,
+          "elapsed_ms": 0.022750000000002046,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 34,
@@ -1843,7 +1843,7 @@
         },
         {
           "fixture_id": "json-tool-1",
-          "elapsed_ms": 0.01387499999999875,
+          "elapsed_ms": 0.013625000000004661,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 34,
@@ -1867,7 +1867,7 @@
         },
         {
           "fixture_id": "json-tool-2",
-          "elapsed_ms": 0.022041999999999007,
+          "elapsed_ms": 0.02241699999999014,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 34,
@@ -1891,7 +1891,7 @@
         },
         {
           "fixture_id": "json-tool-3",
-          "elapsed_ms": 0.013791999999995141,
+          "elapsed_ms": 0.013333000000002926,
           "metrics": {
             "arm": "pruner_jev_off",
             "input_lines": 34,
@@ -1927,7 +1927,7 @@
       "per_fixture": [
         {
           "fixture_id": "fatal-tail-0",
-          "elapsed_ms": 0.1068339999999921,
+          "elapsed_ms": 0.09454200000000412,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 36,
@@ -1951,7 +1951,7 @@
         },
         {
           "fixture_id": "fatal-tail-1",
-          "elapsed_ms": 0.009500000000002728,
+          "elapsed_ms": 0.009166999999990821,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 36,
@@ -1975,7 +1975,7 @@
         },
         {
           "fixture_id": "fatal-tail-2",
-          "elapsed_ms": 0.012957999999997583,
+          "elapsed_ms": 0.014915999999999485,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 36,
@@ -1999,7 +1999,7 @@
         },
         {
           "fixture_id": "fatal-tail-3",
-          "elapsed_ms": 0.00883299999999565,
+          "elapsed_ms": 0.009958999999994944,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 36,
@@ -2023,7 +2023,7 @@
         },
         {
           "fixture_id": "fatal-tail-4",
-          "elapsed_ms": 0.006584000000003698,
+          "elapsed_ms": 0.006917000000001394,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 36,
@@ -2047,7 +2047,7 @@
         },
         {
           "fixture_id": "tsc-0",
-          "elapsed_ms": 0.03391700000000242,
+          "elapsed_ms": 0.04683299999999235,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 33,
@@ -2071,7 +2071,7 @@
         },
         {
           "fixture_id": "tsc-1",
-          "elapsed_ms": 0.006624999999999659,
+          "elapsed_ms": 0.005958000000006791,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 33,
@@ -2095,7 +2095,7 @@
         },
         {
           "fixture_id": "tsc-2",
-          "elapsed_ms": 0.008250000000003865,
+          "elapsed_ms": 0.005540999999993801,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 33,
@@ -2119,7 +2119,7 @@
         },
         {
           "fixture_id": "tsc-3",
-          "elapsed_ms": 0.00566699999998832,
+          "elapsed_ms": 0.005291999999997188,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 33,
@@ -2143,7 +2143,7 @@
         },
         {
           "fixture_id": "tsc-4",
-          "elapsed_ms": 0.004709000000005403,
+          "elapsed_ms": 0.0051250000000067075,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 33,
@@ -2167,7 +2167,7 @@
         },
         {
           "fixture_id": "boiler-0",
-          "elapsed_ms": 0.0051250000000067075,
+          "elapsed_ms": 0.00420799999999133,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 40,
@@ -2191,7 +2191,7 @@
         },
         {
           "fixture_id": "boiler-1",
-          "elapsed_ms": 0.0051660000000026685,
+          "elapsed_ms": 0.004750000000001364,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 40,
@@ -2215,7 +2215,7 @@
         },
         {
           "fixture_id": "boiler-2",
-          "elapsed_ms": 0.0040000000000048885,
+          "elapsed_ms": 0.004374999999996021,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 40,
@@ -2239,7 +2239,7 @@
         },
         {
           "fixture_id": "boiler-3",
-          "elapsed_ms": 0.0048340000000024475,
+          "elapsed_ms": 0.0036670000000071923,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 40,
@@ -2263,7 +2263,7 @@
         },
         {
           "fixture_id": "boiler-4",
-          "elapsed_ms": 0.0048340000000024475,
+          "elapsed_ms": 0.004082999999994286,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 40,
@@ -2287,7 +2287,7 @@
         },
         {
           "fixture_id": "ctx-req-short-0",
-          "elapsed_ms": 0.0013749999999959073,
+          "elapsed_ms": 0.001167000000009466,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 20,
@@ -2335,7 +2335,7 @@
         },
         {
           "fixture_id": "ctx-req-short-2",
-          "elapsed_ms": 0.0010420000000124219,
+          "elapsed_ms": 0.00245800000000429,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 20,
@@ -2359,7 +2359,7 @@
         },
         {
           "fixture_id": "boundary-29",
-          "elapsed_ms": 0.0028750000000030695,
+          "elapsed_ms": 0.0017919999999946867,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 29,
@@ -2383,7 +2383,7 @@
         },
         {
           "fixture_id": "boundary-30",
-          "elapsed_ms": 0.0016669999999976426,
+          "elapsed_ms": 0.0015420000000005984,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 30,
@@ -2407,7 +2407,7 @@
         },
         {
           "fixture_id": "boundary-31-fatal",
-          "elapsed_ms": 0.0038330000000001974,
+          "elapsed_ms": 0.0037499999999965894,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 31,
@@ -2431,7 +2431,7 @@
         },
         {
           "fixture_id": "boundary-31-boiler",
-          "elapsed_ms": 0.004540999999989026,
+          "elapsed_ms": 0.003333999999995285,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 31,
@@ -2455,7 +2455,7 @@
         },
         {
           "fixture_id": "json-tool-0",
-          "elapsed_ms": 0.005375000000000796,
+          "elapsed_ms": 0.004416000000006193,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 34,
@@ -2479,7 +2479,7 @@
         },
         {
           "fixture_id": "json-tool-1",
-          "elapsed_ms": 0.004125000000001933,
+          "elapsed_ms": 0.00520899999999358,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 34,
@@ -2503,7 +2503,7 @@
         },
         {
           "fixture_id": "json-tool-2",
-          "elapsed_ms": 0.0040830000000084965,
+          "elapsed_ms": 0.22470899999999006,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 34,
@@ -2527,7 +2527,7 @@
         },
         {
           "fixture_id": "json-tool-3",
-          "elapsed_ms": 0.0040000000000048885,
+          "elapsed_ms": 0.007708999999991306,
           "metrics": {
             "arm": "pruner_jev_on",
             "input_lines": 34,
@@ -2563,7 +2563,7 @@
       "per_fixture": [
         {
           "fixture_id": "fatal-tail-0",
-          "elapsed_ms": 0.3422079999999994,
+          "elapsed_ms": 0.06408400000000825,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 36,
@@ -2578,8 +2578,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.006957999999997355,
-            "jev_latency_ms_p95": 0.005375000000000796,
+            "jev_latency_ms_total": 0.003290999999990163,
+            "jev_latency_ms_p95": 0.0018749999999982947,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2587,7 +2587,7 @@
         },
         {
           "fixture_id": "fatal-tail-1",
-          "elapsed_ms": 0.01604199999999878,
+          "elapsed_ms": 0.014707999999998833,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 36,
@@ -2602,8 +2602,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0015829999999823485,
-            "jev_latency_ms_p95": 0.0004999999999881766,
+            "jev_latency_ms_total": 0.0015830000000107702,
+            "jev_latency_ms_p95": 0.0005420000000100345,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2611,7 +2611,7 @@
         },
         {
           "fixture_id": "fatal-tail-2",
-          "elapsed_ms": 0.008499999999997954,
+          "elapsed_ms": 0.008875000000003297,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 36,
@@ -2626,8 +2626,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0014999999999929514,
-            "jev_latency_ms_p95": 0.00045899999999221563,
+            "jev_latency_ms_total": 0.00145700000000204,
+            "jev_latency_ms_p95": 0.00045800000000895125,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2635,7 +2635,7 @@
         },
         {
           "fixture_id": "fatal-tail-3",
-          "elapsed_ms": 0.007707999999993831,
+          "elapsed_ms": 0.008209000000007904,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 36,
@@ -2650,7 +2650,7 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.001373999999998432,
+            "jev_latency_ms_total": 0.0013339999999999463,
             "jev_latency_ms_p95": 0.0003750000000053433,
             "chunks_kept": 4,
             "chunks_dropped": 0
@@ -2659,7 +2659,7 @@
         },
         {
           "fixture_id": "fatal-tail-4",
-          "elapsed_ms": 0.007250000000013301,
+          "elapsed_ms": 0.007874999999998522,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 36,
@@ -2674,8 +2674,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0013350000000258433,
-            "jev_latency_ms_p95": 0.0003750000000053433,
+            "jev_latency_ms_total": 0.0013329999999740494,
+            "jev_latency_ms_p95": 0.0003749999999911324,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2683,7 +2683,7 @@
         },
         {
           "fixture_id": "tsc-0",
-          "elapsed_ms": 0.007750000000001478,
+          "elapsed_ms": 0.008042000000003213,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 33,
@@ -2698,8 +2698,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0013320000000049959,
-            "jev_latency_ms_p95": 0.0003750000000053433,
+            "jev_latency_ms_total": 0.0012920000000065102,
+            "jev_latency_ms_p95": 0.0003749999999911324,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2707,7 +2707,7 @@
         },
         {
           "fixture_id": "tsc-1",
-          "elapsed_ms": 0.006916000000003919,
+          "elapsed_ms": 0.007541000000003351,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 33,
@@ -2722,31 +2722,7 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.001376999999976647,
-            "jev_latency_ms_p95": 0.0003749999999911324,
-            "chunks_kept": 4,
-            "chunks_dropped": 0
-          },
-          "output_bytes": 451
-        },
-        {
-          "fixture_id": "tsc-2",
-          "elapsed_ms": 0.006666999999993095,
-          "metrics": {
-            "arm": "pruner_jev_unavailable",
-            "input_lines": 33,
-            "output_lines": 33,
-            "input_bytes": 451,
-            "output_bytes": 451,
-            "input_chars": 451,
-            "output_chars": 451,
-            "estimated_tokens_in": 113,
-            "estimated_tokens_out": 113,
-            "pass_through": false,
-            "chunk_count": 4,
-            "jev_calls": 0,
-            "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0013769999999908578,
+            "jev_latency_ms_total": 0.0012920000000065102,
             "jev_latency_ms_p95": 0.0003750000000053433,
             "chunks_kept": 4,
             "chunks_dropped": 0
@@ -2754,8 +2730,8 @@
           "output_bytes": 451
         },
         {
-          "fixture_id": "tsc-3",
-          "elapsed_ms": 0.007165999999998007,
+          "fixture_id": "tsc-2",
+          "elapsed_ms": 0.007457999999999743,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 33,
@@ -2770,31 +2746,7 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0013349999999832107,
-            "jev_latency_ms_p95": 0.0003339999999951715,
-            "chunks_kept": 4,
-            "chunks_dropped": 0
-          },
-          "output_bytes": 451
-        },
-        {
-          "fixture_id": "tsc-4",
-          "elapsed_ms": 0.006749999999996703,
-          "metrics": {
-            "arm": "pruner_jev_unavailable",
-            "input_lines": 33,
-            "output_lines": 33,
-            "input_bytes": 451,
-            "output_bytes": 451,
-            "input_chars": 451,
-            "output_chars": 451,
-            "estimated_tokens_in": 113,
-            "estimated_tokens_out": 113,
-            "pass_through": false,
-            "chunk_count": 4,
-            "jev_calls": 0,
-            "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0013339999999999463,
+            "jev_latency_ms_total": 0.0013760000000075934,
             "jev_latency_ms_p95": 0.0003749999999911324,
             "chunks_kept": 4,
             "chunks_dropped": 0
@@ -2802,8 +2754,56 @@
           "output_bytes": 451
         },
         {
+          "fixture_id": "tsc-3",
+          "elapsed_ms": 0.0072499999999990905,
+          "metrics": {
+            "arm": "pruner_jev_unavailable",
+            "input_lines": 33,
+            "output_lines": 33,
+            "input_bytes": 451,
+            "output_bytes": 451,
+            "input_chars": 451,
+            "output_chars": 451,
+            "estimated_tokens_in": 113,
+            "estimated_tokens_out": 113,
+            "pass_through": false,
+            "chunk_count": 4,
+            "jev_calls": 0,
+            "jev_skipped_chunks": 4,
+            "jev_latency_ms_total": 0.001207999999991216,
+            "jev_latency_ms_p95": 0.00033299999999769625,
+            "chunks_kept": 4,
+            "chunks_dropped": 0
+          },
+          "output_bytes": 451
+        },
+        {
+          "fixture_id": "tsc-4",
+          "elapsed_ms": 0.006457999999994968,
+          "metrics": {
+            "arm": "pruner_jev_unavailable",
+            "input_lines": 33,
+            "output_lines": 33,
+            "input_bytes": 451,
+            "output_bytes": 451,
+            "input_chars": 451,
+            "output_chars": 451,
+            "estimated_tokens_in": 113,
+            "estimated_tokens_out": 113,
+            "pass_through": false,
+            "chunk_count": 4,
+            "jev_calls": 0,
+            "jev_skipped_chunks": 4,
+            "jev_latency_ms_total": 0.0012929999999755637,
+            "jev_latency_ms_p95": 0.0003339999999951715,
+            "chunks_kept": 4,
+            "chunks_dropped": 0
+          },
+          "output_bytes": 451
+        },
+        {
           "fixture_id": "boiler-0",
-          "elapsed_ms": 0.011458000000004631,
+          "elapsed_ms": 0.010874999999998636,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 40,
@@ -2818,8 +2818,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0021670000000284517,
-            "jev_latency_ms_p95": 0.0007500000000106866,
+            "jev_latency_ms_total": 0.0018350000000140199,
+            "jev_latency_ms_p95": 0.0007090000000005148,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2827,7 +2827,7 @@
         },
         {
           "fixture_id": "boiler-1",
-          "elapsed_ms": 0.006209000000012566,
+          "elapsed_ms": 0.005624999999994884,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 40,
@@ -2842,8 +2842,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0005000000000023874,
-            "jev_latency_ms_p95": 0.0002080000000006521,
+            "jev_latency_ms_total": 0.0003730000000103928,
+            "jev_latency_ms_p95": 0.00016600000000721593,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2851,7 +2851,7 @@
         },
         {
           "fixture_id": "boiler-2",
-          "elapsed_ms": 0.005583999999998923,
+          "elapsed_ms": 0.0051660000000026685,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 40,
@@ -2866,8 +2866,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.00029000000000678483,
-            "jev_latency_ms_p95": 0.00008300000000360797,
+            "jev_latency_ms_total": 0.00033299999999769625,
+            "jev_latency_ms_p95": 0.00008400000000108321,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -2875,7 +2875,7 @@
         },
         {
           "fixture_id": "boiler-3",
-          "elapsed_ms": 0.005583999999998923,
+          "elapsed_ms": 0.005041999999988889,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 40,
@@ -2899,7 +2899,7 @@
         },
         {
           "fixture_id": "boiler-4",
-          "elapsed_ms": 0.005583999999998923,
+          "elapsed_ms": 0.0049579999999878055,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 40,
@@ -2914,7 +2914,7 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0003330000000119071,
+            "jev_latency_ms_total": 0.0002100000000240243,
             "jev_latency_ms_p95": 0.00008400000000108321,
             "chunks_kept": 4,
             "chunks_dropped": 0
@@ -2923,7 +2923,7 @@
         },
         {
           "fixture_id": "ctx-req-short-0",
-          "elapsed_ms": 0.001958999999999378,
+          "elapsed_ms": 0.0017500000000012506,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 20,
@@ -2947,7 +2947,7 @@
         },
         {
           "fixture_id": "ctx-req-short-1",
-          "elapsed_ms": 0.0012919999999922993,
+          "elapsed_ms": 0.001125000000001819,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 20,
@@ -2971,7 +2971,7 @@
         },
         {
           "fixture_id": "ctx-req-short-2",
-          "elapsed_ms": 0.00116599999999778,
+          "elapsed_ms": 0.001041999999998211,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 20,
@@ -2995,7 +2995,7 @@
         },
         {
           "fixture_id": "boundary-29",
-          "elapsed_ms": 0.002290999999999599,
+          "elapsed_ms": 0.002125000000006594,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 29,
@@ -3019,7 +3019,7 @@
         },
         {
           "fixture_id": "boundary-30",
-          "elapsed_ms": 0.0017500000000012506,
+          "elapsed_ms": 0.0015000000000071623,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 30,
@@ -3043,7 +3043,7 @@
         },
         {
           "fixture_id": "boundary-31-fatal",
-          "elapsed_ms": 0.005167000000000144,
+          "elapsed_ms": 0.004666999999997756,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 31,
@@ -3058,8 +3058,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0002930000000134214,
-            "jev_latency_ms_p95": 0.000125000000011255,
+            "jev_latency_ms_total": 0.0002490000000108239,
+            "jev_latency_ms_p95": 0.00008300000000360797,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -3067,7 +3067,7 @@
         },
         {
           "fixture_id": "boundary-31-boiler",
-          "elapsed_ms": 0.006833999999997786,
+          "elapsed_ms": 0.004708000000007928,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 31,
@@ -3082,8 +3082,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.0002490000000108239,
-            "jev_latency_ms_p95": 0.00008300000000360797,
+            "jev_latency_ms_total": 0.0002930000000134214,
+            "jev_latency_ms_p95": 0.00008400000000108321,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -3091,7 +3091,7 @@
         },
         {
           "fixture_id": "json-tool-0",
-          "elapsed_ms": 0.006667000000007306,
+          "elapsed_ms": 0.0047919999999948,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 34,
@@ -3106,8 +3106,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.00029199999998752446,
-            "jev_latency_ms_p95": 0.00008400000000108321,
+            "jev_latency_ms_total": 0.00024800000001334865,
+            "jev_latency_ms_p95": 0.00008300000000360797,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -3115,7 +3115,7 @@
         },
         {
           "fixture_id": "json-tool-1",
-          "elapsed_ms": 0.006624999999999659,
+          "elapsed_ms": 0.004459000000011315,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 34,
@@ -3130,8 +3130,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.00025000000000829914,
-            "jev_latency_ms_p95": 0.00008400000000108321,
+            "jev_latency_ms_total": 0.0002489999999824022,
+            "jev_latency_ms_p95": 0.00008300000000360797,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -3139,7 +3139,7 @@
         },
         {
           "fixture_id": "json-tool-2",
-          "elapsed_ms": 0.018541999999996506,
+          "elapsed_ms": 0.017583000000001903,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 34,
@@ -3154,8 +3154,8 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.010958000000016455,
-            "jev_latency_ms_p95": 0.010750000000001592,
+            "jev_latency_ms_total": 0.01112600000000441,
+            "jev_latency_ms_p95": 0.010834000000002675,
             "chunks_kept": 4,
             "chunks_dropped": 0
           },
@@ -3163,7 +3163,7 @@
         },
         {
           "fixture_id": "json-tool-3",
-          "elapsed_ms": 0.006540999999998576,
+          "elapsed_ms": 0.006458999999992443,
           "metrics": {
             "arm": "pruner_jev_unavailable",
             "input_lines": 34,
@@ -3178,7 +3178,7 @@
             "chunk_count": 4,
             "jev_calls": 0,
             "jev_skipped_chunks": 4,
-            "jev_latency_ms_total": 0.00029299999999921056,
+            "jev_latency_ms_total": 0.0003329999999834854,
             "jev_latency_ms_p95": 0.00008400000000108321,
             "chunks_kept": 4,
             "chunks_dropped": 0
@@ -3191,7 +3191,7 @@
         "total_input_bytes": 11484,
         "total_output_bytes": 11484,
         "reduction_bytes": 0,
-        "mean_jev_latency_ms_p95": 0.005375000000000796,
+        "mean_jev_latency_ms_p95": 0.0018749999999982947,
         "total_jev_calls": 0
       }
     }

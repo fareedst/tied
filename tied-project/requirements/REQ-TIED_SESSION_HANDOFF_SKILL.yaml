@@ -1,0 +1,12 @@
+REQ-TIED_SESSION_HANDOFF_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_SESSION_HANDOFF_SKILL"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  description: "Standalone bundled skill for ending one chat and resuming in another."
+  name: "Handoff skill"
+  status: "Planned"
