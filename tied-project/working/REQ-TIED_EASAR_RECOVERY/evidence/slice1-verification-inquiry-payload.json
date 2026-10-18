@@ -1,0 +1,125 @@
+{
+  "graph": {
+    "projectId": "stdd-easar",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EASAR_RECOVERY#SC-EASAR-INV",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-s1-inv",
+          "sourceRevision": "easar-s1-src"
+        },
+        "architectureConstraintIds": ["constraint:arch-easar-inventory"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint:arch-easar-inventory",
+        "implementationBlockIds": [
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+          "kind": "block",
+          "name": "BUILD_INVENTORY_V1_FROM_WALK",
+          "derivation": "content",
+          "revision": "55186a2f86e3188d",
+          "sourceRevision": "easar-s1-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-s1-inventory-tests",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:inventory.v1 stable content_hash",
+        "sourceRevision": "easar-s1-src"
+      },
+      {
+        "id": "loci-s1-inventory-mcp-test",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/inventory-receipt-mcp.test.ts",
+        "sourceRevision": "easar-s1-src"
+      },
+      {
+        "id": "loci-s1-inventory-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/inventory-v1.ts:buildInventoryV1FromWalkSummary",
+        "sourceRevision": "easar-s1-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "55186a2f86e3188d",
+    "specification": [
+      {
+        "id": "s1-spec-hash",
+        "kind": "behavior",
+        "value": "inventory.v1 content_hash is stable over identical walk_summary inputs excluding content_hash field.",
+        "order": 1
+      },
+      {
+        "id": "s1-spec-fields",
+        "kind": "behavior",
+        "value": "inventory.v1 includes request_token, baseline_revision, scoped_analysis_run_id, walk_summary, and matrix_row_placeholders.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "s1-test-stable-hash",
+        "statementId": "s1-spec-hash",
+        "kind": "behavior",
+        "value": "fixture walk produces identical content_hash on repeat buildInventoryV1FromWalkSummary",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "55186a2f86e3188d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:inventory.v1 stable content_hash"
+        }
+      },
+      {
+        "id": "s1-test-mcp-build",
+        "statementId": "s1-spec-fields",
+        "kind": "behavior",
+        "value": "buildEasarInventoryReceipt writes inventory.v1 under working evidence path",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "55186a2f86e3188d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/inventory-receipt-mcp.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "s1-prod-inventory",
+        "statementId": "s1-spec-fields",
+        "kind": "behavior",
+        "value": "buildInventoryV1FromWalkSummary infers languages and computes stableHash over body fields",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "55186a2f86e3188d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/inventory-v1.ts:buildInventoryV1FromWalkSummary"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "run_id": "easar-slice1-verify-20261018",
+  "phase": "verification"
+}

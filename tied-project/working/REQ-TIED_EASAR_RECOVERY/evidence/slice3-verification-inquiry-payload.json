@@ -1,0 +1,163 @@
+{
+  "graph": {
+    "projectId": "stdd-easar",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EASAR_RECOVERY#SC-EASAR-CLAIMS",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-s3-claims",
+          "sourceRevision": "easar-s3-src"
+        },
+        "architectureConstraintIds": ["constraint:arch-easar-claim-matrix"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint:arch-easar-claim-matrix",
+        "implementationBlockIds": [
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+          "kind": "block",
+          "name": "BUILD_CLAIM_MATRIX_MAP",
+          "derivation": "content",
+          "revision": "b383add3f1e89a3d",
+          "sourceRevision": "easar-s3-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f",
+          "kind": "block",
+          "name": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP",
+          "derivation": "content",
+          "revision": "b383add3f1e89a3d",
+          "sourceRevision": "easar-s3-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-s3-map-unit",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:claim-matrix map sorts entries",
+        "sourceRevision": "easar-s3-src"
+      },
+      {
+        "id": "loci-s3-choreography",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/claim-matrix-choreography.test.ts",
+        "sourceRevision": "easar-s3-src"
+      },
+      {
+        "id": "loci-s3-mcp-test",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/claim-matrix-map-mcp.test.ts",
+        "sourceRevision": "easar-s3-src"
+      },
+      {
+        "id": "loci-s3-map-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/claim-matrix-map.ts:buildClaimMatrixMap",
+        "sourceRevision": "easar-s3-src"
+      },
+      {
+        "id": "loci-s3-mcp-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/claim-matrix-map-mcp.ts:buildEasarClaimMatrixMap",
+        "sourceRevision": "easar-s3-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "b383add3f1e89a3d",
+    "specification": [
+      {
+        "id": "s3-spec-map",
+        "kind": "behavior",
+        "value": "claim-matrix-map.v1 binds unique claim_id to matrix_row_number with deterministic sort.",
+        "order": 1
+      },
+      {
+        "id": "s3-spec-mcp",
+        "kind": "behavior",
+        "value": "MCP builder writes claim-matrix-map.v1 under working evidence without invoking claims-review.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "s3-test-unit-map",
+        "statementId": "s3-spec-map",
+        "kind": "behavior",
+        "value": "buildClaimMatrixMap rejects duplicate claim_id and duplicate matrix row",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "b383add3f1e89a3d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:claim-matrix map sorts entries"
+        }
+      },
+      {
+        "id": "s3-test-choreography",
+        "statementId": "s3-spec-map",
+        "kind": "behavior",
+        "value": "claim-matrix map entries align with frozen EASAR claim surface and claims-review ledger",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "b383add3f1e89a3d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/claim-matrix-choreography.test.ts"
+        }
+      },
+      {
+        "id": "s3-test-mcp",
+        "statementId": "s3-spec-mcp",
+        "kind": "behavior",
+        "value": "buildEasarClaimMatrixMap writes claim-matrix-map.v1 JSON",
+        "order": 3,
+        "reliable": true,
+        "blockRevision": "b383add3f1e89a3d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/claim-matrix-map-mcp.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "s3-prod-mcp",
+        "statementId": "s3-spec-mcp",
+        "kind": "behavior",
+        "value": "buildEasarClaimMatrixMap calls buildClaimMatrixMap and optional envelope patch",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "b383add3f1e89a3d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/claim-matrix-map-mcp.ts:buildEasarClaimMatrixMap"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "run_id": "easar-slice3-verify-20261018",
+  "phase": "verification"
+}

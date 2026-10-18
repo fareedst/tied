@@ -1,0 +1,145 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "easar-slice4-verify-20261018",
+  "commit": "f1ef04ec73a810d13f433b7c4b394cbe9402b666",
+  "environment": {
+    "node": "v25.9.0",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "easar-slice1-unit",
+      "command": ["npm", "test", "--prefix", "mcp-server", "--", "easar-receipts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "easar-slice2-unit",
+      "command": ["npm", "test", "--prefix", "mcp-server", "--", "easar-receipts", "source-graph"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json"
+      ]
+    },
+    {
+      "id": "easar-slice3-unit",
+      "command": ["npm", "test", "--prefix", "mcp-server", "--", "easar-receipts", "claims-evidence-review"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/claim-matrix-map.v1.json"
+      ]
+    },
+    {
+      "id": "easar-slice4-unit",
+      "command": ["npm", "test", "--prefix", "mcp-server", "--", "easar-receipts", "claims-evidence-review", "source-graph", "checklist-validator"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/reflexion-report.v1.json"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "easar-s1-inventory-receipt",
+      "attribute": "inventory.v1",
+      "applicability": "applicable",
+      "rationale": "Slice 1 SC-EASAR-INV dogfood receipt under working evidence",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/easar-receipts/*.test.ts",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "easar-s1-integrated-inquiry",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Slice 1 verification run_id (historical)",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "tied-project/working/REQ-TIED_EASAR_RECOVERY/gates/verification-2026-10-18T02-24-28-044Z.json",
+      "result": "passed",
+      "owner": "sub-adversarial-inquiry-pass"
+    },
+    {
+      "id": "easar-s2-code-graph-receipt",
+      "attribute": "code-graph-matrix-receipt.v1",
+      "applicability": "applicable",
+      "rationale": "Slice 2 SC-EASAR-GRAPH dogfood receipt + matrix row 4 linkage",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/easar-receipts/graph-matrix-receipt-mcp.test.ts",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "easar-s2-integrated-inquiry",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Distinct verification run_id easar-slice2-verify-20261018 paired at gate",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/",
+      "result": "passed",
+      "owner": "sub-adversarial-inquiry-pass"
+    },
+    {
+      "id": "easar-s3-claim-matrix-map",
+      "attribute": "claim-matrix-map.v1",
+      "applicability": "applicable",
+      "rationale": "Slice 3 SC-EASAR-CLAIMS dogfood map + CER choreography",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/easar-receipts/claim-matrix-choreography.test.ts",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "easar-s3-integrated-inquiry",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Distinct verification run_id easar-slice3-verify-20261018 paired at gate",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "tied-project/working/REQ-TIED_EASAR_RECOVERY/gates/verification-2026-10-18T03-48-39-332Z.json",
+      "result": "passed",
+      "owner": "sub-adversarial-inquiry-pass"
+    },
+    {
+      "id": "easar-s4-reflexion-report",
+      "attribute": "reflexion-report.v1",
+      "applicability": "applicable",
+      "rationale": "Slice 4 SC-EASAR-REFLEX dogfood export-only synthesis",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/easar-receipts/reflexion-choreography.test.ts",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "easar-s4-integrated-inquiry",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Distinct verification run_id easar-slice4-verify-20261018 paired at gate",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "tied-project/working/REQ-TIED_EASAR_RECOVERY/gates/verification-2026-10-18T03-57-03-468Z.json",
+      "result": "passed",
+      "owner": "sub-adversarial-inquiry-pass"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_EASAR_RECOVERY",
+    "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+    "IMPL-TIED_EASAR_RECEIPTS"
+  ],
+  "proof_boundaries": [
+    "read-only-tied-yaml",
+    "observed-matrix-rows-not-req-authority",
+    "envelope-error-gaps-deferred-to-close-out"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

@@ -13,7 +13,7 @@ Copy from `tied-bundle/templates/brownfield-evidence-to-intent-matrix.md` per [w
 | Column | Description |
 | --- | --- |
 | Claim | Testable statement (not sidecar prose paste) |
-| Source type | `code` \| `impl_sidecar` \| `test` \| `help` \| `arch` \| `req` |
+| Source type | `code` \| `code_graph` \| `impl_sidecar` \| `test` \| `help` \| `arch` \| `req` |
 | Location | Path or block id + revision |
 | Disposition | `observed` \| `approved` \| `unresolved` \| `rejected` |
 | Confidence | `high` \| `medium` \| `low` |

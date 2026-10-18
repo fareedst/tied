@@ -1,0 +1,33 @@
+brownfield_intent_elevation:
+  engagement: "easar_full"
+  entry_points:
+    client_legacy_adoption: "brownfield-baseline-lock … brownfield-closure when mode is pilot or strict; PROC-EASAR_RECOVERY sequences Mode C stages"
+    store_feature_build: "session-bootstrap → author-requirement; dogfood on stdd mcp-server/ + checklist gate modules"
+  mode: "pilot"
+copy_hygiene: "Authoritative Tracker for REQ-TIED_EASAR_RECOVERY; clear completed/close_out before build-plan unless resuming same run."
+depth_tier: "integrated"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-{phase}/"
+    limitation: "Identity-bound activation required at integrated depth; one run_id per gate phase."
+    slice1_verification_run_id: "easar-slice1-verify-20261018"
+    slice2_verification_run_id: "easar-slice2-verify-20261018"
+    slice2_e2e_plan: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/slice2-e2e-plan.md"
+    slice3_verification_run_id: "easar-slice3-verify-20261018"
+    slice4_verification_run_id: "easar-slice4-verify-20261018"
+    close_out_run_id: "easar-close-out-20261018"
+    status: "program_close_out_in_progress"
+  request: "REQ-TIED_EASAR_RECOVERY"
+gate_policy: "advisory"
+name: "easar-recovery-refine-plan-tracker"
+request_token: "REQ-TIED_EASAR_RECOVERY"
+schema_version: "checklist-tracker.v1"
+state_history: []
+steps: []

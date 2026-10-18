@@ -1,0 +1,22 @@
+{
+  "schema_version": "claim-matrix-map.v1",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "entries": [
+    {
+      "claim_id": "06059538417ce513",
+      "matrix_row_number": 4
+    },
+    {
+      "claim_id": "230e9f36704d4589",
+      "matrix_row_number": 2
+    },
+    {
+      "claim_id": "5b297b89a22f852c",
+      "matrix_row_number": 1
+    },
+    {
+      "claim_id": "f3f3360de6502098",
+      "matrix_row_number": 3
+    }
+  ]
+}

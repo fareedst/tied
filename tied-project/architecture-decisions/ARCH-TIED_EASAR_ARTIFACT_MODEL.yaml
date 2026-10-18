@@ -1,0 +1,24 @@
+ARCH-TIED_EASAR_ARTIFACT_MODEL:
+  ARCH-TIED_EASAR_ARTIFACT_MODEL:
+    cross_references:
+      architecture: []
+      implementation:
+        - "IMPL-TIED_EASAR_RECEIPTS"
+      requirements:
+        - "REQ-TIED_EASAR_RECOVERY"
+    decisions:
+      - id: "ledger-separation"
+        rationale: "Adversarial finding-ledger and claims-review ledgers remain distinct per EASAR section 5."
+        status: "accepted"
+        title: "No merged obligation and claims ledgers"
+      - id: "portable-export-readonly"
+        rationale: "recovery/ tree is export-only serializer target, never git source of truth."
+        status: "accepted"
+        title: "Canonical traceability stays in tied-project/"
+      - id: "receipt-versioning"
+        rationale: "Follow inventory.v1 and reflexion-report.v1 schema_version pattern with MCP tests."
+        status: "accepted"
+        title: "Versioned receipts under tied-project/working/{REQ}/evidence/"
+    description: "Artifact model for Evidence-Assured Software Architecture Recovery in TIED store clients."
+    name: "EASAR Artifact Model"
+    status: "Active"

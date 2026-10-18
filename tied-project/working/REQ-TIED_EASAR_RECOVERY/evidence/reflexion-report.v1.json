@@ -1,0 +1,17 @@
+{
+  "schema_version": "reflexion-report.v1",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "inquiry_run_id": "easar-slice4-verify-20261018",
+  "gate_allowed": true,
+  "obligation_report_ref": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/obligation-report.json",
+  "adversarial_ledger_ref": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+  "divergences": [
+    {
+      "arch_token": "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+      "summary": "Receipt-versioning decision expects versioned working evidence; dogfood graph remains TS/JS static index (matrix row #4).",
+      "graph_evidence_ref": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json",
+      "severity": "info"
+    }
+  ],
+  "export_only": true
+}

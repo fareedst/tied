@@ -190,6 +190,29 @@ See [brownfield-intent-elevation.md](brownfield-intent-elevation.md).
 
 ---
 
+## `[PROC-EASAR_RECOVERY]` Evidence-Assured Software Architecture Recovery (Mode C)
+
+### Purpose
+Compose existing brownfield, source graph, claims review, fidelity research, adversarial inquiry, and request evidence envelope tooling into a **Mode C** recovery engagement without duplicating `[PROC-AGENT_REQ_CHECKLIST]`.
+
+### Scope
+Store and client engagements where Tracker metadata includes `brownfield_intent_elevation.engagement: easar_full` (requires `mode: pilot` or `strict`). MVP slices deliver `inventory.v1`, matrix `code_graph` receipt linkage, claim.id ↔ matrix `#` mapping, and `reflexion-report.v1` export-only synthesis.
+
+### Token references
+- `[REQ-TIED_EASAR_RECOVERY]`, `[ARCH-TIED_EASAR_ARTIFACT_MODEL]`, `[IMPL-TIED_EASAR_RECEIPTS]`
+- `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]`, `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]`, `[REQ-TIED_CLAIMS_EVIDENCE_REVIEW]`, `[REQ-TIED_FIDELITY_RESEARCH]`, `[REQ-TIED_ADVERSARIAL_INQUIRY]`, `[REQ-REQUEST_EVIDENCE_ENVELOPE]`
+
+### Checklist choreography (references only)
+1. CITDP + PLAN + envelope shell (Stages 0–1) — `inventory.v1` receipt from scoped analysis normalization
+2. Source graph MCP + matrix `code_graph` rows (Stage 2) — freshness/trace receipt linkage
+3. Track C sidecars → fidelity audit prompt → claims review (Stages 3–4) — **sequence**, do not merge prompts
+4. Adversarial inquiry + `reflexion-report.v1` (Stage 6) — separate from claims ledger
+
+### Narrative spec
+See [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) and [easar-recovery.md](../../tied-project/vocab/easar-recovery.md).
+
+---
+
 ## `[PROC-QUALITY_ASSURANCE]` Risk-triggered quality assurance
 
 ### Purpose

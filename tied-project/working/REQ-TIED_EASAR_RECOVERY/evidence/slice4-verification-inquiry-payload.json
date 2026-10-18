@@ -1,0 +1,170 @@
+{
+  "graph": {
+    "projectId": "stdd-easar",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EASAR_RECOVERY#SC-EASAR-REFLEX",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-s4-reflex",
+          "sourceRevision": "easar-s4-src"
+        },
+        "architectureConstraintIds": ["constraint:arch-easar-reflexion"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint:arch-easar-reflexion",
+        "implementationBlockIds": [
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+          "kind": "block",
+          "name": "BUILD_REFLEXION_REPORT_V1",
+          "derivation": "content",
+          "revision": "c23de233217d7511",
+          "sourceRevision": "easar-s4-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1",
+          "kind": "block",
+          "name": "BUILD_EASAR_REFLEXION_REPORT_MCP",
+          "derivation": "content",
+          "revision": "46b6b2ade7d04e09",
+          "sourceRevision": "easar-s4-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-s4-unit",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:reflexion-report.v1 is export_only",
+        "sourceRevision": "easar-s4-src"
+      },
+      {
+        "id": "loci-s4-choreography",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/reflexion-choreography.test.ts",
+        "sourceRevision": "easar-s4-src"
+      },
+      {
+        "id": "loci-s4-mcp-test",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/reflexion-report-mcp.test.ts",
+        "sourceRevision": "easar-s4-src"
+      },
+      {
+        "id": "loci-s4-reflex-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/reflexion-report-v1.ts:buildReflexionReportV1",
+        "sourceRevision": "easar-s4-src"
+      },
+      {
+        "id": "loci-s4-mcp-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/reflexion-report-mcp.ts:buildEasarReflexionReport",
+        "sourceRevision": "easar-s4-src"
+      },
+      {
+        "id": "loci-s4-engagement",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:engagement easar_full requires pilot",
+        "sourceRevision": "easar-s4-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "46b6b2ade7d04e09",
+    "specification": [
+      {
+        "id": "s4-spec-reflex",
+        "kind": "behavior",
+        "value": "reflexion-report.v1 is export_only; adversarial_ledger_ref is pointer only.",
+        "order": 1
+      },
+      {
+        "id": "s4-spec-mcp",
+        "kind": "behavior",
+        "value": "MCP builder writes reflexion-report.v1 under working evidence without merging finding-ledger body.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "s4-test-unit",
+        "statementId": "s4-spec-reflex",
+        "kind": "behavior",
+        "value": "validateReflexionReportV1Input rejects missing obligation_report_ref",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "c23de233217d7511",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:reflexion-report.v1 input validation"
+        }
+      },
+      {
+        "id": "s4-test-choreography",
+        "statementId": "s4-spec-reflex",
+        "kind": "behavior",
+        "value": "synthesizeReflexionReportV1FromInputs produces export_only report with divergence rows",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "c23de233217d7511",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/reflexion-choreography.test.ts"
+        }
+      },
+      {
+        "id": "s4-test-mcp",
+        "statementId": "s4-spec-mcp",
+        "kind": "behavior",
+        "value": "buildEasarReflexionReport writes reflexion-report.v1 JSON",
+        "order": 3,
+        "reliable": true,
+        "blockRevision": "46b6b2ade7d04e09",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/reflexion-report-mcp.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "s4-prod-mcp",
+        "statementId": "s4-spec-mcp",
+        "kind": "behavior",
+        "value": "buildEasarReflexionReport calls synthesizeReflexionReportV1FromInputs and optional envelope patch",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "46b6b2ade7d04e09",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/reflexion-report-mcp.ts:buildEasarReflexionReport"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "run_id": "easar-slice4-verify-20261018",
+  "phase": "verification"
+}

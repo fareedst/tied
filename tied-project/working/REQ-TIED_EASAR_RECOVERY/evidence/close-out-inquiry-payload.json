@@ -1,0 +1,205 @@
+{
+  "graph": {
+    "projectId": "stdd-easar",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EASAR_RECOVERY#SC-EASAR-GATES",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-easar-close-out",
+          "sourceRevision": "easar-close-out-20261018"
+        },
+        "architectureConstraintIds": ["constraint:arch-easar-mvp-receipts"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint:arch-easar-mvp-receipts",
+        "implementationBlockIds": [
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+          "kind": "block",
+          "name": "BUILD_INVENTORY_V1_FROM_WALK",
+          "derivation": "content",
+          "revision": "55186a2f86e3188d",
+          "sourceRevision": "easar-close-out-20261018"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+          "kind": "block",
+          "name": "BUILD_CODE_GRAPH_MATRIX_RECEIPT",
+          "derivation": "content",
+          "revision": "0c6c30ad6e1943ea",
+          "sourceRevision": "easar-close-out-20261018"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb",
+          "kind": "block",
+          "name": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+          "derivation": "content",
+          "revision": "ec3bf7e434818156",
+          "sourceRevision": "easar-close-out-20261018"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+          "kind": "block",
+          "name": "BUILD_CLAIM_MATRIX_MAP",
+          "derivation": "content",
+          "revision": "b383add3f1e89a3d",
+          "sourceRevision": "easar-close-out-20261018"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f",
+          "kind": "block",
+          "name": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP",
+          "derivation": "content",
+          "revision": "b383add3f1e89a3d",
+          "sourceRevision": "easar-close-out-20261018"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+          "kind": "block",
+          "name": "BUILD_REFLEXION_REPORT_V1",
+          "derivation": "content",
+          "revision": "c23de233217d7511",
+          "sourceRevision": "easar-close-out-20261018"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1",
+          "kind": "block",
+          "name": "BUILD_EASAR_REFLEXION_REPORT_MCP",
+          "derivation": "content",
+          "revision": "46b6b2ade7d04e09",
+          "sourceRevision": "easar-close-out-20261018"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-co-easar-tests",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts",
+        "sourceRevision": "easar-close-out-20261018"
+      },
+      {
+        "id": "loci-co-checklist-validator",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+        "kind": "test",
+        "location": "mcp-server/src/checklist-validator.test.ts:easar_full engagement facet",
+        "sourceRevision": "easar-close-out-20261018"
+      },
+      {
+        "id": "loci-co-receipts-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/",
+        "sourceRevision": "easar-close-out-20261018"
+      }
+    ],
+    "adversarialCases": [
+      {
+        "id": "CE-EASAR-001",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a"
+      },
+      {
+        "id": "CE-EASAR-002",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431"
+      },
+      {
+        "id": "CE-EASAR-003",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "55186a2f86e3188d",
+    "specification": [
+      {
+        "id": "co-spec-readonly",
+        "kind": "behavior",
+        "value": "EASAR receipt builders and MCP wrappers do not mutate tied-project YAML indexes.",
+        "order": 1
+      },
+      {
+        "id": "co-spec-ledger-sep",
+        "kind": "behavior",
+        "value": "reflexion-report.v1 does not merge adversarial finding-ledger with claims-review ledgers.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "co-test-receipts",
+        "statementId": "co-spec-readonly",
+        "kind": "behavior",
+        "value": "npm test easar-receipts claims-evidence-review source-graph checklist-validator",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "55186a2f86e3188d",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "co-prod-receipts",
+        "statementId": "co-spec-ledger-sep",
+        "kind": "behavior",
+        "value": "reflexion-report-v1.ts export-only synthesis from inquiry obligation rows",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "c23de233217d7511",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/reflexion-report-v1.ts"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "run_id": "easar-close-out-20261018",
+  "phase": "close_out",
+  "provenance": {
+    "builder": "plan-close-out",
+    "request_token": "REQ-TIED_EASAR_RECOVERY",
+    "source_revision": "easar-close-out-20261018",
+    "tied_base_path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project"
+  }
+}

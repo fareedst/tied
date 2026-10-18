@@ -71,6 +71,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | New requirement | **Checklist** → `session-bootstrap` | **Pseudo-code** Track A; project YAML indexes below |
 | Proposed concept (impact, risks, costs before costly work) | [**Concept impact inquiry**](../../docs/tied-concept-impact-inquiry.md) | RESOLVE via **Vocabulary**; escalate to **Checklist** / CITDP when sponsor proceeds |
 | External workflows, integrators, undocumented ops behavior (brownfield externalities) | [**Operating environment externalities**](../../docs/tied-operating-environment-externalities.md) | **Vocabulary** `operating-environment-externalities.md`; BBCE + brownfield intent elevation; then **Checklist** / CITDP |
+| Legacy / architecture recovery (EASAR Mode C) | [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7 | **Vocabulary** [easar-recovery.md](../../tied-project/vocab/easar-recovery.md); Tracker `engagement: easar_full` + `[PROC-EASAR_RECOVERY]`; brownfield intent elevation doc |
 | Change existing behavior | **Checklist** → `change-definition` | **Processes** § `[PROC-CITDP]`; **Change records** |
 | Upgrade TIED methodology | **methodology-migration.md** → Phase 0 | **Rules**, refreshed TIED YAML MCP, and the per-request Tracker |
 | TIED already updated; code/tests lag | [tied-first-implementation-procedure.md](tied-first-implementation-procedure.md) (**TIED-first**) | **Checklist** with verify-only REQ/ARCH/IMPL steps |

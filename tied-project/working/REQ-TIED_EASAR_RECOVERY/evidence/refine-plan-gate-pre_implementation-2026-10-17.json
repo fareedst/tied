@@ -1,0 +1,17 @@
+{
+  "allowed": false,
+  "ok": false,
+  "blocking": true,
+  "depth": "integrated",
+  "phase": "pre_implementation",
+  "diagnostics": [
+    "tracker_sparse",
+    "malformed_tracker:steps",
+    "missing_required_step:risk-assessment",
+    "missing_required_step:sub-adversarial-inquiry-pass",
+    "missing_required_step:gate-pseudocode-validation",
+    "integrated_depth_requires_pairing",
+    "activation_pairing_incomplete"
+  ],
+  "note": "Refine-plan gate probe with draft CITDP (unwrapped record) and authoritative tracker_path; expected until Slice 0 enrollment and structural inquiry."
+}

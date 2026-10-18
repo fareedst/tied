@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "claim-surface.v1",
+  "revision": "easar-dogfood-slice3-v1",
+  "sourceRevision": "intent-elevation-matrix-rows-1-4",
+  "requestToken": "REQ-TIED_EASAR_RECOVERY",
+  "claims": [
+    {
+      "id": "5b297b89a22f852c",
+      "text": "validateEasarEngagementFacet rejects easar_full when BFIE mode is report_only",
+      "source": "intent-elevation-matrix#1",
+      "scope": "REQ-TIED_EASAR_RECOVERY"
+    },
+    {
+      "id": "230e9f36704d4589",
+      "text": "buildInventoryV1FromWalkSummary yields stable content_hash for identical walk input",
+      "source": "intent-elevation-matrix#2",
+      "scope": "REQ-TIED_EASAR_RECOVERY"
+    },
+    {
+      "id": "f3f3360de6502098",
+      "text": "MCP tied_easar_inventory_receipt_build registered on tool surface",
+      "source": "intent-elevation-matrix#3",
+      "scope": "REQ-TIED_EASAR_RECOVERY"
+    },
+    {
+      "id": "06059538417ce513",
+      "text": "tied_source_graph_refresh remains read-only on project YAML (regression guard for slice 2)",
+      "source": "intent-elevation-matrix#4",
+      "scope": "REQ-TIED_EASAR_RECOVERY"
+    }
+  ]
+}

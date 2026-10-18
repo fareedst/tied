@@ -1,0 +1,13 @@
+{
+  "schema_version": "code-graph-matrix-receipt.v1",
+  "matrix_row_number": 4,
+  "source_type": "code_graph",
+  "location": "mcp-server/src/source-graph/source-graph-composition.test.ts",
+  "disposition": "observed",
+  "graph_freshness_run_id": "easar-sg-freshness-20261018",
+  "graph_trace_id": "n/a-composition-only",
+  "index_path": "tied-bundle/reports/source-graph/source-graph-index.v1.json",
+  "source_graph_content_hash": "0d7cb7dcab4fde625b455f71d8da6d991e7e47938d186e950f8e9d07289ab88b",
+  "source_graph_ok": true,
+  "source_graph_diagnostics": []
+}

@@ -2249,6 +2249,17 @@ IMPL-TIED_DAE_VERIFICATION_CHARTER:
   detail_file: "implementation-decisions/IMPL-TIED_DAE_VERIFICATION_CHARTER.yaml"
   name: "DAE verification charter implementation"
   status: "Active"
+IMPL-TIED_EASAR_RECEIPTS:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_EASAR_RECOVERY"
+  description: "inventory.v1, graph-matrix linkage, claim-matrix map, reflexion-report.v1 synthesis adapters."
+  detail_file: "implementation-decisions/IMPL-TIED_EASAR_RECEIPTS.yaml"
+  name: "EASAR Receipt Builders"
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

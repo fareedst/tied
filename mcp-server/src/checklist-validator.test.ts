@@ -1157,3 +1157,32 @@ describe("Stage P trigger: non-agentstream unresolved evidence_refs", () => {
     assert.equal(result.depth, "minimal");
   });
 });
+
+// [REQ-TIED_EASAR_RECOVERY] [IMPL-TIED_EASAR_RECEIPTS] — engagement facet on Tracker.
+describe("EASAR engagement facet [REQ-TIED_EASAR_RECOVERY]", () => {
+  const integratedCitdp = {
+    risk_analysis: {
+      adversarial_inquiry: {
+        depth_tier: "integrated",
+        gate_policy: "advisory",
+        counterexamples: ["easar on report_only"],
+        falsification_questions: ["Can easar_full bypass pilot/strict?"],
+        disconfirming_observations: ["gate rejects report_only + easar_full"],
+        evidence_references: ["checklist-validator.test.ts"],
+      },
+    },
+  };
+
+  it("rejects easar_full when brownfield mode is report_only", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: {
+        brownfield_intent_elevation: { engagement: "easar_full", mode: "report_only" },
+        steps: [],
+      },
+      citdp: integratedCitdp,
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("easar_full_requires_pilot_or_strict_mode"));
+  });
+});

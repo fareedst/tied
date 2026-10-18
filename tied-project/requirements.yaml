@@ -2415,6 +2415,20 @@ REQ-TIED_DAE_VERIFICATION_CHARTER:
   name: "DAE verification charter (opt-in)"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_EASAR_RECOVERY:
+  category: "Functional"
+  description: "Mode C EASAR recovery orchestration via PROC-EASAR_RECOVERY; MVP slices compose BFIE, source graph, claims, inquiry, and envelope tooling."
+  detail_file: "requirements/REQ-TIED_EASAR_RECOVERY.yaml"
+  name: "Evidence-Assured Software Architecture Recovery (Mode C MVP)"
+  priority: "P1"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EASAR_RECEIPTS"
+    tests:
+      - "mcp-server/src/easar-receipts/*.test.ts"
 REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH:
   category: "Functional"
   cross_references:

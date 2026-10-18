@@ -1,0 +1,26 @@
+{
+  "schema_version": "inventory.v1",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "baseline_revision": "f1ef04ec73a810d13f433b7c4b394cbe9402b666",
+  "scoped_analysis_run_id": "easar-dogfood-inv-20261017",
+  "files_scanned": 8,
+  "languages": [
+    "ts"
+  ],
+  "entry_points": [],
+  "walk_summary": {
+    "roots_used": [
+      "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/checklist-validator.ts",
+      "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/easar-receipts"
+    ],
+    "skipped_paths_count": 0,
+    "followed_symlinks": "false"
+  },
+  "matrix_row_placeholders": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "content_hash": "2bb92beb19f8552132d67814905970582ba0ca174e2b134863168af70c7a070b"
+}

@@ -13,6 +13,7 @@ import {
 } from "./checklist-slug-registry.js";
 import { validateMethodologySurfacePairingGate } from "./methodology-conformance-effectiveness-pairing/pairing-gate.js";
 import { validateMethodologySurfaceExperimentGate } from "./methodology-surface-experiment-gate/gate.js";
+import { validateEasarEngagementFacet } from "./easar-receipts/engagement-facet.js";
 
 export type GatePhase = "pre_implementation" | "verification" | "close_out";
 export type AdversarialDepth = "minimal" | "integrated" | "strict_candidate";
@@ -1410,6 +1411,10 @@ export function validateChecklistGate(input: {
     now: input.now,
   });
   diagnostics.push(...trackerResult.diagnostics);
+
+  // [IMPL-TIED_EASAR_RECEIPTS] [REQ-TIED_EASAR_RECOVERY] — How: Mode C engagement facet on Tracker when present.
+  const engagementResult = validateEasarEngagementFacet(input.tracker);
+  if (!engagementResult.ok) diagnostics.push(...engagementResult.diagnostics);
 
   const gatePolicy = identityValue(section?.gate_policy);
   let findingAdvisoryDiagnostics: string[] = [];

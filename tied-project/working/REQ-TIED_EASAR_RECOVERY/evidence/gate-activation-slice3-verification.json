@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_EASAR_RECOVERY",
+    "project_id": "stdd-easar",
+    "run_id": "easar-slice3-verify-20261018",
+    "phase": "verification",
+    "scope": [
+      "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+      "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f"
+    ],
+    "scope_hash": "9e17abea92ee3da302053fae55d9fd555521ebc6640a48c60252d3ae5eb57244",
+    "artifact_hashes": {
+      "obligation-report.json": "2777c34353cfe5894895a2883b19095318ccc28cf3b5470f7ff3b92976b95fc8",
+      "finding-ledger.jsonl": "2d2e54f41e29b1572c898ad63c3bfa3424d3c89527d5451d5320b4844dfe968f",
+      "gate-result.json": "59ab494377925dbd39cc6ff443a6767d313b34a1d418064473c61ab002e92bab",
+      "evidence-provenance.json": "d97639872df0aa2150f23cbb1cf5686dd97e8f2ad91ad5a8538985405af87736"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EASAR_RECOVERY",
+      "project_id": "stdd-easar",
+      "run_id": "easar-slice3-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "9e17abea92ee3da302053fae55d9fd555521ebc6640a48c60252d3ae5eb57244",
+      "hash": "2777c34353cfe5894895a2883b19095318ccc28cf3b5470f7ff3b92976b95fc8",
+      "path": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_EASAR_RECOVERY",
+      "project_id": "stdd-easar",
+      "run_id": "easar-slice3-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "9e17abea92ee3da302053fae55d9fd555521ebc6640a48c60252d3ae5eb57244",
+      "hash": "2d2e54f41e29b1572c898ad63c3bfa3424d3c89527d5451d5320b4844dfe968f",
+      "path": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EASAR_RECOVERY",
+      "project_id": "stdd-easar",
+      "run_id": "easar-slice3-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "9e17abea92ee3da302053fae55d9fd555521ebc6640a48c60252d3ae5eb57244",
+      "hash": "59ab494377925dbd39cc6ff443a6767d313b34a1d418064473c61ab002e92bab",
+      "path": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EASAR_RECOVERY",
+      "project_id": "stdd-easar",
+      "run_id": "easar-slice3-verify-20261018",
+      "phase": "verification",
+      "scope_hash": "9e17abea92ee3da302053fae55d9fd555521ebc6640a48c60252d3ae5eb57244",
+      "hash": "d97639872df0aa2150f23cbb1cf5686dd97e8f2ad91ad5a8538985405af87736",
+      "path": "tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_EASAR_RECOVERY",
+    "project_id": "stdd-easar",
+    "run_id": "easar-slice3-verify-20261018",
+    "phase": "verification",
+    "scope": [
+      "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661",
+      "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f"
+    ],
+    "scope_hash": "9e17abea92ee3da302053fae55d9fd555521ebc6640a48c60252d3ae5eb57244"
+  },
+  "diagnostics": []
+}

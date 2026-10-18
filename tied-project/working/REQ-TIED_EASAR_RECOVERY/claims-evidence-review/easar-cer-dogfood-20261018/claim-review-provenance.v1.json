@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "claim-review-provenance.v1",
+  "runId": "easar-cer-dogfood-20261018",
+  "requestToken": "REQ-TIED_EASAR_RECOVERY",
+  "sourceRevision": "intent-elevation-matrix-rows-1-4",
+  "executionPolicy": "static_only",
+  "commands": [
+    "runClaimsEvidenceReview"
+  ],
+  "artifactHashes": {
+    "ledger": "44b48ef6ff9c6bc458405567dc5791a69ce2d5a1bef3989b73377e9b6536aa60",
+    "report": "110c4fffb2a3c5dc85439e2dc6582ffe8aad9bcbec447599f5c1c88f0966a874",
+    "frozenSurface": "77cb1c6ed5a2c758b877af1ccaf3597fed80092d64b84972e89d64512d0cc030"
+  }
+}

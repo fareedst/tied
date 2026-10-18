@@ -1,9 +1,9 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-09-12T00:21:38.500Z",
+    "generated_at": "2026-10-18T04:15:02.096Z",
     "generator": "request_evidence_envelope_patch",
-    "revision": 2
+    "revision": 3
   },
   "identity": {
     "request_token": "REQ-REQUEST_EVIDENCE_ENVELOPE",
@@ -24,6 +24,12 @@
       "phase": "pre_implementation",
       "started_at": null,
       "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "easar-close-out-20261018",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "evidence_chain_profile_generate"
     },
     {
       "run_id": "ree-envelope-refresh-20260911",
@@ -246,6 +252,17 @@
       "status": "present",
       "proof_boundaries": [
         "citdp_snapshot_only"
+      ]
+    },
+    {
+      "kind": "evidence_chain_profile",
+      "schema_version": "evidence-chain-profile.v1",
+      "path": "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/evidence-chain-profile.v1.json",
+      "content_hash": "sha256:2c8514fe7014294203dd88af8b3bf832be6fe193406ed9d4415da78ca7433d98",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
       ]
     },
     {

@@ -1,0 +1,790 @@
+{
+  "ok": true,
+  "gate_mode_applied": true,
+  "schema_version": "pseudocode-analysis-report.v1",
+  "grammar_version": "pseudocode-grammar.v2",
+  "analyzer_version": "1.0.0",
+  "proof_boundary": "Deterministic static analysis of essence_pseudocode within declared grammar and budgets; not runtime execution, not test execution, not complete behavioral verification.",
+  "token": "IMPL-TIED_EASAR_RECEIPTS",
+  "input_identity": {
+    "algorithm": "sha256",
+    "hash": "43d598c8fba6ef34b85c95750a4758af9730ef6480be260124f89dee753f0f8e",
+    "byte_length": 5020
+  },
+  "budgets_applied": {
+    "requested": {},
+    "effective": {
+      "max_parse_nodes": 5000,
+      "max_procedures": 256,
+      "max_cfg_blocks_per_procedure": 512,
+      "max_call_graph_edges": 2048,
+      "max_fixed_point_iterations": 32,
+      "max_path_conditions": 64,
+      "max_report_diagnostics": 500,
+      "max_source_bytes": 512000,
+      "max_cfg_join_iterations": 32
+    }
+  },
+  "truncated": false,
+  "diagnostics_truncated": false,
+  "sections": {
+    "parse": {
+      "procedure_count": 8,
+      "parse_node_count": 16,
+      "token_refs": [
+        "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+        "IMPL-TIED_EASAR_RECEIPTS",
+        "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+        "REQ-TIED_EASAR_RECOVERY",
+        "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+      ],
+      "unsupported_syntax_count": 0
+    },
+    "symbols": {
+      "procedures": [
+        "BUILD_CLAIM_MATRIX_MAP",
+        "BUILD_CODE_GRAPH_MATRIX_RECEIPT",
+        "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP",
+        "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+        "BUILD_EASAR_REFLEXION_REPORT_MCP",
+        "BUILD_INVENTORY_V1_FROM_WALK",
+        "BUILD_REFLEXION_REPORT_V1",
+        "VALIDATE_EASAR_ENGAGEMENT_FACET"
+      ],
+      "symbols": [
+        {
+          "name": "BUILD_CLAIM_MATRIX_MAP",
+          "kind": "procedure",
+          "declared_line": 69
+        },
+        {
+          "name": "BUILD_CODE_GRAPH_MATRIX_RECEIPT",
+          "kind": "procedure",
+          "declared_line": 40
+        },
+        {
+          "name": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP",
+          "kind": "procedure",
+          "declared_line": 82
+        },
+        {
+          "name": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+          "kind": "procedure",
+          "declared_line": 52
+        },
+        {
+          "name": "BUILD_EASAR_REFLEXION_REPORT_MCP",
+          "kind": "procedure",
+          "declared_line": 110
+        },
+        {
+          "name": "BUILD_INVENTORY_V1_FROM_WALK",
+          "kind": "procedure",
+          "declared_line": 7
+        },
+        {
+          "name": "BUILD_REFLEXION_REPORT_V1",
+          "kind": "procedure",
+          "declared_line": 98
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 11,
+          "procedure": "BUILD_INVENTORY_V1_FROM_WALK"
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP"
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP"
+        },
+        {
+          "name": "CALL",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "BUILD_EASAR_REFLEXION_REPORT_MCP"
+        },
+        {
+          "name": "IF",
+          "kind": "local",
+          "declared_line": 12,
+          "procedure": "VALIDATE_EASAR_ENGAGEMENT_FACET"
+        },
+        {
+          "name": "VALIDATE_EASAR_ENGAGEMENT_FACET",
+          "kind": "procedure",
+          "declared_line": 23
+        }
+      ],
+      "defined_calls": [],
+      "unresolved_calls": []
+    },
+    "cfg": {
+      "procedures": [
+        {
+          "procedure": "BUILD_INVENTORY_V1_FROM_WALK",
+          "nodes": [
+            {
+              "id": "BUILD_INVENTORY_V1_FROM_WALK::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 7
+            },
+            {
+              "id": "BUILD_INVENTORY_V1_FROM_WALK::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 7
+            },
+            {
+              "id": "BUILD_INVENTORY_V1_FROM_WALK::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 11,
+              "span": {
+                "line": 11,
+                "column": 3,
+                "end_line": 11,
+                "end_column": 28
+              }
+            },
+            {
+              "id": "BUILD_INVENTORY_V1_FROM_WALK::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 34
+              }
+            },
+            {
+              "id": "BUILD_INVENTORY_V1_FROM_WALK::n3",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 21
+              }
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_INVENTORY_V1_FROM_WALK::entry",
+              "to": "BUILD_INVENTORY_V1_FROM_WALK::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_INVENTORY_V1_FROM_WALK::n1",
+              "to": "BUILD_INVENTORY_V1_FROM_WALK::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_INVENTORY_V1_FROM_WALK::n2",
+              "to": "BUILD_INVENTORY_V1_FROM_WALK::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_INVENTORY_V1_FROM_WALK::n3",
+              "to": "BUILD_INVENTORY_V1_FROM_WALK::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_INVENTORY_V1_FROM_WALK::entry",
+            "BUILD_INVENTORY_V1_FROM_WALK::exit",
+            "BUILD_INVENTORY_V1_FROM_WALK::n1",
+            "BUILD_INVENTORY_V1_FROM_WALK::n2",
+            "BUILD_INVENTORY_V1_FROM_WALK::n3"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "VALIDATE_EASAR_ENGAGEMENT_FACET",
+          "nodes": [
+            {
+              "id": "VALIDATE_EASAR_ENGAGEMENT_FACET::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 66
+              }
+            },
+            {
+              "id": "VALIDATE_EASAR_ENGAGEMENT_FACET::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 5,
+                "end_line": 13,
+                "end_column": 62
+              }
+            },
+            {
+              "id": "VALIDATE_EASAR_ENGAGEMENT_FACET::n3",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 3,
+                "end_line": 14,
+                "end_column": 23
+              }
+            },
+            {
+              "id": "VALIDATE_EASAR_ENGAGEMENT_FACET::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 23
+            },
+            {
+              "id": "VALIDATE_EASAR_ENGAGEMENT_FACET::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 23
+            }
+          ],
+          "edges": [
+            {
+              "from": "VALIDATE_EASAR_ENGAGEMENT_FACET::entry",
+              "to": "VALIDATE_EASAR_ENGAGEMENT_FACET::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "VALIDATE_EASAR_ENGAGEMENT_FACET::n1",
+              "to": "VALIDATE_EASAR_ENGAGEMENT_FACET::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "VALIDATE_EASAR_ENGAGEMENT_FACET::n2",
+              "to": "VALIDATE_EASAR_ENGAGEMENT_FACET::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "VALIDATE_EASAR_ENGAGEMENT_FACET::n3",
+              "to": "VALIDATE_EASAR_ENGAGEMENT_FACET::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "VALIDATE_EASAR_ENGAGEMENT_FACET::entry",
+            "VALIDATE_EASAR_ENGAGEMENT_FACET::exit",
+            "VALIDATE_EASAR_ENGAGEMENT_FACET::n1",
+            "VALIDATE_EASAR_ENGAGEMENT_FACET::n2",
+            "VALIDATE_EASAR_ENGAGEMENT_FACET::n3"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_CODE_GRAPH_MATRIX_RECEIPT",
+          "nodes": [
+            {
+              "id": "BUILD_CODE_GRAPH_MATRIX_RECEIPT::n1",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 11,
+              "span": {
+                "line": 11,
+                "column": 3,
+                "end_line": 11,
+                "end_column": 25
+              }
+            },
+            {
+              "id": "BUILD_CODE_GRAPH_MATRIX_RECEIPT::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 40
+            },
+            {
+              "id": "BUILD_CODE_GRAPH_MATRIX_RECEIPT::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 40
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_CODE_GRAPH_MATRIX_RECEIPT::entry",
+              "to": "BUILD_CODE_GRAPH_MATRIX_RECEIPT::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_CODE_GRAPH_MATRIX_RECEIPT::n1",
+              "to": "BUILD_CODE_GRAPH_MATRIX_RECEIPT::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_CODE_GRAPH_MATRIX_RECEIPT::entry",
+            "BUILD_CODE_GRAPH_MATRIX_RECEIPT::exit",
+            "BUILD_CODE_GRAPH_MATRIX_RECEIPT::n1"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+          "nodes": [
+            {
+              "id": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 31
+              }
+            },
+            {
+              "id": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n2",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 34
+              }
+            },
+            {
+              "id": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n3",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 14,
+              "span": {
+                "line": 14,
+                "column": 3,
+                "end_line": 14,
+                "end_column": 23
+              }
+            },
+            {
+              "id": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 52
+            },
+            {
+              "id": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 52
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::entry",
+              "to": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n1",
+              "to": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n2",
+              "to": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n3",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n3",
+              "to": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::entry",
+            "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::exit",
+            "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n1",
+            "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n2",
+            "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP::n3"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_CLAIM_MATRIX_MAP",
+          "nodes": [
+            {
+              "id": "BUILD_CLAIM_MATRIX_MAP::n1",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 21
+              }
+            },
+            {
+              "id": "BUILD_CLAIM_MATRIX_MAP::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 69
+            },
+            {
+              "id": "BUILD_CLAIM_MATRIX_MAP::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 69
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_CLAIM_MATRIX_MAP::entry",
+              "to": "BUILD_CLAIM_MATRIX_MAP::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_CLAIM_MATRIX_MAP::n1",
+              "to": "BUILD_CLAIM_MATRIX_MAP::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_CLAIM_MATRIX_MAP::entry",
+            "BUILD_CLAIM_MATRIX_MAP::exit",
+            "BUILD_CLAIM_MATRIX_MAP::n1"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP",
+          "nodes": [
+            {
+              "id": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 26
+              }
+            },
+            {
+              "id": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 19
+              }
+            },
+            {
+              "id": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 82
+            },
+            {
+              "id": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 82
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::entry",
+              "to": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n1",
+              "to": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n2",
+              "to": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::entry",
+            "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::exit",
+            "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n1",
+            "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP::n2"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_REFLEXION_REPORT_V1",
+          "nodes": [
+            {
+              "id": "BUILD_REFLEXION_REPORT_V1::n1",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 11,
+              "span": {
+                "line": 11,
+                "column": 3,
+                "end_line": 11,
+                "end_column": 28
+              }
+            },
+            {
+              "id": "BUILD_REFLEXION_REPORT_V1::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 98
+            },
+            {
+              "id": "BUILD_REFLEXION_REPORT_V1::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 98
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_REFLEXION_REPORT_V1::entry",
+              "to": "BUILD_REFLEXION_REPORT_V1::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_REFLEXION_REPORT_V1::n1",
+              "to": "BUILD_REFLEXION_REPORT_V1::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_REFLEXION_REPORT_V1::entry",
+            "BUILD_REFLEXION_REPORT_V1::exit",
+            "BUILD_REFLEXION_REPORT_V1::n1"
+          ],
+          "truncated": false
+        },
+        {
+          "procedure": "BUILD_EASAR_REFLEXION_REPORT_MCP",
+          "nodes": [
+            {
+              "id": "BUILD_EASAR_REFLEXION_REPORT_MCP::n1",
+              "kind": "statement",
+              "label": "assignment",
+              "line": 12,
+              "span": {
+                "line": 12,
+                "column": 3,
+                "end_line": 12,
+                "end_column": 29
+              }
+            },
+            {
+              "id": "BUILD_EASAR_REFLEXION_REPORT_MCP::n2",
+              "kind": "statement",
+              "label": "RETURN",
+              "line": 13,
+              "span": {
+                "line": 13,
+                "column": 3,
+                "end_line": 13,
+                "end_column": 25
+              }
+            },
+            {
+              "id": "BUILD_EASAR_REFLEXION_REPORT_MCP::entry",
+              "kind": "entry",
+              "label": "entry",
+              "line": 110
+            },
+            {
+              "id": "BUILD_EASAR_REFLEXION_REPORT_MCP::exit",
+              "kind": "exit",
+              "label": "exit",
+              "line": 110
+            }
+          ],
+          "edges": [
+            {
+              "from": "BUILD_EASAR_REFLEXION_REPORT_MCP::entry",
+              "to": "BUILD_EASAR_REFLEXION_REPORT_MCP::n1",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_EASAR_REFLEXION_REPORT_MCP::n1",
+              "to": "BUILD_EASAR_REFLEXION_REPORT_MCP::n2",
+              "kind": "sequential"
+            },
+            {
+              "from": "BUILD_EASAR_REFLEXION_REPORT_MCP::n2",
+              "to": "BUILD_EASAR_REFLEXION_REPORT_MCP::exit",
+              "kind": "sequential"
+            }
+          ],
+          "reachable": [
+            "BUILD_EASAR_REFLEXION_REPORT_MCP::entry",
+            "BUILD_EASAR_REFLEXION_REPORT_MCP::exit",
+            "BUILD_EASAR_REFLEXION_REPORT_MCP::n1",
+            "BUILD_EASAR_REFLEXION_REPORT_MCP::n2"
+          ],
+          "truncated": false
+        }
+      ]
+    },
+    "call_graph": {
+      "edges": [],
+      "unresolved": [],
+      "truncated": false
+    },
+    "abstract": {
+      "facts": [
+        {
+          "variable": "CALL",
+          "procedure": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP",
+          "fact": "defined",
+          "line": 12
+        },
+        {
+          "variable": "CALL",
+          "procedure": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+          "fact": "defined",
+          "line": 12
+        },
+        {
+          "variable": "CALL",
+          "procedure": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+          "fact": "defined",
+          "line": 13
+        },
+        {
+          "variable": "CALL",
+          "procedure": "BUILD_EASAR_REFLEXION_REPORT_MCP",
+          "fact": "defined",
+          "line": 12
+        },
+        {
+          "variable": "CALL",
+          "procedure": "BUILD_INVENTORY_V1_FROM_WALK",
+          "fact": "defined",
+          "line": 11
+        },
+        {
+          "variable": "CALL",
+          "procedure": "BUILD_INVENTORY_V1_FROM_WALK",
+          "fact": "defined",
+          "line": 12
+        },
+        {
+          "variable": "IF",
+          "procedure": "VALIDATE_EASAR_ENGAGEMENT_FACET",
+          "fact": "defined",
+          "line": 12
+        }
+      ],
+      "path_conditions": [],
+      "effect_gaps": [],
+      "termination_unknown": []
+    },
+    "obligations": {
+      "decision_tables": [],
+      "path_obligations": []
+    },
+    "traceability": {
+      "block_edges": [
+        {
+          "block": "BUILD_CLAIM_MATRIX_MAP",
+          "tokens": [
+            "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_EASAR_RECOVERY"
+          ],
+          "line": 69
+        },
+        {
+          "block": "BUILD_CODE_GRAPH_MATRIX_RECEIPT",
+          "tokens": [
+            "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_EASAR_RECOVERY"
+          ],
+          "line": 40
+        },
+        {
+          "block": "BUILD_EASAR_CLAIM_MATRIX_MAP_MCP",
+          "tokens": [
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+            "REQ-TIED_EASAR_RECOVERY"
+          ],
+          "line": 82
+        },
+        {
+          "block": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+          "tokens": [
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_EASAR_RECOVERY",
+            "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+          ],
+          "line": 52
+        },
+        {
+          "block": "BUILD_EASAR_REFLEXION_REPORT_MCP",
+          "tokens": [
+            "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_EASAR_RECOVERY"
+          ],
+          "line": 110
+        },
+        {
+          "block": "BUILD_INVENTORY_V1_FROM_WALK",
+          "tokens": [
+            "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_EASAR_RECOVERY"
+          ],
+          "line": 7
+        },
+        {
+          "block": "BUILD_REFLEXION_REPORT_V1",
+          "tokens": [
+            "ARCH-TIED_EASAR_ARTIFACT_MODEL",
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_EASAR_RECOVERY"
+          ],
+          "line": 98
+        },
+        {
+          "block": "VALIDATE_EASAR_ENGAGEMENT_FACET",
+          "tokens": [
+            "IMPL-TIED_EASAR_RECEIPTS",
+            "REQ-TIED_EASAR_RECOVERY"
+          ],
+          "line": 23
+        }
+      ]
+    }
+  },
+  "diagnostics": [],
+  "unsupported_syntax": [],
+  "unknowns": []
+}

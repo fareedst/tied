@@ -1,0 +1,22 @@
+[
+  {
+    "claimId": "5b297b89a22f852c",
+    "proofBoundary": "static_analysis",
+    "path": "mcp-server/src/checklist-validator.test.ts"
+  },
+  {
+    "claimId": "230e9f36704d4589",
+    "proofBoundary": "static_analysis",
+    "path": "mcp-server/src/easar-receipts/easar-receipts.test.ts"
+  },
+  {
+    "claimId": "f3f3360de6502098",
+    "proofBoundary": "static_analysis",
+    "path": "mcp-server/src/tools/index.ts"
+  },
+  {
+    "claimId": "06059538417ce513",
+    "proofBoundary": "static_analysis",
+    "path": "mcp-server/src/source-graph/source-graph-composition.test.ts"
+  }
+]

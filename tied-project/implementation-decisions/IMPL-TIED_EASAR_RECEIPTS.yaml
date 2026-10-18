@@ -1,0 +1,28 @@
+IMPL-TIED_EASAR_RECEIPTS:
+  IMPL-TIED_EASAR_RECEIPTS:
+    code_locations:
+      files:
+        - description: "Checklist engagement facet validation"
+          path: "mcp-server/src/checklist-validator.ts"
+        - description: "EASAR receipt builders and validators"
+          path: "mcp-server/src/easar-receipts/"
+      functions:
+        - description: "Build inventory.v1 from scoped analysis walk_summary"
+          file: "mcp-server/src/easar-receipts/inventory-v1.ts"
+          name: "buildInventoryV1FromWalkSummary"
+        - description: "Synthesize reflexion-report.v1 from inquiry gate allowed"
+          file: "mcp-server/src/easar-receipts/reflexion-report-v1.ts"
+          name: "buildReflexionReportV1"
+        - description: "MCP wrapper for reflexion-report.v1 write + envelope patch"
+          file: "mcp-server/src/easar-receipts/reflexion-report-mcp.ts"
+          name: "buildEasarReflexionReport"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
+      implementation: []
+      requirements:
+        - "REQ-TIED_EASAR_RECOVERY"
+    description: "Receipt builders, matrix linkage helpers, read-only export adapters for EASAR Mode C."
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EASAR_RECEIPTS-pseudocode.md"
+    name: "EASAR Receipt Builders"
+    status: "Active"

@@ -76,6 +76,10 @@ import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
 import { runPlumbDiffImpactPreview } from "../analysis/plumb-diff-impact-preview.js";
 import { validateBindingInventory } from "../analysis/binding-inventory.js";
 import { brownfieldIntentEvidenceValidate } from "../brownfield-intent-evidence/intent-elevation.js";
+import { buildEasarInventoryReceipt } from "../easar-receipts/inventory-receipt-mcp.js";
+import { buildEasarCodeGraphMatrixReceipt } from "../easar-receipts/graph-matrix-receipt-mcp.js";
+import { buildEasarClaimMatrixMap } from "../easar-receipts/claim-matrix-map-mcp.js";
+import { buildEasarReflexionReport } from "../easar-receipts/reflexion-report-mcp.js";
 import {
   tiedSourceGraphFreshness,
   tiedSourceGraphMap,
@@ -2806,6 +2810,165 @@ export const allTools = [
       return textContent(
         JSON.stringify(validateBindingInventory(args.rows as Parameters<typeof validateBindingInventory>[0]), null, 2),
       );
+    },
+  },
+  {
+    name: "tied_easar_inventory_receipt_build",
+    config: {
+      description:
+        "Build [REQ-TIED_EASAR_RECOVERY] inventory.v1 receipt from scoped analysis walk_summary. Optional write under tied-project/working/{REQ}/evidence/; envelope patch when TIED_ENVELOPE_HOOKS=1.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token (e.g. REQ-TIED_EASAR_RECOVERY)."),
+        project_root: z.string().optional().describe("Client project root; defaults from TIED layout."),
+        baseline_revision: z.string().optional().describe("Git SHA or baseline lock revision."),
+        scoped_analysis_run_id: z.string().optional().describe("Stable run id for receipt cross-refs."),
+        roots: z.array(z.string()).optional().describe("Scoped analysis roots; default mcp-server/src."),
+        output_path: z.string().optional().describe("Repo-relative or absolute path to write inventory.v1.json."),
+        matrix_row_placeholders: z.array(z.string()).optional(),
+        entry_points: z.array(z.string()).optional(),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      project_root?: string;
+      baseline_revision?: string;
+      scoped_analysis_run_id?: string;
+      roots?: string[];
+      output_path?: string;
+      matrix_row_placeholders?: string[];
+      entry_points?: string[];
+    }) => {
+      try {
+        const result = await buildEasarInventoryReceipt(args);
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        return textContent(JSON.stringify({ ok: false, error: message }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_easar_code_graph_matrix_receipt_build",
+    config: {
+      description:
+        "Build [REQ-TIED_EASAR_RECOVERY] code-graph-matrix-receipt.v1 from tied_source_graph_freshness + matrix code_graph row. Optional write under tied-project/working/{REQ}/evidence/; envelope patch when TIED_ENVELOPE_HOOKS=1.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token (e.g. REQ-TIED_EASAR_RECOVERY)."),
+        matrix_row_number: z.number().int().min(1).describe("Intent elevation matrix row number."),
+        row: z
+          .object({
+            source_type: z.string(),
+            location: z.string(),
+            disposition: z.string(),
+          })
+          .describe("Matrix row fields (source_type must be code_graph)."),
+        repo_root: z.string().optional().describe("Repository root for source graph; defaults to project root."),
+        project_root: z.string().optional().describe("Client project root; defaults from TIED layout."),
+        index_rel_path: z.string().optional().describe("Relative path to source-graph index JSON."),
+        graph_freshness_run_id: z.string().optional().describe("Operator correlation id; derived from freshness when omitted."),
+        graph_trace_id: z.string().optional().describe("Optional trace symbol id or composition-only marker."),
+        output_path: z.string().optional().describe("Repo-relative or absolute path to write receipt JSON."),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      matrix_row_number: number;
+      row: { source_type: string; location: string; disposition: string };
+      repo_root?: string;
+      project_root?: string;
+      index_rel_path?: string;
+      graph_freshness_run_id?: string;
+      graph_trace_id?: string;
+      output_path?: string;
+    }) => {
+      try {
+        const result = await buildEasarCodeGraphMatrixReceipt(args);
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        return textContent(JSON.stringify({ ok: false, error: message }, null, 2));
+      }
+    },
+  },
+  {
+    name: "tied_easar_claim_matrix_map_build",
+    config: {
+      description:
+        "Build [REQ-TIED_EASAR_RECOVERY] claim-matrix-map.v1 from claim_id ↔ matrix row pairs. Optional write under tied-project/working/{REQ}/evidence/; envelope patch when TIED_ENVELOPE_HOOKS=1.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token (e.g. REQ-TIED_EASAR_RECOVERY)."),
+        entries: z
+          .array(
+            z.object({
+              claim_id: z.string(),
+              matrix_row_number: z.number().int().min(1),
+            }),
+          )
+          .min(1)
+          .describe("claim.id ↔ intent elevation matrix row numbers."),
+        project_root: z.string().optional().describe("Client project root; defaults from TIED layout."),
+        output_path: z.string().optional().describe("Repo-relative or absolute path to write claim-matrix-map.v1.json."),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      entries: { claim_id: string; matrix_row_number: number }[];
+      project_root?: string;
+      output_path?: string;
+    }) => {
+      const result = buildEasarClaimMatrixMap(args);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_easar_reflexion_report_build",
+    config: {
+      description:
+        "Build [REQ-TIED_EASAR_RECOVERY] reflexion-report.v1 export-only synthesis from inquiry obligation ref + gate_allowed. Optional write under tied-project/working/{REQ}/evidence/; envelope patch when TIED_ENVELOPE_HOOKS=1.",
+      inputSchema: z.object({
+        request_token: z.string().describe("REQ token (e.g. REQ-TIED_EASAR_RECOVERY)."),
+        inquiry_run_id: z.string().describe("Distinct adversarial inquiry run_id for this slice verification."),
+        gate_allowed: z.boolean().describe("Whether verification gate allowed progression."),
+        obligation_report_ref: z.string().describe("Relative path to obligation-report.json (pointer only)."),
+        adversarial_ledger_ref: z
+          .string()
+          .optional()
+          .describe("Optional pointer to finding-ledger.jsonl; body is never merged."),
+        divergences: z
+          .array(
+            z.object({
+              arch_token: z.string(),
+              summary: z.string(),
+              graph_evidence_ref: z.string().optional(),
+              severity: z.enum(["info", "warn", "block"]),
+            }),
+          )
+          .optional()
+          .describe("Optional ARCH ↔ graph divergence rows."),
+        project_root: z.string().optional().describe("Client project root; defaults from TIED layout."),
+        output_path: z
+          .string()
+          .optional()
+          .describe("Repo-relative or absolute path to write reflexion-report.v1.json."),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      inquiry_run_id: string;
+      gate_allowed: boolean;
+      obligation_report_ref: string;
+      adversarial_ledger_ref?: string;
+      divergences?: {
+        arch_token: string;
+        summary: string;
+        graph_evidence_ref?: string;
+        severity: "info" | "warn" | "block";
+      }[];
+      project_root?: string;
+      output_path?: string;
+    }) => {
+      const result = buildEasarReflexionReport(args);
+      return textContent(JSON.stringify(result, null, 2));
     },
   },
   {

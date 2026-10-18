@@ -899,6 +899,16 @@ ARCH-TIED_DAE_VERIFICATION_CHARTER:
   source_index: "architecture-decisions.yaml"
   status: "Proposed"
   type: "ARCH"
+ARCH-TIED_EASAR_ARTIFACT_MODEL:
+  cross_references:
+    - "IMPL-TIED_EASAR_RECEIPTS"
+    - "REQ-TIED_EASAR_RECOVERY"
+  description: "Portable-to-canonical map and ledger separation for Mode C recovery."
+  detail_file: "architecture-decisions/ARCH-TIED_EASAR_ARTIFACT_MODEL.yaml"
+  name: "EASAR Artifact Model"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -2256,6 +2266,16 @@ IMPL-TIED_DAE_VERIFICATION_CHARTER:
   source_index: "implementation-decisions.yaml"
   status: "Planned"
   type: "IMPL"
+IMPL-TIED_EASAR_RECEIPTS:
+  cross_references:
+    - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
+    - "REQ-TIED_EASAR_RECOVERY"
+  description: "inventory.v1, graph-matrix, claim map, reflexion-report builders."
+  detail_file: "implementation-decisions/IMPL-TIED_EASAR_RECEIPTS.yaml"
+  name: "EASAR Receipt Builders"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_FEEDBACK_PROMOTION:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -2582,6 +2602,17 @@ PROC-COMMIT_MESSAGES:
     last_updated: "2026-03-03T00:00:00.000Z"
     registered: "2026-03-03T00:00:00.000Z"
   name: "Commit message format and guidelines"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-EASAR_RECOVERY:
+  cross_references:
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "PROC-BROWNFIELD_INTENT_ELEVATION"
+    - "REQ-TIED_EASAR_RECOVERY"
+  description: "Mode C orchestration composing BFIE, source graph, claims, fidelity, adversarial inquiry, and envelope tools."
+  detail_file: "null"
+  name: "EASAR Recovery Process"
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
@@ -3848,6 +3879,17 @@ REQ-TIED_DAE_VERIFICATION_CHARTER:
   name: "DAE verification charter"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_EASAR_RECOVERY:
+  cross_references:
+    - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
+    - "IMPL-TIED_EASAR_RECEIPTS"
+    - "PROC-EASAR_RECOVERY"
+  description: "Umbrella REQ for EASAR Mode C MVP slices 0-4."
+  detail_file: "requirements/REQ-TIED_EASAR_RECOVERY.yaml"
+  name: "Evidence-Assured Software Architecture Recovery (Mode C MVP)"
+  source_index: "requirements.yaml"
+  status: "In Progress"
   type: "REQ"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"

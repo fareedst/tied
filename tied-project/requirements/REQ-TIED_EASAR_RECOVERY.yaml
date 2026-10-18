@@ -1,0 +1,42 @@
+REQ-TIED_EASAR_RECOVERY:
+  REQ-TIED_EASAR_RECOVERY:
+    category: "Functional"
+    description: "Mode C EASAR recovery engagement composes existing brownfield, graph, claims, fidelity, adversarial inquiry, and request envelope REQs under integrated depth."
+    name: "Evidence-Assured Software Architecture Recovery (Mode C MVP)"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Single orchestration token for Mode C without forking runtimes."
+        - "Versioned receipts under committed working roots."
+      problems_solved:
+        - "EASAR documented in methodology but not enrolled in tied-project."
+        - "No engagement facet easar_full on Tracker."
+      why: "Bridge docs/methodologies/evidence-assured-software-architecture-recovery.md section 7 into executable TIED stack."
+    related_requirements:
+      depends_on:
+        - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+        - "REQ-TIED_ADVERSARIAL_INQUIRY"
+        - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+        - "REQ-TIED_FIDELITY_RESEARCH"
+        - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+      related_to: []
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "SC-EASAR-CLAIMS — claim.id maps to matrix row numbers."
+      - criterion: "SC-EASAR-ENROLL — REQ/ARCH/IMPL/PROC tokens enrolled with depends_on links."
+      - criterion: "SC-EASAR-GATES — integrated phase-aware inquiry gates per slice."
+      - criterion: "SC-EASAR-GRAPH — matrix code_graph rows cite graph freshness and trace ids."
+      - criterion: "SC-EASAR-INV — inventory.v1.json receipt from scoped analysis."
+      - criterion: "SC-EASAR-PROC — PROC-EASAR_RECOVERY sequences existing slugs without duplicating full checklist."
+      - criterion: "SC-EASAR-REFLEX — reflexion-report.v1.json export-only synthesis."
+      - criterion: "SC-EASAR-TRACKER — engagement easar_full accepted when mode is pilot or strict."
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
+      implementation:
+        - "IMPL-TIED_EASAR_RECEIPTS"
+      tests:
+        - "mcp-server/src/easar-receipts/*.test.ts"

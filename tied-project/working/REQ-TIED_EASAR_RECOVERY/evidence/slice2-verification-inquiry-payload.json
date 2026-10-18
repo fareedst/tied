@@ -1,0 +1,144 @@
+{
+  "graph": {
+    "projectId": "stdd-easar",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EASAR_RECOVERY#SC-EASAR-GRAPH",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "criterion-rev-s2-graph",
+          "sourceRevision": "easar-s2-src"
+        },
+        "architectureConstraintIds": ["constraint:arch-easar-graph-matrix"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint:arch-easar-graph-matrix",
+        "implementationBlockIds": [
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+          "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+          "kind": "block",
+          "name": "BUILD_CODE_GRAPH_MATRIX_RECEIPT",
+          "derivation": "content",
+          "revision": "0c6c30ad6e1943ea",
+          "sourceRevision": "easar-s2-src"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb",
+          "kind": "block",
+          "name": "BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP",
+          "derivation": "content",
+          "revision": "ec3bf7e434818156",
+          "sourceRevision": "easar-s2-src"
+        }
+      }
+    ],
+    "evidenceLoci": [
+      {
+        "id": "loci-s2-graph-unit",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:code_graph matrix receipt binds freshness run id",
+        "sourceRevision": "easar-s2-src"
+      },
+      {
+        "id": "loci-s2-graph-mcp-test",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb",
+        "kind": "test",
+        "location": "mcp-server/src/easar-receipts/graph-matrix-receipt-mcp.test.ts",
+        "sourceRevision": "easar-s2-src"
+      },
+      {
+        "id": "loci-s2-graph-mcp-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/graph-matrix-receipt-mcp.ts:buildEasarCodeGraphMatrixReceipt",
+        "sourceRevision": "easar-s2-src"
+      },
+      {
+        "id": "loci-s2-graph-link-prod",
+        "blockId": "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+        "kind": "production",
+        "location": "mcp-server/src/easar-receipts/graph-matrix-link.ts:buildCodeGraphMatrixReceipt",
+        "sourceRevision": "easar-s2-src"
+      }
+    ]
+  },
+  "fidelity": {
+    "blockRevision": "ec3bf7e434818156",
+    "specification": [
+      {
+        "id": "s2-spec-bind",
+        "kind": "behavior",
+        "value": "code-graph-matrix-receipt.v1 binds matrix_row_number, graph_freshness_run_id, and index_path for code_graph rows.",
+        "order": 1
+      },
+      {
+        "id": "s2-spec-freshness",
+        "kind": "behavior",
+        "value": "MCP builder calls tied_source_graph_freshness read-only and writes receipt under working evidence.",
+        "order": 2
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "s2-test-unit-bind",
+        "statementId": "s2-spec-bind",
+        "kind": "behavior",
+        "value": "buildCodeGraphMatrixReceipt rejects non-code_graph rows and requires freshness run id",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "0c6c30ad6e1943ea",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/easar-receipts.test.ts:code_graph matrix receipt binds freshness run id"
+        }
+      },
+      {
+        "id": "s2-test-mcp",
+        "statementId": "s2-spec-freshness",
+        "kind": "behavior",
+        "value": "buildEasarCodeGraphMatrixReceipt writes receipt with source graph index_path",
+        "order": 2,
+        "reliable": true,
+        "blockRevision": "ec3bf7e434818156",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/graph-matrix-receipt-mcp.test.ts"
+        }
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "s2-prod-mcp",
+        "statementId": "s2-spec-freshness",
+        "kind": "behavior",
+        "value": "buildEasarCodeGraphMatrixReceipt invokes tiedSourceGraphFreshness and buildCodeGraphMatrixReceipt",
+        "order": 1,
+        "reliable": true,
+        "blockRevision": "ec3bf7e434818156",
+        "source": {
+          "location": "mcp-server/src/easar-receipts/graph-matrix-receipt-mcp.ts:buildEasarCodeGraphMatrixReceipt"
+        }
+      }
+    ]
+  },
+  "scope": [
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431",
+    "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb"
+  ],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EASAR_RECOVERY",
+  "run_id": "easar-slice2-verify-20261018",
+  "phase": "verification"
+}
