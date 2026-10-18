@@ -1,0 +1,8 @@
+docs(readme): certifiable operator onboarding three-band IA
+
+Restructure store README for macOS quick start, EDSE/certifiability
+operator guidance, and consolidated install appendix; add structure
+test and REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING stack.
+
+Evidence: tied-project/working/REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING/evidence/
+REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING

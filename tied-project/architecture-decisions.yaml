@@ -2386,6 +2386,15 @@ ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
       - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
     requirements:
       - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
+ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE:
+  detail_file: "architecture-decisions/ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE.yaml"
+  name: "Store README information architecture"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_STORE_README_SECTIONS"
+    requirements:
+      - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
 ARCH-TIED_STRUCTURE:
   alternatives_considered:
     - cons:

@@ -2882,6 +2882,16 @@ IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
       - "ARCH-TIED_STORE_BUNDLE_GIT_POLICY"
     requirements:
       - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
+IMPL-TIED_STORE_README_SECTIONS:
+  detail_file: "implementation-decisions/IMPL-TIED_STORE_README_SECTIONS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_STORE_README_SECTIONS-pseudocode.md"
+  name: "Store README section contracts"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    requirements:
+      - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
 IMPL-TIED_TWO_FOLDER_LAYOUT:
   description: "Layout resolver, legacy detection, migrate, gitignore v2, config loaders, working-root split."
   detail_file: "implementation-decisions/IMPL-TIED_TWO_FOLDER_LAYOUT.yaml"

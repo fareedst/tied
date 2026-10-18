@@ -1,0 +1,35 @@
+REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
+  REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
+    category: "Documentation"
+    description: "Restructure root README into macOS quick start, certifiable-workflow operator body, and full install appendix with structure-test enforcement."
+    name: "Store README certifiable operator onboarding"
+    priority: "P2"
+    rationale:
+      benefits:
+        - "Operators see build path and EDSE certifiability story before long install prose."
+      problems_solved:
+        - "Legacy README buries toolchain setup and omits PCR operator guidance."
+      why: "Sponsor-directed IA for certifiable workflows onboarding."
+    satisfaction_criteria:
+      - criterion: "Band 2 documents PCR proof boundary and verify path."
+        id: "SC-README-PCR-OPS"
+        metric: "README.md"
+      - criterion: "Client development index certifiability scenario row."
+        id: "SC-README-INDEX"
+        metric: "client-development-index.md"
+      - criterion: "Preserved bootstrap anchors and structure test pass."
+        id: "SC-README-ANCHORS"
+        metric: "store-readme-structure.test.ts"
+      - criterion: "Root README opens Quick start macOS before Install and use; certifiable body between them."
+        id: "SC-README-BANDS"
+        metric: "store-readme-structure.test.ts"
+      - criterion: "Unified mcp-server workspace build documented in Band 1 and Band 3."
+        id: "SC-README-TOOLCHAIN"
+        metric: "README.md"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+      implementation:
+        - "IMPL-TIED_STORE_README_SECTIONS"
+  status: "Implemented"

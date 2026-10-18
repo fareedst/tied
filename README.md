@@ -2,173 +2,107 @@
 
 **TIED Methodology Version**: 3.0.0
 
-[TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is a methodology template for projects built in any language or stack.
+[TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store** (methodology source, MCP server, and bootstrap engine). For the executable process and Core seven references, start at the [client development index](tied-bundle/docs/client-development-index.md).
 
-## The problem TIED addresses
+## Quick start (macOS)
 
-In a short-lived coding task, the current conversation may be enough context. In a long-lived system, intent is spread across sessions, agents, issue descriptions, design discussions, tests, and implementation details. When that context is not recorded in a form the next person or agent can reload, the team must reconstruct it from code.
+From the TIED repository root on macOS (Unix / Git Bash). Windows and full prerequisites: [Install and use](#install-and-use) below.
 
-That reconstruction creates a predictable failure mode:
+### Build TIED MCP and tools
 
-- clearly specified behavior is usually easy to review;
-- unspecified behavior is often filled in by an implementation choice;
-- the choice may become an accidental requirement;
-- the mismatch is discovered later in review, integration, maintenance, or production.
+`tied-install` and IDE MCP require a built workspace:
 
-TIED is designed for work where preserving the reasoning matters: multi-session development, agent-assisted implementation, changing tools or languages, and systems expected to live through refactors. It does not promise zero rework. It gives intent a durable structure that can be revised when the system teaches us something new.
-
-## Sponsor and executor: the iceberg model
-
-The human sponsor stays above the waterline. The sponsor:
-
-- states what must be true and why;
-- bounds the change with unchanged behavior, non-goals, and explicit success conditions;
-- resolves ambiguous terms;
-- decides at classification points, such as accepting an architectural trade-off or owning a deferral;
-- reviews evidence and outcomes rather than choreographing every file edit.
-
-The executor is the discipline below the waterline. TIED carries the sponsor’s intent through:
-
-```text
-shared vocabulary  → understanding
-change analysis    → blast radius and risks
-requirements       → what must be true (REQ)
-architecture       → boundaries and trade-offs (ARCH)
-implementation     → operational contracts (IMPL pseudo-code)
-tests              → executable evidence
-code               → mechanism
-composition        → binding seams tested separately
-gates              → block, defer with ownership, or prove
-LEAP               → reconcile drift upward (IMPL → ARCH → REQ)
+```bash
+cd mcp-server && npm install && npm run build
+cd ../tools/bootstrap && npm install
 ```
 
-The sponsor designs from the top. The methodology makes the mass below the waterline visible and reviewable.
+This produces `mcp-server/dist/index.js`, the umbrella **`tied`** CLI, **`tied agentstream`**, and bootstrap verification gates. See [TIED source repository setup](#tied-source-repository-setup) for step details and Windows commands.
 
-## Gated lifecycle and classification
+### Greenfield
 
-TIED treats unspecified behavior as work to classify, not as permission for an agent to improvise silently.
+| Situation | Command (from store root) | Next step |
+| --- | --- | --- |
+| Disposable smoke client | `source scripts/build-commands.sh && test-new-tied-client` | Open the new client in Cursor; enable MCP |
+| External client directory | `./tied-install.sh /path/to/your/project` | [Getting started with a new client project](#getting-started-with-a-new-client-project) |
+| Primary implementation repo (code + `tied-project/` in one tree) | `/path/to/tied-store/tied-install.sh --mode linked --store /abs/path/to/tied-store .` from the **primary** root | [Primary implementation repository](#primary-implementation-repository) |
+
+After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`, then run REQ-scoped work with Prompt Composer skills (for example `/plan-new-feature`). Optional trial prompts: [catalog-greenfield plan-new-feature](docs/demos/catalog-greenfield-plan-new-feature-prompts.md).
+
+**Store-as-primary note:** This git repository is both the store and a TIED client (`tied-project/`). To linked-install into **other** primary repos, use a **separate store clone** as `--store` (see [Methodology development layout](#methodology-development-layout)).
+
+### Brownfield
+
+| Situation | Start here |
+| --- | --- |
+| Legacy `tied/` layout | `tied-install --migrate-layout` from the client or primary root |
+| Methodology refresh | [methodology-migration.md](tied-bundle/docs/methodology-migration.md) |
+| Architecture recovery | [Evidence-assured software architecture recovery (EASAR)](docs/methodologies/evidence-assured-software-architecture-recovery.md) |
+| External workflows / integrators | [Operating environment externalities](docs/tied-operating-environment-externalities.md) |
+
+Then follow `[PROC-AGENT_REQ_CHECKLIST]` via the [agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md).
+
+## Performing work in certifiable workflows
+
+TIED work is designed so intent, evidence, and gates can support **external appraisal** without the repository claiming third-party certification. Deeper methodology narrative lives in the [client development index](tied-bundle/docs/client-development-index.md), [LEAP guide](tied-bundle/docs/LEAP.md), and [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
+
+### What “certifiable” means here
+
+[Certification of context-adaptive workflows](docs/methodologies/certification-of-workflows.md) distinguishes process compliance, capability, and effectiveness. In this repository, **certifiability readiness** means machine-assessable artifacts (spec, mappings, conformance, capability profile, independent assessment, bounded experiments) that support **`ready_for_external_appraisal`** — not **`certified`**, ISO compliance, or CMMI ratings. Stages **1–5** and **7** are in-repo tooling; stages **6** and **8** are human-owned external appraisal. Vocabulary: [process-certification-readiness.md](tied-project/vocab/process-certification-readiness.md).
+
+### EDSE daily loop
+
+**Evidence-Driven Situational Engineering (EDSE)** composes with TIED: characterize context → select practices (CASE) → execute the checklist → collect verification evidence. See [context-adaptive-engineering.md](tied-project/vocab/context-adaptive-engineering.md).
 
 ```mermaid
 flowchart LR
-    Vocab["Vocabulary\nresolve/preload"]
-    CITDP["CITDP\nchange analysis"]
-    Stack["REQ ARCH IMPL"]
-    Tests["RED tests"]
-    Code["Code"]
-    Composition["Composition\nevidence"]
-    Gates["Gates\nblock/defer/prove"]
-    LEAP["LEAP\nreconcile drift"]
-
-    Vocab --> CITDP --> Stack --> Tests --> Code --> Composition --> Gates --> LEAP
-    LEAP -.->|"scope change"| Stack
+  Vocab[Vocabulary_PRELOAD]
+  CITDP[CITDP_and_Tracker]
+  Stack[REQ_ARCH_IMPL]
+  Execute[TDD_composition_gates]
+  Envelope[Request_evidence_envelope]
+  Readiness[PCR_readiness_artifacts]
+  Vocab --> CITDP --> Stack --> Execute --> Envelope --> Readiness
 ```
 
-At the relevant gate, an edge case or open question belongs in one of five buckets:
+### Executable process spine
 
-1. **Required behavior** — a product obligation recorded in a REQ.
-2. **Architectural constraint** — a boundary or trade-off recorded in an ARCH decision.
-3. **Implementation failure mode** — an operational risk or error path recorded in an IMPL decision.
-4. **Test obligation** — evidence that must be created and run.
-5. **Explicit deferral or waiver** — an owned risk with a reason, owner, and expiry or review point.
+1. **Vocabulary** — client [routing.md](tied-project/vocab/routing.md) → PRELOAD matched glossaries.
+2. **Change analysis** — CITDP + per-request Tracker copy ([checklist YAML](tied-bundle/docs/agent-req-implementation-checklist.yaml)).
+3. **Stack** — REQ → ARCH → IMPL pseudo-code (with block token comments) before RED tests.
+4. **Gates** — `tied gate check --request-token REQ-… --phase pre_implementation|verification|close_out` (see [client development index](tied-bundle/docs/client-development-index.md) § adherence ergonomics).
+5. **Envelope** — request evidence envelope at close-out when the Tracker requires it.
 
-If a decision cannot be classified, the checklist and configured gate policy can block progression until the missing intent is resolved. An explicit deferral is different from silently leaving a gap.
+Use the [multi-harness entry matrix](tied-bundle/docs/client-development-index.md#multi-harness-entry-matrix-cursor-vs-claude-code) to separate REQ-scoped Prompt Composer work from FEAT lifecycle orchestration.
 
-The negative space is part of the design. Record what must remain unchanged, what is out of scope, and which counterexamples would falsify “done.” The full procedure is the [agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md), identified by `[PROC-AGENT_REQ_CHECKLIST]`.
+### Certifiability readiness (`[REQ-TIED_PROCESS_CERTIFICATION_READINESS]`)
 
-## What TIED is
+Read-only MCP/CLI layer: EDSE process spec, 12207 reference mapping (reference only), conformance matrix, seven-dimension capability profile (no rollup score), independent assessment file ingress, adaptive-effectiveness fixtures, assessor pack.
 
-TIED creates a traceability chain:
-
-```text
-vocabulary → REQ (what and why) → ARCH (high-level how)
-          → IMPL (operational how and pseudo-code)
-          → tests → code → composition and quality evidence
-```
-
-Semantic tokens such as `[REQ-FEATURE]`, `[ARCH-DESIGN]`, and `[IMPL-IMPLEMENTATION]` connect the records, tests, code, and documentation. The token registry is `tied-project/semantic-tokens.yaml`.
-
-TIED is methodology-level and language-independent. Templates and process rules can be adapted to Go, Ruby, TypeScript, Swift, or another stack. Language-specific syntax belongs in the implementation decision for that project; the intent and traceability model remains the same.
-
-LEAP means **Logic Elevation And Propagation**. When tests or code disagree with an existing implementation decision, reconcile the written logic first: update IMPL, then ARCH and REQ when scope changed. LEAP does not invent requirements; it resynchronizes an existing stack.
-
-## Benefits, costs, and fit
-
-TIED is most useful when context has to survive time, people, agents, and implementation changes.
-
-Potential benefits include:
-
-- **Temporal context** — the reasons behind decisions can be reloaded after a session ends.
-- **Horizontal consistency** — vocabulary gives sponsors, pseudo-code, tests, and code one preferred set of terms.
-- **Vertical traceability** — a requirement can be followed through architecture, implementation, evidence, and code.
-- **Implementation fluidity** — a project can change tools or languages while preserving and reconciling intent.
-- **Visible technical debt** — ambiguity, missing failure modes, binding gaps, and owned deferrals become discussable records.
-- **Reviewable evidence** — reviewers can distinguish unit, composition, E2E, structural, and other evidence instead of relying on a green status alone.
-
-Those benefits have costs:
-
-- terms and boundaries need clarification earlier;
-- records, tokens, and links need maintenance;
-- gates add friction when work is genuinely underspecified;
-- a team can create false confidence if it bypasses gates or records evidence without challenging the assumptions.
-
-TIED is a poor fit for a disposable script, a one-off experiment, or work whose context will not outlive a single session. A lightweight vocabulary and requirement record may be enough for a small change; integrated checklist, evidence, and adversarial depth should be reserved for work whose risk and lifespan justify them.
-
-## Proof boundaries and honest limits
-
-TIED makes a class of technical debt more explicit and reviewable. That is an operational hypothesis about a workflow, not a controlled claim that debt or bugs disappear.
-
-```text
-valid records != correct product
-passing tests != complete edge-case coverage
-traceability != runtime correctness
-```
-
-Records can be wrong. Tests can miss behavior. Structural checks can pass while runtime behavior fails. Gate receipts and consistency checks show what was checked and what remains unresolved; they do not replace domain judgment, execution, or production observation.
-
-## How to use this repository
-
-There are three useful starting points:
-
-1. **Evaluate TIED** — read this overview, then the [Core seven references](tied-bundle/docs/client-development-index.md), [LEAP guide](tied-bundle/docs/LEAP.md), and [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
-2. **Bootstrap an external client directory** — run `./tied-install.sh` (default **linked**) from this **TIED store** checkout against another project path; see [Getting started with a new client project](#getting-started-with-a-new-client-project).
-3. **Bootstrap a primary implementation repository** — your product git repo is also the TIED client (`tied-project/` plus application code); use a separate built **TIED store** checkout and [Primary implementation repository](#primary-implementation-repository).
-
-The TIED repository is the source of the methodology. A client receives its own copy of the layout and can maintain project-specific requirements, decisions, and tokens without changing the inherited methodology.
-
-## Spec-driven execution (optional)
-
-For a new client, an ordered feature-spec YAML can drive one change at a time through the checklist. A spec commonly contains `order`, `feature_name`, `goal`, `rules`, `examples`, `boundary_conditions`, and `out_of_scope`.
-
-Example:
-
-```yaml
-- order: 1
-  feature_name: "Default search root"
-  goal: "A search runs from the current working directory when no root path is provided."
-  rules:
-    - "If no root path is given, the search root is the current working directory."
-    - "The run summary shows the effective search root."
-  examples:
-    - given: "the current working directory contains app.rb"
-      when: "a file-name search for 'app' is run with no root path"
-      then: "app.rb is eligible to match and the summary shows the current working directory"
-  boundary_conditions:
-    - "An empty root path is treated the same as no root path."
-  out_of_scope: "Resolving shell aliases or environment-variable syntax in the path"
-```
-
-Run one selected spec with the agentstream batch driver (`scripts/run-feature-batch.sh` → `tied agentstream`):
+After `cd mcp-server && npm run build`:
 
 ```bash
-./scripts/run-feature-batch.sh \
-  --workspace . \
-  --prompt-file ./tied-project/agent-preload-contract.yaml \
-  --lead-checklist-yaml $TIED/tied-bundle/docs/agent-req-implementation-checklist.yaml \
-  --feature-spec-batch-yaml ./prompts/initial-specs.yaml \
-  --select-order 1
+export TIED_BASE_PATH="/absolute/path/to/tied-project"
+node --import tsx --test src/process-certification-readiness/*.test.ts
+.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency
 ```
 
-`scripts/run-feature-batch.sh` delegates to `scripts/run-feature-batch-agentstream.sh` (`tied agentstream` / `@tied/agentstream` after `cd mcp-server && npm run build`). Optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [mcp-server/packages/agentstream/README.md](mcp-server/packages/agentstream/README.md).
+CLI (same surface as MCP): `tied certification spec-validate`, `conformance-evaluate`, `capability-evaluate`, `independent-assess`, `adaptive-experiment-run`, `readiness-report-compose`, `assessor-pack-generate` — see `mcp-server/src/cli/process-certification-cli.ts`.
+
+### REQ-scoped prompt types
+
+Installed under `.cursor/skills/` (and `.claude/skills/` when bootstrapped): for example **`plan-new-feature`**, **`refine-plan`**, **`build-plan`**, **`plan-close-out`**. **[AGENTS.md](AGENTS.md)** remains authoritative. Prompt skills do not replace checklist gates or integrated adversarial inquiry when those apply.
+
+### Honest limits
+
+- Valid records ≠ correct product behavior.
+- Passing tests ≠ complete edge coverage.
+- Readiness **`ready_for_external_appraisal`** ≠ certification or standard compliance.
+- Reference mappings do not establish ISO/CMMI conformance claims.
+
+## Install and use
+
+Complete reference for store setup, client bootstrap, MCP, automation, and layout. Operator mechanics for `tied-install` layers: [tools/bootstrap/README.md](tools/bootstrap/README.md).
 
 ## TIED source repository setup
 
@@ -188,7 +122,7 @@ cd mcp-server && npm install && npm run build
 cd ../tools/bootstrap && npm install
 ```
 
-The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp`, `@tied/cli`, `@tied/agentstream`, `@tied/bootstrap`, `@tied/yaml-cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and **`tied agentstream`** (TypeScript-only after Phase **4d**). Ruby `tools/agent-stream` was removed in Phase **4b**. Legacy Go emergency reinstall: [phase4c-deprecation-notice.md](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md) and [phase4d-go-oracle-freeze.json](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
+The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp`, `@tied/cli`, `@tied/agentstream`, `@tied/bootstrap`, `@tied/yaml-cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and **`tied agentstream`** (TypeScript-only after Phase **4d**). Ruby `tools/agent-stream` was removed in Phase **4b**. Legacy Go emergency reinstall: [phase4c-deprecation-notice.md](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md) and [phase4d-go-oracle-freeze.json](tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
 
 **Windows (`cmd.exe`)** (from the TIED repository root):
 
@@ -208,7 +142,7 @@ Notes:
 
 - `npm install` in `mcp-server` also runs `prepare` → `npm run build`, so an explicit `npm run build` is optional but documents intent.
 - `scripts/run-feature-batch-agentstream.sh` requires a built `@tied/cli` (`cd mcp-server && npm run build`) unless `AGENTSTREAM` points at another compatible binary.
-- See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`tied-install.cmd`, `tied-install.cmd`, `test-new-tied-client.cmd`, PowerShell `.ps1` shims).
+- See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`tied-install.cmd`, `test-new-tied-client.cmd`, PowerShell `.ps1` shims).
 
 ## Getting started with a new client project
 
@@ -366,6 +300,41 @@ For YAML workflows without IDE MCP, see [TIED YAML agent index](tied-bundle/docs
 
 When you work in **this** TIED git repository as the store **and** also track project REQ/ARCH/IMPL here, keep a **separate** store clone for installing into other primary repos. Do not run `tied-install .` with `--store` equal to the same root (self-install refused). A pinned store under `tied_versions/...` while product code lives elsewhere is a normal pattern.
 
+## Spec-driven execution (optional)
+
+For a new client, an ordered feature-spec YAML can drive one change at a time through the checklist. A spec commonly contains `order`, `feature_name`, `goal`, `rules`, `examples`, `boundary_conditions`, and `out_of_scope`.
+
+Example:
+
+```yaml
+- order: 1
+  feature_name: "Default search root"
+  goal: "A search runs from the current working directory when no root path is provided."
+  rules:
+    - "If no root path is given, the search root is the current working directory."
+    - "The run summary shows the effective search root."
+  examples:
+    - given: "the current working directory contains app.rb"
+      when: "a file-name search for 'app' is run with no root path"
+      then: "app.rb is eligible to match and the summary shows the current working directory"
+  boundary_conditions:
+    - "An empty root path is treated the same as no root path."
+  out_of_scope: "Resolving shell aliases or environment-variable syntax in the path"
+```
+
+Run one selected spec with the agentstream batch driver (`scripts/run-feature-batch.sh` → `tied agentstream`):
+
+```bash
+./scripts/run-feature-batch.sh \
+  --workspace . \
+  --prompt-file ./tied-project/agent-preload-contract.yaml \
+  --lead-checklist-yaml $TIED/tied-bundle/docs/agent-req-implementation-checklist.yaml \
+  --feature-spec-batch-yaml ./prompts/initial-specs.yaml \
+  --select-order 1
+```
+
+`scripts/run-feature-batch.sh` delegates to `scripts/run-feature-batch-agentstream.sh` (`tied agentstream` / `@tied/agentstream` after `cd mcp-server && npm run build`). Optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [mcp-server/packages/agentstream/README.md](mcp-server/packages/agentstream/README.md).
+
 ## Tooling and scripts
 
 - `tied-install.sh` — bootstrap a project with the inherited TIED layout.
@@ -376,7 +345,7 @@ When you work in **this** TIED git repository as the store **and** also track pr
 - `feature-orchestrator` / `tied` feature commands — feature lifecycle CLI from the same workspace (see [feature-orchestration vocabulary](tied-project/vocab/feature-orchestration.md)).
 - `tools/bundled-tied-yaml-skill/` — canonical tied-yaml skill source; clients receive `.cursor/skills/tied-yaml/` via `tied-install`.
 - `scripts/yaml_tool.sh` and `scripts/lint_yaml.sh` — canonicalize or lint TIED YAML according to the documented edit loop.
-- `scripts/prepare_readme_demo.sh` — bootstrap `tied-project/` when needed and run the README’s structured YAML query examples.
+- `scripts/prepare_readme_demo.sh` — bootstrap `tied-project/` when needed and run structured YAML query examples.
 - `mcp-server/` — TypeScript MCP server for TIED indexes, details, traceability, and validation.
 
 ## Where to read next

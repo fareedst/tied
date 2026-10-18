@@ -1150,6 +1150,17 @@ ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE:
+  cross_references:
+    - "IMPL-TIED_STORE_README_SECTIONS"
+    - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+  description: "Three-band README information architecture for certifiable operator onboarding."
+  metadata:
+    last_updated: "2026-10-18"
+    registered: "2026-10-18"
+  name: "Store README information architecture"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "IMPL-TIED_FILES"
@@ -2594,6 +2605,17 @@ IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
   description: "applyStoreGitignoreProfile and migrate tracked local working"
   name: "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_STORE_README_SECTIONS:
+  cross_references:
+    - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+  description: "README section contracts enforced by store-readme-structure.test.ts."
+  metadata:
+    last_updated: "2026-10-18"
+    registered: "2026-10-18"
+  name: "Store README section contracts"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_UNIFIED_TOOLCHAIN:
@@ -4270,6 +4292,17 @@ REQ-TIED_STORE_BUNDLE_GIT_POLICY:
   description: "Store bundle git policy — asymmetric tied-bundle/ tracking vs clients"
   name: "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
   source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
+  cross_references:
+    - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    - "IMPL-TIED_STORE_README_SECTIONS"
+  description: "Store root README macOS quick start, certifiable workflow body, and install appendix."
+  metadata:
+    last_updated: "2026-10-18"
+    registered: "2026-10-18"
+  name: "Store README certifiable operator onboarding"
   status: "Active"
   type: "REQ"
 REQ-TIED_UNIFIED_TOOLCHAIN:

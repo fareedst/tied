@@ -1,0 +1,12 @@
+IMPL-TIED_STORE_README_SECTIONS:
+  IMPL-TIED_STORE_README_SECTIONS:
+    description: "Section contracts for root README bands and VERIFY_README_STRUCTURE checks."
+    name: "Store README section contracts"
+    status: "Active"
+    tests:
+      - "mcp-server/src/store-readme-structure.test.ts"
+    traceability:
+      architecture:
+        - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+      requirements:
+        - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"

@@ -3120,6 +3120,17 @@ REQ-TIED_STORE_BUNDLE_GIT_POLICY:
       - "ARCH-TIED_STORE_BUNDLE_GIT_POLICY"
     implementation:
       - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
+REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
+  category: "Documentation"
+  detail_file: "requirements/REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING.yaml"
+  name: "Store README certifiable operator onboarding"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    implementation:
+      - "IMPL-TIED_STORE_README_SECTIONS"
 REQ-TIED_TWO_FOLDER_LAYOUT:
   category: "Infrastructure"
   description: "Two-folder client layout: committed tied-project traceability store and local tied-bundle methodology/docs; no top-level tied/ after install or migrate."
