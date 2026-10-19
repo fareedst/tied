@@ -1,6 +1,6 @@
 # traceable-commit
 
-**Adherence ledger commit:** (pending — 2026-10-19). **Slice C commit:** `16c1e9de`. **v1 program wave:** `d80f00d2` … `eb8e1ed2`.
+**Adherence ledger commit:** `ff6f2f6a` (2026-10-19). **Slice C commit:** `16c1e9de`. **v1 program wave:** `d80f00d2` … `eb8e1ed2`.
 
 ## Adherence ledger scope (2026-10-19)
 

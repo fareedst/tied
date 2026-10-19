@@ -37,6 +37,7 @@
 | Close-out inquiry + gate | **allowed** | [slice8-close-out-gate.md](./slice8-close-out-gate.md), [close_out-2026-10-19T17-16-21-639Z.json](../gates/close_out-2026-10-19T17-16-21-639Z.json) |
 | Traceable commit (v1 close-out) | **done** | `eb8e1ed2` … `4bb32c84` wave |
 | Traceable commit (Slice C) | **done** | `16c1e9de` — [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
+| Traceable commit (adherence) | **done** | `ff6f2f6a` — gate ledger reconcile + workspace hygiene |
 
 ---
 
