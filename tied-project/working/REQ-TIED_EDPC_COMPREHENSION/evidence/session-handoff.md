@@ -35,7 +35,8 @@
 | Verification inquiry + gate | **allowed** | [slice7-verification-gate.md](./slice7-verification-gate.md), [verification-2026-10-19T16-12-36-116Z.json](../gates/verification-2026-10-19T16-12-36-116Z.json) |
 | Envelope + chain profile | done | [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json), [evidence-chain-profile.v1.json](./evidence-chain-profile.v1.json) — **no envelope error gaps** |
 | Close-out inquiry + gate | **allowed** | [slice8-close-out-gate.md](./slice8-close-out-gate.md), [close_out-2026-10-19T16-25-28-150Z.json](../gates/close_out-2026-10-19T16-25-28-150Z.json) |
-| Traceable commit | **deferred** | [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
+| Traceable commit (v1 close-out) | **done** | `eb8e1ed2` … `4bb32c84` wave |
+| Traceable commit (Slice C) | **done** | `16c1e9de` — [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
 
 ---
 
@@ -66,8 +67,8 @@
 
 ## Resume here
 
-1. **Sponsor `traceable-commit`** per [traceable-commit-evidence.md](./traceable-commit-evidence.md) (include Slice C evidence + updated ledger/manifest/charter).  
-2. **Done:** Chart Viewer CER — [slice-c-claims-evidence-review-chartviewer.md](./slice-c-claims-evidence-review-chartviewer.md); publish manifest **`gaps: []`**.  
+1. **Optional:** push `main` when ready (35 commits ahead of `origin/main`).  
+2. **Done:** Slice C traceable-commit **`16c1e9de`**.  
 3. **Gitignore:** applied — see [gitignore-close-out-hygiene.md](./gitignore-close-out-hygiene.md); quality-collect logs under `tied-bundle/working/.../quality-collect/`.
 
 **Docs slice (2026-10-19):** [client-development-index](../../../../tied-bundle/docs/client-development-index.md), [methodology-composition-matrix §2 row 12](../../../../docs/comparisons/methodology-composition-matrix.md), [brownfield-intent-elevation](../../../../tied-bundle/docs/brownfield-intent-elevation.md), [easar-recovery.md](../../../vocab/easar-recovery.md) pointer, `edpc-queues.v1.example.yaml` template, EASAR `edpc_full` gate fixture, REQ detail LEAP fix.

@@ -1,6 +1,6 @@
-# traceable-commit (deferred)
+# traceable-commit
 
-**Policy:** plan-close-out-commit-deferred — sponsor runs traceable-commit when ready.
+**Slice C commit:** `16c1e9de` (2026-10-19). **v1 program wave:** `d80f00d2` … `eb8e1ed2`.
 
 ## Proposed scope (from [session-handoff.md](./session-handoff.md))
 
