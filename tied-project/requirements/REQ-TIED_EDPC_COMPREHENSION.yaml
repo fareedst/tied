@@ -10,7 +10,7 @@ REQ-TIED_EDPC_COMPREHENSION:
     problems_solved:
       - "EDPC methodology documented but not enrolled in tied-project."
       - "No evidence_access_tier model or EDPC MCP validate/route/publish."
-    why: "Bridge docs/methodologies/EDPC_Methodology_and_Workflows.md into executable TIED stack."
+    why: "Ship EDPC methodology under tied-bundle/docs and enroll orchestration MCP + PROC-EDPC for client installs."
   related_requirements:
     depends_on:
       - "REQ-REQUEST_EVIDENCE_ENVELOPE"

@@ -10,8 +10,8 @@
 
 When the per-request Tracker sets **`brownfield_intent_elevation.engagement: edpc_full`**, follow **`[PROC-EDPC_COMPREHENSION]`** for tier-bounded workflows A–G (charter, access matrix, route, publish). Add optional **`edpc_engagement`** on the Tracker (`evidence_access_tier`, `target_repository_root`, `production_touch`, charter and matrix paths). Keep **`brownfield_intent_elevation.mode`** as the authority for pilot/strict vs report-only; do **not** add a parallel `recovery_engagement.mode` field.
 
-- **Vocabulary:** [edpc-comprehension.md](../../tied-project/vocab/edpc-comprehension.md)
-- **Methodology:** [EDPC_Methodology_and_Workflows.md](../../docs/methodologies/EDPC_Methodology_and_Workflows.md)
+- **Vocabulary:** [edpc-comprehension.md](../vocab/edpc-comprehension.md)
+- **Methodology:** [EDPC_Methodology_and_Workflows.md](./EDPC_Methodology_and_Workflows.md)
 - **MCP (read-only on project YAML):** `tied_edpc_access_validate`, `tied_edpc_engagement_validate`, `tied_edpc_workflow_route`, `tied_edpc_publish_build`
 
 Workflow **B** (baseline inventory/graph) still uses **`[PROC-EASAR_RECOVERY]`** receipt builders; EDPC composes them rather than replacing receipt schemas.

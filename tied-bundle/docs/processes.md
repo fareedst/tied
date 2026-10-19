@@ -236,7 +236,7 @@ Engagements where Tracker metadata includes `brownfield_intent_elevation.engagem
 7. **G Refresh** — documented stale-claim triggers; `tied_edpc_workflow_route` reprioritize (no continuous daemon in v1)
 
 ### Narrative spec
-See [EDPC_Methodology_and_Workflows.md](../../docs/methodologies/EDPC_Methodology_and_Workflows.md) and [edpc-comprehension.md](../../tied-project/vocab/edpc-comprehension.md).
+See [EDPC_Methodology_and_Workflows.md](./EDPC_Methodology_and_Workflows.md) and [edpc-comprehension.md](../vocab/edpc-comprehension.md).
 
 ---
 

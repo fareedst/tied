@@ -12,6 +12,7 @@ import {
   verifyAdversarialInquiryMethodology,
   verifyVocabularyOwnershipMethodology,
   verifyPromptTypeMethodology,
+  verifyEdpcMethodology,
   verifyQmmMethodology,
   verifyQaEvidenceChainMethodology,
   verifyQmmCohortExportMethodology,
@@ -55,6 +56,7 @@ export function runPostInstallVerification(projectRoot, options) {
     verifyAdversarialInquiryMethodology(bundlePath, verifyOpts);
     verifyVocabularyOwnershipMethodology(bundlePath, verifyOpts);
     verifyPromptTypeMethodology(bundlePath, verifyOpts);
+    verifyEdpcMethodology(bundlePath, verifyOpts);
     verifyQmmMethodology(bundlePath, verifyOpts);
     verifyQaEvidenceChainMethodology(bundlePath, verifyOpts);
     verifyQmmCohortExportMethodology(bundlePath, verifyOpts);
@@ -79,6 +81,7 @@ export function runPostInstallVerification(projectRoot, options) {
   verifyAdversarialInquiryMethodology(bundlePath, verifyOpts);
   verifyVocabularyOwnershipMethodology(bundlePath, verifyOpts);
   verifyPromptTypeMethodology(bundlePath, verifyOpts);
+  verifyEdpcMethodology(bundlePath, verifyOpts);
   verifyQmmMethodology(bundlePath, verifyOpts);
   verifyQaEvidenceChainMethodology(bundlePath, verifyOpts);
   verifyQmmCohortExportMethodology(bundlePath, verifyOpts);

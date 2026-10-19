@@ -34,6 +34,7 @@ import {
   verifyAdversarialInquiryMethodology,
   verifyVocabularyOwnershipMethodology,
   verifyPromptTypeMethodology,
+  verifyEdpcMethodology,
   verifyQmmMethodology,
   verifyQaEvidenceChainMethodology,
   verifyQmmCohortExportMethodology,
@@ -266,6 +267,7 @@ export function bootstrapTied(projectRoot, options = {}) {
   verifyAdversarialInquiryMethodology(tiedDir);
   verifyVocabularyOwnershipMethodology(tiedDir);
   verifyPromptTypeMethodology(tiedDir);
+  verifyEdpcMethodology(tiedDir);
   verifyQmmMethodology(tiedDir);
   verifyQaEvidenceChainMethodology(tiedDir);
   verifyQmmCohortExportMethodology(tiedDir);

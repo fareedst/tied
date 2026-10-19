@@ -62,7 +62,12 @@ export function installMethodologyLinked(projectRoot, options) {
 
   for (const f of paths.DOCS_TO_COPY) {
     const storeDoc = path.join(storeDocs, f);
-    writeDocRedirectStub(path.join(docsDest, f), storeDoc, f);
+    const dest = path.join(docsDest, f);
+    if (fs.existsSync(storeDoc)) {
+      linkOrMaterializeCopy(storeDoc, dest);
+    } else {
+      writeDocRedirectStub(dest, storeDoc, f);
+    }
   }
 
   materializeLinkedMethodologyBundle(projectRoot, options.storeRoot, options.methodologyBundle ?? "live");

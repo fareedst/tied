@@ -97,6 +97,45 @@ export function verifyAdversarialInquiryMethodology(verifyRoot, options = {}) {
  * @param {string} verifyRoot
  * @param {{ bundleLayout?: boolean }} [options]
  */
+/**
+ * @param {string} verifyRoot
+ * @param {{ bundleLayout?: boolean }} [options]
+ */
+export function verifyEdpcMethodology(verifyRoot, options = {}) {
+  const relPath = (rel) =>
+    options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;
+  const requiredRel = loadManifest().EDPC_METHODOLOGY_REQUIRED_FILES ?? [];
+  if (requiredRel.length === 0) {
+    return;
+  }
+  sayWarn("MUST verify EDPC methodology bundle artifacts before completion.");
+  let missing = 0;
+  for (const rel of requiredRel) {
+    const legacyRel = rel.startsWith("methodology/") ? rel : `methodology/${rel}`;
+    const p = path.join(verifyRoot, relPath(legacyRel));
+    if (!fs.existsSync(p)) {
+      sayErr(`MISSING mandatory EDPC methodology artifact: ${p}`);
+      missing = 1;
+    }
+  }
+  const processesPath = path.join(
+    verifyRoot,
+    relPath("methodology/docs/processes.md"),
+  );
+  if (fs.existsSync(processesPath)) {
+    const text = fs.readFileSync(processesPath, "utf8");
+    if (!text.includes("[PROC-EDPC_COMPREHENSION]")) {
+      sayErr(`MISSING [PROC-EDPC_COMPREHENSION] in ${processesPath}`);
+      missing = 1;
+    }
+  }
+  if (missing) {
+    sayErr("EDPC methodology verification failed; client bootstrap is incomplete.");
+    throw new Error("EDPC_METHODOLOGY_GATE_FAILED");
+  }
+  sayOk("MUST verify EDPC methodology bundle artifacts: complete.");
+}
+
 export function verifyPromptTypeMethodology(verifyRoot, options = {}) {
   const relPath = (rel) =>
     options.bundleLayout ? bundleRelativeVerifyPath(rel) : rel;

@@ -72,6 +72,7 @@
     "commit-guidelines.md",
     "composition-coverage.md",
     "detail-files-schema.md",
+    "EDPC_Methodology_and_Workflows.md",
     "evidence-chain-profile.md",
     "agent-req-implementation-checklist.yaml",
     "ai-agent-tied-mcp-usage.md",
@@ -128,6 +129,13 @@
     "architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml",
     "implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT.yaml",
     "implementation-decisions/IMPL-PROMPT_TYPE_SUBAGENT-pseudocode.md"
+  ],
+  "EDPC_METHODOLOGY_REQUIRED_FILES": [
+    "docs/EDPC_Methodology_and_Workflows.md",
+    "docs/processes.md",
+    "docs/brownfield-intent-elevation.md",
+    "docs/client-development-index.md",
+    "templates/edpc-queues.v1.example.yaml"
   ],
   "ADVERSARIAL_INQUIRY_METHODOLOGY_REQUIRED_FILES": [
     "requirements/REQ-TIED_ADVERSARIAL_INQUIRY.yaml",

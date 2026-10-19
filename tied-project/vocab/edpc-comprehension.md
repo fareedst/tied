@@ -2,7 +2,7 @@
 
 **Scope:** Domain vocabulary for Evidence-Driven Program Comprehension (EDPC) orchestration in TIED clients. Terms **do not** replace REQ/ARCH/IMPL authority.
 
-**Traceability:** `[REQ-TIED_EDPC_COMPREHENSION]` · `[ARCH-TIED_EDPC_ARTIFACT_MODEL]` · `[IMPL-TIED_EDPC_ACCESS]` · `[IMPL-TIED_EDPC_ORCHESTRATION]` · `[IMPL-TIED_EDPC_PUBLISH]` · `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]` · `[PROC-EDPC_COMPREHENSION]` · methodology [EDPC_Methodology_and_Workflows.md](../../docs/methodologies/EDPC_Methodology_and_Workflows.md)
+**Traceability:** `[REQ-TIED_EDPC_COMPREHENSION]` · `[ARCH-TIED_EDPC_ARTIFACT_MODEL]` · `[IMPL-TIED_EDPC_ACCESS]` · `[IMPL-TIED_EDPC_ORCHESTRATION]` · `[IMPL-TIED_EDPC_PUBLISH]` · `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]` · `[PROC-EDPC_COMPREHENSION]` · methodology [EDPC_Methodology_and_Workflows.md](../../tied-bundle/docs/EDPC_Methodology_and_Workflows.md)
 
 **Status:** Slice 0 enrollment (2026-10-19). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
 
@@ -29,7 +29,7 @@
 | **A** | Commission | Charter + access matrix; MCP access/engagement validate |
 | **B** | Baseline | `[PROC-EASAR_RECOVERY]` inventory/graph receipts |
 | **C** | Deep slice | Source graph, Track C, claims review |
-| **D** | Failure / ops | Fidelity/adversarial; runtime when tier allows (v1 dogfood deferred) |
+| **D** | Failure / ops | **OFSM v1** (`operational-failure-state-bundle.v1.yaml` + health snapshot); `tied_edpc_failure_state_validate` / `_build` (Slice D); fidelity/adversarial when integrated; prod Observed only when `production_touch` allows |
 | **E** | Change impact | Scoped analysis; edits only at `source_change` |
 | **F** | Verify / publish | `tied_edpc_publish_build`, envelope, gates |
 | **G** | Refresh | Stale-claim triggers; route reprioritize (no daemon in v1) |
@@ -48,6 +48,10 @@ Path: `tied-project/working/{REQ-TOKEN}/evidence/edpc/`
 | `scm-snapshot-shell.v1.yaml` | SCM index + receipt refs |
 | `claims-ledger.v1.yaml` | Investigation claims (not adversarial finding-ledger) |
 | `edpc-publish-manifest.v1.json` | Workflow F freeze |
+| `operational-failure-state-bundle.v1.yaml` | Workflow D index (Slice D) |
+| `capability-health-snapshot.v1.yaml` | Workflow D present-state classifications |
+| `observation-window.v1.yaml` | Time-bound ops conclusions (EDPC principle 7) |
+| `failure-mode-register.v1.yaml` | Workflow D FMEA-style register |
 | `edpc-queues.v1.yaml` | Five live queues (EDPC §5); template [edpc-queues.v1.example.yaml](../../tied-bundle/templates/edpc-queues.v1.example.yaml) |
 
 ---
