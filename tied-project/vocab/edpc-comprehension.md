@@ -2,7 +2,7 @@
 
 **Scope:** Domain vocabulary for Evidence-Driven Program Comprehension (EDPC) orchestration in TIED clients. Terms **do not** replace REQ/ARCH/IMPL authority.
 
-**Traceability:** `[REQ-TIED_EDPC_COMPREHENSION]` · `[ARCH-TIED_EDPC_ARTIFACT_MODEL]` · `[IMPL-TIED_EDPC_ACCESS]` · `[IMPL-TIED_EDPC_ORCHESTRATION]` · `[IMPL-TIED_EDPC_PUBLISH]` · `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]` · `[IMPL-TIED_EDPC_FAILURE_OPS]` · `[PROC-EDPC_COMPREHENSION]` · methodology [EDPC_Methodology_and_Workflows.md](../../tied-bundle/docs/EDPC_Methodology_and_Workflows.md)
+**Traceability:** `[REQ-TIED_EDPC_COMPREHENSION]` · `[REQ-TIED_EDPC_CLIENT_ASSESSMENT]` · `[ARCH-TIED_EDPC_ARTIFACT_MODEL]` · `[ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL]` · `[IMPL-TIED_EDPC_ACCESS]` · `[IMPL-TIED_EDPC_ORCHESTRATION]` · `[IMPL-TIED_EDPC_PUBLISH]` · `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]` · `[IMPL-TIED_EDPC_FAILURE_OPS]` · `[IMPL-TIED_EDPC_CLIENT_ASSESSMENT]` · `[PROC-EDPC_COMPREHENSION]` · `[PROC-EDPC_CLIENT_ASSESSMENT]` · methodology [EDPC_Methodology_and_Workflows.md](../../tied-bundle/docs/EDPC_Methodology_and_Workflows.md)
 
 **Status:** Slice 0 enrollment (2026-10-19). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
 
@@ -33,6 +33,7 @@
 | **E** | Change impact | Scoped analysis; edits only at `source_change` |
 | **F** | Verify / publish | `tied_edpc_publish_build`, envelope, gates |
 | **G** | Refresh | Stale-claim triggers; route reprioritize (no daemon in v1) |
+| **H** | Client assessment | `[PROC-EDPC_CLIENT_ASSESSMENT]` — CAM v1 + technical summary after **F**; MCP `tied_edpc_client_assessment_*` |
 
 ---
 

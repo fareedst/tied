@@ -2473,6 +2473,35 @@ REQ-TIED_EASAR_RECOVERY:
       - "IMPL-TIED_EASAR_RECEIPTS"
     tests:
       - "mcp-server/src/easar-receipts/*.test.ts"
+REQ-TIED_EDPC_CLIENT_ASSESSMENT:
+  category: "Functional"
+  description: "EDPC Workflow H client assessment validate/compose/render and CAM handoff after publish."
+  detail_file: "requirements/REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+  name: "EDPC Client Assessment (Workflow H)"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_EDPC_COMPREHENSION"
+    related_to:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  satisfaction_criteria:
+    - criterion: "SC-CAM-DECISIONS — five outcomes separate evidence from consultant decisions."
+    - criterion: "SC-CAM-DOMAINS — twenty domains with status and rationale."
+    - criterion: "SC-CAM-FRESHNESS — stale baseline or unresolved receipt refs produce refresh gaps."
+    - criterion: "SC-CAM-HANDOFF — working and docs handoff share CAM revision metadata."
+    - criterion: "SC-CAM-LINKS — material findings link evidence, confidence, and actions or consultant gaps."
+    - criterion: "SC-CAM-RENDER — deterministic Markdown from CAM."
+    - criterion: "SC-CAM-SOURCE — compose requires valid publish manifest and preserves provenance."
+    - criterion: "SC-CAM-TIER — source_static cannot promote Observed/Verified health without evidence."
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL"
+    implementation:
+      - "IMPL-TIED_EDPC_CLIENT_ASSESSMENT"
+    tests:
+      - "mcp-server/src/edpc/client-assessment-*.test.ts"
 REQ-TIED_EDPC_COMPREHENSION:
   category: "Functional"
   description: "EDPC orchestration: tier-bounded comprehension engagements, SCM shell artifacts, MCP validate/route/publish; edpc_full supersedes easar_full engagement naming."

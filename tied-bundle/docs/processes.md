@@ -240,6 +240,32 @@ See [EDPC_Methodology_and_Workflows.md](./EDPC_Methodology_and_Workflows.md) and
 
 ---
 
+## `[PROC-EDPC_CLIENT_ASSESSMENT]` EDPC client assessment (Workflow H)
+
+### Purpose
+After Workflow **F**, produce EDPC §17–18 **technical and decision summaries** from committed EDPC artifacts plus consultant context, using deterministic MCP validate → compose → render (no claim-graph DB, no MCP filesystem writes).
+
+### Scope
+Engagements with `edpc-publish-manifest.v1.json` and charter-scoped **CAM v1** under `tied-project/working/{REQ}/evidence/reports/`, with optional committed handoff copy under `docs/assessments/`.
+
+### Token references
+- `[REQ-TIED_EDPC_CLIENT_ASSESSMENT]`, `[ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL]`, `[IMPL-TIED_EDPC_CLIENT_ASSESSMENT]`
+- `[REQ-TIED_EDPC_COMPREHENSION]`, `[ARCH-TIED_EDPC_ARTIFACT_MODEL]`
+
+### Checklist choreography (references only)
+1. **Precondition** — Workflow **F** complete; publish gaps documented.
+2. **Charter + context** — `assessment-charter.v1.yaml`, `assessment-context.v1.yaml` (consultant-owned).
+3. **Validate** — `tied_edpc_client_assessment_validate` (domain matrix, tier legality, receipt freshness).
+4. **Compose** — `tied_edpc_client_assessment_compose` → `assessment-model.v1.yaml` + manifest.
+5. **Review** — sponsor/consultant significance and actions on material findings.
+6. **Render + handoff** — `tied_edpc_client_assessment_render`; client workflow writes working + `docs/assessments/` copies.
+7. **Refresh** — re-run when baseline, tier, or receipt refs change (Workflow **G** triggers).
+
+### Narrative spec
+See EDPC methodology §18 and [edpc-comprehension.md](../vocab/edpc-comprehension.md) (Workflow **H**).
+
+---
+
 ## `[PROC-EASAR_RECOVERY]` Evidence-Assured Software Architecture Recovery (Mode C)
 
 ### Purpose

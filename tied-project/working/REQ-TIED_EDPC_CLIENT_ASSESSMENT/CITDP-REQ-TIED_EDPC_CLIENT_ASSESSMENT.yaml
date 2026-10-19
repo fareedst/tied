@@ -1,0 +1,109 @@
+# Analysis record — persist copy to tied-project/citdp/ at traceable-commit (build-plan).
+change_request_id: REQ-TIED_EDPC_CLIENT_ASSESSMENT
+citdp_version: "1"
+status: analysis
+analysis:
+  current_behavior: >-
+    EDPC Workflow F stops at tied_edpc_publish_build and SCM/publish artifacts.
+    Methodology §17–18 defines technical/decision summaries and a consulting layer
+    (Understand, Trust, Protect, Change, Decide) but TIED has no CAM schema, PROC
+    Workflow H, validate/compose/render MCP tools, or handoff templates.
+    Chart Viewer engagement (external) has publish manifest and SCM without §17 item 6
+    client-facing summary under evidence/reports/.
+  desired_behavior: >-
+    New REQ-TIED_EDPC_CLIENT_ASSESSMENT enrolls Workflow H: pure JSON-in/JSON-out
+    tied_edpc_client_assessment_validate, _compose, _render; CAM v1 + assessment manifest;
+    PROC-EDPC_CLIENT_ASSESSMENT; templates under tied-bundle/templates/; vocab extension.
+    Chart Viewer pilot produces hand-authored technical summary then golden-compares tool chain.
+    MCP never writes client paths; tier and receipt freshness fail-closed.
+  satisfaction_criteria:
+    - "SC-CAM-SOURCE — compose requires valid publish manifest; preserves revision, tier, window, receipt refs, publish gaps"
+    - "SC-CAM-TIER — source_static cannot promote Observed/Verified health/trust without evidence"
+    - "SC-CAM-LINKS — material findings: evidence refs, confidence, limitations, significance/action or consultant gap"
+    - "SC-CAM-DOMAINS — 20 domains with sampled|investigated|deferred|excluded + rationale"
+    - "SC-CAM-DECISIONS — five outcomes separate evidence-backed vs consultant decisions"
+    - "SC-CAM-RENDER — deterministic Markdown from CAM; stable ordering"
+    - "SC-CAM-HANDOFF — working reports/ and docs/assessments/ share CAM revision metadata"
+    - "SC-CAM-FRESHNESS — stale baseline or unresolved receipt refs → explicit refresh gap"
+  non_goals:
+    - "Claim graph database or agentic report writer"
+    - "MCP filesystem read/write of client repos"
+    - "PDF/HTML export v1"
+    - "Certification of health, compliance, or business value"
+    - "Reopening Slice D OFSM implementation (consume contracts only)"
+  blast_radius:
+    modules_or_boundaries: >-
+      mcp-server/src/edpc/client-assessment-*.ts; tools/index.ts registration;
+      tied-bundle/templates/edpc-client-assessment-*; processes.md PROC-EDPC_CLIENT_ASSESSMENT;
+      ARCH-TIED_EDPC_ARTIFACT_MODEL CAM bundle; edpc-comprehension vocab Workflow H;
+      client-development-index cross-link §18
+    data_stores: >-
+      tied-project YAML for new REQ/ARCH/IMPL; mcp-server/test/fixtures/edpc/cam/;
+      chartviewer tied-project/working/.../evidence/reports/ (pilot, external repo)
+    external_interfaces: Three MCP tools; optional tied-cli parity
+  risks:
+    - id: R-CAM-001
+      summary: Consulting layer invents Observed/Verified health from static code review
+      mitigation: SC-CAM-TIER; reuse SC-EDPC-D-NO-BLANKET-HEALTH patterns; render fail-closed
+      severity: high
+    - id: R-CAM-002
+      summary: Stale EASAR receipt refs presented as current in client report
+      mitigation: SC-CAM-FRESHNESS; compose records limitations; validate rejects silent repoint
+      severity: high
+    - id: R-CAM-003
+      summary: CAM conflated with claims-ledger or adversarial finding-ledger
+      mitigation: Separate artifact names; PROC sequence after F; meta-assessment from queues only
+      severity: medium
+    - id: R-CAM-004
+      summary: Platform build blocked on incomplete Slice D in stdd working tree
+      mitigation: Explicit dependency gate; Chart Viewer pilot H0 parallel; compose tests use fixtures
+      severity: medium
+  test_strategy_ref: tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/test-strategy.md
+  depth_tier: integrated
+  profile_depth: integrated
+  gate_policy: advisory
+  tdd_sequence:
+    - "Mint REQ/ARCH/IMPL + IMPL-TIED_EDPC_CLIENT_ASSESSMENT pseudo-code with block comments"
+    - "RED client-assessment-validate.test.ts domain matrix, tier, stale refs"
+    - "RED client-assessment-compose.test.ts deterministic CAM + consultant gaps"
+    - "RED client-assessment-render.test.ts golden Markdown sections"
+    - "Composition MCP registration + fixture chain publish → compose → render"
+    - "Dogfood compare Chart Viewer-shaped fixture vs hand-authored pilot summary"
+  methodology_surface_change_class: mcp_surface_enrollment
+  methodology_surface_experiment_link: null
+  brownfield_intent_elevation:
+    note: "Platform dogfood remains stdd; Chart Viewer is external pilot evidence only"
+  compatibility_ledger:
+    - component: REQ-TIED_EDPC_COMPREHENSION
+      disposition: hard_dependency
+      note: publish manifest, artifact model, Slice D OFSM refs in compose inputs
+    - component: REQ-CHARTVIEWER-BROWNFIELD_EDPC_COMPREHENSION
+      disposition: external_pilot
+      note: First report in client repo; sponsor-approved inspection only
+risk_analysis:
+  adversarial_inquiry:
+    assurance_profile: baseline-functional
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: integrated
+    research_profile: read-only-research
+    rationale: >-
+      External client evidence ingestion, new MCP surface, and client-facing decision
+      wording require integrated structural inquiry before first RED (distinct from
+      EDPC comprehension v1 and Slice D pre-impl runs).
+    eligibility_triggers_matched:
+      - "External input — Chart Viewer committed EDPC artifacts"
+      - "MCP surface expansion — three assessment tools"
+      - "Persistence-adjacent — handoff paths documented (writes outside MCP)"
+    falsification_questions:
+      - "Can render emit aggregate trustworthy/healthy without row-level evidence_ids?"
+      - "Can compose upgrade tier-blocked Observed claims via overlay text?"
+      - "Can pre_implementation pass without fresh identity-bound inquiry artifacts?"
+    integrated_waiver: null
+    prior_depth_tier: null
+    sub_adversarial_inquiry_pass: required_before_red
+completion_criteria:
+  activation:
+    phase: pre_implementation
+    request_token: REQ-TIED_EDPC_CLIENT_ASSESSMENT
+    note: "Planned run_id at build-plan — not executed in refine-plan pass"

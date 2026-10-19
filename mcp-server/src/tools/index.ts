@@ -86,6 +86,9 @@ import { validateEdpcAccessMatrix } from "../edpc/access-validate.js";
 import { validateEdpcEngagementFacet } from "../edpc/edpc-engagement-facet.js";
 import { buildEdpcFailureState } from "../edpc/failure-state-build.js";
 import { validateEdpcFailureState } from "../edpc/failure-state-validate.js";
+import { composeEdpcClientAssessment } from "../edpc/client-assessment-compose.js";
+import { renderEdpcClientAssessmentMarkdown } from "../edpc/client-assessment-render.js";
+import { validateEdpcClientAssessment } from "../edpc/client-assessment-validate.js";
 import { buildEdpcPublishManifest } from "../edpc/publish-build.js";
 import { routeEdpcWorkflow } from "../edpc/workflow-route.js";
 import { EVIDENCE_ACCESS_TIERS } from "../edpc/types.js";
@@ -3189,6 +3192,91 @@ export const allTools = [
         ofsm_bundle: args.ofsm_bundle,
         scm_shell: args.scm_shell,
       });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_client_assessment_validate",
+    config: {
+      description:
+        "Validate [REQ-TIED_EDPC_CLIENT_ASSESSMENT] Workflow H charter, overlay tier legality, and publish manifest freshness.",
+      inputSchema: z.object({
+        charter: z.record(z.unknown()),
+        assessment_context: z.record(z.unknown()).optional(),
+        publish_manifest: z.record(z.unknown()),
+        receipt_exists_map: z.record(z.boolean()).optional(),
+      }),
+    },
+    handler: async (args: {
+      charter: Record<string, unknown>;
+      assessment_context?: Record<string, unknown>;
+      publish_manifest: Record<string, unknown>;
+      receipt_exists_map?: Record<string, boolean>;
+    }) => {
+      const existsMap = args.receipt_exists_map ?? {};
+      const result = validateEdpcClientAssessment({
+        charter: args.charter as Parameters<typeof validateEdpcClientAssessment>[0]["charter"],
+        assessment_context: args.assessment_context as Parameters<
+          typeof validateEdpcClientAssessment
+        >[0]["assessment_context"],
+        publish_manifest: args.publish_manifest as Parameters<
+          typeof validateEdpcClientAssessment
+        >[0]["publish_manifest"],
+        receipt_exists: (path) => existsMap[path] ?? false,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_client_assessment_compose",
+    config: {
+      description:
+        "Compose [REQ-TIED_EDPC_CLIENT_ASSESSMENT] client-assessment-model.v1 from EDPC inputs (pure JSON).",
+      inputSchema: z.object({
+        charter: z.record(z.unknown()),
+        assessment_context: z.record(z.unknown()).optional(),
+        publish_manifest: z.record(z.unknown()),
+        claims_ledger: z.array(z.record(z.unknown())),
+        receipt_exists_map: z.record(z.boolean()).optional(),
+      }),
+    },
+    handler: async (args: {
+      charter: Record<string, unknown>;
+      assessment_context?: Record<string, unknown>;
+      publish_manifest: Record<string, unknown>;
+      claims_ledger: Array<Record<string, unknown>>;
+      receipt_exists_map?: Record<string, boolean>;
+    }) => {
+      const existsMap = args.receipt_exists_map ?? {};
+      const result = composeEdpcClientAssessment({
+        charter: args.charter as Parameters<typeof composeEdpcClientAssessment>[0]["charter"],
+        assessment_context: args.assessment_context as Parameters<
+          typeof composeEdpcClientAssessment
+        >[0]["assessment_context"],
+        publish_manifest: args.publish_manifest as Parameters<
+          typeof composeEdpcClientAssessment
+        >[0]["publish_manifest"],
+        claims_ledger: args.claims_ledger as Parameters<
+          typeof composeEdpcClientAssessment
+        >[0]["claims_ledger"],
+        receipt_exists: (path) => existsMap[path] ?? false,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_client_assessment_render",
+    config: {
+      description:
+        "Render [REQ-TIED_EDPC_CLIENT_ASSESSMENT] deterministic Markdown from CAM v1.",
+      inputSchema: z.object({
+        cam: z.record(z.unknown()),
+      }),
+    },
+    handler: async (args: { cam: Record<string, unknown> }) => {
+      const result = renderEdpcClientAssessmentMarkdown(
+        args.cam as Parameters<typeof renderEdpcClientAssessmentMarkdown>[0],
+      );
       return textContent(JSON.stringify(result, null, 2));
     },
   },

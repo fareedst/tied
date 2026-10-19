@@ -1,0 +1,31 @@
+REQ-TIED_EDPC_CLIENT_ASSESSMENT:
+  REQ-TIED_EDPC_CLIENT_ASSESSMENT:
+    category: "Functional"
+    description: "EDPC Workflow H enrolls client assessment validate, compose, and render MCP tools plus CAM/report handoff conventions per EDPC section 18."
+    name: "EDPC Client Assessment (Workflow H)"
+    priority: "P1"
+    rationale:
+      why: "Ship consulting-layer tooling after EDPC publish without MCP filesystem I/O."
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        - "REQ-TIED_EDPC_COMPREHENSION"
+      related_to:
+        - "REQ-TIED_EDPC_COMPREHENSION"
+    satisfaction_criteria:
+      - criterion: "SC-CAM-DECISIONS"
+      - criterion: "SC-CAM-DOMAINS"
+      - criterion: "SC-CAM-FRESHNESS"
+      - criterion: "SC-CAM-HANDOFF"
+      - criterion: "SC-CAM-LINKS"
+      - criterion: "SC-CAM-RENDER"
+      - criterion: "SC-CAM-SOURCE"
+      - criterion: "SC-CAM-TIER"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL"
+      implementation:
+        - "IMPL-TIED_EDPC_CLIENT_ASSESSMENT"
+      tests:
+        - "mcp-server/src/edpc/client-assessment-*.test.ts"

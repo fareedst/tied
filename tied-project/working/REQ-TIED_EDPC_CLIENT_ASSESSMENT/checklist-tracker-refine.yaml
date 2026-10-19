@@ -1,0 +1,63 @@
+copy_hygiene: "Workflow H refine-plan pass 1; clear execution_evidence.completed before build-plan RED or refresh inquiry run_id."
+depth_tier: "integrated"
+gate_policy: "advisory"
+name: "edpc-client-assessment-refine-tracker"
+profile_depth: "integrated"
+refine_pass: 1
+refine_pass_date: "2026-10-19"
+refine_scope: "EDPC §17–18 client assessment (Workflow H) + Chart Viewer pilot"
+request_token: "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+execution_evidence:
+  request: "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+  envelope_path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/evidence/request-evidence-envelope.v1.json"
+  completed:
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  operator_evidence:
+    integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/adversarial-inquiry/phase-{phase}/"
+    limitation: "pre_implementation inquiry not run in refine-plan; required before build-plan RED."
+    planned_pre_impl_run_id: "edpc-cam-pre-impl-20261019"
+    status: "refine_plan_complete_pending_inquiry"
+brownfield_intent_elevation:
+  mode: pilot
+  engagement: edpc_full
+edpc_engagement:
+  evidence_access_tier: source_static
+  production_touch: none
+  note: "Platform stdd dogfood; Chart Viewer pilot is external source_static engagement"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-bundle/docs/EDPC_Methodology_and_Workflows.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+    id: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+    id: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/evidence/risk-assessment-refine-pass1.md"
+    id: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/test-strategy.md"
+    id: "test-strategy"

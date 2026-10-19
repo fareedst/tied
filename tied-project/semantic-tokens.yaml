@@ -948,6 +948,16 @@ ARCH-TIED_EDPC_ARTIFACT_MODEL:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
+  cross_references:
+    - "IMPL-TIED_EDPC_CLIENT_ASSESSMENT"
+    - "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+  description: "CAM v1 schema, domain scope matrix, render views, and handoff rules for EDPC Workflow H."
+  detail_file: "architecture-decisions/ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL.yaml"
+  name: "EDPC Client Assessment Model"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -2487,6 +2497,15 @@ IMPL-TIED_EDPC_PUBLISH:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_EDPC_CLIENT_ASSESSMENT:
+  cross_references:
+    - "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL"
+    - "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+  name: "EDPC Client Assessment Validate/Compose/Render"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_FEEDBACK_PROMOTION:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -2866,6 +2885,16 @@ PROC-EDPC_COMPREHENSION:
   description: "Orchestrate EDPC workflows A-G composing EASAR, brownfield, graph, claims, inquiry, and envelope tools."
   detail_file: "null"
   name: "EDPC Comprehension Process"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-EDPC_CLIENT_ASSESSMENT:
+  cross_references:
+    - "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "After Workflow F, validate, compose, and render CAM v1 and technical summaries (EDPC section 18)."
+  detail_file: "null"
+  name: "EDPC Client Assessment Process"
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
@@ -4196,6 +4225,17 @@ REQ-TIED_EDPC_COMPREHENSION:
   description: "EDPC orchestration with tier caps, SCM shell, MCP validate/route/publish."
   detail_file: "requirements/REQ-TIED_EDPC_COMPREHENSION.yaml"
   name: "Evidence-Driven Program Comprehension (EDPC orchestration v1)"
+  source_index: "requirements.yaml"
+  status: "In Progress"
+  type: "REQ"
+REQ-TIED_EDPC_CLIENT_ASSESSMENT:
+  cross_references:
+    - "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL"
+    - "IMPL-TIED_EDPC_CLIENT_ASSESSMENT"
+    - "PROC-EDPC_CLIENT_ASSESSMENT"
+  description: "EDPC Workflow H MCP validate/compose/render and CAM handoff conventions."
+  detail_file: "requirements/REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+  name: "EDPC Client Assessment (Workflow H)"
   source_index: "requirements.yaml"
   status: "In Progress"
   type: "REQ"

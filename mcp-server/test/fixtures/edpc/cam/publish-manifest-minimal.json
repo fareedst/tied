@@ -1,0 +1,9 @@
+{
+  "schema_version": "edpc-publish-manifest.v1",
+  "gaps": ["evidence_gap:c1:Observed"],
+  "receipt_refs": {
+    "inventory": "reports/easar/inventory.v1.json",
+    "missing_receipt": "reports/easar/missing.v1.json"
+  },
+  "tier": "source_static"
+}

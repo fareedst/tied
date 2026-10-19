@@ -2324,6 +2324,18 @@ IMPL-TIED_EDPC_ACCESS:
   detail_file: "implementation-decisions/IMPL-TIED_EDPC_ACCESS.yaml"
   name: "EDPC Access Matrix Validator"
   status: "Active"
+IMPL-TIED_EDPC_CLIENT_ASSESSMENT:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+      - "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+  description: "validate, compose, and render Workflow H client assessment artifacts."
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+  name: "EDPC Client Assessment MCP"
+  status: "Active"
 IMPL-TIED_EDPC_ENGAGEMENT_FACET:
   cross_references:
     architecture:

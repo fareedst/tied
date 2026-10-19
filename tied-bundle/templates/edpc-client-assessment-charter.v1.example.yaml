@@ -1,0 +1,9 @@
+baseline_revision: "example-baseline"
+domains:
+  - domain_id: 1
+    rationale: "example"
+    status: "sampled"
+evidence_access_tier: "source_static"
+handoff_path: "docs/assessments/example-edpc-assessment.md"
+refresh_gap: null
+schema_version: "edpc-client-assessment-charter.v1"

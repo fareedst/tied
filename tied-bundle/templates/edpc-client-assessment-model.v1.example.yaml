@@ -1,0 +1,7 @@
+baseline_revision: "example-baseline"
+domains: []
+findings: []
+publish_gaps: []
+receipt_refs: {}
+schema_version: "client-assessment-model.v1"
+tier: "source_static"

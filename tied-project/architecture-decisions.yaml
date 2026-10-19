@@ -2029,6 +2029,18 @@ ARCH-TIED_EDPC_ARTIFACT_MODEL:
   detail_file: "architecture-decisions/ARCH-TIED_EDPC_ARTIFACT_MODEL.yaml"
   name: "EDPC Artifact Model"
   status: "Active"
+ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EDPC_CLIENT_ASSESSMENT"
+    requirements:
+      - "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+  description: "CAM v1 schema, domain matrix, render views, and handoff paths parallel to EDPC artifact model."
+  detail_file: "architecture-decisions/ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL.yaml"
+  name: "EDPC Client Assessment Model"
+  status: "Active"
 ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH:
   cross_references:
     architecture:

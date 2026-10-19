@@ -1,0 +1,17 @@
+ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
+  ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
+    cross_references:
+      architecture:
+        - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+      implementation:
+        - "IMPL-TIED_EDPC_CLIENT_ASSESSMENT"
+      requirements:
+        - "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+    decisions:
+      - id: "CAM-001"
+        summary: "CAM and technical summary live under evidence/reports with docs/assessments handoff copy."
+      - id: "CAM-002"
+        summary: "MCP tools remain pure JSON-in/JSON-out; client workflow writes committed files."
+    description: "CAM v1 links evidence to findings and consultant significance; assessment manifest references EDPC publish manifest without duplicating receipt bytes."
+    name: "EDPC Client Assessment Model"
+    status: "Active"

@@ -1,0 +1,27 @@
+{
+  "schema_version": "edpc-client-assessment-charter.v1",
+  "evidence_access_tier": "source_static",
+  "baseline_revision": "chartviewer-baseline-20261019",
+  "domains": [
+    { "domain_id": 1, "status": "sampled", "rationale": "matrix" },
+    { "domain_id": 2, "status": "investigated", "rationale": "claims" },
+    { "domain_id": 3, "status": "deferred", "rationale": "no runtime" },
+    { "domain_id": 4, "status": "deferred", "rationale": "ofsm stub" },
+    { "domain_id": 5, "status": "sampled", "rationale": "review" },
+    { "domain_id": 6, "status": "sampled", "rationale": "ofsm" },
+    { "domain_id": 7, "status": "deferred", "rationale": "partial" },
+    { "domain_id": 8, "status": "sampled", "rationale": "static" },
+    { "domain_id": 9, "status": "sampled", "rationale": "matrix" },
+    { "domain_id": 10, "status": "investigated", "rationale": "inventory" },
+    { "domain_id": 11, "status": "investigated", "rationale": "graph" },
+    { "domain_id": 12, "status": "investigated", "rationale": "bbce" },
+    { "domain_id": 13, "status": "deferred", "rationale": "no metrics" },
+    { "domain_id": 14, "status": "deferred", "rationale": "no cost" },
+    { "domain_id": 15, "status": "sampled", "rationale": "reflexion" },
+    { "domain_id": 16, "status": "sampled", "rationale": "charter" },
+    { "domain_id": 17, "status": "deferred", "rationale": "tier" },
+    { "domain_id": 18, "status": "sampled", "rationale": "baseline" },
+    { "domain_id": 19, "status": "sampled", "rationale": "queues" },
+    { "domain_id": 20, "status": "consultant_required", "rationale": "priorities" }
+  ]
+}

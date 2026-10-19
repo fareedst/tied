@@ -1,0 +1,22 @@
+IMPL-TIED_EDPC_CLIENT_ASSESSMENT:
+  IMPL-TIED_EDPC_CLIENT_ASSESSMENT:
+    code_locations:
+      files:
+        - description: "CAM v1 composition"
+          path: "mcp-server/src/edpc/client-assessment-compose.ts"
+        - description: "Charter and publish manifest validation"
+          path: "mcp-server/src/edpc/client-assessment-validate.ts"
+        - description: "Deterministic Markdown render"
+          path: "mcp-server/src/edpc/client-assessment-render.ts"
+    cross_references:
+      architecture:
+        - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+        - "ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL"
+      implementation:
+        - "IMPL-TIED_EDPC_PUBLISH"
+      requirements:
+        - "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
+    description: "Pure functions for tied_edpc_client_assessment_validate, _compose, and _render."
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_CLIENT_ASSESSMENT-pseudocode.md"
+    name: "EDPC Client Assessment MCP"
+    status: "Active"
