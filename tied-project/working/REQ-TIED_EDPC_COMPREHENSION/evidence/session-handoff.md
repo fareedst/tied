@@ -1,6 +1,6 @@
 # Session handoff — REQ-TIED_EDPC_COMPREHENSION
 
-**Updated:** 2026-10-19 (Slice D plan-close-out)  
+**Updated:** 2026-10-19 (Slice D traceable commit recorded)  
 **Depth:** `integrated` · **gate_policy:** `advisory`  
 **Engagement:** `edpc_full` · **Tier (dogfood):** `toolchain_readonly` · **production_touch:** `none`
 
@@ -21,7 +21,7 @@
 | Verification gate | **allowed** | [slice-d-verification-gate.md](./slice-d-verification-gate.md) |
 | Close-out gate | **allowed** | [slice-d-close-out-gate.md](./slice-d-close-out-gate.md) |
 | Envelope | **0 blocking gaps** | [closeout-run-close-out-gates-slice-d.json](./closeout-run-close-out-gates-slice-d.json) |
-| Traceable commit | **pending (sponsor)** | [plan-close-out-slice-d-proposed-commit.md](./plan-close-out-slice-d-proposed-commit.md) |
+| Traceable commit | **done** `a03bdb0f` | [plan-close-out-slice-d-proposed-commit.md](./plan-close-out-slice-d-proposed-commit.md) |
 
 ---
 
@@ -43,7 +43,7 @@ Prior v1 EDPC close-out (`edpc-closeout-20261019`) remains valid; Slice D is add
 
 ## Resume here
 
-1. **Commit:** stage Slice D paths and commit using the proposed message in [plan-close-out-slice-d-proposed-commit.md](./plan-close-out-slice-d-proposed-commit.md).  
+1. **Next program work:** [REQ-TIED_EDPC_CLIENT_ASSESSMENT](../../REQ-TIED_EDPC_CLIENT_ASSESSMENT/PLAN-refine-pass1.md) (Workflow H) — platform code is unstaged; Chart Viewer pilot (H0/H2) needs sponsor repo scope.  
 2. **MCP:** Reload TIED YAML MCP after `npm run build --prefix mcp-server` if using in-editor tools.  
 3. **Proof boundary:** Slice D proves OFSM validators and choreography — not production health of any target system.
 

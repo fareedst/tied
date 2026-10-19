@@ -1,6 +1,6 @@
 # Proposed commit — Slice D (plan-close-out)
 
-**Do not commit from agent.** Sponsor runs `git add` / `git commit` when ready.
+**Applied:** `a03bdb0ffb64692139954cd8dcfca268cb7e1fe1` (2026-10-19) — message below.
 
 ## Proposed message
 
