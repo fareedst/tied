@@ -1185,4 +1185,17 @@ describe("EASAR engagement facet [REQ-TIED_EASAR_RECOVERY]", () => {
     assert.equal(result.allowed, false);
     assert.ok(result.diagnostics.includes("easar_full_requires_pilot_or_strict_mode"));
   });
+
+  it("rejects edpc_full when brownfield mode is report_only", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: {
+        brownfield_intent_elevation: { engagement: "edpc_full", mode: "report_only" },
+        steps: [],
+      },
+      citdp: integratedCitdp,
+    });
+    assert.equal(result.allowed, false);
+    assert.ok(result.diagnostics.includes("full_engagement_requires_pilot_or_strict_mode"));
+  });
 });

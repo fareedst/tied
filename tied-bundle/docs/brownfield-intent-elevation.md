@@ -2,13 +2,23 @@
 
 **Audience:** TIED client projects reverse-documenting legacy code (Track C) and sponsors promoting **adjudicated** claims into REQ/ARCH without treating IMPL sidecars as approved product intent.
 
-**Tokens:** `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]`, `[ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL]`, `[IMPL-TIED_BROWNFIELD_VALIDATION]`, `[PROC-BROWNFIELD_INTENT_ELEVATION]`. Mode C superset: `[REQ-TIED_EASAR_RECOVERY]`, `[PROC-EASAR_RECOVERY]` when Tracker `brownfield_intent_elevation.engagement` is `easar_full` (requires `mode: pilot` or `strict`).
+**Tokens:** `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]`, `[ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL]`, `[IMPL-TIED_BROWNFIELD_VALIDATION]`, `[PROC-BROWNFIELD_INTENT_ELEVATION]`. Comprehension superset: `[REQ-TIED_EDPC_COMPREHENSION]`, `[PROC-EDPC_COMPREHENSION]` when Tracker `brownfield_intent_elevation.engagement` is **`edpc_full`** (requires `mode: pilot` or `strict`). Receipt baseline: `[REQ-TIED_EASAR_RECOVERY]`, `[PROC-EASAR_RECOVERY]` nested under EDPC workflow **B**.
 
 ---
 
-## Mode C engagement facet (`engagement: easar_full`)
+## EDPC engagement facet (`engagement: edpc_full`)
 
-When the per-request Tracker sets **`brownfield_intent_elevation.engagement: easar_full`**, follow **`[PROC-EASAR_RECOVERY]`** for staged receipts (inventory, graph-matrix linkage, claims choreography, reflexion synthesis). Keep **`brownfield_intent_elevation.mode`** as the authority for pilot/strict vs report-only; do **not** add a parallel `recovery_engagement.mode` field. Vocabulary: [easar-recovery.md](../../tied-project/vocab/easar-recovery.md).
+When the per-request Tracker sets **`brownfield_intent_elevation.engagement: edpc_full`**, follow **`[PROC-EDPC_COMPREHENSION]`** for tier-bounded workflows A–G (charter, access matrix, route, publish). Add optional **`edpc_engagement`** on the Tracker (`evidence_access_tier`, `target_repository_root`, `production_touch`, charter and matrix paths). Keep **`brownfield_intent_elevation.mode`** as the authority for pilot/strict vs report-only; do **not** add a parallel `recovery_engagement.mode` field.
+
+- **Vocabulary:** [edpc-comprehension.md](../../tied-project/vocab/edpc-comprehension.md)
+- **Methodology:** [EDPC_Methodology_and_Workflows.md](../../docs/methodologies/EDPC_Methodology_and_Workflows.md)
+- **MCP (read-only on project YAML):** `tied_edpc_access_validate`, `tied_edpc_engagement_validate`, `tied_edpc_workflow_route`, `tied_edpc_publish_build`
+
+Workflow **B** (baseline inventory/graph) still uses **`[PROC-EASAR_RECOVERY]`** receipt builders; EDPC composes them rather than replacing receipt schemas.
+
+### Deprecated alias (`engagement: easar_full`)
+
+**`easar_full`** remains accepted for migration: same validation rules as `edpc_full`, with a **`deprecated_engagement_alias:easar_full`** diagnostic from `tied_edpc_engagement_validate`. New engagements should use **`edpc_full`**. Vocabulary: [easar-recovery.md](../../tied-project/vocab/easar-recovery.md) (receipt terms; umbrella → EDPC).
 
 ---
 

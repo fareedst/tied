@@ -60,6 +60,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | **Incident/revert eval corpus** | [incident-revert-evaluation-corpus.md](incident-revert-evaluation-corpus.md) | Loop 3 guide for bounded `evaluation-corpus.v1` rows (incidents, reverts, review false positives) with denominators and pilot stop criteria (Phase 4; no new MCP authority). |
 | **Client DevOps appendix** | [client-devops-integration-appendix.md](client-devops-integration-appendix.md) | Client-owned PR/CI/release field guidance composing with Phases 1–4 (Phase 5; not TIED core authority). |
 | **Path-scoped review guidance** | [path-scoped-review-guidance.md](path-scoped-review-guidance.md) | Optional `REVIEW.md` / `tied-project/review/` client pattern (post-compose; not TIED core authority). |
+| **EDPC methodology** | [EDPC_Methodology_and_Workflows.md](../../docs/methodologies/EDPC_Methodology_and_Workflows.md) | Workflows A–G, `evidence_access_tier`, file-based SCM shell; pairs with **Vocabulary** [edpc-comprehension.md](../../tied-project/vocab/edpc-comprehension.md) and `[PROC-EDPC_COMPREHENSION]` in **Processes**. |
 | **Claude review comparison** | [claude-code-team-code-review-vs-tied.md](../../docs/comparisons/claude-code-team-code-review-vs-tied.md) | Outreach map + [compose snapshot](../../docs/comparisons/claude-code-team-code-review-vs-tied.md#compose-status-snapshot) for Anthropic PR-review layers × TIED (Phases 1–5 guides; store **`fb-mvclklsa-t5gzbo`**). |
 
 ---
@@ -71,7 +72,8 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | New requirement | **Checklist** → `session-bootstrap` | **Pseudo-code** Track A; project YAML indexes below |
 | Proposed concept (impact, risks, costs before costly work) | [**Concept impact inquiry**](../../docs/tied-concept-impact-inquiry.md) | RESOLVE via **Vocabulary**; escalate to **Checklist** / CITDP when sponsor proceeds |
 | External workflows, integrators, undocumented ops behavior (brownfield externalities) | [**Operating environment externalities**](../../docs/tied-operating-environment-externalities.md) | **Vocabulary** `operating-environment-externalities.md`; BBCE + brownfield intent elevation; then **Checklist** / CITDP |
-| Legacy / architecture recovery (EASAR Mode C) | [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7 | **Vocabulary** [easar-recovery.md](../../tied-project/vocab/easar-recovery.md); Tracker `engagement: easar_full` + `[PROC-EASAR_RECOVERY]`; brownfield intent elevation doc |
+| Program comprehension (EDPC umbrella) | [EDPC_Methodology_and_Workflows.md](../../docs/methodologies/EDPC_Methodology_and_Workflows.md) | **Vocabulary** [edpc-comprehension.md](../../tied-project/vocab/edpc-comprehension.md); Tracker `brownfield_intent_elevation.engagement: edpc_full` with `mode: pilot` or `strict`; optional `edpc_engagement` (tier, charter, access matrix, target repo); `[PROC-EDPC_COMPREHENSION]`; MCP `tied_edpc_*` (see **EDPC orchestration** below); store program [PLAN.md](../../tied-project/working/REQ-TIED_EDPC_COMPREHENSION/PLAN.md) |
+| Legacy / architecture recovery (EASAR receipts — workflow **B**) | [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7 | **Vocabulary** [easar-recovery.md](../../tied-project/vocab/easar-recovery.md) → prefer **EDPC** row for new engagements; `[PROC-EASAR_RECOVERY]` nested under EDPC baseline; Tracker `easar_full` is a **deprecated alias** of `edpc_full`; brownfield intent elevation doc |
 | Certifiability / external appraisal readiness (EDSE) | Root [README.md](../../README.md) § Performing work in certifiable workflows | **Vocabulary** [process-certification-readiness.md](../../tied-project/vocab/process-certification-readiness.md); [certification-of-workflows.md](../../docs/methodologies/certification-of-workflows.md); `[REQ-TIED_PROCESS_CERTIFICATION_READINESS]` MCP/CLI (`tied certification …`) |
 | Change existing behavior | **Checklist** → `change-definition` | **Processes** § `[PROC-CITDP]`; **Change records** |
 | Upgrade TIED methodology | **methodology-migration.md** → Phase 0 | **Rules**, refreshed TIED YAML MCP, and the per-request Tracker |
@@ -153,6 +155,25 @@ MCP `pseudocode_validate` accepts optional `leakage_lint` (default on) and `gate
 MCP **`pseudocode_analyze`** accepts **`closure_join_report: true`** with **`request_token`**, **`impl_tokens[]`**, optional path globs, and **`persist_closure_report`** (default true) to write `working/{REQ}/evidence/closure-join-{timestamp}.json`. Implementation: `mcp-server/src/analysis/closure-join-report.ts`. Mechanical vs LLM judgment boundaries: [`pseudocode-writing-and-validation.md`](pseudocode-writing-and-validation.md) § Mechanical checks vs LLM judgment.
 
 Set `TIED_BASE_PATH` to this project’s `tied/` (or pass `--project-root`) before gate checks. Receipts may persist under `working/{REQ}/gates/` when gate persistence is configured in CITDP/Tracker.
+
+### EDPC comprehension orchestration (v1)
+
+Traceability: [REQ-TIED_EDPC_COMPREHENSION](../../tied-project/requirements/REQ-TIED_EDPC_COMPREHENSION.yaml) · `[PROC-EDPC_COMPREHENSION]` in [processes.md](processes.md).
+
+Use when the sponsor task is **tier-bounded investigation choreography** on a target repository (not certifiability claims, not a substitute for the full **Checklist** on feature work in that repo).
+
+| Mechanism | Operator entry | Notes |
+| --- | --- | --- |
+| **Engagement facet** | Authoritative Tracker YAML | `brownfield_intent_elevation.engagement: edpc_full`; requires `mode: pilot` or `strict`. Deprecated `easar_full` hits the same code path with a diagnostic. |
+| **Tier + charter** | `edpc_engagement` on Tracker | `evidence_access_tier` one of `source_static`, `toolchain_readonly`, `source_change`; paths to `engagement-charter.v1.yaml` and `evidence-access-matrix.v1.yaml`; `target_repository_root` (absolute). |
+| **Access validate** | MCP `tied_edpc_access_validate` | Fail-closed matrix vs tier before dogfood or publish. |
+| **Engagement validate** | MCP `tied_edpc_engagement_validate` | Charter + facet consistency with gate Tracker fields. |
+| **Workflow route** | MCP `tied_edpc_workflow_route` | Deterministic A–G step list for tier (strips D/E when tier blocks). |
+| **Publish** | MCP `tied_edpc_publish_build` | SCM/publish manifest + explicit `gaps[]` — no silent universal health (EDPC §16). |
+| **Compose (no duplicate)** | Existing MCP | EASAR receipts (`tied_easar_*`), brownfield validator, source graph, claims review, adversarial inquiry, request evidence envelope — sequenced by `[PROC-EDPC_COMPREHENSION]`, not merged ledgers. |
+| **Gates** | `tied gate check` / `tied_checklist_gate_validate` | Integrated depth: identity-bound inquiry + activation at `pre_implementation`, `verification`, `close_out`; absolute `gates_dir` / `ledger_path` or cwd = repo root when persisting receipts. |
+
+Proof boundaries (v1): tier caps agent actions; dogfood on the TIED store at `toolchain_readonly` does not prove target-system health; workflows D/E and continuous G deferred per methodology non-goals.
 
 ### Verification charter (Wave 4 — opt-in)
 
@@ -261,4 +282,4 @@ On a fresh bootstrap with no project-specific REQ/ARCH/IMPL tokens, `tied_valida
 
 ---
 
-**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-09-24
+**TIED Methodology Version**: 3.0.0 · **Last updated**: 2026-10-19

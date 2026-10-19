@@ -4,11 +4,11 @@
 | --- | --- |
 | **Purpose** | Sponsor-facing **loop × method** surface: prefilled dispositions, TIED center-of-gravity, and agent-drafted mechanism columns (sponsor review before accepted outreach). |
 | **Audience** | Sponsors, methodology owners, plan authors, agent operators |
-| **Status** | **Mechanism fill complete (agent draft)** — **38/38** rows (§2 **row 11** PR-centric review added 2026-10-17 per [Claude Code team review × TIED](claude-code-team-code-review-vs-tied.md)); sponsor review before accepted outreach; tracked by [REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX](../../tied-project/requirements/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml) |
+| **Status** | **Mechanism fill complete (agent draft)** — **39/39** rows (§2 **row 12** EDPC added 2026-10-19); sponsor review before accepted outreach; tracked by [REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX](../../tied-project/requirements/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml) |
 | **Proof boundary** | Structure, row inventory, links, and TIED traceability only — **not** ISO/CMMI certification or behavioral equivalence with any row method. |
 | **TIED anchors** | [Client development index](../../tied-bundle/docs/client-development-index.md), [Vocabulary layer × TIED × LEAP × CITDP](../../tied-bundle/docs/vocabulary-layer-tied-leap-citdp.md), [LEAP](../../tied-bundle/docs/LEAP.md), [processes](../../tied-bundle/docs/processes.md), [AGENTS.md](../../AGENTS.md) |
 | **Sibling docs** | [TIED × well-known methodologies](tied-vs-well-known-methodologies.md), [QMM × TIED](qmm-kaizen-vs-tied.md), [Jev × TIED](jev-for-tied-improvement.md), [Trail-Code × TIED](tied-vs-trail-code.md), [Claude Code team code review × TIED](claude-code-team-code-review-vs-tied.md) |
-| **Last updated** | 2026-10-17 |
+| **Last updated** | 2026-10-19 |
 
 ---
 
@@ -93,7 +93,7 @@ Delivery and engineering rows that are not expanded in the [Primary QMM systems 
 
 ## §2 — Layer C adjacent frameworks {#section-2-layer-c-adjacent-frameworks}
 
-**Row contract:** exactly **11** data rows. One row per framework; **`Loop(s)`** may be `1`, `2`, or `1–2`. Mechanism columns: filled (agent draft; see §3).
+**Row contract:** exactly **12** data rows. One row per framework; **`Loop(s)`** may be `1`, `2`, or `1–2`. Mechanism columns: filled (agent draft; see §3).
 
 | # | Framework | Loop(s) | Disposition | TIED center of gravity | Evidence refs | vocabulary | intent_stack | change_analysis | implementation_proof | anti_drift | improvement_loop | sponsor_notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -108,6 +108,7 @@ Delivery and engineering rows that are not expanded in the [Primary QMM systems 
 | 9 | LangGraph (EDS pattern) | 2 | **Composable** | Orchestration shell around evidence-driven steps | [langgraph-evidence-driven-software-engineering.md](../tools/langgraph-evidence-driven-software-engineering.md) | LangGraph doc maps steps to checklist slugs | Each node maps to REQ-scoped evidence | CITDP + gate phases as graph nodes | Manifest/gate outputs as node artifacts | LEAP if graph diverges from checklist | External graph for multi-agent ops | Shell only — `[PROC-AGENT_REQ_CHECKLIST]` stays normative |
 | 10 | Brownfield intent elevation / OEE | 1 | **Composable** | Observed code → intent; operating-environment externalities | [brownfield-intent-elevation.md](../../tied-bundle/docs/brownfield-intent-elevation.md), [OEE doc](../tied-operating-environment-externalities.md) | OEE + operating-environment vocab; brownfield doc | `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]` when installed | CITDP compatibility ledger; costly → `/unblock` | Elevation → then standard TDD cycle | LEAP from observed code to REQ/IMPL | Client cohort evidence when scoped | Composable brownfield path; not automatic in every client |
 | 11 | PR-centric agent code review (Anthropic team model) | 1–2 | **Composable** | Pre-handoff charter, convergence policy, risk-tier playbook; PR/diff review complements IMPL/spec authority | [Claude Code team code review × TIED](claude-code-team-code-review-vs-tied.md) | `quality-assurance.md` review convergence + compose snapshot RECORD | Compose phase REQs (pre-handoff, risk-tier, convergence, incident corpus, DevOps appendix) | CITDP `depth_tier` + assurance; sponsor **costly choice** on human approval | [pre-handoff-verification-charter.md](../../tied-bundle/docs/pre-handoff-verification-charter.md); optional Bugbot/local diff review; adversarial inquiry when integrated | LEAP when PR feedback diverges from IMPL; article metrics not TIED targets | `fb-mvclklsa-t5gzbo`; `mle-claude-compose-20261017-001`; [incident-revert-evaluation-corpus.md](../../tied-bundle/docs/incident-revert-evaluation-corpus.md) | **Composable:** hosted PR bots not TIED authority; merge/CI/release **Defer** per comparison; convergence MCP/checklist receipts still **Gap** after 2026-10-17 doc compose |
+| 12 | EDPC (Evidence-Driven Program Comprehension) | 1–2 | **Composable** | Tier-bounded investigation choreography; file SCM shell; compose BFIE/EASAR/graph/claims/inquiry/envelope | [EDPC_Methodology_and_Workflows.md](../methodologies/EDPC_Methodology_and_Workflows.md), [REQ-TIED_EDPC_COMPREHENSION](../../tied-project/requirements/REQ-TIED_EDPC_COMPREHENSION.yaml) | [edpc-comprehension.md](../../tied-project/vocab/edpc-comprehension.md); `[PROC-EDPC_COMPREHENSION]` in [processes.md](../../tied-bundle/docs/processes.md) | `[REQ-TIED_EDPC_COMPREHENSION]` + `edpc_engagement` on Tracker | CITDP + integrated gates; `edpc-queues.v1` template | `tied_edpc_*` MCP; EASAR receipts under workflow **B**; module tests `mcp-server/src/edpc/` | LEAP on tier/route/publish drift; envelope + gate receipts | Dogfood pilots; `easar_full` deprecated alias period | **Composable:** not health/certification claims; no claim-graph DB in v1; target-repo feature work still uses `[PROC-AGENT_REQ_CHECKLIST]` |
 
 ---
 

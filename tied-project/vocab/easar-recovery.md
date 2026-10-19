@@ -1,5 +1,7 @@
 # EASAR recovery (Mode C) (canonical)
 
+**Umbrella engagement:** New comprehension programs should start from **[edpc-comprehension.md](edpc-comprehension.md)** and Tracker **`engagement: edpc_full`**. This glossary documents **EASAR receipt and workflow B baseline** terms; `[REQ-TIED_EASAR_RECOVERY]` remains implemented and is linked **`superseded_by`** `[REQ-TIED_EDPC_COMPREHENSION]` for engagement naming only (receipt builders unchanged).
+
 **Scope:** Domain vocabulary for Evidence-Assured Software Architecture Recovery (EASAR) Mode C engagements in TIED clients. Terms **do not** replace REQ/ARCH/IMPL authority.
 
 **Traceability:** `[REQ-TIED_EASAR_RECOVERY]` · `[ARCH-TIED_EASAR_ARTIFACT_MODEL]` · `[IMPL-TIED_EASAR_RECEIPTS]` · `[PROC-EASAR_RECOVERY]` · methodology [evidence-assured-software-architecture-recovery.md](../../docs/methodologies/evidence-assured-software-architecture-recovery.md) §7
@@ -14,7 +16,7 @@
 
 | Term | Definition | TIED preferred name |
 | --- | --- | --- |
-| **Recovery engagement (Mode C)** | Full EASAR orchestration composing BFIE, graph, claims, fidelity, inquiry, envelope | Tracker `brownfield_intent_elevation.engagement: easar_full` with `mode: pilot` or `strict` |
+| **Recovery engagement (Mode C)** | EASAR receipt orchestration (EDPC workflow **B** baseline) | Tracker `engagement: edpc_full` (preferred) or deprecated `easar_full`; `mode: pilot` or `strict` |
 | **Evidence-backed traceability stack** | REQ/ARCH/IMPL + working receipts + envelope | `tied-project/` + `tied-project/working/{REQ}/` |
 | **Claim registry** | Interpretations with verification state | Intent elevation matrix + claims-review output (not adversarial finding-ledger) |
 | **Evaluation ledger** | Measured close-out outcomes | Request evidence envelope + gate receipts |

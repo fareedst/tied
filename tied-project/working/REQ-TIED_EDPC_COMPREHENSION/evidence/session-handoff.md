@@ -1,16 +1,18 @@
 # Session handoff — REQ-TIED_EDPC_COMPREHENSION
 
-**Updated:** 2026-10-19 (resume session — pre_impl gate + Slice 6 dogfood A+B+F)  
+**Updated:** 2026-10-19 (handoff after program close_out)  
 **Depth:** `integrated` · **gate_policy:** `advisory` · **Refine pass:** 1  
 **Engagement:** `edpc_full` · **Tier (dogfood):** `toolchain_readonly`  
-**Inquiry run_id:** `edpc-structural-pre-impl-20261019`
+**Inquiry run_ids:** pre_impl `edpc-structural-pre-impl-20261019` · verification `edpc-verify-20261019` · close_out `edpc-closeout-20261019`
 
 **Methodology (uncommitted):** [docs/methodologies/EDPC_Methodology_and_Workflows.md](../../../../docs/methodologies/EDPC_Methodology_and_Workflows.md)  
 **Program plan:** [../PLAN.md](../PLAN.md)  
 **CITDP (persisted):** [../../../citdp/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml](../../../citdp/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml) · working copy [../CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml](../CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml)  
 **Test strategy:** [../test-strategy.md](../test-strategy.md)  
 **Refine tracker:** [../checklist-tracker.yaml](../checklist-tracker.yaml)  
-**Pre-impl gate tracker:** [../gate-tracker-pre-implementation.yaml](../gate-tracker-pre-implementation.yaml)
+**Pre-impl gate tracker:** [../gate-tracker-pre-implementation.yaml](../gate-tracker-pre-implementation.yaml)  
+**Verification gate tracker:** [../gate-tracker-verification.yaml](../gate-tracker-verification.yaml)  
+**Close-out gate tracker:** [../gate-tracker-close-out.yaml](../gate-tracker-close-out.yaml)
 
 ---
 
@@ -20,23 +22,34 @@
 
 ---
 
-## Finished this session
+## Program state (cumulative)
+
+| Phase | Status | Evidence |
+| --- | --- | --- |
+| Refine pass 1 | done | [PLAN.md](../PLAN.md), working CITDP, [test-strategy.md](../test-strategy.md) |
+| Slice 0 enrollment | done | REQ/ARCH/IMPL tokens, `PROC-EDPC_COMPREHENSION`, four pseudo-code sidecars |
+| Slices 1–5 code | done | `mcp-server/src/edpc/*`, four MCP tools; 14 unit tests green |
+| Pre-impl gate | **allowed** | [pre_implementation-2026-10-19T15-51-46-424Z.json](../gates/pre_implementation-2026-10-19T15-51-46-424Z.json) |
+| Slice 6 dogfood A+B+F | done | [slice6-dogfood-abf.md](./slice6-dogfood-abf.md) |
+| Verification inquiry + gate | **allowed** | [slice7-verification-gate.md](./slice7-verification-gate.md), [verification-2026-10-19T16-12-36-116Z.json](../gates/verification-2026-10-19T16-12-36-116Z.json) |
+| Envelope + chain profile | done | [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json), [evidence-chain-profile.v1.json](./evidence-chain-profile.v1.json) — **no envelope error gaps** |
+| Close-out inquiry + gate | **allowed** | [slice8-close-out-gate.md](./slice8-close-out-gate.md), [close_out-2026-10-19T16-25-28-150Z.json](../gates/close_out-2026-10-19T16-25-28-150Z.json) |
+| Traceable commit | **deferred** | [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
+
+---
+
+## Last session (close_out)
 
 | Item | Evidence |
 | --- | --- |
-| Refine pass 1 | [PLAN.md](../PLAN.md), working CITDP, test strategy, risk, refine tracker |
-| Slice 0 enrollment | `REQ-TIED_EDPC_COMPREHENSION`, `ARCH-TIED_EDPC_ARTIFACT_MODEL`, four IMPL tokens, `PROC-EDPC_COMPREHENSION` in `tied-bundle/docs/processes.md` + `semantic-tokens.yaml` |
-| IMPL pseudo-code | Four sidecars; **`pseudocode_validate` gate_mode** all pass |
-| Slices 1–5 MCP | `mcp-server/src/edpc/*`, four MCP tools in `tools/index.ts`; EASAR `engagement-facet` delegates to EDPC |
-| Unit tests | `mcp-server/src/edpc/*.test.ts`; EASAR engagement regression green after `npm run build` |
-| Vocab | [edpc-comprehension.md](../../../vocab/edpc-comprehension.md), routing **2i** |
-| EASAR link | `REQ-TIED_EASAR_RECOVERY` `superseded_by` → EDPC (engagement naming) |
-| Integrated inquiry | Four artifacts under `tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/` |
-| `tied_checklist_activation_collect` | ok for `run_id` above |
-| `tied_validate_consistency` | **ok: true** (post-enrollment) |
-| Slice 6 draft | Charter, access matrix, scm shell, empty claims ledger under [evidence/edpc/](./edpc/) |
-| Pre-impl gate (retry) | **`allowed: true`** — [pre_implementation-2026-10-19T15-51-46-424Z.json](../gates/pre_implementation-2026-10-19T15-51-46-424Z.json) |
-| Slice 6 dogfood A+B+F | [slice6-dogfood-abf.md](./slice6-dogfood-abf.md) — inventory + publish manifest + envelope shell |
+| Phase-close_out inquiry | `tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-close_out/` (four artifacts) |
+| Activation collect | [gate-activation-close-out.json](./gate-activation-close-out.json) |
+| Layer C PSA | `tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/pseudocode-analysis/IMPL-TIED_EDPC_*.v1.json` |
+| Close-out runner | [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) |
+| Gate validate payload | [gate-validate-close-out-payload.json](./gate-validate-close-out-payload.json) |
+| CITDP `completion_criteria.close_out` | Working + persisted copy under `tied-project/citdp/` |
+
+**Gate validate tip:** Use absolute `gates_dir` / `ledger_path` or cwd = repo root ([slice6-dogfood-abf.md](./slice6-dogfood-abf.md)).
 
 ---
 
@@ -44,43 +57,37 @@
 
 | Signal | Status |
 | --- | --- |
-| **Machine close-out** | **not_run** — verification/close_out gates + envelope gap closure pending |
-| **Process contract** | **partial** — pre_impl **allowed**; dogfood A+B+F done; integrated envelope has **evidence_chain_profile** gap |
-| **Adherence ledger** | **partial** — gate-ledger.jsonl includes allowed pre_impl receipt |
-
-### Next (verification / close_out)
-
-1. **`gate-tracker-verification.yaml`** + optional phase-verification adversarial inquiry (integrated pairing).
-2. **`evidence_chain_profile`** or waiver for envelope error gap.
-3. **`tied_checklist_gate_validate`** `verification` then `close_out` when sponsor wants machine close-out.
-4. Reload IDE TIED YAML MCP after build (CLI already uses fresh dist).
-
-### Costly choices / risks (unchanged)
-
-- **R-EDPC-003:** Keep `easar_full` alias + dual fixtures through migration.
-- **R-EDPC-001:** Tier bypass if tools skipped — dogfood must call `tied_edpc_access_validate`.
+| **Machine close-out** | **allowed** — close_out gate + envelope `fail_on_error_gaps` (0 blocking) |
+| **Process contract** | **allowed** — pre_impl + verification + close_out **allowed**; advisory inquiry warns only |
+| **Adherence ledger** | **partial** — [gate-ledger.jsonl](../gate-ledger.jsonl) (close_out receipt appended); reconcile band **B** possible on `run-close-out-gates` default ledger path vs program ledger |
 
 ---
 
 ## Resume here
 
-1. Verification tracker + **`tied_checklist_gate_validate`** **`verification`** (activation collect if integrated verification inquiry armed).
-2. Close envelope gaps (evidence chain profile); re-run **`request_evidence_envelope_build`**.
-3. **`close_out`** gate + **`tied_adherence_reconcile_run`** when sponsor wants machine close-out.
-4. Docs follow-ons: `client-development-index`, methodology composition matrix §2 row; optional `edpc-queues.v1.yaml` template.
-5. **Envelope in git:** `.gitignore` negation for `evidence/request-evidence-envelope.v1.json` on this REQ only (rebuild + commit after gap closure).
+1. **Sponsor `traceable-commit`** per [traceable-commit-evidence.md](./traceable-commit-evidence.md) (CHANGELOG entry drafted under `[Unreleased]`).  
+2. **Gitignore:** applied — see [gitignore-close-out-hygiene.md](./gitignore-close-out-hygiene.md); quality-collect logs under `tied-bundle/working/.../quality-collect/`.
+
+**Docs slice (2026-10-19):** [client-development-index](../../../../tied-bundle/docs/client-development-index.md), [methodology-composition-matrix §2 row 12](../../../../docs/comparisons/methodology-composition-matrix.md), [brownfield-intent-elevation](../../../../tied-bundle/docs/brownfield-intent-elevation.md), [easar-recovery.md](../../../vocab/easar-recovery.md) pointer, `edpc-queues.v1.example.yaml` template, EASAR `edpc_full` gate fixture, REQ detail LEAP fix.
 
 **TIED MCP base path:** `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` — confirm with `tied_config_get_base_path` before YAML writes.
 
 ---
 
+## Costly choices / risks (unchanged)
+
+- **R-EDPC-003:** Keep `easar_full` alias + dual fixtures through migration.  
+- **R-EDPC-001:** Tier bypass if tools skipped — dogfood must call `tied_edpc_access_validate`.
+
+---
+
 ## Related programs
 
-- **[REQ-TIED_EASAR_RECOVERY]** — Receipts unchanged; nested under EDPC workflow B.
+- **[REQ-TIED_EASAR_RECOVERY]** — Receipts unchanged; nested under EDPC workflow B.  
 - **[REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING]** — CASE `execution_access` deferred v1.1.
 
 ---
 
 ## Git (informational)
 
-No commit this session. Large uncommitted surface: `docs/methodologies/EDPC_Methodology_and_Workflows.md`, `tied-project/` enrollment, `tied-bundle/docs/processes.md`, `mcp-server/src/edpc/`, working evidence.
+No commit yet. Staged scope unchanged from prior handoff plus close_out artifacts, PSA (local working root, gitignored), CHANGELOG `[Unreleased]` bullet, persisted CITDP with `completion_criteria.close_out`.

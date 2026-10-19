@@ -55,7 +55,8 @@
     "prompt-composer.md"
   ],
   "METHODOLOGY_TEMPLATES_TO_COPY": [
-    "brownfield-evidence-to-intent-matrix.md"
+    "brownfield-evidence-to-intent-matrix.md",
+    "edpc-queues.v1.example.yaml"
   ],
   "DOCS_TO_COPY": [
     "adding-tied-mcp-and-invoking-passes.md",

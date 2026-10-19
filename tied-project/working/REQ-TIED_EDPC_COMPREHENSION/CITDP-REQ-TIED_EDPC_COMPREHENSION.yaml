@@ -98,3 +98,29 @@ risk_analysis:
     rationale: "EDPC orchestration spans tier caps and MCP tools; integrated structural inquiry before RED."
     research_profile: "read-only-research"
     sub_adversarial_inquiry_pass: "required_before_red"
+completion_criteria:
+  close_out:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_EDPC_COMPREHENSION"
+      run_id: "edpc-closeout-20261019"
+      scope:
+        - "IMPL-TIED_EDPC_ACCESS#MCP_TIED_EDPC_ACCESS_VALIDATE#edpc-closeout-rev-1"
+        - "IMPL-TIED_EDPC_ENGAGEMENT_FACET#MCP_TIED_EDPC_ENGAGEMENT_VALIDATE#edpc-closeout-rev-1"
+        - "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-closeout-rev-1"
+        - "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-closeout-rev-1"
+    envelope_blocking: "fail_on_error_gaps true at program close-out"
+    tracker_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-close-out.yaml"
+  activation:
+    phase: "verification"
+    request_token: "REQ-TIED_EDPC_COMPREHENSION"
+    run_id: "edpc-verify-20261019"
+    scope:
+      - "IMPL-TIED_EDPC_ACCESS#MCP_TIED_EDPC_ACCESS_VALIDATE#edpc-verify-rev-1"
+      - "IMPL-TIED_EDPC_ENGAGEMENT_FACET#MCP_TIED_EDPC_ENGAGEMENT_VALIDATE#edpc-verify-rev-1"
+      - "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-verify-rev-1"
+      - "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-verify-rev-1"
+  envelope_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
+  focused_tests: "mcp-server/src/edpc/*.test.ts; scoped easar + checklist-validator regression"
+  verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
+  tracker_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-verification.yaml"

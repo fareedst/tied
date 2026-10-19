@@ -7,7 +7,7 @@
 **Test strategy:** [test-strategy.md](./test-strategy.md)  
 **Risk:** [evidence/risk-assessment-refine-pass1.md](./evidence/risk-assessment-refine-pass1.md)
 
-**Refine-plan pass:** 1 · **2026-10-19** · **build-plan:** in progress (Slice 0 enrollment + Slices 1–5 MCP; Slice 6 dogfood draft)  
+**Refine-plan pass:** 1 · **2026-10-19** · **build-plan:** close_out allowed (Slices 0–6 + verification + program close_out; docs/matrix migration complete)  
 **Session handoff:** [evidence/session-handoff.md](./evidence/session-handoff.md) (2026-10-19, `@handoff`)
 
 ## Sponsor decisions (locked for v1)
@@ -189,11 +189,11 @@ EDPC in TIED v1 proves **tier-bounded investigation choreography and inspectable
 
 ## EASAR supersession migration (implementation checklist)
 
-1. Add `EDPC_FULL_ENGAGEMENT = "edpc_full"`; map `easar_full` → same code path + `deprecated_engagement_alias:easar_full` diagnostic.  
-2. Rename exports: `edpcFullEngagementActive()` primary; keep `easarFullEngagementActive` as thin wrapper.  
-3. Update gate tracker fixtures under `REQ-TIED_EASAR_RECOVERY/working` → add parallel `edpc_full` fixtures; keep `easar_full` regression tests.  
-4. Docs: client-development-index scenario row; brownfield-intent-elevation.md engagement section; easar-recovery.md → pointer to edpc-comprehension.md.  
-5. LEAP: `REQ-TIED_EASAR_RECOVERY` `related_requirements.superseded_by` + cross-refs in EDPC REQ satisfaction criteria.
+1. **Done** — `EDPC_FULL_ENGAGEMENT`; `easar_full` alias + `deprecated_engagement_alias:easar_full` diagnostic.  
+2. **Done** — `edpcFullEngagementActive()` primary; `easarFullEngagementActive` wrapper.  
+3. **Done** — [gate-tracker-pre-implementation-edpc-full-facet.yaml](../REQ-TIED_EASAR_RECOVERY/gate-tracker-pre-implementation-edpc-full-facet.yaml); `easar_full` + `edpc_full` regression tests.  
+4. **Done** — client-development-index; brownfield-intent-elevation; easar-recovery → edpc-comprehension; composition matrix §2 row 12; `edpc-queues.v1.example.yaml`.  
+5. **Done** — `REQ-TIED_EASAR_RECOVERY` `superseded_by` + EDPC `SC-EDPC-SUPERSEDE`; fixed nested detail YAML shape.
 
 ---
 

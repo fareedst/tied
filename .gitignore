@@ -88,12 +88,13 @@ working/**/evidence/evidence-chain-profile.v1.json
 working/**/evidence/request-evidence-envelope.v1.json
 # Regenerable envelope index under committed working root (mirror root working/ rule)
 tied-project/working/**/evidence/request-evidence-envelope.v1.json
-# [REQ-TIED_EDPC_COMPREHENSION] committed envelope for integrated pilot / close-out traceability
+# [REQ-TIED_EDPC_COMPREHENSION] committed close-out proof under tied-project/working/ (negate envelope rule above)
 !tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/
-!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**
 tied-project/working/**/evidence/quality-manifest/
 tied-project/working/**/evidence/quality/**/*.stdout.txt
 tied-project/working/**/evidence/quality/**/*.stderr.txt
+tied-project/working/**/evidence/quality-collect/
 tied-project/working/**/evidence/not-applicable-receipt.v1.json
 working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/r7-raw/
 # CITDP pre-persist scratch (canonical record under tied/citdp/)

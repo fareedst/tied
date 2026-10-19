@@ -48,6 +48,7 @@ Path: `tied-project/working/{REQ-TOKEN}/evidence/edpc/`
 | `scm-snapshot-shell.v1.yaml` | SCM index + receipt refs |
 | `claims-ledger.v1.yaml` | Investigation claims (not adversarial finding-ledger) |
 | `edpc-publish-manifest.v1.json` | Workflow F freeze |
+| `edpc-queues.v1.yaml` | Five live queues (EDPC §5); template [edpc-queues.v1.example.yaml](../../tied-bundle/templates/edpc-queues.v1.example.yaml) |
 
 ---
 

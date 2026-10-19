@@ -2461,6 +2461,8 @@ REQ-TIED_EASAR_RECOVERY:
   name: "Evidence-Assured Software Architecture Recovery (Mode C MVP)"
   priority: "P1"
   related_requirements:
+    related_to:
+      - "REQ-TIED_EDPC_COMPREHENSION"
     superseded_by:
       - "REQ-TIED_EDPC_COMPREHENSION"
   status: "Implemented"
