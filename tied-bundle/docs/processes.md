@@ -213,6 +213,33 @@ See [context-adaptive-software-engineering.md](../../docs/methodologies/context-
 
 ---
 
+## `[PROC-EDPC_COMPREHENSION]` Evidence-Driven Program Comprehension (orchestration v1)
+
+### Purpose
+Compose existing brownfield, source graph, claims review, EASAR receipts, adversarial inquiry, and request evidence envelope tooling into **EDPC workflows A–G** without duplicating `[PROC-AGENT_REQ_CHECKLIST]` or persisting a claim-graph database.
+
+### Scope
+Engagements where Tracker metadata includes `brownfield_intent_elevation.engagement: edpc_full` (requires `mode: pilot` or `strict`). Deprecated alias `easar_full` maps to the same validation path with a diagnostic. v1 delivers tier-bounded access validation, deterministic workflow routing, file-based SCM shell artifacts, and publish manifests with explicit `gaps[]`.
+
+### Token references
+- `[REQ-TIED_EDPC_COMPREHENSION]`, `[ARCH-TIED_EDPC_ARTIFACT_MODEL]`, `[IMPL-TIED_EDPC_ACCESS]`, `[IMPL-TIED_EDPC_ORCHESTRATION]`, `[IMPL-TIED_EDPC_PUBLISH]`, `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]`
+- `[REQ-TIED_EASAR_RECOVERY]`, `[PROC-EASAR_RECOVERY]` (nested under workflow **B** baseline)
+- `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]`, `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]`, `[REQ-TIED_CLAIMS_EVIDENCE_REVIEW]`, `[REQ-TIED_ADVERSARIAL_INQUIRY]`, `[REQ-REQUEST_EVIDENCE_ENVELOPE]`
+
+### Checklist choreography (references only)
+1. **A Commission** — charter + evidence-access matrix; `tied_edpc_access_validate`, `tied_edpc_engagement_validate`
+2. **B Baseline** — `[PROC-EASAR_RECOVERY]` slices 0–2 where applicable; inventory + graph receipts
+3. **C Deep slice** — source graph MCP, Track C sidecars, claims review (tier-appropriate claim classes)
+4. **D Failure / ops** — fidelity/adversarial when integrated; runtime evidence only when tier ≥ `toolchain_readonly` (v1 dogfood defers full D)
+5. **E Change impact** — scoped analysis / BBCE advisory; source mutations only at `source_change`
+6. **F Verify / publish** — `tied_edpc_publish_build`, envelope + checklist verification gates
+7. **G Refresh** — documented stale-claim triggers; `tied_edpc_workflow_route` reprioritize (no continuous daemon in v1)
+
+### Narrative spec
+See [EDPC_Methodology_and_Workflows.md](../../docs/methodologies/EDPC_Methodology_and_Workflows.md) and [edpc-comprehension.md](../../tied-project/vocab/edpc-comprehension.md).
+
+---
+
 ## `[PROC-EASAR_RECOVERY]` Evidence-Assured Software Architecture Recovery (Mode C)
 
 ### Purpose

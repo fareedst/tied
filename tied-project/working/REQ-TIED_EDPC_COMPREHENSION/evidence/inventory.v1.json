@@ -1,0 +1,20 @@
+{
+  "schema_version": "inventory.v1",
+  "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+  "baseline_revision": "6b498c9b",
+  "scoped_analysis_run_id": "edpc-dogfood-slice6-20261019",
+  "files_scanned": 9,
+  "languages": [
+    "ts"
+  ],
+  "entry_points": [],
+  "walk_summary": {
+    "roots_used": [
+      "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/src/edpc"
+    ],
+    "skipped_paths_count": 0,
+    "followed_symlinks": "false"
+  },
+  "matrix_row_placeholders": [],
+  "content_hash": "d6ef31e7e673a1fd1b26f6fef7a8373ee4a71e5bbddfa901a4f00227c8aeca51"
+}

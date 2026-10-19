@@ -1,0 +1,15 @@
+IMPL-TIED_EDPC_ACCESS:
+  code_locations:
+    files:
+      - description: "Tier and matrix validation"
+        path: "mcp-server/src/edpc/access-validate.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Validate evidence_access_tier, capability flags, production_touch, and charter/matrix path consistency."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_ACCESS-pseudocode.md"
+  name: "EDPC Access Matrix Validator"
+  status: "Active"

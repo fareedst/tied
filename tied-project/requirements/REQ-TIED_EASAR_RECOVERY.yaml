@@ -1,4 +1,7 @@
 REQ-TIED_EASAR_RECOVERY:
+  related_requirements:
+    superseded_by:
+      - "REQ-TIED_EDPC_COMPREHENSION"
   REQ-TIED_EASAR_RECOVERY:
     category: "Functional"
     description: "Mode C EASAR recovery engagement composes existing brownfield, graph, claims, fidelity, adversarial inquiry, and request envelope REQs under integrated depth."

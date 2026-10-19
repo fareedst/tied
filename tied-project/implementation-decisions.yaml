@@ -2314,6 +2314,46 @@ IMPL-TIED_EASAR_RECEIPTS:
   detail_file: "implementation-decisions/IMPL-TIED_EASAR_RECEIPTS.yaml"
   name: "EASAR Receipt Builders"
   status: "Active"
+IMPL-TIED_EDPC_ACCESS:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Fail-closed evidence_access_tier validator for charter and access matrix."
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_ACCESS.yaml"
+  name: "EDPC Access Matrix Validator"
+  status: "Active"
+IMPL-TIED_EDPC_ENGAGEMENT_FACET:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Tracker edpc_engagement facet and brownfield engagement edpc_full with easar_full alias."
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_ENGAGEMENT_FACET.yaml"
+  name: "EDPC Engagement Facet"
+  status: "Active"
+IMPL-TIED_EDPC_ORCHESTRATION:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Deterministic EDPC workflow A-G routing from question class and tier."
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_ORCHESTRATION.yaml"
+  name: "EDPC Workflow Orchestration"
+  status: "Active"
+IMPL-TIED_EDPC_PUBLISH:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Build edpc-publish-manifest with SCM minimum fields and gaps[]."
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_PUBLISH.yaml"
+  name: "EDPC Publish Builder"
+  status: "Active"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

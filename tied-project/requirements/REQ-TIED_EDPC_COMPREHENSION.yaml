@@ -1,0 +1,44 @@
+REQ-TIED_EDPC_COMPREHENSION:
+  category: "Functional"
+  description: "EDPC orchestration enrolls evidence_access_tier, file-based SCM shell, and MCP tools composing EASAR/brownfield/graph/claims/envelope without a claim-graph DB."
+  name: "Evidence-Driven Program Comprehension (EDPC orchestration v1)"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Deterministic workflow routing and publish manifests with explicit gaps."
+      - "Single umbrella for comprehension engagements with fail-closed tier caps."
+    problems_solved:
+      - "EDPC methodology documented but not enrolled in tied-project."
+      - "No evidence_access_tier model or EDPC MCP validate/route/publish."
+    why: "Bridge docs/methodologies/EDPC_Methodology_and_Workflows.md into executable TIED stack."
+  related_requirements:
+    depends_on:
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_ADVERSARIAL_INQUIRY"
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_CLAIMS_EVIDENCE_REVIEW"
+      - "REQ-TIED_EASAR_RECOVERY"
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+    related_to:
+      - "REQ-TIED_EASAR_RECOVERY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "SC-EDPC-COMPOSE — SCM shell references EASAR receipts without duplicating bytes."
+    - criterion: "SC-EDPC-FACET — edpc_full requires pilot|strict; easar_full deprecated alias diagnostic."
+    - criterion: "SC-EDPC-PROC — PROC-EDPC_COMPREHENSION references existing slugs/tools only."
+    - criterion: "SC-EDPC-ROUTE — tied_edpc_workflow_route deterministic for identical inputs."
+    - criterion: "SC-EDPC-SCM — publish manifest lists gaps; EDPC minimum fields or gaps[]."
+    - criterion: "SC-EDPC-SUPERSEDE — EASAR REQ linked superseded_by engagement naming; receipt tests green."
+    - criterion: "SC-EDPC-TIER — tied_edpc_access_validate fail-closed per evidence_access_tier."
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EDPC_ACCESS"
+      - "IMPL-TIED_EDPC_ENGAGEMENT_FACET"
+      - "IMPL-TIED_EDPC_ORCHESTRATION"
+      - "IMPL-TIED_EDPC_PUBLISH"
+    tests:
+      - "mcp-server/src/edpc/*.test.ts"

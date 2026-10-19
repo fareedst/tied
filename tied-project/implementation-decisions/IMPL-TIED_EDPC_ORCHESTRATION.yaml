@@ -1,0 +1,15 @@
+IMPL-TIED_EDPC_ORCHESTRATION:
+  code_locations:
+    files:
+      - description: "Workflow route table"
+        path: "mcp-server/src/edpc/workflow-route.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation: []
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Route comprehension questions to ordered workflow ids with tier stripping for D/E at source_static."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_ORCHESTRATION-pseudocode.md"
+  name: "EDPC Workflow Orchestration"
+  status: "Active"

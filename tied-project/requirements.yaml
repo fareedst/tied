@@ -2460,6 +2460,9 @@ REQ-TIED_EASAR_RECOVERY:
   detail_file: "requirements/REQ-TIED_EASAR_RECOVERY.yaml"
   name: "Evidence-Assured Software Architecture Recovery (Mode C MVP)"
   priority: "P1"
+  related_requirements:
+    superseded_by:
+      - "REQ-TIED_EDPC_COMPREHENSION"
   status: "Implemented"
   traceability:
     architecture:
@@ -2468,6 +2471,23 @@ REQ-TIED_EASAR_RECOVERY:
       - "IMPL-TIED_EASAR_RECEIPTS"
     tests:
       - "mcp-server/src/easar-receipts/*.test.ts"
+REQ-TIED_EDPC_COMPREHENSION:
+  category: "Functional"
+  description: "EDPC orchestration: tier-bounded comprehension engagements, SCM shell artifacts, MCP validate/route/publish; edpc_full supersedes easar_full engagement naming."
+  detail_file: "requirements/REQ-TIED_EDPC_COMPREHENSION.yaml"
+  name: "Evidence-Driven Program Comprehension (EDPC orchestration v1)"
+  priority: "P1"
+  status: "In Progress"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EDPC_ACCESS"
+      - "IMPL-TIED_EDPC_ENGAGEMENT_FACET"
+      - "IMPL-TIED_EDPC_ORCHESTRATION"
+      - "IMPL-TIED_EDPC_PUBLISH"
+    tests:
+      - "mcp-server/src/edpc/*.test.ts"
 REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH:
   category: "Functional"
   cross_references:

@@ -1,0 +1,8 @@
+schema_version: "engagement-charter.v1"
+request_token: "REQ-TIED_EDPC_COMPREHENSION"
+target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+workflows_planned:
+  - "A"
+  - "B"
+  - "F"
+sponsor_note: "Store dogfood v1 at toolchain_readonly; D/E deferred."

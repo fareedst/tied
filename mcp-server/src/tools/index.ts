@@ -82,6 +82,11 @@ import { buildEasarClaimMatrixMap } from "../easar-receipts/claim-matrix-map-mcp
 import { buildEasarReflexionReport } from "../easar-receipts/reflexion-report-mcp.js";
 import { runEasarValidationSuiteMcp } from "../easar-receipts/validation-results-mcp.js";
 import { buildEasarRecoveryExport } from "../easar-receipts/recovery-export-mcp.js";
+import { validateEdpcAccessMatrix } from "../edpc/access-validate.js";
+import { validateEdpcEngagementFacet } from "../edpc/edpc-engagement-facet.js";
+import { buildEdpcPublishManifest } from "../edpc/publish-build.js";
+import { routeEdpcWorkflow } from "../edpc/workflow-route.js";
+import { EVIDENCE_ACCESS_TIERS } from "../edpc/types.js";
 import {
   tiedSourceGraphFreshness,
   tiedSourceGraphMap,
@@ -3043,6 +3048,82 @@ export const allTools = [
       manifest_output_path?: string;
     }) => {
       const result = buildEasarRecoveryExport(args);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_access_validate",
+    config: {
+      description:
+        "Validate [REQ-TIED_EDPC_COMPREHENSION] evidence-access matrix and tier capability flags (fail-closed).",
+      inputSchema: z.object({
+        access_matrix: z.record(z.unknown()).describe("Parsed evidence-access-matrix.v1 body."),
+        tracker: z.record(z.unknown()).optional().describe("Optional Tracker snippet with edpc_engagement paths."),
+      }),
+    },
+    handler: async (args: { access_matrix: Record<string, unknown>; tracker?: Record<string, unknown> }) => {
+      const engagement =
+        args.tracker && typeof args.tracker === "object"
+          ? (args.tracker as { edpc_engagement?: Record<string, unknown> }).edpc_engagement
+          : undefined;
+      const result = validateEdpcAccessMatrix(args.access_matrix, engagement as Parameters<typeof validateEdpcAccessMatrix>[1]);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_engagement_validate",
+    config: {
+      description:
+        "Validate [REQ-TIED_EDPC_COMPREHENSION] brownfield engagement edpc_full (easar_full deprecated alias).",
+      inputSchema: z.object({
+        tracker: z.record(z.unknown()).describe("Checklist Tracker or gate tracker object."),
+      }),
+    },
+    handler: async (args: { tracker: Record<string, unknown> }) => {
+      const result = validateEdpcEngagementFacet(args.tracker);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_workflow_route",
+    config: {
+      description: "Deterministic [REQ-TIED_EDPC_COMPREHENSION] EDPC workflow A–G route from question class and tier.",
+      inputSchema: z.object({
+        question_class: z.string(),
+        evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
+      }),
+    },
+    handler: async (args: { question_class: string; evidence_access_tier: (typeof EVIDENCE_ACCESS_TIERS)[number] }) => {
+      const result = routeEdpcWorkflow(args.question_class, args.evidence_access_tier);
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_publish_build",
+    config: {
+      description: "Build [REQ-TIED_EDPC_COMPREHENSION] edpc-publish-manifest.v1 with gaps[] and receipt refs.",
+      inputSchema: z.object({
+        scm_shell: z.record(z.unknown()),
+        claims_ledger: z.array(z.record(z.unknown())),
+        access_matrix: z.object({
+          evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
+        }),
+        receipt_exists_map: z.record(z.boolean()).optional(),
+      }),
+    },
+    handler: async (args: {
+      scm_shell: Record<string, unknown>;
+      claims_ledger: Array<Record<string, unknown>>;
+      access_matrix: { evidence_access_tier: (typeof EVIDENCE_ACCESS_TIERS)[number] };
+      receipt_exists_map?: Record<string, boolean>;
+    }) => {
+      const existsMap = args.receipt_exists_map ?? {};
+      const result = buildEdpcPublishManifest({
+        scm_shell: args.scm_shell,
+        claims_ledger: args.claims_ledger as Parameters<typeof buildEdpcPublishManifest>[0]["claims_ledger"],
+        access_matrix: args.access_matrix,
+        receipt_exists: (path) => existsMap[path] ?? false,
+      });
       return textContent(JSON.stringify(result, null, 2));
     },
   },

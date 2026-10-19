@@ -1,0 +1,8 @@
+{
+  "schema_version": "edpc-publish-manifest.v1",
+  "gaps": [],
+  "receipt_refs": {
+    "inventory": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json"
+  },
+  "tier": "toolchain_readonly"
+}

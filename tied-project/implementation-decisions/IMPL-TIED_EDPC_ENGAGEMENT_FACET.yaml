@@ -1,0 +1,17 @@
+IMPL-TIED_EDPC_ENGAGEMENT_FACET:
+  code_locations:
+    files:
+      - description: "EDPC engagement facet (extends EASAR pattern)"
+        path: "mcp-server/src/edpc/edpc-engagement-facet.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EASAR_RECEIPTS"
+    requirements:
+      - "REQ-TIED_EASAR_RECOVERY"
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Validate edpc_full engagement, edpc_engagement block, and deprecated easar_full alias on Tracker."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_ENGAGEMENT_FACET-pseudocode.md"
+  name: "EDPC Engagement Facet"
+  status: "Active"

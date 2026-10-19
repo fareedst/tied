@@ -1,0 +1,16 @@
+IMPL-TIED_EDPC_PUBLISH:
+  code_locations:
+    files:
+      - description: "Publish manifest builder"
+        path: "mcp-server/src/edpc/publish-build.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EASAR_RECEIPTS"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Assemble publish manifest from scm shell, claims ledger, tier, and nested EASAR receipt refs."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_PUBLISH-pseudocode.md"
+  name: "EDPC Publish Builder"
+  status: "Active"

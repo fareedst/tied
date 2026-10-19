@@ -939,6 +939,15 @@ ARCH-TIED_EASAR_ARTIFACT_MODEL:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_EDPC_ARTIFACT_MODEL:
+  cross_references:
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "File-based SCM shell and publish artifacts for EDPC."
+  detail_file: "architecture-decisions/ARCH-TIED_EDPC_ARTIFACT_MODEL.yaml"
+  name: "EDPC Artifact Model"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -2431,6 +2440,42 @@ IMPL-TIED_EASAR_RECEIPTS:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_EDPC_ACCESS:
+  cross_references:
+    - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_ACCESS.yaml"
+  name: "EDPC Access Matrix Validator"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_EDPC_ENGAGEMENT_FACET:
+  cross_references:
+    - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_ENGAGEMENT_FACET.yaml"
+  name: "EDPC Engagement Facet"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_EDPC_ORCHESTRATION:
+  cross_references:
+    - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_ORCHESTRATION.yaml"
+  name: "EDPC Workflow Orchestration"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_EDPC_PUBLISH:
+  cross_references:
+    - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_PUBLISH.yaml"
+  name: "EDPC Publish Builder"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_FEEDBACK_PROMOTION:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
@@ -2798,6 +2843,18 @@ PROC-EASAR_RECOVERY:
   description: "Mode C orchestration composing BFIE, source graph, claims, fidelity, adversarial inquiry, and envelope tools."
   detail_file: "null"
   name: "EASAR Recovery Process"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
+PROC-EDPC_COMPREHENSION:
+  cross_references:
+    - "PROC-AGENT_REQ_CHECKLIST"
+    - "PROC-BROWNFIELD_INTENT_ELEVATION"
+    - "PROC-EASAR_RECOVERY"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Orchestrate EDPC workflows A-G composing EASAR, brownfield, graph, claims, inquiry, and envelope tools."
+  detail_file: "null"
+  name: "EDPC Comprehension Process"
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
@@ -4114,6 +4171,20 @@ REQ-TIED_EASAR_RECOVERY:
   description: "Umbrella REQ for EASAR Mode C MVP slices 0-4."
   detail_file: "requirements/REQ-TIED_EASAR_RECOVERY.yaml"
   name: "Evidence-Assured Software Architecture Recovery (Mode C MVP)"
+  source_index: "requirements.yaml"
+  status: "In Progress"
+  type: "REQ"
+REQ-TIED_EDPC_COMPREHENSION:
+  cross_references:
+    - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    - "IMPL-TIED_EDPC_ACCESS"
+    - "IMPL-TIED_EDPC_ENGAGEMENT_FACET"
+    - "IMPL-TIED_EDPC_ORCHESTRATION"
+    - "IMPL-TIED_EDPC_PUBLISH"
+    - "PROC-EDPC_COMPREHENSION"
+  description: "EDPC orchestration with tier caps, SCM shell, MCP validate/route/publish."
+  detail_file: "requirements/REQ-TIED_EDPC_COMPREHENSION.yaml"
+  name: "Evidence-Driven Program Comprehension (EDPC orchestration v1)"
   source_index: "requirements.yaml"
   status: "In Progress"
   type: "REQ"

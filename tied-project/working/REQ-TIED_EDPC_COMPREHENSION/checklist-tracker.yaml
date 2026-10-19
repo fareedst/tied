@@ -1,0 +1,67 @@
+copy_hygiene: "Authoritative Tracker for REQ-TIED_EDPC_COMPREHENSION refine-plan pass; clear completed/close_out before build-plan unless resuming same run."
+depth_tier: "integrated"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+  envelope_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-{phase}/"
+    limitation: "Integrated depth: identity-bound activation required at pre_implementation before RED; refine-plan completes analysis only."
+    planned_pre_impl_run_id: "edpc-structural-pre-impl-TBD"
+    status: "refine_plan_analysis_complete"
+  request: "REQ-TIED_EDPC_COMPREHENSION"
+gate_policy: "advisory"
+name: "edpc-comprehension-refine-plan-tracker"
+profile_depth: "integrated"
+refine_pass: 1
+refine_pass_date: "2026-10-19"
+request_token: "REQ-TIED_EDPC_COMPREHENSION"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+brownfield_intent_elevation:
+  mode: pilot
+  engagement: edpc_full
+edpc_engagement:
+  evidence_access_tier: toolchain_readonly
+  target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  production_touch: none
+  charter_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/engagement-charter.v1.yaml"
+  access_matrix_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/evidence-access-matrix.v1.yaml"
+state_history:
+  - at: "2026-10-19"
+    note: "refine-plan pass 1 — PLAN, CITDP analysis, test strategy, risk, tier mapping, EASAR supersession checklist"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "docs/methodologies/EDPC_Methodology_and_Workflows.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/PLAN.md"
+    id: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml"
+    id: "impact-discovery"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/risk-assessment-refine-pass1.md"
+    id: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/test-strategy.md"
+    id: "test-strategy"

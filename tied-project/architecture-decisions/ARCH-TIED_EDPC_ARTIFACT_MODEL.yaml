@@ -1,0 +1,30 @@
+ARCH-TIED_EDPC_ARTIFACT_MODEL:
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_EDPC_ACCESS"
+      - "IMPL-TIED_EDPC_ENGAGEMENT_FACET"
+      - "IMPL-TIED_EDPC_ORCHESTRATION"
+      - "IMPL-TIED_EDPC_PUBLISH"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  decisions:
+    - id: "claims-ledger-separation"
+      rationale: "EDPC claims-ledger is investigation claims; adversarial finding-ledger and EASAR reflexion remain distinct."
+      status: "accepted"
+      title: "Separate claims ledger from inquiry and EASAR ledgers"
+    - id: "easar-receipt-compose"
+      rationale: "SCM shell holds pointers to inventory.v1 and other EASAR receipts; no duplicate bytes."
+      status: "accepted"
+      title: "Compose EASAR receipts by reference"
+    - id: "intent-matrix-promotion"
+      rationale: "Brownfield intent elevation matrix remains promotion path; claims-ledger does not dual-write REQ rows."
+      status: "accepted"
+      title: "Promotion via BFIE matrix only"
+    - id: "scm-shell-not-graph-db"
+      rationale: "v1 uses scm-snapshot-shell.v1.yaml index + claims-ledger.v1.yaml; no persisted relationship graph."
+      status: "accepted"
+      title: "File-based SCM shell only in v1"
+  description: "Artifact model for Evidence-Driven Program Comprehension in TIED store clients (v1 file-based SCM, no graph DB)."
+  name: "EDPC Artifact Model"
+  status: "Active"

@@ -30,6 +30,8 @@
 | 2c | [`project-operations-mcp.md`](project-operations-mcp.md) | Project lint, git hygiene, sponsor questions MCP tools; `/xlate` and `/unblock` skills |
 | 2e | [`operating-environment-externalities.md`](operating-environment-externalities.md) | OEE: external workflows, compatibility ledger, operating-environment dependency management |
 | 2f | [`easar-recovery.md`](easar-recovery.md) | EASAR Mode C, recovery engagement, Stage 7 validation cases, receipt schemas, `[PROC-EASAR_RECOVERY]` |
+| 2h | [`process-certification-readiness.md`](process-certification-readiness.md) | EDSE certifiability readiness, normative process spec, conformance/capability profiles, 12207 reference mapping, independent assessment, assessor pack, non-certifying external appraisal, `[PROC-PROCESS_CERTIFICATION_READINESS]` |
+| 2i | [`edpc-comprehension.md`](edpc-comprehension.md) | EDPC program comprehension, evidence-access tiers, SCM shell, workflows A–G, engagement charter, claims ledger, `[PROC-EDPC_COMPREHENSION]` |
 | 2g | [`context-adaptive-engineering.md`](context-adaptive-engineering.md) | CASE / EDSE practice layer, practice contracts, context profiles, deterministic selection, reassessment receipts, method-effectiveness readout, `[PROC-CONTEXT_ADAPTIVE_PRACTICE]` |
 | 2b | [`feedback-to-tied.md`](feedback-to-tied.md) | Upstream feedback artifact (`feedback.yaml`) and MCP export |
 | 3 | [`leap-proposal-queue.md`](leap-proposal-queue.md) | Non-canonical LEAP proposals, audit, diff/session import |
@@ -80,6 +82,8 @@
 - **Evidence chain profile vs assurance profile vs research profile** — the **evidence chain profile** (`evidence-chain-profile.v1`) is a read-only completeness/provenance artifact. An **assurance profile** selects risk-triggered quality evidence. **Integrated agent profile** and **human research profile** are fidelity research *modes*. **Evidence-chain profile depth** (`integrated` \| `human_research`) only selects how much of the chain one generator run measures. Canonical terms: [`quality-assurance.md`](quality-assurance.md); contrast in [`fidelity-research.md`](fidelity-research.md).
 - **Evidence chain statistics report vs evidence chain profile** — the **evidence chain statistics report** (`evidence-chain-statistics-report.v1`) is a TIED-source offline batch over already-generated profiles. A **client cohort** is a compatibility partition, not a quality **pilot**. A **report input manifest** names artifacts; it is not a **project manifest**. Canonical terms: [`quality-assurance.md`](quality-assurance.md).
 - **Context-adaptive practice layer vs TIED checklist authority** — CASE/EDSE **practice contracts** and **deterministic practice selection** emit advisory receipts in v1; they do not auto-activate checklist steps or replace assurance profiles. **Method-effectiveness readout** stays separate from product-quality scores. Canonical terms: [`context-adaptive-engineering.md`](context-adaptive-engineering.md); first dogfood ties to [`easar-recovery.md`](easar-recovery.md).
+- **EDPC vs EASAR recovery baseline** — EDPC workflow **B** delegates Mode C inventory/graph receipts to `[PROC-EASAR_RECOVERY]`; `easar_full` is a **deprecated alias** for `edpc_full`. EDPC **claims-ledger** is investigation claims, not adversarial **finding-ledger**. Canonical terms: [`edpc-comprehension.md`](edpc-comprehension.md), [`easar-recovery.md`](easar-recovery.md).
+- **Certifiability readiness vs certification claims** — readiness artifacts support **external appraisal** without asserting ISO/CMMI compliance or automated `certified` status. Canonical terms: [`process-certification-readiness.md`](process-certification-readiness.md); methodology: [certification-of-workflows.md](../../docs/methodologies/certification-of-workflows.md).
 
 ---
 
@@ -99,6 +103,7 @@
 |------|---------|
 | agent-stream | Cross-topic notes |
 | agentstream | Cross-topic notes |
+| certifiability readiness | `process-certification-readiness.md` |
 | client refresh | Cross-topic notes |
 | Domain vocabulary index | Title |
 | domain-references.md | Preferred terms (directory entry) |
@@ -106,7 +111,10 @@
 | evidence-chain profile depth | Cross-topic notes |
 | evidence chain statistics report | Cross-topic notes |
 | EASAR recovery | `easar-recovery.md` |
+| EDPC program comprehension | `edpc-comprehension.md` |
+| edpc-comprehension.md | Canonical glossaries |
 | easar-recovery.md | Canonical glossaries |
+| evidence-access tier | `edpc-comprehension.md` |
 | client cohort | Cross-topic notes |
 | report input manifest | Cross-topic notes |
 | full catalog | Preferred terms (directory entry) |
@@ -114,6 +122,7 @@
 | Layer C static analysis gate | Cross-topic notes |
 | methodology migration | Cross-topic notes |
 | origin layer | `fidelity-research.md` |
+| process-certification-readiness.md | Canonical glossaries |
 | proof boundary | `fidelity-research.md` |
 | specification state | `fidelity-research.md` |
 | divergent edge | `fidelity-research.md` |

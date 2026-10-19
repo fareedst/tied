@@ -2016,6 +2016,19 @@ ARCH-TIED_EASAR_ARTIFACT_MODEL:
   detail_file: "architecture-decisions/ARCH-TIED_EASAR_ARTIFACT_MODEL.yaml"
   name: "EASAR Artifact Model"
   status: "Active"
+ARCH-TIED_EDPC_ARTIFACT_MODEL:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_EDPC_ACCESS"
+      - "IMPL-TIED_EDPC_ENGAGEMENT_FACET"
+      - "IMPL-TIED_EDPC_ORCHESTRATION"
+      - "IMPL-TIED_EDPC_PUBLISH"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "File-based SCM shell, claims ledger, queues, and publish manifest for EDPC engagements."
+  detail_file: "architecture-decisions/ARCH-TIED_EDPC_ARTIFACT_MODEL.yaml"
+  name: "EDPC Artifact Model"
+  status: "Active"
 ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH:
   cross_references:
     architecture:
