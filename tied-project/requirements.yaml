@@ -2479,7 +2479,7 @@ REQ-TIED_EDPC_COMPREHENSION:
   detail_file: "requirements/REQ-TIED_EDPC_COMPREHENSION.yaml"
   name: "Evidence-Driven Program Comprehension (EDPC orchestration v1)"
   priority: "P1"
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_EDPC_ARTIFACT_MODEL"

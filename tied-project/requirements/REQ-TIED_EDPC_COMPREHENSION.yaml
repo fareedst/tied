@@ -31,7 +31,7 @@ REQ-TIED_EDPC_COMPREHENSION:
     - criterion: "SC-EDPC-SCM — publish manifest lists gaps; EDPC minimum fields or gaps[]."
     - criterion: "SC-EDPC-SUPERSEDE — EASAR REQ linked superseded_by engagement naming; receipt tests green."
     - criterion: "SC-EDPC-TIER — tied_edpc_access_validate fail-closed per evidence_access_tier."
-  status: "In Progress"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
