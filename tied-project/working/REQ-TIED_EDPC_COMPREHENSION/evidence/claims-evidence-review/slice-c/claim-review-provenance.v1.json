@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "claim-review-provenance.v1",
+  "runId": "edpc-slice-c-chartviewer-cer-20261019",
+  "requestToken": "REQ-TIED_EDPC_COMPREHENSION",
+  "sourceRevision": "intent-elevation-matrix-rebase-20261017",
+  "executionPolicy": "static_only",
+  "commands": [
+    "runClaimsEvidenceReview"
+  ],
+  "artifactHashes": {
+    "ledger": "57eccff383595aeb2509dd828a6b6f46ce55d8146ed1210ab2f6136a3056b396",
+    "report": "befc752db14d15893a5e578b9baf6854a6ed41db450757a68ffdd847d21e25b8",
+    "frozenSurface": "c94abd3cb3d66c848fb73f2a30676cb9831663fadb66d6dcaf113c0a94f47f78"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "edpc-claims-evidence-review-receipt.v1",
+  "run_id": "edpc-slice-c-chartviewer-cer-20261019",
+  "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+  "target_project_root": "/Users/fareed/Documents/persante/repos/261016/chartviewer",
+  "source_request_token": "REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY",
+  "claim_surface_path": "/Users/fareed/Documents/persante/repos/261016/chartviewer/tied-project/working/REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY/evidence/claim-surface-easar.v1.json",
+  "fixture_root": "/Users/fareed/Documents/persante/repos/261016/chartviewer/tied-project/working/REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY/evidence",
+  "execution_policy": "static_only",
+  "ok": true,
+  "summary": {
+    "shown": 4,
+    "unsettled": 0,
+    "notExamined": 0
+  },
+  "artifacts": {
+    "report": "claim-review-report.v1.json",
+    "provenance": "claim-review-provenance.v1.json",
+    "ledger": "claim-review-ledger.v1.jsonl"
+  }
+}

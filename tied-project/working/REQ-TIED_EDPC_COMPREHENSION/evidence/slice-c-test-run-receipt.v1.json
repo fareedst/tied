@@ -1,0 +1,8 @@
+{
+  "schema_version": "toolchain-test-receipt.v1",
+  "run_id": "edpc-slice-c-bcf-20261019",
+  "command": "npm test --prefix mcp-server -- src/edpc",
+  "baseline_revision": "eb8e1ed2",
+  "exit_code": 0,
+  "summary": "run-mcp-tests edpc scope: pass 1709 fail 0 (full npm test harness)"
+}

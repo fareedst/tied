@@ -1,0 +1,45 @@
+{
+  "scm_shell": {
+    "schema_version": "scm-snapshot-shell.v1",
+    "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+    "minimum_fields": {
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "baseline_revision": "eb8e1ed2",
+      "tier": "toolchain_readonly"
+    },
+    "receipt_refs": {
+      "inventory": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json",
+      "source_graph_index": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-index.v1.json",
+      "source_graph_trace": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-trace-routeEdpcWorkflow.v1.json",
+      "slice_c_investigation": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/slice-c-investigation.v1.yaml",
+      "claims_evidence_review": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/claims-evidence-review/slice-c/receipt.v1.json"
+    }
+  },
+  "claims_ledger": [
+    {
+      "claim_id": "CL-EDPC-C-001",
+      "claim_class": "Derived",
+      "text": "module_comprehension routes to B,C,F"
+    },
+    {
+      "claim_id": "CL-EDPC-C-002",
+      "claim_class": "Derived",
+      "text": "source_static strips D and E via stripWorkflows"
+    },
+    {
+      "claim_id": "CL-EDPC-C-003",
+      "claim_class": "Observed",
+      "text": "npm test src/edpc pass at eb8e1ed2"
+    }
+  ],
+  "access_matrix": {
+    "evidence_access_tier": "toolchain_readonly"
+  },
+  "receipt_exists_map": {
+    "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json": true,
+    "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-index.v1.json": true,
+    "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-trace-routeEdpcWorkflow.v1.json": true,
+    "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/slice-c-investigation.v1.yaml": true,
+    "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/claims-evidence-review/slice-c/receipt.v1.json": true
+  }
+}

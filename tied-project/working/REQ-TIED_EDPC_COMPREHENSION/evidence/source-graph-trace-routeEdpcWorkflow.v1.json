@@ -1,0 +1,12 @@
+{
+  "schema_version": "source-graph-receipt.v1",
+  "run_id": "edpc-slice-c-bcf-20261019",
+  "symbol_id": "mcp-server/src/edpc/workflow-route.ts#routeEdpcWorkflow",
+  "depth": 2,
+  "index_path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-index.v1.json",
+  "trace": {
+    "callers": [],
+    "callees": ["mcp-server/src/edpc/workflow-route.ts#stripWorkflows"]
+  },
+  "proof_boundary": "Static TypeScript/JavaScript analysis; does not prove runtime MCP handler wiring."
+}

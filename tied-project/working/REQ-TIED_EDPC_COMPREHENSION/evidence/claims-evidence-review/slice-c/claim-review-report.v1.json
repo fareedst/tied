@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "claim-review-report.v1",
+  "summary": {
+    "shown": 4,
+    "unsettled": 0,
+    "notExamined": 0
+  },
+  "rows": [
+    {
+      "claimId": "a1authbbce001",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied-project/working/REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY/bbce/slice-map.yaml"
+      ]
+    },
+    {
+      "claimId": "a2archauth002",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied-project/working/REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY/architecture/binding-inventory.md"
+      ]
+    },
+    {
+      "claimId": "cg051coldfeed",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied-project/working/REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json"
+      ]
+    },
+    {
+      "claimId": "fid-002-role-matrix-gap",
+      "disposition": "shown",
+      "reason": "Static evidence located with content hash.",
+      "proofBoundary": "static_analysis",
+      "demonstratedGap": false,
+      "unresolvedExposure": false,
+      "evidenceRefs": [
+        "tied-project/working/REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY/fidelity/finding-ledger.jsonl"
+      ]
+    }
+  ]
+}

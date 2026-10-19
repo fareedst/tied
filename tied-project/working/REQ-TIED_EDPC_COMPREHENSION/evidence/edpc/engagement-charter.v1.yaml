@@ -4,5 +4,10 @@ target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
 workflows_planned:
   - "A"
   - "B"
+  - "C"
   - "F"
-sponsor_note: "Store dogfood v1 at toolchain_readonly; D/E deferred."
+investigation_question: >-
+  What does the EDPC workflow-route module do, and how does evidence_access_tier
+  alter the planned B→C→F choreography for module comprehension?
+bounded_path: "mcp-server/src/edpc"
+sponsor_note: "Slice C follow-on (2026-10-19): B+C+F on bounded edpc module; D/E deferred."

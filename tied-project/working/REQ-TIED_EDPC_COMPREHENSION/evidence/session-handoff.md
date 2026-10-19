@@ -1,6 +1,6 @@
 # Session handoff — REQ-TIED_EDPC_COMPREHENSION
 
-**Updated:** 2026-10-19 (handoff after program close_out)  
+**Updated:** 2026-10-19 (Slice C B+C+F follow-on after close_out)  
 **Depth:** `integrated` · **gate_policy:** `advisory` · **Refine pass:** 1  
 **Engagement:** `edpc_full` · **Tier (dogfood):** `toolchain_readonly`  
 **Inquiry run_ids:** pre_impl `edpc-structural-pre-impl-20261019` · verification `edpc-verify-20261019` · close_out `edpc-closeout-20261019`
@@ -31,6 +31,7 @@
 | Slices 1–5 code | done | `mcp-server/src/edpc/*`, four MCP tools; 14 unit tests green |
 | Pre-impl gate | **allowed** | [pre_implementation-2026-10-19T15-51-46-424Z.json](../gates/pre_implementation-2026-10-19T15-51-46-424Z.json) |
 | Slice 6 dogfood A+B+F | done | [slice6-dogfood-abf.md](./slice6-dogfood-abf.md) |
+| Slice C follow-on B+C+F | done | [slice-c-dogfood-bcf.md](./slice-c-dogfood-bcf.md) · ledger + manifest gaps |
 | Verification inquiry + gate | **allowed** | [slice7-verification-gate.md](./slice7-verification-gate.md), [verification-2026-10-19T16-12-36-116Z.json](../gates/verification-2026-10-19T16-12-36-116Z.json) |
 | Envelope + chain profile | done | [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json), [evidence-chain-profile.v1.json](./evidence-chain-profile.v1.json) — **no envelope error gaps** |
 | Close-out inquiry + gate | **allowed** | [slice8-close-out-gate.md](./slice8-close-out-gate.md), [close_out-2026-10-19T16-25-28-150Z.json](../gates/close_out-2026-10-19T16-25-28-150Z.json) |
@@ -65,8 +66,9 @@
 
 ## Resume here
 
-1. **Sponsor `traceable-commit`** per [traceable-commit-evidence.md](./traceable-commit-evidence.md) (CHANGELOG entry drafted under `[Unreleased]`).  
-2. **Gitignore:** applied — see [gitignore-close-out-hygiene.md](./gitignore-close-out-hygiene.md); quality-collect logs under `tied-bundle/working/.../quality-collect/`.
+1. **Sponsor `traceable-commit`** per [traceable-commit-evidence.md](./traceable-commit-evidence.md) (include Slice C evidence + updated ledger/manifest/charter).  
+2. **Done:** Chart Viewer CER — [slice-c-claims-evidence-review-chartviewer.md](./slice-c-claims-evidence-review-chartviewer.md); publish manifest **`gaps: []`**.  
+3. **Gitignore:** applied — see [gitignore-close-out-hygiene.md](./gitignore-close-out-hygiene.md); quality-collect logs under `tied-bundle/working/.../quality-collect/`.
 
 **Docs slice (2026-10-19):** [client-development-index](../../../../tied-bundle/docs/client-development-index.md), [methodology-composition-matrix §2 row 12](../../../../docs/comparisons/methodology-composition-matrix.md), [brownfield-intent-elevation](../../../../tied-bundle/docs/brownfield-intent-elevation.md), [easar-recovery.md](../../../vocab/easar-recovery.md) pointer, `edpc-queues.v1.example.yaml` template, EASAR `edpc_full` gate fixture, REQ detail LEAP fix.
 

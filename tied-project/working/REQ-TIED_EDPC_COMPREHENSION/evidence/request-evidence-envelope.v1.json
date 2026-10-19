@@ -1,9 +1,9 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-19T16:34:29.619Z",
-    "generator": "request_evidence_envelope_build",
-    "revision": 1
+    "generated_at": "2026-10-19T16:54:47.322Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
   },
   "identity": {
     "request_token": "REQ-TIED_EDPC_COMPREHENSION",
@@ -240,6 +240,18 @@
       "status": "present",
       "proof_boundaries": [
         "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "inventory.v1",
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json",
+      "content_hash": "sha256:48f6c4475df1c6ba3e02d5cc6df47b7f6448d782eb9d99fd5395e095765f5ecb",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "read-only-tied-yaml",
+        "static-walk-limits"
       ]
     },
     {

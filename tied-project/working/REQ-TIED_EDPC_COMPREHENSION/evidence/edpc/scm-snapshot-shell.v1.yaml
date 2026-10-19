@@ -2,7 +2,11 @@ schema_version: "scm-snapshot-shell.v1"
 request_token: "REQ-TIED_EDPC_COMPREHENSION"
 minimum_fields:
   request_token: "REQ-TIED_EDPC_COMPREHENSION"
-  baseline_revision: "6b498c9b"
+  baseline_revision: "eb8e1ed2"
   tier: "toolchain_readonly"
 receipt_refs:
   inventory: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json"
+  source_graph_index: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-index.v1.json"
+  source_graph_trace: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-trace-routeEdpcWorkflow.v1.json"
+  slice_c_investigation: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/slice-c-investigation.v1.yaml"
+  claims_evidence_review: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/claims-evidence-review/slice-c/receipt.v1.json"

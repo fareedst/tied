@@ -1,2 +1,45 @@
 schema_version: "claims-ledger.v1"
-claims: []
+claims:
+  - claim_id: "CL-EDPC-C-001"
+    statement: >-
+      For question_class module_comprehension at any tier, routeEdpcWorkflow returns
+      workflows [B, C, F] from ROUTE_TABLE without defaulting.
+    classification: "Derived"
+    claim_class: "Derived"
+    subject: "mcp-server/src/edpc/workflow-route.ts#routeEdpcWorkflow"
+    applicable_version: "eb8e1ed2"
+    environment: "store dogfood; bounded_path mcp-server/src/edpc"
+    evidence_ids:
+      - "workflow-route-module-comprehension.v1.json"
+      - "mcp-server/src/edpc/workflow-route.ts"
+    verification_method: "static read + tied_edpc_workflow_route receipt"
+    confidence: "high"
+    limitations: "Does not prove MCP tool registration exposes routeEdpcWorkflow to agents."
+  - claim_id: "CL-EDPC-C-002"
+    statement: >-
+      At evidence_access_tier source_static, routeEdpcWorkflow removes workflows D and E
+      via stripWorkflows (callee edge from source-graph trace).
+    classification: "Derived"
+    claim_class: "Derived"
+    subject: "mcp-server/src/edpc/workflow-route.ts#stripWorkflows"
+    applicable_version: "eb8e1ed2"
+    evidence_ids:
+      - "source-graph-trace-routeEdpcWorkflow.v1.json"
+      - "mcp-server/src/edpc/workflow-route.test.ts"
+    verification_method: "source graph trace + unit tests (static)"
+    confidence: "high"
+    limitations: "Trace depth 2; no dynamic import edges."
+  - claim_id: "CL-EDPC-C-003"
+    statement: >-
+      npm test --prefix mcp-server -- src/edpc completes with 0 failures at baseline eb8e1ed2
+      (toolchain_readonly compile/test gate).
+    classification: "Observed"
+    claim_class: "Observed"
+    subject: "mcp-server/src/edpc/*.test.ts"
+    applicable_version: "eb8e1ed2"
+    time_window: "2026-10-19T16:55:00-07:00 approximate"
+    evidence_ids:
+      - "slice-c-test-run-receipt.v1.json"
+    verification_method: "npm test execution"
+    confidence: "medium"
+    limitations: "Observed for scoped edpc test filter only, not full mcp-server suite."

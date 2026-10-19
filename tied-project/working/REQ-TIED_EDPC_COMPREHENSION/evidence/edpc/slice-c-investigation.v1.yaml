@@ -1,0 +1,30 @@
+schema_version: "slice-c-investigation.v1"
+run_id: "edpc-slice-c-bcf-20261019"
+request_token: "REQ-TIED_EDPC_COMPREHENSION"
+question_class: "module_comprehension"
+charter_question: >-
+  What does the EDPC workflow-route module do, and how does evidence_access_tier
+  alter the planned B→C→F choreography for module comprehension?
+bounded_path: "mcp-server/src/edpc"
+target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+baseline_revision: "eb8e1ed2"
+evidence_access_tier: "toolchain_readonly"
+workflows_executed:
+  - "B"
+  - "C"
+  - "F"
+route:
+  workflows: ["B", "C", "F"]
+  defaulted: false
+evidence_refs:
+  inventory: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json"
+  source_graph_index: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-index.v1.json"
+  source_graph_trace: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-trace-routeEdpcWorkflow.v1.json"
+  workflow_route: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/workflow-route-module-comprehension.v1.json"
+claims_evidence_review:
+  run_id: "edpc-slice-c-chartviewer-cer-20261019"
+  target_project_root: "/Users/fareed/Documents/persante/repos/261016/chartviewer"
+  source_request_token: "REQ-CHARTVIEWER-BROWNFIELD_EASAR_RECOVERY"
+  claim_surface: "claim-surface-easar.v1.json"
+  receipt: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/claims-evidence-review/slice-c/receipt.v1.json"
+  summary: { shown: 4, unsettled: 0, not_examined: 0 }

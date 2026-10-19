@@ -2,7 +2,11 @@
   "schema_version": "edpc-publish-manifest.v1",
   "gaps": [],
   "receipt_refs": {
-    "inventory": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json"
+    "claims_evidence_review": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/claims-evidence-review/slice-c/receipt.v1.json",
+    "inventory": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json",
+    "slice_c_investigation": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/slice-c-investigation.v1.yaml",
+    "source_graph_index": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-index.v1.json",
+    "source_graph_trace": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-trace-routeEdpcWorkflow.v1.json"
   },
   "tier": "toolchain_readonly"
 }
