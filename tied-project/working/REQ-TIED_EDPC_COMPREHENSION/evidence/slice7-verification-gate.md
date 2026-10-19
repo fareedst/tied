@@ -11,7 +11,7 @@
 | `evidence_chain_profile_generate` | **ok** — [evidence-chain-profile.v1.json](./evidence-chain-profile.v1.json) |
 | `request_evidence_envelope_build` | **ok** — [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json) (no error gaps; advisory inquiry warns only) |
 | `tied_checklist_gate_validate` `verification` | **`allowed: true`** |
-| Gate receipt | [../gates/verification-2026-10-19T16-12-36-116Z.json](../gates/verification-2026-10-19T16-12-36-116Z.json) |
+| Gate receipt | [../gates/verification-2026-10-19T17-15-07-441Z.json](../gates/verification-2026-10-19T17-15-07-441Z.json) |
 | Tracker | [../gate-tracker-verification.yaml](../gate-tracker-verification.yaml) |
 | Inquiry payload | [verification-inquiry-payload.json](./verification-inquiry-payload.json) |
 

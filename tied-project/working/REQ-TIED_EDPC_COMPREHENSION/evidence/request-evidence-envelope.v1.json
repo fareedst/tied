@@ -1,9 +1,9 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-19T16:54:47.322Z",
+    "generated_at": "2026-10-19T17:16:21.641Z",
     "generator": "request_evidence_envelope_patch",
-    "revision": 2
+    "revision": 6
   },
   "identity": {
     "request_token": "REQ-TIED_EDPC_COMPREHENSION",
@@ -14,16 +14,34 @@
   },
   "runs": [
     {
+      "run_id": "edpc-closeout-20261019",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "persistGateDecisionReceipt"
+    },
+    {
       "run_id": "run-close_out",
       "phase": "close_out",
       "started_at": null,
       "generator": "request_evidence_envelope_build"
     },
     {
+      "run_id": "edpc-structural-pre-impl-20261019",
+      "phase": "pre_implementation",
+      "started_at": null,
+      "generator": "persistGateDecisionReceipt"
+    },
+    {
       "run_id": "run-pre_implementation",
       "phase": "pre_implementation",
       "started_at": null,
       "generator": "request_evidence_envelope_build"
+    },
+    {
+      "run_id": "edpc-verify-20261019",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "persistGateDecisionReceipt"
     },
     {
       "run_id": "run-verification",
@@ -163,6 +181,50 @@
       "status": "present",
       "proof_boundaries": [
         "provenance_identity"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/close_out-2026-10-19T17-14-58-007Z.json",
+      "content_hash": "sha256:ab2dd0856ba281dfba8a1d5dd0aa6db403c68134d251fb79b3d296cea2a0c373",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/close_out-2026-10-19T17-16-21-639Z.json",
+      "content_hash": "sha256:6622e348ea197e1cfd785b05eb10853dc143b5042d8dedee8baee1887c00f67e",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/pre_implementation-2026-10-19T17-15-20-407Z.json",
+      "content_hash": "sha256:f37061eaf817b4847f143c6be6b22c98898c660d82002e784ad8ad95981c251f",
+      "phase": "pre_implementation",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/verification-2026-10-19T17-15-07-441Z.json",
+      "content_hash": "sha256:14985866ab35dca2687e6b97b14bfaf731adb64c0708eb7cfe6d956dc985f407",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
       ]
     },
     {

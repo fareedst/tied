@@ -1,0 +1,70 @@
+{
+  "ok": true,
+  "report": {
+    "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+    "findings": [
+      {
+        "code": "gate_without_current_evidence",
+        "detail": {
+          "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gates/pre_implementation-2026-10-19T17-15-20-407Z.json",
+          "stored_tracker_hash": "sha256:107e3157648d779120de6735c725ea4fe740599368886b1efd01c6cc23041c63",
+          "current_tracker_hash": "sha256:56e10f7c1ecfd479bb3d110d6432fc4fba8be892fae94d94651b4484ad6e8818",
+          "stored_citdp_hash": "sha256:1eee1f3781faaaa616e60ee2dd653be930476b8f1a570e4e6954967aea9e2e31",
+          "current_citdp_hash": "sha256:1eee1f3781faaaa616e60ee2dd653be930476b8f1a570e4e6954967aea9e2e31"
+        }
+      },
+      {
+        "code": "gate_without_current_evidence",
+        "detail": {
+          "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gates/verification-2026-10-19T17-15-07-441Z.json",
+          "stored_tracker_hash": "sha256:710a5ecaa56a7cb1e3dda62b68759790609c3baf8b6a21072bf0761608a946c6",
+          "current_tracker_hash": "sha256:56e10f7c1ecfd479bb3d110d6432fc4fba8be892fae94d94651b4484ad6e8818",
+          "stored_citdp_hash": "sha256:1eee1f3781faaaa616e60ee2dd653be930476b8f1a570e4e6954967aea9e2e31",
+          "current_citdp_hash": "sha256:1eee1f3781faaaa616e60ee2dd653be930476b8f1a570e4e6954967aea9e2e31"
+        }
+      }
+    ],
+    "ledger_rows": 3,
+    "read_only": true,
+    "process_grade": {
+      "score": 88,
+      "band": "B",
+      "dimensions": [
+        {
+          "name": "tracker_integrity",
+          "score": 100,
+          "weight": 0.3,
+          "gap_codes": []
+        },
+        {
+          "name": "verification_manifest",
+          "score": 100,
+          "weight": 0.25,
+          "gap_codes": []
+        },
+        {
+          "name": "hash_alignment",
+          "score": 40,
+          "weight": 0.2,
+          "gap_codes": [
+            "evidence_stale"
+          ]
+        },
+        {
+          "name": "ledger_correlation",
+          "score": 100,
+          "weight": 0.15,
+          "gap_codes": []
+        },
+        {
+          "name": "typed_evidence_refs",
+          "score": 100,
+          "weight": 0.1
+        }
+      ],
+      "gap_codes": [
+        "evidence_stale"
+      ]
+    }
+  }
+}

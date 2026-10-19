@@ -10,7 +10,7 @@
 | `tied_checklist_activation_collect` | **ok** (identity-bound pairing) |
 | `tied_checklist_gate_validate` `pre_implementation` | **allowed: true** (2026-10-19, fresh `mcp-server/dist` via `tied-cli`) |
 
-**Gate receipt (allowed):** [../gates/pre_implementation-2026-10-19T15-51-46-424Z.json](../gates/pre_implementation-2026-10-19T15-51-46-424Z.json)
+**Gate receipt (allowed):** [../gates/pre_implementation-2026-10-19T17-15-20-407Z.json](../gates/pre_implementation-2026-10-19T17-15-20-407Z.json)
 
 **Prior attempt (stale MCP):** [../gates/pre_implementation-2026-10-19T15-40-21-729Z.json](../gates/pre_implementation-2026-10-19T15-40-21-729Z.json) — `invalid_brownfield_engagement:edpc_full`
 

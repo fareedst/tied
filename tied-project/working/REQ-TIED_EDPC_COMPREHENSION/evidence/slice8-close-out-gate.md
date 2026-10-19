@@ -10,7 +10,7 @@
 | Layer C PSA | four `IMPL-TIED_EDPC_*.v1.json` under `tied-bundle/working/.../pseudocode-analysis/` |
 | `run-close-out-gates.mjs` | **merged_decision.allowed=true**; envelope **blocking_gap_count=0** |
 | `tied_checklist_gate_validate` `close_out` | **`allowed: true`** |
-| Gate receipt | [../gates/close_out-2026-10-19T16-25-28-150Z.json](../gates/close_out-2026-10-19T16-25-28-150Z.json) |
+| Gate receipt | [../gates/close_out-2026-10-19T17-16-21-639Z.json](../gates/close_out-2026-10-19T17-16-21-639Z.json) |
 | Tracker | [../gate-tracker-close-out.yaml](../gate-tracker-close-out.yaml) |
 
 **Advisory diagnostics (non-blocking):** `finding_unresolved`, `warn_not_success` (pre_impl + verification + close_out).

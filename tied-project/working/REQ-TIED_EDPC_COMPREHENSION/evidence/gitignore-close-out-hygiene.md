@@ -10,4 +10,4 @@
 | **track** | `tied-project/working/REQ-TIED_EDPC_COMPREHENSION/**` (PLAN, gate trackers, slug evidence, envelope, manifests, authoritative gate receipts + ledger) | Committed process evidence |
 | **track** | `.gitignore` negation `!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**` | Envelope file matches global `tied-project/working/**/evidence/request-evidence-envelope.v1.json` ignore |
 
-**Applied (unstaged):** `.gitignore` EDPC negation block + `quality-collect/` under committed root; moved collect stdout to `tied-bundle/working/.../quality-collect/`; removed duplicate non-authoritative gate receipts (retain pre_impl `15-51-46-424Z`, verification `16-12-36-116Z`, close_out `16-25-28-150Z`).
+**Applied:** `.gitignore` EDPC negation block + `quality-collect/` under committed root; moved collect stdout to `tied-bundle/working/.../quality-collect/`; authoritative gate receipts only (pre_impl `17-15-20-407Z`, verification `17-15-07-441Z`, close_out `17-16-21-639Z`) with matching [gate-ledger.jsonl](../gate-ledger.jsonl).

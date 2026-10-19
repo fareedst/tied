@@ -66,7 +66,7 @@ steps:
   - disposition: "completed"
     evidence_refs:
       - kind: "gate_receipt"
-        path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gates/verification-2026-10-19T16-12-36-116Z.json"
+        path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gates/verification-2026-10-19T17-15-07-441Z.json"
       - kind: "manifest_ref"
         path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
       - kind: "file_path"

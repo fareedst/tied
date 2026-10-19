@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+    "project_id": "stdd",
+    "run_id": "edpc-structural-pre-impl-20261019",
+    "phase": "pre_implementation",
+    "scope": [
+      "REQ-TIED_EDPC_COMPREHENSION#SC-EDPC-TIER"
+    ],
+    "scope_hash": "6f92af9ae46d81781d13b1ac24495f697108f3f27d4b3537de30c069563371f7",
+    "artifact_hashes": {
+      "obligation-report.json": "719570bf9cb9c1497451440afe2123d07c367d6fe1cdf39a849b12aa78975757",
+      "finding-ledger.jsonl": "55739caadae657d31ce3a1ed5e02f843cd6ae9f2b64c4550e4cff2b8a2974d06",
+      "gate-result.json": "b970c77e2a43a404384f1f2a90f81f4d95013ea6ae9129e58546719455e307d6",
+      "evidence-provenance.json": "f0c70f753945609b083a49dc0d6d9a1aa5e0fb29f83c366202f96ef2fda0a979"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd",
+      "run_id": "edpc-structural-pre-impl-20261019",
+      "phase": "pre_implementation",
+      "scope_hash": "6f92af9ae46d81781d13b1ac24495f697108f3f27d4b3537de30c069563371f7",
+      "hash": "719570bf9cb9c1497451440afe2123d07c367d6fe1cdf39a849b12aa78975757",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd",
+      "run_id": "edpc-structural-pre-impl-20261019",
+      "phase": "pre_implementation",
+      "scope_hash": "6f92af9ae46d81781d13b1ac24495f697108f3f27d4b3537de30c069563371f7",
+      "hash": "55739caadae657d31ce3a1ed5e02f843cd6ae9f2b64c4550e4cff2b8a2974d06",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd",
+      "run_id": "edpc-structural-pre-impl-20261019",
+      "phase": "pre_implementation",
+      "scope_hash": "6f92af9ae46d81781d13b1ac24495f697108f3f27d4b3537de30c069563371f7",
+      "hash": "b970c77e2a43a404384f1f2a90f81f4d95013ea6ae9129e58546719455e307d6",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd",
+      "run_id": "edpc-structural-pre-impl-20261019",
+      "phase": "pre_implementation",
+      "scope_hash": "6f92af9ae46d81781d13b1ac24495f697108f3f27d4b3537de30c069563371f7",
+      "hash": "f0c70f753945609b083a49dc0d6d9a1aa5e0fb29f83c366202f96ef2fda0a979",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+    "project_id": "stdd",
+    "run_id": "edpc-structural-pre-impl-20261019",
+    "phase": "pre_implementation",
+    "scope": [
+      "REQ-TIED_EDPC_COMPREHENSION#SC-EDPC-TIER"
+    ],
+    "scope_hash": "6f92af9ae46d81781d13b1ac24495f697108f3f27d4b3537de30c069563371f7"
+  },
+  "diagnostics": []
+}

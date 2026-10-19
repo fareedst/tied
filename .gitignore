@@ -68,6 +68,9 @@ working/**/doc-*-checklist.yaml
 working/DOC-*/
 # refine-plan session scratch (linked plan lives in ~/.cursor/plans/; not canonical TIED intent)
 working/REFINE-*/
+# @clear-workspace operator receipts (ephemeral; regenerate per hygiene pass)
+working/CLEAR-WORKSPACE-*/
+tied-project/working/CLEAR-WORKSPACE-*/
 # Repo-root operator scratch (token-create / gate-args dumps; prefer tied-bundle/working/)
 tmp/
 # MCP gate-args payloads for one-off gate validate runs (regenerate per gate invocation)

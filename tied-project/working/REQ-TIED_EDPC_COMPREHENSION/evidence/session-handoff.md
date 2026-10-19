@@ -1,6 +1,6 @@
 # Session handoff — REQ-TIED_EDPC_COMPREHENSION
 
-**Updated:** 2026-10-19 (Slice C B+C+F follow-on after close_out)  
+**Updated:** 2026-10-19 (adherence ledger reconcile + workspace hygiene)  
 **Depth:** `integrated` · **gate_policy:** `advisory` · **Refine pass:** 1  
 **Engagement:** `edpc_full` · **Tier (dogfood):** `toolchain_readonly`  
 **Inquiry run_ids:** pre_impl `edpc-structural-pre-impl-20261019` · verification `edpc-verify-20261019` · close_out `edpc-closeout-20261019`
@@ -29,12 +29,12 @@
 | Refine pass 1 | done | [PLAN.md](../PLAN.md), working CITDP, [test-strategy.md](../test-strategy.md) |
 | Slice 0 enrollment | done | REQ/ARCH/IMPL tokens, `PROC-EDPC_COMPREHENSION`, four pseudo-code sidecars |
 | Slices 1–5 code | done | `mcp-server/src/edpc/*`, four MCP tools; 14 unit tests green |
-| Pre-impl gate | **allowed** | [pre_implementation-2026-10-19T15-51-46-424Z.json](../gates/pre_implementation-2026-10-19T15-51-46-424Z.json) |
+| Pre-impl gate | **allowed** | [pre_implementation-2026-10-19T17-15-20-407Z.json](../gates/pre_implementation-2026-10-19T17-15-20-407Z.json) |
 | Slice 6 dogfood A+B+F | done | [slice6-dogfood-abf.md](./slice6-dogfood-abf.md) |
 | Slice C follow-on B+C+F | done | [slice-c-dogfood-bcf.md](./slice-c-dogfood-bcf.md) · ledger + manifest gaps |
-| Verification inquiry + gate | **allowed** | [slice7-verification-gate.md](./slice7-verification-gate.md), [verification-2026-10-19T16-12-36-116Z.json](../gates/verification-2026-10-19T16-12-36-116Z.json) |
+| Verification inquiry + gate | **allowed** | [slice7-verification-gate.md](./slice7-verification-gate.md), [verification-2026-10-19T17-15-07-441Z.json](../gates/verification-2026-10-19T17-15-07-441Z.json) |
 | Envelope + chain profile | done | [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json), [evidence-chain-profile.v1.json](./evidence-chain-profile.v1.json) — **no envelope error gaps** |
-| Close-out inquiry + gate | **allowed** | [slice8-close-out-gate.md](./slice8-close-out-gate.md), [close_out-2026-10-19T16-25-28-150Z.json](../gates/close_out-2026-10-19T16-25-28-150Z.json) |
+| Close-out inquiry + gate | **allowed** | [slice8-close-out-gate.md](./slice8-close-out-gate.md), [close_out-2026-10-19T17-16-21-639Z.json](../gates/close_out-2026-10-19T17-16-21-639Z.json) |
 | Traceable commit (v1 close-out) | **done** | `eb8e1ed2` … `4bb32c84` wave |
 | Traceable commit (Slice C) | **done** | `16c1e9de` — [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
 
@@ -61,15 +61,15 @@
 | --- | --- |
 | **Machine close-out** | **allowed** — close_out gate + envelope `fail_on_error_gaps` (0 blocking) |
 | **Process contract** | **allowed** — pre_impl + verification + close_out **allowed**; advisory inquiry warns only |
-| **Adherence ledger** | **partial** — [gate-ledger.jsonl](../gate-ledger.jsonl) (close_out receipt appended); reconcile band **B** possible on `run-close-out-gates` default ledger path vs program ledger |
+| **Adherence ledger** | **done (authoritative)** — [gate-ledger.jsonl](../gate-ledger.jsonl) (3 phase rows); [adherence-ledger-reconcile.md](./adherence-ledger-reconcile.md) + [adherence-reconcile-close-out.json](./adherence-reconcile-close-out.json); close-out receipt aligned; band **B** advisory from cross-phase gate files only |
 
 ---
 
 ## Resume here
 
-1. **Optional:** push `main` when ready (35 commits ahead of `origin/main`).  
-2. **Done:** Slice C traceable-commit **`16c1e9de`**.  
-3. **Gitignore:** applied — see [gitignore-close-out-hygiene.md](./gitignore-close-out-hygiene.md); quality-collect logs under `tied-bundle/working/.../quality-collect/`.
+1. **Optional:** push `main` when ready (commits ahead of `origin/main`).  
+2. **Done:** adherence ledger reconcile + workspace regen reverted (see [adherence-ledger-reconcile.md](./adherence-ledger-reconcile.md)).  
+3. **Gitignore:** CLEAR-WORKSPACE ephemeral paths — see root `.gitignore` and [gitignore-close-out-hygiene.md](./gitignore-close-out-hygiene.md).
 
 **Docs slice (2026-10-19):** [client-development-index](../../../../tied-bundle/docs/client-development-index.md), [methodology-composition-matrix §2 row 12](../../../../docs/comparisons/methodology-composition-matrix.md), [brownfield-intent-elevation](../../../../tied-bundle/docs/brownfield-intent-elevation.md), [easar-recovery.md](../../../vocab/easar-recovery.md) pointer, `edpc-queues.v1.example.yaml` template, EASAR `edpc_full` gate fixture, REQ detail LEAP fix.
 
@@ -93,4 +93,4 @@
 
 ## Git (informational)
 
-No commit yet. Staged scope unchanged from prior handoff plus close_out artifacts, PSA (local working root, gitignored), CHANGELOG `[Unreleased]` bullet, persisted CITDP with `completion_criteria.close_out`.
+Commit pending: gate receipts, `gate-ledger.jsonl`, adherence evidence, handoff refresh, `.gitignore` CLEAR-WORKSPACE ignore. Working tree otherwise clean after regen revert.
