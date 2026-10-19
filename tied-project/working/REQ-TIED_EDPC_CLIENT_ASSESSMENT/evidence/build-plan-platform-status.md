@@ -1,6 +1,7 @@
 # Build-plan status — Workflow H (platform slice)
 
-**Date:** 2026-10-19 · **Plan:** [PLAN-refine-pass1.md](../PLAN-refine-pass1.md)
+**Date:** 2026-10-19 · **Plan:** [PLAN-refine-pass1.md](../PLAN-refine-pass1.md)  
+**Traceable commit (platform):** `6577f890` — 2026-10-19
 
 ## Completed (stdd)
 
