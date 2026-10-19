@@ -1,0 +1,29 @@
+{
+  "schema_version": "operational-failure-state-bundle.v1",
+  "bundle_path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/operational-failure-state-bundle.v1.yaml",
+  "observation_window": {
+    "start": "2026-10-19T00:00:00Z",
+    "end": "2026-10-19T23:59:59Z",
+    "timezone": "America/Los_Angeles",
+    "environment": "local_dev"
+  },
+  "health_snapshot": {
+    "rows": [
+      {
+        "outcome_id": "dev_toolchain",
+        "classification": "healthy_within_observed_scope",
+        "evidence_ids": ["local-npm-test"],
+        "claim_class": "Observed",
+        "evidence_source": "local"
+      },
+      {
+        "outcome_id": "mcp_edpc_surface",
+        "classification": "unknown",
+        "evidence_ids": [],
+        "claim_class": "Hypothesized"
+      }
+    ]
+  },
+  "blind_spot_gaps": [],
+  "summary_healthy": false
+}

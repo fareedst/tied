@@ -222,7 +222,7 @@ Compose existing brownfield, source graph, claims review, EASAR receipts, advers
 Engagements where Tracker metadata includes `brownfield_intent_elevation.engagement: edpc_full` (requires `mode: pilot` or `strict`). Deprecated alias `easar_full` maps to the same validation path with a diagnostic. v1 delivers tier-bounded access validation, deterministic workflow routing, file-based SCM shell artifacts, and publish manifests with explicit `gaps[]`.
 
 ### Token references
-- `[REQ-TIED_EDPC_COMPREHENSION]`, `[ARCH-TIED_EDPC_ARTIFACT_MODEL]`, `[IMPL-TIED_EDPC_ACCESS]`, `[IMPL-TIED_EDPC_ORCHESTRATION]`, `[IMPL-TIED_EDPC_PUBLISH]`, `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]`
+- `[REQ-TIED_EDPC_COMPREHENSION]`, `[ARCH-TIED_EDPC_ARTIFACT_MODEL]`, `[IMPL-TIED_EDPC_ACCESS]`, `[IMPL-TIED_EDPC_ORCHESTRATION]`, `[IMPL-TIED_EDPC_PUBLISH]`, `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]`, `[IMPL-TIED_EDPC_FAILURE_OPS]`
 - `[REQ-TIED_EASAR_RECOVERY]`, `[PROC-EASAR_RECOVERY]` (nested under workflow **B** baseline)
 - `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]`, `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]`, `[REQ-TIED_CLAIMS_EVIDENCE_REVIEW]`, `[REQ-TIED_ADVERSARIAL_INQUIRY]`, `[REQ-REQUEST_EVIDENCE_ENVELOPE]`
 
@@ -230,7 +230,7 @@ Engagements where Tracker metadata includes `brownfield_intent_elevation.engagem
 1. **A Commission** — charter + evidence-access matrix; `tied_edpc_access_validate`, `tied_edpc_engagement_validate`
 2. **B Baseline** — `[PROC-EASAR_RECOVERY]` slices 0–2 where applicable; inventory + graph receipts
 3. **C Deep slice** — source graph MCP, Track C sidecars, claims review (tier-appropriate claim classes)
-4. **D Failure / ops** — fidelity/adversarial when integrated; runtime evidence only when tier ≥ `toolchain_readonly` (v1 dogfood defers full D)
+4. **D Failure / ops** — OFSM v1 validate/build (`tied_edpc_failure_state_validate`, `tied_edpc_failure_state_build`); D-lite dogfood at `toolchain_readonly` with `production_touch: none` (local/CI Observed only); production Observed when charter allows; fidelity/adversarial when integrated
 5. **E Change impact** — scoped analysis / BBCE advisory; source mutations only at `source_change`
 6. **F Verify / publish** — `tied_edpc_publish_build`, envelope + checklist verification gates
 7. **G Refresh** — documented stale-claim triggers; `tied_edpc_workflow_route` reprioritize (no continuous daemon in v1)

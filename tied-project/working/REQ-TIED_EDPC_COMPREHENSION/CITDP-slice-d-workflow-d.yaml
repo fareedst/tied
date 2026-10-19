@@ -1,0 +1,100 @@
+# Slice D analysis delta — merge into persisted CITDP at traceable-commit when build-plan starts.
+change_request_id: REQ-TIED_EDPC_COMPREHENSION
+citdp_version: "1"
+status: implemented
+parent_close_out: "v1 program close_out 2026-10-19 allowed"
+slice: "D-workflow-d-prod-ops"
+analysis:
+  current_behavior: >-
+    Workflow D appears in methodology §9 and PROC-EDPC step 4 as narrative only.
+    tied_edpc_workflow_route strips D for source_static but has no ops question classes.
+    Publish/SCM v1 has no Operational Failure State Model artifacts or validators.
+    v1 non_goals explicitly excluded Workflow D production ops from dogfood.
+  desired_behavior: >-
+    OFSM v1 file bundle with validate/build MCP tools; publish and SCM shell reference OFSM
+    with explicit gaps when D is routed but evidence insufficient; extended route table for
+    operational_health, billing_processor_health, resource_cost; D-lite dogfood at
+    toolchain_readonly with production_touch none (local/CI evidence only).
+  satisfaction_criteria:
+    - "SC-EDPC-D-OFSM — failure_state_validate accepts well-formed bundle; rejects invalid classifications"
+    - "SC-EDPC-D-NO-BLANKET-HEALTH — no aggregate healthy without row-level evidence_ids"
+    - "SC-EDPC-D-ROUTE — operational question classes match EDPC §13 golden order before tier strip"
+    - "SC-EDPC-D-PUBLISH — publish manifest records ofsm gaps when critical_outcomes uncovered"
+  non_goals:
+    - "Production read_only dogfood on live systems in Slice D"
+    - "Fault injection or approved_execute paths"
+    - "Failure propagation graph database"
+    - "Replacing SRE on-call tooling"
+  blast_radius:
+    modules_or_boundaries: >-
+      mcp-server/src/edpc/failure-state-*.ts; workflow-route.ts; publish-build.ts;
+      tied-bundle/templates/edpc-*-health*.yaml; PROC-EDPC step 4; edpc-comprehension vocab
+    data_stores: >-
+      tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/* OFSM files;
+      optional REQ/ARCH/IMPL index updates
+    external_interfaces: Two new MCP tools; tied-cli registration
+  risks:
+    - id: R-EDPC-D-001
+      summary: Observed production health claims under production_touch none
+      mitigation: access_validate + failure_state_validate fail-closed; publish gaps
+      severity: high
+    - id: R-EDPC-D-002
+      summary: Blanket healthy from passing unit tests alone (EDPC §9 exit violation)
+      mitigation: SC-EDPC-D-NO-BLANKET-HEALTH; manifest rejects summary flags
+      severity: high
+    - id: R-EDPC-D-003
+      summary: OFSM conflated with adversarial finding-ledger
+      mitigation: Separate artifact names; PROC choreography unchanged from v1
+      severity: medium
+  test_strategy_ref: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/test-strategy-slice-d.md
+  depth_tier: integrated
+  profile_depth: integrated
+  gate_policy: advisory
+  tdd_sequence:
+    - "Mint IMPL-TIED_EDPC_FAILURE_OPS pseudo-code with block comments"
+    - "RED failure-state-validate.test.ts tier/touch/classification matrix"
+    - "RED failure-state-build.test.ts SCM shell merge"
+    - "RED workflow-route.test.ts ops question classes"
+    - "RED publish-build.test.ts ofsm gap prefixes"
+    - "Composition MCP tool registration"
+    - "Dogfood D-lite evidence doc"
+risk_analysis:
+  adversarial_inquiry:
+    depth_tier: integrated
+    gate_policy: advisory
+    profile_depth: integrated
+    rationale: >-
+      Health and ops claims are high-consequence; new MCP surface and Observed claim paths
+      require fresh structural inquiry before Slice D1 RED (distinct from v1 close_out run_id).
+    eligibility_triggers_matched:
+      - "MCP surface expansion — failure state validate/build"
+      - "Operational/outcome claims — health classifications"
+    falsification_questions:
+      - "Can publish emit healthy summary with production_touch none and Observed prod metrics?"
+      - "Can critical_outcome remain unclassified without a gap entry?"
+completion_criteria:
+  activation:
+    phase: verification
+    request_token: REQ-TIED_EDPC_COMPREHENSION
+    run_id: edpc-slice-d-verify-20261019
+    scope:
+      - IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1
+      - IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_BUILD#edpc-slice-d-rev-1
+      - IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-slice-d-rev-1
+      - IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-slice-d-rev-1
+  close_out:
+    activation:
+      phase: close_out
+      request_token: REQ-TIED_EDPC_COMPREHENSION
+      run_id: edpc-slice-d-closeout-20261019
+      scope:
+        - IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1
+        - IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_BUILD#edpc-slice-d-rev-1
+        - IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-slice-d-rev-1
+        - IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-slice-d-rev-1
+    envelope_blocking: fail_on_error_gaps true at Slice D close-out
+    tracker_path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-slice-d-close-out.yaml
+  envelope_path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+  focused_tests: mcp-server/src/edpc/*.test.ts
+  verification: tied_validate_consistency; tied_checklist_gate_validate verification
+  tracker_path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-slice-d-verification.yaml

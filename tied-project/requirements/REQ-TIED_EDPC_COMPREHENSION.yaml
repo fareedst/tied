@@ -25,6 +25,10 @@ REQ-TIED_EDPC_COMPREHENSION:
     supersedes: []
   satisfaction_criteria:
     - criterion: "SC-EDPC-COMPOSE — SCM shell references EASAR receipts without duplicating bytes."
+    - criterion: "SC-EDPC-D-NO-BLANKET-HEALTH — no aggregate healthy summary without row-level evidence_ids."
+    - criterion: "SC-EDPC-D-OFSM — failure_state_validate accepts well-formed OFSM bundle; rejects invalid classifications."
+    - criterion: "SC-EDPC-D-PUBLISH — publish manifest records ofsm/health gaps when critical_outcomes uncovered."
+    - criterion: "SC-EDPC-D-ROUTE — operational question classes match EDPC §13 golden order before tier strip."
     - criterion: "SC-EDPC-FACET — edpc_full requires pilot|strict; easar_full deprecated alias diagnostic."
     - criterion: "SC-EDPC-PROC — PROC-EDPC_COMPREHENSION references existing slugs/tools only."
     - criterion: "SC-EDPC-ROUTE — tied_edpc_workflow_route deterministic for identical inputs."
@@ -38,6 +42,7 @@ REQ-TIED_EDPC_COMPREHENSION:
     implementation:
       - "IMPL-TIED_EDPC_ACCESS"
       - "IMPL-TIED_EDPC_ENGAGEMENT_FACET"
+      - "IMPL-TIED_EDPC_FAILURE_OPS"
       - "IMPL-TIED_EDPC_ORCHESTRATION"
       - "IMPL-TIED_EDPC_PUBLISH"
     tests:

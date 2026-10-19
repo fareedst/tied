@@ -1,9 +1,9 @@
 {
   "schema_version": "request-evidence-envelope.v1",
   "envelope_meta": {
-    "generated_at": "2026-10-19T17:16:21.641Z",
-    "generator": "request_evidence_envelope_patch",
-    "revision": 6
+    "generated_at": "2026-10-19T18:04:41.615Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
   },
   "identity": {
     "request_token": "REQ-TIED_EDPC_COMPREHENSION",
@@ -14,34 +14,16 @@
   },
   "runs": [
     {
-      "run_id": "edpc-closeout-20261019",
-      "phase": "close_out",
-      "started_at": null,
-      "generator": "persistGateDecisionReceipt"
-    },
-    {
       "run_id": "run-close_out",
       "phase": "close_out",
       "started_at": null,
       "generator": "request_evidence_envelope_build"
     },
     {
-      "run_id": "edpc-structural-pre-impl-20261019",
-      "phase": "pre_implementation",
-      "started_at": null,
-      "generator": "persistGateDecisionReceipt"
-    },
-    {
       "run_id": "run-pre_implementation",
       "phase": "pre_implementation",
       "started_at": null,
       "generator": "request_evidence_envelope_build"
-    },
-    {
-      "run_id": "edpc-verify-20261019",
-      "phase": "verification",
-      "started_at": null,
-      "generator": "persistGateDecisionReceipt"
     },
     {
       "run_id": "run-verification",
@@ -55,7 +37,7 @@
       "kind": "adversarial_inquiry_gate",
       "schema_version": "adversarial-inquiry-gate.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-close_out/gate-result.json",
-      "content_hash": "sha256:75ac81dd3b72e9c88639e08acb1b22cb3666c3c0c346d21c63c360476c05bec9",
+      "content_hash": "sha256:46a6d3baacc73e15e7db4a99077e7814431bae944f7311e24dc50cd623d77e50",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -66,7 +48,7 @@
       "kind": "adversarial_inquiry_gate",
       "schema_version": "adversarial-inquiry-gate.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/gate-result.json",
-      "content_hash": "sha256:b970c77e2a43a404384f1f2a90f81f4d95013ea6ae9129e58546719455e307d6",
+      "content_hash": "sha256:46a6d3baacc73e15e7db4a99077e7814431bae944f7311e24dc50cd623d77e50",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -77,7 +59,7 @@
       "kind": "adversarial_inquiry_gate",
       "schema_version": "adversarial-inquiry-gate.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/gate-result.json",
-      "content_hash": "sha256:9fc01897cdcb20590d53394f544555d6fded0008c91fa3a3999264d3f4154638",
+      "content_hash": "sha256:46a6d3baacc73e15e7db4a99077e7814431bae944f7311e24dc50cd623d77e50",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
@@ -88,7 +70,7 @@
       "kind": "adversarial_inquiry_ledger",
       "schema_version": null,
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
-      "content_hash": "sha256:4f3099244664b8870de0c6ab99c21d47adfc4656f080fd403fbeed2df9512f98",
+      "content_hash": "sha256:6e0471bf374c5474a87b7364c5f73fb99d133797cf6ab83cae08bc72c75161bd",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -99,7 +81,7 @@
       "kind": "adversarial_inquiry_ledger",
       "schema_version": null,
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
-      "content_hash": "sha256:55739caadae657d31ce3a1ed5e02f843cd6ae9f2b64c4550e4cff2b8a2974d06",
+      "content_hash": "sha256:6dc975d0fa39e08035b5a83de902b08a8054f9252d5fc3e87de325fe691765a1",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -110,7 +92,7 @@
       "kind": "adversarial_inquiry_ledger",
       "schema_version": null,
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
-      "content_hash": "sha256:78c4cb41ce4a36c09d1a8bf1682a426421d9a14119cc5725e5a13e8092b1ed72",
+      "content_hash": "sha256:2af4ddf8775ae0600983eba292580157e5b94843ecef3dd27ca72bd1795874ae",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
@@ -121,7 +103,7 @@
       "kind": "adversarial_inquiry_obligation",
       "schema_version": "adversarial-inquiry-report.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-close_out/obligation-report.json",
-      "content_hash": "sha256:7217b51471ac03d72f7fa520a850d42816258823e4921df8cf61b3a3e8644868",
+      "content_hash": "sha256:3d3c74473fc2decae3f6145c5b519b66ed13a3c4fc3fb7586f51753b525f20c2",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -132,7 +114,7 @@
       "kind": "adversarial_inquiry_obligation",
       "schema_version": "adversarial-inquiry-report.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
-      "content_hash": "sha256:719570bf9cb9c1497451440afe2123d07c367d6fe1cdf39a849b12aa78975757",
+      "content_hash": "sha256:256f83a1e4c3e909c333bf4573b976992bf4a9fc3b05e4a17a28ac990b253ab4",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -143,7 +125,7 @@
       "kind": "adversarial_inquiry_obligation",
       "schema_version": "adversarial-inquiry-report.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/obligation-report.json",
-      "content_hash": "sha256:661c4088a718ba718c00130a350599aad52c372ffd48abc218c653322dfc0c23",
+      "content_hash": "sha256:3d3c74473fc2decae3f6145c5b519b66ed13a3c4fc3fb7586f51753b525f20c2",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
@@ -154,7 +136,7 @@
       "kind": "adversarial_inquiry_provenance",
       "schema_version": "adversarial-inquiry-provenance.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-close_out/evidence-provenance.json",
-      "content_hash": "sha256:772fc35dc2ce99a5421ab477932feafe4c14c7826e8e1de72c2c5c01cbfc575c",
+      "content_hash": "sha256:1039ffc572e122530545ffd1e8cd5b92e3c78bbc643d2c047a710f726f62d221",
       "phase": "close_out",
       "status": "present",
       "proof_boundaries": [
@@ -165,7 +147,7 @@
       "kind": "adversarial_inquiry_provenance",
       "schema_version": "adversarial-inquiry-provenance.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
-      "content_hash": "sha256:f0c70f753945609b083a49dc0d6d9a1aa5e0fb29f83c366202f96ef2fda0a979",
+      "content_hash": "sha256:64ede68932e008725e926edc6fe3ca8ef2fe4a8058f3e3ed0ad29e6e39cf2535",
       "phase": "pre_implementation",
       "status": "present",
       "proof_boundaries": [
@@ -176,55 +158,11 @@
       "kind": "adversarial_inquiry_provenance",
       "schema_version": "adversarial-inquiry-provenance.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/evidence-provenance.json",
-      "content_hash": "sha256:0537ff177fe8ba662381fa575125386a8355b6854f9c0cec708247009656cee9",
+      "content_hash": "sha256:a8004a10739296c5aa9afcecda3d649b1d2e7afb424f806a28d5f49c8941bcc3",
       "phase": "verification",
       "status": "present",
       "proof_boundaries": [
         "provenance_identity"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/close_out-2026-10-19T17-14-58-007Z.json",
-      "content_hash": "sha256:ab2dd0856ba281dfba8a1d5dd0aa6db403c68134d251fb79b3d296cea2a0c373",
-      "phase": "close_out",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/close_out-2026-10-19T17-16-21-639Z.json",
-      "content_hash": "sha256:6622e348ea197e1cfd785b05eb10853dc143b5042d8dedee8baee1887c00f67e",
-      "phase": "close_out",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/pre_implementation-2026-10-19T17-15-20-407Z.json",
-      "content_hash": "sha256:f37061eaf817b4847f143c6be6b22c98898c660d82002e784ad8ad95981c251f",
-      "phase": "pre_implementation",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": "checklist-gate-receipt.v1",
-      "path": "working/REQ-TIED_EDPC_COMPREHENSION/gates/verification-2026-10-19T17-15-07-441Z.json",
-      "content_hash": "sha256:14985866ab35dca2687e6b97b14bfaf731adb64c0708eb7cfe6d956dc985f407",
-      "phase": "verification",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
       ]
     },
     {
@@ -274,6 +212,17 @@
     {
       "kind": "pseudocode_analysis_report",
       "schema_version": "pseudocode-analysis-report.v1",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/pseudocode-analysis/IMPL-TIED_EDPC_FAILURE_OPS.v1.json",
+      "content_hash": "sha256:7cdb30fb0bd489b856f75f3a49bc276b75d16ea4010aab949c1bed2b0ceae06b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ]
+    },
+    {
+      "kind": "pseudocode_analysis_report",
+      "schema_version": "pseudocode-analysis-report.v1",
       "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/pseudocode-analysis/IMPL-TIED_EDPC_ORCHESTRATION.v1.json",
       "content_hash": "sha256:f8e6b3aa02e7abfea7e1e0ac41cdf2613ab6c31756960c46e3c94df98095e9da",
       "phase": null,
@@ -297,7 +246,7 @@
       "kind": "request_evidence_envelope",
       "schema_version": "request-evidence-envelope.v1",
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:0d1476ade45a70d509fe2bf3463ce241caa4b99ed680c578db98834a164b3831",
+      "content_hash": "sha256:fb423463d1723b567dee5be561889816f22e3bf52c50427f4531c11efb2f1bdb",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -306,14 +255,24 @@
     },
     {
       "kind": "unknown",
-      "schema_version": "inventory.v1",
-      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json",
-      "content_hash": "sha256:48f6c4475df1c6ba3e02d5cc6df47b7f6448d782eb9d99fd5395e095765f5ecb",
-      "phase": "pre_implementation",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/adherence-ledger-reconcile.md",
+      "content_hash": "sha256:9db9fbe4424736aa0e1b4a301f359b19279acd196f0d5a11459a911ebe3107d5",
+      "phase": null,
       "status": "present",
       "proof_boundaries": [
-        "read-only-tied-yaml",
-        "static-walk-limits"
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/adherence-reconcile-close-out.json",
+      "content_hash": "sha256:dd4b8088091e5c2b8f84ac14c69a0c5e5a09f0b542d2f56c99d96d590fb711aa",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
       ]
     },
     {
@@ -321,6 +280,17 @@
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/close-out-inquiry-payload.json",
       "content_hash": "sha256:e9057086371f1fea9a2ead130c41ff97ca464f0960793faee17c9da2f244dc72",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/closeout-run-close-out-gates-slice-d.json",
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -352,6 +322,17 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/gate-activation-pre-implementation.json",
+      "content_hash": "sha256:09d758b15275be2f695a07bff2a119533e6a6e147c89acf220b6ce8071d43056",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/gate-activation-verification.json",
       "content_hash": "sha256:dac4bf7dc96be6cae52935f41f57199d7f7daff1c79f5664908750d64602bb8e",
       "phase": null,
@@ -374,8 +355,19 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/gitignore-close-out-hygiene-slice-d.md",
+      "content_hash": "sha256:3c265b86c67c0c4c6a185e3be90bbfbc0c61252323f9f6388a5c774b3692975c",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/gitignore-close-out-hygiene.md",
-      "content_hash": "sha256:310bd26a49f4b96211c4aaf3bb2b82a95544397aeae7ded55a989bd12dfcc6bd",
+      "content_hash": "sha256:85e4a7e858df807059174a836b79388ed1e6afeb390be2e6e6d6540c96bc0117",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -386,7 +378,18 @@
       "kind": "unknown",
       "schema_version": "inventory.v1",
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/inventory.v1.json",
-      "content_hash": "sha256:ce17c8a4db671cd85646049d338712f67d9a0f7b4ee5b5acf22beb56b830ebcd",
+      "content_hash": "sha256:48f6c4475df1c6ba3e02d5cc6df47b7f6448d782eb9d99fd5395e095765f5ecb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/plan-close-out-slice-d-proposed-commit.md",
+      "content_hash": "sha256:442aa955770b94e4860206ec83b296f64a331826976623fcda306664289259d0",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -398,6 +401,17 @@
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/risk-assessment-refine-pass1.md",
       "content_hash": "sha256:eac675af53d500a25bf35f75a399a1c2086f11888cf4659e4b604cdea9cb372b",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/risk-assessment-refine-pass2-workflow-d.md",
+      "content_hash": "sha256:02fe7f3a45166079acd624535c3322de257f624ca8929ea8c9516a36f2e2e41d",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -419,7 +433,117 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/session-handoff.md",
-      "content_hash": "sha256:7c9f402e0fd8d3d8d0e56ab39f23d3faa714b8af91b352917ed3284cc5965712",
+      "content_hash": "sha256:a367c8e150c32b04bd0c77da2e9614a0f2fb98d99c43fb539032ed7b27ceae4a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-c-claims-evidence-review-chartviewer.md",
+      "content_hash": "sha256:e9ba1b7845114790bca9ed2af1a2510d5b260ec48c76e8d7a6606a7f3fde35c5",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-c-dogfood-bcf.md",
+      "content_hash": "sha256:2394556e456d954cd01749ab245e50d0eefd62d59aae94c2e30ee2ee95915a45",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-c-publish-payload.json",
+      "content_hash": "sha256:52d61a736e5b40a4ea436f71b269f9f4b987e648f6740f0ae36b03a118407590",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "toolchain-test-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-c-test-run-receipt.v1.json",
+      "content_hash": "sha256:cd15e06fee0073548ecbe704bb7e7e5cf3d38b085da0b27dcaa5b8fe858b0bde",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-close-out-inquiry-payload.json",
+      "content_hash": "sha256:a40e52353d0d5e40029c7b4478934cd7da3a64959ea0f19d92f1424d0d8bb3fb",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-dogfood-d-lite.md",
+      "content_hash": "sha256:3cc6f6b94ba440f6cceed38f469209390c59c496490dcba72159d965c427f1cd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-pre-impl-inquiry-payload.json",
+      "content_hash": "sha256:959b516e41ae9a896bd60a151408f473813f3953e720986e3f030d37bba0673a",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-pre-implementation-gate.md",
+      "content_hash": "sha256:3cdbcd856d57b72beadac8800c256f896e941b80d793f8a3bb63424e1cfb305e",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-verification-gate.md",
+      "content_hash": "sha256:91a211975d2b3b840b435de488e2ad4b9d45f8c9c547c567c721664d01b29cd2",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-verification-inquiry-payload.json",
+      "content_hash": "sha256:4641874c11baf3d6fbfd8d804a1fd14c20935f73eefab1f79f73dbff39a32ecf",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -430,7 +554,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice0-pre-implementation-gate.md",
-      "content_hash": "sha256:d2c449eb90bc6e1e6f063a6a967546e14404d53b552ba4028c74c37ae9966977",
+      "content_hash": "sha256:7391be59881c2ff7deaffe302b7a012d4400a1d4dc02f8f34924293045f8744f",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -452,7 +576,7 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice7-verification-gate.md",
-      "content_hash": "sha256:2e78840166aefe5b011767ebb11ef01654c9f11f6dae955a773fa318c43a812f",
+      "content_hash": "sha256:0b44377c8e48298b808b8b82b4d06c15d433919bed5662a5d084a1832bf0f8a6",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -463,7 +587,29 @@
       "kind": "unknown",
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice8-close-out-gate.md",
-      "content_hash": "sha256:69b1a177ea58b6f744b4b4ea7f1dc5a4129baa1d7b76eb1a2050b48ae183c1b5",
+      "content_hash": "sha256:8f64b77f7c0c7458940696b0c2aae417234bde0aec17351c98b3ab6ca8237044",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "source-graph-index.v1",
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-index.v1.json",
+      "content_hash": "sha256:c9ca7dcd8ab5fce56d5f04a508940fe4a08deb49e6de5fd6a5ea96d7214a3493",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "source-graph-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/source-graph-trace-routeEdpcWorkflow.v1.json",
+      "content_hash": "sha256:d42094f65aecdaab877173938afb9c2e4ad4e106942ecf140615f300b966d617",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -475,6 +621,39 @@
       "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/sub-adversarial-inquiry-pass-close-out.md",
       "content_hash": "sha256:ec1be53d93917b7ae6c63d8c8c5c346e9aaced01e799315108de373942ef0bbe",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/sub-adversarial-inquiry-pass-slice-d-close-out.md",
+      "content_hash": "sha256:fa2d7afa2b280c9e62fcf6734d09ef0354a2ec0cd6874360bb7e21d0f3da278f",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/sub-adversarial-inquiry-pass-slice-d-pre-impl.md",
+      "content_hash": "sha256:8189dce3515602cd0f7a7ce4fd2eca401c8b746f265136be9d1545ee2ad2cfc8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/sub-adversarial-inquiry-pass-slice-d-verification.md",
+      "content_hash": "sha256:5037749ea881cdd28d82319a63ccdc7f7c4522293bb0f095e2aa43b9d6e7e27a",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -517,8 +696,30 @@
     {
       "kind": "unknown",
       "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/sub-close-out-evidence-sync-slice-d.md",
+      "content_hash": "sha256:a7b1b6ea79d746ee54f9dc69a392336502ec1fe1496b8c706077778d6def6508",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/tied-verify-result.json",
+      "content_hash": "sha256:0d7a3f750f2ba58bbdefe1ad027458ed9ad4233b8a4db7519d88f11725c371c6",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
       "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/traceable-commit-evidence.md",
-      "content_hash": "sha256:1d5681abe09e70c996815a7708b4d9afd261b19e091efa17e3bb1e093ef385fb",
+      "content_hash": "sha256:99f43811c31ea802c14359d5214f61202a01b63ff97e19edf5dab58b2e3932a8",
       "phase": null,
       "status": "present",
       "proof_boundaries": [
@@ -534,6 +735,28 @@
       "status": "present",
       "proof_boundaries": [
         "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": "edpc-workflow-route-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/workflow-route-module-comprehension.v1.json",
+      "content_hash": "sha256:7f0231eacd16a0978363e927daedd8960c3b3acf1c01d491b05a7e329092ef70",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "verification_evidence_manifest",
+      "schema_version": "verification-evidence-manifest.v1",
+      "path": "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/verification-evidence-manifest-slice-d.v1.json",
+      "content_hash": "sha256:16e7be7f98bf06648cb8b867d6671e84173b026038e49709034a195019a721cd",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
       ]
     },
     {

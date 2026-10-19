@@ -3,6 +3,11 @@
  */
 
 import type { EvidenceAccessMatrix, EvidenceAccessTier } from "./types.js";
+import {
+  type EdpcCharterCriticalOutcomes,
+  type OperationalFailureStateBundle,
+  ofsmPublishGaps,
+} from "./failure-state-validate.js";
 
 export type ClaimsLedgerRow = {
   claim_id: string;
@@ -53,6 +58,8 @@ export function buildEdpcPublishManifest(input: {
   access_matrix: EvidenceAccessMatrix;
   receipt_refs?: Record<string, string>;
   receipt_exists?: (path: string) => boolean;
+  charter?: EdpcCharterCriticalOutcomes;
+  ofsm_bundle?: OperationalFailureStateBundle | null;
 }): { ok: boolean; manifest?: EdpcPublishManifest; diagnostics: string[] } {
   const diagnostics: string[] = [];
   if (!isRecord(input.scm_shell)) {
@@ -72,6 +79,15 @@ export function buildEdpcPublishManifest(input: {
     }
   }
   gaps.push(...classifyClaimsForTier(input.claims_ledger, input.access_matrix.evidence_access_tier));
+
+  if (input.charter || input.ofsm_bundle !== undefined) {
+    gaps.push(
+      ...ofsmPublishGaps({
+        charter: input.charter ?? {},
+        bundle: input.ofsm_bundle ?? null,
+      }),
+    );
+  }
 
   const resolvedRefs: Record<string, string | null> = {};
   const refs = { ...shell.receipt_refs, ...input.receipt_refs };

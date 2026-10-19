@@ -29,4 +29,21 @@ describe("EDPC workflow route [REQ-TIED_EDPC_COMPREHENSION]", () => {
     const b = routeEdpcWorkflow("module_comprehension", "toolchain_readonly");
     assert.deepEqual(a, b);
   });
+
+  it("operational_health routes B D F before source_static strip", () => {
+    const full = routeEdpcWorkflow("operational_health", "toolchain_readonly");
+    assert.deepEqual(full.workflows, ["B", "D", "F"]);
+    const stripped = routeEdpcWorkflow("operational_health", "source_static");
+    assert.deepEqual(stripped.workflows, ["B", "F"]);
+  });
+
+  it("billing_processor_health golden order A B D C F", () => {
+    const route = routeEdpcWorkflow("billing_processor_health", "source_change");
+    assert.deepEqual(route.workflows, ["A", "B", "D", "C", "F"]);
+  });
+
+  it("resource_cost routes B D E F", () => {
+    const route = routeEdpcWorkflow("resource_cost", "toolchain_readonly");
+    assert.deepEqual(route.workflows, ["B", "D", "E", "F"]);
+  });
 });

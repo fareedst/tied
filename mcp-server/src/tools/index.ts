@@ -84,6 +84,8 @@ import { runEasarValidationSuiteMcp } from "../easar-receipts/validation-results
 import { buildEasarRecoveryExport } from "../easar-receipts/recovery-export-mcp.js";
 import { validateEdpcAccessMatrix } from "../edpc/access-validate.js";
 import { validateEdpcEngagementFacet } from "../edpc/edpc-engagement-facet.js";
+import { buildEdpcFailureState } from "../edpc/failure-state-build.js";
+import { validateEdpcFailureState } from "../edpc/failure-state-validate.js";
 import { buildEdpcPublishManifest } from "../edpc/publish-build.js";
 import { routeEdpcWorkflow } from "../edpc/workflow-route.js";
 import { EVIDENCE_ACCESS_TIERS } from "../edpc/types.js";
@@ -3109,6 +3111,8 @@ export const allTools = [
           evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
         }),
         receipt_exists_map: z.record(z.boolean()).optional(),
+        charter: z.record(z.unknown()).optional(),
+        ofsm_bundle: z.record(z.unknown()).optional().nullable(),
       }),
     },
     handler: async (args: {
@@ -3116,6 +3120,8 @@ export const allTools = [
       claims_ledger: Array<Record<string, unknown>>;
       access_matrix: { evidence_access_tier: (typeof EVIDENCE_ACCESS_TIERS)[number] };
       receipt_exists_map?: Record<string, boolean>;
+      charter?: Record<string, unknown>;
+      ofsm_bundle?: Record<string, unknown> | null;
     }) => {
       const existsMap = args.receipt_exists_map ?? {};
       const result = buildEdpcPublishManifest({
@@ -3123,6 +3129,65 @@ export const allTools = [
         claims_ledger: args.claims_ledger as Parameters<typeof buildEdpcPublishManifest>[0]["claims_ledger"],
         access_matrix: args.access_matrix,
         receipt_exists: (path) => existsMap[path] ?? false,
+        charter: args.charter as Parameters<typeof buildEdpcPublishManifest>[0]["charter"],
+        ofsm_bundle: args.ofsm_bundle as Parameters<typeof buildEdpcPublishManifest>[0]["ofsm_bundle"],
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_failure_state_validate",
+    config: {
+      description:
+        "Validate [REQ-TIED_EDPC_COMPREHENSION] Workflow D Operational Failure State Model (OFSM v1) fail-closed.",
+      inputSchema: z.object({
+        charter: z.record(z.unknown()),
+        access_matrix: z.object({
+          evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
+          production_touch: z.enum(["none", "read_only", "approved_execute"]).optional(),
+        }),
+        ofsm_bundle: z.record(z.unknown()),
+      }),
+    },
+    handler: async (args: {
+      charter: Record<string, unknown>;
+      access_matrix: Parameters<typeof validateEdpcFailureState>[0]["access_matrix"];
+      ofsm_bundle: Record<string, unknown>;
+    }) => {
+      const result = validateEdpcFailureState({
+        charter: args.charter,
+        access_matrix: args.access_matrix,
+        ofsm_bundle: args.ofsm_bundle,
+      });
+      return textContent(JSON.stringify(result, null, 2));
+    },
+  },
+  {
+    name: "tied_edpc_failure_state_build",
+    config: {
+      description:
+        "Build [REQ-TIED_EDPC_COMPREHENSION] OFSM attachment JSON and merge operational_failure_state SCM receipt ref.",
+      inputSchema: z.object({
+        charter: z.record(z.unknown()),
+        access_matrix: z.object({
+          evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
+          production_touch: z.enum(["none", "read_only", "approved_execute"]).optional(),
+        }),
+        ofsm_bundle: z.record(z.unknown()),
+        scm_shell: z.record(z.unknown()),
+      }),
+    },
+    handler: async (args: {
+      charter: Record<string, unknown>;
+      access_matrix: Parameters<typeof buildEdpcFailureState>[0]["access_matrix"];
+      ofsm_bundle: Record<string, unknown>;
+      scm_shell: Record<string, unknown>;
+    }) => {
+      const result = buildEdpcFailureState({
+        charter: args.charter,
+        access_matrix: args.access_matrix,
+        ofsm_bundle: args.ofsm_bundle,
+        scm_shell: args.scm_shell,
       });
       return textContent(JSON.stringify(result, null, 2));
     },

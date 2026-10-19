@@ -2458,6 +2458,17 @@ IMPL-TIED_EDPC_ENGAGEMENT_FACET:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_EDPC_FAILURE_OPS:
+  cross_references:
+    - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    - "IMPL-TIED_EDPC_ACCESS"
+    - "IMPL-TIED_EDPC_PUBLISH"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_FAILURE_OPS.yaml"
+  name: "EDPC Operational Failure State (Workflow D)"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_EDPC_ORCHESTRATION:
   cross_references:
     - "ARCH-TIED_EDPC_ARTIFACT_MODEL"

@@ -124,3 +124,19 @@ completion_criteria:
   focused_tests: "mcp-server/src/edpc/*.test.ts; scoped easar + checklist-validator regression"
   verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
   tracker_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-verification.yaml"
+slice_d_workflow_d:
+  status: implemented
+  parent_program: "EDPC orchestration v1 close_out 2026-10-19"
+  citdp_delta: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/CITDP-slice-d-workflow-d.yaml"
+  satisfaction_criteria:
+    - "SC-EDPC-D-OFSM"
+    - "SC-EDPC-D-NO-BLANKET-HEALTH"
+    - "SC-EDPC-D-ROUTE"
+    - "SC-EDPC-D-PUBLISH"
+  close_out:
+    run_id: edpc-slice-d-closeout-20261019
+    tracker_path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-slice-d-close-out.yaml
+    evidence: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-close-out-gate.md
+  verification:
+    run_id: edpc-slice-d-verify-20261019
+    manifest: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/verification-evidence-manifest-slice-d.v1.json

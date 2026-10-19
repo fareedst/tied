@@ -8,6 +8,7 @@
 **Risk:** [evidence/risk-assessment-refine-pass1.md](./evidence/risk-assessment-refine-pass1.md)
 
 **Refine-plan pass:** 1 · **2026-10-19** · **build-plan:** close_out allowed (Slices 0–6 + verification + program close_out; docs/matrix migration complete)  
+**Refine-plan pass 2 (Slice D — Workflow D prod ops):** [PLAN-slice-d-workflow-d-prod-ops.md](./PLAN-slice-d-workflow-d-prod-ops.md) · **2026-10-19** — maps [EDPC §9](../../../../docs/methodologies/EDPC_Methodology_and_Workflows.md) to OFSM artifacts + MCP; **build-plan not started**  
 **Session handoff:** [evidence/session-handoff.md](./evidence/session-handoff.md) (2026-10-19, `@handoff`)
 
 ## Sponsor decisions (locked for v1)
@@ -79,7 +80,7 @@ edpc_engagement:
 | **A** Commission | Charter, scope, access | `change-definition`, `risk-assessment`; templates `edpc-engagement-charter.v1.yaml` | All |
 | **B** Baseline | Inventory, architecture map | `brownfield-baseline-lock`, `evidence-inventory`; **`[PROC-EASAR_RECOVERY]`** slices 0–2; `tied_scoped_analysis_run`, `inventory.v1` | static+ |
 | **C** Deep slice | Bounded Q answer | Source graph MCP, Track C sidecars, `tied_claims_evidence_review_run` | static+ (Derived); toolchain for Observed checks |
-| **D** Failure / ops | Health, incidents, blind spots | Fidelity/adversarial when integrated; **runtime evidence** only if charter + tier ≥ `toolchain_readonly` | Not in v1 dogfood scope (slice 6) |
+| **D** Failure / ops | Health, incidents, blind spots | OFSM v1 validate/build MCP (Slice D); fidelity/adversarial when integrated; runtime per tier + `production_touch` | [PLAN-slice-d](./PLAN-slice-d-workflow-d-prod-ops.md) — D-lite dogfood; v1 excluded full D |
 | **E** Change impact | Up/downstream effects | BBCE advisory + scoped analysis; **edits** only at `source_change` | E analysis at tier 2; mutations tier 3 |
 | **F** Verify / publish | SCM release | `tied_edpc_publish_build`, envelope + `tied_checklist_gate_validate` verification | All |
 | **G** Refresh | Stale claim invalidation | Document triggers; **`tied_edpc_workflow_route`** reprioritize — no continuous daemon in v1 | All |

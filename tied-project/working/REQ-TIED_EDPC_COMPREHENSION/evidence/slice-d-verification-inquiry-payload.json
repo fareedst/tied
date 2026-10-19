@@ -1,0 +1,254 @@
+{
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+  "run_id": "edpc-slice-d-verify-20261019",
+  "phase": "verification",
+  "scope": [
+    "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1",
+    "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_BUILD#edpc-slice-d-rev-1",
+    "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-slice-d-rev-1",
+    "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-slice-d-rev-1"
+  ],
+  "redact": [],
+  "graph": {
+    "projectId": "stdd-edpc-slice-d",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EDPC_COMPREHENSION#SC-EDPC-D-OFSM",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "edpc-slice-d-criterion-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        },
+        "architectureConstraintIds": [
+          "constraint-edpc-d-ofsm"
+        ]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_EDPC_COMPREHENSION#SC-EDPC-D-NO-BLANKET-HEALTH",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "edpc-slice-d-criterion-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        },
+        "architectureConstraintIds": [
+          "constraint-edpc-d-blanket"
+        ]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_EDPC_COMPREHENSION#SC-EDPC-D-ROUTE",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "edpc-slice-d-criterion-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        },
+        "architectureConstraintIds": [
+          "constraint-edpc-d-route"
+        ]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_EDPC_COMPREHENSION#SC-EDPC-D-PUBLISH",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "edpc-slice-d-criterion-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        },
+        "architectureConstraintIds": [
+          "constraint-edpc-d-publish"
+        ]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-edpc-d-ofsm",
+        "implementationBlockIds": [
+          "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-edpc-d-blanket",
+        "implementationBlockIds": [
+          "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-edpc-d-route",
+        "implementationBlockIds": [
+          "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-slice-d-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-edpc-d-publish",
+        "implementationBlockIds": [
+          "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-slice-d-rev-1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1",
+          "kind": "block",
+          "name": "MCP_TIED_EDPC_FAILURE_STATE_VALIDATE",
+          "derivation": "content",
+          "revision": "edpc-slice-d-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_BUILD#edpc-slice-d-rev-1",
+          "kind": "block",
+          "name": "MCP_TIED_EDPC_FAILURE_STATE_BUILD",
+          "derivation": "content",
+          "revision": "edpc-slice-d-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-slice-d-rev-1",
+          "kind": "block",
+          "name": "MCP_TIED_EDPC_WORKFLOW_ROUTE",
+          "derivation": "content",
+          "revision": "edpc-slice-d-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-slice-d-rev-1",
+          "kind": "block",
+          "name": "MCP_TIED_EDPC_PUBLISH_BUILD",
+          "derivation": "content",
+          "revision": "edpc-slice-d-rev-1",
+          "sourceRevision": "edpc-slice-d-source-rev-1"
+        }
+      }
+    ],
+    "bindings": [],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "edpc-slice-d-rev-1",
+    "specification": [
+      {
+        "id": "spec-ofsm-validate",
+        "kind": "behavior",
+        "value": "failure_state_validate must fail-closed on invalid classifications and missing observation window",
+        "order": 1
+      },
+      {
+        "id": "spec-no-blanket-health",
+        "kind": "behavior",
+        "value": "summary_healthy requires row-level healthy_within_observed_scope evidence_ids",
+        "order": 2
+      },
+      {
+        "id": "spec-ops-route",
+        "kind": "behavior",
+        "value": "operational question classes route B/D/F (and golden billing order) before source_static strip",
+        "order": 3
+      },
+      {
+        "id": "spec-ofsm-publish-gaps",
+        "kind": "behavior",
+        "value": "publish_build records ofsm:/health: gaps when bundle missing or outcomes uncovered",
+        "order": 4
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-spec-ofsm",
+        "direction": "test",
+        "statementId": "spec-ofsm-validate",
+        "kind": "behavior",
+        "value": "failure-state-validate.test.ts matrix",
+        "order": 1,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/edpc/failure-state-validate.test.ts"
+        },
+        "provenance": "unit-test",
+        "blockRevision": "edpc-slice-d-rev-1"
+      },
+      {
+        "id": "test-spec-route-d",
+        "direction": "test",
+        "statementId": "spec-ops-route",
+        "kind": "behavior",
+        "value": "workflow-route.test.ts ops question classes",
+        "order": 2,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/edpc/workflow-route.test.ts"
+        },
+        "provenance": "unit-test",
+        "blockRevision": "edpc-slice-d-rev-1"
+      },
+      {
+        "id": "test-spec-build",
+        "direction": "test",
+        "statementId": "spec-ofsm-validate",
+        "kind": "behavior",
+        "value": "failure-state-build.test.ts SCM merge",
+        "order": 3,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/edpc/failure-state-build.test.ts"
+        },
+        "provenance": "unit-test",
+        "blockRevision": "edpc-slice-d-rev-1"
+      },
+      {
+        "id": "test-spec-publish-d",
+        "direction": "test",
+        "statementId": "spec-ofsm-publish-gaps",
+        "kind": "behavior",
+        "value": "publish-build.test.ts ofsm gaps",
+        "order": 4,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/edpc/publish-build.test.ts"
+        },
+        "provenance": "unit-test",
+        "blockRevision": "edpc-slice-d-rev-1"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-spec-ofsm",
+        "direction": "production",
+        "statementId": "spec-ofsm-validate",
+        "kind": "behavior",
+        "value": "mcp-server/src/edpc/failure-state-validate.ts",
+        "order": 1,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/edpc/failure-state-validate.ts"
+        },
+        "provenance": "source",
+        "blockRevision": "edpc-slice-d-rev-1"
+      },
+      {
+        "id": "prod-spec-publish-d",
+        "direction": "production",
+        "statementId": "spec-ofsm-publish-gaps",
+        "kind": "behavior",
+        "value": "mcp-server/src/edpc/publish-build.ts ofsmPublishGaps",
+        "order": 2,
+        "reliable": true,
+        "source": {
+          "location": "mcp-server/src/edpc/publish-build.ts"
+        },
+        "provenance": "source",
+        "blockRevision": "edpc-slice-d-rev-1"
+      }
+    ]
+  }
+}

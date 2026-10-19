@@ -16,6 +16,9 @@ export type EdpcRouteResult = {
 const ROUTE_TABLE: Record<string, EdpcWorkflowId[]> = {
   module_comprehension: ["B", "C", "F"],
   replacement_safety: ["B", "C", "E", "D", "F"],
+  operational_health: ["B", "D", "F"],
+  billing_processor_health: ["A", "B", "D", "C", "F"],
+  resource_cost: ["B", "D", "E", "F"],
 };
 
 const DEFAULT_ROUTE: EdpcWorkflowId[] = ["B", "C", "F"];

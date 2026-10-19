@@ -2,7 +2,7 @@
 
 **Scope:** Domain vocabulary for Evidence-Driven Program Comprehension (EDPC) orchestration in TIED clients. Terms **do not** replace REQ/ARCH/IMPL authority.
 
-**Traceability:** `[REQ-TIED_EDPC_COMPREHENSION]` · `[ARCH-TIED_EDPC_ARTIFACT_MODEL]` · `[IMPL-TIED_EDPC_ACCESS]` · `[IMPL-TIED_EDPC_ORCHESTRATION]` · `[IMPL-TIED_EDPC_PUBLISH]` · `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]` · `[PROC-EDPC_COMPREHENSION]` · methodology [EDPC_Methodology_and_Workflows.md](../../tied-bundle/docs/EDPC_Methodology_and_Workflows.md)
+**Traceability:** `[REQ-TIED_EDPC_COMPREHENSION]` · `[ARCH-TIED_EDPC_ARTIFACT_MODEL]` · `[IMPL-TIED_EDPC_ACCESS]` · `[IMPL-TIED_EDPC_ORCHESTRATION]` · `[IMPL-TIED_EDPC_PUBLISH]` · `[IMPL-TIED_EDPC_ENGAGEMENT_FACET]` · `[IMPL-TIED_EDPC_FAILURE_OPS]` · `[PROC-EDPC_COMPREHENSION]` · methodology [EDPC_Methodology_and_Workflows.md](../../tied-bundle/docs/EDPC_Methodology_and_Workflows.md)
 
 **Status:** Slice 0 enrollment (2026-10-19). Re-VALIDATE on glossary edits per `[PROC-VOCABULARY_INDEX]`.
 

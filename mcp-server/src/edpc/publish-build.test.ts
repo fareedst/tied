@@ -22,6 +22,53 @@ describe("EDPC publish build [REQ-TIED_EDPC_COMPREHENSION]", () => {
     assert.ok(result.manifest!.gaps.some((g) => g.startsWith("evidence_gap:c1")));
   });
 
+  it("records ofsm and health gaps when bundle missing", () => {
+    const result = buildEdpcPublishManifest({
+      scm_shell: {
+        schema_version: "scm-snapshot-shell.v1",
+        minimum_fields: {
+          request_token: "REQ-TIED_EDPC_COMPREHENSION",
+          baseline_revision: "abc",
+          tier: "toolchain_readonly",
+        },
+      },
+      claims_ledger: [],
+      access_matrix: { evidence_access_tier: "toolchain_readonly" },
+      charter: { critical_outcomes: ["billing"] },
+      ofsm_bundle: null,
+    });
+    assert.ok(result.manifest!.gaps.some((g) => g === "ofsm:bundle_missing"));
+  });
+
+  it("rejects summary healthy without row evidence via health gap", () => {
+    const result = buildEdpcPublishManifest({
+      scm_shell: {
+        schema_version: "scm-snapshot-shell.v1",
+        minimum_fields: {
+          request_token: "REQ-TIED_EDPC_COMPREHENSION",
+          baseline_revision: "abc",
+          tier: "toolchain_readonly",
+        },
+      },
+      claims_ledger: [],
+      access_matrix: { evidence_access_tier: "toolchain_readonly" },
+      charter: { critical_outcomes: ["billing"] },
+      ofsm_bundle: {
+        schema_version: "operational-failure-state-bundle.v1",
+        observation_window: {
+          start: "2026-10-19T00:00:00Z",
+          end: "2026-10-19T23:59:59Z",
+          timezone: "UTC",
+          environment: "local",
+        },
+        health_snapshot: { rows: [] },
+        blind_spot_gaps: ["blind_spot:billing"],
+        summary_healthy: true,
+      },
+    });
+    assert.ok(result.manifest!.gaps.some((g) => g.startsWith("health:")));
+  });
+
   it("flags unresolved receipt refs", () => {
     const result = buildEdpcPublishManifest({
       scm_shell: {

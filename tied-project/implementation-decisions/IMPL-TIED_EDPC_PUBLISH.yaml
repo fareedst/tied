@@ -8,6 +8,7 @@ IMPL-TIED_EDPC_PUBLISH:
       - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
     implementation:
       - "IMPL-TIED_EASAR_RECEIPTS"
+      - "IMPL-TIED_EDPC_FAILURE_OPS"
     requirements:
       - "REQ-TIED_EDPC_COMPREHENSION"
   description: "Assemble publish manifest from scm shell, claims ledger, tier, and nested EASAR receipt refs."

@@ -1,0 +1,19 @@
+IMPL-TIED_EDPC_FAILURE_OPS:
+  code_locations:
+    files:
+      - description: "OFSM build and SCM merge"
+        path: "mcp-server/src/edpc/failure-state-build.ts"
+      - description: "OFSM validate"
+        path: "mcp-server/src/edpc/failure-state-validate.ts"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EDPC_ACCESS"
+      - "IMPL-TIED_EDPC_PUBLISH"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Validate and build Operational Failure State Model v1 artifacts for EDPC Workflow D."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_FAILURE_OPS-pseudocode.md"
+  name: "EDPC Operational Failure State (Workflow D)"
+  status: "Active"

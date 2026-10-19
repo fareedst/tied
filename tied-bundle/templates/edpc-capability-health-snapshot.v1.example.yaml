@@ -1,0 +1,8 @@
+schema_version: "capability-health-snapshot.v1"
+rows:
+  - outcome_id: "example_outcome"
+    classification: "healthy_within_observed_scope"
+    evidence_ids:
+      - "local-test-run-001"
+    claim_class: "Observed"
+    evidence_source: "local"

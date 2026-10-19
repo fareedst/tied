@@ -1,0 +1,139 @@
+brownfield_intent_elevation:
+  engagement: edpc_full
+  mode: pilot
+depth_tier: integrated
+edpc_engagement:
+  access_matrix_path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/evidence-access-matrix.v1.yaml
+  charter_path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/engagement-charter.v1.yaml
+  evidence_access_tier: toolchain_readonly
+  production_touch: none
+  target_repository_root: /Users/fareed/Documents/dev/chatgpt/stdd
+execution_evidence:
+  completed:
+    - change-definition
+    - gate-pseudocode-validation
+    - gitignore-close-out-hygiene
+    - impact-discovery
+    - persist-citdp-record
+    - risk-assessment
+    - session-bootstrap
+    - sub-adversarial-inquiry-pass
+    - sub-close-out-evidence-sync
+    - translate-sponsor-intent
+    - traceable-commit
+    - user-facing-release-notes
+    - verification-gate
+  envelope_path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+  impl_inventory:
+    - IMPL-TIED_EDPC_FAILURE_OPS
+    - IMPL-TIED_EDPC_ORCHESTRATION
+    - IMPL-TIED_EDPC_PUBLISH
+  operator_evidence:
+    psa_layer_c_dir: tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/pseudocode-analysis/
+  request: REQ-TIED_EDPC_COMPREHENSION
+gate_policy: advisory
+name: edpc-comprehension-slice-d-close-out-gate
+note: tracker_path for tied_checklist_gate_validate phase close_out (Slice D v1.1).
+profile_depth: integrated
+request_token: REQ-TIED_EDPC_COMPREHENSION
+schema_version: checklist-tracker.v1
+steps:
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/vocab/edpc-comprehension.md
+    slug: session-bootstrap
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/PLAN-slice-d-workflow-d-prod-ops.md
+    slug: translate-sponsor-intent
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/CITDP-slice-d-workflow-d.yaml
+    slug: change-definition
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/edpc/failure-state-validate.ts
+    slug: impact-discovery
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/risk-assessment-refine-pass2-workflow-d.md
+    slug: risk-assessment
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-close_out/gate-result.json
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/sub-adversarial-inquiry-pass-slice-d-close-out.md
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_EDPC_FAILURE_OPS-pseudocode.md
+    slug: gate-pseudocode-validation
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: manifest_ref
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/verification-evidence-manifest-slice-d.v1.json
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/slice-d-verification-gate.md
+    slug: verification-gate
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: manifest_ref
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/verification-evidence-manifest-slice-d.v1.json
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/sub-close-out-evidence-sync-slice-d.md
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+    slug: sub-close-out-evidence-sync
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml
+    slug: persist-citdp-record
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: CHANGELOG.md
+    slug: user-facing-release-notes
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/gitignore-close-out-hygiene-slice-d.md
+    slug: gitignore-close-out-hygiene
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/plan-close-out-slice-d-proposed-commit.md
+    slug: traceable-commit
+    tracking:
+      status: completed

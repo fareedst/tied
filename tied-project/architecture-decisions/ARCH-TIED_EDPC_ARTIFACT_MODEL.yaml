@@ -1,13 +1,11 @@
 ARCH-TIED_EDPC_ARTIFACT_MODEL:
   cross_references:
-    architecture: []
     implementation:
       - "IMPL-TIED_EDPC_ACCESS"
       - "IMPL-TIED_EDPC_ENGAGEMENT_FACET"
+      - "IMPL-TIED_EDPC_FAILURE_OPS"
       - "IMPL-TIED_EDPC_ORCHESTRATION"
       - "IMPL-TIED_EDPC_PUBLISH"
-    requirements:
-      - "REQ-TIED_EDPC_COMPREHENSION"
   decisions:
     - id: "claims-ledger-separation"
       rationale: "EDPC claims-ledger is investigation claims; adversarial finding-ledger and EASAR reflexion remain distinct."
@@ -21,6 +19,10 @@ ARCH-TIED_EDPC_ARTIFACT_MODEL:
       rationale: "Brownfield intent elevation matrix remains promotion path; claims-ledger does not dual-write REQ rows."
       status: "accepted"
       title: "Promotion via BFIE matrix only"
+    - id: "ofsm-v1-file-bundle"
+      rationale: "Workflow D uses operational-failure-state-bundle.v1.yaml index plus observation window, health snapshot, registers; SCM receipt_refs.operational_failure_state points at bundle path; publish emits ofsm:/health: gaps when coverage or evidence insufficient."
+      status: "accepted"
+      title: "Operational Failure State Model as linked file bundle"
     - id: "scm-shell-not-graph-db"
       rationale: "v1 uses scm-snapshot-shell.v1.yaml index + claims-ledger.v1.yaml; no persisted relationship graph."
       status: "accepted"

@@ -2334,6 +2334,20 @@ IMPL-TIED_EDPC_ENGAGEMENT_FACET:
   detail_file: "implementation-decisions/IMPL-TIED_EDPC_ENGAGEMENT_FACET.yaml"
   name: "EDPC Engagement Facet"
   status: "Active"
+IMPL-TIED_EDPC_FAILURE_OPS:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    implementation:
+      - "IMPL-TIED_EDPC_ACCESS"
+      - "IMPL-TIED_EDPC_PUBLISH"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Validate and build OFSM v1 bundle for Workflow D with fail-closed health classifications and tier/touch rules."
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_FAILURE_OPS.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_FAILURE_OPS-pseudocode.md"
+  name: "EDPC Operational Failure State (Workflow D)"
+  status: "Active"
 IMPL-TIED_EDPC_ORCHESTRATION:
   cross_references:
     architecture:
