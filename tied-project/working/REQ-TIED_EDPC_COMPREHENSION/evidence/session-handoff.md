@@ -68,7 +68,7 @@
 2. Close envelope gaps (evidence chain profile); re-run **`request_evidence_envelope_build`**.
 3. **`close_out`** gate + **`tied_adherence_reconcile_run`** when sponsor wants machine close-out.
 4. Docs follow-ons: `client-development-index`, methodology composition matrix §2 row; optional `edpc-queues.v1.yaml` template.
-5. **Traceable-commit** when sponsor asks (methodology doc + working folder + TIED/MCP changes still uncommitted).
+5. **Envelope in git:** `.gitignore` negation for `evidence/request-evidence-envelope.v1.json` on this REQ only (rebuild + commit after gap closure).
 
 **TIED MCP base path:** `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` — confirm with `tied_config_get_base_path` before YAML writes.
 
