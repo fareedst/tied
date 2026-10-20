@@ -1,6 +1,6 @@
 # Build-plan status — Workflow H (platform slice)
 
-**Date:** 2026-10-19 · **Plan:** [PLAN-refine-pass1.md](../PLAN-refine-pass1.md)  
+**Date:** 2026-10-19 · **Plan:** [PLAN-refine-pass2.md](../PLAN-refine-pass2.md)  
 **Traceable commit (platform):** `6577f890` — 2026-10-19
 
 ## Completed (stdd)
@@ -12,11 +12,20 @@
 - **CITDP:** persisted to `tied-project/citdp/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml`.
 - **`tied_validate_consistency`:** passed after token creation.
 
+## Chart Viewer pilot (H0 / H2)
+
+- **Access:** [chartviewer-pilot-access.md](./chartviewer-pilot-access.md) — sponsor path `/Users/fareed/Documents/persante/repos/261016/chartviewer`.
+- **H0:** 18/18 publish `receipt_refs` resolve; audit [assessment-audit-2026-10-19.md](file:///Users/fareed/Documents/persante/repos/261016/chartviewer/tied-project/working/REQ-CHARTVIEWER-BROWNFIELD_EDPC_COMPREHENSION/evidence/reports/assessment-audit-2026-10-19.md).
+- **H2:** Consultant `technical-summary.v1.md` + handoff `docs/assessments/chartviewer-edpc-assessment-2026-10.md`; platform wrote `assessment-model.v1.yaml` via `scripts/dogfood-chartviewer-cam.mjs`.
+
+## Close-out (2026-10-19)
+
+- **Integrated close-out:** `run_id=edpc-cam-closeout-20261019` — [h5-close-out-gate.md](./h5-close-out-gate.md), [closeout-run-close-out-gates-h5.json](./closeout-run-close-out-gates-h5.json).
+- **Traceable commit:** pending — [plan-close-out-proposed-commit.md](./plan-close-out-proposed-commit.md).
+
 ## Deferred (explicit)
 
-- **H0 / H2 Chart Viewer pilot:** requires sponsor-approved chartviewer repo access; not executed in this build-plan turn.
-- **Integrated pre_implementation gate:** adversarial inquiry payload needs v2 pseudo-code grammar alignment and/or expanded graph bindings before `tied_checklist_gate_validate` allows RED progression formally.
-- **H5 close-out:** verification / close_out gates and three completion signals not claimed.
+- **H4** full client playbook; **H6** golden compare vs consultant summary.
 
 ## Verify locally
 

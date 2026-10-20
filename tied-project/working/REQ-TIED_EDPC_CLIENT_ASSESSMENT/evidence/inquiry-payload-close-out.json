@@ -1,0 +1,110 @@
+{
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_EDPC_CLIENT_ASSESSMENT",
+  "run_id": "edpc-cam-closeout-20261019",
+  "phase": "close_out",
+  "scope": [
+    "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_VALIDATE#edpc-cam-rev-1",
+    "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_COMPOSE#edpc-cam-rev-1",
+    "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_RENDER#edpc-cam-rev-1"
+  ],
+  "redact": [],
+  "graph": {
+    "projectId": "stdd-edpc-cam",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_EDPC_CLIENT_ASSESSMENT#SC-CAM-SOURCE",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "edpc-cam-criterion-rev-1",
+          "sourceRevision": "edpc-cam-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-cam-closeout"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-cam-closeout",
+        "implementationBlockIds": [
+          "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_COMPOSE#edpc-cam-rev-1",
+          "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_RENDER#edpc-cam-rev-1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_VALIDATE#edpc-cam-rev-1",
+          "kind": "block",
+          "name": "MCP_TIED_EDPC_CLIENT_ASSESSMENT_VALIDATE",
+          "derivation": "content",
+          "revision": "edpc-cam-rev-1",
+          "sourceRevision": "edpc-cam-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_COMPOSE#edpc-cam-rev-1",
+          "kind": "block",
+          "name": "MCP_TIED_EDPC_CLIENT_ASSESSMENT_COMPOSE",
+          "derivation": "content",
+          "revision": "edpc-cam-rev-1",
+          "sourceRevision": "edpc-cam-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_EDPC_CLIENT_ASSESSMENT#MCP_TIED_EDPC_CLIENT_ASSESSMENT_RENDER#edpc-cam-rev-1",
+          "kind": "block",
+          "name": "MCP_TIED_EDPC_CLIENT_ASSESSMENT_RENDER",
+          "derivation": "content",
+          "revision": "edpc-cam-rev-1",
+          "sourceRevision": "edpc-cam-source-rev-1"
+        }
+      }
+    ],
+    "bindings": [],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "edpc-cam-rev-1",
+    "specification": [
+      {
+        "id": "spec-cam-closeout",
+        "kind": "behavior",
+        "value": "MCP handlers remain JSON-in JSON-out without filesystem client I/O",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-cam-suite",
+        "direction": "test",
+        "statementId": "spec-cam-closeout",
+        "kind": "behavior",
+        "value": "client-assessment-*.test.ts fixture-only chain",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "mcp-server/src/edpc/client-assessment-compose.test.ts" },
+        "provenance": "unit-test",
+        "blockRevision": "edpc-cam-rev-1"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-cam-mcp",
+        "direction": "production",
+        "statementId": "spec-cam-closeout",
+        "kind": "behavior",
+        "value": "mcp-server/src/tools/index.ts registration",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "mcp-server/src/tools/index.ts" },
+        "provenance": "source",
+        "blockRevision": "edpc-cam-rev-1"
+      }
+    ]
+  }
+}

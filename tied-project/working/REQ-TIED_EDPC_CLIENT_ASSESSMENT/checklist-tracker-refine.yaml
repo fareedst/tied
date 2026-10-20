@@ -1,10 +1,11 @@
-copy_hygiene: "Workflow H refine-plan pass 1; clear execution_evidence.completed before build-plan RED or refresh inquiry run_id."
+copy_hygiene: "Pass 2: retroactive inquiry before close-out; do not clear build evidence at 6577f890; refresh run_ids if inquiry re-run."
 depth_tier: "integrated"
 gate_policy: "advisory"
 name: "edpc-client-assessment-refine-tracker"
 profile_depth: "integrated"
-refine_pass: 1
+refine_pass: 2
 refine_pass_date: "2026-10-19"
+refine_plan_path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/PLAN-refine-pass2.md"
 refine_scope: "EDPC §17–18 client assessment (Workflow H) + Chart Viewer pilot"
 request_token: "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
 schema_version: "checklist-tracker.v1"
@@ -25,9 +26,11 @@ execution_evidence:
     master_checklist: ""
   operator_evidence:
     integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/adversarial-inquiry/phase-{phase}/"
-    limitation: "pre_implementation inquiry not run in refine-plan; required before build-plan RED."
+    limitation: "Build at 6577f890 preceded pre_impl allowed; retroactive inquiry required before close-out claim (pass 2)."
     planned_pre_impl_run_id: "edpc-cam-pre-impl-20261019"
-    status: "refine_plan_complete_pending_inquiry"
+    planned_verify_run_id: "edpc-cam-verify-20261019"
+    planned_closeout_run_id: "edpc-cam-closeout-20261019"
+    status: "refine_pass2_process_debt_documented"
 brownfield_intent_elevation:
   mode: pilot
   engagement: edpc_full

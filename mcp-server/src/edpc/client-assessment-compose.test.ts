@@ -30,4 +30,18 @@ describe("EDPC client assessment compose [REQ-TIED_EDPC_CLIENT_ASSESSMENT]", () 
     assert.equal(a.cam!.findings.some((f) => f.claim_id === "c1"), true);
     assert.equal(a.cam!.domains.length, 20);
   });
+
+  it("maps claims-ledger statement field to finding assertion", () => {
+    const result = composeEdpcClientAssessment({
+      charter: { ...charter, refresh_gap: "documented" },
+      publish_manifest: manifest,
+      claims_ledger: [{ claim_id: "c2", statement: "Derived from matrix" }],
+      receipt_exists: () => true,
+    });
+    assert.equal(result.ok, true);
+    assert.equal(
+      result.cam!.findings.find((f) => f.claim_id === "c2")?.assertion,
+      "Derived from matrix",
+    );
+  });
 });

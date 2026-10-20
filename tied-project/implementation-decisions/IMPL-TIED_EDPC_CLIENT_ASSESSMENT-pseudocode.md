@@ -31,7 +31,7 @@ PROCEDURE MCP_TIED_EDPC_CLIENT_ASSESSMENT_COMPOSE(input)
   Contract: validated EDPC inputs in; CAM v1 + manifest out; overlay cannot upgrade claim_class.
   INPUT: charter, assessment_context, publish_manifest, claims_ledger[], ofsm_bundle optional, edpc_queues optional
   PRE: MCP_TIED_EDPC_CLIENT_ASSESSMENT_VALIDATE.ok
-  DATA_TRANSITION: claims_ledger rows -> findings[] with evidence_ids from claim_id; preserve publish gaps[]
+  DATA_TRANSITION: claims_ledger rows -> findings[] (assertion from row.text or row.statement per SC-CAM-LEDGER-FIELDS); evidence_ids from claim_id; preserve publish gaps[]
   POST: cam.schema_version == "client-assessment-model.v1"
   POST: cam.provenance includes baseline_revision, tier, receipt_refs copy, publish gaps
   POST: consultant_required domains without overlay significance -> explicit gap entries
@@ -48,6 +48,7 @@ PROCEDURE MCP_TIED_EDPC_CLIENT_ASSESSMENT_COMPOSE(input)
 // Deterministic Markdown projection from CAM; no invented claims.
 
 PROCEDURE MCP_TIED_EDPC_CLIENT_ASSESSMENT_RENDER(cam)
+  // [IMPL-TIED_EDPC_CLIENT_ASSESSMENT] render projection
   Contract: CAM v1 in; deterministic Markdown out; fail-closed on blanket health language.
   INPUT: cam client-assessment-model.v1
   PRE: five decision sections and 20 domain rows present

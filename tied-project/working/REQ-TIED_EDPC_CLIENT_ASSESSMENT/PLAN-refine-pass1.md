@@ -25,7 +25,7 @@ isProject: false
 
 # EDPC client assessment report workflow
 
-**Refine-plan pass:** 1 · **2026-10-19**  
+**Refine-plan pass:** 1 · **2026-10-19** · **Superseded by:** [PLAN-refine-pass2.md](./PLAN-refine-pass2.md) (execution reconciliation)  
 **Program REQ (platform):** `[REQ-TIED_EDPC_CLIENT_ASSESSMENT]` (to be minted at build-plan)  
 **Pilot engagement (external):** `REQ-CHARTVIEWER-BROWNFIELD_EDPC_COMPREHENSION`  
 **Tracker:** [checklist-tracker-refine.yaml](file:///Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/checklist-tracker-refine.yaml)  

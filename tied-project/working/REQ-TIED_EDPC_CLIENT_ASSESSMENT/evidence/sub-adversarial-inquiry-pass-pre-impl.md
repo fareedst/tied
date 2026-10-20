@@ -13,4 +13,4 @@
 | gate-result.json | `tied-bundle/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/adversarial-inquiry/phase-pre_implementation/gate-result.json` |
 | evidence-provenance.json | `tied-bundle/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json` |
 
-**Verdict:** advisory · see gate-result.json for blocking disposition.
+**Verdict:** advisory · `gate-result.json` status `warn`, `blocking: false`. Activation collect ok (2026-10-19 retroactive pass).

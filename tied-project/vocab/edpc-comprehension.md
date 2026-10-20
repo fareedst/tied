@@ -47,7 +47,7 @@ Path: `tied-project/working/{REQ-TOKEN}/evidence/edpc/`
 | `evidence-access-matrix.v1.yaml` | Tier + capability flags |
 | `edpc-queues.v1.yaml` | Five investigation queues |
 | `scm-snapshot-shell.v1.yaml` | SCM index + receipt refs |
-| `claims-ledger.v1.yaml` | Investigation claims (not adversarial finding-ledger) |
+| `claims-ledger.v1.yaml` | Investigation claims (not adversarial finding-ledger); row body **`statement`** or **`text`** — compose maps either to CAM assertion (**SC-CAM-LEDGER-FIELDS**) |
 | `edpc-publish-manifest.v1.json` | Workflow F freeze |
 | `operational-failure-state-bundle.v1.yaml` | Workflow D index (Slice D) |
 | `capability-health-snapshot.v1.yaml` | Workflow D present-state classifications |

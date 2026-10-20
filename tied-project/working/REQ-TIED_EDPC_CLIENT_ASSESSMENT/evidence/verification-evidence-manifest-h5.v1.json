@@ -1,0 +1,40 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "edpc-cam-verify-20261019",
+  "slice": "workflow-h-client-assessment",
+  "environment": {
+    "node": "v25.9.0",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "TIED_BASE_PATH": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project"
+  },
+  "command_results": [
+    {
+      "id": "cam-unit",
+      "command": ["npx", "tsx", "--test", "src/edpc/client-assessment-*.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "note": "6 tests validate/compose/render including SC-CAM-LEDGER-FIELDS statement mapping"
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "qa-cam-tier",
+      "attribute": "source_static overlay fail-closed",
+      "applicability": "applicable",
+      "rationale": "SC-CAM-TIER",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/edpc/client-assessment-validate.test.ts",
+      "result": "passed"
+    },
+    {
+      "id": "qa-cam-ledger",
+      "attribute": "claims-ledger statement field mapping",
+      "applicability": "applicable",
+      "rationale": "SC-CAM-LEDGER-FIELDS",
+      "evidence_method": "automated_test",
+      "command_or_test": "mcp-server/src/edpc/client-assessment-compose.test.ts",
+      "result": "passed"
+    }
+  ]
+}

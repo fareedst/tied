@@ -25,6 +25,7 @@ analysis:
     - "SC-CAM-RENDER — deterministic Markdown from CAM; stable ordering"
     - "SC-CAM-HANDOFF — working reports/ and docs/assessments/ share CAM revision metadata"
     - "SC-CAM-FRESHNESS — stale baseline or unresolved receipt refs → explicit refresh gap"
+    - "SC-CAM-LEDGER-FIELDS — compose maps claims-ledger row text or statement to finding assertion without class upgrade"
   non_goals:
     - "Claim graph database or agentic report writer"
     - "MCP filesystem read/write of client repos"
@@ -104,6 +105,7 @@ risk_analysis:
     sub_adversarial_inquiry_pass: required_before_red
 completion_criteria:
   activation:
-    phase: pre_implementation
+    phase: close_out
     request_token: REQ-TIED_EDPC_CLIENT_ASSESSMENT
-    note: "Planned run_id at build-plan — not executed in refine-plan pass"
+    run_id: edpc-cam-closeout-20261019
+    note: "Retroactive integrated close-out after platform 6577f890; pre_impl edpc-cam-pre-impl-20261019"

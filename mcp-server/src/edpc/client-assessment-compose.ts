@@ -72,7 +72,7 @@ export function composeEdpcClientAssessment(input: {
     findings.push({
       finding_id: `finding:${id}`,
       claim_id: id,
-      assertion: row.text,
+      assertion: row.text ?? (row as { statement?: string }).statement,
       evidence_refs: [id],
       consultant_required: false,
     });
