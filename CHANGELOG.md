@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-GF-14 trial readout (facilitator)** — [trial-readout-PROMPT-GF-14-1792479171.md](docs/demos/trial-readout-PROMPT-GF-14-1792479171.md) for disposable client `1792479171` (**TIED-DEMO-14** / **STATE-01**, `REQ-BATCH_PROCESSOR` on client). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-14-1792479171/PLAN.md](tied-project/working/FACILITATOR-GF-14-1792479171/PLAN.md).
+
 - **close-out prompt-type leaf ([REQ-PROMPT_TYPE_GLOBAL_SKILLS])** — Renamed **`plan-close-out`** → **`close-out`**; bundle at [close-out/SKILL.md](tools/bundled-prompt-type-skills/close-out/SKILL.md), Task wrapper [.cursor/agents/close-out.md](.cursor/agents/close-out.md). **`git_preamble_plan_close_out`** and **`context_mode: plan_close_out`** unchanged. Plan: [PLAN.md](tied-project/working/REQ-PROMPT_TYPE_CLOSE_OUT_RENAME/PLAN.md).
 
 - **add-feature + add-refine-build ([REQ-PROMPT_TYPE_GLOBAL_SKILLS], [REQ-PROMPT_TYPE_SUBAGENT])** — Greenfield leaf **`plan-new-feature`** → **`add-feature`**; TIED-source sequencer **`plan-refine-build`** → **`add-refine-build`** (`add-feature` → `refine-plan` → `build-plan`). No backward-compat stubs. Plan: [PLAN.md](tied-project/working/REQ-PROMPT_TYPE_ADD_FEATURE_RENAME/PLAN.md).

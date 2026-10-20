@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "base_path": "/Users/fareed/Documents/dev/test/1792479171/tied-project",
+  "sections": {
+    "indexes": {
+      "requirements": {
+        "ok": true,
+        "diagnostics": []
+      },
+      "architecture": {
+        "ok": true,
+        "diagnostics": []
+      },
+      "implementation": {
+        "ok": true,
+        "diagnostics": []
+      },
+      "semantic-tokens": {
+        "ok": true,
+        "diagnostics": []
+      }
+    },
+    "consistency": {
+      "ok": true,
+      "detail": {
+        "token_reference_issues": 0,
+        "traceability_issues": 0
+      }
+    }
+  },
+  "diagnostics": []
+}

@@ -1,0 +1,17 @@
+docs(demos): trial readout PROMPT-GF-14 client 1792479171
+
+Record facilitator grading readout for TIED-DEMO-14 / STATE-01 disposable
+client (crash-resumable batch processor). Links from demo catalogs; working
+evidence under FACILITATOR-GF-14-1792479171.
+
+Completion signals (close_out):
+- Machine close-out: pass — docs deliverable + catalog links on disk
+- Process contract: pass — refine-plan + build-plan phases; docs-only gate waiver
+- Adherence ledger: N/A — minimal depth facilitator publish (no store REQ token)
+
+Staging map:
+- CHANGELOG.md
+- docs/demos/trial-readout-PROMPT-GF-14-1792479171.md
+- docs/demos/README.md
+- docs/demos/catalog-greenfield-plan-new-feature-prompts.md
+- tied-project/working/FACILITATOR-GF-14-1792479171/
