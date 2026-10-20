@@ -103,18 +103,31 @@ export function filterClientBootstrapDoc(source, destination, basename) {
       .map((line) => line.replaceAll(" · [`prompt-composer.md`](prompt-composer.md)", ""))
       .join("\n");
   } else if (basename === "prompt-type-skills.md") {
+    const clientVocabularyLine =
+      "**Vocabulary:** Prompt Composer terms are maintained in the TIED source repository and are not installed into clients.";
+    const clientGlossaryBlock =
+      "Prompt Composer terms are recorded here for client skill context; the canonical glossary is maintained in the TIED source repository and is not installed into clients.";
     text = text.replaceAll(
-      "**Vocabulary:** [`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md)",
-      "**Vocabulary:** Prompt Composer terms are maintained in the TIED source repository and are not installed into clients."
+      "**Vocabulary:** `tied-project/vocab/prompt-composer.md` (TIED source repository only; not installed into clients)",
+      clientVocabularyLine
     );
-    text = text.replaceAll(
-      "The canonical glossary is\n[`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md). The following\nterms were recorded for this skill implementation.",
-      "Prompt Composer terms are recorded here for client skill context; the canonical glossary is maintained in the TIED source repository and is not installed into clients."
+    text = text.replace(
+      /\*\*Vocabulary:\*\* \[`tied-project\/vocab\/prompt-composer\.md`\]\(\.\.\/vocab\/prompt-composer\.md\)\s*/g,
+      `${clientVocabularyLine}\n`
+    );
+    text = text.replace(
+      /The canonical glossary lives at `tied-project\/vocab\/prompt-composer\.md` in the\nTIED source repository \(not installed into clients\)\. The following terms were\nrecorded for this skill implementation\./,
+      `${clientGlossaryBlock}.`
+    );
+    text = text.replace(
+      /The canonical glossary is\n\[`tied-project\/vocab\/prompt-composer\.md`\]\(\.\.\/vocab\/prompt-composer\.md\)\. The following\nterms were recorded for this skill implementation\./,
+      `${clientGlossaryBlock}.`
     );
     text = text.replaceAll(
       "1. Update `tied-project/vocab/prompt-composer.md` for new or renamed concepts.",
       "1. Update the source-only `tied-project/vocab/prompt-composer.md` glossary for new or renamed concepts."
     );
+    text = text.replace(/\]\(\.\.\/vocab\/prompt-composer\.md\)/g, "");
   }
   fs.writeFileSync(destination, text, "utf8");
   normalizeCopiedPathTimestamps(source, destination);

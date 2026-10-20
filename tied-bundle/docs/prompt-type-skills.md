@@ -3,7 +3,7 @@
 **Status:** Implemented  
 **Scope:** Versioned Cursor Agent Skills for Prompt Composer workflows in TIED projects
 **Canonical source:** [`tools/bundled-prompt-type-skills/`](../../tools/bundled-prompt-type-skills/)
-**Vocabulary:** [`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md)  
+**Vocabulary:** `tied-project/vocab/prompt-composer.md` (TIED source repository only; not installed into clients)
 **Recorded:** 2026-08-12
 
 This is the canonical repository documentation for the prompt-type skills. It
@@ -58,9 +58,9 @@ Traceability: [REQ-PROMPT_TYPE_SUBAGENT](../requirements/REQ-PROMPT_TYPE_SUBAGEN
 
 ## Vocabulary
 
-The canonical glossary is
-[`tied-project/vocab/prompt-composer.md`](../vocab/prompt-composer.md). The following
-terms were recorded for this skill implementation.
+The canonical glossary lives at `tied-project/vocab/prompt-composer.md` in the
+TIED source repository (not installed into clients). The following terms were
+recorded for this skill implementation.
 
 ### Existing Prompt Composer terms
 

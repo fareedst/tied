@@ -17,6 +17,11 @@ export const STALE_LAYOUT_ALLOWLIST = [
     reason: "v1 manifest path segments",
   },
   {
+    glob: "tools/bootstrap/manifest.json",
+    patternIds: ["root_templates"],
+    reason: "EDPC_METHODOLOGY_REQUIRED_FILES paths are tied-bundle-relative (templates/, docs/)",
+  },
+  {
     glob: "tools/bootstrap/lib/methodology-client-boundary.mjs",
     reason: "legacy path detection",
   },
