@@ -2690,6 +2690,29 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
       - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
     implementation:
       - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  category: "Documentation"
+  description: "User-facing prose on live surfaces shall describe only the two-folder client layout (tied-project/ + tied-bundle/) and shall not document legacy top-level tied/ clients or --migrate-layout in markdown."
+  detail_file: "requirements/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION.yaml"
+  name: "Legacy layout documentation decommission"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+    related_to:
+      - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Live-surface markdown/yaml prose does not describe legacy top-level tied/ client layout."
+      id: "SC-LAYOUT-DOC-NO-LEGACY-NARRATIVE"
+      metric: "lint-stale-layout Layer B + manual rg sweep"
+    - criterion: "No --migrate-layout in markdown on live surfaces (CLI --help only)."
+      id: "SC-LAYOUT-DOC-NO-MIGRATE-MD"
+      metric: "lint-stale-layout migrate_layout_markdown pattern"
+    - criterion: "store-readme-structure.test.ts forbids legacy layout patterns and requires --refresh."
+      id: "SC-LAYOUT-DOC-README-TEST"
+      metric: "node test store-readme-structure.test.ts"
+  status: "Implemented"
 REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   category: "Functional"
   cross_references:
@@ -3195,6 +3218,19 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
   detail_file: "requirements/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml"
   name: "Store README operator delivery spine"
   priority: "P2"
+  satisfaction_criteria:
+    - criterion: "Band 1 H3 Primary operator delivery path lists build, install, MCP confirm with both help commands."
+      id: "SC-README-SPINE"
+      metric: "README.md and store-readme-structure.test.ts"
+    - criterion: "Extended structure test passes with unchanged three-band H2 order."
+      id: "SC-README-STRUCTURE-TEST"
+      metric: "store-readme-structure.test.ts"
+    - criterion: "README documents no-arg tied-install help and --refresh for methodology refresh."
+      id: "SC-README-INSTALL-HELP"
+      metric: "README.md"
+    - criterion: "Repository layout lists build-workspace entry points at store root."
+      id: "SC-README-LAYOUT"
+      metric: "README.md"
   status: "Implemented"
   traceability:
     architecture:

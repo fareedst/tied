@@ -2202,6 +2202,24 @@ ARCH-TIED_LAYERED_CLIENT_INSTALL:
       - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
     requirements:
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  category: "Documentation"
+  description: "Enforce two-folder-only operator prose via Layer B stale-layout lint, README structure tests, and LEAP on store README delivery spine REQ."
+  detail_file: "architecture-decisions/ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION.yaml"
+  name: "Legacy layout doc decommission architecture"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+    implements:
+      - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  status: "Implemented"
+  traceability:
+    implementation:
+      - "IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    requirements:
+      - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
 ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"

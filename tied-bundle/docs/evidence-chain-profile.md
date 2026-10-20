@@ -63,7 +63,7 @@ TIED_BASE_PATH=/absolute/client/tied \
 
 Required: `profile_depth`. Optional: `project_root`, `tied_base_path` (must match `tied_config_get_base_path`), `scope`, `change_context`, `manifest_reference`, `invoke_structural_validators`, `invoke_pseudocode_analyze`, `output_mode` / `output_path`.
 
-**Fail closed** when the requested **TIED base path** is not the workspace **`tied-project/`** (or legacy **`tied/`** alias) or does not match the confirmed MCP base path (`WrongTiedBasePath`).
+**Fail closed** when the requested **TIED base path** is not the workspace **`tied-project/`** or does not match the confirmed MCP base path (`WrongTiedBasePath`).
 
 **Read-only:** never write project REQ/ARCH/IMPL, methodology YAML, finding ledgers, or case reports. `output_path` may only target a caller-selected non-intent file (for example `working/evidence-chain/{run_id}.json`).
 

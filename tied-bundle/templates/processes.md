@@ -263,7 +263,7 @@ When the client uses the methodology/project layout (e.g. after running `tied-in
 - **Reading**: MCP and validation may merge methodology + project (methodology keys first, then project keys; project overrides if same token) so the full set of REQ/ARCH/IMPL is visible.
 - **Writing**: Insert, update, and delete only in project index and project detail files. Do not modify `tied-bundle/`.
 
-If `tied-bundle/` is absent (legacy or single-file layout), tooling may treat the single set of files under `tied/` as the only source; see project docs or MCP server behavior for backward compatibility.
+If `tied-bundle/` is absent (store mode), tooling reads project traceability under `tied-project/` only; see MCP server behavior for methodology resolution.
 
 ### Token references
 - `[REQ-TIED_SETUP]` — YAML indexes are part of TIED methodology setup

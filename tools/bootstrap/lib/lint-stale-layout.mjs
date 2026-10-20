@@ -1,5 +1,6 @@
 /**
  * [IMPL-TIED_TWO_FOLDER_LAYOUT] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT]
+ * [IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION] [ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION] [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
  * How: LINT_STALE_LAYOUT_REFERENCES — fail-closed scan of live surfaces for pre-two-folder paths.
  */
 import fs from "node:fs";
@@ -32,6 +33,22 @@ export const STALE_LAYOUT_PATTERNS = [
   { id: "legacy_bootstrap_flag", re: /--legacy-bootstrap/, hint: "removed; use --mode full" },
   { id: "legacy_bootstrap_env", re: /TIED_BOOTSTRAP_LEGACY/, hint: "removed" },
 ];
+
+/** Layer B — prose doc decommission ([REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]); .md/.yaml/.yml only */
+export const DOC_DECOMMISSION_PATTERNS = [
+  {
+    id: "legacy_tied_dir_narrative",
+    re: /legacy [`'"]?\*{0,2}tied\/|or legacy `tied\/|Legacy `tied\/ layout|legacy top-level `tied\/|before `--migrate-layout`|until migration\)/i,
+    hint: "document tied-project/ + tied-bundle/ only; no legacy tied/ client narrative",
+  },
+  {
+    id: "migrate_layout_markdown",
+    re: /--migrate-layout/,
+    hint: "layout flags: tied-install --help only (not markdown)",
+  },
+];
+
+const DOC_DECOMMISSION_EXTENSIONS = new Set([".md", ".yaml", ".yml"]);
 
 /** @type {readonly string[]} */
 export const LIVE_SURFACE_ROOTS = [
@@ -141,6 +158,19 @@ export function lintStaleLayoutReferences(repoRoot, opts = {}) {
       for (const pat of STALE_LAYOUT_PATTERNS) {
         if (!pat.re.test(line)) continue;
         if (pat.id === "root_templates" && line.includes("tied-bundle/templates/")) continue;
+        if (isAllowlistedStaleHit(rel, pat.id)) continue;
+        findings.push({
+          file: rel,
+          line: i + 1,
+          patternId: pat.id,
+          hint: pat.hint,
+          excerpt: line.trim().slice(0, 160),
+        });
+      }
+      const ext = path.extname(rel);
+      if (!DOC_DECOMMISSION_EXTENSIONS.has(ext)) continue;
+      for (const pat of DOC_DECOMMISSION_PATTERNS) {
+        if (!pat.re.test(line)) continue;
         if (isAllowlistedStaleHit(rel, pat.id)) continue;
         findings.push({
           file: rel,

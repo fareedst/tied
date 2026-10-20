@@ -1,5 +1,5 @@
 /**
- * [REQ-TIED_TWO_FOLDER_LAYOUT] lint-stale-layout fixture + allowlist.
+ * [REQ-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION] lint-stale-layout fixture + allowlist.
  */
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -31,6 +31,43 @@ describe("lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
       "utf8",
     );
     const result = lintStaleLayoutReferences(root, { roots: ["tied-bundle"] });
+    assert.equal(result.ok, true);
+  });
+
+  it("flags legacy tied narrative and migrate-layout in markdown", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "stale-lint-"));
+    fs.writeFileSync(
+      path.join(root, "README.md"),
+      "Use legacy `tied/` or tied-install --migrate-layout\n",
+      "utf8",
+    );
+    const result = lintStaleLayoutReferences(root, { roots: ["README.md"] });
+    assert.equal(result.ok, false);
+    assert.ok(result.findings.some((f) => f.patternId === "legacy_tied_dir_narrative"));
+    assert.ok(result.findings.some((f) => f.patternId === "migrate_layout_markdown"));
+  });
+
+  it("does not flag migrate-layout in .mjs CLI sources", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "stale-lint-"));
+    fs.mkdirSync(path.join(root, "tools"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, "tools", "help.mjs"),
+      "export const flags = ['--migrate-layout'];\n",
+      "utf8",
+    );
+    const result = lintStaleLayoutReferences(root, { roots: ["tools"] });
+    assert.equal(result.ok, true);
+  });
+
+  it("allowlists migrate-layout in REQ detail yaml", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "stale-lint-"));
+    fs.mkdirSync(path.join(root, "tied-project", "requirements"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, "tied-project", "requirements", "REQ-EXAMPLE.yaml"),
+      "criterion: tied-install --migrate-layout idempotent\n",
+      "utf8",
+    );
+    const result = lintStaleLayoutReferences(root, { roots: ["tied-project/requirements"] });
     assert.equal(result.ok, true);
   });
 });

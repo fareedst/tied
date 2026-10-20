@@ -1,10 +1,46 @@
 /**
  * [IMPL-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT]
+ * [IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION] [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
  * Intentional legacy path mentions (migration history, legacy markers in code, inherited methodology tokens).
  */
 
 /** @type {readonly { glob: string, patternIds?: readonly string[], reason: string }[]} */
 export const STALE_LAYOUT_ALLOWLIST = [
+  {
+    glob: "tied-project/requirements.yaml",
+    patternIds: ["migrate_layout_markdown", "legacy_tied_dir_narrative"],
+    reason: "requirements index rows cite decommission satisfaction criteria",
+  },
+  {
+    glob: "tied-project/requirements/**",
+    patternIds: ["migrate_layout_markdown", "legacy_tied_dir_narrative"],
+    reason: "REQ satisfaction criteria describe migrate behavior",
+  },
+  {
+    glob: "tied-project/semantic-tokens.yaml",
+    patternIds: ["migrate_layout_markdown", "legacy_tied_dir_narrative"],
+    reason: "token registry descriptions name decommission policy",
+  },
+  {
+    glob: "tied-project/architecture-decisions.yaml",
+    patternIds: ["migrate_layout_markdown", "legacy_tied_dir_narrative"],
+    reason: "architecture index may cite layout policy",
+  },
+  {
+    glob: "tied-project/implementation-decisions.yaml",
+    patternIds: ["migrate_layout_markdown", "legacy_tied_dir_narrative"],
+    reason: "implementation index may cite layout policy",
+  },
+  {
+    glob: "tied-project/architecture-decisions/**",
+    patternIds: ["migrate_layout_markdown", "legacy_tied_dir_narrative"],
+    reason: "ARCH detail may reference layout migration behavior",
+  },
+  {
+    glob: "tied-project/implementation-decisions/**",
+    patternIds: ["migrate_layout_markdown", "legacy_tied_dir_narrative"],
+    reason: "IMPL detail may reference layout migration behavior",
+  },
   { glob: "**/*.test.mjs", reason: "tests may reference legacy fixtures and names" },
   { glob: "**/*.test.ts", reason: "tests may reference legacy fixtures and names" },
   { glob: "mcp-server/test/**", reason: "MCP fixtures" },

@@ -19,7 +19,7 @@
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |
 | **activation collect** | gate JSON assembly, hand-built activation | `tied_checklist_activation_collect` — read-only assembly of `{ receipt, artifacts, expected }` from phase artifact dirs |
-| **TIED base path** | repo root, workspace | Absolute path to **`tied-project/`** (modern) or legacy **`tied/`**; `tied_config_get_base_path` confirms writable project root |
+| **TIED base path** | repo root, workspace | Absolute path to **`tied-project/`**; `tied_config_get_base_path` confirms writable project root |
 | **client project root** | repo root (alone), workspace | Directory containing **`tied/`**; parent of **TIED base path**; anchor for `tied_token_rename` `extra_globs` / `extra_extensions` |
 | **default TIED rename scope** | yaml rename | Built-in `tied_token_rename` targets: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames |
 | **extra substitution targets** | extra files, glob rename | Client-repo files outside default TIED rename scope; selected via `extra_globs` and `extra_extensions` on `tied_token_rename` |

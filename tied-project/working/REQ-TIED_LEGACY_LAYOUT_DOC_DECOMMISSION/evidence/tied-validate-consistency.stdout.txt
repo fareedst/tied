@@ -1,0 +1,446 @@
+{
+  "index": {
+    "requirements": {
+      "valid": true
+    },
+    "architecture": {
+      "valid": true
+    },
+    "implementation": {
+      "valid": true
+    },
+    "semantic-tokens": {
+      "valid": true
+    }
+  },
+  "index_tokens": {
+    "requirements": {
+      "tokens": [
+        "REQ-TIED_BOUNDED_COMPOSITION"
+      ],
+      "with_detail_file": [
+        "REQ-TIED_BOUNDED_COMPOSITION"
+      ],
+      "detail_file_exists": [
+        "REQ-TIED_BOUNDED_COMPOSITION"
+      ]
+    },
+    "architecture": {
+      "tokens": [],
+      "with_detail_file": [],
+      "detail_file_exists": []
+    },
+    "implementation": {
+      "tokens": [],
+      "with_detail_file": [],
+      "detail_file_exists": []
+    },
+    "semantic-tokens": {
+      "tokens": [
+        "ARCH-TIED_BOUNDED_COMPOSITION",
+        "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+        "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+        "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+        "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+        "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+        "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+        "REQ-TIED_BOUNDED_COMPOSITION"
+      ],
+      "with_detail_file": [],
+      "detail_file_exists": []
+    }
+  },
+  "token_references": [
+    {
+      "kind": "orphan_detail",
+      "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+      "index": "architecture"
+    },
+    {
+      "kind": "orphan_detail",
+      "token": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+      "index": "implementation"
+    },
+    {
+      "kind": "orphan_detail",
+      "token": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+      "index": "implementation"
+    },
+    {
+      "kind": "orphan_detail",
+      "token": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+      "index": "implementation"
+    },
+    {
+      "kind": "orphan_detail",
+      "token": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+      "index": "implementation"
+    },
+    {
+      "kind": "orphan_detail",
+      "token": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+      "index": "implementation"
+    },
+    {
+      "kind": "orphan_detail",
+      "token": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+      "index": "implementation"
+    }
+  ],
+  "traceability": [],
+  "detail_files": {
+    "REQ-TIED_BOUNDED_COMPOSITION": {
+      "token": "REQ-TIED_BOUNDED_COMPOSITION",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "REQ-FEAT_AGENTSTREAM_ADAPTER",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-FEAT_AGENTSTREAM_ADAPTER",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-FEEDBACK_TO_TIED",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-FEEDBACK_TO_TIED",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-GOAGENT-AGENT-EXECUTOR",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-GOAGENT-AGENT-EXECUTOR",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-MODULE_VALIDATION",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-MODULE_VALIDATION",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-REQUEST_EVIDENCE_ENVELOPE",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-REQUEST_EVIDENCE_ENVELOPE",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-TIED_FIDELITY_RESEARCH",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-TIED_FIDELITY_RESEARCH",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "REQ-TIED_JEV_DECISION_COPROCESSOR",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+          "referenced_by": "REQ-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_BOUNDED_COMPOSITION": {
+      "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_FIDELITY_RESEARCH",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "ARCH-TIED_FIDELITY_RESEARCH",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+          "index": "implementation"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+          "referenced_by": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_token": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM": {
+      "token": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "REQ-FEAT_AGENTSTREAM_ADAPTER",
+          "referenced_by": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "referenced_token": "REQ-FEAT_AGENTSTREAM_ADAPTER",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "REQ-GOAGENT-AGENT-EXECUTOR",
+          "referenced_by": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "referenced_token": "REQ-GOAGENT-AGENT-EXECUTOR",
+          "index": "requirements"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_by": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "referenced_token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-MODULE_VALIDATION",
+          "referenced_by": "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+          "referenced_token": "IMPL-MODULE_VALIDATION",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS": {
+      "token": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_by": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+          "referenced_token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-MODULE_VALIDATION",
+          "referenced_by": "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+          "referenced_token": "IMPL-MODULE_VALIDATION",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_LESSON_DISTILLATION": {
+      "token": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_by": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+          "referenced_token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-MODULE_VALIDATION",
+          "referenced_by": "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+          "referenced_token": "IMPL-MODULE_VALIDATION",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET": {
+      "token": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_by": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+          "referenced_token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-MODULE_VALIDATION",
+          "referenced_by": "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+          "referenced_token": "IMPL-MODULE_VALIDATION",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_SHADOW_COMPARISON": {
+      "token": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_by": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+          "referenced_token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-MODULE_VALIDATION",
+          "referenced_by": "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+          "referenced_token": "IMPL-MODULE_VALIDATION",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE": {
+      "token": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+      "has_file": true,
+      "ref_issues": [
+        {
+          "kind": "missing_reference",
+          "token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "referenced_by": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+          "referenced_token": "ARCH-TIED_BOUNDED_COMPOSITION",
+          "index": "architecture"
+        },
+        {
+          "kind": "missing_reference",
+          "token": "IMPL-MODULE_VALIDATION",
+          "referenced_by": "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+          "referenced_token": "IMPL-MODULE_VALIDATION",
+          "index": "implementation"
+        }
+      ],
+      "format": "yaml",
+      "top_level_key_ok": true
+    }
+  },
+  "pseudocode": {},
+  "ok": false
+}

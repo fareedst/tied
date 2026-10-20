@@ -1091,7 +1091,7 @@ export const allTools = [
     name: "tied_feedback_add",
     config: {
       description:
-        "Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to tied/feedback.yaml. Returns ok, id, created_at, and optionally a copy-paste-ready markdown snippet for reporting to the TIED project.",
+        "Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to feedback.yaml under the project traceability root (TIED_BASE_PATH). Returns ok, id, created_at, and optionally a copy-paste-ready markdown snippet for reporting to the TIED project.",
       inputSchema: z.object({
         type: z
           .enum(["feature_request", "bug_report", "methodology_improvement"])
@@ -3965,7 +3965,7 @@ export const allTools = [
   {
     name: "feature_create",
     config: {
-      description: "Create an idempotent feature package under tied/features.",
+      description: "Create an idempotent feature package under {TIED_BASE_PATH}/features/.",
       inputSchema: z.object({
         request_key: z.string().min(1),
         title: z.string().min(1),

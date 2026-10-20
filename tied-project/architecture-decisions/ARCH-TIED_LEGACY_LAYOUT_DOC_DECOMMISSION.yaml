@@ -1,0 +1,18 @@
+ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+    category: "Documentation"
+    description: "Layer A/B lint split, allowlists for behavioral REQ criteria, store README forbidden patterns, install matrix verify tokens."
+    name: "Legacy layout doc decommission architecture"
+    priority: "P2"
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      implements:
+        - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    status: "In Progress"
+    traceability:
+      implementation:
+        - "IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      requirements:
+        - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  status: "Implemented"

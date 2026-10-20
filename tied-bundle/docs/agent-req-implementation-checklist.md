@@ -825,7 +825,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Goals**: Ensure every TIED YAML file is syntactically valid and canonically formatted before use. **Mutations** to project-owned TIED YAML go through `.cursor/skills/tied-yaml/scripts/tied-cli.sh` per [.cursor/skills/tied-yaml/SKILL.md](../../.cursor/skills/tied-yaml/SKILL.md) (tool names and JSON args in [.cursor/skills/tied-yaml/reference.md](../../.cursor/skills/tied-yaml/reference.md)). Agents use **`lint_yaml`** per [PROC-YAML_EDIT_LOOP] (`processes.md`); it may accept multiple paths but must process each file independently—never raw multi-argument `yq` pretty-print, which merges documents and corrupts files.
 
-**Per-file order** (project-owned `./tied/` paths only):
+**Per-file order** (project-owned `./tied-project/` paths only):
 
 1. Governed **`tied-cli.sh`** mutation when applicable.
 2. **Baseline canonical formatting** via `lint_yaml` (`tied-yaml-canonical-v1` + resolved `scalar_style`).
@@ -860,11 +860,11 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Tasks**:
 1. Resolve style policy from `tied-project/config.yaml`: `scalar_style` per [REQ-TIED_YAML_STYLE_CONFIGURATION]; optional `client_formatter` when present.
 2. IF **`client_formatter`** is absent: record **`styling_status: not_configured`**; baseline canonical remains effective; **RETURN**.
-3. IF **`client_formatter`** is configured: capture pre-style snapshot; invoke hook on each path under project-owned `./tied/` only (never `./tied-bundle/**`).
+3. IF **`client_formatter`** is configured: capture pre-style snapshot; invoke hook on each path under project-owned `./tied-project/` only (never `./tied-bundle/**`).
 4. Re-read formatted file; run **`lint_yaml`** for syntax.
 5. Run **`scripts/yaml_semantic_compare.rb`** between pre-style and post-style bytes; semantic mismatch blocks acceptance.
 6. Verify idempotence (second pass byte-identical or fail closed).
-7. On formatter error, semantic change, non-idempotent output, or write outside project-owned `./tied/`: **RETURN** error to `sub-yaml-edit-loop` caller.
+7. On formatter error, semantic change, non-idempotent output, or write outside project-owned `./tied-project/`: **RETURN** error to `sub-yaml-edit-loop` caller.
 8. Record evidence: `styling_status`, `scalar_style`, `style_source`, formatter command/version when configured.
 
 **Outcomes**: Post-style files valid and semantically equivalent; `styling_status` recorded.

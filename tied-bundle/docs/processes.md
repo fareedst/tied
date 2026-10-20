@@ -415,7 +415,7 @@ When the client uses the methodology/project layout (e.g. after running `tied-in
 - **Reading**: MCP and validation may merge methodology + project (methodology keys first, then project keys; project overrides if same token) so the full set of REQ/ARCH/IMPL is visible.
 - **Writing**: Insert, update, and delete only in project index and project detail files. Do not modify `tied-bundle/`.
 
-If `tied-bundle/` is absent (store mode or legacy layout), tooling uses project-only reads under `tied-project/`; run `tied-install --migrate-layout` when `LEGACY_LAYOUT_DETECTED` is reported.
+If `tied-bundle/` is absent (store mode), tooling uses project-only reads under `tied-project/`. When `LEGACY_LAYOUT_DETECTED` is reported, use layout options from `tied-install --help`.
 
 ### Token references
 - `[REQ-TIED_SETUP]` — YAML indexes are part of TIED methodology setup
@@ -579,7 +579,7 @@ This is the **controlling loop** for creating or editing any TIED YAML (index or
 
 **Repository scalar-style policy** — Set `scalar_style: unwrapped` or `scalar_style: wrapped` in `tied-project/config.yaml` at the project root (the parent of `TIED_BASE_PATH`). Resolution precedence is repository file, `TIED_YAML_STYLE`, `$XDG_CONFIG_HOME/tied/yaml-format.yaml`, then `unwrapped`. `wrapped` double-quotes string scalars only; booleans, numbers, and null remain typed. An invalid explicit setting fails without fallback. MCP writers and `tied-cli.sh` use this same policy, and successful `yaml_format` metadata reports `scalar_style` and `style_source`. Use `scripts/yaml_tool.sh --check <file>` as a read-only enforcement gate.
 
-**Client presentation styling (checklist gate)** — After baseline canonical formatting, the agent requirement checklist **`sub-client-yaml-styling`** sub-procedure may invoke an optional repository `client_formatter` hook declared in `tied-project/config.yaml`. When absent, record `styling_status: not_configured` and keep the shared canonical profile effective. When configured, run the hook only on project-owned `./tied/` paths, re-validate syntax with `lint_yaml`, and require semantic equivalence via `scripts/yaml_semantic_compare.rb` before acceptance. Presentation styling must not change record meaning, schema, token links, ordered-list semantics, or opaque pseudo-code text.
+**Client presentation styling (checklist gate)** — After baseline canonical formatting, the agent requirement checklist **`sub-client-yaml-styling`** sub-procedure may invoke an optional repository `client_formatter` hook declared in `tied-project/config.yaml`. When absent, record `styling_status: not_configured` and keep the shared canonical profile effective. When configured, run the hook only on project-owned `./tied-project/` paths, re-validate syntax with `lint_yaml`, and require semantic equivalence via `scripts/yaml_semantic_compare.rb` before acceptance. Presentation styling must not change record meaning, schema, token links, ordered-list semantics, or opaque pseudo-code text.
 
 **`lint_yaml`** / **`scripts/lint_yaml.sh`** — Backward-compatible alias; delegates to **`yaml_tool.sh`**. It accepts one or more paths and processes each independently through the shared canonicalizer. MCP YAML writers and **`tied_token_rename`** use the same profile and return `yaml_format` metadata on successful writes.
 

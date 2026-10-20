@@ -1,0 +1,20 @@
+IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+    category: "Documentation"
+    description: "Implements doc decommission lint layer and documentation sweep."
+    name: "Legacy layout doc decommission implementation"
+    priority: "P2"
+    related_requirements:
+      architecture:
+        - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      depends_on:
+        - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      code_locations:
+        - "tools/bootstrap/lib/lint-stale-layout.mjs"
+      requirements:
+        - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  status: "Implemented"

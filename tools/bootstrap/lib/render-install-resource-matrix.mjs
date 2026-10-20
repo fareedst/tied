@@ -53,7 +53,7 @@ export function verifyInstallResourceMatrixDoc(repoRoot = REPO_ROOT) {
     PROJECT_DIR_NAME,
     BUNDLE_DIR_NAME,
     "tied-install",
-    "--migrate-layout",
+    "--refresh",
   ];
   const missing = required.filter((s) => !text.includes(s));
   if (missing.length) {

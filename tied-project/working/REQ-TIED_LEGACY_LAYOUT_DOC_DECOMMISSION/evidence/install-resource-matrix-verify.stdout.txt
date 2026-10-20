@@ -1,0 +1,17 @@
+DEBUG: install-resource-matrix.md sync ok
+  tied-project/config.yaml
+  tied-project/requirements.yaml
+  tied-bundle/install.json
+  tied-bundle/docs/
+  tied-bundle/templates/impl-essence-pseudocode-template.md
+  .cursor/mcp.json
+  .mcp.json
+  .cursor/skills/
+  .claude/skills/
+  skills/
+  tied-bundle/
+  .cursorrules
+  .cursor/hooks.json
+  .claude/hooks/
+  .claude/settings.json
+  tied-project/config.yaml

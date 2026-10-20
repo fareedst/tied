@@ -1,0 +1,28 @@
+REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+    category: "Documentation"
+    description: "User-facing prose on live surfaces shall describe only tied-project/ + tied-bundle/; no legacy tied/ wild-client narrative; no --migrate-layout in markdown."
+    name: "Legacy layout documentation decommission"
+    priority: "P2"
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_TWO_FOLDER_LAYOUT"
+      related_to:
+        - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
+    satisfaction_criteria:
+      - criterion: "Live-surface markdown/yaml prose does not describe legacy top-level tied/ client layout."
+        id: "SC-LAYOUT-DOC-NO-LEGACY-NARRATIVE"
+        metric: "lint-stale-layout Layer B"
+      - criterion: "No --migrate-layout in markdown on live surfaces."
+        id: "SC-LAYOUT-DOC-NO-MIGRATE-MD"
+        metric: "lint-stale-layout migrate_layout_markdown"
+      - criterion: "README structure test enforces two-folder operator spine without migrate-layout."
+        id: "SC-LAYOUT-DOC-README-TEST"
+        metric: "store-readme-structure.test.ts"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      implementation:
+        - "IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  status: "Implemented"

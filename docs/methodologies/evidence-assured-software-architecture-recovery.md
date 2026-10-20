@@ -627,7 +627,7 @@ Agent prompts already split roles: Track C **creates** sidecars ([impl-pseudocod
 
 ### 7.5 Implementer anti-patterns (do not do in the build)
 
-- Rename `tied-project/` → `recovery/` or move working roots to repo root (brownfield clients use `tied-install --migrate-layout` away from undivided `working/`).
+- Rename `tied-project/` → `recovery/` or move working roots to repo root; keep committed evidence under `tied-project/working/` per [working-artifact-placement.md](../../tied-bundle/docs/working-artifact-placement.md).
 - Collapse adversarial **finding-ledger.jsonl** and claims-review ledgers into one file (architecture explicitly keeps them distinct).
 - Treat Track C sidecars or `observed` matrix rows as approved REQ intent.
 - Add methodology content under client-writable paths or commit regenerable gate JSON under `tied-project/working/` to satisfy CI.

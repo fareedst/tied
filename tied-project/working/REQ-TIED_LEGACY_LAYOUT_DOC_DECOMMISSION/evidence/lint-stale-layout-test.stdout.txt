@@ -1,0 +1,16 @@
+▶ lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]
+  ✔ flags planted copy_files reference on live surface (2.724375ms)
+  ✔ includes tied-bundle/docs on live surfaces (0.054ms)
+  ✔ allowlists migration history file (1.238291ms)
+  ✔ flags legacy tied narrative and migrate-layout in markdown (1.221917ms)
+  ✔ does not flag migrate-layout in .mjs CLI sources (0.627ms)
+  ✔ allowlists migrate-layout in REQ detail yaml (0.512708ms)
+✔ lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT] (6.983ms)
+ℹ tests 6
+ℹ suites 1
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 78.658

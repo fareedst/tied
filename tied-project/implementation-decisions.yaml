@@ -2706,6 +2706,23 @@ IMPL-TIED_LAYERED_CLIENT_INSTALL:
       - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
     requirements:
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  category: "Documentation"
+  description: "Doc decommission lint and README tests."
+  detail_file: "implementation-decisions/IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION.yaml"
+  name: "Legacy layout doc decommission implementation"
+  priority: "P2"
+  related_requirements:
+    architecture:
+      - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    depends_on:
+      - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    requirements:
+      - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
 IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"

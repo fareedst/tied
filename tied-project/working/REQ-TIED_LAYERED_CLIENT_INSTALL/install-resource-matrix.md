@@ -58,7 +58,7 @@
 | `--install-layers db,mcp,…` | install | only listed layers; others **—** |
 | `--methodology-bundle live\|pinned` | install (linked) | bundle path for MCP + verify |
 | `--store PATH` | install | store root in stubs, wrappers, MCP dist path |
-| `--migrate-layout` | brownfield | hard cut to `tied-project/` + `tied-bundle/` (idempotent) |
+| `--refresh` | install | refresh inherited methodology (idempotent; see `tied-install --help` for layout flags) |
 | `--full-tools` / Jev/DAE/BBCE | db + `tied-project/config.yaml` | tool profile in install config |
 | `--skip-lint`, `--skip-mcp-enable`, `--skip-git`, `--skip-onboarding-audit` | pipeline only | no change to install materialization |
 | `--doctor` (on `tied-install` after smoke) | verify | read-only checks; no new resources |
@@ -86,9 +86,9 @@ how install-matrix
 verify-install-matrix-doc
 test-new-tied-client --install-mode linked
 test-new-tied-client --install-mode full
-tied-install --migrate-layout /path/to/brownfield/client
+tied-install --refresh /path/to/client
 ```
 
 **G4 audit ([REQ-TIED_NEW_CLIENT_ADHERENCE]):** grammar audit + **two-folder layout checks** (`two_folder_layout` in `tied-new-client-audit.v1.json`): no top-level `tied/`, `tied-project/config.yaml`, `git check-ignore tied-bundle/`.
 
-**Sync check:** `node tools/bootstrap/lib/render-install-resource-matrix.mjs` verifies this file mentions `tied-project`, `tied-bundle`, `tied-install`, and `--migrate-layout`.
+**Sync check:** `node tools/bootstrap/lib/render-install-resource-matrix.mjs` verifies this file mentions `tied-project`, `tied-bundle`, `tied-install`, and `--refresh`.

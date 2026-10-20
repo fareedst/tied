@@ -7,7 +7,7 @@ MCP server that exposes **tools** and **resources** for TIED YAML index files: r
 - Node.js 18+
 - TIED project with YAML indexes (e.g. `tied-project/requirements.yaml`) or template repo with the same-named files at root (e.g. `requirements.yaml`)
 
-**Template vs MCP:** At repo root the index files (e.g. `requirements.yaml`) are templates; in `tied/` they are the project indexes. The root files are minimal and foundational for non-MCP bootstrap (e.g. `tied-install.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, `tied_token_create_with_detail`) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements/REQ-IDENTIFIER.yaml`).
+**Template vs MCP:** At repo root the index files (e.g. `requirements.yaml`) are templates; in `tied-project/` they are the project indexes. The root files are minimal and foundational for non-MCP bootstrap (e.g. `tied-install.sh`). New REQ/ARCH/IMPL records can be added via MCP tools (`yaml_index_insert`, `yaml_detail_create`, `tied_token_create_with_detail`) or by copying the template block at the bottom of each index file or the template detail file (e.g. `requirements/REQ-IDENTIFIER.yaml`).
 
 ## Install
 
@@ -94,16 +94,16 @@ Path parameters on tools that accept file paths are resolved by the Node process
 | `yaml_detail_delete` | Delete a detail YAML file. Params: `token`, optional `sync_index` (default true to clear detail_file in index). |
 | `tied_token_create_with_detail` | Create a new REQ, ARCH, or IMPL token with both index record and detail YAML in one step. Params: `token`, `index_record` (JSON string), `detail_record` (JSON string), optional `upsert_index` (default false). Sets `detail_file` on the index automatically. Fails if detail file already exists. |
 | `tied_yaml_format` | Return read-only `tied-yaml-canonical-v1` metadata, including the resolved `scalar_style` and `style_source`. |
-| `tied_client_yaml_styling_apply` | Run optional repository `client_formatter` on one project-owned `./tied/` YAML path. Params: `file_path`. Returns `styling_status` (`configured` \| `not_configured`) and fail-closed errors for path escape, methodology paths, spawn failures, invalid post-hook YAML, semantic drift, or non-idempotent second passes. Does not auto-run during MCP writers. |
+| `tied_client_yaml_styling_apply` | Run optional repository `client_formatter` on one project-owned `./tied-project/` YAML path. Params: `file_path`. Returns `styling_status` (`configured` \| `not_configured`) and fail-closed errors for path escape, methodology paths, spawn failures, invalid post-hook YAML, semantic drift, or non-idempotent second passes. Does not auto-run during MCP writers. |
 | `tied_token_rename` | Rename a single semantic token across the **default TIED rename scope** (project YAML indexes, detail files, pseudo-code sidecars, detail filename renames) and optional **extra substitution targets** under the **client project root** (parent of `TIED_BASE_PATH`). Params: `old_token`, `new_token` (same prefix required), optional `dry_run`, `include_markdown` (also replace in `tied-bundle/docs/processes.md`), `extra_globs` (path globs from client project root, e.g. `./*.md`, `tied-project/vocab/**/*.md`), `extra_extensions` (e.g. `swift` → `**/*.swift`). Skips `.git`, `node_modules`, `build`, `dist`, `vendor`, `DerivedData` for extra targets; skips binary files. Modified YAML uses tied-yaml-canonical-v1 atomically. Returns `ok`, `files_modified`, `file_renamed`, optional `files_skipped`, `errors`. |
 | `tied_import_summary` | Import/inspect an existing TIED directory: read YAML indexes and report tokens plus detail file presence (hybrid .md and .yaml). Params: optional `base_path`. Use to validate a reference TIED layout. |
-| `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `tied/feedback.yaml`. Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
+| `tied_feedback_add` | Add a feedback entry (feature request, bug report, or methodology improvement). Creates or appends to `feedback.yaml` under the project traceability root (`tied-project/feedback.yaml` when `TIED_BASE_PATH` points at `tied-project/`). Params: `type` (feature_request \| bug_report \| methodology_improvement), `title`, `description`, optional `context` (JSON string), `include_report_snippet` (default true), optional `base_path`. Returns `ok`, `id`, `created_at`, and optionally `report_snippet` (markdown for pasting into a TIED issue). |
 | `tied_feedback_export` | Export all feedback entries for reporting to the TIED project. Params: `format` (markdown \| json), optional `base_path`. Returns a string suitable for copy-paste into an issue or report. |
 | `requirement_list_state_guide` | Client-supplied requirement list walk. First call: non-empty `requirements`; later: `current_state` = `continuation_state`. Returns one requirement object per step until **`id: end_requirement_list`**. For each item, use the agent REQ checklist (e.g. `tied-bundle/docs/agent-req-implementation-checklist.md`). See [tied-bundle/docs/requirement-list-state-guide-agent-workflow.md](../tied-bundle/docs/requirement-list-state-guide-agent-workflow.md). |
 
 ### Feature orchestration tools
 
-These tools operate on client feature manifests under `tied/features/`. They are
+These tools operate on client feature manifests under `{TIED_BASE_PATH}/features/` (typically `tied-project/features/`). They are
 separate from the TIED YAML record tools above and from `tied-cli.sh`:
 
 | Tool | Purpose |
@@ -130,7 +130,7 @@ Use **`tied_token_rename`** to rename a semantic token everywhere in the default
 
 ### Feedback (report to TIED)
 
-Projects and users can submit **feature requests**, **bug reports**, and **methodology improvement** suggestions via the feedback tools. Feedback is stored in `tied/feedback.yaml` under your project's TIED base path (versioned with the project). Use **`tied_feedback_add`** to add an entry and **`tied_feedback_export`** to produce markdown or JSON you can paste into a GitHub issue (or send to the TIED project) to report what would improve the TIED methodology. Each entry has an `id`, `type`, `title`, `description`, optional `context`, and `created_at`. See [REQ-FEEDBACK_TO_TIED], [ARCH-FEEDBACK_STORAGE], [IMPL-MCP_FEEDBACK_TOOLS].
+Projects and users can submit **feature requests**, **bug reports**, and **methodology improvement** suggestions via the feedback tools. Feedback is stored in `feedback.yaml` under your project's TIED base path (`tied-project/feedback.yaml` when `TIED_BASE_PATH` points at `tied-project/`). Use **`tied_feedback_add`** to add an entry and **`tied_feedback_export`** to produce markdown or JSON you can paste into a GitHub issue (or send to the TIED project) to report what would improve the TIED methodology. Each entry has an `id`, `type`, `title`, `description`, optional `context`, and `created_at`. See [REQ-FEEDBACK_TO_TIED], [ARCH-FEEDBACK_STORAGE], [IMPL-MCP_FEEDBACK_TOOLS].
 
 ### Hybrid layout (detail .md and .yaml)
 

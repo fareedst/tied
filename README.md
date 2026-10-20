@@ -13,7 +13,7 @@ From the TIED repository root on macOS (Unix / Git Bash). Windows and full prere
 The canonical **store-to-client delivery spine** is two CLI entry points at the store root (styled help on both):
 
 1. **Store workspace build:** `./build-workspace.sh` — details in [Store workspace build](#store-workspace-build) below; `./build-workspace.sh --help`.
-2. **Client install:** `./tied-install.sh /path/to/client` (or linked primary install from the greenfield table); `./tied-install.sh --help` (no arguments prints styled help). Brownfield layout: `--migrate-layout`; methodology refresh: `--refresh`.
+2. **Client install:** `./tied-install.sh /path/to/client` (or linked primary install from the greenfield table); `./tied-install.sh --help` (no arguments prints styled help). Methodology refresh: `--refresh`.
 3. **Confirm MCP:** `tied_config_get_base_path` → client `tied-project/` — [Optionally enable the MCP server](#2-optionally-enable-the-mcp-server).
 
 Windows store build and install shims: [Install and use](#install-and-use).
@@ -46,8 +46,7 @@ After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`,
 
 | Situation | Start here |
 | --- | --- |
-| Legacy `tied/` layout | `tied-install --migrate-layout` from the client or primary root |
-| Methodology refresh | [methodology-migration.md](tied-bundle/docs/methodology-migration.md) |
+| Methodology refresh | [methodology-migration.md](tied-bundle/docs/methodology-migration.md) and `tied-install --refresh` |
 | Architecture recovery | [Evidence-assured software architecture recovery (EASAR)](docs/methodologies/evidence-assured-software-architecture-recovery.md) |
 | External workflows / integrators | [Operating environment externalities](docs/tied-operating-environment-externalities.md) |
 
@@ -197,7 +196,7 @@ Or from repo root: `test-new-tied-client.cmd`. PowerShell: `powershell -Executio
 ..\dev\tied\tied-install.cmd C:\path\to\your\project
 ```
 
-`tied-install` creates or refreshes the client layout per `--mode` (**linked** by default: methodology stubs and MCP env pointing at the store; **full**: materialized `tied-bundle/` for offline use). It creates missing project indexes under `tied-project/`, and installs the bundled [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) under `.cursor/skills/tied-yaml/` when appropriate. It does not overwrite an existing `AGENTS.md` or `.cursorrules`. Brownfield clients: `tied-install --migrate-layout` from the project root.
+`tied-install` creates or refreshes the client layout per `--mode` (**linked** by default: methodology stubs and MCP env pointing at the store; **full**: materialized `tied-bundle/` for offline use). It creates missing project indexes under `tied-project/`, and installs the bundled [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) under `.cursor/skills/tied-yaml/` when appropriate. It does not overwrite an existing `AGENTS.md` or `.cursorrules`.
 
 Methodology-owned YAML under `tied-bundle/` is read-only in the client and can be refreshed by running `tied-install.sh` again. Project-owned REQ/ARCH/IMPL indexes and detail files live at the root of the client’s `tied-project/` directory and are not overwritten.
 
@@ -225,7 +224,7 @@ Read [using TIED without MCP](tied-bundle/docs/using-tied-without-mcp.md) before
 
 ## Primary implementation repository
 
-Use this path when **one git repository** holds both your application and TIED project data (`tied-project/`, or legacy `tied/` before `--migrate-layout`). That repo is the **primary implementation repository**. The **TIED store** is a separate checkout of this methodology repository (or a pinned clone such as under `tied_versions/`) with a built MCP server (`mcp-server/dist/index.js`) and bundled skills under `tools/bundled-*`.
+Use this path when **one git repository** holds both your application and TIED project data (`tied-project/`). That repo is the **primary implementation repository**. The **TIED store** is a separate checkout of this methodology repository (or a pinned clone such as under `tied_versions/`) with a built MCP server (`mcp-server/dist/index.js`) and bundled skills under `tools/bundled-*`.
 
 ```mermaid
 flowchart LR
@@ -290,21 +289,11 @@ Linked install refreshes the `tied-yaml` MCP entry when present: `node` with `ar
 }
 ```
 
-Use absolute paths. `TIED_BASE_PATH` is set to the resolved project traceability directory (`tied-project/`, or legacy `tied/` until migration). One Cursor window per implementation repo; confirm with MCP `tied_config_get_base_path`. Optional: set `TIED_MCP_BIN` when the server binary is not under the store layout you use. See [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md) and [mcp-server/README.md](mcp-server/README.md).
+Use absolute paths. `TIED_BASE_PATH` is set to the project traceability directory (`tied-project/`). One Cursor window per implementation repo; confirm with MCP `tied_config_get_base_path`. Optional: set `TIED_MCP_BIN` when the server binary is not under the store layout you use. See [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md) and [mcp-server/README.md](mcp-server/README.md).
 
 ### Skills (linked stubs)
 
 Linked mode writes **stubs** under `.cursor/skills/` (tied-yaml, prompt-type leaf skills, xlate) and `.claude/skills/`; canonical skill bodies remain in the store (`tools/bundled-tied-yaml-skill/`, `tools/bundled-prompt-type-skills/`, etc.). If a stub points at a missing store path, re-run `tied-install --mode linked` with a valid `--store` or use `--mode full`. Optional IDE flow: `agent mcp enable tied-yaml` from the primary repo root.
-
-### Brownfield layout
-
-If the primary repo still uses legacy `tied/` instead of `tied-project/`, run from the primary root:
-
-```bash
-tied-install --migrate-layout
-```
-
-Then re-run linked install as needed.
 
 ### Verify checklist
 

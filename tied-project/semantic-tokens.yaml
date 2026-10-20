@@ -1048,6 +1048,17 @@ ARCH-TIED_LAYERED_CLIENT_INSTALL:
   source_index: "architecture-decisions.yaml"
   status: "Proposed"
   type: "ARCH"
+ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  cross_references:
+    - "IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  description: "Layer B lint and README structure enforcement."
+  metadata:
+    last_updated: "2026-10-19"
+    registered: "2026-10-19"
+  name: "Legacy layout doc decommission architecture"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Architecture for docs/comparisons methodology composition matrix"
   type: "architecture"
@@ -2608,6 +2619,17 @@ IMPL-TIED_LAYERED_CLIENT_INSTALL:
   name: "Layered client install implementation"
   source_index: "implementation-decisions.yaml"
   status: "Proposed"
+  type: "IMPL"
+IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  cross_references:
+    - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  description: "lint-stale-layout DOC_DECOMMISSION patterns and doc sweep."
+  metadata:
+    last_updated: "2026-10-19"
+    registered: "2026-10-19"
+  name: "Legacy layout doc decommission implementation"
+  status: "Active"
   type: "IMPL"
 IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Markdown-only implementation for methodology composition matrix"
@@ -4336,6 +4358,17 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
   name: "Layered TIED client install"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
+  cross_references:
+    - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    - "IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+  description: "User-facing prose documents two-folder layout only; no legacy tied/ or migrate-layout in markdown."
+  metadata:
+    last_updated: "2026-10-19"
+    registered: "2026-10-19"
+  name: "Legacy layout documentation decommission"
+  status: "Active"
   type: "REQ"
 REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   cross_references:

@@ -14,9 +14,9 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 | `build-workspace.sh` / `.ps1` / `.cmd` | Unix / Windows | Store workspace build; `./build-workspace.sh --help` for usage (texture matches `tied-install` help) |
 | `tied-install.sh` / `tied-install.cmd` / `tied-install.ps1` | Unix / CMD / PowerShell | **Layered install** (default `--mode linked`); no args → styled help; pass `.` or a client path to install; `tied-install-dispatch.mjs` → `install-layers.mjs` |
 | `tools/bootstrap/tied-install-dispatch.mjs` | All | Install dispatch ([RUN_TIED_INSTALL_ENTRYPOINT]) |
-| `tools/bootstrap/install-layers.mjs` | All | Layer engine: `--layers`, `--harness`, `--mode linked\|full`, `--doctor`, `--migrate-layout` |
+| `tools/bootstrap/install-layers.mjs` | All | Layer engine: `--layers`, `--harness`, `--mode linked\|full`, `--doctor` (see `tied-install --help` for full flag list) |
 
-**Profiles:** `linked` (stubs + MCP bundle env; factory default) vs **`full`** (offline materialized `tied-bundle/`). Brownfield: **`tied-install --migrate-layout`**.
+**Profiles:** `linked` (stubs + MCP bundle env; factory default) vs **`full`** (offline materialized `tied-bundle/`). Refresh inherited methodology with **`tied-install --refresh`**.
 
 **Operator journey (macOS quick start, certifiable workflows, full install):** root [README.md](../../README.md). **Primary implementation repositories** (product repo + `tied-project/` in one tree, separate TIED store): see [README § Primary implementation repository](../../README.md#primary-implementation-repository).
 
@@ -113,7 +113,7 @@ From the TIED repo on Windows (after `mcp-server` build):
 scripts\windows-bootstrap-smoke.cmd (includes Claude asserts via `tools/bootstrap/assert-windows-bootstrap-claude.mjs` — [REQ-TIED_CLAUDE_BOOTSTRAP_OPS])
 ```
 
-Runs `tied-install.cmd` into a temp client dir, `lint_yaml.cmd -F tied-project`, **`tied-install.cmd --mode linked`**, **`--migrate-layout`** on a legacy fixture, and **`test-new-tied-client.cmd`** with MCP/git/audit skips. Exit code 0 = pass.
+Runs `tied-install.cmd` into a temp client dir, `lint_yaml.cmd -F tied-project`, **`tied-install.cmd --mode linked`**, a layout-migration integration step on a fixture tree, and **`test-new-tied-client.cmd`** with MCP/git/audit skips. Exit code 0 = pass.
 
 **CI:** GitHub Actions workflow `Windows bootstrap smoke` (`.github/workflows/windows-bootstrap-smoke.yml`) runs the same script on `windows-latest` after building `mcp-server`, plus a **`pwsh`** step for `tied-install.ps1`. A green run is the only evidence that may set `WINDOWS_COPY_PROVEN_IN_CI` to `true` in `tools/bootstrap/lib/constants.mjs` (symlink opt-in remains env-driven; copy-default unchanged).
 
@@ -194,7 +194,7 @@ After the Cursor path (`.cursor/skills/`, create-only `.cursor/mcp.json`), boots
 | `.claude/skills/` | Copy-default Prompt Composer + `tied-yaml` bundles (same inventory as Cursor) |
 | Repo-root `skills/` (optional) | When **`TIED_SKILLS_REROOT=1`**, both Cursor and Claude managed bundles install under **`skills/`** instead of harness-native paths. Default **off**. Requires `windows_copy_proven_in_ci` and [ARCH-TIED_CLAUDE_SKILLS_REROOT](../tied-project/architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml). See [REQ-TIED_CLAUDE_SKILLS_REROOT](../tied-project/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml). |
 | Repo-root `.mcp.json` | Create-if-absent or safe-merge **`tied-yaml` only**; sets `TIED_MCP_HARNESS=claude` |
-| `CLAUDE.md` | Optional create-if-absent thin delta pointing at **AGENTS.md** (never replaces Tracker or `tied/` YAML) |
+| `CLAUDE.md` | Optional create-if-absent thin delta pointing at **AGENTS.md** (never replaces Tracker or `tied-project/` YAML) |
 
 Cursor **create-only** `.cursor/mcp.json` policy is unchanged — existing client MCP files are never mutated.
 
@@ -206,7 +206,7 @@ Traceability: [REQ-TIED_CLAUDE_HARNESS](../tied-project/requirements/REQ-TIED_CL
 
 ## Client `.gitignore` (INSTALL MANAGED v2)
 
-`writeGitignoreBlock` ([`lib/layers/gitignore-block.mjs`](lib/layers/gitignore-block.mjs)) always uses **`mergeLocalWorkingGitignoreBlock` profile `client`**: it writes the versioned `# BEGIN TIED INSTALL MANAGED` paths (including `tied-bundle/`, `.cursor/skills/`, `.claude/skills/`, repo-root `skills/` for optional `TIED_SKILLS_REROOT=1`, and create-if-absent **BASE_FILES** loaders **`AGENTS.md`** and **`.cursorrules`**) and **removes** legacy `# BEGIN TIED LOCAL WORKING` / undivided-store mirror blocks without re-appending them. Refresh and `--migrate-layout` are idempotent on the managed block.
+`writeGitignoreBlock` ([`lib/layers/gitignore-block.mjs`](lib/layers/gitignore-block.mjs)) always uses **`mergeLocalWorkingGitignoreBlock` profile `client`**: it writes the versioned `# BEGIN TIED INSTALL MANAGED` paths (including `tied-bundle/`, `.cursor/skills/`, `.claude/skills/`, repo-root `skills/` for optional `TIED_SKILLS_REROOT=1`, and create-if-absent **BASE_FILES** loaders **`AGENTS.md`** and **`.cursorrules`**) and **removes** legacy `# BEGIN TIED LOCAL WORKING` / undivided-store mirror blocks without re-appending them. Refresh re-runs are idempotent on the managed block.
 
 **Store profile** — `applyStoreGitignoreProfile` / `collapseLegacyWorkingGitignorePatterns` in [`lib/working-gitignore.mjs`](lib/working-gitignore.mjs) merge `# BEGIN TIED STORE LOCAL WORKING (managed)` (`tied-bundle/working/`, `tied-bundle/install.json`) and remove the client-only `tied-bundle/` INSTALL MANAGED line. Operator entry: [`scripts/apply-store-gitignore-profile.mjs`](scripts/apply-store-gitignore-profile.mjs). Client bootstrap must keep using `writeGitignoreBlock` only.
 

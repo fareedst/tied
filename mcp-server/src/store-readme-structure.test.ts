@@ -1,6 +1,7 @@
 /**
  * [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING] [REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE]
- * [IMPL-TIED_STORE_README_SECTIONS]
+ * [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
+ * [IMPL-TIED_STORE_README_SECTIONS] [IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -27,8 +28,14 @@ const REQUIRED_SUBSTRINGS = [
   "### Primary operator delivery path",
   "### Store workspace build",
   "tied-install.sh --help",
-  "--migrate-layout",
   "--refresh",
+] as const;
+
+const FORBIDDEN_LEGACY_LAYOUT_DOC_PATTERNS = [
+  /--migrate-layout/,
+  /legacy `tied\//,
+  /or legacy `tied\//,
+  /Legacy `tied\/ layout/,
 ] as const;
 
 const NORMATIVE_QUICK_START_H3 = [
@@ -73,6 +80,9 @@ describe("store README structure [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING]"
     }
     for (const pattern of FORBIDDEN_CLAIM_PATTERNS) {
       assert.doesNotMatch(text, pattern, `forbidden certification claim: ${pattern}`);
+    }
+    for (const pattern of FORBIDDEN_LEGACY_LAYOUT_DOC_PATTERNS) {
+      assert.doesNotMatch(text, pattern, `legacy layout doc pattern: ${pattern}`);
     }
     const quickStartEnd = certIdx;
     const quickStart = text.slice(quickIdx, quickStartEnd);

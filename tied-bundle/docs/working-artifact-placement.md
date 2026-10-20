@@ -1,6 +1,6 @@
 # Working artifact placement
 
-**Audience:** Sponsors, operators, and AI agents in TIED client projects (after `tied-install --migrate-layout` or fresh linked/full install).
+**Audience:** Sponsors, operators, and AI agents in TIED client projects (after `tied-install` linked/full install).
 
 **Tokens:** [REQ-TIED_WORKING_ARTIFACT_PLACEMENT], [ARCH-TIED_WORKING_ARTIFACT_PLACEMENT], [REQ-TIED_TWO_FOLDER_LAYOUT], [ARCH-TIED_TWO_FOLDER_LAYOUT], [IMPL-TIED_TWO_FOLDER_LAYOUT]
 
@@ -76,7 +76,7 @@ Tools and MCP writers should use layout helpers so artifacts land here automatic
 | Large JSON under `tied-project/working/` (qualification, claims-review) | **Commit** when an agreed regression fixture or pilot artifact referenced by envelope/CITDP; **local** when one-off reproducible tool output |
 | `tied-project/working/evaluation/` cross-REQ corpora | **Commit** when defining reusable evaluation policy; not a substitute for per-REQ envelope |
 | Store repo git-tracked pins under `tied-bundle/working/` | **Migrated** — fixture corpus under `mcp-server/test/fixtures/store-local-working/`; runtime local root unchanged ([REQ-TIED_STORE_BUNDLE_GIT_POLICY]) |
-| Undivided repo-root `working/` | Brownfield fallback only — run `tied-install --migrate-layout` |
+| Undivided repo-root `working/` | Non-standard — use `tied-project/working/`; re-run `tied-install` if layout is wrong |
 
 ---
 

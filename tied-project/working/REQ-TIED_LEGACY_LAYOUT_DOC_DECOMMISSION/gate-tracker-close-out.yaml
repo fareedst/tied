@@ -1,0 +1,90 @@
+depth_tier: minimal
+gate_policy: advisory
+request_token: REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
+schema_version: checklist-tracker.v1
+name: legacy-layout-doc-decommission-close-out
+note: tracker_path for tied_checklist_gate_validate phase close_out.
+execution_evidence:
+  request: REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
+  envelope_path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/request-evidence-envelope.v1.json
+  impl_inventory:
+    - IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
+  completed:
+    - risk-assessment
+    - unit-test-red
+    - verification-gate
+    - persist-citdp-record
+    - gitignore-close-out-hygiene
+    - sub-close-out-evidence-sync
+    - traceable-commit
+    - user-facing-release-notes
+steps:
+  - disposition: not_applicable
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/not-applicable-receipt.v1.json
+    policy: minimal-depth-no-inquiry
+    rationale: Documentation-only decommission; sub_adversarial_inquiry_pass not_applicable.
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION.yaml
+    slug: risk-assessment
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/lint-stale-layout-test.stdout.txt
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/store-readme-structure-test.stdout.txt
+    slug: unit-test-red
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/lint-stale-layout.stdout.txt
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/install-resource-matrix-verify.stdout.txt
+    slug: verification-gate
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION.yaml
+    slug: persist-citdp-record
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/gitignore-close-out-hygiene-evidence.md
+    slug: gitignore-close-out-hygiene
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/verification-evidence-manifest.v1.json
+    slug: sub-close-out-evidence-sync
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/proposed-commit-message.txt
+    slug: traceable-commit
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: CHANGELOG.md
+    slug: user-facing-release-notes
+    tracking:
+      status: completed

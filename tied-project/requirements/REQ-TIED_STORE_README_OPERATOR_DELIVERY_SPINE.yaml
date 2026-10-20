@@ -16,7 +16,7 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
     - criterion: "Extended structure test passes with unchanged three-band H2 order."
       id: "SC-README-STRUCTURE-TEST"
       metric: "store-readme-structure.test.ts"
-    - criterion: "README documents no-arg tied-install help and refresh or migrate-layout."
+    - criterion: "README documents no-arg tied-install help and --refresh for methodology refresh."
       id: "SC-README-INSTALL-HELP"
       metric: "README.md"
     - criterion: "Repository layout lists build-workspace entry points at store root."

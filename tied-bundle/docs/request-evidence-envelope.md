@@ -2,7 +2,7 @@
 
 **Tokens:** `[REQ-REQUEST_EVIDENCE_ENVELOPE]`, `[ARCH-REQUEST_EVIDENCE_ENVELOPE]`, `[IMPL-REQUEST_EVIDENCE_ENVELOPE]`, `[PROC-REQUEST_EVIDENCE_ENVELOPE]`
 
-Per-REQ machine index at `tied-project/working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json` in two-folder clients (legacy undivided layout: repo-root `working/{REQ-TOKEN}/...` until `--migrate-layout`). See [working-artifact-placement.md](working-artifact-placement.md). Wraps producer artifacts with stable identity, typed cross-references, and explicit `gaps[]` — without mutating inner artifact schemas.
+Per-REQ machine index at `tied-project/working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json`. See [working-artifact-placement.md](working-artifact-placement.md). Wraps producer artifacts with stable identity, typed cross-references, and explicit `gaps[]` — without mutating inner artifact schemas.
 
 ## When to build vs backfill vs patch
 

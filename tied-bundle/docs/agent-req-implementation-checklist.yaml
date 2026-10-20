@@ -475,7 +475,7 @@ steps:
     goals: "Confirm everything is aligned, passing, and consistent. Compound gate before work is complete."
     outcomes: "All tests pass; lint clean; post-test pseudo-code validation pass recorded; token validation passes; three-way alignment verified; IMPL metadata current; module validation documented; canonical vocabulary reconciled with final tests/code."
     preconditions:
-      - "./tied/ present when tied_validate_consistency and token validation apply; if TIED not in client yet, skip token steps with explicit maturity note."
+      - "./tied-project/ present when tied_validate_consistency and token validation apply; if TIED not in client yet, skip token steps with explicit maturity note."
       - "Project test command runnable from workspace root (same harness used in TDD phases). If tests cannot run, fix harness before claiming gate—defer gate with note only when policy allows."
     references:
       - "tied-bundle/docs/processes.md § [PROC-CITDP] step 7"
@@ -495,7 +495,7 @@ steps:
       - "Rebuild/reload the MCP server and smoke-test live discovery and invocation of tied_adversarial_inquiry_run; source registration alone is not adoption evidence."
       - "Record client YAML styling evidence for final on-disk TIED YAML: styling_status (configured|not_configured), resolved scalar_style and style_source from tied-project/config.yaml or defaults, and post-style lint_yaml plus tied_validate_consistency results—not pre-style agent output alone."
       - "Responsibility: test/code owner step. Verify implementation fidelity to pseudocode; if new logic is discovered, route back to resolve-pseudocode before accepting."
-      - "Run [PROC-TOKEN_VALIDATION]: run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency with JSON args per SKILL; fix any issues on ./tied/ via tied-cli.sh when possible."
+      - "Run [PROC-TOKEN_VALIDATION]: run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency with JSON args per SKILL; fix any issues on ./tied-project/ via tied-cli.sh when possible."
       - "Run full test suite (unit, composition, E2E). All must pass."
       - "Run lint for each language in scope."
       - "The executable-evidence partition of the fidelity matrix must cite command provenance (command, revision, environment, result) from evidence-provenance.json, not a bare pass/fail flag."
@@ -520,9 +520,9 @@ steps:
         - "sub-yaml-edit-loop"
       next: "user-facing-release-notes"
     goals: "Ensure TIED documentation matches the final implementation. TIED docs remain single source of truth for intent."
-    outcomes: "TIED docs consistent with implementation; tied_validate_consistency passes; optional ./tied/agent-preload-contract.yaml recheck if TIED status or traceability to tests/code shifted."
+    outcomes: "TIED docs consistent with implementation; tied_validate_consistency passes; optional ./tied-project/agent-preload-contract.yaml recheck if TIED status or traceability to tests/code shifted."
     preconditions:
-      - "tied-cli.sh available for mutations under ./tied/."
+      - "tied-cli.sh available for mutations under ./tied-project/."
       - "verification-gate satisfied for this pass, or partial sync explicitly scoped (document divergence)."
     references:
       - "./tied-bundle/docs/agent-preload-contract-template.yaml"
@@ -532,17 +532,17 @@ steps:
     slug: "sync-tied-stack"
     tasks:
       - "CALL sub-yaml-edit-loop on every changed TIED YAML file."
-      - "Confirm final post-style project-owned ./tied/ YAML passed sub-client-yaml-styling (via sub-yaml-edit-loop): lint_yaml, tied_validate_consistency, and yaml_semantic_compare when client_formatter is configured; record styling_status and resolved style policy."
+      - "Confirm final post-style project-owned ./tied-project/ YAML passed sub-client-yaml-styling (via sub-yaml-edit-loop): lint_yaml, tied_validate_consistency, and yaml_semantic_compare when client_formatter is configured; record styling_status and resolved style policy."
       - "If a profile was generated, ensure it references current token metadata; do not store generated evidence-chain output as REQ/ARCH/IMPL intent."
       - "If REQ/ARCH/IMPL status, traceability.tests, or other TIED fields changed in this pass such that they would desync a session preload (status lines, test file paths, implementation_contract hints), re-check tied/agent-preload-contract.yaml and update only as needed; do not duplicate the full author-architecture or persist-implementation-records rewrite if nothing material changed."
       - "Keep observed inquiry findings outside canonical TIED YAML; route confirmed findings to existing owners (author-requirement, author-architecture, resolve-pseudocode, unit-test-red, composition-integration, or test-strategy) and never trigger LEAP from observation alone."
       - "Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' — must report ok true."
       - "Sync ./tied-project/semantic-tokens.yaml, requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml and detail dirs; no documentation drift; do not patch those YAML paths with IDE tools when tied-cli.sh covers the mutation."
-      - "Update REQ/ARCH/IMPL index and detail files under ./tied/ via tied-cli.sh so final code/tests match TIED; IMPLs reflect implemented code and block-level token comments."
+      - "Update REQ/ARCH/IMPL index and detail files under ./tied-project/ via tied-cli.sh so final code/tests match TIED; IMPLs reflect implemented code and block-level token comments."
       - "Update vocab after design and implementation: CALL sub-vocabulary-sync (RECORD) so ./tied-project/vocab/*.md reflects the final REQ/ARCH/IMPL terms, design/UI terms, and storage names; each concept resolves to one preferred term and the naming bridge and alphabetical index are current ([PROC-VOCABULARY_INDEX]). Final VALIDATE gate is at traceable-commit (Touchpoint 3)."
     title: "TIED docs match implementation; consistency via tied-cli.sh"
     tracking:
-      consideration_before_proceeding: "TIED docs match code/tests; tied_validate_consistency reports ok true; canonical vocabulary reconciled (RECORD) with final REQ/ARCH/IMPL, design/UI, and storage terms; ./tied/agent-preload-contract.yaml re-checked or explicitly unchanged if sync did not affect preload-relevant fields."
+      consideration_before_proceeding: "TIED docs match code/tests; tied_validate_consistency reports ok true; canonical vocabulary reconciled (RECORD) with final REQ/ARCH/IMPL, design/UI, and storage terms; ./tied-project/agent-preload-contract.yaml re-checked or explicitly unchanged if sync did not affect preload-relevant fields."
       retry_count: "0"
       returned_from: []
       state_history: []
@@ -623,7 +623,7 @@ steps:
     outcomes: "Contracts cataloged for in-scope feature IMPLs; procedure names and UPPER_SNAKE block names drawn from and recorded in the canonical vocabulary; structure noted."
     preconditions:
       - "IMPL inventory from impact-discovery lists IMPL tokens; each target has or will have essence_pseudocode (readable detail or working draft in scope)."
-      - "Primary targets are project/feature IMPLs for this REQ (from tied_tokens_affected / tied_tokens_new / planned project IMPL). Methodology IMPLs under ./tied/methodology are read-only unless this pass edits methodology—do not enumerate row-by-row contract extraction for them when essence_pseudocode is null and they are out of scope."
+      - "Primary targets are project/feature IMPLs for this REQ (from tied_tokens_affected / tied_tokens_new / planned project IMPL). Methodology IMPLs under ./tied-bundle/methodology are read-only unless this pass edits methodology—do not enumerate row-by-row contract extraction for them when essence_pseudocode is null and they are out of scope."
       - "When no IMPL detail files exist yet, defer cataloging until after draft pseudo-code exists—skip with explicit note rather than inventing contracts."
     references:
       - "tied-bundle/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phases B-C"
@@ -716,7 +716,7 @@ steps:
     outcomes: "Agent has read all governing documents. Session context is established."
     preconditions:
       - "Active workspace root is the implementation repository for this requirement or change."
-      - "When ./tied/ or .cursor/skills/tied-yaml/ are missing (immature client), run only tasks that apply to existing paths; defer tied-cli TIED mutations until the methodology bundle is installed—record what was deferred in the per-request checklist copy."
+      - "When ./tied-project/ or .cursor/skills/tied-yaml/ are missing (immature client), run only tasks that apply to existing paths; defer tied-cli TIED mutations until the methodology bundle is installed—record what was deferred in the per-request checklist copy."
     references:
       - ".cursor/skills/tied-yaml/reference.md"
       - ".cursor/skills/tied-yaml/SKILL.md"
@@ -729,7 +729,7 @@ steps:
       - "Implementation freeze until gate-pseudocode-validation and persist-implementation-records are satisfied for this REQ/changed IMPL set: do not add or modify production implementation files (application source, deliverable scripts, etc.) or automated test files. Exception only for TIED YAML and docs required by completed checklist steps (TIED paths routed per .cursor/skills/tied-yaml/SKILL.md)."
       - "Mandatory global sequence (before any RED test or production code): token-commented IMPL essence_pseudocode → gate-pseudocode-validation → persist-implementation-records when authoring new IMPL — then RED tests → GREEN code."
       - "Preface the response with \"Observing AI principles!\"."
-      - "Read .cursor/skills/tied-yaml/SKILL.md. For every create/update/delete under project TIED YAML (./tied/*.yaml and detail trees under ./tied/requirements, ./tied/architecture-decisions, ./tied/implementation-decisions, excluding methodology), invoke tools only through .cursor/skills/tied-yaml/scripts/tied-cli.sh with tool name and JSON arguments per the skill and .cursor/skills/tied-yaml/reference.md. Set TIED_BASE_PATH and the built dist/index.js path per the skill Environment overrides. When .cursor/skills/tied-yaml/ or tied-cli.sh is missing, follow this step's preconditions (defer, lightweight pass, or explicit note in the per-request checklist copy)—do not leave the checklist to obtain tooling. In agentstream or headless runs, rely on tied-cli.sh only. Do not use apply_patch or Write on those paths when tied-cli.sh covers the operation; on errors retry with corrected JSON; do not silently fall back to direct file edit."
+      - "Read .cursor/skills/tied-yaml/SKILL.md. For every create/update/delete under project TIED YAML (./tied-project/*.yaml and detail trees under ./tied-project/requirements, ./tied-project/architecture-decisions, ./tied-project/implementation-decisions, excluding methodology), invoke tools only through .cursor/skills/tied-yaml/scripts/tied-cli.sh with tool name and JSON arguments per the skill and .cursor/skills/tied-yaml/reference.md. Set TIED_BASE_PATH and the built dist/index.js path per the skill Environment overrides. When .cursor/skills/tied-yaml/ or tied-cli.sh is missing, follow this step's preconditions (defer, lightweight pass, or explicit note in the per-request checklist copy)—do not leave the checklist to obtain tooling. In agentstream or headless runs, rely on tied-cli.sh only. Do not use apply_patch or Write on those paths when tied-cli.sh covers the operation; on errors retry with corrected JSON; do not silently fall back to direct file edit."
       - "Read completely: tied-bundle/docs/ai-principles.md"
       - "Review IMPL schema and pseudo-code rules: ./tied-bundle/docs/implementation-decisions.md ([PROC-IMPL_PSEUDOCODE_TOKENS])."
       - "Review the domain vocabulary index ([PROC-VOCABULARY_INDEX]): scan ./tied-project/vocab/*.md (preferred terms; filenames have no -vocabulary suffix) and the standards in tied-bundle/docs/vocabulary-index-analysis-and-standards.md so concept names stay consistent this session. If ./tied-project/vocab/ is absent, note it (immature client) and apply the discipline when concepts arise. This is distinct from the IMPL grammar \"preferred vocabulary\" (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS)."
@@ -822,10 +822,10 @@ steps:
         - "sub-yaml-edit-loop"
       next: "catalog-pseudocode-contracts"
     goals: "Create or update architecture decision(s) that fulfill the REQ, with cross-references."
-    outcomes: "ARCH records exist with REQ cross-references; tokens registered; YAML validated; ./tied/agent-preload-contract.yaml created or updated when ARCH introduced meaningful platform constants (or step output records explicit skip or not-applicable)."
+    outcomes: "ARCH records exist with REQ cross-references; tokens registered; YAML validated; ./tied-project/agent-preload-contract.yaml created or updated when ARCH introduced meaningful platform constants (or step output records explicit skip or not-applicable)."
     preconditions:
       - "REQ token and scope for this change identified (author-requirement completed or verify-only REQ exists on disk)."
-      - "Same ./tied/ and tied-cli availability as author-requirement."
+      - "Same ./tied-project/ and tied-cli availability as author-requirement."
     references:
       - "./tied-bundle/docs/agent-preload-contract-template.yaml"
       - "tied-bundle/docs/ai-principles.md § Phase 1"
@@ -834,8 +834,8 @@ steps:
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "author-architecture"
     tasks:
-      - "Agent preload contract (ARCH-locked): After material ARCH/REQ decisions exist, create or update ./tied/agent-preload-contract.yaml (agentstream and batch runners use this file when present). Base it on ./tied-bundle/docs/agent-preload-contract-template.yaml when YAML indexes live at the repo root (TIED source layout, no ./tied/ subtree). Populate from locked REQ+ARCH, for example session_bootstrap_docs paths, tied_paths.TIED_BASE_PATH, and implementation_contract fields the ARCH decision fixes (language/stack hints, high-level target_source_paths if ARCH names roots); set active_user_intent.checklist_step_id if useful. A generic or empty preload is not a substitute for REQ+ARCH-bounded system definition; do not treat it as authoritative for implementation before REQ and ARCH exist. If this pass only adjusted cross-references and did not change stack, layout, or other constants, state in the step output that ./tied/agent-preload-contract.yaml was not refreshed."
-      - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied/ (direct-edit exception only with one-line logged gap per .cursor/skills/tied-yaml/SKILL.md)."
+      - "Agent preload contract (ARCH-locked): After material ARCH/REQ decisions exist, create or update ./tied-project/agent-preload-contract.yaml (agentstream and batch runners use this file when present). Base it on ./tied-bundle/docs/agent-preload-contract-template.yaml when YAML indexes live at the repo root (TIED source layout, no ./tied-project/ subtree). Populate from locked REQ+ARCH, for example session_bootstrap_docs paths, tied_paths.TIED_BASE_PATH, and implementation_contract fields the ARCH decision fixes (language/stack hints, high-level target_source_paths if ARCH names roots); set active_user_intent.checklist_step_id if useful. A generic or empty preload is not a substitute for REQ+ARCH-bounded system definition; do not treat it as authoritative for implementation before REQ and ARCH exist. If this pass only adjusted cross-references and did not change stack, layout, or other constants, state in the step output that ./tied-project/agent-preload-contract.yaml was not refreshed."
+      - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied-project/ (direct-edit exception only with one-line logged gap per .cursor/skills/tied-yaml/SKILL.md)."
       - "Create or update ./tied-project/architecture-decisions.yaml via tied-cli.sh yaml_index_insert / yaml_index_update; never write to ./tied-bundle/**."
       - "Create or update ARCH detail at ./tied-project/architecture-decisions/ARCH-{TOKEN}.yaml via tied-cli.sh yaml_detail_create / yaml_detail_update per detail-files-schema § ARCH."
       - "Identify architectural decisions needed (or update existing ones)."
@@ -906,7 +906,7 @@ steps:
     goals: "Create or update the requirement record so the change has a formal [REQ-*] token with full traceability fields."
     outcomes: "REQ record exists in both the index and the detail file; token name reflects the canonical domain term and is recorded in the vocabulary naming bridge; token is registered in semantic-tokens.yaml; all YAML validated."
     preconditions:
-      - "./tied/ present or creatable at workspace root; ./tied-project/requirements.yaml (or project index path) reachable for index operations."
+      - "./tied-project/ present or creatable at workspace root; ./tied-project/requirements.yaml (or project index path) reachable for index operations."
       - ".cursor/skills/tied-yaml/scripts/tied-cli.sh available when mutating TIED paths (per session-bootstrap); if missing, defer REQ authoring until bootstrap—do not apply_patch TIED index/detail when tied-cli is required."
     references:
       - "tied-bundle/docs/detail-files-schema.md § 1"
@@ -915,7 +915,7 @@ steps:
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "author-requirement"
     tasks:
-      - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied/ (after tied-cli.sh writes; for direct-edit exceptions only, run lint_yaml on that absolute path inside sub-yaml-edit-loop—never raw multi-argument `yq` pretty-print on multiple paths in one process; see processes.md [PROC-YAML_EDIT_LOOP])."
+      - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied-project/ (after tied-cli.sh writes; for direct-edit exceptions only, run lint_yaml on that absolute path inside sub-yaml-edit-loop—never raw multi-argument `yq` pretty-print on multiple paths in one process; see processes.md [PROC-YAML_EDIT_LOOP])."
       - "Create or update REQ detail via tied-cli.sh yaml_detail_create / yaml_detail_update (prefer yaml_detail_read then small updates) at ./tied-project/requirements/REQ-{TOKEN}.yaml per ./tied-bundle/docs/detail-files-schema.md § REQ (or detail-files-schema.md at template root)."
       - "Create or update the requirements index row via tied-cli.sh (yaml_index_insert / yaml_index_update) or tied_token_create_with_detail on ./tied-project/requirements.yaml — do not apply_patch the index file directly unless no tied-cli.sh tool covers the operation (document one-line exception)."
       - "For each satisfaction_criteria row, record at least one positive example and one negative (counterexample) case."
@@ -1012,7 +1012,7 @@ steps:
     outcomes: "Complete impact map; pre-design risk/profile selection and initial quality evidence matrix exist; bounded scenarios and applicable abuse cases are recorded; IMPL inventory table ready; all affected and related tokens identified; inherited IMPL paths interpreted per traceability rules without false blocking."
     preconditions:
       - "Change definition for this pass is available (from change-definition or equivalent context)."
-      - "When ./tied/ is absent or indexes are missing, discovery is code-and-docs-only; defer tied-cli IMPL detail reads until TIED exists—document inventory gaps instead of inventing YAML."
+      - "When ./tied-project/ is absent or indexes are missing, discovery is code-and-docs-only; defer tied-cli IMPL detail reads until TIED exists—document inventory gaps instead of inventing YAML."
     references:
       - "tied-bundle/docs/processes.md § [PROC-CITDP] step 2"
       - "tied-bundle/docs/processes.md § [PROC-IMPL_CODE_TEST_SYNC] Phase A (A1-A3)"
@@ -1243,7 +1243,7 @@ steps:
     slug: "persist-implementation-records"
     tasks:
       - "Agent preload contract (IMPL-locked): Refresh tied/agent-preload-contract.yaml (same template sources as author-architecture) using IMPL-anchored data—e.g. code_locations into implementation_contract.target_source_paths, test or harness paths if derivable from IMPL detail, citdp_artifact_paths per project CITDP policy, language/test_framework when known. Set or clear discovery_already_done fields only from quick checks or already-known TIED state (do not re-scan the whole repo; keep preload narrow). If this step was verify-only for IMPL, still reconcile the preload if earlier steps may have left path or stack lists stale."
-      - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied/."
+      - "CALL sub-yaml-edit-loop for each changed YAML file under ./tied-project/."
       - "Create or update ./tied-project/implementation-decisions.yaml index entries via tied-cli.sh (yaml_index_* or tied_token_create_with_detail); do not patch that file directly when tied-cli.sh covers the change."
       - "Create or update IMPL detail at ./tied-project/implementation-decisions/IMPL-{TOKEN}.yaml via tied-cli.sh yaml_detail_*; include complete essence_pseudocode per ./tied-bundle/docs/detail-files-schema.md § IMPL."
       - "IF IMPL index/detail/tokens were already written during resolve-pseudocode, treat this step as verify-only — confirm yaml_index_read / yaml_detail_read / semantic-tokens rows, refresh metadata if needed, CALL sub-yaml-edit-loop on touched paths, tied_validate_consistency — do not recreate records from scratch."
@@ -1252,7 +1252,7 @@ steps:
       - "Responsibility: pseudo-code owner step. Persist validated logic intent and traceability; do not treat persistence as permission to introduce new logic outside pseudocode in later steps."
     title: "IMPL index/detail via tied-cli.sh; sub-yaml-edit-loop"
     tracking:
-      consideration_before_proceeding: "IMPL index and detail files persisted; IMPL token and storage (code_locations/file/folder/schema) names resolved from and recorded in the canonical vocabulary; tokens registered; sub-yaml-edit-loop passed for all changed files; ./tied/agent-preload-contract.yaml updated or reconciled for IMPL-locked paths and constants."
+      consideration_before_proceeding: "IMPL index and detail files persisted; IMPL token and storage (code_locations/file/folder/schema) names resolved from and recorded in the canonical vocabulary; tokens registered; sub-yaml-edit-loop passed for all changed files; ./tied-project/agent-preload-contract.yaml updated or reconciled for IMPL-locked paths and constants."
       retry_count: "0"
       returned_from: []
       state_history: []
@@ -1266,7 +1266,7 @@ sub_procedures:
     outcomes: "Post-style bytes are syntactically valid and semantically equivalent to pre-style canonical output; styling_status recorded as configured or not_configured; formatter errors return to owning checklist step."
     preconditions:
       - "Baseline canonical formatting already applied via lint_yaml or tied-cli.sh write with tied-yaml-canonical-v1."
-      - "Caller provides absolute or repo-relative paths for changed project-owned ./tied/ YAML files only."
+      - "Caller provides absolute or repo-relative paths for changed project-owned ./tied-project/ YAML files only."
     references:
       - "./tied-bundle/docs/processes.md § [PROC-YAML_EDIT_LOOP]"
       - ".cursor/skills/tied-yaml/SKILL.md"
@@ -1275,8 +1275,8 @@ sub_procedures:
     slug: "sub-client-yaml-styling"
     tasks:
       - "IF client_formatter is absent or empty: record styling_status not_configured; baseline tied-yaml-canonical-v1 plus resolved scalar_style remains the effective formatter; RETURN to sub-yaml-edit-loop caller."
-      - "IF client_formatter is configured: capture a pre-style snapshot of each path; invoke the configured formatter/hook on each path under project-owned ./tied/ only—never ./tied-bundle/**."
-      - "On formatter error, unsupported construct, non-idempotent output, semantic change, or write outside project-owned ./tied/: RETURN error to sub-yaml-edit-loop caller for correction at the owning step."
+      - "IF client_formatter is configured: capture a pre-style snapshot of each path; invoke the configured formatter/hook on each path under project-owned ./tied-project/ only—never ./tied-bundle/**."
+      - "On formatter error, unsupported construct, non-idempotent output, semantic change, or write outside project-owned ./tied-project/: RETURN error to sub-yaml-edit-loop caller for correction at the owning step."
       - "Re-read each formatted file from disk; run lint_yaml for syntax validation."
       - "Record evidence: styling_status (configured|not_configured), scalar_style, style_source, client_formatter command/version when configured."
       - "Resolve repository style policy from tied-project/config.yaml at the client project root (parent of TIED_BASE_PATH): scalar_style (unwrapped|wrapped) per [REQ-TIED_YAML_STYLE_CONFIGURATION]; optional client_formatter hook when present."
@@ -1284,7 +1284,7 @@ sub_procedures:
       - "Verify idempotence: a second formatter pass on unchanged input must produce byte-identical output or fail closed."
     title: "Client YAML presentation styling and semantic-equivalence gate"
     tracking:
-      consideration_before_proceeding: "styling_status recorded; post-style lint_yaml passed; yaml_semantic_compare passed when client_formatter configured; no writes outside project-owned ./tied/."
+      consideration_before_proceeding: "styling_status recorded; post-style lint_yaml passed; yaml_semantic_compare passed when client_formatter configured; no writes outside project-owned ./tied-project/."
       retry_count: "0"
       state_history: []
       status: "pending"
@@ -1339,7 +1339,7 @@ sub_procedures:
     outcomes: "YAML valid and consistent; mutations used tied-cli.sh where required; no silent bypass of tied-yaml."
     preconditions:
       - "Caller provides absolute or repo-relative paths for changed YAML files."
-      - "When mutating ./tied/ project-owned YAML, .cursor/skills/tied-yaml/scripts/tied-cli.sh and SKILL.md contract available; if tied-cli missing, RETURN error to caller—no silent IDE patch of TIED paths."
+      - "When mutating ./tied-project/ project-owned YAML, .cursor/skills/tied-yaml/scripts/tied-cli.sh and SKILL.md contract available; if tied-cli missing, RETURN error to caller—no silent IDE patch of TIED paths."
     references:
       - "./tied-bundle/docs/methodology-diagrams.md Diagram 6"
       - "./tied-bundle/docs/processes.md § [PROC-YAML_EDIT_LOOP]"
@@ -1348,13 +1348,13 @@ sub_procedures:
     slug: "sub-yaml-edit-loop"
     tasks:
       - "After yaml_detail_update or yaml_index_update: re-read affected detail/index rows; mcp-server deep-merges one level for metadata/traceability/related_* objects, but arrays (e.g. cross_references) still replace wholesale—if metadata.created or similar is missing (older server or mistaken payload), restore with one follow-up yaml_*_update—see docs/yaml-update-mcp-runbook.md §2.1."
-      - "CALL sub-client-yaml-styling for each changed project-owned ./tied/ path after baseline lint_yaml canonicalization and before tied_validate_consistency."
+      - "CALL sub-client-yaml-styling for each changed project-owned ./tied-project/ path after baseline lint_yaml canonicalization and before tied_validate_consistency."
       - "Direct-edit exception only when no tied-cli.sh tool covers the operation: document one-line gap, edit minimal file, then run lint_yaml <absolute-path> until it passes (or one lint_yaml with multiple paths if your wrapper implements per-file safe passes per processes.md)."
       - "IF consistency check fails THEN fix the TIED stack via tied-cli.sh (prefer yaml_detail_update / yaml_index_update) and RETURN to the calling step to re-validate."
       - "IF tied-cli.sh returns an error: interpret payload, TIED_BASE_PATH, methodology vs project and retry; do not silently fall back to IDE file tools on the same paths."
-      - "Mutation path: for create/update/delete under ./tied/ on project-owned YAML (indexes, requirements/*.yaml, architecture-decisions/*.yaml, implementation-decisions/*.yaml, semantic-tokens.yaml, feedback.yaml), use .cursor/skills/tied-yaml/scripts/tied-cli.sh per .cursor/skills/tied-yaml/SKILL.md. Do not use apply_patch/Write on those absolute paths when tied-cli.sh covers the operation."
+      - "Mutation path: for create/update/delete under ./tied-project/ on project-owned YAML (indexes, requirements/*.yaml, architecture-decisions/*.yaml, implementation-decisions/*.yaml, semantic-tokens.yaml, feedback.yaml), use .cursor/skills/tied-yaml/scripts/tied-cli.sh per .cursor/skills/tied-yaml/SKILL.md. Do not use apply_patch/Write on those absolute paths when tied-cli.sh covers the operation."
       - "Never mutate ./tied-bundle/** (read-only). If a tool rejects a write as methodology-owned, fix the target token/path—do not bypass with direct file edit."
-      - "Per changed project-owned ./tied/ YAML path, enforce this order: governed tied-cli.sh mutation (when applicable) → baseline canonical formatting via lint_yaml (tied-yaml-canonical-v1 + resolved scalar_style per [PROC-YAML_EDIT_LOOP]) → CALL sub-client-yaml-styling → re-read on disk → lint_yaml syntax pass → tied_validate_consistency → semantic-equivalence acceptance (sub-client-yaml-styling or yaml_semantic_compare when client_formatter configured)."
+      - "Per changed project-owned ./tied-project/ YAML path, enforce this order: governed tied-cli.sh mutation (when applicable) → baseline canonical formatting via lint_yaml (tied-yaml-canonical-v1 + resolved scalar_style per [PROC-YAML_EDIT_LOOP]) → CALL sub-client-yaml-styling → re-read on disk → lint_yaml syntax pass → tied_validate_consistency → semantic-equivalence acceptance (sub-client-yaml-styling or yaml_semantic_compare when client_formatter configured)."
       - "Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' (required before marking TIED work complete; not optional when sub-yaml-edit-loop is invoked for TIED changes)."
       - "Run lint_yaml on each changed file that was direct-edited or when your workflow requires canonical formatting on disk—never raw multi-argument `yq` with multiple file arguments in one process. If validation fails, fix and repeat; file is invalid until lint_yaml succeeds."
     title: "tied-cli.sh mutations, lint_yaml, client styling, tied_validate_consistency"
@@ -1417,7 +1417,7 @@ sub_procedures:
     outcomes: "Concept(s) resolve to exactly one preferred term (RESOLVE), term map loaded for reading (PRELOAD), new/changed terms recorded (RECORD), or pre-commit audit passed (VALIDATE); immature-client deferral noted when tied/vocab is absent."
     preconditions:
       - "Caller indicates mode (RESOLVE before naming/writing; PRELOAD before reading TIED/docs/code; RECORD when concepts are generated or after artifacts change; VALIDATE before commit) and the concept(s) or artifact in scope."
-      - "Domain vocabulary index files live at ./tied-project/vocab/*.md (plain Markdown; filenames have no -vocabulary suffix, e.g. tied-project/vocab/<topic>.md). They are NOT TIED index/detail YAML and are NOT under ./tied/methodology, so they are edited DIRECTLY (like ./tied-project/implementation-decisions/IMPL-*-pseudocode.md sidecars)—do not route through tied-cli.sh and do not run lint_yaml on them."
+      - "Domain vocabulary index files live at ./tied-project/vocab/*.md (plain Markdown; filenames have no -vocabulary suffix, e.g. tied-project/vocab/<topic>.md). They are NOT TIED index/detail YAML and are NOT under ./tied-bundle/methodology, so they are edited DIRECTLY (like ./tied-project/implementation-decisions/IMPL-*-pseudocode.md sidecars)—do not route through tied-cli.sh and do not run lint_yaml on them."
       - "When ./tied-project/vocab/ or its *.md files do not exist (immature client), create ./tied-project/vocab/ and seed an index file when this change introduces enough named concepts; otherwise do a lightweight consistency pass or skip with an explicit note in the per-request checklist copy. Do not fabricate terms."
     references:
       - "./tied-bundle/docs/processes.md § [PROC-VOCABULARY_INDEX]"
@@ -1458,7 +1458,7 @@ sub_procedures:
       - "tied-bundle/docs/pseudocode-writing-and-validation.md#leap-micro-cycle-and-post-fix-recovery"
     slug: "sub-leap-micro-cycle"
     tasks:
-      - "CALL sub-yaml-edit-loop on the changed detail file (absolute path under ./tied/)."
+      - "CALL sub-yaml-edit-loop on the changed detail file (absolute path under ./tied-project/)."
       - "IF the change affects ARCH scope THEN update ARCH via tied-cli.sh: GOTO author-architecture (scoped to affected ARCH), CALL sub-yaml-edit-loop, then return here."
       - "IF the change affects REQ scope THEN update REQ via tied-cli.sh: GOTO author-requirement (scoped to affected REQ), CALL sub-yaml-edit-loop, then return here."
       - "IF the divergence originates from sponsor intent THEN confirm it is inside the delegated work envelope before LEAP; ELSE raise a sponsor question (costly choice)."
@@ -1671,7 +1671,7 @@ vocabulary_touchpoints:
       - "translate-sponsor-intent"
     when: "Sponsor or user text names concepts before formal TIED work"
 workspace_paths:
-  CITDP_RECORDS: "./tied/citdp"
+  CITDP_RECORDS: "./tied-project/citdp"
   TIED_BASE: "./tied-project"
-  TIED_DOCS: "./tied/docs"
-  VOCAB_INDEX: "./tied/vocab"
+  TIED_DOCS: "./tied-project/docs"
+  VOCAB_INDEX: "./tied-project/vocab"
