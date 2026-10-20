@@ -1,6 +1,6 @@
 # Proposed commit — Workflow H (plan-close-out)
 
-**Status:** pending sponsor `traceable-commit` — agent did **not** commit.
+**Applied:** `57e6ab3d` (2026-10-19) — message below.
 
 ## Proposed message
 

@@ -6,7 +6,7 @@
 **CITDP:** [../../../citdp/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml](../../../citdp/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml)  
 **Close-out:** [h5-close-out-gate.md](./h5-close-out-gate.md) · [closeout-run-close-out-gates-h5.json](./closeout-run-close-out-gates-h5.json)
 
-**Platform commits:** build **`6577f890`** · follow-on traceable commit **pending** — [plan-close-out-proposed-commit.md](./plan-close-out-proposed-commit.md)
+**Platform commits:** build **`6577f890`** · follow-on close-out **`57e6ab3d`** — [plan-close-out-proposed-commit.md](./plan-close-out-proposed-commit.md)
 
 ---
 
