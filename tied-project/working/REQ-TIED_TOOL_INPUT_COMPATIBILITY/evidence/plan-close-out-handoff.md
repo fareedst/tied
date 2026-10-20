@@ -21,4 +21,4 @@
 
 ### Commit
 
-**SHA:** `047ca46e` — scoped REQ wave only; unrelated dirty paths left unstaged.
+**SHAs:** `047ca46e` (feature) · `1d3dbbce` (vocab) · `cda41867` (Kaizen PDCA + clear-workspace commit).

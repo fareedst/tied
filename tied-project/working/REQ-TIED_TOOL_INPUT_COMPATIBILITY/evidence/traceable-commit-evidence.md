@@ -9,4 +9,4 @@
 | `tied_validate_consistency` | ok (pre-commit) |
 | Git hygiene | [git-hygiene-receipt-2026-10-20.md](./git-hygiene-receipt-2026-10-20.md) |
 
-**Kaizen (post-commit):** [kaizen-pdca-handoff.md](./kaizen-pdca-handoff.md) — witness baseline + `fb-mvgagoen-gtfuua` / outcome **improved**.
+**Kaizen traceable commit (this pass):** [kaizen-pdca-handoff.md](./kaizen-pdca-handoff.md) · [clear-workspace-kaizen-2026-10-20.md](./clear-workspace-kaizen-2026-10-20.md) · hygiene [git-hygiene-receipt-2026-10-20-kaizen.md](./git-hygiene-receipt-2026-10-20-kaizen.md) · `fb-mvgagoen-gtfuua` / outcome **improved**.
