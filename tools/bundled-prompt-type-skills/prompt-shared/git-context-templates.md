@@ -26,6 +26,34 @@ Git: all changes are in git stage. Unrelated changes in git diff are not signifi
 Git: consider changes in git diff or stage.
 ```
 
+## git_preamble_plan_close_out
+
+For **`@plan-close-out`** only. Describes starting staged/diff state; **does not** forbid commit at the end of the skill when unified close_out allows.
+
+### staged-clean
+
+```
+Staged changes are ready for close-out.
+All changes are in git stage; there is nothing in git diff.
+When close_out gates allow, run traceable-commit per traceable-commit-close-out.md.
+```
+
+### staged-unrelated-diff
+
+```
+Staged changes are ready for close-out.
+All changes are in git stage. Unrelated changes in git diff are not significant unless shown otherwise.
+When close_out gates allow, scope staging to the REQ wave only.
+```
+
+### diff-or-stage
+
+```
+Staged changes are ready for close-out.
+Consider changes in git diff or stage.
+When close_out gates allow, run traceable-commit per traceable-commit-close-out.md.
+```
+
 ## git_preamble_close_out
 
 Shared constraint (all non-irrelevant conditions):

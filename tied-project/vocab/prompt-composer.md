@@ -24,11 +24,11 @@ files and the implementation pseudo-code.
 | **prompt envelope** | prompt wrapper | Optional `prompt-type:` and `git-condition:` fields on a generated prompt; not required for Cursor skill or agent invocation |
 | **invocation remainder** | ::: body, request after ::: | Text after the named skill or agent (or the Task prompt body). For `plan-new-feature` this is the requirement, not a plan document. |
 | **linked plan** | ::: plan body, in-document plan | The attached Cursor plan or an in-message plan. Primary payload for `refine-plan` and `build-plan`. |
-| **plan-close-out (commit deferred)** | close-out commit, merge now | `plan-close-out` prepares Tracker, gates, CHANGELOG, and a proposed commit message; it must not `git add`, `git commit`, or `git push`. |
+| **plan-close-out (traceable commit when gates allow)** | close-out commit deferred, merge later | `@plan-close-out` runs unified close_out gates, git hygiene preview, CHANGELOG, and **traceable-commit** (`git add`/`git commit`) when gates allow; skips commit when blocked; must not `git push` unless sponsor asks. |
 | **gitignore close-out hygiene** | git cleanup, ignore sweep | Advisory close-out review per `[PROC-GITIGNORE_CLOSE_OUT]`; classify ephemeral artifacts; propose or apply unstaged `.gitignore` patterns |
 | **ephemeral artifact** | temp file, junk | Regenerable local-dev output not canonical TIED intent |
 | **aggregate artifact** | summary file | Intentionally trackable rollup; may require `!` negation in `.gitignore` |
-| **caller git context** | auto git | Pasted git preamble or untracked path list; no agent-initiated git in plan-close-out |
+| **caller git context** | auto git | Pasted git preamble or untracked path list; **`git_preamble_plan_close_out`** for `@plan-close-out`; read-only git and stage/commit only in traceable-commit phase after close_out allows |
 | **advisory close-out step** | blocking gate | Required procedure with handoff evidence; explicit N/A when clean |
 | **prompt-shared bundle** | shared skill docs | Direct one-level Markdown references used by leaf skills |
 | **surface enrollment contract** | enrollment helper, PDSA hook | Normative when/how to open or update a Loop 3 methodology experiment for non-`checklist_step` production surfaces (prompt types, assurance profiles, experiment `gate_policy` category); MCP assist + advisory skill steps; gate-blocking only when implement CITDP declares link · [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT](../requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml) |

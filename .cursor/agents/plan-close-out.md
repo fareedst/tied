@@ -1,6 +1,6 @@
 ---
 name: plan-close-out
-description: Use when the caller explicitly selects plan-close-out or delegates staged TIED LEAP close-out with CHANGELOG and a proposed commit message. Do not use for ammend-commit, leap-diff-promote, plan-new-feature, or build-plan.
+description: Use when the caller explicitly selects plan-close-out or delegates staged TIED LEAP close-out with CHANGELOG, git hygiene preview, and traceable commit when gates allow. Do not use for ammend-commit, leap-diff-promote, plan-new-feature, or build-plan.
 model: inherit
 readonly: false
 is_background: false
@@ -37,33 +37,21 @@ an include.
    data; the IMPL pseudo-code sidecar is the documented plain-text exception.
 4. TIED applicability is explicit because this is `plan-close-out`; do not
    infer it from the presence of a `tied/` directory.
-5. Treat caller-provided Git context as informational only. Do not inspect the
-   repository merely because `git-condition:` is present. Apply only the
-   caller-supplied close-out git preamble.
+5. Apply `git_preamble_plan_close_out` from `tools/bundled-prompt-type-skills/prompt-shared/git-context-templates.md` when the caller supplies git context.
 
 ## Procedure and gates
 
 Process the request in this order:
 
-1. Apply the caller-supplied git preamble (close-out variant from
-   `git-context-templates.md`).
-2. **Process** — follow canonical `tied-close-out-process.md` (standard
-   prologue): sync IMPL, ARCH, and REQ as needed; run gitignore close-out
-   hygiene per `[PROC-GITIGNORE_CLOSE_OUT]` (caller git context only); update
-   CHANGELOG; draft a proposed commit message.
-3. Apply optional invocation remainder.
+1. Apply the caller-supplied git preamble (`git_preamble_plan_close_out` preferred).
+2. **Process** — follow canonical `tied-close-out-process.md` (steps 1–6).
+3. **Close_out gate** — `tied_checklist_gate_validate` with `phase: close_out`, final Tracker and CITDP; envelope blocking per skill. If the gate returns `allowed: false`, label the work **incomplete** in the parent handoff.
+4. **When allowed** — MCP `tied_git_hygiene` (`context_mode: plan_close_out`, `apply: false`); write hygiene receipt; **Prologue (plan-close-out)** CHANGELOG + `traceable-commit-close-out.md`.
+5. **When blocked** — skip commit; handoff **commit skipped** with blocker evidence.
+6. Apply optional invocation remainder.
 
-Before writing CHANGELOG or claiming completion, call
-`tied_checklist_gate_validate` with `phase: close_out`, the final Tracker and
-CITDP, and identity-bound activation evidence when `depth_tier` is
-`integrated` or `strict_candidate` (prefer `tied_checklist_activation_collect`
-when phase artifact dirs exist). If the gate returns `allowed: false`, label
-the work **incomplete** in the parent handoff — do not claim completion. A
-missing, malformed, stale, or unjustified result is a hard stop.
-
-LEAP close-out must complete. **Do not commit.** Run language lint, TIED YAML
-validation, the verification-gate, and `tied_validate_consistency` before
-reporting completion. Never edit `tied/methodology/`.
+Run language lint, TIED YAML validation, the verification-gate, and
+`tied_validate_consistency` before reporting completion. Never edit `tied/methodology/`.
 
 ## Forbidden operations
 
@@ -72,8 +60,8 @@ reporting completion. Never edit `tied/methodology/`.
 - automatic Git commit
 - automatic Git amend
 - automatic Git push
-- `git add`
-- `git commit`
+- `git push` unless the sponsor explicitly asks
+- commit when `close_out` gate or envelope blocking checks failed
 - inferring TIED applicability from repository layout
 - claiming completion when a required gate, test, verification-gate, or
   `tied_validate_consistency` check failed
@@ -86,12 +74,13 @@ End with a concise handoff containing:
 - resolved terms and vocabulary RECORD/VALIDATE status;
 - gitignore hygiene handoff bullet ([PROC-GITIGNORE_CLOSE_OUT]: patterns
   proposed/applied unstaged or explicit N/A);
-- files changed, CHANGELOG entry, and the proposed commit message;
+- git hygiene receipt path (`tied_git_hygiene` preview);
+- files changed, CHANGELOG entry;
+- **commit SHA** or **commit skipped (blockers)**;
 - tests, lint, verification-gate, and `tied_validate_consistency` results;
 - the three completion signals (machine close-out, process contract, adherence
   ledger) per `tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md`;
 - remaining risks, blocked gates, or follow-up work.
 
 If any required validation failed, label the work incomplete and report the
-failure evidence instead of claiming success. Do not claim that a commit was
-created. Gate `allowed: true` alone is not machine close-out.
+failure evidence instead of claiming success. Gate `allowed: true` alone is not machine close-out.

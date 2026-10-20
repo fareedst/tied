@@ -22,7 +22,7 @@ procedure INVENTORY_PROMPT_TYPE_SKILLS(source_root):
       - success => TBD
     EFFECTS: pure
 
-  # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: declare the exact 13 leaf skills, router, and 15 direct shared references (includes gitignore-close-out-hygiene.md for [PROC-GITIGNORE_CLOSE_OUT]) so omissions fail deterministically.
+  # [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: declare the exact 13 leaf skills, router, and prompt-shared inventory in prompt-type-skills.test.ts SHARED_REFERENCES (includes traceable-commit-close-out.md and gitignore-close-out-hygiene.md) so omissions fail deterministically.
   INPUT: source_root: string where length(source_root) > 0
   PRE: source_root is a readable directory
   OUTPUT: inventory of relative source paths

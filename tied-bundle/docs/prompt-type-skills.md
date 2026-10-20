@@ -187,7 +187,7 @@ TIED-source development artifacts and are not installed by `tied-install.sh`.
 | `plan-new-feature` | Full TIED Refine → CITDP Plan → Implement |
 | `refine-plan` | Improve a linked or in-message plan |
 | `build-plan` | Execute a linked or in-message plan; omits Refine |
-| `plan-close-out` | TIED/LEAP close-out with CHANGELOG and proposed message |
+| `plan-close-out` | TIED/LEAP close-out with CHANGELOG, git hygiene preview, traceable commit when gates allow |
 | `debug` | Refine → Capture Failure → Plan → Implement |
 | `question` | Answer the invocation remainder; no TIED blocks |
 | `use-skill` | Import/apply skills with full TIED gates |
@@ -222,6 +222,7 @@ Every leaf has:
 - `tied-read-ad-hoc.md`
 - `tied-close-out-process.md`
 - `gitignore-close-out-hygiene.md`
+- `traceable-commit-close-out.md`
 - `non-tied-refine.md`
 - `non-tied-plan.md`
 - `git-context-templates.md`
@@ -255,6 +256,12 @@ CITDP, and vocabulary files for domain understanding. They must not:
 All skills must leave caller-supplied Git state untouched unless the caller
 explicitly authorizes a required operation. The skills do not run Git commands,
 inspect the repository automatically, or access `pbpaste`/`pbcopy`.
+
+**Exception — `plan-close-out`:** After unified **close_out** allows, this leaf
+may run read-only git, **`tied_git_hygiene`** preview, and **traceable-commit**
+(`git add` / `git commit`) per `traceable-commit-close-out.md`. It must not
+commit when gates or envelope blocking checks fail, and must not **`git push`**
+unless the sponsor explicitly asks.
 
 ## Validation
 

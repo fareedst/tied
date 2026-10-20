@@ -1,0 +1,26 @@
+feat(prompt-type): plan-close-out traceable commit
+
+[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
+
+When unified close_out allows, @plan-close-out runs tied_git_hygiene preview
+and checklist traceable-commit; leap-diff-promote and ammend-commit unchanged.
+
+Completion signals (close-out): machine pass (merged_decision.allowed, envelope
+blocking_gap_count=0); process pass (manifest + tracker); adherence band A.
+
+Staging map:
+.cursor/agents/plan-close-out.md
+CHANGELOG.md
+mcp-server/src/e2e/prompt-type-skills.test.ts
+mcp-server/src/e2e/prompt-type-subagent.test.ts
+mcp-server/src/jev/prompt-type-taxonomy.ts
+tied-bundle/docs/prompt-type-skills.md
+tied-project/architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+tied-project/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS-pseudocode.md
+tied-project/implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+tied-project/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+tied-project/vocab/prompt-composer.md
+tied-project/citdp/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml
+tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/
+tools/bundled-prompt-type-skills/plan-close-out/SKILL.md
+tools/bundled-prompt-type-skills/prompt-shared/

@@ -1,0 +1,78 @@
+depth_tier: minimal
+gate_policy: advisory
+request_token: REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT
+schema_version: checklist-tracker.v1
+name: pco-traceable-commit-close-out
+note: Authoritative tracker for @plan-close-out (Phase 3). Refine history remains in checklist-tracker-refine.yaml.
+execution_evidence:
+  request: REQ-PROMPT_TYPE_GLOBAL_SKILLS
+  citdp_path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml
+  completed:
+    - change-definition
+    - test-strategy
+    - risk-assessment
+    - sub-adversarial-inquiry-pass
+    - unit-test-red
+    - unit-test-green
+    - sync-tied-stack
+steps:
+  - disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Skill contract and static prompt-type tests only; no integrated adversarial inquiry.
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md
+    slug: change-definition
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml
+    slug: risk-assessment
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/test-strategy.md
+    slug: test-strategy
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/e2e/prompt-type-subagent.test.ts
+      - kind: file_path
+        path: mcp-server/src/e2e/prompt-type-skills.test.ts
+    slug: unit-test-red
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/evidence/build-plan-handoff.md
+    slug: unit-test-green
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml
+      - kind: file_path
+        path: tools/bundled-prompt-type-skills/plan-close-out/SKILL.md
+    slug: sync-tied-stack
+    tracking:
+      status: completed
+  - disposition: pending
+    slug: verification-gate
+    tracking:
+      status: pending
+  - disposition: pending
+    slug: traceable-commit
+    tracking:
+      status: pending

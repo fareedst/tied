@@ -26,7 +26,7 @@ export const PROMPT_TYPE_HINTS: Record<LeafPromptType, string> = {
   "plan-new-feature": "New REQ/ARCH/IMPL feature with full TIED stack",
   "refine-plan": "Improve a linked or in-message plan",
   "build-plan": "Execute an approved linked plan",
-  "plan-close-out": "LEAP close-out; commit deferred",
+  "plan-close-out": "LEAP close-out; traceable commit when gates allow",
   debug: "TIED-tracked bug with gates",
   question: "Minimal answer-only workflow",
   "use-skill": "Import and run a named skill with TIED gates",

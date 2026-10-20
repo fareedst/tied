@@ -11,7 +11,7 @@ Advisory close-out review of **ephemeral artifacts** against [`.gitignore`](../.
 
 | Surface | Read-only `git status` / `git diff --name-only` | Edit `.gitignore` (unstaged) | `git add` / `git commit` |
 |---------|---------------------------------------------------|------------------------------|--------------------------|
-| **plan-close-out** | **Forbidden** — use [caller git context](git-context-templates.md) / pasted untracked path list only | **Allowed** when unambiguous; otherwise propose-only in handoff | **Forbidden** |
+| **plan-close-out** | **Allowed** when needed for staging (after close_out allows) | **Allowed** when unambiguous; otherwise propose-only in handoff | **Allowed** in [traceable-commit-close-out.md](traceable-commit-close-out.md) phase only |
 | **checklist `gitignore-close-out-hygiene`** | **Allowed** when caller context is thin | **Allowed** unstaged; stage at `traceable-commit` | **Forbidden at this slug** |
 | **`traceable-commit`** | As needed for staging | N/A | **Allowed** |
 
@@ -81,7 +81,7 @@ Include **exactly one** in plan-close-out / checklist close-out handoff:
 - Broad `working/**` without `!` for trackable aggregates.
 - One-off path literals when a convention pattern exists.
 - Treating modified tracked source/TIED files as ephemeral.
-- Agent-initiated git commands in **plan-close-out**.
+- Commit in **plan-close-out** when unified close_out or envelope blocking checks failed.
 - Blocking close-out when hygiene is incomplete.
 
 ## Cross-refs

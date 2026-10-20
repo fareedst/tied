@@ -37,6 +37,10 @@ const CLOSE_OUT_LEAVES = new Set<LeafPromptType>([
   "ammend-commit",
   "leap-diff-promote",
 ]);
+const CLOSE_OUT_NO_COMMIT_LEAVES = new Set<LeafPromptType>([
+  "ammend-commit",
+  "leap-diff-promote",
+]);
 const REFINE_PLAN_IMPLEMENT_LEAVES = new Set<LeafPromptType>([
   "plan-new-feature",
   "refine-plan",
@@ -160,11 +164,20 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.match(nonTiedDebug, /non-tied-boundary\.md/);
     assert.match(nonTiedDebug, /Do not start code until a test strategy is in place/);
 
-    for (const promptType of CLOSE_OUT_LEAVES) {
+    for (const promptType of CLOSE_OUT_NO_COMMIT_LEAVES) {
       const body = readAgent(promptType).body;
       assert.match(body, /Do not commit/i);
     }
-    assert.match(readAgent("plan-close-out").body, /phase:\s*close_out/i);
+    const planCloseOutBody = readAgent("plan-close-out").body;
+    assert.doesNotMatch(
+      planCloseOutBody,
+      /LEAP close-out must complete\.\s*\*\*Do not commit\.\*\*/i,
+      "plan-close-out must not use legacy do-not-commit close-out contract",
+    );
+    assert.match(planCloseOutBody, /traceable-commit-close-out\.md/i);
+    assert.match(planCloseOutBody, /tied_git_hygiene/i);
+    assert.match(planCloseOutBody, /commit SHA|commit skipped/i);
+    assert.match(planCloseOutBody, /phase:\s*close_out/i);
     assert.match(
       readAgent("plan-close-out").body,
       /gitignore close-out hygiene|\[PROC-GITIGNORE_CLOSE_OUT\]/i,
@@ -208,13 +221,17 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
 
     for (const promptType of CLOSE_OUT_LEAVES) {
       const { body } = readAgent(promptType);
-      assert.match(body, /git add/);
-      assert.match(body, /git commit/);
       assert.match(body, /CHANGELOG/);
       assert.match(body, /tied_validate_consistency/i);
       assert.match(body, /verification-gate/i);
       assert.match(body, /completion signals/i, `${promptType} must separate completion signals in handoff`);
     }
+    for (const promptType of CLOSE_OUT_NO_COMMIT_LEAVES) {
+      const { body } = readAgent(promptType);
+      assert.match(body, /git add/);
+      assert.match(body, /git commit/);
+    }
+    assert.match(readAgent("plan-close-out").body, /traceable-commit-close-out\.md/i);
     assert.match(readAgent("build-plan").body, /completion signals/i, "build-plan must document completion signals in handoff");
     assert.match(readAgent("ammend-commit").body, /git commit --amend/);
 

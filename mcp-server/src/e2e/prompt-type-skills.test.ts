@@ -38,6 +38,7 @@ const SHARED_REFERENCES = [
   "tied-capture-failure.md",
   "tied-read-ad-hoc.md",
   "gitignore-close-out-hygiene.md",
+  "traceable-commit-close-out.md",
   "clear-workspace-routing.md",
   "tied-close-out-process.md",
   "non-tied-refine.md",
@@ -227,6 +228,8 @@ describe("prompt-type skill bundle", () => {
     const planCloseOut = fs.readFileSync(path.join(bundleRoot, "plan-close-out", "SKILL.md"), "utf8");
     assert.match(planCloseOut, /close_out/);
     assert.match(planCloseOut, /jev-plan-skills-adjunct\.md/);
+    assert.match(planCloseOut, /traceable-commit-close-out\.md/);
+    assert.match(planCloseOut, /tied_git_hygiene/);
   });
 
   it("documents advisory methodology surface enrollment on plan skills [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]", () => {

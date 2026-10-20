@@ -1,0 +1,9 @@
+{
+  "request_token": "REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT",
+  "phase": "close_out",
+  "sub_procedure": "sub-adversarial-inquiry-pass",
+  "disposition": "not_applicable",
+  "policy": "minimal-depth-no-inquiry",
+  "rationale": "Prompt Composer skill contract and static prompt-type tests; depth_tier minimal; no integrated adversarial inquiry.",
+  "recorded_at": "2026-10-20"
+}

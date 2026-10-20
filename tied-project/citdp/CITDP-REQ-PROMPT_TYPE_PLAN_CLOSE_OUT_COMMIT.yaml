@@ -1,0 +1,76 @@
+CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT:
+  change_definition:
+    current_behavior_prior: "plan-close-out forbids git add/commit; prepares CHANGELOG and proposed commit message only; clear-workspace routes traceable-commit as separate sponsor-requested step."
+    desired_behavior: "plan-close-out runs tied_git_hygiene preview by default and executes checklist traceable-commit when unified close_out allows; skips commit when blocked."
+    non_goals:
+      - "Change leap-diff-promote or ammend-commit commit policy"
+      - "Automatic git push"
+      - "tied_git_hygiene apply without exact allowed_paths"
+    success_criteria:
+      - "plan-close-out SKILL and agent authorize traceable-commit after gates"
+      - "SHARED_REFERENCES includes traceable-commit-close-out.md"
+      - "prompt-type e2e tests pass"
+      - "prompt-composer vocabulary updated"
+      - "close_out merged_decision.allowed with envelope blocking_gap_count zero at minimal depth"
+      - "traceable-commit records SHA or documented skip when blocked"
+  evidence:
+    commands:
+      - "cd mcp-server && node --test src/e2e/prompt-type-subagent.test.ts src/e2e/prompt-type-skills.test.ts"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "prompt_composer_prose_and_static_tests"
+      - "does_not_prove_live_ide_skill_invocation"
+  impact_analysis:
+    impl_inventory_notes: "prompt-shared + plan-close-out SKILL + plan-close-out agent + taxonomy hint + TIED REQ criterion."
+    modules_or_boundaries: "tools/bundled-prompt-type-skills/; .cursor/agents/plan-close-out.md"
+    tied_tokens_affected:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-19"
+    title: "plan-close-out traceable-commit"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "plan-close-out commits when close_out gate disallowed"
+      - "Hygiene apply deletes tracked or canonical paths without allowlist"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "SKILL.md drops gate precondition and always runs git commit."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "prompt-type-subagent.test still requires global Do not commit on plan-close-out (legacy contract)."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md"
+        - "tools/bundled-prompt-type-skills/plan-close-out/SKILL.md"
+      falsification_questions:
+        - "Does traceable-commit run only after allowed close_out?"
+        - "Is git push still forbidden unless asked?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Skill contract and static tests; minimal depth."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "prompt-type-subagent.test.ts"
+        evidence_method: "static e2e"
+        limitation: "Does not invoke Cursor skill runtime."
+        owner: "agent"
+        rationale: "Agent wrapper contract mirrors bundled SKILL."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/test-strategy.md"
+  persist_policy: "Persist to tied-project/citdp/ after implementation complete"
