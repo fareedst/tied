@@ -42,3 +42,37 @@ entries:
     promotion_status: "canonical_ready"
     title: "Compose Anthropic-style review layers into TIED (Claude Code comparison)"
     type: "methodology_improvement"
+  - capture_schema_version: "feedback-event.v1"
+    context:
+      capture:
+        delivery:
+          attempted_at: "2026-10-20T06:14:55.631Z"
+          idempotency_key: "REQ-TIED_TOOL_INPUT_COMPATIBILITY#32602-tied-token-create-2026-10-19"
+        entry_type_omitted: false
+        evidence:
+          redaction: "not_required"
+          refs: []
+        observation:
+          kind: "workflow"
+          title: "Witnessed -32602 on tied_token_create_with_detail record fields"
+        schema_version: "feedback-event.v1"
+      outcome_observations:
+        - baseline_ref: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md"
+          countermeasure_ref: "REQ-TIED_TOOL_INPUT_COMPATIBILITY@047ca46e"
+          evidence_links:
+            - "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md"
+            - "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-gate-evidence.md"
+            - "git://commit/047ca46e"
+          observation_id: "oo-mvgahc5x-zacqtr"
+          observed_at: "2026-10-20T06:15:00.000Z"
+          outcome: "improved"
+          recorded_at: "2026-10-20T06:15:26.421Z"
+          schema_version: "outcome-observation.v1"
+    created_at: "2026-10-20T06:14:55.631Z"
+    description: "Sponsor observed agent tied-cli call with @args JSON fail MCP -32602 (Expected string, received object at index_record/detail_record). Baseline: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md"
+    id: "fb-mvgagoen-gtfuua"
+    idempotency_key: "REQ-TIED_TOOL_INPUT_COMPATIBILITY#32602-tied-token-create-2026-10-19"
+    occurred_at: "2026-10-19T22:18:00.000-07:00"
+    privacy_tier: "operator_local"
+    title: "Witnessed -32602 on tied_token_create_with_detail record fields"
+    type: "methodology_improvement"

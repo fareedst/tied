@@ -11,7 +11,7 @@ refine: "refine-plan pass 1 / Composer 2.5 Fast"
 
 # PLAN — Native record inputs and QC loop
 
-**Plan status:** **Close-out complete** — `run_id=ntic-close-out-20261020-r1`; [evidence/closeout-run-close-out-gates.json](evidence/closeout-run-close-out-gates.json) **`merged_decision.allowed=true`**; envelope **`blocking_gap_count=0`** (advisory warns remain). Verification receipt [gates/verification-2026-10-20T05-57-24-415Z.json](gates/verification-2026-10-20T05-57-24-415Z.json). **Kaizen PDCA** deferred (no sponsor baseline -32602 text).
+**Plan status:** **Close-out complete** — `run_id=ntic-close-out-20261020-r1`; [evidence/closeout-run-close-out-gates.json](evidence/closeout-run-close-out-gates.json) **`merged_decision.allowed=true`**; envelope **`blocking_gap_count=0`** (advisory warns remain). Verification receipt [gates/verification-2026-10-20T05-57-24-415Z.json](gates/verification-2026-10-20T05-57-24-415Z.json). **Kaizen PDCA:** witness baseline [evidence/operator-baseline-32602.md](evidence/operator-baseline-32602.md); capture `fb-mvgagoen-gtfuua`; outcome **improved** — [evidence/kaizen-pdca-handoff.md](evidence/kaizen-pdca-handoff.md).
 
 ## Session handoff (refine-plan pass 1)
 

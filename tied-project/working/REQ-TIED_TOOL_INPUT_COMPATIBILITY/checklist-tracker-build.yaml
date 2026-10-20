@@ -17,7 +17,9 @@ execution_evidence:
     - verification-gate
   envelope_path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/request-evidence-envelope.v1.json
   operator_evidence:
-    limitation: Kaizen capture/outcome deferred — no sponsor baseline -32602 text.
+    kaizen_baseline: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md
+    kaizen_feedback_id: fb-mvgagoen-gtfuua
+    kaizen_outcome_id: oo-mvgahc5x-zacqtr
     status: build_plan_verification_pass
   pre_implementation_receipt: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/gates/pre_implementation-2026-10-20T05-43-33-302Z.json
   request: REQ-TIED_TOOL_INPUT_COMPATIBILITY

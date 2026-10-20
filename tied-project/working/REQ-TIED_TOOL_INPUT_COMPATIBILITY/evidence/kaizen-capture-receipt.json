@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "receipt": {
+    "feedback_id": "fb-mvgagoen-gtfuua",
+    "occurred_at": "2026-10-19T22:18:00.000-07:00",
+    "created_at": "2026-10-20T06:14:55.631Z",
+    "observation_kind": "workflow",
+    "impact": "unknown",
+    "idempotent_replay": false,
+    "duplicate_group": null,
+    "evidence_refs_validated": [],
+    "evidence_refs_rejected": [
+      "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md"
+    ],
+    "notification_disposition": "not_configured"
+  }
+}

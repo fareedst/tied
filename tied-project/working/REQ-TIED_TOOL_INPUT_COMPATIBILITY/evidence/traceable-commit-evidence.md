@@ -9,4 +9,4 @@
 | `tied_validate_consistency` | ok (pre-commit) |
 | Git hygiene | [git-hygiene-receipt-2026-10-20.md](./git-hygiene-receipt-2026-10-20.md) |
 
-**Deferred:** Kaizen PDCA feedback capture (no sponsor baseline -32602 text).
+**Kaizen (post-commit):** [kaizen-pdca-handoff.md](./kaizen-pdca-handoff.md) — witness baseline + `fb-mvgagoen-gtfuua` / outcome **improved**.

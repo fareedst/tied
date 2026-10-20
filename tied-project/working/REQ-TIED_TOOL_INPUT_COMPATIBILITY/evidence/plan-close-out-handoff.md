@@ -8,10 +8,15 @@
 - **Process contract:** partial — dual-write present; manifest missing (skipped `--skip-manifest` while sponsor ran tests); PSA Layer C present at `tied-bundle/working/.../pseudocode-analysis/IMPL-TIED_TOOL_INPUT_NORMALIZATION.v1.json` (gitignored local); profile not regenerated (manifest skipped)
 - **Adherence ledger:** partial — reconcile `process_grade` band **C** (`expected_artifact_missing` for verification manifest); thin_ledger clear for synced slugs
 
+### Kaizen PDCA (post close-out)
+
+- Witness baseline: [operator-baseline-32602.md](./operator-baseline-32602.md) (sponsor observed agent `-32602`)
+- Capture: `fb-mvgagoen-gtfuua` · Outcome: **improved** `oo-mvgahc5x-zacqtr` — [kaizen-pdca-handoff.md](./kaizen-pdca-handoff.md)
+- Store append: `tied-project/feedback.yaml` (commit separately if desired)
+
 ### Remaining risks
 
-- Kaizen capture/outcome not recorded (documented deferral)
-- Advisory inquiry: `warn_not_success`, `finding_unresolved` (6 envelope advisory gaps)
+- Advisory inquiry: `warn_not_success`, `finding_unresolved` (envelope advisory gaps)
 - Replay `run-close-out-gates.mjs` without `--skip-manifest` after focused tests when convenient
 
 ### Commit

@@ -1,0 +1,21 @@
+{
+  "payload": {
+    "entry_id": "fb-mvgagoen-gtfuua",
+    "outcome": "improved",
+    "observed_at": "2026-10-20T06:15:00.000Z",
+    "baseline": {
+      "baseline_ref": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md",
+      "captured_at": "2026-10-19T22:18:00.000-07:00"
+    },
+    "countermeasure_ref": "REQ-TIED_TOOL_INPUT_COMPATIBILITY@047ca46e",
+    "evidence_links": [
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md",
+      "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-gate-evidence.md",
+      "git://commit/047ca46e"
+    ]
+  },
+  "follow_up_window": {
+    "start": "2026-10-19T00:00:00.000Z",
+    "end": "2026-10-21T00:00:00.000Z"
+  }
+}

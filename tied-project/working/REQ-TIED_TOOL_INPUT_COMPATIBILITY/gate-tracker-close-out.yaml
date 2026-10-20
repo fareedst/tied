@@ -11,9 +11,7 @@ execution_evidence:
   envelope_path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/request-evidence-envelope.v1.json
   close_out_evidence:
     date: "2026-10-20"
-    deferred:
-      - slug: kaizen-pdca-feedback
-        rationale: "No sponsor baseline -32602 observation text; operator_evidence documents deferral"
+    kaizen_pdca: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/kaizen-pdca-handoff.md
   completed:
     - change-definition
     - session-bootstrap

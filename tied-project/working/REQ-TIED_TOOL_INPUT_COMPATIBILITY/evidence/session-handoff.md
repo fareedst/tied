@@ -1,6 +1,6 @@
 # Session handoff — REQ-TIED_TOOL_INPUT_COMPATIBILITY
 
-**Recorded:** 2026-10-20  
+**Recorded:** 2026-10-20 (updated after Kaizen evidence)  
 **Request:** Native MCP record inputs + CLI hindrance diagnostics + Kaizen-shaped QC (no ISO certification claim)
 
 ## Pipeline completed
@@ -11,13 +11,14 @@
 | refine-plan pass 1 | Composer 2.5 Fast | TIED stack, CITDP, pre_implementation gate, [plan-refine-delta.jsonl](./plan-refine-delta.jsonl) |
 | build-plan | Composer (Task) | Phases 1–3 product code + docs |
 | Verification repair | Composer (parent) | Verification gate + envelope + `tied_verify` |
+| plan-close-out | Composer | Commits `047ca46e`, `1d3dbbce`; [plan-close-out-handoff.md](./plan-close-out-handoff.md) |
+| Kaizen PDCA | Sponsor witness + MCP | [kaizen-pdca-handoff.md](./kaizen-pdca-handoff.md) |
 
 ## Current status
 
-- **REQ / IMPL status:** `implemented` / `active` via [tied-verify-result.json](./tied-verify-result.json)
-- **Verification gate:** `allowed: true`, `run_id=ntic-build-verify-20261020-r1`, receipt [../gates/verification-2026-10-20T05-57-24-415Z.json](../gates/verification-2026-10-20T05-57-24-415Z.json)
-- **Envelope:** [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json) — `fail_on_error_gaps` validates **ok**; **4 advisory warns** (`finding_unresolved` on inquiry gates, expected under advisory policy)
-- **Close-out:** **Not done** — run `@plan-close-out` for `close_out` gate, envelope sync, CHANGELOG, traceable commit when sponsor wants git land
+- **REQ / IMPL:** Shipped; verification [gates/verification-2026-10-20T05-57-24-415Z.json](../gates/verification-2026-10-20T05-57-24-415Z.json); close-out [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json)
+- **Kaizen (`kaizen-pdca`):** **Complete** — witness baseline [operator-baseline-32602.md](./operator-baseline-32602.md); feedback entry `fb-mvgagoen-gtfuua`; outcome **improved** (`oo-mvgahc5x-zacqtr`) in `tied-project/feedback.yaml`
+- **Operator baseline source:** Sponsor witnessed agent failure; original report [xlate -32602 tied-cli feedback](f4f8b498-ce8f-4339-81da-6550de99375f)
 
 ## Primary paths
 
@@ -25,24 +26,16 @@
 | --- | --- |
 | PLAN | [../PLAN.md](../PLAN.md) |
 | Build tracker | [../checklist-tracker-build.yaml](../checklist-tracker-build.yaml) |
-| CITDP (working) | [../CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml](../CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml) |
-| Re-run verification + envelope | [../run-verification-and-envelope.mjs](../run-verification-and-envelope.mjs) |
+| Close-out gate tracker | [../gate-tracker-close-out.yaml](../gate-tracker-close-out.yaml) |
+| CITDP (canonical) | [../../citdp/CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml](../../citdp/CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml) |
 
-## Product summary (shipped)
+## Product summary
 
-- `normalizeRecordPayload` + `recordInputSchema` in `mcp-server/src/parse-content.ts`
-- Six MCP write tools accept string **or** object in `mcp-server/src/tools/index.ts`
-- `DIAGNOSTIC: TIED_CLI_HINDRANCE` in `tools/bundled-tied-yaml-skill/scripts/tied-mcp-stdio-client.cjs` (+ synced `.cursor/skills/tied-yaml/scripts/`)
-- Tests: `parse-content.test.ts`, `tool-record-input-schema.test.ts`, `tied-cli-large-args.test.cjs`
-- Operator docs updated (README, SKILL, runbook, ai-agent MCP usage)
+- `normalizeRecordPayload` + union record fields on six MCP write tools
+- `DIAGNOSTIC: TIED_CLI_HINDRANCE` on tied-cli (exit codes unchanged)
+- Tests and docs per [test-strategy.md](../test-strategy.md)
 
-## Deferred / open
+## Optional follow-up
 
-1. **Kaizen PDCA:** `tied_feedback_capture_observation` + `tied_feedback_outcome_record` — needs sponsor baseline for original `-32602` / workaround text (noted in tracker).
-2. **CITDP persist:** `persist_policy` — copy working CITDP to `tied-project/citdp/` at close-out if policy requires.
-3. **Git:** No commit in workflow passes; dirty tree may include unrelated edits — preserve hygiene at close-out.
-4. **TIED CLI:** Gate scripts set `TIED_BASE_PATH` to **this repo’s** `tied-project/`; default shell tied-cli may still point at `/Users/fareed/Documents/dev/chatgpt/tied-project` unless env is set (match `.cursor/mcp.json`).
-
-## Next command
-
-`@plan-close-out` linked to [../PLAN.md](../PLAN.md) when ready to commit.
+- Replay `run-close-out-gates.mjs` **without** `--skip-manifest` after local `npm test`
+- Envelope advisory warns (`finding_unresolved`) remain visible under advisory policy
