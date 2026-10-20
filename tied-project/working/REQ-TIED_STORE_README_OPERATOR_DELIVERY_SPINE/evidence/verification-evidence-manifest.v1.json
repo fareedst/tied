@@ -1,0 +1,42 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "readme-operator-spine-close-out-20261019",
+  "commit": "HEAD",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": [
+        "bash",
+        "-lc",
+        "node --import tsx --test mcp-server/src/store-readme-structure.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "citdp-evidence-2",
+      "command": [
+        "bash",
+        "-lc",
+        "tied_validate_consistency"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ],
+  "quality_rows": [],
+  "proof_boundaries": [
+    "documentation_only",
+    "no_runtime_mcp_changes"
+  ],
+  "covered_tokens": [
+    "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE",
+    "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE",
+    "IMPL-TIED_STORE_README_SECTIONS"
+  ]
+}

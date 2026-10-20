@@ -1,5 +1,6 @@
 /**
- * [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING] [IMPL-TIED_STORE_README_SECTIONS]
+ * [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING] [REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE]
+ * [IMPL-TIED_STORE_README_SECTIONS]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -23,6 +24,17 @@ const REQUIRED_SUBSTRINGS = [
   "npm install && npm run build",
   "REQ-TIED_PROCESS_CERTIFICATION_READINESS",
   "tied certification",
+  "### Primary operator delivery path",
+  "### Store workspace build",
+  "tied-install.sh --help",
+  "--migrate-layout",
+  "--refresh",
+] as const;
+
+const NORMATIVE_QUICK_START_H3 = [
+  "### Primary operator delivery path",
+  "### Store workspace build",
+  "### Greenfield",
 ] as const;
 
 const PRESERVED_HEADINGS = [
@@ -61,6 +73,15 @@ describe("store README structure [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING]"
     }
     for (const pattern of FORBIDDEN_CLAIM_PATTERNS) {
       assert.doesNotMatch(text, pattern, `forbidden certification claim: ${pattern}`);
+    }
+    const quickStartEnd = certIdx;
+    const quickStart = text.slice(quickIdx, quickStartEnd);
+    let prev = -1;
+    for (const h3 of NORMATIVE_QUICK_START_H3) {
+      const idx = quickStart.indexOf(h3);
+      assert.ok(idx >= 0, `missing ${h3} in Quick start band`);
+      assert.ok(idx > prev, `H3 order in Quick start: ${h3}`);
+      prev = idx;
     }
   });
 });

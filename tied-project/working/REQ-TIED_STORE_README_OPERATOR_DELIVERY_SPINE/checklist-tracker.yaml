@@ -1,0 +1,68 @@
+depth_tier: minimal
+gate_policy: advisory
+request_token: REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE
+schema_version: checklist-tracker.v1
+name: readme-operator-delivery-spine-build
+note: Tracker for build-plan verification gate (doc-only).
+execution_evidence:
+  request: REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE
+  citdp_path: tied-project/citdp/CITDP-REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml
+  impl_inventory:
+    - IMPL-TIED_STORE_README_SECTIONS
+steps:
+  - disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Documentation-only README spine; no integrated adversarial inquiry.
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE/PLAN.md
+    slug: change-definition
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml
+    slug: risk-assessment
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE/PLAN.md
+    slug: test-strategy
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/store-readme-structure.test.ts
+    slug: unit-test-red
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE/evidence/store-readme-structure-test.stdout.txt
+    slug: unit-test-green
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: README.md
+    slug: sync-tied-data
+    tracking:
+      status: completed
+  - disposition: pending
+    slug: traceable-commit
+    tracking:
+      status: pending
+  - disposition: pending
+    slug: verification-gate
+    tracking:
+      status: in_progress

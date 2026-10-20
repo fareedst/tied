@@ -1,0 +1,31 @@
+REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
+  category: "Documentation"
+  description: "Elevate build-workspace.sh and tied-install.sh as the primary store-to-client operator delivery path in root README with structure-test enforcement."
+  name: "Store README operator delivery spine"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Operators see a single build-then-install spine before greenfield/brownfield tables."
+    problems_solved:
+      - "README scatters workspace build and client install without naming the canonical CLI pair."
+    why: "Follow-on to certifiable onboarding IA after styled build-workspace and tied-install help shipped."
+  satisfaction_criteria:
+    - criterion: "Band 1 H3 Primary operator delivery path lists build, install, MCP confirm with both help commands."
+      id: "SC-README-SPINE"
+      metric: "README.md and store-readme-structure.test.ts"
+    - criterion: "Extended structure test passes with unchanged three-band H2 order."
+      id: "SC-README-STRUCTURE-TEST"
+      metric: "store-readme-structure.test.ts"
+    - criterion: "README documents no-arg tied-install help and refresh or migrate-layout."
+      id: "SC-README-INSTALL-HELP"
+      metric: "README.md"
+    - criterion: "Repository layout lists build-workspace entry points at store root."
+      id: "SC-README-LAYOUT"
+      metric: "README.md"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    implementation:
+      - "IMPL-TIED_STORE_README_SECTIONS"
+    requirements: []

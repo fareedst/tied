@@ -4505,6 +4505,17 @@ REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
   name: "Store README certifiable operator onboarding"
   status: "Active"
   type: "REQ"
+REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
+  cross_references:
+    - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    - "IMPL-TIED_STORE_README_SECTIONS"
+  description: "Store root README primary operator delivery path (build-workspace then tied-install)."
+  metadata:
+    last_updated: "2026-10-19"
+    registered: "2026-10-19"
+  name: "Store README operator delivery spine"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_UNIFIED_TOOLCHAIN:
   category: "Tooling"
   cross_references:

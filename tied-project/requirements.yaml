@@ -3189,6 +3189,18 @@ REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
       - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     implementation:
       - "IMPL-TIED_STORE_README_SECTIONS"
+REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
+  category: "Documentation"
+  description: "Elevate build-workspace.sh and tied-install.sh as the primary store-to-client operator delivery path in root README with structure-test enforcement."
+  detail_file: "requirements/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml"
+  name: "Store README operator delivery spine"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    implementation:
+      - "IMPL-TIED_STORE_README_SECTIONS"
 REQ-TIED_TWO_FOLDER_LAYOUT:
   category: "Infrastructure"
   description: "Two-folder client layout: committed tied-project traceability store and local tied-bundle methodology/docs; no top-level tied/ after install or migrate."

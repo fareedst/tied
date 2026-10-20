@@ -8,15 +8,23 @@
 
 From the TIED repository root on macOS (Unix / Git Bash). Windows and full prerequisites: [Install and use](#install-and-use) below.
 
-### Build TIED MCP and tools
+### Primary operator delivery path
 
-`tied-install` and IDE MCP require a built workspace. From the store root:
+The canonical **store-to-client delivery spine** is two CLI entry points at the store root (styled help on both):
+
+1. **Store workspace build:** `./build-workspace.sh` — details in [Store workspace build](#store-workspace-build) below; `./build-workspace.sh --help`.
+2. **Client install:** `./tied-install.sh /path/to/client` (or linked primary install from the greenfield table); `./tied-install.sh --help` (no arguments prints styled help). Brownfield layout: `--migrate-layout`; methodology refresh: `--refresh`.
+3. **Confirm MCP:** `tied_config_get_base_path` → client `tied-project/` — [Optionally enable the MCP server](#2-optionally-enable-the-mcp-server).
+
+Windows store build and install shims: [Install and use](#install-and-use).
+
+### Store workspace build
+
+From the store root:
 
 ```bash
 ./build-workspace.sh
 ```
-
-Usage and steps: `./build-workspace.sh --help`.
 
 On macOS the default shell is **zsh** — run `./build-workspace.sh` anyway (bash via shebang), or `./build-workspace.zsh`. **Windows:** `.\build-workspace.ps1` or `build-workspace.cmd`.
 
@@ -26,7 +34,7 @@ This produces `mcp-server/dist/index.js`, the umbrella **`tied`** CLI, **`tied a
 
 | Situation | Command (from store root) | Next step |
 | --- | --- | --- |
-| Disposable smoke client | `source scripts/build-commands.sh && test-new-tied-client` | Open the new client in Cursor; enable MCP |
+| Disposable smoke client | `source scripts/build-commands.sh && test-new-tied-client` (requires a **built store** — run `./build-workspace.sh` on the store clone first) | Open the new client in Cursor; enable MCP |
 | External client directory | `./tied-install.sh /path/to/your/project` | [Getting started with a new client project](#getting-started-with-a-new-client-project) |
 | Primary implementation repo (code + `tied-project/` in one tree) | `/path/to/tied-store/tied-install.sh --mode linked --store /abs/path/to/tied-store .` from the **primary** root | [Primary implementation repository](#primary-implementation-repository) |
 
@@ -165,11 +173,11 @@ Notes:
 
 This section is for bootstrapping an **external client directory** from the TIED store checkout. If the client **is** your product repository (code and `tied-project/` in one tree), use [Primary implementation repository](#primary-implementation-repository) instead.
 
-Complete [TIED source repository setup](#tied-source-repository-setup) first. `tied-install` fails without a built MCP server and bootstrap dependencies.
+Complete [TIED source repository setup](#tied-source-repository-setup) first. **Prerequisite — built store workspace:** from the TIED store root, run `./build-workspace.sh` before any client install. `tied-install` fails without `mcp-server/dist/index.js` and bootstrap verification dependencies.
 
 ### 1. Copy the methodology
 
-From a TIED repository clone, run ( `./tied-install.sh` alone prints help):
+From a TIED repository clone, run client install ( `./tied-install.sh` with no arguments prints styled help; use `.` or a path to install):
 
 ```bash
 ./tied-install.sh /path/to/your/project
@@ -350,11 +358,12 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
   --select-order 1
 ```
 
-`scripts/run-feature-batch.sh` delegates to `scripts/run-feature-batch-agentstream.sh` (`tied agentstream` / `@tied/agentstream` after `cd mcp-server && npm run build`). Optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [mcp-server/packages/agentstream/README.md](mcp-server/packages/agentstream/README.md).
+`scripts/run-feature-batch.sh` delegates to `scripts/run-feature-batch-agentstream.sh` (`tied agentstream` / `@tied/agentstream` after `./build-workspace.sh` on the store). Optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [mcp-server/packages/agentstream/README.md](mcp-server/packages/agentstream/README.md).
 
 ## Tooling and scripts
 
-- `tied-install.sh` — bootstrap a project with the inherited TIED layout (`./tied-install.sh` with no args prints help; use `.` or a path to install).
+- `build-workspace.sh` / `build-workspace.ps1` / `build-workspace.cmd` — store workspace build (`mcp-server` + `tools/bootstrap`); `./build-workspace.sh --help`.
+- `tied-install.sh` / `tied-install.cmd` / `tied-install.ps1` — layered **client install** (`./tied-install.sh` with no args prints help; use `.` or a path to install).
 - `bootstrap_without_mcp.sh` — bootstrap and print next steps for non-MCP use.
 - `scripts/run-feature-batch.sh` — delegates to the agentstream batch driver (stable CLI surface; Ruby runner removed Phase **4b**).
 - `scripts/run-feature-batch-agentstream.sh` — `tied agentstream` feature-spec and checklist driver.
@@ -393,7 +402,10 @@ stdd/
 │   ├── bundled-tied-yaml-skill/   # Canonical tied-yaml skill (installed into clients)
 │   └── agentstream/           # Redirect stub only (Go runner removed Phase 4d)
 ├── scripts/                   # Bootstrap, batch, YAML, and analysis utilities
-├── tied-install.sh            # Client bootstrap (linked/full)
+├── build-workspace.sh         # Store workspace build (Unix / Git Bash)
+├── build-workspace.ps1        # Store workspace build (Windows PowerShell)
+├── build-workspace.cmd        # Store workspace build (Windows cmd → ps1)
+├── tied-install.sh            # Client install (linked/full)
 ├── bootstrap_without_mcp.sh   # Non-MCP bootstrap
 ├── AGENTS.md                  # Agent operating guide
 └── CHANGELOG.md               # Methodology version history

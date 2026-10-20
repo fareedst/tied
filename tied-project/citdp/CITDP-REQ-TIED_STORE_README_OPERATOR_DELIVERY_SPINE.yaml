@@ -1,0 +1,71 @@
+CITDP-REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
+  change_definition:
+    current_behavior: README mentions build-workspace and tied-install but lacks a scannable store-to-client delivery spine and structure-test enforcement for help flags.
+    desired_behavior: Band 1 names Primary operator delivery path and Store workspace build H3s; layout and tooling lists lead with build-workspace; client-development-index scenario row.
+    non_goals:
+      - Change bootstrap or MCP runtime behavior
+      - Alter three-band H2 contract from parent README REQ
+    success_criteria:
+      - SC-README-SPINE through SC-README-STRUCTURE-TEST satisfied
+  completion_criteria:
+    verification_gate_notes: store-readme-structure.test.ts green; tied_validate_consistency ok.
+  evidence:
+    commands:
+      - "node --import tsx --test mcp-server/src/store-readme-structure.test.ts"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - documentation_only
+      - no_runtime_mcp_changes
+  impact_analysis:
+    impl_inventory_notes: README.md; store-readme-structure.test.ts; client-development-index.md; tied-methodology.md vocab
+    modules_or_boundaries: Operator documentation only.
+    tied_tokens_affected:
+      - ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE
+      - IMPL-TIED_STORE_README_SECTIONS
+    tied_tokens_new:
+      - REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE
+  leap_feedback:
+    divergences_from_analysis: none
+    record_status: complete
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE
+    gate_policy: advisory
+    profile_depth: minimal
+    recorded_at: "2026-10-19"
+    title: Store README operator delivery spine
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - Band 1 duplication between spine H3 and Store workspace build H3 overwhelms readers.
+        - Operators skip styled help and miss --refresh for linked clients.
+      depth_tier: minimal
+      disconfirming_observations:
+        - Spine uses numbered pointers; detail lives in subsection below.
+        - structure test requires tied-install.sh --help and H3 order under Quick start.
+      eligibility_triggers_matched: []
+      evidence_references:
+        - README.md
+        - mcp-server/src/store-readme-structure.test.ts
+        - tied-project/citdp/CITDP-REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml
+      falsification_questions:
+        - Does Quick start list Primary operator delivery path before Greenfield?
+        - Does README omit build-workspace or tied-install help pointers while claiming a delivery spine?
+      gate_policy: advisory
+      prior_depth_tier: minimal
+      rationale: Documentation-only README spine; no integrated inquiry activation.
+      sub_adversarial_inquiry_pass: not_applicable
+    risks:
+      - description: Band 1 length / duplicate build narrative.
+        id: RISK-README-SPINE-001
+        likelihood: Medium
+        mitigation: Spine as numbered pointers; structure test H3 order.
+        severity: Low
+    summary: Doc-only spine; anchor and help-flag drift.
+  tdd_sequence:
+    summary: RED store-readme-structure.test.ts extensions then README GREEN.
+  test_strategy:
+    red_green:
+      - Extend store-readme-structure.test.ts before README edits; confirm fail then pass.
+    manual:
+      - "./build-workspace.sh --help and ./tied-install.sh --help match README claims"
