@@ -27,4 +27,4 @@
 
 - **REQ wave:** already closed; envelope re-validate `blocking_gap_count=0` (6 advisory warns).
 - **Noise restored:** 14 paths (fixture envelopes, source-graph churn, certification/template styling, unrelated REQ benchmarks/trackers) — see [git-hygiene-receipt-2026-10-20-workspace-sweep.md](./git-hygiene-receipt-2026-10-20-workspace-sweep.md).
-- **Follow-on commit:** `39c2f5ba` — legacy layout hygiene receipt SHA correction + workspace sweep evidence.
+- **Follow-on commit:** `d4fa7d9c` — legacy layout hygiene receipt SHA correction + workspace sweep evidence.
