@@ -18,6 +18,10 @@ Audited staging map against [prompt-composer.md](../../../vocab/prompt-composer.
 - `node --test` prompt-type e2e: **23/23 pass**
 - `tied_validate_consistency`: **ok: true**
 
+## Commit
+
+- **SHA:** `cf2c43b4`
+
 ## Exclude
 
 - `tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/**` not staged

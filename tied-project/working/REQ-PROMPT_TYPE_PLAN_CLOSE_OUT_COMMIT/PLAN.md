@@ -8,7 +8,7 @@ working_slug: REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT
 
 # PLAN — plan-close-out traceable-commit + git hygiene
 
-**Plan status:** Build complete (2026-10-19); **close-out planned** (refine pass 2, 2026-10-20). Next: `@plan-close-out` per Phase 3 below. Handoff: [evidence/build-plan-handoff.md](evidence/build-plan-handoff.md), [evidence/session-handoff.md](evidence/session-handoff.md), [evidence/refine-plan-pass2.md](evidence/refine-plan-pass2.md).
+**Plan status:** **Close-out complete** (2026-10-20) — commit `cf2c43b4`. Handoff: [evidence/session-handoff.md](evidence/session-handoff.md).
 
 ## Session handoff (2026-10-20 — refine pass 2)
 

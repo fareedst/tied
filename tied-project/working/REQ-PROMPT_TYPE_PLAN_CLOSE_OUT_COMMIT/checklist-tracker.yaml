@@ -6,7 +6,7 @@ name: pco-traceable-commit-close-out
 note: Authoritative tracker for @plan-close-out (Phase 3). Refine history remains in checklist-tracker-refine.yaml.
 execution_evidence:
   request: REQ-PROMPT_TYPE_GLOBAL_SKILLS
-  citdp_path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml
+  citdp_path: tied-project/citdp/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml
   completed:
     - change-definition
     - test-strategy
@@ -15,6 +15,8 @@ execution_evidence:
     - unit-test-red
     - unit-test-green
     - sync-tied-stack
+    - verification-gate
+    - traceable-commit
 steps:
   - disposition: not_applicable
     policy: minimal-depth-no-inquiry
@@ -68,11 +70,21 @@ steps:
     slug: sync-tied-stack
     tracking:
       status: completed
-  - disposition: pending
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/evidence/closeout-run-close-out-gates-final.json
+      - kind: file_path
+        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/evidence/verification-evidence-manifest.v1.json
     slug: verification-gate
     tracking:
-      status: pending
-  - disposition: pending
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/evidence/traceable-commit-evidence.md
+      - kind: git_commit
+        path: cf2c43b4
     slug: traceable-commit
     tracking:
-      status: pending
+      status: completed
