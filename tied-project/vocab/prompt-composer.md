@@ -100,7 +100,7 @@ unknown or ambiguous input.
 | global prompt skill | Preferred terms vs synonyms |
 | invocation remainder | Preferred terms vs synonyms |
 | linked plan | Preferred terms vs synonyms |
-| plan-close-out (commit deferred) | Preferred terms vs synonyms |
+| plan-close-out (traceable commit when gates allow) | Preferred terms vs synonyms |
 | prompt envelope | Preferred terms vs synonyms |
 | Prompt Composer | Preferred terms vs synonyms |
 | prompt-shared bundle | Preferred terms vs synonyms |

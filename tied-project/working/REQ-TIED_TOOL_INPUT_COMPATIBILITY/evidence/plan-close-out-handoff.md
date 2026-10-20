@@ -16,4 +16,4 @@
 
 ### Commit
 
-See parent return for SHA or **commit skipped** if sponsor withheld commit step.
+**SHA:** `047ca46e` — scoped REQ wave only; unrelated dirty paths left unstaged.
