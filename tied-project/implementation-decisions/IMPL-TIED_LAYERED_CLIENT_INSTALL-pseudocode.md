@@ -98,4 +98,18 @@ PROCEDURE INSTALL_METHODOLOGY_DOC_AND_TEMPLATE_ALLOWLIST(projectRoot, storeRoot,
   FAILURE_MODES: STORE_DOC_OR_TEMPLATE_MISSING
   DATA_TRANSITION: DOCS_TO_COPY → tied-bundle/docs/; sidecar + METHODOLOGY_TEMPLATES_TO_COPY → tied-bundle/templates/
 END PROCEDURE
+
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
+// How: Operator help when shim invoked without a client target (texture aligned with build-workspace.sh).
+PROCEDURE TIED_INSTALL_HELP_TEXTURE(argv)
+  PRE: argv is process argv slice after node entry
+  POST: if isTiedInstallHelpArgv(argv) then styled help on stdout and exit 0; else install proceeds
+  EFFECTS: dispatch path prints help without CHILD spawn or DIAGNOSTIC line
+  FAILURE_MODES: none (help is success)
+
+  IF isTiedInstallHelpArgv(argv) THEN
+    printTiedInstallHelp()
+    TERMINATE exit 0
+  ENDIF
+END PROCEDURE
 ```

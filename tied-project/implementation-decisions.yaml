@@ -3017,6 +3017,17 @@ IMPL-TIED_VOCABULARY_REFRESH:
   detail_file: "implementation-decisions/IMPL-TIED_VOCABULARY_REFRESH.yaml"
   name: "Vocabulary Ownership Refresh"
   status: "Active"
+IMPL-TIED_WORKSPACE_BUILD_ENTRY:
+  description: "Cross-platform build-workspace.sh/.ps1 store workspace build with styled --help."
+  detail_file: "implementation-decisions/IMPL-TIED_WORKSPACE_BUILD_ENTRY.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_WORKSPACE_BUILD_ENTRY-pseudocode.md"
+  name: "TIED store workspace build entry"
+  related_architecture:
+    - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+  related_requirements:
+    - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+    - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  status: "Active"
 IMPL-TIED_XLATE_SKILL:
   cross_references:
     - "ARCH-TIED_XLATE_SKILL_BOUNDARY"

@@ -5,7 +5,11 @@
  */
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { sayErr, sayOk } from "./lib/console.mjs";
+import { sayErr, sayOk, writeErrorHints } from "./lib/console.mjs";
+import {
+  isTiedInstallHelpArgv,
+  printTiedInstallHelp,
+} from "./lib/tied-install-help.mjs";
 import { parseParityCliFlags } from "./lib/parity-cli-options.mjs";
 import { parseBootstrapToolFlags } from "./lib/client-tool-use-bootstrap.mjs";
 import { installTiedLayers, refreshInstallFromManifest } from "./lib/install-layers-core.mjs";
@@ -18,26 +22,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../..");
 
 function usage() {
-  sayErr(`usage: install-layers.mjs [OPTIONS] [CLIENT_DIR]
-
-Options:
-  --layers db,mcp,skills,methodology   Capability layers (default: all)
-  --harness cursor|claude|both         Default: both
-  --mode linked|full                   Default: linked
-  --store PATH                         TIED store root (default: env TIED_STORE_ROOT, else mcp.json, else TIED_REPO_ROOT)
-  --methodology-bundle live|pinned     Default: live
-  --refresh                            Re-run from tied-bundle/install.json
-  --allow-self-install                 Allow install when project root equals store root
-  --doctor                             No-MCP self-test on installed client
-  --migrate-layout                     Brownfield layout migration (idempotent)
-  --store                              With --migrate-layout --dry-run: print store git mv plan (p6)
-  --dry-run                            With --migrate-layout: plan only
-  --merge-vocab                        Accepted for parity (full methodology only)
-  --methodology-readonly               Unix chmod for full methodology tree
-  --install-methodology-hook           Install client pre-commit hook template
-  Plus parity flags: --skip-parity-gate, --strict-refresh, etc.
-  Plus tool flags: --full-tools, --with-jev, --with-dae, --with-bbce
-`);
+  printTiedInstallHelp();
 }
 
 /**
@@ -145,8 +130,13 @@ export function parseInstallLayersArgs(argv, env = process.env) {
 }
 
 function main() {
+  const argv = process.argv.slice(2);
+  if (isTiedInstallHelpArgv(argv)) {
+    printTiedInstallHelp();
+    return;
+  }
   try {
-    const parsed = parseInstallLayersArgs(process.argv.slice(2));
+    const parsed = parseInstallLayersArgs(argv);
     if (parsed.migrateLayout) {
       const result = migrateLayout(parsed.target, {
         store: parsed.storeMigrate,
@@ -204,9 +194,16 @@ function main() {
     }
   } catch (e) {
     if (e instanceof Error) {
-      sayErr(e.message);
-      if (e.missing) {
-        for (const m of e.missing) sayErr(`  missing: ${m}`);
+      if (e.message.startsWith("Unknown option:")) {
+        writeErrorHints(e.message, [
+          "Run ./tied-install.sh with no arguments for full help.",
+          "Use ./tied-install.sh . to install the current directory.",
+        ]);
+      } else {
+        sayErr(e.message);
+        if (e.missing) {
+          for (const m of e.missing) sayErr(`  missing: ${m}`);
+        }
       }
     }
     process.exit(1);

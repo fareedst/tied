@@ -10,14 +10,17 @@ From the TIED repository root on macOS (Unix / Git Bash). Windows and full prere
 
 ### Build TIED MCP and tools
 
-`tied-install` and IDE MCP require a built workspace:
+`tied-install` and IDE MCP require a built workspace. From the store root:
 
 ```bash
-cd mcp-server && npm install && npm run build
-cd ../tools/bootstrap && npm install
+./build-workspace.sh
 ```
 
-This produces `mcp-server/dist/index.js`, the umbrella **`tied`** CLI, **`tied agentstream`**, and bootstrap verification gates. See [TIED source repository setup](#tied-source-repository-setup) for step details and Windows commands.
+Usage and steps: `./build-workspace.sh --help`.
+
+On macOS the default shell is **zsh** — run `./build-workspace.sh` anyway (bash via shebang), or `./build-workspace.zsh`. **Windows:** `.\build-workspace.ps1` or `build-workspace.cmd`.
+
+This produces `mcp-server/dist/index.js`, the umbrella **`tied`** CLI, **`tied agentstream`**, and bootstrap verification gates. The script prints colored steps and hints for common failures. See [TIED source repository setup](#tied-source-repository-setup) for prerequisites and manual equivalents.
 
 ### Greenfield
 
@@ -115,7 +118,13 @@ These steps prepare **this TIED checkout** (MCP server, npm workspace CLIs, boot
 | Node.js | 18+ | `tied-install`, MCP server, bootstrap verification gates |
 | Go | — | **Not required** (Go `tools/agentstream/` removed Phase **4d**; see [phase4d-go-oracle-freeze.json](tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json)) |
 
-**Unix / Git Bash** (from the TIED repository root):
+**Unix / Git Bash / macOS zsh** (from the TIED repository root):
+
+```bash
+./build-workspace.sh
+```
+
+Manual equivalent (same steps the script runs):
 
 ```bash
 cd mcp-server && npm install && npm run build
@@ -124,7 +133,15 @@ cd ../tools/bootstrap && npm install
 
 The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp`, `@tied/cli`, `@tied/agentstream`, `@tied/bootstrap`, `@tied/yaml-cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and **`tied agentstream`** (TypeScript-only after Phase **4d**). Ruby `tools/agent-stream` was removed in Phase **4b**. Legacy Go emergency reinstall: [phase4c-deprecation-notice.md](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md) and [phase4d-go-oracle-freeze.json](tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
 
-**Windows (`cmd.exe`)** (from the TIED repository root):
+**Windows** (from the TIED repository root):
+
+```powershell
+.\build-workspace.ps1
+```
+
+Or from **`cmd.exe`**: `build-workspace.cmd`
+
+Manual equivalent:
 
 ```cmd
 cd mcp-server && npm install && npm run build && cd ..\tools\bootstrap && npm install && cd ..\..
@@ -152,7 +169,7 @@ Complete [TIED source repository setup](#tied-source-repository-setup) first. `t
 
 ### 1. Copy the methodology
 
-From a TIED repository clone, run:
+From a TIED repository clone, run ( `./tied-install.sh` alone prints help):
 
 ```bash
 ./tied-install.sh /path/to/your/project
@@ -337,7 +354,7 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
 
 ## Tooling and scripts
 
-- `tied-install.sh` — bootstrap a project with the inherited TIED layout.
+- `tied-install.sh` — bootstrap a project with the inherited TIED layout (`./tied-install.sh` with no args prints help; use `.` or a path to install).
 - `bootstrap_without_mcp.sh` — bootstrap and print next steps for non-MCP use.
 - `scripts/run-feature-batch.sh` — delegates to the agentstream batch driver (stable CLI surface; Ruby runner removed Phase **4b**).
 - `scripts/run-feature-batch-agentstream.sh` — `tied agentstream` feature-spec and checklist driver.

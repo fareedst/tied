@@ -19,6 +19,7 @@ const REQUIRED_SUBSTRINGS = [
   "certification-of-workflows.md",
   "client-development-index.md",
   "process-certification-readiness",
+  "build-workspace.sh",
   "npm install && npm run build",
   "REQ-TIED_PROCESS_CERTIFICATION_READINESS",
   "tied certification",

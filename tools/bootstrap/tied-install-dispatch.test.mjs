@@ -42,12 +42,30 @@ describe("tied-install-dispatch [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     assert.equal(captured.opts.stdio, "inherit");
   });
 
+  it("runTiedInstallEntrypoint prints help without spawn when argv empty or --help", () => {
+    let spawnCalls = 0;
+    const spawn = () => {
+      spawnCalls += 1;
+      return { status: 0, error: undefined };
+    };
+    assert.equal(runTiedInstallEntrypoint([], { spawn, fsExists: () => false }), 0);
+    assert.equal(spawnCalls, 0);
+    assert.equal(runTiedInstallEntrypoint(["--help"], { spawn, fsExists: () => false }), 0);
+    assert.equal(spawnCalls, 0);
+  });
+
   it("runTiedInstallEntrypoint returns child status and 1 on spawn error", () => {
     const spawnOk = () => ({ status: 3, error: undefined });
-    assert.equal(runTiedInstallEntrypoint([], { spawn: spawnOk, fsExists: () => false }), 3);
+    assert.equal(
+      runTiedInstallEntrypoint(["."], { spawn: spawnOk, fsExists: () => false }),
+      3,
+    );
 
     const spawnFail = () => ({ status: null, error: new Error("ENOENT") });
-    assert.equal(runTiedInstallEntrypoint([], { spawn: spawnFail, fsExists: () => false }), 1);
+    assert.equal(
+      runTiedInstallEntrypoint(["."], { spawn: spawnFail, fsExists: () => false }),
+      1,
+    );
   });
 
 });

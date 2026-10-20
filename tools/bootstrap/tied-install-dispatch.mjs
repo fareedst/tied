@@ -8,6 +8,10 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { childProcessSpawnOptions } from "./lib/child-process-win.mjs";
+import {
+  isTiedInstallHelpArgv,
+  printTiedInstallHelp,
+} from "./lib/tied-install-help.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(__dirname, "../..");
@@ -41,6 +45,11 @@ export function runTiedInstallEntrypoint(argv, options = {}) {
     fsExists = fs.existsSync.bind(fs),
     repoRoot = REPO_ROOT,
   } = options;
+  if (isTiedInstallHelpArgv(argv)) {
+    printTiedInstallHelp();
+    return 0;
+  }
+
   const { script, argvPrefix } = resolveInstallTarget(repoRoot, fsExists);
   console.error(`DIAGNOSTIC: tied-install dispatch -> ${script}`);
   const result = spawn(

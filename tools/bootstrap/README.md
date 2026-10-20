@@ -5,13 +5,14 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 ## Prerequisites
 
 - Node.js >= 18 on PATH
-- Built MCP server: `cd mcp-server && npm install && npm run build`
+- Built workspace: `./build-workspace.sh` (Unix / Git Bash / macOS zsh) or `.\build-workspace.ps1` (Windows). Manual: `cd mcp-server && npm install && npm run build`, then `cd ../tools/bootstrap && npm install`.
 
 ## Entry points
 
 | Entry | Platform | Behavior |
 |-------|----------|----------|
-| `tied-install.sh` / `tied-install.cmd` / `tied-install.ps1` | Unix / CMD / PowerShell | **Layered install** (default `--mode linked`); `tied-install-dispatch.mjs` → `install-layers.mjs` |
+| `build-workspace.sh` / `.ps1` / `.cmd` | Unix / Windows | Store workspace build; `./build-workspace.sh --help` for usage (texture matches `tied-install` help) |
+| `tied-install.sh` / `tied-install.cmd` / `tied-install.ps1` | Unix / CMD / PowerShell | **Layered install** (default `--mode linked`); no args → styled help; pass `.` or a client path to install; `tied-install-dispatch.mjs` → `install-layers.mjs` |
 | `tools/bootstrap/tied-install-dispatch.mjs` | All | Install dispatch ([RUN_TIED_INSTALL_ENTRYPOINT]) |
 | `tools/bootstrap/install-layers.mjs` | All | Layer engine: `--layers`, `--harness`, `--mode linked\|full`, `--doctor`, `--migrate-layout` |
 

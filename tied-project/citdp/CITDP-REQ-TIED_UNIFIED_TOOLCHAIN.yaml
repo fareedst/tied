@@ -245,3 +245,13 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN:
         role: "Cursor hook bridge (append-only)"
       - path: "working/** research qualification scripts"
         role: "Research pilots; out of unified suite scope"
+  operator_slices:
+    - date: "2026-10-19"
+      id: "SLICE-BUILD-WORKSPACE-HELP"
+      summary: "build-workspace.sh/.ps1 sole -h/--help prints styled help (build-workspace-help.mjs); SC-UNIFIED-BUILD-WORKSPACE-HELP"
+      tokens_new:
+        - "IMPL-TIED_WORKSPACE_BUILD_ENTRY"
+      evidence:
+        - "tools/bootstrap/build-workspace-help.test.mjs"
+        - "tools/bootstrap/build-workspace-sh-help.test.mjs"
+      plan: "tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN-build-workspace-cli-help.md"

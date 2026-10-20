@@ -177,7 +177,7 @@ tasd () {
     echo_exec \
      git init
     echo_exec \
-     eval "$tied_path/tied-install.sh"
+     eval "$tied_path/tied-install.sh" .
     echo_exec \
      git add -A
     echo_exec \

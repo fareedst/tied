@@ -1,0 +1,66 @@
+copy_hygiene: "Close-out tracker for store CLI help slice (build-workspace --help + tied-install no-args help)."
+execution_evidence:
+  completed:
+    - run_id: "store-cli-help-closeout-20261019"
+      slug: "gate-pseudocode-validation"
+    - run_id: "store-cli-help-closeout-20261019"
+      slug: "sub-adversarial-inquiry-pass"
+    - run_id: "store-cli-help-closeout-20261019"
+      slug: "verification-gate"
+metadata:
+  plan:
+    - "tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/PLAN-tied-install-cli-help.md"
+    - "tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/PLAN-build-workspace-cli-help.md"
+  run_id: "store-cli-help-closeout-20261019"
+profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+request: "REQ-TIED_UNIFIED_TOOLCHAIN"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "PLAN-build-workspace-cli-help.md"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "CITDP-store-cli-help-closeout.yaml"
+    slug: "change-definition"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/build-workspace-help.test.mjs"
+      - "tools/bootstrap/tied-install-help.test.mjs"
+    slug: "test-strategy"
+  - disposition: "completed"
+    evidence_refs:
+      - "depth_tier minimal per slice CITDP"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_LAYERED_CLIENT_INSTALL-pseudocode.md"
+      - "tied-project/implementation-decisions/IMPL-TIED_WORKSPACE_BUILD_ENTRY-pseudocode.md"
+      - "tied_validate_consistency ok:true"
+    slug: "gate-pseudocode-validation"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Operator CLI help slice; no integrated inquiry activation required."
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    evidence_refs:
+      - "15/15 bootstrap help tests pass (2026-10-19)"
+    slug: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "REQ/IMPL/CITDP/semantic-tokens updated"
+    slug: "sync-tied-stack"
+  - disposition: "completed"
+    evidence_refs:
+      - "CITDP operator_slices SLICE-BUILD-WORKSPACE-HELP"
+    slug: "persist-citdp-record"
+  - disposition: "completed"
+    evidence_refs:
+      - "N/A — build-workspace shims and working PLANs are intentional track paths"
+    slug: "gitignore-close-out-hygiene"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/plan-close-out-proposed-commit.md"
+    slug: "traceable-commit"

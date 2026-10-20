@@ -1,0 +1,14 @@
+IMPL-TIED_WORKSPACE_BUILD_ENTRY:
+  implementation_approach:
+    details:
+      - "Root build-workspace.sh / .ps1 / .cmd / .zsh install and build mcp-server workspace plus tools/bootstrap"
+      - "Sole -h or --help delegates to build-workspace-help-cli.mjs (shared console.mjs texture)"
+    summary: "Cross-platform store workspace build entry with styled --help."
+  name: "TIED store workspace build entry"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_UNIFIED_TOOLCHAIN"
+    requirements:
+      - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"

@@ -1,0 +1,50 @@
+CITDP-REQ-TIED_UNIFIED_TOOLCHAIN-STORE-CLI-HELP:
+  change_definition:
+    current_behavior: "build-workspace entry points had no --help; tied-install with zero args implicitly installed cwd."
+    desired_behavior: "build-workspace sole -h/--help prints styled help; tied-install no-args prints help; install requires explicit path or '.'."
+    success_criteria:
+      - "SC-LCI-CLI-HELP-NO-ARGS tests pass"
+      - "SC-UNIFIED-BUILD-WORKSPACE-HELP tests pass"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      run_id: "store-cli-help-closeout-20261019"
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "verification"
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/build-workspace-help.test.mjs tools/bootstrap/build-workspace-sh-help.test.mjs tools/bootstrap/tied-install-help.test.mjs tools/bootstrap/tied-install-dispatch.test.mjs tools/bootstrap/install-layers-help.test.mjs"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+      - "IMPL-TIED_WORKSPACE_BUILD_ENTRY"
+    requirements:
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+  record_identity:
+    change_request_id: "REQ-TIED_UNIFIED_TOOLCHAIN"
+    gate_policy: "advisory"
+    recorded_at: "2026-10-19"
+    title: "Store CLI help (build-workspace --help + tied-install no-args help)"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Empty argv build-workspace could be confused with tied-install no-args help"
+        - "Help guard after npm prechecks would run install on --help"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Shell integration test asserts no build Step banner on --help"
+      evidence_references:
+        - "tools/bootstrap/build-workspace-sh-help.test.mjs"
+        - "tools/bootstrap/install-layers-help.test.mjs"
+      falsification_questions:
+        - "Can tied-install still install without an explicit client path?"
+        - "Does --help still invoke npm when NODE is present?"
+      gate_policy: "advisory"
+      inquiry_policy: "advisory"
+      rationale: "Operator CLI contract only; no auth, network, or persistence change."
+    depth_tier: "minimal"
+    gate_policy: "advisory"

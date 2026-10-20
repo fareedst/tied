@@ -27,6 +27,9 @@ REQ-TIED_UNIFIED_TOOLCHAIN:
       - "REQ-GOAGENT-LIB-MODULE"
     supersedes: []
   satisfaction_criteria:
+    - criterion: "build-workspace entry points accept sole -h or --help and print styled operator help without running npm."
+      id: "SC-UNIFIED-BUILD-WORKSPACE-HELP"
+      metric: "tools/bootstrap/build-workspace-help.test.mjs + build-workspace-sh-help.test.mjs"
     - criterion: "Minimum suite membership includes mcp-server, agentstream, bootstrap/copy_files, tied-cli facade, yaml lint/canonicalize"
       id: "SC-UNIFIED-SUITE-MEMBERSHIP"
       metric: "CITDP tool_suite_inventory tier_1 and tier_2"
@@ -39,3 +42,4 @@ REQ-TIED_UNIFIED_TOOLCHAIN:
       - "ARCH-TIED_UNIFIED_TOOLCHAIN"
     implementation:
       - "IMPL-TIED_UNIFIED_TOOLCHAIN"
+      - "IMPL-TIED_WORKSPACE_BUILD_ENTRY"

@@ -121,8 +121,13 @@ build_mcp() {
 }
 alias build-mcp=build_mcp
 
+build_workspace() {
+  echo_exec "${_BUILD_COMMANDS_REPO_ROOT}/build-workspace.sh"
+}
+alias build-workspace=build_workspace
+
 build_all() {
-  build_mcp
+  build_workspace
 }
 alias build-all=build_all
 
@@ -551,9 +556,10 @@ EOF
 _how_build() {
   cat <<'EOF'
 Build
-  build-mcp                  npm install + full workspace build in mcp-server/
+  build-workspace            ./build-workspace.sh (mcp-server + tools/bootstrap)
+  build-mcp                  npm install + build in mcp-server/ only
   build-agentstream          npm -w build @tied/agentstream + @tied/cli (incremental)
-  build-all                  same as build-mcp (root + all packages/*)
+  build-all                  same as build-workspace
 EOF
 }
 
@@ -641,7 +647,7 @@ _how_install_matrix() {
   cat <<'EOF'
 Layered install resource matrix (committed vs gitignored)
   how install-matrix             this summary + path to working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md
-  tied-install.sh [OPTS] DIR     default --mode linked (stubs + MCP bundle env)
+  tied-install.sh [OPTS] DIR     no args → help; default --mode linked (stubs + MCP bundle env)
   tied-install.cmd / tied-install.ps1   same dispatch on native Windows (CMD / PowerShell)
   test-new-tied-client           disposable factory via tied-install linked
   tied-install --migrate-layout  brownfield layout migration (idempotent)
@@ -696,7 +702,7 @@ EOF
 _how_drivers() {
   cat <<'EOF'
 Related repo scripts (not wrapped here)
-  ./tied-install.sh [OPTS] TARGET   bootstrap TIED into a client project (linked default)
+  ./tied-install.sh [OPTS] TARGET   no args → help; bootstrap TIED (linked default; use . for cwd)
   tied-install.cmd / tied-install.ps1   Windows layered install dispatch
   node tools/bootstrap/install-layers.mjs   direct cross-platform install CLI
   scripts/lint_yaml.sh FILE    canonicalize/lint one or more YAML paths
