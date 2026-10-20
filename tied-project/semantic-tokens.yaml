@@ -637,7 +637,7 @@ ARCH-PROMPT_TYPE_SUBAGENT:
   cross_references:
     - "IMPL-PROMPT_TYPE_SUBAGENT"
     - "REQ-PROMPT_TYPE_SUBAGENT"
-  description: "Project-scoped Cursor Task wrapper around the canonical plan-new-feature skill."
+  description: "Project-scoped Cursor Task wrapper around the canonical add-feature skill."
   metadata:
     last_updated: "2026-08-12"
     registered: "2026-08-12"
@@ -1980,7 +1980,7 @@ IMPL-PROMPT_TYPE_SUBAGENT:
   cross_references:
     - "ARCH-PROMPT_TYPE_SUBAGENT"
     - "REQ-PROMPT_TYPE_SUBAGENT"
-  description: "Static contract and clean-context workflow contract for the writable plan-new-feature Task subagent."
+  description: "Static contract and clean-context workflow contract for the writable add-feature Task subagent."
   metadata:
     last_updated: "2026-08-12"
     registered: "2026-08-12"
@@ -3938,7 +3938,7 @@ REQ-PROMPT_TYPE_SUBAGENT:
   cross_references:
     - "ARCH-PROMPT_TYPE_SUBAGENT"
     - "IMPL-PROMPT_TYPE_SUBAGENT"
-  description: "Explicit-only writable Cursor Task subagent for the plan-new-feature prompt type."
+  description: "Explicit-only writable Cursor Task subagent for the add-feature prompt type."
   metadata:
     last_updated: "2026-08-12"
     registered: "2026-08-12"

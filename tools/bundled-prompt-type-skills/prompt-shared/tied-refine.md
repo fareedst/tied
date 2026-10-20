@@ -2,7 +2,7 @@
 
 **Variants:** Default gate is `plan`. For **debug**, use gate "test or code" (see debug skill). For **leap-ad-hoc**, use the ad-hoc variant below.
 
-## Default (plan-new-feature, refine-plan, use-skill)
+## Default (add-feature, refine-plan, use-skill)
 
 ## Refine (Touchpoint 1 -- RESOLVE)
 

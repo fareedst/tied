@@ -851,7 +851,7 @@ Active
 
 **Tokens:** `[REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]`, `[REQ-REQUEST_EVIDENCE_ENVELOPE]`
 
-**When:** Integrated or strict_candidate depth at `verification` and `close_out`; `traceable-commit`; `plan-close-out`.
+**When:** Integrated or strict_candidate depth at `verification` and `close_out`; `traceable-commit`; `close-out`.
 
 **Procedure:**
 
@@ -896,13 +896,13 @@ Active
 
 Advisory close-out review of ephemeral local-dev artifacts against `.gitignore`.
 
-**When:** plan-close-out (`tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md` step 5) and checklist slug `gitignore-close-out-hygiene` (after `persist-citdp-record`, before `traceable-commit`).
+**When:** close-out (`tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md` step 5) and checklist slug `gitignore-close-out-hygiene` (after `persist-citdp-record`, before `traceable-commit`).
 
-**Inputs:** Caller git context (plan-close-out) or read-only `git status` / `git diff --name-only` (checklist); current `.gitignore` comment blocks as pattern catalog.
+**Inputs:** Caller git context (close-out) or read-only `git status` / `git diff --name-only` (checklist); current `.gitignore` comment blocks as pattern catalog.
 
 **Procedure:** Classify paths as ignore / track / delete; propose or apply unstaged grouped patterns; use `!` negation for trackable aggregates; output handoff bullet per `tools/bundled-prompt-type-skills/prompt-shared/gitignore-close-out-hygiene.md`.
 
-**Constraints:** plan-close-out forbids agent-initiated git commands. No `git add`/`git commit` at this step. Not a blocking checklist gate.
+**Constraints:** close-out forbids agent-initiated git commands. No `git add`/`git commit` at this step. Not a blocking checklist gate.
 
 **Cross-refs:** [PROC-AGENT_REQ_CHECKLIST], [PROC-COMMIT_MESSAGES] (staging at traceable-commit).
 

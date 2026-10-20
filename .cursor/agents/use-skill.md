@@ -1,6 +1,6 @@
 ---
 name: use-skill
-description: Use when the caller explicitly selects use-skill or delegates importing and applying skills with full TIED Refine, Plan, and Implement gates. Do not use for prompt-type-router, question, non-tied-plan, or plan-new-feature.
+description: Use when the caller explicitly selects use-skill or delegates importing and applying skills with full TIED Refine, Plan, and Implement gates. Do not use for prompt-type-router, question, non-tied-plan, or add-feature.
 model: inherit
 readonly: false
 is_background: false

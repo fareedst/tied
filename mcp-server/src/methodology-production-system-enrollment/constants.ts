@@ -18,10 +18,10 @@ export const ENROLLMENT_REQUIRED_SURFACE_REF = [
 
 /** Leaf prompt types (excludes prompt-type-router). [REQ-PROMPT_TYPE_GLOBAL_SKILLS] */
 export const PROMPT_TYPE_LEAF_IDS = [
-  "plan-new-feature",
+  "add-feature",
   "refine-plan",
   "build-plan",
-  "plan-close-out",
+  "close-out",
   "debug",
   "question",
   "use-skill",

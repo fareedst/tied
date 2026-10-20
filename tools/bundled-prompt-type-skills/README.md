@@ -6,7 +6,7 @@ Cursor skills used by TIED projects.
 ## Inventory
 
 - 13 explicit-only leaf skills:
-  `plan-new-feature`, `refine-plan`, `build-plan`, `plan-close-out`, `debug`,
+  `add-feature`, `refine-plan`, `build-plan`, `close-out`, `debug`,
   `question`, `use-skill`, `ammend-commit`, `non-tied-plan`, `non-tied-debug`,
   `leap-ad-hoc`, `leap-diff-promote`, and `other`.
 - One explicit-only `prompt-type-router` skill.
@@ -19,7 +19,7 @@ development, but clients must consume the version committed here.
 
 `tied-install.sh` installs the managed skill directories and `prompt-shared/`
 under a client project's `.cursor/skills/`. Prompt-type Task wrappers under
-`.cursor/agents/` (including `plan-refine-build`) are TIED-source development
+`.cursor/agents/` (including `add-refine-build`) are TIED-source development
 artifacts only and are not copied into client projects. The installer refreshes
 only managed prompt-type skill paths; unrelated skills and `.cursor/mcp.json`
 remain client-owned.

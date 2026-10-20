@@ -1608,7 +1608,7 @@ ARCH-PROMPT_TYPE_SUBAGENT:
   cross_references:
     - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
     - "REQ-PROMPT_TYPE_SUBAGENT"
-  description: "Project-scoped Cursor Task wrappers delegate explicitly to each canonical leaf prompt-type skill; plan-refine-build sequences three leaf Task children using invocation remainder then linked plans."
+  description: "Project-scoped Cursor Task wrappers delegate explicitly to each canonical leaf prompt-type skill; add-refine-build sequences three leaf Task children using invocation remainder then linked plans."
   detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml"
   implementation_approach:
     details:

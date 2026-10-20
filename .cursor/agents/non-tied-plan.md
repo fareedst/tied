@@ -1,6 +1,6 @@
 ---
 name: non-tied-plan
-description: Use when the caller explicitly selects non-tied-plan or delegates ordinary development inside a TIED client without TIED synchronization writes. Do not use for plan-new-feature, build-plan, non-tied-debug, or refine-plan.
+description: Use when the caller explicitly selects non-tied-plan or delegates ordinary development inside a TIED client without TIED synchronization writes. Do not use for add-feature, build-plan, non-tied-debug, or refine-plan.
 model: inherit
 readonly: false
 is_background: false

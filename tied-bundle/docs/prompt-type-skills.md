@@ -45,8 +45,8 @@ contract validation. Each wrapper is a foreground Task subagent that delegates
 to its canonical leaf skill while making clean-context gates, forbidden
 operations, and parent handoff evidence explicit. Implementing and close-out
 wrappers are writable; `question` and `other` are readonly. A fixed-sequence
-orchestrator at `.cursor/agents/plan-refine-build.md` Task-launches
-`plan-new-feature`, then `refine-plan`, then `build-plan`, and does not
+orchestrator at `.cursor/agents/add-refine-build.md` Task-launches
+`add-feature`, then `refine-plan`, then `build-plan`, and does not
 implement the feature in its own context.
 
 `tied-install.sh` installs only the canonical prompt-type **skills** into client
@@ -81,7 +81,7 @@ recorded for this skill implementation.
 - **prompt envelope** — optional `prompt-type:` and `git-condition:` fields on
   a generated prompt; not required for Cursor skill or agent invocation.
 - **invocation remainder** — the text after the named skill or agent. For
-  `plan-new-feature` this is the requirement.
+  `add-feature` this is the requirement.
 - **linked plan** — the attached or in-message plan document. Primary payload
   for `refine-plan` and `build-plan`.
 - **prompt-shared bundle** — one-level-deep Markdown references under
@@ -184,10 +184,10 @@ TIED-source development artifacts and are not installed by `tied-install.sh`.
 
 | Skill | Workflow |
 | --- | --- |
-| `plan-new-feature` | Full TIED Refine → CITDP Plan → Implement |
+| `add-feature` | Full TIED Refine → CITDP Plan → Implement |
 | `refine-plan` | Improve a linked or in-message plan |
 | `build-plan` | Execute a linked or in-message plan; omits Refine |
-| `plan-close-out` | TIED/LEAP close-out with CHANGELOG, git hygiene preview, traceable commit when gates allow |
+| `close-out` | TIED/LEAP close-out with CHANGELOG, git hygiene preview, traceable commit when gates allow |
 | `debug` | Refine → Capture Failure → Plan → Implement |
 | `question` | Answer the invocation remainder; no TIED blocks |
 | `use-skill` | Import/apply skills with full TIED gates |
@@ -257,7 +257,7 @@ All skills must leave caller-supplied Git state untouched unless the caller
 explicitly authorizes a required operation. The skills do not run Git commands,
 inspect the repository automatically, or access `pbpaste`/`pbcopy`.
 
-**Exception — `plan-close-out`:** After unified **close_out** allows, this leaf
+**Exception — `close-out`:** After unified **close_out** allows, this leaf
 may run read-only git, **`tied_git_hygiene`** preview, and **traceable-commit**
 (`git add` / `git commit`) per `traceable-commit-close-out.md`. It must not
 commit when gates or envelope blocking checks fail, and must not **`git push`**

@@ -1,0 +1,16 @@
+feat(prompt-type): rename add-feature, add-refine-build, close-out
+
+Breaking invoke renames for the prompt-type product story: plan-new-feature →
+add-feature, plan-refine-build → add-refine-build (sequencer), plan-close-out →
+close-out. Updates bundled skills, Task agents, bootstrap manifest, Jev
+taxonomy, enrollment constants, e2e tests, and REQ/ARCH/IMPL + vocab LEAP
+mirrors. No backward-compat stubs.
+
+Tokens: REQ-PROMPT_TYPE_GLOBAL_SKILLS, REQ-PROMPT_TYPE_SUBAGENT,
+ARCH-PROMPT_TYPE_GLOBAL_SKILLS, ARCH-PROMPT_TYPE_SUBAGENT,
+IMPL-PROMPT_TYPE_GLOBAL_SKILLS, IMPL-PROMPT_TYPE_SUBAGENT
+
+Tests: mcp-server prompt-type e2e (skills + subagent) pass; tied_validate_consistency ok.
+
+Completion signals: machine close-out not_run (minimal tooling wave);
+process contract satisfied via sponsor close-out; adherence ledger not_run.

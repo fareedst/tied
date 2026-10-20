@@ -270,7 +270,7 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
   status: "Implemented"
 REQ-PROMPT_TYPE_SUBAGENT:
   category: "Tooling"
-  description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not Task wrappers."
+  description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a add-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not Task wrappers."
   detail_file: "requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml"
   metadata:
     created:

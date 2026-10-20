@@ -1,15 +1,15 @@
 ---
-name: plan-close-out
-description: "Staged LEAP close-out with CHANGELOG, default git hygiene preview, and traceable commit when unified close_out allows. Use when the caller names plan-close-out, closes out staged TIED work, or finishes a REQ with commit. Do not use for ammend-commit, leap-diff-promote, or planning new features."
+name: close-out
+description: "Staged LEAP close-out with CHANGELOG, default git hygiene preview, and traceable commit when unified close_out allows. Use when the caller names close-out, closes out staged TIED work, or finishes a REQ with commit. Do not use for ammend-commit, leap-diff-promote, or planning new features."
 disable-model-invocation: true
 ---
 
-# plan-close-out
+# close-out
 
-Explicit invocation only (`@plan-close-out` or `prompt-type: plan-close-out`).
+Explicit invocation only (`@close-out` or `prompt-type: close-out`).
 
 This skill is the workflow source of truth for client prompt-type invocation.
-`tied-install.sh` installs it under `.cursor/skills/plan-close-out/`. Task wrappers under
+`tied-install.sh` installs it under `.cursor/skills/close-out/`. Task wrappers under
 `.cursor/agents/` remain TIED-source development artifacts only.
 [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
 [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
@@ -17,7 +17,7 @@ This skill is the workflow source of truth for client prompt-type invocation.
 
 ## Inputs
 
-- **Optional prompt envelope:** `prompt-type: plan-close-out`, `git-condition:`
+- **Optional prompt envelope:** `prompt-type: close-out`, `git-condition:`
 - **Git context:** caller-pasted [git_preamble_plan_close_out](../prompt-shared/git-context-templates.md) (or close-out variant when describing prep-only state)
 - **Invocation remainder:** optional issue text after the skill or agent name.
 
@@ -51,7 +51,7 @@ is a hard stop. Return the three completion signals per
 [completion-signals-handoff.md](../prompt-shared/completion-signals-handoff.md).
 
 6. **When close_out allows** — MCP **`tied_git_hygiene`** with `context_mode: plan_close_out`, `apply: false` (default); write `evidence/git-hygiene-receipt-{YYYY-MM-DD}.md`. Guarded `apply: true` only with sponsor exact `allowed_paths` ([REQ-TIED_GIT_HYGIENE]).
-7. **Prologue (plan-close-out)** — [tied-close-out-process.md](../prompt-shared/tied-close-out-process.md): CHANGELOG entry, then [traceable-commit-close-out.md](../prompt-shared/traceable-commit-close-out.md).
+7. **Prologue (close-out)** — [tied-close-out-process.md](../prompt-shared/tied-close-out-process.md): CHANGELOG entry, then [traceable-commit-close-out.md](../prompt-shared/traceable-commit-close-out.md).
 8. **When close_out blocked** — Skip steps 6–7 commit portions; handoff lists blockers and **commit skipped** rationale.
 
 ## Gates

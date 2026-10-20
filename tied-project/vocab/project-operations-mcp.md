@@ -22,7 +22,7 @@
 | `/handoff` | Explicit skill for **chat continuity** between sessions; installed to `.cursor/skills/handoff`. |
 | **handoff skill** | Bundled skill at `tools/bundled-session-handoff-skill/SKILL.md`; invoke name **`handoff`** (not `session-handoff`). |
 | **`session-handoff.md`** | Evidence log under `tied-project/working/{REQ}/evidence/` — **artifact filename**, not the skill install name. |
-| `/clear-workspace` | Orchestrator toward commit-ready workspace: git hygiene, `plan-close-out`, `traceable-commit` prep as merited. |
+| `/clear-workspace` | Orchestrator toward commit-ready workspace: git hygiene, `close-out`, `traceable-commit` prep as merited. |
 | **clear-workspace skill** | Bundled skill at `tools/bundled-clear-workspace-skill/SKILL.md`; routing norm in `prompt-shared/clear-workspace-routing.md`. |
 
 ## Boundaries

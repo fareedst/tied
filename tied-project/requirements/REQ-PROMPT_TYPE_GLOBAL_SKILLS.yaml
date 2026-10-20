@@ -7,8 +7,8 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
       date: "2026-08-12"
     last_updated:
       author: "AI Agent"
-      date: "2026-10-13"
-      reason: "YAML-safe skill frontmatter close-out"
+      date: "2026-10-19"
+      reason: "Rename greenfield leaf to add-feature"
   name: "Global Prompt-Type Skills"
   priority: "P1"
   rationale:
@@ -27,13 +27,14 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     supersedes: []
   satisfaction_criteria:
     - criterion: "A TIED client bootstrap installs the same managed bundle under .cursor/skills/ without modifying unrelated skills or existing MCP configuration."
-    - criterion: "Close-out workflows include advisory gitignore hygiene per [PROC-GITIGNORE_CLOSE_OUT]: plan-close-out shared process step and checklist slug gitignore-close-out-hygiene review ephemeral artifacts against .gitignore, apply or propose unstaged patterns using repository comment-block conventions, and record handoff evidence of patterns proposed/applied or explicit N/A when clean."
-    - criterion: "plan-close-out runs default tied_git_hygiene preview (plan_close_out) and executes checklist-aligned traceable-commit when unified close_out allows; skips commit when blocked; leap-diff-promote and ammend-commit remain no-commit."
+    - criterion: "close-out runs default tied_git_hygiene preview (plan_close_out) and executes checklist-aligned traceable-commit when unified close_out allows; skips commit when blocked; leap-diff-promote and ammend-commit remain no-commit."
+    - criterion: "Close-out workflows include advisory gitignore hygiene per [PROC-GITIGNORE_CLOSE_OUT]: close-out shared process step and checklist slug gitignore-close-out-hygiene review ephemeral artifacts against .gitignore, apply or propose unstaged patterns using repository comment-block conventions, and record handoff evidence of patterns proposed/applied or explicit N/A when clean."
     - criterion: "Every canonical and installed prompt-type SKILL.md frontmatter parses as valid YAML (mapping with string description and disable-model-invocation true); description scalars that contain colons are double-quoted so Cursor and strict loaders accept linked stubs and full copies."
     - criterion: "Every installed skill is explicit-only, preserves its workflow gates, names invocation remainder and linked plan where applicable, and resolves its shared references."
-    - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. plan-new-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
+    - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. add-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
     - criterion: "The bundle and bootstrap behavior are covered by deterministic static and integration tests."
     - criterion: "The canonical TIED repository contains all 13 prompt-type leaf skills, one prompt-type router, and all direct shared references."
+    - criterion: "The greenfield TIED leaf skill invoke name is add-feature (full Refine, CITDP Plan, Implement); the LEAP close-out leaf is close-out."
   status: "Implemented"
   traceability:
     architecture:

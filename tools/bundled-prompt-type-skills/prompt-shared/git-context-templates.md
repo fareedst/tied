@@ -28,7 +28,7 @@ Git: consider changes in git diff or stage.
 
 ## git_preamble_plan_close_out
 
-For **`@plan-close-out`** only. Describes starting staged/diff state; **does not** forbid commit at the end of the skill when unified close_out allows.
+For **`@close-out`** only. Describes starting staged/diff state; **does not** forbid commit at the end of the skill when unified close_out allows.
 
 ### staged-clean
 

@@ -17,7 +17,7 @@ Follow **Rules**, run **Checklist** steps from the **Tracker** copy, author/repa
    missing, malformed, stale, or unjustified evidence blocks progression.
 6. Before handoff or close-out claims, when `depth_tier` is `integrated` or
    `strict_candidate`, require verification gate `allowed: true` and document
-   that `plan-close-out` must call `tied_checklist_gate_validate` with
+   that `close-out` must call `tied_checklist_gate_validate` with
    `phase: close_out` and activation (or a valid close-out inquiry waiver). If
    the gate returns `allowed: false`, label the work **incomplete** — do not
    claim success.

@@ -1,13 +1,13 @@
 ---
-name: plan-new-feature
-description: Use when the caller explicitly selects plan-new-feature or delegates a new TIED-tracked feature with full Refine, CITDP Plan, and Implement gates. Do not use for refine-plan, build-plan, debug, non-tied-plan, question, or other minimal workflows.
+name: add-feature
+description: Use when the caller explicitly selects add-feature or delegates a new TIED-tracked feature with full Refine, CITDP Plan, and Implement gates. Do not use for refine-plan, build-plan, debug, non-tied-plan, question, or other minimal workflows.
 model: inherit
 readonly: false
 is_background: false
 ---
 
 <!-- [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] -->
-# Plan-New-Feature Task Subagent
+# Add-Feature Task Subagent
 
 You are an isolated Cursor Task subagent. You start with no parent context
 other than the Task prompt, so treat the invocation remainder and any linked
@@ -17,13 +17,13 @@ from `git-condition:` text.
 ## Source of truth
 
 Read and follow the canonical skill at
-`tools/bundled-prompt-type-skills/plan-new-feature/SKILL.md`, including its
+`tools/bundled-prompt-type-skills/add-feature/SKILL.md`, including its
 direct `prompt-shared` references. The skill owns the workflow wording and
 section order. This agent prompt supplies the clean-context, permission,
-validation, and parent-handoff contract; do not rely on `@plan-new-feature` as
+validation, and parent-handoff contract; do not rely on `@add-feature` as
 an include.
 
-<!-- [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical plan-new-feature skill. -->
+<!-- [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical add-feature skill. -->
 ## Bootstrap and boundaries
 
 1. Start every response with `Observing AI principles!`.
@@ -35,7 +35,7 @@ an include.
    the `tied/` directory of the repository being changed. Use the TIED YAML
    MCP or `.cursor/skills/tied-yaml/scripts/tied-cli.sh` for structured TIED
    data; the IMPL pseudo-code sidecar is the documented plain-text exception.
-4. TIED applicability is explicit because this is `plan-new-feature`; do not
+4. TIED applicability is explicit because this is `add-feature`; do not
    infer it from the presence of a `tied/` directory.
 5. Treat caller-provided Git context as informational only. Do not inspect the
    repository merely because `git-condition:` is present.

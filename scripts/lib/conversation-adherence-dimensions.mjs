@@ -22,7 +22,7 @@ const CALL_SYNC_RE = /\bCALL\s+sub-close-out-evidence-sync\b/giu;
 const CALL_EXEC_SYNC_RE =
   /sub-close-out-evidence-sync|run-close-out-gates\.mjs|request_evidence_envelope_validate/giu;
 const BUILD_PLAN_RE = /\bbuild-plan\b|\bprompt-type:\s*build-plan\b/giu;
-const CLOSEOUT_SKILL_RE = /\bplan-close-out\b|\bleap-diff-promote\b|\bammend-commit\b/giu;
+const CLOSEOUT_SKILL_RE = /\bclose-out\b|\bplan-close-out\b|\bleap-diff-promote\b|\bammend-commit\b/giu;
 const TEST_STDOUT_RE = /\b(npm test|go test|node --test|tests pass|test suite)\b/giu;
 const MANIFEST_PATH_RE = /verification-evidence-manifest\.v1\.json/giu;
 const MINIMAL_DEPTH_RE = /depth_tier:\s*minimal\b/giu;

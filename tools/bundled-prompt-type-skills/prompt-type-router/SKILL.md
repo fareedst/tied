@@ -12,10 +12,10 @@ disable-model-invocation: true
 
 | prompt-type | Class |
 | --- | --- |
-| `plan-new-feature` | TIED full |
+| `add-feature` | TIED full |
 | `refine-plan` | TIED full |
 | `build-plan` | TIED execute |
-| `plan-close-out` | Git + TIED |
+| `close-out` | Git + TIED |
 | `debug` | TIED debug |
 | `question` | minimal |
 | `use-skill` | TIED full |
@@ -49,7 +49,7 @@ disable-model-invocation: true
 | --- | --- |
 | `refine-plan` then `build-plan` | Improve the linked plan → execute build-plan on the result |
 | `debug` only | Single leaf; Capture Failure before Plan |
-| "fix bug and ship" (ambiguous) | Ask: `debug` + `plan-close-out`? or `non-tied-debug`? |
+| "fix bug and ship" (ambiguous) | Ask: `debug` + `close-out`? or `non-tied-debug`? |
 
 ## Leaf skill locations
 

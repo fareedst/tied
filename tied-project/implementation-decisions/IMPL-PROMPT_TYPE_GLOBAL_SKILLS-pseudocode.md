@@ -79,6 +79,6 @@ procedure VALIDATE_PROMPT_TYPE_SKILL_CONTRACT(root):
   CHECK every direct ../prompt-shared link resolves
   CHECK every SKILL.md is below 500 lines
   CHECK no SKILL.md uses a triple-colon payload delimiter
-  CHECK plan-new-feature names invocation remainder and does not treat a linked plan as the request
+  CHECK add-feature names invocation remainder and does not treat a linked plan as the request
   CHECK refine-plan and build-plan name linked plan and stop when none is present
   RETURN pass or diagnostics

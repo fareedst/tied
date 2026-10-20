@@ -1813,7 +1813,7 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
   status: "Implemented"
 REQ-PROMPT_TYPE_SUBAGENT:
   category: "Tooling"
-  description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus a plan-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not Task wrappers."
+  description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus an add-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not Task wrappers."
   detail_file: "requirements/REQ-PROMPT_TYPE_SUBAGENT.yaml"
   metadata:
     created:
@@ -2375,7 +2375,7 @@ REQ-TIED_CLEAR_WORKSPACE_SKILL:
       - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
       - "REQ-TIED_GIT_HYGIENE"
-  description: "Orchestrator skill for git hygiene, plan-close-out, and traceable-commit prep as merited."
+  description: "Orchestrator skill for git hygiene, close-out, and traceable-commit prep as merited."
   detail_file: "requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
   name: "Clear-workspace skill"
   satisfaction_criteria:

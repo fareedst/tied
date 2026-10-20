@@ -26,7 +26,7 @@ Output schema: `conversation-adherence-report.v1.yaml` with `sessions_scored`, a
 | `call_mention_without_execution` | Assistant prose mentions `CALL sub-close-out-evidence-sync` without matching tool/script |
 | `completion_verb_without_artifacts` | Completion verbs without envelope + manifest on disk at session end |
 | `depth_tier_avoidance` | `depth_tier: minimal` when integrated-scope triggers appear in transcript |
-| `build_without_closeout_skill` | `build-plan` prompt-type without `plan-close-out` / promote / amend arc |
+| `build_without_closeout_skill` | `build-plan` prompt-type without `close-out` / promote / amend arc |
 | `dual_write_turn_shape` | Tracker `execution_evidence.completed` shape without disposition sync |
 | `stdout_without_manifest` | Test stdout quoted without manifest path mention |
 

@@ -1,6 +1,6 @@
 ---
 name: refine-plan
-description: Use when the caller explicitly selects refine-plan or delegates improvement of an in-document TIED plan with Refine, CITDP Plan, and Implement gates. Do not use for build-plan, plan-new-feature, non-tied-plan, debug, or question.
+description: Use when the caller explicitly selects refine-plan or delegates improvement of an in-document TIED plan with Refine, CITDP Plan, and Implement gates. Do not use for build-plan, add-feature, non-tied-plan, debug, or question.
 model: inherit
 readonly: false
 is_background: false

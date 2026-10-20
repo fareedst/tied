@@ -97,7 +97,7 @@ Use this matrix to pick the **entry surface** and **state layer** without confla
 
 | Work kind | Primary entry | Skill / tool surface | Canonical state |
 | --- | --- | --- | --- |
-| **REQ-scoped change** (new requirement, behavior change, bug tied to `[REQ-*]`) | **Prompt Composer** global skills | **Cursor:** `.cursor/skills/` (installed by `tied-install.sh`) · **Claude Code:** `.claude/skills/` (same bundles, copy-default) — e.g. `/plan-new-feature`, `/refine-plan`, `/build-plan`, `/plan-close-out` | Project **`tied/`** YAML + per-request **`working/{REQ-TOKEN}/`** (linked plan, CITDP, Authoritative Tracker) |
+| **REQ-scoped change** (new requirement, behavior change, bug tied to `[REQ-*]`) | **Prompt Composer** global skills | **Cursor:** `.cursor/skills/` (installed by `tied-install.sh`) · **Claude Code:** `.claude/skills/` (same bundles, copy-default) — e.g. `/add-feature`, `/refine-plan`, `/build-plan`, `/close-out` | Project **`tied/`** YAML + per-request **`working/{REQ-TOKEN}/`** (linked plan, CITDP, Authoritative Tracker) |
 | **FEAT lifecycle** (staged product feature, canonical FEAT views) | **Feature orchestrator** | `tied init` / `tied.sh feature …` and feature-orchestration MCP tools; skills under `.cursor/skills/` or `.claude/skills/` as needed for YAML edits | **`tied/features/`** + feature MCP workflow (not a substitute for REQ checklist when semantics live in `[REQ-*]`) |
 | **Mutate project TIED YAML** (either harness) | **TIED YAML MCP** or **`tied-cli.sh`** | Same server and CLI on both harnesses; confirm **`tied_config_get_base_path`** points at this repo’s **`tied/`** before writes | Index + detail YAML under **`tied/`** (methodology under **`tied-bundle/`** is read-only) |
 

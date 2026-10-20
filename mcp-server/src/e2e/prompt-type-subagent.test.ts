@@ -12,10 +12,10 @@ import yaml from "js-yaml";
 const repoRoot = path.resolve(process.cwd(), "..");
 
 const LEAF_PROMPT_TYPES = [
-  "plan-new-feature",
+  "add-feature",
   "refine-plan",
   "build-plan",
-  "plan-close-out",
+  "close-out",
   "debug",
   "question",
   "use-skill",
@@ -33,7 +33,7 @@ const READONLY_LEAVES = new Set<LeafPromptType>(["question", "other"]);
 const MINIMAL_LEAVES = new Set<LeafPromptType>(["question", "other"]);
 const NON_TIED_LEAVES = new Set<LeafPromptType>(["non-tied-plan", "non-tied-debug"]);
 const CLOSE_OUT_LEAVES = new Set<LeafPromptType>([
-  "plan-close-out",
+  "close-out",
   "ammend-commit",
   "leap-diff-promote",
 ]);
@@ -42,7 +42,7 @@ const CLOSE_OUT_NO_COMMIT_LEAVES = new Set<LeafPromptType>([
   "leap-diff-promote",
 ]);
 const REFINE_PLAN_IMPLEMENT_LEAVES = new Set<LeafPromptType>([
-  "plan-new-feature",
+  "add-feature",
   "refine-plan",
   "debug",
   "use-skill",
@@ -108,11 +108,11 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
 
   it("preserves workflow order and blocking gates [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     // [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify each agent file is an explicit-only Task wrapper around its canonical leaf skill.
-    const planNewFeature = readAgent("plan-new-feature").body;
+    const planNewFeature = readAgent("add-feature").body;
     const refine = planNewFeature.indexOf("1. **Refine**");
     const plan = planNewFeature.indexOf("2. **Plan**");
     const implement = planNewFeature.indexOf("3. **Implement**");
-    assert.ok(refine >= 0 && refine < plan && plan < implement, "plan-new-feature must be Refine -> Plan -> Implement");
+    assert.ok(refine >= 0 && refine < plan && plan < implement, "add-feature must be Refine -> Plan -> Implement");
     assert.match(planNewFeature, /do not start plan until ambiguity is cleared/i);
     assert.match(planNewFeature, /do not start code until .*IMPL pseudo-code.*test strategy/i);
     assert.match(planNewFeature, /tied_checklist_gate_validate/);
@@ -168,25 +168,25 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       const body = readAgent(promptType).body;
       assert.match(body, /Do not commit/i);
     }
-    const planCloseOutBody = readAgent("plan-close-out").body;
+    const planCloseOutBody = readAgent("close-out").body;
     assert.doesNotMatch(
       planCloseOutBody,
       /LEAP close-out must complete\.\s*\*\*Do not commit\.\*\*/i,
-      "plan-close-out must not use legacy do-not-commit close-out contract",
+      "close-out must not use legacy do-not-commit close-out contract",
     );
     assert.match(planCloseOutBody, /traceable-commit-close-out\.md/i);
     assert.match(planCloseOutBody, /tied_git_hygiene/i);
     assert.match(planCloseOutBody, /commit SHA|commit skipped/i);
     assert.match(planCloseOutBody, /phase:\s*close_out/i);
     assert.match(
-      readAgent("plan-close-out").body,
+      readAgent("close-out").body,
       /gitignore close-out hygiene|\[PROC-GITIGNORE_CLOSE_OUT\]/i,
-      "plan-close-out must mention gitignore close-out hygiene"
+      "close-out must mention gitignore close-out hygiene"
     );
     assert.match(
-      readAgent("plan-close-out").body,
+      readAgent("close-out").body,
       /allowed:\s*false/i,
-      "plan-close-out must fail handoff when close_out gate disallowed"
+      "close-out must fail handoff when close_out gate disallowed"
     );
   });
 
@@ -214,9 +214,9 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       assert.match(body, /resolved terms/i);
     }
 
-    const planNewFeature = readAgent("plan-new-feature").body;
+    const planNewFeature = readAgent("add-feature").body;
     for (const handoffField of ["resolved terms", "Tracker", "CITDP", "tests", "validation", "remaining risks"]) {
-      assert.match(planNewFeature, new RegExp(handoffField, "i"), `plan-new-feature parent handoff should include ${handoffField}`);
+      assert.match(planNewFeature, new RegExp(handoffField, "i"), `add-feature parent handoff should include ${handoffField}`);
     }
 
     for (const promptType of CLOSE_OUT_LEAVES) {
@@ -231,7 +231,7 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       assert.match(body, /git add/);
       assert.match(body, /git commit/);
     }
-    assert.match(readAgent("plan-close-out").body, /traceable-commit-close-out\.md/i);
+    assert.match(readAgent("close-out").body, /traceable-commit-close-out\.md/i);
     assert.match(readAgent("build-plan").body, /completion signals/i, "build-plan must document completion signals in handoff");
     assert.match(readAgent("ammend-commit").body, /git commit --amend/);
 
@@ -250,27 +250,27 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.match(readAgent("leap-ad-hoc").body, /automatic `git diff`/);
   });
 
-  it("sequences plan-new-feature, refine-plan, then build-plan as Task children [REQ-PROMPT_TYPE_SUBAGENT]", () => {
+  it("sequences add-feature, refine-plan, then build-plan as Task children [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     // [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the sequencer Task-launches the three leaf wrappers in order and stops on a failed gate.
-    const content = fs.readFileSync(path.join(repoRoot, ".cursor", "agents", "plan-refine-build.md"), "utf8");
+    const content = fs.readFileSync(path.join(repoRoot, ".cursor", "agents", "add-refine-build.md"), "utf8");
     const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-    assert.ok(match, "plan-refine-build agent must contain YAML frontmatter followed by a prompt body");
+    assert.ok(match, "add-refine-build agent must contain YAML frontmatter followed by a prompt body");
     const frontmatter = yaml.load(match[1]) as Record<string, unknown>;
     const body = match[2];
-    assert.equal(frontmatter.name, "plan-refine-build");
+    assert.equal(frontmatter.name, "add-refine-build");
     assert.equal(frontmatter.readonly, false);
     assert.equal(frontmatter.is_background, false);
-    assert.match(String(frontmatter.description), /Use when .*plan-refine-build/i);
+    assert.match(String(frontmatter.description), /Use when .*add-refine-build/i);
     assert.match(String(frontmatter.description), /Do not use for /i);
     assert.doesNotMatch(String(frontmatter.description), /\b(?:use proactively|always use)\b/i);
-    const planNewFeature = body.indexOf("plan-new-feature");
+    const planNewFeature = body.indexOf("add-feature");
     const refinePlan = body.indexOf("refine-plan");
     const buildPlan = body.indexOf("build-plan");
     assert.ok(
       planNewFeature >= 0 && planNewFeature < refinePlan && refinePlan < buildPlan,
-      "sequence must be plan-new-feature -> refine-plan -> build-plan"
+      "sequence must be add-feature -> refine-plan -> build-plan"
     );
-    assert.match(body, /subagent_type: plan-new-feature/);
+    assert.match(body, /subagent_type: add-feature/);
     assert.match(body, /subagent_type: refine-plan/);
     assert.match(body, /subagent_type: build-plan/);
     assert.match(body, /run_in_background.*false/);

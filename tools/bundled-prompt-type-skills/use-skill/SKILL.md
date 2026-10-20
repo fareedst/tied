@@ -35,7 +35,7 @@ invocation remainder in this order:
 
 ## Gates
 
-Same as plan-new-feature.
+Same as add-feature.
 
 ## Forbidden
 

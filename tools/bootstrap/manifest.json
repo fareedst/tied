@@ -17,10 +17,10 @@
     "semantic-tokens.yaml"
   ],
   "PROMPT_TYPE_SKILL_DIRS": [
-    "plan-new-feature",
+    "add-feature",
     "refine-plan",
     "build-plan",
-    "plan-close-out",
+    "close-out",
     "debug",
     "question",
     "use-skill",

@@ -1,6 +1,6 @@
 ---
 name: build-plan
-description: Use when the caller explicitly selects build-plan or delegates execution of an approved TIED linked plan with guiding vocab, CITDP build Plan, and Implement gates. Do not use for refine-plan, plan-new-feature, non-tied-plan, debug, or question.
+description: Use when the caller explicitly selects build-plan or delegates execution of an approved TIED linked plan with guiding vocab, CITDP build Plan, and Implement gates. Do not use for refine-plan, add-feature, non-tied-plan, debug, or question.
 model: inherit
 readonly: false
 is_background: false

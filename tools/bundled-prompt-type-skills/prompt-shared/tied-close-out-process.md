@@ -1,4 +1,4 @@
-# Process and prologue (plan-close-out / leap-diff-promote / ammend-commit)
+# Process and prologue (close-out / leap-diff-promote / ammend-commit)
 
 ## Process
 
@@ -6,7 +6,7 @@
 2. TIED: Update related IMPL pseudocode (block token comments); mirror reasoning in staged code and tests. Guides: `pseudocode-writing-and-validation.md`, `pseudocode-validation-checklist.yaml`.
 3. LEAP: Propagate IMPL -> ARCH -> REQ -> Vocab for any drift (`LEAP.md`). Changes to IMPL, ARCH, REQ must be accounted for in an existing CITDP plan or one is created and executed.
 4. Tests: Confirm unit, composition, and E2E coverage for the staged work.
-5. Gitignore close-out hygiene — [gitignore-close-out-hygiene.md](gitignore-close-out-hygiene.md) ([PROC-GITIGNORE_CLOSE_OUT]): review ephemeral untracked artifacts; apply unstaged `.gitignore` additions or propose patterns; record N/A when clean. **plan-close-out** may use read-only git during the traceable-commit phase per the git policy matrix; **leap-diff-promote** / **ammend-commit** use caller git context only.
+5. Gitignore close-out hygiene — [gitignore-close-out-hygiene.md](gitignore-close-out-hygiene.md) ([PROC-GITIGNORE_CLOSE_OUT]): review ephemeral untracked artifacts; apply unstaged `.gitignore` additions or propose patterns; record N/A when clean. **close-out** may use read-only git during the traceable-commit phase per the git policy matrix; **leap-diff-promote** / **ammend-commit** use caller git context only.
 6. **CALL `sub-close-out-evidence-sync`** (Wave 5): sync dispositions from
    `execution_evidence.completed`, collect verification manifest when tests ran,
    reconcile with `include_process_grade: true`, then rebuild/validate envelope.
@@ -37,7 +37,7 @@
 7. `./CHANGELOG.md`: brief summary.
 8. Propose a commit message per `commit-guidelines.md` for the ammended commit. **Do not commit.**
 
-## Prologue (plan-close-out)
+## Prologue (close-out)
 
 7. `./CHANGELOG.md`: brief summary.
 8. **Traceable commit** — follow [traceable-commit-close-out.md](traceable-commit-close-out.md) when unified close_out allows; otherwise skip commit and document blockers.

@@ -1,13 +1,13 @@
 ---
-name: plan-close-out
-description: Use when the caller explicitly selects plan-close-out or delegates staged TIED LEAP close-out with CHANGELOG, git hygiene preview, and traceable commit when gates allow. Do not use for ammend-commit, leap-diff-promote, plan-new-feature, or build-plan.
+name: close-out
+description: Use when the caller explicitly selects close-out or delegates staged TIED LEAP close-out with CHANGELOG, git hygiene preview, and traceable commit when gates allow. Do not use for ammend-commit, leap-diff-promote, add-feature, or build-plan.
 model: inherit
 readonly: false
 is_background: false
 ---
 
 <!-- [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] -->
-# Plan-Close-Out Task Subagent
+# Close-Out Task Subagent
 
 You are an isolated Cursor Task subagent. You start with no parent context
 other than the Task prompt, so treat the invocation remainder and any linked
@@ -17,13 +17,13 @@ from `git-condition:` text.
 ## Source of truth
 
 Read and follow the canonical skill at
-`tools/bundled-prompt-type-skills/plan-close-out/SKILL.md`, including its
+`tools/bundled-prompt-type-skills/close-out/SKILL.md`, including its
 direct `prompt-shared` references. The skill owns the workflow wording and
 section order. This agent prompt supplies the clean-context, permission,
-validation, and parent-handoff contract; do not rely on `@plan-close-out` as
+validation, and parent-handoff contract; do not rely on `@close-out` as
 an include.
 
-<!-- [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical plan-close-out skill. -->
+<!-- [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical close-out skill. -->
 ## Bootstrap and boundaries
 
 1. Start every response with `Observing AI principles!`.
@@ -35,7 +35,7 @@ an include.
    the `tied/` directory of the repository being changed. Use the TIED YAML
    MCP or `.cursor/skills/tied-yaml/scripts/tied-cli.sh` for structured TIED
    data; the IMPL pseudo-code sidecar is the documented plain-text exception.
-4. TIED applicability is explicit because this is `plan-close-out`; do not
+4. TIED applicability is explicit because this is `close-out`; do not
    infer it from the presence of a `tied/` directory.
 5. Apply `git_preamble_plan_close_out` from `tools/bundled-prompt-type-skills/prompt-shared/git-context-templates.md` when the caller supplies git context.
 
@@ -46,7 +46,7 @@ Process the request in this order:
 1. Apply the caller-supplied git preamble (`git_preamble_plan_close_out` preferred).
 2. **Process** — follow canonical `tied-close-out-process.md` (steps 1–6).
 3. **Close_out gate** — `tied_checklist_gate_validate` with `phase: close_out`, final Tracker and CITDP; envelope blocking per skill. If the gate returns `allowed: false`, label the work **incomplete** in the parent handoff.
-4. **When allowed** — MCP `tied_git_hygiene` (`context_mode: plan_close_out`, `apply: false`); write hygiene receipt; **Prologue (plan-close-out)** CHANGELOG + `traceable-commit-close-out.md`.
+4. **When allowed** — MCP `tied_git_hygiene` (`context_mode: plan_close_out`, `apply: false`); write hygiene receipt; **Prologue (close-out)** CHANGELOG + `traceable-commit-close-out.md`.
 5. **When blocked** — skip commit; handoff **commit skipped** with blocker evidence.
 6. Apply optional invocation remainder.
 

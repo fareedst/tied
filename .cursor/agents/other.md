@@ -1,6 +1,6 @@
 ---
 name: other
-description: Use when the caller explicitly selects other or delegates a custom prefix without CITDP, Tracker, or Implement blocks. Do not use for question, plan-new-feature, debug, or any full TIED workflow.
+description: Use when the caller explicitly selects other or delegates a custom prefix without CITDP, Tracker, or Implement blocks. Do not use for question, add-feature, debug, or any full TIED workflow.
 model: inherit
 readonly: true
 is_background: false

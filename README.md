@@ -38,7 +38,7 @@ This produces `mcp-server/dist/index.js`, the umbrella **`tied`** CLI, **`tied a
 | External client directory | `./tied-install.sh /path/to/your/project` | [Getting started with a new client project](#getting-started-with-a-new-client-project) |
 | Primary implementation repo (code + `tied-project/` in one tree) | `/path/to/tied-store/tied-install.sh --mode linked --store /abs/path/to/tied-store .` from the **primary** root | [Primary implementation repository](#primary-implementation-repository) |
 
-After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`, then run REQ-scoped work with Prompt Composer skills (for example `/plan-new-feature`). Optional trial prompts: [catalog-greenfield plan-new-feature](docs/demos/catalog-greenfield-plan-new-feature-prompts.md).
+After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`, then run REQ-scoped work with Prompt Composer skills (for example `/add-feature`). Optional trial prompts: [catalog-greenfield add-feature](docs/demos/catalog-greenfield-add-feature-prompts.md).
 
 **Store-as-primary note:** This git repository is both the store and a TIED client (`tied-project/`). To linked-install into **other** primary repos, use a **separate store clone** as `--store` (see [Methodology development layout](#methodology-development-layout)).
 
@@ -101,7 +101,7 @@ CLI (same surface as MCP): `tied certification spec-validate`, `conformance-eval
 
 ### REQ-scoped prompt types
 
-Installed under `.cursor/skills/` (and `.claude/skills/` when bootstrapped): for example **`plan-new-feature`**, **`refine-plan`**, **`build-plan`**, **`plan-close-out`**. **[AGENTS.md](AGENTS.md)** remains authoritative. Prompt skills do not replace checklist gates or integrated adversarial inquiry when those apply.
+Installed under `.cursor/skills/` (and `.claude/skills/` when bootstrapped): for example **`add-feature`**, **`refine-plan`**, **`build-plan`**, **`close-out`**. **[AGENTS.md](AGENTS.md)** remains authoritative. Prompt skills do not replace checklist gates or integrated adversarial inquiry when those apply.
 
 ### Honest limits
 

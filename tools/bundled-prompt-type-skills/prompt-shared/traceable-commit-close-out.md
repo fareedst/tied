@@ -1,4 +1,4 @@
-# Traceable commit (plan-close-out)
+# Traceable commit (close-out)
 
 **Checklist slug:** `traceable-commit` ([PROC-AGENT_REQ_CHECKLIST])  
 **Tokens:** [REQ-PROMPT_TYPE_GLOBAL_SKILLS], [REQ-TIED_GIT_HYGIENE]
@@ -20,7 +20,7 @@ Run this block **only after** unified **close_out** allows progression (`tied_ch
 3. **Stage** — `git add` only paths in the staging map (scoped to the REQ wave; exclude unrelated workspace drift).
 4. **Commit message** — Per [PROC-COMMIT_MESSAGES](../../../tied-bundle/docs/processes.md): header `type(scope): subject` (≤50 chars); body with motivation, REQ/ARCH/IMPL tokens, three **completion signals** summary; footer tokens touched. Include proof-boundary / open-finding counts when CITDP requires.
 5. **Commit** — `git commit` with the prepared message. **Do not push** unless the sponsor explicitly asks in the same thread.
-6. **Post-commit** — Record commit SHA in `plan-close-out-handoff.md` (or parent return). Update Tracker **`traceable-commit`** disposition to `completed` with typed `evidence_refs` (dual-write with `execution_evidence.completed` in the same pass).
+6. **Post-commit** — Record commit SHA in `close-out-handoff.md` (or parent return). Update Tracker **`traceable-commit`** disposition to `completed` with typed `evidence_refs` (dual-write with `execution_evidence.completed` in the same pass).
 
 ## Advisory (non-blocking alone)
 

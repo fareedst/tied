@@ -3,10 +3,10 @@
  */
 
 export const LEAF_PROMPT_TYPES = [
-  "plan-new-feature",
+  "add-feature",
   "refine-plan",
   "build-plan",
-  "plan-close-out",
+  "close-out",
   "debug",
   "question",
   "use-skill",
@@ -23,10 +23,10 @@ export type LeafPromptType = (typeof LEAF_PROMPT_TYPES)[number];
 export type TiedApplicability = "full" | "client-local" | "minimal";
 
 export const PROMPT_TYPE_HINTS: Record<LeafPromptType, string> = {
-  "plan-new-feature": "New REQ/ARCH/IMPL feature with full TIED stack",
+  "add-feature": "New REQ/ARCH/IMPL feature with full TIED stack",
   "refine-plan": "Improve a linked or in-message plan",
   "build-plan": "Execute an approved linked plan",
-  "plan-close-out": "LEAP close-out; traceable commit when gates allow",
+  "close-out": "LEAP close-out; traceable commit when gates allow",
   debug: "TIED-tracked bug with gates",
   question: "Minimal answer-only workflow",
   "use-skill": "Import and run a named skill with TIED gates",

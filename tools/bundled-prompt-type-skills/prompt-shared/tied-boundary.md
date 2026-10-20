@@ -2,10 +2,10 @@
 
 TIED tracking applies **only** when the caller explicitly selects a TIED workflow prompt type:
 
-- `plan-new-feature`
+- `add-feature`
 - `refine-plan`
 - `build-plan`
-- `plan-close-out`
+- `close-out`
 - `debug`
 - `use-skill`
 - `ammend-commit`

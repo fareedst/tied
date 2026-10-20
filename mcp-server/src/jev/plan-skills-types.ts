@@ -3,10 +3,10 @@
  */
 
 export const PLAN_SKILL_VALUES = [
-  "plan-new-feature",
+  "add-feature",
   "refine-plan",
   "build-plan",
-  "plan-close-out",
+  "close-out",
 ] as const;
 
 export type PlanSkillName = (typeof PLAN_SKILL_VALUES)[number];

@@ -1,9 +1,9 @@
 # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
-# Summary: Validate the explicit-only Task wrappers for all 13 leaf prompt types, plus the plan-refine-build sequence orchestrator, and their clean-context workflow contracts.
+# Summary: Validate the explicit-only Task wrappers for all 13 leaf prompt types, plus the add-refine-build sequence orchestrator, and their clean-context workflow contracts.
 
 Contract:
   INPUT: agent_markdown_by_leaf: map where length(agent_markdown_by_leaf) > 0; sequence_agent_markdown; canonical_skill_markdown_by_leaf; test_contract
-  PRE: each of the 13 leaf agent files and plan-refine-build.md are readable; matching canonical skills exist; test_contract names required clauses
+  PRE: each of the 13 leaf agent files and add-refine-build.md are readable; matching canonical skills exist; test_contract names required clauses
   OUTPUT: pass or contract_violation diagnostics
   POST: pass means each leaf wrapper and the sequence orchestrator have frontmatter, delegation, type-specific gates, safety boundary, and parent handoff contract
   FAILURE_MODES: missing_agent; invalid_frontmatter; invalid_activation; missing_skill_reference; missing_gate; missing_safety_boundary; missing_return_contract; invalid_sequence
@@ -43,19 +43,19 @@ procedure VALIDATE_PROMPT_TYPE_SUBAGENT_CONTRACT(agent_markdown, canonical_skill
 procedure DISPATCH_PROMPT_TYPE_SEQUENCE(request_envelope):
   # [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the sequencer Task-launches the three leaf wrappers in order and stops on a failed gate.
   Contract:
-    INPUT: request_envelope: object where length(request_envelope) > 0; plan-new-feature child; refine-plan child; build-plan child
+    INPUT: request_envelope: object where length(request_envelope) > 0; add-feature child; refine-plan child; build-plan child
     PRE: request_envelope includes the invocation remainder; the three leaf Task wrappers exist
     OUTPUT: aggregated parent_handoff or incomplete evidence
-    POST: children ran in order plan-new-feature then refine-plan then build-plan; later Implement gates did not start after a failed earlier Plan gate
+    POST: children ran in order add-feature then refine-plan then build-plan; later Implement gates did not start after a failed earlier Plan gate
     FAILURE_MODES: child_incomplete; parallel_dispatch; skipped_step; orchestrator_implemented_feature
     DATA: child_handoffs; sequence_order; merge_gates
-    DATA_TRANSITION: invocation remainder -> plan-new-feature handoff -> refine-plan linked plan -> build-plan linked plan -> aggregated parent_handoff
+    DATA_TRANSITION: invocation remainder -> add-feature handoff -> refine-plan linked plan -> build-plan linked plan -> aggregated parent_handoff
     EFFECTS: IO
     TERMINATION: total
-  CHECK sequence agent name equals plan-refine-build
+  CHECK sequence agent name equals add-refine-build
   CHECK sequence is foreground and writable
   FORBID implementing the feature in the orchestrator context
-  LAUNCH Task subagent_type plan-new-feature with the invocation remainder
+  LAUNCH Task subagent_type add-feature with the invocation remainder
   IF child incomplete: RETURN incomplete
   LAUNCH Task subagent_type refine-plan with the prior plan as the linked plan
   IF child incomplete: RETURN incomplete
@@ -76,8 +76,8 @@ procedure REPORT_PROMPT_TYPE_SUBAGENT_RESULT(execution_evidence):
     TERMINATION: total
   INCLUDE resolved terms when sponsor wording was restated
   INCLUDE remaining risks, questions, or blocked gates
-  IF the work is the plan-refine-build sequence:
-    INCLUDE ordered child results for plan-new-feature, refine-plan, and build-plan
+  IF the work is the add-refine-build sequence:
+    INCLUDE ordered child results for add-feature, refine-plan, and build-plan
   IF the leaf performs TIED implementation or close-out:
     INCLUDE Tracker or CITDP status when the leaf uses them
     INCLUDE tests and validation results

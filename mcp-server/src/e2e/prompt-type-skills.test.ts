@@ -12,10 +12,10 @@ import { execFileSync } from "node:child_process";
 import yaml from "js-yaml";
 
 const LEAF_SKILLS = [
-  "plan-new-feature",
+  "add-feature",
   "refine-plan",
   "build-plan",
-  "plan-close-out",
+  "close-out",
   "debug",
   "question",
   "use-skill",
@@ -146,9 +146,9 @@ describe("prompt-type skill bundle", () => {
       assert.equal(fs.readFileSync(customSkill, "utf8"), "client-only skill\n");
       assert.equal(fs.readFileSync(mcpConfig, "utf8"), mcpBefore);
       assert.equal(
-        fs.readFileSync(path.join(clientSkillRoot, "plan-new-feature", "SKILL.md"), "utf8"),
+        fs.readFileSync(path.join(clientSkillRoot, "add-feature", "SKILL.md"), "utf8"),
         fs.readFileSync(
-          path.join(repoRoot, "tools", "bundled-prompt-type-skills", "plan-new-feature", "SKILL.md"),
+          path.join(repoRoot, "tools", "bundled-prompt-type-skills", "add-feature", "SKILL.md"),
           "utf8"
         )
       );
@@ -191,7 +191,7 @@ describe("prompt-type skill bundle", () => {
 
   it("preserves prompt-type workflow-specific contracts [REQ-PROMPT_TYPE_GLOBAL_SKILLS]", () => {
     const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
-    const planNewFeature = fs.readFileSync(path.join(bundleRoot, "plan-new-feature", "SKILL.md"), "utf8");
+    const planNewFeature = fs.readFileSync(path.join(bundleRoot, "add-feature", "SKILL.md"), "utf8");
     const buildPlan = fs.readFileSync(path.join(bundleRoot, "build-plan", "SKILL.md"), "utf8");
     const refinePlan = fs.readFileSync(path.join(bundleRoot, "refine-plan", "SKILL.md"), "utf8");
     const debug = fs.readFileSync(path.join(bundleRoot, "debug", "SKILL.md"), "utf8");
@@ -218,14 +218,14 @@ describe("prompt-type skill bundle", () => {
 
   it("links Jev plan-skills adjunct on four main plan skills only [REQ-TIED_JEV_DECISION_COPROCESSOR]", () => {
     const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
-    const wired = ["plan-new-feature", "refine-plan", "build-plan", "plan-close-out"] as const;
+    const wired = ["add-feature", "refine-plan", "build-plan", "close-out"] as const;
     for (const skill of wired) {
       const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
       assert.match(content, /jev-plan-skills-adjunct\.md/);
     }
     const debug = fs.readFileSync(path.join(bundleRoot, "debug", "SKILL.md"), "utf8");
     assert.doesNotMatch(debug, /jev-plan-skills-adjunct\.md/);
-    const planCloseOut = fs.readFileSync(path.join(bundleRoot, "plan-close-out", "SKILL.md"), "utf8");
+    const planCloseOut = fs.readFileSync(path.join(bundleRoot, "close-out", "SKILL.md"), "utf8");
     assert.match(planCloseOut, /close_out/);
     assert.match(planCloseOut, /jev-plan-skills-adjunct\.md/);
     assert.match(planCloseOut, /traceable-commit-close-out\.md/);
@@ -245,7 +245,7 @@ describe("prompt-type skill bundle", () => {
     const planCitdp = fs.readFileSync(path.join(bundleRoot, "prompt-shared", "tied-plan-citdp.md"), "utf8");
     assert.match(planCitdp, /methodology-surface-enrollment-advisory\.md/);
 
-    for (const skill of ["plan-new-feature", "build-plan"] as const) {
+    for (const skill of ["add-feature", "build-plan"] as const) {
       const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
       assert.match(content, /methodology-surface-enrollment-advisory\.md/);
     }

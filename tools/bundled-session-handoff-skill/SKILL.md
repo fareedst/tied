@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: "End-of-session handoff for a new chat—record completions, next steps, completion signals, and a paste-ready resume prompt. Use when the sponsor invokes /handoff or @handoff (legacy phrasing: session handoff). Persists evidence/session-handoff.md. Not for plan-close-out commits or automatic git."
+description: "End-of-session handoff for a new chat—record completions, next steps, completion signals, and a paste-ready resume prompt. Use when the sponsor invokes /handoff or @handoff (legacy phrasing: session handoff). Persists evidence/session-handoff.md. Not for close-out commits or automatic git."
 disable-model-invocation: true
 ---
 
@@ -27,7 +27,7 @@ Explicit invocation only (`/handoff`, `@handoff`, legacy natural phrasing **“s
 4. **Completion signals** (when TIED REQ work applies) — Emit the three signals per store doc `tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md` (machine close-out | process contract | adherence ledger). Never label “complete” from tests alone when verification-gated or integrated depth applies.
 
 5. **Next steps** — Ordered for **minimum pause** in the new chat:
-   - recommended **prompt type** (`/build-plan`, `/refine-plan`, `/plan-close-out`, `/clear-workspace`, etc.);
+   - recommended **prompt type** (`/build-plan`, `/refine-plan`, `/close-out`, `/clear-workspace`, etc.);
    - exact **paths** to attach (`@PLAN.md`, Tracker, CITDP);
    - **blockers** (gates, costly choices → suggest `/unblock` if sponsor decisions pending);
    - **defaults:** proceed on documented reversible choices; surface costly choices only.
@@ -69,7 +69,7 @@ Invoke `@handoff` only if you need another handoff later.
 
 | Surface | Role |
 |---------|------|
-| **`/plan-close-out`** | Staged LEAP close-out, CHANGELOG, proposed commit message |
+| **`/close-out`** | Staged LEAP close-out, CHANGELOG, proposed commit message |
 | **`/handoff`** | **Conversation continuity** only; updates **`session-handoff.md`**; no commit |
 | **`/clear-workspace`** | Hygiene + close-out chain toward commit-ready workspace |
 | **`/unblock`** | Sponsor costly-choice decisions blocking progress |

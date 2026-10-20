@@ -1,7 +1,7 @@
 # Plan process tools adjunct (optional — DAE + BBCE)
 
 **Scope:** Advisory guidance for the four **explicit** main plan skills:
-`plan-new-feature`, `refine-plan`, `build-plan`, `plan-close-out`.
+`add-feature`, `refine-plan`, `build-plan`, `close-out`.
 
 **Traceability:** [REQ-TIED_SETUP](../../../tied-project/requirements/REQ-TIED_SETUP.yaml) · [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../../../tied-project/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml)
 

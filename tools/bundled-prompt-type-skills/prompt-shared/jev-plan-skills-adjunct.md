@@ -1,7 +1,7 @@
 # Jev plan-skills adjunct (optional)
 
 **Scope:** Advisory vocabulary shadow for the four **explicit** main plan skills only:
-`plan-new-feature`, `refine-plan`, `build-plan`, `plan-close-out`.
+`add-feature`, `refine-plan`, `build-plan`, `close-out`.
 
 **Traceability:** [REQ-TIED_JEV_DECISION_COPROCESSOR](../../../tied-project/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml) · [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../../../tied-project/requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml)
 

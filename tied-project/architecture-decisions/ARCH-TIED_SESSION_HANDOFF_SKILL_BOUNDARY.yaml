@@ -9,6 +9,6 @@ ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY:
       - "IMPL-TIED_SESSION_HANDOFF_SKILL"
     requirements:
       - "REQ-TIED_SESSION_HANDOFF_SKILL"
-  decision: "Standalone /handoff skill; invoke name handoff; persisted log session-handoff.md; not plan-close-out."
+  decision: "Standalone /handoff skill; invoke name handoff; persisted log session-handoff.md; not close-out."
   name: "Handoff skill boundary"
   status: "Planned"

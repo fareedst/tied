@@ -1,7 +1,7 @@
 CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL:
   change_definition:
-    current_behavior_prior: "Operators manually chain tied_git_hygiene, plan-close-out, and traceable-commit checklist steps without a single explicit skill; git hygiene receipts and close-out sequencing vary by working folder."
-    desired_behavior: "Standalone clear-workspace skill routes to git hygiene MCP, plan-close-out workflow, and traceable-commit prep as merited; shared clear-workspace-routing.md in prompt-shared; no automatic git commit; suggests handoff when not commit-ready."
+    current_behavior_prior: "Operators manually chain tied_git_hygiene, close-out, and traceable-commit checklist steps without a single explicit skill; git hygiene receipts and close-out sequencing vary by working folder."
+    desired_behavior: "Standalone clear-workspace skill routes to git hygiene MCP, close-out workflow, and traceable-commit prep as merited; shared clear-workspace-routing.md in prompt-shared; no automatic git commit; suggests handoff when not commit-ready."
     non_goals:
       - "New MCP tools or prompt-type leaf skills"
       - "Automatic git commit or push"
@@ -21,7 +21,7 @@ CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL:
       - "orchestration_prose_and_bootstrap_only"
       - "does_not_prove_git_hygiene_apply_safety"
   impact_analysis:
-    impl_inventory_notes: "SKILL.md + clear-workspace-routing.md + manifest; reuses tied_git_hygiene and plan-close-out boundaries."
+    impl_inventory_notes: "SKILL.md + clear-workspace-routing.md + manifest; reuses tied_git_hygiene and close-out boundaries."
     modules_or_boundaries: "tools/bundled-clear-workspace-skill/; tools/bundled-prompt-type-skills/prompt-shared/"
     tied_tokens_affected: []
     tied_tokens_new:

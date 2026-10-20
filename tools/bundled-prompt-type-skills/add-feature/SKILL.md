@@ -1,15 +1,15 @@
 ---
-name: plan-new-feature
-description: "Plans a new TIED-tracked feature with Refine, CITDP analysis, and Implement gates. Use when the caller names plan-new-feature, plans a new requirement with full TIED traceability, or starts feature work with Tracker and IMPL pseudo-code. Do not use for build-plan (execute an existing linked plan), refine-plan (improve a linked plan), non-tied-plan, question, or other minimal prompts."
+name: add-feature
+description: "Plans a new TIED-tracked feature with Refine, CITDP analysis, and Implement gates. Use when the caller names add-feature, plans a new requirement with full TIED traceability, or starts feature work with Tracker and IMPL pseudo-code. Do not use for build-plan (execute an existing linked plan), refine-plan (improve a linked plan), non-tied-plan, question, or other minimal prompts."
 disable-model-invocation: true
 ---
 
-# plan-new-feature
+# add-feature
 
-Explicit invocation only (`@plan-new-feature` or caller names `prompt-type: plan-new-feature`).
+Explicit invocation only (`@add-feature` or caller names `prompt-type: add-feature`).
 
 This skill is the workflow source of truth for client prompt-type invocation.
-`tied-install.sh` installs it under `.cursor/skills/plan-new-feature/`. Task wrappers under
+`tied-install.sh` installs it under `.cursor/skills/add-feature/`. Task wrappers under
 `.cursor/agents/` remain TIED-source development artifacts only.
 [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
 [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
@@ -17,7 +17,7 @@ This skill is the workflow source of truth for client prompt-type invocation.
 
 ## Inputs
 
-- **Optional prompt envelope:** `prompt-type: plan-new-feature`, `git-condition:` (informational only)
+- **Optional prompt envelope:** `prompt-type: add-feature`, `git-condition:` (informational only)
 - **Invocation remainder:** the request text after the skill or agent name.
   That text is the requirement. Do not treat a linked plan as the request.
 - **Git context:** caller-pasted text from [git-context-templates.md](../prompt-shared/git-context-templates.md) when relevant

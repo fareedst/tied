@@ -206,7 +206,7 @@ describe("W6 shadow/evidence T-SH", () => {
       projectRoot: root,
       tiedBasePath: tiedBasePath(root),
       prompt: "x",
-      skill: "plan-close-out",
+      skill: "close-out",
       record_evidence: true,
       request_token: "not-a-token",
       env: { JEV_API_KEY: "k" },
