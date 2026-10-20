@@ -7,7 +7,7 @@ Complete catalog of tools exposed by the tied-yaml MCP server. Call any tool via
 .cursor/skills/tied-yaml/scripts/tied-cli.sh <tool_name> @/path/to/args.json
 ```
 
-Parameters marked **required** must be present in `args_json` (or in the JSON file when using `@path`). All `record`, `updates`, `index_record`, and `detail_record` params accept a JSON string.
+Parameters marked **required** must be present in `args_json` (or in the JSON file when using `@path`). All `record`, `updates`, `index_record`, and `detail_record` params accept a **JSON object** (recommended) or a JSON/YAML **string** (compatibility). **`tied-mcp-stdio-client.cjs`** may emit **`DIAGNOSTIC: TIED_CLI_HINDRANCE`** on stderr for parse/transport/JSON-RPC failures (see bundled skill `SKILL.md`).
 
 **`tied-cli.sh` and large arguments:** For any tool args other than exactly `{}`, the shell writes the JSON to a **temp file** and the stdio client reads **`TIED_CLI_ARGS_FILE`** so payloads are not stuffed into the process environment (which would break large **`tied_token_create_with_detail`** calls). The JSON-RPC envelope is built in Node with **`JSON.stringify`**. Use **`@/path/to.json`** for the heaviest payloads.
 

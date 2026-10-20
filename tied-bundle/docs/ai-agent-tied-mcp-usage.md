@@ -12,7 +12,7 @@
 
 - **MCP for every mutation** of project-owned YAML under the TIED base path (`yaml_detail_*`, `yaml_index_*`, `tied_token_create_with_detail`, etc.); do not use IDE `apply_patch` / `Write` when a tool covers the operation ([yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md)).
 - **Why hand edits fail**: models often break indentation, quoting (values with `:`), duplicate keys, and index/detail alignment; the MCP server emits **safe YAML**.
-- **On MCP errors**: follow the runbook failure playbook (fix JSON in `record`/`updates`, narrow scope, retry)—do **not** silently fall back to direct file edit on the same path.
+- **On MCP errors**: follow the runbook failure playbook (prefer **native JSON objects** for `record`/`updates`/`index_record`/`detail_record`; fix string quoting when using legacy payloads; on **`tied-cli`**, parse optional **`DIAGNOSTIC: TIED_CLI_HINDRANCE`** then read **`ERROR:`**; narrow scope, retry)—do **not** silently fall back to direct file edit on the same path.
 - **`tied-bundle/`** is read-only in client projects; when MCP rejects a methodology write, do not “fix” it with `Write`.
 
 - The TIED **database** (YAML indexes and detail files under **`tied-project/`** or **`TIED_BASE_PATH`**) **controls and directs** the creation of code and tests.

@@ -3237,6 +3237,26 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
       - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     implementation:
       - "IMPL-TIED_STORE_README_SECTIONS"
+REQ-TIED_TOOL_INPUT_COMPATIBILITY:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
+    implementation:
+      - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+  description: "MCP YAML write tools and tied-cli accept native JSON record objects alongside legacy JSON/YAML strings with identical normalization and canonical persistence."
+  detail_file: "requirements/REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml"
+  name: "MCP record input compatibility"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
+    implementation:
+      - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+    tests:
+      - "parse-content.test.ts"
+      - "tied-cli-large-args.test.cjs"
+      - "yaml-canonicalization-mcp.test.ts"
 REQ-TIED_TWO_FOLDER_LAYOUT:
   category: "Infrastructure"
   description: "Two-folder client layout: committed tied-project traceability store and local tied-bundle methodology/docs; no top-level tied/ after install or migrate."

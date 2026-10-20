@@ -2524,6 +2524,15 @@ ARCH-TIED_STRUCTURE:
       - "REQ-TIED_SETUP"
     tests:
       - "TestTIEDSetup_REQ_TIED_SETUP"
+ARCH-TIED_TOOL_INPUT_NORMALIZATION:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+    requirements:
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  detail_file: "architecture-decisions/ARCH-TIED_TOOL_INPUT_NORMALIZATION.yaml"
+  name: "Tool input normalization architecture"
+  status: "Planned"
 ARCH-TIED_TWO_FOLDER_LAYOUT:
   description: "Two-folder on-disk layout: tied-project + tied-bundle, working split, flattened bundle, store exception."
   detail_file: "architecture-decisions/ARCH-TIED_TWO_FOLDER_LAYOUT.yaml"

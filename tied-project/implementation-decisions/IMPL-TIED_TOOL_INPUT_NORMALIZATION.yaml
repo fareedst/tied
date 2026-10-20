@@ -1,0 +1,16 @@
+IMPL-TIED_TOOL_INPUT_NORMALIZATION:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
+    implementation: []
+    requirements:
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Add DIAGNOSTIC TIED_CLI_HINDRANCE JSON to stdio client error paths"
+      - "Export recordInputSchema and normalizeRecordPayload from parse-content module"
+      - "Wire six write-tool fields per REQ inventory"
+    summary: "parse-content normalizer + tools/index write schema wiring + tied-mcp-stdio-client hindrance diagnostic emission"
+  name: "Tool input normalization implementation"
+  status: "Planned"

@@ -1,0 +1,124 @@
+{
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+  "run_id": "ntic-refine-preimpl-20261020-r1",
+  "phase": "pre_implementation",
+  "scope": [
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1"
+  ],
+  "graph": {
+    "projectId": "stdd-ntic-refine",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-OBJECT-OR-STRING",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-ntic-normalize"]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-CLI-HINDRANCE",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-ntic-cli"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-ntic-normalize",
+        "implementationBlockIds": [
+          "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-ntic-cli",
+        "implementationBlockIds": [
+          "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "kind": "block",
+          "name": "NORMALIZE_RECORD_PAYLOAD",
+          "derivation": "content",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+          "kind": "block",
+          "name": "APPLY_RECORD_FIELD_TO_WRITE_TOOLS",
+          "derivation": "content",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+          "kind": "block",
+          "name": "EMIT_CLI_HINDRANCE_DIAGNOSTIC",
+          "derivation": "content",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        }
+      }
+    ],
+    "bindings": [],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "ntic-rev-1",
+    "specification": [
+      {
+        "id": "spec-normalize-object-string",
+        "kind": "behavior",
+        "value": "normalizeRecordPayload accepts plain objects and legacy strings with identical write semantics",
+        "order": 1
+      },
+      {
+        "id": "spec-reject-non-record",
+        "kind": "behavior",
+        "value": "null, array, and primitive payloads fail closed without partial writes",
+        "order": 2
+      },
+      {
+        "id": "spec-cli-diagnostic",
+        "kind": "behavior",
+        "value": "CLI emits DIAGNOSTIC TIED_CLI_HINDRANCE without changing exit codes",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-spec-normalize-planned",
+        "direction": "test",
+        "statementId": "spec-normalize-object-string",
+        "kind": "behavior",
+        "value": "parse-content.test.ts RED cases (planned at build-plan)",
+        "order": 1,
+        "reliable": false,
+        "source": { "location": "mcp-server/src/parse-content.test.ts" },
+        "provenance": "planned-red",
+        "blockRevision": "ntic-rev-1"
+      }
+    ],
+    "productionEvidence": []
+  }
+}

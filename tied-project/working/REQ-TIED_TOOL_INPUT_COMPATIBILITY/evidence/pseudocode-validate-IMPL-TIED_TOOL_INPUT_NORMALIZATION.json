@@ -1,0 +1,118 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only; behavioral test coverage remains separate.",
+  "blocks": [
+    {
+      "name": "NORMALIZE_RECORD_PAYLOAD",
+      "line": 18,
+      "token_refs": [
+        "ARCH-TIED_TOOL_INPUT_NORMALIZATION",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION",
+        "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "PARSE_RECORD_OR_YAML",
+      "line": 33,
+      "token_refs": [
+        "ARCH-TIED_TOOL_INPUT_NORMALIZATION",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION",
+        "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "APPLY_RECORD_FIELD_TO_WRITE_TOOLS",
+      "line": 46,
+      "token_refs": [
+        "ARCH-TIED_TOOL_INPUT_NORMALIZATION",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION",
+        "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    },
+    {
+      "name": "EMIT_CLI_HINDRANCE_DIAGNOSTIC",
+      "line": 63,
+      "token_refs": [
+        "ARCH-TIED_TOOL_INPUT_NORMALIZATION",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION",
+        "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+      ],
+      "contract_fields": [
+        "EFFECTS",
+        "FAILURE_MODES",
+        "INPUT",
+        "OUTPUT",
+        "POST",
+        "PRE"
+      ]
+    }
+  ],
+  "dependencies": [],
+  "coverage": [
+    {
+      "block": "NORMALIZE_RECORD_PAYLOAD",
+      "branch_lines": [
+        27,
+        29
+      ],
+      "failure_modes": [
+        "- RETURN { ok: false, error: \"Payload must be a JSON or YAML object (not null, array, or primitive)\" }"
+      ],
+      "references": []
+    },
+    {
+      "block": "PARSE_RECORD_OR_YAML",
+      "branch_lines": [
+        40
+      ],
+      "failure_modes": [],
+      "references": []
+    },
+    {
+      "block": "APPLY_RECORD_FIELD_TO_WRITE_TOOLS",
+      "branch_lines": [
+        57
+      ],
+      "failure_modes": [
+        "- IF NOT result.ok THEN RETURN tool error envelope (no write)"
+      ],
+      "references": []
+    },
+    {
+      "block": "EMIT_CLI_HINDRANCE_DIAGNOSTIC",
+      "branch_lines": [],
+      "failure_modes": [
+        "OUTPUT: stderr line + preserved legacy ERROR line",
+        "- EMIT existing human-readable ERROR unchanged"
+      ],
+      "references": []
+    }
+  ],
+  "diagnostics": [],
+  "leakage": []
+}

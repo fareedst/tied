@@ -1,0 +1,229 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-ntic-refine",
+    "scope": [
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1"
+    ],
+    "graph": {
+      "projectId": "stdd-ntic-refine",
+      "nodes": [
+        {
+          "id": "constraint:constraint-ntic-cli",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:constraint-ntic-normalize",
+          "kind": "constraint"
+        },
+        {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+          "kind": "block",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+          "kind": "block",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "kind": "block",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-CLI-HINDRANCE",
+          "kind": "criterion",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-OBJECT-OR-STRING",
+          "kind": "criterion",
+          "revision": "ntic-rev-1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-CLI-HINDRANCE",
+          "to": "constraint:constraint-ntic-cli",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-OBJECT-OR-STRING",
+          "to": "constraint:constraint-ntic-normalize",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-ntic-cli",
+          "to": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-ntic-normalize",
+          "to": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-ntic-normalize",
+          "to": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "kind": "constraint_block"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "03851dfa8d3609f4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "spec-reject-non-record",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9dc5734d39647ba6",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "spec-cli-diagnostic",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "9f92eea74912efed",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "spec-cli-diagnostic",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e16fdaa634af9856",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "spec-reject-non-record",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "fb00ac95c2041d26",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "spec-normalize-object-string",
+        "message": "Evidence is marked unreliable.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/parse-content.test.ts"
+        },
+        "evidenceRefs": [
+          "test-spec-normalize-planned"
+        ]
+      },
+      {
+        "id": "fe82deaa26d3e8c8",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "spec-normalize-object-string",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRESOLVED",
+  "status": {
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1": "UNRESOLVED",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1": "UNRESOLVED",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1": "UNRESOLVED"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRESOLVED",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+      "project_id": "stdd-ntic-refine",
+      "run_id": "ntic-refine-preimpl-20261020-r1",
+      "phase": "pre_implementation",
+      "scope": [
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1"
+      ],
+      "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+      "artifact_hashes": {
+        "obligation-report.json": "f12f4f4ea079bcec5a0d0cd9b4ebcffa38fb59aa2364d18f94f698423c6ef585",
+        "finding-ledger.jsonl": "7a6b740e0a760447c978949e1fe778d765ebfef3ae9911ce212f1c214b782d93",
+        "gate-result.json": "09386147c52c03375e48b24bb8841395342b5939b70780cd24a6ffa681f2742f",
+        "evidence-provenance.json": "55056902163adc6c20e0b4a8376539e4a980245f56534e4dd5c51c9a8832d41d"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-refine",
+        "run_id": "ntic-refine-preimpl-20261020-r1",
+        "phase": "pre_implementation",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "f12f4f4ea079bcec5a0d0cd9b4ebcffa38fb59aa2364d18f94f698423c6ef585",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-refine",
+        "run_id": "ntic-refine-preimpl-20261020-r1",
+        "phase": "pre_implementation",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "7a6b740e0a760447c978949e1fe778d765ebfef3ae9911ce212f1c214b782d93",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-refine",
+        "run_id": "ntic-refine-preimpl-20261020-r1",
+        "phase": "pre_implementation",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "09386147c52c03375e48b24bb8841395342b5939b70780cd24a6ffa681f2742f",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-refine",
+        "run_id": "ntic-refine-preimpl-20261020-r1",
+        "phase": "pre_implementation",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "55056902163adc6c20e0b4a8376539e4a980245f56534e4dd5c51c9a8832d41d",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  }
+}

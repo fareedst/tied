@@ -1,0 +1,21 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "integrated",
+  "phase": "verification",
+  "diagnostics": [
+    "warn_not_success",
+    "finding_unresolved"
+  ],
+  "evidence_hydrated": [
+    "evidence-provenance.json",
+    "gate-result.json",
+    "finding-ledger.jsonl",
+    "request-evidence-envelope.v1.json:gaps"
+  ],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/gates/verification-2026-10-20T05-57-24-415Z.json",
+    "hash": "sha256:6f9f6b21378198ae6d21643bb9fe5e0e0cc0442edb2020151a0fa425ae73a9d8"
+  }
+}

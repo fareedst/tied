@@ -11,6 +11,15 @@
 const fs = require("node:fs");
 const { spawn } = require("node:child_process");
 
+/** [IMPL-TIED_TOOL_INPUT_NORMALIZATION] [REQ-TIED_TOOL_INPUT_COMPATIBILITY] Machine-readable CLI hindrance line; exit codes unchanged. */
+function emitCliHindranceDiagnostic(payload) {
+  try {
+    process.stderr.write(`DIAGNOSTIC: TIED_CLI_HINDRANCE ${JSON.stringify(payload)}\n`);
+  } catch {
+    /* diagnostic_serialization_fail — omit secondary line */
+  }
+}
+
 const mcpBin = process.env.TIED_CLI_MCP_BIN || "";
 const umbrellaEntry = process.env.TIED_CLI_UMBRELLA_ENTRY || "";
 const useUmbrellaMcp = process.env.TIED_CLI_UMBRELLA_MCP === "1" && umbrellaEntry;
@@ -31,6 +40,10 @@ function loadArgumentsObject() {
       return JSON.parse(raw);
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
+      emitCliHindranceDiagnostic({
+        failure_kind: "parse_error",
+        recovery_hint: "Ensure TIED_CLI_ARGS_FILE is valid UTF-8 JSON object.",
+      });
       console.error(`ERROR: Failed to read or parse TIED_CLI_ARGS_FILE (${argsFile}): ${msg}`);
       process.exit(1);
     }
@@ -40,6 +53,10 @@ function loadArgumentsObject() {
     return JSON.parse(raw);
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
+    emitCliHindranceDiagnostic({
+      failure_kind: "parse_error",
+      recovery_hint: "Ensure TIED_CLI_ARGS_JSON is a single JSON object.",
+    });
     console.error(`ERROR: Invalid TIED_CLI_ARGS_JSON: ${msg}`);
     process.exit(1);
   }
@@ -203,12 +220,32 @@ function finish(d) {
   if (done) return;
   done = true;
   if (d.error) {
+    const code = typeof d.error.code === "number" ? d.error.code : undefined;
+    emitCliHindranceDiagnostic({
+      failure_kind: code === -32602 ? "invalid_arguments" : "tool_error",
+      jsonrpc_code: code,
+      tool_name: toolName,
+      recovery_hint:
+        code === -32602
+          ? "Fix tools/call arguments per tool schema; record fields accept native objects or legacy JSON strings."
+          : "Read JSON-RPC error output; verify TIED_BASE_PATH and server build.",
+    });
     console.error(JSON.stringify(d.error));
     child.kill("SIGTERM");
     process.exit(2);
   }
   const raw = extractToolText(d.result);
   if (d.result && d.result.isError) {
+    const invalidArgs =
+      /(?:^|\s)-32602\b/.test(raw) || /Input validation error/i.test(raw);
+    emitCliHindranceDiagnostic({
+      failure_kind: invalidArgs ? "invalid_arguments" : "tool_error",
+      jsonrpc_code: invalidArgs ? -32602 : undefined,
+      tool_name: toolName,
+      recovery_hint: invalidArgs
+        ? "Fix tools/call arguments per tool schema; record fields accept native objects or legacy JSON strings."
+        : "Tool returned isError; read stderr ERROR text for handler message.",
+    });
     console.error(raw);
     child.kill("SIGTERM");
     process.exit(2);
@@ -241,12 +278,21 @@ child.stdout.on("data", (chunk) => {
 
 child.stdout.on("end", () => {
   if (!done) {
+    emitCliHindranceDiagnostic({
+      failure_kind: "transport_error",
+      tool_name: toolName,
+      recovery_hint: "MCP server exited early; rebuild mcp-server and check TIED_MCP_BIN.",
+    });
     console.error("ERROR: MCP stdout closed before tools/call response.");
     process.exit(1);
   }
 });
 
 child.on("error", (err) => {
+  emitCliHindranceDiagnostic({
+    failure_kind: "transport_error",
+    recovery_hint: "Failed to spawn MCP server; verify TIED_MCP_BIN path and Node version.",
+  });
   console.error("ERROR: Failed to spawn MCP server:", err.message);
   process.exit(1);
 });

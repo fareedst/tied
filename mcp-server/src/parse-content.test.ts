@@ -1,11 +1,11 @@
 /**
- * Unit tests for parseRecordOrYaml. [IMPL]
- * Verifies JSON and YAML input produce the same record; invalid input returns error.
+ * Unit tests for parseRecordOrYaml and normalizeRecordPayload.
+ * [IMPL-TIED_TOOL_INPUT_NORMALIZATION] [REQ-TIED_TOOL_INPUT_COMPATIBILITY]
  */
 
 import { describe, it } from "node:test";
 import assert from "node:assert";
-import { parseRecordOrYaml } from "./parse-content.js";
+import { normalizeRecordPayload, parseRecordOrYaml } from "./parse-content.js";
 
 describe("parseRecordOrYaml", () => {
   it("parses valid JSON object", () => {
@@ -41,5 +41,41 @@ describe("parseRecordOrYaml", () => {
     const result = parseRecordOrYaml("not json or yaml {{{");
     assert.strictEqual(result.ok, false);
     if (!result.ok) assert.ok(result.error.length > 0);
+  });
+});
+
+describe("normalizeRecordPayload", () => {
+  const sample = { name: "Test", status: "Planned" };
+
+  it("passes through plain objects", () => {
+    const result = normalizeRecordPayload(sample);
+    assert.strictEqual(result.ok, true);
+    if (result.ok) assert.deepStrictEqual(result.value, sample);
+  });
+
+  it("delegates valid JSON strings to parseRecordOrYaml", () => {
+    const result = normalizeRecordPayload(JSON.stringify(sample));
+    assert.strictEqual(result.ok, true);
+    if (result.ok) assert.deepStrictEqual(result.value, sample);
+  });
+
+  it("rejects null", () => {
+    assert.strictEqual(normalizeRecordPayload(null).ok, false);
+  });
+
+  it("rejects arrays", () => {
+    assert.strictEqual(normalizeRecordPayload([1]).ok, false);
+  });
+
+  it("rejects number primitives", () => {
+    assert.strictEqual(normalizeRecordPayload(42).ok, false);
+  });
+
+  it("rejects boolean primitives", () => {
+    assert.strictEqual(normalizeRecordPayload(true).ok, false);
+  });
+
+  it("rejects undefined", () => {
+    assert.strictEqual(normalizeRecordPayload(undefined).ok, false);
   });
 });

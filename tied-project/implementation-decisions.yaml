@@ -2999,6 +2999,15 @@ IMPL-TIED_STORE_README_SECTIONS:
       - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     requirements:
       - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+IMPL-TIED_TOOL_INPUT_NORMALIZATION:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
+    requirements:
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  detail_file: "implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION.yaml"
+  name: "Tool input normalization implementation"
+  status: "Active"
 IMPL-TIED_TWO_FOLDER_LAYOUT:
   description: "Layout resolver, legacy detection, migrate, gitignore v2, config loaders, working-root split."
   detail_file: "implementation-decisions/IMPL-TIED_TWO_FOLDER_LAYOUT.yaml"

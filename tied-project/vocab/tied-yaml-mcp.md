@@ -18,6 +18,9 @@
 | **signature coverage** | top-k metadata | Analyzer YAML: `bound` / `considered` / `emitted` / `omitted` / `status` for bounded aggregation. `exact_within_bound` means the complete visible candidate set fits the bound; `approximate` discloses per-file truncation or visible aggregate overflow and never claims hidden candidates were globally ranked. |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |
+| **structured record input** | native object, JSON object payload | Non-array JSON object passed directly on MCP `tools/call` for record-shaped write fields · [REQ-TIED_TOOL_INPUT_COMPATIBILITY](../requirements/REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml) |
+| **input normalization** | payload coercion, record resolver | Shared `normalizeRecordPayload`: object pass-through or legacy string via `parseRecordOrYaml` before canonical YAML write · [IMPL-TIED_TOOL_INPUT_NORMALIZATION](../implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION.yaml) |
+| **CLI hindrance diagnostic** | cli error json, transport diagnostic | `DIAGNOSTIC: TIED_CLI_HINDRANCE` stderr JSON from `tied-mcp-stdio-client.cjs`; adjunct to ERROR lines; exit codes unchanged · [REQ-TIED_TOOL_INPUT_COMPATIBILITY](../requirements/REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml) |
 | **activation collect** | gate JSON assembly, hand-built activation | `tied_checklist_activation_collect` — read-only assembly of `{ receipt, artifacts, expected }` from phase artifact dirs |
 | **TIED base path** | repo root, workspace | Absolute path to **`tied-project/`**; `tied_config_get_base_path` confirms writable project root |
 | **client project root** | repo root (alone), workspace | Directory containing **`tied/`**; parent of **TIED base path**; anchor for `tied_token_rename` `extra_globs` / `extra_extensions` |

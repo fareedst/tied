@@ -1212,6 +1212,15 @@ ARCH-TIED_STRUCTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_TOOL_INPUT_NORMALIZATION:
+  cross_references:
+    - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+    - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  description: "Shared MCP record normalization boundary"
+  name: "Tool input normalization architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Planned"
+  type: "ARCH"
 ARCH-TIED_UNIFIED_TOOLCHAIN:
   cross_references:
     - "IMPL-TIED_UNIFIED_TOOLCHAIN"
@@ -2770,6 +2779,15 @@ IMPL-TIED_STORE_README_SECTIONS:
     registered: "2026-10-18"
   name: "Store README section contracts"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_TOOL_INPUT_NORMALIZATION:
+  cross_references:
+    - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
+    - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  description: "normalizeRecordPayload and CLI hindrance diagnostics"
+  name: "Tool input normalization implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
   type: "IMPL"
 IMPL-TIED_UNIFIED_TOOLCHAIN:
   cross_references:
@@ -4548,6 +4566,15 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
     registered: "2026-10-19"
   name: "Store README operator delivery spine"
   status: "Active"
+  type: "REQ"
+REQ-TIED_TOOL_INPUT_COMPATIBILITY:
+  cross_references:
+    - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
+    - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+  description: "Native object or string record inputs on MCP write tools"
+  name: "MCP record input compatibility"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"
 REQ-TIED_UNIFIED_TOOLCHAIN:
   category: "Tooling"

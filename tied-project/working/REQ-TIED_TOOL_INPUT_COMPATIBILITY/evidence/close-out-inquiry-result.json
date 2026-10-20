@@ -1,0 +1,269 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "stdd-ntic-closeout",
+    "scope": [
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1"
+    ],
+    "graph": {
+      "projectId": "stdd-ntic-closeout",
+      "nodes": [
+        {
+          "id": "constraint:constraint-ntic-cli",
+          "kind": "constraint"
+        },
+        {
+          "id": "constraint:constraint-ntic-normalize",
+          "kind": "constraint"
+        },
+        {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+          "kind": "block",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+          "kind": "block",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "kind": "block",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-CLI-HINDRANCE",
+          "kind": "criterion",
+          "revision": "ntic-rev-1"
+        },
+        {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-OBJECT-OR-STRING",
+          "kind": "criterion",
+          "revision": "ntic-rev-1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-CLI-HINDRANCE",
+          "to": "constraint:constraint-ntic-cli",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-OBJECT-OR-STRING",
+          "to": "constraint:constraint-ntic-normalize",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-ntic-cli",
+          "to": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-ntic-normalize",
+          "to": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "constraint:constraint-ntic-normalize",
+          "to": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "kind": "constraint_block"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "id": "03851dfa8d3609f4",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "spec-reject-non-record",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "2c7166ba6daada7f",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "spec-normalize-object-string",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/parse-content.test.ts"
+        },
+        "evidenceRefs": [
+          "test-spec-normalize"
+        ]
+      },
+      {
+        "id": "65e87a96ecbfe25d",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "spec-cli-diagnostic",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/test/tied-cli-large-args.test.cjs"
+        },
+        "evidenceRefs": [
+          "test-spec-cli"
+        ]
+      },
+      {
+        "id": "9dc5734d39647ba6",
+        "kind": "completeness",
+        "direction": "B",
+        "statementId": "spec-cli-diagnostic",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "c7d2cbfa38e07aef",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "spec-normalize-object-string",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/tools/tool-record-input-schema.test.ts"
+        },
+        "evidenceRefs": [
+          "test-spec-schema"
+        ]
+      },
+      {
+        "id": "e16fdaa634af9856",
+        "kind": "completeness",
+        "direction": "A",
+        "statementId": "spec-reject-non-record",
+        "message": "Specification statement has no corresponding evidence.",
+        "proofBoundary": "semantic_fidelity"
+      },
+      {
+        "id": "e6d7667fc624ae0e",
+        "kind": "reliability",
+        "direction": "A",
+        "statementId": "spec-normalize-object-string",
+        "message": "Evidence order differs from the specified order.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/tools/tool-record-input-schema.test.ts"
+        },
+        "evidenceRefs": [
+          "test-spec-schema"
+        ]
+      },
+      {
+        "id": "e94dee98d79efdb7",
+        "kind": "reliability",
+        "direction": "B",
+        "statementId": "spec-normalize-object-string",
+        "message": "Evidence does not match the specified statement.",
+        "proofBoundary": "semantic_fidelity",
+        "source": {
+          "location": "mcp-server/src/parse-content.ts"
+        },
+        "evidenceRefs": [
+          "prod-normalize"
+        ]
+      }
+    ],
+    "proofBoundaries": [
+      "semantic_fidelity"
+    ],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "UNRELIABLE",
+  "status": {
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1": "REVIEW",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1": "REVIEW",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1": "REVIEW"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+      "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1"
+    ],
+    "status": "warn",
+    "blocking": false,
+    "verdict": "UNRELIABLE",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+      "project_id": "stdd-ntic-closeout",
+      "run_id": "ntic-close-out-20261020-r1",
+      "phase": "close_out",
+      "scope": [
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+        "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1"
+      ],
+      "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+      "artifact_hashes": {
+        "obligation-report.json": "f34300b769a5728bc9a2b4f5b90b758e1bb06f26f55dd666152f15b4beedc104",
+        "finding-ledger.jsonl": "dfa5351d46556da93a764edbda8172e7e412eac1935205fe40b660f76968518b",
+        "gate-result.json": "b117074fc7f1f7649cb413ef58d2e16347c422c232fdca6ff408961f44a537bd",
+        "evidence-provenance.json": "535ad5a737e38489d9271ab8fe7683828c8174cec16e64e5cd2849a7f6ba4086"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-closeout",
+        "run_id": "ntic-close-out-20261020-r1",
+        "phase": "close_out",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "f34300b769a5728bc9a2b4f5b90b758e1bb06f26f55dd666152f15b4beedc104",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-closeout",
+        "run_id": "ntic-close-out-20261020-r1",
+        "phase": "close_out",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "dfa5351d46556da93a764edbda8172e7e412eac1935205fe40b660f76968518b",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-closeout",
+        "run_id": "ntic-close-out-20261020-r1",
+        "phase": "close_out",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "b117074fc7f1f7649cb413ef58d2e16347c422c232fdca6ff408961f44a537bd",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+        "project_id": "stdd-ntic-closeout",
+        "run_id": "ntic-close-out-20261020-r1",
+        "phase": "close_out",
+        "scope_hash": "d94a5a04a40a956b5a4a95a679e3a14838fec6b5043f6c10217261bfe5e78ff8",
+        "hash": "535ad5a737e38489d9271ab8fe7683828c8174cec16e64e5cd2849a7f6ba4086",
+        "path": "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-close_out/evidence-provenance.json"
+      }
+    }
+  }
+}

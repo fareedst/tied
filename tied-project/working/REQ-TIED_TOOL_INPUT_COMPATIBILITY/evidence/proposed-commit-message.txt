@@ -1,0 +1,14 @@
+feat(mcp): native record inputs for YAML write tools
+
+Agents may pass JSON objects on MCP write-tool record fields while legacy
+string JSON/YAML callers stay unchanged. Adds normalizeRecordPayload,
+union Zod schemas on six write surfaces, and DIAGNOSTIC TIED_CLI_HINDRANCE
+on tied-cli transport failures without changing exit codes.
+
+REQ-TIED_TOOL_INPUT_COMPATIBILITY · ARCH-TIED_TOOL_INPUT_NORMALIZATION ·
+IMPL-TIED_TOOL_INPUT_NORMALIZATION
+
+Completion signals: machine close-out pass (close_out allowed, envelope
+blocking_gaps=0); process contract partial (verification manifest replay
+deferred during concurrent npm test); adherence reconcile band C (missing
+verification-evidence-manifest path until replay).

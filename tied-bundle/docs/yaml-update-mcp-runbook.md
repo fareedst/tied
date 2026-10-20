@@ -42,7 +42,9 @@
 
 ### 2.2 `tied-cli.sh`, payload size, timeouts
 
-Each [`tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) invocation starts **one** MCP stdio client and performs **one** `tools/call`. Long “sync-tied-stack” sequences therefore spawn many short-lived Node processes—keep each `args` JSON **small** (especially avoid pasting huge `essence_pseudocode` into `yaml_detail_update`; use **`impl_detail_set_essence_pseudocode`**, a **`essence_pseudocode_path`**, or **`TIED_CLI_IMPL_ESSENCE_FILE`** / **`TIED_CLI_IMPL_ESSENCE_STDIN`**, or **direct** sidecar `.md` edit). **Timeouts** are enforced by the host client; if a call is killed mid-flight, re-run **`yaml_index_validate`** and **`tied_validate_consistency`** before assuming the tree is consistent. Prefer **one** `tied_validate_consistency` at the **end** of a multi-step sync rather than after every RPC unless you are debugging. The companion **`tied-mcp-stdio-client.cjs`** reassembles JSON-RPC over newlines—do not hand-roll stdio framing.
+Each [`tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) invocation starts **one** MCP stdio client and performs **one** `tools/call`. Long “sync-tied-stack” sequences therefore spawn many short-lived Node processes—keep each `args` JSON **small** (especially avoid pasting huge `essence_pseudocode` into `yaml_detail_update`; use **`impl_detail_set_essence_pseudocode`**, a **`essence_pseudocode_path`**, or **`TIED_CLI_IMPL_ESSENCE_FILE`** / **`TIED_CLI_IMPL_ESSENCE_STDIN`**, or **direct** sidecar `.md` edit). **Timeouts** are enforced by the host client; if a call is killed mid-flight, re-run **`yaml_index_validate`** and **`tied_validate_consistency`** before assuming the tree is consistent. Prefer **one** `tied_validate_consistency` at the **end** of a multi-step sync rather than after every RPC unless you are debugging. The companion **`tied-mcp-stdio-client.cjs`** reassembles JSON-RPC over newlines—do not hand-roll stdio framing. On failure it may print **`DIAGNOSTIC: TIED_CLI_HINDRANCE`** (machine-readable JSON after the prefix) **before** the human **`ERROR:`** line; **exit codes are unchanged**—treat **`ERROR:`** as authoritative for operators.
+
+**Structured record inputs:** Write tools (`yaml_index_insert`, `yaml_index_update`, `yaml_detail_create`, `yaml_detail_update`, `citdp_record_write`, `tied_token_create_with_detail`) accept **`record` / `updates` / `index_record` / `detail_record` as native JSON objects** in MCP and in `@path` args files; legacy JSON/YAML strings remain valid.
 
 ---
 
@@ -54,15 +56,15 @@ Each [`tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) invocat
 | Read a whole index | `yaml_index_read` | `index`: `requirements` \| `architecture` \| `implementation` \| `semantic-tokens`; optional `token` |
 | List tokens in an index | `yaml_index_list_tokens` | `index`; optional `type` (semantic-tokens) |
 | Filter index rows | `yaml_index_filter` | `index`, `field`, `value` |
-| Insert new index row | `yaml_index_insert` | `index`, `token`, `record` (JSON string; YAML string also accepted where the server supports it) |
-| Merge index row fields | `yaml_index_update` | `index`, `token`, `updates` (JSON string) |
+| Insert new index row | `yaml_index_insert` | `index`, `token`, `record` (object recommended; JSON/YAML string compatible) |
+| Merge index row fields | `yaml_index_update` | `index`, `token`, `updates` (object recommended; string compatible) |
 | Ordered batch merge (index/detail) | `yaml_updates_apply` | `steps` (array of `{ kind, token, updates }` or `{ kind, index, token, updates }`); optional `dry_run`, `run_validate_consistency` |
-| Create token + index + detail in one step | `tied_token_create_with_detail` | `token`, `index_record`, `detail_record` (JSON strings); optional `upsert_index` |
+| Create token + index + detail in one step | `tied_token_create_with_detail` | `token`, `index_record`, `detail_record` (objects recommended); optional `upsert_index` |
 | Read one detail file | `yaml_detail_read` | `token` |
 | Read many details | `yaml_detail_read_many` | `tokens` array and/or `type` |
 | List tokens with detail files | `yaml_detail_list` | `type` |
-| Create detail file | `yaml_detail_create` | `token`, `record` (JSON string); optional `sync_index` (default true) |
-| Merge detail fields | `yaml_detail_update` | `token`, `updates` (JSON string) |
+| Create detail file | `yaml_detail_create` | `token`, `record` (object recommended); optional `sync_index` (default true) |
+| Merge detail fields | `yaml_detail_update` | `token`, `updates` (object recommended) |
 | IMPL: set `essence_pseudocode` only | `impl_detail_set_essence_pseudocode` | `token`, and **exactly one of** `essence_pseudocode` **or** `essence_pseudocode_path` (file under TIED base); optional `metadata_last_updated`. `tied-cli:` `TIED_CLI_IMPL_ESSENCE_FILE` or `TIED_CLI_IMPL_ESSENCE_STDIN=1` to supply the body without a huge JSON string. |
 | Delete detail file | `yaml_detail_delete` | `token`; optional `sync_index` |
 | REQ ↔ ARCH/IMPL traceability | `get_decisions_for_requirement`, `get_requirements_for_decision` | requirement or decision token |
@@ -79,7 +81,7 @@ Each [`tied-cli.sh`](../../.cursor/skills/tied-yaml/scripts/tied-cli.sh) invocat
 }
 ```
 
-Pass that object as a **string** in `updates` or `record` per the tool descriptor.
+Pass that object directly in `updates` or `record` (recommended), or as a JSON/YAML **string** for legacy callers.
 
 ---
 
@@ -89,7 +91,8 @@ Pass that object as a **string** in `updates` or `record` per the tool descripto
 |---------|---------|--------|
 | “Methodology”, “read-only”, or token not writable | Target **project** index/detail only; create project detail if the token should be client-specific | Patch files under `methodology/` or bypass with `Write` |
 | Wrong or missing `TIED_BASE_PATH` | **STOP**. Ensure the MCP server targets **this workspace’s** `tied-project/` directory (must be **under the workspace root**). **`tied-install.sh` does not modify `.cursor/mcp.json`** — edit it so `mcpServers.tied-yaml.env.TIED_BASE_PATH` is **`<workspace>/tied-project`** (e.g. **`${workspaceFolder}/tied-project`**) and **`command`** is **`tied-yaml`** (preferred) with **`args: []`**, *or* **`node`** + path to **`dist/index.js`** if the CLI is not on `PATH`; re-check with `tied_config_get_base_path`. For terminal-only automation, set **`TIED_BASE_PATH`** and use **`TIED_MCP_CMD` / `TIED_MCP_BIN`** for **`tied-cli.sh`** (see `.cursor/skills/tied-yaml/SKILL.md`). | “Quick fix” by pointing at another repo’s project tree (risk: silent writes to the wrong `tied-project/`) |
-| Invalid JSON in `record` / `updates` | Fix quoting; retry with smaller `updates` chunk | Switch to full-file `Write` on the same path |
+| Invalid JSON in `record` / `updates` | Prefer native **objects** in MCP/`@path` args; for strings fix quoting; retry with smaller `updates` chunk | Switch to full-file `Write` on the same path |
+| JSON-RPC **-32602** / `DIAGNOSTIC: TIED_CLI_HINDRANCE` | Read stderr JSON (`failure_kind`, `recovery_hint`); fix argument shape (record must be object or string, not array) | Ignore diagnostic and patch YAML by hand |
 | Tool timeout / transient error | Retry; narrow the operation (single token) | Immediately fall back to direct file edit |
 | `tied_validate_consistency` fails | Fix the reported token/path via MCP or LEAP stack; re-run validation | Mark work complete while consistency is failing |
 | **`metadata.created` / `registered` missing after an update** | First upgrade mcp-server (deep-merge fix). Then: `yaml_detail_read` / `yaml_index_read`, restore dropped keys in one follow-up `yaml_*_update`, then §5 | Assume the field was never authored—silent loss breaks audit trails |

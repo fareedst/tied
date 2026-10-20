@@ -1,0 +1,23 @@
+ARCH-TIED_TOOL_INPUT_NORMALIZATION:
+  alternatives_considered:
+    - description: "Union every z.record field"
+      name: "Convert all tools globally"
+      rejected_because: "Out of scope; risk on unrelated APIs"
+    - description: "Tell agents to always stringify records"
+      name: "Document stringify-only workflow"
+      rejected_because: "Fights native MCP client serialization; recurring -32602 friction"
+  consequences:
+    negative:
+      - "Schema maintenance for new write tools"
+    positive:
+      - "Agent-native object payloads"
+      - "Single normalization module"
+  context: "TIED MCP write tools historically typed record payloads as strings requiring JSON.stringify from agents. Batch and feedback tools already accept z.record objects. Agents using native JSON objects hit JSON-RPC validation before handlers run."
+  cross_references:
+    implementation:
+      - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+    requirements:
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  decision: "Introduce a shared normalization layer at the MCP boundary: Zod union schemas (string | record) on in-scope write tools, normalizeRecordPayload coercing to Record<string, unknown>, reusing parseRecordOrYaml for strings. CLI stdio client adds machine-readable hindrance diagnostics without changing exit semantics."
+  name: "Tool input normalization architecture"
+  status: "Planned"

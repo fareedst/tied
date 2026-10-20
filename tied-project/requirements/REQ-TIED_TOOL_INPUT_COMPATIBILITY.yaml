@@ -1,0 +1,34 @@
+REQ-TIED_TOOL_INPUT_COMPATIBILITY:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
+    implementation:
+      - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+  description: "Agents invoking TIED MCP write tools must be able to pass structured record payloads as native JSON objects without JSON-RPC -32602 string-type validation failures, while legacy string callers retain current behavior."
+  name: "MCP record input compatibility"
+  rationale:
+    benefits:
+      - "Clear CLI hindrance diagnostics"
+      - "Native object payloads on write surface"
+      - "Shared normalization with string compatibility"
+    problems_solved:
+      - "Inconsistent agent ergonomics vs batch tools that already accept objects"
+      - "JSON-RPC -32602 when agents pass object record fields"
+    why: "Cursor and other MCP clients naturally serialize tool arguments as JSON objects; string-only Zod schemas force brittle double-encoding and block agent workflows."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Baseline operational observation captured and post-fix outcome recorded via feedback capture/outcome tools"
+      criterion_id: "kaizen-pdca"
+    - criterion: "Each in-scope write tool accepts object or string record fields with identical persisted YAML"
+      criterion_id: "object-or-string-write-fields"
+    - criterion: "null, array, and primitive payloads are rejected without partial writes"
+      criterion_id: "reject-non-record"
+    - criterion: "tied-cli emits DIAGNOSTIC TIED_CLI_HINDRANCE on JSON-RPC/tool transport failures without changing exit codes"
+      criterion_id: "cli-hindrance-diagnostic"
+  status: "Planned"

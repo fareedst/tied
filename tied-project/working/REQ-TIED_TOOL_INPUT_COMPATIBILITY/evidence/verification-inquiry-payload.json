@@ -1,0 +1,161 @@
+{
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "REQ-TIED_TOOL_INPUT_COMPATIBILITY",
+  "run_id": "ntic-build-verify-20261020-r1",
+  "phase": "verification",
+  "scope": [
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+    "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1"
+  ],
+  "graph": {
+    "projectId": "stdd-ntic-build",
+    "criteria": [
+      {
+        "identity": {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-OBJECT-OR-STRING",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-ntic-normalize"]
+      },
+      {
+        "identity": {
+          "id": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#SC-CLI-HINDRANCE",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        },
+        "architectureConstraintIds": ["constraint-ntic-cli"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-ntic-normalize",
+        "implementationBlockIds": [
+          "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1"
+        ]
+      },
+      {
+        "id": "constraint-ntic-cli",
+        "implementationBlockIds": [
+          "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1"
+        ]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#NORMALIZE_RECORD_PAYLOAD#ntic-rev-1",
+          "kind": "block",
+          "name": "NORMALIZE_RECORD_PAYLOAD",
+          "derivation": "content",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#APPLY_RECORD_FIELD_TO_WRITE_TOOLS#ntic-rev-1",
+          "kind": "block",
+          "name": "APPLY_RECORD_FIELD_TO_WRITE_TOOLS",
+          "derivation": "content",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        }
+      },
+      {
+        "identity": {
+          "id": "IMPL-TIED_TOOL_INPUT_NORMALIZATION#EMIT_CLI_HINDRANCE_DIAGNOSTIC#ntic-rev-1",
+          "kind": "block",
+          "name": "EMIT_CLI_HINDRANCE_DIAGNOSTIC",
+          "derivation": "content",
+          "revision": "ntic-rev-1",
+          "sourceRevision": "ntic-source-rev-1"
+        }
+      }
+    ],
+    "bindings": [],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "ntic-rev-1",
+    "specification": [
+      {
+        "id": "spec-normalize-object-string",
+        "kind": "behavior",
+        "value": "normalizeRecordPayload accepts plain objects and legacy strings with identical write semantics",
+        "order": 1
+      },
+      {
+        "id": "spec-reject-non-record",
+        "kind": "behavior",
+        "value": "null, array, and primitive payloads fail closed without partial writes",
+        "order": 2
+      },
+      {
+        "id": "spec-cli-diagnostic",
+        "kind": "behavior",
+        "value": "CLI emits DIAGNOSTIC TIED_CLI_HINDRANCE without changing exit codes",
+        "order": 3
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-spec-normalize",
+        "direction": "test",
+        "statementId": "spec-normalize-object-string",
+        "kind": "behavior",
+        "value": "parse-content.test.ts normalizeRecordPayload GREEN",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "mcp-server/src/parse-content.test.ts" },
+        "provenance": "npm-test",
+        "blockRevision": "ntic-rev-1"
+      },
+      {
+        "id": "test-spec-schema",
+        "direction": "test",
+        "statementId": "spec-normalize-object-string",
+        "kind": "behavior",
+        "value": "tool-record-input-schema.test.ts write-tool unions GREEN",
+        "order": 2,
+        "reliable": true,
+        "source": { "location": "mcp-server/src/tools/tool-record-input-schema.test.ts" },
+        "provenance": "npm-test",
+        "blockRevision": "ntic-rev-1"
+      },
+      {
+        "id": "test-spec-cli",
+        "direction": "test",
+        "statementId": "spec-cli-diagnostic",
+        "kind": "behavior",
+        "value": "tied-cli-large-args.test.cjs hindrance diagnostic GREEN",
+        "order": 3,
+        "reliable": true,
+        "source": { "location": "mcp-server/test/tied-cli-large-args.test.cjs" },
+        "provenance": "npm-test",
+        "blockRevision": "ntic-rev-1"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-normalize",
+        "direction": "production",
+        "statementId": "spec-normalize-object-string",
+        "kind": "behavior",
+        "value": "normalizeRecordPayload in parse-content.ts",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "mcp-server/src/parse-content.ts" },
+        "provenance": "implementation",
+        "blockRevision": "ntic-rev-1"
+      }
+    ]
+  }
+}

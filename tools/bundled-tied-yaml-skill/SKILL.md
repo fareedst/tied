@@ -144,16 +144,16 @@ Index names: `requirements`, `architecture`, `implementation`, `semantic-tokens`
 
 | Goal | Tool | Key args |
 |------|------|----------|
-| Insert new index row | `yaml_index_insert` | `index`, `token`, `record` (JSON string) |
-| Merge fields into index row | `yaml_index_update` | `index`, `token`, `updates` (JSON string) |
-| Create detail file | `yaml_detail_create` | `token`, `record` (JSON string); `sync_index` (default true) |
-| Merge fields into detail | `yaml_detail_update` | `token`, `updates` (JSON string) |
+| Insert new index row | `yaml_index_insert` | `index`, `token`, `record` (native JSON **object** recommended; JSON/YAML string still supported) |
+| Merge fields into index row | `yaml_index_update` | `index`, `token`, `updates` (object recommended; string compatible) |
+| Create detail file | `yaml_detail_create` | `token`, `record` (object recommended); `sync_index` (default true) |
+| Merge fields into detail | `yaml_detail_update` | `token`, `updates` (object recommended) |
 | Append bullets to `implementation_approach.details` | `yaml_detail_append_implementation_approach_details` | `token`, `details_lines` (array of strings)—appends without dropping existing lines |
 | Delete detail file | `yaml_detail_delete` | `token`; `sync_index` (default true) |
-| Create token + index + detail | `tied_token_create_with_detail` | `token`, `index_record`, `detail_record` (JSON strings) |
+| Create token + index + detail | `tied_token_create_with_detail` | `token`, `index_record`, `detail_record` (objects recommended; strings compatible) |
 | Rename a token everywhere | `tied_token_rename` | `old_token`, `new_token`; optional `dry_run`, `include_markdown`, `extra_globs`, `extra_extensions` |
 
-The `record`, `updates`, `index_record`, and `detail_record` parameters accept a **JSON string**. Escape inner quotes appropriately.
+The `record`, `updates`, `index_record`, and `detail_record` parameters accept a **native JSON object** (recommended for IDE MCP and `@path` args files) or a **JSON/YAML string** (legacy `tied-cli` quoting). On **`tied-cli`** transport/validation failures, stderr may include **`DIAGNOSTIC: TIED_CLI_HINDRANCE`** JSON (adjunct to **`ERROR:`** lines; exit codes unchanged).
 
 **Nested `updates`:** Current **mcp-server** deep-merges one level for `metadata`, `traceability`, `related_requirements`, `related_decisions`, `rationale`, and `implementation_approach` (partial `metadata` keeps `metadata.created`; when `metadata.last_updated` / `metadata.last_validated` are objects on both sides, sub-keys merge one level). Arrays such as `cross_references` still replace wholesale—send the full array when updating.
 
