@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **tied-install no-args CLI help ([REQ-TIED_LAYERED_CLIENT_INSTALL])** — `./tied-install.sh` with no arguments (or sole `-h` / `--help`) prints styled operator help aligned with `build-workspace.sh`; install requires an explicit client path or `.`. Shared module `tools/bootstrap/lib/tied-install-help.mjs`; tests `tied-install-help.test.mjs`, `install-layers-help.test.mjs`; **SC-LCI-CLI-HELP-NO-ARGS**. Plan: [PLAN-tied-install-cli-help.md](tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/PLAN-tied-install-cli-help.md).
 
+### Fixed
+
+- **Legacy layout close-out receipt** — Correct full commit SHA in [git-hygiene-receipt-2026-10-19.md](tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/git-hygiene-receipt-2026-10-19.md) for the decommission wave (`28fee75a3ea33ca7a75f4097dd17a93c1dbe69bf`).
+
 ### Changed
 
 - **plan-close-out traceable commit ([REQ-PROMPT_TYPE_GLOBAL_SKILLS])** — `@plan-close-out` runs default **`tied_git_hygiene`** preview and checklist-aligned **traceable-commit** when unified **close_out** allows; skips commit when blocked. New shared [traceable-commit-close-out.md](tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md); **`git_preamble_plan_close_out`**; updated [plan-close-out/SKILL.md](tools/bundled-prompt-type-skills/plan-close-out/SKILL.md) and [.cursor/agents/plan-close-out.md](.cursor/agents/plan-close-out.md). **`leap-diff-promote`** / **`ammend-commit`** unchanged (no commit). Plan: [PLAN.md](tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md).

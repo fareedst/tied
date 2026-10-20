@@ -1,10 +1,17 @@
-docs(feedback): Kaizen PDCA for REQ-TIED_TOOL_INPUT_COMPATIBILITY
+Staging map (workspace sweep — non-REQ noise discarded):
 
-Formalize sponsor-witness baseline for MCP -32602 on record fields,
-capture fb-mvgagoen-gtfuua and improved outcome oo-mvgahc5x-zacqtr
-in tied-project/feedback.yaml, and sync handoff/tracker evidence.
+- tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/git-hygiene-receipt-2026-10-19.md
 
-REQ-TIED_TOOL_INPUT_COMPATIBILITY · kaizen-pdca criterion
+---
 
-Clear-workspace: unrelated dirty paths excluded per
-evidence/clear-workspace-kaizen-2026-10-20.md.
+fix(evidence): correct legacy layout close-out commit SHA
+
+The git-hygiene receipt cited a non-existent full hash; align with
+`git rev-parse 28fee75a` for traceability to the decommission commit.
+
+Refs: REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION (evidence only)
+
+Completion signals (REQ-TIED_TOOL_INPUT_COMPATIBILITY — unchanged):
+- Machine close-out: pass (envelope blocking_gaps=0)
+- Process contract: partial (manifest skipped per prior pass)
+- Adherence ledger: partial band C

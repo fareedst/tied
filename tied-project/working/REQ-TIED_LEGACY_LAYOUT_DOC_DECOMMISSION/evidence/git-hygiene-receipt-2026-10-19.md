@@ -15,4 +15,4 @@ Staged only the legacy layout documentation decommission wave (52 paths); no unr
 
 ## Traceable commit
 
-**`28fee75a6ddd1ce6ed3f4b6dcf8f09da04dc5c09`** — `docs(tied): decommission legacy tied/ layout operator prose`
+**`28fee75a3ea33ca7a75f4097dd17a93c1dbe69bf`** — `docs(tied): decommission legacy tied/ layout operator prose`

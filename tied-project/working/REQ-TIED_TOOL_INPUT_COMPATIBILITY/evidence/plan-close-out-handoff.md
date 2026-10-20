@@ -22,3 +22,9 @@
 ### Commit
 
 **SHAs:** `047ca46e` (feature) · `1d3dbbce` (vocab) · `cda41867` (Kaizen PDCA + clear-workspace commit).
+
+### Workspace sweep (2026-10-20, sponsor: commit unless noise)
+
+- **REQ wave:** already closed; envelope re-validate `blocking_gap_count=0` (6 advisory warns).
+- **Noise restored:** 14 paths (fixture envelopes, source-graph churn, certification/template styling, unrelated REQ benchmarks/trackers) — see [git-hygiene-receipt-2026-10-20-workspace-sweep.md](./git-hygiene-receipt-2026-10-20-workspace-sweep.md).
+- **Follow-on commit:** `39c2f5ba` — legacy layout hygiene receipt SHA correction + workspace sweep evidence.
