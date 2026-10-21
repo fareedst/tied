@@ -1045,6 +1045,18 @@ ARCH-TIED_HARNESS_TRACE_OBSERVATION:
     last_updated: "2026-10-21"
     registered: "2026-10-21"
   name: "Harness trace observation architecture"
+ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK:
+  cross_references:
+    - "IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+    - "REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+  description: "Runbook layer on Loop 3 charter without new gate authority"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "HTOL pilot cohort runbook architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Planned"
+  type: "ARCH"
 ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"
@@ -2683,6 +2695,18 @@ IMPL-TIED_HARNESS_TRACE_OBSERVATION:
     last_updated: "2026-10-21"
     registered: "2026-10-21"
   name: "Harness trace observation implementation"
+IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK:
+  cross_references:
+    - "ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+    - "REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+  description: "Runbook doc, instance template, bootstrap test, cross-links"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "HTOL pilot cohort runbook implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+  type: "IMPL"
 IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
@@ -4486,6 +4510,18 @@ REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
     last_updated: "2026-10-21"
     registered: "2026-10-21"
   name: "Harness trace observation loop"
+REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK:
+  cross_references:
+    - "ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+    - "IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+  description: "Operator checklist composing Loop 3 charter for real cohort runs"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "HTOL pilot cohort runbook"
+  source_index: "requirements.yaml"
+  status: "Planned"
+  type: "REQ"
 REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"

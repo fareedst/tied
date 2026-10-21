@@ -2691,6 +2691,18 @@ REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
       - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
     implementation:
       - "IMPL-TIED_HARNESS_TRACE_OBSERVATION"
+REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK:
+  category: "Methodology"
+  description: "Operator-facing paste-friendly cohort runbook composing Loop 3 charter: enroll, htol-v1 tagged captures, tied_feedback_pilot_run, and not_measured/inconclusive outcome recording—without new gate MCP or LangSmith requirements."
+  detail_file: "requirements/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml"
+  name: "HTOL pilot cohort runbook (Loop 3 operator checklist)"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+    implementation:
+      - "IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK"
 REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   category: "Methodology"
   description: "Loop 3 guide and example template for bounded evaluation-corpus.v1 rows (incidents, reverts, review false positives)."

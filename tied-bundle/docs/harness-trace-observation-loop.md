@@ -114,8 +114,9 @@ Compose with [pre-handoff verification charter](pre-handoff-verification-charter
 
 When a sponsor scopes **HTOL effectiveness** (not just Loop 2 capture), use the Loop 3 charter and enrollment path—**does not** replace this guide or checklist gates:
 
+- [HTOL pilot cohort runbook](htol-pilot-cohort-runbook.md) ([REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK](../../tied-project/requirements/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml)) — enroll → tag captures → **`tied_feedback_pilot_run`** checklist
 - [Harness trace learning experiment charter](harness-trace-learning-experiment-charter.md) ([REQ-TIED_HARNESS_TRACE_LEARNING_PILOT](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml))
-- Templates: [htol-methodology-learning-experiment.v1.example.yaml](../templates/htol-methodology-learning-experiment.v1.example.yaml), [htol-feedback-pilot-spec.v1.example.yaml](../templates/htol-feedback-pilot-spec.v1.example.yaml)
+- Templates: [htol-methodology-learning-experiment.v1.example.yaml](../templates/htol-methodology-learning-experiment.v1.example.yaml), [htol-feedback-pilot-spec.v1.example.yaml](../templates/htol-feedback-pilot-spec.v1.example.yaml), [htol-pilot-cohort-runbook-instance.v1.example.yaml](../templates/htol-pilot-cohort-runbook-instance.v1.example.yaml)
 
 ---
 

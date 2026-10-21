@@ -2687,6 +2687,18 @@ IMPL-TIED_HARNESS_TRACE_OBSERVATION:
       - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
     requirements:
       - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK:
+  cross_references:
+    - "ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+    - "REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+  detail_file: "implementation-decisions/IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml"
+  name: "HTOL pilot cohort runbook implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+    requirements:
+      - "REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK"
 IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   detail_file: "implementation-decisions/IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
   name: "Incident/revert evaluation corpus doc maintenance"

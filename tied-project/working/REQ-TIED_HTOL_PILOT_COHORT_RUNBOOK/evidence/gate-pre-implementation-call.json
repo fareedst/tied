@@ -1,0 +1,35 @@
+{
+  "phase": "pre_implementation",
+  "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "tracker_path": "tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/checklist-tracker.yaml",
+  "citdp": {
+    "change_definition": {
+      "methodology_surface_change_class": "prompt_type_workflow",
+      "methodology_surface_experiment_link": {
+        "experiment_id": "mle-htol-pilot-20261021-001",
+        "production_system_surface": "prompt_type_workflow",
+        "surface_ref": "harness-trace-review"
+      }
+    },
+    "record_identity": {
+      "change_request_id": "REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK",
+      "depth_tier": "minimal",
+      "gate_policy": "advisory",
+      "profile_depth": "minimal"
+    },
+    "risk_analysis": {
+      "adversarial_inquiry": {
+        "depth_tier": "minimal",
+        "gate_policy": "advisory"
+      }
+    }
+  },
+  "evidence": {
+    "methodologySurfaceExperimentBasePath": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project"
+  },
+  "receipt_persistence": {
+    "request_token": "REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK",
+    "gates_dir": "tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/gates",
+    "ledger_path": "tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/gates/gate-ledger.jsonl"
+  }
+}

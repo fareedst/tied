@@ -1,0 +1,27 @@
+feat(htol): Loop 3 pilot cohort operator runbook
+
+Paste-friendly enroll→capture→pilot→outcome checklist composing
+REQ-TIED_HARNESS_TRACE_LEARNING_PILOT charter—htol-v1 tagging,
+not_measured/inconclusive outcome cap, no new gate MCP.
+
+REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK
+ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK
+IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK
+
+Completion signals: machine close-out pass (close_out gate +
+envelope blocking_gap_count=0); process contract pass (tracker +
+manifest); adherence reconcile band B (thin_ledger advisory).
+
+Staging map:
+- CHANGELOG.md
+- tied-bundle/docs/htol-pilot-cohort-runbook.md
+- tied-bundle/docs/harness-trace-learning-experiment-charter.md
+- tied-bundle/docs/harness-trace-observation-loop.md
+- tied-bundle/templates/htol-pilot-cohort-runbook-instance.v1.example.yaml
+- tools/bootstrap/lib/htol-pilot-cohort-runbook-doc.test.mjs
+- tied-project/{requirements,architecture-decisions,implementation-decisions}/*HTOL_PILOT_COHORT_RUNBOOK*
+- tied-project/{requirements,architecture-decisions,implementation-decisions}.yaml
+- tied-project/citdp/CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml
+- tied-project/semantic-tokens.yaml
+- tied-project/working/PLAN-HTOL-PILOT-COHORT-RUNBOOK/
+- tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/

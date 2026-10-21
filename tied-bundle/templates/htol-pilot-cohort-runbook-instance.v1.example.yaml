@@ -1,0 +1,33 @@
+# Fill-in instance for one HTOL pilot cohort run (operator-local working copy).
+# Traceability: REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK · REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
+# Runbook: tied-bundle/docs/htol-pilot-cohort-runbook.md
+
+schema_version: "htol-pilot-cohort-runbook-instance.v1"
+experiment_id: "mle-htol-pilot-YYYYMMDD-001"
+cohort_id: "htol-pilot-local-001"
+working_folder: "tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK"
+privacy_tier: "operator_local"
+analysis_window:
+  start: "2026-01-01T00:00:00Z"
+  end: "2026-03-01T00:00:00Z"
+cohort_bounds:
+  min_entries: 3
+  max_entries: 30
+  follow_up_weeks_max: 8
+denominator_fingerprint: "htol-v1"
+compatibility_key: "feedback-capture.v1|operator_local"
+methodology_hypothesis: >
+  Replace with sponsor-finalized hypothesis (see harness-trace-learning-experiment-charter.md).
+stop_overrides:
+  zero_compatible_weeks_before_halt: 4
+  classification_ambiguity_consecutive_threshold: 2
+outcome_cap:
+  allowed_values:
+    - "not_measured"
+    - "inconclusive"
+  forbidden_without_sponsor_countermeasure:
+    - "improved"
+    - "regressed"
+evidence_paths:
+  upsert_receipt: "{working_folder}/evidence/methodology-learning-experiment-upsert.v1.json"
+  pilot_report: "{working_folder}/evidence/htol-feedback-pilot-report.v1.json"

@@ -64,6 +64,8 @@ Record the finalized hypothesis on the experiment row **`methodology_hypothesis`
 
 ## Operator sequence
 
+**Paste-friendly checklist:** [HTOL pilot cohort runbook](htol-pilot-cohort-runbook.md) ([REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK](../../tied-project/requirements/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml)) — fill-in fields, MCP names, and pilot spec skeleton for a real cohort. Policy prose remains in this charter.
+
 1. **Declare hypothesis** — Sponsor scopes question, bounds, and stop criteria (this charter).
 2. **Upsert experiment** — **`tied_methodology_learning_experiment_upsert`** with `schema_version: methodology-learning-experiment.v1`, `production_system_surface: prompt_type_workflow`, `surface_ref: harness-trace-review`. Template: [htol-methodology-learning-experiment.v1.example.yaml](../templates/htol-methodology-learning-experiment.v1.example.yaml).
 3. **Optional enrollment check** — Read-only **`tied_methodology_production_system_enrollment_validate`** (structural completeness only).
@@ -93,6 +95,7 @@ Compose with [harness-trace-observation-loop.md](harness-trace-observation-loop.
 
 ## Related documents
 
+- [HTOL pilot cohort runbook](htol-pilot-cohort-runbook.md) (operator checklist for a real cohort)
 - [Harness trace observation loop (Phase 1)](harness-trace-observation-loop.md)
 - [Incident and revert evaluation corpus](incident-revert-evaluation-corpus.md) (pilot bounds pattern)
 - [Feedback to TIED (vocab)](../../tied-project/vocab/feedback-to-tied.md)

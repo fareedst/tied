@@ -1,0 +1,102 @@
+citdp:
+  path: tied-project/citdp/CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml
+  reason: HTOL pilot cohort runbook; Loop 3 operator checklist composing charter.
+  status: complete
+depth_tier: minimal
+gate_policy: advisory
+methodology_surface_change_class: prompt_type_workflow
+profile_depth: minimal
+purpose: Per-request Tracker for REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.
+refine_pass: 1
+refine_pass_date: "2026-10-21"
+request: REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK
+request_token: REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: close_out_complete
+execution_evidence:
+  request: REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK
+steps:
+  - id: session-bootstrap
+    disposition: completed
+    notes: PRELOAD feedback-to-tied, quality-assurance pilots; parent REQ-TIED_HARNESS_TRACE_LEARNING_PILOT stack.
+  - id: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-HTOL-PILOT-COHORT-RUNBOOK/PLAN.md
+  - id: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml
+  - id: impact-discovery
+    disposition: completed
+    notes: Mint new REQ (not LEAP extend Phase 2); doc + bootstrap test; slices A–E.
+  - id: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml
+    notes: No integrated waiver; outcomes not_measured/inconclusive until sponsor confirms.
+  - id: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/test-strategy.md
+  - id: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: CITDP counterexamples only; minimal/advisory per PLAN.
+  - id: author-requirement
+    disposition: completed
+    notes: REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK minted via tied_token_create_with_detail.
+  - id: author-architecture
+    disposition: completed
+    notes: ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK minted.
+  - id: persist-implementation-records
+    disposition: completed
+    notes: IMPL index + pseudocode sidecar.
+  - id: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK-pseudocode.md
+      - kind: gate_receipt
+        path: tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/gates/pre_implementation-2026-10-21T14-28-51-040Z.json
+  - id: resolve-pseudocode
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK-pseudocode.md
+  - id: three-way-alignment-unit
+    disposition: not_applicable
+  - id: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tools/bootstrap/lib/htol-pilot-cohort-runbook-doc.test.mjs
+  - id: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - kind: command_evidence
+        claimed_success: true
+        exit_code: 0
+        stdout_ref: tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/evidence/runbook-doc-test-stdout.txt
+  - id: composition-integration
+    disposition: not_applicable
+  - id: end-to-end-ui
+    disposition: not_applicable
+  - id: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: gate_receipt
+        path: tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/gates/verification-2026-10-21T14-29-02-124Z.json
+  - id: persist-citdp-record
+    disposition: completed
+  - id: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/evidence/traceable-commit-evidence.md
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/evidence/proposed-commit-message.txt
