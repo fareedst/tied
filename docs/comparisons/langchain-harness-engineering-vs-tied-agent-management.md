@@ -78,7 +78,7 @@ LangChain’s named middleware classes (**`PreCompletionChecklistMiddleware`**, 
 | LangChain pattern | TIED surface | Notes |
 | --- | --- | --- |
 | LangSmith trace store | Adherence ledger, **`tied_adherence_reconcile_run`**, working evidence under [working-artifact-placement](../../tied-bundle/docs/working-artifact-placement.md) | Committed rationale vs regenerable machine traces |
-| Trace Analyzer Skill | Kaizen / **`tied_feedback_*`** observations; prompt-type **skills** as repeatable recipes (**Recommendation-only** for a dedicated trace skill) | Observations **inform**; confirmed process changes route through checklist steps—not automatic LEAP |
+| Trace Analyzer Skill | Kaizen / **`tied_feedback_*`** observations; **`@harness-trace-review`** and **`@harness-trace-analyzer`** (**TIED-existing**) | Observations **inform**; confirmed process changes route through checklist steps—not automatic LEAP |
 | Parallel error-analysis agents | Cursor **Task** subagent delegation (`build-plan`, `refine-plan`, …) | Harness-side fan-out; gate receipts stay platform-adjacent |
 | Human review of harness edits | Sponsor **consequence ladder**; costly benchmark overfit → sponsor choice | Avoid encoding waivers only in skill prose |
 
@@ -134,7 +134,7 @@ LangChain’s named middleware classes (**`PreCompletionChecklistMiddleware`**, 
 | --- | --- | --- |
 | **Harness engineering** (LangChain) | **Harness profile** — Task subagent, skills, hooks, agentstream turns | Not [Harness²](tied-vs-harness2.md) recursive library |
 | **Three knobs** | AGENTS.md bootstrap, IDE MCP tools, hooks + opt-in preflight | YAML on **TIED MCP** seam |
-| **Trace Analyzer Skill** | Kaizen/adherence recipe; future Loop 3 skill (**Recommendation-only**) | Not **`tied_checklist_gate_validate`** |
+| **Trace Analyzer Skill** | **`@harness-trace-analyzer`** (+ Loop 2 **`@harness-trace-review`**) → Kaizen capture (**TIED-existing**) | Not **`tied_checklist_gate_validate`**; not LangSmith |
 | **LangSmith / traces** | Adherence ledger, reconcile, optional adversarial inquiry (depth-gated) | Advisory until checklist-owned confirmation |
 | **Middleware** (named classes) | **External examples** → PRELOAD, verification nudge, Jev guard | Not shipped class names in stdd |
 | **Self-verification** | **`pseudocode_validate`**, tests, **`tied_verify`**, **`tied_validate_consistency`** | Composes with harness nudges |

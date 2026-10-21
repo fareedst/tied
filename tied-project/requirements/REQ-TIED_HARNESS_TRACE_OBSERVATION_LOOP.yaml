@@ -1,42 +1,43 @@
 REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
-  REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
-    category: "Methodology"
-    description: "Loop 2 compose: methodology guide and explicit harness-trace-review skill for trace-driven harness failure review into Kaizen capture_observation, plus test-strategy executable matrix for build-verify evidence."
-    name: "Harness trace observation loop (LangChain Phase 1)"
-    priority: "P2"
-    rationale:
-      benefits:
-        - "Clear promotion boundary"
-        - "Repeatable Kaizen capture path"
-      problems_solved:
-        - "Ad hoc harness postmortems"
-        - "test-strategy evidence that cites model self-check only"
-      why: "LangChain comparison Phase 1; trace observations must not substitute for checklist gates."
-    related_requirements:
-      depends_on:
-        - "REQ-FEEDBACK_TO_TIED"
-        - "REQ-KAIZEN-OBSERVATION-CAPTURE"
-        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-      related_to:
-        - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-        - "REQ-TIED_HARNESS_PLATFORM_SEAM"
-        - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
-    satisfaction_criteria:
-      - criterion: "bundled harness-trace-review skill references guide and forbids gate authority claims"
-        id: "SC-HTOL-SKILL"
-        metric: "Doc/skill audit"
-      - criterion: "harness-trace-observation-loop.md passes bootstrap contract test"
-        id: "SC-HTOL-GUIDE"
-        metric: "harness-trace-observation-loop-doc.test.mjs"
-      - criterion: "LangChain comparison Phase 1 row and authority checklist cross-links updated"
-        id: "SC-HTOL-COMPOSE"
-        metric: "Link audit"
-      - criterion: "tied_validate_consistency passes after implement"
-        id: "SC-HTOL-TRACE"
-        metric: "tied_validate_consistency"
-    status: "Planned"
-    traceability:
-      architecture:
-        - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
-      implementation:
-        - "IMPL-TIED_HARNESS_TRACE_OBSERVATION"
+  category: Methodology
+  description: "Loop 2 compose: methodology guide and explicit harness-trace-review skill for trace-driven harness failure review into Kaizen capture_observation, plus test-strategy executable matrix for build-verify evidence."
+  name: Harness trace observation loop (LangChain Phase 1)
+  priority: P2
+  rationale:
+    benefits:
+      - Clear promotion boundary
+      - Repeatable Kaizen capture path
+    problems_solved:
+      - Ad hoc harness postmortems
+      - test-strategy evidence that cites model self-check only
+    why: LangChain comparison Phase 1; trace observations must not substitute for checklist gates.
+  related_requirements:
+    depends_on:
+      - REQ-FEEDBACK_TO_TIED
+      - REQ-KAIZEN-OBSERVATION-CAPTURE
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+    related_to:
+      - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+      - REQ-TIED_HARNESS_PLATFORM_SEAM
+      - REQ-TIED_HARNESS_LANGCHAIN_PHASE3
+      - REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
+      - REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER
+  satisfaction_criteria:
+    - criterion: bundled harness-trace-review skill references guide and forbids gate authority claims
+      id: SC-HTOL-SKILL
+      metric: Doc/skill audit
+    - criterion: harness-trace-observation-loop.md passes bootstrap contract test
+      id: SC-HTOL-GUIDE
+      metric: harness-trace-observation-loop-doc.test.mjs
+    - criterion: LangChain comparison Phase 1 row and authority checklist cross-links updated
+      id: SC-HTOL-COMPOSE
+      metric: Link audit
+    - criterion: tied_validate_consistency passes after implement
+      id: SC-HTOL-TRACE
+      metric: tied_validate_consistency
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-TIED_HARNESS_TRACE_OBSERVATION
+    implementation:
+      - IMPL-TIED_HARNESS_TRACE_OBSERVATION
