@@ -91,3 +91,33 @@ experiments:
       rationale: "Follow-on A implement pass."
     schema_version: "methodology-learning-experiment.v1"
     surface_ref: "agent-req-implementation-checklist.yaml#methodology-surface-experiment-gate"
+  - experiment_id: "mle-htol-pilot-20261021-001"
+    methodology_baseline:
+      metric_rows:
+        - name: "htol_tagged_capture_count"
+          value: "not_measured"
+        - name: "pre_charter_observation_rate"
+          value: "not_measured"
+      snapshot_at: "2026-10-21T06:16:00Z"
+    methodology_hypothesis: "Structured @harness-trace-review / HTOL trace observation increases actionable Kaizen captures versus ad hoc transcript review, measurable only after a bounded HTOL-tagged capture cohort exists."
+    methodology_outcome_observation:
+      evidence_refs:
+        - "tied-bundle/docs/harness-trace-learning-experiment-charter.md"
+        - "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/htol-feedback-pilot-report.v1.json"
+        - "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/methodology-learning-experiment-validate-implement.v1.json"
+      recorded_at: "2026-10-21T06:24:00Z"
+      value: "inconclusive"
+    privacy_tier: "operator_local"
+    production_system_surface: "prompt_type_workflow"
+    proof_boundary: "Structural enrollment for LangChain Phase 2 Loop 3 pilot; does not prove LangChain-style bench gains or HTOL effectiveness."
+    rule_countermeasure_ref:
+      kind: "methodology_doc_compose"
+      paths:
+        - "tied-bundle/docs/harness-trace-learning-experiment-charter.md"
+        - "tied-bundle/docs/harness-trace-observation-loop.md"
+        - "tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md"
+    rule_reversal:
+      applied: false
+      rationale: "Dogfood pilot run returned IncompatibleCohort; charter documents expected empty initial cohort."
+    schema_version: "methodology-learning-experiment.v1"
+    surface_ref: "harness-trace-review"

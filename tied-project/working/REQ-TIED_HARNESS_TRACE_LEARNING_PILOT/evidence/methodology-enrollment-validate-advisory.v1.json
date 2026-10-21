@@ -1,0 +1,14 @@
+{
+  "schema_version": "methodology-enrollment-validate-evidence.v1",
+  "experiment_id": "mle-htol-pilot-20261021-001",
+  "recorded_at": "2026-10-21T06:24:00Z",
+  "note": "Read-only advisory; structural_invalid ENROLLMENT_INVALID_PROMPT_TYPE until leaf registry recognizes harness-trace-review in enrollment validator catalog.",
+  "enrollment_disposition": "structural_invalid",
+  "diagnostics": [
+    {
+      "code": "ENROLLMENT_INVALID_PROMPT_TYPE",
+      "message": "surface_ref must be a leaf prompt type id; got: harness-trace-review",
+      "path": "surface_ref"
+    }
+  ]
+}

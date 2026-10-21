@@ -2628,6 +2628,18 @@ REQ-TIED_HARNESS_PLATFORM_SEAM:
     implementation:
       - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
     tests: []
+REQ-TIED_HARNESS_TRACE_LEARNING_PILOT:
+  category: "Methodology"
+  description: "Loop 3 compose: HTOL learning experiment charter, templates, store dogfood enrollment, and optional tied_feedback_pilot_run evidence for sponsor-run effectiveness pilots with explicit stop criteria and not_measured outcomes."
+  detail_file: "requirements/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml"
+  name: "Harness trace learning pilot (LangChain Phase 2)"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT"
+    implementation:
+      - "IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT"
 REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
   category: "Methodology"
   description: "Loop 2 compose: methodology guide and explicit harness-trace-review skill for trace-driven harness failure review into Kaizen capture_observation, plus test-strategy executable matrix for build-verify evidence."

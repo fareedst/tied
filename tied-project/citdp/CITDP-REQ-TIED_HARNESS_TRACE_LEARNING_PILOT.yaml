@@ -1,0 +1,122 @@
+CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT:
+  change_definition:
+    current_behavior: "LangChain comparison Phase 2 recommends a Loop 3 methodology learning experiment for HTOL effectiveness but marks it Defer; Phase 1 ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP]) delivers Loop 2 trace→Kaizen compose without experiment charter, templates, or store enrollment for @harness-trace-review."
+    desired_behavior: "REQ-tracked Phase 2 package: HTOL learning experiment charter + fillable templates, store dogfood row in methodology-experiments.yaml via existing MCP upsert, optional tied_feedback_pilot_run evidence with not_measured/inconclusive outcomes until a real cohort exists—composing Loop 3 stack without new gate authority or LangSmith automation."
+    methodology_surface_change_class: "prompt_type_workflow"
+    methodology_surface_experiment_link:
+      experiment_id: "mle-htol-pilot-20261021-001"
+      production_system_surface: "prompt_type_workflow"
+      surface_ref: "harness-trace-review"
+    non_goals:
+      - "LangSmith, Harbor, or trace-store automation"
+      - "Terminal Bench or vendor benchmark scores as TIED effectiveness"
+      - "Automatic LEAP or project YAML mutation from pilot metrics"
+      - "New checklist slugs or MCP gate tools"
+      - "Phase 3 methodology composition matrix row without sponsor promotion"
+      - "Claim improved methodology_outcome_observation without sponsor-confirmed countermeasure + baseline"
+    success_criteria:
+      - "tied-bundle/docs/harness-trace-learning-experiment-charter.md passes bootstrap contract test"
+      - "htol-methodology-learning-experiment.v1.example.yaml and htol-feedback-pilot-spec.v1.example.yaml under tied-bundle/templates/"
+      - "Dogfood experiment mle-htol-pilot-20261021-001 enrolled via tied_methodology_learning_experiment_upsert with validate/list evidence JSON in working/evidence/"
+      - "Cross-links: harness-trace-observation-loop Loop 3 section, LangChain comparison Phase 2 row, client-development-index, feedback-to-tied HTOL pilot convention"
+      - "pre_implementation and verification gate receipts under working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/gates/"
+      - "REQ/ARCH/IMPL registered; pseudocode_validate and tied_validate_consistency pass after implement"
+    unchanged_behavior: "Checklist gate authority; harness-trace-review explicit-only invocation; Kaizen capture semantics; Phase 1 HTOL guide and skill behavior unless optional denominator doc slice applied."
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/harness-trace-learning-experiment-charter-doc.test.mjs (after implement)"
+      - "tied_methodology_learning_experiment_validate on dogfood row"
+      - "tied_methodology_production_system_enrollment_validate (read-only advisory) for prompt_type_workflow / harness-trace-review"
+      - "tied_feedback_pilot_run once with htol-feedback-pilot-spec template (best-effort; empty cohort documented)"
+      - "pseudocode_validate IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT gate_mode"
+      - "tied_checklist_gate_validate phase pre_implementation"
+    manifest_reference: null
+    proof_boundaries:
+      - "structural_enrollment_does_not_prove_htol_improves_outcomes"
+      - "pilot_metrics_analysis_only_not_methodology_promotion"
+      - "vendor_benchmarks_remain_langchain_reported_or_not_measured"
+  impact_analysis:
+    impl_inventory_notes: "tied-bundle/docs charter; tied-bundle/templates; tied-project/methodology-experiments.yaml (MCP upsert); tools/bootstrap/lib charter test; docs/comparisons langchain Phase 2 row; optional harness-trace-review SKILL denominator hint."
+    modules_or_boundaries: "Methodology docs and templates; existing methodology-learning-experiment and kaizen-feedback-pilot MCP; project YAML enrollment only."
+    tied_tokens_affected:
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+      - "REQ-KAIZEN-FEEDBACK-PILOT"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+      - "REQ-FEEDBACK_TO_TIED"
+    tied_tokens_new:
+      - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+      - "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT"
+      - "IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  persist_policy: "Persist CITDP at refine-plan; update record_status to complete after implement persist-citdp-record"
+  record_identity:
+    change_request_id: "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-21"
+    title: "Harness trace learning pilot (LangChain comparison Phase 2 Loop 3)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Pilot report cited as proof HTOL improves Terminal Bench or LangChain metrics"
+      - "methodology_outcome_observation set to improved on empty or zero-entry cohort"
+      - "Charter prose grants tied_checklist_gate_validate or tied_verify waiver"
+      - "Hand-edited methodology-experiments.yaml bypassing validate/upsert MCP"
+      - "Trace review skill mandatory global enrollment without sponsor charter"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Charter omits stop criteria for privacy incident or zero compatible entries"
+        - "Pilot spec uses metrics outside closed catalog in feedback-to-tied.md"
+      depth_change_waiver:
+        approval: "sponsor linked Cursor plan htol_phase_2_pilot 2026-10-21"
+        expiry: "2026-11-21"
+        owner: "sponsor"
+        rationale: "Sponsor chose charter + store dogfood at minimal/advisory; persistence is single-row existing MCP upsert on operator-local store, not fleet rollout."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "New MCP gate tool added for HTOL pilot authority"
+        - "Default harness-trace-review behavior flip without explicit skill invocation"
+      eligibility_triggers_matched:
+        - "persistence"
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/htol_phase_2_pilot_88cb172f.plan.md"
+        - "docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md"
+        - "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/PLAN.md"
+      falsification_questions:
+        - "Does every outcome observation stay not_measured or inconclusive until sponsor confirms baseline and countermeasure?"
+        - "Does charter state pilot does not replace checklist gates?"
+      gate_policy: "advisory"
+      integrated_waiver:
+        approval: "sponsor linked Cursor plan htol_phase_2_pilot 2026-10-21"
+        expiry: "2026-11-21"
+        owner: "sponsor"
+        rationale: "Eligibility persistence trigger matched; sponsor confirmed minimal/advisory Loop 3 charter + single-row store dogfood via existing MCP upsert."
+      prior_depth_tier: null
+      rationale: "Doc-first charter + templates + bounded store enrollment; existing validated MCP only; no auth/network expansion; dogfood cohort may be empty initially."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Charter doc contract test + enrollment validate JSON"
+        evidence_method: "Bootstrap test + working folder MCP evidence"
+        limitation: "Does not measure whether HTOL improves client harness outcomes until real captures accumulate"
+        owner: "agent"
+        rationale: "Compose Loop 3 operator package on Phase 1 HTOL foundation"
+  test_strategy:
+    documentation_only: false
+    mandatory_order: "RED charter doc contract test before charter finalization"
+    unit_tests:
+      - "tools/bootstrap/lib/harness-trace-learning-experiment-charter-doc.test.mjs"
+    verification_commands:
+      - "tied_validate_consistency after YAML mutations"
+      - "optional tied_methodology_learning_experiment_validate on dogfood experiment_id"

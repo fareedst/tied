@@ -1,0 +1,16 @@
+{
+  "schema_version": "methodology-learning-experiment-upsert-evidence.v1",
+  "experiment_id": "mle-htol-pilot-20261021-001",
+  "phase": "refine-plan",
+  "recorded_at": "2026-10-21T06:16:00Z",
+  "purpose": "Structural enrollment required for pre_implementation gate (methodology_surface_experiment_link); full charter/templates deferred to implement.",
+  "upsert_result": {
+    "ok": true,
+    "created": true,
+    "path": "tied-project/methodology-experiments.yaml"
+  },
+  "validation": {
+    "ok": true,
+    "diagnostics": []
+  }
+}

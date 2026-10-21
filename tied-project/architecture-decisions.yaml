@@ -2151,6 +2151,17 @@ ARCH-TIED_HARNESS_PLATFORM_SEAM:
     requirements:
       - "REQ-TIED_HARNESS_PLATFORM_SEAM"
     tests: []
+ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT:
+  cross_references:
+    - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml"
+  name: "Harness trace learning pilot architecture"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT"
+    requirements:
+      - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
 ARCH-TIED_HARNESS_TRACE_OBSERVATION:
   cross_references:
     - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"

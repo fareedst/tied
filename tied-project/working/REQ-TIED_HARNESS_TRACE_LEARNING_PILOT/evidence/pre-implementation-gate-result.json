@@ -1,0 +1,8 @@
+{
+  "phase": "pre_implementation",
+  "allowed": true,
+  "depth": "minimal",
+  "gate_policy": "advisory",
+  "receipt_path": "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/gates/pre_implementation-2026-10-21T06-16-12-831Z.json",
+  "recorded_at": "2026-10-21T06:16:12.831Z"
+}

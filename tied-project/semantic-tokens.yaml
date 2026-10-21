@@ -1000,6 +1000,18 @@ ARCH-TIED_HARNESS_PLATFORM_SEAM:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT:
+  cross_references:
+    - "IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT"
+    - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+  description: "Loop 3 compose on Phase 1 HTOL; pilot analysis does not replace gates"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "Harness trace learning pilot architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_HARNESS_TRACE_OBSERVATION:
   cross_references:
     - "IMPL-TIED_HARNESS_TRACE_OBSERVATION"
@@ -2599,6 +2611,18 @@ IMPL-TIED_HARNESS_PLATFORM_SEAM:
     last_updated: "2026-10-20"
     registered: "2026-10-20"
   name: "Harness–platform seam implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
+  type: "IMPL"
+IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT:
+  cross_references:
+    - "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT"
+    - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+  description: "Charter, templates, MCP enrollment, pilot evidence, charter doc test"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "Harness trace learning pilot implementation"
   source_index: "implementation-decisions.yaml"
   status: "Planned"
   type: "IMPL"
@@ -4366,6 +4390,18 @@ REQ-TIED_HARNESS_PLATFORM_SEAM:
     last_updated: "2026-10-20"
     registered: "2026-10-20"
   name: "Harness–platform authority seam"
+  source_index: "requirements.yaml"
+  status: "Planned"
+  type: "REQ"
+REQ-TIED_HARNESS_TRACE_LEARNING_PILOT:
+  cross_references:
+    - "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT"
+    - "IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT"
+  description: "LangChain Phase 2 Loop 3: HTOL learning experiment charter, templates, dogfood enrollment"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "Harness trace learning pilot"
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"

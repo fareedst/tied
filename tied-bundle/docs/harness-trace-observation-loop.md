@@ -6,7 +6,7 @@
 
 **Invoke skill:** `@harness-trace-review` (`tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md`; installed under `.cursor/skills/harness-trace-review/`).
 
-**Source study:** [LangChain harness engineering × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) (Phase 1 compose).
+**Source studies:** [LangChain harness engineering × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) (trace/benchmark compose); [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md) (online metrics / Keep Rate compose — **Cursor-reported** only).
 
 ---
 
@@ -43,6 +43,7 @@ Trace review produces **Kaizen Loop 2** evidence. It does **not** prove implemen
 | **Gate confusion** | Skill/hook language waives or replaces checklist gates | Record observation; fix harness prose | Gate authority unchanged |
 | **YAML bypass** | Trace loop suggested direct index edits | Record observation; route via TIED MCP / **`tied-cli.sh`** | **`tied_validate_consistency`** after mutations |
 | **Benchmark overclaim** | Vendor Terminal Bench % cited as TIED success | Record observation; label **LangChain-reported** / **`not_measured`** | No methodology effectiveness claim |
+| **Product metric overclaim** | Keep Rate, CursorBench, or online A/B outcomes cited as TIED success | Record observation; label **Cursor-reported** / **`not_measured`** | No methodology effectiveness claim |
 | **Promotion skip** | Observation treated as LEAP or REQ mint | Record observation; open **`add-feature`** or sponsor queue | LEAP via reviewed paths only |
 
 ---
@@ -75,9 +76,19 @@ Compose with [pre-handoff verification charter](pre-handoff-verification-charter
 
 ---
 
+## Loop 3 pilot (optional)
+
+When a sponsor scopes **HTOL effectiveness** (not just Loop 2 capture), use the Loop 3 charter and enrollment path—**does not** replace this guide or checklist gates:
+
+- [Harness trace learning experiment charter](harness-trace-learning-experiment-charter.md) ([REQ-TIED_HARNESS_TRACE_LEARNING_PILOT](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml))
+- Templates: [htol-methodology-learning-experiment.v1.example.yaml](../templates/htol-methodology-learning-experiment.v1.example.yaml), [htol-feedback-pilot-spec.v1.example.yaml](../templates/htol-feedback-pilot-spec.v1.example.yaml)
+
+---
+
 ## Related documents
 
-- [LangChain harness engineering × TIED — Phase 1](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md#phased-recommendations-doc-first)
+- [LangChain harness engineering × TIED — Phase 1 & Phase 2](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md#phased-recommendations-doc-first)
+- [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md)
 - [Traefik harness/platform × TIED](../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md)
 - [Client development index](client-development-index.md)
 - [Feedback to TIED (vocab)](../../tied-project/vocab/feedback-to-tied.md)

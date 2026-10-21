@@ -1,0 +1,30 @@
+{
+  "run_id": "htol-lp-close-out-2026-10-21",
+  "request_token": "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "phase": "close_out"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  },
+  "reconcile": {
+    "process_grade": {
+      "band": "B",
+      "gap_codes": ["thin_ledger"]
+    }
+  },
+  "tied_gate_check_close_out": {
+    "allowed": true,
+    "exit_code": 0
+  }
+}

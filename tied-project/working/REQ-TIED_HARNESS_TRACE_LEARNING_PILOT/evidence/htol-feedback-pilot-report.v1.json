@@ -1,0 +1,12 @@
+{
+  "schema_version": "feedback-pilot-run-evidence.v1",
+  "recorded_at": "2026-10-21T06:24:00Z",
+  "cohort_id": "htol-pilot-dogfood-20261021",
+  "compatibility_key": "feedback-capture.v1|operator_local",
+  "result": {
+    "ok": false,
+    "error": "IncompatibleCohort"
+  },
+  "interpretation": "Expected initial store dogfood state: compatible HTOL capture cohort below min size. Outcome observation remains inconclusive until captures accumulate.",
+  "promotion_rule": "analysis_only"
+}

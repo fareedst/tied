@@ -1,0 +1,23 @@
+# Example PilotSpec for tied_feedback_pilot_run (HTOL learning pilot).
+# Closed-catalog named_metrics — see tied-project/vocab/feedback-to-tied.md and Kaizen pilot fixtures.
+# Traceability: REQ-TIED_HARNESS_TRACE_LEARNING_PILOT · REQ-KAIZEN-FEEDBACK-PILOT
+
+spec:
+  cohort_id: "htol-pilot-local-001"
+  cohort:
+    compatibility_key: "feedback-capture.v1|operator_local"
+    denominator_fingerprint: "htol-v1"
+    min_entries: 3
+    max_entries: 30
+  analysis_window:
+    start: "2026-01-01T00:00:00Z"
+    end: "2026-03-01T00:00:00Z"
+  named_metrics:
+    - "observations_captured"
+    - "recurrence_groups"
+    - "countermeasures_with_outcome"
+    - "promotion_pending_rate"
+  stop_criteria_policy:
+    halt_on_trigger: false
+    classification_ambiguity_threshold: 2
+  transport_phase_status: "deferred_closed"

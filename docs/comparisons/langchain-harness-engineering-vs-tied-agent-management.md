@@ -6,9 +6,10 @@
 | **Audience** | Sponsors, harness authors, prompt-type operators, methodology owners |
 | **Source URL** | [Improving Deep Agents with harness engineering](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering) (LangChain blog, February 17, 2026) |
 | **Article capture (sibling)** | [langchain-improving-deep-agents-harness-engineering.md](langchain-improving-deep-agents-harness-engineering.md) — read-only capture; **reference only** |
+| **Article capture (sibling)** | [cursor-continually-improving-agent-harness.md](cursor-continually-improving-agent-harness.md) — read-only capture; **reference only** |
 | **Status / date** | Outreach / analysis snapshot, **2026-10-21** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
 | **Executable follow-up** | [REQ-TIED_HARNESS_PLATFORM_SEAM](../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/PLAN.md), [authority-boundary operator checklist](../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md) |
-| **Distinct from** | [Traefik harness/platform × TIED](traefik-harness-platform-vs-tied-agent-management.md) (three-layer **seam** mental model); [TIED vs Harness²](tied-vs-harness2.md) (recursive **benchmark** harness optimization)—same English word *harness*, different subjects |
+| **Distinct from** | [Traefik harness/platform × TIED](traefik-harness-platform-vs-tied-agent-management.md) (three-layer **seam** mental model); [Cursor harness engineering × TIED](cursor-harness-engineering-vs-tied-agent-management.md) (production evals, online A/B, Keep Rate, tool-reliability ops); [TIED vs Harness²](tied-vs-harness2.md) (recursive **benchmark** harness optimization)—same English word *harness*, different subjects |
 | **TIED anchors (reference only)** | [AGENTS.md](../../AGENTS.md), [agent-req-implementation-checklist](../../tied-bundle/docs/agent-req-implementation-checklist.md), [fresh-client-prompt-activation-map](../../tied-bundle/docs/fresh-client-prompt-activation-map.md), [sponsor-agent-relationship](../../tied-project/vocab/sponsor-agent-relationship.md), [agentstream vocab](../../tied-project/vocab/agentstream.md), [agentstream README](../../mcp-server/packages/agentstream/README.md) |
 
 ---
@@ -263,7 +264,7 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 | --- | --- | --- |
 | **0** | This comparison + cross-links | Outreach |
 | **1** | **Implemented** — [harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) + `@harness-trace-review` ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)) | Loop 2 Kaizen |
-| **2** | Optional methodology learning experiment with explicit stop criteria | Loop 3 (**Defer** until sponsor scopes) |
+| **2** | **Implemented** — [Harness trace learning experiment charter](../../tied-bundle/docs/harness-trace-learning-experiment-charter.md) + templates + store dogfood enrollment ([REQ-TIED_HARNESS_TRACE_LEARNING_PILOT](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml)) | Loop 3 PDSA (sponsor-run; **`not_measured`** until cohort) |
 | **3** | Matrix §2 row or product skill (**Defer** — costly; header sibling link sufficient for v1) | Sponsor promotion |
 
 ---
@@ -290,6 +291,8 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 ## Related documents
 
 - [LangChain article capture (sibling)](langchain-improving-deep-agents-harness-engineering.md)
+- [Cursor harness engineering × TIED — agent management lens](cursor-harness-engineering-vs-tied-agent-management.md)
+- [Cursor article capture (sibling)](cursor-continually-improving-agent-harness.md)
 - [Traefik harness/platform × TIED — agent management lens](traefik-harness-platform-vs-tied-agent-management.md)
 - [Traefik article capture](traefik-harness-engineering-vs-platform-engineering.md)
 - [TIED vs Harness²](tied-vs-harness2.md)

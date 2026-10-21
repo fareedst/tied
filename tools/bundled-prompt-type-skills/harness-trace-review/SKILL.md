@@ -31,7 +31,8 @@ TIED store (clients: same path after `tied-install` refresh under methodology do
 1. Read the methodology guide sections: Proof boundary, Procedure, Failure-mode taxonomy.
 2. Classify findings; do not treat chat assertions as gate receipts.
 3. Call **`tied_feedback_capture_observation`** once per review batch idempotency key
-   unless sponsor documents duplicate capture.
+   unless sponsor documents duplicate capture. For Loop 3 HTOL pilot cohorting, optionally set
+   **`context.denominator_fingerprint: htol-v1`** (see [harness-trace-learning-experiment-charter.md](../../../tied-bundle/docs/harness-trace-learning-experiment-charter.md)).
 4. Optional: Task fan-out for failure analysis with explicit readonly scope.
 5. Route methodology or REQ changes through owning prompt-type skills—not from this skill.
 

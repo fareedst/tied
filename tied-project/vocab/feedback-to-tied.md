@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-FEEDBACK_TO_TIED](../requirements/REQ-FEEDBACK_TO_TIED.yaml) · [ARCH-FEEDBACK_STORAGE](../architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml) · [IMPL-MCP_FEEDBACK_TOOLS](../implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`quality-assurance.md`](quality-assurance.md) · [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md) · [Harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml))
+**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`quality-assurance.md`](quality-assurance.md) · [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md) · [Harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)) · [HTOL learning experiment charter](../../tied-bundle/docs/harness-trace-learning-experiment-charter.md) ([REQ-TIED_HARNESS_TRACE_LEARNING_PILOT](../requirements/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml))
 
 **Planning decisions (Kaizen loop):** Sponsor-approved costly choices for the first behavior-changing phases (local append/export only, default **privacy tier** `operator_local`, three **feedback entry types** plus additive **observation kind**) are recorded in [`../../docs/tied-kaizen-feedback-loop-plan.md`](../../docs/tied-kaizen-feedback-loop-plan.md) (2026-10-07). They bound REQ scope; they are not store fields.
 
@@ -119,6 +119,19 @@ entries:
 ```
 
 `observation_kind` is a proposed additive field. It is not part of the current store. Legacy entries without it stay `unknown` during **feedback analysis**.
+
+---
+
+## HTOL learning pilot (Loop 3 compose)
+
+| Term | Convention |
+| --- | --- |
+| **HTOL learning pilot** | Sponsor-run Loop 3 PDSA on **`@harness-trace-review`** effectiveness; charter at [harness-trace-learning-experiment-charter.md](../../tied-bundle/docs/harness-trace-learning-experiment-charter.md) |
+| **denominator fingerprint (HTOL)** | Optional capture field **`context.denominator_fingerprint: htol-v1`** for pilot cohort selection via **`compatibility_key`** + fingerprint filters in **`tied_feedback_pilot_run`** |
+| **Default pilot cohort key** | `feedback-capture.v1\|operator_local` until HTOL-tagged captures exist |
+| **Pilot outcome on implement** | **`methodology_outcome_observation`**: **`not_measured`** or **`inconclusive`** only—never **`improved`** without sponsor-confirmed **baseline** + **countermeasure** |
+
+Template **`PilotSpec`:** [htol-feedback-pilot-spec.v1.example.yaml](../../tied-bundle/templates/htol-feedback-pilot-spec.v1.example.yaml).
 
 ---
 

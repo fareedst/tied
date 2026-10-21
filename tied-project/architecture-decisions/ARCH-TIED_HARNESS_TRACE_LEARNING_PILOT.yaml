@@ -1,0 +1,29 @@
+ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT:
+  ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT:
+    cross_references:
+      - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+    decision: "Treat HTOL effectiveness questions as Loop 3 methodology learning experiments composing Phase 1 harness trace observation, methodology-learning-experiment persistence, and kaizen feedback pilot analysis—keeping checklist gate authority and LEAP promotion on platform-adjacent plane."
+    implementation_approach:
+      details:
+        - "Charter defines sponsor-run bounds"
+        - "Dogfood enrollment via upsert not hand edit"
+        - "Templates align with MCP validators"
+      summary: "Doc + templates + store enrollment; no trace automation product."
+    name: "Harness trace learning pilot architecture"
+    rationale:
+      benefits:
+        - "Repeatable Loop 3 operator path for HTOL"
+      problems_solved:
+        - "Pilot metrics mistaken for gate outcomes"
+      why: "LangChain Phase 2 maps to PDSA on existing MCP stack."
+    related_decisions:
+      depends_on:
+        - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+      see_also:
+        - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    status: "Active"
+    traceability:
+      implementation:
+        - "IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT"
+      requirements:
+        - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"

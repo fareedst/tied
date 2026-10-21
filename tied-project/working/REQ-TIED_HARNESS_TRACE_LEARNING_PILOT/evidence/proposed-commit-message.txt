@@ -1,0 +1,31 @@
+feat(htol): Loop 3 harness trace learning pilot (Phase 2)
+
+LangChain comparison Phase 2: sponsor-run HTOL effectiveness experiment
+charter, fillable templates, store dogfood enrollment, and pilot evidence
+compose on Phase 1 @harness-trace-review — analysis-only outcomes until a
+real cohort exists.
+
+REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
+ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT
+IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT
+
+Completion signals: machine close-out pass (close_out gate + envelope
+blocking_gap_count=0); process contract pass (tracker + manifest);
+adherence reconcile band B (thin_ledger advisory).
+
+Staging map:
+- CHANGELOG.md
+- docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md
+- tied-bundle/docs/harness-trace-learning-experiment-charter.md
+- tied-bundle/docs/client-development-index.md
+- tied-bundle/docs/harness-trace-observation-loop.md
+- tied-bundle/templates/htol-*.example.yaml
+- tools/bootstrap/lib/harness-trace-learning-experiment-charter-doc.test.mjs
+- tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md
+- tied-project/{requirements,architecture-decisions,implementation-decisions}/*HARNESS_TRACE_LEARNING_PILOT*
+- tied-project/{requirements,architecture-decisions,implementation-decisions}.yaml
+- tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml
+- tied-project/methodology-experiments.yaml
+- tied-project/semantic-tokens.yaml
+- tied-project/vocab/feedback-to-tied.md
+- tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/
