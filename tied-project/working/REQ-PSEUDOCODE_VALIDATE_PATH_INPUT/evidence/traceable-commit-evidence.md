@@ -8,4 +8,4 @@
 
 **Tests:** 36/36 scoped tsx run; see [unit-test-green-evidence.md](./unit-test-green-evidence.md).
 
-**Commit SHA:** (recorded post-commit)
+**Commit SHA:** `0b1d0a89`

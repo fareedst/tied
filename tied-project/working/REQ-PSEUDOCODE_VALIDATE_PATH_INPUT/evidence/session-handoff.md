@@ -1,6 +1,6 @@
 # Session handoff — REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
 
-**Build-plan** · 2026-10-21 · **Close-out:** deferred (verification gate / adversarial artifacts not run this session)
+**Build-plan + close-out** · 2026-10-21 · **Close-out:** complete — see [close-out-handoff.md](./close-out-handoff.md)
 
 ## Machine
 
