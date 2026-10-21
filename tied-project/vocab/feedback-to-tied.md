@@ -126,7 +126,7 @@ entries:
 
 | Term | Convention |
 | --- | --- |
-| **HTOL learning pilot** | Sponsor-run Loop 3 PDSA on **`@harness-trace-review`** effectiveness; charter at [harness-trace-learning-experiment-charter.md](../../tied-bundle/docs/harness-trace-learning-experiment-charter.md) |
+| **HTOL learning pilot** | Sponsor-run Loop 3 PDSA on **`@harness-trace-review`** effectiveness; charter at [harness-trace-learning-experiment-charter.md](../../tied-bundle/docs/harness-trace-learning-experiment-charter.md); operator checklist at [htol-pilot-cohort-runbook.md](../../tied-bundle/docs/htol-pilot-cohort-runbook.md) ([REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK](../requirements/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK.yaml)) |
 | **denominator fingerprint (HTOL)** | Optional capture field **`context.denominator_fingerprint: htol-v1`** for pilot cohort selection via **`compatibility_key`** + fingerprint filters in **`tied_feedback_pilot_run`** |
 | **Default pilot cohort key** | `feedback-capture.v1\|operator_local` until HTOL-tagged captures exist |
 | **Pilot outcome on implement** | **`methodology_outcome_observation`**: **`not_measured`** or **`inconclusive`** only—never **`improved`** without sponsor-confirmed **baseline** + **countermeasure** |
