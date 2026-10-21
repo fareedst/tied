@@ -1,0 +1,83 @@
+CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT:
+  change_definition:
+    current_behavior: "pseudocode_validate requires inline pseudocode string at MCP schema layer. Operators sending token plus pseudocode_path receive JSON-RPC -32602 Required at pseudocode despite valid JSON transport."
+    desired_behavior: "pseudocode_validate accepts inline pseudocode, essence_pseudocode_path, ergonomic alias pseudocode_path, or token-only default sidecar for IMPL-* tokens under TIED_BASE_PATH. Input resolution shared with analyze sandbox rules. Inline callers unchanged."
+    non_goals:
+      - "Changing Layer B validation rules in validateEssencePseudocode"
+      - "Loading from IMPL detail YAML essence_pseudocode_path when token-only"
+      - "Merging pseudocode_validate and pseudocode_analyze tools"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY recovery_hint scope in this change"
+    success_criteria:
+      - "Sponsor exact CLI JSON runs without -32602"
+      - "RED/GREEN unit and MCP tests per test-strategy.md"
+      - "REQ/ARCH/IMPL minted with LEAP on REQ-PSEUDOCODE_STATIC_ANALYSIS and IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "pre_implementation and verification gates allowed"
+    unchanged_behavior:
+      - "Inline pseudocode validation reports"
+      - "pseudocode_analyze behavior unless refactor is byte-identical"
+      - "TIED_BASE_PATH escape rejection"
+  evidence:
+    commands:
+      - "cd mcp-server && node --test src/resolve-essence-pseudocode-source.test.ts"
+      - "cd mcp-server && node --test src/tools/pseudocode-validate-path-mcp.test.ts"
+      - "cd mcp-server && npx tsc -b"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "mcp_server_unit_and_mcp_handler_tests"
+      - "does_not_prove_all_third_party_mcp_clients"
+  impact_analysis:
+    impl_inventory_notes: "New resolve-essence-pseudocode-source.ts; pseudocode_validate handler in tools/index.ts; optional analyze handler dedupe; docs and bundled skill."
+    modules_or_boundaries: "mcp-server/src/resolve-essence-pseudocode-source.ts; mcp-server/src/tools/index.ts; mcp-server/src/impl-pseudocode-input.ts (reuse only)"
+    tied_tokens_affected:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+    tied_tokens_new:
+      - "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+      - "ARCH-PSEUDOCODE_INPUT_RESOLUTION"
+      - "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT"
+  record_identity:
+    change_request_id: "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    profile_depth: "not_measured"
+    recorded_at: "2026-10-21"
+    title: "Sidecar path input for pseudocode_validate"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+    implementation_depth_tier: "integrated"
+  risk_analysis:
+    abuse_cases:
+      - "Token or path injection reads files outside tied-project"
+      - "Default sidecar resolves wrong file when naming diverges from convention"
+    adversarial_inquiry:
+      assurance_profile: "external-input-security"
+      counterexamples:
+        - "Handler accepts path outside base when token contains ../ segments"
+        - "Default sidecar uses REQ token and reads unrelated file"
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Product code changes during refine-plan pass 1"
+      eligibility_triggers_matched:
+        - "external_input"
+        - "filesystem_read"
+        - "ai_enabled_tool_boundary"
+      evidence_references:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md"
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md"
+        - "mcp-server/src/impl-pseudocode-input.ts"
+      falsification_questions:
+        - "Do unit tests fail when both path alias keys are set?"
+        - "Does hyphenated IMPL token resolve correct default sidecar path?"
+        - "Does inline-only regression still pass unchanged?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Filesystem reads under agent-supplied paths at MCP boundary; integrated depth; inquiry before RED at build-plan."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "required_before_red"
+    quality_evidence_matrix:
+      structural_validators:
+        - "pseudocode_validate on IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT sidecar at gate"
+      unit_tests: "resolve-essence-pseudocode-source.test.ts; MCP handler tests"
+  test_strategy_ref: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/test-strategy.md"

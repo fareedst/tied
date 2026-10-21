@@ -25,6 +25,8 @@ Checklist **`sub-vocabulary-sync`** uses **domain** vocab. Do not conflate with 
 |-----------|-------|-------|
 | **essence_pseudocode** | pseudocode body, impl code | Canonical behavior spec; sidecar preferred |
 | **pseudo-code sidecar** | md detail | `tied-project/implementation-decisions/IMPL-*-pseudocode.md` |
+| **default sidecar resolution** | auto-load sidecar | Token-only Layer B validate resolves `implementation-decisions/{IMPL-TOKEN}-pseudocode.md` under **TIED base path** · working [PLAN](../working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md) |
+| **ambiguous pseudocode input** | conflicting validate args | Inline plus path, or both path keys, on `pseudocode_validate` → input error `AMBIGUOUS_INPUT` · same plan |
 | **block lead comment** | header comment | First comment on each block; literal-copy to tests/code |
 | **three-way alignment** | sync | IMPL block lead ↔ test comment ↔ code comment |
 | **UPPER_SNAKE block name** | procedure name (ambiguous) | Preferred **domain** term becomes block identifier |

@@ -115,6 +115,7 @@ import { buildClosureJoinReportAsync } from "../analysis/closure-join-report.js"
 import { ALL_ANALYSIS_PASSES } from "../analysis/pseudocode-ir.js";
 import { validateTestAdequacyPlan } from "../quality-adequacy.js";
 import { readTextFromPseudocodePath, resolvePseudocodePathUnderTiedBase } from "../impl-pseudocode-input.js";
+import { resolveEssencePseudocodeSource } from "../resolve-essence-pseudocode-source.js";
 import {
   buildVerificationEvidenceManifest,
   type VerificationEvidenceInput,
@@ -2592,7 +2593,12 @@ export const allTools = [
         "Run Layer B structural pseudo-code validation: source-located diagnostics, contract shape, symbol closure, dependency graph, token linkage, and optional behavioral coverage references. Does not claim runtime behavior coverage.",
       inputSchema: z.object({
         token: z.string(),
-        pseudocode: z.string(),
+        pseudocode: z.string().optional(),
+        essence_pseudocode_path: z.string().optional(),
+        pseudocode_path: z
+          .string()
+          .optional()
+          .describe("Ergonomic alias for essence_pseudocode_path on pseudocode_validate only."),
         known_tokens: z.array(z.string()).optional(),
         require_contracts: z.boolean().optional(),
         require_behavioral_coverage: z.boolean().optional(),
@@ -2601,8 +2607,19 @@ export const allTools = [
         gate_mode: z.boolean().optional(),
       }),
     },
-    handler: async (args: Parameters<typeof validateEssencePseudocode>[0]) => {
-      return textContent(JSON.stringify(validateEssencePseudocode(args), null, 2));
+    handler: async (args: Parameters<typeof validateEssencePseudocode>[0] & {
+      essence_pseudocode_path?: string;
+      pseudocode_path?: string;
+    }) => {
+      const resolved = resolveEssencePseudocodeSource(getBasePath(), args);
+      if (!resolved.ok) {
+        return textContent(
+          JSON.stringify({ ok: false, stage: "input", error: resolved.error }, null, 2),
+        );
+      }
+      return textContent(
+        JSON.stringify(validateEssencePseudocode({ ...args, pseudocode: resolved.content }), null, 2),
+      );
     },
   },
   {

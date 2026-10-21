@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "receipt": {
+    "feedback_id": "fb-mvia5ie8-837apk",
+    "occurred_at": "2026-10-21T15:41:46.976Z",
+    "created_at": "2026-10-21T15:41:46.976Z",
+    "observation_kind": "tool_friction",
+    "impact": "unknown",
+    "idempotent_replay": false,
+    "duplicate_group": null,
+    "evidence_refs_validated": [],
+    "evidence_refs_rejected": [
+      "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md",
+      "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    ],
+    "notification_disposition": "not_configured"
+  }
+}

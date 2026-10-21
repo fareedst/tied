@@ -27,8 +27,8 @@ REQ-PSEUDOCODE_STATIC_ANALYSIS:
       metric: "gate-pseudocode-validation evidence_refs include working/{REQ}/pseudocode-analysis/{IMPL}.v1.json with ok true and gate_mode_applied true"
     - criterion: "pseudocode_analyze returns deterministic pseudocode-analysis-report.v1 for fixture corpus"
       metric: "Byte-stable JSON for fixed inputs within analyzer_version"
-    - criterion: "pseudocode_validate behavior and schema unchanged"
-      metric: "Golden regression tests pass unchanged"
+    - criterion: "pseudocode_validate MCP input schema changes are additive-only for inline callers"
+      metric: "quality-validation-mcp.test.ts and pseudocode-validate-path-mcp.test.ts; inline golden regressions pass"
   status: "Implemented"
   traceability:
     architecture:

@@ -1710,6 +1710,10 @@ ARCH-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
     tests:
       - "mcp-server/src/analysis/pseudocode-grammar-v2-default.test.ts"
       - "scripts/audit-grammar-v2-default.mjs"
+ARCH-PSEUDOCODE_INPUT_RESOLUTION:
+  detail_file: "architecture-decisions/ARCH-PSEUDOCODE_INPUT_RESOLUTION.yaml"
+  name: "Essence pseudocode input resolution"
+  status: "Active"
 ARCH-PSEUDOCODE_PARSER_UNIFICATION:
   cross_references:
     - "ARCH-PSEUDOCODE_ANALYSIS_PIPELINE"

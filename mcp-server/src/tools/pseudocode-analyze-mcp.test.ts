@@ -99,13 +99,20 @@ describe("pseudocode_analyze MCP [REQ-PSEUDOCODE_STATIC_ANALYSIS]", () => {
     assert.equal(passing.gate_mode_applied, true);
   });
 
-  it("coexists with pseudocode_validate unchanged schema", async () => {
+  it("coexists with pseudocode_validate additive path schema", async () => {
     // [IMPL-PSEUDOCODE_ANALYSIS_ENGINE] [ARCH-PSEUDOCODE_ANALYSIS_PIPELINE] [REQ-PSEUDOCODE_STATIC_ANALYSIS]
+    // [REQ-PSEUDOCODE_VALIDATE_PATH_INPUT] validate accepts optional pseudocode and path fields
     const pseudo = `# [IMPL-QUALITY_PSEUDOCODE_VALIDATOR]\nprocedure RUN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n  RETURN y`;
     const validate = body(await handler("pseudocode_validate")({
       token: "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
       pseudocode: pseudo,
     }));
+    const pathOnly = body(await handler("pseudocode_validate")({
+      token: "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      pseudocode_path: "implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR-pseudocode.md",
+    }));
+    assert.equal(pathOnly.schema_version, "layer-b-pseudocode-validator.v1");
+    assert.notEqual(pathOnly.stage, "input");
     const analyze = body(await handler("pseudocode_analyze")({
       token: "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
       pseudocode: pseudo,

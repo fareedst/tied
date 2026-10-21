@@ -1,0 +1,22 @@
+ARCH-PSEUDOCODE_INPUT_RESOLUTION:
+  description: "Read-only resolution order: inline pseudocode, single explicit path under TIED base (with validate-only pseudocode_path alias), then IMPL default sidecar filename convention."
+  name: "Essence pseudocode input resolution"
+  rationale:
+    benefits:
+      - "One resolver module for validate; optional analyze dedupe"
+    problems_solved:
+      - "Duplicate path logic in validate vs analyze handlers"
+    why: "MCP tools must share sandboxed path rules and reject ambiguous multi-source input at a single boundary."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "ARCH-QUALITY_ASSURANCE_PROFILES"
+    supersedes: []
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-PSEUDOCODE_INPUT_RESOLUTION"
+    implementation:
+      - "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT"
+    requirements:
+      - "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"

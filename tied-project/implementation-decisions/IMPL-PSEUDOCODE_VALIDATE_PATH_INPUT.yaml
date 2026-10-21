@@ -1,0 +1,36 @@
+IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT:
+  code_locations:
+    files:
+      - description: "pseudocode_validate handler"
+        path: "mcp-server/src/tools/index.ts"
+      - description: "Source resolver"
+        path: "mcp-server/src/resolve-essence-pseudocode-source.ts"
+    functions:
+      - description: "Pick inline, path, or default sidecar"
+        file: "mcp-server/src/resolve-essence-pseudocode-source.ts"
+        name: "resolveEssencePseudocodeSource"
+  description: "resolveEssencePseudocodeSource plus pseudocode_validate MCP handler wiring before Layer B validateEssencePseudocode."
+  implementation_approach:
+    details:
+      - "Input-stage errors return { ok: false, stage: input, error }."
+      - "Optional pseudocode, essence_pseudocode_path, and pseudocode_path in Zod schema."
+      - "Reuse resolvePseudocodePathUnderTiedBase and readTextFromPseudocodePath."
+    summary: "Resolve read-only source under TIED base; delegate unchanged Layer B validation."
+  name: "Pseudocode validate path input implementation"
+  related_decisions:
+    depends_on:
+      - "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+    see_also: []
+    supersedes: []
+  status: "Active"
+  testability: "unit"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_INPUT_RESOLUTION"
+    code_annotations:
+      - "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT"
+    requirements:
+      - "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+    tests:
+      - "mcp-server/src/resolve-essence-pseudocode-source.test.ts"
+      - "mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts"

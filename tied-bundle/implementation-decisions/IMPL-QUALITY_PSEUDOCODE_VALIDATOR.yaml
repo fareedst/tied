@@ -5,6 +5,8 @@ IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
         path: "mcp-server/src/analysis/pseudocode-validator.ts"
       - description: "MCP pseudocode_validate handler"
         path: "mcp-server/src/tools/index.ts"
+      - description: "Essence pseudocode source resolution for validate path input"
+        path: "mcp-server/src/resolve-essence-pseudocode-source.ts"
       - description: "Unit coverage for parser, contracts, symbols, and coverage references"
         path: "mcp-server/src/analysis/pseudocode-validator.test.ts"
     functions:
@@ -20,6 +22,7 @@ IMPL-QUALITY_PSEUDOCODE_VALIDATOR:
       - "Keep validation deterministic and independent of runtime execution."
       - "Require PRE, POST, and EFFECTS for changed Active procedure blocks."
       - "Return structural diagnostics without claiming behavioral coverage."
+      - "pseudocode_validate accepts optional pseudocode, essence_pseudocode_path, and validate-only pseudocode_path; resolves via resolveEssencePseudocodeSource before validateEssencePseudocode."
     summary: "Parse language-agnostic pseudo-code, validate token links and contract shape, resolve dependencies, and emit source-located diagnostics."
   metadata:
     last_updated:

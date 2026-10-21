@@ -1970,6 +1970,11 @@ IMPL-PSEUDOCODE_TYPED_FLOW:
     supersedes: []
   status: "Active"
   testability: "unit"
+IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT:
+  detail_file: "implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+  name: "Pseudocode validate path input implementation"
+  status: "Active"
+  testability: "unit"
 IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

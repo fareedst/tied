@@ -1,0 +1,37 @@
+REQ-PSEUDOCODE_VALIDATE_PATH_INPUT:
+  category: "Tooling"
+  description: "Operators and agents must run pseudocode_validate with pseudocode_path or essence_pseudocode_path (or IMPL token-only default sidecar) while inline pseudocode behavior stays unchanged."
+  name: "Pseudocode validate sidecar path input"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Shared essence pseudocode source resolution under TIED base"
+      - "Sponsor replay CLI works without inline duplication"
+    problems_solved:
+      - "Asymmetric path input between pseudocode_validate and pseudocode_analyze"
+      - "JSON-RPC -32602 Required at pseudocode on sponsor HTOL replay"
+    why: "Path-only validate JSON failed at MCP schema before handler; analyze already accepted paths."
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-PSEUDOCODE_STATIC_ANALYSIS"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Inline pseudocode_validate regressions unchanged"
+      criterion_id: "inline-regression"
+    - criterion: "resolveEssencePseudocodeSource unit tests cover inline, path, default sidecar, and ambiguity"
+      criterion_id: "resolver-unit-red"
+    - criterion: "Sponsor replay JSON runs without MCP -32602 and returns layer-b-pseudocode-validator.v1"
+      criterion_id: "sponsor-replay-cli"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PSEUDOCODE_INPUT_RESOLUTION"
+    implementation:
+      - "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT"
+    tests:
+      - "mcp-server/src/resolve-essence-pseudocode-source.test.ts"
+      - "mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts"

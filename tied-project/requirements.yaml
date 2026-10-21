@@ -2074,6 +2074,13 @@ REQ-PSEUDOCODE_TYPED_FLOW:
     - criterion: "typed_flow true emits sections.typed_flow without schema version bump"
       metric: "pseudocode-analysis-report.v1 snapshot tests"
   status: "Implemented"
+REQ-PSEUDOCODE_VALIDATE_PATH_INPUT:
+  category: "Tooling"
+  description: "Layer B pseudocode_validate accepts token plus sidecar path or token-only default sidecar under TIED_BASE_PATH without MCP -32602."
+  detail_file: "requirements/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+  name: "Pseudocode validate sidecar path input"
+  priority: "P1"
+  status: "Planned"
 REQ-QUALITY_ASSURANCE_EVIDENCE:
   category: "Non-Functional"
   cross_references:

@@ -1,0 +1,177 @@
+{
+  "ok": true,
+  "report": {
+    "schemaVersion": "adversarial-inquiry-report.v1",
+    "projectId": "43c95df716872c5d",
+    "scope": [
+      "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed"
+    ],
+    "graph": {
+      "projectId": "43c95df716872c5d",
+      "nodes": [
+        {
+          "id": "case:CE-001",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-002",
+          "kind": "case"
+        },
+        {
+          "id": "case:CE-003",
+          "kind": "case"
+        },
+        {
+          "id": "constraint:constraint-pseudocode_validate_path_input",
+          "kind": "constraint"
+        },
+        {
+          "id": "evidence:prod-1",
+          "kind": "evidence",
+          "revision": "closeout-inquiry-2026-10-21"
+        },
+        {
+          "id": "evidence:test-1",
+          "kind": "evidence",
+          "revision": "closeout-inquiry-2026-10-21"
+        },
+        {
+          "id": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed",
+          "kind": "block",
+          "revision": "293688c264126202"
+        },
+        {
+          "id": "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT#criterion-1",
+          "kind": "criterion",
+          "revision": "criterion-rev-pseudocode_validate_path_input"
+        }
+      ],
+      "edges": [
+        {
+          "from": "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT#criterion-1",
+          "to": "constraint:constraint-pseudocode_validate_path_input",
+          "kind": "criterion_constraint"
+        },
+        {
+          "from": "constraint:constraint-pseudocode_validate_path_input",
+          "to": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed",
+          "kind": "constraint_block"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed",
+          "to": "evidence:prod-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed",
+          "to": "evidence:test-1",
+          "kind": "block_evidence"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed",
+          "to": "case:CE-001",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed",
+          "to": "case:CE-002",
+          "kind": "block_case"
+        },
+        {
+          "from": "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed",
+          "to": "case:CE-003",
+          "kind": "block_case"
+        }
+      ]
+    },
+    "findings": [],
+    "proofBoundaries": [],
+    "readOnly": true,
+    "canonicalMutation": false
+  },
+  "verdict": "PASS",
+  "status": {
+    "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed": "PASS"
+  },
+  "gate": {
+    "schemaVersion": "adversarial-inquiry-gate.v1",
+    "policy": "advisory",
+    "scope": [
+      "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed"
+    ],
+    "status": "passed",
+    "blocking": false,
+    "verdict": "PASS",
+    "diagnostics": [],
+    "proofBoundary": "human_decision"
+  },
+  "artifacts": {
+    "directory": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation",
+    "obligationReport": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+    "findingLedger": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+    "gateResult": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+    "evidenceProvenance": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+  },
+  "activation": {
+    "receipt": {
+      "success": true,
+      "tool": "tied_adversarial_inquiry_run",
+      "request_token": "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT",
+      "project_id": "43c95df716872c5d",
+      "run_id": "closeout-inquiry-20261021-pre_implementation",
+      "phase": "pre_implementation",
+      "scope": [
+        "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT#RESOLVE_ESSENCE_PSEUDOCODE_SOURCE#4276156718949bed"
+      ],
+      "scope_hash": "0c0f056dea4b3defef8caecbaf79d0465ae1dbd93b2cc1f276d4b7b8826aa979",
+      "artifact_hashes": {
+        "obligation-report.json": "850f9b341a510842561de5850ca000e359dae9a6919acea978aec4654e6ca66b",
+        "finding-ledger.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "gate-result.json": "a0a6f242b130922b3263d2c3689297e19a6cdb2d7351d2f8542ab2701f9d6965",
+        "evidence-provenance.json": "bffd384730f51c8008681569f333b6b6aadac10f68b08241430d66d3fa72347d"
+      }
+    },
+    "artifacts": {
+      "obligation-report.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT",
+        "project_id": "43c95df716872c5d",
+        "run_id": "closeout-inquiry-20261021-pre_implementation",
+        "phase": "pre_implementation",
+        "scope_hash": "0c0f056dea4b3defef8caecbaf79d0465ae1dbd93b2cc1f276d4b7b8826aa979",
+        "hash": "850f9b341a510842561de5850ca000e359dae9a6919acea978aec4654e6ca66b",
+        "path": "tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      },
+      "finding-ledger.jsonl": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT",
+        "project_id": "43c95df716872c5d",
+        "run_id": "closeout-inquiry-20261021-pre_implementation",
+        "phase": "pre_implementation",
+        "scope_hash": "0c0f056dea4b3defef8caecbaf79d0465ae1dbd93b2cc1f276d4b7b8826aa979",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "path": "tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl"
+      },
+      "gate-result.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT",
+        "project_id": "43c95df716872c5d",
+        "run_id": "closeout-inquiry-20261021-pre_implementation",
+        "phase": "pre_implementation",
+        "scope_hash": "0c0f056dea4b3defef8caecbaf79d0465ae1dbd93b2cc1f276d4b7b8826aa979",
+        "hash": "a0a6f242b130922b3263d2c3689297e19a6cdb2d7351d2f8542ab2701f9d6965",
+        "path": "tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      },
+      "evidence-provenance.json": {
+        "valid": true,
+        "request_token": "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT",
+        "project_id": "43c95df716872c5d",
+        "run_id": "closeout-inquiry-20261021-pre_implementation",
+        "phase": "pre_implementation",
+        "scope_hash": "0c0f056dea4b3defef8caecbaf79d0465ae1dbd93b2cc1f276d4b7b8826aa979",
+        "hash": "bffd384730f51c8008681569f333b6b6aadac10f68b08241430d66d3fa72347d",
+        "path": "tied-bundle/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json"
+      }
+    }
+  }
+}

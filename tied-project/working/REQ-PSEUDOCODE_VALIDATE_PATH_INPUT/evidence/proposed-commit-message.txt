@@ -1,0 +1,25 @@
+Staging map (REQ-PSEUDOCODE_VALIDATE_PATH_INPUT wave):
+- mcp-server/src/resolve-essence-pseudocode-source.ts
+- mcp-server/src/resolve-essence-pseudocode-source.test.ts
+- mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts
+- mcp-server/src/tools/index.ts
+- mcp-server/src/tools/pseudocode-analyze-mcp.test.ts
+- tied-project/requirements.yaml + requirements/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
+- tied-project/requirements/REQ-PSEUDOCODE_STATIC_ANALYSIS.yaml
+- tied-project/architecture-decisions.yaml + ARCH-PSEUDOCODE_INPUT_RESOLUTION.yaml
+- tied-project/implementation-decisions.yaml + IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT*
+- tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
+- tied-project/vocab/pseudocode-and-citdp.md + tied-yaml-mcp.md
+- tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/
+- tied-bundle/implementation-decisions/IMPL-QUALITY_PSEUDOCODE_VALIDATOR.yaml
+- CHANGELOG.md
+
+Message:
+feat(mcp): pseudocode_validate sidecar path input
+
+Allow pseudocode_path and token-only default sidecar for Layer B
+pseudocode_validate without -32602. REQ-PSEUDOCODE_VALIDATE_PATH_INPUT,
+ARCH-PSEUDOCODE_INPUT_RESOLUTION, IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT.
+
+Machine close-out: close_out allowed; envelope blocking_gaps=0.
+Integrated inquiry run_id=closeout-inquiry-20261021-close_out.
