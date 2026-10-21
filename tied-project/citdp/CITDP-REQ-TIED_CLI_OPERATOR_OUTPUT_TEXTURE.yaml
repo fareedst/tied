@@ -1,0 +1,62 @@
+CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
+  change_definition:
+    current_behavior: "`how()` and `_how_*` in scripts/build-commands.sh print plain heredocs to stdout with no ANSI styling or explicit plain/stream overrides."
+    desired_behavior: "Operator help defaults to stderr with optional ANSI texture; plain mode via NO_COLOR, TIED_CLI_PLAIN, and --plain; stdout override via TIED_CLI_HELP_STDOUT and --stdout; composition tests in tools/bootstrap/build-commands-how.test.mjs."
+    non_goals:
+      - "FORCE_COLOR / CLICOLOR support"
+      - "Shared cli-output-policy.mjs extraction"
+      - "stderr-default for Node --help CLIs in this slice"
+    success_criteria:
+      - "node --test tools/bootstrap/build-commands-how.test.mjs exit 0"
+      - "REQ/ARCH/IMPL chain validates"
+    unchanged_behavior: "Topic names, aliases, informational strings, exit codes 0/2; no Node wrapper for how()"
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/build-commands-how.test.mjs"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "build-workspace.sh --help stdout behavior unchanged"
+  impact_analysis:
+    architecture:
+      - "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    implementation_decisions:
+      - "IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"
+    modules_or_boundaries: "scripts/build-commands.sh CLI guide block; tools/bootstrap/build-commands-how.test.mjs"
+    requirements:
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    tied_tokens_new:
+      - "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+  record_identity:
+    change_request_id: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-21"
+    title: "Styled how() CLI operator output texture"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Operators pipe how stdout today and break silently after stderr-default"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Repo grep found no in-repo piped how consumers; tests lock stderr-default"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/test-strategy.md"
+        - "tools/bootstrap/build-commands-how.test.mjs"
+      falsification_questions:
+        - "Does any script in-repo depend on how printing to stdout?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    items:
+      - id: "R1"
+        mitigation: "Document --stdout and TIED_CLI_HELP_STDOUT for piped help"
+        risk: "stderr-default breaks external scripts piping stdout"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/build-commands-how.test.mjs"
+    verification:
+      - "node --test tools/bootstrap/build-commands-how.test.mjs"
+      - "tied_validate_consistency"

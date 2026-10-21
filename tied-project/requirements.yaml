@@ -2391,6 +2391,18 @@ REQ-TIED_CLEAR_WORKSPACE_SKILL:
       - "client-bootstrap-skills.test.ts"
       - "client-skills-catalog.test.mjs"
       - "prompt-type-skills.test.ts"
+REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
+  category: "Tooling"
+  description: "Cross-CLI contract for operator-facing help: ANSI texture when enabled, plain disable paths, stderr-first human help with chainable stdout for scripting."
+  detail_file: "requirements/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+  name: "CLI operator output texture"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    implementation:
+      - "IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"
 REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   category: "Tooling"
   cross_references:

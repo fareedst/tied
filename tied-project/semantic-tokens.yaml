@@ -888,6 +888,18 @@ ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY:
   name: "Clear-workspace skill boundary"
   status: "Planned"
   type: "ARCH"
+ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
+  cross_references:
+    - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+  description: "Stream and plain policy for operator help"
+  detail_file: "architecture-decisions/ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "CLI operator output texture architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
   cross_references: []
   description: "Promoted ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST (phase-1 QMM bundle)"
@@ -2378,6 +2390,19 @@ IMPL-TIED_BROWNFIELD_VALIDATION:
   description: "brownfield_intent_evidence_validate MCP and normalize/validate module."
   detail_file: "implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION.yaml"
   name: "Brownfield Intent Evidence Validation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
+  cross_references:
+    - "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+  description: "how() implementation in build-commands.sh"
+  detail_file: "implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "build-commands how() texture"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -4364,6 +4389,19 @@ REQ-TIED_CLEAR_WORKSPACE_SKILL:
     - "IMPL-TIED_CLEAR_WORKSPACE_SKILL"
   description: "Workspace hygiene and close-out orchestrator"
   name: "Clear-workspace skill"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+  description: "Umbrella REQ for CLI help texture and stderr-first operator streams"
+  detail_file: "requirements/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "CLI operator output texture"
+  source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
 REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:

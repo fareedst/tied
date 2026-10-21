@@ -1,0 +1,41 @@
+REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
+  category: "Tooling"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-21"
+    last_updated:
+      author: "close-out"
+      date: "2026-10-21"
+      reason: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out"
+  name: "CLI operator output texture"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Aligned presentation with bootstrap console.mjs palette"
+      - "Documented migration path via --stdout and env vars"
+      - "Umbrella REQ for future Node CLI help adoption"
+    problems_solved:
+      - "how() prints to stdout and breaks pipe-friendly workflows"
+      - "No explicit plain or stream overrides for sourced bash help"
+    why: "Operators need readable CLI guides without breaking shell pipelines; stderr-first help preserves stdout for machine output."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "ARCH documents stream roles, env/flag matrix, precedence, glyph policy, and NO_COLOR alignment."
+      id: "SC-CLI-TEXTURE-ARCH"
+    - criterion: "how() in build-commands.sh and build-commands-how.test.mjs satisfy stderr-default, plain modes, and stdout overrides."
+      id: "SC-CLI-TEXTURE-HOW"
+      metric: "node --test tools/bootstrap/build-commands-how.test.mjs"
+    - criterion: "REQ rationale lists future CLI adopters (build-workspace --help, tied-install help, shared cli-output-policy.mjs)."
+      id: "SC-CLI-TEXTURE-FUTURE"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    implementation:
+      - "IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"

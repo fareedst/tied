@@ -2162,6 +2162,10 @@ IMPL-TIED_BROWNFIELD_VALIDATION:
   detail_file: "implementation-decisions/IMPL-TIED_BROWNFIELD_VALIDATION.yaml"
   name: "Brownfield Intent Evidence Validation"
   status: "Active"
+IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
+  detail_file: "implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE.yaml"
+  name: "build-commands how() output texture"
+  status: "Implemented"
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"

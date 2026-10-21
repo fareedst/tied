@@ -1,0 +1,25 @@
+feat(build-commands): stderr-default styled how() help
+
+Styled operator help for sourced how() with plain/ANSI texture and
+stderr-first routing; overrides via --stdout and TIED_CLI_HELP_STDOUT.
+
+REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
+ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
+IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE
+
+Completion signals: machine close-out pass (close_out allowed, envelope
+blocking_gaps=0); process contract pass (dual-write + manifest);
+adherence ledger pass (reconcile band A).
+
+Staging map:
+- scripts/build-commands.sh
+- scripts/_build_commands_cli_guide.inc.sh
+- tools/bootstrap/build-commands-how.test.mjs
+- CHANGELOG.md
+- tied-project/{requirements,architecture-decisions,implementation-decisions,semantic-tokens}.yaml
+- tied-project/requirements/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
+- tied-project/architecture-decisions/ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
+- tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE.yaml
+- tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md
+- tied-project/citdp/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
+- tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/

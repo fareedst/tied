@@ -1,0 +1,55 @@
+{
+  "token": "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE",
+  "record": {
+    "name": "CLI operator output texture",
+    "status": "Implemented",
+    "priority": "P2",
+    "category": "Tooling",
+    "description": "Cross-CLI contract for operator-facing help: ANSI texture when enabled, plain disable paths, stderr-first human help with chainable stdout for scripting.",
+    "rationale": {
+      "why": "Operator help should use consistent ANSI/plain texture and stderr-first routing so stdout remains chainable.",
+      "problems_solved": [
+        "Unstyled how() heredocs on stdout",
+        "No plain-mode disable for piped or NO_COLOR environments",
+        "Help on stdout breaks scripts that chain build-commands output"
+      ],
+      "benefits": [
+        "Styled sections when TTY allows",
+        "Explicit plain and stdout overrides",
+        "Composition tests lock stream contract"
+      ]
+    },
+    "satisfaction_criteria": [
+      {
+        "id": "SC-CLI-TEXTURE-ARCH",
+        "criterion": "ARCH documents stream roles, env/flag matrix, precedence, glyph policy, and NO_COLOR alignment."
+      },
+      {
+        "id": "SC-CLI-TEXTURE-HOW",
+        "criterion": "how() in build-commands.sh and build-commands-how.test.mjs satisfy stderr-default, plain modes, and stdout overrides.",
+        "metric": "tools/bootstrap/build-commands-how.test.mjs"
+      },
+      {
+        "id": "SC-CLI-TEXTURE-FUTURE",
+        "criterion": "REQ rationale lists future CLI adopters under the same umbrella contract."
+      }
+    ],
+    "related_requirements": {
+      "depends_on": ["REQ-TIED_UNIFIED_TOOLCHAIN"],
+      "related_to": [],
+      "supersedes": []
+    },
+    "traceability": {
+      "architecture": ["ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"],
+      "implementation": ["IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"]
+    },
+    "metadata": {
+      "created": { "author": "close-out", "date": "2026-10-21" },
+      "last_updated": {
+        "author": "close-out",
+        "date": "2026-10-21",
+        "reason": "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out"
+      }
+    }
+  }
+}

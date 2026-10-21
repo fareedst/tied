@@ -1,0 +1,25 @@
+{
+  "token": "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE",
+  "index_record": {
+    "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE": {
+      "status": "Implemented"
+    }
+  },
+  "detail_record": {
+    "name": "CLI operator output texture architecture",
+    "status": "Implemented",
+    "decision": "Shell-sourced how() routes human help through a shared inc.sh with plain/ANSI and stderr-default stream selection; errors always stderr exit 2.",
+    "traceability": {
+      "requirements": ["REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"],
+      "implementation": ["IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"]
+    },
+    "metadata": {
+      "created": { "author": "close-out", "date": "2026-10-21" },
+      "last_updated": {
+        "author": "close-out",
+        "date": "2026-10-21",
+        "reason": "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out"
+      }
+    }
+  }
+}

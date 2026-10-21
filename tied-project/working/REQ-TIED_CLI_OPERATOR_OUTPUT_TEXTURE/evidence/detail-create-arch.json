@@ -1,0 +1,20 @@
+{
+  "token": "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE",
+  "record": {
+    "name": "CLI operator output texture architecture",
+    "status": "Implemented",
+    "decision": "Shell-sourced how() routes human help through _build_commands_cli_guide.inc.sh with plain/ANSI selection, stderr-default fd, and explicit stdout override; diagnostics always stderr exit 2.",
+    "traceability": {
+      "requirements": ["REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"],
+      "implementation": ["IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"]
+    },
+    "metadata": {
+      "created": { "author": "close-out", "date": "2026-10-21" },
+      "last_updated": {
+        "author": "close-out",
+        "date": "2026-10-21",
+        "reason": "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope_path": "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/request-evidence-envelope.v1.json",
+  "not_applicable_receipt": "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/not-applicable-receipt.v1.json",
+  "reconcile_process_grade": {
+    "band": "A",
+    "score": 94
+  },
+  "recorded_at": "2026-10-21T15:30:00Z"
+}

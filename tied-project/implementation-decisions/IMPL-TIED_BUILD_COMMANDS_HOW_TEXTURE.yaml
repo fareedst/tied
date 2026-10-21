@@ -1,0 +1,24 @@
+IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md"
+  implementation_approach:
+    details:
+      - "HOW_DISPATCH: flag peel, topic arity, case dispatch"
+      - "HOW_PLAIN_INIT: texture vs plain from flags, env, NO_COLOR, TTY"
+      - "HOW_RENDER: title, header, cmd column, notes, hr"
+      - "HOW_STREAM_INIT: _HOW_FD default 2; TIED_CLI_HELP_STDOUT and --stdout"
+    summary: "Add _how_plain_init, _how_stream_init, _how_out, render helpers; peel global flags in how(); refactor section printers from heredocs to render calls."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-21"
+    last_updated:
+      author: "close-out"
+      date: "2026-10-21"
+      reason: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out"
+  name: "build-commands how() output texture"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    requirements:
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"

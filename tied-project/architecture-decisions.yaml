@@ -1956,6 +1956,10 @@ ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY.yaml"
   name: "Clear-workspace skill boundary"
   status: "Active"
+ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
+  detail_file: "architecture-decisions/ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+  name: "CLI operator output texture architecture"
+  status: "Implemented"
 ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS:
   cross_references:
     - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"

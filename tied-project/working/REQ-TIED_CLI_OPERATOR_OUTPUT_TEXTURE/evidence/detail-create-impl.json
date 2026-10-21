@@ -1,0 +1,27 @@
+{
+  "token": "IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE",
+  "record": {
+    "name": "build-commands how() operator output texture",
+    "status": "Active",
+    "implementation_approach": {
+      "summary": "Inc.sh helpers for plain/texture, stream fd selection, and section renderers sourced by build-commands.sh how().",
+      "details": [
+        "scripts/_build_commands_cli_guide.inc.sh defines _HOW_* helpers and how() dispatch",
+        "Composition tests source build-commands.sh and assert stderr-default and overrides"
+      ]
+    },
+    "essence_pseudocode_path": "implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md",
+    "traceability": {
+      "requirements": ["REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"],
+      "architecture": ["ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"]
+    },
+    "metadata": {
+      "created": { "author": "close-out", "date": "2026-10-21" },
+      "last_updated": {
+        "author": "close-out",
+        "date": "2026-10-21",
+        "reason": "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out"
+      }
+    }
+  }
+}

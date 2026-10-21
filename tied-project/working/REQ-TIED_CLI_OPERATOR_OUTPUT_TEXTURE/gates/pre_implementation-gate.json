@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/gates/pre_implementation-2026-10-21T15-13-47-631Z.json",
+    "hash": "sha256:f0b8593bb365d63cf662717a934bea71e194a3fac8105f048bd464a79def1037"
+  }
+}

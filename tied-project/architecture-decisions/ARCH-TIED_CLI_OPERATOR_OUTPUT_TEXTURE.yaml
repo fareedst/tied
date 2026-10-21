@@ -1,0 +1,28 @@
+ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
+  alternatives_considered:
+    - description: "Leave how() on stdout"
+      name: "Keep stdout default"
+      rejected_because: "Conflicts with chainable stdout principle for future machine output"
+  consequences:
+    negative:
+      - "Breaking change for callers that piped how stdout; mitigated by --stdout"
+    positive:
+      - "NO_COLOR and plain flags align with ecosystem norms"
+      - "Scripts can pipe other commands without capturing help text"
+  context: "Sourced bash how() is the first adopter; Node CLIs may follow under the same contract."
+  decision: "Human operator help defaults to stderr; stdout stays empty on success for chainability. Plain mode disables ANSI and decorative Unicode. Precedence: CLI flag, then env, then automatic (NO_COLOR, non-TTY on help fd)."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-21"
+    last_updated:
+      author: "close-out"
+      date: "2026-10-21"
+      reason: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out"
+  name: "CLI operator output texture architecture"
+  status: "Implemented"
+  traceability:
+    implementation:
+      - "IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE"
+    requirements:
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
