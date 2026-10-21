@@ -80,5 +80,8 @@ steps:
       - kind: file_path
         path: docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md
   - id: traceable-commit
-    disposition: pending
-    notes: Sponsor-requested commit only.
+    disposition: completed
+    notes: "20d54dc1 — LangChain comparison + PLAN artifacts"
+    evidence_refs:
+      - kind: file_path
+        path: docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md
