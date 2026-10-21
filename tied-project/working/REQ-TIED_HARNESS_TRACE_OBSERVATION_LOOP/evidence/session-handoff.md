@@ -41,7 +41,7 @@ Branch **`main`** is **ahead 7** of `origin/main` — **not pushed**.
 
 **Phase 2 (Loop 3 HTOL learning pilot):** **Closed** — [REQ-TIED_HARNESS_TRACE_LEARNING_PILOT](../../REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/session-handoff.md).
 
-**Phase 3 (matrix row 15 + trace analyzer):** **Closed** — [REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/session-handoff.md) (commit `7c84e2c9`).
+**Phase 3 (matrix row 15 + trace analyzer):** **Closed** — [REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/session-handoff.md) (commit `d5c8e055`).
 
 ## Workspace noise (unrelated to HTOL)
 

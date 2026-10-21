@@ -125,4 +125,4 @@ steps:
       - kind: file_path
         path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/proposed-commit-message.txt
       - kind: command
-        path: "git commit 7c84e2c9 — feat(htol): LangChain harness Phase 3 — matrix row 15 + trace analyzer"
+        path: "git commit d5c8e055 — feat(htol): LangChain harness Phase 3 — matrix row 15 + trace analyzer"

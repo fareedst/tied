@@ -3,7 +3,7 @@
 **Date:** 2026-10-21  
 **Status:** **Closed** (implement + close-out + traceable commit)
 
-**Commit:** `7c84e2c9` (47 files, Phase 3 scoped wave)
+**Commit:** `d5c8e055` (47 files, Phase 3 scoped wave)
 
 ## What shipped (LangChain comparison Phase 3)
 

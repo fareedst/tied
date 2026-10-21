@@ -16,7 +16,7 @@ See [git-hygiene-receipt-2026-10-21.md](./git-hygiene-receipt-2026-10-21.md).
 
 ## Commit
 
-**Commit SHA:** `7c84e2c9` (47 files, Phase 3 scoped wave).
+**Commit SHA:** `d5c8e055` (47 files, Phase 3 scoped wave).
 
 ## Remaining risks
 
