@@ -1,0 +1,7 @@
+REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
+  description: "Optional LangSmith export compose for HTOL harness skills"
+  related_tokens:
+    - "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE"
+    - "IMPL-TIED_HARNESS_LANGSMITH_COMPOSE"
+  status: "Implemented"
+  type: "requirement"

@@ -1,0 +1,11 @@
+ARCH-TIED_HARNESS_LANGSMITH_COMPOSE:
+  cross_references:
+    - "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"
+  decision: "Optional operator-run export script and explicit leaf skill produce local JSON review inputs; enrollment surface_ref may reference harness-trace-langsmith-compose; no LangSmith adapter in TIED MCP core."
+  name: "LangSmith client-side HTOL export compose"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_HARNESS_LANGSMITH_COMPOSE"
+    requirements:
+      - "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"

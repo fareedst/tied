@@ -1,0 +1,120 @@
+citdp:
+  path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml
+  reason: Optional LangSmith client export compose for HTOL skills.
+  status: analysis
+depth_tier: minimal
+gate_policy: advisory
+methodology_surface_change_class: prompt_type_workflow
+profile_depth: minimal
+purpose: Per-request Tracker for REQ-TIED_HARNESS_LANGSMITH_COMPOSE.
+refine_pass: 1
+refine_pass_date: "2026-10-21"
+request: REQ-TIED_HARNESS_LANGSMITH_COMPOSE
+request_token: REQ-TIED_HARNESS_LANGSMITH_COMPOSE
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: close_out_complete
+execution_evidence:
+  request: REQ-TIED_HARNESS_LANGSMITH_COMPOSE
+  envelope_path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/request-evidence-envelope.v1.json
+  completed: []
+  close_out_evidence:
+    date: "2026-10-21"
+    deferred:
+      - live_langsmith_api_smoke_no_api_key_sponsor_unblock
+    gates:
+      close_out: allowed
+    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+steps:
+  - id: session-bootstrap
+    disposition: completed
+    notes: PRELOAD HTOL guide, LangChain comparison, prompt-composer; optional LangSmith compose scope.
+  - id: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/translate-sponsor-intent-evidence.md
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/PLAN.md
+  - id: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml
+  - id: impact-discovery
+    disposition: completed
+    notes: Skill + export script + HTOL guide slice + enrollment leaf harness-trace-langsmith-compose.
+  - id: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/sponsor-decisions-evidence.md
+    notes: Costly export script accepted opt-in; sponsor unblock defers live API smoke (no LANGSMITH_API_KEY).
+  - id: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/test-strategy.md
+  - id: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: CITDP counterexamples only.
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/not-applicable-receipt.v1.json
+  - id: author-requirement
+    disposition: completed
+    notes: REQ-TIED_HARNESS_LANGSMITH_COMPOSE at add-feature.
+  - id: author-architecture
+    disposition: completed
+    notes: ARCH-TIED_HARNESS_LANGSMITH_COMPOSE at add-feature.
+  - id: persist-implementation-records
+    disposition: completed
+    notes: IMPL index + sidecar at add-feature.
+  - id: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_LANGSMITH_COMPOSE-pseudocode.md
+  - id: resolve-pseudocode
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_LANGSMITH_COMPOSE-pseudocode.md
+  - id: three-way-alignment-unit
+    disposition: not_applicable
+  - id: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tools/bootstrap/lib/harness-trace-langsmith-compose-skill.test.mjs
+      - kind: file_path
+        path: tools/bootstrap/lib/export-langsmith-traces.test.mjs
+  - id: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - kind: command
+        path: "node --test tools/bootstrap/lib/harness-trace-langsmith-compose-skill.test.mjs tools/bootstrap/lib/export-langsmith-traces.test.mjs tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
+  - id: composition-integration
+    disposition: not_applicable
+    rationale: Doc/skill/script; prompt-type e2e covers bundle install.
+  - id: end-to-end-ui
+    disposition: not_applicable
+  - id: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: gate_receipt
+        path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/gates/verification-2026-10-21T14-10-35-867Z.json
+  - id: persist-citdp-record
+    disposition: completed
+    notes: CITDP leap_feedback.record_status complete.
+  - id: sync-tied-stack
+    disposition: completed
+    notes: tied_validate_consistency ok after implement.
+  - id: sub-close-out-evidence-sync
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/close-out-handoff.md
+  - id: traceable-commit
+    disposition: deferred
+    notes: Sponsor has not requested commit; live LangSmith smoke deferred per sponsor-decisions-evidence.md.

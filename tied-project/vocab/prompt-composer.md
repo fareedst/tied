@@ -72,10 +72,13 @@ The router is `prompt-type-router`. It accepts an explicit ordered list,
 deduplicates adjacent duplicates, preserves first-seen order, and stops on
 unknown or ambiguous input.
 
-**Methodology harness leaf (not a prompt-type branch):** `harness-trace-review` —
-explicit-only trace/session review into **`tied_feedback_capture_observation`**
-([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml);
-guide at `tied-bundle/docs/harness-trace-observation-loop.md`).
+**Methodology harness leaves (not prompt-type branches):**
+
+- `harness-trace-review` — explicit-only Loop 2 trace/session review into **`tied_feedback_capture_observation`** ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)).
+- `harness-trace-analyzer` — explicit-only outer-loop compose with normative **Task** fan-out and synthesis proposals ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)).
+- `harness-trace-langsmith-compose` — explicit-only optional LangSmith run export into local JSON, then hand off to the review/analyzer skills ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)); **client-side**, not TIED core.
+
+Guide: `tied-bundle/docs/harness-trace-observation-loop.md` (Procedure + **Outer loop (LangChain compose)** + **Optional LangSmith client compose**).
 
 ---
 

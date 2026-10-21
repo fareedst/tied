@@ -21,6 +21,9 @@ const REQUIRED_MARKERS = [
   "REQ-TIED_HARNESS_LANGCHAIN_PHASE3",
   "@harness-trace-analyzer",
   "@harness-trace-review",
+  "@harness-trace-langsmith-compose",
+  "REQ-TIED_HARNESS_LANGSMITH_COMPOSE",
+  "## Optional LangSmith client compose",
   "tied_feedback_capture_observation",
   "model self-check",
 ];

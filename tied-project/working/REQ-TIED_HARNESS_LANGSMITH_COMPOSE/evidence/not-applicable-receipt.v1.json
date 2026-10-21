@@ -1,0 +1,14 @@
+{
+  "schema_version": "not-applicable-receipt.v1",
+  "request_token": "REQ-TIED_HARNESS_LANGSMITH_COMPOSE",
+  "artifact_kind": "adversarial_inquiry",
+  "depth_tier": "minimal",
+  "phases": [
+    "close_out",
+    "pre_implementation",
+    "verification"
+  ],
+  "reason": "Adversarial inquiry not applicable at minimal depth_tier",
+  "generated_at": "2026-10-21T14:10:00.000Z",
+  "source": "sponsor_unblock_no_langsmith_keys"
+}

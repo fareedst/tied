@@ -14,7 +14,8 @@
 
 | In scope | Out of scope |
 | --- | --- |
-| Structured review of **session / transcript / adherence** inputs → **operational observation** via **`tied_feedback_capture_observation`** | LangSmith, Harbor, Daytona, or other vendor trace stores |
+| Structured review of **session / transcript / adherence** inputs → **operational observation** via **`tied_feedback_capture_observation`** | Vendor trace stores **as TIED core** (MCP gates, automatic YAML/LEAP) |
+| Optional **client-side** LangSmith export → local JSON paths → **`@harness-trace-review`** / **`@harness-trace-analyzer`** ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)) | Harbor, Daytona, or other vendor adapters; LangSmith metrics as TIED effectiveness |
 | Optional **Task** fan-out for failure-mode analysis (harness plane) | **`tied_checklist_gate_validate`**, **`tied_verify`**, or checklist waivers |
 | **test-strategy executable matrix** wording in Tracker / test-strategy | Automatic REQ/ARCH/IMPL or LEAP from trace review |
 | Compose with [pre-handoff verification charter](pre-handoff-verification-charter.md) | Terminal Bench or vendor benchmark scores as TIED effectiveness |
@@ -67,7 +68,7 @@ LangChain’s empirical **Trace Analyzer** pattern (fetch traces → parallel fa
 
 | Step (external analog) | TIED surface | Authority |
 | --- | --- | --- |
-| Fetch traces | Caller-supplied transcript / working-folder paths only | Harness inputs — **no LangSmith** |
+| Fetch traces | Caller-supplied transcript / working-folder paths; optional **`@harness-trace-langsmith-compose`** export to local JSON (**client-side**, not TIED core) | Automatic LangSmith fetch inside TIED MCP or gate tools |
 | Parallel error analysis | Foreground **Task** fan-out with readonly scope (`@harness-trace-analyzer`) | Advisory until checklist-owned promotion |
 | Synthesize harness edits | Proposal list (prompt / tools / middleware **analogs**) | **`add-feature`** / **`refine-plan`** / sponsor — not auto YAML |
 | Record learning | **`tied_feedback_capture_observation`** once per batch | Kaizen Loop 2 |
@@ -76,8 +77,21 @@ LangChain’s empirical **Trace Analyzer** pattern (fetch traces → parallel fa
 
 - **`@harness-trace-review`** — lightweight Loop 2 review after a session batch ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)).
 - **`@harness-trace-analyzer`** — multi-failure batches needing normative Task fan-out before synthesis ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)).
+- **`@harness-trace-langsmith-compose`** — optional LangSmith run export into local JSON before the skills above ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)).
 
 Vendor benchmark scores remain **LangChain-reported** / **`not_measured`** for TIED effectiveness.
+
+---
+
+## Optional LangSmith client compose
+
+When the operator already uses LangSmith, **`@harness-trace-langsmith-compose`** documents an **opt-in** export path:
+
+1. Set **`LANGSMITH_API_KEY`** in the operator environment (never commit).
+2. Run the bundled script `export-langsmith-traces.mjs` with `--out` under `tied-project/working/{REQ-TOKEN}/` (or another caller-owned directory).
+3. Hand off exported excerpts to **`@harness-trace-review`** or **`@harness-trace-analyzer`**.
+
+This compose path does **not** grant gate authority, does **not** write project YAML, and does **not** prove methodology effectiveness.
 
 ---
 

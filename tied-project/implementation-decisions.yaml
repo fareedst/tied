@@ -2645,6 +2645,11 @@ IMPL-TIED_HARNESS_LANGCHAIN_PHASE3:
   detail_file: "implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
   name: "LangChain harness Phase 3 implementation"
   status: "Active"
+IMPL-TIED_HARNESS_LANGSMITH_COMPOSE:
+  description: "Skill, script, enrollment slices"
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
+  name: "LangSmith HTOL export compose implementation"
+  status: "Active"
 IMPL-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "ARCH-TIED_HARNESS_PLATFORM_SEAM"

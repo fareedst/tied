@@ -2613,6 +2613,11 @@ REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
       - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
     implementation:
       - "IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"
+REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
+  description: "Optional LangSmith export compose for HTOL harness skills"
+  detail_file: "requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
+  status: "Implemented"
+  type: "requirement"
 REQ-TIED_HARNESS_PLATFORM_SEAM:
   category: "Functional"
   cross_references:

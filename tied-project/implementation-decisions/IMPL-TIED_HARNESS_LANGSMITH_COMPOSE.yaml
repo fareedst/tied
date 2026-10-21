@@ -1,0 +1,30 @@
+IMPL-TIED_HARNESS_LANGSMITH_COMPOSE:
+  code_locations:
+    files:
+      - description: "Compose skill"
+        path: "tools/bundled-prompt-type-skills/harness-trace-langsmith-compose/SKILL.md"
+      - description: "Optional export CLI"
+        path: "tools/bundled-prompt-type-skills/harness-trace-langsmith-compose/scripts/export-langsmith-traces.mjs"
+      - description: "PROMPT_TYPE_LEAF_IDS"
+        path: "mcp-server/src/methodology-production-system-enrollment/constants.ts"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE"
+    - "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"
+  decision: "RED/GREEN bootstrap tests; ship harness-trace-langsmith-compose skill and export-langsmith-traces.mjs; extend HTOL guide and LangChain comparison Phase 4 optional compose row."
+  implementation_approach:
+    details:
+      - "mcp-server enrollment constants"
+      - "tools/bootstrap/lib contract tests"
+      - "tools/bundled-prompt-type-skills/harness-trace-langsmith-compose"
+    summary: "Docs, skill, optional script, enrollment constant per pseudo-code sidecar."
+  name: "LangSmith HTOL export compose implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE"
+    requirements:
+      - "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"
+    tests:
+      - "tools/bootstrap/lib/export-langsmith-traces.test.mjs"
+      - "tools/bootstrap/lib/harness-trace-langsmith-compose-skill.test.mjs"

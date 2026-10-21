@@ -9,10 +9,12 @@ Cursor skills used by TIED projects.
   `add-feature`, `refine-plan`, `build-plan`, `close-out`, `debug`,
   `question`, `use-skill`, `ammend-commit`, `non-tied-plan`, `non-tied-debug`,
   `leap-ad-hoc`, `leap-diff-promote`, and `other`.
-- 2 explicit-only **methodology harness** leaf skills: `harness-trace-review`
+- 3 explicit-only **methodology harness** leaf skills: `harness-trace-review`
   ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)),
   `harness-trace-analyzer`
-  ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)).
+  ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)),
+  `harness-trace-langsmith-compose`
+  ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)).
 - One explicit-only `prompt-type-router` skill.
 - 15 direct Markdown references under `prompt-shared/` (includes `gitignore-close-out-hygiene.md`).
 

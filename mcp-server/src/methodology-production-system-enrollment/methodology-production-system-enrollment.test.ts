@@ -57,7 +57,11 @@ describe("production system enrollment validate [REQ-METHODOLOGY-PRODUCTION-SYST
       invalid.diagnostics.some((d) => d.code === "ENROLLMENT_INVALID_PROMPT_TYPE"),
     );
 
-    for (const harnessRef of ["harness-trace-review", "harness-trace-analyzer"] as const) {
+    for (const harnessRef of [
+      "harness-trace-review",
+      "harness-trace-analyzer",
+      "harness-trace-langsmith-compose",
+    ] as const) {
       const harness = validateProductionSystemEnrollmentObject(
         baseRecord("prompt_type_workflow", { surface_ref: harnessRef }),
       );

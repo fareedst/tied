@@ -27,7 +27,11 @@ const LEAF_SKILLS = [
   "other",
 ] as const;
 
-const METHODOLOGY_HARNESS_SKILLS = ["harness-trace-review", "harness-trace-analyzer"] as const;
+const METHODOLOGY_HARNESS_SKILLS = [
+  "harness-trace-review",
+  "harness-trace-analyzer",
+  "harness-trace-langsmith-compose",
+] as const;
 
 const SKILL_DIRS = [...LEAF_SKILLS, "prompt-type-router"] as const;
 

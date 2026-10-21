@@ -32,6 +32,7 @@
     "other",
     "harness-trace-review",
     "harness-trace-analyzer",
+    "harness-trace-langsmith-compose",
     "prompt-type-router"
   ],
   "PROMPT_TYPE_SHARED_DIR": "prompt-shared",

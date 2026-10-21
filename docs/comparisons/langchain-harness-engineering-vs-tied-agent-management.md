@@ -266,6 +266,7 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 | **1** | **Implemented** — [harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) + `@harness-trace-review` ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)) | Loop 2 Kaizen |
 | **2** | **Implemented** — [Harness trace learning experiment charter](../../tied-bundle/docs/harness-trace-learning-experiment-charter.md) + templates + store dogfood enrollment ([REQ-TIED_HARNESS_TRACE_LEARNING_PILOT](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml)) | Loop 3 PDSA (sponsor-run; **`not_measured`** until cohort) |
 | **3** | **Implemented** — [methodology composition matrix §2 row 15](methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks) + `@harness-trace-analyzer` ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)) | Sponsor promotion |
+| **4** | **Implemented** — optional `@harness-trace-langsmith-compose` + client-side export script ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)) | Optional LangSmith → HTOL inputs (not TIED core) |
 
 ---
 
@@ -275,7 +276,7 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 - **Terminal-Bench score** as TIED methodology effectiveness — **LangChain-reported** narrative only.
 - **Trace Analyzer Skill** as substitute for **`sub-adversarial-inquiry-pass`** or integrated inquiry activation.
 - **Harness-only** success as substitute for REQ→ARCH→IMPL traceability.
-- **LangChain product stack** (LangSmith, Harbor, Daytona) as TIED core — **Defer** to client tooling.
+- **LangChain product stack** (LangSmith, Harbor, Daytona) as **TIED core** — optional **client-side** LangSmith export compose only ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)); Harbor/Daytona remain **Defer**.
 
 ---
 

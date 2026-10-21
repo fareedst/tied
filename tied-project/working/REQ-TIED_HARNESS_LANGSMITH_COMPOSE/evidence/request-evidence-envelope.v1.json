@@ -1,0 +1,132 @@
+{
+  "schema_version": "request-evidence-envelope.v1",
+  "envelope_meta": {
+    "generated_at": "2026-10-21T14:10:41.835Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 4
+  },
+  "identity": {
+    "request_token": "REQ-TIED_HARNESS_LANGSMITH_COMPOSE",
+    "project_id": "43c95df716872c5d",
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "3.0.0"
+  },
+  "runs": [
+    {
+      "run_id": "langsmith-unblock-close-out-2026-10-21",
+      "phase": "close_out",
+      "started_at": null,
+      "generator": "persistGateDecisionReceipt"
+    },
+    {
+      "run_id": "langsmith-compose-verify-2026-10-21",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "persistGateDecisionReceipt"
+    },
+    {
+      "run_id": "langsmith-unblock-verify-2026-10-21",
+      "phase": "verification",
+      "started_at": null,
+      "generator": "persistGateDecisionReceipt"
+    }
+  ],
+  "artifacts": [
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/gates/close_out-2026-10-21T14-10-41-834Z.json",
+      "content_hash": "sha256:af00400d0e78f0ef053458a57f036470e73416c90f61f4e4a1c55e1e8bc2a03d",
+      "phase": "close_out",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/gates/verification-2026-10-21T14-10-12-105Z.json",
+      "content_hash": "sha256:f66ca0c030cab80ab4971f206bec82729258db24eb84a847be8ae6595e24a1f4",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "checklist_gate_receipt",
+      "schema_version": "checklist-gate-receipt.v1",
+      "path": "working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/gates/verification-2026-10-21T14-10-35-867Z.json",
+      "content_hash": "sha256:7804294ec28da1c4340d15c29914a4cdd6c0c70352bd2c87ed49d143d3a310ad",
+      "phase": "verification",
+      "status": "present",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ]
+    },
+    {
+      "kind": "not_applicable_receipt",
+      "schema_version": "not-applicable-receipt.v1",
+      "path": "tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/not-applicable-receipt.v1.json",
+      "content_hash": "sha256:365b302930176d147ec25c3a69547361206988141bf413408c26b32c7db2e773",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "request_evidence_envelope",
+      "schema_version": "request-evidence-envelope.v1",
+      "path": "tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:b3d7a49b754c6e4c43c792d9a729b15827e6941a2742157fc6117f8567773fc8",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/close-out-handoff.md",
+      "content_hash": "sha256:3599e2228dc77874c9193cb612e0bd1e6cf43ebd1b7007ace52fdb2d85752972",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/sponsor-decisions-evidence.md",
+      "content_hash": "sha256:2f8282da78dc379ab9e0d3c89004d348d075650e44a1d5ef0b044765c06c5a71",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    },
+    {
+      "kind": "unknown",
+      "schema_version": null,
+      "path": "tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/translate-sponsor-intent-evidence.md",
+      "content_hash": "sha256:1889676458b3a419ac2bce49ea4b3a1ccaf1b1e15d0a7a670bf1737468e550c4",
+      "phase": null,
+      "status": "present",
+      "proof_boundaries": [
+        "discovery_only"
+      ]
+    }
+  ],
+  "cross_links": {
+    "tracker_path": null,
+    "tracker_hash": null,
+    "citdp_path": null,
+    "evidence_chain_profile_path": null
+  },
+  "gaps": []
+}

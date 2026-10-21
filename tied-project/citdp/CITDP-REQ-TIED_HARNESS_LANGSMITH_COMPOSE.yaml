@@ -1,0 +1,99 @@
+CITDP-REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
+  change_definition:
+    current_behavior: "HTOL Phases 1–3 defer LangSmith automation; outer loop guide states caller-supplied paths only with no optional export compose skill."
+    desired_behavior: "REQ-tracked optional client-side LangSmith run export into local JSON plus explicit @harness-trace-langsmith-compose skill handoff to @harness-trace-review / @harness-trace-analyzer—without TIED core vendor adapter, gate authority, or YAML/LEAP automation."
+    methodology_surface_change_class: "prompt_type_workflow"
+    non_goals:
+      - "Automatic LEAP from exported traces"
+      - "Harbor/Daytona adapters"
+      - "LangSmith MCP tools or tied_checklist_gate_validate substitution"
+      - "Terminal Bench effectiveness claims"
+    success_criteria:
+      - "harness-trace-langsmith-compose skill + export script tests green"
+      - "HTOL guide optional LangSmith section + doc test green"
+      - "LangChain comparison Phase 4 Implemented row"
+      - "PROMPT_TYPE_LEAF_IDS includes harness-trace-langsmith-compose"
+      - "tied_validate_consistency ok"
+    unchanged_behavior: "Checklist gate authority; Kaizen capture semantics; LangChain-reported benchmark labeling."
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/harness-trace-langsmith-compose-skill.test.mjs tools/bootstrap/lib/export-langsmith-traces.test.mjs tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
+      - "npx tsx --test mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.test.ts mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "pseudocode_validate IMPL-TIED_HARNESS_LANGSMITH_COMPOSE gate_mode"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "compose_handoff_does_not_waive_gates"
+      - "export_script_client_side_not_tied_core"
+      - "langsmith_metrics_langchain_reported_only"
+  impact_analysis:
+    modules_or_boundaries: "Bundled harness skill + optional export script; HTOL guide slice; enrollment constant; no MCP gate tools."
+    tied_tokens_affected:
+      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+    tied_tokens_new:
+      - "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE"
+      - "IMPL-TIED_HARNESS_LANGSMITH_COMPOSE"
+      - "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  persist_policy: "Persist after implement"
+  record_identity:
+    change_request_id: "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-21"
+    title: "LangSmith optional HTOL trace export compose"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "API keys committed to repo"
+      - "LangSmith export cited as TIED gate receipt"
+      - "Terminal Bench % from LangSmith runs cited as methodology effectiveness"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Export script writes into tied-project YAML indexes"
+        - "Skill prose implies LangSmith fetch is default for every HTOL session"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "New MCP tool reads LANGSMITH_API_KEY for gate validate"
+        - "Skill auto-invokes tied_feedback_capture_observation without review handoff"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md"
+        - "tied-bundle/docs/harness-trace-observation-loop.md"
+        - "tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/PLAN.md"
+      falsification_questions:
+        - "Do harness promotion paths still require checklist gates for implement claims?"
+        - "Does export remain optional and explicit-only?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Optional client-side export script; minimal/advisory; no new gate MCP."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Bootstrap skill + export + doc tests"
+        evidence_method: "RED/GREEN per test-strategy.md"
+        limitation: "Does not measure LangSmith export improving harness scores; live API smoke deferred when sponsor has no LANGSMITH_API_KEY (no-network CLI tests only)"
+        owner: "agent"
+        rationale: "Bounded compose-don't-replace boundary"
+  test_strategy:
+    documentation_only: false
+    mandatory_order: "RED skill/export tests before skill GREEN"
+    unit_tests:
+      - "tools/bootstrap/lib/export-langsmith-traces.test.mjs"
+      - "tools/bootstrap/lib/harness-trace-langsmith-compose-skill.test.mjs"
+    verification_commands:
+      - "tied_validate_consistency"

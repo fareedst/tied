@@ -1001,6 +1001,17 @@ ARCH-TIED_HARNESS_LANGCHAIN_PHASE3:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_HARNESS_LANGSMITH_COMPOSE:
+  cross_references:
+    - "IMPL-TIED_HARNESS_LANGSMITH_COMPOSE"
+    - "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"
+  description: "Client-side export compose boundary"
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "LangSmith HTOL export compose architecture"
+  source_index: "architecture-decisions.yaml"
 ARCH-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
@@ -2628,6 +2639,17 @@ IMPL-TIED_HARNESS_LANGCHAIN_PHASE3:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_HARNESS_LANGSMITH_COMPOSE:
+  cross_references:
+    - "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE"
+    - "REQ-TIED_HARNESS_LANGSMITH_COMPOSE"
+  description: "Skill, script, enrollment slices"
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "LangSmith HTOL export compose implementation"
+  source_index: "implementation-decisions.yaml"
 IMPL-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
@@ -4420,6 +4442,17 @@ REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
   source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
+REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
+  cross_references:
+    - "ARCH-TIED_HARNESS_LANGSMITH_COMPOSE"
+    - "IMPL-TIED_HARNESS_LANGSMITH_COMPOSE"
+  description: "Optional client-side LangSmith export into HTOL harness compose"
+  detail_file: "requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "LangSmith HTOL export compose"
+  source_index: "requirements.yaml"
 REQ-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
