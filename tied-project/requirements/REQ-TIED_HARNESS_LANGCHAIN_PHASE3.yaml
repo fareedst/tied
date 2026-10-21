@@ -1,0 +1,48 @@
+REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
+  category: Methodology
+  description: 'LangChain comparison Phase 3 sponsor promotion: methodology-composition-matrix §2 row 15 for empirical harness trace loop compose, explicit harness-trace-analyzer skill with normative Task fan-out and Kaizen capture, HTOL guide outer-loop section, and PROMPT_TYPE_LEAF_IDS enrollment fix for harness skills—no LangSmith or gate authority.'
+  name: LangChain harness Phase 3 (matrix row + trace analyzer)
+  priority: P2
+  rationale:
+    benefits:
+      - Dedicated matrix row for LangChain empirical tuning vs Cursor row 14
+      - Repeatable outer-loop analyzer recipe without vendor trace store
+    problems_solved:
+      - Enrollment validate rejects harness-trace-review surface_ref
+      - LangChain harness narrative only in matrix header and row 14 pairing
+    why: Phase 3 was Defer as costly; sponsor promoted matrix inventory plus Trace Analyzer compose skill while keeping platform-adjacent proof on gates and MCP.
+  related_requirements:
+    depends_on:
+      - REQ-PROMPT_TYPE_GLOBAL_SKILLS
+      - REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+      - REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
+      - REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP
+    related_to:
+      - REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
+      - REQ-TIED_HARNESS_PLATFORM_SEAM
+      - REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX
+  satisfaction_criteria:
+    - criterion: harness-trace-analyzer skill passes contract test and prompt-type bundle inventory
+      id: SC-HL3-ANALYZER
+      metric: harness-trace-analyzer-skill.test.mjs + prompt-type-skills e2e
+    - criterion: HTOL guide outer-loop section passes harness-trace-observation-loop-doc.test.mjs
+      id: SC-HL3-GUIDE
+      metric: Guide doc contract test
+    - criterion: LangChain comparison Phase 3 Implemented with matrix row 15 and skill links
+      id: SC-HL3-COMPOSE
+      metric: Link audit
+    - criterion: PROMPT_TYPE_LEAF_IDS includes both harness skills; enrollment unit tests green
+      id: SC-HL3-ENROLL
+      metric: methodology-production-system-enrollment.test.ts
+    - criterion: tied_validate_consistency passes after implement
+      id: SC-HL3-TRACE
+      metric: tied_validate_consistency
+    - criterion: §2 row 15 and 15-row contract pass methodology-composition-matrix-langchain-row.test.mjs
+      id: SC-HL3-MATRIX
+      metric: Bootstrap matrix row test
+  status: Implemented
+  traceability:
+    architecture:
+      - ARCH-TIED_HARNESS_LANGCHAIN_PHASE3
+    implementation:
+      - IMPL-TIED_HARNESS_LANGCHAIN_PHASE3

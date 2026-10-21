@@ -265,7 +265,7 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 | **0** | This comparison + cross-links | Outreach |
 | **1** | **Implemented** — [harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) + `@harness-trace-review` ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)) | Loop 2 Kaizen |
 | **2** | **Implemented** — [Harness trace learning experiment charter](../../tied-bundle/docs/harness-trace-learning-experiment-charter.md) + templates + store dogfood enrollment ([REQ-TIED_HARNESS_TRACE_LEARNING_PILOT](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml)) | Loop 3 PDSA (sponsor-run; **`not_measured`** until cohort) |
-| **3** | Matrix §2 row or product skill (**Defer** — costly; header sibling link sufficient for v1) | Sponsor promotion |
+| **3** | **Implemented** — [methodology composition matrix §2 row 15](methodology-composition-matrix.md#section-2-layer-c-adjacent-frameworks) + `@harness-trace-analyzer` ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)) | Sponsor promotion |
 
 ---
 

@@ -1,15 +1,15 @@
 REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
     category: "Functional"
-    description: "Sponsor-facing outreach artifact: one markdown matrix mapping QMM Loop 1/2/3 × well-known and QMM methods (§1, exactly 27 rows) plus Layer C adjacent frameworks (§2, exactly 11 rows). Prefill disposition, tied_center_of_gravity, and evidence_refs from existing comparison docs; TIED mechanism columns remain empty or _TBD_ until sponsor fill-in. Not ISO/CMMI certification or behavioral equivalence claims."
+    description: "Sponsor-facing outreach artifact: one markdown matrix mapping QMM Loop 1/2/3 × well-known and QMM methods (§1, exactly 27 rows) plus Layer C adjacent frameworks (§2, exactly 15 rows). Prefill disposition, tied_center_of_gravity, and evidence_refs from existing comparison docs; mechanism columns agent-drafted for sponsor review. Not ISO/CMMI certification or behavioral equivalence claims."
     metadata:
       created:
         author: "build-plan"
         date: "2026-10-13"
       last_updated:
-        author: "agent"
-        date: "2026-10-17"
-        reason: "§2 row 11 PR-centric agent code review (Claude comparison compose)"
+        author: "build-plan"
+        date: "2026-10-21"
+        reason: "§2 row 15 LangChain harness engineering (REQ-TIED_HARNESS_LANGCHAIN_PHASE3)"
     name: "Methodology composition matrix"
     priority: "P2"
     rationale:
@@ -32,7 +32,7 @@ REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
       - criterion: "Cross-links from tied-vs-well-known-methodologies.md and qmm-kaizen-vs-tied.md resolve to the new matrix."
         id: "SC-MCM-LINKS"
         metric: "Relative link check from docs/comparisons/"
-      - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 11 data rows."
+      - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 15 data rows."
         id: "SC-MCM-DOC"
         metric: "Row inventory script or manual count per working PLAN"
       - criterion: "Project REQ/ARCH/IMPL tokens registered; tied_validate_consistency passes for project YAML."

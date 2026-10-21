@@ -61,6 +61,26 @@ Observations stay **`promotion_pending`** until an owning workflow confirms.
 
 ---
 
+## Outer loop (LangChain compose)
+
+LangChain’s empirical **Trace Analyzer** pattern (fetch traces → parallel failure analysis → synthesize harness edits) is **not** shipped as a vendor product in TIED. This section maps the **compose** pattern to explicit skills:
+
+| Step (external analog) | TIED surface | Authority |
+| --- | --- | --- |
+| Fetch traces | Caller-supplied transcript / working-folder paths only | Harness inputs — **no LangSmith** |
+| Parallel error analysis | Foreground **Task** fan-out with readonly scope (`@harness-trace-analyzer`) | Advisory until checklist-owned promotion |
+| Synthesize harness edits | Proposal list (prompt / tools / middleware **analogs**) | **`add-feature`** / **`refine-plan`** / sponsor — not auto YAML |
+| Record learning | **`tied_feedback_capture_observation`** once per batch | Kaizen Loop 2 |
+
+**Invoke skills:**
+
+- **`@harness-trace-review`** — lightweight Loop 2 review after a session batch ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)).
+- **`@harness-trace-analyzer`** — multi-failure batches needing normative Task fan-out before synthesis ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)).
+
+Vendor benchmark scores remain **LangChain-reported** / **`not_measured`** for TIED effectiveness.
+
+---
+
 ## Test-strategy executable matrix
 
 For TIED-tracked **implement** passes (`build-plan`, `add-feature` implement leg), the task **test-strategy** (or Tracker `test-strategy` step) must name **commands**, not model self-check prose alone.
@@ -87,7 +107,7 @@ When a sponsor scopes **HTOL effectiveness** (not just Loop 2 capture), use the 
 
 ## Related documents
 
-- [LangChain harness engineering × TIED — Phase 1 & Phase 2](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md#phased-recommendations-doc-first)
+- [LangChain harness engineering × TIED — Phases 1–3](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md#phased-recommendations-doc-first)
 - [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md)
 - [Traefik harness/platform × TIED](../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md)
 - [Client development index](client-development-index.md)

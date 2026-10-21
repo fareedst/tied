@@ -56,6 +56,14 @@ describe("production system enrollment validate [REQ-METHODOLOGY-PRODUCTION-SYST
     assert.ok(
       invalid.diagnostics.some((d) => d.code === "ENROLLMENT_INVALID_PROMPT_TYPE"),
     );
+
+    for (const harnessRef of ["harness-trace-review", "harness-trace-analyzer"] as const) {
+      const harness = validateProductionSystemEnrollmentObject(
+        baseRecord("prompt_type_workflow", { surface_ref: harnessRef }),
+      );
+      assert.equal(harness.ok, true, `expected valid enrollment for ${harnessRef}`);
+      assert.equal(harness.enrollment_disposition, "enrolled");
+    }
   });
 
   it("assurance_profile and gate_policy require non-empty surface_ref", () => {

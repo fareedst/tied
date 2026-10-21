@@ -16,7 +16,11 @@ const REQUIRED_MARKERS = [
   "## Failure-mode taxonomy",
   "## Promotion path",
   "## Test-strategy executable matrix",
+  "## Outer loop (LangChain compose)",
   "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP",
+  "REQ-TIED_HARNESS_LANGCHAIN_PHASE3",
+  "@harness-trace-analyzer",
+  "@harness-trace-review",
   "tied_feedback_capture_observation",
   "model self-check",
 ];

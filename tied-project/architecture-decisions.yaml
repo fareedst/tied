@@ -2139,6 +2139,10 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
   detail_file: "architecture-decisions/ARCH-TIED_GIT_HYGIENE_SAFETY.yaml"
   name: "Git hygiene safety boundary"
   status: "Planned"
+ARCH-TIED_HARNESS_LANGCHAIN_PHASE3:
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+  name: "LangChain harness Phase 3 architecture"
+  status: "Active"
 ARCH-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "REQ-TIED_HARNESS_PLATFORM_SEAM"

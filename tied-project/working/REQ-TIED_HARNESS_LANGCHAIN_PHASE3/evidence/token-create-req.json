@@ -1,0 +1,76 @@
+{
+  "token": "REQ-TIED_HARNESS_LANGCHAIN_PHASE3",
+  "index_record": {
+    "name": "LangChain harness Phase 3 (matrix row + trace analyzer)",
+    "category": "Methodology",
+    "priority": "P2",
+    "status": "Planned"
+  },
+  "detail_record": {
+    "name": "LangChain harness Phase 3 (matrix row + trace analyzer)",
+    "category": "Methodology",
+    "priority": "P2",
+    "status": "Planned",
+    "description": "LangChain comparison Phase 3 sponsor promotion: methodology-composition-matrix §2 row 15 for empirical harness trace loop compose, explicit harness-trace-analyzer skill with normative Task fan-out and Kaizen capture, HTOL guide outer-loop section, and PROMPT_TYPE_LEAF_IDS enrollment fix for harness skills—no LangSmith or gate authority.",
+    "rationale": {
+      "why": "Phase 3 was Defer as costly; sponsor promoted matrix inventory plus Trace Analyzer compose skill while keeping platform-adjacent proof on gates and MCP.",
+      "benefits": [
+        "Dedicated matrix row for LangChain empirical tuning vs Cursor row 14",
+        "Repeatable outer-loop analyzer recipe without vendor trace store"
+      ],
+      "problems_solved": [
+        "LangChain harness narrative only in matrix header and row 14 pairing",
+        "Enrollment validate rejects harness-trace-review surface_ref"
+      ]
+    },
+    "related_requirements": {
+      "depends_on": [
+        "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP",
+        "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      ],
+      "related_to": [
+        "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX",
+        "REQ-TIED_HARNESS_PLATFORM_SEAM",
+        "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      ]
+    },
+    "satisfaction_criteria": [
+      {
+        "id": "SC-HL3-MATRIX",
+        "criterion": "§2 row 15 and 15-row contract pass methodology-composition-matrix-langchain-row.test.mjs",
+        "metric": "Bootstrap matrix row test"
+      },
+      {
+        "id": "SC-HL3-ANALYZER",
+        "criterion": "harness-trace-analyzer skill passes contract test and prompt-type bundle inventory",
+        "metric": "harness-trace-analyzer-skill.test.mjs + prompt-type-skills e2e"
+      },
+      {
+        "id": "SC-HL3-GUIDE",
+        "criterion": "HTOL guide outer-loop section passes harness-trace-observation-loop-doc.test.mjs",
+        "metric": "Guide doc contract test"
+      },
+      {
+        "id": "SC-HL3-ENROLL",
+        "criterion": "PROMPT_TYPE_LEAF_IDS includes both harness skills; enrollment unit tests green",
+        "metric": "methodology-production-system-enrollment.test.ts"
+      },
+      {
+        "id": "SC-HL3-COMPOSE",
+        "criterion": "LangChain comparison Phase 3 Implemented with matrix row 15 and skill links",
+        "metric": "Link audit"
+      },
+      {
+        "id": "SC-HL3-TRACE",
+        "criterion": "tied_validate_consistency passes after implement",
+        "metric": "tied_validate_consistency"
+      }
+    ],
+    "traceability": {
+      "architecture": ["ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"],
+      "implementation": ["IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"]
+    }
+  }
+}

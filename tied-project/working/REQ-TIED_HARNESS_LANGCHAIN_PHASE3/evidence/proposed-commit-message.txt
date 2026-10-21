@@ -1,0 +1,16 @@
+feat(htol): LangChain harness Phase 3 — matrix row 15 + trace analyzer
+
+LangChain comparison Phase 3: methodology-composition-matrix §2 row 15,
+@harness-trace-analyzer skill (normative Task fan-out + Kaizen capture),
+HTOL outer-loop guide section, and enrollment leaf ids for harness skills —
+composing Phase 1–2 HTOL without LangSmith or gate authority.
+
+REQ-TIED_HARNESS_LANGCHAIN_PHASE3
+ARCH-TIED_HARNESS_LANGCHAIN_PHASE3
+IMPL-TIED_HARNESS_LANGCHAIN_PHASE3
+
+Completion signals: machine close-out pass (close_out gate + envelope
+blocking_gap_count=0); process contract partial (--skip-manifest);
+adherence reconcile band B (thin_ledger advisory).
+
+Staging map: see evidence/git-hygiene-receipt-2026-10-21.md

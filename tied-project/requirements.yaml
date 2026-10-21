@@ -2601,6 +2601,18 @@ REQ-TIED_GIT_HYGIENE:
   name: "Git hygiene MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
+  category: "Methodology"
+  description: "LangChain comparison Phase 3 sponsor promotion: matrix row 15 and harness-trace-analyzer skill compose on HTOL stack."
+  detail_file: "requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+  name: "LangChain harness Phase 3 (matrix row + trace analyzer)"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
+    implementation:
+      - "IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"
 REQ-TIED_HARNESS_PLATFORM_SEAM:
   category: "Functional"
   cross_references:

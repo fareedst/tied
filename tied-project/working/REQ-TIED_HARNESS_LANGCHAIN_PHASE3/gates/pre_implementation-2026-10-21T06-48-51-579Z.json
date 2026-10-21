@@ -1,0 +1,24 @@
+{
+  "schema_version": "checklist-gate-receipt.v1",
+  "phase": "pre_implementation",
+  "timestamp": "2026-10-21T06:48:51.579Z",
+  "allowed": false,
+  "diagnostics": [
+    "methodology_experiment_not_found:mle-htol-pilot-20261021-001"
+  ],
+  "depth": "minimal",
+  "input_hashes": {
+    "tracker_hash": "sha256:3973d5d0769be89d76590d4aba48c2265c83cd5725ab9ed0d251744dd708f5da",
+    "citdp_hash": "sha256:9850adf5a651c5ac38ce03417333cf16a590fe1ef17531eb2f99ce74c3fb5a4f"
+  },
+  "gate_result": {
+    "allowed": false,
+    "ok": false,
+    "blocking": true,
+    "depth": "minimal",
+    "phase": "pre_implementation",
+    "diagnostics": [
+      "methodology_experiment_not_found:mle-htol-pilot-20261021-001"
+    ]
+  }
+}

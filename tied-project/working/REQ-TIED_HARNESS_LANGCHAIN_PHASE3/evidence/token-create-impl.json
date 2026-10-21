@@ -1,0 +1,49 @@
+{
+  "token": "IMPL-TIED_HARNESS_LANGCHAIN_PHASE3",
+  "index_record": {
+    "name": "LangChain harness Phase 3 implementation",
+    "status": "Planned"
+  },
+  "detail_record": {
+    "name": "LangChain harness Phase 3 implementation",
+    "status": "Planned",
+    "decision": "RED/GREEN bootstrap tests for matrix row and analyzer skill; extend HTOL guide; update prompt-type bundle and PROMPT_TYPE_LEAF_IDS; LEAP REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC at implement.",
+    "implementation_approach": {
+      "summary": "Docs, skill, and enrollment constant slices per sidecar pseudo-code.",
+      "details": [
+        "tools/bootstrap/lib methodology and skill contract tests",
+        "tools/bundled-prompt-type-skills/harness-trace-analyzer",
+        "mcp-server enrollment constants and unit tests"
+      ]
+    },
+    "code_locations": {
+      "files": [
+        {
+          "path": "docs/comparisons/methodology-composition-matrix.md",
+          "description": "§2 row 15"
+        },
+        {
+          "path": "tools/bundled-prompt-type-skills/harness-trace-analyzer/SKILL.md",
+          "description": "Analyzer skill"
+        },
+        {
+          "path": "mcp-server/src/methodology-production-system-enrollment/constants.ts",
+          "description": "PROMPT_TYPE_LEAF_IDS"
+        }
+      ],
+      "functions": []
+    },
+    "cross_references": [
+      "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3",
+      "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+    ],
+    "traceability": {
+      "requirements": ["REQ-TIED_HARNESS_LANGCHAIN_PHASE3"],
+      "architecture": ["ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"],
+      "tests": [
+        "tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs",
+        "tools/bootstrap/lib/harness-trace-analyzer-skill.test.mjs"
+      ]
+    }
+  }
+}

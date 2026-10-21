@@ -988,6 +988,19 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
   name: "Git hygiene safety"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_HARNESS_LANGCHAIN_PHASE3:
+  cross_references:
+    - "IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"
+    - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+  description: "Matrix row and analyzer skill compose"
+  detail_file: "architecture-decisions/ARCH-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "LangChain harness Phase 3 architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:
     - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
@@ -2600,6 +2613,19 @@ IMPL-TIED_GIT_HYGIENE:
     - "REQ-TIED_GIT_HYGIENE"
   description: "Git hygiene module"
   name: "Git hygiene implementation"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_HARNESS_LANGCHAIN_PHASE3:
+  cross_references:
+    - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
+    - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+  description: "Doc/skill/enrollment slices"
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "LangChain harness Phase 3 implementation"
+  source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_HARNESS_PLATFORM_SEAM:
@@ -4380,6 +4406,19 @@ REQ-TIED_GIT_HYGIENE:
   description: "Git hygiene preview and guarded apply"
   name: "Git hygiene MCP"
   status: "Active"
+  type: "REQ"
+REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
+  cross_references:
+    - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
+    - "IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"
+  description: "Matrix row 15 and harness-trace-analyzer skill"
+  detail_file: "requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "LangChain harness Phase 3"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_HARNESS_PLATFORM_SEAM:
   cross_references:

@@ -1,0 +1,37 @@
+{
+  "token": "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3",
+  "index_record": {
+    "name": "LangChain harness Phase 3 architecture",
+    "status": "Active"
+  },
+  "detail_record": {
+    "name": "LangChain harness Phase 3 architecture",
+    "status": "Active",
+    "decision": "Treat LangChain Phase 3 as outreach matrix inventory plus explicit harness-trace-analyzer orchestration composing optional Task fan-out and Kaizen capture; keep checklist gates, MCP YAML writes, and LEAP on platform-adjacent plane; fix enrollment leaf registry so harness skills are valid prompt_type_workflow surface_ref values.",
+    "implementation_approach": {
+      "summary": "Matrix row 15 + bundled analyzer skill + enrollment constants; docs-first proof.",
+      "details": [
+        "Row 15 agent-draft mechanism cells from LangChain comparison",
+        "Analyzer skill explicit-only; synthesis proposals not authority",
+        "LEAP matrix row-count satisfaction criterion to 15"
+      ]
+    },
+    "rationale": {
+      "why": "Sponsor promoted deferred Phase 3 without adopting LangChain product stack.",
+      "benefits": ["Clear matrix inventory for LangChain empirical loop"],
+      "problems_solved": ["Header-only LangChain matrix visibility"]
+    },
+    "cross_references": ["REQ-TIED_HARNESS_LANGCHAIN_PHASE3"],
+    "related_decisions": {
+      "depends_on": [],
+      "see_also": [
+        "ARCH-TIED_HARNESS_TRACE_OBSERVATION",
+        "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      ]
+    },
+    "traceability": {
+      "requirements": ["REQ-TIED_HARNESS_LANGCHAIN_PHASE3"],
+      "implementation": ["IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"]
+    }
+  }
+}

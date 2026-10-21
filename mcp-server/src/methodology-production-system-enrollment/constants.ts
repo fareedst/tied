@@ -16,7 +16,7 @@ export const ENROLLMENT_REQUIRED_SURFACE_REF = [
   "prompt_type_workflow",
 ] as const;
 
-/** Leaf prompt types (excludes prompt-type-router). [REQ-PROMPT_TYPE_GLOBAL_SKILLS] */
+/** Leaf prompt types (excludes prompt-type-router). [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-TIED_HARNESS_LANGCHAIN_PHASE3] */
 export const PROMPT_TYPE_LEAF_IDS = [
   "add-feature",
   "refine-plan",
@@ -31,4 +31,6 @@ export const PROMPT_TYPE_LEAF_IDS = [
   "leap-ad-hoc",
   "leap-diff-promote",
   "other",
+  "harness-trace-review",
+  "harness-trace-analyzer",
 ] as const;

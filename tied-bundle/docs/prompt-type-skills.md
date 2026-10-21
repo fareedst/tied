@@ -198,6 +198,7 @@ TIED-source development artifacts and are not installed by `tied-install.sh`.
 | `leap-diff-promote` | Promote caller-supplied diff patches onto TIED-complete stage |
 | `other` | Process the invocation remainder; no TIED blocks |
 | `harness-trace-review` | Loop 2 harness trace review → **`tied_feedback_capture_observation`**; not a prompt-type router branch ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)) |
+| `harness-trace-analyzer` | Outer-loop compose: normative Task fan-out + harness knob synthesis → Kaizen capture; not a router branch ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)) |
 
 Every leaf has:
 

@@ -31,6 +31,7 @@
     "leap-diff-promote",
     "other",
     "harness-trace-review",
+    "harness-trace-analyzer",
     "prompt-type-router"
   ],
   "PROMPT_TYPE_SHARED_DIR": "prompt-shared",
