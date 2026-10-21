@@ -24,5 +24,6 @@ If a repo still has a physical undivided `working/` directory (not under `tied-p
 
 ## Related
 
+- [Primary improvement pending queue](../../tied-bundle/docs/tied-improvement-pending-work-queue.md) — local operator index at `tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md` ([REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE](../requirements/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml))
 - [AGENTS.md](../../AGENTS.md) — session bootstrap
 - [docs/checklist-process-review-plan.md](../../docs/checklist-process-review-plan.md) — checklist/process review procedure

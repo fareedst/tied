@@ -1,0 +1,28 @@
+feat(methodology): primary TIED improvement pending work queue
+
+Add committed guide and v1 template for local gitignored TIQ-* operator
+index (distinct from MCP tied_backlog and LEAP proposals), bootstrap
+contract test, and REQ/ARCH/IMPL stack.
+
+Tokens: REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE,
+ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE,
+IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE
+
+Close-out: run_id tiq-close-out-commit-20261021 — merged_decision.allowed=true,
+envelope blocking_gap_count=0.
+
+Staging map:
+- CHANGELOG.md (Unreleased entry)
+- tied-bundle/docs/tied-improvement-pending-work-queue.md
+- tied-bundle/templates/tied-improvement-pending-work-queue.v1.example.md
+- tied-bundle/docs/client-development-index.md
+- tied-bundle/docs/pre-handoff-verification-charter.md
+- tied-bundle/docs/working-artifact-placement.md
+- tied-project/{requirements,architecture-decisions,implementation-decisions}.yaml
+- tied-project/{requirements,architecture-decisions,implementation-decisions}/REQ|ARCH|IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE*
+- tied-project/citdp/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml
+- tied-project/semantic-tokens.yaml
+- tied-project/vocab/routing.md
+- tied-project/working/{README,HARNESS-IMPROVEMENT-ARC/RESUMPTION}.md
+- tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/
+- tools/bootstrap/lib/tied-improvement-pending-work-queue-doc.test.mjs

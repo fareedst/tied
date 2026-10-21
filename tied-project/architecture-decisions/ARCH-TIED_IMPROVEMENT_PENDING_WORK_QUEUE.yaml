@@ -1,0 +1,22 @@
+ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
+  consequences:
+    negative:
+      - "Per-machine queue rows can drift until operator updates local file"
+    positive:
+      - "Clients receive queue methodology on tied-install refresh"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+    requirements:
+      - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  decision: "Canonical guide and template under tied-bundle/; live queue at tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md (gitignored); bootstrap test guards guide markers; compose with pre-handoff charter and working-artifact placement; no runtime module."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-21"
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-21"
+      reason: "v1 topology"
+  name: "Improvement pending work queue documentation topology"
+  status: "Implemented"

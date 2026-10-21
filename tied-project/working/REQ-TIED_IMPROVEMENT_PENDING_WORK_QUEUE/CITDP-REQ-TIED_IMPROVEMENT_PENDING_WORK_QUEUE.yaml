@@ -1,0 +1,80 @@
+CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
+  change_definition:
+    current_behavior: "Cross-REQ improvement arcs (e.g. LangChain harness) and sponsor-deferred work are tracked only in committed RESUMPTION/handoff prose or ad hoc notes; no shared operator index for primary improvement/maintenance work distinct from tied_backlog and LEAP queue."
+    desired_behavior: "Committed guide defines private queue path, TIQ-* schema, and handoff/close-out maintenance; bootstrap test guards guide; first local row seeds LangChain harness arc without committing queue body."
+    non_goals:
+      - "MCP read/write for queue rows"
+      - "Mandatory queue update on every close-out"
+      - "Cross-machine queue sync"
+    success_criteria:
+      - "Guide includes proof boundary, path, schema, maintenance, distinction table"
+      - "client-development-index.md links guide"
+      - "working-artifact-placement.md gray zone names private queue path"
+      - "tied-improvement-pending-work-queue-doc.test.mjs passes"
+      - "Example template exists"
+      - "HARNESS RESUMPTION.md registers task id without queue body"
+    unchanged_behavior: "Checklist gates, tied_backlog, LEAP proposal queue, and Tracker/CITDP authority unchanged."
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/tied-improvement-pending-work-queue-doc.test.mjs"
+      - "tied_checklist_gate_validate pre_implementation"
+      - "tied_validate_consistency"
+      - "git check-ignore -v tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md"
+    proof_boundaries:
+      - "documentation_and_local_operator_data_only"
+      - "does_not_prove_queue_compliance_across_sessions"
+  impact_analysis:
+    impl_inventory_notes: "Methodology guide + template + project YAML tokens + bootstrap test + cross-links; optional IMPL doc-maintenance sidecar."
+    modules_or_boundaries: "tied-bundle/docs/, tied-bundle/templates/, tied-project/ YAML and working evidence."
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+      - "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+      - "IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  record_identity:
+    change_request_id: "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-21"
+    title: "Primary TIED improvement and maintenance queue (local operator index)"
+  risk_analysis:
+    abuse_cases:
+      - "Private queue accidentally committed"
+      - "Queue confused with MCP tied_backlog or LEAP proposals"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Guide omits proof boundary and reads as org-wide synced backlog."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Operators duplicate full RESUMPTION prose into queue rows."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/HARNESS-IMPROVEMENT-ARC/RESUMPTION.md"
+        - "/Users/fareed/.cursor/plans/tied_improvement_pending_queue_e64493b6.plan.md"
+      falsification_questions:
+        - "Does the guide state live queue is local-only and not synchronized by TIED?"
+        - "Is distinction from tied_backlog documented?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Doc-only v1; no integrated inquiry triggers."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "tied-improvement-pending-work-queue-doc.test.mjs"
+        evidence_method: "unit test"
+        limitation: "Does not validate operator updates to local queue file."
+        owner: "agent"
+        rationale: "File presence and section markers."
+        result: "pass"
+        threshold: "test green"
+  test_strategy:
+    approach: "Doc contract test; no production MCP changes."
+    cases:
+      - "Guide file exists under tied-bundle/docs with required markers"
+      - "Template example under tied-bundle/templates"
+      - "tied_validate_consistency after token mint"

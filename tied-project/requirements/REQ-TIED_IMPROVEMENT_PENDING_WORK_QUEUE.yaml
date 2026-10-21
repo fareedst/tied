@@ -1,0 +1,45 @@
+REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
+  category: "Methodology"
+  description: "Methodology for the primary TIED improvement and maintenance queue: committed guide and local gitignored operator index (TIQ-* rows); distinct from tied_backlog and LEAP proposal queue."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-21"
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-21"
+      reason: "v1 doc-only queue management"
+  name: "Primary TIED improvement and maintenance queue (local operator index)"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Single local index with committed methodology shared via tied-install"
+    problems_solved:
+      - "Deferred harness and maintenance work scattered across RESUMPTION-only prose"
+    why: "Cross-REQ improvement arcs need a private operator index without conflating MCP backlog or LEAP proposals."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md scenario or Quick read links guide"
+      id: "SC-INDEX-LINK"
+    - criterion: "Example template exists with header and empty task table"
+      id: "SC-TEMPLATE"
+    - criterion: "Guide includes proof boundary, canonical path, schema, maintenance rules, distinction table"
+      id: "SC-GUIDE-DOC"
+    - criterion: "HARNESS RESUMPTION.md registers task id and guide path without queue body"
+      id: "SC-RESUMPTION-LINK"
+    - criterion: "tied-improvement-pending-work-queue-doc.test.mjs passes"
+      id: "SC-QUEUE-TEST"
+    - criterion: "working-artifact-placement.md gray zone names private queue path"
+      id: "SC-PLACEMENT"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+    implementation:
+      - "IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"

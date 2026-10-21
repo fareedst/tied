@@ -1,0 +1,155 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE; doc-only queue management guide."
+description: "Minimal tracker for primary TIED improvement pending work queue (v1)."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+record_identity:
+  change_request_id: "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  citdp_path: "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-21"
+  req_token: "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  title: "Primary TIED improvement and maintenance queue (local operator index)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "/Users/fareed/.cursor/plans/tied_improvement_pending_queue_e64493b6.plan.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "/Users/fareed/.cursor/plans/tied_improvement_pending_queue_e64493b6.plan.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/PLAN.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/PLAN.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/test-strategy.md"
+      - "tools/bootstrap/lib/tied-improvement-pending-work-queue-doc.test.mjs"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/tied-improvement-pending-work-queue-doc.test.mjs"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Doc-only queue guide; minimal depth; no integrated inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE-pseudocode.md"
+    policy: "doc-only-no-runtime-pseudocode"
+    rationale: "IMPL sidecar documents doc paths only; no executable pseudo-code blocks."
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied-project/implementation-decisions/IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE-pseudocode.md"
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/docs/working-artifact-placement.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "tied-bundle/docs/working-artifact-placement.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/lib/tied-improvement-pending-work-queue-doc.test.mjs"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tools/bootstrap/lib/tied-improvement-pending-work-queue-doc.test.mjs"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+      - "tied-project/architecture-decisions/ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+      - "tied-project/implementation-decisions/IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      evidence_refs:
+        - "tied-project/citdp/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - ".gitignore"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - ".gitignore"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      evidence_refs:
+        - "CHANGELOG.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"

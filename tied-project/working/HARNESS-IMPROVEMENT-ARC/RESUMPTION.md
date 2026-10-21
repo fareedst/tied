@@ -168,4 +168,12 @@ No sponsor work required unless policy changes:
 
 Some handoff bullets (e.g. “Phase 3 deferred”) may be **stale** relative to later commits—this document supersedes for arc-level status.
 
+## 9. Local queue registration
+
+| Field | Value |
+| --- | --- |
+| **task_id** | `TIQ-20261021-LANGCHAIN-HARNESS-ARC` |
+| **Queue method** | [tied-improvement-pending-work-queue.md](../../../tied-bundle/docs/tied-improvement-pending-work-queue.md) |
+| **Live row** | `tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md` (gitignored; link only—no queue body here) |
+
 **Last updated:** 2026-10-21

@@ -1,0 +1,17 @@
+IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
+  approach: "Edit tied-bundle/docs/tied-improvement-pending-work-queue.md, template, and index/placement cross-links; verify with tied-improvement-pending-work-queue-doc.test.mjs; operators maintain local TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md manually."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+    requirements:
+      - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-21"
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-21"
+      reason: "Guide + bootstrap test"
+  name: "Improvement pending work queue doc maintenance"
+  status: "Implemented"

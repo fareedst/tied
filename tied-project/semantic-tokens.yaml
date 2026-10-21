@@ -1057,6 +1057,16 @@ ARCH-TIED_HTOL_PILOT_COHORT_RUNBOOK:
   source_index: "architecture-decisions.yaml"
   status: "Planned"
   type: "ARCH"
+ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
+  cross_references:
+    - "IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+    - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  description: "Guide + template committed; live queue gitignored under tied-bundle/working/"
+  detail_file: "architecture-decisions/ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+  name: "Improvement pending work queue documentation topology"
+  source_index: "architecture-decisions.yaml"
+  status: "Implemented"
+  type: "ARCH"
 ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"
@@ -2706,6 +2716,16 @@ IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK:
   name: "HTOL pilot cohort runbook implementation"
   source_index: "implementation-decisions.yaml"
   status: "Planned"
+  type: "IMPL"
+IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
+  cross_references:
+    - "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+    - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  description: "Maintain guide, template, cross-links; bootstrap contract test"
+  detail_file: "implementation-decisions/IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+  name: "Improvement pending work queue doc maintenance"
+  source_index: "implementation-decisions.yaml"
+  status: "Implemented"
   type: "IMPL"
 IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
@@ -4521,6 +4541,16 @@ REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK:
   name: "HTOL pilot cohort runbook"
   source_index: "requirements.yaml"
   status: "Planned"
+  type: "REQ"
+REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
+  cross_references:
+    - "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+    - "IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  description: "Methodology guide and local TIQ-* operator index; distinct from tied_backlog"
+  detail_file: "requirements/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+  name: "Primary TIED improvement and maintenance queue (local operator index)"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
