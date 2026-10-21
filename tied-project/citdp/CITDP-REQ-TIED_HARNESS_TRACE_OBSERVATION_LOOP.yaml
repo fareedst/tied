@@ -1,0 +1,104 @@
+CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
+  change_definition:
+    current_behavior: "LangChain comparison Phase 1 recommends trace→Kaizen observations and test-strategy executable evidence; no methodology guide, bundled skill, or REQ-tracked compose path. Operators rely on ad hoc transcript review and scattered Kaizen docs."
+    desired_behavior: "REQ-tracked Loop 2 package: harness-trace-observation-loop methodology guide, explicit-only harness-trace-review skill composing tied_feedback_capture_observation, test-strategy executable matrix section, and additive cross-links—without new gate authority or LangSmith integration."
+    non_goals:
+      - "Automatic LEAP or YAML mutation from trace review"
+      - "LangSmith, Harbor, or Daytona integration"
+      - "Methodology composition matrix LangChain §2 row without sponsor promotion"
+      - "New TIED MCP gate tools or checklist slugs"
+      - "Phase 2 methodology learning experiment (separate costly REQ)"
+      - "Substitute for sub-adversarial-inquiry-pass or integrated inquiry"
+      - "Terminal Bench or vendor benchmark scores as TIED effectiveness"
+    success_criteria:
+      - "Cross-links in authority checklist, LangChain comparison Phase 1 row, pre-handoff charter, client-development-index"
+      - "pre_implementation and verification gate receipts under working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/gates/"
+      - "REQ/ARCH/IMPL registered; pseudocode_validate and tied_validate_consistency pass after implement"
+      - "tied-bundle/docs/harness-trace-observation-loop.md passes contract test"
+      - "tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md installed via tied-install path"
+    unchanged_behavior: "Checklist gate authority, MCP YAML writes, closed REQ-TIED_HARNESS_PLATFORM_SEAM seam, Kaizen capture semantics."
+  evidence:
+    commands:
+      - "node --test tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs (after implement)"
+      - "pseudocode_validate IMPL-TIED_HARNESS_TRACE_OBSERVATION gate_mode"
+      - "tied_checklist_gate_validate phase pre_implementation"
+    manifest_reference: null
+    proof_boundaries:
+      - "does_not_prove_harness_tactics_improve_outcomes_until_phase_2_experiment"
+      - "observations_advisory_until_checklist_owned_promotion"
+  impact_analysis:
+    impl_inventory_notes: "tied-bundle/docs; tools/bundled-prompt-type-skills; tools/bootstrap/lib test; tied-project/vocab; docs/comparisons langchain sibling; working authority checklist."
+    methodology_surface_change_class: "prompt_type_workflow"
+    modules_or_boundaries: "Methodology docs; bundled prompt-type skills; bootstrap contract tests"
+    tied_tokens_affected:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-OBSERVATION-CAPTURE"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+    tied_tokens_new:
+      - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+      - "IMPL-TIED_HARNESS_TRACE_OBSERVATION"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required: []
+  persist_policy: "Persist CITDP at refine-plan; update record_status to complete after implement persist-citdp-record"
+  record_identity:
+    change_request_id: "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-21"
+    title: "Harness trace observation loop (LangChain comparison Phase 1 compose)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "LangChain Trace Analyzer naming implies shipped middleware class"
+      - "test-strategy matrix satisfied by chat claims without command evidence"
+      - "tied_feedback_capture_observation used to auto-mint REQ without add-feature"
+      - "Trace review skill described as replacing tied_checklist_gate_validate or tied_verify"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Guide cites Terminal Bench gains as TIED methodology outcomes"
+        - "Skill prose grants YAML write authority without tied_config_get_base_path"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Default AGENTSTREAM_TIED_MCP_PREFLIGHT flipped on"
+        - "New MCP tool for trace ingestion added without scoped REQ"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/harness_trace_observation_810f5fe6.plan.md"
+        - "docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md"
+        - "tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/PLAN.md"
+      falsification_questions:
+        - "Does every promotion path require checklist-owned confirmation?"
+        - "Is capture_observation subordinate to gate receipts for implement claims?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Documentation and explicit skill; existing feedback MCP only; no auth/network/persistence in deliverable."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Doc contract test + link audit"
+        evidence_method: "Bootstrap test + working folder gate receipts"
+        limitation: "Does not measure whether trace loops improve client outcomes"
+        owner: "agent"
+        rationale: "Compose documentation and operator recipe"
+  test_strategy:
+    documentation_only: false
+    mandatory_order: "RED doc contract test before guide finalization"
+    unit_tests:
+      - "tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
+    verification_commands:
+      - "prompt-type-skills static contract if leaf inventory changes"
+      - "tied_validate_consistency after YAML mutations"

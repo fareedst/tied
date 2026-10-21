@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-FEEDBACK_TO_TIED](../requirements/REQ-FEEDBACK_TO_TIED.yaml) · [ARCH-FEEDBACK_STORAGE](../architecture-decisions/ARCH-FEEDBACK_STORAGE.yaml) · [IMPL-MCP_FEEDBACK_TOOLS](../implementation-decisions/IMPL-MCP_FEEDBACK_TOOLS.yaml)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`quality-assurance.md`](quality-assurance.md) · [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`quality-assurance.md`](quality-assurance.md) · [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md) · [Harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml))
 
 **Planning decisions (Kaizen loop):** Sponsor-approved costly choices for the first behavior-changing phases (local append/export only, default **privacy tier** `operator_local`, three **feedback entry types** plus additive **observation kind**) are recorded in [`../../docs/tied-kaizen-feedback-loop-plan.md`](../../docs/tied-kaizen-feedback-loop-plan.md) (2026-10-07). They bound REQ scope; they are not store fields.
 

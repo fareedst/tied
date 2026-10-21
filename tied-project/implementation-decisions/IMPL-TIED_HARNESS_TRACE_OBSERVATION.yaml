@@ -1,0 +1,36 @@
+IMPL-TIED_HARNESS_TRACE_OBSERVATION:
+  IMPL-TIED_HARNESS_TRACE_OBSERVATION:
+    code_locations:
+      files:
+        - description: "Doc contract test (slice D)"
+          path: "tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
+        - description: "Explicit-only skill (slice B)"
+          path: "tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md"
+        - description: "Primary methodology guide (slice A)"
+          path: "tied-bundle/docs/harness-trace-observation-loop.md"
+      functions: []
+    cross_references:
+      - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+    decision: "Execute PLAN slices A–D: methodology guide, bundled skill, cross-links, bootstrap doc contract test."
+    essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_HARNESS_TRACE_OBSERVATION-pseudocode.md"
+    implementation_approach:
+      details:
+        - "Slice A guide"
+        - "Slice B skill + prompt-type inventory"
+        - "Slice C cross-links"
+        - "Slice D tests"
+      summary: "Doc-first TDD; RED doc test before guide."
+    name: "Harness trace observation implementation"
+    rationale:
+      benefits:
+        - "Checklist-gated implement path"
+      problems_solved:
+        - "Untracked comparison follow-through"
+      why: "Token-linked maintenance for LangChain Phase 1 compose."
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+      requirements:
+        - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"

@@ -2654,6 +2654,18 @@ IMPL-TIED_HARNESS_PLATFORM_SEAM:
     requirements:
       - "REQ-TIED_HARNESS_PLATFORM_SEAM"
     tests: []
+IMPL-TIED_HARNESS_TRACE_OBSERVATION:
+  cross_references:
+    - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+    - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+  detail_file: "implementation-decisions/IMPL-TIED_HARNESS_TRACE_OBSERVATION.yaml"
+  name: "Harness trace observation implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+    requirements:
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
 IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   detail_file: "implementation-decisions/IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
   name: "Incident/revert evaluation corpus doc maintenance"

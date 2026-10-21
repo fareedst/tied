@@ -197,6 +197,7 @@ TIED-source development artifacts and are not installed by `tied-install.sh`.
 | `leap-ad-hoc` | Read and fortify caller-supplied staged ad-hoc work |
 | `leap-diff-promote` | Promote caller-supplied diff patches onto TIED-complete stage |
 | `other` | Process the invocation remainder; no TIED blocks |
+| `harness-trace-review` | Loop 2 harness trace review → **`tied_feedback_capture_observation`**; not a prompt-type router branch ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)) |
 
 Every leaf has:
 

@@ -1000,6 +1000,15 @@ ARCH-TIED_HARNESS_PLATFORM_SEAM:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_HARNESS_TRACE_OBSERVATION:
+  cross_references:
+    - "IMPL-TIED_HARNESS_TRACE_OBSERVATION"
+    - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+  description: "Trace review composes with Kaizen; gates and MCP YAML stay authoritative"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "Harness trace observation architecture"
 ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"
@@ -2593,6 +2602,15 @@ IMPL-TIED_HARNESS_PLATFORM_SEAM:
   source_index: "implementation-decisions.yaml"
   status: "Planned"
   type: "IMPL"
+IMPL-TIED_HARNESS_TRACE_OBSERVATION:
+  cross_references:
+    - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+    - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+  description: "Doc-first slices: guide, bundled skill, cross-links, contract test"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "Harness trace observation implementation"
 IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
@@ -4351,6 +4369,15 @@ REQ-TIED_HARNESS_PLATFORM_SEAM:
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"
+REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
+  cross_references:
+    - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+    - "IMPL-TIED_HARNESS_TRACE_OBSERVATION"
+  description: "LangChain Phase 1 compose: trace review into Kaizen capture and test-strategy executable matrix"
+  metadata:
+    last_updated: "2026-10-21"
+    registered: "2026-10-21"
+  name: "Harness trace observation loop"
 REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"

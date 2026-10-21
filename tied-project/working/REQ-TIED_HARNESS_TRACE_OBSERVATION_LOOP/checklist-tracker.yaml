@@ -1,0 +1,103 @@
+citdp:
+  path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml
+  reason: Harness trace observation loop; LangChain comparison Phase 1 compose.
+  status: analysis
+depth_tier: minimal
+gate_policy: advisory
+methodology_surface_change_class: prompt_type_workflow
+profile_depth: minimal
+purpose: Per-request Tracker for REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.
+refine_pass: 1
+refine_pass_date: "2026-10-21"
+request: REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP
+request_token: REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: close_out_complete
+steps:
+  - id: session-bootstrap
+    disposition: completed
+    notes: PRELOAD feedback-to-tied, agentstream, sponsor-agent-relationship, HPS authority checklist; LangChain comparison Phase 1 scope.
+  - id: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: /Users/fareed/.cursor/plans/harness_trace_observation_810f5fe6.plan.md
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/PLAN.md
+  - id: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml
+  - id: impact-discovery
+    disposition: completed
+    notes: Slices A–D; prompt_type_workflow surface; depends on Kaizen capture + HPS seam.
+  - id: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml
+  - id: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/test-strategy.md
+  - id: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: CITDP counterexamples only.
+  - id: author-requirement
+    disposition: completed
+    notes: REQ/ARCH/IMPL minted at refine-plan via tied_token_create_with_detail.
+  - id: author-architecture
+    disposition: completed
+    notes: ARCH-TIED_HARNESS_TRACE_OBSERVATION at refine-plan.
+  - id: persist-implementation-records
+    disposition: completed
+    notes: IMPL index + sidecar stub at refine-plan; full pseudo-code before RED in implement.
+  - id: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_TRACE_OBSERVATION-pseudocode.md
+      - kind: gate_receipt
+        path: tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/gates/pre_implementation-2026-10-21T05-34-27-312Z.json
+  - id: resolve-pseudocode
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_TRACE_OBSERVATION-pseudocode.md
+  - id: three-way-alignment-unit
+    disposition: not_applicable
+  - id: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs
+      - kind: command
+        path: "node --test tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs (RED before guide)"
+  - id: unit-test-green
+    disposition: completed
+    evidence_refs:
+      - kind: command
+        path: "node --test tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs tools/bootstrap/lib/harness-trace-review-skill.test.mjs"
+  - id: composition-integration
+    disposition: not_applicable
+    rationale: Doc/skill/bootstrap contract only; no composition bindings.
+  - id: end-to-end-ui
+    disposition: not_applicable
+  - id: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: gate_receipt
+        path: tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/gates/verification-2026-10-21T05-38-56-450Z.json
+  - id: persist-citdp-record
+    disposition: completed
+    notes: record_status complete after implement; leap_feedback unchanged.
+  - id: traceable-commit
+    disposition: completed
+    evidence_refs:
+      - kind: git_commit
+        path: "616b2bdd"
+      - kind: file_path
+        path: tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/evidence/traceable-commit-evidence.md

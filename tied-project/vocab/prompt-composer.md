@@ -72,6 +72,11 @@ The router is `prompt-type-router`. It accepts an explicit ordered list,
 deduplicates adjacent duplicates, preserves first-seen order, and stops on
 unknown or ambiguous input.
 
+**Methodology harness leaf (not a prompt-type branch):** `harness-trace-review` —
+explicit-only trace/session review into **`tied_feedback_capture_observation`**
+([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml);
+guide at `tied-bundle/docs/harness-trace-observation-loop.md`).
+
 ---
 
 ## Pseudo-code block names

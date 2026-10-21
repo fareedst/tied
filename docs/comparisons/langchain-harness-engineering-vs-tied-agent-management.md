@@ -262,7 +262,7 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 | Phase | Action | TIED loop |
 | --- | --- | --- |
 | **0** | This comparison + cross-links | Outreach |
-| **1** | Record trace/adherence observations in working evidence | Loop 2 Kaizen |
+| **1** | **Implemented** — [harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) + `@harness-trace-review` ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)) | Loop 2 Kaizen |
 | **2** | Optional methodology learning experiment with explicit stop criteria | Loop 3 (**Defer** until sponsor scopes) |
 | **3** | Matrix §2 row or product skill (**Defer** — costly; header sibling link sufficient for v1) | Sponsor promotion |
 
@@ -295,5 +295,6 @@ Operator skim: [authority-boundary operator checklist](../../tied-project/workin
 - [TIED vs Harness²](tied-vs-harness2.md)
 - [Methodology composition matrix](methodology-composition-matrix.md) (§2 row 13 — Traefik seam; LangChain as empirical evidence)
 - [Authority boundary operator checklist](../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md)
+- [Harness trace observation loop](../../tied-bundle/docs/harness-trace-observation-loop.md) ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml))
 - [@tied/agentstream README](../../mcp-server/packages/agentstream/README.md)
 - [Jev × TIED](jev-for-tied-improvement.md)

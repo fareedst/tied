@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/gates/pre_implementation-2026-10-21T05-34-27-312Z.json",
+    "hash": "sha256:a85fbdadc99071087b4b6e9be8e01a9020d8a05e24f0b42887c2a82934aa3870"
+  }
+}

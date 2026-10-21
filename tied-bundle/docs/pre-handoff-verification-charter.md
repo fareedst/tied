@@ -55,6 +55,7 @@ Do **not** treat PR comment volume or bot scores as TIED authority.
 - [Review convergence policy](review-convergence-policy.md) — Phase 3 multi-round review norms ([REQ-TIED_REVIEW_CONVERGENCE_POLICY](../../tied-project/requirements/REQ-TIED_REVIEW_CONVERGENCE_POLICY.yaml))
 - [Path-scoped review guidance](path-scoped-review-guidance.md) — optional `REVIEW.md` / `tied-project/review/` client pattern ([REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE](../../tied-project/requirements/REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE.yaml))
 - [Client development index](client-development-index.md) — core seven and scenario entry
+- [Harness trace observation loop](harness-trace-observation-loop.md) — Loop 2 trace review → Kaizen capture ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml))
 - [Claude Code team code review × TIED](../../docs/comparisons/claude-code-team-code-review-vs-tied.md) — compose-don't-replace source study
 - [Sponsor–agent relationship](../../tied-project/vocab/sponsor-agent-relationship.md) — consequence ladder
 

@@ -1,0 +1,10 @@
+feat(harness): trace observation loop and harness-trace-review skill
+
+LangChain Phase 1 compose: methodology guide, explicit Kaizen capture path,
+bootstrap contract tests, and cross-links without new gate authority.
+
+REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP · ARCH-TIED_HARNESS_TRACE_OBSERVATION ·
+IMPL-TIED_HARNESS_TRACE_OBSERVATION
+
+Completion signals: close_out allowed + envelope blocking_gap_count=0
+(run_id=htol-close-out-2026-10-21); reconcile band B (thin_ledger advisory).

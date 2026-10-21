@@ -1,0 +1,28 @@
+ARCH-TIED_HARNESS_TRACE_OBSERVATION:
+  ARCH-TIED_HARNESS_TRACE_OBSERVATION:
+    cross_references:
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+    decision: "Treat trace-driven harness review as Loop 2 harness orchestration composing tied_feedback_capture_observation and optional Task fan-out; keep checklist gate authority, MCP YAML writes, and LEAP promotion on platform-adjacent plane per ARCH-TIED_HARNESS_PLATFORM_SEAM."
+    implementation_approach:
+      details:
+        - "Guide defines promotion path"
+        - "Skill delegates to guide"
+        - "test-strategy matrix in guide"
+      summary: "Methodology doc + explicit prompt-type skill; no trace store product."
+    name: "Harness trace observation architecture"
+    rationale:
+      benefits:
+        - "Composable harness tuning"
+      problems_solved:
+        - "Trace loop mistaken for gate receipts"
+      why: "LangChain empirical loop maps to Kaizen, not gates."
+    related_decisions:
+      depends_on: []
+      see_also:
+        - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    status: "Active"
+    traceability:
+      implementation:
+        - "IMPL-TIED_HARNESS_TRACE_OBSERVATION"
+      requirements:
+        - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"

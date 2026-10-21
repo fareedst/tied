@@ -11,6 +11,7 @@
 | **Before YAML write** | Read domain context; RESOLVE names in vocab. | **`tied_config_get_base_path`** → intended **`tied-project/`**; then TIED MCP or **`tied-cli.sh`**. |
 | | — | No routine bypass of MCP for project indexes/detail YAML ([AGENTS.md](../../../AGENTS.md)). |
 | | On CLI failure, note **`DIAGNOSTIC: TIED_CLI_HINDRANCE`** ([REQ-TIED_TOOL_INPUT_COMPATIBILITY](../../requirements/REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml)). | **`yaml_index_validate`** / **`tied_validate_consistency`** after mutations. |
+| **After session batch** | Optional `@harness-trace-review` → **`tied_feedback_capture_observation`** ([harness trace observation loop](../../../tied-bundle/docs/harness-trace-observation-loop.md)). | Observations are not gate receipts; implement claims still need checklist gates. |
 | **Before close-out** | Harness traces under `tied-bundle/working/`; Kaizen observations. | **`tied_checklist_gate_validate`** `verification` / `close_out`; **`tied_verify`** when verification-gated. |
 | | Agentstream batch: opt-in DAE/Jev middleware only. | **`sub-close-out-evidence-sync`**, envelope validate, adherence reconcile; committed rationale under `tied-project/working/`. |
 | | — | Do not claim merge/ship from chat without gate receipts. |

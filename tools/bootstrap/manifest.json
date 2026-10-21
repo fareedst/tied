@@ -30,6 +30,7 @@
     "leap-ad-hoc",
     "leap-diff-promote",
     "other",
+    "harness-trace-review",
     "prompt-type-router"
   ],
   "PROMPT_TYPE_SHARED_DIR": "prompt-shared",
@@ -69,6 +70,7 @@
     "sponsor-agent-relationship.md",
     "citdp-record-template.yaml",
     "client-development-index.md",
+    "harness-trace-observation-loop.md",
     "commit-guidelines.md",
     "composition-coverage.md",
     "detail-files-schema.md",

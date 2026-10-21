@@ -27,7 +27,11 @@ const LEAF_SKILLS = [
   "other",
 ] as const;
 
+const METHODOLOGY_HARNESS_SKILLS = ["harness-trace-review"] as const;
+
 const SKILL_DIRS = [...LEAF_SKILLS, "prompt-type-router"] as const;
+
+const ALL_MANAGED_SKILL_DIRS = [...LEAF_SKILLS, ...METHODOLOGY_HARNESS_SKILLS, "prompt-type-router"] as const;
 
 const SHARED_REFERENCES = [
   "tied-refine.md",
@@ -61,7 +65,7 @@ function extractYamlFrontMatter(text: string): string {
 
 function assertFrontMatterParses(root: string): void {
   // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: strict YAML parse of frontmatter so Cursor and linked stubs accept every skill.
-  for (const skillDir of SKILL_DIRS) {
+  for (const skillDir of ALL_MANAGED_SKILL_DIRS) {
     const skillPath = path.join(root, skillDir, "SKILL.md");
     const content = fs.readFileSync(skillPath, "utf8");
     const front = extractYamlFrontMatter(content);
@@ -82,7 +86,7 @@ function assertFrontMatterParses(root: string): void {
 function assertSkillContract(root: string): void {
   assertFrontMatterParses(root);
   // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: verify exact names, explicit-only frontmatter, direct shared-link resolution, and bounded file size before distribution.
-  for (const skillDir of SKILL_DIRS) {
+  for (const skillDir of ALL_MANAGED_SKILL_DIRS) {
     const skillPath = path.join(root, skillDir, "SKILL.md");
     assert.ok(fs.existsSync(skillPath), `missing skill: ${skillDir}/SKILL.md`);
     const content = fs.readFileSync(skillPath, "utf8");
