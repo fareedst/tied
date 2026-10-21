@@ -1,0 +1,15 @@
+docs(tied): harness-platform authority seam for agents
+
+Deliver REQ-TIED_HARNESS_PLATFORM_SEAM operator documentation: bootstrap
+seam, prompt-type harness profiles, agentstream preflight boundaries,
+authority checklist, and composition-matrix row 13. Traefik comparison
+docs un-ignored for publication.
+
+REQ-TIED_HARNESS_PLATFORM_SEAM
+ARCH-TIED_HARNESS_PLATFORM_SEAM
+IMPL-TIED_HARNESS_PLATFORM_SEAM
+
+Completion signals (close-out hps-close-out-20261020-r1):
+- Machine close-out: pass — close_out allowed; envelope blocking_gaps=0
+- Process contract: partial — manifest skipped (--skip-manifest); NA receipt present
+- Adherence ledger: pass — reconcile band A

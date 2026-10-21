@@ -1,0 +1,8 @@
+{
+  "schema_version": "layer-b-pseudocode-validator.v1",
+  "ok": true,
+  "token": "IMPL-TIED_HARNESS_PLATFORM_SEAM",
+  "gate_mode": true,
+  "recorded_at": "2026-10-20",
+  "proof_boundary": "Structural pseudo-code shape, token linkage, and dependency diagnostics only."
+}

@@ -1,0 +1,62 @@
+REQ-TIED_HARNESS_PLATFORM_SEAM:
+  category: "Functional"
+  description: "Deliver bounded documentation, vocabulary, and lightweight harness hooks implied by docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md: session bootstrap (TIED_BASE_PATH / tied_config_get_base_path), prompt-type harness profiles, agentstream preflight chain boundaries, authority-boundary operator checklist, and composition-matrix row 13 maintenance. Compose-don't-replace: harness middleware and turn orchestration must not replace tied_checklist_gate_validate or MCP YAML write authority."
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-10-20"
+    last_updated:
+      author: "close-out"
+      date: "2026-10-20"
+      reason: "Docs-only slices A–E complete; unified close_out allowed"
+  name: "Harness–platform authority seam"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Cross-linked sponsor agency boundary checklist"
+      - "Explicit TIED-tracked vs non-tied prompt-type map"
+      - "Single REQ-tracked phased plan for build-plan execution"
+    problems_solved:
+      - "Ambiguous delegation vs gate authority"
+      - "Incomplete matrix row 13 mechanism cells for Traefik comparison"
+      - "Scattered operator guidance for harness vs MCP plane"
+    why: "Wrong-tree MCP writes and skills absorbing gate authority are the in-repo analog of Traefik anti-patterns (MCP direct without platform seam; auth in the harness)."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Agentstream README and/or harness docs state DAE gate preflight and Jev tool gate compose with tied_checklist_gate_validate; they do not replace MCP YAML authority"
+      id: "SC-HPS-AGENTSTREAM"
+      metric: "Doc cross-link audit"
+    - criterion: "Committed authority-boundary operator checklist under tied-project/working/ links comparison doc and sponsor-agent-relationship vocab"
+      id: "SC-HPS-CHECKLIST"
+      metric: "File presence and link check"
+    - criterion: "fresh-client-prompt-activation-map (and client vocab if needed) states TIED-tracked vs non-tied prompt types; delegation text does not imply gate waivers"
+      id: "SC-HPS-PROMPT-PROFILES"
+      metric: "Markdown table audit"
+    - criterion: "methodology-composition-matrix.md row 13 mechanism cells filled only where sponsor-owned TIED mechanisms are concrete; no codegen broadening"
+      id: "SC-HPS-MATRIX-ROW13"
+      metric: "Row 13 audit vs parent REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    - criterion: "Project REQ/ARCH/IMPL registered; tied_validate_consistency passes"
+      id: "SC-HPS-TRACE"
+      metric: "tied_validate_consistency"
+    - criterion: "Session bootstrap seam documented and/or automated (agentstream preflight opt-in, tied-cli, AGENTS/skills) so operators verify TIED_BASE_PATH before YAML mutation"
+      id: "SC-HPS-BOOTSTRAP"
+      metric: "Doc/skill audit + optional preflight flag path"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
+    tests: []
+  validation_criteria:
+    - coverage: "docs vocab small hooks"
+      method: "Manual audit per tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/PLAN.md phased slices"

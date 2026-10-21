@@ -1,0 +1,179 @@
+citdp:
+  deferred: false
+  path: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/CITDP-REQ-TIED_HARNESS_PLATFORM_SEAM.yaml
+  persisted: true
+  persisted_path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_PLATFORM_SEAM.yaml
+  rationale: Persisted after build-plan slices A–E (+ F via A).
+depth_tier: minimal
+dispositions:
+  allowed:
+    - completed
+    - not_applicable
+    - pending
+    - waived
+  completed_requires_evidence: true
+execution_evidence:
+  close_out_evidence:
+    deferred: []
+    gates: {}
+    master_checklist: ''
+  completed:
+    - author-architecture
+    - author-requirement
+    - change-definition
+    - gate-pseudocode-validation
+    - gitignore-close-out-hygiene
+    - impact-discovery
+    - persist-implementation-records
+    - resolve-pseudocode
+    - risk-assessment
+    - sub-close-out-evidence-sync
+    - sync-tied-stack
+    - test-strategy
+    - translate-sponsor-intent
+    - verification-gate
+  envelope_path: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/request-evidence-envelope.v1.json
+  pre_implementation_receipt: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/gates/pre_implementation-2026-10-21T04-34-09-116Z.json
+  request: REQ-TIED_HARNESS_PLATFORM_SEAM
+  verification_receipt: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/gates/verification-2026-10-21T04-34-09-507Z.json
+gate_policy: advisory
+loop_back_policy: If depth_tier, gate_policy, or slice scope changes, clear downstream gate receipts and re-run pre_implementation.
+methodology_surface_change_class: prompt_type_workflow
+profile_depth: minimal
+request: REQ-TIED_HARNESS_PLATFORM_SEAM
+request_token: REQ-TIED_HARNESS_PLATFORM_SEAM
+scope: Build-plan slices A–E complete; close-out planned (refine-plan pass 2 2026-10-20).
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+steps:
+  - disposition: completed
+    evidence_refs: &ref_0
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/translate-sponsor-intent-evidence.md
+    slug: translate-sponsor-intent
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
+  - disposition: completed
+    evidence_refs: &ref_1
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/change-definition-evidence.md
+    slug: change-definition
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - disposition: completed
+    evidence_refs: &ref_2
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/impact-discovery-evidence.md
+    slug: impact-discovery
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
+  - disposition: completed
+    evidence_refs: &ref_3
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/risk-assessment-evidence.md
+    slug: risk-assessment
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_3
+  - disposition: completed
+    evidence_refs: &ref_4
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/test-strategy-evidence.md
+    slug: test-strategy
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_4
+  - disposition: not_applicable
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/PLAN.md
+    policy: minimal-depth-no-inquiry
+    rationale: minimal depth docs-first plan; integrated adversarial inquiry not activated.
+    slug: sub-adversarial-inquiry-pass
+    status: not_applicable
+  - disposition: completed
+    evidence_refs: &ref_5
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/author-requirement-evidence.md
+    slug: author-requirement
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_5
+  - disposition: completed
+    evidence_refs: &ref_6
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/author-architecture-evidence.md
+    slug: author-architecture
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_6
+  - disposition: completed
+    evidence_refs: &ref_7
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/persist-implementation-records-evidence.md
+    slug: persist-implementation-records
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_7
+  - disposition: completed
+    evidence_refs: &ref_8
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/resolve-pseudocode-evidence.md
+    slug: resolve-pseudocode
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_8
+  - disposition: completed
+    evidence_refs: &ref_9
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/gate-pseudocode-validation-evidence.md
+    slug: gate-pseudocode-validation
+    status: completed
+    tracking:
+      status: completed
+      evidence_refs: *ref_9
+  - disposition: not_applicable
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/build-plan-slices-evidence.md
+    policy: docs-only-no-production-code
+    rationale: Slices A–E are documentation; no RED/GREEN unit cycle required.
+    slug: unit-test-red
+    status: not_applicable
+  - disposition: not_applicable
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/build-plan-slices-evidence.md
+    policy: docs-only-no-production-code
+    rationale: Slices A–E are documentation; no RED/GREEN unit cycle required.
+    slug: unit-test-green
+    status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/build-plan-slices-evidence.md
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/gates/verification-2026-10-21T04-34-09-507Z.json
+    slug: verification-gate
+    status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/sync-tied-stack-evidence.md
+    slug: sync-tied-stack
+    status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/gitignore-close-out-hygiene-evidence.md
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/git-hygiene-receipt-2026-10-20.md
+    slug: gitignore-close-out-hygiene
+    status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/sub-close-out-evidence-sync-evidence.md
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/closeout-run-close-out-gates.json
+    slug: sub-close-out-evidence-sync
+    status: completed
+  - disposition: pending
+    evidence_refs:
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/traceable-commit-evidence.md
+    slug: traceable-commit
+    status: pending
+working_roots:
+  committed_root: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/
+  local_root: tied-bundle/working/REQ-TIED_HARNESS_PLATFORM_SEAM/

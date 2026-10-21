@@ -15,9 +15,22 @@
 | **Jev live tool gate (opt-in, W5 residual)** | `src/jev-harness-live-tool-gate.ts` + `executor-run.ts` — when harness is enabled, each blocking **`Shell`/`bash`** proposal parsed from agent **stream-json** is passed to `evaluateHarnessToolCall` (`mcp-server/dist/jev/harness-tool-guard.js`) **before** the turn continues; **`block`** terminates the subprocess (fail-closed without `JEV_API_KEY` per harness config). Composition fakes may emit `{ type: "agentstream_tool_proposal", tool, command }`. |
 | **Golden fixtures** | `testdata/checklist/`, `testdata/live/`, frozen oracle outputs in `testdata/oracle/` |
 
+## Preflight chain (compose, don't replace)
+
+Agentstream runs **harness middleware** before live turns when operators opt in. None of these layers replace **`tied_checklist_gate_validate`**, project YAML write authority on the **TIED MCP** / **tied-cli** path, or sponsor **costly choice** on the consequence ladder.
+
+| Layer | Opt-in | Role |
+| --- | --- | --- |
+| **Static tied-yaml preflight** (`tiedpreflight`) | `--tied-mcp-preflight` or **`AGENTSTREAM_TIED_MCP_PREFLIGHT=1`** (default **off**) | Validates `.cursor/mcp.json` layout and **`TIED_BASE_PATH`** before batch/live turns; skip via `--skip-tied-mcp-preflight`, **`AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`**, or **`-y`**. Composes with session bootstrap **`tied_config_get_base_path`**—does not substitute for confirming the intended **`tied-project/`** tree before YAML mutation. |
+| **DAE gate preflight** | **`AGENTSTREAM_DAE_GATE_CHECK=1`** or `dae.agentstream_gate_check: true` | Spawns **`tied gate check --phase pre_implementation`** for the batch `request_token`; checklist gate receipt authority stays on the platform-adjacent plane. |
+| **Jev harness preflight + live tool gate** | **`AGENTSTREAM_JEV_HARNESS=1`** or `jev.agentstream_harness: true` | Fail-closed **`Shell`/`bash`** proposals via `evaluateHarnessToolCall`; **does not** waive checklist gates or MCP YAML writes. |
+
+Cross-links: [agentstream vocab](../../../tied-project/vocab/agentstream.md), [Traefik harness/platform seam](../../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md), [authority-boundary operator checklist](../../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md).
+
 ## Environment
 
 - **`TIED_AGENTSTREAM_IMPL`** — `ts` (default). Value **`go`** is rejected (Phase **4d**); emergency legacy Go: checkout commit in [phase4d-go-oracle-freeze.json](../../../working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
+- **`AGENTSTREAM_TIED_MCP_PREFLIGHT=1`** — opt-in static **`tiedpreflight`** (same as `--tied-mcp-preflight`); default remains skip unless flag or env set. See **Preflight chain** above.
 - **`AGENTSTREAM`** — optional path override for shell drivers (`scripts/run-feature-batch-agentstream.sh`, etc.).
 - **`AGENTSTREAM_DAE_GATE_CHECK=1`** — opt-in DAE gate pre-turn (requires tied-yaml MCP preflight **not** skipped). Disable via unset env and `dae.agentstream_gate_check: false` (default). **`AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT=1`**, **`--skip-tied-mcp-preflight`**, or **`-y` / `--yes`** follow the same semantics as static `tiedpreflight` (including exit **2** misconfig bypass with `-y`).
 - **`AGENTSTREAM_JEV_HARNESS=1`** — opt-in Jev harness bootstrap ([REQ-TIED_JEV_DECISION_COPROCESSOR](../../../tied-project/requirements/REQ-TIED_JEV_DECISION_COPROCESSOR.yaml)); also `jev.agentstream_harness: true` in `tied-project/config.yaml`. **Build prerequisite (S2/2C):** when the harness is enabled, agentstream **exits 1** (dry-run and live) unless `mcp-server/dist/jev/harness-tool-guard.js` exists — run `cd mcp-server && npm run build` first. Set **`JEV_API_KEY`** for live `/v1/decide` smoke; without a key, **`bash`/`Shell`** tool guard paths fail-closed when the harness is enabled elsewhere. Live tool gate runs on **Cursor** (`runAgent`) and **Claude** (`collectClaudeStreamFromSpawn`) NDJSON streams. **`confirm`** decisions log-only locally; **`CI=true`** or **`AGENTSTREAM_JEV_HARNESS_CONFIRM_STRICT=1`** also aborts the turn on `confirm` (S3/G3).

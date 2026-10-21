@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "requirements_updated": 0,
+  "implementation_updated": 0,
+  "requirements_set_implemented": [],
+  "requirements_set_planned": [],
+  "implementation_set_active": [],
+  "implementation_set_planned": [],
+  "yaml_format": {
+    "profile_id": "tied-yaml-canonical-v1",
+    "scalar_style": "unwrapped",
+    "style_source": "default",
+    "recursive_key_order": "case-insensitive-primary locale-independent lexical with original-value tie-break",
+    "ordered_list_key_pattern": "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*",
+    "string_list_rule": "sort all-string lists except ordered-list keys",
+    "record_list_rule": "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
+    "scalar_policy": "preserve string, boolean, number, and null types",
+    "opaque_block_policy": "preserve block-scalar bodies and IMPL pseudo-code sidecars"
+  },
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/gates/close_out-2026-10-21T04-43-06-155Z.json",
+    "hash": "sha256:2f135ceae866663fe0c81de433bb4cd349a172c295fe7684f56cb946a0124d1a"
+  }
+}

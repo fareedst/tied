@@ -1,0 +1,12 @@
+{
+  "allowed": true,
+  "ok": true,
+  "blocking": false,
+  "depth": "minimal",
+  "phase": "pre_implementation",
+  "diagnostics": [],
+  "gate_receipt": {
+    "path": "tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/gates/pre_implementation-2026-10-21T04-40-13-651Z.json",
+    "hash": "sha256:8fc345f8d45e3781881771cc7f84647a4b02142b44959a72411e458f2fbd7e7d"
+  }
+}

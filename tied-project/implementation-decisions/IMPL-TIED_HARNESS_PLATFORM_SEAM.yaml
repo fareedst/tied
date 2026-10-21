@@ -1,0 +1,53 @@
+IMPL-TIED_HARNESS_PLATFORM_SEAM:
+  code_locations:
+    files:
+      - description: "Committed operator checklist (build slice D)"
+        path: "tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md"
+      - description: "Preflight chain boundaries"
+        path: "mcp-server/packages/agentstream/README.md"
+      - description: "Primary analysis source (reference)"
+        path: "docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md"
+      - description: "Prompt-type harness profiles"
+        path: "tied-bundle/docs/fresh-client-prompt-activation-map.md"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+  decision: "Execute phased slices in PLAN.md: docs, client vocab RECORD, optional small agentstream/tied-yaml skill hooks; reference closed REQ-TIED_TOOL_INPUT_COMPATIBILITY for MCP tool-call seam diagnostics."
+  implementation_approach:
+    details:
+      - "Slice A session bootstrap"
+      - "Slice B prompt activation map"
+      - "Slice C agentstream preflight docs"
+      - "Slice D authority checklist"
+      - "Slice E matrix row 13"
+      - "Slice F tool-input cross-ref in harness docs"
+    summary: "Phased doc/vocab/hook edits per working PLAN; matrix row 13 fill under parent matrix REQ constraints."
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-10-20"
+    last_updated:
+      author: "close-out"
+      date: "2026-10-20"
+      reason: "Documentation delivery complete"
+  name: "Harness–platform seam implementation"
+  rationale:
+    benefits:
+      - "Token-linked maintenance path"
+    problems_solved:
+      - "Untracked Traefik comparison follow-through"
+    why: "Minimal reversible slices prioritized; build-plan child implements code/doc edits."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    supersedes: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    code_annotations: []
+    requirements:
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+    tests: []

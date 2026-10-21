@@ -6,6 +6,30 @@
 
 ---
 
+## 0. Prompt-type harness profiles (leaf types)
+
+Each **leaf prompt type** is a bounded **harness profile** (turn orchestration). **TIED applicability** names how much of the REQ/CITDP/checklist stack the skill may drive. **Delegation** (Task subagents, prompt-type router) does **not** waive **`tied_checklist_gate_validate`** or MCP YAML authority—`gate_policy: advisory` still requires gate receipts where the checklist says so; it does not mean gates are optional.
+
+| Leaf prompt type | TIED applicability | Harness profile note | Gate authority reminder |
+| --- | --- | --- | --- |
+| `add-feature` | **full** | Refine → CITDP plan → implement entry | **`pre_implementation`** before RED; full Tracker/CITDP when scoped |
+| `refine-plan` | **full** | Plan improvement only; no implement | Planning gates per linked PLAN/CITDP |
+| `build-plan` | **full** | Execute linked plan; omits Refine | **`pre_implementation`** before code; verification gate before status claims |
+| `close-out` | **full** | Envelope, dispositions, traceable commit when allowed | **`close_out`** gate + **`sub-close-out-evidence-sync`**; no commit when blocked |
+| `debug` | **full** | Refine → capture failure → plan → implement | Same gate stack as feature work for the scoped defect |
+| `use-skill` | **full** | Import/apply skills under TIED boundaries | Mutating TIED YAML only via MCP/tied-cli after base-path check |
+| `leap-ad-hoc` | **full** | Fortify staged ad-hoc work | LEAP proposals; no gate waiver in skill text |
+| `leap-diff-promote` | **full** | Promote diff onto TIED-complete stage | Sponsor ladder for costly promotion |
+| `ammend-commit` | **minimal** | Staged amend preparation only | Does not bypass verification or envelope blocking |
+| `non-tied-plan` | **minimal** | TIED-client-local dev; read context, no TIED sync writes | No project YAML/IMPL/CITDP mutations; gates not auto-run |
+| `non-tied-debug` | **minimal** | TIED-client-local debugging | Same no-record boundary as `non-tied-plan` |
+| `question` | **none** | Answer invocation remainder | No TIED blocks; operator may still run gates manually |
+| `other` | **none** | Process remainder; no TIED workflow | No TIED blocks |
+
+**Router:** `prompt-type-router` composes explicit ordered leaf lists; each leaf retains its applicability row above. Taxonomy: [prompt-composer.md](../../tied-project/vocab/prompt-composer.md), [prompt-type-skills.md](prompt-type-skills.md). Seam context: [Traefik harness/platform × TIED](../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md).
+
+---
+
 ## 1. Bootstrap boundary (G4 only)
 
 ### 1.1 What `test-new-tied-client` runs
@@ -343,4 +367,4 @@ dae:
 
 **Related:** [`agent-req-implementation-checklist.md`](agent-req-implementation-checklist.md), [`../../docs/integrated-activation-checklist-enforcement-plan.md`](../../docs/integrated-activation-checklist-enforcement-plan.md), [`../vocab/behavior-bounded-change-engineering.md`](../vocab/behavior-bounded-change-engineering.md), [`../methodology/vocab/residuality.md`](../methodology/vocab/residuality.md) (client path: `tied-bundle/vocab/residuality.md`).
 
-**Last updated:** 2026-09-27
+**Last updated:** 2026-10-20

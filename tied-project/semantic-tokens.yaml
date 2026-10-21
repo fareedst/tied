@@ -988,6 +988,18 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
   name: "Git hygiene safety"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_HARNESS_PLATFORM_SEAM:
+  cross_references:
+    - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
+    - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+  description: "Harness vs platform-adjacent authority separation for agent management"
+  metadata:
+    last_updated: "2026-10-20"
+    registered: "2026-10-20"
+  name: "Harness–platform seam architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
     - "IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS"
@@ -2568,6 +2580,18 @@ IMPL-TIED_GIT_HYGIENE:
   description: "Git hygiene module"
   name: "Git hygiene implementation"
   status: "Active"
+  type: "IMPL"
+IMPL-TIED_HARNESS_PLATFORM_SEAM:
+  cross_references:
+    - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+  description: "Phased docs vocab and optional preflight hooks"
+  metadata:
+    last_updated: "2026-10-20"
+    registered: "2026-10-20"
+  name: "Harness–platform seam implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Planned"
   type: "IMPL"
 IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:
@@ -4314,6 +4338,18 @@ REQ-TIED_GIT_HYGIENE:
   description: "Git hygiene preview and guarded apply"
   name: "Git hygiene MCP"
   status: "Active"
+  type: "REQ"
+REQ-TIED_HARNESS_PLATFORM_SEAM:
+  cross_references:
+    - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
+  description: "Compose harness orchestration with MCP/checklist gate authority per Traefik seam analysis"
+  metadata:
+    last_updated: "2026-10-20"
+    registered: "2026-10-20"
+  name: "Harness–platform authority seam"
+  source_index: "requirements.yaml"
+  status: "Planned"
   type: "REQ"
 REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   cross_references:

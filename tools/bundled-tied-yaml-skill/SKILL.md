@@ -8,6 +8,10 @@ In TIED-**client** checkouts, this skill is installed to **`.cursor/skills/tied-
 
 All reads and writes to REQ, ARCH, and IMPL **YAML** records (indexes, `IMPL-*.yaml` detail files, and other structured TIED YAML) **must** go through the `tied-yaml` tooling. Direct file edits (`Write`, `StrReplace`, `sed`, etc.) on those paths produce invalid output (unquoted colons, broken indentation, duplicate keys). The tied-yaml server emits safe, schema-conformant YAML every time. **Exception:** the plain-text **pseudo-code sidecar** `tied-project/implementation-decisions/IMPL-*-pseudocode.md` may be edited **directly** in the editor when that is most efficient, then run **`tied_validate_consistency`**; or use **`impl_detail_set_essence_pseudocode`** with an inline string, `essence_pseudocode_path`, or **`tied-cli.sh`** with `TIED_CLI_IMPL_ESSENCE_FILE` / `TIED_CLI_IMPL_ESSENCE_STDIN` (see the `tied-cli.sh` header). Do not re-encode the sidecar as JSON when a direct edit or file path is simpler. **Preference:** for non-trivial or growing IMPLs, the **sidecar** is the primary artifact (diffable, avoids YAML body pitfalls); a **canonical** hand-authored body template lives at `templates/impl-essence-pseudocode-template.md` (methodology repo) — see `tied-bundle/docs/pseudocode-writing-and-validation.md` and `tied-bundle/docs/pseudocode-format-and-practices.md`.
 
+## Session bootstrap seam (before any YAML write)
+
+Every session that mutates project REQ/ARCH/IMPL YAML must **`tied_config_get_base_path`** (IDE MCP or **`tied-cli.sh`**) and confirm the path is the intended **`tied-project/`** directory—especially in multi-root workspaces where a stale **`TIED_BASE_PATH`** writes the wrong tree. See bounded recommendation §1 in [Traefik harness/platform × TIED](../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md). On transport or validation failures, **`tied-cli.sh`** may print **`DIAGNOSTIC: TIED_CLI_HINDRANCE`** ([REQ-TIED_TOOL_INPUT_COMPATIBILITY](../../tied-project/requirements/REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml)).
+
 ## Prerequisites
 
 - **Node >= 18** on `PATH`.

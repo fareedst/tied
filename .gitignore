@@ -18,6 +18,8 @@ docs/comparisons/*
 !docs/comparisons/qmm-kaizen-vs-tied.md
 !docs/comparisons/tied-vs-well-known-methodologies.md
 !docs/comparisons/tied-vs-harness2.md
+!docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md
+!docs/comparisons/traefik-harness-engineering-vs-platform-engineering.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

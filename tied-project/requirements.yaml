@@ -2601,6 +2601,33 @@ REQ-TIED_GIT_HYGIENE:
   name: "Git hygiene MCP"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_HARNESS_PLATFORM_SEAM:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    implementation:
+      - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
+  description: "Operator-facing seams that compose Traefik-style in-IDE harness tuning (orchestration, prompt-type profiles, agentstream middleware) with TIED platform-adjacent authority (MCP project YAML, checklist gates, sponsor consequence ladder) without duplicating enterprise gateway products or encoding gate waivers in skills."
+  detail_file: "requirements/REQ-TIED_HARNESS_PLATFORM_SEAM.yaml"
+  name: "Harness–platform authority seam"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+    supersedes: []
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+    implementation:
+      - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
+    tests: []
 REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   category: "Methodology"
   description: "Loop 3 guide and example template for bounded evaluation-corpus.v1 rows (incidents, reverts, review false positives)."

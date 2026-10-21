@@ -1,0 +1,39 @@
+ARCH-TIED_HARNESS_PLATFORM_SEAM:
+  cross_references:
+    - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+  decision: "Treat IDE/agentstream/prompt-type Task surfaces as harness orchestration; treat TIED MCP project YAML writes, checklist gate receipts, IMPL pseudo-code authority, and sponsor consequence ladder as platform-adjacent governance. Document and optionally automate the session bootstrap seam (TIED_BASE_PATH verification) without shipping client egress gateways."
+  implementation_approach:
+    details:
+      - "Clarify agentstream middleware vs MCP gate authority in README"
+      - "Cross-link traefik-harness-platform-vs-tied-agent-management.md from operator checklist"
+      - "Extend fresh-client-prompt-activation-map with harness profile column"
+    summary: "Docs-first seams plus optional opt-in agentstream preflight; no Triple Gate product stack."
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-10-20"
+    last_updated:
+      author: "add-feature"
+      date: "2026-10-20"
+      reason: "Initial creation"
+  name: "Harness–platform seam architecture"
+  rationale:
+    benefits:
+      - "Clear compose-don't-replace contract for build-plan slices"
+    problems_solved:
+      - "Harness/platform smear in operator docs"
+      - "Implicit gate waivers via subagent delegation"
+    why: "Traefik three-layer model maps to existing TIED surfaces; anti-pattern is collapsing gate authority into skills or bypassing MCP for speed."
+  related_decisions:
+    depends_on: []
+    informs: []
+    see_also:
+      - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_HARNESS_PLATFORM_SEAM"
+    requirements:
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+    tests: []
