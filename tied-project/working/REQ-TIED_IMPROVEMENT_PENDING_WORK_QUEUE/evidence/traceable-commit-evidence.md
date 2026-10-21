@@ -20,4 +20,4 @@ Receipt: `run-close-out-gates.mjs --envelope-blocking --sync-dispositions --reco
 
 ## Commit SHA
 
-`7e657b7f` — `feat(methodology): primary TIED improvement pending work queue`
+`9fc13347` — `feat(methodology): primary TIED improvement pending work queue`

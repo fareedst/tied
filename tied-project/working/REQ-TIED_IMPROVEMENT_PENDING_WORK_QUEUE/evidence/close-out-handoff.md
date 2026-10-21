@@ -22,7 +22,7 @@
 
 ## Commit
 
-**SHA:** `7e657b7f` — scoped wave; local queue not in git.
+**SHA:** `9fc13347` — scoped wave; local queue not in git.
 
 ## Sponsor follow-up
 
