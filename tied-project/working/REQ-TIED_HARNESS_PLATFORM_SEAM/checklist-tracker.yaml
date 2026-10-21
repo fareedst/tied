@@ -32,6 +32,7 @@ execution_evidence:
     - test-strategy
     - translate-sponsor-intent
     - verification-gate
+    - traceable-commit
   envelope_path: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/request-evidence-envelope.v1.json
   pre_implementation_receipt: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/gates/pre_implementation-2026-10-21T04-34-09-116Z.json
   request: REQ-TIED_HARNESS_PLATFORM_SEAM
@@ -169,11 +170,12 @@ steps:
       - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/closeout-run-close-out-gates.json
     slug: sub-close-out-evidence-sync
     status: completed
-  - disposition: pending
+  - disposition: completed
     evidence_refs:
       - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/traceable-commit-evidence.md
+      - tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/plan-close-out-handoff.md
     slug: traceable-commit
-    status: pending
+    status: completed
 working_roots:
   committed_root: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/
   local_root: tied-bundle/working/REQ-TIED_HARNESS_PLATFORM_SEAM/

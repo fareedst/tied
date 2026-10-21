@@ -12,7 +12,7 @@
 | **gate_policy** | `advisory` |
 | **methodology_surface_change_class** | `prompt_type_workflow` (documentation + optional harness hooks only) |
 | **Operator interruption budget** | Docs-only build-plan; **no new mandatory CLI flags**, **no default behavior flips**, **no IDE restart rituals**; opt-in preflight stays off |
-| **program_phase** | **close-out in progress** — unified `close_out` allowed (2026-10-20) |
+| **program_phase** | **closed** — close-out commit `3c5c49f8` (2026-10-20) |
 | **Linked close-out plan** | Cursor plan `hps_req_close-out_a5b032cf` (sponsor scope: HPS wave + Traefik comparison if diff) |
 
 ## Refine resolution

@@ -10,7 +10,7 @@
 
 ### Commit
 
-**SHA:** _(recorded after traceable-commit)_
+**SHA:** `3c5c49f83dcc82db3829b3fde6b5d63e2de136a4`
 
 ### Client follow-up
 
