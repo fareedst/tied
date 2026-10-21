@@ -98,6 +98,6 @@ steps:
     disposition: completed
     evidence_refs:
       - kind: git_commit
-        path: "616b2bdd"
+        path: "0c86e202"
       - kind: file_path
         path: tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/evidence/traceable-commit-evidence.md
