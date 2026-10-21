@@ -106,4 +106,4 @@ steps:
       - kind: file_path
         path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/proposed-commit-message.txt
       - kind: command
-        path: "git commit 760b4e57 — feat(htol): Loop 3 harness trace learning pilot (Phase 2)"
+        path: "git commit c5441f70 — feat(htol): Loop 3 harness trace learning pilot (Phase 2)"

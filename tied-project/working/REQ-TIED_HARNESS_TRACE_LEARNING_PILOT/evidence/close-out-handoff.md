@@ -12,7 +12,7 @@ N/A — see [git-hygiene-receipt-2026-10-21.md](./git-hygiene-receipt-2026-10-21
 
 ## Commit
 
-**Commit SHA:** `760b4e57` (42 files, Phase 2 HTOL-scoped wave; Cursor comparison docs excluded).
+**Commit SHA:** `c5441f70` (42 files, Phase 2 HTOL-scoped wave; Cursor comparison docs excluded).
 
 ## Remaining risks
 
