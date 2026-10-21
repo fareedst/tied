@@ -22,4 +22,4 @@ HTOL cohort / **htol-v1** / Loop 3 terms align with [feedback-to-tied.md](../../
 
 ## Commit
 
-- **SHA:** `8f3910ae`
+- **SHA:** `d4e323c`

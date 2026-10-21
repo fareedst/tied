@@ -12,7 +12,7 @@ N/A — see [git-hygiene-receipt-2026-10-21.md](./git-hygiene-receipt-2026-10-21
 
 ## Commit
 
-**Commit SHA:** `8f3910ae` (33 files, HTOL runbook-scoped wave)
+**Commit SHA:** `d4e323c` (33 files, HTOL runbook-scoped wave)
 
 ## Remaining risks
 
