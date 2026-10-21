@@ -7,8 +7,8 @@
 | **Status** | **Mechanism fill complete (agent draft)** — **40/40** rows (§2 **row 13** Traefik harness/platform added 2026-10-20); sponsor review before accepted outreach; tracked by [REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX](../../tied-project/requirements/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml) |
 | **Proof boundary** | Structure, row inventory, links, and TIED traceability only — **not** ISO/CMMI certification or behavioral equivalence with any row method. |
 | **TIED anchors** | [Client development index](../../tied-bundle/docs/client-development-index.md), [Vocabulary layer × TIED × LEAP × CITDP](../../tied-bundle/docs/vocabulary-layer-tied-leap-citdp.md), [LEAP](../../tied-bundle/docs/LEAP.md), [processes](../../tied-bundle/docs/processes.md), [AGENTS.md](../../AGENTS.md) |
-| **Sibling docs** | [TIED × well-known methodologies](tied-vs-well-known-methodologies.md), [QMM × TIED](qmm-kaizen-vs-tied.md), [Jev × TIED](jev-for-tied-improvement.md), [Trail-Code × TIED](tied-vs-trail-code.md), [Claude Code team code review × TIED](claude-code-team-code-review-vs-tied.md), [Traefik harness/platform × TIED](traefik-harness-platform-vs-tied-agent-management.md), [LangChain harness engineering capture](langchain-improving-deep-agents-harness-engineering.md) |
-| **Last updated** | 2026-10-20 |
+| **Sibling docs** | [TIED × well-known methodologies](tied-vs-well-known-methodologies.md), [QMM × TIED](qmm-kaizen-vs-tied.md), [Jev × TIED](jev-for-tied-improvement.md), [Trail-Code × TIED](tied-vs-trail-code.md), [Claude Code team code review × TIED](claude-code-team-code-review-vs-tied.md), [Traefik harness/platform × TIED](traefik-harness-platform-vs-tied-agent-management.md), [LangChain harness engineering × TIED](langchain-harness-engineering-vs-tied-agent-management.md), [LangChain harness engineering capture](langchain-improving-deep-agents-harness-engineering.md) |
+| **Last updated** | 2026-10-21 |
 
 ---
 

@@ -265,6 +265,7 @@ All items are **Recommendation-only**; they do not mint tokens or change MCP gat
 
 - [Authority boundary operator checklist](../../tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/authority-boundary-operator-checklist.md) — fast skim before turns (REQ-TIED_HARNESS_PLATFORM_SEAM)
 - [Traefik article capture (sibling)](traefik-harness-engineering-vs-platform-engineering.md)
+- [LangChain harness engineering × TIED — agent management lens (sibling)](langchain-harness-engineering-vs-tied-agent-management.md) — empirical trace loop and middleware patterns
 - [LangChain harness engineering article capture (sibling)](langchain-improving-deep-agents-harness-engineering.md)
 - [TIED vs Harness²](tied-vs-harness2.md) — distinct “harness” subject; recursive optimization vs Traefik fleet seam
 - [Methodology composition matrix](methodology-composition-matrix.md)

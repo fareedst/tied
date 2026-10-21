@@ -1,0 +1,84 @@
+citdp:
+  path: tied-project/citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml
+  reason: Documentation-only LangChain harness × TIED comparison; no product REQ.
+  status: complete
+depth_tier: minimal
+gate_policy: advisory
+profile_depth: minimal
+purpose: Plan-only Tracker for PLAN-LANGCHAIN-HARNESS-COMPARISON.
+refine_pass: 1
+refine_pass_date: "2026-10-21"
+request: PLAN-LANGCHAIN-HARNESS-COMPARISON
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: build_complete_verification_passed
+steps:
+  - id: session-bootstrap
+    disposition: completed
+    notes: PRELOAD agentstream, prompt-composer, quality-assurance, working-artifact-placement; read LangChain capture.
+  - id: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: /Users/fareed/.cursor/plans/langchain_harness_×_tied_9814e00c.plan.md
+  - id: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml
+  - id: impact-discovery
+    disposition: completed
+    notes: docs/comparisons/ cross-links; optional matrix header only.
+  - id: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml
+  - id: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml
+      - kind: file_path
+        path: tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/evidence/doc-verification-2026-10-21.md
+  - id: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: Minimal depth; CITDP counterexamples only.
+  - id: author-requirement
+    disposition: not_applicable
+  - id: gate-pseudocode-validation
+    disposition: completed
+    notes: Doc-only; no IMPL mutation; pre_implementation gate anchor after refine-plan.
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml
+      - kind: gate_receipt
+        path: tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/gates/pre_implementation-2026-10-21T05-13-26-754Z.json
+  - id: three-way-alignment-unit
+    disposition: not_applicable
+  - id: unit-test-red
+    disposition: not_applicable
+  - id: unit-test-green
+    disposition: not_applicable
+  - id: composition-integration
+    disposition: not_applicable
+  - id: end-to-end-ui
+    disposition: not_applicable
+  - id: verification-gate
+    disposition: completed
+    notes: Doc-only; tied_checklist_gate_validate phase verification after draft.
+    evidence_refs:
+      - kind: gate_receipt
+        path: tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/gates/verification-2026-10-21T05-15-46-603Z.json
+      - kind: file_path
+        path: tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/evidence/doc-verification-2026-10-21.md
+  - id: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml
+      - kind: file_path
+        path: docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md
+  - id: traceable-commit
+    disposition: pending
+    notes: Sponsor-requested commit only.
