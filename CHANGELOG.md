@@ -45,6 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **`lint_tied` / `yaml_tool -F` ([REQ-TIED_LAYERED_CLIENT_INSTALL], [REQ-TIED_SETUP], [IMPL-TIED_FILES])** — `lint_tied` runs from `_BUILD_COMMANDS_REPO_ROOT` in a subshell (so `test-all` step 9 no longer depends on caller `pwd`). `yaml_tool.sh --find` accumulates multiple `-F` roots and includes symlinked `*.yaml` (linked-install `tied-bundle` index stubs). Evidence: [close-out-handoff.md](tied-project/working/FIX-LINT-TIED-TEST-ALL/evidence/close-out-handoff.md).
+
 - **Legacy layout close-out receipt** — Correct full commit SHA in [git-hygiene-receipt-2026-10-19.md](tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/git-hygiene-receipt-2026-10-19.md) for the decommission wave (`28fee75a3ea33ca7a75f4097dd17a93c1dbe69bf`).
 
 ### Changed

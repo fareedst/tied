@@ -70,11 +70,15 @@ alias tied-cli=tied_cli
 
 lint_tied() {
   local root="${_BUILD_COMMANDS_REPO_ROOT}"
-  if [[ -d "${root}/tied-project" ]]; then
-    "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied-project -F tied-bundle
-  else
-    "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied
-  fi
+  (
+    cd "$root" || exit 1
+    if [[ -d tied-project ]]; then
+      "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied-project
+      "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied-bundle
+    else
+      "${_BUILD_COMMANDS_DIR}/lint_yaml.sh" -F tied
+    fi
+  )
 }
 alias lint-tied=lint_tied
 

@@ -1,0 +1,15 @@
+fix(yaml): anchor lint_tied and symlink -F scans
+
+test-all step 9 failed when the shell cwd was a linked client: lint_tied
+used relative -F paths and yaml_tool find -type f skipped symlinked index YAML.
+
+Staging map:
+- scripts/build-commands.sh
+- scripts/yaml_tool.sh
+- CHANGELOG.md
+- tied-project/working/FIX-LINT-TIED-TEST-ALL/evidence/
+
+Tokens: REQ-TIED_LAYERED_CLIENT_INSTALL, REQ-TIED_SETUP, IMPL-TIED_FILES
+
+Completion signals: machine close-out not_run (ad-hoc fix); process partial
+(bash -n, lint_tied from bkpdir cwd); adherence not_run.

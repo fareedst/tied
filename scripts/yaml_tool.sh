@@ -73,6 +73,7 @@ sort_yaml_list_files() {
 
 null_delim=false
 find_mode=false
+find_bases=()
 find_base='.'
 find_name='*.yaml'
 sort_keys=false
@@ -112,25 +113,17 @@ while [ "$#" -gt 0 ]; do
       ;;
     -F | --find)
       find_mode=true
-      find_base='.'
-      find_name='*.yaml'
       shift
-      c=0
-      while
-        [ "$#" -gt 0 ] && [[ "$1" != -- ]] &&
-        [ "${1#-}" = "$1" ]
-      do
-        if [ "$c" -eq 0 ]; then
-          find_base=$1
-          c=1
-        else
-          find_name=$1
-          c=2
-          shift
-          break
-        fi
+      if [ "$#" -eq 0 ] || [[ "$1" == -- ]] || [[ "${1#-}" != "$1" ]]; then
+        find_bases+=('.')
+      else
+        find_bases+=("$1")
         shift
-      done
+        if [ "$#" -gt 0 ] && [[ "$1" != -- ]] && [[ "${1#-}" = "$1" ]]; then
+          find_name=$1
+          shift
+        fi
+      fi
       ;;
     -h | --help)
       usage
@@ -169,13 +162,19 @@ fi
 paths=()
 find_rc=0
 if [ "$find_mode" = true ]; then
-  _find_tmp=$(mktemp -t yaml_tool_find.XXXXXX)
-  find "$find_base" -type f -name "$find_name" -print0 >"$_find_tmp" || find_rc=$?
-  if [ "$find_rc" -ne 0 ]; then
-    rm -f "$_find_tmp"
-    printf '%s: find failed under %q (exit %s)\n' "${0##*/}" "$find_base" "$find_rc" 1>&2
-    exit "$find_rc"
+  if [ "${#find_bases[@]}" -eq 0 ]; then
+    find_bases=("$find_base")
   fi
+  _find_tmp=$(mktemp -t yaml_tool_find.XXXXXX)
+  for find_base in "${find_bases[@]}"; do
+    # Linked TIED installs expose index YAML as symlinks; include them in -F scans.
+    find "$find_base" \( -type f -o -type l \) -name "$find_name" -print0 >>"$_find_tmp" || find_rc=$?
+    if [ "$find_rc" -ne 0 ]; then
+      rm -f "$_find_tmp"
+      printf '%s: find failed under %q (exit %s)\n' "${0##*/}" "$find_base" "$find_rc" 1>&2
+      exit "$find_rc"
+    fi
+  done
   while IFS= read -r -d '' line || [ -n "${line:-}" ]; do
     [ -n "$line" ] && paths+=("$line")
   done <"$_find_tmp"
