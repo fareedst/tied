@@ -1,0 +1,5 @@
+docs(comparisons): Ludanyi judgment × TIED Waves 1–2
+
+Add read-only capture and TIED agent-management analysis for Andras
+Ludanyi's anti-proxy-metrics people-management essay; git allowlist
+only. No REQ/ARCH/IMPL mint; outreach minimal close-out.

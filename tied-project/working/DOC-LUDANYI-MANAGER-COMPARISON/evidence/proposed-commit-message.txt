@@ -1,0 +1,16 @@
+docs(comparisons): Ludanyi judgment × TIED Waves 1–2
+
+Add read-only capture and agent-management analysis mapping Andras
+Ludanyi's anti-proxy-metrics people-management essay to TIED proof
+boundaries and sponsor authority (no REQ/ARCH/IMPL mint). Git allowlist
+for the two comparison paths.
+
+Outreach close-out (depth_tier minimal): machine gate N/A; doc exit
+checklist passed; effectiveness not_measured.
+
+Staging map:
+- docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation.md
+- docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation-vs-tied-agent-management.md
+- .gitignore (Ludanyi allowlist lines only)
+- CHANGELOG.md
+- tied-project/working/DOC-LUDANYI-MANAGER-COMPARISON/evidence/
