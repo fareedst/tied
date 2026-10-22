@@ -231,6 +231,8 @@ Every leaf has:
 - `tied-boundary.md`
 - `non-tied-boundary.md`
 - `guiding-vocab.md`
+- `agent-shell-working-directory.md`
+- `agent-shell-script-header.template.sh`
 
 ### Safety boundaries
 

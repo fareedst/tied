@@ -16,7 +16,7 @@ Cursor skills used by TIED projects.
   `harness-trace-langsmith-compose`
   ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)).
 - One explicit-only `prompt-type-router` skill.
-- 15 direct Markdown references under `prompt-shared/` (includes `gitignore-close-out-hygiene.md`).
+- 21 tracked `prompt-shared/` references (includes `agent-shell-working-directory.md`, `agent-shell-script-header.template.sh`, and `gitignore-close-out-hygiene.md`; see `mcp-server/src/e2e/prompt-type-skills.test.ts` `SHARED_REFERENCES`).
 
 The source files are copied from the personal Cursor skill bundle during
 development, but clients must consume the version committed here.

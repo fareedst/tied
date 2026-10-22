@@ -57,6 +57,8 @@ const SHARED_REFERENCES = [
   "guiding-vocab.md",
   "jev-plan-skills-adjunct.md",
   "methodology-surface-enrollment-advisory.md",
+  "agent-shell-working-directory.md",
+  "agent-shell-script-header.template.sh",
 ] as const;
 
 const repoRoot = path.resolve(process.cwd(), "..");
@@ -118,10 +120,26 @@ function assertSkillContract(root: string): void {
   }
 }
 
+function assertAgentShellWorkingDirectoryContract(root: string): void {
+  // [IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_GLOBAL_SKILLS] — How: fail closed if agent shell cwd guidance is missing or hollow.
+  const shared = path.join(root, "prompt-shared");
+  const guide = fs.readFileSync(path.join(shared, "agent-shell-working-directory.md"), "utf8");
+  const template = fs.readFileSync(path.join(shared, "agent-shell-script-header.template.sh"), "utf8");
+  for (const needle of ["working_directory", "REPO_ROOT", "DIAGNOSTIC:"] as const) {
+    assert.match(guide, new RegExp(needle));
+  }
+  assert.match(guide, /fail closed/i);
+  for (const needle of ["set -euo pipefail", "assert_repo_root", "MARKER_REL"] as const) {
+    assert.match(template, new RegExp(needle));
+  }
+  assert.match(template, /DIAGNOSTIC:/);
+}
+
 describe("prompt-type skill bundle", () => {
   it("validates the tracked canonical bundle [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]", () => {
     const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
     assertSkillContract(bundleRoot);
+    assertAgentShellWorkingDirectoryContract(bundleRoot);
   });
 
   it("installs the canonical bundle while preserving unrelated client tooling [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]", () => {

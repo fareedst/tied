@@ -4,6 +4,8 @@
 
 Follow **Rules**, run **Checklist** steps from the **Tracker** copy, author/repair in **Pseudo-code** before RED, apply **LEAP** on divergence, persist **Change records** when behavior changes, mutate **project** YAML via **tied-cli** (not `tied-bundle/`), finish with **`verification-gate`** and `tied_validate_consistency`. The shared `tied_checklist_gate_validate` result is authoritative; do not replace it with caller assertions.
 
+**Shell scripts:** When adding or generating bash scripts, read [agent-shell-working-directory.md](agent-shell-working-directory.md) and start from [agent-shell-script-header.template.sh](agent-shell-script-header.template.sh).
+
 1. Update TIED before implementing; apply LEAP so pseudo-code logic is valid and block-commented.
    When implementing changes on enrolled methodology surfaces, keep experiment upsert + optional `tied_methodology_production_system_enrollment_validate` aligned with [methodology-surface-enrollment-advisory.md](methodology-surface-enrollment-advisory.md); W2 pairing still follows CITDP linkage only.
 2. RECORD vocabulary after TIED/YAML edits.

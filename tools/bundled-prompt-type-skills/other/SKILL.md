@@ -21,6 +21,8 @@ This skill is the workflow source of truth for client prompt-type invocation.
 
 ## Procedure
 
+When generating bash scripts, read [agent-shell-working-directory.md](../prompt-shared/agent-shell-working-directory.md) and start from [agent-shell-script-header.template.sh](../prompt-shared/agent-shell-script-header.template.sh).
+
 Process the invocation remainder.
 
 ## Gates

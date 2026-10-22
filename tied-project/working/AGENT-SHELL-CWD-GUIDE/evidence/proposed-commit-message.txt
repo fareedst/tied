@@ -1,0 +1,20 @@
+Staging map (agent shell cwd guide wave only):
+- CHANGELOG.md
+- mcp-server/src/e2e/prompt-type-skills.test.ts
+- tied-bundle/docs/prompt-type-skills.md
+- tools/bundled-prompt-type-skills/README.md
+- tools/bundled-prompt-type-skills/other/SKILL.md
+- tools/bundled-prompt-type-skills/prompt-shared/agent-shell-working-directory.md
+- tools/bundled-prompt-type-skills/prompt-shared/agent-shell-script-header.template.sh
+- tools/bundled-prompt-type-skills/prompt-shared/non-tied-plan.md
+- tools/bundled-prompt-type-skills/prompt-shared/tied-implement.md
+- tied-project/working/AGENT-SHELL-CWD-GUIDE/evidence/ (close-out receipts)
+
+Draft message:
+docs(prompt-type): agent shell cwd guide for scripts
+
+Add prompt-shared guidance and a copy-paste bash header so agents anchor
+shell invocations and generated scripts on an absolute REPO_ROOT with
+fail-closed marker checks instead of session cwd.
+
+[REQ-PROMPT_TYPE_GLOBAL_SKILLS] Tests: prompt-type-skills.test.ts (7/7).

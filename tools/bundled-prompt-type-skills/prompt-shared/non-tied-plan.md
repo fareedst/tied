@@ -20,6 +20,8 @@
 
 ## Implement (when design is composed)
 
+**Shell scripts:** When adding or generating bash scripts, read [agent-shell-working-directory.md](agent-shell-working-directory.md) and start from [agent-shell-script-header.template.sh](agent-shell-script-header.template.sh).
+
 1. RECORD vocabulary.
 2. RED tests before code (TDD).
 3. RECORD vocabulary after tests/code.
