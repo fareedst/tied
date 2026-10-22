@@ -5,7 +5,8 @@
 ## Deliverables
 
 - Wave 1 capture + Wave 2 analysis under `docs/comparisons/andras-ludanyi-*`
-- `.gitignore` allowlist for both paths
+- Wave 1: LinkedIn Pulse source link + TL;DR only (no full article in repo)
+- `.gitignore` allowlist for both paths (initial commit `abaf92a0`)
 
 ## Completion signals
 
@@ -17,8 +18,11 @@
 
 - Optional `client-development-index.md` scenario row **Defer**
 - Wave 3 REQ **Defer** unless sponsor scopes `add-feature`
-- Workspace contains extensive unrelated dirty files — not included in this commit
+- Workspace contains extensive unrelated dirty files — not included in commits
 
-## Commit
+## Commits
 
-*(SHA recorded below after traceable-commit)*
+| Order | SHA | Summary |
+| --- | --- | --- |
+| 1 | `abaf92a04b536c16247d81b8d71bbf3f748df388` | Waves 1–2 + allowlist + initial CHANGELOG |
+| 2 | `57f34d8309f7a5fe76e3d41ba3dc427249c976b8` | Stub + LinkedIn source; no full article body (`proposed-commit-message.txt`) |

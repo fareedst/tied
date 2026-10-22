@@ -4,8 +4,8 @@
 | --- | --- |
 | **Purpose** | Map Andras Ludanyi’s **human-management critique of proxy metrics** (judgment, individuality, cooperation, contextual placement) to TIED as implemented in this repository—with emphasis on **proof boundaries**, sponsor–agent authority, and engineering evidence—not HR performance systems or article history as verified fact. |
 | **Audience** | Sponsors, managers, harness authors, prompt-type operators, methodology owners |
-| **Source URL** | User-supplied article text (2026-10-22); optional public URL **Defer** |
-| **Article capture (sibling)** | [andras-ludanyi-illusion-of-measurement-judgment-cooperation.md](andras-ludanyi-illusion-of-measurement-judgment-cooperation.md) — read-only; **reference only** |
+| **Source URL** | [LinkedIn Pulse — Ludanyi, 2026-10-22](https://www.linkedin.com/pulse/illusion-measurement-judgment-individuality-teams-andras-ludanyi-k7ave/) (**Ludanyi-reported**); full text **not** in repo — [sibling stub](andras-ludanyi-illusion-of-measurement-judgment-cooperation.md) |
+| **Article reference (sibling)** | [andras-ludanyi-illusion-of-measurement-judgment-cooperation.md](andras-ludanyi-illusion-of-measurement-judgment-cooperation.md) — metadata + TL;DR only; **reference only** |
 | **Status / date** | Outreach / analysis snapshot, **2026-10-22** — **reference only; this document does not mint REQ/ARCH/IMPL tokens** |
 | **Executable follow-up** | *(Wave 3: optional glossary RECORD or client-devops appendix pointer only—**Defer** unless sponsor scopes add-feature)* |
 | **Distinct from** | [LangChain harness × TIED](langchain-harness-engineering-vs-tied-agent-management.md) (trace/benchmark harness metrics); [Cursor harness × TIED](cursor-harness-engineering-vs-tied-agent-management.md) (Keep Rate / product telemetry); [QMM Kaizen × TIED](qmm-kaizen-vs-tied.md) (Kaizen loops and proof boundaries); [TIED vs well-known methodologies](tied-vs-well-known-methodologies.md) (broad methodology map) |
@@ -15,13 +15,13 @@
 
 ## Executive summary
 
-Ludanyi’s article (**user-supplied** capture) argues that organizational excellence rests on **qualitative managerial judgment**, **distinct individual capability**, **cross-domain translators**, **contextual placement and support**, and **intentional cooperation**—and that proxy metrics (velocity, pull requests, cycle time, ticket counts) create an **illusion of measurement** for inherently qualitative human contribution.
+Ludanyi’s article (summarized from sponsor-read content; **not** reproduced in repo) argues that organizational excellence rests on **qualitative managerial judgment**, **distinct individual capability**, **cross-domain translators**, **contextual placement and support**, and **intentional cooperation**—and that proxy metrics (velocity, pull requests, cycle time, ticket counts) create an **illusion of measurement** for inherently qualitative human contribution.
 
 TIED’s center of gravity is different but **complementary**. TIED governs **software change and agent-assisted delivery**: intent traceability (requirements → architecture → implementation → tests → code), mechanical vs human judgment splits, checklist gates, quality evidence manifests, Kaizen-style **`not_measured`** / **`inconclusive`** outcomes, and the sponsor **consequence ladder** for **costly choices**. TIED does **not** model employee performance management, HR placement, or team chemistry as authoritative core semantics.
 
 **Compose-don’t-replace:** Use TIED to make **engineering and agent-governance evidence boundaries** inspectable; retain **manager and sponsor judgment** for people, context, and irreversible organizational choices. Both traditions warn against treating **proxy counts** as authority—for people in the article; for **artifact conformance mistaken for product quality or people merit** in TIED.
 
-| Center of gravity | Ludanyi article (**user-supplied**) | TIED (this repo) |
+| Center of gravity | Ludanyi article (off-repo; **Ludanyi-reported** summary) | TIED (this repo) |
 | --- | --- | --- |
 | Primary subject | Human performance, team design, managerial judgment | Intent traceability, test-backed change, agent/sponsor authority |
 | “Measurement” critique | Velocity/PR-style proxies for human contribution | Checklist counts, token coverage, consistency checks mistaken for quality or merit |
@@ -31,9 +31,9 @@ TIED’s center of gravity is different but **complementary**. TIED governs **so
 
 ---
 
-## Source summary (Ludanyi / user-supplied claims only)
+## Source summary (Ludanyi claims only — off-repo)
 
-Bullets summarize the capture. Historical and empirical claims are **user-supplied** / **Ludanyi-reported**—not independently verified in this repository.
+Bullets summarize the sibling **TL;DR** (full text not in repo). Historical and empirical claims are **Ludanyi-reported**—not independently verified in this repository.
 
 - **Illusion of measurement:** Complex human capabilities cannot be “measured” in a physical sense; impact, effectiveness, and performance are qualitative and contextual. Proxy indicators (velocity, pull requests, cycle times, ticket counts) substitute bureaucratic control for managerial insight (**user-supplied**).
 - **Judgment vs metrics:** Evaluation requires active, qualitative observation—who needs support, who should lead, who should mentor, who are **translators** bridging domain, product, and architecture. Prevented mistakes and clarified requirements may show low personal output on charts (**user-supplied**).
@@ -126,7 +126,7 @@ The article is not a harness post; subsections map **management themes** to TIED
 
 | Label | Use when |
 | --- | --- |
-| **Ludanyi-reported** / **user-supplied** | Article prose and historical citations in capture |
+| **Ludanyi-reported** | Article claims and historical citations (off-repo; summarized in sibling TL;DR) |
 | **TIED-existing** | Committed docs/tools in this repo |
 | **Recommendation-only** | Operator suggestions not implemented |
 | **`not_measured`** | Effectiveness of TIED on teams or correctness of article history |
@@ -223,7 +223,7 @@ Manager and HR systems sit **outside** TIED’s authoritative core. TIED ingests
 
 | Phase | Action | Status |
 | --- | --- | --- |
-| **0** | This capture + analysis + git allowlist | **Done** (2026-10-22 outreach) |
+| **0** | Reference stub + analysis + git allowlist (no full article in repo) | **Done** (2026-10-22 outreach) |
 | **1** | Optional glossary RECORD for “illusion of measurement” as outreach label | **Defer** (reversible; sponsor choice) |
 | **1** | Optional row in [client-development-index.md](../../tied-bundle/docs/client-development-index.md) external three-wave table | **Defer** (plan: optional index touch) |
 | **2+** | Wave 3 REQ for HR/performance features | **Defer** — explicit non-adoption unless sponsor opens scope |
@@ -252,7 +252,7 @@ Manager and HR systems sit **outside** TIED’s authoritative core. TIED ingests
 
 ## Related documents
 
-- [Article capture (sibling)](andras-ludanyi-illusion-of-measurement-judgment-cooperation.md)
+- [Article reference stub (sibling)](andras-ludanyi-illusion-of-measurement-judgment-cooperation.md)
 - [External three-wave comparison template](../../tied-bundle/docs/external-service-three-wave-comparison-template.md)
 - [LangChain harness × TIED](langchain-harness-engineering-vs-tied-agent-management.md)
 - [Cursor harness × TIED](cursor-harness-engineering-vs-tied-agent-management.md)

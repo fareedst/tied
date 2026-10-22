@@ -21,3 +21,10 @@ Immature-client deferral: no new durable glossary RECORD; RESOLVE mappings live 
 
 - Receipt: [git-hygiene-receipt-2026-10-22.md](git-hygiene-receipt-2026-10-22.md)
 - Scoped commit excludes unrelated workspace drift (162+ dirty paths).
+
+## Commits (traceable)
+
+| SHA | Message |
+| --- | --- |
+| `abaf92a04b536c16247d81b8d71bbf3f748df388` | `docs(comparisons): Ludanyi judgment × TIED Waves 1–2` |
+| `57f34d8309f7a5fe76e3d41ba3dc427249c976b8` | `docs(comparisons): Ludanyi stub LinkedIn source, no full text` |
