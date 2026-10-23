@@ -22,6 +22,8 @@
 - Optional client-development-index row (**Defer**)
 - Unrelated workspace dirty files excluded from commit
 
-## Commit
+## Commits
 
-See [traceable-commit-evidence.md](traceable-commit-evidence.md) for SHA after traceable-commit step.
+| SHA | Summary |
+| --- | --- |
+| `eb501dae3e5e6709ee231210668efcfb1f78731c` | Wave 2 analysis, allowlist, CHANGELOG, working evidence |

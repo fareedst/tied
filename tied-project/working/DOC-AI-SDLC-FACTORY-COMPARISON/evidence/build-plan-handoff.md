@@ -3,14 +3,15 @@
 | Field | Value |
 | --- | --- |
 | **Date** | 2026-10-23 |
-| **Plan** | [PLAN-refine-pass1.md](../PLAN-refine-pass1.md) |
+| **Plan (authoritative)** | [PLAN-refine-pass2.md](../PLAN-refine-pass2.md) |
+| **Prior plan** | [PLAN-refine-pass1.md](../PLAN-refine-pass1.md) |
 
 ## Deliverables
 
 | Item | Path | Status |
 | --- | --- | --- |
-| Git allowlist | `.gitignore` → `!docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md` | Done |
-| Wave 2 analysis | [docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md](../../../../docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md) | Done |
+| Git allowlist | `.gitignore` → `!docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md` | Done (committed) |
+| Wave 2 analysis | [docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md](../../../../docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md) | Done (committed `eb501dae`) |
 
 ## Verification (doc-only)
 
@@ -19,20 +20,36 @@
 - Evidence boundary states target tests not re-run in stdd.
 - `tied_validate_consistency`: skipped (no project YAML mutated).
 
-## Gates
+## Gates (2026-10-23 build-plan pass 2 re-check)
 
-- `pre_implementation`: **allowed: false** (outreach tracker schema; same class as sibling DOC comparisons).
-- **Close-out:** deferred — not a behavior-changing REQ; sponsor may commit or run **close-out** for envelope if desired.
+| Phase | `allowed` | Diagnostic |
+| --- | --- | --- |
+| `pre_implementation` | **false** | `malformed_citdp:adversarial_inquiry` |
+| `verification` | **false** | `malformed_citdp:adversarial_inquiry`; hydration `hydration_psa_missing_request_token` |
+
+Outreach `DOC-*` tracker has no enrolled CITDP; blocked gates are **documented limitations**, not authorization to add integrated inquiry or behavior-changing work to this doc-only wave.
 
 ## Completion signals (build-plan)
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | **Deferred** |
-| Process contract (Tracker doc steps) | Deliverables done; commit pending |
-| Adherence ledger | N/A for doc-only |
+| Machine close-out | **Deferred / blocked** — no REQ envelope; machine gates `allowed: false` |
+| Process contract (Tracker doc steps) | **pass** — deliverables committed; doc verification recorded |
+| Adherence ledger | **not_run** — doc-only minimal depth |
 
-## Suggested commit message (sponsor)
+## Build-plan pass 2 outcome
+
+**No implementation actions.** Pass 2 reconciled pass 1 “future deliverables” with committed state. Re-invoking `build-plan` on pass 2 is an idempotent confirmation only; do not re-edit the comparison unless scope expands.
+
+## Remaining sponsor choices
+
+| Choice | Status |
+| --- | --- |
+| Commit scoped doc/working evidence | **Done** — `eb501dae` (see [traceable-commit-evidence.md](./traceable-commit-evidence.md)) |
+| Optional **close-out** for envelope sync | **Deferred** — not required for Wave 2 outreach |
+| Promote recommendations to TIED behavior/YAML | **Deferred** — new scoped `add-feature` / `build-plan` with REQ/ARCH/IMPL |
+
+## Suggested commit message (historical — applied in `eb501dae`)
 
 ```
 Add Wave 2 comparison of AI-SDLC ATDD Software Factory to TIED.

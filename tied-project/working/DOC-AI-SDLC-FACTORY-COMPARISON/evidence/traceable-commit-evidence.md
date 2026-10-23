@@ -24,3 +24,9 @@ Same class as [DOC-LUDANYI-MANAGER-COMPARISON traceable-commit-evidence.md](../.
 ## Hygiene
 
 - Receipt: [git-hygiene-receipt-2026-10-23.md](git-hygiene-receipt-2026-10-23.md)
+
+## Commits (traceable)
+
+| SHA | Message |
+| --- | --- |
+| `eb501dae3e5e6709ee231210668efcfb1f78731c` | `docs(comparisons): AI-SDLC factory × TIED Wave 2` |

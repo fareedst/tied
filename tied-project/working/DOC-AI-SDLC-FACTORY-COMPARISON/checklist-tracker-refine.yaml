@@ -22,7 +22,7 @@ steps:
     status: done
   pre_implementation:
     status: blocked
-    notes: "tied_checklist_gate_validate allowed:false — outreach DOC token; invalid_slug on custom steps; minimal depth missing sub-adversarial-inquiry-pass per full Tracker schema. Doc-only deliverables completed per PLAN."
+    notes: "tied_checklist_gate_validate allowed:false — prior outreach DOC token validation reported invalid_slug/custom-step and minimal-depth schema diagnostics; latest read-only validation (2026-10-23) reported malformed_citdp:adversarial_inquiry. No implementation is authorized or pending; doc-only deliverables are complete per PLAN."
   implement-doc-deliverables:
     status: done
     notes: ".gitignore allowlist + docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md"
@@ -31,7 +31,7 @@ steps:
     notes: "Doc test strategy — token grep (reference-only REQ-REQUEST_EVIDENCE_ENVELOPE OK), 14 sections, Factory-reported labels; tied_validate_consistency skipped (no YAML)."
   traceable-commit:
     status: done
-    notes: "2026-10-23 close-out scoped commit; see evidence/traceable-commit-evidence.md"
+    notes: "2026-10-23 scoped commit eb501dae; build-plan pass2 (2026-10-23) reconciled — no further doc deliverables"
   close_out:
     status: done
     notes: "Minimal outreach — machine gate blocked; Ludanyi-class doc close-out with handoff evidence."
