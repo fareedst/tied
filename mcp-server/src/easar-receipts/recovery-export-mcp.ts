@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { safeStringifyJson } from "../storage-dump.js";
 import { getClientProjectRoot } from "../yaml-loader.js";
 import { tryPatchArtifactFile } from "../request-evidence-envelope/hooks.js";
 import {
@@ -72,7 +73,7 @@ export function buildEasarRecoveryExport(
     const rel = input.manifest_output_path.replace(/\\/g, "/");
     const absolute = path.isAbsolute(rel) ? rel : path.join(projectRoot, rel);
     fs.mkdirSync(path.dirname(absolute), { recursive: true });
-    fs.writeFileSync(absolute, `${JSON.stringify(built.manifest, null, 2)}\n`, "utf8");
+    fs.writeFileSync(absolute, safeStringifyJson(built.manifest), "utf8");
     written_manifest_path = path.relative(projectRoot, absolute).split(path.sep).join("/");
     void tryPatchArtifactFile({
       request_token: input.request_token,

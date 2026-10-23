@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 
+import { safeDumpYaml } from "../storage-dump.js";
+
 export type ConstitutionScope = "requirements" | "architecture" | "implementation" | "task_plans" | "citdp";
 export type Constitution = {
   schema_version: "project-constitution.v1";
@@ -79,7 +81,7 @@ export class ProjectConstitutionStore {
     if (!result.ok) throw new Error(result.error);
     fs.mkdirSync(path.dirname(this.path), { recursive: true });
     const temporary = `${this.path}.${process.pid}.${crypto.randomUUID()}.tmp`;
-    fs.writeFileSync(temporary, yaml.dump(result.constitution, { sortKeys: true, lineWidth: -1 }), "utf8");
+    fs.writeFileSync(temporary, safeDumpYaml(result.constitution), "utf8");
     fs.renameSync(temporary, this.path);
     return result.constitution;
   }

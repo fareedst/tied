@@ -9,6 +9,7 @@ import path from "node:path";
 
 import yaml from "js-yaml";
 
+import { safeDumpYaml } from "../storage-dump.js";
 import {
   hashScope,
   isForbiddenIntentPath,
@@ -632,7 +633,7 @@ export function renderStatisticsReportYaml(report: EvidenceChainStatisticsReport
   // [IMPL-EVIDENCE_CHAIN_REPORT] [ARCH-EVIDENCE_CHAIN_REPORT] [REQ-EVIDENCE_CHAIN_REPORT]
   // How: Write the authoritative evidence-chain-statistics-report.v1 document with stable key order.
   assertNoForbiddenReportKeys(report);
-  return yaml.dump(report, { sortKeys: true, lineWidth: -1, noRefs: true });
+  return safeDumpYaml(report);
 }
 
 export function renderStatisticsReportMarkdown(report: EvidenceChainStatisticsReport): string {

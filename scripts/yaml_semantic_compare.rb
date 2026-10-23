@@ -166,9 +166,10 @@ class DifferenceWalker
     @record_list_keys.include?(key.to_s)
   end
 
+  ORDERED_LIST_KEY_PATTERN = /\A(?:order|order_.*|.*_order|.*_order_.*|steps|steps_.*|.*_steps|.*_steps_.*|_order|_order_.*|_seq|_seq_.*|_sequence|_sequence_.*|.*_seq|.*_sequence|seq_.*|sequence_.*)\z/
+
   def ordered_list_key?(key)
-    key_text = key.to_s
-    key_text.match?(/\A(?:order|order_.+|.+_order|.+_order_.+)\z/)
+    key.to_s.match?(ORDERED_LIST_KEY_PATTERN)
   end
 
   def compare_ordered_arrays(left, right, path, result)

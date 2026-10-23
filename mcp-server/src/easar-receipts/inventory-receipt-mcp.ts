@@ -10,6 +10,7 @@ import path from "node:path";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 import { getClientProjectRoot } from "../yaml-loader.js";
 import { tryPatchArtifactFile } from "../request-evidence-envelope/hooks.js";
+import { safeStringifyJson } from "../storage-dump.js";
 import { INVENTORY_V1_SCHEMA, buildInventoryV1FromWalkSummary } from "./inventory-v1.js";
 
 export type BuildEasarInventoryReceiptInput = {
@@ -72,7 +73,7 @@ export async function buildEasarInventoryReceipt(
       ? relative
       : path.join(projectRoot, relative);
     fs.mkdirSync(path.dirname(absolute), { recursive: true });
-    fs.writeFileSync(absolute, `${JSON.stringify(inventory, null, 2)}\n`, "utf8");
+    fs.writeFileSync(absolute, safeStringifyJson(inventory), "utf8");
     written_path = path.relative(projectRoot, absolute).split(path.sep).join("/");
     void tryPatchArtifactFile({
       request_token: input.request_token,

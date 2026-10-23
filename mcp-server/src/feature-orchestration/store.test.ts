@@ -22,7 +22,10 @@ describe("FEATURE_STORE REQ-FEAT_STORE_PERSISTENCE", () => {
     const manifest = store.createManifest(allocation);
     store.publish(allocation.directory_name, manifest);
     assert.deepEqual(store.read(allocation.directory_name), manifest);
-    assert.match(fs.readFileSync(path.join(root, allocation.directory_name, "feature.yaml"), "utf8"), /feature_id: FEAT-001/);
+    assert.match(
+      fs.readFileSync(path.join(root, allocation.directory_name, "feature.yaml"), "utf8"),
+      /feature_id:\s*"?FEAT-001"?/,
+    );
   });
 
   it("rejects traversal and preserves the old file when publication fails", () => {

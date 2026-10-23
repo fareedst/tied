@@ -7,6 +7,8 @@ import yaml from "js-yaml";
 import {
   canonicalizeValue,
   formatYamlMetadata,
+  isOrderedListKey,
+  ORDERED_LIST_KEY_PATTERN,
   RECORD_LIST_REGISTRY,
   writeCanonicalYamlAtomic,
 } from "./yaml-canonicalizer.js";
@@ -103,6 +105,37 @@ test("preserves every ordered-list key variant REQ-TIED_YAML_CANONICALIZATION", 
   assert.deepEqual(result.ordinary, ["a", "b"]);
 });
 
+// [IMPL-TIED_YAML_CANONICALIZER] [REQ-TIED_YAML_CANONICALIZATION]
+test("preserves seq and sequence ordered-list key variants ORD-SEQ", () => {
+  const value = {
+    _seq_foo: ["b", "a"],
+    _sequence_bar: ["b", "a"],
+    workflow_seq: ["b", "a"],
+    tdd_sequence: ["step-2", "step-1"],
+    seq_steps: ["b", "a"],
+    sequence_phases: ["b", "a"],
+    resource_sequence_id: ["z", "a"],
+    cross_references: ["z", "a"],
+  };
+
+  const result = canonicalizeValue(value) as Record<string, unknown>;
+
+  assert.deepEqual(result._seq_foo, ["b", "a"]);
+  assert.deepEqual(result._sequence_bar, ["b", "a"]);
+  assert.deepEqual(result.workflow_seq, ["b", "a"]);
+  assert.deepEqual(result.tdd_sequence, ["step-2", "step-1"]);
+  assert.deepEqual(result.seq_steps, ["b", "a"]);
+  assert.deepEqual(result.sequence_phases, ["b", "a"]);
+  assert.deepEqual(result.resource_sequence_id, ["a", "z"], "ORD-NEG-SUFFIX-ID");
+  assert.deepEqual(result.cross_references, ["a", "z"], "SET-SORT");
+});
+
+test("isOrderedListKey matches documented pattern ORD-TDD-SEQUENCE", () => {
+  assert.equal(isOrderedListKey("tdd_sequence"), true);
+  assert.equal(isOrderedListKey("resource_sequence_id"), false);
+  assert.equal(ORDERED_LIST_KEY_PATTERN.includes("_seq"), true);
+});
+
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 // How: Exclude block-scalar bodies and IMPL pseudo-code sidecars from recursive semantic normalization; preserve their internal text structure.
 test("preserves opaque block-scalar bodies REQ-TIED_YAML_CANONICALIZATION", () => {
@@ -130,7 +163,7 @@ test("reports tied-yaml-canonical-v1 metadata REQ-TIED_YAML_CANONICALIZATION", (
       metadata.recursive_key_order,
       "case-insensitive-primary locale-independent lexical with original-value tie-break",
     );
-    assert.equal(metadata.ordered_list_key_pattern, "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*");
+    assert.equal(metadata.ordered_list_key_pattern, ORDERED_LIST_KEY_PATTERN);
     assert.equal(metadata.string_list_rule, "sort all-string lists except ordered-list keys");
     assert.equal(
       metadata.record_list_rule,

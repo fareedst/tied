@@ -5,6 +5,7 @@
 
 import { createHash } from "node:crypto";
 
+import { stableJsonForHash } from "../storage-dump.js";
 import type { ValidationGrader } from "./validation-cases-v1.js";
 
 export const VALIDATION_RESULTS_V1_SCHEMA = "validation-results.v1";
@@ -30,7 +31,7 @@ export type ValidationResultsV1 = {
 };
 
 function stableHash(value: unknown): string {
-  return createHash("sha256").update(JSON.stringify(value), "utf8").digest("hex");
+  return createHash("sha256").update(stableJsonForHash(value), "utf8").digest("hex");
 }
 
 // [IMPL-TIED_EASAR_RECEIPTS] [REQ-TIED_EASAR_RECOVERY] — RUN_EASAR_VALIDATION_SUITE_V1 POST

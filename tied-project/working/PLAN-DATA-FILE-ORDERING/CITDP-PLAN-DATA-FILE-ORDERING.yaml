@@ -1,0 +1,105 @@
+CITDP-PLAN-DATA-FILE-ORDERING:
+  record_identity:
+    citdp_id: CITDP-PLAN-DATA-FILE-ORDERING
+    title: "Sponsor data-ordering preference — ordered-key naming, set sorting, JSON profile"
+    status: implemented
+    parent_citdp: CITDP-REQ-TIED_YAML_CANONICALIZATION-record-aware
+    created_at: "2026-10-23"
+    updated_at: "2026-10-23-build-plan"
+  change_definition:
+    current_behavior: "tied-yaml-canonical-v1 sorts map keys and all-string lists except ordered-list keys matching order/steps patterns only. MCP index/detail writes use safeDump/writeCanonicalValueAtomic; many tool paths still call raw yaml.dump or JSON.stringify without canonicalizeValue. Ruby yaml_semantic_compare ordered_list_key? lags TypeScript (missing steps*). Authors receive no schema guidance for set vs ordered list key names (_seq/_sequence)."
+    requested_change: "Extend ordered-list key detection with sponsor _order/_seq/_sequence naming (prefix and suffix families). Introduce shared storage marshalling (YAML + JSON) via canonicalizeForStorage/safeStringifyJson. Migrate prioritized production writers. Document generation-time conventions. LEAP REQ-TIED_YAML_CANONICALIZATION and IMPL-TIED_YAML_CANONICALIZER IS_ORDERED_LIST_KEY."
+    scope_in:
+      - "mcp-server/src/yaml-canonicalizer.ts and tests"
+      - "mcp-server/src/storage-dump.ts (or yaml-dump extension) and tests"
+      - "scripts/yaml_list_sorter.rb, yaml_semantic_compare.rb, yaml_list_sorter_test.rb"
+      - "Production YAML writers listed in PLAN-refine-pass2.md (8 modules, 9 call sites)"
+      - "Phased JSON writers (~42 production .ts files; slice 1 = hashed/diffed gate artifacts)"
+      - "tied-bundle/docs/detail-files-schema.md, processes.md"
+      - "tools/bundled-tied-yaml-skill/SKILL.md (and client install stub via refresh)"
+      - "REQ-TIED_YAML_CANONICALIZATION LEAP (satisfaction_criteria + detail)"
+      - "IMPL-TIED_YAML_CANONICALIZER-pseudocode.md IS_ORDERED_LIST_KEY block"
+      - "ARCH-TIED_YAML_CANONICAL_PROFILE decision text (ordered_list_key_pattern)"
+    scope_out:
+      - "Mass rename of existing YAML keys (e.g. migrating every traceability list)"
+      - "client_formatter hook behavior"
+      - "New MCP lint tool tied_storage_format_hint"
+      - "Sorting unregistered object lists or mixed lists"
+    target_behavior: "All supported TIED marshalling surfaces emit deterministic bytes: lexical map keys, sorted string sets, ordered lists only under recognized key names including _seq/_sequence families; JSON gate artifacts use the same canonical tree; TS/Ruby/s semantic-compare stay aligned."
+  impact_analysis:
+    requirements:
+      - REQ-TIED_YAML_CANONICALIZATION
+      - REQ-TIED_YAML_STYLE_CONFIGURATION
+    architecture:
+      - ARCH-TIED_YAML_CANONICAL_PROFILE
+    implementation_decisions:
+      - IMPL-TIED_YAML_CANONICALIZER
+      - IMPL-TIED_YAML_STYLE_RESOLVER
+    processes:
+      - PROC-YAML_EDIT_LOOP
+  risk_analysis:
+    adversarial_inquiry:
+      profile_depth: minimal
+      depth_tier: minimal
+      gate_policy: advisory
+      assurance_profile: baseline-functional
+      research_profile: integrated-agent
+      prior_depth_tier: minimal
+      rationale: "Serialization contract extension on implemented REQ; bounded fixture matrix; no new auth/network. JSON hash churn is operational not security."
+      falsification_questions:
+        - "Does *_sequence accidentally treat non-workflow lists as ordered?"
+        - "Do Ruby and TS disagree after pattern extension?"
+      counterexamples:
+        - "A key ending in _sequence (e.g. custom_sequence) becomes order-preserving where authors expected a sorted set."
+        - "JSON canonicalization breaks a test that pinned pre-canonical hash without updating fixture."
+      disconfirming_observations:
+        - "tdd_sequence lists preserve workflow order once *_sequence matches."
+        - "Semantic compare accepts set sort, rejects ordered-key reorder."
+      evidence_references:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md"
+        - "mcp-server/src/yaml-canonicalizer.ts"
+    risks:
+      - id: RISK-SEQ-SUFFIX
+        description: "Suffix *_sequence matches tdd_sequence and similar workflow keys — changes sort behavior for those lists."
+        mitigation: "Treat as intended (workflow sequences); add explicit test vectors; document in CHANGELOG."
+      - id: RISK-JSON-HASH
+        description: "Consumers pinning SHA of raw JSON may see one-time byte change."
+        mitigation: "Phased migration; note in CHANGELOG; update tests that hash serialized output."
+      - id: RISK-RUBY-DRIFT
+        description: "yaml_semantic_compare still narrower than TS after edit."
+        mitigation: "Single documented pattern table; mirror tests in Ruby."
+  test_strategy:
+    matrix_notes:
+      - "RED-first: extend ordered-key matrix before implementation"
+      - "No UI E2E; module tests + Ruby sorter + yaml_tool smoke"
+    cases:
+      - id: ORD-SEQ-PREFIX
+        expectation: "_seq_foo and _sequence_foo preserve list order"
+      - id: ORD-SEQ-SUFFIX
+        expectation: "foo_seq and foo_sequence preserve list order"
+      - id: ORD-TDD-SEQUENCE
+        expectation: "tdd_sequence preserves document order (suffix _sequence)"
+      - id: ORD-NEG-SUFFIX-ID
+        expectation: "resource_sequence_id string list sorts (suffix _sequence does not match _id)"
+      - id: SET-SORT
+        expectation: "cross_references string list sorts lexically"
+      - id: JSON-STABLE
+        expectation: "safeStringifyJson twice yields identical bytes"
+      - id: RUBY-PARITY
+        expectation: "yaml_list_sorter and semantic_compare match TS for new patterns"
+      - id: WRITER-SMOKE
+        expectation: "At least one migrated YAML writer round-trips through canonical profile"
+  completion_criteria:
+    - "IMPL IS_ORDERED_LIST_KEY pseudo-code LEAP with token comments"
+    - "REQ satisfaction_criteria mention _seq/_sequence and JSON marshalling"
+    - "npm test --prefix mcp-server and ruby scripts/yaml_list_sorter_test.rb green"
+    - "lint_yaml on changed project YAML if any"
+    - "tied_validate_consistency ok after REQ LEAP"
+  tdd_sequence:
+    - "Extend yaml-canonicalizer.test.ts ordered-key cases (RED)"
+    - "Implement isOrderedListKey + metadata (GREEN)"
+    - "Add storage-dump.ts + JSON unit test (RED/GREEN)"
+    - "Migrate YAML writer slice (RED composition if needed)"
+    - "Ruby parity + yaml_list_sorter_test.rb"
+    - "Docs + REQ LEAP + pseudocode_validate"
+    - "Phased JSON writer slice with hash fixture updates"

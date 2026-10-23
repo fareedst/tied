@@ -192,6 +192,7 @@ import {
 import { toolSafetyMcpTools } from "./tool-safety-mcp.js";
 import { projectOperationsMcpTools } from "./project-operations-mcp.js";
 import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
+import { patchIndependentProof } from "../request-evidence-envelope/independent-proofs.js";
 import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
 import { validateRequestEvidenceEnvelope } from "../request-evidence-envelope/validate.js";
 import { runAdherenceReconcile } from "./adherence-reconcile-runner.js";
@@ -3620,7 +3621,7 @@ export const allTools = [
     name: "tied_plumb_diff_impact_preview",
     config: {
       description:
-        "Deterministic plumb diff-style impact preview over git diffs. Scans staged/unstaged diff hunks for [REQ-*]/[ARCH-*]/[IMPL-*] tokens, maps impacted tokens to TIED decisions, and returns a versioned JSON report plus a human summary. No network/LLM calls.",
+        "Deterministic plumb diff-style impact preview over git diffs. Scans staged/unstaged diff hunks for [REQ-*]/[ARCH-*]/[IMPL-*] tokens, maps impacted tokens to TIED decisions, and returns impact-preview.v1 (default) or impact-preview.v2 when profile_path or use_default_profile is explicitly set. No network/LLM calls.",
       inputSchema: z.object({
         selection: z
           .enum(["staged", "unstaged", "both"])
@@ -3658,6 +3659,19 @@ export const allTools = [
           .describe(
             "Max total patch bytes scanned across all files."
           ),
+        profile_path: z
+          .string()
+          .optional()
+          .describe(
+            "Opt-in change-impact-profile.v1.yaml path (cwd-relative or absolute). Emits impact-preview.v2 when set."
+          ),
+        use_default_profile: z
+          .boolean()
+          .optional()
+          .default(false)
+          .describe(
+            "When true, load tied-project/change-impact-profile.v1.yaml under the git root."
+          ),
       }),
     },
     handler: async (args: {
@@ -3667,6 +3681,8 @@ export const allTools = [
       max_files?: number;
       max_patch_bytes?: number;
       max_total_patch_bytes?: number;
+      profile_path?: string;
+      use_default_profile?: boolean;
     }) => {
       const report = runPlumbDiffImpactPreview({
         selection: args.selection ?? "both",
@@ -4097,6 +4113,9 @@ export const allTools = [
         fail_on_process_gaps: z.boolean().optional().default(false).describe(
           "When true, process-adherence warn gaps fail validation (Wave 5 process-strict mode).",
         ),
+        fail_on_independent_proof_errors: z.boolean().optional().default(false).describe(
+          "When true, independent proof advisory gaps (missing boundary/hash) fail validation.",
+        ),
       }),
     },
     handler: async (args: {
@@ -4105,6 +4124,7 @@ export const allTools = [
       project_root?: string;
       fail_on_error_gaps?: boolean;
       fail_on_process_gaps?: boolean;
+      fail_on_independent_proof_errors?: boolean;
     }) => {
       try {
         const result = await validateRequestEvidenceEnvelope({
@@ -4113,6 +4133,7 @@ export const allTools = [
           project_root: args.project_root,
           fail_on_error_gaps: args.fail_on_error_gaps ?? false,
           fail_on_process_gaps: args.fail_on_process_gaps ?? false,
+          fail_on_independent_proof_errors: args.fail_on_independent_proof_errors ?? false,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {
@@ -4161,6 +4182,61 @@ export const allTools = [
           project_root: projectRoot,
           tied_base_path: tiedBasePath,
           confirmed_tied_base_path: confirmed,
+        });
+        return textContent(JSON.stringify(result, null, 2));
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        return textContent(JSON.stringify({ ok: false, gaps: [], error: msg }, null, 2));
+      }
+    },
+  },
+  {
+    name: "request_evidence_envelope_independent_proof_patch",
+    config: {
+      description:
+        "Append or update one independent_proofs[] record on request-evidence-envelope.v1 (metadata-only; no foreign verifier execution).",
+      inputSchema: z.object({
+        request_token: z.string().min(1),
+        project_root: z.string().optional(),
+        expected_revision: z.number().int().nonnegative().optional(),
+        generated_at: z.string().optional(),
+        proof: z.object({
+          proof_id: z.string().min(1),
+          role: z.enum(["asserted", "derived"]),
+          proof_kind: z.string().min(1),
+          locator: z.object({
+            path: z.string().optional(),
+            uri: z.string().optional(),
+            content_hash: z.string().optional(),
+          }),
+          verifier_hint: z.string().optional(),
+          scope_limits: z.array(z.string()).optional().default([]),
+          proof_boundary: z.string(),
+          review_status: z.enum(["pending", "verified_offline", "rejected"]),
+          reviewer_ref: z.string().optional(),
+          reviewed_at: z.string().optional(),
+        }),
+      }),
+    },
+    handler: async (args: {
+      request_token: string;
+      project_root?: string;
+      expected_revision?: number;
+      generated_at?: string;
+      proof: Parameters<typeof patchIndependentProof>[0]["proof"];
+    }) => {
+      try {
+        const confirmed = getBasePath();
+        const projectRoot = args.project_root ?? path.resolve(confirmed, "..");
+        const result = await patchIndependentProof({
+          request_token: args.request_token,
+          project_root: projectRoot,
+          proof: {
+            ...args.proof,
+            scope_limits: args.proof.scope_limits ?? [],
+          },
+          expected_revision: args.expected_revision,
+          generated_at: args.generated_at,
         });
         return textContent(JSON.stringify(result, null, 2));
       } catch (e) {

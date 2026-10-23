@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
+
+import { safeDumpYaml } from "../storage-dump.js";
 import type { LifecyclePhase } from "./manifest.js";
 
 export type ClarificationBlocking = "informational" | "req_authoring" | "arch_impl_authoring" | "red_tests";
@@ -113,7 +115,7 @@ export class ClarificationStore {
     if (!result.ok) throw new Error(result.error);
     fs.mkdirSync(target, { recursive: true });
     const temporary = `${currentPath}.${process.pid}.tmp`;
-    fs.writeFileSync(temporary, yaml.dump(result.sidecar, { sortKeys: true, lineWidth: -1 }), "utf8");
+    fs.writeFileSync(temporary, safeDumpYaml(result.sidecar), "utf8");
     fs.renameSync(temporary, currentPath);
     return result.sidecar;
   }

@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { safeStringifyJson } from "../storage-dump.js";
 import { getClientProjectRoot } from "../yaml-loader.js";
 import { tryPatchArtifactFile } from "../request-evidence-envelope/hooks.js";
 import {
@@ -52,7 +53,7 @@ export function buildEasarClaimMatrixMap(
       ? relative
       : path.join(projectRoot, relative);
     fs.mkdirSync(path.dirname(absolute), { recursive: true });
-    fs.writeFileSync(absolute, `${JSON.stringify(built.map, null, 2)}\n`, "utf8");
+    fs.writeFileSync(absolute, safeStringifyJson(built.map), "utf8");
     written_path = path.relative(projectRoot, absolute).split(path.sep).join("/");
     void tryPatchArtifactFile({
       request_token: input.request_token,

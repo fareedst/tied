@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { safeStringifyJson } from "../storage-dump.js";
 import { isValidWorkingRequestToken } from "../working-request-token.js";
 import { workingPathRelativeToProject } from "../working-root.js";
 import {
@@ -119,7 +120,7 @@ export function captureTrajectoryManifest(
   }
 
   const outcome = outcomeRedacted.value as RunOutcomeSummary;
-  const rawJson = `${JSON.stringify(rawRedacted.value, null, 2)}\n`;
+  const rawJson = safeStringifyJson(rawRedacted.value);
   const rawHash = contentHashHex(rawJson);
 
   const localResolved = resolveLocalTrajectoryPath(
@@ -176,7 +177,7 @@ export function captureTrajectoryManifest(
     );
     const evidenceAbs = path.join(input.project_root, evidenceRel);
     fs.mkdirSync(path.dirname(evidenceAbs), { recursive: true });
-    fs.writeFileSync(evidenceAbs, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+    fs.writeFileSync(evidenceAbs, safeStringifyJson(manifest), "utf8");
     manifestRelative = evidenceRel;
   }
 

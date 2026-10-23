@@ -7,6 +7,7 @@ import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
+import { safeStringifyJson, stableJsonForHash } from "../storage-dump.js";
 import { tiedSourceGraphFreshness } from "../source-graph/mcp-handlers.js";
 import { getClientProjectRoot } from "../yaml-loader.js";
 import { tryPatchArtifactFile } from "../request-evidence-envelope/hooks.js";
@@ -44,7 +45,7 @@ function defaultFreshnessRunId(freshnessPayload: {
   index_path?: string;
   ok: boolean;
 }): string {
-  const canonical = JSON.stringify({
+  const canonical = stableJsonForHash({
     content_hash: freshnessPayload.content_hash ?? "",
     index_path: freshnessPayload.index_path ?? "",
     ok: freshnessPayload.ok,
@@ -97,7 +98,7 @@ export async function buildEasarCodeGraphMatrixReceipt(
       source_graph_ok: freshness.ok,
       source_graph_diagnostics: freshness.diagnostics,
     };
-    fs.writeFileSync(absolute, `${JSON.stringify(body, null, 2)}\n`, "utf8");
+    fs.writeFileSync(absolute, safeStringifyJson(body), "utf8");
     written_path = path.relative(projectRoot, absolute).split(path.sep).join("/");
     void tryPatchArtifactFile({
       request_token: input.request_token,

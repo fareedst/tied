@@ -85,6 +85,18 @@ This document describes the YAML structure for individual REQ, ARCH, and IMPL to
 
 ---
 
+## Set vs ordered list keys (generation)
+
+When authoring or generating TIED YAML (detail files, CITDP, working artifacts):
+
+- **Sets (sort before write):** Token lists and other unordered string collections (`cross_references`, `depends_on`, `related_to`, `code_annotations`, and similar) should be emitted in **case-insensitive-primary lexical order** (the `tied-yaml-canonical-v1` profile sorts all-string lists automatically, but generators should not rely on accidental document order).
+- **Ordered lists (preserve document order):** Workflow sequences must use a recognized **ordered-list key** name. Families include `order` / `steps` / `_order` / `_seq` / `_sequence` with prefix, suffix, or infix forms (see `yaml_format.ordered_list_key_pattern` from `tied_yaml_format` or MCP `formatYamlMetadata`).
+- **Suffix precision:** Only keys ending in `_sequence` (not `_sequence_id` or other suffixes) preserve list order; when in doubt, prefer `_seq_*` or `*_seq` for new workflow lists.
+
+Gate and receipt **JSON** under `tied-project/working/` should use the same canonical tree as YAML (`safeStringifyJson` / `canonicalizeForStorage` in `mcp-server/src/storage-dump.ts`).
+
+---
+
 ## Transformations enabled
 
 - **Validation**: Parse detail YAML; check token id matches filename; validate cross-reference tokens exist. Use the MCP tool `tied_validate_consistency` to validate indexes, detail files, REQ→ARCH→IMPL traceability, and IMPL `essence_pseudocode` token references.

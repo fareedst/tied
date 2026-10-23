@@ -9,6 +9,7 @@ import path from "node:path";
 
 import yaml from "js-yaml";
 
+import { safeDumpYaml } from "../storage-dump.js";
 import { buildRequestEvidenceEnvelope } from "./build.js";
 import type { ArtifactKind, ArtifactStatus, RequestEvidenceEnvelope } from "./types.js";
 import { validateRequestEvidenceEnvelope } from "./validate.js";
@@ -464,7 +465,7 @@ export async function collectEnvelopeGapReport(
     };
   }
 
-  const yamlBody = yaml.dump(report, { lineWidth: 120, noRefs: true, sortKeys: false });
+  const yamlBody = safeDumpYaml(report);
   const yamlPath = path.resolve(input.yamlOut);
   mkdirSync(path.dirname(yamlPath), { recursive: true });
   writeFileSync(yamlPath, yamlBody, "utf8");

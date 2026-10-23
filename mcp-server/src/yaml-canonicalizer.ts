@@ -12,6 +12,13 @@ import {
 
 export const YAML_FORMAT_PROFILE = "tied-yaml-canonical-v1";
 
+/** Human-readable ordered-list key naming families for metadata and ARCH contract. */
+export const ORDERED_LIST_KEY_PATTERN =
+  "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*|_order|_order_*|_seq|_seq_*|_sequence|_sequence_*|*_seq|*_sequence|seq_*|sequence_*";
+
+const ORDERED_LIST_KEY_REGEX =
+  /^(?:order|order_.*|.*_order|.*_order_.*|steps|steps_.*|.*_steps|.*_steps_.*|_order|_order_.*|_seq|_seq_.*|_sequence|_sequence_.*|.*_seq|.*_sequence|seq_.*|sequence_.*)$/;
+
 export type CanonicalYamlValue =
   | null
   | string
@@ -184,8 +191,14 @@ export function canonicalizeValue(value: unknown, parentKey?: string): Canonical
     return value;
   }
 
+  if (value === undefined) {
+    throw new TypeError("Unsupported YAML value: undefined");
+  }
+
   if (Array.isArray(value)) {
-    const mapped = value.map((item) => canonicalizeValue(item, parentKey));
+    const mapped = value
+      .filter((item) => item !== undefined)
+      .map((item) => canonicalizeValue(item, parentKey));
     if (isOrderedListKey(parentKey)) {
       return mapped;
     }
@@ -199,7 +212,9 @@ export function canonicalizeValue(value: unknown, parentKey?: string): Canonical
   if (typeof value === "object") {
     const result: Record<string, CanonicalYamlValue> = {};
     for (const key of Object.keys(value as Record<string, unknown>).sort(compareLexical)) {
-      result[key] = canonicalizeValue((value as Record<string, unknown>)[key], key);
+      const child = (value as Record<string, unknown>)[key];
+      if (child === undefined) continue;
+      result[key] = canonicalizeValue(child, key);
     }
     return result;
   }
@@ -220,7 +235,7 @@ function compareCodeUnits(left: string, right: string): number {
 }
 
 export function isOrderedListKey(key: string | undefined): boolean {
-  return Boolean(key && /^(?:order|order_.*|.*_order|.*_order_.*|steps|steps_.*|.*_steps|.*_steps_.*)$/.test(key));
+  return Boolean(key && ORDERED_LIST_KEY_REGEX.test(key));
 }
 
 // [IMPL-TIED_YAML_STYLE_RESOLVER] [ARCH-TIED_YAML_STYLE_RESOLUTION] [REQ-TIED_YAML_STYLE_CONFIGURATION]
@@ -233,7 +248,7 @@ export function formatYamlMetadata(
     scalar_style: resolvedStyle.scalar_style,
     style_source: resolvedStyle.style_source,
     recursive_key_order: "case-insensitive-primary locale-independent lexical with original-value tie-break",
-    ordered_list_key_pattern: "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*",
+    ordered_list_key_pattern: ORDERED_LIST_KEY_PATTERN,
     string_list_rule: "sort all-string lists except ordered-list keys",
     record_list_rule:
       "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",

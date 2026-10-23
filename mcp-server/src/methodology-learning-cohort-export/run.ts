@@ -6,8 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import yaml from "js-yaml";
-
+import { safeDumpYaml } from "../storage-dump.js";
 import { isForbiddenIntentPath } from "../fidelity-research/evidence-chain-profile.js";
 import {
   generateEvidenceChainStatisticsReport,
@@ -178,7 +177,7 @@ export function runMethodologyLearningCohortExport(input: RunCohortExportInput):
   };
 
   fs.mkdirSync(path.dirname(yamlOut), { recursive: true });
-  fs.writeFileSync(yamlOut, yaml.dump(exportDoc, { lineWidth: 120 }), "utf8");
+  fs.writeFileSync(yamlOut, safeDumpYaml(exportDoc), "utf8");
 
   console.debug("TRACE: [IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT] wrote export", { yamlOut });
 

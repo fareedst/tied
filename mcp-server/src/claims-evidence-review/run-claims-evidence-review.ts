@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
+import { safeStringifyJson, stableJsonForHash } from "../storage-dump.js";
 import { promoteConfirmedCase } from "../fidelity-research/case-promotion.js";
 import { freezeClaimSurface } from "./claim-surface.js";
 import {
@@ -46,11 +47,11 @@ function writeJsonl(filePath: string, rows: unknown[]): void {
 
 function writeJson(filePath: string, value: unknown): void {
   fs.mkdirSync(path.dirname(filePath), { recursive: true, mode: 0o700 });
-  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, { encoding: "utf8", mode: 0o600 });
+  fs.writeFileSync(filePath, safeStringifyJson(value), { encoding: "utf8", mode: 0o600 });
 }
 
 function hashContent(value: unknown): string {
-  return crypto.createHash("sha256").update(JSON.stringify(value), "utf8").digest("hex");
+  return crypto.createHash("sha256").update(stableJsonForHash(value), "utf8").digest("hex");
 }
 
 export type RunClaimsEvidenceReviewInput = {

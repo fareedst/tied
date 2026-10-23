@@ -9,6 +9,8 @@ import path from "node:path";
 
 import yaml from "js-yaml";
 
+import { safeDumpYaml, safeStringifyJson, stableJsonForHash } from "../storage-dump.js";
+
 import type { ReflexionReportV1 } from "./reflexion-report-v1.js";
 
 export const RECOVERY_PORTABLE_MAP_V1_SCHEMA = "recovery-portable-map.v1";
@@ -73,7 +75,7 @@ export type VerificationReportExportV1 = {
 };
 
 function stableHash(value: unknown): string {
-  return createHash("sha256").update(JSON.stringify(value), "utf8").digest("hex");
+  return createHash("sha256").update(stableJsonForHash(value), "utf8").digest("hex");
 }
 
 function fileContentHash(content: string): string {
@@ -200,7 +202,7 @@ export function applyRecoveryTransform(
     if (!ctx.manifestDraft) {
       return { ok: false, error: "manifest_draft_missing" };
     }
-    const yamlBody = yaml.dump({
+    const yamlBody = safeDumpYaml({
       schema_version: "recovery-manifest.v1",
       request_token: ctx.manifestDraft.request_token,
       map_path: ctx.manifestDraft.map_path,
@@ -223,7 +225,7 @@ export function applyRecoveryTransform(
     case "copy_json": {
       const raw = fs.readFileSync(absolute, "utf8");
       const parsed = JSON.parse(raw) as unknown;
-      return { ok: true, content: `${JSON.stringify(parsed, null, 2)}\n`, source_kind };
+      return { ok: true, content: safeStringifyJson(parsed), source_kind };
     }
     case "copy_yaml": {
       const raw = fs.readFileSync(absolute, "utf8");
@@ -237,7 +239,7 @@ export function applyRecoveryTransform(
       const raw = fs.readFileSync(absolute, "utf8");
       const reflexion = JSON.parse(raw) as ReflexionReportV1;
       const report = reflexionToVerificationReportExport(reflexion);
-      return { ok: true, content: `${JSON.stringify(report, null, 2)}\n`, source_kind: "committed" };
+      return { ok: true, content: safeStringifyJson(report), source_kind: "committed" };
     }
     default:
       return { ok: false, error: `unsupported_transform:${slot.transform}` };

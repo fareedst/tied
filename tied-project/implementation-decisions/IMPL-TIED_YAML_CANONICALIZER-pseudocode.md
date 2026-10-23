@@ -192,11 +192,13 @@ procedure IS_ORDERED_LIST_KEY(key):
     EFFECTS: pure
 
   PRE: key is a string
-  POST: returns true for order, order_*, *_order, and *_order_*; otherwise false
+  POST: returns true for order, steps, and seq/sequence naming families (exact, prefix, suffix, infix); otherwise false
   EFFECTS: pure
   FAILURE_MODES: none
   TERMINATION: total
-  RETURN key equals "order" OR key matches "order_*" OR key matches "*_order" OR key matches "*_order_*"
+  RETURN key matches ordered-list pattern:
+    order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*|
+    _order|_order_*|_seq|_seq_*|_sequence|_sequence_*|*_seq|*_sequence|seq_*|sequence_*
 
 ## PRESERVE_OPAQUE_TEXT
 # [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
@@ -267,7 +269,7 @@ procedure REPORT_YAML_FORMAT():
   RETURN {
     profile_id: "tied-yaml-canonical-v1",
     recursive_key_order: "case-insensitive-primary locale-independent lexical with original-value tie-break",
-    ordered_list_key_pattern: "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*",
+    ordered_list_key_pattern: "order|order_*|*_order|*_order_*|steps|steps_*|*_steps|*_steps_*|_order|_order_*|_seq|_seq_*|_sequence|_sequence_*|*_seq|*_sequence|seq_*|sequence_*",
     string_list_rule: "sort all-string lists except ordered-list keys",
     record_list_rule: "tier-0/tier-1 heterogeneous list sorting: strings/arrays/keyless maps before keyed maps; registry and heuristic map lists sort by fieldName.fieldValue; ordered-list keys preserve document order",
     scalar_policy: "preserve string, boolean, number, and null types",

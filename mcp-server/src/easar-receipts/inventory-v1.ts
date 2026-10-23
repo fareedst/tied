@@ -5,6 +5,8 @@
 
 import { createHash } from "node:crypto";
 
+import { stableJsonForHash } from "../storage-dump.js";
+
 export const INVENTORY_V1_SCHEMA = "inventory.v1";
 
 export type InventoryV1 = {
@@ -34,7 +36,7 @@ function inferLanguages(files: string[]): string[] {
 }
 
 function stableHash(value: unknown): string {
-  return createHash("sha256").update(JSON.stringify(value), "utf8").digest("hex");
+  return createHash("sha256").update(stableJsonForHash(value), "utf8").digest("hex");
 }
 
 export type WalkSummaryInput = {

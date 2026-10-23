@@ -1,0 +1,100 @@
+copy_hygiene: Build-plan + close-out — PLAN-DATA-FILE-ORDERING (REQ-TIED_YAML_CANONICALIZATION extension).
+schema_version: checklist-tracker.v1
+name: plan-data-file-ordering-refine-tracker
+request_token: PLAN-DATA-FILE-ORDERING
+parent_requirement: REQ-TIED_YAML_CANONICALIZATION
+profile_depth: minimal
+depth_tier: minimal
+gate_policy: advisory
+change_class: serialization_profile_extension
+refine_pass: 2
+refine_pass_date: '2026-10-23'
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+execution_evidence:
+  request: PLAN-DATA-FILE-ORDERING
+  envelope_path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    status: build_plan_complete
+    gate_pre_implementation:
+      allowed: true
+      evidence_file: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/gate-pre_implementation-refine-pass2.json
+    gate_verification:
+      allowed: true
+      evidence_file: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json
+  completed:
+    - translate-sponsor-intent
+    - change-definition
+    - session-bootstrap
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - sub-adversarial-inquiry-pass
+    - resolve-pseudocode
+    - gate-pseudocode-validation
+    - unit-test-red
+    - verification-gate
+    - persist-citdp-record
+steps:
+  - id: translate-sponsor-intent
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md
+  - id: change-definition
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
+  - id: session-bootstrap
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md
+  - id: impact-discovery
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
+  - id: risk-assessment
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
+  - id: test-strategy
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md
+  - id: sub-adversarial-inquiry-pass
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/sub-adversarial-inquiry-pass-na.md
+  - id: resolve-pseudocode
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/implementation-decisions/IMPL-TIED_YAML_CANONICALIZER-pseudocode.md
+  - id: gate-pseudocode-validation
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json
+  - id: unit-test-red
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: mcp-server/src/yaml-canonicalizer.test.ts
+  - id: verification-gate
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json
+  - id: persist-citdp-record
+    disposition: completed
+    evidence_refs:
+      - kind: file_path
+        path: tied-project/citdp/CITDP-PLAN-DATA-FILE-ORDERING.yaml
+  - id: traceable-commit
+    disposition: pending
+    rationale: "Completes during close-out after close_out gate allows."

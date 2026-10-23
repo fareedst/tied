@@ -40,6 +40,10 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
 - **`TIED_MCP_METRICS_PATH`** — optional override; default `~/.cursor/logs/tied-mcp-metrics.jsonl`.
 - Analyze with **`scripts/analyze_tied_mcp_metrics.rb`** in the TIED repo (see `docs/conversation-analysis-tools.md`). Traceability: [REQ-MCP_USAGE_METRICS], [IMPL-MCP_USAGE_METRICS].
 
+### Set vs ordered list keys (generation)
+
+Before writing generated YAML, sort **set-like** string lists (`cross_references`, traceability token lists, etc.) lexically. Name **workflow sequences** with ordered-list keys (`_seq_*`, `*_seq`, `*_order`, `steps`, `tdd_sequence`, …) so `tied-yaml-canonical-v1` preserves list order. See `tied-bundle/docs/detail-files-schema.md` § Set vs ordered list keys and `yaml_format.ordered_list_key_pattern` from `tied_yaml_format`.
+
 ### Repository YAML scalar style
 
 Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `tied-project/config.yaml` at the client project root (the parent of `TIED_BASE_PATH`). Resolution precedence is:

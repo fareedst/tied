@@ -1,0 +1,13 @@
+feat(yaml): extend ordered-list keys and storage marshalling
+
+Extend tied-yaml-canonical-v1 with _seq/_sequence ordered-list families,
+shared storage-dump marshalling for YAML and JSON slice-1 writers, Ruby/TS
+parity, and LEAP on REQ-TIED_YAML_CANONICALIZATION.
+
+Tokens: REQ-TIED_YAML_CANONICALIZATION, ARCH-TIED_YAML_CANONICAL_PROFILE,
+IMPL-TIED_YAML_CANONICALIZER.
+
+Completion signals: close_out gate allowed; envelope blocking_gaps=0;
+reconcile process_grade A.
+
+Plan: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md

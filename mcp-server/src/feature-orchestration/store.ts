@@ -2,6 +2,8 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
+
+import { safeDumpYaml } from "../storage-dump.js";
 import { validateManifest, type FeatureManifest } from "./manifest.js";
 
 export type Allocation = {
@@ -217,7 +219,7 @@ export class FeatureStore {
     const temporary = path.join(directory, `.feature.yaml.${process.pid}.${crypto.randomUUID()}.tmp`);
     try {
       fs.mkdirSync(directory, { recursive: true });
-      fs.writeFileSync(temporary, yaml.dump(validation.manifest, { sortKeys: true, lineWidth: -1 }), "utf8");
+      fs.writeFileSync(temporary, safeDumpYaml(validation.manifest), "utf8");
       fs.renameSync(temporary, path.join(directory, "feature.yaml"));
       return validation.manifest;
     } catch {
@@ -285,7 +287,7 @@ export class FeatureStore {
       publishedDirectory = allocation.directory_name;
       records[requestKey] = { fingerprint, directory_name: allocation.directory_name };
       const temporary = `${metadataPath}.${process.pid}.${crypto.randomUUID()}.tmp`;
-      fs.writeFileSync(temporary, yaml.dump(records, { sortKeys: true, lineWidth: -1 }), "utf8");
+      fs.writeFileSync(temporary, safeDumpYaml(records), "utf8");
       fs.renameSync(temporary, metadataPath);
       return { ok: true, outcome: "created", manifest };
     } catch {

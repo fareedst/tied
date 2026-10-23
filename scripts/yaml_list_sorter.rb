@@ -561,18 +561,13 @@ class YamlListSorter
     value
   end
 
-  # True for key names: order, *_order, order_*, *_order_*, steps, *_steps, steps_*, *_steps_*.
+  # True for order/steps/seq workflow list keys (aligned with mcp-server isOrderedListKey).
+  ORDERED_LIST_KEY_PATTERN = /\A(?:order|order_.*|.*_order|.*_order_.*|steps|steps_.*|.*_steps|.*_steps_.*|_order|_order_.*|_seq|_seq_.*|_sequence|_sequence_.*|.*_seq|.*_sequence|seq_.*|sequence_.*)\z/
+
   def order_preserving_key?(key_name)
     return false if key_name.nil?
 
-    key_name == "order" ||
-      key_name.start_with?("order_") ||
-      key_name.end_with?("_order") ||
-      key_name.include?("_order_") ||
-      key_name == "steps" ||
-      key_name.start_with?("steps_") ||
-      key_name.end_with?("_steps") ||
-      key_name.include?("_steps_")
+    key_name.match?(ORDERED_LIST_KEY_PATTERN)
   end
 
   def walk_for_block_scalars(lines, start_idx, end_idx, regions)

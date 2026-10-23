@@ -615,7 +615,7 @@ procedure SORT_QUALIFYING_LIST_GROUPS(paths, sort_keys=false):
 1. **Edit** — Create or modify the YAML file (index or detail) under `tied-project/` (indexes and detail dirs) or other TIED-related paths (e.g. `tied-project/citdp/*.yaml` as defined by the project).
 2. **Validate and pretty-print** — Run `scripts/yaml_tool.sh <file>` or `lint_yaml <file>` (or multiple paths in one invocation). This validates syntax and canonicalizes formatting in place. On failure, the file is invalid; fix and repeat from step 1.
 
-   **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files). Lists under keys matching `order` / `*_order` / `order_*` / `*_order_*` are left in document order. Add **`--sort-keys`** to also sort sibling map keys at every indent level.
+   **Optional list sort:** Run `scripts/yaml_tool.sh --sort-lists <file>` to alphabetize qualifying list groups (e.g. `cross_references` in index files). Lists under recognized ordered-list keys (`order`, `steps`, `_order`, `_seq`, `_sequence`, and their prefix/suffix/infix variants — see [detail-files-schema.md](detail-files-schema.md) § Set vs ordered list keys) stay in document order. Hashed **JSON** gate artifacts should use the same canonical tree as YAML (`mcp-server/src/storage-dump.ts`). Add **`--sort-keys`** to also sort sibling map keys at every indent level.
 
    **Caution:** If your environment lacks a safe `lint_yaml` / `yaml_tool` wrapper, you must still run validation **one file per underlying pretty-print process**; never pass multiple paths to one raw `yq` invocation.
 
