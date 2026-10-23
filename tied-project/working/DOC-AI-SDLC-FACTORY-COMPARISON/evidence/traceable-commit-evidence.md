@@ -30,6 +30,6 @@ Same class as [DOC-LUDANYI-MANAGER-COMPARISON traceable-commit-evidence.md](../.
 | SHA | Message |
 | --- | --- |
 | `eb501dae3e5e6709ee231210668efcfb1f78731c` | `docs(comparisons): AI-SDLC factory × TIED Wave 2` |
-| *(this commit)* | `chore(working): DOC-AI-SDLC-FACTORY pass-2 reconcile` |
+| `fff92ca7` | `chore(working): DOC-AI-SDLC-FACTORY pass-2 reconcile` |
 
 Pass-2 scope: PLAN-refine-pass2, tracker/handoff updates, clear-workspace hygiene receipt — no comparison or YAML changes.
