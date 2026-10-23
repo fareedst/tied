@@ -27,6 +27,8 @@ docs/comparisons/*
 !docs/comparisons/veronika-heimsbakk-on-ai-generated-ontologies.md
 !docs/comparisons/veronika-heimsbakk-ai-generated-ontologies-vs-tied-agent-management.md
 !docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md
+!docs/comparisons/open-ontologies-repository.md
+!docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

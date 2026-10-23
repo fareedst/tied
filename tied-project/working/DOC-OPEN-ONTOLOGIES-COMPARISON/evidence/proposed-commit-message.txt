@@ -1,0 +1,17 @@
+docs(comparisons): Open Ontologies × TIED Waves 1–2
+
+Add read-only repository capture and Wave 2 agent-management analysis for
+fabio-rovai/open-ontologies (plan/apply, Lean certs, MCP surface) with proof
+boundaries and sibling cross-links. Allowlist both paths in .gitignore; record
+working plan/evidence under DOC-OPEN-ONTOLOGIES-COMPARISON. No REQ/ARCH/IMPL
+mint; target outcomes Tesseract-reported / not_measured in stdd.
+
+Completion signals: machine close-out blocked (DOC outreach tracker);
+process contract pass (doc verification); adherence ledger not_run.
+
+Staging map:
+- docs/comparisons/open-ontologies-repository.md
+- docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md
+- .gitignore
+- CHANGELOG.md
+- tied-project/working/DOC-OPEN-ONTOLOGIES-COMPARISON/
