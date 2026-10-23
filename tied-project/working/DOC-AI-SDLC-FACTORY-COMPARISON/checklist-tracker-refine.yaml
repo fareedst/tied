@@ -30,8 +30,8 @@ steps:
     status: done
     notes: "Doc test strategy — token grep (reference-only REQ-REQUEST_EVIDENCE_ENVELOPE OK), 14 sections, Factory-reported labels; tied_validate_consistency skipped (no YAML)."
   traceable-commit:
-    status: pending
-    notes: Sponsor git commit when ready.
+    status: done
+    notes: "2026-10-23 close-out scoped commit; see evidence/traceable-commit-evidence.md"
   close_out:
-    status: deferred
-    notes: "Machine close-out deferred — doc-only outreach; run close-out skill if sponsor wants envelope sync."
+    status: done
+    notes: "Minimal outreach — machine gate blocked; Ludanyi-class doc close-out with handoff evidence."
