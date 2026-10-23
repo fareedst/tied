@@ -1,0 +1,16 @@
+docs(comparisons): AI-SDLC factory × TIED Wave 2
+
+Add read-only Wave 2 analysis mapping the AI-SDLC ATDD Software
+Factory (executable spec, protected tests, run records) to TIED
+traceability and gates. No REQ/ARCH/IMPL mint. Minimal doc-only
+close-out 2026-10-23 (machine close_out gate blocked on DOC tracker
+schema; process contract pass). Plan: ai_sdlc_factory_comparison_080db2c8.
+
+Staging map:
+- docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md
+- .gitignore (allowlist)
+- CHANGELOG.md
+- tied-project/working/DOC-AI-SDLC-FACTORY-COMPARISON/
+
+Completion signals: machine N/A (minimal outreach); process pass;
+ledger not_run.

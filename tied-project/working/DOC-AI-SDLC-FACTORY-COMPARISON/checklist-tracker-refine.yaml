@@ -1,0 +1,37 @@
+# Per-request tracker — DOC-AI-SDLC-FACTORY-COMPARISON (build-plan 2026-10-23)
+# Doc-only outreach; full checklist slugs not enrolled.
+
+request_token: DOC-AI-SDLC-FACTORY-COMPARISON
+profile_depth: minimal
+gate_policy: outreach_doc_only
+change_class: comparisons_doc_only
+no_req_mint: true
+
+steps:
+  translate-sponsor-intent:
+    status: done
+  change-definition:
+    status: done
+  session-bootstrap:
+    status: done
+  impact-discovery:
+    status: done
+  risk-assessment:
+    status: done
+  test-strategy:
+    status: done
+  pre_implementation:
+    status: blocked
+    notes: "tied_checklist_gate_validate allowed:false — outreach DOC token; invalid_slug on custom steps; minimal depth missing sub-adversarial-inquiry-pass per full Tracker schema. Doc-only deliverables completed per PLAN."
+  implement-doc-deliverables:
+    status: done
+    notes: ".gitignore allowlist + docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md"
+  verification-gate:
+    status: done
+    notes: "Doc test strategy — token grep (reference-only REQ-REQUEST_EVIDENCE_ENVELOPE OK), 14 sections, Factory-reported labels; tied_validate_consistency skipped (no YAML)."
+  traceable-commit:
+    status: pending
+    notes: Sponsor git commit when ready.
+  close_out:
+    status: deferred
+    notes: "Machine close-out deferred — doc-only outreach; run close-out skill if sponsor wants envelope sync."

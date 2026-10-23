@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **AI-SDLC ATDD Software Factory × TIED (Wave 2 outreach)** — Read-only [analysis](docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md) mapping executable-spec factory patterns (protected spec, red-first tests, run records, reconstruction) to TIED traceability, checklist gates, and evidence envelopes (**no REQ/ARCH/IMPL mint**). Target repo inspected locally only; factory outcomes **Factory-reported** / **not_measured** in stdd. Minimal doc-only close-out 2026-10-23. Plan: `ai_sdlc_factory_comparison_080db2c8`.
+
 - **Ludanyi “Illusion of Measurement” × TIED (Waves 1–2 outreach)** — Read-only [capture](docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation.md) and [agent-management analysis](docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation-vs-tied-agent-management.md) mapping people/management judgment and anti-proxy-metrics themes to TIED proof boundaries and sponsor authority (**no REQ/ARCH/IMPL mint**). Minimal doc-only close-out 2026-10-22 (machine gate N/A; effectiveness **not_measured**). Plan: `manager_method_comparison_f6cae799`.
 
 ### Changed

@@ -24,6 +24,9 @@ docs/comparisons/*
 !docs/comparisons/langchain-improving-deep-agents-harness-engineering.md
 !docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation.md
 !docs/comparisons/andras-ludanyi-illusion-of-measurement-judgment-cooperation-vs-tied-agent-management.md
+!docs/comparisons/veronika-heimsbakk-on-ai-generated-ontologies.md
+!docs/comparisons/veronika-heimsbakk-ai-generated-ontologies-vs-tied-agent-management.md
+!docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md
