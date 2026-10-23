@@ -37,7 +37,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave5-process-adherence:
         - "verification"
     verification_gate_notes: "Machine close-out requires gate allowed AND envelope zero blocking error gaps. Process grade is measured separately via reconcile process_grade extension."
   evidence:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/checklist/... -count=1"
       - "go test ./tools/agentstream/cmd/adherence-reconcile/... -count=1"
       - "node --test mcp-server/dist/checklist-validator.test.js"
@@ -132,7 +132,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave5-process-adherence:
       - "mcp-server/src/checklist-validator.test.ts"
       - "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts"
       - "tools/agentstream/checklist/adherence_reconcile_test.go"
-    verification_commands:
+    verification_command_seq:
       - "go test ./tools/agentstream/checklist/... -count=1"
       - "node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js"
       - "npm run build --prefix mcp-server"

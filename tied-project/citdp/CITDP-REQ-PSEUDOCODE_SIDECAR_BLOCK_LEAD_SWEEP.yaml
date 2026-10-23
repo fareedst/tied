@@ -43,7 +43,7 @@ CITDP-REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP:
       - "No completion claim for script implementation, sidecar --write, or wave sweep is made by this CITDP."
     verification_gate_notes: "Track B close-out 2026-09-11: 6/6 normalize CLI tests; full-repo --check 0/0 leaks; verification inquiry run_id track-b-verification-20260911; close_out track-b-closeout-20260911; advisory warn only."
   evidence:
-    commands:
+    command_seq:
       - "node scripts/normalize-sidecar-block-leads.mjs --check"
       - "node scripts/normalize-sidecar-block-leads.mjs --write --wave B1"
       - "pseudocode_analyze gate_mode=true"

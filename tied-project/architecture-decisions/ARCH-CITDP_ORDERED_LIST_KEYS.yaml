@@ -1,0 +1,12 @@
+ARCH-CITDP_ORDERED_LIST_KEYS:
+  consequences:
+    - "Agents must use command_seq in template and working CITDP"
+    - "Mass migration script renames historical CITDP YAML"
+  decision: "Ordered command list keys under evidence, adoption_evidence, and test_strategy use *_seq suffix families; legacy *commands keys are rejected at write."
+  description: "CITDP record shape for ordered command lists documented in citdp-record-template and detail-files-schema; enforced at citdp_record_write."
+  implementation_decisions:
+    - "IMPL-CITDP_ORDERED_KEY_VALIDATE"
+  name: "CITDP ordered list key validation boundary"
+  requirements:
+    - "REQ-CITDP_ORDERED_LIST_KEYS"
+  status: "Planned"

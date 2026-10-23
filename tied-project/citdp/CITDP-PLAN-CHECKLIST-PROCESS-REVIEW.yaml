@@ -15,7 +15,7 @@ CITDP-PLAN-CHECKLIST-PROCESS-REVIEW:
       - "Test strategy and validation commands documented before build-plan phase 1"
     unchanged_behavior: "[PROC-AGENT_REQ_CHECKLIST] remains machine source of step order; per-request Trackers remain execution authority; tied-bundle methodology stays read-only in the client."
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of linked plan checklist-process-review against working-artifact-placement and AGENTS navigation"
       - "TIED MCP tied_checklist_gate_validate at pre_implementation for plan-only CITDP"
     manifest_reference: null

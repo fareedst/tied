@@ -27,7 +27,7 @@ CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
     lint: "npm run build in mcp-server"
     verification: "tied_verify and tied_validate_consistency for touched project YAML"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && node --import tsx --test src/methodology-learning-cohort-export/methodology-learning-cohort-export.mcp.test.ts"
       - "cd mcp-server && node --import tsx --test src/methodology-learning-cohort-export/run.test.ts"
       - "cd mcp-server && npm run build"

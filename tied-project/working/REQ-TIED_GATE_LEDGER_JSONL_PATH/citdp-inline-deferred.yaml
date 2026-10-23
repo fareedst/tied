@@ -22,19 +22,19 @@ risk_analysis:
     assurance_profile: "baseline-functional"
     counterexamples:
       - "Guard rejects valid custom extension used by legacy tooling"
-      - "Renamed ledger breaks reconcile scripts still pointing at .yaml path"
       - "P3 source.path mismatch misread as hash corruption"
+      - "Renamed ledger breaks reconcile scripts still pointing at .yaml path"
     depth_tier: "minimal"
     disconfirming_observations:
-      - "lint_yaml still fails on tied-project after rename"
       - "appendGateDecided succeeds with .yaml path after guard"
+      - "lint_yaml still fails on tied-project after rename"
     eligibility_triggers_matched: []
     evidence_references:
-      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
       - "mcp-server/src/adherence-ledger.test.ts"
+      - "tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/PLAN.md"
     falsification_questions:
-      - "Does lint_yaml -F tied-project pass?"
       - "Do adherence-ledger tests reject .yaml ledger_path?"
+      - "Does lint_yaml -F tied-project pass?"
       - "Is P3 gate-ledger.v1.yaml absent from git?"
     gate_policy: "advisory"
     prior_depth_tier: null

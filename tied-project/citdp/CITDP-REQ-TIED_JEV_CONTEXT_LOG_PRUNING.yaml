@@ -18,7 +18,7 @@ CITDP-REQ-TIED_JEV_CONTEXT_LOG_PRUNING:
     lint: "cd mcp-server && bunx tsc -b"
     verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
   evidence:
-    commands:
+    command_seq:
       - command:
           - "./src/jev/jev.test.ts"
           - "./src/jev/shadow-vocab-preload.test.ts"

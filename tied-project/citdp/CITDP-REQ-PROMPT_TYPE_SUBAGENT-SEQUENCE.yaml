@@ -15,7 +15,7 @@ CITDP-REQ-PROMPT_TYPE_SUBAGENT-SEQUENCE:
   completion_criteria:
     verification_gate_notes: "Prompt-type skill and subagent contract tests passed including the add-refine-build sequence test; YAML indexes and TIED consistency passed; Layer B pseudo-code validation passed for IMPL-PROMPT_TYPE_SUBAGENT; lint_yaml passed on changed project TIED YAML; bash -n copy_files.sh passed."
   evidence:
-    commands:
+    command_seq:
       - command: "bash -n copy_files.sh"
         notes: "Bootstrap shell syntax validation passed."
         result: "pass"

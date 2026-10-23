@@ -14,7 +14,7 @@ CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
       - "sponsor-risk-tier-playbook.md exists with proof boundary and review attention map"
     unchanged_behavior: "Checklist gates, tied_verify, DAE charter opt-in, and consequence ladder semantics unchanged."
   evidence:
-    commands:
+    command_seq:
       - "node --test sponsor-risk-tier-playbook-doc.test.mjs"
       - "run-close-out-gates.mjs --phase verification|close_out --envelope-blocking"
       - "tied_checklist_gate_validate pre_implementation"

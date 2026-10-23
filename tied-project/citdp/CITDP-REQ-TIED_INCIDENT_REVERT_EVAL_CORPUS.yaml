@@ -15,7 +15,7 @@ CITDP-REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
       - "pre_implementation, verification, and close_out gates allowed at minimal depth"
     unchanged_behavior: "Checklist gates, tied_verify defaults, and Kaizen transport deferrals unchanged."
   evidence:
-    commands:
+    command_seq:
       - "node --test incident-revert-eval-corpus-doc.test.mjs"
       - "run-close-out-gates.mjs --phase verification|close_out --envelope-blocking"
       - "tied_validate_consistency"

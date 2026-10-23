@@ -16,7 +16,7 @@ CITDP-PLAN-TIED-QMM-W1-METHODOLOGY-PDSA:
       - "Storage spike order and minimum record fields documented for hinge number one."
     unchanged_behavior: "Kaizen MCP tools, feedback.yaml, checklist gates, and LEAP queue keep current behavior."
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of child plan against parent program section 5.1"
       - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
     manifest_reference: null

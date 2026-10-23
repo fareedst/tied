@@ -32,7 +32,7 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS:
     critical_high_unaccepted: "false"
     verification_gate_notes: "580/580 mcp-server tests; tied_validate_consistency ok; gate_mode Layer C smoke ok; integrated close_out gate doc-psa-full-update-closeout-20260909; inquiry reused via close_out_inquiry_waiver."
   evidence:
-    commands:
+    command_seq:
       - command: "npm test"
         cwd: "mcp-server"
         exit_code: "0"

@@ -17,7 +17,7 @@ CITDP-REQ-TIED_JEV_LOCAL_DECISION_PROVIDER:
     lint: "cd mcp-server && bunx tsc -b"
     verification: "tied_validate_consistency; integrated close_out gates"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && bun test src/jev/decision-provider.test.ts src/jev/local-client.test.ts src/jev/jev.test.ts src/jev/harness-tool-guard.test.ts"
     proof_boundaries:
       - "Remote default; local bridge stub; JEV_LOCAL_MLX_SMOKE opt-in only"

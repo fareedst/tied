@@ -46,7 +46,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-p:
       profile_depth: "not_measured"
       sub_adversarial_inquiry_pass: "not_applicable"
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/checklist/..."
       - "go test ./tools/agentstream/checklist/... -run CommandEvidence -count=1"
       - "node --test mcp-server/dist/checklist-validator.test.js --test-name-pattern 'Stage P trigger'"

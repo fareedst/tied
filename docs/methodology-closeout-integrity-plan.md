@@ -406,11 +406,11 @@ Minimum CITDP fields per wave (in addition to `tied-bundle/docs/citdp-record-tem
 | `risk_analysis.adversarial_inquiry.prior_depth_tier` | `null` on first wave CITDP; prior wave tier when upgrading |
 | `risk_analysis.quality_profiles` | At least `baseline-functional`; add migration/reliability when envelope or phase persistence changes |
 | `completion_criteria.activation` | Populated after each phase inquiry run; hashes must match phase dir |
-| `evidence.commands` | Exact regression commands from §7.2 for that wave |
+| `evidence.command_seq` | Exact regression commands from §7.2 for that wave |
 
 ### 7.2 Wave verification commands
 
-Commands populate each wave CITDP `evidence.commands`. Labels:
+Commands populate each wave CITDP `evidence.command_seq`. Labels:
 
 - **Today** — runnable against current `mcp-server/dist` without wave deliverables.
 - **Target** — requires the named wave deliverable (script, flag, or template) first.

@@ -1,0 +1,26 @@
+REQ-CITDP_ORDERED_LIST_KEYS:
+  category: "Tooling"
+  description: "CITDP YAML ordered verification batteries use *_seq key names; citdp_record_write rejects legacy commands keys under evidence, adoption_evidence, and test_strategy."
+  name: "CITDP ordered command list keys"
+  rationale:
+    benefits:
+      - "Deterministic CITDP command batteries"
+      - "Write-time fail closed on deprecated keys"
+    problems_solved:
+      - "Ambiguous commands key implies unordered set"
+      - "Verification command order destroyed by YAML lint"
+    why: "tied-yaml-canonical-v1 sorts bare list keys; ordered close-out command batteries must use recognized ordered-list key names."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+    related_to:
+      - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "All in-scope CITDP-family YAML uses command_seq for ordered command lists under evidence, adoption_evidence, and test_strategy"
+      criterion_id: "command-seq-naming"
+    - criterion: "canonicalizeValue preserves evidence.command_seq document order"
+      criterion_id: "canonicalizer-preserve"
+    - criterion: "citdp_record_write rejects evidence.commands and test_strategy.commands with deprecated_citdp_key diagnostics"
+      criterion_id: "write-reject-legacy"
+  status: "Planned"

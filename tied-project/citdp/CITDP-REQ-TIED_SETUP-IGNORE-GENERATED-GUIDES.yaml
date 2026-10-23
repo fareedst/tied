@@ -53,7 +53,7 @@ CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES:
         reversibility: "reversible"
         severity: "low"
   test_strategy:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/layers/gitignore-block.test.mjs tools/bootstrap/install-layers.integration.test.mjs"
     integration:
       - "install-layers.integration.test.mjs db layer .gitignore content"

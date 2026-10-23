@@ -1,71 +1,71 @@
 CITDP-REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
   change_definition:
-    current_behavior: Operator and agent docs describe legacy top-level tied/ clients and --migrate-layout in markdown.
-    desired_behavior: Live-surface prose documents only tied-project/ + tied-bundle/; layout flags discoverable via tied-install --help only.
+    current_behavior: "Operator and agent docs describe legacy top-level tied/ clients and --migrate-layout in markdown."
+    desired_behavior: "Live-surface prose documents only tied-project/ + tied-bundle/; layout flags discoverable via tied-install --help only."
     non_goals:
-      - Remove CLI --migrate-layout or MCP LEGACY_LAYOUT_DETECTED
-      - Rewrite historical tied-project/working archives
+      - "Remove CLI --migrate-layout or MCP LEGACY_LAYOUT_DETECTED"
+      - "Rewrite historical tied-project/working archives"
     success_criteria:
-      - SC-LAYOUT-DOC-NO-LEGACY-NARRATIVE
-      - SC-LAYOUT-DOC-NO-MIGRATE-MD
-      - SC-LAYOUT-DOC-README-TEST
+      - "SC-LAYOUT-DOC-NO-LEGACY-NARRATIVE"
+      - "SC-LAYOUT-DOC-NO-MIGRATE-MD"
+      - "SC-LAYOUT-DOC-README-TEST"
   completion_criteria:
-    verification_gate_notes: lint-stale-layout, store-readme-structure.test.ts, tied_validate_consistency.
+    verification_gate_notes: "lint-stale-layout, store-readme-structure.test.ts, tied_validate_consistency."
   evidence:
-    commands:
-      - "node tools/bootstrap/lint-stale-layout.mjs"
+    command_seq:
       - "cd mcp-server && npx tsx --test src/store-readme-structure.test.ts"
       - "node --test tools/bootstrap/lib/lint-stale-layout.test.mjs"
       - "node tools/bootstrap/lib/render-install-resource-matrix.mjs"
+      - "node tools/bootstrap/lint-stale-layout.mjs"
     proof_boundaries:
-      - documentation_only
+      - "documentation_only"
   impact_analysis:
-    impl_inventory_notes: README, AGENTS, tied-bundle docs, vocab, bundled skill, bootstrap README, install matrix verify
-    modules_or_boundaries: Operator documentation and lint only.
+    impl_inventory_notes: "README, AGENTS, tied-bundle docs, vocab, bundled skill, bootstrap README, install matrix verify"
+    modules_or_boundaries: "Operator documentation and lint only."
     tied_tokens_affected:
-      - REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE
+      - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
     tied_tokens_new:
-      - REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
-      - ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
-      - IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
+      - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      - "IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+      - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
   leap_feedback:
-    divergences_from_analysis: none
-    record_status: complete
+    divergences_from_analysis: "none"
+    record_status: "complete"
     tied_stack_updates_required: []
   record_identity:
-    change_request_id: REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
-    gate_policy: advisory
-    profile_depth: minimal
+    change_request_id: "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
     recorded_at: "2026-10-19"
-    title: Legacy layout documentation decommission
+    title: "Legacy layout documentation decommission"
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
-        - Layer B lint flags legitimate REQ satisfaction criteria mentioning migrate behavior.
-      depth_tier: minimal
+        - "Layer B lint flags legitimate REQ satisfaction criteria mentioning migrate behavior."
+      depth_tier: "minimal"
       disconfirming_observations:
-        - Allowlist tied-project/requirements/** for migrate_layout_markdown pattern only.
+        - "Allowlist tied-project/requirements/** for migrate_layout_markdown pattern only."
       eligibility_triggers_matched: []
       evidence_references:
-        - tools/bootstrap/lib/lint-stale-layout.mjs
-        - README.md
+        - "README.md"
+        - "tools/bootstrap/lib/lint-stale-layout.mjs"
       falsification_questions:
-        - Does any live-surface markdown still tell operators to run --migrate-layout?
-      gate_policy: advisory
-      prior_depth_tier: minimal
-      rationale: Documentation-only decommission; no integrated inquiry.
-      sub_adversarial_inquiry_pass: not_applicable
+        - "Does any live-surface markdown still tell operators to run --migrate-layout?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Documentation-only decommission; no integrated inquiry."
+      sub_adversarial_inquiry_pass: "not_applicable"
     risks:
-      - description: Over-broad lint breaks REQ YAML criteria text.
-        id: RISK-LAYOUT-DOC-001
-        likelihood: Low
-        mitigation: Pattern scoped to md/yaml/yml; allowlist requirements tree.
-        severity: Medium
-    summary: Doc-only; lint scope is main technical risk.
+      - description: "Over-broad lint breaks REQ YAML criteria text."
+        id: "RISK-LAYOUT-DOC-001"
+        likelihood: "Low"
+        mitigation: "Pattern scoped to md/yaml/yml; allowlist requirements tree."
+        severity: "Medium"
+    summary: "Doc-only; lint scope is main technical risk."
   tdd_sequence:
-    summary: RED lint + README tests; GREEN doc sweep.
+    summary: "RED lint + README tests; GREEN doc sweep."
   test_strategy:
-    red_green:
-      - Extend lint-stale-layout.test.mjs and store-readme-structure.test.ts before doc edits.
     manual:
       - "rg migrate-layout and legacy tied/ on live markdown surfaces"
+    red_green:
+      - "Extend lint-stale-layout.test.mjs and store-readme-structure.test.ts before doc edits."

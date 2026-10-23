@@ -19,7 +19,7 @@ CITDP-REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
     lint: "cd mcp-server && bunx tsc -b"
     verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
   evidence:
-    commands:
+    command_seq:
       - command:
           - "bun"
           - "src/jev/checklist-evidence-sufficiency-benchmark.test.ts"

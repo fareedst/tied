@@ -8,47 +8,47 @@ CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
       production_system_surface: "prompt_type_workflow"
       surface_ref: "harness-trace-analyzer"
     non_goals:
-      - "LangSmith, Harbor, Daytona, or automated trace fetch"
-      - "Terminal Bench or LangChain-reported % as TIED methodology effectiveness"
       - "Automatic LEAP or project YAML mutation from analyzer synthesis"
-      - "Replacing tied_checklist_gate_validate or tied_verify with trace review"
-      - "New Loop 3 methodology learning experiment enrollment on this pass"
+      - "LangSmith, Harbor, Daytona, or automated trace fetch"
       - "Mandatory global invocation of harness-trace-analyzer"
+      - "New Loop 3 methodology learning experiment enrollment on this pass"
+      - "Replacing tied_checklist_gate_validate or tied_verify with trace review"
+      - "Terminal Bench or LangChain-reported % as TIED methodology effectiveness"
     success_criteria:
-      - "§2 row 15 present; matrix header contract 15 rows; methodology-composition-matrix-langchain-row.test.mjs green"
       - "harness-trace-analyzer bundled skill + harness-trace-analyzer-skill.test.mjs green"
       - "HTOL guide outer-loop section + updated observation-loop-doc.test.mjs green"
-      - "PROMPT_TYPE_LEAF_IDS includes harness-trace-review and harness-trace-analyzer; enrollment unit tests green"
       - "LangChain comparison Phase 3 row Implemented with links to row 15 and skill"
-      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC updated to 15 §2 rows"
       - "pre_implementation and verification gate receipts; tied_validate_consistency after implement"
+      - "PROMPT_TYPE_LEAF_IDS includes harness-trace-review and harness-trace-analyzer; enrollment unit tests green"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC updated to 15 §2 rows"
+      - "§2 row 15 present; matrix header contract 15 rows; methodology-composition-matrix-langchain-row.test.mjs green"
     unchanged_behavior: "Checklist gate authority; Phase 2 HTOL charter and pilot enrollment; harness-trace-review explicit-only semantics unless guide cross-links expanded."
   evidence:
-    commands:
-      - "node --test tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs"
+    command_seq:
+      - "node --test mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.test.ts"
       - "node --test tools/bootstrap/lib/harness-trace-analyzer-skill.test.mjs"
       - "node --test tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
-      - "node --test mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.test.ts"
+      - "node --test tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs"
       - "pseudocode_validate IMPL-TIED_HARNESS_LANGCHAIN_PHASE3 gate_mode"
       - "tied_checklist_gate_validate phase pre_implementation"
     manifest_reference: null
     proof_boundaries:
-      - "matrix_row_structure_not_behavioral_equivalence_with_langchain"
       - "analyzer_synthesis_advisory_until_checklist_owned_promotion"
+      - "matrix_row_structure_not_behavioral_equivalence_with_langchain"
       - "vendor_benchmarks_remain_langchain_reported_or_not_measured"
   impact_analysis:
     impl_inventory_notes: "docs/comparisons methodology-composition-matrix.md + langchain comparison; tools/bundled-prompt-type-skills/harness-trace-analyzer; HTOL guide; bootstrap doc/skill tests; mcp-server enrollment constants + prompt-type-skills e2e; optional LEAP on REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX."
     modules_or_boundaries: "Outreach markdown; prompt-type skill bundle; methodology enrollment validator constants; no new MCP gate tools."
     tied_tokens_affected:
-      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
-      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
-      - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
-      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
     tied_tokens_new:
-      - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
       - "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3"
       - "IMPL-TIED_HARNESS_LANGCHAIN_PHASE3"
+      - "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
   leap_feedback:
     divergences_from_analysis: null
     record_status: "complete"
@@ -66,22 +66,22 @@ CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     abuse_cases:
-      - "Matrix row 15 cited as proof TIED matches LangChain Terminal Bench gains"
       - "Analyzer synthesis applied directly to AGENTS.md or project YAML without MCP/checklist"
-      - "Parallel Task fan-out writes project YAML or claims gate pass"
       - "Enrollment leaf expansion treated as Loop 3 effectiveness proof"
+      - "Matrix row 15 cited as proof TIED matches LangChain Terminal Bench gains"
+      - "Parallel Task fan-out writes project YAML or claims gate pass"
       - "Row 14 and row 15 duplicate LangChain narrative without clear seam to Cursor vs LangChain studies"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
       counterexamples:
-        - "Skill prose omits explicit-only invocation and reads as default middleware"
         - "Matrix row sponsor_notes omit LangChain-reported label"
+        - "Skill prose omits explicit-only invocation and reads as default middleware"
       depth_change_waiver: null
       depth_tier: "minimal"
       disconfirming_observations:
-        - "New MCP tool grants analyzer outcomes checklist authority"
         - "harness-trace-analyzer auto-stages git changes"
+        - "New MCP tool grants analyzer outcomes checklist authority"
       eligibility_triggers_matched: []
       evidence_references:
         - "/Users/fareed/.cursor/plans/langchain_phase_3_promotion_01bdd01a.plan.md"
@@ -109,8 +109,8 @@ CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3:
     documentation_only: false
     mandatory_order: "RED matrix + analyzer + guide marker tests before markdown/skill GREEN"
     unit_tests:
-      - "tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs"
-      - "tools/bootstrap/lib/harness-trace-analyzer-skill.test.mjs"
       - "mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.test.ts"
-    verification_commands:
+      - "tools/bootstrap/lib/harness-trace-analyzer-skill.test.mjs"
+      - "tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs"
+    verification_command_seq:
       - "tied_validate_consistency"

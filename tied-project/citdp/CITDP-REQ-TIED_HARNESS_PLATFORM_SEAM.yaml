@@ -10,17 +10,17 @@ CITDP-REQ-TIED_HARNESS_PLATFORM_SEAM:
       - "Vendor benchmark anecdotes as TIED methodology effectiveness"
     success_criteria:
       - "Build-plan completes satisfaction criteria SC-HPS-*"
+      - "close_out gate allowed with envelope blocking_gap_count=0 (skip-manifest acceptable at minimal depth)"
       - "PLAN phased slices A–F with compose-don't-replace contract"
       - "pre_implementation gate allowed for build-plan handoff"
       - "REQ/ARCH/IMPL minted with cross-references and pseudo-code gate pass"
-      - "close_out gate allowed with envelope blocking_gap_count=0 (skip-manifest acceptable at minimal depth)"
       - "Traceable commit scoped to HPS wave plus Traefik comparison when diff present"
     unchanged_behavior:
       - "Closed REQ-TIED_CLAUDE_HARNESS arc (cross-link only)"
       - "Default agentstream preflight remains off unless operator opts in"
       - "MCP gate authority and tied_validate_consistency semantics"
   evidence:
-    commands:
+    command_seq:
       - "pseudocode_validate IMPL-TIED_HARNESS_PLATFORM_SEAM gate_mode"
       - "tied_checklist_gate_validate phase pre_implementation"
       - "tied_validate_consistency (after YAML mutations)"

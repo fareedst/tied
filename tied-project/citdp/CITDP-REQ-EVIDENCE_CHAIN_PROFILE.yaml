@@ -25,7 +25,7 @@ CITDP-REQ-EVIDENCE_CHAIN_PROFILE:
     yaml_index_validate: "requirements, architecture, implementation, and semantic-tokens all valid."
     yaml_lint: "scripts/yaml_tool.sh --check passed for the canonical CITDP and changed project YAML files."
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/fidelity-research/evidence-chain-profile.test.js mcp-server/dist/fidelity-research/evidence-chain-profile.mcp.test.js mcp-server/dist/usage-metrics.test.js — 25 tests passed, 0 failed"
       - "npm run build --prefix mcp-server — passed"
       - "npm test --prefix mcp-server — 317 tests passed, 0 failed"

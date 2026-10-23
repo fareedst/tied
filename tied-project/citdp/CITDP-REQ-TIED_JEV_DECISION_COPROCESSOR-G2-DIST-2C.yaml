@@ -14,7 +14,7 @@ CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G2-DIST-2C:
       - "Sync and live preflight exit 1 when harness on and dist missing"
     unchanged_behavior: "Harness remains opt-in; checklist gates and keyword PRELOAD authoritative; createJevLiveToolGate still returns null when dist missing (hard stop owned by preflight+belt)."
   evidence:
-    commands:
+    command_seq:
       - "bun test mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.test.ts"
       - "bun test mcp-server/packages/agentstream/src/jev-harness-preflight.test.ts"
       - "bun test mcp-server/src/jev/"

@@ -42,7 +42,7 @@ CITDP-REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT:
       - "No completion claim for implementation or verification is made by this CITDP."
     verification_gate_notes: "§E incremental close-out 2026-09-11: analysis 305/305; §E script tests (corpus replay, adherence replay, audit, baseline commit message); bootstrap E2E 7/7; advisory inquiry warn; envelope blocking gaps zero."
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/e2e/new-tied-client.test.js"
       - "node --test scripts/audit-grammar-v2-default.test.mjs"
       - "node --test scripts/corpus-grammar-v2-replay.test.mjs scripts/replay-adherence-fixtures.test.mjs scripts/audit-grammar-v2-default.test.mjs tools/bootstrap/lib/tied-baseline-commit-message.test.mjs"

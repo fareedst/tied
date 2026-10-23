@@ -10,7 +10,7 @@ CITDP-DOC-JEV-COMPARISON:
       - "Sponsor S1-S9 recorded"
     unchanged_behavior: "Keyword PRELOAD and MCP gates authoritative."
   evidence:
-    commands:
+    command_seq:
       - "rg 'system-one-jev-vs-laya' docs/comparisons/*.md tied/vocab/decision-copilot.md"
       - "tied_validate_consistency"
     evidence_references:

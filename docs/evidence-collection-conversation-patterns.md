@@ -504,7 +504,7 @@ node working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/run-wave7-gates.mjs            
 node working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/run-wave7-gates.mjs --verification  # → allowed: false until PSA refresh
 ```
 
-Close-out adds unified runner commands in §12.3; CITDP `evidence.commands` finalized at `persist-citdp-record`.
+Close-out adds unified runner commands in §12.3; CITDP `evidence.command_seq` finalized at `persist-citdp-record`.
 
 ### 10.6 Remaining gaps mapped to Wave 7
 
@@ -553,7 +553,7 @@ Close-out adds unified runner commands in §12.3; CITDP `evidence.commands` fina
 | Dual-write | `execution_evidence.completed` lists 6 planning slugs; many implementation steps `completed` in `steps[]` — disposition sync required |
 | Envelope | `working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json` — **0 error**, **7 warn** (6× `finding_unresolved` advisory, 1× `thin_ledger`) |
 | PSA Layer C | Files under `pseudocode-analysis/` from Wave 5 (Sep 10); verification gate `psa_missing` until refresh |
-| CITDP | Draft; `evidence.commands` to finalize at close-out |
+| CITDP | Draft; `evidence.command_seq` to finalize at close-out |
 
 ### 12.2 Three completion signals (close-out targets)
 
@@ -587,7 +587,7 @@ node scripts/backfill-pseudocode-analysis.mjs \
   --gate-mode \
   --impl IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT IMPL-REQUEST_EVIDENCE_ENVELOPE
 
-# 2b. Finalize CITDP evidence.commands (see CITDP-wave7-conversation-adherence.yaml)
+# 2b. Finalize CITDP evidence.command_seq (see CITDP-wave7-conversation-adherence.yaml)
 node --test mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js
 node --test scripts/conversation-adherence-score.test.mjs
 node --test mcp-server/dist/checklist-validator.test.js
@@ -658,7 +658,7 @@ Current helper supports `pre_implementation` (default) and `--verification` only
 - [x] `sub-close-out-evidence-sync` completed with typed evidence refs
 - [x] `close_out` gate `allowed: true` (Wave 5 inquiry reuse `wave5-closeout-20260910`)
 - [x] Envelope zero blocking gaps under `--envelope-blocking` (including `thin_ledger` cleared)
-- [x] CITDP finalized with Wave 7 `evidence.commands`
+- [x] CITDP finalized with Wave 7 `evidence.command_seq`
 - [x] PSA Layer C refreshed for changed IMPLs
 - [x] `tied_validate_consistency` and `tied_verify` pass (after `checklist_gate.evidence` forwarding fix)
 - [x] CHANGELOG + proposed commit message written

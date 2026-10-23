@@ -22,7 +22,7 @@ CITDP-REQ-TIED_VOCABULARY_OWNERSHIP:
     record_status: "complete"
     verification_gate_notes: "Verification-gated status update completed after the passing test suite; final YAML and TIED consistency checks must be rerun after this CITDP write."
   evidence:
-    commands:
+    command_seq:
       - "bash -n copy_files.sh"
       - "bash -n scripts/yaml_tool.sh"
       - "npm run build --prefix mcp-server"

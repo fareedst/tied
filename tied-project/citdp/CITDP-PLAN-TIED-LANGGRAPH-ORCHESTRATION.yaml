@@ -14,7 +14,7 @@ CITDP-PLAN-TIED-LANGGRAPH-ORCHESTRATION:
       - "pre_implementation gate receipt stored under tied-bundle/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/gates/"
     unchanged_behavior: "Checklist gates, agentstream default executor, and existing product REQs except documented stdd BOUNDED_WORKER_POOL retention."
   evidence:
-    commands:
+    command_seq:
       - "tied_checklist_gate_validate phase pre_implementation"
       - "tied_project_lint"
       - "tied_validate_consistency"

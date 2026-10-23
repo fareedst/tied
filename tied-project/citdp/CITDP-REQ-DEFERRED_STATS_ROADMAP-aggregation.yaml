@@ -23,7 +23,7 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-aggregation:
       - "No sibling-client pilots beyond 1787461685"
     verification_gate_notes: "PASS: Ruby syntax and analyzer suite; post-test pseudo-code validation; TIED index syntax and consistency; literal block-lead parity; vocabulary validation; tied_verify limited to REQ-MCP_USAGE_METRICS and IMPL-MCP_USAGE_METRICS with no demotions."
   evidence:
-    commands:
+    command_seq:
       - command: "ruby -c scripts/analyze_tied_mcp_metrics.rb"
         result: "Syntax OK"
       - command: "ruby -c scripts/analyze_tied_mcp_metrics_test.rb"

@@ -3,18 +3,18 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
     current_behavior_prior: "Conversation handoff procedure exists at tools/bundled-session-handoff-skill/SKILL.md with invoke name session-handoff; skill is not registered in BUNDLED_STANDALONE_CLIENT_SKILLS; typing session-handoff in the IDE conflates the skill with many evidence/session-handoff.md paths."
     desired_behavior: "Standalone handoff skill installs as handoff (/handoff, @handoff); persisted operator log remains tied-project/working/{REQ}/evidence/session-handoff.md; legacy session handoff phrasing documented without a second manifest row; bootstrap tests assert install parity with xlate/unblock."
     non_goals:
-      - "Renaming existing session-handoff.md files across working trees"
       - "Automatic git inspection or commit"
+      - "Renaming existing session-handoff.md files across working trees"
       - "Substituting plan-close-out or clear-workspace"
     success_criteria:
-      - "manifest.json lists skillName handoff"
       - "client-bootstrap-skills and client-skills-catalog tests pass with four standalone skills"
+      - "manifest.json lists skillName handoff"
       - "SKILL.md mandates evidence/session-handoff.md"
       - "tied_validate_consistency ok after YAML mint"
   evidence:
-    commands:
-      - "node --test tools/bootstrap/lib/client-skills-catalog.test.mjs"
+    command_seq:
       - "cd mcp-server && npm test -- client-bootstrap-skills"
+      - "node --test tools/bootstrap/lib/client-skills-catalog.test.mjs"
       - "tied_validate_consistency"
     proof_boundaries:
       - "bootstrap_install_surface_only"
@@ -49,8 +49,8 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
         - "Bootstrap tests pass but linked install omits handoff stub."
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md"
         - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/build-plan-evidence.md"
+        - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md"
       falsification_questions:
         - "Does manifest list exactly one handoff row?"
         - "Does SKILL.md forbid automatic git commit?"
@@ -73,6 +73,6 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
   test_strategy:
     approach: "RED catalog count then GREEN manifest; e2e copy install."
     cases:
-      - "loadStandaloneClientSkills length 4 with handoff"
       - "installStandaloneSkillsCopy includes /handoff marker"
+      - "loadStandaloneClientSkills length 4 with handoff"
       - "tied_validate_consistency after token mint"

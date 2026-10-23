@@ -40,7 +40,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l:
       prior_depth_tier: "minimal"
       profile_depth: "not_measured"
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/..."
       - "go test ./tools/agentstream/checklist/... -run 'Rollout|Pilot|gotoClears'"
       - "tied_validate_consistency"

@@ -27,7 +27,7 @@ CITDP-REQ-PSEUDOCODE_STATIC_ANALYSIS-track-c-validator-hardening:
         - "verification"
     verification_gate_notes: "Track C close-out 2026-09-11: tokenScan + negation heuristic; verification gate allowed at minimal depth; inquiry waiver inquiry_not_required_validator_only."
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/analysis/*.test.js"
       - "node --test mcp-server/dist/analysis/pseudocode-shared.test.js mcp-server/dist/analysis/pseudocode-validator.test.js"
       - "npm run build --prefix mcp-server"

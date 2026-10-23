@@ -64,7 +64,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer:
       prior_depth_tier: "minimal"
       profile_depth: "not_measured"
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/..."
       - "node --test mcp-server/dist/checklist-validator.test.js mcp-server/dist/verify.test.js"
       - "npm run build --prefix mcp-server"

@@ -27,7 +27,7 @@ CITDP-REQ-TIED_BROWNFIELD_INTENT_ELEVATION:
     tied_validate_consistency: "required"
     verification_gate_notes: "npm test --prefix mcp-server; tied_validate_consistency; checklist gate verification phase after implementation"
   evidence:
-    commands:
+    command_seq:
       - "npm run lint:ts --prefix mcp-server"
       - "npm test --prefix mcp-server -- brownfield"
     manifest_reference: "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/verification-evidence-manifest.v1.json"

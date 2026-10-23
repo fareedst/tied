@@ -13,7 +13,7 @@ CITDP-REVIEW-CHECKLIST-PROCESS-20261010:
       - "Inventory covers canonical spine, docs/ plan clusters, tied-project/working orchestrators, and navigation surfaces"
     unchanged_behavior: "[PROC-AGENT_REQ_CHECKLIST] remains machine authority; docs/checklist-process-review-*.md unchanged except cross-links if added later."
   evidence:
-    commands:
+    command_seq:
       - "Manual worksheet sections A–H in review-worksheet-filled.md"
       - "rg -c 'tied/docs' docs/*.md — legacy path hotspot survey"
       - "tied_project_lint and close-out envelope at minimal advisory depth"

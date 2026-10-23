@@ -20,7 +20,7 @@ CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring:
     vocabulary_validate: "ruby scripts/validate_vocab_index.rb passed; attach provenance recorded in quality-assurance.md."
     yaml_lint: "scripts/yaml_tool.sh --check passed for tied/citdp/CITDP-REQ-EVIDENCE_CHAIN_PROFILE-wiring.yaml; agent-req-implementation-checklist.yaml remains non-canonical style (pre-existing project debt)."
   evidence:
-    commands:
+    command_seq:
       - "bunx tsc -b (mcp-server) — passed"
       - "npm test --prefix mcp-server — 364 tests passed, 0 failed"
       - "Pilot: invoke_structural_validators true — structural rows observed"

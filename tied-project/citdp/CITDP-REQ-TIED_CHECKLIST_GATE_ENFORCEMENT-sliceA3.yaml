@@ -33,7 +33,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-sliceA3:
     persist_policy: "persisted to tied/citdp/ after Slice A3 implementation"
     verification: "pseudocode_validate; tied_validate_consistency"
   evidence:
-    commands:
+    command_seq:
       - "npm test --prefix mcp-server -- checklist-validator"
       - "pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
     proof_boundaries:

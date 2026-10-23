@@ -36,7 +36,7 @@ completion_criteria:
       - "verification"
   verification_gate_notes: "pending"
 evidence:
-  commands:
+  command_seq:
     - "go test ./..."
     - "go vet ./..."
   manifest_reference: "pending"

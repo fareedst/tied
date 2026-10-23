@@ -4,26 +4,36 @@ CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
     desired_behavior: "Optional, opt-in context-adaptive layer: 5–8 seed practice contracts mapped to existing TIED procedures/tools; context-profile.v1 with explicit UNKNOWN handling; deterministic selection-receipt.v1; reassessment-receipt.v1 that routes changed risk through existing CITDP/gate/LEAP paths; evaluation-link adapter to methodology-learning and conformance–effectiveness pairing. MCP tools remain read-only/deterministic by default and do not mutate project TIED YAML or checklist status. First dogfood: Condition B vs fixed baseline on comparable EASAR recovery slices using existing receipts—not a parallel recovery runtime."
     non_goals:
       - "AI-generated or unrestricted method selection/override"
-      - "LangGraph or other orchestration framework as runtime dependency"
-      - "Full OMG Essence compliance or 10–15+ practice catalog"
       - "Default checklist activation or normative gate/assurance-profile behavior changes in v1"
-      - "Universal 0–100 grade, SPC/control charts, CMMI maturity claims, DORA product metrics as blocking scores"
+      - "Full OMG Essence compliance or 10–15+ practice catalog"
+      - "LangGraph or other orchestration framework as runtime dependency"
       - "Portable EASAR export (Slice 6) bundled into this REQ"
       - "Replacing TIED as center of gravity or claiming methodology-composition-matrix behavioral equivalence"
+      - "Universal 0–100 grade, SPC/control charts, CMMI maturity claims, DORA product metrics as blocking scores"
     success_criteria:
       - "SC-CAE-CONTRACTS — closed practice-contract.v1 library (5–8) with TIED PROC/tool bindings and proof boundaries; loader/validator tests green"
-      - "SC-CAE-PROFILE — context-profile.v1 validator/normalizer; UNKNOWN criticality never downgraded to LOW in selection"
-      - "SC-CAE-SELECT — identical inputs → identical selection-receipt.v1; hard constraints dominate preferences"
-      - "SC-CAE-REASSESS — immutable prior snapshots; auditable delta and explicit loop-back action"
-      - "SC-CAE-MCP — composition tests before thin MCP wrappers; no silent TIED YAML or checklist mutation"
       - "SC-CAE-DOGFOOD — EASAR baseline vs rule-selected pilot records + method-effectiveness readout without causal improvement claim"
+      - "SC-CAE-MCP — composition tests before thin MCP wrappers; no silent TIED YAML or checklist mutation"
+      - "SC-CAE-PROFILE — context-profile.v1 validator/normalizer; UNKNOWN criticality never downgraded to LOW in selection"
+      - "SC-CAE-REASSESS — immutable prior snapshots; auditable delta and explicit loop-back action"
       - "SC-CAE-REGRESS — existing EASAR/gate/envelope/quality/methodology-learning suites remain green"
+      - "SC-CAE-SELECT — identical inputs → identical selection-receipt.v1; hard constraints dominate preferences"
     unchanged_behavior:
+      - "[REQ-TIED_EASAR_RECOVERY] receipt builders and PROC sequence when engagement is easar_full without CASE overlay"
       - "Mandatory checklist steps and gate fail-closed defaults when selector is not invoked"
       - "Methodology read-only tied-bundle/ boundary"
-      - "[REQ-TIED_EASAR_RECOVERY] receipt builders and PROC sequence when engagement is easar_full without CASE overlay"
       - "Verification-gated status via tied_verify only"
   completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
+      run_id: "cae-verify-20261018"
+      scope:
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-verify-rev-1"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-verify-rev-1"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE#VALIDATE_CONTEXT_PROFILE_V1#cae-verify-rev-1"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS#REASSESS_CONTEXT_V1#cae-verify-rev-1"
+        - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-verify-rev-1"
     close_out:
       activation:
         phase: "close_out"
@@ -32,40 +42,30 @@ CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
       envelope_blocking: "fail_on_error_gaps true at plan-close-out"
       methodology_pilot_ref: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/cae-easar-dogfood-pilot.v1.json"
       tracker_path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/gate-tracker-close-out.yaml"
-    activation:
-      phase: "verification"
-      request_token: "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
-      run_id: "cae-verify-20261018"
-      scope:
-        - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS#VALIDATE_PRACTICE_CONTRACT_V1#cae-verify-rev-1"
-        - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE#VALIDATE_CONTEXT_PROFILE_V1#cae-verify-rev-1"
-        - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR#SELECT_PRACTICES_DETERMINISTIC_V1#cae-verify-rev-1"
-        - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS#REASSESS_CONTEXT_V1#cae-verify-rev-1"
-        - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK#BUILD_METHOD_EFFECTIVENESS_REFS_V1#cae-verify-rev-1"
     envelope_path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/request-evidence-envelope.v1.json"
     focused_tests: "mcp-server/src/context-adaptive/**/*.test.ts; context-adaptive*.mcp.test.ts"
     lint: "npm run lint:ts --prefix mcp-server"
     verification: "tied_validate_consistency; tied_checklist_gate_validate pre_implementation|verification|close_out"
   evidence:
-    commands:
+    command_seq:
       - "npm run lint:ts --prefix mcp-server"
       - "npm test --prefix mcp-server -- context-adaptive"
       - "tied_checklist_gate_validate"
       - "tied_validate_consistency"
     proof_boundaries:
-      - "selector-advisory-not-checklist-authority"
-      - "read-only-tied-yaml-from-case-tools"
-      - "dogfood-observational-not-causal"
       - "deterministic-receipts-not-ai-policy"
+      - "dogfood-observational-not-causal"
+      - "read-only-tied-yaml-from-case-tools"
+      - "selector-advisory-not-checklist-authority"
   impact_analysis:
     depends_on:
-      - "REQ-TIED_EASAR_RECOVERY"
-      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
       - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+      - "REQ-MODULE_VALIDATION"
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
       - "REQ-REQUEST_EVIDENCE_ENVELOPE"
       - "REQ-TIED_ADVERSARIAL_INQUIRY"
-      - "REQ-MODULE_VALIDATION"
+      - "REQ-TIED_EASAR_RECOVERY"
     files:
       - "mcp-server/src/context-adaptive/"
       - "mcp-server/src/tools/index.ts"
@@ -73,38 +73,38 @@ CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
       - "tied-project/vocab/context-adaptive-engineering.md"
     impl_inventory:
       - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS"
-      - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
-      - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
-      - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
       - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK"
+      - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
+      - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
+      - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
     modules_or_boundaries: "Pure modules under mcp-server/src/context-adaptive/; thin MCP layer; methodology seed library via bundle manifest; pilot artifacts under tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/"
     tied_tokens_affected:
-      - "REQ-TIED_EASAR_RECOVERY"
       - "PROC-EASAR_RECOVERY"
+      - "REQ-TIED_EASAR_RECOVERY"
     tied_tokens_new:
-      - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
       - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
       - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS"
-      - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
-      - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
-      - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
       - "IMPL-TIED_CONTEXT_ADAPTIVE_EVAL_LINK"
+      - "IMPL-TIED_CONTEXT_ADAPTIVE_PROFILE"
+      - "IMPL-TIED_CONTEXT_ADAPTIVE_REASSESS"
+      - "IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR"
       - "PROC-CONTEXT_ADAPTIVE_PRACTICE"
+      - "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
   leap_feedback:
     sponsor_costly_choices:
       C1:
         choice: "default_adaptive_selection_or_mandatory_checklist_step"
-        status: "deferred"
         note: "v1 remains explicit opt-in tools; any default activation is separate LEAP proposal/REQ."
+        status: "deferred"
       C2:
         choice: "ai_first_method_selector"
-        status: "deferred"
         note: "Rule-based selector only in v1 per CASE §6.2."
+        status: "deferred"
     tied_stack_updates_required: []
   parent_program:
+    composition_boundary: "docs/comparisons/methodology-composition-matrix.md"
     linked_cursor_plan: "context-adaptive-tied_8292d200.plan.md"
     methodology_bridge: "docs/methodologies/context-adaptive-software-engineering.md"
-    composition_boundary: "docs/comparisons/methodology-composition-matrix.md"
   record_identity:
     author: "refine-plan"
     change_request_id: "REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
@@ -121,66 +121,66 @@ CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Selector silently marks UNKNOWN as LOW and skips integrated inquiry practices"
-        - "Reassessment rewrites selection receipt in place and bypasses verification gate"
         - "MCP select_practices mutates tied-project/requirements.yaml status"
         - "Method readout treats gate-only success as effectiveness"
+        - "Reassessment rewrites selection receipt in place and bypasses verification gate"
+        - "Selector silently marks UNKNOWN as LOW and skips integrated inquiry practices"
       depth_selected_at: "2026-10-17T21:57:00-07:00"
       depth_tier: "integrated"
       disconfirming_observations:
         - "One dogfood run proves causal improvement over fixed EASAR workflow"
         - "Opt-in tools remain advisory while checklist steps become mandatory by side effect"
-      evidence_references:
-        - "docs/methodologies/context-adaptive-software-engineering.md"
-        - "docs/comparisons/methodology-composition-matrix.md"
-        - "tied-project/working/REQ-TIED_EASAR_RECOVERY/PLAN.md"
-        - "tied-project/vocab/context-adaptive-engineering.md"
-      falsification_questions:
-        - "Can pre_implementation pass at integrated depth without structural inquiry pairing?"
-        - "Does any context_adaptive_* tool call yaml_index_update on tied-project indexes?"
-        - "Can UNKNOWN criticality produce the same practice set as explicit LOW in tests?"
       eligibility_triggers_matched:
+        - "cross_repo_tooling"
         - "mcp_write_surface"
         - "persistence"
-        - "cross_repo_tooling"
         - "strict_close_out"
+      evidence_references:
+        - "docs/comparisons/methodology-composition-matrix.md"
+        - "docs/methodologies/context-adaptive-software-engineering.md"
+        - "tied-project/vocab/context-adaptive-engineering.md"
+        - "tied-project/working/REQ-TIED_EASAR_RECOVERY/PLAN.md"
+      falsification_questions:
+        - "Can pre_implementation pass at integrated depth without structural inquiry pairing?"
+        - "Can UNKNOWN criticality produce the same practice set as explicit LOW in tests?"
+        - "Does any context_adaptive_* tool call yaml_index_update on tied-project indexes?"
       gate_policy: "advisory"
       prior_depth_tier: null
       rationale: "New MCP tools, versioned evidence receipts, and cross-module composition with EASAR/quality/methodology-learning; integrated depth with advisory gate policy for findings."
-      research_profile: "integrated-agent"
       refine_plan_note: "Structural tied_adversarial_inquiry_run + pre_implementation allowed:true is build-plan Slice 0 (after TIED mint), not refine-only passes."
+      research_profile: "integrated-agent"
       sub_adversarial_inquiry_pass: "required_before_red"
-    quality_profiles:
-      - "baseline-functional"
     consequence_ladder:
-      reversible_defaults:
-        - "Opt-in MCP tools with explicit output paths"
-        - "Seed library under tied-bundle/resources with smoke parity tests"
-        - "EASAR dogfood as methodology-learning experiment with pairing"
       costly_deferred:
+        - "AI policy engine replacing rule-based selector"
         - "Default selector activation on every agent request"
         - "New mandatory checklist step for practice selection"
-        - "AI policy engine replacing rule-based selector"
+      reversible_defaults:
+        - "EASAR dogfood as methodology-learning experiment with pairing"
+        - "Opt-in MCP tools with explicit output paths"
+        - "Seed library under tied-bundle/resources with smoke parity tests"
     quality_evidence_matrix:
-      - applicability: "applicable"
-        attribute: "read-only-tied-yaml"
-        command_or_test: "composition no-mutation tests for context_adaptive_* tools"
-        evidence_method: "automated"
-        limitation: "Does not prove all future MCP write paths"
-        owner: "build-plan"
-        rationale: "Selector must remain advisory; receipt builders must not become REQ writers"
-        result: "pass"
-        evidence_ref: "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts"
-        threshold: "no yaml_index_update from context_adaptive tools in tests"
       - applicability: "applicable"
         attribute: "deterministic-selection"
         command_or_test: "selector golden-hash unit tests"
         evidence_method: "automated"
+        evidence_ref: "mcp-server/src/context-adaptive/selector.test.ts"
         limitation: "Fixture library only until dogfood"
         owner: "build-plan"
         result: "pass"
-        evidence_ref: "mcp-server/src/context-adaptive/selector.test.ts"
         threshold: "identical profile+library bytes → identical receipt hash"
+      - applicability: "applicable"
+        attribute: "read-only-tied-yaml"
+        command_or_test: "composition no-mutation tests for context_adaptive_* tools"
+        evidence_method: "automated"
+        evidence_ref: "mcp-server/src/context-adaptive/context-adaptive.mcp.test.ts"
+        limitation: "Does not prove all future MCP write paths"
+        owner: "build-plan"
+        rationale: "Selector must remain advisory; receipt builders must not become REQ writers"
+        result: "pass"
+        threshold: "no yaml_index_update from context_adaptive tools in tests"
+    quality_profiles:
+      - "baseline-functional"
   tdd_sequence:
     - "Slice 0 — enroll tokens, gate-tracker-pre-implementation.yaml, structural inquiry, pre_implementation allowed:true"
     - "Slice 1 — IMPL pseudo-code + Layer C gate for five module IMPLs"
@@ -189,15 +189,15 @@ CITDP-REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
     - "Slice 4 — EASAR dogfood pilot (inventory/graph/claims slice inputs) + methodology-learning experiment"
     - "Slice 5 — verification + close_out gates; persist CITDP under tied-project/citdp/"
   test_strategy:
-    unit_red_first:
-      - "Contract loader: valid/malformed/unknown-field/duplicate-ID/cycle/contradictory fixtures"
-      - "Profile normalizer: UNKNOWN criticality → conservative selection path"
-      - "Selector: hard-constraint dominance, prerequisite failure, incompatible pair, stable tie-break"
-      - "Reassessment: unchanged/increased-risk/new-dependency/contradictory-evidence/stop-for-review"
-      - "Eval-link adapter: maps to envelope/quality/learning refs without conflating conformance and effectiveness"
     composition_before_mcp:
       - "Library load → profile validate → select → evidence obligations"
       - "Reassessment → loop_back action enum"
       - "Tool registration in index.ts without changing existing EASAR/gate tool schemas"
     e2e_justification: "No UI E2E; dogfood is MCP-driven methodology pilot with fixed EASAR slice inputs"
     regression: "Full mcp-server suites for easar-receipts, checklist-validator, request-evidence-envelope, methodology-learning"
+    unit_red_first:
+      - "Contract loader: valid/malformed/unknown-field/duplicate-ID/cycle/contradictory fixtures"
+      - "Eval-link adapter: maps to envelope/quality/learning refs without conflating conformance and effectiveness"
+      - "Profile normalizer: UNKNOWN criticality → conservative selection path"
+      - "Reassessment: unchanged/increased-risk/new-dependency/contradictory-evidence/stop-for-review"
+      - "Selector: hard-constraint dominance, prerequisite failure, incompatible pair, stable tie-break"

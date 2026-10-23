@@ -20,7 +20,7 @@ CITDP-REQ-TIED_JEV_TOOL_SAFETY_GATING:
     lint: "cd mcp-server && bunx tsc -b"
     verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && bun test src/jev/harness-tool-guard.test.ts src/jev/tool-safety-benchmark.test.ts src/tools/tool-safety-mcp.test.ts packages/agentstream/src/jev-harness-live-tool-gate.test.ts"
     proof_boundaries:
       - "Harness opt-in default off; no checklist gate authority from diagnostic MCP"

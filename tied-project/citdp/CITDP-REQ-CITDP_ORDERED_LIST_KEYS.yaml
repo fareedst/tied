@@ -1,0 +1,92 @@
+CITDP-REQ-CITDP_ORDERED_LIST_KEYS:
+  change_definition:
+    current_behavior: "CITDP records used evidence.commands and test_strategy.commands for ordered verification batteries; tied-yaml-canonical-v1 sorted those lists."
+    desired_behavior: "Ordered command lists use *_seq keys; citdp_record_write rejects legacy keys; in-repo CITDP YAML migrated."
+    non_goals:
+      - "Backward-compat read alias for evidence.commands"
+      - "Changing ORDERED_LIST_KEY_PATTERN"
+      - "Renaming unordered CITDP sets"
+    success_criteria:
+      - "188+ CITDP-family YAML files migrated to command_seq naming"
+      - "citdp_record_write rejects legacy keys"
+      - "REQ/ARCH/IMPL stack validates"
+      - "tied_validate_consistency ok"
+      - "yaml-canonicalizer preserves evidence.command_seq order"
+    unchanged_behavior:
+      - "Canonicalizer behavior for existing ordered keys"
+      - "validateCitdpOpenRecord semantics"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "npm test --prefix mcp-server; rename-citdp-command-keys.mjs --check; tied_validate_consistency ok; pseudocode_validate gate ok."
+  evidence:
+    command_seq:
+      - "npm test --prefix mcp-server"
+      - "node scripts/rename-citdp-command-keys.mjs --check"
+      - "tied_validate_consistency"
+      - "pseudocode_validate IMPL-CITDP_ORDERED_KEY_VALIDATE gate"
+    proof_boundaries:
+      - "unit_and_composition_tests_only"
+  impact_analysis:
+    impl_inventory_notes: "citdp-ordered-keys.ts; citdp-writer hook; scripts/rename-citdp-command-keys.mjs; docs LEAP"
+    modules_or_boundaries: "mcp-server/src/citdp-ordered-keys.ts; mcp-server/src/citdp-writer.ts; tied-bundle/docs/citdp-record-template.yaml"
+    tied_tokens_affected:
+      - "IMPL-TIED_YAML_CANONICALIZER"
+      - "REQ-TIED_YAML_CANONICALIZATION"
+    tied_tokens_new:
+      - "ARCH-CITDP_ORDERED_LIST_KEYS"
+      - "IMPL-CITDP_ORDERED_KEY_VALIDATE"
+      - "REQ-CITDP_ORDERED_LIST_KEYS"
+  leap_feedback:
+    divergences_from_analysis: "Extended scope to adoption_evidence.command_seq and citdp-inline/citdp-record-body filenames; 188 files migrated in one pass plus follow-ups."
+    record_status: "implemented"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-CITDP_ORDERED_LIST_KEYS"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-23"
+    title: "CITDP ordered command list keys (command_seq)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Codemod renames under wrong parent"
+        - "Migration misses adoption_evidence.commands"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "grep 'evidence:\\n  commands:' under tied-project/citdp after migration"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "mcp-server/src/citdp-ordered-keys.ts"
+        - "tied-bundle/docs/citdp-record-template.yaml"
+      falsification_questions:
+        - "Does command_seq match isOrderedListKey?"
+        - "Does validator run before atomic write?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Schema naming and bulk YAML rename; minimal depth."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - id: "R1"
+        mitigation: "Template, citdp-policy, CHANGELOG"
+        summary: "Stale docs reference legacy key"
+  tdd_sequence:
+    summary: "Validator TDD, migration, docs, TIED persist"
+  test_strategy:
+    documentation_only: false
+    e2e_applicability: "not_applicable"
+    summary: "citdp-ordered-keys.test.ts; citdp-writer.test.ts; yaml-canonicalizer nested command_seq case; migration --check"

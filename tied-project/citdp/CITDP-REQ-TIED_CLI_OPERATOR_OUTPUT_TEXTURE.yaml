@@ -11,7 +11,7 @@ CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
       - "REQ/ARCH/IMPL chain validates"
     unchanged_behavior: "Topic names, aliases, informational strings, exit codes 0/2; no Node wrapper for how()"
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/build-commands-how.test.mjs"
       - "tied_validate_consistency"
     proof_boundaries:

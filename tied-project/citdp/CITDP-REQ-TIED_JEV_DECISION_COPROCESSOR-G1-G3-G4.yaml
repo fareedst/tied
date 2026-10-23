@@ -10,7 +10,7 @@ CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-G1-G3-G4:
       - "mcp-server jev tests pass"
     unchanged_behavior: "Keyword PRELOAD authority; checklist gates authoritative."
   evidence:
-    commands:
+    command_seq:
       - "bun test mcp-server/packages/agentstream/src/jev-harness-live-tool-gate.test.ts"
       - "bun test mcp-server/src/jev/"
     evidence_references:

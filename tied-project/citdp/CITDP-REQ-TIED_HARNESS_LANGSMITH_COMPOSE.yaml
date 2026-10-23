@@ -16,7 +16,7 @@ CITDP-REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
       - "tied_validate_consistency ok"
     unchanged_behavior: "Checklist gate authority; Kaizen capture semantics; LangChain-reported benchmark labeling."
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/harness-trace-langsmith-compose-skill.test.mjs tools/bootstrap/lib/export-langsmith-traces.test.mjs tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
       - "npx tsx --test mcp-server/src/methodology-production-system-enrollment/methodology-production-system-enrollment.test.ts mcp-server/src/e2e/prompt-type-skills.test.ts"
       - "pseudocode_validate IMPL-TIED_HARNESS_LANGSMITH_COMPOSE gate_mode"
@@ -95,5 +95,5 @@ CITDP-REQ-TIED_HARNESS_LANGSMITH_COMPOSE:
     unit_tests:
       - "tools/bootstrap/lib/export-langsmith-traces.test.mjs"
       - "tools/bootstrap/lib/harness-trace-langsmith-compose-skill.test.mjs"
-    verification_commands:
+    verification_command_seq:
       - "tied_validate_consistency"

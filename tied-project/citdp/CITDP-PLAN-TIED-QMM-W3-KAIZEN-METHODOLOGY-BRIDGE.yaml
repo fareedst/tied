@@ -16,7 +16,7 @@ CITDP-PLAN-TIED-QMM-W3-KAIZEN-METHODOLOGY-BRIDGE:
       - "Orchestrator records W3 plan-only fields and W2 complete; current_wave W3 after plan-only exit."
     unchanged_behavior: "Kaizen capture/digest/review_bridge/outcome loop, W1 experiment MCP, W2 pairing MCP, and LEAP queue keep current behavior."
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of child plan against parent program W3 section"
       - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
     manifest_reference: null

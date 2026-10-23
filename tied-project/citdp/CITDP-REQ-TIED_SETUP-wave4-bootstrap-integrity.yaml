@@ -30,7 +30,7 @@ CITDP-REQ-TIED_SETUP-wave4-bootstrap-integrity:
         - "pre_implementation"
         - "verification"
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/adversarial-inquiry/checklist-integration.test.js"
       - "node --test mcp-server/dist/checklist-remediation-acceptance.test.js"
       - "node --test mcp-server/dist/request-evidence-envelope/request-evidence-envelope.test.js"

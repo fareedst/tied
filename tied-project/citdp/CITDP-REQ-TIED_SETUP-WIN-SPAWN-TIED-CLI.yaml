@@ -54,7 +54,7 @@ CITDP-REQ-TIED_SETUP-WIN-SPAWN-TIED-CLI:
       sub_adversarial_inquiry_pass: "not_applicable"
     summary: "Spawn option regression on Windows; wrong MCP base path."
   test_strategy:
-    commands:
+    command_seq:
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
       - "node --test tools/bootstrap/install-layers.integration.test.mjs"
       - "node --test tools/bootstrap/lib/child-process-win.test.mjs"

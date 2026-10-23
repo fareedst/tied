@@ -7,7 +7,7 @@ CITDP-REQ-TIED_CLAUDE_DOC_REMAINDER:
       - "Persisting this record to tied/citdp/ (inline only for DOC_REMAINDER)"
       - "Reopening REQ-TIED_CLAUDE_HARNESS implementation"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server/packages/agentstream && npm test"
       - "node --test tools/bootstrap/lib/claude-client-validation.test.mjs"
       - "node --test tools/bootstrap/lib/claude-harness.test.mjs"

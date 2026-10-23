@@ -31,7 +31,7 @@ CITDP-REQ-PSEUDOCODE_TYPED_FLOW:
         - "verification"
     verification_gate_notes: "626 mcp-server tests pass; qualification 124/124 parse, 0 new gate failures; F11 annotation median 2.5 lines; pilot recommendation proceed."
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && npm test (626/626 pass)"
       - "tied_validate_consistency ok"
       - "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-harness.sh qualify"

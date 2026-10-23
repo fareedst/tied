@@ -1,67 +1,67 @@
 CITDP-REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
   change_definition:
-    current_behavior: Root README leads with long methodology narrative; certifiable workflow and macOS quick start are buried.
-    desired_behavior: Three-band README with structure test, PCR operator guidance, and preserved bootstrap anchors.
+    current_behavior: "Root README leads with long methodology narrative; certifiable workflow and macOS quick start are buried."
+    desired_behavior: "Three-band README with structure test, PCR operator guidance, and preserved bootstrap anchors."
     non_goals:
-      - Change bootstrap or MCP runtime behavior
-      - Certification or compliance claims in prose
+      - "Certification or compliance claims in prose"
+      - "Change bootstrap or MCP runtime behavior"
     success_criteria:
-      - SC-README-BANDS through SC-README-INDEX satisfied
+      - "SC-README-BANDS through SC-README-INDEX satisfied"
   completion_criteria:
-    verification_gate_notes: store-readme-structure.test.ts green; tied_validate_consistency ok.
+    verification_gate_notes: "store-readme-structure.test.ts green; tied_validate_consistency ok."
   evidence:
-    commands:
+    command_seq:
       - "node --import tsx --test mcp-server/src/store-readme-structure.test.ts"
       - "tied_validate_consistency"
     proof_boundaries:
-      - documentation_only
-      - no_runtime_mcp_changes
+      - "documentation_only"
+      - "no_runtime_mcp_changes"
   impact_analysis:
-    impl_inventory_notes: README.md; client-development-index.md; tools/bootstrap/README.md; store-readme-structure.test.ts
-    modules_or_boundaries: Operator documentation only.
+    impl_inventory_notes: "README.md; client-development-index.md; tools/bootstrap/README.md; store-readme-structure.test.ts"
+    modules_or_boundaries: "Operator documentation only."
     tied_tokens_affected: []
     tied_tokens_new:
-      - ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE
-      - IMPL-TIED_STORE_README_SECTIONS
-      - REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+      - "IMPL-TIED_STORE_README_SECTIONS"
+      - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
   leap_feedback:
-    divergences_from_analysis: none
-    record_status: complete
+    divergences_from_analysis: "none"
+    record_status: "complete"
     tied_stack_updates_required: []
   record_identity:
-    change_request_id: REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING
-    gate_policy: advisory
-    profile_depth: minimal
+    change_request_id: "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
     recorded_at: "2026-10-18"
-    title: Store README certifiable operator onboarding
+    title: "Store README certifiable operator onboarding"
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
-        - Reader skips Band 3 and never finds Windows install commands.
-        - External link to #primary-implementation-repository breaks after heading move.
-      depth_tier: minimal
+        - "External link to"
+        - "Reader skips Band 3 and never finds Windows install commands."
+      depth_tier: "minimal"
       disconfirming_observations:
-        - store-readme-structure.test.ts asserts preserved H2 anchors.
-        - tools/bootstrap/README.md still links #primary-implementation-repository.
+        - "store-readme-structure.test.ts asserts preserved H2 anchors."
+        - "tools/bootstrap/README.md still links"
       eligibility_triggers_matched: []
       evidence_references:
-        - README.md
-        - mcp-server/src/store-readme-structure.test.ts
+        - "mcp-server/src/store-readme-structure.test.ts"
+        - "README.md"
       falsification_questions:
-        - Do normative H2 bands appear out of order?
-        - Does README contain affirmative ISO/CMMI certification claims?
-      gate_policy: advisory
-      prior_depth_tier: minimal
-      rationale: Documentation-only change.
-      sub_adversarial_inquiry_pass: not_applicable
+        - "Do normative H2 bands appear out of order?"
+        - "Does README contain affirmative ISO/CMMI certification claims?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Documentation-only change."
+      sub_adversarial_inquiry_pass: "not_applicable"
     risks:
-      - description: Broken deep links to removed narrative headings.
-        id: RISK-README-001
-        likelihood: Medium
-        mitigation: Preserve bootstrap H2 anchors; structure test.
-        severity: Low
-    summary: Anchor and band-order drift; minimal depth.
+      - description: "Broken deep links to removed narrative headings."
+        id: "RISK-README-001"
+        likelihood: "Medium"
+        mitigation: "Preserve bootstrap H2 anchors; structure test."
+        severity: "Low"
+    summary: "Anchor and band-order drift; minimal depth."
   tdd_sequence:
-    summary: RED store-readme-structure.test.ts then README rewrite.
+    summary: "RED store-readme-structure.test.ts then README rewrite."
   test_strategy:
-    summary: mcp-server/src/store-readme-structure.test.ts; tied_validate_consistency.
+    summary: "mcp-server/src/store-readme-structure.test.ts; tied_validate_consistency."

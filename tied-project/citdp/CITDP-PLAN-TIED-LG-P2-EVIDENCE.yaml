@@ -29,7 +29,7 @@ CITDP-PLAN-TIED-LG-P2-EVIDENCE:
         - "close_out"
         - "verification"
   evidence:
-    commands:
+    command_seq:
       - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
       - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out --envelope-blocking --run-id p2-closeout-closeout-20261012"
       - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase verification --run-id p2-closeout-verification-20261012"

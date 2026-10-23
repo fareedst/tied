@@ -1,0 +1,14 @@
+IMPL-CITDP_ORDERED_KEY_VALIDATE:
+  architecture_decisions:
+    - "ARCH-CITDP_ORDERED_LIST_KEYS"
+  description: "validateCitdpOrderedListKeys module and citdp-writer hook; migration script rename-citdp-command-keys.mjs."
+  essence_pseudocode_path: "implementation-decisions/IMPL-CITDP_ORDERED_KEY_VALIDATE-pseudocode.md"
+  name: "CITDP ordered list key validator"
+  requirements:
+    - "REQ-CITDP_ORDERED_LIST_KEYS"
+  status: "Planned"
+  validation_criteria:
+    - description: "rename-citdp-command-keys.mjs --check exits 0"
+      method: "migration idempotency"
+    - description: "citdp-ordered-keys.test.ts and citdp-writer.test.ts"
+      method: "unit test"

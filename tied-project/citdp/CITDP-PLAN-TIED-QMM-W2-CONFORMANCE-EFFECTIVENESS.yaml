@@ -16,7 +16,7 @@ CITDP-PLAN-TIED-QMM-W2-CONFORMANCE-EFFECTIVENESS:
       - "Orchestrator records W2 plan-only execution_authority and child_plan_status authored."
     unchanged_behavior: "Runtime gate behavior, W1 experiment MCP, Kaizen tools, and LEAP queue keep current behavior."
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of child plan against parent program W2 section"
       - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
     manifest_reference: null

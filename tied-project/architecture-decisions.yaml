@@ -288,6 +288,15 @@ ARCH-CHECKLIST-PROCESS-REVIEW:
       - "IMPL-CHECKLIST-PROCESS-REVIEW"
     requirements:
       - "REQ-CHECKLIST-PROCESS-REVIEW"
+ARCH-CITDP_ORDERED_LIST_KEYS:
+  description: "CITDP record shape for ordered command lists documented in citdp-record-template and detail-files-schema; enforced at citdp_record_write."
+  detail_file: "architecture-decisions/ARCH-CITDP_ORDERED_LIST_KEYS.yaml"
+  implementation_decisions:
+    - "IMPL-CITDP_ORDERED_KEY_VALIDATE"
+  name: "CITDP ordered list key validation boundary"
+  requirements:
+    - "REQ-CITDP_ORDERED_LIST_KEYS"
+  status: "Accepted"
 ARCH-CONFIG_DISCOVERY_LAYERING:
   alternatives_considered:
     - cons:

@@ -18,7 +18,7 @@
 | **depth_tier** | `minimal` | Sidecar-only; no behavior change; no production code |
 | **Inquiry** | **Skip** with documented waiver `inquiry_not_required_sidecar_only` | Contract precision; not integrated activation |
 | **Gate policy** | `advisory` | Inherited from Wave 8; no new inquiry findings expected |
-| **CITDP timing** | Draft at refine-plan; **finalize at plan-close-out** (`persist-citdp-record`) | `evidence.commands` populated after PSA refresh + close_out runner |
+| **CITDP timing** | Draft at refine-plan; **finalize at plan-close-out** (`persist-citdp-record`) | `evidence.command_seq` populated after PSA refresh + close_out runner |
 | **Tracker strategy** | **New follow-up tracker** — do not mutate Wave 8 tracker | Preserves Wave 8 historical receipt |
 | **Run identity** | `run_id: layerb-sidecar-fix-20260911` | Distinct from `wave8-closeout-20260911` |
 | **Unified runner** | **Required** at `close_out` (not optional) | Refreshes envelope after post-W8 sidecar hash change; clears stale PSA/sidecar gaps without Wave 9 inquiry |
@@ -281,7 +281,7 @@ Also run **`tied_checklist_gate_validate`** with `phase: close_out`, same tracke
 
 | Task | Target | Pass criterion |
 |---|---|---|
-| Finalize CITDP | `CITDP-layerb-sidecar-fix.yaml` | `record_status: final`; `evidence.commands` = validation + PSA + close_out runner |
+| Finalize CITDP | `CITDP-layerb-sidecar-fix.yaml` | `record_status: final`; `evidence.command_seq` = validation + PSA + close_out runner |
 | Update §13.2 | `docs/evidence-collection-conversation-patterns.md` | Note close-out complete when executed |
 | CHANGELOG | `CHANGELOG.md` `[Unreleased]` → **### Changed** | Layer B sidecar hygiene entry |
 | Mark `persist-citdp-record` | Tracker slug | `completed` with CITDP ref |

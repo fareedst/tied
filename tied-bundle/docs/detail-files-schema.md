@@ -93,6 +93,18 @@ When authoring or generating TIED YAML (detail files, CITDP, working artifacts):
 - **Ordered lists (preserve document order):** Workflow sequences must use a recognized **ordered-list key** name. Families include `order` / `steps` / `_order` / `_seq` / `_sequence` with prefix, suffix, or infix forms (see `yaml_format.ordered_list_key_pattern` from `tied_yaml_format` or MCP `formatYamlMetadata`).
 - **Suffix precision:** Only keys ending in `_sequence` (not `_sequence_id` or other suffixes) preserve list order; when in doubt, prefer `_seq_*` or `*_seq` for new workflow lists.
 
+### CITDP ordered command batteries ([REQ-CITDP_ORDERED_LIST_KEYS])
+
+Close-out verification command lists are **ordered sequences**, not sorted sets. In CITDP YAML (`tied-project/citdp/CITDP-*.yaml`, working copies, and `citdp-record-template.yaml`):
+
+| Section | Use | Do not use |
+| --- | --- | --- |
+| `evidence` | `command_seq` | `commands` |
+| `adoption_evidence` | `command_seq` | `commands` |
+| `test_strategy` | `command_seq`, `verification_command_seq`, `integration_command_seq`, `regression_command_seq` | `commands`, `verification_commands`, … |
+
+`citdp_record_write` rejects deprecated keys with `deprecated_citdp_key:*` diagnostics.
+
 Gate and receipt **JSON** under `tied-project/working/` should use the same canonical tree as YAML (`safeStringifyJson` / `canonicalizeForStorage` in `mcp-server/src/storage-dump.ts`).
 
 ---

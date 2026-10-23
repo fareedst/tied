@@ -22,7 +22,7 @@ CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION:
     tied_validate_consistency: "required"
     verification_gate_notes: "mcp-server npm test; yaml-loader isolation tests; tied_validate_consistency ok"
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/check-docs-vocab-links.test.mjs tools/bootstrap/lib/lint-stale-layout.test.mjs"
       - "node scripts/prune-project-index-methodology-duplicates.mjs --dry-run /path/to/client"
       - "node tools/bootstrap/lib/check-docs-vocab-links.mjs ."

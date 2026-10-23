@@ -34,7 +34,7 @@ CITDP-doc-psa-layer-c-closeout:
         - "verification"
     verification_gate_notes: "Layer C PSA ok for IMPL-TIED_FILES; backfill exit 0; gates doc-psa-lc-* allowed true; envelope zero blocking gaps."
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && npm test"
       - "node --test mcp-server/dist/checklist-pseudocode-gate.test.js"
       - "node --test mcp-server/dist/checklist-validator.test.js"

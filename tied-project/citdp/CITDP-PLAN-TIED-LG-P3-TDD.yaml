@@ -28,7 +28,7 @@ CITDP-PLAN-TIED-LG-P3-TDD:
         - "close_out"
         - "verification"
   evidence:
-    commands:
+    command_seq:
       - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
     manifest_reference: null
     proof_boundaries:

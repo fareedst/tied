@@ -19,7 +19,7 @@ CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK:
       - "REQ/ARCH/IMPL and pseudocode_validate pass"
     unchanged_behavior: "Charter policy bounds; checklist gate authority; existing methodology MCP semantics."
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/htol-pilot-cohort-runbook-doc.test.mjs"
       - "pseudocode_validate IMPL-TIED_HTOL_PILOT_COHORT_RUNBOOK gate_mode"
       - "tied_checklist_gate_validate phase verification"
@@ -95,5 +95,5 @@ CITDP-REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK:
     mandatory_order: "RED runbook doc test then author runbook"
     unit_tests:
       - "tools/bootstrap/lib/htol-pilot-cohort-runbook-doc.test.mjs"
-    verification_commands:
+    verification_command_seq:
       - "tied_validate_consistency"

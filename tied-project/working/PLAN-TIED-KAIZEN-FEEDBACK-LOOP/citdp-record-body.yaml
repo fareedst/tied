@@ -16,7 +16,7 @@ change_definition:
     - "The three costly choices are recorded as 2026-10-07 sponsor decisions: local append and export only, privacy tier operator_local, and three feedback entry types plus observation kind."
   unchanged_behavior: "tied_feedback_add, tied_feedback_export, normalizeOperationalSource, duplicate grouping, and reviewed proposal creation keep their current behavior."
 evidence:
-  commands:
+  command_seq:
     - "Read-only comparison of the linked plan with feedback.ts and feedback-promotion.ts"
     - "TIED MCP tied_checklist_gate_validate at pre_implementation and verification"
     - "TIED MCP tied_validate_consistency"

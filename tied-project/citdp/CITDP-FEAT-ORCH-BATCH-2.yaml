@@ -18,7 +18,7 @@ CITDP-FEAT-ORCH-BATCH-2:
     status: "complete"
     verification_gate_notes: "Focused 12/12 and full 230/230 tests passed; TypeScript build passed; TIED consistency returned ok true; tied_verify updated four REQ and seven IMPL statuses."
   evidence:
-    commands:
+    command_seq:
       - "node --test dist/feature-orchestration/clarification.test.js dist/feature-orchestration/constitution.test.js dist/feature-orchestration/readiness.test.js dist/feature-orchestration/commands.test.js"
       - "npm run build"
       - "npm test"

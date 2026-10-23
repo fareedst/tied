@@ -17,7 +17,7 @@ CITDP-REQ-QUALITY_ASSURANCE_EVIDENCE:
     selected_quality_evidence_reproducible: "true"
     verification_gate_notes: "MCP suite passed 144 tests; webhook pilot passed 7 tests; Go tests passed; Ruby syntax passed; changed YAML lint passed; Layer B and scoped traceability reports passed; final TIED consistency report passed."
   evidence:
-    commands:
+    command_seq:
       - artifacts:
           - "/tmp/tied-quality-evidence-2026-08-02/agentstream-go-test.stderr.txt"
           - "/tmp/tied-quality-evidence-2026-08-02/agentstream-go-test.stdout.txt"

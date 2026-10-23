@@ -15,7 +15,7 @@ CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE:
       - "sponsor-authority-qmm-program-close-w6-waived-20261010.md on disk"
     unchanged_behavior: "Product behavior from W1–W5 REQ stacks; Kaizen closed program Phase 3 remains deferred on Kaizen orchestrator."
   evidence:
-    commands:
+    command_seq:
       - "Commit 1: enrollment tests + tied_validate_consistency"
       - "lint_yaml on changed project YAML"
       - "Read-only cross-artifact hygiene matrix"
@@ -82,6 +82,6 @@ CITDP-PLAN-TIED-QMM-PROGRAM-CLOSE:
     composition_tests: "not_applicable"
     e2e_tests: "not_applicable"
     notes: "Program-close commit validates YAML lint and reconcile table only unless indexes touched."
-    regression_commands:
+    regression_command_seq:
       - "Commit 1: mcp-server enrollment unit/MCP tests per W5 implement CITDP"
     unit_tests: "not_applicable"

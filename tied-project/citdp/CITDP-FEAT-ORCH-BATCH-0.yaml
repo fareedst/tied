@@ -24,7 +24,7 @@ CITDP-FEAT-ORCH-BATCH-0:
       - "user-facing orchestration CLI and MCP tools"
     verification_gate_notes: "tied_verify updated all four REQ statuses to Implemented and all four IMPL statuses to Active; post-update tied_validate_consistency returned ok true."
   evidence:
-    commands:
+    command_seq:
       - "node --test dist/feature-orchestration/*.test.js"
       - "npm run build"
       - "npm test"
@@ -113,7 +113,7 @@ CITDP-FEAT-ORCH-BATCH-0:
       - "manifest validator"
     summary: "Tests preceded each module; production code followed observed RED failures; each module was validated independently before suite integration."
   test_strategy:
-    commands:
+    command_seq:
       - "node --test dist/feature-orchestration/*.test.js"
       - "npm run build"
       - "npm test"

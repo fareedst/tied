@@ -12,7 +12,7 @@ CITDP-REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
       - "Zero Bun in controlled runner inventory"
     unchanged_behavior: "MCP stdio via node dist/index.js; @tied/* package boundaries; full test graph semantics"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && npm run build && npm test"
       - "cd mcp-server && npx tsc -b"
       - "TIED_BASE_PATH=tied-project TIED_MCP_BIN=mcp-server/dist/index.js tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_validate_consistency '{}'"

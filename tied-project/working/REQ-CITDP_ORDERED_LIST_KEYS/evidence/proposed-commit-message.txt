@@ -1,0 +1,11 @@
+feat(citdp): use command_seq for ordered verification batteries
+
+CITDP YAML ordered command lists now use *_seq keys so tied-yaml-canonical-v1
+preserves close-out run order. citdp_record_write rejects legacy commands keys;
+bulk migration via scripts/rename-citdp-command-keys.mjs.
+
+REQ-CITDP_ORDERED_LIST_KEYS, ARCH-CITDP_ORDERED_LIST_KEYS,
+IMPL-CITDP_ORDERED_KEY_VALIDATE
+
+Machine close-out: gate close_out allowed; envelope blocking_gaps=0.
+Process: npm test --prefix mcp-server; tied_validate_consistency ok.

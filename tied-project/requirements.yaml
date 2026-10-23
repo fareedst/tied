@@ -352,6 +352,26 @@ REQ-CHECKLIST-PROCESS-REVIEW:
       - "ARCH-CHECKLIST-PROCESS-REVIEW"
     implementation:
       - "IMPL-CHECKLIST-PROCESS-REVIEW"
+REQ-CITDP_ORDERED_LIST_KEYS:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-CITDP_ORDERED_LIST_KEYS"
+    implementation:
+      - "IMPL-CITDP_ORDERED_KEY_VALIDATE"
+  description: "CITDP YAML ordered verification batteries use *_seq key names; citdp_record_write rejects legacy commands keys under evidence, adoption_evidence, and test_strategy."
+  detail_file: "requirements/REQ-CITDP_ORDERED_LIST_KEYS.yaml"
+  name: "CITDP ordered command list keys"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-CITDP_ORDERED_LIST_KEYS"
+    implementation:
+      - "IMPL-CITDP_ORDERED_KEY_VALIDATE"
+    tests:
+      - "citdp-ordered-keys.test.ts"
+      - "citdp-writer.test.ts"
+      - "yaml-canonicalizer.test.ts"
 REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   category: "Functional"
   detail_file: "requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml"

@@ -12,6 +12,7 @@ import {
   type AdversarialDepth,
 } from "./checklist-validator.js";
 import { validateCitdpDaeSizingFields } from "./citdp-express-lane.js";
+import { validateCitdpOrderedListKeys } from "./citdp-ordered-keys.js";
 import {
   projectRootFromTiedBase,
   requestTokenFromCitdpFilename,
@@ -145,6 +146,15 @@ export function writeCitdpRecord(params: {
   });
   if (!daeFields.ok) {
     return { ok: false, error: `invalid CITDP DAE fields: ${daeFields.diagnostics.join(", ")}` };
+  }
+
+  // [IMPL-CITDP_ORDERED_KEY_VALIDATE] [ARCH-CITDP_ORDERED_LIST_KEYS] [REQ-CITDP_ORDERED_LIST_KEYS]
+  const orderedKeys = validateCitdpOrderedListKeys(mergedRecord);
+  if (!orderedKeys.ok) {
+    return {
+      ok: false,
+      error: `invalid CITDP ordered list keys: ${orderedKeys.diagnostics.join(", ")}`,
+    };
   }
 
   try {

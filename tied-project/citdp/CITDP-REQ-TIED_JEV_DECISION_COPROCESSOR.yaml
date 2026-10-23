@@ -17,7 +17,7 @@ CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR:
     lint: "cd mcp-server && bunx tsc -b (project standard)"
     verification: "tied_validate_consistency; run-close-out-gates close_out"
   evidence:
-    commands:
+    command_seq:
       - command:
           - "-b"
           - "bunx"

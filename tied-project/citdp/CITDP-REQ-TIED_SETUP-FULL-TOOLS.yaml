@@ -10,7 +10,7 @@ CITDP-REQ-TIED_SETUP-FULL-TOOLS:
       - "Fresh disposable client with --full-tools has expected YAML and tied/analysis/ files"
       - "Re-bootstrap without force leaves tool keys unchanged"
   evidence:
-    commands:
+    command_seq:
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
       - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
     proof_boundaries:
@@ -46,7 +46,7 @@ CITDP-REQ-TIED_SETUP-FULL-TOOLS:
       gate_policy: "advisory"
       research_profile: "read-only research profile"
   test_strategy:
-    commands:
+    command_seq:
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
       - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
     matrix_notes: "Cases: --full-tools and granular flags; create-only skip merge; --force-tool-config; BBCE starter copy; CLI overrides env mirrors.\n"

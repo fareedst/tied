@@ -3,23 +3,23 @@ CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
     current_behavior: "Cross-REQ improvement arcs (e.g. LangChain harness) and sponsor-deferred work are tracked only in committed RESUMPTION/handoff prose or ad hoc notes; no shared operator index for primary improvement/maintenance work distinct from tied_backlog and LEAP queue."
     desired_behavior: "Committed guide defines private queue path, TIQ-* schema, and handoff/close-out maintenance; bootstrap test guards guide; first local row seeds LangChain harness arc without committing queue body."
     non_goals:
-      - "MCP read/write for queue rows"
-      - "Mandatory queue update on every close-out"
       - "Cross-machine queue sync"
+      - "Mandatory queue update on every close-out"
+      - "MCP read/write for queue rows"
     success_criteria:
-      - "Guide includes proof boundary, path, schema, maintenance, distinction table"
       - "client-development-index.md links guide"
-      - "working-artifact-placement.md gray zone names private queue path"
-      - "tied-improvement-pending-work-queue-doc.test.mjs passes"
       - "Example template exists"
+      - "Guide includes proof boundary, path, schema, maintenance, distinction table"
       - "HARNESS RESUMPTION.md registers task id without queue body"
+      - "tied-improvement-pending-work-queue-doc.test.mjs passes"
+      - "working-artifact-placement.md gray zone names private queue path"
     unchanged_behavior: "Checklist gates, tied_backlog, LEAP proposal queue, and Tracker/CITDP authority unchanged."
   evidence:
-    commands:
+    command_seq:
+      - "git check-ignore -v tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md"
       - "node --test tools/bootstrap/lib/tied-improvement-pending-work-queue-doc.test.mjs"
       - "tied_checklist_gate_validate pre_implementation"
       - "tied_validate_consistency"
-      - "git check-ignore -v tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md"
     proof_boundaries:
       - "documentation_and_local_operator_data_only"
       - "does_not_prove_queue_compliance_across_sessions"
@@ -28,9 +28,9 @@ CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
     modules_or_boundaries: "tied-bundle/docs/, tied-bundle/templates/, tied-project/ YAML and working evidence."
     tied_tokens_affected: []
     tied_tokens_new:
-      - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
       - "ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
       - "IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+      - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
   record_identity:
     change_request_id: "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
     depth_tier: "minimal"
@@ -51,8 +51,8 @@ CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE:
         - "Operators duplicate full RESUMPTION prose into queue rows."
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/HARNESS-IMPROVEMENT-ARC/RESUMPTION.md"
         - "/Users/fareed/.cursor/plans/tied_improvement_pending_queue_e64493b6.plan.md"
+        - "tied-project/working/HARNESS-IMPROVEMENT-ARC/RESUMPTION.md"
       falsification_questions:
         - "Does the guide state live queue is local-only and not synchronized by TIED?"
         - "Is distinction from tied_backlog documented?"

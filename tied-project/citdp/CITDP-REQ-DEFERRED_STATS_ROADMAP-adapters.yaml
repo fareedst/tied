@@ -24,7 +24,7 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-adapters:
       - "No sibling-client pilots beyond 1787461685"
     verification_gate_notes: "PASS structural-only gates. No tied_verify call for IMPL-EVIDENCE_CHAIN_PROFILE and no runtime verification claim."
   evidence:
-    commands:
+    command_seq:
       - command: "ruby scripts/validate_vocab_index.rb"
         result: "passed: Vocabulary index validation passed."
       - command: "search mcp-server/src for COLLECT_FILE_INVENTORY or COLLECT_VOCAB_DRIFT"

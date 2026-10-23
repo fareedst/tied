@@ -31,7 +31,7 @@ CITDP-REQ-DEFERRED_STATS_ROADMAP-v2:
     artifact_paths:
       - "working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.md"
       - "working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.yaml"
-    commands:
+    command_seq:
       - command: "bunx tsc -b from mcp-server"
         result: "passed: exit 0"
       - command: "node dist/cli/evidence-chain-report.js --inputs ../working/evidence-chain/report-inputs-v2-golden.yaml --yaml-out ../working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.yaml --markdown-out ../working/REQ-DEFERRED_STATS_ROADMAP/v2-acceptance/report.md --report-version v2"

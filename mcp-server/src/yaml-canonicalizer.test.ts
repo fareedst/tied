@@ -136,6 +136,16 @@ test("isOrderedListKey matches documented pattern ORD-TDD-SEQUENCE", () => {
   assert.equal(ORDERED_LIST_KEY_PATTERN.includes("_seq"), true);
 });
 
+// [REQ-CITDP_ORDERED_LIST_KEYS] CITDP evidence.command_seq preserves verification battery order.
+test("preserves nested evidence.command_seq order REQ-CITDP_ORDERED_LIST_KEYS", () => {
+  const result = canonicalizeValue({
+    evidence: { command_seq: ["z", "a"], proof_boundaries: ["b", "a"] },
+  }) as Record<string, Record<string, unknown>>;
+  assert.deepEqual(result.evidence.command_seq, ["z", "a"]);
+  assert.deepEqual(result.evidence.proof_boundaries, ["a", "b"]);
+  assert.equal(isOrderedListKey("command_seq"), true);
+});
+
 // [IMPL-TIED_YAML_CANONICALIZER] [ARCH-TIED_YAML_CANONICAL_PROFILE] [REQ-TIED_YAML_CANONICALIZATION]
 // How: Exclude block-scalar bodies and IMPL pseudo-code sidecars from recursive semantic normalization; preserve their internal text structure.
 test("preserves opaque block-scalar bodies REQ-TIED_YAML_CANONICALIZATION", () => {

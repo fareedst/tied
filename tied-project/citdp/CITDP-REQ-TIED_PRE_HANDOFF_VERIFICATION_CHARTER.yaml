@@ -13,7 +13,7 @@ CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
       - "REQ/ARCH/IMPL Planned→Implemented with tied_validate_consistency pass"
     unchanged_behavior: "Checklist gates, tied_verify, and DAE charter opt-in defaults unchanged."
   evidence:
-    commands:
+    command_seq:
       - "node --test pre-handoff-charter-doc.test.mjs"
       - "tied_gate_check pre_implementation"
       - "tied_validate_consistency"

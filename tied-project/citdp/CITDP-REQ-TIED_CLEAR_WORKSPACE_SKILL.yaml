@@ -3,23 +3,23 @@ CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL:
     current_behavior_prior: "Operators manually chain tied_git_hygiene, close-out, and traceable-commit checklist steps without a single explicit skill; git hygiene receipts and close-out sequencing vary by working folder."
     desired_behavior: "Standalone clear-workspace skill routes to git hygiene MCP, close-out workflow, and traceable-commit prep as merited; shared clear-workspace-routing.md in prompt-shared; no automatic git commit; suggests handoff when not commit-ready."
     non_goals:
-      - "New MCP tools or prompt-type leaf skills"
       - "Automatic git commit or push"
+      - "New MCP tools or prompt-type leaf skills"
       - "Replacing checklist gate authority"
     success_criteria:
+      - "Bootstrap tests assert /clear-workspace marker"
       - "bundled-clear-workspace-skill/SKILL.md and clear-workspace-routing.md exist"
       - "manifest.json lists skillName clear-workspace"
-      - "Bootstrap tests assert /clear-workspace marker"
       - "tied_validate_consistency ok after YAML mint"
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/client-skills-catalog.test.mjs"
       - "cd mcp-server && npm test -- client-bootstrap-skills"
       - "cd mcp-server && npm test -- prompt-type-skills"
       - "tied_validate_consistency"
     proof_boundaries:
-      - "orchestration_prose_and_bootstrap_only"
       - "does_not_prove_git_hygiene_apply_safety"
+      - "orchestration_prose_and_bootstrap_only"
   impact_analysis:
     impl_inventory_notes: "SKILL.md + clear-workspace-routing.md + manifest; reuses tied_git_hygiene and close-out boundaries."
     modules_or_boundaries: "tools/bundled-clear-workspace-skill/; tools/bundled-prompt-type-skills/prompt-shared/"

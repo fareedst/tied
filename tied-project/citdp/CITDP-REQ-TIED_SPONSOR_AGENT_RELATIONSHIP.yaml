@@ -38,7 +38,7 @@ CITDP-REQ-TIED_SPONSOR_AGENT_RELATIONSHIP:
     pseudocode_structural_validation: "Layer B + Layer C gate_mode pass"
     verification: "tied_verify + tied_validate_consistency + pre_implementation/verification/close_out gates allowed: true"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && bun test src/checklist-validator.test.ts src/e2e/sponsor-agent-relationship-contract.test.ts src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts src/relationship/consequence-ladder.test.ts src/fixture-corpus-regression.test.ts"
       - "cd mcp-server && bunx tsc -b"
       - "ruby scripts/validate_vocab_index.rb"

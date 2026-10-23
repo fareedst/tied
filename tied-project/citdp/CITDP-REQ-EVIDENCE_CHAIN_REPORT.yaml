@@ -19,7 +19,7 @@ CITDP-REQ-EVIDENCE_CHAIN_REPORT:
   completion_criteria:
     verification_gate_notes: "Unit, CLI composition, and bootstrap tests passed; tied_verify set REQ-EVIDENCE_CHAIN_REPORT Implemented and IMPL-EVIDENCE_CHAIN_REPORT Active. CHANGELOG updated after green tests."
   evidence:
-    commands:
+    command_seq:
       - "node --test dist/e2e/bootstrap-and-load.test.js"
       - "node --test dist/fidelity-research/evidence-chain-report.test.js dist/fidelity-research/evidence-chain-report.cli.test.js dist/fidelity-research/evidence-chain-profile.test.js"
       - "npx tsc -b --pretty false"

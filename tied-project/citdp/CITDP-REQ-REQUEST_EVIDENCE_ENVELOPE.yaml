@@ -29,7 +29,7 @@ CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE:
         - "verification"
     verification_gate_notes: "Slice 5 complete: request_evidence_envelope_backfill MCP+CLI; pilot on /dev/test/1788547701 and /dev/test/1787603099; evaluation-corpus rows flipped to require_envelope; envelope tests green."
   evidence:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/... (pass)"
       - "node --test dist/request-evidence-envelope/*.test.js (35/35 pass)"
       - "node working/REQ-REQUEST_EVIDENCE_ENVELOPE/run-close-out-gates.mjs"

@@ -39,6 +39,6 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-h:
       prior_depth_tier: "minimal"
       profile_depth: "not_measured"
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/..."
       - "tied_validate_consistency"

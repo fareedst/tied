@@ -42,7 +42,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m:
       prior_depth_tier: "integrated"
       profile_depth: "not_measured"
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/checklist/..."
       - "go test ./tools/agentstream/cmd/agentstream/..."
       - "ruby -Iscripts/test scripts/test/adherence_append_action_attempted_test.rb"

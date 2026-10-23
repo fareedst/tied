@@ -32,7 +32,7 @@ CITDP-REQ-TIED_YAML_CANONICALIZATION:
     - "TypeScript and Ruby produce Apple, apple, Banana, zebra in the same order for mixed-case values."
     - "Unit, composition, and compatibility validation pass; E2E is explicitly not applicable."
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && npm test — tsc build plus 159 tests passed, 0 failed"
       - "MCP pseudocode_validate(IMPL-TIED_YAML_CANONICALIZER) — Layer B ok with 9 blocks and no diagnostics"
       - "MCP tied_validate_consistency — ok true"

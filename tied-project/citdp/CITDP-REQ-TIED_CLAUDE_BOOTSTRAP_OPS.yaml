@@ -30,7 +30,7 @@ CITDP-REQ-TIED_CLAUDE_BOOTSTRAP_OPS:
         - "verification"
     verification_gate_notes: "Plan-new-feature opens stack only; RED/code deferred to build-plan. Implement B1 Windows asserts first."
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/claude-harness.test.mjs"
       - "pseudocode_validate for IMPL-TIED_CLAUDE_BOOTSTRAP_OPS"
       - "scripts/windows-bootstrap-smoke.cmd (after B1 asserts)"

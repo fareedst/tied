@@ -130,6 +130,8 @@ For small but real behavior changes, some teams still want a **short** CITDP rec
 
 After `tied-install.sh`, use the layout in **`./tied-bundle/docs/citdp-record-template.yaml`** when creating `tied-project/citdp/CITDP-{change_request_id}.yaml` (see **persist-citdp-record** in `agent-req-implementation-checklist.yaml`).
 
+Ordered verification command batteries use **`evidence.command_seq`** (not `commands`); see `detail-files-schema.md` § CITDP ordered command batteries and [REQ-CITDP_ORDERED_LIST_KEYS].
+
 ## Hinge fields
 
 A **hinge field** is a CITDP map that is simultaneously measurement for the agent and consent for the sponsor/reviewer. When present (non-null), require:

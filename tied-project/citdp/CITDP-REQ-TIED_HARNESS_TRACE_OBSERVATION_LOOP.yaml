@@ -18,7 +18,7 @@ CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
       - "tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md installed via tied-install path"
     unchanged_behavior: "Checklist gate authority, MCP YAML writes, closed REQ-TIED_HARNESS_PLATFORM_SEAM seam, Kaizen capture semantics."
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs (after implement)"
       - "pseudocode_validate IMPL-TIED_HARNESS_TRACE_OBSERVATION gate_mode"
       - "tied_checklist_gate_validate phase pre_implementation"
@@ -99,6 +99,6 @@ CITDP-REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP:
     mandatory_order: "RED doc contract test before guide finalization"
     unit_tests:
       - "tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
-    verification_commands:
+    verification_command_seq:
       - "prompt-type-skills static contract if leaf inventory changes"
       - "tied_validate_consistency after YAML mutations"

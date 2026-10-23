@@ -348,6 +348,22 @@ IMPL-CHECKLIST-PROCESS-REVIEW:
       - "ARCH-CHECKLIST-PROCESS-REVIEW"
     requirements:
       - "REQ-CHECKLIST-PROCESS-REVIEW"
+IMPL-CITDP_ORDERED_KEY_VALIDATE:
+  architecture_decisions:
+    - "ARCH-CITDP_ORDERED_LIST_KEYS"
+  code_locations:
+    - description: "Bulk migration"
+      path: "scripts/rename-citdp-command-keys.mjs"
+    - description: "Validator and transform"
+      path: "mcp-server/src/citdp-ordered-keys.ts"
+    - description: "Write hook"
+      path: "mcp-server/src/citdp-writer.ts"
+  description: "validateCitdpOrderedListKeys module and citdp-writer hook; migration script rename-citdp-command-keys.mjs."
+  detail_file: "implementation-decisions/IMPL-CITDP_ORDERED_KEY_VALIDATE.yaml"
+  name: "CITDP ordered list key validator"
+  requirements:
+    - "REQ-CITDP_ORDERED_LIST_KEYS"
+  status: "Active"
 IMPL-EVIDENCE_CHAIN_PROFILE:
   cross_references:
     - "ARCH-EVIDENCE_CHAIN_PROFILE"

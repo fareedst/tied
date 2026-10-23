@@ -13,7 +13,7 @@ CITDP-PLAN-TIED-LG-P1-SCAFFOLD:
       - "README documents uv/pip install and optional live MCP smoke"
     unchanged_behavior: "Agentstream default executor; existing product REQs except pilot tree addition."
   evidence:
-    commands:
+    command_seq:
       - "cd tools/langgraph-pilot && uv run pytest"
       - "tied_checklist_gate_validate phase pre_implementation"
       - "tied_validate_consistency"

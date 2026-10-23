@@ -1,0 +1,94 @@
+CITDP-REQ-CITDP_ORDERED_LIST_KEYS:
+  change_definition:
+    current_behavior: "CITDP records use evidence.commands and test_strategy.commands (and *commands variants) for ordered verification batteries. tied-yaml-canonical-v1 sorts those lists because key names do not match ordered-list patterns."
+    desired_behavior: "Ordered command lists use *_seq keys (evidence.command_seq, test_strategy.command_seq, verification_command_seq, etc.). citdp_record_write rejects legacy command keys under evidence and test_strategy. All in-repo CITDP YAML and citdp-record-template.yaml migrated."
+    non_goals:
+      - "Renaming unordered CITDP sets (proof_boundaries, token lists, success_criteria)"
+      - "Changing ORDERED_LIST_KEY_PATTERN in yaml-canonicalizer"
+      - "Backward-compat alias for evidence.commands on read paths"
+    success_criteria:
+      - "251 scoped CITDP-family YAML files use command_seq naming where commands were ordered"
+      - "citdp_record_write fails closed on evidence.commands and test_strategy.commands"
+      - "REQ/ARCH/IMPL stack with token-commented IMPL pseudo-code"
+      - "yaml-canonicalizer.test.ts preserves evidence.command_seq order"
+      - "tied_validate_consistency ok after close-out"
+    unchanged_behavior:
+      - "validateCitdpOpenRecord and checklist gate semantics unrelated to command key names"
+      - "Canonicalizer behavior for keys already matching *_seq / tdd_sequence"
+  completion_criteria:
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+    verification_gate_notes: "Deferred until build-plan verification slice."
+  evidence:
+    command_seq:
+      - "npm test --prefix mcp-server (citdp-ordered-keys + writer + canonicalizer cases)"
+      - "node scripts/rename-citdp-command-keys.mjs --check (idempotent)"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "unit_and_composition_tests_only"
+      - "does_not_prove_external_client_citdp_corpus_without_refresh"
+  impact_analysis:
+    impl_inventory_notes: "New citdp-ordered-keys.ts; citdp-writer hook; optional migration script; detail-files-schema + citdp-policy + docs prose; mass CITDP YAML key rename."
+    modules_or_boundaries: "mcp-server/src/citdp-writer.ts; mcp-server/src/yaml-canonicalizer.ts (test only); tied-bundle/docs/citdp-record-template.yaml; tied-project/citdp/**"
+    tied_tokens_affected:
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "IMPL-TIED_YAML_CANONICALIZER"
+    tied_tokens_new:
+      - "ARCH-CITDP_ORDERED_LIST_KEYS"
+      - "IMPL-CITDP_ORDERED_KEY_VALIDATE"
+      - "REQ-CITDP_ORDERED_LIST_KEYS"
+  persist_policy: "Copy working CITDP to tied-project/citdp/ at persist-citdp-record after implementation."
+  record_identity:
+    change_request_id: "REQ-CITDP_ORDERED_LIST_KEYS"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-23"
+    title: "CITDP ordered command list keys (command_seq)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Migration misses working-folder duplicate; validator allows drift in unfixed file"
+        - "Codemod renames commands under wrong parent map"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "grep evidence.commands returns hits under tied-project/citdp after migration"
+        - "lint_yaml sorts command_seq entries alphabetically"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "mcp-server/src/yaml-canonicalizer.ts"
+        - "tied-bundle/docs/citdp-record-template.yaml"
+        - "tied-project/working/REQ-CITDP_ORDERED_LIST_KEYS/PLAN-refine-pass1.md"
+      falsification_questions:
+        - "Does command_seq match isOrderedListKey *_seq suffix rule?"
+        - "Does validator run before atomic write in citdp-writer?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Schema naming and bulk YAML rename; no new auth/network/runtime surface; minimal depth."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - id: "R1"
+        mitigation: "Template, citdp-policy, CHANGELOG, grep docs for evidence.commands"
+        summary: "Stale agent docs reference legacy key"
+      - id: "R2"
+        mitigation: "Single migration script with parent-path awareness; validator on write"
+        summary: "Partial migration leaves mixed keys"
+  test_strategy:
+    summary: "Unit tests for validateCitdpOrderedListKeys; composition tests for writeCitdpRecord; one canonicalizer fixture; migration idempotency check."
+    documentation_only: false
+    e2e_applicability: "not_applicable"
+  tdd_sequence:
+    summary: "Validator RED/GREEN, writer hook, migration script, canonicalizer test, docs LEAP, mass YAML, TIED persist."

@@ -20,7 +20,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation:
       request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       run_id: "remediation-verification-20260824"
   evidence:
-    commands:
+    command_seq:
       - "node --test dist/checklist-remediation-acceptance.test.js dist/fixture-corpus-regression.test.js"
       - "npm run build --prefix mcp-server"
     manifest_reference: "working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence-manifest.json"

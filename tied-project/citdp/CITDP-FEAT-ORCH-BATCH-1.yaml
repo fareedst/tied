@@ -26,7 +26,7 @@ CITDP-FEAT-ORCH-BATCH-1:
       - "Tests prove synchronous filesystem contract and shared adapter routing; they do not prove distributed locking or future Batch 2 gates."
     verification_gate_notes: "Focused feature-orchestration suite passed 19 tests; TypeScript build passed; IDE lints reported no errors; TIED base path confirmed before writes; final YAML and consistency validation recorded separately."
   evidence:
-    commands:
+    command_seq:
       - "node --test dist/feature-orchestration/*.test.js"
       - "npm run build"
       - "pseudocode_validate"

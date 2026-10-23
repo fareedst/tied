@@ -15,7 +15,7 @@ CITDP-PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT:
       - "Plan-only Tracker records non-activation pre_implementation gate."
     unchanged_behavior: "W1 experiment MCP, W2 pairing, W3 bridge, W4 report CLI, and prompt-type install mechanics remain unchanged in plan-only pass."
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of child plan against parent program W5 section"
       - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
     manifest_reference: null

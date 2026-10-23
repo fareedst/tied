@@ -14,7 +14,7 @@ CITDP-PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT:
       - "Plan-only Tracker records non-activation pre_implementation gate."
     unchanged_behavior: "Existing evidence-chain report CLI/module, W1–W3 program deliverables, and profile generation remain unchanged in plan-only pass."
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of child plan against parent program W4 section"
       - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
     manifest_reference: null

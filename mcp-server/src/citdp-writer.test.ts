@@ -17,6 +17,26 @@ beforeEach(() => {
 });
 
 describe("writeCitdpRecord", () => {
+  it("rejects deprecated evidence.commands ordered-list key", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-citdp-ordered-"));
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+      const r = writeCitdpRecord({
+        filename: "CITDP-REQ-ORDERED.yaml",
+        record: {
+          evidence: { commands: ["npm test"] },
+        },
+      });
+      assert.equal(r.ok, false);
+      if (!r.ok) assert.match(r.error, /deprecated_citdp_key:evidence\.commands/);
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
   it("rejects path segments in filename", () => {
     const r = writeCitdpRecord({
       filename: "../evil/CITDP-X.yaml",

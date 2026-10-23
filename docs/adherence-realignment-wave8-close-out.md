@@ -18,7 +18,7 @@
 | **Inquiry depth** | `depth_tier: integrated` | Close-out integrity + methodology tooling + disposable-client replay |
 | **Gate policy** | `gate_policy: advisory` for observed/unresolved inquiry findings | Structural/producer-consumer misalignment remains blocking |
 | **Quality profiles** | `baseline-functional`, `data-integrity-migration`, `stateful-reliability` | Envelope/ledger layout + sync/replay touch persistence |
-| **CITDP timing** | Draft at refine-plan; **finalize at plan-close-out** (`persist-citdp-record`) | `evidence.commands` and `activation.artifact_hashes` populated after gates run |
+| **CITDP timing** | Draft at refine-plan; **finalize at plan-close-out** (`persist-citdp-record`) | `evidence.command_seq` and `activation.artifact_hashes` populated after gates run |
 | **Eligibility triggers** | `strict-close-out`, `methodology-tooling-change`, `persistence`, `external-input` | Matched at `risk-assessment`; no `integrated_waiver` |
 | **Tracker strategy** | **Single tracker expansion** on `agent-req-implementation-checklist-wave8-adherence-realignment.yaml` (mirror Wave 7) | Separate `wave8-close-out.yaml` stub **not created** — gate validate pairs one Tracker + one CITDP per wave |
 | **Run identity** | `run_id: wave8-closeout-20260911` for inquiry phases, verification, and close_out gates | Distinct from `wave5-*`, `wave7-closeout-*`; reusing Wave 5/7 inquiry fails `activation_pairing_incomplete` |
@@ -381,7 +381,7 @@ tied_verify  # with update — derive REQ/IMPL status from tests
 
 | Task | Target | Pass criterion |
 |---|---|---|
-| Finalize CITDP | `CITDP-wave8-adherence-realignment.yaml` | `leap_feedback.record_status: final`; `evidence.commands` = regression block; `activation.artifact_hashes` from close_out collect |
+| Finalize CITDP | `CITDP-wave8-adherence-realignment.yaml` | `leap_feedback.record_status: final`; `evidence.command_seq` = regression block; `activation.artifact_hashes` from close_out collect |
 | Update build plan status | `docs/adherence-realignment-wave8-plan.md` | Note close-out complete |
 | Update §13 | `docs/evidence-collection-conversation-patterns.md` | build-plan + close-out complete |
 | CHANGELOG | `CHANGELOG.md` `[Unreleased]` | Wave 8 entry (W8-D1–D7 summaries) |
@@ -433,7 +433,7 @@ Mirror [§12.6](evidence-collection-conversation-patterns.md):
 - [ ] `close_out` gate `merged_decision.allowed: true`
 - [ ] Envelope zero blocking gaps under `--envelope-blocking` (including `thin_ledger` cleared)
 - [ ] Disposable FILEHASH smoke pass (§4c)
-- [ ] CITDP finalized with Wave 8 `evidence.commands`
+- [ ] CITDP finalized with Wave 8 `evidence.command_seq`
 - [ ] PSA Layer C refreshed for changed IMPLs
 - [ ] `tied_validate_consistency` and `tied_verify` pass
 - [ ] CHANGELOG + proposed commit message written (Wave 7+8 strategy documented)
@@ -451,7 +451,7 @@ Mirror [§12.6](evidence-collection-conversation-patterns.md):
 | No wave8 inquiry dirs | Phase 2 fresh `run_id` before verification |
 | `prompt-type-subagent.test.js` env failure | Omit from CITDP commands (pre-existing; same as Wave 7) |
 | Wave 7 uncommitted | Single proposed commit message covering Waves 7+8 (Phase 6) |
-| Profile substance skipped | Ensure CITDP `evidence.commands` populated so W8-D3 chain runs |
+| Profile substance skipped | Ensure CITDP `evidence.command_seq` populated so W8-D3 chain runs |
 | Process grade band D (non-blocking) | Document in handoff; does not block under advisory policy |
 | Evaluation corpus gitignored | Operator-local path; replay script must exist in repo |
 

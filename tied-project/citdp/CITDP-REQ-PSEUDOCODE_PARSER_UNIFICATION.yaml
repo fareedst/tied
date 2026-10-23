@@ -23,7 +23,7 @@ CITDP-REQ-PSEUDOCODE_PARSER_UNIFICATION:
       run_id: "parser-unification-closeout-20260908"
     verification_gate_notes: "574/574 mcp-server tests; layer-b-pseudocode-validator.v1 goldens preserved; C1+C2 complete; C3 explicitly deferred."
   evidence:
-    commands:
+    command_seq:
       - command: "npm test"
         cwd: "mcp-server"
         exit_code: "0"

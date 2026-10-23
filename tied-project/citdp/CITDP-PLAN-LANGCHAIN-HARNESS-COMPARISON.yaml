@@ -1,95 +1,95 @@
 CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON:
   change_definition:
-    current_behavior: LangChain harness study exists as read-only capture only; analysis sibling link points at Traefik doc; no LangChain-primary × TIED agent-management comparison.
-    desired_behavior: Outreach comparison Markdown under docs/comparisons/ mapping LangChain empirical harness loop (traces, three knobs, named middleware patterns) to TIED in-IDE agent surfaces, with proof boundary and cross-links—without minting REQ/ARCH/IMPL or implying LangChain middleware exists in-repo.
+    current_behavior: "LangChain harness study exists as read-only capture only; analysis sibling link points at Traefik doc; no LangChain-primary × TIED agent-management comparison."
+    desired_behavior: "Outreach comparison Markdown under docs/comparisons/ mapping LangChain empirical harness loop (traces, three knobs, named middleware patterns) to TIED in-IDE agent surfaces, with proof boundary and cross-links—without minting REQ/ARCH/IMPL or implying LangChain middleware exists in-repo."
     non_goals:
-      - Mint new semantic tokens or edit semantic-tokens.yaml
-      - Implement LangChain middleware in agentstream or Cursor hooks
-      - Cite Terminal Bench 66.5% as TIED methodology effectiveness
-      - Duplicate Traefik three-layer mental model (link Traefik doc for seam; LangChain doc for empirical loop)
-      - Add methodology-composition-matrix §2 row without sponsor promotion (header sibling link only)
+      - "Add methodology-composition-matrix §2 row without sponsor promotion (header sibling link only)"
+      - "Cite Terminal Bench 66.5% as TIED methodology effectiveness"
+      - "Duplicate Traefik three-layer mental model (link Traefik doc for seam; LangChain doc for empirical loop)"
+      - "Implement LangChain middleware in agentstream or Cursor hooks"
+      - "Mint new semantic tokens or edit semantic-tokens.yaml"
     success_criteria:
-      - docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md matches sibling comparison structure
-      - LangChain-reported metrics labeled; middleware names mapped as external examples only
-      - Capture Analysis metadata points to new doc; Traefik analysis lists LangChain sibling
-      - Relative links resolve from docs/comparisons/
-      - CITDP and pre_implementation gate receipt under tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/
-    unchanged_behavior: TIED REQ→ARCH→IMPL, MCP writes, checklist gates, and REQ-TIED_HARNESS_PLATFORM_SEAM operator checklist remain authoritative.
+      - "Capture Analysis metadata points to new doc; Traefik analysis lists LangChain sibling"
+      - "CITDP and pre_implementation gate receipt under tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/"
+      - "docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md matches sibling comparison structure"
+      - "LangChain-reported metrics labeled; middleware names mapped as external examples only"
+      - "Relative links resolve from docs/comparisons/"
+    unchanged_behavior: "TIED REQ→ARCH→IMPL, MCP writes, checklist gates, and REQ-TIED_HARNESS_PLATFORM_SEAM operator checklist remain authoritative."
   evidence:
-    commands:
-      - Read-only review of docs/comparisons/langchain-improving-deep-agents-harness-engineering.md
-      - Documentation verification per refine-plan test strategy
+    command_seq:
+      - "Documentation verification per refine-plan test strategy"
+      - "Read-only review of docs/comparisons/langchain-improving-deep-agents-harness-engineering.md"
     manifest_reference: null
     proof_boundaries:
-      - docs_and_working_folder_only
-      - langchain_reported_metrics_not_tied_outcomes
+      - "docs_and_working_folder_only"
+      - "langchain_reported_metrics_not_tied_outcomes"
   impact_analysis:
-    impl_inventory_notes: No IMPL mutation. TIED anchors include agentstream vocab/README, authority-boundary checklist, Traefik comparison, tied-vs-harness2.
-    modules_or_boundaries: docs/comparisons/; tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/
+    impl_inventory_notes: "No IMPL mutation. TIED anchors include agentstream vocab/README, authority-boundary checklist, Traefik comparison, tied-vs-harness2."
+    modules_or_boundaries: "docs/comparisons/; tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/"
     tied_tokens_affected: []
     tied_tokens_new: []
+  implementation_notes:
+    completed_at: "2026-10-21"
+    deliverable: "docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md"
+    scope: "documentation_only"
   leap_feedback:
     divergences_from_analysis: null
-    record_status: complete
+    record_status: "complete"
     tied_stack_updates_required: []
-  implementation_notes:
-    deliverable: docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md
-    completed_at: "2026-10-21"
-    scope: documentation_only
   record_identity:
-    change_request_id: PLAN-LANGCHAIN-HARNESS-COMPARISON
-    depth_tier: minimal
-    gate_policy: advisory
-    profile_depth: minimal
+    change_request_id: "PLAN-LANGCHAIN-HARNESS-COMPARISON"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
     recorded_at: "2026-10-21"
-    title: LangChain harness engineering × TIED agent management (documentation-only)
+    title: "LangChain harness engineering × TIED agent management (documentation-only)"
   risk_analysis:
     abuse_cases:
-      - Terminal Bench gains cited as TIED improvement targets
-      - PreCompletionChecklistMiddleware described as replacing tied_checklist_gate_validate or tied_verify
-      - Trace-driven skill loop presented as LEAP or automatic YAML mutation
-      - Conflating LangChain product loop with Harness² recursive library
+      - "Conflating LangChain product loop with Harness² recursive library"
+      - "PreCompletionChecklistMiddleware described as replacing tied_checklist_gate_validate or tied_verify"
+      - "Terminal Bench gains cited as TIED improvement targets"
+      - "Trace-driven skill loop presented as LEAP or automatic YAML mutation"
     adversarial_inquiry:
-      assurance_profile: baseline-functional
+      assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
       counterexamples:
-        - Comparison doc introduces new REQ-* without plan-new-feature
-        - Skills edited to encode YAML write authority without MCP base-path check
+        - "Comparison doc introduces new REQ-* without plan-new-feature"
+        - "Skills edited to encode YAML write authority without MCP base-path check"
       depth_change_waiver: null
-      depth_tier: minimal
+      depth_tier: "minimal"
       disconfirming_observations:
-        - Any tied-project index YAML mutated during doc-only pass
-        - Middleware class names implied as shipped TIED components
+        - "Any tied-project index YAML mutated during doc-only pass"
+        - "Middleware class names implied as shipped TIED components"
       eligibility_triggers_matched: []
       evidence_references:
-        - /Users/fareed/.cursor/plans/langchain_harness_×_tied_9814e00c.plan.md
-        - tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/checklist-tracker.yaml
-        - docs/comparisons/langchain-improving-deep-agents-harness-engineering.md
-        - docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md
-        - tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/evidence/doc-verification-2026-10-21.md
+        - "/Users/fareed/.cursor/plans/langchain_harness_×_tied_9814e00c.plan.md"
+        - "docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md"
+        - "docs/comparisons/langchain-improving-deep-agents-harness-engineering.md"
+        - "tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/checklist-tracker.yaml"
+        - "tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/evidence/doc-verification-2026-10-21.md"
       falsification_questions:
-        - Does every percentage in the new doc carry LangChain-reported labeling?
-        - Are compose recommendations subordinate to TIED gates and sponsor ladder?
-      gate_policy: advisory
+        - "Are compose recommendations subordinate to TIED gates and sponsor ladder?"
+        - "Does every percentage in the new doc carry LangChain-reported labeling?"
+      gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null
-      rationale: Documentation-only; external blog capture; no auth/network/persistence in deliverable.
-      research_profile: read-only
+      rationale: "Documentation-only; external blog capture; no auth/network/persistence in deliverable."
+      research_profile: "read-only"
       strict_eligibility_prerequisites: []
-      sub_adversarial_inquiry_pass: not_applicable
+      sub_adversarial_inquiry_pass: "not_applicable"
     quality_evidence_matrix:
-      - applicability: applicable
-        attribute: baseline-functional
-        command_or_test: Markdown link and claim-label review
-        evidence_method: Committed comparison doc + working folder receipts
-        limitation: Does not prove LangChain harness tactics improve TIED client outcomes
-        owner: agent
-        rationale: Deliverable is analysis documentation
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Markdown link and claim-label review"
+        evidence_method: "Committed comparison doc + working folder receipts"
+        limitation: "Does not prove LangChain harness tactics improve TIED client outcomes"
+        owner: "agent"
+        rationale: "Deliverable is analysis documentation"
   test_strategy:
     documentation_only: true
-    verification_commands:
-      - git diff --name-only scope guard (docs/comparisons/* + working/PLAN-LANGCHAIN-HARNESS-COMPARISON/* + citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml)
-      - Relative link check from docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md
-      - rg audit for 66.5|52.8|13.7 with LangChain-reported nearby
-      - rg audit for PreCompletionChecklistMiddleware|LocalContextMiddleware|LoopDetectionMiddleware as external-only
-    unit_tests: not_applicable
+    unit_tests: "not_applicable"
+    verification_command_seq:
+      - "git diff --name-only scope guard (docs/comparisons/* + working/PLAN-LANGCHAIN-HARNESS-COMPARISON/* + citdp/CITDP-PLAN-LANGCHAIN-HARNESS-COMPARISON.yaml)"
+      - "Relative link check from docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md"
+      - "rg audit for 66.5|52.8|13.7 with LangChain-reported nearby"
+      - "rg audit for PreCompletionChecklistMiddleware|LocalContextMiddleware|LoopDetectionMiddleware as external-only"

@@ -14,7 +14,7 @@ CITDP-PLAN-TIED-QMM-FOLLOWON-A:
       - "Plan-only Tracker records non-activation pre_implementation gate attempt."
     unchanged_behavior: "W2 verification/close_out pairing, outcome timing, trap dispositions, and absent/none class legacy behavior remain unchanged in plan-only pass."
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of child plan against parent QMM program follow-on (a)"
       - "TIED MCP tied_checklist_gate_validate at pre_implementation (expect not allowed for RED)"
     manifest_reference: null

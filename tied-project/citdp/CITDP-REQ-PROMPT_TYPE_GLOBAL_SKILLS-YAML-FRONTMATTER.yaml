@@ -52,7 +52,7 @@ CITDP-REQ-PROMPT_TYPE_GLOBAL_SKILLS-YAML-FRONTMATTER:
       sub_adversarial_inquiry_pass: "not_applicable"
     summary: "Mis-quoted YAML or stale client stubs without refresh."
   test_strategy:
-    integration_commands:
+    integration_command_seq:
       - command: "cd mcp-server && npx tsx --test src/e2e/prompt-type-skills.test.ts"
         notes: "Bundle, full install, linked stub parse contract."
       - command: "cd tools/bootstrap && node --test lib/layers/skills-linked.test.mjs"

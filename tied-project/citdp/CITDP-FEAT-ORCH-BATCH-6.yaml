@@ -1,6 +1,6 @@
 CITDP-FEAT-ORCH-BATCH-6:
   adoption_evidence:
-    commands:
+    command_seq:
       - "npm test --prefix mcp-server"
       - "TIED_BASE_PATH=/Users/fareed/Documents/dev/chatgpt/stdd/tied .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}'"
       - "tied_scoped_analysis_run walk_summary"
