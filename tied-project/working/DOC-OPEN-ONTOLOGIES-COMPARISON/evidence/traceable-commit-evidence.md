@@ -29,4 +29,6 @@ Same class as [DOC-AI-SDLC-FACTORY-COMPARISON traceable-commit-evidence.md](../.
 
 | SHA | Message |
 | --- | --- |
-| *(pending)* | **Commit skipped** — machine `close_out` blocked; sponsor may commit using proposed message |
+| `dc0489c2` | `docs(comparisons): Open Ontologies × TIED Waves 1–2` |
+
+DOC outreach waiver: scoped commit after machine `close_out` blocked (same class as DOC-AI-SDLC).

@@ -33,5 +33,5 @@ steps:
     status: done
     notes: Wave 1 + Wave 2 + .gitignore; verification in evidence/build-plan-handoff.md.
   traceable-commit:
-    status: pending
-    notes: "Close-out 2026-10-23 — commit skipped (close_out blocked); proposed-commit-message.txt ready."
+    status: done
+    notes: "dc0489c2 — scoped DOC outreach commit; close_out machine gate blocked."
