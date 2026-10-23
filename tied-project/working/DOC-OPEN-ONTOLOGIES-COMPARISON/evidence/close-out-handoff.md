@@ -8,7 +8,7 @@
 - Wave 2 analysis: [docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md](../../../../docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md)
 - `.gitignore` allowlist for both comparison paths
 - Working plan/tracker/evidence under `tied-project/working/DOC-OPEN-ONTOLOGIES-COMPARISON/`
-- `CHANGELOG.md` [Unreleased] entry (in working tree)
+- `CHANGELOG.md` [Unreleased] entry
 
 ## Completion signals
 
@@ -29,25 +29,10 @@
 - Wave 3 REQ candidates in analysis (**Defer**)
 - Optional bundle cross-link / matrix row (**Defer**)
 - Unrelated workspace dirty files excluded from staging map
-- **Commit not created** — sponsor may apply [proposed-commit-message.txt](./proposed-commit-message.txt) to scoped paths only
 
 ## Commits
 
 | SHA | Summary |
 | --- | --- |
-| *(none)* | **Commit skipped** per unified `close_out` block |
-
-## Sponsor replay (optional commit)
-
-```bash
-cd /Users/fareed/Documents/dev/chatgpt/stdd
-git add \
-  docs/comparisons/open-ontologies-repository.md \
-  docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md \
-  .gitignore \
-  CHANGELOG.md \
-  tied-project/working/DOC-OPEN-ONTOLOGIES-COMPARISON/
-git commit -F tied-project/working/DOC-OPEN-ONTOLOGIES-COMPARISON/evidence/proposed-commit-message.txt
-```
-
-Then record SHA in this handoff and set tracker `traceable-commit` to done.
+| `dc0489c2` | Wave 1–2 comparisons, allowlist, CHANGELOG, working evidence |
+| `01dadced` | CHANGELOG wording + traceable-commit follow-up |
