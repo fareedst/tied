@@ -77,6 +77,23 @@ export type EnvelopeCrossLinks = {
   evidence_chain_profile_path: string | null;
 };
 
+export type IndependentProofRecord = {
+  proof_id: string;
+  role: "asserted" | "derived";
+  proof_kind: string;
+  locator: {
+    path?: string;
+    uri?: string;
+    content_hash?: string;
+  };
+  verifier_hint?: string;
+  scope_limits: string[];
+  proof_boundary: string;
+  review_status: "pending" | "verified_offline" | "rejected";
+  reviewer_ref?: string;
+  reviewed_at?: string;
+};
+
 export type RequestEvidenceEnvelope = {
   schema_version: typeof ENVELOPE_SCHEMA_VERSION;
   envelope_meta: {
@@ -89,7 +106,20 @@ export type RequestEvidenceEnvelope = {
   artifacts: EnvelopeArtifact[];
   cross_links: EnvelopeCrossLinks;
   gaps: EnvelopeGap[];
+  independent_proofs?: IndependentProofRecord[];
 };
+
+export type PatchIndependentProofInput = {
+  request_token: string;
+  project_root: string;
+  proof: IndependentProofRecord;
+  expected_revision?: number;
+  generated_at?: string;
+};
+
+export type PatchIndependentProofResult =
+  | { ok: true; envelope: RequestEvidenceEnvelope; revision: number; envelope_path: string }
+  | { ok: false; gaps: EnvelopeGap[]; error?: string };
 
 export type BuildRequestEvidenceEnvelopeInput = {
   request_token: string;

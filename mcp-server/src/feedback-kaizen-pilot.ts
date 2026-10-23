@@ -3,6 +3,7 @@
  * [REQ-KAIZEN-FEEDBACK-PILOT] [ARCH-KAIZEN-FEEDBACK-PILOT] [IMPL-KAIZEN-FEEDBACK-PILOT]
  */
 
+import { prettyCanonicalJson } from "./storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 import {
@@ -368,7 +369,7 @@ function writeReportAtomic(reportPath: string, report: FeedbackPilotReportV1): v
   const dir = path.dirname(reportPath);
   fs.mkdirSync(dir, { recursive: true });
   const tmp = `${reportPath}.${process.pid}.tmp`;
-  fs.writeFileSync(tmp, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  fs.writeFileSync(tmp, `${prettyCanonicalJson(report)}\n`, "utf8");
   fs.renameSync(tmp, reportPath);
 }
 

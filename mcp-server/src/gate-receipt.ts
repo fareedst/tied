@@ -1,3 +1,4 @@
+import { prettyCanonicalJson } from "./storage-dump.js";
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
 // How: PERSIST_GATE_DECISION_RECEIPT — atomic gate JSON write with input Tracker/CITDP hashes.
 import { createHash } from "node:crypto";
@@ -76,7 +77,7 @@ export function persistGateDecisionReceipt(
     gate_result: input.gateResult,
   };
 
-  const serialized = `${JSON.stringify(receiptBody, null, 2)}\n`;
+  const serialized = `${prettyCanonicalJson(receiptBody)}\n`;
   const tmpPath = `${receiptPath}.tmp`;
   writeFileSync(tmpPath, serialized, "utf8");
   renameSync(tmpPath, receiptPath);

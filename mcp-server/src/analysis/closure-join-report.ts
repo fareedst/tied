@@ -3,6 +3,7 @@
  * How: Four-way closure join — REQ criterion ↔ IMPL block ↔ test anchor ↔ code block-lead (W3a).
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 import { resolveWorkingPath } from "../working-root.js";
@@ -413,7 +414,7 @@ export function buildClosureJoinReport(input: ClosureJoinBuildInput): ClosureJoi
     fs.mkdirSync(evidenceDir, { recursive: true });
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     const reportPath = path.join(evidenceDir, `closure-join-${timestamp}.json`);
-    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), "utf8");
+    fs.writeFileSync(reportPath, prettyCanonicalJson(report), "utf8");
     report.report_path = reportPath;
   }
 

@@ -1,3 +1,4 @@
+import { prettyCanonicalJson } from "./storage-dump.js";
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -353,5 +354,5 @@ export function writeRegressionManifest(
     },
     residual_risks: manifest.limitations ?? [],
   };
-  writeFileSync(paths.regressionManifest, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  writeFileSync(paths.regressionManifest, `${prettyCanonicalJson(payload)}\n`, "utf8");
 }

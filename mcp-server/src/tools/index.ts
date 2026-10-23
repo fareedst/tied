@@ -7,6 +7,7 @@ import path from "node:path";
 import { z } from "zod";
 import yaml from "js-yaml";
 import { textContent } from "../types.js";
+import { prettyCanonicalJson, safeStringifyJson } from "../storage-dump.js";
 import {
   loadIndex,
   getRecord,
@@ -199,7 +200,7 @@ import { runAdherenceReconcile } from "./adherence-reconcile-runner.js";
 
 /** LEAP proposal MCP tools: JSON envelope; catch sync throws from fs/git. [REQ-LEAP_PROPOSAL_QUEUE] */
 function leapMcpJson(payload: unknown) {
-  return textContent(JSON.stringify(payload, null, 2));
+  return textContent(prettyCanonicalJson(payload));
 }
 
 function safeLeapCall<T>(fn: () => T) {
@@ -247,11 +248,11 @@ export const allTools = [
       if (token) {
         const record = getRecord(idx, token);
         if (record == null) return textContent(`No record found for token: ${token}`);
-        return textContent(JSON.stringify(record, null, 2));
+        return textContent(prettyCanonicalJson(record));
       }
       const data = loadIndex(idx);
       if (!data) return textContent(`Could not load index: ${index}`);
-      return textContent(JSON.stringify(data, null, 2));
+      return textContent(prettyCanonicalJson(data));
     },
   },
   {
@@ -287,7 +288,7 @@ export const allTools = [
             )
             .map(([k]) => k);
       }
-      return textContent(JSON.stringify(tokens, null, 2));
+      return textContent(prettyCanonicalJson(tokens));
     },
   },
   {
@@ -308,7 +309,7 @@ export const allTools = [
     }: { index: string; field: string; value: string }) => {
       const idx = index as IndexName;
       const filtered = filterByField(idx, field, value);
-      return textContent(JSON.stringify(filtered, null, 2));
+      return textContent(prettyCanonicalJson(filtered));
     },
   },
   {
@@ -328,7 +329,7 @@ export const allTools = [
       ] as const) {
         results[name] = validateIndex(name);
       }
-      return textContent(JSON.stringify(results, null, 2));
+      return textContent(prettyCanonicalJson(results));
     },
   },
   {
@@ -390,7 +391,7 @@ export const allTools = [
         adherence_ledger,
         verifier_session_id,
       });
-      return textContent(JSON.stringify(report, null, 2));
+      return textContent(prettyCanonicalJson(report));
     },
   },
   {
@@ -408,7 +409,7 @@ export const allTools = [
       const bundle_root = getMethodologyBasePath();
       const installConfigExists = fs.existsSync(layout.installConfigPath);
       return textContent(
-        JSON.stringify(
+        prettyCanonicalJson(
           {
             base_path,
             env_TIED_BASE_PATH,
@@ -417,9 +418,7 @@ export const allTools = [
             store_root: process.env.TIED_STORE_ROOT ?? null,
             mode: installConfigExists ? "client" : "store",
             legacy_project_dir: layout.legacyProjectDir,
-          },
-          null,
-          2,
+          }
         ),
       );
     },
@@ -439,7 +438,7 @@ export const allTools = [
       requirement_token,
     }: { requirement_token: string }) => {
       const result = getDecisionsForRequirement(requirement_token);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -457,7 +456,7 @@ export const allTools = [
     },
     handler: async ({ decision_token }: { decision_token: string }) => {
       const result = getRequirementsForDecision(decision_token);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -485,9 +484,9 @@ export const allTools = [
       record: unknown;
     }) => {
       const parsed = normalizeRecordPayload(recordRaw);
-      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      if (!parsed.ok) return textContent(prettyCanonicalJson({ ok: false, error: parsed.error }));
       const result = insertRecord(index as IndexName, token, parsed.value);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -515,9 +514,9 @@ export const allTools = [
       updates: unknown;
     }) => {
       const parsed = normalizeRecordPayload(updatesRaw);
-      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      if (!parsed.ok) return textContent(prettyCanonicalJson({ ok: false, error: parsed.error }));
       const result = updateRecord(index as IndexName, token, parsed.value);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -527,7 +526,7 @@ export const allTools = [
         "Return the resolved tied-yaml-canonical-v1 profile, scalar style, and configuration source used by successful TIED YAML writes.",
       inputSchema: z.object({}),
     },
-    handler: async () => textContent(JSON.stringify({ yaml_format: formatYamlMetadata() }, null, 2)),
+    handler: async () => textContent(prettyCanonicalJson({ yaml_format: formatYamlMetadata() })),
   },
   {
     name: "tied_client_yaml_styling_apply",
@@ -548,20 +547,18 @@ export const allTools = [
       const hookResult = await runClientFormatterHook(absolutePath);
       if (!hookResult.ok) {
         return textContent(
-          JSON.stringify(
+          prettyCanonicalJson(
             {
               ok: false,
               error: hookResult.error,
               code: hookResult.code,
               styling: reportStylingEvidence(hookResult),
-            },
-            null,
-            2,
+            }
           ),
         );
       }
       return textContent(
-        JSON.stringify(
+        prettyCanonicalJson(
           {
             ok: true,
             path: absolutePath,
@@ -575,9 +572,7 @@ export const allTools = [
                 }
               : {}),
             styling: reportStylingEvidence(hookResult),
-          },
-          null,
-          2,
+          }
         ),
       );
     },
@@ -611,13 +606,13 @@ export const allTools = [
       run_validate_consistency?: boolean;
     }) => {
       const parsed = parseYamlUpdateSteps(args.steps);
-      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }, null, 2));
+      if (!parsed.ok) return textContent(prettyCanonicalJson({ ok: false, error: parsed.error }));
       const result = applyYamlUpdates({
         steps: parsed.steps,
         dry_run: args.dry_run ?? false,
         run_validate_consistency: args.run_validate_consistency ?? true,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -634,10 +629,10 @@ export const allTools = [
       if (record == null) {
         const path = getDetailPath(token);
         if (path === null)
-          return textContent(JSON.stringify({ error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` }, null, 2));
-        return textContent(JSON.stringify({ error: `No detail file found for token: ${token}` }, null, 2));
+          return textContent(prettyCanonicalJson({ error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` }));
+        return textContent(prettyCanonicalJson({ error: `No detail file found for token: ${token}` }));
       }
-      return textContent(JSON.stringify(record, null, 2));
+      return textContent(prettyCanonicalJson(record));
     },
   },
   {
@@ -669,7 +664,7 @@ export const allTools = [
         tokens = listDetailTokens(type as "requirement" | "architecture" | "implementation");
       } else {
         return textContent(
-          JSON.stringify({ error: "Provide tokens (array) or type (requirement | architecture | implementation)." }, null, 2)
+          prettyCanonicalJson({ error: "Provide tokens (array) or type (requirement | architecture | implementation)." })
         );
       }
       const result: Record<string, Record<string, unknown> | { error: string }> = {};
@@ -686,7 +681,7 @@ export const allTools = [
           }
         }
       }
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -700,7 +695,7 @@ export const allTools = [
     },
     handler: async ({ type }: { type: string }) => {
       const tokens = listDetailTokens(type as "requirement" | "architecture" | "implementation");
-      return textContent(JSON.stringify(tokens, null, 2));
+      return textContent(prettyCanonicalJson(tokens));
     },
   },
   {
@@ -726,9 +721,9 @@ export const allTools = [
       sync_index?: boolean;
     }) => {
       const parsed = normalizeRecordPayload(recordRaw);
-      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      if (!parsed.ok) return textContent(prettyCanonicalJson({ ok: false, error: parsed.error }));
       const result = writeDetail(token, parsed.value, { syncIndex: sync_index !== false });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -751,9 +746,9 @@ export const allTools = [
       updates: unknown;
     }) => {
       const parsed = normalizeRecordPayload(updatesRaw);
-      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      if (!parsed.ok) return textContent(prettyCanonicalJson({ ok: false, error: parsed.error }));
       const result = updateDetail(token, parsed.value);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -796,25 +791,21 @@ export const allTools = [
       const hasInline = typeof essence_pseudocode === "string";
       if (!hasPath && !hasInline) {
         return textContent(
-          JSON.stringify(
+          prettyCanonicalJson(
             { ok: false, error: "Provide exactly one of essence_pseudocode (string) or essence_pseudocode_path" },
-            null,
-            2
           )
         );
       }
       if (hasPath && hasInline) {
         return textContent(
-          JSON.stringify(
+          prettyCanonicalJson(
             { ok: false, error: "Provide exactly one of essence_pseudocode or essence_pseudocode_path, not both" },
-            null,
-            2
           )
         );
       }
       if (!token.startsWith("IMPL-")) {
         return textContent(
-          JSON.stringify({ ok: false, error: `Token must be IMPL-* (got ${token})` }, null, 2)
+          prettyCanonicalJson({ ok: false, error: `Token must be IMPL-* (got ${token})` })
         );
       }
       let body: string;
@@ -822,11 +813,11 @@ export const allTools = [
         const base = getBasePath();
         const resolved = resolvePseudocodePathUnderTiedBase(essence_pseudocode_path!, base);
         if (!resolved.ok) {
-          return textContent(JSON.stringify({ ok: false, error: resolved.error }, null, 2));
+          return textContent(prettyCanonicalJson({ ok: false, error: resolved.error }));
         }
         const read = readTextFromPseudocodePath(resolved.absolutePath);
         if (!read.ok) {
-          return textContent(JSON.stringify({ ok: false, error: read.error }, null, 2));
+          return textContent(prettyCanonicalJson({ ok: false, error: read.error }));
         }
         body = read.content;
       } else {
@@ -837,7 +828,7 @@ export const allTools = [
         updates.metadata = { last_updated: metadata_last_updated };
       }
       const result = updateDetail(token, updates);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -864,7 +855,7 @@ export const allTools = [
       details_lines: string[];
     }) => {
       const result = appendImplementationApproachDetails(token, details_lines);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -896,14 +887,14 @@ export const allTools = [
       top_level_key?: string;
     }) => {
       const parsed = normalizeRecordPayload(recordRaw);
-      if (!parsed.ok) return textContent(JSON.stringify({ ok: false, error: parsed.error }));
+      if (!parsed.ok) return textContent(prettyCanonicalJson({ ok: false, error: parsed.error }));
       const rec = parsed.value as Record<string, unknown>;
       const result = writeCitdpRecord({
         filename,
         record: rec,
         top_level_key,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -924,7 +915,7 @@ export const allTools = [
       sync_index?: boolean;
     }) => {
       const result = deleteDetail(token, { syncIndex: sync_index !== false });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -961,7 +952,7 @@ export const allTools = [
         : null;
       if (indexName === null) {
         return textContent(
-          JSON.stringify({ ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` }, null, 2)
+          prettyCanonicalJson({ ok: false, error: `Invalid token: ${token}. Must be REQ-*, ARCH-*, or IMPL-*` })
         );
       }
       const detailFile =
@@ -971,30 +962,28 @@ export const allTools = [
 
       const indexParsed = normalizeRecordPayload(indexRecordRaw);
       if (!indexParsed.ok)
-        return textContent(JSON.stringify({ ok: false, error: indexParsed.error }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: indexParsed.error }));
       const indexRecord = { ...indexParsed.value, detail_file: detailFile };
 
       const detailParsed = normalizeRecordPayload(detailRecordRaw);
       if (!detailParsed.ok)
-        return textContent(JSON.stringify({ ok: false, error: detailParsed.error }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: detailParsed.error }));
       const detailRecord = detailParsed.value;
 
       if (upsert_index) {
         const res = upsertRecord(indexName, token, indexRecord);
-        if (!res.ok) return textContent(JSON.stringify(res, null, 2));
+        if (!res.ok) return textContent(prettyCanonicalJson(res));
       } else {
         const res = insertRecord(indexName, token, indexRecord);
-        if (!res.ok) return textContent(JSON.stringify(res, null, 2));
+        if (!res.ok) return textContent(prettyCanonicalJson(res));
       }
 
       const writeRes = writeDetail(token, detailRecord, { syncIndex: false });
-      if (!writeRes.ok) return textContent(JSON.stringify(writeRes, null, 2));
+      if (!writeRes.ok) return textContent(prettyCanonicalJson(writeRes));
 
       return textContent(
-        JSON.stringify(
-          { ok: true, index: indexName, token, detail_path: detailFile, yaml_format: writeRes.yaml_format },
-          null,
-          2,
+        prettyCanonicalJson(
+          { ok: true, index: indexName, token, detail_path: detailFile, yaml_format: writeRes.yaml_format }
         )
       );
     },
@@ -1044,7 +1033,7 @@ export const allTools = [
         extraGlobs: extra_globs,
         extraExtensions: extra_extensions,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -1096,7 +1085,7 @@ export const allTools = [
         }
         (summary.indexes as Record<string, unknown>)[name] = { token_count: tokenCount, details };
       }
-      return textContent(JSON.stringify(summary, null, 2));
+      return textContent(prettyCanonicalJson(summary));
     },
   },
   {
@@ -1139,7 +1128,7 @@ export const allTools = [
           }
         } catch {
           return textContent(
-            JSON.stringify({ ok: false, error: "context must be valid JSON object" }, null, 2)
+            prettyCanonicalJson({ ok: false, error: "context must be valid JSON object" })
           );
         }
       }
@@ -1153,7 +1142,7 @@ export const allTools = [
         args.base_path
       );
       if (!result.ok) {
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       }
       const out: Record<string, unknown> = { ok: true, id: result.id, created_at: result.created_at };
       if (args.include_report_snippet !== false) {
@@ -1161,7 +1150,7 @@ export const allTools = [
         const entry = data.entries.find((e) => e.id === result.id);
         if (entry) out.report_snippet = buildReportSnippet(entry);
       }
-      return textContent(JSON.stringify(out, null, 2));
+      return textContent(prettyCanonicalJson(out));
     },
   },
   {
@@ -1228,10 +1217,10 @@ export const allTools = [
       };
       const normalized = normalizeCaptureInput(raw);
       if ("error" in normalized) {
-        return textContent(JSON.stringify({ ok: false, error: normalized.error }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: normalized.error }));
       }
       const result = captureOperationalObservation(normalized, args.base_path);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -1253,15 +1242,13 @@ export const allTools = [
       evaluated_at: string;
     }) => {
       const normalized = normalizeResearchRecord(args.record as unknown as ResearchRecordInput);
-      if (!normalized.ok) return textContent(JSON.stringify(normalized, null, 2));
+      if (!normalized.ok) return textContent(prettyCanonicalJson(normalized));
       const freshness = evaluateResearchFreshness(normalized.record, args.evaluated_at);
-      return textContent(JSON.stringify(
+      return textContent(prettyCanonicalJson(
         emitResearchDatasetRecord(normalized.record, freshness, {
           auditedProjectRoot: args.audited_project_root,
           datasetPath: args.dataset_path,
-        }),
-        null,
-        2,
+        })
       ));
     },
   },
@@ -1277,7 +1264,7 @@ export const allTools = [
     },
     handler: async (args: { source: Record<string, unknown>; base_path?: string }) => {
       const normalized = normalizeOperationalSource(args.source as unknown as OperationalSource);
-      if (!normalized.ok) return textContent(JSON.stringify(normalized, null, 2));
+      if (!normalized.ok) return textContent(prettyCanonicalJson(normalized));
       const duplicate = groupDuplicateFeedback(
         normalized.entry,
         loadFeedback(args.base_path).entries.filter(
@@ -1299,7 +1286,7 @@ export const allTools = [
         proposed_req: entry.proposed_req,
         promotion_status: entry.promotion_status,
       }, args.base_path);
-      return textContent(JSON.stringify({ ...result, duplicate_of: duplicate.kind === "duplicate" ? duplicate.duplicate_of : undefined }, null, 2));
+      return textContent(prettyCanonicalJson({ ...result, duplicate_of: duplicate.kind === "duplicate" ? duplicate.duplicate_of : undefined }));
     },
   },
   {
@@ -1326,10 +1313,10 @@ export const allTools = [
         canonicalWrite: args.canonical_write,
         review: args.review as Parameters<typeof createReviewedLeapProposal>[1]["review"],
       });
-      return textContent(JSON.stringify({
+      return textContent(prettyCanonicalJson({
         ...result,
         promotion_status: reportPromotionStatus(entry, result.ok ? result.proposal : undefined),
-      }, null, 2));
+      }));
     },
   },
   {
@@ -1353,7 +1340,7 @@ export const allTools = [
       require_manifest_ref?: boolean;
       include_markdown?: boolean;
       base_path?: string;
-    }) => textContent(JSON.stringify(handleTiedFeedbackAnalysisDigest(args), null, 2)),
+    }) => textContent(prettyCanonicalJson(handleTiedFeedbackAnalysisDigest(args))),
   },
   {
     name: "tied_feedback_review_bridge",
@@ -1374,7 +1361,7 @@ export const allTools = [
       review?: Record<string, unknown>;
       review_context?: Record<string, unknown>;
       base_path?: string;
-    }) => textContent(JSON.stringify(handleTiedFeedbackReviewBridge(args), null, 2)),
+    }) => textContent(prettyCanonicalJson(handleTiedFeedbackReviewBridge(args))),
   },
   {
     name: "tied_feedback_outcome_record",
@@ -1391,7 +1378,7 @@ export const allTools = [
       payload: Record<string, unknown>;
       follow_up_window: Record<string, unknown>;
       base_path?: string;
-    }) => textContent(JSON.stringify(handleTiedFeedbackOutcomeRecord(args), null, 2)),
+    }) => textContent(prettyCanonicalJson(handleTiedFeedbackOutcomeRecord(args))),
   },
   {
     name: "tied_feedback_pilot_run",
@@ -1410,7 +1397,7 @@ export const allTools = [
       pilot_incident_signals?: string[];
       report_out_path?: string;
       base_path?: string;
-    }) => textContent(JSON.stringify(handleTiedFeedbackPilotRun(args), null, 2)),
+    }) => textContent(prettyCanonicalJson(handleTiedFeedbackPilotRun(args))),
   },
   {
     name: "tied_verify",
@@ -1522,11 +1509,11 @@ export const allTools = [
         } else if (args.checklist_gate.tracker && typeof args.checklist_gate.tracker === "object") {
           tracker = args.checklist_gate.tracker as Record<string, unknown>;
         } else {
-          return textContent(JSON.stringify({
+          return textContent(prettyCanonicalJson({
             ok: false,
             error: "CHECKLIST_GATE_BLOCKED: missing tracker or tracker_path",
             diagnostics: ["missing_checklist_gate"],
-          }, null, 2));
+          }));
         }
         if (!evidence.requestToken) {
           const ee = tracker.execution_evidence;
@@ -1565,7 +1552,7 @@ export const allTools = [
         project_root: args.project_root,
         receipt_persistence: args.receipt_persistence,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -1589,7 +1576,7 @@ export const allTools = [
       const cycles = findCycles(g);
       const has_cycles = cycles.length > 0;
       return textContent(
-        JSON.stringify({ cycles, has_cycles, ok: !has_cycles }, null, 2)
+        prettyCanonicalJson({ cycles, has_cycles, ok: !has_cycles })
       );
     },
   },
@@ -1609,7 +1596,7 @@ export const allTools = [
       const { statusByToken, priorityByToken } = getRequirementStatusAndPriority();
       if (args.view === "order") {
         const order = topologicalSort(g);
-        return textContent(JSON.stringify({ order, has_cycles: order.length === 0 && g.size > 0 }, null, 2));
+        return textContent(prettyCanonicalJson({ order, has_cycles: order.length === 0 && g.size > 0 }));
       }
       const kind =
         args.view === "quick-wins"
@@ -1618,7 +1605,7 @@ export const allTools = [
             ? "blockers"
             : "critical";
       const tokens = getBacklogView(g, kind, { statusByToken, priorityByToken });
-      return textContent(JSON.stringify({ view: args.view, tokens }, null, 2));
+      return textContent(prettyCanonicalJson({ view: args.view, tokens }));
     },
   },
   {
@@ -1643,7 +1630,7 @@ export const allTools = [
     },
     handler: async (args: { requirements?: unknown[]; current_state?: string }) => {
       const next = resolveRequirementListStateGuide(args);
-      return textContent(JSON.stringify(next, null, 2));
+      return textContent(prettyCanonicalJson(next));
     },
   },
   {
@@ -1719,10 +1706,10 @@ export const allTools = [
     handler: async (args: any) => {
       try {
         const result = runScopedAnalysis(args);
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -1788,7 +1775,7 @@ export const allTools = [
           identifier_mode: args.identifier_mode,
         });
         if (!result.ok) {
-          return textContent(JSON.stringify({ ok: false, error: result.error ?? "unknown" }, null, 2));
+          return textContent(prettyCanonicalJson({ ok: false, error: result.error ?? "unknown" }));
         }
         const payload: Record<string, unknown> = {
           ok: true,
@@ -1806,13 +1793,13 @@ export const allTools = [
           const jsonAbs = path.isAbsolute(args.emit_json_path)
             ? args.emit_json_path
             : path.resolve(process.cwd(), args.emit_json_path);
-          fs.writeFileSync(jsonAbs, `${JSON.stringify(result.envelope, null, 2)}\n`, "utf8");
+          fs.writeFileSync(jsonAbs, safeStringifyJson(result.envelope), "utf8");
           payload.emit_json_path = jsonAbs;
         }
-        return textContent(JSON.stringify(payload, null, 2));
+        return textContent(prettyCanonicalJson(payload));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -1882,7 +1869,7 @@ export const allTools = [
             ...projectArgs,
             activation,
           });
-          return textContent(JSON.stringify(result, null, 2));
+          return textContent(prettyCanonicalJson(result));
         }
         if (!args.graph || !args.fidelity || !args.scope?.length) {
           throw new Error("graph, fidelity, and non-empty scope are required unless mode is project.");
@@ -1900,10 +1887,10 @@ export const allTools = [
           provenance: args.provenance,
           redact: args.redact,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -1935,10 +1922,10 @@ export const allTools = [
     }) => {
       try {
         const result = await runClaimsEvidenceReviewMcp(args);
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -1997,7 +1984,7 @@ export const allTools = [
         } else if (args.tracker) {
           tracker = args.tracker;
         } else {
-          return textContent(JSON.stringify({ ok: false, error: "missing tracker or tracker_path" }, null, 2));
+          return textContent(prettyCanonicalJson({ ok: false, error: "missing tracker or tracker_path" }));
         }
         if (!evidence.requestToken) {
           const ee = tracker.execution_evidence;
@@ -2022,11 +2009,11 @@ export const allTools = [
           requiredStepSlugs: args.required_step_slugs,
         });
         if (preGateReject) {
-          return textContent(JSON.stringify({
+          return textContent(prettyCanonicalJson({
             ...preGateReject,
             ...(hydration.hydrated.length > 0 ? { evidence_hydrated: hydration.hydrated } : {}),
             ...(hydration.diagnostics.length > 0 ? { hydration_diagnostics: hydration.diagnostics } : {}),
-          }, null, 2));
+          }));
         }
         const result = validateChecklistGate({
           phase: args.phase,
@@ -2049,23 +2036,23 @@ export const allTools = [
             runId: args.receipt_persistence.run_id,
           });
           if (!persisted.ok) {
-            return textContent(JSON.stringify({
+            return textContent(prettyCanonicalJson({
               ...result,
               gate_receipt_error: persisted.error,
               diagnostics: [...result.diagnostics, ...persisted.diagnostics],
-            }, null, 2));
+            }));
           }
           gateReceipt = { path: persisted.path, hash: persisted.hash };
         }
-        return textContent(JSON.stringify({
+        return textContent(prettyCanonicalJson({
           ...result,
           ...(hydration.hydrated.length > 0 ? { evidence_hydrated: hydration.hydrated } : {}),
           ...(hydration.diagnostics.length > 0 ? { hydration_diagnostics: hydration.diagnostics } : {}),
           ...(gateReceipt ? { gate_receipt: gateReceipt } : {}),
-        }, null, 2));
+        }));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -2100,12 +2087,12 @@ export const allTools = [
         const requestToken = args.request_token.trim();
         if (!requestToken) {
           return textContent(
-            JSON.stringify({
+            prettyCanonicalJson({
               allowed: false,
               exit_code: 2,
               receipt_path: null,
               reasons: ["missing_request_token"],
-            }, null, 2),
+            }),
           );
         }
         const defaults = defaultPathsForRequest(
@@ -2120,12 +2107,12 @@ export const allTools = [
         } catch (e) {
           const msg = e instanceof Error ? e.message : String(e);
           return textContent(
-            JSON.stringify({
+            prettyCanonicalJson({
               allowed: false,
               exit_code: 2,
               receipt_path: null,
               reasons: [msg],
-            }, null, 2),
+            }),
           );
         }
         const summary = await runGateCheckComposition({
@@ -2139,22 +2126,22 @@ export const allTools = [
           callGateValidate,
         });
         return textContent(
-          JSON.stringify({
+          prettyCanonicalJson({
             allowed: summary.allowed,
             exit_code: summary.exit_code,
             receipt_path: summary.receipt_path ?? null,
             reasons: summary.reasons,
-          }, null, 2),
+          }),
         );
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(
-          JSON.stringify({
+          prettyCanonicalJson({
             allowed: false,
             exit_code: 2,
             receipt_path: null,
             reasons: [msg],
-          }, null, 2),
+          }),
         );
       }
     },
@@ -2199,10 +2186,10 @@ export const allTools = [
           requirements_index: args.requirements_index?.trim() || undefined,
           implementation_index: args.implementation_index?.trim() || undefined,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -2234,10 +2221,10 @@ export const allTools = [
           projectRoot: args.project_root,
           metricsPath: args.metrics_path,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -2252,7 +2239,7 @@ export const allTools = [
       }),
     },
     handler: async (args: Parameters<typeof validateTestAdequacyPlan>[0]) => {
-      return textContent(JSON.stringify(validateTestAdequacyPlan(args), null, 2));
+      return textContent(prettyCanonicalJson(validateTestAdequacyPlan(args)));
     },
   },
   {
@@ -2309,10 +2296,10 @@ export const allTools = [
     handler: async (args: Record<string, unknown>) => {
       try {
         const manifest = buildVerificationEvidenceManifest(args as unknown as VerificationEvidenceInput);
-        return textContent(JSON.stringify(manifest, null, 2));
+        return textContent(prettyCanonicalJson(manifest));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -2343,10 +2330,10 @@ export const allTools = [
     handler: async (args: QualityCommandRunnerInput) => {
       try {
         const results = await runDeclaredQualityCommands(args);
-        return textContent(JSON.stringify({ ok: true, command_results: results }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: true, command_results: results }));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -2374,7 +2361,7 @@ export const allTools = [
       }),
     },
     handler: async (args: SecurityProfileInput) => {
-      return textContent(JSON.stringify(validateSecurityProfile(args), null, 2));
+      return textContent(prettyCanonicalJson(validateSecurityProfile(args)));
     },
   },
   {
@@ -2453,10 +2440,10 @@ export const allTools = [
         const payload = diff_scoped_crap_hook
           ? { ...manifest, diff_scoped_crap_hook }
           : manifest;
-        return textContent(JSON.stringify(payload, null, 2));
+        return textContent(prettyCanonicalJson(payload));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -2580,10 +2567,10 @@ export const allTools = [
           manifest_reference: args.manifest_reference,
           structural_validators: structuralValidators,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, stage: "handler", error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, stage: "handler", error: msg }));
       }
     },
   },
@@ -2615,11 +2602,11 @@ export const allTools = [
       const resolved = resolveEssencePseudocodeSource(getBasePath(), args);
       if (!resolved.ok) {
         return textContent(
-          JSON.stringify({ ok: false, stage: "input", error: resolved.error }, null, 2),
+          prettyCanonicalJson({ ok: false, stage: "input", error: resolved.error }),
         );
       }
       return textContent(
-        JSON.stringify(validateEssencePseudocode({ ...args, pseudocode: resolved.content }), null, 2),
+        prettyCanonicalJson(validateEssencePseudocode({ ...args, pseudocode: resolved.content })),
       );
     },
   },
@@ -2757,12 +2744,12 @@ export const allTools = [
       const hasPath = typeof args.essence_pseudocode_path === "string" && args.essence_pseudocode_path.length > 0;
       if (hasInline && hasPath) {
         return textContent(
-          JSON.stringify({ ok: false, stage: "input", error: "AMBIGUOUS_INPUT" }, null, 2),
+          prettyCanonicalJson({ ok: false, stage: "input", error: "AMBIGUOUS_INPUT" }),
         );
       }
       if (!hasInline && !hasPath) {
         return textContent(
-          JSON.stringify({ ok: false, stage: "input", error: "MISSING_INPUT" }, null, 2),
+          prettyCanonicalJson({ ok: false, stage: "input", error: "MISSING_INPUT" }),
         );
       }
 
@@ -2771,20 +2758,18 @@ export const allTools = [
         const resolved = resolvePseudocodePathUnderTiedBase(args.essence_pseudocode_path!, getBasePath());
         if (!resolved.ok) {
           return textContent(
-            JSON.stringify(
+            prettyCanonicalJson(
               {
                 ok: false,
                 stage: "input",
                 error: resolved.error.includes("TIED_BASE_PATH") ? "PATH_NOT_UNDER_TIED_BASE" : resolved.error,
-              },
-              null,
-              2,
+              }
             ),
           );
         }
         const read = readTextFromPseudocodePath(resolved.absolutePath);
         if (!read.ok) {
-          return textContent(JSON.stringify({ ok: false, stage: "input", error: read.error }, null, 2));
+          return textContent(prettyCanonicalJson({ ok: false, stage: "input", error: read.error }));
         }
         source = read.content;
       }
@@ -2811,10 +2796,8 @@ export const allTools = [
         const implTokens = args.impl_tokens;
         if (!reqToken || !implTokens || implTokens.length === 0) {
           return textContent(
-            JSON.stringify(
-              { ok: false, stage: "input", error: "CLOSURE_JOIN_MISSING_REQ_OR_IMPL" },
-              null,
-              2,
+            prettyCanonicalJson(
+              { ok: false, stage: "input", error: "CLOSURE_JOIN_MISSING_REQ_OR_IMPL" }
             ),
           );
         }
@@ -2836,7 +2819,7 @@ export const allTools = [
         }
       }
 
-      return textContent(JSON.stringify(report, null, 2));
+      return textContent(prettyCanonicalJson(report));
     },
   },
   {
@@ -2850,7 +2833,7 @@ export const allTools = [
     },
     handler: async (args: { rows: unknown[] }) => {
       return textContent(
-        JSON.stringify(validateBindingInventory(args.rows as Parameters<typeof validateBindingInventory>[0]), null, 2),
+        prettyCanonicalJson(validateBindingInventory(args.rows as Parameters<typeof validateBindingInventory>[0])),
       );
     },
   },
@@ -2882,10 +2865,10 @@ export const allTools = [
     }) => {
       try {
         const result = await buildEasarInventoryReceipt(args);
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        return textContent(JSON.stringify({ ok: false, error: message }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: message }));
       }
     },
   },
@@ -2925,10 +2908,10 @@ export const allTools = [
     }) => {
       try {
         const result = await buildEasarCodeGraphMatrixReceipt(args);
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        return textContent(JSON.stringify({ ok: false, error: message }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: message }));
       }
     },
   },
@@ -2959,7 +2942,7 @@ export const allTools = [
       output_path?: string;
     }) => {
       const result = buildEasarClaimMatrixMap(args);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3010,7 +2993,7 @@ export const allTools = [
       output_path?: string;
     }) => {
       const result = buildEasarReflexionReport(args);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3044,7 +3027,7 @@ export const allTools = [
       min_cases?: number;
     }) => {
       const result = runEasarValidationSuiteMcp(args);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3081,7 +3064,7 @@ export const allTools = [
       manifest_output_path?: string;
     }) => {
       const result = buildEasarRecoveryExport(args);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3100,7 +3083,7 @@ export const allTools = [
           ? (args.tracker as { edpc_engagement?: Record<string, unknown> }).edpc_engagement
           : undefined;
       const result = validateEdpcAccessMatrix(args.access_matrix, engagement as Parameters<typeof validateEdpcAccessMatrix>[1]);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3114,7 +3097,7 @@ export const allTools = [
     },
     handler: async (args: { tracker: Record<string, unknown> }) => {
       const result = validateEdpcEngagementFacet(args.tracker);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3128,7 +3111,7 @@ export const allTools = [
     },
     handler: async (args: { question_class: string; evidence_access_tier: (typeof EVIDENCE_ACCESS_TIERS)[number] }) => {
       const result = routeEdpcWorkflow(args.question_class, args.evidence_access_tier);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3163,7 +3146,7 @@ export const allTools = [
         charter: args.charter as Parameters<typeof buildEdpcPublishManifest>[0]["charter"],
         ofsm_bundle: args.ofsm_bundle as Parameters<typeof buildEdpcPublishManifest>[0]["ofsm_bundle"],
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3190,7 +3173,7 @@ export const allTools = [
         access_matrix: args.access_matrix,
         ofsm_bundle: args.ofsm_bundle,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3220,7 +3203,7 @@ export const allTools = [
         ofsm_bundle: args.ofsm_bundle,
         scm_shell: args.scm_shell,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3252,7 +3235,7 @@ export const allTools = [
         >[0]["publish_manifest"],
         receipt_exists: (path) => existsMap[path] ?? false,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3289,7 +3272,7 @@ export const allTools = [
         >[0]["claims_ledger"],
         receipt_exists: (path) => existsMap[path] ?? false,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3305,7 +3288,7 @@ export const allTools = [
       const result = renderEdpcClientAssessmentMarkdown(
         args.cam as Parameters<typeof renderEdpcClientAssessmentMarkdown>[0],
       );
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3346,7 +3329,7 @@ export const allTools = [
         }
       }
       return textContent(
-        JSON.stringify(
+        prettyCanonicalJson(
           brownfieldIntentEvidenceValidate({
             markdown_text,
             yaml_text,
@@ -3356,9 +3339,7 @@ export const allTools = [
             mode: args.mode,
             scoped_analysis_evidence_id: args.scoped_analysis_evidence_id,
             claims_review_evidence_id: args.claims_review_evidence_id,
-          }),
-          null,
-          2,
+          })
         ),
       );
     },
@@ -3374,7 +3355,7 @@ export const allTools = [
       }),
     },
     handler: async (args: { repo_root: string; index_rel_path?: string }) => {
-      return textContent(JSON.stringify(await tiedSourceGraphRefresh(args), null, 2));
+      return textContent(prettyCanonicalJson(await tiedSourceGraphRefresh(args)));
     },
   },
   {
@@ -3388,7 +3369,7 @@ export const allTools = [
       }),
     },
     handler: async (args: { repo_root: string; index_rel_path?: string }) => {
-      return textContent(JSON.stringify(await tiedSourceGraphMap(args), null, 2));
+      return textContent(prettyCanonicalJson(await tiedSourceGraphMap(args)));
     },
   },
   {
@@ -3409,7 +3390,7 @@ export const allTools = [
       depth?: number;
       index_rel_path?: string;
     }) => {
-      return textContent(JSON.stringify(await tiedSourceGraphTrace(args), null, 2));
+      return textContent(prettyCanonicalJson(await tiedSourceGraphTrace(args)));
     },
   },
   {
@@ -3423,7 +3404,7 @@ export const allTools = [
       }),
     },
     handler: async (args: { repo_root: string; index_rel_path?: string }) => {
-      return textContent(JSON.stringify(await tiedSourceGraphFreshness(args), null, 2));
+      return textContent(prettyCanonicalJson(await tiedSourceGraphFreshness(args)));
     },
   },
   {
@@ -3437,7 +3418,7 @@ export const allTools = [
       }),
     },
     handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
-      return textContent(JSON.stringify(validateStressorResidueRecord(args), null, 2));
+      return textContent(prettyCanonicalJson(validateStressorResidueRecord(args)));
     },
   },
   {
@@ -3451,7 +3432,7 @@ export const allTools = [
       }),
     },
     handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
-      return textContent(JSON.stringify(validateMethodologyLearningExperiment(args), null, 2));
+      return textContent(prettyCanonicalJson(validateMethodologyLearningExperiment(args)));
     },
   },
   {
@@ -3465,7 +3446,7 @@ export const allTools = [
       }),
     },
     handler: async (args: { record?: Record<string, unknown>; yaml_text?: string }) => {
-      return textContent(JSON.stringify(validateProductionSystemEnrollment(args), null, 2));
+      return textContent(prettyCanonicalJson(validateProductionSystemEnrollment(args)));
     },
   },
   {
@@ -3480,7 +3461,7 @@ export const allTools = [
     },
     handler: async (args: { record: Record<string, unknown>; base_path?: string }) => {
       const result = upsertMethodologyLearningExperiment(args.record, args.base_path);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3494,7 +3475,7 @@ export const allTools = [
     },
     handler: async (args: { base_path?: string }) => {
       const data = listMethodologyLearningExperiments(args.base_path);
-      return textContent(JSON.stringify(data, null, 2));
+      return textContent(prettyCanonicalJson(data));
     },
   },
   {
@@ -3527,7 +3508,7 @@ export const allTools = [
         cwd: args.cwd,
         projectRoot: args.project_root,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -3559,29 +3540,29 @@ export const allTools = [
       base_path?: string;
     }) => {
       if (args.experiment_id) {
-        return textContent(JSON.stringify(pairFromExperimentId({
+        return textContent(prettyCanonicalJson(pairFromExperimentId({
           experiment_id: args.experiment_id,
           conformance_evidence_refs: args.conformance_evidence_refs,
           process_grade_gap_documented: args.process_grade_gap_documented,
           waiver: args.waiver,
           base_path: args.base_path,
-        }), null, 2));
+        })));
       }
       if (args.record) {
         const outcome = args.record.methodology_outcome_observation;
-        return textContent(JSON.stringify(pairConformanceEffectiveness({
+        return textContent(prettyCanonicalJson(pairConformanceEffectiveness({
           conformance_evidence_refs: args.conformance_evidence_refs,
           methodology_outcome_observation: outcome as Record<string, unknown> | null | undefined,
           experiment_proof_boundary:
             typeof args.record.proof_boundary === "string" ? args.record.proof_boundary : undefined,
           process_grade_gap_documented: args.process_grade_gap_documented,
           waiver: args.waiver,
-        }), null, 2));
+        })));
       }
-      return textContent(JSON.stringify({
+      return textContent(prettyCanonicalJson({
         ok: false,
         diagnostics: [{ code: "INVALID_INPUT", message: "Provide experiment_id or record" }],
-      }, null, 2));
+      }));
     },
   },
   {
@@ -3614,7 +3595,7 @@ export const allTools = [
         production_system_surface: args.production_system_surface,
         base_path: args.base_path,
       });
-      return textContent(JSON.stringify(report, null, 2));
+      return textContent(prettyCanonicalJson(report));
     },
   },
   {
@@ -3692,7 +3673,7 @@ export const allTools = [
         max_patch_bytes: args.max_patch_bytes ?? 250000,
         max_total_patch_bytes: args.max_total_patch_bytes ?? 2000000,
       });
-      return textContent(JSON.stringify(report, null, 2));
+      return textContent(prettyCanonicalJson(report));
     },
   },
   {
@@ -3965,10 +3946,8 @@ export const allTools = [
       feature_identifier: string;
       expected_revision?: number;
       command_input?: Record<string, unknown>;
-    }) => textContent(JSON.stringify(
-      await handleOrchestrationTool(name, args, { store: new FeatureStore(path.join(getBasePath(), "features")) }),
-      null,
-      2,
+    }) => textContent(prettyCanonicalJson(
+      await handleOrchestrationTool(name, args, { store: new FeatureStore(path.join(getBasePath(), "features")) })
     )),
   })),
   {
@@ -3981,9 +3960,9 @@ export const allTools = [
       }),
     },
     handler: async (args: { view_kind: string; source_input: Record<string, unknown> }) =>
-      textContent(JSON.stringify(await handleOrchestrationTool("feature_view_render", args, {
+      textContent(prettyCanonicalJson(await handleOrchestrationTool("feature_view_render", args, {
         store: new FeatureStore(path.join(getBasePath(), "features")),
-      }), null, 2)),
+      }))),
   },
   {
     name: "feature_view_check_stale",
@@ -4001,9 +3980,9 @@ export const allTools = [
       current_source_revision: Record<string, unknown>[];
       policy: "fail" | "warn";
       view_path?: string;
-    }) => textContent(JSON.stringify(await handleOrchestrationTool("feature_view_check_stale", args, {
+    }) => textContent(prettyCanonicalJson(await handleOrchestrationTool("feature_view_check_stale", args, {
       store: new FeatureStore(path.join(getBasePath(), "features")),
-    }), null, 2)),
+    }))),
   },
   {
     name: "feature_create",
@@ -4015,10 +3994,8 @@ export const allTools = [
         mode: z.enum(["greenfield", "brownfield"]).optional(),
       }),
     },
-    handler: async (args: { request_key: string; title: string; mode?: "greenfield" | "brownfield" }) => textContent(JSON.stringify(
-      await handleOrchestrationTool("feature_create", args, { store: new FeatureStore(path.join(getBasePath(), "features")) }),
-      null,
-      2,
+    handler: async (args: { request_key: string; title: string; mode?: "greenfield" | "brownfield" }) => textContent(prettyCanonicalJson(
+      await handleOrchestrationTool("feature_create", args, { store: new FeatureStore(path.join(getBasePath(), "features")) })
     )),
   },
   {
@@ -4027,7 +4004,7 @@ export const allTools = [
       description: "Delegate canonical REQ, ARCH, or IMPL mutation to the existing TIED YAML surface.",
       inputSchema: z.object({ token: z.string().min(1), updates: z.record(z.unknown()) }),
     },
-    handler: async (args: { token: string; updates: Record<string, unknown> }) => textContent(JSON.stringify(
+    handler: async (args: { token: string; updates: Record<string, unknown> }) => textContent(prettyCanonicalJson(
       await handleOrchestrationTool("feature_update_canonical", args, {
         store: new FeatureStore(path.join(getBasePath(), "features")),
         delegateCanonical: async (request) => {
@@ -4048,9 +4025,7 @@ export const allTools = [
           if (!updated.ok) return updated;
           return { ...updated, consistency: validateConsistency({ include_detail_files: true, include_pseudocode: true }) };
         },
-      }),
-      null,
-      2,
+      })
     )),
   },
   {
@@ -4091,10 +4066,10 @@ export const allTools = [
           output_mode: args.output_mode,
           corpus_inventory: args.corpus_inventory,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, stage: "build", error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, stage: "build", error: msg }));
       }
     },
   },
@@ -4113,9 +4088,6 @@ export const allTools = [
         fail_on_process_gaps: z.boolean().optional().default(false).describe(
           "When true, process-adherence warn gaps fail validation (Wave 5 process-strict mode).",
         ),
-        fail_on_independent_proof_errors: z.boolean().optional().default(false).describe(
-          "When true, independent proof advisory gaps (missing boundary/hash) fail validation.",
-        ),
       }),
     },
     handler: async (args: {
@@ -4124,7 +4096,6 @@ export const allTools = [
       project_root?: string;
       fail_on_error_gaps?: boolean;
       fail_on_process_gaps?: boolean;
-      fail_on_independent_proof_errors?: boolean;
     }) => {
       try {
         const result = await validateRequestEvidenceEnvelope({
@@ -4133,12 +4104,11 @@ export const allTools = [
           project_root: args.project_root,
           fail_on_error_gaps: args.fail_on_error_gaps ?? false,
           fail_on_process_gaps: args.fail_on_process_gaps ?? false,
-          fail_on_independent_proof_errors: args.fail_on_independent_proof_errors ?? false,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, diagnostics: [msg] }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, diagnostics: [msg] }));
       }
     },
   },
@@ -4183,10 +4153,10 @@ export const allTools = [
           tied_base_path: tiedBasePath,
           confirmed_tied_base_path: confirmed,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, gaps: [], error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, gaps: [], error: msg }));
       }
     },
   },
@@ -4238,10 +4208,10 @@ export const allTools = [
           expected_revision: args.expected_revision,
           generated_at: args.generated_at,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, gaps: [], error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, gaps: [], error: msg }));
       }
     },
   },
@@ -4280,10 +4250,10 @@ export const allTools = [
           gate_policy: args.gate_policy,
           write_not_applicable_receipts: args.write_not_applicable_receipts,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, stage: "backfill", error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, stage: "backfill", error: msg }));
       }
     },
   },
@@ -4342,11 +4312,11 @@ export const allTools = [
           privacyTier: args.privacy_tier,
           includeAbsolutePaths: args.include_absolute_paths,
         });
-        return textContent(JSON.stringify(result, null, 2));
+        return textContent(prettyCanonicalJson(result));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(
-          JSON.stringify({ ok: false, error: msg, validation_errors: [msg], exit_code: 1 }, null, 2),
+          prettyCanonicalJson({ ok: false, error: msg, validation_errors: [msg], exit_code: 1 }),
         );
       }
     },

@@ -3,6 +3,7 @@
  * [REQ-TIED_PROCESS_CERTIFICATION_READINESS]
  */
 
+import { stableJsonForHash } from "../storage-dump.js";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -28,7 +29,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function sha256Clauses(clauses: unknown): string {
-  return crypto.createHash("sha256").update(JSON.stringify(clauses)).digest("hex");
+  return crypto.createHash("sha256").update(stableJsonForHash(clauses)).digest("hex");
 }
 
 function findForbiddenRollupKeys(value: unknown, prefix = ""): ValidationDiagnostic[] {

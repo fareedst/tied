@@ -3,6 +3,7 @@
  * DISTILL_TRAJECTORY_LESSONS — draft-only lesson distillation (no canonical writes).
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -215,6 +216,6 @@ export function writeTrajectoryLessonDraftReport(
   const relative = workingPathRelativeToProject(projectRoot, requestToken, "evidence", filename);
   const absolute = path.join(projectRoot, relative);
   fs.mkdirSync(path.dirname(absolute), { recursive: true });
-  fs.writeFileSync(absolute, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  fs.writeFileSync(absolute, `${prettyCanonicalJson(report)}\n`, "utf8");
   return relative;
 }

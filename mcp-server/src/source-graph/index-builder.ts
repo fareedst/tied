@@ -3,6 +3,7 @@
  * [ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL] [REQ-TIED_SOURCE_GRAPH_COMPREHENSION]
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -152,7 +153,7 @@ export async function refreshSourceGraphIndex(input: {
   const indexRel = input.index_rel_path ?? DEFAULT_INDEX_REL;
   const indexPath = path.join(repoRoot, indexRel);
   await mkdir(path.dirname(indexPath), { recursive: true });
-  await writeFile(indexPath, `${JSON.stringify(index, null, 2)}\n`, "utf8");
+  await writeFile(indexPath, `${prettyCanonicalJson(index)}\n`, "utf8");
 
   return { index, index_path: indexPath };
 }

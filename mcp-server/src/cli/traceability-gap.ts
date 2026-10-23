@@ -4,6 +4,7 @@
  * when --strict is set (for CI). Default exit 0 unless strict + gaps.
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import { runScopedAnalysis } from "../analysis/scoped-analysis.js";
 
 function main(): void {
@@ -23,7 +24,7 @@ function main(): void {
     },
   };
 
-  process.stdout.write(`${JSON.stringify(merged, null, 2)}\n`);
+  process.stdout.write(`${prettyCanonicalJson(merged)}\n`);
 
   if (!strict) {
     process.exit(0);

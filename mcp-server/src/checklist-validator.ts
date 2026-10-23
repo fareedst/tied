@@ -1,3 +1,4 @@
+import { stableJsonForHash } from "./storage-dump.js";
 import { createHash } from "node:crypto";
 
 import { REPORT_SCHEMA_VERSION } from "./analysis/pseudocode-ir.js";
@@ -111,7 +112,7 @@ function stableValue(value: unknown): unknown {
 
 export function stableHash(value: unknown): string {
   return createHash("sha256")
-    .update(JSON.stringify(stableValue(value)), "utf8")
+    .update(stableJsonForHash(stableValue(value)), "utf8")
     .digest("hex");
 }
 

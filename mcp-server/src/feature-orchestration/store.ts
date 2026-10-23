@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 
-import { safeDumpYaml } from "../storage-dump.js";
+import { safeDumpYaml, stableJsonForHash } from "../storage-dump.js";
 import { validateManifest, type FeatureManifest } from "./manifest.js";
 
 export type Allocation = {
@@ -109,14 +109,7 @@ function readLockRecord(lockPath: string): LockRecord | null {
 }
 
 function writeLockRecord(lockPath: string, expiresAtMs: number): void {
-  fs.writeFileSync(path.join(lockPath, "lock-meta.json"), JSON.stringify({ expires_at_ms: expiresAtMs }), "utf8");
-}
-
-function stableJson(value: unknown): string {
-  return JSON.stringify(value, (_key, item) => {
-    if (!item || typeof item !== "object" || Array.isArray(item)) return item;
-    return Object.fromEntries(Object.entries(item).sort(([left], [right]) => left.localeCompare(right)));
-  });
+  fs.writeFileSync(path.join(lockPath, "lock-meta.json"), stableJsonForHash({ expires_at_ms: expiresAtMs }), "utf8");
 }
 
 // [IMPL-FEAT_STORE] [ARCH-FEAT_STORE_PERSISTENCE] [REQ-FEAT_STORE_PERSISTENCE] — How: persist and load one feature manifest beneath the feature store root without copying canonical TIED records.
@@ -266,7 +259,7 @@ export class FeatureStore {
         const refreshed = fs.existsSync(metadataPath)
           ? (yaml.load(fs.readFileSync(metadataPath, "utf8")) as Record<string, RequestRecord>) ?? {}
           : {};
-        const fingerprint = crypto.createHash("sha256").update(stableJson({ title: title.trim(), options })).digest("hex");
+        const fingerprint = crypto.createHash("sha256").update(stableJsonForHash({ title: title.trim(), options })).digest("hex");
         const inFlight = refreshed[requestKey];
         if (inFlight && inFlight.fingerprint === fingerprint) {
           return { ok: true, outcome: "existing", manifest: this.read(inFlight.directory_name) };
@@ -275,7 +268,7 @@ export class FeatureStore {
       }
     }
     try {
-      const fingerprint = crypto.createHash("sha256").update(stableJson({ title: title.trim(), options })).digest("hex");
+      const fingerprint = crypto.createHash("sha256").update(stableJsonForHash({ title: title.trim(), options })).digest("hex");
       const prior = records[requestKey];
       if (prior && prior.fingerprint !== fingerprint) return { ok: false, error: "REQUEST_KEY_COLLISION" };
       if (prior) return { ok: true, outcome: "existing", manifest: this.read(prior.directory_name) };

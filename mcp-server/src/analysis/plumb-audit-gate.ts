@@ -9,6 +9,8 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 
+import { stableJsonForHash } from "../storage-dump.js";
+
 import {
   runPlumbDiffImpactPreview,
   type PlumbDiffImpactPreviewArgs,
@@ -191,7 +193,7 @@ function stablePreviewSummaryRef(preview: PlumbDiffImpactPreviewReport): PlumbAu
       preview.token_registry_checks.missing_detail_files.IMPL.length,
   };
 
-  const id = sha256Hex(JSON.stringify(refObj));
+  const id = sha256Hex(stableJsonForHash(refObj));
 
   return {
     id,
@@ -219,7 +221,7 @@ function stableGapSummaryRef(gap: TraceabilityGapReportResult): PlumbAuditGateRu
     missing_registry_count: gap.registry_gaps.missing_count,
   };
 
-  const id = sha256Hex(JSON.stringify(refObj));
+  const id = sha256Hex(stableJsonForHash(refObj));
 
   return {
     id,
@@ -250,7 +252,7 @@ function resolveAuditLogPath(p?: string): string {
 function appendJsonLine(fileAbs: string, lineObj: unknown): void {
   const dir = path.dirname(fileAbs);
   fs.mkdirSync(dir, { recursive: true });
-  const json = JSON.stringify(lineObj);
+  const json = stableJsonForHash(lineObj);
   fs.appendFileSync(fileAbs, `${json}\n`, { encoding: "utf8" });
 }
 
@@ -266,7 +268,7 @@ function localityEnabled(args: PlumbAuditGateArgs): boolean {
 
 function stableLocalitySummaryRef(report: ChangeLocalityReportV1): PlumbAuditGateRunResult["locality_summary_ref"] {
   const compact = compactLocalitySummaryFromReport(report);
-  const id = sha256Hex(JSON.stringify(compact));
+  const id = sha256Hex(stableJsonForHash(compact));
   return { id, ...compact };
 }
 

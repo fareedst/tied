@@ -1,3 +1,4 @@
+import { prettyCanonicalJson } from "../storage-dump.js";
 import path from "node:path";
 import { executeLifecycleCommand, type CommandResult } from "./commands.js";
 import { FeatureStore } from "./store.js";
@@ -43,6 +44,6 @@ export function runFeatureOrchestrator(argv: string[], injectedStore?: FeatureSt
 
 export function main(argv = process.argv.slice(2)): void {
   const output = runFeatureOrchestrator(argv);
-  process.stdout.write(`${JSON.stringify(output.result, null, 2)}\n`);
+  process.stdout.write(`${prettyCanonicalJson(output.result)}\n`);
   process.exitCode = output.status;
 }

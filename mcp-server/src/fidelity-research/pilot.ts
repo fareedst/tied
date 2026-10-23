@@ -1,3 +1,4 @@
+import { stableJsonForHash } from "../storage-dump.js";
 import crypto from "node:crypto";
 import {
   appendCandidateFinding,
@@ -211,11 +212,11 @@ export function runFidelityResearchPilot(
       const snapshot = stageValue<{ snapshot: ArtifactSnapshot }>(stageInput.snapshot);
       const snapshotHash = crypto
         .createHash("sha256")
-        .update(JSON.stringify(snapshot.snapshot))
+        .update(stableJsonForHash(snapshot.snapshot))
         .digest("hex");
       const configurationHash = crypto
         .createHash("sha256")
-        .update(JSON.stringify({ token: input.scope.token, changeId: input.change.id }))
+        .update(stableJsonForHash({ token: input.scope.token, changeId: input.change.id }))
         .digest("hex");
       return verifyDeterministicRerun({
         snapshotHash,

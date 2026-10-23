@@ -41,7 +41,7 @@ function isAuditedIntentWrite(outputDir: string, projectRoot: string): boolean {
 
 function writeJsonl(filePath: string, rows: unknown[]): void {
   fs.mkdirSync(path.dirname(filePath), { recursive: true, mode: 0o700 });
-  const body = rows.length > 0 ? `${rows.map((row) => JSON.stringify(row)).join("\n")}\n` : "";
+  const body = rows.length > 0 ? `${rows.map((row) => stableJsonForHash(row)).join("\n")}\n` : "";
   fs.writeFileSync(filePath, body, { encoding: "utf8", mode: 0o600 });
 }
 

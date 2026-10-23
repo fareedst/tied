@@ -3,6 +3,7 @@
  * Summary: Connect declared command execution to deterministic verification manifest generation.
  */
 
+import { prettyCanonicalJson } from "./storage-dump.js";
 import {
   buildVerificationEvidenceManifest,
   type VerificationEvidenceInput,
@@ -96,7 +97,7 @@ export async function collectVerificationEvidence(
     decision_references: input.decision_references,
   });
   if (input.envelope_patch) {
-    const serialized = `${JSON.stringify(manifest, null, 2)}\n`;
+    const serialized = `${prettyCanonicalJson(manifest)}\n`;
     await tryPatchRequestEvidenceEnvelope({
       request_token: input.envelope_patch.request_token,
       project_root: input.envelope_patch.project_root,

@@ -1,7 +1,7 @@
 schema_version: edse-process-spec.v1
 spec_version: 1.0.0
 proof_boundary: conformance-not-capability-not-product
-content_hash: 07029fe28dead27c82e3c346261d81fea1d3f437059ee4f7fb0fb61f791d9d2f
+content_hash: 88bca9b12a7733c06aa2317362ffee6bef92444cb0016b9f2c48beb03c39f3b4
 clauses:
   - id: EDSE-001
     title: Context characterization

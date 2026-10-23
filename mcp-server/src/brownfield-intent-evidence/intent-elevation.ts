@@ -4,6 +4,7 @@
  * Summary: Normalize and validate brownfield intent-elevation matrices (Markdown/YAML parity, report-only).
  */
 
+import { stableJsonForHash } from "../storage-dump.js";
 import { createHash } from "node:crypto";
 
 import yaml from "js-yaml";
@@ -348,7 +349,7 @@ export function computeNormalizeHash(normalized: NormalizedIntentElevation): str
       promotion_target: row.promotion_target ?? "",
     })),
   };
-  return createHash("sha256").update(JSON.stringify(canonical)).digest("hex");
+  return createHash("sha256").update(stableJsonForHash(canonical)).digest("hex");
 }
 
 export function normalizedModelsEquivalent(

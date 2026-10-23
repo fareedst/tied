@@ -23,8 +23,8 @@
     "mode": "project",
     "primaryBlock": "BUILD_PROJECT_INQUIRY_INPUT",
     "proofBoundaries": [
-      "traceability_structure",
-      "semantic_fidelity"
+      "semantic_fidelity",
+      "traceability_structure"
     ],
     "request_token": "REQ-FIXTURE-ADVERSARIAL",
     "run_id": "run-unknown",

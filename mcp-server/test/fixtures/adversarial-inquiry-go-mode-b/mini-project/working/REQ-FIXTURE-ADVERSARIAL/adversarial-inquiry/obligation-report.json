@@ -2,22 +2,6 @@
   "canonicalMutation": false,
   "findings": [
     {
-      "direction": "B",
-      "id": "4a3ed3285e2bb6b9",
-      "kind": "completeness",
-      "message": "Specification statement has no corresponding evidence.",
-      "proofBoundary": "semantic_fidelity",
-      "statementId": "gotest-13-t.Errorf"
-    },
-    {
-      "direction": "B",
-      "id": "7e4c277374b921ad",
-      "kind": "completeness",
-      "message": "Specification statement has no corresponding evidence.",
-      "proofBoundary": "semantic_fidelity",
-      "statementId": "gotest-9-t.Errorf"
-    },
-    {
       "direction": "A",
       "id": "d28e41c0b319fcb1",
       "kind": "completeness",
@@ -32,20 +16,26 @@
       "message": "Specification statement has no corresponding evidence.",
       "proofBoundary": "semantic_fidelity",
       "statementId": "gotest-9-t.Errorf"
+    },
+    {
+      "direction": "B",
+      "id": "4a3ed3285e2bb6b9",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "gotest-13-t.Errorf"
+    },
+    {
+      "direction": "B",
+      "id": "7e4c277374b921ad",
+      "kind": "completeness",
+      "message": "Specification statement has no corresponding evidence.",
+      "proofBoundary": "semantic_fidelity",
+      "statementId": "gotest-9-t.Errorf"
     }
   ],
   "graph": {
     "edges": [
-      {
-        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
-        "kind": "criterion_constraint",
-        "to": "constraint:constraint-fixture-divide"
-      },
-      {
-        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
-        "kind": "criterion_constraint",
-        "to": "constraint:constraint-fixture-divide"
-      },
       {
         "from": "constraint:constraint-fixture-divide",
         "kind": "constraint_block",
@@ -60,6 +50,16 @@
         "from": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#cb126201ed2ab5d5",
         "kind": "block_evidence",
         "to": "evidence:test-locus"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-fixture-divide"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-fixture-divide"
       }
     ],
     "nodes": [

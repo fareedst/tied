@@ -3,6 +3,7 @@
  * Read-only tied_jev_tool_safety_evaluate diagnostic over evaluateHarnessToolCall.
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import path from "node:path";
 import { z } from "zod";
 import {
@@ -118,10 +119,10 @@ export const toolSafetyMcpTools = [
           context: args.context,
           projectRoot,
         });
-        return textContent(JSON.stringify(payload, null, 2));
+        return textContent(prettyCanonicalJson(payload));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },

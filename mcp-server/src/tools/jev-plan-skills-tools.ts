@@ -2,6 +2,7 @@
  * [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR]
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import path from "node:path";
 import { z } from "zod";
 import { textContent } from "../types.js";
@@ -28,10 +29,10 @@ export const jevPlanSkillsTools = [
         const tiedBase = getBasePath();
         const projectRoot = args.project_root ?? path.resolve(tiedBase, "..");
         const payload = buildPlanSkillsStatus(projectRoot);
-        return textContent(JSON.stringify(payload, null, 2));
+        return textContent(prettyCanonicalJson(payload));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        return textContent(JSON.stringify({ ok: false, error: msg }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, error: msg }));
       }
     },
   },
@@ -78,16 +79,16 @@ export const jevPlanSkillsTools = [
           record_evidence: args.record_evidence ?? false,
           shadow_mode: args.shadow_mode ?? "advisory",
         });
-        return textContent(JSON.stringify(payload, null, 2));
+        return textContent(prettyCanonicalJson(payload));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(
-          JSON.stringify({
+          prettyCanonicalJson({
             schema: "jev-plan-skills-vocab-shadow.v1",
             readiness: "configured_unreachable",
             failure_class: "transport",
             failure_excerpt_redacted: msg.slice(0, 500),
-          }, null, 2),
+          }),
         );
       }
     },
@@ -148,18 +149,18 @@ export const jevPlanSkillsTools = [
           run_id: args.run_id,
           record_evidence: args.record_evidence ?? false,
         });
-        return textContent(JSON.stringify(payload, null, 2));
+        return textContent(prettyCanonicalJson(payload));
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         return textContent(
-          JSON.stringify({
+          prettyCanonicalJson({
             schema: "adversarial-triage-pilot.v1",
             jev_invoked: false,
             cases: [],
             agreement_rate: null,
             note: msg.slice(0, 500),
             error: "transport",
-          }, null, 2),
+          }),
         );
       }
     },

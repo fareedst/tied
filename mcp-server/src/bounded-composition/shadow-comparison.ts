@@ -3,6 +3,7 @@
  * RUN_SHADOW_COMPARISON — opt-in advisory shadow comparison (selection_authority none).
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -222,6 +223,6 @@ export function writeShadowComparisonReport(
   const relative = workingPathRelativeToProject(projectRoot, requestToken, "evidence", filename);
   const absolute = path.join(projectRoot, relative);
   fs.mkdirSync(path.dirname(absolute), { recursive: true });
-  fs.writeFileSync(absolute, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  fs.writeFileSync(absolute, `${prettyCanonicalJson(report)}\n`, "utf8");
   return relative;
 }

@@ -10,16 +10,16 @@
       "statementId": "minitest-6-assert_equal"
     },
     {
-      "direction": "B",
-      "id": "9427bd3779233689",
+      "direction": "A",
+      "id": "f0ba09599b6d88f9",
       "kind": "completeness",
       "message": "Specification statement has no corresponding evidence.",
       "proofBoundary": "semantic_fidelity",
       "statementId": "minitest-7-assert_raises"
     },
     {
-      "direction": "A",
-      "id": "f0ba09599b6d88f9",
+      "direction": "B",
+      "id": "9427bd3779233689",
       "kind": "completeness",
       "message": "Specification statement has no corresponding evidence.",
       "proofBoundary": "semantic_fidelity",
@@ -37,16 +37,6 @@
   "graph": {
     "edges": [
       {
-        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
-        "kind": "criterion_constraint",
-        "to": "constraint:divide-contract"
-      },
-      {
-        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
-        "kind": "criterion_constraint",
-        "to": "constraint:divide-contract"
-      },
-      {
         "from": "constraint:divide-contract",
         "kind": "constraint_block",
         "to": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#bc1fd0a97eb78576"
@@ -60,6 +50,16 @@
         "from": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#bc1fd0a97eb78576",
         "kind": "block_evidence",
         "to": "evidence:test-locus"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+        "kind": "criterion_constraint",
+        "to": "constraint:divide-contract"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
+        "kind": "criterion_constraint",
+        "to": "constraint:divide-contract"
       }
     ],
     "nodes": [

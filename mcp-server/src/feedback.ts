@@ -3,6 +3,7 @@
  * [REQ-FEEDBACK_TO_TIED] [ARCH-FEEDBACK_STORAGE] [IMPL-MCP_FEEDBACK_TOOLS]
  */
 
+import { prettyCanonicalJson } from "./storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
@@ -176,7 +177,7 @@ export function exportMarkdown(entries: FeedbackEntry[]): string {
       lines.push("");
       lines.push("**Context:**");
       lines.push("```json");
-      lines.push(JSON.stringify(e.context, null, 2));
+      lines.push(prettyCanonicalJson(e.context));
       lines.push("```");
     }
     lines.push("");
@@ -192,7 +193,7 @@ export function exportMarkdown(entries: FeedbackEntry[]): string {
  * Export entries as JSON string for reporting to TIED.
  */
 export function exportJson(entries: FeedbackEntry[]): string {
-  return JSON.stringify(entries, null, 2);
+  return prettyCanonicalJson(entries);
 }
 
 /**
@@ -205,7 +206,7 @@ export function buildReportSnippet(entry: FeedbackEntry): string {
     entry.description,
   ];
   if (entry.context && Object.keys(entry.context).length > 0) {
-    lines.push("", "**Context:**", "```json", JSON.stringify(entry.context, null, 2), "```");
+    lines.push("", "**Context:**", "```json", prettyCanonicalJson(entry.context), "```");
   }
   lines.push("", `*Reported at ${entry.created_at} (ID: ${entry.id})*`);
   return lines.join("\n");

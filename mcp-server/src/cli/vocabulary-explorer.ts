@@ -4,6 +4,7 @@
  * CLI for offline vocabulary explorer artifact generation.
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 import { runVocabularyExplorer } from "../vocabulary-explorer/pipeline.js";
@@ -76,7 +77,7 @@ function main(): void {
 
   if (args.emitJson) {
     const jsonAbs = path.resolve(process.cwd(), args.emitJson);
-    fs.writeFileSync(jsonAbs, `${JSON.stringify(result.envelope, null, 2)}\n`, "utf8");
+    fs.writeFileSync(jsonAbs, `${prettyCanonicalJson(result.envelope)}\n`, "utf8");
   }
 
   process.stdout.write(`DIAGNOSTIC: wrote ${outAbs} (${result.envelope.terms.length} terms)\n`);

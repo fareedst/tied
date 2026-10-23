@@ -3,6 +3,7 @@
  * Compose depth-gated adapters into one read-only profile without first-slice side effects.
  */
 
+import { prettyCanonicalJson, stableJsonForHash } from "../storage-dump.js";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -174,7 +175,7 @@ const FORBIDDEN_SCORE_KEYS = new Set(["maturity", "score", "maturity_score", "un
 const GENERATOR_VERSION = "1.0.0";
 
 export function hashScope(scope: unknown): string {
-  const stable = JSON.stringify(scope ?? {}, Object.keys((scope ?? {}) as object).sort());
+  const stable = stableJsonForHash(scope ?? {});
   return crypto.createHash("sha256").update(stable).digest("hex").slice(0, 16);
 }
 
@@ -755,7 +756,7 @@ export function generateEvidenceChainProfile(
       fs.writeFileSync(filePath, contents, "utf8");
     });
     try {
-      writer(path.resolve(input.output_path), `${JSON.stringify(profile, null, 2)}\n`);
+      writer(path.resolve(input.output_path), `${JSON.stringify(profile)}\n`);
     } catch (error) {
       return { ok: false, stage: "emit", error: errorMessage(error) };
     }

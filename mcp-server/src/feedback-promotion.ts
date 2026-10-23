@@ -1,3 +1,4 @@
+import { stableJsonForHash } from "./storage-dump.js";
 import crypto from "node:crypto";
 import {
   addProposal,
@@ -63,7 +64,7 @@ export type FeedbackPromotionError =
 function stableGroup(source: Pick<OperationalSource, "source_type" | "affected_feature" | "title" | "description" | "evidence_links" | "proposed_req">): string {
   return `fg-${crypto
     .createHash("sha256")
-    .update(JSON.stringify({
+    .update(stableJsonForHash({
       source_type: source.source_type,
       affected_feature: source.affected_feature,
       title: source.title.trim().toLowerCase(),

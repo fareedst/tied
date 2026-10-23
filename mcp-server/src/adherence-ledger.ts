@@ -1,5 +1,6 @@
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
 // How: append-only agent-adherence-event.v1 rows for gate_decided and status_mutated.
+import { stableJsonForHash } from "./storage-dump.js";
 import { appendFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 
@@ -42,7 +43,7 @@ export function assertJsonlLedgerPath(ledgerPath: string): void {
 function appendLedgerRow(ledgerPath: string, row: Record<string, unknown>): void {
   assertJsonlLedgerPath(ledgerPath);
   mkdirSync(dirname(ledgerPath), { recursive: true });
-  appendFileSync(ledgerPath, `${JSON.stringify(row)}\n`, "utf8");
+  appendFileSync(ledgerPath, `${stableJsonForHash(row)}\n`, "utf8");
 }
 
 /** Append gate_decided after atomic gate receipt write. */

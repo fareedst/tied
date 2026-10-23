@@ -2,6 +2,7 @@
  * [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR]
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -63,7 +64,7 @@ export function writeVocabShadowEvidence(
   }
   fs.mkdirSync(resolved.dir, { recursive: true });
   const filePath = path.join(resolved.dir, "vocab-shadow.v1.json");
-  fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  fs.writeFileSync(filePath, `${prettyCanonicalJson(payload)}\n`, "utf8");
   return { artifact_relpath: resolved.artifact_relpath };
 }
 
@@ -87,6 +88,6 @@ export function writeTriagePilotEvidence(
     runId,
     "adversarial-triage-pilot.v1.json",
   );
-  fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  fs.writeFileSync(filePath, `${prettyCanonicalJson(payload)}\n`, "utf8");
   return { artifact_relpath };
 }

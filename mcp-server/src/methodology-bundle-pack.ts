@@ -3,6 +3,7 @@
  * PACK_METHODOLOGY_BUNDLE_FOR_RELEASE — copy pinned methodology corpus + version manifest for @tied/mcp release.
  */
 
+import { prettyCanonicalJson } from "./storage-dump.js";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -188,7 +189,7 @@ export function packMethodologyBundle(options: PackMethodologyBundleOptions): Me
   };
 
   fs.mkdirSync(path.dirname(manifestOutPath), { recursive: true });
-  fs.writeFileSync(manifestOutPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  fs.writeFileSync(manifestOutPath, `${prettyCanonicalJson(manifest)}\n`, "utf8");
 
   const validated = validateMethodologyBundleManifest(manifest, corpusOutDir);
   if (!validated.ok) {

@@ -5,6 +5,7 @@
  * How: MCP adapters for project operations modules.
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import path from "node:path";
 import { z } from "zod";
 import { textContent } from "../types.js";
@@ -39,7 +40,7 @@ export const projectOperationsMcpTools = [
         impl_tokens: args.impl_tokens,
         include_pseudocode: args.include_pseudocode,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -69,7 +70,7 @@ export const projectOperationsMcpTools = [
         allowed_paths: args.allowed_paths,
         write_gitignore: args.write_gitignore,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -107,7 +108,7 @@ export const projectOperationsMcpTools = [
         citdp: args.citdp,
         pending_decisions: args.pending_decisions,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
 ];

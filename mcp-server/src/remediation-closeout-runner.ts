@@ -1,3 +1,4 @@
+import { prettyCanonicalJson } from "./storage-dump.js";
 // [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
 // How: run verification/close_out inquiry, collect activation, validate gates, write receipts.
 import { readFileSync, writeFileSync } from "node:fs";
@@ -192,7 +193,7 @@ export async function runRemediationPhaseGate(
   });
 
   const gatePath = gatePathFor(phase, root);
-  writeFileSync(gatePath, `${JSON.stringify(gate, null, 2)}\n`, "utf8");
+  writeFileSync(gatePath, `${prettyCanonicalJson(gate)}\n`, "utf8");
   return { allowed: gate.allowed, diagnostics: gate.diagnostics, gatePath };
 }
 
@@ -241,7 +242,7 @@ export async function runRemediationCloseout(root = repoRoot()) {
     { phase: "verification", run_id: verificationRunId },
     { phase: "close_out", run_id: closeOutRunId },
   ];
-  writeFileSync(evidenceManifestPath, `${JSON.stringify(evidence, null, 2)}\n`, "utf8");
+  writeFileSync(evidenceManifestPath, `${prettyCanonicalJson(evidence)}\n`, "utf8");
 
   return { preImplementation, verification, closeOut };
 }
@@ -249,7 +250,7 @@ export async function runRemediationCloseout(root = repoRoot()) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   runRemediationCloseout()
     .then((result) => {
-      process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+      process.stdout.write(`${prettyCanonicalJson(result)}\n`);
       if (!result.preImplementation.allowed
         || !result.verification.allowed
         || !result.closeOut.allowed) {

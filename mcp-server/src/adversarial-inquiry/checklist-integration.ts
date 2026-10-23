@@ -1,3 +1,4 @@
+import { prettyCanonicalJson } from "../storage-dump.js";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { resolveRequestWorkingBase, resolveWorkingPath } from "../working-root.js";
@@ -312,7 +313,7 @@ function stableValue(value: unknown): unknown {
 }
 
 function stableJson(value: unknown): string {
-  return `${JSON.stringify(stableValue(value), null, 2)}\n`;
+  return `${prettyCanonicalJson(stableValue(value))}\n`;
 }
 
 function contentHash(value: string): string {

@@ -4,6 +4,7 @@
  * CLI for request_evidence_envelope_backfill.
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import path from "node:path";
 
 import { backfillRequestEvidenceEnvelope } from "../request-evidence-envelope/backfill.js";
@@ -85,7 +86,7 @@ export async function runEnvelopeBackfillCli(
       gate_policy: gatePolicy,
       write_not_applicable_receipts: !argv.includes("--no-write-not-applicable-receipts"),
     });
-    writeOut(`${JSON.stringify(result, null, 2)}\n`);
+    writeOut(`${prettyCanonicalJson(result)}\n`);
     if (result.ok) {
       writeOut(
         `DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE] backfill wrote ${result.envelope_path}` +

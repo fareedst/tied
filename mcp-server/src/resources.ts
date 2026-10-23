@@ -3,6 +3,7 @@
  * Exposes YAML indexes and single records as read-only resources.
  */
 
+import { prettyCanonicalJson } from "./storage-dump.js";
 import { type McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import {
   loadIndex,
@@ -15,7 +16,7 @@ import { loadDetail, listDetailTokens } from "./detail-loader.js";
 const TIED_PREFIX = "tied://";
 
 function toYamlLike(obj: unknown): string {
-  return JSON.stringify(obj, null, 2);
+  return prettyCanonicalJson(obj);
 }
 
 export function registerResources(server: McpServer): void {

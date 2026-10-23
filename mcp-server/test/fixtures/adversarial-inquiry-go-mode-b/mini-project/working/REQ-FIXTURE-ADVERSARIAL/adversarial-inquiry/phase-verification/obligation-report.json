@@ -13,16 +13,6 @@
   "graph": {
     "edges": [
       {
-        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
-        "kind": "criterion_constraint",
-        "to": "constraint:constraint-fixture-divide"
-      },
-      {
-        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
-        "kind": "criterion_constraint",
-        "to": "constraint:constraint-fixture-divide"
-      },
-      {
         "from": "constraint:constraint-fixture-divide",
         "kind": "constraint_block",
         "to": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#cb126201ed2ab5d5"
@@ -36,6 +26,16 @@
         "from": "IMPL-FIXTURE-ADVERSARIAL#BUILD_PROJECT_INQUIRY_INPUT#cb126201ed2ab5d5",
         "kind": "block_evidence",
         "to": "evidence:test-locus"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-failure",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-fixture-divide"
+      },
+      {
+        "from": "REQ-FIXTURE-ADVERSARIAL#divide-success",
+        "kind": "criterion_constraint",
+        "to": "constraint:constraint-fixture-divide"
       }
     ],
     "nodes": [

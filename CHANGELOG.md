@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Data file ordering — JSON slice 2 ([REQ-TIED_YAML_CANONICALIZATION])** — `prettyCanonicalJson()`; migrated remaining MCP tool JSON responses, CLI stdout, disk JSON writers, and hash/JSONL paths to `storage-dump` helpers (bounded-composition reports, evidence envelopes, feature store locks, adherence ledger, plumb audit, leap queue, source-graph index). Evidence: [json-slice2-build-evidence.md](tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/json-slice2-build-evidence.md).
+
 - **Ludanyi comparison capture (redistribution policy)** — Wave 1 stub now links [LinkedIn Pulse source](https://www.linkedin.com/pulse/illusion-measurement-judgment-individuality-teams-andras-ludanyi-k7ave/) and TL;DR only (no full article body in repo); Wave 2 analysis cross-references off-repo capture. Follow-up traceable commit 2026-10-22.
 
 - **Agent shell working directory ([REQ-PROMPT_TYPE_GLOBAL_SKILLS])** — Prompt-shared [agent-shell-working-directory.md](tools/bundled-prompt-type-skills/prompt-shared/agent-shell-working-directory.md) and [agent-shell-script-header.template.sh](tools/bundled-prompt-type-skills/prompt-shared/agent-shell-script-header.template.sh): absolute `working_directory` / `REPO_ROOT` anchor, fail-closed marker guards, wired from `non-tied-plan`, `tied-implement`, and `other` skills. E2E contract in [prompt-type-skills.test.ts](mcp-server/src/e2e/prompt-type-skills.test.ts). Linked install keeps redirect stubs; canonical content in store bundle.

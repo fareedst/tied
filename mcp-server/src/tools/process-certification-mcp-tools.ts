@@ -2,6 +2,7 @@
  * [REQ-TIED_PROCESS_CERTIFICATION_READINESS] read-only MCP tools
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import { z } from "zod";
 import path from "node:path";
 import { textContent } from "../types.js";
@@ -34,7 +35,7 @@ export const processCertificationMcpTools = [
     handler: async (args: { bundle_root?: string }) => {
       const root = args.bundle_root ? path.resolve(args.bundle_root) : defaultBundleRoot();
       const result = loadProcessCertificationBundleV1(root);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -50,14 +51,14 @@ export const processCertificationMcpTools = [
       const root = args.bundle_root ? path.resolve(args.bundle_root) : defaultBundleRoot();
       const bundle = loadProcessCertificationBundleV1(root);
       if (!bundle.ok || !bundle.bundle) {
-        return textContent(JSON.stringify(bundle, null, 2));
+        return textContent(prettyCanonicalJson(bundle));
       }
       const result = evaluateConformanceMatrixV1({
         record: args.process_record as EdseProcessRecordV1,
         catalog: bundle.bundle.catalog,
         specContentHash: bundle.bundle.spec.content_hash,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -78,7 +79,7 @@ export const processCertificationMcpTools = [
       const root = args.bundle_root ? path.resolve(args.bundle_root) : defaultBundleRoot();
       const bundle = loadProcessCertificationBundleV1(root);
       if (!bundle.ok || !bundle.bundle) {
-        return textContent(JSON.stringify(bundle, null, 2));
+        return textContent(prettyCanonicalJson(bundle));
       }
       const result = evaluateCapabilityProfileV1({
         record: args.process_record as EdseProcessRecordV1,
@@ -86,7 +87,7 @@ export const processCertificationMcpTools = [
         specContentHash: bundle.bundle.spec.content_hash,
         options: args.options as never,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -103,9 +104,9 @@ export const processCertificationMcpTools = [
         loadIndependentAssessmentRecordFromFile(path.resolve(p), args.author_identity),
       );
       const failed = records.find((r) => !r.ok);
-      if (failed) return textContent(JSON.stringify({ ok: false, records }, null, 2));
+      if (failed) return textContent(prettyCanonicalJson({ ok: false, records }));
       const agreement = buildAssessorAgreementReportV1(records.map((r) => r.record!));
-      return textContent(JSON.stringify({ ok: agreement.ok, records, agreement }, null, 2));
+      return textContent(prettyCanonicalJson({ ok: agreement.ok, records, agreement }));
     },
   },
   {
@@ -122,7 +123,7 @@ export const processCertificationMcpTools = [
         fixtureRoot: path.resolve(args.fixture_root),
         heldOutCaseIds: args.held_out_case_ids,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -148,7 +149,7 @@ export const processCertificationMcpTools = [
         agreement: args.agreement as never,
         adaptive: args.adaptive as never,
       });
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -165,7 +166,7 @@ export const processCertificationMcpTools = [
         readiness: args.readiness as never,
         bundleSpecVersion: args.bundle_spec_version,
       });
-      return textContent(JSON.stringify({ ok: true, pack }, null, 2));
+      return textContent(prettyCanonicalJson({ ok: true, pack }));
     },
   },
 ];

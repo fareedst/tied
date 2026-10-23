@@ -5,6 +5,7 @@
  * [REQ-LEAP_PROPOSAL_QUEUE] [ARCH-LEAP_PROPOSAL_QUEUE] [IMPL-MCP_LEAP_PROPOSAL_QUEUE]
  */
 
+import { prettyCanonicalJson, safeStringifyJson, stableJsonForHash } from "../storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -122,7 +123,7 @@ export function loadQueue(projectRoot: string): LeapProposalQueueFile {
 export function saveQueue(projectRoot: string, queue: LeapProposalQueueFile): void {
   ensureDir(getLeapProposalDir(projectRoot));
   const p = getQueuePath(projectRoot);
-  fs.writeFileSync(p, JSON.stringify(queue, null, 2), "utf8");
+  fs.writeFileSync(p, safeStringifyJson(queue), "utf8");
 }
 
 export function appendAudit(projectRoot: string, event: Omit<LeapProposalAuditEvent, "schema_version" | "timestamp"> & { timestamp?: string }): void {
@@ -132,7 +133,7 @@ export function appendAudit(projectRoot: string, event: Omit<LeapProposalAuditEv
     timestamp: event.timestamp ?? new Date().toISOString(),
     ...event,
   };
-  fs.appendFileSync(getAuditLogPath(projectRoot), `${JSON.stringify(line)}\n`, "utf8");
+  fs.appendFileSync(getAuditLogPath(projectRoot), `${stableJsonForHash(line)}\n`, "utf8");
 }
 
 function nowIso(): string {

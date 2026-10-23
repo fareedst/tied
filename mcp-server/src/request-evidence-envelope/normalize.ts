@@ -2,6 +2,7 @@
  * [IMPL-REQUEST_EVIDENCE_ENVELOPE] [ARCH-REQUEST_EVIDENCE_ENVELOPE] [REQ-REQUEST_EVIDENCE_ENVELOPE]
  */
 
+import { safeStringifyJson } from "../storage-dump.js";
 import type { EnvelopeArtifact, EnvelopeGap, RequestEvidenceEnvelope } from "./types.js";
 
 function artifactSortKey(artifact: EnvelopeArtifact): string {
@@ -22,5 +23,5 @@ export function normalizeEnvelope(envelope: RequestEvidenceEnvelope): RequestEvi
 }
 
 export function serializeEnvelope(envelope: RequestEvidenceEnvelope): string {
-  return `${JSON.stringify(normalizeEnvelope(envelope), null, 2)}\n`;
+  return safeStringifyJson(normalizeEnvelope(envelope));
 }

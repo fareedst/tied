@@ -1,3 +1,4 @@
+import { prettyCanonicalJson } from "../storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 import { resolveLocalDefaults, type DefaultOptions } from "./defaults.js";
@@ -112,6 +113,6 @@ export function dispatchOnboardingCommand(argv: string[], context: OnboardingCon
 
 export function mainOnboarding(argv = process.argv.slice(2)): void {
   const result = dispatchOnboardingCommand(argv, { project_root: process.cwd() });
-  process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+  process.stdout.write(`${prettyCanonicalJson(result)}\n`);
   process.exitCode = result.ok ? 0 : result.fallback ? 0 : 1;
 }

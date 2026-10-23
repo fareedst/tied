@@ -3,6 +3,7 @@
  * [REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING]
  */
 
+import { stableJsonForHash } from "../storage-dump.js";
 import { createHash } from "node:crypto";
 import { SELECTION_RECEIPT_SCHEMA, SELECTOR_PROOF_BOUNDARY } from "./constants.js";
 import type { PracticeLibraryV1, PracticeContractV1 } from "./contracts.js";
@@ -25,7 +26,7 @@ export type SelectionReceiptV1 = {
 };
 
 export function hashStable(value: unknown): string {
-  return createHash("sha256").update(JSON.stringify(value), "utf8").digest("hex");
+  return createHash("sha256").update(stableJsonForHash(value), "utf8").digest("hex");
 }
 
 function passesApplicability(contract: PracticeContractV1, profile: ContextProfileV1): boolean {

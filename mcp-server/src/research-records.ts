@@ -1,3 +1,4 @@
+import { stableJsonForHash } from "./storage-dump.js";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -114,7 +115,7 @@ export function normalizeResearchRecord(input: ResearchRecordInput): NormalizeRe
   }
   const id = crypto
     .createHash("sha256")
-    .update(JSON.stringify({ ...input, evidence_provenance: input.evidence_provenance }))
+    .update(stableJsonForHash({ ...input, evidence_provenance: input.evidence_provenance }))
     .digest("hex");
   return {
     ok: true,

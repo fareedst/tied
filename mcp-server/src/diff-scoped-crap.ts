@@ -3,6 +3,7 @@
  * How: W2d diff-scoped CRAP report composing path list + coverage map (test_adequacy metadata style only).
  */
 
+import { prettyCanonicalJson } from "./storage-dump.js";
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
@@ -157,7 +158,7 @@ export function writeDiffScopedCrapReport(
       evidenceDir,
       `diff-scoped-crap-${report.generated_at}.json`,
     );
-    fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+    fs.writeFileSync(reportPath, `${prettyCanonicalJson(report)}\n`, "utf8");
     const ok = report.action !== "fail";
     return { ok, report, report_path: reportPath };
   } catch (e) {

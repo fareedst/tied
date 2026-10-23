@@ -15,7 +15,12 @@ export function safeDumpYaml(obj: unknown): string {
 
 /** Deterministic pretty JSON for gate artifacts and hashed receipts. */
 export function safeStringifyJson(obj: unknown): string {
-  return `${JSON.stringify(canonicalizeValue(obj), null, 2)}\n`;
+  return `${prettyCanonicalJson(obj)}\n`;
+}
+
+/** Pretty JSON without trailing newline (MCP tool responses, CLI stdout). */
+export function prettyCanonicalJson(obj: unknown): string {
+  return JSON.stringify(canonicalizeValue(obj), null, 2);
 }
 
 /** Compact canonical JSON for content hashes (no pretty-print). */

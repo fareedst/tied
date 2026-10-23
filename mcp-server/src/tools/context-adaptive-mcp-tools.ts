@@ -2,6 +2,7 @@
  * [REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING] [IMPL-TIED_CONTEXT_ADAPTIVE_*]
  */
 
+import { prettyCanonicalJson } from "../storage-dump.js";
 import { z } from "zod";
 import { textContent } from "../types.js";
 import { loadPracticeLibraryV1 } from "../context-adaptive/contracts.js";
@@ -21,7 +22,7 @@ export const contextAdaptiveMcpTools = [
     },
     handler: async (args: { contracts: Record<string, unknown>[] }) => {
       const result = loadPracticeLibraryV1(args.contracts);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -34,7 +35,7 @@ export const contextAdaptiveMcpTools = [
     },
     handler: async (args: { profile: Record<string, unknown> }) => {
       const result = validateContextProfileV1(args.profile);
-      return textContent(JSON.stringify(result, null, 2));
+      return textContent(prettyCanonicalJson(result));
     },
   },
   {
@@ -62,18 +63,18 @@ export const contextAdaptiveMcpTools = [
     }) => {
       const library = loadPracticeLibraryV1(args.contracts);
       if (!library.ok || !library.library) {
-        return textContent(JSON.stringify(library, null, 2));
+        return textContent(prettyCanonicalJson(library));
       }
       const profile = validateContextProfileV1(args.profile);
       if (!profile.ok || !profile.profile) {
-        return textContent(JSON.stringify(profile, null, 2));
+        return textContent(prettyCanonicalJson(profile));
       }
       const receipt = selectPracticesDeterministicV1({
         library: library.library,
         profile: profile.profile,
         hard_constraints: args.hard_constraints,
       });
-      return textContent(JSON.stringify({ ok: true, receipt }, null, 2));
+      return textContent(prettyCanonicalJson({ ok: true, receipt }));
     },
   },
   {
@@ -95,7 +96,7 @@ export const contextAdaptiveMcpTools = [
       const prior = validateContextProfileV1(args.prior_profile);
       const revised = validateContextProfileV1(args.revised_profile);
       if (!prior.ok || !prior.profile || !revised.ok || !revised.profile) {
-        return textContent(JSON.stringify({ ok: false, prior, revised }, null, 2));
+        return textContent(prettyCanonicalJson({ ok: false, prior, revised }));
       }
       const receipt = args.prior_receipt as Parameters<typeof reassessContextV1>[0]["prior_receipt"];
       const result = reassessContextV1({
@@ -103,7 +104,7 @@ export const contextAdaptiveMcpTools = [
         revised_profile: revised.profile,
         prior_receipt: receipt,
       });
-      return textContent(JSON.stringify({ ok: true, receipt: result }, null, 2));
+      return textContent(prettyCanonicalJson({ ok: true, receipt: result }));
     },
   },
 ];
