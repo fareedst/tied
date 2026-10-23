@@ -1878,6 +1878,12 @@ ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
   detail_file: "architecture-decisions/ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL.yaml"
   name: "Brownfield Evidence Model"
   status: "Active"
+ARCH-TIED_CHANGE_IMPACT_PROFILE:
+  cross_references:
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  detail_file: "architecture-decisions/ARCH-TIED_CHANGE_IMPACT_PROFILE.yaml"
+  name: "Change impact profile architecture"
+  status: "Active"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -1992,6 +1998,17 @@ ARCH-TIED_CLIENT_REFRESH_PARITY:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_REFRESH_PARITY.yaml"
   name: "Client refresh parity proof boundary"
   status: "Active"
+ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  description: "Asymmetric store git profile: committed working allowlist under tied-project/working/; regenerable globs mirrored from tied-bundle/working/; classifier routes evidence gate JSON to local root."
+  detail_file: "architecture-decisions/ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE.yaml"
+  name: "Committed working git hygiene architecture"
+  status: "Accepted"
+  traceability:
+    architecture: []
+    implementation:
+      - "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+    requirements:
+      - "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"
 ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   detail_file: "architecture-decisions/ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
   name: "Context-adaptive artifact model"
@@ -2228,6 +2245,13 @@ ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   detail_file: "architecture-decisions/ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
   name: "Incident/revert evaluation corpus documentation topology"
   status: "Implemented"
+ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE:
+  cross_references:
+    - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  detail_file: "architecture-decisions/ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE.yaml"
+  name: "Independent proof envelope extension"
+  status: "Active"
 ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []

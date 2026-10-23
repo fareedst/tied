@@ -5,7 +5,7 @@ CITDP-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
     methodology_surface_experiment_link:
       conformance_evidence_refs:
         - kind: "gate_receipt"
-          path: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json"
+          path: "tied-bundle/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json"
       experiment_id: "mle-demo-20261010-001"
       production_system_surface: "checklist_step"
     non_goals:

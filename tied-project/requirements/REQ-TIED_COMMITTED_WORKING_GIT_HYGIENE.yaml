@@ -1,0 +1,43 @@
+REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+    category: "Infrastructure"
+    description: "Mirror store local-working gitignore patterns onto tied-project/working/, extend MCP path classifier for evidence/gate-* artifacts, wave-untrack regenerable committed working while preserving process evidence and fixture pins."
+    name: "Committed working git hygiene"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Classifier and gitignore stay aligned for regenerable gate JSON under evidence/"
+        - "Downstream clients receive policy and tooling without store dogfood archives"
+      problems_solved:
+        - "classifyWorkingRelativePath treats evidence/gate-*.json as committed"
+        - "Legacy .gitignore ignores root working/ but not most EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS under tied-project/working/"
+      why: "Store dogfoods thousands of files under tied-project/working/; WAP already splits committed vs local but practice drifted."
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
+        - "REQ-TIED_TWO_FOLDER_LAYOUT"
+        - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+      related_to: []
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "All moved fixture pins covered by tests; CI green."
+        id: "SC-CWGH-FIXTURE-PARITY"
+        metric: "test-all subset"
+      - criterion: "evidence/gate-foo.json resolves to tied-bundle/working/{REQ}/ in resolveWorkingPath tests."
+        id: "SC-CWGH-CLASSIFIER"
+        metric: "working-root.test.ts"
+      - criterion: "git check-ignore covers representative regenerable paths under tied-project/working/ in temp repo test."
+        id: "SC-CWGH-IGNORE"
+        metric: "committed-working-gitignore.test.mjs"
+      - criterion: "git ls-files tied-project/working drops materially vs inventory baseline."
+        id: "SC-CWGH-TRACKED-SHRINK"
+        metric: "migration-inventory.v1.json"
+      - criterion: "WAP gray zone and install matrix document asymmetric store rule."
+        id: "SC-CWGH-DOCS"
+        metric: "doc review"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+      implementation:
+        - "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"

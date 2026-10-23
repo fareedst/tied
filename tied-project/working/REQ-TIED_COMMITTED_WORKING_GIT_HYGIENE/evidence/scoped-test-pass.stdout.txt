@@ -1,0 +1,20 @@
+# Scoped test pass — REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE (2026-10-23)
+
+## Bootstrap (node --test, name-filtered CWGH + store profile unit tests)
+- committed-working-gitignore.test.mjs: 2/2 pass
+- working-gitignore.test.mjs (subset): 3/3 pass
+- store-gitignore-policy.test.mjs (subset, excludes repo invariant): 2/2 pass
+- working-gitignore.test.mjs client profile: 1/1 pass
+
+## MCP
+- mcp-server/src/working-root.test.ts (tsx --test): 10/10 pass
+
+## Smoke (node -e)
+- committed-working-inventory bucket: 4/4 ok
+- applyCommittedWorkingHygieneProfile idempotent on repo .gitignore: ok
+
+## Post-migration index
+- git ls-files tied-project/working: 6251 (baseline 6851, untrack 600)
+
+## Out of scope (known repo debt, not CWGH)
+- store-gitignore-policy.test.mjs "store repo invariant: no tracked paths under tied-bundle/working" — FAIL (~57 paths under REQ-TIED_CHECKLIST_GATE_ENFORCEMENT fixture tree; REQ-TIED_STORE_BUNDLE_GIT_POLICY follow-up)

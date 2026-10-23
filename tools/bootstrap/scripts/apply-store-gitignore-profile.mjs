@@ -7,12 +7,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { applyStoreGitignoreProfile } from "../lib/working-gitignore.mjs";
+import { applyCommittedWorkingHygieneProfile } from "../lib/working-gitignore.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const gitignorePath = path.join(repoRoot, ".gitignore");
 const before = fs.readFileSync(gitignorePath, "utf8");
-const after = applyStoreGitignoreProfile(before);
+const after = applyCommittedWorkingHygieneProfile(before);
 if (before !== after) {
   fs.writeFileSync(gitignorePath, after, "utf8");
   console.log(`DEBUG: updated ${gitignorePath} with store gitignore profile`);

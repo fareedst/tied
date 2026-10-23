@@ -54,6 +54,8 @@ export function verifyInstallResourceMatrixDoc(repoRoot = REPO_ROOT) {
     BUNDLE_DIR_NAME,
     "tied-install",
     "--refresh",
+    "COMMITTED WORKING REGENERABLE",
+    "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE",
   ];
   const missing = required.filter((s) => !text.includes(s));
   if (missing.length) {

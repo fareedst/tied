@@ -52,7 +52,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | **LEAP overview** | [LEAP.md](LEAP.md) | Short rationale for why IMPL beats hunting source files. |
 | **Diagrams** | [methodology-diagrams.md](methodology-diagrams.md) | Visual stack, LEAP loop, TDD inner loop, CITDP flow. |
 | **Build order** | [implementation-order.md](implementation-order.md) | One-page mandatory sequence (also inside **Processes** § `[PROC-TIED_DEV_CYCLE]`). |
-| **Working artifact placement** | [working-artifact-placement.md](working-artifact-placement.md) | Commit vs ignore: `tied-project/working/` vs `tied-bundle/working/` vs tooling scratch. |
+| **Working artifact placement** | [working-artifact-placement.md](working-artifact-placement.md) | Commit vs ignore: `tied-project/working/` vs `tied-bundle/working/` vs tooling scratch. **Store only:** committed-working regenerable gitignore ([REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE]) — see install matrix store row in `tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md`. |
 | **Sponsor–agent roles** | [sponsor-agent-relationship.md](sponsor-agent-relationship.md) | Consequence ladder, hinge fields, over-asking / instrumentalizing spot checks; pairs with **Vocabulary** row 5j. |
 | **Pre-handoff charter** | [pre-handoff-verification-charter.md](pre-handoff-verification-charter.md) | Before PR/commit/handoff: executable checks and evidence (Loop 1; doc-only—no new MCP authority). |
 | **Improvement pending queue** | [tied-improvement-pending-work-queue.md](tied-improvement-pending-work-queue.md) | Private `TIQ-*` operator index for cross-REQ improvement/maintenance arcs; live data under `tied-bundle/working/` (not MCP `tied_backlog`). |

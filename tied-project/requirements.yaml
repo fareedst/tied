@@ -2443,6 +2443,18 @@ REQ-TIED_CLIENT_REFRESH_PARITY:
   name: "Client refresh methodology and doc parity gate"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  category: "Infrastructure"
+  description: "Mirror store local-working gitignore patterns onto tied-project/working/, extend MCP path classifier for evidence/gate-* artifacts, wave-untrack regenerable committed working while preserving process evidence and fixture pins."
+  detail_file: "requirements/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE.yaml"
+  name: "Committed working git hygiene"
+  priority: "P1"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+    implementation:
+      - "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
 REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
@@ -2961,6 +2973,13 @@ REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
       - "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT"
     implementation:
       - "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT"
+REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
+  category: "Methodology"
+  description: "Open Ontologies Wave 3 harness compose"
+  detail_file: "requirements/REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml"
+  name: "Open Ontologies Wave 3 harness compose"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   category: "Functional"
   cross_references:

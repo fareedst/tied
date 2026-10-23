@@ -24,7 +24,7 @@
 | Project DB indexes | `tied-project/*.yaml` (project indexes) | db | **C** | create-if-absent | create-if-absent | db only |
 | Project detail dirs | `tied-project/requirements/`, `architecture-decisions/`, `implementation-decisions/` | db | **C** | mkdir | mkdir | db only |
 | Client vocab handoffs | `tied-project/vocab/` | db | **C** | written | written | db only |
-| Committed working | `tied-project/working/{REQ}/` (PLAN, tracker, envelope) | db | **C** | — | — | — |
+| Committed working | `tied-project/working/{REQ}/` (PLAN, tracker, facet markdown) | db | **C** (clients: slim set only) | — | — | — |
 | Loader files | `AGENTS.md`, `.cursorrules` | db | **C** | create-if-absent | create-if-absent | db only |
 | Constitution example | `tied-project/constitution.example.yaml` | db | **C** | create-if-absent | create-if-absent | db only |
 | Gitignore managed block | `.gitignore` (TIED INSTALL MANAGED v2 only; no LOCAL WORKING on clients) | db | **C** | idempotent append | idempotent append | db only |
@@ -41,7 +41,7 @@
 | Methodology vocab | `tied-bundle/vocab/*.md` | methodology | **G** | stub/symlink from store `tied-project/vocab` | **Copy** | methodology only |
 | Methodology templates | `tied-bundle/templates/impl-essence-pseudocode-template.md`, `tied-bundle/templates/brownfield-evidence-to-intent-matrix.md` (manifest `METHODOLOGY_TEMPLATES_TO_COPY` + sidecar) | methodology | **G** | **Stub** | **Copy** (copy-when-missing) | methodology only |
 | Local working evidence | `tied-bundle/working/**` (gates, adversarial-inquiry, …) | — | **G** | — | — | — |
-| **Store repo git (asymmetric)** | **Store:** methodology corpus under `tied-bundle/` **C**; `tied-bundle/working/**` + `tied-bundle/install.json` **G** (STORE LOCAL WORKING block). **Client:** whole `tied-bundle/` tree **G** via INSTALL MANAGED v2 (unchanged). | methodology | **C** / **G** | — | — | — |
+| **Store repo git (asymmetric)** | **Store:** methodology corpus under `tied-bundle/` **C**; `tied-bundle/working/**` + `tied-bundle/install.json` **G** (STORE LOCAL WORKING block); regenerable gate JSON under `tied-project/working/**` **G** (COMMITTED WORKING REGENERABLE block — [REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE]). **Client:** whole `tied-bundle/` tree **G** via INSTALL MANAGED v2; committed working stays **C** without store-only block (unchanged). | methodology | **C** / **G** | — | — | — |
 | Parity report (full) | `tied-bundle/reports/client-refresh-parity-report.json` | methodology | **G** | — | written | full mode |
 
 **Removed (SC-TFL-LEGACY-REMOVED):** root `templates/`, top-level `tied/`, `copy_files.*`, `--legacy-bootstrap`, `TIED_BOOTSTRAP_LEGACY`, `.tied-yaml.yaml`, `tied/.tied-install.json`, `.linked-methodology-view/`.

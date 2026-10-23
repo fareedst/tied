@@ -1,0 +1,12 @@
+feat(bootstrap): committed working git hygiene for store dogfood
+
+Mirror regenerable local-working gitignore onto tied-project/working/,
+route evidence gate receipts to tied-bundle/working/, and untrack 600
+regenerable indexed paths while keeping PLAN/tracker/facet markdown.
+
+REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE
+ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE
+IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE
+
+Machine close-out: verification + close_out allowed; envelope blocking_gaps=0.
+Process: minimal adversarial N/A receipt; manifest + bootstrap/MCP scoped tests green.

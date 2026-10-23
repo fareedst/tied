@@ -13,7 +13,21 @@ export const LOCAL_WORKING_PREFIXES = [
   "adherence/",
   "jev/",
   "pseudocode-analysis/",
+  "trajectories/",
 ];
+
+/** @param {string} norm */
+function isLocalWorkingEvidenceArtifact(norm) {
+  if (
+    norm.startsWith("evidence/gate-") ||
+    norm.startsWith("evidence/pre_implementation-") ||
+    norm.startsWith("evidence/verification-") ||
+    norm.startsWith("evidence/close_out-")
+  ) {
+    return true;
+  }
+  return /\/gate-/.test(norm);
+}
 
 /**
  * @param {string} relativePath
@@ -22,8 +36,10 @@ export const LOCAL_WORKING_PREFIXES = [
 export function classifyWorkingRelativePath(relativePath) {
   const norm = relativePath.replace(/\\/g, "/").replace(/^\.\//, "");
   for (const prefix of LOCAL_WORKING_PREFIXES) {
-    if (norm.startsWith(prefix)) return "local";
+    const bare = prefix.endsWith("/") ? prefix.slice(0, -1) : prefix;
+    if (norm === bare || norm.startsWith(prefix)) return "local";
   }
+  if (isLocalWorkingEvidenceArtifact(norm)) return "local";
   if (norm.endsWith("-ledger.jsonl") || norm.includes("/ledger.jsonl")) return "local";
   if (/-CLIENT-/.test(norm)) return "local";
   return "committed";

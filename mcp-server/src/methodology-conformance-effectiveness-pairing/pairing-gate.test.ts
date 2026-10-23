@@ -1,11 +1,19 @@
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { before, describe, it } from "node:test";
 import path from "node:path";
 
 import { validateChecklistGate } from "../checklist-validator.js";
+import {
+  ensureMethodologyPairingDemoGateReceipt,
+  METHODOLOGY_PAIRING_DEMO_GATE_RECEIPT_PATH,
+} from "./pairing-demo-fixture.js";
 
 const projectRoot = path.resolve(import.meta.dirname, "../../../");
 const tiedBase = path.join(projectRoot, "tied-project");
+
+before(() => {
+  ensureMethodologyPairingDemoGateReceipt(projectRoot);
+});
 
 // [REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
 describe("methodology surface pairing gate", () => {
@@ -55,7 +63,7 @@ describe("methodology surface pairing gate", () => {
           conformance_evidence_refs: [
             {
               kind: "gate_receipt",
-              path: "tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/pre_implementation-gate-result.json",
+              path: METHODOLOGY_PAIRING_DEMO_GATE_RECEIPT_PATH,
             },
           ],
         },

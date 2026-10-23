@@ -1,0 +1,15 @@
+✔ buildCommittedWorkingRegenerableGlobs mirrors tied-bundle/working entries (0.671917ms)
+✔ temp repo: regenerable gate JSON ignored, PLAN.md trackable (86.475583ms)
+✔ applyStoreGitignoreProfile is idempotent and removes client tied-bundle/ install line (0.859875ms)
+✔ temp git repo: corpus trackable, local working ignored (100.952959ms)
+✔ collapseWorkingGitignoreLine remaps local gate globs (0.656208ms)
+✔ applyStoreGitignoreProfile uses whole-root store local working without undivided mirror (0.214541ms)
+✔ client profile removes legacy blocks without appending (0.104542ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 193.212791

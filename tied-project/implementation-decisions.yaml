@@ -2171,6 +2171,13 @@ IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
   detail_file: "implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE.yaml"
   name: "build-commands how() output texture"
   status: "Implemented"
+IMPL-TIED_CHANGE_IMPACT_PROFILE:
+  cross_references:
+    - "ARCH-TIED_CHANGE_IMPACT_PROFILE"
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  detail_file: "implementation-decisions/IMPL-TIED_CHANGE_IMPACT_PROFILE.yaml"
+  name: "Change impact profile implementation"
+  status: "Active"
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -2278,6 +2285,18 @@ IMPL-TIED_CLIENT_REFRESH_PARITY:
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_REFRESH_PARITY.yaml"
   name: "Client refresh parity gate implementation"
   status: "Active"
+IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  description: "Mirror committed-working regenerable gitignore block, extend classifyWorkingRelativePath for evidence gate artifacts, inventory and wave-untrack migration scripts."
+  detail_file: "implementation-decisions/IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE-pseudocode.md"
+  name: "Committed working git hygiene implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+    implementation: []
+    requirements:
+      - "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"
 IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
   detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS.yaml"
   name: "Context-adaptive practice contracts"
@@ -2730,6 +2749,13 @@ IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   detail_file: "implementation-decisions/IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS.yaml"
   name: "Incident/revert evaluation corpus doc maintenance"
   status: "Implemented"
+IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE:
+  cross_references:
+    - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  detail_file: "implementation-decisions/IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE.yaml"
+  name: "Independent proof envelope implementation"
+  status: "Active"
 IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture:

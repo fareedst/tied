@@ -59,7 +59,8 @@ Under `tied-bundle/working/{REQ-TOKEN}/`, relative paths are classified **local*
 
 | Rule | Patterns |
 | --- | --- |
-| Prefixes | `gates/`, `gate-`, `adversarial-inquiry/`, `adherence/`, `jev/`, `pseudocode-analysis/` |
+| Prefixes | `gates/`, `gate-`, `adversarial-inquiry/`, `adherence/`, `jev/`, `pseudocode-analysis/`, `trajectories/` |
+| Evidence gate receipts | `evidence/gate-*`, `evidence/pre_implementation-*`, `evidence/verification-*`, `evidence/close_out-*`, any path segment `/gate-` |
 | Ledgers | `*-ledger.jsonl`, paths containing `/ledger.jsonl` |
 | Disposable clients | `*-CLIENT-*` anywhere in the relative path |
 
@@ -76,6 +77,7 @@ Tools and MCP writers should use layout helpers so artifacts land here automatic
 | Large JSON under `tied-project/working/` (qualification, claims-review) | **Commit** when an agreed regression fixture or pilot artifact referenced by envelope/CITDP; **local** when one-off reproducible tool output |
 | `tied-project/working/evaluation/` cross-REQ corpora | **Commit** when defining reusable evaluation policy; not a substitute for per-REQ envelope |
 | Store repo git-tracked pins under `tied-bundle/working/` | **Migrated** — fixture corpus under `mcp-server/test/fixtures/store-local-working/`; runtime local root unchanged ([REQ-TIED_STORE_BUNDLE_GIT_POLICY]) |
+| Store repo regenerable paths under `tied-project/working/` | **Untracked** — `# BEGIN TIED COMMITTED WORKING REGENERABLE (managed)` mirrors local-working globs; slim committed set (PLAN, tracker, facet markdown, evaluation corpora) stays indexed ([REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE]) |
 | **`tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md`** | **Local only** — primary improvement/maintenance operator index ([tied-improvement-pending-work-queue.md](tied-improvement-pending-work-queue.md)); never commit |
 | Undivided repo-root `working/` | Non-standard — use `tied-project/working/`; re-run `tied-install` if layout is wrong |
 

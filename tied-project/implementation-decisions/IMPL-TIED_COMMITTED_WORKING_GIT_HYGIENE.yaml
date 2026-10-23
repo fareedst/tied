@@ -1,0 +1,12 @@
+IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+    description: "Mirror committed-working regenerable gitignore block, extend classifyWorkingRelativePath for evidence gate artifacts, inventory and wave-untrack migration scripts."
+    implementation_approach: "TDD: classifier RED in working-root.test.ts; gitignore RED in committed-working-gitignore.test.mjs; inventory read-only then migrate-tracked script with git rm --cached."
+    name: "Committed working git hygiene implementation"
+    status: "Proposed"
+    traceability:
+      architecture:
+        - "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+      implementation: []
+      requirements:
+        - "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"

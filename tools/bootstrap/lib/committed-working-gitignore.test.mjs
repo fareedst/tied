@@ -1,0 +1,47 @@
+// [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE] [REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE]
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { execSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+
+import {
+  applyCommittedWorkingHygieneProfile,
+  GITIGNORE_COMMITTED_WORKING_REGENERABLE_BEGIN,
+  buildCommittedWorkingRegenerableGlobs,
+} from "./working-gitignore.mjs";
+
+test("buildCommittedWorkingRegenerableGlobs mirrors tied-bundle/working entries", () => {
+  const globs = buildCommittedWorkingRegenerableGlobs();
+  assert.ok(globs.some((g) => g === "tied-project/working/**/gate-*.json"));
+  assert.ok(globs.some((g) => g.startsWith("tied-project/working/")));
+  assert.ok(!globs.some((g) => g.startsWith("tied-bundle/working/")));
+});
+
+test("temp repo: regenerable gate JSON ignored, PLAN.md trackable", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cwgh-gitignore-"));
+  try {
+    execSync("git init", { cwd: dir, stdio: "ignore" });
+    const gitignore = applyCommittedWorkingHygieneProfile("");
+    assert.ok(gitignore.includes(GITIGNORE_COMMITTED_WORKING_REGENERABLE_BEGIN));
+    fs.writeFileSync(path.join(dir, ".gitignore"), gitignore);
+    fs.mkdirSync(path.join(dir, "tied-project", "working", "REQ-X", "evidence"), {
+      recursive: true,
+    });
+    fs.writeFileSync(path.join(dir, "tied-project", "working", "REQ-X", "PLAN.md"), "# plan\n");
+    fs.writeFileSync(
+      path.join(dir, "tied-project", "working", "REQ-X", "evidence", "gate-pre_implementation.json"),
+      "{}\n",
+    );
+    execSync("git add .", { cwd: dir, stdio: "ignore" });
+    const tracked = execSync("git ls-files", { cwd: dir, encoding: "utf8" }).trim().split("\n");
+    assert.ok(tracked.includes("tied-project/working/REQ-X/PLAN.md"));
+    assert.ok(!tracked.some((p) => p.includes("gate-pre_implementation.json")));
+    execSync("git check-ignore -q tied-project/working/REQ-X/evidence/gate-pre_implementation.json", {
+      cwd: dir,
+    });
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

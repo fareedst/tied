@@ -1,0 +1,29 @@
+▶ tied_methodology_conformance_effectiveness_pair MCP
+  ✔ returns paired for demo experiment with conformance refs (2.223958ms)
+✔ tied_methodology_conformance_effectiveness_pair MCP (2.393833ms)
+▶ methodology surface pairing gate
+  ✔ blocks close_out on conformance_only_trap when CITDP declares experiment link (6.658458ms)
+  ✔ allows close_out for paired demo experiment with conformance refs (0.390458ms)
+✔ methodology surface pairing gate (7.279334ms)
+▶ classifyWorkingRelativePath
+  ✔ routes gates and adherence to local (0.408958ms)
+  ✔ routes PLAN and tracker to committed (0.124875ms)
+  ✔ routes evidence gate receipts to local [REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE] (0.05075ms)
+✔ classifyWorkingRelativePath (1.08275ms)
+▶ resolveWorkingPath
+  ✔ uses tied/working vs tied-bundle/working when divided (1.419583ms)
+  ✔ falls back to root working/ when undivided (store layout) (0.939958ms)
+  ✔ listRequestWorkingTokens scans committed and local roots when divided (1.897167ms)
+  ✔ isPathUnderProjectWorking accepts paths under either root when divided (1.361667ms)
+  ✔ resolveGlobalLocalWorkingPath uses bundle when divided (1.149209ms)
+  ✔ committedWorkingFileRel respects undivided layout (0.697875ms)
+  ✔ workingPathRelativeToProject returns posix relpath (0.860417ms)
+✔ resolveWorkingPath (8.574542ms)
+ℹ tests 13
+ℹ suites 4
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 523.206666

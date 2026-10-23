@@ -12,6 +12,16 @@ export const GITIGNORE_UNDIVIDED_MIRROR_END = "# END TIED UNDIVIDED STORE MIRROR
 export const GITIGNORE_STORE_LOCAL_WORKING_BEGIN =
   "# BEGIN TIED STORE LOCAL WORKING (managed)";
 export const GITIGNORE_STORE_LOCAL_WORKING_END = "# END TIED STORE LOCAL WORKING (managed)";
+/** [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE] [REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE] */
+export const GITIGNORE_COMMITTED_WORKING_REGENERABLE_BEGIN =
+  "# BEGIN TIED COMMITTED WORKING REGENERABLE (managed)";
+export const GITIGNORE_COMMITTED_WORKING_REGENERABLE_END =
+  "# END TIED COMMITTED WORKING REGENERABLE (managed)";
+/** Negations preserved when merging committed-working regenerable block. */
+export const COMMITTED_WORKING_REGENERABLE_NEGATIONS = [
+  "!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/",
+  "!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**",
+];
 /** Matches {@link GITIGNORE_BLOCK_BEGIN} in gitignore-block.mjs (avoid import cycle). */
 const GITIGNORE_INSTALL_MANAGED_BEGIN = "# BEGIN TIED INSTALL MANAGED";
 const GITIGNORE_INSTALL_MANAGED_END = "# END TIED INSTALL MANAGED";
@@ -116,6 +126,10 @@ const STORE_LOCAL_WORKING_BLOCK_REGEX = new RegExp(
   `${escapeRegExp(GITIGNORE_STORE_LOCAL_WORKING_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_STORE_LOCAL_WORKING_END)}\\n?`,
   "m",
 );
+const COMMITTED_WORKING_REGENERABLE_BLOCK_REGEX = new RegExp(
+  `${escapeRegExp(GITIGNORE_COMMITTED_WORKING_REGENERABLE_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_COMMITTED_WORKING_REGENERABLE_END)}\\n?`,
+  "m",
+);
 const INSTALL_MANAGED_BLOCK_REGEX = new RegExp(
   `${escapeRegExp(GITIGNORE_INSTALL_MANAGED_BEGIN)}[\\s\\S]*?${escapeRegExp(GITIGNORE_INSTALL_MANAGED_END)}\\n?`,
   "m",
@@ -191,6 +205,55 @@ export function stripTiedBundleFromInstallManagedBlock(content) {
  * Idempotent store .gitignore: STORE LOCAL WORKING block, no legacy LOCAL WORKING / UNDIVIDED, no tied-bundle/ in INSTALL MANAGED.
  * @param {string} content
  */
+/**
+ * [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE] [REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE]
+ * Mirror tied-bundle/working regenerable globs onto tied-project/working/.
+ * @returns {string[]}
+ */
+export function buildCommittedWorkingRegenerableGlobs() {
+  /** @type {Set<string>} */
+  const out = new Set();
+  for (const g of EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS) {
+    if (g.startsWith("tied-bundle/working/")) {
+      out.add(g.replace(/^tied-bundle\/working\//, "tied-project/working/"));
+    } else if (g.startsWith("tied-project/working/")) {
+      out.add(g);
+    }
+  }
+  return [...out].sort();
+}
+
+/**
+ * @returns {string}
+ */
+export function buildCommittedWorkingRegenerableBlock() {
+  return [
+    GITIGNORE_COMMITTED_WORKING_REGENERABLE_BEGIN,
+    ...buildCommittedWorkingRegenerableGlobs(),
+    ...COMMITTED_WORKING_REGENERABLE_NEGATIONS,
+    GITIGNORE_COMMITTED_WORKING_REGENERABLE_END,
+    "",
+  ].join("\n");
+}
+
+/**
+ * [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE] Store profile + committed-working regenerable managed block.
+ * @param {string} content
+ */
+export function applyCommittedWorkingHygieneProfile(content) {
+  let next = applyStoreGitignoreProfile(content);
+  const block = buildCommittedWorkingRegenerableBlock();
+  if (next.includes(GITIGNORE_COMMITTED_WORKING_REGENERABLE_BEGIN)) {
+    next = next.replace(COMMITTED_WORKING_REGENERABLE_BLOCK_REGEX, block);
+  } else if (STORE_LOCAL_WORKING_BLOCK_REGEX.test(next)) {
+    next = next.replace(STORE_LOCAL_WORKING_BLOCK_REGEX, (storeBlock) => `${storeBlock}${block}`);
+  } else {
+    next =
+      next.endsWith("\n") || next.length === 0 ? `${next}${block}` : `${next}\n${block}`;
+  }
+  return next;
+}
+
 export function applyStoreGitignoreProfile(content) {
   let next = removeLegacyWorkingGitignoreBlocks(content);
   const filtered = next

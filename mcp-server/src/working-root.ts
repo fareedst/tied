@@ -23,12 +23,26 @@ export const LOCAL_WORKING_PREFIXES = [
 /**
  * Classify a path relative to the per-request working folder (no token prefix).
  */
+/** [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE] evidence/* gate receipts → local root (align gitignore). */
+function isLocalWorkingEvidenceArtifact(norm: string): boolean {
+  if (
+    norm.startsWith("evidence/gate-") ||
+    norm.startsWith("evidence/pre_implementation-") ||
+    norm.startsWith("evidence/verification-") ||
+    norm.startsWith("evidence/close_out-")
+  ) {
+    return true;
+  }
+  return /\/gate-/.test(norm);
+}
+
 export function classifyWorkingRelativePath(relativePath: string): WorkingArtifactKind {
   const norm = relativePath.replace(/\\/g, "/").replace(/^\.\//, "");
   for (const prefix of LOCAL_WORKING_PREFIXES) {
     const bare = prefix.endsWith("/") ? prefix.slice(0, -1) : prefix;
     if (norm === bare || norm.startsWith(prefix)) return "local";
   }
+  if (isLocalWorkingEvidenceArtifact(norm)) return "local";
   if (norm.endsWith("-ledger.jsonl") || norm.includes("/ledger.jsonl")) return "local";
   if (/-CLIENT-/.test(norm)) return "local";
   return "committed";

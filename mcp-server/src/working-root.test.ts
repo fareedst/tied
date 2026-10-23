@@ -31,6 +31,14 @@ describe("classifyWorkingRelativePath", () => {
     assert.equal(classifyWorkingRelativePath("checklist-tracker.yaml"), "committed");
     assert.equal(classifyWorkingRelativePath("evidence/request-evidence-envelope.v1.json"), "committed");
   });
+
+  it("routes evidence gate receipts to local [REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE]", () => {
+    assert.equal(classifyWorkingRelativePath("evidence/gate-pre_implementation.json"), "local");
+    assert.equal(classifyWorkingRelativePath("evidence/pre_implementation-2026.json"), "local");
+    assert.equal(classifyWorkingRelativePath("evidence/verification-run.json"), "local");
+    assert.equal(classifyWorkingRelativePath("evidence/close_out-final.json"), "local");
+    assert.equal(classifyWorkingRelativePath("evidence/session-handoff.md"), "committed");
+  });
 });
 
 describe("resolveWorkingPath", () => {
@@ -42,8 +50,13 @@ describe("resolveWorkingPath", () => {
     try {
       const plan = resolveWorkingPath(root, "REQ-TIED_FOO", "PLAN.md");
       const gate = resolveWorkingPath(root, "REQ-TIED_FOO", "gates", "verification.json");
+      const evGate = resolveWorkingPath(root, "REQ-TIED_FOO", "evidence", "gate-pre_implementation.json");
       assert.match(plan, /tied[/\\]working[/\\]REQ-TIED_FOO[/\\]PLAN\.md$/);
       assert.match(gate, /tied-bundle[/\\]working[/\\]REQ-TIED_FOO[/\\]gates[/\\]verification\.json$/);
+      assert.match(
+        evGate,
+        /tied-bundle[/\\]working[/\\]REQ-TIED_FOO[/\\]evidence[/\\]gate-pre_implementation\.json$/,
+      );
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }

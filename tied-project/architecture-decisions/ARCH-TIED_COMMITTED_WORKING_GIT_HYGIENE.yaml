@@ -1,0 +1,19 @@
+ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+    description: "Asymmetric store git profile: committed working allowlist under tied-project/working/; regenerable globs mirrored from tied-bundle/working/; classifier routes evidence gate JSON to local root."
+    name: "Committed working git hygiene architecture"
+    rationale:
+      alternatives_considered:
+        - "Gitignore all tied-project/working (rejected: violates SC-TFL-INVARIANT)"
+        - "Leave drift (rejected: breaks WAP and MCP routing)"
+      consequences:
+        - "Large wave untrack diff stat on store"
+        - "Tests referencing tracked gate JSON must relocate or update"
+      decision: "Extend STORE_BUNDLE asymmetric git with committed-working regenerable profile and classifier parity for evidence/* gate artifacts."
+    status: "Proposed"
+    traceability:
+      architecture: []
+      implementation:
+        - "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+      requirements:
+        - "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"

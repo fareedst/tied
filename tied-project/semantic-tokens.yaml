@@ -801,6 +801,9 @@ ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CHANGE_IMPACT_PROFILE:
+  description: "Change impact profile architecture"
+  type: "architecture"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -914,6 +917,13 @@ ARCH-TIED_CLIENT_REFRESH_PARITY:
   description: "Parity gate distinct from G4 and tied_validate_consistency"
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_REFRESH_PARITY.yaml"
   name: "Client refresh parity proof boundary"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  cross_references: []
+  description: "Architecture for committed working regenerable gitignore and classifier parity"
+  name: "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE"
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
@@ -1089,6 +1099,9 @@ ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   source_index: "architecture-decisions.yaml"
   status: "Implemented"
   type: "ARCH"
+ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE:
+  description: "Independent proof envelope extension"
+  type: "architecture"
 ARCH-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "IMPL-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -2406,6 +2419,9 @@ IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_CHANGE_IMPACT_PROFILE:
+  description: "Change impact profile implementation"
+  type: "implementation"
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -2503,6 +2519,13 @@ IMPL-TIED_CLIENT_REFRESH_PARITY:
   name: "Client refresh parity gate implementation"
   source_index: "implementation-decisions.yaml"
   status: "Implemented"
+  type: "IMPL"
+IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  cross_references: []
+  description: "Implementation for committed working hygiene scripts and gitignore profile"
+  name: "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
   type: "IMPL"
 IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
   cross_references:
@@ -2762,6 +2785,9 @@ IMPL-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   source_index: "implementation-decisions.yaml"
   status: "Implemented"
   type: "IMPL"
+IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE:
+  description: "Independent proof envelope implementation"
+  type: "implementation"
 IMPL-TIED_JEV_CONTEXT_LOG_PRUNING:
   cross_references:
     - "ARCH-TIED_JEV_CONTEXT_LOG_PRUNING"
@@ -4427,6 +4453,13 @@ REQ-TIED_CLIENT_REFRESH_PARITY:
   source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
+REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
+  cross_references: []
+  description: "Committed working git hygiene — store regenerable profile on tied-project/working/"
+  name: "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+  source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   cross_references:
     - "ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING"
@@ -4698,6 +4731,9 @@ REQ-TIED_NODE_TOOLCHAIN_DEFAULT:
   source_index: "requirements.yaml"
   status: "Proposed"
   type: "REQ"
+REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
+  description: "Open Ontologies Wave 3 harness compose"
+  type: "requirement"
 REQ-TIED_OPERATIONAL_FEEDBACK_PROMOTION:
   cross_references:
     - "ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY"
