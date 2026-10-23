@@ -19,7 +19,7 @@
 | Arc | Status |
 | --- | --- |
 | Slice 1 (ordered keys, YAML writers, JSON slice 1, docs, LEAP) | **Closed in repo** — commit **`d293bba14c46002f85f5e59af011ad790e97d498`** (not pushed) |
-| JSON slice 2 (remaining MCP/CLI/disk JSON marshalling) | **Committed** — **`9243bb2a80820a88731f3feb6961890c581db46f`** (not pushed); evidence [traceable-commit-evidence-slice2.md](./traceable-commit-evidence-slice2.md) |
+| JSON slice 2 (remaining MCP/CLI/disk JSON marshalling) | **Committed** — **`6563527323488e74d220dff04287d34402c89dff`** (not pushed); evidence [traceable-commit-evidence-slice2.md](./traceable-commit-evidence-slice2.md) |
 
 ---
 
@@ -65,7 +65,7 @@
 
 | Id | Topic | Disposition |
 | --- | --- | --- |
-| C1 | Commit slice 2 as second commit vs amend slice 1 | **Resolved** — **`9243bb2a80820a88731f3feb6961890c581db46f`** (second commit) |
+| C1 | Commit slice 2 as second commit vs amend slice 1 | **Resolved** — **`6563527323488e74d220dff04287d34402c89dff`** (second commit) |
 | C2 | Full `npm test --prefix mcp-server` before commit | **Done** — 1757 pass; include `edse-process-spec.v1.yaml` + golden fixture in slice 2 commit |
 | C3 | Slice 2 verification + envelope refresh | **Deferred** — run `@close-out` or `run-close-out-gates.mjs` when ready |
 
@@ -75,8 +75,8 @@
 
 1. Review `git diff` for `mcp-server/src` (~46 files), [CHANGELOG.md](../../../../CHANGELOG.md), `tied-bundle/resources/process-certification/edse-process-spec.v1.yaml` (hash line only), golden fixture.
 2. ~~Run full MCP test suite~~ — **complete**.
-3. ~~Traceable commit (slice 2)~~ — **complete** (`9243bb2a`).
+3. ~~Traceable commit (slice 2)~~ — **complete** (`65635273`).
 4. Optional: `@close-out` with `--envelope-blocking --sync-dispositions --reconcile` for slice 2; update completion signals.
-5. Push when sponsor wants (`d293bba1` + `9243bb2a`).
+5. Push when sponsor wants (`d293bba1` + `65635273`).
 
 **Prompt types:** `@close-out` (gates + commit hygiene) · `@debug` (fixture/hash failures) · `@build-plan` only if a slice 3 scope is defined in plan.

@@ -11,7 +11,7 @@ Parent REQ: **REQ-TIED_YAML_CANONICALIZATION**
 ### Commits
 
 - **Slice 1 (YAML + JSON slice 1):** `d293bba14c46002f85f5e59af011ad790e97d498` (not pushed)
-- **Slice 2 (JSON marshalling):** `9243bb2a80820a88731f3feb6961890c581db46f` (not pushed) — [traceable-commit-evidence-slice2.md](./traceable-commit-evidence-slice2.md)
+- **Slice 2 (JSON marshalling):** `6563527323488e74d220dff04287d34402c89dff` (not pushed) — [traceable-commit-evidence-slice2.md](./traceable-commit-evidence-slice2.md)
 
 ### Remaining risks
 

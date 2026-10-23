@@ -6,4 +6,4 @@
 - **Verify:** `npm test` in `mcp-server/` — 1757 + 7 pass, 0 fail (2026-10-23)
 - **Hash churn (RISK-JSON-HASH):** `stableJsonForHash` for EDSE clause hash; `edse-process-spec.v1.yaml` + golden fixture updated
 - **Close-out:** slice 1 envelope remains authoritative; slice 2 machine close-out **deferred**
-- **Commit SHA:** `65635273a8b8c8d8e8f8a8b8c8d8e8f8a8b8c8d8e` (not pushed)
+- **Commit SHA:** `6563527323488e74d220dff04287d34402c89dff` (not pushed)
