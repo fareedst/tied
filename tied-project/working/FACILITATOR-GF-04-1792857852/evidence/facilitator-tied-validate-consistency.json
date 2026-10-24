@@ -1,0 +1,1861 @@
+{
+  "detail_files": {
+    "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET",
+      "top_level_key_ok": true
+    },
+    "ARCH-EVIDENCE_CHAIN_PROFILE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-EVIDENCE_CHAIN_PROFILE",
+      "top_level_key_ok": true
+    },
+    "ARCH-EVIDENCE_CHAIN_REPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-EVIDENCE_CHAIN_REPORT",
+      "top_level_key_ok": true
+    },
+    "ARCH-FEEDBACK_STORAGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-FEEDBACK_STORAGE",
+      "top_level_key_ok": true
+    },
+    "ARCH-GLOSSARY_RENAME_CHECK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-GLOSSARY_RENAME_CHECK",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-LEARNING-EXPERIMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "top_level_key_ok": true
+    },
+    "ARCH-MODULE_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-MODULE_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "ARCH-PROMPT_TYPE_GLOBAL_SKILLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+      "top_level_key_ok": true
+    },
+    "ARCH-PROMPT_TYPE_SUBAGENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-PROMPT_TYPE_SUBAGENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-QUALITY_ASSURANCE_PROFILES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-QUALITY_ASSURANCE_PROFILES",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_ADVERSARIAL_INQUIRY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_ADVERSARIAL_INQUIRY",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_FIDELITY_RESEARCH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_FIDELITY_RESEARCH",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_STRUCTURE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_STRUCTURE",
+      "top_level_key_ok": true
+    },
+    "ARCH-TIED_VOCABULARY_LAYERS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "ARCH-TIED_VOCABULARY_LAYERS",
+      "top_level_key_ok": true
+    },
+    "IMPL-EVIDENCE_CHAIN_PROFILE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-EVIDENCE_CHAIN_PROFILE",
+      "top_level_key_ok": true
+    },
+    "IMPL-EVIDENCE_CHAIN_REPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-EVIDENCE_CHAIN_REPORT",
+      "top_level_key_ok": true
+    },
+    "IMPL-GLOSSARY_RENAME_CHECK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-GLOSSARY_RENAME_CHECK",
+      "top_level_key_ok": true
+    },
+    "IMPL-MCP_FEEDBACK_TOOLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_FEEDBACK_TOOLS",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "top_level_key_ok": true
+    },
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "top_level_key_ok": true
+    },
+    "IMPL-MODULE_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-MODULE_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-PROMPT_TYPE_GLOBAL_SKILLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+      "top_level_key_ok": true
+    },
+    "IMPL-PROMPT_TYPE_SUBAGENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_SUBAGENT",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_BINDING_INVENTORY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_BINDING_INVENTORY",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_EVIDENCE_COLLECTION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_COLLECTION",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_EVIDENCE_MANIFEST": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_MANIFEST",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_PSEUDOCODE_VALIDATOR": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "IMPL-QUALITY_TEST_ADEQUACY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_TEST_ADEQUACY",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_ADVERSARIAL_INQUIRY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_ADVERSARIAL_INQUIRY",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_FIDELITY_RESEARCH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_FIDELITY_RESEARCH",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_FILES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_FILES",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+      "top_level_key_ok": true
+    },
+    "IMPL-TIED_VOCABULARY_REFRESH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_VOCABULARY_REFRESH",
+      "top_level_key_ok": true
+    },
+    "REQ-EVIDENCE_CHAIN_PROFILE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-EVIDENCE_CHAIN_PROFILE",
+      "top_level_key_ok": true
+    },
+    "REQ-EVIDENCE_CHAIN_REPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-EVIDENCE_CHAIN_REPORT",
+      "top_level_key_ok": true
+    },
+    "REQ-FEEDBACK_TO_TIED": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-FEEDBACK_TO_TIED",
+      "top_level_key_ok": true
+    },
+    "REQ-GLOSSARY_RENAME_CHECK": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-GLOSSARY_RENAME_CHECK",
+      "top_level_key_ok": true
+    },
+    "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "top_level_key_ok": true
+    },
+    "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "top_level_key_ok": true
+    },
+    "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "top_level_key_ok": true
+    },
+    "REQ-METHODOLOGY-LEARNING-EXPERIMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+      "top_level_key_ok": true
+    },
+    "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "top_level_key_ok": true
+    },
+    "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "top_level_key_ok": true
+    },
+    "REQ-MODULE_VALIDATION": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-MODULE_VALIDATION",
+      "top_level_key_ok": true
+    },
+    "REQ-PROMPT_TYPE_GLOBAL_SKILLS": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+      "top_level_key_ok": true
+    },
+    "REQ-PROMPT_TYPE_SUBAGENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-PROMPT_TYPE_SUBAGENT",
+      "top_level_key_ok": true
+    },
+    "REQ-QUALITY_ASSURANCE_EVIDENCE": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-QUALITY_ASSURANCE_EVIDENCE",
+      "top_level_key_ok": true
+    },
+    "REQ-TIED_ADVERSARIAL_INQUIRY": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-TIED_ADVERSARIAL_INQUIRY",
+      "top_level_key_ok": true
+    },
+    "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "top_level_key_ok": true
+    },
+    "REQ-TIED_FIDELITY_RESEARCH": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-TIED_FIDELITY_RESEARCH",
+      "top_level_key_ok": true
+    },
+    "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+      "top_level_key_ok": true
+    },
+    "REQ-TIED_SETUP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-TIED_SETUP",
+      "top_level_key_ok": true
+    },
+    "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+      "top_level_key_ok": true
+    },
+    "REQ-TIED_VOCABULARY_OWNERSHIP": {
+      "format": "yaml",
+      "has_file": true,
+      "ref_issues": [],
+      "token": "REQ-TIED_VOCABULARY_OWNERSHIP",
+      "top_level_key_ok": true
+    }
+  },
+  "index": {
+    "architecture": {
+      "valid": true
+    },
+    "implementation": {
+      "valid": true
+    },
+    "requirements": {
+      "valid": true
+    },
+    "semantic-tokens": {
+      "valid": true
+    }
+  },
+  "index_tokens": {
+    "architecture": {
+      "detail_file_exists": [
+        "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET",
+        "ARCH-EVIDENCE_CHAIN_PROFILE",
+        "ARCH-EVIDENCE_CHAIN_REPORT",
+        "ARCH-FEEDBACK_STORAGE",
+        "ARCH-GLOSSARY_RENAME_CHECK",
+        "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+        "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "ARCH-MODULE_VALIDATION",
+        "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+        "ARCH-PROMPT_TYPE_SUBAGENT",
+        "ARCH-QUALITY_ASSURANCE_PROFILES",
+        "ARCH-TIED_ADVERSARIAL_INQUIRY",
+        "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM",
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST",
+        "ARCH-TIED_FIDELITY_RESEARCH",
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "ARCH-TIED_STRUCTURE",
+        "ARCH-TIED_VOCABULARY_LAYERS"
+      ],
+      "tokens": [
+        "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET",
+        "ARCH-EVIDENCE_CHAIN_PROFILE",
+        "ARCH-EVIDENCE_CHAIN_REPORT",
+        "ARCH-FEEDBACK_STORAGE",
+        "ARCH-GLOSSARY_RENAME_CHECK",
+        "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+        "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "ARCH-MODULE_VALIDATION",
+        "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+        "ARCH-PROMPT_TYPE_SUBAGENT",
+        "ARCH-QUALITY_ASSURANCE_PROFILES",
+        "ARCH-TIED_ADVERSARIAL_INQUIRY",
+        "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM",
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST",
+        "ARCH-TIED_FIDELITY_RESEARCH",
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "ARCH-TIED_STRUCTURE",
+        "ARCH-TIED_VOCABULARY_LAYERS"
+      ],
+      "with_detail_file": [
+        "ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET",
+        "ARCH-EVIDENCE_CHAIN_PROFILE",
+        "ARCH-EVIDENCE_CHAIN_REPORT",
+        "ARCH-FEEDBACK_STORAGE",
+        "ARCH-GLOSSARY_RENAME_CHECK",
+        "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+        "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "ARCH-MODULE_VALIDATION",
+        "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+        "ARCH-PROMPT_TYPE_SUBAGENT",
+        "ARCH-QUALITY_ASSURANCE_PROFILES",
+        "ARCH-TIED_ADVERSARIAL_INQUIRY",
+        "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM",
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST",
+        "ARCH-TIED_FIDELITY_RESEARCH",
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "ARCH-TIED_STRUCTURE",
+        "ARCH-TIED_VOCABULARY_LAYERS"
+      ]
+    },
+    "implementation": {
+      "detail_file_exists": [
+        "IMPL-EVIDENCE_CHAIN_PROFILE",
+        "IMPL-EVIDENCE_CHAIN_REPORT",
+        "IMPL-GLOSSARY_RENAME_CHECK",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+        "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "IMPL-MODULE_VALIDATION",
+        "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+        "IMPL-PROMPT_TYPE_SUBAGENT",
+        "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+        "IMPL-QUALITY_BINDING_INVENTORY",
+        "IMPL-QUALITY_EVIDENCE_COLLECTION",
+        "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+        "IMPL-QUALITY_EVIDENCE_MANIFEST",
+        "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+        "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+        "IMPL-QUALITY_TEST_ADEQUACY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_FIDELITY_RESEARCH",
+        "IMPL-TIED_FILES",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_VOCABULARY_REFRESH"
+      ],
+      "tokens": [
+        "IMPL-EVIDENCE_CHAIN_PROFILE",
+        "IMPL-EVIDENCE_CHAIN_REPORT",
+        "IMPL-GLOSSARY_RENAME_CHECK",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+        "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "IMPL-MODULE_VALIDATION",
+        "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+        "IMPL-PROMPT_TYPE_SUBAGENT",
+        "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+        "IMPL-QUALITY_BINDING_INVENTORY",
+        "IMPL-QUALITY_EVIDENCE_COLLECTION",
+        "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+        "IMPL-QUALITY_EVIDENCE_MANIFEST",
+        "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+        "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+        "IMPL-QUALITY_TEST_ADEQUACY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_FIDELITY_RESEARCH",
+        "IMPL-TIED_FILES",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_VOCABULARY_REFRESH"
+      ],
+      "with_detail_file": [
+        "IMPL-EVIDENCE_CHAIN_PROFILE",
+        "IMPL-EVIDENCE_CHAIN_REPORT",
+        "IMPL-GLOSSARY_RENAME_CHECK",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+        "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "IMPL-MODULE_VALIDATION",
+        "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+        "IMPL-PROMPT_TYPE_SUBAGENT",
+        "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+        "IMPL-QUALITY_BINDING_INVENTORY",
+        "IMPL-QUALITY_EVIDENCE_COLLECTION",
+        "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+        "IMPL-QUALITY_EVIDENCE_MANIFEST",
+        "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+        "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+        "IMPL-QUALITY_TEST_ADEQUACY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_FIDELITY_RESEARCH",
+        "IMPL-TIED_FILES",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_VOCABULARY_REFRESH"
+      ]
+    },
+    "requirements": {
+      "detail_file_exists": [
+        "REQ-EVIDENCE_CHAIN_PROFILE",
+        "REQ-EVIDENCE_CHAIN_REPORT",
+        "REQ-FEEDBACK_TO_TIED",
+        "REQ-GLOSSARY_RENAME_CHECK",
+        "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "REQ-MODULE_VALIDATION",
+        "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+        "REQ-PROMPT_TYPE_SUBAGENT",
+        "REQ-QUALITY_ASSURANCE_EVIDENCE",
+        "REQ-TIED_ADVERSARIAL_INQUIRY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_FIDELITY_RESEARCH",
+        "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+        "REQ-TIED_SETUP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_VOCABULARY_OWNERSHIP"
+      ],
+      "tokens": [
+        "REQ-EVIDENCE_CHAIN_PROFILE",
+        "REQ-EVIDENCE_CHAIN_REPORT",
+        "REQ-FEEDBACK_TO_TIED",
+        "REQ-GLOSSARY_RENAME_CHECK",
+        "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "REQ-MODULE_VALIDATION",
+        "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+        "REQ-PROMPT_TYPE_SUBAGENT",
+        "REQ-QUALITY_ASSURANCE_EVIDENCE",
+        "REQ-TIED_ADVERSARIAL_INQUIRY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_FIDELITY_RESEARCH",
+        "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+        "REQ-TIED_SETUP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_VOCABULARY_OWNERSHIP"
+      ],
+      "with_detail_file": [
+        "REQ-EVIDENCE_CHAIN_PROFILE",
+        "REQ-EVIDENCE_CHAIN_REPORT",
+        "REQ-FEEDBACK_TO_TIED",
+        "REQ-GLOSSARY_RENAME_CHECK",
+        "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "REQ-MODULE_VALIDATION",
+        "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+        "REQ-PROMPT_TYPE_SUBAGENT",
+        "REQ-QUALITY_ASSURANCE_EVIDENCE",
+        "REQ-TIED_ADVERSARIAL_INQUIRY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_FIDELITY_RESEARCH",
+        "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+        "REQ-TIED_SETUP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_VOCABULARY_OWNERSHIP"
+      ]
+    },
+    "semantic-tokens": {
+      "detail_file_exists": [],
+      "tokens": [
+        "ARCH-EVIDENCE_CHAIN_PROFILE",
+        "ARCH-EVIDENCE_CHAIN_REPORT",
+        "ARCH-FEEDBACK_STORAGE",
+        "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+        "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "ARCH-MODULE_VALIDATION",
+        "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+        "ARCH-PROMPT_TYPE_SUBAGENT",
+        "ARCH-QUALITY_ASSURANCE_PROFILES",
+        "ARCH-TIED_ADVERSARIAL_INQUIRY",
+        "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST",
+        "ARCH-TIED_FIDELITY_RESEARCH",
+        "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "ARCH-TIED_STRUCTURE",
+        "ARCH-TIED_VOCABULARY_LAYERS",
+        "IMPL-EVIDENCE_CHAIN_PROFILE",
+        "IMPL-EVIDENCE_CHAIN_REPORT",
+        "IMPL-MCP_FEEDBACK_TOOLS",
+        "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+        "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "IMPL-MODULE_VALIDATION",
+        "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+        "IMPL-PROMPT_TYPE_SUBAGENT",
+        "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+        "IMPL-QUALITY_BINDING_INVENTORY",
+        "IMPL-QUALITY_EVIDENCE_COLLECTION",
+        "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+        "IMPL-QUALITY_EVIDENCE_MANIFEST",
+        "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+        "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+        "IMPL-QUALITY_TEST_ADEQUACY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY",
+        "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+        "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "IMPL-TIED_FIDELITY_RESEARCH",
+        "IMPL-TIED_FILES",
+        "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "IMPL-TIED_VOCABULARY_REFRESH",
+        "PROC-BUILD_PIPELINE_VALIDATION",
+        "PROC-COMMIT_MESSAGES",
+        "PROC-EVIDENCE_CHAIN",
+        "PROC-IMPL_PSEUDOCODE_TOKENS",
+        "PROC-PROJECT_SURVEY_AND_SETUP",
+        "PROC-QUALITY_ASSURANCE",
+        "PROC-QUALITY_EVIDENCE_PROVENANCE",
+        "PROC-RELEASE",
+        "PROC-TEST_ADEQUACY",
+        "PROC-TEST_STRATEGY",
+        "PROC-TIED_DEV_CYCLE",
+        "PROC-TIED_METHODOLOGY_READONLY",
+        "PROC-TOKEN_AUDIT",
+        "PROC-TOKEN_VALIDATION",
+        "PROC-VOCABULARY_INDEX",
+        "PROC-YAML_DB_OPERATIONS",
+        "REQ-EVIDENCE_CHAIN_PROFILE",
+        "REQ-EVIDENCE_CHAIN_REPORT",
+        "REQ-FEEDBACK_TO_TIED",
+        "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+        "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+        "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+        "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+        "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+        "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+        "REQ-MODULE_VALIDATION",
+        "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+        "REQ-PROMPT_TYPE_SUBAGENT",
+        "REQ-QUALITY_ASSURANCE_EVIDENCE",
+        "REQ-TIED_ADVERSARIAL_INQUIRY",
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_FIDELITY_RESEARCH",
+        "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES",
+        "REQ-TIED_SETUP",
+        "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+        "REQ-TIED_VOCABULARY_OWNERSHIP"
+      ],
+      "with_detail_file": []
+    }
+  },
+  "ok": true,
+  "pseudocode": {
+    "IMPL-EVIDENCE_CHAIN_PROFILE": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-EVIDENCE_CHAIN_PROFILE",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE",
+          "ARCH-EVIDENCE_CHAIN_PROFILE"
+        ],
+        "impl": [
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE",
+          "IMPL-EVIDENCE_CHAIN_PROFILE"
+        ],
+        "req": [
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE",
+          "REQ-EVIDENCE_CHAIN_PROFILE"
+        ]
+      }
+    },
+    "IMPL-EVIDENCE_CHAIN_REPORT": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-EVIDENCE_CHAIN_REPORT",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT",
+          "ARCH-EVIDENCE_CHAIN_REPORT"
+        ],
+        "impl": [
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-EVIDENCE_CHAIN_REPORT"
+        ],
+        "req": [
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-EVIDENCE_CHAIN_REPORT"
+        ]
+      }
+    },
+    "IMPL-GLOSSARY_RENAME_CHECK": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-GLOSSARY_RENAME_CHECK",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-GLOSSARY_RENAME_CHECK",
+          "ARCH-GLOSSARY_RENAME_CHECK",
+          "ARCH-GLOSSARY_RENAME_CHECK",
+          "ARCH-GLOSSARY_RENAME_CHECK",
+          "ARCH-GLOSSARY_RENAME_CHECK",
+          "ARCH-GLOSSARY_RENAME_CHECK",
+          "ARCH-GLOSSARY_RENAME_CHECK",
+          "ARCH-GLOSSARY_RENAME_CHECK"
+        ],
+        "impl": [
+          "IMPL-GLOSSARY_RENAME_CHECK",
+          "IMPL-GLOSSARY_RENAME_CHECK",
+          "IMPL-GLOSSARY_RENAME_CHECK",
+          "IMPL-GLOSSARY_RENAME_CHECK",
+          "IMPL-GLOSSARY_RENAME_CHECK",
+          "IMPL-GLOSSARY_RENAME_CHECK",
+          "IMPL-GLOSSARY_RENAME_CHECK",
+          "IMPL-GLOSSARY_RENAME_CHECK"
+        ],
+        "req": [
+          "REQ-GLOSSARY_RENAME_CHECK",
+          "REQ-GLOSSARY_RENAME_CHECK",
+          "REQ-GLOSSARY_RENAME_CHECK",
+          "REQ-GLOSSARY_RENAME_CHECK",
+          "REQ-GLOSSARY_RENAME_CHECK",
+          "REQ-GLOSSARY_RENAME_CHECK",
+          "REQ-GLOSSARY_RENAME_CHECK",
+          "REQ-GLOSSARY_RENAME_CHECK"
+        ]
+      }
+    },
+    "IMPL-MCP_FEEDBACK_TOOLS": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-MCP_FEEDBACK_TOOLS",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-FEEDBACK_STORAGE",
+          "ARCH-FEEDBACK_STORAGE",
+          "ARCH-FEEDBACK_STORAGE",
+          "ARCH-FEEDBACK_STORAGE"
+        ],
+        "impl": [
+          "IMPL-MCP_FEEDBACK_TOOLS",
+          "IMPL-MCP_FEEDBACK_TOOLS",
+          "IMPL-MCP_FEEDBACK_TOOLS",
+          "IMPL-MCP_FEEDBACK_TOOLS"
+        ],
+        "req": [
+          "REQ-FEEDBACK_TO_TIED",
+          "REQ-FEEDBACK_TO_TIED",
+          "REQ-FEEDBACK_TO_TIED",
+          "REQ-FEEDBACK_TO_TIED"
+        ]
+      }
+    },
+    "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
+        ],
+        "impl": [
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        ],
+        "req": [
+          "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        ]
+      }
+    },
+    "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+          "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+        ],
+        "impl": [
+          "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+          "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+          "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+          "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
+        ],
+        "req": [
+          "REQ-FEEDBACK_TO_TIED",
+          "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+          "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE",
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+        ]
+      }
+    },
+    "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST"
+        ],
+        "impl": [
+          "IMPL-EVIDENCE_CHAIN_REPORT",
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+        ],
+        "req": [
+          "REQ-EVIDENCE_CHAIN_REPORT",
+          "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT",
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
+        ]
+      }
+    },
+    "IMPL-METHODOLOGY-LEARNING-EXPERIMENT": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+          "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+          "ARCH-METHODOLOGY-LEARNING-EXPERIMENT",
+          "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
+        ],
+        "impl": [
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
+        ],
+        "req": [
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
+        ]
+      }
+    },
+    "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+        ],
+        "impl": [
+          "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+          "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+          "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+        ],
+        "req": [
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT",
+          "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+        ]
+      }
+    },
+    "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
+        ],
+        "impl": [
+          "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING",
+          "IMPL-METHODOLOGY-LEARNING-EXPERIMENT",
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        ],
+        "req": [
+          "REQ-METHODOLOGY-LEARNING-EXPERIMENT",
+          "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE",
+          "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        ]
+      }
+    },
+    "IMPL-MODULE_VALIDATION": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-MODULE_VALIDATION",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION"
+        ],
+        "impl": [
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION",
+          "IMPL-MODULE_VALIDATION"
+        ],
+        "req": [
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION"
+        ]
+      }
+    },
+    "IMPL-PROMPT_TYPE_GLOBAL_SKILLS": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+          "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+          "ARCH-PROMPT_TYPE_GLOBAL_SKILLS",
+          "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+        ],
+        "impl": [
+          "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+          "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+          "IMPL-PROMPT_TYPE_GLOBAL_SKILLS",
+          "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+        ],
+        "req": [
+          "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+          "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+          "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+          "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+        ]
+      }
+    },
+    "IMPL-PROMPT_TYPE_SUBAGENT": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-PROMPT_TYPE_SUBAGENT",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-PROMPT_TYPE_SUBAGENT",
+          "ARCH-PROMPT_TYPE_SUBAGENT",
+          "ARCH-PROMPT_TYPE_SUBAGENT",
+          "ARCH-PROMPT_TYPE_SUBAGENT"
+        ],
+        "impl": [
+          "IMPL-PROMPT_TYPE_SUBAGENT",
+          "IMPL-PROMPT_TYPE_SUBAGENT",
+          "IMPL-PROMPT_TYPE_SUBAGENT",
+          "IMPL-PROMPT_TYPE_SUBAGENT"
+        ],
+        "req": [
+          "REQ-PROMPT_TYPE_SUBAGENT",
+          "REQ-PROMPT_TYPE_SUBAGENT",
+          "REQ-PROMPT_TYPE_SUBAGENT",
+          "REQ-PROMPT_TYPE_SUBAGENT"
+        ]
+      }
+    },
+    "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK",
+          "IMPL-QUALITY_ASSURANCE_PILOT_WEBHOOK"
+        ],
+        "req": [
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-QUALITY_BINDING_INVENTORY": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_BINDING_INVENTORY",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-MODULE_VALIDATION",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY",
+          "IMPL-QUALITY_BINDING_INVENTORY"
+        ],
+        "req": [
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-MODULE_VALIDATION",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-QUALITY_EVIDENCE_COLLECTION": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_COLLECTION",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COLLECTION",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST"
+        ],
+        "req": [
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER",
+          "IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER"
+        ],
+        "req": [
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-QUALITY_EVIDENCE_MANIFEST": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_EVIDENCE_MANIFEST",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST",
+          "IMPL-QUALITY_EVIDENCE_MANIFEST"
+        ],
+        "req": [
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-QUALITY_PSEUDOCODE_VALIDATOR": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+          "IMPL-QUALITY_PSEUDOCODE_VALIDATOR"
+        ],
+        "req": [
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION",
+          "IMPL-QUALITY_SECURITY_PROFILE_VALIDATION"
+        ],
+        "req": [
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-QUALITY_TEST_ADEQUACY": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-QUALITY_TEST_ADEQUACY",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES",
+          "ARCH-QUALITY_ASSURANCE_PROFILES"
+        ],
+        "impl": [
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY",
+          "IMPL-QUALITY_TEST_ADEQUACY"
+        ],
+        "req": [
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE",
+          "REQ-QUALITY_ASSURANCE_EVIDENCE"
+        ]
+      }
+    },
+    "IMPL-TIED_ADVERSARIAL_INQUIRY": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_ADVERSARIAL_INQUIRY",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY"
+        ],
+        "impl": [
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY"
+        ],
+        "req": [
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY"
+        ]
+      }
+    },
+    "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY",
+          "ARCH-TIED_ADVERSARIAL_INQUIRY"
+        ],
+        "impl": [
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST",
+          "IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST"
+        ],
+        "req": [
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY",
+          "REQ-TIED_ADVERSARIAL_INQUIRY"
+        ]
+      }
+    },
+    "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT": {
+      "has_essence_pseudocode": false,
+      "ref_issues": [],
+      "token": "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "tokens_in_text": {
+        "arch": [],
+        "impl": [],
+        "req": []
+      }
+    },
+    "IMPL-TIED_FIDELITY_RESEARCH": {
+      "essence_pseudocode_empty": false,
+      "has_essence_pseudocode": true,
+      "ref_issues": [],
+      "token": "IMPL-TIED_FIDELITY_RESEARCH",
+      "tokens_in_text": {
+        "arch": [
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH",
+          "ARCH-TIED_FIDELITY_RESEARCH"
+        ],
+        "impl": [
+          "IMPL-TIED_FIDELITY_RESEARCH",
+          "IMPL-TIED_FIDELITY_RESEARCH",
+          "IMPL-TIED_FIDELITY_RESEARCH",
+          "IMPL-TIED_FIDELITY_RESEARCH",
+          "IMPL-TIED_FIDELITY_RESEARCH",
+          "IMPL-TIED_FIDELITY_RESEARCH",
+          "IMPL-TI

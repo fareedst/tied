@@ -1,0 +1,17 @@
+docs(demos): trial readout PROMPT-GF-04 client 1792857852
+
+Record facilitator grading readout for TIED-DEMO-04 / L1 rename drift
+disposable client (glossary rename consistency CLI, TIED 4.0.0 bootstrap).
+Links from demo catalogs; working evidence under FACILITATOR-GF-04-1792857852.
+
+Completion signals (close_out):
+- Machine close-out: pass — docs deliverable + catalog links on disk
+- Process contract: pass — refine-plan + build-plan + close-out phases; docs-only gate waiver
+- Adherence ledger: N/A — minimal depth facilitator publish (no store REQ token)
+
+Staging map:
+- CHANGELOG.md
+- docs/demos/trial-readout-PROMPT-GF-04-1792857852.md
+- docs/demos/README.md
+- docs/demos/catalog-greenfield-plan-new-feature-prompts.md
+- tied-project/working/FACILITATOR-GF-04-1792857852/

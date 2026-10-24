@@ -1,0 +1,5 @@
+{"pass":1,"area":"structure","before":"single_section_plan","after":"refine_plan_implement_three_part","rationale":"align FACILITATOR-GF-14 refine-plan contract"}
+{"pass":1,"area":"readout_contract","before":"bullet_deliverables","after":"twelve_section_gf11_gf14_checklist","rationale":"facilitator grading comparability"}
+{"pass":1,"area":"touchpoint","before":"unspecified","after":"add_feature_not_xlate","rationale":"honest metadata for TIED 4.0.0 client PLAN header"}
+{"pass":1,"area":"working_artifacts","before":"optional_facilitator_folder","after":"FACILITATOR-GF-04-1792857852_CITDP_tracker_evidence","rationale":"committed process evidence per working-artifact-placement"}
+{"pass":1,"area":"w5_feedback","before":"store_plan_link_only","after":"explicit_no_re_ingest_cite_client_feedback_in_readout","rationale":"PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK already complete"}

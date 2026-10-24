@@ -1,0 +1,74 @@
+CITDP-FACILITATOR-GF-04-1792857852:
+  change_definition:
+    current_behavior: "Disposable client 1792857852 completed PROMPT-GF-04 (REQ-GLOSSARY_RENAME_CHECK) on TIED 4.0.0 with close-out handoff and client methodology_improvement feedback; no store trial readout or catalog recorded-trials row for PROMPT-GF-04 / TIED-DEMO-04."
+    desired_behavior: "GF-11-quality facilitator trial readout under docs/demos/ plus README and greenfield catalog links; dimensioned grading vs GF cohort; optional FACILITATOR working evidence from subject-client re-verification."
+    non_goals:
+      - "Mint store [REQ-*] tokens for product feature"
+      - "Persist CITDP to tied-project/citdp/"
+      - "Mutate disposable client tracker, reconcile, or feedback.yaml"
+      - "Re-ingest Wave 5 store feedback (already fb-mvmmb3lp-723euw)"
+      - "Claim methodology effectiveness from a single trial"
+    success_criteria:
+      - "docs/demos/trial-readout-PROMPT-GF-04-1792857852.md matches GF-11/14 section contract"
+      - "docs/demos/README.md and catalog recorded-trials include PROMPT-GF-04 row"
+      - "Facilitator re-verify captures npm test, tsc/lint:ts, tied_validate_consistency ok on client tied-project/"
+      - "Grading table uses six catalog dimensions with cohort comparisons (GF-11, GF-14, Family A)"
+    unchanged_behavior: "Subject client product code and TIED indexes remain as-built; store methodology YAML read-only."
+  evidence:
+    command_seq:
+      - "git log -1 (client root) pin HEAD"
+      - "npm test @ client root"
+      - "npm run lint:ts or npx tsc -b @ client root"
+      - "tied-cli tied_validate_consistency with TIED_BASE_PATH -> client tied-project/"
+      - "optional tied_project_lint on client"
+    proof_boundaries:
+      - "facilitator_session_reconstruction"
+      - "does_not_prove_methodology_effectiveness"
+      - "subject_client_observed_not_rebuilt"
+  impact_analysis:
+    impl_inventory_notes: "Markdown and catalog index rows only in stdd store."
+    modules_or_boundaries: "docs/demos/*; tied-project/working/FACILITATOR-GF-04-1792857852/"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "FACILITATOR-GF-04-1792857852"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-24"
+    title: "Facilitator trial readout PROMPT-GF-04 client 1792857852"
+  risk_analysis:
+    abuse_cases:
+      - "Collapsed maturity score or leaderboard from dimension bands"
+      - "Machine close_out on subject client treated as full Wave 5 completion without three-signal table"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Readout cites gate allowed without noting adherence ledger not_run on subject client."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Grading bands written before facilitator re-verify commands run."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "/Users/fareed/Documents/dev/test/1792857852/tied-project/working/REQ-GLOSSARY_RENAME_CHECK/evidence/close-out-handoff.md"
+        - "/Users/fareed/Documents/dev/test/1792857852/tied-project/working/REQ-GLOSSARY_RENAME_CHECK/checklist-tracker.yaml"
+        - "/Users/fareed/Documents/dev/test/1792857852/tied-project/feedback.yaml"
+        - "docs/demos/trial-readout-PROMPT-GF-14-1792479171.md"
+        - "docs/demos/trial-readout-PROMPT-GF-11-1792344147.md"
+      falsification_questions:
+        - "Would a reader infer TIED-DEMO-04 catalog disposition changed without explicit built-instance note?"
+    consequence_ladder:
+      - choice: "Publish readout without client re-verify"
+        disposition: "costly"
+        rationale: "Grading bands must follow captured command evidence."
+      - choice: "Docs-only commit in stdd"
+        disposition: "reversible"
+        rationale: "Standard GF readout close-out when sponsor requests."
+  test_strategy:
+    outline:
+      - "No unit RED in store; verification is facilitator command replay on subject client."
+      - "Readout body must cite command counts and HEAD SHA from capture artifacts."
+    quality_evidence_matrix:
+      baseline-functional:
+        applicability: applicable
+        evidence_method: "npm test + tied_validate_consistency on client scoped env"
