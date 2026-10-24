@@ -17,7 +17,7 @@
 | Wave | SHA | Scope |
 | --- | --- | --- |
 | Product | `a3c844af` | Skill bundle, TIED tokens, bootstrap test, working PLAN/tracker |
-| Close-out evidence | *(this commit)* | Gate final JSON + handoff SHA backfill |
+| Close-out evidence | `23f3e487` | Gate final JSON + handoff SHA backfill |
 
 ## Proof boundary
 
