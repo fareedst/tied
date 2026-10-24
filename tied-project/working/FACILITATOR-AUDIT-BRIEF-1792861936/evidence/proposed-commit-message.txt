@@ -1,0 +1,17 @@
+docs(demos): trial readout custom audit brief client 1792861936
+
+Record facilitator grading readout for custom greenfield / TIED-DEMO-23 lens
+disposable client (onboarding audit brief CLI, TIED 4.0.0 bootstrap).
+Links from demo catalogs; working evidence under FACILITATOR-AUDIT-BRIEF-1792861936.
+
+Completion signals (close_out):
+- Machine close-out: pass — docs deliverable + catalog links on disk
+- Process contract: pass — refine-plan + build-plan + close-out phases; docs-only gate waiver
+- Adherence ledger: N/A — minimal depth facilitator publish (no store REQ token)
+
+Staging map:
+- CHANGELOG.md
+- docs/demos/trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md
+- docs/demos/README.md
+- docs/demos/catalog-greenfield-plan-new-feature-prompts.md
+- tied-project/working/FACILITATOR-AUDIT-BRIEF-1792861936/
