@@ -6,7 +6,7 @@
 | **Depth** | `profile_depth` / `depth_tier`: **minimal** · `gate_policy`: **advisory** |
 | **Profiles** | `research_profile`: read-only · `assurance_profile`: baseline-functional · `eligibility_triggers_matched`: [] |
 | **Source feedback id** | `fb-mvmmq5pl-dxzvb6` (store; `tied-project/feedback.yaml`) |
-| **Status** | **Build-plan complete (2026-10-24)** — close-out / traceable-commit deferred |
+| **Status** | **Close-out complete** — traceable-commit **`9506e55e`** (2026-10-24) |
 | **Related REQ** | [REQ-TIED_CLEAR_WORKSPACE_SKILL](../../requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml), [REQ-TIED_GIT_HYGIENE](../../requirements/REQ-TIED_GIT_HYGIENE.yaml), [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../../requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml), [REQ-PROMPT_TYPE_GLOBAL_SKILLS](../../requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml) |
 | **Sibling PLAN** | [PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK](../PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/PLAN.md) |
 | **Pending LEAP** | `lp-2026-10-24T16-33-13-575Z-707c63d33f60` — *Close-out completion pass (doc/skill addendum)*; **this PLAN is a second doc slice** (workspace hygiene narrative), merge summary at build-plan |
@@ -139,7 +139,7 @@ flowchart LR
 | 7 | `tied_project_lint` | ok |
 | 8 | `tied_gate_check` `verification` | **allowed: true** |
 | 9 | Evidence | [evidence/build-plan-evidence.md](./evidence/build-plan-evidence.md) |
-| 10 | **Close-out / traceable-commit** | **Deferred** — sponsor `@close-out` when ready |
+| 10 | **Close-out / traceable-commit** | **`9506e55e`** — [plan-close-out-handoff.md](./evidence/plan-close-out-handoff.md) |
 
 **Non-goals honored:** No auto-restore of unrelated WIP; no repo-wide single commit; no `tied_git_hygiene` summary tooling.
 
@@ -151,4 +151,4 @@ flowchart LR
 | --- | --- | --- |
 | `pre_implementation` | **allowed: true** | 2026-10-24 build-plan |
 | `verification` | **allowed: true** | 2026-10-24 build-plan |
-| `close_out` | **deferred** | traceable-commit (sponsor) |
+| `close_out` | **complete** | **`9506e55e`** — unified gates + scoped traceable-commit |

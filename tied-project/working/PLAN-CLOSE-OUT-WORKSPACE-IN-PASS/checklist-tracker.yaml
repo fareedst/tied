@@ -18,6 +18,7 @@ execution_evidence:
     - "sub-close-out-evidence-sync"
     - "verification-gate"
     - "gitignore-close-out-hygiene"
+    - "traceable-commit"
   envelope_path: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/request-evidence-envelope.v1.json"
   request: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
 record_identity:
@@ -117,7 +118,12 @@ steps:
       evidence_refs:
         - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/git-hygiene-receipt-2026-10-24.md"
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/traceable-commit-evidence.md"
     slug: "traceable-commit"
     tracking:
-      status: "pending"
+      evidence_refs:
+        - "9506e55e"
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/traceable-commit-evidence.md"
+      status: "completed"
