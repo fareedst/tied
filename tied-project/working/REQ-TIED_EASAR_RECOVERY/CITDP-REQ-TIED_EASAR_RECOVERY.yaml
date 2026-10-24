@@ -4,15 +4,15 @@ CITDP-REQ-TIED_EASAR_RECOVERY:
     desired_behavior: "Mode C recovery engagement composes existing REQs via [PROC-EASAR_RECOVERY]: slices 1–6 deliver inventory, graph receipt, claims map, reflexion, validation corpus, and read-only portable export manifest—under integrated depth with phase-aware inquiry gates. Tracker keeps brownfield_intent_elevation.mode and adds engagement: easar_full without duplicating checklist authority."
     non_goals:
       - "Blocking 85/100 portable rubric without sponsor costly choice"
+      - "Blocking export completeness for full EASAR §6.2 tree without documented gaps[]"
       - "Merging adversarial finding-ledger.jsonl with claims-review ledgers"
       - "Multi-language source graph beyond current TS/JS static index"
       - "Replacing [PROC-AGENT_REQ_CHECKLIST] with a parallel full checklist"
       - "Repo-root recovery/ tree as git source of truth"
-      - "Blocking export completeness for full EASAR §6.2 tree without documented gaps[]"
     success_criteria:
       - "SC-EASAR-CLAIMS — claim.id ↔ matrix # mapping documented and tested; claims output under working/{REQ}/claims-evidence-review/"
-      - "SC-EASAR-EXPORT — recovery-portable-map.v1.yaml + recovery-export-manifest.v1.json read-only Stage 9 adapter with documented gaps"
       - "SC-EASAR-ENROLL — REQ/ARCH/IMPL/PROC tokens enrolled; depends_on links to BFIE, SGC, CER, fidelity, inquiry, envelope REQs"
+      - "SC-EASAR-EXPORT — recovery-portable-map.v1.yaml + recovery-export-manifest.v1.json read-only Stage 9 adapter with documented gaps"
       - "SC-EASAR-GATES — integrated pre_implementation + per-slice verification gates with identity-bound activation (or governed waivers only)"
       - "SC-EASAR-GRAPH — matrix code_graph rows cite graph freshness + trace ids; BFIE validator allows proof type (code_graph already in intent-elevation.ts)"
       - "SC-EASAR-INV — evidence/inventory.v1.json receipt from scoped analysis normalization; envelope-indexed"
@@ -32,18 +32,18 @@ CITDP-REQ-TIED_EASAR_RECOVERY:
       request_token: "REQ-TIED_EASAR_RECOVERY"
       run_id: "easar-close-out-20261018"
       scope:
-        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a"
-        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431"
-        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb"
         - "IMPL-TIED_EASAR_RECEIPTS#BUILD_CLAIM_MATRIX_MAP#1d027d957113e661"
+        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_CODE_GRAPH_MATRIX_RECEIPT#036ebbe69abb6431"
         - "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CLAIM_MATRIX_MAP_MCP#62ed29fe45dc2f2f"
-        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8"
+        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_CODE_GRAPH_RECEIPT_MCP#4c3d95a6d137ceeb"
         - "IMPL-TIED_EASAR_RECEIPTS#BUILD_EASAR_REFLEXION_REPORT_MCP#c0437590071828a1"
+        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_INVENTORY_V1_FROM_WALK#d869f6d8a00cd82a"
+        - "IMPL-TIED_EASAR_RECEIPTS#BUILD_REFLEXION_REPORT_V1#5ef883efe944a0f8"
     envelope_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/request-evidence-envelope.v1.json"
     tied_validate_consistency: "required"
     verification_gate_notes: "Slices 0–6 verified (slice 6 run_id easar-slice6-verify-20261019); program close_out easar-close-out-20261018 unchanged unless sponsor LEAP re-close"
   evidence:
-    commands:
+    command_seq:
       - "npm run lint:ts --prefix mcp-server"
       - "npm test --prefix mcp-server -- brownfield-intent-evidence source-graph claims-evidence-review"
       - "tied_checklist_gate_validate phase pre_implementation|verification|close_out"

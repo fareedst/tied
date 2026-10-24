@@ -7,13 +7,13 @@ CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
       - "Mandatory PR-bot or merge automation"
       - "Phases 2-5 of Claude comparison"
     success_criteria:
-      - "pre-handoff-verification-charter.md exists with proof boundary and check list sections"
-      - "client-development-index.md links the charter"
       - "Bootstrap test asserts charter markers"
+      - "client-development-index.md links the charter"
+      - "pre-handoff-verification-charter.md exists with proof boundary and check list sections"
       - "REQ/ARCH/IMPL Planned→Implemented with tied_validate_consistency pass"
     unchanged_behavior: "Checklist gates, tied_verify, and DAE charter opt-in defaults unchanged."
   evidence:
-    commands:
+    command_seq:
       - "tied_gate_check pre_implementation"
       - "node --test pre-handoff-charter-doc.test.mjs"
       - "tied_validate_consistency"
@@ -25,9 +25,9 @@ CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
     modules_or_boundaries: "tied-bundle/docs/ (methodology corpus refreshed by tied-install)."
     tied_tokens_affected: []
     tied_tokens_new:
-      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
       - "ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
       - "IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
   record_identity:
     change_request_id: "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
     depth_tier: "minimal"
@@ -37,8 +37,8 @@ CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER:
     title: "Pre-handoff verification charter (Claude comparison Phase 1)"
   risk_analysis:
     abuse_cases:
-      - "Charter mistaken for new MCP gate authority"
       - "Charter duplicates DAE verification charter scope"
+      - "Charter mistaken for new MCP gate authority"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:

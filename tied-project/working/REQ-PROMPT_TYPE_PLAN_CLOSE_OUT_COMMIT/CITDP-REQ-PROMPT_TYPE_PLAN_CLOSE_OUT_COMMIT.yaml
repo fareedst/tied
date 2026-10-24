@@ -3,31 +3,32 @@ CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT:
     current_behavior_prior: "plan-close-out forbids git add/commit; prepares CHANGELOG and proposed commit message only; clear-workspace routes traceable-commit as separate sponsor-requested step."
     desired_behavior: "plan-close-out runs tied_git_hygiene preview by default and executes checklist traceable-commit when unified close_out allows; skips commit when blocked."
     non_goals:
-      - "Change leap-diff-promote or ammend-commit commit policy"
       - "Automatic git push"
+      - "Change leap-diff-promote or ammend-commit commit policy"
       - "tied_git_hygiene apply without exact allowed_paths"
     success_criteria:
-      - "plan-close-out SKILL and agent authorize traceable-commit after gates"
-      - "SHARED_REFERENCES includes traceable-commit-close-out.md"
-      - "prompt-type e2e tests pass"
-      - "prompt-composer vocabulary updated"
       - "close_out merged_decision.allowed with envelope blocking_gap_count zero at minimal depth"
+      - "plan-close-out SKILL and agent authorize traceable-commit after gates"
+      - "prompt-composer vocabulary updated"
+      - "prompt-type e2e tests pass"
+      - "SHARED_REFERENCES includes traceable-commit-close-out.md"
       - "traceable-commit records SHA or documented skip when blocked"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && node --test src/e2e/prompt-type-subagent.test.ts src/e2e/prompt-type-skills.test.ts"
       - "tied_validate_consistency"
     proof_boundaries:
-      - "prompt_composer_prose_and_static_tests"
       - "does_not_prove_live_ide_skill_invocation"
+      - "prompt_composer_prose_and_static_tests"
   impact_analysis:
     impl_inventory_notes: "prompt-shared + plan-close-out SKILL + plan-close-out agent + taxonomy hint + TIED REQ criterion."
     modules_or_boundaries: "tools/bundled-prompt-type-skills/; .cursor/agents/plan-close-out.md"
     tied_tokens_affected:
-      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
       - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
     tied_tokens_new: []
+  persist_policy: "Persist to tied-project/citdp/ after implementation complete"
   record_identity:
     change_request_id: "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
     checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
@@ -39,8 +40,8 @@ CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT:
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     abuse_cases:
-      - "plan-close-out commits when close_out gate disallowed"
       - "Hygiene apply deletes tracked or canonical paths without allowlist"
+      - "plan-close-out commits when close_out gate disallowed"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
@@ -73,4 +74,3 @@ CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT:
         threshold: "test green"
   test_strategy:
     path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/test-strategy.md"
-  persist_policy: "Persist to tied-project/citdp/ after implementation complete"

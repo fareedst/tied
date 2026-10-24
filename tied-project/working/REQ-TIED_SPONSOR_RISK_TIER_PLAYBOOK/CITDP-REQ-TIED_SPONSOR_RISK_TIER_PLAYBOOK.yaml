@@ -7,14 +7,14 @@ CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
       - "Mandatory PR-bot or zero-human merge paths"
       - "Phases 3-5 of Claude comparison"
     success_criteria:
-      - "sponsor-risk-tier-playbook.md exists with proof boundary and review attention map"
-      - "client-development-index.md links the playbook; Phase 1 charter cross-linked"
       - "Bootstrap test asserts playbook markers (SC-PLAYBOOK-TEST)"
-      - "pre_implementation gate allowed; verification and close_out gates allowed at close-out"
       - "CITDP persisted under tied-project/citdp/; REQ/ARCH/IMPL Implemented"
+      - "client-development-index.md links the playbook; Phase 1 charter cross-linked"
+      - "pre_implementation gate allowed; verification and close_out gates allowed at close-out"
+      - "sponsor-risk-tier-playbook.md exists with proof boundary and review attention map"
     unchanged_behavior: "Checklist gates, tied_verify, DAE charter opt-in, and consequence ladder semantics unchanged."
   evidence:
-    commands:
+    command_seq:
       - "node --test sponsor-risk-tier-playbook-doc.test.mjs"
       - "tied_validate_consistency"
       - "tied_checklist_gate_validate pre_implementation"
@@ -28,9 +28,9 @@ CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
     tied_tokens_affected:
       - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
     tied_tokens_new:
-      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
       - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
       - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
   record_identity:
     change_request_id: "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
     depth_tier: "minimal"
@@ -75,6 +75,6 @@ CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
   test_strategy:
     approach: "Doc contract test then content; no production MCP changes."
     cases:
-      - "Playbook file exists under tied-bundle/docs"
       - "Client development index links playbook"
+      - "Playbook file exists under tied-bundle/docs"
       - "tied_validate_consistency after token mint"

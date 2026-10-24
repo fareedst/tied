@@ -3,10 +3,10 @@ CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX:
     current_behavior: "Claude comparison Phase 5 (client DevOps appendix) remained recommendations-only; PR/CI/release compose guidance not installable."
     desired_behavior: "One client-layer appendix under tied-bundle/docs, example PR handoff fields template, client index link, bootstrap doc test; no new MCP gate authority."
     non_goals:
-      - "Merge queues, feature flags, or CI products as TIED core index fields"
-      - "Matrix row for PR-centric review"
       - "Kaizen Phase 3 transport reopen"
       - "Mandatory PR-bot voters or zero-human merge"
+      - "Matrix row for PR-centric review"
+      - "Merge queues, feature flags, or CI products as TIED core index fields"
     success_criteria:
       - "CITDP persisted under tied-project/citdp/; REQ/ARCH/IMPL Implemented"
       - "client-development-index.md Quick read links appendix"
@@ -15,13 +15,13 @@ CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX:
       - "pre_implementation and verification gates allowed at minimal depth"
     unchanged_behavior: "Checklist gates, tied_verify defaults, and Kaizen transport deferrals unchanged."
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
       - "tied_gate_check pre_implementation and verification"
       - "tied_validate_consistency"
     proof_boundaries:
-      - "documentation_and_template_only"
       - "client_owned_ci_not_tied_core"
+      - "documentation_and_template_only"
   impact_analysis:
     impl_inventory_notes: "Doc + template + index + bootstrap test; IMPL pseudo-code sidecar."
     modules_or_boundaries: "tied-bundle/docs/ and tied-bundle/templates/ (methodology corpus)."
@@ -54,8 +54,8 @@ CITDP-REQ-TIED_CLIENT_DEVOPS_APPENDIX:
         - "docs/comparisons/claude-code-team-code-review-vs-tied.md"
         - "tied-project/feedback.yaml"
       falsification_questions:
-        - "Does appendix forbid TIED core ownership of pipelines?"
         - "Are Phases 1–4 cross-linked?"
+        - "Does appendix forbid TIED core ownership of pipelines?"
       gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null

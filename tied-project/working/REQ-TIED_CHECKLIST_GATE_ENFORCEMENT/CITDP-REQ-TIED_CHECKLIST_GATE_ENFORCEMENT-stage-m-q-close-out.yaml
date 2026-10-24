@@ -47,7 +47,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out:
     traceable_commit: "Final gate receipt, CHANGELOG, and staged M-Q implementation set are the traceability evidence; no commit is created by this worker."
     verification_gate_notes: "Close-out gate must consume the consolidated Authoritative Tracker, this CITDP, and activation collected from working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/adversarial-inquiry/phase-close_out/. Status verification follows the same allowed gate result."
   evidence:
-    commands:
+    command_seq:
       - "go test ./... (from tools/agentstream)"
       - "node --test mcp-server/dist/tools/adherence-reconcile-mcp.test.js"
       - "npm run build --prefix mcp-server"
@@ -169,7 +169,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out:
       - "Successful advisory close-out with valid artifacts and non-blocking advisory diagnostics."
       - "Successful integrated close-out with phase-bound activation and zero blocking diagnostics."
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./... (from tools/agentstream)"
       - "node --test mcp-server/dist/tools/adherence-reconcile-mcp.test.js"
       - "npm run build --prefix mcp-server"

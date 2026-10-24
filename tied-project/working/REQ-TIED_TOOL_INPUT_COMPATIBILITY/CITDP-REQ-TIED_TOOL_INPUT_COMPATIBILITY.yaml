@@ -3,54 +3,60 @@ CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY:
     current_behavior: "MCP write tools declare record-shaped arguments as z.string(); agents sending native JSON objects receive JSON-RPC -32602 invalid params. parseRecordOrYaml handles strings only. tied-cli stdio client emits generic ERROR lines without machine-readable hindrance classification."
     desired_behavior: "Record-shaped write fields accept z.union(string, record object); shared normalizeRecordPayload coerces to the same internal record before canonical YAML writes. Legacy string callers unchanged. tied-mcp-stdio-client emits DIAGNOSTIC: TIED_CLI_HINDRANCE on transport/validation failures with recovery hints; exit codes unchanged; no automatic feedback from failure path."
     non_goals:
-      - "ISO 9001 certification claims"
       - "Automatic tied_feedback_add from CLI hindrance path"
       - "Changing REQ-TIED_UNIFIED_TOOLCHAIN scope"
       - "Converting tied_feedback_add.context to object union (remains JSON string)"
+      - "ISO 9001 certification claims"
     success_criteria:
-      - "REQ/ARCH/IMPL tokens persisted with cross-references"
-      - "IMPL pseudo-code passes pseudocode_validate gate mode"
-      - "RED/GREEN tests prove object/string parity and rejection of null/array/primitive"
       - "CLI regression proves hindrance diagnostic + unchanged exit codes"
+      - "IMPL pseudo-code passes pseudocode_validate gate mode"
       - "Kaizen capture + outcome recorded for baseline -32602 observation"
       - "pre_implementation gate allowed at integrated depth"
+      - "RED/GREEN tests prove object/string parity and rejection of null/array/primitive"
+      - "REQ/ARCH/IMPL tokens persisted with cross-references"
     unchanged_behavior:
       - "parseRecordOrYaml string parsing and error text"
       - "Project-only MCP write isolation"
       - "Tools already accepting z.record payloads"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+      run_id: "ntic-close-out-20261020-r1"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && node --test src/parse-content.test.ts src/tools/yaml-canonicalization-mcp.test.ts"
       - "cd mcp-server && node --test test/tied-cli-large-args.test.cjs"
       - "cd mcp-server && npx tsc -b"
       - "tied_validate_consistency"
     proof_boundaries:
-      - "mcp_server_unit_and_composition_tests"
       - "does_not_prove_every_third_party_mcp_client"
+      - "mcp_server_unit_and_composition_tests"
   impact_analysis:
     impl_inventory_notes: "parse-content.ts normalizer; tools/index.ts write tool schemas; tied-mcp-stdio-client.cjs diagnostics; bundled tied-yaml docs."
     modules_or_boundaries: "mcp-server/src/parse-content.ts; mcp-server/src/tools/index.ts; tools/bundled-tied-yaml-skill/scripts/"
     tied_tokens_affected:
-      - "REQ-TIED_SETUP"
       - "IMPL-TIED_FILES"
+      - "REQ-TIED_SETUP"
     tied_tokens_new:
-      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
       - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"
       - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  persist_policy: "Persist to tied-project/citdp/ after implementation complete"
   record_identity:
     change_request_id: "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
     checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
     depth_tier: "integrated"
     gate_policy: "advisory"
+    implementation_depth_tier: "integrated"
     profile_depth: "not_measured"
     recorded_at: "2026-10-20"
     title: "Native MCP record inputs and CLI hindrance diagnostics"
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
-    implementation_depth_tier: "integrated"
   risk_analysis:
     abuse_cases:
-      - "Non-plain object payloads bypass validation"
       - "Diagnostic misclassified recovery hints cause unsafe retries"
+      - "Non-plain object payloads bypass validation"
     adversarial_inquiry:
       assurance_profile: "external-input-security"
       counterexamples:
@@ -60,17 +66,17 @@ CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY:
       disconfirming_observations:
         - "Any production code change during refine-plan pass 1"
       eligibility_triggers_matched:
+        - "ai_enabled_tool_boundary"
         - "external_input"
         - "persistence"
-        - "ai_enabled_tool_boundary"
       evidence_references:
-        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md"
-        - "tied-project/implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION-pseudocode.md"
         - "mcp-server/src/parse-content.ts"
+        - "tied-project/implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION-pseudocode.md"
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md"
       falsification_questions:
+        - "Are null/array/primitive rejected identically for string and object paths?"
         - "Do schema tests fail when a write tool omits union typing?"
         - "Does CLI diagnostic preserve legacy exit codes under regression?"
-        - "Are null/array/primitive rejected identically for string and object paths?"
       gate_policy: "advisory"
       integrated_waiver: null
       prior_depth_tier: null
@@ -107,9 +113,3 @@ CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY:
         threshold: "exit code unchanged vs baseline"
   test_strategy:
     path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/test-strategy.md"
-  completion_criteria:
-    activation:
-      run_id: ntic-close-out-20261020-r1
-      phase: close_out
-      request_token: REQ-TIED_TOOL_INPUT_COMPATIBILITY
-  persist_policy: "Persist to tied-project/citdp/ after implementation complete"
