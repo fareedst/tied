@@ -1,0 +1,53 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "kaizen-p2-verify-20261007",
+  "commit": "229ab6b863084532b23296c41f1161dc0ff1b169",
+  "environment": { "node": "local", "os": "darwin" },
+  "command_results": [
+    {
+      "id": "kaizen-p2-tests",
+      "command": ["npx", "tsx", "--test", "src/feedback-source-normalization.test.ts", "src/feedback-capture.test.ts", "src/feedback-promotion.test.ts", "src/tools/batch-5-mcp.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 500,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/quality-artifacts/kaizen-p2-tests.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/quality-artifacts/kaizen-p2-tests.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "source-normalization-contract",
+      "attribute": "Shared kind and entry_type inference",
+      "applicability": "applicable",
+      "rationale": "Integrated depth Phase 2 persistence adapters",
+      "evidence_method": "unit and composition tests",
+      "command_or_test": "kaizen-p2-tests",
+      "result": "passed"
+    },
+    {
+      "id": "e2e",
+      "attribute": "E2E UI",
+      "applicability": "not_applicable",
+      "rationale": "MCP module tests suffice per CITDP",
+      "evidence_method": "CITDP test strategy",
+      "result": "not_applicable"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-KAIZEN_SOURCE_NORMALIZATION",
+    "IMPL-KAIZEN_SOURCE_NORMALIZATION",
+    "REQ-KAIZEN-SOURCE-NORMALIZATION"
+  ],
+  "proof_boundaries": [
+    "Does not prove upstream transport or digest (Phase 3+)"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": [
+      "tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/CITDP-REQ-KAIZEN-SOURCE-NORMALIZATION.yaml"
+    ]
+  }
+}

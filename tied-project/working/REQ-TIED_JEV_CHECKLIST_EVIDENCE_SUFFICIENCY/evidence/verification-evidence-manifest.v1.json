@@ -1,0 +1,70 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "closeout-2026-09-30",
+  "commit": "7c7b110c62ef4ff21a849cf022c54c73a9ee7a98",
+  "environment": {
+    "node": "v25.9.0",
+    "bun": "1.3.9"
+  },
+  "command_results": [
+    {
+      "id": "blueprint-c-feature-tests",
+      "command": [
+        "bun",
+        "test",
+        "checklist-evidence-sufficiency",
+        "checklist-evidence-sufficiency-mcp",
+        "checklist-gate-mcp",
+        "jev.test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "mcp-server-build",
+      "command": ["bun", "run", "build"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "blueprint-c-pre-gate",
+      "attribute": "evidence_sufficiency_pre_gate",
+      "applicability": "applicable",
+      "rationale": "Blueprint C opt-in pre-gate, MCP hook, benchmark arms",
+      "evidence_method": "automated_test",
+      "command_or_test": "checklist-evidence-sufficiency*.test.ts + mcp composition",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "blueprint-c-adversarial-verification",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Mode B inquiry PASS for pre_implementation, verification, close_out",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "adversarial-inquiry/phase-*/gate-result.json",
+      "result": "passed",
+      "owner": "verification-gate"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+    "ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY",
+    "IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY"
+  ],
+  "proof_boundaries": [
+    "Mocked Jev in CI; live Jev optional via replay --live",
+    "Agentstream DAE composition deferred",
+    "Machine close-out envelope sync at close_out phase"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

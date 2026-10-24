@@ -1,0 +1,30 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "plan-close-out-2026-09-27",
+  "commit": "21ff5d4b2106891c9a6082c647447356a361268e",
+  "command_results": [
+    {
+      "id": "bbce-analysis-unit-tests",
+      "command": [
+        "node",
+        "--test",
+        "dist/analysis/bbce-shared-code-justification.test.js",
+        "dist/analysis/bbce-boundary-violation-report.test.js",
+        "dist/analysis/change-locality-pilot.test.js"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "summary": "12 pass (4 B + 4 C + 4 locality)"
+    },
+    {
+      "id": "tied-validate-consistency",
+      "command": ["tied_validate_consistency"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ],
+  "scope_tokens": [],
+  "notes": "PLAN-TIED-BBCE-ALIGNMENT program close-out; no project REQ tokens; advisory pilot W0–W4."
+}

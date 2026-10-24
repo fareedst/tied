@@ -1,0 +1,27 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "generated_at": "2026-09-27T14:10:00.000Z",
+  "request_token": "REQ-TIED_CLIENT_REFRESH_PARITY",
+  "commands": [
+    {
+      "command": "ruby scripts/yaml_semantic_compare_load_test.rb",
+      "exit_code": 0,
+      "evidence_path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/ruby-load-test.txt"
+    },
+    {
+      "command": "ruby scripts/compare_yaml_dirs_test.rb",
+      "exit_code": 0,
+      "evidence_path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/ruby-compare-dirs-test.txt"
+    },
+    {
+      "command": "node --test tools/bootstrap/lib/methodology-template-only-allowlist.test.mjs tools/bootstrap/lib/client-refresh-parity.test.mjs tools/bootstrap/lib/copy-managed.test.mjs",
+      "exit_code": 0,
+      "evidence_path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/bootstrap-lib-tests.txt"
+    },
+    {
+      "command": "node tools/bootstrap/verify-client-methodology.mjs /Users/fareed/Documents/dev/test/1790492487",
+      "exit_code": 0,
+      "evidence_path": "working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/verify-disposable-client.txt"
+    }
+  ]
+}

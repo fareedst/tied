@@ -1,0 +1,56 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "pcr-plan-close-out-20261018",
+  "commit": "9b259603018e5c1586478186cdf30487f9d3295c",
+  "environment": {
+    "node": "v25.9.0",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "TIED_BASE_PATH": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project"
+  },
+  "command_results": [
+    {
+      "id": "pcr-co-build",
+      "command": ["npm", "run", "build", "--prefix", "mcp-server"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "pcr-co-unit",
+      "command": ["node", "--import", "tsx", "--test", "src/process-certification-readiness/*.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "pcr-co-tsc",
+      "command": ["npx", "tsc", "-b"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "pcr-co-tied-validate",
+      "command": [".cursor/skills/tied-yaml/scripts/tied-cli.sh", "tied_validate_consistency"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "pcr-co-tied-verify",
+      "command": ["tied_verify", "REQ-TIED_PROCESS_CERTIFICATION_READINESS"],
+      "note": "Authoritative status at build verification",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/tied-verify-20261018.json"
+      ]
+    }
+  ],
+  "request_token": "REQ-TIED_PROCESS_CERTIFICATION_READINESS",
+  "phase": "plan-close-out"
+}

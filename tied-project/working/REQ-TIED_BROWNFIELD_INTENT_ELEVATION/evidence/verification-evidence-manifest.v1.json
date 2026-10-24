@@ -1,0 +1,61 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "bfie-closeout-2026-10-13",
+  "commit": "414817057a2558cc43436aa7859c11f5b5ec9b5e",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "bfie-brownfield-tests",
+      "command": [
+        "npm",
+        "test",
+        "--prefix",
+        "mcp-server",
+        "--",
+        "brownfield-intent-evidence"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 31991,
+      "artifacts": [
+        "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/quality-manifest/bfie-brownfield-tests.stderr.txt",
+        "tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/quality-manifest/bfie-brownfield-tests.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "CITDP quality profile matrix",
+      "evidence_method": "automated",
+      "result": "passed"
+    },
+    {
+      "id": "read-only-validation",
+      "attribute": "read-only-validation",
+      "applicability": "applicable",
+      "rationale": "CITDP quality profile matrix",
+      "evidence_method": "automated",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL",
+    "IMPL-TIED_BROWNFIELD_VALIDATION",
+    "PROC-BROWNFIELD_INTENT_ELEVATION",
+    "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+  ],
+  "proof_boundaries": [
+    "baseline-functional",
+    "read-only-validation"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

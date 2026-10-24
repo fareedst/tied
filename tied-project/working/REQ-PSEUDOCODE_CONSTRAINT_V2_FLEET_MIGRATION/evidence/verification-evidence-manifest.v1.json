@@ -1,0 +1,52 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "fleet-migration-phase4-closeout-20260913",
+  "commit": "b568c983e69c8959be3035e783c2e5b7a8c8a94d",
+  "environment": {
+    "os": "darwin",
+    "runtime": "bun"
+  },
+  "command_results": [
+    {
+      "id": "fleet-qualification-unit-tests",
+      "command": [
+        "bun",
+        "test",
+        "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 70,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/quality/fleet-qualification-unit-tests-closeout/fleet-qualification-unit-tests.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/quality/fleet-qualification-unit-tests-closeout/fleet-qualification-unit-tests.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "fleet-harness-unit",
+      "attribute": "executable_behavior",
+      "applicability": "applicable",
+      "rationale": "Phase 4 closeout seq 6 — run-fleet-* composition paths covered by qualification script unit tests",
+      "evidence_method": "automated_test",
+      "command_or_test": "bun test working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts",
+      "result": "passed",
+      "owner": "orchestrator",
+      "limitation": "Unit scope only; E2E UI not in matrix"
+    }
+  ],
+  "covered_tokens": [
+    "IMPL-PSEUDOCODE_FLEET_MIGRATION_ORCHESTRATION",
+    "IMPL-PSEUDOCODE_MIGRATION_TOOLING",
+    "REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION"
+  ],
+  "proof_boundaries": [
+    "Fleet qualification scripts prove harness helpers; not full multi-repo client gate replay"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "phase8-verify-2026-10-02",
+  "commit": "e82cd9dbcf8de1571a6c33a7d20b93bf3ba7c5cc",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": [
+        "bash",
+        "-lc",
+        "npm test --prefix mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 31391,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-2",
+      "command": [
+        "bash",
+        "-lc",
+        "source scripts/build-commands.sh && test-all"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 38996,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-3",
+      "command": [
+        "bash",
+        "-lc",
+        "source scripts/build-commands.sh && lint_tied"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 611,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [],
+  "covered_tokens": [
+    "ARCH-TIED_STRUCTURE",
+    "IMPL-TIED_FILES",
+    "PROC-TIED_METHODOLOGY_READONLY",
+    "REQ-TIED_LAYERED_CLIENT_INSTALL",
+    "REQ-TIED_SETUP"
+  ],
+  "proof_boundaries": [
+    "baseline-functional",
+    "install/MCP structural parity"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

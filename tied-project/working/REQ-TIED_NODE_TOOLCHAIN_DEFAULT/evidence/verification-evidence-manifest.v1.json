@@ -1,0 +1,80 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "node-toolchain-closeout-2026-10-03",
+  "commit": "f320f9a17ab84949eecf6feaa9eae3716f509b8d",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": [
+        "bash",
+        "-lc",
+        "cd mcp-server && npm run build && npm test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 33133,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-2",
+      "command": [
+        "bash",
+        "-lc",
+        "cd mcp-server && npx tsc -b"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 755,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ]
+    },
+    {
+      "id": "citdp-evidence-3",
+      "command": [
+        "bash",
+        "-lc",
+        "TIED_BASE_PATH=tied-project TIED_MCP_BIN=mcp-server/dist/index.js tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_validate_consistency '{}'"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 1615,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "CITDP quality profile matrix",
+      "evidence_method": "command",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_NODE_TOOLCHAIN_DEFAULT",
+    "IMPL-TIED_NODE_TOOLCHAIN_DEFAULT",
+    "REQ-TIED_NODE_TOOLCHAIN_DEFAULT"
+  ],
+  "proof_boundaries": [
+    "Historical tied-project/citdp and quality-manifest stderr with bunx unchanged"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

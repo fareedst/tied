@@ -1,0 +1,61 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "kaizen-p4-verify-20261007",
+  "commit": "c4cc94fcad49350d4224cfea92620ee94d5c8890",
+  "environment": { "node": "local", "os": "darwin" },
+  "command_results": [
+    {
+      "id": "kaizen-p4-tests",
+      "command": ["npx", "tsx", "--test", "src/feedback-analysis.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 140,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/quality-artifacts/kaizen-p4-tests.stdout.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/quality-artifacts/kaizen-p4-tsc.stderr.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "feedback-analysis-golden-fixtures",
+      "attribute": "Read-only digest projection and golden fixture matrix",
+      "applicability": "applicable",
+      "rationale": "Phase 4 integrated depth unit module validation",
+      "evidence_method": "unit tests",
+      "command_or_test": "kaizen-p4-tests",
+      "result": "passed"
+    },
+    {
+      "id": "mcp-export-composition",
+      "attribute": "MCP tied_feedback_analysis_digest binding",
+      "applicability": "not_applicable",
+      "rationale": "Optional Phase 4 composition deferred per CITDP; local digest API only",
+      "evidence_method": "CITDP test strategy",
+      "result": "not_applicable"
+    },
+    {
+      "id": "e2e",
+      "attribute": "E2E UI",
+      "applicability": "not_applicable",
+      "rationale": "Pure unit projection module",
+      "evidence_method": "CITDP test strategy",
+      "result": "not_applicable"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-KAIZEN_FEEDBACK_ANALYSIS",
+    "IMPL-KAIZEN_FEEDBACK_ANALYSIS",
+    "REQ-KAIZEN-FEEDBACK-ANALYSIS"
+  ],
+  "proof_boundaries": [
+    "Does not prove Phase 5 review bridge or Phase 3 transport"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": [
+      "tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/CITDP-REQ-KAIZEN-FEEDBACK-ANALYSIS.yaml"
+    ]
+  }
+}

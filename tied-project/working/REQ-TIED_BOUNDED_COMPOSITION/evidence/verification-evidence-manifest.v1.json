@@ -1,0 +1,44 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "bc-plan-close-out-20261018",
+  "commit": "uncommitted",
+  "environment": {
+    "node": "v25.9.0",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "TIED_BASE_PATH": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project"
+  },
+  "command_results": [
+    {
+      "id": "bc-co-build",
+      "command": ["npm", "run", "build", "--prefix", "mcp-server"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "bc-co-unit",
+      "command": ["node", "--import", "tsx", "--test", "src/bounded-composition/*.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": ["tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/bounded-composition-test-slice5.txt"]
+    },
+    {
+      "id": "bc-co-tsc",
+      "command": ["npx", "tsc", "-b"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    },
+    {
+      "id": "bc-co-tied-validate",
+      "command": [".cursor/skills/tied-yaml/scripts/tied-cli.sh", "tied_validate_consistency"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    }
+  ]
+}

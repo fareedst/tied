@@ -1,0 +1,52 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-cwgh-2026-10-23",
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "bootstrap-gitignore-tests",
+      "command": [
+        "node",
+        "--test",
+        "tools/bootstrap/lib/committed-working-gitignore.test.mjs",
+        "tools/bootstrap/lib/working-gitignore.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE/evidence/bootstrap-gitignore-tests.stdout.txt"
+      ]
+    },
+    {
+      "id": "mcp-scoped-tests",
+      "command": [
+        "npx",
+        "tsx",
+        "--test",
+        "src/working-root.test.ts",
+        "src/methodology-conformance-effectiveness-pairing/pairing-gate.test.ts",
+        "src/methodology-conformance-effectiveness-pairing/methodology-conformance-effectiveness-pairing.mcp.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE/evidence/mcp-scoped-tests.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [],
+  "covered_tokens": [
+    "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE",
+    "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE",
+    "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+  ],
+  "proof_boundaries": ["baseline-functional", "committed working git hygiene"],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

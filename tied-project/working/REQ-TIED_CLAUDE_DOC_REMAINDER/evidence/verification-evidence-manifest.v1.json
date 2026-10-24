@@ -1,0 +1,53 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-REQ-TIED_CLAUDE_DOC_REMAINDER-20260924",
+  "commit": "eb992104ec3fe22b2659292bc1bdcf4957ffd622",
+  "environment": {
+    "node": "v25.9.0",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": [
+        "bash",
+        "-lc",
+        "cd mcp-server/packages/agentstream && npm test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 8843,
+      "threshold": "53 pass, 0 fail",
+      "artifacts": [
+        "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "R7 oracle maintenance agentstream suite",
+      "evidence_method": "command",
+      "command_or_test": "cd mcp-server/packages/agentstream && npm test",
+      "threshold": "53 pass, 0 fail",
+      "result": "passed",
+      "owner": "plan-close-out DOC_REMAINDER",
+      "limitation": "no_live_claude_in_ci"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_CLAUDE_DOC_REMAINDER",
+    "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  ],
+  "proof_boundaries": [
+    "no_live_claude_in_ci"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "evidence-collect-2026-09-24T02-48-25-164Z",
+  "commit": "afa3e713c98322aa2a35be08aed35c4ebd8945d9",
+  "environment": {
+    "node": "v25.9.0",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "agentstream-npm-test",
+      "command": [
+        "bash",
+        "-lc",
+        "cd mcp-server/packages/agentstream && npm test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 8039,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/quality-manifest/agentstream-npm-test.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/quality-manifest/agentstream-npm-test.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional-agentstream",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "Fixture-gated Claude live driver suites + regressions",
+      "evidence_method": "automated_test",
+      "command_or_test": "cd mcp-server/packages/agentstream && npm test",
+      "threshold": "52 pass, 0 fail",
+      "result": "passed",
+      "owner": "build-plan REQ A",
+      "limitation": "No live Claude subprocess in CI"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-TIED_CLAUDE_LIVE_DRIVER",
+    "IMPL-TIED_CLAUDE_LIVE_DRIVER",
+    "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  ],
+  "proof_boundaries": [
+    "fixtures/claude/ is the only Claude oracle root",
+    "No live Claude subprocess in CI for v1",
+    "Synthetic v1 NDJSON oracles until CLI capture"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "kaizen-p1-verify-20261007",
+  "commit": "ee8afd7354988381749eb27be470b843c1bd1ddb",
+  "environment": {
+    "node": "local",
+    "os": "darwin"
+  },
+  "command_results": [
+    {
+      "id": "kaizen-capture-tests",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "src/feedback-capture.test.ts",
+        "src/feedback.test.ts",
+        "src/tools/batch-5-mcp.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 397,
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/quality-artifacts/kaizen-capture-tests.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/quality-artifacts/kaizen-capture-tests.stdout.txt"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "capture-contract",
+      "attribute": "Phase 1 capture receipt and idempotency",
+      "applicability": "applicable",
+      "rationale": "Integrated depth external input persistence",
+      "evidence_method": "unit and composition tests",
+      "command_or_test": "kaizen-capture-tests",
+      "result": "passed"
+    },
+    {
+      "id": "e2e",
+      "attribute": "E2E UI",
+      "applicability": "not_applicable",
+      "rationale": "MCP file append suffices per CITDP",
+      "evidence_method": "CITDP test strategy",
+      "result": "not_applicable"
+    }
+  ],
+  "covered_tokens": [
+    "ARCH-KAIZEN_OBSERVATION_CAPTURE",
+    "IMPL-KAIZEN_OBSERVATION_CAPTURE",
+    "REQ-KAIZEN-OBSERVATION-CAPTURE"
+  ],
+  "proof_boundaries": [
+    "Does not prove upstream transport, digest, or kind normalization (Phase 2+)"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": [
+      "tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/CITDP-REQ-KAIZEN-OBSERVATION-CAPTURE.yaml"
+    ]
+  }
+}

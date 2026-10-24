@@ -1,0 +1,62 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "closeout-2026-09-30",
+  "commit": "d8fc09d7f63279f247a983949a1dea26e58fe7ef",
+  "environment": {
+    "node": "v25.9.0",
+    "bun": "1.3.9",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "blueprint-d-feature-tests",
+      "command": [
+        "bun",
+        "test",
+        "src/jev/harness-tool-guard.test.ts",
+        "src/jev/tool-safety-benchmark.test.ts",
+        "src/tools/tool-safety-mcp.test.ts",
+        "packages/agentstream/src/jev-harness-live-tool-gate.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": []
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "blueprint-d-tool-safety",
+      "attribute": "harness_tool_safety_gating",
+      "applicability": "applicable",
+      "rationale": "Blueprint D guard, benchmark five arms, diagnostic MCP, live workspace seam",
+      "evidence_method": "automated_test",
+      "command_or_test": "harness-tool-guard + tool-safety-mcp + jev-harness-live-tool-gate tests",
+      "result": "passed",
+      "owner": "verification-gate"
+    },
+    {
+      "id": "blueprint-d-adversarial-inquiry",
+      "attribute": "integrated_adversarial_inquiry",
+      "applicability": "applicable",
+      "rationale": "Mode A inquiry PASS for pre_implementation, verification, close_out",
+      "evidence_method": "tied_adversarial_inquiry_run",
+      "command_or_test": "adversarial-inquiry/phase-*/gate-result.json",
+      "result": "passed",
+      "owner": "verification-gate"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_JEV_TOOL_SAFETY_GATING",
+    "ARCH-TIED_JEV_TOOL_SAFETY_GATING",
+    "IMPL-TIED_JEV_TOOL_SAFETY_GATING"
+  ],
+  "proof_boundaries": [
+    "Mocked Jev in CI; live Jev optional via replay --live",
+    "Harness opt-in default off; diagnostic MCP never emits checklist gate authority"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "mcm-verification-full-fill-2026-10-13",
+  "commit": null,
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "command_results": [
+    {
+      "id": "mcm-row-count-section1",
+      "command": [
+        "awk",
+        "/^## §1/{p=1} /^## §2/{p=0} p && /^\\| [0-9]+ \\|/{c++} END{print c}",
+        "docs/comparisons/methodology-composition-matrix.md"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "expected": "27",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/row-count-section1.txt"
+      ]
+    },
+    {
+      "id": "mcm-row-count-section2",
+      "command": [
+        "awk",
+        "/^## §2/{p=1} /^## §3/{p=0} p && /^\\| [0-9]+ \\|/{c++} END{print c}",
+        "docs/comparisons/methodology-composition-matrix.md"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "expected": "10",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/row-count-section2.txt"
+      ]
+    },
+    {
+      "id": "mcm-mechanism-fill-audit",
+      "command": [
+        "manual",
+        "mechanism-fill-verification.v1.json"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "expected": "37/37",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/mechanism-fill-verification.v1.json"
+      ]
+    },
+    {
+      "id": "mcm-no-tbd-in-data-rows",
+      "command": [
+        "rg",
+        "_TBD_",
+        "docs/comparisons/methodology-composition-matrix.md"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "note": "Only §3 checklist prose mentions _TBD_; table data rows have no _TBD_ cells",
+      "artifacts": []
+    },
+    {
+      "id": "mcm-lint-yaml",
+      "command": [
+        "scripts/lint_yaml.sh",
+        "tied-project/requirements/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml",
+        "tied-project/architecture-decisions/ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml",
+        "tied-project/implementation-decisions/IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/lint-yaml-2026-10-13-full-fill.stdout.txt"
+      ]
+    },
+    {
+      "id": "mcm-tied-validate-consistency",
+      "command": [
+        "MCP",
+        "tied_validate_consistency"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/tied-validate-consistency-2026-10-13-full-fill.json"
+      ]
+    }
+  ],
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "not_applicable",
+      "rationale": "Docs-only outreach; no executable behavior under test.",
+      "evidence_method": "manual",
+      "result": "not_applicable"
+    }
+  ],
+  "proof_boundary": "Row inventory, full mechanism fill (37/37), link resolution, YAML lint, and TIED traceability only — not external-standard compliance."
+}
