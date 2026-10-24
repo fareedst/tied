@@ -265,6 +265,33 @@ tied/
   docs/detail-files-schema.md       # schema for detail YAML files
 ```
 
+## Close-out recovery (Wave 5 completion pass)
+
+When machine close-out looks green but Tracker dispositions, envelope, or reconcile lag, run recovery on the **same** `request_token` before YAML status updates or completion claims. Full handoff slug and checklist order: [close-out-wave5-completion-pass.md](../bundled-prompt-type-skills/prompt-shared/close-out-wave5-completion-pass.md).
+
+1. **`tied_config_get_base_path`** — confirm writes target the intended `tied-project/`.
+2. **`project_root`** — git repo root (parent of `tied-project/`), not `TIED_BASE_PATH` alone, for `tied_adherence_reconcile_run` and `run-close-out-gates.mjs`.
+3. **Gate runner** (from repo root; paths relative to `project_root`):
+
+```bash
+node tools/bootstrap/templates/run-close-out-gates.mjs \
+  --project-root "$REPO_ROOT" \
+  --request-token REQ-EXAMPLE \
+  --tracker-path tied-project/working/REQ-EXAMPLE/checklist-tracker.yaml \
+  --citdp-path tied-project/working/REQ-EXAMPLE/CITDP-REQ-EXAMPLE.yaml \
+  --phase close_out \
+  --envelope-blocking \
+  --sync-dispositions \
+  --reconcile
+```
+
+4. **MCP parity** — `tied_gate_check` / `tied_checklist_gate_validate` with the same paths and `project_root`; `tied_adherence_reconcile_run` with `include_process_grade: true` when the checklist requires ledger correlation.
+5. **Receipts** — persist `evidence/closeout-run-close-out-gates.json`; dual-write Tracker `execution_evidence` and `steps[].tracking` in one pass.
+6. **Bootstrap deps** — ensure repo root artifacts the close-out tooling expects exist (e.g. root `VERSION` when envelope tooling requires it) before re-running gates.
+7. **After recovery** — three completion signals per [completion-signals-handoff.md](../bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md); then `tied_validate_consistency` if project YAML changed.
+
+Do not use ad-hoc gate MCP calls as a substitute for disposition sync when `sub-close-out-evidence-sync` is still pending.
+
 ## Additional resources
 
 - **Central index (easiest YAML update paths):** in this repository, [tied-bundle/docs/tied-yaml-agent-index.md](../../tied-bundle/docs/tied-yaml-agent-index.md) links the skill, MCP runbook, checklist, schema, and payload guidance in one place.

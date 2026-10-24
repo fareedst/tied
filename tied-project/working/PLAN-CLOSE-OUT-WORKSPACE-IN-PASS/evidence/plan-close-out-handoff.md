@@ -12,5 +12,5 @@
 
 ### Remaining risks
 
-- Pending LEAP `lp-2026-10-24T16-33-13-575Z-707c63d33f60` still **pending** (tied-yaml close-out recovery doc not in this commit).
+- LEAP `lp-2026-10-24T16-33-13-575Z-707c63d33f60` **applied** 2026-10-24 — see [leap-close-out-handoff.md](../../LEAP-CLOSE-OUT-COMPLETION-PASS/evidence/leap-close-out-handoff.md).
 - Repo may still show unrelated dirty paths (other REQs, mcp fixtures) — expected per scoped close-out policy.

@@ -1,6 +1,7 @@
 {
   "proposals": [
     {
+      "approval_note": "Track B doc/skill addendum complete 2026-10-24: close-out-wave5-completion-pass.md, completion-signals, tied-yaml recovery; hygiene slice PLAN-CLOSE-OUT-WORKSPACE-IN-PASS. Wave 5 tooling deferred per CITDP.",
       "created_at": "2026-10-24T16:33:13.575Z",
       "id": "lp-2026-10-24T16-33-13-575Z-707c63d33f60",
       "kind": "manual",
@@ -13,11 +14,11 @@
       "source": {
         "type": "manual"
       },
-      "status": "pending",
+      "status": "applied",
       "suggested_leap_order": "mixed",
       "summary": "Pending LEAP from store feedback fb-mvmmb3lp-723euw (client source fb-mvmlz1rk-tavn9z). Scope Track B only: document normative close-out completion pass in prompt-shared/completion-signals-handoff; tied-yaml skill close-out recovery procedure (items 1, 4, 5 from field feedback). Wave 5 tooling (items 2, 3, 5 tooling) stays in CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave5-process-adherence.\n\nEvidence: /Users/fareed/Documents/dev/test/1792857852/tied-project/working/REQ-GLOSSARY_RENAME_CHECK/evidence/close-out-handoff.md\nPlan: tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/PLAN.md\n\nImplemented slice (2026-10-24 build-plan): fb-mvmmq5pl-dxzvb6 scoped workspace hygiene — completion-signals-handoff, traceable-commit-close-out, clear-workspace-routing, tied-close-out-process; checklist traceable-commit drift note. PLAN-CLOSE-OUT-WORKSPACE-IN-PASS. Remaining Track B: tied-yaml close-out recovery procedure; Wave 5 completion-pass handoff slug.",
       "title": "Close-out completion pass (doc/skill addendum)",
-      "updated_at": "2026-10-24T16:50:04.513Z"
+      "updated_at": "2026-10-24T16:58:45.150Z"
     }
   ],
   "schema_version": "leap-proposal-queue.v1"

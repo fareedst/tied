@@ -23,6 +23,14 @@ This is **not** a fourth completion signal. It clarifies what “workspace clean
 
 **`@clear-workspace`** is a **router / recovery** skill when close-out did not finish or scope is ambiguous — not a mandatory follow-on after a **complete** `@close-out` on a named REQ. See [clear-workspace-routing.md](clear-workspace-routing.md).
 
+## Close-out completion pass (Wave 5)
+
+When **machine close-out** passes early but **process contract** or **adherence ledger** is still partial, run the normative **completion pass** on the **same** `request_token` (not a new phase): sync dispositions, reconcile, rebuild/validate envelope, then re-check all three signals before EXIT.
+
+**Operator reference:** [close-out-wave5-completion-pass.md](close-out-wave5-completion-pass.md) (handoff slug `close-out-wave5-completion`). **tied-yaml:** close-out recovery procedure in the bundled tied-yaml skill.
+
+Do not claim **complete** until either all three signals pass or the handoff documents explicit waivers.
+
 ## Handoff template (copy into parent return)
 
 ```markdown
