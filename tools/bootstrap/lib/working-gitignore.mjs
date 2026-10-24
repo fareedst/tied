@@ -22,6 +22,14 @@ export const COMMITTED_WORKING_REGENERABLE_NEGATIONS = [
   "!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/",
   "!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**",
 ];
+/**
+ * Regenerable under tied-project/working/ but not mirrored from tied-bundle/working/ globs.
+ * Gate trackers: `tied_checklist_activation_collect` outputs for `tied_checklist_gate_validate`.
+ */
+export const COMMITTED_WORKING_REGENERABLE_EXTRA_GLOBS = [
+  "tied-project/working/**/gate-tracker*.yaml",
+  "working/**/gate-tracker*.yaml",
+];
 /** Matches {@link GITIGNORE_BLOCK_BEGIN} in gitignore-block.mjs (avoid import cycle). */
 const GITIGNORE_INSTALL_MANAGED_BEGIN = "# BEGIN TIED INSTALL MANAGED";
 const GITIGNORE_INSTALL_MANAGED_END = "# END TIED INSTALL MANAGED";
@@ -219,6 +227,9 @@ export function buildCommittedWorkingRegenerableGlobs() {
     } else if (g.startsWith("tied-project/working/")) {
       out.add(g);
     }
+  }
+  for (const g of COMMITTED_WORKING_REGENERABLE_EXTRA_GLOBS) {
+    out.add(g);
   }
   return [...out].sort();
 }

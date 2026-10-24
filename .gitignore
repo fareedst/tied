@@ -193,10 +193,6 @@ working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGU
 
 # Per-REQ integrated gate runner scripts (regenerate per build-plan / close-out; includes run-phase3-gates.mjs)
 
-# BEGIN TIED STORE LOCAL WORKING (managed)
-tied-bundle/working/
-tied-bundle/install.json
-# END TIED STORE LOCAL WORKING (managed)
 # BEGIN TIED COMMITTED WORKING REGENERABLE (managed)
 tied-project/working/**/*-ledger.jsonl
 tied-project/working/**/*-remediation-log.yaml
@@ -223,6 +219,7 @@ tied-project/working/**/evidence/quality/**/*.stdout.txt
 tied-project/working/**/g*-dogfood/
 tied-project/working/**/gate-*.json
 tied-project/working/**/gate-args*.json
+tied-project/working/**/gate-tracker*.yaml
 tied-project/working/**/gates/
 tied-project/working/**/gates/quality-*-profile-result.json
 tied-project/working/**/jev/
@@ -247,9 +244,14 @@ tied-project/working/*-close-out-summary.json
 tied-project/working/client-*/
 tied-project/working/jev-decide-trace/
 tied-project/working/post-session/
+working/**/gate-tracker*.yaml
 !tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/
 !tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**
 # END TIED COMMITTED WORKING REGENERABLE (managed)
+# BEGIN TIED STORE LOCAL WORKING (managed)
+tied-bundle/working/
+tied-bundle/install.json
+# END TIED STORE LOCAL WORKING (managed)
 # BEGIN TIED INSTALL MANAGED
 .cursor/mcp.json
 .mcp.json
@@ -261,3 +263,4 @@ CLAUDE.md
 .claude/settings.json
 .claude/adherence-bridge.log
 # END TIED INSTALL MANAGED
+docs/visuals/2026-10-20.md

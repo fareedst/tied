@@ -15,6 +15,7 @@ import {
 test("buildCommittedWorkingRegenerableGlobs mirrors tied-bundle/working entries", () => {
   const globs = buildCommittedWorkingRegenerableGlobs();
   assert.ok(globs.some((g) => g === "tied-project/working/**/gate-*.json"));
+  assert.ok(globs.some((g) => g === "tied-project/working/**/gate-tracker*.yaml"));
   assert.ok(globs.some((g) => g.startsWith("tied-project/working/")));
   assert.ok(!globs.some((g) => g.startsWith("tied-bundle/working/")));
 });
@@ -34,11 +35,19 @@ test("temp repo: regenerable gate JSON ignored, PLAN.md trackable", () => {
       path.join(dir, "tied-project", "working", "REQ-X", "evidence", "gate-pre_implementation.json"),
       "{}\n",
     );
+    fs.writeFileSync(
+      path.join(dir, "tied-project", "working", "REQ-X", "gate-tracker-verification.yaml"),
+      "steps: []\n",
+    );
     execSync("git add .", { cwd: dir, stdio: "ignore" });
     const tracked = execSync("git ls-files", { cwd: dir, encoding: "utf8" }).trim().split("\n");
     assert.ok(tracked.includes("tied-project/working/REQ-X/PLAN.md"));
     assert.ok(!tracked.some((p) => p.includes("gate-pre_implementation.json")));
+    assert.ok(!tracked.some((p) => p.includes("gate-tracker-verification.yaml")));
     execSync("git check-ignore -q tied-project/working/REQ-X/evidence/gate-pre_implementation.json", {
+      cwd: dir,
+    });
+    execSync("git check-ignore -q tied-project/working/REQ-X/gate-tracker-verification.yaml", {
       cwd: dir,
     });
   } finally {
