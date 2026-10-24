@@ -1,0 +1,24 @@
+{
+  "proposals": [
+    {
+      "created_at": "2026-10-24T16:33:13.575Z",
+      "id": "lp-2026-10-24T16-33-13-575Z-707c63d33f60",
+      "kind": "manual",
+      "leap_hints": {
+        "related_req": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "source_feedback_id": "fb-mvmlz1rk-tavn9z",
+        "store_feedback_id": "fb-mvmmb3lp-723euw"
+      },
+      "non_canonical": true,
+      "source": {
+        "type": "manual"
+      },
+      "status": "pending",
+      "suggested_leap_order": "mixed",
+      "summary": "Pending LEAP from store feedback fb-mvmmb3lp-723euw (client source fb-mvmlz1rk-tavn9z). Scope Track B only: document normative close-out completion pass in prompt-shared/completion-signals-handoff; tied-yaml skill close-out recovery procedure (items 1, 4, 5 from field feedback). Wave 5 tooling (items 2, 3, 5 tooling) stays in CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave5-process-adherence.\n\nEvidence: /Users/fareed/Documents/dev/test/1792857852/tied-project/working/REQ-GLOSSARY_RENAME_CHECK/evidence/close-out-handoff.md\nPlan: tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/PLAN.md",
+      "title": "Close-out completion pass (doc/skill addendum)",
+      "updated_at": "2026-10-24T16:33:13.575Z"
+    }
+  ],
+  "schema_version": "leap-proposal-queue.v1"
+}

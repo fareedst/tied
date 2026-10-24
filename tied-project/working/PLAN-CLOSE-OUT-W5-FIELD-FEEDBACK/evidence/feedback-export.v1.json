@@ -1,0 +1,23 @@
+{
+  "plan_token": "PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK",
+  "exported_at": "2026-10-24T16:33:07.837Z",
+  "store_entry": {
+    "id": "fb-mvmmb3lp-723euw",
+    "type": "methodology_improvement",
+    "title": "Close-out Wave 5 addendum when machine pass precedes process contract",
+    "promotion_status": "promotion_pending",
+    "context": {
+      "source_feedback_id": "fb-mvmlz1rk-tavn9z",
+      "client_repo": "/Users/fareed/Documents/dev/test/1792857852",
+      "tied_version": "4.0.0",
+      "related_req": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "plan_token": "PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK",
+      "leap_proposal_pending": "lp-2026-10-24T16-33-13-575Z-707c63d33f60"
+    }
+  },
+  "leap_proposal": {
+    "id": "lp-2026-10-24T16-33-13-575Z-707c63d33f60",
+    "status": "pending",
+    "title": "Close-out completion pass (doc/skill addendum)"
+  }
+}

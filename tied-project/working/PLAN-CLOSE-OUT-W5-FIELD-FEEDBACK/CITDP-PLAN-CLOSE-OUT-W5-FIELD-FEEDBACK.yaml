@@ -1,0 +1,81 @@
+CITDP-PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK:
+  change_definition:
+    current_behavior: "Client demo repo /Users/fareed/Documents/dev/test/1792857852 holds methodology_improvement feedback fb-mvmlz1rk-tavn9z (full body, 2026-10-24). stdd tied-project/feedback.yaml has no store copy; Wave 5 CITDP and PLAN-TIED-4.0-RESPONSE-STAMP describe desired close-out integrity but lack this field receipt in the store feedback store."
+    desired_behavior: "One store methodology_improvement entry appended via MCP tied_feedback_add with context linking source_feedback_id fb-mvmlz1rk-tavn9z, client evidence paths, and related_req REQ-TIED_CHECKLIST_GATE_ENFORCEMENT; optional pending LEAP proposal for close-out completion pass doc/skill addendum; export confirms traceability."
+    non_goals:
+      - "Auto-bridge to methodology experiment on capture"
+      - "Committing feedback.yaml unless sponsor requests traceable-commit"
+      - "Implementing Wave 5 tooling (envelope, run-close-out-gates.mjs) in this PLAN token"
+      - "Minting REQ-CLOSE_OUT_COMPLETION_PASS without sponsor LEAP approve"
+    success_criteria:
+      - "After build-plan: stdd tied-project/feedback.yaml contains one new entry with context.source_feedback_id fb-mvmlz1rk-tavn9z"
+      - "pre_implementation checklist gate allowed at minimal depth"
+      - "tied_feedback_export lists store entry title Close-out Wave 5 addendum when machine pass precedes process contract"
+      - "Working PLAN links client close-out-handoff.md and Wave 5 CITDP"
+    unchanged_behavior: "[REQ-FEEDBACK_TO_TIED] appendEntry generates new store id; Kaizen bridge remains explicit-only per [REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE]."
+  evidence:
+    command_seq:
+      - "tied_config_get_base_path"
+      - "tied_feedback_add (once per PLAN token) with promotion_status promotion_pending"
+      - "tied_feedback_export format json and markdown"
+      - "tied_gate_check phase pre_implementation and verification (tracker_path + citdp_path)"
+    proof_boundaries:
+      - "does_not_prove_wave5_tooling_shipped"
+      - "local_feedback_store_ingest_only"
+  impact_analysis:
+    impl_inventory_notes: "No IMPL pseudo-code or production code mutation in PLAN-token scope."
+    modules_or_boundaries: "tied-project/feedback.yaml; optional leap-proposals queue entry."
+    tied_tokens_affected:
+      - "REQ-FEEDBACK_TO_TIED"
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-24"
+    title: "Ingest client Wave 5 close-out field feedback into store"
+  risk_analysis:
+    abuse_cases:
+      - "Duplicate ingest without source_feedback_id conflates client and store ids"
+      - "Field feedback treated as enacted Wave 5 policy without CITDP"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Store append omits client evidence path so digest cannot trace handoff."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Hand-edited feedback.yaml bypassing MCP canonical writer."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "/Users/fareed/Documents/dev/test/1792857852/tied-project/feedback.yaml"
+        - "/Users/fareed/Documents/dev/test/1792857852/tied-project/working/REQ-GLOSSARY_RENAME_CHECK/evidence/close-out-handoff.md"
+        - "tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave5-process-adherence.yaml"
+        - "tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/PLAN.md"
+      falsification_questions:
+        - "Are addendum items labeled recommendations-only vs Wave 5 deliverables?"
+        - "Is source_feedback_id preserved in context?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Non-behavior-changing store feedback ingest; external client path cited in content only."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "tied_feedback_export after append"
+        evidence_method: "MCP tool output"
+        evidence_ref: "context.source_feedback_id fb-mvmlz1rk-tavn9z"
+        limitation: "Does not validate LEAP approval or Wave 5 code ship."
+        owner: "agent"
+        rationale: "Feedback store ingest with export confirmation."
+        result: "pass"
+        threshold: "export lists new store id and source_feedback_id"
+  test_strategy:
+    approach: "Tool verification only; no RED tests."
+    cases:
+      - "Export includes methodology_improvement and related_req link"
+      - "Gate pre_implementation allowed at minimal depth"
+      - "tied_config_get_base_path resolves to stdd tied-project"
+      - "tied_feedback_add succeeds once; context includes source_feedback_id and evidence_links"
