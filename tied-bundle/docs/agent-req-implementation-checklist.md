@@ -2,7 +2,7 @@
 
 **Audience**: AI agents. Process token: `[PROC-AGENT_REQ_CHECKLIST]`.
 
-**TIED Methodology Version**: 3.0.0
+**TIED Methodology Version**: 4.0.0
 
 **Purpose**: This document is the primary behavioral guide an AI agent follows for every new requirement or change to the tested system. It makes domain vocabulary a peer control layer alongside pseudo-code, semantic-token, YAML, and test validation, then unifies and sequences the controlling processes into a single executable checklist with explicit branching and looping. The agent executes this checklist from start to finish; skipping steps is not permitted unless a branch directive says otherwise.
 
@@ -165,7 +165,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 **Vocabulary benefit**: Establishes the term map before the agent forms conclusions, so the rest of the session starts from shared domain meaning.
 
 **Tasks**:
-1. Preface the response with `"Observing AI principles!"`.
+1. Preface the response with **`TIEDv{semver}:`** (full semver from **TIED Methodology Version** in `AGENTS.md`).
 2. Read `tied-bundle/docs/ai-principles.md` completely.
 3. Review `tied-project/semantic-tokens.yaml` (token registry) and `tied-bundle/docs/semantic-tokens.md` (token guide).
 4. Review `tied-project/architecture-decisions.yaml` and `tied-project/implementation-decisions.yaml` (YAML indexes).

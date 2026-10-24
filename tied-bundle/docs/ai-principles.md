@@ -4,9 +4,11 @@
 
 ## MANDATORY ACKNOWLEDGMENT
 
-**AI AGENTS MUST** acknowledge adherence to these principles at the start of EVERY response by prefacing with:
+**AI AGENTS MUST** acknowledge adherence to these principles at the start of EVERY response by prefacing the first line with a **TIED response stamp**:
 
-**"Observing AI principles!"**
+**`TIEDv{semver}:`** (for example **`TIEDv4.0.0:`** — use the full semver from **TIED Methodology Version** at the bottom of this file).
+
+The stamp is a weak loader signal only; checklist gates, evidence envelopes, and reconcile tooling remain authoritative for compliance. During client `--refresh` lag, transcripts may still contain the deprecated phrase **`Observing AI principles!`**; W7 conversation-adherence records that as **warn-only**, not error-tier blocking.
 
 This acknowledgment confirms that the AI agent has:
 - Read and understood this document
@@ -231,7 +233,7 @@ See `tied-bundle/docs/processes.md` § LEAP for the canonical process definition
 
 **AT THE START OF EVERY RESPONSE:**
 
-- [ ] **MANDATORY**: Preface response with "Observing AI principles!"
+- [ ] **MANDATORY**: Preface response with **`TIEDv{semver}:`** (semver from **TIED Methodology Version**)
 - [ ] Read `tied-bundle/docs/ai-principles.md` (if not already read in this session)
 - [ ] Check `semantic-tokens.yaml` for existing tokens
 - [ ] Know the development process and priority levels
@@ -307,4 +309,4 @@ See `tied-bundle/docs/processes.md` § LEAP for the canonical process definition
 - **Completion Phase**: Verify all documentation is current and complete
 
 **Last Updated**: 2026-06-02
-**TIED Methodology Version**: 3.0.0
+**TIED Methodology Version**: 4.0.0

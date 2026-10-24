@@ -1,0 +1,3 @@
+{"role":"assistant","message":{"content":[{"type":"text","text":"TIEDv4.0.0: Proceeding with work."}]}}
+{"role":"user","message":{"content":[{"type":"text","text":"continue"}]}}
+{"role":"assistant","message":{"content":[{"type":"text","text":"TIEDv4.0.0: Done."}]}}

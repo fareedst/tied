@@ -108,7 +108,7 @@ REQ-TIED_SETUP:
       - "scripts/validate_vocab_index_test.rb"
       - "tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
   validation_criteria:
-    - coverage: "Agent responds with 'Observing AI principles!' confirming rules are loaded"
+    - coverage: "Agent prefaces with TIEDv{semver}: (full semver from TIED Methodology Version) confirming the operating guide is loaded"
       method: "AI agent acknowledgment"
     - coverage: "File existence checks for all required files and directories"
       method: "Manual verification"

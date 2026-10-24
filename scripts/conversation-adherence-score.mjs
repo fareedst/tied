@@ -12,6 +12,7 @@ import {
   parseTranscriptLines,
   scoreAllDimensions,
 } from "./lib/conversation-adherence-dimensions.mjs";
+import { readTiedMethodologyVersionFromProjectRoot } from "./lib/read-tied-methodology-version.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,6 +25,7 @@ Options:
   --transcript PATH           Single transcript file (repeatable)
   --project-root PATH         Project root for disk artifact checks
   --request-token TOKEN       REQ token for envelope/manifest paths
+  --expected-methodology-version VER  Expected TIEDv semver (default: repo VERSION)
   --yaml-out PATH             Write conversation-adherence-report.v1.yaml
   --json                      Emit JSON to stdout instead of YAML
 `);
@@ -35,6 +37,7 @@ function parseArgs(argv) {
     transcripts: [],
     projectRoot: process.cwd(),
     requestToken: "",
+    expectedMethodologyVersion: "",
     yamlOut: "",
     json: false,
     help: false,
@@ -47,6 +50,9 @@ function parseArgs(argv) {
     else if (arg === "--transcript") out.transcripts.push(path.resolve(argv[++i] ?? ""));
     else if (arg === "--project-root") out.projectRoot = path.resolve(argv[++i] ?? "");
     else if (arg === "--request-token") out.requestToken = argv[++i] ?? "";
+    else if (arg === "--expected-methodology-version") {
+      out.expectedMethodologyVersion = argv[++i] ?? "";
+    }
     else if (arg === "--yaml-out") out.yamlOut = argv[++i] ?? "";
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -144,7 +150,13 @@ function main() {
   if (files.length === 0) {
     throw new Error("no transcript files found; pass --transcript-dir or --transcript");
   }
-  const disk = diskContext(args.projectRoot, args.requestToken);
+  const expectedMethodologyVersion =
+    args.expectedMethodologyVersion.trim()
+    || readTiedMethodologyVersionFromProjectRoot(args.projectRoot);
+  const disk = {
+    ...diskContext(args.projectRoot, args.requestToken),
+    expectedMethodologyVersion,
+  };
   const sessions = files.map((filePath) => {
     const raw = fs.readFileSync(filePath, "utf8");
     const turns = parseTranscriptLines(raw);

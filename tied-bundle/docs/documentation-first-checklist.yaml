@@ -71,7 +71,7 @@ steps:
     stage: "bootstrap"
     tasks:
       - "Confirm TIED MCP availability if applicable; understand priority order."
-      - "Preface with \"Observing AI principles!\""
+      - "Preface with TIEDv{semver}: (from AGENTS.md TIED Methodology Version)"
       - "Read tied-bundle/docs/ai-principles.md; review semantic-tokens, architecture-decisions, implementation-decisions (YAML + guides)."
     title: "Session Bootstrap"
   - goals: "Create or update architecture decision(s) fulfilling the REQ."

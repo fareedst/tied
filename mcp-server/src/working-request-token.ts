@@ -4,7 +4,7 @@
  *
  * Product change requests use REQ-*; methodology/analysis plans use PLAN-* under working/.
  */
-export const WORKING_REQUEST_TOKEN_RE = /^(?:REQ|PLAN)-[A-Z0-9][A-Z0-9_-]*$/u;
+export const WORKING_REQUEST_TOKEN_RE = /^(?:REQ|PLAN)-[A-Z0-9][A-Z0-9_.-]*$/u;
 
 export function isValidWorkingRequestToken(token: string): boolean {
   return WORKING_REQUEST_TOKEN_RE.test(token);

@@ -18,7 +18,7 @@
 The series runs in **stages**. Each stage emits a named artifact. **Stages 0–4 are read-only analysis** and end in a report; **Stage 5 applies LEAP fixes** and must not start until the Stage 4 report is reviewed/confirmed. If the operator only wants the analysis, stop after Stage 4.
 
 ```text
-Observing AI principles!
+TIEDv4.0.0:
 
 You are auditing the FIDELITY of existing TIED IMPL essence_pseudocode against the tests and production code built from it. Tests and code are the behavioral evidence (ground truth of what the system does); the IMPL pseudo-code is the language-agnostic specification whose quality you are measuring. For each logical pseudo-code block you decide whether it is a RELIABLE and COMPLETE transform of the tests and code:
 

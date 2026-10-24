@@ -39,7 +39,7 @@ function validDraft(overrides: Record<string, unknown> = {}): Record<string, unk
       generator_version: "1.0.0",
       observed_at: "2026-08-22T00:00:00.000Z",
       commit: "deadbeef",
-      tied_methodology_version: "3.0.0",
+      tied_methodology_version: "4.0.0",
       tied_base_path_confirmed: true,
     },
     scope: {

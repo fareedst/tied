@@ -11,7 +11,13 @@ export const DIMENSION_IDS = [
   "build_without_closeout_skill",
   "dual_write_turn_shape",
   "stdout_without_manifest",
+  "response_stamp_present",
+  "response_stamp_version_mismatch",
+  "response_stamp_legacy_phrase",
 ];
+
+const RESPONSE_STAMP_LINE_RE = /^TIEDv(\d+\.\d+\.\d+):\s*/u;
+const LEGACY_ACK_PHRASE_RE = /Observing AI principles!/u;
 
 const COMPLETION_VERB_RE =
   /\b(implementation complete|work complete|task complete|fully implemented|shipped|done implementing)\b/giu;
@@ -66,6 +72,11 @@ export function parseTranscriptLines(raw) {
 
 function assistantTexts(turns) {
   return turns.filter((t) => t.role === "assistant").map((t) => t.text);
+}
+
+function firstAssistantLine(text) {
+  const line = text.split("\n").find((row) => row.trim().length > 0);
+  return line?.trim() ?? "";
 }
 
 function allToolNames(turns) {
@@ -215,9 +226,78 @@ export function scoreStdoutWithoutManifest(turns) {
 
 /**
  * @param {TranscriptTurn[]} turns
- * @param {{ envelopePath?: string, manifestPath?: string }} [disk]
+ */
+export function scoreResponseStampPresent(turns) {
+  const texts = assistantTexts(turns);
+  const denominator = texts.length;
+  if (denominator === 0) {
+    return { numerator: 0, denominator: 0, flagged: false, evidence_refs: [] };
+  }
+  let missing = 0;
+  for (const text of texts) {
+    if (!RESPONSE_STAMP_LINE_RE.test(firstAssistantLine(text))) {
+      missing += 1;
+    }
+  }
+  return {
+    numerator: missing,
+    denominator,
+    flagged: missing > 0,
+    evidence_refs: missing > 0 ? ["response_stamp_missing_or_malformed"] : [],
+  };
+}
+
+/**
+ * @param {TranscriptTurn[]} turns
+ * @param {string} expectedVersion
+ */
+export function scoreResponseStampVersionMismatch(turns, expectedVersion) {
+  const texts = assistantTexts(turns);
+  const denominator = texts.length;
+  if (denominator === 0 || !expectedVersion) {
+    return { numerator: 0, denominator: 0, flagged: false, evidence_refs: [] };
+  }
+  let mismatches = 0;
+  for (const text of texts) {
+    const line = firstAssistantLine(text);
+    const match = line.match(RESPONSE_STAMP_LINE_RE);
+    if (match && match[1] !== expectedVersion) {
+      mismatches += 1;
+    }
+  }
+  return {
+    numerator: mismatches,
+    denominator,
+    flagged: mismatches > 0,
+    evidence_refs: mismatches > 0 ? ["response_stamp_version_mismatch"] : [],
+  };
+}
+
+/**
+ * @param {TranscriptTurn[]} turns
+ */
+export function scoreResponseStampLegacyPhrase(turns) {
+  const texts = assistantTexts(turns);
+  const denominator = texts.length;
+  if (denominator === 0) {
+    return { numerator: 0, denominator: 0, flagged: false, evidence_refs: [], severity: "warn" };
+  }
+  const hits = texts.filter((text) => LEGACY_ACK_PHRASE_RE.test(text)).length;
+  return {
+    numerator: hits,
+    denominator,
+    flagged: hits > 0,
+    severity: "warn",
+    evidence_refs: hits > 0 ? ["response_stamp_legacy_phrase"] : [],
+  };
+}
+
+/**
+ * @param {TranscriptTurn[]} turns
+ * @param {{ envelopePath?: string, manifestPath?: string, expectedMethodologyVersion?: string }} [disk]
  */
 export function scoreAllDimensions(turns, disk) {
+  const expectedVersion = disk?.expectedMethodologyVersion ?? "";
   const scorers = {
     early_exit_at_gate: () => scoreEarlyExitAtGate(turns),
     call_mention_without_execution: () => scoreCallMentionWithoutExecution(turns),
@@ -226,6 +306,9 @@ export function scoreAllDimensions(turns, disk) {
     build_without_closeout_skill: () => scoreBuildWithoutCloseoutSkill(turns),
     dual_write_turn_shape: () => scoreDualWriteTurnShape(turns),
     stdout_without_manifest: () => scoreStdoutWithoutManifest(turns),
+    response_stamp_present: () => scoreResponseStampPresent(turns),
+    response_stamp_version_mismatch: () => scoreResponseStampVersionMismatch(turns, expectedVersion),
+    response_stamp_legacy_phrase: () => scoreResponseStampLegacyPhrase(turns),
   };
   return DIMENSION_IDS.map((id) => {
     const result = scorers[id]();
@@ -237,6 +320,7 @@ export function scoreAllDimensions(turns, disk) {
       flagged: result.flagged,
       proof_boundary: "transcript_observation_only",
       evidence_refs: result.evidence_refs,
+      ...(result.severity ? { severity: result.severity } : {}),
     };
   });
 }

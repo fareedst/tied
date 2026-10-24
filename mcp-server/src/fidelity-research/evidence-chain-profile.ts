@@ -10,6 +10,7 @@ import path from "node:path";
 
 import { resolveProjectIdentity } from "../project-identity.js";
 import { resolveTiedLayout } from "../tied-layout.js";
+import { readTiedMethodologyVersion } from "../tied-methodology-version.js";
 import { isMetricsEnabled } from "../usage-metrics.js";
 import {
   projectRootFromTiedBase,
@@ -676,6 +677,10 @@ export function generateEvidenceChainProfile(
   const compositionField = bindingResult
     ? derived(bindingResult, "ANALYZE_BINDING_EVIDENCE", "binding_analysis", 1, "executable_behavior", "observed")
     : undefined;
+  const tiedMethodologyVersion = readTiedMethodologyVersion({
+    project_root: input.project_root,
+    tied_base_path: input.tied_base_path,
+  });
   const draft: EvidenceChainProfile = {
     identity: {
       schema_version: EVIDENCE_CHAIN_PROFILE_SCHEMA,
@@ -684,7 +689,7 @@ export function generateEvidenceChainProfile(
       generator_version: GENERATOR_VERSION,
       observed_at: input.observed_at ?? "1970-01-01T00:00:00.000Z",
       commit: input.run_metadata?.commit ?? "unknown",
-      tied_methodology_version: "3.0.0",
+      tied_methodology_version: tiedMethodologyVersion,
       tied_base_path_confirmed: true,
       identity_source: identitySource,
     },

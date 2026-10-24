@@ -168,7 +168,7 @@ describe("process-adherence gaps [REQ-REQUEST_EVIDENCE_ENVELOPE] Wave 5", () => 
         project_id: "abc",
         depth_tier: "minimal" as const,
         gate_policy: "advisory",
-        methodology_snapshot_id: "3.0.0",
+        methodology_snapshot_id: "4.0.0",
       },
       runs: [],
       artifacts: [],

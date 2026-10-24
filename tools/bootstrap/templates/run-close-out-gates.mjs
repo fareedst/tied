@@ -107,7 +107,7 @@ function buildQualityRows(citdp) {
 }
 
 async function collectQualityManifest(args, citdp) {
-  const commands = citdp?.evidence?.commands;
+  const commands = citdp?.evidence?.commands ?? citdp?.evidence?.command_seq;
   if (!Array.isArray(commands) || commands.length === 0) {
     return { ok: false, skipped: true, reason: "no_citdp_commands" };
   }

@@ -140,9 +140,9 @@
     "tracker_path": null
   },
   "envelope_meta": {
-    "generated_at": "2026-10-24T14:51:50.759Z",
+    "generated_at": "2026-10-24T15:51:52.977Z",
     "generator": "request_evidence_envelope_patch",
-    "revision": 2100
+    "revision": 2115
   },
   "gaps": [
     {
@@ -229,7 +229,7 @@
   "identity": {
     "depth_tier": "integrated",
     "gate_policy": "advisory",
-    "methodology_snapshot_id": "3.0.0",
+    "methodology_snapshot_id": "4.0.0",
     "project_id": "af8451e933f573ec",
     "request_token": "REQ-FIXTURE-ADVERSARIAL"
   },

@@ -25,5 +25,5 @@ export function tiedBaselineCommitMessage(sourceRoot = TIED_REPO_ROOT) {
   } catch {
     // fall through
   }
-  return "TIED 3.0.0";
+  return "TIED 4.0.0";
 }

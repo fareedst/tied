@@ -37,6 +37,7 @@ import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
 
 import { classifyBoundedEvidenceFilename } from "../bounded-composition/envelope-artifact-kind.js";
 import { isValidWorkingRequestToken } from "../working-request-token.js";
+import { readTiedMethodologyVersion } from "../tied-methodology-version.js";
 const PHASE_DIR_RE = /^phase-(pre_implementation|verification|close_out)$/u;
 const INQUIRY_ARTIFACTS = [
   "evidence-provenance.json",
@@ -676,6 +677,10 @@ export async function buildRequestEvidenceEnvelope(
   }
 
   const identity = resolveProjectIdentity(resolvedTied);
+  const methodologySnapshotId = readTiedMethodologyVersion({
+    project_root: projectRoot,
+    tied_base_path: resolvedTied,
+  });
   const envelope: RequestEvidenceEnvelope = normalizeEnvelope({
     schema_version: ENVELOPE_SCHEMA_VERSION,
     envelope_meta: {
@@ -688,7 +693,7 @@ export async function buildRequestEvidenceEnvelope(
       project_id: identity.project_id,
       depth_tier: depthTier,
       gate_policy: input.gate_policy ?? "advisory",
-      methodology_snapshot_id: "3.0.0",
+      methodology_snapshot_id: methodologySnapshotId,
     },
     runs: extractRuns(artifacts),
     artifacts,

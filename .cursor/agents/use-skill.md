@@ -26,7 +26,7 @@ an include.
 <!-- [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical use-skill skill. -->
 ## Bootstrap and boundaries
 
-1. Start every response with `Observing AI principles!`.
+1. Start every response with `TIEDv4.0.0:` (use the semver from **TIED Methodology Version** in `AGENTS.md`).
 2. Read `AGENTS.md`, `tied-bundle/docs/ai-principles.md`, and
    `tied/vocab/routing.md` before reading project TIED records, source, or
    tests. PRELOAD the matched Prompt Composer glossary

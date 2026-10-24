@@ -96,7 +96,7 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       );
       assert.doesNotMatch(body.trim(), new RegExp(`^@${promptType.replace(/-/g, "\\-")}$`));
       assert.match(body, /TIED applicability/i);
-      assert.match(body, /Observing AI principles!/);
+      assert.match(body, /TIEDv\d+\.\d+\.\d+:/);
       assert.match(body, /tied\/vocab\/prompt-composer\.md/);
       assert.doesNotMatch(body, /:::/, `${promptType} agent must not use a triple-colon payload delimiter`);
       assert.match(

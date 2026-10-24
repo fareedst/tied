@@ -1,6 +1,6 @@
 # TIED Methodology
 
-**TIED Methodology Version**: 3.0.0
+**TIED Methodology Version**: 4.0.0
 
 [TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store** (methodology source, MCP server, and bootstrap engine). For the executable process and Core seven references, start at the [client development index](tied-bundle/docs/client-development-index.md).
 

@@ -10,6 +10,7 @@ describe("isValidWorkingRequestToken [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
 
   it("accepts PLAN-* analysis working-folder tokens", () => {
     assert.equal(isValidWorkingRequestToken("PLAN-TIED-RESIDUALITY-ANALYSIS"), true);
+    assert.equal(isValidWorkingRequestToken("PLAN-TIED-4.0-RESPONSE-STAMP"), true);
   });
 
   it("rejects invalid prefixes", () => {

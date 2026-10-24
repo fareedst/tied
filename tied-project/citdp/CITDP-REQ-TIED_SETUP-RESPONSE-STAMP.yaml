@@ -1,0 +1,134 @@
+CITDP-REQ-TIED_SETUP-RESPONSE-STAMP:
+  change_definition:
+    current_behavior_prior: "Agents preface turns with Observing AI principles!; REQ-TIED_SETUP validation_criteria and checklists encode that phrase; envelope build and evidence-chain-profile defaults hardcode methodology_snapshot_id / tied_methodology_version 3.0.0 while VERSION and AGENTS still read 3.0.0."
+    desired_behavior: "Methodology 4.0.0 release replaces the acknowledgment with a versioned first-line stamp TIEDv4.0.0: (semver from VERSION / AGENTS); REQ-TIED_SETUP criterion and mirrors describe stamp grammar; runtime reads VERSION via readTiedMethodologyVersion for envelope and fidelity defaults; W7 conversation-adherence adds transcript-only stamp dimensions with legacy phrase warn-only."
+    non_goals:
+      - "Integrated adversarial inquiry artifacts during minimal build depth (close_out uses integrated envelope path per sponsor decision)"
+      - "Live Cursor/Claude hooks enforcing stamp on every turn"
+      - "Mass-edit historical tied-project/working/** checklist snapshots"
+      - "New REQ token solely for stamp (scope stays on REQ-TIED_SETUP)"
+    references:
+      - "AGENTS.md"
+      - "CHANGELOG.md"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      - "mcp-server/src/fidelity-research/evidence-chain-profile.ts"
+      - "mcp-server/src/request-evidence-envelope/build.ts"
+      - "scripts/lib/conversation-adherence-dimensions.mjs"
+      - "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+      - "tied-bundle/docs/ai-principles.md"
+      - "tied-bundle/requirements/REQ-TIED_SETUP.yaml"
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-RESPONSE-STAMP.yaml"
+      - "tied-project/requirements.yaml"
+      - "tied-project/requirements/REQ-TIED_SETUP.yaml"
+      - "tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/PLAN.md"
+      - "VERSION"
+    success_criteria:
+      - "conversation-adherence-score tests cover stamp present, version mismatch, legacy phrase warn-only"
+      - "Envelope build emits methodology_snapshot_id 4.0.0 from VERSION reader"
+      - "Integrated close_out checklist gate allowed with envelope fail_on_error_gaps before v4.0.0 tag"
+      - "mcp-server npm test and conversation-adherence-score.test.mjs pass"
+      - "prompt-type-subagent.test.ts asserts stamp pattern"
+      - "REQ-TIED_SETUP validation_criteria (bundle detail, project detail, and requirements.yaml index mirror) describe TIEDv semver stamp not the legacy phrase"
+      - "VERSION and canonical AGENTS TIED Methodology Version are 4.0.0"
+  evidence:
+    command_seq:
+      - "npm test --prefix mcp-server -- src/tied-methodology-version.test.ts src/e2e/prompt-type-subagent.test.ts src/request-evidence-envelope/request-evidence-envelope.test.ts src/fidelity-research/evidence-chain-profile.test.ts src/working-request-token.test.ts"
+      - "node scripts/conversation-adherence-score.test.mjs"
+      - "node .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency"
+    proof_boundaries:
+      - "response_stamp_is_transcript_and_loader_contract_not_live_ide_hook"
+      - "integrated_close_out_uses_inquiry_waiver_at_minimal_build_depth"
+  completion_criteria:
+    close_out_sequence:
+      - "CALL sub-close-out-evidence-sync or @close-out"
+      - "tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking --sync-dispositions"
+      - "request_evidence_envelope_validate with fail_on_error_gaps true"
+      - "tied_checklist_gate_validate phase close_out allowed true"
+    close_out_wave: "integrated"
+    persist_policy: "Canonical record at tied-project/citdp/CITDP-REQ-TIED_SETUP-RESPONSE-STAMP.yaml; working copy kept in sync until record_status closed"
+    verification: "mcp-server npm test; node scripts/conversation-adherence-score.test.mjs; tied_validate_consistency after REQ/YAML LEAP; manual fresh agent turn shows TIEDv4.0.0:; integrated close-out completion signals per completion-signals-handoff.md"
+    w7_legacy_phrase_policy: "warn_only"
+  impact_analysis:
+    modules_or_boundaries: "Methodology docs and loaders (AGENTS, ai-principles, checklists, .cursor/agents); inherited REQ-TIED_SETUP YAML; mcp-server envelope + fidelity defaults; scripts W7 adherence; bootstrap version fallbacks."
+    tied_tokens_affected:
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "REQ-TIED_SETUP-RESPONSE-STAMP"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    date: "2026-10-24"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    record_status: "closed"
+    title: "TIED 4.0.0 response stamp and centralized methodology version"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "sponsor-response-stamp-choices-2026-10-24"
+        expiry: "2026-12-31"
+        owner: "sponsor"
+        rationale: "Build wave stays minimal/advisory; integrated close-out at v4.0.0 tag uses envelope-blocking path without full integrated inquiry artifact set for doc/stamp scope."
+      counterexamples:
+        - "Agents stamp TIEDv4.0.0: while REQ-TIED_SETUP still requires Observing AI principles! — verify reports false green"
+        - "Only tied-bundle REQ detail updated; tied-project/requirements.yaml index mirror left stale"
+        - "readTiedMethodologyVersion reads wrong repo root in multi-clone workspace — envelope snapshot id diverges from AGENTS"
+        - "v4.0.0 tag cut after tests only without integrated close_out gate and envelope validation"
+        - "W7 treats legacy phrase as error during client refresh lag despite warn-only policy"
+      depth_selected_at: "2026-10-24T15:30:00-07:00"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "close_out gate receipt allowed true under PLAN-TIED-4.0-RESPONSE-STAMP"
+        - "conversation-adherence-score.test.mjs covers stamp dimensions and warn-only legacy"
+        - "grep shows no legacy phrase in authoritative loader set listed in PLAN"
+        - "request-evidence-envelope.test.ts expects methodology_snapshot_id 4.0.0"
+      evidence_references:
+        - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+        - "scripts/conversation-adherence-score.test.mjs"
+        - "tied-project/citdp/CITDP-REQ-TIED_SETUP-RESPONSE-STAMP.yaml"
+        - "tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/PLAN.md"
+      falsification_questions:
+        - "Does envelope build still emit 3.0.0 when VERSION is 4.0.0 without fixture updates?"
+        - "Does tied_verify fail if SETUP criterion text still names the legacy phrase after stamp rollout?"
+        - "Was v4.0.0 tagged without close_out gate allowed and envelope fail_on_error_gaps?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      rationale: "Doc and observable contract realignment with unit/e2e transcript checks; tag proof via integrated close-out per sponsor decision."
+      research_profile: "planning-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - description: "Clients on old tied-bundle until --refresh continue legacy phrase; W7 noise if warn-only not implemented."
+        id: "RISK-CLIENT-LAG-001"
+        likelihood: "High"
+        mitigation: "Implement W7 legacy dimension as warn-only per sponsor decision; document refresh lag in ai-principles."
+        severity: "Low"
+      - description: "Hardcoded 3.0.0 remains in tests/fixtures after build.ts change."
+        id: "RISK-FIXTURE-001"
+        likelihood: "Medium"
+        mitigation: "Grep methodology_snapshot_id and tied_methodology_version in mcp-server; update in same change set as readTiedMethodologyVersion."
+        severity: "Medium"
+      - description: "REQ criterion still names legacy phrase while agents emit TIEDv4.0.0: — verify/tied_verify drift at tag time."
+        id: "RISK-LEAP-SETUP-001"
+        likelihood: "Medium"
+        mitigation: "Mandatory LEAP on SETUP validation_criteria and requirements.yaml mirror in same PR as doc/agent stamp edits."
+        severity: "High"
+    summary: "Documentation and observable contract change with concentrated runtime wiring; tag gated by integrated close-out and persisted CITDP."
+  sponsor_decisions:
+    choices:
+      citdp_persist: "tied-project/citdp/CITDP-REQ-TIED_SETUP-RESPONSE-STAMP.yaml"
+      close_out_at_tag: "integrated"
+      w7_legacy_phrase: "warn_only"
+    owner: "sponsor"
+    recorded_at: "2026-10-24T15:36:00-07:00"
+  tdd_sequence:
+    summary: "Docs/checklist/REQ LEAP aligned with stamp grammar → readTiedMethodologyVersion + envelope/fidelity wiring (RED) → W7 dimensions warn-only legacy (RED) → green tests → integrated close-out → CITDP record_status closed → v4.0.0 tag."
+  test_strategy:
+    coverage_gaps:
+      - "Historical working checklist YAML under tied-project/working/** intentionally unchanged."
+      - "No UI E2E — stamp is transcript/doc contract only."
+    matrix_notes: "RED-first: extend conversation-adherence-score.test.mjs for new dimensions including warn-only legacy; update request-evidence-envelope.test.ts and related envelope tests for 4.0.0 snapshot id; prompt-type-subagent e2e for agent front matter; close-out envelope evidence at tag."
+    summary: "Unit tests for readTiedMethodologyVersion; update existing envelope/fidelity tests/fixtures; W7 dimension tests; subagent e2e; full mcp-server npm test; adherence script test file; integrated close-out at tag."

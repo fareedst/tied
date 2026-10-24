@@ -13,7 +13,7 @@
 ## Copy-paste prompt (give this block to the agent)
 
 ```text
-Observing AI principles!
+TIEDv4.0.0:
 
 You are retrofitting TIED IMPL essence_pseudocode for behavior that already exists in production code and tests. The code and tests are the behavioral evidence; IMPL pseudo-code is the language-agnostic specification you write to match them. After pseudo-code is correct, test and production **comments** must carry the same block-lead lines as the sidecar (literal copy; host comment syntax only).
 

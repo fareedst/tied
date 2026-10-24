@@ -52,15 +52,15 @@
     "tracker_path": null
   },
   "envelope_meta": {
-    "generated_at": "2026-10-24T14:51:50.730Z",
+    "generated_at": "2026-10-24T15:51:52.929Z",
     "generator": "request_evidence_envelope_patch",
-    "revision": 3622
+    "revision": 3652
   },
   "gaps": [],
   "identity": {
     "depth_tier": "integrated",
     "gate_policy": "advisory",
-    "methodology_snapshot_id": "3.0.0",
+    "methodology_snapshot_id": "4.0.0",
     "project_id": "af8451e933f573ec",
     "request_token": "REQ-FIXTURE-ADVERSARIAL"
   },

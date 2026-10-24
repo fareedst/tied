@@ -1,6 +1,6 @@
 # Architecture Decisions
 
-**TIED Methodology Version**: 3.0.0
+**TIED Methodology Version**: 4.0.0
 
 ## Overview
 

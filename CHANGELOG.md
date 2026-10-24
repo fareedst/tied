@@ -1625,6 +1625,12 @@ This release (when tagged) will summarize work that **(a)** makes **`tied/docs/`
     - REQ, ARCH, and IMPL conversions now use the same parsing and fidelity patterns so all captured info is preserved in both detail YAML and index.
     - Detail output is now YAML only (REQ-*.yaml, ARCH-*.yaml, IMPL-*.yaml); index `detail_file` paths reference .yaml.
 
+## [4.0.0] - 2026-10-24
+
+### Changed
+
+- **TIED 4.0.0 response stamp ([REQ-TIED_SETUP])** — Replaced the legacy **`Observing AI principles!`** acknowledgment with a versioned first-line stamp **`TIEDv4.0.0:`** (full semver from root `VERSION` / **TIED Methodology Version**). Updated AGENTS, ai-principles, checklists, `.cursor/agents`, and REQ-TIED_SETUP validation criteria on bundle detail, project detail, and `tied-project/requirements.yaml` mirror. **`readTiedMethodologyVersion()`** centralizes semver for envelope `methodology_snapshot_id` and evidence-chain-profile defaults; W7 conversation-adherence adds `response_stamp_*` dimensions with **warn-only** legacy phrase handling. Plan: [PLAN-TIED-4.0-RESPONSE-STAMP](tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/PLAN.md).
+
 ## [2.2.0] - 2026-02-23
 
 ### Changed
@@ -2050,6 +2056,7 @@ This enhancement addresses the need to eliminate bugs related to code complexity
 - AI agent integration (Cursor IDE)
 - Template-based structure for easy adoption
 
+[4.0.0]: https://github.com/fareedst/tied/releases/tag/v4.0.0
 [3.0.0]: https://github.com/fareedst/tied/releases/tag/v3.0.0
 [2.2.0]: https://github.com/fareedst/tied/releases/tag/v2.2.0
 [2.1.0]: https://github.com/fareedst/tied/releases/tag/v2.1.0

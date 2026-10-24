@@ -88,7 +88,7 @@ function minimalEnvelope(requestToken: string): RequestEvidenceEnvelope {
       project_id: "abc123",
       depth_tier: "integrated",
       gate_policy: "advisory",
-      methodology_snapshot_id: "3.0.0",
+      methodology_snapshot_id: "4.0.0",
     },
     runs: [],
     artifacts: [

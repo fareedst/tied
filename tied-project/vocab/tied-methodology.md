@@ -29,7 +29,7 @@
 | **binding inventory** | glue list, wiring notes (alone) | Table of trigger→callee→arguments→effect seams; see [`../docs/composition-coverage.md`](../../tied-bundle/docs/composition-coverage.md) |
 | **composition evidence** | E2E covers wiring | UI-free composition/integration/contract test proving a binding before integration |
 | **contract precision** | INPUT/OUTPUT only (for new Active blocks) | PRE/POST/EFFECTS required on new/changed Active procedure blocks; FAILURE_MODES/DATA_TRANSITION/TERMINATION when applicable |
-| **Observing AI principles!** | (omit) | Mandatory session acknowledgment per [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) |
+| **TIED response stamp** / **response stamp** | acknowledgment phrase (alone) | First assistant line **`TIEDv{semver}:`** (regex `^TIEDv(\d+\.\d+\.\d+):\s*`); semver from root `VERSION` / **TIED Methodology Version**; weak loader signal per [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml); W7 **warn-only** for deprecated **`Observing AI principles!`** during client refresh lag |
 | **yaml_tool** | yaml lint script, yq wrapper (alone) | Compatibility frontend for the shared **canonical YAML profile** in `scripts/yaml_tool.sh` per [PROC-YAML_EDIT_LOOP](../../tied-bundle/docs/processes.md) |
 | **lint_yaml** | lint yaml (generic) | Backward-compatible wrapper; delegates to **yaml_tool** |
 | **YAML canonicalization** | YAML normalization, pretty-printing | Deterministic transformation under profile `tied-yaml-canonical-v1`; recursively orders map keys, applies ordered-list exceptions, preserves scalar types, and keeps opaque text unchanged |
