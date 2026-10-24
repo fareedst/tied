@@ -14,12 +14,12 @@ Parent REQ: **REQ-TIED_YAML_CANONICALIZATION**
 - **Slice 1 (YAML + JSON slice 1):** `d293bba14c46002f85f5e59af011ad790e97d498` (not pushed)
 - **Slice 2 (JSON marshalling):** `9fcaf3ef5392ffb8bb06676e09d7ac04e58aa0ec` (not pushed) — [traceable-commit-evidence-slice2.md](./traceable-commit-evidence-slice2.md)
 - **Slice 2 close-out (evidence):** `c912ba47` — `docs(plan): close out DATA-FILE-ORDERING slice 2 evidence`
+- **Clear-workspace (canonical styling remainder):** `1a9f62db` — `chore(yaml): canonical styling on remaining dirty tree` (78 files; `tied_validate_consistency` ok)
 
 ### Remaining risks
 
 - **RISK-JSON-HASH** — one-time byte/hash churn on hashed artifacts; re-run tests that pin serialized output when fixtures drift.
 - ~40 intentional `JSON.stringify` exclusions (internal/compare/wire/codegen) — see [json-slice2-build-evidence.md](./json-slice2-build-evidence.md).
-- Repo-wide unrelated dirty tree outside this plan folder — use scoped commits or revert per hygiene receipts.
 
 ### Replay
 
