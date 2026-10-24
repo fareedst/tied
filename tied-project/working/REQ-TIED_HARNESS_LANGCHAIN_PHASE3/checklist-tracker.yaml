@@ -1,128 +1,128 @@
 citdp:
-  path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml
-  reason: LangChain comparison Phase 3; matrix row 15 + harness-trace-analyzer compose.
-  status: analysis
-depth_tier: minimal
-gate_policy: advisory
-methodology_surface_change_class: prompt_type_workflow
-profile_depth: minimal
-purpose: Per-request Tracker for REQ-TIED_HARNESS_LANGCHAIN_PHASE3.
-refine_pass: 1
-refine_pass_date: "2026-10-21"
-request: REQ-TIED_HARNESS_LANGCHAIN_PHASE3
-request_token: REQ-TIED_HARNESS_LANGCHAIN_PHASE3
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_complete
+  path: "tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+  reason: "LangChain comparison Phase 3; matrix row 15 + harness-trace-analyzer compose."
+  status: "analysis"
+depth_tier: "minimal"
 execution_evidence:
-  request: REQ-TIED_HARNESS_LANGCHAIN_PHASE3
-  completed: []
   close_out_evidence:
     date: "2026-10-21"
     deferred: []
     gates:
-      close_out: allowed
-    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+      close_out: "allowed"
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+  completed: []
+  request: "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+gate_policy: "advisory"
+methodology_surface_change_class: "prompt_type_workflow"
+profile_depth: "minimal"
+purpose: "Per-request Tracker for REQ-TIED_HARNESS_LANGCHAIN_PHASE3."
+refine_pass: 1
+refine_pass_date: "2026-10-21"
+request: "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+request_token: "REQ-TIED_HARNESS_LANGCHAIN_PHASE3"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
 steps:
-  - id: session-bootstrap
-    disposition: completed
-    notes: PRELOAD feedback-to-tied, prompt-composer, HTOL guide, external-service three-wave template; Phase 3 matrix+skill scope.
-  - id: translate-sponsor-intent
-    disposition: completed
+  - disposition: "completed"
+    id: "session-bootstrap"
+    notes: "PRELOAD feedback-to-tied, prompt-composer, HTOL guide, external-service three-wave template; Phase 3 matrix+skill scope."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: /Users/fareed/.cursor/plans/langchain_phase_3_promotion_01bdd01a.plan.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/PLAN.md
-  - id: change-definition
-    disposition: completed
+      - kind: "file_path"
+        path: "/Users/fareed/.cursor/plans/langchain_phase_3_promotion_01bdd01a.plan.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/PLAN.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml
-  - id: impact-discovery
-    disposition: completed
-    notes: Slices B–E; surface_ref harness-trace-analyzer; LEAP MCM row count; enrollment constants.
-  - id: risk-assessment
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+    id: "change-definition"
+  - disposition: "completed"
+    id: "impact-discovery"
+    notes: "Slices B–E; surface_ref harness-trace-analyzer; LEAP MCM row count; enrollment constants."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml
-    notes: Costly choice accepted — matrix contract increment + new managed skill; no LangSmith.
-  - id: test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
+    id: "risk-assessment"
+    notes: "Costly choice accepted — matrix contract increment + new managed skill; no LangSmith."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/test-strategy.md
-  - id: sub-adversarial-inquiry-pass
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: CITDP counterexamples only.
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/test-strategy.md"
+    id: "test-strategy"
+  - disposition: "not_applicable"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/not-applicable-receipt.v1.json
-  - id: author-requirement
-    disposition: completed
-    notes: REQ-TIED_HARNESS_LANGCHAIN_PHASE3 minted at refine-plan via tied_token_create_with_detail.
-  - id: author-architecture
-    disposition: completed
-    notes: ARCH-TIED_HARNESS_LANGCHAIN_PHASE3 at refine-plan.
-  - id: persist-implementation-records
-    disposition: completed
-    notes: IMPL index + sidecar at refine-plan.
-  - id: gate-pseudocode-validation
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/not-applicable-receipt.v1.json"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "CITDP counterexamples only."
+  - disposition: "completed"
+    id: "author-requirement"
+    notes: "REQ-TIED_HARNESS_LANGCHAIN_PHASE3 minted at refine-plan via tied_token_create_with_detail."
+  - disposition: "completed"
+    id: "author-architecture"
+    notes: "ARCH-TIED_HARNESS_LANGCHAIN_PHASE3 at refine-plan."
+  - disposition: "completed"
+    id: "persist-implementation-records"
+    notes: "IMPL index + sidecar at refine-plan."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3-pseudocode.md
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/gates/pre_implementation-2026-10-21T07-04-42-036Z.json
-  - id: resolve-pseudocode
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3-pseudocode.md"
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/gates/pre_implementation-2026-10-21T07-04-42-036Z.json"
+    id: "gate-pseudocode-validation"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3-pseudocode.md
-  - id: three-way-alignment-unit
-    disposition: not_applicable
-  - id: unit-test-red
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3-pseudocode.md"
+    id: "resolve-pseudocode"
+  - disposition: "not_applicable"
+    id: "three-way-alignment-unit"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs
-      - kind: file_path
-        path: tools/bootstrap/lib/harness-trace-analyzer-skill.test.mjs
-  - id: unit-test-green
-    disposition: completed
+      - kind: "file_path"
+        path: "tools/bootstrap/lib/harness-trace-analyzer-skill.test.mjs"
+      - kind: "file_path"
+        path: "tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs"
+    id: "unit-test-red"
+  - disposition: "completed"
     evidence_refs:
-      - kind: command
+      - kind: "command"
         path: "node --test tools/bootstrap/lib/methodology-composition-matrix-langchain-row.test.mjs tools/bootstrap/lib/harness-trace-analyzer-skill.test.mjs tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
-  - id: composition-integration
-    disposition: not_applicable
-    rationale: Doc/skill/enrollment constants; prompt-type e2e covers bundle install.
-  - id: end-to-end-ui
-    disposition: not_applicable
-  - id: verification-gate
-    disposition: completed
+    id: "unit-test-green"
+  - disposition: "not_applicable"
+    id: "composition-integration"
+    rationale: "Doc/skill/enrollment constants; prompt-type e2e covers bundle install."
+  - disposition: "not_applicable"
+    id: "end-to-end-ui"
+  - disposition: "completed"
     evidence_refs:
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/gates/verification-2026-10-21T07-04-35-634Z.json
-  - id: persist-citdp-record
-    disposition: completed
-    notes: CITDP leap_feedback.record_status complete after implement slices B–E.
-  - id: sync-tied-stack
-    disposition: completed
-    notes: tied_validate_consistency ok at close-out.
-  - id: sub-close-out-evidence-sync
-    disposition: completed
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/gates/verification-2026-10-21T07-04-35-634Z.json"
+    id: "verification-gate"
+  - disposition: "completed"
+    id: "persist-citdp-record"
+    notes: "CITDP leap_feedback.record_status complete after implement slices B–E."
+  - disposition: "completed"
+    id: "sync-tied-stack"
+    notes: "tied_validate_consistency ok at close-out."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/sub-close-out-evidence-sync-evidence.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/closeout-run-close-out-gates-final.json
-  - id: traceable-commit
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/closeout-run-close-out-gates-final.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/sub-close-out-evidence-sync-evidence.md"
+    id: "sub-close-out-evidence-sync"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/traceable-commit-evidence.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/proposed-commit-message.txt
-      - kind: command
+      - kind: "command"
         path: "git commit d5c8e055 — feat(htol): LangChain harness Phase 3 — matrix row 15 + trace analyzer"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/proposed-commit-message.txt"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/traceable-commit-evidence.md"
+    id: "traceable-commit"

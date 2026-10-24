@@ -1,37 +1,32 @@
-# Per-request tracker — DOC-HEIMSBBAKK-ONTOLOGY-COMPARISON (refine-plan pass 1)
-# Copy of tied-bundle/docs/agent-req-implementation-checklist.yaml — scoped steps only.
-# Full checklist applies at build-plan execution.
-
-request_token: DOC-HEIMSBBAKK-ONTOLOGY-COMPARISON
-profile_depth: minimal
-gate_policy: outreach_doc_only
-change_class: bundle_docs_and_comparisons
+change_class: "bundle_docs_and_comparisons"
+gate_policy: "outreach_doc_only"
 no_req_mint: true
-
+profile_depth: "minimal"
+request_token: "DOC-HEIMSBBAKK-ONTOLOGY-COMPARISON"
 steps:
-  translate-sponsor-intent:
-    status: done
-    notes: Heimsbakk meaning-ownership × TIED vocab; no full article in repo.
   change-definition:
-    status: done
-    notes: P0–P2 deliverables scoped; P3 Defer unless sponsor opens add-feature.
-  session-bootstrap:
-    status: done
+    notes: "P0–P2 deliverables scoped; P3 Defer unless sponsor opens add-feature."
+    status: "done"
   impact-discovery:
-    status: done
-    notes: Files listed in PLAN-refine-pass1.md Implement section.
-  risk-assessment:
-    status: done
-    notes: Copyright paste risk; reversible P0–P2 defaults documented.
-  test-strategy:
-    status: done
-    notes: Copyright grep + link parity + 14-section analysis checklist.
-  pre_implementation:
-    status: blocked
-    notes: "tied_checklist_gate_validate allowed:false (malformed_citdp:adversarial_inquiry) — outreach DOC token; doc-only build proceeded per plan."
+    notes: "Files listed in PLAN-refine-pass1.md Implement section."
+    status: "done"
   implement-doc-deliverables:
-    status: done
-    notes: P0–P2 files written; copyright grep clean.
+    notes: "P0–P2 files written; copyright grep clean."
+    status: "done"
+  pre_implementation:
+    notes: "tied_checklist_gate_validate allowed:false (malformed_citdp:adversarial_inquiry) — outreach DOC token; doc-only build proceeded per plan."
+    status: "blocked"
+  risk-assessment:
+    notes: "Copyright paste risk; reversible P0–P2 defaults documented."
+    status: "done"
+  session-bootstrap:
+    status: "done"
+  test-strategy:
+    notes: "Copyright grep + link parity + 14-section analysis checklist."
+    status: "done"
   traceable-commit:
-    status: pending
-    notes: Sponsor git commit when ready.
+    notes: "Sponsor git commit when ready."
+    status: "pending"
+  translate-sponsor-intent:
+    notes: "Heimsbakk meaning-ownership × TIED vocab; no full article in repo."
+    status: "done"

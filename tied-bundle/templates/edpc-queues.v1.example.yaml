@@ -1,14 +1,6 @@
-# Example — EDPC §5 live queues (file-based v1 shell).
-# Copy to tied-project/working/{REQ-TOKEN}/evidence/edpc/edpc-queues.v1.yaml and edit.
-schema_version: "edpc-queues.v1"
-request_token: "REQ-EXAMPLE"
-revision: "queues-rev-1"
 queues:
-  question:
-    description: "Client questions plus questions EDPC discovers during investigation."
-    items: []
-  hypothesis:
-    description: "Alternative explanations for noteworthy behavior or anomalies."
+  action:
+    description: "Approved follow-up work, investigations, recommendations, and decisions."
     items: []
   evidence_gap:
     description: "Missing logs, tests, inaccessible systems, or unverifiable assumptions."
@@ -16,6 +8,12 @@ queues:
   finding:
     description: "Confirmed problems, possible risks, inconsistencies, and positive characteristics."
     items: []
-  action:
-    description: "Approved follow-up work, investigations, recommendations, and decisions."
+  hypothesis:
+    description: "Alternative explanations for noteworthy behavior or anomalies."
     items: []
+  question:
+    description: "Client questions plus questions EDPC discovers during investigation."
+    items: []
+request_token: "REQ-EXAMPLE"
+revision: "queues-rev-1"
+schema_version: "edpc-queues.v1"

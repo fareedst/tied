@@ -1,13 +1,11 @@
-schema_version: "engagement-charter.v1"
+bounded_path: "mcp-server/src/edpc"
+investigation_question: "What does the EDPC workflow-route module do, and how does evidence_access_tier alter the planned B→C→F choreography for module comprehension?"
 request_token: "REQ-TIED_EDPC_COMPREHENSION"
+schema_version: "engagement-charter.v1"
+sponsor_note: "Slice C follow-on (2026-10-19): B+C+F on bounded edpc module; D/E deferred."
 target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
 workflows_planned:
   - "A"
   - "B"
   - "C"
   - "F"
-investigation_question: >-
-  What does the EDPC workflow-route module do, and how does evidence_access_tier
-  alter the planned B→C→F choreography for module comprehension?
-bounded_path: "mcp-server/src/edpc"
-sponsor_note: "Slice C follow-on (2026-10-19): B+C+F on bounded edpc module; D/E deferred."

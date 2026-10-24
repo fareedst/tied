@@ -113,9 +113,9 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/requirements/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
       - "tied-project/architecture-decisions/ARCH-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
       - "tied-project/implementation-decisions/IMPL-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+      - "tied-project/requirements/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
     slug: "sync-tied-stack"
     tracking:
       evidence_refs:

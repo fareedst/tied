@@ -10,12 +10,12 @@ IMPL-TIED_EASAR_RECEIPTS:
         - description: "Build inventory.v1 from scoped analysis walk_summary"
           file: "mcp-server/src/easar-receipts/inventory-v1.ts"
           name: "buildInventoryV1FromWalkSummary"
-        - description: "Synthesize reflexion-report.v1 from inquiry gate allowed"
-          file: "mcp-server/src/easar-receipts/reflexion-report-v1.ts"
-          name: "buildReflexionReportV1"
         - description: "MCP wrapper for reflexion-report.v1 write + envelope patch"
           file: "mcp-server/src/easar-receipts/reflexion-report-mcp.ts"
           name: "buildEasarReflexionReport"
+        - description: "Synthesize reflexion-report.v1 from inquiry gate allowed"
+          file: "mcp-server/src/easar-receipts/reflexion-report-v1.ts"
+          name: "buildReflexionReportV1"
     cross_references:
       architecture:
         - "ARCH-TIED_EASAR_ARTIFACT_MODEL"

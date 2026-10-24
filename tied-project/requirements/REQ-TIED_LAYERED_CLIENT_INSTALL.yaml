@@ -32,6 +32,9 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
     - criterion: "tied-install linked mode installs harness-local SKILL.md stubs, tied-cli wrappers, and TIED_METHODOLOGY_BUNDLE_PATH in MCP config without local committed methodology tree."
       id: "SC-LCI-LINKED-DEFAULT"
       metric: "tools/bootstrap install-layers smoke + mcp.json env assertions"
+    - criterion: "tied-install shims with no arguments or sole -h/--help print styled operator help on stdout and exit 0 without install side effects."
+      id: "SC-LCI-CLI-HELP-NO-ARGS"
+      metric: "tools/bootstrap/tied-install-help.test.mjs + tied-install-dispatch.test.mjs + install-layers-help.test.mjs"
     - criterion: "tied-install.sh bootstrapTied behavior unchanged."
       id: "SC-LCI-LEGACY-COPY"
       metric: "existing bootstrap tests still pass"
@@ -41,9 +44,6 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
     - criterion: "Windows smoke includes linked tied-install and disposable test-new-tied-client.cmd with documented skip flags."
       id: "SC-LCI-WINDOWS-SMOKE"
       metric: "scripts/windows-bootstrap-smoke.cmd phases 4–5 + pwsh tied-install.ps1 step in workflow"
-    - criterion: "tied-install shims with no arguments or sole -h/--help print styled operator help on stdout and exit 0 without install side effects."
-      id: "SC-LCI-CLI-HELP-NO-ARGS"
-      metric: "tools/bootstrap/tied-install-help.test.mjs + tied-install-dispatch.test.mjs + install-layers-help.test.mjs"
   status: "Planned"
   traceability:
     architecture:

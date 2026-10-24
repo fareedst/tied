@@ -1,37 +1,32 @@
-# Per-request tracker — DOC-OPEN-ONTOLOGIES-COMPARISON (refine-plan pass 1)
-# Copy of tied-bundle/docs/agent-req-implementation-checklist.yaml — scoped steps only.
-# Full checklist applies at build-plan execution.
-
-request_token: DOC-OPEN-ONTOLOGIES-COMPARISON
-profile_depth: minimal
-gate_policy: outreach_doc_only
-change_class: comparisons_doc_only
+change_class: "comparisons_doc_only"
+gate_policy: "outreach_doc_only"
 no_req_mint: true
-
+profile_depth: "minimal"
+request_token: "DOC-OPEN-ONTOLOGIES-COMPARISON"
 steps:
-  translate-sponsor-intent:
-    status: done
-    notes: Open Ontologies Rust engine × TIED agent-management lens; local repo read-only.
   change-definition:
-    status: done
-    notes: Wave 1 capture + Wave 2 analysis + git allowlist; no YAML mint.
-  session-bootstrap:
-    status: done
+    notes: "Wave 1 capture + Wave 2 analysis + git allowlist; no YAML mint."
+    status: "done"
   impact-discovery:
-    status: done
-    notes: Files listed in PLAN-refine-pass1.md Implement section.
-  risk-assessment:
-    status: done
-    notes: Tool-count/version doc drift; conflating Lean certs with TIED verify — documented.
-  test-strategy:
-    status: done
-    notes: Section parity, claim labels, link check, token grep, sibling cross-links.
-  pre_implementation:
-    status: blocked
-    notes: "tied_checklist_gate_validate allowed:false (missing adversarial slugs, outreach DOC token) — doc-only build may proceed at build-plan per sibling outreach pattern; not implementation authorization."
+    notes: "Files listed in PLAN-refine-pass1.md Implement section."
+    status: "done"
   implement-doc-deliverables:
-    status: done
-    notes: Wave 1 + Wave 2 + .gitignore; verification in evidence/build-plan-handoff.md.
+    notes: "Wave 1 + Wave 2 + .gitignore; verification in evidence/build-plan-handoff.md."
+    status: "done"
+  pre_implementation:
+    notes: "tied_checklist_gate_validate allowed:false (missing adversarial slugs, outreach DOC token) — doc-only build may proceed at build-plan per sibling outreach pattern; not implementation authorization."
+    status: "blocked"
+  risk-assessment:
+    notes: "Tool-count/version doc drift; conflating Lean certs with TIED verify — documented."
+    status: "done"
+  session-bootstrap:
+    status: "done"
+  test-strategy:
+    notes: "Section parity, claim labels, link check, token grep, sibling cross-links."
+    status: "done"
   traceable-commit:
-    status: done
     notes: "dc0489c2 — scoped DOC outreach commit; close_out machine gate blocked."
+    status: "done"
+  translate-sponsor-intent:
+    notes: "Open Ontologies Rust engine × TIED agent-management lens; local repo read-only."
+    status: "done"

@@ -144,7 +144,7 @@ CITDP and tracker YAML under **`tied-project/`** must use ordered-list keys (`co
 ./tied-install.sh --migrate-ordered-list-keys --fail-if-pending /path/to/client   # CI: exit 1 if still pending
 ```
 
-Scope: `tied-project/citdp/` and `tied-project/working/` only (not client `tied-bundle/`). Requires modern two-folder layout (`--migrate-layout` first if legacy `tied/` markers remain). See `tied-bundle/docs/detail-files-schema.md` (Set vs ordered list keys) and [REQ-CITDP_ORDERED_LIST_KEYS].
+Scope: `tied-project/citdp/` and `tied-project/working/` only (not client `tied-bundle/`). Clients must already use **`tied-project/`** + **`tied-bundle/`**; see **`./tied-install.sh --help`** for layout-related install flags. See `tied-bundle/docs/detail-files-schema.md` (Set vs ordered list keys) and [REQ-CITDP_ORDERED_LIST_KEYS].
 
 ### Client refresh parity gate ([REQ-TIED_CLIENT_REFRESH_PARITY])
 

@@ -1,37 +1,33 @@
-# Per-request tracker — DOC-AI-SDLC-FACTORY-COMPARISON (build-plan 2026-10-23)
-# Doc-only outreach; full checklist slugs not enrolled.
-
-request_token: DOC-AI-SDLC-FACTORY-COMPARISON
-profile_depth: minimal
-gate_policy: outreach_doc_only
-change_class: comparisons_doc_only
+change_class: "comparisons_doc_only"
+gate_policy: "outreach_doc_only"
 no_req_mint: true
-
+profile_depth: "minimal"
+request_token: "DOC-AI-SDLC-FACTORY-COMPARISON"
 steps:
-  translate-sponsor-intent:
-    status: done
   change-definition:
-    status: done
-  session-bootstrap:
-    status: done
-  impact-discovery:
-    status: done
-  risk-assessment:
-    status: done
-  test-strategy:
-    status: done
-  pre_implementation:
-    status: blocked
-    notes: "tied_checklist_gate_validate allowed:false — prior outreach DOC token validation reported invalid_slug/custom-step and minimal-depth schema diagnostics; latest read-only validation (2026-10-23) reported malformed_citdp:adversarial_inquiry. No implementation is authorized or pending; doc-only deliverables are complete per PLAN."
-  implement-doc-deliverables:
-    status: done
-    notes: ".gitignore allowlist + docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md"
-  verification-gate:
-    status: done
-    notes: "Doc test strategy — token grep (reference-only REQ-REQUEST_EVIDENCE_ENVELOPE OK), 14 sections, Factory-reported labels; tied_validate_consistency skipped (no YAML)."
-  traceable-commit:
-    status: done
-    notes: "2026-10-23 scoped commit eb501dae; build-plan pass2 (2026-10-23) reconciled — no further doc deliverables"
+    status: "done"
   close_out:
-    status: done
     notes: "Minimal outreach — machine gate blocked; Ludanyi-class doc close-out with handoff evidence."
+    status: "done"
+  impact-discovery:
+    status: "done"
+  implement-doc-deliverables:
+    notes: ".gitignore allowlist + docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md"
+    status: "done"
+  pre_implementation:
+    notes: "tied_checklist_gate_validate allowed:false — prior outreach DOC token validation reported invalid_slug/custom-step and minimal-depth schema diagnostics; latest read-only validation (2026-10-23) reported malformed_citdp:adversarial_inquiry. No implementation is authorized or pending; doc-only deliverables are complete per PLAN."
+    status: "blocked"
+  risk-assessment:
+    status: "done"
+  session-bootstrap:
+    status: "done"
+  test-strategy:
+    status: "done"
+  traceable-commit:
+    notes: "2026-10-23 scoped commit eb501dae; build-plan pass2 (2026-10-23) reconciled — no further doc deliverables"
+    status: "done"
+  translate-sponsor-intent:
+    status: "done"
+  verification-gate:
+    notes: "Doc test strategy — token grep (reference-only REQ-REQUEST_EVIDENCE_ENVELOPE OK), 14 sections, Factory-reported labels; tied_validate_consistency skipped (no YAML)."
+    status: "done"

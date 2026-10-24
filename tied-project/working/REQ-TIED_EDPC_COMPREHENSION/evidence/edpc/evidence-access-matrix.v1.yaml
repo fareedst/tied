@@ -1,10 +1,10 @@
-schema_version: "evidence-access-matrix.v1"
-evidence_access_tier: "toolchain_readonly"
-production_touch: "none"
+access_matrix_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/evidence-access-matrix.v1.yaml"
 capabilities:
   compile: true
-  test: true
   execute: true
   source_write: false
+  test: true
 charter_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/engagement-charter.v1.yaml"
-access_matrix_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/evidence-access-matrix.v1.yaml"
+evidence_access_tier: "toolchain_readonly"
+production_touch: "none"
+schema_version: "evidence-access-matrix.v1"

@@ -1,109 +1,109 @@
 citdp:
-  path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml
-  reason: Harness trace learning pilot; LangChain comparison Phase 2 Loop 3 compose.
-  status: analysis
-depth_tier: minimal
-gate_policy: advisory
-methodology_surface_change_class: prompt_type_workflow
-profile_depth: minimal
-purpose: Per-request Tracker for REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.
+  path: "tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml"
+  reason: "Harness trace learning pilot; LangChain comparison Phase 2 Loop 3 compose."
+  status: "analysis"
+depth_tier: "minimal"
+gate_policy: "advisory"
+methodology_surface_change_class: "prompt_type_workflow"
+profile_depth: "minimal"
+purpose: "Per-request Tracker for REQ-TIED_HARNESS_TRACE_LEARNING_PILOT."
 refine_pass: 1
 refine_pass_date: "2026-10-21"
-request: REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
-request_token: REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_complete
+request: "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+request_token: "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
 steps:
-  - id: session-bootstrap
-    disposition: completed
-    notes: PRELOAD feedback-to-tied, quality-assurance pilots, HTOL guide, methodology-surface-enrollment-advisory; Phase 2 scope.
-  - id: translate-sponsor-intent
-    disposition: completed
+  - disposition: "completed"
+    id: "session-bootstrap"
+    notes: "PRELOAD feedback-to-tied, quality-assurance pilots, HTOL guide, methodology-surface-enrollment-advisory; Phase 2 scope."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: /Users/fareed/.cursor/plans/htol_phase_2_pilot_88cb172f.plan.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/PLAN.md
-  - id: change-definition
-    disposition: completed
+      - kind: "file_path"
+        path: "/Users/fareed/.cursor/plans/htol_phase_2_pilot_88cb172f.plan.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/PLAN.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml
-  - id: impact-discovery
-    disposition: completed
-    notes: Slices A–F; prompt_type_workflow surface_ref harness-trace-review; Loop 3 MCP compose only.
-  - id: risk-assessment
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml"
+    id: "change-definition"
+  - disposition: "completed"
+    id: "impact-discovery"
+    notes: "Slices A–F; prompt_type_workflow surface_ref harness-trace-review; Loop 3 MCP compose only."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml
-    notes: persistence trigger; depth_change_waiver documented; costly choice — no improved outcome on implement.
-  - id: test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-REQ-TIED_HARNESS_TRACE_LEARNING_PILOT.yaml"
+    id: "risk-assessment"
+    notes: "persistence trigger; depth_change_waiver documented; costly choice — no improved outcome on implement."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/test-strategy.md
-  - id: sub-adversarial-inquiry-pass
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: CITDP counterexamples only.
-  - id: author-requirement
-    disposition: completed
-    notes: REQ-TIED_HARNESS_TRACE_LEARNING_PILOT minted at refine-plan via tied_token_create_with_detail.
-  - id: author-architecture
-    disposition: completed
-    notes: ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT at refine-plan.
-  - id: persist-implementation-records
-    disposition: completed
-    notes: IMPL index + sidecar at refine-plan; expand blocks before RED in implement.
-  - id: gate-pseudocode-validation
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/test-strategy.md"
+    id: "test-strategy"
+  - disposition: "not_applicable"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "CITDP counterexamples only."
+  - disposition: "completed"
+    id: "author-requirement"
+    notes: "REQ-TIED_HARNESS_TRACE_LEARNING_PILOT minted at refine-plan via tied_token_create_with_detail."
+  - disposition: "completed"
+    id: "author-architecture"
+    notes: "ARCH-TIED_HARNESS_TRACE_LEARNING_PILOT at refine-plan."
+  - disposition: "completed"
+    id: "persist-implementation-records"
+    notes: "IMPL index + sidecar at refine-plan; expand blocks before RED in implement."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT-pseudocode.md
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/gates/pre_implementation-2026-10-21T06-16-12-831Z.json
-  - id: resolve-pseudocode
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT-pseudocode.md"
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/gates/pre_implementation-2026-10-21T06-16-12-831Z.json"
+    id: "gate-pseudocode-validation"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT-pseudocode.md
-  - id: three-way-alignment-unit
-    disposition: not_applicable
-  - id: unit-test-red
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_HARNESS_TRACE_LEARNING_PILOT-pseudocode.md"
+    id: "resolve-pseudocode"
+  - disposition: "not_applicable"
+    id: "three-way-alignment-unit"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tools/bootstrap/lib/harness-trace-learning-experiment-charter-doc.test.mjs
-      - kind: command
+      - kind: "command"
         path: "node --test tools/bootstrap/lib/harness-trace-learning-experiment-charter-doc.test.mjs (RED before charter)"
-  - id: unit-test-green
-    disposition: completed
+      - kind: "file_path"
+        path: "tools/bootstrap/lib/harness-trace-learning-experiment-charter-doc.test.mjs"
+    id: "unit-test-red"
+  - disposition: "completed"
     evidence_refs:
-      - kind: command
+      - kind: "command"
         path: "node --test tools/bootstrap/lib/harness-trace-learning-experiment-charter-doc.test.mjs (GREEN after charter)"
-  - id: composition-integration
-    disposition: completed
+    id: "unit-test-green"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/methodology-learning-experiment-validate-implement.v1.json
-    rationale: tied_methodology_learning_experiment_validate on dogfood row; enrollment advisory JSON optional.
-  - id: end-to-end-ui
-    disposition: not_applicable
-  - id: verification-gate
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/methodology-learning-experiment-validate-implement.v1.json"
+    id: "composition-integration"
+    rationale: "tied_methodology_learning_experiment_validate on dogfood row; enrollment advisory JSON optional."
+  - disposition: "not_applicable"
+    id: "end-to-end-ui"
+  - disposition: "completed"
     evidence_refs:
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/gates/verification-2026-10-21T06-24-58-859Z.json
-  - id: persist-citdp-record
-    disposition: completed
-    notes: CITDP record_status complete after implement slices A–E.
-  - id: traceable-commit
-    disposition: completed
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/gates/verification-2026-10-21T06-24-58-859Z.json"
+    id: "verification-gate"
+  - disposition: "completed"
+    id: "persist-citdp-record"
+    notes: "CITDP record_status complete after implement slices A–E."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/traceable-commit-evidence.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/proposed-commit-message.txt
-      - kind: command
+      - kind: "command"
         path: "git commit c5441f70 — feat(htol): Loop 3 harness trace learning pilot (Phase 2)"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/proposed-commit-message.txt"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/traceable-commit-evidence.md"
+    id: "traceable-commit"

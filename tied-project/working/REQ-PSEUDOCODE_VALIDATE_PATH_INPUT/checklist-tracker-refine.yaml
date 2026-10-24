@@ -1,72 +1,72 @@
 copy_hygiene: "Refine-plan pass 1 — planning + draft IMPL pseudo; product code deferred to build-plan."
-depth_tier: integrated
+depth_tier: "integrated"
 execution_evidence:
   completed:
-    - translate-sponsor-intent
-    - session-bootstrap
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - resolve-pseudocode
-  envelope_path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/request-evidence-envelope.v1.json
+    - "change-definition"
+    - "impact-discovery"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     limitation: "Refine only; no mcp-server product diff in pass 1."
-    status: refine_pass_1_complete
-  request: REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
-gate_policy: advisory
-name: pseudocode-validate-path-input-refine-tracker
-profile_depth: not_measured
+    status: "refine_pass_1_complete"
+  request: "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+gate_policy: "advisory"
+name: "pseudocode-validate-path-input-refine-tracker"
+profile_depth: "not_measured"
 refine_pass: 1
 refine_pass_date: "2026-10-21"
-request_token: REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
-schema_version: checklist-tracker.v1
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+request_token: "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
 state_history:
   - at: "2026-10-21"
     note: "refine-plan pass 1 — validate path input plan; integrated depth; implement deferred"
 steps:
-  - disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md
-    id: translate-sponsor-intent
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: /Users/fareed/.cursor/plans/validate_path_input_3fea2021.plan.md
-    id: session-bootstrap
-  - disposition: completed
+      - kind: "file_path"
+        path: "/Users/fareed/.cursor/plans/validate_path_input_3fea2021.plan.md"
+    id: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md
-    id: change-definition
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md"
+    id: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-    id: impact-discovery
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    id: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-    id: risk-assessment
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    id: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/test-strategy.md
-    id: test-strategy
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/test-strategy.md"
+    id: "test-strategy"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md
-    id: resolve-pseudocode
-  - disposition: pending
-    id: gate-pseudocode-validation
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md"
+    id: "resolve-pseudocode"
+  - disposition: "pending"
+    id: "gate-pseudocode-validation"
     rationale: "After token mint at build-plan; validate promoted sidecar under tied-project/implementation-decisions/."
-  - disposition: pending
-    id: sub-adversarial-inquiry-pass
+  - disposition: "pending"
+    id: "sub-adversarial-inquiry-pass"
     rationale: "Required before RED at build-plan (integrated depth)."
-  - disposition: pending
-    id: unit-test-red
+  - disposition: "pending"
+    id: "unit-test-red"
     rationale: "Deferred to @build-plan."

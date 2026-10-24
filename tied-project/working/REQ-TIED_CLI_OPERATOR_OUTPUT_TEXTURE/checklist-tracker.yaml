@@ -1,274 +1,292 @@
-copy_hygiene: Per-request Tracker for REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out; replaces full template copy.
-description: Styled how() CLI operator output texture at minimal depth advisory.
-depth_tier: minimal
-gate_policy: advisory
-profile_depth: minimal
-purpose: Gate and close-out tracker for REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.
-request: REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
-request_token: REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_complete
 citdp:
-  path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
+  path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+copy_hygiene: "Per-request Tracker for REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE close-out; replaces full template copy."
+depth_tier: "minimal"
+description: "Styled how() CLI operator output texture at minimal depth advisory."
 execution_evidence:
-  request: REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
-  completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - gate-pseudocode-validation
-    - author-requirement
-    - author-architecture
-    - persist-implementation-records
-    - resolve-pseudocode
-    - unit-test-red
-    - unit-test-green
-    - composition-integration
-    - verification-gate
-    - sync-tied-stack
-    - persist-citdp-record
-    - sub-close-out-evidence-sync
   close_out_evidence:
     date: null
     deferred: []
     gates: {}
-    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
-  envelope_path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/request-evidence-envelope.v1.json
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Gate and close-out tracker for REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE."
+request: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+request_token: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
 steps:
-  - id: session-bootstrap
-    disposition: completed
-    notes: PRELOAD CLI operator output scope; PLAN + CITDP at minimal advisory depth.
-  - id: translate-sponsor-intent
-    disposition: completed
+  - disposition: "completed"
+    id: "session-bootstrap"
+    notes: "PRELOAD CLI operator output scope; PLAN + CITDP at minimal advisory depth."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/PLAN.md
-  - id: change-definition
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/PLAN.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
-  - id: impact-discovery
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+    id: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/PLAN.md
-  - id: risk-assessment
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/PLAN.md"
+    id: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
-    notes: R1 stderr-default; mitigated via --stdout and TIED_CLI_HELP_STDOUT.
-  - id: test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+    id: "risk-assessment"
+    notes: "R1 stderr-default; mitigated via --stdout and TIED_CLI_HELP_STDOUT."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/test-strategy.md
-  - id: sub-adversarial-inquiry-pass
-    disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: Operator UX slice at minimal depth; CITDP sub_adversarial_inquiry_pass not_applicable.
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/test-strategy.md"
+    id: "test-strategy"
+  - disposition: "not_applicable"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/not-applicable-receipt.v1.json
-  - id: author-requirement
-    disposition: completed
-    notes: REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE in tied-project requirements index.
-  - id: author-architecture
-    disposition: completed
-    notes: ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE in tied-project architecture index.
-  - id: persist-implementation-records
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/not-applicable-receipt.v1.json"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Operator UX slice at minimal depth; CITDP sub_adversarial_inquiry_pass not_applicable."
+  - disposition: "completed"
+    id: "author-requirement"
+    notes: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE in tied-project requirements index."
+  - disposition: "completed"
+    id: "author-architecture"
+    notes: "ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE in tied-project architecture index."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md
-  - id: gate-pseudocode-validation
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md"
+    id: "persist-implementation-records"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/gates/pre_implementation-gate.json
-  - id: resolve-pseudocode
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md"
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/gates/pre_implementation-gate.json"
+    id: "gate-pseudocode-validation"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md
-  - id: unit-test-red
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE-pseudocode.md"
+    id: "resolve-pseudocode"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-red-evidence.md
-  - id: unit-test-green
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-red-evidence.md"
+    id: "unit-test-red"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-green-evidence.md
-      - kind: command_evidence
-        claimed_success: true
+      - claimed_success: true
         exit_code: 0
-        stdout_ref: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-green-evidence.md
-  - id: composition-integration
-    disposition: completed
+        kind: "command_evidence"
+        stdout_ref: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-green-evidence.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-green-evidence.md"
+    id: "unit-test-green"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tools/bootstrap/build-commands-how.test.mjs
-  - id: end-to-end-ui
-    disposition: not_applicable
-    rationale: Shell CLI; no UI invocation required.
-  - id: verification-gate
-    disposition: completed
+      - kind: "file_path"
+        path: "tools/bootstrap/build-commands-how.test.mjs"
+    id: "composition-integration"
+  - disposition: "not_applicable"
+    id: "end-to-end-ui"
+    rationale: "Shell CLI; no UI invocation required."
+  - disposition: "completed"
     evidence_refs:
-      - kind: gate_receipt
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/gates/verification-gate.json
-      - kind: manifest_ref
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/verification-evidence-manifest.v1.json
-  - id: persist-citdp-record
-    disposition: completed
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/gates/verification-gate.json"
+      - kind: "manifest_ref"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/verification-evidence-manifest.v1.json"
+    id: "verification-gate"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
-  - id: sync-tied-stack
-    disposition: completed
-    notes: tied_validate_consistency at close-out pre-commit.
-  - id: sub-close-out-evidence-sync
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+    id: "persist-citdp-record"
+  - disposition: "completed"
+    id: "sync-tied-stack"
+    notes: "tied_validate_consistency at close-out pre-commit."
+  - disposition: "completed"
     evidence_refs:
-      - kind: envelope_ref
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/request-evidence-envelope.v1.json
-  - id: traceable-commit
-    disposition: completed
+      - kind: "envelope_ref"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/request-evidence-envelope.v1.json"
+    id: "sub-close-out-evidence-sync"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/traceable-commit-evidence.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/proposed-commit-message.txt
-  - slug: session-bootstrap
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/proposed-commit-message.txt"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/traceable-commit-evidence.md"
+    id: "traceable-commit"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
     tracking:
-      status: completed
-      evidence_refs: &ref_0
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/session-bootstrap-evidence.md
-    disposition: completed
-    evidence_refs: *ref_0
-  - slug: translate-sponsor-intent
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
-      evidence_refs: &ref_1
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/translate-sponsor-intent-evidence.md
-    disposition: completed
-    evidence_refs: *ref_1
-  - slug: change-definition
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/change-definition-evidence.md"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: &ref_2
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/change-definition-evidence.md
-    disposition: completed
-    evidence_refs: *ref_2
-  - slug: impact-discovery
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
     tracking:
-      status: completed
-      evidence_refs: &ref_3
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/impact-discovery-evidence.md
-    disposition: completed
-    evidence_refs: *ref_3
-  - slug: risk-assessment
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: &ref_4
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/risk-assessment-evidence.md
-    disposition: completed
-    evidence_refs: *ref_4
-  - slug: test-strategy
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: &ref_5
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/test-strategy-evidence.md
-    disposition: completed
-    evidence_refs: *ref_5
-  - slug: gate-pseudocode-validation
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
     tracking:
-      status: completed
-      evidence_refs: &ref_6
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/gate-pseudocode-validation-evidence.md
-    disposition: completed
-    evidence_refs: *ref_6
-  - slug: author-requirement
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/author-requirement-evidence.md"
+    slug: "author-requirement"
     tracking:
-      status: completed
-      evidence_refs: &ref_7
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/author-requirement-evidence.md
-    disposition: completed
-    evidence_refs: *ref_7
-  - slug: author-architecture
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/author-requirement-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/author-architecture-evidence.md"
+    slug: "author-architecture"
     tracking:
-      status: completed
-      evidence_refs: &ref_8
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/author-architecture-evidence.md
-    disposition: completed
-    evidence_refs: *ref_8
-  - slug: persist-implementation-records
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/author-architecture-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/persist-implementation-records-evidence.md"
+    slug: "persist-implementation-records"
     tracking:
-      status: completed
-      evidence_refs: &ref_9
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/persist-implementation-records-evidence.md
-    disposition: completed
-    evidence_refs: *ref_9
-  - slug: resolve-pseudocode
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/persist-implementation-records-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/resolve-pseudocode-evidence.md"
+    slug: "resolve-pseudocode"
     tracking:
-      status: completed
-      evidence_refs: &ref_10
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/resolve-pseudocode-evidence.md
-    disposition: completed
-    evidence_refs: *ref_10
-  - slug: unit-test-red
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/resolve-pseudocode-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
     tracking:
-      status: completed
-      evidence_refs: &ref_11
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-red-evidence.md
-    disposition: completed
-    evidence_refs: *ref_11
-  - slug: unit-test-green
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
     tracking:
-      status: completed
-      evidence_refs: &ref_12
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-green-evidence.md
-    disposition: completed
-    evidence_refs: *ref_12
-  - slug: composition-integration
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/composition-integration-evidence.md"
+    slug: "composition-integration"
     tracking:
-      status: completed
-      evidence_refs: &ref_13
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/composition-integration-evidence.md
-    disposition: completed
-    evidence_refs: *ref_13
-  - slug: verification-gate
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/composition-integration-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: &ref_14
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/verification-evidence-manifest.v1.json
-    disposition: completed
-    evidence_refs: *ref_14
-  - slug: sync-tied-stack
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/sync-tied-stack-evidence.md"
+    slug: "sync-tied-stack"
     tracking:
-      status: completed
-      evidence_refs: &ref_15
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/sync-tied-stack-evidence.md
-    disposition: completed
-    evidence_refs: *ref_15
-  - slug: persist-citdp-record
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/sync-tied-stack-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+    slug: "persist-citdp-record"
     tracking:
-      status: completed
-      evidence_refs: &ref_16
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml
-    disposition: completed
-    evidence_refs: *ref_16
-  - slug: sub-close-out-evidence-sync
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/CITDP-REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/sub-close-out-evidence-sync-evidence.md"
+    slug: "sub-close-out-evidence-sync"
     tracking:
-      status: completed
-      evidence_refs: &ref_17
-        - tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/sub-close-out-evidence-sync-evidence.md
-    disposition: completed
-    evidence_refs: *ref_17
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/sub-close-out-evidence-sync-evidence.md"
+      status: "completed"

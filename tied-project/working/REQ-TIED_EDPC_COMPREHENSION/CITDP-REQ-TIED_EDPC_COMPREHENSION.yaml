@@ -1,61 +1,51 @@
-# Analysis record — persist copy to tied-project/citdp/ at traceable-commit (citdp-policy.md).
-change_request_id: REQ-TIED_EDPC_COMPREHENSION
-citdp_version: "1"
-status: analysis
 analysis:
-  current_behavior: >-
-    EDPC methodology exists only as docs/methodologies/EDPC_Methodology_and_Workflows.md (untracked).
-    EASAR Mode C is implemented via REQ-TIED_EASAR_RECOVERY with engagement easar_full.
-    No evidence_access_tier model, no EDPC PROC token, no MCP validate/route/publish for comprehension engagements.
-  desired_behavior: >-
-    EDPC orchestration enrolls in tied-project: edpc_full engagement (easar_full deprecated alias),
-    three fail-closed evidence_access tiers mapping sponsor codebase conditions, file-based SCM shell
-    and queues, MCP tools tied_edpc_access_validate / engagement_validate / workflow_route / publish_build,
-    PROC-EDPC_COMPREHENSION composing EASAR receipts and existing brownfield/graph/claims/envelope tools.
-    Dogfood A+B+F on stdd at toolchain_readonly under integrated advisory gates.
+  blast_radius:
+    data_stores: "tied-project YAML indexes/detail; working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/*; no mutation of target repo in store dogfood except read-only/toolchain per charter"
+    external_interfaces: "MCP tool registration; tied-cli parity"
+    modules_or_boundaries: "mcp-server/src/edpc/*; easar-receipts engagement-facet; checklist gate fixtures; tied-bundle/docs/processes.md PROC-EDPC; client-development-index; vocab routing 2i; methodology-composition-matrix §2 row; optional bootstrap PROC manifest"
+  brownfield_intent_elevation:
+    note: "Reuse mode; engagement edpc_full supersedes easar_full naming"
+  compatibility_ledger:
+    - component: "REQ-TIED_EASAR_RECOVERY"
+      disposition: "superseded_engagement_naming"
+      note: "Receipt builders unchanged; PROC nested under EDPC"
+  current_behavior: "EDPC methodology exists only as docs/methodologies/EDPC_Methodology_and_Workflows.md (untracked). EASAR Mode C is implemented via REQ-TIED_EASAR_RECOVERY with engagement easar_full. No evidence_access_tier model, no EDPC PROC token, no MCP validate/route/publish for comprehension engagements."
+  depth_tier: "integrated"
+  desired_behavior: "EDPC orchestration enrolls in tied-project: edpc_full engagement (easar_full deprecated alias), three fail-closed evidence_access tiers mapping sponsor codebase conditions, file-based SCM shell and queues, MCP tools tied_edpc_access_validate / engagement_validate / workflow_route / publish_build, PROC-EDPC_COMPREHENSION composing EASAR receipts and existing brownfield/graph/claims/envelope tools. Dogfood A+B+F on stdd at toolchain_readonly under integrated advisory gates."
+  gate_policy: "advisory"
+  methodology_surface_change_class: "prompt_type_workflow_adjacent"
+  methodology_surface_experiment_link: null
+  non_goals:
+    - "Agentstream automatic tier preflight (defer)"
+    - "CASE execution_access dimension until v1.1"
+    - "Claim relationship graph database"
+    - "Continuous G monitoring daemon"
+    - "Workflow D production ops in v1 dogfood"
+  profile_depth: "integrated"
+  risks:
+    - id: "R-EDPC-004"
+      mitigation: "coverage map + gaps[] on publish; no silent universal health"
+      severity: "medium"
+      summary: "SCM shell overstates coverage (EDPC §16 violation)"
+    - id: "R-EDPC-003"
+      mitigation: "Deprecated alias period; dual fixtures; easarFullEngagementActive wrapper"
+      severity: "medium"
+      summary: "easar_full removal breaks existing gate fixtures and CASE dogfood"
+    - id: "R-EDPC-001"
+      mitigation: "Fail-closed access_validate; publish manifest records tier; dogfood envelope"
+      severity: "high"
+      summary: "Tier validator bypassed; agent runs tests under source_static"
+    - id: "R-EDPC-002"
+      mitigation: "Separate artifacts; PROC choreography explicit sequence (EASAR stage 4–6 pattern)"
+      severity: "high"
+      summary: "Claims ledger conflated with adversarial finding ledger or reflexion output"
   satisfaction_criteria:
-    - "SC-EDPC-TIER — access matrix vs tier fail-closed"
+    - "SC-EDPC-COMPOSE — SCM shell refs inventory.v1 without duplicate"
     - "SC-EDPC-FACET — edpc_full requires pilot|strict; easar_full alias diagnostic"
     - "SC-EDPC-ROUTE — deterministic workflow_route"
     - "SC-EDPC-SCM — publish manifest + gaps[]; §16 minimum or documented gap"
-    - "SC-EDPC-COMPOSE — SCM shell refs inventory.v1 without duplicate"
     - "SC-EDPC-SUPERSEDE — EASAR REQ superseded_by link; receipt tests stay green"
-  non_goals:
-    - "Claim relationship graph database"
-    - "Workflow D production ops in v1 dogfood"
-    - "Continuous G monitoring daemon"
-    - "Agentstream automatic tier preflight (defer)"
-    - "CASE execution_access dimension until v1.1"
-  blast_radius:
-    modules_or_boundaries: >-
-      mcp-server/src/edpc/*; easar-receipts engagement-facet; checklist gate fixtures;
-      tied-bundle/docs/processes.md PROC-EDPC; client-development-index; vocab routing 2i;
-      methodology-composition-matrix §2 row; optional bootstrap PROC manifest
-    data_stores: >-
-      tied-project YAML indexes/detail; working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/*;
-      no mutation of target repo in store dogfood except read-only/toolchain per charter
-    external_interfaces: MCP tool registration; tied-cli parity
-  risks:
-    - id: R-EDPC-001
-      summary: Tier validator bypassed; agent runs tests under source_static
-      mitigation: Fail-closed access_validate; publish manifest records tier; dogfood envelope
-      severity: high
-    - id: R-EDPC-002
-      summary: Claims ledger conflated with adversarial finding ledger or reflexion output
-      mitigation: Separate artifacts; PROC choreography explicit sequence (EASAR stage 4–6 pattern)
-      severity: high
-    - id: R-EDPC-003
-      summary: easar_full removal breaks existing gate fixtures and CASE dogfood
-      mitigation: Deprecated alias period; dual fixtures; easarFullEngagementActive wrapper
-      severity: medium
-    - id: R-EDPC-004
-      summary: SCM shell overstates coverage (EDPC §16 violation)
-      mitigation: coverage map + gaps[] on publish; no silent universal health
-      severity: medium
-  test_strategy_ref: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/test-strategy.md
-  depth_tier: integrated
-  profile_depth: integrated
-  gate_policy: advisory
+    - "SC-EDPC-TIER — access matrix vs tier fail-closed"
   tdd_sequence:
     - "IMPL pseudo-code all EDPC IMPL tokens with block comments"
     - "RED: edpc/access-validate.test.ts tier matrix"
@@ -64,41 +54,19 @@ analysis:
     - "RED: edpc/publish-build.test.ts manifest gaps"
     - "Composition: tools/index.ts registers four tools"
     - "Regression: easar-receipts, brownfield-intent-evidence, checklist-validator globs"
-  methodology_surface_change_class: prompt_type_workflow_adjacent
-  methodology_surface_experiment_link: null
-  brownfield_intent_elevation:
-    note: "Reuse mode; engagement edpc_full supersedes easar_full naming"
-  compatibility_ledger:
-    - component: REQ-TIED_EASAR_RECOVERY
-      disposition: superseded_engagement_naming
-      note: Receipt builders unchanged; PROC nested under EDPC
-risk_analysis:
-  adversarial_inquiry:
-    assurance_profile: "baseline-functional"
-    counterexamples:
-      - "evidence_access_tier bypassed; agent runs compile/test under source_static"
-      - "easar_full removed without alias breaks gate fixtures"
-      - "claims-ledger merged with adversarial finding-ledger"
-    depth_tier: "integrated"
-    disconfirming_observations:
-      - "tied_edpc_access_validate rejects forbidden capability flags in unit tests"
-      - "pre_implementation structural inquiry run_id pairs with phase artifacts"
-    eligibility_triggers_matched:
-      - "MCP surface expansion — four EDPC validate/route/publish tools"
-    evidence_references:
-      - "docs/methodologies/EDPC_Methodology_and_Workflows.md"
-      - "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/PLAN.md"
-    falsification_questions:
-      - "Can publish manifest omit gaps[] when tier blocks Observed claims?"
-      - "Can pre_implementation pass without identity-bound inquiry artifacts?"
-    gate_policy: "advisory"
-    integrated_waiver: null
-    prior_depth_tier: null
-    profile_depth: "integrated"
-    rationale: "EDPC orchestration spans tier caps and MCP tools; integrated structural inquiry before RED."
-    research_profile: "read-only-research"
-    sub_adversarial_inquiry_pass: "required_before_red"
+  test_strategy_ref: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/test-strategy.md"
+change_request_id: "REQ-TIED_EDPC_COMPREHENSION"
+citdp_version: "1"
 completion_criteria:
+  activation:
+    phase: "verification"
+    request_token: "REQ-TIED_EDPC_COMPREHENSION"
+    run_id: "edpc-verify-20261019"
+    scope:
+      - "IMPL-TIED_EDPC_ACCESS#MCP_TIED_EDPC_ACCESS_VALIDATE#edpc-verify-rev-1"
+      - "IMPL-TIED_EDPC_ENGAGEMENT_FACET#MCP_TIED_EDPC_ENGAGEMENT_VALIDATE#edpc-verify-rev-1"
+      - "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-verify-rev-1"
+      - "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-verify-rev-1"
   close_out:
     activation:
       phase: "close_out"
@@ -111,16 +79,34 @@ completion_criteria:
         - "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-closeout-rev-1"
     envelope_blocking: "fail_on_error_gaps true at program close-out"
     tracker_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-close-out.yaml"
-  activation:
-    phase: "verification"
-    request_token: "REQ-TIED_EDPC_COMPREHENSION"
-    run_id: "edpc-verify-20261019"
-    scope:
-      - "IMPL-TIED_EDPC_ACCESS#MCP_TIED_EDPC_ACCESS_VALIDATE#edpc-verify-rev-1"
-      - "IMPL-TIED_EDPC_ENGAGEMENT_FACET#MCP_TIED_EDPC_ENGAGEMENT_VALIDATE#edpc-verify-rev-1"
-      - "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-verify-rev-1"
-      - "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-verify-rev-1"
   envelope_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
   focused_tests: "mcp-server/src/edpc/*.test.ts; scoped easar + checklist-validator regression"
-  verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
   tracker_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/gate-tracker-verification.yaml"
+  verification: "tied_validate_consistency; tied_checklist_gate_validate verification"
+risk_analysis:
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    counterexamples:
+      - "claims-ledger merged with adversarial finding-ledger"
+      - "easar_full removed without alias breaks gate fixtures"
+      - "evidence_access_tier bypassed; agent runs compile/test under source_static"
+    depth_tier: "integrated"
+    disconfirming_observations:
+      - "pre_implementation structural inquiry run_id pairs with phase artifacts"
+      - "tied_edpc_access_validate rejects forbidden capability flags in unit tests"
+    eligibility_triggers_matched:
+      - "MCP surface expansion — four EDPC validate/route/publish tools"
+    evidence_references:
+      - "docs/methodologies/EDPC_Methodology_and_Workflows.md"
+      - "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/PLAN.md"
+    falsification_questions:
+      - "Can pre_implementation pass without identity-bound inquiry artifacts?"
+      - "Can publish manifest omit gaps[] when tier blocks Observed claims?"
+    gate_policy: "advisory"
+    integrated_waiver: null
+    prior_depth_tier: null
+    profile_depth: "integrated"
+    rationale: "EDPC orchestration spans tier caps and MCP tools; integrated structural inquiry before RED."
+    research_profile: "read-only-research"
+    sub_adversarial_inquiry_pass: "required_before_red"
+status: "analysis"

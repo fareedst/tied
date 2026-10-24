@@ -1,30 +1,30 @@
-schema_version: conformance-catalog.v1
 entries:
-  - clause_id: EDSE-001
-    validator_id: EVIDENCE_KIND_PRESENT
-    evidence_kind: context_profile_record
-    tied_surface: context_adaptive_profile_validate
-  - clause_id: EDSE-002
-    validator_id: EVIDENCE_KIND_PRESENT
-    evidence_kind: selection_receipt
-    tied_surface: context_adaptive_select_practices
-  - clause_id: EDSE-003
-    validator_id: EVIDENCE_KIND_PRESENT
-    evidence_kind: test_evidence
-    tied_surface: tied_verify
-  - clause_id: EDSE-004
-    validator_id: EVIDENCE_KIND_PRESENT
-    evidence_kind: envelope_artifact
-    tied_surface: request_evidence_envelope
-  - clause_id: EDSE-005
-    validator_id: EVIDENCE_KIND_PRESENT
-    evidence_kind: gate_receipt
-    tied_surface: tied_checklist_gate_validate
-  - clause_id: EDSE-006
-    validator_id: EVIDENCE_KIND_PRESENT
-    evidence_kind: reassessment_receipt
-    tied_surface: context_adaptive_reassess
-  - clause_id: EDSE-007
-    validator_id: EVIDENCE_KIND_PRESENT
-    evidence_kind: learning_experiment_link
-    tied_surface: tied_methodology_learning_experiment_list
+  - clause_id: "EDSE-001"
+    evidence_kind: "context_profile_record"
+    tied_surface: "context_adaptive_profile_validate"
+    validator_id: "EVIDENCE_KIND_PRESENT"
+  - clause_id: "EDSE-002"
+    evidence_kind: "selection_receipt"
+    tied_surface: "context_adaptive_select_practices"
+    validator_id: "EVIDENCE_KIND_PRESENT"
+  - clause_id: "EDSE-003"
+    evidence_kind: "test_evidence"
+    tied_surface: "tied_verify"
+    validator_id: "EVIDENCE_KIND_PRESENT"
+  - clause_id: "EDSE-004"
+    evidence_kind: "envelope_artifact"
+    tied_surface: "request_evidence_envelope"
+    validator_id: "EVIDENCE_KIND_PRESENT"
+  - clause_id: "EDSE-005"
+    evidence_kind: "gate_receipt"
+    tied_surface: "tied_checklist_gate_validate"
+    validator_id: "EVIDENCE_KIND_PRESENT"
+  - clause_id: "EDSE-006"
+    evidence_kind: "reassessment_receipt"
+    tied_surface: "context_adaptive_reassess"
+    validator_id: "EVIDENCE_KIND_PRESENT"
+  - clause_id: "EDSE-007"
+    evidence_kind: "learning_experiment_link"
+    tied_surface: "tied_methodology_learning_experiment_list"
+    validator_id: "EVIDENCE_KIND_PRESENT"
+schema_version: "conformance-catalog.v1"

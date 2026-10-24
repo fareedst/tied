@@ -1,29 +1,20 @@
-# Example methodology-learning-experiment.v1 row for HTOL Loop 3 pilot enrollment.
-# Upsert via tied_methodology_learning_experiment_upsert (do not hand-edit store index when MCP available).
-# Traceability: REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
-
-schema_version: "methodology-learning-experiment.v1"
 experiment_id: "mle-htol-pilot-YYYYMMDD-001"
-production_system_surface: "prompt_type_workflow"
-surface_ref: "harness-trace-review"
-privacy_tier: "operator_local"
-methodology_hypothesis: >
-  Structured @harness-trace-review increases actionable Kaizen captures versus ad hoc transcript review
-  within a bounded cohort and follow-up window.
 methodology_baseline:
-  snapshot_at: "2026-01-01T00:00:00Z"
   metric_rows:
     - name: "htol_tagged_capture_count"
       value: "not_measured"
     - name: "pre_charter_observation_rate"
       value: "not_measured"
+  snapshot_at: "2026-01-01T00:00:00Z"
+methodology_hypothesis: "Structured @harness-trace-review increases actionable Kaizen captures versus ad hoc transcript review within a bounded cohort and follow-up window.\n"
 methodology_outcome_observation:
-  value: "not_measured"
-  recorded_at: "2026-01-01T00:00:00Z"
   evidence_refs:
     - "tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/methodology-learning-experiment-upsert-refine.v1.json"
-proof_boundary: >
-  Structural enrollment for HTOL learning pilot; does not prove LangChain-style bench gains or HTOL effectiveness.
+  recorded_at: "2026-01-01T00:00:00Z"
+  value: "not_measured"
+privacy_tier: "operator_local"
+production_system_surface: "prompt_type_workflow"
+proof_boundary: "Structural enrollment for HTOL learning pilot; does not prove LangChain-style bench gains or HTOL effectiveness.\n"
 rule_countermeasure_ref:
   kind: "methodology_doc_compose"
   paths:
@@ -33,3 +24,5 @@ rule_countermeasure_ref:
 rule_reversal:
   applied: false
   rationale: "Outcome observation deferred until pilot window and sponsor review."
+schema_version: "methodology-learning-experiment.v1"
+surface_ref: "harness-trace-review"

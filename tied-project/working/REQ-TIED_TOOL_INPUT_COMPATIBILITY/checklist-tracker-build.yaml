@@ -1,205 +1,214 @@
-copy_hygiene: Build-plan Phases 1–3 complete; verification gate + envelope sync.
-depth_tier: integrated
+copy_hygiene: "Build-plan Phases 1–3 complete; verification gate + envelope sync."
+depth_tier: "integrated"
 execution_evidence:
   completed:
-    - translate-sponsor-intent
-    - session-bootstrap
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - resolve-pseudocode
-    - gate-pseudocode-validation
-    - sub-adversarial-inquiry-pass
-    - unit-test-red
-    - unit-test-green
-    - composition-integration
-    - verification-gate
-  envelope_path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/request-evidence-envelope.v1.json
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
-    kaizen_baseline: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md
-    kaizen_feedback_id: fb-mvgagoen-gtfuua
-    kaizen_outcome_id: oo-mvgahc5x-zacqtr
-    status: build_plan_verification_pass
-  pre_implementation_receipt: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/gates/pre_implementation-2026-10-20T05-43-33-302Z.json
-  request: REQ-TIED_TOOL_INPUT_COMPATIBILITY
-gate_policy: advisory
+    kaizen_baseline: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md"
+    kaizen_feedback_id: "fb-mvgagoen-gtfuua"
+    kaizen_outcome_id: "oo-mvgahc5x-zacqtr"
+    status: "build_plan_verification_pass"
+  pre_implementation_receipt: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/gates/pre_implementation-2026-10-20T05-43-33-302Z.json"
+  request: "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+gate_policy: "advisory"
 impl_inventory:
-  - IMPL-TIED_TOOL_INPUT_NORMALIZATION
-name: tied-tool-input-compat-build-tracker
-profile_depth: not_measured
-request_token: REQ-TIED_TOOL_INPUT_COMPATIBILITY
-schema_version: checklist-tracker.v1
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+  - "IMPL-TIED_TOOL_INPUT_NORMALIZATION"
+name: "tied-tool-input-compat-build-tracker"
+profile_depth: "not_measured"
+request_token: "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
 state_history:
-  - at: '2026-10-20'
-    note: build-plan verification gate + envelope repair
+  - at: "2026-10-20"
+    note: "build-plan verification gate + envelope repair"
 steps:
-  - disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md
-    id: translate-sponsor-intent
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md
-    id: session-bootstrap
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md"
+    id: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md
-    id: change-definition
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/PLAN.md"
+    id: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml
-    id: impact-discovery
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml"
+    id: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml
-    id: risk-assessment
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/CITDP-REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml"
+    id: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/test-strategy.md
-    id: test-strategy
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/test-strategy.md"
+    id: "test-strategy"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION-pseudocode.md
-    id: resolve-pseudocode
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION-pseudocode.md"
+    id: "resolve-pseudocode"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: >-
-          tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/pseudocode-validate-IMPL-TIED_TOOL_INPUT_NORMALIZATION.json
-    id: gate-pseudocode-validation
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/pseudocode-validate-IMPL-TIED_TOOL_INPUT_NORMALIZATION.json"
+    id: "gate-pseudocode-validation"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: >-
-          tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/obligation-report.json
-      - kind: file_path
-        path: >-
-          tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-verification/obligation-report.json
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-inquiry-result.json
-    id: sub-adversarial-inquiry-pass
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-pre_implementation/obligation-report.json"
+      - kind: "file_path"
+        path: "tied-bundle/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/adversarial-inquiry/phase-verification/obligation-report.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-inquiry-result.json"
+    id: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/parse-content.test.ts
-    id: unit-test-red
-  - disposition: completed
+      - kind: "file_path"
+        path: "mcp-server/src/parse-content.test.ts"
+    id: "unit-test-red"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/tools/tool-record-input-schema.test.ts
-    id: unit-test-green
-  - disposition: completed
+      - kind: "file_path"
+        path: "mcp-server/src/tools/tool-record-input-schema.test.ts"
+    id: "unit-test-green"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/tools/tool-record-input-schema.test.ts
-      - kind: file_path
-        path: mcp-server/test/tied-cli-large-args.test.cjs
-    id: composition-integration
-  - disposition: completed
+      - kind: "file_path"
+        path: "mcp-server/src/tools/tool-record-input-schema.test.ts"
+      - kind: "file_path"
+        path: "mcp-server/test/tied-cli-large-args.test.cjs"
+    id: "composition-integration"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-gate-evidence.md
-      - kind: file_path
-        path: >-
-          tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/pseudocode-validate-IMPL-TIED_TOOL_INPUT_NORMALIZATION.json
-    id: verification-gate
-  - slug: translate-sponsor-intent
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/pseudocode-validate-IMPL-TIED_TOOL_INPUT_NORMALIZATION.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-gate-evidence.md"
+    id: "verification-gate"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
-      evidence_refs: &ref_0
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/translate-sponsor-intent-evidence.md
-    disposition: completed
-    evidence_refs: *ref_0
-  - slug: session-bootstrap
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
     tracking:
-      status: completed
-      evidence_refs: &ref_1
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/session-bootstrap-evidence.md
-    disposition: completed
-    evidence_refs: *ref_1
-  - slug: change-definition
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/change-definition-evidence.md"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: &ref_2
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/change-definition-evidence.md
-    disposition: completed
-    evidence_refs: *ref_2
-  - slug: impact-discovery
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
     tracking:
-      status: completed
-      evidence_refs: &ref_3
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/impact-discovery-evidence.md
-    disposition: completed
-    evidence_refs: *ref_3
-  - slug: risk-assessment
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: &ref_4
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/risk-assessment-evidence.md
-    disposition: completed
-    evidence_refs: *ref_4
-  - slug: test-strategy
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: &ref_5
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/test-strategy-evidence.md
-    disposition: completed
-    evidence_refs: *ref_5
-  - slug: resolve-pseudocode
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/resolve-pseudocode-evidence.md"
+    slug: "resolve-pseudocode"
     tracking:
-      status: completed
-      evidence_refs: &ref_6
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/resolve-pseudocode-evidence.md
-    disposition: completed
-    evidence_refs: *ref_6
-  - slug: gate-pseudocode-validation
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/resolve-pseudocode-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
     tracking:
-      status: completed
-      evidence_refs: &ref_7
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/gate-pseudocode-validation-evidence.md
-    disposition: completed
-    evidence_refs: *ref_7
-  - slug: sub-adversarial-inquiry-pass
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
-      status: completed
-      evidence_refs: &ref_8
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/sub-adversarial-inquiry-pass-evidence.md
-    disposition: completed
-    evidence_refs: *ref_8
-  - slug: unit-test-red
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
     tracking:
-      status: completed
-      evidence_refs: &ref_9
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/unit-test-red-evidence.md
-    disposition: completed
-    evidence_refs: *ref_9
-  - slug: unit-test-green
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
     tracking:
-      status: completed
-      evidence_refs: &ref_10
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/unit-test-green-evidence.md
-    disposition: completed
-    evidence_refs: *ref_10
-  - slug: composition-integration
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/composition-integration-evidence.md"
+    slug: "composition-integration"
     tracking:
-      status: completed
-      evidence_refs: &ref_11
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/composition-integration-evidence.md
-    disposition: completed
-    evidence_refs: *ref_11
-  - slug: verification-gate
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/composition-integration-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: &ref_12
-        - tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-evidence-manifest.v1.json
-    disposition: completed
-    evidence_refs: *ref_12
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"

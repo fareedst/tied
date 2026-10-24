@@ -1,63 +1,63 @@
 copy_hygiene: "Refine-plan pass 2 — close-out execution plan; dedicated checklist-tracker.yaml; no commit in refine."
-depth_tier: minimal
+depth_tier: "minimal"
 execution_evidence:
   completed:
-    - translate-sponsor-intent
-    - session-bootstrap
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-  envelope_path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/evidence/request-evidence-envelope.v1.json
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     limitation: "Refine only; no product code."
-    status: refine_pass_1_complete
-  request: REQ-PROMPT_TYPE_GLOBAL_SKILLS
-gate_policy: advisory
-name: pco-traceable-commit-refine-tracker
-profile_depth: not_measured
+    status: "refine_pass_1_complete"
+  request: "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+gate_policy: "advisory"
+name: "pco-traceable-commit-refine-tracker"
+profile_depth: "not_measured"
 refine_pass: 2
 refine_pass_date: "2026-10-20"
-request_token: REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT
-schema_version: checklist-tracker.v1
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+request_token: "REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
 state_history:
   - at: "2026-10-19"
     note: "refine-plan pass 1 — linked plan plan-close-out_commit_c1bbb590; sponsor skip commit when gates blocked"
   - at: "2026-10-20"
     note: "refine-plan pass 2 — Phase 3 close-out playbook; checklist-tracker.yaml; envelope minimal rebuild"
 steps:
-  - disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md
-    id: translate-sponsor-intent
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: /Users/fareed/.cursor/plans/plan-close-out_commit_c1bbb590.plan.md
-    id: session-bootstrap
-  - disposition: completed
+      - kind: "file_path"
+        path: "/Users/fareed/.cursor/plans/plan-close-out_commit_c1bbb590.plan.md"
+    id: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md
-    id: change-definition
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/PLAN.md"
+    id: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml
-    id: impact-discovery
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml"
+    id: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml
-    id: risk-assessment
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/CITDP-REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT.yaml"
+    id: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/test-strategy.md
-    id: test-strategy
-  - disposition: not_applicable
-    id: sub-adversarial-inquiry-pass
-    policy: minimal-depth-no-inquiry
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/test-strategy.md"
+    id: "test-strategy"
+  - disposition: "not_applicable"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
     rationale: "Docs and static prompt-type tests only; sub_adversarial_inquiry_pass not_applicable in CITDP."

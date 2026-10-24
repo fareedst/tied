@@ -15,14 +15,14 @@ execution_evidence:
   completed: []
   envelope_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
+    close_out_run_id: "easar-close-out-20261018"
     integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EASAR_RECOVERY/adversarial-inquiry/phase-{phase}/"
     limitation: "Identity-bound activation required at integrated depth; one run_id per gate phase."
     slice1_verification_run_id: "easar-slice1-verify-20261018"
-    slice2_verification_run_id: "easar-slice2-verify-20261018"
     slice2_e2e_plan: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/slice2-e2e-plan.md"
+    slice2_verification_run_id: "easar-slice2-verify-20261018"
     slice3_verification_run_id: "easar-slice3-verify-20261018"
     slice4_verification_run_id: "easar-slice4-verify-20261018"
-    close_out_run_id: "easar-close-out-20261018"
     status: "program_close_out_in_progress"
   request: "REQ-TIED_EASAR_RECOVERY"
 gate_policy: "advisory"

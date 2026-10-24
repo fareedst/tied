@@ -3,17 +3,17 @@ CITDP-REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
     current_behavior: "Store .gitignore mirrors little of EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS onto tied-project/working/; classifier treats evidence/gate-*.json as committed; thousands of regenerable paths git-tracked under tied-project/working/."
     desired_behavior: "COMMITTED WORKING REGENERABLE managed block; classifier routes evidence gate receipts to tied-bundle/working/; wave untrack regenerable index entries while keeping PLAN/tracker/facet markdown and evaluation corpora."
     non_goals:
-      - "Gitignore all of tied-project/"
-      - "Delete on-disk evidence during migration"
       - "Change client INSTALL MANAGED tied-bundle/ line"
+      - "Delete on-disk evidence during migration"
+      - "Gitignore all of tied-project/"
     sponsor_decisions:
       costly_accepted_on_implementation: "Wave git rm --cached for regenerable tied-project/working paths (600 paths in inventory)"
     success_criteria:
-      - "SC-CWGH-IGNORE"
       - "SC-CWGH-CLASSIFIER"
-      - "SC-CWGH-TRACKED-SHRINK"
-      - "SC-CWGH-FIXTURE-PARITY"
       - "SC-CWGH-DOCS"
+      - "SC-CWGH-FIXTURE-PARITY"
+      - "SC-CWGH-IGNORE"
+      - "SC-CWGH-TRACKED-SHRINK"
   completion_criteria:
     envelope_path: "tied-project/working/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE/evidence/request-evidence-envelope.v1.json"
     lint_yaml: "required on changed tied-project YAML"
@@ -34,21 +34,21 @@ CITDP-REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
   risk_analysis:
     adversarial_inquiry:
       counterexamples:
-        - "Regenerable gate JSON remains git-tracked after wave"
         - "evaluation corpus accidentally untracked"
+        - "Regenerable gate JSON remains git-tracked after wave"
       depth_tier: "minimal"
       disconfirming_observations:
         - "committed-working-gitignore temp-repo test ignores gate JSON"
-        - "working-root.test routes evidence/gate-* to tied-bundle/working"
         - "migration inventory baseline 6851 untrack 600"
+        - "working-root.test routes evidence/gate-* to tied-bundle/working"
       evidence_references:
-        - "tools/bootstrap/lib/committed-working-gitignore.test.mjs"
         - "mcp-server/src/working-root.test.ts"
         - "tied-project/working/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE/evidence/migration-inventory.v1.json"
         - "tied-project/working/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE/evidence/scoped-test-pass.stdout.txt"
+        - "tools/bootstrap/lib/committed-working-gitignore.test.mjs"
       falsification_questions:
-        - "Does git check-ignore cover tied-project/working/**/gate-*.json after profile apply?"
         - "Do pairing tests resolve demo receipt under tied-bundle/working/?"
+        - "Does git check-ignore cover tied-project/working/**/gate-*.json after profile apply?"
       gate_policy: "default"
       methodology_surface_change_class: "none"
       profile_depth: "minimal"
@@ -61,9 +61,9 @@ CITDP-REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
         - "Re-run apply-store-gitignore-profile.mjs and inventory/migrate scripts"
   test_strategy:
     green:
+      - "methodology pairing tests with methodology-pairing fixture"
       - "node --test tools/bootstrap/lib/committed-working-gitignore.test.mjs"
       - "npx tsx --test mcp-server/src/working-root.test.ts"
-      - "methodology pairing tests with methodology-pairing fixture"
     red_first:
-      - "committed-working-gitignore before applyCommittedWorkingHygieneProfile"
       - "classifier evidence/gate-* before CWGH change"
+      - "committed-working-gitignore before applyCommittedWorkingHygieneProfile"

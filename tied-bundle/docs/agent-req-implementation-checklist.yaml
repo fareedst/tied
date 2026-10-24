@@ -1576,8 +1576,8 @@ sub_procedures:
       - "tools/bootstrap/templates/sync-tracker-dispositions.mjs"
     slug: "sub-close-out-evidence-sync"
     tasks:
-      - "Collect manifest: when verification-gate or test slugs are completed, run quality_evidence_collect to working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json or record not-applicable receipt."
       - "After manifest/envelope exist on disk: run tied_git_hygiene (plan_close_out, apply false, request_token set) and copy committed_working_stage_candidates into evidence/proposed-commit-message.txt staging map for traceable-commit git add (collect does not index files)."
+      - "Collect manifest: when verification-gate or test slugs are completed, run quality_evidence_collect to working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json or record not-applicable receipt."
       - "Rebuild request-evidence-envelope.v1.json; validate with fail_on_error_gaps for machine close-out; optionally fail_on_process_gaps for process-strict sponsors."
       - "Reconcile before gates: run tied_adherence_reconcile_run with include_process_grade true; re-run gates if tracker hash changed after sync."
       - "Sync dispositions: run tools/bootstrap/templates/sync-tracker-dispositions.mjs --tracker working/{REQ-TOKEN}/agent-req-implementation-checklist.yaml so every execution_evidence.completed slug has matching steps[].tracking.status completed (or documented N/A) plus typed evidence_refs."

@@ -1,6 +1,6 @@
 {
-  "built_at": "2026-10-24T03:40:18.375Z",
-  "content_hash": "d60d485ee1aa9db41e797723305a8d41c415dc99a3a63771144c978dcb14aa76",
+  "built_at": "2026-10-24T14:51:49.107Z",
+  "content_hash": "ab3e5382dfe195b1b36308f806252bfaa766c282306306ee2e5b6a2ed8dc9ce0",
   "edges": [
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/adherence-evidence-resolve.ts#fileContentHash",
@@ -22931,6 +22931,26 @@
       "from_symbol_id": "mcp-server/src/e2e/client-bootstrap-skills.test.ts#manifestPaths",
       "kind": "imports",
       "to_symbol_id": "tools/bootstrap/lib/constants.mjs.ts#manifestPaths"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/feedback-skill.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/feedback-skill.test.ts#installStandaloneSkillsCopy",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/client-skills-catalog.mjs.ts#installStandaloneSkillsCopy"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/feedback-skill.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/feedback-skill.test.ts#loadStandaloneClientSkills",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/client-skills-catalog.mjs.ts#loadStandaloneClientSkills"
     },
     {
       "from_symbol_id": "mcp-server/src/e2e/methodology-bundle-consistency.test.ts#afterEach",
@@ -60137,6 +60157,7 @@
     "mcp-server/src/e2e/bootstrap-and-load.test.ts",
     "mcp-server/src/e2e/brownfield-client-doc-stack-contract.test.ts",
     "mcp-server/src/e2e/client-bootstrap-skills.test.ts",
+    "mcp-server/src/e2e/feedback-skill.test.ts",
     "mcp-server/src/e2e/methodology-bundle-consistency.test.ts",
     "mcp-server/src/e2e/new-tied-client.test.ts",
     "mcp-server/src/e2e/prompt-type-skills.test.ts",

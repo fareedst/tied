@@ -1,5 +1,14 @@
+brownfield_intent_elevation:
+  engagement: "edpc_full"
+  mode: "pilot"
 copy_hygiene: "Slice D refine-plan pass 2 only; clear before build-plan RED or reuse with updated execution_evidence."
 depth_tier: "integrated"
+edpc_engagement:
+  access_matrix_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/evidence-access-matrix.v1.yaml"
+  charter_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/engagement-charter.v1.yaml"
+  evidence_access_tier: "toolchain_readonly"
+  production_touch: "none"
+  target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
 execution_evidence:
   close_out_evidence:
     date: null
@@ -7,11 +16,11 @@ execution_evidence:
     gates: {}
     master_checklist: ""
   completed:
-    - "translate-sponsor-intent"
     - "change-definition"
     - "impact-discovery"
     - "risk-assessment"
     - "test-strategy"
+    - "translate-sponsor-intent"
   envelope_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-{phase}/"
@@ -28,15 +37,6 @@ refine_scope: "Workflow D prod ops — EDPC methodology section 9"
 request_token: "REQ-TIED_EDPC_COMPREHENSION"
 schema_version: "checklist-tracker.v1"
 source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
-brownfield_intent_elevation:
-  mode: pilot
-  engagement: edpc_full
-edpc_engagement:
-  evidence_access_tier: toolchain_readonly
-  target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
-  production_touch: none
-  charter_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/engagement-charter.v1.yaml"
-  access_matrix_path: "tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/edpc/evidence-access-matrix.v1.yaml"
 state_history:
   - at: "2026-10-19"
     note: "refine-plan pass 2 — Slice D PLAN, CITDP delta, test strategy, risk; maps EDPC §9 to OFSM + MCP"

@@ -1,5 +1,5 @@
+end: "2026-10-19T23:59:59Z"
+environment: "local_dev"
 schema_version: "observation-window.v1"
 start: "2026-10-19T00:00:00Z"
-end: "2026-10-19T23:59:59Z"
 timezone: "America/Los_Angeles"
-environment: "local_dev"

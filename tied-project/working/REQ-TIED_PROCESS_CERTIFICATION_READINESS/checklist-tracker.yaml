@@ -7,12 +7,12 @@ execution_evidence:
     gates: {}
     master_checklist: ""
   completed:
-    - "translate-sponsor-intent"
-    - "session-bootstrap"
     - "change-definition"
     - "impact-discovery"
     - "risk-assessment"
+    - "session-bootstrap"
     - "test-strategy"
+    - "translate-sponsor-intent"
   envelope_path: "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/adversarial-inquiry/phase-{phase}/"
@@ -31,9 +31,9 @@ state_history:
   - at: "2026-10-18"
     note: "refine-plan pass 1 — RESOLVE, CITDP, test strategy, vocab RECORD"
   - at: "2026-10-18"
-    note: "sponsor accepted C1 fixture-grounded harness; C2 file-based independent-assessment-record.v1"
-  - at: "2026-10-18"
     note: "refine-plan pass 2 — hardened slice specifications, concrete module interfaces, and build-plan readiness"
+  - at: "2026-10-18"
+    note: "sponsor accepted C1 fixture-grounded harness; C2 file-based independent-assessment-record.v1"
 steps:
   - disposition: "completed"
     evidence_refs:

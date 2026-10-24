@@ -1,5 +1,33 @@
+brownfield_intent_elevation:
+  engagement: "edpc_full"
+  mode: "pilot"
 copy_hygiene: "Pass 2: retroactive inquiry before close-out; do not clear build evidence at 6577f890; refresh run_ids if inquiry re-run."
 depth_tier: "integrated"
+edpc_engagement:
+  evidence_access_tier: "source_static"
+  note: "Platform stdd dogfood; Chart Viewer pilot is external source_static engagement"
+  production_touch: "none"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/adversarial-inquiry/phase-{phase}/"
+    limitation: "Build at 6577f890 preceded pre_impl allowed; retroactive inquiry required before close-out claim (pass 2)."
+    planned_closeout_run_id: "edpc-cam-closeout-20261019"
+    planned_pre_impl_run_id: "edpc-cam-pre-impl-20261019"
+    planned_verify_run_id: "edpc-cam-verify-20261019"
+    status: "refine_pass2_process_debt_documented"
+  request: "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
 gate_policy: "advisory"
 name: "edpc-client-assessment-refine-tracker"
 profile_depth: "integrated"
@@ -10,34 +38,6 @@ refine_scope: "EDPC §17–18 client assessment (Workflow H) + Chart Viewer pilo
 request_token: "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
 schema_version: "checklist-tracker.v1"
 source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
-execution_evidence:
-  request: "REQ-TIED_EDPC_CLIENT_ASSESSMENT"
-  envelope_path: "tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/evidence/request-evidence-envelope.v1.json"
-  completed:
-    - "translate-sponsor-intent"
-    - "change-definition"
-    - "impact-discovery"
-    - "risk-assessment"
-    - "test-strategy"
-  close_out_evidence:
-    date: null
-    deferred: []
-    gates: {}
-    master_checklist: ""
-  operator_evidence:
-    integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/adversarial-inquiry/phase-{phase}/"
-    limitation: "Build at 6577f890 preceded pre_impl allowed; retroactive inquiry required before close-out claim (pass 2)."
-    planned_pre_impl_run_id: "edpc-cam-pre-impl-20261019"
-    planned_verify_run_id: "edpc-cam-verify-20261019"
-    planned_closeout_run_id: "edpc-cam-closeout-20261019"
-    status: "refine_pass2_process_debt_documented"
-brownfield_intent_elevation:
-  mode: pilot
-  engagement: edpc_full
-edpc_engagement:
-  evidence_access_tier: source_static
-  production_touch: none
-  note: "Platform stdd dogfood; Chart Viewer pilot is external source_static engagement"
 steps:
   - disposition: "completed"
     evidence_refs:

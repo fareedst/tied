@@ -1,71 +1,71 @@
-schema_version: validation-cases.v1
-request_token: REQ-TIED_EASAR_RECOVERY
-git_rev: e02716de
-references:
-  - "https://arxiv.org/abs/2509.14635"
 cases:
-  - task_id: inv-schema-version
-    prompt: "What schema identifies the EASAR inventory receipt?"
-    grader: receipt_field
-    inputs:
-      receipt_path: tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json
-      field_path: schema_version
-    expected:
-      value: inventory.v1
-  - task_id: inv-request-token
-    prompt: "Which REQ token owns the dogfood inventory receipt?"
-    grader: receipt_field
-    inputs:
-      receipt_path: tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json
-      field_path: request_token
-    expected:
-      value: REQ-TIED_EASAR_RECOVERY
-  - task_id: graph-matrix-freshness-run
-    prompt: "Which freshness run id binds matrix row 4 to the source graph?"
-    grader: receipt_field
-    inputs:
-      receipt_path: tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json
-      field_path: graph_freshness_run_id
-    expected:
-      value: easar-sg-freshness-20261018
-  - task_id: claim-map-schema
-    prompt: "What schema identifies the claim-matrix map receipt?"
-    grader: receipt_field
-    inputs:
-      receipt_path: tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/claim-matrix-map.v1.json
-      field_path: schema_version
-    expected:
-      value: claim-matrix-map.v1
-  - task_id: reflexion-export-only
-    prompt: "Is the reflexion report export-only (no ledger merge)?"
-    grader: receipt_field
-    inputs:
-      receipt_path: tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/reflexion-report.v1.json
-      field_path: export_only
-    expected:
-      value: true
-  - task_id: engagement-facet-mode-guard
-    prompt: "Does easar_full engagement reject report_only mode?"
-    grader: engagement_facet
+  - expected:
+      diagnostic: "easar_full_requires_pilot_or_strict_mode"
+      ok: false
+    grader: "engagement_facet"
     inputs:
       tracker:
         brownfield_intent_elevation:
-          engagement: easar_full
-          mode: report_only
-    expected:
-      ok: false
-      diagnostic: easar_full_requires_pilot_or_strict_mode
-  - task_id: mcp-inventory-tool
-    prompt: "Is the inventory receipt MCP tool registered?"
-    grader: mcp_tool_registry
+          engagement: "easar_full"
+          mode: "report_only"
+    prompt: "Does easar_full engagement reject report_only mode?"
+    task_id: "engagement-facet-mode-guard"
+  - expected:
+      tool_name: "tied_easar_inventory_receipt_build"
+    grader: "mcp_tool_registry"
     inputs: {}
-    expected:
-      tool_name: tied_easar_inventory_receipt_build
-  - task_id: source-graph-index-schema
-    prompt: "What schema version does the dogfood source graph index use?"
-    grader: source_graph_trace
+    prompt: "Is the inventory receipt MCP tool registered?"
+    task_id: "mcp-inventory-tool"
+  - expected:
+      value: "claim-matrix-map.v1"
+    grader: "receipt_field"
     inputs:
-      index_path: tied-bundle/reports/source-graph/source-graph-index.v1.json
-      field_path: schema_version
-    expected:
-      value: source-graph-index.v1
+      field_path: "schema_version"
+      receipt_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/claim-matrix-map.v1.json"
+    prompt: "What schema identifies the claim-matrix map receipt?"
+    task_id: "claim-map-schema"
+  - expected:
+      value: "easar-sg-freshness-20261018"
+    grader: "receipt_field"
+    inputs:
+      field_path: "graph_freshness_run_id"
+      receipt_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/code-graph-matrix-receipt.v1.json"
+    prompt: "Which freshness run id binds matrix row 4 to the source graph?"
+    task_id: "graph-matrix-freshness-run"
+  - expected:
+      value: "inventory.v1"
+    grader: "receipt_field"
+    inputs:
+      field_path: "schema_version"
+      receipt_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json"
+    prompt: "What schema identifies the EASAR inventory receipt?"
+    task_id: "inv-schema-version"
+  - expected:
+      value: "REQ-TIED_EASAR_RECOVERY"
+    grader: "receipt_field"
+    inputs:
+      field_path: "request_token"
+      receipt_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/inventory.v1.json"
+    prompt: "Which REQ token owns the dogfood inventory receipt?"
+    task_id: "inv-request-token"
+  - expected:
+      value: true
+    grader: "receipt_field"
+    inputs:
+      field_path: "export_only"
+      receipt_path: "tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/reflexion-report.v1.json"
+    prompt: "Is the reflexion report export-only (no ledger merge)?"
+    task_id: "reflexion-export-only"
+  - expected:
+      value: "source-graph-index.v1"
+    grader: "source_graph_trace"
+    inputs:
+      field_path: "schema_version"
+      index_path: "tied-bundle/reports/source-graph/source-graph-index.v1.json"
+    prompt: "What schema version does the dogfood source graph index use?"
+    task_id: "source-graph-index-schema"
+git_rev: "e02716de"
+references:
+  - "https://arxiv.org/abs/2509.14635"
+request_token: "REQ-TIED_EASAR_RECOVERY"
+schema_version: "validation-cases.v1"

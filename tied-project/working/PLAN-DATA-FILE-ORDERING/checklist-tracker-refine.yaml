@@ -1,196 +1,209 @@
-copy_hygiene: Build-plan + close-out — PLAN-DATA-FILE-ORDERING (REQ-TIED_YAML_CANONICALIZATION extension).
-schema_version: checklist-tracker.v1
-name: plan-data-file-ordering-refine-tracker
-request_token: PLAN-DATA-FILE-ORDERING
-parent_requirement: REQ-TIED_YAML_CANONICALIZATION
-profile_depth: minimal
-depth_tier: minimal
-gate_policy: advisory
-change_class: serialization_profile_extension
-refine_pass: 2
-refine_pass_date: '2026-10-23'
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+change_class: "serialization_profile_extension"
+copy_hygiene: "Build-plan + close-out — PLAN-DATA-FILE-ORDERING (REQ-TIED_YAML_CANONICALIZATION extension)."
+depth_tier: "minimal"
 execution_evidence:
-  request: PLAN-DATA-FILE-ORDERING
-  envelope_path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/request-evidence-envelope.v1.json
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
-    status: build_plan_complete
     gate_pre_implementation:
       allowed: true
-      evidence_file: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/gate-pre_implementation-refine-pass2.json
+      evidence_file: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/gate-pre_implementation-refine-pass2.json"
     gate_verification:
       allowed: true
-      evidence_file: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json
-  completed:
-    - translate-sponsor-intent
-    - change-definition
-    - session-bootstrap
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - sub-adversarial-inquiry-pass
-    - resolve-pseudocode
-    - gate-pseudocode-validation
-    - unit-test-red
-    - verification-gate
-    - persist-citdp-record
-    - traceable-commit
+      evidence_file: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json"
+    status: "build_plan_complete"
+  request: "PLAN-DATA-FILE-ORDERING"
+gate_policy: "advisory"
+name: "plan-data-file-ordering-refine-tracker"
+parent_requirement: "REQ-TIED_YAML_CANONICALIZATION"
+profile_depth: "minimal"
+refine_pass: 2
+refine_pass_date: "2026-10-23"
+request_token: "PLAN-DATA-FILE-ORDERING"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
 steps:
-  - id: translate-sponsor-intent
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md
-  - id: change-definition
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
-  - id: session-bootstrap
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+    id: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md
-  - id: impact-discovery
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md"
+    id: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
-  - id: risk-assessment
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+    id: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
-  - id: test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+    id: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md
-  - id: sub-adversarial-inquiry-pass
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md"
+    id: "test-strategy"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/sub-adversarial-inquiry-pass-na.md
-  - id: resolve-pseudocode
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/sub-adversarial-inquiry-pass-na.md"
+    id: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_YAML_CANONICALIZER-pseudocode.md
-  - id: gate-pseudocode-validation
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_YAML_CANONICALIZER-pseudocode.md"
+    id: "resolve-pseudocode"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json
-  - id: unit-test-red
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json"
+    id: "gate-pseudocode-validation"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/yaml-canonicalizer.test.ts
-  - id: verification-gate
-    disposition: completed
+      - kind: "file_path"
+        path: "mcp-server/src/yaml-canonicalizer.test.ts"
+    id: "unit-test-red"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json
-  - id: persist-citdp-record
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-2026-10-23T18-19-28-939Z.json"
+    id: "verification-gate"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-PLAN-DATA-FILE-ORDERING.yaml
-  - id: traceable-commit
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+    id: "persist-citdp-record"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/traceable-commit-evidence-slice2.md
-      - kind: file_path
-        path: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/close-out-handoff.md
-  - slug: translate-sponsor-intent
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/close-out-handoff.md"
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/traceable-commit-evidence-slice2.md"
+    id: "traceable-commit"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
-      evidence_refs: &ref_0
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/translate-sponsor-intent-evidence.md
-    disposition: completed
-    evidence_refs: *ref_0
-  - slug: change-definition
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/change-definition-evidence.md"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: &ref_1
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/change-definition-evidence.md
-    disposition: completed
-    evidence_refs: *ref_1
-  - slug: session-bootstrap
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
     tracking:
-      status: completed
-      evidence_refs: &ref_2
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/session-bootstrap-evidence.md
-    disposition: completed
-    evidence_refs: *ref_2
-  - slug: impact-discovery
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
     tracking:
-      status: completed
-      evidence_refs: &ref_3
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/impact-discovery-evidence.md
-    disposition: completed
-    evidence_refs: *ref_3
-  - slug: risk-assessment
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: &ref_4
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/risk-assessment-evidence.md
-    disposition: completed
-    evidence_refs: *ref_4
-  - slug: test-strategy
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: &ref_5
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/test-strategy-evidence.md
-    disposition: completed
-    evidence_refs: *ref_5
-  - slug: sub-adversarial-inquiry-pass
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
-      status: completed
-      evidence_refs: &ref_6
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/sub-adversarial-inquiry-pass-evidence.md
-    disposition: completed
-    evidence_refs: *ref_6
-  - slug: resolve-pseudocode
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/resolve-pseudocode-evidence.md"
+    slug: "resolve-pseudocode"
     tracking:
-      status: completed
-      evidence_refs: &ref_7
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/resolve-pseudocode-evidence.md
-    disposition: completed
-    evidence_refs: *ref_7
-  - slug: gate-pseudocode-validation
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/resolve-pseudocode-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
     tracking:
-      status: completed
-      evidence_refs: &ref_8
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/gate-pseudocode-validation-evidence.md
-    disposition: completed
-    evidence_refs: *ref_8
-  - slug: unit-test-red
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
     tracking:
-      status: completed
-      evidence_refs: &ref_9
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/unit-test-red-evidence.md
-    disposition: completed
-    evidence_refs: *ref_9
-  - slug: verification-gate
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: &ref_10
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-evidence-manifest.v1.json
-    disposition: completed
-    evidence_refs: *ref_10
-  - slug: persist-citdp-record
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+    slug: "persist-citdp-record"
     tracking:
-      status: completed
-      evidence_refs: &ref_11
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
-    disposition: completed
-    evidence_refs: *ref_11
-  - slug: traceable-commit
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/traceable-commit-evidence.md"
+    slug: "traceable-commit"
     tracking:
-      status: completed
-      evidence_refs: &ref_12
-        - tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/traceable-commit-evidence.md
-    disposition: completed
-    evidence_refs: *ref_12
+      evidence_refs:
+        - "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/traceable-commit-evidence.md"
+      status: "completed"

@@ -1,59 +1,59 @@
 copy_hygiene: "Refine-plan pass 3 — plan-close-out execution tracker; product implementation complete; do not re-open build-plan slices."
-depth_tier: integrated
+depth_tier: "integrated"
 execution_evidence:
   completed:
-    - translate-sponsor-intent
-    - session-bootstrap
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-  envelope_path: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/request-evidence-envelope.v1.json
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     limitation: "Close-out wave only; build-plan slices 0-6 complete per session-handoff.md."
-    status: plan_close_out_refine_complete
-  request: REQ-TIED_PROCESS_CERTIFICATION_READINESS
-gate_policy: advisory
-name: pcr-plan-close-out-refine-tracker
-profile_depth: not_measured
+    status: "plan_close_out_refine_complete"
+  request: "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+gate_policy: "advisory"
+name: "pcr-plan-close-out-refine-tracker"
+profile_depth: "not_measured"
 refine_pass: 3
 refine_pass_date: "2026-10-18"
-request_token: REQ-TIED_PROCESS_CERTIFICATION_READINESS
-schema_version: checklist-tracker.v1
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+request_token: "REQ-TIED_PROCESS_CERTIFICATION_READINESS"
+schema_version: "checklist-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
 state_history:
   - at: "2026-10-18"
-    note: "refine-plan pass 3 — linked plan pcr_plan-close-out; band A adherence upgrade; CHANGELOG + gate replay ordering"
-  - at: "2026-10-18"
     note: "pre_implementation re-gate blocked (activation pairing); build pre-impl receipt authoritative; close_out execution next"
+  - at: "2026-10-18"
+    note: "refine-plan pass 3 — linked plan pcr_plan-close-out; band A adherence upgrade; CHANGELOG + gate replay ordering"
 steps:
-  - disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/session-handoff.md
-    id: translate-sponsor-intent
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/session-handoff.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: /Users/fareed/.cursor/plans/pcr_plan-close-out_c266c7bc.plan.md
-    id: session-bootstrap
-  - disposition: completed
+      - kind: "file_path"
+        path: "/Users/fareed/.cursor/plans/pcr_plan-close-out_c266c7bc.plan.md"
+    id: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/PLAN-CLOSE-OUT.md
-    id: change-definition
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/PLAN-CLOSE-OUT.md"
+    id: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml
-    id: impact-discovery
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
+    id: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml
-    id: risk-assessment
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
+    id: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/test-strategy-close-out.md
-    id: test-strategy
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/test-strategy-close-out.md"
+    id: "test-strategy"

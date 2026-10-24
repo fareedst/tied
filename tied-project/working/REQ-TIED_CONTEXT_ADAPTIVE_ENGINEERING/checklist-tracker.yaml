@@ -7,12 +7,12 @@ execution_evidence:
     gates: {}
     master_checklist: ""
   completed:
-    - "translate-sponsor-intent"
-    - "session-bootstrap"
     - "change-definition"
     - "impact-discovery"
     - "risk-assessment"
+    - "session-bootstrap"
     - "test-strategy"
+    - "translate-sponsor-intent"
   envelope_path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     integrated_pilot_template: "phase_artifact_dir: tied-bundle/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/adversarial-inquiry/phase-{phase}/"

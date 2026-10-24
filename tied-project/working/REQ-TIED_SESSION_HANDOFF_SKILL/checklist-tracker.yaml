@@ -112,8 +112,8 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/client-skills-catalog.stdout.txt"
       - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/client-bootstrap-skills.stdout.txt"
+      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/client-skills-catalog.stdout.txt"
     slug: "unit-test-green"
     tracking:
       status: "completed"

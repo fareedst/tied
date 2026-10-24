@@ -1,293 +1,310 @@
-copy_hygiene: Build-plan + close-out tracker for REQ-PSEUDOCODE_VALIDATE_PATH_INPUT (integrated advisory).
-description: Integrated depth tracker — pseudocode_validate path input.
-depth_tier: integrated
-gate_policy: advisory
-profile_depth: not_measured
-purpose: Gate and close-out tracker for REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.
-request: REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
-request_token: REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_complete
 citdp:
-  path: tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
+  path: "tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+copy_hygiene: "Build-plan + close-out tracker for REQ-PSEUDOCODE_VALIDATE_PATH_INPUT (integrated advisory)."
+depth_tier: "integrated"
+description: "Integrated depth tracker — pseudocode_validate path input."
 execution_evidence:
-  request: REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
-  envelope_path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/request-evidence-envelope.v1.json
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - sub-adversarial-inquiry-pass
-    - author-requirement
-    - author-architecture
-    - persist-implementation-records
-    - resolve-pseudocode
-    - gate-pseudocode-validation
-    - unit-test-red
-    - unit-test-green
-    - composition-integration
-    - verification-gate
-    - sync-tied-stack
-    - persist-citdp-record
-    - gitignore-close-out-hygiene
-    - sub-close-out-evidence-sync
-    - user-facing-release-notes
-    - traceable-commit
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+gate_policy: "advisory"
+profile_depth: "not_measured"
+purpose: "Gate and close-out tracker for REQ-PSEUDOCODE_VALIDATE_PATH_INPUT."
+request: "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+request_token: "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
 steps:
-  - id: translate-sponsor-intent
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md
-  - id: session-bootstrap
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/vocab/pseudocode-and-citdp.md
-  - id: change-definition
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/vocab/pseudocode-and-citdp.md"
+    id: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-  - id: impact-discovery
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    id: "change-definition"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md
-  - id: risk-assessment
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/PLAN.md"
+    id: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-  - id: test-strategy
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    id: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/test-strategy.md
-  - id: sub-adversarial-inquiry-pass
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/test-strategy.md"
+    id: "test-strategy"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: >-
-          tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/gate-result.json
-      - kind: file_path
-        path: >-
-          tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-verification/gate-result.json
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/closeout-inquiry-pre_implementation-run.json
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/closeout-inquiry-verification-run.json
-  - id: author-requirement
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-pre_implementation/gate-result.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/adversarial-inquiry/phase-verification/gate-result.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/closeout-inquiry-pre_implementation-run.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/closeout-inquiry-verification-run.json"
+    id: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/requirements/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-  - id: author-architecture
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/requirements/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    id: "author-requirement"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/architecture-decisions/ARCH-PSEUDOCODE_INPUT_RESOLUTION.yaml
-  - id: persist-implementation-records
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/architecture-decisions/ARCH-PSEUDOCODE_INPUT_RESOLUTION.yaml"
+    id: "author-architecture"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md
-  - id: resolve-pseudocode
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md"
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    id: "persist-implementation-records"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md
-  - id: gate-pseudocode-validation
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md"
+    id: "resolve-pseudocode"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md
-      - kind: gate_receipt
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/gates/pre_implementation-refine-pass1.json
-  - id: unit-test-red
-    disposition: completed
-    notes: RED cases R1–R11 and M1–M4 per test-strategy.md (TDD order in build-plan session).
-  - id: unit-test-green
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-pseudocode.md"
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/gates/pre_implementation-refine-pass1.json"
+    id: "gate-pseudocode-validation"
+  - disposition: "completed"
+    id: "unit-test-red"
+    notes: "RED cases R1–R11 and M1–M4 per test-strategy.md (TDD order in build-plan session)."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-green-evidence.md
-  - id: composition-integration
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-green-evidence.md"
+    id: "unit-test-green"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts
-  - id: end-to-end-ui
-    disposition: not_applicable
-    rationale: MCP/CLI boundary; no UI.
-  - id: verification-gate
-    disposition: completed
+      - kind: "file_path"
+        path: "mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts"
+    id: "composition-integration"
+  - disposition: "not_applicable"
+    id: "end-to-end-ui"
+    rationale: "MCP/CLI boundary; no UI."
+  - disposition: "completed"
     evidence_refs:
-      - kind: gate_receipt
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/gates/verification-gate.json
-  - id: sync-tied-stack
-    disposition: completed
-    notes: tied_validate_consistency ok at close-out.
-  - id: persist-citdp-record
-    disposition: completed
+      - kind: "gate_receipt"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/gates/verification-gate.json"
+    id: "verification-gate"
+  - disposition: "completed"
+    id: "sync-tied-stack"
+    notes: "tied_validate_consistency ok at close-out."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-  - id: gitignore-close-out-hygiene
-    disposition: completed
-    notes: No new ephemeral patterns; working evidence committed per LangChain Phase 3 precedent.
-  - id: sub-close-out-evidence-sync
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    id: "persist-citdp-record"
+  - disposition: "completed"
+    id: "gitignore-close-out-hygiene"
+    notes: "No new ephemeral patterns; working evidence committed per LangChain Phase 3 precedent."
+  - disposition: "completed"
     evidence_refs:
-      - kind: envelope_ref
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/request-evidence-envelope.v1.json
-  - id: traceable-commit
-    disposition: completed
+      - kind: "envelope_ref"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/request-evidence-envelope.v1.json"
+    id: "sub-close-out-evidence-sync"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/traceable-commit-evidence.md
-      - kind: file_path
-        path: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/proposed-commit-message.txt
-  - id: user-facing-release-notes
-    disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/proposed-commit-message.txt"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/traceable-commit-evidence.md"
+    id: "traceable-commit"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: CHANGELOG.md
-  - slug: session-bootstrap
+      - kind: "file_path"
+        path: "CHANGELOG.md"
+    id: "user-facing-release-notes"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
     tracking:
-      status: completed
-      evidence_refs: &ref_0
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/session-bootstrap-evidence.md
-    disposition: completed
-    evidence_refs: *ref_0
-  - slug: translate-sponsor-intent
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
-      evidence_refs: &ref_1
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/translate-sponsor-intent-evidence.md
-    disposition: completed
-    evidence_refs: *ref_1
-  - slug: change-definition
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/change-definition-evidence.md"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: &ref_2
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/change-definition-evidence.md
-    disposition: completed
-    evidence_refs: *ref_2
-  - slug: impact-discovery
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
     tracking:
-      status: completed
-      evidence_refs: &ref_3
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/impact-discovery-evidence.md
-    disposition: completed
-    evidence_refs: *ref_3
-  - slug: risk-assessment
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: &ref_4
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/risk-assessment-evidence.md
-    disposition: completed
-    evidence_refs: *ref_4
-  - slug: test-strategy
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: &ref_5
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/test-strategy-evidence.md
-    disposition: completed
-    evidence_refs: *ref_5
-  - slug: sub-adversarial-inquiry-pass
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
-      status: completed
-      evidence_refs: &ref_6
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/sub-adversarial-inquiry-pass-evidence.md
-    disposition: completed
-    evidence_refs: *ref_6
-  - slug: author-requirement
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/author-requirement-evidence.md"
+    slug: "author-requirement"
     tracking:
-      status: completed
-      evidence_refs: &ref_7
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/author-requirement-evidence.md
-    disposition: completed
-    evidence_refs: *ref_7
-  - slug: author-architecture
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/author-requirement-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/author-architecture-evidence.md"
+    slug: "author-architecture"
     tracking:
-      status: completed
-      evidence_refs: &ref_8
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/author-architecture-evidence.md
-    disposition: completed
-    evidence_refs: *ref_8
-  - slug: persist-implementation-records
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/author-architecture-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/persist-implementation-records-evidence.md"
+    slug: "persist-implementation-records"
     tracking:
-      status: completed
-      evidence_refs: &ref_9
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/persist-implementation-records-evidence.md
-    disposition: completed
-    evidence_refs: *ref_9
-  - slug: resolve-pseudocode
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/persist-implementation-records-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/resolve-pseudocode-evidence.md"
+    slug: "resolve-pseudocode"
     tracking:
-      status: completed
-      evidence_refs: &ref_10
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/resolve-pseudocode-evidence.md
-    disposition: completed
-    evidence_refs: *ref_10
-  - slug: gate-pseudocode-validation
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/resolve-pseudocode-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
     tracking:
-      status: completed
-      evidence_refs: &ref_11
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/gate-pseudocode-validation-evidence.md
-    disposition: completed
-    evidence_refs: *ref_11
-  - slug: unit-test-red
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
     tracking:
-      status: completed
-      evidence_refs: &ref_12
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-red-evidence.md
-    disposition: completed
-    evidence_refs: *ref_12
-  - slug: unit-test-green
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
     tracking:
-      status: completed
-      evidence_refs: &ref_13
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-green-evidence.md
-    disposition: completed
-    evidence_refs: *ref_13
-  - slug: composition-integration
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/composition-integration-evidence.md"
+    slug: "composition-integration"
     tracking:
-      status: completed
-      evidence_refs: &ref_14
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/composition-integration-evidence.md
-    disposition: completed
-    evidence_refs: *ref_14
-  - slug: verification-gate
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/composition-integration-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: &ref_15
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/verification-evidence-manifest.v1.json
-    disposition: completed
-    evidence_refs: *ref_15
-  - slug: sync-tied-stack
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/sync-tied-stack-evidence.md"
+    slug: "sync-tied-stack"
     tracking:
-      status: completed
-      evidence_refs: &ref_16
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/sync-tied-stack-evidence.md
-    disposition: completed
-    evidence_refs: *ref_16
-  - slug: persist-citdp-record
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/sync-tied-stack-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    slug: "persist-citdp-record"
     tracking:
-      status: completed
-      evidence_refs: &ref_17
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-    disposition: completed
-    evidence_refs: *ref_17
-  - slug: gitignore-close-out-hygiene
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/gitignore-close-out-hygiene-evidence.md"
+    slug: "gitignore-close-out-hygiene"
     tracking:
-      status: completed
-      evidence_refs: &ref_18
-        - tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/gitignore-close-out-hygiene-evidence.md
-    disposition: completed
-    evidence_refs: *ref_18
+      evidence_refs:
+        - "tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/gitignore-close-out-hygiene-evidence.md"
+      status: "completed"

@@ -9,10 +9,10 @@ execution_evidence:
     gates: {}
     master_checklist: ""
   completed:
-    - "translate-sponsor-intent"
     - "change-definition"
     - "risk-assessment"
     - "test-strategy"
+    - "translate-sponsor-intent"
   envelope_path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     linked_cursor_plan: ".cursor/plans/cae_plan-close-out_222bebd8.plan.md"
@@ -49,9 +49,9 @@ steps:
   - disposition: "completed"
     evidence_refs:
       - kind: "file_path"
-        path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/test-strategy.md"
-      - kind: "file_path"
         path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/refine-plan-pass-3-close-out.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/test-strategy.md"
     id: "test-strategy"
   - disposition: "pending"
     id: "sub-close-out-evidence-sync"

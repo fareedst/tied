@@ -116,8 +116,8 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/verification-evidence-manifest.v1.json"
       - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/closeout-run-close-out-gates.json"
+      - "tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/verification-evidence-manifest.v1.json"
     slug: "verification-gate"
     tracking:
       evidence_refs:
@@ -125,9 +125,9 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
       - "tied-project/architecture-decisions/ARCH-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
       - "tied-project/implementation-decisions/IMPL-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+      - "tied-project/requirements/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
     slug: "sync-tied-stack"
     tracking:
       evidence_refs:
