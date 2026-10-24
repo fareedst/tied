@@ -7,7 +7,7 @@
 | **Profiles** | `research_profile`: read-only · `assurance_profile`: baseline-functional · `eligibility_triggers_matched`: [] |
 | **Client source** | `/Users/fareed/Documents/dev/test/1792857852` (TIED 4.0.0 greenfield demo) |
 | **Source feedback id** | `fb-mvmlz1rk-tavn9z` (client-local; store copy gets new `fb-*` id) |
-| **Status** | **traceable-commit** pending (2026-10-24) — verification complete; git commit in progress |
+| **Status** | **Complete** — build-plan + traceable-commit `06157ce6` (2026-10-24) |
 | **Related REQ** | [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT](../../requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml) (Wave 5 field evidence, not owner) |
 
 ---
@@ -107,7 +107,7 @@ flowchart LR
 | 5 | `tied_leap_proposal_add` (Track B) | **`lp-2026-10-24T16-33-13-575Z-707c63d33f60`** pending; linked in entry `context.leap_proposal_pending` |
 | 6 | `tied_gate_check` `verification` | **allowed: true** (2026-10-24 build-plan) |
 | 7 | PLAN + CITDP evidence row | This table + CITDP matrix `result: pass` |
-| 8 | **Close-out** | **Deferred** — sponsor **traceable-commit** only (no `sub-close-out-evidence-sync` at minimal depth) |
+| 8 | **Close-out / traceable-commit** | **`06157ce6`** — `feedback.yaml`, PLAN working folder, `leap-proposals/queue.json` (no integrated `sub-close-out-evidence-sync`) |
 
 **Non-goals honored:** No Wave 5 code; no new REQ without LEAP; no client `feedback.yaml` mutation.
 
@@ -128,4 +128,4 @@ flowchart LR
 | --- | --- | --- |
 | `pre_implementation` | **allowed: true** | 2026-10-24 refine-plan (`tied_gate_check`, Tracker + CITDP paths) |
 | `verification` | **allowed: true** | 2026-10-24 build-plan |
-| `close_out` | **traceable-commit** | Git commit records store ingest + PLAN evidence (minimal depth; no integrated envelope sync) |
+| `close_out` | **complete** | `06157ce6` — traceable-commit (minimal depth; no integrated envelope sync) |
