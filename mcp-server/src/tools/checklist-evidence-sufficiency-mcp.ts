@@ -177,11 +177,11 @@ export const checklistEvidenceSufficiencyTools = [
         "[REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY] Read-only Blueprint C evidence sufficiency check for gate target slugs. Never emits gate_receipt or workflow allowed.",
       inputSchema: z.object({
         project_root: z.string().optional(),
-        tracker: z.record(z.unknown()).optional(),
+        tracker: z.record(z.string(), z.unknown()).optional(),
         tracker_path: z.string().optional(),
         phase: gatePhaseSchema,
         required_step_slugs: z.array(z.string()).optional(),
-        citdp: z.record(z.unknown()).optional(),
+        citdp: z.record(z.string(), z.unknown()).optional(),
         depth_tier: z.enum(["minimal", "integrated", "strict_candidate"]).optional(),
       }),
     },

@@ -25,7 +25,7 @@ export const projectOperationsMcpTools = [
       description:
         "[REQ-TIED_PROJECT_LINT] Read-only aggregation of TIED index validation, consistency, optional CITDP DAE sizing, and optional pseudocode gate checks. Does not replace tied_validate_consistency authority.",
       inputSchema: z.object({
-        citdp: z.record(z.unknown()).optional(),
+        citdp: z.record(z.string(), z.unknown()).optional(),
         impl_tokens: z.array(z.string()).optional(),
         include_pseudocode: z.boolean().optional(),
       }),

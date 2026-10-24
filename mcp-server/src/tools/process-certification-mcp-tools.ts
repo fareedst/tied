@@ -43,7 +43,7 @@ export const processCertificationMcpTools = [
     config: {
       description: "Evaluate process record conformance matrix. [REQ-TIED_PROCESS_CERTIFICATION_READINESS]",
       inputSchema: z.object({
-        process_record: z.record(z.unknown()),
+        process_record: z.record(z.string(), z.unknown()),
         bundle_root: z.string().optional(),
       }),
     },
@@ -66,9 +66,9 @@ export const processCertificationMcpTools = [
     config: {
       description: "Evaluate seven-dimension capability profile. [REQ-TIED_PROCESS_CERTIFICATION_READINESS]",
       inputSchema: z.object({
-        process_record: z.record(z.unknown()),
+        process_record: z.record(z.string(), z.unknown()),
         bundle_root: z.string().optional(),
-        options: z.record(z.unknown()).optional(),
+        options: z.record(z.string(), z.unknown()).optional(),
       }),
     },
     handler: async (args: {
@@ -131,10 +131,10 @@ export const processCertificationMcpTools = [
     config: {
       description: "Compose certifiability-readiness.v1. [REQ-TIED_PROCESS_CERTIFICATION_READINESS]",
       inputSchema: z.object({
-        matrix: z.record(z.unknown()),
-        profile: z.record(z.unknown()),
-        agreement: z.record(z.unknown()).optional(),
-        adaptive: z.record(z.unknown()).optional(),
+        matrix: z.record(z.string(), z.unknown()),
+        profile: z.record(z.string(), z.unknown()),
+        agreement: z.record(z.string(), z.unknown()).optional(),
+        adaptive: z.record(z.string(), z.unknown()).optional(),
       }),
     },
     handler: async (args: {
@@ -157,7 +157,7 @@ export const processCertificationMcpTools = [
     config: {
       description: "Generate assessor-pack.v1. [REQ-TIED_PROCESS_CERTIFICATION_READINESS]",
       inputSchema: z.object({
-        readiness: z.record(z.unknown()),
+        readiness: z.record(z.string(), z.unknown()),
         bundle_spec_version: z.string(),
       }),
     },

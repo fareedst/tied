@@ -17,7 +17,7 @@ export const contextAdaptiveMcpTools = [
       description:
         "Validate practice-contract.v1 documents or a practice library (read-only). [REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING]",
       inputSchema: z.object({
-        contracts: z.array(z.record(z.unknown())).min(1),
+        contracts: z.array(z.record(z.string(), z.unknown())).min(1),
       }),
     },
     handler: async (args: { contracts: Record<string, unknown>[] }) => {
@@ -30,7 +30,7 @@ export const contextAdaptiveMcpTools = [
     config: {
       description: "Validate context-profile.v1 (read-only). [REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING]",
       inputSchema: z.object({
-        profile: z.record(z.unknown()),
+        profile: z.record(z.string(), z.unknown()),
       }),
     },
     handler: async (args: { profile: Record<string, unknown> }) => {
@@ -44,8 +44,8 @@ export const contextAdaptiveMcpTools = [
       description:
         "Deterministic practice selection producing selection-receipt.v1 (read-only). [REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING]",
       inputSchema: z.object({
-        contracts: z.array(z.record(z.unknown())).min(1),
-        profile: z.record(z.unknown()),
+        contracts: z.array(z.record(z.string(), z.unknown())).min(1),
+        profile: z.record(z.string(), z.unknown()),
         hard_constraints: z
           .array(
             z.object({
@@ -83,9 +83,9 @@ export const contextAdaptiveMcpTools = [
       description:
         "Compare context profiles and emit reassessment-receipt.v1 (read-only). [REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING]",
       inputSchema: z.object({
-        prior_profile: z.record(z.unknown()),
-        revised_profile: z.record(z.unknown()),
-        prior_receipt: z.record(z.unknown()),
+        prior_profile: z.record(z.string(), z.unknown()),
+        revised_profile: z.record(z.string(), z.unknown()),
+        prior_receipt: z.record(z.string(), z.unknown()),
       }),
     },
     handler: async (args: {

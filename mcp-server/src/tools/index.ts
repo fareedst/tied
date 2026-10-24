@@ -1177,7 +1177,7 @@ export const allTools = [
         "Point-of-work capture for Kaizen Phase 1: operator_local privacy, idempotent append, structured receipt. Does not replace tied_feedback_add.",
       inputSchema: z.object({
         event: z
-          .record(z.unknown())
+          .record(z.string(), z.unknown())
           .optional()
           .describe("feedback-event.v1-shaped object (client, observation, evidence, delivery)"),
         privacy_tier: z.string().optional(),
@@ -1229,7 +1229,7 @@ export const allTools = [
       description:
         "Normalize and append one external research record with provenance and freshness; rejects writes inside the audited project's tied/ boundary.",
       inputSchema: z.object({
-        record: z.record(z.unknown()),
+        record: z.record(z.string(), z.unknown()),
         audited_project_root: z.string().min(1),
         dataset_path: z.string().min(1),
         evaluated_at: z.string().min(1),
@@ -1258,7 +1258,7 @@ export const allTools = [
       description:
         "Normalize an incident, metric, test-failure, or user-report source and append additive metadata to the existing feedback store.",
       inputSchema: z.object({
-        source: z.record(z.unknown()),
+        source: z.record(z.string(), z.unknown()),
         base_path: z.string().optional(),
       }),
     },
@@ -1295,9 +1295,9 @@ export const allTools = [
       description:
         "Create a reviewed non-canonical LEAP proposal from an operational feedback entry; never writes canonical REQ, ARCH, or IMPL YAML.",
       inputSchema: z.object({
-        entry: z.record(z.unknown()),
+        entry: z.record(z.string(), z.unknown()),
         project_root: z.string().min(1),
-        review: z.record(z.unknown()).optional(),
+        review: z.record(z.string(), z.unknown()).optional(),
         canonical_write: z.boolean().optional(),
       }),
     },
@@ -1325,9 +1325,9 @@ export const allTools = [
       description:
         "Kaizen Phase 4: build a read-only feedback-analysis.v1 digest from local feedback.yaml (delegates to buildFeedbackDigest).",
       inputSchema: z.object({
-        cohort: z.record(z.unknown()).describe("CohortSelector — requires compatibility_key"),
-        window: z.record(z.unknown()).optional(),
-        denominator_manifest: z.record(z.unknown()).optional(),
+        cohort: z.record(z.string(), z.unknown()).describe("CohortSelector — requires compatibility_key"),
+        window: z.record(z.string(), z.unknown()).optional(),
+        denominator_manifest: z.record(z.string(), z.unknown()).optional(),
         require_manifest_ref: z.boolean().optional(),
         include_markdown: z.boolean().optional().default(true),
         base_path: z.string().optional(),
@@ -1348,10 +1348,10 @@ export const allTools = [
       description:
         "Kaizen Phase 5: resolve a digest observation_group to feedback entries and apply reviewed LEAP handoff (delegates to runDigestReviewBridge).",
       inputSchema: z.object({
-        digest: z.record(z.unknown()).describe("feedback-analysis.v1 digest object"),
+        digest: z.record(z.string(), z.unknown()).describe("feedback-analysis.v1 digest object"),
         observation_group: z.string().min(1),
-        review: z.record(z.unknown()).optional(),
-        review_context: z.record(z.unknown()).optional(),
+        review: z.record(z.string(), z.unknown()).optional(),
+        review_context: z.record(z.string(), z.unknown()).optional(),
         base_path: z.string().optional(),
       }),
     },
@@ -1369,8 +1369,8 @@ export const allTools = [
       description:
         "Kaizen Phase 6: record an outcome observation against baseline and follow-up window (delegates to runOutcomeLoop).",
       inputSchema: z.object({
-        payload: z.record(z.unknown()).describe("OutcomeObservationPayload — entry_id required"),
-        follow_up_window: z.record(z.unknown()),
+        payload: z.record(z.string(), z.unknown()).describe("OutcomeObservationPayload — entry_id required"),
+        follow_up_window: z.record(z.string(), z.unknown()),
         base_path: z.string().optional(),
       }),
     },
@@ -1386,7 +1386,7 @@ export const allTools = [
       description:
         "Kaizen Phase 7: run a bounded feedback pilot cohort and return feedback-pilot.v1 metrics (delegates to runKaizenFeedbackPilot).",
       inputSchema: z.object({
-        spec: z.record(z.unknown()).describe("PilotSpec object"),
+        spec: z.record(z.string(), z.unknown()).describe("PilotSpec object"),
         pilot_incident_signals: z.array(z.string()).optional(),
         report_out_path: z.string().optional(),
         base_path: z.string().optional(),
@@ -1432,14 +1432,14 @@ export const allTools = [
           .describe("If true, no writes; returns would_update with index/token/previous_status/next_status for each row that would change"),
         checklist_gate: z.object({
           phase: z.enum(["pre_implementation", "verification", "close_out"]),
-          tracker: z.record(z.unknown()).optional(),
+          tracker: z.record(z.string(), z.unknown()).optional(),
           tracker_path: z.string().optional().describe(
             "Authoritative Tracker YAML path; when set, loads tracker and hydrates gate evidence like tied_checklist_gate_validate.",
           ),
-          citdp: z.record(z.unknown()),
+          citdp: z.record(z.string(), z.unknown()),
           required_step_slugs: z.array(z.string()).optional(),
-          activation: z.record(z.unknown()).optional(),
-          evidence: z.record(z.unknown()).optional(),
+          activation: z.record(z.string(), z.unknown()).optional(),
+          evidence: z.record(z.string(), z.unknown()).optional(),
         }).optional().describe("Validated shared Tracker/CITDP/activation gate; required for every workflow status update."),
         require_checklist_gate: z
           .boolean()
@@ -1816,15 +1816,15 @@ export const allTools = [
         test_path: z.string().optional().describe("Repository-relative Ruby Minitest (.rb) or Go (_test.go) path for Mode B."),
         production_path: z.string().optional().describe("Repository-relative Ruby or Go production source path for Mode B."),
         production_evidence_path: z.string().optional().describe("Relative production evidence JSON path for Mode B."),
-        production_evidence: z.array(z.record(z.unknown())).optional().describe("Inline production evidence observations for Mode B."),
+        production_evidence: z.array(z.record(z.string(), z.unknown())).optional().describe("Inline production evidence observations for Mode B."),
         criterion_scope: z.array(z.string()).optional().describe("Optional criterion token subset for Mode B."),
         block_scope: z.array(z.string()).optional().describe("Optional procedure names for Mode B multi-block close_out; supports #closeout tag suffix."),
-        graph: z.record(z.unknown()).optional().describe("Language-neutral obligation graph input with criteria, constraints, blocks, loci, and bindings."),
-        fidelity: z.record(z.unknown()).optional().describe("Normalized fidelity input with block revision, specification, test evidence, and production evidence."),
+        graph: z.record(z.string(), z.unknown()).optional().describe("Language-neutral obligation graph input with criteria, constraints, blocks, loci, and bindings."),
+        fidelity: z.record(z.string(), z.unknown()).optional().describe("Normalized fidelity input with block revision, specification, test evidence, and production evidence."),
         scope: z.array(z.string()).optional().describe("Explicit obligation IDs to project."),
-        eligibility: z.record(z.unknown()).optional().describe("Optional strict eligibility result; omit for non-strict research projection."),
+        eligibility: z.record(z.string(), z.unknown()).optional().describe("Optional strict eligibility result; omit for non-strict research projection."),
         policy: z.enum(["advisory", "strict-candidate", "strict-approved"]).optional().describe("Explicit gate policy; advisory is the default."),
-        human_approval: z.record(z.unknown()).optional().describe("Human CITDP approval required for strict-approved blocking."),
+        human_approval: z.record(z.string(), z.unknown()).optional().describe("Human CITDP approval required for strict-approved blocking."),
         repository_root: z.string().optional().describe("Repository root for bounded working artifact persistence."),
         request_token: z.string().optional().describe("REQ token selecting working/{REQ-TOKEN}/adversarial-inquiry."),
         run_id: z.string().optional().describe("Identity-bound inquiry run identifier for activation pairing."),
@@ -1936,11 +1936,11 @@ export const allTools = [
         "Validate [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] Tracker, CITDP adversarial depth, and optional identity-bound activation evidence before workflow progression. This is read-only and fails closed on missing or stale evidence.",
       inputSchema: z.object({
         phase: z.enum(["pre_implementation", "verification", "close_out"]),
-        tracker: z.record(z.unknown()).optional(),
-        citdp: z.record(z.unknown()),
+        tracker: z.record(z.string(), z.unknown()).optional(),
+        citdp: z.record(z.string(), z.unknown()),
         required_step_slugs: z.array(z.string()).optional(),
-        activation: z.record(z.unknown()).optional(),
-        evidence: z.record(z.unknown()).optional(),
+        activation: z.record(z.string(), z.unknown()).optional(),
+        evidence: z.record(z.string(), z.unknown()).optional(),
         tracker_path: z.string().optional().describe(
           "Authoritative Tracker YAML path; when set, loads tracker and marks trackerSource authoritative_file.",
         ),
@@ -2236,7 +2236,7 @@ export const allTools = [
         "Validate risk-triggered advanced test adequacy and external-call cost controls. Requires selected profiles and explicit replay, flakiness, timeout, retry, and resource behavior fields when applicable; does not run the checks.",
       inputSchema: z.object({
         selected_profiles: z.array(z.string()),
-        checks: z.array(z.record(z.unknown())),
+        checks: z.array(z.record(z.string(), z.unknown())),
       }),
     },
     handler: async (args: Parameters<typeof validateTestAdequacyPlan>[0]) => {
@@ -2251,7 +2251,7 @@ export const allTools = [
       inputSchema: z.object({
         run_id: z.string(),
         commit: z.string(),
-        environment: z.record(z.union([z.string(), z.number(), z.boolean(), z.null()])),
+        environment: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null()])),
         command_results: z.array(
           z.object({
             id: z.string(),
@@ -2263,7 +2263,7 @@ export const allTools = [
             threshold: z.string().optional(),
             artifacts: z.array(z.string()).optional(),
             diagnostics: z.array(z.string()).optional(),
-            tool_versions: z.record(z.string()).optional(),
+            tool_versions: z.record(z.string(), z.string()).optional(),
           }),
         ),
         quality_rows: z.array(
@@ -2315,7 +2315,7 @@ export const allTools = [
             id: z.string().min(1),
             argv: z.array(z.string()).min(1),
             cwd: z.string().min(1),
-            environment: z.record(z.string()).optional(),
+            environment: z.record(z.string(), z.string()).optional(),
             timeout_ms: z.number().int().positive().optional(),
             max_output_bytes: z.number().int().positive().optional(),
             artifact_dir: z.string().min(1),
@@ -2373,13 +2373,13 @@ export const allTools = [
       inputSchema: z.object({
         run_id: z.string(),
         commit: z.string(),
-        environment: z.record(z.union([z.string(), z.number(), z.boolean(), z.null()])),
+        environment: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null()])),
         commands: z.array(
           z.object({
             id: z.string().min(1),
             argv: z.array(z.string()).min(1),
             cwd: z.string().min(1),
-            environment: z.record(z.string()).optional(),
+            environment: z.record(z.string(), z.string()).optional(),
             timeout_ms: z.number().int().positive().optional(),
             max_output_bytes: z.number().int().positive().optional(),
             artifact_dir: z.string().min(1),
@@ -2429,7 +2429,7 @@ export const allTools = [
             project_root: z.string(),
             citdp_path: z.string().optional(),
             diff_paths: z.array(z.string()).optional(),
-            coverage_by_path: z.record(z.number()).optional(),
+            coverage_by_path: z.record(z.string(), z.number()).optional(),
             diff_selection: z.enum(["staged", "unstaged", "both"]).optional(),
           })
           .optional(),
@@ -2465,11 +2465,11 @@ export const allTools = [
             architecture_tokens: z.array(z.string()).optional(),
             implementation_tokens: z.array(z.string()).optional(),
             impl_tokens_for_pseudocode: z.array(z.string()).optional(),
-            binding_rows: z.array(z.record(z.unknown())).optional(),
+            binding_rows: z.array(z.record(z.string(), z.unknown())).optional(),
             quality_plan: z
               .object({
                 selected_profiles: z.array(z.string()),
-                checks: z.array(z.record(z.unknown())),
+                checks: z.array(z.record(z.string(), z.unknown())),
               })
               .optional(),
           })
@@ -2478,7 +2478,7 @@ export const allTools = [
           .object({
             run_id: z.string().optional(),
             commit: z.string().optional(),
-            environment: z.record(z.unknown()).optional(),
+            environment: z.record(z.string(), z.unknown()).optional(),
           })
           .optional(),
         change_context: z
@@ -2591,7 +2591,7 @@ export const allTools = [
         known_tokens: z.array(z.string()).optional(),
         require_contracts: z.boolean().optional(),
         require_behavioral_coverage: z.boolean().optional(),
-        coverage_references: z.record(z.array(z.string())).optional(),
+        coverage_references: z.record(z.string(), z.array(z.string())).optional(),
         leakage_lint: z.boolean().optional(),
         gate_mode: z.boolean().optional(),
       }),
@@ -2829,7 +2829,7 @@ export const allTools = [
       description:
         "Validate binding inventory rows for trigger, callee, arguments, effect, ordering, failure behavior, optional async_semantics/cancellation/idempotency_evidence (W5 async seams), UI-free composition evidence, and named E2E platform constraints. Reports missing fields only; does not certify runtime ordering or race-freedom.",
       inputSchema: z.object({
-        rows: z.array(z.record(z.unknown())),
+        rows: z.array(z.record(z.string(), z.unknown())),
       }),
     },
     handler: async (args: { rows: unknown[] }) => {
@@ -3074,8 +3074,8 @@ export const allTools = [
       description:
         "Validate [REQ-TIED_EDPC_COMPREHENSION] evidence-access matrix and tier capability flags (fail-closed).",
       inputSchema: z.object({
-        access_matrix: z.record(z.unknown()).describe("Parsed evidence-access-matrix.v1 body."),
-        tracker: z.record(z.unknown()).optional().describe("Optional Tracker snippet with edpc_engagement paths."),
+        access_matrix: z.record(z.string(), z.unknown()).describe("Parsed evidence-access-matrix.v1 body."),
+        tracker: z.record(z.string(), z.unknown()).optional().describe("Optional Tracker snippet with edpc_engagement paths."),
       }),
     },
     handler: async (args: { access_matrix: Record<string, unknown>; tracker?: Record<string, unknown> }) => {
@@ -3093,7 +3093,7 @@ export const allTools = [
       description:
         "Validate [REQ-TIED_EDPC_COMPREHENSION] brownfield engagement edpc_full (easar_full deprecated alias).",
       inputSchema: z.object({
-        tracker: z.record(z.unknown()).describe("Checklist Tracker or gate tracker object."),
+        tracker: z.record(z.string(), z.unknown()).describe("Checklist Tracker or gate tracker object."),
       }),
     },
     handler: async (args: { tracker: Record<string, unknown> }) => {
@@ -3120,14 +3120,14 @@ export const allTools = [
     config: {
       description: "Build [REQ-TIED_EDPC_COMPREHENSION] edpc-publish-manifest.v1 with gaps[] and receipt refs.",
       inputSchema: z.object({
-        scm_shell: z.record(z.unknown()),
-        claims_ledger: z.array(z.record(z.unknown())),
+        scm_shell: z.record(z.string(), z.unknown()),
+        claims_ledger: z.array(z.record(z.string(), z.unknown())),
         access_matrix: z.object({
           evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
         }),
-        receipt_exists_map: z.record(z.boolean()).optional(),
-        charter: z.record(z.unknown()).optional(),
-        ofsm_bundle: z.record(z.unknown()).optional().nullable(),
+        receipt_exists_map: z.record(z.string(), z.boolean()).optional(),
+        charter: z.record(z.string(), z.unknown()).optional(),
+        ofsm_bundle: z.record(z.string(), z.unknown()).optional().nullable(),
       }),
     },
     handler: async (args: {
@@ -3156,12 +3156,12 @@ export const allTools = [
       description:
         "Validate [REQ-TIED_EDPC_COMPREHENSION] Workflow D Operational Failure State Model (OFSM v1) fail-closed.",
       inputSchema: z.object({
-        charter: z.record(z.unknown()),
+        charter: z.record(z.string(), z.unknown()),
         access_matrix: z.object({
           evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
           production_touch: z.enum(["none", "read_only", "approved_execute"]).optional(),
         }),
-        ofsm_bundle: z.record(z.unknown()),
+        ofsm_bundle: z.record(z.string(), z.unknown()),
       }),
     },
     handler: async (args: {
@@ -3183,13 +3183,13 @@ export const allTools = [
       description:
         "Build [REQ-TIED_EDPC_COMPREHENSION] OFSM attachment JSON and merge operational_failure_state SCM receipt ref.",
       inputSchema: z.object({
-        charter: z.record(z.unknown()),
+        charter: z.record(z.string(), z.unknown()),
         access_matrix: z.object({
           evidence_access_tier: z.enum(EVIDENCE_ACCESS_TIERS as unknown as [string, ...string[]]),
           production_touch: z.enum(["none", "read_only", "approved_execute"]).optional(),
         }),
-        ofsm_bundle: z.record(z.unknown()),
-        scm_shell: z.record(z.unknown()),
+        ofsm_bundle: z.record(z.string(), z.unknown()),
+        scm_shell: z.record(z.string(), z.unknown()),
       }),
     },
     handler: async (args: {
@@ -3213,10 +3213,10 @@ export const allTools = [
       description:
         "Validate [REQ-TIED_EDPC_CLIENT_ASSESSMENT] Workflow H charter, overlay tier legality, and publish manifest freshness.",
       inputSchema: z.object({
-        charter: z.record(z.unknown()),
-        assessment_context: z.record(z.unknown()).optional(),
-        publish_manifest: z.record(z.unknown()),
-        receipt_exists_map: z.record(z.boolean()).optional(),
+        charter: z.record(z.string(), z.unknown()),
+        assessment_context: z.record(z.string(), z.unknown()).optional(),
+        publish_manifest: z.record(z.string(), z.unknown()),
+        receipt_exists_map: z.record(z.string(), z.boolean()).optional(),
       }),
     },
     handler: async (args: {
@@ -3245,11 +3245,11 @@ export const allTools = [
       description:
         "Compose [REQ-TIED_EDPC_CLIENT_ASSESSMENT] client-assessment-model.v1 from EDPC inputs (pure JSON).",
       inputSchema: z.object({
-        charter: z.record(z.unknown()),
-        assessment_context: z.record(z.unknown()).optional(),
-        publish_manifest: z.record(z.unknown()),
-        claims_ledger: z.array(z.record(z.unknown())),
-        receipt_exists_map: z.record(z.boolean()).optional(),
+        charter: z.record(z.string(), z.unknown()),
+        assessment_context: z.record(z.string(), z.unknown()).optional(),
+        publish_manifest: z.record(z.string(), z.unknown()),
+        claims_ledger: z.array(z.record(z.string(), z.unknown())),
+        receipt_exists_map: z.record(z.string(), z.boolean()).optional(),
       }),
     },
     handler: async (args: {
@@ -3282,7 +3282,7 @@ export const allTools = [
       description:
         "Render [REQ-TIED_EDPC_CLIENT_ASSESSMENT] deterministic Markdown from CAM v1.",
       inputSchema: z.object({
-        cam: z.record(z.unknown()),
+        cam: z.record(z.string(), z.unknown()),
       }),
     },
     handler: async (args: { cam: Record<string, unknown> }) => {
@@ -3414,7 +3414,7 @@ export const allTools = [
       description:
         "Validate stressor-residue.v1 YAML discovery records for required fields, enums, and proof_boundary. Structural check only; does not prove runtime resilience or promote residues to REQ authority.",
       inputSchema: z.object({
-        record: z.record(z.unknown()).optional(),
+        record: z.record(z.string(), z.unknown()).optional(),
         yaml_text: z.string().optional(),
       }),
     },
@@ -3428,7 +3428,7 @@ export const allTools = [
       description:
         "Validate methodology-learning-experiment.v1 YAML records for Loop 3 PDSA shape (hypothesis, baseline, outcome, proof_boundary). Structural check only; does not prove effectiveness.",
       inputSchema: z.object({
-        record: z.record(z.unknown()).optional(),
+        record: z.record(z.string(), z.unknown()).optional(),
         yaml_text: z.string().optional(),
       }),
     },
@@ -3442,7 +3442,7 @@ export const allTools = [
       description:
         "Validate methodology learning experiment enrollment for non-checklist_step production surfaces (surface_ref rules for prompt_type_workflow, assurance_profile, gate_policy). Composes W1 structural validation; read-only.",
       inputSchema: z.object({
-        record: z.record(z.unknown()).optional(),
+        record: z.record(z.string(), z.unknown()).optional(),
         yaml_text: z.string().optional(),
       }),
     },
@@ -3456,7 +3456,7 @@ export const allTools = [
       description:
         "Validate and upsert a methodology learning experiment record into tied-project/methodology-experiments.yaml under the TIED base path.",
       inputSchema: z.object({
-        record: z.record(z.unknown()),
+        record: z.record(z.string(), z.unknown()),
         base_path: z.string().optional(),
       }),
     },
@@ -3486,7 +3486,7 @@ export const allTools = [
         "Run methodology learning cohort export: validate manifest, resolve W1 experiments, compose W4 report, emit shareable_hashed export YAML.",
       inputSchema: z.object({
         manifest_path: z.string().optional(),
-        manifest: z.record(z.unknown()).optional(),
+        manifest: z.record(z.string(), z.unknown()).optional(),
         yaml_out: z.string(),
         base_path: z.string().optional(),
         cwd: z.string().optional(),
@@ -3519,7 +3519,7 @@ export const allTools = [
         "Read-only conformance–effectiveness pairing report for a methodology learning experiment (trap, paired, not_measured, waived). Does not mutate stores.",
       inputSchema: z.object({
         experiment_id: z.string().optional(),
-        record: z.record(z.unknown()).optional(),
+        record: z.record(z.string(), z.unknown()).optional(),
         conformance_evidence_refs: z.array(z.unknown()).optional(),
         process_grade_gap_documented: z.boolean().optional(),
         waiver: z
@@ -3574,7 +3574,7 @@ export const allTools = [
       inputSchema: z.object({
         feedback_ids: z.array(z.string()).optional(),
         observation_group: z.string().optional(),
-        digest: z.record(z.unknown()).optional(),
+        digest: z.record(z.string(), z.unknown()).optional(),
         digest_projection_hash: z.string().optional(),
         production_system_surface: z.string().optional(),
         base_path: z.string().optional(),
@@ -3714,7 +3714,7 @@ export const allTools = [
         title: z.string().min(1).describe("Short title"),
         summary: z.string().min(1).describe("Proposal body (markdown/plain)"),
         suggested_leap_order: z.enum(["impl", "arch", "req", "mixed"]).optional(),
-        leap_hints: z.record(z.unknown()).optional().describe("Optional structured hints for the approver"),
+        leap_hints: z.record(z.string(), z.unknown()).optional().describe("Optional structured hints for the approver"),
       }),
     },
     handler: async (args: {
@@ -3900,7 +3900,7 @@ export const allTools = [
         proposal_id: z.string().min(1),
         title: z.string().optional(),
         summary: z.string().optional(),
-        leap_hints: z.record(z.unknown()).optional(),
+        leap_hints: z.record(z.string(), z.unknown()).optional(),
       }),
     },
     handler: async (args: {
@@ -3940,7 +3940,7 @@ export const allTools = [
       inputSchema: z.object({
         feature_identifier: z.string().min(1),
         expected_revision: z.number().int().positive().optional(),
-        command_input: z.record(z.unknown()).optional(),
+        command_input: z.record(z.string(), z.unknown()).optional(),
       }),
     },
     handler: async (args: {
@@ -3957,7 +3957,7 @@ export const allTools = [
       description: "Render a deterministic Batch 4 feature view from a reference-only source projection.",
       inputSchema: z.object({
         view_kind: z.string().min(1),
-        source_input: z.record(z.unknown()),
+        source_input: z.record(z.string(), z.unknown()),
       }),
     },
     handler: async (args: { view_kind: string; source_input: Record<string, unknown> }) =>
@@ -3971,7 +3971,7 @@ export const allTools = [
       description: "Check a generated Batch 4 feature view against current source revisions; fail or warn explicitly.",
       inputSchema: z.object({
         generated_view: z.string(),
-        current_source_revision: z.array(z.record(z.unknown())),
+        current_source_revision: z.array(z.record(z.string(), z.unknown())),
         policy: z.enum(["fail", "warn"]),
         view_path: z.string().optional(),
       }),
@@ -4003,7 +4003,7 @@ export const allTools = [
     name: "feature_update_canonical",
     config: {
       description: "Delegate canonical REQ, ARCH, or IMPL mutation to the existing TIED YAML surface.",
-      inputSchema: z.object({ token: z.string().min(1), updates: z.record(z.unknown()) }),
+      inputSchema: z.object({ token: z.string().min(1), updates: z.record(z.string(), z.unknown()) }),
     },
     handler: async (args: { token: string; updates: Record<string, unknown> }) => textContent(prettyCanonicalJson(
       await handleOrchestrationTool("feature_update_canonical", args, {
@@ -4080,7 +4080,7 @@ export const allTools = [
       description:
         "Validate request-evidence-envelope.v1 JSON or path. Rejects forbidden maturity or ranking fields.",
       inputSchema: z.object({
-        envelope: z.record(z.unknown()).optional(),
+        envelope: z.record(z.string(), z.unknown()).optional(),
         envelope_path: z.string().optional(),
         project_root: z.string().optional(),
         fail_on_error_gaps: z.boolean().optional().default(false).describe(

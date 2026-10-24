@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **MCP tool Zod 4 record schemas ([REQ-TIED_TOOL_INPUT_COMPATIBILITY])** — Remaining `mcp-server/src/tools` `inputSchema` definitions use `z.record(z.string(), z.unknown())` for Zod 4; `zod` ^4.6.7 and `@modelcontextprotocol/sdk` ^1.32.2 in `mcp-server/package.json`. Verification: `npm run build` in `mcp-server`.
+
 - **Data file ordering — JSON slice 2 ([REQ-TIED_YAML_CANONICALIZATION])** — `prettyCanonicalJson()`; migrated remaining MCP tool JSON responses, CLI stdout, disk JSON writers, and hash/JSONL paths to `storage-dump` helpers (bounded-composition reports, evidence envelopes, feature store locks, adherence ledger, plumb audit, leap queue, source-graph index). Product commit `9fcaf3ef`. Unified close-out `run_id=close-out-plan-data-file-ordering-slice2-2026-10-23` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Evidence: [json-slice2-build-evidence.md](tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/json-slice2-build-evidence.md), [close-out-handoff.md](tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/close-out-handoff.md).
 
 - **Ludanyi comparison capture (redistribution policy)** — Wave 1 stub now links [LinkedIn Pulse source](https://www.linkedin.com/pulse/illusion-measurement-judgment-individuality-teams-andras-ludanyi-k7ave/) and TL;DR only (no full article body in repo); Wave 2 analysis cross-references off-repo capture. Follow-up traceable commit 2026-10-22.
