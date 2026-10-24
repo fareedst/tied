@@ -77,8 +77,9 @@ unknown or ambiguous input.
 - `harness-trace-review` — explicit-only Loop 2 trace/session review into **`tied_feedback_capture_observation`** ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)).
 - `harness-trace-analyzer` — explicit-only outer-loop compose with normative **Task** fan-out and synthesis proposals ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)).
 - `harness-trace-langsmith-compose` — explicit-only optional LangSmith run export into local JSON, then hand off to the review/analyzer skills ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)); **client-side**, not TIED core.
+- `external-service-comparison` — explicit-only **external service comparison** (Wave 1 capture + Wave 2 TIED analysis + Wave 3 handoff-only); mandatory `DOC-{SLUG}-COMPARISON` working folder ([REQ-TIED_EXTERNAL_SERVICE_COMPARISON](../requirements/REQ-TIED_EXTERNAL_SERVICE_COMPARISON.yaml)).
 
-Guide: `tied-bundle/docs/harness-trace-observation-loop.md` (Procedure + **Outer loop (LangChain compose)** + **Optional LangSmith client compose**).
+Guide: `tied-bundle/docs/harness-trace-observation-loop.md` (Procedure + **Outer loop (LangChain compose)** + **Optional LangSmith client compose**). Comparison template: `tied-bundle/docs/external-service-three-wave-comparison-template.md`.
 
 ---
 

@@ -61,6 +61,7 @@ describe("production system enrollment validate [REQ-METHODOLOGY-PRODUCTION-SYST
       "harness-trace-review",
       "harness-trace-analyzer",
       "harness-trace-langsmith-compose",
+      "external-service-comparison",
     ] as const) {
       const harness = validateProductionSystemEnrollmentObject(
         baseRecord("prompt_type_workflow", { surface_ref: harnessRef }),

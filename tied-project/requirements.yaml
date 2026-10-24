@@ -2571,6 +2571,12 @@ REQ-TIED_EDPC_COMPREHENSION:
       - "IMPL-TIED_EDPC_PUBLISH"
     tests:
       - "mcp-server/src/edpc/*.test.ts"
+REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
+  category: "Methodology"
+  detail_file: "requirements/REQ-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"
+  name: "External service comparison skill"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH:
   category: "Functional"
   cross_references:

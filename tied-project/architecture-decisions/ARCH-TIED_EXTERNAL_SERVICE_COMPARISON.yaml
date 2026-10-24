@@ -1,0 +1,26 @@
+ARCH-TIED_EXTERNAL_SERVICE_COMPARISON:
+  cross_references:
+    - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+  decision: "Treat external service comparison as explicit-only methodology-harness orchestration composing read-only Wave 1–2 outreach under docs/comparisons/ and Wave 3 handoff routing; keep checklist gate authority, MCP project YAML writes, and LEAP promotion on platform-adjacent plane."
+  implementation_approach:
+    details:
+      - "Fourth methodology-harness leaf (not core prompt-type router branch)"
+      - "Mandatory DOC-{SLUG}-COMPARISON working root per invocation"
+    summary: "Bundled skill + reference + bootstrap contract test; reuse PROMPT_TYPE_GLOBAL_SKILLS install path."
+  name: "External service comparison architecture"
+  rationale:
+    benefits:
+      - "Compose-don't-replace harness tuning"
+    problems_solved:
+      - "Comparison prose mistaken for REQ authority"
+    why: "External input workflows must not conflate vendor claims with TIED effectiveness proof."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON"
+    requirements:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"

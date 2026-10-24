@@ -34,4 +34,5 @@ export const PROMPT_TYPE_LEAF_IDS = [
   "harness-trace-review",
   "harness-trace-analyzer",
   "harness-trace-langsmith-compose",
+  "external-service-comparison",
 ] as const;

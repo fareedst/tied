@@ -980,6 +980,18 @@ ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_EXTERNAL_SERVICE_COMPARISON:
+  cross_references:
+    - "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON"
+    - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+  description: "Methodology-harness orchestration for read-only comparison outreach"
+  metadata:
+    last_updated: "2026-10-23"
+    registered: "2026-10-23"
+  name: "External service comparison architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   cross_references:
     - "IMPL-TIED_FEEDBACK_PROMOTION"
@@ -2650,6 +2662,18 @@ IMPL-TIED_EDPC_PUBLISH:
     - "REQ-TIED_EDPC_COMPREHENSION"
   detail_file: "implementation-decisions/IMPL-TIED_EDPC_PUBLISH.yaml"
   name: "EDPC Publish Builder"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_EXTERNAL_SERVICE_COMPARISON:
+  cross_references:
+    - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
+    - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+  description: "Bundled skill, contract test, bootstrap wiring"
+  metadata:
+    last_updated: "2026-10-23"
+    registered: "2026-10-23"
+  name: "External service comparison implementation"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -4521,6 +4545,18 @@ REQ-TIED_EDPC_COMPREHENSION:
   name: "Evidence-Driven Program Comprehension (EDPC orchestration v1)"
   source_index: "requirements.yaml"
   status: "In Progress"
+  type: "REQ"
+REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
+  cross_references:
+    - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
+    - "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON"
+  description: "Explicit-only @external-service-comparison three-wave methodology harness"
+  metadata:
+    last_updated: "2026-10-23"
+    registered: "2026-10-23"
+  name: "External service comparison skill"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"

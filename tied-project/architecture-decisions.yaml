@@ -2075,6 +2075,10 @@ ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
   detail_file: "architecture-decisions/ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL.yaml"
   name: "EDPC Client Assessment Model"
   status: "Active"
+ARCH-TIED_EXTERNAL_SERVICE_COMPARISON:
+  detail_file: "architecture-decisions/ARCH-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"
+  name: "External service comparison architecture"
+  status: "Active"
 ARCH-TIED_FACTORY_ONBOARDING_WORKING_PATH:
   cross_references:
     architecture:

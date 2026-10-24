@@ -2424,6 +2424,10 @@ IMPL-TIED_EDPC_PUBLISH:
   detail_file: "implementation-decisions/IMPL-TIED_EDPC_PUBLISH.yaml"
   name: "EDPC Publish Builder"
   status: "Active"
+IMPL-TIED_EXTERNAL_SERVICE_COMPARISON:
+  detail_file: "implementation-decisions/IMPL-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"
+  name: "External service comparison implementation"
+  status: "Planned"
 IMPL-TIED_FEEDBACK_PROMOTION:
   code_locations:
     files:

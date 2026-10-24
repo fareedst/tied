@@ -1,0 +1,38 @@
+REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
+  category: "Methodology"
+  description: "Explicit-only methodology-harness skill @external-service-comparison standardizing three-wave external repository and article comparison (Wave 1 capture, Wave 2 TIED analysis, Wave 3 handoff-only) with mandatory DOC working folders and claim labeling."
+  name: "External service comparison skill"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Bootstrap contract tests for authority boundaries"
+      - "Template-aligned 14-section Wave 2 analyses"
+    problems_solved:
+      - "Ad hoc non-tied-plan comparison runs"
+      - "Missing DOC working folder and proof boundaries"
+    why: "Repeatable outreach without vendor-truth-as-TIED-proof or token mint from comparison prose."
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to:
+      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+  satisfaction_criteria:
+    - criterion: "Bundled external-service-comparison skill references template and forbids YAML/gate waiver language"
+      id: "SC-ESC-SKILL"
+      metric: "external-service-comparison-skill.test.mjs"
+    - criterion: "Skill installs via tied-install without clobbering unrelated client skills"
+      id: "SC-ESC-INSTALL"
+      metric: "prompt-type-skills.test.ts"
+    - criterion: "Template and client indexes link @external-service-comparison"
+      id: "SC-ESC-DOCS"
+      metric: "Link audit"
+    - criterion: "tied_validate_consistency passes after implement"
+      id: "SC-ESC-TRACE"
+      metric: "tied_validate_consistency"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
+    implementation:
+      - "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON"

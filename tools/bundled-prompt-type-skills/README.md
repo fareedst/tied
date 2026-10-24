@@ -9,12 +9,14 @@ Cursor skills used by TIED projects.
   `add-feature`, `refine-plan`, `build-plan`, `close-out`, `debug`,
   `question`, `use-skill`, `ammend-commit`, `non-tied-plan`, `non-tied-debug`,
   `leap-ad-hoc`, `leap-diff-promote`, and `other`.
-- 3 explicit-only **methodology harness** leaf skills: `harness-trace-review`
+- 4 explicit-only **methodology harness** leaf skills: `harness-trace-review`
   ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml)),
   `harness-trace-analyzer`
   ([REQ-TIED_HARNESS_LANGCHAIN_PHASE3](../../tied-project/requirements/REQ-TIED_HARNESS_LANGCHAIN_PHASE3.yaml)),
   `harness-trace-langsmith-compose`
-  ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)).
+  ([REQ-TIED_HARNESS_LANGSMITH_COMPOSE](../../tied-project/requirements/REQ-TIED_HARNESS_LANGSMITH_COMPOSE.yaml)),
+  `external-service-comparison`
+  ([REQ-TIED_EXTERNAL_SERVICE_COMPARISON](../../tied-project/requirements/REQ-TIED_EXTERNAL_SERVICE_COMPARISON.yaml)).
 - One explicit-only `prompt-type-router` skill.
 - 21 tracked `prompt-shared/` references (includes `agent-shell-working-directory.md`, `agent-shell-script-header.template.sh`, and `gitignore-close-out-hygiene.md`; see `mcp-server/src/e2e/prompt-type-skills.test.ts` `SHARED_REFERENCES`).
 

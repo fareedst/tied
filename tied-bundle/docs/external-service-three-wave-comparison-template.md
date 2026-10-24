@@ -37,8 +37,8 @@ flowchart LR
 
 | Wave | Question | Default prompt-type / mode | Primary output |
 | --- | --- | --- | --- |
-| **1 — Summarize service** | What did the vendor/service claim, in their words (cleaned)? | `non-tied-plan` | `{vendor}-{topic-short}.md` capture |
-| **2 — Compare to TIED** | How does that map to TIED surfaces here—compose, gap, defer—without adoption claims? | `non-tied-plan` or doc-only plan | `{vendor}-{topic}-vs-tied-agent-management.md` (or domain-specific suffix) |
+| **1 — Summarize service** | What did the vendor/service claim, in their words (cleaned)? | **`@external-service-comparison`** (preferred) or `non-tied-plan` | `{vendor}-{topic-short}.md` capture |
+| **2 — Compare to TIED** | How does that map to TIED surfaces here—compose, gap, defer—without adoption claims? | **`@external-service-comparison`** (Wave 1+2 default) or doc-only plan | `{vendor}-{topic}-vs-tied-agent-management.md` (or domain-specific suffix) |
 | **3 — Improve TIED** | What should change in TIED docs, skills, gates, or YAML—and with what proof? | `add-feature` / `build-plan` when behavior changes; else doc PR | Working REQ, bundle docs, skills, matrix row |
 
 **Compose-don’t-replace:** External ideas tune **harness-adjacent** surfaces (skills, PRELOAD, observations). **Gate authority**, **MCP project YAML writes**, **token graph truth**, and **sponsor costly choices** stay on the TIED/checklist plane ([Traefik harness/platform × TIED](../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md)).

@@ -1,0 +1,95 @@
+CITDP-REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
+  change_definition:
+    current_behavior: "External repository and article comparisons follow an documented three-wave template and ad hoc operator prompts (`non-tied-plan`, manual plans). There is no explicit-only bundled skill, no mandatory per-comparison DOC working folder, and no RED contract test for comparison authority boundaries."
+    desired_behavior: "REQ-tracked explicit-only methodology-harness skill `@external-service-comparison` standardizes Wave 1 capture + Wave 2 analysis, mandatory `tied-project/working/DOC-{SLUG}-COMPARISON/` planning artifacts, claim labeling, and Wave 3 handoff-only routing—without minting tokens from comparison prose or replacing checklist gates."
+    non_goals:
+      - "Automatic LEAP or project YAML mutation from comparison deliverables"
+      - "Executing target test suites, vendor MCP servers, or untrusted scripts by default"
+      - "Methodology composition matrix row without sponsor promotion"
+      - "New prompt-type-router branch or 14th core prompt-type leaf"
+      - "Vendor metrics or badges as TIED effectiveness proof"
+    success_criteria:
+      - "Bootstrap + prompt-type-skills.test.ts include fourth methodology-harness skill"
+      - "pre_implementation and verification gate receipts under working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/gates/"
+      - "REQ/ARCH/IMPL registered; pseudocode_validate and tied_validate_consistency pass after implement"
+      - "Template and client-development-index link `@external-service-comparison`"
+      - "tools/bundled-prompt-type-skills/external-service-comparison/{SKILL.md,reference.md,examples.md} installed via tied-install"
+    unchanged_behavior: "Checklist gate authority, MCP project YAML writes, 13 core prompt-type leaves, harness trace skills, sponsor consequence ladder."
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/external-service-comparison-skill.test.mjs"
+      - "npm test --prefix mcp-server -- src/e2e/prompt-type-skills.test.ts"
+      - "pseudocode_validate IMPL-TIED_EXTERNAL_SERVICE_COMPARISON gate_mode"
+      - "tied_validate_consistency"
+    manifest_reference: null
+    proof_boundaries:
+      - "comparison_documents_remain_outreach_until_wave_3_req"
+      - "skill_packaging_does_not_prove_external_vendor_effectiveness"
+  impact_analysis:
+    impl_inventory_notes: "tools/bundled-prompt-type-skills; tools/bootstrap/manifest.json; mcp-server enrollment constants; tied-bundle/docs external comparison template; tied-project/vocab prompt-composer; docs/comparisons worked examples."
+    methodology_surface_change_class: "prompt_type_workflow"
+    modules_or_boundaries: "Bundled skills; bootstrap contract tests; methodology docs cross-links"
+    surface_ref: "external-service-comparison"
+    tied_tokens_affected:
+      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    tied_tokens_new:
+      - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+  leap_feedback:
+    divergences_from_analysis: "build-plan: depth_tier minimal for skill packaging (mirror REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP); integrated eligibility applies to @external-service-comparison invocations not Node contract-test implement path"
+    record_status: "implement"
+    tied_stack_updates_required: []
+  methodology_surface_experiment_link: null
+  persist_policy: "Persist CITDP at refine-plan; update record_status to complete after implement persist-citdp-record"
+  record_identity:
+    change_request_id: "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-23"
+    title: "External service comparison skill (three-wave methodology harness)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Comparison prose triggers yaml_index_insert without add-feature"
+      - "Duplicate Traefik/LangChain/Cursor/Open Ontologies scope without Distinct from"
+      - "Silent execution of target repo install scripts during Wave 1"
+      - "Skill described as replacing tied_checklist_gate_validate or tied_verify"
+      - "Vendor self-verify or benchmark badges quoted as TIED proof"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Skill omits mandatory DOC working folder and writes straight to docs/comparisons/"
+        - "Wave 2 recommendation implemented by direct tied-project/requirements.yaml edit"
+      depth_change_waiver:
+        approval: "build-plan-leap-2026-10-23"
+        expiry: "2026-12-31"
+        owner: "REQ-TIED_EXTERNAL_SERVICE_COMPARISON program sponsor"
+        rationale: "Skill packaging uses Node contract tests; tied_adversarial_inquiry_run Mode B accepts Ruby/Go paths only. Integrated depth reserved for DOC-* comparison invocations with external fetch."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Default skill runs npm test in target repository without sponsor scope"
+        - "Template Wave 1 row still lists non-tied-plan after skill ships"
+      eligibility_triggers_matched:
+        - "external_input_in_workflow_invocation_only"
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/external_comparison_skill_d7e5efdc.plan.md"
+        - "tied-bundle/docs/external-service-three-wave-comparison-template.md"
+        - "tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/PLAN.md"
+        - "tools/bootstrap/lib/external-service-comparison-skill.test.mjs"
+      falsification_questions:
+        - "Are vendor-reported metrics always labeled and excluded from gate receipts?"
+        - "Does every behavior-changing Wave 3 item require add-feature or build-plan on a REQ?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: "integrated"
+      rationale: "Refine-plan selected integrated; build-plan LEAP to minimal for harness-style skill packaging with documented waiver."
+      research_profile: "read-only"
+    mitigation_summary: "Explicit-only skill; read-only default; handoff-only Wave 3; contract tests for forbidden YAML/gate language; template + examples cross-link proof boundaries."
+  test_strategy:
+    path: "tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/test-strategy.md"
+    red_first: true

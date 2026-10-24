@@ -1,0 +1,34 @@
+IMPL-TIED_EXTERNAL_SERVICE_COMPARISON:
+  code_locations:
+    files:
+      - description: "Canonical methodology template"
+        path: "tied-bundle/docs/external-service-three-wave-comparison-template.md"
+      - description: "Explicit-only skill"
+        path: "tools/bundled-prompt-type-skills/external-service-comparison/SKILL.md"
+      - description: "Skill contract test"
+        path: "tools/bootstrap/lib/external-service-comparison-skill.test.mjs"
+    functions: []
+  cross_references:
+    - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
+    - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+  decision: "Execute PLAN slices: bundled skill trio, bootstrap contract test, manifest and enrollment wiring, template and index cross-links."
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_EXTERNAL_SERVICE_COMPARISON-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Slice A skill package"
+      - "Slice B bootstrap + e2e inventory"
+      - "Slice C template and vocab links"
+    summary: "Doc-first TDD; RED skill test before SKILL.md GREEN."
+  name: "External service comparison implementation"
+  rationale:
+    benefits:
+      - "RED contract test before skill GREEN"
+    problems_solved:
+      - "Untracked comparison deliverables"
+    why: "Token-linked maintenance for reusable comparison procedure."
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
+    requirements:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"

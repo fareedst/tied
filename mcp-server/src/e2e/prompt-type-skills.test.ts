@@ -31,6 +31,7 @@ const METHODOLOGY_HARNESS_SKILLS = [
   "harness-trace-review",
   "harness-trace-analyzer",
   "harness-trace-langsmith-compose",
+  "external-service-comparison",
 ] as const;
 
 const SKILL_DIRS = [...LEAF_SKILLS, "prompt-type-router"] as const;
