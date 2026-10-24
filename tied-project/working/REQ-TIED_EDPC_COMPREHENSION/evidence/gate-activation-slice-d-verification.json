@@ -1,0 +1,80 @@
+{
+  "ok": true,
+  "receipt": {
+    "success": true,
+    "tool": "tied_adversarial_inquiry_run",
+    "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+    "project_id": "stdd-edpc-slice-d",
+    "run_id": "edpc-slice-d-verify-20261019",
+    "phase": "verification",
+    "scope": [
+      "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_BUILD#edpc-slice-d-rev-1",
+      "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1",
+      "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-slice-d-rev-1",
+      "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-slice-d-rev-1"
+    ],
+    "scope_hash": "b34c7891da71963c317dc6163f2543da112775e86626aaf4df0c99aab236a9b1",
+    "artifact_hashes": {
+      "obligation-report.json": "3d3c74473fc2decae3f6145c5b519b66ed13a3c4fc3fb7586f51753b525f20c2",
+      "finding-ledger.jsonl": "2af4ddf8775ae0600983eba292580157e5b94843ecef3dd27ca72bd1795874ae",
+      "gate-result.json": "46a6d3baacc73e15e7db4a99077e7814431bae944f7311e24dc50cd623d77e50",
+      "evidence-provenance.json": "a8004a10739296c5aa9afcecda3d649b1d2e7afb424f806a28d5f49c8941bcc3"
+    }
+  },
+  "artifacts": {
+    "obligation-report.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd-edpc-slice-d",
+      "run_id": "edpc-slice-d-verify-20261019",
+      "phase": "verification",
+      "scope_hash": "b34c7891da71963c317dc6163f2543da112775e86626aaf4df0c99aab236a9b1",
+      "hash": "3d3c74473fc2decae3f6145c5b519b66ed13a3c4fc3fb7586f51753b525f20c2",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/obligation-report.json"
+    },
+    "finding-ledger.jsonl": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd-edpc-slice-d",
+      "run_id": "edpc-slice-d-verify-20261019",
+      "phase": "verification",
+      "scope_hash": "b34c7891da71963c317dc6163f2543da112775e86626aaf4df0c99aab236a9b1",
+      "hash": "2af4ddf8775ae0600983eba292580157e5b94843ecef3dd27ca72bd1795874ae",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/finding-ledger.jsonl"
+    },
+    "gate-result.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd-edpc-slice-d",
+      "run_id": "edpc-slice-d-verify-20261019",
+      "phase": "verification",
+      "scope_hash": "b34c7891da71963c317dc6163f2543da112775e86626aaf4df0c99aab236a9b1",
+      "hash": "46a6d3baacc73e15e7db4a99077e7814431bae944f7311e24dc50cd623d77e50",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/gate-result.json"
+    },
+    "evidence-provenance.json": {
+      "valid": true,
+      "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+      "project_id": "stdd-edpc-slice-d",
+      "run_id": "edpc-slice-d-verify-20261019",
+      "phase": "verification",
+      "scope_hash": "b34c7891da71963c317dc6163f2543da112775e86626aaf4df0c99aab236a9b1",
+      "hash": "a8004a10739296c5aa9afcecda3d649b1d2e7afb424f806a28d5f49c8941bcc3",
+      "path": "tied-bundle/working/REQ-TIED_EDPC_COMPREHENSION/adversarial-inquiry/phase-verification/evidence-provenance.json"
+    }
+  },
+  "expected": {
+    "request_token": "REQ-TIED_EDPC_COMPREHENSION",
+    "project_id": "stdd-edpc-slice-d",
+    "run_id": "edpc-slice-d-verify-20261019",
+    "phase": "verification",
+    "scope": [
+      "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_BUILD#edpc-slice-d-rev-1",
+      "IMPL-TIED_EDPC_FAILURE_OPS#MCP_TIED_EDPC_FAILURE_STATE_VALIDATE#edpc-slice-d-rev-1",
+      "IMPL-TIED_EDPC_ORCHESTRATION#MCP_TIED_EDPC_WORKFLOW_ROUTE#edpc-slice-d-rev-1",
+      "IMPL-TIED_EDPC_PUBLISH#MCP_TIED_EDPC_PUBLISH_BUILD#edpc-slice-d-rev-1"
+    ],
+    "scope_hash": "b34c7891da71963c317dc6163f2543da112775e86626aaf4df0c99aab236a9b1"
+  },
+  "diagnostics": []
+}
