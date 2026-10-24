@@ -138,7 +138,7 @@ Proceed to **`@build-plan`** when **`pre_implementation`** gate allows (or docum
 
 **Close-out:** **`tied_validate_consistency`** after LEAP YAML edits; **`traceable-commit`** sponsor-only.
 
-**Implement status:** **Complete (build-plan + close-out 2026-10-24)** — [evidence/build-plan-evidence.md](./evidence/build-plan-evidence.md) · traceable-commit **`81f14008`** · [evidence/plan-close-out-handoff.md](./evidence/plan-close-out-handoff.md)
+**Implement status:** **Complete (build-plan + close-out 2026-10-24)** — [evidence/build-plan-evidence.md](./evidence/build-plan-evidence.md) · traceable-commit **`d0a29ad9`** · [evidence/plan-close-out-handoff.md](./evidence/plan-close-out-handoff.md)
 
 | Phase | Status |
 | --- | --- |

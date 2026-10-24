@@ -1,0 +1,8 @@
+docs(demos): PROMPT-GF-15 trial readout @ 1792863463
+
+First recorded greenfield PROMPT-GF-15 instance (TIED-DEMO-15 / DATA-04,
+REQ-OUT_OF_ORDER_EVENT_AGGREGATOR on client). Facilitator ingest via
+@record-gf-trial. Completion signals: process pass; machine close_out waived;
+adherence N/A.
+
+FACILITATOR-GF-15-1792863463
