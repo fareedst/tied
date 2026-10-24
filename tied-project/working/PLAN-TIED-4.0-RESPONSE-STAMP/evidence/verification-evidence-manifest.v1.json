@@ -1,0 +1,81 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npm test --prefix mcp-server -- src/tied-methodology-version.test.ts src/e2e/prompt-type-subagent.test.ts src/request-evidence-envelope/request-evidence-envelope.test.ts src/fidelity-research/evidence-chain-profile.test.ts src/working-request-token.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 35498,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node scripts/conversation-adherence-score.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 510,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 390,
+      "exit_code": 1,
+      "id": "citdp-evidence-3",
+      "result": "failed"
+    }
+  ],
+  "commit": "fc76a5a18c34dd2100b813b03482496927d65475",
+  "covered_tokens": [
+    "REQ-REQUEST_EVIDENCE_ENVELOPE",
+    "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "REQ-TIED_SETUP"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "integrated_close_out_uses_inquiry_waiver_at_minimal_build_depth",
+    "response_stamp_is_transcript_and_loader_contract_not_live_ide_hook"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "regen-manifest-20261024",
+  "schema_version": "verification-evidence-manifest.v1"
+}

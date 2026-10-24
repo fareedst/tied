@@ -13,7 +13,7 @@
  *     --run-id close-out-run-20260910
  */
 
-import { mkdirSync, readFileSync, readdirSync, existsSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, existsSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -127,7 +127,7 @@ async function collectQualityManifest(args, citdp) {
   );
   mkdirSync(artifactDir, { recursive: true });
   const runId = args.runId ?? `close-out-${Date.now()}`;
-  const manifest = await qualityCollection.collectVerificationEvidence({
+  const collectionResult = await qualityCollection.collectVerificationEvidence({
     run_id: runId,
     commit: resolveGitCommit(args.projectRoot),
     environment: { project_root: args.projectRoot },
@@ -146,6 +146,13 @@ async function collectQualityManifest(args, citdp) {
       manifest_relative_path: manifestRelativePath,
     },
   });
+  const manifest = collectionResult.manifest;
+  const manifestAbsolute = path.join(args.projectRoot, manifestRelativePath);
+  mkdirSync(path.dirname(manifestAbsolute), { recursive: true });
+  const storageDump = await import(
+    pathToFileURL(path.join(MCP_DIST, "storage-dump.js")).href,
+  );
+  writeFileSync(manifestAbsolute, `${storageDump.prettyCanonicalJson(manifest)}\n`, "utf8");
   return {
     ok: true,
     manifest_path: manifestRelativePath,
