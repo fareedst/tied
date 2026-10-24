@@ -167,7 +167,7 @@ Proceed to **Implement (`@build-plan`)** when §2.3 verification outputs are cap
 | 3 | Link catalogs (§2.2) | `docs/demos/README.md`, `catalog-greenfield-plan-new-feature-prompts.md` |
 | 4 | CHANGELOG | `CHANGELOG.md` Unreleased Added row |
 
-**Close-out (facilitator session):** **complete** — traceable-commit **`6d6abb5b`** (2026-10-24).
+**Close-out (facilitator session):** **complete** — traceable-commit **`9d82307a`** (2026-10-24).
 
 **Completion signals (this session):**
 

@@ -18,4 +18,4 @@ Traceability closure raised from draft **A−** to **A** after facilitator `ok: 
 
 ## Close-out
 
-**Deferred** — awaiting sponsor `@close-out` / traceable-commit for stdd repo.
+**Complete** — close-out traceable-commit `9d82307a` (2026-10-24).
