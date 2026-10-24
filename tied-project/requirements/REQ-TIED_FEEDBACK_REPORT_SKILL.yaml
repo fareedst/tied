@@ -1,0 +1,24 @@
+REQ-TIED_FEEDBACK_REPORT_SKILL:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+    requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  description: "Bundled /feedback skill for sponsor-witnessed operational observation capture via Kaizen Phase 1 intake."
+  name: "Feedback report skill"
+  satisfaction_criteria:
+    - criterion: "Skill at .cursor/skills/feedback documents intake gate, base-path confirm, and receipt boundary; manifest lists feedback; existing bundled skills unchanged"
+      criterion_id: "feedback-install"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+    tests:
+      - "feedback-skill.test.ts"

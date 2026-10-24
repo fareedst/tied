@@ -1,0 +1,39 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-req-tied-feedback-report-skill-2026-10-24",
+  "commit": "a3c844af7f3c72b35469fbd477e1d36ffab7b7d2",
+  "command_results": [
+    {
+      "id": "client-skills-catalog",
+      "command": ["node", "--test", "tools/bootstrap/lib/client-skills-catalog.test.mjs"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/client-skills-catalog.stdout.txt",
+        "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/client-skills-catalog.stderr.txt"
+      ]
+    },
+    {
+      "id": "feedback-skill-e2e",
+      "command": ["npx", "tsx", "--test", "src/e2e/feedback-skill.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/feedback-skill-e2e.stdout.txt",
+        "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/feedback-skill-e2e.stderr.txt"
+      ]
+    }
+  ],
+  "scope_tokens": [
+    "REQ-TIED_FEEDBACK_REPORT_SKILL",
+    "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY",
+    "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+  ],
+  "proof_boundaries": [
+    "manifest copy only",
+    "no feedback.ts runtime changes"
+  ],
+  "notes": "Close-out focused verification for bundled /feedback skill bootstrap surface."
+}

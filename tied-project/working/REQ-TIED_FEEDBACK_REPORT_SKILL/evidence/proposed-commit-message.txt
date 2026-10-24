@@ -1,0 +1,22 @@
+feat(bootstrap): add /feedback bundled skill and TIED tokens
+
+Ship fifth standalone bootstrap skill for sponsor Kaizen capture ([REQ-TIED_FEEDBACK_REPORT_SKILL],
+[ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY], [IMPL-TIED_FEEDBACK_REPORT_SKILL]): manifest entry,
+catalog + feedback-skill e2e smoke, vocab /feedback rows, closed CITDP, committed working proof.
+
+Machine close-out: run_id=close-out-req-tied-feedback-report-skill-2026-10-24, allowed=true,
+envelope blocking_gap_count=0, reconcile band A.
+
+Staging map:
+- tools/bundled-feedback-skill/
+- tools/bootstrap/manifest.json, tools/bootstrap/lib/client-skills-catalog.test.mjs
+- mcp-server/src/e2e/feedback-skill.test.ts
+- tied-project/{requirements,architecture-decisions,implementation-decisions}* + semantic-tokens.yaml
+- tied-project/requirements/REQ-TIED_FEEDBACK_REPORT_SKILL.yaml (+ detail files)
+- tied-project/architecture-decisions/ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY.yaml
+- tied-project/implementation-decisions/IMPL-TIED_FEEDBACK_REPORT_SKILL*
+- tied-project/citdp/CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL.yaml
+- tied-project/requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml (standalone manifest cross-ref)
+- tied-project/vocab/project-operations-mcp.md, tied-project/vocab/routing.md
+- tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/ (trackers, handoff, manifest, gate receipt)
+- CHANGELOG.md

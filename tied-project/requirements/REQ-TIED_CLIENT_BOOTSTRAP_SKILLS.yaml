@@ -1,15 +1,10 @@
 REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   category: "Tooling"
   cross_references:
-    architecture:
-      - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
-      - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
-    implementation:
-      - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
-      - "IMPL-TIED_UNBLOCK_SKILL"
     requirements:
       - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_FEEDBACK_REPORT_SKILL"
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-TIED_SETUP"
       - "REQ-TIED_SPONSOR_QUESTIONS"
@@ -27,7 +22,7 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
       criterion_id: "cursor-full-standalone"
     - criterion: "Linked bootstrap stubs all standalone skills for both harnesses"
       criterion_id: "linked-standalone-stubs"
-    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate and unblock"
+    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate, unblock, and feedback"
       criterion_id: "standalone-manifest"
   status: "Implemented"
   traceability:
@@ -40,4 +35,5 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
     tests:
       - "client-bootstrap-skills.test.ts"
       - "client-skills-catalog.test.mjs"
+      - "feedback-skill.test.ts"
       - "xlate-skill.test.ts"

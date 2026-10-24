@@ -2463,6 +2463,26 @@ IMPL-TIED_FEEDBACK_PROMOTION:
     tests:
       - "mcp-server/src/feedback-promotion.test.ts"
       - "mcp-server/src/tools/batch-5-mcp.test.ts"
+IMPL-TIED_FEEDBACK_REPORT_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-MCP_FEEDBACK_TOOLS"
+    requirements:
+      - "REQ-TIED_FEEDBACK_REPORT_SKILL"
+  detail_file: "implementation-decisions/IMPL-TIED_FEEDBACK_REPORT_SKILL.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_FEEDBACK_REPORT_SKILL-pseudocode.md"
+  implementation_approach:
+    details: []
+    summary: "tools/bundled-feedback-skill + manifest BUNDLED_STANDALONE_CLIENT_SKILLS"
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-23"
+      reason: "mint"
+  name: "Feedback report skill implementation"
+  status: "Active"
 IMPL-TIED_FIDELITY_RESEARCH:
   code_locations:
     files:

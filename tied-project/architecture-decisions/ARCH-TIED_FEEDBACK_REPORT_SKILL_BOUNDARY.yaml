@@ -1,0 +1,20 @@
+ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY:
+  consequences:
+    negative: []
+    positive:
+      - "Explicit /feedback entry point aligned with Kaizen Phase 1 capture"
+  context: "Sponsor witness intake for operational observations"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+    requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_FEEDBACK_REPORT_SKILL"
+  decision: "Separate bundled /feedback skill; witness intake and capture receipt only; no canonical REQ/ARCH/IMPL mutation from skill; promotion gated elsewhere."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-23"
+      reason: "mint"
+  name: "Feedback report skill boundary"
+  status: "Active"

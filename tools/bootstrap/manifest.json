@@ -53,6 +53,10 @@
     {
       "skillName": "clear-workspace",
       "storeDir": "tools/bundled-clear-workspace-skill"
+    },
+    {
+      "skillName": "feedback",
+      "storeDir": "tools/bundled-feedback-skill"
     }
   ],
   "SOURCE_ONLY_VOCAB_BASENAMES": [

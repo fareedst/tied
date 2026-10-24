@@ -2433,13 +2433,20 @@ REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
 REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   category: "Tooling"
   cross_references:
-    - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"
-    - "ARCH-TIED_UNBLOCK_SKILL_BOUNDARY"
-    - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
-    - "IMPL-TIED_UNBLOCK_SKILL"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_FEEDBACK_REPORT_SKILL"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_SPONSOR_QUESTIONS"
+      - "REQ-TIED_XLATE_SKILL"
   detail_file: "requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
   name: "Client bootstrap skills distribution"
   priority: "P1"
+  satisfaction_criteria:
+    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate, unblock, and feedback"
+      criterion_id: "standalone-manifest"
   status: "Implemented"
 REQ-TIED_CLIENT_DEVOPS_APPENDIX:
   category: "Methodology"
@@ -2592,6 +2599,31 @@ REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH:
   name: "Factory onboarding working path"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_FEEDBACK_REPORT_SKILL:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+    requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+  description: "Bundled /feedback skill for sponsor-witnessed operational observation capture via Kaizen Phase 1 intake."
+  detail_file: "requirements/REQ-TIED_FEEDBACK_REPORT_SKILL.yaml"
+  name: "Feedback report skill"
+  satisfaction_criteria:
+    - criterion: "Skill at .cursor/skills/feedback documents intake gate, base-path confirm, and receipt boundary; manifest lists feedback; existing bundled skills unchanged"
+      criterion_id: "feedback-install"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+    tests:
+      - "feedback-skill.test.ts"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"

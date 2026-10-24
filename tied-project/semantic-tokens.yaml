@@ -1001,6 +1001,14 @@ ARCH-TIED_FEEDBACK_PROMOTION_BOUNDARY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY:
+  cross_references:
+    - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+    - "REQ-TIED_FEEDBACK_REPORT_SKILL"
+  description: "Witness intake and receipt only"
+  name: "Feedback report skill boundary"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_FIDELITY_RESEARCH:
   cross_references:
     - "IMPL-TIED_FIDELITY_RESEARCH"
@@ -2684,6 +2692,14 @@ IMPL-TIED_FEEDBACK_PROMOTION:
   description: "Normalizes operational sources, groups duplicates, and creates reviewed non-canonical proposals without canonical writes."
   name: "Operational feedback adapters and reviewed promotion"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_FEEDBACK_REPORT_SKILL:
+  cross_references:
+    - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
+    - "REQ-TIED_FEEDBACK_REPORT_SKILL"
+  description: "bundled-feedback-skill bootstrap"
+  name: "Feedback report skill implementation"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_FIDELITY_RESEARCH:
@@ -4557,6 +4573,14 @@ REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
   name: "External service comparison skill"
   source_index: "requirements.yaml"
   status: "Implemented"
+  type: "REQ"
+REQ-TIED_FEEDBACK_REPORT_SKILL:
+  cross_references:
+    - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
+    - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+  description: "Bundled /feedback sponsor witness capture skill"
+  name: "Feedback report skill"
+  status: "Active"
   type: "REQ"
 REQ-TIED_FIDELITY_RESEARCH:
   category: "Functional"
