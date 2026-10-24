@@ -1,0 +1,33 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "run_id": "close-out-plan-data-file-ordering-slice2-2026-10-23",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "close-out-plan-data-file-ordering-slice2-2026-10-23"
+  },
+  "reconcile": {
+    "ok": true,
+    "process_grade": {
+      "score": 100,
+      "band": "A"
+    }
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  }
+}

@@ -28,4 +28,4 @@
 
 ## Close-out
 
-**Deferred** — run unified close-out (`sub-close-out-evidence-sync`) after sponsor review; slice 1 close-out remains authoritative for PLAN-DATA-FILE-ORDERING arc until slice 2 verification gate + envelope sync.
+**Complete (2026-10-23)** — unified close-out `run_id=close-out-plan-data-file-ordering-slice2-2026-10-23` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`, reconcile band **A**). Receipt: [closeout-run-close-out-gates-slice2-2026-10-23.json](./closeout-run-close-out-gates-slice2-2026-10-23.json).

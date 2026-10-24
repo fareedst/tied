@@ -1,13 +1,23 @@
-feat(yaml): extend ordered-list keys and storage marshalling
+docs(plan): close out DATA-FILE-ORDERING slice 2 evidence
 
-Extend tied-yaml-canonical-v1 with _seq/_sequence ordered-list families,
-shared storage-dump marshalling for YAML and JSON slice-1 writers, Ruby/TS
-parity, and LEAP on REQ-TIED_YAML_CANONICALIZATION.
+Unified close-out for PLAN-DATA-FILE-ORDERING after JSON slice 2 product
+commit 9fcaf3ef. Gates: close_out allowed, envelope blocking_gaps=0,
+reconcile band A (run_id=close-out-plan-data-file-ordering-slice2-2026-10-23).
 
-Tokens: REQ-TIED_YAML_CANONICALIZATION, ARCH-TIED_YAML_CANONICAL_PROFILE,
-IMPL-TIED_YAML_CANONICALIZER.
+Parent: REQ-TIED_YAML_CANONICALIZATION
+Tokens: REQ-TIED_YAML_CANONICALIZATION, IMPL-TIED_YAML_CANONICALIZER
 
-Completion signals: close_out gate allowed; envelope blocking_gaps=0;
-reconcile process_grade A.
+Completion signals: machine close-out pass; process contract pass; adherence A.
 
-Plan: tied-project/working/PLAN-DATA-FILE-ORDERING/PLAN-refine-pass2.md
+Staging map:
+CHANGELOG.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/checklist-tracker-refine.yaml
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/close-out-handoff.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/session-handoff.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/json-slice2-build-evidence.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/traceable-commit-evidence.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/traceable-commit-evidence-slice2.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/closeout-run-close-out-gates-slice2-2026-10-23.json
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/git-hygiene-receipt-2026-10-23-clear-workspace.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/git-hygiene-receipt-2026-10-23-slice2.md
+tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/proposed-commit-message.txt
