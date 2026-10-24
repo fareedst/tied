@@ -1,0 +1,15 @@
+ARCH-TIED_CHANGE_IMPACT_PROFILE:
+  cross_references:
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  decision: "Client change-impact-profile.v1 with opt-in impact-preview.v2 from tied_plumb_diff_impact_preview."
+  name: "Change impact profile architecture"
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_CHANGE_IMPACT_PROFILE"
+    implementation:
+      - "IMPL-TIED_CHANGE_IMPACT_PROFILE"
+    requirements:
+      - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+    tests:
+      - "mcp-server/src/analysis/plumb-diff-impact-preview.test.ts"

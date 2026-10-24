@@ -1,0 +1,16 @@
+IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE:
+  cross_references:
+    - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  decision: "independent-proofs.ts validate patch and MCP tools."
+  name: "Independent proof envelope implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    code_annotations:
+      - "IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    requirements:
+      - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+    tests:
+      - "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts"

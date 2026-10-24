@@ -1,0 +1,16 @@
+IMPL-TIED_CHANGE_IMPACT_PROFILE:
+  cross_references:
+    - "ARCH-TIED_CHANGE_IMPACT_PROFILE"
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  decision: "change-impact-profile.ts and plumb v2 report legs."
+  name: "Change impact profile implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHANGE_IMPACT_PROFILE"
+    code_annotations:
+      - "IMPL-TIED_CHANGE_IMPACT_PROFILE"
+    requirements:
+      - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+    tests:
+      - "mcp-server/src/analysis/plumb-diff-impact-preview.test.ts"

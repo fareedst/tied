@@ -1,0 +1,38 @@
+REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
+  category: "Methodology"
+  description: "Wave 3 from open-ontologies comparison: optional independent_proofs on request evidence envelope and opt-in change-impact profile for plumb v2."
+  name: "Open Ontologies Wave 3 harness compose"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Backward-compatible v1 envelope"
+      - "Opt-in v2 impact preview"
+    problems_solved:
+      - "No envelope slot for external proofs"
+      - "Token-only plumb preview"
+    why: "Compose reviewer evidence without replacing checklist gates."
+  related_requirements:
+    depends_on:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "impact-preview.v2 with profile"
+      metric: "plumb-diff-impact-preview tests"
+    - criterion: "independent_proofs advisory validation"
+      metric: "request-evidence-envelope tests"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHANGE_IMPACT_PROFILE"
+      - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    code_annotations:
+      - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+    implementation:
+      - "IMPL-TIED_CHANGE_IMPACT_PROFILE"
+      - "IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    tests:
+      - "mcp-server/src/analysis/plumb-diff-impact-preview.test.ts"
+      - "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts"
