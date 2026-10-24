@@ -1,2 +1,0 @@
-FAIL	./tools/agentstream/checklist/... [setup failed]
-FAIL

@@ -213,10 +213,10 @@ tied-project/working/**/create-arch.json
 tied-project/working/**/create-impl.json
 tied-project/working/**/create-req.json
 tied-project/working/**/doc-*-checklist.yaml
+tied-project/working/**/evidence/**/*.stdout.txt
 tied-project/working/**/evidence/psa-*.json
 tied-project/working/**/evidence/pseudocode-validate-*.json
 tied-project/working/**/evidence/quality/**/*.stderr.txt
-tied-project/working/**/evidence/quality/**/*.stdout.txt
 tied-project/working/**/g*-dogfood/
 tied-project/working/**/gate-*.json
 tied-project/working/**/gate-args*.json
@@ -246,6 +246,7 @@ tied-project/working/client-*/
 tied-project/working/jev-decide-trace/
 tied-project/working/post-session/
 working/**/claims-evidence-review/mcp-run/
+working/**/evidence/**/*.stdout.txt
 working/**/gate-tracker*.yaml
 !tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/
 !tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**
@@ -268,3 +269,4 @@ CLAUDE.md
 .claude/adherence-bridge.log
 # END TIED INSTALL MANAGED
 docs/visuals/2026-10-20.md
+.bkpdir.yml

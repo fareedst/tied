@@ -34,6 +34,8 @@ export const COMMITTED_WORKING_REGENERABLE_EXTRA_GLOBS = [
   /** MCP integration test / default run_id output — regenerable dogfood, not pinned pilot. */
   "tied-project/working/**/claims-evidence-review/mcp-run/",
   "working/**/claims-evidence-review/mcp-run/",
+  /** Command logs under committed working evidence — regenerate via collect/verify. */
+  "working/**/evidence/**/*.stdout.txt",
 ];
 /** Matches {@link GITIGNORE_BLOCK_BEGIN} in gitignore-block.mjs (avoid import cycle). */
 const GITIGNORE_INSTALL_MANAGED_BEGIN = "# BEGIN TIED INSTALL MANAGED";
@@ -87,7 +89,7 @@ export const EXPANDED_LOCAL_WORKING_GITIGNORE_GLOBS = [
   "tied-bundle/working/**/run-*-close-out*.mjs",
   "tied-bundle/working/**/sync-*-close-out*.mjs",
   "tied-bundle/working/*-close-out-summary.json",
-  "tied-bundle/working/**/evidence/quality/**/*.stdout.txt",
+  "tied-bundle/working/**/evidence/**/*.stdout.txt",
   "tied-bundle/working/**/evidence/quality/**/*.stderr.txt",
   "tied-bundle/working/**/evidence/psa-*.json",
   "tied-bundle/working/**/evidence/pseudocode-validate-*.json",

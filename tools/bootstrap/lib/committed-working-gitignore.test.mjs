@@ -19,6 +19,7 @@ test("buildCommittedWorkingRegenerableGlobs mirrors tied-bundle/working entries"
   assert.ok(
     globs.some((g) => g === "tied-project/working/**/claims-evidence-review/mcp-run/"),
   );
+  assert.ok(globs.some((g) => g === "tied-project/working/**/evidence/**/*.stdout.txt"));
   assert.ok(globs.some((g) => g.startsWith("tied-project/working/")));
   assert.ok(!globs.some((g) => g.startsWith("tied-bundle/working/")));
 });
@@ -54,6 +55,26 @@ test("temp repo: regenerable gate JSON ignored, PLAN.md trackable", () => {
       "{}\n",
     );
     fs.writeFileSync(
+      path.join(dir, "tied-project", "working", "REQ-X", "evidence", "npm-test.stdout.txt"),
+      "ok\n",
+    );
+    fs.mkdirSync(
+      path.join(dir, "tied-project", "working", "REQ-X", "evidence", "quality-manifest"),
+      { recursive: true },
+    );
+    fs.writeFileSync(
+      path.join(
+        dir,
+        "tied-project",
+        "working",
+        "REQ-X",
+        "evidence",
+        "quality-manifest",
+        "citdp-evidence-1.stdout.txt",
+      ),
+      "ok\n",
+    );
+    fs.writeFileSync(
       path.join(dir, "tied-project", "working", "REQ-X", "gate-tracker-verification.yaml"),
       "steps: []\n",
     );
@@ -85,6 +106,8 @@ test("temp repo: regenerable gate JSON ignored, PLAN.md trackable", () => {
     assert.ok(!tracked.some((p) => p.includes("gate-pre_implementation.json")));
     assert.ok(!tracked.some((p) => p.includes("gate-tracker-verification.yaml")));
     assert.ok(!tracked.some((p) => p.includes("claims-evidence-review/mcp-run/")));
+    assert.ok(!tracked.some((p) => p.endsWith("npm-test.stdout.txt")));
+    assert.ok(!tracked.some((p) => p.includes("quality-manifest/citdp-evidence-1.stdout.txt")));
     execSync("git check-ignore -q tied-project/working/REQ-X/evidence/gate-pre_implementation.json", {
       cwd: dir,
     });
@@ -95,6 +118,9 @@ test("temp repo: regenerable gate JSON ignored, PLAN.md trackable", () => {
       "git check-ignore -q tied-project/working/REQ-X/claims-evidence-review/mcp-run/claim-review-report.v1.json",
       { cwd: dir },
     );
+    execSync("git check-ignore -q tied-project/working/REQ-X/evidence/npm-test.stdout.txt", {
+      cwd: dir,
+    });
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

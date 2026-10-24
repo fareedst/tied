@@ -42,6 +42,9 @@ export function bucketCommittedWorkingPath(repoRelativePath) {
   if (COMMITTED_WORKING_KEEP_RELATIVE_RES.some((re) => re.test(relative))) {
     return "keep";
   }
+  if (/^evidence\/.+\.stdout\.txt$/.test(relative)) {
+    return "untrack";
+  }
   if (classifyWorkingRelativePath(relative) === "local") {
     return "untrack";
   }
