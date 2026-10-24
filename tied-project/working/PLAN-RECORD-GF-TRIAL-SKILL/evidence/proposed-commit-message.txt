@@ -1,0 +1,11 @@
+feat(bootstrap): add store-only record-gf-trial facilitator skill
+
+Codify greenfield trial ingest for facilitators: bundled skill,
+STORE_FACILITATOR_SKILLS manifest, self-install stub on store root only.
+Extends REQ-TIED_CLIENT_BOOTSTRAP_SKILLS / IMPL pseudo-code. Demo catalog
+protocol + vocab rows. Tests: store-facilitator-skills.test.mjs.
+
+Completion signals: machine close-out waived (minimal PLAN, no envelope);
+process contract pass; adherence ledger N/A.
+
+PLAN-RECORD-GF-TRIAL-SKILL

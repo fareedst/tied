@@ -12,6 +12,11 @@ import {
   installStandaloneSkillsCopy,
   installStandaloneSkillsLinkedStub,
 } from "../client-skills-catalog.mjs";
+import {
+  installStoreFacilitatorSkillsCopy,
+  installStoreFacilitatorSkillsLinkedStub,
+  isStoreSelfInstall,
+} from "../store-facilitator-skills.mjs";
 import { buildSkillStubBody, writeSkillStub } from "../skill-stub.mjs";
 import {
   installClaudeSkills,
@@ -72,6 +77,9 @@ export function installSkillsLinked(projectRoot, options) {
     installLinkedPromptTypeSkills(projectRoot, paths, cursorSkillsDir, options.storeRoot);
     installLinkedTiedYamlSkill(projectRoot, paths, cursorSkillsDir, options.storeRoot);
     installStandaloneSkillsLinkedStub(options.storeRoot, cursorSkillsDir);
+    if (isStoreSelfInstall(projectRoot, options.storeRoot)) {
+      installStoreFacilitatorSkillsLinkedStub(options.storeRoot, cursorSkillsDir);
+    }
   }
 
   if (harness === "claude" || harness === "both") {
@@ -79,6 +87,9 @@ export function installSkillsLinked(projectRoot, options) {
     installLinkedPromptTypeSkills(projectRoot, paths, claudeSkillsDir, options.storeRoot);
     installLinkedTiedYamlSkill(projectRoot, paths, claudeSkillsDir, options.storeRoot);
     installStandaloneSkillsLinkedStub(options.storeRoot, claudeSkillsDir);
+    if (isStoreSelfInstall(projectRoot, options.storeRoot)) {
+      installStoreFacilitatorSkillsLinkedStub(options.storeRoot, claudeSkillsDir);
+    }
   }
 }
 
@@ -183,6 +194,9 @@ export function installSkillsFull(projectRoot, paths, options) {
     const cursorSkillsDir = resolveSkillsInstallDir(projectRoot, "cursor", skillsBootstrap);
     installTiedYamlSkill(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
     installStandaloneSkillsCopy(options.storeRoot, cursorSkillsDir);
+    if (isStoreSelfInstall(projectRoot, options.storeRoot)) {
+      installStoreFacilitatorSkillsCopy(options.storeRoot, cursorSkillsDir);
+    }
     installPromptTypeSkills(projectRoot, paths, { skillsInstallDir: cursorSkillsDir });
   }
   if (harness === "claude" || harness === "both") {

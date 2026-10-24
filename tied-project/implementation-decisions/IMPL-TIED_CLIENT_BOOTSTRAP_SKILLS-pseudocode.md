@@ -64,3 +64,41 @@ procedure EXTEND_CHECK_STORE_REACHABLE:
   CALL LOAD_STANDALONE_CLIENT_SKILLS
   APPEND each storeDir to required list
   RETURN check result
+
+procedure LOAD_STORE_FACILITATOR_SKILLS:
+  # [IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS] [ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS] [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS] How: read manifest.json STORE_FACILITATOR_SKILLS; store-only facilitator bundles (not disposable client bootstrap).
+  Contract:
+    INPUT: { store_root }
+    OUTPUT: { entries: object[] }
+    PRE: manifest STORE_FACILITATOR_SKILLS is array (may be empty)
+    POST: each entry has existing SKILL.md
+    EFFECTS: IO | pure
+  READ manifest STORE_FACILITATOR_SKILLS
+  FOR EACH entry RESOLVE path.join(store_root, storeDir, SKILL.md)
+  IF missing THEN FAIL STORE_FACILITATOR_SKILL_MISSING
+  RETURN entries
+
+procedure INSTALL_STORE_FACILITATOR_SKILLS_LINKED_STUB:
+  # [IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS] [ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS] [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS] [REQ-TIED_LAYERED_CLIENT_INSTALL] How: when projectRoot equals storeRoot on linked install, writeSkillStub for each STORE_FACILITATOR_SKILLS entry.
+  Contract:
+    INPUT: { store_root, project_root, skills_install_dir }
+    OUTPUT: { stub_paths: string[] }
+    PRE: LOAD_STORE_FACILITATOR_SKILLS succeeds when entries non-empty
+    POST: stubs reference store canonical SKILL.md
+    EFFECTS: IO
+  IF resolve(project_root) != resolve(store_root) THEN RETURN empty
+  CALL LOAD_STORE_FACILITATOR_SKILLS
+  FOR EACH entry CALL buildSkillStubBody AND writeSkillStub
+  RETURN stub_paths
+
+procedure EXTEND_CHECK_STORE_REACHABLE_FACILITATOR:
+  # [IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS] [ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS] [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS] How: append each STORE_FACILITATOR_SKILLS storeDir to required paths.
+  Contract:
+    INPUT: { store_root }
+    OUTPUT: { store_root, checked }
+    PRE: true
+    POST: missing facilitator bundle fails reachability
+    EFFECTS: IO
+  CALL LOAD_STORE_FACILITATOR_SKILLS
+  APPEND each storeDir to required list
+  RETURN check result

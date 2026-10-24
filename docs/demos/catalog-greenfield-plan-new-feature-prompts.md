@@ -16,7 +16,8 @@
 2. Confirm **`tied-yaml`** MCP and **plan-new-feature** skill are available (default after bootstrap).
 3. Attach **`@plan-new-feature`** and paste **one** block from [Trial prompts](#trial-prompts) below—nothing else unless the sponsor adds product constraints.
 4. Let the skill run; optionally **`@build-plan`** on the linked plan the session produces.
-5. Score the session using [facilitator grading](#facilitator-grading-readout); do not add methodology instructions to the pasted text.
+5. From the **TIED store** workspace, run **`@record-gf-trial`** with the disposable client path or numeric id to publish a [trial readout](README.md) and update [Recorded trials](#recorded-trials-facilitator) (replaces ad hoc `/non-tied-plan … grade and record` ingest prompts).
+6. Score the session using [facilitator grading](#facilitator-grading-readout) when not fully captured by the skill readout; do not add methodology instructions to the pasted text.
 
 **Do not paste into the remainder:** TIED, REQ/ARCH/IMPL tokens, CITDP, checklists, MCP tool names, pseudo-code, LEAP, Kaizen, gates, or “use tied-bundle.” The client already loads those.
 

@@ -59,6 +59,12 @@
       "storeDir": "tools/bundled-feedback-skill"
     }
   ],
+  "STORE_FACILITATOR_SKILLS": [
+    {
+      "skillName": "record-gf-trial",
+      "storeDir": "tools/bundled-record-gf-trial-skill"
+    }
+  ],
   "SOURCE_ONLY_VOCAB_BASENAMES": [
     "prompt-composer.md"
   ],

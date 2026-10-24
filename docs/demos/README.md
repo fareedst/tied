@@ -33,6 +33,10 @@ Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ token
 | `runbook` | Link to existing runnable documentation |
 | `meta-tool` | Exercises TIED MCP, gates, or bootstrap |
 
+## Facilitator skill (store only)
+
+After a greenfield client build, open the **TIED store** repo and invoke **`@record-gf-trial`** with the client directory or id. Install stub: `./tied-install.sh --allow-self-install --layers skills .` from the store root. Canonical procedure: [tools/bundled-record-gf-trial-skill/SKILL.md](../../tools/bundled-record-gf-trial-skill/SKILL.md).
+
 ## Runnable entry points
 
 - [TIED feature demo](../tied-feature-demo.md) — staged feature orchestration walkthrough
