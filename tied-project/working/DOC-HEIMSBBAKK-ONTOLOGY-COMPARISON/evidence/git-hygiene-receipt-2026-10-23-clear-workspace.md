@@ -11,7 +11,7 @@
 | Scope | `tied-project/working/DOC-HEIMSBBAKK-ONTOLOGY-COMPARISON/` + allowlisted `docs/comparisons/veronika-heimsbakk-*.md` |
 | Lint | **N/A** — no project TIED YAML |
 | Close-out | **Deferred** — machine envelope not chartered (minimal outreach) |
-| Hygiene | Traceable commit for untracked deliverables (see commit SHA in close-out note below) |
+| Hygiene | Traceable commit **`7f62cd81`** — comparison docs + working folder |
 | Commit-ready | **Yes** for P0–P2 comparison docs + working plan/tracker/handoff |
 
 ## Untracked cleared (this pass)

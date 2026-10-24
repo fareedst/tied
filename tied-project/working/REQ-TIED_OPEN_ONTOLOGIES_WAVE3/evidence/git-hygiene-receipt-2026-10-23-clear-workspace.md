@@ -11,7 +11,7 @@
 | Scope | `REQ-TIED_OPEN_ONTOLOGIES_WAVE3` + ARCH/IMPL detail YAML |
 | Lint | **`tied_validate_consistency`**: **ok** (with detail files present locally) |
 | Close-out | **Not run** — detail commit closes index↔detail gap only |
-| Hygiene | Traceable commit for untracked detail + working checklist |
+| Hygiene | Traceable commit **`05c69f99`** — detail YAML + working checklist |
 | Commit-ready | **Yes** after MCP tests for envelope + plumb impact |
 
 ## Untracked cleared (this pass)
