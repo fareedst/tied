@@ -32,7 +32,7 @@ CITDP-layerb-sidecar-fix:
     close_out_gate_notes: "Minimal depth follow-up. Unified runner required at close_out with run_id layerb-sidecar-fix-20260911. No verification phase or inquiry four-pack required. Finalize CITDP at persist-citdp-record."
     verification_gate_notes: "Not required — no code changed."
   evidence:
-    commands:
+    command_seq:
       - "node scripts/backfill-pseudocode-analysis.mjs --req REQ-TIED_CHECKLIST_GATE_ENFORCEMENT --gate-mode --impl IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "node tools/bootstrap/templates/run-close-out-gates.mjs --phase close_out --run-id layerb-sidecar-fix-20260911 --envelope-blocking --sync-dispositions --reconcile"
       - "pseudocode_validate IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT (MCP)"

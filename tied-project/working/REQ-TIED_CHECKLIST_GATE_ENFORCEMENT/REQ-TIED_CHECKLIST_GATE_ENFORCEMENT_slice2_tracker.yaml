@@ -30,7 +30,7 @@ execution_evidence:
     - "unit-test-red"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "node --test dist/checklist-activation-collect.test.js dist/tools/checklist-gate-mcp.test.js"
       - "npm run build --prefix mcp-server"
       - "npm test --prefix mcp-server"

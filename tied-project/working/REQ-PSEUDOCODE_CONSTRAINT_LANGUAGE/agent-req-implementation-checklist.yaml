@@ -48,7 +48,7 @@ execution_evidence:
         run_id: "cl-verify-20260910"
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     verification:
-      commands:
+      command_seq:
         - "cd mcp-server && bun test src/analysis/pseudocode-constraint*.test.ts (795+ pass)"
         - "pseudocode_validate IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE sidecar ok"
         - "tied_validate_consistency ok"
@@ -83,7 +83,7 @@ execution_evidence:
       pseudocode_validate: "pass"
       sidecar: "tied/implementation-decisions/IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE-pseudocode.md"
   operator_evidence:
-    commands:
+    command_seq:
       - "node working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-pre-implementation-gates.mjs"
       - "pseudocode_validate IMPL-PSEUDOCODE_CONSTRAINT_LANGUAGE sidecar ok"
       - "tied_validate_consistency ok"
@@ -98,7 +98,7 @@ execution_evidence:
     integrated_pilot_template: "depth_tier: integrated\ngate_policy: advisory\nprior_depth_tier: null\nphase_artifact_dir: working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/adversarial-inquiry/phase-{phase}/\ncollect: tied_checklist_activation_collect request_token, phase, run_id, project_root\ngate: tied_checklist_gate_validate with activation payload (receipt + four artifacts)\n"
     limitation: "Slice 4 interproc solver complete; verification gate pending Slice 8."
     slice2_evidence:
-      commands:
+      command_seq:
         - "cd mcp-server && bunx tsc -b"
         - "cd mcp-server && npm test"
       f8_regression: "28/28 typed-flow fixtures parse as v1 with zero constraint IR fields"
@@ -108,7 +108,7 @@ execution_evidence:
       tests_before: 688
     slice3_evidence:
       cl1_case12: "v2 length(items) > 0 proven; v1 typed-flow remains unknown"
-      commands:
+      command_seq:
         - "cd mcp-server && bunx tsc -b"
         - "cd mcp-server && npm test"
       f8_regression: "28/28 typed-flow + cl-01..06 grammar-v2 tests pass; analyzer pipeline unchanged"
@@ -130,7 +130,7 @@ execution_evidence:
       tied_validate_consistency: "ok"
     slice4_evidence:
       cl4_cl5: "summary_missing unknown on missing callee summary; solver_truncation metadata when max_solver_steps=0"
-      commands:
+      command_seq:
         - "cd mcp-server && bunx tsc -b"
         - "cd mcp-server && npm test"
       extended_modules:

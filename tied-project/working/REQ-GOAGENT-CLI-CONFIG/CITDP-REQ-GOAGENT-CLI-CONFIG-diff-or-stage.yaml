@@ -11,7 +11,7 @@ CITDP-REQ-GOAGENT-CLI-CONFIG-diff-or-stage:
       phases:
         - "close_out"
   evidence:
-    commands:
+    command_seq:
       - "cd tools/agentstream && go build -trimpath -o agentstream ./cmd/agentstream"
       - "cd tools/agentstream && go test ./..."
     proof_boundaries:

@@ -1,0 +1,9 @@
+feat(bootstrap): migrate ordered YAML list keys via tied-install
+
+Brownfield clients fix legacy evidence.commands and related keys in
+tied-project/ with --migrate-ordered-list-keys; shared bootstrap lib,
+audit script, and working tracker/CITDP renames. [REQ-CITDP_ORDERED_LIST_KEYS]
+[REQ-TIED_LAYERED_CLIENT_INSTALL] [IMPL-CITDP_ORDERED_KEY_VALIDATE]
+
+Completion signals: machine close-out N/A (minimal plan slice); process
+contract pass (scoped tests + rename --check); adherence ledger not_run.

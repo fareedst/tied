@@ -1,5 +1,5 @@
 evidence:
-  commands:
+  command_seq:
     - "npx tsc -b --pretty false --prefix mcp-server"
   proof_boundaries:
     - "executable_behavior"
@@ -44,7 +44,7 @@ execution_evidence:
     - "user-facing-release-notes"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "bash -n scripts/build-commands.sh scripts/yaml_tool.sh scripts/lint_yaml.sh scripts/lint.sh"
       - "cd tools/agentstream && go test ./..."
       - "npm test --prefix mcp-server"

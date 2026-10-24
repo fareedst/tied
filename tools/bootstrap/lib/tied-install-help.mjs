@@ -29,6 +29,8 @@ export function printTiedInstallHelp() {
   writeDim("  ./tied-install.sh .                    # install into current directory");
   writeDim("  ./tied-install.sh --mode linked --store /abs/tied-store /path/to/primary");
   writeDim("  ./tied-install.sh --migrate-layout /path/to/brownfield");
+  writeDim("  ./tied-install.sh --migrate-ordered-list-keys /path/to/client");
+  writeDim("  ./tied-install.sh --migrate-ordered-list-keys --dry-run .");
   writeDim("  ./tied-install.sh --refresh /path/to/client");
   process.stdout.write("\n");
 
@@ -42,8 +44,10 @@ export function printTiedInstallHelp() {
   writeDim("  --allow-self-install                 Allow install when project root equals store root");
   writeDim("  --doctor                             No-MCP self-test on installed client");
   writeDim("  --migrate-layout                     Brownfield layout migration (idempotent)");
+  writeDim("  --migrate-ordered-list-keys          Rename legacy ordered-command YAML keys in tied-project/ (see tied-bundle/docs/detail-files-schema.md § Set vs ordered list keys)");
+  writeDim("  --fail-if-pending                    With --migrate-ordered-list-keys: exit 1 if migration still needed (CI; no writes)");
   writeDim("  --store                              With --migrate-layout --dry-run: store git mv plan");
-  writeDim("  --dry-run                            With --migrate-layout: plan only");
+  writeDim("  --dry-run                            With --migrate-layout or --migrate-ordered-list-keys: plan only");
   writeDim("  --merge-vocab                        Accepted for parity (full methodology only)");
   writeDim("  --methodology-readonly               Unix chmod for full methodology tree");
   writeDim("  --install-methodology-hook           Install client pre-commit hook template");
@@ -54,6 +58,7 @@ export function printTiedInstallHelp() {
   writeSection("Hints");
   writeDim("  • Missing MCP build: run ./build-workspace.sh from the TIED store root first.");
   writeDim("  • Legacy tied/ layout: use --migrate-layout before a normal install.");
+  writeDim("  • Legacy evidence.commands / verification_commands in tied-project/: use --migrate-ordered-list-keys (requires built store mcp-server/dist).");
   writeDim("  • Store root equals client root: use --allow-self-install or a separate store clone.");
   writeDim("  • Windows: .\\tied-install.ps1 or tied-install.cmd (same behavior).");
   writeDim("  • No arguments prints this help; pass . to install the current directory.");

@@ -38,7 +38,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-j:
       prior_depth_tier: "minimal"
       profile_depth: "not_measured"
   test_strategy:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/adherence-ledger.test.js mcp-server/dist/verify.test.js"
       - "npm run build --prefix mcp-server"
       - "tied_validate_consistency"

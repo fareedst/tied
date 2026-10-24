@@ -19,7 +19,7 @@ CITDP-REQ-GOAGENT-CLI-CONFIG:
         - "close_out"
     verification_gate_notes: "go test ./... under tools/agentstream; close_out gate allowed 2026-09-11."
   evidence:
-    commands:
+    command_seq:
       - "cd tools/agentstream && go build -trimpath -o agentstream ./cmd/agentstream"
       - "cd tools/agentstream && go test ./..."
     manifest_reference: "working/REQ-GOAGENT-CLI-CONFIG/evidence/verification-evidence-manifest.v1.json"

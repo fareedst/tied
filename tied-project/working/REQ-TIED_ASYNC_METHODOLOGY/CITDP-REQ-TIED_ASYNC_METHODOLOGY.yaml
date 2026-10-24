@@ -39,7 +39,7 @@ CITDP-REQ-TIED_ASYNC_METHODOLOGY:
     verification_gate_receipt: "working/REQ-TIED_ASYNC_METHODOLOGY/gates/verification-w2-gate-receipt.json"
     w2_exit_gates: "catalog rows, contradiction routing, async_in_scope, legacy regression"
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/checklist-async-dispositions.test.js mcp-server/dist/tools/tied-async-contract-fixtures.test.js"
       - "npm run build --prefix mcp-server"
     manifest_reference: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"

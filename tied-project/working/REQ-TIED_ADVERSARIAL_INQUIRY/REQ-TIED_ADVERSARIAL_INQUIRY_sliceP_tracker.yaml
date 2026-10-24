@@ -19,7 +19,7 @@ execution_evidence:
     - "test-strategy"
     - "translate-sponsor-intent"
   operator_evidence:
-    commands:
+    command_seq:
       - "node --test dist/adversarial-inquiry/checklist-integration.test.js dist/checklist-validator.test.js dist/tools/checklist-gate-mcp.test.js"
       - "npm run build --prefix mcp-server"
       - "tied_adversarial_inquiry_run phase=close_out"

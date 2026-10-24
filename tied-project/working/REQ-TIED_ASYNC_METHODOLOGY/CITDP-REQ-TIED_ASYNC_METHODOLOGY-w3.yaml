@@ -41,7 +41,7 @@ CITDP-REQ-TIED_ASYNC_METHODOLOGY-w3:
       - "no inquiry without activation evidence"
       - "waivers owner expiry rationale bound"
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/citdp-async-triggers.test.js"
       - "npm run build --prefix mcp-server"
     manifest_reference: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"

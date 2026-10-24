@@ -14,7 +14,7 @@ CITDP-REQ-TIED_REVIEW_CONVERGENCE_POLICY:
       - "review-convergence-policy.md exists with proof boundary and policy sections"
     unchanged_behavior: "Checklist gates, tied_verify, and DAE charter unchanged."
   evidence:
-    commands:
+    command_seq:
       - "node --test review-convergence-policy-doc.test.mjs"
       - "run-close-out-gates.mjs --phase verification|close_out --envelope-blocking"
       - "tied_validate_consistency"

@@ -30,7 +30,7 @@ CITDP-URLFETCH-CLIENT-ANALYSIS:
         - "client_remediation_OQ-A1"
       status: "complete"
   evidence:
-    commands:
+    command_seq:
       - "request_evidence_envelope_validate fail_on_error_gaps on client envelope (2026-09-12)"
     proof_boundaries:
       - "Analysis does not prove urlfetch runtime on live networks."

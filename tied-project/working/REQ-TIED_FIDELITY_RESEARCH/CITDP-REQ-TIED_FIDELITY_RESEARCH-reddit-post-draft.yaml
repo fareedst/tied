@@ -90,7 +90,7 @@ CITDP-REQ-TIED_FIDELITY_RESEARCH-reddit-post:
         severity: "high"
         summary: "Public post overclaims TIED efficacy."
   test_strategy:
-    commands: []
+    command_seq: []
     composition_tests: []
     documentation_checks:
       - "Manual review: sections 0-6 present and Reddit post readable standalone."

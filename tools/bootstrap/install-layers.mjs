@@ -17,6 +17,10 @@ import { TIED_REPO_ROOT } from "./lib/constants.mjs";
 import { resolveStoreRoot } from "./lib/layers/store.mjs";
 import { detectLegacyLayout } from "./lib/layout.mjs";
 import { migrateLayout } from "./lib/migrate-layout.mjs";
+import {
+  migrateOrderedListKeys,
+  runPostMigrateAuditCheck,
+} from "./lib/migrate-ordered-list-keys.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../..");
@@ -40,6 +44,8 @@ export function parseInstallLayersArgs(argv, env = process.env) {
   let allowSelfInstall = false;
   let doctor = false;
   let migrateLayoutFlag = false;
+  let migrateOrderedListKeysFlag = false;
+  let migrateFailIfPending = false;
   let storeMigrate = false;
   let dryRun = false;
   let mergeVocab = false;
@@ -81,6 +87,12 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     } else if (flag === "--migrate-layout") {
       migrateLayoutFlag = true;
       args.shift();
+    } else if (flag === "--migrate-ordered-list-keys") {
+      migrateOrderedListKeysFlag = true;
+      args.shift();
+    } else if (flag === "--fail-if-pending") {
+      migrateFailIfPending = true;
+      args.shift();
     } else if (flag === "--dry-run") {
       dryRun = true;
       args.shift();
@@ -106,6 +118,10 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     throw new Error(`Unknown option: ${unknownFlag}`);
   }
 
+  if (migrateFailIfPending && !migrateOrderedListKeysFlag) {
+    throw new Error("--fail-if-pending requires --migrate-ordered-list-keys");
+  }
+
   const target = positional[0] ? path.resolve(positional[0]) : process.cwd();
   return {
     target,
@@ -118,6 +134,8 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     allowSelfInstall,
     doctor,
     migrateLayout: migrateLayoutFlag,
+    migrateOrderedListKeys: migrateOrderedListKeysFlag,
+    migrateFailIfPending,
     storeMigrate,
     dryRun,
     mergeVocab,
@@ -129,7 +147,49 @@ export function parseInstallLayersArgs(argv, env = process.env) {
   };
 }
 
-function main() {
+async function handleMigrateOrderedListKeys(parsed) {
+  const storeRoot = resolveStoreRoot({ store: parsed.store, projectRoot: parsed.target });
+  const preview = parsed.dryRun || parsed.migrateFailIfPending;
+  const result = await migrateOrderedListKeys(parsed.target, {
+    storeRoot,
+    includeTrackers: true,
+    dryRun: preview,
+    failIfPending: parsed.migrateFailIfPending,
+    logRelativeTo: parsed.target,
+  });
+
+  if (!result.ok) {
+    sayErr(result.code ?? "MIGRATE_ORDERED_LIST_KEYS_FAILED");
+    if (result.hint) sayErr(result.hint);
+    if (result.paths) {
+      for (const p of result.paths) sayErr(`  ${p}`);
+    }
+    process.exit(1);
+  }
+
+  if (result.message) {
+    sayOk(`migrate-ordered-list-keys: ${result.message}`);
+  } else {
+    sayOk(
+      `migrate-ordered-list-keys: ${result.changed} file(s) ${preview ? "need migration" : "migrated"} of ${result.scanned} scanned`,
+    );
+  }
+
+  if (parsed.migrateFailIfPending && result.changed > 0) {
+    process.exit(1);
+  }
+
+  if (!preview && result.changed > 0 && result.scanRoots?.length) {
+    const audit = runPostMigrateAuditCheck(storeRoot, result.scanRoots);
+    if (!audit.ok) {
+      sayErr(audit.code ?? "ORDERED_LIST_AUDIT_FAILED");
+      if (audit.hint) sayErr(audit.hint);
+      process.exit(audit.status ?? 1);
+    }
+  }
+}
+
+async function main() {
   const argv = process.argv.slice(2);
   if (isTiedInstallHelpArgv(argv)) {
     printTiedInstallHelp();
@@ -137,6 +197,10 @@ function main() {
   }
   try {
     const parsed = parseInstallLayersArgs(argv);
+    if (parsed.migrateOrderedListKeys) {
+      await handleMigrateOrderedListKeys(parsed);
+      return;
+    }
     if (parsed.migrateLayout) {
       const result = migrateLayout(parsed.target, {
         store: parsed.storeMigrate,

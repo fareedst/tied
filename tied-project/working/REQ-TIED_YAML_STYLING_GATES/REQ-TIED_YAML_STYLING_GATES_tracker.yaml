@@ -21,7 +21,7 @@ execution_evidence:
         ok: true
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     verification:
-      commands:
+      command_seq:
         - "npm test --prefix mcp-server (441/441 pass)"
         - "tied_validate_consistency ok"
   completed:
@@ -39,7 +39,7 @@ execution_evidence:
     - "user-facing-release-notes"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "lint_yaml working/REQ-TIED_YAML_STYLING_GATES/*.yaml"
       - "npm test --prefix mcp-server"
       - "tied-cli.sh tied_checklist_gate_validate (phase close_out; plan-close-out)"

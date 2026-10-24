@@ -34,7 +34,7 @@ CITDP-wave2-pseudocode-enforcement:
         - "pre_implementation"
         - "verification"
   evidence:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/checklist/... -run Pseudocode"
       - "node --test mcp-server/dist/checklist-pseudocode-gate.test.js"
       - "node --test mcp-server/dist/checklist-validator.test.js"

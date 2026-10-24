@@ -28,7 +28,7 @@ CITDP-REQ-TIED_ASYNC_METHODOLOGY-w6:
       - "async_in_scope does not auto-activate inquiry"
       - "never force typed_flow on async detection alone"
   evidence:
-    commands:
+    command_seq:
       - "go test ./checklist/ -run TestLoadTurns_asyncMethodologyHighlightForPhaseBAndG"
       - "node --test mcp-server/dist/analysis/scoped-analysis-async-preview.test.js"
       - "npm run build --prefix mcp-server"

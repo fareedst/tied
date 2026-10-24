@@ -51,7 +51,7 @@ execution_evidence:
         run_id: "tf-verify-20260910"
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     verification:
-      commands:
+      command_seq:
         - "cd mcp-server && npm test (626/626 pass)"
         - "pseudocode_validate IMPL-PSEUDOCODE_TYPED_FLOW sidecar ok"
         - "tied_validate_consistency ok"
@@ -84,7 +84,7 @@ execution_evidence:
       pseudocode_validate: "pass"
       sidecar: "tied/implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md"
   operator_evidence:
-    commands:
+    command_seq:
       - "node working/REQ-PSEUDOCODE_TYPED_FLOW/run-pre-implementation-gates.mjs"
       - "pseudocode_validate IMPL-PSEUDOCODE_TYPED_FLOW sidecar ok"
       - "tied_validate_consistency ok"

@@ -33,7 +33,7 @@ execution_evidence:
         run_id: "refine-plan-pre-impl-20260826"
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     policy: "plan-close-out-commit-deferred"
-    verification_commands:
+    verification_command_seq:
       - "(cd mcp-server && bunx tsc -b) -> exit 0"
       - "(cd mcp-server && npm run build && npm test) -> 497 pass / 0 fail"
       - "lint_yaml on changed CITDP, REQ, templates, and Tracker YAML -> exit 0"
@@ -55,7 +55,7 @@ execution_evidence:
     - "traceable-commit"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "(cd mcp-server && bunx tsc -b)"
       - "(cd mcp-server && npm run build && npm test)"
       - "mkdir -p /tmp/tied-bootstrap-smoke-integrity && ./copy_files.sh /tmp/tied-bootstrap-smoke-integrity"

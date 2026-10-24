@@ -44,7 +44,7 @@ execution_evidence:
         run_id: "tf-phase3-verify-20260910"
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     verification:
-      commands:
+      command_seq:
         - "cd mcp-server && npm test (651/651 pass)"
         - "node working/REQ-PSEUDOCODE_TYPED_FLOW/run-phase3-gates.mjs"
         - "working/PSEUDOCODE-CONSTRAINT-STUDY/qualification/scripts/run-phase3.ts"
@@ -74,7 +74,7 @@ execution_evidence:
       pseudocode_validate: "pass"
       sidecar: "tied/implementation-decisions/IMPL-PSEUDOCODE_TYPED_FLOW-pseudocode.md"
   operator_evidence:
-    commands:
+    command_seq:
       - "node working/REQ-PSEUDOCODE_TYPED_FLOW/run-phase3-gates.mjs"
     depth_tier: "integrated"
     gate_policy: "advisory"

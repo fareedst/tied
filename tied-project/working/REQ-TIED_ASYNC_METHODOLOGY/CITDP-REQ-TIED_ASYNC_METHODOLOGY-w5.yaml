@@ -34,7 +34,7 @@ CITDP-REQ-TIED_ASYNC_METHODOLOGY-w5:
       - "evidence says binding exercised never system is race-free"
       - "non-async inventory remains compatible"
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/analysis/binding-inventory.test.js mcp-server/dist/analysis/binding-inventory-composition.test.js"
       - "npm run build --prefix mcp-server"
     manifest_reference: "working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json"

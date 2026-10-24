@@ -10,7 +10,7 @@ CITDP-CLIENT-1787507684-REPLAY-SCRIPT:
       - "replay-integrated-activation.sh supports --dry-run and --check"
       - "Three phases run inquiry, collect, and gate with distinct run_ids"
   evidence:
-    commands:
+    command_seq:
       - "./working/client-1787507684-activation-audit/replay-integrated-activation.sh --check"
       - "./working/client-1787507684-activation-audit/replay-integrated-activation.sh --dry-run"
       - "bash -n working/client-1787507684-activation-audit/replay-integrated-activation.sh"

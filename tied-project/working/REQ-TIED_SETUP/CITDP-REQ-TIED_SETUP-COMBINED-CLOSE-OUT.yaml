@@ -26,7 +26,7 @@ CITDP-REQ-TIED_SETUP-COMBINED-CLOSE-OUT:
       commit_deferred: true
       single_combined_commit: true
   evidence:
-    commands:
+    command_seq:
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
       - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
       - "node --test tools/bootstrap/lib/mcp-config.test.mjs"
@@ -78,7 +78,7 @@ CITDP-REQ-TIED_SETUP-COMBINED-CLOSE-OUT:
     quality_profiles:
       - "baseline-functional"
   test_strategy:
-    commands:
+    command_seq:
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
       - "node --test tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
       - "node --test tools/bootstrap/lib/mcp-config.test.mjs"

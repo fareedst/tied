@@ -56,7 +56,7 @@ CITDP-wave7-conversation-adherence:
       slice: "C"
       summary: "PSA gate hydration cross-read with envelope gaps"
   evidence:
-    commands:
+    command_seq:
       - "cd tools/agentstream && go test ./checklist/... -run 'TestTraceableCommitEnvelope|TestCanonicalChecklist_stepMarkers' -count=1"
       - "node --test mcp-server/dist/checklist-validator.test.js"
       - "node --test mcp-server/dist/request-evidence-envelope/process-adherence-gaps.test.js"

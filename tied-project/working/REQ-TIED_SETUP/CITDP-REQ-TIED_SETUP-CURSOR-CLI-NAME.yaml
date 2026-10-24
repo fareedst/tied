@@ -13,7 +13,7 @@ CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME:
       - "tied/docs/fresh-client-prompt-activation-map.md and tools/bootstrap/README.md describe env consistently"
       - "TIED_CURSOR_AGENT_CMD overrides CURSOR_CLI_NAME"
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && npm run build && node --test dist/e2e/new-tied-client.test.js"
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
     proof_boundaries:
@@ -72,7 +72,7 @@ CITDP-REQ-TIED_SETUP-CURSOR-CLI-NAME:
         likelihood: "Low"
         mitigation: "Explicit test row; error message names env vars"
   test_strategy:
-    commands:
+    command_seq:
       - "cd mcp-server && npm run build && node --test dist/e2e/new-tied-client.test.js"
       - "node --experimental-strip-types --test mcp-server/src/e2e/new-tied-client.test.ts"
     matrix_notes: "Test rename: \"resolveCursorAgentCli prefers agent when on PATH and honors TIED_CURSOR_AGENT_CMD and CURSOR_CLI_NAME [IMPL-TIED_FILES] [REQ-TIED_SETUP]\"\nCases: default both→agent; CURSOR_CLI_NAME=cursor both→cursor; default cursor-only→cursor; TIED_CURSOR_AGENT_CMD→override; neither on PATH→agent\n"

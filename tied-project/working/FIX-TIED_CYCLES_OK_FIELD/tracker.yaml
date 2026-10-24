@@ -31,7 +31,7 @@ execution_evidence:
         run_id: "plan-close-out-fix-tied-cycles-20260827"
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     policy: "plan-close-out-commit-deferred"
-    verification_commands:
+    verification_command_seq:
       - "(cd mcp-server && npm test) -> 497 pass / 0 fail"
       - "node --test dist/tools/tied-cycles-mcp.test.js -> 3 pass (not yet in npm test script list)"
       - "TIED_BASE_PATH=/Users/fareed/Documents/dev/chatgpt/stdd/tied tied-cli.sh tied_cycles '{}' -> ok:true"

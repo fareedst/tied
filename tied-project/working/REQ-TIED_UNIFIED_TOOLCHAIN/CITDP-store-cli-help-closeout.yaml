@@ -15,7 +15,7 @@ CITDP-REQ-TIED_UNIFIED_TOOLCHAIN-STORE-CLI-HELP:
         - "close_out"
         - "verification"
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/build-workspace-help.test.mjs tools/bootstrap/build-workspace-sh-help.test.mjs tools/bootstrap/tied-install-help.test.mjs tools/bootstrap/tied-install-dispatch.test.mjs tools/bootstrap/install-layers-help.test.mjs"
   impact_analysis:
     impl_inventory:

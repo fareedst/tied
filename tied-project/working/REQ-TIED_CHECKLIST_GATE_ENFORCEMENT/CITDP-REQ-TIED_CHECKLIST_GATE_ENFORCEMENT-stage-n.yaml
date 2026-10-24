@@ -40,7 +40,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-n:
       prior_depth_tier: "integrated"
       profile_depth: "not_measured"
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/checklist/..."
       - "go test ./tools/agentstream/cmd/adherence-reconcile/... -count=1"
       - "node --test mcp-server/dist/tools/adherence-reconcile-mcp.test.js"

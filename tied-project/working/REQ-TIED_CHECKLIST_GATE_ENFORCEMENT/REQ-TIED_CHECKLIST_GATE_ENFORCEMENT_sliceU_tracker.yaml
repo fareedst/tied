@@ -26,7 +26,7 @@ execution_evidence:
     - "unit-test-red"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "gate-sliceU-close_out.json"
       - "gate-sliceU-pre_implementation.json"
       - "gate-sliceU-verification.json"

@@ -27,7 +27,7 @@ execution_evidence:
     - "unit-test-red"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "ruby -c scripts/build_adversarial_inquiry_from_tied.rb"
       - "ruby scripts/build_adversarial_inquiry_from_tied_test.rb"
       - "tied_validate_consistency"

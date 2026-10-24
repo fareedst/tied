@@ -108,7 +108,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-tracker-writer:
         severity: "high"
         summary: "Atomic update failure corrupts or truncates the Tracker."
   test_strategy:
-    commands:
+    command_seq:
       - "./scripts/validate_tokens.sh"
       - "go test ./tools/agentstream/..."
       - "node --test mcp-server/dist/checklist-validator.test.js mcp-server/dist/verify.test.js"

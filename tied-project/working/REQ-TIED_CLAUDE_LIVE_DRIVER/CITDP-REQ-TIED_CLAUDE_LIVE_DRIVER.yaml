@@ -31,7 +31,7 @@ CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER:
         - "verification"
     verification_gate_notes: "Plan-new-feature opens stack only; RED/code deferred to build-plan after pre_implementation gate."
   evidence:
-    commands:
+    command_seq:
       - "cd mcp-server/packages/agentstream && npm test"
       - "pseudocode_validate for IMPL-TIED_CLAUDE_LIVE_DRIVER"
       - "tied_checklist_gate_validate phase=pre_implementation"

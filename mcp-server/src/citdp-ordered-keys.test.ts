@@ -68,4 +68,15 @@ describe("transformCitdpOrderedListKeys", () => {
     const twice = transformCitdpOrderedListKeys(once);
     assert.deepEqual(twice, once);
   });
+
+  it("renames execution_evidence.operator_evidence.commands to command_seq", () => {
+    const out = transformCitdpOrderedListKeys({
+      execution_evidence: {
+        operator_evidence: { commands: ["npm test", "tied_validate_consistency"] },
+      },
+    });
+    assert.deepEqual(out.execution_evidence?.operator_evidence, {
+      command_seq: ["npm test", "tied_validate_consistency"],
+    });
+  });
 });

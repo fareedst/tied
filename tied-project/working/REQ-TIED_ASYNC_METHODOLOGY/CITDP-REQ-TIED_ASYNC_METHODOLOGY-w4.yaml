@@ -38,7 +38,7 @@ CITDP-REQ-TIED_ASYNC_METHODOLOGY-w4:
       - "no race/deadlock freedom claims"
       - "reports state structural-only proof boundary"
   evidence:
-    commands:
+    command_seq:
       - "node --test dist/analysis/pseudocode-async-boundary.test.js dist/analysis/pseudocode-async-boundary-corpus.test.js"
       - "node --test dist/tools/pseudocode-analyze-mcp.test.js"
       - "npm run build --prefix mcp-server"

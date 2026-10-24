@@ -73,7 +73,7 @@ CITDP-wave8-adherence-realignment:
       slice: "D"
       summary: "Promote agentstream enforce to integrated default"
   evidence:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/checklist/... -count=1"
       - "go test ./tools/agentstream/cmd/adherence-reconcile/... -count=1"
       - "node --test mcp-server/dist/checklist-gate-evidence-hydration.test.js"

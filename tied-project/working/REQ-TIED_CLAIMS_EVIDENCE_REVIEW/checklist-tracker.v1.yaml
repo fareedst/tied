@@ -64,7 +64,7 @@ execution_evidence:
     - "user-facing-release-notes"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "node working/REQ-TIED_CLAIMS_EVIDENCE_REVIEW/run-gates.mjs"
       - "npm --prefix mcp-server test"
       - "pseudocode_validate IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"

@@ -23,7 +23,7 @@ execution_evidence:
     - "unit-test-red"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "working/client-1787416567-strict-pilot/evidence/strict-approved-blocking-gate-result.json"
       - "working/client-1787416567-strict-pilot/evidence/strict-approved-negative-control-gate-result.json"
       - "working/client-1787416567-strict-pilot/replay-strict-approved-pilot.sh"

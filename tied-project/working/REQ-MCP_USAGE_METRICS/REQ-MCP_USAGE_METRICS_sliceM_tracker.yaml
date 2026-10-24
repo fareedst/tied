@@ -29,7 +29,7 @@ execution_evidence:
     - "unit-test-red"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/test/tied-cli-metrics-client.test.cjs"
       - "npm test --prefix mcp-server"
       - "ruby scripts/analyze_tied_mcp_metrics_test.rb"

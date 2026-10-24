@@ -15,7 +15,7 @@ change_definition:
     - "Deterministic MCP gates and keyword PRELOAD authority (until future gated promotion per S9)"
     - "REQ-TIED_JEV_DECISION_COPROCESSOR Implemented / program CITDP closed"
 evidence:
-  commands:
+  command_seq:
     - "rg -n 'Sponsor policy' docs/comparisons/jev-for-tied-improvement.md"
     - "tied_validate_consistency"
   evidence_references:

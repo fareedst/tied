@@ -41,7 +41,7 @@ execution_evidence:
     - "unit-test-red"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "npm run build --prefix mcp-server"
       - "npm test --prefix mcp-server"
       - "tied_adversarial_inquiry_run phase=close_out run_id=g2-dogfood-stdd-close-001 (stdd repo Go Mode B)"

@@ -31,7 +31,7 @@ execution_evidence:
         run_id: "win-bootstrap-closeout-20260904"
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     verification:
-      commands:
+      command_seq:
         - "cd mcp-server && npm run build && node --test dist/e2e/bootstrap-and-load.test.js dist/e2e/new-tied-client.test.js dist/e2e/prompt-type-skills.test.js (15/15 pass)"
         - "lint_yaml on changed TIED YAML (7 files, exit 0)"
         - "tied_checklist_gate_validate phase close_out allowed: true (minimal depth)"

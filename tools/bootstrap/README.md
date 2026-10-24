@@ -133,6 +133,19 @@ cd C:\dev\my-client-app
 ./tied-install.sh --methodology-readonly --install-methodology-hook /path/to/client  # Unix opt-in chmod
 ```
 
+### Brownfield ordered YAML keys (TIED 3.0)
+
+CITDP and tracker YAML under **`tied-project/`** must use ordered-list keys (`command_seq`, `verification_command_seq`, …) so `lint_yaml` does not lexically sort normative shell-command batteries. Legacy keys such as `evidence.commands` are migrated in place from the **TIED store** (built `mcp-server/dist`):
+
+```bash
+./build-workspace.sh   # once, from store root
+./tied-install.sh --migrate-ordered-list-keys --dry-run /path/to/client
+./tied-install.sh --migrate-ordered-list-keys /path/to/client
+./tied-install.sh --migrate-ordered-list-keys --fail-if-pending /path/to/client   # CI: exit 1 if still pending
+```
+
+Scope: `tied-project/citdp/` and `tied-project/working/` only (not client `tied-bundle/`). Requires modern two-folder layout (`--migrate-layout` first if legacy `tied/` markers remain). See `tied-bundle/docs/detail-files-schema.md` (Set vs ordered list keys) and [REQ-CITDP_ORDERED_LIST_KEYS].
+
 ### Client refresh parity gate ([REQ-TIED_CLIENT_REFRESH_PARITY])
 
 Bootstrap runs parity **after** inherited methodology verify gates and **before** the methodology client boundary hook. Default report: `<client>/.tied/client-refresh-parity-report.json`.

@@ -19,7 +19,7 @@ execution_evidence:
     - "test-strategy"
     - "translate-sponsor-intent"
   operator_evidence:
-    commands:
+    command_seq:
       - "bunx tsc -b (mcp-server)"
       - "gate-slice0-close_out.json"
       - "gate-slice0-minimal-pre_implementation.json"

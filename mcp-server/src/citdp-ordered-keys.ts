@@ -45,6 +45,25 @@ function renameSection(
   return out;
 }
 
+function transformCloseOutEvidence(section: Record<string, unknown>): Record<string, unknown> {
+  let out = renameSection(section, TEST_STRATEGY_DEPRECATED);
+  const verification = out.verification;
+  if (isRecord(verification)) {
+    out = { ...out, verification: renameSection(verification, EVIDENCE_DEPRECATED) };
+  }
+  return out;
+}
+
+function transformOperatorEvidenceBlock(section: Record<string, unknown>): Record<string, unknown> {
+  const out = renameSection(section, EVIDENCE_DEPRECATED);
+  for (const [key, value] of Object.entries(out)) {
+    if (key.endsWith("_evidence") && isRecord(value)) {
+      out[key] = renameSection(value, EVIDENCE_DEPRECATED);
+    }
+  }
+  return out;
+}
+
 // [IMPL-CITDP_ORDERED_KEY_VALIDATE] — How: fail closed when evidence or test_strategy use legacy *commands keys.
 export function validateCitdpOrderedListKeys(record: Record<string, unknown>): {
   ok: boolean;
@@ -60,6 +79,39 @@ export function validateCitdpOrderedListKeys(record: Record<string, unknown>): {
   if (isRecord(record.test_strategy)) {
     pushDeprecated(diagnostics, "test_strategy", TEST_STRATEGY_DEPRECATED, record.test_strategy);
   }
+  const executionEvidence = record.execution_evidence;
+  if (isRecord(executionEvidence)) {
+    if (isRecord(executionEvidence.operator_evidence)) {
+      pushDeprecated(
+        diagnostics,
+        "execution_evidence.operator_evidence",
+        EVIDENCE_DEPRECATED,
+        executionEvidence.operator_evidence,
+      );
+      for (const [key, value] of Object.entries(executionEvidence.operator_evidence)) {
+        if (key.endsWith("_evidence") && isRecord(value)) {
+          pushDeprecated(diagnostics, `execution_evidence.operator_evidence.${key}`, EVIDENCE_DEPRECATED, value);
+        }
+      }
+    }
+    if (isRecord(executionEvidence.close_out_evidence)) {
+      pushDeprecated(
+        diagnostics,
+        "execution_evidence.close_out_evidence",
+        TEST_STRATEGY_DEPRECATED,
+        executionEvidence.close_out_evidence,
+      );
+      const verification = executionEvidence.close_out_evidence.verification;
+      if (isRecord(verification)) {
+        pushDeprecated(
+          diagnostics,
+          "execution_evidence.close_out_evidence.verification",
+          EVIDENCE_DEPRECATED,
+          verification,
+        );
+      }
+    }
+  }
   return { ok: diagnostics.length === 0, diagnostics };
 }
 
@@ -74,6 +126,19 @@ export function transformCitdpOrderedListKeys(record: Record<string, unknown>): 
   }
   if (isRecord(out.test_strategy)) {
     out.test_strategy = renameSection(out.test_strategy, TEST_STRATEGY_DEPRECATED);
+  }
+  const executionEvidenceIn = out.execution_evidence;
+  if (isRecord(executionEvidenceIn)) {
+    const executionEvidence = { ...executionEvidenceIn };
+    const operatorEvidence = executionEvidence.operator_evidence;
+    if (isRecord(operatorEvidence)) {
+      executionEvidence.operator_evidence = transformOperatorEvidenceBlock(operatorEvidence);
+    }
+    const closeOutEvidence = executionEvidence.close_out_evidence;
+    if (isRecord(closeOutEvidence)) {
+      executionEvidence.close_out_evidence = transformCloseOutEvidence(closeOutEvidence);
+    }
+    out.execution_evidence = executionEvidence;
   }
   return out;
 }

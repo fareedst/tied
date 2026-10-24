@@ -34,7 +34,7 @@ CITDP-REQ-TIED_TWO_FOLDER_LAYOUT:
     tied_validate_consistency: "required before close-out"
     verification_gate_notes: "Blocking at verification-gate; advisory at structural/pre-RED inquiry"
   evidence:
-    commands:
+    command_seq:
       - "npm test --prefix mcp-server"
       - "source scripts/build-commands.sh && lint_tied"
       - "source scripts/build-commands.sh && test-all"

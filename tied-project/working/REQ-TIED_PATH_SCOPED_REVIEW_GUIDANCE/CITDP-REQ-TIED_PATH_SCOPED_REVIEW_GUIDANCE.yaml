@@ -12,7 +12,7 @@ CITDP-REQ-TIED_PATH_SCOPED_REVIEW_GUIDANCE:
       - "REQ/ARCH/IMPL Implemented; CITDP persisted"
     unchanged_behavior: "Global AGENTS.md and checklist gates unchanged."
   evidence:
-    commands:
+    command_seq:
       - "node --test tools/bootstrap/lib/path-scoped-review-guidance-doc.test.mjs"
       - "tied_gate_check pre_implementation and verification"
       - "tied_validate_consistency"

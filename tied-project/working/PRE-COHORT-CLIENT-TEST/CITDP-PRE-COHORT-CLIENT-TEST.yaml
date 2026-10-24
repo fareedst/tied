@@ -39,7 +39,7 @@ CITDP-PRE-COHORT-CLIENT-TEST:
     proof_boundaries:
       - "Client test execution and product verification remain operator-deferred after this refine."
   evidence:
-    commands:
+    command_seq:
       - "Client lifecycle gates delegated to client working/{REQ}/"
       - "Operator preflight commands in docs/pre-cohort-client-test-grammar-v2-and-evidence.md §A"
     proof_boundaries:

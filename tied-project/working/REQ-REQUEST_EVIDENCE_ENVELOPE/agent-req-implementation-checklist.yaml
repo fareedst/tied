@@ -88,7 +88,7 @@ execution_evidence:
         - "tied_validate_consistency ok: true"
         - "working/REQ-REQUEST_EVIDENCE_ENVELOPE/run-close-out-gates.mjs (all phases allowed)"
     verification:
-      commands:
+      command_seq:
         - "bunx tsc -b mcp-server (pass)"
         - "go test ./tools/agentstream/... (pass)"
         - "node --test dist/request-evidence-envelope/*.test.js (35/35 pass)"

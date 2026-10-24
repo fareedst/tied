@@ -30,7 +30,7 @@ CITDP-combined-hygiene-close-out:
     proof_boundaries:
       - "No product implementation claim; close-out gates run on linked REQ trackers."
   evidence:
-    commands:
+    command_seq:
       - "Delegated to plan-close-out preflight (read-only re-runs)"
     proof_boundaries:
       - "Process addendum does not prove product behavior; product proof remains per-track evidence"

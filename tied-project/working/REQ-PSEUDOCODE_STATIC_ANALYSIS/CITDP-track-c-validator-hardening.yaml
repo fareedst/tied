@@ -25,7 +25,7 @@ CITDP-track-c-validator-hardening:
         - "pre_implementation"
         - "verification"
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/analysis/*.test.js"
       - "node --test mcp-server/dist/analysis/pseudocode-shared.test.js mcp-server/dist/analysis/pseudocode-validator.test.js"
       - "npm run build --prefix mcp-server"

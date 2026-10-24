@@ -11,7 +11,7 @@ change_definition:
   unchanged_behavior:
     - "REQ-TIED_JEV_DECISION_COPROCESSOR program status and runtime gates"
 evidence:
-  commands:
+  command_seq:
     - "rg 'system-one-jev-vs-laya' docs/comparisons/*.md tied/vocab/decision-copilot.md"
     - "tied_validate_consistency"
   evidence_references:

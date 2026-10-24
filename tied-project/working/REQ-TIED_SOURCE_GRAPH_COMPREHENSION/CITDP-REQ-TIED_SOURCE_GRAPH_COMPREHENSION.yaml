@@ -30,7 +30,7 @@ CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION:
     tied_validate_consistency: "required"
     verification_gate_notes: "npm test --prefix mcp-server source-graph; tied_validate_consistency; pre_implementation + verification checklist gates"
   evidence:
-    commands:
+    command_seq:
       - "npm run lint:ts --prefix mcp-server"
       - "npm test --prefix mcp-server -- source-graph"
     manifest_reference: "tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"

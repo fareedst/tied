@@ -13,7 +13,7 @@ CITDP-PLAN-CLAUDE-REVIEW-FEEDBACK-MCP:
       - "tied_feedback_add returns ok, id, created_at, report_snippet"
     unchanged_behavior: "[REQ-FEEDBACK_TO_TIED] appendEntry validation; Kaizen bridge eligibility unchanged; comparison doc remains outreach-only."
   evidence:
-    commands:
+    command_seq:
       - "tied_config_get_base_path"
       - "tied_feedback_add (once) and tied_feedback_export format json"
       - "tied_gate_check phase pre_implementation and verification (tracker_path + citdp_path)"

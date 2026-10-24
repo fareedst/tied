@@ -34,7 +34,7 @@ CITDP-wave3-inquiry-scope:
         - "pre_implementation"
         - "verification"
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/adversarial-inquiry/checklist-integration.test.js"
       - "node --test mcp-server/dist/adversarial-inquiry/project-orchestrator.test.js"
       - "node --test mcp-server/dist/adversarial-inquiry/psa-fixture.test.js"

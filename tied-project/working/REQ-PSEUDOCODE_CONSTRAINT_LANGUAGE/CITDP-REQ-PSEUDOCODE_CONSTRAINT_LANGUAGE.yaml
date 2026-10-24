@@ -32,7 +32,7 @@ CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
         - "verification"
     verification_gate_notes: "739/740 tests pass; R1 124/124 R2 0; F11 pass; constraint_gate_errors 3d enabled with sponsor approval."
   evidence:
-    commands:
+    command_seq:
       - "bun run working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-constraint-annotation-study.ts"
       - "node working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/run-close-out-gates.mjs"
     proof_boundaries:

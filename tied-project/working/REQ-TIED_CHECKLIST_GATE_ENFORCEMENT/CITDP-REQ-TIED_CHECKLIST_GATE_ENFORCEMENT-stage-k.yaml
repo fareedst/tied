@@ -37,7 +37,7 @@ CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k:
       prior_depth_tier: "minimal"
       profile_depth: "not_measured"
   test_strategy:
-    commands:
+    command_seq:
       - "go test ./tools/agentstream/checklist/... -run Reconcile"
       - "node --test mcp-server/dist/adherence-reconcile.test.js"
       - "npm run build --prefix mcp-server"

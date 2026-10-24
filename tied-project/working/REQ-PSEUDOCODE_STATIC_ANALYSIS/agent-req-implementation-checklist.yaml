@@ -43,7 +43,7 @@ execution_evidence:
         run_id: "psa-verify-20260908"
     master_checklist: "tied/docs/agent-req-implementation-checklist.yaml"
     verification:
-      commands:
+      command_seq:
         - "cd mcp-server && npm run build && npm test (567/567 pass)"
         - "pseudocode_validate ok for IMPL-PSEUDOCODE_ANALYSIS_ENGINE sidecar"
         - "quality_security_profile_validate ok (external-input-security)"
@@ -73,7 +73,7 @@ execution_evidence:
     - "unit-test-red"
     - "verification-gate"
   operator_evidence:
-    commands:
+    command_seq:
       - "cd mcp-server && npm run build && npm test"
       - "pseudocode_validate IMPL-PSEUDOCODE_ANALYSIS_ENGINE sidecar"
       - "quality_security_profile_validate (external-input-security)"

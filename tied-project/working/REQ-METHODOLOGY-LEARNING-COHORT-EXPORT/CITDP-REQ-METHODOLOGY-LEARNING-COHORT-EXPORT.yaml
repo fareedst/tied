@@ -37,7 +37,7 @@ CITDP-PLAN-TIED-QMM-FOLLOWON-C:
       - "pre_implementation gate receipt is allowed:false and activation:non_activation"
     status: "plan_only_non_activation"
   evidence:
-    commands:
+    command_seq:
       - "Read-only review of sponsor authority, W1 methodology experiment records, W4 report plan/module, and shareable_hashed envelope batch patterns"
       - "tied_checklist_gate_validate at pre_implementation with plan-only Tracker/CITDP; expected allowed false"
       - "tied_jev_status and advisory tied_jev_vocab_shadow; shadow is not gate evidence"

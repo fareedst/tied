@@ -36,7 +36,7 @@ CITDP-wave1-unified-closeout:
         - "verification"
     verification_gate_notes: "Close-out requires gate allowed true AND envelope zero blocking error gaps (or documented waiver per gap code)."
   evidence:
-    commands:
+    command_seq:
       - "node --test mcp-server/dist/checklist-gate-evidence-hydration.test.js"
       - "node --test mcp-server/dist/checklist-remediation-acceptance.test.js"
       - "node --test mcp-server/dist/checklist-validator.test.js"
@@ -130,6 +130,6 @@ CITDP-wave1-unified-closeout:
       - "mcp-server/src/checklist-gate-evidence-hydration.test.ts"
       - "mcp-server/src/checklist-remediation-acceptance.test.ts"
       - "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.js"
-    verification_commands:
+    verification_command_seq:
       - "node --test mcp-server/dist/checklist-remediation-acceptance.test.js"
       - "npm run build --prefix mcp-server"
