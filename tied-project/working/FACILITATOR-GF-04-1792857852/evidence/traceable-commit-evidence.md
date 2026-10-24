@@ -1,7 +1,8 @@
 # traceable-commit evidence
 
 **Scope:** Facilitator publish — PROMPT-GF-04 trial readout  
-**Date:** 2026-10-24
+**Date:** 2026-10-24  
+**Commit:** `9ebcaa5d666b4d5e61015ea8772f07366fa538cb`
 
 ## Vocabulary VALIDATE (Touchpoint 3)
 
