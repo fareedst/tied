@@ -26,7 +26,7 @@ Advisory close-out review of **ephemeral artifacts** against [`.gitignore`](../.
 | Class | Meaning | Action |
 |-------|---------|--------|
 | **ignore** | Regenerable local-dev output; not canonical TIED intent | Add or confirm gitignore pattern |
-| **track** | Aggregate, golden, fixture, or intentional deliverable | Do **not** ignore; use `!` negation when a broad pattern would hide it |
+| **track** | Aggregate, golden, fixture, or intentional deliverable | Do **not** ignore; use `!` negation when a broad pattern would hide it; **`git add` at `traceable-commit`** (collect alone does not index the file) |
 | **delete** | One-off scratch with no convention | Remove locally; do not add a one-off ignore unless it will recur |
 
 ## Procedure

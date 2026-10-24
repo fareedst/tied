@@ -54,6 +54,12 @@ export const projectOperationsMcpTools = [
         apply: z.boolean().optional(),
         allowed_paths: z.array(z.string()).optional(),
         write_gitignore: z.boolean().optional(),
+        request_token: z
+          .string()
+          .optional()
+          .describe(
+            "When set, preview includes committed_working_stage_candidates (manifest/envelope on disk but not git-indexed).",
+          ),
       }),
     },
     handler: async (args: {
@@ -62,6 +68,7 @@ export const projectOperationsMcpTools = [
       apply?: boolean;
       allowed_paths?: string[];
       write_gitignore?: boolean;
+      request_token?: string;
     }) => {
       const result = await runGitHygiene({
         project_root: resolveProjectRoot(args.project_root),
@@ -69,6 +76,7 @@ export const projectOperationsMcpTools = [
         apply: args.apply,
         allowed_paths: args.allowed_paths,
         write_gitignore: args.write_gitignore,
+        request_token: args.request_token,
       });
       return textContent(prettyCanonicalJson(result));
     },

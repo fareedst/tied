@@ -58,3 +58,13 @@ Use `applicable`, `not_applicable`, or `accepted_risk`. `not_applicable` require
 ## Reproducibility
 
 Retain the commit identity, environment/tool versions, exact commands, exit codes, thresholds, output artifact references, covered REQ/IMPL tokens, validator diagnostics, and `tied_validate_consistency` result. A result without those provenance fields is incomplete evidence.
+
+## Git (committed working)
+
+The default path is `tied-project/working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json`. Building the manifest does **not** commit it:
+
+1. **`sub-close-out-evidence-sync`** (or `quality_evidence_collect`) writes the file.
+2. **`gitignore-close-out-hygiene`** classifies it as **track** (not `verification-*.json` gate receipt noise).
+3. **`traceable-commit`** must **`git add`** that path when it appears in the staging map or in **`tied_git_hygiene`** `committed_working_stage_candidates` for the REQ.
+
+If the manifest is referenced in the envelope or Tracker but missing from git history, close-out is incomplete even when tests passed.

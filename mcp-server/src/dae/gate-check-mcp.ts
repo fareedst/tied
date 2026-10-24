@@ -5,7 +5,13 @@ import type { GateValidateArgs, GateValidateFn, GateValidateResult } from "./gat
 
 function parseGateToolPayload(text: string): GateValidateResult {
   try {
-    return JSON.parse(text) as GateValidateResult;
+    const parsed = JSON.parse(text) as GateValidateResult & {
+      gate_receipt?: { path?: string; hash?: string };
+    };
+    const receiptPath =
+      parsed.receipt_path ??
+      (typeof parsed.gate_receipt?.path === "string" ? parsed.gate_receipt.path : null);
+    return { ...parsed, receipt_path: receiptPath ?? null };
   } catch {
     return { allowed: false, ok: false, error: "invalid_gate_response" };
   }

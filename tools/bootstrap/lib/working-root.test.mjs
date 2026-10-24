@@ -16,6 +16,21 @@ describe("working-root.mjs", () => {
     assert.equal(classifyWorkingRelativePath("gates/ledger.jsonl"), "local");
   });
 
+  it("classifies claims-evidence MCP dogfood mcp-run as local", () => {
+    assert.equal(
+      classifyWorkingRelativePath("claims-evidence-review/mcp-run/claim-review-report.v1.json"),
+      "local",
+    );
+    assert.equal(
+      classifyWorkingRelativePath("claims-evidence-review/pilot-from-tied/claim-review-report.v1.json"),
+      "committed",
+    );
+    assert.equal(
+      classifyWorkingRelativePath("evidence/verification-evidence-manifest.v1.json"),
+      "committed",
+    );
+  });
+
   it("resolveWorkingPath uses bundle for local when divided", () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "tfl-wrm-"));
     fs.mkdirSync(path.join(root, "tied", "working"), { recursive: true });

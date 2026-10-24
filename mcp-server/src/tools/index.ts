@@ -2033,6 +2033,7 @@ export const allTools = [
             gatesDir: args.receipt_persistence.gates_dir,
             ledgerPath: args.receipt_persistence.ledger_path,
             requestToken: args.receipt_persistence.request_token,
+            projectRoot,
             runId: args.receipt_persistence.run_id,
           });
           if (!persisted.ok) {

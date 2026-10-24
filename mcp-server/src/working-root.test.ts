@@ -8,6 +8,7 @@ import os from "node:os";
 import path from "node:path";
 import {
   classifyWorkingRelativePath,
+  defaultGateReceiptPersistencePaths,
   isUndividedWorkingLayout,
   resolveWorkingPath,
   workingPathRelativeToProject,
@@ -38,6 +39,26 @@ describe("classifyWorkingRelativePath", () => {
     assert.equal(classifyWorkingRelativePath("evidence/verification-run.json"), "local");
     assert.equal(classifyWorkingRelativePath("evidence/close_out-final.json"), "local");
     assert.equal(classifyWorkingRelativePath("evidence/session-handoff.md"), "committed");
+    assert.equal(
+      classifyWorkingRelativePath("claims-evidence-review/mcp-run/claim-review-report.v1.json"),
+      "local",
+    );
+    assert.equal(
+      classifyWorkingRelativePath("claims-evidence-review/pilot-from-tied/claim-review-report.v1.json"),
+      "committed",
+    );
+    assert.equal(
+      classifyWorkingRelativePath("evidence/verification-evidence-manifest.v1.json"),
+      "committed",
+    );
+    assert.equal(
+      classifyWorkingRelativePath("evidence/verification-gate-run.json"),
+      "local",
+    );
+    assert.equal(
+      classifyWorkingRelativePath("evidence/pre_implementation-gate-result.json"),
+      "local",
+    );
   });
 });
 
@@ -56,6 +77,12 @@ describe("resolveWorkingPath", () => {
       assert.match(
         evGate,
         /tied-bundle[/\\]working[/\\]REQ-TIED_FOO[/\\]evidence[/\\]gate-pre_implementation\.json$/,
+      );
+      const persistence = defaultGateReceiptPersistencePaths(root, "REQ-TIED_FOO");
+      assert.match(persistence.gatesDir, /tied-bundle[/\\]working[/\\]REQ-TIED_FOO[/\\]gates$/);
+      assert.match(
+        persistence.ledgerPath,
+        /tied-bundle[/\\]working[/\\]REQ-TIED_FOO[/\\]evidence[/\\]gate-ledger\.jsonl$/,
       );
     } finally {
       fs.rmSync(root, { recursive: true, force: true });

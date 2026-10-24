@@ -17,10 +17,14 @@ Run this block **only after** unified **close_out** allows progression (`tied_ch
 2. **Evidence paths** — Write or update:
    - `evidence/proposed-commit-message.txt` (staging map + message draft)
    - `evidence/traceable-commit-evidence.md` (VALIDATE outcome, gate receipt refs, hygiene receipt path)
-3. **Stage** — `git add` only paths in the staging map (scoped to the REQ wave; exclude unrelated workspace drift).
-4. **Commit message** — Per [PROC-COMMIT_MESSAGES](../../../tied-bundle/docs/processes.md): header `type(scope): subject` (≤50 chars); body with motivation, REQ/ARCH/IMPL tokens, three **completion signals** summary; footer tokens touched. Include proof-boundary / open-finding counts when CITDP requires.
-5. **Commit** — `git commit` with the prepared message. **Do not push** unless the sponsor explicitly asks in the same thread.
-6. **Post-commit** — Record commit SHA in `close-out-handoff.md` (or parent return). Update Tracker **`traceable-commit`** disposition to `completed` with typed `evidence_refs` (dual-write with `execution_evidence.completed` in the same pass).
+3. **Committed working staging map** — After `sub-close-out-evidence-sync`, include every **track** artifact that close-out produced and the envelope references:
+   - `tied-project/working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json` when verification/test slugs completed (not regenerable gate JSON).
+   - `tied-project/working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json` when envelope workflow is in scope.
+   - MCP **`tied_git_hygiene`** with `context_mode: plan_close_out`, `apply: false`, and `request_token: {REQ-TOKEN}` lists `committed_working_stage_candidates` — merge those paths into the staging map (they are often untracked even when work is complete).
+4. **Stage** — `git add` only paths in the staging map (scoped to the REQ wave; exclude unrelated workspace drift and regenerable gate receipts under `tied-bundle/working/`).
+5. **Commit message** — Per [PROC-COMMIT_MESSAGES](../../../tied-bundle/docs/processes.md): header `type(scope): subject` (≤50 chars); body with motivation, REQ/ARCH/IMPL tokens, three **completion signals** summary; footer tokens touched. Include proof-boundary / open-finding counts when CITDP requires.
+6. **Commit** — `git commit` with the prepared message. **Do not push** unless the sponsor explicitly asks in the same thread.
+7. **Post-commit** — Record commit SHA in `close-out-handoff.md` (or parent return). Update Tracker **`traceable-commit`** disposition to `completed` with typed `evidence_refs` (dual-write with `execution_evidence.completed` in the same pass).
 
 ## Advisory (non-blocking alone)
 

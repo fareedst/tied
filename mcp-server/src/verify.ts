@@ -234,6 +234,7 @@ export async function updateStatusFromPassedTokens(
         gatesDir: options.receipt_persistence.gates_dir,
         ledgerPath: options.receipt_persistence.ledger_path,
         requestToken: options.receipt_persistence.request_token,
+        projectRoot: options.project_root,
         runId: options.receipt_persistence.run_id,
       });
       if (!persisted.ok) {

@@ -1,5 +1,8 @@
 import path from "node:path";
-import { workingPathRelativeToProject } from "../working-root.js";
+import {
+  defaultGateReceiptPersistencePaths,
+  workingPathRelativeToProject,
+} from "../working-root.js";
 
 import type { GatePhase } from "../checklist-validator.js";
 import { runBranchCheck } from "./branch-check.js";
@@ -236,5 +239,22 @@ export function defaultPathsForRequest(
     citdpPath:
       citdpPath?.trim() ||
       path.join("tied", "citdp", `CITDP-${requestToken}.yaml`),
+  };
+}
+
+/** Local-root gate receipt paths for MCP receipt_persistence (tied-bundle/working/{REQ}/…). */
+export function defaultGateReceiptPersistenceForRequest(
+  projectRoot: string,
+  requestToken: string,
+): {
+  request_token: string;
+  gates_dir: string;
+  ledger_path: string;
+} {
+  const paths = defaultGateReceiptPersistencePaths(projectRoot, requestToken);
+  return {
+    request_token: requestToken,
+    gates_dir: paths.gatesDir,
+    ledger_path: paths.ledgerPath,
   };
 }

@@ -21,6 +21,8 @@ export const GITIGNORE_COMMITTED_WORKING_REGENERABLE_END =
 export const COMMITTED_WORKING_REGENERABLE_NEGATIONS = [
   "!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/",
   "!tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**",
+  "!tied-project/working/**/evidence/verification-evidence-manifest.v1.json",
+  "!working/**/evidence/verification-evidence-manifest.v1.json",
 ];
 /**
  * Regenerable under tied-project/working/ but not mirrored from tied-bundle/working/ globs.
@@ -29,6 +31,9 @@ export const COMMITTED_WORKING_REGENERABLE_NEGATIONS = [
 export const COMMITTED_WORKING_REGENERABLE_EXTRA_GLOBS = [
   "tied-project/working/**/gate-tracker*.yaml",
   "working/**/gate-tracker*.yaml",
+  /** MCP integration test / default run_id output — regenerable dogfood, not pinned pilot. */
+  "tied-project/working/**/claims-evidence-review/mcp-run/",
+  "working/**/claims-evidence-review/mcp-run/",
 ];
 /** Matches {@link GITIGNORE_BLOCK_BEGIN} in gitignore-block.mjs (avoid import cycle). */
 const GITIGNORE_INSTALL_MANAGED_BEGIN = "# BEGIN TIED INSTALL MANAGED";

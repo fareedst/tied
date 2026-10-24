@@ -1,15 +1,15 @@
 {
-  "schemaVersion": "claim-review-provenance.v1",
-  "runId": "pilot-from-tied",
-  "requestToken": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
-  "sourceRevision": "working",
-  "executionPolicy": "static_only",
+  "artifactHashes": {
+    "frozenSurface": "6286c97c1472ee569f972f751e00103b1220e949b6c4b7e5a52b358cbd029f74",
+    "ledger": "026c9b32c2fcb4751b6d55849de4809c958b16386baf94386a1818debe122dd2",
+    "report": "ae4e0eedb68c3dcb7668a0f87996e6c9b852b6c703c06fb508143fecab3ef64c"
+  },
   "commands": [
     "runClaimsEvidenceReview"
   ],
-  "artifactHashes": {
-    "ledger": "f3e38a4030d4a290132355cea57980b39366427f0a8062e40931ca3807cb9f22",
-    "report": "0f617c378816144a3d872bc0caf4a192314a7e4578cb033b2eed8b4c8b93a26d",
-    "frozenSurface": "6286c97c1472ee569f972f751e00103b1220e949b6c4b7e5a52b358cbd029f74"
-  }
+  "executionPolicy": "static_only",
+  "requestToken": "REQ-TIED_CLAIMS_EVIDENCE_REVIEW",
+  "runId": "pilot-from-tied",
+  "schemaVersion": "claim-review-provenance.v1",
+  "sourceRevision": "working"
 }

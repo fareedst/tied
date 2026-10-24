@@ -18,12 +18,18 @@ export const LOCAL_WORKING_PREFIXES = [
 
 /** @param {string} norm */
 function isLocalWorkingEvidenceArtifact(norm) {
+  if (norm.endsWith("verification-evidence-manifest.v1.json")) {
+    return false;
+  }
   if (
     norm.startsWith("evidence/gate-") ||
     norm.startsWith("evidence/pre_implementation-") ||
     norm.startsWith("evidence/verification-") ||
     norm.startsWith("evidence/close_out-")
   ) {
+    return true;
+  }
+  if (norm.endsWith("-gate-result.json") || norm.includes("/gate-result.json")) {
     return true;
   }
   return /\/gate-/.test(norm);
@@ -40,6 +46,15 @@ export function classifyWorkingRelativePath(relativePath) {
     if (norm === bare || norm.startsWith(prefix)) return "local";
   }
   if (isLocalWorkingEvidenceArtifact(norm)) return "local";
+  if (
+    norm === "claims-evidence-review/mcp-run" ||
+    norm.startsWith("claims-evidence-review/mcp-run/")
+  ) {
+    return "local";
+  }
+  if (norm === "evidence/verification-evidence-manifest.v1.json") {
+    return "committed";
+  }
   if (norm.endsWith("-ledger.jsonl") || norm.includes("/ledger.jsonl")) return "local";
   if (/-CLIENT-/.test(norm)) return "local";
   return "committed";

@@ -8,6 +8,13 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 
+type CommittedWorkingStagingModule = {
+  listCommittedWorkingStageCandidates: (
+    projectRoot: string,
+    requestToken: string,
+  ) => string[];
+};
+
 export type GitHygieneContextMode = "checklist" | "plan_close_out" | "agent_preview";
 
 export type GitHygieneInput = {
@@ -16,12 +23,16 @@ export type GitHygieneInput = {
   apply?: boolean;
   allowed_paths?: string[];
   write_gitignore?: boolean;
+  /** When set, preview lists close-out evidence on disk that still needs `git add` at traceable-commit. */
+  request_token?: string;
 };
 
 export type GitHygienePreview = {
   context_mode: GitHygieneContextMode;
   untracked: string[];
   tracked_dirty: string[];
+  /** Committed working close-out files present but not indexed (stage at traceable-commit). */
+  committed_working_stage_candidates?: string[];
   suggested_gitignore_sample?: string;
 };
 
@@ -74,6 +85,16 @@ async function loadWorkingGitignoreModule(projectRoot: string) {
   }>;
 }
 
+async function loadCommittedWorkingStagingModule(
+  projectRoot: string,
+): Promise<CommittedWorkingStagingModule | undefined> {
+  const modPath = path.join(projectRoot, "tools/bootstrap/lib/committed-working-staging.mjs");
+  if (!fs.existsSync(modPath)) {
+    return undefined;
+  }
+  return import(pathToFileURL(modPath).href) as Promise<CommittedWorkingStagingModule>;
+}
+
 export async function previewGitHygiene(
   input: GitHygieneInput,
 ): Promise<GitHygienePreview> {
@@ -92,10 +113,23 @@ export async function previewGitHygiene(
   } catch {
     suggested_gitignore_sample = undefined;
   }
+  let committed_working_stage_candidates: string[] | undefined;
+  if (input.request_token?.trim()) {
+    try {
+      const staging = await loadCommittedWorkingStagingModule(input.project_root);
+      committed_working_stage_candidates = staging?.listCommittedWorkingStageCandidates(
+        input.project_root,
+        input.request_token.trim(),
+      );
+    } catch {
+      committed_working_stage_candidates = undefined;
+    }
+  }
   return {
     context_mode,
     untracked,
     tracked_dirty,
+    committed_working_stage_candidates,
     suggested_gitignore_sample,
   };
 }

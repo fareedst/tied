@@ -25,12 +25,18 @@ export const LOCAL_WORKING_PREFIXES = [
  */
 /** [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE] evidence/* gate receipts → local root (align gitignore). */
 function isLocalWorkingEvidenceArtifact(norm: string): boolean {
+  if (norm.endsWith("verification-evidence-manifest.v1.json")) {
+    return false;
+  }
   if (
     norm.startsWith("evidence/gate-") ||
     norm.startsWith("evidence/pre_implementation-") ||
     norm.startsWith("evidence/verification-") ||
     norm.startsWith("evidence/close_out-")
   ) {
+    return true;
+  }
+  if (norm.endsWith("-gate-result.json") || norm.includes("/gate-result.json")) {
     return true;
   }
   return /\/gate-/.test(norm);
@@ -43,6 +49,15 @@ export function classifyWorkingRelativePath(relativePath: string): WorkingArtifa
     if (norm === bare || norm.startsWith(prefix)) return "local";
   }
   if (isLocalWorkingEvidenceArtifact(norm)) return "local";
+  if (
+    norm === "claims-evidence-review/mcp-run" ||
+    norm.startsWith("claims-evidence-review/mcp-run/")
+  ) {
+    return "local";
+  }
+  if (norm === "evidence/verification-evidence-manifest.v1.json") {
+    return "committed";
+  }
   if (norm.endsWith("-ledger.jsonl") || norm.includes("/ledger.jsonl")) return "local";
   if (/-CLIENT-/.test(norm)) return "local";
   return "committed";
@@ -90,6 +105,17 @@ export function workingPathRelativeToProject(
 ): string {
   const abs = resolveWorkingPath(projectRoot, requestToken, ...parts);
   return path.relative(path.resolve(projectRoot), abs).split(path.sep).join("/");
+}
+
+/** [IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE] Default local-root paths for checklist gate receipt persistence. */
+export function defaultGateReceiptPersistencePaths(
+  projectRoot: string,
+  requestToken: string,
+): { gatesDir: string; ledgerPath: string } {
+  return {
+    gatesDir: resolveWorkingPath(projectRoot, requestToken, "gates"),
+    ledgerPath: resolveWorkingPath(projectRoot, requestToken, "evidence", "gate-ledger.jsonl"),
+  };
 }
 
 /** Global paths under the local working root (not scoped to a REQ token). */

@@ -8,6 +8,7 @@ import path from "node:path";
 
 import type { GatePhase } from "../checklist-validator.js";
 import {
+  defaultGateReceiptPersistenceForRequest,
   defaultPathsForRequest,
   runGateCheckComposition,
 } from "../dae/gate-check-composition.js";
@@ -22,6 +23,8 @@ Options:
   --citdp PATH
   --project-root PATH   Default: parent of tied/ (from TIED_BASE_PATH or cwd heuristic)
   --check-branch        Hard-fail when git branch mismatches CITDP/Tracker expected branch (W2a)
+  --persist-receipt     Write checklist-gate-receipt.v1 under local working gates/ (tied-bundle/working/…)
+  --run-id ID           Optional run_id when --persist-receipt is set
   --json-only           Omit human one-liner on stdout
   --help
 `);
@@ -98,6 +101,15 @@ async function main(): Promise<void> {
     process.exit(2);
   }
 
+  let receiptPersistence: Parameters<typeof runGateCheckComposition>[0]["receiptPersistence"];
+  if (hasFlag(argv, "--persist-receipt")) {
+    const runId = getFlag(argv, "--run-id");
+    receiptPersistence = {
+      ...defaultGateReceiptPersistenceForRequest(projectRoot, requestToken.trim()),
+      ...(runId ? { run_id: runId } : {}),
+    };
+  }
+
   const summary = await runGateCheckComposition({
     requestToken: requestToken.trim(),
     phase,
@@ -107,6 +119,7 @@ async function main(): Promise<void> {
     projectRoot,
     checkBranch: hasFlag(argv, "--check-branch"),
     callGateValidate,
+    receiptPersistence,
   });
 
   console.log(JSON.stringify(summary));

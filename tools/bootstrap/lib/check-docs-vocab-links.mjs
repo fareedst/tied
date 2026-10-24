@@ -11,6 +11,25 @@ export const DEFAULT_REPO_ROOT = path.resolve(__dirname, "../../..");
 
 const LINK_RE = /\]\(([^)]+)\)/g;
 
+/**
+ * Operator templates embed copy-paste markdown in fenced blocks; placeholders like `{analysis}.md` are not real links.
+ * @param {string} text
+ */
+export function markdownTextForLinkScan(text) {
+  const lines = text.split("\n");
+  /** @type {string[]} */
+  const out = [];
+  let inFence = false;
+  for (const line of lines) {
+    if (/^```/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (!inFence) out.push(line);
+  }
+  return out.join("\n");
+}
+
 /** @type {readonly string[]} repo-relative roots scanned by VERIFY_DOC_LINKS */
 export const DOC_LINK_SCAN_ROOTS = [
   "tied-project/vocab",
@@ -226,7 +245,7 @@ export function checkDocsVocabLinks(repoRoot) {
   const broken = [];
   for (const rel of collectDocLinkScanFiles(root)) {
     const abs = path.join(root, rel);
-    const text = fs.readFileSync(abs, "utf8");
+    const text = markdownTextForLinkScan(fs.readFileSync(abs, "utf8"));
     let m;
     LINK_RE.lastIndex = 0;
     while ((m = LINK_RE.exec(text)) !== null) {

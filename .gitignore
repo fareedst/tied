@@ -206,6 +206,7 @@ tied-project/working/**/citdp-doc-*.json
 tied-project/working/**/citdp-p*-*.json
 tied-project/working/**/citdp-record-body.json
 tied-project/working/**/citdp-write-payload.json
+tied-project/working/**/claims-evidence-review/mcp-run/
 tied-project/working/**/close_out-*.json
 tied-project/working/**/context-pruning-benchmark-live.v1.json
 tied-project/working/**/create-arch.json
@@ -244,9 +245,12 @@ tied-project/working/*-close-out-summary.json
 tied-project/working/client-*/
 tied-project/working/jev-decide-trace/
 tied-project/working/post-session/
+working/**/claims-evidence-review/mcp-run/
 working/**/gate-tracker*.yaml
 !tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/
 !tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/**
+!tied-project/working/**/evidence/verification-evidence-manifest.v1.json
+!working/**/evidence/verification-evidence-manifest.v1.json
 # END TIED COMMITTED WORKING REGENERABLE (managed)
 # BEGIN TIED STORE LOCAL WORKING (managed)
 tied-bundle/working/

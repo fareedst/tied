@@ -51,6 +51,18 @@ Under `tied-project/working/{REQ-TOKEN}/`:
 
 Prefer summary markdown + manifest JSON over raw `*.stdout.txt` unless the envelope lists stdout as blocking proof.
 
+### Close-out git staging (easy to miss)
+
+Collecting a manifest or envelope **writes disk only**. Regenerable gate JSON stays untracked by design; **committed** close-out JSON must be staged explicitly:
+
+| Artifact | When to `git add` |
+| --- | --- |
+| `evidence/verification-evidence-manifest.v1.json` | After `quality_evidence_collect` / `sub-close-out-evidence-sync` when verification/test slugs completed |
+| `evidence/request-evidence-envelope.v1.json` | After envelope rebuild + validate when envelope workflow is in scope |
+| `*-evidence.md`, `PLAN.md`, tracker, draft CITDP | Same close-out pass — checklist slug **`traceable-commit`** |
+
+Preview untracked committed candidates: MCP **`tied_git_hygiene`** with `request_token` and `context_mode: plan_close_out` → field **`committed_working_stage_candidates`**. List those paths in `evidence/proposed-commit-message.txt` before `git add`.
+
 ---
 
 ## Per-REQ layout (local)
@@ -60,7 +72,7 @@ Under `tied-bundle/working/{REQ-TOKEN}/`, relative paths are classified **local*
 | Rule | Patterns |
 | --- | --- |
 | Prefixes | `gates/`, `gate-`, `adversarial-inquiry/`, `adherence/`, `jev/`, `pseudocode-analysis/`, `trajectories/` |
-| Evidence gate receipts | `evidence/gate-*`, `evidence/pre_implementation-*`, `evidence/verification-*`, `evidence/close_out-*`, any path segment `/gate-` |
+| Evidence gate receipts | `evidence/gate-*`, `evidence/pre_implementation-*`, `evidence/verification-*` (except **`verification-evidence-manifest.v1.json`**), `evidence/close_out-*`, `*-gate-result.json`, any path segment `/gate-` |
 | Ledgers | `*-ledger.jsonl`, paths containing `/ledger.jsonl` |
 | Disposable clients | `*-CLIENT-*` anywhere in the relative path |
 
@@ -75,6 +87,7 @@ Tools and MCP writers should use layout helpers so artifacts land here automatic
 | Situation | Default |
 | --- | --- |
 | Large JSON under `tied-project/working/` (qualification, claims-review) | **Commit** when an agreed regression fixture or pilot artifact referenced by envelope/CITDP; **local** when one-off reproducible tool output |
+| `claims-evidence-review/mcp-run/` under a REQ working tree | **Regenerable** — MCP integration-test / default `run_id` output; gitignored and untracked (`pilot-from-tied/` and named slice dirs may stay committed when referenced) |
 | `tied-project/working/evaluation/` cross-REQ corpora | **Commit** when defining reusable evaluation policy; not a substitute for per-REQ envelope |
 | Store repo git-tracked pins under `tied-bundle/working/` | **Migrated** — fixture corpus under `mcp-server/test/fixtures/store-local-working/`; runtime local root unchanged ([REQ-TIED_STORE_BUNDLE_GIT_POLICY]) |
 | Store repo regenerable paths under `tied-project/working/` | **Untracked** — `# BEGIN TIED COMMITTED WORKING REGENERABLE (managed)` mirrors local-working globs; slim committed set (PLAN, tracker, facet markdown, evaluation corpora) stays indexed ([REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE]) |

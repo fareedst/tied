@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 
@@ -12,7 +14,9 @@ const fixtureRoot = path.join(
 
 describe("tied_claims_evidence_review_run MCP [REQ-TIED_CLAIMS_EVIDENCE_REVIEW]", () => {
   it("returns ledger and provenance for tied-generated fixture", async () => {
-    const outputDir = path.join(repoRoot, "working/REQ-TIED_CLAIMS_EVIDENCE_REVIEW/claims-evidence-review/mcp-run");
+    const outputDir = fs.mkdtempSync(
+      path.join(os.tmpdir(), "tied-claims-evidence-review-mcp-"),
+    );
     const result = await runClaimsEvidenceReviewMcp({
       tied_base_path: path.join(repoRoot, "tied"),
       project_root: repoRoot,

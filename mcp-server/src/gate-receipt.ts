@@ -33,6 +33,7 @@ export type PersistGateDecisionReceiptInput = {
   gatesDir: string;
   ledgerPath: string;
   requestToken: string;
+  projectRoot?: string;
   runId?: string;
 };
 
@@ -94,9 +95,12 @@ export function persistGateDecisionReceipt(
     hash,
   );
 
+  const projectRoot =
+    input.projectRoot?.trim() ||
+    path.resolve(input.gatesDir, "..", "..", "..", "..");
   void tryPatchArtifactFile({
     request_token: input.requestToken,
-    project_root: path.resolve(input.gatesDir, "..", "..", ".."),
+    project_root: projectRoot,
     absolute_path: receiptPath,
     kind: "checklist_gate_receipt",
     phase: input.phase,
