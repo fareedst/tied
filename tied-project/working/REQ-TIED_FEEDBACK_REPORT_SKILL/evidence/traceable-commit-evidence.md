@@ -19,4 +19,4 @@ Vocab audit: `/feedback`, `feedback skill`, and MCP capture terms in staged path
 
 ## Commit SHA
 
-_(filled after `git commit`)_
+`fbadcf75` — `feat(bootstrap): add /feedback bundled skill and TIED tokens` (not pushed)
