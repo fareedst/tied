@@ -2,7 +2,7 @@
 
 **Scope:** Facilitator publish — custom audit brief trial readout  
 **Date:** 2026-10-24  
-**Commit:** `6d6abb5bac8bb89ce674c56328adb3181fd59e1c`
+**Commit:** `9d82307a77a48fd3613121c9f2f6850637950196`
 
 ## Vocabulary VALIDATE (Touchpoint 3)
 
