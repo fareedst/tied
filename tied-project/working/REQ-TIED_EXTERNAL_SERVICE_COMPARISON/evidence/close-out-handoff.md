@@ -4,9 +4,9 @@
 
 | Signal | Status |
 | --- | --- |
-| **Machine close-out** | pass — `close_out` `allowed=true`; envelope `blocking_gap_count=0`; [closeout-run-close-out-gates-final.json](./closeout-run-close-out-gates-final.json) |
-| **Process contract** | pass — minimal depth; `--skip-manifest`; [not-applicable-receipt.v1.json](./not-applicable-receipt.v1.json) via envelope backfill |
-| **Adherence ledger** | pass — reconcile completed in unified gate runner (band per runner output) |
+| **Machine close-out** | pass — `close_out` `allowed=true`; envelope `blocking_gap_count=0`; [closeout-run-close-out-gates-final.json](./closeout-run-close-out-gates-final.json); re-run `run_id=esc-close-out-20261024` (2026-10-24) |
+| **Process contract** | pass — minimal depth; `--skip-manifest`; envelope on disk (gitignored regenerable) |
+| **Adherence ledger** | pass — reconcile band **B** (`thin_ledger` advisory); `merged_decision.allowed=true` |
 
 ## Gitignore hygiene
 
@@ -14,7 +14,10 @@
 
 ## Commit
 
-See traceable-commit evidence for SHA after `git commit`.
+| Wave | SHA | Scope |
+| --- | --- | --- |
+| Product | `a3c844af` | Skill bundle, TIED tokens, bootstrap test, working PLAN/tracker |
+| Close-out evidence | *(this commit)* | Gate final JSON + handoff SHA backfill |
 
 ## Proof boundary
 
