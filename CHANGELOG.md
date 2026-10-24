@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Close-out scoped workspace hygiene (prompt-shared, [REQ-PROMPT_TYPE_GLOBAL_SKILLS], [REQ-TIED_CLEAR_WORKSPACE_SKILL], [REQ-TIED_GIT_HYGIENE])** — `completion-signals-handoff.md`, `traceable-commit-close-out.md`, `clear-workspace-routing.md`, and `tied-close-out-process.md` define post-REQ workspace clean vs repo-wide drift; `@clear-workspace` documented as router/recovery only. Checklist `traceable-commit` slug notes hygiene receipt and excluded unrelated drift. Feedback `fb-mvmmq5pl-dxzvb6`; plan [PLAN-CLOSE-OUT-WORKSPACE-IN-PASS](tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md).
+
 - **MCP test fixtures (`mcp-server/test/fixtures`)** — Refresh adversarial-inquiry Mode B / Go Mode B mini-project `request-evidence-envelope.v1.json` revision metadata and source-graph mini-repo `source-graph-index.v1.json` `built_at` after `npm test`; `content_hash` and envelope gap payloads unchanged.
 
 - **MCP tool Zod 4 record schemas ([REQ-TIED_TOOL_INPUT_COMPATIBILITY])** — Remaining `mcp-server/src/tools` `inputSchema` definitions use `z.record(z.string(), z.unknown())` for Zod 4; `zod` ^4.6.7 and `@modelcontextprotocol/sdk` ^1.32.2 in `mcp-server/package.json`. Verification: `npm run build` in `mcp-server`.

@@ -2,6 +2,8 @@
 
 Normative decision tree for **`@clear-workspace`** ([REQ-TIED_CLEAR_WORKSPACE_SKILL]). The skill delegates; it does not replace **`tied_checklist_gate_validate`**, **`tied_verify`**, or checklist authority.
 
+**Primary hygiene lives in `@close-out`:** gitignore close-out hygiene, `tied_git_hygiene` preview, regenerable restore, and scoped traceable-commit staging are normative parts of close-out ([tied-close-out-process.md](tied-close-out-process.md), [traceable-commit-close-out.md](traceable-commit-close-out.md)). Use **`@clear-workspace`** when the sponsor did not name a REQ, close-out failed or stalled mid-flight, or scope is ambiguous — not as a mandatory second step after a complete close-out on a named REQ.
+
 ## Inputs
 
 - Sponsor-named **`request_token`** and paths to **Tracker**, **CITDP**, **PLAN.md**
@@ -19,7 +21,7 @@ Normative decision tree for **`@clear-workspace`** ([REQ-TIED_CLEAR_WORKSPACE_SK
    - `close_out` gate **allowed: true** (when TIED close-out applies), and
    - envelope validate with blocking gaps cleared (or documented waivers), and
    - three [completion signals](completion-signals-handoff.md) documented for the REQ
-7. **Traceable-commit-only path** — When **`@close-out`** already ran with gates green, skip duplicate commit. Otherwise checklist slug **traceable-commit**: VALIDATE, staging map, commit (same rules as [traceable-commit-close-out.md](traceable-commit-close-out.md)).
+7. **Traceable-commit-only path** — When **`@close-out`** already ran with gates green **for this `request_token`**, hygiene receipt exists, and traceable-commit completed or was explicitly deferred with blockers documented, **do not** re-run close-out or instruct `@clear-workspace` as a separate “cleanup phase.” When close-out is incomplete, route to **`@close-out`** first (step 3). Otherwise checklist slug **traceable-commit**: VALIDATE, staging map, commit (same rules as [traceable-commit-close-out.md](traceable-commit-close-out.md)).
 8. **Not commit-ready** — List blockers; recommend **`@handoff`** to continue in a fresh chat.
 
 ## Forbidden

@@ -1,0 +1,25 @@
+docs(close-out): scoped workspace hygiene prompt-shared
+
+Feedback fb-mvmmq5pl-dxzvb6 — define post-REQ workspace clean vs repo-wide
+drift; @clear-workspace as router/recovery only. Updates completion-signals,
+traceable-commit, clear-workspace routing, tied-close-out-process; checklist
+traceable-commit drift note; feedback context; LEAP summary cross-link.
+
+PLAN-CLOSE-OUT-WORKSPACE-IN-PASS
+
+REQ-PROMPT_TYPE_GLOBAL_SKILLS REQ-TIED_CLEAR_WORKSPACE_SKILL
+REQ-TIED_GIT_HYGIENE REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+
+Staging map:
+CHANGELOG.md
+leap-proposals/audit-log.jsonl
+leap-proposals/queue.json
+tied-bundle/docs/agent-req-implementation-checklist.yaml
+tied-project/feedback.yaml
+tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md
+tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md
+tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md
+tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md
+tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/
+
+Excluded: mcp-server/test/fixtures, unrelated REQ working trees, source-graph reports.

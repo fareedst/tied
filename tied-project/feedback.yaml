@@ -95,3 +95,26 @@ entries:
     promotion_status: "promotion_pending"
     title: "Close-out Wave 5 addendum when machine pass precedes process contract"
     type: "methodology_improvement"
+  - context:
+      links:
+        - "tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md"
+        - "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md"
+        - "tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md"
+        - "tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md"
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
+      observation_kind: "methodology_gap"
+      plan_token: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
+      related_plan_tokens:
+        - "PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK"
+      related_req: "REQ-TIED_CLEAR_WORKSPACE_SKILL"
+      related_tokens:
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        - "REQ-TIED_GIT_HYGIENE"
+      source: "sponsor_chat_2026-10-24"
+      tied_version: "4.0.0"
+    created_at: "2026-10-24T16:44:50.409Z"
+    description: "Sponsor observation (2026-10-24): After successful feedback ingest (PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK), the repo still showed a large unrelated dirty tree (other REQ trackers/CITDP, regenerable source-graph and envelope fixtures, benchmark JSON). Operators should not need a separate @clear-workspace management habit when close-out already normatively includes gitignore hygiene, tied_git_hygiene preview, and scoped traceable-commit staging.\n\nSuggested implementation:\n\n1) Methodology prose: State explicitly in completion-signals-handoff.md and/or traceable-commit-close-out.md that post-REQ \"workspace clean\" means (a) scoped REQ artifacts committed or classified, (b) regenerable noise restored/deleted in the same close-out pass—not a second lifecycle phase. Document when @clear-workspace is only a router (ambiguous scope, not commit-ready handoff) vs redundant when @close-out ran completely.\n\n2) Checklist: Ensure traceable-commit slug text requires a hygiene receipt and documents excluded unrelated drift; optional sub-slug or gate reason when tracked regenerable paths remain modified after close-out (warn at minimal depth).\n\n3) clear-workspace-routing.md: Add upfront note that cleanup obligations live inside close-out; this skill sequences close-out/hygiene when the sponsor did not name a REQ or gates failed mid-flight.\n\n4) Feedback / kaizen path: When tied_feedback_add or feedback ingest completes at minimal depth, handoff template should say orthogonal REQ dirt and regenerable indexes are expected until those REQs close out—avoid implying \"feedback done = entire repo clean.\"\n\n5) Tooling (optional, Wave 5 adjacent): tied_git_hygiene could emit post-close-out summary: scoped_staged, restored_regenerable, remaining_blockers_by_req_token.\n\nNon-goals: Auto git restore of unrelated WIP; repo-wide single commit; replacing close_out gate authority.\n\nRelated: REQ-TIED_CLEAR_WORKSPACE_SKILL, REQ-TIED_GIT_HYGIENE, REQ-TIED_CHECKLIST_GATE_ENFORCEMENT, pending LEAP lp-2026-10-24T16-33-13-575Z-707c63d33f60 (close-out completion pass)."
+    id: "fb-mvmmq5pl-dxzvb6"
+    promotion_status: "promotion_pending"
+    title: "Treat workspace cleanup as part of close-out, not a separate management step"
+    type: "methodology_improvement"

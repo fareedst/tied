@@ -1,0 +1,123 @@
+copy_hygiene: "execution_evidence.request = PLAN-CLOSE-OUT-WORKSPACE-IN-PASS; doc/skill addendum from store feedback."
+description: "Tracker for close-out-integrated workspace hygiene (fb-mvmmq5pl-dxzvb6)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-10-24"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        path: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/closeout-run-close-out-gates.json"
+    master_checklist: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/checklist-tracker.yaml"
+  completed:
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "sub-close-out-evidence-sync"
+    - "verification-gate"
+    - "gitignore-close-out-hygiene"
+  envelope_path: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/request-evidence-envelope.v1.json"
+  request: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
+record_identity:
+  change_request_id: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
+  citdp_path: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-24"
+  req_token: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
+  title: "Close-out integrated workspace hygiene (feedback)"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/feedback.yaml"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "tied-project/feedback.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS.yaml"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
+        - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Doc/skill addendum PLAN; minimal depth."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/not-applicable-receipt.v1.json"
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    policy: "no-impl-pseudocode-change"
+    rationale: "No IMPL or production code in PLAN-token refine scope."
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/closeout-run-close-out-gates.json"
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/closeout-run-close-out-gates.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/build-plan-evidence.md"
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/build-plan-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/git-hygiene-receipt-2026-10-24.md"
+    policy: "n-a-clean"
+    rationale: "No new gitignore patterns; receipt documents N/A."
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/git-hygiene-receipt-2026-10-24.md"
+      status: "completed"
+  - disposition: "pending"
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

@@ -1,0 +1,115 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_config_get_base_path"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 463,
+      "exit_code": 127,
+      "id": "citdp-evidence-1",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_gate_check phase pre_implementation and verification"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 346,
+      "exit_code": 127,
+      "id": "citdp-evidence-2",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npm test -- prompt-type-skills (or full npm test if fast enough)"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 339,
+      "exit_code": 2,
+      "id": "citdp-evidence-3",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-4.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-4.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_feedback_export json — confirm plan_token on fb-mvmmq5pl-dxzvb6"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 342,
+      "exit_code": 127,
+      "id": "citdp-evidence-4",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-5.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/quality-manifest/citdp-evidence-5.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "Optional: tied_leap_proposal_update on lp-2026-10-24T16-33-13-575Z-707c63d33f60 summary append"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 342,
+      "exit_code": 127,
+      "id": "citdp-evidence-5",
+      "result": "failed"
+    }
+  ],
+  "commit": "f1b159dfad850a6c9e4108ebb8a3a33e3369b27d",
+  "covered_tokens": [
+    "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
+    "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "REQ-TIED_CLEAR_WORKSPACE_SKILL",
+    "REQ-TIED_GIT_HYGIENE"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "documentation_and_prompt_shared_only",
+    "does_not_prove_entire_repo_clean_after_feedback_ingest",
+    "does_not_prove_wave5_tooling"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-1792860826466",
+  "schema_version": "verification-evidence-manifest.v1"
+}
