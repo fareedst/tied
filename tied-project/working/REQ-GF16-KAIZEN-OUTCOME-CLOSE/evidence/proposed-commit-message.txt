@@ -1,0 +1,8 @@
+feat(kaizen): close GF-16 dual-track coordinator REQ
+
+Record Kaizen outcomes for fb-mvny01eb-my451g (improved) and
+fb-mvnyr5n2-aaeg1j (not_measured); commit coordinator PLAN/CITDP,
+smoke evidence, and feedback.yaml promotion_status.
+
+REQ-GF16-KAIZEN-OUTCOME-CLOSE
+Completion: close_out pass, envelope blocking 0, reconcile band B

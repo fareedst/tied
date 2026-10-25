@@ -1,0 +1,21 @@
+REQ-GF16-KAIZEN-OUTCOME-CLOSE:
+  REQ-GF16-KAIZEN-OUTCOME-CLOSE:
+    category: "Process"
+    description: "Operator arc closing fb-mvny01eb-my451g and fb-mvnyr5n2-aaeg1j with separate countermeasure REQs."
+    name: "GF-16 dual-track Kaizen close (coordinator)"
+    priority: "P2"
+    related_requirements:
+      related_to:
+        - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+        - "REQ-TIED_CLIENT_FEEDBACK_CAPTURE"
+    satisfaction_criteria:
+      - criterion: "Dual-track register maintained under working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/."
+        id: "SC-GF16-REGISTER"
+      - criterion: "Track B outcome improved with GF-16 smoke evidence."
+        id: "SC-GF16-TRACK-B"
+    status: "Planned"
+    traceability:
+      architecture: []
+      implementation: []
+      tests: []
+  status: "Implemented"

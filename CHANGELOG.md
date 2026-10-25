@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **[REQ-GF16-KAIZEN-OUTCOME-CLOSE]** — GF-16 dual-track Kaizen coordinator: **`fb-mvny01eb-my451g`** outcome **improved** (GF-16 cwd smoke); **`fb-mvnyr5n2-aaeg1j`** **not_measured** → **`REQ-TIED_CLIENT_FEEDBACK_CAPTURE`**; register and working evidence under `tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/`.
+
+### Added
+
 - **Client upstream feedback capture ([REQ-TIED_CLIENT_FEEDBACK_CAPTURE], [ARCH-TIED_CLIENT_FEEDBACK_CAPTURE], [IMPL-TIED_CLIENT_FEEDBACK_CAPTURE])** — Close-out templates and `/feedback` skill forbid narrative-only upstream claims; require receipt, store `fb-*`, client `feedback.yaml`, or **N/A + reason**; `record-gf-trial` documents client-originated vs proxy vs `--skip-feedback-ingest`. Contract tests `client-feedback-capture-contract.test.ts`. GF-16 witness **`fb-mvnyr5n2-aaeg1j`**; Track A outcome **not_measured** until next cohort. Close-out `run_id=close-out-2026-10-25-track-a`. Plan: [PLAN.md](tied-project/working/REQ-TIED_CLIENT_FEEDBACK_CAPTURE/PLAN.md).
 
 - **CLI mcp.json base path ([REQ-TIED_CLI_MCP_JSON_BASE_PATH], [ARCH-TIED_CLI_MCP_JSON_BASE_PATH], [IMPL-TIED_CLI_MCP_JSON_BASE_PATH])** — `tied-cli.sh` / `tied.sh` / `feature-orchestrator.sh` resolve **`TIED_BASE_PATH`** from **`.cursor/mcp.json`** then **`.mcp.json`** (client cwd, optional env override for store CI); **`tools/bootstrap/lib/mcp-base-path.mjs`** + bootstrap tests; Kaizen feedback **`fb-mvny01eb-my451g`** (GF-16 proxy). Plan: [PLAN.md](tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/PLAN.md).

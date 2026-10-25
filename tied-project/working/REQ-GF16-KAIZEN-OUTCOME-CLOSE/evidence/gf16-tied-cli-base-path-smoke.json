@@ -1,0 +1,15 @@
+{
+  "captured_at": "2026-10-25T15:12:00.000Z",
+  "command": "cd /Users/fareed/Documents/dev/test/1792937222-gf-16 && unset TIED_BASE_PATH && /Users/fareed/Documents/dev/chatgpt/stdd/tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_config_get_base_path '{}'",
+  "result": {
+    "base_path": "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project",
+    "bundle_root": "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-bundle",
+    "env_TIED_BASE_PATH": "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project",
+    "legacy_project_dir": false,
+    "mode": "client",
+    "project_root": "/Users/fareed/Documents/dev/test/1792937222-gf-16",
+    "store_root": null
+  },
+  "track": "B",
+  "feedback_id": "fb-mvny01eb-my451g"
+}
