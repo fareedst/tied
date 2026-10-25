@@ -1,34 +1,35 @@
 # Session handoff — PLAN-GF-05 (dual-track)
 
 **Updated:** 2026-10-25  
-**Parent:** `PLAN-GF-05-GATE-VERIFY-DUAL-TRACK`
+**Parent:** `PLAN-GF-05-GATE-VERIFY-DUAL-TRACK` — **both tracks closed**
 
 ---
 
-## Status
+## Commits
 
-| Track | Token | Status |
+| Track | Token | SHA |
 | --- | --- | --- |
-| **B** | `PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON` | **Closed** — `ddb7ae14` |
-| **A** | `PLAN-GF-05-SCOPE-CLOSE-OUT-EXT` | **Build-plan complete** — close-out deferred |
+| **B** | `PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON` | `ddb7ae14` |
+| **A** | `PLAN-GF-05-SCOPE-CLOSE-OUT-EXT` | `63724045` |
 
 ---
 
-## Track A shipped
+## Close-out runs
 
-- `run-close-out-gates.mjs` persists **`close_out`** gate receipt by default (`--no-persist-gate-receipt` opt-out)
-- Tests: `mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts` (3/3)
-- CITDP: `tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml`
-- Verification gate: **allowed: true**
+| Track | run_id |
+| --- | --- |
+| B | `close-out-gf05-track-b-20261025` |
+| A | `close-out-gf05-track-a-20261025` |
 
-Evidence: [`build-plan-evidence-track-a.md`](build-plan-evidence-track-a.md)
+Evidence: [`close-out-handoff.md`](close-out-handoff.md)
 
 ---
 
-## Next
+## Optional follow-up
 
-1. **`@close-out track a`** — scoped commit (runner + test + CITDP + prompt-shared + working PLAN)
-2. Commit **`leap-proposals/*`** if still unstaged from LEAP apply
+- Commit **`leap-proposals/*`** if queue state should be on disk in git
+- **`tied-install.sh --refresh`** on brownfield clients
+- GF-05 readout: facilitator rows 2–4 updated for store Track A/B
 
 ---
 

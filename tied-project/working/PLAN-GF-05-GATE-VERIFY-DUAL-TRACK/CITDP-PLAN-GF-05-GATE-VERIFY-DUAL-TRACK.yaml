@@ -114,6 +114,6 @@ CITDP-PLAN-GF-05-GATE-VERIFY-DUAL-TRACK:
       track_b_citdp: "tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml"
       track_b_status: "closed_commit_ddb7ae14_2026-10-25"
       track_a_citdp: "tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml"
-      track_a_status: "build_plan_complete_2026-10-25"
+      track_a_status: "closed_close_out_2026-10-25"
       track_a_citdp_persisted: "tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml"
       leap_proposal_status: "applied"

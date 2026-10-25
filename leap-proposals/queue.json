@@ -1,6 +1,41 @@
 {
   "proposals": [
     {
+      "approval_note": "Track B (SCOPE-VERIFY-GATE-COMMON) shipped commit ddb7ae14: checklist sub-checklist-gate-before-verify-update, processes.md, bundled skill, contract tests, CITDP closed. Track A (SCOPE-CLOSE-OUT-EXT) explicitly deferred per dual-track CITDP; no new REQ mint.",
+      "created_at": "2026-10-25T16:23:32.864Z",
+      "id": "lp-2026-10-25T16-23-32-863Z-c284570f3c0b",
+      "kind": "manual",
+      "leap_hints": {
+        "affected_feature": "TIED-METHODOLOGY",
+        "evidence_links": [
+          "/Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/templates/run-close-out-gates.mjs",
+          "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/close-out-handoff.md",
+          "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/evidence/request-evidence-envelope.v1.json",
+          "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/gates/close_out-2026-10-25T16-16-27-148Z.json"
+        ],
+        "feedback_id": "fb-mvo18hye-i6x5fq",
+        "proposed_req": "PLAN-GF-05-GATE-VERIFY-DUAL-TRACK",
+        "review": {
+          "decision": "create_proposal",
+          "evidence_links": [
+            "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/gates/close_out-2026-10-25T16-16-27-148Z.json",
+            "tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/CITDP-PLAN-GF-05-GATE-VERIFY-DUAL-TRACK.yaml"
+          ],
+          "rationale": "Reviewed GF-05 field feedback; queue dual-track CITDP separating close-out surface extension from cross-client checklist gate+verify step common to all TIED REQ work.",
+          "reviewer": "sponsor"
+        }
+      },
+      "non_canonical": true,
+      "source": {
+        "type": "manual"
+      },
+      "status": "applied",
+      "suggested_leap_order": "req",
+      "summary": "Field case from disposable client 1792944114-gf-05 (PROMPT-GF-05 / REQ-REQ_TOKEN_COVERAGE, TIED v4.0.0). Close-out runner may allow in-memory close_out without persisted receipt; tied_verify then fails missing_checklist_gate when agents pass only update:true.",
+      "title": "Reviewed feedback: GF-05: persist close_out gate receipt and pass checklist_gate to tied_verify after run-close-out-gates",
+      "updated_at": "2026-10-25T16:39:28.043Z"
+    },
+    {
       "approval_note": "Track B doc/skill addendum complete 2026-10-24: close-out-wave5-completion-pass.md, completion-signals, tied-yaml recovery; hygiene slice PLAN-CLOSE-OUT-WORKSPACE-IN-PASS. Wave 5 tooling deferred per CITDP.",
       "created_at": "2026-10-24T16:33:13.575Z",
       "id": "lp-2026-10-24T16-33-13-575Z-707c63d33f60",

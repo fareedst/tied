@@ -12,7 +12,7 @@
 
 ## Commit
 
-**SHA:** _(after traceable commit)_
+**SHA:** `63724045` — `feat(gf05): persist close_out gate receipt in runner`
 
 ## Dual-track
 
