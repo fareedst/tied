@@ -71,6 +71,8 @@ Build a CLI that scans source and test files for requirement identifiers referen
 
 **GF cohort extras:** No client **`feedback.yaml`**. No `trial-prompt-interaction-inventory.v1.json`. **Store proxy feedback (pre-readout):** **`fb-mvo18hye-i6x5fq`** — gate persist / `checklist_gate` verify sequence (facilitator ingest **N/A** this session — no duplicate row).
 
+**Store follow-up (2026-10-25):** Track B **`SCOPE-VERIFY-GATE-COMMON`** shipped in methodology — checklist sub **`sub-checklist-gate-before-verify-update`**, `[PROC-TIED_VERIFICATION_GATED]` cross-link, tied-yaml skill **`checklist_gate`** example. PLAN: `tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/`. Track A (close-out runner persist) **deferred**.
+
 **Future-test rule:** A single successful trial must not be treated as evidence of methodology effectiveness; cohort claims need baseline, outcome observation, and pairing disposition.
 
 ---
@@ -131,9 +133,9 @@ Separate dimension readout (not a collapsed score). Weights from catalog default
 | # | Action | Status (2026-10-25) |
 | --- | --- | --- |
 | 1 | Publish store trial readout + catalog rows | **Done** — this document |
-| 2 | Trim master tracker; sync **`completed`** with close-out slugs including **`traceable-commit`** | **Open** — sponsor/client |
-| 3 | Populate **`execution_evidence.close_out_evidence`** on subject tracker | **Open** — sponsor/client |
-| 4 | Runner default: persist close_out receipts when verify/update follows (**`fb-mvo18hye-i6x5fq`** / LEAP track) | **Open** — store methodology |
+| 2 | Trim master tracker; sync **`completed`** with close-out slugs including **`traceable-commit`** | **Done (store Track B)** — `PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/checklist-tracker.yaml` |
+| 3 | Populate **`execution_evidence.close_out_evidence`** on subject tracker | **Done (store Track B)** — close_out `close-out-gf05-track-b-20261025` |
+| 4 | Runner default: persist close_out receipts when verify/update follows (**`fb-mvo18hye-i6x5fq`** / LEAP track) | **Open** — Track A (`SCOPE-CLOSE-OUT-EXT`) |
 | 5 | Duplicate **`tied_feedback_add`** for gate friction | **N/A** — proxy row **`fb-mvo18hye-i6x5fq`** already on store |
 
 ---

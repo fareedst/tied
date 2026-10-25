@@ -201,14 +201,23 @@ TIED_BASE_PATH=/absolute/client/tied \
 
 ### Status from test results
 
+**Do not** call `tied_verify` with only `{ "update": true }` (or passed tokens alone) **without** `checklist_gate` — the tool fails closed with `missing_checklist_gate`. Before status mutation, follow checklist sub-procedure **`sub-checklist-gate-before-verify-update`** ([REQ-TIED_VERIFICATION_GATED]): run `tied_checklist_gate_validate` with `receipt_persistence`, then pass **`checklist_gate`** using the **unwrapped inner CITDP body** (not the YAML wrapper key alone).
+
 ```bash
 .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_verify '{
   "passed_requirement_tokens": ["REQ-MY_FEATURE"],
-  "passed_impl_tokens": ["IMPL-MY_FEATURE"]
+  "passed_impl_tokens": ["IMPL-MY_FEATURE"],
+  "update": true,
+  "checklist_gate": {
+    "phase": "verification",
+    "allowed": true,
+    "tracker_path": "tied-project/working/REQ-MY_FEATURE/checklist-tracker.yaml",
+    "citdp": { "record_identity": { "change_request_id": "REQ-MY_FEATURE" } }
+  }
 }'
 ```
 
-This sets matching REQ status to `Implemented` and IMPL status to `Active`. Use optional `set_unpassed_reqs_to_planned` / `set_unpassed_impl_to_planned` to demote others.
+Replace the `citdp` object with the **inner body** loaded from your `CITDP-REQ-*.yaml` file (value under the top-level `CITDP-…` key). This sets matching REQ status to `Implemented` and IMPL status to `Active` when verify-gated mode applies. Use optional `set_unpassed_reqs_to_planned` / `set_unpassed_impl_to_planned` to demote others.
 
 ## Validation loop
 

@@ -1,0 +1,26 @@
+docs(gf05): norm checklist_gate before tied_verify update
+
+Track B (PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON): add sub-checklist-gate-before-verify-update
+to [PROC-AGENT_REQ_CHECKLIST], cross-link [PROC-TIED_VERIFICATION_GATED], document
+checklist_gate in bundled tied-yaml skill, and lock with gf05 contract tests.
+
+Witness: fb-mvo18hye-i6x5fq (PROMPT-GF-05). LEAP lp-2026-10-25T16-23-32-863Z-c284570f3c0b
+still pending sponsor approve. Track A (SCOPE-CLOSE-OUT-EXT) deferred.
+
+Completion signals: machine close_out allowed=true, envelope blocking_gaps=0;
+process contract sync+manifest; adherence reconcile band A.
+
+Staging map:
+- tied-bundle/docs/agent-req-implementation-checklist.yaml
+- tied-bundle/docs/agent-req-implementation-checklist.md
+- tied-bundle/docs/processes.md
+- tools/bundled-tied-yaml-skill/SKILL.md
+- mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts
+- tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml
+- tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/
+- tied-project/working/PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON/CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml
+- docs/demos/trial-readout-PROMPT-GF-05-1792944114.md
+- CHANGELOG.md
+
+Tokens: REQ-TIED_VERIFICATION_GATED, REQ-TIED_CHECKLIST_GATE_ENFORCEMENT,
+PROC-AGENT_REQ_CHECKLIST, PROC-TIED_VERIFICATION_GATED

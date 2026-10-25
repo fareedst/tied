@@ -1,0 +1,116 @@
+CITDP-PLAN-GF-05-GATE-VERIFY-DUAL-TRACK:
+  record_identity:
+    change_request_id: "PLAN-GF-05-GATE-VERIFY-DUAL-TRACK"
+    recorded_at: "2026-10-25"
+    title: "GF-05 dual-track — close-out extension vs common checklist_gate+verify step"
+    profile_depth: "minimal"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  change_definition:
+    current_behavior: >
+      Feedback fb-mvo18hye-i6x5fq (PROMPT-GF-05, client 1792944114-gf-05) documents that run-close-out-gates.mjs can report
+      close_out allowed without persisting gates/close_out-*.json; agents call tied_verify with { update: true } only and receive
+      missing_checklist_gate; envelope may lack checklist_gate_receipt; malformed CITDP wrapper objects can yield false gate failures.
+      Methodology treats these as one "close-out bug" unless promotion explicitly forks delivery scope.
+    desired_behavior: >
+      Two delivery tracks remain distinct for LEAP and build-plan. Track A (SCOPE-CLOSE-OUT-EXT): extend close-out runner and
+      close-out skills so close_out persistence and envelope sync are explicit in the close-out surface (align PLAN-CLOSE-OUT-W5).
+      Track B (SCOPE-VERIFY-GATE-COMMON): add or strengthen a checklist step in PROC-AGENT_REQ_CHECKLIST required before any
+      tied_verify update across all REQ implementations and all TIED client repos — persist checklist gate receipt (receipt_persistence),
+      patch request evidence envelope checklist_gate_receipt when applicable, call tied_verify with full checklist_gate (phase,
+      tracker_path, unwrapped inner CITDP body). Track B is not a close-out-only sub-step; Track A does not replace Track B.
+    delivery_tracks:
+      - track_id: "SCOPE-CLOSE-OUT-EXT"
+        title: "Close-out surface extension"
+        scope_summary: "run-close-out-gates.mjs, bootstrap close-out templates, @close-out / traceable-commit-close-out, completion-signals"
+        primary_token_owners:
+          - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        merges_with_track_b: false
+        non_goals:
+          - "Define global verify checklist slug inside runner-only change"
+      - track_id: "SCOPE-VERIFY-GATE-COMMON"
+        title: "Common pre-verify checklist gate step"
+        scope_summary: "agent-req-implementation-checklist, tied_verify MCP docs, verification-gated flows, disposable client harness tests"
+        primary_token_owners:
+          - "REQ-TIED_VERIFICATION_GATED"
+          - "PROC-AGENT_REQ_CHECKLIST"
+        applies_to: "all TIED REQ test cycles and all tied-project client layouts"
+        merges_with_track_a: false
+        operator_sequence_ref: "tied_checklist_gate_validate (inner CITDP) → envelope patch → tied_verify with checklist_gate"
+    non_goals:
+      - "Single combined REQ without sponsor LEAP approve per track"
+      - "Canonical REQ/ARCH/IMPL YAML writes in promotion pass"
+      - "Replaying GF-05 client git history as methodology proof"
+      - "Wave 5-D12/D13 gate tightening bundled into this PLAN token"
+    success_criteria:
+      - "LEAP proposal lp-2026-10-25T16-23-32-863Z-c284570f3c0b references feedback_id fb-mvo18hye-i6x5fq and this CITDP path"
+      - "Sponsor can select Track A, Track B, or both without conflating owners in one IMPL slice"
+      - "Build-plan RED tests name track_id in test descriptions"
+      - "After Track B: checklist documents forbid bare tied_verify { update: true } without checklist_gate"
+      - "After Track A: runner documents or defaults receipt persistence when verify/update follows close_out"
+    unchanged_behavior: >
+      Kaizen capture path for /feedback; advisory minimal depth defaults; Wave 5 process-adherence envelope grades unchanged until their CITDP ships.
+  evidence:
+    command_seq:
+      - "tied_config_get_base_path"
+      - "tied_feedback_promote (reviewed) → lp-2026-10-25T16-23-32-863Z-c284570f3c0b"
+      - "tied_leap_proposal_list (confirm pending proposal)"
+    proof_boundaries:
+      - "promotion_creates_non_canonical_proposal_only"
+      - "does_not_prove_either_track_shipped"
+    witness_feedback_id: "fb-mvo18hye-i6x5fq"
+    witness_client_paths:
+      - "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/gates/close_out-2026-10-25T16-16-27-148Z.json"
+      - "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/evidence/request-evidence-envelope.v1.json"
+      - "/Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/templates/run-close-out-gates.mjs"
+  impact_analysis:
+    modules_or_boundaries: "Track A: tools/bootstrap close-out runner and prompt-type close-out skills. Track B: tied-bundle/docs/agent-req-implementation-checklist.md, mcp-server tied_verify/checklist gate tools, client bootstrap verify tests."
+    tied_tokens_affected:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_VERIFICATION_GATED"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+    tied_tokens_new: []
+    impl_inventory_notes: "No IMPL pseudo-code in promotion pass; tracks may map to separate LEAP-approved REQ slices after review."
+  risk_analysis:
+    abuse_cases:
+      - "Track A shipped alone; agents still omit checklist_gate on verification-phase tied_verify"
+      - "Track B documented but runner still implies close_out complete without persisted receipt"
+      - "Dual-track CITDP collapsed into one close-out skill paragraph without checklist slug"
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      research_profile: "read-only"
+      eligibility_triggers_matched: []
+      rationale: "Promotion and scope fork only; field evidence cited; no runtime change in this record."
+      sub_adversarial_inquiry_pass: "not_applicable"
+      integrated_waiver: null
+      falsification_questions:
+        - "Does a greenfield REQ pass tied_verify update without checklist_gate after Track A only?"
+        - "Is Track B checklist step visible outside close-out skills?"
+      counterexamples:
+        - "Operator fixes GF-05 manually but methodology still lacks Track B slug"
+    costly_choices:
+      - choice: "Merge tracks into one REQ-REQ_TOKEN_COVERAGE follow-on"
+        ladder: "costly"
+        disposition: "Reject — keep PLAN token and dual delivery_tracks"
+      - choice: "Mark feedback canonical_ready without LEAP approve + build-plan"
+        ladder: "costly misread"
+        disposition: "Reject — proposal stays pending until approve + implement"
+  test_strategy:
+    approach: "Track-scoped RED at build-plan; promotion pass has no new tests."
+    summary: "Track B: composition test or bootstrap script asserts missing_checklist_gate when update:true without gate. Track A: runner test asserts close_out json file when persist flag/default."
+  leap_feedback:
+    record_status: "draft"
+    divergences_from_analysis: "none"
+    tied_stack_updates_required: []
+    promotion:
+      feedback_id: "fb-mvo18hye-i6x5fq"
+      leap_proposal_id: "lp-2026-10-25T16-23-32-863Z-c284570f3c0b"
+      proposed_plan_token: "PLAN-GF-05-GATE-VERIFY-DUAL-TRACK"
+      suggested_leap_order: "req"
+      track_selection_deferred_to: "sponsor at tied_leap_proposal_approve or @build-plan wave 0"
+      active_delivery_track: "SCOPE-VERIFY-GATE-COMMON"
+      track_b_citdp: "tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml"
+      track_b_status: "implemented_methodology_docs_2026-10-25"
+      track_a_deferred: "SCOPE-CLOSE-OUT-EXT until separate refine/build-plan"

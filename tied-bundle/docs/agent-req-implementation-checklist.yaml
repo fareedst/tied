@@ -466,6 +466,7 @@ steps:
           condition: "Test failure"
           target: "unit-test-red"
       calls:
+        - "sub-checklist-gate-before-verify-update"
         - "sub-adversarial-inquiry-pass"
         - "sub-evidence-chain-profile"
         - "sub-pseudocode-static-analysis-pass"
@@ -484,6 +485,7 @@ steps:
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "verification-gate"
     tasks:
+      - "CALL sub-checklist-gate-before-verify-update with phase verification before any tied_verify that sets update:true or passes passed_* tokens for status mutation ([REQ-TIED_VERIFICATION_GATED]); do not call tied_verify with only { update: true } — missing_checklist_gate is expected without checklist_gate."
       - "Build the full fidelity matrix with an executable evidence partition; CALL sub-adversarial-inquiry-pass with phase verification and profile-dependent blocking (strict-eligible only)."
       - "CALL sub-pseudocode-static-analysis-pass when input_identity.hash differs from the pre-RED Layer C report for any changed in-scope IMPL; otherwise cite the existing report path in evidence_refs."
       - "CALL sub-pseudocode-validation-pass: re-run full pseudo-code validation (Layer B including minimum_gating_rules) now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings."
@@ -784,6 +786,7 @@ steps:
           condition: "VALIDATE reports unresolved vocabulary mismatches"
           target: "sync-tied-stack"
       calls:
+        - "sub-checklist-gate-before-verify-update"
         - "sub-adversarial-inquiry-pass"
         - "sub-close-out-evidence-sync"
         - "sub-vocabulary-sync"
@@ -797,6 +800,7 @@ steps:
       - "tied-bundle/docs/vocabulary-index-analysis-and-standards.md"
     slug: "traceable-commit"
     tasks:
+      - "When tied_verify update:true runs at close_out, CALL sub-checklist-gate-before-verify-update with phase close_out first (same checklist_gate contract as verification-gate; applies to every TIED client layout)."
       - "Advisory diff-scoped change-risk report at traceable-commit when CITDP diff_scoped_crap is true and crap_block is false: warn in commit body if threshold exceeded (same report path convention as verification-gate); do not block commit on change-risk score alone when crap_block is false."
       - "CALL sub-close-out-evidence-sync before close-out gates: never write execution_evidence.completed without matching step dispositions in the same pass (tracker_dual_write is a process gap)."
       - "Do NOT push unless explicitly asked."
@@ -1559,6 +1563,32 @@ sub_procedures:
     title: "Layer C static analysis gate (gate_mode)"
     tracking:
       consideration_before_proceeding: "Layer C reports persisted with ok true and gate_mode_applied for each changed in-scope IMPL; RETURN to gate-pseudocode-validation or verification-gate."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
+  - flow:
+      return_to: "caller"
+    goals: "Persist checklist gate receipt, attach envelope checklist_gate_receipt when applicable, and call tied_verify with full checklist_gate before any verify-derived status update ([REQ-TIED_VERIFICATION_GATED], [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT])."
+    invoked_by:
+      - "verification-gate"
+      - "traceable-commit"
+    outcomes: "Gate receipt persisted under working/{REQ-TOKEN}/gates/ when receipt_persistence used; tied_verify receives checklist_gate (phase, tracker_path, unwrapped inner CITDP body — not CITDP-* wrapper key); bare { update: true } without checklist_gate is forbidden."
+    preconditions:
+      - "Test suite for the pass has completed when verification-gate invokes this sub before status update."
+      - "Authoritative Tracker path and CITDP inner body available (loadCitdpRecord shape)."
+    references:
+      - "tied-bundle/docs/processes.md § [PROC-TIED_VERIFICATION_GATED]"
+      - ".cursor/skills/tied-yaml/SKILL.md § Status from test results"
+      - "mcp-server/src/verify.ts (missing_checklist_gate)"
+    slug: "sub-checklist-gate-before-verify-update"
+    tasks:
+      - "CALL tied_checklist_gate_validate for the active phase with receipt_persistence:true, tracker_path, and citdp inner body (value under CITDP-* key in YAML file — same shape as loadCitdpRecord in run-close-out-gates.mjs; truncated or wrapper-only objects yield malformed_citdp diagnostics)."
+      - "When request evidence envelope is in scope, patch or rebuild checklist_gate_receipt on the envelope before tied_verify (request_evidence_envelope_patch or envelope runner)."
+      - "CALL tied_verify with checklist_gate plus passed_requirement_tokens / passed_impl_tokens and update:true; record diagnostics if CHECKLIST_GATE_BLOCKED."
+      - "Do not claim verification-gated status updated or close-out verify-green without tied_verify ok:true after this sequence."
+    title: "Checklist gate payload before tied_verify update (all clients)"
+    tracking:
+      consideration_before_proceeding: "Persisted gate receipt when required; tied_verify ok with checklist_gate or documented N/A when verify-gated mode off."
       retry_count: "0"
       state_history: []
       status: "pending"

@@ -1,0 +1,108 @@
+CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON:
+  record_identity:
+    change_request_id: "PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON"
+    parent_plan_token: "PLAN-GF-05-GATE-VERIFY-DUAL-TRACK"
+    active_delivery_track: "SCOPE-VERIFY-GATE-COMMON"
+    deferred_delivery_track: "SCOPE-CLOSE-OUT-EXT"
+    recorded_at: "2026-10-25"
+    title: "GF-05 Track B — common checklist_gate step before tied_verify update"
+    profile_depth: "minimal"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  change_definition:
+    current_behavior: >
+      [PROC-AGENT_REQ_CHECKLIST] and tied-yaml skill examples show tied_verify with passed token lists but do not
+      normatively require checklist_gate before update:true. Agents across disposable clients call tied_verify with
+      { update: true } only and receive missing_checklist_gate. GF-05 witness fb-mvo18hye-i6x5fq shows the failure at
+      close_out; the same contract applies at verification whenever status is verify-derived. CITDP unwrapping (inner
+      body vs CITDP-* wrapper) is tribal knowledge.
+    desired_behavior: >
+      A callable checklist sub-procedure sub-checklist-gate-before-verify-update documents the operator sequence for all
+      REQ work: tied_checklist_gate_validate with receipt_persistence for the active phase, optional
+      request_evidence_envelope_patch for checklist_gate_receipt, then tied_verify with full checklist_gate (phase,
+      tracker_path, unwrapped inner CITDP). verification-gate and traceable-commit CALL this sub before any update:true.
+      tied-yaml SKILL and client-development-index show a copy-paste checklist_gate example. Track A (close-out runner)
+      remains deferred.
+    non_goals:
+      - "SCOPE-CLOSE-OUT-EXT runner persistence (Track A)"
+      - "New MCP verify behavior or removing missing_checklist_gate guard"
+      - "Wave 5 process-adherence envelope tightening"
+      - "Minting a new REQ token without LEAP approve after build-plan"
+      - "Changing tied-bundle methodology YAML in client-only repos without store refresh"
+    success_criteria:
+      - "SC-SUB-VERIFY-GATE: agent-req-implementation-checklist.yaml defines slug sub-checklist-gate-before-verify-update with CALL sites from verification-gate and traceable-commit"
+      - "SC-SKILL-EXAMPLE: bundled-tied-yaml-skill/SKILL.md documents tied_verify with checklist_gate + cites inner CITDP rule"
+      - "SC-PROC-XREF: processes.md [PROC-TIED_VERIFICATION_GATED] cross-links the sub-procedure"
+      - "SC-TEST-CONTRACT: Node test fails if checklist YAML loses sub slug or skill loses checklist_gate example block"
+      - "SC-WITNESS-LINK: CITDP cites fb-mvo18hye-i6x5fq and GF-05 operator sequence"
+    unchanged_behavior: >
+      tied_verify still fails closed without checklist_gate; Track A run-close-out-gates.mjs behavior unchanged until separate build-plan.
+  impact_analysis:
+    modules_or_boundaries: "tied-bundle/docs/agent-req-implementation-checklist.{yaml,md}; tied-bundle/docs/processes.md; tools/bundled-tied-yaml-skill/SKILL.md; tools/bootstrap test for checklist/skill contract"
+    tied_tokens_affected:
+      - "REQ-TIED_VERIFICATION_GATED"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "PROC-AGENT_REQ_CHECKLIST"
+      - "PROC-TIED_VERIFICATION_GATED"
+    tied_tokens_new: []
+    impl_inventory_notes: "Methodology-surface doc/checklist change; optional IMPL LEAP only if MCP doc resource added"
+  risk_analysis:
+    abuse_cases:
+      - "Sub-procedure documented only in close-out skills so verification-phase verify still omits checklist_gate"
+      - "Example payload uses CITDP wrapper key and reproduces malformed_citdp failures"
+      - "Track B claimed shipped while Track A symptom persists and agents skip sub CALL"
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      prior_depth_tier: null
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      research_profile: "read-only"
+      eligibility_triggers_matched: []
+      rationale: "Checklist and skill prose with contract tests; no auth/network/persistence feature."
+      sub_adversarial_inquiry_pass: "not_applicable"
+      integrated_waiver: null
+      falsification_questions:
+        - "Can an agent complete verification-gate while calling tied_verify update:true without checklist_gate?"
+        - "Is the sub-procedure referenced from both verification and close_out verify paths?"
+      counterexamples:
+        - "verify.test.ts already asserts missing_checklist_gate but checklist never mandates payload"
+      disconfirming_observations:
+        - "mcp-server verify.test.ts already fails bare update:true with missing_checklist_gate"
+        - "GF-05 operator sequence succeeded when checklist_gate payload was supplied"
+      evidence_references:
+        - "tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml"
+        - "tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/PLAN.md"
+        - "tied-project/feedback.yaml"
+        - "docs/demos/trial-readout-PROMPT-GF-05-1792944114.md"
+        - "mcp-server/src/verify.test.ts"
+    costly_choices:
+      - choice: "Implement Track A in same build-plan wave as Track B"
+        ladder: "reversible"
+        disposition: "Reject for this PLAN — sponsor selected Track B only"
+      - choice: "Hard-fail tied_verify in MCP when update true without gate"
+        ladder: "costly"
+        disposition: "Defer — behavior already fail-closed; scope is checklist normativity"
+  test_strategy:
+    approach: "RED contract tests before checklist/skill GREEN edits"
+    cases:
+      - "grep/assert sub-checklist-gate-before-verify-update in checklist YAML"
+      - "grep/assert checklist_gate in tied-yaml SKILL tied_verify section"
+      - "Existing mcp-server verify.test.ts missing_checklist_gate remains green"
+    summary: "No new production module; composition via bootstrap or mcp-server doc test"
+  evidence:
+    commands:
+      - "npx tsx --test mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts"
+    witness_feedback_id: "fb-mvo18hye-i6x5fq"
+    leap_proposal_id: "lp-2026-10-25T16-23-32-863Z-c284570f3c0b"
+    proof_boundaries:
+      - "methodology_doc_and_checklist_only"
+      - "does_not_prove_track_a_runner_change"
+  leap_feedback:
+    record_status: "closed"
+    close_out_run_id: "close-out-gf05-track-b-20261025"
+    divergences_from_analysis: "none"
+    tied_stack_updates_required: []
+    build_plan_completed_at: "2026-10-25"
+    close_out_completed_at: "2026-10-25"
+    test_evidence:
+      - "mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts"

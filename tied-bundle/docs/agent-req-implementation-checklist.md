@@ -661,7 +661,8 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Vocabulary benefit**: Performs the final RECORD reconciliation and ensures every named concept resolves to exactly one preferred term before close-out.
 
 **Tasks**:
-0. **CALL sub-pseudocode-validation-pass** — full Layer B including **minimum_gating_rules** now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.
+0. **CALL sub-checklist-gate-before-verify-update** with `phase: verification` before any **`tied_verify`** that sets **`update: true`** or passes `passed_*` tokens for status mutation ([REQ-TIED_VERIFICATION_GATED]). Do not call `tied_verify` with only `{ update: true }` — `missing_checklist_gate` is expected without **`checklist_gate`**.
+0a. **CALL sub-pseudocode-validation-pass** — full Layer B including **minimum_gating_rules** now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.
 1. Run the **full test suite** (unit, composition, E2E). All must pass.
 2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `npx tsc -b`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`).
 2a. Rebuild/reload the MCP server and smoke-test live discovery and invocation of `tied_adversarial_inquiry_run`; source registration alone is not adoption evidence.
@@ -983,6 +984,22 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 **Outcomes**: `evidence-chain-profile.v1` on disk or stdout; project intent unchanged.
 
 **Reference**: [evidence-chain-profile.md](evidence-chain-profile.md); `[PROC-EVIDENCE_CHAIN]`.
+
+---
+
+### sub-checklist-gate-before-verify-update (sub-checklist-gate-before-verify-update): Checklist gate payload before tied_verify update
+
+**Invoked by**: `verification-gate`, `traceable-commit` (phase `close_out` when verify runs at close-out).
+
+**Goals**: Normative operator sequence for **every TIED client** before verify-derived status updates: persist checklist gate receipt, attach envelope `checklist_gate_receipt` when applicable, call **`tied_verify`** with full **`checklist_gate`**.
+
+**Tasks**:
+1. **CALL `tied_checklist_gate_validate`** for the active phase with `receipt_persistence: true`, `tracker_path`, and **unwrapped inner CITDP body** (same shape as `loadCitdpRecord` — not the top-level `CITDP-*` wrapper key alone).
+2. Patch or rebuild request evidence envelope **`checklist_gate_receipt`** when envelope is in scope.
+3. **CALL `tied_verify`** with **`checklist_gate`** plus passed REQ/IMPL tokens and `update: true`.
+4. Do not claim verify-green or verification-gated status updated without `tied_verify` **`ok: true`**.
+
+**Reference**: `[PROC-TIED_VERIFICATION_GATED]` in `processes.md`; `.cursor/skills/tied-yaml/SKILL.md`; witness feedback `fb-mvo18hye-i6x5fq` (PROMPT-GF-05).
 
 ---
 
