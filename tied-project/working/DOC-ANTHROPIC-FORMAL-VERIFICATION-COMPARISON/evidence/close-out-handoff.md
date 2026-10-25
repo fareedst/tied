@@ -34,7 +34,7 @@
 
 | SHA | Summary |
 | --- | --- |
-| `3ceb7b58` | Wave 1–2 comparisons, allowlist, CHANGELOG, working evidence |
+| `ff242d5b` | Wave 1–2 comparisons, allowlist, CHANGELOG, working evidence |
 
 ## Feedback
 

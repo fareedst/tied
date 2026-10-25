@@ -32,7 +32,7 @@ steps:
     notes: "Doc QA: 14 sections, Anthropic-reported labels, token grep OK; tied_validate_consistency skipped (no YAML)."
     status: "done"
   traceable-commit:
-    notes: "2026-10-25 commit 3ceb7b58; evidence/traceable-commit-evidence.md"
+    notes: "2026-10-25 commit ff242d5b; evidence/traceable-commit-evidence.md"
     status: "done"
   close_out:
     notes: "2026-10-25 handoff evidence/close-out-handoff.md; machine gate blocked (DOC pattern); process pass."
