@@ -22,4 +22,4 @@ See hygiene receipt — fixture/source-graph/JEV/evaluation paths not part of th
 
 ## Commit SHA
 
-_(filled post-commit)_
+`5ba4086ef39c119199a3ba4c64a238acb34d248d` (main)

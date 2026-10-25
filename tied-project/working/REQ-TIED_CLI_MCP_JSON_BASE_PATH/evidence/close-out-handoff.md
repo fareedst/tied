@@ -18,4 +18,4 @@ Envelope initially failed `not_applicable_receipt_missing`; cleared via `request
 
 ## Commit
 
-See `traceable-commit-evidence.md` for SHA after traceable commit.
+**Commit:** `5ba4086ef39c119199a3ba4c64a238acb34d248d` on `main` (not pushed).
