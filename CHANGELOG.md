@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Store README operator rhythms (PLAN-README-DUAL-RHYTHMS)** — Quick start **configuration rhythm** (clone → `./build-workspace.sh` → `./tied-install.sh` → MCP confirm) and new **Compact feature rhythm** H3 (`/add-feature` → `/refine-plan` → `/build-plan` → `/close-out`); [client-development-index.md](tied-bundle/docs/client-development-index.md) scenario row; extended [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts). Plan: [PLAN-refine-pass1.md](tied-project/working/PLAN-README-DUAL-RHYTHMS/PLAN-refine-pass1.md). Machine close-out gate N/A (doc-only).
+
 ### Added
 
 - **PROMPT-GF-10 trial readout (facilitator)** — [trial-readout-PROMPT-GF-10-1792950723-gf-10.md](docs/demos/trial-readout-PROMPT-GF-10-1792950723-gf-10.md) for disposable client `1792950723-gf-10` (**TIED-DEMO-10** / **CON-03**, `REQ-ORDERED_PARALLEL_MAP` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-10-1792950723/PLAN.md](tied-project/working/FACILITATOR-GF-10-1792950723/PLAN.md). Feedback ingest **N/A**.

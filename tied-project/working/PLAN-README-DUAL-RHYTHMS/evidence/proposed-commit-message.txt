@@ -1,0 +1,9 @@
+docs(readme): configuration and compact feature rhythms
+
+Lead Quick start with clone→build→install configuration rhythm and a new
+Compact feature rhythm H3 (/add-feature through /close-out). Extend store
+README structure test and client-development-index scenario row.
+
+Plan: tied-project/working/PLAN-README-DUAL-RHYTHMS/PLAN-refine-pass1.md
+
+Completion signals: machine close_out waived (doc-only PLAN); structure test pass.

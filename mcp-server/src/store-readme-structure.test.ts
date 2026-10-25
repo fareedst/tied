@@ -29,6 +29,11 @@ const REQUIRED_SUBSTRINGS = [
   "### Store workspace build",
   "tied-install.sh --help",
   "--refresh",
+  "/add-feature",
+  "/refine-plan",
+  "/build-plan",
+  "/close-out",
+  "git clone",
 ] as const;
 
 const FORBIDDEN_LEGACY_LAYOUT_DOC_PATTERNS = [
@@ -40,6 +45,7 @@ const FORBIDDEN_LEGACY_LAYOUT_DOC_PATTERNS = [
 
 const NORMATIVE_QUICK_START_H3 = [
   "### Primary operator delivery path",
+  "### Compact feature rhythm",
   "### Store workspace build",
   "### Greenfield",
 ] as const;
@@ -63,7 +69,7 @@ describe("store README structure [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING]"
     assert.equal(fs.existsSync(readmePath), true);
   });
 
-  it("satisfies three-band H2 contract and link/anchor requirements", () => {
+  it("satisfies three-band H2 contract, compact feature rhythm H3, and link/anchor requirements", () => {
     const text = fs.readFileSync(readmePath, "utf8");
     for (const h2 of NORMATIVE_H2) {
       assert.match(text, new RegExp(`^${escapeRegExp(h2)}`, "m"), `missing ${h2}`);

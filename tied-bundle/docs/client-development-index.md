@@ -74,6 +74,7 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 
 | Situation | Start at | Also open |
 | --- | --- | --- |
+| Compact feature in Cursor (store README) | Root [README.md](../../README.md#compact-feature-rhythm) → **Compact feature rhythm** | [Multi-harness entry matrix](#multi-harness-entry-matrix-cursor-vs-claude-code); **Checklist** for REQ semantics |
 | New requirement | **Checklist** → `session-bootstrap` | **Pseudo-code** Track A; project YAML indexes below |
 | Proposed concept (impact, risks, costs before costly work) | [**Concept impact inquiry**](../../docs/tied-concept-impact-inquiry.md) | RESOLVE via **Vocabulary**; escalate to **Checklist** / CITDP when sponsor proceeds |
 | External workflows, integrators, undocumented ops behavior (brownfield externalities) | [**Operating environment externalities**](../../docs/tied-operating-environment-externalities.md) | **Vocabulary** `operating-environment-externalities.md`; BBCE + brownfield intent elevation; then **Checklist** / CITDP |

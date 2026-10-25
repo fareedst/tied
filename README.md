@@ -2,7 +2,7 @@
 
 **TIED Methodology Version**: 4.0.0
 
-[TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store** (methodology source, MCP server, and bootstrap engine). For the executable process and Core seven references, start at the [client development index](tied-bundle/docs/client-development-index.md).
+[TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. Deeper process and the Core seven documents: [client development index](tied-bundle/docs/client-development-index.md).
 
 ## Quick start (macOS)
 
@@ -10,13 +10,40 @@ From the TIED repository root on macOS (Unix / Git Bash). Windows and full prere
 
 ### Primary operator delivery path
 
-The canonical **store-to-client delivery spine** is two CLI entry points at the store root (styled help on both):
+The **configuration rhythm** (store → client) in four steps:
 
-1. **Store workspace build:** `./build-workspace.sh` — details in [Store workspace build](#store-workspace-build) below; `./build-workspace.sh --help`.
-2. **Client install:** `./tied-install.sh /path/to/client` (or linked primary install from the greenfield table); `./tied-install.sh --help` (no arguments prints styled help). Methodology refresh: `--refresh`.
-3. **Confirm MCP:** `tied_config_get_base_path` → client `tied-project/` — [Optionally enable the MCP server](#2-optionally-enable-the-mcp-server).
+1. **Clone:** `git clone` the [TIED store](https://github.com/fareedst/tied); `cd` to the store root.
+2. **Store workspace build:** `./build-workspace.sh` — details in [Store workspace build](#store-workspace-build) below; `./build-workspace.sh --help`.
+3. **Client install:** `./tied-install.sh /path/to/client` (or linked primary install from the greenfield table); `./tied-install.sh --help` (no arguments prints styled help). Methodology refresh: `--refresh`.
+4. **Confirm MCP:** `tied_config_get_base_path` → client `tied-project/` — [Optionally enable the MCP server](#2-optionally-enable-the-mcp-server).
 
 Windows store build and install shims: [Install and use](#install-and-use).
+
+<a id="compact-feature-rhythm"></a>
+
+### Compact feature rhythm
+
+After client bootstrap (`tied-install` installs Prompt Composer skills under `.cursor/skills/`), one **REQ-scoped compact feature** in Cursor follows this **coding rhythm**:
+
+| Step | Invoke | Purpose |
+| --- | --- | --- |
+| 1 | `/add-feature` | New requirement + linked plan (Refine, CITDP Plan, Implement inside the skill) |
+| 2 | `/refine-plan` | Improve the linked plan before execution |
+| 3 | `/build-plan` | Execute the approved plan (TDD, checklist; omits Refine) |
+| 4 | `/close-out` | LEAP sync, `close_out` gate, CHANGELOG, traceable commit when allowed |
+
+(`@add-feature` and the other `@…` names are equivalent aliases in Cursor.)
+
+Canonical skill sources: [add-feature](tools/bundled-prompt-type-skills/add-feature/SKILL.md), [refine-plan](tools/bundled-prompt-type-skills/refine-plan/SKILL.md), [build-plan](tools/bundled-prompt-type-skills/build-plan/SKILL.md), [close-out](tools/bundled-prompt-type-skills/close-out/SKILL.md). **[AGENTS.md](AGENTS.md)** remains authoritative. Optional trial remainders: [catalog-greenfield add-feature](docs/demos/catalog-greenfield-add-feature-prompts.md). For FEAT lifecycle vs REQ-scoped work, see the [multi-harness entry matrix](tied-bundle/docs/client-development-index.md#multi-harness-entry-matrix-cursor-vs-claude-code).
+
+```mermaid
+flowchart LR
+  addFeature[add_feature]
+  refinePlan[refine_plan]
+  buildPlan[build_plan]
+  closeOut[close_out]
+  addFeature --> refinePlan --> buildPlan --> closeOut
+```
 
 ### Store workspace build
 
@@ -38,7 +65,7 @@ This produces `mcp-server/dist/index.js`, the umbrella **`tied`** CLI, **`tied a
 | External client directory | `./tied-install.sh /path/to/your/project` | [Getting started with a new client project](#getting-started-with-a-new-client-project) |
 | Primary implementation repo (code + `tied-project/` in one tree) | `/path/to/tied-store/tied-install.sh --mode linked --store /abs/path/to/tied-store .` from the **primary** root | [Primary implementation repository](#primary-implementation-repository) |
 
-After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`, then run REQ-scoped work with Prompt Composer skills (for example `/add-feature`). Optional trial prompts: [catalog-greenfield add-feature](docs/demos/catalog-greenfield-add-feature-prompts.md).
+After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`, then follow [Compact feature rhythm](#compact-feature-rhythm).
 
 **Store-as-primary note:** This git repository is both the store and a TIED client (`tied-project/`). To linked-install into **other** primary repos, use a **separate store clone** as `--store` (see [Methodology development layout](#methodology-development-layout)).
 
@@ -101,7 +128,7 @@ CLI (same surface as MCP): `tied certification spec-validate`, `conformance-eval
 
 ### REQ-scoped prompt types
 
-Installed under `.cursor/skills/` (and `.claude/skills/` when bootstrapped): for example **`add-feature`**, **`refine-plan`**, **`build-plan`**, **`close-out`**. **[AGENTS.md](AGENTS.md)** remains authoritative. Prompt skills do not replace checklist gates or integrated adversarial inquiry when those apply.
+See [Compact feature rhythm](#compact-feature-rhythm) in Quick start. **[AGENTS.md](AGENTS.md)** remains authoritative. Prompt skills do not replace checklist gates or integrated adversarial inquiry when those apply.
 
 ### Honest limits
 
@@ -375,7 +402,7 @@ The [client development index](tied-bundle/docs/client-development-index.md) nam
 6. [Pseudo-code guide](tied-bundle/docs/pseudocode-writing-and-validation.md) — author and validate IMPL behavior contracts.
 7. [CITDP policy and record template](tied-bundle/docs/citdp-policy.md) — determine when to persist change analysis.
 
-For orientation, read [methodology diagrams](tied-bundle/docs/methodology-diagrams.md) and the [LEAP guide](tied-bundle/docs/LEAP.md). For YAML operations, use the [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and the [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) (installed under `.cursor/skills/tied-yaml/` in client projects). Agents should read [AGENTS.md](AGENTS.md) before working in a client project.
+For orientation, read [methodology diagrams](tied-bundle/docs/methodology-diagrams.md) and the [LEAP guide](tied-bundle/docs/LEAP.md). Semantic tokens link REQ → ARCH → IMPL → tests → code across client projects. For YAML operations, use the [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and the [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) (installed under `.cursor/skills/tied-yaml/` in client projects). Agents should read [AGENTS.md](AGENTS.md) before working in a client project.
 
 ## Repository layout
 
