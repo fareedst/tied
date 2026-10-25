@@ -1,0 +1,24 @@
+copy_hygiene: >-
+  Facilitator publish tracker for FACILITATOR-GF-16-1792937222 only. Not the subject client master checklist.
+description: >
+  Minimal tracker for store documentation-only facilitator readout (PROMPT-GF-16 / client 1792937222).
+execution_evidence:
+  request: FACILITATOR-GF-16-1792937222
+  completed:
+    - session-bootstrap
+    - translate-sponsor-intent
+    - change-definition
+    - risk-assessment
+    - test-strategy
+    - build-plan-verification
+    - publish-trial-readout
+    - link-demo-catalogs
+  close_out_evidence:
+    date: null
+    deferred:
+      - traceable-commit
+    envelope: null
+    gates: {}
+profile_depth: minimal
+depth_tier: minimal
+gate_policy: advisory
