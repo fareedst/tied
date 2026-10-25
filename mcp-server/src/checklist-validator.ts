@@ -15,6 +15,7 @@ import {
 import { validateMethodologySurfacePairingGate } from "./methodology-conformance-effectiveness-pairing/pairing-gate.js";
 import { validateMethodologySurfaceExperimentGate } from "./methodology-surface-experiment-gate/gate.js";
 import { validateEasarEngagementFacet } from "./easar-receipts/engagement-facet.js";
+import { auditMidLaneSponsorDeferral } from "./relationship/sponsor-decision-lane.js";
 
 export type GatePhase = "pre_implementation" | "verification" | "close_out";
 export type AdversarialDepth = "minimal" | "integrated" | "strict_candidate";
@@ -1491,6 +1492,17 @@ export function validateChecklistGate(input: {
     diagnostics.push(...hingeResult.diagnostics);
   } else if (hingeResult.diagnostics.length > 0) {
     findingAdvisoryDiagnostics = [...findingAdvisoryDiagnostics, ...hingeResult.diagnostics];
+  }
+
+  // [IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY] [REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] — How: AUDIT_MID_LANE_SPONSOR_DEFERRAL warn-only under advisory.
+  const midLaneDiagnostics = auditMidLaneSponsorDeferral(input.citdp, gatePolicy);
+  if (midLaneDiagnostics.length > 0) {
+    const warnOnly = midLaneDiagnostics.every((code) => code.startsWith("mid_lane_sponsor_deferral:"));
+    if (warnOnly && !hingeDiagnosticsAreBlocking(gatePolicy)) {
+      findingAdvisoryDiagnostics = [...findingAdvisoryDiagnostics, ...midLaneDiagnostics];
+    } else {
+      diagnostics.push(...midLaneDiagnostics);
+    }
   }
 
   const parentChildResult = validateIntegratedParentChildSlugs({

@@ -1,0 +1,23 @@
+ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY:
+  alternatives_considered:
+    - name: "Hard-block mid-lane backlog"
+      rationale: "Sponsor chose warn-only"
+      rejected: true
+    - name: "Merge reviewer into sponsor lanes"
+      rationale: "Proof boundary"
+      rejected: true
+  decision: "Charter vs selection lane classification in pure module; warn-only mid_lane_sponsor_deferral in checklist gate under advisory; lane metadata on sponsor questions MCP without YAML writes."
+  description: "Compose consequence ladder and hinge validation; no duplicate taxonomy."
+  name: "Sponsor two-lane delivery architecture"
+  related_decisions:
+    composed_with:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    depends_on:
+      - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+    see_also: []
+  status: "Implemented"
+  traceability:
+    implementation:
+      - "IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    requirements:
+      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"

@@ -28,8 +28,14 @@
 | **over-asking** | hesitation | Human model applied to reversible agent work |
 | **instrumentalizing the sponsor** | — | System model applied to sponsor choices or placeholder waivers |
 | **RESOLVE charter** | — | RESOLVE canonicalizes **names** only; intent authority stays sponsor-owned |
+| **charter lane** | before-deploy (normative) | Pre-code strategic sponsor Q&A through **`pre_implementation`** ([REQ-TIED_SPONSOR_TWO_LANE_DELIVERY](../requirements/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml)) |
+| **selection lane** | after-deploy (normative) | Post-code preference among implemented options; requires **selection_evidence** |
+| **mid-lane deferral** | mid-build sponsor chat | Documented default + backlog row; **warn-only** under advisory gates |
+| **selection_evidence** | demo link (alone) | Typed refs per selectable option (test id, demo, gate receipt) |
 
 Fleet **reversible sponsor choice (fleet)** / **costly sponsor choice (fleet)** in [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) are specializations of **reversible choice** / **costly choice**.
+
+**Two-lane delivery guide:** [`../../tied-bundle/docs/sponsor-two-lane-delivery.md`](../../tied-bundle/docs/sponsor-two-lane-delivery.md)
 
 ---
 

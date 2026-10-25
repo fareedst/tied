@@ -3151,6 +3151,23 @@ IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
   detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
   name: "Sponsor risk-tier playbook doc maintenance"
   status: "Implemented"
+IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY:
+  description: "sponsor-decision-lane.ts, checklist-validator mid-lane diagnostic, sponsor-questions lane fields."
+  detail_file: "implementation-decisions/IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml"
+  name: "Sponsor two-lane delivery implementation"
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      - "IMPL-TIED_SPONSOR_QUESTIONS"
+    see_also: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    requirements:
+      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
 IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
   description: "applyStoreGitignoreProfile, migrate tracked local working, assert zero tracked tied-bundle/working; collapseLegacyWorkingGitignorePatterns uses undividedMirror false."
   detail_file: "implementation-decisions/IMPL-TIED_STORE_BUNDLE_GIT_POLICY.yaml"

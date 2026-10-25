@@ -1,0 +1,12 @@
+feat(sponsor-lane): two-lane charter and selection delivery
+
+Charter vs selection sponsor gates with lane classifier, checklist warn
+hook, and MCP sponsor-questions lane metadata. TIED stack
+REQ/ARCH/IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY; docs and checklist markers.
+
+Machine close-out: pass (close_out + envelope blocking_gaps=0).
+Process contract: partial (minimal, skip-manifest).
+Adherence: band B.
+
+Tokens: REQ-TIED_SPONSOR_TWO_LANE_DELIVERY, ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY,
+IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY

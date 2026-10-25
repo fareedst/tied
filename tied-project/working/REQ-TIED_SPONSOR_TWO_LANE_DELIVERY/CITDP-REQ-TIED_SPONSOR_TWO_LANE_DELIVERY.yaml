@@ -1,0 +1,154 @@
+CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY:
+  record_identity:
+    change_request_id: "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    recorded_at: "2026-10-25"
+    title: "Sponsor two-lane delivery (charter + selection gates)"
+    profile_depth: "minimal"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    record_status: "draft"
+  change_definition:
+    methodology_surface_change_class: "checklist_step"
+    methodology_surface_experiment_link:
+      experiment_id: "mle-demo-20261010-001"
+      production_system_surface: "checklist_step"
+      surface_ref: "agent-req-implementation-checklist.yaml#sponsor-two-lane-markers"
+    methodology_surface_experiment_advisory:
+      hypothesis: "Normative charter/selection lane markers reduce mid-RED sponsor Q&A without increasing silent costly defaults versus existing SAR reversible-choice defaults."
+      baseline_ref: "tied-project/methodology-experiments.yaml#mle-demo-20261010-001.methodology_baseline"
+    current_behavior: >
+      Sponsor involvement is scattered across checklist steps (costly choice at end of turn,
+      risk-tier playbook attention map, consequence ladder rungs 1–4). Agents may surface
+      sponsor questions mid-RED/GREEN even when defaults exist, causing extra passes. Pre-code
+      vs post-code decisions are implicit; selection among alternatives is not tied to
+      verification or deployed product evidence.
+    desired_behavior: >
+      Normative two-lane strategy limits sponsor Q&A to charter gate (pre-code strategic
+      decisions through pre_implementation) and selection gate (post-code preference among
+      implemented options at verification through close_out). Mid-lane deferral uses documented
+      defaults plus sponsor_charter_backlog / sponsor_selection_backlog with warn-only
+      diagnostics (W3+). Selection options require selection_evidence (tests, demo, gate
+      receipt). Methodology propagates in build waves across docs, checklist, MCP classifier,
+      and contract tests. Reviewer rungs and costly-choice authority unchanged.
+    non_goals:
+      - "Removing reviewer confirmation, strict CITDP, or integrated inquiry when policy requires"
+      - "Auto-approving costly or irreversible sponsor choices"
+      - "Hard-blocking mid-lane backlog at gates in W3 (warn-only unless future REQ)"
+      - "Replacing REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK or PRE_HANDOFF charter"
+      - "Production deploy orchestration or CI merge bots"
+      - "REQ-TIED_FEATURE_ORCHESTRATION scope (deferred unless sponsor re-approves)"
+    success_criteria:
+      - "SC-TLD-001: vocab + routing for charter lane, selection lane, mid-lane deferral"
+      - "SC-TLD-002: tied-bundle/docs/sponsor-two-lane-delivery.md + client-development-index"
+      - "SC-TLD-003: checklist MD/YAML parity at five slugs"
+      - "SC-TLD-004: lane classifier + tied_sponsor_questions unit tests"
+      - "SC-TLD-005: tied_validate_consistency + pseudocode Layer B/C"
+    unchanged_behavior: "Consequence ladder taxonomy; hinge fields; LEAP routing; verification-gated tied_verify"
+    sponsor_backlog_shapes:
+      sponsor_charter_backlog:
+        required_fields:
+          - "decision_id"
+          - "phase"
+          - "lane"
+          - "default_or_option"
+          - "consequence_rung"
+          - "disposition"
+          - "evidence_refs"
+        lane_value: "charter"
+        notes: "Pre-code strategic items; locked or deferred-with-default at charter gate"
+      sponsor_selection_backlog:
+        required_fields:
+          - "decision_id"
+          - "phase"
+          - "lane"
+          - "default_or_option"
+          - "consequence_rung"
+          - "disposition"
+          - "selection_evidence"
+          - "evidence_refs"
+        lane_value: "selection"
+        selection_evidence_rule: "Every selectable option must cite at least one typed selection_evidence ref (test id, demo path, feature flag, gate receipt)"
+  impact_analysis:
+    modules_or_boundaries: >
+      Pure lane classifier (mcp-server/src/relationship/sponsor-decision-lane.ts);
+      checklist warn adapter (checklist-validator.ts); read-only MCP sponsor-questions.ts;
+      tied-bundle/docs and vocab; agent-req-implementation-checklist MD/YAML; bootstrap doc tests
+    impl_inventory:
+      - token: "IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY"
+        declared_module_paths:
+          - "mcp-server/src/relationship/sponsor-decision-lane.ts"
+          - "mcp-server/src/checklist-validator.ts"
+          - "mcp-server/src/project-operations/sponsor-questions.ts"
+        composes_with:
+          - "mcp-server/src/relationship/consequence-ladder.ts (classifyDecisionConsequence)"
+          - "mcp-server/src/checklist-validator.ts (validateHingeFields)"
+    tied_tokens_affected:
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      - "REQ-TIED_SPONSOR_QUESTIONS"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new:
+      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
+      - "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY"
+      - "IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      prior_depth_tier: null
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      research_profile: "read-only"
+      eligibility_triggers_matched: []
+      rationale: "Methodology documentation and read-mostly MCP extensions; no new auth or persistence."
+      sub_adversarial_inquiry_pass: "not_applicable"
+      integrated_waiver: null
+      counterexamples:
+        - "Charter lane used to block RED when scope was already documented as reversible default"
+        - "Selection gate offered hypothetical options without passing tests or demo evidence"
+        - "Mid-lane costly items lost because backlog fields omitted from CITDP"
+      falsification_questions:
+        - "Does warn-only mid-lane deferral increase silent wrong defaults vs today over-asking?"
+        - "Does selection_evidence rule block legitimate sponsor preference when only one option shipped?"
+      disconfirming_observations:
+        - "SAR layer already reduces over-asking via reversible choice defaults"
+      evidence_references:
+        - "tied-bundle/docs/sponsor-agent-relationship.md"
+        - "tied-project/working/HARNESS-IMPROVEMENT-ARC/RESUMPTION.md (sponsor involvement bands S0–S4)"
+        - "mcp-server/src/project-operations/sponsor-questions.ts"
+    bbce_alignment:
+      bbce_advisory_enforced: true
+      disposition: "advisory_at_verification — sub-bbce-advisory-verification-pass when Tracker bbce_advisory_enforced true (STDD rule B: new REQ + ARCH detail)"
+      declared_change_surface_ref: null
+      notes: "New REQ/ARCH slice; locality compare default off; must not hard-block pre_implementation or RED"
+    risks:
+      - id: "RISK-TLD-001"
+        summary: "Agents defer all costly choices to selection when charter lock was required"
+        mitigation: "CLASSIFY_SPONSOR_DECISION_LANE requires_product_evidence flag + checklist text at risk-assessment"
+      - id: "RISK-TLD-002"
+        summary: "Checklist parity drift between MD and YAML"
+        mitigation: "SC-TLD-003 parity test pattern from SAR"
+      - id: "RISK-TLD-003"
+        summary: "Lane classifier duplicates consequence-ladder authority"
+        mitigation: "Compose classifyDecisionConsequence; unit tests assert delegation not redefinition"
+    costly_choices:
+      - choice: "Hard-block pre_implementation when mid-lane backlog non-empty"
+        ladder: "costly"
+        disposition: "Reject — sponsor chose warn-only deferral for W3+"
+      - choice: "Collapse reviewer rungs into sponsor lanes"
+        ladder: "costly"
+        disposition: "Reject — proof boundary"
+  test_strategy:
+    proof_boundary: "Unit + contract tests on classifier and sponsor-questions; doc tests; no E2E UI"
+    focused_tests:
+      - "sponsor-two-lane-lane-classifier.test.ts (T-TLD-01, T-TLD-07)"
+      - "sponsor-two-lane-checklist-parity.test.ts (T-TLD-04)"
+      - "checklist-validator mid_lane_sponsor_deferral warn-only (T-TLD-08)"
+      - "sponsor-two-lane-delivery-doc.test.mjs (T-TLD-05)"
+      - "tied_sponsor_questions composition (T-TLD-06)"
+    operator_evidence:
+      - "pre_implementation gate receipt under tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/"
+      - "verification + close_out gates at build-plan close-out"
+      - "request-evidence-envelope.v1.json + verification-evidence-manifest when close-out blocking"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "draft"
+    tied_stack_updates_required: []

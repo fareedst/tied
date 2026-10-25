@@ -1,0 +1,21 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "run_id": "close-out-2026-10-25-sponsor-two-lane-v2",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate_receipt_persist": {
+    "path": "tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/close_out-2026-10-25T17-17-15-868Z.json"
+  },
+  "envelope": {
+    "path": "tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 1
+  },
+  "unblock": "request_evidence_envelope_backfill (not-applicable-receipt.v1.json) after initial not_applicable_receipt_missing",
+  "flags": ["--envelope-blocking", "--sync-dispositions", "--reconcile", "--skip-manifest"]
+}

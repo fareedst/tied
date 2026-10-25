@@ -2588,6 +2588,23 @@ ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
   detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
   name: "Sponsor risk-tier playbook documentation topology"
   status: "Implemented"
+ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY:
+  description: "Three modules: pure lane classifier, checklist warn adapter, sponsor-questions MCP readout — compose SAR ladder and hinges."
+  detail_file: "architecture-decisions/ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml"
+  name: "Sponsor two-lane delivery architecture"
+  related_decisions:
+    composed_with: []
+    depends_on:
+      - "ARCH-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      - "ARCH-TIED_SPONSOR_QUESTIONS_BOUNDARY"
+    see_also:
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  status: "Implemented"
+  traceability:
+    implementation:
+      - "IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    requirements:
+      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
 ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
   description: "Store git tracks tied-bundle corpus except whole-root working/ and install.json; clients keep INSTALL MANAGED whole tied-bundle/ ignore; runtime MCP writes unchanged under tied-bundle/working/."
   detail_file: "architecture-decisions/ARCH-TIED_STORE_BUNDLE_GIT_POLICY.yaml"

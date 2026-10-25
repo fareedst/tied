@@ -1119,6 +1119,31 @@ describe("VALIDATE_HINGE_FIELD [REQ-TIED_SPONSOR_AGENT_RELATIONSHIP]", () => {
     assert.ok(result.diagnostics.some((d) => d.startsWith("hinge_field_incomplete:")));
   });
 
+  it("mid_lane_sponsor_deferral is warn-only under advisory [REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] T-TLD-08", () => {
+    const citdp = {
+      ...minimalCitdp({ gate_policy: "advisory" }),
+      change_definition: {
+        sponsor_charter_backlog: [
+          {
+            decision_id: "d1",
+            phase: "pre_implementation",
+            lane: "charter",
+            default_or_option: "default",
+            consequence_rung: 2,
+            disposition: "deferred",
+          },
+        ],
+      },
+    };
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: minimalTracker(),
+      citdp,
+    });
+    assert.equal(result.allowed, true);
+    assert.ok(result.diagnostics.some((d) => d.startsWith("mid_lane_sponsor_deferral:")));
+  });
+
   it("strict-candidate gate blocks on hinge_field_incomplete", () => {
     const citdp = {
       ...minimalCitdp({ gate_policy: "strict-candidate" }),

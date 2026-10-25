@@ -201,6 +201,7 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 6. Record anti-examples, ambiguity probes, and an unchanged-behavior checklist in the phase plan (in addition to profile/policy separation already present).
 7. **Touchpoint 1 (prompt intake):** **Reword fuzzy sponsor wording that names concepts** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RESOLVE**) to map synonyms/ambiguous sponsor terms onto the preferred domain terms in `tied-project/vocab/*.md` before mapping intent to phases; **CALL sub-vocabulary-sync** (**RECORD**) for any genuinely new concept the sponsor introduces so it is captured immediately.
 8. **RESOLVE charter** and **delegated work envelope**: RESOLVE changes concept names, not sponsor intent authority (non-goals, approvals, irreversible choices). State what this request's **delegated work envelope** allows the agent to do without asking (bounded by approved plan, CITDP, Tracker, documented defaults).
+9. **[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY]** RESOLVE **charter lane** (pre-code strategic sponsor Q&A through `pre_implementation`) vs **selection lane** (post-code preference among implemented options); do not schedule selection-lane questions before product evidence exists.
 
 **Outcomes**: Sponsor wording translated into an explicit checklist-phase plan using canonical domain terms; agent primed to follow slug order rather than imperative goal phrasing alone.
 
@@ -221,9 +222,10 @@ This section is **optional guidance** only. Checklist order and gating are uncha
 4. State **non-goals** (what this work intentionally does not address).
 5. State **success criteria** (measurable outcomes that determine when the work is done).
 6. Deliverable production code and automated tests are **out of scope** for this step; output is the written change definition (current, desired, unchanged, non-goals, success criteria) only.
-7. State explicit counterexamples and falsification questions for the success criteria; treat non-goals as negative scope for adversarial review.
-8. **Touchpoint 1 (prompt intake):** **Express the change definition using canonical domain terms** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RESOLVE**) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in `tied-project/vocab/*.md`; **CALL sub-vocabulary-sync** (**RECORD**) for any new concept named here.
-9. **Optional BBCE declared surface (Mechanism A, advisory):** When the sponsor requests change-locality discipline, record on the per-request Tracker optional field **`declared_change_surface`** (inline object or path ref) with `behavior`, `owning_slice_req`, `expected_path_globs`, `public_behavioral_boundary`, `expected_tests`, `anticipated_shared_deps` — schema **`bbce-declared-change-surface.v1`** (see `tied/analysis/examples/declared-change-surface.v1.example.yaml`). On working CITDP, optional **`risk_analysis.bbce_alignment.declared_change_surface_ref`** mirrors the residuality attach pattern. Advisory only — not a checklist hard blocker (W4 promotion).
+7. **[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY]** State whether sponsor decisions belong in **charter lane** or **selection lane**; **selection lane** choices require implemented alternatives and typed **selection_evidence** per option (tests, demo, gate receipt).
+8. State explicit counterexamples and falsification questions for the success criteria; treat non-goals as negative scope for adversarial review.
+9. **Touchpoint 1 (prompt intake):** **Express the change definition using canonical domain terms** (`[PROC-VOCABULARY_INDEX]`): **CALL sub-vocabulary-sync** (**RESOLVE**) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in `tied-project/vocab/*.md`; **CALL sub-vocabulary-sync** (**RECORD**) for any new concept named here.
+10. **Optional BBCE declared surface (Mechanism A, advisory):** When the sponsor requests change-locality discipline, record on the per-request Tracker optional field **`declared_change_surface`** (inline object or path ref) with `behavior`, `owning_slice_req`, `expected_path_globs`, `public_behavioral_boundary`, `expected_tests`, `anticipated_shared_deps` — schema **`bbce-declared-change-surface.v1`** (see `tied/analysis/examples/declared-change-surface.v1.example.yaml`). On working CITDP, optional **`risk_analysis.bbce_alignment.declared_change_surface_ref`** mirrors the residuality attach pattern. Advisory only — not a checklist hard blocker (W4 promotion).
 
 **Outcomes**: A clear change definition exists, worded with canonical domain terms. For CITDP records, this populates the `change_definition` section.
 
@@ -462,6 +464,7 @@ Full typed-flow enforcement of AWAIT/Promise consistency is deferred to W4; docu
 7. Select and document the adversarial depth tier (`minimal` | `integrated` | `strict_candidate`) and, when blocking is desired later, list every strict-eligibility prerequisite with owner.
 8. Record the selected **assurance profile**, proof boundaries, and which evidence-chain edges are in scope. Keep inquiry `research_profile` separate from **evidence-chain profile depth**.
 9. Classify each open decision as a **reversible choice** (proceed on documented default) or **costly choice** (list as sponsor question with recommended default; surface at end of turn). Record **consequence ladder** rung for each **hinge field** present on the working CITDP.
+10. **[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY]** Batch unresolved charter-lane costly choices into **sponsor_charter_backlog** on the working CITDP (decision_id, phase, lane, default_or_option, consequence_rung, disposition, evidence_refs).
 
 **Outcomes**: Risks documented with token references. Mitigations identified.
 
@@ -662,6 +665,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 
 **Tasks**:
 0. **CALL sub-checklist-gate-before-verify-update** with `phase: verification` before any **`tied_verify`** that sets **`update: true`** or passes `passed_*` tokens for status mutation ([REQ-TIED_VERIFICATION_GATED]). Do not call `tied_verify` with only `{ update: true }` — `missing_checklist_gate` is expected without **`checklist_gate`**.
+0b. **[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY]** Validate **selection_evidence** for each **selection lane** option before sponsor preference is accepted; missing evidence warns and defers selection — does not hard-block advisory gates.
 0a. **CALL sub-pseudocode-validation-pass** — full Layer B including **minimum_gating_rules** now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings.
 1. Run the **full test suite** (unit, composition, E2E). All must pass.
 2. Run **lint** for each language in scope: Rust → `bun run lint:rust`; TypeScript → `npx tsc -b`; Swift → `swift build && swift test`; YAML → run `lint_yaml` on changed files per [PROC-YAML_EDIT_LOOP] (`processes.md`).
@@ -709,6 +713,7 @@ END LOOP (repeat unit-test-red → unit-test-green → unit-refactor → three-w
 5. If REQ/ARCH/IMPL `status`, `traceability.tests`, or similar fields changed such that a session `agent_preload` would be stale, re-check **`tied/agent-preload-contract.yaml`** and patch only as needed; do not redo the full ARCH/IMPL preload passes unless something material changed.
 6. Keep observed inquiry findings outside canonical TIED YAML; route only confirmed findings to existing owners and never trigger LEAP from observation alone.
 7. If a profile was generated, ensure it references current token metadata. Do **not** store generated evidence-chain output as REQ/ARCH/IMPL intent.
+8. **[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY]** Reconcile **sponsor_charter_backlog** / **sponsor_selection_backlog** with vocab and MCP lane readout; **mid-lane deferral** remains warn-only under advisory `gate_policy` (W3+).
 
 **Branch**: IF divergence between TIED docs and code/tests is detected THEN apply LEAP:
 - Update IMPL first (GOTO resolve-pseudocode scope).

@@ -1,0 +1,39 @@
+REQ-TIED_SPONSOR_TWO_LANE_DELIVERY:
+  description: "Limit sponsor Q&A to charter gate (pre_implementation) and selection gate (verification through close_out) with backlog fields and warn-only mid-lane deferral."
+  name: "Sponsor two-lane delivery"
+  rationale:
+    benefits:
+      - "Auditable backlog shapes"
+      - "Charter vs selection lane vocabulary"
+      - "MCP lane readout"
+    problems_solved:
+      - "Implicit pre-code vs post-code decisions"
+      - "Selection without product evidence"
+    why: "Reduce mid-RED sponsor passes while preserving costly-choice and reviewer authority."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      - "REQ-TIED_SPONSOR_QUESTIONS"
+    related_to: []
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Checklist parity"
+      criterion_id: "SC-TLD-003"
+    - criterion: "Classifier + MCP"
+      criterion_id: "SC-TLD-004"
+    - criterion: "Consistency + pseudo-code validation"
+      criterion_id: "SC-TLD-005"
+    - criterion: "Methodology guide + index"
+      criterion_id: "SC-TLD-002"
+    - criterion: "Vocab and routing"
+      criterion_id: "SC-TLD-001"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    implementation:
+      - "IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    tests:
+      - "sponsor-two-lane-checklist-parity.test.ts"
+      - "sponsor-two-lane-delivery-doc.test.mjs"
+      - "sponsor-two-lane-lane-classifier.test.ts"

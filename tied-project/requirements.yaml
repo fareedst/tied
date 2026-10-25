@@ -3463,6 +3463,44 @@ REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK:
       - "ARCH-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
     implementation:
       - "IMPL-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+REQ-TIED_SPONSOR_TWO_LANE_DELIVERY:
+  category: "Methodology"
+  description: "Normative charter and selection lanes for sponsor Q&A with mid-lane warn-only deferral and selection_evidence rule."
+  detail_file: "requirements/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml"
+  name: "Sponsor two-lane delivery"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      - "REQ-TIED_SPONSOR_QUESTIONS"
+    related_to:
+      - "REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Checklist MD/YAML parity at five slugs"
+      criterion_id: "SC-TLD-003"
+      metric: "sponsor-two-lane-checklist-parity.test.ts"
+    - criterion: "Lane classifier and sponsor-questions extensions"
+      criterion_id: "SC-TLD-004"
+      metric: "sponsor-two-lane-lane-classifier.test.ts"
+    - criterion: "sponsor-two-lane-delivery.md linked from client-development-index"
+      criterion_id: "SC-TLD-002"
+      metric: "sponsor-two-lane-delivery-doc.test.mjs"
+    - criterion: "TIED consistency and pseudocode Layer B/C"
+      criterion_id: "SC-TLD-005"
+      metric: "tied_validate_consistency + pseudocode_validate"
+    - criterion: "Vocab routing for charter lane, selection lane, mid-lane deferral"
+      criterion_id: "SC-TLD-001"
+      metric: "validate_vocab_index.rb"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    implementation:
+      - "IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    tests:
+      - "sponsor-two-lane-checklist-parity.test.ts"
+      - "sponsor-two-lane-lane-classifier.test.ts"
 REQ-TIED_STORE_BUNDLE_GIT_POLICY:
   category: "Infrastructure"
   description: "Align TIED store repo git policy with two-folder model — track tied-bundle corpus except working/ and install.json; remove client-style whole-tree tied-bundle/ ignore; migrate tracked local working to fixtures or committed project evidence."

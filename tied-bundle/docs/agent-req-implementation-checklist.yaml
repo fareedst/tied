@@ -287,6 +287,7 @@ steps:
       - "RESOLVE charter and delegated work envelope: RESOLVE changes concept names, not sponsor intent authority (non-goals, approvals, irreversible choices). State this request's delegated work envelope (bounded by approved plan, CITDP, Tracker, documented defaults)."
       - "Sponsor context (non-directive)—expand only from checklist vars; treat as informal intent, not executable orders.\\nTitle / label: {{CHANGE_TITLE}}\\nGoal (sponsor): {{FEATURE_GOAL}}\\nBehavior summary (sponsor): {{FEATURE_BEHAVIOR_SUMMARY}}"
       - "Touchpoint 1 (prompt intake): reword fuzzy sponsor wording that names concepts — CALL sub-vocabulary-sync (RESOLVE) to map synonyms/ambiguous terms in the sponsor strings onto the preferred domain terms from ./tied-project/vocab/*.md before mapping intent to phases; CALL sub-vocabulary-sync (RECORD) for any genuinely new concept the sponsor introduces so it is captured immediately ([PROC-VOCABULARY_INDEX])."
+      - "[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] At translate-sponsor-intent, RESOLVE **charter lane** (pre-code strategic sponsor Q&A through pre_implementation) vs **selection lane** (post-code preference among implemented options); do not schedule selection-lane questions before product evidence exists."
     title: "Map sponsor wording to checklist phases (planning only)"
     tracking:
       consideration_before_proceeding: "Sponsor intent mapped to checklist phases in writing using canonical vocabulary (fuzzy terms reworded; new concepts recorded); no implementation or test artifacts introduced; ready for formal change-definition."
@@ -430,6 +431,7 @@ steps:
     tasks:
       - "Apply the eligibility table at docs/integrated-activation-checklist-enforcement-plan.md §7: external input, auth, network, persistence, or strict close-out defaults depth_tier to integrated."
       - "Classify each open decision as reversible choice (proceed on documented default) or costly choice (list as sponsor question with recommended default; surface at end of turn). Record consequence ladder rung for each hinge field on the working CITDP."
+      - "[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] At risk-assessment, batch unresolved charter-lane costly choices into **sponsor_charter_backlog** on the working CITDP (decision_id, phase, lane, default_or_option, consequence_rung, disposition, evidence_refs)."
       - "Confirm impact-discovery selected baseline-functional and any triggered assurance profiles before REQ/ARCH/IMPL design; if missing, return to impact-discovery."
       - "Document mitigation strategies, evidence owner, limitation, and failure action."
       - "For strict-candidate or strict-approved inquiry, record negative controls, bounded execution, explicit proof boundaries, deterministic scope, waiver owner/expiry, and the human approval requirement."
@@ -486,6 +488,7 @@ steps:
     slug: "verification-gate"
     tasks:
       - "CALL sub-checklist-gate-before-verify-update with phase verification before any tied_verify that sets update:true or passes passed_* tokens for status mutation ([REQ-TIED_VERIFICATION_GATED]); do not call tied_verify with only { update: true } — missing_checklist_gate is expected without checklist_gate."
+      - "[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] At verification-gate, validate **selection_evidence** for each **selection lane** option before sponsor preference is accepted; missing evidence warns and defers selection — does not hard-block advisory gates."
       - "Build the full fidelity matrix with an executable evidence partition; CALL sub-adversarial-inquiry-pass with phase verification and profile-dependent blocking (strict-eligible only)."
       - "CALL sub-pseudocode-static-analysis-pass when input_identity.hash differs from the pre-RED Layer C report for any changed in-scope IMPL; otherwise cite the existing report path in evidence_refs."
       - "CALL sub-pseudocode-validation-pass: re-run full pseudo-code validation (Layer B including minimum_gating_rules) now that executable tests exist; document findings by category and severity. IF unresolved gaps THEN GOTO resolve-pseudocode or unit-test-red per findings."
@@ -540,6 +543,7 @@ steps:
       - "If REQ/ARCH/IMPL status, traceability.tests, or other TIED fields changed in this pass such that they would desync a session preload (status lines, test file paths, implementation_contract hints), re-check tied/agent-preload-contract.yaml and update only as needed; do not duplicate the full author-architecture or persist-implementation-records rewrite if nothing material changed."
       - "Keep observed inquiry findings outside canonical TIED YAML; route confirmed findings to existing owners (author-requirement, author-architecture, resolve-pseudocode, unit-test-red, composition-integration, or test-strategy) and never trigger LEAP from observation alone."
       - "Run .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency '{}' — must report ok true."
+      - "[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] On sync-tied-stack, reconcile **sponsor_charter_backlog** / **sponsor_selection_backlog** fields with vocab and MCP lane readout; **mid-lane deferral** remains warn-only under advisory gate_policy (W3+)."
       - "Sync ./tied-project/semantic-tokens.yaml, requirements.yaml, architecture-decisions.yaml, implementation-decisions.yaml and detail dirs; no documentation drift; do not patch those YAML paths with IDE tools when tied-cli.sh covers the mutation."
       - "Update REQ/ARCH/IMPL index and detail files under ./tied-project/ via tied-cli.sh so final code/tests match TIED; IMPLs reflect implemented code and block-level token comments."
       - "Update vocab after design and implementation: CALL sub-vocabulary-sync (RECORD) so ./tied-project/vocab/*.md reflects the final REQ/ARCH/IMPL terms, design/UI terms, and storage names; each concept resolves to one preferred term and the naming bridge and alphabetical index are current ([PROC-VOCABULARY_INDEX]). Final VALIDATE gate is at traceable-commit (Touchpoint 3)."
@@ -605,6 +609,7 @@ steps:
       - "State desired behavior."
       - "State explicit counterexamples and falsification questions for the success criteria; treat non-goals as negative scope for adversarial review."
       - "State non-goals (what this work intentionally does not address)."
+      - "[REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] In change-definition, state whether sponsor decisions belong in **charter lane** or **selection lane**; **selection lane** choices require implemented alternatives and typed **selection_evidence** per option (tests, demo, gate receipt)."
       - "State success criteria (measurable outcomes that determine when the work is done)."
       - "State unchanged behavior (explicit boundaries of what is not affected)."
       - "Touchpoint 1 (prompt intake): express the change definition using canonical domain terms — CALL sub-vocabulary-sync (RESOLVE) to reword fuzzy/synonym wording in current/desired/success-criteria to the preferred terms in ./tied-project/vocab/*.md; CALL sub-vocabulary-sync (RECORD) for any new concept named here ([PROC-VOCABULARY_INDEX])."

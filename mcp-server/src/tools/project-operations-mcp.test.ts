@@ -37,4 +37,27 @@ describe("project operations MCP composition", () => {
     const payload = JSON.parse(result.content[0]?.text ?? "{}") as { questions?: unknown[] };
     assert.ok(Array.isArray(payload.questions));
   });
+
+  it("tied_sponsor_questions returns lane fields for backlog citdp [REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] T-TLD-06", async () => {
+    const result = await toolHandler("tied_sponsor_questions")({
+      citdp: {
+        change_definition: {
+          sponsor_charter_backlog: [
+            {
+              decision_id: "c1",
+              phase: "pre_implementation",
+              lane: "charter",
+              default_or_option: "Scope lock",
+              consequence_rung: 3,
+              disposition: "pending",
+            },
+          ],
+        },
+      },
+    });
+    const payload = JSON.parse(result.content[0]?.text ?? "{}") as {
+      questions?: Array<{ lane?: string }>;
+    };
+    assert.ok(payload.questions?.some((q) => q.lane === "charter"));
+  });
 });

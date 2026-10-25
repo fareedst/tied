@@ -89,6 +89,7 @@ export const projectOperationsMcpTools = [
       inputSchema: z.object({
         project_root: z.string().optional(),
         citdp: z.unknown().optional(),
+        phase: z.string().optional(),
         pending_decisions: z
           .array(
             z.object({
@@ -96,6 +97,8 @@ export const projectOperationsMcpTools = [
               reversibility_evidence: z.string().optional(),
               affects_clients: z.boolean().optional(),
               affects_status: z.boolean().optional(),
+              requires_product_evidence: z.boolean().optional(),
+              reversible_default_documented: z.boolean().optional(),
             }),
           )
           .optional(),
@@ -104,16 +107,20 @@ export const projectOperationsMcpTools = [
     handler: async (args: {
       project_root?: string;
       citdp?: unknown;
+      phase?: string;
       pending_decisions?: Array<{
         description: string;
         reversibility_evidence?: string;
         affects_clients?: boolean;
         affects_status?: boolean;
+        requires_product_evidence?: boolean;
+        reversible_default_documented?: boolean;
       }>;
     }) => {
       const result = extractSponsorQuestions({
         project_root: resolveProjectRoot(args.project_root),
         citdp: args.citdp,
+        phase: args.phase,
         pending_decisions: args.pending_decisions,
       });
       return textContent(prettyCanonicalJson(result));

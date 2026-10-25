@@ -14,6 +14,29 @@ describe("extractSponsorQuestions [REQ-TIED_SPONSOR_QUESTIONS]", () => {
     assert.ok(result.questions.some((q) => q.kind === "costly_decision" && q.rung === 4));
   });
 
+  it("includes lane metadata for CITDP backlog hints [REQ-TIED_SPONSOR_TWO_LANE_DELIVERY] T-TLD-02", () => {
+    const result = extractSponsorQuestions({
+      project_root: process.cwd(),
+      citdp: {
+        change_definition: {
+          sponsor_selection_backlog: [
+            {
+              decision_id: "sel-1",
+              phase: "verification",
+              lane: "selection",
+              default_or_option: "Option A",
+              consequence_rung: 3,
+              disposition: "pending",
+              selection_evidence: [{ kind: "test_id", path: "T-TLD-04" }],
+            },
+          ],
+        },
+      },
+      phase: "verification",
+    });
+    assert.ok(result.questions.some((q) => q.lane === "selection" && q.phase === "verification"));
+  });
+
   it("reports hinge diagnostics for incomplete CITDP", () => {
     const result = extractSponsorQuestions({
       project_root: process.cwd(),

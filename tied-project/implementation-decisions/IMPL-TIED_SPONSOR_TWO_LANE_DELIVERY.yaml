@@ -1,0 +1,40 @@
+IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY:
+  code_locations:
+    files:
+      - description: "CLASSIFY_SPONSOR_DECISION_LANE and related"
+        path: "mcp-server/src/relationship/sponsor-decision-lane.ts"
+      - description: "lane metadata on questions"
+        path: "mcp-server/src/project-operations/sponsor-questions.ts"
+      - description: "mid_lane_sponsor_deferral diagnostic"
+        path: "mcp-server/src/checklist-validator.ts"
+  description: "Four pseudo-code blocks: classify lane, batch charter backlog, validate selection evidence, audit mid-lane deferral."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY-pseudocode.md"
+  implementation_approach:
+    details: []
+    summary: "Pure lane module + checklist adapter + sponsor-questions extension"
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-25"
+      reason: "implementation complete"
+  name: "Sponsor two-lane delivery implementation"
+  related_decisions:
+    composed_with:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    depends_on:
+      - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
+      - "IMPL-TIED_SPONSOR_QUESTIONS"
+    see_also: []
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    requirements:
+      - "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY"
+    tests:
+      - "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts"
+      - "mcp-server/src/checklist-validator.test.ts"
+      - "mcp-server/src/project-operations/sponsor-questions.test.ts"
+      - "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts"
+      - "mcp-server/src/tools/project-operations-mcp.test.ts"
+      - "tools/bootstrap/lib/sponsor-two-lane-delivery-doc.test.mjs"
