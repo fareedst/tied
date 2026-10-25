@@ -2279,6 +2279,15 @@ IMPL-TIED_CLEAR_WORKSPACE_SKILL:
   detail_file: "implementation-decisions/IMPL-TIED_CLEAR_WORKSPACE_SKILL.yaml"
   name: "Clear-workspace skill bootstrap"
   status: "Active"
+IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
+  detail_file: "implementation-decisions/IMPL-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
+  name: "mcp-base-path module and tied-cli env resolver"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+    requirements:
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
 IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS:
   cross_references:
     - "ARCH-TIED_CLIENT_BOOTSTRAP_SKILLS"

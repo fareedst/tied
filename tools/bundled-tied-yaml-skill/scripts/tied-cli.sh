@@ -71,14 +71,28 @@ if [[ "${ARGS_JSON}" == @* ]]; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# Client project root (four levels up from .cursor/skills/tied-yaml/scripts); used for TIED_BASE_PATH default.
+# Script anchor (linked install: TIED store path); not used as TIED_BASE_PATH authority.
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
-: "${TIED_BASE_PATH:=$REPO_ROOT/tied}"
-if [[ ! -d "${TIED_BASE_PATH}" && -d "${REPO_ROOT}/tied-project" ]]; then
-  TIED_BASE_PATH="${REPO_ROOT}/tied-project"
+# [IMPL-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_CLI_MCP_JSON_BASE_PATH] Resolve from client cwd + mcp.json unless env override set.
+if [[ -z "${TIED_BASE_PATH:-}" ]]; then
+  RESOLVER_JS="${SCRIPT_DIR}/resolve-tied-cli-env.mjs"
+  if [[ ! -f "${RESOLVER_JS}" ]]; then
+    echo "ERROR: Missing ${RESOLVER_JS} (companion to tied-cli.sh)." >&2
+    exit 1
+  fi
+  _TIED_CLI_ENV_EXPORTS="$(
+    node "${RESOLVER_JS}" 2>&1
+  )" || {
+    echo "${_TIED_CLI_ENV_EXPORTS}" >&2
+    exit 1
+  }
+  # shellcheck disable=SC1090
+  eval "${_TIED_CLI_ENV_EXPORTS}"
+  unset _TIED_CLI_ENV_EXPORTS
 fi
-: "${TIED_METHOD_ROOT:=${REPO_ROOT}/tied-bundle}"
+
+: "${TIED_METHOD_ROOT:=${TIED_METHODOLOGY_BUNDLE_PATH:-${REPO_ROOT}/tied-bundle}}"
 export TIED_METHOD_ROOT
 
 # TIED methodology repository (mcp-server lives here). tied-install.sh replaces the placeholder below

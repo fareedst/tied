@@ -1,0 +1,94 @@
+CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH:
+  record_identity:
+    change_request_id: "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+    recorded_at: "2026-10-25"
+    title: "CLI resolves TIED_BASE_PATH from client mcp.json (GF-16 proxy feedback)"
+    profile_depth: "minimal"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  change_definition:
+    current_behavior: >
+      tied-cli.sh (and siblings) default TIED_BASE_PATH from REPO_ROOT derived by walking up from
+      the script directory. Linked-install clients point stubs at the TIED store copy of the script,
+      so CLI YAML writes can target the methodology/store tied-project/ while IDE MCP (mcp.json env)
+      targets the client. Quick-start (clone, build-workspace, tied-install) does not set shell env vars.
+    desired_behavior: >
+      From client cwd, resolve project_root (git toplevel or walk-up to repo containing
+      .cursor/mcp.json or .mcp.json), read mcpServers.tied-yaml.env.TIED_BASE_PATH (and
+      TIED_METHODOLOGY_BUNDLE_PATH when present) from those files, validate tied-project layout,
+      and export to the MCP stdio child. Explicit TIED_BASE_PATH env remains an optional override
+      for store/CI only. Missing mcp.json or missing TIED_BASE_PATH in config fails closed with
+      DIAGNOSTIC (no silent wrong-tree writes).
+    non_goals:
+      - "Mutating existing client .cursor/mcp.json (create-only bootstrap policy)"
+      - "Replacing tied_config_get_base_path pre-write check in IDE sessions"
+      - "GF-16 disposable client product changes (REQ-RECONCILIATION_ENGINE)"
+      - "Requiring shell profile exports for normal client operators"
+    success_criteria:
+      - "Bootstrap tests: Cursor .cursor/mcp.json only (no env) → tied_config_get_base_path matches mcp"
+      - "Bootstrap tests: Claude .mcp.json only (no .cursor/mcp.json, no env) → same match"
+      - "When both mcp files exist with different TIED_BASE_PATH, CLI uses Cursor file (documented order)"
+      - "Linked-layout regression: store script path + client cwd → client tied-project/"
+      - "Fail closed when neither mcp file exists or TIED_BASE_PATH missing in tied-yaml env block"
+      - "Store feedback.yaml entry for GF-16 proxy + tied_validate_consistency after REQ/ARCH/IMPL"
+    unchanged_behavior: "IDE MCP per harness still receives env from that harness spawn; CLI reads install-managed mcp JSON (Cursor and/or Claude paths), not harness selection."
+  impact_analysis:
+    modules_or_boundaries: "tools/bootstrap/lib (mcp-base-path.mjs); bundled-tied-yaml-skill scripts; bootstrap tests"
+    tied_tokens_new:
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+      - "IMPL-TIED_CLI_MCP_JSON_BASE_PATH"
+    tied_tokens_affected:
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+    impl_inventory_notes: "Shared read helper mirroring readStoreRootFromProjectMcp; Node resolver invoked from bash entrypoints"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      prior_depth_tier: null
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      research_profile: "read-only"
+      eligibility_triggers_matched: []
+      rationale: "Bootstrap path resolution and shell wiring; no auth, network, or persistence."
+      sub_adversarial_inquiry_pass: "not_applicable"
+      integrated_waiver: null
+      counterexamples:
+        - "CLI still writes store tree when cwd is wrong directory"
+        - "Env override accidentally removed breaks store CI"
+        - "Fail closed blocks store operators without mcp.json"
+      falsification_questions:
+        - "Does git root from subdirectory still find client mcp.json?"
+        - "Does .mcp.json-only Claude layout resolve base path?"
+      disconfirming_observations:
+        - "tied-cli-invoke test passes without TIED_BASE_PATH env"
+      evidence_references:
+        - "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project/working/REQ-RECONCILIATION_ENGINE/evidence/traceable-commit-evidence.md"
+        - "docs/demos/trial-readout-PROMPT-GF-16-1792937222.md"
+        - "tools/bootstrap/lib/layers/store.mjs"
+        - "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+    risks:
+      - id: "RISK-001"
+        summary: "Store repo operators without .cursor/mcp.json hit fail closed"
+        mitigation: "stdd ships .cursor/mcp.json; document store vs client; env override for CI"
+      - id: "RISK-002"
+        summary: "Duplicate JSON parse logic drifts from store.mjs"
+        mitigation: "Single mcp-base-path.mjs module; tests mirror store.test.mjs"
+      - id: "RISK-003"
+        summary: "Hand-edited Cursor vs Claude mcp files diverge on TIED_BASE_PATH"
+        mitigation: "Same read order as store.mjs; bootstrap writes identical base path; test precedence; doc alignment warning"
+  test_strategy:
+    levels:
+      - "L0 unit: readTiedBasePathFromProjectMcp, resolveProjectRootFromCwd"
+      - "L2 composition: invokeTiedCliMcpTool / tied-cli.sh tied_config_get_base_path without env"
+    required_cases:
+      - "Claude-only: repo-root .mcp.json with tied-yaml env, no .cursor/mcp.json"
+      - "Cursor-only: .cursor/mcp.json with tied-yaml env, no .mcp.json"
+      - "cursor .cursor/mcp.json wins over .mcp.json when both set different paths (document order)"
+      - "neither mcp file → non-zero exit + DIAGNOSTIC substring"
+      - "optional env TIED_BASE_PATH overrides mcp.json (CI contract)"
+      - "GF-16 linked layout regression fixture"
+    composition: "Shell invokes Node resolver once before spawnSync MCP client"

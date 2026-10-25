@@ -1,0 +1,42 @@
+REQ-TIED_CLI_MCP_JSON_BASE_PATH:
+  REQ-TIED_CLI_MCP_JSON_BASE_PATH:
+    category: "Tooling"
+    description: "From client cwd, resolve project_root (git toplevel or walk-up to a directory containing .cursor/mcp.json or .mcp.json), read mcpServers.tied-yaml.env.TIED_BASE_PATH (and TIED_METHODOLOGY_BUNDLE_PATH when present), validate tied-project layout, export to MCP stdio child. Explicit TIED_BASE_PATH env remains optional override for store/CI."
+    name: "CLI resolves TIED_BASE_PATH from client mcp.json"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "CLI and IDE MCP share one install-managed config surface"
+        - "Fail closed prevents silent store mutations"
+      problems_solved:
+        - "Mandatory shell export for quick-start operators"
+        - "Wrong-tree CLI YAML writes on linked clients"
+      why: "GF-16 proxy feedback: linked-install tied-cli stubs defaulted base path from script location (store), causing wrong-tree YAML writes while IDE MCP used mcp.json."
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+        - "REQ-TIED_SETUP"
+      related_to:
+        - "REQ-TIED_CLAUDE_HARNESS"
+        - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+        - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+    satisfaction_criteria:
+      - criterion: "Claude-only .mcp.json without .cursor/mcp.json resolves the same way."
+        id: "SC-CLI-MCP-CLAUDE"
+      - criterion: "Cursor-only .cursor/mcp.json without env override resolves base path for tied_config_get_base_path smoke."
+        id: "SC-CLI-MCP-CURSOR"
+      - criterion: "Neither mcp file or missing TIED_BASE_PATH exits before MCP spawn with DIAGNOSTIC citing tied-install/mcp config."
+        id: "SC-CLI-MCP-FAIL-CLOSED"
+      - criterion: "Process env TIED_BASE_PATH overrides mcp.json for store CI."
+        id: "SC-CLI-MCP-ENV-OVERRIDE"
+      - criterion: "When both files exist with different TIED_BASE_PATH, .cursor/mcp.json wins."
+        id: "SC-CLI-MCP-PRECEDENCE"
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+      implementation:
+        - "IMPL-TIED_CLI_MCP_JSON_BASE_PATH"
+      tests:
+        - "tools/bootstrap/lib/mcp-base-path.test.mjs"
+        - "tools/bootstrap/lib/tied-cli-invoke.test.mjs"

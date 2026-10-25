@@ -1,0 +1,12 @@
+feat(bootstrap): resolve tied-cli TIED_BASE_PATH from mcp.json
+
+GF-16 proxy: linked-install tied-cli no longer defaults base path from the
+store script directory; read .cursor/mcp.json then .mcp.json from client cwd
+with optional env override for store CI ([REQ-TIED_CLI_MCP_JSON_BASE_PATH]).
+
+Tokens: REQ-TIED_CLI_MCP_JSON_BASE_PATH, ARCH-TIED_CLI_MCP_JSON_BASE_PATH,
+IMPL-TIED_CLI_MCP_JSON_BASE_PATH. Kaizen feedback fb-mvny01eb-my451g.
+
+Completion signals: machine close-out pass (close_out gate + envelope 0
+blocking); process contract pass (sync-dispositions, reconcile band A);
+adherence ledger pass.

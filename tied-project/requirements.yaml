@@ -2418,6 +2418,26 @@ REQ-TIED_CLEAR_WORKSPACE_SKILL:
       - "client-bootstrap-skills.test.ts"
       - "client-skills-catalog.test.mjs"
       - "prompt-type-skills.test.ts"
+REQ-TIED_CLI_MCP_JSON_BASE_PATH:
+  category: "Tooling"
+  description: "tied-cli and sibling bash entrypoints resolve TIED_BASE_PATH from install-managed .cursor/mcp.json and/or repo-root .mcp.json (same env block as IDE MCP), with optional process env override for store CI. Missing config fails closed before MCP spawn."
+  detail_file: "requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
+  name: "CLI resolves TIED_BASE_PATH from client mcp.json"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+    implementation:
+      - "IMPL-TIED_CLI_MCP_JSON_BASE_PATH"
 REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
   category: "Tooling"
   description: "Cross-CLI contract for operator-facing help: ANSI texture when enabled, plain disable paths, stderr-first human help with chainable stdout for scripting."

@@ -891,6 +891,15 @@ ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY:
   name: "Clear-workspace skill boundary"
   status: "Planned"
   type: "ARCH"
+ARCH-TIED_CLI_MCP_JSON_BASE_PATH:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_CLI_MCP_JSON_BASE_PATH"
+    - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  description: "Harness-agnostic mcp.json base path resolution for CLI."
+  detail_file: "architecture-decisions/ARCH-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
+  metadata:
+    last_updated: "2026-10-25"
 ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
   cross_references:
     - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
@@ -2529,6 +2538,15 @@ IMPL-TIED_CLEAR_WORKSPACE_SKILL:
   name: "Clear-workspace skill bootstrap"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+    - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  description: "mcp-base-path module and tied-cli env resolver wiring."
+  detail_file: "implementation-decisions/IMPL-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
+  metadata:
+    last_updated: "2026-10-25"
 IMPL-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     - "ARCH-TIED_CLIENT_REFRESH_PARITY"
@@ -4457,6 +4475,15 @@ REQ-TIED_CLEAR_WORKSPACE_SKILL:
   name: "Clear-workspace skill"
   status: "Active"
   type: "REQ"
+REQ-TIED_CLI_MCP_JSON_BASE_PATH:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+    - "IMPL-TIED_CLI_MCP_JSON_BASE_PATH"
+  description: "CLI resolves TIED_BASE_PATH from client mcp.json with optional env override."
+  detail_file: "requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
+  metadata:
+    last_updated: "2026-10-25"
 REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
   category: "Tooling"
   cross_references:

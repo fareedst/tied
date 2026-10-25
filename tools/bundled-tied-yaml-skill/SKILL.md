@@ -32,7 +32,7 @@ TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
   .cursor/skills/tied-yaml/scripts/tied-cli.sh yaml_index_list_tokens '{"index":"requirements"}'
 ```
 
-- **`TIED_BASE_PATH`** — absolute path to the project traceability root (**`tied-project/`**; defaults to `<client_repo_root>/tied-project` when present).
+- **`TIED_BASE_PATH`** — absolute path to the project traceability root (**`tied-project/`**). **`tied-cli.sh`** resolves this from install-managed **`.cursor/mcp.json`** then repo-root **`.mcp.json`** (same order as IDE MCP bootstrap) using the **client cwd**; explicit **`export TIED_BASE_PATH`** remains an optional override for store CI. Missing mcp config fails closed with **`DIAGNOSTIC: TIED_CLI_MCP_BASE_PATH`** ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
 - **`TIED_METHOD_ROOT`** — absolute path to the methodology bundle root (**`tied-bundle/`**; defaults to `<client_repo_root>/tied-bundle`). Methodology reads use MCP **`getMethodologyBasePath`** / env **`TIED_METHODOLOGY_BUNDLE_PATH`** when set.
 - **`TIED_REPO_ROOT`** — TIED methodology repository used for **`mcp-server`** (baked by **`tied-install.sh`**; override if the TIED clone moved).
 - **`TIED_MCP_BIN`** — absolute path to **`mcp-server/dist/index.js`** (defaults to `$TIED_REPO_ROOT/mcp-server/dist/index.js`).

@@ -1975,6 +1975,15 @@ ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_CLEAR_WORKSPACE_SKILL_BOUNDARY.yaml"
   name: "Clear-workspace skill boundary"
   status: "Active"
+ARCH-TIED_CLI_MCP_JSON_BASE_PATH:
+  detail_file: "architecture-decisions/ARCH-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
+  name: "Harness-agnostic mcp.json base path resolution for CLI"
+  status: "Draft"
+  traceability:
+    implementation:
+      - "IMPL-TIED_CLI_MCP_JSON_BASE_PATH"
+    requirements:
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
 ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
   detail_file: "architecture-decisions/ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE.yaml"
   name: "CLI operator output texture architecture"

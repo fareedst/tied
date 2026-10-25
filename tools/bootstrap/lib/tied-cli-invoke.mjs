@@ -7,6 +7,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
+import { resolveTiedCliEnvFromCwd } from "./mcp-base-path.mjs";
 
 /**
  * @param {string} storeRoot
@@ -61,6 +62,27 @@ export function invokeTiedCliMcpTool(options) {
     TIED_CLI_TOOL_NAME: options.toolName,
     TIED_CLI_ARGS_JSON: options.argsJson ?? "{}",
   };
+  if (options.env && "TIED_BASE_PATH" in options.env && !options.env.TIED_BASE_PATH?.trim()) {
+    delete env.TIED_BASE_PATH;
+  }
+  if (!env.TIED_BASE_PATH?.trim()) {
+    try {
+      const resolved = resolveTiedCliEnvFromCwd(options.projectRoot, env);
+      env.TIED_BASE_PATH = resolved.TIED_BASE_PATH;
+      if (resolved.TIED_METHODOLOGY_BUNDLE_PATH) {
+        env.TIED_METHODOLOGY_BUNDLE_PATH = resolved.TIED_METHODOLOGY_BUNDLE_PATH;
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      return {
+        ok: false,
+        status: null,
+        stderr: message,
+        stdout: "",
+        error: err instanceof Error ? err : null,
+      };
+    }
+  }
   delete env.TIED_CLI_ARGS_FILE;
   if (fs.existsSync(umbrellaCli)) {
     env.TIED_CLI_UMBRELLA_MCP = "1";

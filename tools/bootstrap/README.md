@@ -211,6 +211,8 @@ After the Cursor path (`.cursor/skills/`, create-only `.cursor/mcp.json`), boots
 
 Cursor **create-only** `.cursor/mcp.json` policy is unchanged — existing client MCP files are never mutated.
 
+**CLI parity:** **`tied-cli.sh`** (and **`tied.sh`** / **`feature-orchestrator.sh`**) read **`TIED_BASE_PATH`** from the same mcp files (**.cursor/mcp.json** first, then **`.mcp.json`**) relative to the operator’s cwd—not from the linked stub’s script directory. Keep both harness files aligned after **`tied-install`**; when both define different paths, the Cursor file wins ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
+
 Contract tests: `node --test tools/bootstrap/lib/claude-harness.test.mjs` (requires built `mcp-server` for MCP prerequisite).
 
 Operator routing (REQ vs FEAT, operating modes): [client-development-index.md](../tied-bundle/docs/client-development-index.md) § **Multi-harness entry matrix (Cursor vs Claude Code)**.

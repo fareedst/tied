@@ -97,11 +97,11 @@ entries:
     type: "methodology_improvement"
   - context:
       links:
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
         - "tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md"
+        - "tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md"
         - "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md"
         - "tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md"
-        - "tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md"
-        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
       observation_kind: "methodology_gap"
       plan_token: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
       related_plan_tokens:
@@ -117,4 +117,14 @@ entries:
     id: "fb-mvmmq5pl-dxzvb6"
     promotion_status: "promotion_pending"
     title: "Treat workspace cleanup as part of close-out, not a separate management step"
+    type: "methodology_improvement"
+  - context:
+      client_cohort: "1792937222-gf-16"
+      client_evidence: "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project/working/REQ-RECONCILIATION_ENGINE/evidence/traceable-commit-evidence.md"
+      tied_version: "4.0.0"
+      trial_readout: "docs/demos/trial-readout-PROMPT-GF-16-1792937222.md"
+    created_at: "2026-10-25T14:48:13.331Z"
+    description: "Greenfield trial PROMPT-GF-16 (disposable client 1792937222) showed tied-cli YAML writes targeting the TIED store tied-project/ while IDE MCP (via .cursor/mcp.json env) targeted the client. Root cause: linked-install stubs run store copy of tied-cli.sh which defaulted TIED_BASE_PATH from script-dir REPO_ROOT (store), not client cwd + mcp.json. Countermeasure tracked as REQ-TIED_CLI_MCP_JSON_BASE_PATH."
+    id: "fb-mvny01eb-my451g"
+    title: "GF-16 proxy: tied-cli must read TIED_BASE_PATH from client mcp.json"
     type: "methodology_improvement"

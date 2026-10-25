@@ -1,0 +1,28 @@
+ARCH-TIED_CLI_MCP_JSON_BASE_PATH:
+  ARCH-TIED_CLI_MCP_JSON_BASE_PATH:
+    decision: "Centralize JSON read and project_root resolution in tools/bootstrap/lib/mcp-base-path.mjs; bash entrypoints invoke a thin Node resolver from bundled-tied-yaml-skill/scripts before MCP spawn. Read order matches store.mjs: .cursor/mcp.json then .mcp.json; first file with tied-yaml.env.TIED_BASE_PATH wins (Cursor precedence when both differ). Process env TIED_BASE_PATH overrides for CI."
+    implementation_approach:
+      details:
+        - "Optional TIED_METHODOLOGY_BUNDLE_PATH forwarded when present"
+        - "readTiedBasePathFromProjectMcp mirrors tied-yaml env block"
+        - "resolveProjectRootFromCwd: git rev-parse --show-toplevel when inside repo, else walk parents for mcp files"
+      summary: "Node resolver + shell eval hook; fail-closed diagnostics; layout validation via resolveTiedLayout."
+    name: "Harness-agnostic mcp.json base path resolution for CLI"
+    rationale:
+      benefits:
+        - "No runtime harness selection"
+        - "Single module tested alongside bootstrap"
+      problems_solved:
+        - "Script-dir REPO_ROOT misidentifies client on linked stubs"
+      why: "Duplicate ad-hoc REPO_ROOT walk from script dir breaks linked-install; mcp.json is already canonical for IDE MCP."
+    related_decisions:
+      depends_on:
+        - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
+        - "ARCH-TIED_LAYERED_CLIENT_INSTALL"
+      related_to:
+        - "ARCH-TIED_CLAUDE_HARNESS"
+    traceability:
+      implementation:
+        - "IMPL-TIED_CLI_MCP_JSON_BASE_PATH"
+      requirements:
+        - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"

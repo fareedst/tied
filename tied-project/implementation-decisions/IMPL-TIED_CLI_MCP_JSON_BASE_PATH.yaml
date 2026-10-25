@@ -1,0 +1,27 @@
+IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
+  IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
+    code_locations:
+      files:
+        - description: "readTiedBasePathFromProjectMcp, resolveProjectRootFromCwd, resolveTiedCliEnvFromCwd"
+          path: "tools/bootstrap/lib/mcp-base-path.mjs"
+        - description: "Same env contract"
+          path: "tools/bundled-tied-yaml-skill/scripts/feature-orchestrator.sh"
+        - description: "Same env contract"
+          path: "tools/bundled-tied-yaml-skill/scripts/tied.sh"
+        - description: "Shell-facing CLI emitting export lines"
+          path: "tools/bundled-tied-yaml-skill/scripts/resolve-tied-cli-env.mjs"
+        - description: "Source resolver before MCP spawn"
+          path: "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+      functions:
+        - "readTiedBasePathFromProjectMcp"
+        - "resolveProjectRootFromCwd"
+        - "resolveTiedCliEnvFromCwd"
+    name: "mcp-base-path module and tied-cli env resolver"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+      requirements:
+        - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      tests:
+        - "tools/bootstrap/lib/mcp-base-path.test.mjs"
+        - "tools/bootstrap/lib/tied-cli-invoke.test.mjs"
