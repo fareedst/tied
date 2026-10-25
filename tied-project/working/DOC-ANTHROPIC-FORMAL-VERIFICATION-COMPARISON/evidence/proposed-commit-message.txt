@@ -1,0 +1,18 @@
+docs(comparisons): Anthropic formal verification × TIED Waves 1–2
+
+Add PDF appendix capture and Wave 2 agent-management analysis mapping
+Anthropic LLM-scale formal verification (binary Rocq proofs, Verus
+interpreter, tests vs proofs) to TIED proof boundaries and checklist
+authority. Allowlist both comparison paths; record working plan/evidence
+under DOC-ANTHROPIC-FORMAL-VERIFICATION-COMPARISON. No REQ/ARCH/IMPL
+mint; metrics Anthropic-reported / not_measured in stdd.
+
+Completion signals: machine close_out blocked (DOC outreach tracker);
+process contract pass (doc verification); adherence ledger not_run.
+
+Staging map:
+- docs/comparisons/anthropic-llm-formal-verification-appendix.md
+- docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md
+- .gitignore
+- CHANGELOG.md
+- tied-project/working/DOC-ANTHROPIC-FORMAL-VERIFICATION-COMPARISON/

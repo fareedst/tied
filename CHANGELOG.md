@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Anthropic LLM formal verification appendix × TIED (Waves 1–2)** — [anthropic-llm-formal-verification-appendix.md](docs/comparisons/anthropic-llm-formal-verification-appendix.md) capture and [anthropic-llm-formal-verification-vs-tied-agent-management.md](docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md) agent-management analysis (binary proofs, Verus interpreter, tests vs proofs, proof boundaries). `.gitignore` allowlist; working evidence under [DOC-ANTHROPIC-FORMAL-VERIFICATION-COMPARISON](tied-project/working/DOC-ANTHROPIC-FORMAL-VERIFICATION-COMPARISON/). No REQ/ARCH/IMPL mint; outcomes **Anthropic-reported** / **not_measured** in stdd. Machine `close_out` gate blocked (DOC outreach tracker).
+
 ### Changed
 
 - **Store README operator rhythms (PLAN-README-DUAL-RHYTHMS)** — Quick start **configuration rhythm** (clone → `./build-workspace.sh` → `./tied-install.sh` → MCP confirm) and new **Compact feature rhythm** H3 (`/add-feature` → `/refine-plan` → `/build-plan` → `/close-out`); [client-development-index.md](tied-bundle/docs/client-development-index.md) scenario row; extended [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts). Plan: [PLAN-refine-pass1.md](tied-project/working/PLAN-README-DUAL-RHYTHMS/PLAN-refine-pass1.md). Machine close-out gate N/A (doc-only).

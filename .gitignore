@@ -29,6 +29,8 @@ docs/comparisons/*
 !docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md
 !docs/comparisons/open-ontologies-repository.md
 !docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md
+!docs/comparisons/anthropic-llm-formal-verification-appendix.md
+!docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md
