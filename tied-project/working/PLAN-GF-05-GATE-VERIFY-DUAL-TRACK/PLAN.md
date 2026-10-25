@@ -3,13 +3,14 @@
 | Field | Value |
 | --- | --- |
 | **Parent token** | `PLAN-GF-05-GATE-VERIFY-DUAL-TRACK` |
-| **Active track (refine pass 2)** | **`SCOPE-VERIFY-GATE-COMMON` (Track B)** |
-| **Deferred track** | `SCOPE-CLOSE-OUT-EXT` (Track A) — out of scope until separate refine/build-plan |
+| **Active track (refine pass 3)** | **`SCOPE-CLOSE-OUT-EXT` (Track A)** |
+| **Closed track** | `SCOPE-VERIFY-GATE-COMMON` (Track B) — commit `ddb7ae14`, close_out `close-out-gf05-track-b-20261025` |
+| **Track A CITDP** | [`CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml`](CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml) |
 | **Track B CITDP** | [`CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml`](CITDP-PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON.yaml) |
 | **Parent CITDP** | [`CITDP-PLAN-GF-05-GATE-VERIFY-DUAL-TRACK.yaml`](CITDP-PLAN-GF-05-GATE-VERIFY-DUAL-TRACK.yaml) |
 | **Tracker** | [`checklist-tracker.yaml`](checklist-tracker.yaml) |
 | **Source feedback** | `fb-mvo18hye-i6x5fq` · **PROMPT-GF-05** · client `1792944114-gf-05` |
-| **LEAP proposal** | `lp-2026-10-25T16-23-32-863Z-c284570f3c0b` (pending) |
+| **LEAP proposal** | `lp-2026-10-25T16-23-32-863Z-c284570f3c0b` (**applied**) |
 | **Depth** | `minimal` · `gate_policy`: **advisory** |
 
 ---
@@ -125,6 +126,100 @@ Evidence: [`evidence/build-plan-evidence.md`](evidence/build-plan-evidence.md)
 
 ---
 
+## 7. Refine (Touchpoint 1 — RESOLVE) — Track A (pass 3)
+
+| Sponsor term | Resolved meaning |
+| --- | --- |
+| **Track A** | **`SCOPE-CLOSE-OUT-EXT`** — `run-close-out-gates.mjs` + close-out operator surface; **not** global verify checklist (Track B) |
+| **Persist** | Call **`persistGateDecisionReceipt`** after `validateChecklistGate` for **`close_out`**; default **on**, **`--no-persist-gate-receipt`** opt-out |
+| **Receipt path** | `tied-project/working/{request_token}/gates/close_out-*.json` (`checklist-gate-receipt.v1`) + ledger append |
+| **Operator sequence** | Unchanged: `--envelope-blocking --sync-dispositions --reconcile` then expect **on-disk** close_out receipt when persist enabled |
+
+**Vocabulary PRELOAD:** [feedback-to-tied.md](../../vocab/feedback-to-tied.md), [tied-yaml-mcp.md](../../vocab/tied-yaml-mcp.md), [leap-proposal-queue.md](../../vocab/leap-proposal-queue.md).
+
+**Consequence ladder**
+
+| Choice | Ladder | Disposition |
+| --- | --- | --- |
+| Track A refine/build (this pass) | **Reversible** | **Accepted** |
+| Default persist **off** | **Costly** | **Reject** |
+| Persist all gate phases in one wave | **Reversible** | **Defer** — close_out only in build-plan |
+| Merge with Track B CITDP | **Costly** | **Reject** |
+
+**Depth / gates:** `depth_tier: minimal`, `gate_policy: advisory`, `sub_adversarial_inquiry_pass: not_applicable`.
+
+---
+
+## 8. Plan (CITDP — Track A build-plan map)
+
+### 8.1 File touch list (normative)
+
+| SC id | Path | Change |
+| --- | --- | --- |
+| SC-RUNNER-PERSIST | `tools/bootstrap/templates/run-close-out-gates.mjs` | After gate validate, **`persistGateDecisionReceipt`** for `close_out` (default); `--no-persist-gate-receipt`; document in `--help` |
+| SC-RUNNER-PERSIST | `mcp-server/dist/gate-receipt.js` | Import from dist in runner (existing build) |
+| SC-DOC-CLOSE-OUT | `tools/bootstrap/templates/run-close-out-gates.mjs` header comment and/or `prompt-shared/tied-close-out-process.md` | State default close_out receipt on disk |
+| SC-TEST-CONTRACT | `mcp-server/src/e2e/` or `tools/bootstrap/` test | RED: runner creates `gates/close_out-*.json` |
+
+### 8.2 IMPL pseudo-code
+
+No new IMPL token in refine pass. Build-plan may reference **`IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT`** / **`persistGateDecisionReceipt`** only if sidecar update required.
+
+### 8.3 Test strategy
+
+| Test | Asserts |
+| --- | --- |
+| New Node test `[PLAN-GF-05-SCOPE-CLOSE-OUT-EXT]` | Temp `project_root` + minimal tracker/citdp; runner writes `close_out-*.json` |
+| Same or flag test | `--no-persist-gate-receipt` skips new file |
+| Existing gate-receipt tests | Still green |
+
+### 8.4 Build-plan waves (Track A)
+
+| Wave | Action |
+| --- | --- |
+| 0 | `pre_implementation` gate (receipt under `gates/`) |
+| 1 | RED runner persistence test |
+| 2 | GREEN: `run-close-out-gates.mjs` + docs |
+| 3 | Persist CITDP to `tied-project/citdp/`; update parent dual-track CITDP Track A note |
+| 4 | `@close-out` scoped Track A or traceable commit |
+
+---
+
+## 9. Implement boundary (Track A)
+
+| Refine (pass 3) | `@build-plan` |
+| --- | --- |
+| Track A CITDP + PLAN §8 + tracker `request: PLAN-GF-05-SCOPE-CLOSE-OUT-EXT` | Waves 0–4 |
+| `pre_implementation` allowed | Receipt [`pre_implementation-2026-10-25T16-42-21-321Z.json`](gates/pre_implementation-2026-10-25T16-42-21-321Z.json) |
+| No runner code yet | §8.1 |
+
+---
+
+## 10. Gate receipts (refine-plan pass 3 — Track A)
+
+| Gate | Result | Receipt |
+| --- | --- | --- |
+| `pre_implementation` | **allowed: true** (minimal) | [`pre_implementation-2026-10-25T16-42-21-321Z.json`](gates/pre_implementation-2026-10-25T16-42-21-321Z.json) |
+
+Evidence: [`evidence/refine-plan-risk-assessment-evidence-track-a.md`](evidence/refine-plan-risk-assessment-evidence-track-a.md) · [`evidence/session-handoff-refine-track-a.md`](evidence/session-handoff-refine-track-a.md)
+
+---
+
+## 11. Build-plan (Track A — 2026-10-25)
+
+| Wave | Status |
+| --- | --- |
+| 1 RED | **done** — `gf05-close-out-runner-persist.test.ts` |
+| 2 GREEN | **done** — `run-close-out-gates.mjs`, `tied-close-out-process.md` |
+| 3 persist CITDP | **done** — `tied-project/citdp/CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml` |
+| verification gate | **allowed: true** (minimal, scoped tests) |
+
+Evidence: [`evidence/build-plan-evidence-track-a.md`](evidence/build-plan-evidence-track-a.md)
+
+**Close-out:** **done** — `close-out-gf05-track-a-20261025`; [`evidence/close-out-handoff.md`](evidence/close-out-handoff.md).
+
+---
+
 ## Session handoff
 
-Track B **closed**. Optional: LEAP approve/mark applied; Track A refine when ready.
+Track A **build-plan complete**. Track B **closed** (`ddb7ae14`). Next: **`@close-out track a`** (optional scoped commit).

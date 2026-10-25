@@ -11,6 +11,10 @@
  *     --citdp-path working/REQ-EXAMPLE/CITDP-wave.yaml \
  *     --phase close_out \
  *     --run-id close-out-run-20260910
+ *
+ * For phase close_out, persists checklist-gate-receipt.v1 under the request working
+ * gates/ directory by default (see defaultGateReceiptPersistencePaths). Pass
+ * --no-persist-gate-receipt to skip the on-disk receipt (stdout summary unchanged).
  */
 
 import { mkdirSync, readFileSync, readdirSync, existsSync, writeFileSync } from "node:fs";
@@ -54,6 +58,7 @@ Options:
   --reconcile               Run tied_adherence_reconcile_run (read-only) before gates
   --rebuild-envelope-only   Build/validate envelope only; skip gate validate
   --skip-manifest           Skip quality evidence manifest collection
+  --no-persist-gate-receipt Skip writing close_out gate receipt JSON (default: persist for close_out)
   --help                    Show this help
 `);
     process.exit(0);
@@ -80,6 +85,7 @@ Options:
     reconcile: argv.includes("--reconcile"),
     rebuildEnvelopeOnly: argv.includes("--rebuild-envelope-only"),
     skipManifest: argv.includes("--skip-manifest"),
+    noPersistGateReceipt: argv.includes("--no-persist-gate-receipt"),
   };
 }
 
@@ -445,6 +451,37 @@ async function main() {
     });
   }
 
+  let gateReceiptPersist = { ok: false, skipped: true, reason: "not_close_out" };
+  if (
+    !args.rebuildEnvelopeOnly
+    && args.phase === "close_out"
+    && !args.noPersistGateReceipt
+  ) {
+    const { persistGateDecisionReceipt } = await import(
+      pathToFileURL(path.join(MCP_DIST, "gate-receipt.js")).href
+    );
+    const { defaultGateReceiptPersistencePaths } = await import(
+      pathToFileURL(path.join(MCP_DIST, "working-root.js")).href
+    );
+    const { gatesDir, ledgerPath } = defaultGateReceiptPersistencePaths(
+      args.projectRoot,
+      args.requestToken,
+    );
+    gateReceiptPersist = persistGateDecisionReceipt({
+      gateResult: gate,
+      phase: args.phase,
+      tracker,
+      citdp,
+      gatesDir,
+      ledgerPath,
+      requestToken: args.requestToken,
+      projectRoot: args.projectRoot,
+      runId: args.runId,
+    });
+  } else if (args.noPersistGateReceipt && args.phase === "close_out") {
+    gateReceiptPersist = { ok: false, skipped: true, reason: "no_persist_flag" };
+  }
+
   const mergedDecision = mergeCloseOutDecision(gate, envelopeValidation);
 
   const summary = {
@@ -462,6 +499,7 @@ async function main() {
       evidence_hydrated: hydrationResult.hydrated?.length > 0,
       hydration_diagnostics: hydrationResult.diagnostics,
     },
+    gate_receipt_persist: gateReceiptPersist,
     envelope: buildResult.ok
       ? {
           ok: envelopeValidation.ok,

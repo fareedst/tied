@@ -20,6 +20,8 @@
    `request_evidence_envelope_validate` with `fail_on_error_gaps: true` on
    `working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json`, or use
    `tools/bootstrap/templates/run-close-out-gates.mjs --envelope-blocking`.
+   For `phase: close_out`, the runner **persists** `checklist-gate-receipt.v1` under the
+   request working `gates/` tree by default (`--no-persist-gate-receipt` to skip).
    At integrated depth, `--envelope-blocking` also applies process-strict validate
    (Wave 6). Completion requires gate `allowed: true` **and** zero blocking
    envelope gaps (structural errors always; process warn gaps at integrated

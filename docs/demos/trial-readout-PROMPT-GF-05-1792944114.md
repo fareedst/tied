@@ -135,7 +135,7 @@ Separate dimension readout (not a collapsed score). Weights from catalog default
 | 1 | Publish store trial readout + catalog rows | **Done** — this document |
 | 2 | Trim master tracker; sync **`completed`** with close-out slugs including **`traceable-commit`** | **Done (store Track B)** — `PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/checklist-tracker.yaml` |
 | 3 | Populate **`execution_evidence.close_out_evidence`** on subject tracker | **Done (store Track B)** — close_out `close-out-gf05-track-b-20261025` |
-| 4 | Runner default: persist close_out receipts when verify/update follows (**`fb-mvo18hye-i6x5fq`** / LEAP track) | **Open** — Track A (`SCOPE-CLOSE-OUT-EXT`) |
+| 4 | Runner default: persist close_out receipts when verify/update follows (**`fb-mvo18hye-i6x5fq`** / LEAP track) | **Done (store Track A)** — `run-close-out-gates.mjs` + `close-out-gf05-track-a-20261025` |
 | 5 | Duplicate **`tied_feedback_add`** for gate friction | **N/A** — proxy row **`fb-mvo18hye-i6x5fq`** already on store |
 
 ---

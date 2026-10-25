@@ -1,0 +1,10 @@
+feat(gf05): persist close_out gate receipt in runner
+
+Track A (PLAN-GF-05-SCOPE-CLOSE-OUT-EXT): run-close-out-gates.mjs calls
+persistGateDecisionReceipt for close_out by default; --no-persist-gate-receipt
+opt-out; contract tests; close-out process doc note.
+
+Witness: fb-mvo18hye-i6x5fq. Complements Track B ddb7ae14.
+Close-out run_id=close-out-gf05-track-a-20261025.
+
+REQ-TIED_CHECKLIST_GATE_ENFORCEMENT REQ-REQUEST_EVIDENCE_ENVELOPE
