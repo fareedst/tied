@@ -2,7 +2,7 @@
 
 **Scope:** Facilitator publish — PROMPT-GF-05 trial readout  
 **Date:** 2026-10-25  
-**Commit:** `8dba5b816aa11b93c4fc04720c0c073ec2efa157`
+**Commit:** `1d812b8d12695d4e80e76dc911979a454069b2d2`
 
 ## Vocabulary VALIDATE (Touchpoint 3)
 
