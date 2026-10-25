@@ -24,7 +24,7 @@ export function resolveBootstrapMetricsClient(projectRoot, env = process.env) {
   const basename = path.basename(projectRoot);
   const normalized = path.normalize(projectRoot).split(path.sep).join("/");
   const underDevTest = normalized.includes(`/dev/test/${basename}`);
-  const unixSecondsDir = /^\d{10}$/.test(basename);
+  const unixSecondsDir = /^\d{10}(-[a-zA-Z0-9]+)*$/.test(basename);
   if (underDevTest || unixSecondsDir) {
     return basename;
   }

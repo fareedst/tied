@@ -241,6 +241,7 @@ _how_install_matrix() {
   tied-install.sh [OPTS] DIR     no args → help; default --mode linked (stubs + MCP bundle env)
   tied-install.cmd / tied-install.ps1   same dispatch on native Windows (CMD / PowerShell)
   test-new-tied-client           disposable factory via tied-install linked
+  test-new-tied-client --tag gf-001   id/dir suffix: <epoch>-gf-001 under TIED_TEST_ROOT
   tied-install --migrate-layout  brownfield layout migration (idempotent)
   tied-install --migrate-layout --store --dry-run   store p6 git mv plan (no mutation)
   test-new-tied-client --install-mode full
@@ -259,7 +260,7 @@ _how_smoke() {
   _how_header "Feature-orchestration smoke (disposable clients)"
   _how_render_body <<'EOF'
   new-tied-client DIR [SOURCE]   tied-install linked (default) + lint + mcp enable + git init
-  test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp>
+  test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp> or <timestamp>-<tag>
                                  tied-install linked + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git
                                  install flags: how install-matrix

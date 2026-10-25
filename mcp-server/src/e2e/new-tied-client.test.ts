@@ -82,6 +82,18 @@ describe("new-tied-client pipeline", () => {
     assert.match(output, /ok/);
   });
 
+  it("parseNewTiedClientArgs handles --tag with disposable [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    const output = runBootstrapModuleEval(`
+      import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";
+      const ok = parseNewTiedClientArgs(["--disposable", "--tag", "gf-001"], {});
+      if (ok.tag !== "gf-001" || !ok.disposable) throw new Error("tag disposable");
+      const bad = parseNewTiedClientArgs(["--tag", "x"], {});
+      if (!bad.error) throw new Error("expected error without disposable");
+      console.log("ok");
+    `);
+    assert.match(output, /ok/);
+  });
+
   it("parseNewTiedClientArgs handles disposable and skip flags [IMPL-TIED_FILES]", () => {
     const output = runBootstrapModuleEval(`
       import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";
@@ -371,6 +383,36 @@ describe("new-tied-client integration", () => {
     assert.match(output, /ok/);
   });
 
+  it("runs disposable CLI with --tag suffix on directory name [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    const testRoot = path.join(tempDir, "disposable-tag-root");
+    fs.mkdirSync(testRoot, { recursive: true });
+
+    const cli = path.join(repoRoot, "tools", "bootstrap", "new-tied-client.mjs");
+    const output = spawnSync(
+      process.execPath,
+      [
+        cli,
+        "--disposable",
+        "--tag",
+        "gf-001",
+        "--test-root",
+        testRoot,
+        "--skip-mcp-enable",
+        "--skip-git",
+      ],
+      {
+        cwd: repoRoot,
+        encoding: "utf8",
+        env: { ...process.env, TIED_REPO_ROOT: repoRoot },
+      },
+    );
+
+    assert.strictEqual(output.status, 0, output.stderr || output.stdout);
+    const entries = fs.readdirSync(testRoot);
+    assert.strictEqual(entries.length, 1);
+    assert.match(entries[0], /^\d{10}-gf-001$/, `expected epoch-gf-001 dir, got ${entries[0]}`);
+  });
+
   it("runs disposable CLI with skip flags [IMPL-TIED_FILES]", () => {
     const testRoot = path.join(tempDir, "disposable-root");
     fs.mkdirSync(testRoot, { recursive: true });
@@ -493,5 +535,47 @@ describe("new-tied-client integration", () => {
     };
     assert.strictEqual(cursorMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
     assert.strictEqual(claudeMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
+  });
+
+  it("disposable --tag sets MCP metrics client to tagged basename [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS] [IMPL-TIED_FILES]", () => {
+    const testRoot = path.join(tempDir, "metrics-tag-root");
+    fs.mkdirSync(testRoot, { recursive: true });
+
+    const cli = path.join(repoRoot, "tools", "bootstrap", "new-tied-client.mjs");
+    const output = spawnSync(
+      process.execPath,
+      [
+        cli,
+        "--disposable",
+        "--tag",
+        "trial-01",
+        "--test-root",
+        testRoot,
+        "--skip-mcp-enable",
+        "--skip-git",
+        "--skip-onboarding-audit",
+        "--skip-lint",
+      ],
+      {
+        cwd: repoRoot,
+        encoding: "utf8",
+        env: {
+          ...process.env,
+          TIED_REPO_ROOT: repoRoot,
+          TIED_MCP_COLLECT_METRICS: "1",
+          TIED_MCP_METRICS_CLIENT: "stdd-dev",
+        },
+      },
+    );
+
+    assert.strictEqual(output.status, 0, output.stderr || output.stdout);
+    const entries = fs.readdirSync(testRoot);
+    assert.match(entries[0], /^\d{10}-trial-01$/);
+    const clientId = entries[0];
+    const clientPath = path.join(testRoot, clientId);
+    const cursorMcp = JSON.parse(
+      fs.readFileSync(path.join(clientPath, ".cursor", "mcp.json"), "utf8"),
+    ) as { mcpServers: { "tied-yaml": { env: Record<string, string> } } };
+    assert.strictEqual(cursorMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
   });
 });

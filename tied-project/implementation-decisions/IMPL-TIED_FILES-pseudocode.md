@@ -612,23 +612,28 @@ procedure RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot):
   RETURN success
 
 
-procedure CREATE_DISPOSABLE_TIED_CLIENT(testRoot, sourceRoot):
+procedure CREATE_DISPOSABLE_TIED_CLIENT(testRoot, sourceRoot, optionalTag):
   # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
-  # How: Allocate testRoot/<unix-seconds> using Math.floor(Date.now()/1000) and run the full new-client pipeline.
+  # How: Allocate testRoot/<clientId> where clientId is unix-seconds or unix-seconds-tag when optionalTag is set; run the full new-client pipeline.
   Contract:
-    INPUT: testRoot; sourceRoot; optional skip flags for lint, MCP enable, git
+    INPUT: testRoot; sourceRoot; optional skip flags for lint, MCP enable, git; optionalTag (letters, digits, hyphens only)
     OUTPUT: disposable client directory path; process exit status
-    DATA: timestamp directory name; bootstrapped client tree
-    CONTROL: default testRoot is %USERPROFILE%/Documents/dev/test or $HOME/Documents/dev/test; timestamp is seconds not milliseconds
-    PRE: testRoot parent is writable; sourceRoot contains bootstrap entry points
-    POST: client directory exists with bootstrapped tied/ layout; stdout prints Disposable TIED client path on success
+    DATA: clientId directory basename (epoch or epoch-tag); bootstrapped client tree
+    CONTROL: default testRoot is %USERPROFILE%/Documents/dev/test or $HOME/Documents/dev/test; epoch is seconds not milliseconds; --tag requires --disposable
+    PRE: testRoot parent is writable; sourceRoot contains bootstrap entry points; optionalTag validates before mkdir
+    POST: client directory exists with bootstrapped tied/ layout; stdout prints Disposable TIED client path with clientId on success
     EFFECTS: File I/O; Process — invokes RUN_NEW_TIED_CLIENT_PIPELINE
-    FAILURE_MODES: UNWRITABLE_TEST_ROOT; PIPELINE_STEP_FAILED
+    FAILURE_MODES: UNWRITABLE_TEST_ROOT; INVALID_DISPOSABLE_TAG; PIPELINE_STEP_FAILED
     TERMINATION: total
   LET timestamp = floor(now_ms / 1000) as decimal string
-  LET clientDir = join(testRoot, timestamp)
-  CALL RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot)
-  PRINT "Disposable TIED client: {testRoot}/{timestamp}"
+  IF optionalTag is set:
+    VALIDATE optionalTag matches ^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$
+    LET clientId = timestamp + "-" + optionalTag
+  ELSE:
+    LET clientId = timestamp
+  LET clientDir = join(testRoot, clientId)
+  CALL RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot, disposable=true)
+  PRINT "Disposable TIED client: {testRoot}/{clientId}"
   RETURN clientDir
 
 

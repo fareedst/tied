@@ -25,6 +25,22 @@ describe("resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]
     assert.equal(label, "1700000001");
   });
 
+  it("uses tagged epoch basename under dev/test [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    const projectRoot = path.join("/Users/me/Documents/dev/test", "1700000000-gf-001");
+    const label = resolveBootstrapMetricsClient(projectRoot, {
+      TIED_MCP_METRICS_CLIENT: "stdd-dev",
+    });
+    assert.equal(label, "1700000000-gf-001");
+  });
+
+  it("uses tagged epoch basename outside dev/test path [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    const projectRoot = path.join("/tmp", "custom-root", "1700000002-trial-01");
+    const label = resolveBootstrapMetricsClient(projectRoot, {
+      TIED_MCP_METRICS_CLIENT: "stdd-dev",
+    });
+    assert.equal(label, "1700000002-trial-01");
+  });
+
   it("honors explicit env override for named project dirs", () => {
     const projectRoot = path.join("/Users/me/projects", "my-app");
     const label = resolveBootstrapMetricsClient(projectRoot, {

@@ -26,7 +26,7 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 
 | `tools/bootstrap/new-tied-client.mjs` | All | Disposable/explicit client factory pipeline (defaults to `tied-install` linked) |
 | `scripts/new-tied-client.cmd` / `.ps1` | Windows | Explicit client dir: bootstrap + lint + MCP + git |
-| `scripts/test-new-tied-client.cmd` / `.ps1` | Windows | `--disposable` under `%USERPROFILE%\Documents\dev\test\<unix-seconds>` |
+| `scripts/test-new-tied-client.cmd` / `.ps1` | Windows | `--disposable` under `%USERPROFILE%\Documents\dev\test\<unix-seconds>` or `<unix-seconds>-<tag>` with `--tag` |
 | `scripts/test-new-claude-tied-client.cmd` / `.ps1` | Windows | Claude-first disposable (`--harness claude` + validation receipt) |
 | `scripts/validate-claude-tied-client.cmd` / `.ps1` | Windows | Re-run Claude validation on an existing client (`CLIENT_DIR` + optional flags) |
 | `scripts/run-tied-claude-client-validation.mjs` | All | Node backend for validate-claude shims |
@@ -48,7 +48,7 @@ PowerShell:
 powershell -ExecutionPolicy Bypass -File .\scripts\test-new-tied-client.ps1
 ```
 
-Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` with bootstrap, lint, **G4 new-client onboarding audit** (`tied-project/working/tied-new-client-audit.v1.json` on two-folder clients; undivided brownfield fallback `working/tied-new-client-audit.v1.json` — [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH](../../tied-project/requirements/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml), [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional ``${CURSOR_CLI_NAME:-agent} mcp enable tied-yaml`` (resolved via `resolveCursorAgentCli`; see env table below), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
+Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` (or `<unix-seconds>-<tag>` when `--tag gf-001` is passed) with bootstrap, lint, **G4 new-client onboarding audit** (`tied-project/working/tied-new-client-audit.v1.json` on two-folder clients; undivided brownfield fallback `working/tied-new-client-audit.v1.json` — [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH](../../tied-project/requirements/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml), [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional ``${CURSOR_CLI_NAME:-agent} mcp enable tied-yaml`` (resolved via `resolveCursorAgentCli`; see env table below), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
 
 | Variable | Role |
 |----------|------|

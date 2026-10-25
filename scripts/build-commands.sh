@@ -384,11 +384,11 @@ alias new-tied-client=new_tied_client
 make_new_tied_client() {
   local test_root="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
   local source_root="${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
-  local dn
-  dn=$(date +%s)
-  mkdir -p "$test_root/$dn"
-  _new_tied_test_client "$test_root/$dn" "$source_root" "$@"
-  printf 'Disposable TIED client: %s/%s\n' "$test_root" "$dn"
+  node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
+    --disposable \
+    --source-root "${source_root}" \
+    --test-root "${test_root}" \
+    "$@"
 }
 alias test-new-tied-client=make_new_tied_client
 alias setx-test-new-tied-client='( set -x; make_new_tied_client ); echo "rc=$?"'
@@ -407,7 +407,8 @@ make_new_claude_tied_client() {
   local source_root="${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
   node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
     --disposable --harness claude --with-agentstream-dry-run \
-    --source-root "${source_root}" --test-root "${test_root}"
+    --source-root "${source_root}" --test-root "${test_root}" \
+    "$@"
 }
 alias test-new-claude-tied-client=make_new_claude_tied_client
 

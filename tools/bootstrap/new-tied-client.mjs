@@ -19,7 +19,8 @@ function usage() {
   sayErr(`usage: new-tied-client.mjs [OPTIONS] [CLIENT_DIR]
 
 Options:
-  --disposable              Create under TIED_TEST_ROOT/<unix-seconds>
+  --disposable              Create under TIED_TEST_ROOT/<unix-seconds> or <unix-seconds>-<tag>
+  --tag SUFFIX              Disposable id suffix (requires --disposable; e.g. gf-001)
   --source-root PATH        TIED repo root (default: bootstrap engine repo root)
   --test-root PATH          Disposable parent (default: %USERPROFILE%\\Documents\\dev\\test)
   --skip-lint               Skip lint step
@@ -76,6 +77,7 @@ export function parseNewTiedClientArgs(argv, env = process.env) {
     withAgentstreamDryRun: undefined,
     withLiveClaude: false,
     clientDir: undefined,
+    tag: undefined,
   };
 
   while (args.length > 0 && args[0].startsWith("-")) {
@@ -83,6 +85,9 @@ export function parseNewTiedClientArgs(argv, env = process.env) {
     switch (flag) {
       case "--disposable":
         options.disposable = true;
+        break;
+      case "--tag":
+        options.tag = args.shift() ?? "";
         break;
       case "--source-root":
         options.sourceRoot = path.resolve(args.shift() ?? "");
@@ -147,6 +152,10 @@ export function parseNewTiedClientArgs(argv, env = process.env) {
   if (args.length > 0) {
     options.clientDir = path.resolve(args[0]);
   }
+  if (options.tag !== undefined && options.tag !== "" && !options.disposable) {
+    sayErr("--tag requires --disposable");
+    options.error = true;
+  }
   return options;
 }
 
@@ -192,6 +201,7 @@ function main() {
     const result = runDisposableClient({
       ...common,
       testRoot: parsed.testRoot ?? resolveTestRoot(env),
+      tag: parsed.tag,
     });
     process.exit(result.ok ? 0 : result.code ?? 1);
   }

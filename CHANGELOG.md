@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Disposable factory `--tag` suffix ([REQ-TIED_SETUP], [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM], [IMPL-TIED_FILES])** — `test-new-tied-client --tag gf-001` creates `$TIED_TEST_ROOT/<epoch>-gf-001`; Bash factory delegates to Node `--disposable` (Windows parity); `resolveBootstrapMetricsClient` treats tagged epoch basenames like plain unix-second dirs. Proof: bootstrap unit tests + `new-tied-client` e2e; manual smoke `1792898539-gf-001`. Minimal close-out `PLAN-DISPOSABLE-CLIENT-TAG` (machine gate N/A; no new REQ index).
+
 - **Close-out Wave 5 completion pass (LEAP `lp-2026-10-24T16-33-13-575Z-707c63d33f60`, Track B)** — [close-out-wave5-completion-pass.md](tools/bundled-prompt-type-skills/prompt-shared/close-out-wave5-completion-pass.md); completion-signals cross-link; [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) close-out recovery procedure. Feedback `fb-mvmmb3lp-723euw` / `PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK`.
 
 - **Close-out scoped workspace hygiene (prompt-shared, [REQ-PROMPT_TYPE_GLOBAL_SKILLS], [REQ-TIED_CLEAR_WORKSPACE_SKILL], [REQ-TIED_GIT_HYGIENE])** — `completion-signals-handoff.md`, `traceable-commit-close-out.md`, `clear-workspace-routing.md`, and `tied-close-out-process.md` define post-REQ workspace clean vs repo-wide drift; `@clear-workspace` documented as router/recovery only. Checklist `traceable-commit` slug notes hygiene receipt and excluded unrelated drift. Feedback `fb-mvmmq5pl-dxzvb6`; plan [PLAN-CLOSE-OUT-WORKSPACE-IN-PASS](tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md).

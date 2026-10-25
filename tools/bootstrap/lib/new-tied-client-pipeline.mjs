@@ -49,10 +49,34 @@ export function unixSecondsTimestamp(nowMs = Date.now()) {
   return Math.floor(nowMs / 1000).toString();
 }
 
-export function createDisposableClientDir(testRoot, nowMs = Date.now()) {
+const DISPOSABLE_TAG_PATTERN = /^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$/;
+
+/** [REQ-TIED_SETUP] [IMPL-TIED_FILES] Letters, digits, and hyphens only (e.g. gf-001). */
+export function validateDisposableTag(tag) {
+  const value = typeof tag === "string" ? tag.trim() : "";
+  if (!value || !DISPOSABLE_TAG_PATTERN.test(value)) {
+    throw new Error(
+      "Invalid --tag: use letters, digits, and hyphens only (example: gf-001)",
+    );
+  }
+  return value;
+}
+
+/** [REQ-TIED_SETUP] [IMPL-TIED_FILES] Directory basename for disposable clients. */
+export function disposableClientBasename(nowMs = Date.now(), tag) {
   const timestamp = unixSecondsTimestamp(nowMs);
-  const clientDir = path.join(testRoot, timestamp);
-  return { clientDir, timestamp };
+  if (tag === undefined || tag === null || tag === "") {
+    return timestamp;
+  }
+  const normalized = validateDisposableTag(tag);
+  return `${timestamp}-${normalized}`;
+}
+
+export function createDisposableClientDir(testRoot, nowMs = Date.now(), tag) {
+  const timestamp = unixSecondsTimestamp(nowMs);
+  const clientId = disposableClientBasename(nowMs, tag);
+  const clientDir = path.join(testRoot, clientId);
+  return { clientDir, clientId, timestamp };
 }
 
 export function prepareClientDirectory(clientDir, { disposable = false } = {}) {
@@ -312,14 +336,26 @@ export function runNewTiedClientPipeline(options) {
 
 export function runDisposableClient(options) {
   const testRoot = options.testRoot ?? resolveTestRoot(options.env);
-  const { clientDir, timestamp } = createDisposableClientDir(testRoot, options.nowMs);
+  let clientDir;
+  let clientId;
+  let timestamp;
+  try {
+    ({ clientDir, clientId, timestamp } = createDisposableClientDir(
+      testRoot,
+      options.nowMs,
+      options.tag,
+    ));
+  } catch (err) {
+    sayErr(err instanceof Error ? err.message : String(err));
+    return { ok: false, code: 1, step: "tag", testRoot };
+  }
   const result = runNewTiedClientPipeline({
     ...options,
     clientDir,
     disposable: true,
   });
   if (result.ok) {
-    sayOk(`Disposable TIED client: ${testRoot}${path.sep}${timestamp}`);
+    sayOk(`Disposable TIED client: ${testRoot}${path.sep}${clientId}`);
   }
-  return { ...result, clientDir, timestamp, testRoot };
+  return { ...result, clientDir, clientId, timestamp, testRoot };
 }
