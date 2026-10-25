@@ -1,10 +1,11 @@
 # PLAN — REQ-TIED_CLI_MCP_JSON_BASE_PATH (refined)
 
 **Linked Cursor plan:** `gf-16_mcp.json_base_path_15f178d8.plan.md`  
-**Prompt type:** refine-plan (pass 2 complete 2026-10-25)  
+**Prompt type:** refine-plan (pass 3 complete 2026-10-25)  
+**Delivery:** **Implemented** — commit `5ba4086e` · close-out [`evidence/close-out-handoff.md`](evidence/close-out-handoff.md)  
 **Tracker:** [`checklist-tracker.yaml`](checklist-tracker.yaml)  
 **CITDP (working):** [`CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml`](CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)  
-**Persist CITDP to `tied-project/citdp/`:** after `@build-plan` implementation
+**CITDP (persisted):** [`../../citdp/CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml`](../../citdp/CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)
 
 ---
 
@@ -15,7 +16,7 @@
 | **Proxy feedback (GF-16)** | Kaizen ingest from client [traceable-commit-evidence](file:///Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project/working/REQ-RECONCILIATION_ENGINE/evidence/traceable-commit-evidence.md) — wrong-tree CLI writes; not a product defect in reconciliation engine |
 | **mcp.json canonical** | `mcpServers["tied-yaml"].env.TIED_BASE_PATH` in `.cursor/mcp.json` and/or repo-root `.mcp.json` as written by [mcp-config.mjs](../../../tools/bootstrap/lib/mcp-config.mjs) |
 | **No client env dependency** | Quick-start path does not require `export TIED_BASE_PATH`; CLI must read the same values IDE MCP receives |
-| **Fail closed** | No mcp.json or no `TIED_BASE_PATH` key → exit before MCP spawn; message cites `tied-install` / mcp config |
+| **Fail closed** | No mcp.json or no `TIED_BASE_PATH` key → exit before MCP spawn; message cites `tied-install` / mcp config (`DIAGNOSTIC: TIED_CLI_MCP_BASE_PATH`) |
 | **Optional env override** | `TIED_BASE_PATH` in process env wins for store CI and explicit operator override only |
 | **project_root** | Git toplevel from cwd when inside a repo; else walk parents until a directory contains `.cursor/mcp.json` or `.mcp.json` |
 | **Cursor MCP config** | `.cursor/mcp.json` — `initializeTiedMcpConfig` (create-only when absent) |
@@ -28,15 +29,15 @@
 
 | Choice | Ladder | Disposition |
 | --- | --- | --- |
-| mcp.json as sole client default | **Locked** (sponsor) | Implement |
-| Fail closed without mcp.json | **Locked** (sponsor) | Implement |
+| mcp.json as sole client default | **Locked** (sponsor) | **Delivered** |
+| Fail closed without mcp.json | **Locked** (sponsor) | **Delivered** |
 | Remove env override entirely | **Costly** | **Reject** — keep for store CI |
 | Auto-create mcp.json on CLI run | **Costly** | **Out of scope** — bootstrap create-only |
 | Divergent paths in Cursor vs Claude mcp files | **Costly misread** if hand-edited | **Mitigate:** read order + test; doc says keep both aligned |
 
 ### 1.1 Dual harness (Cursor and/or Claude)
 
-CLI resolution is **harness-agnostic**: it reads JSON from disk, matching [readStoreRootFromProjectMcp](../../../tools/bootstrap/lib/layers/store.mjs) file order.
+CLI resolution is **harness-agnostic**: it reads JSON from disk, matching [readStoreRootFromProjectMcp](../../../tools/bootstrap/lib/layers/store.mjs) **file order** (that helper reads **`TIED_STORE_ROOT`**, not `TIED_BASE_PATH` — separate concern).
 
 | Client layout | After `tied-install` | CLI behavior |
 | --- | --- | --- |
@@ -51,13 +52,13 @@ CLI resolution is **harness-agnostic**: it reads JSON from disk, matching [readS
 
 **Related tokens (cross-link, do not reopen Implemented status):** `REQ-TIED_HARNESS_PLATFORM_SEAM`, `REQ-TIED_TOOL_INPUT_COMPATIBILITY`, `REQ-TIED_LAYERED_CLIENT_INSTALL`, `REQ-TIED_SETUP`.
 
-**Pollution note:** At refine time, stray `RECONCILIATION_ENGINE` indexes in store `tied-project/` were **not** present in YAML indexes (verify again at build-plan before cleanup step).
+**Pollution note:** Stray `RECONCILIATION_ENGINE` indexes were **not** present at build-plan; no cleanup commit required for this REQ.
 
 ---
 
 ## 2. Plan (CITDP)
 
-### 2.1 Resolution algorithm (normative for IMPL pseudo-code)
+### 2.1 Resolution algorithm (normative — matches as-built)
 
 ```mermaid
 flowchart TD
@@ -72,68 +73,74 @@ flowchart TD
   validateLayout --> spawn
 ```
 
-**Module placement:** `tools/bootstrap/lib/mcp-base-path.mjs` — export `readTiedBasePathFromProjectMcp`, `resolveProjectRootFromCwd`, `resolveTiedCliEnvFromCwd` (bundle path optional read).
+**Module placement (as-built):** [mcp-base-path.mjs](../../../tools/bootstrap/lib/mcp-base-path.mjs) — exports `readTiedYamlEnvFromProjectMcp`, `readTiedBasePathFromProjectMcp`, `resolveProjectRootFromCwd`, `resolveTiedCliEnvFromCwd`, `validateTiedProjectLayout`, `failClosedMissingMcp`; constant `MCP_REL_PATHS`.
 
-**Shell integration:** New script `tools/bundled-tied-yaml-skill/scripts/resolve-tied-cli-env.mjs` (or under bootstrap) prints/export shell-safe assignments; `tied-cli.sh` sources result **before** line 77 REPO_ROOT defaulting (replace script-dir REPO_ROOT as authority for base path).
+**Shell integration (as-built):** [resolve-tied-cli-env.mjs](../../../tools/bundled-tied-yaml-skill/scripts/resolve-tied-cli-env.mjs) imports bootstrap `mcp-base-path.mjs`, emits `export TIED_BASE_PATH=…`, optional `TIED_METHODOLOGY_BUNDLE_PATH`, and **`TIED_CLI_PROJECT_ROOT`**; [tied-cli.sh](../../../tools/bundled-tied-yaml-skill/scripts/tied-cli.sh) `eval`s that output **before** MCP spawn when env override unset. **`REPO_ROOT`** from script dir remains for **MCP binary / methodology store** resolution only.
 
-**Also wire:** `tied.sh`, `feature-orchestrator.sh` (same env contract).
+**Also wired:** `tied.sh`, `feature-orchestrator.sh` (same env contract).
 
 ### 2.2 Impact
 
 | Boundary | Change |
 | --- | --- |
-| Bootstrap lib | New module + tests |
-| Bundled skill scripts | Call resolver; remove silent store fallback |
-| Docs | `tools/bundled-tied-yaml-skill/SKILL.md`, `AGENTS.md`, `tools/bootstrap/README.md` — dual mcp.json surfaces; de-emphasize mandatory export for clients |
-| Feedback | Store `tied_feedback_add` with GF-16 proxy body (build-plan step 0) |
-| Demos | Optional trial-readout follow-up row |
+| Bootstrap lib | `mcp-base-path.mjs` + unit tests |
+| Bundled skill scripts | `resolve-tied-cli-env.mjs` + `tied-cli.sh` resolver hook |
+| Docs | SKILL, AGENTS, `tools/bootstrap/README.md` — dual mcp.json surfaces |
+| Feedback | Store row **`fb-mvny01eb-my451g`** (GF-16 proxy) |
+| Demos | Trial readout row 6 marked **Done** |
 
 ### 2.3 Depth
 
 **minimal** / **advisory** — `sub-adversarial-inquiry-pass` **not_applicable** ([evidence/sub-adversarial-inquiry-pass-na.md](evidence/sub-adversarial-inquiry-pass-na.md)).
 
-### 2.4 Test strategy (RED before code)
+### 2.4 Test strategy (verified)
 
 | File | Cases |
 | --- | --- |
-| `tools/bootstrap/lib/mcp-base-path.test.mjs` | Read from `.cursor/mcp.json`; read from `.mcp.json`; **Claude-only** (`.mcp.json` only); **both present** (precedence); missing both → null; invalid JSON |
-| `tools/bootstrap/lib/tied-cli-invoke.test.mjs` (extend) | Temp client: **Cursor** mcp only, then **Claude-only** mcp; **unset** `TIED_BASE_PATH` env → `tied_config_get_base_path` matches file |
-| Shell or invoke test | `tied-project/` without mcp → failure diagnostic |
-| Fixture | Linked stub path under store + `cwd` = disposable client root |
+| `tools/bootstrap/lib/mcp-base-path.test.mjs` | Cursor file; Claude-only; both-present precedence; missing both; invalid JSON; layout validation |
+| `tools/bootstrap/lib/tied-cli-invoke.test.mjs` | Temp client Cursor / Claude layouts; unset env → `tied_config_get_base_path` matches mcp |
+| Shell / invoke | Fail closed without mcp; linked stub + client cwd regression |
 
-### 2.5 TIED artifacts (before RED — build-plan)
+Evidence: [`evidence/build-plan-verification-evidence.md`](evidence/build-plan-verification-evidence.md).
 
-1. MCP: `REQ-TIED_CLI_MCP_JSON_BASE_PATH`, `ARCH-*`, `IMPL-*` + semantic tokens  
-2. IMPL sidecar: blocks `RESOLVE_TIED_CLI_ENV`, `READ_TIED_BASE_FROM_MCP`, `FAIL_CLOSED_MISSING_MCP` with token comments  
-3. `pseudocode_validate`  
-4. Re-run `tied_checklist_gate_validate` **`pre_implementation`** → expect **allowed: true** after tokens + pseudo-code  
+### 2.5 TIED artifacts
+
+| Artifact | Status |
+| --- | --- |
+| REQ / ARCH / IMPL + semantic tokens | **On disk** — REQ **Implemented** |
+| IMPL sidecar `RESOLVE_TIED_CLI_ENV`, `READ_TIED_BASE_FROM_MCP`, `FAIL_CLOSED_MISSING_MCP` | **Validated** at build-plan |
+| Persisted CITDP under `tied-project/citdp/` | **Yes** |
+| `tied_validate_consistency` / `tied_verify` | **Pass** (build-plan) |
 
 ### 2.6 Plan process tools (refine-plan)
 
 | Check | Result |
 | --- | --- |
-| DAE / CRAP adjunct | Inactive (no diff-scoped CRAP this pass) |
-| BBCE | **not_applicable** (bootstrap seam) |
-| JEV vocab shadow | Advisory keywords: mcp.json, TIED_BASE_PATH, tied-cli |
+| DAE / CRAP adjunct | Inactive |
+| BBCE | **not_applicable** |
+| JEV vocab shadow | **Skipped** (`jev.plan_skills` not enabled) |
 
-**Skill boundary:** Refine pass stops before **Implement** — no `tied_feedback_add`, no REQ token MCP writes, no production code until `@build-plan`.
+**Gate invocation (pass 3):** Use **`tied_gate_check`** with `citdp_path` + `tracker_path` so the validator receives the **inner** CITDP body. Inline JSON with the top-level `CITDP-REQ-*` wrapper yields `malformed_citdp:adversarial_inquiry`.
+
+**Skill boundary:** Refine updates planning artifacts only — no new production code in refine passes.
 
 ---
 
-## 3. Implement (build-plan execution order)
+## 3. As-built delivery (complete)
 
-| Step | Action |
+| Step | Status |
 | --- | --- |
-| 0 | `tied_feedback_add` — methodology_improvement, GF-16 proxy, links to client evidence + trial readout |
-| 1 | Create REQ/ARCH/IMPL via MCP; IMPL sidecar; `pseudocode_validate` |
-| 2 | `pre_implementation` gate → **allowed: true** |
-| 3 | RED: bootstrap unit + composition tests |
-| 4 | GREEN: `mcp-base-path.mjs` + shell wiring |
+| 0 | **`tied_feedback_add`** → **`fb-mvny01eb-my451g`** |
+| 1 | REQ/ARCH/IMPL + sidecar + `pseudocode_validate` |
+| 2 | `pre_implementation` gate → **allowed: true** (build-plan receipt) |
+| 3–4 | RED → GREEN: `mcp-base-path.mjs` + shell wiring |
 | 5 | Docs + CHANGELOG |
-| 6 | Verify stray pollution absent; else MCP delete client tokens from store tree |
-| 7 | Persist CITDP; `lint_yaml`; `tied_validate_consistency`; verification + close_out |
+| 6 | Pollution re-check — none |
+| 7 | CITDP persisted; verify + **`@close-out`** machine close-out |
 
-**Commands (evidence):**
+**Follow-on (separate REQ):** [REQ-GF16-KAIZEN-OUTCOME-CLOSE](../REQ-GF16-KAIZEN-OUTCOME-CLOSE/PLAN.md) — Kaizen outcome record + **`tied_verify`** hygiene on this REQ.
+
+**Commands (regression):**
 
 ```bash
 node --test tools/bootstrap/lib/mcp-base-path.test.mjs
@@ -142,14 +149,15 @@ node --test tools/bootstrap/lib/tied-cli-invoke.test.mjs
 
 ---
 
-## 4. Gate receipts (refine-plan)
+## 4. Gate receipts
 
 | Phase | Result | Receipt |
 | --- | --- | --- |
-| `pre_implementation` (pass 1) | **allowed: true** (minimal) | [`pre_implementation-2026-10-25T14-42-12-822Z.json`](gates/pre_implementation-2026-10-25T14-42-12-822Z.json) |
-| `pre_implementation` (pass 2) | **allowed: true** (minimal) | [`pre_implementation-2026-10-25T14-45-50-757Z.json`](gates/pre_implementation-2026-10-25T14-45-50-757Z.json) |
-
-Refine-stage gate passes with CITDP + Tracker + `sub-adversarial-inquiry-pass` NA evidence. **Re-run after** REQ/ARCH/IMPL and `gate-pseudocode-validation` at build-plan (expect new receipt hash).
+| `pre_implementation` (refine pass 2) | **allowed: true** (minimal) | [`pre_implementation-2026-10-25T14-45-50-757Z.json`](gates/pre_implementation-2026-10-25T14-45-50-757Z.json) |
+| `pre_implementation` (build-plan) | **allowed: true** | [`pre_implementation-2026-10-25T14-52-22-129Z.json`](gates/pre_implementation-2026-10-25T14-52-22-129Z.json) |
+| `verification` (build-plan) | **allowed: true** | [`verification-2026-10-25T14-52-28-858Z.json`](gates/verification-2026-10-25T14-52-28-858Z.json) |
+| `close_out` | **allowed: true** | Envelope blocking gaps **0** — [`evidence/close-out-handoff.md`](evidence/close-out-handoff.md) |
+| `pre_implementation` (refine pass 3) | **allowed: true** | `tied_gate_check` on working CITDP + tracker (2026-10-25) |
 
 ---
 
@@ -174,3 +182,18 @@ Refine-stage gate passes with CITDP + Tracker + `sub-adversarial-inquiry-pass` N
 | Tests | Generic “mcp.json” | Explicit **Claude-only** and **both-present** RED cases |
 | Docs scope | SKILL + AGENTS | + **`tools/bootstrap/README.md`** dual-harness note |
 | Cross-link | Layered install | + **`REQ-TIED_CLAUDE_HARNESS`** |
+
+---
+
+## 7. Delta vs refine pass 2 (pass 3 — post-close-out sync)
+
+| Area | Pass 2 (pre-build) | Pass 3 (as-built) |
+| --- | --- | --- |
+| PLAN posture | Future `@build-plan` steps | **§3 As-built delivery** — commit `5ba4086e`, close-out pass |
+| API surface | Three named exports | **`readTiedYamlEnvFromProjectMcp`**, layout validate, **`TIED_CLI_PROJECT_ROOT`** export |
+| Resolver path | “New script under bootstrap or skill” | **`resolve-tied-cli-env.mjs`** imports **`tools/bootstrap/lib/mcp-base-path.mjs`** |
+| store.mjs | “Mirror file order” | Explicit: same order; **`TIED_STORE_ROOT`** vs **`TIED_BASE_PATH`** |
+| Gates | Refine-only pre_implementation | + verification + close_out + **`tied_gate_check`** invocation note |
+| CITDP persist | “After build-plan” | **Done** — `tied-project/citdp/CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml` |
+
+**Pass 3 trigger:** PLAN still read as pre-implementation while REQ is **Implemented** and machine close-out completed; this pass aligns the linked plan with shipped behavior for handoff and LEAP readers.

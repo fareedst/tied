@@ -1,6 +1,6 @@
 # build-plan verification evidence — REQ-TIED_CLI_MCP_JSON_BASE_PATH
 
-**Date:** 2026-10-25
+**Date:** 2026-10-25 (re-verified at close-out pass 3)
 
 ## Tests
 
@@ -9,21 +9,21 @@ node --test tools/bootstrap/lib/mcp-base-path.test.mjs
 node --test tools/bootstrap/lib/tied-cli-invoke.test.mjs
 ```
 
-All passed on 2026-10-25.
+All passed (10/10).
 
 ## Gates
 
-| Phase | Allowed | Receipt |
+| Phase | Allowed | Notes |
 | --- | --- | --- |
-| `pre_implementation` | true | `gates/pre_implementation-2026-10-25T14-52-22-129Z.json` |
-| `verification` | true | `gates/verification-2026-10-25T14-52-28-858Z.json` |
+| `verification` | true | `tied_gate_check` 2026-10-25 |
+| `close_out` | true | `run-close-out-gates.mjs --envelope-blocking --sync-dispositions --reconcile`; blocking gaps **0** |
 
 ## TIED
 
-- Kaizen feedback: `fb-mvny01eb-my451g` (methodology_improvement, GF-16 proxy)
+- Kaizen feedback: **`fb-mvny01eb-my451g`** (ingested at original build-plan; not re-ingested this pass)
 - `tied_validate_consistency`: ok
-- `tied_verify`: REQ → Implemented, IMPL → Active
+- `tied_verify`: REQ → **Implemented**, IMPL → **Active** (detail status synced via MCP)
 
 ## Close-out
 
-**Deferred** — verification gate complete; run `@close-out` for machine close-out envelope sync when committing.
+Pass 3 re-run after refine-plan PLAN/CITDP sync and resolver import LEAP.

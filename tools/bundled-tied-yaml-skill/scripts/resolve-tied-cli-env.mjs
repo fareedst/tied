@@ -3,7 +3,7 @@
  * [IMPL-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_CLI_MCP_JSON_BASE_PATH]
  * How: Emit shell-safe export lines for tied-cli.sh (RESOLVE_TIED_CLI_ENV).
  */
-import { resolveTiedCliEnvFromCwd } from "../../../bootstrap/lib/mcp-base-path.mjs";
+import { resolveTiedCliEnvFromCwd } from "../../bootstrap/lib/mcp-base-path.mjs";
 
 function shellQuote(value) {
   return `'${String(value).replace(/'/g, `'\"'\"'`)}'`;

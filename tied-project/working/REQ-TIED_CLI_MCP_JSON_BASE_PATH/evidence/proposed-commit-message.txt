@@ -1,12 +1,20 @@
-feat(bootstrap): resolve tied-cli TIED_BASE_PATH from mcp.json
+docs(cli-mcp): sync PLAN pass 3 and fix resolver import
 
-GF-16 proxy: linked-install tied-cli no longer defaults base path from the
-store script directory; read .cursor/mcp.json then .mcp.json from client cwd
-with optional env override for store CI ([REQ-TIED_CLI_MCP_JSON_BASE_PATH]).
+Align REQ-TIED_CLI_MCP_JSON_BASE_PATH working PLAN/CITDP with as-built
+delivery; add delivery_record; fix resolve-tied-cli-env.mjs bootstrap
+import path; re-verify tests and close_out gates.
 
-Tokens: REQ-TIED_CLI_MCP_JSON_BASE_PATH, ARCH-TIED_CLI_MCP_JSON_BASE_PATH,
-IMPL-TIED_CLI_MCP_JSON_BASE_PATH. Kaizen feedback fb-mvny01eb-my451g.
+Tokens: REQ-TIED_CLI_MCP_JSON_BASE_PATH, IMPL-TIED_CLI_MCP_JSON_BASE_PATH
+Feedback: fb-mvny01eb-my451g (prior ingest)
+Completion: machine close_out pass, envelope blocking 0, reconcile band A
 
-Completion signals: machine close-out pass (close_out gate + envelope 0
-blocking); process contract pass (sync-dispositions, reconcile band A);
-adherence ledger pass.
+Staging map:
+- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/PLAN.md
+- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml
+- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/refine-plan-pass3.md
+- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/*.md (close-out pass 3)
+- tied-project/citdp/CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml
+- tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml
+- tied-project/requirements.yaml
+- tools/bundled-tied-yaml-skill/scripts/resolve-tied-cli-env.mjs
+- CHANGELOG.md

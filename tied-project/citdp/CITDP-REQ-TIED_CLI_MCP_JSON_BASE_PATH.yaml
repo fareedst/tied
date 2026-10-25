@@ -92,3 +92,10 @@ CITDP-REQ-TIED_CLI_MCP_JSON_BASE_PATH:
       - "optional env TIED_BASE_PATH overrides mcp.json (CI contract)"
       - "GF-16 linked layout regression fixture"
     composition: "Shell invokes Node resolver once before spawnSync MCP client"
+  delivery_record:
+    status: "implemented"
+    commit_sha: "5ba4086ef39c119199a3ba4c64a238acb34d248d"
+    closed_at: "2026-10-25"
+    kaizen_feedback: "fb-mvny01eb-my451g"
+    close_out_evidence: "tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/close-out-handoff.md"
+    plan_refine_pass: 3

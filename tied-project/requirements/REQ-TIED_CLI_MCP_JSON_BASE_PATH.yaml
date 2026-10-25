@@ -40,3 +40,4 @@ REQ-TIED_CLI_MCP_JSON_BASE_PATH:
       tests:
         - "tools/bootstrap/lib/mcp-base-path.test.mjs"
         - "tools/bootstrap/lib/tied-cli-invoke.test.mjs"
+  status: "Implemented"
