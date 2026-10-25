@@ -3162,7 +3162,7 @@ IMPL-TIED_SPONSOR_TWO_LANE_DELIVERY:
       - "IMPL-TIED_SPONSOR_AGENT_RELATIONSHIP"
       - "IMPL-TIED_SPONSOR_QUESTIONS"
     see_also: []
-  status: "Implemented"
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-TIED_SPONSOR_TWO_LANE_DELIVERY"

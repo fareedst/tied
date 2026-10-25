@@ -9,10 +9,12 @@ CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY:
       - "SC-TLD-001 through SC-TLD-005 satisfied via build-plan 2026-10-25"
   evidence:
     command_seq:
-      - "node --import tsx --test mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts"
-      - "node --import tsx --test mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts"
+      - "cd mcp-server && npm test -- --testPathPattern='sponsor-two-lane|sponsor-decision-lane|mid_lane_sponsor'"
       - "node --test tools/bootstrap/lib/sponsor-two-lane-delivery-doc.test.mjs"
-      - "tied gate check --phase verification"
+      - "ruby scripts/validate_vocab_index.rb"
+    proof_boundaries:
+      - "command result only"
+      - "SC-TLD-001 through SC-TLD-005 battery"
   leap_feedback:
     divergences_from_analysis: "none"
     record_status: "final"

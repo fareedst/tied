@@ -6,7 +6,7 @@ CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY:
     profile_depth: "minimal"
     depth_tier: "minimal"
     gate_policy: "advisory"
-    record_status: "draft"
+    record_status: "final"
   change_definition:
     methodology_surface_change_class: "checklist_step"
     methodology_surface_experiment_link:
@@ -136,6 +136,31 @@ CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY:
       - choice: "Collapse reviewer rungs into sponsor lanes"
         ladder: "costly"
         disposition: "Reject — proof boundary"
+  evidence:
+    command_seq:
+      - "cd mcp-server && npm test -- --testPathPattern='sponsor-two-lane|sponsor-decision-lane|mid_lane_sponsor'"
+      - "node --test tools/bootstrap/lib/sponsor-two-lane-delivery-doc.test.mjs"
+      - "ruby scripts/validate_vocab_index.rb"
+    proof_boundaries:
+      - "command result only"
+      - "SC-TLD-001 through SC-TLD-005 battery"
+  operator_selection_lane_example:
+    notes: "Worked example for selection_evidence at verification — not live product deploy"
+    sponsor_selection_backlog:
+      - decision_id: "SEL-TLD-DEMO-UI"
+        phase: "verification"
+        lane: "selection"
+        default_or_option: "Extend tied_sponsor_questions JSON with lane filter (shipped)"
+        consequence_rung: 2
+        disposition: "accepted"
+        selection_evidence:
+          - kind: test_id
+            path: "T-TLD-06"
+          - kind: test_id
+            path: "mcp-server/src/tools/project-operations-mcp.test.ts"
+        evidence_refs:
+          - kind: file_path
+            path: "tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/selection-lane-operator-runbook.md"
   test_strategy:
     proof_boundary: "Unit + contract tests on classifier and sponsor-questions; doc tests; no E2E UI"
     focused_tests:
@@ -150,5 +175,5 @@ CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY:
       - "request-evidence-envelope.v1.json + verification-evidence-manifest when close-out blocking"
   leap_feedback:
     divergences_from_analysis: "none"
-    record_status: "draft"
+    record_status: "final"
     tied_stack_updates_required: []

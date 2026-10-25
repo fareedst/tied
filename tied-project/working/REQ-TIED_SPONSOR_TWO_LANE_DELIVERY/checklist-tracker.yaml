@@ -68,8 +68,8 @@ execution_evidence:
     gates:
       close_out:
         allowed: true
-        run_id: close-out-2026-10-25-sponsor-two-lane-v2
-        receipt: tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/closeout-run-close-out-gates.json
+        run_id: close-out-2026-10-25-sponsor-two-lane-unblock-final
+        receipt: tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/closeout-run-close-out-gates-unblock.json
     master_checklist: tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/checklist-tracker.yaml
   completed:
     - sub-adversarial-inquiry-pass
@@ -80,6 +80,7 @@ execution_evidence:
     - unit-test-green
     - verification-gate
     - persist-citdp-record
+    - sync-tied-stack
   envelope_path: tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -98,7 +99,10 @@ execution_evidence:
         exit_code: 0
     Legacy string paths remain accepted; generic prose (e.g. "tests passed") is rejected as unresolved_evidence_ref.
   operator_evidence:
-    command_seq: []
+    command_seq:
+      - cd mcp-server && npm test -- --testPathPattern='sponsor-two-lane|sponsor-decision-lane|mid_lane_sponsor'
+      - node --test tools/bootstrap/lib/sponsor-two-lane-delivery-doc.test.mjs
+      - ruby scripts/validate_vocab_index.rb
     integrated_pilot_template: |
       depth_tier: integrated
       gate_policy: advisory
@@ -111,7 +115,7 @@ execution_evidence:
       Replace {REQ-TOKEN} and {phase}; prefer collect when phase dirs exist; see §8 for pre_implementation,
       verification, and close_out sequence. Use command_seq (ordered shell-command battery); legacy commands is
       lexically sorted by lint_yaml and must not be used for normative verification order.
-    status: not_run
+    status: collected
   request: REQ-TIED_SPONSOR_TWO_LANE_DELIVERY
 feedback_loops:
   composition_and_e2e: Missing implementation coverage returns to the specification path before evidence is accepted.
@@ -894,7 +898,11 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_3
+        - tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/sync-tied-stack-evidence.md
+    disposition: completed
+    evidence_refs: *ref_3
   - flow:
       branches: []
       calls:
@@ -1128,10 +1136,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_3
+      evidence_refs: &ref_4
         - tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/test-strategy-evidence.md
     disposition: completed
-    evidence_refs: *ref_3
+    evidence_refs: *ref_4
   - flow:
       branches:
         - action: Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions
@@ -1626,10 +1634,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_4
+      evidence_refs: &ref_5
         - tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/gate-pseudocode-validation-evidence.md
     disposition: completed
-    evidence_refs: *ref_4
+    evidence_refs: *ref_5
   - flow:
       branches: []
       calls:
@@ -1983,10 +1991,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_5
+      evidence_refs: &ref_6
         - tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml
     disposition: completed
-    evidence_refs: *ref_5
+    evidence_refs: *ref_6
   - flow:
       branches: []
       calls: []
@@ -2137,10 +2145,10 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_6
+      evidence_refs: &ref_7
         - tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/persist-implementation-records-evidence.md
     disposition: completed
-    evidence_refs: *ref_6
+    evidence_refs: *ref_7
   - slug: sub-adversarial-inquiry-pass
     disposition: completed
     evidence_refs:

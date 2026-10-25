@@ -1,0 +1,81 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npm test -- --testPathPattern='sponsor-two-lane|sponsor-decision-lane|mid_lane_sponsor'"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 37075,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/sponsor-two-lane-delivery-doc.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 576,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "ruby scripts/validate_vocab_index.rb"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 1249,
+      "exit_code": 0,
+      "id": "citdp-evidence-3",
+      "result": "passed"
+    }
+  ],
+  "commit": "b286f10a9bd112a6d0d0334bd1ddbe6289229fe3",
+  "covered_tokens": [
+    "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "REQ-TIED_SPONSOR_AGENT_RELATIONSHIP",
+    "REQ-TIED_SPONSOR_QUESTIONS"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "command result only",
+    "SC-TLD-001 through SC-TLD-005 battery"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-2026-10-25-sponsor-two-lane-unblock-final",
+  "schema_version": "verification-evidence-manifest.v1"
+}

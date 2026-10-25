@@ -1,0 +1,186 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "close-out-2026-10-25-sponsor-two-lane-unblock"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-TIED_SPONSOR_TWO_LANE_DELIVERY",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "unit-test-red",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/unit-test-red-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "unit-test-green",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/unit-test-green-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "verification-gate",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/verification-evidence-manifest.v1.json\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "test-strategy",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/test-strategy-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "gate-pseudocode-validation",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/gate-pseudocode-validation-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "persist-implementation-records",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/persist-implementation-records-evidence.md\""
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/close_out-2026-10-25T17-15-59-674Z.json",
+            "stored_tracker_hash": "sha256:6af0e27986c5052cf3ba0832cb156c368bfa25cd9fb761be3af6c7fe6d4e07f0",
+            "current_tracker_hash": "sha256:42361681edc584e5ca6963104d891af02bc8f9433f25ef34a0e6fb5308f5c754",
+            "stored_citdp_hash": "sha256:9f4e2c377748665c56238470d77291041800b3707d0b4f1b74576984e61cd2cd",
+            "current_citdp_hash": "sha256:d65e189771208dea5f5a1fa9baedb9bf45d9f2dcba504f145afdc233aee48082"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/close_out-2026-10-25T17-17-15-868Z.json",
+            "stored_tracker_hash": "sha256:6af0e27986c5052cf3ba0832cb156c368bfa25cd9fb761be3af6c7fe6d4e07f0",
+            "current_tracker_hash": "sha256:42361681edc584e5ca6963104d891af02bc8f9433f25ef34a0e6fb5308f5c754",
+            "stored_citdp_hash": "sha256:9f4e2c377748665c56238470d77291041800b3707d0b4f1b74576984e61cd2cd",
+            "current_citdp_hash": "sha256:d65e189771208dea5f5a1fa9baedb9bf45d9f2dcba504f145afdc233aee48082"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/pre_implementation-2026-10-25T17-07-04-163Z.json",
+            "stored_tracker_hash": "sha256:6af0e27986c5052cf3ba0832cb156c368bfa25cd9fb761be3af6c7fe6d4e07f0",
+            "current_tracker_hash": "sha256:42361681edc584e5ca6963104d891af02bc8f9433f25ef34a0e6fb5308f5c754",
+            "stored_citdp_hash": "sha256:9f4e2c377748665c56238470d77291041800b3707d0b4f1b74576984e61cd2cd",
+            "current_citdp_hash": "sha256:d65e189771208dea5f5a1fa9baedb9bf45d9f2dcba504f145afdc233aee48082"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/pre_implementation-2026-10-25T17-08-41-578Z.json",
+            "stored_tracker_hash": "sha256:6af0e27986c5052cf3ba0832cb156c368bfa25cd9fb761be3af6c7fe6d4e07f0",
+            "current_tracker_hash": "sha256:42361681edc584e5ca6963104d891af02bc8f9433f25ef34a0e6fb5308f5c754",
+            "stored_citdp_hash": "sha256:9f4e2c377748665c56238470d77291041800b3707d0b4f1b74576984e61cd2cd",
+            "current_citdp_hash": "sha256:d65e189771208dea5f5a1fa9baedb9bf45d9f2dcba504f145afdc233aee48082"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/verification-2026-10-25T17-13-22-024Z.json",
+            "stored_tracker_hash": "sha256:6af0e27986c5052cf3ba0832cb156c368bfa25cd9fb761be3af6c7fe6d4e07f0",
+            "current_tracker_hash": "sha256:42361681edc584e5ca6963104d891af02bc8f9433f25ef34a0e6fb5308f5c754",
+            "stored_citdp_hash": "sha256:9f4e2c377748665c56238470d77291041800b3707d0b4f1b74576984e61cd2cd",
+            "current_citdp_hash": "sha256:d65e189771208dea5f5a1fa9baedb9bf45d9f2dcba504f145afdc233aee48082"
+          }
+        }
+      ],
+      "ledger_rows": 8,
+      "read_only": true,
+      "process_grade": {
+        "score": 82,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": false,
+    "hydration_diagnostics": []
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/gates/close_out-2026-10-25T17-27-15-248Z.json",
+    "hash": "sha256:6b3be6c71c7aab4403bca003ad1666443c9c4c94ed8b8e4de4d84dfd45720dff"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 1,
+    "diagnostics": []
+  }
+}
