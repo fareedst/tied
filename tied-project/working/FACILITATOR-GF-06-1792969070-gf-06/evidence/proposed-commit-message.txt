@@ -1,0 +1,5 @@
+docs(demos): record GF-06, GF-12, GF-17 trial readouts
+
+Publish facilitator @record-gf-trial grading for disposable clients 1792969070-gf-06 (TIED-DEMO-06), 1792966303-gf-12 (TIED-DEMO-12), and 1792967943-gf-17 (TIED-DEMO-17/ALG-02). Updates demo catalog recorded-trials, README, CHANGELOG, and FACILITATOR working evidence. Feedback ingest N/A for all three.
+
+Machine close-out: pass (docs-only gate waived). Process contract: pass. Adherence ledger: N/A.

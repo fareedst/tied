@@ -1,0 +1,14 @@
+
+> deadline-aware-search@0.1.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /Users/fareed/Documents/dev/test/1792967943-gf-17
+
+ ✓ tests/deadline-search.test.ts (8 tests) 2ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  15:53:12
+   Duration  289ms (transform 30ms, setup 0ms, collect 27ms, tests 2ms, environment 0ms, prepare 44ms)
+

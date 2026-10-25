@@ -27,6 +27,9 @@ Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ token
 | [PROMPT-GF-16 @ 1792937222](trial-readout-PROMPT-GF-16-1792937222.md) | [PROMPT-GF-16](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-16) | `/Users/fareed/Documents/dev/test/1792937222-gf-16` |
 | [PROMPT-GF-05 @ 1792944114-gf-05](trial-readout-PROMPT-GF-05-1792944114.md) | [PROMPT-GF-05](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-05) | `/Users/fareed/Documents/dev/test/1792944114-gf-05` |
 | [PROMPT-GF-10 @ 1792950723-gf-10](trial-readout-PROMPT-GF-10-1792950723-gf-10.md) | [PROMPT-GF-10](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-10) | `/Users/fareed/Documents/dev/test/1792950723-gf-10` |
+| [PROMPT-GF-12 @ 1792966303-gf-12](trial-readout-PROMPT-GF-12-1792966303-gf-12.md) | [PROMPT-GF-12](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-12) | `/Users/fareed/Documents/dev/test/1792966303-gf-12` |
+| [PROMPT-GF-17 @ 1792967943-gf-17](trial-readout-PROMPT-GF-17-1792967943-gf-17.md) | [PROMPT-GF-17](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-17) | `/Users/fareed/Documents/dev/test/1792967943-gf-17` |
+| [PROMPT-GF-06 @ 1792969070-gf-06](trial-readout-PROMPT-GF-06-1792969070-gf-06.md) | [PROMPT-GF-06](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-06) | `/Users/fareed/Documents/dev/test/1792969070-gf-06` |
 
 ## Disposition legend (TIED catalog)
 

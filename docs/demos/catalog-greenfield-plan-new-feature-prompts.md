@@ -241,6 +241,9 @@ Build one publishable library package in this repo (TypeScript or Python—pick 
 | PROMPT-GF-16 | `1792937222` | [trial-readout-PROMPT-GF-16-1792937222.md](trial-readout-PROMPT-GF-16-1792937222.md) |
 | PROMPT-GF-05 | `1792944114-gf-05` | [trial-readout-PROMPT-GF-05-1792944114.md](trial-readout-PROMPT-GF-05-1792944114.md) |
 | PROMPT-GF-10 | `1792950723-gf-10` | [trial-readout-PROMPT-GF-10-1792950723-gf-10.md](trial-readout-PROMPT-GF-10-1792950723-gf-10.md) |
+| PROMPT-GF-12 | `1792966303-gf-12` | [trial-readout-PROMPT-GF-12-1792966303-gf-12.md](trial-readout-PROMPT-GF-12-1792966303-gf-12.md) |
+| PROMPT-GF-17 | `1792967943-gf-17` | [trial-readout-PROMPT-GF-17-1792967943-gf-17.md](trial-readout-PROMPT-GF-17-1792967943-gf-17.md) |
+| PROMPT-GF-06 | `1792969070-gf-06` | [trial-readout-PROMPT-GF-06-1792969070-gf-06.md](trial-readout-PROMPT-GF-06-1792969070-gf-06.md) |
 
 Sponsor text for the custom row is **not** a numbered **PROMPT-GF-* block**; see readout sponsor-intent section.
 
