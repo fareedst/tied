@@ -28,7 +28,7 @@ Initial close-out **`not_applicable_receipt_missing`** cleared earlier via `requ
 ## Commits
 
 - **`b286f10a`** — initial scoped feature + machine close-out
-- Unblock follow-up commit pending (this pass)
+- **`ae79c3e7`** — unblock pass (manifest, process contract, runbook, `tied_verify`)
 
 ## Remaining risks (accepted policy)
 
