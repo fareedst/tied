@@ -25,6 +25,7 @@ Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ token
 | [Custom audit brief @ 1792861936](trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md) | Custom ([TIED-DEMO-23](catalog-tied-compact-tools.md#family-f--meta-tied-tooling-tied-demo-2324) lens) | `/Users/fareed/Documents/dev/test/1792861936` |
 | [PROMPT-GF-15 @ 1792863463](trial-readout-PROMPT-GF-15-1792863463.md) | [PROMPT-GF-15](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-15) | `/Users/fareed/Documents/dev/test/1792863463` |
 | [PROMPT-GF-16 @ 1792937222](trial-readout-PROMPT-GF-16-1792937222.md) | [PROMPT-GF-16](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-16) | `/Users/fareed/Documents/dev/test/1792937222-gf-16` |
+| [PROMPT-GF-05 @ 1792944114-gf-05](trial-readout-PROMPT-GF-05-1792944114.md) | [PROMPT-GF-05](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-05) | `/Users/fareed/Documents/dev/test/1792944114-gf-05` |
 
 ## Disposition legend (TIED catalog)
 

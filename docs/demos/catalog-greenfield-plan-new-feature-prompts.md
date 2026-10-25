@@ -239,6 +239,7 @@ Build one publishable library package in this repo (TypeScript or Python—pick 
 | Custom (audit brief / [TIED-DEMO-23](catalog-tied-compact-tools.md#family-f--meta-tied-tooling-tied-demo-2324) lens) | `1792861936` | [trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md](trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md) |
 | PROMPT-GF-15 | `1792863463` | [trial-readout-PROMPT-GF-15-1792863463.md](trial-readout-PROMPT-GF-15-1792863463.md) |
 | PROMPT-GF-16 | `1792937222` | [trial-readout-PROMPT-GF-16-1792937222.md](trial-readout-PROMPT-GF-16-1792937222.md) |
+| PROMPT-GF-05 | `1792944114-gf-05` | [trial-readout-PROMPT-GF-05-1792944114.md](trial-readout-PROMPT-GF-05-1792944114.md) |
 
 Sponsor text for the custom row is **not** a numbered **PROMPT-GF-* block**; see readout sponsor-intent section.
 

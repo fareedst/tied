@@ -1,0 +1,3 @@
+docs(demos): record PROMPT-GF-05 trial readout for client 1792944114-gf-05
+
+Publish facilitator grading for TIED-DEMO-05 token coverage auditor via @record-gf-trial; link existing proxy feedback fb-mvo18hye-i6x5fq.

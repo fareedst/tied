@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-GF-05 trial readout (facilitator)** — [trial-readout-PROMPT-GF-05-1792944114.md](docs/demos/trial-readout-PROMPT-GF-05-1792944114.md) for disposable client `1792944114-gf-05` (**TIED-DEMO-05**, `REQ-REQ_TOKEN_COVERAGE` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-05-1792944114/PLAN.md](tied-project/working/FACILITATOR-GF-05-1792944114/PLAN.md). Proxy feedback **`fb-mvo18hye-i6x5fq`** linked; no duplicate ingest.
+
 - **MCP stdio console guard ([REQ-MCP_STDIO_CONSOLE_GUARD], [ARCH-MCP_STDIO_CONSOLE_GUARD], [IMPL-MCP_STDIO_CONSOLE_GUARD])** — Patch `console.log` / `console.debug` / `console.info` in the MCP server process so stdio JSON-RPC keeps stdout exclusive; opt-in stderr diagnostics via **`TIED_MCP_DIAGNOSTICS`**. Kaizen **`fb-mvnztbmv-ez5nep`**. Plan: [PLAN.md](tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/PLAN.md).
 
 ### Changed
