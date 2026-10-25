@@ -1,0 +1,26 @@
+IMPL-MCP_STDIO_CONSOLE_GUARD:
+  code_locations:
+    files:
+      - description: "First import wires side-effect module"
+        path: "mcp-server/src/index.ts"
+      - description: "installMcpStdioConsoleGuard, mcpDiagnosticsEnabled, test reset"
+        path: "mcp-server/src/mcp-stdio-console-guard.ts"
+      - description: "Side-effect install on MCP load"
+        path: "mcp-server/src/mcp-stdio-console-guard-side-effect.ts"
+      - description: "stdout/stderr capture tests"
+        path: "mcp-server/src/mcp-stdio-console-guard.test.ts"
+  cross_references:
+    - "ARCH-MCP_STDIO_CONSOLE_GUARD"
+    - "REQ-MCP_STDIO_CONSOLE_GUARD"
+  essence_pseudocode_path: "implementation-decisions/IMPL-MCP_STDIO_CONSOLE_GUARD-pseudocode.md"
+  implementation_approach:
+    details:
+      - "resetMcpStdioConsoleGuardForTests restores native console for unit tests"
+      - "Source feedback: fb-mvnztbmv-ez5nep"
+      - "util.formatWithOptions to stderr with depth null for object dumps"
+    summary: "Guard module + side-effect entry + unit tests; linked Kaizen feedback fb-mvnztbmv-ez5nep."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-10-25"
+  name: "MCP stdio console guard implementation"

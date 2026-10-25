@@ -1,0 +1,31 @@
+ARCH-MCP_STDIO_CONSOLE_GUARD:
+  alternatives_considered:
+    - cons:
+        - "Noisy MCP logs in Cursor"
+      name: "Always redirect diagnostics to stderr without env gate"
+      pros:
+        - "Operators always see DEBUG"
+      rejected_reason: "Env gate matches opt-in diagnostic pattern used elsewhere (e.g. metrics)"
+    - cons:
+        - "Easy regression"
+        - "High churn"
+      name: "Audit and rewrite every console.debug call site"
+      pros:
+        - "Explicit control per module"
+      rejected_reason: "Central guard at MCP entry covers all tool code paths with one install point"
+  cross_references:
+    - "IMPL-MCP_STDIO_CONSOLE_GUARD"
+    - "REQ-MCP_STDIO_CONSOLE_GUARD"
+  implementation_approach:
+    details:
+      - "CLI entrypoints that own stdout are unchanged (guard only on MCP index path)"
+      - "Default: diagnostics disabled (no stdout, no stderr noise)"
+      - "First static import in MCP index loads side-effect module that calls installMcpStdioConsoleGuard"
+      - "Guard replaces console.log/debug/info; never patches console.error"
+      - "TIED_MCP_DIAGNOSTICS=1|true|yes enables formatted stderr lines"
+    summary: "Side-effect module installed as first import patches console.log/debug/info; diagnostics env-gated to stderr."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-10-25"
+  name: "MCP stdio console guard architecture"

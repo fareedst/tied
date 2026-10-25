@@ -1,0 +1,48 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npm run build && npm test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 43053,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    }
+  ],
+  "commit": "ec4777d8d0fc205614ac1374955f88e67f1fc4e8",
+  "covered_tokens": [
+    "REQ-FEEDBACK_TO_TIED",
+    "REQ-MCP_USAGE_METRICS",
+    "REQ-TIED_SETUP"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "command result only"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-req-mcp-stdio-console-guard-2026-10-25",
+  "schema_version": "verification-evidence-manifest.v1"
+}

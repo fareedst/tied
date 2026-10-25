@@ -1,0 +1,14 @@
+CITDP-REQ-MCP_STDIO_CONSOLE_GUARD:
+  change_summary: "Install MCP stdio console guard so JSON-RPC stdout is not corrupted by DEBUG/diagnostic lines."
+  depth_tier: minimal
+  gate_policy: advisory
+  related_requirements:
+    - REQ-MCP_STDIO_CONSOLE_GUARD
+  source_feedback_ids:
+    - fb-mvnztbmv-ez5nep
+  status: implemented
+  delivery_record:
+    closed_at: "2026-10-25"
+    close_out_evidence: tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/close-out-handoff.md
+    kaizen_feedback: fb-mvnztbmv-ez5nep
+    plan_ref: tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/PLAN.md

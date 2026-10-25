@@ -1,0 +1,10 @@
+feat(mcp): guard stdio console output for JSON-RPC
+
+Prevent console.log/debug/info from corrupting MCP stdio transport; opt-in
+stderr diagnostics via TIED_MCP_DIAGNOSTICS. Countermeasure for Kaizen
+fb-mvnztbmv-ez5nep.
+
+Tokens: REQ-MCP_STDIO_CONSOLE_GUARD, ARCH-MCP_STDIO_CONSOLE_GUARD,
+IMPL-MCP_STDIO_CONSOLE_GUARD
+
+Close-out: machine pass, envelope blocking gaps 0, mcp-server npm test green.

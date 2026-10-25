@@ -76,6 +76,7 @@
 | Client project root | client repo | — | derived in tied-cli (`REPO_ROOT`) | default for `TIED_BASE_PATH`; `getClientProjectRoot()` for extra rename globs |
 | IDE MCP config | mcp.json | `.cursor/mcp.json` | `env.TIED_BASE_PATH` | Cursor Settings → MCP |
 | Bootstrap metrics configuration | new `.cursor/mcp.json` metrics fields | `tied-install.sh` | `TIED_MCP_COLLECT_METRICS=1`, `TIED_MCP_METRICS_CLIENT` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) |
+| MCP stdio diagnostics | stderr DEBUG lines | — | `TIED_MCP_DIAGNOSTICS=1` (or `true` / `yes`) | When unset, `console.log` / `console.debug` / `console.info` in the MCP server process are no-ops (stdout stays JSON-RPC only). When set, same calls format to **stderr** only · [REQ-MCP_STDIO_CONSOLE_GUARD](../requirements/REQ-MCP_STDIO_CONSOLE_GUARD.yaml) |
 | Configured project identity | env project ID | — | `TIED_MCP_PROJECT_ID` | `mcp-server/src/project-identity.ts`; shared by usage metrics + evidence-chain profile |
 | Path-fallback identity | path-derived project ID | — | unset/invalid `TIED_MCP_PROJECT_ID` | SHA-256→16-hex of `path.resolve(TIED_BASE_PATH)`; not relocation-stable |
 | Identity source | identity provenance | profile `identity_source` | — | `configured` or `path_fallback`; opaque hashed `project_id` in artifacts |

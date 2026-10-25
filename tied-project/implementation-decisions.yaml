@@ -1516,6 +1516,10 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     tests:
       - "leap-proposal-mcp.test.ts — LPQ-MCP composition: all tied_leap_proposal_* handler bindings (composition-integration)"
       - "leap-proposal-queue.test.ts — LPQ-CORE unit: lifecycle, session parse, LOAD_QUEUE BOM, corrupt JSON/schema mismatch, extractDiff non-repo error path (S09 / sub-leap-micro-cycle)"
+IMPL-MCP_STDIO_CONSOLE_GUARD:
+  detail_file: "implementation-decisions/IMPL-MCP_STDIO_CONSOLE_GUARD.yaml"
+  name: "MCP stdio console guard implementation"
+  status: "Implemented"
 IMPL-MCP_USAGE_METRICS:
   code_locations:
     files:

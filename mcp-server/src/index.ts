@@ -4,6 +4,8 @@
  * Exposes tools and resources for requirements, architecture, and implementation decision YAML indexes.
  */
 
+import "./mcp-stdio-console-guard-side-effect.js";
+
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { allTools } from "./tools/index.js";

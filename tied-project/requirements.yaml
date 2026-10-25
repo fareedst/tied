@@ -1521,6 +1521,17 @@ REQ-LEAP_PROPOSAL_QUEUE:
       method: "Manual or MCP client"
     - coverage: "leap-proposal-queue module and schema strings"
       method: "Unit tests"
+REQ-MCP_STDIO_CONSOLE_GUARD:
+  category: "Functional"
+  cross_references:
+    architecture_decisions:
+      - "ARCH-MCP_STDIO_CONSOLE_GUARD"
+    implementation_decisions:
+      - "IMPL-MCP_STDIO_CONSOLE_GUARD"
+  detail_file: "requirements/REQ-MCP_STDIO_CONSOLE_GUARD.yaml"
+  name: "MCP stdio console guard"
+  priority: "P1"
+  status: "Implemented"
 REQ-MCP_USAGE_METRICS:
   category: "Functional"
   detail_file: "requirements/REQ-MCP_USAGE_METRICS.yaml"

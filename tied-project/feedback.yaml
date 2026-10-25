@@ -76,6 +76,28 @@ entries:
     privacy_tier: "operator_local"
     title: "Witnessed -32602 on tied_token_create_with_detail record fields"
     type: "methodology_improvement"
+  - capture_schema_version: "feedback-event.v1"
+    context:
+      capture:
+        delivery:
+          attempted_at: "2026-10-25T15:38:59.239Z"
+          idempotency_key: "mcp-stdio-debug-invalid-json-2026-10-25-stdd"
+        entry_type_omitted: false
+        evidence:
+          redaction: "not_required"
+          refs: []
+        observation:
+          kind: "tooling_defect"
+          title: "MCP stdio transport broken by DEBUG lines on stdout"
+        schema_version: "feedback-event.v1"
+    created_at: "2026-10-25T15:38:59.239Z"
+    description: "## Observation\nSponsor witnessed Cursor MCP shared-process logs for server `project-0-stdd-tied-yaml` (`tied-yaml` stdio) while using the TIED store client repo `/Users/fareed/Documents/dev/chatgpt/stdd`. Connection initially succeeds; during tool activity the transport reports repeated JSON parse failures and FSM `connection:transport_error` (conn=connected → conn=failed).\n\n## Failure (verbatim / redacted log excerpts)\n- `Client error: Unexpected token 'D', \"DEBUG: [IM\"... is not valid JSON`\n- Follow-on lines on separate \"messages\": `request_to...`, `phases: [`, `path: 'tie...`, `}` — consistent with Node pretty-printing a multi-line object after a `DEBUG: [IMPL-...]` prefix.\n- Recurrence at 2026-10-25 07:53:43, 08:24:26, and 08:35:43 (local) on the same session pattern.\n- Separate noise: startup line `TIED YAML MCP Server running on stdio` appears at `[error]` in Cursor UI but uses `console.error` in `mcp-server/src/index.ts` and does not by itself break JSON-RPC; the DEBUG burst does.\n\n## Sponsor intent\nConfirm whether this is a known/common failure mode (diagnostic output on the MCP stdio channel) and record it for Kaizen / tooling hardening — not an authorization to implement fixes in this turn.\n\n## Workaround\nRestart MCP connection (`stopped connection` → reconnect succeeds until the next tool emits DEBUG on stdout). Avoid or gate tools that trigger verbose `console.debug` during MCP stdio sessions, or run equivalent work via CLI where stdout is not JSON-RPC.\n\n## Redaction\nNone required.\n\n## Technical hypothesis (intake instrument)\nMCP stdio JSON-RPC must own stdout exclusively. In Node, `console.debug` is an alias for `console.log` (stdout). Known emitters in this repo include `console.debug(\"DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE]...\", { request_token, phases, path, ... })` and similar in evidence-chain / batch-collect paths under `mcp-server/src/`. Each line of the formatted object is interpreted as a separate invalid JSON-RPC frame → transport failure.\n\n## Client\nTIED store: `/Users/fareed/Documents/dev/chatgpt/stdd` (witnessed MCP label `project-0-stdd-tied-yaml`)."
+    id: "fb-mvnztbmv-ez5nep"
+    idempotency_key: "mcp-stdio-debug-invalid-json-2026-10-25-stdd"
+    occurred_at: "2026-10-25T14:53:43.600Z"
+    privacy_tier: "operator_local"
+    title: "MCP stdio transport broken by DEBUG lines on stdout"
+    type: "bug_report"
   - context:
       client_repo: "/Users/fareed/Documents/dev/test/1792857852"
       evidence_links:

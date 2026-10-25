@@ -552,6 +552,19 @@ ARCH-LEAP_PROPOSAL_QUEUE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-MCP_STDIO_CONSOLE_GUARD:
+  cross_references:
+    - "IMPL-MCP_STDIO_CONSOLE_GUARD"
+    - "REQ-MCP_STDIO_CONSOLE_GUARD"
+  description: "Side-effect install patches console methods; env-gated stderr diagnostics"
+  detail_file: "architecture-decisions/ARCH-MCP_STDIO_CONSOLE_GUARD.yaml"
+  metadata:
+    last_updated: "2026-10-25T00:00:00.000Z"
+    registered: "2026-10-25T00:00:00.000Z"
+  name: "MCP stdio console guard architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Accepted"
+  type: "ARCH"
 ARCH-MCP_USAGE_METRICS:
   cross_references:
     - "IMPL-MCP_USAGE_METRICS"
@@ -2024,6 +2037,19 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
     last_updated: "2026-03-28T00:00:00.000Z"
     registered: "2026-03-26T00:00:00.000Z"
   name: "MCP LEAP proposal queue tools and module"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-MCP_STDIO_CONSOLE_GUARD:
+  cross_references:
+    - "ARCH-MCP_STDIO_CONSOLE_GUARD"
+    - "REQ-MCP_STDIO_CONSOLE_GUARD"
+  description: "mcp-stdio-console-guard module and index.ts first import"
+  detail_file: "implementation-decisions/IMPL-MCP_STDIO_CONSOLE_GUARD.yaml"
+  metadata:
+    last_updated: "2026-10-25T00:00:00.000Z"
+    registered: "2026-10-25T00:00:00.000Z"
+  name: "MCP stdio console guard implementation"
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
@@ -4117,6 +4143,20 @@ REQ-LEAP_PROPOSAL_QUEUE:
   name: "Optional LEAP proposal queue with human review"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-MCP_STDIO_CONSOLE_GUARD:
+  category: "Functional"
+  cross_references:
+    - "ARCH-MCP_STDIO_CONSOLE_GUARD"
+    - "IMPL-MCP_STDIO_CONSOLE_GUARD"
+  description: "Patch console.log/debug/info in MCP stdio server so JSON-RPC stdout is never corrupted; opt-in stderr diagnostics via TIED_MCP_DIAGNOSTICS"
+  detail_file: "requirements/REQ-MCP_STDIO_CONSOLE_GUARD.yaml"
+  metadata:
+    last_updated: "2026-10-25T00:00:00.000Z"
+    registered: "2026-10-25T00:00:00.000Z"
+  name: "MCP stdio console guard"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-MCP_USAGE_METRICS:
   category: "Functional"

@@ -1,0 +1,36 @@
+REQ-MCP_STDIO_CONSOLE_GUARD:
+  category: "Functional"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-10-25"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-10-25"
+      reason: "Initial capture from fb-mvnztbmv-ez5nep"
+  name: "MCP stdio console guard"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Optional stderr diagnostics via TIED_MCP_DIAGNOSTICS"
+      - "Stable IDE MCP sessions during verbose tool paths"
+    problems_solved:
+      - "DEBUG and console.log lines parsed as invalid JSON-RPC"
+      - "MCP FSM transport_error after tool calls that emit diagnostics"
+    why: "Cursor MCP stdio JSON-RPC requires exclusive use of stdout; diagnostic console output corrupts the transport and fails the connection."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-MCP_USAGE_METRICS"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "console.log, console.debug, and console.info never write to process.stdout in the MCP server process when diagnostics env is unset"
+      metric: "mcp-stdio-console-guard.test.ts passes"
+    - criterion: "MCP stdio entry installs console guard before tool handlers via first side-effect import"
+      metric: "mcp-server/src/index.ts imports mcp-stdio-console-guard-side-effect.js first"
+    - criterion: "TIED_MCP_DIAGNOSTICS documented in tied-project/vocab/tied-yaml-mcp.md"
+      metric: "vocab naming bridge row present"
+    - criterion: "When TIED_MCP_DIAGNOSTICS is enabled, diagnostic console methods write to stderr only"
+      metric: "mcp-stdio-console-guard.test.ts passes"
