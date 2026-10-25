@@ -868,6 +868,18 @@ REQ-FEEDBACK_TO_TIED:
       method: "Manual or E2E"
     - coverage: "Feedback module load/append/export and tool handlers"
       method: "Unit tests"
+REQ-GF16-KAIZEN-OUTCOME-CLOSE:
+  category: "Process"
+  cross_references:
+    requirements:
+      - "REQ-KAIZEN-OUTCOME-LOOP"
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      - "REQ-TIED_CLIENT_FEEDBACK_CAPTURE"
+  description: "Coordinate GF-16 feedback tracks: complete Track B (tied-cli) outcomes; link Track A to REQ-TIED_CLIENT_FEEDBACK_CAPTURE."
+  detail_file: "requirements/REQ-GF16-KAIZEN-OUTCOME-CLOSE.yaml"
+  name: "GF-16 dual-track Kaizen close (coordinator)"
+  priority: "P2"
+  status: "Implemented"
 REQ-GOAGENT-AGENT-EXECUTOR:
   category: "Tooling"
   detail_file: "requirements/REQ-GOAGENT-AGENT-EXECUTOR.yaml"
@@ -2474,6 +2486,18 @@ REQ-TIED_CLIENT_DEVOPS_APPENDIX:
   detail_file: "requirements/REQ-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
   name: "Client DevOps integration appendix (Claude comparison Phase 5)"
   priority: "P2"
+  status: "Implemented"
+REQ-TIED_CLIENT_FEEDBACK_CAPTURE:
+  category: "Process"
+  cross_references:
+    requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-GF16-KAIZEN-OUTCOME-CLOSE"
+      - "REQ-TIED_FEEDBACK_REPORT_SKILL"
+  description: "Close the gap between agent narrative \"posting to TIED store\" and Kaizen Phase 1 capture: require receipt or documented N/A at close-out, distinguish facilitator proxy vs client-originated feedback, and align greenfield trial ingest with feedback.yaml or MCP capture on the correct TIED_BASE_PATH."
+  detail_file: "requirements/REQ-TIED_CLIENT_FEEDBACK_CAPTURE.yaml"
+  name: "Client upstream feedback capture discipline"
+  priority: "P1"
   status: "Implemented"
 REQ-TIED_CLIENT_REFRESH_PARITY:
   category: "Functional"

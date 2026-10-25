@@ -21,6 +21,8 @@ This is **not** a fourth completion signal. It clarifies what “workspace clean
 | **Post-REQ workspace clean** | Scoped artifacts committed or classified in the staging map; regenerable noise for **that** REQ restored or deleted in the **same** close-out pass (gitignore hygiene, `tied_git_hygiene` preview, traceable-commit staging per [traceable-commit-close-out.md](traceable-commit-close-out.md)) | Entire repo free of unrelated REQ WIP, other trackers/CITDP drafts, or `tied-bundle/working/` gate JSON |
 | **Feedback / PLAN ingest complete** | Store or client feedback row ingested with traceability | Whole monorepo clean — orthogonal REQ dirt is **expected** until those REQs close |
 
+**Upstream feedback capture outcome** is **not** implied by **machine close-out** alone. Handoffs and `traceable-commit-evidence.md` must record MCP **receipt id**, store **`fb-*`**, client **`feedback.yaml`**, or **N/A + reason** per [traceable-commit-close-out.md](traceable-commit-close-out.md) ([REQ-TIED_CLIENT_FEEDBACK_CAPTURE] **SC-CAPTURE-RECEIPT**).
+
 **`@clear-workspace`** is a **router / recovery** skill when close-out did not finish or scope is ambiguous — not a mandatory follow-on after a **complete** `@close-out` on a named REQ. See [clear-workspace-routing.md](clear-workspace-routing.md).
 
 ## Close-out completion pass (Wave 5)

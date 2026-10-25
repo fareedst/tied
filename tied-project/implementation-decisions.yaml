@@ -2299,6 +2299,15 @@ IMPL-TIED_CLIENT_DEVOPS_APPENDIX:
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
   name: "Client DevOps appendix doc maintenance"
   status: "Implemented"
+IMPL-TIED_CLIENT_FEEDBACK_CAPTURE:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CLIENT_FEEDBACK_CAPTURE"
+    requirements:
+      - "REQ-TIED_CLIENT_FEEDBACK_CAPTURE"
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_FEEDBACK_CAPTURE.yaml"
+  name: "Client feedback capture implementation"
+  status: "Active"
 IMPL-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     architecture:

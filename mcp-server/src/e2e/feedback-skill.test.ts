@@ -35,6 +35,8 @@ describe("feedback skill install [REQ-TIED_FEEDBACK_REPORT_SKILL]", () => {
     assert.match(text, /receipt.*notification/i);
     assert.match(text, new RegExp(SPONSOR_CONTRACT.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(text, /Intake gate/i);
+    // [IMPL-TIED_CLIENT_FEEDBACK_CAPTURE] [REQ-TIED_CLIENT_FEEDBACK_CAPTURE] — SC-NO-NARRATIVE-POST
+    assert.match(text, /must not assert.*upstream.*without.*receipt/is);
     const bundled = fs.readFileSync(
       path.join(repoRoot, "tools/bundled-feedback-skill/SKILL.md"),
       "utf8",

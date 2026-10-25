@@ -1,0 +1,12 @@
+ARCH-TIED_CLIENT_FEEDBACK_CAPTURE:
+  ARCH-TIED_CLIENT_FEEDBACK_CAPTURE:
+    consequences:
+      - "REQ-GF16-KAIZEN-OUTCOME-CLOSE coordinates dual-track close only"
+      - "Track A GF-16 fb-mvnyr5n2-aaeg1j owned by REQ-TIED_CLIENT_FEEDBACK_CAPTURE"
+    decision: "Process artifacts (checklist slug text, traceable-commit section, record-gf-trial ingest rules) enforce capture outcome; no silent agent narrative as upstream transport."
+    name: "Client feedback capture boundary"
+    related_requirements:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_CLIENT_FEEDBACK_CAPTURE"
+    status: "Planned"
+    summary: "Separate point-of-work capture (receipt, client or store feedback.yaml) from facilitator proxy ingest and from tooling countermeasures (e.g. tied-cli base path)."

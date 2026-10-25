@@ -135,6 +135,9 @@ Separate dimension readout (not a collapsed score). Weights from catalog default
 | 2 | Trim master tracker to minimal per-REQ copy; sync **`completed`** with close-out slugs | **Open** — sponsor/client |
 | 3 | Populate **`execution_evidence.close_out_evidence`** on subject tracker | **Open** — sponsor/client |
 | 4 | Optional: add client **`feedback.yaml`** methodology_improvement row for wrong-base-path lesson | **Open** — sponsor/client |
+| 5 | Dual-track Kaizen close (coordinator **`REQ-GF16-KAIZEN-OUTCOME-CLOSE`**) | **Done (2026-10-25)** — register [`feedback-dual-track-register.md`](../tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/feedback-dual-track-register.md); Track B **`improved`** (`fb-mvny01eb-my451g`); Track A **`not_measured`** → countermeasure **`REQ-TIED_CLIENT_FEEDBACK_CAPTURE`** |
+| 6 | CLI countermeasure + resolver LEAP (`REQ-TIED_CLI_MCP_JSON_BASE_PATH`) | **Done** — GF-16 cwd smoke [`gf16-tied-cli-base-path-smoke.json`](../tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/gf16-tied-cli-base-path-smoke.json) |
+| 7 | Capture countermeasure docs (`REQ-TIED_CLIENT_FEEDBACK_CAPTURE` Track A) | **Done (2026-10-25)** — [`PLAN.md`](../tied-project/working/REQ-TIED_CLIENT_FEEDBACK_CAPTURE/PLAN.md); witness **`fb-mvnyr5n2-aaeg1j`**; outcome remains **`not_measured`** until next cohort |
 
 ---
 

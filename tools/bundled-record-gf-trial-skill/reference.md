@@ -9,7 +9,7 @@
 | Flag | Effect |
 | --- | --- |
 | `--force` | Allow republish when `trial-readout-*-{id}.md` already exists |
-| `--skip-feedback-ingest` | Readout + catalogs only; no store `tied_feedback_add` |
+| `--skip-feedback-ingest` | Readout + catalogs only; no store `tied_feedback_add`. Readout must state ingest **N/A** and must not imply a client-originated receipt when skipped |
 | `--prompt PROMPT-GF-NN` | Override auto-discovery from client PLAN headers |
 | `--custom` | Label trial as custom greenfield (not a catalog PROMPT-GF block) |
 
@@ -58,6 +58,14 @@ Mirror [FACILITATOR-GF-04 §2.4](../../tied-project/working/FACILITATOR-GF-04-17
 12. Future-test rule.
 
 **Filename pattern:** `docs/demos/trial-readout-{PROMPT-GF-NN|CUSTOM-*}-{clientId}.md`
+
+## Feedback ingest modes (facilitator)
+
+| Mode | Who writes | Typical evidence | Close-out note |
+| --- | --- | --- | --- |
+| **Client-originated** | Sponsor **`/feedback`** or client agent with MCP receipt on client `TIED_BASE_PATH` | Client `tied/feedback.yaml` or store row after export/ingest; **receipt id** | Not the same as facilitator proxy |
+| **Proxy store row** | Facilitator **`tied_feedback_add`** on **store** `tied-project/feedback.yaml` during readout (Track B class: tooling fix witness) | Store **`fb-*`** with readout `context` | Label as facilitator/proxy in readout — not client session capture |
+| **`--skip-feedback-ingest`** | None | No new store row from step 11 | Readout documents **N/A**; e.g. GF-16 capture gap class **`fb-mvnyr5n2-aaeg1j`** until **`REQ-TIED_CLIENT_FEEDBACK_CAPTURE`** ships |
 
 ## Store operator install
 

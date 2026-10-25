@@ -39,7 +39,7 @@ Explicit invocation only (`/record-gf-trial`, `@record-gf-trial`).
 
 10. **Publish store deliverables** — Author readout per [reference.md § Readout contract](./reference.md); update **Recorded trials** in greenfield catalog and [docs/demos/README.md](../../docs/demos/README.md); add **CHANGELOG** Unreleased row. **Do not** mint store `[REQ-*]` for the subject product.
 
-11. **Feedback cycle (optional)** — If client `feedback.yaml` has rows to upstream: sponsor-confirmed `tied_feedback_add` into **store** `tied-project/feedback.yaml` with `context` linking readout (Track A per [PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK](../../tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/PLAN.md)). Skip when `--skip-feedback-ingest`. Never auto `tied_feedback_promote`.
+11. **Feedback cycle (optional)** — If client `feedback.yaml` has rows to upstream: sponsor-confirmed `tied_feedback_add` into **store** `tied-project/feedback.yaml` with `context` linking readout (**proxy store row** — distinct from client-originated **`/feedback`** receipt). Skip when `--skip-feedback-ingest`; readout must document ingest **N/A** and not imply client capture (see [reference.md § Feedback ingest modes](./reference.md)). Never auto `tied_feedback_promote`.
 
 12. **Close-out** — Return paths to readout and evidence. **Git commit is sponsor-only** unless explicitly requested.
 

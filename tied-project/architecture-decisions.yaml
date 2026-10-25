@@ -1999,6 +1999,15 @@ ARCH-TIED_CLIENT_DEVOPS_APPENDIX:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_DEVOPS_APPENDIX.yaml"
   name: "Client DevOps appendix documentation topology"
   status: "Implemented"
+ARCH-TIED_CLIENT_FEEDBACK_CAPTURE:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_CLIENT_FEEDBACK_CAPTURE"
+    requirements:
+      - "REQ-TIED_CLIENT_FEEDBACK_CAPTURE"
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_FEEDBACK_CAPTURE.yaml"
+  name: "Client feedback capture boundary"
+  status: "Planned"
 ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST.yaml"
   name: "Client methodology resource manifest (QMM and QA evidence chain)"

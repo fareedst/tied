@@ -1,0 +1,14 @@
+IMPL-TIED_CLIENT_FEEDBACK_CAPTURE:
+  essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_CLIENT_FEEDBACK_CAPTURE-pseudocode.md"
+  IMPL-TIED_CLIENT_FEEDBACK_CAPTURE:
+    approach_summary: "Prose and checklist updates under prompt-shared close-out/traceable-commit, bundled feedback skill cross-links, record-gf-trial facilitator ingest documentation; optional composition test that receipt id appears in close-out evidence template."
+    name: "Client feedback capture implementation"
+    related_architecture:
+      - "ARCH-TIED_CLIENT_FEEDBACK_CAPTURE"
+    related_requirements:
+      - "REQ-TIED_CLIENT_FEEDBACK_CAPTURE"
+    status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/src/e2e/client-feedback-capture-contract.test.ts"
+      - "mcp-server/src/e2e/feedback-skill.test.ts"

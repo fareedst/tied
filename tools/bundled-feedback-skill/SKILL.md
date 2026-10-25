@@ -49,6 +49,10 @@ This wording triggers existing Kaizen and quality-maturity **processes**; it is 
 
 10. **On request** — `tied_feedback_export` for sponsor review. Do **not** call `tied_feedback_promote` unless the sponsor explicitly asks for **reviewed** promotion.
 
+## Agent sessions without `/feedback`
+
+In **TIED client** agent sessions (implementation, build-plan, close-out, handoff), the agent **must not assert** that feedback was posted upstream to the TIED store **without** an MCP capture **receipt** (`id` / `created_at`) or a committed client **`feedback.yaml`** row the sponsor can verify. Narrative-only claims are forbidden ([REQ-TIED_CLIENT_FEEDBACK_CAPTURE] **SC-NO-NARRATIVE-POST**). When the sponsor wants witness capture, they invoke **`/feedback`** or **`@feedback`**; otherwise document **N/A + reason** at close-out per [traceable-commit-close-out.md](../bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md).
+
 ## Boundaries
 
 | Surface | Role |

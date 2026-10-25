@@ -1,0 +1,41 @@
+REQ-TIED_CLIENT_FEEDBACK_CAPTURE:
+  REQ-TIED_CLIENT_FEEDBACK_CAPTURE:
+    category: "Process"
+    description: "When a TIED client observes methodology friction (e.g. wrong-base-path, tooling defect), upstream feedback must be captured with a Kaizen receipt or explicit N/A—not agent narrative alone. GF-16 witness fb-mvnyr5n2-aaeg1j."
+    name: "Client upstream feedback capture discipline"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Clear ownership for process countermeasure vs REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+        - "Cohort-comparable client feedback.yaml or store ids"
+        - "Receipt-gated claims in traceable-commit"
+      problems_solved:
+        - "Agent claims upstream post without tied_feedback_add or capture receipt"
+        - "Facilitator ingest skip with no client feedback.yaml"
+        - "Proxy store rows vs client-originated capture undifferentiated in close-out"
+      why: "Sponsor could not find GF-16 report in feedback queue surfaces while client traceable-commit held the full account; dual-track Kaizen requires separate countermeasure REQ from tied-cli fix."
+    related_requirements:
+      depends_on:
+        - "REQ-FEEDBACK_TO_TIED"
+        - "REQ-TIED_FEEDBACK_REPORT_SKILL"
+      related_to:
+        - "REQ-GF16-KAIZEN-OUTCOME-CLOSE"
+        - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+    satisfaction_criteria:
+      - criterion: "Agent-facing checklist/skill text forbids claiming TIED store post without MCP receipt or committed client feedback.yaml row."
+        id: "SC-NO-NARRATIVE-POST"
+      - criterion: "GF-16 fb-mvnyr5n2-aaeg1j linked in REQ detail; outcome improved only after countermeasure shipped and a cohort run shows receipt or honest N/A."
+        id: "SC-GF16-WITNESS"
+      - criterion: "record-gf-trial / facilitator path documents proxy vs client-originated and when ingest is N/A."
+        id: "SC-GF-INGEST"
+      - criterion: "Traceable-commit or close-out template requires feedback capture outcome: receipt id, store feedback id, or N/A with reason."
+        id: "SC-CAPTURE-RECEIPT"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLIENT_FEEDBACK_CAPTURE"
+      implementation:
+        - "IMPL-TIED_CLIENT_FEEDBACK_CAPTURE"
+      tests:
+        - "mcp-server/src/e2e/client-feedback-capture-contract.test.ts"
+        - "mcp-server/src/e2e/feedback-skill.test.ts"

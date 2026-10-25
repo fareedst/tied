@@ -34,6 +34,7 @@ Unrelated REQ trackers, draft CITDP under other tokens, and gate receipts under 
 2. **Evidence paths** — Write or update:
    - `evidence/proposed-commit-message.txt` (staging map + message draft)
    - `evidence/traceable-commit-evidence.md` (VALIDATE outcome, gate receipt refs, hygiene receipt path, **excluded unrelated drift** summary)
+   - **Upstream feedback capture outcome** — in `traceable-commit-evidence.md` (or linked close-out evidence) record **one** of: MCP **`receipt` `id`** (+ optional store **`fb-*`**, client **`feedback.yaml`** path), or **N/A + reason**. Not implied by machine **`close_out`** alone ([completion-signals-handoff.md](completion-signals-handoff.md); [REQ-TIED_CLIENT_FEEDBACK_CAPTURE] **SC-NO-NARRATIVE-POST**).
 3. **Committed working staging map** — After `sub-close-out-evidence-sync`, include every **track** artifact that close-out produced and the envelope references:
    - `tied-project/working/{REQ-TOKEN}/evidence/verification-evidence-manifest.v1.json` when verification/test slugs completed (not regenerable gate JSON).
    - `tied-project/working/{REQ-TOKEN}/evidence/request-evidence-envelope.v1.json` when envelope workflow is in scope.
