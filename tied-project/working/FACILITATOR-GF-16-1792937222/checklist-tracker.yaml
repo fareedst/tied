@@ -13,10 +13,10 @@ execution_evidence:
     - build-plan-verification
     - publish-trial-readout
     - link-demo-catalogs
+    - traceable-commit
   close_out_evidence:
-    date: null
-    deferred:
-      - traceable-commit
+    date: "2026-10-25"
+    deferred: []
     envelope: null
     gates: {}
 profile_depth: minimal

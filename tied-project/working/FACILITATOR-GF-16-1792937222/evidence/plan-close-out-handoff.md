@@ -1,7 +1,7 @@
 # close-out handoff — FACILITATOR-GF-16-1792937222
 
 **Build-plan complete:** 2026-10-25  
-**Traceable-commit:** *(filled after commit)*
+**Traceable-commit:** `baa1aa9509548fb91bb5cc26d3bc72a5d182665d` (2026-10-25 close-out)
 
 ### Completion signals
 

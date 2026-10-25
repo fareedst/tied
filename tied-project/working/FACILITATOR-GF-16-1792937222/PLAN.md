@@ -163,7 +163,7 @@ Proceed to **Implement (`@build-plan`)** when §2.3 verification outputs are cap
 | 3 | Link catalogs (§2.2) | `docs/demos/README.md`, `catalog-greenfield-plan-new-feature-prompts.md` |
 | 4 | CHANGELOG | [CHANGELOG.md](../../../CHANGELOG.md) Unreleased Added row |
 
-**Close-out (facilitator session):** **complete (deliverables)** — traceable-commit **sponsor-only**.
+**Close-out (facilitator session):** **complete** — traceable-commit **`baa1aa95`** (2026-10-25).
 
 **Completion signals (this session):**
 
