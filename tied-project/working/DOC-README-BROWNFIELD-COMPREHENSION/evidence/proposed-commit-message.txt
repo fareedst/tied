@@ -1,0 +1,12 @@
+docs(readme): brownfield comprehension quick-start section
+
+Help operators understand EDPC/brownfield intent elevation before
+feature work on legacy codebases: purpose, steps, benefits, costs.
+
+DOC-README-BROWNFIELD-COMPREHENSION; PROC-EDPC_COMPREHENSION,
+PROC-BROWNFIELD_INTENT_ELEVATION (docs only). Machine close_out N/A.
+
+Staging map:
+- README.md
+- CHANGELOG.md
+- tied-project/working/DOC-README-BROWNFIELD-COMPREHENSION/

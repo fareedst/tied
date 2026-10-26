@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Store README brownfield comprehension** — Quick start section **Brownfield comprehension on an existing codebase** (purpose, EDPC steps A–G, intent elevation, benefits, costs, deep links). Non-tied-plan doc-only; `[PROC-EDPC_COMPREHENSION]`, `[PROC-BROWNFIELD_INTENT_ELEVATION]`. Working evidence: [DOC-README-BROWNFIELD-COMPREHENSION](tied-project/working/DOC-README-BROWNFIELD-COMPREHENSION/). Machine close-out gate **N/A** (no REQ mint). Feedback ingest **N/A**.
+
 ### Added
 
 - **PROMPT-GF-06 trial readout (facilitator)** — [trial-readout-PROMPT-GF-06-1792969070-gf-06.md](docs/demos/trial-readout-PROMPT-GF-06-1792969070-gf-06.md) for disposable client `1792969070-gf-06` (**TIED-DEMO-06**, `REQ-IMPL_DESIGN_DOC_VALIDATOR` on client, TIED 4.0.0 bootstrap). Catalog links in [docs/demos/README.md](docs/demos/README.md) and [catalog-greenfield-plan-new-feature-prompts.md](docs/demos/catalog-greenfield-plan-new-feature-prompts.md). Working evidence: [FACILITATOR-GF-06-1792969070-gf-06/PLAN.md](tied-project/working/FACILITATOR-GF-06-1792969070-gf-06/PLAN.md). Feedback ingest **N/A**.

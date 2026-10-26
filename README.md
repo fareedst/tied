@@ -79,6 +79,38 @@ After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`,
 
 Then follow `[PROC-AGENT_REQ_CHECKLIST]` via the [agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md).
 
+### Brownfield comprehension on an existing codebase
+
+**Purpose.** Brownfield comprehension is how TIED learns a legacy or unfamiliar system *before* feature work assumes correct intent. The goal is an evidence-backed **Software Comprehension Model**—declared intent, what code can do, what was observed, environmental effects, failures, and explicit unknowns—not a one-shot repository summary or “tests pass, so we’re fine.” TIED orchestrates this through **Evidence-Driven Program Comprehension (EDPC)** (`[PROC-EDPC_COMPREHENSION]`) and, when promoting sponsor-approved intent into REQ/ARCH, **brownfield intent elevation** (`[PROC-BROWNFIELD_INTENT_ELEVATION]`). Reverse documentation (**Track C**) captures observed behavior in IMPL sidecars only; it does not by itself create approved requirements.
+
+**Typical steps** (depth and tier vary by engagement):
+
+1. **Commission (A)** — Charter, scope matrix, and **evidence-access tier** (`source_static`, `toolchain_readonly`, or `source_change`) on the target repository; validate with MCP `tied_edpc_access_validate` / `tied_edpc_engagement_validate`.
+2. **Baseline (B)** — Structural inventory and graph receipts (EASAR workflow **B** under the EDPC umbrella).
+3. **Deep slices (C)** — Focused investigation: source graph, claims review, Track C pseudo-code where appropriate.
+4. **Ops / change (D–E, when tier allows)** — Failure and operational state, or scoped change-impact analysis.
+5. **Intent elevation (when adopting TIED on legacy code)** — Evidence-to-intent matrix, dispositions (`observed`, `approved`, `unresolved`, `rejected`); enrich REQ/ARCH from **`approved`** rows only; close with `brownfield_intent_evidence_validate`.
+6. **Verify and publish (F)** — Publish manifest with explicit **`gaps[]`**; optional client assessment (workflow **H**) for external-facing summaries.
+7. **Refresh (G)** — Re-run when builds, access, or questions change material claims.
+
+Set the per-request Tracker to `brownfield_intent_elevation.engagement: edpc_full` with `mode: pilot` or `strict` for full choreography; use `report_only` when you need diagnostics without blocking the checklist. Artifacts live under `tied-project/working/{REQ-TOKEN}/evidence/edpc/` (and related brownfield working paths).
+
+**Benefits**
+
+- **Proof boundaries** — Tier caps what agents and tools may do; conclusions stay tied to revisions, environments, and observation windows.
+- **Reuse for later TDD/LEAP** — Approved intent and structural receipts feed `[PROC-AGENT_REQ_CHECKLIST]` without treating AI prose as REQ authority.
+- **Composable tooling** — EDPC sequences existing MCP passes (source graph, EASAR receipts, claims review, brownfield validation) instead of duplicating ledgers.
+- **Honest uncertainty** — Queues and publish gaps document what was not measured, not reproduced, or deferred.
+
+**Costs**
+
+- **Time and sponsor attention** — Adjudication and `approved` promotion are human-gated; `strict` mode can block checklist steps when validation fails.
+- **Artifact upkeep** — Charters, access matrices, claim ledgers, and queue files must stay aligned with the target repo and engagement scope.
+- **Not universal depth** — The scope matrix intentionally defers domains; a published comprehension is bounded, not a certificate of health.
+- **Infrastructure** — Built MCP server, correct `TIED_BASE_PATH`, and (for production evidence) explicit charter approval for `production_touch`.
+
+Deep dives: [EDPC methodology](tied-bundle/docs/EDPC_Methodology_and_Workflows.md), [brownfield intent elevation](tied-bundle/docs/brownfield-intent-elevation.md), [EDPC vocabulary](tied-project/vocab/edpc-comprehension.md), and the [client development index — program comprehension](tied-bundle/docs/client-development-index.md) row.
+
 ## Performing work in certifiable workflows
 
 TIED work is designed so intent, evidence, and gates can support **external appraisal** without the repository claiming third-party certification. Deeper methodology narrative lives in the [client development index](tied-bundle/docs/client-development-index.md), [LEAP guide](tied-bundle/docs/LEAP.md), and [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
