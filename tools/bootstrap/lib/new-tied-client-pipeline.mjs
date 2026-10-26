@@ -154,16 +154,11 @@ export function runNewTiedClientPipeline(options) {
     skipLint = false,
     skipOnboardingAudit = false,
     skipGit = false,
-    forceMcpEnable = false,
     skipClaudeValidation = false,
     spawn = spawnSync,
     nodeExec = process.execPath,
-    stdinIsTTY = process.stdin.isTTY,
   } = options;
   const claudeValidation = options.claudeValidation ?? {};
-  const skipMcpEnable =
-    harnessProfile === "claude" ? true : options.skipMcpEnable === true;
-
   prepareClientDirectory(clientDir, { disposable: options.disposable === true });
 
   const { script: copyScript, argv: entryArgv } = bootstrapEntry(sourceRoot);
@@ -247,47 +242,6 @@ export function runNewTiedClientPipeline(options) {
     });
     if (!step.ok) {
       return step;
-    }
-  }
-
-  if (!skipMcpEnable) {
-    const cursorAgentCli = options.cursorAgentCli ?? resolveCursorAgentCli(process.env, spawn);
-    const mcpEnableLabel = `${cursorAgentCli} mcp enable tied-yaml`;
-    if (!stdinIsTTY && !forceMcpEnable) {
-      sayWarn(`Skipping ${mcpEnableLabel} (stdin is not a TTY). Use --force-mcp-enable to run anyway.`);
-    } else {
-      step = runStep(mcpEnableLabel, () => {
-        const result = spawn(
-          cursorAgentCli,
-          ["mcp", "enable", "tied-yaml"],
-          childProcessSpawnOptions({
-            cwd: clientDir,
-            shell: true,
-            encoding: "utf8",
-            stdio: "pipe",
-          }),
-        );
-        if (result.error && result.error.code === "ENOENT") {
-          sayErr(
-            `${cursorAgentCli} CLI not found on PATH (override with TIED_CURSOR_AGENT_CMD or CURSOR_CLI_NAME)`,
-          );
-          return {
-            ok: false,
-            code: 127,
-            stderr: `${cursorAgentCli} not found`,
-            step: "mcp_enable",
-          };
-        }
-        return {
-          ok: result.status === 0,
-          code: result.status ?? 1,
-          stderr: result.stderr,
-          step: "mcp_enable",
-        };
-      });
-      if (!step.ok) {
-        return step;
-      }
     }
   }
 

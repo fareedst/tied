@@ -68,7 +68,6 @@ describe("new-tied-client pipeline", () => {
       const result = runNewTiedClientPipeline({
         clientDir,
         sourceRoot,
-        skipMcpEnable: true,
         skipGit: true,
         skipLint: true,
         skipOnboardingAudit: true,
@@ -185,7 +184,7 @@ describe("new-tied-client pipeline", () => {
     assert.match(output, /ok/);
   });
 
-  it("mcp enable step uses resolved Cursor agent CLI [IMPL-TIED_FILES]", () => {
+  it("cursor harness never invokes agent mcp enable [IMPL-TIED_FILES]", () => {
     const output = runBootstrapModuleEval(`
       import { runNewTiedClientPipeline } from "./tools/bootstrap/lib/new-tied-client-pipeline.mjs";
       import path from "node:path";
@@ -203,18 +202,14 @@ describe("new-tied-client pipeline", () => {
         skipLint: true,
         skipOnboardingAudit: true,
         skipGit: true,
-        cursorAgentCli: "cursor",
-        stdinIsTTY: true,
-        forceMcpEnable: true,
         spawn: mockSpawn,
       });
       if (!result.ok) throw new Error("pipeline failed");
       const mcpCall = calls.find((c) => {
         const joined = [c.cmd, ...c.args].join(" ");
-        return joined.includes("cursor") && joined.includes("mcp") && joined.includes("enable");
+        return joined.includes("mcp") && joined.includes("enable");
       });
-      if (!mcpCall) throw new Error("missing mcp enable call: " + JSON.stringify(calls));
-      if (mcpCall.cwd !== clientDir) throw new Error("cwd mismatch");
+      if (mcpCall) throw new Error("mcp enable must not run: " + JSON.stringify(calls));
       console.log("ok");
     `);
     assert.match(output, /ok/);
@@ -274,7 +269,6 @@ describe("new-tied-client pipeline", () => {
       const result = runNewTiedClientPipeline({
         clientDir,
         sourceRoot,
-        skipMcpEnable: true,
         skipGit: true,
         skipLint: true,
         skipOnboardingAudit: true,
@@ -324,7 +318,6 @@ describe("new-tied-client integration", () => {
       const result = runNewTiedClientPipeline({
         clientDir,
         sourceRoot,
-        skipMcpEnable: true,
         skipGit: true,
         spawn: spawnSync,
       });
@@ -397,7 +390,6 @@ describe("new-tied-client integration", () => {
         "gf-001",
         "--test-root",
         testRoot,
-        "--skip-mcp-enable",
         "--skip-git",
       ],
       {
@@ -420,7 +412,7 @@ describe("new-tied-client integration", () => {
     const cli = path.join(repoRoot, "tools", "bootstrap", "new-tied-client.mjs");
     const output = spawnSync(
       process.execPath,
-      [cli, "--disposable", "--test-root", testRoot, "--skip-mcp-enable", "--skip-git"],
+      [cli, "--disposable", "--test-root", testRoot, "--skip-git"],
       {
         cwd: repoRoot,
         encoding: "utf8",
@@ -463,7 +455,6 @@ describe("new-tied-client integration", () => {
         "--full-tools",
         "--test-root",
         testRoot,
-        "--skip-mcp-enable",
         "--skip-git",
         "--skip-onboarding-audit",
       ],
@@ -505,7 +496,6 @@ describe("new-tied-client integration", () => {
         "--disposable",
         "--test-root",
         testRoot,
-        "--skip-mcp-enable",
         "--skip-git",
         "--skip-onboarding-audit",
         "--skip-lint",
@@ -529,12 +519,30 @@ describe("new-tied-client integration", () => {
     const clientPath = path.join(testRoot, clientId);
     const cursorMcp = JSON.parse(
       fs.readFileSync(path.join(clientPath, ".cursor", "mcp.json"), "utf8"),
-    ) as { mcpServers: { "tied-yaml": { env: Record<string, string> } } };
-    const claudeMcp = JSON.parse(fs.readFileSync(path.join(clientPath, ".mcp.json"), "utf8")) as {
-      mcpServers: { "tied-yaml": { env: Record<string, string> } };
+    ) as {
+      mcpServers: {
+        "tied-yaml": { env: Record<string, string> };
+        "tied-yaml-optin": { env: Record<string, string> };
+      };
     };
+    const claudeMcp = JSON.parse(fs.readFileSync(path.join(clientPath, ".mcp.json"), "utf8")) as {
+      mcpServers: {
+        "tied-yaml": { env: Record<string, string> };
+        "tied-yaml-optin": { env: Record<string, string> };
+      };
+    };
+    assert.strictEqual(cursorMcp.mcpServers["tied-yaml"].env.TIED_MCP_TOOL_PROFILE, "core");
+    assert.strictEqual(cursorMcp.mcpServers["tied-yaml-optin"].env.TIED_MCP_TOOL_PROFILE, "optin");
     assert.strictEqual(cursorMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
+    assert.strictEqual(
+      cursorMcp.mcpServers["tied-yaml-optin"].env.TIED_MCP_METRICS_CLIENT,
+      `${clientId}-optin`,
+    );
     assert.strictEqual(claudeMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
+    assert.strictEqual(
+      claudeMcp.mcpServers["tied-yaml-optin"].env.TIED_MCP_METRICS_CLIENT,
+      `${clientId}-optin`,
+    );
   });
 
   it("disposable --tag sets MCP metrics client to tagged basename [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS] [IMPL-TIED_FILES]", () => {
@@ -551,7 +559,6 @@ describe("new-tied-client integration", () => {
         "trial-01",
         "--test-root",
         testRoot,
-        "--skip-mcp-enable",
         "--skip-git",
         "--skip-onboarding-audit",
         "--skip-lint",
@@ -575,7 +582,16 @@ describe("new-tied-client integration", () => {
     const clientPath = path.join(testRoot, clientId);
     const cursorMcp = JSON.parse(
       fs.readFileSync(path.join(clientPath, ".cursor", "mcp.json"), "utf8"),
-    ) as { mcpServers: { "tied-yaml": { env: Record<string, string> } } };
+    ) as {
+      mcpServers: {
+        "tied-yaml": { env: Record<string, string> };
+        "tied-yaml-optin": { env: Record<string, string> };
+      };
+    };
     assert.strictEqual(cursorMcp.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, clientId);
+    assert.strictEqual(
+      cursorMcp.mcpServers["tied-yaml-optin"].env.TIED_MCP_METRICS_CLIENT,
+      `${clientId}-optin`,
+    );
   });
 });

@@ -25,9 +25,7 @@ Options:
   --test-root PATH          Disposable parent (default: %USERPROFILE%\\Documents\\dev\\test)
   --skip-lint               Skip lint step
   --skip-onboarding-audit   Skip G4 new-client onboarding audit (see TIED_SKIP_NEW_CLIENT_AUDIT)
-  --skip-mcp-enable         Skip Cursor agent mcp enable
   --skip-git                Skip git init/commit
-  --force-mcp-enable        Run mcp enable even when stdin is not a TTY
   --harness cursor|claude   Harness profile (default: cursor)
   --claude-first            Alias for --harness claude
   --skip-claude-validation  Skip post-audit Claude validation (claude harness only)
@@ -68,9 +66,7 @@ export function parseNewTiedClientArgs(argv, env = process.env) {
     testRoot: undefined,
     skipLint: false,
     skipOnboardingAudit: false,
-    skipMcpEnable: false,
     skipGit: false,
-    forceMcpEnable: false,
     harnessProfile: "cursor",
     skipClaudeValidation: false,
     withConsistency: false,
@@ -101,14 +97,8 @@ export function parseNewTiedClientArgs(argv, env = process.env) {
       case "--skip-onboarding-audit":
         options.skipOnboardingAudit = true;
         break;
-      case "--skip-mcp-enable":
-        options.skipMcpEnable = true;
-        break;
       case "--skip-git":
         options.skipGit = true;
-        break;
-      case "--force-mcp-enable":
-        options.forceMcpEnable = true;
         break;
       case "--harness": {
         const value = (args.shift() ?? "").toLowerCase();
@@ -182,9 +172,7 @@ function main() {
     sourceRoot,
     skipLint: parsed.skipLint,
     skipOnboardingAudit: parsed.skipOnboardingAudit,
-    skipMcpEnable: harnessProfile === "claude" ? true : parsed.skipMcpEnable,
     skipGit: parsed.skipGit,
-    forceMcpEnable: parsed.forceMcpEnable,
     harnessProfile,
     skipClaudeValidation: parsed.skipClaudeValidation,
     claudeValidation: {

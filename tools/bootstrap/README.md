@@ -48,12 +48,7 @@ PowerShell:
 powershell -ExecutionPolicy Bypass -File .\scripts\test-new-tied-client.ps1
 ```
 
-Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` (or `<unix-seconds>-<tag>` when `--tag gf-001` is passed) with bootstrap, lint, **G4 new-client onboarding audit** (`tied-project/working/tied-new-client-audit.v1.json` on two-folder clients; undivided brownfield fallback `working/tied-new-client-audit.v1.json` — [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH](../../tied-project/requirements/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml), [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), optional ``${CURSOR_CLI_NAME:-agent} mcp enable tied-yaml`` (resolved via `resolveCursorAgentCli`; see env table below), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
-
-| Variable | Role |
-|----------|------|
-| `CURSOR_CLI_NAME` | Preferred Cursor Agent CLI basename for MCP enable; default **`agent`**. Probed first, then `agent`, then `cursor` (deduped). |
-| `TIED_CURSOR_AGENT_CMD` | Full override basename; wins over `CURSOR_CLI_NAME` when set. |
+Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` (or `<unix-seconds>-<tag>` when `--tag gf-001` is passed) with bootstrap, lint, **G4 new-client onboarding audit** (`tied-project/working/tied-new-client-audit.v1.json` on two-folder clients; undivided brownfield fallback `working/tied-new-client-audit.v1.json` — [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH](../../tied-project/requirements/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml), [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), dual MCP entries in `.cursor/mcp.json` and `.mcp.json` (`tied-yaml` + `tied-yaml-optin`; enable in **Cursor Settings → MCP**), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
 
 Explicit directory:
 
@@ -61,7 +56,7 @@ Explicit directory:
 scripts\new-tied-client C:\path\to\client-dir
 ```
 
-Skip flags: `--skip-lint`, `--skip-mcp-enable`, `--skip-git`, `--force-mcp-enable`.
+Skip flags: `--skip-lint`, `--skip-git`.
 
 ## Claude adherence hook bridge ([REQ-TIED_CLAUDE_ADHERENCE_HOOKS])
 

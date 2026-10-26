@@ -259,7 +259,7 @@ EOF
 _how_smoke() {
   _how_header "Feature-orchestration smoke (disposable clients)"
   _how_render_body <<'EOF'
-  new-tied-client DIR [SOURCE]   tied-install linked (default) + lint + mcp enable + git init
+  new-tied-client DIR [SOURCE]   tied-install linked (default) + lint + git init
   test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp> or <timestamp>-<tag>
                                  tied-install linked + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git

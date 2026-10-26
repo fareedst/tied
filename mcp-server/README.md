@@ -156,7 +156,9 @@ Read-only resources (e.g. for LLM context). Detail files may be YAML or Markdown
 
 Configure MCP in your **development project** (the project where you ran `tied-install.sh` and have a `tied-project/` directory). Use your project's MCP config (e.g. `.cursor/mcp.json` in the project, or Cursor Settings → MCP with that project as the workspace).
 
-**Enable in Cursor (recommended):** From the **client project** root, run `agent mcp enable tied-yaml`. When Cursor prompts you to apply the project MCP configuration, **approve** the update. Type **`quit`** to exit the interactive `agent` session. (The file on disk alone does not always enable the server in the IDE until you do this.)
+**Enable in Cursor (recommended):** Open **Settings → MCP** and enable **`tied-yaml`** (core tools, ~92). Enable **`tied-yaml-optin`** when you need infrequent tools (~37; certification, LEAP import, token rename, etc.). Bootstrap writes both entries to `.cursor/mcp.json` with `disabled: false`; toggling is manual in the IDE.
+
+**Tool profiles:** Same `dist/index.js` binary; set `TIED_MCP_TOOL_PROFILE` to `core`, `optin`, or `full`. Unset env registers all tools (`full`, 129) for ad-hoc runs. Invalid profile values fail fast at startup.
 
 - **args**: Must be the **absolute path to the TIED repo's** `mcp-server/dist/index.js` (e.g. `/path/to/tied/mcp-server/dist/index.js`), not a path inside your project.
 - **TIED_BASE_PATH**: Must be your **project's** tied directory — absolute path (e.g. `/path/to/your/project/tied`) or relative to the workspace root (e.g. `tied` or `./tied` when your project root is the workspace).
@@ -168,7 +170,16 @@ Configure MCP in your **development project** (the project where you ran `tied-i
       "command": "node",
       "args": ["/path/to/tied/mcp-server/dist/index.js"],
       "env": {
-        "TIED_BASE_PATH": "/path/to/your/project/tied-project"
+        "TIED_BASE_PATH": "/path/to/your/project/tied-project",
+        "TIED_MCP_TOOL_PROFILE": "core"
+      }
+    },
+    "tied-yaml-optin": {
+      "command": "node",
+      "args": ["/path/to/tied/mcp-server/dist/index.js"],
+      "env": {
+        "TIED_BASE_PATH": "/path/to/your/project/tied-project",
+        "TIED_MCP_TOOL_PROFILE": "optin"
       }
     }
   }

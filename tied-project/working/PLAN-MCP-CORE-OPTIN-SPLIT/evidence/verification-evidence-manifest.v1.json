@@ -1,0 +1,68 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npm run build && npx tsx --test src/tool-profiles.test.ts src/tool-profile-stdio.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 6063,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/mcp-config.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 521,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    }
+  ],
+  "commit": "ddb02f76887fbaad870a046a448195f1e4ee48d6",
+  "covered_tokens": [
+    "IMPL-MCP_USAGE_METRICS",
+    "IMPL-TIED_FILES",
+    "REQ-MCP_USAGE_METRICS",
+    "REQ-TIED_CLAUDE_HARNESS",
+    "REQ-TIED_LAYERED_CLIENT_INSTALL",
+    "REQ-TIED_SETUP"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "Brownfield merge preserves foreign mcpServers keys in fixtures only",
+    "Tool counts are registration partition only; not production usage metrics"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "mcp-optin-closeout-2026-10-26",
+  "schema_version": "verification-evidence-manifest.v1"
+}

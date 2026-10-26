@@ -1,0 +1,75 @@
+CITDP-PLAN-MCP-CORE-OPTIN-SPLIT:
+  change_definition:
+    current_behavior: "Single tied-yaml MCP stdio entry registers all 129 tools; bootstrap may spawn agent mcp enable; Claude init noops when tied-yaml exists, blocking opt-in merge."
+    desired_behavior: "Core (92) and opt-in (37) stdio entries via TIED_MCP_TOOL_PROFILE; install refresh updates both keys; no agent mcp enable in factory; resources only on core/full."
+    non_goals:
+      - "Methodology-wide doc sweep for agent mcp enable"
+      - "New REQ/ARCH/IMPL tokens for first delivery"
+      - "Separate dist binaries per profile"
+    success_criteria:
+      - "mcp-config tests cover dual servers and Claude partial merge"
+      - "new-tied-client e2e never invokes mcp enable"
+      - "tool-profiles unit tests and stdio tools/list counts pass"
+  evidence:
+    command_seq:
+      - "cd mcp-server && npm run build && npx tsx --test src/tool-profiles.test.ts src/tool-profile-stdio.test.ts"
+      - "node --test tools/bootstrap/lib/mcp-config.test.mjs"
+    proof_boundaries:
+      - "Tool counts are registration partition only; not production usage metrics"
+      - "Brownfield merge preserves foreign mcpServers keys in fixtures only"
+  completion_criteria:
+    envelope_path: "tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/request-evidence-envelope.v1.json"
+    verification_gate_notes: "mcp-server npm test; node --test tools/bootstrap/lib/mcp-config.test.mjs"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-MCP_USAGE_METRICS"
+      - "IMPL-TIED_CLAUDE_HARNESS"
+      - "IMPL-TIED_FILES"
+      - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
+    modules_or_boundaries: "mcp-server/src tool registration; tools/bootstrap/lib/mcp-config.mjs; layers/mcp.mjs; new-tied-client pipeline"
+    tied_tokens_affected:
+      - "IMPL-MCP_USAGE_METRICS"
+      - "IMPL-TIED_FILES"
+      - "REQ-MCP_USAGE_METRICS"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+  leap_feedback:
+    divergences_from_analysis: "none yet"
+    record_status: "in_progress"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-MCP-CORE-OPTIN-SPLIT"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-25"
+    status: "in_progress"
+    title: "MCP core and opt-in tool profile split"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Both MCP servers enabled register duplicate tied:// resource URIs"
+        - "Brownfield refresh overwrites org-kb or other foreign mcpServers keys"
+        - "New tool ships without OPTIN classification and disappears from core unexpectedly"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "mcp-config brownfield fixture preserves foreign servers"
+        - "Partition invariant test core union optin equals allTools"
+        - "resources.ts gated to core/full profiles only"
+      evidence_references:
+        - "mcp-server/src/e2e/new-tied-client.test.ts"
+        - "mcp-server/src/tool-profiles.test.ts"
+        - "tools/bootstrap/lib/mcp-config.test.mjs"
+      falsification_questions:
+        - "Does Claude initializeClaudeMcpConfig noop leave opt-in missing on brownfield?"
+        - "Does tied-cli still read only mcpServers.tied-yaml env after dual entry?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Bootstrap MCP registration; minimal adversarial depth."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    summary: "Tool partition drift; duplicate resources; foreign server clobber."
+  test_strategy:
+    command_seq:
+      - "cd mcp-server && npm run build && npm test"
+      - "node --test tools/bootstrap/lib/mcp-config.test.mjs"
+    summary: "Unit partition and bootstrap JSON tests plus mcp-server suite."

@@ -128,7 +128,7 @@ echo.
 echo --- 5/5 test-new-tied-client.cmd factory skips ---
 set "TIED_TEST_ROOT=%TEMP%\tied-factory-smoke"
 if not exist "!TIED_TEST_ROOT!" mkdir "!TIED_TEST_ROOT!"
-call "%REPO_ROOT%\test-new-tied-client.cmd" --skip-mcp-enable --skip-git --skip-onboarding-audit
+call "%REPO_ROOT%\test-new-tied-client.cmd" --skip-git --skip-onboarding-audit
 if errorlevel 1 (
   echo FAIL: test-new-tied-client.cmd
   popd

@@ -1,6 +1,6 @@
 /**
  * [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS]
- * How: INITIALIZE_TIED_MCP_CONFIG — create .cursor/mcp.json only when absent.
+ * How: INITIALIZE_TIED_MCP_CONFIG — create .cursor/mcp.json only when absent; refresh merges tied-yaml + tied-yaml-optin.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -35,7 +35,80 @@ export function resolveBootstrapMetricsClient(projectRoot, env = process.env) {
   return basename;
 }
 
-export function refreshTiedMcpJson({
+/**
+ * @param {object} params
+ * @param {string} params.tiedMcpIndexJs
+ * @param {string} params.tiedBasePath
+ * @param {boolean} [params.collectMetrics]
+ * @param {string} [params.metricsClient]
+ * @param {string} [params.projectBasename]
+ * @param {string} [params.harnessLabel]
+ * @param {"core"|"optin"} params.toolProfile
+ * @param {Record<string, string>} [params.extraEnv]
+ */
+export function buildTiedMcpServerEntry({
+  tiedMcpIndexJs,
+  tiedBasePath,
+  collectMetrics,
+  metricsClient,
+  projectBasename,
+  harnessLabel,
+  toolProfile,
+  extraEnv,
+}) {
+  /** @type {Record<string, string>} */
+  const env = {
+    TIED_BASE_PATH: jsonSafeAbsolute(tiedBasePath),
+    TIED_MCP_TOOL_PROFILE: toolProfile,
+    ...(extraEnv ?? {}),
+  };
+  if (harnessLabel) {
+    env.TIED_MCP_HARNESS = harnessLabel;
+  }
+  if (collectMetrics) {
+    env.TIED_MCP_COLLECT_METRICS = "1";
+    env.TIED_MCP_METRICS_CLIENT = metricsClient || projectBasename || "tied-client";
+  }
+  return {
+    type: "stdio",
+    disabled: false,
+    command: "node",
+    args: [jsonSafeAbsolute(tiedMcpIndexJs)],
+    env,
+  };
+}
+
+/**
+ * @param {object} cfg
+ * @returns {boolean}
+ */
+export function tiedMcpServersUpToDate(cfg) {
+  const servers = cfg?.mcpServers;
+  if (!servers?.["tied-yaml"] || !servers?.["tied-yaml-optin"]) {
+    return false;
+  }
+  if (servers["tied-yaml"].env?.TIED_MCP_TOOL_PROFILE !== "core") {
+    return false;
+  }
+  if (servers["tied-yaml-optin"].env?.TIED_MCP_TOOL_PROFILE !== "optin") {
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Merge or create both tied-yaml (core) and tied-yaml-optin entries; preserve foreign mcpServers keys.
+ * @param {object} params
+ * @param {string} params.mcpJsonPath
+ * @param {string} params.tiedMcpIndexJs
+ * @param {string} params.tiedBasePath
+ * @param {boolean} [params.collectMetrics]
+ * @param {string} [params.metricsClient]
+ * @param {string} [params.projectBasename]
+ * @param {string} [params.harnessLabel]
+ * @param {Record<string, string>} [params.extraEnv]
+ */
+export function refreshTiedMcpServersJson({
   mcpJsonPath,
   tiedMcpIndexJs,
   tiedBasePath,
@@ -43,22 +116,32 @@ export function refreshTiedMcpJson({
   metricsClient,
   projectBasename,
   harnessLabel,
+  extraEnv,
 }) {
-  const env = { TIED_BASE_PATH: jsonSafeAbsolute(tiedBasePath) };
-  if (harnessLabel) {
-    env.TIED_MCP_HARNESS = harnessLabel;
-  }
-  if (collectMetrics) {
-    env.TIED_MCP_COLLECT_METRICS = "1";
-    env.TIED_MCP_METRICS_CLIENT = metricsClient || projectBasename;
-  }
-  const entry = {
-    type: "stdio",
-    disabled: false,
-    command: "node",
-    args: [jsonSafeAbsolute(tiedMcpIndexJs)],
-    env,
-  };
+  const baseMetrics = metricsClient || projectBasename;
+  const coreEntry = buildTiedMcpServerEntry({
+    tiedMcpIndexJs,
+    tiedBasePath,
+    collectMetrics,
+    metricsClient: baseMetrics,
+    projectBasename,
+    harnessLabel,
+    toolProfile: "core",
+    extraEnv,
+  });
+  const optinMetrics =
+    collectMetrics && baseMetrics ? `${baseMetrics}-optin` : baseMetrics;
+  const optinEntry = buildTiedMcpServerEntry({
+    tiedMcpIndexJs,
+    tiedBasePath,
+    collectMetrics,
+    metricsClient: optinMetrics,
+    projectBasename,
+    harnessLabel,
+    toolProfile: "optin",
+    extraEnv,
+  });
+
   let cfg;
   if (fs.existsSync(mcpJsonPath)) {
     const raw = fs.readFileSync(mcpJsonPath, "utf8");
@@ -69,12 +152,18 @@ export function refreshTiedMcpJson({
     }
     if (typeof cfg !== "object" || cfg === null) cfg = {};
     if (typeof cfg.mcpServers !== "object" || cfg.mcpServers === null) cfg.mcpServers = {};
-    cfg.mcpServers["tied-yaml"] = entry;
   } else {
-    cfg = { mcpServers: { "tied-yaml": entry } };
+    cfg = { mcpServers: {} };
   }
+  cfg.mcpServers["tied-yaml"] = coreEntry;
+  cfg.mcpServers["tied-yaml-optin"] = optinEntry;
   fs.mkdirSync(path.dirname(mcpJsonPath), { recursive: true });
   fs.writeFileSync(mcpJsonPath, `${JSON.stringify(cfg, null, 2)}\n`, "utf8");
+}
+
+/** @deprecated Use refreshTiedMcpServersJson — kept for callers that refresh a single path shape. */
+export function refreshTiedMcpJson(refreshArgs) {
+  refreshTiedMcpServersJson(refreshArgs);
 }
 
 export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process.env) {
@@ -85,12 +174,12 @@ export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process
   const mcpServerDist = path.join(tiedRepoRoot, "mcp-server", "dist", "index.js");
   if (!fs.existsSync(mcpServerDist)) {
     throw new Error(
-      `Missing built MCP server: ${mcpServerDist}\nBuild it: cd ${path.join(tiedRepoRoot, "mcp-server")} && npm install && npm run build`
+      `Missing built MCP server: ${mcpServerDist}\nBuild it: cd ${path.join(tiedRepoRoot, "mcp-server")} && npm install && npm run build`,
     );
   }
   const collectMetrics = env.TIED_MCP_COLLECT_METRICS === "1";
   const projectBasename = path.basename(projectRoot);
-  refreshTiedMcpJson({
+  refreshTiedMcpServersJson({
     mcpJsonPath: mcpJson,
     tiedMcpIndexJs: mcpServerDist,
     tiedBasePath: projectTiedBasePath(projectRoot),
@@ -98,13 +187,15 @@ export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process
     metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
     projectBasename,
   });
-  sayOk(`Initialized ${mcpJson} mcpServers.tied-yaml (TIED_MCP dist + project TIED_BASE_PATH).`);
+  sayOk(
+    `Initialized ${mcpJson} mcpServers.tied-yaml + tied-yaml-optin (TIED_MCP dist + project TIED_BASE_PATH).`,
+  );
   return { initialized: true };
 }
 
 /**
  * [IMPL-TIED_CLAUDE_HARNESS] [ARCH-TIED_CLAUDE_HARNESS] [REQ-TIED_CLAUDE_HARNESS] [REQ-MCP_USAGE_METRICS]
- * How: INITIALIZE_CLAUDE_MCP_CONFIG — repo-root .mcp.json create-if-absent or safe-merge tied-yaml only.
+ * How: INITIALIZE_CLAUDE_MCP_CONFIG — repo-root .mcp.json create-if-absent or safe-merge TIED servers.
  */
 export function initializeClaudeMcpConfig(projectRoot, tiedRepoRoot, options = {}) {
   const env = options.env ?? process.env;
@@ -131,16 +222,18 @@ export function initializeClaudeMcpConfig(projectRoot, tiedRepoRoot, options = {
     } catch (e) {
       throw new Error(`Invalid JSON in ${mcpJson}: ${e.message}`);
     }
-    if (typeof cfg === "object" && cfg !== null && cfg.mcpServers?.["tied-yaml"]) {
+    if (typeof cfg === "object" && cfg !== null && tiedMcpServersUpToDate(cfg)) {
       return { path: mcpJson, action: "noop", initialized: false };
     }
-    refreshTiedMcpJson(refreshArgs);
-    sayOk(`Merged ${mcpJson} mcpServers.tied-yaml (safe merge; foreign servers preserved).`);
+    refreshTiedMcpServersJson(refreshArgs);
+    sayOk(`Merged ${mcpJson} mcpServers tied-yaml + tied-yaml-optin (foreign servers preserved).`);
     return { path: mcpJson, action: "merged", initialized: true };
   }
 
-  refreshTiedMcpJson(refreshArgs);
-  sayOk(`Initialized ${mcpJson} mcpServers.tied-yaml (TIED_MCP dist + TIED_MCP_HARNESS=${harnessLabel}).`);
+  refreshTiedMcpServersJson(refreshArgs);
+  sayOk(
+    `Initialized ${mcpJson} mcpServers tied-yaml + tied-yaml-optin (TIED_MCP_HARNESS=${harnessLabel}).`,
+  );
   return { path: mcpJson, action: "created", initialized: true };
 }
 
@@ -148,7 +241,7 @@ export function assertMcpPrerequisite(tiedRepoRoot) {
   const mcpServerDist = path.join(tiedRepoRoot, "mcp-server", "dist", "index.js");
   if (!fs.existsSync(mcpServerDist)) {
     throw new Error(
-      `Missing built MCP server: ${mcpServerDist}\nBuild it: cd ${path.join(tiedRepoRoot, "mcp-server")} && npm install && npm run build`
+      `Missing built MCP server: ${mcpServerDist}\nBuild it: cd ${path.join(tiedRepoRoot, "mcp-server")} && npm install && npm run build`,
     );
   }
 }

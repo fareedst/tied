@@ -17,6 +17,9 @@
 | **identity source** | id type, id origin | Profile metadata: `configured` or `path_fallback` |
 | **signature coverage** | top-k metadata | Analyzer YAML: `bound` / `considered` / `emitted` / `omitted` / `status` for bounded aggregation. `exact_within_bound` means the complete visible candidate set fits the bound; `approximate` discloses per-file truncation or visible aggregate overflow and never claims hidden candidates were globally ranked. |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
+| **tool profile** | MCP profile, core/opt-in split | `TIED_MCP_TOOL_PROFILE` on stdio entry: `core` (~92 tools), `optin` (~37), `full`/unset (129) · [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) |
+| **`tied-yaml-optin`** | opt-in MCP server | Second stdio entry in `.cursor/mcp.json` / `.mcp.json` for infrequent tools; enable in **Settings → MCP** |
+| **`TIED_MCP_TOOL_PROFILE`** | tool profile env | `core` on `tied-yaml`; `optin` on `tied-yaml-optin`; invalid value fails fast at startup |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |
 | **structured record input** | native object, JSON object payload | Non-array JSON object passed directly on MCP `tools/call` for record-shaped write fields · [REQ-TIED_TOOL_INPUT_COMPATIBILITY](../requirements/REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml) |
 | **input normalization** | payload coercion, record resolver | Shared `normalizeRecordPayload`: object pass-through or legacy string via `parseRecordOrYaml` before canonical YAML write · [IMPL-TIED_TOOL_INPUT_NORMALIZATION](../implementation-decisions/IMPL-TIED_TOOL_INPUT_NORMALIZATION.yaml) |

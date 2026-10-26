@@ -421,13 +421,17 @@ describe("e2e: bootstrap and load", () => {
     );
 
     const legacyMcpEnableCommand = ["agent", "enable", "tied-yaml"].join(" ");
-    const currentMcpEnableCommand = ["agent", "mcp", "enable", "tied-yaml"].join(" ");
     const bundledSkillPath = path.join(repoRoot, "tools", "bundled-tied-yaml-skill", "SKILL.md");
     const bundledSkillText = fs.readFileSync(bundledSkillPath, "utf8");
     assert.match(
       bundledSkillText,
-      new RegExp(currentMcpEnableCommand.replaceAll(" ", "\\s+")),
-      "bundled tied-yaml skill should document the current MCP enable command [REQ-TIED_SETUP]"
+      /Settings\s*→\s*MCP/,
+      "bundled tied-yaml skill should document Cursor Settings MCP enable [REQ-TIED_SETUP]"
+    );
+    assert.doesNotMatch(
+      bundledSkillText,
+      new RegExp(["agent", "mcp", "enable", "tied-yaml"].join(" ").replaceAll(" ", "\\s+")),
+      "bundled tied-yaml skill should not treat agent mcp enable as primary path [REQ-TIED_SETUP]"
     );
     assert.doesNotMatch(
       bundledSkillText,
@@ -629,7 +633,10 @@ describe("e2e: bootstrap and load", () => {
       if (clientValue !== undefined) env.TIED_MCP_METRICS_CLIENT = clientValue;
       runBootstrap(repoRoot, { target, entrypoint: "node", env });
       return JSON.parse(fs.readFileSync(path.join(target, ".cursor", "mcp.json"), "utf8")) as {
-        mcpServers: { "tied-yaml": { env: Record<string, string> } };
+        mcpServers: {
+          "tied-yaml": { env: Record<string, string> };
+          "tied-yaml-optin": { env: Record<string, string> };
+        };
       };
     };
 
@@ -637,6 +644,14 @@ describe("e2e: bootstrap and load", () => {
       TIED_BASE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-project")),
       TIED_METHODOLOGY_BUNDLE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-bundle")),
       TIED_STORE_ROOT: jsonSafeAbsoluteForTest(repoRoot),
+      TIED_MCP_TOOL_PROFILE: "core",
+      ...extra,
+    });
+    const linkedOptinEnv = (target: string, extra: Record<string, string> = {}) => ({
+      TIED_BASE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-project")),
+      TIED_METHODOLOGY_BUNDLE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-bundle")),
+      TIED_STORE_ROOT: jsonSafeAbsoluteForTest(repoRoot),
+      TIED_MCP_TOOL_PROFILE: "optin",
       ...extra,
     });
 
@@ -647,19 +662,34 @@ describe("e2e: bootstrap and load", () => {
       TIED_MCP_COLLECT_METRICS: "1",
       TIED_MCP_METRICS_CLIENT: "basename-client",
     }));
+    assert.deepStrictEqual(
+      basenameConfig.mcpServers["tied-yaml-optin"].env,
+      linkedOptinEnv(basenameTarget, {
+        TIED_MCP_COLLECT_METRICS: "1",
+        TIED_MCP_METRICS_CLIENT: "basename-client-optin",
+      }),
+    );
 
     const overrideTarget = path.join(tempDir, "override-client");
     fs.mkdirSync(overrideTarget);
     const overrideConfig = runBootstrapMetrics(overrideTarget, "1", "explicit-client");
     assert.strictEqual(
       overrideConfig.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT,
-      "explicit-client"
+      "explicit-client",
+    );
+    assert.strictEqual(
+      overrideConfig.mcpServers["tied-yaml-optin"].env.TIED_MCP_METRICS_CLIENT,
+      "explicit-client-optin",
     );
 
     const nonOneTarget = path.join(tempDir, "non-one-client");
     fs.mkdirSync(nonOneTarget);
     const nonOneConfig = runBootstrapMetrics(nonOneTarget, "true");
     assert.deepStrictEqual(nonOneConfig.mcpServers["tied-yaml"].env, linkedMcpEnv(nonOneTarget));
+    assert.deepStrictEqual(
+      nonOneConfig.mcpServers["tied-yaml-optin"].env,
+      linkedOptinEnv(nonOneTarget),
+    );
   });
 
   it("refreshes layered vocabulary without overwriting client content [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [REQ-TIED_VOCABULARY_OWNERSHIP]", () => {
