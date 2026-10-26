@@ -1,0 +1,280 @@
+DIAGNOSTIC: envelope patch failed for tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/verification-evidence-manifest.v1.json: envelope_revision_conflict
+DEBUG: evidence_chain_profile depth=integrated fidelity=false binding=false spec=false
+DIAGNOSTIC: envelope patch failed for tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/evidence-chain-profile.v1.json: envelope_revision_conflict
+{
+  "phase": "close_out",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": false,
+    "reason": "collect",
+    "run_id": "oow3-closeout-2026-10-26"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-TIED_OPEN_ONTOLOGIES_WAVE3",
+      "findings": [
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "translate-sponsor-intent",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/translate-sponsor-intent-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "unit-test-red",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-red-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "unit-test-green",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-green-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "composition-integration",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/composition-integration-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "risk-assessment",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/risk-assessment-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sync-tied-stack",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sync-tied-stack-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "apply-token-comments",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/apply-token-comments-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "change-definition",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/change-definition-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "test-strategy",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/test-strategy-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "session-bootstrap",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/session-bootstrap-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "traceable-commit",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/traceable-commit-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "gate-pseudocode-validation",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gate-pseudocode-validation-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "impact-discovery",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/impact-discovery-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "gitignore-close-out-hygiene",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gitignore-close-out-hygiene-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "three-way-alignment-unit",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/three-way-alignment-unit-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "persist-implementation-records",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/persist-implementation-records-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sub-adversarial-inquiry-pass",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-adversarial-inquiry-pass-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sub-yaml-edit-loop",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-yaml-edit-loop-evidence.md\""
+          }
+        },
+        {
+          "code": "completed_with_unresolved_evidence",
+          "detail": {
+            "step_slug": "sub-close-out-evidence-sync",
+            "error": "missing_artifact: \"tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-close-out-evidence-sync-evidence.md\""
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T15-16-16-687Z.json",
+            "stored_tracker_hash": "sha256:e81b9dbf6fe1f2f95317802f792aa2022cf51025becb60191175d31c23c19ae7",
+            "current_tracker_hash": "sha256:884798a9c5f4f0892cfc12cd9b8a59d1d00b8bb87e9cc8d7a1c0fc0d8e62bfac",
+            "stored_citdp_hash": "sha256:dd960fbd4f3e88397baf43e245f89b22dd23c19c68ae72ca41169fa5d7bd8722",
+            "current_citdp_hash": "sha256:98d3b82625e62c60a275f0122c490d4b42f2413b6ba5b504af7ca831cbc294d9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T15-17-03-164Z.json",
+            "stored_tracker_hash": "sha256:e81b9dbf6fe1f2f95317802f792aa2022cf51025becb60191175d31c23c19ae7",
+            "current_tracker_hash": "sha256:884798a9c5f4f0892cfc12cd9b8a59d1d00b8bb87e9cc8d7a1c0fc0d8e62bfac",
+            "stored_citdp_hash": "sha256:dd960fbd4f3e88397baf43e245f89b22dd23c19c68ae72ca41169fa5d7bd8722",
+            "current_citdp_hash": "sha256:98d3b82625e62c60a275f0122c490d4b42f2413b6ba5b504af7ca831cbc294d9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T15-17-58-662Z.json",
+            "stored_tracker_hash": "sha256:884099bbd579b56170e3fec9e2e3e48e6ee1822fff799cb57c6d68888d202454",
+            "current_tracker_hash": "sha256:884798a9c5f4f0892cfc12cd9b8a59d1d00b8bb87e9cc8d7a1c0fc0d8e62bfac",
+            "stored_citdp_hash": "sha256:dd960fbd4f3e88397baf43e245f89b22dd23c19c68ae72ca41169fa5d7bd8722",
+            "current_citdp_hash": "sha256:98d3b82625e62c60a275f0122c490d4b42f2413b6ba5b504af7ca831cbc294d9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T17-37-59-017Z.json",
+            "stored_tracker_hash": "sha256:884099bbd579b56170e3fec9e2e3e48e6ee1822fff799cb57c6d68888d202454",
+            "current_tracker_hash": "sha256:884798a9c5f4f0892cfc12cd9b8a59d1d00b8bb87e9cc8d7a1c0fc0d8e62bfac",
+            "stored_citdp_hash": "sha256:dd960fbd4f3e88397baf43e245f89b22dd23c19c68ae72ca41169fa5d7bd8722",
+            "current_citdp_hash": "sha256:98d3b82625e62c60a275f0122c490d4b42f2413b6ba5b504af7ca831cbc294d9"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T17-54-36-419Z.json",
+            "stored_tracker_hash": "sha256:d6407e1782465ac3aeb9ca26d0c25b68a4dfd8ae6b6a73b3c859cd5f21580a52",
+            "current_tracker_hash": "sha256:884798a9c5f4f0892cfc12cd9b8a59d1d00b8bb87e9cc8d7a1c0fc0d8e62bfac",
+            "stored_citdp_hash": "sha256:dd960fbd4f3e88397baf43e245f89b22dd23c19c68ae72ca41169fa5d7bd8722",
+            "current_citdp_hash": "sha256:98d3b82625e62c60a275f0122c490d4b42f2413b6ba5b504af7ca831cbc294d9"
+          }
+        }
+      ],
+      "ledger_rows": 21,
+      "read_only": true,
+      "process_grade": {
+        "score": 82,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 40,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "evidence_chain_profile": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/evidence-chain-profile.v1.json",
+    "validators_observed": true
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T17-55-21-053Z.json",
+    "hash": "sha256:37d0b1d25a200aab39cd958e0fdcf4df0e372c885fc711668e70e6fa3408c731"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 4,
+    "diagnostics": []
+  }
+}

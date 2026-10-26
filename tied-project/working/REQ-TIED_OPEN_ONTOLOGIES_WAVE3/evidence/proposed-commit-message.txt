@@ -1,10 +1,13 @@
-chore(tied): refresh OOW3 close-out envelope on HEAD
+chore(tied): OOW3 close-out recovery evidence after hygiene delete
 
-Re-run close_out gates after checker-claim; update verification
-manifest commit pointer and request-evidence-envelope sync only.
+Re-run close_out gates (blocking gaps 0), refresh envelope/manifest/
+evidence-chain profile, restore step-evidence stubs, and update tracker
+after local apply-delete removed untracked close-out artifacts.
 
 REQ-TIED_OPEN_ONTOLOGIES_WAVE3
 
-Machine close-out: pass (blocking gaps 0)
-Process contract: pass
-Adherence ledger: pass (band B stale gate receipts advisory)
+Machine close-out: pass
+Process contract: pass (24/24 CITDP unit tests)
+Adherence ledger: band B (stale gate receipts advisory)
+
+Feature SHAs unchanged: 7f493e8, ddb02f76

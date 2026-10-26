@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Open Ontologies Wave 3 close-out recovery** — Re-ran unified `close_out` gates after local hygiene apply-delete; refreshed committed working envelope/manifest and recovery step-evidence under [REQ-TIED_OPEN_ONTOLOGIES_WAVE3](tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/). Feature delivery unchanged (`7f493e8`).
+
 - **Store README brownfield comprehension** — Quick start section **Brownfield comprehension on an existing codebase** (purpose, EDPC steps A–G, intent elevation, benefits, costs, deep links). Non-tied-plan doc-only; `[PROC-EDPC_COMPREHENSION]`, `[PROC-BROWNFIELD_INTENT_ELEVATION]`. Working evidence: [DOC-README-BROWNFIELD-COMPREHENSION](tied-project/working/DOC-README-BROWNFIELD-COMPREHENSION/). Machine close-out gate **N/A** (no REQ mint). Feedback ingest **N/A**.
 
 ### Added
