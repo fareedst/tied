@@ -1,9 +1,10 @@
-feat(mcp): plumb impact-preview.v2 with change-impact profile
+chore(tied): refresh OOW3 close-out envelope on HEAD
 
-Opt-in tied-project/change-impact-profile.v1.yaml emits impact-preview.v2
-impact_legs (path/glob touch, not_measured); default callers stay v1.
+Re-run close_out gates after checker-claim; update verification
+manifest commit pointer and request-evidence-envelope sync only.
 
-REQ-TIED_OPEN_ONTOLOGIES_WAVE3, ARCH/IMPL-TIED_CHANGE_IMPACT_PROFILE,
-IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE (pseudo-code sidecar for PSA).
+REQ-TIED_OPEN_ONTOLOGIES_WAVE3
 
-Close-out: envelope + manifest under tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/.
+Machine close-out: pass (blocking gaps 0)
+Process contract: pass
+Adherence ledger: pass (band B stale gate receipts advisory)

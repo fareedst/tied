@@ -11,7 +11,7 @@
         "cd mcp-server && npx tsx --test src/analysis/change-impact-profile.test.ts src/analysis/plumb-diff-impact-preview.test.ts"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 1953,
+      "duration_ms": 1928,
       "exit_code": 0,
       "id": "citdp-evidence-1",
       "result": "passed"
@@ -27,13 +27,13 @@
         "cd mcp-server && npx tsx --test src/request-evidence-envelope/request-evidence-envelope.test.ts"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 805,
+      "duration_ms": 864,
       "exit_code": 0,
       "id": "citdp-evidence-2",
       "result": "passed"
     }
   ],
-  "commit": "cf2ae00f125f872fe3e5c7182ee45cbf9b47d57c",
+  "commit": "c208a29cfd816579928d9888b2fa763fb36c57de",
   "covered_tokens": [
     "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
   ],

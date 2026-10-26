@@ -53,11 +53,13 @@ execution_evidence:
     date: '2026-10-26'
     feature_complete: true
     commit:
-      hash: 7f493e8a5597009f7544b567f1430291bdd697ac
-      short: 7f493e8
-      message: 'feat(mcp): plumb impact-preview.v2 with change-impact profile'
+      hash: 62fe1caab144aceaccb07f1a42e9855d139b2132
+      short: 62fe1ca
+      message: 'chore(tied): refresh OOW3 close-out envelope on HEAD'
+      feature_hash: 7f493e8a5597009f7544b567f1430291bdd697ac
     master_checklist: tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/agent-req-implementation-checklist.yaml
-    gates: {}
+    gates:
+      close_out: allowed
   completed:
     - session-bootstrap
     - translate-sponsor-intent
