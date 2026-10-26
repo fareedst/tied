@@ -78,6 +78,7 @@
 - **Methodology migration** / **client refresh** / **vocabulary merge mode** — a `tied-install.sh` refresh replaces only the inherited `tied-bundle/` snapshot, preserves project YAML and client-owned vocabulary, and uses `--merge-vocab` to add absent glossary files; canonical terms live in [`tied-methodology.md`](tied-methodology.md) and the operational procedure in [`../docs/methodology-migration.md`](../../tied-bundle/docs/methodology-migration.md).
 - **Non-canonical LEAP proposals** (`leap-proposals/`) never mutate project TIED YAML — see [`leap-proposal-queue.md`](leap-proposal-queue.md).
 - **Fidelity research** is read-only against audited projects; candidate findings and case reports belong in the research dataset, while remediation is a separately approved LEAP operation — see [`fidelity-research.md`](fidelity-research.md) and [`../docs/tied-fidelity-research-plan.md`](../../docs/tied-fidelity-research-plan.md).
+- **Checker-backed claims vs tests vs `tied_verify`** — **checker-backed claim** and **theorem statement** are canonical in [`quality-assurance.md`](quality-assurance.md) (Phase 2 [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)); operator compose in [tests-vs-checker-backed-claims.md](../../tied-bundle/docs/tests-vs-checker-backed-claims.md). Passing TIED tests is **empirical test pass**, not a **checker-backed claim**; **`tied_verify`** is verification-gated status, not external proof discharge.
 - **Adversarial inquiry vs quality-assurance profiles vs pseudo-code validation** — three distinct checklist layers: (1) `[PROC-PSEUDOCODE_VALIDATION]` / `sub-pseudocode-validation-pass` gates IMPL contract structure and traceability without runtime claims; (2) [`quality-assurance.md`](quality-assurance.md) profiles and evidence matrices select risk-triggered assurance depth at `impact-discovery` / `risk-assessment`; (3) [`fidelity-research.md`](fidelity-research.md) adversarial inquiry and `sub-adversarial-inquiry-pass` add obligation mapping, proof-boundary partitioning, finding ledgers, and scoped strict blocking at `verification-gate`. Do not conflate structural pseudo-code PASS with executable fidelity PASS or with human-approved strict status.
 - **Evidence chain profile vs assurance profile vs research profile** — the **evidence chain profile** (`evidence-chain-profile.v1`) is a read-only completeness/provenance artifact. An **assurance profile** selects risk-triggered quality evidence. **Integrated agent profile** and **human research profile** are fidelity research *modes*. **Evidence-chain profile depth** (`integrated` \| `human_research`) only selects how much of the chain one generator run measures. Canonical terms: [`quality-assurance.md`](quality-assurance.md); contrast in [`fidelity-research.md`](fidelity-research.md).
 - **Evidence chain statistics report vs evidence chain profile** — the **evidence chain statistics report** (`evidence-chain-statistics-report.v1`) is a TIED-source offline batch over already-generated profiles. A **client cohort** is a compatibility partition, not a quality **pilot**. A **report input manifest** names artifacts; it is not a **project manifest**. Canonical terms: [`quality-assurance.md`](quality-assurance.md).
@@ -104,6 +105,7 @@
 | agent-stream | Cross-topic notes |
 | agentstream | Cross-topic notes |
 | certifiability readiness | `process-certification-readiness.md` |
+| checker-backed claim | Cross-topic notes; `quality-assurance.md` |
 | client refresh | Cross-topic notes |
 | Domain vocabulary index | Title |
 | domain-references.md | Preferred terms (directory entry) |
@@ -125,6 +127,7 @@
 | process-certification-readiness.md | Canonical glossaries |
 | proof boundary | `fidelity-research.md` |
 | specification state | `fidelity-research.md` |
+| theorem statement | Cross-topic notes; `quality-assurance.md` |
 | divergent edge | `fidelity-research.md` |
 | fidelity finding | `fidelity-research.md` |
 | finding lifecycle | `fidelity-research.md` |

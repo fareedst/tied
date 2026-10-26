@@ -9,14 +9,14 @@ ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
       - "IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
     requirements:
       - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
-  decision: "Canonical guide in tied-bundle/docs/tests-vs-checker-backed-claims.md; client-development-index Quick reads and pseudocode-writing-and-validation cross-link; bootstrap contract test guards markers; no Rocq/Verus gate."
+  decision: "Canonical guide in tied-bundle/docs/tests-vs-checker-backed-claims.md; canonical claim-class terms CHECKER_BACKED_CLAIM and THEOREM_STATEMENT in tied-project/vocab/quality-assurance.md; Phase 3 envelope compose and MCM §2 row 16; advisory independent_proofs validate via ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF; client-development-index Quick reads and pseudocode cross-link; bootstrap contract tests; no Rocq/Verus gate."
   metadata:
     created:
       author: "add-feature"
       date: "2026-10-26"
     last_updated:
-      author: "add-feature"
+      author: "build-plan"
       date: "2026-10-26"
-      reason: "Phase 1 doc topology"
+      reason: "Phase 3 envelope + matrix compose"
   name: "Tests vs checker-backed claims documentation topology"
   status: "Implemented"

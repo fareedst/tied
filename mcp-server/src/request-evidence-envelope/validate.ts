@@ -7,6 +7,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 
 import { INTEGRATED_ENVELOPE_BLOCKING_PROCESS_GAPS, PROCESS_ADHERENCE_GAP_CODE_SET } from "./gap-codes.js";
+import { collectIndependentProofAdvisoryGaps } from "./proof-kinds.js";
 import { PROCESS_WARN_GAP_CODES } from "./process-adherence-gaps.js";
 import { normalizeEnvelope } from "./normalize.js";
 import type {
@@ -109,7 +110,13 @@ export async function validateRequestEvidenceEnvelope(
     return { ok: false, diagnostics };
   }
 
-  const normalized = normalizeEnvelope(envelope);
+  // [IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF] [ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF] [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE]
+  const independentProofGaps = collectIndependentProofAdvisoryGaps(envelope.independent_proofs);
+  const envelopeWithProofGaps =
+    independentProofGaps.length > 0
+      ? { ...envelope, gaps: [...envelope.gaps, ...independentProofGaps] }
+      : envelope;
+  const normalized = normalizeEnvelope(envelopeWithProofGaps);
   const errorGaps = normalized.gaps.filter((gap) => gap.severity === "error");
   const warnGaps = normalized.gaps.filter((gap) => gap.severity === "warn");
   const processWarnGaps = warnGaps.filter(

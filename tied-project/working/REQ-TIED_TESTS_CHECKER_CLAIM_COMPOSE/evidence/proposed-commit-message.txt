@@ -1,11 +1,18 @@
-feat(docs): tests vs checker-backed claims (Anthropic FV Wave 3 P1)
+feat(checker-claim): Anthropic FV Wave 3 Phases 2–3 compose
 
-Ship REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE doc compose: claim-class guide,
-client-development-index and pseudocode cross-links, bootstrap contract test,
-and Anthropic comparison Phase 1 Done markers. Doc-only; no MCP gate authority.
+Record checker-backed claim / theorem statement vocab, MCM §2 row 16,
+guide envelope compose, and advisory independent_proofs validate on
+request evidence envelopes. Does not wire Rocq/Verus gates or imply
+tied_verify from proof_kind metadata.
 
-Completion signals: machine close_out blocked (minimal doc CITDP);
-process contract pass (tests-checker-claim-compose-doc.test.mjs);
-adherence ledger not_run.
+REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE
+ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE
+ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF
+IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE
+IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF
+REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX (SC-MCM-DOC 16 rows)
 
-Feedback: N/A
+Machine close-out: allowed (minimal); envelope blocking_gap_count=0.
+Process: contract tests green. Adherence: thin_ledger (band B).
+
+Feedback capture: N/A

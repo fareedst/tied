@@ -1,0 +1,83 @@
+CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  change_definition:
+    current_behavior: "Wave 3 Phase 1–2 complete: tests-vs-checker-backed-claims guide, QA CHECKER_BACKED_CLAIM/THEOREM_STATEMENT, comparison Phase 1–2 Done. Methodology composition matrix §2 has exactly 15 rows; no formal-methods row. request-evidence-envelope.v1 accepts independent_proofs[] (REQ-TIED_OPEN_ONTOLOGIES_WAVE3) but validate does not advisory-check checker-backed proof_kind or proof_boundary."
+    desired_behavior: "Phase 3: add §2 row 16 (LLM-scale formal verification / proof-checker compose); guide Envelope compose subsection; advisory validate gaps for unknown proof_kind and checker_backed_claim without proof_boundary; LEAP SC-MCM-DOC to 16 rows; comparison Phase 3 matrix + envelope rows Done; new ARCH/IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF."
+    non_goals:
+      - "Rocq/Verus/Z3 execution or gate wiring"
+      - "Auto-promote review_status to verified_offline"
+      - "In-repo 36-task Anthropic FV benchmark"
+      - "New artifacts[] kind or checklist consumption of proofs"
+      - "fail_on_independent_proof_errors (defer — advisory only this pass)"
+    success_criteria:
+      - "methodology-composition-matrix-anthropic-fv-row.test.mjs green (16 §2 rows)"
+      - "checker-backed envelope advisory tests green"
+      - "tests-checker-claim-compose-doc.test.mjs Phase 3 markers green"
+      - "pseudocode_validate on new IMPL sidecar blocks"
+      - "tied_validate_consistency after project YAML LEAP"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs"
+      - "node --test tools/bootstrap/lib/methodology-composition-matrix-anthropic-fv-row.test.mjs"
+      - "cd mcp-server && npx tsx --test src/request-evidence-envelope/checker-backed-envelope-proof.test.ts"
+      - "npx tsc -b"
+      - "pseudocode_validate IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    proof_boundaries:
+      - "independent_proofs metadata-only; no foreign verifier execution"
+      - "advisory gaps do not imply tied_verify or checklist pass"
+      - "Anthropic-reported metrics remain not_measured for stdd"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+      - "IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE (sidecar COMPOSE_CHECKER_ENVELOPE_PROOF)"
+    modules_or_boundaries: "mcp-server request-evidence-envelope validate; docs/comparisons matrix; tied-bundle guide; project vocab QA"
+    tied_tokens_new:
+      - "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+      - "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    tied_tokens_affected:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
+  record_identity:
+    change_request_id: "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-26"
+    title: "Anthropic FV Wave 3 Phase 3 (MCM row 16 + envelope advisory)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Envelope independent_proofs cited as tied_verify or checklist completion"
+      - "verified_offline review_status treated as TIED formal verification"
+      - "MCM row 16 implies Rocq/Verus gates in methodology core"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Guide omits non-implication vs tied_verify for envelope receipts"
+        - "Unknown proof_kind accepted silently without advisory gap"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "validate adds warn gaps only unless future fail_on_independent_proof_errors"
+        - "patch MCP still does not execute foreign verifiers"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/anthropic_fv_phase_3_ea79b24f.plan.md"
+        - "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN-refine-phase3.md"
+        - "docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md"
+      falsification_questions:
+        - "Does any green path auto-promote review_status or gate authority from proof_kind?"
+        - "Does row 16 sponsor_notes keep Anthropic-reported and not_measured labels?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Advisory envelope validation + doc matrix row; compose on OPEN_ONTOLOGIES independent_proofs; minimal depth."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+  test_strategy:
+    documentation_only: false
+    mandatory_order: "RED doc + matrix + envelope tests before production code and markdown GREEN"
+    unit_tests:
+      - "tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs"
+      - "tools/bootstrap/lib/methodology-composition-matrix-anthropic-fv-row.test.mjs"
+      - "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts"

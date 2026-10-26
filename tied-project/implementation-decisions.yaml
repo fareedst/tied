@@ -2208,6 +2208,15 @@ IMPL-TIED_CHANGE_IMPACT_PROFILE:
     tests:
       - "mcp-server/src/analysis/change-impact-profile.test.ts"
       - "mcp-server/src/analysis/plumb-diff-impact-preview.test.ts"
+IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  detail_file: "implementation-decisions/IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF.yaml"
+  name: "Checker-backed envelope proof advisory validate"
+  status: "Active"
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"

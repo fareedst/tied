@@ -1,0 +1,114 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 651,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/methodology-composition-matrix-anthropic-fv-row.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 495,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npx tsx --test src/request-evidence-envelope/checker-backed-envelope-proof.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 883,
+      "exit_code": 0,
+      "id": "citdp-evidence-3",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-4.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-4.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npx tsc -b"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 1191,
+      "exit_code": 1,
+      "id": "citdp-evidence-4",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-5.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/quality-manifest/citdp-evidence-5.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "pseudocode_validate IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 488,
+      "exit_code": 1,
+      "id": "citdp-evidence-5",
+      "result": "failed"
+    }
+  ],
+  "commit": "c52bcec241e26e3580e5be4fe0fa630106cbac48",
+  "covered_tokens": [
+    "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE",
+    "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX",
+    "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "advisory gaps do not imply tied_verify or checklist pass",
+    "Anthropic-reported metrics remain not_measured for stdd",
+    "independent_proofs metadata-only; no foreign verifier execution"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-2026-10-26-checker-claim-p23",
+  "schema_version": "verification-evidence-manifest.v1"
+}

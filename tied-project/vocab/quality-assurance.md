@@ -4,7 +4,22 @@
 
 **Traceability:** [REQ-QUALITY_ASSURANCE_EVIDENCE](../requirements/REQ-QUALITY_ASSURANCE_EVIDENCE.yaml) · [ARCH-QUALITY_ASSURANCE_PROFILES](../architecture-decisions/ARCH-QUALITY_ASSURANCE_PROFILES.yaml) · [IMPL-QUALITY_EVIDENCE_MANIFEST](../implementation-decisions/IMPL-QUALITY_EVIDENCE_MANIFEST.yaml) · [PROC-QUALITY_ASSURANCE](../../tied-bundle/docs/processes.md) · [PROC-QUALITY_EVIDENCE_PROVENANCE](../../tied-bundle/docs/processes.md)
 
-**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md)
+**See also:** [`routing.md`](routing.md) · [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`pseudocode-and-citdp.md`](pseudocode-and-citdp.md) · [tests vs checker-backed claims (guide)](../../tied-bundle/docs/tests-vs-checker-backed-claims.md) · [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)
+
+---
+
+## Formal verification compose (external)
+
+**Proof boundary:** Labels for Anthropic FV and other outreach — TIED does **not** run Rocq, Verus, or Z3 as checklist gates unless a scoped integration REQ says otherwise. Effectiveness vs vendor formal verification claims remains **`not_measured`** unless independently documented.
+
+| Preferred term | Use when |
+| --- | --- |
+| **theorem statement** | Sponsor-readable proposition or short spec **before** or **without** external discharge |
+| **checker-backed claim** | External proof engine or vendor artifact **discharged** the stated property |
+
+Non-implication: **empirical test pass** and **checker-backed claim** are different classes (see guide injection 5/7 vs 7/7 compose).
+
+**Envelope `proof_kind`:** On `request-evidence-envelope.v1`, `independent_proofs[].proof_kind` values `checker_backed_claim` and `theorem_statement_metadata` map to **CHECKER_BACKED_CLAIM** and **THEOREM_STATEMENT** above. Advisory validate warns on unknown kinds or empty `proof_boundary` for checker-backed records — **does not imply** **`tied_verify`**.
 
 ---
 
@@ -28,6 +43,8 @@
 | stop criterion | stopping rule, abort threshold | A measurable condition that pauses or rolls back a pilot or gate. | `PILOT_STOP_CRITERION` |
 | test adequacy | test sufficiency, test strength | Risk-relative confidence that selected tests exercise meaningful behavior, boundaries, and failure modes. | `TEST_ADEQUACY` |
 | proof boundary | quality proof, validation guarantee | The explicit claim limit for one evidence source; it states what the evidence does and does not establish. | `PROOF_BOUNDARY` |
+| checker-backed claim | machine-checked proof (unqualified), proof passed, formally verified (unqualified) | A **claim class**: a property discharged by an external proof engine (Rocq, Verus+Z3, vendor proof artifacts). Cite **proof boundary**; **does not imply** **`tied_verify`** pass, **`tied_checklist_gate_validate`** completion, checklist progression, or stdd effectiveness unless a scoped integration REQ wires receipts. | `CHECKER_BACKED_CLAIM` |
+| theorem statement | short spec (alone), theorem (ambiguous), crash-freeness theorem (unscoped) | Formal proposition or sponsor-readable criteria text **before** or **without** external discharge; distinct from **checker-backed claim**. **Person-branch** acceptance per [sponsor-agent-relationship.md](sponsor-agent-relationship.md); **does not imply** **empirical test pass**, **`pseudocode_validate`**, or **`tied_verify`**. | `THEOREM_STATEMENT` |
 | methodology surface experiment gate | pre-impl experiment gate, surface gate | Pre-implementation gate evidence proves Loop 3 discipline (persisted experiment + hypothesis + baseline), not methodology effectiveness; W2 + `tied_verify` remain effectiveness authority. | `METHODOLOGY_SURFACE_EXPERIMENT_GATE` |
 | methodology surface change class | surface change class | Explicit CITDP enum triggering the pre-implementation experiment gate; no path inference. | `METHODOLOGY_SURFACE_CHANGE_CLASS` |
 | abuse case | security scenario, attack case | A named external-input misuse or failure scenario that requires executable evidence or an owned waiver. | `ABUSE_CASE` |
@@ -201,6 +218,8 @@ Domain terms above are distinct from IMPL grammar keywords such as `INPUT`, `OUT
 | PATCH_REQUEST_EVIDENCE_ENVELOPE | Pseudo-code block names |
 | non-implication rule | Canonical terms |
 | proof boundary | Canonical terms |
+| checker-backed claim | Canonical terms; Formal verification compose (external) |
+| theorem statement | Canonical terms; Formal verification compose (external) |
 | quality command declaration | Canonical terms |
 | vocabulary drift adapter | Canonical terms |
 | privacy tier | Canonical terms |

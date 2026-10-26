@@ -1897,6 +1897,15 @@ ARCH-TIED_CHANGE_IMPACT_PROFILE:
   detail_file: "architecture-decisions/ARCH-TIED_CHANGE_IMPACT_PROFILE.yaml"
   name: "Change impact profile architecture"
   status: "Active"
+ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  detail_file: "architecture-decisions/ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF.yaml"
+  name: "Checker-backed envelope proof advisory validation"
+  status: "Active"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -2714,7 +2723,7 @@ ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
       - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
   detail_file: "architecture-decisions/ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml"
   name: "Tests vs checker-backed claims documentation topology"
-  status: "Implemented"
+  status: "Active"
 ARCH-TIED_TOOL_INPUT_NORMALIZATION:
   cross_references:
     implementation:

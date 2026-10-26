@@ -4,9 +4,9 @@ REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
       author: "add-feature"
       date: "2026-10-26"
     last_updated:
-      author: "add-feature"
+      author: "build-plan"
       date: "2026-10-26"
-      reason: "Wave 3 Phase 1 from Anthropic FV comparison"
+      reason: "Wave 3 Phase 3 MCM row 16 + envelope advisory"
   name: "Tests vs checker-backed claims operator compose"
   priority: "P2"
   rationale:
@@ -16,7 +16,7 @@ REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
     problems_solved:
       - "Anthropic 5/7 vs 7/7 story misread as TIED guarantee"
       - "Vendor proof metrics cited as tied_verify outcomes"
-    why: "Operators conflate passing tests or pseudocode_validate with formal crash-freeness or proof-checker outcomes; Phase 1 doc compose only."
+    why: "Operators conflate passing tests or pseudocode_validate with formal crash-freeness or proof-checker outcomes; Phase 1 guide + Phase 2 canonical vocab RECORD."
   related_requirements:
     depends_on:
       - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -29,8 +29,20 @@ REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
       id: "SC-INDEX-LINK"
     - criterion: "pseudocode-writing-and-validation.md cross-links the guide"
       id: "SC-PSEUDOCODE-LINK"
+    - criterion: "quality-assurance.md canonical rows CHECKER_BACKED_CLAIM and THEOREM_STATEMENT with non-implication vs tied_verify"
+      id: "SC-VOCAB-CHECKER-CLAIM"
+    - criterion: "quality-assurance.md theorem statement row references person-branch acceptance"
+      id: "SC-VOCAB-THEOREM-STATEMENT"
     - criterion: "tests-checker-claim-compose-doc.test.mjs passes"
       id: "SC-COMPOSE-TEST"
+    - criterion: "tests-vs-checker-backed-claims.md bidirectionally links quality-assurance.md canonical vocab"
+      id: "SC-VOCAB-GUIDE-BIDIRECTIONAL"
     - criterion: "tests-vs-checker-backed-claims.md includes proof boundary and claim classes"
       id: "SC-GUIDE-DOC"
+    - criterion: "methodology-composition-matrix.md §2 row 16 and 16-row contract test green"
+      id: "SC-MCM-ROW-16"
+    - criterion: "validateRequestEvidenceEnvelope advisory gaps for unknown proof_kind and checker_backed_claim without proof_boundary"
+      id: "SC-ENVELOPE-CHECKER-PROOF-KIND"
+    - criterion: "tests-vs-checker-backed-claims.md Envelope compose subsection documents patch flow and non-implication vs tied_verify"
+      id: "SC-GUIDE-ENVELOPE-COMPOSE"
   status: "Implemented"

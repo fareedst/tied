@@ -1,0 +1,23 @@
+IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF:
+  approach: "proof-kinds.ts registry plus collectIndependentProofAdvisoryGaps merged in validateRequestEvidenceEnvelope; contract tests in checker-backed-envelope-proof.test.ts."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+      - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-26"
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-26"
+      reason: "sync sidecar for pseudocode_validate"
+  name: "Checker-backed envelope proof advisory validate"
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    tests:
+      - "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts"

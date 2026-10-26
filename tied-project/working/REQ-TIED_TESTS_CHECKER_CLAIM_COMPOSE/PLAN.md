@@ -1,5 +1,9 @@
 # REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE — Wave 3 Phase 1 (Anthropic FV)
 
+**Current implement plan:** [PLAN-refine-phase3.md](./PLAN-refine-phase3.md) (Phase 3 MCM row + envelope advisory — refined 2026-10-26).
+
+**Prior:** [PLAN-refine-phase2.md](./PLAN-refine-phase2.md) (Phase 2 vocab RECORD).
+
 | Field | Value |
 | --- | --- |
 | **Source** | [anthropic-llm-formal-verification-vs-tied-agent-management.md](../../../docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md) § Phased recommendations Phase 1 |

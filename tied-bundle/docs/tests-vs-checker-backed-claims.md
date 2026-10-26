@@ -2,7 +2,7 @@
 
 **Audience:** Operators, agents, and sponsors interpreting verification outcomes after TDD, checklist gates, or external formal-verification research.
 
-**Traceability:** [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml) · Anthropic comparison [Wave 3 Phase 1](../../docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md#phased-recommendations-doc-first)
+**Traceability:** [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml) · Anthropic comparison [Wave 3](../../docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md#phased-recommendations-doc-first) (Phase 1 guide, Phase 2 vocab)
 
 ---
 
@@ -19,6 +19,8 @@ This guide is **normative prose** for humans and agents. It does **not** add MCP
 ---
 
 ## Claim classes
+
+**Canonical vocab (Phase 2):** [`CHECKER_BACKED_CLAIM` and `THEOREM_STATEMENT`](../../tied-project/vocab/quality-assurance.md#formal-verification-compose-external) in [quality-assurance.md](../../tied-project/vocab/quality-assurance.md).
 
 Use these labels in comparisons, gate receipts, and sponsor handoffs:
 
@@ -48,8 +50,36 @@ Use these labels in comparisons, gate receipts, and sponsor handoffs:
 
 ---
 
+## Envelope compose
+
+**Schema:** `request-evidence-envelope.v1` optional `independent_proofs[]` ([ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE](../../tied-project/architecture-decisions/ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE.yaml)). Metadata-only — TIED does **not** execute Rocq, Verus, or Z3 when patching or validating.
+
+| `proof_kind` | Maps to vocab | Notes |
+| --- | --- | --- |
+| `checker_backed_claim` | **CHECKER_BACKED_CLAIM** | Requires non-empty **`proof_boundary`** on the record |
+| `theorem_statement_metadata` | **THEOREM_STATEMENT** | Spec/theorem text metadata; optional `verifier_hint` |
+
+**Patch flow:** use MCP **`request_evidence_envelope_independent_proof_patch`** with a scoped `request_token` and project root. **`validateRequestEvidenceEnvelope`** adds **advisory** warn gaps for unknown `proof_kind` or missing `proof_boundary` on checker-backed records — it **does not imply** **`tied_verify`** pass or **`tied_checklist_gate_validate`** completion.
+
+Example record (illustrative):
+
+```json
+{
+  "proof_id": "anthropic-fv-example-1",
+  "role": "asserted",
+  "proof_kind": "checker_backed_claim",
+  "locator": { "uri": "vendor://proof-artifact/example" },
+  "scope_limits": ["external", "Anthropic-reported"],
+  "proof_boundary": "Vendor proof only; not stdd tied_verify or checklist gate",
+  "review_status": "pending"
+}
+```
+
+---
+
 ## Related documents
 
+- [Quality assurance vocabulary (canonical)](../../tied-project/vocab/quality-assurance.md)
 - [Anthropic LLM formal verification × TIED](../../docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md)
 - [Anthropic appendix capture (sibling)](../../docs/comparisons/anthropic-llm-formal-verification-appendix.md)
 - [Writing and validating IMPL pseudo-code](pseudocode-writing-and-validation.md)

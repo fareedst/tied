@@ -817,6 +817,16 @@ ARCH-TIED_BROWNFIELD_EVIDENCE_MODEL:
 ARCH-TIED_CHANGE_IMPACT_PROFILE:
   description: "Change impact profile architecture"
   type: "architecture"
+ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF:
+  cross_references:
+    - "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  description: "Advisory independent_proofs proof_kind validate on request evidence envelope."
+  detail_file: "architecture-decisions/ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF.yaml"
+  name: "Checker-backed envelope proof advisory validation"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -2477,6 +2487,16 @@ IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE:
 IMPL-TIED_CHANGE_IMPACT_PROFILE:
   description: "Change impact profile implementation"
   type: "implementation"
+IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF:
+  cross_references:
+    - "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  description: "proof-kinds registry and validateRequestEvidenceEnvelope advisory gap merge."
+  detail_file: "implementation-decisions/IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF.yaml"
+  name: "Checker-backed envelope proof advisory validate"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   cross_references:
     - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
@@ -5007,9 +5027,11 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
   type: "REQ"
 REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
   cross_references:
+    - "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
     - "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    - "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
     - "IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
-  description: "Methodology doc distinguishing empirical tests and gates from external machine-checked proof claims; Anthropic FV Wave 3 Phase 1."
+  description: "Anthropic FV Wave 3: tests vs checker-backed claims guide, vocab, MCM row 16, envelope advisory proof_kind."
   detail_file: "requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml"
   name: "Tests vs checker-backed claims operator compose"
   source_index: "requirements.yaml"

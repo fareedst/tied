@@ -1,5 +1,5 @@
 IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
-  approach: "Edit tied-bundle/docs/tests-vs-checker-backed-claims.md, client-development-index and pseudocode cross-links; verify with tests-checker-claim-compose-doc.test.mjs."
+  approach: "Edit guide and cross-links; RECORD vocab; Phase 3 MCM row 16 and guide Envelope compose; delegate proof_kind advisory validate to IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF; verify with bootstrap and mcp-server contract tests."
   cross_references:
     architecture:
       - "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
@@ -10,8 +10,8 @@ IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
       author: "add-feature"
       date: "2026-10-26"
     last_updated:
-      author: "add-feature"
+      author: "build-plan"
       date: "2026-10-26"
-      reason: "Phase 1 implement"
+      reason: "Phase 3 COMPOSE_CHECKER_ENVELOPE_PROOF block"
   name: "Tests vs checker-backed claims doc maintenance"
   status: "Implemented"

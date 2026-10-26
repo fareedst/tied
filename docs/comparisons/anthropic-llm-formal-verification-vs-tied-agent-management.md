@@ -310,9 +310,9 @@ Anthropic’s **proof-checker loop** sits outside TIED’s authoritative core. T
 | **0** | Wave 1 capture + this analysis + `.gitignore` allowlist | **Done** (2026-10-25 build-plan) |
 | **1** | Bundle guide: tests vs checker-backed claims | **Done** (2026-10-26 [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)) |
 | **1** | `client-development-index` Anthropic comparison + guide rows | **Done** (2026-10-26) |
-| **2** | Project vocab RECORD (`checker-backed claim`, `theorem statement`) | **Defer** (costly) |
-| **3** | `methodology-composition-matrix.md` formal-methods row | **Defer** |
-| **3** | Request evidence envelope: external proof receipt type | **Defer** — **add-feature** |
+| **2** | Project vocab RECORD (`checker-backed claim`, `theorem statement`) | **Done** (2026-10-26 [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)) |
+| **3** | `methodology-composition-matrix.md` formal-methods row | **Done** (2026-10-26 [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)) |
+| **3** | Request evidence envelope: external proof receipt type | **Done** (2026-10-26 advisory `independent_proofs[]` / `proof_kind` — metadata-only) |
 | **3** | In-repo 36-task-style agent FV benchmark harness | **Defer** |
 
 ---

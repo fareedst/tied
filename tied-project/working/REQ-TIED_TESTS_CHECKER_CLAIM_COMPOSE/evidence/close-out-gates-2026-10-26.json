@@ -1,0 +1,17 @@
+{
+  "run_id": "close-out-2026-10-26-checker-claim-p23",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "path": "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/request-evidence-envelope.v1.json"
+  },
+  "gate_receipt": "tied-bundle/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/gates/close_out-2026-10-26T17-27-09-656Z.json",
+  "reconcile_band": "B",
+  "process_grade_gap_codes": ["thin_ledger"]
+}

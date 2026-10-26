@@ -1,0 +1,25 @@
+ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF:
+  cross_references:
+    - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
+    - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  decision: "Advisory validateRequestEvidenceEnvelope extension for independent_proofs[] proof_kind registry (checker_backed_claim, theorem_statement_metadata); warn gaps only; no foreign verifier execution or tied_verify promotion."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-10-26"
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-26"
+      reason: "Wave 3 Phase 3 Anthropic FV envelope compose"
+  name: "Checker-backed envelope proof advisory validation"
+  status: "Active"
+  traceability:
+    code_annotations:
+      - "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    implementation:
+      - "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    tests:
+      - "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts"

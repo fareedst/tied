@@ -21,13 +21,13 @@ function countSection2DataRows(text) {
 }
 
 describe("methodology composition matrix LangChain row [REQ-TIED_HARNESS_LANGCHAIN_PHASE3]", () => {
-  it("has exactly 15 §2 data rows including LangChain harness engineering row 15", () => {
+  it("has exactly 16 §2 data rows including LangChain harness engineering row 15", () => {
     assert.ok(fs.existsSync(matrixPath), `missing matrix: ${matrixPath}`);
     const text = fs.readFileSync(matrixPath, "utf8");
-    assert.match(text, /§2 \*\*15\*\* rows/);
-    assert.match(text, /exactly \*\*15\*\* data rows/);
+    assert.match(text, /§2 \*\*16\*\* rows/);
+    assert.match(text, /exactly \*\*16\*\* data rows/);
     const rowNumbers = countSection2DataRows(text);
-    assert.deepEqual(rowNumbers, Array.from({ length: 15 }, (_, i) => i + 1));
+    assert.deepEqual(rowNumbers, Array.from({ length: 16 }, (_, i) => i + 1));
     assert.ok(
       text.includes("LangChain harness engineering (empirical trace loop)"),
       "row 15 framework label missing"

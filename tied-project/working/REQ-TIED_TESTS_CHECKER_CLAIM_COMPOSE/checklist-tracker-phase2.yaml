@@ -1,0 +1,38 @@
+# Phase 2 implement tracker — copy hygiene: do not inherit Phase 1 close_out_evidence.
+request_token: "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+profile_depth: "minimal"
+gate_policy: "doc_only"
+change_class: "vocab_record_doc_only"
+steps:
+  translate-sponsor-intent:
+    notes: "Wave 3 Phase 2 vocab RECORD; QA extend; PLAN-refine-phase2.md"
+    status: "done"
+  session-bootstrap:
+    notes: "PRELOAD quality-assurance, sponsor-agent-relationship, Phase 1 guide"
+    status: "done"
+  change-definition:
+    notes: "LEAP extend REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE; SC-VOCAB-* criteria"
+    status: "done"
+  impact-discovery:
+    notes: "Blast radius in PLAN-refine-phase2.md Plan section"
+    status: "done"
+  risk-assessment:
+    notes: "Over-claim formal verification; theorem vs tied_verify — mitigated in RESOLVE table"
+    status: "done"
+  test-strategy:
+    notes: "Extend tests-checker-claim-compose-doc.test.mjs; pseudocode_validate; lint_yaml"
+    status: "done"
+  pre_implementation:
+    notes: "tied_checklist_gate_validate allowed:false (malformed_citdp:adversarial_inquiry); evidence/refine-phase2-pre-implementation-gate.json — doc-only implement proceeds per sibling outreach pattern"
+    status: "blocked"
+  implement-doc-deliverables:
+    notes: "QA vocab, guide, comparison, routing, domain-references, LEAP YAML, CHANGELOG"
+    status: "done"
+  verification-gate:
+    notes: "node --test tools-checker-claim-compose-doc.test.mjs 6/6; pseudocode_validate ok; machine verification gate blocked (doc_only)"
+    status: "done"
+  traceable-commit:
+    status: "pending"
+  close_out:
+    notes: "Deferred — no envelope; use @close-out for scoped commit if sponsor asks"
+    status: "pending"

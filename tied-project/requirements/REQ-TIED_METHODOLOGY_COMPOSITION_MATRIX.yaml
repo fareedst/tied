@@ -8,8 +8,8 @@ REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
         date: "2026-10-13"
       last_updated:
         author: "build-plan"
-        date: "2026-10-21"
-        reason: "§2 row 15 LangChain harness engineering (REQ-TIED_HARNESS_LANGCHAIN_PHASE3)"
+        date: "2026-10-26"
+        reason: "§2 row 16 Anthropic FV formal-methods compose (REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE)"
     name: "Methodology composition matrix"
     priority: "P2"
     rationale:
@@ -32,7 +32,7 @@ REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
       - criterion: "Cross-links from tied-vs-well-known-methodologies.md and qmm-kaizen-vs-tied.md resolve to the new matrix."
         id: "SC-MCM-LINKS"
         metric: "Relative link check from docs/comparisons/"
-      - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 15 data rows."
+      - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 16 data rows."
         id: "SC-MCM-DOC"
         metric: "Row inventory script or manual count per working PLAN"
       - criterion: "Project REQ/ARCH/IMPL tokens registered; tied_validate_consistency passes for project YAML."
