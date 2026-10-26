@@ -1,0 +1,39 @@
+change_class: "comparisons_doc_only"
+gate_policy: "outreach_doc_only"
+no_req_mint: true
+profile_depth: "minimal"
+request_token: "DOC-NDTP-AI-ONTOLOGY-EXTENSION-COMPARISON"
+steps:
+  change-definition:
+    notes: "Wave 1 capture + Wave 2 analysis + git allowlist; no YAML mint."
+    status: "done"
+  impact-discovery:
+    notes: "Files listed in PLAN-refine-pass1.md Implement section; sibling scope vs Open Ontologies engine, Heimsbakk meaning, harness docs."
+    status: "done"
+  implement-doc-deliverables:
+    notes: "Wave 1 + Wave 2 + .gitignore allowlist; see evidence/build-plan-handoff.md (2026-10-26)."
+    status: "done"
+  verification-gate:
+    notes: "Doc QA complete per build-plan-handoff; tied_validate_consistency skipped (no YAML)."
+    status: "done"
+  pre_implementation:
+    notes: "tied_checklist_gate_validate 2026-10-26: allowed=false, blocking=true — invalid_slug (sparse DOC tracker), missing sub-adversarial-inquiry-pass; doc-only build may proceed at build-plan per sibling outreach pattern; not REQ implementation authorization."
+    status: "blocked"
+  risk-assessment:
+    notes: "Conflating Owlready2/SHACL green with tied_validate_consistency; LLM TTL repair without sponsor; ABM as adversarial inquiry substitute."
+    status: "done"
+  session-bootstrap:
+    notes: "PRELOAD tied-methodology, quality-assurance, sponsor-agent-relationship, pseudocode-and-citdp, prompt-composer; external-service-comparison SKILL + template."
+    status: "done"
+  test-strategy:
+    notes: "14-section parity, claim labels (NDTP-reported), link check, token grep, sibling cross-links."
+    status: "done"
+  close_out:
+    notes: "2026-10-26: allowed=false (DOC outreach tracker); see evidence/close-out-handoff.md."
+    status: "blocked"
+  traceable-commit:
+    notes: "Commit skipped — unified close_out blocked; proposed-commit-message.txt ready."
+    status: "blocked"
+  translate-sponsor-intent:
+    notes: "@external-service-comparison on local ndtp-ai-ontology-extension-main; Waves 1–2 only."
+    status: "done"

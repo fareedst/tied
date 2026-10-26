@@ -4,7 +4,8 @@
 | --- | --- | --- |
 | Open Ontologies repository | [open-ontologies-repository.md](../../../docs/comparisons/open-ontologies-repository.md) | [open-ontologies-repository-vs-tied-agent-management.md](../../../docs/comparisons/open-ontologies-repository-vs-tied-agent-management.md) |
 | AI-SDLC ATDD Software Factory | (capture sibling if published) | [ai-sdlc-atdd-software-factory-vs-tied.md](../../../docs/comparisons/ai-sdlc-atdd-software-factory-vs-tied.md) |
+| NDTP AI Ontology Extension | [ndtp-ai-ontology-extension.md](../../../docs/comparisons/ndtp-ai-ontology-extension.md) | [ndtp-ai-ontology-extension-vs-tied-agent-management.md](../../../docs/comparisons/ndtp-ai-ontology-extension-vs-tied-agent-management.md) |
 
-**DOC working pattern:** see `tied-project/working/DOC-AI-SDLC-FACTORY-COMPARISON/` and `DOC-OPEN-ONTOLOGIES-COMPARISON/` (when present) for refine trackers and handoff evidence.
+**DOC working pattern:** see `tied-project/working/DOC-AI-SDLC-FACTORY-COMPARISON/`, `DOC-OPEN-ONTOLOGIES-COMPARISON/`, and `DOC-NDTP-AI-ONTOLOGY-EXTENSION-COMPARISON/` for refine trackers and handoff evidence.
 
 **Lesson:** Factory-reported and **target-repo-observed** labels stay separate from TIED-existing proof; Wave 3 matrix row remains **Defer** unless sponsor promotes.

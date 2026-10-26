@@ -1,0 +1,21 @@
+docs(comparisons): NDTP AI Ontology Extension × TIED Waves 1–2
+
+Add read-only repository capture and Wave 2 agent-management analysis for
+National-Digital-Twin/ndtp-ai-ontology-extension (Streamlit HITL wizard,
+LLM extension, Owlready2/SHACL validation) with proof boundaries and sibling
+cross-links to Open Ontologies and Heimsbakk. Allowlist both paths in
+.gitignore; record working plan/evidence under
+DOC-NDTP-AI-ONTOLOGY-EXTENSION-COMPARISON; extend
+external-service-comparison examples. No REQ/ARCH/IMPL mint; target outcomes
+NDTP-reported / not_measured in stdd.
+
+Completion signals: machine close-out blocked (DOC outreach tracker);
+process contract pass (doc verification); adherence ledger not_run.
+
+Staging map:
+- docs/comparisons/ndtp-ai-ontology-extension.md
+- docs/comparisons/ndtp-ai-ontology-extension-vs-tied-agent-management.md
+- .gitignore
+- CHANGELOG.md
+- tools/bundled-prompt-type-skills/external-service-comparison/examples.md
+- tied-project/working/DOC-NDTP-AI-ONTOLOGY-EXTENSION-COMPARISON/
