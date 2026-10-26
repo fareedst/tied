@@ -3574,6 +3574,18 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
       - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     implementation:
       - "IMPL-TIED_STORE_README_SECTIONS"
+REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  category: "Methodology"
+  description: "Methodology documentation distinguishing empirical tests and checklist gates from external machine-checked proof claims; Anthropic formal verification comparison Wave 3 Phase 1 compose."
+  detail_file: "requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml"
+  name: "Tests vs checker-backed claims operator compose"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    implementation:
+      - "IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
 REQ-TIED_TOOL_INPUT_COMPATIBILITY:
   category: "Tooling"
   cross_references:

@@ -2706,6 +2706,15 @@ ARCH-TIED_STRUCTURE:
       - "REQ-TIED_SETUP"
     tests:
       - "TestTIEDSetup_REQ_TIED_SETUP"
+ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  detail_file: "architecture-decisions/ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml"
+  name: "Tests vs checker-backed claims documentation topology"
+  status: "Implemented"
 ARCH-TIED_TOOL_INPUT_NORMALIZATION:
   cross_references:
     implementation:

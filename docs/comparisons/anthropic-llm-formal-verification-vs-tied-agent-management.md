@@ -308,8 +308,8 @@ Anthropic’s **proof-checker loop** sits outside TIED’s authoritative core. T
 | Phase | Action | Status |
 | --- | --- | --- |
 | **0** | Wave 1 capture + this analysis + `.gitignore` allowlist | **Done** (2026-10-25 build-plan) |
-| **1** | Optional bundle subsection: tests vs checker-backed claims | **Defer** |
-| **1** | Optional `client-development-index` external-comparison row | **Defer** |
+| **1** | Bundle guide: tests vs checker-backed claims | **Done** (2026-10-26 [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)) |
+| **1** | `client-development-index` Anthropic comparison + guide rows | **Done** (2026-10-26) |
 | **2** | Project vocab RECORD (`checker-backed claim`, `theorem statement`) | **Defer** (costly) |
 | **3** | `methodology-composition-matrix.md` formal-methods row | **Defer** |
 | **3** | Request evidence envelope: external proof receipt type | **Defer** — **add-feature** |

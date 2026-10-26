@@ -1,0 +1,11 @@
+feat(docs): tests vs checker-backed claims (Anthropic FV Wave 3 P1)
+
+Ship REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE doc compose: claim-class guide,
+client-development-index and pseudocode cross-links, bootstrap contract test,
+and Anthropic comparison Phase 1 Done markers. Doc-only; no MCP gate authority.
+
+Completion signals: machine close_out blocked (minimal doc CITDP);
+process contract pass (tests-checker-claim-compose-doc.test.mjs);
+adherence ledger not_run.
+
+Feedback: N/A

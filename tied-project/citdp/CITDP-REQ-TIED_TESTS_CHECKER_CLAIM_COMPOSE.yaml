@@ -1,0 +1,10 @@
+CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  desired_behavior: "Wave 3 Phase 1 doc compose from Anthropic FV comparison: claim-class guide, index links, pseudocode cross-link, contract test."
+  depth_tier: minimal
+  gate_policy: doc_only
+  test_strategy:
+    evidence:
+      command_seq:
+        - command_or_test: "tests-checker-claim-compose-doc.test.mjs"
+          working_directory: "tools/bootstrap/lib"
+          notes: "node --test tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs"

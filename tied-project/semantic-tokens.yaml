@@ -5005,6 +5005,16 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
   name: "Store README operator delivery spine"
   status: "Active"
   type: "REQ"
+REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  cross_references:
+    - "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    - "IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  description: "Methodology doc distinguishing empirical tests and gates from external machine-checked proof claims; Anthropic FV Wave 3 Phase 1."
+  detail_file: "requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml"
+  name: "Tests vs checker-backed claims operator compose"
+  source_index: "requirements.yaml"
+  status: "Implemented"
+  type: "REQ"
 REQ-TIED_TOOL_INPUT_COMPATIBILITY:
   cross_references:
     - "ARCH-TIED_TOOL_INPUT_NORMALIZATION"

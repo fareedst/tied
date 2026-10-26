@@ -1,0 +1,22 @@
+ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  consequences:
+    negative:
+      - "Store and client copies drift until refresh"
+    positive:
+      - "Clients receive guide on tied-install refresh"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  decision: "Canonical guide in tied-bundle/docs/tests-vs-checker-backed-claims.md; client-development-index Quick reads and pseudocode-writing-and-validation cross-link; bootstrap contract test guards markers; no Rocq/Verus gate."
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-10-26"
+    last_updated:
+      author: "add-feature"
+      date: "2026-10-26"
+      reason: "Phase 1 doc topology"
+  name: "Tests vs checker-backed claims documentation topology"
+  status: "Implemented"

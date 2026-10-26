@@ -1,0 +1,17 @@
+IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  approach: "Edit tied-bundle/docs/tests-vs-checker-backed-claims.md, client-development-index and pseudocode cross-links; verify with tests-checker-claim-compose-doc.test.mjs."
+  cross_references:
+    architecture:
+      - "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-10-26"
+    last_updated:
+      author: "add-feature"
+      date: "2026-10-26"
+      reason: "Phase 1 implement"
+  name: "Tests vs checker-backed claims doc maintenance"
+  status: "Implemented"

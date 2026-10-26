@@ -655,6 +655,7 @@ Mechanical generation from tests does **not** replace verbatim block-lead rules 
 | [impl-pseudocode-from-code-agent-prompt.md](impl-pseudocode-from-code-agent-prompt.md) | Track C: retrofit pseudo-code from existing code and tests |
 | [pseudocode-fidelity-audit-agent-prompt.md](pseudocode-fidelity-audit-agent-prompt.md) | Audit whether existing pseudo-code is a reliable + complete transform of tests/code; report then LEAP-fix gaps |
 | [processes.md](processes.md) | `[PROC-PSEUDOCODE_VALIDATION]`, `[PROC-IMPL_CODE_TEST_SYNC]`, `[PROC-LEAP]` |
+| [tests-vs-checker-backed-claims.md](tests-vs-checker-backed-claims.md) | Tests vs **`pseudocode_validate`** vs external checker-backed claims ([REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)) |
 | [yaml-update-mcp-runbook.md](yaml-update-mcp-runbook.md) | MCP routing, `TIED_BASE_PATH` |
 | [tied-yaml skill](../../.cursor/skills/tied-yaml/SKILL.md), [reference.md](../../.cursor/skills/tied-yaml/reference.md) | CLI/MCP tools |
 | [source-file-impl-traceability.md](source-file-impl-traceability.md) | Full-block file layout (markdown_exec) |

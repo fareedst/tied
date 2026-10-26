@@ -1,0 +1,36 @@
+REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  metadata:
+    created:
+      author: "add-feature"
+      date: "2026-10-26"
+    last_updated:
+      author: "add-feature"
+      date: "2026-10-26"
+      reason: "Wave 3 Phase 1 from Anthropic FV comparison"
+  name: "Tests vs checker-backed claims operator compose"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Cross-links from pseudo-code and client-development-index"
+      - "Single refreshable guide via tied-install"
+    problems_solved:
+      - "Anthropic 5/7 vs 7/7 story misread as TIED guarantee"
+      - "Vendor proof metrics cited as tied_verify outcomes"
+    why: "Operators conflate passing tests or pseudocode_validate with formal crash-freeness or proof-checker outcomes; Phase 1 doc compose only."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+    related_to:
+      - "REQ-QUALITY_ASSURANCE_EVIDENCE"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  satisfaction_criteria:
+    - criterion: "client-development-index.md Quick reads link guide and Anthropic comparison"
+      id: "SC-INDEX-LINK"
+    - criterion: "pseudocode-writing-and-validation.md cross-links the guide"
+      id: "SC-PSEUDOCODE-LINK"
+    - criterion: "tests-checker-claim-compose-doc.test.mjs passes"
+      id: "SC-COMPOSE-TEST"
+    - criterion: "tests-vs-checker-backed-claims.md includes proof boundary and claim classes"
+      id: "SC-GUIDE-DOC"
+  status: "Implemented"

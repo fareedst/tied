@@ -67,6 +67,8 @@ Quality assurance references: [quality-assurance-commands.md](quality-assurance-
 | **Path-scoped review guidance** | [path-scoped-review-guidance.md](path-scoped-review-guidance.md) | Optional `REVIEW.md` / `tied-project/review/` client pattern (post-compose; not TIED core authority). |
 | **EDPC methodology** | [EDPC_Methodology_and_Workflows.md](./EDPC_Methodology_and_Workflows.md) | Workflows A–G, `evidence_access_tier`, file-based SCM shell; pairs with **Vocabulary** [edpc-comprehension.md](../vocab/edpc-comprehension.md) and `[PROC-EDPC_COMPREHENSION]` in **Processes**. |
 | **Claude review comparison** | [claude-code-team-code-review-vs-tied.md](../../docs/comparisons/claude-code-team-code-review-vs-tied.md) | Outreach map + [compose snapshot](../../docs/comparisons/claude-code-team-code-review-vs-tied.md#compose-status-snapshot) for Anthropic PR-review layers × TIED (Phases 1–5 guides; store **`fb-mvclklsa-t5gzbo`**). |
+| **Anthropic formal verification comparison** | [anthropic-llm-formal-verification-vs-tied-agent-management.md](../../docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md) | Outreach map for LLM-scale binary/Verus proofs × TIED; Wave 3 Phase 1 compose: [tests vs checker-backed claims](tests-vs-checker-backed-claims.md) ([REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE](../../tied-project/requirements/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml)). |
+| **Tests vs checker-backed claims** | [tests-vs-checker-backed-claims.md](tests-vs-checker-backed-claims.md) | Claim-class table (tests, **`pseudocode_validate`**, gates, external proof checkers); compose from Anthropic FV appendix — doc-only, no new MCP authority. |
 
 ---
 

@@ -3199,6 +3199,15 @@ IMPL-TIED_STORE_README_SECTIONS:
       - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     requirements:
       - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+    requirements:
+      - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+  detail_file: "implementation-decisions/IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE.yaml"
+  name: "Tests vs checker-backed claims doc maintenance"
+  status: "Implemented"
 IMPL-TIED_TOOL_INPUT_NORMALIZATION:
   cross_references:
     architecture:
