@@ -50,10 +50,14 @@ entry_points:
     start_at: session-bootstrap
 execution_evidence:
   close_out_evidence:
-    date: null
-    deferred: []
+    date: '2026-10-26'
+    feature_complete: true
+    commit:
+      hash: 7f493e8a5597009f7544b567f1430291bdd697ac
+      short: 7f493e8
+      message: 'feat(mcp): plumb impact-preview.v2 with change-impact profile'
+    master_checklist: tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/agent-req-implementation-checklist.yaml
     gates: {}
-    master_checklist: ''
   completed:
     - session-bootstrap
     - translate-sponsor-intent
@@ -75,6 +79,7 @@ execution_evidence:
     - verification-gate
     - sub-close-out-evidence-sync
     - gitignore-close-out-hygiene
+    - traceable-commit
   envelope_path: tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/request-evidence-envelope.v1.json
   evidence_refs_format: |
     Typed evidence_refs for completed dispositions (RESOLVE_EVIDENCE_REFS at write time):
@@ -417,10 +422,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_0
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/translate-sponsor-intent-evidence.md
     disposition: completed
-    evidence_refs: *ref_0
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/translate-sponsor-intent-evidence.md
   - agentstream_new_session: 'true'
     flow:
       branches: []
@@ -508,10 +514,11 @@ steps:
         - three-way-alignment-unit
       state_history: []
       status: completed
-      evidence_refs: &ref_1
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-red-evidence.md
     disposition: completed
-    evidence_refs: *ref_1
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-red-evidence.md
   - flow:
       branches:
         - action: CALL sub-leap-micro-cycle; do not silently diverge
@@ -574,10 +581,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_2
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-green-evidence.md
     disposition: completed
-    evidence_refs: *ref_2
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-green-evidence.md
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -643,10 +651,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_3
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/composition-integration-evidence.md
     disposition: completed
-    evidence_refs: *ref_3
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/composition-integration-evidence.md
   - agentstream_new_session: 'true'
     flow:
       branches: []
@@ -705,10 +714,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_4
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/risk-assessment-evidence.md
     disposition: completed
-    evidence_refs: *ref_4
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/risk-assessment-evidence.md
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -828,10 +838,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_5
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/verification-evidence-manifest.v1.json
     disposition: completed
-    evidence_refs: *ref_5
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/verification-evidence-manifest.v1.json
   - agentstream_new_session: 'true'
     flow:
       branches:
@@ -898,10 +909,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_6
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sync-tied-stack-evidence.md
     disposition: completed
-    evidence_refs: *ref_6
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sync-tied-stack-evidence.md
   - flow:
       branches: []
       calls:
@@ -950,10 +962,11 @@ steps:
         - composition-integration
       state_history: []
       status: completed
-      evidence_refs: &ref_7
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/apply-token-comments-evidence.md
     disposition: completed
-    evidence_refs: *ref_7
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/apply-token-comments-evidence.md
   - flow:
       branches:
         - action: GOTO author-requirement first, then return here to define the fix
@@ -1019,10 +1032,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_8
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/change-definition-evidence.md
     disposition: completed
-    evidence_refs: *ref_8
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/change-definition-evidence.md
   - flow:
       branches: []
       calls:
@@ -1143,10 +1157,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_9
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/test-strategy-evidence.md
     disposition: completed
-    evidence_refs: *ref_9
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/test-strategy-evidence.md
   - flow:
       branches:
         - action: Refactor (split or restructure) one IMPL before proceeding; do not paper over contradictions
@@ -1268,10 +1283,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_10
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/session-bootstrap-evidence.md
     disposition: completed
-    evidence_refs: *ref_10
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/session-bootstrap-evidence.md
   - flow:
       branches:
         - action: >-
@@ -1393,7 +1409,11 @@ steps:
       retry_count: '0'
       returned_from: []
       state_history: []
-      status: pending
+      status: completed
+      evidence_refs: &ref_0
+        - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/traceable-commit-evidence.md
+    disposition: completed
+    evidence_refs: *ref_0
   - flow:
       branches: []
       calls:
@@ -1633,10 +1653,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_11
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gate-pseudocode-validation-evidence.md
     disposition: completed
-    evidence_refs: *ref_11
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gate-pseudocode-validation-evidence.md
   - flow:
       branches: []
       calls:
@@ -1814,10 +1835,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_12
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/impact-discovery-evidence.md
     disposition: completed
-    evidence_refs: *ref_12
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/impact-discovery-evidence.md
   - flow:
       branches: []
       calls: []
@@ -1994,10 +2016,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_13
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml
     disposition: completed
-    evidence_refs: *ref_13
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml
   - flow:
       branches: []
       calls: []
@@ -2026,10 +2049,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_14
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gitignore-close-out-hygiene-evidence.md
     disposition: completed
-    evidence_refs: *ref_14
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gitignore-close-out-hygiene-evidence.md
   - flow:
       branches: []
       calls:
@@ -2091,10 +2115,11 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_15
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/three-way-alignment-unit-evidence.md
     disposition: completed
-    evidence_refs: *ref_15
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/three-way-alignment-unit-evidence.md
   - flow:
       branches: []
       calls:
@@ -2156,31 +2181,35 @@ steps:
       returned_from: []
       state_history: []
       status: completed
-      evidence_refs: &ref_16
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/persist-implementation-records-evidence.md
     disposition: completed
-    evidence_refs: *ref_16
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/persist-implementation-records-evidence.md
   - slug: sub-adversarial-inquiry-pass
     tracking:
       status: completed
-      evidence_refs: &ref_17
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-adversarial-inquiry-pass-evidence.md
     disposition: completed
-    evidence_refs: *ref_17
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-adversarial-inquiry-pass-evidence.md
   - slug: sub-yaml-edit-loop
     tracking:
       status: completed
-      evidence_refs: &ref_18
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-yaml-edit-loop-evidence.md
     disposition: completed
-    evidence_refs: *ref_18
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-yaml-edit-loop-evidence.md
   - slug: sub-close-out-evidence-sync
     tracking:
       status: completed
-      evidence_refs: &ref_19
+      evidence_refs:
         - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-close-out-evidence-sync-evidence.md
     disposition: completed
-    evidence_refs: *ref_19
+    evidence_refs:
+      - tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-close-out-evidence-sync-evidence.md
 sub_procedures:
   - flow:
       return_to: caller
