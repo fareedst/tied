@@ -35,7 +35,7 @@
 
 | SHA | Summary |
 | --- | --- |
-| *(skipped)* | Unified `close_out` blocked — sponsor may commit using [proposed-commit-message.txt](./proposed-commit-message.txt) staging map |
+| `bf8af176` | Wave 1–2 comparisons, allowlist, CHANGELOG, working evidence (DOC outreach traceable-commit; machine `close_out` still blocked) |
 
 ## Feedback
 

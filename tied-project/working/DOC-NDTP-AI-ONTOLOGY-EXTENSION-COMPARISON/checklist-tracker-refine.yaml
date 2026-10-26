@@ -32,8 +32,8 @@ steps:
     notes: "2026-10-26: allowed=false (DOC outreach tracker); see evidence/close-out-handoff.md."
     status: "blocked"
   traceable-commit:
-    notes: "Commit skipped — unified close_out blocked; proposed-commit-message.txt ready."
-    status: "blocked"
+    notes: "bf8af176 — scoped DOC outreach commit; machine close_out still blocked."
+    status: "done"
   translate-sponsor-intent:
     notes: "@external-service-comparison on local ndtp-ai-ontology-extension-main; Waves 1–2 only."
     status: "done"

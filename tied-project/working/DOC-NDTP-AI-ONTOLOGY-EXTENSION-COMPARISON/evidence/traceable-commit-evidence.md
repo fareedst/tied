@@ -19,7 +19,7 @@ Immature-client deferral: no new glossary RECORD; RESOLVE mappings live in analy
 
 ## Close-out policy (minimal outreach)
 
-Canonical **traceable-commit-close-out** requires unified `close_out` **allowed: true** — **commit skipped** in this pass per blocked machine gate. Scoped staging map and [proposed-commit-message.txt](./proposed-commit-message.txt) ready for sponsor commit (same class as [DOC-OPEN-ONTOLOGIES-COMPARISON](../../DOC-OPEN-ONTOLOGIES-COMPARISON/evidence/traceable-commit-evidence.md)).
+Unified `close_out` remained **allowed: false** (DOC outreach tracker). Sponsor-requested **traceable-commit** applied scoped staging map anyway (same waiver class as [DOC-OPEN-ONTOLOGIES-COMPARISON](../../DOC-OPEN-ONTOLOGIES-COMPARISON/evidence/traceable-commit-evidence.md)); machine close-out signal still **fail**.
 
 ## Hygiene
 
@@ -37,4 +37,4 @@ See hygiene receipt — other REQ/CITDP/checklist dirty files not in staging map
 
 | SHA | Message |
 | --- | --- |
-| *(none)* | **Commit skipped** — machine `close_out` blocked |
+| `bf8af176` | `docs(comparisons): NDTP AI Ontology Extension × TIED Waves 1–2` |
