@@ -1,0 +1,58 @@
+{
+  "schema_version": "traceable-commit-mcp-receipt.v1",
+  "request_token": "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE",
+  "recorded_at": "2026-10-26T17:30:00Z",
+  "git": {
+    "commit_sha": "d99b609a199c92b6c9d924d0711a09efc3fc15f9",
+    "commit_subject": "feat(checker-claim): Anthropic FV Wave 3 Phases 2–3 compose",
+    "pushed_to": "origin/main",
+    "push_range": "4198c5f4..d99b609a"
+  },
+  "mcp_tools": [
+    {
+      "namespace": "project-0-stdd-tied-yaml",
+      "tool": "tied_git_hygiene",
+      "arguments_summary": "context_mode=plan_close_out, apply=false, request_token=REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE",
+      "ok": true
+    },
+    {
+      "namespace": "project-0-stdd-tied-yaml",
+      "tool": "yaml_index_insert",
+      "arguments_summary": "ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF, IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF, semantic-tokens",
+      "ok": true
+    },
+    {
+      "namespace": "project-0-stdd-tied-yaml",
+      "tool": "yaml_index_update",
+      "arguments_summary": "REQ/IMPL status Implemented; traceability extended",
+      "ok": true
+    },
+    {
+      "namespace": "project-0-stdd-tied-yaml",
+      "tool": "impl_detail_set_essence_pseudocode",
+      "arguments_summary": "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF sidecar sync",
+      "ok": true
+    },
+    {
+      "namespace": "project-0-stdd-tied-yaml",
+      "tool": "pseudocode_validate",
+      "arguments_summary": "IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF",
+      "ok": true
+    },
+    {
+      "namespace": "project-0-stdd-tied-yaml",
+      "tool": "tied_validate_consistency",
+      "arguments_summary": "post-LEAP index/detail check",
+      "ok": true
+    }
+  ],
+  "cli": [
+    {
+      "command": "node tools/bootstrap/templates/run-close-out-gates.mjs",
+      "flags": ["--envelope-blocking", "--sync-dispositions", "--reconcile"],
+      "run_id": "close-out-2026-10-26-checker-claim-p23",
+      "merged_decision_allowed": true
+    }
+  ],
+  "feedback_capture": "N/A"
+}

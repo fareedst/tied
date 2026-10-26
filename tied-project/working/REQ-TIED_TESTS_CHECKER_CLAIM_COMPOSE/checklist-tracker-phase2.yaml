@@ -32,7 +32,8 @@ steps:
     notes: "node --test tools-checker-claim-compose-doc.test.mjs 6/6; pseudocode_validate ok; machine verification gate blocked (doc_only)"
     status: "done"
   traceable-commit:
-    status: "pending"
+    notes: "Rolled into d99b609a with Phase 3; see checklist-tracker-phase3"
+    status: "done"
   close_out:
-    notes: "Deferred — no envelope; use @close-out for scoped commit if sponsor asks"
-    status: "pending"
+    notes: "Superseded by Phase 3 close_out_complete (close-out-2026-10-26-checker-claim-p23)"
+    status: "done"

@@ -22,7 +22,7 @@
 | SHA | Summary |
 | --- | --- |
 | `c52bcec2` | Phase 1 doc compose |
-| *(this close-out)* | Phases 2–3 — see traceable-commit |
+| `d99b609a` | Phases 2–3 vocab, MCM row 16, envelope advisory validate |
 
 ## Feedback
 

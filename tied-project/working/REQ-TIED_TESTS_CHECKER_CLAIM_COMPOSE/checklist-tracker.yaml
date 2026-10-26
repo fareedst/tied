@@ -1,6 +1,6 @@
 request_token: "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
 profile_depth: "minimal"
-gate_policy: "doc_only"
+gate_policy: "advisory"
 steps:
   session-bootstrap:
     status: "done"
@@ -11,14 +11,14 @@ steps:
   test-strategy:
     status: "done"
   implement-doc-deliverables:
-    notes: "Guide, index, pseudocode link, contract test; comparison Phase 1 Done"
+    notes: "Phase 1 guide; Phase 2 vocab; Phase 3 MCM row 16 + envelope advisory"
     status: "done"
   verification-gate:
-    notes: "node --test tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs pass"
+    notes: "Contract tests + mcp-server build; manifest at close-out"
     status: "done"
   traceable-commit:
-    notes: "2026-10-26 commit 146ba7ff; evidence/traceable-commit-evidence.md"
+    notes: "146ba7ff Phase 1; d99b609a Phases 2–3 pushed; evidence/traceable-commit-evidence.md + traceable-commit-mcp-receipt.json"
     status: "done"
   close_out:
-    notes: "2026-10-26 evidence/close-out-handoff.md; machine gate blocked; process pass"
+    notes: "close-out-2026-10-26-checker-claim-p23; machine pass; checklist-tracker-phase3.yaml authoritative"
     status: "done"
