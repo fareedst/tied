@@ -3,6 +3,11 @@ IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE:
     - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
     - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
   decision: "independent-proofs.ts validate patch and MCP tools."
+  metadata:
+    last_updated:
+      author: "close-out"
+      date: "2026-10-26"
+      reason: "Wave 3 envelope pseudo-code for PSA"
   name: "Independent proof envelope implementation"
   status: "Active"
   traceability:

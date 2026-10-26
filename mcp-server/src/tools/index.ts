@@ -3673,6 +3673,8 @@ export const allTools = [
         max_files: args.max_files ?? 200,
         max_patch_bytes: args.max_patch_bytes ?? 250000,
         max_total_patch_bytes: args.max_total_patch_bytes ?? 2000000,
+        profile_path: args.profile_path,
+        use_default_profile: args.use_default_profile ?? false,
       });
       return textContent(prettyCanonicalJson(report));
     },

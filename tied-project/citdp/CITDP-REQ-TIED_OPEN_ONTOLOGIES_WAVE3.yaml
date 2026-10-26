@@ -1,6 +1,6 @@
 CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
   change_definition:
-    current_behavior: "Request evidence envelope v1 has no independent proof slot; plumb impact preview is token-only (impact-preview.v1)."
+    current_behavior: "Request evidence envelope v1 supports optional independent_proofs[] (metadata-only). Plumb default remains impact-preview.v1; opt-in change-impact-profile.v1 emits impact-preview.v2 with impact_legs (path/glob touch, not_measured semantics)."
     desired_behavior: "Optional independent_proofs[] on envelope; opt-in change-impact profile emits impact-preview.v2 with impact_legs for non-token paths."
     non_goals:
       - "Automatic foreign verifier execution"
@@ -11,8 +11,8 @@ CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
       - "Plumb v1 default unchanged without profile"
   evidence:
     command_seq:
-      - "npx tsx --test src/analysis/plumb-diff-impact-preview.test.ts"
-      - "npx tsx --test src/request-evidence-envelope/request-evidence-envelope.test.ts"
+      - "cd mcp-server && npx tsx --test src/analysis/change-impact-profile.test.ts src/analysis/plumb-diff-impact-preview.test.ts"
+      - "cd mcp-server && npx tsx --test src/request-evidence-envelope/request-evidence-envelope.test.ts"
     proof_boundaries:
       - "Impact legs not_measured for semantics"
       - "Independent proofs metadata-only"
@@ -27,6 +27,15 @@ CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
       - "IMPL-TIED_CHANGE_IMPACT_PROFILE"
       - "IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE"
       - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+      run_id: "oow3-closeout-2026-10-26"
+      scope:
+        - "IMPL-TIED_CHANGE_IMPACT_PROFILE#RUN_PLUMB_DIFF_IMPACT_PREVIEW#plumb-v2-rev1"
+    envelope_path: "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/request-evidence-envelope.v1.json"
+    tied_validate_consistency: "required"
   record_identity:
     change_request_id: "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
     checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"

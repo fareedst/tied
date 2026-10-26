@@ -1,0 +1,63 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npx tsx --test src/analysis/change-impact-profile.test.ts src/analysis/plumb-diff-impact-preview.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 1953,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npx tsx --test src/request-evidence-envelope/request-evidence-envelope.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 805,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    }
+  ],
+  "commit": "cf2ae00f125f872fe3e5c7182ee45cbf9b47d57c",
+  "covered_tokens": [
+    "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "Impact legs not_measured for semantics",
+    "Independent proofs metadata-only"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "oow3-closeout-2026-10-26",
+  "schema_version": "verification-evidence-manifest.v1"
+}

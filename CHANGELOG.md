@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Open Ontologies Wave 3 — plumb v2** — `change-impact-profile.v1` + **impact-preview.v2** on `tied_plumb_diff_impact_preview` when `profile_path` or `use_default_profile` is set; default **impact-preview.v1** unchanged. [REQ-TIED_OPEN_ONTOLOGIES_WAVE3](tied-project/requirements/REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml); template [change-impact-profile.v1.example.yaml](tied-bundle/templates/tied/analysis/examples/change-impact-profile.v1.example.yaml).
+
 ### Changed
 
 - **Store README brownfield comprehension** — Quick start section **Brownfield comprehension on an existing codebase** (purpose, EDPC steps A–G, intent elevation, benefits, costs, deep links). Non-tied-plan doc-only; `[PROC-EDPC_COMPREHENSION]`, `[PROC-BROWNFIELD_INTENT_ELEVATION]`. Working evidence: [DOC-README-BROWNFIELD-COMPREHENSION](tied-project/working/DOC-README-BROWNFIELD-COMPREHENSION/). Machine close-out gate **N/A** (no REQ mint). Feedback ingest **N/A**.

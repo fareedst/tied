@@ -1,0 +1,9 @@
+feat(mcp): plumb impact-preview.v2 with change-impact profile
+
+Opt-in tied-project/change-impact-profile.v1.yaml emits impact-preview.v2
+impact_legs (path/glob touch, not_measured); default callers stay v1.
+
+REQ-TIED_OPEN_ONTOLOGIES_WAVE3, ARCH/IMPL-TIED_CHANGE_IMPACT_PROFILE,
+IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE (pseudo-code sidecar for PSA).
+
+Close-out: envelope + manifest under tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/.

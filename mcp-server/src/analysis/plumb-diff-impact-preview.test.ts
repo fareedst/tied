@@ -93,5 +93,93 @@ describe("plumb diff impact preview (deterministic)", () => {
     assert.ok(suggestion, "should include suggestion entry for the token");
     assert.strictEqual(suggestion?.exists, true, "REQ-TIED_SETUP should have an existing detail YAML file");
   });
+
+  it("v2_without_profile_opt_in_stays_v1", () => {
+    fs.writeFileSync("src/b.ts", "export const y = 2;\n", "utf8");
+    child_process.execFileSync("git", ["add", "src/b.ts"], { stdio: ["ignore", "ignore", "ignore"] });
+
+    const report = runPlumbDiffImpactPreview({
+      selection: "staged",
+      tied_base_path: realTiedBasePathAbs,
+    });
+    assert.strictEqual(report.schema_version, "impact-preview.v1");
+  });
+
+  it("v2_with_profile_emits_legs", () => {
+    fs.mkdirSync("tied-project", { recursive: true });
+    fs.writeFileSync(
+      "tied-project/change-impact-profile.v1.yaml",
+      [
+        "schema_version: change-impact-profile.v1",
+        'proof_boundary: "path/glob touch only"',
+        "legs:",
+        "  - leg_id: src_code",
+        '    label: "Source"',
+        "    path_globs:",
+        '      - "src/**"',
+        "",
+      ].join("\n"),
+      "utf8"
+    );
+    fs.writeFileSync("src/b.ts", "export const y = 2;\n", "utf8");
+    child_process.execFileSync("git", ["add", "src/b.ts", "tied-project/change-impact-profile.v1.yaml"], {
+      stdio: ["ignore", "ignore", "ignore"],
+    });
+
+    const report = runPlumbDiffImpactPreview({
+      selection: "staged",
+      use_default_profile: true,
+      tied_base_path: realTiedBasePathAbs,
+    });
+
+    assert.strictEqual(report.schema_version, "impact-preview.v2");
+    if (report.schema_version !== "impact-preview.v2") return;
+    assert.strictEqual(report.profile.load_ok, true);
+    const leg = report.impact_legs.find((l) => l.leg_id === "src_code");
+    assert.ok(leg);
+    assert.ok(leg!.matched_touched_paths.includes("src/b.ts"));
+  });
+
+  it("v2_missing_profile_file", () => {
+    const report = runPlumbDiffImpactPreview({
+      selection: "staged",
+      use_default_profile: true,
+      tied_base_path: realTiedBasePathAbs,
+    });
+    assert.strictEqual(report.schema_version, "impact-preview.v2");
+    if (report.schema_version !== "impact-preview.v2") return;
+    assert.strictEqual(report.profile.load_ok, false);
+    assert.ok(report.profile.diagnostics && report.profile.diagnostics.length > 0);
+    assert.deepStrictEqual(report.impact_legs, []);
+  });
+
+  it("v2_includes_path_touch_summary", () => {
+    fs.mkdirSync("tied-project", { recursive: true });
+    fs.writeFileSync(
+      "tied-project/change-impact-profile.v1.yaml",
+      [
+        "schema_version: change-impact-profile.v1",
+        'proof_boundary: "explicit boundary text from profile"',
+        "legs:",
+        "  - leg_id: src_code",
+        '    label: "Source"',
+        "    path_globs:",
+        '      - "src/**"',
+        "",
+      ].join("\n"),
+      "utf8"
+    );
+    fs.writeFileSync("src/c.ts", "export const z = 3;\n", "utf8");
+    child_process.execFileSync("git", ["add", "src/c.ts"], { stdio: ["ignore", "ignore", "ignore"] });
+
+    const report = runPlumbDiffImpactPreview({
+      selection: "staged",
+      use_default_profile: true,
+      tied_base_path: realTiedBasePathAbs,
+    });
+    assert.strictEqual(report.schema_version, "impact-preview.v2");
+    if (report.schema_version !== "impact-preview.v2") return;
+    assert.strictEqual(report.path_touch_summary.proof_boundary, "explicit boundary text from profile");
+  });
 });
 

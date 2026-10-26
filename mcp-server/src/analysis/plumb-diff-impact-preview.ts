@@ -21,6 +21,11 @@ import {
   clearBasePathCache,
 } from "../yaml-loader.js";
 import { getDetailPath } from "../detail-loader.js";
+import {
+  computeImpactLegs,
+  loadChangeImpactProfile,
+  type ImpactLegReportRow,
+} from "./change-impact-profile.js";
 
 const TOKEN_REGEX = /\[(REQ-[A-Za-z0-9_-]+|ARCH-[A-Za-z0-9_-]+|IMPL-[A-Za-z0-9_-]+)\]/g;
 
@@ -127,13 +132,16 @@ export type PlumbDiffImpactPreviewArgs = {
    * Explicit TIED base path for token registry lookups (deterministic when cwd is a temp git repo).
    */
   tied_base_path?: string;
+  /** Opt-in change-impact-profile.v1 path (cwd-relative or absolute). Emits impact-preview.v2 when set. */
+  profile_path?: string;
+  /** When true, load `{gitRoot}/tied-project/change-impact-profile.v1.yaml`. `profile_path` wins when both set. */
+  use_default_profile?: boolean;
 };
 
-export type PlumbDiffImpactPreviewReport = z.infer<typeof PlumbDiffImpactPreviewReportSchema>;
-
 export const IMPACT_PREVIEW_SCHEMA_VERSION = "impact-preview.v1";
+export const IMPACT_PREVIEW_SCHEMA_VERSION_V2 = "impact-preview.v2";
 
-export const PlumbDiffImpactPreviewReportSchema = z.object({
+export const PlumbDiffImpactPreviewReportV1Schema = z.object({
   schema_version: z.literal(IMPACT_PREVIEW_SCHEMA_VERSION),
   generated_at: z.string(),
   input: z.object({
@@ -232,6 +240,102 @@ export const PlumbDiffImpactPreviewReportSchema = z.object({
   human_readable_summary: z.string(),
 });
 
+/** @deprecated alias — prefer PlumbDiffImpactPreviewReportV1Schema */
+export const PlumbDiffImpactPreviewReportSchema = PlumbDiffImpactPreviewReportV1Schema;
+
+const ImpactLegReportRowSchema = z.object({
+  leg_id: z.string(),
+  label: z.string(),
+  path_globs: z.array(z.string()),
+  matched_touched_paths: z.array(z.string()),
+  matched_count: z.number(),
+  related_tokens: z.array(z.string()).optional(),
+  semantics: z.literal("not_measured"),
+});
+
+export const PlumbDiffImpactPreviewReportV2Schema = PlumbDiffImpactPreviewReportV1Schema.omit({
+  schema_version: true,
+}).extend({
+  schema_version: z.literal(IMPACT_PREVIEW_SCHEMA_VERSION_V2),
+  profile: z.object({
+    source_path: z.string(),
+    load_ok: z.boolean(),
+    diagnostics: z.array(z.string()).optional(),
+  }),
+  impact_legs: z.array(ImpactLegReportRowSchema),
+  path_touch_summary: z.object({
+    total_touched_files: z.number(),
+    legs_with_matches: z.number(),
+    proof_boundary: z.string(),
+  }),
+});
+
+export type PlumbDiffImpactPreviewReportV1 = z.infer<typeof PlumbDiffImpactPreviewReportV1Schema>;
+export type PlumbDiffImpactPreviewReportV2 = z.infer<typeof PlumbDiffImpactPreviewReportV2Schema>;
+export type PlumbDiffImpactPreviewReport = PlumbDiffImpactPreviewReportV1 | PlumbDiffImpactPreviewReportV2;
+
+function profileOptInRequested(args: PlumbDiffImpactPreviewArgs): boolean {
+  return Boolean(
+    (args.profile_path && args.profile_path.trim()) || args.use_default_profile === true
+  );
+}
+
+function resolveChangeImpactProfilePath(args: {
+  profile_path?: string;
+  use_default_profile?: boolean;
+  gitRootAbs: string;
+}): string {
+  if (args.profile_path && args.profile_path.trim()) {
+    const p = args.profile_path.trim();
+    return path.isAbsolute(p) ? p : path.resolve(process.cwd(), p);
+  }
+  return path.join(args.gitRootAbs, "tied-project", "change-impact-profile.v1.yaml");
+}
+
+function buildV2HumanSummaryAppendix(impactLegs: ImpactLegReportRow[]): string {
+  const lines = impactLegs.map(
+    (leg) =>
+      `  - ${leg.leg_id}: matched ${leg.matched_count} path(s)${leg.matched_count > 0 ? ` (${leg.matched_touched_paths.join(", ")})` : ""}`
+  );
+  return ["Impact legs (not_measured — path/glob touch only):", ...lines].join("\n");
+}
+
+function wrapV1AsV2Report(args: {
+  v1: PlumbDiffImpactPreviewReportV1;
+  profileSourcePath: string;
+  loadOk: boolean;
+  diagnostics?: string[];
+  impactLegs: ImpactLegReportRow[];
+  proofBoundary: string;
+}): PlumbDiffImpactPreviewReportV2 {
+  const { v1, profileSourcePath, loadOk, diagnostics, impactLegs, proofBoundary } = args;
+  const legsWithMatches = impactLegs.filter((l) => l.matched_count > 0).length;
+  const touchedCount = v1.touched_files.length;
+  const appendix = buildV2HumanSummaryAppendix(impactLegs);
+  const human_readable_summary = `${v1.human_readable_summary}\n\n${appendix}`;
+
+  const { schema_version: _v1Schema, human_readable_summary: _v1Human, ...v1Rest } = v1;
+
+  const report = {
+    ...v1Rest,
+    schema_version: IMPACT_PREVIEW_SCHEMA_VERSION_V2,
+    profile: {
+      source_path: profileSourcePath,
+      load_ok: loadOk,
+      ...(diagnostics && diagnostics.length > 0 ? { diagnostics } : {}),
+    },
+    impact_legs: impactLegs,
+    path_touch_summary: {
+      total_touched_files: touchedCount,
+      legs_with_matches: legsWithMatches,
+      proof_boundary: proofBoundary,
+    },
+    human_readable_summary,
+  };
+
+  return PlumbDiffImpactPreviewReportV2Schema.parse(report);
+}
+
 export function runPlumbDiffImpactPreview(args: PlumbDiffImpactPreviewArgs): PlumbDiffImpactPreviewReport {
   const previousTiedBasePath = process.env.TIED_BASE_PATH;
   const scopedTiedBasePath =
@@ -244,7 +348,36 @@ export function runPlumbDiffImpactPreview(args: PlumbDiffImpactPreviewArgs): Plu
     }
     // Keep base_path deterministic within a single report build.
     clearBasePathCache();
-    return buildPlumbDiffImpactPreviewReport(args);
+    const v1 = buildPlumbDiffImpactPreviewV1Report(args);
+    if (!profileOptInRequested(args)) {
+      return v1;
+    }
+    const gitRootAbs = gitTopLevel(process.cwd());
+    const profilePathAbs = resolveChangeImpactProfilePath({
+      profile_path: args.profile_path,
+      use_default_profile: args.use_default_profile,
+      gitRootAbs,
+    });
+    const loaded = loadChangeImpactProfile(profilePathAbs);
+    const touchedPaths = v1.touched_files.map((t) => t.path);
+    if (!loaded.ok) {
+      return wrapV1AsV2Report({
+        v1,
+        profileSourcePath: loaded.source_path,
+        loadOk: false,
+        diagnostics: loaded.diagnostics,
+        impactLegs: [],
+        proofBoundary: "Profile load failed — impact legs not computed",
+      });
+    }
+    const impactLegs = computeImpactLegs(loaded.profile, touchedPaths);
+    return wrapV1AsV2Report({
+      v1,
+      profileSourcePath: loaded.source_path,
+      loadOk: true,
+      impactLegs,
+      proofBoundary: loaded.profile.proof_boundary,
+    });
   } finally {
     if (scopedTiedBasePath) {
       if (previousTiedBasePath === undefined) {
@@ -257,7 +390,7 @@ export function runPlumbDiffImpactPreview(args: PlumbDiffImpactPreviewArgs): Plu
   }
 }
 
-function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): PlumbDiffImpactPreviewReport {
+function buildPlumbDiffImpactPreviewV1Report(args: PlumbDiffImpactPreviewArgs): PlumbDiffImpactPreviewReportV1 {
   const projectCwd = process.cwd();
   const projectRootAbs = gitTopLevel(projectCwd);
   const selection: PlumbDiffImpactPreviewSelection = args.selection ?? "both";
@@ -291,7 +424,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
   const filesTruncated = candidateFiles.length > maxFiles;
   const truncatedCandidateFiles = filesTruncated ? candidateFiles.slice(0, maxFiles) : candidateFiles;
 
-  const touchedFiles: PlumbDiffImpactPreviewReport["touched_files"] = [];
+  const touchedFiles: PlumbDiffImpactPreviewReportV1["touched_files"] = [];
 
   const addedByType: Record<"REQ" | "ARCH" | "IMPL", Set<string>> = {
     REQ: new Set(),
@@ -417,7 +550,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
   const impactedArchitecture = new Set<string>(discoveredArch);
   const impactedImplementation = new Set<string>(discoveredImpl);
 
-  const decisionsByRequirement: PlumbDiffImpactPreviewReport["implicated"]["decisions_by_requirement"] = {};
+  const decisionsByRequirement: PlumbDiffImpactPreviewReportV1["implicated"]["decisions_by_requirement"] = {};
 
   for (const reqToken of discoveredReq) {
     const decisions = getDecisionsForRequirement(reqToken);
@@ -443,12 +576,12 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
 
   const allImpactedTokens = new Set([...impactedRequirements, ...impactedArchitecture, ...impactedImplementation]);
 
-  const missing_index_records: PlumbDiffImpactPreviewReport["token_registry_checks"]["missing_index_records"] = {
+  const missing_index_records: PlumbDiffImpactPreviewReportV1["token_registry_checks"]["missing_index_records"] = {
     REQ: [],
     ARCH: [],
     IMPL: [],
   };
-  const missing_detail_files: PlumbDiffImpactPreviewReport["token_registry_checks"]["missing_detail_files"] = {
+  const missing_detail_files: PlumbDiffImpactPreviewReportV1["token_registry_checks"]["missing_detail_files"] = {
     REQ: [],
     ARCH: [],
     IMPL: [],
@@ -456,7 +589,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
 
   const semanticTokensMissing: string[] = [];
 
-  const suggestedDetailFilesToOpen: PlumbDiffImpactPreviewReport["suggested_detail_files_to_open"] = [];
+  const suggestedDetailFilesToOpen: PlumbDiffImpactPreviewReportV1["suggested_detail_files_to_open"] = [];
 
   // Base path relative presentation:
   const tiedBasePathAbs = process.env.TIED_BASE_PATH ?? path.resolve(projectRootAbs, "tied");
@@ -498,7 +631,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
     });
   }
 
-  const tokenReferencesDetected: PlumbDiffImpactPreviewReport["token_references_detected"] = Object.entries(tokenFiles)
+  const tokenReferencesDetected: PlumbDiffImpactPreviewReportV1["token_references_detected"] = Object.entries(tokenFiles)
     .map(([token, entry]) => {
       const direction: "added" | "removed" | "added_and_removed" =
         entry.added.size > 0 && entry.removed.size > 0
@@ -516,7 +649,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
     .sort((a, b) => a.token.localeCompare(b.token));
 
   // Heuristic, non-authoritative LEAP hints.
-  const leap_actions_checklist: PlumbDiffImpactPreviewReport["leap_actions_checklist"] = [];
+  const leap_actions_checklist: PlumbDiffImpactPreviewReportV1["leap_actions_checklist"] = [];
   const addAction = (id: string, action: string, trigger: string) => {
     leap_actions_checklist.push({ id, action, non_authoritative: true, trigger });
   };
@@ -586,7 +719,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
     "LEAP hints are non-authoritative heuristics (not an automatic fix).",
   ].join("\n");
 
-  const reportBase: Omit<PlumbDiffImpactPreviewReport, "human_readable_summary"> = {
+  const reportBase: Omit<PlumbDiffImpactPreviewReportV1, "human_readable_summary"> = {
     schema_version: IMPACT_PREVIEW_SCHEMA_VERSION,
     generated_at: new Date().toISOString(),
     input: {
@@ -642,7 +775,7 @@ function buildPlumbDiffImpactPreviewReport(args: PlumbDiffImpactPreviewArgs): Pl
     leap_actions_checklist,
   };
 
-  const report = PlumbDiffImpactPreviewReportSchema.parse({
+  const report = PlumbDiffImpactPreviewReportV1Schema.parse({
     ...reportBase,
     human_readable_summary,
   });

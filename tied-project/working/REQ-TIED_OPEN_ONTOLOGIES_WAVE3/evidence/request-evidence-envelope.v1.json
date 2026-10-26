@@ -1,0 +1,531 @@
+{
+  "artifacts": [
+    {
+      "content_hash": "sha256:09878053cff1421c7995eaa45bd459af7d5352eeee5dad77e9b4116aa8528e3e",
+      "kind": "adversarial_inquiry_gate",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-verification/gate-result.json",
+      "phase": "verification",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:2090b225b0d7c2d75adb8cb1d095159b7087c0916c80ec129b1af396b0b8da83",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/git-hygiene-receipt-2026-10-23-clear-workspace.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:2e4a1d98afef38d4e4eb7aae0db460acc9c3d2292026b0980706ffb88f252791",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/three-way-alignment-unit-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:31e9884ef44ec6c0cda0cc79c0b52fe0ab42d2cb44559af990f371426492bc20",
+      "kind": "adversarial_inquiry_obligation",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:327c9f317fe55beeca4c0aab01b49cce792903e41d12853576d3e8bc01f6d4ee",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-close-out-evidence-sync-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:33ed0eb91178a9b07505099305fd07b1e19283c3ae5647dae4d614f5720a9103",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/risk-assessment-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:3d5d8ca8f89e2fedd7c46c6c524f7facef242a613d63892ee757eb2c2b7d88e8",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gitignore-close-out-hygiene-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4947e4d3e2b33256a9851528f810186eee51cff8a1a5b34cd749dc740cff01b5",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sync-tied-stack-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4c67135eefded21e55c93a269da559faa0ddf7cdb01e536a0db841af4fb717da",
+      "kind": "adversarial_inquiry_provenance",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "provenance_identity"
+      ],
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4c8d20e60f439e144b7d693adaf8d4ddf25b550442cc1f9c3f06941116e7dae0",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-green-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4dc1d7a285378146bf641274276cfe3e623d69e251ef01c66e009b4ee5d89f33",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/translate-sponsor-intent-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4e7b1556ab47aaf8c74c14224aecaaa2d53a5c4a48bc52fb8b3a1c86735cebc1",
+      "kind": "citdp_record",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml",
+      "phase": null,
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:59b60c274d64db4023ece5c712127ffd21eb19398756c16b7b89545cb492d393",
+      "kind": "adversarial_inquiry_gate",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-close_out/gate-result.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:5b8a130d840803538547a9b3deb3c5f89f344c009bcca5b8c2b57b9086b799ef",
+      "kind": "evidence_chain_profile",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/evidence-chain-profile.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:5e5df804a9fe8a325d63f1e39fb0469fc25ff8e0a08726072b1fb2b4a8ee85d2",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/session-bootstrap-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6084eb709c55761657904f5d71a2099086cd4937a0f448da788f2ca653fa46b3",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/unit-test-red-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:641529438141450f48047fae53901c721e07a7b01d1f97a2c928ef4b01384374",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6d3c6390c9825db022967ea7416578388e7c2452865ab83699df3d674ba688d7",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/sub-yaml-edit-loop-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6e4757d7fca8598d010a2e3f4df4189d0c6c0e4a5874bb2fa9dc64a2a50bed28",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/impact-discovery-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6f5284048d359414aeaf0d072637c929fec7e0d6041c4025cf465338edf98480",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/composition-integration-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:951b9f60eaac4705fd81761793b6ef5438e1b909d7083a74b33eebdfcc91ce6c",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/verification-gate-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:95a715797d080e15fbc7c8d5ca59b2cf1a4992a6d3c0082e3433d4407f77c35d",
+      "kind": "pseudocode_analysis_report",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/pseudocode-analysis/IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ],
+      "schema_version": "pseudocode-analysis-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:97249097caef3028beb15e4618bb9641cf1f2eeab7b2471e12148bada165c40b",
+      "kind": "adversarial_inquiry_obligation",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:a02f25e6f570a471155d1968fb19542da034e1e6e73551e65043f3c29f2cb6c7",
+      "kind": "checklist_tracker",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/agent-req-implementation-checklist.yaml",
+      "phase": null,
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:a2a6bd2ae7a79c0cae81736fbaddb173e832e5dee4f3928821972e40d1d70ee0",
+      "kind": "pseudocode_analysis_report",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/pseudocode-analysis/IMPL-TIED_CHANGE_IMPACT_PROFILE.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "pseudocode_gate_only"
+      ],
+      "schema_version": "pseudocode-analysis-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:a38453b9a718b87dc082d0cea3aecf57753313334b26aea60033daf2ee9236ce",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/gate-pseudocode-validation-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:a4f80f625f9981f6a8e10d3cfa02e537840705574088549ff82afd1cbbb18e35",
+      "kind": "adversarial_inquiry_gate",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:ab4c064ab167f194e815419b663915804b5d403030a8e72a2f883564c7e2160f",
+      "kind": "adversarial_inquiry_ledger",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-close_out/finding-ledger.jsonl",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:bcf4388f704db36660368bb19d91ccfb896be8d23b9403ab46bef06711c0e513",
+      "kind": "adversarial_inquiry_obligation",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-verification/obligation-report.json",
+      "phase": "verification",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:cd9a39382c07e44eb7481a0b8ab8fc2d0362cada144289845adaaae7fa05a2f0",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T15-17-03-164Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:d08c3f66c0e91fa6272138715595453b086814de7d748efe05013d83b5c32a66",
+      "kind": "adversarial_inquiry_ledger",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-verification/finding-ledger.jsonl",
+      "phase": "verification",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:d10d2d9aed6dc1572cdc0607af93feebdb573c59dd855c5e73507b9cf897b54f",
+      "kind": "adversarial_inquiry_provenance",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "phase": "verification",
+      "proof_boundaries": [
+        "provenance_identity"
+      ],
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:d332c0a8ed75db60ac021a974903bd435ea8734049f915fb181958ee9bcccdc1",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/change-definition-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:d5527fc9606827991338bb44c84c6de31676478487a7199442aad3ad949c02b8",
+      "kind": "adversarial_inquiry_provenance",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "provenance_identity"
+      ],
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:da0cfaa3ea3634b88476811b83f8f167a6dff10cc50fdf6d256462e16805e637",
+      "kind": "verification_evidence_manifest",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/verification-evidence-manifest.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "verification-evidence-manifest.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e2dd6b123bfaad4e16f9360305092a3bc45d16b755e83c583544110d5a7362c7",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/gates/close_out-2026-10-26T15-16-16-687Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e686d9b7f2c6b6e822a767b39326197af036e3d2b0239478a073296c5f88aaa4",
+      "kind": "adversarial_inquiry_ledger",
+      "path": "tied-bundle/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/adversarial-inquiry/phase-pre_implementation/finding-ledger.jsonl",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:ef75d58c9ac9debf98259563418bbe12da14874770453d819341883849c69018",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/apply-token-comments-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:f2299754124df842e64a8dee16793f75088792f91665f59678c9abfa181fe227",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/persist-implementation-records-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:ff7e252d4e2738e3711bbe206749884f2b75e883ff8d28131ba9dfb1c7d2945e",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/test-strategy-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    }
+  ],
+  "cross_links": {
+    "citdp_path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml",
+    "evidence_chain_profile_path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/evidence-chain-profile.v1.json",
+    "tracker_hash": "sha256:e81b9dbf6fe1f2f95317802f792aa2022cf51025becb60191175d31c23c19ae7",
+    "tracker_path": "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/agent-req-implementation-checklist.yaml"
+  },
+  "envelope_meta": {
+    "generated_at": "2026-10-26T15:17:03.165Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
+  },
+  "gaps": [
+    {
+      "artifact_kind": "adversarial_inquiry_gate",
+      "code": "finding_unresolved",
+      "detail": "finding_unresolved",
+      "phase": "close_out",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "artifact_kind": "adversarial_inquiry_gate",
+      "code": "finding_unresolved",
+      "detail": "finding_unresolved",
+      "phase": "pre_implementation",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "artifact_kind": "adversarial_inquiry_gate",
+      "code": "finding_unresolved",
+      "detail": "finding_unresolved",
+      "phase": "verification",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "artifact_kind": "adversarial_inquiry_gate",
+      "code": "finding_unresolved",
+      "detail": "warn_not_success",
+      "phase": "pre_implementation",
+      "severity": "warn",
+      "source": "A5"
+    },
+    {
+      "artifact_kind": "adversarial_inquiry_gate",
+      "code": "finding_unresolved",
+      "detail": "warn_not_success",
+      "phase": "verification",
+      "severity": "warn",
+      "source": "A5"
+    }
+  ],
+  "identity": {
+    "depth_tier": "integrated",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "4.0.0",
+    "project_id": "43c95df716872c5d",
+    "request_token": "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+  },
+  "runs": [
+    {
+      "generator": "persistGateDecisionReceipt",
+      "phase": "close_out",
+      "run_id": "oow3-closeout-2026-10-26",
+      "started_at": null
+    },
+    {
+      "generator": "request_evidence_envelope_build",
+      "phase": "close_out",
+      "run_id": "run-close_out",
+      "started_at": null
+    },
+    {
+      "generator": "request_evidence_envelope_build",
+      "phase": "pre_implementation",
+      "run_id": "run-pre_implementation",
+      "started_at": null
+    },
+    {
+      "generator": "request_evidence_envelope_build",
+      "phase": "verification",
+      "run_id": "run-verification",
+      "started_at": null
+    }
+  ],
+  "schema_version": "request-evidence-envelope.v1"
+}

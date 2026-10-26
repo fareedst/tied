@@ -1,0 +1,11 @@
+# Example change-impact-profile.v1 — copy to tied-project/change-impact-profile.v1.yaml to opt in.
+# Proof boundary: path/glob touch only — not semantic equivalence or REQ satisfaction.
+schema_version: change-impact-profile.v1
+proof_boundary: "path/glob touch only — not semantic or REQ satisfaction"
+legs:
+  - leg_id: kg_assets
+    label: "Knowledge-graph assets (example)"
+    path_globs:
+      - "ontology/**"
+      - "**/*.ttl"
+    related_tokens: []

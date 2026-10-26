@@ -3,6 +3,11 @@ IMPL-TIED_CHANGE_IMPACT_PROFILE:
     - "ARCH-TIED_CHANGE_IMPACT_PROFILE"
     - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
   decision: "change-impact-profile.ts and plumb v2 report legs."
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-10-26"
+      reason: "plumb v2 slice pseudo-code"
   name: "Change impact profile implementation"
   status: "Active"
   traceability:

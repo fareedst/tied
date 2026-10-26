@@ -8,6 +8,7 @@ Optional change-footprint encodings for Behavior-Bounded Change Engineering (BBC
 | --- | --- |
 | `slice-map.yaml` | Client-owned binding → owning REQ slice map (`bbce-slice-map.v1`) |
 | `examples/declared-change-surface.v1.example.yaml` | Example declared surface for CITDP / `working/{CHANGE-ID}/` |
+| `examples/change-impact-profile.v1.example.yaml` | Example plumb opt-in profile (`tied-project/change-impact-profile.v1.yaml`) for **impact-preview.v2** |
 
 ## Usage
 

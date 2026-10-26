@@ -256,7 +256,8 @@ The ontology engine’s **RDF store, reasoner, and 122-tool MCP plane** sit **ou
 | **2** | Project vocab RECORD (`ontology plan apply`, `derivation certificate`) | **Defer** (costly) |
 | **3** | `methodology-composition-matrix.md` row | **Defer** |
 | **3** | Certificate-shaped fields in request evidence envelope | **Defer** — **add-feature** |
-| **3** | Client profile: semantic diff preview for non-YAML assets | **Defer** — **add-feature** |
+| **3** | Client profile: semantic diff preview for non-YAML assets | **Partial** — `change-impact-profile.v1` + **impact-preview.v2** via [REQ-TIED_OPEN_ONTOLOGIES_WAVE3](../../tied-project/requirements/REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml) (path/glob legs; **not_measured** semantics) |
+| **3** | Request evidence envelope `independent_proofs[]` | **Done** — [REQ-TIED_OPEN_ONTOLOGIES_WAVE3](../../tied-project/requirements/REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml) |
 | **3** | Integrate Open Ontologies MCP as optional client tool | **Defer** — sponsor-owned infra |
 
 ---
