@@ -9,7 +9,7 @@
 
 ## Ship commit
 
-(SHA filled post-commit)
+`75b1c27b20acd43a6f12ef7ff4adb51187060d01` — feat(bootstrap): batch tied-install --targets YAML client lists
 
 ## Remaining risks
 
