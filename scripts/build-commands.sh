@@ -203,6 +203,9 @@ test_bootstrap_layered_install() {
     "${root}/tools/bootstrap/lib/layers/gitignore-block.test.mjs" \
     "${root}/tools/bootstrap/lib/layers/skills-linked.test.mjs" \
     "${root}/tools/bootstrap/install-layers.integration.test.mjs" \
+    "${root}/tools/bootstrap/install-layers-migrate-ordered.test.mjs" \
+    "${root}/tools/bootstrap/install-layers-batch.test.mjs" \
+    "${root}/tools/bootstrap/lib/install-targets-list.test.mjs" \
     "${root}/tools/bootstrap/tied-install-dispatch.test.mjs" \
     "${root}/tools/bootstrap/windows-shims.test.mjs" \
     "${root}/tools/bootstrap/lib/lint-stale-layout.test.mjs" \

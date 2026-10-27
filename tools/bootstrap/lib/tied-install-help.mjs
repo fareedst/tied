@@ -32,6 +32,8 @@ export function printTiedInstallHelp() {
   writeDim("  ./tied-install.sh --migrate-ordered-list-keys /path/to/client");
   writeDim("  ./tied-install.sh --migrate-ordered-list-keys --dry-run .");
   writeDim("  ./tied-install.sh --refresh /path/to/client");
+  writeDim("  ./tied-install.sh --refresh --targets-only-installed --targets ~/clients.yaml");
+  writeDim("  ./tied-install.sh --targets-plan --targets ./clients.yaml");
   process.stdout.write("\n");
 
   writeSection("Options");
@@ -53,6 +55,12 @@ export function printTiedInstallHelp() {
   writeDim("  --install-methodology-hook           Install client pre-commit hook template");
   writeDim("  Plus parity flags: --skip-parity-gate, --strict-refresh, etc.");
   writeDim("  Plus tool flags: --full-tools, --with-jev, --with-dae, --with-bbce");
+  writeDim("  --targets PATH                       YAML list of client dirs (- for stdin); or set TIED_INSTALL_TARGETS");
+  writeDim("  --targets-plan                       Print resolved paths; requires --targets (no install)");
+  writeDim("  --targets-include|--targets-exclude GLOB  Filter batch list (* and **)");
+  writeDim("  --targets-skip-missing               Drop list entries that are not directories");
+  writeDim("  --targets-only-installed             Keep clients with tied-bundle/install.json");
+  writeDim("  --targets-continue-on-error          Run all batch targets; exit 1 if any failed");
   process.stdout.write("\n");
 
   writeSection("Hints");
@@ -62,6 +70,7 @@ export function printTiedInstallHelp() {
   writeDim("  • Store root equals client root: use --allow-self-install or a separate store clone.");
   writeDim("  • Windows: .\\tied-install.ps1 or tied-install.cmd (same behavior).");
   writeDim("  • No arguments prints this help; pass . to install the current directory.");
+  writeDim("  • Batch refresh: list file is a YAML array of paths; sample: tools/bootstrap/fixtures/install-targets/sample.v1.yaml");
   writeHr();
   process.stdout.write("\n");
 }

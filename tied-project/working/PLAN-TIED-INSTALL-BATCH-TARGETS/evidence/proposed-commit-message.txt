@@ -1,0 +1,26 @@
+feat(bootstrap): batch tied-install --targets YAML client lists
+
+Operators can refresh or migrate many TIED clients in one invocation via
+--targets (or TIED_INSTALL_TARGETS), with filters and fail-fast/continue
+policies. [REQ-TIED_LAYERED_CLIENT_INSTALL] [IMPL-TIED_LAYERED_CLIENT_INSTALL]
+
+Staging map:
+- scripts/build-commands.sh
+- tools/bootstrap/install-layers.mjs
+- tools/bootstrap/install-layers-batch.test.mjs
+- tools/bootstrap/install-layers-migrate-ordered.test.mjs
+- tools/bootstrap/lib/install-targets-list.mjs
+- tools/bootstrap/lib/install-targets-list.test.mjs
+- tools/bootstrap/lib/tied-install-help.mjs
+- tools/bootstrap/README.md
+- tools/bootstrap/fixtures/install-targets/sample.v1.yaml
+- tied-project/implementation-decisions/IMPL-TIED_LAYERED_CLIENT_INSTALL-pseudocode.md
+- tied-project/citdp/CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml
+- tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/PLAN-refine-pass1.md
+- tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/evidence/close-out-handoff.md
+- tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/evidence/git-hygiene-receipt-2026-10-27.md
+- tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/evidence/proposed-commit-message.txt
+- tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/evidence/traceable-commit-evidence.md
+- CHANGELOG.md
+
+Completion signals: close_out gate allowed; envelope blocking gaps 0 (minimal depth).

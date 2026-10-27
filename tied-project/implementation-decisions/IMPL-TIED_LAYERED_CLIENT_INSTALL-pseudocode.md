@@ -112,4 +112,31 @@ PROCEDURE TIED_INSTALL_HELP_TEXTURE(argv)
     TERMINATE exit 0
   ENDIF
 END PROCEDURE
+
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
+// How: Load ordered client roots from YAML list file or stdin for batch tied-install.
+PROCEDURE LOAD_INSTALL_TARGETS_YAML(sourcePath, baseDir)
+  PRE: sourcePath is readable file path or "-" for stdin
+  POST: ordered list of absolute directory path strings
+  EFFECTS: parse js-yaml document as list or { targets: list }; resolve relative paths against baseDir; expand ~
+  FAILURE_MODES: TARGETS_YAML_INVALID; TARGETS_LIST_EMPTY
+END PROCEDURE
+
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
+// How: Apply include/exclude globs and optional missing or install-manifest filters before batch run.
+PROCEDURE FILTER_INSTALL_TARGETS(paths, filterOptions)
+  PRE: paths are normalized absolute strings
+  POST: subset paths after AND-combined filters
+  FAILURE_MODES: TARGETS_FILTER_EMPTY
+END PROCEDURE
+
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
+// How: Sequential multi-target install orchestration with plan-only and continue-on-error policies.
+PROCEDURE RUN_INSTALL_BATCH(targets, parsedOptions, runOne) // [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
+  PRE: targets non-empty when not plan-only; runOne invokes per-target install, refresh, doctor, or migrate
+  POST: each target processed per fail-fast or continue-on-error policy
+  EFFECTS: log prefix [index/total]; DIAGNOSTIC batch summary line
+  FAILURE_MODES: BATCH_ABORTED_FIRST_ERROR; BATCH_PARTIAL_FAILURE
+  TERMINATION: exit 0 when all succeed or plan-only; exit 1 on any failure (partial when continue-on-error)
+END PROCEDURE
 ```

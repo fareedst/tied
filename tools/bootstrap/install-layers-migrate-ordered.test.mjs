@@ -7,10 +7,10 @@ import { parseInstallLayersArgs } from "./install-layers.mjs";
 
 describe("parseInstallLayersArgs migrate-ordered-list-keys [MIG-UNIT-002]", () => {
   it("parses --migrate-ordered-list-keys with target path", () => {
-    const parsed = parseInstallLayersArgs(["--migrate-ordered-list-keys", "/tmp/client"]);
+    const parsed = parseInstallLayersArgs(["--migrate-ordered-list-keys", "/tmp"]);
     assert.equal(parsed.migrateOrderedListKeys, true);
     assert.equal(parsed.migrateFailIfPending, false);
-    assert.equal(parsed.target, "/tmp/client");
+    assert.equal(parsed.targets[0], "/tmp");
   });
 
   it("parses --fail-if-pending with migrate flag", () => {

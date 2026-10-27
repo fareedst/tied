@@ -1,0 +1,3 @@
+# tied-install-targets.v1 — YAML list of TIED client roots (paths relative to this file).
+- ../example-client-a
+- /absolute/path/to/client-b

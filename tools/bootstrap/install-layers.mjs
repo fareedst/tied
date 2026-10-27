@@ -13,20 +13,67 @@ import {
 import { parseParityCliFlags } from "./lib/parity-cli-options.mjs";
 import { parseBootstrapToolFlags } from "./lib/client-tool-use-bootstrap.mjs";
 import { installTiedLayers, refreshInstallFromManifest } from "./lib/install-layers-core.mjs";
-import { TIED_REPO_ROOT } from "./lib/constants.mjs";
 import { resolveStoreRoot } from "./lib/layers/store.mjs";
+import { readInstallManifest } from "./lib/layers/install-manifest.mjs";
 import { detectLegacyLayout } from "./lib/layout.mjs";
 import { migrateLayout } from "./lib/migrate-layout.mjs";
 import {
   migrateOrderedListKeys,
   runPostMigrateAuditCheck,
 } from "./lib/migrate-ordered-list-keys.mjs";
+import {
+  assertInstallTargetDirectories,
+  dedupeInstallTargets,
+  filterInstallTargets,
+  loadInstallTargetsYaml,
+} from "./lib/install-targets-list.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, "../..");
 
-function usage() {
-  printTiedInstallHelp();
+/**
+ * @param {{
+ *   targetsFile?: string,
+ *   positionalClient?: string,
+ *   targetsPlan?: boolean,
+ *   targetsInclude?: string,
+ *   targetsExclude?: string,
+ *   targetsSkipMissing?: boolean,
+ *   targetsOnlyInstalled?: boolean,
+ * }} parsed
+ */
+export function resolveInstallTargets(parsed) {
+  const filterOpts = {
+    includeGlob: parsed.targetsInclude,
+    excludeGlob: parsed.targetsExclude,
+    skipMissing: parsed.targetsSkipMissing,
+    onlyInstalled: parsed.targetsOnlyInstalled,
+    readManifest: readInstallManifest,
+  };
+
+  if (parsed.targetsFile) {
+    let paths = dedupeInstallTargets(
+      loadInstallTargetsYaml(parsed.targetsFile, { baseDir: process.cwd() }),
+    );
+    const hasFilters =
+      filterOpts.includeGlob
+      || filterOpts.excludeGlob
+      || filterOpts.skipMissing
+      || filterOpts.onlyInstalled;
+    if (hasFilters) {
+      ({ paths } = filterInstallTargets(paths, filterOpts));
+    } else {
+      assertInstallTargetDirectories(paths);
+    }
+    return paths;
+  }
+
+  if (parsed.targetsPlan) {
+    throw new Error("--targets-plan requires --targets or TIED_INSTALL_TARGETS");
+  }
+
+  const single = path.resolve(parsed.positionalClient ?? process.cwd());
+  assertInstallTargetDirectories([single]);
+  return [single];
 }
 
 /**
@@ -52,6 +99,14 @@ export function parseInstallLayersArgs(argv, env = process.env) {
   let methodologyReadonly = false;
   let installMethodologyHook = false;
   let claudeHarnessLabel;
+  /** @type {string | undefined} */
+  let targetsFile;
+  let targetsInclude;
+  let targetsExclude;
+  let targetsSkipMissing = false;
+  let targetsOnlyInstalled = false;
+  let targetsPlan = false;
+  let targetsContinueOnError = false;
 
   while (args.length > 0 && args[0].startsWith("-")) {
     const flag = args[0];
@@ -108,6 +163,30 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     } else if (flag === "--claude-harness-label") {
       claudeHarnessLabel = args[1];
       args.splice(0, 2);
+    } else if (flag === "--targets") {
+      targetsFile = args[1];
+      if (!targetsFile) {
+        throw new Error("--targets requires a YAML list file path (or - for stdin)");
+      }
+      args.splice(0, 2);
+    } else if (flag === "--targets-include") {
+      targetsInclude = args[1];
+      args.splice(0, 2);
+    } else if (flag === "--targets-exclude") {
+      targetsExclude = args[1];
+      args.splice(0, 2);
+    } else if (flag === "--targets-skip-missing") {
+      targetsSkipMissing = true;
+      args.shift();
+    } else if (flag === "--targets-only-installed") {
+      targetsOnlyInstalled = true;
+      args.shift();
+    } else if (flag === "--targets-plan") {
+      targetsPlan = true;
+      args.shift();
+    } else if (flag === "--targets-continue-on-error") {
+      targetsContinueOnError = true;
+      args.shift();
     } else {
       break;
     }
@@ -122,9 +201,23 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     throw new Error("--fail-if-pending requires --migrate-ordered-list-keys");
   }
 
-  const target = positional[0] ? path.resolve(positional[0]) : process.cwd();
-  return {
-    target,
+  if (!targetsFile && env.TIED_INSTALL_TARGETS?.trim()) {
+    targetsFile = env.TIED_INSTALL_TARGETS.trim();
+  }
+
+  if (positional[0] && targetsFile) {
+    throw new Error("Cannot combine a positional client directory with --targets");
+  }
+
+  const parsed = {
+    positionalClient: positional[0],
+    targetsFile,
+    targetsInclude,
+    targetsExclude,
+    targetsSkipMissing,
+    targetsOnlyInstalled,
+    targetsPlan,
+    targetsContinueOnError,
     layers: layers ?? ["db", "mcp", "skills", "methodology"],
     harness,
     mode,
@@ -145,8 +238,73 @@ export function parseInstallLayersArgs(argv, env = process.env) {
     toolUseProfile,
     ...parity,
   };
+
+  parsed.targets = resolveInstallTargets(parsed);
+  return parsed;
 }
 
+/**
+ * @param {ReturnType<typeof parseInstallLayersArgs>} parsed
+ * @returns {Promise<number>}
+ */
+export async function runInstallForTarget(parsed) {
+  const target = parsed.target;
+  if (parsed.migrateOrderedListKeys) {
+    return handleMigrateOrderedListKeys({ ...parsed, target });
+  }
+  if (parsed.migrateLayout) {
+    return runMigrateLayoutForTarget({ ...parsed, target });
+  }
+
+  const legacy = detectLegacyLayout(target);
+  if (legacy.detected) {
+    sayErr(`${legacy.code}: ${legacy.hint}`);
+    for (const p of legacy.paths) sayErr(`  ${p}`);
+    return 1;
+  }
+
+  const options = {
+    layers: parsed.layers,
+    harness: parsed.harness,
+    mode: parsed.mode,
+    store: parsed.store,
+    methodologyBundle: parsed.methodologyBundle,
+    doctor: parsed.doctor,
+    toolUseProfile: parsed.toolUseProfile,
+    methodologyReadonly: parsed.methodologyReadonly,
+    installMethodologyHook: parsed.installMethodologyHook,
+    claudeHarnessLabel: parsed.claudeHarnessLabel,
+    skipParityGate: parsed.skipParityGate,
+    strictRefresh: parsed.strictRefresh,
+    parityGateReportOnly: parsed.parityGateReportOnly,
+    semanticYamlCompare: parsed.semanticYamlCompare,
+    parityReport: parsed.parityReport,
+    allowSelfInstall: parsed.allowSelfInstall,
+    env: process.env,
+  };
+
+  try {
+    if (parsed.refresh) {
+      refreshInstallFromManifest(target, options);
+    } else {
+      installTiedLayers(target, options);
+    }
+    return 0;
+  } catch (e) {
+    if (e instanceof Error) {
+      sayErr(e.message);
+      if (e.missing) {
+        for (const m of e.missing) sayErr(`  missing: ${m}`);
+      }
+    }
+    return 1;
+  }
+}
+
+/**
+ * @param {ReturnType<typeof parseInstallLayersArgs> & { target: string }} parsed
+ * @returns {Promise<number>}
+ */
 async function handleMigrateOrderedListKeys(parsed) {
   const storeRoot = resolveStoreRoot({ store: parsed.store, projectRoot: parsed.target });
   const preview = parsed.dryRun || parsed.migrateFailIfPending;
@@ -164,7 +322,7 @@ async function handleMigrateOrderedListKeys(parsed) {
     if (result.paths) {
       for (const p of result.paths) sayErr(`  ${p}`);
     }
-    process.exit(1);
+    return 1;
   }
 
   if (result.message) {
@@ -176,7 +334,7 @@ async function handleMigrateOrderedListKeys(parsed) {
   }
 
   if (parsed.migrateFailIfPending && result.changed > 0) {
-    process.exit(1);
+    return 1;
   }
 
   if (!preview && result.changed > 0 && result.scanRoots?.length) {
@@ -184,9 +342,82 @@ async function handleMigrateOrderedListKeys(parsed) {
     if (!audit.ok) {
       sayErr(audit.code ?? "ORDERED_LIST_AUDIT_FAILED");
       if (audit.hint) sayErr(audit.hint);
-      process.exit(audit.status ?? 1);
+      return audit.status ?? 1;
     }
   }
+  return 0;
+}
+
+/**
+ * @param {ReturnType<typeof parseInstallLayersArgs> & { target: string }} parsed
+ * @returns {number}
+ */
+function runMigrateLayoutForTarget(parsed) {
+  const result = migrateLayout(parsed.target, {
+    store: parsed.storeMigrate,
+    dryRun: parsed.dryRun,
+    storeRoot: resolveStoreRoot({ store: parsed.store, projectRoot: parsed.target }),
+  });
+  if (!result.ok) {
+    sayErr(result.code ?? "MIGRATE_LAYOUT_FAILED");
+    if (result.hint) sayErr(result.hint);
+    if (result.paths) {
+      for (const p of result.paths) sayErr(`  ${p}`);
+    }
+    return 1;
+  }
+  sayOk(`migrate-layout: ${result.action}`);
+  if (result.planned_commands) {
+    for (const line of result.planned_commands) {
+      console.log(line);
+    }
+  }
+  return 0;
+}
+
+/**
+ * @param {ReturnType<typeof parseInstallLayersArgs>} parsed
+ * @param {{ runOne?: (p: ReturnType<typeof parseInstallLayersArgs> & { target: string }) => Promise<number> }} [options]
+ * @returns {Promise<number>}
+ */
+export async function runInstallBatch(parsed, options = {}) {
+  const runOne = options.runOne ?? (async (p) => runInstallForTarget(p));
+  const targets = parsed.targets;
+
+  if (parsed.targetsPlan) {
+    for (const t of targets) {
+      console.log(t);
+    }
+    return 0;
+  }
+
+  let succeeded = 0;
+  let anyFailed = false;
+  for (let i = 0; i < targets.length; i++) {
+    const target = targets[i];
+    const label = `[${i + 1}/${targets.length}]`;
+    sayOk(`${label} ${target}`);
+    const code = await runOne({ ...parsed, target });
+    if (code !== 0) {
+      anyFailed = true;
+      sayErr(`${label} failed (exit ${code})`);
+      if (!parsed.targetsContinueOnError) {
+        console.error(`DIAGNOSTIC: batch aborted at ${i + 1}/${targets.length}`);
+        return code;
+      }
+    } else {
+      succeeded += 1;
+    }
+  }
+
+  if (anyFailed) {
+    console.error(`DIAGNOSTIC: batch ${succeeded}/${targets.length} succeeded`);
+    return 1;
+  }
+  if (targets.length > 1) {
+    console.error(`DIAGNOSTIC: batch ${targets.length}/${targets.length} succeeded`);
+  }
+  return 0;
 }
 
 async function main() {
@@ -197,64 +428,9 @@ async function main() {
   }
   try {
     const parsed = parseInstallLayersArgs(argv);
-    if (parsed.migrateOrderedListKeys) {
-      await handleMigrateOrderedListKeys(parsed);
-      return;
-    }
-    if (parsed.migrateLayout) {
-      const result = migrateLayout(parsed.target, {
-        store: parsed.storeMigrate,
-        dryRun: parsed.dryRun,
-        storeRoot: resolveStoreRoot({ store: parsed.store, projectRoot: parsed.target }),
-      });
-      if (!result.ok) {
-        sayErr(result.code ?? "MIGRATE_LAYOUT_FAILED");
-        if (result.hint) sayErr(result.hint);
-        if (result.paths) {
-          for (const p of result.paths) sayErr(`  ${p}`);
-        }
-        process.exit(1);
-      }
-      sayOk(`migrate-layout: ${result.action}`);
-      if (result.planned_commands) {
-        for (const line of result.planned_commands) {
-          console.log(line);
-        }
-      }
-      return;
-    }
-
-    const legacy = detectLegacyLayout(parsed.target);
-    if (legacy.detected) {
-      sayErr(`${legacy.code}: ${legacy.hint}`);
-      for (const p of legacy.paths) sayErr(`  ${p}`);
-      process.exit(1);
-    }
-
-    const options = {
-      layers: parsed.layers,
-      harness: parsed.harness,
-      mode: parsed.mode,
-      store: parsed.store,
-      methodologyBundle: parsed.methodologyBundle,
-      doctor: parsed.doctor,
-      toolUseProfile: parsed.toolUseProfile,
-      methodologyReadonly: parsed.methodologyReadonly,
-      installMethodologyHook: parsed.installMethodologyHook,
-      claudeHarnessLabel: parsed.claudeHarnessLabel,
-      skipParityGate: parsed.skipParityGate,
-      strictRefresh: parsed.strictRefresh,
-      parityGateReportOnly: parsed.parityGateReportOnly,
-      semanticYamlCompare: parsed.semanticYamlCompare,
-      parityReport: parsed.parityReport,
-      allowSelfInstall: parsed.allowSelfInstall,
-      env: process.env,
-    };
-
-    if (parsed.refresh) {
-      refreshInstallFromManifest(parsed.target, options);
-    } else {
-      installTiedLayers(parsed.target, options);
+    const code = await runInstallBatch(parsed);
+    if (code !== 0) {
+      process.exit(code);
     }
   } catch (e) {
     if (e instanceof Error) {

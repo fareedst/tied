@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **tied-install batch `--targets` ([PLAN-TIED-INSTALL-BATCH-TARGETS])** — YAML list of client directories (or stdin via `-`) for sequential install, `--refresh`, `--doctor`, and migrate flows; filters (`--targets-only-installed`, include/exclude globs, skip-missing) and `--targets-continue-on-error`. [REQ-TIED_LAYERED_CLIENT_INSTALL](tied-project/requirements/REQ-TIED_LAYERED_CLIENT_INSTALL.yaml). CITDP: [CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml](tied-project/citdp/CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml).
+
 - **MCP core / opt-in stdio split ([PLAN-MCP-CORE-OPTIN-SPLIT])** — `TIED_MCP_TOOL_PROFILE` partitions tools into core vs opt-in; bootstrap writes dual `mcpServers` entries; Claude brownfield merge preserves foreign keys; resources gated to core/full. [REQ-TIED_SETUP](tied-project/requirements/REQ-TIED_SETUP.yaml), [REQ-MCP_USAGE_METRICS](tied-project/requirements/REQ-MCP_USAGE_METRICS.yaml), [REQ-TIED_LAYERED_CLIENT_INSTALL](tied-project/requirements/REQ-TIED_LAYERED_CLIENT_INSTALL.yaml). Plan: [CITDP-PLAN-MCP-CORE-OPTIN-SPLIT.yaml](tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/CITDP-PLAN-MCP-CORE-OPTIN-SPLIT.yaml).
 
 - **Open Ontologies Wave 3 — plumb v2** — `change-impact-profile.v1` + **impact-preview.v2** on `tied_plumb_diff_impact_preview` when `profile_path` or `use_default_profile` is set; default **impact-preview.v1** unchanged. [REQ-TIED_OPEN_ONTOLOGIES_WAVE3](tied-project/requirements/REQ-TIED_OPEN_ONTOLOGIES_WAVE3.yaml); template [change-impact-profile.v1.example.yaml](tied-bundle/templates/tied/analysis/examples/change-impact-profile.v1.example.yaml).

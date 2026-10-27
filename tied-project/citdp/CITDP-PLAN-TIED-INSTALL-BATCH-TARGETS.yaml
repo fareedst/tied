@@ -1,0 +1,58 @@
+CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS:
+  change_definition:
+    current_behavior: "tied-install / install-layers accepts one client directory (positional or cwd) per invocation."
+    desired_behavior: "Operators may pass --targets PATH (YAML list of client dirs, or stdin via -) to run the same install, --refresh, --doctor, --migrate-layout, and --migrate-ordered-list-keys flows sequentially across many clients, with optional include/exclude globs, skip-missing, only-installed filter, --targets-plan, and fail-fast or --targets-continue-on-error."
+    non_goals:
+      - "Parallel batch installs"
+      - "Per-target flag overrides inside YAML (v1)"
+      - "Native import of fleet client-inventory-manifest.v1 schema"
+    success_criteria:
+      - "Batch --refresh with --targets-only-installed skips clients without install manifest"
+      - "Single-target argv behavior unchanged when --targets omitted"
+      - "Bootstrap unit tests cover load, filter, parse, and batch loop policy"
+    unchanged_behavior: "RUN_TIED_INSTALL_ENTRYPOINT argv forwarding; Windows shims; factory new-tied-client single-target install"
+  record_identity:
+    change_request_id: "PLAN-TIED-INSTALL-BATCH-TARGETS"
+    recorded_at: "2026-10-27"
+    title: "tied-install batch --targets YAML list"
+  record_status: "complete"
+  risk_analysis:
+    abuse_cases:
+      - "Typo path in YAML mutates wrong tree — mitigated by default fail on missing dir"
+      - "Partial fleet refresh leaves inconsistent methodology pins — operator uses --targets-continue-on-error knowingly"
+    adversarial_inquiry:
+      counterexamples:
+        - "Batch continues after first target corrupts MCP config when continue-on-error is set without operator review"
+        - "Relative paths in YAML resolve against wrong base when operators mix stdin and file-relative entries"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Single-target parseInstallLayersArgs tests remain unchanged when --targets omitted"
+        - "refreshInstallFromManifest still throws INSTALL_MANIFEST_MISSING per target without only-installed filter"
+      evidence_references:
+        - "tools/bootstrap/install-layers.mjs"
+        - "tools/bootstrap/lib/install-targets-list.test.mjs"
+        - "tools/bootstrap/install-layers-batch.test.mjs"
+        - "tools/bootstrap/tied-install-dispatch.test.mjs"
+      falsification_questions:
+        - "Does batch mode mutate a second client after the first target fails under default argv?"
+        - "Does --targets-plan perform zero install layer writes?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
+      profile_depth: "minimal"
+      rationale: "Local filesystem CLI orchestration; no new auth, network, or persistence beyond existing install side effects per target."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    residual_risk:
+      summary: "Sequential long-running batch may fail mid-fleet; operator re-runs with plan mode or continue-on-error."
+      owner: "operator"
+      expiry: "n/a"
+  test_strategy:
+    evidence:
+      command_seq:
+        - command_or_test: "install-targets-list.test.mjs"
+          working_directory: "tools/bootstrap/lib"
+        - command_or_test: "install-layers-migrate-ordered.test.mjs"
+          working_directory: "tools/bootstrap"
+        - command_or_test: "install-layers-batch.test.mjs"
+          working_directory: "tools/bootstrap"
+        - command_or_test: "test-bootstrap-layered-install"
+          working_directory: "."
