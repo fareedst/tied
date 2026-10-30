@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
+import { assertBindingForWrite } from "./project-identity-write-binding.js";
 import {
   getDefaultTiedBasePath,
+  resolveTiedBasePathForYamlFile,
   resolveYamlStyle,
   tiedBasePathForYamlContext,
   yamlDumpOptionsForStyle,
@@ -338,6 +340,11 @@ function writeSerializedAtomic(
   serialized: string,
   yamlFormat: YamlFormatMetadata,
 ): { ok: true; yaml_format: YamlFormatMetadata } {
+  // [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING] [REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING]
+  const tiedBaseForFile = resolveTiedBasePathForYamlFile(filePath);
+  if (tiedBaseForFile) {
+    assertBindingForWrite(filePath, tiedBaseForFile, process.env);
+  }
   const temporaryPath = path.join(
     path.dirname(filePath),
     `.${path.basename(filePath)}.${process.pid}.${Date.now()}.tmp`,

@@ -1,0 +1,19 @@
+REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING:
+  description: "Wave 1 REQ-CTRL-001 alignment."
+  metadata:
+    created: "2026-10-29"
+    status: "Planned"
+  name: "Project identity write binding"
+  rationale:
+    benefits:
+      - "Fail closed at startup and write"
+    problems_solved:
+      - "CASE-003 wrong project identity"
+    why: "Metrics-only identity does not block wrong-tree MCP writes."
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    implementation:
+      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    requirements:
+      - "REQ-TIED_INTENT_CONTROL_PLANE"

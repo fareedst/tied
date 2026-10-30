@@ -1,0 +1,15 @@
+IMPL-TIED_INTENT_CONTROL_PLANE:
+  implementation_approach:
+    details:
+      - "Wave 0: tokens and working artifacts"
+      - "Wave 1: identity write binding child REQ"
+    summary: "Gap matrix, wave scheduling, no gate authority in umbrella IMPL."
+  metadata:
+    created: "2026-10-29"
+    status: "Planned"
+  name: "Intent control plane program orchestration"
+  traceability:
+    architecture:
+      - "ARCH-TIED_INTENT_CONTROL_PLANE"
+    requirements:
+      - "REQ-TIED_INTENT_CONTROL_PLANE"

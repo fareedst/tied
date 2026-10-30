@@ -2950,6 +2950,28 @@ REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS:
   name: "Incident/revert evaluation corpus (Claude comparison Phase 4)"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_INTENT_CONTROL_PLANE:
+  category: "Architecture"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_INTENT_CONTROL_PLANE"
+    implementation:
+      - "IMPL-TIED_INTENT_CONTROL_PLANE"
+  description: "Phased program for MCP-first intent authority (handoff reference), process and execution boundaries, and Wave 1 identity write binding."
+  detail_file: "requirements/REQ-TIED_INTENT_CONTROL_PLANE.yaml"
+  name: "Intent control plane umbrella"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+  satisfaction_criteria:
+    - criterion: "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING delivered with tests"
+      criterion_id: "wave1-child"
+    - criterion: "Umbrella REQ/ARCH/IMPL exist and validate"
+      criterion_id: "umbrella-tokens"
+  status: "Implemented"
 REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []
@@ -3230,6 +3252,31 @@ REQ-TIED_PROCESS_CERTIFICATION_READINESS:
   detail_file: "requirements/REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
   name: "EDSE process certification readiness"
   priority: "P1"
+  status: "Implemented"
+REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    implementation:
+      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+  description: "Fail-closed Path 2 binding: marker, startup drift check, per-write guard on project corpus."
+  detail_file: "requirements/REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING.yaml"
+  name: "Project identity write binding"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+      - "REQ-TIED_INTENT_CONTROL_PLANE"
+    related_to:
+      - "REQ-MCP_USAGE_METRICS"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  satisfaction_criteria:
+    - criterion: "Marker created idempotently when missing and enforce on"
+      criterion_id: "bootstrap"
+    - criterion: "Mutations rejected when resolved base or project_id differs from marker"
+      criterion_id: "startup-fail"
+    - criterion: "writeSerializedAtomic and sidecar writes reject under mismatch"
+      criterion_id: "per-write-fail"
   status: "Implemented"
 REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION:
   category: "Infrastructure"

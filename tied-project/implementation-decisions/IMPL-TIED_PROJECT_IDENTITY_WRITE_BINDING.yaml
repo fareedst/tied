@@ -1,0 +1,17 @@
+IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING:
+  implementation_approach:
+    details:
+      - "Marker bootstrap idempotent"
+      - "project-identity-write-binding.ts"
+    summary: "Pure binding module; hooks at getBasePath cache, writeSerializedAtomic, detail sidecar."
+  metadata:
+    created: "2026-10-29"
+    status: "Planned"
+  name: "Project identity write binding implementation"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    requirements:
+      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    tests:
+      - "project-identity-write-binding.test.ts"

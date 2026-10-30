@@ -16,6 +16,10 @@ import {
   PROJECT_DIR_NAME,
   resolveTiedLayout,
 } from "./tied-layout.js";
+import {
+  assertBindingAtStartup,
+  resetWriteBindingStateForTests,
+} from "./project-identity-write-binding.js";
 import { pickClientBundlePath, pickClientProjectPath } from "./tied-path-env.js";
 
 export type IndexName =
@@ -38,6 +42,7 @@ let cachedBasePath: string | null = null;
  */
 export function clearBasePathCache(): void {
   cachedBasePath = null;
+  resetWriteBindingStateForTests();
 }
 
 function requirementsIndexAt(tiedDir: string): string {
@@ -85,6 +90,8 @@ export function getBasePath(): string {
     resolved = discoverDefaultBasePath();
   }
   cachedBasePath = resolved;
+  // [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING] [REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING] Path 2 startup binding
+  assertBindingAtStartup(cachedBasePath, process.env);
   return cachedBasePath;
 }
 

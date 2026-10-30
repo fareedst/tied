@@ -2859,6 +2859,18 @@ IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE:
   detail_file: "implementation-decisions/IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE.yaml"
   name: "Independent proof envelope implementation"
   status: "Active"
+IMPL-TIED_INTENT_CONTROL_PLANE:
+  cross_references:
+    - "ARCH-TIED_INTENT_CONTROL_PLANE"
+    - "REQ-TIED_INTENT_CONTROL_PLANE"
+  detail_file: "implementation-decisions/IMPL-TIED_INTENT_CONTROL_PLANE.yaml"
+  name: "Intent control plane program orchestration"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_INTENT_CONTROL_PLANE"
+    requirements:
+      - "REQ-TIED_INTENT_CONTROL_PLANE"
 IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture:
@@ -3047,6 +3059,19 @@ IMPL-TIED_PROJECT_IDENTITY:
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_IDENTITY.yaml"
   name: "Project identity pure module"
   status: "Active"
+IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING:
+  cross_references:
+    - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    - "IMPL-TIED_PROJECT_IDENTITY"
+    - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+  detail_file: "implementation-decisions/IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING.yaml"
+  name: "Project identity write binding implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    requirements:
+      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
 IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION:
   cross_references:
     - "ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION"

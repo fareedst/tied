@@ -1,0 +1,19 @@
+REQ-TIED_INTENT_CONTROL_PLANE:
+  description: "External handoff informs design; canonical criteria live in project YAML after LEAP."
+  metadata:
+    created: "2026-10-29"
+    status: "Planned"
+  name: "Intent control plane umbrella"
+  rationale:
+    benefits:
+      - "Phased REQ-CTRL alignment"
+      - "Traceable waves"
+    problems_solved:
+      - "Agent completion claims without gate proof"
+      - "Wrong-repo MCP writes"
+    why: "Separate intent, process, and execution authority with independent completion evidence."
+  traceability:
+    architecture:
+      - "ARCH-TIED_INTENT_CONTROL_PLANE"
+    implementation:
+      - "IMPL-TIED_INTENT_CONTROL_PLANE"

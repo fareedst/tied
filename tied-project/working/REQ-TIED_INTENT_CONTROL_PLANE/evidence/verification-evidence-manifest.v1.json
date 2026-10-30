@@ -1,0 +1,65 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npm test --prefix mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 36555,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npx tsc -b mcp-server"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 1280,
+      "exit_code": 1,
+      "id": "citdp-evidence-2",
+      "result": "failed"
+    }
+  ],
+  "commit": "9226877b9067413508ad01c73bb134b8c989f690",
+  "covered_tokens": [
+    "ARCH-TIED_PROJECT_IDENTITY",
+    "IMPL-TIED_PROJECT_IDENTITY",
+    "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "baseline-functional",
+    "external-input-security"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "icp-closeout-20261030",
+  "schema_version": "verification-evidence-manifest.v1"
+}

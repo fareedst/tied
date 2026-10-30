@@ -1,0 +1,21 @@
+ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING:
+  decision: "Persist project-identity.v1.yaml under tied-project with writable_root and project_id; Path 2 startup plus canonicalizer guard; opt-out in config identity.write_binding."
+  metadata:
+    created: "2026-10-29"
+    status: "Accepted"
+  name: "On-disk project identity marker and write binding"
+  rationale:
+    benefits:
+      - "Single choke point for YAML writes"
+      - "Spawn env bound to marker"
+    problems_solved:
+      - "Silent cross-repo MCP mutation"
+    why: "Extends ARCH-TIED_PROJECT_IDENTITY deferred repo-local marker with enforcement."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_PROJECT_IDENTITY"
+  traceability:
+    implementation:
+      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    requirements:
+      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"

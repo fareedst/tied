@@ -14,6 +14,10 @@
 |-----------|-------|-------|
 | **configured project identity** | project name, repo name | Opaque pseudonymous ID from `TIED_MCP_PROJECT_ID` after trim + hash |
 | **path-fallback identity** | base path id | Path-hash when env ID unset/invalid; stable only for stable canonicalized path |
+| **project identity marker** | id file, repo id yaml | On-disk `project-identity.v1.yaml` under **`tied-project/`** with `writable_root` and opaque `project_id` · [REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING](../requirements/REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING.yaml) |
+| **write binding** | identity enforce, corpus guard | Fail-closed check before project corpus writes; Path 2 startup + `writeSerializedAtomic` hook · [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING](../implementation-decisions/IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING.yaml) |
+| **startup binding** | process bind | First resolve per `tied-project/` root compares live env/cwd identity to marker before mutations |
+| **identity mismatch** | wrong tree write | `DIAGNOSTIC: TIED_IDENTITY_WRITE_BINDING_MISMATCH` when marker ≠ resolved base or `project_id` |
 | **identity source** | id type, id origin | Profile metadata: `configured` or `path_fallback` |
 | **signature coverage** | top-k metadata | Analyzer YAML: `bound` / `considered` / `emitted` / `omitted` / `status` for bounded aggregation. `exact_within_bound` means the complete visible candidate set fits the bound; `approximate` discloses per-file truncation or visible aggregate overflow and never claims hidden candidates were globally ranked. |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |

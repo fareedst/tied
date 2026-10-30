@@ -3,7 +3,7 @@ ARCH-TIED_PROJECT_IDENTITY:
     - "IMPL-TIED_PROJECT_IDENTITY"
     - "REQ-EVIDENCE_CHAIN_PROFILE"
     - "REQ-MCP_USAGE_METRICS"
-  decision: "Single pure resolver supplies opaque 16-hex project_id for usage metrics JSONL and evidence-chain profile identity. Configured TIED_MCP_PROJECT_ID (trim, validate, hash) takes precedence; unset/empty/invalid falls back to legacy path.resolve hash without silent re-key."
+  decision: "Single pure resolver supplies opaque 16-hex project_id for usage metrics JSONL and evidence-chain profile identity. Configured TIED_MCP_PROJECT_ID (trim, validate, hash) takes precedence; unset/empty/invalid falls back to legacy path.resolve hash without silent re-key. Wave 1 Path 2 write binding (REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING) persists project-identity.v1.yaml under tied-project/ and fail-closes MCP corpus mutations when live getBasePath()/project_id drifts from the marker; Path 3 marker-only routing remains deferred."
   implementation_approach:
     details:
       - "Artifacts emit hashed project_id only; never raw configured string or raw path"
@@ -26,7 +26,9 @@ ARCH-TIED_PROJECT_IDENTITY:
       - "REQ-EVIDENCE_CHAIN_PROFILE"
       - "REQ-MCP_USAGE_METRICS"
     informs:
+      - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
       - "IMPL-TIED_PROJECT_IDENTITY"
+      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
   status: "Accepted"
   traceability:
     implementation:

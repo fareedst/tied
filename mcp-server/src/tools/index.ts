@@ -403,6 +403,8 @@ export const allTools = [
     },
     handler: async () => {
       const base_path = getBasePath();
+      const { bindingStatus: resolveBindingStatus } = await import("../project-identity-write-binding.js");
+      const binding_status = resolveBindingStatus(base_path, process.env);
       const env_TIED_CLIENT_PROJECT_PATH =
         process.env.TIED_CLIENT_PROJECT_PATH?.trim() || null;
       const env_TIED_CLIENT_BUNDLE_PATH =
@@ -416,6 +418,7 @@ export const allTools = [
         prettyCanonicalJson(
           {
             base_path,
+            binding_status,
             env_TIED_CLIENT_PROJECT_PATH,
             env_TIED_CLIENT_BUNDLE_PATH,
             env_TIED_BASE_PATH,

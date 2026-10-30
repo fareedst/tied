@@ -2338,6 +2338,16 @@ ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE:
   detail_file: "architecture-decisions/ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE.yaml"
   name: "Independent proof envelope extension"
   status: "Active"
+ARCH-TIED_INTENT_CONTROL_PLANE:
+  cross_references:
+    - "IMPL-TIED_INTENT_CONTROL_PLANE"
+    - "REQ-TIED_INTENT_CONTROL_PLANE"
+  detail_file: "architecture-decisions/ARCH-TIED_INTENT_CONTROL_PLANE.yaml"
+  name: "Intent process execution authority split"
+  status: "Accepted"
+  traceability:
+    requirements:
+      - "REQ-TIED_INTENT_CONTROL_PLANE"
 ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []
@@ -2511,6 +2521,17 @@ ARCH-TIED_PROJECT_IDENTITY:
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_IDENTITY.yaml"
   name: "Shared TIED project identity resolver"
   status: "Accepted"
+ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING:
+  cross_references:
+    - "ARCH-TIED_PROJECT_IDENTITY"
+    - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING.yaml"
+  name: "On-disk project identity marker and write binding"
+  status: "Accepted"
+  traceability:
+    requirements:
+      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
 ARCH-TIED_PROJECT_INDEX_WRITE_ISOLATION:
   cross_references:
     - "IMPL-TIED_PROJECT_INDEX_WRITE_ISOLATION"

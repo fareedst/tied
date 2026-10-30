@@ -1,0 +1,21 @@
+ARCH-TIED_INTENT_CONTROL_PLANE:
+  decision: "Three logical authorities: Intent (canonical records, validated mutations), Process (checklists, gates), Execution (agent, tests). Completion authority stays independent of agent claims."
+  metadata:
+    created: "2026-10-29"
+    status: "Accepted"
+  name: "Intent process execution authority split"
+  rationale:
+    benefits:
+      - "Clear module boundaries"
+      - "Handoff alignment"
+    problems_solved:
+      - "Monolithic agent-only completion"
+    why: "MCP alone does not enforce methodology; separation enables controlled compliance levels."
+  related_decisions:
+    informs:
+      - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+  traceability:
+    implementation:
+      - "IMPL-TIED_INTENT_CONTROL_PLANE"
+    requirements:
+      - "REQ-TIED_INTENT_CONTROL_PLANE"

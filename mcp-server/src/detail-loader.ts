@@ -18,6 +18,7 @@ import {
 } from "./yaml-loader.js";
 import { safeDumpTiedDetailDoc } from "./yaml-dump.js";
 import { mergeRecordUpdate } from "./record-merge.js";
+import { assertBindingForWrite } from "./project-identity-write-binding.js";
 import { writeAtomicText, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 import { getDefaultTiedBasePath, resolveYamlStyle } from "./yaml-style-config.js";
 import { isUsableDetailFilePath } from "./detail-file-path.js";
@@ -142,6 +143,8 @@ function writeTiedDetailToDisk(
     const ep = record.essence_pseudocode;
     if (typeof ep === "string") {
       if (ep.length > 0) {
+        // [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING] [REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING]
+        assertBindingForWrite(side, getBasePath(), process.env);
         fs.writeFileSync(side, ep, "utf8");
       } else if (fs.existsSync(side)) {
         fs.unlinkSync(side);
