@@ -29,6 +29,8 @@ function minimalCfg(overrides: Partial<DryRunConfig> = {}): DryRunConfig {
     leadChecklistStepToId: "",
     leadChecklistBeforeFeatureSpec: false,
     firstTurn: 1,
+    resumeFromTracker: false,
+    firstTurnExplicit: false,
     checklistVars: {},
     checklistVarStrict: false,
     skipTiedMcpPreflight: false,

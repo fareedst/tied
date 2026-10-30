@@ -11,7 +11,7 @@
         "npm test --prefix mcp-server"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 36430,
+      "duration_ms": 36513,
       "exit_code": 0,
       "id": "citdp-evidence-1",
       "result": "passed"
@@ -27,13 +27,13 @@
         "npx tsc -b mcp-server"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 1285,
+      "duration_ms": 1297,
       "exit_code": 1,
       "id": "citdp-evidence-2",
       "result": "failed"
     }
   ],
-  "commit": "2f48c2eab388fdb518f7ba18b561d586f8a7a86b",
+  "commit": "e1a6304d3ac09586b81f2f82d04f37f6d3689f54",
   "covered_tokens": [
     "ARCH-TIED_PROJECT_IDENTITY",
     "IMPL-TIED_PROJECT_IDENTITY",

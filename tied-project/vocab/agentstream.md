@@ -25,6 +25,7 @@
 | **Tracker completion receipt** | completion prose, successful turn | Strict fenced `agentstream_tracker` JSON emitted for the current `StepStub`; carries one disposition and its evidence contract |
 | **Tracker writer** | checklist updater, status writer | Agentstream component that validates one Tracker completion receipt and atomically updates the explicit per-request Tracker without mutating the checklist definition |
 | **`--checklist-tracker-yaml`** | checklist state path | Writable per-request Authoritative Tracker path; distinct from read-only `--lead-checklist-yaml` definition |
+| **`--resume-from-tracker`** | tracker resume, durable controller | With `--checklist-tracker-yaml`, derives `--first-turn` from pending step dispositions; optional `--session-id` from latest `state_history` ([REQ-TIED_DURABLE_CHECKLIST_CONTROLLER](../requirements/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER.yaml), REQ-CTRL-007) |
 | **Adherence ledger** | adherence events, event log | Append-only `agent-adherence-event.v1` JSONL under `working/{REQ-TOKEN}/adherence/`; hash/reference edges for six lifecycle event classes; distinct from **evidence chain profile** |
 | **`--adherence-ledger`** | adherence path | Writable adherence ledger path; defaults to `working/{REQ-TOKEN}/adherence/events.jsonl` (Stage G committed) |
 | **instruction binding** | nonce binding, instruction hash | Per-turn `instruction_nonce` + `instruction_hash` issued before subprocess; receipt must match both |

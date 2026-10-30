@@ -1,20 +1,21 @@
 # Session handoff — REQ-TIED_INTENT_CONTROL_PLANE
 
-**Recorded:** 2026-10-30 (post Wave 3 close-out)  
-**Program:** Intent control plane — Waves 1–3  
-**Linked Cursor plan:** `.cursor/plans/intent_control_plane_req_9e21803c.plan.md`
+**Recorded:** 2026-10-30 (post Wave 4 close-out)  
+**Program:** Intent control plane — Waves 1–4  
+**Linked Cursor plan:** `/Users/fareed/.cursor/plans/intent_control_plane_req_9e21803c.plan.md`
 
 ## Program status
 
-**Waves 1–3 close-out complete.** Wave 3 commit **`b2770f9`**. Branch **main** is **14 commits** ahead of `origin/main` (not pushed).
+**Waves 1–4 close-out complete.** Wave 4 commit SHA in [traceable-commit-evidence.md](./traceable-commit-evidence.md). Branch **main** ahead of `origin/main` (not pushed).
 
 | Wave | Focus |
 | --- | --- |
 | 1 | Path 2 identity write binding (`222d2b58`) |
 | 2 | Atomic `yaml_updates_apply` (`2f48c2ea`) |
-| 3 | Verify manifest provenance (REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE) |
+| 3 | Verify manifest provenance (`e1a6304d`) |
+| 4 | Durable checklist resume (REQ-TIED_DURABLE_CHECKLIST_CONTROLLER) |
 
-## Completion signals (Wave 3)
+## Completion signals (Wave 4)
 
 | Signal | Status |
 | --- | --- |
@@ -28,8 +29,9 @@
 ## Do next
 
 1. **`git push`** when sponsor wants origin updated
-2. Wave 4+ (REQ-CTRL-007 checklist controller) — optional
+2. Wave 5 (REQ-CTRL-009 verification runner) — optional
 3. Path 3 marker-only routing — deferred (LEAP/unblock)
+4. LEAP: unify duplicate `checklist-controller-resume.ts` copies
 
 ## Constraints
 

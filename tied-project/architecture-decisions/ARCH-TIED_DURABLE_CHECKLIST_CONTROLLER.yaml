@@ -1,0 +1,13 @@
+ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER:
+  ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER:
+    decision: "Process authority derives eligible turn from persisted tracker dispositions; MCP read tool and agentstream apply share the same pure resume plan."
+    metadata:
+      created: "2026-10-30"
+      status: "Accepted"
+    name: "Checklist resume from Authoritative Tracker"
+    traceability:
+      implementation:
+        - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      requirements:
+        - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+        - "REQ-TIED_INTENT_CONTROL_PLANE"

@@ -69,6 +69,10 @@ import {
   getRequirementStatusAndPriority,
 } from "../dependency-graph.js";
 import { updateStatusFromPassedTokens, type VerifyUpdateOptions } from "../verify.js";
+import {
+  deriveChecklistResumePlan,
+  loadTrackerResumeContext,
+} from "../checklist-controller-resume.js";
 import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js";
 import { formatYamlMetadata } from "../yaml-canonicalizer.js";
 import {
@@ -445,6 +449,51 @@ export const allTools = [
           }
         ),
       );
+    },
+  },
+  {
+    name: "tied_checklist_controller_resume_plan",
+    config: {
+      description:
+        "[REQ-TIED_DURABLE_CHECKLIST_CONTROLLER] Read-only resume plan from Authoritative Tracker: first eligible turn and optional session hint (REQ-CTRL-007).",
+      inputSchema: z.object({
+        tracker_path: z.string().describe("Path to checklist-tracker.v1 YAML"),
+        turns: z
+          .array(
+            z.object({
+              step_stub: z.string(),
+              chain_from_previous: z.boolean().optional(),
+            }),
+          )
+          .min(1)
+          .describe("Ordered turn queue matching agentstream pipeline step stubs"),
+      }),
+    },
+    handler: async (args: {
+      tracker_path: string;
+      turns: Array<{ step_stub: string; chain_from_previous?: boolean }>;
+    }) => {
+      const ctx = loadTrackerResumeContext(args.tracker_path);
+      const plan = deriveChecklistResumePlan({
+        turns: args.turns.map((t) => ({
+          stepStub: t.step_stub,
+          chainFromPrevious: t.chain_from_previous ?? false,
+        })),
+        stepDispositions: ctx.stepDispositions,
+      });
+      if (plan.ok) {
+        return textContent(
+          prettyCanonicalJson({
+            ok: true,
+            first_turn: plan.first_turn,
+            next_step_slug: plan.next_step_slug,
+            skipped_completed_count: plan.skipped_completed_count,
+            session_id_hint: ctx.sessionId ?? null,
+            request_token: ctx.requestToken ?? null,
+          }),
+        );
+      }
+      return textContent(prettyCanonicalJson({ ok: false, error: plan.error, slug: "slug" in plan ? plan.slug : undefined }));
     },
   },
   {

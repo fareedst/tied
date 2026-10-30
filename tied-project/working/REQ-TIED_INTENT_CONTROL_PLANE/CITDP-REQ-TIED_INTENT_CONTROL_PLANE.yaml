@@ -1,7 +1,7 @@
 CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
   change_definition:
     current_behavior: "MCP resolves project_id for metrics but does not fail closed when TIED_CLIENT_PROJECT_PATH or cwd targets the wrong tied-project tree; project corpus writes proceed without marker binding."
-    desired_behavior: "Wave 1 Path 2 identity write binding plus Wave 2 atomic yaml_updates_apply: snapshot touched corpus files and rollback on write or consistency failure (REQ-CTRL-002)."
+    desired_behavior: "Waves 1–3 shipped; Wave 4 durable checklist resume from Authoritative Tracker (REQ-CTRL-007) via deriveChecklistResumePlan, agentstream --resume-from-tracker, and MCP tied_checklist_controller_resume_plan."
     non_goals:
       - "Path 3 marker-only routing (ignore env)"
       - "OS sandbox blocking editor YAML edits"
@@ -24,7 +24,7 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     implementation_depth_tier: "integrated"
     profile_depth: "not_measured"
     recorded_at: "2026-10-29"
-    title: "Intent control plane — Wave 1 identity binding + Wave 2 atomic batch"
+    title: "Intent control plane — Wave 4 durable checklist controller resume"
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     adversarial_inquiry:
@@ -63,7 +63,7 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
   test_strategy:
     path: "tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/PLAN.md"
   impact_analysis:
-    modules_or_boundaries: "project-identity-write-binding.ts; yaml-updates-apply.ts; yaml-canonicalizer.ts; yaml-loader.ts; detail-loader.ts; tools/index.ts"
+    modules_or_boundaries: "checklist-controller-resume.ts; apply-resume-from-tracker.ts; agentstream dry-run-config; tools/index.ts"
     tied_tokens_new:
       - "REQ-TIED_INTENT_CONTROL_PLANE"
       - "ARCH-TIED_INTENT_CONTROL_PLANE"
@@ -74,6 +74,9 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
       - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
       - "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH"
       - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
+      - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      - "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
     tied_tokens_affected:
       - "ARCH-TIED_PROJECT_IDENTITY"
       - "IMPL-TIED_PROJECT_IDENTITY"
@@ -81,6 +84,8 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     impl_inventory:
       - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
       - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
+      - "IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
+      - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
   evidence:
     command_seq:
       - "npm test --prefix mcp-server"
@@ -93,12 +98,12 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     activation:
       phase: "close_out"
       request_token: "REQ-TIED_INTENT_CONTROL_PLANE"
-      run_id: "icp-w2-closeout-20261030"
+      run_id: "icp-w4-closeout-20261030"
     envelope_path: "tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/request-evidence-envelope.v1.json"
     tied_validate_consistency: "required"
-    verification_gate_notes: "Wave 2: yaml-updates-apply.test.ts green; pseudocode_validate ok for IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH; reuse Wave 1 integrated inquiry artifacts"
+    verification_gate_notes: "Wave 4: checklist-controller-resume.test.ts + apply-resume-from-tracker.test.ts green; npm test --prefix mcp-server; reuse Waves 1–3 inquiry artifacts"
   leap_feedback:
-    divergences_from_analysis: "Wave 2 build-plan landed before pre_implementation replay; rollback behavior matches REQ-FEAT_REVISION_SAFE_MUTATION pattern at batch scope."
+    divergences_from_analysis: "Duplicate checklist-controller-resume.ts in mcp-server and agentstream packages until LEAP unify; config checklist.resume_from_tracker not wired in agentstream apply yet."
     record_status: "final"
     tied_stack_updates_required:
       - "ARCH-TIED_PROJECT_IDENTITY LEAP for Path 2 marker binding (Wave 1)"

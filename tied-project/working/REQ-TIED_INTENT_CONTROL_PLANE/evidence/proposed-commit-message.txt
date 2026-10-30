@@ -1,19 +1,24 @@
-feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 3 verify manifest provenance
+feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 4 durable checklist resume
 
-REQ-CTRL-005/011: tied_verify requires verification-evidence-manifest.v1
-covering passed_* tokens; rejects fabricated lists and optional commit mismatch.
+REQ-CTRL-007: resume agentstream from Authoritative Tracker via
+deriveChecklistResumePlan, --resume-from-tracker, and MCP
+tied_checklist_controller_resume_plan.
 
-Staging map (Wave 3):
-- mcp-server/src/verification-evidence-provenance.{ts,test.ts}
-- mcp-server/src/verify.ts, verify.test.ts, tools/index.ts, tied-project-config.ts
-- tied-project REQ/ARCH/IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE + indexes
-- tied-project/vocab/tied-yaml-mcp.md
+Staging map (Wave 4):
+- mcp-server/src/checklist-controller-resume.{ts,test.ts}
+- mcp-server/packages/agentstream/src/{checklist-controller-resume.ts,apply-resume-from-tracker.ts,apply-resume-from-tracker.test.ts}
+- mcp-server/packages/agentstream/src/{dry-run-config.ts,run-pipeline-prep.ts,README.md}
+- mcp-server/packages/agentstream/src/{dae-gate-preflight.test.ts,jev-harness-preflight.test.ts}
+- mcp-server/src/{tool-profiles.test.ts,tool-profile-stdio.test.ts,tools/index.ts}
+- tied-project REQ/ARCH/IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER + indexes + semantic-tokens
+- tied-project/implementation-decisions/IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER-pseudocode.md
+- tied-project/vocab/agentstream.md
 - tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
-- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN,gap-matrix,tracker,evidence/*.md,verification-evidence-manifest.v1.json}
+- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN,gap-matrix,CITDP,evidence/wave4-*.md,evidence/git-hygiene-receipt-2026-10-30-w4.md,evidence/proposed-commit-message.txt,evidence/traceable-commit-evidence.md,evidence/session-handoff.md,evidence/verification-evidence-manifest.v1.json}
 - CHANGELOG.md
 
 Excluded: unrelated fixture/benchmark drift.
 
-Completion signals: close_out allowed; envelope blocking_gap_count 0; adherence reconciled.
+Completion signals: close_out allowed; envelope blocking_gap_count 0; gate advisory finding_unresolved/warn_not_success.
 
 Feedback capture: N/A.

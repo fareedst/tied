@@ -25,6 +25,8 @@ export type DryRunConfig = {
   leadChecklistStepToId: string;
   leadChecklistBeforeFeatureSpec: boolean;
   firstTurn: number;
+  resumeFromTracker: boolean;
+  firstTurnExplicit: boolean;
   checklistVars: Record<string, string>;
   checklistVarStrict: boolean;
   skipTiedMcpPreflight: boolean;
@@ -109,6 +111,8 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
     leadChecklistStepToId: "",
     leadChecklistBeforeFeatureSpec: false,
     firstTurn: 1,
+    resumeFromTracker: false,
+    firstTurnExplicit: false,
     checklistVars: {},
     checklistVarStrict: process.env.AGENTSTREAM_CHECKLIST_VAR_STRICT === "1",
     skipTiedMcpPreflight: true,
@@ -181,8 +185,12 @@ export function parseDryRunConfig(cwd: string, args: string[]): DryRunConfig {
           throw new Error(`${k} must be a positive integer`);
         }
         c.firstTurn = n;
+        c.firstTurnExplicit = true;
         break;
       }
+      case "--resume-from-tracker":
+        c.resumeFromTracker = true;
+        break;
       case "-w":
       case "--workspace":
         c.workspace = needVal(k, v, ok, flagPart, i);
@@ -509,6 +517,9 @@ function validateDryRunConfig(c: DryRunConfig): void {
         "--checklist-tracker-yaml must not equal --lead-checklist-yaml",
       );
     }
+  }
+  if (c.resumeFromTracker && c.checklistTrackerYaml.trim() === "") {
+    throw new Error("--resume-from-tracker requires --checklist-tracker-yaml");
   }
 }
 

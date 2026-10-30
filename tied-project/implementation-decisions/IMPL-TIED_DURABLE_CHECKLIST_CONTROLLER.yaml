@@ -1,0 +1,18 @@
+IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER:
+  IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER:
+    implementation_approach:
+      details:
+        - "apply-resume-from-tracker.ts"
+        - "checklist-controller-resume.ts"
+        - "tied_checklist_controller_resume_plan"
+      summary: "Shared resume plan, agentstream apply, MCP read tool."
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Checklist controller resume module"
+    traceability:
+      architecture:
+        - "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      requirements:
+        - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+        - "REQ-TIED_INTENT_CONTROL_PLANE"

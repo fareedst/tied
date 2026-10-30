@@ -1,0 +1,24 @@
+REQ-TIED_DURABLE_CHECKLIST_CONTROLLER:
+  REQ-TIED_DURABLE_CHECKLIST_CONTROLLER:
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Durable checklist controller resume"
+    rationale:
+      benefits:
+        - "Interrupted agentstream batches resume from Authoritative Tracker"
+      problems_solved:
+        - "Manual --first-turn counting after crash"
+      why: "REQ-CTRL-007 requires execution resume from last accepted checklist state."
+    satisfaction_criteria:
+      - criterion: "agentstream --resume-from-tracker requires --checklist-tracker-yaml."
+      - criterion: "deriveChecklistResumePlan selects first pending stubbed turn."
+      - criterion: "tied_checklist_controller_resume_plan returns first_turn and session_id_hint read-only."
+    traceability:
+      architecture:
+        - "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      implementation:
+        - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      requirements:
+        - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+        - "REQ-TIED_INTENT_CONTROL_PLANE"

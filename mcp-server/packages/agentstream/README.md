@@ -46,6 +46,7 @@ Cross-links: [agentstream vocab](../../../tied-project/vocab/agentstream.md), [T
 | Extended dry-run | `--prompts-file`, `--tdd-yaml`, `--verify-session`, `--non-compact-html`, argv after `--` |
 | Adherence reconcile | `adherence-reconcile` subcommand or standalone `--tracker` with reconcile flags |
 | Live checklist + tracker | `-c`, `--checklist-tracker-yaml`, tracker vars, optional `--adherence-ledger`, `--enforce-envelope` |
+| Resume from Authoritative Tracker (Wave 4, [REQ-TIED_DURABLE_CHECKLIST_CONTROLLER](../../../tied-project/requirements/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER.yaml)) | `--resume-from-tracker` with `--checklist-tracker-yaml` — derives `--first-turn` from pending step dispositions; fills `--session-id` from latest `state_history` when omitted |
 | Harness profile (Phase 2) | `--harness cursor\|claude` selects **AgentDriver** profile; **`--agent-path`** remains Cursor executable override only (not a Claude adapter). Dry-run command rendering uses placeholder bin **`claude`** when `--harness claude` and `--agent-path` is unset. |
 | Claude live driver ([REQ-TIED_CLAUDE_LIVE_DRIVER](../../../tied-project/requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml)) | Live `--harness claude` routes through **SELECT_LIVE_DRIVER** → **CLAUDE_AGENT_DRIVER** with frozen oracles under `fixtures/claude/`. **CI:** fixture-only unit/composition tests (no live Claude subprocess). **Operator live:** set `AGENTSTREAM_CLAUDE_LIVE_OK=1` after local `npm test` is green; optional manual smoke only. |
 

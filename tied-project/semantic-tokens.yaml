@@ -1005,6 +1005,16 @@ ARCH-TIED_DAE_VERIFICATION_CHARTER:
   source_index: "architecture-decisions.yaml"
   status: "Proposed"
   type: "ARCH"
+ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER:
+  description: "Shared resume plan between MCP and agentstream."
+  name: "Checklist resume architecture"
+  traceability:
+    architecture:
+      - "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    implementation:
+      - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    requirements:
+      - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
 ARCH-TIED_EASAR_ARTIFACT_MODEL:
   cross_references:
     - "IMPL-TIED_EASAR_RECEIPTS"
@@ -2725,6 +2735,16 @@ IMPL-TIED_DAE_VERIFICATION_CHARTER:
   source_index: "implementation-decisions.yaml"
   status: "Planned"
   type: "IMPL"
+IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER:
+  description: "deriveChecklistResumePlan and agentstream/MCP surfaces."
+  name: "Checklist controller resume implementation"
+  traceability:
+    architecture:
+      - "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    implementation:
+      - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    requirements:
+      - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
 IMPL-TIED_EASAR_RECEIPTS:
   cross_references:
     - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
@@ -4721,6 +4741,16 @@ REQ-TIED_DAE_VERIFICATION_CHARTER:
   source_index: "requirements.yaml"
   status: "Planned"
   type: "REQ"
+REQ-TIED_DURABLE_CHECKLIST_CONTROLLER:
+  description: "REQ-CTRL-007: resume checklist execution from Authoritative Tracker."
+  name: "Durable checklist controller resume"
+  traceability:
+    architecture:
+      - "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    implementation:
+      - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    requirements:
+      - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
 REQ-TIED_EASAR_RECOVERY:
   cross_references:
     - "ARCH-TIED_EASAR_ARTIFACT_MODEL"
