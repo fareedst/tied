@@ -1,6 +1,6 @@
 /**
  * [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS]
- * How: INITIALIZE_TIED_MCP_CONFIG — create .cursor/mcp.json only when absent; refresh merges tied-yaml + tied-yaml-optin.
+ * How: INITIALIZE_TIED_MCP_CONFIG — create or refresh .cursor/mcp.json; path fields updated every pass; foreign servers preserved.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -96,6 +96,57 @@ export function tiedMcpServersUpToDate(cfg) {
   return true;
 }
 
+/** Env keys rewritten on every MCP refresh pass (linked bundle keys omitted when not linked). */
+export const TIED_MCP_PATH_ENV_KEYS = [
+  "TIED_BASE_PATH",
+  "TIED_METHODOLOGY_BUNDLE_PATH",
+  "TIED_STORE_ROOT",
+];
+
+/**
+ * Path fields only — used to refresh brownfield tied-yaml / tied-yaml-optin without touching other env.
+ * @param {{ tiedMcpIndexJs: string; tiedBasePath: string; extraEnv?: Record<string, string> }} params
+ */
+export function buildTiedMcpPathPatch({ tiedMcpIndexJs, tiedBasePath, extraEnv }) {
+  return {
+    args: [jsonSafeAbsolute(tiedMcpIndexJs)],
+    env: {
+      TIED_BASE_PATH: jsonSafeAbsolute(tiedBasePath),
+      ...(extraEnv ?? {}),
+    },
+  };
+}
+
+/**
+ * Overwrite only args + path env on an existing mcpServers entry; leave all other fields untouched.
+ * @param {Record<string, unknown>|undefined} existing
+ * @param {{ args: string[]; env: Record<string, string> }} pathPatch
+ * @returns {Record<string, unknown>|null} null when existing is absent (caller supplies full bootstrap entry)
+ */
+export function applyTiedMcpPathRefresh(existing, pathPatch) {
+  if (!existing || typeof existing !== "object") {
+    return null;
+  }
+  /** @type {Record<string, unknown>} */
+  const merged = { ...existing, args: [...pathPatch.args] };
+  const existingEnv =
+    existing.env && typeof existing.env === "object" && !Array.isArray(existing.env)
+      ? /** @type {Record<string, string>} */ ({ ...existing.env })
+      : {};
+  /** @type {Record<string, string>} */
+  const env = { ...existingEnv, TIED_BASE_PATH: pathPatch.env.TIED_BASE_PATH };
+  for (const key of TIED_MCP_PATH_ENV_KEYS) {
+    if (key === "TIED_BASE_PATH") continue;
+    if (pathPatch.env[key] !== undefined) {
+      env[key] = pathPatch.env[key];
+    } else {
+      delete env[key];
+    }
+  }
+  merged.env = env;
+  return merged;
+}
+
 /**
  * Merge or create both tied-yaml (core) and tied-yaml-optin entries; preserve foreign mcpServers keys.
  * @param {object} params
@@ -141,6 +192,7 @@ export function refreshTiedMcpServersJson({
     toolProfile: "optin",
     extraEnv,
   });
+  const pathPatch = buildTiedMcpPathPatch({ tiedMcpIndexJs, tiedBasePath, extraEnv });
 
   let cfg;
   if (fs.existsSync(mcpJsonPath)) {
@@ -155,8 +207,10 @@ export function refreshTiedMcpServersJson({
   } else {
     cfg = { mcpServers: {} };
   }
-  cfg.mcpServers["tied-yaml"] = coreEntry;
-  cfg.mcpServers["tied-yaml-optin"] = optinEntry;
+  cfg.mcpServers["tied-yaml"] =
+    applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml"], pathPatch) ?? coreEntry;
+  cfg.mcpServers["tied-yaml-optin"] =
+    applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml-optin"], pathPatch) ?? optinEntry;
   fs.mkdirSync(path.dirname(mcpJsonPath), { recursive: true });
   fs.writeFileSync(mcpJsonPath, `${JSON.stringify(cfg, null, 2)}\n`, "utf8");
 }
@@ -168,15 +222,9 @@ export function refreshTiedMcpJson(refreshArgs) {
 
 export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process.env) {
   const mcpJson = path.join(projectRoot, ".cursor", "mcp.json");
-  if (fs.existsSync(mcpJson)) {
-    return { initialized: false };
-  }
+  assertMcpPrerequisite(tiedRepoRoot);
   const mcpServerDist = path.join(tiedRepoRoot, "mcp-server", "dist", "index.js");
-  if (!fs.existsSync(mcpServerDist)) {
-    throw new Error(
-      `Missing built MCP server: ${mcpServerDist}\nBuild it: cd ${path.join(tiedRepoRoot, "mcp-server")} && npm install && npm run build`,
-    );
-  }
+  const existed = fs.existsSync(mcpJson);
   const collectMetrics = env.TIED_MCP_COLLECT_METRICS === "1";
   const projectBasename = path.basename(projectRoot);
   refreshTiedMcpServersJson({
@@ -187,10 +235,16 @@ export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process
     metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
     projectBasename,
   });
+  if (existed) {
+    sayOk(
+      `Refreshed ${mcpJson} tied-yaml path settings (foreign mcpServers and non-path env preserved).`,
+    );
+    return { initialized: false, refreshed: true };
+  }
   sayOk(
     `Initialized ${mcpJson} mcpServers.tied-yaml + tied-yaml-optin (TIED_MCP dist + project TIED_BASE_PATH).`,
   );
-  return { initialized: true };
+  return { initialized: true, refreshed: false };
 }
 
 /**
@@ -222,12 +276,18 @@ export function initializeClaudeMcpConfig(projectRoot, tiedRepoRoot, options = {
     } catch (e) {
       throw new Error(`Invalid JSON in ${mcpJson}: ${e.message}`);
     }
-    if (typeof cfg === "object" && cfg !== null && tiedMcpServersUpToDate(cfg)) {
-      return { path: mcpJson, action: "noop", initialized: false };
-    }
+    const hadTiedYaml =
+      typeof cfg === "object" &&
+      cfg !== null &&
+      typeof cfg.mcpServers === "object" &&
+      cfg.mcpServers !== null &&
+      Boolean(cfg.mcpServers["tied-yaml"]);
     refreshTiedMcpServersJson(refreshArgs);
-    sayOk(`Merged ${mcpJson} mcpServers tied-yaml + tied-yaml-optin (foreign servers preserved).`);
-    return { path: mcpJson, action: "merged", initialized: true };
+    const action = hadTiedYaml ? "refreshed" : "merged";
+    sayOk(
+      `${hadTiedYaml ? "Refreshed" : "Merged"} ${mcpJson} mcpServers tied-yaml + tied-yaml-optin (foreign servers preserved).`,
+    );
+    return { path: mcpJson, action, initialized: true };
   }
 
   refreshTiedMcpServersJson(refreshArgs);

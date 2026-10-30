@@ -1,0 +1,15 @@
+fix(bootstrap): refresh tied-yaml path fields on every install
+
+On MCP layer install/refresh, overwrite only args and path env
+(TIED_BASE_PATH, linked bundle/store roots) for tied-yaml and
+tied-yaml-optin; preserve foreign servers and operator non-path env.
+
+Tests: mcp-config.test.mjs, mcp-layer.test.mjs (13/13 pass).
+
+Staging map:
+- CHANGELOG.md
+- tools/bootstrap/README.md
+- tools/bootstrap/lib/mcp-config.mjs
+- tools/bootstrap/lib/layers/mcp.mjs
+- tools/bootstrap/lib/mcp-config.test.mjs
+- tools/bootstrap/lib/claude-harness.test.mjs

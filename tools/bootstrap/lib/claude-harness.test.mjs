@@ -13,6 +13,7 @@ import { initializeTiedMcpConfig, initializeClaudeMcpConfig } from "./mcp-config
 import { installClaudeSkills } from "./skills.mjs";
 import { installTiedLayers } from "./install-layers-core.mjs";
 import { manifestPaths, TIED_REPO_ROOT } from "./constants.mjs";
+import { jsonSafeAbsolute } from "./paths.mjs";
 import { assertMcpPrerequisite } from "./mcp-config.mjs";
 import {
   assertWindowsBootstrapClaude,
@@ -44,20 +45,24 @@ function bootstrapLinkedClient(clientRoot, extra = {}) {
   });
 }
 
-describe("PRESERVE_CURSOR_MCP_INIT [REQ-TIED_CLAUDE_HARNESS]", () => {
-  it("does not mutate existing .cursor/mcp.json (create-only policy)", () => {
+describe("REFRESH_CURSOR_MCP_PATHS [REQ-TIED_CLAUDE_HARNESS]", () => {
+  it("adds tied-yaml with fresh paths while preserving foreign mcpServers", () => {
     const clientRoot = tempClient();
+    fs.mkdirSync(path.join(clientRoot, "tied-project"), { recursive: true });
     const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
     fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
     const foreign = { mcpServers: { foreign: { type: "stdio", command: "echo" } } };
     fs.writeFileSync(mcpPath, `${JSON.stringify(foreign, null, 2)}\n`, "utf8");
-    const before = fs.readFileSync(mcpPath, "utf8");
 
     assertMcpPrerequisite(TIED_REPO_ROOT);
     const result = initializeTiedMcpConfig(clientRoot, TIED_REPO_ROOT, {});
 
     assert.equal(result.initialized, false);
-    assert.equal(fs.readFileSync(mcpPath, "utf8"), before);
+    assert.equal(result.refreshed, true);
+    const cfg = JSON.parse(fs.readFileSync(mcpPath, "utf8"));
+    assert.deepEqual(cfg.mcpServers.foreign, foreign.mcpServers.foreign);
+    assert.ok(cfg.mcpServers["tied-yaml"]);
+    assert.ok(path.isAbsolute(cfg.mcpServers["tied-yaml"].env.TIED_BASE_PATH));
   });
 });
 
@@ -97,15 +102,30 @@ describe("INITIALIZE_CLAUDE_MCP_CONFIG [REQ-TIED_CLAUDE_HARNESS]", () => {
     assert.equal(cfg.mcpServers["tied-yaml"].env.TIED_MCP_HARNESS, "claude");
   });
 
-  it("noop when tied-yaml already present", () => {
+  it("refreshes path fields when tied-yaml already present", () => {
     const clientRoot = tempClient();
+    fs.mkdirSync(path.join(clientRoot, "tied-project"), { recursive: true });
     assertMcpPrerequisite(TIED_REPO_ROOT);
     initializeClaudeMcpConfig(clientRoot, TIED_REPO_ROOT, { harnessLabel: "claude" });
-    const afterFirst = fs.readFileSync(path.join(clientRoot, ".mcp.json"), "utf8");
+    const mcpPath = path.join(clientRoot, ".mcp.json");
+    const cfg = JSON.parse(fs.readFileSync(mcpPath, "utf8"));
+    cfg.mcpServers["tied-yaml"].env.TIED_BASE_PATH = path.join(clientRoot, "stale-tied-project");
+    cfg.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT = "keep-me";
+    cfg.mcpServers["tied-yaml"].disabled = true;
+    fs.writeFileSync(mcpPath, `${JSON.stringify(cfg, null, 2)}\n`, "utf8");
 
-    const result = initializeClaudeMcpConfig(clientRoot, TIED_REPO_ROOT, { harnessLabel: "claude" });
-    assert.equal(result.action, "noop");
-    assert.equal(fs.readFileSync(path.join(clientRoot, ".mcp.json"), "utf8"), afterFirst);
+    const result = initializeClaudeMcpConfig(clientRoot, TIED_REPO_ROOT, {
+      harnessLabel: "claude",
+      env: {},
+    });
+    assert.equal(result.action, "refreshed");
+    const after = JSON.parse(fs.readFileSync(mcpPath, "utf8"));
+    assert.equal(after.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, "keep-me");
+    assert.equal(after.mcpServers["tied-yaml"].disabled, true);
+    assert.equal(
+      after.mcpServers["tied-yaml"].env.TIED_BASE_PATH,
+      jsonSafeAbsolute(path.join(clientRoot, "tied-project")),
+    );
   });
 });
 
@@ -143,18 +163,21 @@ describe("INSTALL_CLAUDE_SKILLS [REQ-TIED_CLAUDE_HARNESS]", () => {
 });
 
 describe("BOOTSTRAP_TIED dual harness binding [REQ-TIED_CLAUDE_HARNESS]", () => {
-  it("orchestration installs Claude artifacts and preserves existing .cursor/mcp.json", () => {
+  it("orchestration installs Claude artifacts and merges tied-yaml into existing .cursor/mcp.json", () => {
     const clientRoot = tempClient();
+    fs.mkdirSync(path.join(clientRoot, "tied-project"), { recursive: true });
     const mcpPath = path.join(clientRoot, ".cursor", "mcp.json");
     fs.mkdirSync(path.dirname(mcpPath), { recursive: true });
     const foreign = { mcpServers: { foreign: { type: "stdio", command: "echo" } } };
     fs.writeFileSync(mcpPath, `${JSON.stringify(foreign, null, 2)}\n`, "utf8");
-    const before = fs.readFileSync(mcpPath, "utf8");
 
     assertMcpPrerequisite(TIED_REPO_ROOT);
     bootstrapLinkedClient(clientRoot);
 
-    assert.equal(fs.readFileSync(mcpPath, "utf8"), before);
+    const cursorMcp = JSON.parse(fs.readFileSync(mcpPath, "utf8"));
+    assert.deepEqual(cursorMcp.mcpServers.foreign, foreign.mcpServers.foreign);
+    assert.ok(cursorMcp.mcpServers["tied-yaml"]);
+    assert.ok(cursorMcp.mcpServers["tied-yaml"].env.TIED_METHODOLOGY_BUNDLE_PATH);
     const tiedCli = path.join(clientRoot, ".claude", "skills", "tied-yaml", "scripts", "tied-cli.sh");
     assert.ok(fs.existsSync(tiedCli));
     const rootMcp = JSON.parse(fs.readFileSync(path.join(clientRoot, ".mcp.json"), "utf8"));

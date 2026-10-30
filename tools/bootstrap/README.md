@@ -197,16 +197,22 @@ Unix: `source scripts/build-commands.sh && test-new-tied-client --full-tools`. W
 
 ## Claude Code harness (dual bootstrap)
 
-After the Cursor path (`.cursor/skills/`, create-only `.cursor/mcp.json`), bootstrap also:
+After the Cursor path (`.cursor/skills/`, refresh `.cursor/mcp.json` path settings on every install), bootstrap also:
 
 | Artifact | Policy |
 | --- | --- |
 | `.claude/skills/` | Copy-default Prompt Composer + `tied-yaml` bundles (same inventory as Cursor) |
 | Repo-root `skills/` (optional) | When **`TIED_SKILLS_REROOT=1`**, both Cursor and Claude managed bundles install under **`skills/`** instead of harness-native paths. Default **off**. Requires `windows_copy_proven_in_ci` and [ARCH-TIED_CLAUDE_SKILLS_REROOT](../tied-project/architecture-decisions/ARCH-TIED_CLAUDE_SKILLS_REROOT.yaml). See [REQ-TIED_CLAUDE_SKILLS_REROOT](../tied-project/requirements/REQ-TIED_CLAUDE_SKILLS_REROOT.yaml). |
-| Repo-root `.mcp.json` | Create-if-absent or safe-merge **`tied-yaml` only**; sets `TIED_MCP_HARNESS=claude` |
+| Repo-root `.mcp.json` | Create-if-absent or safe-merge **`tied-yaml` + `tied-yaml-optin`**; sets `TIED_MCP_HARNESS=claude` |
 | `CLAUDE.md` | Optional create-if-absent thin delta pointing at **AGENTS.md** (never replaces Tracker or `tied-project/` YAML) |
 
-Cursor **create-only** `.cursor/mcp.json` policy is unchanged — existing client MCP files are never mutated.
+On every **`tied-install`** / **`--refresh`** pass that runs the MCP layer, bootstrap **overwrites only** these fields on **`tied-yaml`** and **`tied-yaml-optin`** in **`.cursor/mcp.json`** and **`.mcp.json`**:
+
+- `args` → store `mcp-server/dist/index.js`
+- `env.TIED_BASE_PATH` → client `tied-project/`
+- `env.TIED_METHODOLOGY_BUNDLE_PATH` and `env.TIED_STORE_ROOT` → linked mode only (removed on full/offline install)
+
+Everything else on those entries (and all foreign `mcpServers`) is **preserved**.
 
 **CLI parity:** **`tied-cli.sh`** (and **`tied.sh`** / **`feature-orchestrator.sh`**) read **`TIED_BASE_PATH`** from the same mcp files (**.cursor/mcp.json** first, then **`.mcp.json`**) relative to the operator’s cwd—not from the linked stub’s script directory. Keep both harness files aligned after **`tied-install`**; when both define different paths, the Cursor file wins ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
 

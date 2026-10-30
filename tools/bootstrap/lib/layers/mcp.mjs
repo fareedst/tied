@@ -5,7 +5,6 @@
 import path from "node:path";
 import {
   assertMcpPrerequisite,
-  initializeTiedMcpConfig,
   initializeClaudeMcpConfig,
   refreshTiedMcpServersJson,
   resolveBootstrapMetricsClient,
@@ -63,24 +62,14 @@ export function installMcpLayer(projectRoot, options) {
   if (harness === "cursor" || harness === "both") {
     const mcpJson = path.join(projectRoot, ".cursor", "mcp.json");
     const cursorMcpExisted = fs.existsSync(mcpJson);
+    refreshTiedMcpServersJson({
+      ...refreshArgsBase,
+      mcpJsonPath: mcpJson,
+    });
     if (!cursorMcpExisted) {
-      initializeTiedMcpConfig(projectRoot, options.storeRoot, env);
-    }
-    let refreshCursor = !cursorMcpExisted;
-    if (cursorMcpExisted) {
-      try {
-        const cfg = JSON.parse(fs.readFileSync(mcpJson, "utf8"));
-        refreshCursor = Boolean(cfg?.mcpServers?.["tied-yaml"]);
-      } catch {
-        refreshCursor = false;
-      }
-    }
-    if (refreshCursor) {
-      refreshTiedMcpServersJson({
-        ...refreshArgsBase,
-        mcpJsonPath: mcpJson,
-      });
-      if (extraEnv) sayOk(`Refreshed ${mcpJson} with linked methodology bundle env.`);
+      sayOk(`Initialized ${mcpJson} mcpServers.tied-yaml + tied-yaml-optin.`);
+    } else if (extraEnv) {
+      sayOk(`Refreshed ${mcpJson} with linked methodology bundle env.`);
     }
   }
 

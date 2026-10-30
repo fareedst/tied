@@ -10,11 +10,14 @@ import { describe, it } from "node:test";
 import {
   buildTiedMcpServerEntry,
   initializeClaudeMcpConfig,
+  applyTiedMcpPathRefresh,
+  buildTiedMcpPathPatch,
   refreshTiedMcpServersJson,
   resolveBootstrapMetricsClient,
   tiedMcpServersUpToDate,
 } from "./mcp-config.mjs";
 import { TIED_REPO_ROOT } from "./constants.mjs";
+import { jsonSafeAbsolute } from "./paths.mjs";
 
 describe("resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]", () => {
   it("uses timestamp basename under dev/test when shell has stdd-dev", () => {
@@ -87,6 +90,96 @@ describe("refreshTiedMcpServersJson [REQ-MCP_USAGE_METRICS]", () => {
     assert.equal(cfg.mcpServers["tied-yaml"].disabled, false);
   });
 
+  it("preserves disabled and metrics env while refreshing path fields", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-preserve-env-"));
+    const mcpJsonPath = path.join(tmp, ".cursor", "mcp.json");
+    const staleBase = path.join(tmp, "stale-tied-project");
+    const freshBase = path.join(tmp, "tied-project");
+    fs.mkdirSync(staleBase, { recursive: true });
+    fs.mkdirSync(freshBase, { recursive: true });
+    const dist = path.join(TIED_REPO_ROOT, "mcp-server", "dist", "index.js");
+    const staleDist = path.join(tmp, "stale-dist", "index.js");
+    fs.mkdirSync(path.dirname(staleDist), { recursive: true });
+    fs.writeFileSync(staleDist, "// stale\n", "utf8");
+    fs.mkdirSync(path.dirname(mcpJsonPath), { recursive: true });
+    fs.writeFileSync(
+      mcpJsonPath,
+      `${JSON.stringify(
+        {
+          mcpServers: {
+            "tied-yaml": {
+              type: "stdio",
+              disabled: true,
+              command: "node",
+              args: [staleDist],
+              env: {
+                TIED_BASE_PATH: staleBase,
+                TIED_MCP_TOOL_PROFILE: "core",
+                TIED_MCP_COLLECT_METRICS: "1",
+                TIED_MCP_METRICS_CLIENT: "operator-label",
+              },
+            },
+          },
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    refreshTiedMcpServersJson({
+      mcpJsonPath,
+      tiedMcpIndexJs: dist,
+      tiedBasePath: freshBase,
+      collectMetrics: false,
+      projectBasename: "preserve-env",
+    });
+    const cfg = JSON.parse(fs.readFileSync(mcpJsonPath, "utf8"));
+    const entry = cfg.mcpServers["tied-yaml"];
+    assert.equal(entry.disabled, true);
+    assert.equal(entry.env.TIED_MCP_METRICS_CLIENT, "operator-label");
+    assert.equal(entry.env.TIED_MCP_COLLECT_METRICS, "1");
+    assert.equal(entry.env.TIED_BASE_PATH, jsonSafeAbsolute(freshBase));
+    assert.equal(entry.args[0], jsonSafeAbsolute(dist));
+  });
+
+  it("applyTiedMcpPathRefresh keeps operator command and non-path env", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-merge-cmd-"));
+    const tiedBase = path.join(tmp, "tied-project");
+    fs.mkdirSync(tiedBase, { recursive: true });
+    const dist = path.join(TIED_REPO_ROOT, "mcp-server", "dist", "index.js");
+    const bundleDir = path.join(tmp, "tied-bundle");
+    fs.mkdirSync(bundleDir, { recursive: true });
+    const pathPatch = buildTiedMcpPathPatch({
+      tiedMcpIndexJs: dist,
+      tiedBasePath: tiedBase,
+      extraEnv: {
+        TIED_METHODOLOGY_BUNDLE_PATH: jsonSafeAbsolute(bundleDir),
+        TIED_STORE_ROOT: jsonSafeAbsolute(TIED_REPO_ROOT),
+      },
+    });
+    const merged = applyTiedMcpPathRefresh(
+      {
+        type: "stdio",
+        command: "node22",
+        disabled: true,
+        args: ["/stale/index.js"],
+        env: {
+          TIED_BASE_PATH: "/stale/tied-project",
+          TIED_MCP_TOOL_PROFILE: "core",
+          TIED_MCP_HARNESS: "claude",
+          TIED_MCP_METRICS_CLIENT: "keep-me",
+        },
+      },
+      pathPatch,
+    );
+    assert.equal(merged.command, "node22");
+    assert.equal(merged.disabled, true);
+    assert.equal(merged.env.TIED_MCP_HARNESS, "claude");
+    assert.equal(merged.env.TIED_MCP_METRICS_CLIENT, "keep-me");
+    assert.equal(merged.env.TIED_MCP_TOOL_PROFILE, "core");
+    assert.equal(merged.env.TIED_BASE_PATH, jsonSafeAbsolute(tiedBase));
+    assert.equal(merged.args[0], jsonSafeAbsolute(dist));
+  });
+
   it("preserves foreign mcpServers keys on brownfield merge", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-brownfield-"));
     const mcpJsonPath = path.join(tmp, ".cursor", "mcp.json");
@@ -135,7 +228,7 @@ describe("refreshTiedMcpServersJson [REQ-MCP_USAGE_METRICS]", () => {
     );
     assert.equal(tiedMcpServersUpToDate(JSON.parse(fs.readFileSync(mcpJsonPath, "utf8"))), false);
     const result = initializeClaudeMcpConfig(tmp, TIED_REPO_ROOT, { env: {} });
-    assert.equal(result.action, "merged");
+    assert.equal(result.action, "refreshed");
     const cfg = JSON.parse(fs.readFileSync(mcpJsonPath, "utf8"));
     assert.ok(cfg.mcpServers["tied-yaml-optin"]);
     assert.equal(cfg.mcpServers["tied-yaml-optin"].env.TIED_MCP_TOOL_PROFILE, "optin");
