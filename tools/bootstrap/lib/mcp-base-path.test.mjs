@@ -11,14 +11,19 @@ import {
   DIAGNOSTIC_PREFIX,
 } from "./mcp-base-path.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
+import { ENV_CLIENT_PROJECT_PATH } from "./tied-path-env.mjs";
 
-function writeMcp(projectRoot, rel, tiedBasePath) {
+function writeMcp(projectRoot, rel, tiedBasePath, { legacy = false } = {}) {
   const dir = path.dirname(path.join(projectRoot, rel));
   fs.mkdirSync(dir, { recursive: true });
+  const abs = jsonSafeAbsolute(tiedBasePath);
+  const env = legacy
+    ? { TIED_BASE_PATH: abs }
+    : { [ENV_CLIENT_PROJECT_PATH]: abs };
   const payload = {
     mcpServers: {
       "tied-yaml": {
-        env: { TIED_BASE_PATH: jsonSafeAbsolute(tiedBasePath) },
+        env,
       },
     },
   };
@@ -31,7 +36,7 @@ function seedTiedProject(tiedDir) {
 }
 
 describe("mcp-base-path [REQ-TIED_CLI_MCP_JSON_BASE_PATH]", () => {
-  it("reads TIED_BASE_PATH from .cursor/mcp.json", () => {
+  it("reads canonical project path from .cursor/mcp.json", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-base-cursor-"));
     const tiedDir = path.join(tmp, "tied-project");
     seedTiedProject(tiedDir);
@@ -39,13 +44,12 @@ describe("mcp-base-path [REQ-TIED_CLI_MCP_JSON_BASE_PATH]", () => {
     assert.equal(readTiedBasePathFromProjectMcp(tmp), jsonSafeAbsolute(tiedDir));
   });
 
-  it("reads TIED_BASE_PATH from Claude-only .mcp.json", () => {
+  it("reads legacy TIED_BASE_PATH from Claude-only .mcp.json", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-base-claude-"));
     const tiedDir = path.join(tmp, "tied-project");
     seedTiedProject(tiedDir);
-    writeMcp(tmp, ".mcp.json", tiedDir);
+    writeMcp(tmp, ".mcp.json", tiedDir, { legacy: true });
     assert.equal(readTiedBasePathFromProjectMcp(tmp), jsonSafeAbsolute(tiedDir));
-    assert.deepEqual(readTiedYamlEnvFromProjectMcp(tmp).TIED_BASE_PATH, jsonSafeAbsolute(tiedDir));
   });
 
   it("prefers .cursor/mcp.json when both files define different paths", () => {
@@ -83,7 +87,16 @@ describe("mcp-base-path [REQ-TIED_CLI_MCP_JSON_BASE_PATH]", () => {
     fs.mkdirSync(wrongDir, { recursive: true });
     writeMcp(tmp, ".cursor/mcp.json", wrongDir);
     const resolved = resolveTiedCliEnvFromCwd(tmp, { TIED_BASE_PATH: tiedDir });
-    assert.equal(resolved.TIED_BASE_PATH, jsonSafeAbsolute(tiedDir));
+    assert.equal(resolved.TIED_CLIENT_PROJECT_PATH, jsonSafeAbsolute(tiedDir));
+  });
+
+  it("reads TIED_CLIENT_PROJECT_PATH from mcp.json", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-base-canonical-"));
+    const tiedDir = path.join(tmp, "tied-project");
+    seedTiedProject(tiedDir);
+    writeMcp(tmp, ".cursor/mcp.json", tiedDir);
+    const resolved = resolveTiedCliEnvFromCwd(tmp, {});
+    assert.equal(resolved.TIED_CLIENT_PROJECT_PATH, jsonSafeAbsolute(tiedDir));
   });
 
   it("resolveProjectRootFromCwd walks up to mcp sentinel", () => {

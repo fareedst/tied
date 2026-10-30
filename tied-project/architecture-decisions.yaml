@@ -2030,6 +2030,15 @@ ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
       - "IMPL-TIED_FILES"
     requirements:
       - "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
+ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
+  name: "Client path env canonical names and migration seam"
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-TIED_CLIENT_PATH_ENV_MIGRATION"
+    requirements:
+      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
 ARCH-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     - "ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM"
@@ -2394,6 +2403,13 @@ ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
       - "IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
     requirements:
       - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  cross_references:
+    - "IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT"
+    - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+  detail_file: "architecture-decisions/ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+  name: "MCP JSON canonical serialization seam"
+  status: "Accepted"
 ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"

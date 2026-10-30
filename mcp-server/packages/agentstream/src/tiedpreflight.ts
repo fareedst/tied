@@ -177,10 +177,17 @@ export function analyze(workspace: string, mcpJsonPath: string): PreflightResult
     return res;
   }
 
-  const base = (srv.env?.TIED_BASE_PATH ?? "").trim();
+  const envBlock = srv.env ?? {};
+  const base = (
+    envBlock.TIED_CLIENT_PROJECT_PATH?.trim()
+    || envBlock.TIED_BASE_PATH?.trim()
+    || ""
+  );
   if (base === "") {
     res.status = Status.Blocked;
-    res.errors.push("tied-yaml env.TIED_BASE_PATH is missing or empty");
+    res.errors.push(
+      "tied-yaml env.TIED_CLIENT_PROJECT_PATH (or legacy TIED_BASE_PATH) is missing or empty",
+    );
     return res;
   }
 

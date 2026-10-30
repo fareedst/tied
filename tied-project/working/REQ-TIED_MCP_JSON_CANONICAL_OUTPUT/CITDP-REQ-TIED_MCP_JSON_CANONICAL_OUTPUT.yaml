@@ -1,0 +1,81 @@
+CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  change_definition:
+    current_behavior: |
+      refreshTiedMcpServersJson merges tied-yaml entries then writes JSON.stringify(cfg) preserving
+      JavaScript object insertion order. env keys often appear non-alphabetically (e.g. TIED_CLIENT_PROJECT_PATH before TIED_CLIENT_BUNDLE_PATH).
+      mcpServers and server entry property order depend on merge history and foreign server layout.
+    desired_behavior: |
+      Before every TIED write of .cursor/mcp.json and .mcp.json, canonicalizeMcpJsonDocument sorts object keys
+      alphabetically at root, mcpServers, each server entry, and nested env/headers maps; args arrays preserve order.
+      Values and foreign server semantics unchanged; only deterministic serialization order.
+    non_goals:
+      - Canonicalizing non-bootstrap JSON (envelopes, gate receipts, MCP server API responses)
+      - Global JSON canonicalizer for all TIED packages in this change
+      - Modifying MCP read paths or env resolution semantics
+    success_criteria:
+      - Unit tests prove canonicalizeMcpJsonDocument sort rules including args exception
+      - Integration test proves on-disk mcp.json after refresh has sorted mcpServers and env keys
+      - Existing mcp-config regression tests pass (values)
+      - REQ/ARCH/IMPL + pseudo-code; bootstrap README documents policy
+    unchanged_behavior: |
+      Brownfield merge preserves foreign mcpServers and operator fields; path env migration and metrics env unchanged;
+      create-only policies for unrelated files unchanged.
+  delivery_record:
+    close_out_evidence: null
+    closed_at: null
+    commit_sha: null
+    plan_refine_pass: 1
+    status: "planned"
+  impact_analysis:
+    impl_inventory_notes: |
+      New mcp-json-canonical.mjs; one-line call site in mcp-config refreshTiedMcpServersJson.
+    modules_or_boundaries: |
+      tools/bootstrap/lib (mcp-config, new canonicalizer, tests); tools/bootstrap/README.md; CHANGELOG.
+    tied_tokens_affected:
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+    tied_tokens_new:
+      - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+      - "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT"
+      - "IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT"
+  record_identity:
+    change_request_id: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-29"
+    title: "Canonical alphabetical key order for TIED-generated mcp.json"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Operators rely on hand-ordered mcp.json for human scanning"
+        - "localeCompare locale differs across CI vs macOS"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Sorted keys improve diff stability without value changes"
+        - "ASCII env names sort identically under default localeCompare"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/PLAN-TIED-MCP-JSON-CANONICAL/PLAN.md"
+        - "tools/bootstrap/lib/mcp-config.mjs"
+      falsification_questions:
+        - "Does canonicalization mutate env values?"
+        - "Does sorting args break stdio MCP launch?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Bootstrap mcp.json serialization order only; no auth, network, or persistence change."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - id: "RISK-001"
+        mitigation: "CHANGELOG note; reorder-only diffs; values unchanged"
+        summary: "First refresh after upgrade reorders keys in hand-edited mcp.json"
+  test_strategy:
+    unit:
+      - "tools/bootstrap/lib/mcp-json-canonical.test.mjs (new) — sort rules, args preserved"
+      - "tools/bootstrap/lib/mcp-config.test.mjs — on-disk key order after refresh"
+    verification_commands:
+      - "node --test tools/bootstrap/lib/mcp-json-canonical.test.mjs tools/bootstrap/lib/mcp-config.test.mjs"

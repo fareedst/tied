@@ -1,5 +1,6 @@
 /**
  * [IMPL-TIED_CLI_MCP_JSON_BASE_PATH] [ARCH-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_CLI_MCP_JSON_BASE_PATH]
+ * [IMPL-TIED_CLIENT_PATH_ENV_MIGRATION] [REQ-TIED_CLIENT_PATH_ENV_MIGRATION]
  * How: READ_TIED_YAML_ENV_FROM_PROJECT_MCP, RESOLVE_PROJECT_ROOT_FROM_CWD, RESOLVE_TIED_CLI_ENV.
  */
 import fs from "node:fs";
@@ -7,6 +8,13 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
+import {
+  ENV_CLIENT_BUNDLE_PATH,
+  ENV_CLIENT_PROJECT_PATH,
+  mcpEnvHasClientProjectPath,
+  pickClientBundlePath,
+  pickClientProjectPath,
+} from "./tied-path-env.mjs";
 
 export const MCP_REL_PATHS = [".cursor/mcp.json", ".mcp.json"];
 
@@ -33,17 +41,17 @@ export function readTiedYamlEnvFromProjectMcp(projectRoot) {
     if (!env || typeof env !== "object") {
       continue;
     }
-    const base = env.TIED_BASE_PATH;
-    if (typeof base === "string" && base.trim()) {
-      /** @type {Record<string, string>} */
-      const out = {};
-      for (const [key, value] of Object.entries(env)) {
-        if (typeof value === "string" && value.trim()) {
-          out[key] = value.trim();
-        }
-      }
-      return out;
+    if (!mcpEnvHasClientProjectPath(env)) {
+      continue;
     }
+    /** @type {Record<string, string>} */
+    const out = {};
+    for (const [key, value] of Object.entries(env)) {
+      if (typeof value === "string" && value.trim()) {
+        out[key] = value.trim();
+      }
+    }
+    return out;
   }
   return {};
 }
@@ -54,7 +62,7 @@ export function readTiedYamlEnvFromProjectMcp(projectRoot) {
  */
 export function readTiedBasePathFromProjectMcp(projectRoot) {
   const env = readTiedYamlEnvFromProjectMcp(projectRoot);
-  const raw = env.TIED_BASE_PATH;
+  const raw = pickClientProjectPath(env);
   return raw ? jsonSafeAbsolute(raw) : null;
 }
 
@@ -132,7 +140,9 @@ export function validateTiedProjectLayout(basePath) {
  * @returns {never}
  */
 export function failClosedMissingMcp(projectRoot) {
-  const err = new Error(`${DIAGNOSTIC_PREFIX}: missing tied-yaml TIED_BASE_PATH in .cursor/mcp.json or .mcp.json under ${projectRoot}. Run ./tied-install.sh in the client project.`);
+  const err = new Error(
+    `${DIAGNOSTIC_PREFIX}: missing tied-yaml ${ENV_CLIENT_PROJECT_PATH} (or legacy TIED_BASE_PATH) in .cursor/mcp.json or .mcp.json under ${projectRoot}. Run ./tied-install.sh in the client project.`,
+  );
   err.code = "TIED_CLI_MCP_BASE_PATH_MISSING";
   throw err;
 }
@@ -140,37 +150,38 @@ export function failClosedMissingMcp(projectRoot) {
 /**
  * @param {string} cwd
  * @param {NodeJS.ProcessEnv} [processEnv]
- * @returns {{ projectRoot: string, TIED_BASE_PATH: string, TIED_METHODOLOGY_BUNDLE_PATH?: string }}
+ * @returns {{ projectRoot: string, TIED_CLIENT_PROJECT_PATH: string, TIED_CLIENT_BUNDLE_PATH?: string }}
  */
 export function resolveTiedCliEnvFromCwd(cwd, processEnv = process.env) {
-  const envOverride = processEnv.TIED_BASE_PATH?.trim();
+  const envOverride = pickClientProjectPath(processEnv);
   if (envOverride) {
     const basePath = validateTiedProjectLayout(jsonSafeAbsolute(envOverride));
-    /** @type {{ projectRoot: string, TIED_BASE_PATH: string, TIED_METHODOLOGY_BUNDLE_PATH?: string }} */
+    /** @type {{ projectRoot: string, TIED_CLIENT_PROJECT_PATH: string, TIED_CLIENT_BUNDLE_PATH?: string }} */
     const out = {
       projectRoot: path.dirname(basePath),
-      TIED_BASE_PATH: basePath,
+      TIED_CLIENT_PROJECT_PATH: basePath,
     };
-    const bundle = processEnv.TIED_METHODOLOGY_BUNDLE_PATH?.trim();
+    const bundle = pickClientBundlePath(processEnv);
     if (bundle) {
-      out.TIED_METHODOLOGY_BUNDLE_PATH = jsonSafeAbsolute(bundle);
+      out.TIED_CLIENT_BUNDLE_PATH = jsonSafeAbsolute(bundle);
     }
     return out;
   }
 
   const projectRoot = resolveProjectRootFromCwd(cwd, processEnv);
   const mcpEnv = readTiedYamlEnvFromProjectMcp(projectRoot);
-  if (!mcpEnv.TIED_BASE_PATH?.trim()) {
+  const fromMcp = pickClientProjectPath(mcpEnv);
+  if (!fromMcp?.trim()) {
     failClosedMissingMcp(projectRoot);
   }
-  const basePath = validateTiedProjectLayout(jsonSafeAbsolute(mcpEnv.TIED_BASE_PATH.trim()));
+  const basePath = validateTiedProjectLayout(jsonSafeAbsolute(fromMcp.trim()));
   const out = {
     projectRoot,
-    TIED_BASE_PATH: basePath,
+    TIED_CLIENT_PROJECT_PATH: basePath,
   };
-  const bundle = mcpEnv.TIED_METHODOLOGY_BUNDLE_PATH?.trim();
+  const bundle = pickClientBundlePath(mcpEnv);
   if (bundle) {
-    out.TIED_METHODOLOGY_BUNDLE_PATH = jsonSafeAbsolute(bundle);
+    out.TIED_CLIENT_BUNDLE_PATH = jsonSafeAbsolute(bundle);
   }
   return out;
 }

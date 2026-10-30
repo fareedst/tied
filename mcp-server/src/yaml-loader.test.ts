@@ -103,6 +103,26 @@ describe("resolveIndexPath", () => {
 });
 
 describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
+  it("prefers TIED_CLIENT_BUNDLE_PATH env override", () => {
+    const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-canonical-"));
+    const tiedDir = path.join(clientRoot, "tied-project");
+    const override = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-canonical-override-"));
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.writeFileSync(path.join(override, "requirements.yaml"), "{}\n", "utf8");
+    try {
+      process.env.TIED_CLIENT_PROJECT_PATH = tiedDir;
+      process.env.TIED_CLIENT_BUNDLE_PATH = override;
+      clearBasePathCache();
+      assert.strictEqual(resolveMethodologyRoot(), override);
+    } finally {
+      delete process.env.TIED_CLIENT_PROJECT_PATH;
+      delete process.env.TIED_CLIENT_BUNDLE_PATH;
+      clearBasePathCache();
+      fs.rmSync(clientRoot, { recursive: true });
+      fs.rmSync(override, { recursive: true });
+    }
+  });
+
   it("prefers TIED_METHODOLOGY_BUNDLE_PATH env override", () => {
     const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-root-"));
     const tiedDir = path.join(clientRoot, "tied-project");

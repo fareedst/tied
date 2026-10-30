@@ -1,0 +1,7 @@
+feat(bootstrap): canonical mcp.json key order on refresh
+
+REQ-TIED_MCP_JSON_CANONICAL_OUTPUT sorts object keys (including env maps)
+before every TIED write of .cursor/mcp.json and .mcp.json; args order preserved.
+
+Co-staged REQ-TIED_CLIENT_PATH_ENV_MIGRATION bootstrap/MCP changes share
+mcp-config.mjs and tied-path-env (prior session, same release).

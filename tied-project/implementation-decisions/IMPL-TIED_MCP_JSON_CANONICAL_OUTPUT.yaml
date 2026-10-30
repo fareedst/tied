@@ -1,0 +1,10 @@
+IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT-pseudocode.md"
+    name: "mcp-json-canonical bootstrap writer"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT"
+      requirements:
+        - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"

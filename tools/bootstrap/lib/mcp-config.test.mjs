@@ -18,6 +18,11 @@ import {
 } from "./mcp-config.mjs";
 import { TIED_REPO_ROOT } from "./constants.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
+import {
+  ENV_CLIENT_BUNDLE_PATH,
+  ENV_CLIENT_PROJECT_PATH,
+  LEGACY_ENV_CLIENT_PROJECT_PATH,
+} from "./tied-path-env.mjs";
 
 describe("resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]", () => {
   it("uses timestamp basename under dev/test when shell has stdd-dev", () => {
@@ -137,7 +142,8 @@ describe("refreshTiedMcpServersJson [REQ-MCP_USAGE_METRICS]", () => {
     assert.equal(entry.disabled, true);
     assert.equal(entry.env.TIED_MCP_METRICS_CLIENT, "operator-label");
     assert.equal(entry.env.TIED_MCP_COLLECT_METRICS, "1");
-    assert.equal(entry.env.TIED_BASE_PATH, jsonSafeAbsolute(freshBase));
+    assert.equal(entry.env[ENV_CLIENT_PROJECT_PATH], jsonSafeAbsolute(freshBase));
+    assert.equal(entry.env[LEGACY_ENV_CLIENT_PROJECT_PATH], undefined);
     assert.equal(entry.args[0], jsonSafeAbsolute(dist));
   });
 
@@ -152,7 +158,7 @@ describe("refreshTiedMcpServersJson [REQ-MCP_USAGE_METRICS]", () => {
       tiedMcpIndexJs: dist,
       tiedBasePath: tiedBase,
       extraEnv: {
-        TIED_METHODOLOGY_BUNDLE_PATH: jsonSafeAbsolute(bundleDir),
+        [ENV_CLIENT_BUNDLE_PATH]: jsonSafeAbsolute(bundleDir),
         TIED_STORE_ROOT: jsonSafeAbsolute(TIED_REPO_ROOT),
       },
     });
@@ -176,8 +182,48 @@ describe("refreshTiedMcpServersJson [REQ-MCP_USAGE_METRICS]", () => {
     assert.equal(merged.env.TIED_MCP_HARNESS, "claude");
     assert.equal(merged.env.TIED_MCP_METRICS_CLIENT, "keep-me");
     assert.equal(merged.env.TIED_MCP_TOOL_PROFILE, "core");
-    assert.equal(merged.env.TIED_BASE_PATH, jsonSafeAbsolute(tiedBase));
+    assert.equal(merged.env[ENV_CLIENT_PROJECT_PATH], jsonSafeAbsolute(tiedBase));
+    assert.equal(merged.env[LEGACY_ENV_CLIENT_PROJECT_PATH], undefined);
     assert.equal(merged.args[0], jsonSafeAbsolute(dist));
+  });
+
+  it("writes alphabetically sorted mcpServers and env keys [REQ-TIED_MCP_JSON_CANONICAL_OUTPUT]", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-canonical-order-"));
+    const mcpJsonPath = path.join(tmp, ".cursor", "mcp.json");
+    fs.mkdirSync(path.dirname(mcpJsonPath), { recursive: true });
+    fs.writeFileSync(
+      mcpJsonPath,
+      `${JSON.stringify(
+        {
+          mcpServers: {
+            "tied-yaml": {
+              env: { ZZZ: "1", AAA: "2" },
+              command: "node",
+              type: "stdio",
+            },
+            "org-kb": { url: "https://example.test" },
+          },
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    const tiedBase = path.join(tmp, "tied-project");
+    fs.mkdirSync(tiedBase, { recursive: true });
+    refreshTiedMcpServersJson({
+      mcpJsonPath,
+      tiedMcpIndexJs: path.join(TIED_REPO_ROOT, "mcp-server", "dist", "index.js"),
+      tiedBasePath: tiedBase,
+      collectMetrics: true,
+      metricsClient: "sort-test",
+      projectBasename: "sort-test",
+    });
+    const cfg = JSON.parse(fs.readFileSync(mcpJsonPath, "utf8"));
+    const serverKeys = Object.keys(cfg.mcpServers);
+    assert.deepEqual(serverKeys, [...serverKeys].sort((a, b) => a.localeCompare(b)));
+    const envKeys = Object.keys(cfg.mcpServers["tied-yaml"].env);
+    assert.deepEqual(envKeys, [...envKeys].sort((a, b) => a.localeCompare(b)));
+    assert.equal(cfg.mcpServers["tied-yaml"].env.AAA, "2");
   });
 
   it("preserves foreign mcpServers keys on brownfield merge", () => {

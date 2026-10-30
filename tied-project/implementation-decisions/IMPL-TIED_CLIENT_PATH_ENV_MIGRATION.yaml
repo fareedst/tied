@@ -1,0 +1,10 @@
+IMPL-TIED_CLIENT_PATH_ENV_MIGRATION:
+  IMPL-TIED_CLIENT_PATH_ENV_MIGRATION:
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLIENT_PATH_ENV_MIGRATION-pseudocode.md"
+    name: "tied-path-env pick/strip and mcp-config migration"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION"
+      requirements:
+        - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"

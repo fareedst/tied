@@ -403,7 +403,11 @@ export const allTools = [
     },
     handler: async () => {
       const base_path = getBasePath();
-      const env_TIED_BASE_PATH = process.env.TIED_BASE_PATH ?? null;
+      const env_TIED_CLIENT_PROJECT_PATH =
+        process.env.TIED_CLIENT_PROJECT_PATH?.trim() || null;
+      const env_TIED_CLIENT_BUNDLE_PATH =
+        process.env.TIED_CLIENT_BUNDLE_PATH?.trim() || null;
+      const env_TIED_BASE_PATH = process.env.TIED_BASE_PATH?.trim() || null;
       const project_root = getClientProjectRoot();
       const layout = resolveTiedLayout(project_root);
       const bundle_root = getMethodologyBasePath();
@@ -412,6 +416,8 @@ export const allTools = [
         prettyCanonicalJson(
           {
             base_path,
+            env_TIED_CLIENT_PROJECT_PATH,
+            env_TIED_CLIENT_BUNDLE_PATH,
             env_TIED_BASE_PATH,
             project_root,
             bundle_root,

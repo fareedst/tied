@@ -2510,6 +2510,29 @@ REQ-TIED_CLIENT_FEEDBACK_CAPTURE:
   name: "Client upstream feedback capture discipline"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CLIENT_PATH_ENV_MIGRATION:
+  category: "Tooling"
+  description: "On tied-install refresh write TIED_CLIENT_PROJECT_PATH and TIED_CLIENT_BUNDLE_PATH; strip legacy env keys; runtime dual-read."
+  detail_file: "requirements/REQ-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
+  name: "Migrate MCP client path env on install refresh"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION"
+    implementation:
+      - "IMPL-TIED_CLIENT_PATH_ENV_MIGRATION"
+    tests:
+      - "mcp-server/src/tied-path-env.test.ts"
+      - "mcp-server/src/yaml-loader.test.ts"
+      - "tools/bootstrap/lib/mcp-base-path.test.mjs"
+      - "tools/bootstrap/lib/mcp-config.test.mjs"
+      - "tools/bootstrap/lib/tied-path-env.test.mjs"
 REQ-TIED_CLIENT_REFRESH_PARITY:
   category: "Functional"
   cross_references:
@@ -3004,6 +3027,17 @@ REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
     - criterion: "store-readme-structure.test.ts forbids legacy layout patterns and requires --refresh."
       id: "SC-LAYOUT-DOC-README-TEST"
       metric: "node test store-readme-structure.test.ts"
+  status: "Implemented"
+REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  category: "Tooling"
+  description: "Bootstrap refresh writes mcp.json with alphabetically sorted object keys including env maps."
+  detail_file: "requirements/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+  name: "Canonical alphabetical mcp.json output"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+      - "REQ-TIED_SETUP"
   status: "Implemented"
 REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   category: "Functional"

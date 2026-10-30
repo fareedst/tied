@@ -942,6 +942,17 @@ ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_CLIENT_PATH_ENV_MIGRATION"
+    - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+  description: "pick/strip helpers; bootstrap mcp.json migration; MCP dual-read."
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
+  metadata:
+    last_updated: "2026-10-29"
+  name: "Client path env canonical names and migration seam"
+  status: "Accepted"
 ARCH-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     - "IMPL-TIED_CLIENT_REFRESH_PARITY"
@@ -1215,6 +1226,16 @@ ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
   name: "Legacy layout doc decommission architecture"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT"
+    - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+  detail_file: "architecture-decisions/ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+  metadata:
+    last_updated: "2026-10-29"
+  name: "MCP JSON canonical serialization seam"
+  status: "Accepted"
 ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Architecture for docs/comparisons methodology composition matrix"
   type: "architecture"
@@ -2593,6 +2614,17 @@ IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
   detail_file: "implementation-decisions/IMPL-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
   metadata:
     last_updated: "2026-10-25"
+IMPL-TIED_CLIENT_PATH_ENV_MIGRATION:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION"
+    - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+  description: "Shared pick/strip semantics in bootstrap and MCP server."
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
+  metadata:
+    last_updated: "2026-10-29"
+  name: "tied-path-env pick/strip and mcp-config migration"
+  status: "Implemented"
 IMPL-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     - "ARCH-TIED_CLIENT_REFRESH_PARITY"
@@ -2953,6 +2985,16 @@ IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
   name: "Legacy layout doc decommission implementation"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT"
+    - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+  detail_file: "implementation-decisions/IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+  metadata:
+    last_updated: "2026-10-29"
+  name: "mcp-json-canonical bootstrap writer"
+  status: "Implemented"
 IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Markdown-only implementation for methodology composition matrix"
   type: "implementation"
@@ -4568,6 +4610,18 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_CLIENT_PATH_ENV_MIGRATION:
+  cross_references:
+    - "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION"
+    - "IMPL-TIED_CLIENT_PATH_ENV_MIGRATION"
+  description: "Bootstrap refresh writes TIED_CLIENT_* keys; runtime dual-read."
+  detail_file: "requirements/REQ-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
+  metadata:
+    last_updated: "2026-10-29"
+  name: "Migrate MCP client path env on install refresh"
+  source_index: "requirements.yaml"
+  status: "Implemented"
+  type: "REQ"
 REQ-TIED_CLIENT_REFRESH_PARITY:
   category: "Functional"
   cross_references:
@@ -4842,6 +4896,17 @@ REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
     registered: "2026-10-19"
   name: "Legacy layout documentation decommission"
   status: "Active"
+  type: "REQ"
+REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  cross_references:
+    - "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT"
+    - "IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT"
+  detail_file: "requirements/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+  metadata:
+    last_updated: "2026-10-29"
+  name: "Canonical alphabetical mcp.json output"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   cross_references:

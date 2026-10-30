@@ -99,6 +99,30 @@ describe("@tied/agentstream tiedpreflight [REQ-TIED_UNIFIED_TOOLCHAIN]", () => {
     assert.equal(res.status, Status.Blocked);
   });
 
+  it("accepts canonical TIED_CLIENT_PROJECT_PATH", () => {
+    const w = fs.mkdtempSync(path.join(os.tmpdir(), "tpf-canonical-"));
+    const tied = path.join(w, "tied-project");
+    fs.mkdirSync(tied, { recursive: true });
+    fs.writeFileSync(path.join(tied, "requirements.yaml"), "{}\n");
+    const cursorDir = path.join(w, ".cursor");
+    fs.mkdirSync(cursorDir, { recursive: true });
+    const p = path.join(cursorDir, "mcp.json");
+    fs.writeFileSync(
+      p,
+      JSON.stringify({
+        mcpServers: {
+          "tied-yaml": {
+            command: "node",
+            args: ["/x"],
+            env: { TIED_CLIENT_PROJECT_PATH: tied },
+          },
+        },
+      }),
+    );
+    const res = analyze(w, p);
+    assert.equal(res.status, Status.OK);
+  });
+
   it("blocks relative TIED_BASE_PATH", () => {
     const w = fs.mkdtempSync(path.join(os.tmpdir(), "tpf-"));
     const cursorDir = path.join(w, ".cursor");

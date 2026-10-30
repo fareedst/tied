@@ -1,0 +1,20 @@
+REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
+    category: "Tooling"
+    description: "refreshTiedMcpServersJson canonicalizes key order before write; args order preserved."
+    name: "Canonical alphabetical mcp.json output"
+    priority: "P2"
+    satisfaction_criteria:
+      - criterion: "mcpServers names and server entry property keys are alphabetically sorted."
+        id: "SC-MCP-JSON-FULL-SHAPE"
+      - criterion: "tied-yaml env keys on disk are alphabetically sorted after refresh."
+        id: "SC-MCP-JSON-ENV-SORT"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT"
+      implementation:
+        - "IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT"
+      tests:
+        - "tools/bootstrap/lib/mcp-config.test.mjs"
+        - "tools/bootstrap/lib/mcp-json-canonical.test.mjs"

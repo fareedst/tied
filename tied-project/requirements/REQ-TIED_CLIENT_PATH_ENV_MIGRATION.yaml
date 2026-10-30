@@ -1,0 +1,20 @@
+REQ-TIED_CLIENT_PATH_ENV_MIGRATION:
+  REQ-TIED_CLIENT_PATH_ENV_MIGRATION:
+    category: "Tooling"
+    description: "Bootstrap MCP layer writes canonical TIED_CLIENT_* path env keys and removes legacy keys on refresh; MCP server and CLI dual-read canonical then legacy."
+    name: "Migrate MCP client path env on install refresh"
+    priority: "P1"
+    satisfaction_criteria:
+      - criterion: "Refresh emits canonical keys only on tied-yaml env and removes TIED_BASE_PATH / TIED_METHODOLOGY_BUNDLE_PATH."
+        id: "SC-CLIENT-PATH-REFRESH"
+      - criterion: "Runtime resolves project and bundle paths from canonical env first, legacy second."
+        id: "SC-CLIENT-PATH-DUAL-READ"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION"
+      implementation:
+        - "IMPL-TIED_CLIENT_PATH_ENV_MIGRATION"
+      tests:
+        - "mcp-server/src/tied-path-env.test.ts"
+        - "tools/bootstrap/lib/tied-path-env.test.mjs"

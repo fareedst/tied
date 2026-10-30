@@ -5,9 +5,10 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { installMcpLayer } from "./mcp.mjs";
 import { TIED_REPO_ROOT } from "../constants.mjs";
+import { ENV_CLIENT_BUNDLE_PATH, ENV_CLIENT_PROJECT_PATH } from "../tied-path-env.mjs";
 
 describe("mcp layer [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
-  it("linked mode sets TIED_METHODOLOGY_BUNDLE_PATH in mcp.json", () => {
+  it("linked mode sets TIED_CLIENT_BUNDLE_PATH in mcp.json", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tied-mcp-layer-"));
     fs.mkdirSync(path.join(tmp, "tied"), { recursive: true });
     installMcpLayer(tmp, {
@@ -18,7 +19,8 @@ describe("mcp layer [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     });
     const mcpJson = JSON.parse(fs.readFileSync(path.join(tmp, ".cursor", "mcp.json"), "utf8"));
     const env = mcpJson.mcpServers["tied-yaml"].env;
-    assert.ok(env.TIED_METHODOLOGY_BUNDLE_PATH);
+    assert.ok(env[ENV_CLIENT_PROJECT_PATH]);
+    assert.ok(env[ENV_CLIENT_BUNDLE_PATH]);
     assert.ok(env.TIED_STORE_ROOT);
   });
 
@@ -33,7 +35,7 @@ describe("mcp layer [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     });
     const mcpJson = JSON.parse(fs.readFileSync(path.join(tmp, ".cursor", "mcp.json"), "utf8"));
     const env = mcpJson.mcpServers["tied-yaml"].env;
-    assert.equal(env.TIED_METHODOLOGY_BUNDLE_PATH, undefined);
+    assert.equal(env[ENV_CLIENT_BUNDLE_PATH], undefined);
     assert.equal(env.TIED_STORE_ROOT, undefined);
   });
 });

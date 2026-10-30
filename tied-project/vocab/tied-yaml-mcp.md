@@ -26,7 +26,9 @@
 | **CLI hindrance diagnostic** | cli error json, transport diagnostic | `DIAGNOSTIC: TIED_CLI_HINDRANCE` stderr JSON from `tied-mcp-stdio-client.cjs`; adjunct to ERROR lines; exit codes unchanged · [REQ-TIED_TOOL_INPUT_COMPATIBILITY](../requirements/REQ-TIED_TOOL_INPUT_COMPATIBILITY.yaml) |
 | **activation collect** | gate JSON assembly, hand-built activation | `tied_checklist_activation_collect` — read-only assembly of `{ receipt, artifacts, expected }` from phase artifact dirs |
 | **TIED base path** | repo root, workspace | Absolute path to **`tied-project/`**; `tied_config_get_base_path` confirms writable project root |
-| **client project root** | repo root (alone), workspace | Directory containing **`tied/`**; parent of **TIED base path**; anchor for `tied_token_rename` `extra_globs` / `extra_extensions` |
+| **client project path env** | `TIED_BASE_PATH` (legacy name) | Canonical env **`TIED_CLIENT_PROJECT_PATH`** (recorded choice; implementation pending) — absolute **`tied-project/`** |
+| **client bundle path env** | `TIED_METHODOLOGY_BUNDLE_PATH` (legacy name) | Canonical env **`TIED_CLIENT_BUNDLE_PATH`** (recorded choice; implementation pending) — absolute **`tied-bundle/`** or pinned methodology corpus |
+| **client project root** | repo root (alone), workspace | Directory containing **`tied-project/`** (or legacy **`tied/`**); parent of **TIED base path**; anchor for `tied_token_rename` `extra_globs` / `extra_extensions` |
 | **default TIED rename scope** | yaml rename | Built-in `tied_token_rename` targets: project YAML indexes, detail files, pseudo-code sidecars, detail filename renames |
 | **extra substitution targets** | extra files, glob rename | Client-repo files outside default TIED rename scope; selected via `extra_globs` and `extra_extensions` on `tied_token_rename` |
 | **project YAML write** | any yaml under tied | MCP writes **only** project indexes/detail dirs; never `tied-bundle/` |
@@ -67,17 +69,38 @@
 
 ---
 
+## Recorded sponsor choice: client path env names (2026-10-29)
+
+**Status:** **Implemented** — bootstrap refresh writes canonical keys and strips legacy keys; runtime dual-read (canonical first, legacy fallback for process.env and unmigrated mcp.json).
+
+| Role | Canonical env (chosen) | Legacy env (today) | Resolves to |
+|------|------------------------|--------------------|-------------|
+| Writable project traceability root | **`TIED_CLIENT_PROJECT_PATH`** | `TIED_BASE_PATH` | Absolute **`tied-project/`** |
+| Read-only methodology corpus root | **`TIED_CLIENT_BUNDLE_PATH`** | `TIED_METHODOLOGY_BUNDLE_PATH` | Absolute **`tied-bundle/`** (or linked pin) |
+
+**Rationale (sponsor):** Names **`CLIENT_*`** mark trees owned by the **implementation checkout**, without colliding with **`TIED_STORE_ROOT`** (methodology store git root) or the vague label “base path.”
+
+**Rejected for this pair:** `TIED_STORE_PROJECT_PATH` / `TIED_STORE_BUNDLE_PATH` — “store” overload with **`TIED_STORE_ROOT`**.
+
+**Implementation policy (when built):** Dual-read (canonical first, legacy fallback), **`tied-install`** MCP refresh writes canonical keys, deprecation window for legacy names; LEAP from [REQ-TIED_CLI_MCP_JSON_BASE_PATH](../requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml) and two-folder layout tokens as needed.
+
+**Committed record:** [../working/TIED-CLIENT-PATH-ENV-NAMES/decision-record.md](../working/TIED-CLIENT-PATH-ENV-NAMES/decision-record.md)
+
+---
+
 ## Naming bridge: environment and paths
 
 | Concept | Doc label | Storage | Env / flag | Code |
 |---------|-----------|---------|------------|------|
-| TIED root | TIED base | `tied/` | `TIED_BASE_PATH` | `getBasePath()` in `yaml-loader.ts` |
-| Client project root | client repo | parent of `tied/` | derived | `getClientProjectRoot()` in `yaml-loader.ts` |
+| TIED root | TIED base | `tied-project/` | **`TIED_CLIENT_PROJECT_PATH`** (chosen); **`TIED_BASE_PATH`** (legacy) | `getBasePath()` in `yaml-loader.ts` |
+| Client methodology bundle | tied-bundle | `tied-bundle/` | **`TIED_CLIENT_BUNDLE_PATH`** (chosen); **`TIED_METHODOLOGY_BUNDLE_PATH`** (legacy) | `resolveBundledMethodologyPath()` in `yaml-loader.ts` |
+| Client project root | client repo | parent of `tied-project/` | derived | `getClientProjectRoot()` in `yaml-loader.ts` |
 | MCP server binary | dist index | `mcp-server/dist/index.js` | `TIED_MCP_BIN` | stdio MCP entry |
 | Bundled skill (source) | bundled skill | `tools/bundled-tied-yaml-skill/` | — | copied to `.cursor/skills/tied-yaml/` |
 | TIED source root | TIED methodology repo | — | `TIED_REPO_ROOT` (baked by `tied-install.sh` into installed tied-cli) | default for `TIED_MCP_BIN` |
-| Client project root | client repo | — | derived in tied-cli (`REPO_ROOT`) | default for `TIED_BASE_PATH`; `getClientProjectRoot()` for extra rename globs |
-| IDE MCP config | mcp.json | `.cursor/mcp.json` | `env.TIED_BASE_PATH` | Cursor Settings → MCP |
+| Client project root | client repo | — | derived in tied-cli (`REPO_ROOT`) | parent of project path env; `getClientProjectRoot()` for extra rename globs |
+| IDE MCP config | mcp.json | `.cursor/mcp.json` | `env.TIED_CLIENT_PROJECT_PATH` (chosen) / `env.TIED_BASE_PATH` (legacy) | Cursor Settings → MCP |
+| Methodology store root | TIED store | store git checkout | `TIED_STORE_ROOT` | Linked install; distinct from **client** path env pair |
 | Bootstrap metrics configuration | new `.cursor/mcp.json` metrics fields | `tied-install.sh` | `TIED_MCP_COLLECT_METRICS=1`, `TIED_MCP_METRICS_CLIENT` | [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) |
 | MCP stdio diagnostics | stderr DEBUG lines | — | `TIED_MCP_DIAGNOSTICS=1` (or `true` / `yes`) | When unset, `console.log` / `console.debug` / `console.info` in the MCP server process are no-ops (stdout stays JSON-RPC only). When set, same calls format to **stderr** only · [REQ-MCP_STDIO_CONSOLE_GUARD](../requirements/REQ-MCP_STDIO_CONSOLE_GUARD.yaml) |
 | Configured project identity | env project ID | — | `TIED_MCP_PROJECT_ID` | `mcp-server/src/project-identity.ts`; shared by usage metrics + evidence-chain profile |
@@ -228,6 +251,10 @@ Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedbac
 | metrics JSONL | MCP usage metrics |
 | signature coverage | Preferred terms |
 | TIED base path | Preferred terms |
+| client bundle path env | Preferred terms |
+| client project path env | Preferred terms |
+| TIED_CLIENT_BUNDLE_PATH | Recorded sponsor choice |
+| TIED_CLIENT_PROJECT_PATH | Recorded sponsor choice |
 | TIED methodology repository | Preferred terms |
 | TIED_REPO_ROOT | Naming bridge |
 | tied-cli | Preferred terms |

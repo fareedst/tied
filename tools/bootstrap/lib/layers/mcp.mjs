@@ -14,6 +14,7 @@ import { sayOk } from "../console.mjs";
 import fs from "node:fs";
 import { resolveMethodologyBundlePath } from "./store.mjs";
 import { resolveTiedLayout } from "../layout.mjs";
+import { ENV_CLIENT_BUNDLE_PATH } from "../tied-path-env.mjs";
 
 /**
  * @param {string} projectRoot
@@ -44,7 +45,7 @@ export function installMcpLayer(projectRoot, options) {
       projectRoot,
     );
     extraEnv = {
-      TIED_METHODOLOGY_BUNDLE_PATH: jsonSafeAbsolute(bundlePath),
+      [ENV_CLIENT_BUNDLE_PATH]: jsonSafeAbsolute(bundlePath),
       TIED_STORE_ROOT: jsonSafeAbsolute(options.storeRoot),
     };
   }

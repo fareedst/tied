@@ -209,10 +209,12 @@ After the Cursor path (`.cursor/skills/`, refresh `.cursor/mcp.json` path settin
 On every **`tied-install`** / **`--refresh`** pass that runs the MCP layer, bootstrap **overwrites only** these fields on **`tied-yaml`** and **`tied-yaml-optin`** in **`.cursor/mcp.json`** and **`.mcp.json`**:
 
 - `args` → store `mcp-server/dist/index.js`
-- `env.TIED_BASE_PATH` → client `tied-project/`
-- `env.TIED_METHODOLOGY_BUNDLE_PATH` and `env.TIED_STORE_ROOT` → linked mode only (removed on full/offline install)
+- `env.TIED_CLIENT_PROJECT_PATH` → client `tied-project/` (legacy `TIED_BASE_PATH` stripped on refresh)
+- `env.TIED_CLIENT_BUNDLE_PATH` and `env.TIED_STORE_ROOT` → linked mode only (removed on full/offline install; legacy `TIED_METHODOLOGY_BUNDLE_PATH` stripped)
 
 Everything else on those entries (and all foreign `mcpServers`) is **preserved**.
+
+**Canonical JSON shape:** On every write, bootstrap sorts object keys alphabetically (`localeCompare`) across the full file—`mcpServers` names, each server entry’s properties, and nested `env` / `headers` maps—while preserving `args` array order. Reorder-only diffs may appear on the first refresh after upgrade; values are unchanged ([REQ-TIED_MCP_JSON_CANONICAL_OUTPUT](../../tied-project/requirements/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml)).
 
 **CLI parity:** **`tied-cli.sh`** (and **`tied.sh`** / **`feature-orchestrator.sh`**) read **`TIED_BASE_PATH`** from the same mcp files (**.cursor/mcp.json** first, then **`.mcp.json`**) relative to the operator’s cwd—not from the linked stub’s script directory. Keep both harness files aligned after **`tied-install`**; when both define different paths, the Cursor file wins ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
 

@@ -11,10 +11,12 @@ function shellQuote(value) {
 
 try {
   const resolved = resolveTiedCliEnvFromCwd(process.cwd(), process.env);
-  process.stdout.write(`export TIED_BASE_PATH=${shellQuote(resolved.TIED_BASE_PATH)}\n`);
-  if (resolved.TIED_METHODOLOGY_BUNDLE_PATH) {
+  process.stdout.write(
+    `export TIED_CLIENT_PROJECT_PATH=${shellQuote(resolved.TIED_CLIENT_PROJECT_PATH)}\n`,
+  );
+  if (resolved.TIED_CLIENT_BUNDLE_PATH) {
     process.stdout.write(
-      `export TIED_METHODOLOGY_BUNDLE_PATH=${shellQuote(resolved.TIED_METHODOLOGY_BUNDLE_PATH)}\n`,
+      `export TIED_CLIENT_BUNDLE_PATH=${shellQuote(resolved.TIED_CLIENT_BUNDLE_PATH)}\n`,
     );
   }
   process.stdout.write(`export TIED_CLI_PROJECT_ROOT=${shellQuote(resolved.projectRoot)}\n`);

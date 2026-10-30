@@ -7,6 +7,13 @@ import path from "node:path";
 import { jsonSafeAbsolute } from "./paths.mjs";
 import { sayOk } from "./console.mjs";
 import { resolveTiedLayout } from "./layout.mjs";
+import {
+  ENV_CLIENT_BUNDLE_PATH,
+  ENV_CLIENT_PROJECT_PATH,
+  buildCanonicalPathEnv,
+  stripLegacyClientPathEnv,
+} from "./tied-path-env.mjs";
+import { canonicalizeMcpJsonDocument } from "./mcp-json-canonical.mjs";
 
 function projectTiedBasePath(projectRoot) {
   const tiedDir = resolveTiedLayout(projectRoot).tiedDir;
@@ -58,7 +65,7 @@ export function buildTiedMcpServerEntry({
 }) {
   /** @type {Record<string, string>} */
   const env = {
-    TIED_BASE_PATH: jsonSafeAbsolute(tiedBasePath),
+    ...buildCanonicalPathEnv({ projectPath: jsonSafeAbsolute(tiedBasePath) }),
     TIED_MCP_TOOL_PROFILE: toolProfile,
     ...(extraEnv ?? {}),
   };
@@ -98,8 +105,8 @@ export function tiedMcpServersUpToDate(cfg) {
 
 /** Env keys rewritten on every MCP refresh pass (linked bundle keys omitted when not linked). */
 export const TIED_MCP_PATH_ENV_KEYS = [
-  "TIED_BASE_PATH",
-  "TIED_METHODOLOGY_BUNDLE_PATH",
+  ENV_CLIENT_PROJECT_PATH,
+  ENV_CLIENT_BUNDLE_PATH,
   "TIED_STORE_ROOT",
 ];
 
@@ -111,7 +118,7 @@ export function buildTiedMcpPathPatch({ tiedMcpIndexJs, tiedBasePath, extraEnv }
   return {
     args: [jsonSafeAbsolute(tiedMcpIndexJs)],
     env: {
-      TIED_BASE_PATH: jsonSafeAbsolute(tiedBasePath),
+      ...buildCanonicalPathEnv({ projectPath: jsonSafeAbsolute(tiedBasePath) }),
       ...(extraEnv ?? {}),
     },
   };
@@ -134,16 +141,19 @@ export function applyTiedMcpPathRefresh(existing, pathPatch) {
       ? /** @type {Record<string, string>} */ ({ ...existing.env })
       : {};
   /** @type {Record<string, string>} */
-  const env = { ...existingEnv, TIED_BASE_PATH: pathPatch.env.TIED_BASE_PATH };
+  const env = {
+    ...existingEnv,
+    [ENV_CLIENT_PROJECT_PATH]: pathPatch.env[ENV_CLIENT_PROJECT_PATH],
+  };
   for (const key of TIED_MCP_PATH_ENV_KEYS) {
-    if (key === "TIED_BASE_PATH") continue;
+    if (key === ENV_CLIENT_PROJECT_PATH) continue;
     if (pathPatch.env[key] !== undefined) {
       env[key] = pathPatch.env[key];
     } else {
       delete env[key];
     }
   }
-  merged.env = env;
+  merged.env = stripLegacyClientPathEnv(env);
   return merged;
 }
 
@@ -211,6 +221,7 @@ export function refreshTiedMcpServersJson({
     applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml"], pathPatch) ?? coreEntry;
   cfg.mcpServers["tied-yaml-optin"] =
     applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml-optin"], pathPatch) ?? optinEntry;
+  cfg = canonicalizeMcpJsonDocument(cfg);
   fs.mkdirSync(path.dirname(mcpJsonPath), { recursive: true });
   fs.writeFileSync(mcpJsonPath, `${JSON.stringify(cfg, null, 2)}\n`, "utf8");
 }
@@ -242,7 +253,7 @@ export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process
     return { initialized: false, refreshed: true };
   }
   sayOk(
-    `Initialized ${mcpJson} mcpServers.tied-yaml + tied-yaml-optin (TIED_MCP dist + project TIED_BASE_PATH).`,
+    `Initialized ${mcpJson} mcpServers.tied-yaml + tied-yaml-optin (TIED_MCP dist + ${ENV_CLIENT_PROJECT_PATH}).`,
   );
   return { initialized: true, refreshed: false };
 }

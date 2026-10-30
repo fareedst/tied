@@ -1,0 +1,10 @@
+ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
+  ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
+    decision: "Centralize pick/strip helpers in tied-path-env; bootstrap owns mcp.json migration; MCP server dual-reads process.env."
+    name: "Client path env canonical names and migration seam"
+    status: "Accepted"
+    traceability:
+      implementation:
+        - "IMPL-TIED_CLIENT_PATH_ENV_MIGRATION"
+      requirements:
+        - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"

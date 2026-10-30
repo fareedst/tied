@@ -1,0 +1,10 @@
+ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
+    decision: "Single canonicalizeMcpJsonDocument helper at bootstrap write choke point; localeCompare key sort; args arrays preserved."
+    name: "MCP JSON canonical serialization seam"
+    status: "Accepted"
+    traceability:
+      implementation:
+        - "IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT"
+      requirements:
+        - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"

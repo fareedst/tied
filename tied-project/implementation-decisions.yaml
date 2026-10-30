@@ -2331,6 +2331,15 @@ IMPL-TIED_CLIENT_FEEDBACK_CAPTURE:
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_FEEDBACK_CAPTURE.yaml"
   name: "Client feedback capture implementation"
   status: "Active"
+IMPL-TIED_CLIENT_PATH_ENV_MIGRATION:
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
+  name: "tied-path-env pick/strip and mcp-config migration"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION"
+    requirements:
+      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
 IMPL-TIED_CLIENT_REFRESH_PARITY:
   cross_references:
     architecture:
@@ -2915,6 +2924,14 @@ IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION:
       - "ARCH-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
     requirements:
       - "REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION"
+IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
+  cross_references:
+    - "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT"
+    - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+  detail_file: "implementation-decisions/IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT-pseudocode.md"
+  name: "mcp-json-canonical bootstrap writer"
+  status: "Implemented"
 IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"

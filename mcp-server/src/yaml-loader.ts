@@ -16,6 +16,7 @@ import {
   PROJECT_DIR_NAME,
   resolveTiedLayout,
 } from "./tied-layout.js";
+import { pickClientBundlePath, pickClientProjectPath } from "./tied-path-env.js";
 
 export type IndexName =
   | "requirements"
@@ -75,7 +76,7 @@ function discoverDefaultBasePath(): string {
  */
 export function getBasePath(): string {
   if (cachedBasePath !== null) return cachedBasePath;
-  const envRaw = process.env.TIED_BASE_PATH?.trim();
+  const envRaw = pickClientProjectPath(process.env);
   let resolved: string;
   if (envRaw) {
     resolved = path.isAbsolute(envRaw) ? envRaw : path.resolve(process.cwd(), envRaw);
@@ -102,7 +103,7 @@ export function getClientProjectRoot(): string {
  * instead of tied-bundle/ under TIED_BASE_PATH. Project-only writes unchanged.
  */
 export function resolveBundledMethodologyPath(): string | null {
-  const env = process.env.TIED_METHODOLOGY_BUNDLE_PATH;
+  const env = pickClientBundlePath(process.env);
   if (env === undefined || env.trim() === "") return null;
   const resolved = path.isAbsolute(env) ? env : path.resolve(process.cwd(), env);
   if (!fs.existsSync(resolved) || !fs.statSync(resolved).isDirectory()) return null;
