@@ -8,7 +8,7 @@ Reference: [docs/anonymized-mcp-architecture-handoff.md](../../../docs/anonymize
 | REQ-CTRL-002 atomic batch writes | **Wave 2** | REQ-TIED_YAML_UPDATES_ATOMIC_BATCH (+ FEAT revision-safe pattern) |
 | REQ-CTRL-003 consistency | Exists | tied_validate_consistency |
 | REQ-CTRL-004 gates | Exists | tied_checklist_gate_validate |
-| REQ-CTRL-005 evidence freshness | Partial W3 | tied_verify, quality evidence |
+| REQ-CTRL-005 evidence freshness | **Wave 3** | REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE + tied_verify manifest binding |
 | REQ-CTRL-007 checklist controller | Deferred W4 | agentstream partial |
 | REQ-CTRL-008 agent driver | Partial | REQ-TIED_BOUNDED_COMPOSITION |
 | REQ-CTRL-009 verification runner | Deferred W5 | — |

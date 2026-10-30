@@ -1,22 +1,19 @@
-feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 2 atomic yaml_updates_apply
+feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 3 verify manifest provenance
 
-REQ-CTRL-002: snapshot/rollback for yaml_updates_apply so partial batch
-writes do not leave accepted inconsistent corpus state.
+REQ-CTRL-005/011: tied_verify requires verification-evidence-manifest.v1
+covering passed_* tokens; rejects fabricated lists and optional commit mismatch.
 
-Staging map (Wave 2 scoped):
-- mcp-server/src/yaml-updates-apply.ts
-- mcp-server/src/yaml-updates-apply.test.ts
-- mcp-server/src/yaml-loader.ts
-- mcp-server/src/tools/index.ts
-- tied-project/requirements.yaml + requirements/REQ-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml
-- tied-project/architecture-decisions.yaml + ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml
-- tied-project/implementation-decisions.yaml + IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml + pseudocode sidecar
+Staging map (Wave 3):
+- mcp-server/src/verification-evidence-provenance.{ts,test.ts}
+- mcp-server/src/verify.ts, verify.test.ts, tools/index.ts, tied-project-config.ts
+- tied-project REQ/ARCH/IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE + indexes
 - tied-project/vocab/tied-yaml-mcp.md
 - tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
-- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN.md,gap-matrix,CITDP,checklist-tracker,evidence/*.md,evidence/verification-evidence-manifest.v1.json}
+- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN,gap-matrix,tracker,evidence/*.md,verification-evidence-manifest.v1.json}
+- CHANGELOG.md
 
-Excluded: unrelated fixture/source-graph/JEV benchmark drift.
+Excluded: unrelated fixture/benchmark drift.
 
-Completion signals: close_out allowed; envelope blocking_gap_count 0; adherence reconciled via gate runner.
+Completion signals: close_out allowed; envelope blocking_gap_count 0; adherence reconciled.
 
-Feedback capture: N/A (no new upstream feedback this pass).
+Feedback capture: N/A.

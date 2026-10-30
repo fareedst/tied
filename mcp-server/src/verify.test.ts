@@ -17,6 +17,46 @@ beforeEach(() => {
   clearBasePathCache();
 });
 
+function tempTiedProject(): { tied: string; root: string } {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-"));
+  const tied = path.join(root, "tied-project");
+  fs.mkdirSync(tied, { recursive: true });
+  fs.writeFileSync(
+    path.join(tied, "config.yaml"),
+    "schema: tied-project-config.v1\nyaml:\n  scalar_style: wrapped\n",
+    "utf8",
+  );
+  return { tied, root };
+}
+
+function writeVerifyManifest(tied: string, coveredTokens: string[]): string {
+  const manifestPath = path.join(tied, "verification-evidence-manifest.v1.json");
+  fs.writeFileSync(
+    manifestPath,
+    JSON.stringify({
+      schema_version: "verification-evidence-manifest.v1",
+      run_id: "verify-test",
+      commit: "testcommit",
+      environment: {},
+      command_results: [
+        {
+          id: "unit",
+          command: "npm test",
+          cwd: tied,
+          exit_code: 0,
+          result: "passed",
+        },
+      ],
+      quality_rows: [],
+      covered_tokens: coveredTokens,
+      proof_boundaries: [],
+      human_decisions: { stored_separately: true, references: [] },
+    }),
+    "utf8",
+  );
+  return manifestPath;
+}
+
 function validChecklistGate() {
   return {
     phase: "verification" as const,
@@ -59,9 +99,9 @@ describe("updateStatusFromPassedTokens dry_run", () => {
   });
 
   it("returns would_update without writing when dry_run true", async () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-"));
-    const reqPath = path.join(dir, "requirements.yaml");
-    const implPath = path.join(dir, "implementation-decisions.yaml");
+    const { tied, root } = tempTiedProject();
+    const reqPath = path.join(tied, "requirements.yaml");
+    const implPath = path.join(tied, "implementation-decisions.yaml");
     fs.writeFileSync(
       reqPath,
       `REQ-ONE:
@@ -81,8 +121,9 @@ REQ-TWO:
 `,
       "utf8"
     );
+    const manifestPath = writeVerifyManifest(tied, ["REQ-ONE", "REQ-TWO", "IMPL-ONE"]);
     try {
-      process.env.TIED_BASE_PATH = dir;
+      process.env.TIED_BASE_PATH = tied;
       clearBasePathCache();
 
       const r = await updateStatusFromPassedTokens({
@@ -90,6 +131,7 @@ REQ-TWO:
         checklist_gate: validChecklistGate(),
         passed_requirement_tokens: ["REQ-ONE", "REQ-TWO"],
         passed_impl_tokens: ["IMPL-ONE"],
+        verification_manifest_path: manifestPath,
       });
 
       assert.strictEqual(r.ok, true);
@@ -110,13 +152,13 @@ REQ-TWO:
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
-      fs.rmSync(dir, { recursive: true });
+      fs.rmSync(root, { recursive: true });
     }
   });
 
   it("dry_run with empty passed lists returns empty would_update and unchanged disk", async () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-empty-"));
-    const reqPath = path.join(dir, "requirements.yaml");
+    const { tied, root } = tempTiedProject();
+    const reqPath = path.join(tied, "requirements.yaml");
     fs.writeFileSync(
       reqPath,
       `REQ-ONE:
@@ -126,7 +168,7 @@ REQ-TWO:
       "utf8"
     );
     try {
-      process.env.TIED_BASE_PATH = dir;
+      process.env.TIED_BASE_PATH = tied;
       clearBasePathCache();
 
       const r = await updateStatusFromPassedTokens({
@@ -145,13 +187,40 @@ REQ-TWO:
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
-      fs.rmSync(dir, { recursive: true });
+      fs.rmSync(root, { recursive: true });
+    }
+  });
+
+  it("blocks promotion when verification manifest path is missing", async () => {
+    const { tied, root } = tempTiedProject();
+    fs.writeFileSync(
+      path.join(tied, "requirements.yaml"),
+      `REQ-ONE:
+  status: Planned
+  name: One
+`,
+      "utf8",
+    );
+    try {
+      process.env.TIED_BASE_PATH = tied;
+      clearBasePathCache();
+      const r = await updateStatusFromPassedTokens({
+        dry_run: true,
+        checklist_gate: validChecklistGate(),
+        passed_requirement_tokens: ["REQ-ONE"],
+      });
+      assert.equal(r.ok, false);
+      assert.ok(r.diagnostics?.includes("missing_verification_manifest"));
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(root, { recursive: true });
     }
   });
 
   it("A9 dry_run rejects invalid Go writer tracker input with no would_update", async () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-writer-invalid-"));
-    const reqPath = path.join(dir, "requirements.yaml");
+    const { tied, root } = tempTiedProject();
+    const reqPath = path.join(tied, "requirements.yaml");
     fs.writeFileSync(
       reqPath,
       `REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
@@ -160,8 +229,9 @@ REQ-TWO:
 `,
       "utf8",
     );
+    writeVerifyManifest(tied, ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"]);
     try {
-      process.env.TIED_BASE_PATH = dir;
+      process.env.TIED_BASE_PATH = tied;
       clearBasePathCache();
       const result = await updateStatusFromPassedTokens({
         dry_run: true,
@@ -184,6 +254,7 @@ REQ-TWO:
           },
         },
         passed_requirement_tokens: ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],
+        verification_manifest_path: path.join(tied, "verification-evidence-manifest.v1.json"),
       });
       assert.equal(result.ok, false);
       assert.ok(result.diagnostics?.includes("tracker_sparse"));
@@ -193,7 +264,7 @@ REQ-TWO:
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
-      fs.rmSync(dir, { recursive: true });
+      fs.rmSync(root, { recursive: true });
     }
   });
 
@@ -204,8 +275,8 @@ REQ-TWO:
       "mcp-server/packages/agentstream/testdata/checklist/gate-writer-minimal-tracker.yaml",
     );
     const tracker = yaml.load(fs.readFileSync(writerFixturePath, "utf8")) as Record<string, unknown>;
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-writer-valid-"));
-    const reqPath = path.join(dir, "requirements.yaml");
+    const { tied, root } = tempTiedProject();
+    const reqPath = path.join(tied, "requirements.yaml");
     fs.writeFileSync(
       reqPath,
       `REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
@@ -214,8 +285,9 @@ REQ-TWO:
 `,
       "utf8",
     );
+    const manifestPath = writeVerifyManifest(tied, ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"]);
     try {
-      process.env.TIED_BASE_PATH = dir;
+      process.env.TIED_BASE_PATH = tied;
       clearBasePathCache();
       const result = await updateStatusFromPassedTokens({
         dry_run: true,
@@ -225,6 +297,7 @@ REQ-TWO:
           citdp: validChecklistGate().citdp,
         },
         passed_requirement_tokens: ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],
+        verification_manifest_path: manifestPath,
       });
       assert.equal(result.ok, true);
       assert.strictEqual(result.dry_run, true);
@@ -236,15 +309,15 @@ REQ-TWO:
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
-      fs.rmSync(dir, { recursive: true });
+      fs.rmSync(root, { recursive: true });
     }
   });
 
   it("A17 persists gate receipt on dry_run with tracker_hash and citdp_hash", async () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-gate-receipt-"));
-    const reqPath = path.join(dir, "requirements.yaml");
-    const gatesDir = path.join(dir, "gates");
-    const ledgerPath = path.join(dir, "adherence", "events.jsonl");
+    const { tied, root } = tempTiedProject();
+    const reqPath = path.join(tied, "requirements.yaml");
+    const gatesDir = path.join(tied, "gates");
+    const ledgerPath = path.join(tied, "adherence", "events.jsonl");
     fs.writeFileSync(
       reqPath,
       `REQ-ONE:
@@ -254,14 +327,16 @@ REQ-TWO:
       "utf8",
     );
     const gate = validChecklistGate();
+    const manifestPath = writeVerifyManifest(tied, ["REQ-ONE"]);
     try {
-      process.env.TIED_BASE_PATH = dir;
+      process.env.TIED_BASE_PATH = tied;
       clearBasePathCache();
 
       const r = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: gate,
         passed_requirement_tokens: ["REQ-ONE"],
+        verification_manifest_path: manifestPath,
         receipt_persistence: {
           request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
           gates_dir: gatesDir,
@@ -289,15 +364,15 @@ REQ-TWO:
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
-      fs.rmSync(dir, { recursive: true });
+      fs.rmSync(root, { recursive: true });
     }
   });
 
   it("A18 status mutation records gate receipt ref on dry_run", async () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-verify-status-receipt-"));
-    const reqPath = path.join(dir, "requirements.yaml");
-    const gatesDir = path.join(dir, "gates");
-    const ledgerPath = path.join(dir, "adherence", "events.jsonl");
+    const { tied, root } = tempTiedProject();
+    const reqPath = path.join(tied, "requirements.yaml");
+    const gatesDir = path.join(tied, "gates");
+    const ledgerPath = path.join(tied, "adherence", "events.jsonl");
     fs.writeFileSync(
       reqPath,
       `REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
@@ -306,13 +381,15 @@ REQ-TWO:
 `,
       "utf8",
     );
+    const manifestPath = writeVerifyManifest(tied, ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"]);
     try {
-      process.env.TIED_BASE_PATH = dir;
+      process.env.TIED_BASE_PATH = tied;
       clearBasePathCache();
       const r = await updateStatusFromPassedTokens({
         dry_run: true,
         checklist_gate: validChecklistGate(),
         passed_requirement_tokens: ["REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"],
+        verification_manifest_path: manifestPath,
         receipt_persistence: {
           request_token: "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
           gates_dir: gatesDir,
@@ -332,7 +409,7 @@ REQ-TWO:
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
-      fs.rmSync(dir, { recursive: true });
+      fs.rmSync(root, { recursive: true });
     }
   });
 });

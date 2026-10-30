@@ -1,0 +1,13 @@
+ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
+  ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
+    decision: "After checklist gate allows verify, validate manifest provenance before any REQ/IMPL index status mutation; opt-out via tied-project/config.yaml verification.require_manifest_provenance."
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Verify manifest provenance architecture"
+    traceability:
+      implementation:
+        - "IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
+      requirements:
+        - "REQ-TIED_INTENT_CONTROL_PLANE"
+        - "REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE"

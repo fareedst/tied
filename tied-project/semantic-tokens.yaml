@@ -3748,6 +3748,22 @@ REQ-BOUNDED_WORKER_POOL:
   source_index: "requirements.yaml"
   status: "In Progress"
   type: "REQ"
+REQ-CANONICAL_COMPOSITION_TEST:
+  count: 7
+  description: "Composition evidence for shared YAML writer metadata"
+  empty: null
+  flag: false
+  message: "hello"
+  name: "Canonical composition test"
+  names:
+    - "alpha"
+    - "zeta"
+  note: "z: keep\na: order\n"
+  order:
+    - "second"
+    - "first"
+  status: "Active"
+  type: "REQ"
 REQ-CHECKLIST-PROCESS-REVIEW:
   description: "Phase 1 operator docs program"
   name: "Checklist process review"
@@ -4311,6 +4327,11 @@ REQ-MODULE_VALIDATION:
   name: "Independent Module Validation Before Integration"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-OBJECT_STRING_EQUIV:
+  description: "Equivalence test"
+  name: "Object string equiv"
+  status: "Planned"
   type: "REQ"
 REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   cross_references:

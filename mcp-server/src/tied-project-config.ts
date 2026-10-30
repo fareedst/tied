@@ -13,6 +13,7 @@ const PROJECT_CONFIG_TOP_LEVEL_KEYS = new Set([
   "schema",
   "yaml",
   "identity",
+  "verification",
   "jev",
   "dae",
   "bbce",

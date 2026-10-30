@@ -1476,6 +1476,12 @@ export const allTools = [
         consult_envelope_blocking: z.boolean().optional().default(false).describe(
           "When true with envelope_path, reject verify when envelope has severity:error gaps.",
         ),
+        verification_manifest_path: z.string().optional().describe(
+          "verification-evidence-manifest.v1.json path; required when promoting REQ/IMPL tokens and verification.require_manifest_provenance is not false.",
+        ),
+        current_commit: z.string().optional().describe(
+          "When set, manifest.commit must match for status promotion (evidence freshness).",
+        ),
         project_root: z.string().optional().describe("Project root for envelope_path resolution."),
         receipt_persistence: z.object({
           request_token: z.string(),
@@ -1506,6 +1512,8 @@ export const allTools = [
       require_checklist_gate?: boolean;
       envelope_path?: string;
       consult_envelope_blocking?: boolean;
+      verification_manifest_path?: string;
+      current_commit?: string;
       project_root?: string;
       receipt_persistence?: {
         request_token: string;
@@ -1573,6 +1581,8 @@ export const allTools = [
         require_checklist_gate: args.require_checklist_gate ?? true,
         envelope_path: args.envelope_path,
         consult_envelope_blocking: args.consult_envelope_blocking ?? false,
+        verification_manifest_path: args.verification_manifest_path,
+        current_commit: args.current_commit,
         project_root: args.project_root,
         receipt_persistence: args.receipt_persistence,
       });

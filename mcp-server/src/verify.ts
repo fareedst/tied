@@ -3,7 +3,7 @@
  * [PROC-TIED_VERIFICATION_GATED]
  */
 
-import { loadIndex, updateRecord } from "./yaml-loader.js";
+import { getBasePath, loadIndex, updateRecord } from "./yaml-loader.js";
 import { formatYamlMetadata, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
 import {
   validateChecklistGate,
@@ -16,6 +16,7 @@ import {
   persistStatusMutationReceipt,
   type GateValidationResult,
 } from "./gate-receipt.js";
+import { validateVerifyManifestProvenance } from "./verification-evidence-provenance.js";
 
 const REQ_IMPLEMENTED_STATUS = "Implemented";
 const REQ_PLANNED_STATUS = "Planned";
@@ -60,6 +61,10 @@ export interface VerifyUpdateOptions {
   /** Default false — when true with envelope_path, validate envelope with fail_on_error_gaps. */
   consult_envelope_blocking?: boolean;
   project_root?: string;
+  /** Path to verification-evidence-manifest.v1.json; required when promoting tokens and manifest provenance is enforced. */
+  verification_manifest_path?: string;
+  /** When set with verification_manifest_path, manifest.commit must match (evidence freshness). */
+  current_commit?: string;
   /** Optional durable receipt persistence for gate and status mutation (Stage J). */
   receipt_persistence?: {
     request_token: string;
@@ -201,6 +206,21 @@ export async function updateStatusFromPassedTokens(
       ok: false,
       error: "CHECKLIST_GATE_BLOCKED: process evidence did not satisfy the selected gate",
       diagnostics: gate.diagnostics,
+    };
+  }
+
+  const provenance = validateVerifyManifestProvenance({
+    tiedBasePath: getBasePath(),
+    verificationManifestPath: options.verification_manifest_path,
+    passedRequirementTokens: passed_requirement_tokens,
+    passedImplTokens: passed_impl_tokens,
+    currentCommit: options.current_commit,
+  });
+  if (!provenance.ok) {
+    return {
+      ok: false,
+      error: provenance.error,
+      diagnostics: provenance.diagnostics,
     };
   }
 

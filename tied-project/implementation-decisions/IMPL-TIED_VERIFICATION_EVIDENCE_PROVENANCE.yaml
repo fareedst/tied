@@ -1,0 +1,17 @@
+IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
+  IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
+    essence_pseudocode_path: "tied-project/implementation-decisions/IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE-pseudocode.md"
+    implementation_approach:
+      details:
+        - "MCP params: verification_manifest_path, current_commit"
+        - "Module: mcp-server/src/verification-evidence-provenance.ts"
+      summary: "Pure validator module; verify.ts calls after gate"
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Verify manifest provenance module"
+    traceability:
+      architecture:
+        - "ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
+      requirements:
+        - "REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE"

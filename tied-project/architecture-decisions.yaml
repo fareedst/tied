@@ -2809,6 +2809,11 @@ ARCH-TIED_UNIFIED_TOOLCHAIN:
   related_requirements:
     - "REQ-TIED_UNIFIED_TOOLCHAIN"
   status: "Proposed"
+ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
+  detail_file: "architecture-decisions/ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE.yaml"
+  name: "Verify manifest provenance architecture"
+  status: "Active"
+  summary: "Intent authority: tied_verify binds passed tokens to verification-evidence-manifest.v1 covered_tokens and freshness."
 ARCH-TIED_VOCABULARY_LAYERS:
   category: "Structural"
   cross_references:

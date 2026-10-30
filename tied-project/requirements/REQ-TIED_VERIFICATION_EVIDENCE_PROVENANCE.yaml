@@ -1,0 +1,27 @@
+REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
+  REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Verification evidence manifest provenance"
+    rationale:
+      benefits:
+        - "Aligns tied_verify with quality_evidence_collect_manifest"
+        - "Status derives from machine-collected manifest"
+      problems_solved:
+        - "CASE-002 fabricated pass tokens"
+        - "CASE-005 stale verification manifest"
+      why: "REQ-CTRL-005 and REQ-CTRL-011 require trusted verification provenance and evidence freshness at the MCP verify boundary."
+    satisfaction_criteria:
+      - criterion: "Optional current_commit mismatch yields evidence_stale."
+      - criterion: "Passed tokens not in manifest covered_tokens fail closed."
+      - criterion: "Promoting passed_* tokens without manifest fails when enforcement is on."
+      - criterion: "verification.require_manifest_provenance: false disables binding."
+    traceability:
+      architecture:
+        - "ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
+      implementation:
+        - "IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
+      requirements:
+        - "REQ-TIED_INTENT_CONTROL_PLANE"
+        - "REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE"

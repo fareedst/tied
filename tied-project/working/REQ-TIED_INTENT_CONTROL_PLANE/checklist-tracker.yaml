@@ -111,6 +111,7 @@ execution_evidence:
   impl_inventory:
     - IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING
     - IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH
+    - IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE
   request: REQ-TIED_INTENT_CONTROL_PLANE
   gates: {}
 feedback_loops:

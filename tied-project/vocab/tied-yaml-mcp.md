@@ -18,6 +18,8 @@
 | **write binding** | identity enforce, corpus guard | Fail-closed check before project corpus writes; Path 2 startup + `writeSerializedAtomic` hook · [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING](../implementation-decisions/IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING.yaml) |
 | **startup binding** | process bind | First resolve per `tied-project/` root compares live env/cwd identity to marker before mutations |
 | **identity mismatch** | wrong tree write | `DIAGNOSTIC: TIED_IDENTITY_WRITE_BINDING_MISMATCH` when marker ≠ resolved base or `project_id` |
+| **verify manifest provenance** | trusted pass list | `tied_verify` binds `passed_*` tokens to `verification-evidence-manifest.v1` `covered_tokens` · [REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE](../requirements/REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE.yaml) |
+| **verification manifest freshness** | stale verify evidence | Optional `current_commit` on `tied_verify` rejects manifest when `commit` disagrees (CASE-005) |
 | **identity source** | id type, id origin | Profile metadata: `configured` or `path_fallback` |
 | **signature coverage** | top-k metadata | Analyzer YAML: `bound` / `considered` / `emitted` / `omitted` / `status` for bounded aggregation. `exact_within_bound` means the complete visible candidate set fits the bound; `approximate` discloses per-file truncation or visible aggregate overflow and never claims hidden candidates were globally ranked. |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
