@@ -202,7 +202,7 @@ Exact tool names registered in `mcp-server/src/tools/index.ts`:
 
 | Tool | Purpose |
 |------|---------|
-| `yaml_updates_apply` | Apply batched YAML mutations |
+| `yaml_updates_apply` | Apply batched YAML mutations (Wave 2: snapshot/rollback on failure — **atomic batch**) |
 
 Feedback and LEAP proposal tools are documented in sibling glossaries ([`feedback-to-tied.md`](feedback-to-tied.md), [`leap-proposal-queue.md`](leap-proposal-queue.md)).
 

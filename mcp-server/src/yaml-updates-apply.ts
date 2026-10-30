@@ -1,9 +1,17 @@
 /**
  * Batch apply index/detail merges in one process (yaml_updates_apply MCP tool).
+ * [IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH] [REQ-TIED_YAML_UPDATES_ATOMIC_BATCH]
  */
 
-import { loadDetail, updateDetail } from "./detail-loader.js";
-import { getRecord, updateRecord, type IndexName } from "./yaml-loader.js";
+import fs from "node:fs";
+import path from "node:path";
+import { getDetailPath, loadDetail, updateDetail } from "./detail-loader.js";
+import {
+  getRecord,
+  updateRecord,
+  getProjectIndexFilePath,
+  type IndexName,
+} from "./yaml-loader.js";
 import { mergeRecordUpdate } from "./record-merge.js";
 import { validateConsistency, type ConsistencyReport } from "./consistency-validator.js";
 import { formatYamlMetadata, type YamlFormatMetadata } from "./yaml-canonicalizer.js";
@@ -95,6 +103,42 @@ export interface ApplyYamlUpdatesResult {
   error?: string;
   consistency?: ConsistencyReport;
   yaml_format?: YamlFormatMetadata;
+  /** True when pre-batch snapshots were restored after a failed write or consistency rejection. */
+  rolled_back?: boolean;
+}
+
+/** Resolve on-disk path for a batch step target under the project corpus. */
+export function resolveYamlUpdateStepPath(step: YamlUpdateStep): string | null {
+  if (step.kind === "detail") return getDetailPath(step.token);
+  return getProjectIndexFilePath(step.index);
+}
+
+export type BatchFileSnapshot = { path: string; bytes: Buffer | null };
+
+/** Capture unique step target paths before batch writes (null bytes = file absent). */
+export function snapshotBatchTargetFiles(steps: YamlUpdateStep[]): BatchFileSnapshot[] {
+  const seen = new Set<string>();
+  const snapshots: BatchFileSnapshot[] = [];
+  for (const step of steps) {
+    const target = resolveYamlUpdateStepPath(step);
+    if (!target || seen.has(target)) continue;
+    seen.add(target);
+    const bytes = fs.existsSync(target) ? fs.readFileSync(target) : null;
+    snapshots.push({ path: target, bytes });
+  }
+  return snapshots;
+}
+
+/** Restore corpus files to pre-batch snapshot bytes. */
+export function restoreBatchSnapshots(snapshots: BatchFileSnapshot[]): void {
+  for (const { path: filePath, bytes } of snapshots) {
+    if (bytes === null) {
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+      continue;
+    }
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, bytes);
+  }
 }
 
 function simulateStep(step: YamlUpdateStep, stepIndex: number): YamlUpdateStepResult {
@@ -144,6 +188,7 @@ function writeStep(step: YamlUpdateStep): { ok: true } | { ok: false; error: str
 /**
  * Apply ordered detail/index merges. Same merge rules as yaml_*_update.
  * dry_run: compute merged previews only; no writes.
+ * Write path: snapshot touched files; rollback on write failure or consistency rejection.
  */
 export function applyYamlUpdates(options: ApplyYamlUpdatesOptions): ApplyYamlUpdatesResult {
   const { steps, dry_run = false, run_validate_consistency = true } = options;
@@ -162,22 +207,36 @@ export function applyYamlUpdates(options: ApplyYamlUpdatesOptions): ApplyYamlUpd
       };
     }
     step_results.push(simulated);
+  }
 
-    if (!dry_run) {
-      const w = writeStep(step);
-      if (!w.ok) {
-        return {
-          ok: false,
-          dry_run: false,
-          applied_steps: i,
-          step_results,
-          error: w.error,
-        };
-      }
+  if (dry_run) {
+    return {
+      ok: true,
+      dry_run: true,
+      applied_steps: 0,
+      step_results,
+    };
+  }
+
+  const snapshots = snapshotBatchTargetFiles(steps);
+
+  for (let i = 0; i < steps.length; i++) {
+    const step = steps[i]!;
+    const w = writeStep(step);
+    if (!w.ok) {
+      restoreBatchSnapshots(snapshots);
+      return {
+        ok: false,
+        dry_run: false,
+        applied_steps: i,
+        step_results,
+        error: w.error,
+        rolled_back: true,
+      };
     }
   }
 
-  if (!dry_run && run_validate_consistency) {
+  if (run_validate_consistency) {
     const consistency = validateConsistency({});
     const out: ApplyYamlUpdatesResult = {
       ok: true,
@@ -188,10 +247,12 @@ export function applyYamlUpdates(options: ApplyYamlUpdatesOptions): ApplyYamlUpd
       yaml_format: formatYamlMetadata(),
     };
     if (!consistency.ok) {
+      restoreBatchSnapshots(snapshots);
       return {
         ...out,
         ok: false,
         error: "tied_validate_consistency reported ok: false after batch apply",
+        rolled_back: true,
       };
     }
     return out;
@@ -199,9 +260,9 @@ export function applyYamlUpdates(options: ApplyYamlUpdatesOptions): ApplyYamlUpd
 
   return {
     ok: true,
-    dry_run,
-    applied_steps: dry_run ? 0 : steps.length,
+    dry_run: false,
+    applied_steps: steps.length,
     step_results,
-    ...(dry_run ? {} : { yaml_format: formatYamlMetadata() }),
+    yaml_format: formatYamlMetadata(),
   };
 }

@@ -1,16 +1,15 @@
 CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
   change_definition:
     current_behavior: "MCP resolves project_id for metrics but does not fail closed when TIED_CLIENT_PROJECT_PATH or cwd targets the wrong tied-project tree; project corpus writes proceed without marker binding."
-    desired_behavior: "Path 2 identity write binding: persisted marker, startup fail-closed on drift, per-write guard at writeSerializedAtomic and IMPL sidecar writes; bootstrap seeds marker; opt-out via identity.write_binding false."
+    desired_behavior: "Wave 1 Path 2 identity write binding plus Wave 2 atomic yaml_updates_apply: snapshot touched corpus files and rollback on write or consistency failure (REQ-CTRL-002)."
     non_goals:
       - "Path 3 marker-only routing (ignore env)"
       - "OS sandbox blocking editor YAML edits"
-      - "Transactional yaml_updates_apply (Wave 2)"
     success_criteria:
-      - "Umbrella and Wave 1 REQ/ARCH/IMPL tokens validate"
-      - "Startup and per-write reject wrong-tree mutations"
-      - "Sidecar writes use same binding assert"
-      - "pre_implementation gate allowed at integrated depth"
+      - "Umbrella and Wave 1–2 REQ/ARCH/IMPL tokens validate"
+      - "Startup and per-write reject wrong-tree mutations (Wave 1)"
+      - "yaml_updates_apply sets rolled_back on mid-batch or consistency failure (Wave 2)"
+      - "pre_implementation and close_out gates allowed at integrated depth"
       - "mcp-server tests green; tied_validate_consistency ok"
     unchanged_behavior:
       - "Read-only methodology merge"
@@ -25,7 +24,7 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     implementation_depth_tier: "integrated"
     profile_depth: "not_measured"
     recorded_at: "2026-10-29"
-    title: "Intent control plane umbrella and Wave 1 identity write binding"
+    title: "Intent control plane — Wave 1 identity binding + Wave 2 atomic batch"
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     adversarial_inquiry:
@@ -64,7 +63,7 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
   test_strategy:
     path: "tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/PLAN.md"
   impact_analysis:
-    modules_or_boundaries: "project-identity-write-binding.ts; yaml-canonicalizer.ts; yaml-loader.ts; detail-loader.ts; tools/index.ts tied_config_get_base_path; tools/bootstrap"
+    modules_or_boundaries: "project-identity-write-binding.ts; yaml-updates-apply.ts; yaml-canonicalizer.ts; yaml-loader.ts; detail-loader.ts; tools/index.ts"
     tied_tokens_new:
       - "REQ-TIED_INTENT_CONTROL_PLANE"
       - "ARCH-TIED_INTENT_CONTROL_PLANE"
@@ -72,12 +71,16 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
       - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
       - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
       - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+      - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
+      - "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH"
+      - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
     tied_tokens_affected:
       - "ARCH-TIED_PROJECT_IDENTITY"
       - "IMPL-TIED_PROJECT_IDENTITY"
       - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
     impl_inventory:
       - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+      - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
   evidence:
     command_seq:
       - "npm test --prefix mcp-server"
@@ -90,12 +93,13 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     activation:
       phase: "close_out"
       request_token: "REQ-TIED_INTENT_CONTROL_PLANE"
-      run_id: "icp-closeout-20261030"
+      run_id: "icp-w2-closeout-20261030"
     envelope_path: "tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/request-evidence-envelope.v1.json"
     tied_validate_consistency: "required"
-    verification_gate_notes: "mcp-server npm test green; pseudocode_validate ok for IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING; integrated inquiry three phases"
+    verification_gate_notes: "Wave 2: yaml-updates-apply.test.ts green; pseudocode_validate ok for IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH; reuse Wave 1 integrated inquiry artifacts"
   leap_feedback:
-    divergences_from_analysis: "Implementation landed in prior session before pre_implementation gate replay; structural inquiry run post-GREEN for integrated envelope."
+    divergences_from_analysis: "Wave 2 build-plan landed before pre_implementation replay; rollback behavior matches REQ-FEAT_REVISION_SAFE_MUTATION pattern at batch scope."
     record_status: "final"
     tied_stack_updates_required:
       - "ARCH-TIED_PROJECT_IDENTITY LEAP for Path 2 marker binding (Wave 1)"
+      - "Wave 2 child REQ-TIED_YAML_UPDATES_ATOMIC_BATCH under umbrella program"

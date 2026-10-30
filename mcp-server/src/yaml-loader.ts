@@ -35,6 +35,11 @@ const INDEX_FILES: Record<IndexName, string> = {
   "semantic-tokens": "semantic-tokens.yaml",
 };
 
+/** Project-owned index file path for batch snapshot/rollback ([IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH]). */
+export function getProjectIndexFilePath(index: IndexName): string {
+  return path.join(getBasePath(), INDEX_FILES[index]);
+}
+
 let cachedBasePath: string | null = null;
 
 /**

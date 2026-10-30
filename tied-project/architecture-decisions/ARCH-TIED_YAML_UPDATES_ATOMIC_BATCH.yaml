@@ -1,0 +1,15 @@
+ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH:
+  ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH:
+    decision: "Batch apply uses pre-write byte snapshots of unique touched paths under getBasePath(); rollback restores snapshots on any write failure or post-batch consistency rejection."
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Atomic batch write transaction"
+    traceability:
+      architecture:
+        - "ARCH-TIED_INTENT_CONTROL_PLANE"
+      implementation:
+        - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
+      requirements:
+        - "REQ-TIED_INTENT_CONTROL_PLANE"
+        - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"

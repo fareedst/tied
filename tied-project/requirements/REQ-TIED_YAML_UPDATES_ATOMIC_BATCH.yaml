@@ -1,0 +1,31 @@
+REQ-TIED_YAML_UPDATES_ATOMIC_BATCH:
+  category: "Non-Functional"
+  description: "Multi-step yaml_updates_apply must leave no accepted inconsistent corpus state: rollback on mid-batch write failure and on post-batch consistency rejection."
+  metadata:
+    created: "2026-10-30"
+    last_updated:
+      date: "2026-10-30"
+      reason: "Wave 2 close-out tests green"
+    status: "Implemented"
+  name: "Atomic yaml_updates_apply batch"
+  priority: "P0"
+  rationale:
+    benefits:
+      - "Agents can retry batch safely"
+      - "Aligns with Wave 1 write binding"
+    problems_solved:
+      - "Consistency failure after partial batch apply"
+      - "Partial multi-file TIED updates after tool error"
+    why: "REQ-CTRL-002 intent authority requires recoverable canonical mutations at the MCP write boundary."
+  satisfaction_criteria:
+    - criterion: "dry_run performs no writes and does not require rollback."
+    - criterion: "When any write step fails, all files touched in the batch restore to pre-batch bytes."
+    - criterion: "When run_validate_consistency is true and validation fails after writes, all touched files restore to pre-batch bytes."
+  traceability:
+    architecture:
+      - "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH"
+    implementation:
+      - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
+    requirements:
+      - "REQ-TIED_INTENT_CONTROL_PLANE"
+      - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"

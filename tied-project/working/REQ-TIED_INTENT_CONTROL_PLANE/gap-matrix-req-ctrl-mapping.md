@@ -5,7 +5,7 @@ Reference: [docs/anonymized-mcp-architecture-handoff.md](../../../docs/anonymize
 | Handoff | Status | TIED / code |
 | --- | --- | --- |
 | REQ-CTRL-001 project identity binding | **Wave 1 new** | REQ/ARCH/IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING |
-| REQ-CTRL-002 atomic batch writes | Deferred W2 | REQ-FEAT_REVISION_SAFE_MUTATION pattern |
+| REQ-CTRL-002 atomic batch writes | **Wave 2** | REQ-TIED_YAML_UPDATES_ATOMIC_BATCH (+ FEAT revision-safe pattern) |
 | REQ-CTRL-003 consistency | Exists | tied_validate_consistency |
 | REQ-CTRL-004 gates | Exists | tied_checklist_gate_validate |
 | REQ-CTRL-005 evidence freshness | Partial W3 | tied_verify, quality evidence |

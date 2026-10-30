@@ -605,7 +605,7 @@ export const allTools = [
     name: "yaml_updates_apply",
     config: {
       description:
-        "Apply an ordered list of index/detail merges in one Node process using the same merge rules as yaml_index_update and yaml_detail_update. Each step is { kind: \"detail\", token, updates } or { kind: \"index\", index, token, updates } (updates are objects, not JSON strings). Use dry_run: true to get merged_preview per step without writing. On write path, stops on first error (applied_steps is count completed before failure). When dry_run is false, run_validate_consistency defaults true: after all writes, runs tied_validate_consistency and returns ok: false if that report is not ok (writes are not rolled back—re-read and fix). Prefer small step lists and impl_detail_set_essence_pseudocode for large IMPL pseudo-code only.",
+        "Apply an ordered list of index/detail merges in one Node process using the same merge rules as yaml_index_update and yaml_detail_update. Each step is { kind: \"detail\", token, updates } or { kind: \"index\", index, token, updates } (updates are objects, not JSON strings). Use dry_run: true to get merged_preview per step without writing. On write path, snapshots unique touched files before the first write; on step failure or post-batch tied_validate_consistency rejection, restores pre-batch bytes (rolled_back: true). When dry_run is false, run_validate_consistency defaults true. Prefer small step lists and impl_detail_set_essence_pseudocode for large IMPL pseudo-code only.",
       inputSchema: z.object({
         steps: z
           .array(z.record(z.string(), z.unknown()))

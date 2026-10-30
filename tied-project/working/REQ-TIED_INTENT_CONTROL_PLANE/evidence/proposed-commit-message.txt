@@ -1,0 +1,22 @@
+feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 2 atomic yaml_updates_apply
+
+REQ-CTRL-002: snapshot/rollback for yaml_updates_apply so partial batch
+writes do not leave accepted inconsistent corpus state.
+
+Staging map (Wave 2 scoped):
+- mcp-server/src/yaml-updates-apply.ts
+- mcp-server/src/yaml-updates-apply.test.ts
+- mcp-server/src/yaml-loader.ts
+- mcp-server/src/tools/index.ts
+- tied-project/requirements.yaml + requirements/REQ-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml
+- tied-project/architecture-decisions.yaml + ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml
+- tied-project/implementation-decisions.yaml + IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml + pseudocode sidecar
+- tied-project/vocab/tied-yaml-mcp.md
+- tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
+- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN.md,gap-matrix,CITDP,checklist-tracker,evidence/*.md,evidence/verification-evidence-manifest.v1.json}
+
+Excluded: unrelated fixture/source-graph/JEV benchmark drift.
+
+Completion signals: close_out allowed; envelope blocking_gap_count 0; adherence reconciled via gate runner.
+
+Feedback capture: N/A (no new upstream feedback this pass).

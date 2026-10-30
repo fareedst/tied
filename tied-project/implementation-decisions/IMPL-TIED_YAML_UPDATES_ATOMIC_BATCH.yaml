@@ -1,0 +1,23 @@
+IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH:
+  IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH:
+    implementation_approach:
+      details:
+        - "Rollback on step failure or consistency ok:false"
+        - "Snapshot unique target paths before first write"
+      summary: "Extend yaml-updates-apply.ts with snapshot/rollback; reuse writeSerializedAtomic and Wave 1 binding."
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "yaml_updates_apply rollback module"
+    traceability:
+      architecture:
+        - "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH"
+      implementation:
+        - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
+      requirements:
+        - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
+  metadata:
+    last_updated:
+      date: "2026-10-30"
+      reason: "Wave 2 rollback shipped"
+    status: "Active"

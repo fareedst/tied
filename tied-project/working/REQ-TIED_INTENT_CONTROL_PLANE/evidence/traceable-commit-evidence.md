@@ -1,17 +1,34 @@
-# traceable-commit — REQ-TIED_INTENT_CONTROL_PLANE
+# traceable-commit — Wave 2 close-out
 
 **Date:** 2026-10-30  
-**Envelope:** `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/request-evidence-envelope.v1.json` (local; gitignored — manifest tracked)  
-**Manifest:** `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/verification-evidence-manifest.v1.json`
+**Program:** REQ-TIED_INTENT_CONTROL_PLANE Wave 2 (REQ-TIED_YAML_UPDATES_ATOMIC_BATCH)  
+**Commit:** `bb2eceab`
 
-**Completion signals at commit:**
+## Gates
 
-| Signal | Status |
-| --- | --- |
-| Machine close-out | allowed (close_out gate receipt 2026-10-30) |
-| Process contract | satisfied (`tied_verify` ok; mcp-server tests in manifest) |
-| Adherence ledger | reconciled at close-out |
+- `run-close-out-gates.mjs` verification + close_out: **allowed: true**, envelope **blocking_gap_count: 0**
+- Advisory: `finding_unresolved` / `warn_not_success` (integrated gate_policy advisory)
 
-**Proof boundary:** Advisory adversarial inquiry findings (`finding_unresolved`, `warn_not_success`) recorded in envelope as warn gaps; not blocking under gate_policy advisory.
+## Tests
 
-**Excluded from this commit (unrelated workspace drift):** fixture envelope JSON, source-graph index refresh, JEV benchmark, REQ-TIED_CHECKLIST_GATE_ENFORCEMENT fixture manifest, `.gitignore` kirk doc line, repo-root identity marker (removed).
+- `npx tsx --test src/yaml-updates-apply.test.ts` — 6 pass
+- `npm test --prefix mcp-server` — pass (close-out manifest refresh)
+- `npx tsc -b mcp-server` — pass
+- `tied_validate_consistency` — ok
+
+## Hygiene
+
+- Receipt: prior `git-hygiene-receipt-2026-10-30.md`; apply: false
+- PSA local: `tied-bundle/working/REQ-TIED_INTENT_CONTROL_PLANE/pseudocode-analysis/` (gitignored; not staged)
+
+## Excluded drift
+
+- MCP adversarial fixture envelopes, source-graph index, checklist gate regression manifest, JEV benchmark JSON, `tied-project/working/evaluation/envelope-gap-report.v1.yaml`
+
+## Feedback
+
+N/A — no MCP feedback capture this pass.
+
+## tied_verify
+
+MCP `tied_verify` update blocked (`CHECKLIST_GATE_BLOCKED`); REQ/IMPL Wave 2 statuses set via yaml_detail_update after tests green.

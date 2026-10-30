@@ -43,9 +43,12 @@
 - `evidence/request-evidence-envelope.v1.json` (gitignored; rebuild via `run-close-out-gates.mjs`)
 - Untracked local: `evidence/evidence-chain-profile.v1.json`, anonymized handoff docs under `docs/`
 
-## Hygiene pass (2026-10-30)
+## Wave 2 close-out (2026-10-30)
 
-Scoped `@clear-workspace`: committed `.gitignore`, handoff, anonymized reference docs, fixture/evidence updates, MCP env-label diagnostics (`tied_config_get_base_path`), and [git-hygiene-receipt-2026-10-30.md](./git-hygiene-receipt-2026-10-30.md). Regenerable envelope/profile JSON remain gitignored locally.
+- **Deliverable:** atomic `yaml_updates_apply` ([REQ-TIED_YAML_UPDATES_ATOMIC_BATCH])
+- **Gates:** verification + close_out **allowed**; envelope blocking_gap_count **0**
+- **Commit:** `bb2eceab` — see [traceable-commit-evidence.md](./traceable-commit-evidence.md)
+- **Next:** push when sponsor asks; Wave 3+ optional
 
 ## Sponsor decisions (locked)
 

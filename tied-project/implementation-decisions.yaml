@@ -3398,6 +3398,15 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
       - "mcp-server/src/yaml-canonicalizer.test.ts"
       - "mcp-server/src/yaml-style-config.test.ts"
       - "scripts/yaml_list_sorter_test.rb"
+IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH"
+    requirements:
+      - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
+  detail_file: "implementation-decisions/IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml"
+  name: "yaml_updates_apply rollback module"
+  status: "Active"
 IMPL-VOCABULARY_ANALYSIS:
   category: "Implementation"
   detail_file: "implementation-decisions/IMPL-VOCABULARY_ANALYSIS.yaml"

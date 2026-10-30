@@ -2957,6 +2957,8 @@ REQ-TIED_INTENT_CONTROL_PLANE:
       - "ARCH-TIED_INTENT_CONTROL_PLANE"
     implementation:
       - "IMPL-TIED_INTENT_CONTROL_PLANE"
+      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+      - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
   description: "Phased program for MCP-first intent authority (handoff reference), process and execution boundaries, and Wave 1 identity write binding."
   detail_file: "requirements/REQ-TIED_INTENT_CONTROL_PLANE.yaml"
   name: "Intent control plane umbrella"
@@ -2966,12 +2968,21 @@ REQ-TIED_INTENT_CONTROL_PLANE:
       - "REQ-TIED_SETUP"
     related_to:
       - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+      - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
   satisfaction_criteria:
     - criterion: "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING delivered with tests"
       criterion_id: "wave1-child"
     - criterion: "Umbrella REQ/ARCH/IMPL exist and validate"
       criterion_id: "umbrella-tokens"
   status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_INTENT_CONTROL_PLANE"
+    implementation:
+      - "IMPL-TIED_INTENT_CONTROL_PLANE"
+      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+      - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
 REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []
@@ -3881,6 +3892,13 @@ REQ-TIED_YAML_STYLE_CONFIGURATION:
       - "mcp-server/src/tools/yaml-canonicalization-mcp.test.ts"
       - "mcp-server/src/yaml-style-config.test.ts"
       - "scripts/yaml_list_sorter_test.rb"
+REQ-TIED_YAML_UPDATES_ATOMIC_BATCH:
+  category: "Non-Functional"
+  description: "Multi-step yaml_updates_apply must leave no accepted inconsistent corpus state: rollback on mid-batch write failure and on post-batch consistency rejection."
+  detail_file: "requirements/REQ-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml"
+  name: "Atomic yaml_updates_apply batch"
+  priority: "P0"
+  status: "Planned"
 REQ-VOCABULARY_ANALYSIS:
   category: "Functional"
   detail_file: "requirements/REQ-VOCABULARY_ANALYSIS.yaml"

@@ -7,7 +7,11 @@ import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
-import { applyYamlUpdates, parseYamlUpdateSteps } from "./yaml-updates-apply.js";
+import {
+  applyYamlUpdates,
+  parseYamlUpdateSteps,
+  restoreBatchSnapshots,
+} from "./yaml-updates-apply.js";
 import { clearBasePathCache } from "./yaml-loader.js";
 
 beforeEach(() => {
@@ -146,6 +150,82 @@ describe("applyYamlUpdates", () => {
     } finally {
       delete process.env.TIED_BASE_PATH;
       clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+
+  it("rolls back first step when a later write fails [IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH]", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-batch-rb-"));
+    const reqYaml = path.join(dir, "requirements.yaml");
+    fs.writeFileSync(
+      reqYaml,
+      `REQ-ONE:
+  status: Planned
+  name: One
+  detail_file: requirements/REQ-ONE.yaml
+REQ-TWO:
+  status: Planned
+  name: Two
+  detail_file: requirements/REQ-TWO.md
+`,
+      "utf8"
+    );
+    fs.mkdirSync(path.join(dir, "requirements"), { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, "requirements", "REQ-ONE.yaml"),
+      `REQ-ONE:
+  name: One
+  metadata:
+    created: "2026-01-01"
+`,
+      "utf8"
+    );
+    fs.writeFileSync(path.join(dir, "requirements", "REQ-TWO.md"), "# Two\n", "utf8");
+    const originalDetail = fs.readFileSync(path.join(dir, "requirements", "REQ-ONE.yaml"), "utf8");
+    try {
+      process.env.TIED_BASE_PATH = dir;
+      clearBasePathCache();
+
+      const result = applyYamlUpdates({
+        dry_run: false,
+        run_validate_consistency: false,
+        steps: [
+          {
+            kind: "detail",
+            token: "REQ-ONE",
+            updates: { metadata: { last_updated: { reason: "step1" } } },
+          },
+          {
+            kind: "detail",
+            token: "REQ-TWO",
+            updates: { metadata: { last_updated: { reason: "blocked" } } },
+          },
+        ],
+      });
+
+      assert.strictEqual(result.ok, false);
+      assert.strictEqual(result.rolled_back, true);
+      const detailAfter = fs.readFileSync(path.join(dir, "requirements", "REQ-ONE.yaml"), "utf8");
+      assert.strictEqual(detailAfter, originalDetail, "detail restored after failed markdown write");
+    } finally {
+      delete process.env.TIED_BASE_PATH;
+      clearBasePathCache();
+      fs.rmSync(dir, { recursive: true });
+    }
+  });
+});
+
+describe("snapshotBatchTargetFiles", () => {
+  it("dedupes paths and restoreBatchSnapshots reverts bytes", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-snap-"));
+    const file = path.join(dir, "sample.txt");
+    fs.writeFileSync(file, "before", "utf8");
+    try {
+      const snapshots = [{ path: file, bytes: Buffer.from("before", "utf8") }];
+      fs.writeFileSync(file, "mutated", "utf8");
+      restoreBatchSnapshots(snapshots);
+      assert.strictEqual(fs.readFileSync(file, "utf8"), "before");
+    } finally {
       fs.rmSync(dir, { recursive: true });
     }
   });

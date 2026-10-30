@@ -110,6 +110,7 @@ execution_evidence:
     status: partial
   impl_inventory:
     - IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING
+    - IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH
   request: REQ-TIED_INTENT_CONTROL_PLANE
   gates: {}
 feedback_loops:
