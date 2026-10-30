@@ -21,3 +21,7 @@
 ## Not a fallback
 
 Presence of a `tied/` tree does **not** upgrade a `non-tied-*` request to full TIED tracking. The caller must explicitly choose a TIED prompt type instead.
+
+## CITDP without V+R+A+I
+
+When the change merits a **CITDP record** but not project REQ/ARCH/IMPL tokens, use **`citdp-record`** ([citdp-only-boundary.md](citdp-only-boundary.md)), not `non-tied-plan` (which forbids CITDP writes).

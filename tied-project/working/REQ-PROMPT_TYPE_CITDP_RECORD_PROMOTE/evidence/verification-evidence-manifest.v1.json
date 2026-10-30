@@ -1,0 +1,23 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-req-prompt-type-citdp-record-promote-2026-10-29",
+  "command_results": [
+    {
+      "id": "prompt-type-skills-e2e",
+      "command": ["npx", "tsx", "--test", "src/e2e/prompt-type-skills.test.ts", "src/e2e/prompt-type-subagent.test.ts"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "exit_code": 0,
+      "result": "passed",
+      "artifacts": [
+        "tied-project/working/REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE/evidence/verification-test-evidence.md"
+      ]
+    }
+  ],
+  "scope_tokens": [
+    "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE",
+    "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE",
+    "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE",
+    "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  ],
+  "proof_boundaries": ["static contract tests only"]
+}

@@ -11,6 +11,11 @@ TIED tracking applies **only** when the caller explicitly selects a TIED workflo
 - `ammend-commit`
 - `leap-ad-hoc`
 - `leap-diff-promote`
+- `citdp-promote`
+
+Partial sync (**CITDP-only**, no project V+R+A+I) applies only when the caller explicitly selects:
+
+- `citdp-record` — see [citdp-only-boundary.md](citdp-only-boundary.md)
 
 ## Rules
 

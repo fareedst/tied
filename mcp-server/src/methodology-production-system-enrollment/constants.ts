@@ -30,6 +30,8 @@ export const PROMPT_TYPE_LEAF_IDS = [
   "non-tied-debug",
   "leap-ad-hoc",
   "leap-diff-promote",
+  "citdp-record",
+  "citdp-promote",
   "other",
   "harness-trace-review",
   "harness-trace-analyzer",

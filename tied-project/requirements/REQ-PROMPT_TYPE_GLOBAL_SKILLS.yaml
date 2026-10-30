@@ -33,7 +33,8 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     - criterion: "Every installed skill is explicit-only, preserves its workflow gates, names invocation remainder and linked plan where applicable, and resolves its shared references."
     - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. add-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
     - criterion: "The bundle and bootstrap behavior are covered by deterministic static and integration tests."
-    - criterion: "The canonical TIED repository contains all 13 prompt-type leaf skills, one prompt-type router, and all direct shared references."
+    - criterion: "The canonical TIED repository contains all 15 prompt-type leaf skills, one prompt-type router, and all direct shared references enumerated in prompt-type-skills.test.ts SHARED_REFERENCES."
+    - criterion: "citdp-record and citdp-promote ship with citdp-only-boundary.md and tied-promote-citdp.md per [REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE]."
     - criterion: "The greenfield TIED leaf skill invoke name is add-feature (full Refine, CITDP Plan, Implement); the LEAP close-out leaf is close-out."
   status: "Implemented"
   traceability:

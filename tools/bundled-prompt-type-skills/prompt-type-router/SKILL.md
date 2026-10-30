@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 **Explicit-only invocation.** Never infer composition from ambiguous intent.
 
-## Taxonomy (13 leaf types)
+## Taxonomy (15 leaf types)
 
 | prompt-type | Class |
 | --- | --- |
@@ -24,6 +24,8 @@ disable-model-invocation: true
 | `non-tied-debug` | TIED-client-local |
 | `leap-ad-hoc` | Git + TIED |
 | `leap-diff-promote` | Git + TIED |
+| `citdp-record` | CITDP-only |
+| `citdp-promote` | TIED full |
 | `other` | minimal |
 
 ## Inputs
@@ -48,6 +50,8 @@ disable-model-invocation: true
 | Request | Action |
 | --- | --- |
 | `refine-plan` then `build-plan` | Improve the linked plan → execute build-plan on the result |
+| `non-tied-plan` then `citdp-record` | Implement without TIED sync → retrospective standalone CITDP |
+| `citdp-record` then `citdp-promote` | Standalone CITDP → full enforcement from named file |
 | `debug` only | Single leaf; Capture Failure before Plan |
 | "fix bug and ship" (ambiguous) | Ask: `debug` + `close-out`? or `non-tied-debug`? |
 

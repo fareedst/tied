@@ -24,6 +24,8 @@ const LEAF_SKILLS = [
   "non-tied-debug",
   "leap-ad-hoc",
   "leap-diff-promote",
+  "citdp-record",
+  "citdp-promote",
   "other",
 ] as const;
 
@@ -60,6 +62,10 @@ const SHARED_REFERENCES = [
   "methodology-surface-enrollment-advisory.md",
   "agent-shell-working-directory.md",
   "agent-shell-script-header.template.sh",
+  "citdp-only-boundary.md",
+  "tied-refine-citdp-record.md",
+  "tied-plan-citdp-record.md",
+  "tied-promote-citdp.md",
 ] as const;
 
 const repoRoot = path.resolve(process.cwd(), "..");

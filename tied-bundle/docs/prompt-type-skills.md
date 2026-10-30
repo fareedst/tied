@@ -113,7 +113,7 @@ The skills shall:
 
 ### Acceptance criteria
 
-- 13 leaf `SKILL.md` files exist with exact prompt-type names.
+- 15 leaf `SKILL.md` files exist with exact prompt-type names (includes `citdp-record` and `citdp-promote`).
 - One `prompt-type-router/SKILL.md` exists.
 - All 14 skills have `disable-model-invocation: true`.
 - Shared references resolve and each leaf remains below 500 lines.
@@ -131,7 +131,7 @@ The bundle uses a hybrid architecture:
 ```text
 tools/bundled-prompt-type-skills/
 ├── prompt-shared/       shared workflow references
-├── <prompt-type>/       13 thin leaf skills
+├── <prompt-type>/       15 thin leaf skills
 └── prompt-type-router/  explicit multi-type composer
 
 client/.cursor/skills/
@@ -290,7 +290,7 @@ The static and bootstrap validation covers the acceptance contract:
 
 The scenario matrix covers:
 
-1. Each of the 13 leaf prompt types.
+1. Each of the 15 leaf prompt types (including `citdp-record` and `citdp-promote`).
 2. Missing and unknown router types.
 3. Explicit `refine-plan` plus `build-plan` composition.
 4. Ambiguous multi-intent requests.

@@ -1,6 +1,6 @@
 REQ-PROMPT_TYPE_SUBAGENT:
   category: "Tooling"
-  description: "Project-scoped Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types in the TIED source repository, plus an add-refine-build sequence orchestrator that Task-launches add-feature, then refine-plan, then build-plan. Each leaf wrapper follows its canonical Prompt Composer skill, preserves that skill's procedure, gates, and TIED applicability boundary, avoids unsafe clipboard and automatic Git mutations, and returns structured evidence to its parent. Implementing and close-out wrappers are writable; question and other are readonly. The sequence orchestrator does not implement the feature in its own context. Client projects receive prompt-type skills via tied-install.sh; Task wrappers remain TIED-source development artifacts for static contract validation."
+  description: "Project-scoped Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 15 leaf prompt types in the TIED source repository, plus an add-refine-build sequence orchestrator that Task-launches add-feature, then refine-plan, then build-plan. Each leaf wrapper follows its canonical Prompt Composer skill, preserves that skill's procedure, gates, and TIED applicability boundary, avoids unsafe clipboard and automatic Git mutations, and returns structured evidence to its parent. Implementing and close-out wrappers are writable; question and other are readonly. The sequence orchestrator does not implement the feature in its own context. Client projects receive prompt-type skills via tied-install.sh; Task wrappers remain TIED-source development artifacts for static contract validation."
   metadata:
     created:
       author: "AI Agent"
@@ -33,12 +33,12 @@ REQ-PROMPT_TYPE_SUBAGENT:
     supersedes: []
   satisfaction_criteria:
     - criterion: ".cursor/agents/add-refine-build.md is an explicit-only writable foreground sequencer that Task-launches add-feature, then refine-plan, then build-plan, stops on a failed child gate, and does not implement the feature in its own context."
-    - criterion: "A deterministic static contract test covers all 13 leaf wrappers."
+    - criterion: "A deterministic static contract test covers all 15 leaf wrappers."
     - criterion: "Each body forbids clipboard commands, automatic Git mutation, and inferred TIED applicability."
     - criterion: "Each body preserves that prompt type's procedure, gates, TIED applicability boundary, and parent handoff contract."
     - criterion: "Each description distinguishes neighboring prompt types without proactive activation language."
     - criterion: "Each leaf body identifies tools/bundled-prompt-type-skills/<prompt-type>/SKILL.md as the workflow source and does not rely on an include."
-    - criterion: "Each of the 13 leaf wrappers at .cursor/agents/<prompt-type>.md has valid frontmatter with a matching name and is_background false."
+    - criterion: "Each of the 15 leaf wrappers at .cursor/agents/<prompt-type>.md has valid frontmatter with a matching name and is_background false."
     - criterion: "Implementing and close-out wrappers have readonly false; question and other have readonly true."
     - criterion: "Leaf and sequence agents name invocation remainder and linked plan instead of a triple-colon payload delimiter. add-feature treats remainder as the requirement. refine-plan and build-plan require a linked or in-message plan. add-refine-build passes remainder then linked plans to its children."
     - criterion: "tied-install.sh does not install .cursor/agents/*.md wrappers into client projects"

@@ -1,0 +1,42 @@
+CITDP-REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  change_definition:
+    current_behavior: "Prompt-type taxonomy offers non-tied-plan or full TIED leaves without CITDP-only or CITDP-promotion paths."
+    desired_behavior: "citdp-record and citdp-promote leaves ship with tests and docs; 15 leaf inventory."
+    non_goals:
+      - "MCP citdp_record_write schema changes"
+    success_criteria:
+      - "prompt-type e2e tests pass"
+  impact_analysis:
+    modules_or_boundaries: "bundled prompt-type skills and bootstrap manifest"
+    tied_tokens_affected:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    tied_tokens_new:
+      - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+      - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+      - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    recorded_at: "2026-10-29"
+    title: "CITDP record and promote prompt-type skills"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Agents could be mistaken for non-tied leaves and skip CITDP writes."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "citdp-record listed under NON_TIED_LEAVES in subagent tests."
+      evidence_references:
+        - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      falsification_questions:
+        - "Does citdp-record appear in NON_TIED_LEAVES test set?"
+      gate_policy: "advisory"
+      rationale: "Skills and static tests only."
+      sub_adversarial_inquiry_pass: "not_applicable"

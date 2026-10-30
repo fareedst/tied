@@ -633,6 +633,17 @@ ARCH-MODULE_VALIDATION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  cross_references:
+    - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+  description: "CITDP-only vs full TIED promotion boundaries for new prompt types."
+  metadata:
+    last_updated: "2026-10-29"
+    registered: "2026-10-29"
+  name: "CITDP record and promote boundaries"
+  status: "Active"
+  type: "ARCH"
 ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
   cross_references:
     - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
@@ -2150,6 +2161,17 @@ IMPL-MODULE_VALIDATION:
     registered: "2025-12-18T00:00:00.000Z"
   name: "Module Validation Implementation"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+  description: "Bundle files and tests for citdp-record and citdp-promote."
+  metadata:
+    last_updated: "2026-10-29"
+    registered: "2026-10-29"
+  name: "Citdp record and promote bundle files"
   status: "Active"
   type: "IMPL"
 IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
@@ -4289,6 +4311,17 @@ REQ-MODULE_VALIDATION:
   name: "Independent Module Validation Before Integration"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+  description: "citdp-record and citdp-promote prompt-type leaf skills."
+  metadata:
+    last_updated: "2026-10-29"
+    registered: "2026-10-29"
+  name: "CITDP record and promote prompt-type leaves"
+  status: "Implemented"
   type: "REQ"
 REQ-PROMPT_TYPE_GLOBAL_SKILLS:
   cross_references:

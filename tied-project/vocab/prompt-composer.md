@@ -36,6 +36,9 @@ files and the implementation pseudo-code.
 | **harness profile** | agent mode, harness mode | Bounded turn orchestration for a leaf **prompt type** (IDE agent, Task subagent, or agentstream `--harness`); tune prompts/delegation here—not checklist gate authority · [fresh-client-prompt-activation-map §0](../../tied-bundle/docs/fresh-client-prompt-activation-map.md) |
 | **TIED applicability boundary** | inferred TIED mode | Explicit **`full`** \| **`minimal`** \| **`none`** per leaf prompt type in the activation map; distinct from **harness profile** wording |
 | **TIED-client-local development** | non-TIED project | Development that reads context but intentionally avoids TIED synchronization |
+| **standalone CITDP** | CITDP spike | Change record with empty `tied_tokens_new`; created via `@citdp-record` |
+| **CITDP-only boundary** | partial TIED | Allows `citdp_record_write` and working evidence; forbids project V+R+A+I writes |
+| **CITDP promotion** | promote CITDP | `@citdp-promote` with a named `CITDP-*.yaml` enters full TIED enforcement |
 | **canonical bundle** | personal source | Git-tracked source under `tools/bundled-prompt-type-skills/` |
 | **client installation** | global sync | Copy into a client’s `.cursor/skills/` by `tied-install.sh` |
 | **source-only glossary** | client glossary | Canonical glossary retained in the TIED source repository and excluded from client bootstrap |
@@ -61,12 +64,15 @@ files and the implementation pseudo-code.
 
 ## Prompt-type taxonomy
 
-The 13 leaf prompt types are:
+The 15 leaf prompt types are:
 
 - `add-feature`, `refine-plan`, `build-plan`, `close-out`, `debug`
 - `question`, `use-skill`, `ammend-commit`
 - `non-tied-plan`, `non-tied-debug`
-- `leap-ad-hoc`, `leap-diff-promote`, `other`
+- `leap-ad-hoc`, `leap-diff-promote`
+- `citdp-record`, `citdp-promote`, `other`
+
+**CITDP-only applicability** applies to `citdp-record` (partial sync: CITDP + working evidence only; no project V+R+A+I). **`citdp-promote`** enters full TIED enforcement from a named CITDP file.
 
 The router is `prompt-type-router`. It accepts an explicit ordered list,
 deduplicates adjacent duplicates, preserves first-seen order, and stops on

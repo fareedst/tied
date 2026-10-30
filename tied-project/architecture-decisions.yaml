@@ -1582,6 +1582,18 @@ ARCH-MODULE_VALIDATION:
       - "REQ-MODULE_VALIDATION"
     tests:
       - "testModuleName_IndependentValidation_REQ_MODULE_VALIDATION"
+ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE.yaml"
+  name: "CITDP record and promote boundaries"
+  related_decisions:
+    depends_on:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    requirements:
+      - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
 ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
   cross_references:
     - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"

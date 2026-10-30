@@ -24,6 +24,8 @@ const LEAF_PROMPT_TYPES = [
   "non-tied-debug",
   "leap-ad-hoc",
   "leap-diff-promote",
+  "citdp-record",
+  "citdp-promote",
   "other",
 ] as const;
 
@@ -32,6 +34,7 @@ type LeafPromptType = (typeof LEAF_PROMPT_TYPES)[number];
 const READONLY_LEAVES = new Set<LeafPromptType>(["question", "other"]);
 const MINIMAL_LEAVES = new Set<LeafPromptType>(["question", "other"]);
 const NON_TIED_LEAVES = new Set<LeafPromptType>(["non-tied-plan", "non-tied-debug"]);
+const CITDP_ONLY_LEAVES = new Set<LeafPromptType>(["citdp-record"]);
 const CLOSE_OUT_LEAVES = new Set<LeafPromptType>([
   "close-out",
   "ammend-commit",
@@ -47,6 +50,7 @@ const REFINE_PLAN_IMPLEMENT_LEAVES = new Set<LeafPromptType>([
   "debug",
   "use-skill",
   "leap-ad-hoc",
+  "citdp-promote",
 ]);
 
 function agentPath(promptType: LeafPromptType): string {
@@ -160,6 +164,19 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.match(nonTiedPlan, /non-tied-boundary\.md/);
     assert.match(nonTiedPlan, /Do not start code until a test strategy is in place/);
 
+    const citdpRecord = readAgent("citdp-record").body;
+    assert.ok(
+      citdpRecord.indexOf("1. **Refine**") < citdpRecord.indexOf("2. **Plan**"),
+      "citdp-record must be Refine -> Plan without Implement"
+    );
+    assert.match(citdpRecord, /citdp-only-boundary\.md/);
+    assert.match(citdpRecord, /Do not start Plan until ambiguity is cleared/i);
+    assert.match(citdpRecord, /citdp_record_write/i);
+
+    const citdpPromote = readAgent("citdp-promote").body;
+    assert.match(citdpPromote, /tied_checklist_gate_validate/);
+    assert.match(citdpPromote, /pre_implementation/);
+
     const nonTiedDebug = readAgent("non-tied-debug").body;
     assert.match(nonTiedDebug, /non-tied-boundary\.md/);
     assert.match(nonTiedDebug, /Do not start code until a test strategy is in place/);
@@ -239,6 +256,13 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
       const { body } = readAgent(promptType);
       assert.match(body, /no TIED writes/i);
       assert.match(body, /Do not write TIED YAML/);
+    }
+
+    for (const promptType of CITDP_ONLY_LEAVES) {
+      const { body } = readAgent(promptType);
+      assert.match(body, /citdp-only-boundary\.md/);
+      assert.match(body, /citdp_record_write|CITDP record/i);
+      assert.doesNotMatch(body, /Do not write TIED YAML, CITDP/);
     }
 
     for (const promptType of MINIMAL_LEAVES) {

@@ -24,7 +24,7 @@ ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
       - "close-out is the authorized prompt-type leaf for stage/commit after unified close_out; other leaves keep the no-git-mutation contract unless documented otherwise."
       - "Copy tied-bundle/docs/prompt-type-skills.md when missing so clients receive the distribution contract and maintenance guidance."
       - "Install only the managed prompt-type directories and prompt-shared directory; preserve unrelated client skills."
-      - "Keep the 13 leaf SKILL.md files, prompt-type-router/SKILL.md, and the prompt-shared Markdown inventory enumerated in mcp-server/src/e2e/prompt-type-skills.test.ts SHARED_REFERENCES (includes traceable-commit-close-out.md and gitignore-close-out-hygiene.md)."
+      - "Keep the 15 leaf SKILL.md files, prompt-type-router/SKILL.md, and the prompt-shared Markdown inventory enumerated in mcp-server/src/e2e/prompt-type-skills.test.ts SHARED_REFERENCES (includes citdp-only-boundary.md and tied-promote-citdp.md)."
       - "Leaf skills take an invocation remainder; refine-plan and build-plan take a linked or in-message plan. Skills do not use a triple-colon payload delimiter or emit composer headers."
       - "Treat installed prompt skills as refreshable tooling artifacts, analogous to the bundled tied-yaml skill."
     summary: "Use tools/bundled-prompt-type-skills as the canonical source and copy its explicit managed file set into client .cursor/skills during tied-install.sh refresh."

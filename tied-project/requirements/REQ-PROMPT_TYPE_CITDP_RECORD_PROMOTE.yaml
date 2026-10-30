@@ -1,0 +1,30 @@
+REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  category: "Tooling"
+  description: "Standalone CITDP analysis without V+R+A+I (citdp-record) and promotion of a named CITDP into full TIED enforcement (citdp-promote)."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-10-29"
+  name: "CITDP record and promote prompt-type leaves"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+    related_to:
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+  satisfaction_criteria:
+    - criterion: "citdp-promote creates or updates V+R+A+I only when CITDP lists tied_tokens_new and sponsor confirms slugs."
+    - criterion: "citdp-promote SKILL.md requires a named CITDP file and follows build-plan-class gates for promotion."
+    - criterion: "citdp-record persists via citdp_record_write only; project V+R+A+I remain untouched in that leaf."
+    - criterion: "citdp-record SKILL.md installs under .cursor/skills/ and cites citdp-only-boundary.md with no Implement section."
+    - criterion: "prompt-type-skills.test.ts and prompt-type-subagent.test.ts cover 15 leaf prompt types including citdp-record and citdp-promote."
+    - criterion: "PROMPT_TYPE_LEAF_IDS and LEAF_PROMPT_TYPES include citdp-record and citdp-promote."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    implementation:
+      - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"

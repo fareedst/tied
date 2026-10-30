@@ -1,0 +1,32 @@
+IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  code_locations:
+    files:
+      - description: "CITDP-only leaf skill"
+        path: "tools/bundled-prompt-type-skills/citdp-record/SKILL.md"
+      - description: "Full TIED promotion leaf skill"
+        path: "tools/bundled-prompt-type-skills/citdp-promote/SKILL.md"
+      - description: "Partial sync boundary"
+        path: "tools/bundled-prompt-type-skills/prompt-shared/citdp-only-boundary.md"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+  implementation_approach:
+    details:
+      - "Insert citdp-record and citdp-promote in manifest PROMPT_TYPE_SKILL_DIRS before other."
+      - "Subagent tests use CITDP_ONLY_LEAVES for citdp-record boundary assertions."
+    summary: "Extend managed prompt-type inventory and e2e contract tests from 13 to 15 leaves."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-10-29"
+  name: "Citdp record and promote bundle files"
+  status: "Active"
+  testability: "integration"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    requirements:
+      - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"

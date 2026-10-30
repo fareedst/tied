@@ -23,6 +23,8 @@ Each **leaf prompt type** is a bounded **harness profile** (turn orchestration).
 | `ammend-commit` | **minimal** | Staged amend preparation only | Does not bypass verification or envelope blocking |
 | `non-tied-plan` | **minimal** | TIED-client-local dev; read context, no TIED sync writes | No project YAML/IMPL/CITDP mutations; gates not auto-run |
 | `non-tied-debug` | **minimal** | TIED-client-local debugging | Same no-record boundary as `non-tied-plan` |
+| `citdp-record` | **citdp-only** | Standalone CITDP via `citdp_record_write`; no V+R+A+I | CITDP + working evidence only; no implement leaf |
+| `citdp-promote` | **full** | Promote named CITDP to V+R+A+I + Tracker + implement | Same gate stack as `build-plan` for scoped work |
 | `question` | **none** | Answer invocation remainder | No TIED blocks; operator may still run gates manually |
 | `other` | **none** | Process remainder; no TIED workflow | No TIED blocks |
 

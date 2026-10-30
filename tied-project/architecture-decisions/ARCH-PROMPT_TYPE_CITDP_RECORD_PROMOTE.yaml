@@ -1,0 +1,20 @@
+ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
+  decision: "Add citdp-only applicability for citdp-record (partial sync: CITDP and working evidence only) and full TIED applicability for citdp-promote starting from a named CITDP file."
+  implementation_approach:
+    details:
+      - "citdp-promote composes tied-plan-citdp-build and tied-implement with the same gate expectations as build-plan for scoped promotion."
+      - "citdp-record must not mutate project requirements, architecture, implementation, or semantic-token indexes."
+    summary: "Shared citdp-only-boundary.md and tied-promote-citdp.md; router taxonomy 15 leaves."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-10-29"
+  name: "CITDP-only vs promote full TIED"
+  rationale:
+    why: "Sponsors need CITDP traceability without immediate V+R+A+I expansion and a explicit promotion path into enforcement."
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+    requirements:
+      - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"

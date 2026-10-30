@@ -15,6 +15,8 @@ export const LEAF_PROMPT_TYPES = [
   "non-tied-debug",
   "leap-ad-hoc",
   "leap-diff-promote",
+  "citdp-record",
+  "citdp-promote",
   "other",
 ] as const;
 
@@ -35,6 +37,8 @@ export const PROMPT_TYPE_HINTS: Record<LeafPromptType, string> = {
   "non-tied-debug": "Ordinary debug without TIED sync",
   "leap-ad-hoc": "Fortify staged ad-hoc work with TIED gates",
   "leap-diff-promote": "Promote diff onto TIED-complete stage",
+  "citdp-record": "Standalone CITDP analysis without V+R+A+I writes",
+  "citdp-promote": "Promote a named CITDP into full TIED enforcement",
   other: "Custom prefix; minimal workflow",
 };
 
