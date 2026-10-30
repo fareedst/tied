@@ -63,9 +63,9 @@ steps:
     rationale: "Bootstrap contract + e2e install only."
   - disposition: "completed"
     evidence_refs:
-      - kind: "command_evidence"
-        claimed_success: true
+      - claimed_success: true
         exit_code: 0
+        kind: "command_evidence"
         stdout_ref: "tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/verification-tests.stdout.txt"
     id: "verification-gate"
   - disposition: "completed"

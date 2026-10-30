@@ -1,15 +1,18 @@
-fix(bootstrap): refresh tied-yaml path fields on every install
+chore(workspace): reconcile drift after bootstrap MCP path refresh
 
-On MCP layer install/refresh, overwrite only args and path env
-(TIED_BASE_PATH, linked bundle/store roots) for tied-yaml and
-tied-yaml-optin; preserve foreign servers and operator non-path env.
+Prior close-out excluded most dirty paths as unrelated; this commit
+includes program-wave YAML (CITDP/checklist lint sync), bootstrap E2E
+alignment, comparison-doc allowlist + degree comparisons, methodology
+checklist sponsor two-lane ordering, and working PLAN copies.
 
-Tests: mcp-config.test.mjs, mcp-layer.test.mjs (13/13 pass).
+Reverted before staging: fixture envelope revision bumps, source-graph
+index regen, mistaken store-repo .gitignore client-install block.
 
-Staging map:
-- CHANGELOG.md
-- tools/bootstrap/README.md
-- tools/bootstrap/lib/mcp-config.mjs
-- tools/bootstrap/lib/layers/mcp.mjs
-- tools/bootstrap/lib/mcp-config.test.mjs
-- tools/bootstrap/lib/claude-harness.test.mjs
+See tied-project/working/BOOTSTRAP-MCP-PATH-REFRESH/evidence/workspace-drift-reconciliation.md
+
+Tests (bootstrap slice):
+- node --import tsx --test mcp-server/src/e2e/bootstrap-and-load.test.ts
+- node --import tsx --test mcp-server/src/e2e/prompt-type-skills.test.ts
+- node tools/bootstrap/lint-stale-layout.mjs .
+
+Not staged: docs/methodologies/kirk-context-makes-agents-useful.md (sponsor: track or gitignore)

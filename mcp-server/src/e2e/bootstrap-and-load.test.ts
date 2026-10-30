@@ -624,7 +624,7 @@ describe("e2e: bootstrap and load", () => {
 
   it("initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]", () => {
     // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
-    // How: Create the default TIED MCP configuration only when the client has no .cursor/mcp.json; when TIED_MCP_COLLECT_METRICS is exactly 1, add metrics fields and derive the client label from an explicit override or the project basename; preserve an existing configuration byte-for-byte.
+    // How: Merge tied-yaml + tied-yaml-optin on every pass; when TIED_MCP_COLLECT_METRICS is exactly 1, add metrics fields and derive the client label from an explicit override or the project basename; preserve foreign mcpServers and non-path env on brownfield refresh.
     const runBootstrapMetrics = (target: string, metricsValue?: string, clientValue?: string) => {
       const env: NodeJS.ProcessEnv = { ...process.env };
       delete env.TIED_MCP_COLLECT_METRICS;
@@ -641,15 +641,15 @@ describe("e2e: bootstrap and load", () => {
     };
 
     const linkedMcpEnv = (target: string, extra: Record<string, string> = {}) => ({
-      TIED_BASE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-project")),
-      TIED_METHODOLOGY_BUNDLE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-bundle")),
+      TIED_CLIENT_PROJECT_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-project")),
+      TIED_CLIENT_BUNDLE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-bundle")),
       TIED_STORE_ROOT: jsonSafeAbsoluteForTest(repoRoot),
       TIED_MCP_TOOL_PROFILE: "core",
       ...extra,
     });
     const linkedOptinEnv = (target: string, extra: Record<string, string> = {}) => ({
-      TIED_BASE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-project")),
-      TIED_METHODOLOGY_BUNDLE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-bundle")),
+      TIED_CLIENT_PROJECT_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-project")),
+      TIED_CLIENT_BUNDLE_PATH: jsonSafeAbsoluteForTest(path.join(target, "tied-bundle")),
       TIED_STORE_ROOT: jsonSafeAbsoluteForTest(repoRoot),
       TIED_MCP_TOOL_PROFILE: "optin",
       ...extra,
@@ -744,7 +744,7 @@ describe("e2e: bootstrap and load", () => {
     fs.writeFileSync(staleMethodologySidecar, "# stale inherited sidecar\n");
 
     // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-    // How: Refresh inherited methodology and vocabulary while preserving an existing client MCP configuration byte-for-byte.
+    // How: Refresh inherited methodology and vocabulary while merging TIED MCP path settings and preserving foreign mcpServers keys.
     const refreshOutput = runBootstrap(repoRoot, {
       target: tempDir,
       entrypoint: "node",
@@ -812,10 +812,22 @@ describe("e2e: bootstrap and load", () => {
       "unrelated client content\n",
       "refresh must preserve unrelated client content"
     );
-    assert.strictEqual(
-      fs.readFileSync(mcpConfigPath, "utf8"),
-      preservedMcpConfig,
-      "refresh must preserve an existing .cursor/mcp.json byte-for-byte"
+    const mcpAfterRefresh = JSON.parse(fs.readFileSync(mcpConfigPath, "utf8")) as {
+      customSetting?: string;
+      mcpServers: Record<string, { command?: string; env?: Record<string, string> }>;
+    };
+    assert.strictEqual(mcpAfterRefresh.customSetting, "preserve me");
+    assert.deepStrictEqual(mcpAfterRefresh.mcpServers["other-server"], { command: "custom-node" });
+    assert.ok(mcpAfterRefresh.mcpServers["tied-yaml"]?.env?.TIED_CLIENT_PROJECT_PATH);
+    assert.ok(mcpAfterRefresh.mcpServers["tied-yaml-optin"]?.env?.TIED_CLIENT_PROJECT_PATH);
+    assert.equal(
+      mcpAfterRefresh.mcpServers["tied-yaml"]?.env?.TIED_MCP_METRICS_CLIENT,
+      "should-not-rewrite",
+      "refresh must add tied-yaml when absent and honor install-time metrics env for new entries"
+    );
+    assert.equal(
+      mcpAfterRefresh.mcpServers["tied-yaml-optin"]?.env?.TIED_MCP_METRICS_CLIENT,
+      "should-not-rewrite-optin"
     );
     assert.ok(
       fs.existsSync(staleMethodologyFile) && fs.existsSync(staleMethodologySidecar),

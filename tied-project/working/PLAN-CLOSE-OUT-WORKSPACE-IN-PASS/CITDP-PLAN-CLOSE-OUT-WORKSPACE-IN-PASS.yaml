@@ -4,19 +4,19 @@ CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS:
     desired_behavior: "Prompt-shared and completion-signals docs state that (1) scoped REQ close-out includes gitignore hygiene, tied_git_hygiene preview, and regenerable restore in the same pass; (2) unrelated REQ WIP and orthogonal dirty trees are expected until those REQs close; (3) @clear-workspace is router/recovery only when close-out did not complete or scope is ambiguous. Optional: feedback row context.plan_token and LEAP lp-2026-10-24T16-33-13-575Z-707c63d33f60 summary cross-link this PLAN."
     non_goals:
       - "Auto git restore of unrelated WIP"
-      - "Repo-wide single commit"
-      - "Replacing close_out gate authority"
-      - "Minting new REQ without LEAP approve"
-      - "Wave 5 MCP behavior changes (tied_git_hygiene summary fields) unless sponsor expands scope"
       - "Methodology learning experiment enrollment (gate_policy unchanged; prose-only)"
+      - "Minting new REQ without LEAP approve"
+      - "Replacing close_out gate authority"
+      - "Repo-wide single commit"
+      - "Wave 5 MCP behavior changes (tied_git_hygiene summary fields) unless sponsor expands scope"
     success_criteria:
-      - "completion-signals-handoff.md adds scoped workspace-cleanliness signal distinct from three completion signals (or explicit subsection) — does not collapse machine/process/adherence"
-      - "traceable-commit-close-out.md defines post-REQ workspace clean (a)+(b) from feedback and when @clear-workspace is redundant"
       - "clear-workspace-routing.md opens with close-out owns primary hygiene; skill is recovery/router"
-      - "tied-close-out-process.md cross-links scoped vs repo-wide clean (one bullet)"
+      - "completion-signals-handoff.md adds scoped workspace-cleanliness signal distinct from three completion signals (or explicit subsection) — does not collapse machine/process/adherence"
       - "fb-mvmmq5pl-dxzvb6 context includes plan_token PLAN-CLOSE-OUT-WORKSPACE-IN-PASS after build-plan"
       - "mcp-server prompt-type-skills e2e passes after shared doc edits"
       - "pre_implementation and verification checklist gates allowed at minimal depth"
+      - "tied-close-out-process.md cross-links scoped vs repo-wide clean (one bullet)"
+      - "traceable-commit-close-out.md defines post-REQ workspace clean (a)+(b) from feedback and when @clear-workspace is redundant"
     unchanged_behavior: "@clear-workspace skill install and REQ-TIED_CLEAR_WORKSPACE_SKILL ownership; traceable-commit gate authority; existing three completion signals semantics."
   evidence:
     command_seq:
@@ -26,17 +26,17 @@ CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS:
       - "tied_feedback_export json — confirm plan_token on fb-mvmmq5pl-dxzvb6"
       - "Optional: tied_leap_proposal_update on lp-2026-10-24T16-33-13-575Z-707c63d33f60 summary append"
     proof_boundaries:
-      - "does_not_prove_wave5_tooling"
       - "documentation_and_prompt_shared_only"
       - "does_not_prove_entire_repo_clean_after_feedback_ingest"
+      - "does_not_prove_wave5_tooling"
   impact_analysis:
     impl_inventory_notes: "Edit store sources under tools/bundled-prompt-type-skills/prompt-shared/ (installed to clients via tied-install). Optional tied-bundle/docs/agent-req-implementation-checklist.yaml traceable-commit slug bullet if checklist text change is required (methodology source in store repo)."
     modules_or_boundaries: "prompt-shared markdown; tied-project/feedback.yaml context via MCP; leap-proposals/queue.json summary cross-link (reversible)."
     tied_tokens_affected:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "REQ-TIED_CLEAR_WORKSPACE_SKILL"
       - "REQ-TIED_GIT_HYGIENE"
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
     tied_tokens_new: []
   record_identity:
     change_request_id: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
@@ -47,9 +47,9 @@ CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS:
     title: "Integrate workspace hygiene into close-out narrative (feedback fb-mvmmq5pl-dxzvb6)"
   risk_analysis:
     abuse_cases:
+      - "Feedback-ingest PLAN marked complete while repo still dirty — handoff must not imply repo-wide clean"
       - "Operators interpret 'unrelated WIP OK' as skipping regenerable restore in scoped close-out"
       - "Prose deprecates @clear-workspace while recovery paths still need it after gate failure"
-      - "Feedback-ingest PLAN marked complete while repo still dirty — handoff must not imply repo-wide clean"
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
@@ -59,12 +59,12 @@ CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS:
         - "Every close-out handoff still recommends @clear-workspace unconditionally after @close-out."
       eligibility_triggers_matched: []
       evidence_references:
+        - "leap-proposals/queue.json lp-2026-10-24T16-33-13-575Z-707c63d33f60"
         - "tied-project/feedback.yaml entry fb-mvmmq5pl-dxzvb6"
         - "tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/PLAN.md"
-        - "leap-proposals/queue.json lp-2026-10-24T16-33-13-575Z-707c63d33f60"
-        - "tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md"
         - "tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md"
         - "tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md"
+        - "tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md"
       falsification_questions:
         - "Does any updated doc still equate feedback-done with entire repo clean?"
         - "Is regenerable restore still required in the same close-out pass for the active REQ?"
@@ -75,15 +75,15 @@ CITDP-PLAN-CLOSE-OUT-WORKSPACE-IN-PASS:
     matrix_notes: "Primary: prompt-type-skills.test.ts SHARED_REFERENCES still resolve. Secondary: manual read of four prompt-shared files for router vs redundant clear-workspace table. Optional RED: assert new subsection heading in completion-signals-handoff — only if sponsor wants contract lock-in."
     summary: "No IMPL pseudo-code RED; run mcp-server e2e for prompt-type skills after markdown edits; tied_validate_consistency if feedback.yaml mutated via MCP."
   tracker_matrix:
-    - slug: "translate-sponsor-intent"
-      expected: "completed"
-    - slug: "change-definition"
-      expected: "completed"
-    - slug: "impact-discovery"
-      expected: "completed"
-    - slug: "risk-assessment"
-      expected: "completed"
-    - slug: "test-strategy"
-      expected: "completed"
-    - slug: "sub-adversarial-inquiry-pass"
-      expected: "not_applicable"
+    - expected: "completed"
+      slug: "change-definition"
+    - expected: "completed"
+      slug: "impact-discovery"
+    - expected: "completed"
+      slug: "risk-assessment"
+    - expected: "completed"
+      slug: "test-strategy"
+    - expected: "completed"
+      slug: "translate-sponsor-intent"
+    - expected: "not_applicable"
+      slug: "sub-adversarial-inquiry-pass"

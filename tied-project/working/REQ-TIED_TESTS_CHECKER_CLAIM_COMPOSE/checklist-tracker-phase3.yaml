@@ -1,130 +1,125 @@
 citdp:
-  path: >-
-    tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE-phase3-draft.yaml
-  reason: Anthropic FV Phase 3 draft for refine-plan gates; persist to citdp/ after implement.
-  status: analysis
-depth_tier: minimal
+  path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE-phase3-draft.yaml"
+  reason: "Anthropic FV Phase 3 draft for refine-plan gates; persist to citdp/ after implement."
+  status: "analysis"
+depth_tier: "minimal"
 execution_evidence:
   close_out_evidence:
-    date: '2026-10-26'
+    date: "2026-10-26"
     deferred:
-      - 36-task Anthropic FV benchmark
-      - fail_on_independent_proof_errors
+      - "36-task Anthropic FV benchmark"
+      - "fail_on_independent_proof_errors"
     gates:
-      close_out: allowed
-    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+      close_out: "allowed"
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   completed:
-    - gate-pseudocode-validation
-    - unit-test-red
-    - unit-test-green
-    - verification-gate
-    - sub-close-out-evidence-sync
-    - sync-tied-stack
-    - traceable-commit
-  request: REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE
-gate_policy: advisory
-profile_depth: minimal
-purpose: Per-request Tracker for REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE Wave 3 Phase 3.
+    - "gate-pseudocode-validation"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "traceable-commit"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  request: "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Per-request Tracker for REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE Wave 3 Phase 3."
 refine_pass: 1
-refine_pass_date: '2026-10-26'
-request: REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE
-request_token: REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_complete
+refine_pass_date: "2026-10-26"
+request: "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+request_token: "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
 steps:
-  - disposition: completed
-    id: session-bootstrap
-    notes: PRELOAD quality-assurance, tests-vs-checker-backed-claims, ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE.
-  - disposition: completed
+  - disposition: "completed"
+    id: "session-bootstrap"
+    notes: "PRELOAD quality-assurance, tests-vs-checker-backed-claims, ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: /Users/fareed/.cursor/plans/anthropic_fv_phase_3_ea79b24f.plan.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN-refine-phase3.md
-    id: translate-sponsor-intent
-    notes: MCM row 16 + envelope checker_backed_claim advisory; exclude 36-task benchmark.
-  - disposition: completed
+      - kind: "file_path"
+        path: "/Users/fareed/.cursor/plans/anthropic_fv_phase_3_ea79b24f.plan.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN-refine-phase3.md"
+    id: "translate-sponsor-intent"
+    notes: "MCM row 16 + envelope checker_backed_claim advisory; exclude 36-task benchmark."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: >-
-          tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE-phase3-draft.yaml
-    id: change-definition
-    notes: LEAP REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE + MCM SC-MCM-DOC 16; new ARCH/IMPL checker envelope tokens.
-  - disposition: completed
-    id: impact-discovery
-    notes: Blast radius in PLAN-refine-phase3.md Plan section.
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE-phase3-draft.yaml"
+    id: "change-definition"
+    notes: "LEAP REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE + MCM SC-MCM-DOC 16; new ARCH/IMPL checker envelope tokens."
+  - disposition: "completed"
+    id: "impact-discovery"
+    notes: "Blast radius in PLAN-refine-phase3.md Plan section."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: >-
-          tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE-phase3-draft.yaml
-    id: risk-assessment
-    notes: Envelope over-claim vs tied_verify; Rocq in gates declined.
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE-phase3-draft.yaml"
+    id: "risk-assessment"
+    notes: "Envelope over-claim vs tied_verify; Rocq in gates declined."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/test-strategy-phase3.md
-    id: test-strategy
-  - disposition: not_applicable
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/test-strategy-phase3.md"
+    id: "test-strategy"
+  - disposition: "not_applicable"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN-refine-phase3.md
-    id: sub-adversarial-inquiry-pass
-    policy: minimal-depth-no-inquiry
-    rationale: Advisory envelope validate + doc matrix row; CITDP counterexamples only.
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN-refine-phase3.md"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Advisory envelope validate + doc matrix row; CITDP counterexamples only."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/implementation-decisions/IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF-pseudocode.md
-    id: gate-pseudocode-validation
-    notes: pseudocode_validate IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF ok (2026-10-26).
-  - disposition: completed
-    id: unit-test-red
-    notes: 'RED: matrix row 16, envelope advisory, doc Phase 3 markers.'
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF-pseudocode.md"
+    id: "gate-pseudocode-validation"
+    notes: "pseudocode_validate IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF ok (2026-10-26)."
+  - disposition: "completed"
+    id: "unit-test-red"
+    notes: "RED: matrix row 16, envelope advisory, doc Phase 3 markers."
+  - disposition: "completed"
     evidence_refs:
-      - kind: command
-        path: >-
-          node --test tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs
-          tools/bootstrap/lib/methodology-composition-matrix-anthropic-fv-row.test.mjs
-    id: unit-test-green
-  - disposition: not_applicable
-    id: composition-integration
-    rationale: Doc + advisory validate only; no new MCP tool registration.
-  - disposition: not_applicable
-    id: end-to-end-ui
-  - disposition: completed
+      - kind: "command"
+        path: "node --test tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs tools/bootstrap/lib/methodology-composition-matrix-anthropic-fv-row.test.mjs"
+    id: "unit-test-green"
+  - disposition: "not_applicable"
+    id: "composition-integration"
+    rationale: "Doc + advisory validate only; no new MCP tool registration."
+  - disposition: "not_applicable"
+    id: "end-to-end-ui"
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/verification-evidence-manifest.v1.json
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/verification-gate-evidence.md
-    id: verification-gate
-  - disposition: completed
-    id: sync-tied-stack
-    notes: tied_validate_consistency ok at close-out.
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/verification-evidence-manifest.v1.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/verification-gate-evidence.md"
+    id: "verification-gate"
+  - disposition: "completed"
+    id: "sync-tied-stack"
+    notes: "tied_validate_consistency ok at close-out."
+  - disposition: "completed"
     evidence_refs:
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/close-out-gates-2026-10-26.json
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/sub-close-out-evidence-sync-evidence.md
-    id: sub-close-out-evidence-sync
-  - disposition: completed
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/close-out-gates-2026-10-26.json"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/sub-close-out-evidence-sync-evidence.md"
+    id: "sub-close-out-evidence-sync"
+  - disposition: "completed"
     evidence_refs:
-      - kind: command
-        path: 'git commit d99b609a — feat(checker-claim): Anthropic FV Wave 3 Phases 2–3 compose; git push origin/main'
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/proposed-commit-message.txt
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/traceable-commit-evidence.md
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/traceable-commit-mcp-receipt.json
-      - kind: file_path
-        path: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/git-hygiene-receipt-2026-10-26.md
-    id: traceable-commit
-    notes: Scoped commit d99b609a pushed; MCP receipt documents tied_git_hygiene + YAML MCP writes.
+      - kind: "command"
+        path: "git commit d99b609a — feat(checker-claim): Anthropic FV Wave 3 Phases 2–3 compose; git push origin/main"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/git-hygiene-receipt-2026-10-26.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/proposed-commit-message.txt"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/traceable-commit-evidence.md"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/traceable-commit-mcp-receipt.json"
+    id: "traceable-commit"
+    notes: "Scoped commit d99b609a pushed; MCP receipt documents tied_git_hygiene + YAML MCP writes."
     tracking:
-      status: completed
       evidence_refs:
-        - tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/traceable-commit-evidence.md
+        - "tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/traceable-commit-evidence.md"
+      status: "completed"

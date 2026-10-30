@@ -1,8 +1,8 @@
 citdp:
-  path: tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/CITDP-REQ-TIED_CLIENT_PATH_ENV_MIGRATION.yaml
-copy_hygiene: Per-request Tracker for REQ-TIED_CLIENT_PATH_ENV_MIGRATION; refine-plan pass 1.
-depth_tier: minimal
-description: Client path env rename + tied-install refresh migration at minimal advisory depth.
+  path: "tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/CITDP-REQ-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
+copy_hygiene: "Per-request Tracker for REQ-TIED_CLIENT_PATH_ENV_MIGRATION; refine-plan pass 1."
+depth_tier: "minimal"
+description: "Client path env rename + tied-install refresh migration at minimal advisory depth."
 execution_evidence:
   close_out_evidence:
     date: "2026-10-29"
@@ -10,76 +10,76 @@ execution_evidence:
     gates:
       close_out:
         allowed: true
-        run_id: close-out-tied-client-path-env-20261029-r2
-    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+        run_id: "close-out-tied-client-path-env-20261029-r2"
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - sub-adversarial-inquiry-pass
-    - author-requirement
-    - author-architecture
-    - resolve-pseudocode
-    - gate-pseudocode-validation
-    - unit-test-red
-    - unit-test-green
-    - verification-gate
-  envelope_path: tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/evidence/request-evidence-envelope.v1.json
-  request: REQ-TIED_CLIENT_PATH_ENV_MIGRATION
-gate_policy: advisory
-profile_depth: minimal
-purpose: Tracker for REQ-TIED_CLIENT_PATH_ENV_MIGRATION through close_out.
-request: REQ-TIED_CLIENT_PATH_ENV_MIGRATION
-request_token: REQ-TIED_CLIENT_PATH_ENV_MIGRATION
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_complete
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Tracker for REQ-TIED_CLIENT_PATH_ENV_MIGRATION through close_out."
+request: "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+request_token: "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
 steps:
-  - disposition: completed
-    id: session-bootstrap
-    notes: PRELOAD tied-yaml-mcp.md; decision-record 2026-10-29.
-  - disposition: completed
-    id: translate-sponsor-intent
-    notes: Auto-migrate mcp.json keys on tied-install --refresh; canonical names on new install.
-  - disposition: completed
-    id: change-definition
-    notes: CITDP change_definition draft in working folder.
-  - disposition: completed
-    id: impact-discovery
-    notes: Bootstrap, CLI, MCP server, agentstream preflight boundaries listed in CITDP.
-  - disposition: completed
-    id: risk-assessment
-    notes: Costly choice refresh strip legacy keys; mitigation same-release dual-read.
-  - disposition: completed
-    id: test-strategy
-    notes: RED-first table in CITDP test_strategy; tied-path-env unit tests first.
-  - disposition: not_applicable
+  - disposition: "completed"
+    id: "session-bootstrap"
+    notes: "PRELOAD tied-yaml-mcp.md; decision-record 2026-10-29."
+  - disposition: "completed"
+    id: "translate-sponsor-intent"
+    notes: "Auto-migrate mcp.json keys on tied-install --refresh; canonical names on new install."
+  - disposition: "completed"
+    id: "change-definition"
+    notes: "CITDP change_definition draft in working folder."
+  - disposition: "completed"
+    id: "impact-discovery"
+    notes: "Bootstrap, CLI, MCP server, agentstream preflight boundaries listed in CITDP."
+  - disposition: "completed"
+    id: "risk-assessment"
+    notes: "Costly choice refresh strip legacy keys; mitigation same-release dual-read."
+  - disposition: "completed"
+    id: "test-strategy"
+    notes: "RED-first table in CITDP test_strategy; tied-path-env unit tests first."
+  - disposition: "not_applicable"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/evidence/not-applicable-receipt.v1.json
-      - tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/evidence/sub-adversarial-inquiry-pass-na.md
-    id: sub-adversarial-inquiry-pass
-    policy: minimal-depth-no-inquiry
-    rationale: Bootstrap MCP env key migration at minimal depth; CITDP sub_adversarial_inquiry_pass not_applicable.
-  - disposition: completed
-    id: author-requirement
-    notes: REQ-TIED_CLIENT_PATH_ENV_MIGRATION index + detail via MCP.
-  - disposition: completed
-    id: author-architecture
-    notes: ARCH-TIED_CLIENT_PATH_ENV_MIGRATION index + detail.
-  - disposition: completed
-    id: resolve-pseudocode
-    notes: IMPL-TIED_CLIENT_PATH_ENV_MIGRATION sidecar + index.
-  - disposition: completed
-    id: gate-pseudocode-validation
-    notes: pseudocode_validate gate_mode ok (sidecar synced via MCP).
-  - disposition: completed
-    id: unit-test-red
-    notes: tied-path-env + mcp-config tests added before green.
-  - disposition: completed
-    id: unit-test-green
-    notes: 30 bootstrap + 14 yaml-loader + 11 agentstream tests green 2026-10-29.
-  - disposition: completed
-    id: verification-gate
-    notes: close_out merged_decision.allowed true; envelope blocking_gap_count 0.
+      - "tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/evidence/not-applicable-receipt.v1.json"
+      - "tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/evidence/sub-adversarial-inquiry-pass-na.md"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Bootstrap MCP env key migration at minimal depth; CITDP sub_adversarial_inquiry_pass not_applicable."
+  - disposition: "completed"
+    id: "author-requirement"
+    notes: "REQ-TIED_CLIENT_PATH_ENV_MIGRATION index + detail via MCP."
+  - disposition: "completed"
+    id: "author-architecture"
+    notes: "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION index + detail."
+  - disposition: "completed"
+    id: "resolve-pseudocode"
+    notes: "IMPL-TIED_CLIENT_PATH_ENV_MIGRATION sidecar + index."
+  - disposition: "completed"
+    id: "gate-pseudocode-validation"
+    notes: "pseudocode_validate gate_mode ok (sidecar synced via MCP)."
+  - disposition: "completed"
+    id: "unit-test-red"
+    notes: "tied-path-env + mcp-config tests added before green."
+  - disposition: "completed"
+    id: "unit-test-green"
+    notes: "30 bootstrap + 14 yaml-loader + 11 agentstream tests green 2026-10-29."
+  - disposition: "completed"
+    id: "verification-gate"
+    notes: "close_out merged_decision.allowed true; envelope blocking_gap_count 0."

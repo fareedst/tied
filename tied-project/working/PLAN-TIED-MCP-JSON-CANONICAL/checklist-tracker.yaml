@@ -1,76 +1,77 @@
 citdp:
-  path: tied-project/working/PLAN-TIED-MCP-JSON-CANONICAL/CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml
-copy_hygiene: Tracker for REQ-TIED_MCP_JSON_CANONICAL_OUTPUT; build-plan 2026-10-29.
-depth_tier: minimal
-description: Canonical alphabetical mcp.json output at minimal advisory depth.
+  path: "tied-project/working/PLAN-TIED-MCP-JSON-CANONICAL/CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+copy_hygiene: "Tracker for REQ-TIED_MCP_JSON_CANONICAL_OUTPUT; build-plan 2026-10-29."
+depth_tier: "minimal"
+description: "Canonical alphabetical mcp.json output at minimal advisory depth."
 execution_evidence:
   close_out_evidence:
     date: null
-    deferred: ["close_out"]
+    deferred:
+      - "close_out"
     gates: {}
-    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - sub-adversarial-inquiry-pass
-    - author-requirement
-    - author-architecture
-    - resolve-pseudocode
-    - gate-pseudocode-validation
-    - unit-test-red
-    - unit-test-green
-  envelope_path: tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/request-evidence-envelope.v1.json
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+  envelope_path: "tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/request-evidence-envelope.v1.json"
   gates:
     pre_implementation:
       allowed: true
-      run_id: refine-plan-mcp-json-canonical-20261029
+      run_id: "refine-plan-mcp-json-canonical-20261029"
     verification:
       allowed: true
-      run_id: build-plan-mcp-json-canonical-verify-20261029
-  request: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
-gate_policy: advisory
-profile_depth: minimal
-purpose: Tracker through build-plan implementation; close_out deferred.
-request: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
-request_token: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: build_plan_complete
+      run_id: "build-plan-mcp-json-canonical-verify-20261029"
+  request: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Tracker through build-plan implementation; close_out deferred."
+request: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+request_token: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "build_plan_complete"
 steps:
-  - disposition: completed
-    id: session-bootstrap
-  - disposition: completed
-    id: translate-sponsor-intent
-  - disposition: completed
-    id: change-definition
-  - disposition: completed
-    id: impact-discovery
-  - disposition: completed
-    id: risk-assessment
-  - disposition: completed
-    id: test-strategy
-  - disposition: not_applicable
+  - disposition: "completed"
+    id: "session-bootstrap"
+  - disposition: "completed"
+    id: "translate-sponsor-intent"
+  - disposition: "completed"
+    id: "change-definition"
+  - disposition: "completed"
+    id: "impact-discovery"
+  - disposition: "completed"
+    id: "risk-assessment"
+  - disposition: "completed"
+    id: "test-strategy"
+  - disposition: "not_applicable"
     evidence_refs:
-      - tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/not-applicable-receipt.v1.json
-    id: sub-adversarial-inquiry-pass
-  - disposition: completed
-    id: author-requirement
-    notes: REQ via tied_token_create_with_detail
-  - disposition: completed
-    id: author-architecture
-  - disposition: completed
-    id: resolve-pseudocode
-  - disposition: completed
-    id: gate-pseudocode-validation
-    notes: pseudocode_validate gate_mode ok
-  - disposition: completed
-    id: unit-test-red
-  - disposition: completed
-    id: unit-test-green
-    notes: mcp-json-canonical + mcp-config tests green
-  - disposition: completed
-    id: verification-gate
-    notes: verification gate allowed; tied_verify blocked on partial citdp in MCP call (status already Implemented via token create)
+      - "tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/not-applicable-receipt.v1.json"
+    id: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
+    id: "author-requirement"
+    notes: "REQ via tied_token_create_with_detail"
+  - disposition: "completed"
+    id: "author-architecture"
+  - disposition: "completed"
+    id: "resolve-pseudocode"
+  - disposition: "completed"
+    id: "gate-pseudocode-validation"
+    notes: "pseudocode_validate gate_mode ok"
+  - disposition: "completed"
+    id: "unit-test-red"
+  - disposition: "completed"
+    id: "unit-test-green"
+    notes: "mcp-json-canonical + mcp-config tests green"
+  - disposition: "completed"
+    id: "verification-gate"
+    notes: "verification gate allowed; tied_verify blocked on partial citdp in MCP call (status already Implemented via token create)"

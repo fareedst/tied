@@ -30,14 +30,6 @@ CITDP-REQ-TIED_SETUP-RESPONSE-STAMP:
       - "prompt-type-subagent.test.ts asserts stamp pattern"
       - "REQ-TIED_SETUP validation_criteria (bundle detail, project detail, and requirements.yaml index mirror) describe TIEDv semver stamp not the legacy phrase"
       - "VERSION and canonical AGENTS TIED Methodology Version are 4.0.0"
-  evidence:
-    command_seq:
-      - "npm test --prefix mcp-server -- src/tied-methodology-version.test.ts src/e2e/prompt-type-subagent.test.ts src/request-evidence-envelope/request-evidence-envelope.test.ts src/fidelity-research/evidence-chain-profile.test.ts src/working-request-token.test.ts"
-      - "node scripts/conversation-adherence-score.test.mjs"
-      - "node .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency"
-    proof_boundaries:
-      - "response_stamp_is_transcript_and_loader_contract_not_live_ide_hook"
-      - "integrated_close_out_uses_inquiry_waiver_at_minimal_build_depth"
   completion_criteria:
     close_out_sequence:
       - "CALL sub-close-out-evidence-sync or @close-out"
@@ -48,6 +40,14 @@ CITDP-REQ-TIED_SETUP-RESPONSE-STAMP:
     persist_policy: "Canonical record at tied-project/citdp/CITDP-REQ-TIED_SETUP-RESPONSE-STAMP.yaml; working copy kept in sync until record_status closed"
     verification: "mcp-server npm test; node scripts/conversation-adherence-score.test.mjs; tied_validate_consistency after REQ/YAML LEAP; manual fresh agent turn shows TIEDv4.0.0:; integrated close-out completion signals per completion-signals-handoff.md"
     w7_legacy_phrase_policy: "warn_only"
+  evidence:
+    command_seq:
+      - "npm test --prefix mcp-server -- src/tied-methodology-version.test.ts src/e2e/prompt-type-subagent.test.ts src/request-evidence-envelope/request-evidence-envelope.test.ts src/fidelity-research/evidence-chain-profile.test.ts src/working-request-token.test.ts"
+      - "node scripts/conversation-adherence-score.test.mjs"
+      - "node .cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency"
+    proof_boundaries:
+      - "integrated_close_out_uses_inquiry_waiver_at_minimal_build_depth"
+      - "response_stamp_is_transcript_and_loader_contract_not_live_ide_hook"
   impact_analysis:
     modules_or_boundaries: "Methodology docs and loaders (AGENTS, ai-principles, checklists, .cursor/agents); inherited REQ-TIED_SETUP YAML; mcp-server envelope + fidelity defaults; scripts W7 adherence; bootstrap version fallbacks."
     tied_tokens_affected:

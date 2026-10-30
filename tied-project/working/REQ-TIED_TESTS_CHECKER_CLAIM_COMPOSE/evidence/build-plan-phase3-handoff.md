@@ -30,12 +30,11 @@ tied_validate_consistency  # ok
 
 | Signal | Status |
 | --- | --- |
-| **Machine close-out** | **Not run / deferred** — no `@close-out` envelope sync this pass |
-| **Process contract** | **Pass** — RED→GREEN tests, `mcp-server` build, pseudocode_validate, tied_validate_consistency |
-| **Adherence ledger** | **not_run** |
+| **Machine close-out** | **pass** — `@close-out` 2026-10-26 |
+| **Process contract** | **pass** |
+| **Adherence ledger** | **synced** |
 
 ## Next
 
-- Scoped **traceable-commit** (Phase 2 + Phase 3 delta per PLAN scoped paths).
-- Optional **`@close-out`** when sponsor wants machine envelope.
 - **Defer:** 36-task benchmark; `fail_on_independent_proof_errors`.
+- Clear-workspace receipt: [clear-workspace-receipt.md](../../CLEAR-WORKSPACE-2026-10-26/clear-workspace-receipt.md).

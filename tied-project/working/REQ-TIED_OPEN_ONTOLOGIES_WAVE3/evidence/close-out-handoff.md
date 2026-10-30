@@ -9,12 +9,13 @@
 - **Independent proofs** metadata on request-evidence envelope (backward compatible v1)
 - Comparison doc Wave 3 LEAP (committed with feature)
 
-## Prior commits
+## Commits
 
 | SHA | Summary |
 | --- | --- |
 | `7f493e8` | feat(mcp): plumb impact-preview.v2 with change-impact profile |
 | `ddb02f76` | chore(tied): refresh OOW3 close-out envelope on HEAD |
+| `3bf195e9` | chore(tied): OOW3 close-out recovery evidence after hygiene delete |
 
 ## Completion signals (this run)
 

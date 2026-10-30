@@ -1,16 +1,16 @@
 CITDP-REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
+  depth_tier: "minimal"
   desired_behavior: "Wave 3 Phase 3: methodology-composition-matrix §2 row 16; guide Envelope compose; advisory validateRequestEvidenceEnvelope gaps for independent_proofs proof_kind; LEAP ARCH/IMPL-TIED_CHECKER_BACKED_ENVELOPE_PROOF; comparison Phase 3 matrix+envelope Done; 36-task benchmark Defer. Phases 1–2 guide and vocab retained."
-  depth_tier: minimal
-  gate_policy: advisory
+  gate_policy: "advisory"
   test_strategy:
     evidence:
       command_seq:
         - command_or_test: "tests-checker-claim-compose-doc.test.mjs"
-          working_directory: "tools/bootstrap/lib"
           notes: "node --test tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs"
-        - command_or_test: "methodology-composition-matrix-anthropic-fv-row.test.mjs"
           working_directory: "tools/bootstrap/lib"
+        - command_or_test: "methodology-composition-matrix-anthropic-fv-row.test.mjs"
           notes: "node --test tools/bootstrap/lib/methodology-composition-matrix-anthropic-fv-row.test.mjs"
+          working_directory: "tools/bootstrap/lib"
         - command_or_test: "checker-backed-envelope-proof.test.ts"
-          working_directory: "mcp-server"
           notes: "npx tsx --test src/request-evidence-envelope/checker-backed-envelope-proof.test.ts"
+          working_directory: "mcp-server"

@@ -18,7 +18,7 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 
 **Profiles:** `linked` (stubs + MCP bundle env; factory default) vs **`full`** (offline materialized `tied-bundle/`). Refresh inherited methodology with **`tied-install --refresh`**.
 
-**Batch targets:** Pass **`--targets PATH`** where `PATH` is a YAML list of client directories (or `-` for stdin). Use with **`--refresh`**, **`--doctor`**, **`--migrate-layout`**, or **`--migrate-ordered-list-keys`** to run sequentially across many clients. Filters: **`--targets-only-installed`**, **`--targets-plan`**, **`--targets-continue-on-error`**. Same list via env **`TIED_INSTALL_TARGETS`** when **`--targets`** is omitted. Example fixture: `tools/bootstrap/fixtures/install-targets/sample.v1.yaml`.
+**Batch targets:** Pass **`--targets PATH`** where `PATH` is a YAML list of client directories (or `-` for stdin). Use with **`--refresh`**, **`--doctor`**, or **`--migrate-ordered-list-keys`** to run sequentially across many clients (layout migration flags: **`tied-install --help`** only). Filters: **`--targets-only-installed`**, **`--targets-plan`**, **`--targets-continue-on-error`**. Same list via env **`TIED_INSTALL_TARGETS`** when **`--targets`** is omitted. Example fixture: `tools/bootstrap/fixtures/install-targets/sample.v1.yaml`.
 
 **Operator journey (macOS quick start, certifiable workflows, full install):** root [README.md](../../README.md). **Primary implementation repositories** (product repo + `tied-project/` in one tree, separate TIED store): see [README § Primary implementation repository](../../README.md#primary-implementation-repository).
 

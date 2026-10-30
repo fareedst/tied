@@ -4,15 +4,15 @@ CITDP-PLAN-RECORD-GF-TRIAL-SKILL:
     desired_behavior: "Store-only skill `record-gf-trial` (canonical under tools/bundled-record-gf-trial-skill/) installed via store self-install stub; procedure codifies client inspection, six-dimension grading, trial-readout publish, catalog links, and optional Kaizen feedback ingest into store tied-project/feedback.yaml."
     non_goals:
       - "Add record-gf-trial to BUNDLED_STANDALONE_CLIENT_SKILLS (disposable clients)"
-      - "Mint new store [REQ-*] tokens for v1"
-      - "MCP or feedback schema changes"
       - "Auto git commit or auto tied_feedback_promote"
       - "Cohort leaderboard or methodology effectiveness claims"
+      - "MCP or feedback schema changes"
+      - "Mint new store [REQ-*] tokens for v1"
     success_criteria:
+      - "Greenfield catalog trial protocol documents @record-gf-trial for facilitators"
       - "manifest.json lists STORE_FACILITATOR_SKILLS with record-gf-trial; store-facilitator-skills.mjs + node:test pass"
       - "Self-install (projectRoot === storeRoot) writes linked stub under .cursor/skills/record-gf-trial/"
       - "SKILL.md references GF readout §2.4 contract, workspace gate, idempotent readout detection"
-      - "Greenfield catalog trial protocol documents @record-gf-trial for facilitators"
     unchanged_behavior: "BUNDLED_STANDALONE_CLIENT_SKILLS inventory and client bootstrap skill count unchanged."
   evidence:
     command_seq:
@@ -26,52 +26,52 @@ CITDP-PLAN-RECORD-GF-TRIAL-SKILL:
     impl_inventory_notes: "New bundled skill tree; bootstrap lib + manifest; docs/demos catalog lines; vocab RECORD in project-operations-mcp.md; LEAP extend IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS pseudo-code."
     modules_or_boundaries: "tools/bundled-record-gf-trial-skill/*; tools/bootstrap/lib/store-facilitator-skills.mjs; tools/bootstrap/lib/layers/skills-linked.mjs; tools/bootstrap/manifest.json; docs/demos/*"
     tied_tokens_affected:
-      - REQ-TIED_CLIENT_BOOTSTRAP_SKILLS
-      - IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS
+      - "IMPL-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
     tied_tokens_new: []
   record_identity:
-    change_request_id: PLAN-RECORD-GF-TRIAL-SKILL
-    depth_tier: minimal
-    gate_policy: advisory
-    profile_depth: minimal
+    change_request_id: "PLAN-RECORD-GF-TRIAL-SKILL"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
     recorded_at: "2026-10-24"
     title: "Store-only record-gf-trial facilitator skill"
   risk_analysis:
     abuse_cases:
-      - "Wrong TIED_BASE_PATH during skill run mutates client feedback.yaml instead of store"
-      - "Republish duplicate catalog rows without sponsor --force"
       - "Collapsed maturity score in skill-generated readout prose"
+      - "Republish duplicate catalog rows without sponsor --force"
+      - "Wrong TIED_BASE_PATH during skill run mutates client feedback.yaml instead of store"
     adversarial_inquiry:
-      assurance_profile: baseline-functional
+      assurance_profile: "baseline-functional"
       counterexamples:
         - "Skill installs on disposable client and suggests grading from client workspace."
-      depth_tier: minimal
+      depth_tier: "minimal"
       disconfirming_observations:
         - "store-facilitator install runs when projectRoot !== storeRoot."
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/FACILITATOR-GF-04-1792857852/PLAN.md"
         - "docs/demos/catalog-greenfield-plan-new-feature-prompts.md"
+        - "tied-project/working/FACILITATOR-GF-04-1792857852/PLAN.md"
         - "tools/bundled-feedback-skill/SKILL.md"
       falsification_questions:
         - "Would a facilitator infer record-gf-trial replaces @build-plan on subject clients?"
     consequence_ladder:
-      - choice: "STORE_FACILITATOR_SKILLS separate manifest key vs hardcoded skill list"
-        disposition: reversible
-        rationale: "Mirrors BUNDLED_STANDALONE pattern; extensible for future store facilitator tools."
       - choice: "Default stop when trial-readout-*-{id}.md exists"
-        disposition: reversible
+        disposition: "reversible"
         rationale: "Prevents accidental duplicate catalog samples."
       - choice: "LEAP pseudo-code update in same PR as code"
-        disposition: reversible
+        disposition: "reversible"
         rationale: "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS scope extended for store-only install path."
+      - choice: "STORE_FACILITATOR_SKILLS separate manifest key vs hardcoded skill list"
+        disposition: "reversible"
+        rationale: "Mirrors BUNDLED_STANDALONE pattern; extensible for future store facilitator tools."
   test_strategy:
     outline:
-      - "RED: store-facilitator-skills.test.mjs asserts manifest entry and stub body before implementation."
-      - "GREEN: installStoreFacilitatorSkillsLinkedStub + skills-linked hook when normalized projectRoot equals storeRoot."
-      - "Regression: client-skills-catalog.test.mjs still expects exactly five standalone skills."
       - "Dogfood: resolve client id 1792857852; detect existing readout without --force (manual or script note in examples.md)."
+      - "GREEN: installStoreFacilitatorSkillsLinkedStub + skills-linked hook when normalized projectRoot equals storeRoot."
+      - "RED: store-facilitator-skills.test.mjs asserts manifest entry and stub body before implementation."
+      - "Regression: client-skills-catalog.test.mjs still expects exactly five standalone skills."
     quality_evidence_matrix:
       baseline-functional:
-        applicability: applicable
+        applicability: "applicable"
         evidence_method: "node --test on bootstrap lib tests"

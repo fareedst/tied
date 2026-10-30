@@ -1,6 +1,7 @@
 # Traceable commit — REQ-TIED_OPEN_ONTOLOGIES_WAVE3 (recovery)
 
 **Run ID:** `oow3-closeout-2026-10-26-rerun`  
+**Recovery commit:** `3bf195e9` — chore(tied): OOW3 close-out recovery evidence after hygiene delete  
 **Feature commits (prior):** `7f493e8`, `ddb02f76`
 
 ## Completion signals

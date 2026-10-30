@@ -7,8 +7,14 @@ steps:
   change-definition:
     notes: "Wave 1 PDF appendix capture + Wave 2 TIED analysis + .gitignore allowlist; no project YAML mint."
     status: "done"
+  close_out:
+    notes: "2026-10-25 handoff evidence/close-out-handoff.md; machine gate blocked (DOC pattern); process pass."
+    status: "done"
   impact-discovery:
     notes: "Blast radius in PLAN-refine-pass1.md Plan section; sibling scope vs Claude review, LangChain, AI-SDLC, Open Ontologies."
+    status: "done"
+  implement-doc-deliverables:
+    notes: "Wave 1 + Wave 2 + .gitignore allowlist; see evidence/build-plan-handoff.md."
     status: "done"
   pre_implementation:
     notes: "tied_checklist_gate_validate 2026-10-25: allowed=false, blocking=true, diagnostics=missing_or_invalid_depth — outreach DOC token + minimal depth; doc-only build may proceed at build-plan per sibling outreach pattern (Open Ontologies, AI-SDLC); not REQ implementation authorization."
@@ -22,18 +28,12 @@ steps:
   test-strategy:
     notes: "Doc-only: 14-section parity, claim labels, token grep, link check, optional PDF fetch reconcile headings only."
     status: "done"
-  translate-sponsor-intent:
-    notes: "@external-service-comparison on Anthropic CDN PDF appendix (Oct 2026); Waves 1–2 only."
-    status: "done"
-  implement-doc-deliverables:
-    notes: "Wave 1 + Wave 2 + .gitignore allowlist; see evidence/build-plan-handoff.md."
-    status: "done"
-  verification-gate:
-    notes: "Doc QA: 14 sections, Anthropic-reported labels, token grep OK; tied_validate_consistency skipped (no YAML)."
-    status: "done"
   traceable-commit:
     notes: "2026-10-25 commit ff242d5b; evidence/traceable-commit-evidence.md"
     status: "done"
-  close_out:
-    notes: "2026-10-25 handoff evidence/close-out-handoff.md; machine gate blocked (DOC pattern); process pass."
+  translate-sponsor-intent:
+    notes: "@external-service-comparison on Anthropic CDN PDF appendix (Oct 2026); Waves 1–2 only."
+    status: "done"
+  verification-gate:
+    notes: "Doc QA: 14 sections, Anthropic-reported labels, token grep OK; tied_validate_consistency skipped (no YAML)."
     status: "done"

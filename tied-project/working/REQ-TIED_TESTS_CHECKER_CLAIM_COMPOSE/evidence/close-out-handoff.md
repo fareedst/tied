@@ -15,7 +15,7 @@
 | --- | --- |
 | **Machine close-out** | **pass** — `close_out` allowed; envelope `blocking_gap_count=0` ([close-out-gates-2026-10-26.json](./close-out-gates-2026-10-26.json)) |
 | **Process contract** | **pass** — doc/matrix/envelope contract tests; `mcp-server` build |
-| **Adherence ledger** | **band B** — `thin_ledger` advisory (reconcile read-only) |
+| **Adherence ledger** | **synced** — 7 `outcome_verified` rows via `sync-tracker-dispositions` (`traceable-commit-sync-2026-10-26`); ledger `tied-bundle/working/…/gates/ledger.jsonl` |
 
 ## Commits
 

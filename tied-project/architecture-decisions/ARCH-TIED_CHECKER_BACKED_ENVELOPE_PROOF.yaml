@@ -1,8 +1,8 @@
 ARCH-TIED_CHECKER_BACKED_ENVELOPE_PROOF:
   cross_references:
     - "ARCH-TIED_INDEPENDENT_PROOF_ENVELOPE"
-    - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
     - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+    - "REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE"
   decision: "Advisory validateRequestEvidenceEnvelope extension for independent_proofs[] proof_kind registry (checker_backed_claim, theorem_statement_metadata); warn gaps only; no foreign verifier execution or tied_verify promotion."
   metadata:
     created:

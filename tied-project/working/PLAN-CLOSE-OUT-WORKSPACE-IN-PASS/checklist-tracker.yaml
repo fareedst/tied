@@ -10,15 +10,15 @@ execution_evidence:
         path: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/closeout-run-close-out-gates.json"
     master_checklist: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/checklist-tracker.yaml"
   completed:
-    - "translate-sponsor-intent"
     - "change-definition"
+    - "gitignore-close-out-hygiene"
     - "impact-discovery"
     - "risk-assessment"
-    - "test-strategy"
     - "sub-close-out-evidence-sync"
-    - "verification-gate"
-    - "gitignore-close-out-hygiene"
+    - "test-strategy"
     - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "verification-gate"
   envelope_path: "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/request-evidence-envelope.v1.json"
   request: "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS"
 record_identity:
@@ -68,13 +68,13 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
       - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
     slug: "test-strategy"
     tracking:
       evidence_refs:
-        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
         - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+        - "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md"
       status: "completed"
   - disposition: "not_applicable"
     evidence_refs:

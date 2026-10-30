@@ -3,14 +3,14 @@ CITDP-FACILITATOR-AUDIT-BRIEF-1792861936:
     current_behavior: "Disposable client 1792861936 completed custom greenfield REQ-TIED_CLIENT_AUDIT_BRIEF (audit brief CLI) on TIED 4.0.0 with close-out handoff; no store trial readout or catalog recorded-trials row for custom / TIED-DEMO-23 lens."
     desired_behavior: "GF-11/14-quality facilitator trial readout under docs/demos/ plus README and greenfield catalog links; dimensioned grading vs GF cohort (GF-04, GF-25, GF-11, GF-14); FACILITATOR working evidence from subject-client re-verification."
     non_goals:
-      - "Mint store [REQ-*] tokens for product feature"
-      - "Persist CITDP to tied-project/citdp/"
-      - "Mutate disposable client tracker, reconcile, or indexes"
-      - "Map product to PROMPT-GF-05 token auditor despite Family B process lens"
       - "Claim methodology effectiveness from a single trial"
+      - "Map product to PROMPT-GF-05 token auditor despite Family B process lens"
+      - "Mint store [REQ-*] tokens for product feature"
+      - "Mutate disposable client tracker, reconcile, or indexes"
+      - "Persist CITDP to tied-project/citdp/"
     success_criteria:
-      - "docs/demos/trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md matches GF-11/14 section contract"
       - "docs/demos/README.md and catalog recorded-trials include custom audit-brief row"
+      - "docs/demos/trial-readout-CUSTOM-AUDIT-BRIEF-1792861936.md matches GF-11/14 section contract"
       - "Facilitator re-verify captures node --test (11 pass), tied_validate_consistency ok on client tied-project/"
       - "Grading table uses catalog dimensions; methodology learning band N/A (not GF-19/20)"
     unchanged_behavior: "Subject client product code and TIED indexes remain as-built; store methodology YAML read-only."
@@ -22,8 +22,8 @@ CITDP-FACILITATOR-AUDIT-BRIEF-1792861936:
       - "optional tied_project_lint on client"
       - "optional tied_adherence_reconcile_run with project_root -> client root (document only)"
     proof_boundaries:
-      - "facilitator_session_reconstruction"
       - "does_not_prove_methodology_effectiveness"
+      - "facilitator_session_reconstruction"
       - "subject_client_observed_not_rebuilt"
   impact_analysis:
     impl_inventory_notes: "Markdown and catalog index rows only in stdd store."
@@ -45,34 +45,34 @@ CITDP-FACILITATOR-AUDIT-BRIEF-1792861936:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Readout cites gate allowed without noting adherence ledger not_run on subject client."
         - "Grading cites manifest commit HEAD without facilitator re-run tied_validate_consistency."
+        - "Readout cites gate allowed without noting adherence ledger not_run on subject client."
       depth_tier: "minimal"
       disconfirming_observations:
         - "Grading bands written before facilitator re-verify commands run."
       eligibility_triggers_matched: []
       evidence_references:
-        - "/Users/fareed/Documents/dev/test/1792861936/tied-project/working/REQ-TIED_CLIENT_AUDIT_BRIEF/evidence/close-out-handoff.md"
         - "/Users/fareed/Documents/dev/test/1792861936/tied-project/working/REQ-TIED_CLIENT_AUDIT_BRIEF/checklist-tracker-build.yaml"
+        - "/Users/fareed/Documents/dev/test/1792861936/tied-project/working/REQ-TIED_CLIENT_AUDIT_BRIEF/evidence/close-out-handoff.md"
         - "docs/demos/trial-readout-PROMPT-GF-04-1792857852.md"
-        - "docs/demos/trial-readout-PROMPT-GF-25-1791754135.md"
         - "docs/demos/trial-readout-PROMPT-GF-11-1792344147.md"
         - "docs/demos/trial-readout-PROMPT-GF-14-1792479171.md"
+        - "docs/demos/trial-readout-PROMPT-GF-25-1791754135.md"
       falsification_questions:
         - "Would a reader infer TIED-DEMO-23 runbook disposition changed without explicit custom-trial note?"
     consequence_ladder:
-      - choice: "Publish readout without client re-verify"
-        disposition: "costly"
-        rationale: "Grading bands must follow captured command evidence."
       - choice: "Docs-only commit in stdd"
         disposition: "reversible"
         rationale: "Standard GF readout close-out when sponsor requests."
+      - choice: "Publish readout without client re-verify"
+        disposition: "costly"
+        rationale: "Grading bands must follow captured command evidence."
   test_strategy:
     outline:
+      - "Do not assume Vitest or package.json on subject client."
       - "No unit RED in store; verification is facilitator command replay on subject client."
       - "Readout body must cite 11 tests / 4 suites and HEAD SHA from capture artifacts."
-      - "Do not assume Vitest or package.json on subject client."
     quality_evidence_matrix:
       baseline-functional:
-        applicability: applicable
+        applicability: "applicable"
         evidence_method: "node --test + tied_validate_consistency on client scoped env"

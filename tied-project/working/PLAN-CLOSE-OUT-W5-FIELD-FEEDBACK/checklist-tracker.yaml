@@ -7,11 +7,11 @@ execution_evidence:
     gates: {}
     master_checklist: "tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/checklist-tracker.yaml"
   completed:
-    - "translate-sponsor-intent"
     - "change-definition"
     - "impact-discovery"
     - "risk-assessment"
     - "test-strategy"
+    - "translate-sponsor-intent"
   envelope_path: "tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/evidence/request-evidence-envelope.v1.json"
   request: "PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK"
 record_identity:

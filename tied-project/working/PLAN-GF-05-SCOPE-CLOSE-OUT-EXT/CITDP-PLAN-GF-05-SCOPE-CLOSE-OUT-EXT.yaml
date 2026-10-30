@@ -1,116 +1,102 @@
 CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT:
-  record_identity:
-    change_request_id: "PLAN-GF-05-SCOPE-CLOSE-OUT-EXT"
-    parent_plan_token: "PLAN-GF-05-GATE-VERIFY-DUAL-TRACK"
-    active_delivery_track: "SCOPE-CLOSE-OUT-EXT"
-    sibling_closed_track: "SCOPE-VERIFY-GATE-COMMON"
-    recorded_at: "2026-10-25"
-    title: "GF-05 Track A — persist close_out gate receipt from run-close-out-gates"
-    profile_depth: "minimal"
-    depth_tier: "minimal"
-    gate_policy: "advisory"
   change_definition:
-    current_behavior: >
-      tools/bootstrap/templates/run-close-out-gates.mjs validates checklist gate and envelope in-process, prints JSON
-      summary to stdout, and may write envelope/manifest under tied-project/working/{request_token}/evidence/, but it does
-      not call persistGateDecisionReceipt. Operators and disposable clients can see merged_decision.allowed true while
-      tied-project/working/{token}/gates/close_out-*.json is absent unless MCP tied_checklist_gate_validate was invoked
-      separately with receipt_persistence. GF-05 field witness fb-mvo18hye-i6x5fq contrasts runner stdout-only vs client
-      gate file on disk.
-    desired_behavior: >
-      For phase close_out (default runner phase), run-close-out-gates.mjs persists a checklist-gate-receipt.v1 JSON under
-      the committed working gates directory for the request_token (same paths as defaultGateReceiptPersistencePaths /
-      gate-receipt.js), appends gate_decided to the working ledger, and optionally patches envelope checklist_gate_receipt
-      when envelope build succeeds. Default persist on; --no-persist-gate-receipt opts out for dry runs. Help text and
-      bundled close-out / completion-signals prose state that machine close-out includes an on-disk close_out receipt when
-      the runner succeeds. Track B checklist_gate before tied_verify remains required and is not replaced.
+    current_behavior: "tools/bootstrap/templates/run-close-out-gates.mjs validates checklist gate and envelope in-process, prints JSON summary to stdout, and may write envelope/manifest under tied-project/working/{request_token}/evidence/, but it does not call persistGateDecisionReceipt. Operators and disposable clients can see merged_decision.allowed true while tied-project/working/{token}/gates/close_out-*.json is absent unless MCP tied_checklist_gate_validate was invoked separately with receipt_persistence. GF-05 field witness fb-mvo18hye-i6x5fq contrasts runner stdout-only vs client gate file on disk.\n"
+    desired_behavior: "For phase close_out (default runner phase), run-close-out-gates.mjs persists a checklist-gate-receipt.v1 JSON under the committed working gates directory for the request_token (same paths as defaultGateReceiptPersistencePaths / gate-receipt.js), appends gate_decided to the working ledger, and optionally patches envelope checklist_gate_receipt when envelope build succeeds. Default persist on; --no-persist-gate-receipt opts out for dry runs. Help text and bundled close-out / completion-signals prose state that machine close-out includes an on-disk close_out receipt when the runner succeeds. Track B checklist_gate before tied_verify remains required and is not replaced.\n"
     non_goals:
-      - "Replacing sub-checklist-gate-before-verify-update (Track B)"
       - "Auto-injecting checklist_gate into tied_verify MCP"
-      - "Wave 5 process-adherence envelope fail-closed policy change"
-      - "Minting a new REQ token in refine pass (build-plan may extend REQ-TIED_CHECKLIST_GATE_ENFORCEMENT docs only)"
       - "Changing tied_verify missing_checklist_gate guard"
+      - "Minting a new REQ token in refine pass (build-plan may extend REQ-TIED_CHECKLIST_GATE_ENFORCEMENT docs only)"
+      - "Replacing sub-checklist-gate-before-verify-update (Track B)"
+      - "Wave 5 process-adherence envelope fail-closed policy change"
     success_criteria:
-      - "SC-RUNNER-PERSIST: close_out runner pass writes gates/close_out-*.json (defaultGateReceiptPersistencePaths) with schema checklist-gate-receipt.v1"
-      - "SC-RUNNER-OPT-OUT: --no-persist-gate-receipt skips file write; merged_decision unchanged"
-      - "SC-TEST-CONTRACT: Node test fails if close_out path removed from runner"
       - "SC-DOC-CLOSE-OUT: prompt-shared close-out or run-close-out-gates header documents default persistence"
+      - "SC-RUNNER-OPT-OUT: --no-persist-gate-receipt skips file write; merged_decision unchanged"
+      - "SC-RUNNER-PERSIST: close_out runner pass writes gates/close_out-*.json (defaultGateReceiptPersistencePaths) with schema checklist-gate-receipt.v1"
+      - "SC-TEST-CONTRACT: Node test fails if close_out path removed from runner"
       - "SC-WITNESS-LINK: CITDP cites fb-mvo18hye-i6x5fq and GF-05 dual-track parent"
-    unchanged_behavior: >
-      Gate validate logic, envelope-blocking, sync-dispositions, and reconcile flags unchanged except added persistence step;
-      pre_implementation and verification phases do not gain default persistence unless explicitly scoped in build-plan.
-  impact_analysis:
-    modules_or_boundaries: "tools/bootstrap/templates/run-close-out-gates.mjs; mcp-server gate-receipt.js (import/reuse); optional tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md or run-close-out-gates --help"
-    tied_tokens_affected:
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
-      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    tied_tokens_new: []
-    impl_inventory_notes: "Runner composition change; reuse persistGateDecisionReceipt from mcp-server dist; no new Active IMPL unless LEAP adds doc slice"
-  risk_analysis:
-    abuse_cases:
-      - "Runner persists receipt while gate allowed false — receipt must record allowed false, not skip write"
-      - "Persistence writes under wrong request_token working root (multi-root TIED_BASE_PATH)"
-      - "Track A claimed complete while Track B checklist still omitted in client sessions without refresh"
-    adversarial_inquiry:
-      depth_tier: "minimal"
-      prior_depth_tier: null
-      gate_policy: "advisory"
-      assurance_profile: "baseline-functional"
-      research_profile: "read-only"
-      eligibility_triggers_matched: []
-      rationale: "Bootstrap runner + receipt file I/O; field evidence read-only."
-      sub_adversarial_inquiry_pass: "not_applicable"
-      integrated_waiver: null
-      falsification_questions:
-        - "After runner exit 0 close_out, can an operator find close_out-*.json under committed working gates?"
-        - "Does opt-out flag leave zero new gate JSON while still printing summary?"
-      counterexamples:
-        - "MCP receipt_persistence already persists; runner duplicate path must match hashes"
-      disconfirming_observations:
-        - "Client field gate close_out-2026-10-25T16-16-27-148Z.json exists when MCP receipt_persistence used manually"
-        - "Store run-close-out-gates close_out pass 2026-10-25 wrote envelope without gates/close_out-*.json"
-      evidence_references:
-        - "tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml"
-        - "tools/bootstrap/templates/run-close-out-gates.mjs"
-        - "mcp-server/src/gate-receipt.ts"
-        - "docs/demos/trial-readout-PROMPT-GF-05-1792944114.md"
-    costly_choices:
-      - choice: "Persist for all phases (pre_implementation, verification, close_out) in one wave"
-        ladder: "reversible"
-        disposition: "Defer — build-plan default close_out only; extend in follow-on if needed"
-      - choice: "Default persist off (opt-in --persist-gate-receipt)"
-        ladder: "costly"
-        disposition: "Reject — GF-05 symptom is missing receipt after allowed close_out"
-      - choice: "Merge Track A into Track B CITDP"
-        ladder: "costly"
-        disposition: "Reject — dual-track LEAP already applied per track"
-  test_strategy:
-    approach: "RED composition test against temp project_root with minimal tracker/citdp fixture"
-    cases:
-      - "run-close-out-gates.mjs close_out creates gates/close_out-*.json"
-      - "--no-persist-gate-receipt does not create new close_out-*.json"
-      - "Receipt schema_version checklist-gate-receipt.v1 and phase close_out"
-    summary: "Spawn node runner or import persist helper; avoid full MCP e2e in RED"
+    unchanged_behavior: "Gate validate logic, envelope-blocking, sync-dispositions, and reconcile flags unchanged except added persistence step; pre_implementation and verification phases do not gain default persistence unless explicitly scoped in build-plan.\n"
   evidence:
     commands:
       - "npx tsx --test mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts"
-    witness_feedback_id: "fb-mvo18hye-i6x5fq"
     leap_proposal_id: "lp-2026-10-25T16-23-32-863Z-c284570f3c0b"
     proof_boundaries:
-      - "runner_and_close_out_docs_only"
       - "does_not_prove_client_refresh"
+      - "runner_and_close_out_docs_only"
     witness_client_paths:
       - "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/gates/close_out-2026-10-25T16-16-27-148Z.json"
+    witness_feedback_id: "fb-mvo18hye-i6x5fq"
+  impact_analysis:
+    impl_inventory_notes: "Runner composition change; reuse persistGateDecisionReceipt from mcp-server dist; no new Active IMPL unless LEAP adds doc slice"
+    modules_or_boundaries: "tools/bootstrap/templates/run-close-out-gates.mjs; mcp-server gate-receipt.js (import/reuse); optional tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md or run-close-out-gates --help"
+    tied_tokens_affected:
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    tied_tokens_new: []
   leap_feedback:
-    record_status: "closed"
-    close_out_run_id: "close-out-gf05-track-a-20261025"
     build_plan_completed_at: "2026-10-25"
     close_out_completed_at: "2026-10-25"
+    close_out_run_id: "close-out-gf05-track-a-20261025"
+    divergences_from_analysis: "none"
+    record_status: "closed"
+    sibling_track:
+      status: "closed_commit_ddb7ae14"
+      token: "PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON"
     test_evidence:
       - "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts"
-    divergences_from_analysis: "none"
     tied_stack_updates_required: []
-    sibling_track:
-      token: "PLAN-GF-05-SCOPE-VERIFY-GATE-COMMON"
-      status: "closed_commit_ddb7ae14"
+  record_identity:
+    active_delivery_track: "SCOPE-CLOSE-OUT-EXT"
+    change_request_id: "PLAN-GF-05-SCOPE-CLOSE-OUT-EXT"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    parent_plan_token: "PLAN-GF-05-GATE-VERIFY-DUAL-TRACK"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-25"
+    sibling_closed_track: "SCOPE-VERIFY-GATE-COMMON"
+    title: "GF-05 Track A — persist close_out gate receipt from run-close-out-gates"
+  risk_analysis:
+    abuse_cases:
+      - "Persistence writes under wrong request_token working root (multi-root TIED_BASE_PATH)"
+      - "Runner persists receipt while gate allowed false — receipt must record allowed false, not skip write"
+      - "Track A claimed complete while Track B checklist still omitted in client sessions without refresh"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "MCP receipt_persistence already persists; runner duplicate path must match hashes"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Client field gate close_out-2026-10-25T16-16-27-148Z.json exists when MCP receipt_persistence used manually"
+        - "Store run-close-out-gates close_out pass 2026-10-25 wrote envelope without gates/close_out-*.json"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/demos/trial-readout-PROMPT-GF-05-1792944114.md"
+        - "mcp-server/src/gate-receipt.ts"
+        - "tied-project/working/PLAN-GF-05-GATE-VERIFY-DUAL-TRACK/CITDP-PLAN-GF-05-SCOPE-CLOSE-OUT-EXT.yaml"
+        - "tools/bootstrap/templates/run-close-out-gates.mjs"
+      falsification_questions:
+        - "After runner exit 0 close_out, can an operator find close_out-*.json under committed working gates?"
+        - "Does opt-out flag leave zero new gate JSON while still printing summary?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Bootstrap runner + receipt file I/O; field evidence read-only."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    costly_choices:
+      - choice: "Default persist off (opt-in --persist-gate-receipt)"
+        disposition: "Reject — GF-05 symptom is missing receipt after allowed close_out"
+        ladder: "costly"
+      - choice: "Merge Track A into Track B CITDP"
+        disposition: "Reject — dual-track LEAP already applied per track"
+        ladder: "costly"
+      - choice: "Persist for all phases (pre_implementation, verification, close_out) in one wave"
+        disposition: "Defer — build-plan default close_out only; extend in follow-on if needed"
+        ladder: "reversible"
+  test_strategy:
+    approach: "RED composition test against temp project_root with minimal tracker/citdp fixture"
+    cases:
+      - "--no-persist-gate-receipt does not create new close_out-*.json"
+      - "Receipt schema_version checklist-gate-receipt.v1 and phase close_out"
+      - "run-close-out-gates.mjs close_out creates gates/close_out-*.json"
+    summary: "Spawn node runner or import persist helper; avoid full MCP e2e in RED"

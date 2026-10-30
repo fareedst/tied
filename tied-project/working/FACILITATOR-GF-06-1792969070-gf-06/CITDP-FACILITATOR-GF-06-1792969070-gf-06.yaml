@@ -3,12 +3,12 @@ CITDP-FACILITATOR-GF-06-1792969070-gf-06:
     current_behavior: "Disposable client 1792969070-gf-06 completed PROMPT-GF-06 (REQ-IMPL_DESIGN_DOC_VALIDATOR) on TIED 4.0.0 with Contract-section CLI/library, good/bad fixtures, and on-disk close_out receipt; no store trial readout or catalog recorded-trials row for PROMPT-GF-06 / TIED-DEMO-06."
     desired_behavior: "GF-05/16-quality facilitator trial readout under docs/demos/ plus README and greenfield catalog links; dimensioned grading vs GF cohort; FACILITATOR working evidence from subject-client re-verification via @record-gf-trial contract."
     non_goals:
+      - "Claim methodology effectiveness from a single trial"
       - "Mint store [REQ-*] tokens for product feature"
       - "Persist CITDP to tied-project/citdp/"
-      - "Claim methodology effectiveness from a single trial"
     success_criteria:
-      - "docs/demos/trial-readout-PROMPT-GF-06-1792969070-gf-06.md matches 12-section GF readout contract"
       - "docs/demos/README.md and catalog recorded-trials include PROMPT-GF-06 row"
+      - "docs/demos/trial-readout-PROMPT-GF-06-1792969070-gf-06.md matches 12-section GF readout contract"
       - "Facilitator re-verify captures npm test (6), lint:ts, tied_validate_consistency ok on client tied-project/"
     unchanged_behavior: "Subject client product code and TIED indexes remain as-built; store methodology YAML read-only."
   evidence:
@@ -18,8 +18,8 @@ CITDP-FACILITATOR-GF-06-1792969070-gf-06:
       - "npm run lint:ts @ client root"
       - "tied-cli tied_validate_consistency with TIED_BASE_PATH -> client tied-project/"
     proof_boundaries:
-      - "facilitator_session_reconstruction"
       - "does_not_prove_methodology_effectiveness"
+      - "facilitator_session_reconstruction"
       - "subject_client_observed_not_rebuilt"
   impact_analysis:
     impl_inventory_notes: "Markdown and catalog index rows only in stdd store."
@@ -36,8 +36,8 @@ CITDP-FACILITATOR-GF-06-1792969070-gf-06:
   risk_analysis:
     abuse_cases:
       - "Collapsed maturity score from dimension bands"
-      - "Treating Contract-key scan as full pseudocode_validate / Layer B gate"
       - "GF-07 trace-walk trial mislabeled as design-doc validator peer"
+      - "Treating Contract-key scan as full pseudocode_validate / Layer B gate"
     adversarial_inquiry:
       depth_tier: "minimal"
       eligibility_triggers_matched: []

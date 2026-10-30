@@ -1,26 +1,24 @@
-copy_hygiene: >-
-  Tracker for PLAN-RECORD-GF-TRIAL-SKILL only. Extends bootstrap skills; not a disposable client checklist.
-description: >
-  Minimal tracker for store-only record-gf-trial skill (bootstrap + bundled skill + demo catalog docs).
+copy_hygiene: "Tracker for PLAN-RECORD-GF-TRIAL-SKILL only. Extends bootstrap skills; not a disposable client checklist."
+depth_tier: "minimal"
+description: "Minimal tracker for store-only record-gf-trial skill (bootstrap + bundled skill + demo catalog docs).\n"
 execution_evidence:
-  request: PLAN-RECORD-GF-TRIAL-SKILL
-  completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - risk-assessment
-    - test-strategy
-    - module-validation
-    - build-plan-implementation
-    - documentation-sync
-    - traceable-commit
   close_out_evidence:
     date: "2026-10-24"
     deferred:
-      - verification-gate
+      - "verification-gate"
     envelope: null
     gates:
-      close_out: waived_minimal_plan_no_envelope
-profile_depth: minimal
-depth_tier: minimal
-gate_policy: advisory
+      close_out: "waived_minimal_plan_no_envelope"
+  completed:
+    - "build-plan-implementation"
+    - "change-definition"
+    - "documentation-sync"
+    - "module-validation"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+  request: "PLAN-RECORD-GF-TRIAL-SKILL"
+gate_policy: "advisory"
+profile_depth: "minimal"

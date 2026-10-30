@@ -1,23 +1,21 @@
-copy_hygiene: >-
-  Facilitator publish tracker for FACILITATOR-GF-04-1792857852 only. Not the subject client master checklist.
-description: >
-  Minimal tracker for store documentation-only facilitator readout (PROMPT-GF-04 / client 1792857852).
+copy_hygiene: "Facilitator publish tracker for FACILITATOR-GF-04-1792857852 only. Not the subject client master checklist."
+depth_tier: "minimal"
+description: "Minimal tracker for store documentation-only facilitator readout (PROMPT-GF-04 / client 1792857852).\n"
 execution_evidence:
-  request: FACILITATOR-GF-04-1792857852
-  completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - test-strategy
-    - build-plan-verification
-    - publish-trial-readout
-    - link-demo-catalogs
   close_out_evidence:
     date: null
     deferred:
-      - traceable-commit
+      - "traceable-commit"
     envelope: null
     gates: {}
-profile_depth: minimal
-depth_tier: minimal
-gate_policy: advisory
+  completed:
+    - "build-plan-verification"
+    - "change-definition"
+    - "link-demo-catalogs"
+    - "publish-trial-readout"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  request: "FACILITATOR-GF-04-1792857852"
+gate_policy: "advisory"
+profile_depth: "minimal"

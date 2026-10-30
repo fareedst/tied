@@ -1,0 +1,39 @@
+change_class: "comparisons_doc_only"
+gate_policy: "outreach_doc_only"
+no_req_mint: true
+profile_depth: "minimal"
+request_token: "DOC-SOFTWARE-ENGINEERING-DEGREE-COMPARISON"
+steps:
+  change-definition:
+    notes: "Wave 1 normalize capture + Wave 2 bullet-level analysis + git allowlist; no YAML mint."
+    status: "done"
+  close_out:
+    notes: "Defer until sponsor requests; DOC outreach tracker typically blocks machine close_out."
+    status: "pending"
+  impact-discovery:
+    notes: "docs/comparisons/software-engineering-degree*.md, .gitignore, optional examples.md; sibling scope vs well-known methodologies, factory, harness docs."
+    status: "done"
+  implement-doc-deliverables:
+    notes: "build-plan 2026-10-26 — Wave 1/2, allowlist, 887-row inventory, examples row; generator evidence/generate-wave2-inventory.mjs."
+    status: "done"
+  pre_implementation:
+    notes: "tied_checklist_gate_validate 2026-10-26: allowed=false, blocking=true — invalid_slug (sparse DOC tracker), missing sub-adversarial-inquiry-pass; doc-only build may proceed at build-plan per sibling outreach pattern; not REQ implementation authorization."
+    status: "blocked"
+  risk-assessment:
+    notes: "Conflating tied_validate_consistency with CS foundations competence; treating curriculum as TIED certification; monolithic 400+ row doc maintainability."
+    status: "done"
+  session-bootstrap:
+    notes: "PRELOAD tied-methodology, quality-assurance, sponsor-agent-relationship, pseudocode-and-citdp, prompt-composer; external-service-comparison SKILL + template."
+    status: "done"
+  test-strategy:
+    notes: "14-section parity, Sponsor-proposed labels, bullet row count receipt, plane/disposition columns, token grep."
+    status: "done"
+  traceable-commit:
+    notes: "Sponsor-owned after build-plan review."
+    status: "pending"
+  translate-sponsor-intent:
+    notes: "@external-service-comparison on in-repo software-engineering-degree.md; graduate engineer persona; 887 Interpretation+Observance rows (884 course + 3 framing); pass 3 reconciled ~175 vs 167 modules."
+    status: "done"
+  verification-gate:
+    notes: "Doc QA per test-strategy.md 2026-10-26 — pass; tied_validate_consistency skipped (no YAML)."
+    status: "done"

@@ -1,88 +1,77 @@
 CITDP-REQ-GF16-KAIZEN-OUTCOME-CLOSE:
-  record_identity:
-    change_request_id: "REQ-GF16-KAIZEN-OUTCOME-CLOSE"
-    recorded_at: "2026-10-25"
-    title: "Kaizen dual-track close for GF-16 feedback (capture gap + tied-cli env)"
-    profile_depth: "minimal"
-    depth_tier: "minimal"
-    gate_policy: "advisory"
   change_definition:
-    current_behavior: >
-      Two distinct GF-16 lessons must stay separate in feedback.yaml. Track B (fb-mvny01eb-my451g):
-      tied-cli depended on unset TIED_BASE_PATH / script-dir store root; countermeasure REQ-TIED_CLI_MCP_JSON_BASE_PATH
-      shipped but resolver import breaks linked client smoke. Track A (fb-mvnyr5n2-aaeg1j): client agent narrated
-      upstream post but never completed Kaizen capture (no client feedback.yaml, no MCP receipt); facilitator ingest skipped.
-      Neither row has outcome_observations; CLI REQ remains Draft; queue UIs may omit rows without promotion_status.
-    desired_behavior: >
-      Maintain dual-track register (evidence/feedback-dual-track-register.md). Track B: LEAP-fix resolver import;
-      GF-16 cwd smoke without env; tied_feedback_outcome_record on fb-mvny01eb-my451g with countermeasure_ref
-      REQ-TIED_CLI_MCP_JSON_BASE_PATH@5ba4086e; tied_verify on CLI REQ. Track A: document capture countermeasure
-      (receipt discipline, traceable-commit capture section, optional client mirror); tied_feedback_outcome_record on
-      fb-mvnyr5n2-aaeg1j when process evidence exists (not before). Both entries get promotion_status after review.
-      Ongoing client-operating evidence appended under REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/ as cohort runs continue.
+    current_behavior: "Two distinct GF-16 lessons must stay separate in feedback.yaml. Track B (fb-mvny01eb-my451g): tied-cli depended on unset TIED_BASE_PATH / script-dir store root; countermeasure REQ-TIED_CLI_MCP_JSON_BASE_PATH shipped but resolver import breaks linked client smoke. Track A (fb-mvnyr5n2-aaeg1j): client agent narrated upstream post but never completed Kaizen capture (no client feedback.yaml, no MCP receipt); facilitator ingest skipped. Neither row has outcome_observations; CLI REQ remains Draft; queue UIs may omit rows without promotion_status.\n"
+    desired_behavior: "Maintain dual-track register (evidence/feedback-dual-track-register.md). Track B: LEAP-fix resolver import; GF-16 cwd smoke without env; tied_feedback_outcome_record on fb-mvny01eb-my451g with countermeasure_ref REQ-TIED_CLI_MCP_JSON_BASE_PATH@5ba4086e; tied_verify on CLI REQ. Track A: document capture countermeasure (receipt discipline, traceable-commit capture section, optional client mirror); tied_feedback_outcome_record on fb-mvnyr5n2-aaeg1j when process evidence exists (not before). Both entries get promotion_status after review. Ongoing client-operating evidence appended under REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/ as cohort runs continue.\n"
     non_goals:
-      - "Re-open GF-16 product scope (REQ-RECONCILIATION_ENGINE)"
-      - "Phase 3 feedback transport or notification policy"
       - "LEAP proposal queue unless sponsor requests diff promotion separate from REQ stack"
       - "Mandatory client git commit (disposable witness)"
+      - "Phase 3 feedback transport or notification policy"
+      - "Re-open GF-16 product scope (REQ-RECONCILIATION_ENGINE)"
     success_criteria:
-      - "node --test tools/bootstrap/lib/mcp-base-path.test.mjs and tied-cli-invoke.test.mjs green"
-      - "From 1792937222-gf-16 cwd without TIED_BASE_PATH env: tied-cli tied_config_get_base_path returns client tied-project/"
       - "fb-mvny01eb-my451g has outcome_observations[] with outcome-observation.v1 and countermeasure_ref"
+      - "From 1792937222-gf-16 cwd without TIED_BASE_PATH env: tied-cli tied_config_get_base_path returns client tied-project/"
+      - "node --test tools/bootstrap/lib/mcp-base-path.test.mjs and tied-cli-invoke.test.mjs green"
       - "REQ-TIED_CLI_MCP_JSON_BASE_PATH verify-derived status not Draft when tests pass"
       - "tied_validate_consistency ok on store tied-project/"
     unchanged_behavior: "Kaizen MCP tools (REQ-KAIZEN-OUTCOME-LOOP) behavior; no new feedback entry types"
   impact_analysis:
+    impl_inventory_notes: "Primarily operator MCP + one-line import fix; possible yaml_index_update on feedback via MCP yaml path or feedback tools only"
     modules_or_boundaries: "tools/bundled-tied-yaml-skill/scripts/resolve-tied-cli-env.mjs (import path); store feedback.yaml; optional client tied/feedback.yaml; docs/demos trial readout"
+    tied_tokens_affected:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-KAIZEN-OUTCOME-LOOP"
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
     tied_tokens_new:
       - "REQ-GF16-KAIZEN-OUTCOME-CLOSE"
-    tied_tokens_affected:
-      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
-      - "REQ-KAIZEN-OUTCOME-LOOP"
-      - "REQ-FEEDBACK_TO_TIED"
-    impl_inventory_notes: "Primarily operator MCP + one-line import fix; possible yaml_index_update on feedback via MCP yaml path or feedback tools only"
+  record_identity:
+    change_request_id: "REQ-GF16-KAIZEN-OUTCOME-CLOSE"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-10-25"
+    title: "Kaizen dual-track close for GF-16 feedback (capture gap + tied-cli env)"
   risk_analysis:
     adversarial_inquiry:
-      depth_tier: "minimal"
-      prior_depth_tier: null
-      gate_policy: "advisory"
       assurance_profile: "baseline-functional"
-      research_profile: "read-only"
-      eligibility_triggers_matched: []
-      rationale: "Operator Kaizen close-out, import LEAP, and feedback.yaml outcomes; no new runtime surface."
-      sub_adversarial_inquiry_pass: "not_applicable"
-      integrated_waiver: null
       counterexamples:
-        - "Track B improved claimed without GF-16 cwd smoke"
-        - "Track A merged into CLI REQ countermeasure"
         - "promotion_status set without outcome_observations"
+        - "Track A merged into CLI REQ countermeasure"
+        - "Track B improved claimed without GF-16 cwd smoke"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Bootstrap tests pass after resolve-tied-cli-env import fix"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/demos/trial-readout-PROMPT-GF-16-1792937222.md"
+        - "tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/feedback-dual-track-register.md"
+        - "tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/gf16-tied-cli-base-path-smoke.json"
       falsification_questions:
         - "Does smoke JSON show client tied-project base_path?"
         - "Does Track A remain not_measured with REQ-TIED_CLIENT_FEEDBACK_CAPTURE owner?"
-      disconfirming_observations:
-        - "Bootstrap tests pass after resolve-tied-cli-env import fix"
-      evidence_references:
-        - "tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/gf16-tied-cli-base-path-smoke.json"
-        - "tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/feedback-dual-track-register.md"
-        - "docs/demos/trial-readout-PROMPT-GF-16-1792937222.md"
-    risks:
-      - id: "RISK-GF16-001"
-        summary: "Detail/index drift on REQ-TIED_CLI_MCP_JSON_BASE_PATH after LEAP import fix"
-        mitigation: "Re-run bootstrap tests and tied_verify"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Operator Kaizen close-out, import LEAP, and feedback.yaml outcomes; no new runtime surface."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
     costly_choices:
       - choice: "Record outcome improved without GF-16 client smoke"
-        ladder: "costly misread"
         disposition: "Reject — require smoke or mark inconclusive/not_measured"
-      - choice: "Treat chat narrative as feedback ingest"
         ladder: "costly misread"
+      - choice: "Treat chat narrative as feedback ingest"
         disposition: "Reject — use fb-mvny01eb-my451g + receipts"
+        ladder: "costly misread"
+    risks:
+      - id: "RISK-GF16-001"
+        mitigation: "Re-run bootstrap tests and tied_verify"
+        summary: "Detail/index drift on REQ-TIED_CLI_MCP_JSON_BASE_PATH after LEAP import fix"
   test_strategy:
-    proof_boundary: "Operator verification + existing bootstrap tests; no new production modules unless import fix requires composition test addition"
     focused_tests:
+      - "Optional RED: resolve-tied-cli-env.mjs integration from tmp client fixture"
       - "tools/bootstrap/lib/mcp-base-path.test.mjs"
       - "tools/bootstrap/lib/tied-cli-invoke.test.mjs"
-      - "Optional RED: resolve-tied-cli-env.mjs integration from tmp client fixture"
     operator_evidence:
       - "GF-16 cwd tied-cli tied_config_get_base_path JSON"
       - "tied_feedback_outcome_record receipt"
       - "tied_verify output for REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+    proof_boundary: "Operator verification + existing bootstrap tests; no new production modules unless import fix requires composition test addition"

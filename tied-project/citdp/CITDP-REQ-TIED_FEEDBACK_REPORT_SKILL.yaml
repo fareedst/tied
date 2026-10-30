@@ -3,44 +3,44 @@ CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL:
     current_behavior: "Sponsors can call MCP feedback tools ad hoc; no bundled skill documents witness intake, intake gate, base-path confirmation, or receipt boundary. Bootstrap manifest lists four standalone skills only."
     desired_behavior: "Fifth standalone skill feedback installs via manifest; procedure matches Kaizen Phase 1 capture; vocab documents /feedback next to other project-operation skills."
     non_goals:
-      - "Modify tools/bundled-xlate-skill, bundled-unblock-skill, bundled-session-handoff-skill, bundled-clear-workspace-skill"
-      - "Change mcp-server/src/feedback*.ts"
       - "Auto-promote LEAP; transport/notification policy; fourth feedback entry type"
+      - "Change mcp-server/src/feedback*.ts"
+      - "Modify tools/bundled-xlate-skill, bundled-unblock-skill, bundled-session-handoff-skill, bundled-clear-workspace-skill"
     success_criteria:
-      - "REQ-TIED_FEEDBACK_REPORT_SKILL feedback-install criterion met"
       - "client-skills-catalog.test.mjs expects five standalone skills"
       - "feedback-skill.test.ts static install smoke passes"
+      - "REQ-TIED_FEEDBACK_REPORT_SKILL feedback-install criterion met"
       - "tied_validate_consistency passes"
     unchanged_behavior:
-      - "captureOperationalObservation and promotion modules"
       - "/xlate, /unblock, /handoff, /clear-workspace skill sources"
+      - "captureOperationalObservation and promotion modules"
   completion_criteria:
     focused_tests: "tools/bootstrap/lib/client-skills-catalog.test.mjs; mcp-server/src/e2e/feedback-skill.test.ts"
     persist_policy: "persist CITDP on close-out"
     verification: "tied_validate_consistency; tied_verify when gated"
   impact_analysis:
     depends_on:
+      - "IMPL-MCP_FEEDBACK_TOOLS"
       - "REQ-FEEDBACK_TO_TIED"
       - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
-      - "IMPL-MCP_FEEDBACK_TOOLS"
     files:
-      - "tools/bundled-feedback-skill/SKILL.md"
-      - "tools/bootstrap/manifest.json"
-      - "tools/bootstrap/lib/client-skills-catalog.test.mjs"
       - "mcp-server/src/e2e/feedback-skill.test.ts"
       - "tied-project/vocab/project-operations-mcp.md"
       - "tied-project/vocab/routing.md"
+      - "tools/bootstrap/lib/client-skills-catalog.test.mjs"
+      - "tools/bootstrap/manifest.json"
+      - "tools/bundled-feedback-skill/SKILL.md"
     modules:
-      - "client_skills_catalog"
       - "bundled_feedback_skill"
+      - "client_skills_catalog"
     tags:
       - "bootstrap-skills"
       - "kaizen-capture"
     tied_tokens_new:
-      - "REQ-TIED_FEEDBACK_REPORT_SKILL"
       - "ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY"
       - "IMPL-TIED_FEEDBACK_REPORT_SKILL"
+      - "REQ-TIED_FEEDBACK_REPORT_SKILL"
   leap_feedback:
     divergences_from_analysis: "Build-plan re-selected minimal depth for bootstrap-only proof boundary; runtime capture remains in skill procedure."
     propagation: "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS standalone-manifest cross-ref extended for feedback"
@@ -48,8 +48,8 @@ CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL:
   record_identity:
     author: "build-plan"
     change_request_id: "REQ-TIED_FEEDBACK_REPORT_SKILL"
-    closed_at: "2026-10-24T06:05:00-07:00"
     close_out_run_id: "close-out-req-tied-feedback-report-skill-2026-10-24"
+    closed_at: "2026-10-24T06:05:00-07:00"
     date: "2026-10-23"
     depth_tier: "minimal"
     gate_policy: "advisory"
@@ -65,10 +65,10 @@ CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL:
         owner: "sponsor"
         rationale: "Minimal depth bootstrap skill install; catalog and feedback-skill e2e satisfy advisory close_out without phase artifacts."
       counterexamples:
-        - "Skill documents capture but omits base_path confirm — silent write to wrong client feedback.yaml"
+        - "Intake gate skipped when sponsor pastes contract text only — empty observation persisted"
         - "Manifest lists feedback but storeDir missing — install skips fifth skill while catalog test passes stale manifest"
         - "Receipt wording implies LEAP promotion authorized without explicit sponsor promote request"
-        - "Intake gate skipped when sponsor pastes contract text only — empty observation persisted"
+        - "Skill documents capture but omits base_path confirm — silent write to wrong client feedback.yaml"
       depth_change_waiver:
         approval: "build-plan-bootstrap-skill-surface-2026-10-23"
         expiry: "2026-12-31"
@@ -77,8 +77,8 @@ CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL:
       depth_selected_at: "2026-10-23T22:35:00-07:00"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "feedback-skill.test.ts asserts tied_feedback_capture_observation and receipt boundary language"
         - "client-skills-catalog.test.mjs throws when bundled-feedback-skill storeDir absent"
+        - "feedback-skill.test.ts asserts tied_feedback_capture_observation and receipt boundary language"
       eligibility_triggers_matched:
         - "external_sponsor_input"
         - "persistence_feedback_yaml"
@@ -98,9 +98,9 @@ CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL:
         owner: "sponsor"
         rationale: "Eligibility triggers matched for runtime capture; build-plan minimal/advisory proof boundary is manifest + static SKILL.md tests only."
       prior_depth_tier: "integrated"
-      sub_adversarial_inquiry_pass: "not_applicable"
       rationale: "Bootstrap file copy and linked stubs plus static content tests; runtime capture rules live in skill procedure and existing feedback MCP."
       research_profile: "planning-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
     residual_risk:
       expiry: "2027-04-23"
       owner: "sponsor"
@@ -113,10 +113,10 @@ CITDP-REQ-TIED_FEEDBACK_REPORT_SKILL:
         severity: "High"
   test_strategy:
     module_validation:
-      - boundary: "manifest load and copy only"
-        module: "client_skills_catalog"
-        tests: "tools/bootstrap/lib/client-skills-catalog.test.mjs"
       - boundary: "bundled SKILL.md content contract"
         module: "bundled_feedback_skill"
         tests: "mcp-server/src/e2e/feedback-skill.test.ts"
+      - boundary: "manifest load and copy only"
+        module: "client_skills_catalog"
+        tests: "tools/bootstrap/lib/client-skills-catalog.test.mjs"
     summary: "RED catalog + feedback-skill tests; GREEN skill dir and manifest entry; no feedback.ts runtime changes."

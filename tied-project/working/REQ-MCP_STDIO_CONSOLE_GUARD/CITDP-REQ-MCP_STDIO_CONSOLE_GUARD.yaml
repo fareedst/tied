@@ -1,65 +1,61 @@
-record_identity:
-  change_request_id: REQ-MCP_STDIO_CONSOLE_GUARD
-  recorded_at: "2026-10-25"
-  title: "MCP stdio console guard (Kaizen fb-mvnztbmv-ez5nep)"
-  profile_depth: minimal
-  depth_tier: minimal
-  gate_policy: advisory
 change_definition:
-  current_behavior: >
-    MCP tool handlers call console.debug/log with DEBUG lines on stdout; Cursor MCP host parses
-    non-JSON lines and fails transport (Unexpected token D DEBUG).
-  desired_behavior: >
-    MCP stdio server process patches console.log/debug/info: default no-op on stdout;
-    TIED_MCP_DIAGNOSTICS enables stderr-only formatted diagnostics.
+  current_behavior: "MCP tool handlers call console.debug/log with DEBUG lines on stdout; Cursor MCP host parses non-JSON lines and fails transport (Unexpected token D DEBUG).\n"
+  desired_behavior: "MCP stdio server process patches console.log/debug/info: default no-op on stdout; TIED_MCP_DIAGNOSTICS enables stderr-only formatted diagnostics.\n"
   non_goals:
-    - "Rewriting all console.debug call sites"
     - "Changing CLI stdout JSON contracts"
+    - "Rewriting all console.debug call sites"
   success_criteria:
-    - "mcp-stdio-console-guard.test.ts passes"
     - "mcp-server npm test passes"
+    - "mcp-stdio-console-guard.test.ts passes"
     - "pseudocode_validate ok for IMPL-MCP_STDIO_CONSOLE_GUARD"
-impact_analysis:
-  modules_or_boundaries: "mcp-server/src index entry; console guard module"
-  tied_tokens_new:
-    - REQ-MCP_STDIO_CONSOLE_GUARD
-    - ARCH-MCP_STDIO_CONSOLE_GUARD
-    - IMPL-MCP_STDIO_CONSOLE_GUARD
-  tied_tokens_affected:
-    - REQ-TIED_SETUP
-    - REQ-MCP_USAGE_METRICS
-    - REQ-FEEDBACK_TO_TIED
-  impl_inventory:
-    - impl_token: IMPL-MCP_STDIO_CONSOLE_GUARD
-risk_analysis:
-  adversarial_inquiry:
-    depth_tier: minimal
-    gate_policy: advisory
-    sub_adversarial_inquiry_pass: not_applicable
-    rationale: Internal MCP hygiene; no auth, network, or persistence.
-    counterexamples:
-      - "Guard loads after a dependency logs to stdout at import time"
-      - "Third-party MCP SDK writes to stdout during tool calls"
-    falsification_questions:
-      - "Does console.debug with object args still corrupt stdout when diagnostics env unset?"
-      - "Does guard apply when MCP server restarted without rebuild?"
-    disconfirming_observations:
-      - "mcp-stdio-console-guard.test.ts captures zero stdout bytes when env unset"
-    evidence_references:
-      - "tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/npm-test-2026-10-25.txt"
-      - "tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md"
-  quality_profiles:
-    - baseline-functional
-test_strategy:
-  levels:
-    - "L0 unit: mcp-stdio-console-guard.test.ts"
-    - "L1 workspace: mcp-server npm test"
 evidence:
   command_seq:
     - "cd mcp-server && npm run build && npm test"
   proof_boundaries:
     - "command result only"
+impact_analysis:
+  impl_inventory:
+    - impl_token: "IMPL-MCP_STDIO_CONSOLE_GUARD"
+  modules_or_boundaries: "mcp-server/src index entry; console guard module"
+  tied_tokens_affected:
+    - "REQ-FEEDBACK_TO_TIED"
+    - "REQ-MCP_USAGE_METRICS"
+    - "REQ-TIED_SETUP"
+  tied_tokens_new:
+    - "ARCH-MCP_STDIO_CONSOLE_GUARD"
+    - "IMPL-MCP_STDIO_CONSOLE_GUARD"
+    - "REQ-MCP_STDIO_CONSOLE_GUARD"
+plan_ref: "tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/PLAN.md"
+record_identity:
+  change_request_id: "REQ-MCP_STDIO_CONSOLE_GUARD"
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-25"
+  title: "MCP stdio console guard (Kaizen fb-mvnztbmv-ez5nep)"
+risk_analysis:
+  adversarial_inquiry:
+    counterexamples:
+      - "Guard loads after a dependency logs to stdout at import time"
+      - "Third-party MCP SDK writes to stdout during tool calls"
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "mcp-stdio-console-guard.test.ts captures zero stdout bytes when env unset"
+    evidence_references:
+      - "tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/npm-test-2026-10-25.txt"
+      - "tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md"
+    falsification_questions:
+      - "Does console.debug with object args still corrupt stdout when diagnostics env unset?"
+      - "Does guard apply when MCP server restarted without rebuild?"
+    gate_policy: "advisory"
+    rationale: "Internal MCP hygiene; no auth, network, or persistence."
+    sub_adversarial_inquiry_pass: "not_applicable"
+  quality_profiles:
+    - "baseline-functional"
 source_feedback_ids:
-  - fb-mvnztbmv-ez5nep
-status: implemented
-plan_ref: tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/PLAN.md
+  - "fb-mvnztbmv-ez5nep"
+status: "implemented"
+test_strategy:
+  levels:
+    - "L0 unit: mcp-stdio-console-guard.test.ts"
+    - "L1 workspace: mcp-server npm test"

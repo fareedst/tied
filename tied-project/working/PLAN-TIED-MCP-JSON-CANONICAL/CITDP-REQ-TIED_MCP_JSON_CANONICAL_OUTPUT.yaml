@@ -1,25 +1,17 @@
 CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
   change_definition:
-    current_behavior: |
-      refreshTiedMcpServersJson merges tied-yaml entries then writes JSON.stringify(cfg) preserving
-      JavaScript object insertion order. env keys often appear non-alphabetically (e.g. TIED_CLIENT_PROJECT_PATH before TIED_CLIENT_BUNDLE_PATH).
-      mcpServers and server entry property order depend on merge history and foreign server layout.
-    desired_behavior: |
-      Before every TIED write of .cursor/mcp.json and .mcp.json, canonicalizeMcpJsonDocument sorts object keys
-      alphabetically at root, mcpServers, each server entry, and nested env/headers maps; args arrays preserve order.
-      Values and foreign server semantics unchanged; only deterministic serialization order.
+    current_behavior: "refreshTiedMcpServersJson merges tied-yaml entries then writes JSON.stringify(cfg) preserving\nJavaScript object insertion order. env keys often appear non-alphabetically (e.g. TIED_CLIENT_PROJECT_PATH before TIED_CLIENT_BUNDLE_PATH).\nmcpServers and server entry property order depend on merge history and foreign server layout.\n"
+    desired_behavior: "Before every TIED write of .cursor/mcp.json and .mcp.json, canonicalizeMcpJsonDocument sorts object keys\nalphabetically at root, mcpServers, each server entry, and nested env/headers maps; args arrays preserve order.\nValues and foreign server semantics unchanged; only deterministic serialization order.\n"
     non_goals:
-      - Canonicalizing non-bootstrap JSON (envelopes, gate receipts, MCP server API responses)
-      - Global JSON canonicalizer for all TIED packages in this change
-      - Modifying MCP read paths or env resolution semantics
+      - "Canonicalizing non-bootstrap JSON (envelopes, gate receipts, MCP server API responses)"
+      - "Global JSON canonicalizer for all TIED packages in this change"
+      - "Modifying MCP read paths or env resolution semantics"
     success_criteria:
-      - Unit tests prove canonicalizeMcpJsonDocument sort rules including args exception
-      - Integration test proves on-disk mcp.json after refresh has sorted mcpServers and env keys
-      - Existing mcp-config regression tests pass (values)
-      - REQ/ARCH/IMPL + pseudo-code; bootstrap README documents policy
-    unchanged_behavior: |
-      Brownfield merge preserves foreign mcpServers and operator fields; path env migration and metrics env unchanged;
-      create-only policies for unrelated files unchanged.
+      - "Existing mcp-config regression tests pass (values)"
+      - "Integration test proves on-disk mcp.json after refresh has sorted mcpServers and env keys"
+      - "REQ/ARCH/IMPL + pseudo-code; bootstrap README documents policy"
+      - "Unit tests prove canonicalizeMcpJsonDocument sort rules including args exception"
+    unchanged_behavior: "Brownfield merge preserves foreign mcpServers and operator fields; path env migration and metrics env unchanged;\ncreate-only policies for unrelated files unchanged.\n"
   delivery_record:
     close_out_evidence: null
     closed_at: null
@@ -27,18 +19,16 @@ CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
     plan_refine_pass: 1
     status: "planned"
   impact_analysis:
-    impl_inventory_notes: |
-      New mcp-json-canonical.mjs; one-line call site in mcp-config refreshTiedMcpServersJson.
-    modules_or_boundaries: |
-      tools/bootstrap/lib (mcp-config, new canonicalizer, tests); tools/bootstrap/README.md; CHANGELOG.
+    impl_inventory_notes: "New mcp-json-canonical.mjs; one-line call site in mcp-config refreshTiedMcpServersJson.\n"
+    modules_or_boundaries: "tools/bootstrap/lib (mcp-config, new canonicalizer, tests); tools/bootstrap/README.md; CHANGELOG.\n"
     tied_tokens_affected:
+      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-TIED_SETUP"
-      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
     tied_tokens_new:
-      - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
       - "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT"
       - "IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT"
+      - "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
   record_identity:
     change_request_id: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
     depth_tier: "minimal"
@@ -50,12 +40,12 @@ CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "Operators rely on hand-ordered mcp.json for human scanning"
         - "localeCompare locale differs across CI vs macOS"
+        - "Operators rely on hand-ordered mcp.json for human scanning"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "Sorted keys improve diff stability without value changes"
         - "ASCII env names sort identically under default localeCompare"
+        - "Sorted keys improve diff stability without value changes"
       eligibility_triggers_matched: []
       evidence_references:
         - "tied-project/working/PLAN-TIED-MCP-JSON-CANONICAL/PLAN.md"
@@ -75,7 +65,7 @@ CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
         summary: "First refresh after upgrade reorders keys in hand-edited mcp.json"
   test_strategy:
     unit:
-      - "tools/bootstrap/lib/mcp-json-canonical.test.mjs (new) — sort rules, args preserved"
       - "tools/bootstrap/lib/mcp-config.test.mjs — on-disk key order after refresh"
+      - "tools/bootstrap/lib/mcp-json-canonical.test.mjs (new) — sort rules, args preserved"
     verification_commands:
       - "node --test tools/bootstrap/lib/mcp-json-canonical.test.mjs tools/bootstrap/lib/mcp-config.test.mjs"

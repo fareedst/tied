@@ -12,4 +12,4 @@
 ### Commit
 
 - **Subject:** `docs(readme): brownfield comprehension quick-start section`
-- **SHA:** `26b77917534c99b65427ce0eedc964d1dd3695c9` (parent handoff; amend if handoff is amended again)
+- **SHA:** see `git log -1 --grep=brownfield comprehension`

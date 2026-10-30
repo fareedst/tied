@@ -33,6 +33,8 @@ docs/comparisons/*
 !docs/comparisons/anthropic-llm-formal-verification-vs-tied-agent-management.md
 !docs/comparisons/ndtp-ai-ontology-extension.md
 !docs/comparisons/ndtp-ai-ontology-extension-vs-tied-agent-management.md
+!docs/comparisons/software-engineering-degree.md
+!docs/comparisons/software-engineering-degree-vs-tied.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

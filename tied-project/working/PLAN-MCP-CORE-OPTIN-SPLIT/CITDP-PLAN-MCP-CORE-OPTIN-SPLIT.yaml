@@ -10,16 +10,16 @@ CITDP-PLAN-MCP-CORE-OPTIN-SPLIT:
       - "mcp-config tests cover dual servers and Claude partial merge"
       - "new-tied-client e2e never invokes mcp enable"
       - "tool-profiles unit tests and stdio tools/list counts pass"
+  completion_criteria:
+    envelope_path: "tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/request-evidence-envelope.v1.json"
+    verification_gate_notes: "mcp-server npm test; node --test tools/bootstrap/lib/mcp-config.test.mjs"
   evidence:
     command_seq:
       - "cd mcp-server && npm run build && npx tsx --test src/tool-profiles.test.ts src/tool-profile-stdio.test.ts"
       - "node --test tools/bootstrap/lib/mcp-config.test.mjs"
     proof_boundaries:
-      - "Tool counts are registration partition only; not production usage metrics"
       - "Brownfield merge preserves foreign mcpServers keys in fixtures only"
-  completion_criteria:
-    envelope_path: "tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/request-evidence-envelope.v1.json"
-    verification_gate_notes: "mcp-server npm test; node --test tools/bootstrap/lib/mcp-config.test.mjs"
+      - "Tool counts are registration partition only; not production usage metrics"
   impact_analysis:
     impl_inventory:
       - "IMPL-MCP_USAGE_METRICS"

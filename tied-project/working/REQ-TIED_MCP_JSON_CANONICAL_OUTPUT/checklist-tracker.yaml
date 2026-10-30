@@ -1,93 +1,93 @@
 citdp:
-  path: tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml
-copy_hygiene: Tracker for REQ-TIED_MCP_JSON_CANONICAL_OUTPUT; close-out 2026-10-29.
-depth_tier: minimal
-description: Canonical alphabetical mcp.json output at minimal advisory depth.
+  path: "tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/CITDP-REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
+copy_hygiene: "Tracker for REQ-TIED_MCP_JSON_CANONICAL_OUTPUT; close-out 2026-10-29."
+depth_tier: "minimal"
+description: "Canonical alphabetical mcp.json output at minimal advisory depth."
 execution_evidence:
   close_out_evidence:
+    commit_sha: "b1ec7611"
     date: "2026-10-29"
     deferred: []
     gates:
       close_out:
         allowed: true
-        run_id: close-out-mcp-json-canonical-20261029-r3
-    commit_sha: b1ec7611
-    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+        run_id: "close-out-mcp-json-canonical-20261029-r3"
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - sub-adversarial-inquiry-pass
-    - author-requirement
-    - author-architecture
-    - resolve-pseudocode
-    - gate-pseudocode-validation
-    - unit-test-red
-    - unit-test-green
-    - verification-gate
-  envelope_path: tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/request-evidence-envelope.v1.json
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/request-evidence-envelope.v1.json"
   gates:
     pre_implementation:
       allowed: true
-      run_id: refine-plan-mcp-json-canonical-20261029
+      run_id: "refine-plan-mcp-json-canonical-20261029"
     verification:
       allowed: true
-      run_id: build-plan-mcp-json-canonical-verify-20261029
-  request: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
-gate_policy: advisory
-profile_depth: minimal
-purpose: Tracker through close_out for REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.
-request: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
-request_token: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_complete
+      run_id: "build-plan-mcp-json-canonical-verify-20261029"
+  request: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Tracker through close_out for REQ-TIED_MCP_JSON_CANONICAL_OUTPUT."
+request: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+request_token: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
 steps:
-  - disposition: completed
-    id: session-bootstrap
-    notes: PRELOAD tied-yaml-mcp.md; PLAN-TIED-MCP-JSON-CANONICAL.
-  - disposition: completed
-    id: translate-sponsor-intent
-    notes: Full mcp.json canonical shape; alphabetical env and object keys.
-  - disposition: completed
-    id: change-definition
-    notes: CITDP in REQ working folder.
-  - disposition: completed
-    id: impact-discovery
-    notes: mcp-json-canonical.mjs + refreshTiedMcpServersJson choke point.
-  - disposition: completed
-    id: risk-assessment
-    notes: Reorder-only refresh diffs; scope bootstrap only.
-  - disposition: completed
-    id: test-strategy
-    notes: CITDP test_strategy unit + integration commands.
-  - disposition: not_applicable
+  - disposition: "completed"
+    id: "session-bootstrap"
+    notes: "PRELOAD tied-yaml-mcp.md; PLAN-TIED-MCP-JSON-CANONICAL."
+  - disposition: "completed"
+    id: "translate-sponsor-intent"
+    notes: "Full mcp.json canonical shape; alphabetical env and object keys."
+  - disposition: "completed"
+    id: "change-definition"
+    notes: "CITDP in REQ working folder."
+  - disposition: "completed"
+    id: "impact-discovery"
+    notes: "mcp-json-canonical.mjs + refreshTiedMcpServersJson choke point."
+  - disposition: "completed"
+    id: "risk-assessment"
+    notes: "Reorder-only refresh diffs; scope bootstrap only."
+  - disposition: "completed"
+    id: "test-strategy"
+    notes: "CITDP test_strategy unit + integration commands."
+  - disposition: "not_applicable"
     evidence_refs:
-      - tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/not-applicable-receipt.v1.json
-      - tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/sub-adversarial-inquiry-pass-na.md
-    id: sub-adversarial-inquiry-pass
-    policy: minimal-depth-no-inquiry
-    rationale: Bootstrap mcp.json serialization at minimal depth; sub_adversarial_inquiry_pass not_applicable.
-  - disposition: completed
-    id: author-requirement
-    notes: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT via MCP.
-  - disposition: completed
-    id: author-architecture
-    notes: ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT via MCP.
-  - disposition: completed
-    id: resolve-pseudocode
-    notes: IMPL sidecar + MCP sync.
-  - disposition: completed
-    id: gate-pseudocode-validation
-    notes: pseudocode_validate gate_mode ok.
-  - disposition: completed
-    id: unit-test-red
-    notes: mcp-json-canonical.test.mjs added first.
-  - disposition: completed
-    id: unit-test-green
-    notes: node --test mcp-json-canonical + mcp-config tests green.
-  - disposition: completed
-    id: verification-gate
-    notes: verification merged_decision.allowed; envelope blocking_gap_count 0.
+      - "tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/not-applicable-receipt.v1.json"
+      - "tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/sub-adversarial-inquiry-pass-na.md"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Bootstrap mcp.json serialization at minimal depth; sub_adversarial_inquiry_pass not_applicable."
+  - disposition: "completed"
+    id: "author-requirement"
+    notes: "REQ-TIED_MCP_JSON_CANONICAL_OUTPUT via MCP."
+  - disposition: "completed"
+    id: "author-architecture"
+    notes: "ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT via MCP."
+  - disposition: "completed"
+    id: "resolve-pseudocode"
+    notes: "IMPL sidecar + MCP sync."
+  - disposition: "completed"
+    id: "gate-pseudocode-validation"
+    notes: "pseudocode_validate gate_mode ok."
+  - disposition: "completed"
+    id: "unit-test-red"
+    notes: "mcp-json-canonical.test.mjs added first."
+  - disposition: "completed"
+    id: "unit-test-green"
+    notes: "node --test mcp-json-canonical + mcp-config tests green."
+  - disposition: "completed"
+    id: "verification-gate"
+    notes: "verification merged_decision.allowed; envelope blocking_gap_count 0."

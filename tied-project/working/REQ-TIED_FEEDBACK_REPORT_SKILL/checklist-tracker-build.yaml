@@ -1,88 +1,98 @@
-depth_tier: minimal
+depth_tier: "minimal"
 execution_evidence:
   completed:
-    - change-definition
-    - gate-pseudocode-validation
-    - impact-discovery
-    - risk-assessment
-    - session-bootstrap
-    - sub-adversarial-inquiry-pass
-    - test-strategy
-    - translate-sponsor-intent
-    - unit-test-green
-    - verification-gate
-  request: REQ-TIED_FEEDBACK_REPORT_SKILL
-gate_policy: advisory
-name: req-tied-feedback-report-skill-build-tracker
-request_token: REQ-TIED_FEEDBACK_REPORT_SKILL
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "verification-gate"
+  request: "REQ-TIED_FEEDBACK_REPORT_SKILL"
+gate_policy: "advisory"
+name: "req-tied-feedback-report-skill-build-tracker"
+request_token: "REQ-TIED_FEEDBACK_REPORT_SKILL"
 steps:
-  - disposition: completed
-    evidence_refs: &ref_0
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/change-definition-evidence.md
-    slug: change-definition
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/change-definition-evidence.md"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: *ref_0
-  - disposition: completed
-    evidence_refs: &ref_1
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/gate-pseudocode-validation-evidence.md
-    slug: gate-pseudocode-validation
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
     tracking:
-      status: completed
-      evidence_refs: *ref_1
-  - disposition: completed
-    evidence_refs: &ref_2
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/impact-discovery-evidence.md
-    slug: impact-discovery
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
     tracking:
-      status: completed
-      evidence_refs: *ref_2
-  - disposition: completed
-    evidence_refs: &ref_3
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/risk-assessment-evidence.md
-    slug: risk-assessment
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: *ref_3
-  - disposition: completed
-    evidence_refs: &ref_4
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/session-bootstrap-evidence.md
-    slug: session-bootstrap
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
     tracking:
-      status: completed
-      evidence_refs: *ref_4
-  - disposition: completed
-    evidence_refs: &ref_5
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/sub-adversarial-inquiry-pass-evidence.md
-    slug: sub-adversarial-inquiry-pass
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
-      status: completed
-      evidence_refs: *ref_5
-  - disposition: completed
-    evidence_refs: &ref_6
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/test-strategy-evidence.md
-    slug: test-strategy
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: *ref_6
-  - disposition: completed
-    evidence_refs: &ref_7
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/translate-sponsor-intent-evidence.md
-    slug: translate-sponsor-intent
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
-      evidence_refs: *ref_7
-  - disposition: completed
-    evidence_refs: &ref_8
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/unit-test-green-evidence.md
-    slug: unit-test-green
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
     tracking:
-      status: completed
-      evidence_refs: *ref_8
-  - disposition: completed
-    evidence_refs: &ref_9
-      - tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/verification-evidence-manifest.v1.json
-    slug: verification-gate
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: *ref_9
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"

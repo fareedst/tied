@@ -9,6 +9,15 @@ CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
     success_criteria:
       - "Envelope v1 backward compatible"
       - "Plumb v1 default unchanged without profile"
+  completion_criteria:
+    activation:
+      phase: "close_out"
+      request_token: "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
+      run_id: "oow3-closeout-2026-10-26"
+      scope:
+        - "IMPL-TIED_CHANGE_IMPACT_PROFILE#RUN_PLUMB_DIFF_IMPACT_PREVIEW#plumb-v2-rev1"
+    envelope_path: "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/request-evidence-envelope.v1.json"
+    tied_validate_consistency: "required"
   evidence:
     command_seq:
       - "cd mcp-server && npx tsx --test src/analysis/change-impact-profile.test.ts src/analysis/plumb-diff-impact-preview.test.ts"
@@ -27,15 +36,6 @@ CITDP-REQ-TIED_OPEN_ONTOLOGIES_WAVE3:
       - "IMPL-TIED_CHANGE_IMPACT_PROFILE"
       - "IMPL-TIED_INDEPENDENT_PROOF_ENVELOPE"
       - "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
-  completion_criteria:
-    activation:
-      phase: "close_out"
-      request_token: "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
-      run_id: "oow3-closeout-2026-10-26"
-      scope:
-        - "IMPL-TIED_CHANGE_IMPACT_PROFILE#RUN_PLUMB_DIFF_IMPACT_PREVIEW#plumb-v2-rev1"
-    envelope_path: "tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/request-evidence-envelope.v1.json"
-    tied_validate_consistency: "required"
   record_identity:
     change_request_id: "REQ-TIED_OPEN_ONTOLOGIES_WAVE3"
     checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"

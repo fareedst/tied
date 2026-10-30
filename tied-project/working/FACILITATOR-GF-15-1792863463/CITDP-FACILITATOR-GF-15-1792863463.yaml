@@ -3,13 +3,13 @@ CITDP-FACILITATOR-GF-15-1792863463:
     current_behavior: "Disposable client 1792863463 completed REQ-OUT_OF_ORDER_EVENT_AGGREGATOR (PROMPT-GF-15) on TIED 4.0.0 with close-out handoff; no store trial readout."
     desired_behavior: "GF cohort-quality facilitator trial readout under docs/demos/ plus README and greenfield catalog links; dimensioned grading vs peer readouts."
     non_goals:
-      - "Mint store [REQ-*] tokens for product feature"
-      - "Persist CITDP to tied-project/citdp/"
-      - "Mutate disposable client"
       - "Claim methodology effectiveness from a single trial"
+      - "Mint store [REQ-*] tokens for product feature"
+      - "Mutate disposable client"
+      - "Persist CITDP to tied-project/citdp/"
     success_criteria:
-      - "docs/demos/trial-readout-PROMPT-GF-15-1792863463.md matches GF section contract"
       - "Catalog recorded-trials and README include PROMPT-GF-15 row"
+      - "docs/demos/trial-readout-PROMPT-GF-15-1792863463.md matches GF section contract"
       - "Facilitator re-verify: npm test 10 pass, tied_validate_consistency ok on client tied-project/"
     unchanged_behavior: "Subject client product and TIED indexes remain as-built."
   evidence:
@@ -19,8 +19,8 @@ CITDP-FACILITATOR-GF-15-1792863463:
       - "npm run lint:ts @ client root"
       - "tied-cli tied_validate_consistency with TIED_BASE_PATH -> client tied-project/"
     proof_boundaries:
-      - "facilitator_session_reconstruction"
       - "does_not_prove_methodology_effectiveness"
+      - "facilitator_session_reconstruction"
       - "subject_client_observed_not_rebuilt"
   impact_analysis:
     impl_inventory_notes: "Markdown and catalog index rows only in stdd store."
@@ -37,5 +37,5 @@ CITDP-FACILITATOR-GF-15-1792863463:
   risk_analysis:
     adversarial_inquiry:
       depth_tier: "minimal"
-      gate_policy: "advisory"
       eligibility: "not_applicable"
+      gate_policy: "advisory"

@@ -1,23 +1,21 @@
-copy_hygiene: >-
-  Facilitator publish tracker for FACILITATOR-GF-15-1792863463 only. Not the subject client master checklist.
-description: >
-  Minimal tracker for store documentation-only facilitator readout (PROMPT-GF-15 / client 1792863463).
+copy_hygiene: "Facilitator publish tracker for FACILITATOR-GF-15-1792863463 only. Not the subject client master checklist."
+depth_tier: "minimal"
+description: "Minimal tracker for store documentation-only facilitator readout (PROMPT-GF-15 / client 1792863463).\n"
 execution_evidence:
-  request: FACILITATOR-GF-15-1792863463
-  completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - build-plan-verification
-    - publish-trial-readout
-    - link-demo-catalogs
-    - traceable-commit
   close_out_evidence:
     date: "2026-10-24"
     deferred: []
     envelope: null
     gates:
-      close_out: waived_minimal_facilitator_no_envelope
-profile_depth: minimal
-depth_tier: minimal
-gate_policy: advisory
+      close_out: "waived_minimal_facilitator_no_envelope"
+  completed:
+    - "build-plan-verification"
+    - "change-definition"
+    - "link-demo-catalogs"
+    - "publish-trial-readout"
+    - "session-bootstrap"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+  request: "FACILITATOR-GF-15-1792863463"
+gate_policy: "advisory"
+profile_depth: "minimal"
