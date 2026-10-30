@@ -1,24 +1,15 @@
-feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 4 durable checklist resume
+feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 5 isolated verification runner
 
-REQ-CTRL-007: resume agentstream from Authoritative Tracker via
-deriveChecklistResumePlan, --resume-from-tracker, and MCP
-tied_checklist_controller_resume_plan.
+REQ-CTRL-009: dedicated local child runner for quality_evidence_collect_manifest
+when verification.isolated_runner is true; manifest execution_runner provenance.
 
-Staging map (Wave 4):
-- mcp-server/src/checklist-controller-resume.{ts,test.ts}
-- mcp-server/packages/agentstream/src/{checklist-controller-resume.ts,apply-resume-from-tracker.ts,apply-resume-from-tracker.test.ts}
-- mcp-server/packages/agentstream/src/{dry-run-config.ts,run-pipeline-prep.ts,README.md}
-- mcp-server/packages/agentstream/src/{dae-gate-preflight.test.ts,jev-harness-preflight.test.ts}
-- mcp-server/src/{tool-profiles.test.ts,tool-profile-stdio.test.ts,tools/index.ts}
-- tied-project REQ/ARCH/IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER + indexes + semantic-tokens
-- tied-project/implementation-decisions/IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER-pseudocode.md
-- tied-project/vocab/agentstream.md
-- tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
-- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN,gap-matrix,CITDP,evidence/wave4-*.md,evidence/git-hygiene-receipt-2026-10-30-w4.md,evidence/proposed-commit-message.txt,evidence/traceable-commit-evidence.md,evidence/session-handoff.md,evidence/verification-evidence-manifest.v1.json}
+Close-out: machine allowed, envelope blocking 0, adherence reconciled.
+
+Staging map (Wave 5):
+- mcp-server/src/{isolated-verification-runner.ts,isolated-verification-runner.test.ts,cli/isolated-verification-runner.ts}
+- mcp-server/src/{quality-evidence-collection.ts,quality-evidence.ts}
+- tools/bootstrap/lib/project-config.mjs
 - CHANGELOG.md
-
-Excluded: unrelated fixture/benchmark drift.
-
-Completion signals: close_out allowed; envelope blocking_gap_count 0; gate advisory finding_unresolved/warn_not_success.
-
-Feedback capture: N/A.
+- tied-project REQ/ARCH/IMPL-TIED_ISOLATED_VERIFICATION_RUNNER + indexes + config.yaml + vocab
+- tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
+- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN,gap-matrix,CITDP,evidence/wave5-*.md,evidence/git-hygiene-receipt-2026-10-30-w5.md,evidence/proposed-commit-message.txt,evidence/traceable-commit-evidence.md,evidence/session-handoff.md,evidence/verification-evidence-manifest.v1.json}

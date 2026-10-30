@@ -3,5 +3,7 @@ dae:
 jev:
   plan_skills: true
 schema: "tied-project-config.v1"
+verification:
+  isolated_runner: true
 yaml:
   scalar_style: "wrapped"

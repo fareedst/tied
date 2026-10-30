@@ -1,0 +1,24 @@
+REQ-TIED_ISOLATED_VERIFICATION_RUNNER:
+  REQ-TIED_ISOLATED_VERIFICATION_RUNNER:
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Isolated verification runner"
+    rationale:
+      benefits:
+        - "Smaller execution boundary for declared verification argv"
+      problems_solved:
+        - "Shared MCP privileges during quality_evidence_collect_manifest"
+      why: "REQ-CTRL-009 requires verification with bounded permissions and structured evidence capture."
+    satisfaction_criteria:
+      - criterion: "verification-evidence-manifest.v1 records execution_runner mode and entry when isolated."
+      - criterion: "verification.isolated_runner: false preserves in-process IMPL-QUALITY_EVIDENCE_COMMAND_RUNNER behavior."
+      - criterion: "verification.isolated_runner: true routes quality collection through dedicated child runner entry."
+    traceability:
+      architecture:
+        - "ARCH-TIED_ISOLATED_VERIFICATION_RUNNER"
+      implementation:
+        - "IMPL-TIED_ISOLATED_VERIFICATION_RUNNER"
+      requirements:
+        - "REQ-TIED_INTENT_CONTROL_PLANE"
+        - "REQ-TIED_ISOLATED_VERIFICATION_RUNNER"

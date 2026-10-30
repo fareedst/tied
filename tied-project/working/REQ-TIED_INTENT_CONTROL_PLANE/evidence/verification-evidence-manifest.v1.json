@@ -11,10 +11,10 @@
         "npm test --prefix mcp-server"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 36513,
-      "exit_code": 0,
+      "duration_ms": 29902,
+      "exit_code": 1,
       "id": "citdp-evidence-1",
-      "result": "passed"
+      "result": "failed"
     },
     {
       "artifacts": [
@@ -27,13 +27,13 @@
         "npx tsc -b mcp-server"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 1297,
+      "duration_ms": 923,
       "exit_code": 1,
       "id": "citdp-evidence-2",
       "result": "failed"
     }
   ],
-  "commit": "e1a6304d3ac09586b81f2f82d04f37f6d3689f54",
+  "commit": "6856f61e0e4a60515dd304ace73d07a4e7473f8f",
   "covered_tokens": [
     "ARCH-TIED_PROJECT_IDENTITY",
     "IMPL-TIED_PROJECT_IDENTITY",
@@ -41,6 +41,10 @@
   ],
   "environment": {
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
   },
   "human_decisions": {
     "references": [],

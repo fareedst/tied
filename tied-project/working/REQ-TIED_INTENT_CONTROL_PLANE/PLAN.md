@@ -11,6 +11,7 @@ Linked Cursor plan: `intent_control_plane_req_9e21803c.plan.md`
 | 2 | REQ-CTRL-002 — atomic `yaml_updates_apply` snapshot/rollback ([REQ-TIED_YAML_UPDATES_ATOMIC_BATCH]) |
 | 3 | REQ-CTRL-005/011 — `tied_verify` manifest provenance + freshness ([REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE]) |
 | 4 | REQ-CTRL-007 — durable checklist resume ([REQ-TIED_DURABLE_CHECKLIST_CONTROLLER]) |
+| 5 | REQ-CTRL-009 — isolated verification runner ([REQ-TIED_ISOLATED_VERIFICATION_RUNNER]) |
 
 ## Sponsor decisions
 

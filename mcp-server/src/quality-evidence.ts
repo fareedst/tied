@@ -39,6 +39,11 @@ export type QualityEvidenceRow = {
   };
 };
 
+export type VerificationExecutionRunner = {
+  mode: "in_process" | "isolated_subprocess";
+  entry: string;
+};
+
 export type VerificationEvidenceInput = {
   run_id: string;
   commit: string;
@@ -48,6 +53,7 @@ export type VerificationEvidenceInput = {
   covered_tokens: string[];
   proof_boundaries: string[];
   decision_references?: string[];
+  execution_runner?: VerificationExecutionRunner;
 };
 
 export type VerificationEvidenceManifest = {
@@ -59,6 +65,7 @@ export type VerificationEvidenceManifest = {
   quality_rows: QualityEvidenceRow[];
   covered_tokens: string[];
   proof_boundaries: string[];
+  execution_runner?: VerificationExecutionRunner;
   human_decisions: {
     stored_separately: true;
     references: string[];
@@ -193,6 +200,7 @@ export function buildVerificationEvidenceManifest(
     quality_rows: qualityRows,
     covered_tokens: sortedUnique(input.covered_tokens),
     proof_boundaries: sortedUnique(input.proof_boundaries),
+    execution_runner: input.execution_runner,
     human_decisions: {
       stored_separately: true,
       references: sortedUnique(input.decision_references ?? []),

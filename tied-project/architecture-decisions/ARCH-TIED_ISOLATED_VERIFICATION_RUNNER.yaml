@@ -1,0 +1,13 @@
+ARCH-TIED_ISOLATED_VERIFICATION_RUNNER:
+  ARCH-TIED_ISOLATED_VERIFICATION_RUNNER:
+    decision: "Declared verification argv runs in a dedicated local Node child when project config enables isolated_runner; MCP intent process spawns runner and records execution_runner on manifests."
+    metadata:
+      created: "2026-10-30"
+      status: "Accepted"
+    name: "Execution authority isolated verification runner"
+    traceability:
+      implementation:
+        - "IMPL-TIED_ISOLATED_VERIFICATION_RUNNER"
+      requirements:
+        - "REQ-TIED_INTENT_CONTROL_PLANE"
+        - "REQ-TIED_ISOLATED_VERIFICATION_RUNNER"

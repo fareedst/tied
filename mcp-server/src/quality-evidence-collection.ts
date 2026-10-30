@@ -9,10 +9,8 @@ import {
   type VerificationEvidenceInput,
   type VerificationEvidenceManifest,
 } from "./quality-evidence.js";
-import {
-  runDeclaredQualityCommands,
-  type QualityCommandDeclaration,
-} from "./quality-command-runner.js";
+import { runDeclaredQualityCommandsWithRunnerPolicy } from "./isolated-verification-runner.js";
+import type { QualityCommandDeclaration } from "./quality-command-runner.js";
 import {
   hashStringContents,
   tryPatchRequestEvidenceEnvelope,
@@ -29,11 +27,16 @@ export type EnvelopePatchContext = {
   manifest_relative_path: string;
 };
 
-export type QualityEvidenceCollectionInput = Omit<VerificationEvidenceInput, "command_results"> & {
+export type QualityEvidenceCollectionInput = Omit<
+  VerificationEvidenceInput,
+  "command_results" | "execution_runner"
+> & {
   commands: QualityCommandDeclaration[];
   default_timeout_ms?: number;
   default_max_output_bytes?: number;
   envelope_patch?: EnvelopePatchContext;
+  /** When set, enables isolated runner when tied-project/config.yaml verification.isolated_runner is true. */
+  project_root?: string;
   /** Explicit W2d hook context; when omitted but envelope_patch is set, hook runs from envelope request_token + project_root. */
   diff_scoped_crap_hook?: DiffScopedCrapHookContext;
 };
@@ -79,11 +82,15 @@ export async function collectVerificationEvidence(
   // How: Delegate validated command declarations and execution limits to the bounded command runner.
   // [IMPL-QUALITY_EVIDENCE_COLLECTION] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   // How: Run the upstream command runner, then build a manifest from observed results.
-  const command_results = await runDeclaredQualityCommands({
-    commands: input.commands,
-    default_timeout_ms: input.default_timeout_ms,
-    default_max_output_bytes: input.default_max_output_bytes,
-  });
+  const projectRoot = input.project_root ?? input.envelope_patch?.project_root;
+  const { command_results, execution_runner } = await runDeclaredQualityCommandsWithRunnerPolicy(
+    {
+      commands: input.commands,
+      default_timeout_ms: input.default_timeout_ms,
+      default_max_output_bytes: input.default_max_output_bytes,
+    },
+    { project_root: projectRoot },
+  );
   // [IMPL-QUALITY_EVIDENCE_COLLECTION] [IMPL-QUALITY_EVIDENCE_MANIFEST] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]
   // How: Delegate normalized command results and collection metadata to deterministic manifest generation.
   const manifest = buildVerificationEvidenceManifest({
@@ -95,6 +102,7 @@ export async function collectVerificationEvidence(
     covered_tokens: input.covered_tokens,
     proof_boundaries: input.proof_boundaries,
     decision_references: input.decision_references,
+    execution_runner,
   });
   if (input.envelope_patch) {
     const serialized = `${prettyCanonicalJson(manifest)}\n`;

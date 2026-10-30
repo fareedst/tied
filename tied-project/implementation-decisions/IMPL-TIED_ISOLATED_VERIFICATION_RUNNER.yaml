@@ -1,0 +1,18 @@
+IMPL-TIED_ISOLATED_VERIFICATION_RUNNER:
+  IMPL-TIED_ISOLATED_VERIFICATION_RUNNER:
+    implementation_approach:
+      details:
+        - "mcp-server/src/cli/isolated-verification-runner.ts"
+        - "mcp-server/src/isolated-verification-runner.ts"
+        - "tied-project/config.yaml verification.isolated_runner"
+      summary: "Child runner CLI plus runDeclaredQualityCommandsWithRunnerPolicy wired into collectVerificationEvidence."
+    metadata:
+      created: "2026-10-30"
+      status: "Planned"
+    name: "Isolated verification runner module"
+    traceability:
+      architecture:
+        - "ARCH-TIED_ISOLATED_VERIFICATION_RUNNER"
+      requirements:
+        - "REQ-TIED_INTENT_CONTROL_PLANE"
+        - "REQ-TIED_ISOLATED_VERIFICATION_RUNNER"

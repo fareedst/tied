@@ -2360,6 +2360,10 @@ ARCH-TIED_INTENT_CONTROL_PLANE:
   traceability:
     requirements:
       - "REQ-TIED_INTENT_CONTROL_PLANE"
+ARCH-TIED_ISOLATED_VERIFICATION_RUNNER:
+  detail_file: "architecture-decisions/ARCH-TIED_ISOLATED_VERIFICATION_RUNNER.yaml"
+  name: "Execution authority isolated verification runner"
+  status: "Accepted"
 ARCH-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture: []

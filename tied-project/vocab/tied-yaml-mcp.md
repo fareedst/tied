@@ -18,6 +18,7 @@
 | **write binding** | identity enforce, corpus guard | Fail-closed check before project corpus writes; Path 2 startup + `writeSerializedAtomic` hook · [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING](../implementation-decisions/IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING.yaml) |
 | **startup binding** | process bind | First resolve per `tied-project/` root compares live env/cwd identity to marker before mutations |
 | **identity mismatch** | wrong tree write | `DIAGNOSTIC: TIED_IDENTITY_WRITE_BINDING_MISMATCH` when marker ≠ resolved base or `project_id` |
+| **isolated verification runner** | dedicated local runner, execution runner | `quality_evidence_collect_manifest` spawns `isolated-verification-runner` child when `verification.isolated_runner: true`; manifest records `execution_runner` · [REQ-TIED_ISOLATED_VERIFICATION_RUNNER](../requirements/REQ-TIED_ISOLATED_VERIFICATION_RUNNER.yaml) |
 | **verify manifest provenance** | trusted pass list | `tied_verify` binds `passed_*` tokens to `verification-evidence-manifest.v1` `covered_tokens` · [REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE](../requirements/REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE.yaml) |
 | **verification manifest freshness** | stale verify evidence | Optional `current_commit` on `tied_verify` rejects manifest when `commit` disagrees (CASE-005) |
 | **identity source** | id type, id origin | Profile metadata: `configured` or `path_fallback` |

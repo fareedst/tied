@@ -1,57 +1,23 @@
 CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
   change_definition:
     current_behavior: "MCP resolves project_id for metrics but does not fail closed when TIED_CLIENT_PROJECT_PATH or cwd targets the wrong tied-project tree; project corpus writes proceed without marker binding."
-    desired_behavior: "Waves 1–3 shipped; Wave 4 durable checklist resume from Authoritative Tracker (REQ-CTRL-007) via deriveChecklistResumePlan, agentstream --resume-from-tracker, and MCP tied_checklist_controller_resume_plan."
+    desired_behavior: "Waves 1–4 shipped; Wave 5 isolated verification runner (REQ-CTRL-009) via dedicated local child entry, config verification.isolated_runner, and manifest execution_runner provenance on quality_evidence_collect_manifest."
     non_goals:
       - "OS sandbox blocking editor YAML edits"
       - "Path 3 marker-only routing (ignore env)"
     success_criteria:
       - "mcp-server tests green; tied_validate_consistency ok"
       - "pre_implementation and close_out gates allowed at integrated depth"
+      - "quality_evidence_collect_manifest uses isolated child when config enabled (Wave 5)"
       - "Startup and per-write reject wrong-tree mutations (Wave 1)"
-      - "Umbrella and Wave 1–2 REQ/ARCH/IMPL tokens validate"
+      - "Umbrella and Wave 1–5 REQ/ARCH/IMPL tokens validate"
       - "yaml_updates_apply sets rolled_back on mid-batch or consistency failure (Wave 2)"
     unchanged_behavior:
       - "Env dual-read for client paths at spawn"
       - "Project index write isolation"
       - "Read-only methodology merge"
-  completion_criteria:
-    activation:
-      phase: "close_out"
-      request_token: "REQ-TIED_INTENT_CONTROL_PLANE"
-      run_id: "icp-w4-closeout-20261030"
-    envelope_path: "tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/request-evidence-envelope.v1.json"
-    tied_validate_consistency: "required"
-    verification_gate_notes: "Wave 4: checklist-controller-resume.test.ts + apply-resume-from-tracker.test.ts green; npm test --prefix mcp-server; reuse Waves 1–3 inquiry artifacts"
-  evidence:
-    command_seq:
-      - "npm test --prefix mcp-server"
-      - "npx tsc -b mcp-server"
-    manifest_reference: "tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/verification-evidence-manifest.v1.json"
-    proof_boundaries:
-      - "baseline-functional"
-      - "external-input-security"
-  impact_analysis:
-    impl_inventory:
-      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
-      - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
-    modules_or_boundaries: "checklist-controller-resume.ts; apply-resume-from-tracker.ts; agentstream dry-run-config; tools/index.ts"
-    tied_tokens_affected:
-      - "ARCH-TIED_PROJECT_IDENTITY"
-      - "IMPL-TIED_PROJECT_IDENTITY"
-      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
-    tied_tokens_new:
-      - "ARCH-TIED_INTENT_CONTROL_PLANE"
-      - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
-      - "ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH"
-      - "IMPL-TIED_INTENT_CONTROL_PLANE"
-      - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
-      - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"
-      - "REQ-TIED_INTENT_CONTROL_PLANE"
-      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
-      - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
   leap_feedback:
-    divergences_from_analysis: "Duplicate checklist-controller-resume.ts in mcp-server and agentstream packages until LEAP unify; config checklist.resume_from_tracker not wired in agentstream apply yet."
+    divergences_from_analysis: "Duplicate checklist-controller-resume.ts in mcp-server and agentstream packages until LEAP unify; Wave 5 close-out deferred pending verification activation refresh."
     record_status: "final"
     tied_stack_updates_required:
       - "ARCH-TIED_PROJECT_IDENTITY LEAP for Path 2 marker binding (Wave 1)"
@@ -64,42 +30,6 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     gate_policy: "advisory"
     implementation_depth_tier: "integrated"
     profile_depth: "not_measured"
-    recorded_at: "2026-10-29"
-    title: "Intent control plane — Wave 4 durable checklist controller resume"
+    recorded_at: "2026-10-30"
+    title: "Intent control plane — Wave 5 isolated verification runner"
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
-  risk_analysis:
-    adversarial_inquiry:
-      assurance_profile: "external-input-security"
-      counterexamples:
-        - "Bootstrap overwrites valid marker on restart"
-        - "citdp-writer bypasses yaml-loader-only guard"
-        - "Sidecar fs.writeFileSync bypasses canonicalizer"
-      depth_tier: "integrated"
-      disconfirming_observations:
-        - "detail-loader calls assertBindingForWrite before sidecar bytes"
-        - "project-identity-write-binding.test.ts covers mismatch, opt-out, sidecar path"
-      eligibility_triggers_matched:
-        - "ai_enabled_tool_boundary"
-        - "external_input"
-        - "persistence"
-      evidence_references:
-        - "mcp-server/src/detail-loader.ts"
-        - "mcp-server/src/project-identity-write-binding.ts"
-        - "mcp-server/src/yaml-canonicalizer.ts"
-      falsification_questions:
-        - "Can yaml_index_insert mutate a foreign tied-project tree when env points elsewhere?"
-        - "Does bootstrap rewrite an existing valid marker on MCP restart?"
-        - "Does impl_detail_set_essence_pseudocode write without assertBindingForWrite?"
-      gate_policy: "advisory"
-      rationale: "External handoff design input; MCP write boundary; YAML persistence."
-      research_profile: "integrated-agent"
-      sub_adversarial_inquiry_pass: "required_before_red"
-    quality_evidence_matrix:
-      - applicability: "applicable"
-        attribute: "baseline-functional"
-        command_or_test: "project-identity-write-binding.test.ts"
-        evidence_method: "unit TDD"
-        owner: "build-plan"
-        threshold: "test green"
-  test_strategy:
-    path: "tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/PLAN.md"

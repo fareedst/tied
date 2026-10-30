@@ -2907,6 +2907,10 @@ IMPL-TIED_INTENT_CONTROL_PLANE:
       - "ARCH-TIED_INTENT_CONTROL_PLANE"
     requirements:
       - "REQ-TIED_INTENT_CONTROL_PLANE"
+IMPL-TIED_ISOLATED_VERIFICATION_RUNNER:
+  detail_file: "implementation-decisions/IMPL-TIED_ISOLATED_VERIFICATION_RUNNER.yaml"
+  name: "Isolated verification runner module"
+  status: "Planned"
 IMPL-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY:
   cross_references:
     architecture:

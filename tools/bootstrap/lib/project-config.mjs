@@ -13,6 +13,8 @@ export const PROJECT_CONFIG_SCHEMA_V1 = "tied-project-config.v1";
 export const PROJECT_CONFIG_TOP_LEVEL_KEYS = new Set([
   "schema",
   "yaml",
+  "identity",
+  "verification",
   "jev",
   "dae",
   "bbce",
