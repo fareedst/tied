@@ -26,6 +26,10 @@ import {
 } from "../yaml-loader.js";
 import { resolveTiedLayout } from "../tied-layout.js";
 import {
+  ENV_CLIENT_PROJECT_PATH,
+  LEGACY_ENV_CLIENT_PROJECT_PATH,
+} from "../tied-path-env.js";
+import {
   getDetailPath,
   loadDetail,
   listDetailTokens,
@@ -398,7 +402,7 @@ export const allTools = [
     name: "tied_config_get_base_path",
     config: {
       description:
-        "Return the effective TIED base path used by the server (resolved from TIED_BASE_PATH env or default 'tied'). Use to inspect current configuration.",
+        "Return the effective TIED project corpus path (writable tied-project/). Resolution order: TIED_CLIENT_PROJECT_PATH (canonical), then legacy TIED_BASE_PATH, then cwd discovery. Legacy env values may appear in env_* fields without affecting base_path when canonical is set.",
       inputSchema: z.object({}),
     },
     handler: async () => {
@@ -410,6 +414,15 @@ export const allTools = [
       const env_TIED_CLIENT_BUNDLE_PATH =
         process.env.TIED_CLIENT_BUNDLE_PATH?.trim() || null;
       const env_TIED_BASE_PATH = process.env.TIED_BASE_PATH?.trim() || null;
+      const project_path_resolved_from = env_TIED_CLIENT_PROJECT_PATH
+        ? ENV_CLIENT_PROJECT_PATH
+        : env_TIED_BASE_PATH
+          ? LEGACY_ENV_CLIENT_PROJECT_PATH
+          : "discovery";
+      const legacy_project_path_env_ignored =
+        env_TIED_CLIENT_PROJECT_PATH !== null &&
+        env_TIED_BASE_PATH !== null &&
+        path.resolve(env_TIED_CLIENT_PROJECT_PATH) !== path.resolve(env_TIED_BASE_PATH);
       const project_root = getClientProjectRoot();
       const layout = resolveTiedLayout(project_root);
       const bundle_root = getMethodologyBasePath();
@@ -422,6 +435,8 @@ export const allTools = [
             env_TIED_CLIENT_PROJECT_PATH,
             env_TIED_CLIENT_BUNDLE_PATH,
             env_TIED_BASE_PATH,
+            project_path_resolved_from,
+            legacy_project_path_env_ignored,
             project_root,
             bundle_root,
             store_root: process.env.TIED_STORE_ROOT ?? null,

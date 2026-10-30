@@ -1,6 +1,6 @@
 {
-  "built_at": "2026-10-24T14:51:49.107Z",
-  "content_hash": "ab3e5382dfe195b1b36308f806252bfaa766c282306306ee2e5b6a2ed8dc9ce0",
+  "built_at": "2026-10-30T05:55:41.315Z",
+  "content_hash": "64d05a0d51d256a38567ef083207aeaa5f35a41dc0a77c7afb307cdfbd784d03",
   "edges": [
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/adherence-evidence-resolve.ts#fileContentHash",
@@ -8508,6 +8508,36 @@
       "to_symbol_id": "mcp-server/src/adversarial-inquiry/checklist-parity-helpers.ts#yamlTasksForSlug"
     },
     {
+      "from_symbol_id": "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts#containsMarker",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/adversarial-inquiry/checklist-parity-helpers.ts#containsMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/adversarial-inquiry/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts#extractMarkdownSection",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/adversarial-inquiry/checklist-parity-helpers.ts#extractMarkdownSection"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/adversarial-inquiry/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts#loadChecklistYaml",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/adversarial-inquiry/checklist-parity-helpers.ts#loadChecklistYaml"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts#yamlTasksForSlug",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/adversarial-inquiry/checklist-parity-helpers.ts#yamlTasksForSlug"
+    },
+    {
       "from_symbol_id": "mcp-server/src/adversarial-inquiry/workflow.test.ts#appendFinding",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/adversarial-inquiry/workflow.ts#appendFinding"
@@ -8986,6 +9016,56 @@
       "from_symbol_id": "mcp-server/src/analysis/binding-inventory.ts#validateBindingInventory",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/binding-inventory.ts#validateAsyncSeamRules"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.test.ts#ChangeImpactProfileSchema",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#ChangeImpactProfileSchema"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.test.ts#computeImpactLegs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#computeImpactLegs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.test.ts#parseChangeImpactProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#parseChangeImpactProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#computeImpactLegs",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/change-locality-pilot.ts#matchPathAgainstGlobs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#loadChangeImpactProfile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#formatZodIssues"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#loadChangeImpactProfile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#matchPathAgainstGlobs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/change-locality-pilot.ts#matchPathAgainstGlobs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#z",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/zod.ts#z"
     },
     {
       "from_symbol_id": "mcp-server/src/analysis/change-locality-pilot.test.ts#classifyChangedPaths",
@@ -9908,117 +9988,117 @@
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#addAction"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#addAction"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#addAction"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#addAction"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#addAction"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#addAction"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#classifyToken"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#classifyToken"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#classifyToken"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#extractTokensFromLine"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#extractTokensFromLine"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#gitNameOnly"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#gitNameOnly"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#gitPatchForFile"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#gitRelativePath"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#gitTopLevel"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#isBinaryDiffPatch"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/detail-loader.ts#getDetailPath"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#getDecisionsForRequirement"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#getRecord"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#getRequirementsForDecision"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#getRequirementsForDecision"
     },
     {
-      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport",
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#listTokens"
     },
@@ -10026,6 +10106,11 @@
       "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#clearBasePathCache",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#computeImpactLegs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#computeImpactLegs"
     },
     {
       "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#execFileSync",
@@ -10068,6 +10153,11 @@
       "to_symbol_id": "mcp-server/src/analysis/node:child_process.ts#execFileSync"
     },
     {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#ImpactLegReportRow",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#ImpactLegReportRow"
+    },
+    {
       "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#IndexName",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#IndexName"
@@ -10078,9 +10168,54 @@
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#listTokens"
     },
     {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#loadChangeImpactProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#loadChangeImpactProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#profileOptInRequested",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#Boolean"
+    },
+    {
       "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport"
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#computeImpactLegs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#loadChangeImpactProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#gitTopLevel"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#profileOptInRequested"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#resolveChangeImpactProfilePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#wrapV1AsV2Report"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#wrapV1AsV2Report"
     },
     {
       "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
@@ -10091,6 +10226,11 @@
       "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#runPlumbDiffImpactPreview",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#wrapV1AsV2Report",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildV2HumanSummaryAppendix"
     },
     {
       "from_symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#z",
@@ -17353,6 +17493,11 @@
       "to_symbol_id": "mcp-server/src/checklist-validator.ts#isRecord"
     },
     {
+      "from_symbol_id": "mcp-server/src/checklist-validator.ts#auditMidLaneSponsorDeferral",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#auditMidLaneSponsorDeferral"
+    },
+    {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#buildMutationCacheReport",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/mutation-cache.ts#buildMutationCacheReport"
@@ -18045,6 +18190,11 @@
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateChecklistGate",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/checklist-validator.ts#hingeDiagnosticsAreBlocking"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateChecklistGate",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/checklist-validator.ts#identityValue"
     },
     {
@@ -18211,6 +18361,11 @@
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateChecklistGate",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/mutation-cache.ts#mutationCacheBlocksVerification"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateChecklistGate",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#auditMidLaneSponsorDeferral"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateCitdpDepthUpgrade",
@@ -22268,6 +22423,11 @@
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#getMethodologyBasePath"
     },
     {
+      "from_symbol_id": "mcp-server/src/detail-loader.ts#assertBindingForWrite",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite"
+    },
+    {
       "from_symbol_id": "mcp-server/src/detail-loader.ts#deleteDetail",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/detail-loader.ts#getDetailPath"
@@ -22540,12 +22700,22 @@
     {
       "from_symbol_id": "mcp-server/src/detail-loader.ts#writeTiedDetailToDisk",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/detail-loader.ts#writeTiedDetailToDisk",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#writeAtomicText"
     },
     {
       "from_symbol_id": "mcp-server/src/detail-loader.ts#writeTiedDetailToDisk",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-dump.ts#safeDumpTiedDetailDoc"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/detail-loader.ts#writeTiedDetailToDisk",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
     },
     {
       "from_symbol_id": "mcp-server/src/detail-loader.ts#writeTiedDetailToDisk",
@@ -22933,6 +23103,16 @@
       "to_symbol_id": "tools/bootstrap/lib/constants.mjs.ts#manifestPaths"
     },
     {
+      "from_symbol_id": "mcp-server/src/e2e/client-feedback-capture-contract.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/client-feedback-capture-contract.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
+    },
+    {
       "from_symbol_id": "mcp-server/src/e2e/feedback-skill.test.ts#describe",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
@@ -22951,6 +23131,36 @@
       "from_symbol_id": "mcp-server/src/e2e/feedback-skill.test.ts#loadStandaloneClientSkills",
       "kind": "imports",
       "to_symbol_id": "tools/bootstrap/lib/client-skills-catalog.mjs.ts#loadStandaloneClientSkills"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#execFileSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:child_process.ts#execFileSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#runRunner",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/e2e/node:child_process.ts#execFileSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
     },
     {
       "from_symbol_id": "mcp-server/src/e2e/methodology-bundle-consistency.test.ts#afterEach",
@@ -28175,6 +28385,11 @@
     {
       "from_symbol_id": "mcp-server/src/fidelity-research/evidence-chain-profile.ts#generateEvidenceChainProfile",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/fidelity-research/evidence-chain-profile.ts#generateEvidenceChainProfile",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/usage-metrics.ts#isMetricsEnabled"
     },
     {
@@ -28416,6 +28631,11 @@
       "from_symbol_id": "mcp-server/src/fidelity-research/evidence-chain-profile.ts#projectRootFromTiedBase",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#projectRootFromTiedBase"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/fidelity-research/evidence-chain-profile.ts#readTiedMethodologyVersion",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
     },
     {
       "from_symbol_id": "mcp-server/src/fidelity-research/evidence-chain-profile.ts#requestTokenFromCitdpFilename",
@@ -30808,6 +31028,11 @@
       "to_symbol_id": "mcp-server/src/usage-metrics.ts#instrumentToolHandlers"
     },
     {
+      "from_symbol_id": "mcp-server/src/index.ts#InvalidToolProfileError",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#InvalidToolProfileError"
+    },
+    {
       "from_symbol_id": "mcp-server/src/index.ts#McpServer",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/@modelcontextprotocol/sdk/server/mcp.ts#McpServer"
@@ -30816,6 +31041,21 @@
       "from_symbol_id": "mcp-server/src/index.ts#registerResources",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/resources.ts#registerResources"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/index.ts#resolveToolProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#resolveToolProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/index.ts#selectToolsForProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#selectToolsForProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/index.ts#shouldRegisterResources",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#shouldRegisterResources"
     },
     {
       "from_symbol_id": "mcp-server/src/index.ts#StdioServerTransport",
@@ -33868,6 +34108,76 @@
       "to_symbol_id": "mcp-server/src/feedback-outcome-loop.ts#runOutcomeLoop"
     },
     {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard-side-effect.ts#installMcpStdioConsoleGuard",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#installMcpStdioConsoleGuard"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#beforeEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#beforeEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#captureProcessWrites",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#captureProcessWrites",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#installMcpStdioConsoleGuard",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#installMcpStdioConsoleGuard"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#mcpDiagnosticsEnabled",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#mcpDiagnosticsEnabled"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#resetMcpStdioConsoleGuardForTests",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#resetMcpStdioConsoleGuardForTests"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#installMcpStdioConsoleGuard",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#writeDiagnosticsToStderr"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#installMcpStdioConsoleGuard",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#writeDiagnosticsToStderr"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#installMcpStdioConsoleGuard",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#writeDiagnosticsToStderr"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#writeDiagnosticsToStderr",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#mcpDiagnosticsEnabled"
+    },
+    {
       "from_symbol_id": "mcp-server/src/methodology-bundle-pack.test.ts#compareDiskAndBundledParity",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/bundled-methodology-read.ts#compareDiskAndBundledParity"
@@ -36333,6 +36643,251 @@
       "to_symbol_id": "mcp-server/src/process-certification-readiness/constants.ts#ISO_330XX_CAPABILITY_MODEL_SCHEMA"
     },
     {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#assertBindingAtStartup",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#assertBindingForWrite",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#bindingStatus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#bindingStatus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#ensureProjectIdentityMarker",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#getMarkerFilePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#getMarkerFilePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#IdentityWriteBindingError",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#IdentityWriteBindingError"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#isMarkerBootstrapPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isMarkerBootstrapPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#isWriteBindingEnforced",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#PROJECT_IDENTITY_MARKER_BASENAME",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#PROJECT_IDENTITY_MARKER_BASENAME"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#resetWriteBindingStateForTests",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#resetWriteBindingStateForTests"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#resolveProjectIdentity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#resolveProjectIdentity"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#canonicalTiedRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#readMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isMarkerBootstrapPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isUnderTiedBase"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#readMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#bindingStatus",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#bindingStatus",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#bindingStatus",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#readMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#readMarker"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#writeMarkerFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isMarkerBootstrapPath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#getMarkerFilePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isUnderTiedBase",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#canonicalTiedRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#projectRootFromTiedBase"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#liveIdentity",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#canonicalTiedRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#liveIdentity",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#resolveProjectIdentity"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#loadProjectConfig",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#canonicalTiedRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#liveIdentity"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#ProjectIdentity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#ProjectIdentity"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#projectRootFromTiedBase",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#canonicalTiedRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#readMarker",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#getMarkerFilePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#resolveProjectIdentity",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity.ts#resolveProjectIdentity"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#writeMarkerFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#canonicalTiedRoot"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#writeMarkerFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#getMarkerFilePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-identity-write-binding.ts#writeMarkerFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#liveIdentity"
+    },
+    {
       "from_symbol_id": "mcp-server/src/project-identity.composition.test.ts#afterEach",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/node:test.ts#afterEach"
@@ -36638,6 +37193,11 @@
       "to_symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#classifyDecisionConsequence"
     },
     {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#classifySponsorDecisionLane",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#classifySponsorDecisionLane"
+    },
+    {
       "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/analysis/leap-proposal-queue.ts#listProposals"
@@ -36646,6 +37206,16 @@
       "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/checklist-validator.ts#validateHingeFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#phaseMatches"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#phaseMatches"
     },
     {
       "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
@@ -36653,14 +37223,44 @@
       "to_symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#classifyDecisionConsequence"
     },
     {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#classifySponsorDecisionLane"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#extractSponsorQuestions",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#validateSelectionEvidence"
+    },
+    {
       "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#listProposals",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/analysis/leap-proposal-queue.ts#listProposals"
     },
     {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#readSponsorBacklogs",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#SponsorDecisionLane",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#SponsorDecisionLane"
+    },
+    {
       "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#validateHingeFields",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/checklist-validator.ts#validateHingeFields"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#validateSelectionEvidence",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#validateSelectionEvidence"
     },
     {
       "from_symbol_id": "mcp-server/src/quality-adequacy.test.ts#describe",
@@ -37071,6 +37671,101 @@
       "from_symbol_id": "mcp-server/src/relationship/consequence-ladder.test.ts#routeSponsorTiedDisagreement",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#routeSponsorTiedDisagreement"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#auditMidLaneSponsorDeferral",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#batchCharterCostlyChoices",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#classifyDecisionConsequence"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#batchCharterCostlyChoices",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#classifySponsorDecisionLane"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#batchCharterCostlyChoices",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#classifyDecisionConsequence",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#classifyDecisionConsequence"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#classifySponsorDecisionLane",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#classifyDecisionConsequence"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#DecisionInput",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#DecisionInput"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#unwrapCitdpBody"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#unwrapCitdpBody",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#unwrapCitdpBody",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#validateSelectionEvidence",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts#auditMidLaneSponsorDeferral",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#auditMidLaneSponsorDeferral"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts#batchCharterCostlyChoices",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#batchCharterCostlyChoices"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts#classifySponsorDecisionLane",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#classifySponsorDecisionLane"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts#validateSelectionEvidence",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#validateSelectionEvidence"
     },
     {
       "from_symbol_id": "mcp-server/src/remediation-closeout-runner.ts#authoritativeTracker",
@@ -38020,6 +38715,11 @@
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#buildRequestEvidenceEnvelope",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#buildRequestEvidenceEnvelope",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/working-request-token.ts#isValidWorkingRequestToken"
     },
     {
@@ -38428,6 +39128,11 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#readOptional"
     },
     {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#readTiedMethodologyVersion",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
+    },
+    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#RequestEvidenceEnvelope",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#RequestEvidenceEnvelope"
@@ -38476,6 +39181,56 @@
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#validateProvenanceComplete",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/checklist-validator.ts#validateProvenanceComplete"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#ENVELOPE_SCHEMA_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#ENVELOPE_SCHEMA_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#INDEPENDENT_PROOF_GAP_MISSING_BOUNDARY",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#INDEPENDENT_PROOF_GAP_MISSING_BOUNDARY"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#INDEPENDENT_PROOF_GAP_UNKNOWN_KIND",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#INDEPENDENT_PROOF_GAP_UNKNOWN_KIND"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#IndependentProofRecord",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#IndependentProofRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#PROOF_KIND_CHECKER_BACKED_CLAIM",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#PROOF_KIND_CHECKER_BACKED_CLAIM"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#PROOF_KIND_THEOREM_STATEMENT_METADATA",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#PROOF_KIND_THEOREM_STATEMENT_METADATA"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#RequestEvidenceEnvelope",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#RequestEvidenceEnvelope"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#validateRequestEvidenceEnvelope",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#validateRequestEvidenceEnvelope"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.composition.test.ts#describe",
@@ -39318,6 +40073,16 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/process-adherence-gaps.ts#isRecord"
     },
     {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#EnvelopeGap",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#EnvelopeGap"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#IndependentProofRecord",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#IndependentProofRecord"
+    },
+    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/request-evidence-envelope-batch.test.ts#BATCH_INPUT_SCHEMA",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#BATCH_INPUT_SCHEMA"
@@ -39713,6 +40478,11 @@
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#isRecord"
     },
     {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#collectIndependentProofAdvisoryGaps",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#collectIndependentProofAdvisoryGaps"
+    },
+    {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#ENVELOPE_SCHEMA_VERSION",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/types.ts#ENVELOPE_SCHEMA_VERSION"
@@ -39756,6 +40526,11 @@
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#validateRequestEvidenceEnvelope",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/normalize.ts#normalizeEnvelope"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#validateRequestEvidenceEnvelope",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#collectIndependentProofAdvisoryGaps"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/validate.ts#validateRequestEvidenceEnvelope",
@@ -40768,6 +41543,106 @@
       "to_symbol_id": "mcp-server/src/tied-layout.ts#resolveProjectDirName"
     },
     {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#clearTiedMethodologyVersionCache",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#clearTiedMethodologyVersionCache"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#mkdirSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:fs.ts#mkdirSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#mkdtempSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:fs.ts#mkdtempSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#readTiedMethodologyVersion",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.test.ts#writeFileSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:fs.ts#writeFileSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#projectRootFromTiedBase",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#projectRootFromTiedBase"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/hooks.ts#projectRootFromTiedBase"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#findVersionPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readVersionFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#ENV_CLIENT_BUNDLE_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#ENV_CLIENT_BUNDLE_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#ENV_CLIENT_PROJECT_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#ENV_CLIENT_PROJECT_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#LEGACY_ENV_CLIENT_BUNDLE_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#LEGACY_ENV_CLIENT_BUNDLE_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#LEGACY_ENV_CLIENT_PROJECT_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#LEGACY_ENV_CLIENT_PROJECT_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#pickClientBundlePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientBundlePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#pickClientProjectPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientProjectPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#stripLegacyClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#stripLegacyClientPathEnv"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-project-config.ts#isRecord"
@@ -41051,6 +41926,81 @@
       "from_symbol_id": "mcp-server/src/token-rename.ts#YamlFormatMetadata",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#YamlFormatMetadata"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#listToolCount",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/node:child_process.ts#spawn"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#listToolCount",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#reject"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#listToolCount",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#reject"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#listToolCount",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#resolve"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#spawn",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:child_process.ts#spawn"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profiles.test.ts#allTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profiles.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profiles.test.ts#InvalidToolProfileError",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#InvalidToolProfileError"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profiles.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profiles.test.ts#OPTIN_TOOL_NAMES",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#OPTIN_TOOL_NAMES"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profiles.test.ts#resolveToolProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#resolveToolProfile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tool-profiles.test.ts#selectToolsForProfile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tool-profiles.ts#selectToolsForProfile"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/adherence-reconcile-mcp.test.ts#allTools",
@@ -44313,6 +45263,11 @@
       "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#writeCanonicalYamlAtomic"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#assertBindingForWrite",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#canonicalizeRecordInner",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#canonicalizeRecordInner"
@@ -44478,6 +45433,11 @@
       "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#String"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#resolveTiedBasePathForYamlFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-style-config.ts#resolveTiedBasePathForYamlFile"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#resolveYamlStyle",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-style-config.ts#resolveYamlStyle"
@@ -44636,6 +45596,16 @@
       "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#writeCanonicalYamlTextAtomic",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#writeSerializedAtomic"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#writeSerializedAtomic",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#writeSerializedAtomic",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-style-config.ts#resolveTiedBasePathForYamlFile"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-canonicalizer.ts#yamlDumpOptionsForStyle",
@@ -45053,9 +46023,19 @@
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#upsertRecord"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#assertBindingAtStartup",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#BUNDLE_DIR_NAME",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/tied-layout.ts#BUNDLE_DIR_NAME"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#resetWriteBindingStateForTests"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#cloneProjectIndexMap",
@@ -45081,6 +46061,16 @@
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#filterByField",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientProjectPath"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath",
@@ -45278,6 +46268,16 @@
       "to_symbol_id": "mcp-server/src/record-merge.ts#mergeRecordUpdate"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#pickClientBundlePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientBundlePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#pickClientProjectPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientProjectPath"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#PROJECT_DIR_NAME",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/tied-layout.ts#PROJECT_DIR_NAME"
@@ -45291,6 +46291,16 @@
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#remapLegacyTiedBasePathIfNeeded",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#requirementsIndexAt"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#resetWriteBindingStateForTests",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/project-identity-write-binding.ts#resetWriteBindingStateForTests"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.ts#resolveBundledMethodologyPath",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#pickClientBundlePath"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#resolveIndexPath",
@@ -59969,6 +60979,7 @@
     "mcp-server/src/adversarial-inquiry/scope-validation.test.ts",
     "mcp-server/src/adversarial-inquiry/scope-validation.ts",
     "mcp-server/src/adversarial-inquiry/sponsor-agent-checklist-parity.test.ts",
+    "mcp-server/src/adversarial-inquiry/sponsor-two-lane-checklist-parity.test.ts",
     "mcp-server/src/adversarial-inquiry/types.ts",
     "mcp-server/src/adversarial-inquiry/workflow.test.ts",
     "mcp-server/src/adversarial-inquiry/workflow.ts",
@@ -59982,6 +60993,8 @@
     "mcp-server/src/analysis/binding-inventory-composition.test.ts",
     "mcp-server/src/analysis/binding-inventory.test.ts",
     "mcp-server/src/analysis/binding-inventory.ts",
+    "mcp-server/src/analysis/change-impact-profile.test.ts",
+    "mcp-server/src/analysis/change-impact-profile.ts",
     "mcp-server/src/analysis/change-locality-pilot.test.ts",
     "mcp-server/src/analysis/change-locality-pilot.ts",
     "mcp-server/src/analysis/closure-join-report.test.ts",
@@ -60157,7 +61170,10 @@
     "mcp-server/src/e2e/bootstrap-and-load.test.ts",
     "mcp-server/src/e2e/brownfield-client-doc-stack-contract.test.ts",
     "mcp-server/src/e2e/client-bootstrap-skills.test.ts",
+    "mcp-server/src/e2e/client-feedback-capture-contract.test.ts",
     "mcp-server/src/e2e/feedback-skill.test.ts",
+    "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts",
+    "mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts",
     "mcp-server/src/e2e/methodology-bundle-consistency.test.ts",
     "mcp-server/src/e2e/new-tied-client.test.ts",
     "mcp-server/src/e2e/prompt-type-skills.test.ts",
@@ -60366,6 +61382,9 @@
     "mcp-server/src/jev/tool-safety-benchmark.ts",
     "mcp-server/src/jev/types.ts",
     "mcp-server/src/kaizen-feedback-mcp-handlers.ts",
+    "mcp-server/src/mcp-stdio-console-guard-side-effect.ts",
+    "mcp-server/src/mcp-stdio-console-guard.test.ts",
+    "mcp-server/src/mcp-stdio-console-guard.ts",
     "mcp-server/src/methodology-bundle-pack.test.ts",
     "mcp-server/src/methodology-bundle-pack.ts",
     "mcp-server/src/methodology-conformance-effectiveness-pairing/constants.ts",
@@ -60426,6 +61445,8 @@
     "mcp-server/src/process-certification-readiness/spec-loader.test.ts",
     "mcp-server/src/process-certification-readiness/spec-loader.ts",
     "mcp-server/src/process-certification-readiness/types.ts",
+    "mcp-server/src/project-identity-write-binding.test.ts",
+    "mcp-server/src/project-identity-write-binding.ts",
     "mcp-server/src/project-identity.composition.test.ts",
     "mcp-server/src/project-identity.test.ts",
     "mcp-server/src/project-identity.ts",
@@ -60449,11 +61470,14 @@
     "mcp-server/src/record-merge.ts",
     "mcp-server/src/relationship/consequence-ladder.test.ts",
     "mcp-server/src/relationship/consequence-ladder.ts",
+    "mcp-server/src/relationship/sponsor-decision-lane.ts",
+    "mcp-server/src/relationship/sponsor-two-lane-lane-classifier.test.ts",
     "mcp-server/src/remediation-closeout-runner.ts",
     "mcp-server/src/request-evidence-envelope/backfill.test.ts",
     "mcp-server/src/request-evidence-envelope/backfill.ts",
     "mcp-server/src/request-evidence-envelope/batch-collect.ts",
     "mcp-server/src/request-evidence-envelope/build.ts",
+    "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts",
     "mcp-server/src/request-evidence-envelope/gap-codes.ts",
     "mcp-server/src/request-evidence-envelope/hooks.composition.test.ts",
     "mcp-server/src/request-evidence-envelope/hooks.ts",
@@ -60463,6 +61487,7 @@
     "mcp-server/src/request-evidence-envelope/patch.ts",
     "mcp-server/src/request-evidence-envelope/process-adherence-gaps.test.ts",
     "mcp-server/src/request-evidence-envelope/process-adherence-gaps.ts",
+    "mcp-server/src/request-evidence-envelope/proof-kinds.ts",
     "mcp-server/src/request-evidence-envelope/request-evidence-envelope-batch.test.ts",
     "mcp-server/src/request-evidence-envelope/request-evidence-envelope.mcp.test.ts",
     "mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts",
@@ -60487,9 +61512,16 @@
     "mcp-server/src/tied-layout.js",
     "mcp-server/src/tied-layout.test.ts",
     "mcp-server/src/tied-layout.ts",
+    "mcp-server/src/tied-methodology-version.test.ts",
+    "mcp-server/src/tied-methodology-version.ts",
+    "mcp-server/src/tied-path-env.test.ts",
+    "mcp-server/src/tied-path-env.ts",
     "mcp-server/src/tied-project-config.ts",
     "mcp-server/src/token-rename.test.ts",
     "mcp-server/src/token-rename.ts",
+    "mcp-server/src/tool-profile-stdio.test.ts",
+    "mcp-server/src/tool-profiles.test.ts",
+    "mcp-server/src/tool-profiles.ts",
     "mcp-server/src/tools/adherence-reconcile-mcp.test.ts",
     "mcp-server/src/tools/adherence-reconcile-runner.ts",
     "mcp-server/src/tools/adversarial-inquiry-mcp.test.ts",
@@ -64321,6 +65353,34 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/src/analysis/change-impact-profile.ts",
+      "kind": "function",
+      "name": "formatZodIssues",
+      "symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#formatZodIssues"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/analysis/change-impact-profile.ts",
+      "kind": "function",
+      "name": "computeImpactLegs",
+      "symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#computeImpactLegs"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/analysis/change-impact-profile.ts",
+      "kind": "function",
+      "name": "loadChangeImpactProfile",
+      "symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#loadChangeImpactProfile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/analysis/change-impact-profile.ts",
+      "kind": "function",
+      "name": "parseChangeImpactProfile",
+      "symbol_id": "mcp-server/src/analysis/change-impact-profile.ts#parseChangeImpactProfile"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/src/analysis/change-locality-pilot.ts",
       "kind": "function",
       "name": "bindingsForPath",
@@ -64729,8 +65789,15 @@
       "exported": false,
       "file": "mcp-server/src/analysis/plumb-diff-impact-preview.ts",
       "kind": "function",
-      "name": "buildPlumbDiffImpactPreviewReport",
-      "symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewReport"
+      "name": "buildPlumbDiffImpactPreviewV1Report",
+      "symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildPlumbDiffImpactPreviewV1Report"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/analysis/plumb-diff-impact-preview.ts",
+      "kind": "function",
+      "name": "buildV2HumanSummaryAppendix",
+      "symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#buildV2HumanSummaryAppendix"
     },
     {
       "exported": false,
@@ -64780,6 +65847,27 @@
       "kind": "function",
       "name": "isBinaryDiffPatch",
       "symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#isBinaryDiffPatch"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/analysis/plumb-diff-impact-preview.ts",
+      "kind": "function",
+      "name": "profileOptInRequested",
+      "symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#profileOptInRequested"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/analysis/plumb-diff-impact-preview.ts",
+      "kind": "function",
+      "name": "resolveChangeImpactProfilePath",
+      "symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#resolveChangeImpactProfilePath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/analysis/plumb-diff-impact-preview.ts",
+      "kind": "function",
+      "name": "wrapV1AsV2Report",
+      "symbol_id": "mcp-server/src/analysis/plumb-diff-impact-preview.ts#wrapV1AsV2Report"
     },
     {
       "exported": true,
@@ -69263,6 +70351,20 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts",
+      "kind": "function",
+      "name": "listCloseOutReceipts",
+      "symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#listCloseOutReceipts"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts",
+      "kind": "function",
+      "name": "runRunner",
+      "symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#runRunner"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/src/e2e/methodology-bundle-consistency.test.ts",
       "kind": "function",
       "name": "writeEmptyProjectIndexes",
@@ -73295,6 +74397,41 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/src/mcp-stdio-console-guard.test.ts",
+      "kind": "function",
+      "name": "captureProcessWrites",
+      "symbol_id": "mcp-server/src/mcp-stdio-console-guard.test.ts#captureProcessWrites"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/mcp-stdio-console-guard.ts",
+      "kind": "function",
+      "name": "writeDiagnosticsToStderr",
+      "symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#writeDiagnosticsToStderr"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-stdio-console-guard.ts",
+      "kind": "function",
+      "name": "installMcpStdioConsoleGuard",
+      "symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#installMcpStdioConsoleGuard"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-stdio-console-guard.ts",
+      "kind": "function",
+      "name": "mcpDiagnosticsEnabled",
+      "symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#mcpDiagnosticsEnabled"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/mcp-stdio-console-guard.ts",
+      "kind": "function",
+      "name": "resetMcpStdioConsoleGuardForTests",
+      "symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#resetMcpStdioConsoleGuardForTests"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/src/methodology-bundle-pack.ts",
       "kind": "function",
       "name": "listFilesRecursive",
@@ -74100,6 +75237,118 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.test.ts",
+      "kind": "function",
+      "name": "tempTiedProject",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.test.ts#tempTiedProject"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "canonicalTiedRoot",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#canonicalTiedRoot"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "isUnderTiedBase",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#isUnderTiedBase"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "liveIdentity",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#liveIdentity"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "markerMatchesLive",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#markerMatchesLive"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "projectRootFromTiedBase",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#projectRootFromTiedBase"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "readMarker",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#readMarker"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "writeMarkerFile",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#writeMarkerFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "assertBindingAtStartup",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingAtStartup"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "assertBindingForWrite",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#assertBindingForWrite"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "bindingStatus",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#bindingStatus"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "ensureProjectIdentityMarker",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#ensureProjectIdentityMarker"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "getMarkerFilePath",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#getMarkerFilePath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "isMarkerBootstrapPath",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#isMarkerBootstrapPath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "isWriteBindingEnforced",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#isWriteBindingEnforced"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/project-identity-write-binding.ts",
+      "kind": "function",
+      "name": "resetWriteBindingStateForTests",
+      "symbol_id": "mcp-server/src/project-identity-write-binding.ts#resetWriteBindingStateForTests"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/src/project-identity.composition.test.ts",
       "kind": "function",
       "name": "minimalAdapters",
@@ -74237,6 +75486,13 @@
       "kind": "function",
       "name": "runProjectLint",
       "symbol_id": "mcp-server/src/project-operations/project-lint.ts#runProjectLint"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/project-operations/sponsor-questions.ts",
+      "kind": "function",
+      "name": "phaseMatches",
+      "symbol_id": "mcp-server/src/project-operations/sponsor-questions.ts#phaseMatches"
     },
     {
       "exported": true,
@@ -74377,6 +75633,55 @@
       "kind": "function",
       "name": "routeSponsorTiedDisagreement",
       "symbol_id": "mcp-server/src/relationship/consequence-ladder.ts#routeSponsorTiedDisagreement"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/relationship/sponsor-decision-lane.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#isRecord"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/relationship/sponsor-decision-lane.ts",
+      "kind": "function",
+      "name": "auditMidLaneSponsorDeferral",
+      "symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#auditMidLaneSponsorDeferral"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/relationship/sponsor-decision-lane.ts",
+      "kind": "function",
+      "name": "batchCharterCostlyChoices",
+      "symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#batchCharterCostlyChoices"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/relationship/sponsor-decision-lane.ts",
+      "kind": "function",
+      "name": "classifySponsorDecisionLane",
+      "symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#classifySponsorDecisionLane"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/relationship/sponsor-decision-lane.ts",
+      "kind": "function",
+      "name": "readSponsorBacklogs",
+      "symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#readSponsorBacklogs"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/relationship/sponsor-decision-lane.ts",
+      "kind": "function",
+      "name": "unwrapCitdpBody",
+      "symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#unwrapCitdpBody"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/relationship/sponsor-decision-lane.ts",
+      "kind": "function",
+      "name": "validateSelectionEvidence",
+      "symbol_id": "mcp-server/src/relationship/sponsor-decision-lane.ts#validateSelectionEvidence"
     },
     {
       "exported": false,
@@ -74813,6 +76118,20 @@
       "symbol_id": "mcp-server/src/request-evidence-envelope/build.ts#buildRequestEvidenceEnvelope"
     },
     {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts",
+      "kind": "function",
+      "name": "baseProof",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#baseProof"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts",
+      "kind": "function",
+      "name": "envelopeWithProofs",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/checker-backed-envelope-proof.test.ts#envelopeWithProofs"
+    },
+    {
       "exported": true,
       "file": "mcp-server/src/request-evidence-envelope/gap-codes.ts",
       "kind": "function",
@@ -75175,6 +76494,13 @@
       "kind": "function",
       "name": "hasNonPendingDisposition",
       "symbol_id": "mcp-server/src/request-evidence-envelope/process-adherence-gaps.ts#hasNonPendingDisposition"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/request-evidence-envelope/proof-kinds.ts",
+      "kind": "function",
+      "name": "collectIndependentProofAdvisoryGaps",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/proof-kinds.ts#collectIndependentProofAdvisoryGaps"
     },
     {
       "exported": false,
@@ -75654,6 +76980,55 @@
     },
     {
       "exported": false,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
+      "name": "findVersionPath",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#findVersionPath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
+      "name": "readVersionFile",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#readVersionFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
+      "name": "clearTiedMethodologyVersionCache",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#clearTiedMethodologyVersionCache"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
+      "name": "readTiedMethodologyVersion",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-path-env.ts",
+      "kind": "function",
+      "name": "pickClientBundlePath",
+      "symbol_id": "mcp-server/src/tied-path-env.ts#pickClientBundlePath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-path-env.ts",
+      "kind": "function",
+      "name": "pickClientProjectPath",
+      "symbol_id": "mcp-server/src/tied-path-env.ts#pickClientProjectPath"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tied-path-env.ts",
+      "kind": "function",
+      "name": "stripLegacyClientPathEnv",
+      "symbol_id": "mcp-server/src/tied-path-env.ts#stripLegacyClientPathEnv"
+    },
+    {
+      "exported": false,
       "file": "mcp-server/src/tied-project-config.ts",
       "kind": "function",
       "name": "isRecord",
@@ -75784,6 +77159,34 @@
       "kind": "function",
       "name": "renameSemanticToken",
       "symbol_id": "mcp-server/src/token-rename.ts#renameSemanticToken"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tool-profile-stdio.test.ts",
+      "kind": "function",
+      "name": "listToolCount",
+      "symbol_id": "mcp-server/src/tool-profile-stdio.test.ts#listToolCount"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tool-profiles.ts",
+      "kind": "function",
+      "name": "resolveToolProfile",
+      "symbol_id": "mcp-server/src/tool-profiles.ts#resolveToolProfile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tool-profiles.ts",
+      "kind": "function",
+      "name": "selectToolsForProfile",
+      "symbol_id": "mcp-server/src/tool-profiles.ts#selectToolsForProfile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/tool-profiles.ts",
+      "kind": "function",
+      "name": "shouldRegisterResources",
+      "symbol_id": "mcp-server/src/tool-profiles.ts#shouldRegisterResources"
     },
     {
       "exported": false,

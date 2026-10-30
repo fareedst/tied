@@ -1,0 +1,183 @@
+FEATURE DESCRIPTION (ANONYMIZED)
+
+Purpose: External agent and reviewer comment on overall design and rationale.
+Instructions: Respond with architectural feedback, risks, and alternatives.
+Do not request proprietary product names, internal paths, or trademarked tool labels.
+
+Note: An expanded architecture review and engineering handoff (same
+anonymization policy) lives alongside this file as
+anonymized-mcp-architecture-handoff.md — three-authority model, invariants,
+compliance levels, and acceptance cases.
+
+
+SUMMARY
+
+This system is an MCP-first control plane over a structured intent database.
+The database holds requirements, architecture decisions, implementation
+decisions, and a semantic registry. Implementation behavior is specified in
+YAML records and in optional plain-text pseudo-code sidecars attached to
+implementation records. The MCP server is the primary way agents read and
+write project-owned data. A matching command-line interface speaks the same
+protocol for scripts and continuous integration. The coding agent remains
+responsible for editing source and tests; the intent layer directs what
+those edits must satisfy. The design separates the agent harness (turn loop,
+prompts, host tools) from governance-adjacent mechanics (validated writes,
+checklist gates, consistency checks, verification-gated status, and sponsor
+authority for costly choices).
+
+
+PROBLEM AND RATIONALE
+
+Significant software change fails when intent is scattered across chat logs
+and ad hoc edits. Agents mis-quote YAML, break alignment between index rows
+and detail files, and drop traceability from requirements through design to
+tests. This platform keeps intent in a validated, queryable store before and
+during implementation. Records are updated through the MCP control plane so
+quoting, merge semantics, and canonical formatting stay consistent. Direct
+hand-editing of project YAML by the agent is discouraged when an MCP
+operation exists; failures on the control plane should be retried or
+narrowed rather than silently bypassed with raw file patches. Tests and code
+are downstream: intent first, then failing tests, then minimal code, with
+documentation updated when behavior diverges (implementation record first,
+then architecture and requirements if scope changed).
+
+
+DATA MODEL
+
+Each client project maintains writable indexes for requirements,
+architecture, implementation, and semantic tokens. Each token has a detail
+record (typically YAML) and, for implementation tokens, an optional
+pseudo-code sidecar in plain text. An inherited methodology corpus provides
+read-only baseline definitions; the MCP layer merges methodology and
+project views on read but persists writes only to project-owned keys. A
+consistency pass validates token existence, cross references, detail file
+presence, and pseudo-code block comments that link blocks back to the
+records they implement. Traceability queries walk from a requirement to
+related architecture and implementation records and the reverse direction.
+
+
+MCP CAPABILITY CATEGORIES
+
+Index and detail create, read, update, delete, and ordered batch apply with
+optional dry run and post-batch consistency validation. Traceability queries
+between requirements and decisions. Schema and graph consistency validation
+beyond mere YAML syntax. Structural validation of implementation pseudo-code
+including contract-shaped blocks; this validates form and linkage, not
+runtime correctness. Post-test activation of requirement and implementation
+status from supplied pass lists, with optional dry run. Writes for structured
+change-analysis audit records. Checklist phase gate validation tied to
+on-disk tracker and change-analysis artifacts. Optional feature-lifecycle
+orchestration for staged product work parallel to requirement-scoped
+checklists. Quality evidence manifest construction and bounded execution of
+declared verification commands with captured stdout and stderr. Read-only
+project lint aggregation, git hygiene preview, and extraction of open costly
+choices for sponsor review. Optional MCP resources for loading requirement
+and decision context into agent prompts.
+
+
+ARCHITECTURE (ASCII)
+
+  [Coding agent harness]
+        |
+        |  host tools (shell, search, etc.)
+        v
+  [MCP-capable host] ----stdio MCP----> [Intent MCP server] ----> [Project corpus]
+        |                                        ^
+        |                                        |
+        +------------ CLI parity layer ----------+
+        |
+  [Inherited methodology corpus] ---read-only merge on read---
+
+The MCP server runs as a child process of the host. The project corpus lives
+on the filesystem under a configurable base path that must point at the
+writable project root, not the repository root alone.
+
+
+HARNESS VS GOVERNANCE SEAM
+
+The harness owns orchestration: system and task prompts, skill-like procedure
+bundles, rules files, multi-turn checklist drivers, sub-agent delegation,
+context management, and optional middleware that blocks risky shell
+proposals. Governance-adjacent behavior stays on the MCP and checklist
+plane: which YAML may be written, whether a phase gate allows progression,
+whether consistency and verification tools pass, and whether the sponsor
+must decide a costly choice before continuing. Tuning the harness for speed
+or model choice must not bypass write policy, gate receipts, or
+verification-gated status. Optional advisory analyzers may suggest gaps but
+must not auto-promote drafts into canonical records without explicit writes
+through the control plane.
+
+
+DEPLOYMENT AND ACCESS PATTERNS
+
+Typical deployment attaches the MCP server to a host IDE or coding-agent CLI
+via local configuration. Any MCP-capable agent runtime can attach the same
+server if it mounts the client tree and sets the base path correctly. A
+shell checklist driver can render checklist steps into prompts and optionally
+spawn a host-specific coding-agent subprocess with stream parsing; built-in
+driver profiles may exist for common CLIs while other runtimes use a
+client-owned adapter behind a small injectable driver interface—the
+methodology distribution does not ship third-party agent binaries. Container
+packaging is feasible (Node runtime, stdio entrypoint, volume mounts for
+project and methodology trees) but is not required for the core design.
+Bootstrap installs methodology material and project seeds, wires MCP
+configuration once, and preserves existing host MCP configuration on refresh
+rather than overwriting operator customizations.
+
+
+BOOTSTRAP (CONCEPTUAL)
+
+Installation copies or links a methodology bundle and creates project index
+scaffolds. Modes range from store-linked stubs with live doc resolution to
+fully materialized offline copies. Procedure bundles installed into the host
+skills or rules area are optional carriers for checklist sequencing; they
+are not the database. Operators confirm the effective base path at session
+start because misconfigured paths cause silent writes to the wrong project
+tree—a class of failure as serious as attaching the wrong database connection.
+
+
+EVIDENCE AND AUTOMATION DEPTH
+
+Interactive work uses MCP writes plus manually updated checklist tracker
+state; gate tools validate but do not replace human judgment on reversible
+choices. Semi-automated runs attach typed evidence references to tracker
+dispositions. Batch-driven checklist execution expects machine-parseable
+completion receipts, an append-only adherence ledger correlating
+instructions and actions, and request evidence envelopes that block
+close-out when material gaps remain. These layers increase automation cost
+but reduce false “done” claims.
+
+
+NON-GOALS
+
+This is not an enterprise API gateway or fleet identity product. It is not
+automatic promotion from advisory or shadow analysis into canonical records.
+Structural pseudo-code validation does not prove tests pass or production
+behavior. The MCP surface does not replace module-level test design or
+host-native code review.
+
+
+QUESTIONS FOR REVIEWERS
+
+1. Is MCP plus a generic rules document sufficient for full methodology
+   adherence without host-specific procedure skills, or is a checklist driver
+   mandatory for acceptable gate discipline?
+
+2. Where should checklist sequencing live: host rules, a shell driver,
+   gate-only human loops, or some combination—and what breaks if only two of
+   three are present?
+
+3. For distribution, compare git-bootstrap installs versus MCP registry
+   entries plus container images: versioning, offline use, and wrong-base-path
+   risk.
+
+4. What minimum contract should a pluggable agent driver expose so batch
+   checklist runs work across non-IDE agent hosts?
+
+5. Should quality-evidence command execution remain inside the MCP server,
+   or move to a separate sandbox service with manifest-only handoff?
+
+6. What privacy and redaction rules belong in usage metrics if operators
+   opt in to local MCP call logging?
+
+End of feature description.
