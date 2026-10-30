@@ -5,9 +5,13 @@ depth_tier: minimal
 description: Canonical alphabetical mcp.json output at minimal advisory depth.
 execution_evidence:
   close_out_evidence:
-    date: null
+    date: "2026-10-29"
     deferred: []
-    gates: {}
+    gates:
+      close_out:
+        allowed: true
+        run_id: close-out-mcp-json-canonical-20261029-r3
+    commit_sha: b1ec7611
     master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
   completed:
     - session-bootstrap
@@ -39,7 +43,7 @@ purpose: Tracker through close_out for REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.
 request: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
 request_token: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
 source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: close_out_pending
+status: close_out_complete
 steps:
   - disposition: completed
     id: session-bootstrap
