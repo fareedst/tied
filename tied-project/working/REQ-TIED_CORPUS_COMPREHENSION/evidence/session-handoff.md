@@ -3,7 +3,11 @@
 **Date:** 2026-10-31  
 **Origin:** DOC-STDD gap **G3** · [gap-planning-handoff.md](../../DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/gap-planning-handoff.md)
 
-## Build-plan complete (verification; close-out deferred)
+## Close-out complete (2026-10-31)
+
+See [close-out-handoff.md](./close-out-handoff.md) · commit **`131f0011`**
+
+## Build-plan (verification)
 
 | Signal | Status |
 | --- | --- |

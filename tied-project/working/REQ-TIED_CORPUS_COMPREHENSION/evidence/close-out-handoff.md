@@ -11,6 +11,6 @@
 | **Process** | [checklist-tracker-close-out.yaml](../checklist-tracker-close-out.yaml); envelope `blocking_gap_count: 0` |
 | **Ledger** | [CITDP-REQ-TIED_CORPUS_COMPREHENSION.yaml](../../../citdp/CITDP-REQ-TIED_CORPUS_COMPREHENSION.yaml) |
 
-**Commit:** _(record SHA after traceable-commit)_
+**Commit:** `131f0011` (not pushed)
 
 **Feedback capture:** N/A
