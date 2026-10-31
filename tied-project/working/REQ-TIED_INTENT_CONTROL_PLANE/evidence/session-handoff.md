@@ -6,7 +6,7 @@
 
 ## Program status
 
-**Umbrella program close-out complete** (LEAP REQ detail + persisted CITDP). Implementation waves **`222d2b58`–`ea39bcda`**. Full MCP **`npm test`** green (2026-10-30). Branch **main** ahead of `origin/main` (not pushed).
+**Umbrella program close-out complete** (LEAP REQ detail + persisted CITDP). Implementation waves **`222d2b58`–`ea39bcda`**. Full MCP **`npm test`** green (2026-10-30). **`main`** synced with **`origin/main`** (pushed 2026-10-31 through **`64d6b12d`**).
 
 | Wave | Focus |
 | --- | --- |
@@ -30,14 +30,21 @@
 
 ## Do next
 
-1. **`git push`** when sponsor wants origin updated (includes **`e96b9483`** LEAP unify and prior ahead commits)
-2. Optional: refresh full-suite MCP tests for dogfood `marker_only` (yaml-loader fixture expectations)
+1. Optional: refresh full-suite MCP tests for dogfood `marker_only` (yaml-loader fixture expectations)
 
 **Done:**
 
 - ~~LEAP unify duplicate `checklist-controller-resume.ts`~~ — **`e96b9483`** (`@tied/checklist-resume`, 2026-10-31)
 - ~~**`@clear-workspace`**~~ — 2026-10-31; receipt [git-hygiene-receipt-2026-10-31-clear-workspace.md](./git-hygiene-receipt-2026-10-31-clear-workspace.md)
-- ~~Post close-out traceable commit (hygiene + test-isolation evidence)~~ — record SHA below after commit
+- ~~Post close-out traceable commit (hygiene + test-isolation evidence)~~ — **`64d6b12d`**; [traceable-commit-evidence.md](./traceable-commit-evidence.md) § Post close-out
+- ~~**`git push`**~~ — 2026-10-31 (`origin/main` through **`64d6b12d`**)
+
+## Workspace (local only, not errors)
+
+| Path | Disposition |
+| --- | --- |
+| `project-identity.v1.yaml` (repo root) | Untracked dogfood marker for Path 3 — **keep local**; do not commit |
+| `evidence/evidence-chain-profile.v1.json` | Regenerable — safe to delete locally; not tracked |
 
 ## Constraints
 

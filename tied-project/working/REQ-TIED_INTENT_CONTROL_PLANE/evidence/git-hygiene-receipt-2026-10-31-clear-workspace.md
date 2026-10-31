@@ -22,9 +22,13 @@
 | Path | Reason |
 | --- | --- |
 | `project-identity.v1.yaml` (repo root) | Dogfood marker — **untracked** per ICP constraint; do not commit |
-| `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/close-out-mcp-test-isolation-2026-10-30.md` | Optional ICP evidence — **defer** commit until sponsor wants hygiene batch |
-| `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/evidence-chain-profile.v1.json` | Regenerable close-out artifact (gitignored pattern) — local only |
-| `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/session-handoff.md` | Updated for hygiene completion (this pass) |
+| `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/close-out-mcp-test-isolation-2026-10-30.md` | **Committed** in **`64d6b12d`** |
+| `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/evidence-chain-profile.v1.json` | Regenerable — local untracked only |
+| `project-identity.v1.yaml` (repo root) | Local dogfood marker — untracked per ICP constraint |
+
+## Follow-up pass (2026-10-31)
+
+Close-out handoff links + **`origin/main`** sync; remaining untracked paths documented in [session-handoff.md](./session-handoff.md) § Workspace.
 
 ## MCP note
 

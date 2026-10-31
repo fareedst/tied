@@ -66,4 +66,8 @@ N/A — no upstream feedback ingest this wave.
 
 ### Commit
 
-Record SHA after `git commit` in [session-handoff.md](./session-handoff.md).
+**`64d6b12d`** — `docs(req): ICP post close-out hygiene and test-isolation evidence` (pushed **`origin/main`** 2026-10-31).
+
+### Follow-up (2026-10-31)
+
+Handoff sync with **`origin/main`**, explicit **`64d6b12d`** pin, and workspace table for allowed local untracked paths.
