@@ -1,0 +1,8 @@
+feat(langgraph-pilot): P4 acceptance and verification subgraph
+
+LangGraph program wave P4: deterministic acceptance policy, evidence schema
+validation, verification subgraph, MCP role separation; pytest 41 passed.
+
+Completion: close_out allowed, envelope blocking_gaps=0 (p4-closeout-closeout-20261031).
+
+Tokens: pilot-local (PLAN-TIED-LG-P4-ACCEPTANCE CITDP only).

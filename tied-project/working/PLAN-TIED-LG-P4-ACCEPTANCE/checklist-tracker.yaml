@@ -1,0 +1,154 @@
+citdp:
+  path: "tied-project/citdp/CITDP-PLAN-TIED-LG-P4-ACCEPTANCE.yaml"
+  status: "persisted"
+depth_tier: "integrated"
+execution_evidence:
+  close_out_evidence:
+    date: "2026-10-31"
+    deferred: []
+    gates:
+      close_out: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/closeout-run-close-out-gates.json"
+      verification: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/closeout-run-verification-gates.json"
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+  completed:
+    - "session-bootstrap"
+    - "translate-sponsor-intent"
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "gate-pseudocode-validation"
+    - "sub-adversarial-inquiry-pass"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "composition-integration"
+    - "sync-tied-stack"
+    - "verification-gate"
+    - "traceable-commit"
+  pending: []
+  request: "PLAN-TIED-LG-P4-ACCEPTANCE"
+gate_policy: "per_citdp"
+purpose: "P4 implement Tracker; build-plan 2026-10-31."
+request: "PLAN-TIED-LG-P4-ACCEPTANCE"
+schema_version: "langgraph-p4-implement-tracker.v1"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "machine_close_out_complete"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/sync-tied-stack-evidence.md"
+    policy: "pilot-local-no-tied-token-change"
+    slug: "sync-tied-stack"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/sync-tied-stack-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: manifest_ref
+        path: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-evidence-manifest.v1.json
+      - kind: file_path
+        path: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-gate-evidence.md
+    slug: "verification-gate"
+    tracking:
+      evidence_refs:
+        - kind: manifest_ref
+          path: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-evidence-manifest.v1.json
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/traceable-commit-evidence.md"
+    slug: "traceable-commit"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/traceable-commit-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/composition-integration-evidence.md"
+    slug: "composition-integration"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/composition-integration-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-bootstrap-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/change-definition-evidence.md"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/gate-pseudocode-validation-evidence.md"
+    policy: "no-impl-pseudocode-in-scope"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"

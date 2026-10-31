@@ -1,0 +1,468 @@
+{
+  "artifacts": [
+    {
+      "content_hash": "sha256:0870e3977ad0994ac7edecd4260ebf7b5ab771626c0db32130772487faf7034c",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/gate-pseudocode-validation-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:0f91b688d112a58e0a319d56806cd9b1eb04f3a04b217d946e2996dd865bb9d3",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/impact-discovery-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:15e6704bf0d35326ef44b6bbf9bf7d849f9ccf2dd7a18b5545b400618e10717c",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/translate-sponsor-intent-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:1cb2947a1470e6c1e61f65db7c2aec4cb71a517732314d1fd5a3849271acffdf",
+      "kind": "verification_evidence_manifest",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-evidence-manifest.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "verification-evidence-manifest.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:20ef2fc0db5fe5178d54399e081e7350a190490aa4614709190120cb774d2b34",
+      "kind": "adversarial_inquiry_provenance",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-verification/evidence-provenance.json",
+      "phase": "verification",
+      "proof_boundaries": [
+        "provenance_identity"
+      ],
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:2830a7efa7220a8f27d48e2a987f39142b8fd948893e81197e803c21e323dd02",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/p4-activation-pre_impl.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:2f8696d85aa94ef3b0a95a696970e87551f17a67d9c99cb2b0263742a3f80332",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/sync-tied-stack-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:3b7c50e9cefca41efcedf6cd5cebc10b682d3e9038f84783e57ac07d6cf0a514",
+      "kind": "adversarial_inquiry_obligation",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-pre_implementation/obligation-report.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:476f226b8f89a69f786d49290184dbd3371fbec0b2100b9566a693034bc49c77",
+      "kind": "evidence_chain_profile",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/evidence-chain-profile.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4e4c53d3426c3eabb75a21ff84efb80a11a044fa4b81d7e8348bec385557a036",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/sub-adversarial-inquiry-pass-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4f14ffff12df6fdea4f92d3ba64aee44fffa829499896858ee228a4a0b175547",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/composition-integration-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4fe14d88cd0f37e3df36eb617289e974f5a14a20a98bae1c2f8f8474cc98ae74",
+      "kind": "adversarial_inquiry_obligation",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-close_out/obligation-report.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:4fe14d88cd0f37e3df36eb617289e974f5a14a20a98bae1c2f8f8474cc98ae74",
+      "kind": "adversarial_inquiry_obligation",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-verification/obligation-report.json",
+      "phase": "verification",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-report.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:500f95003df16bc7906907c9e64b628405165e2ec6100b9ab7c4f4d37c55d794",
+      "kind": "adversarial_inquiry_gate",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-close_out/gate-result.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:500f95003df16bc7906907c9e64b628405165e2ec6100b9ab7c4f4d37c55d794",
+      "kind": "adversarial_inquiry_gate",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-pre_implementation/gate-result.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:500f95003df16bc7906907c9e64b628405165e2ec6100b9ab7c4f4d37c55d794",
+      "kind": "adversarial_inquiry_gate",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-verification/gate-result.json",
+      "phase": "verification",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "adversarial-inquiry-gate.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:5efed6c0fd7f9742c268ab436225db918516255d83cc77006616abce655d41f4",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-handoff.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:65406e8b9d14ad4bb50f6e631e736b7727471e221c84507ca756e12a5f0ab2fe",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-gate-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6c6ca398b66a011f637228801bbb85f4d5e23bec0f9e3f0ba5ddaa8c9765d449",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/gates/pre_implementation-2026-10-31T17-54-44-244Z.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6f476519bfaf73697a09d56810eac598079b4fe12bb62931a3590459477be7b2",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/gate-ledger.jsonl",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:71a94ee0b6fd99bc45852f925ee59bc1655d79c00774ae38166a3451d92fcd64",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/change-definition-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:79e52fa7d157a005fc669a7985af1c8067c6e27b908abefd33a7c1faab287143",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/git-hygiene-receipt-2026-10-31.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:84bf0c5ae41d6f811f07fdd1d7f87a6ed66973dc18da55fc98edf11939e626ae",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/unit-test-green-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:8e7f702400602770f2befccf139119edef3f1c3d841fd612d78de10d6d2f451e",
+      "kind": "adversarial_inquiry_provenance",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-pre_implementation/evidence-provenance.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "provenance_identity"
+      ],
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:9bb63f8c157c687af3ebcfffa9a69a150411e03acd36dc8414e68e8501504a69",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/pre_implementation-gate-summary.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:9fd0ca96869579fc99b6ff5c773e304cb1291d4a4c72ae60c43539dd32bc7eec",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/closeout-run-verification-gates.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:a1a92bfa05579063ba1b931d510ab32274c0661888b20cbbd033d5c2d609b82e",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-bootstrap-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:ac9044ac3dc6139aaf2ceda53f623ccc361e84306ccf42ef0d91d09b5a9e891c",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/risk-assessment-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:b4a3b399a3da17bb0ad04c626f7f6d19f7a492542cc669af2cc2fada0d9a0cce",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/gates/close_out-2026-10-31T17-56-18-484Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:bc57ad8edfb5f1e0bc73f944e5bea58d9b64ec3d820df31413817b17c836a1c4",
+      "kind": "adversarial_inquiry_provenance",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/adversarial-inquiry/phase-close_out/evidence-provenance.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "provenance_identity"
+      ],
+      "schema_version": "adversarial-inquiry-provenance.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:c0975282547ebed5b45b66c527837ad12559d3bc73cc8e3148c51bfd3fa11f6f",
+      "kind": "request_evidence_envelope",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/request-evidence-envelope.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "request-evidence-envelope.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:c0fbaf3f25b01c9be599548dcfc8bf076b13ea8c1ab454950dacb14b4dea2d92",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/traceable-commit-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:c14dc5c522a9ccc911ec11fa018b26f0519ca1cd6da2ca293f165a493fdf9433",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/proposed-commit-message.txt",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:c69d30688ad90f24990feb9fbd8381953f41be0318d00a604ac979c89005da07",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/unit-test-red-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:c95eea8bf1e9a80ba1cecd26408ef502b42dfd6630ec6cafaf53c9b218e014bb",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/PLAN-TIED-LG-P4-ACCEPTANCE/gates/close_out-2026-10-31T17-57-24-552Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:d2bc318f224b993e79fa4884b81b1bdaf4cbb01e7fa4df6821231a9d1db9ab97",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/pre-inquiry-graph.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e233eb0a6704a6c7295c3d4b6baf8c144f1858491e1ab25c49addcd08993cfef",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/test-strategy-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:f0b2bca2c8418cdb3e6f30bc3853005f369893cc94b810b0e4ddd3ad81c6db55",
+      "kind": "unknown",
+      "path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/closeout-run-close-out-gates.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    }
+  ],
+  "cross_links": {
+    "citdp_path": null,
+    "evidence_chain_profile_path": "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/evidence-chain-profile.v1.json",
+    "tracker_hash": null,
+    "tracker_path": null
+  },
+  "envelope_meta": {
+    "generated_at": "2026-10-31T17:57:24.553Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
+  },
+  "gaps": [],
+  "identity": {
+    "depth_tier": "integrated",
+    "gate_policy": "per_citdp",
+    "methodology_snapshot_id": "4.0.0",
+    "project_id": "43c95df716872c5d",
+    "request_token": "PLAN-TIED-LG-P4-ACCEPTANCE"
+  },
+  "runs": [
+    {
+      "generator": "persistGateDecisionReceipt",
+      "phase": "close_out",
+      "run_id": "p4-closeout-closeout-20261031",
+      "started_at": null
+    },
+    {
+      "generator": "request_evidence_envelope_build",
+      "phase": "close_out",
+      "run_id": "run-close_out",
+      "started_at": null
+    },
+    {
+      "generator": "request_evidence_envelope_build",
+      "phase": "pre_implementation",
+      "run_id": "run-pre_implementation",
+      "started_at": null
+    },
+    {
+      "generator": "request_evidence_envelope_build",
+      "phase": "verification",
+      "run_id": "run-verification",
+      "started_at": null
+    }
+  ],
+  "schema_version": "request-evidence-envelope.v1"
+}

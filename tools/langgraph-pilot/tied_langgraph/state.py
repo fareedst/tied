@@ -22,3 +22,5 @@ class RunState(TypedDict, total=False):
     green_blocked: bool
     tdd_route: str | None
     worktree_path: str | None
+    acceptance_route: str | None
+    verification_decision_written: bool

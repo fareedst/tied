@@ -1,0 +1,4 @@
+Error: $HOME must be set to run brew.
+Error: $HOME must be set to run brew.
+mkdir: /.rbenv: Read-only file system
+mkdir: /.rbenv: Read-only file system

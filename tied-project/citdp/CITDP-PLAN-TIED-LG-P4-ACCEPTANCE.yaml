@@ -1,0 +1,104 @@
+CITDP-PLAN-TIED-LG-P4-ACCEPTANCE:
+  change_definition:
+    current_behavior: "P3 TDD subgraph and policies exist; acceptance.py is a stub; no verification subgraph."
+    desired_behavior: "Verification subgraph validates evidence, optional MCP checklist gate, deterministic acceptance routes; separation of duties for MCP roles."
+    non_goals:
+      - "P5 checklist slice end-to-end"
+      - "Live MCP gate receipts in default CI"
+      - "Fixture client TIED YAML mutation"
+    success_criteria:
+      - "acceptance_gate unit matrix matches conceptual doc §5 + review evidence"
+      - "Verification subgraph writes decision artifact under run directory"
+      - "Implement role blocked from envelope build via separation policy"
+      - "pytest green for pilot including P4 tests"
+    unchanged_behavior: "P3 TDD subgraph and P2 envelope routing unchanged."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "close_out"
+      project_id: "stdd-project"
+      request_token: "PLAN-TIED-LG-P4-ACCEPTANCE"
+      run_id: "p4-closeout-closeout-20261031"
+      scope: []
+      scope_hash: "~"
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "verification"
+  evidence:
+    command_seq:
+      - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
+    manifest_reference: null
+    proof_boundaries:
+      - "mocked_mcp_default_ci"
+      - "pilot_tree_only"
+  impact_analysis:
+    impl_inventory_notes: "Extends tools/langgraph-pilot; no new REQ/ARCH/IMPL unless sponsor mints REQ-LANGGRAPH-*"
+    modules_or_boundaries:
+      - "tools/langgraph-pilot/tied_langgraph/policies/acceptance.py"
+      - "tools/langgraph-pilot/tied_langgraph/policies/separation.py"
+      - "tools/langgraph-pilot/tied_langgraph/verification_evidence.py"
+      - "tools/langgraph-pilot/tied_langgraph/graphs/verification.py"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "machine_close_out_complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LG-P4-ACCEPTANCE"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    prior_depth_tier: null
+    profile_depth: "integrated"
+    recorded_at: "2026-10-31"
+    title: "LangGraph program P4 acceptance gate"
+  risk_analysis:
+    abuse_cases:
+      - "implement-agent-self-acceptance"
+      - "stale-evidence-at-wrong-commit"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Implement node calls envelope build and marks accept."
+        - "Acceptance ignores missing independent_review."
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Default CI requires live MCP server."
+      eligibility_triggers_matched:
+        - "external_input"
+      evidence_references:
+        - "docs/langgraph/plan-tied-lg-p4-acceptance-gate.md"
+        - "docs/tools/langgraph-evidence-driven-software-engineering.md"
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/risk-assessment-evidence.md"
+        - "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      falsification_questions:
+        - "Can implement role call tied_checklist_gate_validate?"
+      gate_policy: "per_citdp"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "MCP gate tools and external checklist validation trigger integrated defaults."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "completed"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-04-30"
+      owner: "P5 checklist slice wave"
+      summary: "P4 does not bind real checklist slugs end-to-end."
+    risks:
+      - "Mocked MCP gate diverges from live gate receipts"
+    scenarios:
+      - "Optional live gate skipped in CI"
+  test_strategy:
+    composition_tests:
+      - "Verification subgraph invoke with mocked gate skip"
+    integration_tests: []
+    unit_tests:
+      - "acceptance_gate route matrix"
+      - "verification evidence schema"
+      - "separation MCP allowlists"

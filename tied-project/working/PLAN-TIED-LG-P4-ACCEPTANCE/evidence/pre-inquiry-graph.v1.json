@@ -1,0 +1,79 @@
+{
+  "graph": {
+    "projectId": "stdd-project",
+    "criteria": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P4-ACCEPTANCE#criterion-p4-implement",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        },
+        "architectureConstraintIds": ["constraint-p4-implement"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-p4-implement",
+        "implementationBlockIds": ["PLAN-TIED-LG-P4-ACCEPTANCE#PILOT#verification_subgraph"]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P4-ACCEPTANCE#PILOT#verification_subgraph",
+          "kind": "block",
+          "name": "PILOT",
+          "derivation": "content",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "rev1",
+    "specification": [
+      {
+        "id": "stmt-p4-1",
+        "kind": "behavior",
+        "value": "Verification subgraph validates evidence and routes accept only when green, regression, static analysis, and review evidence match candidate_commit",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-p4-1",
+        "direction": "test",
+        "statementId": "stmt-p4-1",
+        "kind": "behavior",
+        "value": "Verification subgraph validates evidence and routes accept only when green, regression, static analysis, and review evidence match candidate_commit",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tests/test_verification_subgraph.py:1" },
+        "provenance": "p4-implement-inquiry",
+        "blockRevision": "rev1"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-p4-1",
+        "direction": "production",
+        "statementId": "stmt-p4-1",
+        "kind": "behavior",
+        "value": "Verification subgraph validates evidence and routes accept only when green, regression, static analysis, and review evidence match candidate_commit",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tied_langgraph/graphs/verification.py:1" },
+        "provenance": "p4-implement-inquiry",
+        "blockRevision": "rev1"
+      }
+    ]
+  },
+  "scope": ["PLAN-TIED-LG-P4-ACCEPTANCE#PILOT#verification_subgraph"],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "PLAN-TIED-LG-P4-ACCEPTANCE"
+}

@@ -50,3 +50,18 @@ flowchart LR
 - Subprocess runner: `tied_langgraph.runners.subprocess_test`
 - Hermetic CI fixture: `tests/fixtures/tdd-mini-repo/` (`run_tests.sh` expects `.green` after implement)
 - Optional charter client: set `LANGGRAPH_FIXTURE_CLIENT_ROOT` to `/Users/fareed/Documents/dev/test/1791767366` for the integration-marked pytest
+
+## Verification subgraph (P4)
+
+Policy: **`AcceptAllowed => GreenEvidence && RegressionEvidence && ReviewEvidence`** (commit-aligned records) via `tied_langgraph.policies.acceptance`. Implement-role MCP clients cannot call envelope or gate mutators (`tied_langgraph.policies.separation`).
+
+```mermaid
+flowchart LR
+  SCHEMA --> MCP_GATE
+  MCP_GATE --> ACCEPTANCE
+  ACCEPTANCE -->|repair/replan/escalate/accept| OUT
+```
+
+- Graph builder: `tied_langgraph.graphs.verification.build_verification_graph`
+- Evidence schema: `tied_langgraph.verification_evidence.validate_evidence_for_acceptance`
+- Default CI mocks MCP gate; optional live `tied_checklist_gate_validate` documented for sponsor runs

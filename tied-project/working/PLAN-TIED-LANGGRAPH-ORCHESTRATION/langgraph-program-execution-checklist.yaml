@@ -1,5 +1,5 @@
-agent_handoff: "P3 implement + close-out complete; proceed P4 acceptance or sponsor git commit. See tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/session-handoff.md"
-current_wave: "P4"
+agent_handoff: "P4 close-out complete; proceed @build-plan P5. See tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-handoff.md"
+current_wave: "P5"
 execution_authority:
   p0_enrollment_complete_at: "2026-10-12T04:15:00-07:00"
   p0_enrollment_evidence_ref: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/charter.md"
@@ -24,7 +24,7 @@ program:
   program_evidence_registry: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/program-evidence-registry.v1.yaml"
   program_request: "PLAN-TIED-LANGGRAPH-ORCHESTRATION"
   refine_tracker: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/checklist-tracker.yaml"
-program_phase: "P3_close_out_complete"
+program_phase: "P4_close_out_complete"
 schema_version: "langgraph-program-execution.v1"
 waves:
   P0:
@@ -70,8 +70,10 @@ waves:
     title: "TDD subgraph"
   P4:
     child_folder: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE"
+    exit_commit: "b72a1e1f"
+    linked_plan: "docs/langgraph/plan-tied-lg-p4-acceptance-gate.md"
     mode: "implement"
-    status: "pending"
+    status: "implement_close_out_complete"
     title: "Acceptance gate"
   P5:
     child_folder: "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST"
