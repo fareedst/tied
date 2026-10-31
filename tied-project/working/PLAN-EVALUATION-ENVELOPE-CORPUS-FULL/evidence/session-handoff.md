@@ -25,7 +25,7 @@
 
 - Publish manifest gap string may remain until EDPC republish (process gap is **visibility**, not blocking).
 - Per-folder envelope quality remediation (gap codes inside each row) — out of scope for G5 manifest pass.
-- Commit/push — sponsor request.
+- Traceable commit: `2fa173cc` — [traceable-commit-evidence.md](./traceable-commit-evidence.md)
 
 ---
 

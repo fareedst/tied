@@ -2,7 +2,7 @@
 
 **Gap:** G5 `process:envelope_sample_ten_tokens_not_full_corpus`  
 **Prompt:** `@non-tied-plan` G5  
-**Commit:** _(record after commit)_
+**Commit:** `2fa173cc` — feat(evaluation): full store envelope corpus manifest and gap report (G5)
 
 ## Staged scope
 
