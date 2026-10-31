@@ -27,6 +27,7 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     supersedes: []
   satisfaction_criteria:
     - criterion: "A TIED client bootstrap installs the same managed bundle under .cursor/skills/ without modifying unrelated skills or existing MCP configuration."
+    - criterion: "citdp-record and citdp-promote ship with citdp-only-boundary.md and tied-promote-citdp.md per [REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE]."
     - criterion: "close-out runs default tied_git_hygiene preview (plan_close_out) and executes checklist-aligned traceable-commit when unified close_out allows; skips commit when blocked; leap-diff-promote and ammend-commit remain no-commit."
     - criterion: "Close-out workflows include advisory gitignore hygiene per [PROC-GITIGNORE_CLOSE_OUT]: close-out shared process step and checklist slug gitignore-close-out-hygiene review ephemeral artifacts against .gitignore, apply or propose unstaged patterns using repository comment-block conventions, and record handoff evidence of patterns proposed/applied or explicit N/A when clean."
     - criterion: "Every canonical and installed prompt-type SKILL.md frontmatter parses as valid YAML (mapping with string description and disable-model-invocation true); description scalars that contain colons are double-quoted so Cursor and strict loaders accept linked stubs and full copies."
@@ -34,7 +35,6 @@ REQ-PROMPT_TYPE_GLOBAL_SKILLS:
     - criterion: "Leaf skills and the router do not use a triple-colon payload delimiter. add-feature treats the invocation remainder as the requirement. refine-plan and build-plan require a linked or in-message plan."
     - criterion: "The bundle and bootstrap behavior are covered by deterministic static and integration tests."
     - criterion: "The canonical TIED repository contains all 15 prompt-type leaf skills, one prompt-type router, and all direct shared references enumerated in prompt-type-skills.test.ts SHARED_REFERENCES."
-    - criterion: "citdp-record and citdp-promote ship with citdp-only-boundary.md and tied-promote-citdp.md per [REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE]."
     - criterion: "The greenfield TIED leaf skill invoke name is add-feature (full Refine, CITDP Plan, Implement); the LEAP close-out leaf is close-out."
   status: "Implemented"
   traceability:

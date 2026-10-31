@@ -34,6 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Tests vs checker-backed claims Phase 1 ([REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE], [ARCH-TIED_TESTS_CHECKER_CLAIM_COMPOSE], [IMPL-TIED_TESTS_CHECKER_CLAIM_COMPOSE])** — [tests-vs-checker-backed-claims.md](tied-bundle/docs/tests-vs-checker-backed-claims.md) from Anthropic FV Wave 3; [client-development-index.md](tied-bundle/docs/client-development-index.md) rows; pseudocode cross-link; [tests-checker-claim-compose-doc.test.mjs](tools/bootstrap/lib/tests-checker-claim-compose-doc.test.mjs). Doc-only; no new MCP gate authority. Plan: [PLAN.md](tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/PLAN.md).
 
+### Changed
+
+- **REQ-PROMPT_TYPE_GLOBAL_SKILLS satisfaction criteria order** — Project detail lists citdp-record/promote criterion immediately after bootstrap install criterion ([REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE]); close-out envelope refreshed (`ptgs-closeout-2026-10-30`).
+
 ### Fixed
 
 - **MCP unit test path isolation ([REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING], [REQ-TIED_CLIENT_PATH_ENV_MIGRATION])** — `run-mcp-tests.mjs` strips inherited `TIED_CLIENT_*` / `TIED_METHODOLOGY_BUNDLE_PATH` from the parent process; shared `bindWritableProjectCorpus()` helper gives temp corpora a `requirements.yaml` so Path 3 `marker_only` cwd discovery does not override legacy `TIED_BASE_PATH` in tests. Fixes `yaml-loader`, detail-loader, usage-metrics, and impl-pseudocode suites when IDE MCP env is present.

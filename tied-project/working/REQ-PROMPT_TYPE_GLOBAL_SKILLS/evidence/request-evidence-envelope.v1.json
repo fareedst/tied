@@ -1,91 +1,109 @@
 {
-  "schema_version": "request-evidence-envelope.v1",
-  "envelope_meta": {
-    "generated_at": "2026-10-13T23:55:13.767Z",
-    "generator": "request_evidence_envelope_build",
-    "revision": 1
-  },
-  "identity": {
-    "request_token": "REQ-PROMPT_TYPE_GLOBAL_SKILLS",
-    "project_id": "43c95df716872c5d",
-    "depth_tier": "minimal",
-    "gate_policy": "advisory",
-    "methodology_snapshot_id": "3.0.0"
-  },
-  "runs": [],
   "artifacts": [
     {
-      "kind": "checklist_gate_receipt",
-      "schema_version": null,
-      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-close_out-result.json",
-      "content_hash": "sha256:87a3b6f8293cc84e7a1c04fa06a66831699e4b467e573492194bbf4f80bb3754",
-      "phase": "close_out",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": null,
-      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-pre_implementation-result.json",
-      "content_hash": "sha256:7c50fd20710690ac888472c0431b981d8edc06c84cd1f699965b7a826f043202",
-      "phase": "pre_implementation",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_gate_receipt",
-      "schema_version": null,
-      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-verification-result.json",
-      "content_hash": "sha256:9dca6d543dd4be94f50169c5eac97b1fe27002d14e1effac51af16b139c81810",
-      "phase": "verification",
-      "status": "present",
-      "proof_boundaries": [
-        "gate_decision_only"
-      ]
-    },
-    {
-      "kind": "checklist_tracker",
-      "schema_version": null,
-      "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml",
       "content_hash": "sha256:17b92da0fbbd850f76c498669f047580f65191d5c5783ec18cf54bb66835c381",
+      "kind": "checklist_tracker",
+      "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml",
       "phase": null,
-      "status": "present",
       "proof_boundaries": [
         "tracker_disposition_only"
-      ]
+      ],
+      "schema_version": null,
+      "status": "present"
     },
     {
-      "kind": "not_applicable_receipt",
-      "schema_version": "not-applicable-receipt.v1",
-      "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/not-applicable-receipt.v1.json",
       "content_hash": "sha256:2c1bf5fa8f430079dceb88d6187a63856905df72b9991e24e5f28155f53e7429",
+      "kind": "not_applicable_receipt",
+      "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/not-applicable-receipt.v1.json",
       "phase": null,
-      "status": "present",
       "proof_boundaries": [
         "artifact_presence_only"
-      ]
+      ],
+      "schema_version": "not-applicable-receipt.v1",
+      "status": "present"
     },
     {
+      "content_hash": "sha256:7c50fd20710690ac888472c0431b981d8edc06c84cd1f699965b7a826f043202",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-pre_implementation-result.json",
+      "phase": "pre_implementation",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:87a3b6f8293cc84e7a1c04fa06a66831699e4b467e573492194bbf4f80bb3754",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-close_out-result.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:9dca6d543dd4be94f50169c5eac97b1fe27002d14e1effac51af16b139c81810",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/gate-verification-result.json",
+      "phase": "verification",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e3d55060d16824148b1135e5ddd42c802eedf26769c5e588c921f5717dbbcc67",
       "kind": "request_evidence_envelope",
-      "schema_version": "request-evidence-envelope.v1",
       "path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:16768e6f288e169170e4e4ddd7ab7d78bff51e6ccca6d158c46879badb02aab8",
       "phase": null,
-      "status": "present",
       "proof_boundaries": [
         "artifact_presence_only"
-      ]
+      ],
+      "schema_version": "request-evidence-envelope.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e519ef6cbac53032b2ac60c409d8bbc99b8b0fe189f26c54e7c744dc791aa55b",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/gates/close_out-2026-10-31T04-52-30-505Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
     }
   ],
   "cross_links": {
-    "tracker_path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml",
-    "tracker_hash": "sha256:f211255644d7c9e69b9871842574065f5617a41e81ae0356fbe48cbc6981c68c",
     "citdp_path": null,
-    "evidence_chain_profile_path": null
+    "evidence_chain_profile_path": null,
+    "tracker_hash": "sha256:f211255644d7c9e69b9871842574065f5617a41e81ae0356fbe48cbc6981c68c",
+    "tracker_path": "tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/agent-req-implementation-checklist.yaml"
   },
-  "gaps": []
+  "envelope_meta": {
+    "generated_at": "2026-10-31T04:52:30.507Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
+  },
+  "gaps": [],
+  "identity": {
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "4.0.0",
+    "project_id": "43c95df716872c5d",
+    "request_token": "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+  },
+  "runs": [
+    {
+      "generator": "persistGateDecisionReceipt",
+      "phase": "close_out",
+      "run_id": "ptgs-closeout-2026-10-30",
+      "started_at": null
+    }
+  ],
+  "schema_version": "request-evidence-envelope.v1"
 }
