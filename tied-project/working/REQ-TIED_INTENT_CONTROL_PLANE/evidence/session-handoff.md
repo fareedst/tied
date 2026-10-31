@@ -1,12 +1,12 @@
 # Session handoff — REQ-TIED_INTENT_CONTROL_PLANE
 
-**Recorded:** 2026-10-30 (post Wave 6 close-out)  
+**Recorded:** 2026-10-30 (program close-out)  
 **Program:** Intent control plane — Waves 1–6  
 **Linked Cursor plan:** `/Users/fareed/.cursor/plans/intent_control_plane_req_9e21803c.plan.md`
 
 ## Program status
 
-**Waves 1–6 close-out complete.** Wave 6 commit **`ea39bcda`**. Wave 5 commit **`d057cc27`**. Branch **main** ahead of `origin/main` (not pushed).
+**Umbrella program close-out complete** (LEAP REQ detail + persisted CITDP). Implementation waves **`222d2b58`–`ea39bcda`**. Full MCP **`npm test`** green (2026-10-30). Branch **main** ahead of `origin/main` (not pushed).
 
 | Wave | Focus |
 | --- | --- |

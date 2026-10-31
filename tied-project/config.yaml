@@ -1,10 +1,10 @@
 dae:
   crap_threshold: 30
+identity:
+  routing: "marker_only"
 jev:
   plan_skills: true
 schema: "tied-project-config.v1"
-identity:
-  routing: marker_only
 verification:
   isolated_runner: true
 yaml:

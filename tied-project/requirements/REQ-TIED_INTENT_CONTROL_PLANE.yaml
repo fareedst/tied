@@ -1,19 +1,65 @@
 REQ-TIED_INTENT_CONTROL_PLANE:
-  description: "External handoff informs design; canonical criteria live in project YAML after LEAP."
+  category: "Architecture"
+  description: "Phased MCP-first program separating intent, process, and execution authority with gate-backed completion evidence (Waves 1–6)."
   metadata:
-    created: "2026-10-29"
-    status: "Planned"
+    created:
+      author: "AI Agent"
+      date: "2026-10-29"
+    last_updated:
+      author: "AI Agent"
+      date: "2026-10-30"
+      reason: "Program close-out Waves 1–6"
   name: "Intent control plane umbrella"
+  priority: "P1"
   rationale:
     benefits:
-      - "Phased REQ-CTRL alignment"
-      - "Traceable waves"
+      - "Phased REQ-CTRL alignment with traceable waves"
+      - "Wrong-repo MCP writes fail closed"
     problems_solved:
       - "Agent completion claims without gate proof"
-      - "Wrong-repo MCP writes"
-    why: "Separate intent, process, and execution authority with independent completion evidence."
+      - "Stale IDE env overriding project identity"
+    why: "External handoff informs design; canonical criteria live in project YAML after LEAP."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      - "REQ-TIED_ISOLATED_VERIFICATION_RUNNER"
+      - "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+      - "REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
+      - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
+  satisfaction_criteria:
+    - criterion: "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING delivered with tests (Wave 1)"
+      criterion_id: "wave1-child"
+    - criterion: "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH delivered with tests (Wave 2)"
+      criterion_id: "wave2-child"
+    - criterion: "REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE delivered with tests (Wave 3)"
+      criterion_id: "wave3-child"
+    - criterion: "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER delivered with tests (Wave 4)"
+      criterion_id: "wave4-child"
+    - criterion: "REQ-TIED_ISOLATED_VERIFICATION_RUNNER delivered with tests (Wave 5)"
+      criterion_id: "wave5-child"
+    - criterion: "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING delivered with tests (Wave 6)"
+      criterion_id: "wave6-marker-routing"
+    - criterion: "Umbrella REQ/ARCH/IMPL exist and validate"
+      criterion_id: "umbrella-tokens"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_INTENT_CONTROL_PLANE"
+    code_annotations:
+      - "ARCH-TIED_INTENT_CONTROL_PLANE"
+      - "IMPL-TIED_INTENT_CONTROL_PLANE"
+      - "REQ-TIED_INTENT_CONTROL_PLANE"
     implementation:
       - "IMPL-TIED_INTENT_CONTROL_PLANE"
+    tests:
+      - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+      - "mcp-server/src/project-identity-marker-routing.test.ts"
+      - "mcp-server/src/project-identity-write-binding.test.ts"
+  validation_criteria:
+    - coverage: "Full MCP test suite and umbrella gate close_out"
+      method: "npm test --prefix mcp-server; run-close-out-gates.mjs"
