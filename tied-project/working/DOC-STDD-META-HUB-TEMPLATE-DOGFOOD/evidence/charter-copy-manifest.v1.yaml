@@ -1,0 +1,22 @@
+schema_version: "charter-copy-manifest.v1"
+source_template: "tied-bundle/templates/edpc-meta-hub-engagement-charter.v1.example.yaml"
+target_charter: "tied-project/working/DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/evidence/edpc/engagement-charter.v1.yaml"
+copied_at: "2026-10-31"
+substitutions_only:
+  - field: "target_repository_root"
+    from: "/absolute/path/to/target/repository"
+    to: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  - field: "request_token"
+    from: "DOC-EXAMPLE-OR-REQ-EXAMPLE"
+    to: "DOC-STDD-META-HUB-TEMPLATE-DOGFOOD"
+  - field: "sponsor_note"
+    from: "Meta-hub engagement; include tied-project in bounded_path; defer workflows D/E when production_touch is none and tier is below source_change."
+    to: "Second meta-hub dogfood (2026-10-31); charter fields copied from tied-bundle template except repository path and request_token; see evidence/charter-copy-manifest.v1.yaml."
+unchanged_from_template:
+  - "engagement_pattern"
+  - "hub_path"
+  - "bounded_path"
+  - "investigation_question"
+  - "workflows_planned"
+  - "schema_version"
+ad_hoc_charter_edits: false

@@ -1,0 +1,14 @@
+brownfield_intent_elevation:
+  engagement: "edpc_full"
+  mode: "pilot"
+change_class: "meta_hub_template_second_dogfood"
+edpc_engagement:
+  charter_path: "tied-project/working/DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/evidence/edpc/engagement-charter.v1.yaml"
+  engagement_pattern: "meta_hub"
+  evidence_access_tier: "toolchain_readonly"
+  production_touch: "none"
+  target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+gate_policy: "doc_comprehension_hygiene"
+no_req_mint: true
+profile_depth: "minimal"
+request_token: "DOC-STDD-META-HUB-TEMPLATE-DOGFOOD"

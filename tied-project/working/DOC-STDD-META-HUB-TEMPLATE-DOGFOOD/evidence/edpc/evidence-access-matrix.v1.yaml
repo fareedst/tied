@@ -1,0 +1,10 @@
+access_matrix_path: "tied-project/working/DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/evidence/edpc/evidence-access-matrix.v1.yaml"
+capabilities:
+  compile: true
+  execute: true
+  source_write: false
+  test: true
+charter_path: "tied-project/working/DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/evidence/edpc/engagement-charter.v1.yaml"
+evidence_access_tier: "toolchain_readonly"
+production_touch: "none"
+schema_version: "evidence-access-matrix.v1"

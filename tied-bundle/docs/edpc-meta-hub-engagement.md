@@ -6,7 +6,14 @@
 
 **When not to use:** Bounded product dogfood on a single module (for example `mcp-server/src/edpc` only) without hub navigation — use a standard EDPC charter without `engagement_pattern: meta_hub`.
 
-**Reference dogfood (TIED store):** [DOC-STDD-TIED-PROJECT-BROWNFIELD](../../tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/) · [corpus map](../../tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/reports/tied-project-corpus-map.md)
+**Reference dogfood (TIED store):**
+
+| Token | Role |
+| --- | --- |
+| [DOC-STDD-TIED-PROJECT-BROWNFIELD](../../tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/) | First full meta-hub comprehension + corpus map |
+| [DOC-STDD-META-HUB-TEMPLATE-DOGFOOD](../../tied-project/working/DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/) | Second dogfood — copy-only charter from [template](../templates/edpc-meta-hub-engagement-charter.v1.example.yaml) |
+
+Corpus map example: [tied-project-corpus-map.md](../../tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/reports/tied-project-corpus-map.md)
 
 ---
 

@@ -1,0 +1,22 @@
+queues:
+  action:
+    description: "Approved follow-up work, investigations, recommendations, and decisions."
+    items:
+      - "Optional: expand to EDPC B–F using edpc-meta-hub-engagement.md checklist mapping."
+  evidence_gap:
+    description: "Missing logs, tests, inaccessible systems, or unverifiable assumptions."
+    items: []
+  finding:
+    description: "Confirmed problems, possible risks, inconsistencies, and positive characteristics."
+    items:
+      - "Template charter validates at toolchain_readonly when Tracker uses edpc_full pilot mode."
+  hypothesis:
+    description: "Alternative explanations for noteworthy behavior or anomalies."
+    items: []
+  question:
+    description: "Client questions plus questions EDPC discovers during investigation."
+    items:
+      - "Does copy-only charter satisfy G4 second-dogfood promote gate?"
+request_token: "DOC-STDD-META-HUB-TEMPLATE-DOGFOOD"
+revision: "queues-rev-1"
+schema_version: "edpc-queues.v1"

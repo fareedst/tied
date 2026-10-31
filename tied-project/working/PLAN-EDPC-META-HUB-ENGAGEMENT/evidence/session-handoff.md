@@ -31,10 +31,11 @@ Gap `methodology:meta_hub_edpc_template_deferred` in [DOC publish manifest](../D
 - Second meta-hub engagement completes with template copy-only charter.
 - Then optional `@citdp-promote` or `@add-feature` for normative REQ if needed.
 
-## Suggested second dogfood
+## Second dogfood (complete)
 
-- Any **client** brownfield with committed `tied-project/` and multi-root code, or
-- Store slice under `tied-project/working/` with a new `DOC-*` token copying the example charter.
+[DOC-STDD-META-HUB-TEMPLATE-DOGFOOD](../../DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/) — charter copy-only; `tied_edpc_access_validate` + `tied_edpc_engagement_validate` (**pilot**) green. See [charter-copy-manifest.v1.yaml](../../DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/evidence/charter-copy-manifest.v1.yaml).
+
+**Promote:** optional `@citdp-promote` when sponsor accepts both dogfoods.
 
 ## Downstream
 
