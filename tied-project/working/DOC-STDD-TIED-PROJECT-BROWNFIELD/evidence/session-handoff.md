@@ -52,7 +52,7 @@ Brownfield regenerable noise was **restored** before push (see hygiene receipt).
 1. ~~**Optional** — sync G4/G6 rows in [gap-planning-handoff.md](./gap-planning-handoff.md).~~ **Done (2026-10-31).**
 2. ~~**Republish** DOC EDPC manifest.~~ **Done (2026-10-31)** — [edpc-publish-republish-2026-10-31.json](./receipts/edpc-publish-republish-2026-10-31.json).
 3. ~~**G3** — `@add-feature` [REQ-TIED_CORPUS_COMPREHENSION](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md).~~ **Done (2026-10-31)** — product gap cleared from manifest.
-4. **G4** — `@citdp-promote` only if normative token wanted (optional).
+4. ~~**G4** — `@citdp-promote` normative token.~~ **Done (2026-10-31)** — `REQ-TIED_EDPC_META_HUB_ENGAGEMENT`.
 5. ~~**LangGraph** — P4 traceable SHA sync (`58c1fa9b`) in working docs + CHANGELOG.~~ **Done (2026-10-31)** — push with this chore commit.
 
 ---

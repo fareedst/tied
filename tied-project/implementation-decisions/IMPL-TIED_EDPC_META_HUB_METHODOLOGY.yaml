@@ -1,0 +1,45 @@
+IMPL-TIED_EDPC_META_HUB_METHODOLOGY:
+  code_locations:
+    files:
+      - description: "Example meta-hub charter"
+        path: "tied-bundle/templates/edpc-meta-hub-engagement-charter.v1.example.yaml"
+      - description: "Meta-hub methodology guide"
+        path: "tied-bundle/docs/edpc-meta-hub-engagement.md"
+      - description: "Normative template and doc pointer contract"
+        path: "mcp-server/src/edpc/meta-hub-template.test.ts"
+  cross_references:
+    - "ARCH-TIED_EDPC_META_HUB_ENGAGEMENT"
+    - "REQ-TIED_EDPC_COMPREHENSION"
+    - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+  decision: "Guard meta-hub template and guide via meta-hub-template.test.ts; no runtime MCP changes for promote."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_META_HUB_METHODOLOGY-pseudocode.md"
+  implementation_approach:
+    details:
+      - "mcp-server/src/edpc/meta-hub-template.test.ts"
+    summary: "Filesystem contract test reads tied-bundle template and docs."
+  metadata:
+    created:
+      author: "citdp-promote"
+      date: "2026-10-31"
+      reason: "Normative promote"
+  name: "EDPC meta-hub methodology guard"
+  rationale:
+    benefits:
+      - "CI fails if hub_path or engagement_pattern regresses"
+    problems_solved:
+      - "Template drift undetected"
+    why: "Normative promote after implement-only pass shipped template in 9e2c4c2b."
+  related_decisions:
+    depends_on:
+      - "IMPL-TIED_EDPC_PUBLISH"
+    see_also: []
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EDPC_META_HUB_ENGAGEMENT"
+    code_annotations:
+      - "mcp-server/src/edpc/meta-hub-template.test.ts"
+    requirements:
+      - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+    tests:
+      - "mcp-server/src/edpc/meta-hub-template.test.ts"

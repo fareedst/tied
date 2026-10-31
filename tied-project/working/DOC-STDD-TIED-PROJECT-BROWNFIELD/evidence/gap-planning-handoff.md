@@ -161,7 +161,7 @@ flowchart TB
 | Priority | Gap | Rationale |
 | --- | --- | --- |
 | — | **Brownfield backlog** | Sprint + G3 complete 2026-10-31; manifest retains **G7 only** (comprehension verify boundary) |
-| — | **G4 promote** | Optional `@citdp-promote` for normative meta-hub token |
+| — | **G4 promote** | **Done (2026-10-31)** — `REQ-TIED_EDPC_META_HUB_ENGAGEMENT` via `@citdp-promote` |
 | — | **G2** | Explicit defer until Workflow D chartered |
 
 ---

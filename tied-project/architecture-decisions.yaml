@@ -1967,6 +1967,17 @@ ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
   detail_file: "architecture-decisions/ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL.yaml"
   name: "EDPC Client Assessment Model"
   status: "Active"
+ARCH-TIED_EDPC_META_HUB_ENGAGEMENT:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_EDPC_META_HUB_METHODOLOGY"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+      - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+  description: "Methodology artifacts under tied-bundle for meta-hub EDPC engagements."
+  detail_file: "architecture-decisions/ARCH-TIED_EDPC_META_HUB_ENGAGEMENT.yaml"
+  name: "EDPC meta-hub engagement surface"
+  status: "Active"
 ARCH-TIED_EXTERNAL_SERVICE_COMPARISON:
   detail_file: "architecture-decisions/ARCH-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"
   name: "External service comparison architecture"

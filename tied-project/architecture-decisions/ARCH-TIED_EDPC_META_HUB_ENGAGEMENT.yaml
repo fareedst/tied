@@ -1,0 +1,38 @@
+ARCH-TIED_EDPC_META_HUB_ENGAGEMENT:
+  cross_references:
+    - "REQ-TIED_EDPC_COMPREHENSION"
+    - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+  decision: "Meta-hub EDPC engagements use tied-bundle charter template plus edpc-meta-hub-engagement.md; hub_path is tied-project/; bounded_path must include the hub and code slices."
+  implementation_approach:
+    details:
+      - "Charter example YAML under tied-bundle/templates/"
+      - "Guide under tied-bundle/docs/edpc-meta-hub-engagement.md"
+      - "Pointer in EDPC_Methodology_and_Workflows.md"
+    summary: "Docs + template under tied-bundle; contract test in mcp-server."
+  metadata:
+    created:
+      author: "citdp-promote"
+      date: "2026-10-31"
+      reason: "Normative promote PLAN-EDPC-META-HUB-ENGAGEMENT"
+  name: "EDPC meta-hub engagement surface"
+  rationale:
+    benefits:
+      - "Install refresh copies template via tied-bundle"
+    problems_solved:
+      - "Ad hoc charter fields across dogfoods"
+    why: "Separate methodology surface from MCP edpc/ orchestration while linking to PROC-EDPC_COMPREHENSION."
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+    informs: []
+    see_also:
+      - "ARCH-TIED_EDPC_ARTIFACT_MODEL"
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_EDPC_META_HUB_METHODOLOGY"
+    requirements:
+      - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+    tests:
+      - "mcp-server/src/edpc/meta-hub-template.test.ts"

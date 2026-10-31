@@ -35,7 +35,7 @@ Gap `methodology:meta_hub_edpc_template_deferred` in [DOC publish manifest](../D
 
 [DOC-STDD-META-HUB-TEMPLATE-DOGFOOD](../../DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/) — charter copy-only; `tied_edpc_access_validate` + `tied_edpc_engagement_validate` (**pilot**) green. See [charter-copy-manifest.v1.yaml](../../DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/evidence/charter-copy-manifest.v1.yaml).
 
-**Promote:** optional `@citdp-promote` when sponsor accepts both dogfoods.
+**Promote:** **Done (2026-10-31)** — `@citdp-promote` → [citdp-promote-handoff.md](./citdp-promote-handoff.md); tokens `REQ-TIED_EDPC_META_HUB_ENGAGEMENT`, `ARCH-TIED_EDPC_META_HUB_ENGAGEMENT`, `IMPL-TIED_EDPC_META_HUB_METHODOLOGY`.
 
 ## Downstream
 

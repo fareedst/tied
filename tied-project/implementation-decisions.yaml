@@ -2355,6 +2355,16 @@ IMPL-TIED_EDPC_FAILURE_OPS:
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_EDPC_FAILURE_OPS-pseudocode.md"
   name: "EDPC Operational Failure State (Workflow D)"
   status: "Active"
+IMPL-TIED_EDPC_META_HUB_METHODOLOGY:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_META_HUB_ENGAGEMENT"
+    requirements:
+      - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+  description: "Contract tests and tied-bundle paths for meta-hub EDPC template and guide."
+  detail_file: "implementation-decisions/IMPL-TIED_EDPC_META_HUB_METHODOLOGY.yaml"
+  name: "EDPC meta-hub methodology guard"
+  status: "Active"
 IMPL-TIED_EDPC_ORCHESTRATION:
   cross_references:
     architecture:

@@ -2601,6 +2601,20 @@ REQ-TIED_EDPC_COMPREHENSION:
       - "IMPL-TIED_EDPC_PUBLISH"
     tests:
       - "mcp-server/src/edpc/*.test.ts"
+REQ-TIED_EDPC_META_HUB_ENGAGEMENT:
+  category: "Functional"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_EDPC_META_HUB_ENGAGEMENT"
+    implementation:
+      - "IMPL-TIED_EDPC_META_HUB_METHODOLOGY"
+    requirements:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Normative methodology for full-repo EDPC engagements with tied-project/ as traceability hub."
+  detail_file: "requirements/REQ-TIED_EDPC_META_HUB_ENGAGEMENT.yaml"
+  name: "EDPC meta-hub engagement methodology"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
   category: "Methodology"
   detail_file: "requirements/REQ-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"

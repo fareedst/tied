@@ -1,0 +1,42 @@
+REQ-TIED_EDPC_META_HUB_ENGAGEMENT:
+  category: "Functional"
+  description: "Enrolls the meta-hub EDPC engagement pattern: charter template, methodology guide, and contract tests guarding hub_path and bounded_path rules. Does not mint REQ authority or replace tied_verify."
+  metadata:
+    created:
+      author: "citdp-promote"
+      date: "2026-10-31"
+      reason: "PLAN-EDPC-META-HUB-ENGAGEMENT normative promote"
+  name: "EDPC meta-hub engagement methodology"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Explicit authority boundary vs indexes and tied_verify"
+      - "Repeatable charter copy-only dogfood"
+    problems_solved:
+      - "Meta-hub engagements were ad hoc working folders only"
+      - "Publish manifest backlog lacked normative REQ anchor"
+    why: "Close G4 with normative TIED traceability after DOC and template dogfoods."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+    related_to:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+      - "REQ-TIED_CORPUS_COMPREHENSION"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "SC-MH-CONTRACT — meta-hub-template.test.ts passes in mcp-server"
+    - criterion: "SC-MH-GUIDE — edpc-meta-hub-engagement.md documents layout, checklist mapping, and PROC-EDPC_COMPREHENSION linkage"
+    - criterion: "SC-MH-POINTER — EDPC_Methodology_and_Workflows.md links the meta-hub guide"
+    - criterion: "SC-MH-TEMPLATE — tied-bundle template declares engagement_pattern meta_hub, hub_path tied-project/, bounded_path includes tied-project"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_EDPC_META_HUB_ENGAGEMENT"
+    code_annotations: []
+    implementation:
+      - "IMPL-TIED_EDPC_META_HUB_METHODOLOGY"
+    tests:
+      - "mcp-server/src/edpc/meta-hub-template.test.ts"
+  validation_criteria:
+    - coverage: "template shape and doc pointers"
+      method: "npm test --prefix mcp-server -- meta-hub-template"
