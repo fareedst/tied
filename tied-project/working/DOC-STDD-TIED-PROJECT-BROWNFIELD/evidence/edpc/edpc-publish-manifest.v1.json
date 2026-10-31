@@ -4,7 +4,6 @@
   "tier": "toolchain_readonly",
   "baseline_revision": "cf321c96",
   "gaps": [
-    "minimum_field_gap:request_token",
     "ofsm:bundle_missing",
     "methodology:tied_yaml_corpus_not_in_source_graph",
     "methodology:meta_hub_edpc_template_deferred",

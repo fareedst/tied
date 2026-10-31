@@ -70,9 +70,19 @@ export function buildEdpcPublishManifest(input: {
     diagnostics.push("invalid_scm_shell");
   }
   const gaps: string[] = [...diagnostics.filter((d) => d.startsWith("invalid"))];
+  const shellRecord = shell as unknown as Record<string, unknown>;
   const minimum: Record<string, unknown> = isRecord(shell.minimum_fields)
-    ? shell.minimum_fields
-    : (shell as unknown as Record<string, unknown>);
+    ? { ...shell.minimum_fields }
+    : {};
+  for (const key of SCM_MINIMUM_KEYS) {
+    const current = minimum[key];
+    if (current === undefined || current === null || current === "") {
+      const topLevel = shellRecord[key];
+      if (topLevel !== undefined && topLevel !== null && topLevel !== "") {
+        minimum[key] = topLevel;
+      }
+    }
+  }
   for (const key of SCM_MINIMUM_KEYS) {
     if (minimum[key] === undefined || minimum[key] === null || minimum[key] === "") {
       gaps.push(`minimum_field_gap:${key}`);

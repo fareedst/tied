@@ -69,6 +69,26 @@ describe("EDPC publish build [REQ-TIED_EDPC_COMPREHENSION]", () => {
     assert.ok(result.manifest!.gaps.some((g) => g.startsWith("health:")));
   });
 
+  it("accepts DOC-shaped shell with top-level request_token hoisted into minimum_fields", () => {
+    const result = buildEdpcPublishManifest({
+      scm_shell: {
+        schema_version: "scm-snapshot-shell.v1",
+        request_token: "DOC-STDD-TIED-PROJECT-BROWNFIELD",
+        minimum_fields: {
+          baseline_revision: "cf321c96",
+          tier: "toolchain_readonly",
+        },
+      },
+      claims_ledger: [],
+      access_matrix: { evidence_access_tier: "toolchain_readonly" },
+    });
+    assert.ok(result.manifest);
+    assert.ok(
+      !result.manifest!.gaps.some((g) => g === "minimum_field_gap:request_token"),
+      result.manifest!.gaps.join(", "),
+    );
+  });
+
   it("flags unresolved receipt refs", () => {
     const result = buildEdpcPublishManifest({
       scm_shell: {

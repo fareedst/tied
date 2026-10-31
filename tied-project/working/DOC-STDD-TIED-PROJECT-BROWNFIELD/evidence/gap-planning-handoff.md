@@ -42,7 +42,7 @@ flowchart TB
 
 | # | Manifest gap | Class | Suggested plan token | Prompt type | Depends on | Plan seed (create) |
 | --- | --- | --- | --- | --- | --- | --- |
-| G1 | `minimum_field_gap:request_token` | Process / EDPC F | `PLAN-EDPC-PUBLISH-MINIMUM-FIELDS` | `non-tied-plan` or small `add-feature` if publish schema changes | `[REQ-TIED_EDPC_COMPREHENSION]` | Fix `scm-snapshot-shell.v1.yaml` + `tied_edpc_publish_build` input so `minimum_fields.request_token` is always set; add publish-build test row |
+| G1 | `minimum_field_gap:request_token` | Process / EDPC F | `PLAN-EDPC-PUBLISH-MINIMUM-FIELDS` | **Done (2026-10-31)** — hoist top-level `request_token` in publish build + DOC-shaped test | `[REQ-TIED_EDPC_COMPREHENSION]` | Manifest republished without G1 gap; see `mcp-server/src/edpc/publish-build.ts` |
 | G2 | `ofsm:bundle_missing` | **N/A** (charter) | — | — | Workflow D not chartered | Document in charter: `production_touch: none` → OFSM optional; re-open only with `@add-feature` on EDPC Slice D |
 | G3 | `methodology:tied_yaml_corpus_not_in_source_graph` | **Costly** product | `REQ-TIED_CORPUS_COMPREHENSION` (proposed) | `add-feature` → `refine-plan` → `build-plan` | `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]`, `[REQ-TIED_SCOPED_ANALYSIS]` | Extend static index: YAML/Markdown under `tied-project/` (token refs, detail paths); proof boundary: no runtime |
 | G4 | `methodology:meta_hub_edpc_template_deferred` | Reversible methodology | `PLAN-EDPC-META-HUB-ENGAGEMENT` | `non-tied-plan` then optional `citdp-promote` | `[PROC-EDPC_COMPREHENSION]`, DOC dogfood artifacts | Template: charter + bounded_paths for `tied-project/` hub; checklist slugs A–F; link [corpus-map](./reports/tied-project-corpus-map.md) |
