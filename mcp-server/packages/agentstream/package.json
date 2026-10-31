@@ -13,6 +13,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@tied/checklist-resume": "*",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {

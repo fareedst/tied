@@ -7,8 +7,6 @@ import fs from "node:fs";
 
 import yaml from "js-yaml";
 
-import { loadProjectConfig } from "./tied-project-config.js";
-
 export type ChecklistResumeTurn = {
   stepStub: string;
   chainFromPrevious: boolean;
@@ -120,19 +118,4 @@ export function loadTrackerResumeContext(trackerPath: string): {
     sessionId: parseSessionIdFromStateHistory(history),
     requestToken: requestToken || undefined,
   };
-}
-
-export function isChecklistResumeFromTrackerEnabled(projectRoot: string): boolean {
-  const loaded = loadProjectConfig(projectRoot);
-  if (!loaded) {
-    return true;
-  }
-  const checklist = loaded.record.checklist;
-  if (checklist !== null && typeof checklist === "object" && !Array.isArray(checklist)) {
-    const flag = (checklist as Record<string, unknown>).resume_from_tracker;
-    if (flag === false) {
-      return false;
-    }
-  }
-  return true;
 }

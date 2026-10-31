@@ -1,0 +1,33 @@
+CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY:
+  change_definition:
+    current_behavior: "Duplicate checklist-controller-resume.ts in mcp-server and agentstream; resume apply CLI-only."
+    desired_behavior: "Single @tied/checklist-resume package; config checklist.resume_from_tracker tri-state in agentstream."
+    success_criteria:
+      - "npm test --prefix mcp-server green"
+      - "No duplicate checklist-controller-resume.ts under src or agentstream/src"
+  record_identity:
+    change_request_id: "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    recorded_at: "2026-10-31"
+    title: "LEAP unify checklist resume module"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      counterexamples:
+        - "Auto-resume from config applies wrong first_turn when tracker dispositions stale."
+      falsification_questions:
+        - "Would duplicate modules diverge on bugfix without @tied/checklist-resume?"
+      disconfirming_observations:
+        - "npm test exercises deriveChecklistResumePlan and config policy matrix."
+      evidence_references:
+        - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/verification-evidence-manifest.v1.json"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
+    tied_tokens_affected:
+      - "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+      - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
+  completion_criteria:
+    verification_gate_notes: "npm test --prefix mcp-server full suite green 2026-10-31"

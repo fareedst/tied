@@ -2,7 +2,7 @@ REQ-TIED_DURABLE_CHECKLIST_CONTROLLER:
   REQ-TIED_DURABLE_CHECKLIST_CONTROLLER:
     metadata:
       created: "2026-10-30"
-      status: "Planned"
+      status: "Implemented"
     name: "Durable checklist controller resume"
     rationale:
       benefits:
@@ -13,7 +13,9 @@ REQ-TIED_DURABLE_CHECKLIST_CONTROLLER:
     satisfaction_criteria:
       - criterion: "agentstream --resume-from-tracker requires --checklist-tracker-yaml."
       - criterion: "deriveChecklistResumePlan selects first pending stubbed turn."
+      - criterion: "MCP and agentstream import shared @tied/checklist-resume module (no duplicate checklist-controller-resume.ts)."
       - criterion: "tied_checklist_controller_resume_plan returns first_turn and session_id_hint read-only."
+      - criterion: "When tied-project/config.yaml checklist.resume_from_tracker is true, agentstream auto-applies resume when --checklist-tracker-yaml is set without requiring --resume-from-tracker."
     traceability:
       architecture:
         - "ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER"

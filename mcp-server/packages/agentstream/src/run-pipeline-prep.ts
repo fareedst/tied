@@ -9,6 +9,7 @@ import { applyNonCompactHtmlToTurns } from "./htmlformat.js";
 import { buildPipelineFromDryRunConfig } from "./pipeline-build.js";
 import { sliceFromFirstTurn } from "./pipeline-session.js";
 import { applyResumeFromTracker } from "./apply-resume-from-tracker.js";
+import { shouldApplyResumeFromTracker } from "./checklist-resume-config.js";
 
 export function buildTurnsFromConfig(cfg: DryRunConfig): {
   turns: Turn[];
@@ -22,7 +23,7 @@ export function buildTurnsFromConfig(cfg: DryRunConfig): {
   }
   let turns = buildPipelineFromDryRunConfig(cfg, featureSpecOpts);
   const originalTotal = turns.length;
-  if (cfg.resumeFromTracker) {
+  if (shouldApplyResumeFromTracker(cfg)) {
     const applied = applyResumeFromTracker(cfg, turns);
     if (!applied.ok) {
       throw new Error(`agentstream: resume-from-tracker failed: ${applied.error}`);

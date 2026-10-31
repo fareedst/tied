@@ -60,7 +60,7 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
       - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
       - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
   leap_feedback:
-    divergences_from_analysis: "Duplicate checklist-controller-resume.ts in mcp-server and agentstream packages until LEAP unify; config checklist.resume_from_tracker not wired in agentstream apply yet."
+    divergences_from_analysis: "LEAP unify complete 2026-10-31: @tied/checklist-resume shared module; checklist.resume_from_tracker wired in agentstream via checklist-resume-config.ts."
     record_status: "final"
     tied_stack_updates_required:
       - "ARCH-TIED_PROJECT_IDENTITY LEAP for Path 2 marker binding (Wave 1)"

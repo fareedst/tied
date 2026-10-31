@@ -14,7 +14,7 @@
     "tied": "packages/cli/dist/index.js"
   },
   "scripts": {
-    "build": "tsc && npm run build --workspaces --if-present",
+    "build": "npm run build --workspace=@tied/checklist-resume && npm run build --workspaces --if-present && tsc",
     "start": "node dist/index.js",
     "test": "npm run build && node scripts/run-mcp-tests.mjs",
     "traceability-gap": "node dist/cli/traceability-gap.js",
@@ -30,6 +30,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@tied/checklist-resume": "*",
     "@modelcontextprotocol/sdk": "^1.32.2",
     "fast-glob": "^3.3.3",
     "ignore": "^7.0.5",

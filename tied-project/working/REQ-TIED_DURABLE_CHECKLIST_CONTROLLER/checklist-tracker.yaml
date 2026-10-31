@@ -1,0 +1,116 @@
+citdp:
+  deferred: false
+  persisted: true
+  path: "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml"
+depth_tier: "minimal"
+gate_policy: "advisory"
+profile_depth: "minimal"
+request: "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+scope: "LEAP unify @tied/checklist-resume; config checklist.resume_from_tracker in agentstream."
+dispositions:
+  allowed:
+    - "completed"
+    - "not_applicable"
+    - "pending"
+    - "waived"
+  completed_requires_evidence: true
+execution_evidence:
+  request: "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER"
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "test-strategy"
+    - "unit-test-red"
+    - "unit-test-green"
+    - "verification-gate"
+    - "persist-implementation-records"
+    - "traceable-commit"
+  evidence_refs:
+    - kind: "manifest_ref"
+      path: "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/verification-evidence-manifest.v1.json"
+    - kind: "file_path"
+      path: "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/PLAN-LEAP-UNIFY-CHECKLIST-RESUME.md"
+  close_out_evidence:
+    master_checklist: "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/checklist-tracker.yaml"
+    gates: {}
+    deferred: []
+steps:
+  - slug: "change-definition"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml"
+  - slug: "impact-discovery"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/PLAN-LEAP-UNIFY-CHECKLIST-RESUME.md"
+  - slug: "risk-assessment"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml"
+  - slug: "test-strategy"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/PLAN-LEAP-UNIFY-CHECKLIST-RESUME.md"
+  - slug: "sub-adversarial-inquiry-pass"
+    disposition: "not_applicable"
+    status: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "depth_tier minimal; LEAP hygiene slice."
+    tracking:
+      status: "not_applicable"
+      policy: "minimal-depth-no-inquiry"
+      rationale: "depth_tier minimal."
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/not-applicable-receipt.v1.json"
+  - slug: "unit-test-red"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts"
+  - slug: "unit-test-green"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/verification-evidence-manifest.v1.json"
+  - slug: "persist-implementation-records"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER.yaml"
+      - "tied-project/requirements/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER.yaml"
+  - slug: "verification-gate"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/verification-evidence-manifest.v1.json"
+  - slug: "traceable-commit"
+    disposition: "completed"
+    status: "completed"
+    tracking:
+      status: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/proposed-commit-message.txt"
+      - "tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/traceable-commit-evidence.md"
+version: "3.0.0"

@@ -1,0 +1,13 @@
+feat(mcp): unify checklist resume in @tied/checklist-resume
+
+Extract shared resume plan for MCP and agentstream; wire
+checklist.resume_from_tracker config. Closes ICP handoff LEAP item.
+
+REQ-TIED_DURABLE_CHECKLIST_CONTROLLER, IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER,
+ARCH-TIED_DURABLE_CHECKLIST_CONTROLLER, REQ-TIED_INTENT_CONTROL_PLANE
+
+Machine close-out: pass (close_out gate + envelope blocking_gaps=0).
+Process contract: pass (tracker + manifest + CITDP).
+Adherence ledger: pass (reconcile process_grade A).
+
+Upstream feedback capture: N/A (no MCP feedback promote this slice).

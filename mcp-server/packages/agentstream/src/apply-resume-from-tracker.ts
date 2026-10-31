@@ -7,7 +7,7 @@ import type { Turn } from "./checklist-load-turns.js";
 import {
   deriveChecklistResumePlan,
   loadTrackerResumeContext,
-} from "./checklist-controller-resume.js";
+} from "@tied/checklist-resume/checklist-controller-resume.js";
 
 export type ApplyResumeResult =
   | { ok: true; first_turn: number; next_step_slug: string; session_id_applied: boolean }

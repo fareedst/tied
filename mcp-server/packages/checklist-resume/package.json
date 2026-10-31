@@ -1,0 +1,32 @@
+{
+  "name": "@tied/checklist-resume",
+  "version": "1.0.0",
+  "description": "Shared checklist resume plan from Authoritative Tracker [REQ-TIED_DURABLE_CHECKLIST_CONTROLLER]",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./checklist-controller-resume.js": {
+      "types": "./dist/checklist-controller-resume.d.ts",
+      "import": "./dist/checklist-controller-resume.js"
+    },
+    "./resume-policy.js": {
+      "types": "./dist/resume-policy.d.ts",
+      "import": "./dist/resume-policy.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && npx tsx --test src/**/*.test.ts"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}

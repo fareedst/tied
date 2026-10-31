@@ -38,12 +38,23 @@ procedure PARSE_SESSION_FROM_STATE_HISTORY(input):
   EXTRACT session id suffix after :session=
   RETURN hint
 
+## SHARED_CHECKLIST_RESUME_MODULE
+
+module @tied/checklist-resume:
+  Contract:
+    OUTPUT: DERIVE_CHECKLIST_RESUME_PLAN, loadTrackerResumeContext, resolveResumeFromTrackerPolicy
+    POST: single canonical implementation for MCP read tool and agentstream apply (LEAP unify)
+    EFFECTS: pure (tracker IO via loadTrackerResumeContext only)
+
+  # [IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER] — How: Wave 4 duplicate copies removed; package under mcp-server/packages/checklist-resume.
+  EXPORT deriveChecklistResumePlan, loadTrackerResumeContext, resolveResumeFromTrackerPolicy
+
 ## AGENTSTREAM_APPLY_RESUME
 
 procedure AGENTSTREAM_APPLY_RESUME(input):
   Contract:
-    INPUT: DryRunConfig with --resume-from-tracker and --checklist-tracker-yaml, built turn queue
-    PRE: tracker path readable; --first-turn not conflicting with derived plan unless still 1
+    INPUT: DryRunConfig with optional --resume-from-tracker, --checklist-tracker-yaml, built turn queue
+    PRE: shouldApplyResumeFromTracker(cfg) — CLI flag OR checklist.resume_from_tracker true in tied-project/config.yaml; config false blocks CLI (resume_from_tracker_disabled_by_config); tracker path readable; --first-turn not conflicting with derived plan unless still 1
     OUTPUT: cfg.firstTurn updated; cfg.sessionId filled when empty and hint present
     POST: buildTurnsFromConfig slices queue from derived first_turn
     FAILURE_MODES: checklist_tracker_required; first_turn_conflict; resume plan errors

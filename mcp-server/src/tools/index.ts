@@ -72,7 +72,7 @@ import { updateStatusFromPassedTokens, type VerifyUpdateOptions } from "../verif
 import {
   deriveChecklistResumePlan,
   loadTrackerResumeContext,
-} from "../checklist-controller-resume.js";
+} from "@tied/checklist-resume/checklist-controller-resume.js";
 import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js";
 import { formatYamlMetadata } from "../yaml-canonicalizer.js";
 import {

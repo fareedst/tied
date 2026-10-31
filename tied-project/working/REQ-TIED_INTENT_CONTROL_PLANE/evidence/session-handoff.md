@@ -31,7 +31,7 @@
 ## Do next
 
 1. **`git push`** when sponsor wants origin updated
-2. LEAP: unify duplicate `checklist-controller-resume.ts` copies
+2. ~~LEAP: unify duplicate `checklist-controller-resume.ts` copies~~ — done (`@tied/checklist-resume`, 2026-10-31)
 3. Optional: refresh full-suite MCP tests for dogfood `marker_only` (yaml-loader fixture expectations)
 
 ## Constraints
