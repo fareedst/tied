@@ -1,0 +1,140 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_WORKFLOW_VISUALIZATION_SKILL; workflow visualization standalone bootstrap skill."
+description: "Minimal tracker — close-out dual-write 2026-10-30."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-10-30"
+    deferred: []
+    gates:
+      close_out: "tied-bundle/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/gates/close_out-2026-10-31T03-57-41-422Z.json"
+    master_checklist: "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+record_identity:
+  change_request_id: "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+  citdp_path: "tied-project/citdp/CITDP-REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-10-30"
+  req_token: "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+  title: "Workflow visualization standalone client skill"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/refine-plan-pass1.md"
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/session-bootstrap-evidence.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/PLAN.md"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/test-strategy.md"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/refine-plan-pass1.md"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Bootstrap skill; static SKILL.md contract only."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/session-bootstrap-evidence.md"
+    slug: "session-bootstrap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/test-strategy.md"
+      - "mcp-server/src/e2e/workflow-visualization-skill.test.ts"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+      - "tied-project/architecture-decisions/ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY.yaml"
+      - "tied-project/implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+      - "tied-project/implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL-pseudocode.md"
+    slug: "sync-tied-stack"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/unit-test-green-evidence.md"
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/verification-evidence-manifest.v1.json"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+      - "tied-project/semantic-tokens.yaml"
+    slug: "persist-implementation-records"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/proposed-commit-message.txt"
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/traceable-commit-evidence.md"
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/git-hygiene-receipt-2026-10-30.md"
+    slug: "traceable-commit"
+    tracking:
+      status: "completed"

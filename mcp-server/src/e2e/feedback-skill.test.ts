@@ -18,7 +18,14 @@ describe("feedback skill install [REQ-TIED_FEEDBACK_REPORT_SKILL]", () => {
   it("loadStandaloneClientSkills includes feedback", () => {
     const entries = loadStandaloneClientSkills(repoRoot);
     const names = entries.map((e) => e.skillName).sort();
-    assert.deepEqual(names, ["clear-workspace", "feedback", "handoff", "unblock", "xlate"]);
+    assert.deepEqual(names, [
+      "clear-workspace",
+      "feedback",
+      "handoff",
+      "unblock",
+      "workflow-visualization",
+      "xlate",
+    ]);
   });
 
   it("installStandaloneSkillsCopy places feedback SKILL.md with contract and capture tool", () => {

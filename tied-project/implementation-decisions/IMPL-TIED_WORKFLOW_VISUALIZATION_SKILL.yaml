@@ -1,0 +1,13 @@
+IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY"
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL-pseudocode.md"
+  implementation_approach:
+    details: []
+    summary: "tools/bundled-workflow-visualization-skill/SKILL.md + reference.md registered via BUNDLED_STANDALONE_CLIENT_SKILLS"
+  name: "Workflow visualization skill bootstrap"
+  status: "Active"

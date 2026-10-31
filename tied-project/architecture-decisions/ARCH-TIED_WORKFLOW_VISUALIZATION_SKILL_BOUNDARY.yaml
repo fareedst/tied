@@ -1,0 +1,15 @@
+ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY:
+  consequences:
+    negative:
+      - "Quality of generated diagrams depends on comprehension depth; not validated in CI"
+    positive:
+      - "Discoverable Mermaid workflows under docs/"
+  context: "Sponsor-facing workflow docs after EDPC comprehension"
+  cross_references:
+    implementation:
+      - "IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL"
+    requirements:
+      - "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+  decision: "Standalone workflow-visualization skill writes docs/ only; consumes EDPC publish and assessment artifacts; does not replace working/ evidence or mint TIED tokens at runtime."
+  name: "Workflow visualization skill boundary"
+  status: "Implemented"

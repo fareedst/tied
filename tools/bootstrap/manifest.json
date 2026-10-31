@@ -59,6 +59,10 @@
     {
       "skillName": "feedback",
       "storeDir": "tools/bundled-feedback-skill"
+    },
+    {
+      "skillName": "workflow-visualization",
+      "storeDir": "tools/bundled-workflow-visualization-skill"
     }
   ],
   "STORE_FACILITATOR_SKILLS": [

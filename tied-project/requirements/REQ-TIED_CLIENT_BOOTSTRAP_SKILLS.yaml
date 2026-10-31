@@ -8,6 +8,7 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-TIED_SETUP"
       - "REQ-TIED_SPONSOR_QUESTIONS"
+      - "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
       - "REQ-TIED_XLATE_SKILL"
   description: "Manifest-driven tied-install distribution of standalone bundled skills with Cursor/Claude and full/linked parity."
   name: "Client bootstrap skills distribution"
@@ -22,7 +23,7 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
       criterion_id: "cursor-full-standalone"
     - criterion: "Linked bootstrap stubs all standalone skills for both harnesses"
       criterion_id: "linked-standalone-stubs"
-    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate, unblock, and feedback"
+    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate, unblock, feedback, and workflow-visualization"
       criterion_id: "standalone-manifest"
   status: "Implemented"
   traceability:
@@ -36,4 +37,5 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
       - "client-bootstrap-skills.test.ts"
       - "client-skills-catalog.test.mjs"
       - "feedback-skill.test.ts"
+      - "workflow-visualization-skill.test.ts"
       - "xlate-skill.test.ts"

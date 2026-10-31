@@ -1,8 +1,8 @@
 # Project operations MCP (canonical)
 
-**Scope:** Client vocabulary for MCP project-operation tools, the `/xlate` skill (Touchpoint 1 RESOLVE), the sponsor `/unblock` skill when **known or planned** costly choices block progress, **`/handoff`** chat continuity, **`/clear-workspace`** close-out orchestration, **`/feedback`** sponsor witness capture, and store-only **`/record-gf-trial`** greenfield facilitator ingest.
+**Scope:** Client vocabulary for MCP project-operation tools, the `/xlate` skill (Touchpoint 1 RESOLVE), the sponsor `/unblock` skill when **known or planned** costly choices block progress, **`/handoff`** chat continuity, **`/clear-workspace`** close-out orchestration, **`/feedback`** sponsor witness capture, **`/workflow-visualization`** EDPC sponsor workflow docs, and store-only **`/record-gf-trial`** greenfield facilitator ingest.
 
-**Traceability:** [REQ-TIED_PROJECT_LINT](../requirements/REQ-TIED_PROJECT_LINT.yaml) · [REQ-TIED_GIT_HYGIENE](../requirements/REQ-TIED_GIT_HYGIENE.yaml) · [REQ-TIED_SPONSOR_QUESTIONS](../requirements/REQ-TIED_SPONSOR_QUESTIONS.yaml) · [REQ-TIED_XLATE_SKILL](../requirements/REQ-TIED_XLATE_SKILL.yaml) · [REQ-TIED_SESSION_HANDOFF_SKILL](../requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml) · [REQ-TIED_CLEAR_WORKSPACE_SKILL](../requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml) · [REQ-TIED_FEEDBACK_REPORT_SKILL](../requirements/REQ-TIED_FEEDBACK_REPORT_SKILL.yaml) · [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS](../requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml)
+**Traceability:** [REQ-TIED_PROJECT_LINT](../requirements/REQ-TIED_PROJECT_LINT.yaml) · [REQ-TIED_GIT_HYGIENE](../requirements/REQ-TIED_GIT_HYGIENE.yaml) · [REQ-TIED_SPONSOR_QUESTIONS](../requirements/REQ-TIED_SPONSOR_QUESTIONS.yaml) · [REQ-TIED_XLATE_SKILL](../requirements/REQ-TIED_XLATE_SKILL.yaml) · [REQ-TIED_SESSION_HANDOFF_SKILL](../requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml) · [REQ-TIED_CLEAR_WORKSPACE_SKILL](../requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml) · [REQ-TIED_FEEDBACK_REPORT_SKILL](../requirements/REQ-TIED_FEEDBACK_REPORT_SKILL.yaml) · [REQ-TIED_WORKFLOW_VISUALIZATION_SKILL](../requirements/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml) · [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS](../requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml)
 
 **See also:** [`routing.md`](routing.md) (row **2c**) · [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) · [`tied-methodology.md`](tied-methodology.md)
 
@@ -25,6 +25,8 @@
 | `/clear-workspace` | Orchestrator toward commit-ready workspace: git hygiene, `close-out`, `traceable-commit` prep as merited. |
 | **clear-workspace skill** | Bundled skill at `tools/bundled-clear-workspace-skill/SKILL.md`; routing norm in `prompt-shared/clear-workspace-routing.md`. |
 | `/feedback` | Explicit skill for sponsor **witness** reports of agent/client errors; Kaizen Phase 1 operational observation capture + **receipt** (not notification or countermeasure). |
+| `/workflow-visualization` | Explicit skill for sponsor-facing `docs/<project>-workflows.md` from EDPC/comprehension or static baseline; docs-only on target repo. |
+| **workflow-visualization skill** | Bundled skill at `tools/bundled-workflow-visualization-skill/SKILL.md`; visualization catalog in `reference.md`. |
 | **feedback capture receipt** | Immediate local response from `/feedback` capture; confirms append to `feedback.yaml`; does not notify anyone or authorize canonical change. |
 | **feedback skill** | Bundled skill at `tools/bundled-feedback-skill/SKILL.md`; manifest `BUNDLED_STANDALONE_CLIENT_SKILLS`. |
 | `/record-gf-trial` | Explicit skill for **store** facilitators: inspect disposable greenfield client, publish `docs/demos/trial-readout-*.md`, optional Kaizen feedback ingest. |

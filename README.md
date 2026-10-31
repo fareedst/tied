@@ -92,6 +92,7 @@ Then follow `[PROC-AGENT_REQ_CHECKLIST]` via the [agent requirement implementati
 5. **Intent elevation (when adopting TIED on legacy code)** — Evidence-to-intent matrix, dispositions (`observed`, `approved`, `unresolved`, `rejected`); enrich REQ/ARCH from **`approved`** rows only; close with `brownfield_intent_evidence_validate`.
 6. **Verify and publish (F)** — Publish manifest with explicit **`gaps[]`**; optional client assessment (workflow **H**) for external-facing summaries.
 7. **Refresh (G)** — Re-run when builds, access, or questions change material claims.
+8. **Optional — workflow diagrams** — Invoke **`@workflow-visualization`** to produce sponsor-facing Mermaid workflow docs at `docs/<project>-workflows.md` from comprehension artifacts (or a bounded static read). Machine evidence stays under `tied-project/working/`; see bundled **workflow-visualization** skill.
 
 Set the per-request Tracker to `brownfield_intent_elevation.engagement: edpc_full` with `mode: pilot` or `strict` for full choreography; use `report_only` when you need diagnostics without blocking the checklist. Artifacts live under `tied-project/working/{REQ-TOKEN}/evidence/edpc/` (and related brownfield working paths).
 

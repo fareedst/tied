@@ -2352,14 +2352,32 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-TIED_SETUP"
       - "REQ-TIED_SPONSOR_QUESTIONS"
+      - "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
       - "REQ-TIED_XLATE_SKILL"
   detail_file: "requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
   name: "Client bootstrap skills distribution"
   priority: "P1"
   satisfaction_criteria:
-    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate, unblock, and feedback"
+    - criterion: "checkStoreReachable requires each standalone bundled storeDir"
+      criterion_id: "store-reachability"
+    - criterion: "claudeManagedInventoryComplete requires standalone skills"
+      criterion_id: "inventory-assert"
+    - criterion: "Full bootstrap installs standalone skills under Claude skills dir"
+      criterion_id: "claude-full-standalone"
+    - criterion: "Full bootstrap installs standalone skills under Cursor skills dir"
+      criterion_id: "cursor-full-standalone"
+    - criterion: "Linked bootstrap stubs all standalone skills for both harnesses"
+      criterion_id: "linked-standalone-stubs"
+    - criterion: "manifest.json lists BUNDLED_STANDALONE_CLIENT_SKILLS including xlate, unblock, feedback, and workflow-visualization"
       criterion_id: "standalone-manifest"
   status: "Implemented"
+  traceability:
+    tests:
+      - "client-bootstrap-skills.test.ts"
+      - "client-skills-catalog.test.mjs"
+      - "feedback-skill.test.ts"
+      - "workflow-visualization-skill.test.ts"
+      - "xlate-skill.test.ts"
 REQ-TIED_CLIENT_DEVOPS_APPENDIX:
   category: "Methodology"
   description: "Client-owned PR/CI/release field guidance composing with Claude comparison Phases 1–4; no new MCP gate authority."
@@ -3657,6 +3675,20 @@ REQ-TIED_VOCABULARY_OWNERSHIP:
   detail_file: "requirements/REQ-TIED_VOCABULARY_OWNERSHIP.yaml"
   name: "Separate Vocabulary Ownership"
   priority: "P1"
+  status: "Implemented"
+REQ-TIED_WORKFLOW_VISUALIZATION_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Standalone bundled skill that generates sponsor-facing workflow Markdown with Mermaid from EDPC comprehension or static baseline reads."
+  detail_file: "requirements/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+  name: "Workflow visualization skill"
   status: "Implemented"
 REQ-TIED_WORKING_ARTIFACT_PLACEMENT:
   category: "Infrastructure"

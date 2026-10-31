@@ -2654,6 +2654,15 @@ ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
   name: "Verify manifest provenance architecture"
   status: "Active"
   summary: "Intent authority: tied_verify binds passed tokens to verification-evidence-manifest.v1 covered_tokens and freshness."
+ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL"
+    requirements:
+      - "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+  detail_file: "architecture-decisions/ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY.yaml"
+  name: "Workflow visualization skill boundary"
+  status: "Implemented"
 ARCH-TIED_WORKING_ARTIFACT_PLACEMENT:
   description: "Canonical guide and PROC for committed vs local working roots; defers routing to ARCH-TIED_TWO_FOLDER_LAYOUT."
   detail_file: "architecture-decisions/ARCH-TIED_WORKING_ARTIFACT_PLACEMENT.yaml"

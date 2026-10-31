@@ -1,0 +1,30 @@
+REQ-TIED_WORKFLOW_VISUALIZATION_SKILL:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL"
+    requirements:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_EDPC_COMPREHENSION"
+  description: "Bootstrap-installed @workflow-visualization skill; runtime docs-only on target repo."
+  name: "Workflow visualization skill"
+  satisfaction_criteria:
+    - criterion: "BUNDLED_STANDALONE_CLIENT_SKILLS includes workflow-visualization"
+      criterion_id: "manifest-sixth-skill"
+    - criterion: "client-skills-catalog.test.mjs expects six standalone skills"
+      criterion_id: "catalog-test"
+    - criterion: "workflow-visualization-skill.test.ts passes"
+      criterion_id: "contract-test"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL"
+    tests:
+      - "client-skills-catalog.test.mjs"
+      - "feedback-skill.test.ts"
+      - "workflow-visualization-skill.test.ts"

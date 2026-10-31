@@ -52,7 +52,7 @@ Continue TIED work from a prior session (handoff).
 
 ## Do next (no pause if possible)
 1. {step — e.g. `/build-plan @...` or run pre_implementation gate}
-2. {step}
+2. {step — e.g. after full EDPC comprehension: `/workflow-visualization` for `docs/<project>-workflows.md`}
 
 ## Completion signals (last session)
 - Machine close-out: {not_run | …}
@@ -74,6 +74,7 @@ Invoke `@handoff` only if you need another handoff later.
 | **`/clear-workspace`** | Hygiene + close-out chain toward commit-ready workspace |
 | **`/unblock`** | Sponsor costly-choice decisions blocking progress |
 | **`/build-plan`** | Execute a refined linked plan in the **same** or **new** chat after handoff |
+| **`/workflow-visualization`** | Optional sponsor-facing `docs/<project>-workflows.md` after EDPC comprehension |
 
 ## Related
 

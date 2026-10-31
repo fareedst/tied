@@ -1,0 +1,25 @@
+feat(REQ-TIED_WORKFLOW_VISUALIZATION_SKILL): sixth standalone skill
+
+Ship bootstrap-installed @workflow-visualization so brownfield
+comprehension can produce discoverable docs/<project>-workflows.md
+without minting TIED tokens or editing src/ at runtime.
+
+Tokens: [REQ-TIED_WORKFLOW_VISUALIZATION_SKILL]
+[ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY]
+[IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL]
+[REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]
+
+Completion signals:
+- Machine close-out: pass (close_out allowed=true; envelope
+  fail_on_error_gaps blocking_gaps=0)
+- Process contract: pass (dual-write + verification-evidence-manifest.v1)
+- Adherence ledger: pass (process_grade A / 100)
+
+Proof boundary: bootstrap + static SKILL contract; does not prove
+generated client diagram quality. Costly choice still opt-in:
+migrate_reports: true (step 9).
+
+Upstream feedback capture: N/A — store feature delivery, not client
+witness feedback.
+
+Excluded: tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/evidence-chain-profile.v1.json

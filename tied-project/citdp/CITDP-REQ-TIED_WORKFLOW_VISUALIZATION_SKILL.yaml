@@ -1,0 +1,118 @@
+CITDP-REQ-TIED_WORKFLOW_VISUALIZATION_SKILL:
+  change_definition:
+    current_behavior: "After brownfield comprehension, sponsors lack a bundled, explicit-invocation skill that turns EDPC/comprehension artifacts (or a bounded static read) into discoverable docs/<project>-workflows.md with honest Mermaid and verification gaps. Bootstrap manifest lists five standalone skills only."
+    desired_behavior: "Sixth standalone skill workflow-visualization installs via manifest; procedure uses comprehension-grounded visualization catalog (foundation, multi-domain critical paths, all integration workflows, ops/security/data views); hub docs/<project>-workflows.md plus optional domain/integration satellites; workflow inventory before drawing; Derived/Declared and dashed unverified edges; optional post-EDPC hooks in README and edpc-comprehension vocab."
+    non_goals:
+      - "Automated Mermaid linter CLI"
+      - "Default migration of working/evidence/reports to docs/ without sponsor opt-in"
+      - "Modify bundled-xlate, unblock, feedback, or clear-workspace skill sources"
+      - "New EDPC or source-graph MCP tools"
+      - "REQ/ARCH/IMPL mint or src/ edits when the skill runs on a client"
+    success_criteria:
+      - "client-skills-catalog.test.mjs expects six standalone skills including workflow-visualization"
+      - "README brownfield section and edpc-comprehension vocab cross-link optional @workflow-visualization"
+      - "SKILL.md + reference.md encode verification gaps, workflow inventory, and visualization catalog (multi-domain + all integration-critical flows)"
+      - "tied_validate_consistency passes after YAML mint"
+      - "workflow-visualization-skill.test.ts static install and contract smoke passes"
+    unchanged_behavior:
+      - "EDPC MCP publish and client assessment tools"
+      - "Existing five standalone skill procedures except handoff Related/resume bullet"
+      - "Prompt-type global skills bundle"
+  completion_criteria:
+    focused_tests: "tools/bootstrap/lib/client-skills-catalog.test.mjs; mcp-server/src/e2e/workflow-visualization-skill.test.ts; mcp-server/src/e2e/feedback-skill.test.ts"
+    persist_policy: "persist CITDP on close-out to tied-project/citdp/"
+    verification: "tied_validate_consistency; tied_verify when verification-gated"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/client-skills-catalog.test.mjs"
+      - "cd mcp-server && npx tsx --test src/e2e/workflow-visualization-skill.test.ts"
+      - "cd mcp-server && npx tsx --test src/e2e/feedback-skill.test.ts"
+    proof_boundaries:
+      - "bootstrap_install_surface_and_static_skill_contract"
+      - "does_not_prove_quality_of_generated_client_docs"
+  impact_analysis:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_EDPC_COMPREHENSION"
+    files:
+      - "mcp-server/src/e2e/feedback-skill.test.ts"
+      - "mcp-server/src/e2e/workflow-visualization-skill.test.ts"
+      - "README.md"
+      - "tied-bundle/docs/client-development-index.md"
+      - "tied-project/vocab/edpc-comprehension.md"
+      - "tied-project/vocab/project-operations-mcp.md"
+      - "tied-project/vocab/routing.md"
+      - "tools/bootstrap/lib/client-skills-catalog.test.mjs"
+      - "tools/bootstrap/manifest.json"
+      - "tools/bundled-session-handoff-skill/SKILL.md"
+      - "tools/bundled-workflow-visualization-skill/reference.md"
+      - "tools/bundled-workflow-visualization-skill/SKILL.md"
+    modules:
+      - "bundled_workflow_visualization_skill"
+      - "client_skills_catalog"
+    tags:
+      - "bootstrap-skills"
+      - "edpc-sponsor-docs"
+    tied_tokens_new:
+      - "ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY"
+      - "IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL"
+      - "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+  leap_feedback:
+    divergences_from_analysis: "Visualization catalog expanded in refine pass 2 beyond original eleven-section cap. Close-out added DATA_TRANSITION to IMPL sidecar after Layer B MISSING_DATA_TRANSITION."
+    propagation: "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS cross-ref and standalone-manifest criterion extended"
+    status: "applied"
+  record_identity:
+    author: "close-out"
+    change_request_id: "REQ-TIED_WORKFLOW_VISUALIZATION_SKILL"
+    close_out_run_id: "close-out-req-tied-workflow-visualization-skill-2026-10-30"
+    closed_at: "2026-10-30T21:00:00-07:00"
+    date: "2026-10-30"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    record_status: "closed"
+    title: "Workflow visualization standalone client skill"
+  risk_analysis:
+    abuse_cases:
+      - "Skill invoked before comprehension with no static baseline recorded"
+      - "Sponsor treats generated docs as production-truth without reading Verification gaps"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver:
+        approval: "close-out-bootstrap-skill-surface-2026-10-30"
+        expiry: "2026-12-31"
+        owner: "sponsor"
+        rationale: "Minimal depth bootstrap skill install; catalog and workflow-visualization-skill e2e satisfy advisory close_out without phase artifacts."
+        referenced_verification_run_id: "close-out-req-tied-workflow-visualization-skill-2026-10-30"
+      counterexamples:
+        - "Manifest lists workflow-visualization but storeDir missing — catalog test fails closed"
+        - "Mermaid diagrams invent services not in inventory or static source"
+        - "Skill procedure writes TIED YAML on client during doc generation"
+        - "Step 9 migration retargets links without sponsor opt-in"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "client-skills-catalog.test.mjs expects six standalone skills including workflow-visualization"
+        - "workflow-visualization-skill.test.ts asserts verification gaps and install contract"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "mcp-server/src/e2e/workflow-visualization-skill.test.ts"
+        - "tied-project/implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL-pseudocode.md"
+        - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/gate-pseudocode-validation-evidence.md"
+        - "tools/bootstrap/lib/client-skills-catalog.test.mjs"
+        - "tools/bundled-workflow-visualization-skill/SKILL.md"
+      falsification_questions:
+        - "Does loadStandaloneClientSkills fail when bundled-workflow-visualization-skill is missing from store?"
+        - "Does SKILL.md forbid TIED YAML writes and src edits on the target repo?"
+      gate_policy: "advisory"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_profiles:
+      - "baseline-functional"
+  test_strategy:
+    modules:
+      - "bundled_workflow_visualization_skill"
+      - "client_skills_catalog"
+    proof_boundaries:
+      - "bootstrap_install_surface_and_static_skill_contract"
+      - "does_not_prove_quality_of_generated_client_docs"
+    red_first: true

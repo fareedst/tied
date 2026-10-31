@@ -35,6 +35,8 @@
 | **G** | Refresh | Stale-claim triggers; route reprioritize (no daemon in v1) |
 | **H** | Client assessment | `[PROC-EDPC_CLIENT_ASSESSMENT]` — CAM v1 + technical summary after **F**; MCP `tied_edpc_client_assessment_*` |
 
+**Optional sponsor docs (after F or H):** **`@workflow-visualization`** composes `docs/<project>-workflows.md` (and optional satellite files) from comprehension artifacts — `[REQ-TIED_WORKFLOW_VISUALIZATION_SKILL]`. Machine evidence remains under `tied-project/working/`.
+
 ---
 
 ## Artifacts (committed working root)

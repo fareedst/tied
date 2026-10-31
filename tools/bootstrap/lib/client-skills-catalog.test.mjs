@@ -15,18 +15,32 @@ import {
 } from "./client-skills-catalog.mjs";
 
 describe("client-skills-catalog [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]", () => {
-  it("loadStandaloneClientSkills returns xlate, unblock, handoff, clear-workspace, feedback", () => {
+  it("loadStandaloneClientSkills returns xlate, unblock, handoff, clear-workspace, feedback, workflow-visualization", () => {
     const entries = loadStandaloneClientSkills(TIED_REPO_ROOT);
-    assert.equal(entries.length, 5);
+    assert.equal(entries.length, 6);
     const names = entries.map((e) => e.skillName).sort();
-    assert.deepEqual(names, ["clear-workspace", "feedback", "handoff", "unblock", "xlate"]);
+    assert.deepEqual(names, [
+      "clear-workspace",
+      "feedback",
+      "handoff",
+      "unblock",
+      "workflow-visualization",
+      "xlate",
+    ]);
   });
 
   it("installStandaloneSkillsCopy places SKILL.md files", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "standalone-copy-"));
     const skillsDir = path.join(tmp, ".cursor", "skills");
     installStandaloneSkillsCopy(TIED_REPO_ROOT, skillsDir);
-    for (const name of ["xlate", "unblock", "handoff", "clear-workspace", "feedback"]) {
+    for (const name of [
+      "xlate",
+      "unblock",
+      "handoff",
+      "clear-workspace",
+      "feedback",
+      "workflow-visualization",
+    ]) {
       const skillPath = path.join(skillsDir, name, "SKILL.md");
       assert.ok(fs.existsSync(skillPath), name);
     }
