@@ -8,7 +8,7 @@
 | **Phased spec** | [tied-langgraph-orchestration-plan.md](../../../docs/langgraph/tied-langgraph-orchestration-plan.md) § Phase 4 |
 | **Prerequisite** | [PLAN-TIED-LG-P3-TDD](../PLAN-TIED-LG-P3-TDD/PLAN.md) implement + close-out complete |
 | **CITDP** | [CITDP-PLAN-TIED-LG-P4-ACCEPTANCE.yaml](../../citdp/CITDP-PLAN-TIED-LG-P4-ACCEPTANCE.yaml) |
-| **Status** | Implement + machine close-out complete (`@close-out` 2026-10-31) — commit `b72a1e1f` |
+| **Status** | Implement + machine close-out complete (`@close-out` 2026-10-31) — commit `58c1fa9b` |
 | **Exit** | Verification subgraph + acceptance policy; pytest green; optional gate receipt |
 
 ## Authority

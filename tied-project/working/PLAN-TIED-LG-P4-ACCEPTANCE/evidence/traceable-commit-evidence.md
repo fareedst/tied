@@ -7,4 +7,4 @@
 - Close-out gates: [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json), [closeout-run-verification-gates.json](./closeout-run-verification-gates.json).
 - Upstream feedback capture: **N/A** — no methodology feedback promoted this wave.
 - Excluded unrelated drift: EDPC/brownfield handoffs, evaluation envelope report, MCP test fixtures, stray CITDP REQ-* test files under `tied-project/citdp/`.
-- Git: **`b72a1e1f`** on `main` (not pushed unless sponsor requests).
+- Git: **`58c1fa9b`** on `main` (traceable SHA synced in working docs chore commit after sprint push).

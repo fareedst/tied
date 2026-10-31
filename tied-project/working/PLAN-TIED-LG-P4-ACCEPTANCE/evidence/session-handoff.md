@@ -16,7 +16,7 @@ P4 **implement**, **machine close-out**, and **traceable-commit** are complete.
 
 Receipts: [closeout-run-close-out-gates.json](./closeout-run-close-out-gates.json) · [closeout-run-verification-gates.json](./closeout-run-verification-gates.json) · [traceable-commit-evidence.md](./traceable-commit-evidence.md)
 
-## Shipped (commit `b72a1e1f`)
+## Shipped (commit `58c1fa9b`)
 
 - `tools/langgraph-pilot/` — acceptance policy, verification subgraph, separation allowlists (41 pytest, 1 skipped)
 - P4 working folder + [CITDP-PLAN-TIED-LG-P4-ACCEPTANCE.yaml](../../citdp/CITDP-PLAN-TIED-LG-P4-ACCEPTANCE.yaml)

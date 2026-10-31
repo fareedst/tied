@@ -70,7 +70,7 @@ waves:
     title: "TDD subgraph"
   P4:
     child_folder: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE"
-    exit_commit: "b72a1e1f"
+    exit_commit: "58c1fa9b"
     linked_plan: "docs/langgraph/plan-tied-lg-p4-acceptance-gate.md"
     mode: "implement"
     status: "implement_close_out_complete"

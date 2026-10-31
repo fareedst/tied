@@ -1,7 +1,8 @@
 # Gap planning handoff — DOC-STDD-TIED-PROJECT-BROWNFIELD
 
 **Purpose:** Turn [edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json) `gaps[]` into sponsor-ready **plan seeds** (workflow, token, entry prompt).  
-**Baseline:** `cf321c96` · **Close-out commit:** `944f0666`  
+**Baseline:** `cf321c96` · **Close-out commit:** `944f0666` · **Gap sprint handoff:** [session-handoff.md](./session-handoff.md) (`c74a4d96`)  
+**Matrix sync:** 2026-10-31 — G4/G6 rows aligned to shipped methodology + G6 debug receipt (manifest `gaps[]` still stale until republish).  
 **Authority:** Publish gaps are **backlog**, not approved REQ scope until `@add-feature` / `@refine-plan` locks tokens.
 
 ---
@@ -21,11 +22,13 @@
 flowchart TB
   subgraph product [Product_MCP]
     G3[gap_tied_yaml_corpus]
-    G6[gap_identity_gate]
   end
   subgraph methodology [Methodology_docs]
-    G4[gap_meta_hub_template]
+    G4_done[meta_hub_done]
     G7[gap_verify_semantics]
+  end
+  subgraph resolved [Resolved_ops]
+    G6_done[identity_gate_ops]
   end
   subgraph process [Process_ops]
     G1[gap_request_token_field]
@@ -45,9 +48,9 @@ flowchart TB
 | G1 | `minimum_field_gap:request_token` | Process / EDPC F | `PLAN-EDPC-PUBLISH-MINIMUM-FIELDS` | **Done (2026-10-31)** — hoist top-level `request_token` in publish build + DOC-shaped test | `[REQ-TIED_EDPC_COMPREHENSION]` | Manifest republished without G1 gap; see `mcp-server/src/edpc/publish-build.ts` |
 | G2 | `ofsm:bundle_missing` | **N/A** (charter) | — | — | Workflow D not chartered | Document in charter: `production_touch: none` → OFSM optional; re-open only with `@add-feature` on EDPC Slice D |
 | G3 | `methodology:tied_yaml_corpus_not_in_source_graph` | **Costly** product | `REQ-TIED_CORPUS_COMPREHENSION` (proposed) | `add-feature` → `refine-plan` → `build-plan` | `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]`, `[REQ-TIED_SCOPED_ANALYSIS]` | Extend static index: YAML/Markdown under `tied-project/` (token refs, detail paths); proof boundary: no runtime |
-| G4 | `methodology:meta_hub_edpc_template_deferred` | Reversible methodology | `PLAN-EDPC-META-HUB-ENGAGEMENT` | `non-tied-plan` then optional `citdp-promote` | `[PROC-EDPC_COMPREHENSION]`, DOC dogfood artifacts | Template: charter + bounded_paths for `tied-project/` hub; checklist slugs A–F; link [corpus-map](./reports/tied-project-corpus-map.md) |
+| G4 | `methodology:meta_hub_edpc_template_deferred` | Reversible methodology | `PLAN-EDPC-META-HUB-ENGAGEMENT` | **Done (2026-10-31)** — template + guide + second dogfood (`9e2c4c2b`, `72c45cd2`) | `[PROC-EDPC_COMPREHENSION]`, DOC + [DOC-STDD-META-HUB-TEMPLATE-DOGFOOD](../../DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/) | [PLAN-EDPC-META-HUB-ENGAGEMENT](../../PLAN-EDPC-META-HUB-ENGAGEMENT/PLAN.md), [session-handoff](../../PLAN-EDPC-META-HUB-ENGAGEMENT/evidence/session-handoff.md); manifest row until republish or sponsor accept |
 | G5 | `process:envelope_sample_ten_tokens_not_full_corpus` | Reversible ops | `PLAN-EVALUATION-ENVELOPE-CORPUS-FULL` | **Done (2026-10-31)** — 133-row store corpus + gap report | `[REQ-REQUEST_EVIDENCE_ENVELOPE]`, `request_evidence_envelope_batch_collect` | [envelope-corpus-manifest.v1.yaml](../../evaluation/envelope-corpus-manifest.v1.yaml), [README](../../evaluation/README.md); manifest gap may remain until republish |
-| G6 | `gate:project_config_identity_key_blocks_checklist_gate_tools` | **Costly** if schema wrong | `REQ-TIED_PROJECT_CONFIG_IDENTITY` or Wave 6 follow-on | `debug` / `add-feature` | `[REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING]`, [Wave 6 plan](../REQ-TIED_INTENT_CONTROL_PLANE/PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md) | Reproduce: `tied_gate_check` + `tied_checklist_gate_validate` on store `tied-project/config.yaml`; align **built** MCP `tied-project-config.ts` allowlist with gate loaders; e2e gate with `identity.routing: marker_only` |
+| G6 | `gate:project_config_identity_key_blocks_checklist_gate_tools` | Ops (was **costly** if schema wrong) | — (no REQ mint) | **Resolved (2026-10-31)** — stale IDE MCP `dist`; source allowlist OK | `[REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING]`, [Wave 6 plan](../REQ-TIED_INTENT_CONTROL_PLANE/PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md) | [g6-gate-identity-debug.md](./g6-gate-identity-debug.md); `tied-project-config.test.ts` + `checklist-gate-project-config.test.ts`; manifest gap drops on republish |
 | G7 | `comprehension:req_implementation_status_requires_tied_verify` | Process / docs | `PLAN-EDPC-VERIFY-STATUS-BOUNDARY` | **Done (2026-10-31)** — sponsor docs + publish/CAM boundary | `[PROC-TIED_VERIFICATION_GATED]`, `[PROC-EDPC_COMPREHENSION]` | [PLAN-EDPC-VERIFY-STATUS-BOUNDARY](../../PLAN-EDPC-VERIFY-STATUS-BOUNDARY/PLAN.md); gap emitted by `buildEdpcPublishManifest`; manifest row may remain until republish |
 
 ---
@@ -96,13 +99,17 @@ flowchart TB
 
 **Problem:** Full-repo + `tied-project/` hub engagements are ad hoc (this DOC folder is the first complete example).
 
-**Deliverables (non-tied-plan friendly):**
+**Status:** **Done (2026-10-31)** — `@non-tied-plan` [PLAN-EDPC-META-HUB-ENGAGEMENT](../../PLAN-EDPC-META-HUB-ENGAGEMENT/PLAN.md).
+
+**Shipped:**
 
 - `tied-bundle/templates/edpc-meta-hub-engagement-charter.v1.example.yaml`
-- Methodology subsection in [EDPC_Methodology_and_Workflows.md](../../../tied-bundle/docs/EDPC_Methodology_and_Workflows.md) or `tied-bundle/docs/edpc-meta-hub-engagement.md`
-- Checklist slug mapping table (A–F) referencing `[PROC-EDPC_COMPREHENSION]`
+- `tied-bundle/docs/edpc-meta-hub-engagement.md` + §1.1 pointer in [EDPC_Methodology_and_Workflows.md](../../../tied-bundle/docs/EDPC_Methodology_and_Workflows.md)
+- Second dogfood: [DOC-STDD-META-HUB-TEMPLATE-DOGFOOD](../../DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/)
 
-**Promote when:** Template stabilizes after second dogfood (another store slice or client).
+**Manifest:** `tied_edpc_publish_build` does not auto-clear G4 from [edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json) — sponsor **accept closure** or **republish** to trim `gaps[]`.
+
+**Optional next:** `@citdp-promote` when sponsor wants a normative token (not required for methodology use).
 
 ---
 
@@ -125,15 +132,13 @@ flowchart TB
 
 **Problem:** During DOC refine/build, `tied_checklist_gate_validate` / `tied_gate_check` returned `Unknown project config key: identity` while store `config.yaml` sets `identity.routing: marker_only`.
 
-**Investigation order:**
+**Status:** **Resolved (2026-10-31)** — not a schema bug; long-lived IDE MCP was serving **pre-Wave-6** `dist`. Fresh build + MCP restart clears `CONFIG_UNKNOWN_KEY` for `identity`.
 
-1. Confirm IDE MCP uses **current** `mcp-server/dist` (rebuild if needed).
-2. Source already allows `identity` in `PROJECT_CONFIG_TOP_LEVEL_KEYS` ([tied-project-config.ts](../../../mcp-server/src/tied-project-config.ts)) — if gate still fails, trace **alternate config load path** in gate validator.
-3. Add regression test: store fixture config + gate `pre_implementation` minimal tracker.
+**Receipt:** [g6-gate-identity-debug.md](./g6-gate-identity-debug.md) · [refine-pass1-gate-note.md](./refine-pass1-gate-note.md) · Intent control plane [session-handoff](../REQ-TIED_INTENT_CONTROL_PLANE/evidence/session-handoff.md).
 
-**Link:** [refine-pass1-gate-note.md](./refine-pass1-gate-note.md) · Intent control plane [session-handoff](../REQ-TIED_INTENT_CONTROL_PLANE/evidence/session-handoff.md).
+**Verification:** `loadProjectConfig` + gate tools on current `mcp-server/dist`; regression in `tied-project-config.test.ts`, `checklist-gate-project-config.test.ts`.
 
-**Done when:** Gate tools run on store repo with committed `tied-project/config.yaml` without CONFIG_UNKNOWN_KEY.
+**Re-open only if:** `CONFIG_UNKNOWN_KEY` persists **after** rebuild + MCP restart on current `main` (then treat as product `debug` / Wave 6 follow-on, not G6 backlog).
 
 ---
 
@@ -155,12 +160,9 @@ flowchart TB
 
 | Priority | Gap | Rationale |
 | --- | --- | --- |
-| 1 | **G6** | Unblocks honest gates for all subsequent TIED work on store |
-| 2 | **G1** | Cheap; cleans EDPC F dogfood signal |
-| 3 | **G5** | Improves ops visibility without product schema |
-| 4 | **G4** | Reuses DOC folder as template; lowers cost of next brownfield |
-| 5 | **G7** | Doc/process; reduces misinterpretation risk |
-| 6 | **G3** | Largest product slice; depends on G4 learnings |
+| 1 | **G3** | Largest open product slice; meta-hub layout now documented (G4 done) |
+| 2 | **Republish** | Trim stale `gaps[]` (G1/G4/G5/G6 closed in process layer) |
+| — | **G1, G4, G5, G6, G7** | Sprint closed 2026-10-31 (G7 gap string may remain on publish until verify receipts) |
 | — | **G2** | Explicit defer until Workflow D chartered |
 
 ---
@@ -168,13 +170,13 @@ flowchart TB
 ## Invocation cheat sheet
 
 ```text
-@refine-plan  Plan PLAN-EDPC-META-HUB-ENGAGEMENT from tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/gap-planning-handoff.md § G4
-
 @add-feature  REQ-TIED_CORPUS_COMPREHENSION — YAML index in source graph (gap G3)
 
-@non-tied-plan  Full evaluation envelope corpus manifest + batch (gap G5)
+@non-tied-plan  Republish DOC EDPC manifest to trim closed gaps[] (G1/G4/G5/G6)
 
-@debug  tied_gate_check fails with Unknown project config key identity on stdd store (gap G6)
+@citdp-promote  Optional normative token after G4 meta-hub dogfoods (only if sponsor wants REQ)
+
+# G6 resolved: rebuild mcp-server + restart TIED YAML MCP — see g6-gate-identity-debug.md
 ```
 
 ---
