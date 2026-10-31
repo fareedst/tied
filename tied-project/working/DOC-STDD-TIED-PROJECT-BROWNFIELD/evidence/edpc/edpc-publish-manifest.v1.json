@@ -4,13 +4,13 @@
   "tier": "toolchain_readonly",
   "baseline_revision": "cf321c96",
   "gaps": [
-    "comprehension:req_implementation_status_requires_tied_verify",
-    "methodology:tied_yaml_corpus_not_in_source_graph"
+    "comprehension:req_implementation_status_requires_tied_verify"
   ],
   "receipt_refs": {
     "access_validate": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/edpc-access-validate.json",
     "brownfield_validate": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/brownfield-intent-evidence-validate.json",
     "claims_ledger": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/claims-ledger.v1.yaml",
+    "corpus_graph_dogfood": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/corpus-graph-dogfood-2026-10-31.json",
     "corpus_inventory": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/inventory.v1.json",
     "corpus_map": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/reports/tied-project-corpus-map.md",
     "engagement_validate": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/edpc-engagement-validate.json",

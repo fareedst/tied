@@ -1,0 +1,28 @@
+{
+  "schema_version": "corpus-graph-dogfood-receipt.v1",
+  "request_token": "DOC-STDD-TIED-PROJECT-BROWNFIELD",
+  "closes_gap": "methodology:tied_yaml_corpus_not_in_source_graph",
+  "feature_token": "REQ-TIED_CORPUS_COMPREHENSION",
+  "feature_commit": "131f0011",
+  "date": "2026-10-31",
+  "tools": [
+    "tied_corpus_graph_refresh",
+    "tied_corpus_graph_trace"
+  ],
+  "refresh": {
+    "ok": true,
+    "index_path": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/corpus-graph-index.v1.json",
+    "content_hash": "52ccf65cce8b80031db2ba48083c7562a8091562dde03393b6d4154e93e00a05",
+    "totals": {
+      "nodes": 535,
+      "edges": 2777,
+      "files": 717
+    }
+  },
+  "trace": {
+    "node_id": "REQ-TIED_CORPUS_COMPREHENSION",
+    "depth": 2,
+    "ok": true
+  },
+  "authority": "Observed corpus_graph receipts; does not replace tied_verify or EDPC comprehension verify boundary gap."
+}

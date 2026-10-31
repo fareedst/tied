@@ -21,8 +21,12 @@ See [close-out-handoff.md](./close-out-handoff.md) · commit **`131f0011`**
 
 **Dogfood:** [code-to-token-map.md](../../DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/reports/code-to-token-map.md) row added for `mcp-server/src/corpus-graph/*`.
 
-## Not done (explicit deferrals)
+## EDPC G3 clearance (2026-10-31)
 
-- **Close-out:** No `sub-close-out-evidence-sync` / envelope blocking validate — run `@close-out` when sponsor wants traceable commit
-- **EDPC G3 gap line:** Republish EDPC manifest after sponsor accepts corpus_graph evidence closes `methodology:tied_yaml_corpus_not_in_source_graph`
+- **Dogfood:** [corpus-graph-dogfood-2026-10-31.json](../../DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/corpus-graph-dogfood-2026-10-31.json) (regenerable index local-only under DOC `evidence/corpus-graph-index.v1.json`)
+- **Manifest:** [edpc-publish-manifest.v1.json](../../DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/edpc-publish-manifest.v1.json) — `methodology:tied_yaml_corpus_not_in_source_graph` **dropped**; G7 comprehension boundary remains
+
+## Program notes
+
 - **G6:** Resolved (MCP rebuild); see [g6-gate-identity-debug.md](../../DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/g6-gate-identity-debug.md)
+- **MCP restart:** IDE may lack `tied_corpus_graph_*` until TIED YAML MCP rebuild + restart

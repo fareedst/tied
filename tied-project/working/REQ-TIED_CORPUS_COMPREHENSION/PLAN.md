@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | **Change ID** | `REQ-TIED_CORPUS_COMPREHENSION` |
-| **Status** | **Slice 1 implemented** (build-plan 2026-10-31) · verification gate passed · **close-out deferred** |
+| **Status** | **Complete** — slice 1 shipped `131f0011`; close-out `cgc-closeout-2026-10-31`; EDPC G3 cleared 2026-10-31 |
 | **Origin** | [gap-planning-handoff.md](../DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/gap-planning-handoff.md) **G3** · manifest gap `methodology:tied_yaml_corpus_not_in_source_graph` |
 | **Parent engagement** | `DOC-STDD-TIED-PROJECT-BROWNFIELD` (brownfield comprehension; gaps are backlog until this REQ locks) |
 | **Depends on** | `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]` (code graph), `tied_scoped_analysis_run` patterns (impact roots) |

@@ -2,7 +2,7 @@
 
 **Purpose:** Turn [edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json) `gaps[]` into sponsor-ready **plan seeds** (workflow, token, entry prompt).  
 **Baseline:** `cf321c96` · **Close-out commit:** `944f0666` · **Gap sprint handoff:** [session-handoff.md](./session-handoff.md) (`c74a4d96`)  
-**Matrix sync:** 2026-10-31 — G4/G6 rows aligned; manifest **republished** ([receipt](./receipts/edpc-publish-republish-2026-10-31.json)) — `gaps[]` now G3 + G7 only.  
+**Matrix sync:** 2026-10-31 — G4/G6 aligned; G3 **closed** via [REQ-TIED_CORPUS_COMPREHENSION](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md) (`131f0011`) + [corpus-graph dogfood](./receipts/corpus-graph-dogfood-2026-10-31.json); manifest **`gaps[]` = G7 only**.  
 **Authority:** Publish gaps are **backlog**, not approved REQ scope until `@add-feature` / `@refine-plan` locks tokens.
 
 ---
@@ -21,7 +21,7 @@
 ```mermaid
 flowchart TB
   subgraph product [Product_MCP]
-    G3[gap_tied_yaml_corpus]
+    G3_done[corpus_graph_done]
   end
   subgraph methodology [Methodology_docs]
     G4_done[meta_hub_done]
@@ -47,7 +47,7 @@ flowchart TB
 | --- | --- | --- | --- | --- | --- | --- |
 | G1 | `minimum_field_gap:request_token` | Process / EDPC F | `PLAN-EDPC-PUBLISH-MINIMUM-FIELDS` | **Done (2026-10-31)** — hoist top-level `request_token` in publish build + DOC-shaped test | `[REQ-TIED_EDPC_COMPREHENSION]` | Manifest republished without G1 gap; see `mcp-server/src/edpc/publish-build.ts` |
 | G2 | `ofsm:bundle_missing` | **N/A** (charter) | — | — | Workflow D not chartered | Document in charter: `production_touch: none` → OFSM optional; re-open only with `@add-feature` on EDPC Slice D |
-| G3 | `methodology:tied_yaml_corpus_not_in_source_graph` | **Costly** product | `REQ-TIED_CORPUS_COMPREHENSION` (proposed) | `add-feature` → `refine-plan` → `build-plan` | `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]`, `[REQ-TIED_SCOPED_ANALYSIS]` | Extend static index: YAML/Markdown under `tied-project/` (token refs, detail paths); proof boundary: no runtime |
+| G3 | `methodology:tied_yaml_corpus_not_in_source_graph` | Product | `REQ-TIED_CORPUS_COMPREHENSION` | **Done (2026-10-31)** — `tied_corpus_graph_*` MCP + dogfood (`131f0011`) | `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]`, `[REQ-TIED_SCOPED_ANALYSIS]` | [PLAN.md](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md), [session-handoff](../../REQ-TIED_CORPUS_COMPREHENSION/evidence/session-handoff.md); manifest gap **dropped** |
 | G4 | `methodology:meta_hub_edpc_template_deferred` | Reversible methodology | `PLAN-EDPC-META-HUB-ENGAGEMENT` | **Done (2026-10-31)** — template + guide + second dogfood (`9e2c4c2b`, `72c45cd2`) | `[PROC-EDPC_COMPREHENSION]`, DOC + [DOC-STDD-META-HUB-TEMPLATE-DOGFOOD](../../DOC-STDD-META-HUB-TEMPLATE-DOGFOOD/) | [PLAN-EDPC-META-HUB-ENGAGEMENT](../../PLAN-EDPC-META-HUB-ENGAGEMENT/PLAN.md), [session-handoff](../../PLAN-EDPC-META-HUB-ENGAGEMENT/evidence/session-handoff.md); manifest row until republish or sponsor accept |
 | G5 | `process:envelope_sample_ten_tokens_not_full_corpus` | Reversible ops | `PLAN-EVALUATION-ENVELOPE-CORPUS-FULL` | **Done (2026-10-31)** — 133-row store corpus + gap report | `[REQ-REQUEST_EVIDENCE_ENVELOPE]`, `request_evidence_envelope_batch_collect` | [envelope-corpus-manifest.v1.yaml](../../evaluation/envelope-corpus-manifest.v1.yaml), [README](../../evaluation/README.md); manifest gap may remain until republish |
 | G6 | `gate:project_config_identity_key_blocks_checklist_gate_tools` | Ops (was **costly** if schema wrong) | — (no REQ mint) | **Resolved (2026-10-31)** — stale IDE MCP `dist`; source allowlist OK | `[REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING]`, [Wave 6 plan](../REQ-TIED_INTENT_CONTROL_PLANE/PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md) | [g6-gate-identity-debug.md](./g6-gate-identity-debug.md); `tied-project-config.test.ts` + `checklist-gate-project-config.test.ts`; manifest gap drops on republish |
@@ -160,9 +160,8 @@ flowchart TB
 
 | Priority | Gap | Rationale |
 | --- | --- | --- |
-| 1 | **G3** | Largest open product slice; meta-hub layout now documented (G4 done) |
-| 2 | **Republish** | Trim stale `gaps[]` (G1/G4/G5/G6 closed in process layer) |
-| — | **G1, G4, G5, G6, G7** | Sprint closed 2026-10-31 (G7 gap string may remain on publish until verify receipts) |
+| — | **Brownfield backlog** | Sprint + G3 complete 2026-10-31; manifest retains **G7 only** (comprehension verify boundary) |
+| — | **G4 promote** | Optional `@citdp-promote` for normative meta-hub token |
 | — | **G2** | Explicit defer until Workflow D chartered |
 
 ---
@@ -170,9 +169,9 @@ flowchart TB
 ## Invocation cheat sheet
 
 ```text
-@add-feature  REQ-TIED_CORPUS_COMPREHENSION — YAML index in source graph (gap G3)
+@citdp-promote  Optional normative token after G4 meta-hub dogfoods (only if sponsor wants REQ)
 
-@non-tied-plan  Republish DOC EDPC manifest to trim closed gaps[] (G1/G4/G5/G6)
+# G3 done: REQ-TIED_CORPUS_COMPREHENSION shipped; EDPC manifest republished without product gap
 
 @citdp-promote  Optional normative token after G4 meta-hub dogfoods (only if sponsor wants REQ)
 

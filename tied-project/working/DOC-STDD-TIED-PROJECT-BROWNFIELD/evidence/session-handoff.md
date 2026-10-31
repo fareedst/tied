@@ -23,17 +23,17 @@
 
 ## Gap status vs publish manifest
 
-**Republish (2026-10-31):** `tied_edpc_publish_build` + G3 manual retain → manifest **`gaps[]` length 2** (G3 product + G7 process boundary only).
+**Republish (2026-10-31):** Sprint trim → **`gaps[]` length 1** after [REQ-TIED_CORPUS_COMPREHENSION](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md) G3 clearance ([corpus-graph dogfood](./receipts/corpus-graph-dogfood-2026-10-31.json)).
 
-| Gap | Matrix (git) | Reality | Manifest (post-republish) |
+| Gap | Matrix (git) | Reality | Manifest |
 | --- | --- | --- | --- |
 | G1 | Done | Done | **Dropped** |
 | G4 | Done | Done (methodology) | **Dropped** |
 | G5 | Done | Done | **Dropped** |
 | G6 | Resolved | [g6-gate-identity-debug.md](./g6-gate-identity-debug.md) | **Dropped** |
-| G7 | Done | Process boundary | **`comprehension:req_implementation_status_requires_tied_verify`** |
-| G2 | N/A | `production_touch: none` | **Dropped** (no OFSM in republish input) |
-| G3 | Open | Partial `131f0011`; [REQ-TIED_CORPUS_COMPREHENSION](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md) | **`methodology:tied_yaml_corpus_not_in_source_graph`** |
+| G7 | Done | Process boundary | **`comprehension:req_implementation_status_requires_tied_verify`** (always-on) |
+| G2 | N/A | `production_touch: none` | **Dropped** |
+| G3 | Done | Shipped `131f0011` + dogfood | **Dropped** |
 
 ---
 
@@ -51,8 +51,8 @@ Brownfield regenerable noise was **restored** before push (see hygiene receipt).
 
 1. ~~**Optional** — sync G4/G6 rows in [gap-planning-handoff.md](./gap-planning-handoff.md).~~ **Done (2026-10-31).**
 2. ~~**Republish** DOC EDPC manifest.~~ **Done (2026-10-31)** — [edpc-publish-republish-2026-10-31.json](./receipts/edpc-publish-republish-2026-10-31.json).
-3. **G3** — `@add-feature` / `build-plan` for full YAML corpus graph (clears remaining manifest gap when complete).
-4. **G4** — `@citdp-promote` only if normative token wanted.
+3. ~~**G3** — `@add-feature` [REQ-TIED_CORPUS_COMPREHENSION](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md).~~ **Done (2026-10-31)** — product gap cleared from manifest.
+4. **G4** — `@citdp-promote` only if normative token wanted (optional).
 5. ~~**LangGraph** — P4 traceable SHA sync (`58c1fa9b`) in working docs + CHANGELOG.~~ **Done (2026-10-31)** — push with this chore commit.
 
 ---
@@ -65,5 +65,6 @@ Brownfield regenerable noise was **restored** before push (see hygiene receipt).
 | G5 | [PLAN-EVALUATION-ENVELOPE-CORPUS-FULL/evidence/session-handoff.md](../../PLAN-EVALUATION-ENVELOPE-CORPUS-FULL/evidence/session-handoff.md) |
 | G7 | [PLAN-EDPC-VERIFY-STATUS-BOUNDARY/evidence/session-handoff.md](../../PLAN-EDPC-VERIFY-STATUS-BOUNDARY/evidence/session-handoff.md) |
 | LangGraph P4 | [PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-handoff.md](../../PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-handoff.md) |
+| G3 corpus | [REQ-TIED_CORPUS_COMPREHENSION/evidence/session-handoff.md](../../REQ-TIED_CORPUS_COMPREHENSION/evidence/session-handoff.md) |
 
 **Original DOC close-out:** [close-out-handoff.md](./close-out-handoff.md) (`944f0666`).
