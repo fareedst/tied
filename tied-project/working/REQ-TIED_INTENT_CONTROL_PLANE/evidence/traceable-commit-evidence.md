@@ -2,7 +2,7 @@
 
 **Program:** REQ-TIED_INTENT_CONTROL_PLANE Wave 6 (REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING)  
 **Date:** 2026-10-30  
-**Commit:** `4be21f46` — `feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 6 marker-only routing`
+**Commit:** `ea39bcda` — `feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 6 marker-only routing`
 
 ## Gates
 

@@ -6,7 +6,7 @@
 
 ## Program status
 
-**Waves 1–6 close-out complete.** Wave 6 commit **`4be21f46`**. Wave 5 commit **`d057cc27`**. Branch **main** ahead of `origin/main` (not pushed).
+**Waves 1–6 close-out complete.** Wave 6 commit **`ea39bcda`**. Wave 5 commit **`d057cc27`**. Branch **main** ahead of `origin/main` (not pushed).
 
 | Wave | Focus |
 | --- | --- |
