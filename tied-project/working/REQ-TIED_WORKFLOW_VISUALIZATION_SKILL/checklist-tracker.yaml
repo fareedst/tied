@@ -90,17 +90,17 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/test-strategy.md"
       - "mcp-server/src/e2e/workflow-visualization-skill.test.ts"
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/test-strategy.md"
     slug: "unit-test-red"
     tracking:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/requirements/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
       - "tied-project/architecture-decisions/ARCH-TIED_WORKFLOW_VISUALIZATION_SKILL_BOUNDARY.yaml"
-      - "tied-project/implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
       - "tied-project/implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL-pseudocode.md"
+      - "tied-project/implementation-decisions/IMPL-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
+      - "tied-project/requirements/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml"
     slug: "sync-tied-stack"
     tracking:
       status: "completed"
@@ -132,9 +132,9 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
+      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/git-hygiene-receipt-2026-10-30.md"
       - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/proposed-commit-message.txt"
       - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/traceable-commit-evidence.md"
-      - "tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/git-hygiene-receipt-2026-10-30.md"
     slug: "traceable-commit"
     tracking:
       status: "completed"
