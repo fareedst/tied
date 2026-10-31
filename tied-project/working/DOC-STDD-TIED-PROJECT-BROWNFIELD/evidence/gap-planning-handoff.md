@@ -173,8 +173,6 @@ flowchart TB
 
 # G3 done: REQ-TIED_CORPUS_COMPREHENSION shipped; EDPC manifest republished without product gap
 
-@citdp-promote  Optional normative token after G4 meta-hub dogfoods (only if sponsor wants REQ)
-
 # G6 resolved: rebuild mcp-server + restart TIED YAML MCP — see g6-gate-identity-debug.md
 ```
 
