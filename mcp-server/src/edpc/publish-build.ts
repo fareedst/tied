@@ -31,6 +31,10 @@ export type EdpcPublishManifest = {
 
 const SCM_MINIMUM_KEYS = ["request_token", "baseline_revision", "tier"] as const;
 
+/** Process boundary: comprehension publish does not substitute for tied_verify. */
+export const COMPREHENSION_REQ_STATUS_GAP =
+  "comprehension:req_implementation_status_requires_tied_verify" as const;
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -89,6 +93,7 @@ export function buildEdpcPublishManifest(input: {
     }
   }
   gaps.push(...classifyClaimsForTier(input.claims_ledger, input.access_matrix.evidence_access_tier));
+  gaps.push(COMPREHENSION_REQ_STATUS_GAP);
 
   if (input.charter || input.ofsm_bundle !== undefined) {
     gaps.push(

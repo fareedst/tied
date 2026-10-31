@@ -87,6 +87,8 @@ A practical classification distinguishes:
 
 Classification is not a simple ladder: a verified *declaration of intent* is not proof of production behavior. Track confidence separately as **high / medium / low / indeterminate**, with a recorded rationale; avoid false numeric precision.
 
+**TIED REQ/IMPL index status (comprehension boundary):** Requirements and implementation decision indexes may display statuses such as *Planned* or *Implemented*. EDPC claims must **not** treat those fields as verified implementation sign-off. Classify index-only status references as **Declared** (intent) or **Unknown** (obligation met?) unless a **`tied_verify`** receipt or verification-gated index update is attached in `evidence_ids`. Workflow **F** publish output includes gap `comprehension:req_implementation_status_requires_tied_verify` to record this boundary for sponsors.
+
 **Evidence provenance** should include source URI or path, exact code revision/build identifier where relevant, line/range or query, timestamp, system/environment, collection method, relevant sampling constraints, and cryptographic digest when practical. Treat sensitive operational evidence according to agreed retention and access controls.
 
 **Relationships** should include `implements`, `calls`, `depends_on`, `reads`, `writes`, `emits`, `invoked_by`, `deployed_as`, `observed_in`, `supports`, `contradicts`, `causes_or_contributes_to`, `mitigates`, `affects`, and `answers_question`. Mark causal links as hypotheses unless supported by appropriate causal evidence.

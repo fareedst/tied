@@ -42,9 +42,11 @@
 ## Authority rules (comprehension vs TIED)
 
 - **Indexes + `tied_verify`** decide obligation status — EDPC SCM in `working/DOC-STDD-TIED-PROJECT-BROWNFIELD/` is investigative.
+- **REQ/IMPL implementation status:** Values in `requirements.yaml` / `implementation-decisions.yaml` (for example **Planned**, **In Progress**, **Implemented**) are **not** sponsor sign-off from this comprehension pass. Treat obligation status as **Unknown** in EDPC claims unless a **`tied_verify`** receipt (or verification-gated index update) is attached. See [Verification gaps](../../../../../docs/stdd-workflows.md#verification-gaps) and `[PROC-TIED_VERIFICATION_GATED]`.
+- **Claims ledger:** Use **Declared** / **Derived** / **Observed** for investigation findings; use **Unknown** for per-REQ implementation status unless verify evidence is cited. Never classify a claim as **Verified** “Implemented” from SCM or corpus maps alone.
 - **CITDP:** Prefer `tied-project/citdp/` over duplicate drafts in `working/` (65 identical drafts removed 2026-10-31; see [citdp-dedupe-log.md](./citdp-dedupe-log.md)).
 - **Do not commit** repo-root `project-identity.v1.yaml` (local Path 3 dogfood only).
 
 ## Related sponsor doc
 
-- [docs/stdd-workflows.md](../../../docs/stdd-workflows.md) — workflow hub (Mermaid), when present
+- [docs/stdd-workflows.md](../../../../../docs/stdd-workflows.md) — workflow hub (Mermaid), when present

@@ -77,10 +77,16 @@ flowchart TD
 
 ## Verification gaps
 
+### Implementation status (read this first)
+
+**EDPC and workflow docs do not certify that REQs are implemented.** Index `status` fields and corpus maps are navigational; **`tied_verify`** (W5) or verification-gated index updates are the only supported sign-off for obligation status. Publish manifests record `comprehension:req_implementation_status_requires_tied_verify` until sponsors attach verify receipts. EDPC claims about REQ status must stay **Unknown** without those receipts ([claims-ledger example](../tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/claims-ledger.v1.yaml) CL-DOC-005).
+
+### Residual comprehension limits
+
 - Runtime behavior of **marker_only** identity routing is not fully exercised in this doc pass (see intent control plane handoff).
-- Source graph covers TS/JS under `mcp-server/` only — not full monorepo or YAML corpus.
-- Envelope gap batch sampled **10** REQ tokens; not all **247** working folders.
-- `tied_checklist_gate_validate` blocked by `identity` key in `tied-project/config.yaml` vs MCP schema (documented in DOC gate note).
+- Source graph covers TS/JS under `mcp-server/` only — YAML corpus graph is partial ([REQ-TIED_CORPUS_COMPREHENSION](../tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/PLAN.md)).
+- Envelope gap batch: full store corpus (**133** envelopes) in [envelope-gap-report.v1.yaml](../tied-project/working/evaluation/envelope-gap-report.v1.yaml); **118** working folders still lack envelopes (advisory).
+- Gate tools: store `identity.routing: marker_only` is allowed in current MCP; stale IDE sessions may still show `CONFIG_UNKNOWN_KEY` until MCP restart ([g6-gate-identity-debug.md](../tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/g6-gate-identity-debug.md)).
 
 ## Related
 

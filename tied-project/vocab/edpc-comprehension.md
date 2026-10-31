@@ -59,6 +59,23 @@ Path: `tied-project/working/{REQ-TOKEN}/evidence/edpc/`
 
 ---
 
+## REQ/IMPL status vs comprehension `[PROC-EDPC_COMPREHENSION]`
+
+EDPC investigates; TIED indexes + **`tied_verify`** decide obligation status.
+
+| Surface | Allowed in EDPC claims | Authoritative for Implemented? |
+| --- | --- | --- |
+| `requirements.yaml` / IMPL index `status` | Cite as **Declared** intent only | **No** — unless paired with verify receipt |
+| SCM / corpus map / workflow doc | **Derived** or **Observed** navigation | **No** |
+| `tied_verify` receipt / verification-gated update | **Observed** or **Verified** for the scoped claim | **Yes** for that verify scope |
+| Missing verify evidence | **Unknown** | **No** |
+
+**Claims ledger rules:** Do not add claims with `claim_class: Verified` or statements like “REQ-X is Implemented” unless `evidence_ids` include a `tied_verify` (or equivalent) receipt path. Prefer a standing **Unknown** boundary claim (see DOC dogfood CL-DOC-005). Workflow **F** publish manifests always include gap `comprehension:req_implementation_status_requires_tied_verify` until sponsors explicitly accept closure with verify evidence.
+
+**CAM render:** `tied_edpc_client_assessment_render` appends an **Implementation status boundary** section so sponsor PDFs/Markdown do not inherit false sign-off from domain status labels.
+
+---
+
 ## Engagement naming supersession
 
 | Engagement | Status |

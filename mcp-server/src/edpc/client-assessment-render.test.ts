@@ -30,5 +30,7 @@ describe("EDPC client assessment render [REQ-TIED_EDPC_CLIENT_ASSESSMENT]", () =
     assert.equal(r1.markdown, r2.markdown);
     assert.match(r1.markdown!, /## Understand/);
     assert.match(r1.markdown!, /## Domains \(20\)/);
+    assert.match(r1.markdown!, /## Implementation status boundary/);
+    assert.match(r1.markdown!, /tied_verify/);
   });
 });

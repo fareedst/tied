@@ -71,6 +71,13 @@ export function renderEdpcClientAssessmentMarkdown(cam: ClientAssessmentModel): 
   lines.push(`- publish_gaps: ${cam.publish_gaps.length}`);
   lines.push("");
 
+  lines.push("## Implementation status boundary");
+  lines.push("");
+  lines.push(
+    "REQ and IMPL **status** in `tied-project/` indexes are authoritative only after **`tied_verify`** (or the project verification-gated update step). This report and EDPC claims do not sign off **Implemented** or **Complete** unless a `tied_verify` receipt appears in the traceability appendix.",
+  );
+  lines.push("");
+
   lines.push("## Traceability appendix");
   lines.push("");
   for (const [key, ref] of Object.entries(cam.receipt_refs).sort(([a], [b]) => a.localeCompare(b))) {
