@@ -24,6 +24,10 @@ EDPC constructs a versioned, evidence-backed **Software Comprehension Model (SCM
 
 EDPC is a *methodology proposed here*, assembled from established techniques in program comprehension, static and dynamic analysis, architecture recovery, observability, reliability engineering, and evidence-based assessment. It is not presented as an existing formal standard.
 
+### 1.1 Meta-hub engagements (TIED clients)
+
+When normative TIED data lives under `tied-project/` but the investigation spans the **full repository**, use the **meta-hub** pattern: charter template, bounded paths that always include the hub, and a working-folder artifact tree. Operational detail, checklist mapping, and corpus-map template: [edpc-meta-hub-engagement.md](./edpc-meta-hub-engagement.md). Example charter: [edpc-meta-hub-engagement-charter.v1.example.yaml](../templates/edpc-meta-hub-engagement-charter.v1.example.yaml).
+
 ## 2. Governing principles
 
 1. **Evidence precedes conclusions.** Every material claim has traceable support, scoped to the versions, environment, and period to which it applies.

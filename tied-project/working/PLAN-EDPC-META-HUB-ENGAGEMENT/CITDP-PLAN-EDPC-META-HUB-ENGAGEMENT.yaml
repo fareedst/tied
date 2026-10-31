@@ -1,0 +1,50 @@
+CITDP-PLAN-EDPC-META-HUB-ENGAGEMENT:
+  change_definition:
+    current_behavior: "Meta-hub EDPC engagements (full repo + tied-project hub) rely on ad hoc working folders; publish manifest records methodology:meta_hub_edpc_template_deferred."
+    desired_behavior: "Ship tied-bundle template + edpc-meta-hub-engagement.md with A–G ↔ checklist mapping; EDPC main doc links; sponsors can copy charter from template for the next engagement."
+    non_goals:
+      - "Mint REQ/ARCH/IMPL or edit tied-project indexes"
+      - "MCP publish schema or engagement_validate schema changes unless blocking"
+      - "Vocab RECORD for meta_hub_engagement in pass 1"
+    success_criteria:
+      - "edpc-meta-hub-engagement-charter.v1.example.yaml exists under tied-bundle/templates/"
+      - "edpc-meta-hub-engagement.md exists with workflow/checklist table and authority rules"
+      - "EDPC_Methodology_and_Workflows.md references the new doc"
+    unchanged_behavior:
+      - "REQ-TIED_EDPC_COMPREHENSION product scope in mcp-server/src/edpc"
+      - "DOC-STDD working evidence (reference only unless republish requested)"
+  completion_criteria:
+    focused_tests: "test-strategy.md manual + EDPC validate on DOC charter"
+    persist_policy: "defer CITDP persist to optional citdp-promote"
+    verification: "no tied_verify update"
+  impact_analysis:
+    depends_on:
+      - "PROC-EDPC_COMPREHENSION"
+      - "PROC-WORKING_ARTIFACT_PLACEMENT"
+    files:
+      - "tied-bundle/templates/edpc-meta-hub-engagement-charter.v1.example.yaml"
+      - "tied-bundle/docs/edpc-meta-hub-engagement.md"
+      - "tied-bundle/docs/EDPC_Methodology_and_Workflows.md"
+    modules: []
+    tags:
+      - "meta-hub-edpc-template"
+      - "methodology-surface"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Template prose replaces REQ authority or tied_verify"
+        - "Charter bounded_path omits tied-project hub"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Authority section copied from DOC corpus map"
+        - "no_req_mint on tracker"
+      evidence_references:
+        - "tied-project/working/PLAN-EDPC-META-HUB-ENGAGEMENT/PLAN-refine-pass1.md"
+        - "tied-project/working/PLAN-EDPC-META-HUB-ENGAGEMENT/test-strategy.md"
+      falsification_questions:
+        - "Does the template imply Implemented status without tied_verify?"
+        - "Does Implement edit requirements.yaml?"
+      gate_policy: "doc_comprehension_hygiene"
+  test_determination_and_planning:
+    red_before_code: false
+    strategy_ref: "tied-project/working/PLAN-EDPC-META-HUB-ENGAGEMENT/test-strategy.md"

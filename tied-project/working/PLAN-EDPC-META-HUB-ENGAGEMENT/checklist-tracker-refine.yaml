@@ -1,0 +1,32 @@
+change_class: "methodology_doc_template"
+gate_policy: "doc_comprehension_hygiene"
+notes: "EDPC meta-hub facet documented in PLAN-refine-pass1; this token does not execute edpc_full."
+reference_dogfood:
+  engagement_pattern: "meta_hub"
+  request_token: "DOC-STDD-TIED-PROJECT-BROWNFIELD"
+  working_root: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/"
+no_req_mint: true
+profile_depth: "minimal"
+request_token: "PLAN-EDPC-META-HUB-ENGAGEMENT"
+steps:
+  change-definition:
+    notes: "PLAN-refine-pass1.md; gap G4 meta_hub_edpc_template_deferred."
+    status: "done"
+  impact-discovery:
+    notes: "tied-bundle templates + docs only; DOC as reference."
+    status: "done"
+  risk-assessment:
+    notes: "evidence/risk-assessment-refine-pass1.md"
+    status: "done"
+  session-bootstrap:
+    notes: "PRELOAD edpc-comprehension, working-artifact-placement, tied-methodology; tied_config_get_base_path verified."
+    status: "done"
+  test-strategy:
+    notes: "test-strategy.md"
+    status: "done"
+  translate-sponsor-intent:
+    notes: "Template + doc for meta-hub EDPC; non-tied Implement."
+    status: "done"
+  implement-methodology-doc:
+    notes: "tied-bundle template + edpc-meta-hub-engagement.md + EDPC §1.1; evidence/session-handoff.md"
+    status: "done"

@@ -1,0 +1,23 @@
+# Example charter for a meta-hub EDPC engagement (full-repo target, tied-project/ hub).
+# Copy to: tied-project/working/{REQUEST_TOKEN}/evidence/edpc/engagement-charter.v1.yaml
+# Methodology: tied-bundle/docs/edpc-meta-hub-engagement.md
+# Reference dogfood: tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/engagement-charter.v1.yaml
+schema_version: "engagement-charter.v1"
+engagement_pattern: "meta_hub"
+hub_path: "tied-project/"
+target_repository_root: "/absolute/path/to/target/repository"
+bounded_path: "tied-project,mcp-server/src,tools/bootstrap"
+investigation_question: "How does the codebase relate to tied-project/ declarations and evidence, and what hygiene or navigation closes sponsor-facing gaps without changing REQ authority?"
+request_token: "DOC-EXAMPLE-OR-REQ-EXAMPLE"
+workflows_planned:
+  - "A"
+  - "B"
+  - "C"
+  - "F"
+  - "G"
+sponsor_note: "Meta-hub engagement; include tied-project in bounded_path; defer workflows D/E when production_touch is none and tier is below source_change."
+# Mirror on the working Tracker (edpc_engagement facet):
+#   evidence_access_tier: source_static | toolchain_readonly | source_change
+#   production_touch: none | read_only | approved_execute
+#   charter_path: tied-project/working/{REQUEST_TOKEN}/evidence/edpc/engagement-charter.v1.yaml
+#   target_repository_root: (same absolute path as above)
