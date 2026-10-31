@@ -2,7 +2,7 @@
 
 **Gap:** G4 `methodology:meta_hub_edpc_template_deferred`  
 **Prompt:** `@non-tied-plan` Implement  
-**Commit:** _(filled after commit)_
+**Commit:** `9e2c4c2b` — docs(methodology): add meta-hub EDPC charter template and guide (G4)
 
 ## Staged scope
 

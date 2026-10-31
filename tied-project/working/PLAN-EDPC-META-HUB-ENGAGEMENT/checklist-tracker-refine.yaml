@@ -31,5 +31,5 @@ steps:
     notes: "tied-bundle template + edpc-meta-hub-engagement.md + EDPC §1.1; evidence/session-handoff.md"
     status: "done"
   traceable-commit:
-    notes: "docs(methodology): meta-hub EDPC template and guide (G4)"
+    notes: "9e2c4c2b — docs(methodology): meta-hub EDPC template and guide (G4)"
     status: "done"

@@ -40,6 +40,8 @@ Gap `methodology:meta_hub_edpc_template_deferred` in [DOC publish manifest](../D
 
 - [G3 YAML corpus graph](../DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/gap-planning-handoff.md) — stable hub layout documented in `edpc-meta-hub-engagement.md`.
 
-## Commit staging (sponsor)
+## Traceable commit
 
-Methodology paths only; exclude unrelated working edits.
+**SHA:** `9e2c4c2b` — `docs(methodology): add meta-hub EDPC charter template and guide (G4)`
+
+Evidence: [traceable-commit-evidence.md](./traceable-commit-evidence.md)
