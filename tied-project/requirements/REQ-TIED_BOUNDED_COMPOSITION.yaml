@@ -3,9 +3,9 @@ REQ-TIED_BOUNDED_COMPOSITION:
   description: "Default-off, TIED-native bounded composition: pilot budgets, local trajectory evidence, read-only divergence analysis, explicit lesson drafts, advisory shadow comparison, and injectable AgentDriver seam—subordinate to checklist gates and verification-gated status."
   metadata:
     last_updated:
-      author: "build-plan"
-      date: "2026-10-18"
-      reason: "Slice 0 contract mint"
+      author: "AI Agent"
+      date: "2026-10-31"
+      reason: "add-feature Option A reconcile — tied_verify bc-add-feature-reconcile-20261031"
   name: "TIED bounded composition"
   priority: "P1"
   rationale:
@@ -47,7 +47,7 @@ REQ-TIED_BOUNDED_COMPOSITION:
       id: "SC-BC-SHADOW"
     - criterion: "SC-BC-TRAJ — trajectory manifests and local trajectories/ placement; no unrestricted bodies in committed envelope."
       id: "SC-BC-TRAJ"
-  status: "Planned"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_BOUNDED_COMPOSITION"
@@ -60,7 +60,9 @@ REQ-TIED_BOUNDED_COMPOSITION:
       - "IMPL-TIED_BOUNDED_PILOT_BUDGET"
       - "IMPL-TIED_BOUNDED_SHADOW_COMPARISON"
       - "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE"
-    tests: []
+    tests:
+      - "mcp-server/src/bounded-composition/*.test.ts"
+      - "mcp-server/src/bounded-composition/agentstream-seam-composition.test.ts"
   validation_criteria:
     - coverage: "Each IMPL module validated independently before integration per REQ-MODULE_VALIDATION."
       method: "Unit and composition tests"

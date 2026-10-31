@@ -10,7 +10,7 @@ Reference: [docs/anonymized-mcp-architecture-handoff.md](../../../docs/anonymize
 | REQ-CTRL-004 gates | Exists | tied_checklist_gate_validate |
 | REQ-CTRL-005 evidence freshness | **Wave 3** | REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE + tied_verify manifest binding |
 | REQ-CTRL-007 checklist controller | **Wave 4** | REQ-TIED_DURABLE_CHECKLIST_CONTROLLER + agentstream `--resume-from-tracker` + MCP `tied_checklist_controller_resume_plan` |
-| REQ-CTRL-008 agent driver | Partial | REQ-TIED_BOUNDED_COMPOSITION |
+| REQ-CTRL-008 agent driver | **Delivered (2026-10-31 reconcile)** | REQ-TIED_BOUNDED_COMPOSITION — `SC-BC-DRIVER`; CITDP C2 external executors still deferred |
 | REQ-CTRL-009 verification runner | **Wave 5** | REQ-TIED_ISOLATED_VERIFICATION_RUNNER + isolated child runner + manifest `execution_runner` |
 | REQ-CTRL-013 usage metrics | Partial | REQ-MCP_USAGE_METRICS |
 | INV-004 traceability | Exists | Traceability tools |

@@ -1,7 +1,7 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
-  "run_id": "bc-plan-close-out-20261018",
-  "commit": "uncommitted",
+  "run_id": "bc-add-feature-reconcile-20261031",
+  "commit": "ac08900f528837b3cc5d667b4de1cfe9157698c3",
   "environment": {
     "node": "v25.9.0",
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
@@ -9,36 +9,50 @@
   },
   "command_results": [
     {
-      "id": "bc-co-build",
-      "command": ["npm", "run", "build", "--prefix", "mcp-server"],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "exit_code": 0,
-      "result": "passed",
-      "artifacts": []
-    },
-    {
-      "id": "bc-co-unit",
+      "id": "bc-reconcile-unit",
       "command": ["node", "--import", "tsx", "--test", "src/bounded-composition/*.test.ts"],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
       "exit_code": 0,
       "result": "passed",
-      "artifacts": ["tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/bounded-composition-test-slice5.txt"]
+      "artifacts": [
+        "tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/bounded-composition-test-reconcile-20261031.txt"
+      ]
     },
     {
-      "id": "bc-co-tsc",
-      "command": ["npx", "tsc", "-b"],
+      "id": "bc-reconcile-build",
+      "command": ["npm", "run", "build"],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
       "exit_code": 0,
       "result": "passed",
       "artifacts": []
-    },
-    {
-      "id": "bc-co-tied-validate",
-      "command": [".cursor/skills/tied-yaml/scripts/tied-cli.sh", "tied_validate_consistency"],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "exit_code": 0,
-      "result": "passed",
-      "artifacts": []
     }
-  ]
+  ],
+  "quality_rows": [
+    {
+      "id": "bc-reconcile-unit",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "rationale": "Bounded composition module unit tests",
+      "evidence_method": "Automated test",
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_BOUNDED_COMPOSITION",
+    "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+    "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+    "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+    "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE"
+  ],
+  "proof_boundaries": [
+    "default_off_opt_in_only",
+    "raw_trajectories_operator_local",
+    "shadow_and_divergence_advisory_not_gate_authority"
+  ],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  }
 }

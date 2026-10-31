@@ -1,0 +1,81 @@
+▶ bounded agentstream schedule → trajectory composition
+  ✔ preserves dry-run/live turn parity and captures manifest provenance (6.849417ms)
+  ✔ stops schedule dependents when injected driver fails (1.531958ms)
+✔ bounded agentstream schedule → trajectory composition (8.902875ms)
+▶ bindClientAgentDriver [IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM]
+  ✔ binds built-in dry_run profile without live factory (0.70375ms)
+  ✔ rejects unknown built-in profile (0.075667ms)
+  ✔ requires OEE compatibility ref on client descriptor (0.051292ms)
+  ✔ rejects live external client driver without operator approval (0.050708ms)
+  ✔ binds injected client driver when approved (0.125375ms)
+  ✔ buildScheduleExecutorFromBoundDriver stops on failed turn outcome (0.102375ms)
+✔ bindClientAgentDriver [IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM] (1.74125ms)
+▶ bounded composition envelope discovery
+  ✔ discovers bounded pilot budget artifact in evidence/ (9.102ms)
+✔ bounded composition envelope discovery (9.674208ms)
+▶ analyzeTrajectoryDivergence
+  ✔ reports identical outcome and tool sequence for matching manifests (7.524916ms)
+  ✔ marks outcome divergent when hashes differ (0.175375ms)
+  ✔ marks unknown when truncated summaries present (0.67875ms)
+  ✔ rejects request scope violation (0.111292ms)
+  ✔ rejects stale manifests (0.074667ms)
+  ✔ is deterministic for identical inputs (0.205958ms)
+✔ analyzeTrajectoryDivergence (9.453292ms)
+▶ distillTrajectoryLessons [IMPL-TIED_BOUNDED_LESSON_DISTILLATION]
+  ✔ emits draft-only bundle with feedback, vocabulary, and experiment draft (2.606458ms)
+  ✔ rejects stale report hash (0.171417ms)
+  ✔ rejects ineligible report without advisory proof boundary (0.071666ms)
+  ✔ suppresses duplicate lesson groups (0.073292ms)
+  ✔ refuses silent canonical write attempts (0.04525ms)
+✔ distillTrajectoryLessons [IMPL-TIED_BOUNDED_LESSON_DISTILLATION] (3.964042ms)
+▶ lesson + shadow composition
+  ✔ wires divergence → lesson drafts and envelope discovery without feedback writes (15.767166ms)
+  ✔ keeps checklist gate disposition unchanged after shadow comparison output (6.745125ms)
+✔ lesson + shadow composition (23.059583ms)
+▶ validatePilotBudget [IMPL-TIED_BOUNDED_PILOT_BUDGET]
+  ✔ rejects default-off when context opt-in is false (1.034041ms)
+  ✔ rejects document without bounded_composition_opt_in (0.089708ms)
+  ✔ accepts a closed pilot-budget.v1 document (0.862334ms)
+  ✔ records R=4k/P=3k accounting_formula as mechanics-only (0.140417ms)
+  ✔ rejects k=0 and invalid mode (0.087708ms)
+  ✔ rejects duplicate run_namespace (0.0575ms)
+✔ validatePilotBudget [IMPL-TIED_BOUNDED_PILOT_BUDGET] (3.140042ms)
+▶ redactBoundedSecrets
+  ✔ redacts canary secret patterns in summaries (0.882958ms)
+  ✔ refuses unrestricted prompt_body fields (0.101917ms)
+✔ redactBoundedSecrets (1.589208ms)
+▶ runShadowComparison [IMPL-TIED_BOUNDED_SHADOW_COMPARISON]
+  ✔ requires shadow opt-in (0.570125ms)
+  ✔ rejects exhausted pilot budget (0.067625ms)
+  ✔ anonymizes candidates deterministically and marks ties (7.417208ms)
+  ✔ omits candidates not listed in candidate_run_ids (0.173542ms)
+  ✔ rejects canary secrets in bounded summary fields (0.06275ms)
+  ✔ validateShadowComparisonReportShape rejects missing authority fields (0.459917ms)
+✔ runShadowComparison [IMPL-TIED_BOUNDED_SHADOW_COMPARISON] (9.3975ms)
+▶ manifest → analyzer → envelope discovery
+  ✔ wires capture, divergence report, and envelope artifact kinds (16.541667ms)
+✔ manifest → analyzer → envelope discovery (17.047334ms)
+▶ captureTrajectoryManifest
+  ✔ writes local raw payload and compact committed manifest (4.138958ms)
+  ✔ rejects wrong TIED base path without writes (1.149792ms)
+  ✔ fails privacy redaction on forbidden prompt_body in outcome (1.280875ms)
+  ✔ rejects duplicate run_id (2.99275ms)
+✔ captureTrajectoryManifest (10.244083ms)
+▶ trajectory working-root classification
+  ✔ routes trajectories/ to local working root (0.558417ms)
+✔ trajectory working-root classification (1.265417ms)
+▶ resolveLocalTrajectoryPath
+  ✔ places trajectories under tied-bundle/working when divided (1.573417ms)
+  ✔ rejects path traversal segments (0.983667ms)
+✔ resolveLocalTrajectoryPath (2.648625ms)
+▶ assertTiedBasePathMatchesProject
+  ✔ fails closed on wrong TIED_BASE_PATH (0.449916ms)
+✔ assertTiedBasePathMatchesProject (0.505959ms)
+ℹ tests 45
+ℹ suites 14
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 158.054292

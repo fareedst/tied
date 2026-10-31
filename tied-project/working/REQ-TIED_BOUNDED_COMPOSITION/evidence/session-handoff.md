@@ -1,6 +1,6 @@
 # Session handoff — REQ-TIED_BOUNDED_COMPOSITION
 
-**Updated:** 2026-10-18 (plan-close-out + traceable-commit complete)  
+**Updated:** 2026-10-31 (add-feature Option A reconcile — index/detail status sync) · prior 2026-10-18 close-out  
 **Depth:** `integrated` · **gate_policy:** `advisory`  
 **Program phase:** **Closed in repo** — build + plan-close-out + **traceable-commit**  
 **Commit:** **`aeb9be67`** — `feat(mcp): TIED bounded composition modules (Harness²-inspired, default-off)`
@@ -58,6 +58,10 @@
 | C3 | Reversible — redaction tests; profile `pending_review` in CITDP |
 
 ---
+
+## Reconcile (2026-10-31)
+
+**run_id:** `bc-add-feature-reconcile-20261031` · **traceable-commit:** **`9fd514e3`** · Evidence: [add-feature-refine-handoff-20261031.md](./add-feature-refine-handoff-20261031.md) · [traceable-commit-evidence.md](./traceable-commit-evidence.md)
 
 ## Verification (repeatable)
 

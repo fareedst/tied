@@ -1,0 +1,82 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/bc-reconcile-build.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/bc-reconcile-build.stdout.txt"
+      ],
+      "command": [
+        "build",
+        "npm",
+        "run"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "duration_ms": 4458,
+      "exit_code": 0,
+      "id": "bc-reconcile-build",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/bc-reconcile-unit.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/bc-reconcile-unit.stdout.txt"
+      ],
+      "command": [
+        "--import",
+        "--test",
+        "node",
+        "src/bounded-composition/*.test.ts",
+        "tsx"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server",
+      "duration_ms": 210,
+      "exit_code": 0,
+      "id": "bc-reconcile-unit",
+      "result": "passed"
+    }
+  ],
+  "commit": "ac08900f528837b3cc5d667b4de1cfe9157698c3",
+  "covered_tokens": [
+    "IMPL-TIED_BOUNDED_AGENTSTREAM_SEAM",
+    "IMPL-TIED_BOUNDED_DIVERGENCE_ANALYSIS",
+    "IMPL-TIED_BOUNDED_LESSON_DISTILLATION",
+    "IMPL-TIED_BOUNDED_PILOT_BUDGET",
+    "IMPL-TIED_BOUNDED_SHADOW_COMPARISON",
+    "IMPL-TIED_BOUNDED_TRAJECTORY_EVIDENCE",
+    "REQ-TIED_BOUNDED_COMPOSITION"
+  ],
+  "diff_scoped_crap_hook": {
+    "reason": "diff_scoped_crap_disabled",
+    "skipped": true
+  },
+  "environment": {
+    "node": "v25.9.0",
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+    "TIED_BASE_PATH": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "default_off_opt_in_only",
+    "raw_trajectories_operator_local",
+    "shadow_and_divergence_advisory_not_gate_authority"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "Automated test",
+      "id": "bc-reconcile-unit",
+      "rationale": "Bounded composition module unit tests",
+      "result": "passed"
+    }
+  ],
+  "run_id": "bc-add-feature-reconcile-20261031",
+  "schema_version": "verification-evidence-manifest.v1"
+}

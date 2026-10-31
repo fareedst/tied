@@ -14,16 +14,16 @@ IMPL-TIED_BOUNDED_LESSON_DISTILLATION:
     summary: "Implement DISTILL_TRAJECTORY_LESSONS per sidecar; default-off opt-in; pure module first."
   metadata:
     last_updated:
-      author: "build-plan"
-      date: "2026-10-18"
-      reason: "Slice 0 contract mint"
+      author: "AI Agent"
+      date: "2026-10-31"
+      reason: "tied_verify reconcile"
   name: "Bounded lesson distillation"
   related_decisions:
     depends_on:
       - "IMPL-MODULE_VALIDATION"
     see_also: []
     supersedes: []
-  status: "Planned"
+  status: "Active"
   testability: "unit"
   traceability:
     architecture:
