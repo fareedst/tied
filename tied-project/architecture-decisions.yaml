@@ -1889,6 +1889,19 @@ ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   detail_file: "architecture-decisions/ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
   name: "Context-adaptive artifact model"
   status: "Active"
+ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL:
+  description: "Evidence-only corpus graph; regenerable index layout; static scan proof boundaries."
+  detail_file: "architecture-decisions/ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL.yaml"
+  name: "Corpus graph evidence model"
+  related_architecture:
+    - "ARCH-TIED_SOURCE_GRAPH_EVIDENCE_MODEL"
+  related_implementation:
+    - "IMPL-TIED_CORPUS_GRAPH_MAP"
+    - "IMPL-TIED_CORPUS_GRAPH_REFRESH"
+    - "IMPL-TIED_CORPUS_GRAPH_TRACE"
+  related_requirements:
+    - "REQ-TIED_CORPUS_COMPREHENSION"
+  status: "Active"
 ARCH-TIED_DAE_INCORPORATION:
   cross_references:
     - "ARCH-TIED_UNIFIED_TOOLCHAIN"

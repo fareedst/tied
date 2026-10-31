@@ -2235,6 +2235,40 @@ IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR:
   detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_SELECTOR.yaml"
   name: "Deterministic practice selector"
   status: "Active"
+IMPL-TIED_CORPUS_GRAPH_MAP:
+  description: "Directory and index-file clustering view over corpus graph index."
+  detail_file: "implementation-decisions/IMPL-TIED_CORPUS_GRAPH_MAP.yaml"
+  name: "Corpus graph map view"
+  related_architecture:
+    - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+  related_implementation:
+    - "IMPL-TIED_CORPUS_GRAPH_REFRESH"
+  related_requirements:
+    - "REQ-TIED_CORPUS_COMPREHENSION"
+  status: "Active"
+IMPL-TIED_CORPUS_GRAPH_REFRESH:
+  description: "Build regenerable corpus-graph-index.v1 from tied-project YAML indexes and detail files."
+  detail_file: "implementation-decisions/IMPL-TIED_CORPUS_GRAPH_REFRESH.yaml"
+  name: "Corpus graph index refresh"
+  related_architecture:
+    - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+  related_implementation:
+    - "IMPL-TIED_CORPUS_GRAPH_MAP"
+    - "IMPL-TIED_CORPUS_GRAPH_TRACE"
+  related_requirements:
+    - "REQ-TIED_CORPUS_COMPREHENSION"
+  status: "Active"
+IMPL-TIED_CORPUS_GRAPH_TRACE:
+  description: "Trace token to detail path and static reference edges within configured depth."
+  detail_file: "implementation-decisions/IMPL-TIED_CORPUS_GRAPH_TRACE.yaml"
+  name: "Corpus graph token trace"
+  related_architecture:
+    - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+  related_implementation:
+    - "IMPL-TIED_CORPUS_GRAPH_REFRESH"
+  related_requirements:
+    - "REQ-TIED_CORPUS_COMPREHENSION"
+  status: "Active"
 IMPL-TIED_DAE_INCORPORATION:
   cross_references:
     - "ARCH-TIED_DAE_INCORPORATION"

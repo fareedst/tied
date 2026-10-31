@@ -47,8 +47,8 @@ describe("tool-profiles [REQ-MCP_USAGE_METRICS]", () => {
   });
 
   it("selectToolsForProfile counts match plan targets", () => {
-    assert.equal(selectToolsForProfile(allTools, "core").length, 93);
+    assert.equal(selectToolsForProfile(allTools, "core").length, 97);
     assert.equal(selectToolsForProfile(allTools, "optin").length, 37);
-    assert.equal(selectToolsForProfile(allTools, "full").length, 130);
+    assert.equal(selectToolsForProfile(allTools, "full").length, 134);
   });
 });

@@ -8,6 +8,7 @@
 | `mcp-server/src/edpc/*` | `[REQ-TIED_EDPC_COMPREHENSION]` | Prior slice-c dogfood + static inventory |
 | `mcp-server/src/brownfield-intent-evidence/*` | `[REQ-TIED_BROWNFIELD_INTENT_ELEVATION]` | Module dir + composition tests |
 | `mcp-server/src/source-graph/*` | `[REQ-TIED_SOURCE_GRAPH_COMPREHENSION]` | `tied_source_graph_refresh` receipt |
+| `mcp-server/src/corpus-graph/*` | `[REQ-TIED_CORPUS_COMPREHENSION]` | `tied_corpus_graph_refresh` receipt (`corpus_graph`) |
 | `mcp-server/src/request-evidence-envelope/*` | `[REQ-REQUEST_EVIDENCE_ENVELOPE]` | Envelope batch + trace callers |
 | `mcp-server/src/tools/index.ts` | MCP surface for EDPC, verify, gates, YAML | Scoped analysis root |
 | `tools/bootstrap/*`, `tied-install.sh` | `[REQ-TIED_LAYERED_CLIENT_INSTALL]`, `[REQ-TIED_CLIENT_BOOTSTRAP_SKILLS]` | Install manifest + README |

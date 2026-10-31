@@ -1,0 +1,6 @@
+ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL:
+  constraints:
+    - "Freshness advisory by default"
+    - "No project TIED YAML mutation from corpus graph MCP path"
+    - "Separate corpus-graph-index.v1 schema from source-graph-index.v1"
+  description: "Architecture for TIED YAML corpus graph evidence composing with source graph."

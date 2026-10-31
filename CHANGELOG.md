@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED YAML corpus graph comprehension ([REQ-TIED_CORPUS_COMPREHENSION], [ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL], [IMPL-TIED_CORPUS_GRAPH_*], [PROC-TIED_CORPUS_GRAPH_COMPREHENSION])** — Evidence-only `tied_corpus_graph_refresh|map|trace|freshness` MCP tools index `tied-project/` YAML/Markdown for REQ→detail→sidecar trace (DOC-STDD gap G3). Regression tests for gate path with `identity.routing: marker_only` (G6). Plan: [PLAN.md](tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/PLAN.md).
+
 - **Store brownfield tied-project representation (DOC-STDD-TIED-PROJECT-BROWNFIELD)** — Full-repo EDPC dogfood on stdd with `tied-project/` meta hub: committed working evidence (charter, SCM, claims ledger, corpus map, publish gaps), sponsor hub [docs/stdd-workflows.md](docs/stdd-workflows.md), refreshed [envelope-gap-report](tied-project/working/evaluation/envelope-gap-report.v1.yaml) (10-token sample), and removal of 64 net byte-identical duplicate working `CITDP-*.yaml` drafts (canonical copies remain under `tied-project/citdp/`). No REQ/ARCH/IMPL index changes. Plan: [PLAN-refine-pass1.md](tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/PLAN-refine-pass1.md).
 
 - **LEAP unify checklist resume ([REQ-TIED_DURABLE_CHECKLIST_CONTROLLER])** — Shared `@tied/checklist-resume` workspace package for MCP `tied_checklist_controller_resume_plan` and agentstream apply; `checklist.resume_from_tracker` tri-state in `checklist-resume-config.ts`. Plan: [PLAN-LEAP-UNIFY-CHECKLIST-RESUME.md](tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/PLAN-LEAP-UNIFY-CHECKLIST-RESUME.md).

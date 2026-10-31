@@ -1,0 +1,71 @@
+{
+  "built_at": "2026-10-31T16:07:33.752Z",
+  "content_hash": "1d86b07e6e5f8783eb7966c2b18a23f361ce2a6b2fb4b1092323ca47c38cdf74",
+  "edges": [
+    {
+      "from_node_id": "REQ-ALPHA",
+      "kind": "detail_file",
+      "to_node_id": "tied-project/requirements/REQ-ALPHA.yaml"
+    },
+    {
+      "from_node_id": "REQ-ALPHA",
+      "kind": "references",
+      "to_node_id": "REQ-BETA"
+    },
+    {
+      "from_node_id": "REQ-BETA",
+      "kind": "detail_file",
+      "to_node_id": "tied-project/requirements/REQ-BETA.yaml"
+    },
+    {
+      "from_node_id": "REQ-DELTA",
+      "kind": "detail_file",
+      "to_node_id": "tied-project/requirements/REQ-DELTA-MISSING.yaml"
+    },
+    {
+      "from_node_id": "REQ-GAMMA",
+      "kind": "detail_file",
+      "to_node_id": "tied-project/requirements/REQ-GAMMA.yaml"
+    },
+    {
+      "from_node_id": "REQ-GAMMA",
+      "kind": "references",
+      "to_node_id": "ARCH-MISSING"
+    }
+  ],
+  "files": [
+    "tied-project/requirements.yaml",
+    "tied-project/requirements/REQ-ALPHA.yaml",
+    "tied-project/requirements/REQ-BETA.yaml",
+    "tied-project/requirements/REQ-GAMMA.yaml"
+  ],
+  "nodes": [
+    {
+      "detail_path": "tied-project/requirements/REQ-ALPHA.yaml",
+      "index_file": "tied-project/requirements.yaml",
+      "kind": "req",
+      "node_id": "REQ-ALPHA"
+    },
+    {
+      "detail_path": "tied-project/requirements/REQ-BETA.yaml",
+      "index_file": "tied-project/requirements.yaml",
+      "kind": "req",
+      "node_id": "REQ-BETA"
+    },
+    {
+      "detail_path": "tied-project/requirements/REQ-DELTA-MISSING.yaml",
+      "index_file": "tied-project/requirements.yaml",
+      "kind": "req",
+      "node_id": "REQ-DELTA"
+    },
+    {
+      "detail_path": "tied-project/requirements/REQ-GAMMA.yaml",
+      "index_file": "tied-project/requirements.yaml",
+      "kind": "req",
+      "node_id": "REQ-GAMMA"
+    }
+  ],
+  "repo_root": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/test/fixtures/corpus-graph/mini-repo",
+  "schema_version": "corpus-graph-index.v1",
+  "tied_project_rel": "tied-project"
+}

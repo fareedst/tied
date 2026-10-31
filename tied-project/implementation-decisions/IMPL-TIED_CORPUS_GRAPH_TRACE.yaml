@@ -1,0 +1,8 @@
+IMPL-TIED_CORPUS_GRAPH_TRACE:
+  implementation_approach: "Resolve token node; follow detail_file and references edges; optional pseudocode sidecar mentions."
+  proof_boundaries:
+    - "Does not prove REQ satisfaction or test passage"
+  related_architecture:
+    - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+  related_requirements:
+    - "REQ-TIED_CORPUS_COMPREHENSION"

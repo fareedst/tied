@@ -2453,6 +2453,47 @@ REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   name: "Context-adaptive practice layer (CASE v1)"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CORPUS_COMPREHENSION:
+  category: "Functional"
+  description: "Evidence-only MCP tools index project TIED YAML under tied-project/ for REQ→detail→sidecar traceability."
+  detail_file: "requirements/REQ-TIED_CORPUS_COMPREHENSION.yaml"
+  name: "TIED YAML corpus graph comprehension"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "Composes with existing TS source graph without merging schemas."
+      - "Deterministic corpus_graph receipts for matrices and EDPC."
+    problems_solved:
+      - "Brownfield code-to-token maps omit YAML corpus edges."
+      - "Cannot trace REQ tokens to detail files via source graph alone."
+    why: "Close EDPC gap methodology:tied_yaml_corpus_not_in_source_graph from DOC-STDD brownfield publish manifest."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EDPC_COMPREHENSION"
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+    related_to:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "SC-CGC-ENROLL — REQ/ARCH/IMPL/PROC enrolled with DOC-STDD G3 trace."
+    - criterion: "SC-CGC-FRESHNESS — Advisory stale diagnostic when corpus files change."
+    - criterion: "SC-CGC-MAP — Map clusters tokens by index and detail paths."
+    - criterion: "SC-CGC-NO-MUTATION — No tied-project/*.yaml writes from corpus MCP path."
+    - criterion: "SC-CGC-REFRESH — Deterministic corpus index with content hash and proof_boundary."
+    - criterion: "SC-CGC-TESTS — Fixture mini-repo unit tests and MCP composition."
+    - criterion: "SC-CGC-TRACE — Trace returns detail path and static reference edges."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+    implementation:
+      - "IMPL-TIED_CORPUS_GRAPH_MAP"
+      - "IMPL-TIED_CORPUS_GRAPH_REFRESH"
+      - "IMPL-TIED_CORPUS_GRAPH_TRACE"
+    process:
+      - "PROC-TIED_CORPUS_GRAPH_COMPREHENSION"
+    tests:
+      - "mcp-server/src/corpus-graph/*.test.ts"
 REQ-TIED_DAE_INCORPORATION:
   category: "Methodology"
   cross_references:
@@ -2857,18 +2898,18 @@ REQ-TIED_INTENT_CONTROL_PLANE:
       - "REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
       - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
   satisfaction_criteria:
-    - criterion: "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING delivered with tests (Wave 6)"
-      criterion_id: "wave6-marker-routing"
-    - criterion: "REQ-TIED_ISOLATED_VERIFICATION_RUNNER delivered with tests (Wave 5)"
-      criterion_id: "wave5-child"
     - criterion: "REQ-TIED_DURABLE_CHECKLIST_CONTROLLER delivered with tests (Wave 4)"
       criterion_id: "wave4-child"
+    - criterion: "REQ-TIED_ISOLATED_VERIFICATION_RUNNER delivered with tests (Wave 5)"
+      criterion_id: "wave5-child"
+    - criterion: "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING delivered with tests (Wave 6)"
+      criterion_id: "wave6-marker-routing"
+    - criterion: "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING delivered with tests (Wave 1)"
+      criterion_id: "wave1-child"
     - criterion: "REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE delivered with tests (Wave 3)"
       criterion_id: "wave3-child"
     - criterion: "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH delivered with tests (Wave 2)"
       criterion_id: "wave2-child"
-    - criterion: "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING delivered with tests (Wave 1)"
-      criterion_id: "wave1-child"
     - criterion: "Umbrella REQ/ARCH/IMPL exist and validate"
       criterion_id: "umbrella-tokens"
   status: "Implemented"

@@ -1,0 +1,110 @@
+CITDP-REQ-TIED_CORPUS_COMPREHENSION:
+  change_definition:
+    current_behavior: "Phase 2 source graph ([REQ-TIED_SOURCE_GRAPH_COMPREHENSION]) indexes TS/JS symbols only. EDPC brownfield engagement DOC-STDD recorded gap methodology:tied_yaml_corpus_not_in_source_graph — comprehension cannot trace REQ→detail→IMPL sidecar via graph MCP alone."
+    desired_behavior: "Slice 1 enrolls [REQ-TIED_CORPUS_COMPREHENSION], [ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL], modular [IMPL-TIED_CORPUS_GRAPH_*], and [PROC-TIED_CORPUS_GRAPH_COMPREHENSION]; implements native corpus graph refresh, map, token trace, and freshness under mcp-server — report-only evidence, no project TIED YAML mutation, no checklist gate authority."
+    non_goals:
+      - "Auto-updating REQ status or EDPC claims from graph output"
+      - "Full Markdown semantic parse of pseudo-code (regex token refs only in slice 1)"
+      - "Indexing methodology read-only tied-bundle/ as canonical client intent"
+      - "Replacing tied_scoped_analysis_run or source graph for code modules"
+    success_criteria:
+      - "SC-CGC-ENROLL — REQ/ARCH/IMPL/PROC enrolled with cross-links to [REQ-TIED_SOURCE_GRAPH_COMPREHENSION] and DOC-STDD gap G3"
+      - "SC-CGC-FRESHNESS — Advisory stale diagnostic when tied-project corpus files change after index build"
+      - "SC-CGC-MAP — Map view clusters tokens by index file and detail directory"
+      - "SC-CGC-NO-MUTATION — Corpus MCP path does not write tied-project/*.yaml"
+      - "SC-CGC-REFRESH — Deterministic corpus index with content hash and proof_boundary"
+      - "SC-CGC-TESTS — Unit tests on fixture mini-repo; MCP composition registration"
+      - "SC-CGC-TRACE — Trace from token id returns detail path and static reference edges within depth"
+    unchanged_behavior:
+      - "[REQ-TIED_EDPC_COMPREHENSION] publish gap semantics (gaps remain until closed by evidence)"
+      - "[REQ-TIED_SOURCE_GRAPH_COMPREHENSION] TS/JS graph tools and receipts"
+      - "Methodology read-only tied-bundle/ boundary"
+  completion_criteria:
+    activation:
+      phase: "verification"
+      request_token: "REQ-TIED_CORPUS_COMPREHENSION"
+      run_id: null
+      scope: []
+    envelope_path: "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
+    tied_validate_consistency: "required"
+    verification_gate_notes: "npm test --prefix mcp-server corpus-graph; tied_validate_consistency; pre_implementation + verification checklist gates"
+  evidence:
+    command_seq:
+      - "npm run lint:ts --prefix mcp-server"
+      - "npm test --prefix mcp-server -- corpus-graph"
+    manifest_reference: "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+    proof_boundaries:
+      - "read-only-tied-yaml"
+      - "regenerable-local-index"
+      - "static-file-scan-only"
+  impact_analysis:
+    modules_or_boundaries: "New mcp-server/src/corpus-graph/*; tools/index.ts registration; optional tied-project/vocab corpus-graph terms; regenerable index under tied-bundle/reports/corpus-graph/"
+    tied_tokens_affected:
+      - "PROC-TIED_SOURCE_GRAPH_COMPREHENSION"
+      - "REQ-TIED_EDPC_COMPREHENSION"
+      - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+    tied_tokens_new:
+      - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+      - "IMPL-TIED_CORPUS_GRAPH_MAP"
+      - "IMPL-TIED_CORPUS_GRAPH_REFRESH"
+      - "IMPL-TIED_CORPUS_GRAPH_TRACE"
+      - "PROC-TIED_CORPUS_GRAPH_COMPREHENSION"
+      - "REQ-TIED_CORPUS_COMPREHENSION"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "draft"
+    sponsor_costly_choices:
+      C1:
+        choice: "separate_corpus_graph_module_and_schema"
+        confirmed_at: "2026-10-31"
+        note: "Do not merge YAML corpus nodes into source-graph-index.v1."
+      C3:
+        choice: "one_umbrella_req_modular_impl"
+        confirmed_at: "2026-10-31"
+        inherited_from: "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+      CC1:
+        choice: "new_umbrella_req_not_extend_source_graph"
+        confirmed_at: "2026-10-31"
+        inherited_from: "DOC-STDD-TIED-PROJECT-BROWNFIELD gap G3"
+        note: "Mint REQ-TIED_CORPUS_COMPREHENSION per gap-planning-handoff."
+    tied_stack_updates_required: []
+  parent_program:
+    linked_plan: "DOC-STDD-TIED-PROJECT-BROWNFIELD gap G3"
+    origin_evidence:
+      - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/edpc-publish-manifest.v1.json"
+      - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/gap-planning-handoff.md"
+  record_identity:
+    change_request_id: "REQ-TIED_CORPUS_COMPREHENSION"
+    record_status: "draft"
+    recorded_at: "2026-10-31"
+    title: "TIED YAML corpus graph comprehension (Phase 2 extension slice 1)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Corpus graph presented as proof that REQ is Implemented without tied_verify receipt"
+        - "Merged methodology+project view indexed as if it were writable project state"
+        - "Refresh mutates requirements.yaml to fix broken cross-refs silently"
+        - "Regex sidecar scan misses tokens not in bracket form but claims complete trace"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "DOC code-to-token-map can cite corpus_graph receipt for YAML module row"
+        - "No-mutation test fails if yaml_index_update invoked from corpus graph path"
+        - "Receipt proof_boundary field present on every MCP response"
+      evidence_references:
+        - "tied-project/citdp/CITDP-REQ-TIED_SOURCE_GRAPH_COMPREHENSION.yaml"
+        - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/reports/code-to-token-map.md"
+      falsification_questions:
+        - "Does corpus refresh write any file under tied-project/?"
+        - "Does trace output advance checklist gates without tied_checklist_gate_validate?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      rationale: "Local filesystem static scan; regenerable cache; no auth/network; mirror source graph slice 1 posture"
+      research_profile: "read-only-research"
+      sub_adversarial_inquiry_pass: "not_applicable"
+  tdd_sequence:
+    - "Enroll TIED tokens + IMPL pseudo-code sidecars"
+    - "RED unit tests on corpus-graph fixture mini-repo"
+    - "GREEN index-builder, map, trace, freshness"
+    - "Composition MCP registration"
+    - "Verification gate + tied_validate_consistency"

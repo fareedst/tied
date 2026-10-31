@@ -1,0 +1,12 @@
+feat(mcp): corpus graph MCP for TIED YAML traceability (G3)
+
+Add tied_corpus_graph_* tools and corpus-graph module so brownfield
+comprehension can link REQ→detail→sidecar without mutating project YAML.
+Enrolls REQ-TIED_CORPUS_COMPREHENSION with ARCH/IMPL/PROC slices; G6
+regression tests for identity config + gate path.
+
+Tokens: REQ-TIED_CORPUS_COMPREHENSION, ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL,
+IMPL-TIED_CORPUS_GRAPH_{REFRESH,MAP,TRACE}, PROC-TIED_CORPUS_GRAPH_COMPREHENSION
+
+Close-out: run_id cgc-closeout-2026-10-31, envelope blocking_gap_count 0.
+Feedback capture: N/A (internal store program).

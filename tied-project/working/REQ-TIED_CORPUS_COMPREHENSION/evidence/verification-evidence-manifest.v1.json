@@ -1,0 +1,54 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npm test --prefix mcp-server -- corpus-graph"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 31973,
+      "exit_code": 1,
+      "id": "citdp-evidence-1",
+      "result": "failed"
+    }
+  ],
+  "commit": "944f066606cf64b2ce5034de8b2c02bdb087495e",
+  "covered_tokens": [
+    "PROC-TIED_SOURCE_GRAPH_COMPREHENSION",
+    "REQ-TIED_EDPC_COMPREHENSION",
+    "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "read-only-tied-yaml",
+    "regenerable-local-index",
+    "static-file-scan-only"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "cgc-closeout-2026-10-31",
+  "schema_version": "verification-evidence-manifest.v1"
+}

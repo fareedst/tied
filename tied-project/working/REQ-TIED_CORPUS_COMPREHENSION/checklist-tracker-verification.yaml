@@ -1,0 +1,78 @@
+brownfield_intent_elevation:
+  mode: "report_only"
+depth_tier: "minimal"
+execution_evidence:
+  completed:
+    - "author-architecture"
+    - "author-requirement"
+    - "composition-integration"
+    - "persist-implementation-records"
+    - "persist-citdp-record"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_CORPUS_COMPREHENSION"
+gate_policy: "advisory"
+name: "cgc-build-plan-verification-gate"
+request_token: "REQ-TIED_CORPUS_COMPREHENSION"
+schema_version: "checklist-tracker.v1"
+state_history: []
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/build-plan-session-evidence.md"
+    kind: "main"
+    slug: "session-bootstrap"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_CORPUS_COMPREHENSION.yaml"
+    kind: "main"
+    slug: "author-requirement"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/architecture-decisions/ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL.yaml"
+    kind: "main"
+    slug: "author-architecture"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_CORPUS_GRAPH_REFRESH-pseudocode.md"
+    kind: "main"
+    slug: "persist-implementation-records"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts"
+    kind: "main"
+    slug: "composition-integration"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+    kind: "main"
+    slug: "unit-test-red"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+    kind: "main"
+    slug: "unit-test-green"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_CORPUS_COMPREHENSION.yaml"
+    kind: "main"
+    slug: "persist-citdp-record"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/CITDP-REQ-TIED_CORPUS_COMPREHENSION.yaml"
+    kind: "main"
+    slug: "risk-assessment"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/verification-evidence-manifest.v1.json"
+    kind: "main"
+    slug: "verification-gate"
+  - disposition: "not_applicable"
+    kind: "sub_procedure"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Local read-only corpus indexing; counterexamples in CITDP; no integrated activation in slice 1."
+    slug: "sub-adversarial-inquiry-pass"

@@ -102,6 +102,12 @@ import { buildEdpcPublishManifest } from "../edpc/publish-build.js";
 import { routeEdpcWorkflow } from "../edpc/workflow-route.js";
 import { EVIDENCE_ACCESS_TIERS } from "../edpc/types.js";
 import {
+  tiedCorpusGraphFreshness,
+  tiedCorpusGraphMap,
+  tiedCorpusGraphRefresh,
+  tiedCorpusGraphTrace,
+} from "../corpus-graph/mcp-handlers.js";
+import {
   tiedSourceGraphFreshness,
   tiedSourceGraphMap,
   tiedSourceGraphRefresh,
@@ -3494,6 +3500,86 @@ export const allTools = [
     },
     handler: async (args: { repo_root: string; index_rel_path?: string }) => {
       return textContent(prettyCanonicalJson(await tiedSourceGraphFreshness(args)));
+    },
+  },
+  {
+    name: "tied_corpus_graph_refresh",
+    config: {
+      description:
+        "Build or refresh a local corpus-graph index (static tied-project YAML/Markdown scan) and return a receipt with map summary. Does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        index_rel_path: z.string().optional(),
+        tied_project_rel: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      index_rel_path?: string;
+      tied_project_rel?: string;
+    }) => {
+      return textContent(prettyCanonicalJson(await tiedCorpusGraphRefresh(args)));
+    },
+  },
+  {
+    name: "tied_corpus_graph_map",
+    config: {
+      description:
+        "Return index-file clusters from the corpus-graph index (refresh implied). Evidence-only; does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        index_rel_path: z.string().optional(),
+        tied_project_rel: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      index_rel_path?: string;
+      tied_project_rel?: string;
+    }) => {
+      return textContent(prettyCanonicalJson(await tiedCorpusGraphMap(args)));
+    },
+  },
+  {
+    name: "tied_corpus_graph_trace",
+    config: {
+      description:
+        "Trace static token reference edges for a TIED token node within the corpus-graph index. Evidence-only; does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        node_id: z.string(),
+        depth: z.number().int().min(1).max(4).optional(),
+        index_rel_path: z.string().optional(),
+        tied_project_rel: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      node_id: string;
+      depth?: number;
+      index_rel_path?: string;
+      tied_project_rel?: string;
+    }) => {
+      return textContent(prettyCanonicalJson(await tiedCorpusGraphTrace(args)));
+    },
+  },
+  {
+    name: "tied_corpus_graph_freshness",
+    config: {
+      description:
+        "Compare live tied-project corpus hash to the corpus-graph index (advisory stale diagnostics). Does not mutate project TIED YAML.",
+      inputSchema: z.object({
+        repo_root: z.string(),
+        index_rel_path: z.string().optional(),
+        tied_project_rel: z.string().optional(),
+      }),
+    },
+    handler: async (args: {
+      repo_root: string;
+      index_rel_path?: string;
+      tied_project_rel?: string;
+    }) => {
+      return textContent(prettyCanonicalJson(await tiedCorpusGraphFreshness(args)));
     },
   },
   {

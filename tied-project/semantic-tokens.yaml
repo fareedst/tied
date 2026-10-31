@@ -3356,6 +3356,17 @@ PROC-TEST_STRATEGY:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+PROC-TIED_CORPUS_GRAPH_COMPREHENSION:
+  cross_references:
+    - "PROC-EDPC_COMPREHENSION"
+    - "PROC-TIED_SOURCE_GRAPH_COMPREHENSION"
+    - "REQ-TIED_CORPUS_COMPREHENSION"
+  description: "When to run corpus graph MCP tools and link receipts to brownfield/EDPC corpus_graph rows."
+  detail_file: "null"
+  name: "Corpus Graph Comprehension Process"
+  source_index: "processes.md"
+  status: "Active"
+  type: "PROC"
 PROC-TIED_DEV_CYCLE:
   cross_references:
     - "PROC-AGENT_REQ_CHECKLIST"

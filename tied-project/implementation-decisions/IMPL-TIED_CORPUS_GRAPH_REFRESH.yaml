@@ -1,0 +1,9 @@
+IMPL-TIED_CORPUS_GRAPH_REFRESH:
+  implementation_approach: "Walk tied-project index YAML files; resolve detail_file paths; scan detail YAML and pseudocode sidecars for static token references; SHA-256 content hash; JSON index under tied-bundle/reports/corpus-graph/."
+  proof_boundaries:
+    - "No tied-project YAML writes"
+    - "Static file scan only; no semantic YAML validation authority"
+  related_architecture:
+    - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+  related_requirements:
+    - "REQ-TIED_CORPUS_COMPREHENSION"

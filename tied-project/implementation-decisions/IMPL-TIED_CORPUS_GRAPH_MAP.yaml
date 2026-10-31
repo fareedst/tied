@@ -1,0 +1,8 @@
+IMPL-TIED_CORPUS_GRAPH_MAP:
+  implementation_approach: "Aggregate corpus index nodes by index file and detail directory; return map receipt view."
+  proof_boundaries:
+    - "Read-only index consumption"
+  related_architecture:
+    - "ARCH-TIED_CORPUS_GRAPH_EVIDENCE_MODEL"
+  related_requirements:
+    - "REQ-TIED_CORPUS_COMPREHENSION"

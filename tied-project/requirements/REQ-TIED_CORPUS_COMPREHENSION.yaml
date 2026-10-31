@@ -1,0 +1,10 @@
+REQ-TIED_CORPUS_COMPREHENSION:
+  acceptance_criteria:
+    - "All SC-CGC-* criteria met with tests green"
+  description: "Phase 2 extension slice 1 — corpus graph MCP (YAML/Markdown static scan under tied-project/)."
+  rationale:
+    benefits:
+      - "Linkable corpus_graph rows in brownfield and EDPC artifacts"
+    problems_solved:
+      - "YAML corpus invisible to tied_source_graph_*"
+    why: "Extend structural comprehension to TIED project corpus without substituting tied_verify or checklist authority."
