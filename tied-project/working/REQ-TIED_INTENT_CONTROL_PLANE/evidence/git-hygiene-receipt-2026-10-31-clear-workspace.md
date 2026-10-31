@@ -17,18 +17,17 @@
 | REQ-TIED_WORKFLOW_VISUALIZATION_SKILL working edits | **`git restore`** (post-close-out handoff drift; canonical at `e01f5f4a`) |
 | REQ-TIED_DURABLE_CHECKLIST_CONTROLLER `close-out-handoff.md` local tweak | **`git restore`** (post-session doc holds clear-workspace pointer) |
 
-## Left intentionally dirty / untracked
+## Allowed local untracked (after **`64d6b12d`**)
 
 | Path | Reason |
 | --- | --- |
-| `project-identity.v1.yaml` (repo root) | Dogfood marker — **untracked** per ICP constraint; do not commit |
-| `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/close-out-mcp-test-isolation-2026-10-30.md` | **Committed** in **`64d6b12d`** |
-| `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/evidence-chain-profile.v1.json` | Regenerable — local untracked only |
-| `project-identity.v1.yaml` (repo root) | Local dogfood marker — untracked per ICP constraint |
+| `project-identity.v1.yaml` (repo root) | Dogfood Path 3 marker — keep local; **do not commit** |
+
+Regenerable `evidence-chain-profile.v1.json` removed locally during follow-up pass.
 
 ## Follow-up pass (2026-10-31)
 
-Close-out handoff links + **`origin/main`** sync; remaining untracked paths documented in [session-handoff.md](./session-handoff.md) § Workspace.
+Handoff synced with **`origin/main`**, **`64d6b12d`** pinned in traceable evidence, workspace table in [session-handoff.md](./session-handoff.md). **`tied_git_hygiene`** preview: tracked_dirty = ICP evidence docs only; untracked = identity marker only.
 
 ## MCP note
 
