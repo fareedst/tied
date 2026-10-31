@@ -61,7 +61,7 @@
 
 ## Reconcile (2026-10-31)
 
-**run_id:** `bc-add-feature-reconcile-20261031` · **traceable-commit:** **`efbd165e`** · Evidence: [add-feature-refine-handoff-20261031.md](./add-feature-refine-handoff-20261031.md) · [traceable-commit-evidence.md](./traceable-commit-evidence.md)
+**run_id:** `bc-add-feature-reconcile-20261031` · **traceable-commit:** **`1b9e5646`** · Evidence: [add-feature-refine-handoff-20261031.md](./add-feature-refine-handoff-20261031.md) · [traceable-commit-evidence.md](./traceable-commit-evidence.md)
 
 ## Verification (repeatable)
 

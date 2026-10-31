@@ -24,4 +24,4 @@
 | Manifest | [verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json) @ parent `ac08900f` |
 | `tied_verify` | [tied-verify-reconcile-20261031.json](./tied-verify-reconcile-20261031.json) |
 | Handoff | [add-feature-refine-handoff-20261031.md](./add-feature-refine-handoff-20261031.md) |
-| **Commit** | **`efbd165e`** |
+| **Commit** | **`1b9e5646`** |
