@@ -8,9 +8,10 @@ Human-readable catalogs for picking small programs and TIED-shaped build exercis
 | --- | --- |
 | [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) | Algorithmic resilience (ENV/DATA/CON/STATE/ALG/ADV); may be built without full TIED stack |
 | [TIED compact demo tool catalog](catalog-tied-compact-tools.md) | TIED traceability, TDD, composition, **Kaizen loop**, **methodology learning experiment**, explicit **proof boundaries** |
-| [Greenfield plan-new-feature prompt catalog](catalog-greenfield-plan-new-feature-prompts.md) | Plain-language `@plan-new-feature` trial prompts for `test-new-tied-client` clients (facilitator grading maps to `TIED-DEMO-*`) |
+| [Greenfield plan-new-feature prompt catalog](catalog-greenfield-plan-new-feature-prompts.md) | Plain-language `@add-feature` trial prompts for `test-new-tied-client` clients (facilitator grading maps to `TIED-DEMO-*`) |
+| [Traditional four-phase workflow trial catalog](catalog-traditional-workflow-trial-prompts.md) | Compact **PROMPT-WF-*** remainders for `add-feature` → `refine-plan` → `build-plan` → `close-out`; LLM comparison (Composer 2.5, Luna low/med/high) |
 
-## Trial readouts (facilitator)
+## Trial readouts (facilitator — greenfield)
 
 Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ tokens.
 
@@ -31,6 +32,16 @@ Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ token
 | [PROMPT-GF-17 @ 1792967943-gf-17](trial-readout-PROMPT-GF-17-1792967943-gf-17.md) | [PROMPT-GF-17](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-17) | `/Users/fareed/Documents/dev/test/1792967943-gf-17` |
 | [PROMPT-GF-06 @ 1792969070-gf-06](trial-readout-PROMPT-GF-06-1792969070-gf-06.md) | [PROMPT-GF-06](catalog-greenfield-plan-new-feature-prompts.md#prompt-gf-06) | `/Users/fareed/Documents/dev/test/1792969070-gf-06` |
 
+## Trial readouts (facilitator — four-phase workflow)
+
+Documented disposable-client runs graded with **workflow choreography**. Not REQ tokens.
+
+| Readout | Prompt | Model config | Client |
+| --- | --- | --- | --- |
+| *(none yet)* | | | |
+
+Maintained by **`@record-wf-trial`**. Catalog: [traditional workflow trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator).
+
 ## Disposition legend (TIED catalog)
 
 | Tag | Meaning |
@@ -40,9 +51,14 @@ Documented disposable-client runs (`/xlate` + grading vs catalog). Not REQ token
 | `runbook` | Link to existing runnable documentation |
 | `meta-tool` | Exercises TIED MCP, gates, or bootstrap |
 
-## Facilitator skill (store only)
+## Facilitator skills (store only)
 
-After a greenfield client build, open the **TIED store** repo and invoke **`@record-gf-trial`** with the client directory or id. Install stub: `./tied-install.sh --allow-self-install --layers skills .` from the store root. Canonical procedure: [tools/bundled-record-gf-trial-skill/SKILL.md](../../tools/bundled-record-gf-trial-skill/SKILL.md).
+Install stubs: `./tied-install.sh --allow-self-install --layers skills .` from the store root.
+
+| Skill | When |
+| --- | --- |
+| [**`@record-gf-trial`**](catalog-greenfield-plan-new-feature-prompts.md) | After greenfield / single-session client build — [SKILL.md](../../tools/bundled-record-gf-trial-skill/SKILL.md) |
+| [**`@record-wf-trial`**](catalog-traditional-workflow-trial-prompts.md) | After four-phase workflow trial — [SKILL.md](../../tools/bundled-record-wf-trial-skill/SKILL.md) |
 
 ## Runnable entry points
 

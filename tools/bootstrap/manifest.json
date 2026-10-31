@@ -69,6 +69,10 @@
     {
       "skillName": "record-gf-trial",
       "storeDir": "tools/bundled-record-gf-trial-skill"
+    },
+    {
+      "skillName": "record-wf-trial",
+      "storeDir": "tools/bundled-record-wf-trial-skill"
     }
   ],
   "SOURCE_ONLY_VOCAB_BASENAMES": [

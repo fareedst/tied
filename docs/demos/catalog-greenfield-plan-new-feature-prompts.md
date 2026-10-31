@@ -250,6 +250,7 @@ Sponsor text for the custom row is **not** a numbered **PROMPT-GF-* block**; see
 ## Related references
 
 - [Demos index](README.md)
+- [Traditional four-phase workflow trial catalog](catalog-traditional-workflow-trial-prompts.md) — LLM comparison via separate `add-feature` → `refine-plan` → `build-plan` → `close-out` turns
 - [TIED compact demo tool catalog](catalog-tied-compact-tools.md)
 - [Agent resilience exercise catalog](catalog-compact-programming-exercises.md)
 - [New-client adherence runbook](../pseudocode-new-client-tied-adherence-runbook.md)
