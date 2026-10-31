@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **REQ-TIED_INTENT_CONTROL_PLANE program close-out** — Umbrella REQ detail and `requirements.yaml` index list Waves 1–6 satisfaction criteria; persisted CITDP under `tied-project/citdp/`; full MCP test suite green with store `identity.routing: marker_only` dogfood (`icp-closeout-20261030`).
+
 - **REQ-PROMPT_TYPE_GLOBAL_SKILLS satisfaction criteria order** — Project detail lists citdp-record/promote criterion immediately after bootstrap install criterion ([REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE]); close-out envelope refreshed (`ptgs-closeout-2026-10-30`).
 
 ### Fixed
