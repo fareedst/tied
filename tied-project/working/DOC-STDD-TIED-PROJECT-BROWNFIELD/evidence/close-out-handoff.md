@@ -12,7 +12,7 @@
 
 ## Commit
 
-See [traceable-commit-evidence.md](./traceable-commit-evidence.md). **SHA:** `259d81dc579a3b6eaba622de29cda1df4c57ed0f`
+See [traceable-commit-evidence.md](./traceable-commit-evidence.md). **SHA:** `944f0666579a3b6eaba622de29cda1df4c57ed0f`
 
 ## Gitignore close-out hygiene
 

@@ -3,26 +3,26 @@ queues:
     description: "Approved follow-up work, investigations, recommendations, and decisions."
     items:
       - id: "ACT-001"
-        text: "Optional rebuild MCP so tied-project/config.yaml identity.routing validates in gate tools."
         status: "open"
+        text: "Optional rebuild MCP so tied-project/config.yaml identity.routing validates in gate tools."
   evidence_gap:
     description: "Missing logs, tests, inaccessible systems, or unverifiable assumptions."
     items:
       - id: "EG-001"
+        status: "open"
         text: "No native TIED YAML corpus in source-graph/scoped-analysis (TS/JS only)."
-        status: "open"
       - id: "EG-002"
-        text: "Envelope gap batch covers 10-token sample only, not all 250 working folders."
         status: "open"
+        text: "Envelope gap batch covers 10-token sample only, not all 250 working folders."
   finding:
     description: "Confirmed problems, possible risks, inconsistencies, and positive characteristics."
     items:
       - id: "FND-001"
+        status: "confirmed"
         text: "96 CITDP basenames duplicated between working/ drafts and tied-project/citdp/."
-        status: "confirmed"
       - id: "FND-002"
-        text: "REQ→ARCH→IMPL indexes remain authoritative over EDPC SCM for obligation status."
         status: "confirmed"
+        text: "REQ→ARCH→IMPL indexes remain authoritative over EDPC SCM for obligation status."
   hypothesis:
     description: "Alternative explanations for noteworthy behavior or anomalies."
     items: []
@@ -30,8 +30,8 @@ queues:
     description: "Client questions plus questions EDPC discovers during investigation."
     items:
       - id: "Q-001"
-        text: "Should divergent working CITDP drafts be merged into citdp/ in a future TIED close-out?"
         status: "open"
+        text: "Should divergent working CITDP drafts be merged into citdp/ in a future TIED close-out?"
 request_token: "DOC-STDD-TIED-PROJECT-BROWNFIELD"
 revision: "cf321c96"
 schema_version: "edpc-queues.v1"

@@ -1,44 +1,44 @@
+brownfield_intent_elevation:
+  engagement: "edpc_full"
+  mode: "report_only"
 change_class: "edpc_comprehension_hygiene_doc"
+edpc_engagement:
+  charter_path: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/engagement-charter.v1.yaml"
+  evidence_access_tier: "toolchain_readonly"
+  production_touch: "none"
+  target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
 gate_policy: "doc_comprehension_hygiene"
 no_req_mint: true
 profile_depth: "minimal"
 request_token: "DOC-STDD-TIED-PROJECT-BROWNFIELD"
-brownfield_intent_elevation:
-  mode: report_only
-  engagement: edpc_full
-edpc_engagement:
-  evidence_access_tier: toolchain_readonly
-  target_repository_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
-  production_touch: none
-  charter_path: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/engagement-charter.v1.yaml"
 steps:
-  session-bootstrap:
-    notes: "PRELOAD edpc-comprehension, quality-assurance, tied-methodology, tied-yaml-mcp; tied_config_get_base_path verified."
-    status: done
-  translate-sponsor-intent:
-    notes: "Full-repo EDPC on stdd with tied-project meta hub; hygiene without REQ mint."
-    status: done
   change-definition:
     notes: "PLAN-refine-pass1.md; non-tied boundary honored."
-    status: done
+    status: "done"
   impact-discovery:
     notes: "Corpus metrics + CITDP overlap counts in refine pass."
-    status: done
-  risk-assessment:
-    notes: "evidence/risk-assessment-refine-pass1.md"
-    status: done
-  test-strategy:
-    notes: "test-strategy.md"
-    status: done
-  pre_implementation:
-    notes: "See evidence/refine-pass1-gate-note.md — tied_checklist_gate_validate outcome."
-    status: blocked
+    status: "done"
   implement-comprehension-hygiene:
     notes: "EDPC A–F + hygiene + docs/stdd-workflows.md — see evidence/build-plan-handoff.md."
-    status: done
+    status: "done"
+  pre_implementation:
+    notes: "See evidence/refine-pass1-gate-note.md — tied_checklist_gate_validate outcome."
+    status: "blocked"
+  risk-assessment:
+    notes: "evidence/risk-assessment-refine-pass1.md"
+    status: "done"
+  session-bootstrap:
+    notes: "PRELOAD edpc-comprehension, quality-assurance, tied-methodology, tied-yaml-mcp; tied_config_get_base_path verified."
+    status: "done"
+  test-strategy:
+    notes: "test-strategy.md"
+    status: "done"
+  traceable-commit:
+    notes: "944f0666 — docs(store): brownfield tied-project corpus map and CITDP dedupe"
+    status: "done"
+  translate-sponsor-intent:
+    notes: "Full-repo EDPC on stdd with tied-project meta hub; hygiene without REQ mint."
+    status: "done"
   verification-gate-doc:
     notes: "Minimal DOC — machine close_out deferred; validators run per build-plan-handoff."
-    status: done
-  traceable-commit:
-    notes: "259d81dc — docs(store): brownfield tied-project corpus map and CITDP dedupe"
-    status: done
+    status: "done"

@@ -1,8 +1,8 @@
 # Session handoff — DOC-STDD-TIED-PROJECT-BROWNFIELD
 
-**Recorded:** 2026-10-31  
-**Baseline:** `cf321c96`  
-**Workflow:** build-plan (non-tied index boundary)
+**Recorded:** 2026-10-31 (updated gap-planning handoff)  
+**Baseline:** `cf321c96` · **Close-out:** `944f0666`  
+**Workflow:** build-plan + close-out (non-tied index boundary)
 
 ## Done
 
@@ -16,12 +16,11 @@
 | Envelope gap refresh (10-token sample) | [working/evaluation/envelope-gap-report.v1.yaml](../evaluation/envelope-gap-report.v1.yaml) |
 | CITDP dedupe | **64** net identical drafts removed (**65** deleted, **1** restored for GF05 e2e); **35** divergent kept |
 
-## Publish gaps (methodology backlog)
+## Publish gaps → plans
 
-- TIED YAML corpus not in source-graph / scoped-analysis
-- Meta-hub EDPC template not productized
-- Checklist gate tools vs `config.yaml` `identity` namespace mismatch
-- Full-corpus envelope coverage (250 working folders)
+**Handoff for `@refine-plan` / `@add-feature`:** [gap-planning-handoff.md](./gap-planning-handoff.md) (maps each [edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json) `gaps[]` entry to plan token, prompt type, and sprint order).
+
+Quick list: G6 gate/config → G1 publish minimum_fields → G5 full envelope corpus → G4 meta-hub EDPC template → G7 verify boundary docs → G3 YAML corpus graph; G2 OFSM N/A unless Workflow D chartered.
 
 ## Refresh triggers (workflow G)
 
@@ -35,12 +34,11 @@
 
 ## Close-out status
 
-**Machine close-out:** deferred (DOC token, minimal depth, no CITDP persist)  
-**Verification:** scoped MCP tests — see [build-plan-handoff.md](./build-plan-handoff.md)  
-**Traceable commit:** sponsor-requested; stage DOC tree, `docs/stdd-workflows.md`, dedupe deletions, evaluation YAML — exclude root identity marker
+**Machine close-out:** N/A (minimal DOC)  
+**Traceable commit:** **`944f0666`** — see [close-out-handoff.md](./close-out-handoff.md)
 
-## Optional next
+## Do next
 
-- Re-run envelope batch with corrected `tied_base_path` for REQ-LEAP_PROPOSAL_QUEUE / layered install rows
-- `@close-out` if promoting to traceable commit
-- `add-feature` for TIED-corpus comprehension tooling from publish gaps
+1. Pick a gap track from [gap-planning-handoff.md](./gap-planning-handoff.md) and run the listed prompt type.
+2. Optional: link [docs/stdd-workflows.md](../../../docs/stdd-workflows.md) from README brownfield section.
+3. Regenerable local: `evidence/source-graph-index.v1.json` (not in commit) via `tied_source_graph_refresh`.

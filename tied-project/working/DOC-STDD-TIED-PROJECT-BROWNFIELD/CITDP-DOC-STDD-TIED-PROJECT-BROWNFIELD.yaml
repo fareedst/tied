@@ -3,16 +3,16 @@ CITDP-DOC-STDD-TIED-PROJECT-BROWNFIELD:
     current_behavior: "The TIED store has rich tied-project indexes and ~250 working folders but no full-repo EDPC SCM linking code, tools, and corpus; ~96 CITDP basenames exist in both working drafts and tied-project/citdp/ with 65 identical duplicates; sponsors lack a single corpus navigation map for stdd itself."
     desired_behavior: "DOC engagement produces EDPC artifacts (charter, SCM shell, claims ledger, publish manifest with gaps), corpus map, optional docs/stdd-workflows.md, dedupe log with 65 identical working CITDP removals, refreshed envelope-gap sample — without mutating REQ/ARCH/IMPL indexes."
     non_goals:
-      - "Mint REQ/ARCH/IMPL tokens or edit index/detail YAML"
-      - "Persist CITDP to tied-project/citdp/ in this pass"
       - "BFIE approved promotion or vocab RECORD"
       - "EDPC workflow D production ops"
+      - "Mint REQ/ARCH/IMPL tokens or edit index/detail YAML"
+      - "Persist CITDP to tied-project/citdp/ in this pass"
     success_criteria:
-      - "evidence/edpc/ charter validates at toolchain_readonly"
-      - "claims-ledger and code-to-token map exist under DOC working evidence"
       - "citdp-dedupe-log documents all deletions; divergent drafts retained"
-      - "tied_validate_consistency receipt captured read-only"
+      - "claims-ledger and code-to-token map exist under DOC working evidence"
+      - "evidence/edpc/ charter validates at toolchain_readonly"
       - "No staged repo-root project-identity.v1.yaml"
+      - "tied_validate_consistency receipt captured read-only"
     unchanged_behavior:
       - "Authoritative REQ→ARCH→IMPL indexes and tied_verify semantics"
       - "Prior REQ-TIED_EDPC_COMPREHENSION bounded edpc module dogfood artifacts"
@@ -22,38 +22,38 @@ CITDP-DOC-STDD-TIED-PROJECT-BROWNFIELD:
     verification: "tied_validate_consistency read-only; no tied_verify update"
   impact_analysis:
     depends_on:
-      - "REQ-TIED_EDPC_COMPREHENSION"
       - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
-      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+      - "REQ-TIED_EDPC_COMPREHENSION"
       - "REQ-TIED_SOURCE_GRAPH_COMPREHENSION"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
     files:
-      - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/**"
-      - "tied-project/working/**/CITDP-*.yaml"
-      - "tied-project/working/evaluation/envelope-gap-report.v1.yaml"
       - "docs/stdd-workflows.md"
+      - "tied-project/working/**/CITDP-*.yaml"
+      - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/**"
+      - "tied-project/working/evaluation/envelope-gap-report.v1.yaml"
     modules:
+      - "brownfield_intent_evidence"
       - "edpc_orchestration_mcp"
       - "source_graph"
-      - "brownfield_intent_evidence"
     tags:
-      - "store-dogfood"
       - "meta-hub-comprehension"
+      - "store-dogfood"
   risk_analysis:
     adversarial_inquiry:
-      depth_tier: minimal
-      gate_policy: doc_comprehension_hygiene
       counterexamples:
         - "Comprehension prose replaces REQ authority"
         - "Dedupe removes divergent CITDP drafts"
-      falsification_questions:
-        - "Does any step mutate requirements.yaml?"
-        - "Are Implemented statuses inferred without tied_verify?"
+      depth_tier: "minimal"
       disconfirming_observations:
-        - "non-tied-boundary forbids index writes"
         - "dedupe uses SHA-256 identity only"
+        - "non-tied-boundary forbids index writes"
       evidence_references:
         - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/PLAN-refine-pass1.md"
         - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/test-strategy.md"
+      falsification_questions:
+        - "Are Implemented statuses inferred without tied_verify?"
+        - "Does any step mutate requirements.yaml?"
+      gate_policy: "doc_comprehension_hygiene"
   test_determination_and_planning:
-    strategy_ref: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/test-strategy.md"
     red_before_code: false
+    strategy_ref: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/test-strategy.md"

@@ -20,4 +20,4 @@
 
 **Build-plan:** complete (2026-10-31) — see [evidence/session-handoff.md](./evidence/session-handoff.md).
 
-**Next step:** Optional `@close-out` / traceable commit; or follow publish gaps in [edpc-publish-manifest.v1.json](./evidence/edpc/edpc-publish-manifest.v1.json).
+**Next step:** [gap-planning-handoff.md](./evidence/gap-planning-handoff.md) — plan seeds per [edpc-publish-manifest.v1.json](./evidence/edpc/edpc-publish-manifest.v1.json) `gaps[]`.
