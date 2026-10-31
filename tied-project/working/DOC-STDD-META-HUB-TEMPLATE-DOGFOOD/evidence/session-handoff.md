@@ -21,6 +21,12 @@
 - `ad_hoc_charter_edits: false` in charter-copy-manifest — satisfies PLAN-EDPC-META-HUB-ENGAGEMENT promote criteria for second dogfood.
 - Optional next: `@citdp-promote` or narrow `@non-tied-plan` to run EDPC B–F on a **smaller** bounded slice.
 
+## Traceable commit
+
+**SHA:** `72c45cd2` — docs(dogfood): second meta-hub EDPC slice with template charter (G4)
+
+Evidence: [traceable-commit-evidence.md](./traceable-commit-evidence.md)
+
 ## Related
 
 - [PLAN-EDPC-META-HUB-ENGAGEMENT](../PLAN-EDPC-META-HUB-ENGAGEMENT/PLAN.md)
