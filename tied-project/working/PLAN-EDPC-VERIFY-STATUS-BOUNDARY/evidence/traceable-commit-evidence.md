@@ -2,7 +2,7 @@
 
 **Gap:** G7 `comprehension:req_implementation_status_requires_tied_verify`  
 **Prompt:** `@non-tied-plan` G7  
-**Commit:** _(record after commit)_
+**Commit:** `cb4c8b9f` — docs(edpc): clarify REQ status boundary and tied_verify sign-off (G7)
 
 ## Staged scope
 

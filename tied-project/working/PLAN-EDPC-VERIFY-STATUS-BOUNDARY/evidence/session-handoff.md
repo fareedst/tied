@@ -24,7 +24,7 @@
 ## Not done
 
 - EDPC publish manifest on disk may still list G7 among other manual backlog gaps until republish via `tied_edpc_publish_build`.
-- Traceable commit — sponsor request.
+- Traceable commit: `cb4c8b9f` — [traceable-commit-evidence.md](./traceable-commit-evidence.md)
 
 ---
 
