@@ -21,6 +21,16 @@ import {
   resetWriteBindingStateForTests,
 } from "./project-identity-write-binding.js";
 import { pickClientBundlePath, pickClientProjectPath } from "./tied-path-env.js";
+import {
+  IDENTITY_ROUTING_ENV_DUAL_READ,
+  loadProjectConfig,
+  readIdentityRoutingFromRecord,
+  type IdentityRoutingMode,
+} from "./tied-project-config.js";
+import {
+  type BasePathSource,
+  tryResolveMarkerOnlyBaseFromCwd,
+} from "./project-identity-marker-routing.js";
 
 export type IndexName =
   | "requirements"
@@ -41,6 +51,22 @@ export function getProjectIndexFilePath(index: IndexName): string {
 }
 
 let cachedBasePath: string | null = null;
+
+export type BasePathResolutionMetadata = {
+  routing_mode: IdentityRoutingMode;
+  base_path_source: BasePathSource;
+  env_project_path_ignored: boolean;
+};
+
+let lastBasePathResolution: BasePathResolutionMetadata = {
+  routing_mode: IDENTITY_ROUTING_ENV_DUAL_READ,
+  base_path_source: "discover",
+  env_project_path_ignored: false,
+};
+
+export function getBasePathResolutionMetadata(): BasePathResolutionMetadata {
+  return { ...lastBasePathResolution };
+}
 
 /**
  * Clear cached base path (for tests). [IMPL] Allows tests to re-resolve TIED_BASE_PATH.
@@ -87,14 +113,53 @@ function discoverDefaultBasePath(): string {
 export function getBasePath(): string {
   if (cachedBasePath !== null) return cachedBasePath;
   const envRaw = pickClientProjectPath(process.env);
+  const markerOnlyHit = tryResolveMarkerOnlyBaseFromCwd(process.cwd());
+  let envResolvedForMarkerGate: string | null = null;
+  if (envRaw) {
+    const envBeforeRemap = path.isAbsolute(envRaw)
+      ? envRaw
+      : path.resolve(process.cwd(), envRaw);
+    envResolvedForMarkerGate = remapLegacyTiedBasePathIfNeeded(envBeforeRemap);
+  }
+  // Path 3: legacy remap must not salvage a stale env into a valid corpus (e.g. TIED_BASE_PATH=tied/ → tied-project/).
+  const envPointsAtValidCorpus =
+    envRaw !== undefined &&
+    envRaw.trim() !== "" &&
+    envResolvedForMarkerGate !== null &&
+    fs.existsSync(requirementsIndexAt(envResolvedForMarkerGate)) &&
+    fs.existsSync(
+      requirementsIndexAt(
+        path.isAbsolute(envRaw) ? envRaw : path.resolve(process.cwd(), envRaw),
+      ),
+    );
+  if (markerOnlyHit && !envPointsAtValidCorpus) {
+    cachedBasePath = markerOnlyHit.writableRoot;
+    lastBasePathResolution = {
+      routing_mode: markerOnlyHit.routingMode,
+      base_path_source: markerOnlyHit.basePathSource,
+      env_project_path_ignored: envRaw !== undefined && envRaw.trim() !== "",
+    };
+    // [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING] [REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING] Path 3
+    assertBindingAtStartup(cachedBasePath, process.env);
+    return cachedBasePath;
+  }
   let resolved: string;
+  let basePathSource: BasePathSource;
   if (envRaw) {
     resolved = path.isAbsolute(envRaw) ? envRaw : path.resolve(process.cwd(), envRaw);
     resolved = remapLegacyTiedBasePathIfNeeded(resolved);
+    basePathSource = "env";
   } else {
     resolved = discoverDefaultBasePath();
+    basePathSource = "discover";
   }
   cachedBasePath = resolved;
+  const loadedConfig = loadProjectConfig(path.dirname(cachedBasePath));
+  lastBasePathResolution = {
+    routing_mode: readIdentityRoutingFromRecord(loadedConfig?.record),
+    base_path_source: basePathSource,
+    env_project_path_ignored: false,
+  };
   // [IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING] [REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING] Path 2 startup binding
   assertBindingAtStartup(cachedBasePath, process.env);
   return cachedBasePath;

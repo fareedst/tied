@@ -1,0 +1,23 @@
+ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+  ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+    decision: "When tied-project/config.yaml sets identity.routing to marker_only, getBasePath discovers project-identity.v1.yaml by walking up from cwd and uses writable_root; env project path applies only when it already points at a valid requirements.yaml corpus without legacy remap salvage."
+    metadata:
+      created: "2026-10-30"
+      status: "Accepted"
+    name: "Marker-only project path routing"
+    rationale:
+      benefits:
+        - "Dual-read remains for bootstrap and env_dual_read mode"
+        - "Wrong env is diagnostic not authoritative"
+      problems_solved:
+        - "Fail-closed mismatch when marker is correct but env stale"
+      why: "Completes REQ-CTRL-001 routing story after Path 2 binding; reduces dependence on IDE mcp.json path env."
+    related_decisions:
+      depends_on:
+        - "ARCH-TIED_PROJECT_IDENTITY"
+        - "ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING"
+    traceability:
+      implementation:
+        - "IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+      requirements:
+        - "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING"

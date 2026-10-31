@@ -4,7 +4,7 @@ Reference: [docs/anonymized-mcp-architecture-handoff.md](../../../docs/anonymize
 
 | Handoff | Status | TIED / code |
 | --- | --- | --- |
-| REQ-CTRL-001 project identity binding | **Wave 1 new** | REQ/ARCH/IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING |
+| REQ-CTRL-001 project identity binding | **Wave 1 + Wave 6** | Path 2: REQ/ARCH/IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING; Path 3 marker-only: [PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md](PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md) REQ/ARCH/IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING |
 | REQ-CTRL-002 atomic batch writes | **Wave 2** | REQ-TIED_YAML_UPDATES_ATOMIC_BATCH (+ FEAT revision-safe pattern) |
 | REQ-CTRL-003 consistency | Exists | tied_validate_consistency |
 | REQ-CTRL-004 gates | Exists | tied_checklist_gate_validate |

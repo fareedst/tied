@@ -18,7 +18,18 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import yaml from "js-yaml";
+
+async function loadCanonicalWriter(repoRoot) {
+  const modPath = path.join(repoRoot, "mcp-server/dist/yaml-canonicalizer.js");
+  if (!fs.existsSync(modPath)) {
+    throw new Error(
+      `DIAGNOSTIC: built canonicalizer missing at ${modPath}; run npm run build --prefix mcp-server`,
+    );
+  }
+  return import(pathToFileURL(modPath).href);
+}
 
 const INDEX_FILES = {
   requirements: "requirements.yaml",
@@ -82,7 +93,7 @@ function payloadsEqual(a, b) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
-function pruneIndex(name, base, bundle, write) {
+function pruneIndex(name, base, bundle, write, writeCanonicalValueAtomic) {
   const projPath = path.join(base, INDEX_FILES[name]);
   const methPath = path.join(bundle, INDEX_FILES[name]);
   const proj = loadYaml(projPath);
@@ -109,7 +120,10 @@ function pruneIndex(name, base, bundle, write) {
   }
 
   if (write && removed.length > 0) {
-    fs.writeFileSync(projPath, yaml.dump(proj), "utf8");
+    const result = writeCanonicalValueAtomic(projPath, proj);
+    if (!result.ok) {
+      throw new Error(`DIAGNOSTIC: canonical write failed for ${projPath}: ${result.error}`);
+    }
   }
   return { removed, skipped: null };
 }
@@ -123,8 +137,12 @@ Default is --dry-run (no file changes). Set TIED_BASE_PATH or pass the client pa
 
 const write = process.argv.includes("--write");
 const { base, bundle } = resolveRoots();
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 console.log(`DEBUG: prune base=${base} bundle=${bundle} write=${write}`);
+
+const { writeCanonicalValueAtomic } = await loadCanonicalWriter(repoRoot);
+process.env.TIED_BASE_PATH = base;
 
 if (!fs.existsSync(base)) {
   console.error(
@@ -136,7 +154,7 @@ if (!fs.existsSync(base)) {
 
 let totalRemoved = 0;
 for (const name of Object.keys(INDEX_FILES)) {
-  const result = pruneIndex(name, base, bundle, write);
+  const result = pruneIndex(name, base, bundle, write, writeCanonicalValueAtomic);
   if (result.skipped) {
     console.log(`TRACE: ${name}: ${result.skipped}`);
     continue;

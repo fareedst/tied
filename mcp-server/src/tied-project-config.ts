@@ -7,6 +7,43 @@ import path from "node:path";
 import yaml from "js-yaml";
 import { resolveTiedLayout } from "./tied-layout.js";
 
+export const IDENTITY_ROUTING_ENV_DUAL_READ = "env_dual_read" as const;
+export const IDENTITY_ROUTING_MARKER_ONLY = "marker_only" as const;
+
+export type IdentityRoutingMode =
+  | typeof IDENTITY_ROUTING_ENV_DUAL_READ
+  | typeof IDENTITY_ROUTING_MARKER_ONLY;
+
+export function readIdentityRoutingFromRecord(
+  record: Record<string, unknown> | undefined,
+): IdentityRoutingMode {
+  if (!record) return IDENTITY_ROUTING_ENV_DUAL_READ;
+  const identity = record.identity;
+  if (!isRecord(identity)) return IDENTITY_ROUTING_ENV_DUAL_READ;
+  const routing = identity.routing;
+  if (routing === IDENTITY_ROUTING_MARKER_ONLY) return IDENTITY_ROUTING_MARKER_ONLY;
+  if (routing === IDENTITY_ROUTING_ENV_DUAL_READ) return IDENTITY_ROUTING_ENV_DUAL_READ;
+  return IDENTITY_ROUTING_ENV_DUAL_READ;
+}
+
+export function validateIdentityConfigSection(record: Record<string, unknown>): void {
+  if (record.identity === undefined) return;
+  if (!isRecord(record.identity)) {
+    throw new TiedProjectConfigError("PROJECT_CONFIG_INVALID", "identity must be a mapping");
+  }
+  const routing = record.identity.routing;
+  if (routing === undefined) return;
+  if (
+    routing !== IDENTITY_ROUTING_ENV_DUAL_READ &&
+    routing !== IDENTITY_ROUTING_MARKER_ONLY
+  ) {
+    throw new TiedProjectConfigError(
+      "PROJECT_CONFIG_INVALID",
+      "identity.routing must be env_dual_read or marker_only",
+    );
+  }
+}
+
 export const PROJECT_CONFIG_SCHEMA_V1 = "tied-project-config.v1";
 
 const PROJECT_CONFIG_TOP_LEVEL_KEYS = new Set([
@@ -111,6 +148,12 @@ function validateProjectConfigRecord(record: Record<string, unknown>, source: Pr
       if (!PROJECT_CONFIG_TOP_LEVEL_KEYS.has(key)) {
         throw new TiedProjectConfigError("CONFIG_UNKNOWN_KEY", `Unknown project config key: ${key}`);
       }
+    }
+    try {
+      validateIdentityConfigSection(record);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      throw new TiedProjectConfigError("PROJECT_CONFIG_INVALID", message);
     }
     return;
   }

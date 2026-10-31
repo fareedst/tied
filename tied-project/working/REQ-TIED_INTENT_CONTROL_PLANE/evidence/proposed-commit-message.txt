@@ -1,15 +1,16 @@
-feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 5 isolated verification runner
+feat(REQ-TIED_INTENT_CONTROL_PLANE): Wave 6 marker-only routing
 
-REQ-CTRL-009: dedicated local child runner for quality_evidence_collect_manifest
-when verification.isolated_runner is true; manifest execution_runner provenance.
+REQ-CTRL-001 Path 3: identity.routing marker_only resolves MCP base path from
+project-identity.v1.yaml; stale TIED_BASE_PATH ignored without valid corpus;
+tied_config_get_base_path reports routing_mode and base_path_source.
 
 Close-out: machine allowed, envelope blocking 0, adherence reconciled.
 
-Staging map (Wave 5):
-- mcp-server/src/{isolated-verification-runner.ts,isolated-verification-runner.test.ts,cli/isolated-verification-runner.ts}
-- mcp-server/src/{quality-evidence-collection.ts,quality-evidence.ts}
-- tools/bootstrap/lib/project-config.mjs
+Staging map (Wave 6):
+- mcp-server/src/{project-identity-marker-routing.ts,project-identity-marker-routing.test.ts,yaml-loader.ts,tied-project-config.ts,tools/index.ts}
+- scripts/prune-project-index-methodology-duplicates.mjs
 - CHANGELOG.md
-- tied-project REQ/ARCH/IMPL-TIED_ISOLATED_VERIFICATION_RUNNER + indexes + config.yaml + vocab
-- tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
-- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN,gap-matrix,CITDP,evidence/wave5-*.md,evidence/git-hygiene-receipt-2026-10-30-w5.md,evidence/proposed-commit-message.txt,evidence/traceable-commit-evidence.md,evidence/session-handoff.md,evidence/verification-evidence-manifest.v1.json}
+- tied-project REQ/ARCH/IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING + indexes + config.yaml + vocab + semantic-tokens prune
+- tied-project/architecture-decisions/ARCH-TIED_PROJECT_IDENTITY.yaml
+- tied-project/citdp/CITDP-REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING.yaml
+- tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/{PLAN,PLAN-WAVE6,gap-matrix,CITDP,evidence/wave6-*.md,evidence/sponsor-decisions-wave6-path3-evidence.md,evidence/git-hygiene-receipt-2026-10-30-w6.md,evidence/proposed-commit-message.txt,evidence/traceable-commit-evidence.md,evidence/session-handoff.md}

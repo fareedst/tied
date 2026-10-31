@@ -257,15 +257,6 @@ ARCH-ATDD-E2E_SUBPROCESS_STREAM_JSON:
       - "REQ-GOAGENT-AGENT-EXECUTOR"
     tests:
       - "agent_stream_e2e_test.rb"
-ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET:
-  cross_references: []
-  description: "Optional BBCE slice ownership paste-in snippet (methodology corpus)."
-  detail_file: "architecture-decisions/ARCH-BBCE_SLICE_OWNERSHIP_SNIPPET.yaml"
-  metadata:
-    status: "snippet_only"
-    title: "Optional BBCE slice ownership sections (paste-in snippet)"
-  name: "BBCE slice ownership snippet"
-  status: "Active"
 ARCH-BOUNDED_WORKER_POOL:
   cross_references:
     - "REQ-BOUNDED_WORKER_POOL"
@@ -384,23 +375,6 @@ ARCH-EVIDENCE_CHAIN_PROFILE:
     problems_solved:
       - "No unified profile contract"
     why: "A chain-level artifact needs its own schema, proof-boundary model, and artifact boundary versus canonical TIED YAML."
-  status: "Accepted"
-ARCH-EVIDENCE_CHAIN_REPORT:
-  cross_references:
-    - "ARCH-EVIDENCE_CHAIN_PROFILE"
-    - "REQ-EVIDENCE_CHAIN_PROFILE"
-    - "REQ-EVIDENCE_CHAIN_REPORT"
-  decision: "Ship a TIED-source offline aggregator that reads an evidence-chain-report-inputs.v1 manifest and already-generated evidence-chain-profile.v1 files, partitions compatible client cohorts, and emits evidence-chain-statistics-report.v1 YAML plus a deterministic Markdown projection. Do not traverse client repositories or write project YAML."
-  detail_file: "architecture-decisions/ARCH-EVIDENCE_CHAIN_REPORT.yaml"
-  name: "Evidence chain statistics report architecture"
-  rationale:
-    benefits:
-      - "Stable identity via hashed project_id with optional client alias"
-      - "Testable aggregator versus generator boundary"
-    problems_solved:
-      - "Deferred cross-project tool had no contract"
-      - "Risk of mixing incompatible depths or inventing scores"
-    why: "Aggregation is a different actor and proof boundary from one-client profile generation."
   status: "Accepted"
 ARCH-FEAT_AGENTSTREAM_ADAPTER:
   cross_references:
@@ -1439,68 +1413,6 @@ ARCH-MCP_USAGE_METRICS:
       - "REQ-MCP_USAGE_METRICS"
     tests:
       - "usage-metrics.test.ts"
-ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
-  consequences:
-    negative:
-      - "Gate-blocking blast radius if linkage misconfigured"
-    positive:
-      - "Explicit trap disposition"
-  cross_references:
-    implementation:
-      - "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-    requirements:
-      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-  decision: "Pure pairing module plus CITDP-scoped gate hook on verification/close_out; MCP read-only pair tool; compose W1 experiment store."
-  detail_file: "architecture-decisions/ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml"
-  name: "Methodology pairing architecture"
-  status: "Accepted"
-ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
-  cross_references:
-    implementation:
-      - "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
-    requirements:
-      - "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
-  detail_file: "architecture-decisions/ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
-  name: "Kaizen methodology bridge architecture"
-  status: "Accepted"
-ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT:
-  cross_references:
-    implementation:
-      - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
-    requirements:
-      - "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
-  detail_file: "architecture-decisions/ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
-  name: "Methodology learning cohort export architecture"
-  status: "Accepted"
-ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
-  detail_file: "architecture-decisions/ARCH-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
-  name: "Methodology learning experiment storage"
-  status: "Accepted"
-  traceability:
-    implementation:
-      - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
-    requirements:
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
-  cross_references:
-    implementation:
-      - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-    requirements:
-      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-  decision: "Read-only enrollment validator module plus MCP; compose W1 validate; no global gate hook"
-  detail_file: "architecture-decisions/ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
-  name: "Production-system enrollment architecture"
-  status: "Accepted"
-ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
-  cross_references:
-    implementation:
-      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-    requirements:
-      - "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-  decision: "Four modules: change-class reader, W1 store adapter, pre_implementation validator, checklist composition; no global hook; no path inference; surface gate runs immediately before W2 pairing hook at pre_implementation only."
-  detail_file: "architecture-decisions/ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml"
-  name: "Methodology surface experiment gate architecture"
-  status: "Accepted"
 ARCH-MODULE_VALIDATION:
   alternatives_considered:
     - cons:
@@ -1594,94 +1506,6 @@ ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
       - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
     requirements:
       - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
-ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
-  cross_references:
-    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-  description: "A tracked hybrid bundle keeps canonical prompt skills in the TIED repository and installs them into each client’s local Cursor skill directory."
-  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
-  metadata:
-    created:
-      author: "AI Agent"
-      date: "2026-08-12"
-    last_updated:
-      author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Name invocation remainder and linked plan as skill payloads"
-  name: "Hybrid Prompt-Type Skill Bundle"
-  status: "Active"
-ARCH-PROMPT_TYPE_SUBAGENT:
-  alternatives_considered:
-    - cons:
-        - "Adds a repository-specific orchestration entry to client tooling"
-      name: "Install the agent in every client"
-      pros:
-        - "Uniform Task availability"
-      rejected_reason: "Client projects receive the canonical skill; this Task wrapper is intentionally TIED-source scoped."
-    - cons:
-        - "Cannot perform Implement"
-      name: "Keep the stub readonly"
-      pros:
-        - "Limits mutation risk"
-      rejected_reason: "The selected full workflow requires writable execution."
-    - cons:
-        - "Duplicates the canonical workflow and drifts"
-      name: "Paste the entire skill into the agent"
-      pros:
-        - "More self-contained prompt"
-      rejected_reason: "The wrapper should reference the canonical skill and repeat only clean-context-critical boundaries."
-  cross_references:
-    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "REQ-PROMPT_TYPE_SUBAGENT"
-  description: "Project-scoped Cursor Task wrappers delegate explicitly to each canonical leaf prompt-type skill; add-refine-build sequences three leaf Task children using invocation remainder then linked plans."
-  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_SUBAGENT.yaml"
-  implementation_approach:
-    details:
-      - "Each wrapper repeats only the bootstrap, gates, safety boundary, and return contract needed by a clean subagent context; source-only wrappers are not client-managed copies and no client refresh is performed."
-      - "Prompt-type Task wrappers live under .cursor/agents/ in the TIED source repository only; tied-install.sh installs skills, not agents, into client projects."
-      - "Static contract tests validate frontmatter, workflow gates, and required prompt clauses for all 13 leaf wrappers without attempting runtime LLM evaluation."
-      - "The canonical workflow remains tools/bundled-prompt-type-skills/<prompt-type>/SKILL.md for each leaf."
-    summary: "Keep each agent file as a thin TIED-source Task wrapper with explicit activation, type-specific readonly, foreground execution, canonical skill delegation, and a structured parent handoff; client projects use skills instead."
-  metadata:
-    created:
-      author: "AI Agent"
-      date: "2026-08-12"
-    last_updated:
-      author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Name invocation remainder and linked plan as agent payloads"
-  name: "Prompt-Type Task Subagent Boundary"
-  rationale:
-    benefits:
-      - "Explicit delegation keeps the skill as the single workflow source."
-      - "Static validation makes the agent contract reviewable and deterministic."
-      - "Writable foreground execution supports sequential TIED gates."
-    problems_solved:
-      - "A stub body does not define the workflow or handoff evidence."
-      - "Missing contract tests allow activation and safety drift."
-      - "readonly true prevents the required Implement phase."
-    why: "Cursor custom subagents start with isolated context and do not reliably include a separately named skill from a one-line body."
-  related_decisions:
-    depends_on:
-      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
-    informs:
-      - "IMPL-PROMPT_TYPE_SUBAGENT"
-    see_also:
-      - "ARCH-TIED_STRUCTURE"
-      - "IMPL-TIED_FILES"
-    supersedes: []
-  status: "Active"
-  traceability:
-    code_annotations:
-      - "ARCH-PROMPT_TYPE_SUBAGENT"
-      - "IMPL-PROMPT_TYPE_SUBAGENT"
-      - "REQ-PROMPT_TYPE_SUBAGENT"
-    implementation:
-      - "IMPL-PROMPT_TYPE_SUBAGENT"
-    requirements:
-      - "REQ-PROMPT_TYPE_SUBAGENT"
-    tests:
-      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
 ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"
@@ -2033,15 +1857,6 @@ ARCH-TIED_CLIENT_FEEDBACK_CAPTURE:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_FEEDBACK_CAPTURE.yaml"
   name: "Client feedback capture boundary"
   status: "Planned"
-ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
-  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST.yaml"
-  name: "Client methodology resource manifest (QMM and QA evidence chain)"
-  status: "Active"
-  traceability:
-    implementation:
-      - "IMPL-TIED_FILES"
-    requirements:
-      - "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
 ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
   name: "Client path env canonical names and migration seam"
@@ -2537,6 +2352,15 @@ ARCH-TIED_PROJECT_IDENTITY:
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_IDENTITY.yaml"
   name: "Shared TIED project identity resolver"
   status: "Accepted"
+ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+    requirements:
+      - "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+  detail_file: "architecture-decisions/ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING.yaml"
+  name: "Marker-only project path routing"
+  status: "Accepted"
 ARCH-TIED_PROJECT_IDENTITY_WRITE_BINDING:
   cross_references:
     - "ARCH-TIED_PROJECT_IDENTITY"
@@ -2830,13 +2654,6 @@ ARCH-TIED_VERIFICATION_EVIDENCE_PROVENANCE:
   name: "Verify manifest provenance architecture"
   status: "Active"
   summary: "Intent authority: tied_verify binds passed tokens to verification-evidence-manifest.v1 covered_tokens and freshness."
-ARCH-TIED_VOCABULARY_LAYERS:
-  category: "Structural"
-  cross_references:
-    - "REQ-TIED_VOCABULARY_OWNERSHIP"
-  detail_file: "architecture-decisions/ARCH-TIED_VOCABULARY_LAYERS.yaml"
-  name: "Layered Vocabulary Ownership"
-  status: "Active"
 ARCH-TIED_WORKING_ARTIFACT_PLACEMENT:
   description: "Canonical guide and PROC for committed vs local working roots; defers routing to ARCH-TIED_TWO_FOLDER_LAYOUT."
   detail_file: "architecture-decisions/ARCH-TIED_WORKING_ARTIFACT_PLACEMENT.yaml"

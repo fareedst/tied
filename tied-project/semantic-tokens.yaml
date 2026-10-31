@@ -134,16 +134,6 @@ ARCH-EVIDENCE_CHAIN_PROFILE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
-ARCH-EVIDENCE_CHAIN_REPORT:
-  cross_references:
-    - "ARCH-EVIDENCE_CHAIN_PROFILE"
-    - "IMPL-EVIDENCE_CHAIN_REPORT"
-    - "REQ-EVIDENCE_CHAIN_REPORT"
-  description: "Offline aggregator, cohort partition, and report schemas"
-  name: "Evidence chain statistics report architecture"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
 ARCH-FEAT_AGENTSTREAM_ADAPTER:
   cross_references:
     - "IMPL-FEAT_AGENTSTREAM_ADAPTER"
@@ -578,48 +568,6 @@ ARCH-MCP_USAGE_METRICS:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
-ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
-  cross_references: []
-  description: "Promoted ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING (phase-1 QMM bundle)"
-  name: "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
-ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
-  cross_references: []
-  description: "Promoted ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE (phase-1 QMM bundle)"
-  name: "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
-ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT:
-  cross_references: []
-  description: "Promoted ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT (phase-2 QMM cohort export bundle)"
-  name: "ARCH-METHODOLOGY-LEARNING-COHORT-EXPORT"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
-ARCH-METHODOLOGY-LEARNING-EXPERIMENT:
-  cross_references: []
-  description: "Promoted ARCH-METHODOLOGY-LEARNING-EXPERIMENT (phase-1 QMM bundle)"
-  name: "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
-ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
-  cross_references: []
-  description: "Promoted ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT (phase-1 QMM bundle)"
-  name: "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
-ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
-  cross_references: []
-  description: "Promoted ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE (phase-1 QMM bundle)"
-  name: "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
 ARCH-MODULE_VALIDATION:
   cross_references:
     - "IMPL-MODULE_VALIDATION"
@@ -642,30 +590,6 @@ ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
     last_updated: "2026-10-29"
     registered: "2026-10-29"
   name: "CITDP record and promote boundaries"
-  status: "Active"
-  type: "ARCH"
-ARCH-PROMPT_TYPE_GLOBAL_SKILLS:
-  cross_references:
-    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-  description: "Tracked prompt-type bundle installed into TIED client Cursor skill directories."
-  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
-  metadata:
-    last_updated: "2026-08-12"
-    registered: "2026-08-12"
-  name: "Hybrid Prompt-Type Skill Bundle"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
-ARCH-PROMPT_TYPE_SUBAGENT:
-  cross_references:
-    - "IMPL-PROMPT_TYPE_SUBAGENT"
-    - "REQ-PROMPT_TYPE_SUBAGENT"
-  description: "Project-scoped Cursor Task wrapper around the canonical add-feature skill."
-  metadata:
-    last_updated: "2026-08-12"
-    registered: "2026-08-12"
-  name: "Plan-New-Feature Task Subagent Boundary"
   status: "Active"
   type: "ARCH"
 ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
@@ -946,13 +870,6 @@ ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
-ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST:
-  cross_references: []
-  description: "Promoted ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST (phase-1 QMM bundle)"
-  name: "ARCH-TIED_CLIENT_METHODOLOGY_RESOURCE_MANIFEST"
-  source_index: "architecture-decisions.yaml"
-  status: "Active"
-  type: "ARCH"
 ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
   category: "Architecture"
   cross_references:
@@ -1071,19 +988,6 @@ ARCH-TIED_FEEDBACK_REPORT_SKILL_BOUNDARY:
     - "REQ-TIED_FEEDBACK_REPORT_SKILL"
   description: "Witness intake and receipt only"
   name: "Feedback report skill boundary"
-  status: "Active"
-  type: "ARCH"
-ARCH-TIED_FIDELITY_RESEARCH:
-  cross_references:
-    - "IMPL-TIED_FIDELITY_RESEARCH"
-    - "REQ-TIED_FIDELITY_RESEARCH"
-  description: "Separate research evidence and adjudication from audited project TIED data and remediation"
-  detail_file: "architecture-decisions/ARCH-TIED_FIDELITY_RESEARCH.yaml"
-  metadata:
-    last_updated: "2026-08-09"
-    registered: "2026-08-09"
-  name: "Read-Only Fidelity Research Boundary"
-  source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
 ARCH-TIED_GIT_HYGIENE_SAFETY:
@@ -1619,16 +1523,6 @@ IMPL-EVIDENCE_CHAIN_PROFILE:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
-IMPL-EVIDENCE_CHAIN_REPORT:
-  cross_references:
-    - "ARCH-EVIDENCE_CHAIN_REPORT"
-    - "IMPL-EVIDENCE_CHAIN_PROFILE"
-    - "REQ-EVIDENCE_CHAIN_REPORT"
-  description: "Read-only batch aggregator and CLI for statistics reports"
-  name: "Evidence chain statistics report aggregator"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
 IMPL-FEAT_AGENTSTREAM_ADAPTER:
   cross_references:
     - "ARCH-FEAT_AGENTSTREAM_ADAPTER"
@@ -2118,48 +2012,6 @@ IMPL-MCP_USAGE_METRICS:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
-IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
-  cross_references: []
-  description: "Promoted IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING (phase-1 QMM bundle)"
-  name: "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
-IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
-  cross_references: []
-  description: "Promoted IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE (phase-1 QMM bundle)"
-  name: "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
-IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT:
-  cross_references: []
-  description: "Promoted IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT (phase-2 QMM cohort export bundle)"
-  name: "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
-IMPL-METHODOLOGY-LEARNING-EXPERIMENT:
-  cross_references: []
-  description: "Promoted IMPL-METHODOLOGY-LEARNING-EXPERIMENT (phase-1 QMM bundle)"
-  name: "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
-IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
-  cross_references: []
-  description: "Promoted IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT (phase-1 QMM bundle)"
-  name: "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
-IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
-  cross_references: []
-  description: "Promoted IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE (phase-1 QMM bundle)"
-  name: "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
 IMPL-MODULE_VALIDATION:
   cross_references:
     - "ARCH-MODULE_VALIDATION"
@@ -2182,31 +2034,6 @@ IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
     last_updated: "2026-10-29"
     registered: "2026-10-29"
   name: "Citdp record and promote bundle files"
-  status: "Active"
-  type: "IMPL"
-IMPL-PROMPT_TYPE_GLOBAL_SKILLS:
-  cross_references:
-    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "IMPL-TIED_FILES"
-    - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-  description: "Canonical prompt-type skill bundle and deterministic client installation through tied-install."
-  detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
-  metadata:
-    last_updated: "2026-08-12"
-    registered: "2026-08-12"
-  name: "Prompt-Type Skill Bundle and Bootstrap Installer"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
-  type: "IMPL"
-IMPL-PROMPT_TYPE_SUBAGENT:
-  cross_references:
-    - "ARCH-PROMPT_TYPE_SUBAGENT"
-    - "REQ-PROMPT_TYPE_SUBAGENT"
-  description: "Static contract and clean-context workflow contract for the writable add-feature Task subagent."
-  metadata:
-    last_updated: "2026-08-12"
-    registered: "2026-08-12"
-  name: "Plan-New-Feature Task Subagent Contract"
   status: "Active"
   type: "IMPL"
 IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY:
@@ -2838,19 +2665,6 @@ IMPL-TIED_FEEDBACK_REPORT_SKILL:
     - "REQ-TIED_FEEDBACK_REPORT_SKILL"
   description: "bundled-feedback-skill bootstrap"
   name: "Feedback report skill implementation"
-  status: "Active"
-  type: "IMPL"
-IMPL-TIED_FIDELITY_RESEARCH:
-  cross_references:
-    - "ARCH-TIED_FIDELITY_RESEARCH"
-    - "REQ-TIED_FIDELITY_RESEARCH"
-  description: "Validated modules and read-only composition for fidelity findings and evidence"
-  detail_file: "implementation-decisions/IMPL-TIED_FIDELITY_RESEARCH.yaml"
-  metadata:
-    last_updated: "2026-08-09"
-    registered: "2026-08-09"
-  name: "Fidelity Research First Vertical Slice"
-  source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_FILES:
@@ -3768,22 +3582,6 @@ REQ-BOUNDED_WORKER_POOL:
   source_index: "requirements.yaml"
   status: "In Progress"
   type: "REQ"
-REQ-CANONICAL_COMPOSITION_TEST:
-  count: 7
-  description: "Composition evidence for shared YAML writer metadata"
-  empty: null
-  flag: false
-  message: "hello"
-  name: "Canonical composition test"
-  names:
-    - "alpha"
-    - "zeta"
-  note: "z: keep\na: order\n"
-  order:
-    - "second"
-    - "first"
-  status: "Active"
-  type: "REQ"
 REQ-CHECKLIST-PROCESS-REVIEW:
   description: "Phase 1 operator docs program"
   name: "Checklist process review"
@@ -3814,17 +3612,6 @@ REQ-EVIDENCE_CHAIN_PROFILE:
     - "REQ-EVIDENCE_CHAIN_REPORT"
   description: "Versioned read-only evidence-chain-profile.v1 completeness and provenance report"
   name: "Evidence chain profile"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
-REQ-EVIDENCE_CHAIN_REPORT:
-  cross_references:
-    - "ARCH-EVIDENCE_CHAIN_REPORT"
-    - "IMPL-EVIDENCE_CHAIN_REPORT"
-    - "PROC-EVIDENCE_CHAIN"
-    - "REQ-EVIDENCE_CHAIN_PROFILE"
-  description: "Offline multi-client evidence-chain-statistics-report.v1 from profile artifacts"
-  name: "Evidence chain statistics report"
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
@@ -4292,48 +4079,6 @@ REQ-MCP_USAGE_METRICS:
   source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
-  cross_references: []
-  description: "Promoted REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING (phase-1 QMM bundle)"
-  name: "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
-  cross_references: []
-  description: "Promoted REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE (phase-1 QMM bundle)"
-  name: "REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
-  cross_references: []
-  description: "Promoted REQ-METHODOLOGY-LEARNING-COHORT-EXPORT (phase-2 QMM cohort export bundle)"
-  name: "REQ-METHODOLOGY-LEARNING-COHORT-EXPORT"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
-REQ-METHODOLOGY-LEARNING-EXPERIMENT:
-  cross_references: []
-  description: "Promoted REQ-METHODOLOGY-LEARNING-EXPERIMENT (phase-1 QMM bundle)"
-  name: "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
-REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
-  cross_references: []
-  description: "Promoted REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT (phase-1 QMM bundle)"
-  name: "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
-  cross_references: []
-  description: "Promoted REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE (phase-1 QMM bundle)"
-  name: "REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
 REQ-MODULE_VALIDATION:
   category: "Core Functional"
   cross_references:
@@ -4348,11 +4093,6 @@ REQ-MODULE_VALIDATION:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
-REQ-OBJECT_STRING_EQUIV:
-  description: "Equivalence test"
-  name: "Object string equiv"
-  status: "Planned"
-  type: "REQ"
 REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   cross_references:
     - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
@@ -4362,30 +4102,6 @@ REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
     last_updated: "2026-10-29"
     registered: "2026-10-29"
   name: "CITDP record and promote prompt-type leaves"
-  status: "Implemented"
-  type: "REQ"
-REQ-PROMPT_TYPE_GLOBAL_SKILLS:
-  cross_references:
-    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
-  description: "Versioned prompt-type skill bundle distributed to TIED clients."
-  detail_file: "requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
-  metadata:
-    last_updated: "2026-08-12"
-    registered: "2026-08-12"
-  name: "Global Prompt-Type Skills"
-  source_index: "requirements.yaml"
-  status: "Planned"
-  type: "REQ"
-REQ-PROMPT_TYPE_SUBAGENT:
-  cross_references:
-    - "ARCH-PROMPT_TYPE_SUBAGENT"
-    - "IMPL-PROMPT_TYPE_SUBAGENT"
-  description: "Explicit-only writable Cursor Task subagent for the add-feature prompt type."
-  metadata:
-    last_updated: "2026-08-12"
-    registered: "2026-08-12"
-  name: "Plan-New-Feature Prompt-Type Subagent"
   status: "Implemented"
   type: "REQ"
 REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:
@@ -4807,20 +4523,6 @@ REQ-TIED_FEEDBACK_REPORT_SKILL:
   name: "Feedback report skill"
   status: "Active"
   type: "REQ"
-REQ-TIED_FIDELITY_RESEARCH:
-  category: "Functional"
-  cross_references:
-    - "ARCH-TIED_FIDELITY_RESEARCH"
-    - "IMPL-TIED_FIDELITY_RESEARCH"
-  description: "Read-only fidelity and defect-origin analysis across the TIED translation chain"
-  detail_file: "requirements/REQ-TIED_FIDELITY_RESEARCH.yaml"
-  metadata:
-    last_updated: "2026-08-09"
-    registered: "2026-08-09"
-  name: "TIED Fidelity Research"
-  source_index: "requirements.yaml"
-  status: "Active"
-  type: "REQ"
 REQ-TIED_GIT_HYGIENE:
   cross_references:
     - "ARCH-TIED_GIT_HYGIENE_SAFETY"
@@ -5071,13 +4773,6 @@ REQ-TIED_PROJECT_LINT:
     - "IMPL-TIED_PROJECT_LINT"
   description: "MCP read-only project lint aggregation"
   name: "Project lint MCP"
-  status: "Active"
-  type: "REQ"
-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES:
-  cross_references: []
-  description: "Promoted REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES (phase-1 QMM bundle)"
-  name: "REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES"
-  source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
 REQ-TIED_RESEARCH_RECORDS:

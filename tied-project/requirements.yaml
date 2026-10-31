@@ -1602,64 +1602,6 @@ REQ-MCP_USAGE_METRICS:
       method: "Ruby smoke test"
     - coverage: "usage-metrics module and wrapToolHandler"
       method: "Unit tests"
-REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING:
-  category: "Functional"
-  detail_file: "requirements/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING.yaml"
-  name: "Methodology conformance–effectiveness pairing"
-  priority: "P1"
-  rationale:
-    benefits:
-      - "CITDP-scoped pairing reports and gate hook"
-    problems_solved:
-      - "Gate pass without linked effectiveness readout"
-    why: "Close QMM conformance trap for methodology-surface changes"
-  related_requirements:
-    depends_on:
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    related_to:
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-  satisfaction_criteria:
-    - criterion: "MCP pair tool and gate composition"
-      metric: "MCP and pairing-gate tests pass"
-    - criterion: "Pairing dispositions and trap detection"
-      metric: "Unit tests pass"
-  status: "Implemented"
-  traceability:
-    architecture:
-      - "ARCH-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-    implementation:
-      - "IMPL-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-    tests:
-      - "methodology-conformance-effectiveness-pairing.mcp.test.ts"
-      - "pair.test.ts"
-      - "pairing-gate.test.ts"
-REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE:
-  category: "Functional"
-  detail_file: "requirements/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE.yaml"
-  name: "Kaizen to methodology experiment bridge"
-  priority: "P1"
-  related_requirements:
-    depends_on:
-      - "REQ-FEEDBACK_TO_TIED"
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-    related_to:
-      - "REQ-FEEDBACK_TO_TIED"
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-  satisfaction_criteria:
-    - criterion: "Bridge-eligible feedback mapping"
-      metric: "bridge unit tests pass"
-    - criterion: "Explicit bridge MCP returns draft only"
-      metric: "bridge MCP tests pass"
-  status: "Implemented"
-  traceability:
-    architecture:
-      - "ARCH-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
-    implementation:
-      - "IMPL-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE"
-    tests:
-      - "bridge.test.ts"
-      - "methodology-kaizen-experiment-bridge.mcp.test.ts"
 REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
   category: "Functional"
   detail_file: "requirements/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
@@ -1685,86 +1627,6 @@ REQ-METHODOLOGY-LEARNING-COHORT-EXPORT:
       - "IMPL-METHODOLOGY-LEARNING-COHORT-EXPORT"
     tests:
       - "methodology-learning-cohort-export/*.test.ts"
-REQ-METHODOLOGY-LEARNING-EXPERIMENT:
-  category: "Functional"
-  detail_file: "requirements/REQ-METHODOLOGY-LEARNING-EXPERIMENT.yaml"
-  name: "Methodology learning experiment (Loop 3 PDSA)"
-  priority: "P1"
-  related_requirements:
-    depends_on:
-      - "REQ-FEEDBACK_TO_TIED"
-    related_to:
-      - "REQ-FEEDBACK_TO_TIED"
-  satisfaction_criteria:
-    - criterion: "Experiments persist under tied-project/methodology-experiments.yaml"
-      metric: "tied_methodology_learning_experiment_upsert and list round-trip"
-    - criterion: "Validators accept methodology-learning-experiment.v1 records"
-      metric: "tied_methodology_learning_experiment_validate returns ok for fixture"
-  status: "Implemented"
-  traceability:
-    architecture:
-      - "ARCH-METHODOLOGY-LEARNING-EXPERIMENT"
-    implementation:
-      - "IMPL-METHODOLOGY-LEARNING-EXPERIMENT"
-REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT:
-  category: "Functional"
-  detail_file: "requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml"
-  name: "Production-system surface enrollment"
-  priority: "P1"
-  rationale:
-    benefits:
-      - "Composes W1 store and W2 pairing without global gate hooks"
-    problems_solved:
-      - "Non-checklist production surfaces lack experiment enrollment procedure"
-    why: "W5 Loop 3 enrollment for prompt-type, assurance profile, and gate_policy surfaces"
-  related_requirements:
-    depends_on:
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
-    related_to:
-      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-  satisfaction_criteria:
-    - criterion: "Enrollment validator and MCP"
-      metric: "Unit and MCP tests pass"
-    - criterion: "surface_ref rules for under-covered surfaces"
-      metric: "Fixtures for prompt_type_workflow, assurance_profile, gate_policy pass"
-  status: "Implemented"
-  traceability:
-    architecture:
-      - "ARCH-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-    implementation:
-      - "IMPL-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-    tests:
-      - "methodology-production-system-enrollment.mcp.test.ts"
-      - "methodology-production-system-enrollment.test.ts"
-REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE:
-  category: "Functional"
-  detail_file: "requirements/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE.yaml"
-  name: "Methodology surface experiment gate"
-  priority: "P1"
-  rationale:
-    benefits:
-      - "Pre-implementation Loop 3 discipline before RED"
-    problems_solved:
-      - "Unlinked methodology-surface CITDPs reach RED without W1 experiment"
-    why: "Require persisted experiment with hypothesis and baseline when methodology_surface_change_class is non-none"
-  related_requirements:
-    depends_on:
-      - "REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING"
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-      - "REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT"
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
-    related_to:
-      - "REQ-METHODOLOGY-LEARNING-EXPERIMENT"
-  status: "Implemented"
-  traceability:
-    architecture:
-      - "ARCH-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-    implementation:
-      - "IMPL-METHODOLOGY-SURFACE-EXPERIMENT-GATE"
-    tests:
-      - "checklist-validator methodology surface gate composition"
-      - "methodology-surface-experiment-gate.test.ts"
 REQ-MODULE_VALIDATION:
   category: "Functional"
   detail_file: "requirements/REQ-MODULE_VALIDATION.yaml"
@@ -1857,25 +1719,6 @@ REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
       - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
     implementation:
       - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
-REQ-PROMPT_TYPE_GLOBAL_SKILLS:
-  category: "Tooling"
-  cross_references:
-    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
-    - "REQ-TIED_SETUP"
-  description: "The TIED methodology repository shall provide a versioned prompt-type skill bundle that can be installed into TIED client projects for consistent ongoing development workflows."
-  detail_file: "requirements/REQ-PROMPT_TYPE_GLOBAL_SKILLS.yaml"
-  metadata:
-    created:
-      author: "AI Agent"
-      date: "2026-08-12"
-    last_updated:
-      author: "AI Agent"
-      date: "2026-08-13"
-      reason: "Replace triple-colon payload delimiter with invocation remainder and linked plan"
-  name: "Global Prompt-Type Skills"
-  priority: "P1"
-  status: "Implemented"
 REQ-PROMPT_TYPE_SUBAGENT:
   category: "Tooling"
   description: "TIED-source Cursor custom subagents provide an explicit-only foreground Task wrapper for each of the 13 leaf prompt types, plus an add-refine-build sequence orchestrator. Client projects receive skills via tied-install.sh, not Task wrappers."
@@ -2989,9 +2832,12 @@ REQ-TIED_INTENT_CONTROL_PLANE:
       - "REQ-TIED_SETUP"
     related_to:
       - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
       - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
       - "REQ-TIED_YAML_UPDATES_ATOMIC_BATCH"
   satisfaction_criteria:
+    - criterion: "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING delivered with tests"
+      criterion_id: "wave6-marker-routing"
     - criterion: "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING delivered with tests"
       criterion_id: "wave1-child"
     - criterion: "Umbrella REQ/ARCH/IMPL exist and validate"
@@ -3288,6 +3134,22 @@ REQ-TIED_PROCESS_CERTIFICATION_READINESS:
   detail_file: "requirements/REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
   name: "EDSE process certification readiness"
   priority: "P1"
+  status: "Implemented"
+REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+  category: "Tooling"
+  cross_references:
+    architecture:
+      - "ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+    implementation:
+      - "IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+  description: "Path 3: when identity.routing is marker_only, MCP writable root follows project-identity.v1.yaml instead of stale env."
+  detail_file: "requirements/REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING.yaml"
+  name: "Project identity marker-only routing"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+      - "REQ-TIED_INTENT_CONTROL_PLANE"
+      - "REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING"
   status: "Implemented"
 REQ-TIED_PROJECT_IDENTITY_WRITE_BINDING:
   category: "Tooling"

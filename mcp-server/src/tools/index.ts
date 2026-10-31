@@ -411,6 +411,8 @@ export const allTools = [
     },
     handler: async () => {
       const base_path = getBasePath();
+      const { getBasePathResolutionMetadata } = await import("../yaml-loader.js");
+      const pathResolution = getBasePathResolutionMetadata();
       const { bindingStatus: resolveBindingStatus } = await import("../project-identity-write-binding.js");
       const binding_status = resolveBindingStatus(base_path, process.env);
       const env_TIED_CLIENT_PROJECT_PATH =
@@ -436,6 +438,9 @@ export const allTools = [
           {
             base_path,
             binding_status,
+            routing_mode: pathResolution.routing_mode,
+            base_path_source: pathResolution.base_path_source,
+            env_project_path_ignored: pathResolution.env_project_path_ignored,
             env_TIED_CLIENT_PROJECT_PATH,
             env_TIED_CLIENT_BUNDLE_PATH,
             env_TIED_BASE_PATH,

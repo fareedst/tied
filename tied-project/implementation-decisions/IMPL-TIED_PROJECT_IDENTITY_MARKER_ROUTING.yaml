@@ -1,0 +1,20 @@
+IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+  IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+    implementation_approach:
+      details:
+        - "mcp-server/src/project-identity-marker-routing.ts"
+        - "mcp-server/src/tied-project-config.ts"
+        - "mcp-server/src/tools/index.ts"
+        - "mcp-server/src/yaml-loader.ts"
+      summary: "Cwd-upward discovery when config requests marker_only; yaml-loader caches writable_root and resolution metadata."
+    metadata:
+      created: "2026-10-30"
+      status: "In Progress"
+    name: "Marker-only routing module"
+    traceability:
+      architecture:
+        - "ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+      requirements:
+        - "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+  metadata:
+    status: "Implemented"

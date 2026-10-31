@@ -12,6 +12,7 @@ Linked Cursor plan: `intent_control_plane_req_9e21803c.plan.md`
 | 3 | REQ-CTRL-005/011 — `tied_verify` manifest provenance + freshness ([REQ-TIED_VERIFICATION_EVIDENCE_PROVENANCE]) |
 | 4 | REQ-CTRL-007 — durable checklist resume ([REQ-TIED_DURABLE_CHECKLIST_CONTROLLER]) |
 | 5 | REQ-CTRL-009 — isolated verification runner ([REQ-TIED_ISOLATED_VERIFICATION_RUNNER]) |
+| 6 | **Path 3** marker-only routing ([PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md](PLAN-WAVE6-PATH3-MARKER-ONLY-ROUTING.md)) — REQ-CTRL-001 completion |
 
 ## Sponsor decisions
 

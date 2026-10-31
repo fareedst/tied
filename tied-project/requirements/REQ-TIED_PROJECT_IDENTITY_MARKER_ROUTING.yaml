@@ -1,0 +1,30 @@
+REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+  metadata:
+    status: "Implemented"
+  REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING:
+    metadata:
+      created: "2026-10-30"
+      status: "In Progress"
+    name: "Project identity marker-only routing"
+    rationale:
+      benefits:
+        - "Checked-in marker wins over wrong MCP env"
+        - "REQ-CTRL-001 completion for routing policy"
+      problems_solved:
+        - "CASE-003 wrong-tree recovery when marker is canonical"
+        - "Stale TIED_CLIENT_PROJECT_PATH or legacy TIED_BASE_PATH blocks work despite valid marker"
+      why: "Path 2 fail-closed rejects mutations when IDE env drifts from marker; operators need marker-authoritative routing."
+    satisfaction_criteria:
+      - criterion: "identity.routing marker_only resolves getBasePath from marker writable_root when env path is not a valid corpus"
+        criterion_id: "marker-only-routing"
+      - criterion: "project-identity-marker-routing.test.ts green"
+        criterion_id: "tests"
+      - criterion: "tied_config_get_base_path exposes routing_mode, base_path_source, env_project_path_ignored"
+        criterion_id: "diagnostics"
+    traceability:
+      architecture:
+        - "ARCH-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+      implementation:
+        - "IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+      requirements:
+        - "REQ-TIED_INTENT_CONTROL_PLANE"
