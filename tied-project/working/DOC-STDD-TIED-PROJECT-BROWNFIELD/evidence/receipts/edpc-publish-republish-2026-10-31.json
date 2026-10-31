@@ -1,0 +1,37 @@
+{
+  "schema_version": "edpc-publish-republish-receipt.v1",
+  "request_token": "DOC-STDD-TIED-PROJECT-BROWNFIELD",
+  "date": "2026-10-31",
+  "tool": "buildEdpcPublishManifest",
+  "toolchain": "mcp-server/dist/edpc/publish-build.js (local dist; IDE MCP returned empty gaps[] — stale build)",
+  "inputs": {
+    "scm_shell": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/scm-snapshot-shell.v1.yaml",
+    "claims_ledger": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/claims-ledger.v1.yaml"
+  },
+  "preflight": {
+    "tied_source_graph_refresh": {
+      "ok": true,
+      "index_path": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/source-graph-index.v1.json",
+      "content_hash": "6ad66fea009f92380b2791ad43529dcec6c75a2115300298910ab94cea2dc079"
+    }
+  },
+  "manifest_path": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/edpc-publish-manifest.v1.json",
+  "gaps_before": [
+    "comprehension:req_implementation_status_requires_tied_verify",
+    "gate:project_config_identity_key_blocks_checklist_gate_tools",
+    "methodology:meta_hub_edpc_template_deferred",
+    "methodology:tied_yaml_corpus_not_in_source_graph",
+    "ofsm:bundle_missing",
+    "process:envelope_sample_ten_tokens_not_full_corpus"
+  ],
+  "gaps_after": [
+    "comprehension:req_implementation_status_requires_tied_verify",
+    "methodology:tied_yaml_corpus_not_in_source_graph"
+  ],
+  "notes": [
+    "G3 gap retained manually — product backlog until REQ-TIED_CORPUS_COMPREHENSION complete.",
+    "G7 comprehension gap from publish builder (always-on process boundary).",
+    "OFSM omitted from republish input (charter production_touch: none — G2 N/A).",
+    "Closed sprint gaps G1/G4/G5/G6 dropped; not emitted by current publish builder."
+  ]
+}

@@ -3,7 +3,7 @@
 **Program anchor:** `DOC-STDD-TIED-PROJECT-BROWNFIELD`  
 **Baseline:** `cf321c96` · **Original close-out:** `944f0666`  
 **Remote:** `origin/main` @ **`c74a4d96`** (synced)  
-**Gap index:** [gap-planning-handoff.md](./gap-planning-handoff.md) · **Publish manifest:** [edpc/edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json)  
+**Gap index:** [gap-planning-handoff.md](./gap-planning-handoff.md) · **Publish manifest:** [edpc/edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json) (republished 2026-10-31 — [receipt](./receipts/edpc-publish-republish-2026-10-31.json))  
 **Pre-push hygiene:** [git-hygiene-pre-push-2026-10-31.md](./git-hygiene-pre-push-2026-10-31.md)
 
 ---
@@ -23,17 +23,17 @@
 
 ## Gap status vs publish manifest
 
-Process-layer work closed G1/G5/G7; [edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json) `gaps[]` is **stale** until republish via `tied_edpc_publish_build`.
+**Republish (2026-10-31):** `tied_edpc_publish_build` + G3 manual retain → manifest **`gaps[]` length 2** (G3 product + G7 process boundary only).
 
-| Gap | Matrix (git) | Reality | Manifest |
+| Gap | Matrix (git) | Reality | Manifest (post-republish) |
 | --- | --- | --- | --- |
-| G1 | Done | Done | Drop on republish |
-| G4 | Done | Done (methodology) | Sponsor accept or republish |
-| G5 | Done | Done | Drop on republish |
-| G6 | Resolved | Resolved — [g6-gate-identity-debug.md](./g6-gate-identity-debug.md) | Drop on republish |
-| G7 | Done | Done; new publishes always emit gap until verify receipts | Keep until receipts |
-| G2 | N/A | `production_touch: none` | Document N/A |
-| G3 | Open | Partial `131f0011`; [REQ-TIED_CORPUS_COMPREHENSION](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md) | Keep |
+| G1 | Done | Done | **Dropped** |
+| G4 | Done | Done (methodology) | **Dropped** |
+| G5 | Done | Done | **Dropped** |
+| G6 | Resolved | [g6-gate-identity-debug.md](./g6-gate-identity-debug.md) | **Dropped** |
+| G7 | Done | Process boundary | **`comprehension:req_implementation_status_requires_tied_verify`** |
+| G2 | N/A | `production_touch: none` | **Dropped** (no OFSM in republish input) |
+| G3 | Open | Partial `131f0011`; [REQ-TIED_CORPUS_COMPREHENSION](../../REQ-TIED_CORPUS_COMPREHENSION/PLAN.md) | **`methodology:tied_yaml_corpus_not_in_source_graph`** |
 
 ---
 
@@ -50,8 +50,8 @@ Brownfield regenerable noise was **restored** before push (see hygiene receipt).
 ## Do next
 
 1. ~~**Optional** — sync G4/G6 rows in [gap-planning-handoff.md](./gap-planning-handoff.md).~~ **Done (2026-10-31).**
-2. **Republish** DOC EDPC manifest (optional `@non-tied-plan`) to trim closed `gaps[]`.
-3. **G3** — `@add-feature` / `build-plan` for full YAML corpus graph.
+2. ~~**Republish** DOC EDPC manifest.~~ **Done (2026-10-31)** — [edpc-publish-republish-2026-10-31.json](./receipts/edpc-publish-republish-2026-10-31.json).
+3. **G3** — `@add-feature` / `build-plan` for full YAML corpus graph (clears remaining manifest gap when complete).
 4. **G4** — `@citdp-promote` only if normative token wanted.
 5. ~~**LangGraph** — P4 traceable SHA sync (`58c1fa9b`) in working docs + CHANGELOG.~~ **Done (2026-10-31)** — push with this chore commit.
 

@@ -2,7 +2,7 @@
 
 **Purpose:** Turn [edpc-publish-manifest.v1.json](./edpc/edpc-publish-manifest.v1.json) `gaps[]` into sponsor-ready **plan seeds** (workflow, token, entry prompt).  
 **Baseline:** `cf321c96` · **Close-out commit:** `944f0666` · **Gap sprint handoff:** [session-handoff.md](./session-handoff.md) (`c74a4d96`)  
-**Matrix sync:** 2026-10-31 — G4/G6 rows aligned to shipped methodology + G6 debug receipt (manifest `gaps[]` still stale until republish).  
+**Matrix sync:** 2026-10-31 — G4/G6 rows aligned; manifest **republished** ([receipt](./receipts/edpc-publish-republish-2026-10-31.json)) — `gaps[]` now G3 + G7 only.  
 **Authority:** Publish gaps are **backlog**, not approved REQ scope until `@add-feature` / `@refine-plan` locks tokens.
 
 ---
