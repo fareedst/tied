@@ -1,0 +1,8 @@
+{
+  "schema": "envelope-corpus-manifest-build-summary.v1",
+  "generated_at": "2026-10-31T17:29:10.255Z",
+  "manifest_path": "tied-project/working/evaluation/envelope-corpus-manifest.v1.yaml",
+  "row_count": 133,
+  "skipped_folder_count": 118,
+  "manifest_sha256": "4bbeda997e07ffba6821f05ff8127fcc21cd88e3d8f639e8b3f44a3a795996c5"
+}

@@ -15,6 +15,18 @@ import type { ArtifactKind, ArtifactStatus, RequestEvidenceEnvelope } from "./ty
 import { validateRequestEvidenceEnvelope } from "./validate.js";
 
 export const BATCH_INPUT_SCHEMA = "envelope-batch-inputs.v1" as const;
+/** Store evaluation corpus manifest (same row shape as batch inputs). */
+export const ENVELOPE_CORPUS_MANIFEST_SCHEMA = "envelope-corpus-manifest.v1" as const;
+
+const BATCH_MANIFEST_SCHEMAS = new Set<string>([
+  BATCH_INPUT_SCHEMA,
+  ENVELOPE_CORPUS_MANIFEST_SCHEMA,
+]);
+
+/** REQ-, PLAN-, DOC-, and other committed working-folder tokens. */
+export function isBatchManifestRequestToken(token: string): boolean {
+  return /^[A-Z][A-Z0-9_.-]{2,}$/.test(token);
+}
 export const GAP_REPORT_SCHEMA = "envelope-gap-report.v1" as const;
 export const BATCH_GENERATOR = "request_evidence_envelope_batch_collect" as const;
 export const BATCH_GENERATOR_VERSION = "1.0.0";
@@ -195,8 +207,10 @@ export function loadBatchInputManifest(manifestPath: string): BatchInputManifest
     throw new Error(`InvalidManifest: ${error instanceof Error ? error.message : String(error)}`);
   }
   if (!isRecord(parsed)) throw new Error("InvalidManifest: document must be a mapping");
-  if (parsed.schema_version !== BATCH_INPUT_SCHEMA) {
-    throw new Error(`InvalidManifest: schema_version must be ${BATCH_INPUT_SCHEMA}`);
+  if (typeof parsed.schema_version !== "string" || !BATCH_MANIFEST_SCHEMAS.has(parsed.schema_version)) {
+    throw new Error(
+      `InvalidManifest: schema_version must be ${BATCH_INPUT_SCHEMA} or ${ENVELOPE_CORPUS_MANIFEST_SCHEMA}`,
+    );
   }
   if (!Array.isArray(parsed.rows)) throw new Error("InvalidManifest: rows must be an array");
   const rows: BatchInputRow[] = parsed.rows.map((row, index) => {
@@ -204,8 +218,10 @@ export function loadBatchInputManifest(manifestPath: string): BatchInputManifest
     if (typeof row.project_root !== "string" || row.project_root.trim() === "") {
       throw new Error(`InvalidManifest: rows[${index}].project_root is required`);
     }
-    if (typeof row.request_token !== "string" || !row.request_token.startsWith("REQ-")) {
-      throw new Error(`InvalidManifest: rows[${index}].request_token must start with REQ-`);
+    if (typeof row.request_token !== "string" || !isBatchManifestRequestToken(row.request_token)) {
+      throw new Error(
+        `InvalidManifest: rows[${index}].request_token must be an uppercase working request/plan token`,
+      );
     }
     return {
       project_root: row.project_root,
@@ -245,7 +261,7 @@ export function loadRowsFromEvaluationCorpus(corpusPath: string, projectRoot: st
   for (const [index, project] of corpusEntries.entries()) {
     if (!isRecord(project)) continue;
     const requestToken = typeof project.request_token === "string" ? project.request_token : undefined;
-    if (!requestToken?.startsWith("REQ-")) continue;
+    if (!requestToken || !isBatchManifestRequestToken(requestToken)) continue;
     const notes = typeof project.notes === "string" ? project.notes : "";
     const clientAlias = typeof project.client_alias === "string" ? project.client_alias : `row-${index}`;
     const requireMode =

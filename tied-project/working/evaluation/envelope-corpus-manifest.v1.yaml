@@ -1,0 +1,807 @@
+schema_version: envelope-corpus-manifest.v1
+privacy_tier: shareable_hashed
+include_absolute_paths: false
+generated_at: '2026-10-31T17:29:10.255Z'
+generator: tools/evaluation/build-envelope-corpus-manifest.mjs
+notes: >-
+  Full store working-folder envelope inventory (G5). Refresh before batch collect; paths are operator-local
+  project_root.
+rows:
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-CHECKLIST-PROCESS-REVIEW
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-CLAUDE-REVIEW-FEEDBACK-MCP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-CLOSE-OUT-WORKSPACE-IN-PASS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-DATA-FILE-ORDERING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-DATA-FILE-ORDERING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-GF-05-SCOPE-CLOSE-OUT-EXT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-GF-05-SCOPE-CLOSE-OUT-EXT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-HARNESS2-COMPARISON
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-HARNESS2-COMPARISON/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-LANGCHAIN-HARNESS-COMPARISON
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-LANGCHAIN-HARNESS-COMPARISON/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-MCP-CORE-OPTIN-SPLIT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-MCP-CORE-OPTIN-SPLIT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-4.0-RESPONSE-STAMP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-4.0-RESPONSE-STAMP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-BBCE-ALIGNMENT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-BBCE-ALIGNMENT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-INSTALL-BATCH-TARGETS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-KAIZEN-FEEDBACK-LOOP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-KAIZEN-FEEDBACK-LOOP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-LG-P2-EVIDENCE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-LG-P2-EVIDENCE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-LG-P3-TDD
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-LG-P3-TDD/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-QMM-FOLLOWON-C
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-QMM-FOLLOWON-C/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-QMM-W4-EVIDENCE-CHAIN-REPORT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/PLAN-TIED-QMM-W5-PROMPT-TYPE-GATE-ENROLLMENT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-CHECKLIST-PROCESS-REVIEW
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-CHECKLIST-PROCESS-REVIEW/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-CITDP_ORDERED_LIST_KEYS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-CITDP_ORDERED_LIST_KEYS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-EVIDENCE_CHAIN_REPORT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-EVIDENCE_CHAIN_REPORT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-FEAT_TASK_EXECUTION_RECOVERY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-FEAT_TASK_EXECUTION_RECOVERY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-GF16-KAIZEN-OUTCOME-CLOSE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-GOAGENT-CLI-CONFIG
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-GOAGENT-CLI-CONFIG/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-KAIZEN-FEEDBACK-ANALYSIS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-KAIZEN-FEEDBACK-ANALYSIS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-KAIZEN-FEEDBACK-MCP-WIRING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-KAIZEN-FEEDBACK-MCP-WIRING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-KAIZEN-FEEDBACK-PILOT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-KAIZEN-FEEDBACK-PILOT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-KAIZEN-OBSERVATION-CAPTURE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-KAIZEN-OBSERVATION-CAPTURE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-KAIZEN-OUTCOME-LOOP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-KAIZEN-OUTCOME-LOOP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-KAIZEN-REVIEW-BRIDGE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-KAIZEN-REVIEW-BRIDGE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-KAIZEN-SOURCE-NORMALIZATION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-KAIZEN-SOURCE-NORMALIZATION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-MCP_STDIO_CONSOLE_GUARD
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-METHODOLOGY-CONFORMANCE-EFFECTIVENESS-PAIRING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-METHODOLOGY-KAIZEN-EXPERIMENT-BRIDGE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-METHODOLOGY-LEARNING-COHORT-EXPORT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-METHODOLOGY-LEARNING-EXPERIMENT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-METHODOLOGY-LEARNING-EXPERIMENT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-METHODOLOGY-SURFACE-EXPERIMENT-GATE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PROMPT_TYPE_GLOBAL_SKILLS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PROMPT_TYPE_GLOBAL_SKILLS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PROMPT_TYPE_PLAN_CLOSE_OUT_COMMIT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_CONSTRAINT_V2_FLEET_MIGRATION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_FLEET_G4_MAINTENANCE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_FLEET_NB1_TRANCHE_ZERO/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_FLEET_NB2_TRANCHE_ONE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_FLEET_NB3_TRANCHE_TWO/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_FLEET_NB4_TRANCHE_FINAL/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_GRAMMAR_V2_DEFAULT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_LAYER_B_CORPUS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_LAYER_B_CORPUS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_SIDECAR_BLOCK_LEAD_SWEEP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_STATIC_ANALYSIS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_STATIC_ANALYSIS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-REQUEST_EVIDENCE_ENVELOPE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-REQUEST_EVIDENCE_ENVELOPE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_ASYNC_METHODOLOGY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_ASYNC_METHODOLOGY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_BOUNDED_COMPOSITION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_BROWNFIELD_INTENT_ELEVATION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_BROWNFIELD_INTENT_ELEVATION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLAUDE_ADHERENCE_HOOKS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLAUDE_ADHERENCE_HOOKS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLAUDE_BOOTSTRAP_OPS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLAUDE_BOOTSTRAP_OPS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLAUDE_CLIENT_FACTORY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLAUDE_CLIENT_FACTORY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLAUDE_DOC_REMAINDER
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLAUDE_DOC_REMAINDER/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLAUDE_HARNESS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLAUDE_HARNESS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLAUDE_LIVE_DRIVER
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLAUDE_LIVE_DRIVER/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLAUDE_SKILLS_REROOT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLAUDE_SKILLS_REROOT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLEAR_WORKSPACE_SKILL
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLI_MCP_JSON_BASE_PATH
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLIENT_BOOTSTRAP_SKILLS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLIENT_DEVOPS_APPENDIX
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLIENT_DEVOPS_APPENDIX/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLIENT_FEEDBACK_CAPTURE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLIENT_FEEDBACK_CAPTURE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLIENT_PATH_ENV_MIGRATION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLIENT_PATH_ENV_MIGRATION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CLIENT_REFRESH_PARITY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CLIENT_REFRESH_PARITY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_CORPUS_COMPREHENSION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_CORPUS_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_DAE_INCORPORATION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_DAE_INCORPORATION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_DAE_VERIFICATION_CHARTER
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_DAE_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_DURABLE_CHECKLIST_CONTROLLER
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_EASAR_RECOVERY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_EASAR_RECOVERY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_EDPC_CLIENT_ASSESSMENT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_EDPC_COMPREHENSION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_EDPC_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_EXTERNAL_SERVICE_COMPARISON
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_EXTERNAL_SERVICE_COMPARISON/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_FEEDBACK_REPORT_SKILL
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_FEEDBACK_REPORT_SKILL/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_GATE_LEDGER_JSONL_PATH
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_GATE_LEDGER_JSONL_PATH/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_HARNESS_LANGCHAIN_PHASE3
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_HARNESS_LANGCHAIN_PHASE3/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_HARNESS_LANGSMITH_COMPOSE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_HARNESS_LANGSMITH_COMPOSE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_HARNESS_PLATFORM_SEAM
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_HARNESS_PLATFORM_SEAM/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_HARNESS_TRACE_LEARNING_PILOT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_HARNESS_TRACE_LEARNING_PILOT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_HTOL_PILOT_COHORT_RUNBOOK/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_INTENT_CONTROL_PLANE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_JEV_CONTEXT_LOG_PRUNING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_JEV_DECISION_COPROCESSOR
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_JEV_LOCAL_DECISION_PROVIDER
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_JEV_LOCAL_DECISION_PROVIDER/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_JEV_TOOL_SAFETY_GATING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_JEV_TOOL_SAFETY_GATING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_MCP_JSON_CANONICAL_OUTPUT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_NEW_CLIENT_ADHERENCE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_NEW_CLIENT_ADHERENCE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_NODE_TOOLCHAIN_DEFAULT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_NODE_TOOLCHAIN_DEFAULT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_OPEN_ONTOLOGIES_WAVE3
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_OPEN_ONTOLOGIES_WAVE3/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_PRIMARY_REPO_ONBOARDING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_PROCESS_CERTIFICATION_READINESS
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_PROJECT_LINT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-MCP-PROJECT-OPERATIONS/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_PROJECT_LINT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_PROJECT_LINT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_REVIEW_CONVERGENCE_POLICY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_REVIEW_CONVERGENCE_POLICY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_SESSION_HANDOFF_SKILL
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_SETUP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_SETUP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_SOURCE_GRAPH_COMPREHENSION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_SOURCE_GRAPH_COMPREHENSION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_SPONSOR_AGENT_RELATIONSHIP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_SPONSOR_AGENT_RELATIONSHIP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_SPONSOR_TWO_LANE_DELIVERY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_STORE_BUNDLE_GIT_POLICY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_STORE_BUNDLE_GIT_POLICY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_TWO_FOLDER_LAYOUT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_TWO_FOLDER_LAYOUT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_UNIFIED_TOOLCHAIN
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_VOCABULARY_OWNERSHIP
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_VOCABULARY_OWNERSHIP/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_WORKFLOW_VISUALIZATION_SKILL
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_WORKING_ARTIFACT_PLACEMENT
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_WORKING_ARTIFACT_PLACEMENT/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_YAML_COMPARE_RUBY_LOAD
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_YAML_COMPARE_RUBY_LOAD/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project
+  - project_root: /Users/fareed/Documents/dev/chatgpt/stdd
+    request_token: REQ-TIED_YAML_STYLE_CONFIGURATION
+    client_alias: stdd-store
+    envelope_require_mode: require_envelope
+    envelope_artifact: tied-project/working/REQ-TIED_YAML_STYLE_CONFIGURATION/evidence/request-evidence-envelope.v1.json
+    tied_base_path: /Users/fareed/Documents/dev/chatgpt/stdd/tied-project

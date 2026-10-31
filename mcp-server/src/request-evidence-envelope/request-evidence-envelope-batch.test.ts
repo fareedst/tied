@@ -131,6 +131,30 @@ function minimalEnvelope(requestToken: string): RequestEvidenceEnvelope {
 }
 
 describe("request evidence envelope batch collect [IMPL-REQUEST_EVIDENCE_ENVELOPE_BATCH]", () => {
+  it("loads envelope-corpus-manifest rows with PLAN tokens", () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-corpus-manifest-"));
+    const manifestPath = path.join(tempRoot, "corpus.yaml");
+    writeFileSync(
+      manifestPath,
+      yaml.dump({
+        schema_version: "envelope-corpus-manifest.v1",
+        rows: [
+          {
+            project_root: tempRoot,
+            request_token: "PLAN-EVALUATION-ENVELOPE-CORPUS-FULL",
+            envelope_require_mode: "require_envelope",
+            envelope_artifact: "tied-project/working/PLAN-X/evidence/request-evidence-envelope.v1.json",
+            tied_base_path: path.join(tempRoot, "tied-project"),
+          },
+        ],
+      }),
+      "utf8",
+    );
+    const manifest = loadBatchInputManifest(manifestPath);
+    assert.equal(manifest.rows.length, 1);
+    assert.equal(manifest.rows[0]?.request_token, "PLAN-EVALUATION-ENVELOPE-CORPUS-FULL");
+  });
+
   it("loads batch input manifest rows", () => {
     const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-batch-manifest-"));
     const manifestPath = path.join(tempRoot, "batch-inputs.yaml");
