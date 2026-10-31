@@ -12,12 +12,15 @@ import fg from "fast-glob";
 const mcpRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const repoRoot = path.resolve(mcpRoot, "..");
 const defaultTiedProject = path.join(repoRoot, "tied-project");
-const testEnv = {
-  ...process.env,
-  ...(fs.existsSync(path.join(defaultTiedProject, "requirements.yaml"))
-    ? { TIED_BASE_PATH: defaultTiedProject }
-    : {}),
-};
+// Strip canonical client path env inherited from IDE MCP so unit tests that set
+// legacy TIED_BASE_PATH (or temp dirs) are not overridden by the parent process.
+const testEnv = { ...process.env };
+delete testEnv.TIED_CLIENT_PROJECT_PATH;
+delete testEnv.TIED_CLIENT_BUNDLE_PATH;
+delete testEnv.TIED_METHODOLOGY_BUNDLE_PATH;
+if (fs.existsSync(path.join(defaultTiedProject, "requirements.yaml"))) {
+  testEnv.TIED_BASE_PATH = defaultTiedProject;
+}
 
 const tsPatterns = [
   "src/**/*.test.ts",

@@ -12,6 +12,7 @@ import { generateEvidenceChainProfile, type EvidenceChainProfileAdapters } from 
 import { resolveProjectIdentity } from "./project-identity.js";
 import { wrapToolHandler } from "./usage-metrics.js";
 import { clearBasePathCache } from "./yaml-loader.js";
+import { bindWritableProjectCorpus } from "./test-helpers/client-path-env.js";
 import type { ProjectManifestResult } from "./fidelity-research/manifest.js";
 
 const ENV_KEYS = [
@@ -77,11 +78,10 @@ describe("project identity composition [IMPL-TIED_PROJECT_IDENTITY]", () => {
     saved = saveEnv();
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-identity-compose-"));
     const tiedBasePath = path.join(tempDir, "tied");
-    fs.mkdirSync(tiedBasePath, { recursive: true });
     metricsFile = path.join(tempDir, "metrics.jsonl");
     process.env.TIED_MCP_COLLECT_METRICS = "1";
     process.env.TIED_MCP_METRICS_PATH = metricsFile;
-    process.env.TIED_BASE_PATH = tiedBasePath;
+    bindWritableProjectCorpus(tiedBasePath);
     process.env.TIED_MCP_PROJECT_ID = "shared-compose-id";
     clearBasePathCache();
 

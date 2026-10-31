@@ -22,6 +22,13 @@ import {
   loadIndex,
   loadProjectIndex,
 } from "./yaml-loader.js";
+import { ENV_CLIENT_BUNDLE_PATH, LEGACY_ENV_CLIENT_BUNDLE_PATH } from "./tied-path-env.js";
+import {
+  bindWritableProjectCorpus,
+  restoreClientPathEnv,
+  snapshotClientPathEnv,
+  useLegacyProjectPathOnly,
+} from "./test-helpers/client-path-env.js";
 
 beforeEach(() => {
   clearBasePathCache();
@@ -34,27 +41,31 @@ describe("getBasePath", () => {
   });
 
   it("uses TIED_BASE_PATH when set", () => {
+    const saved = snapshotClientPathEnv();
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-loader-"));
     try {
-      process.env.TIED_BASE_PATH = dir;
+      bindWritableProjectCorpus(dir);
       clearBasePathCache();
       assert.strictEqual(getBasePath(), dir);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
+      clearBasePathCache();
       fs.rmSync(dir, { recursive: true });
     }
   });
 
   it("getClientProjectRoot returns parent of TIED base path", () => {
+    const saved = snapshotClientPathEnv();
     const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-loader-client-"));
     const tiedDir = path.join(clientRoot, "tied-project");
     fs.mkdirSync(tiedDir, { recursive: true });
     try {
-      process.env.TIED_BASE_PATH = tiedDir;
+      bindWritableProjectCorpus(tiedDir);
       clearBasePathCache();
       assert.strictEqual(getClientProjectRoot(), clientRoot);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
+      clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
     }
   });
@@ -62,16 +73,18 @@ describe("getBasePath", () => {
 
 describe("resolveIndexPath", () => {
   it("returns basePath/file when file exists under base [IMPL]", () => {
+    const saved = snapshotClientPathEnv();
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-loader-"));
     const requirementsPath = path.join(dir, "requirements.yaml");
     fs.writeFileSync(requirementsPath, "{}", "utf8");
     try {
-      process.env.TIED_BASE_PATH = dir;
+      useLegacyProjectPathOnly(dir);
       clearBasePathCache();
       const resolved = resolveIndexPath("requirements");
       assert.strictEqual(resolved, requirementsPath);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
+      clearBasePathCache();
       fs.rmSync(dir, { recursive: true });
     }
   });
@@ -85,8 +98,9 @@ describe("resolveIndexPath", () => {
     fs.mkdirSync(cwdDir, { recursive: true });
     const cwdFile = path.join(cwdDir, "requirements.yaml");
     fs.writeFileSync(cwdFile, "{}", "utf8");
+    const saved = snapshotClientPathEnv();
     try {
-      process.env.TIED_BASE_PATH = baseDir;
+      useLegacyProjectPathOnly(baseDir);
       clearBasePathCache();
       process.chdir(cwdDir);
       clearBasePathCache();
@@ -96,7 +110,8 @@ describe("resolveIndexPath", () => {
       assert.ok(resolved.includes("cwd") && resolved.endsWith("requirements.yaml"));
     } finally {
       process.chdir(origCwd);
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
+      clearBasePathCache();
       fs.rmSync(dir, { recursive: true });
     }
   });
@@ -132,15 +147,16 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
     fs.writeFileSync(path.join(bundleDir, "requirements.yaml"), "{}\n", "utf8");
     const override = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-override-"));
     fs.writeFileSync(path.join(override, "requirements.yaml"), "{}\n", "utf8");
+    const saved = snapshotClientPathEnv();
     try {
-      process.env.TIED_BASE_PATH = tiedDir;
-      process.env.TIED_METHODOLOGY_BUNDLE_PATH = override;
+      useLegacyProjectPathOnly(tiedDir);
+      delete process.env[ENV_CLIENT_BUNDLE_PATH];
+      process.env[LEGACY_ENV_CLIENT_BUNDLE_PATH] = override;
       clearBasePathCache();
       assert.strictEqual(resolveMethodologyRoot(), override);
       assert.strictEqual(getMethodologyBasePath(), override);
     } finally {
-      delete process.env.TIED_BASE_PATH;
-      delete process.env.TIED_METHODOLOGY_BUNDLE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
       fs.rmSync(override, { recursive: true });
@@ -153,18 +169,21 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
     const bundleDir = path.join(clientRoot, "tied-bundle");
     fs.mkdirSync(tiedDir, { recursive: true });
     fs.mkdirSync(bundleDir, { recursive: true });
+    fs.writeFileSync(path.join(tiedDir, "requirements.yaml"), "{}\n", "utf8");
     fs.writeFileSync(path.join(bundleDir, "requirements.yaml"), "{}\n", "utf8");
     fs.writeFileSync(
       path.join(bundleDir, "install.json"),
       JSON.stringify({ schema: "tied-install.v2", bundle_path: bundleDir }),
       "utf8",
     );
+    const saved = snapshotClientPathEnv();
     try {
-      process.env.TIED_BASE_PATH = tiedDir;
+      useLegacyProjectPathOnly(tiedDir);
+      delete process.env[ENV_CLIENT_BUNDLE_PATH];
       clearBasePathCache();
       assert.strictEqual(resolveMethodologyRoot(), bundleDir);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
     }
@@ -185,8 +204,10 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
       "utf8",
     );
     fs.writeFileSync(path.join(bundleDir, "requirements.yaml"), "{}\n", "utf8");
+    fs.writeFileSync(path.join(tiedDir, "requirements.yaml"), "{}\n", "utf8");
     fs.writeFileSync(path.join(tiedDir, "implementation-decisions.yaml"), "{}\n", "utf8");
-    process.env.TIED_BASE_PATH = tiedDir;
+    useLegacyProjectPathOnly(tiedDir);
+    delete process.env[ENV_CLIENT_BUNDLE_PATH];
     clearBasePathCache();
     return { clientRoot, tiedDir, bundleDir };
   }
@@ -198,6 +219,7 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
   }
 
   it("insertRecord writes only the new project token [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const saved = snapshotClientPathEnv();
     const { clientRoot, tiedDir } = seedTwoFolderClient();
     try {
       const result = insertRecord("implementation", "IMPL-CLIENT-NEW", {
@@ -210,13 +232,14 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
       assert.ok(merged && merged["IMPL-CLIENT-NEW"]);
       assert.ok(merged && merged["IMPL-METH-A"]);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
     }
   });
 
   it("insertRecord rejects methodology token name collision [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const saved = snapshotClientPathEnv();
     const { clientRoot, tiedDir } = seedTwoFolderClient();
     try {
       const result = insertRecord("implementation", "IMPL-METH-A", {
@@ -226,13 +249,14 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
       assert.strictEqual(result.ok, false);
       assert.strictEqual(countImplIndexTokens(tiedDir), 0);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
     }
   });
 
   it("updateRecord promotes one override row for methodology-only token [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const saved = snapshotClientPathEnv();
     const { clientRoot, tiedDir } = seedTwoFolderClient();
     try {
       const result = updateRecord("implementation", "IMPL-METH-A", { status: "Deprecated" });
@@ -242,35 +266,40 @@ describe("resolveMethodologyRoot [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
       assert.ok(project?.["IMPL-METH-A"]);
       assert.strictEqual((project?.["IMPL-METH-A"] as { status?: string }).status, "Deprecated");
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
     }
   });
 
   it("upsertRecord does not materialize full methodology index [REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION]", () => {
+    const saved = snapshotClientPathEnv();
     const { clientRoot, tiedDir } = seedTwoFolderClient();
     try {
       const result = upsertRecord("implementation", "IMPL-METH-B", { status: "Template" });
       assert.strictEqual(result.ok, true);
       assert.strictEqual(countImplIndexTokens(tiedDir), 1);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
     }
   });
 
   it("returns null when .linked-methodology-view is present without bundle indexes", () => {
+    const saved = snapshotClientPathEnv();
     const clientRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-meth-legacy-view-"));
     const tiedDir = path.join(clientRoot, "tied-project");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.writeFileSync(path.join(tiedDir, "requirements.yaml"), "{}\n", "utf8");
     fs.mkdirSync(path.join(tiedDir, ".linked-methodology-view"), { recursive: true });
     try {
-      process.env.TIED_BASE_PATH = tiedDir;
+      useLegacyProjectPathOnly(tiedDir);
+      delete process.env[ENV_CLIENT_BUNDLE_PATH];
       clearBasePathCache();
       assert.strictEqual(resolveMethodologyRoot(), null);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(clientRoot, { recursive: true });
     }

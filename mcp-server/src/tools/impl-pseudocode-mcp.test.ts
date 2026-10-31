@@ -7,6 +7,11 @@ import os from "node:os";
 import path from "node:path";
 import { describe, it, beforeEach } from "node:test";
 import { clearBasePathCache } from "../yaml-loader.js";
+import {
+  bindWritableProjectCorpus,
+  restoreClientPathEnv,
+  snapshotClientPathEnv,
+} from "../test-helpers/client-path-env.js";
 import { allTools } from "./index.js";
 import { getImplPseudocodeSidecarPath } from "../detail-loader.js";
 
@@ -60,6 +65,7 @@ describe("impl_detail_set_essence_pseudocode (MCP)", () => {
   });
 
   it("writes the same sidecar content from essence_pseudocode_path as from inline [IMPL]", async () => {
+    const saved = snapshotClientPathEnv();
     const base = fs.mkdtempSync(path.join(os.tmpdir(), "tied-impl-ep-"));
     try {
       const id = "IMPL_PSEUDOCODE_MCP_TEST";
@@ -76,7 +82,7 @@ ${token}:
       const text = "INPUT line one\n# [REQ-TEST] block\n";
       fs.writeFileSync(pathBody, text, "utf8");
 
-      process.env.TIED_BASE_PATH = base;
+      bindWritableProjectCorpus(base);
       clearBasePathCache();
 
       const r1 = await handler({
@@ -100,7 +106,7 @@ ${token}:
       assert.equal(body2.ok, true);
       assert.equal(fs.readFileSync(side, "utf8"), text);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(base, { recursive: true, force: true });
     }

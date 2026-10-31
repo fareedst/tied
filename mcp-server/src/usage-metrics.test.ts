@@ -24,6 +24,7 @@ import {
 import { resolveProjectIdentity } from "./project-identity.js";
 import { clearBasePathCache } from "./yaml-loader.js";
 import { allTools } from "./tools/index.js";
+import { bindWritableProjectCorpus } from "./test-helpers/client-path-env.js";
 
 const ENV_KEYS = [
   "TIED_MCP_COLLECT_METRICS",
@@ -133,7 +134,7 @@ describe("recordToolCall and wrapToolHandler", () => {
     metricsFile = path.join(tempDir, "metrics.jsonl");
     process.env.TIED_MCP_COLLECT_METRICS = "1";
     process.env.TIED_MCP_METRICS_PATH = metricsFile;
-    process.env.TIED_BASE_PATH = tempDir;
+    bindWritableProjectCorpus(tempDir);
     delete process.env.TIED_MCP_METRICS_CLIENT;
     clearBasePathCache();
 
@@ -166,7 +167,7 @@ describe("recordToolCall and wrapToolHandler", () => {
     metricsFile = path.join(tempDir, "metrics.jsonl");
     process.env.TIED_MCP_COLLECT_METRICS = "1";
     process.env.TIED_MCP_METRICS_PATH = metricsFile;
-    process.env.TIED_BASE_PATH = tempDir;
+    bindWritableProjectCorpus(tempDir);
     process.env.TIED_MCP_PROJECT_ID = "  relocation-stable-id  ";
     clearBasePathCache();
 
@@ -190,7 +191,7 @@ describe("recordToolCall and wrapToolHandler", () => {
     metricsFile = path.join(tempDir, "metrics.jsonl");
     process.env.TIED_MCP_COLLECT_METRICS = "1";
     process.env.TIED_MCP_METRICS_PATH = metricsFile;
-    process.env.TIED_BASE_PATH = tempDir;
+    bindWritableProjectCorpus(tempDir);
     process.env.TIED_MCP_PROJECT_ID = "bad/id";
     clearBasePathCache();
 
@@ -209,7 +210,7 @@ describe("recordToolCall and wrapToolHandler", () => {
     metricsFile = path.join(tempDir, "metrics.jsonl");
     process.env.TIED_MCP_COLLECT_METRICS = "1";
     process.env.TIED_MCP_METRICS_PATH = metricsFile;
-    process.env.TIED_BASE_PATH = tempDir;
+    bindWritableProjectCorpus(tempDir);
     clearBasePathCache();
 
     const handler = wrapToolHandler("evidence_chain_profile_generate", async () => ({

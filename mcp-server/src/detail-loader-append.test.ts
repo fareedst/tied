@@ -10,6 +10,11 @@ import os from "node:os";
 import { clearBasePathCache } from "./yaml-loader.js";
 import { insertRecord } from "./yaml-loader.js";
 import {
+  bindWritableProjectCorpus,
+  restoreClientPathEnv,
+  snapshotClientPathEnv,
+} from "./test-helpers/client-path-env.js";
+import {
   writeDetail,
   appendImplementationApproachDetails,
   loadDetail,
@@ -22,9 +27,10 @@ beforeEach(() => {
 
 describe("appendImplementationApproachDetails", () => {
   it("appends lines without dropping existing implementation_approach.details", () => {
+    const saved = snapshotClientPathEnv();
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-append-"));
     try {
-      process.env.TIED_BASE_PATH = dir;
+      bindWritableProjectCorpus(dir);
       clearBasePathCache();
       const token = "IMPL-APPEND-TST";
       const ins = insertRecord("implementation", token, {
@@ -59,7 +65,7 @@ describe("appendImplementationApproachDetails", () => {
       const ia = detail!.implementation_approach as Record<string, unknown>;
       assert.deepStrictEqual(ia.details, ["first bullet", "second", "third"]);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(dir, { recursive: true });
     }
@@ -68,9 +74,10 @@ describe("appendImplementationApproachDetails", () => {
 
 describe("IMPL essence sidecar (via writeDetail + loadDetail)", () => {
   it("writes essence_pseudocode to IMPL-TOKEN-pseudocode.md, not in YAML", () => {
+    const saved = snapshotClientPathEnv();
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-dump-"));
     try {
-      process.env.TIED_BASE_PATH = dir;
+      bindWritableProjectCorpus(dir);
       clearBasePathCache();
       const token = "IMPL-BLOCK-DUMP";
       const ins = insertRecord("implementation", token, {
@@ -109,7 +116,7 @@ describe("IMPL essence sidecar (via writeDetail + loadDetail)", () => {
       assert.ok(loaded);
       assert.strictEqual(loaded.essence_pseudocode, ep);
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(dir, { recursive: true });
     }
@@ -118,9 +125,10 @@ describe("IMPL essence sidecar (via writeDetail + loadDetail)", () => {
 
 describe("listDetailTokens", () => {
   it("does not list IMPL-TOKEN-pseudocode as a token", () => {
+    const saved = snapshotClientPathEnv();
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-list-"));
     try {
-      process.env.TIED_BASE_PATH = dir;
+      bindWritableProjectCorpus(dir);
       clearBasePathCache();
       const implDir = path.join(dir, "implementation-decisions");
       fs.mkdirSync(implDir, { recursive: true });
@@ -130,7 +138,7 @@ describe("listDetailTokens", () => {
       assert.ok(tokens.includes("IMPL-ONLY-SIDE"));
       assert.ok(!tokens.includes("IMPL-ONLY-SIDE-pseudocode"));
     } finally {
-      delete process.env.TIED_BASE_PATH;
+      restoreClientPathEnv(saved);
       clearBasePathCache();
       fs.rmSync(dir, { recursive: true });
     }
