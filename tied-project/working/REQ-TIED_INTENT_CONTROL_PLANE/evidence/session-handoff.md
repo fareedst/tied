@@ -30,9 +30,14 @@
 
 ## Do next
 
-1. **`git push`** when sponsor wants origin updated
-2. ~~LEAP: unify duplicate `checklist-controller-resume.ts` copies~~ — done (`@tied/checklist-resume`, 2026-10-31)
-3. Optional: refresh full-suite MCP tests for dogfood `marker_only` (yaml-loader fixture expectations)
+1. **`git push`** when sponsor wants origin updated (includes **`e96b9483`** LEAP unify and prior ahead commits)
+2. Optional: refresh full-suite MCP tests for dogfood `marker_only` (yaml-loader fixture expectations)
+
+**Done:**
+
+- ~~LEAP unify duplicate `checklist-controller-resume.ts`~~ — **`e96b9483`** (`@tied/checklist-resume`, 2026-10-31)
+- ~~**`@clear-workspace`**~~ — 2026-10-31; receipt [git-hygiene-receipt-2026-10-31-clear-workspace.md](./git-hygiene-receipt-2026-10-31-clear-workspace.md)
+- ~~Post close-out traceable commit (hygiene + test-isolation evidence)~~ — record SHA below after commit
 
 ## Constraints
 

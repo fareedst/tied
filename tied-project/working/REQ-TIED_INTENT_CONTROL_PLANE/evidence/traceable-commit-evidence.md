@@ -40,3 +40,30 @@ N/A — no upstream feedback ingest this wave.
 | Adherence ledger | **reconciled** (gate runner `--reconcile`) |
 
 **Advisory:** integrated inquiry `finding_unresolved` / `warn_not_success` (carried from prior waves).
+
+---
+
+## Post close-out — `@clear-workspace` hygiene (2026-10-31)
+
+**Scope:** Working evidence only (program already closed at `fe68d5e8`).
+
+### Staging map
+
+- `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/git-hygiene-receipt-2026-10-31-clear-workspace.md`
+- `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/close-out-mcp-test-isolation-2026-10-30.md`
+- `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/session-handoff.md`
+- `tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/evidence/traceable-commit-evidence.md` (this file)
+
+### Excluded
+
+- Repo-root `project-identity.v1.yaml` (dogfood marker; ICP constraint)
+- `evidence-chain-profile.v1.json` (regenerable operator output)
+- Regenerable drift restored in hygiene pass (source-graph, fixtures, manifests)
+
+### Hygiene
+
+[git-hygiene-receipt-2026-10-31-clear-workspace.md](./git-hygiene-receipt-2026-10-31-clear-workspace.md)
+
+### Commit
+
+Record SHA after `git commit` in [session-handoff.md](./session-handoff.md).
