@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "diagnostics": [
+    "full_engagement_requires_pilot_or_strict_mode"
+  ],
+  "tool": "tied_edpc_engagement_validate",
+  "interpretation": "Expected for brownfield_intent_elevation.mode report_only; charter tier still toolchain_readonly.",
+  "recorded_at": "2026-10-31"
+}

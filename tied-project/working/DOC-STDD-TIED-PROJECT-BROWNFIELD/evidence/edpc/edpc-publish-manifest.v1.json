@@ -1,0 +1,21 @@
+{
+  "schema_version": "edpc-publish-manifest.v1",
+  "request_token": "DOC-STDD-TIED-PROJECT-BROWNFIELD",
+  "tier": "toolchain_readonly",
+  "baseline_revision": "cf321c96",
+  "gaps": [
+    "minimum_field_gap:request_token",
+    "ofsm:bundle_missing",
+    "methodology:tied_yaml_corpus_not_in_source_graph",
+    "methodology:meta_hub_edpc_template_deferred",
+    "process:envelope_sample_ten_tokens_not_full_corpus",
+    "gate:project_config_identity_key_blocks_checklist_gate_tools",
+    "comprehension:req_implementation_status_requires_tied_verify"
+  ],
+  "receipt_refs": {
+    "corpus_map": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/reports/tied-project-corpus-map.md",
+    "claims_ledger": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/claims-ledger.v1.yaml",
+    "brownfield_validate": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/brownfield-intent-evidence-validate.json",
+    "scm_shell": "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/edpc/scm-snapshot-shell.v1.yaml"
+  }
+}

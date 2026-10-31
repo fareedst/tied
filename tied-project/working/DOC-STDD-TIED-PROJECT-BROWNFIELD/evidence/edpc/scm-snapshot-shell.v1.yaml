@@ -1,0 +1,13 @@
+minimum_fields:
+  baseline_revision: "cf321c96"
+  request_token: "DOC-STDD-TIED-PROJECT-BROWNFIELD"
+  tier: "toolchain_readonly"
+receipt_refs:
+  access_validate: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/edpc-access-validate.json"
+  corpus_inventory: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/inventory.v1.json"
+  engagement_validate: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/receipts/edpc-engagement-validate.json"
+  source_graph_index: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/source-graph-index.v1.json"
+  source_graph_trace: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/source-graph-trace-getBasePath.v1.json"
+  tied_validate_consistency: "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/tied-validate-consistency-summary.json"
+request_token: "DOC-STDD-TIED-PROJECT-BROWNFIELD"
+schema_version: "scm-snapshot-shell.v1"

@@ -1,0 +1,10 @@
+{
+  "schema_version": "source-graph-trace-receipt.v1",
+  "request_token": "DOC-STDD-TIED-PROJECT-BROWNFIELD",
+  "baseline_revision": "cf321c96",
+  "symbol_id": "src/yaml-loader.ts#getBasePath",
+  "proof_boundary": "Static TS graph only; does not prove runtime cwd/marker routing in every IDE host.",
+  "callee_count": 8,
+  "caller_count": 30,
+  "note": "Full trace captured via tied_source_graph_trace during build-plan; callers include consistency-validator, verify, envelope batch, citdp-writer."
+}

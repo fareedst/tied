@@ -1,0 +1,21 @@
+{
+  "schema_version": "inventory.v1",
+  "baseline_revision": "cf321c96",
+  "request_token": "DOC-STDD-TIED-PROJECT-BROWNFIELD",
+  "tied_project": {
+    "requirements_index_lines": 3860,
+    "semantic_tokens_index_lines": 4985,
+    "architecture_index_lines": 2763,
+    "implementation_index_lines": 3311,
+    "requirement_detail_files": 185,
+    "architecture_detail_files": 180,
+    "implementation_detail_files": 215,
+    "working_top_level_folders": 247,
+    "citdp_persisted_files": 213,
+    "vocab_markdown_files": 25
+  },
+  "code_roots": {
+    "mcp_server_ts_files": 646,
+    "bootstrap_files": 223
+  }
+}

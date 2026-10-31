@@ -1,0 +1,7 @@
+docs(store): brownfield tied-project corpus map and CITDP dedupe
+
+DOC-STDD-TIED-PROJECT-BROWNFIELD; [PROC-EDPC_COMPREHENSION]; no REQ mint.
+
+- EDPC working evidence, corpus map, stdd-workflows hub, envelope-gap refresh
+- Remove 64 net duplicate working CITDP drafts (canonical in tied-project/citdp/)
+- Completion: machine close_out N/A (minimal DOC); process satisfied; ledger N/A

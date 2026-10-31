@@ -1,70 +1,13 @@
-excluded_rows: []
+excluded_rows:
+  - client_alias: "1787603099"
+    reason: "envelope_missing"
+    request_token: "REQ-LISTENING_PORT_REPORT"
 generated_at: "2026-09-10T18:00:00.000Z"
 generator: "request_evidence_envelope_batch_collect"
 generator_version: "1.0.0"
 include_absolute_paths: false
 privacy_tier: "shareable_hashed"
 rows:
-  - artifact_coverage:
-      by_kind:
-        adversarial_inquiry_gate:
-          missing: 0
-          not_applicable: 0
-          present: 4
-          waived: 0
-        adversarial_inquiry_ledger:
-          missing: 0
-          not_applicable: 0
-          present: 4
-          waived: 0
-        adversarial_inquiry_obligation:
-          missing: 0
-          not_applicable: 0
-          present: 4
-          waived: 0
-        adversarial_inquiry_provenance:
-          missing: 0
-          not_applicable: 0
-          present: 4
-          waived: 0
-        checklist_tracker:
-          missing: 0
-          not_applicable: 0
-          present: 1
-          waived: 0
-        citdp_record:
-          missing: 0
-          not_applicable: 0
-          present: 2
-          waived: 0
-        evidence_chain_profile:
-          missing: 1
-          not_applicable: 0
-          present: 0
-          waived: 0
-        unknown:
-          missing: 0
-          not_applicable: 0
-          present: 2
-          waived: 0
-      denominator_kinds: 8
-    client_alias: "1787603099"
-    envelope_artifact: "working/REQ-LISTENING_PORT_REPORT/evidence/request-evidence-envelope.v1.json"
-    envelope_require_mode: "require_envelope"
-    envelope_revision: 1
-    envelope_source: "envelope_file"
-    gap_codes:
-      - "artifact_path_root_projection_rejected"
-      - "evidence_stale"
-      - "expected_artifact_missing"
-      - "finding_unresolved"
-      - "legacy_json_in_json_wrapper"
-      - "provenance_incomplete"
-      - "thin_ledger"
-      - "tracker_dual_write"
-      - "tracker_sparse"
-    request_token: "REQ-LISTENING_PORT_REPORT"
-    status: "included"
   - artifact_coverage:
       by_kind:
         checklist_tracker:
