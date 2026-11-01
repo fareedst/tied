@@ -62,8 +62,8 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/test-strategy.md"
       - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/refine-plan-handoff-structure-20261101.md"
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/test-strategy.md"
     slug: "test-strategy"
     tracking:
       status: "completed"
@@ -157,8 +157,8 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/traceable-commit-evidence.md"
       - "2c642e28"
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/traceable-commit-evidence.md"
     slug: "traceable-commit"
     tracking:
       status: "completed"

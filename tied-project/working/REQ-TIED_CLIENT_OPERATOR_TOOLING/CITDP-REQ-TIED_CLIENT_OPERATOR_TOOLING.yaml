@@ -20,17 +20,17 @@ CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING:
       - "IMPL-TIED_CLIENT_OPERATOR_TOOLING"
     modules_or_boundaries: "mcp-server checklist-validator, impl-pseudocode-input, tied-methodology-version; tools/bootstrap run-close-out-gates.mjs"
     tied_tokens_affected:
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "REQ-TIED_SETUP"
     tied_tokens_new:
-      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
       - "ARCH-TIED_CLIENT_OPERATOR_TOOLING"
       - "IMPL-TIED_CLIENT_OPERATOR_TOOLING"
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
   record_status: "closed"
   request_token: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
   risk_analysis:
     adversarial_inquiry:
+      assurance_profile: "baseline-functional"
       depth_tier: "minimal"
       gate_policy: "advisory"
-      assurance_profile: "baseline-functional"

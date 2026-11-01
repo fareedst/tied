@@ -3,14 +3,14 @@ CITDP-PLAN-TIED-LG-P4-ACCEPTANCE:
     current_behavior: "P3 TDD subgraph and policies exist; acceptance.py is a stub; no verification subgraph."
     desired_behavior: "Verification subgraph validates evidence, optional MCP checklist gate, deterministic acceptance routes; separation of duties for MCP roles."
     non_goals:
-      - "P5 checklist slice end-to-end"
-      - "Live MCP gate receipts in default CI"
       - "Fixture client TIED YAML mutation"
+      - "Live MCP gate receipts in default CI"
+      - "P5 checklist slice end-to-end"
     success_criteria:
       - "acceptance_gate unit matrix matches conceptual doc §5 + review evidence"
-      - "Verification subgraph writes decision artifact under run directory"
       - "Implement role blocked from envelope build via separation policy"
       - "pytest green for pilot including P4 tests"
+      - "Verification subgraph writes decision artifact under run directory"
     unchanged_behavior: "P3 TDD subgraph and P2 envelope routing unchanged."
   completion_criteria:
     activation:
@@ -36,10 +36,10 @@ CITDP-PLAN-TIED-LG-P4-ACCEPTANCE:
   impact_analysis:
     impl_inventory_notes: "Extends tools/langgraph-pilot; no new REQ/ARCH/IMPL unless sponsor mints REQ-LANGGRAPH-*"
     modules_or_boundaries:
+      - "tools/langgraph-pilot/tied_langgraph/graphs/verification.py"
       - "tools/langgraph-pilot/tied_langgraph/policies/acceptance.py"
       - "tools/langgraph-pilot/tied_langgraph/policies/separation.py"
       - "tools/langgraph-pilot/tied_langgraph/verification_evidence.py"
-      - "tools/langgraph-pilot/tied_langgraph/graphs/verification.py"
     tied_tokens_affected: []
     tied_tokens_new: []
   leap_feedback:
@@ -62,8 +62,8 @@ CITDP-PLAN-TIED-LG-P4-ACCEPTANCE:
       assurance_profile: "baseline-functional"
       close_out_inquiry_waiver: null
       counterexamples:
-        - "Implement node calls envelope build and marks accept."
         - "Acceptance ignores missing independent_review."
+        - "Implement node calls envelope build and marks accept."
       depth_change_waiver: null
       depth_tier: "integrated"
       disconfirming_observations:
@@ -100,5 +100,5 @@ CITDP-PLAN-TIED-LG-P4-ACCEPTANCE:
     integration_tests: []
     unit_tests:
       - "acceptance_gate route matrix"
-      - "verification evidence schema"
       - "separation MCP allowlists"
+      - "verification evidence schema"

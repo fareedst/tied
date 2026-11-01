@@ -1,386 +1,316 @@
-schema_version: citdp-reconcile-ledger.v1
 dry_run: true
 row_count: 35
-unresolved_conflicts: 0
 rows:
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_JEV_DECISION_COPROCESSOR/CITDP-DOC-JEV-COMPARISON.yaml
-    basename: CITDP-DOC-JEV-COMPARISON.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-DOC-JEV-COMPARISON.yaml
-    classification: keep_working_no_citdp
-    action: keep_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml
-    basename: CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml
-    sha256_working: 428af1897dd024ffdbccc7f5c33c75176533596d5633d6a61c95e9097236681a
-    sha256_canonical: 24c52870993f080e70e832437a28503b445df530b416faaf8c4e98018f88981f
-    mtime_working_ms: 1793550489858.815
+  - action: "delete_working"
+    basename: "CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490749.685
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml
-    basename: CITDP-PLAN-DATA-FILE-ORDERING.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-DATA-FILE-ORDERING.yaml
-    sha256_working: df179c5d2b8a3585b9420d35f50d9f3569d9d3890a72513b0c5c3ba93cd02dfb
-    sha256_canonical: 01b865a12c6645787f15d10677cacab2dfde3ad823239843ec9ddaf8d6702862
-    mtime_working_ms: 1793550489762.2803
+    mtime_working_ms: 1793550489858.815
+    sha256_canonical: "24c52870993f080e70e832437a28503b445df530b416faaf8c4e98018f88981f"
+    sha256_working: "428af1897dd024ffdbccc7f5c33c75176533596d5633d6a61c95e9097236681a"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-CHECKLIST-PROCESS-REVIEW/CITDP-PLAN-CHECKLIST-PROCESS-REVIEW.yaml"
+  - action: "delete_working"
+    basename: "CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490728.123
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
-    basename: CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml
-    sha256_working: e9eaabf9b6607f2efa4ec01ba07d2ad6ccdc5c7e1377e8489996eed28a6d77af
-    sha256_canonical: ed4709417aefd00f305c30b5b20b0176873aab8d6bd8a2c1de1a177b4f92e159
-    mtime_working_ms: 1793550489691.6702
+    mtime_working_ms: 1793550489762.2803
+    sha256_canonical: "01b865a12c6645787f15d10677cacab2dfde3ad823239843ec9ddaf8d6702862"
+    sha256_working: "df179c5d2b8a3585b9420d35f50d9f3569d9d3890a72513b0c5c3ba93cd02dfb"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-DATA-FILE-ORDERING/CITDP-PLAN-DATA-FILE-ORDERING.yaml"
+  - action: "delete_working"
+    basename: "CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490725.7751
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml
-    basename: CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml
-    sha256_working: c12bf1cd3b108051435780c91ea4f63967472f85195d0dd1ce30511c47755d3a
-    sha256_canonical: f8f9b3884f08d41529b62a2ee936c74d9c1263b383fdd28cdf48c99b86ff291e
-    mtime_working_ms: 1793550489706.1924
+    mtime_working_ms: 1793550489691.6702
+    sha256_canonical: "ed4709417aefd00f305c30b5b20b0176873aab8d6bd8a2c1de1a177b4f92e159"
+    sha256_working: "e9eaabf9b6607f2efa4ec01ba07d2ad6ccdc5c7e1377e8489996eed28a6d77af"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-BBCE-ALIGNMENT/CITDP-PLAN-TIED-BBCE-ALIGNMENT.yaml"
+  - action: "delete_working"
+    basename: "CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490679.1099
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml
-    basename: CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml
-    sha256_working: d14ff6acbdb9e908c2e430fc7243110f60779135275814b8ff800901c3548f90
-    sha256_canonical: 3611f551e835c4b5d7c0ef2f8d63aaa8a302dea526a564afb78692ab0961b9cd
-    mtime_working_ms: 1793550489722.155
+    mtime_working_ms: 1793550489706.1924
+    sha256_canonical: "f8f9b3884f08d41529b62a2ee936c74d9c1263b383fdd28cdf48c99b86ff291e"
+    sha256_working: "c12bf1cd3b108051435780c91ea4f63967472f85195d0dd1ce30511c47755d3a"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-INSTALL-BATCH-TARGETS/CITDP-PLAN-TIED-INSTALL-BATCH-TARGETS.yaml"
+  - action: "delete_working"
+    basename: "CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490645.7673
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CITDP_ORDERED_LIST_KEYS/CITDP-REQ-CITDP_ORDERED_LIST_KEYS.yaml
-    basename: CITDP-REQ-CITDP_ORDERED_LIST_KEYS.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-CITDP_ORDERED_LIST_KEYS.yaml
-    sha256_working: d9293483a409cc90dc0716f0f9a997d1fce8bc1708e012064d60358a39c8d337
-    sha256_canonical: 3c07f8150bb93efd2a5eb2f7f7dc8047be83a615a9a35ea4c4177206da6ff79b
-    mtime_working_ms: 1793550489851.5361
+    mtime_working_ms: 1793550489722.155
+    sha256_canonical: "3611f551e835c4b5d7c0ef2f8d63aaa8a302dea526a564afb78692ab0961b9cd"
+    sha256_working: "d14ff6acbdb9e908c2e430fc7243110f60779135275814b8ff800901c3548f90"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/PLAN-TIED-QMM-FOLLOWON-A/CITDP-PLAN-TIED-QMM-FOLLOWON-A.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-CITDP_ORDERED_LIST_KEYS.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-CITDP_ORDERED_LIST_KEYS.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490646.7947
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/CITDP-REQ-MCP_STDIO_CONSOLE_GUARD.yaml
-    basename: CITDP-REQ-MCP_STDIO_CONSOLE_GUARD.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-MCP_STDIO_CONSOLE_GUARD.yaml
-    sha256_working: 40dfab72bbbee0d6ed266c1f8d768c06090c8a69fbcc4af0eb152f503b20e2cd
-    sha256_canonical: 4d920b01297429d4f64a90b4882d8b3af873ef44ac6c539c750c5d903eb99146
-    mtime_working_ms: 1793550489820.6025
+    mtime_working_ms: 1793550489851.5361
+    sha256_canonical: "3c07f8150bb93efd2a5eb2f7f7dc8047be83a615a9a35ea4c4177206da6ff79b"
+    sha256_working: "d9293483a409cc90dc0716f0f9a997d1fce8bc1708e012064d60358a39c8d337"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CITDP_ORDERED_LIST_KEYS/CITDP-REQ-CITDP_ORDERED_LIST_KEYS.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-MCP_STDIO_CONSOLE_GUARD.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-MCP_STDIO_CONSOLE_GUARD.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490658.6157
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml
-    basename: CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml
-    sha256_working: 288b7aea6e3e18969423e2265aa4f371e2d34087cd52ad80531f70100d115299
-    sha256_canonical: ce0e04c07bee35b2a680c6163bc99800c0dd1452aa1e4a91caa7407e468f5d57
-    mtime_working_ms: 1793550490496.807
+    mtime_working_ms: 1793550489820.6025
+    sha256_canonical: "4d920b01297429d4f64a90b4882d8b3af873ef44ac6c539c750c5d903eb99146"
+    sha256_working: "40dfab72bbbee0d6ed266c1f8d768c06090c8a69fbcc4af0eb152f503b20e2cd"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-MCP_STDIO_CONSOLE_GUARD/CITDP-REQ-MCP_STDIO_CONSOLE_GUARD.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490745.2207
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml
-    basename: CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml
-    sha256_working: bf394b288b3505db1f41bd0bfb7387b8be20d85ec798209705e59009aa585d7b
-    sha256_canonical: 0ba9b2998ce78630d4ea57730b2b40bac35106289343acebfff788174ad57cc6
-    mtime_working_ms: 1793550490194.6492
+    mtime_working_ms: 1793550490496.807
+    sha256_canonical: "ce0e04c07bee35b2a680c6163bc99800c0dd1452aa1e4a91caa7407e468f5d57"
+    sha256_working: "288b7aea6e3e18969423e2265aa4f371e2d34087cd52ad80531f70100d115299"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-METHODOLOGY-LEARNING-COHORT-EXPORT/CITDP-REQ-METHODOLOGY-LEARNING-COHORT-EXPORT.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490721.3914
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-    basename: CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml
-    sha256_working: e01f366576f61267e5a2435543aa873e027d29091fc7aebe2745f4d39909f81b
-    sha256_canonical: 234eee188f08c8fe0ac2c591f686c318cdf35784f9342249921dbad12bfb0bc5
-    mtime_working_ms: 1793550489731.5522
+    mtime_working_ms: 1793550490194.6492
+    sha256_canonical: "0ba9b2998ce78630d4ea57730b2b40bac35106289343acebfff788174ad57cc6"
+    sha256_working: "bf394b288b3505db1f41bd0bfb7387b8be20d85ec798209705e59009aa585d7b"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE/CITDP-REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490720.041
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-REQUEST_EVIDENCE_ENVELOPE/CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE.yaml
-    basename: CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE.yaml
-    sha256_working: de51ef80337e51bb1345bccca5120e2ecce5a52a995a3b0381165c9567e707ee
-    sha256_canonical: 0be40c28e1066615b696224ba05dc7ad5076735883f81593f2ebb99f9534ccb7
-    mtime_working_ms: 1793550490109.944
+    mtime_working_ms: 1793550489731.5522
+    sha256_canonical: "234eee188f08c8fe0ac2c591f686c318cdf35784f9342249921dbad12bfb0bc5"
+    sha256_working: "e01f366576f61267e5a2435543aa873e027d29091fc7aebe2745f4d39909f81b"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-PSEUDOCODE_VALIDATE_PATH_INPUT/CITDP-REQ-PSEUDOCODE_VALIDATE_PATH_INPUT.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490663.854
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_ADVERSARIAL_INQUIRY/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml
-    basename: CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml
-    sha256_working: fcaad7705d41fba61c8d7a37c10299882c4f33c23daf5b16a929029b0cb1de60
-    sha256_canonical: 4c49e06a8cc25e42dab992df1897498c41765f60b7416301c761eaa58c27dec6
-    mtime_working_ms: 1793550489965.8862
+    mtime_working_ms: 1793550490109.944
+    sha256_canonical: "0be40c28e1066615b696224ba05dc7ad5076735883f81593f2ebb99f9534ccb7"
+    sha256_working: "de51ef80337e51bb1345bccca5120e2ecce5a52a995a3b0381165c9567e707ee"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-REQUEST_EVIDENCE_ENVELOPE/CITDP-REQ-REQUEST_EVIDENCE_ENVELOPE.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490723.759
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml
-    basename: CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml
-    sha256_working: 1f97714b35063baef8e95bc68404495538a42a14a94ae1be415b8e05980ef755
-    sha256_canonical: 7f9c74e3e108afb55a669caea778e6d55c2dd3c22526d8fbfeeb9a428f87d96c
-    mtime_working_ms: 1793550490376.3638
+    mtime_working_ms: 1793550489965.8862
+    sha256_canonical: "4c49e06a8cc25e42dab992df1897498c41765f60b7416301c761eaa58c27dec6"
+    sha256_working: "fcaad7705d41fba61c8d7a37c10299882c4f33c23daf5b16a929029b0cb1de60"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_ADVERSARIAL_INQUIRY/CITDP-REQ-TIED_ADVERSARIAL_INQUIRY-sliceS.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490647.8628
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml
-    basename: CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml
-    sha256_working: 66ab33fcaaf2f78be0dd683c94dcbd3385bb5b12dff6bd1054a1b53d398b6531
-    sha256_canonical: 32eebe4d3b69d22de9a1d94c5dd609ec944a860e46bdcda91908e29a6b01774c
-    mtime_working_ms: 1793550490385.4983
+    mtime_working_ms: 1793550490376.3638
+    sha256_canonical: "7f9c74e3e108afb55a669caea778e6d55c2dd3c22526d8fbfeeb9a428f87d96c"
+    sha256_working: "1f97714b35063baef8e95bc68404495538a42a14a94ae1be415b8e05980ef755"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-remediation.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490679.5015
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k.yaml
-    basename: CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k.yaml
-    sha256_working: 4f9282899c60b22040e7b9870b4ba400b7b5b852f05827552786ccb6120aacb5
-    sha256_canonical: 369ee1cc0b3da62cdbfaada032f1245d53db506810e752212d1b453246f62f0e
-    mtime_working_ms: 1793550490380.8994
+    mtime_working_ms: 1793550490385.4983
+    sha256_canonical: "32eebe4d3b69d22de9a1d94c5dd609ec944a860e46bdcda91908e29a6b01774c"
+    sha256_working: "66ab33fcaaf2f78be0dd683c94dcbd3385bb5b12dff6bd1054a1b53d398b6531"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-slice2.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490657.4192
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l.yaml
-    basename: CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l.yaml
-    sha256_working: 9afa35309ee73d7db131ea184e8f747a215bf5332dcebc0163b35e0f8b59bd14
-    sha256_canonical: 92ee0ab1e8f80f4700519586b4838bd6f3b17a21532cf182c66391e6f4cd2493
-    mtime_working_ms: 1793550490384.588
+    mtime_working_ms: 1793550490380.8994
+    sha256_canonical: "369ee1cc0b3da62cdbfaada032f1245d53db506810e752212d1b453246f62f0e"
+    sha256_working: "4f9282899c60b22040e7b9870b4ba400b7b5b852f05827552786ccb6120aacb5"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-k.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490674.4321
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out.yaml
-    basename: CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out.yaml
-    sha256_working: 92bcb347f0cc9adad75762cb7206f5c2c2493b2cb36be547275fa1fc6393070d
-    sha256_canonical: 85688e3101576679c3edd46fd9b4a2609c42ac1a80036b562644f176d05d21fe
-    mtime_working_ms: 1793550490390.1624
+    mtime_working_ms: 1793550490384.588
+    sha256_canonical: "92ee0ab1e8f80f4700519586b4838bd6f3b17a21532cf182c66391e6f4cd2493"
+    sha256_working: "9afa35309ee73d7db131ea184e8f747a215bf5332dcebc0163b35e0f8b59bd14"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-l.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490711.3223
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLAUDE_LIVE_DRIVER/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml
-    basename: CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml
-    sha256_working: 70c9e6be14424ff745316e35a9bbd397ae39450a1819f45e3e304114fa7465cf
-    sha256_canonical: 3be7277e35d4b88aa3c746acaa5bbb2ad51c8082c831f04f798481a3b2bba3c7
-    mtime_working_ms: 1793550489911.8506
+    mtime_working_ms: 1793550490390.1624
+    sha256_canonical: "85688e3101576679c3edd46fd9b4a2609c42ac1a80036b562644f176d05d21fe"
+    sha256_working: "92bcb347f0cc9adad75762cb7206f5c2c2493b2cb36be547275fa1fc6393070d"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-stage-m-q-close-out.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490665.7996
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml
-    basename: CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml
-    sha256_working: 12105cda6874fd6b4c8df5d0670846f73d857b360e27f7f9c93b22a713d14381
-    sha256_canonical: 2dd918f62aa47e9030ff51f99bb2bd48fa75713cd718afa62284d7cd0736333f
-    mtime_working_ms: 1793550490364.6526
+    mtime_working_ms: 1793550489911.8506
+    sha256_canonical: "3be7277e35d4b88aa3c746acaa5bbb2ad51c8082c831f04f798481a3b2bba3c7"
+    sha256_working: "70c9e6be14424ff745316e35a9bbd397ae39450a1819f45e3e304114fa7465cf"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLAUDE_LIVE_DRIVER/CITDP-REQ-TIED_CLAUDE_LIVE_DRIVER.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490711.6692
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml
-    basename: CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml
-    sha256_working: cbb2ea88d83373000136c037b1be26a6d109ba07948e852aa1a8e52b93ee4f0e
-    sha256_canonical: ef6c81b028ac15497dc8c8aa386884c2413d5db14cb79e5294dc0a58fa9c780a
-    mtime_working_ms: 1793550490102.1274
+    mtime_working_ms: 1793550490364.6526
+    sha256_canonical: "2dd918f62aa47e9030ff51f99bb2bd48fa75713cd718afa62284d7cd0736333f"
+    sha256_working: "12105cda6874fd6b4c8df5d0670846f73d857b360e27f7f9c93b22a713d14381"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLEAR_WORKSPACE_SKILL/CITDP-REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490747.9792
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml
-    basename: CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml
-    sha256_working: 491aa2f0a9eea250972dd44b10fbe26e2dadb8370603c87a41a2e31aa93f3e76
-    sha256_canonical: b307824b9ea2ff8db4cb4a16004889f874de0422da0d2d9081c03e81da1d8361
-    mtime_working_ms: 1793550490533.95
+    mtime_working_ms: 1793550490102.1274
+    sha256_canonical: "ef6c81b028ac15497dc8c8aa386884c2413d5db14cb79e5294dc0a58fa9c780a"
+    sha256_working: "cbb2ea88d83373000136c037b1be26a6d109ba07948e852aa1a8e52b93ee4f0e"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS/CITDP-REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490654.3293
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml
-    basename: CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml
-    sha256_working: d6e0bd7f5fcf4dce2aef663d5f9630508cbdb4b1c6ac750a8bc879b977c68574
-    sha256_canonical: b1eaf83fc9216d9dcf4f7794c11f56e66119b5c18793240139f984636664ba02
-    mtime_working_ms: 1793550490451.2566
+    mtime_working_ms: 1793550490533.95
+    sha256_canonical: "b307824b9ea2ff8db4cb4a16004889f874de0422da0d2d9081c03e81da1d8361"
+    sha256_working: "491aa2f0a9eea250972dd44b10fbe26e2dadb8370603c87a41a2e31aa93f3e76"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER/CITDP-REQ-TIED_DURABLE_CHECKLIST_CONTROLLER-LEAP-UNIFY.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490712.21
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EDPC_COMPREHENSION/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml
-    basename: CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml
-    sha256_working: 845d1073ac1a352fd8388c6f887b89519b7e21ce5cd4034cabd58b689fd57ab0
-    sha256_canonical: 7eb0df7ed662a50a45b5a63cb8a9317d3d57d7ebcc4f666d59e9c5e5425d566b
-    mtime_working_ms: 1793550490089.232
+    mtime_working_ms: 1793550490451.2566
+    sha256_canonical: "b1eaf83fc9216d9dcf4f7794c11f56e66119b5c18793240139f984636664ba02"
+    sha256_working: "d6e0bd7f5fcf4dce2aef663d5f9630508cbdb4b1c6ac750a8bc879b977c68574"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EDPC_CLIENT_ASSESSMENT/CITDP-REQ-TIED_EDPC_CLIENT_ASSESSMENT.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490721.8843
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml
-    basename: CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml
-    sha256_working: 031da513a52f7ce9e74a85459f679a2952b90dea9018b9ca180245624657d079
-    sha256_canonical: f97a27b83fb37722b8dd75f5a8d3452fd00bdfd3b1dae61b4e66c1f9abf085be
-    mtime_working_ms: 1793550489677.8184
+    mtime_working_ms: 1793550490089.232
+    sha256_canonical: "7eb0df7ed662a50a45b5a63cb8a9317d3d57d7ebcc4f666d59e9c5e5425d566b"
+    sha256_working: "845d1073ac1a352fd8388c6f887b89519b7e21ce5cd4034cabd58b689fd57ab0"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_EDPC_COMPREHENSION/CITDP-REQ-TIED_EDPC_COMPREHENSION.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490730.9211
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
-    basename: CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml
-    sha256_working: 218923332dd232a44a3145c1a294626e76647cbe8876ec6678d68c2e7c919424
-    sha256_canonical: 9924269a871d65039007d9623fbdb37965479a0b519f8fd3488793a14d656e03
-    mtime_working_ms: 1793553716776.4358
-    mtime_canonical_ms: 1793553716774.2773
-    classification: working_newer
-    action: persist_working_to_citdp_then_delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml
-    basename: CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml
-    sha256_working: 65e562b9ae4bf196906ef88fbdb28f59c67082f870d855e73044a0b3efc2c25a
-    sha256_canonical: 103f855bc670e03c1c2269c75e57941add90f8f96f047ce1d6759e6f098cfc67
-    mtime_working_ms: 1793550489787.0544
+    mtime_working_ms: 1793550489677.8184
+    sha256_canonical: "f97a27b83fb37722b8dd75f5a8d3452fd00bdfd3b1dae61b4e66c1f9abf085be"
+    sha256_working: "031da513a52f7ce9e74a85459f679a2952b90dea9018b9ca180245624657d079"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE/CITDP-REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490703.378
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml
-    basename: CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml
-    sha256_working: db240ad1df1c35f121479b99ea487dc3d19e7552765c2968bcee2f4a218b4ec0
-    sha256_canonical: 312160c29cdd4f8bb4eb9b2100a385029778780695349efccb06c118d0581771
-    mtime_working_ms: 1793550490524.906
+    mtime_working_ms: 1793550489787.0544
+    sha256_canonical: "103f855bc670e03c1c2269c75e57941add90f8f96f047ce1d6759e6f098cfc67"
+    sha256_working: "65e562b9ae4bf196906ef88fbdb28f59c67082f870d855e73044a0b3efc2c25a"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER/CITDP-REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490667.5562
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
-    basename: CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml
-    sha256_working: f517dbcfb1f3eb41a4d0a59ca3d0e0fb6c78ced5e7d917b2fc07487abf6d2ed5
-    sha256_canonical: f8958987f4d875d803d3276ddf726b309ec0c6ebf96d473b23bd841cb8fe52dc
-    mtime_working_ms: 1793550490011.8738
+    mtime_working_ms: 1793550490524.906
+    sha256_canonical: "312160c29cdd4f8bb4eb9b2100a385029778780695349efccb06c118d0581771"
+    sha256_working: "db240ad1df1c35f121479b99ea487dc3d19e7552765c2968bcee2f4a218b4ec0"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PROCESS_CERTIFICATION_READINESS/CITDP-REQ-TIED_PROCESS_CERTIFICATION_READINESS.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490730.5503
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PROJECT_LINT/CITDP-REQ-TIED_PROJECT_LINT.yaml
-    basename: CITDP-REQ-TIED_PROJECT_LINT.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PROJECT_LINT.yaml
-    sha256_working: f35db3088f0a7b4d5434bed8b3c628b8987a92d43c6160eaf621f896ed9416cb
-    sha256_canonical: 28d44a900dbda3f8718d690e3f4eecee2882f295b41608dc8dd7bf6fc4b2735a
-    mtime_working_ms: 1793550489750.1545
+    mtime_working_ms: 1793550490011.8738
+    sha256_canonical: "f8958987f4d875d803d3276ddf726b309ec0c6ebf96d473b23bd841cb8fe52dc"
+    sha256_working: "f517dbcfb1f3eb41a4d0a59ca3d0e0fb6c78ced5e7d917b2fc07487abf6d2ed5"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION/CITDP-REQ-TIED_PROJECT_INDEX_WRITE_ISOLATION.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_PROJECT_LINT.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_PROJECT_LINT.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490691.0083
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml
-    basename: CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml
-    sha256_working: 30b540f3e77493840a9ad3155b9cc7d5a189cd0111ebd71975ad30362d52d0a0
-    sha256_canonical: 8a37f3f0be26f031c2d1a311663dce6581ff2bbdd2cdd919eed76acc35bad9ae
-    mtime_working_ms: 1793550489826.6985
+    mtime_working_ms: 1793550489750.1545
+    sha256_canonical: "28d44a900dbda3f8718d690e3f4eecee2882f295b41608dc8dd7bf6fc4b2735a"
+    sha256_working: "f35db3088f0a7b4d5434bed8b3c628b8987a92d43c6160eaf621f896ed9416cb"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_PROJECT_LINT/CITDP-REQ-TIED_PROJECT_LINT.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490673.0945
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml
-    basename: CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml
-    sha256_working: d2bfbec4708fe286e2d6c68c5fc9ba200524d9b8fc7a3051f14378c91b976238
-    sha256_canonical: d2bfbec4708fe286e2d6c68c5fc9ba200524d9b8fc7a3051f14378c91b976238
-    mtime_working_ms: 1793554267292.3884
+    mtime_working_ms: 1793550489826.6985
+    sha256_canonical: "8a37f3f0be26f031c2d1a311663dce6581ff2bbdd2cdd919eed76acc35bad9ae"
+    sha256_working: "30b540f3e77493840a9ad3155b9cc7d5a189cd0111ebd71975ad30362d52d0a0"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES/CITDP-REQ-TIED_QMM_METHODOLOGY_CLIENT_RESOURCES.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml"
+    classification: "identical"
     mtime_canonical_ms: 1793554703934.708
-    classification: identical
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml
-    basename: CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml
-    sha256_working: 3cb675fc36fccc9954ba178b0e997d73e1e373c03a9f9326bc03f324cb1e2eef
-    sha256_canonical: 4c307dba562f9848826504cbb1bd6abca9002223e902e30ad2ad0ce3040eec1b
-    mtime_working_ms: 1793550490465.297
+    mtime_working_ms: 1793554267292.3884
+    sha256_canonical: "d2bfbec4708fe286e2d6c68c5fc9ba200524d9b8fc7a3051f14378c91b976238"
+    sha256_working: "d2bfbec4708fe286e2d6c68c5fc9ba200524d9b8fc7a3051f14378c91b976238"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/CITDP-REQ-TIED_SESSION_HANDOFF_SKILL.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490673.7961
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml
-    basename: CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml
-    sha256_working: 4c4c3729be4a5d247a1b8b145200347a3a81159abfee587c10b456004eac18e7
-    sha256_canonical: f456afabe51ebfb7693491e8f99619f9f129697d2b358941e5ec6f9075bb8495
-    mtime_working_ms: 1793550489983.4106
+    mtime_working_ms: 1793550490465.297
+    sha256_canonical: "4c307dba562f9848826504cbb1bd6abca9002223e902e30ad2ad0ce3040eec1b"
+    sha256_working: "3cb675fc36fccc9954ba178b0e997d73e1e373c03a9f9326bc03f324cb1e2eef"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SETUP/CITDP-REQ-TIED_SETUP-IGNORE-GENERATED-GUIDES.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490696.0073
-    classification: canonical_newer
-    action: delete_working
-  - working_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml
-    basename: CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml
-    canonical_path: >-
-      /Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml
-    sha256_working: f0ef92815a21ef641e7de51a72c8df13bff7d957184453423f2ff53ae755a44b
-    sha256_canonical: 080187e18603f75a1b4ee5a31adb4e88ad86726f7f66ef72bd52cd86c1ae3964
-    mtime_working_ms: 1793550489911.18
+    mtime_working_ms: 1793550489983.4106
+    sha256_canonical: "f456afabe51ebfb7693491e8f99619f9f129697d2b358941e5ec6f9075bb8495"
+    sha256_working: "4c4c3729be4a5d247a1b8b145200347a3a81159abfee587c10b456004eac18e7"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK/CITDP-REQ-TIED_SPONSOR_RISK_TIER_PLAYBOOK.yaml"
+  - action: "delete_working"
+    basename: "CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml"
+    classification: "canonical_newer"
     mtime_canonical_ms: 1793550490748.7812
-    classification: canonical_newer
-    action: delete_working
+    mtime_working_ms: 1793550489911.18
+    sha256_canonical: "080187e18603f75a1b4ee5a31adb4e88ad86726f7f66ef72bd52cd86c1ae3964"
+    sha256_working: "f0ef92815a21ef641e7de51a72c8df13bff7d957184453423f2ff53ae755a44b"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_SPONSOR_TWO_LANE_DELIVERY/CITDP-REQ-TIED_SPONSOR_TWO_LANE_DELIVERY.yaml"
+  - action: "keep_working"
+    basename: "CITDP-DOC-JEV-COMPARISON.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-DOC-JEV-COMPARISON.yaml"
+    classification: "keep_working_no_citdp"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_JEV_DECISION_COPROCESSOR/CITDP-DOC-JEV-COMPARISON.yaml"
+  - action: "persist_working_to_citdp_then_delete_working"
+    basename: "CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml"
+    canonical_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/citdp/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml"
+    classification: "working_newer"
+    mtime_canonical_ms: 1793553716774.2773
+    mtime_working_ms: 1793553716776.4358
+    sha256_canonical: "9924269a871d65039007d9623fbdb37965479a0b519f8fd3488793a14d656e03"
+    sha256_working: "218923332dd232a44a3145c1a294626e76647cbe8876ec6678d68c2e7c919424"
+    working_path: "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_INTENT_CONTROL_PLANE/CITDP-REQ-TIED_INTENT_CONTROL_PLANE.yaml"
+schema_version: "citdp-reconcile-ledger.v1"
+unresolved_conflicts: 0

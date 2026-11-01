@@ -22,11 +22,11 @@
         "activation_pairing_incomplete",
         "integrated_depth_requires_pairing",
         "missing_pseudocode_gate_history",
-        "missing_required_step:sub-adversarial-inquiry-pass",
         "pending_required_step:risk-assessment",
+        "pending_required_step:sub-adversarial-inquiry-pass",
         "pending_required_step:verification-gate",
-        "tracker_not_authoritative",
-        "tracker_sparse"
+        "sub_stub_pending",
+        "tracker_not_authoritative"
       ],
       "case_id": "A1-sparse-tracker",
       "classification": "stdd_guard_confirmed",
@@ -165,11 +165,11 @@
         "command_success_unproven",
         "integrated_depth_requires_pairing",
         "missing_pseudocode_gate_history",
-        "missing_required_step:sub-adversarial-inquiry-pass",
         "pending_required_step:risk-assessment",
+        "pending_required_step:sub-adversarial-inquiry-pass",
         "pending_required_step:verification-gate",
-        "tracker_not_authoritative",
-        "tracker_sparse"
+        "sub_stub_pending",
+        "tracker_not_authoritative"
       ],
       "case_id": "A6-unproven-command",
       "classification": "stdd_guard_confirmed",
@@ -238,7 +238,7 @@
     "needs_review": 0,
     "stdd_guard_confirmed": 17
   },
-  "corpus_manifest_ref": "e61102244b1d839b132c407aa4d44ff1461030418a12cb2ff5ed6b47372787fa",
+  "corpus_manifest_ref": "3d30fdd71c9ba34c2389628dc85bb340be0004e84415e276a055e9c4d62ebdb9",
   "gate_receipts": [
     {
       "hash": "343cd6baa8c12bd14b2c35926f41a01a5a32fe3c022a73144c8f41898e807e19",
@@ -262,5 +262,5 @@
     "macOS UI visibility not proven by UI-free gate checks."
   ],
   "schema_version": "regression-manifest.v1",
-  "stdd_revision": "d057cc274ef59131e7ef147c1d4747adfd96d900"
+  "stdd_revision": "359a922e482d5c8822b1cb97b9655b0b9fbf0d7b"
 }

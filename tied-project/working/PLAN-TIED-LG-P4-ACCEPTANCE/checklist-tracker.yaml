@@ -11,20 +11,20 @@ execution_evidence:
       verification: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/closeout-run-verification-gates.json"
     master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   completed:
-    - "session-bootstrap"
-    - "translate-sponsor-intent"
     - "change-definition"
+    - "composition-integration"
+    - "gate-pseudocode-validation"
     - "impact-discovery"
     - "risk-assessment"
-    - "test-strategy"
-    - "gate-pseudocode-validation"
+    - "session-bootstrap"
     - "sub-adversarial-inquiry-pass"
-    - "unit-test-red"
-    - "unit-test-green"
-    - "composition-integration"
     - "sync-tied-stack"
-    - "verification-gate"
+    - "test-strategy"
     - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
   pending: []
   request: "PLAN-TIED-LG-P4-ACCEPTANCE"
 gate_policy: "per_citdp"
@@ -45,15 +45,15 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - kind: manifest_ref
-        path: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-evidence-manifest.v1.json
-      - kind: file_path
-        path: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-gate-evidence.md
+      - kind: "file_path"
+        path: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-gate-evidence.md"
+      - kind: "manifest_ref"
+        path: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-evidence-manifest.v1.json"
     slug: "verification-gate"
     tracking:
       evidence_refs:
-        - kind: manifest_ref
-          path: tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-evidence-manifest.v1.json
+        - kind: "manifest_ref"
+          path: "tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/verification-evidence-manifest.v1.json"
       status: "completed"
   - disposition: "completed"
     evidence_refs:

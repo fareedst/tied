@@ -1,6 +1,6 @@
 {
-  "built_at": "2026-10-31T02:21:58.137Z",
-  "content_hash": "95d4c1c9e1ecc1c12aefbf704b5b49cbc93c501a5ec0140d915828666b7ceba9",
+  "built_at": "2026-11-01T18:38:13.882Z",
+  "content_hash": "e327fb78c7026ad87c7b7ac9709a10e716a6706322670e1093161a2b5c80b661",
   "edges": [
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/adherence-evidence-resolve.ts#fileContentHash",
@@ -945,17 +945,17 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/apply-resume-from-tracker.ts#applyResumeFromTracker",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
+      "to_symbol_id": "mcp-server/packages/agentstream/src/@tied/checklist-resume/checklist-controller-resume.ts#deriveChecklistResumePlan"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/apply-resume-from-tracker.ts#applyResumeFromTracker",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#loadTrackerResumeContext"
+      "to_symbol_id": "mcp-server/packages/agentstream/src/@tied/checklist-resume/checklist-controller-resume.ts#loadTrackerResumeContext"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/apply-resume-from-tracker.ts#deriveChecklistResumePlan",
       "kind": "imports",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
+      "to_symbol_id": "mcp-server/packages/agentstream/src/@tied/checklist-resume/checklist-controller-resume.ts#deriveChecklistResumePlan"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/apply-resume-from-tracker.ts#DryRunConfig",
@@ -965,57 +965,12 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/apply-resume-from-tracker.ts#loadTrackerResumeContext",
       "kind": "imports",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#loadTrackerResumeContext"
+      "to_symbol_id": "mcp-server/packages/agentstream/src/@tied/checklist-resume/checklist-controller-resume.ts#loadTrackerResumeContext"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/apply-resume-from-tracker.ts#Turn",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-load-turns.ts#Turn"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#deriveChecklistResumePlan",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#isTerminal"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#isTerminal",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#String"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-load-turns.ts#appendFlow",
@@ -1366,6 +1321,86 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-preview.ts#previewLeadChecklist",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-load-turns.ts#messagesFromChecklistYaml"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#afterEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#afterEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#beforeEach",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#beforeEach"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#DryRunConfig",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/dry-run-config.ts#DryRunConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#RESUME_FROM_TRACKER_DISABLED_BY_CONFIG",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#RESUME_FROM_TRACKER_DISABLED_BY_CONFIG"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#shouldApplyResumeFromTracker",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#shouldApplyResumeFromTracker"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#DryRunConfig",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/dry-run-config.ts#DryRunConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#findRepoRootFromPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/repo-root.ts#findRepoRootFromPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#projectRootForConfig",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/repo-root.ts#findRepoRootFromPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#readRepoTiedYaml",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#resolveResumeFromTrackerPolicy",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/@tied/checklist-resume/resume-policy.ts#resolveResumeFromTrackerPolicy"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#resolveResumePolicyForWorkspace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/@tied/checklist-resume/resume-policy.ts#resolveResumeFromTrackerPolicy"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#resolveResumePolicyForWorkspace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#projectRootForConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#resolveResumePolicyForWorkspace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#readRepoTiedYaml"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#shouldApplyResumeFromTracker",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#resolveResumePolicyForWorkspace"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/claude-driver.test.ts#claudeAgentDriverLaunchAndParse",
@@ -4500,6 +4535,11 @@
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#buildTurnsFromConfig",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#shouldApplyResumeFromTracker"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#buildTurnsFromConfig",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/packages/agentstream/src/featurespec-load-turns.ts#parseFeatureSpecOrderFilter"
     },
     {
@@ -4526,6 +4566,11 @@
       "from_symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#parseFeatureSpecOrderFilter",
       "kind": "imports",
       "to_symbol_id": "mcp-server/packages/agentstream/src/featurespec-load-turns.ts#parseFeatureSpecOrderFilter"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#shouldApplyResumeFromTracker",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#shouldApplyResumeFromTracker"
     },
     {
       "from_symbol_id": "mcp-server/packages/agentstream/src/run-pipeline-prep.ts#sliceFromFirstTurn",
@@ -5546,6 +5591,101 @@
       "from_symbol_id": "mcp-server/packages/bootstrap/src/paths.ts#repoRootFromBootstrapModule",
       "kind": "calls",
       "to_symbol_id": "mcp-server/packages/bootstrap/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts#ChecklistResumeTurn",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#ChecklistResumeTurn"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts#deriveChecklistResumePlan",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts#parseSessionIdFromStateHistory",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#deriveChecklistResumePlan",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#isTerminal"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#isTerminal",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#loadTrackerResumeContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#loadTrackerResumeContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#loadTrackerResumeContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#loadTrackerResumeContext",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.test.ts#resolveResumeFromTrackerPolicy",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.ts#resolveResumeFromTrackerPolicy"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.ts#resolveResumeFromTrackerPolicy",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.ts#isRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.ts#resolveResumeFromTrackerPolicy",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.ts#isRecord"
     },
     {
       "from_symbol_id": "mcp-server/packages/cli/src/branch-check.test.ts#afterEach",
@@ -17163,86 +17303,6 @@
       "to_symbol_id": "mcp-server/src/checklist-async-dispositions.ts#rowIsClosed"
     },
     {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.test.ts#ChecklistResumeTurn",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#ChecklistResumeTurn"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.test.ts#deriveChecklistResumePlan",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.test.ts#describe",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.test.ts#it",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/node:test.ts#it"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.test.ts#parseSessionIdFromStateHistory",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#deriveChecklistResumePlan",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#isTerminal"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#isChecklistResumeFromTrackerEnabled",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#isTerminal",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#loadProjectConfig",
-      "kind": "imports",
-      "to_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#loadTrackerResumeContext",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#String"
-    },
-    {
       "from_symbol_id": "mcp-server/src/checklist-gate-evidence-hydration.test.ts#describe",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/node:test.ts#describe"
@@ -17366,6 +17426,31 @@
       "from_symbol_id": "mcp-server/src/checklist-gate-evidence-hydration.ts#resolveWorkingPath",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/working-root.ts#resolveWorkingPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-gate-project-config.test.ts#allTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-gate-project-config.test.ts#clearBasePathCache",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-gate-project-config.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-gate-project-config.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-gate-project-config.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-pseudocode-gate.test.ts#createHash",
@@ -17780,7 +17865,7 @@
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#collectTrackerSlugs",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-validator.ts#trackerSteps"
+      "to_symbol_id": "mcp-server/src/checklist-validator.ts#listChecklistTrackerSteps"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#completionCriteria",
@@ -18135,7 +18220,7 @@
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#slugCompletedInTracker",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-validator.ts#trackerSteps"
+      "to_symbol_id": "mcp-server/src/checklist-validator.ts#listChecklistTrackerSteps"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#stableHash",
@@ -18185,7 +18270,7 @@
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#stepCompleted",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-validator.ts#isRecord"
+      "to_symbol_id": "mcp-server/src/checklist-validator.ts#listChecklistTrackerSteps"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#trackerRequestToken",
@@ -18815,7 +18900,7 @@
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateIntegratedParentChildSlugs",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-validator.ts#trackerSteps"
+      "to_symbol_id": "mcp-server/src/checklist-validator.ts#listChecklistTrackerSteps"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateMethodologySurfaceExperimentGate",
@@ -19040,6 +19125,11 @@
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateTracker",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/checklist-validator.ts#listChecklistTrackerSteps"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateTracker",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/checklist-validator.ts#nonEmpty"
     },
     {
@@ -19071,11 +19161,6 @@
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateTracker",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/checklist-validator.ts#String"
-    },
-    {
-      "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateTracker",
-      "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-validator.ts#trackerSteps"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateTrackerAuthoritative",
@@ -19100,7 +19185,7 @@
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#validateTrackerSparse",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/checklist-validator.ts#trackerSteps"
+      "to_symbol_id": "mcp-server/src/checklist-validator.ts#listChecklistTrackerSteps"
     },
     {
       "from_symbol_id": "mcp-server/src/checklist-validator.ts#waiverDiagnosticsInvalid",
@@ -22043,6 +22128,356 @@
       "to_symbol_id": "mcp-server/src/storage-dump.ts#stableJsonForHash"
     },
     {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts#allTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts#stat",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#stat"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#buildCorpusGraphMap",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#buildCorpusGraphMap"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#checkCorpusGraphFreshness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#checkCorpusGraphFreshness"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#mkdir",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#mkdir"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#mkdtemp",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#mkdtemp"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#refreshCorpusGraphIndex",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#rm",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#rm"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#tmpdir",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:os.ts#tmpdir"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#traceCorpusGraphNode",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#traceCorpusGraphNode"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/corpus-graph.test.ts#writeFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#writeFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#access",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#access"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#checkCorpusGraphFreshness",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#CorpusGraphDiagnostic",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphDiagnostic"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#CorpusGraphEdge",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphEdge"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#CorpusGraphIndex",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#CorpusGraphMapView",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphMapView"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#CorpusGraphNode",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphNode"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#CorpusGraphNodeKind",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphNodeKind"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#CorpusGraphTraceView",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphTraceView"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#createHash",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#hashContent",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#INDEX_SCHEMA_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#INDEX_SCHEMA_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#loadCorpusGraphIndex",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#readFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#mkdir",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#mkdir"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#prettyCanonicalJson",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/storage-dump.ts#prettyCanonicalJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#PROOF_BOUNDARY",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#PROOF_BOUNDARY"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#readFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#readFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#mkdir"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#writeFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/storage-dump.ts#prettyCanonicalJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#dedupeEdges"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#dedupeNodes"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#detailPathFromRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#extractTokensFromText"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#extractTokensFromText"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#fg"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#hashContent"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#kindFromToken"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#access"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#access"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#access"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#readFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#readFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#readFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#writeFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/node:fs/promises.ts#writeFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#buildCorpusGraphMap",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#buildCorpusGraphMap"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#checkCorpusGraphFreshness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#checkCorpusGraphFreshness"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#CorpusGraphReceipt",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#CorpusGraphReceipt"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#PROOF_BOUNDARY",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#PROOF_BOUNDARY"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#RECEIPT_SCHEMA_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#RECEIPT_SCHEMA_VERSION"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#refreshCorpusGraphIndex",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphFreshness",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#checkCorpusGraphFreshness"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphFreshness",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphMap",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#buildCorpusGraphMap"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphMap",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphMap",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#Boolean"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphRefresh",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#buildCorpusGraphMap"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphRefresh",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphTrace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphTrace",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#traceCorpusGraphNode"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#traceCorpusGraphNode",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#traceCorpusGraphNode"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#VALIDATOR_VERSION",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/types.ts#VALIDATOR_VERSION"
+    },
+    {
       "from_symbol_id": "mcp-server/src/dae/branch-check.ts#branchCheckOptOut",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/dae/yaml-load.ts#isRecord"
@@ -22498,6 +22933,11 @@
       "to_symbol_id": "mcp-server/src/node:test.ts#beforeEach"
     },
     {
+      "from_symbol_id": "mcp-server/src/detail-loader-append.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
       "from_symbol_id": "mcp-server/src/detail-loader-append.test.ts#clearBasePathCache",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
@@ -22526,6 +22966,16 @@
       "from_symbol_id": "mcp-server/src/detail-loader-append.test.ts#loadDetail",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/detail-loader.ts#loadDetail"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/detail-loader-append.test.ts#restoreClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#restoreClientPathEnv"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/detail-loader-append.test.ts#snapshotClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#snapshotClientPathEnv"
     },
     {
       "from_symbol_id": "mcp-server/src/detail-loader-append.test.ts#writeDetail",
@@ -23345,7 +23795,12 @@
     {
       "from_symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#runRunner",
       "kind": "calls",
-      "to_symbol_id": "mcp-server/src/e2e/node:child_process.ts#execFileSync"
+      "to_symbol_id": "mcp-server/src/e2e/node:child_process.ts#spawnSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts#spawnSync",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:child_process.ts#spawnSync"
     },
     {
       "from_symbol_id": "mcp-server/src/e2e/gf05-verify-gate-checklist-contract.test.ts#describe",
@@ -23506,6 +23961,26 @@
       "from_symbol_id": "mcp-server/src/e2e/tied-gate-check-cli.test.ts#spawnSync",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/e2e/node:child_process.ts#spawnSync"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/workflow-visualization-skill.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/workflow-visualization-skill.test.ts#installStandaloneSkillsCopy",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/client-skills-catalog.mjs.ts#installStandaloneSkillsCopy"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/workflow-visualization-skill.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/e2e/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/e2e/workflow-visualization-skill.test.ts#loadStandaloneClientSkills",
+      "kind": "imports",
+      "to_symbol_id": "tools/bootstrap/lib/client-skills-catalog.mjs.ts#loadStandaloneClientSkills"
     },
     {
       "from_symbol_id": "mcp-server/src/e2e/xlate-skill.test.ts#describe",
@@ -25248,9 +25723,24 @@
       "to_symbol_id": "mcp-server/src/edpc/failure-state-validate.ts#isRecord"
     },
     {
+      "from_symbol_id": "mcp-server/src/edpc/meta-hub-template.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/edpc/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/edpc/meta-hub-template.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/edpc/node:test.ts#it"
+    },
+    {
       "from_symbol_id": "mcp-server/src/edpc/publish-build.test.ts#buildEdpcPublishManifest",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/edpc/publish-build.ts#buildEdpcPublishManifest"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/edpc/publish-build.test.ts#COMPREHENSION_REQ_STATUS_GAP",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/edpc/publish-build.ts#COMPREHENSION_REQ_STATUS_GAP"
     },
     {
       "from_symbol_id": "mcp-server/src/edpc/publish-build.test.ts#describe",
@@ -31213,6 +31703,11 @@
       "to_symbol_id": "mcp-server/src/impl-pseudocode-input.ts#String"
     },
     {
+      "from_symbol_id": "mcp-server/src/impl-pseudocode-input.ts#resolvePseudocodePathUnderTiedBase",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/impl-pseudocode-input.ts#normalizePseudocodePathForTiedBase"
+    },
+    {
       "from_symbol_id": "mcp-server/src/index.ts#allTools",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
@@ -34508,6 +35003,191 @@
       "to_symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#mcpDiagnosticsEnabled"
     },
     {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.test.ts#after",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#after"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.test.ts#before",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#before"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.test.ts#buildReconcileLedger",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#buildReconcileLedger"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.test.ts#parseDivergentWorkingPathsFromDedupeLog",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts#parseDivergentWorkingPathsFromDedupeLog"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#applyReconcileLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/citdp-writer.ts#writeCitdpRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#applyReconcileLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#readCitdpInnerRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#applyReconcileLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#String"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#applyReconcileLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#buildReconcileLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#classifyPair"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#buildReconcileLedger",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts#loadDefaultDivergentPaths"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#classifyPair",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#sha256File"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#classifyPair",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#sha256File"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#classifyPair",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#sha256File"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#createHash",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#getBasePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#loadDefaultDivergentPaths",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts#loadDefaultDivergentPaths"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#sha256File",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:crypto.ts#createHash"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#writeCitdpRecord",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/citdp-writer.ts#writeCitdpRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.test.ts#after",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#after"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.test.ts#before",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#before"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.test.ts#buildCorpusMapMarkdown",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#buildCorpusMapMarkdown"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.test.ts#collectCorpusMapCounts",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#buildCorpusMapMarkdown",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countTopLevelDirs"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#writeCorpusMapFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#buildCorpusMapMarkdown"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#writeCorpusMapFile",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts#loadDefaultDivergentPaths",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts#parseDivergentWorkingPathsFromDedupeLog"
+    },
+    {
       "from_symbol_id": "mcp-server/src/methodology-bundle-pack.test.ts#compareDiskAndBundledParity",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/bundled-methodology-read.ts#compareDiskAndBundledParity"
@@ -37348,6 +38028,11 @@
       "to_symbol_id": "mcp-server/src/node:test.ts#afterEach"
     },
     {
+      "from_symbol_id": "mcp-server/src/project-identity.composition.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
       "from_symbol_id": "mcp-server/src/project-identity.composition.test.ts#clearBasePathCache",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
@@ -38985,6 +39670,11 @@
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#loadBatchInputManifest",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#isBatchManifestRequestToken"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#loadBatchInputManifest",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#isRecord"
     },
     {
@@ -39021,6 +39711,11 @@
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#loadRowsFromEvaluationCorpus",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#defaultEnvelopeArtifact"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#loadRowsFromEvaluationCorpus",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#isBatchManifestRequestToken"
     },
     {
       "from_symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#loadRowsFromEvaluationCorpus",
@@ -41938,6 +42633,36 @@
       "to_symbol_id": "mcp-server/src/node:test.ts#it"
     },
     {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#useLegacyProjectPathOnly"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#writeMinimalProjectCorpus"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#ENV_CLIENT_BUNDLE_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#ENV_CLIENT_BUNDLE_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#ENV_CLIENT_PROJECT_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#ENV_CLIENT_PROJECT_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#LEGACY_ENV_CLIENT_BUNDLE_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#LEGACY_ENV_CLIENT_BUNDLE_PATH"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#LEGACY_ENV_CLIENT_PROJECT_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#LEGACY_ENV_CLIENT_PROJECT_PATH"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tied-layout.js#detectLegacyLayout",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-layout.js#marker"
@@ -42050,7 +42775,32 @@
     {
       "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
       "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#findVersionPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readAgentsMdVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readInstallConfigVersion"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
       "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readVersionFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#readVersionFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-methodology-version.ts#readTiedMethodologyVersion",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/tied-methodology-version.ts#uniqueProjectRoots"
     },
     {
       "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#describe",
@@ -42096,6 +42846,31 @@
       "from_symbol_id": "mcp-server/src/tied-path-env.test.ts#stripLegacyClientPathEnv",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/tied-path-env.ts#stripLegacyClientPathEnv"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-project-config.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-project-config.test.ts#fileURLToPath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:url.ts#fileURLToPath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-project-config.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-project-config.test.ts#loadProjectConfig",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tied-project-config.test.ts#TiedProjectConfigError",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-project-config.ts#TiedProjectConfigError"
     },
     {
       "from_symbol_id": "mcp-server/src/tied-project-config.ts#loadProjectConfig",
@@ -42758,6 +43533,11 @@
       "to_symbol_id": "mcp-server/src/tools/node:test.ts#beforeEach"
     },
     {
+      "from_symbol_id": "mcp-server/src/tools/impl-pseudocode-mcp.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tools/impl-pseudocode-mcp.test.ts#clearBasePathCache",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
@@ -42776,6 +43556,16 @@
       "from_symbol_id": "mcp-server/src/tools/impl-pseudocode-mcp.test.ts#it",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/tools/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/impl-pseudocode-mcp.test.ts#restoreClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#restoreClientPathEnv"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/impl-pseudocode-mcp.test.ts#snapshotClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#snapshotClientPathEnv"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#addProposal",
@@ -42955,7 +43745,7 @@
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#deriveChecklistResumePlan",
       "kind": "imports",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
+      "to_symbol_id": "mcp-server/src/tools/@tied/checklist-resume/checklist-controller-resume.ts#deriveChecklistResumePlan"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#emitResearchDatasetRecord",
@@ -43195,12 +43985,17 @@
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#loadTrackerResumeContext",
       "kind": "imports",
-      "to_symbol_id": "mcp-server/src/checklist-controller-resume.ts#loadTrackerResumeContext"
+      "to_symbol_id": "mcp-server/src/tools/@tied/checklist-resume/checklist-controller-resume.ts#loadTrackerResumeContext"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#markApplied",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/analysis/leap-proposal-queue.ts#markApplied"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#metaHubRepresentationMcpTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#metaHubRepresentationMcpTools"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/index.ts#ModeBInput",
@@ -43468,6 +44263,26 @@
       "to_symbol_id": "mcp-server/src/types.ts#textContent"
     },
     {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#tiedCorpusGraphFreshness",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphFreshness"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#tiedCorpusGraphMap",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphMap"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#tiedCorpusGraphRefresh",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphRefresh"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/index.ts#tiedCorpusGraphTrace",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphTrace"
+    },
+    {
       "from_symbol_id": "mcp-server/src/tools/index.ts#tiedSourceGraphFreshness",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/source-graph/mcp-handlers.ts#tiedSourceGraphFreshness"
@@ -43721,6 +44536,66 @@
       "from_symbol_id": "mcp-server/src/tools/leap-proposal-mcp.test.ts#LEAP_PROPOSAL_QUEUE_SCHEMA",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/analysis/leap-proposal-queue.ts#LEAP_PROPOSAL_QUEUE_SCHEMA"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.test.ts#allTools",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/index.ts#allTools"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.test.ts#describe",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.test.ts#it",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/node:test.ts#it"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#applyReconcileLedger",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#applyReconcileLedger"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#buildReconcileLedger",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#buildReconcileLedger"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#ForceDisposition",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#ForceDisposition"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#getBasePath",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#prettyCanonicalJson",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/storage-dump.ts#prettyCanonicalJson"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#resolveProjectRoot",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/yaml-loader.ts#getBasePath"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#textContent",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/types.ts#textContent"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#writeCorpusMapFile",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#writeCorpusMapFile"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#z",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tools/zod.ts#z"
     },
     {
       "from_symbol_id": "mcp-server/src/tools/process-certification-mcp-tools.ts#buildAssessorAgreementReportV1",
@@ -44246,6 +45121,11 @@
       "from_symbol_id": "mcp-server/src/usage-metrics.test.ts#anonymizedProjectId",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/usage-metrics.ts#anonymizedProjectId"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/usage-metrics.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
     },
     {
       "from_symbol_id": "mcp-server/src/usage-metrics.test.ts#clearBasePathCache",
@@ -46548,6 +47428,11 @@
       "to_symbol_id": "mcp-server/src/node:test.ts#beforeEach"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#bindWritableProjectCorpus",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#clearBasePathCache",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
@@ -46556,6 +47441,11 @@
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#describe",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/node:test.ts#describe"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#ENV_CLIENT_BUNDLE_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#ENV_CLIENT_BUNDLE_PATH"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#getBasePath",
@@ -46583,6 +47473,11 @@
       "to_symbol_id": "mcp-server/src/node:test.ts#it"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#LEGACY_ENV_CLIENT_BUNDLE_PATH",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/tied-path-env.ts#LEGACY_ENV_CLIENT_BUNDLE_PATH"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#loadIndex",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#loadIndex"
@@ -46603,9 +47498,24 @@
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#resolveMethodologyRoot"
     },
     {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#restoreClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#restoreClientPathEnv"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#seedTwoFolderClient",
+      "kind": "calls",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#useLegacyProjectPathOnly"
+    },
+    {
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#seedTwoFolderClient",
       "kind": "calls",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#clearBasePathCache"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#snapshotClientPathEnv",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#snapshotClientPathEnv"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#updateRecord",
@@ -46616,6 +47526,11 @@
       "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#upsertRecord",
       "kind": "imports",
       "to_symbol_id": "mcp-server/src/yaml-loader.ts#upsertRecord"
+    },
+    {
+      "from_symbol_id": "mcp-server/src/yaml-loader.test.ts#useLegacyProjectPathOnly",
+      "kind": "imports",
+      "to_symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#useLegacyProjectPathOnly"
     },
     {
       "from_symbol_id": "mcp-server/src/yaml-loader.ts#assertBindingAtStartup",
@@ -61589,10 +62504,11 @@
     "mcp-server/packages/agentstream/src/apply-resume-from-tracker.test.ts",
     "mcp-server/packages/agentstream/src/apply-resume-from-tracker.ts",
     "mcp-server/packages/agentstream/src/checklist-constants.ts",
-    "mcp-server/packages/agentstream/src/checklist-controller-resume.ts",
     "mcp-server/packages/agentstream/src/checklist-load-turns.ts",
     "mcp-server/packages/agentstream/src/checklist-placeholders.ts",
     "mcp-server/packages/agentstream/src/checklist-preview.ts",
+    "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts",
+    "mcp-server/packages/agentstream/src/checklist-resume-config.ts",
     "mcp-server/packages/agentstream/src/claude-driver.test.ts",
     "mcp-server/packages/agentstream/src/claude-driver.ts",
     "mcp-server/packages/agentstream/src/claude-stream.test.ts",
@@ -61649,6 +62565,10 @@
     "mcp-server/packages/agentstream/src/working-root.ts",
     "mcp-server/packages/bootstrap/src/bootstrap.test.ts",
     "mcp-server/packages/bootstrap/src/paths.ts",
+    "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts",
+    "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts",
+    "mcp-server/packages/checklist-resume/src/resume-policy.test.ts",
+    "mcp-server/packages/checklist-resume/src/resume-policy.ts",
     "mcp-server/packages/cli/src/branch-check.test.ts",
     "mcp-server/packages/cli/src/cli.test.ts",
     "mcp-server/packages/cli/src/gate-check.test.ts",
@@ -61806,10 +62726,9 @@
     "mcp-server/src/checklist-activation-collect.ts",
     "mcp-server/src/checklist-async-dispositions.test.ts",
     "mcp-server/src/checklist-async-dispositions.ts",
-    "mcp-server/src/checklist-controller-resume.test.ts",
-    "mcp-server/src/checklist-controller-resume.ts",
     "mcp-server/src/checklist-gate-evidence-hydration.test.ts",
     "mcp-server/src/checklist-gate-evidence-hydration.ts",
+    "mcp-server/src/checklist-gate-project-config.test.ts",
     "mcp-server/src/checklist-pseudocode-gate.test.ts",
     "mcp-server/src/checklist-remediation-acceptance.test.ts",
     "mcp-server/src/checklist-slug-registry.ts",
@@ -61867,6 +62786,11 @@
     "mcp-server/src/context-adaptive/reassess.ts",
     "mcp-server/src/context-adaptive/selector.test.ts",
     "mcp-server/src/context-adaptive/selector.ts",
+    "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts",
+    "mcp-server/src/corpus-graph/corpus-graph.test.ts",
+    "mcp-server/src/corpus-graph/index-builder.ts",
+    "mcp-server/src/corpus-graph/mcp-handlers.ts",
+    "mcp-server/src/corpus-graph/types.ts",
     "mcp-server/src/dae/branch-check.ts",
     "mcp-server/src/dae/charter-verification.test.ts",
     "mcp-server/src/dae/gate-check-composition.ts",
@@ -61896,6 +62820,7 @@
     "mcp-server/src/e2e/prompt-type-subagent.test.ts",
     "mcp-server/src/e2e/sponsor-agent-relationship-contract.test.ts",
     "mcp-server/src/e2e/tied-gate-check-cli.test.ts",
+    "mcp-server/src/e2e/workflow-visualization-skill.test.ts",
     "mcp-server/src/e2e/xlate-skill.test.ts",
     "mcp-server/src/easar-receipts/claim-matrix-choreography.test.ts",
     "mcp-server/src/easar-receipts/claim-matrix-map-mcp.test.ts",
@@ -61938,6 +62863,7 @@
     "mcp-server/src/edpc/failure-state-build.ts",
     "mcp-server/src/edpc/failure-state-validate.test.ts",
     "mcp-server/src/edpc/failure-state-validate.ts",
+    "mcp-server/src/edpc/meta-hub-template.test.ts",
     "mcp-server/src/edpc/publish-build.test.ts",
     "mcp-server/src/edpc/publish-build.ts",
     "mcp-server/src/edpc/types.ts",
@@ -62103,6 +63029,11 @@
     "mcp-server/src/mcp-stdio-console-guard-side-effect.ts",
     "mcp-server/src/mcp-stdio-console-guard.test.ts",
     "mcp-server/src/mcp-stdio-console-guard.ts",
+    "mcp-server/src/meta-hub-representation/citdp-reconcile.test.ts",
+    "mcp-server/src/meta-hub-representation/citdp-reconcile.ts",
+    "mcp-server/src/meta-hub-representation/corpus-map-build.test.ts",
+    "mcp-server/src/meta-hub-representation/corpus-map-build.ts",
+    "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts",
     "mcp-server/src/methodology-bundle-pack.test.ts",
     "mcp-server/src/methodology-bundle-pack.ts",
     "mcp-server/src/methodology-conformance-effectiveness-pairing/constants.ts",
@@ -62228,6 +63159,7 @@
     "mcp-server/src/storage-dump.test.ts",
     "mcp-server/src/storage-dump.ts",
     "mcp-server/src/store-readme-structure.test.ts",
+    "mcp-server/src/test-helpers/client-path-env.ts",
     "mcp-server/src/tied-layout.d.ts",
     "mcp-server/src/tied-layout.js",
     "mcp-server/src/tied-layout.test.ts",
@@ -62236,6 +63168,7 @@
     "mcp-server/src/tied-methodology-version.ts",
     "mcp-server/src/tied-path-env.test.ts",
     "mcp-server/src/tied-path-env.ts",
+    "mcp-server/src/tied-project-config.test.ts",
     "mcp-server/src/tied-project-config.ts",
     "mcp-server/src/token-rename.test.ts",
     "mcp-server/src/token-rename.ts",
@@ -62255,6 +63188,8 @@
     "mcp-server/src/tools/jev-plan-skills-tools.ts",
     "mcp-server/src/tools/kaizen-feedback-mcp-composition.test.ts",
     "mcp-server/src/tools/leap-proposal-mcp.test.ts",
+    "mcp-server/src/tools/meta-hub-representation-mcp.test.ts",
+    "mcp-server/src/tools/meta-hub-representation-mcp.ts",
     "mcp-server/src/tools/process-certification-mcp-tools.ts",
     "mcp-server/src/tools/project-operations-mcp.test.ts",
     "mcp-server/src/tools/project-operations-mcp.ts",
@@ -62953,41 +63888,6 @@
     },
     {
       "exported": false,
-      "file": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "isTerminal",
-      "symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#isTerminal"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "deriveChecklistResumePlan",
-      "symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "loadTrackerResumeContext",
-      "symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#loadTrackerResumeContext"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "parseSessionIdFromStateHistory",
-      "symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "stepDispositionsFromTrackerSteps",
-      "symbol_id": "mcp-server/packages/agentstream/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps"
-    },
-    {
-      "exported": false,
       "file": "mcp-server/packages/agentstream/src/checklist-load-turns.ts",
       "kind": "function",
       "name": "appendAsyncMethodologyHighlight",
@@ -63181,6 +64081,48 @@
       "kind": "function",
       "name": "previewLeadChecklist",
       "symbol_id": "mcp-server/packages/agentstream/src/checklist-preview.ts#previewLeadChecklist"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts",
+      "kind": "function",
+      "name": "minimalCfg",
+      "symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.test.ts#minimalCfg"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/checklist-resume-config.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#isRecord"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/checklist-resume-config.ts",
+      "kind": "function",
+      "name": "projectRootForConfig",
+      "symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#projectRootForConfig"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/agentstream/src/checklist-resume-config.ts",
+      "kind": "function",
+      "name": "readRepoTiedYaml",
+      "symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#readRepoTiedYaml"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/checklist-resume-config.ts",
+      "kind": "function",
+      "name": "resolveResumePolicyForWorkspace",
+      "symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#resolveResumePolicyForWorkspace"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/agentstream/src/checklist-resume-config.ts",
+      "kind": "function",
+      "name": "shouldApplyResumeFromTracker",
+      "symbol_id": "mcp-server/packages/agentstream/src/checklist-resume-config.ts#shouldApplyResumeFromTracker"
     },
     {
       "exported": false,
@@ -64826,6 +65768,62 @@
       "kind": "function",
       "name": "repoRootFromBootstrapModule",
       "symbol_id": "mcp-server/packages/bootstrap/src/paths.ts#repoRootFromBootstrapModule"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts",
+      "kind": "function",
+      "name": "turn",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.test.ts#turn"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts",
+      "kind": "function",
+      "name": "isTerminal",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#isTerminal"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts",
+      "kind": "function",
+      "name": "deriveChecklistResumePlan",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts",
+      "kind": "function",
+      "name": "loadTrackerResumeContext",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#loadTrackerResumeContext"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts",
+      "kind": "function",
+      "name": "parseSessionIdFromStateHistory",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts",
+      "kind": "function",
+      "name": "stepDispositionsFromTrackerSteps",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/packages/checklist-resume/src/resume-policy.ts",
+      "kind": "function",
+      "name": "isRecord",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.ts#isRecord"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/packages/checklist-resume/src/resume-policy.ts",
+      "kind": "function",
+      "name": "resolveResumeFromTrackerPolicy",
+      "symbol_id": "mcp-server/packages/checklist-resume/src/resume-policy.ts#resolveResumeFromTrackerPolicy"
     },
     {
       "exported": false,
@@ -69022,55 +70020,6 @@
     },
     {
       "exported": false,
-      "file": "mcp-server/src/checklist-controller-resume.test.ts",
-      "kind": "function",
-      "name": "turn",
-      "symbol_id": "mcp-server/src/checklist-controller-resume.test.ts#turn"
-    },
-    {
-      "exported": false,
-      "file": "mcp-server/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "isTerminal",
-      "symbol_id": "mcp-server/src/checklist-controller-resume.ts#isTerminal"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "deriveChecklistResumePlan",
-      "symbol_id": "mcp-server/src/checklist-controller-resume.ts#deriveChecklistResumePlan"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "isChecklistResumeFromTrackerEnabled",
-      "symbol_id": "mcp-server/src/checklist-controller-resume.ts#isChecklistResumeFromTrackerEnabled"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "loadTrackerResumeContext",
-      "symbol_id": "mcp-server/src/checklist-controller-resume.ts#loadTrackerResumeContext"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "parseSessionIdFromStateHistory",
-      "symbol_id": "mcp-server/src/checklist-controller-resume.ts#parseSessionIdFromStateHistory"
-    },
-    {
-      "exported": true,
-      "file": "mcp-server/src/checklist-controller-resume.ts",
-      "kind": "function",
-      "name": "stepDispositionsFromTrackerSteps",
-      "symbol_id": "mcp-server/src/checklist-controller-resume.ts#stepDispositionsFromTrackerSteps"
-    },
-    {
-      "exported": false,
       "file": "mcp-server/src/checklist-gate-evidence-hydration.ts",
       "kind": "function",
       "name": "artifactPath",
@@ -70650,6 +71599,132 @@
       "kind": "function",
       "name": "selectPracticesDeterministicV1",
       "symbol_id": "mcp-server/src/context-adaptive/selector.ts#selectPracticesDeterministicV1"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts",
+      "kind": "function",
+      "name": "body",
+      "symbol_id": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts#body"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts",
+      "kind": "function",
+      "name": "handler",
+      "symbol_id": "mcp-server/src/corpus-graph/corpus-graph-composition.test.ts#handler"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "dedupeEdges",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#dedupeEdges"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "dedupeNodes",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#dedupeNodes"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "detailPathFromRecord",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#detailPathFromRecord"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "extractTokensFromText",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#extractTokensFromText"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "hashContent",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#hashContent"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "kindFromToken",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#kindFromToken"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "scanCorpusProject",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#scanCorpusProject"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "buildCorpusGraphMap",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#buildCorpusGraphMap"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "checkCorpusGraphFreshness",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#checkCorpusGraphFreshness"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "loadCorpusGraphIndex",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#loadCorpusGraphIndex"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "refreshCorpusGraphIndex",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#refreshCorpusGraphIndex"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/index-builder.ts",
+      "kind": "function",
+      "name": "traceCorpusGraphNode",
+      "symbol_id": "mcp-server/src/corpus-graph/index-builder.ts#traceCorpusGraphNode"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/mcp-handlers.ts",
+      "kind": "function",
+      "name": "tiedCorpusGraphFreshness",
+      "symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphFreshness"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/mcp-handlers.ts",
+      "kind": "function",
+      "name": "tiedCorpusGraphMap",
+      "symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphMap"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/mcp-handlers.ts",
+      "kind": "function",
+      "name": "tiedCorpusGraphRefresh",
+      "symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphRefresh"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/corpus-graph/mcp-handlers.ts",
+      "kind": "function",
+      "name": "tiedCorpusGraphTrace",
+      "symbol_id": "mcp-server/src/corpus-graph/mcp-handlers.ts#tiedCorpusGraphTrace"
     },
     {
       "exported": true,
@@ -73998,6 +75073,13 @@
       "symbol_id": "mcp-server/src/hooks/claude-adherence-normalize.ts#normalizeClaudeHookStdin"
     },
     {
+      "exported": false,
+      "file": "mcp-server/src/impl-pseudocode-input.ts",
+      "kind": "function",
+      "name": "normalizePseudocodePathForTiedBase",
+      "symbol_id": "mcp-server/src/impl-pseudocode-input.ts#normalizePseudocodePathForTiedBase"
+    },
+    {
       "exported": true,
       "file": "mcp-server/src/impl-pseudocode-input.ts",
       "kind": "function",
@@ -75291,6 +76373,90 @@
       "kind": "function",
       "name": "resetMcpStdioConsoleGuardForTests",
       "symbol_id": "mcp-server/src/mcp-stdio-console-guard.ts#resetMcpStdioConsoleGuardForTests"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts",
+      "kind": "function",
+      "name": "classifyPair",
+      "symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#classifyPair"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts",
+      "kind": "function",
+      "name": "readCitdpInnerRecord",
+      "symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#readCitdpInnerRecord"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts",
+      "kind": "function",
+      "name": "sha256File",
+      "symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#sha256File"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts",
+      "kind": "function",
+      "name": "applyReconcileLedger",
+      "symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#applyReconcileLedger"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts",
+      "kind": "function",
+      "name": "buildReconcileLedger",
+      "symbol_id": "mcp-server/src/meta-hub-representation/citdp-reconcile.ts#buildReconcileLedger"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/meta-hub-representation/corpus-map-build.ts",
+      "kind": "function",
+      "name": "countFiles",
+      "symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countFiles"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/meta-hub-representation/corpus-map-build.ts",
+      "kind": "function",
+      "name": "countTopLevelDirs",
+      "symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#countTopLevelDirs"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/meta-hub-representation/corpus-map-build.ts",
+      "kind": "function",
+      "name": "buildCorpusMapMarkdown",
+      "symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#buildCorpusMapMarkdown"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/meta-hub-representation/corpus-map-build.ts",
+      "kind": "function",
+      "name": "collectCorpusMapCounts",
+      "symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#collectCorpusMapCounts"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/meta-hub-representation/corpus-map-build.ts",
+      "kind": "function",
+      "name": "writeCorpusMapFile",
+      "symbol_id": "mcp-server/src/meta-hub-representation/corpus-map-build.ts#writeCorpusMapFile"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts",
+      "kind": "function",
+      "name": "loadDefaultDivergentPaths",
+      "symbol_id": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts#loadDefaultDivergentPaths"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts",
+      "kind": "function",
+      "name": "parseDivergentWorkingPathsFromDedupeLog",
+      "symbol_id": "mcp-server/src/meta-hub-representation/dedupe-log-paths.ts#parseDivergentWorkingPathsFromDedupeLog"
     },
     {
       "exported": false,
@@ -76892,6 +78058,13 @@
       "exported": true,
       "file": "mcp-server/src/request-evidence-envelope/batch-collect.ts",
       "kind": "function",
+      "name": "isBatchManifestRequestToken",
+      "symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#isBatchManifestRequestToken"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/request-evidence-envelope/batch-collect.ts",
+      "kind": "function",
       "name": "loadBatchInputManifest",
       "symbol_id": "mcp-server/src/request-evidence-envelope/batch-collect.ts#loadBatchInputManifest"
     },
@@ -77807,6 +78980,41 @@
     },
     {
       "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
+      "name": "bindWritableProjectCorpus",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#bindWritableProjectCorpus"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
+      "name": "restoreClientPathEnv",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#restoreClientPathEnv"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
+      "name": "snapshotClientPathEnv",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#snapshotClientPathEnv"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
+      "name": "useLegacyProjectPathOnly",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#useLegacyProjectPathOnly"
+    },
+    {
+      "exported": true,
+      "file": "mcp-server/src/test-helpers/client-path-env.ts",
+      "kind": "function",
+      "name": "writeMinimalProjectCorpus",
+      "symbol_id": "mcp-server/src/test-helpers/client-path-env.ts#writeMinimalProjectCorpus"
+    },
+    {
+      "exported": true,
       "file": "mcp-server/src/tied-layout.d.ts",
       "kind": "function",
       "name": "detectLegacyLayout",
@@ -77900,8 +79108,29 @@
       "exported": false,
       "file": "mcp-server/src/tied-methodology-version.ts",
       "kind": "function",
+      "name": "readAgentsMdVersion",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#readAgentsMdVersion"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
+      "name": "readInstallConfigVersion",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#readInstallConfigVersion"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
       "name": "readVersionFile",
       "symbol_id": "mcp-server/src/tied-methodology-version.ts#readVersionFile"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tied-methodology-version.ts",
+      "kind": "function",
+      "name": "uniqueProjectRoots",
+      "symbol_id": "mcp-server/src/tied-methodology-version.ts#uniqueProjectRoots"
     },
     {
       "exported": true,
@@ -78294,6 +79523,27 @@
       "kind": "function",
       "name": "toolHandler",
       "symbol_id": "mcp-server/src/tools/leap-proposal-mcp.test.ts#toolHandler"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tools/meta-hub-representation-mcp.test.ts",
+      "kind": "function",
+      "name": "toolHandler",
+      "symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.test.ts#toolHandler"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tools/meta-hub-representation-mcp.ts",
+      "kind": "function",
+      "name": "assertHubPath",
+      "symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#assertHubPath"
+    },
+    {
+      "exported": false,
+      "file": "mcp-server/src/tools/meta-hub-representation-mcp.ts",
+      "kind": "function",
+      "name": "resolveProjectRoot",
+      "symbol_id": "mcp-server/src/tools/meta-hub-representation-mcp.ts#resolveProjectRoot"
     },
     {
       "exported": false,

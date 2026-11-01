@@ -4,8 +4,8 @@ brownfield_intent_elevation:
 depth_tier: "minimal"
 edpc_engagement:
   bounded_paths:
-    - "tied-project"
     - "mcp-server/src"
+    - "tied-project"
     - "tools/bootstrap"
     - "tools/meta-hub"
   charter_path: "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/edpc/engagement-charter.v1.yaml"
@@ -44,8 +44,8 @@ steps:
     slug: "change-definition"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md"
       - "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/CITDP-REQ-TIED_META_HUB_REPRESENTATION.yaml"
+      - "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md"
     kind: "main"
     slug: "impact-discovery"
   - disposition: "completed"

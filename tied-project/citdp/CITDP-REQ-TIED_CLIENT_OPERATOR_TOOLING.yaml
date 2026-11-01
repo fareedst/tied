@@ -20,13 +20,13 @@ CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING:
       - "IMPL-TIED_CLIENT_OPERATOR_TOOLING"
     modules_or_boundaries: "mcp-server checklist-validator, impl-pseudocode-input, tied-methodology-version; tools/bootstrap run-close-out-gates.mjs"
     tied_tokens_affected:
-      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
       - "REQ-TIED_SETUP"
     tied_tokens_new:
-      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
       - "ARCH-TIED_CLIENT_OPERATOR_TOOLING"
       - "IMPL-TIED_CLIENT_OPERATOR_TOOLING"
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
   record_status: "closed"
   request_token: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
   risk_analysis:
@@ -41,8 +41,8 @@ CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING:
         - "tied-methodology-version.test.ts covers install.json and AGENTS.md without cwd."
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md"
         - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/t6-trial-client-1793549271.md"
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md"
       falsification_questions:
         - "Does close_out still fail with sub-adversarial-inquiry-pass only under sub_procedures?"
         - "Does pseudocode_validate still return zero blocks for tied-project/ prefixed paths?"

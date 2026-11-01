@@ -1,37 +1,37 @@
-schema_version: "session-handoff-context.v1"
-request_token: "REQ-EXAMPLE"
-handoff_kind: "session"
-recorded_at: "2026-11-01"
-prompt_type: "@handoff"
-plan_spine:
-  linked_plan: "tied-project/working/REQ-EXAMPLE/PLAN.md"
-  program_phase: "implement"
-environment:
-  workspace_root: "/path/to/repo"
-  tied_base_path: "/path/to/repo/tied-project"
-  execution_site: "store"
-  git_policy: "paste_only_no_auto_git"
-req_tokens:
-  - "REQ-EXAMPLE"
-depends_on:
-  - token: "REQ-UPSTREAM"
-    role: "methodology compose"
 blocks:
   - id: "gate-verification"
     reason: "envelope stale"
+depends_on:
+  - role: "methodology compose"
+    token: "REQ-UPSTREAM"
 depth_tier: "minimal"
+environment:
+  execution_site: "store"
+  git_policy: "paste_only_no_auto_git"
+  tied_base_path: "/path/to/repo/tied-project"
+  workspace_root: "/path/to/repo"
 gate_policy: "advisory"
-pending_prior_requests:
-  - id: "REQ-OTHER"
-    kind: "REQ"
-    status: "pending"
-    owner: "sponsor"
-    evidence_link: "tied-project/working/REQ-OTHER/evidence/session-handoff.md"
-    blocks_current: false
-  - id: "TIQ-20261101-EXAMPLE"
-    kind: "TIQ"
-    status: "active"
-    owner: "agent"
-    evidence_link: "tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md"
-    blocks_current: false
+handoff_kind: "session"
 notes: "Copy-paste helper only; not DAE handoffs/{phase}.yaml schema v1; not MCP authority."
+pending_prior_requests:
+  - blocks_current: false
+    evidence_link: "tied-bundle/working/TIED-IMPROVEMENT-PENDING-WORK-QUEUE.md"
+    id: "TIQ-20261101-EXAMPLE"
+    kind: "TIQ"
+    owner: "agent"
+    status: "active"
+  - blocks_current: false
+    evidence_link: "tied-project/working/REQ-OTHER/evidence/session-handoff.md"
+    id: "REQ-OTHER"
+    kind: "REQ"
+    owner: "sponsor"
+    status: "pending"
+plan_spine:
+  linked_plan: "tied-project/working/REQ-EXAMPLE/PLAN.md"
+  program_phase: "implement"
+prompt_type: "@handoff"
+recorded_at: "2026-11-01"
+req_tokens:
+  - "REQ-EXAMPLE"
+request_token: "REQ-EXAMPLE"
+schema_version: "session-handoff-context.v1"

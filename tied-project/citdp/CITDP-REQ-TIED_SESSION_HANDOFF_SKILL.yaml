@@ -4,14 +4,14 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
     desired_behavior: "Wave 2 (2026-11-01): Normative session-handoff-structure.md + templates; @handoff merges prior handoffs into carry-forward pending-prior-requests table; advisory section validation; expanded resume prompt (environment, dependencies, pending rows); bootstrap doc test; LEAP REQ satisfaction criteria SC-STRUCTURE-DOC through SC-TIED-LEAP. DAE handoffs/{phase}.yaml remains separate additive evidence."
     non_goals:
       - "Automatic git inspection or commit"
+      - "Extending DAE handoff YAML schema v1 or tied handoff validate in this wave"
       - "Renaming existing session-handoff.md files across working trees"
       - "Substituting plan-close-out or clear-workspace"
-      - "Extending DAE handoff YAML schema v1 or tied handoff validate in this wave"
     success_criteria:
+      - "client-skills-catalog.test.mjs still passes"
+      - "session-handoff-structure-doc.test.mjs passes"
       - "session-handoff-structure.md and session-handoff.v1.template.md ship"
       - "SKILL.md references structure doc and pending-prior-requests merge step"
-      - "session-handoff-structure-doc.test.mjs passes"
-      - "client-skills-catalog.test.mjs still passes"
       - "tied_validate_consistency ok after Wave 2 YAML LEAP"
   evidence:
     command_seq:
@@ -26,9 +26,9 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
     impl_inventory_notes: "Wave 2: prompt-shared structure doc, tied-bundle templates, SKILL procedure, bootstrap doc test; IMPL pseudo-code HANDOFF_MERGE_PRIOR + HANDOFF_PERSIST_STRUCTURE."
     modules_or_boundaries: "tools/bundled-prompt-type-skills/prompt-shared/; tied-bundle/templates/; tools/bundled-session-handoff-skill/; tools/bootstrap/lib/"
     tied_tokens_affected:
-      - "REQ-TIED_SESSION_HANDOFF_SKILL"
       - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
       - "IMPL-TIED_SESSION_HANDOFF_SKILL"
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
     tied_tokens_new: []
   record_identity:
     change_request_id: "REQ-TIED_SESSION_HANDOFF_SKILL"
@@ -52,9 +52,9 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
         - "Bootstrap tests pass but linked install omits handoff stub."
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/PLAN.md"
-        - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/refine-plan-handoff-structure-20261101.md"
         - "tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/session-handoff.md"
+        - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/refine-plan-handoff-structure-20261101.md"
+        - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/PLAN.md"
       falsification_questions:
         - "Does manifest list exactly one handoff row?"
         - "Does SKILL.md forbid automatic git commit?"
@@ -77,7 +77,7 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
   test_strategy:
     approach: "RED session-handoff-structure-doc.test.mjs then GREEN docs + SKILL; catalog regression."
     cases:
-      - "structure doc and template paths exist"
-      - "SKILL resume template includes Environment and Pending prior requests"
       - "client-skills-catalog.test.mjs still green"
+      - "SKILL resume template includes Environment and Pending prior requests"
+      - "structure doc and template paths exist"
       - "tied_validate_consistency after Wave 2 LEAP"
