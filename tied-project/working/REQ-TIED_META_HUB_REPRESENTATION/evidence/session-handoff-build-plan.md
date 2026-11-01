@@ -30,7 +30,8 @@ Ledger: [citdp-reconcile-ledger.v1.yaml](./reports/citdp-reconcile-ledger.v1.yam
 | Verification + `close_out` | `run-close-out-gates.mjs` — `allowed=true`, envelope **blocking_gaps=0** (run `close-out-req-tied-meta-hub-representation-20261101`) |
 | CITDP persist | `tied-project/citdp/CITDP-REQ-TIED_META_HUB_REPRESENTATION.yaml` |
 | `tied_verify` | `REQ-TIED_META_HUB_REPRESENTATION` → Implemented (scoped `tsx --test` manifest) |
-| Still open | **Traceable commit**, gitignore-close-out hygiene, optional envelope batch / EDPC republish / README workflows link |
+| Traceable commit | **`359a922e`** — see `evidence/traceable-commit-evidence.md` |
+| Still open | gitignore-close-out hygiene (optional); envelope batch / EDPC republish / README workflows link |
 
 Tracker: [checklist-tracker.yaml](../checklist-tracker.yaml) · Envelope: [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json)
 

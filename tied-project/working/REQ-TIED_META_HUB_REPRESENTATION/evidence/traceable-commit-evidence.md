@@ -2,6 +2,8 @@
 
 **Date:** 2026-11-01
 
+**Commit:** `359a922e` — `feat(meta-hub): CITDP reconcile and corpus-map tooling (REQ-TIED_META_HUB_REPRESENTATION)`
+
 ## Vocab VALIDATE
 
 No new domain glossary terms beyond PLAN/CITDP `meta_hub` engagement pattern and enrolled REQ/ARCH/IMPL tokens.

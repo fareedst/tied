@@ -13,6 +13,6 @@
 | **Execution workflow** | `@add-feature` → `@build-plan` after refine gate |
 | **MCP base path** | `/Users/fareed/Documents/dev/chatgpt/stdd/tied-project` |
 
-**Status:** Build-plan **implemented**; machine close-out **pass** (2026-11-01) — [session-handoff-build-plan.md](./evidence/session-handoff-build-plan.md). **Traceable commit** still pending sponsor.
+**Status:** **Close-out complete** — traceable commit **`359a922e`** · [session-handoff-build-plan.md](./evidence/session-handoff-build-plan.md)
 
 **Refine:** [refine-pass1-gate-note.md](./evidence/refine-pass1-gate-note.md) · **pre_implementation** allowed.
