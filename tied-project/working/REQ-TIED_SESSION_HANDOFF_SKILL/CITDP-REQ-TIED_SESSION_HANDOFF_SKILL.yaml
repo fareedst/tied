@@ -1,18 +1,21 @@
 CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
   change_definition:
-    current_behavior_prior: "Conversation handoff procedure exists at tools/bundled-session-handoff-skill/SKILL.md with invoke name session-handoff; skill is not registered in BUNDLED_STANDALONE_CLIENT_SKILLS; typing session-handoff in the IDE conflates the skill with many evidence/session-handoff.md paths."
-    desired_behavior: "Standalone handoff skill installs as handoff (/handoff, @handoff); persisted operator log remains tied-project/working/{REQ}/evidence/session-handoff.md; legacy session handoff phrasing documented without a second manifest row; bootstrap tests assert install parity with xlate/unblock."
+    current_behavior_prior: "Wave 1 (2026-10-18): @handoff installs via bootstrap; SKILL.md persists evidence/session-handoff.md with minimal resume template. Operator handoffs in working folders use rich ad-hoc sections (plan spine, upstream, excluded drift) without a normative merge contract for pending prior requests."
+    desired_behavior: "Wave 2 (2026-11-01): Normative session-handoff-structure.md + templates; @handoff merges prior handoffs into carry-forward pending-prior-requests table; advisory section validation; expanded resume prompt (environment, dependencies, pending rows); bootstrap doc test; LEAP REQ satisfaction criteria SC-STRUCTURE-DOC through SC-TIED-LEAP. DAE handoffs/{phase}.yaml remains separate additive evidence."
     non_goals:
       - "Automatic git inspection or commit"
       - "Renaming existing session-handoff.md files across working trees"
       - "Substituting plan-close-out or clear-workspace"
+      - "Extending DAE handoff YAML schema v1 or tied handoff validate in this wave"
     success_criteria:
-      - "client-bootstrap-skills and client-skills-catalog tests pass with four standalone skills"
-      - "manifest.json lists skillName handoff"
-      - "SKILL.md mandates evidence/session-handoff.md"
-      - "tied_validate_consistency ok after YAML mint"
+      - "session-handoff-structure.md and session-handoff.v1.template.md ship"
+      - "SKILL.md references structure doc and pending-prior-requests merge step"
+      - "session-handoff-structure-doc.test.mjs passes"
+      - "client-skills-catalog.test.mjs still passes"
+      - "tied_validate_consistency ok after Wave 2 YAML LEAP"
   evidence:
     command_seq:
+      - "node --test tools/bootstrap/lib/session-handoff-structure-doc.test.mjs"
       - "node --test tools/bootstrap/lib/client-skills-catalog.test.mjs"
       - "cd mcp-server && npm test -- client-bootstrap-skills"
       - "tied_validate_consistency"
@@ -20,21 +23,21 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
       - "bootstrap_install_surface_only"
       - "does_not_prove_operator_handoff_quality"
   impact_analysis:
-    impl_inventory_notes: "SKILL.md + manifest row + bootstrap tests; IMPL pseudo-code documents install/load blocks."
-    modules_or_boundaries: "tools/bootstrap/manifest.json; tools/bundled-session-handoff-skill/"
-    tied_tokens_affected: []
-    tied_tokens_new:
+    impl_inventory_notes: "Wave 2: prompt-shared structure doc, tied-bundle templates, SKILL procedure, bootstrap doc test; IMPL pseudo-code HANDOFF_MERGE_PRIOR + HANDOFF_PERSIST_STRUCTURE."
+    modules_or_boundaries: "tools/bundled-prompt-type-skills/prompt-shared/; tied-bundle/templates/; tools/bundled-session-handoff-skill/; tools/bootstrap/lib/"
+    tied_tokens_affected:
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
       - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
       - "IMPL-TIED_SESSION_HANDOFF_SKILL"
-      - "REQ-TIED_SESSION_HANDOFF_SKILL"
+    tied_tokens_new: []
   record_identity:
     change_request_id: "REQ-TIED_SESSION_HANDOFF_SKILL"
     checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
     depth_tier: "minimal"
     gate_policy: "advisory"
     profile_depth: "minimal"
-    recorded_at: "2026-10-18"
-    title: "Handoff standalone client skill"
+    recorded_at: "2026-11-01"
+    title: "Structured session handoff (Wave 2)"
     workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
   risk_analysis:
     abuse_cases:
@@ -43,14 +46,15 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "SKILL.md omits session-handoff.md log path and writes ad-hoc filenames."
+        - "SKILL.md omits pending-prior-requests merge and DAE handoff YAML is documented as replacing session-handoff.md."
       depth_tier: "minimal"
       disconfirming_observations:
         - "Bootstrap tests pass but linked install omits handoff stub."
       eligibility_triggers_matched: []
       evidence_references:
-        - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/build-plan-evidence.md"
-        - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/PLAN.md"
+        - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/PLAN.md"
+        - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/refine-plan-handoff-structure-20261101.md"
+        - "tied-project/working/REQ-TIED_BOUNDED_COMPOSITION/evidence/session-handoff.md"
       falsification_questions:
         - "Does manifest list exactly one handoff row?"
         - "Does SKILL.md forbid automatic git commit?"
@@ -71,8 +75,9 @@ CITDP-REQ-TIED_SESSION_HANDOFF_SKILL:
         result: "pass"
         threshold: "test green"
   test_strategy:
-    approach: "RED catalog count then GREEN manifest; e2e copy install."
+    approach: "RED session-handoff-structure-doc.test.mjs then GREEN docs + SKILL; catalog regression."
     cases:
-      - "installStandaloneSkillsCopy includes /handoff marker"
-      - "loadStandaloneClientSkills length 4 with handoff"
-      - "tied_validate_consistency after token mint"
+      - "structure doc and template paths exist"
+      - "SKILL resume template includes Environment and Pending prior requests"
+      - "client-skills-catalog.test.mjs still green"
+      - "tied_validate_consistency after Wave 2 LEAP"

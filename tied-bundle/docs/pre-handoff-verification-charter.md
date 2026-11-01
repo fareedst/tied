@@ -44,6 +44,7 @@ Prefer **typed refs** over prose alone:
 - **Gate receipt** path and `allowed` outcome
 - **Tracker** slug dispositions for completed steps
 - **Feedback / LEAP** ids when promotion path used (`fb-*`, `lp-*`)
+- **Session handoff log** — `tied-project/working/{REQ}/evidence/session-handoff.md` with sections per [session-handoff-structure.md](../../tools/bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md) and copy-paste [session-handoff.v1.template.md](../templates/session-handoff.v1.template.md) ([REQ-TIED_SESSION_HANDOFF_SKILL](../../tied-project/requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml))
 
 Do **not** treat PR comment volume or bot scores as TIED authority.
 
@@ -60,4 +61,4 @@ Do **not** treat PR comment volume or bot scores as TIED authority.
 - [Claude Code team code review × TIED](../../docs/comparisons/claude-code-team-code-review-vs-tied.md) — compose-don't-replace source study
 - [Sponsor–agent relationship](../../tied-project/vocab/sponsor-agent-relationship.md) — consequence ladder
 
-**Last updated:** 2026-10-17
+**Last updated:** 2026-11-01

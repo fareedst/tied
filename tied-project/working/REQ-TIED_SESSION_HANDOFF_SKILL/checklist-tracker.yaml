@@ -1,4 +1,4 @@
-copy_hygiene: "execution_evidence.request = REQ-TIED_SESSION_HANDOFF_SKILL; handoff standalone bootstrap skill."
+copy_hygiene: "Wave 2 refine 2026-11-01; execution_evidence.request = REQ-TIED_SESSION_HANDOFF_SKILL; structured session handoff."
 description: "Minimal tracker — handoff skill manifest + bootstrap tests."
 execution_evidence:
   close_out_evidence:
@@ -63,6 +63,7 @@ steps:
   - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/test-strategy.md"
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/refine-plan-handoff-structure-20261101.md"
     slug: "test-strategy"
     tracking:
       status: "completed"
@@ -106,14 +107,13 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/build-plan-evidence.md"
+      - "tools/bootstrap/lib/session-handoff-structure-doc.test.mjs"
     slug: "unit-test-red"
     tracking:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/client-bootstrap-skills.stdout.txt"
-      - "tied-project/working/PLAN-HANDOFF-CLEAR-WORKSPACE-SKILLS/evidence/client-skills-catalog.stdout.txt"
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/build-plan-wave2-20261101.md"
     slug: "unit-test-green"
     tracking:
       status: "completed"
@@ -135,25 +135,29 @@ steps:
     slug: "persist-citdp-record"
     tracking:
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
     evidence_refs:
-      - ".gitignore"
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/git-hygiene-receipt-2026-11-01.md"
+    policy: "no_new_gitignore_patterns"
     slug: "gitignore-close-out-hygiene"
     tracking:
-      status: "pending"
-  - disposition: "pending"
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
       - "CHANGELOG.md"
     slug: "user-facing-release-notes"
     tracking:
-      status: "pending"
-  - disposition: "pending"
-    evidence_refs: []
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/closeout-run-close-out-gates-wave2.json"
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/verification-evidence-manifest.v1.json"
     slug: "sub-close-out-evidence-sync"
     tracking:
-      status: "pending"
+      status: "completed"
   - disposition: "pending"
-    evidence_refs: []
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/traceable-commit-evidence.md"
     slug: "traceable-commit"
     tracking:
       status: "pending"

@@ -3386,12 +3386,12 @@ REQ-TIED_SESSION_HANDOFF_SKILL:
     requirements:
       - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
-  description: "Bundled /handoff skill for chat continuity; evidence log session-handoff.md."
+  description: "Bundled @handoff skill with normative session-handoff.md structure and pending-prior-requests carry-forward."
   detail_file: "requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml"
   name: "Handoff skill"
   satisfaction_criteria:
-    - criterion: "Skill installs as handoff and documents session-handoff.md log path"
-      criterion_id: "handoff-install"
+    - criterion: "session-handoff-structure-doc.test.mjs and structure doc ship (Wave 2)"
+      criterion_id: "SC-BOOTSTRAP-TEST"
   status: "Implemented"
   traceability:
     architecture:

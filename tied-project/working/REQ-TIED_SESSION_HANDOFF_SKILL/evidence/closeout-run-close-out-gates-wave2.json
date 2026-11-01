@@ -1,0 +1,115 @@
+DIAGNOSTIC: envelope patch failed for tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/verification-evidence-manifest.v1.json: envelope_revision_conflict
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "minimal_depth",
+    "run_id": "handoff-structure-closeout-20261101"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-TIED_SESSION_HANDOFF_SKILL",
+      "findings": [
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SESSION_HANDOFF_SKILL/gates/close_out-2026-11-01T17-45-16-416Z.json",
+            "stored_tracker_hash": "sha256:146b75a918414bfa7fc43868fe96ae17b414a78617f98afc208a3337c802bb25",
+            "current_tracker_hash": "sha256:c9436340c79c37c1fce8f71b2c2092739b6c417dbda55e39e9376846ce62dcc8",
+            "stored_citdp_hash": "sha256:9bbf9e59095d6d34c6dcd5d3e111729eefe0256b3230cedea31b4103651bbc1a",
+            "current_citdp_hash": "sha256:09939dcd1e32a4ceb0cbb62045aaf56e05a352aa5b5e13f6bd232754a7f1e8b8"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SESSION_HANDOFF_SKILL/gates/close_out-2026-11-01T17-46-13-983Z.json",
+            "stored_tracker_hash": "sha256:146b75a918414bfa7fc43868fe96ae17b414a78617f98afc208a3337c802bb25",
+            "current_tracker_hash": "sha256:c9436340c79c37c1fce8f71b2c2092739b6c417dbda55e39e9376846ce62dcc8",
+            "stored_citdp_hash": "sha256:9bbf9e59095d6d34c6dcd5d3e111729eefe0256b3230cedea31b4103651bbc1a",
+            "current_citdp_hash": "sha256:09939dcd1e32a4ceb0cbb62045aaf56e05a352aa5b5e13f6bd232754a7f1e8b8"
+          }
+        }
+      ],
+      "ledger_rows": 12,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_SESSION_HANDOFF_SKILL/gates/close_out-2026-11-01T17-46-13-983Z.json",
+    "hash": "sha256:62e737a5bd3dba2d71eb953537f35b798bbc53ea9d9da7b108380e88b1d5f8df"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

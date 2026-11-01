@@ -1,35 +1,44 @@
 # Test strategy — REQ-TIED_SESSION_HANDOFF_SKILL
 
-**depth_tier:** minimal · **gate_policy:** advisory
+**Wave 1:** minimal bootstrap (2026-10-18) — satisfied.  
+**Wave 2:** structured handoff (2026-11-01) · **depth_tier:** minimal · **gate_policy:** advisory
 
-## Module boundary
+## Module boundaries
 
-Bootstrap standalone skill catalog + e2e install copy (no new MCP runtime).
+| Module | Boundary |
+| --- | --- |
+| Structure doc + templates | Committed prose/YAML; no runtime |
+| `@handoff` SKILL | Install copy via bootstrap; procedure asserted by doc test |
+| DAE `handoff-yaml.ts` | **Out of scope** — no change to schema v1 |
 
-## RED (before manifest GREEN)
+## Wave 2 — RED (before GREEN)
 
-1. Update `tools/bootstrap/lib/client-skills-catalog.test.mjs`:
-   - `loadStandaloneClientSkills` length **4**
-   - Names include **`handoff`**
-   - Copy install includes `handoff/SKILL.md` with `/handoff` marker
-2. Update `mcp-server/src/e2e/client-bootstrap-skills.test.ts`:
-   - Assert `handoff` skill copy after `installStandaloneSkillsCopy`
-   - Claude `installClaudeSkills` inventory still passes via manifest-driven assert
+1. Add `tools/bootstrap/lib/session-handoff-structure-doc.test.mjs`:
+   - `session-handoff-structure.md` exists under prompt-shared
+   - `tied-bundle/templates/session-handoff.v1.template.md` exists
+   - `tools/bundled-session-handoff-skill/SKILL.md` references structure doc
+   - SKILL resume template includes **Pending prior requests** and **Environment**
+   - Template includes **Related and pending prior requests** table header (or equivalent section title)
 
-## GREEN
+## Wave 2 — GREEN
 
-1. Update `tools/bundled-session-handoff-skill/SKILL.md` (name + log path)
-2. Append manifest row `{ skillName: handoff, storeDir: tools/bundled-session-handoff-skill }`
+1. Implement structure doc, templates, SKILL deltas, charter/index links per [PLAN.md](./PLAN.md)
+2. LEAP TIED YAML + pseudocode sidecar
 
-## Verification
+## Verification commands
 
 ```bash
 node --test tools/bootstrap/lib/client-skills-catalog.test.mjs
+node --test tools/bootstrap/lib/session-handoff-structure-doc.test.mjs
 cd mcp-server && npm test -- client-bootstrap-skills
 ```
 
-Optional: `tied_validate_consistency` after TIED mint.
+Post-YAML: `tied_validate_consistency` (MCP).
 
 ## Composition / E2E
 
-Not required — install path covered by existing bootstrap e2e pattern.
+Not required — doc + bootstrap contract only (same class as Wave 1).
+
+## Security
+
+No network, auth, or persistence changes.

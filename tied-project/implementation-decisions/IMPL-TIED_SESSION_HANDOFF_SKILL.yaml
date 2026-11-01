@@ -8,6 +8,6 @@ IMPL-TIED_SESSION_HANDOFF_SKILL:
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_SESSION_HANDOFF_SKILL-pseudocode.md"
   implementation_approach:
     details: []
-    summary: "tools/bundled-session-handoff-skill/SKILL.md registered as handoff via standalone manifest"
-  name: "Handoff skill bootstrap"
+    summary: "bundled-session-handoff-skill/SKILL.md with merge-prior, structured persist, session-handoff-structure.md; bootstrap doc test; manifest skillName handoff"
+  name: "Handoff skill bootstrap and structured session log"
   status: "Active"

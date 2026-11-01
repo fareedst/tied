@@ -1,4 +1,5 @@
 REQ-TIED_SESSION_HANDOFF_SKILL:
+  category: "Methodology"
   cross_references:
     architecture:
       - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
@@ -7,6 +8,39 @@ REQ-TIED_SESSION_HANDOFF_SKILL:
     requirements:
       - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
       - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
-  description: "Standalone bundled skill for ending one chat and resuming in another."
+  description: "Standalone bundled @handoff skill with normative session-handoff.md structure, pending-prior-requests carry-forward, and expanded resume prompt."
+  metadata:
+    created:
+      author: "plan-new-feature"
+      date: "2026-10-18"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-01"
+      reason: "Wave 2 structured session handoff"
   name: "Handoff skill"
-  status: "Planned"
+  priority: "P2"
+  related_requirements:
+    related_to:
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+      - "REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE"
+  satisfaction_criteria:
+    - criterion: "session-handoff-structure.md defines sections, merge rules, and DAE boundary"
+      id: "SC-STRUCTURE-DOC"
+    - criterion: "session-handoff.v1.template.md and session-handoff-context.v1.example.yaml ship under tied-bundle/templates"
+      id: "SC-TEMPLATE-SHIPS"
+    - criterion: "bundled handoff SKILL.md merges prior handoffs, advisory validate, expanded resume template"
+      id: "SC-SKILL-PROCEDURE"
+    - criterion: "session-handoff-structure-doc.test.mjs passes"
+      id: "SC-BOOTSTRAP-TEST"
+    - criterion: "pre-handoff-verification-charter.md links session structure doc and template"
+      id: "SC-PRE-HANDOFF-LINK"
+    - criterion: "handoff skill installs as handoff via BUNDLED_STANDALONE_CLIENT_SKILLS"
+      id: "SC-BOOTSTRAP-INSTALL"
+    - criterion: "SKILL.md mandates evidence/session-handoff.md filename"
+      id: "SC-LOG-PATH"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_SESSION_HANDOFF_SKILL"
