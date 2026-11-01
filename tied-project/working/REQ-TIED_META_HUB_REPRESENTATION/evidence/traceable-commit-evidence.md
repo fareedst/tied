@@ -20,7 +20,9 @@ No new domain glossary terms beyond PLAN/CITDP `meta_hub` engagement pattern and
 
 ## Excluded unrelated drift
 
-Not staged: `project-identity.v1.yaml`, stray reconcile-test CITDP under `tied-project/citdp/CITDP-REQ-{ACTIVATION,NESTED,PRESERVE,UNIT_TEST,UPGRADE,UPGRADE-MISSING}.yaml`, source-graph / corpus-graph fixture index churn, adversarial-inquiry fixture envelopes, JEV context-pruning benchmark, checklist-gate regression manifest, evaluation `envelope-gap-report.v1.yaml` bulk refresh (optional follow-on).
+**Gate-test CITDP litter (2026-11-01 cleanup):** Removed untracked `tied-project/citdp/CITDP-REQ-{ACTIVATION,NESTED,PRESERVE,UNIT_TEST,UPGRADE,UPGRADE-MISSING}.yaml` (leaked from `citdp-writer.test.ts` when store `TIED_BASE_PATH` was active). See `evidence/citdp-gate-test-litter-cleanup.md`.
+
+Still unstaged: `project-identity.v1.yaml`, source-graph / corpus-graph fixture index churn, adversarial-inquiry fixture envelopes, JEV context-pruning benchmark, checklist-gate regression manifest, evaluation `envelope-gap-report.v1.yaml` bulk refresh (optional follow-on).
 
 ## Store consistency
 
