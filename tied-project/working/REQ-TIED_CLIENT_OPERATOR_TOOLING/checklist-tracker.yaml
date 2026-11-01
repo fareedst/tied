@@ -30,6 +30,7 @@ execution_evidence:
     - "unit-test-green"
     - "unit-test-red"
     - "user-facing-release-notes"
+    - "traceable-commit"
     - "verification-gate"
   envelope_path: "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/request-evidence-envelope.v1.json"
   request: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
@@ -157,7 +158,12 @@ steps:
     id: "sub-close-out-evidence-sync"
     tracking:
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
+    evidence_refs:
+      - "41ddca1ed0fe98d4e93ee1a01f9574696a82e36b"
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/traceable-commit-evidence.md"
     id: "traceable-commit"
     tracking:
-      status: "pending"
+      status: "completed"
+      evidence_refs:
+        - "41ddca1ed0fe98d4e93ee1a01f9574696a82e36b"

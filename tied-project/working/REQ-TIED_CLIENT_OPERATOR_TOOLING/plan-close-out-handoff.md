@@ -37,7 +37,7 @@ Evidence: [evidence/t6-trial-client-1793549271.md](evidence/t6-trial-client-1793
 
 ## Git
 
-Traceable commit via `@close-out` — see `evidence/proposed-commit-message.txt` and commit SHA below (filled post-commit).
+Traceable commit: **`41ddca1e`** — see `evidence/proposed-commit-message.txt` and `evidence/traceable-commit-evidence.md`.
 
 ## Quick re-verify (store)
 
