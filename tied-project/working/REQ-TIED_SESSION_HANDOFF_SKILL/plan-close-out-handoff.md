@@ -16,7 +16,7 @@ Structured `@handoff`: [session-handoff-structure.md](../../../tools/bundled-pro
 
 ## Git
 
-Traceable commit: **{SHA}** — see [proposed-commit-message.txt](evidence/proposed-commit-message.txt) and [traceable-commit-evidence.md](evidence/traceable-commit-evidence.md).
+Traceable commit: **`2c642e28`** — see [proposed-commit-message.txt](evidence/proposed-commit-message.txt) and [traceable-commit-evidence.md](evidence/traceable-commit-evidence.md).
 
 ## Re-verify
 

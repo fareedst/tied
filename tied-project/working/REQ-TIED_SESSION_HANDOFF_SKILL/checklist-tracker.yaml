@@ -155,9 +155,10 @@ steps:
     slug: "sub-close-out-evidence-sync"
     tracking:
       status: "completed"
-  - disposition: "pending"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/evidence/traceable-commit-evidence.md"
+      - "2c642e28"
     slug: "traceable-commit"
     tracking:
-      status: "pending"
+      status: "completed"
