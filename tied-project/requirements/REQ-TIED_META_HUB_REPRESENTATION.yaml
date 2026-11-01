@@ -1,0 +1,19 @@
+REQ-TIED_META_HUB_REPRESENTATION:
+  acceptance_criteria:
+    - "All SC-MHR-* criteria met with tests green"
+  description: "Store meta-hub operator tooling: CITDP reconcile, corpus map builder, MCP parity."
+  rationale:
+    benefits:
+      - "Linkable reconcile receipts"
+      - "Repeatable meta-hub close-out hygiene"
+    problems_solved:
+      - "CITDP canonical/working drift"
+      - "Manual corpus map maintenance"
+    why: "DOC-STDD comprehension left 35 divergent working CITDP copies and manual navigation refresh."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CORPUS_COMPREHENSION"
+      - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+      - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+    related_to:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"

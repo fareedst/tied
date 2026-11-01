@@ -3062,6 +3062,29 @@ REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-TIED_SETUP"
   status: "Implemented"
+REQ-TIED_META_HUB_REPRESENTATION:
+  category: "Tooling"
+  description: "Reconcile divergent working CITDP drafts, regenerate corpus map, and expose MCP/CLI meta-hub operator tools on the TIED store."
+  detail_file: "requirements/REQ-TIED_META_HUB_REPRESENTATION.yaml"
+  name: "Meta-hub tied-project representation tooling"
+  priority: "P1"
+  satisfaction_criteria:
+    - criterion: "Dry-run and apply reconcile ledger for DOC-STDD 35 divergent rows; fail closed on unresolved structural_conflict."
+      criterion_id: "SC-MHR-RECONCILE"
+    - criterion: "Generated corpus map includes meta-hub §4 sections."
+      criterion_id: "SC-MHR-CORPUS-MAP"
+    - criterion: "Reconcile does not mutate REQ/ARCH/IMPL indexes."
+      criterion_id: "SC-MHR-NO-INDEX"
+    - criterion: "tied_citdp_reconcile_run and tied_corpus_map_build registered and tested."
+      criterion_id: "SC-MHR-MCP"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY"
+    implementation:
+      - "IMPL-TIED_CITDP_RECONCILE"
+      - "IMPL-TIED_CORPUS_MAP_BUILD"
+      - "IMPL-TIED_META_HUB_MCP"
 REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   category: "Functional"
   cross_references:

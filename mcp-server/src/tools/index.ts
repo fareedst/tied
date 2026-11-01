@@ -206,6 +206,7 @@ import {
 } from "./checklist-evidence-sufficiency-mcp.js";
 import { toolSafetyMcpTools } from "./tool-safety-mcp.js";
 import { projectOperationsMcpTools } from "./project-operations-mcp.js";
+import { metaHubRepresentationMcpTools } from "./meta-hub-representation-mcp.js";
 import { buildRequestEvidenceEnvelope } from "../request-evidence-envelope/build.js";
 import { patchIndependentProof } from "../request-evidence-envelope/independent-proofs.js";
 import { patchRequestEvidenceEnvelope } from "../request-evidence-envelope/patch.js";
@@ -4504,4 +4505,5 @@ export const allTools = [
   ...checklistEvidenceSufficiencyTools,
   ...toolSafetyMcpTools,
   ...projectOperationsMcpTools,
+  ...metaHubRepresentationMcpTools,
 ];

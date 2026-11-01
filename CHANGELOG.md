@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Meta-hub tied-project representation ([REQ-TIED_META_HUB_REPRESENTATION], [ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY], [IMPL-TIED_CITDP_RECONCILE], [IMPL-TIED_CORPUS_MAP_BUILD], [IMPL-TIED_META_HUB_MCP])** — MCP `tied_citdp_reconcile_run` and `tied_corpus_map_build`; DOC-STDD 35-row reconcile dogfood (34 apply actions). Plan: [PLAN-refine-pass1.md](tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md).
+
 - **Structured session handoff ([REQ-TIED_SESSION_HANDOFF_SKILL], [ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY], [IMPL-TIED_SESSION_HANDOFF_SKILL])** — Wave 2: normative [session-handoff-structure.md](tools/bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md), [session-handoff.v1.template.md](tied-bundle/templates/session-handoff.v1.template.md), `@handoff` merge of pending prior requests + environment/deps in resume prompt; bootstrap test [session-handoff-structure-doc.test.mjs](tools/bootstrap/lib/session-handoff-structure-doc.test.mjs). Plan: [PLAN.md](tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/PLAN.md).
 
 - **Client operator tooling parity ([REQ-TIED_CLIENT_OPERATOR_TOOLING])** — Checklist gate uses merged `steps` + `sub_procedures` for slug validation; `pseudocode_validate` strips repo-root `tied-project/` path prefixes; `readTiedMethodologyVersion` falls back to `tied-bundle/install.json` and `AGENTS.md` (no cwd semver luck); `run-close-out-gates.mjs` resolves MCP dist from client `.cursor/mcp.json` / `TIED_MCP_BIN`, runs `--reconcile` after gate receipt persist; `tied-install` writes root `VERSION` create-if-absent. Plan: [PLAN.md](tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md).

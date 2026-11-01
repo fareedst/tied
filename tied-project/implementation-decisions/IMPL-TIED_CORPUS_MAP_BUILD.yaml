@@ -1,0 +1,13 @@
+IMPL-TIED_CORPUS_MAP_BUILD:
+  code_locations:
+    files:
+      - description: "Markdown corpus map"
+        path: "mcp-server/src/meta-hub-representation/corpus-map-build.ts"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CORPUS_MAP_BUILD-pseudocode.md"
+  name: "Corpus map builder"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY"
+    requirements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"

@@ -1,0 +1,51 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npx tsx --test src/meta-hub-representation/citdp-reconcile.test.ts src/meta-hub-representation/corpus-map-build.test.ts src/tools/meta-hub-representation-mcp.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 954,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    }
+  ],
+  "commit": "b4a455b0e03d9e6c1701bdfd0edb299a83b91766",
+  "covered_tokens": [
+    "REQ-TIED_META_HUB_REPRESENTATION"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "does_not_prove_full_store_npm_test_green",
+    "envelope_edpc_batch_optional_follow_on"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-req-tied-meta-hub-representation-20261101-r2",
+  "schema_version": "verification-evidence-manifest.v1"
+}

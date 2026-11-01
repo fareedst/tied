@@ -1,0 +1,82 @@
+CITDP-REQ-TIED_META_HUB_REPRESENTATION:
+  change_definition:
+    current_behavior: "DOC-STDD meta-hub comprehension produced corpus map, workflows doc, and removed 65 identical working CITDP copies; 35 divergent working CITDP drafts remain vs tied-project/citdp/; navigation and envelope refresh are manual operator steps."
+    desired_behavior: "Enroll REQ-TIED_META_HUB_REPRESENTATION with tested reconcile + corpus-map tooling (CLI + MCP), dogfood full 35-row reconcile into canonical citdp/, refresh meta-hub EDPC artifacts and evaluation envelope batch, and publish comprehension-gap backlog without mutating REQ/ARCH/IMPL indexes except new tokens."
+    non_goals:
+      - "BFIE approved promotion"
+      - "Workflow D/E or production_touch changes"
+      - "Auto tied_verify for full REQ corpus"
+      - "Semantic merge of conflicting CITDP YAML"
+      - "Extend REQ-TIED_PROJECT_LINT scope (Planned parent)"
+    success_criteria:
+      - "SC-MHR-RECONCILE — 35 divergent rows ledgered; apply uses citdp writer; conflicts fail closed"
+      - "SC-MHR-MCP — tied_citdp_reconcile_run and tied_corpus_map_build mirror CLI"
+      - "SC-MHR-CORPUS-MAP — output matches edpc-meta-hub-engagement §4 sections"
+      - "SC-MHR-NO-INDEX — no index mutation beyond this REQ enrollment"
+    unchanged_behavior:
+      - "tied_verify authority for Implemented status"
+      - "Index write isolation for MCP yaml_* tools"
+      - "EDPC G7 verify-boundary gap semantics"
+  completion_criteria:
+    focused_tests: "meta-hub-representation/*.test.ts; tools/meta-hub/*.test.mjs; project-operations MCP registration"
+    persist_policy: "citdp_record_write after close-out; CITDP-REQ-TIED_META_HUB_REPRESENTATION.yaml to tied-project/citdp/"
+    verification: "tied_verify scoped to REQ; request-evidence envelope blocking_gaps=0"
+  impact_analysis:
+    depends_on:
+      - "REQ-TIED_EDPC_META_HUB_ENGAGEMENT"
+      - "REQ-TIED_CORPUS_COMPREHENSION"
+      - "REQ-TIED_WORKING_ARTIFACT_PLACEMENT"
+      - "REQ-TIED_YAML_CANONICALIZATION"
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+    files:
+      - "mcp-server/src/meta-hub-representation/**"
+      - "tools/meta-hub/**"
+      - "tied-project/citdp/CITDP-*.yaml"
+      - "tied-project/working/**/CITDP-*.yaml"
+      - "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/**"
+      - "tied-project/working/evaluation/envelope-gap-report.v1.yaml"
+      - "docs/stdd-workflows.md"
+    modules:
+      - "meta_hub_representation"
+      - "citdp_writer"
+      - "corpus_graph"
+      - "edpc_publish"
+    tags:
+      - "store-dogfood"
+      - "meta-hub-comprehension"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Reconcile overwrites newer canonical CITDP with stale working draft"
+        - "Comprehension tooling mistaken for tied_verify sign-off"
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      disconfirming_observations:
+        - "dry-run ledger reviewed before apply"
+        - "comprehension-gap-backlog documents verify boundary"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md"
+        - "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/test-strategy.md"
+        - "tied-project/working/DOC-STDD-TIED-PROJECT-BROWNFIELD/evidence/reports/citdp-dedupe-log.md"
+      falsification_questions:
+        - "Does apply mutate requirements.yaml?"
+        - "Are structural_conflict rows applied without force_disposition?"
+    costly_choices:
+      - "Full 35-row apply in one traceable commit"
+      - "Slice CITDP basename policy for checklist gate enforcement family"
+  test_determination_and_planning:
+    red_before_code: true
+    strategy_ref: "tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/test-strategy.md"
+  evidence:
+    command_seq:
+      - "cd mcp-server && npx tsx --test src/meta-hub-representation/citdp-reconcile.test.ts src/meta-hub-representation/corpus-map-build.test.ts src/tools/meta-hub-representation-mcp.test.ts"
+    proof_boundaries:
+      - "does_not_prove_full_store_npm_test_green"
+      - "envelope_edpc_batch_optional_follow_on"
+  execution_evidence:
+    verification:
+      commands:
+        - "cd mcp-server && npx tsx --test src/meta-hub-representation/citdp-reconcile.test.ts src/meta-hub-representation/corpus-map-build.test.ts src/tools/meta-hub-representation-mcp.test.ts"
+        - "Dogfood reconcile apply — see evidence/reports/citdp-reconcile-ledger.v1.yaml"
+  record_status: "closed"
+  request_token: "REQ-TIED_META_HUB_REPRESENTATION"

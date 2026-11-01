@@ -5,12 +5,12 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     non_goals:
       - "OS sandbox blocking editor YAML edits"
     success_criteria:
+      - "marker_only routing resolves writable root from project-identity.v1.yaml (Wave 6)"
       - "mcp-server npm test green (2026-10-30 full suite)"
       - "pre_implementation and close_out gates allowed at integrated depth"
       - "Startup and per-write reject wrong-tree mutations (Wave 1)"
       - "Umbrella and Wave 1–6 child REQ/ARCH/IMPL tokens validate"
       - "yaml_updates_apply sets rolled_back on mid-batch or consistency failure (Wave 2)"
-      - "marker_only routing resolves writable root from project-identity.v1.yaml (Wave 6)"
     unchanged_behavior:
       - "Env dual-read for client paths at spawn"
       - "Project index write isolation"
@@ -35,7 +35,6 @@ CITDP-REQ-TIED_INTENT_CONTROL_PLANE:
     impl_inventory:
       - "IMPL-TIED_DURABLE_CHECKLIST_CONTROLLER"
       - "IMPL-TIED_ISOLATED_VERIFICATION_RUNNER"
-      - "IMPL-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
       - "IMPL-TIED_PROJECT_IDENTITY_WRITE_BINDING"
       - "IMPL-TIED_VERIFICATION_EVIDENCE_PROVENANCE"
       - "IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH"

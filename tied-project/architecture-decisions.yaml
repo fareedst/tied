@@ -2297,6 +2297,13 @@ ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
   detail_file: "architecture-decisions/ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
   name: "MCP JSON canonical serialization seam"
   status: "Accepted"
+ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY:
+  detail_file: "architecture-decisions/ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY.yaml"
+  name: "Meta-hub representation boundary"
+  status: "Active"
+  traceability:
+    implements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"
 ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY"

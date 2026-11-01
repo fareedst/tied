@@ -1,0 +1,14 @@
+feat(meta-hub): CITDP reconcile and corpus-map tooling (REQ-TIED_META_HUB_REPRESENTATION)
+
+MCP tied_citdp_reconcile_run and tied_corpus_map_build plus CLI wrapper;
+dogfood 35-row reconcile (34 apply actions) aligns working CITDP drafts
+with tied-project/citdp/; close-out gates and tied_verify with scoped tests.
+
+REQ-TIED_META_HUB_REPRESENTATION
+ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY
+IMPL-TIED_CITDP_RECONCILE, IMPL-TIED_CORPUS_MAP_BUILD, IMPL-TIED_META_HUB_MCP
+
+Machine close-out: pass (close_out allowed; envelope blocking 0).
+Process contract: pass (unified runner sync+reconcile; manifest collected).
+
+Upstream feedback: N/A.

@@ -1,0 +1,13 @@
+IMPL-TIED_CITDP_RECONCILE:
+  code_locations:
+    files:
+      - description: "Reconcile ledger and apply"
+        path: "mcp-server/src/meta-hub-representation/citdp-reconcile.ts"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CITDP_RECONCILE-pseudocode.md"
+  name: "CITDP reconcile core"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY"
+    requirements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"

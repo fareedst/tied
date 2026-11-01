@@ -2078,6 +2078,15 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
   name: "Checklist, CITDP, and activation validator"
   status: "Active"
+IMPL-TIED_CITDP_RECONCILE:
+  detail_file: "implementation-decisions/IMPL-TIED_CITDP_RECONCILE.yaml"
+  name: "CITDP reconcile core"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY"
+    requirements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"
 IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
   cross_references:
     architecture:
@@ -2279,6 +2288,15 @@ IMPL-TIED_CORPUS_GRAPH_TRACE:
   related_requirements:
     - "REQ-TIED_CORPUS_COMPREHENSION"
   status: "Active"
+IMPL-TIED_CORPUS_MAP_BUILD:
+  detail_file: "implementation-decisions/IMPL-TIED_CORPUS_MAP_BUILD.yaml"
+  name: "Corpus map builder"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY"
+    requirements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"
 IMPL-TIED_DAE_INCORPORATION:
   cross_references:
     - "ARCH-TIED_DAE_INCORPORATION"
@@ -2869,6 +2887,15 @@ IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT-pseudocode.md"
   name: "mcp-json-canonical bootstrap writer"
   status: "Implemented"
+IMPL-TIED_META_HUB_MCP:
+  detail_file: "implementation-decisions/IMPL-TIED_META_HUB_MCP.yaml"
+  name: "Meta-hub MCP adapters"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY"
+    requirements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"
 IMPL-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   cross_references:
     - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"

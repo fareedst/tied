@@ -1,0 +1,7 @@
+ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY:
+  decision: "Reconcile and corpus-map tooling may write tied-project/citdp/ and delete working CITDP drafts per ledger; must not write REQ/ARCH/IMPL indexes or imply tied_verify sign-off."
+  name: "Meta-hub representation boundary"
+  status: "Active"
+  traceability:
+    implements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"

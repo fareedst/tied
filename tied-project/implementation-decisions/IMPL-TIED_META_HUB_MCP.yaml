@@ -1,0 +1,13 @@
+IMPL-TIED_META_HUB_MCP:
+  code_locations:
+    files:
+      - description: "MCP tools"
+        path: "mcp-server/src/tools/meta-hub-representation-mcp.ts"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_META_HUB_MCP-pseudocode.md"
+  name: "Meta-hub MCP adapters"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY"
+    requirements:
+      - "REQ-TIED_META_HUB_REPRESENTATION"

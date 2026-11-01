@@ -1,0 +1,271 @@
+citdp:
+  path: tied-project/citdp/CITDP-REQ-TIED_META_HUB_REPRESENTATION.yaml
+copy_hygiene: Per-request tracker for REQ-TIED_META_HUB_REPRESENTATION; close-out 2026-11-01.
+depth_tier: minimal
+description: Meta-hub CITDP reconcile + corpus-map tooling (CLI + MCP); dogfood apply.
+execution_evidence:
+  completed:
+    - author-architecture
+    - author-requirement
+    - change-definition
+    - gate-pseudocode-validation
+    - impact-discovery
+    - persist-citdp-record
+    - resolve-pseudocode
+    - risk-assessment
+    - session-bootstrap
+    - sync-tied-stack
+    - test-strategy
+    - translate-sponsor-intent
+    - unit-test-green
+    - unit-test-red
+    - user-facing-release-notes
+    - verification-gate
+  envelope_path: tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/request-evidence-envelope.v1.json
+  request: REQ-TIED_META_HUB_REPRESENTATION
+gate_policy: advisory
+profile_depth: minimal
+purpose: Tracker for REQ-TIED_META_HUB_REPRESENTATION through close_out.
+request: REQ-TIED_META_HUB_REPRESENTATION
+request_token: REQ-TIED_META_HUB_REPRESENTATION
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: close_out_in_progress
+steps:
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/session-bootstrap-evidence.md
+    id: session-bootstrap
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md
+    id: translate-sponsor-intent
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/CITDP-REQ-TIED_META_HUB_REPRESENTATION.yaml
+    id: change-definition
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md
+    id: impact-discovery
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/risk-assessment-refine-pass1.md
+    id: risk-assessment
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/test-strategy.md
+    id: test-strategy
+    tracking:
+      status: completed
+  - disposition: not_applicable
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/not-applicable-receipt.v1.json
+    id: sub-adversarial-inquiry-pass
+    policy: minimal-depth-no-inquiry
+    rationale: Meta-hub tooling at minimal depth; falsification in CITDP risk_analysis.
+    tracking:
+      status: not_applicable
+  - disposition: completed
+    evidence_refs:
+      - tied-project/requirements/REQ-TIED_META_HUB_REPRESENTATION.yaml
+    id: author-requirement
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/architecture-decisions/ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY.yaml
+    id: author-architecture
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/implementation-decisions/IMPL-TIED_CITDP_RECONCILE-pseudocode.md
+      - tied-project/implementation-decisions/IMPL-TIED_CORPUS_MAP_BUILD.yaml
+      - tied-project/implementation-decisions/IMPL-TIED_META_HUB_MCP-pseudocode.md
+    id: resolve-pseudocode
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/implementation-decisions/IMPL-TIED_CITDP_RECONCILE-pseudocode.md
+    id: gate-pseudocode-validation
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/unit-test-red-evidence.md
+    id: unit-test-red
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/unit-test-green-evidence.md
+    id: unit-test-green
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/session-handoff-build-plan.md
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/reports/citdp-reconcile-ledger.v1.yaml
+    id: verification-gate
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/CITDP-REQ-TIED_META_HUB_REPRESENTATION.yaml
+    id: persist-citdp-record
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/requirements.yaml
+      - tied-project/architecture-decisions.yaml
+      - tied-project/implementation-decisions.yaml
+    id: sync-tied-stack
+    tracking:
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - CHANGELOG.md
+    id: user-facing-release-notes
+    tracking:
+      status: completed
+  - disposition: pending
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/session-handoff-build-plan.md
+    id: gitignore-close-out-hygiene
+    tracking:
+      status: pending
+  - disposition: pending
+    evidence_refs: []
+    id: sub-close-out-evidence-sync
+    tracking:
+      status: pending
+  - disposition: pending
+    evidence_refs:
+      - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/session-handoff-build-plan.md
+    id: traceable-commit
+    tracking:
+      status: pending
+  - slug: author-architecture
+    tracking:
+      status: completed
+      evidence_refs: &ref_0
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/author-architecture-evidence.md
+    disposition: completed
+    evidence_refs: *ref_0
+  - slug: author-requirement
+    tracking:
+      status: completed
+      evidence_refs: &ref_1
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/author-requirement-evidence.md
+    disposition: completed
+    evidence_refs: *ref_1
+  - slug: change-definition
+    tracking:
+      status: completed
+      evidence_refs: &ref_2
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/change-definition-evidence.md
+    disposition: completed
+    evidence_refs: *ref_2
+  - slug: gate-pseudocode-validation
+    tracking:
+      status: completed
+      evidence_refs: &ref_3
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/gate-pseudocode-validation-evidence.md
+    disposition: completed
+    evidence_refs: *ref_3
+  - slug: impact-discovery
+    tracking:
+      status: completed
+      evidence_refs: &ref_4
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/impact-discovery-evidence.md
+    disposition: completed
+    evidence_refs: *ref_4
+  - slug: persist-citdp-record
+    tracking:
+      status: completed
+      evidence_refs: &ref_5
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/CITDP-REQ-TIED_META_HUB_REPRESENTATION.yaml
+    disposition: completed
+    evidence_refs: *ref_5
+  - slug: resolve-pseudocode
+    tracking:
+      status: completed
+      evidence_refs: &ref_6
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/resolve-pseudocode-evidence.md
+    disposition: completed
+    evidence_refs: *ref_6
+  - slug: risk-assessment
+    tracking:
+      status: completed
+      evidence_refs: &ref_7
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/risk-assessment-evidence.md
+    disposition: completed
+    evidence_refs: *ref_7
+  - slug: session-bootstrap
+    tracking:
+      status: completed
+      evidence_refs: &ref_8
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/session-bootstrap-evidence.md
+    disposition: completed
+    evidence_refs: *ref_8
+  - slug: sync-tied-stack
+    tracking:
+      status: completed
+      evidence_refs: &ref_9
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/sync-tied-stack-evidence.md
+    disposition: completed
+    evidence_refs: *ref_9
+  - slug: test-strategy
+    tracking:
+      status: completed
+      evidence_refs: &ref_10
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/test-strategy-evidence.md
+    disposition: completed
+    evidence_refs: *ref_10
+  - slug: translate-sponsor-intent
+    tracking:
+      status: completed
+      evidence_refs: &ref_11
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/translate-sponsor-intent-evidence.md
+    disposition: completed
+    evidence_refs: *ref_11
+  - slug: unit-test-green
+    tracking:
+      status: completed
+      evidence_refs: &ref_12
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/unit-test-green-evidence.md
+    disposition: completed
+    evidence_refs: *ref_12
+  - slug: unit-test-red
+    tracking:
+      status: completed
+      evidence_refs: &ref_13
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/unit-test-red-evidence.md
+    disposition: completed
+    evidence_refs: *ref_13
+  - slug: user-facing-release-notes
+    tracking:
+      status: completed
+      evidence_refs: &ref_14
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/user-facing-release-notes-evidence.md
+    disposition: completed
+    evidence_refs: *ref_14
+  - slug: verification-gate
+    tracking:
+      status: completed
+      evidence_refs: &ref_15
+        - tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/evidence/verification-evidence-manifest.v1.json
+    disposition: completed
+    evidence_refs: *ref_15
