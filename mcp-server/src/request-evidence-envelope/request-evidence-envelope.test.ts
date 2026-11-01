@@ -236,6 +236,7 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     for (const negativeCase of manifest.negative_cases) {
       for (const diagnostic of negativeCase.expected_diagnostics) {
         if (diagnostic.startsWith("receipt_identity_mismatch")) continue;
+        if (diagnostic.startsWith("pending_required_step:")) continue;
         if (diagnostic === "tracker_not_authoritative") continue;
         assert.ok(
           [

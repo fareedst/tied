@@ -1,0 +1,163 @@
+citdp:
+  path: "tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+copy_hygiene: "Per-request Tracker for REQ-TIED_CLIENT_OPERATOR_TOOLING; close-out 2026-11-01."
+depth_tier: "minimal"
+description: "Fresh TIED client operator fixes (gate sub_procedures, pseudocode path, semver/close-out runner)."
+execution_evidence:
+  close_out_evidence:
+    date: "2026-11-01"
+    deferred: []
+    gates:
+      close_out:
+        allowed: true
+        run_id: "close-out-req-tied-client-operator-tooling-20261101-r2"
+    master_checklist: "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/checklist-tracker.yaml"
+  completed:
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "gitignore-close-out-hygiene"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sub-close-out-evidence-sync"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "user-facing-release-notes"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Tracker for REQ-TIED_CLIENT_OPERATOR_TOOLING through close_out."
+request: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+request_token: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "close_out_complete"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/session-bootstrap-evidence.md"
+    id: "session-bootstrap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md"
+    id: "translate-sponsor-intent"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+    id: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md"
+    id: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md"
+    id: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md"
+    id: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/not-applicable-receipt.v1.json"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Tooling parity at minimal depth."
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+    id: "author-requirement"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/architecture-decisions/ARCH-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+    id: "author-architecture"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING-pseudocode.md"
+    id: "resolve-pseudocode"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING-pseudocode.md"
+    id: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-red-evidence.md"
+    id: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-evidence.md"
+    id: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/t6-trial-client-1793549271.md"
+    id: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+    id: "persist-citdp-record"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements.yaml"
+    id: "sync-tied-stack"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "CHANGELOG.md"
+    id: "user-facing-release-notes"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/git-hygiene-receipt-2026-11-01.md"
+    id: "gitignore-close-out-hygiene"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-bundle/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/gates/close_out-2026-11-01T17-18-39-315Z.json"
+    id: "sub-close-out-evidence-sync"
+    tracking:
+      status: "completed"
+  - disposition: "pending"
+    id: "traceable-commit"
+    tracking:
+      status: "pending"

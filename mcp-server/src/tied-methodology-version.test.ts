@@ -47,19 +47,44 @@ describe("readTiedMethodologyVersion [REQ-TIED_SETUP]", () => {
     );
   });
 
-  it("throws when VERSION is missing", () => {
+  it("throws when no semver source exists", () => {
     clearTiedMethodologyVersionCache();
     const root = mkdtempSync(path.join(os.tmpdir(), "tied-ver-missing-"));
-    const prevCwd = process.cwd();
-    process.chdir(root);
+    const prevTestRepo = process.env.TIED_MCP_TEST_REPO_ROOT;
+    delete process.env.TIED_MCP_TEST_REPO_ROOT;
     try {
       assert.throws(
         () => readTiedMethodologyVersion({ project_root: root }),
-        /VERSION file not found/,
+        /Methodology semver not found/,
       );
     } finally {
-      process.chdir(prevCwd);
+      if (prevTestRepo !== undefined) {
+        process.env.TIED_MCP_TEST_REPO_ROOT = prevTestRepo;
+      }
       clearTiedMethodologyVersionCache();
     }
+  });
+
+  it("reads semver from AGENTS.md when VERSION is absent [REQ-TIED_CLIENT_OPERATOR_TOOLING]", () => {
+    clearTiedMethodologyVersionCache();
+    const root = mkdtempSync(path.join(os.tmpdir(), "tied-ver-agents-"));
+    writeFileSync(
+      path.join(root, "AGENTS.md"),
+      "**TIED Methodology Version**: 4.0.0\n",
+      "utf8",
+    );
+    assert.equal(readTiedMethodologyVersion({ project_root: root }), "4.0.0");
+  });
+
+  it("reads semver from tied-bundle/install.json store_methodology_version [REQ-TIED_CLIENT_OPERATOR_TOOLING]", () => {
+    clearTiedMethodologyVersionCache();
+    const root = mkdtempSync(path.join(os.tmpdir(), "tied-ver-install-"));
+    mkdirSync(path.join(root, "tied-bundle"), { recursive: true });
+    writeFileSync(
+      path.join(root, "tied-bundle", "install.json"),
+      JSON.stringify({ store_methodology_version: "3.9.1" }),
+      "utf8",
+    );
+    assert.equal(readTiedMethodologyVersion({ project_root: root }), "3.9.1");
   });
 });

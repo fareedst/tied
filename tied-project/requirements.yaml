@@ -2397,6 +2397,19 @@ REQ-TIED_CLIENT_FEEDBACK_CAPTURE:
   name: "Client upstream feedback capture discipline"
   priority: "P1"
   status: "Implemented"
+REQ-TIED_CLIENT_OPERATOR_TOOLING:
+  category: "Tooling"
+  description: "Gate sub_procedures, pseudocode repo-relative paths, semver fallbacks, and client-root close-out runner."
+  detail_file: "requirements/REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+  name: "Client operator tooling parity"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+      - "REQ-REQUEST_EVIDENCE_ENVELOPE"
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_SETUP"
+  status: "Implemented"
 REQ-TIED_CLIENT_PATH_ENV_MIGRATION:
   category: "Tooling"
   description: "On tied-install refresh write TIED_CLIENT_PROJECT_PATH and TIED_CLIENT_BUNDLE_PATH; strip legacy env keys; runtime dual-read."

@@ -344,7 +344,7 @@ export function validateTracker(input: {
 }): ValidationResult {
   const diagnostics: string[] = [];
   if (!PHASES.has(input.phase)) diagnostics.push("invalid_phase");
-  const steps = trackerSteps(input.tracker);
+  const steps = listChecklistTrackerSteps(input.tracker);
   if (steps.length === 0) diagnostics.push("malformed_tracker:steps");
 
   const required = input.requiredStepSlugs?.length
@@ -402,7 +402,7 @@ export function validateIntegratedParentChildSlugs(input: {
   if (input.depth !== "integrated" && input.depth !== "strict_candidate") {
     return { ok: true, diagnostics: [] };
   }
-  const steps = trackerSteps(input.tracker);
+  const steps = listChecklistTrackerSteps(input.tracker);
   const bySlug = new Map(
     steps.map((step) => [getString(step, "slug", "id") ?? "unknown", step]),
   );
@@ -722,7 +722,7 @@ export function validateTrackerSparse(input: {
   if (input.depth !== "integrated" && input.depth !== "strict_candidate") {
     return { ok: true, diagnostics: [] };
   }
-  const steps = trackerSteps(input.tracker);
+  const steps = listChecklistTrackerSteps(input.tracker);
   const seen = new Set(
     steps.map((step) => getString(step, "slug", "id")).filter(Boolean) as string[],
   );
@@ -1123,7 +1123,7 @@ export function withPseudocodeGateHistory<T extends Record<string, unknown>>(tra
 }
 
 function slugCompletedInTracker(tracker: unknown, slug: string): boolean {
-  for (const step of trackerSteps(tracker)) {
+  for (const step of listChecklistTrackerSteps(tracker)) {
     const stepSlug = getString(step, "slug", "id");
     if (stepSlug === slug && disposition(step) === "completed") return true;
   }
@@ -1136,7 +1136,7 @@ function slugCompletedInTracker(tracker: unknown, slug: string): boolean {
 
 function collectTrackerSlugs(tracker: unknown): string[] {
   const slugs: string[] = [];
-  for (const step of trackerSteps(tracker)) {
+  for (const step of listChecklistTrackerSteps(tracker)) {
     const slug = getString(step, "slug", "id");
     if (slug) slugs.push(slug);
   }
@@ -1265,9 +1265,8 @@ export function validatePseudocodeAnalysisEvidence(input: {
 }
 
 function stepCompleted(tracker: unknown, slug: string): boolean {
-  if (!isRecord(tracker) || !Array.isArray(tracker.steps)) return false;
-  for (const step of tracker.steps) {
-    if (!isRecord(step)) continue;
+  if (!isRecord(tracker)) return false;
+  for (const step of listChecklistTrackerSteps(tracker)) {
     if (identityValue(step.slug) !== slug) continue;
     return identityValue(step.disposition) === "completed";
   }

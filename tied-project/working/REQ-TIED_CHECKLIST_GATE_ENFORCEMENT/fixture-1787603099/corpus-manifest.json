@@ -32,8 +32,8 @@
       "input_refs": ["snapshots/tracker/authoritative-tracker.yaml"],
       "expected_gate_phase": "verification",
       "expected_allowed": false,
-      "expected_diagnostics": ["tracker_sparse"],
-      "proof_boundary": "Proves sparse Tracker fails; does not prove STDD guard until Track 3 regression."
+      "expected_diagnostics": ["pending_required_step:sub-adversarial-inquiry-pass"],
+      "proof_boundary": "Proves sparse/template Tracker fails with sub_procedures included in gate slug enumeration (REQ-TIED_CLIENT_OPERATOR_TOOLING)."
     },
     {
       "id": "A2-root-projection",

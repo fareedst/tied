@@ -1,0 +1,49 @@
+CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING:
+  change_summary:
+    current_behavior: "Gate ignored sub_procedures; pseudocode paths with tied-project/ prefix missed sidecars; envelope build required store VERSION and cwd; close-out reconcile ran before receipt persist."
+    desired_behavior: "Merged step enumeration, path normalization, AGENTS/install semver fallbacks, client MCP dist resolution, reconcile after persist."
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/templates/run-close-out-gates-order.test.mjs"
+      - "cd mcp-server && npm test -- src/checklist-validator.test.ts src/tied-methodology-version.test.ts src/resolve-essence-pseudocode-source.test.ts"
+    proof_boundaries:
+      - "does_not_prove_go_agentstream_gate_parity"
+      - "t6_trial_client_smoke_documented_separately"
+  execution_evidence:
+    verification:
+      commands:
+        - "cd mcp-server && npm test"
+        - "node --test tools/bootstrap/templates/run-close-out-gates-order.test.mjs"
+        - "T6 trial client /Users/fareed/Documents/dev/test/1793549271 — see tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/t6-trial-client-1793549271.md"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_CLIENT_OPERATOR_TOOLING"
+    modules_or_boundaries: "mcp-server checklist-validator, impl-pseudocode-input, tied-methodology-version; tools/bootstrap run-close-out-gates.mjs"
+    tied_tokens_affected:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+      - "ARCH-TIED_CLIENT_OPERATOR_TOOLING"
+      - "IMPL-TIED_CLIENT_OPERATOR_TOOLING"
+  record_status: "closed"
+  request_token: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Merged sub_procedures enumeration double-counts slugs present in both steps and sub_procedures."
+        - "Semver fallback reads wrong AGENTS.md when multiple copies exist."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "checklist-validator.test.ts covers sub_procedures-only sub-adversarial slug."
+        - "tied-methodology-version.test.ts covers install.json and AGENTS.md without cwd."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN.md"
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/t6-trial-client-1793549271.md"
+      falsification_questions:
+        - "Does close_out still fail with sub-adversarial-inquiry-pass only under sub_procedures?"
+        - "Does pseudocode_validate still return zero blocks for tied-project/ prefixed paths?"
+      gate_policy: "advisory"

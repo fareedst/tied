@@ -29,8 +29,49 @@ import {
 import { resolveTiedLayout, resolveWorkingRoot } from "../lib/layout.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, "../../..");
-const MCP_DIST = path.join(REPO_ROOT, "mcp-server/dist");
+const TEMPLATE_REPO_ROOT = path.resolve(__dirname, "../../..");
+
+/** [REQ-TIED_CLIENT_OPERATOR_TOOLING] Resolve built MCP dist from client config or store. */
+export function resolveMcpDistDirectory(projectRoot) {
+  const tiedMcpBin = process.env.TIED_MCP_BIN?.trim();
+  if (tiedMcpBin && existsSync(tiedMcpBin)) {
+    return path.dirname(tiedMcpBin);
+  }
+  const mcpJsonPath = path.join(projectRoot, ".cursor/mcp.json");
+  if (existsSync(mcpJsonPath)) {
+    try {
+      const cfg = JSON.parse(readFileSync(mcpJsonPath, "utf8"));
+      const servers = cfg.mcpServers ?? {};
+      const entry = servers["tied-yaml"] ?? Object.values(servers).find(
+        (item) => item?.args?.[0]?.includes?.("mcp-server/dist/index.js"),
+      );
+      const arg0 = entry?.args?.[0];
+      if (typeof arg0 === "string" && existsSync(arg0)) {
+        return path.dirname(arg0);
+      }
+      const storeRoot = entry?.env?.TIED_STORE_ROOT;
+      if (typeof storeRoot === "string") {
+        const dist = path.join(storeRoot, "mcp-server/dist");
+        if (existsSync(dist)) return dist;
+      }
+    } catch {
+      /* try fallbacks */
+    }
+  }
+  const templateDist = path.join(TEMPLATE_REPO_ROOT, "mcp-server/dist");
+  if (existsSync(templateDist)) return templateDist;
+  throw new Error(
+    "mcp-server/dist not found; build TIED store workspace or set TIED_MCP_BIN to mcp-server/dist/index.js",
+  );
+}
+
+export function resolveStoreRootFromMcpDist(mcpDist) {
+  const candidate = path.resolve(mcpDist, "..", "..");
+  if (existsSync(path.join(candidate, "tools/bootstrap/templates/sync-tracker-dispositions.mjs"))) {
+    return candidate;
+  }
+  return TEMPLATE_REPO_ROOT;
+}
 
 function workingRel(projectRoot, requestToken, kind, ...parts) {
   const abs = path.join(resolveWorkingRoot(projectRoot, requestToken, kind), ...parts);
@@ -67,7 +108,7 @@ Options:
     const index = argv.indexOf(flag);
     return index >= 0 && argv[index + 1] ? argv[index + 1] : undefined;
   };
-  const projectRoot = get("--project-root") ?? REPO_ROOT;
+  const projectRoot = get("--project-root") ?? TEMPLATE_REPO_ROOT;
   const requestToken = get("--request-token");
   if (!requestToken) {
     throw new Error("missing --request-token");
@@ -112,13 +153,13 @@ function buildQualityRows(citdp) {
   }));
 }
 
-async function collectQualityManifest(args, citdp) {
+async function collectQualityManifest(args, citdp, mcpDist) {
   const commands = citdp?.evidence?.commands ?? citdp?.evidence?.command_seq;
   if (!Array.isArray(commands) || commands.length === 0) {
     return { ok: false, skipped: true, reason: "no_citdp_commands" };
   }
   const qualityCollection = await import(
-    pathToFileURL(path.join(MCP_DIST, "quality-evidence-collection.js")).href
+    pathToFileURL(path.join(mcpDist, "quality-evidence-collection.js")).href
   );
   const manifestRelativePath = workingRel(
     args.projectRoot,
@@ -156,7 +197,7 @@ async function collectQualityManifest(args, citdp) {
   const manifestAbsolute = path.join(args.projectRoot, manifestRelativePath);
   mkdirSync(path.dirname(manifestAbsolute), { recursive: true });
   const storageDump = await import(
-    pathToFileURL(path.join(MCP_DIST, "storage-dump.js")).href,
+    pathToFileURL(path.join(mcpDist, "storage-dump.js")).href,
   );
   writeFileSync(manifestAbsolute, `${storageDump.prettyCanonicalJson(manifest)}\n`, "utf8");
   return {
@@ -201,19 +242,19 @@ function loadPseudocodeReports(projectRoot, requestToken, citdp) {
   return reports;
 }
 
-async function loadModules() {
-  const validator = await import(pathToFileURL(path.join(MCP_DIST, "checklist-validator.js")).href);
-  const hydration = await import(pathToFileURL(path.join(MCP_DIST, "checklist-gate-evidence-hydration.js")).href);
-  const activation = await import(pathToFileURL(path.join(MCP_DIST, "checklist-activation-collect.js")).href);
-  const envelopeBuild = await import(pathToFileURL(path.join(MCP_DIST, "request-evidence-envelope/build.js")).href);
-  const envelopeValidate = await import(pathToFileURL(path.join(MCP_DIST, "request-evidence-envelope/validate.js")).href);
-  const reconcileRunner = await import(pathToFileURL(path.join(MCP_DIST, "tools/adherence-reconcile-runner.js")).href);
-  const yamlLoader = await import(pathToFileURL(path.join(MCP_DIST, "yaml-loader.js")).href);
+async function loadModules(mcpDist) {
+  const validator = await import(pathToFileURL(path.join(mcpDist, "checklist-validator.js")).href);
+  const hydration = await import(pathToFileURL(path.join(mcpDist, "checklist-gate-evidence-hydration.js")).href);
+  const activation = await import(pathToFileURL(path.join(mcpDist, "checklist-activation-collect.js")).href);
+  const envelopeBuild = await import(pathToFileURL(path.join(mcpDist, "request-evidence-envelope/build.js")).href);
+  const envelopeValidate = await import(pathToFileURL(path.join(mcpDist, "request-evidence-envelope/validate.js")).href);
+  const reconcileRunner = await import(pathToFileURL(path.join(mcpDist, "tools/adherence-reconcile-runner.js")).href);
+  const yamlLoader = await import(pathToFileURL(path.join(mcpDist, "yaml-loader.js")).href);
   return { validator, hydration, activation, envelopeBuild, envelopeValidate, reconcileRunner, yamlLoader };
 }
 
-function runSyncDispositions(trackerAbsolute, projectRoot, requestToken, runId) {
-  const script = path.join(REPO_ROOT, "tools/bootstrap/templates/sync-tracker-dispositions.mjs");
+function runSyncDispositions(trackerAbsolute, projectRoot, requestToken, runId, storeRoot) {
+  const script = path.join(storeRoot, "tools/bootstrap/templates/sync-tracker-dispositions.mjs");
   const ledgerPath = workingRel(projectRoot, requestToken, "local", "gates", "ledger.jsonl");
   execFileSync(process.execPath, [
     script,
@@ -226,22 +267,22 @@ function runSyncDispositions(trackerAbsolute, projectRoot, requestToken, runId) 
     "--run-id",
     runId ?? `close-out-sync-${Date.now()}`,
   ], {
-    cwd: REPO_ROOT,
+    cwd: storeRoot,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
   });
 }
 
-async function generateSubstanceProfile(args, citdp, manifestResult, pseudocodeReports) {
+async function generateSubstanceProfile(args, citdp, manifestResult, pseudocodeReports, mcpDist) {
   const psaCount = Object.keys(pseudocodeReports ?? {}).length;
   if (!manifestResult.ok || psaCount === 0) {
     return { ok: false, skipped: true, reason: psaCount === 0 ? "no_psa_reports" : "manifest_not_collected" };
   }
   const profileModule = await import(
-    pathToFileURL(path.join(MCP_DIST, "fidelity-research/evidence-chain-profile.js")).href
+    pathToFileURL(path.join(mcpDist, "fidelity-research/evidence-chain-profile.js")).href
   );
   const liveValidators = await import(
-    pathToFileURL(path.join(MCP_DIST, "fidelity-research/live-structural-validators.js")).href
+    pathToFileURL(path.join(mcpDist, "fidelity-research/live-structural-validators.js")).href
   );
   const profileRel = workingRel(
     args.projectRoot,
@@ -311,8 +352,28 @@ function mergeCloseOutDecision(gate, envelopeValidation) {
   };
 }
 
+async function runAdherenceReconcileStep(args, reconcileRunner, trackerAbsolute) {
+  const ledgerRel = workingRel(args.projectRoot, args.requestToken, "local", "gates", "ledger.jsonl");
+  const gatesRel = workingRel(args.projectRoot, args.requestToken, "local", "gates");
+  const ledgerPath = path.join(args.projectRoot, ledgerRel);
+  const gatesDir = path.join(args.projectRoot, gatesRel);
+  return reconcileRunner.runAdherenceReconcile({
+    ledger_path: ledgerPath,
+    tracker_path: trackerAbsolute,
+    gates_dir: gatesDir,
+    workspace: args.projectRoot,
+    citdp_path: args.citdpPath
+      ? (path.isAbsolute(args.citdpPath) ? args.citdpPath : path.join(args.projectRoot, args.citdpPath))
+      : undefined,
+    include_process_grade: true,
+    repo_root: args.projectRoot,
+  });
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
+  const mcpDist = resolveMcpDistDirectory(args.projectRoot);
+  const storeRoot = resolveStoreRootFromMcpDist(mcpDist);
   const {
     validator,
     hydration,
@@ -321,7 +382,7 @@ async function main() {
     envelopeValidate,
     reconcileRunner,
     yamlLoader,
-  } = await loadModules();
+  } = await loadModules(mcpDist);
 
   if (!args.trackerPath) {
     throw new Error("missing --tracker-path");
@@ -335,7 +396,7 @@ async function main() {
     : path.join(args.projectRoot, args.trackerPath);
   let tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
   if (args.syncDispositions) {
-    runSyncDispositions(trackerAbsolute, args.projectRoot, args.requestToken, args.runId);
+    runSyncDispositions(trackerAbsolute, args.projectRoot, args.requestToken, args.runId, storeRoot);
     tracker = yaml.load(readFileSync(trackerAbsolute, "utf8"));
   }
   const citdp = args.citdpPath ? loadCitdpRecord(args.citdpPath, args.projectRoot) : {};
@@ -344,23 +405,6 @@ async function main() {
   const requiredStepSlugs = validator.derivePhaseAwareSlugs(depth, args.phase);
 
   let reconcileResult = { ok: false, skipped: true };
-  if (args.reconcile) {
-    const ledgerRel = workingRel(args.projectRoot, args.requestToken, "local", "gates", "ledger.jsonl");
-    const gatesRel = workingRel(args.projectRoot, args.requestToken, "local", "gates");
-    const ledgerPath = path.join(args.projectRoot, ledgerRel);
-    const gatesDir = path.join(args.projectRoot, gatesRel);
-    reconcileResult = await reconcileRunner.runAdherenceReconcile({
-      ledger_path: ledgerPath,
-      tracker_path: trackerAbsolute,
-      gates_dir: gatesDir,
-      workspace: args.projectRoot,
-      citdp_path: args.citdpPath
-        ? (path.isAbsolute(args.citdpPath) ? args.citdpPath : path.join(args.projectRoot, args.citdpPath))
-        : undefined,
-      include_process_grade: true,
-      repo_root: REPO_ROOT,
-    });
-  }
 
   let activationPayload;
   const activationDecision = shouldCollectActivation({
@@ -396,12 +440,12 @@ async function main() {
 
   let manifestResult = { ok: false, skipped: true, reason: "not_requested" };
   if (!args.skipManifest) {
-    manifestResult = await collectQualityManifest(args, citdp);
+    manifestResult = await collectQualityManifest(args, citdp, mcpDist);
   }
 
   let profileResult = { ok: false, skipped: true, reason: "not_requested" };
   if (!args.rebuildEnvelopeOnly) {
-    profileResult = await generateSubstanceProfile(args, citdp, manifestResult, pseudocodeReports);
+    profileResult = await generateSubstanceProfile(args, citdp, manifestResult, pseudocodeReports, mcpDist);
   }
 
   const tiedBase = resolveTiedBasePath(args.projectRoot);
@@ -458,10 +502,10 @@ async function main() {
     && !args.noPersistGateReceipt
   ) {
     const { persistGateDecisionReceipt } = await import(
-      pathToFileURL(path.join(MCP_DIST, "gate-receipt.js")).href
+      pathToFileURL(path.join(mcpDist, "gate-receipt.js")).href
     );
     const { defaultGateReceiptPersistencePaths } = await import(
-      pathToFileURL(path.join(MCP_DIST, "working-root.js")).href
+      pathToFileURL(path.join(mcpDist, "working-root.js")).href
     );
     const { gatesDir, ledgerPath } = defaultGateReceiptPersistencePaths(
       args.projectRoot,
@@ -480,6 +524,10 @@ async function main() {
     });
   } else if (args.noPersistGateReceipt && args.phase === "close_out") {
     gateReceiptPersist = { ok: false, skipped: true, reason: "no_persist_flag" };
+  }
+
+  if (args.reconcile) {
+    reconcileResult = await runAdherenceReconcileStep(args, reconcileRunner, trackerAbsolute);
   }
 
   const mergedDecision = mergeCloseOutDecision(gate, envelopeValidation);

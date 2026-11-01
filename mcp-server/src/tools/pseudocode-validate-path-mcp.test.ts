@@ -71,6 +71,35 @@ describe("pseudocode_validate path input MCP [REQ-PSEUDOCODE_VALIDATE_PATH_INPUT
       assert.equal(fromPath.schema_version, "layer-b-pseudocode-validator.v1");
       assert.notEqual(fromPath.stage, "input");
       assert.equal(fromPath.ok, fromInline.ok);
+      assert.ok(Array.isArray(fromPath.blocks) && fromPath.blocks.length > 0);
+      assert.equal(fromPath.blocks?.length, fromInline.blocks?.length);
+    } finally {
+      fs.rmSync(abs, { force: true });
+    }
+  });
+
+  it("M4 repo-root tied-project/ path prefix matches inline block count [REQ-TIED_CLIENT_OPERATOR_TOOLING]", async () => {
+    const pseudo = `# [IMPL-QUALITY_PSEUDOCODE_VALIDATOR] [ARCH-QUALITY_ASSURANCE_PROFILES] [REQ-QUALITY_ASSURANCE_EVIDENCE]\nprocedure RUN:\n  Contract:\n    INPUT: x\n    OUTPUT: y\n    PRE: x\n    POST: y\n    EFFECTS: pure\n    TERMINATION: total\n  RETURN y`;
+    const rel = "implementation-decisions/IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT-repo-prefix-fixture.md";
+    const abs = path.join(tiedBase, rel);
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, pseudo, "utf8");
+    const shared = {
+      token: "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+      known_tokens: [
+        "IMPL-QUALITY_PSEUDOCODE_VALIDATOR",
+        "ARCH-QUALITY_ASSURANCE_PROFILES",
+        "REQ-QUALITY_ASSURANCE_EVIDENCE",
+      ],
+    };
+    try {
+      const fromPath = body(await handler("pseudocode_validate")({
+        ...shared,
+        pseudocode_path: `tied-project/${rel}`,
+      }));
+      const fromInline = body(await handler("pseudocode_validate")({ ...shared, pseudocode: pseudo }));
+      assert.ok(Array.isArray(fromPath.blocks) && fromPath.blocks.length > 0);
+      assert.equal(fromPath.blocks?.length, fromInline.blocks?.length);
     } finally {
       fs.rmSync(abs, { force: true });
     }

@@ -1,0 +1,21 @@
+IMPL-TIED_CLIENT_OPERATOR_TOOLING:
+  code_locations:
+    files:
+      - description: "Checklist gate merged step enumeration"
+        path: "mcp-server/src/checklist-validator.ts"
+      - description: "Create-if-absent VERSION on install"
+        path: "tools/bootstrap/lib/bootstrap.mjs"
+      - description: "Methodology semver fallbacks"
+        path: "mcp-server/src/tied-methodology-version.ts"
+      - description: "Pseudocode path prefix normalization"
+        path: "mcp-server/src/impl-pseudocode-input.ts"
+      - description: "Unified close-out runner"
+        path: "tools/bootstrap/templates/run-close-out-gates.mjs"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING-pseudocode.md"
+  name: "Client operator tooling implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CLIENT_OPERATOR_TOOLING"
+    requirements:
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"

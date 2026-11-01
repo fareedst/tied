@@ -870,6 +870,9 @@ ARCH-TIED_CLI_OPERATOR_OUTPUT_TEXTURE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CLIENT_OPERATOR_TOOLING:
+  category: "architecture"
+  description: "Client operator tooling plane"
 ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
   category: "Architecture"
   cross_references:
@@ -2482,6 +2485,9 @@ IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
   detail_file: "implementation-decisions/IMPL-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
   metadata:
     last_updated: "2026-10-25"
+IMPL-TIED_CLIENT_OPERATOR_TOOLING:
+  category: "implementation"
+  description: "Client operator tooling implementation"
 IMPL-TIED_CLIENT_PATH_ENV_MIGRATION:
   category: "Implementation"
   cross_references:
@@ -4429,6 +4435,9 @@ REQ-TIED_CLIENT_BOOTSTRAP_SKILLS:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-TIED_CLIENT_OPERATOR_TOOLING:
+  category: "requirement"
+  description: "Client operator tooling parity for fresh TIED clients"
 REQ-TIED_CLIENT_PATH_ENV_MIGRATION:
   cross_references:
     - "ARCH-TIED_CLIENT_PATH_ENV_MIGRATION"

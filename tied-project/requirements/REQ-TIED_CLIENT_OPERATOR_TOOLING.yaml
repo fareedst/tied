@@ -1,0 +1,27 @@
+REQ-TIED_CLIENT_OPERATOR_TOOLING:
+  REQ-TIED_CLIENT_OPERATOR_TOOLING:
+    category: "Tooling"
+    description: "Fresh TIED clients must run checklist gates, pseudocode validation, envelope build, and close-out gates from the client repo without store cwd workarounds."
+    name: "Client operator tooling parity"
+    priority: "P1"
+    satisfaction_criteria:
+      - criterion: "Checklist gate validates dispositions for slugs listed under sub_procedures as well as main steps."
+        criterion_id: "gate-sub-procedures"
+      - criterion: "Methodology semver resolves from install.json or AGENTS.md when root VERSION is absent."
+        criterion_id: "semver-without-version-file"
+      - criterion: "pseudocode_validate accepts repo-root-relative tied-project/ paths when TIED_BASE_PATH is tied-project/."
+        criterion_id: "pseudocode-repo-path"
+      - criterion: "run-close-out-gates resolves MCP dist from client MCP config and runs reconcile after gate receipt persist."
+        criterion_id: "closeout-runner-client-root"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CLIENT_OPERATOR_TOOLING"
+      implementation:
+        - "IMPL-TIED_CLIENT_OPERATOR_TOOLING"
+      tests:
+        - "mcp-server/src/checklist-validator.test.ts"
+        - "mcp-server/src/resolve-essence-pseudocode-source.test.ts"
+        - "mcp-server/src/tied-methodology-version.test.ts"
+        - "mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts"
+        - "tools/bootstrap/templates/run-close-out-gates-order.test.mjs"

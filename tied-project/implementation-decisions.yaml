@@ -2183,6 +2183,16 @@ IMPL-TIED_CLIENT_FEEDBACK_CAPTURE:
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_FEEDBACK_CAPTURE.yaml"
   name: "Client feedback capture implementation"
   status: "Active"
+IMPL-TIED_CLIENT_OPERATOR_TOOLING:
+  detail_file: "implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+  name: "Client operator tooling implementation"
+  related_decisions:
+    depends_on:
+      - "IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT"
+      - "IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implements:
+      - "ARCH-TIED_CLIENT_OPERATOR_TOOLING"
+  status: "Active"
 IMPL-TIED_CLIENT_PATH_ENV_MIGRATION:
   detail_file: "implementation-decisions/IMPL-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
   name: "tied-path-env pick/strip and mcp-config migration"

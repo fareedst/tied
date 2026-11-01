@@ -4,7 +4,7 @@
  */
 
 import assert from "node:assert/strict";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, it } from "node:test";
@@ -20,7 +20,7 @@ function listCloseOutReceipts(): string[] {
 }
 
 function runRunner(extraArgs: string[] = []): void {
-  execFileSync(
+  const result = spawnSync(
     process.execPath,
     [
       runner,
@@ -39,8 +39,12 @@ function runRunner(extraArgs: string[] = []): void {
       "gf05-track-a-contract-test",
       ...extraArgs,
     ],
-    { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+    { cwd: repoRoot, encoding: "utf8" },
   );
+  if (result.error) {
+    throw result.error;
+  }
+  // Receipt persistence is asserted separately; blocked gate may exit non-zero.
 }
 
 describe("GF-05 Track A close_out runner persistence [PLAN-GF-05-SCOPE-CLOSE-OUT-EXT]", () => {

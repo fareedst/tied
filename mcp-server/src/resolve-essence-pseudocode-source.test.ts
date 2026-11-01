@@ -41,6 +41,23 @@ describe("resolveEssencePseudocodeSource [REQ-PSEUDOCODE_VALIDATE_PATH_INPUT]", 
     }
   });
 
+  it("R1b repo-root-relative tied-project/ prefix under tied-project base [REQ-TIED_CLIENT_OPERATOR_TOOLING]", () => {
+    const clientRoot = tmpBase();
+    const base = path.join(clientRoot, "tied-project");
+    try {
+      const rel = writeSidecar(base, "IMPL-FIXTURE", VALID_PSEUDO);
+      const repoRelative = `tied-project/${rel}`;
+      const result = resolveEssencePseudocodeSource(base, {
+        token: "IMPL-FIXTURE",
+        pseudocode_path: repoRelative,
+      });
+      assert.equal(result.ok, true);
+      if (result.ok) assert.equal(result.content, VALID_PSEUDO);
+    } finally {
+      fs.rmSync(clientRoot, { recursive: true, force: true });
+    }
+  });
+
   it("R2 essence_pseudocode_path only", () => {
     const base = tmpBase();
     try {

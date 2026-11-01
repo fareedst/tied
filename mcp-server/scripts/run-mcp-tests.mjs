@@ -21,6 +21,8 @@ delete testEnv.TIED_METHODOLOGY_BUNDLE_PATH;
 if (fs.existsSync(path.join(defaultTiedProject, "requirements.yaml"))) {
   testEnv.TIED_BASE_PATH = defaultTiedProject;
 }
+// Ephemeral project_root fixtures omit VERSION; inherit store semver without cwd coupling.
+testEnv.TIED_MCP_TEST_REPO_ROOT = repoRoot;
 
 const tsPatterns = [
   "src/**/*.test.ts",

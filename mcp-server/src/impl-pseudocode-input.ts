@@ -4,6 +4,18 @@
 import fs from "node:fs";
 import path from "node:path";
 
+/** [IMPL-PSEUDOCODE_VALIDATE_PATH_INPUT] [REQ-TIED_CLIENT_OPERATOR_TOOLING] — repo-root paths when base is tied-project/. */
+function normalizePseudocodePathForTiedBase(userPath: string, base: string): string {
+  if (path.isAbsolute(userPath)) {
+    return userPath;
+  }
+  const baseName = path.basename(path.resolve(base));
+  if (baseName !== "tied-project" && baseName !== "tied") {
+    return userPath;
+  }
+  return userPath.replace(/^(\.\/)?(tied-project|tied)\//, "");
+}
+
 /**
  * Return absolute path to a file under `base` (TIED project root) or an error.
  * `userPath` may be relative to `base` or absolute if it still lies under `base` after resolution.
@@ -16,7 +28,8 @@ export function resolvePseudocodePathUnderTiedBase(
     return { ok: false, error: "essence_pseudocode_path is empty" };
   }
   const b = path.resolve(base);
-  const resolved = path.isAbsolute(userPath) ? path.resolve(userPath) : path.resolve(b, userPath);
+  const normalized = normalizePseudocodePathForTiedBase(userPath.trim(), b);
+  const resolved = path.isAbsolute(normalized) ? path.resolve(normalized) : path.resolve(b, normalized);
   const rel = path.relative(b, resolved);
   if (rel.startsWith("..") || path.isAbsolute(rel)) {
     return {

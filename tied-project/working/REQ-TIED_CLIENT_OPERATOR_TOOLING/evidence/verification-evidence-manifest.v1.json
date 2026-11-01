@@ -1,0 +1,69 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/templates/run-close-out-gates-order.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 225,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server && npm test -- src/checklist-validator.test.ts src/tied-methodology-version.test.ts src/resolve-essence-pseudocode-source.test.ts"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 31590,
+      "exit_code": 1,
+      "id": "citdp-evidence-2",
+      "result": "failed"
+    }
+  ],
+  "commit": "2c05613bc53286d6a8100e3b56a3a2f3ce4e586c",
+  "covered_tokens": [
+    "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT",
+    "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+    "REQ-TIED_SETUP"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "does_not_prove_go_agentstream_gate_parity",
+    "t6_trial_client_smoke_documented_separately"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-req-tied-client-operator-tooling-20261101-r2",
+  "schema_version": "verification-evidence-manifest.v1"
+}

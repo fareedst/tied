@@ -1857,6 +1857,16 @@ ARCH-TIED_CLIENT_FEEDBACK_CAPTURE:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_FEEDBACK_CAPTURE.yaml"
   name: "Client feedback capture boundary"
   status: "Planned"
+ARCH-TIED_CLIENT_OPERATOR_TOOLING:
+  detail_file: "architecture-decisions/ARCH-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+  name: "Client operator tooling plane"
+  related_decisions:
+    depends_on:
+      - "ARCH-PSEUDOCODE_INPUT_RESOLUTION"
+      - "ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT"
+    implements:
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+  status: "Active"
 ARCH-TIED_CLIENT_PATH_ENV_MIGRATION:
   detail_file: "architecture-decisions/ARCH-TIED_CLIENT_PATH_ENV_MIGRATION.yaml"
   name: "Client path env canonical names and migration seam"

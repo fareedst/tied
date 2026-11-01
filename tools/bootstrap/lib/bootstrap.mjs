@@ -163,6 +163,14 @@ export function bootstrapTied(projectRoot, options = {}) {
     `Copied ${baseCopied} of ${paths.BASE_FILES.length} base files into ${projectRoot}.`
   );
 
+  // [REQ-TIED_CLIENT_OPERATOR_TOOLING] [REQ-TIED_SETUP] — create-if-absent methodology semver for envelope build.
+  const versionDest = path.join(projectRoot, "VERSION");
+  const storeVersion = path.join(TIED_REPO_ROOT, "VERSION");
+  if (!fs.existsSync(versionDest) && fs.existsSync(storeVersion)) {
+    copyFileWithAttributes(storeVersion, versionDest);
+    sayOk(`Wrote ${versionDest} from TIED store (create-if-absent).`);
+  }
+
   const toolUseProfile = options.toolUseProfile;
   if (toolUseProfile && profileHasToolUse(toolUseProfile)) {
     applyClientToolUseBootstrapOptions(projectRoot, toolUseProfile, {

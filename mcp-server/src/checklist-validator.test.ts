@@ -52,6 +52,18 @@ describe("VALIDATE_TRACKER REQ-TIED_CHECKLIST_GATE_ENFORCEMENT", () => {
     assert.ok(result.diagnostics.includes("missing_required_step:risk-assessment"));
   });
 
+  it("finds required slugs under sub_procedures [REQ-TIED_CLIENT_OPERATOR_TOOLING]", () => {
+    const result = validateTracker({
+      tracker: {
+        steps: [completedStep("change-definition"), completedStep("risk-assessment")],
+        sub_procedures: [completedStep("sub-adversarial-inquiry-pass", "inquiry-evidence")],
+      },
+      requiredStepSlugs: ["change-definition", "risk-assessment", "sub-adversarial-inquiry-pass"],
+      phase: "pre_implementation",
+    });
+    assert.equal(result.ok, true);
+  });
+
   it("requires evidence, rationale, and waiver ownership by disposition", () => {
     assert.equal(validateTracker({
       tracker: { steps: [{ slug: "done", disposition: "completed" }] },
@@ -334,6 +346,24 @@ describe("VALIDATE_CHECKLIST_GATE Batch 2 Slice 1 [REQ-TIED_CHECKLIST_GATE_ENFOR
     });
     assert.equal(result.allowed, false);
     assert.ok(result.diagnostics.includes("integrated_depth_requires_pairing"));
+  });
+
+  it("accepts sub-adversarial-inquiry-pass only under sub_procedures [REQ-TIED_CLIENT_OPERATOR_TOOLING]", () => {
+    const result = validateChecklistGate({
+      phase: "pre_implementation",
+      tracker: {
+        steps: [
+          completedStep("risk-assessment"),
+          completedStep("gate-pseudocode-validation"),
+        ],
+        sub_procedures: [completedStep("sub-adversarial-inquiry-pass", "inquiry-evidence")],
+      },
+      citdp: minimalCitdp(),
+    });
+    assert.ok(
+      !result.diagnostics.some((item) => item.includes("sub-adversarial-inquiry-pass")),
+      result.diagnostics.join(", "),
+    );
   });
 
   it("requires auto sub-adversarial slug even when caller omits required_step_slugs", () => {
