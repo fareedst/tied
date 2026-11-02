@@ -1,0 +1,14 @@
+docs(demos): add traditional four-phase agentstream wrapper
+
+Automate add-feature → refine-plan → build-plan → close-out on disposable
+clients via feature-spec batch and run-traditional-four-phase-agentstream.sh,
+with catalog operator docs and smoke evidence for PROMPT-WF-02.
+
+Staging map:
+- CHANGELOG.md
+- docs/demos/catalog-traditional-workflow-trial-prompts.md
+- docs/demos/traditional-four-phase-agentstream.yaml
+- scripts/run-traditional-four-phase-agentstream.sh
+- tied-project/vocab/agentstream.md
+- tied-project/working/PLAN-TRADITIONAL-FOUR-PHASE-AGENTSTREAM/
+- tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs

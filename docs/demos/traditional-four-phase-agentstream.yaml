@@ -1,0 +1,55 @@
+# Traditional four-phase workflow trial — feature-spec batch for `tied agentstream -b`.
+# Placeholders {{FEATURE_REMAINDER}}, {{MODEL_CONFIG}}, {{MODEL_SLUG}} are expanded by
+# scripts/run-traditional-four-phase-agentstream.sh (not by --checklist-var on batch text).
+features:
+  - order: 1
+    feature_name: "Phase 1 — add-feature"
+    goal: |
+      Explicitly follow `.cursor/skills/add-feature/SKILL.md` (/add-feature).
+      Write `tied-project/working/{REQ-TOKEN}/PLAN.md` with header lines:
+      **Trial:** (from product remainder or PROMPT-WF id),
+      **Model config:** {{MODEL_CONFIG}},
+      **Model slug:** {{MODEL_SLUG}},
+      **Workflow:** add-feature → refine-plan → build-plan → close-out.
+      Scaffold REQ/CITDP/PLAN/tracker only — no production code or RED tests this turn.
+      Seed `evidence/trial-workflow-interaction-inventory.v1.json` with
+      `analysis_label`: `traditional-workflow-trial.v1`,
+      `harness`: `cursor-agentstream-four-phase`,
+      `harness_notes`: `run-traditional-four-phase-agentstream.sh` (four feature-spec batch turns; new agent session per turn),
+      `model_config`: {{MODEL_CONFIG}}, `model_slug`: {{MODEL_SLUG}}.
+    behavior: |
+      Product requirement (invocation remainder):
+      {{FEATURE_REMAINDER}}
+
+  - order: 2
+    feature_name: "Phase 2 — refine-plan"
+    goal: |
+      Explicitly follow `.cursor/skills/refine-plan/SKILL.md` (/refine-plan).
+      Use the linked PLAN from phase 1 under `tied-project/working/{REQ-TOKEN}/PLAN.md`.
+      Refine PLAN, CITDP notes, and tracker; still no product implementation commits.
+    behavior: |
+      Optional sponsor refine notes may appear in the phase-1 PLAN or working folder.
+      Do not start RED tests or production code.
+
+  - order: 3
+    feature_name: "Phase 3 — build-plan"
+    goal: |
+      Explicitly follow `.cursor/skills/build-plan/SKILL.md` (/build-plan).
+      Execute the linked PLAN (post-refine) from `tied-project/working/{REQ-TOKEN}/`.
+      RED → GREEN product code/tests; verification evidence per the build-plan skill.
+    behavior: |
+      Linked plan is the authoritative input; do not re-run add-feature or refine-plan scope.
+
+  - order: 4
+    feature_name: "Phase 4 — close-out"
+    goal: |
+      Explicitly follow `.cursor/skills/close-out/SKILL.md` (/close-out).
+      Git context (paste-in only; do not run git unless the skill allows at close-out):
+      Staged changes are ready for close-out.
+      Consider changes in git diff or stage.
+      When close_out gates allow, run traceable-commit per prompt-shared traceable-commit-close-out.md.
+      Deliver CHANGELOG, three completion signals, and traceable commit when gates allow.
+    behavior: |
+      Append or update `tied-project/working/{REQ-TOKEN}/evidence/trial-workflow-interaction-inventory.v1.json`:
+      keep `harness`: `cursor-agentstream-four-phase` and `harness_notes` for this wrapper (not manual IDE @skills);
+      record all four sponsor_turns with ordinals 1–4; set close_out turn gate receipt when close-out completes.

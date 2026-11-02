@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Traditional four-phase agentstream automation (facilitator)** — [traditional-four-phase-agentstream.yaml](docs/demos/traditional-four-phase-agentstream.yaml) feature-spec batch and [run-traditional-four-phase-agentstream.sh](scripts/run-traditional-four-phase-agentstream.sh) wrapper (`MODEL_SLUG` → `--model`, no default lead checklist); catalog [Automated agentstream path](docs/demos/catalog-traditional-workflow-trial-prompts.md#automated-agentstream-path) and gawk `WF_ID` remainder extract. Smoke: disposable `1793597183-wf-agentstream` (PROMPT-WF-02, four new sessions). Plan: [PLAN-refine-pass1.md](tied-project/working/PLAN-TRADITIONAL-FOUR-PHASE-AGENTSTREAM/PLAN-refine-pass1.md). Docs/tooling only; no new `[REQ-*]` index.
+
 - **PROMPT-WF-02 nine-model facilitator readout** — [wf-02-nine-model-implementation-comparison.md](docs/demos/wf-02-nine-model-implementation-comparison.md) plus nine `trial-readout-PROMPT-WF-02-*.md` files for stdin line-dedup CLI trials; evidence under [FACILITATOR-WF-02-matrix](tied-project/working/FACILITATOR-WF-02-matrix/). Docs-only.
 
 - **Meta-hub tied-project representation ([REQ-TIED_META_HUB_REPRESENTATION], [ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY], [IMPL-TIED_CITDP_RECONCILE], [IMPL-TIED_CORPUS_MAP_BUILD], [IMPL-TIED_META_HUB_MCP])** — MCP `tied_citdp_reconcile_run` and `tied_corpus_map_build`; DOC-STDD 35-row reconcile dogfood (34 apply actions). Plan: [PLAN-refine-pass1.md](tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md).

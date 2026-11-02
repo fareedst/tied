@@ -26,6 +26,52 @@
 
 ---
 
+## Automated agentstream path
+
+For the same **four-turn choreography** without manual IDE `@` skills, use the store wrapper and batch YAML (contrast: [run-feature-batch-agentstream.sh](../../scripts/run-feature-batch-agentstream.sh) attaches the full **`agent-req-implementation-checklist.yaml`** — wrong scope for WF trials).
+
+| Layer | Mechanism |
+| --- | --- |
+| **A — model enforcement** | `MODEL_SLUG` → `tied agentstream --model`; `HARNESS` → `--harness cursor\|claude` (Claude live: `AGENTSTREAM_CLAUDE_LIVE_OK=1`) |
+| **B — grading evidence** | Turn 1 instructs PLAN header + `trial-workflow-interaction-inventory.v1.json`; batch placeholders `{{MODEL_CONFIG}}` / `{{MODEL_SLUG}}` expanded by the wrapper |
+| **C — matrix cells** | Same batch + remainder; swap harness/slug between cells; one fresh disposable client per **(PROMPT-WF-NN × model configuration × harness)** |
+
+Artifacts:
+
+- Batch: [traditional-four-phase-agentstream.yaml](traditional-four-phase-agentstream.yaml)
+- Wrapper: [run-traditional-four-phase-agentstream.sh](../../scripts/run-traditional-four-phase-agentstream.sh)
+- Smoke (2026-11-02): disposable `1793597183-wf-agentstream`, PROMPT-WF-02, four agentstream sessions — [smoke note](../../tied-project/working/PLAN-TRADITIONAL-FOUR-PHASE-AGENTSTREAM/evidence/smoke-1793597183-wf-agentstream.md)
+
+Preload: linked disposable clients may lack `tied-project/agent-preload-contract.yaml`; the wrapper falls back to `tied-bundle/docs/agent-preload-contract-template.yaml` when present. — **Jev W5 harness off by default** (`unset AGENTSTREAM_JEV_HARNESS` unless `TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1`).
+
+Extract a trial block from this catalog (`WF_ID` = short id, e.g. `WF-02` → `### PROMPT-WF-02`; requires **GNU awk** (`gawk`), macOS/Linux):
+
+```bash
+REPO=/path/to/stdd
+WF_ID=WF-02
+export FEATURE_REMAINDER="$(
+  gawk -v wf="${WF_ID#PROMPT-}" '
+    BEGIN { hdr = "### PROMPT-" wf }
+    $0 == hdr { insec = 1; next }
+    insec && /^### PROMPT-WF-/ { exit }
+    insec && /^```text$/ { intext = 1; next }
+    insec && intext && /^```$/ { exit }
+    insec && intext { print }
+  ' "${REPO}/docs/demos/catalog-traditional-workflow-trial-prompts.md"
+)"
+```
+
+Dry-run proof (every turn must show `"--model"` on Cursor harness):
+
+```bash
+WORKSPACE=/path/to/disposable-client \
+MODEL_SLUG=composer-2.5-fast \
+./scripts/run-traditional-four-phase-agentstream.sh --dry-run \
+  | rg '"--model"'
+```
+
+---
+
 ## What the pasted prompt is / is not
 
 | It **is** | It **is not** |
