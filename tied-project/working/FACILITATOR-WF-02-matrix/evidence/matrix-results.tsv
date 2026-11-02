@@ -1,0 +1,54 @@
+row_id	client_code	flags	stdin_desc	stdout_pipe_separated	exit_code
+1	Co	default	ordering_A	a|b|c	0
+2	Co	default	ordering_B	b|a|c	0
+3	Co	default	empty		0
+4	Co	default	no_final_nl	a|b	0
+5	Co	default	crlf_vs_lf	a	0
+1	Ge	default	ordering_A	a|b|c	0
+2	Ge	default	ordering_B	b|a|c	0
+3	Ge	default	empty		0
+4	Ge	default	no_final_nl	a|b	0
+5	Ge	default	crlf_vs_lf	a	0
+6	Ge	keep_last	ordering_A	a|c|b	0
+7	Ge	keep_last	ordering_B	c|a|b	0
+1	Gr	default	ordering_A	a|b|c	0
+2	Gr	default	ordering_B	b|a|c	0
+3	Gr	default	empty		0
+4	Gr	default	no_final_nl	a|b	0
+5	Gr	default	crlf_vs_lf	a	0
+6	Gr	keep_last	ordering_A	a|c|b	0
+7	Gr	keep_last	ordering_B	c|a|b	0
+1	Lu	default	ordering_A	a|b|c	0
+2	Lu	default	ordering_B	b|a|c	0
+3	Lu	default	empty		0
+4	Lu	default	no_final_nl	a|b	0
+5	Lu	default	crlf_vs_lf	a	0
+1	Sp	default	ordering_A	a|b|c	0
+2	Sp	default	ordering_B	b|a|c	0
+3	Sp	default	empty		0
+4	Sp	default	no_final_nl	a|b	0
+5	Sp	default	crlf_vs_lf	a|a	0
+1	Wn	default	ordering_A	a|b|c	0
+2	Wn	default	ordering_B	b|a|c	0
+3	Wn	default	empty		0
+4	Wn	default	no_final_nl	a|b	0
+5	Wn	default	crlf_vs_lf	a|a	0
+6	Wn	keep_last	ordering_A	a|c|b	0
+7	Wn	keep_last	ordering_B	c|a|b	0
+1	So	default	ordering_A	a|b|c	0
+2	So	default	ordering_B	b|a|c	0
+3	So	default	empty		0
+4	So	default	no_final_nl	a|b	0
+5	So	default	crlf_vs_lf	a|a	0
+1	Fa	default	ordering_A	a|b|c	0
+2	Fa	default	ordering_B	b|a|c	0
+3	Fa	default	empty		0
+4	Fa	default	no_final_nl	a|b	0
+5	Fa	default	crlf_vs_lf	a	0
+1	Op	default	ordering_A	a|b|c	0
+2	Op	default	ordering_B	b|a|c	0
+3	Op	default	empty		0
+4	Op	default	no_final_nl	a|b	0
+5	Op	default	crlf_vs_lf	a|a	0
+6	Op	keep_last	ordering_A	a|c|b	0
+7	Op	keep_last	ordering_B	c|a|b	0

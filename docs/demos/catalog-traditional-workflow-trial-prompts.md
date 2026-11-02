@@ -186,7 +186,7 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 
 | Prompt | Model config | Client | Readout |
 | --- | --- | --- | --- |
-| *(none yet)* | | | |
+| PROMPT-WF-02 | nine-model cohort | `1793562432-wf-02-composer25` … `1793592181-wf-02-claude-opus55-med` | [Nine-model comparison](wf-02-nine-model-implementation-comparison.md) + `trial-readout-PROMPT-WF-02-*` |
 
 Maintained by **`@record-wf-trial`**.
 

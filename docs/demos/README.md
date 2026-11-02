@@ -38,7 +38,8 @@ Documented disposable-client runs graded with **workflow choreography**. Not REQ
 
 | Readout | Prompt | Model config | Client |
 | --- | --- | --- | --- |
-| *(none yet)* | | | |
+| [PROMPT-WF-01 seven-model comparison](wf-01-four-model-implementation-comparison.md) | [PROMPT-WF-01](catalog-traditional-workflow-trial-prompts.md#prompt-wf-01) | Luna low/med, Composer 2.5, Grok 4.7, Opus 5.5, Gemini 4 Argon, Muse Spark | `/Users/fareed/Documents/dev/test/1793483171-wf-01-*` … `1793560725-wf-01-muse-spark13-med` |
+| [PROMPT-WF-02 nine-model comparison](wf-02-nine-model-implementation-comparison.md) | [PROMPT-WF-02](catalog-traditional-workflow-trial-prompts.md#prompt-wf-02) | Composer 2.5, Gemini, Grok, Luna/Sol, Muse Spark/Wonder, Fable, Opus | `/Users/fareed/Documents/dev/test/1793562432-wf-02-*` … `1793592181-wf-02-claude-opus55-med` — per-client [readouts](trial-readout-PROMPT-WF-02-composer25-1793562432.md) … [Opus](trial-readout-PROMPT-WF-02-claude-opus55-med-1793592181.md) |
 
 Maintained by **`@record-wf-trial`**. Catalog: [traditional workflow trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator).
 

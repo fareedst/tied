@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **PROMPT-WF-02 nine-model facilitator readout** — [wf-02-nine-model-implementation-comparison.md](docs/demos/wf-02-nine-model-implementation-comparison.md) plus nine `trial-readout-PROMPT-WF-02-*.md` files for stdin line-dedup CLI trials; evidence under [FACILITATOR-WF-02-matrix](tied-project/working/FACILITATOR-WF-02-matrix/). Docs-only.
+
 - **Meta-hub tied-project representation ([REQ-TIED_META_HUB_REPRESENTATION], [ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY], [IMPL-TIED_CITDP_RECONCILE], [IMPL-TIED_CORPUS_MAP_BUILD], [IMPL-TIED_META_HUB_MCP])** — MCP `tied_citdp_reconcile_run` and `tied_corpus_map_build`; DOC-STDD 35-row reconcile dogfood (34 apply actions). Plan: [PLAN-refine-pass1.md](tied-project/working/REQ-TIED_META_HUB_REPRESENTATION/PLAN-refine-pass1.md).
 
 - **Structured session handoff ([REQ-TIED_SESSION_HANDOFF_SKILL], [ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY], [IMPL-TIED_SESSION_HANDOFF_SKILL])** — Wave 2: normative [session-handoff-structure.md](tools/bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md), [session-handoff.v1.template.md](tied-bundle/templates/session-handoff.v1.template.md), `@handoff` merge of pending prior requests + environment/deps in resume prompt; bootstrap test [session-handoff-structure-doc.test.mjs](tools/bootstrap/lib/session-handoff-structure-doc.test.mjs). Plan: [PLAN.md](tied-project/working/REQ-TIED_SESSION_HANDOFF_SKILL/PLAN.md).
