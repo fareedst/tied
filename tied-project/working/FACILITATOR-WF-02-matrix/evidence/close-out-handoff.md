@@ -10,4 +10,7 @@
 
 ## Commit
 
-Record SHA after traceable commit in this section.
+**SHA:** `5a729b1b4575d22264dd5fbc2d46419903ce044c`  
+**Message:** `docs(demos): publish PROMPT-WF-02 nine-model comparison readouts`
+
+Post-commit note: `wf-01-four-model-implementation-comparison.md` and `docs/stdd-workflows.md` remain unstaged (unrelated drift).
