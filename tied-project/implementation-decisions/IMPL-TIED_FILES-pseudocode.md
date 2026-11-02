@@ -619,9 +619,9 @@ procedure CREATE_DISPOSABLE_TIED_CLIENT(testRoot, sourceRoot, optionalTag):
     INPUT: testRoot; sourceRoot; optional skip flags for lint, MCP enable, git; optionalTag (letters, digits, hyphens only)
     OUTPUT: disposable client directory path; process exit status
     DATA: clientId directory basename (epoch or epoch-tag); bootstrapped client tree
-    CONTROL: default testRoot is %USERPROFILE%/Documents/dev/test or $HOME/Documents/dev/test; epoch is seconds not milliseconds; --tag requires --disposable
+    CONTROL: default testRoot is %USERPROFILE%/Documents/dev/test or $HOME/Documents/dev/test; epoch is seconds not milliseconds; --tag and --out-path require --disposable
     PRE: testRoot parent is writable; sourceRoot contains bootstrap entry points; optionalTag validates before mkdir
-    POST: client directory exists with bootstrapped tied/ layout; stdout prints Disposable TIED client path with clientId on success
+    POST: client directory exists with bootstrapped tied/ layout; on success prints Disposable TIED client path with clientId unless --out-path (then stderr progress + single absolute clientDir line on stdout via TIED_BOOTSTRAP_OUT_PATH)
     EFFECTS: File I/O; Process — invokes RUN_NEW_TIED_CLIENT_PIPELINE
     FAILURE_MODES: UNWRITABLE_TEST_ROOT; INVALID_DISPOSABLE_TAG; PIPELINE_STEP_FAILED
     TERMINATION: total
@@ -632,8 +632,10 @@ procedure CREATE_DISPOSABLE_TIED_CLIENT(testRoot, sourceRoot, optionalTag):
   ELSE:
     LET clientId = timestamp
   LET clientDir = join(testRoot, clientId)
+  IF --out-path: SET env TIED_BOOTSTRAP_OUT_PATH=1 for pipeline (sayOk/sayWarn → stderr)
   CALL RUN_NEW_TIED_CLIENT_PIPELINE(clientDir, sourceRoot, disposable=true)
-  PRINT "Disposable TIED client: {testRoot}/{clientId}"
+  IF --out-path: PRINT path.resolve(clientDir) on stdout only
+  ELSE: PRINT "Disposable TIED client: {testRoot}/{clientId}"
   RETURN clientDir
 
 

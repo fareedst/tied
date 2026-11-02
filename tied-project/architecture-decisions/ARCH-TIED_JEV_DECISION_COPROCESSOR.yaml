@@ -15,11 +15,11 @@ ARCH-TIED_JEV_DECISION_COPROCESSOR:
       - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
     requirements:
       - "REQ-TIED_JEV_DECISION_COPROCESSOR"
-  decision: "Add mcp-server Jev module (W1) and phased advisory/blocking hooks (W2-W5); authority remains Tracker receipts, pseudocode_analyze, and TIED YAML MCP."
+  decision: "Add mcp-server Jev module (W1) and phased advisory/blocking hooks (W2-W5); authority remains Tracker receipts, pseudocode_analyze, and TIED YAML MCP. W5 harness dist loader resolves TIED store root (monolithic workspace, TIED_MCP_BIN, TIED_REPO_ROOT, or agentstream package anchor); agent workspace for manifest and tool-guard scope signals remains the client project root from resolveProjectRootForJev."
   metadata:
     last_updated:
-      author: "plan-close-out"
-      date: "2026-09-26"
-      reason: "W0-W5 core close-out"
+      author: "build-plan"
+      date: "2026-11-02"
+      reason: "Store-root harness dist vs client workspace"
   name: "Jev decision coprocessor architecture"
   status: "Implemented"

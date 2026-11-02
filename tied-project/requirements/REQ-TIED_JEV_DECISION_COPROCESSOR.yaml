@@ -5,8 +5,8 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
       date: "2026-09-26"
     last_updated:
       author: "build-plan"
-      date: "2026-09-27"
-      reason: "W6d tiebreak + triage MCP LEAP"
+      date: "2026-11-02"
+      reason: "SC-JEV-HARNESS-DIST-STORE-LINKED-CLIENT"
   name: "Jev decision coprocessor program"
   priority: "P2"
   rationale:
@@ -23,6 +23,9 @@ REQ-TIED_JEV_DECISION_COPROCESSOR:
     - criterion: "Jev never substitutes tied_checklist_gate_validate receipts or MCP YAML writes."
       id: "SC-JEV-LAYERING"
       metric: "PLAN.md layering rules + code review"
+    - criterion: "Linked-client agentstream resolves harness dist from TIED store root; four-phase wrapper clears AGENTSTREAM_JEV_HARNESS unless TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1."
+      id: "SC-JEV-HARNESS-DIST-STORE-LINKED-CLIENT"
+      metric: "cd mcp-server/packages/agentstream && npx tsx --test src/jev-harness-shared.test.ts src/jev-harness-preflight.test.ts"
     - criterion: "mcp-server/src/jev exposes jevDecide with skip-without-key, redaction, and unit tests with mocked fetch."
       id: "SC-JEV-W1-CLIENT"
       metric: "mcp-server/src/jev/jev.test.ts passes"

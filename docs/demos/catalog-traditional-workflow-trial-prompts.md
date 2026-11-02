@@ -40,6 +40,8 @@ Artifacts:
 
 - Batch: [traditional-four-phase-agentstream.yaml](traditional-four-phase-agentstream.yaml)
 - Wrapper: [run-traditional-four-phase-agentstream.sh](../../scripts/run-traditional-four-phase-agentstream.sh)
+- Orchestrator: [workflow-trial-agentstream.sh](../../scripts/workflow-trial-agentstream.sh) (bootstrap + catalog extract + wrapper; `source scripts/build-commands.sh && workflow-trial-agentstream wf-02 --dry-run`)
+- Factory path: `test-new-tied-client --out-path --tag wf-agentstream-wf-02` prints absolute client root on stdout (progress on stderr)
 - Smoke (2026-11-02): disposable `1793597183-wf-agentstream`, PROMPT-WF-02, four agentstream sessions — [smoke note](../../tied-project/working/PLAN-TRADITIONAL-FOUR-PHASE-AGENTSTREAM/evidence/smoke-1793597183-wf-agentstream.md)
 
 Preload: linked disposable clients may lack `tied-project/agent-preload-contract.yaml`; the wrapper falls back to `tied-bundle/docs/agent-preload-contract-template.yaml` when present. — **Jev W5 harness off by default** (`unset AGENTSTREAM_JEV_HARNESS` unless `TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1`).
@@ -232,7 +234,9 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 
 | Prompt | Model config | Client | Readout |
 | --- | --- | --- | --- |
+| PROMPT-WF-01 | seven IDE + agentstream orchestrator | `1793483171-wf-01-*` … `1793560725-wf-01-muse-spark13-med`; `1793604353-wf-agentstream-wf-01` (`workflow-trial-agentstream wf-01`) | [IDE + agentstream comparison](wf-01-four-model-implementation-comparison.md) · [agentstream readout](trial-readout-PROMPT-WF-01-composer25-1793604353-wf-agentstream-wf-01.md) |
 | PROMPT-WF-02 | nine-model cohort | `1793562432-wf-02-composer25` … `1793592181-wf-02-claude-opus55-med` | [Nine-model comparison](wf-02-nine-model-implementation-comparison.md) + `trial-readout-PROMPT-WF-02-*` |
+| PROMPT-WF-03 | agentstream orchestrator | `1793605811-wf-agentstream-wf-03` (`workflow-trial-agentstream wf-03`) | [agentstream readout](trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md) |
 
 Maintained by **`@record-wf-trial`**.
 

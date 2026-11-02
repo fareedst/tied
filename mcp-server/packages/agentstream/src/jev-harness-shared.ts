@@ -4,7 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 import yaml from "js-yaml";
 
@@ -84,10 +84,10 @@ export function taskSummaryFromCfg(cfg: DryRunConfig): string {
   return "agentstream session";
 }
 
-/** Absolute path to built W5 harness guard module under project root. */
-export function harnessDistModulePath(projectRoot: string): string {
+/** Absolute path to built W5 harness guard module under TIED store root. */
+export function harnessDistModulePath(storeRoot: string): string {
   return path.join(
-    projectRoot,
+    storeRoot,
     "mcp-server",
     "dist",
     "jev",
@@ -95,14 +95,86 @@ export function harnessDistModulePath(projectRoot: string): string {
   );
 }
 
-/** True when mcp-server/dist/jev/harness-tool-guard.js exists (sync probe). */
-export function isHarnessDistBuilt(projectRoot: string): boolean {
-  return fs.existsSync(harnessDistModulePath(projectRoot));
+function storeRootHasHarnessDist(storeRoot: string): boolean {
+  return fs.existsSync(harnessDistModulePath(storeRoot));
+}
+
+/** Walk parents from agentstream module (src or dist) until harness dist exists. */
+export function packageAnchorStoreRootFromModuleUrl(
+  moduleUrl: string | URL = import.meta.url,
+): string {
+  const filePath = typeof moduleUrl === "string" ? moduleUrl : fileURLToPath(moduleUrl);
+  let dir = path.dirname(filePath);
+  for (let depth = 0; depth < 10; depth += 1) {
+    if (storeRootHasHarnessDist(dir)) {
+      return dir;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) {
+      break;
+    }
+    dir = parent;
+  }
+  return "";
+}
+
+/**
+ * Resolve TIED store root for harness dist probe/load (linked client vs monolithic).
+ * [IMPL-TIED_JEV_DECISION_COPROCESSOR] RESOLVE_JEV_HARNESS_DIST_STORE_ROOT
+ */
+export function resolveJevHarnessDistStoreRoot(
+  cfg: DryRunConfig,
+  env: NodeJS.ProcessEnv = process.env,
+): string | null {
+  const clientRoot = resolveProjectRootForJev(cfg);
+  if (storeRootHasHarnessDist(clientRoot)) {
+    return clientRoot;
+  }
+
+  const mcpBin = env.TIED_MCP_BIN?.trim();
+  if (mcpBin !== undefined && mcpBin !== "" && path.isAbsolute(mcpBin)) {
+    const fromMcpBin = path.resolve(path.dirname(path.dirname(path.dirname(mcpBin))));
+    if (storeRootHasHarnessDist(fromMcpBin)) {
+      return fromMcpBin;
+    }
+  }
+
+  const repoRoot = env.TIED_REPO_ROOT?.trim();
+  if (repoRoot !== undefined && repoRoot !== "" && path.isAbsolute(repoRoot)) {
+    const indexJs = path.join(repoRoot, "mcp-server", "dist", "index.js");
+    if (fs.existsSync(indexJs) && storeRootHasHarnessDist(repoRoot)) {
+      return path.resolve(repoRoot);
+    }
+  }
+
+  const skipAnchor =
+    env.AGENTSTREAM_JEV_HARNESS_DIST_SKIP_PACKAGE_ANCHOR === "1" ||
+    env.AGENTSTREAM_JEV_HARNESS_DIST_SKIP_PACKAGE_ANCHOR === "true";
+  if (!skipAnchor) {
+    const fromAnchor = packageAnchorStoreRootFromModuleUrl(import.meta.url);
+    if (fromAnchor !== "") {
+      return fromAnchor;
+    }
+  }
+
+  return null;
+}
+
+/** True when harness dist exists at resolved store root (sync probe). */
+export function isHarnessDistBuilt(
+  cfg: DryRunConfig,
+  env: NodeJS.ProcessEnv = process.env,
+): boolean {
+  return resolveJevHarnessDistStoreRoot(cfg, env) !== null;
 }
 
 /** Stable operator message for missing-dist hard stop (sponsor 2C). */
 export function formatHarnessDistMissingMessage(): string {
-  return "agentstream: jev harness enabled but mcp-server/dist/jev not built — run: cd mcp-server && npm run build\n";
+  return (
+    "agentstream: jev harness enabled but mcp-server/dist/jev not built — " +
+    "run: ./build-workspace.sh from the TIED store that owns this CLI " +
+    "(linked clients: set TIED_MCP_BIN or TIED_REPO_ROOT to that store)\n"
+  );
 }
 
 /**
@@ -153,14 +225,19 @@ export type JevHarnessDistModule = {
 };
 
 export async function loadJevHarnessDistModule(
-  projectRoot: string,
+  cfg: DryRunConfig,
+  env: NodeJS.ProcessEnv = process.env,
 ): Promise<JevHarnessDistModule | null> {
-  const modPath = harnessDistModulePath(projectRoot);
+  const storeRoot = resolveJevHarnessDistStoreRoot(cfg, env);
+  if (!storeRoot) {
+    return null;
+  }
+  const modPath = harnessDistModulePath(storeRoot);
   if (!fs.existsSync(modPath)) {
     return null;
   }
   const ctx = await import(pathToFileURL(modPath).href);
-  const ctxFilter = path.join(projectRoot, "mcp-server", "dist", "jev", "context-filter-advisory.js");
+  const ctxFilter = path.join(storeRoot, "mcp-server", "dist", "jev", "context-filter-advisory.js");
   let adviseContextFilter = ctx.adviseContextFilter;
   if (fs.existsSync(ctxFilter)) {
     const cf = await import(pathToFileURL(ctxFilter).href);

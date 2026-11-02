@@ -114,8 +114,7 @@ export function runJevHarnessPreflight(cfg: DryRunConfig): {
     return { exitCode: 0, stderr: "" };
   }
   const lines = bootstrapLines(cfg);
-  const projectRoot = resolveProjectRootForJev(cfg);
-  if (!isHarnessDistBuilt(projectRoot)) {
+  if (!isHarnessDistBuilt(cfg, process.env)) {
     lines.push(formatHarnessDistMissingMessage());
     return { exitCode: 1, stderr: lines.join("") };
   }
@@ -149,8 +148,7 @@ export async function runJevHarnessPreflightLive(
   }
 
   if (!hasInjectedDeps) {
-    const projectRoot = resolveProjectRootForJev(cfg);
-    if (!isHarnessDistBuilt(projectRoot)) {
+    if (!isHarnessDistBuilt(cfg, process.env)) {
       append(formatHarnessDistMissingMessage().trimEnd());
       return { exitCode: 1, stderr: lines.join("") };
     }
@@ -174,7 +172,7 @@ export async function runJevHarnessPreflightLive(
   }
 
   const projectRoot = resolveProjectRootForJev(cfg);
-  const mod = await loadJevHarnessDistModule(projectRoot);
+  const mod = await loadJevHarnessDistModule(cfg, process.env);
   if (!mod) {
     // Belt: race between existsSync and import — still hard-stop.
     append(formatHarnessDistMissingMessage().trimEnd());

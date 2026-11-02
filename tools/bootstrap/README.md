@@ -52,6 +52,10 @@ powershell -ExecutionPolicy Bypass -File .\scripts\test-new-tied-client.ps1
 
 Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` (or `<unix-seconds>-<tag>` when `--tag gf-001` is passed) with bootstrap, lint, **G4 new-client onboarding audit** (`tied-project/working/tied-new-client-audit.v1.json` on two-folder clients; undivided brownfield fallback `working/tied-new-client-audit.v1.json` — [REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH](../../tied-project/requirements/REQ-TIED_FACTORY_ONBOARDING_WORKING_PATH.yaml), [REQ-TIED_NEW_CLIENT_ADHERENCE](../../tied-project/requirements/REQ-TIED_NEW_CLIENT_ADHERENCE.yaml)), dual MCP entries in `.cursor/mcp.json` and `.mcp.json` (`tied-yaml` + `tied-yaml-optin`; enable in **Cursor Settings → MCP**), and `git commit -m "TIED {methodology version from AGENTS.md}"` (e.g. `TIED 3.0.0`). Bash equivalent: `source scripts/build-commands.sh` then `test-new-tied-client`. Skip audit: `TIED_SKIP_NEW_CLIENT_AUDIT=1` or `--skip-onboarding-audit`.
 
+**Scriptable path:** `--out-path` with `--disposable` prints the absolute client directory on **stdout** only (bootstrap progress on stderr). Example: `WORKSPACE=$(test-new-tied-client --out-path --tag my-trial)`.
+
+**WF trial one-liner (Git Bash):** `source scripts/build-commands.sh && workflow-trial-agentstream wf-02 --dry-run` — see [catalog automated path](../../docs/demos/catalog-traditional-workflow-trial-prompts.md).
+
 Explicit directory:
 
 ```cmd

@@ -83,6 +83,9 @@ REQ-TIED_SETUP:
       metric: "tools/bootstrap/copy-files.mjs implements BOOTSTRAP_TIED; E2E tests use entrypoint node"
     - criterion: "YAML validation uses the tied-yaml-canonical-v1 profile through scripts/yaml_tool.sh or lint_yaml per [PROC-YAML_EDIT_LOOP]"
       metric: "Recursive lexical map ordering, ordered-list key exceptions, string-only list sorting, scalar-type preservation, and opaque block policy are documented and tested"
+    - id: "SC-DISPOSABLE-OUT-PATH"
+      criterion: "Disposable factory --out-path prints exactly one absolute client root line on stdout; bootstrap progress uses stderr when TIED_BOOTSTRAP_OUT_PATH=1; flag requires --disposable."
+      metric: "node --test tools/bootstrap/new-tied-client-out-path.test.mjs; mcp-server/src/e2e/new-tied-client.test.ts --out-path parse"
   status: "Implemented"
   traceability:
     architecture:

@@ -1,0 +1,22 @@
+CITDP-REQ-TIED_SETUP-wf-trial-orchestration:
+  current_behavior: "Facilitators manually chain test-new-tied-client, gawk catalog extract, env exports, and run-traditional-four-phase-agentstream.sh; factory success text on stdout breaks command substitution."
+  desired_behavior: "workflow-trial-agentstream wf-02 [--dry-run] bootstraps (or --workspace), extracts PROMPT-WF block, runs four-phase wrapper; test-new-tied-client --out-path emits machine path on stdout."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-02"
+  related_tokens:
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    - "REQ-TIED_SETUP"
+  satisfaction_criteria:
+    - "parseNewTiedClientArgs rejects --out-path without --disposable"
+    - "Successful disposable --out-path prints resolved clientDir on stdout only (progress on stderr)"
+    - "workflow-trial-agentstream.sh validates WF-01..WF-08, requires gawk, --workspace + --dry-run shows --model in agentstream output"
+  test_strategy:
+    composition:
+      - "scripts/workflow-trial-agentstream.sh --workspace + --dry-run"
+    unit:
+      - "tools/bootstrap/new-tied-client-out-path.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  title: "WF trial agentstream orchestrator and factory --out-path"

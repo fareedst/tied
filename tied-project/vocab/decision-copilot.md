@@ -43,7 +43,7 @@
 | Shadow PRELOAD replay | `mcp-server/scripts/replay-jev-vocab-shadow.ts` | W2 keyword vs Jev JSONL log |
 | Prompt-type advisory | `advisePromptTypes` in `mcp-server/src/jev/` | W3 explicit-name heuristic + Jev hint |
 | Adversarial triage pilot | `runAdversarialTriagePilot` | W4 observation-only nouls; no finding-ledger |
-| Harness dist module | `mcp-server/dist/jev/harness-tool-guard.js` | Built artifact required by **harness dist gate** when agentstream harness enabled |
+| Harness dist module | `mcp-server/dist/jev/harness-tool-guard.js` under **TIED store root** (not client `-w` tree for linked installs) | Built artifact required by **harness dist gate** when agentstream harness enabled; resolve via monolithic `-w`, `TIED_MCP_BIN`, `TIED_REPO_ROOT`, or agentstream package anchor |
 | Checklist evidence sufficiency | `mcp-server/src/jev/checklist-evidence-sufficiency.ts` | Blueprint C pre-gate module; opt-in `TIED_JEV_CHECKLIST_EVIDENCE_SUFFICIENCY` |
 | Gate MCP pre-gate hook | `mcp-server/src/tools/checklist-evidence-sufficiency-mcp.ts` | `HOOK_CHECKLIST_GATE_VALIDATE` inside `tied_checklist_gate_validate` |
 | Standalone diagnostic MCP | `tied_jev_checklist_evidence_sufficiency` | Same module; does not emit gate `allowed` |

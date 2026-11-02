@@ -122,13 +122,25 @@ Grammar-Version: v2
   - EFFECTS: jevDecide drop_item + truncate_item nouls
   - OUTPUT: { action: keep | truncate | drop, reason }
 
+## RESOLVE_JEV_HARNESS_DIST_STORE_ROOT
+
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [ARCH-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: **JEV-HARNESS-STORE-DIST-LINKED** — probe/load `mcp-server/dist/jev/*` from TIED store while client manifest and tool-guard `workspace` stay on `resolveProjectRootForJev(cfg)`.
+- procedure RESOLVE_JEV_HARNESS_DIST_STORE_ROOT(cfg, env):
+  - PRE: clientRoot = resolveProjectRootForJev(cfg)
+  - PRE: probe harness-tool-guard.js under clientRoot → return clientRoot when present (monolithic)
+  - PRE: TIED_MCP_BIN absolute → storeRoot = dirname³(mcpBin); probe → return storeRoot when present
+  - PRE: TIED_REPO_ROOT absolute with mcp-server/dist/index.js → probe → return when present
+  - PRE: package anchor walk from jev-harness-shared module → return storeRoot when probe present (skip when AGENTSTREAM_JEV_HARNESS_DIST_SKIP_PACKAGE_ANCHOR for tests)
+  - POST: null when no probe succeeds → isHarnessDistBuilt false → 2C hard-stop unchanged
+  - OUTPUT: storeRoot | null
+
 ## RUN_JEV_HARNESS_PREFLIGHT
 
-- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: Agentstream hook after DAE gate; opt-in via AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness; **harness dist gate** hard-stops when `mcp-server/dist/jev/harness-tool-guard.js` is missing (sponsor **2C** / **JEV-HARNESS-DIST-2C**); live smoke when dist built and key present; injected live deps may bypass dist check for unit smoke only.
+- [IMPL-TIED_JEV_DECISION_COPROCESSOR] [REQ-TIED_JEV_DECISION_COPROCESSOR] How: Agentstream hook after DAE gate; opt-in via AGENTSTREAM_JEV_HARNESS or jev.agentstream_harness; **harness dist gate** hard-stops when store-root probe for `mcp-server/dist/jev/harness-tool-guard.js` fails (sponsor **2C** / **JEV-HARNESS-DIST-2C**); live smoke when dist built and key present; injected live deps may bypass dist check for unit smoke only.
 - procedure RUN_JEV_HARNESS_PREFLIGHT(cfg):
   - CONTROL: compose after tiedpreflight and DAE gate; does not replace checklist gates
   - PRE: harness enabled OR return exitCode 0 empty stderr
-  - PRE: isHarnessDistBuilt(projectRoot) OR return exitCode 1 + formatHarnessDistMissingMessage (dry-run / sync always)
+  - PRE: isHarnessDistBuilt(cfg, env) via RESOLVE_JEV_HARNESS_DIST_STORE_ROOT OR return exitCode 1 + formatHarnessDistMissingMessage (dry-run / sync always)
   - EFFECTS: emit bootstrap DEBUG/DIAGNOSTIC lines (key missing → fail-closed tool policy note)
   - POST: exitCode 0 when harness disabled OR dist present; exitCode 1 when harness enabled and dist missing
   - FAILURE_MODES: missing dist → exit 1 (missing-dist hard stop); never auto-build dist
@@ -137,7 +149,7 @@ Grammar-Version: v2
 - procedure RUN_JEV_HARNESS_PREFLIGHT_LIVE(cfg, deps?):
   - PRE: harness enabled OR return exitCode 0
   - PRE: deps.evaluateSampleTool OR deps.adviseSampleContext → skip dist hard-stop (injected deps bypass / T-CFG only)
-  - PRE: ELSE isHarnessDistBuilt OR return exitCode 1 + formatHarnessDistMissingMessage
+  - PRE: ELSE isHarnessDistBuilt(cfg, env) OR return exitCode 1 + formatHarnessDistMissingMessage
   - EFFECTS: optional live smoke via dist module or injected deps
   - POST: exitCode 0 on success or deps smoke; exitCode 1 on missing-dist hard stop
   - FAILURE_MODES: missing dist without deps → exit 1; never bypass checklist gates

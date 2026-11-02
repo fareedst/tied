@@ -81,6 +81,18 @@ describe("new-tied-client pipeline", () => {
     assert.match(output, /ok/);
   });
 
+  it("parseNewTiedClientArgs handles --out-path with disposable [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
+    const output = runBootstrapModuleEval(`
+      import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";
+      const ok = parseNewTiedClientArgs(["--disposable", "--out-path"], {});
+      if (!ok.outPath || !ok.disposable) throw new Error("out-path disposable");
+      const bad = parseNewTiedClientArgs(["--out-path"], {});
+      if (!bad.error) throw new Error("expected error without disposable");
+      console.log("ok");
+    `);
+    assert.match(output, /ok/);
+  });
+
   it("parseNewTiedClientArgs handles --tag with disposable [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {
     const output = runBootstrapModuleEval(`
       import { parseNewTiedClientArgs } from "./tools/bootstrap/new-tied-client.mjs";

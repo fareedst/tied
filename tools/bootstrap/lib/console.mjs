@@ -41,12 +41,16 @@ export function writeErrorHints(message, hints = []) {
   process.stderr.write(`${C_DIM}${HR_LINE}${C_RESET}\n`);
 }
 
+function bootstrapProgressStream() {
+  return process.env.TIED_BOOTSTRAP_OUT_PATH === "1" ? process.stderr : process.stdout;
+}
+
 export function sayOk(msg) {
-  process.stdout.write(`${C_OK}${msg}${C_RESET}\n`);
+  bootstrapProgressStream().write(`${C_OK}${msg}${C_RESET}\n`);
 }
 
 export function sayWarn(msg) {
-  process.stdout.write(`${C_WARN}${msg}${C_RESET}\n`);
+  bootstrapProgressStream().write(`${C_WARN}${msg}${C_RESET}\n`);
 }
 
 export function sayErr(msg) {

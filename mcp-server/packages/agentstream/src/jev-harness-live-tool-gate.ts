@@ -202,7 +202,7 @@ export async function createJevLiveToolGate(
   if (deps?.evaluate) {
     return { goal, workspace: projectRoot, evaluate: deps.evaluate };
   }
-  const mod = await loadJevHarnessDistModule(projectRoot);
+  const mod = await loadJevHarnessDistModule(cfg, process.env);
   if (!mod) {
     return null;
   }

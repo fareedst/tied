@@ -262,5 +262,5 @@
     "macOS UI visibility not proven by UI-free gate checks."
   ],
   "schema_version": "regression-manifest.v1",
-  "stdd_revision": "359a922e482d5c8822b1cb97b9655b0b9fbf0d7b"
+  "stdd_revision": "6c807e7cc35d029b32c7a5ab8b105695c1dd1b6b"
 }

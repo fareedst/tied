@@ -1,0 +1,71 @@
+CITDP-REQ-TIED_JEV_DECISION_COPROCESSOR-STORE-DIST-LINKED-CLIENT:
+  change_definition:
+    current_behavior: "Harness dist gate probes {findRepoRootFromPath(workspace)}/mcp-server/dist/jev/ only; linked disposable clients never see store-built dist; misleading cd mcp-server && npm run build hint from client cwd."
+    desired_behavior: "Dist gate resolves store root via monolithic probe, TIED_MCP_BIN, TIED_REPO_ROOT, or agentstream package anchor; 2C hard-stop when harness on and store dist absent; four-phase wrapper unsets AGENTSTREAM_JEV_HARNESS unless TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1."
+    non_goals:
+      - "Auto-build dist"
+      - "Change harness opt-in defaults"
+      - "Copy mcp-server into linked clients at install"
+      - "Reopen REQ Implemented status"
+    success_criteria:
+      - "Four-phase dry-run with parent AGENTSTREAM_JEV_HARNESS=1 succeeds (wrapper clears harness)"
+      - "Harness on + store dist missing → exit 1 (2C preserved)"
+      - "Monolithic -w unchanged"
+      - "SC-JEV-HARNESS-DIST-STORE-LINKED-CLIENT tests green"
+      - "TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1 + built store + linked client: no missing-dist hard stop"
+  evidence:
+    command_seq:
+      - "cd mcp-server/packages/agentstream && npx tsx --test src/jev-harness-shared.test.ts src/jev-harness-preflight.test.ts"
+  impact_analysis:
+    files:
+      - "mcp-server/packages/agentstream/src/jev-harness-shared.ts"
+      - "scripts/run-traditional-four-phase-agentstream.sh"
+    tied_tokens_affected:
+      - "ARCH-TIED_JEV_DECISION_COPROCESSOR"
+      - "IMPL-TIED_JEV_DECISION_COPROCESSOR"
+      - "REQ-TIED_JEV_DECISION_COPROCESSOR"
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "ARCH dist loader note"
+      - "IMPL RESOLVE_JEV_HARNESS_DIST_STORE_ROOT pseudo-code"
+      - "REQ satisfaction criterion"
+  record_identity:
+    change_request_id: "JEV-HARNESS-STORE-DIST-LINKED"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    record_status: "complete"
+    recorded_at: "2026-11-02"
+    title: "Jev harness store dist resolution for linked clients"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Package anchor resolves wrong ancestor when multiple store trees on disk"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Unit tests cover TIED_MCP_BIN, TIED_REPO_ROOT, monolithic, and package anchor arms"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-TIED_JEV_DECISION_COPROCESSOR/evidence/store-dist-linked-dry-run.stdout.txt"
+      falsification_questions:
+        - "Does four-phase dry-run still fail when operator leaves AGENTSTREAM_JEV_HARNESS=1 in shell?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Bounded path-resolution fix; no new external/auth/network/persistence surface."
+      research_profile: "baseline-functional"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+  test_strategy:
+    composition: []
+    e2e: []
+    summary: "RED then GREEN jev-harness-shared.test.ts + extended jev-harness-preflight.test.ts; preserve G2/2C."
+    unit:
+      - "jev-harness-preflight.test.ts"
+      - "jev-harness-shared.test.ts"

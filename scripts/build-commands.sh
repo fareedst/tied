@@ -396,6 +396,11 @@ make_new_tied_client() {
 alias test-new-tied-client=make_new_tied_client
 alias setx-test-new-tied-client='( set -x; make_new_tied_client ); echo "rc=$?"'
 
+workflow_trial_agentstream() {
+  "${_BUILD_COMMANDS_REPO_ROOT}/scripts/workflow-trial-agentstream.sh" "$@"
+}
+alias workflow-trial-agentstream=workflow_trial_agentstream
+
 new_claude_tied_client() {
   local client_dir="${1:?usage: new-claude-tied-client CLIENT_DIR [TIED_REPO_ROOT]}"
   local source_root="${2:-${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"

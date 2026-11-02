@@ -261,6 +261,8 @@ _how_smoke() {
   _how_render_body <<'EOF'
   new-tied-client DIR [SOURCE]   tied-install linked (default) + lint + git init
   test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp> or <timestamp>-<tag>
+  test-new-tied-client --out-path --tag X   stdout: absolute client path (disposable only)
+  workflow-trial-agentstream wf-02 [--dry-run]   bootstrap + PROMPT-WF extract + four-phase agentstream
                                  tied-install linked + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git
                                  install flags: how install-matrix

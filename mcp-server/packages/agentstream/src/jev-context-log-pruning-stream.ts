@@ -10,6 +10,7 @@ import type { DryRunConfig } from "./dry-run-config.js";
 import {
   manifestEnablesJevHarness,
   readRepoTiedYaml,
+  resolveJevHarnessDistStoreRoot,
   resolveProjectRootForJev,
 } from "./jev-harness-shared.js";
 
@@ -93,12 +94,12 @@ export function contextLogPruningEnabled(
   return false;
 }
 
-function contextLogPrunerDistPath(projectRoot: string): string {
-  return path.join(projectRoot, "mcp-server", "dist", "jev", "context-log-pruner.js");
+function contextLogPrunerDistPath(storeRoot: string): string {
+  return path.join(storeRoot, "mcp-server", "dist", "jev", "context-log-pruner.js");
 }
 
-function resolveJevApiKeyDistPath(projectRoot: string): string {
-  return path.join(projectRoot, "mcp-server", "dist", "jev", "resolve-jev-api-key.js");
+function resolveJevApiKeyDistPath(storeRoot: string): string {
+  return path.join(storeRoot, "mcp-server", "dist", "jev", "resolve-jev-api-key.js");
 }
 
 export async function createContextLogPruneHook(
@@ -112,15 +113,22 @@ export async function createContextLogPruneHook(
   if (deps?.prune) {
     return { prune: deps.prune };
   }
-  const modPath = contextLogPrunerDistPath(projectRoot);
+  const storeRoot = resolveJevHarnessDistStoreRoot(cfg, process.env);
+  if (!storeRoot) {
+    process.stderr.write(
+      "DIAGNOSTIC: context log pruning enabled but mcp-server/dist/jev/context-log-pruner.js missing — run: ./build-workspace.sh from the TIED store\n",
+    );
+    return null;
+  }
+  const modPath = contextLogPrunerDistPath(storeRoot);
   if (!fs.existsSync(modPath)) {
     process.stderr.write(
-      "DIAGNOSTIC: context log pruning enabled but mcp-server/dist/jev/context-log-pruner.js missing — run: cd mcp-server && npm run build\n",
+      "DIAGNOSTIC: context log pruning enabled but mcp-server/dist/jev/context-log-pruner.js missing — run: ./build-workspace.sh from the TIED store\n",
     );
     return null;
   }
   const mod = await import(pathToFileURL(modPath).href);
-  const keyModPath = resolveJevApiKeyDistPath(projectRoot);
+  const keyModPath = resolveJevApiKeyDistPath(storeRoot);
   let apiKey: string | undefined;
   if (fs.existsSync(keyModPath)) {
     const keyMod = await import(pathToFileURL(keyModPath).href);
