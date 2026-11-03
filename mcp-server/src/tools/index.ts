@@ -478,6 +478,56 @@ export const allTools = [
     },
   },
   {
+    name: "tied_config_report",
+    config: {
+      description:
+        "Return tied-config-report.v1: central read-only TIED runtime configuration with provenance (paths, operator toggles, MCP env, ignored shell, secrets catalog). Default redacts secret catalog keys; set include_secrets true to emit values. Shares bootstrap builder with tools/bootstrap/tied-config-report-cli.mjs.",
+      inputSchema: z.object({
+        include_secrets: z.boolean().optional(),
+        format: z.enum(["json", "text"]).optional(),
+      }),
+    },
+    handler: async (args: { include_secrets?: boolean; format?: "json" | "text" }) => {
+      const project_root = getClientProjectRoot();
+      const { resolveTiedConfigReport } = await import("../tied-config-report.js");
+      const result = await resolveTiedConfigReport(project_root, process.env, {
+        includeSecrets: args.include_secrets,
+      });
+      if (result.status !== "ok") {
+        return textContent(
+          prettyCanonicalJson({
+            ok: false,
+            status: result.status,
+            error: result.error,
+          }),
+        );
+      }
+      if (args.include_secrets) {
+        console.error(
+          "WARNING: tied_config_report include_secrets emits catalogued secret values in tool output.",
+        );
+      }
+      if (args.format === "text") {
+        const { formatTiedConfigReportForProject } = await import("../tied-config-report.js");
+        const text = await formatTiedConfigReportForProject(project_root, process.env, {
+          includeSecrets: args.include_secrets,
+        });
+        if (text.status !== "ok" || !text.text) {
+          const errMsg = text.status === "error" || text.status === "unavailable" ? text.error : "text_format_failed";
+          return textContent(
+            prettyCanonicalJson({
+              ok: false,
+              status: text.status,
+              error: errMsg,
+            }),
+          );
+        }
+        return textContent(text.text);
+      }
+      return textContent(prettyCanonicalJson(result.report));
+    },
+  },
+  {
     name: "tied_checklist_controller_resume_plan",
     config: {
       description:

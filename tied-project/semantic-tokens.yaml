@@ -901,6 +901,16 @@ ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CONFIG_REPORT:
+  category: "Tooling"
+  cross_references:
+    - "IMPL-TIED_CONFIG_REPORT"
+    - "REQ-TIED_CONFIG_REPORT"
+  description: "Config report CLI and MCP tied_config_report."
+  detail_file: "architecture-decisions/ARCH-TIED_CONFIG_REPORT.yaml"
+  name: "TIED configuration report"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   cross_references:
     - "IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS"
@@ -2526,6 +2536,16 @@ IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE:
   description: "Implementation for committed working hygiene scripts and gitignore profile"
   name: "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_CONFIG_REPORT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CONFIG_REPORT"
+    - "REQ-TIED_CONFIG_REPORT"
+  description: "Config report CLI and MCP tied_config_report."
+  detail_file: "implementation-decisions/IMPL-TIED_CONFIG_REPORT.yaml"
+  name: "TIED configuration report"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
@@ -4489,6 +4509,16 @@ REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
   description: "Committed working git hygiene — store regenerable profile on tied-project/working/"
   name: "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"
   source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_CONFIG_REPORT:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-TIED_CONFIG_REPORT"
+    - "IMPL-TIED_CONFIG_REPORT"
+  description: "Config report CLI and MCP tied_config_report."
+  detail_file: "requirements/REQ-TIED_CONFIG_REPORT.yaml"
+  name: "TIED configuration report"
   status: "Active"
   type: "REQ"
 REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:

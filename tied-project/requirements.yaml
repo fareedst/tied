@@ -2460,6 +2460,13 @@ REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE:
       - "ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE"
     implementation:
       - "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+REQ-TIED_CONFIG_REPORT:
+  category: "Tooling"
+  description: "Central read-only CLI and MCP report of effective TIED runtime configuration with provenance and opt-in secrets."
+  detail_file: "requirements/REQ-TIED_CONFIG_REPORT.yaml"
+  name: "TIED configuration report"
+  priority: "P1"
+  status: "Draft"
 REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   category: "Functional"
   detail_file: "requirements/REQ-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"

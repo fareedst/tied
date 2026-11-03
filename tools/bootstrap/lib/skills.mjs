@@ -51,7 +51,12 @@ function installTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker, skills
   fs.mkdirSync(skillsInstallDir, { recursive: true });
   copyTreeWithAttributes(src, dest);
   chmodExecutableRecursive(dest);
-  for (const scriptName of ["tied-cli.sh", "tied.sh", "feature-orchestrator.sh"]) {
+  for (const scriptName of [
+    "tied-cli.sh",
+    "tied.sh",
+    "feature-orchestrator.sh",
+    "tied-config-report.sh",
+  ]) {
     const cli = path.join(dest, "scripts", scriptName);
     const sourceCli = path.join(src, "scripts", scriptName);
     if (fs.existsSync(cli) && fs.existsSync(sourceCli)) {
@@ -132,7 +137,12 @@ function installClaudeTiedYamlSkillFrom(projectRoot, src, tiedRepoRoot, marker, 
   fs.mkdirSync(skillsInstallDir, { recursive: true });
   copyTreeWithAttributes(src, dest);
   chmodExecutableRecursive(dest);
-  for (const scriptName of ["tied-cli.sh", "tied.sh", "feature-orchestrator.sh"]) {
+  for (const scriptName of [
+    "tied-cli.sh",
+    "tied.sh",
+    "feature-orchestrator.sh",
+    "tied-config-report.sh",
+  ]) {
     const cli = path.join(dest, "scripts", scriptName);
     const sourceCli = path.join(src, "scripts", scriptName);
     if (fs.existsSync(cli) && fs.existsSync(sourceCli)) {

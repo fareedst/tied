@@ -224,6 +224,8 @@ Everything else on those entries (and all foreign `mcpServers`) is **preserved**
 
 **CLI parity:** **`tied-cli.sh`** (and **`tied.sh`** / **`feature-orchestrator.sh`**) resolve client corpus and store/MCP paths from **`.cursor/mcp.json`** / **`.mcp.json`** plus store **`.tied/store.yaml`** ( **`store.local.yaml`** on refresh)—shell **`TIED_MCP_BIN`**, **`TIED_REPO_ROOT`**, and **`TIED_STORE_ROOT`** are ignored. Missing install config fails closed before MCP spawn ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
 
+**Config report ([REQ-TIED_CONFIG_REPORT](../../tied-project/requirements/REQ-TIED_CONFIG_REPORT.yaml)):** `node tools/bootstrap/tied-config-report-cli.mjs [--format json|text] [--include-secrets]` from store or client cwd; client linked wrapper **`tied-config-report.sh`**; MCP **`tied_config_report`**. Complements **`tied_config_get_base_path`** with operator toggle catalog and provenance.
+
 Contract tests: `node --test tools/bootstrap/lib/claude-harness.test.mjs` (requires built `mcp-server` for MCP prerequisite).
 
 Operator routing (REQ vs FEAT, operating modes): [client-development-index.md](../tied-bundle/docs/client-development-index.md) § **Multi-harness entry matrix (Cursor vs Claude Code)**.

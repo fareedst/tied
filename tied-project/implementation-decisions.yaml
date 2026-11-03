@@ -2234,6 +2234,11 @@ IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE:
     implementation: []
     requirements:
       - "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+IMPL-TIED_CONFIG_REPORT:
+  detail_file: "implementation-decisions/IMPL-TIED_CONFIG_REPORT.yaml"
+  name: "Config report implementation"
+  status: "Draft"
+  summary: "buildTiedConfigReport, tied-config-report-cli.mjs, tied_config_report MCP tool, client shell wrapper."
 IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS:
   detail_file: "implementation-decisions/IMPL-TIED_CONTEXT_ADAPTIVE_CONTRACTS.yaml"
   name: "Context-adaptive practice contracts"

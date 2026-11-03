@@ -1,0 +1,12 @@
+feat(config): central TIED config report CLI and MCP
+
+Operators can inspect effective paths, operator toggles, MCP env, ignored
+shell exports, and secret presence from one read-only report with
+provenance and configure_via hints.
+
+REQ-TIED_CONFIG_REPORT / ARCH-TIED_CONFIG_REPORT / IMPL-TIED_CONFIG_REPORT
+
+Completion signals: close_out gate allowed; envelope blocking_gaps=0;
+verification manifest tests passed (bootstrap + MCP).
+
+Upstream feedback: N/A

@@ -1,0 +1,8 @@
+REQ-TIED_CONFIG_REPORT:
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-03"
+      reason: "Config report CLI and MCP shipped"
+  REQ-TIED_CONFIG_REPORT:
+    status: "Implemented"

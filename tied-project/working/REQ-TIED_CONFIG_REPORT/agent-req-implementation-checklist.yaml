@@ -1,0 +1,94 @@
+citdp_pointer: "tied-project/working/REQ-TIED_CONFIG_REPORT/CITDP-REQ-TIED_CONFIG_REPORT.yaml"
+copy_hygiene: "Set execution_evidence.request to REQ-TIED_CONFIG_REPORT; clear close_out before implement."
+description: "Tracker for TIED configuration report CLI + MCP. See PLAN-refine.md."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-TIED_CONFIG_REPORT/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_CONFIG_REPORT"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+gate_contract:
+  depth_selection_before_inquiry: true
+  fail_closed: true
+  phases:
+    - "close_out"
+    - "pre_implementation"
+    - "verification"
+gate_policy: "advisory"
+linked_plans:
+  - "tied-project/working/REQ-TIED_CONFIG_REPORT/PLAN-refine.md"
+notes: "refine-plan 2026-11-03 — pre-implementation gate before author-requirement + RED."
+profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_CONFIG_REPORT/PLAN-refine.md"
+      status: "completed"
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_CONFIG_REPORT/CITDP-REQ-TIED_CONFIG_REPORT.yaml"
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_CONFIG_REPORT/PLAN-refine.md"
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_CONFIG_REPORT/CITDP-REQ-TIED_CONFIG_REPORT.yaml"
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_CONFIG_REPORT/PLAN-refine.md"
+      status: "completed"
+  - disposition: "completed"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_CONFIG_REPORT/PLAN-refine.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "depth_tier minimal; read-only config report; sub_adversarial_inquiry_pass not_applicable."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_CONFIG_REPORT/CITDP-REQ-TIED_CONFIG_REPORT.yaml"
+  - disposition: "pending"
+    slug: "author-requirement"
+  - disposition: "pending"
+    slug: "persist-implementation-records"
+  - disposition: "pending"
+    slug: "unit-test-red"

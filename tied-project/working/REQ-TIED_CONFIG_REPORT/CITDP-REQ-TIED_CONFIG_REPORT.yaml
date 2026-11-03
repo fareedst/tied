@@ -1,0 +1,92 @@
+CITDP-REQ-TIED_CONFIG_REPORT:
+  change_definition:
+    current_behavior: "Operators and agents infer TIED configuration from multiple surfaces (`tied_config_get_base_path`, `.cursor/mcp.json`, `.tied/store.yaml`, shell exports) without a single catalogued report, provenance, or safe secret handling."
+    desired_behavior: "Shared bootstrap builder emits `tied-config-report.v1` from store or client cwd via no-spawn CLI and MCP `tied_config_report`; default redacts secret catalog keys; opt-in includes values; each catalogued row documents where the effective value came from and how to change it."
+    non_goals:
+      - "Breaking or extending tied_config_get_base_path response shape"
+      - "Changing YAML MCP corpus path authority or getBasePath semantics"
+      - "Dumping all process.env keys"
+      - "Integrated adversarial inquiry activation (minimal depth)"
+      - "Writing or refreshing install-managed config"
+    sponsor_decisions:
+      costly_accepted_on_implementation: "MCP server dynamically imports bootstrap tied-config-report.mjs from store checkout (same dependency model as SC-RDC-MCP-INTROSPECTION)"
+    success_criteria:
+      - "SC-CR-CLI-CLIENT"
+      - "SC-CR-CLI-STORE"
+      - "SC-CR-IGNORE-SHELL"
+      - "SC-CR-MCP-PARITY"
+      - "SC-CR-PROVENANCE"
+      - "SC-CR-SECRETS-DEFAULT"
+      - "SC-CR-SECRETS-OPTIN"
+    unchanged_behavior:
+      - "resolveTiedRuntimeConfig authority for CLI spawn paths"
+      - "tied_config_get_base_path field set and semantics"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_CONFIG_REPORT"
+      run_id: null
+      scope:
+        - "config-report-v1"
+    envelope_path: "tied-project/working/REQ-TIED_CONFIG_REPORT/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required on changed tied-project YAML"
+    pre_implementation_gate: "tied_checklist_gate_validate before RED"
+    tied_validate_consistency: "required before close-out"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+      - "cd mcp-server && npm run build && npx tsx --test src/tied-config-report.test.ts"
+      - "node tools/bootstrap/tied-config-report-cli.mjs --format json"
+      - "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_config_report '{}'"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_CONFIG_REPORT"
+    modules_or_boundaries: "tools/bootstrap/lib/tied-config-report.mjs; tools/bootstrap/tied-config-report-cli.mjs; bundled skill shell wrapper; mcp-server tools/index.ts; tied-config-report.ts"
+    tied_tokens_affected: []
+    tied_tokens_new:
+      - "ARCH-TIED_CONFIG_REPORT"
+      - "IMPL-TIED_CONFIG_REPORT"
+      - "REQ-TIED_CONFIG_REPORT"
+  record_identity:
+    change_request_id: "REQ-TIED_CONFIG_REPORT"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-03"
+    title: "TIED configuration report CLI and MCP"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "include_secrets leaks into logs when operators pipe stdout to shared channels"
+        - "Linked client without store checkout cannot resolve bootstrap module for MCP tool"
+        - "Operators treat report JSON as write authority and skip tied-install refresh"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Fixture catalog already guards bootstrap resolver parity (RDC)"
+        - "Read-only report; no persistence or network"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "mcp-server/src/tied-runtime-introspection.ts"
+        - "tied-project/working/REQ-TIED_CONFIG_REPORT/PLAN-refine.md"
+        - "tools/bootstrap/lib/tied-runtime-config.mjs"
+      falsification_questions:
+        - "Does default report ever emit JEV_API_KEY value without include_secrets?"
+        - "Does MCP JSON match CLI for the same fixture cwd after normalizing timestamps?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Operator diagnostics only; minimal depth; secrets opt-in with stderr warning."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    consequence_ladder:
+      costly:
+        - "Shared bootstrap import from MCP (accepted)"
+      reversible:
+        - "Text vs JSON default (default JSON)"
+        - "Tool profile core vs optin (default core)"
+    summary: "Central config report reduces operator drift; primary risk is secret leakage via include_secrets misuse."
+  test_strategy:
+    integration_command_seq:
+      - command: "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+        notes: "Fixture catalog cases + secrets redaction"
+    matrix_notes: "RED before builder; LEAP new REQ/ARCH/IMPL; MCP tool defaults to core profile."

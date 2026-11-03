@@ -77,6 +77,7 @@ Path parameters on tools that accept file paths are resolved by the Node process
 | `quality_security_profile_validate` | Validate the external-input security abuse-case set, requiring executable evidence or an owned, expiring waiver. |
 | `test_adequacy_validate` | Validate profile-triggered mutation/property/fuzz/flaky/harness/maintainability/dependency and external-call cost plans. It checks control metadata only; it does not run the specialized tests. |
 | `tied_config_get_base_path` | Return effective `tied-project/` corpus path plus disk-aligned `store_root`, `mcp_dist_path`, `config_sources` (bootstrap resolver when store checkout present); legacy env echo fields retained (`env_TIED_*`) |
+| `tied_config_report` | Return `tied-config-report.v1` (paths, operator toggles, MCP env, ignored shell, secrets catalog with provenance); default redacts secrets; optional `include_secrets`. Same builder as `node tools/bootstrap/tied-config-report-cli.mjs` |
 | `get_decisions_for_requirement` | Given a requirement token (e.g. REQ-TIED_SETUP), return all ARCH and IMPL that reference it |
 | `get_requirements_for_decision` | Given a decision token (ARCH-X or IMPL-X), return all REQ it references (and full requirement records) |
 | `yaml_index_insert` | Insert a new record; params: `index`, `token`, `record` (**JSON object recommended**, or JSON/YAML string for compatibility). Writes to the index file (e.g. `tied-project/requirements.yaml`). Fails if token already exists. |

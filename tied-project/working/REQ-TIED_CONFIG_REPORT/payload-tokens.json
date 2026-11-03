@@ -1,0 +1,112 @@
+[
+  {
+    "token": "REQ-TIED_CONFIG_REPORT",
+    "index_record": {
+      "name": "TIED configuration report",
+      "status": "Draft",
+      "category": "Tooling",
+      "priority": "P1",
+      "description": "Central read-only CLI and MCP report of effective TIED runtime configuration with provenance and opt-in secrets."
+    },
+    "detail_record": {
+      "REQ-TIED_CONFIG_REPORT": {
+        "name": "TIED configuration report",
+        "category": "Tooling",
+        "priority": "P1",
+        "description": "Operators run one command from store or client to see paths, operator toggles, MCP env, ignored shell exports, and where to set each value; secrets redacted unless explicitly requested.",
+        "status": "Draft",
+        "related_requirements": {
+          "depends_on": [
+            "REQ-TIED_RUNTIME_DISK_CONFIG",
+            "REQ-TIED_CLI_MCP_JSON_BASE_PATH",
+            "REQ-TIED_CLIENT_PATH_ENV_MIGRATION"
+          ],
+          "related_to": ["REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING"]
+        },
+        "satisfaction_criteria": [
+          {
+            "id": "SC-CR-CLI-STORE",
+            "criterion": "Store checkout emits tied-config-report.v1 with disk-resolved store_root and mcp_dist_path.",
+            "metric": "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+          },
+          {
+            "id": "SC-CR-CLI-CLIENT",
+            "criterion": "Client with tied-yaml mcp.json emits client_project_path and operator toggle provenance.",
+            "metric": "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+          },
+          {
+            "id": "SC-CR-PROVENANCE",
+            "criterion": "Catalogued operator toggles include effective, source_kind, source_ref, configure_via.",
+            "metric": "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+          },
+          {
+            "id": "SC-CR-SECRETS-DEFAULT",
+            "criterion": "Default report never prints JEV_API_KEY value.",
+            "metric": "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+          },
+          {
+            "id": "SC-CR-SECRETS-OPTIN",
+            "criterion": "include_secrets / --include-secrets emits catalogued secret values when set.",
+            "metric": "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+          },
+          {
+            "id": "SC-CR-IGNORE-SHELL",
+            "criterion": "Wrong shell global path env appears under shell_ignored with disk-effective source.",
+            "metric": "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+          },
+          {
+            "id": "SC-CR-MCP-PARITY",
+            "criterion": "tied_config_report JSON matches bootstrap builder for fixture cwd.",
+            "metric": "cd mcp-server && npx tsx --test src/tied-config-report.test.ts"
+          },
+          {
+            "id": "SC-CR-TESTS",
+            "criterion": "Bootstrap and MCP unit tests pass.",
+            "metric": "node --test tools/bootstrap/lib/tied-config-report.test.mjs; cd mcp-server && npx tsx --test src/tied-config-report.test.ts"
+          }
+        ],
+        "traceability": {
+          "architecture": ["ARCH-TIED_CONFIG_REPORT"],
+          "implementation": ["IMPL-TIED_CONFIG_REPORT"],
+          "tests": [
+            "tools/bootstrap/lib/tied-config-report.test.mjs",
+            "mcp-server/src/tied-config-report.test.ts"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "token": "ARCH-TIED_CONFIG_REPORT",
+    "index_record": {
+      "name": "Config report architecture",
+      "status": "Draft",
+      "summary": "Single bootstrap buildTiedConfigReport; MCP and CLI are thin transports; no new config authority."
+    },
+    "detail_record": {
+      "ARCH-TIED_CONFIG_REPORT": {
+        "name": "Config report architecture",
+        "status": "Draft",
+        "related_requirements": ["REQ-TIED_CONFIG_REPORT"],
+        "decision": "Configuration report logic lives in tools/bootstrap/lib/tied-config-report.mjs. MCP dynamically imports it from the store checkout; CLI invokes the same module without MCP spawn. tied_config_get_base_path remains the corpus-path introspection surface; tied_config_report is the operator catalog superset."
+      }
+    }
+  },
+  {
+    "token": "IMPL-TIED_CONFIG_REPORT",
+    "index_record": {
+      "name": "Config report implementation",
+      "status": "Draft",
+      "summary": "buildTiedConfigReport, tied-config-report-cli.mjs, tied_config_report MCP tool, client shell wrapper."
+    },
+    "detail_record": {
+      "IMPL-TIED_CONFIG_REPORT": {
+        "name": "Config report implementation",
+        "status": "Draft",
+        "related_requirements": ["REQ-TIED_CONFIG_REPORT"],
+        "related_architecture": ["ARCH-TIED_CONFIG_REPORT"],
+        "essence_pseudocode_path": "implementation-decisions/IMPL-TIED_CONFIG_REPORT-pseudocode.md"
+      }
+    }
+  }
+]

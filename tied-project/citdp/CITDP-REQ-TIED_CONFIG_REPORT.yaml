@@ -1,0 +1,40 @@
+CITDP-REQ-TIED_CONFIG_REPORT:
+  change_definition:
+    current_behavior: "Operators and agents infer TIED configuration from multiple surfaces without a single catalogued report, provenance, or safe secret handling."
+    desired_behavior: "Shared bootstrap builder emits tied-config-report.v1 from store or client cwd via no-spawn CLI and MCP tied_config_report; default redacts secret catalog keys; opt-in includes values."
+    non_goals:
+      - "Changing getBasePath semantics or tied_config_get_base_path JSON shape"
+      - "Config mutation via report"
+    sponsor_decisions:
+      costly_accepted_on_implementation: "MCP dynamically imports bootstrap tied-config-report.mjs from store checkout"
+    success_criteria:
+      - "SC-CR-CLI-STORE"
+      - "SC-CR-MCP-PARITY"
+      - "SC-CR-SECRETS-DEFAULT"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/tied-config-report.test.mjs"
+      - "cd mcp-server && npx tsx --test src/tied-config-report.test.ts"
+  record_identity:
+    change_request_id: "REQ-TIED_CONFIG_REPORT"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-03"
+    title: "TIED configuration report CLI and MCP"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "include_secrets leaks into shared logs"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Read-only report; unit tests cover redaction"
+      evidence_references:
+        - "mcp-server/src/tied-config-report.test.ts"
+        - "tools/bootstrap/lib/tied-config-report.test.mjs"
+      falsification_questions:
+        - "Does default output ever contain JEV_API_KEY value?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Minimal depth operator diagnostics"
+      sub_adversarial_inquiry_pass: "not_applicable"

@@ -1895,6 +1895,11 @@ ARCH-TIED_COMMITTED_WORKING_GIT_HYGIENE:
       - "IMPL-TIED_COMMITTED_WORKING_GIT_HYGIENE"
     requirements:
       - "REQ-TIED_COMMITTED_WORKING_GIT_HYGIENE"
+ARCH-TIED_CONFIG_REPORT:
+  detail_file: "architecture-decisions/ARCH-TIED_CONFIG_REPORT.yaml"
+  name: "Config report architecture"
+  status: "Draft"
+  summary: "Single bootstrap buildTiedConfigReport; MCP and CLI are thin transports; no new config authority."
 ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING:
   detail_file: "architecture-decisions/ARCH-TIED_CONTEXT_ADAPTIVE_ENGINEERING.yaml"
   name: "Context-adaptive artifact model"
