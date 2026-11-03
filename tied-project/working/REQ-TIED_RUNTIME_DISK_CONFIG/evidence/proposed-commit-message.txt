@@ -1,9 +1,8 @@
-feat(mcp): disk introspection on tied_config_get_base_path [REQ-TIED_RUNTIME_DISK_CONFIG]
+test(e2e): operator-disk metrics alignment [REQ-TIED_RUNTIME_DISK_CONFIG]
 
-SC-RDC-MCP-INTROSPECTION: store_root, mcp_dist_path, config_sources via
-bootstrap resolver; env_TIED_STORE_ROOT echo retained.
+SC-RDC-E2E-METRICS-ALIGN: seed store operator yaml in bootstrap-and-load
+e2e; disk collect_metrics overrides install shell when defined.
 
-Tests: mcp-server/src/tied-runtime-introspection.test.ts (3/3).
+Tests: bootstrap-and-load.test.ts (6/6).
 
-Staging: mcp-server/src/tied-runtime-introspection.*, tools/index.ts, README,
-TIED LEAP (REQ/ARCH/IMPL), CITDP + plan + tracker + close-out evidence.
+Close-out: machine + process gates pass; envelope blocking 0.

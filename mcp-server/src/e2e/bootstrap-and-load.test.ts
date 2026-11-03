@@ -15,6 +15,7 @@ import {
   getRecord,
   resolveIndexPath,
 } from "../yaml-loader.js";
+import { withStoreOperatorCollectMetrics } from "./e2e-store-operator-seed.js";
 
 type BootstrapEntrypoint = "node" | "bash" | "tied";
 
@@ -636,9 +637,10 @@ describe("e2e: bootstrap and load", () => {
 
   });
 
-  it("initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]", () => {
-    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS]
-    // How: Merge tied-yaml + tied-yaml-optin on every pass; when TIED_MCP_COLLECT_METRICS is exactly 1, add metrics fields and derive the client label from an explicit override or the project basename; preserve foreign mcpServers and non-path env on brownfield refresh.
+  it("initializes opt-in MCP metrics fields with an override or project basename [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [REQ-TIED_RUNTIME_DISK_CONFIG] [SC-RDC-E2E-METRICS-ALIGN]", () => {
+    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [IMPL-MCP_USAGE_METRICS] [ARCH-MCP_USAGE_METRICS] [REQ-MCP_USAGE_METRICS] [REQ-TIED_RUNTIME_DISK_CONFIG] [SC-RDC-OPERATOR-DISK] [SC-RDC-E2E-METRICS-ALIGN]
+    // How: Seed store operator.mcp.collect_metrics on disk; merge tied-yaml + tied-yaml-optin; when collect is enabled (disk and/or shell fallback), add metrics fields and derive the client label from override or project basename.
+    withStoreOperatorCollectMetrics(repoRoot, true, () => {
     const runBootstrapMetrics = (target: string, metricsValue?: string, clientValue?: string) => {
       const env: NodeJS.ProcessEnv = { ...process.env };
       delete env.TIED_MCP_COLLECT_METRICS;
@@ -696,17 +698,41 @@ describe("e2e: bootstrap and load", () => {
       "explicit-client-optin",
     );
 
-    const nonOneTarget = path.join(tempDir, "non-one-client");
-    fs.mkdirSync(nonOneTarget);
-    const nonOneConfig = runBootstrapMetrics(nonOneTarget, "true");
-    assert.deepStrictEqual(nonOneConfig.mcpServers["tied-yaml"].env, linkedMcpEnv(nonOneTarget));
-    assert.deepStrictEqual(
-      nonOneConfig.mcpServers["tied-yaml-optin"].env,
-      linkedOptinEnv(nonOneTarget),
-    );
+    withStoreOperatorCollectMetrics(repoRoot, false, () => {
+      const nonOneTarget = path.join(tempDir, "non-one-client");
+      fs.mkdirSync(nonOneTarget);
+      const nonOneConfig = runBootstrapMetrics(nonOneTarget, "true");
+      assert.deepStrictEqual(nonOneConfig.mcpServers["tied-yaml"].env, linkedMcpEnv(nonOneTarget));
+      assert.deepStrictEqual(
+        nonOneConfig.mcpServers["tied-yaml-optin"].env,
+        linkedOptinEnv(nonOneTarget),
+      );
+    });
+    });
   });
 
-  it("refreshes layered vocabulary without overwriting client content [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [REQ-TIED_VOCABULARY_OWNERSHIP]", () => {
+  it("operator disk collect_metrics false ignores install shell TIED_MCP_COLLECT_METRICS=1 [REQ-TIED_RUNTIME_DISK_CONFIG] [SC-RDC-OPERATOR-DISK] [SC-RDC-E2E-METRICS-ALIGN]", () => {
+    // [REQ-TIED_RUNTIME_DISK_CONFIG] [SC-RDC-OPERATOR-DISK] [SC-RDC-E2E-METRICS-ALIGN]
+    // How: Template-equivalent store operator false wins over shell export during bootstrap MCP refresh.
+    withStoreOperatorCollectMetrics(repoRoot, false, () => {
+      const target = path.join(tempDir, "operator-disk-over-shell");
+      fs.mkdirSync(target);
+      runBootstrap(repoRoot, {
+        target,
+        entrypoint: "node",
+        env: { ...process.env, TIED_MCP_COLLECT_METRICS: "1" },
+      });
+      const cfg = JSON.parse(
+        fs.readFileSync(path.join(target, ".cursor", "mcp.json"), "utf8"),
+      ) as {
+        mcpServers: { "tied-yaml": { env: Record<string, string> } };
+      };
+      assert.strictEqual(cfg.mcpServers["tied-yaml"].env.TIED_MCP_COLLECT_METRICS, undefined);
+      assert.strictEqual(cfg.mcpServers["tied-yaml"].env.TIED_MCP_METRICS_CLIENT, undefined);
+    });
+  });
+
+  it("refreshes layered vocabulary without overwriting client content [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [REQ-TIED_VOCABULARY_OWNERSHIP] [REQ-TIED_RUNTIME_DISK_CONFIG] [SC-RDC-E2E-METRICS-ALIGN]", () => {
     // [IMPL-TIED_FILES] [IMPL-TIED_VOCABULARY_REFRESH] [ARCH-TIED_STRUCTURE] [ARCH-TIED_VOCABULARY_LAYERS] [REQ-TIED_SETUP] [REQ-TIED_VOCABULARY_OWNERSHIP]
     // How: Refresh the inherited methodology snapshot, prune stale methodology vocabulary, and preserve client-owned content.
     const projectDir = path.join(tempDir, "tied-project");
@@ -757,18 +783,20 @@ describe("e2e: bootstrap and load", () => {
     fs.writeFileSync(staleMethodologyFile, "stale: true\n");
     fs.writeFileSync(staleMethodologySidecar, "# stale inherited sidecar\n");
 
-    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
-    // How: Refresh inherited methodology and vocabulary while merging TIED MCP path settings and preserving foreign mcpServers keys.
-    const refreshOutput = runBootstrap(repoRoot, {
-      target: tempDir,
-      entrypoint: "node",
-      args: ["--refresh", "--merge-vocab"],
-      env: {
-        ...process.env,
-        TIED_MCP_COLLECT_METRICS: "1",
-        TIED_MCP_METRICS_CLIENT: "should-not-rewrite",
-      },
-    });
+    // [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP] [REQ-TIED_RUNTIME_DISK_CONFIG] [SC-RDC-OPERATOR-DISK]
+    // How: With operator collect_metrics on disk, refresh merges TIED MCP entries and honors install-time metrics client env for new tied-yaml rows.
+    const refreshOutput = withStoreOperatorCollectMetrics(repoRoot, true, () =>
+      runBootstrap(repoRoot, {
+        target: tempDir,
+        entrypoint: "node",
+        args: ["--refresh", "--merge-vocab"],
+        env: {
+          ...process.env,
+          TIED_MCP_COLLECT_METRICS: "1",
+          TIED_MCP_METRICS_CLIENT: "should-not-rewrite",
+        },
+      }),
+    );
     assert.match(
       refreshOutput,
       /Preserved \d+ existing methodology document\(s\); compare them with|Preserved existing client constitution example/,

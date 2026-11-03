@@ -2,9 +2,9 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
   description: "Operator global paths and non-secret toggles are install-managed on disk (.tied/store.yaml, operator.local.yaml, client MCP JSON)—not shell exports. Secrets stay in env."
   metadata:
     last_updated:
-      author: "build-plan-fixture-parity"
+      author: "close-out-e2e-pass4"
       date: "2026-11-03"
-      reason: "SC-RDC-FIXTURE-PARITY catalog + cross-runtime parity gate"
+      reason: "SC-RDC-E2E-METRICS-ALIGN bootstrap-and-load operator seeding"
   REQ-TIED_RUNTIME_DISK_CONFIG:
     category: "Infrastructure"
     description: "Operator global paths (store root, MCP dist, client corpus) are install-managed on disk via .tied/store.yaml, .tied/store.local.yaml, and client MCP JSON—not shell exports."
@@ -64,6 +64,7 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
         - "IMPL-TIED_RUNTIME_DISK_CONFIG"
       tests:
         - "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts"
+        - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
         - "tools/bootstrap/install-layers.integration.test.mjs"
         - "tools/bootstrap/lib/copy-managed.test.mjs"
         - "tools/bootstrap/lib/layout.test.mjs"
@@ -73,6 +74,9 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
         - "tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs"
         - "mcp-server/src/tied-runtime-introspection.test.ts"
   satisfaction_criteria_append:
+    - criterion: "bootstrap-and-load e2e seeds store operator yaml and asserts metrics env matches SC-RDC-OPERATOR-DISK precedence (disk over install shell when defined)."
+      id: "SC-RDC-E2E-METRICS-ALIGN"
+      metric: "cd mcp-server && npx tsx --test src/e2e/bootstrap-and-load.test.ts"
     - criterion: "Non-secret operator toggles resolve from store operator yaml and sync to mcp.json on refresh (collect_metrics, envelope_hooks, agentstream preflight); shell export ignored when disk defines the toggle."
       id: "SC-RDC-OPERATOR-DISK"
       metric: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-config.test.mjs tools/bootstrap/lib/layers/mcp-layer.test.mjs"

@@ -8,10 +8,10 @@
       "command": [
         "-lc",
         "bash",
-        "cd mcp-server && npm test -- --test-path-pattern=tied-config-get-base-path"
+        "cd mcp-server && npx tsx --test src/e2e/bootstrap-and-load.test.ts"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 34408,
+      "duration_ms": 2107,
       "exit_code": 0,
       "id": "citdp-evidence-1",
       "result": "passed"
@@ -24,19 +24,19 @@
       "command": [
         "-lc",
         "bash",
-        "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_config_get_base_path '{}'"
+        "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-config.test.mjs"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 842,
+      "duration_ms": 315,
       "exit_code": 0,
       "id": "citdp-evidence-2",
       "result": "passed"
     }
   ],
-  "commit": "c07706adfc6edfe683b10337d80809c54680f915",
+  "commit": "26fa357373a0d01b90c74212da24eb3efb2d623e",
   "covered_tokens": [
-    "ARCH-TIED_RUNTIME_DISK_CONFIG",
-    "IMPL-TIED_RUNTIME_DISK_CONFIG",
+    "IMPL-TIED_LAYERED_CLIENT_INSTALL",
+    "REQ-MCP_USAGE_METRICS",
     "REQ-TIED_RUNTIME_DISK_CONFIG"
   ],
   "environment": {
@@ -63,6 +63,6 @@
       "result": "pending"
     }
   ],
-  "run_id": "close-out-mcp-introspection-2026-11-03",
+  "run_id": "close-out-e2e-pass4-2026-11-03",
   "schema_version": "verification-evidence-manifest.v1"
 }
