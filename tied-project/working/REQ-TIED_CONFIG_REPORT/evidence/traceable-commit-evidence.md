@@ -42,7 +42,7 @@ Message: [proposed-commit-message.txt](./proposed-commit-message.txt)
 
 Verification: `node --test tools/bootstrap/build-commands-how.test.mjs`
 
-SHA: **`03729a1d`**
+SHA: **`43a61d61`**
 
 Message: [proposed-commit-message-alias.txt](./proposed-commit-message-alias.txt)
 
