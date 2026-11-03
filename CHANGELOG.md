@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Runtime disk config traceability ([REQ-TIED_RUNTIME_DISK_CONFIG], [ARCH-TIED_RUNTIME_DISK_CONFIG], [IMPL-TIED_RUNTIME_DISK_CONFIG])** — Project REQ/ARCH/IMPL stack; bootstrap `tied-runtime-config.mjs`, store `.tied/store.yaml`, layout/store-self refresh LEAP; e2e linked-stub exec follow-through in `bootstrap-and-load.test.ts` ([REQ-TIED_CLI_MCP_JSON_BASE_PATH] SC-CLI-E2E-*). Plan: [PLAN-refine-pass2.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-refine-pass2.md).
 
+### Added
+
+- **Runtime fixture parity ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-FIXTURE-PARITY**: shared catalog `tools/bootstrap/fixtures/tied-runtime/`, loader + cross-runtime parity gate; agentstream tests consume catalog via `tied-runtime-fixture-loader.d.mts`.
+
 ### Fixed
 
 - **Runtime disk config spine review ([REQ-TIED_RUNTIME_DISK_CONFIG])** — Install honors shell `TIED_MCP_COLLECT_METRICS=1` when operator/brownfield omit `collect_metrics`; tied-cli CJS tests seed disk-first `mcp.json`; linked vocab index validates `tied-project/vocab`; stale-layout lint allows store runtime paths under `.tied/`. Evidence: [spine-review-2026-11-03.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/spine-review-2026-11-03.md).
