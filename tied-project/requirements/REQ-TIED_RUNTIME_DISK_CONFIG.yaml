@@ -1,4 +1,10 @@
 REQ-TIED_RUNTIME_DISK_CONFIG:
+  description: "Operator global paths and non-secret toggles are install-managed on disk (.tied/store.yaml, operator.local.yaml, client MCP JSON)—not shell exports. Secrets stay in env."
+  metadata:
+    last_updated:
+      author: "add-feature-pass3"
+      date: "2026-11-03"
+      reason: "SC-RDC-OPERATOR-DISK slice 1"
   REQ-TIED_RUNTIME_DISK_CONFIG:
     category: "Infrastructure"
     description: "Operator global paths (store root, MCP dist, client corpus) are install-managed on disk via .tied/store.yaml, .tied/store.local.yaml, and client MCP JSON—not shell exports."
@@ -61,4 +67,9 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
         - "tools/bootstrap/lib/copy-managed.test.mjs"
         - "tools/bootstrap/lib/layout.test.mjs"
         - "tools/bootstrap/lib/mcp-layer.test.mjs"
+        - "tools/bootstrap/lib/mcp-config.test.mjs"
         - "tools/bootstrap/lib/tied-runtime-config.test.mjs"
+  satisfaction_criteria_append:
+    - criterion: "Non-secret operator toggles resolve from store operator yaml and sync to mcp.json on refresh (collect_metrics, envelope_hooks, agentstream preflight); shell export ignored when disk defines the toggle."
+      id: "SC-RDC-OPERATOR-DISK"
+      metric: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-config.test.mjs tools/bootstrap/lib/layers/mcp-layer.test.mjs"

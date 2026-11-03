@@ -73,6 +73,30 @@ describe("resolveBootstrapMetricsClient [REQ-TIED_SETUP] [REQ-MCP_USAGE_METRICS]
 });
 
 describe("refreshTiedMcpServersJson [REQ-MCP_USAGE_METRICS]", () => {
+  it("writes operator toggle env for envelope and agentstream preflight", () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-operator-env-"));
+    const mcpJsonPath = path.join(tmp, ".cursor", "mcp.json");
+    const tiedBase = path.join(tmp, "tied-project");
+    fs.mkdirSync(tiedBase, { recursive: true });
+    const dist = path.join(TIED_REPO_ROOT, "mcp-server", "dist", "index.js");
+    refreshTiedMcpServersJson({
+      mcpJsonPath,
+      tiedMcpIndexJs: dist,
+      tiedBasePath: tiedBase,
+      collectMetrics: false,
+      projectBasename: "op-env",
+      operatorEnv: {
+        TIED_ENVELOPE_HOOKS: "1",
+        AGENTSTREAM_TIED_MCP_PREFLIGHT: "1",
+      },
+      operatorEnvRemove: ["AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT"],
+    });
+    const env = JSON.parse(fs.readFileSync(mcpJsonPath, "utf8")).mcpServers["tied-yaml"].env;
+    assert.equal(env.TIED_ENVELOPE_HOOKS, "1");
+    assert.equal(env.AGENTSTREAM_TIED_MCP_PREFLIGHT, "1");
+    assert.equal(env.AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT, undefined);
+  });
+
   it("writes core and opt-in entries with profiles and metrics suffix", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-dual-"));
     const mcpJsonPath = path.join(tmp, ".cursor", "mcp.json");

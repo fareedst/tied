@@ -21,6 +21,19 @@ export const RUNTIME_DIAGNOSTIC_PREFIX = "DIAGNOSTIC: TIED_RUNTIME_CONFIG";
 export const RUNTIME_DIAGNOSTIC_MISSING = `${RUNTIME_DIAGNOSTIC_PREFIX}_MISSING`;
 export const STORE_YAML_REL = ".tied/store.yaml";
 export const STORE_LOCAL_YAML_REL = ".tied/store.local.yaml";
+export const OPERATOR_LOCAL_YAML_REL = ".tied/operator.local.yaml";
+
+/** @type {readonly string[]} Catalogued operator toggle env keys (non-secret); disk wins over shell. */
+export const OPERATOR_TOGGLE_ENV_KEYS = [
+  "TIED_MCP_COLLECT_METRICS",
+  "TIED_ENVELOPE_HOOKS",
+  "AGENTSTREAM_TIED_MCP_PREFLIGHT",
+  "AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT",
+  "AGENTSTREAM_CHECKLIST_VAR_STRICT",
+  "AGENTSTREAM_JEV_HARNESS",
+  "TIED_JEV_DECISION_PROVIDER",
+  "TIED_JEV_LOCAL_BRIDGE",
+];
 
 const DEFAULT_MCP_DIST_REL = "mcp-server/dist/index.js";
 
@@ -127,6 +140,186 @@ export function readTiedYamlServerEntryFromProject(projectRoot) {
  * @param {string} storeRoot
  * @returns {Record<string, unknown>}
  */
+/**
+ * @param {unknown} base
+ * @param {unknown} overlay
+ */
+function deepMergeRecords(base, overlay) {
+  if (!overlay || typeof overlay !== "object" || Array.isArray(overlay)) {
+    return base;
+  }
+  if (!base || typeof base !== "object" || Array.isArray(base)) {
+    return { .../** @type {Record<string, unknown>} */ (overlay) };
+  }
+  /** @type {Record<string, unknown>} */
+  const out = { .../** @type {Record<string, unknown>} */ (base) };
+  for (const [key, value] of Object.entries(/** @type {Record<string, unknown>} */ (overlay))) {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      const prev = out[key];
+      out[key] =
+        prev && typeof prev === "object" && !Array.isArray(prev)
+          ? deepMergeRecords(prev, value)
+          : { .../** @type {Record<string, unknown>} */ (value) };
+    } else {
+      out[key] = value;
+    }
+  }
+  return out;
+}
+
+/**
+ * @param {string} storeRoot
+ * @returns {Record<string, unknown>}
+ */
+export function loadMergedOperatorConfig(storeRoot) {
+  const root = path.resolve(storeRoot);
+  const tiedDir = path.join(root, ".tied");
+  const doc = loadMergedStoreYaml(root);
+  /** @type {Record<string, unknown>} */
+  let operator =
+    doc.operator && typeof doc.operator === "object" && !Array.isArray(doc.operator)
+      ? { .../** @type {Record<string, unknown>} */ (doc.operator) }
+      : {};
+  const localOpPath = path.join(tiedDir, "operator.local.yaml");
+  if (fs.existsSync(localOpPath)) {
+    const localDoc = yaml.load(fs.readFileSync(localOpPath, "utf8"));
+    if (localDoc && typeof localDoc === "object" && !Array.isArray(localDoc)) {
+      operator = /** @type {Record<string, unknown>} */ (
+        deepMergeRecords(operator, localDoc)
+      );
+    }
+  }
+  return operator;
+}
+
+/**
+ * @param {Record<string, unknown>} operator
+ * @param {string} section
+ * @param {string} field
+ * @returns {boolean | null}
+ */
+export function readOperatorBooleanField(operator, section, field) {
+  const sec = operator[section];
+  if (!sec || typeof sec !== "object" || Array.isArray(sec)) {
+    return null;
+  }
+  const v = /** @type {Record<string, unknown>} */ (sec)[field];
+  if (v === true || v === false) {
+    return v;
+  }
+  return null;
+}
+
+/** Slice 2+: bool operator fields synced to mcp.json env on refresh. */
+export const OPERATOR_BOOL_MCP_FIELDS = [
+  { section: "mcp", field: "collect_metrics", envKey: "TIED_MCP_COLLECT_METRICS" },
+  { section: "mcp", field: "envelope_hooks", envKey: "TIED_ENVELOPE_HOOKS" },
+  { section: "agentstream", field: "tied_mcp_preflight", envKey: "AGENTSTREAM_TIED_MCP_PREFLIGHT" },
+  {
+    section: "agentstream",
+    field: "skip_tied_mcp_preflight",
+    envKey: "AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT",
+  },
+  {
+    section: "agentstream",
+    field: "checklist_var_strict",
+    envKey: "AGENTSTREAM_CHECKLIST_VAR_STRICT",
+  },
+  { section: "jev", field: "harness", envKey: "AGENTSTREAM_JEV_HARNESS" },
+];
+
+/** Non-secret string operator fields (slice 3 JEV). */
+export const OPERATOR_STRING_MCP_FIELDS = [
+  { section: "jev", field: "decision_provider", envKey: "TIED_JEV_DECISION_PROVIDER" },
+  { section: "jev", field: "local_bridge", envKey: "TIED_JEV_LOCAL_BRIDGE" },
+];
+
+/**
+ * @param {Record<string, unknown>} operator
+ * @param {string} section
+ * @param {string} field
+ * @returns {string | null}
+ */
+export function readOperatorStringField(operator, section, field) {
+  const sec = operator[section];
+  if (!sec || typeof sec !== "object" || Array.isArray(sec)) {
+    return null;
+  }
+  const v = /** @type {Record<string, unknown>} */ (sec)[field];
+  if (typeof v === "string") {
+    const trimmed = v.trim();
+    return trimmed ? trimmed : "";
+  }
+  return null;
+}
+
+export function operatorCollectMetricsFromConfig(operator) {
+  return readOperatorBooleanField(operator, "mcp", "collect_metrics");
+}
+
+/**
+ * @param {Record<string, unknown>} operator
+ * @param {Record<string, string>} [brownfieldEnv]
+ */
+export function mapOperatorConfigToMcpEnv(operator, brownfieldEnv = {}) {
+  /** @type {Record<string, string>} */
+  const set = {};
+  /** @type {string[]} */
+  const remove = [];
+  for (const { section, field, envKey } of OPERATOR_BOOL_MCP_FIELDS) {
+    const v = readOperatorBooleanField(operator, section, field);
+    if (v === true) {
+      set[envKey] = "1";
+    } else if (v === false) {
+      remove.push(envKey);
+    } else if (brownfieldEnv[envKey]) {
+      set[envKey] = brownfieldEnv[envKey];
+    }
+  }
+  for (const { section, field, envKey } of OPERATOR_STRING_MCP_FIELDS) {
+    const v = readOperatorStringField(operator, section, field);
+    if (v === null) {
+      if (brownfieldEnv[envKey]) {
+        set[envKey] = brownfieldEnv[envKey];
+      }
+    } else if (v === "") {
+      remove.push(envKey);
+    } else {
+      set[envKey] = v;
+    }
+  }
+  return { set, remove };
+}
+
+/**
+ * Disk-first operator flags for tied-install MCP refresh.
+ * @param {{ storeRoot: string; projectRoot?: string; processEnv?: NodeJS.ProcessEnv }} params
+ */
+export function resolveOperatorFlagsForInstall(params) {
+  const storeRoot = path.resolve(params.storeRoot);
+  const projectRoot = params.projectRoot ? path.resolve(params.projectRoot) : storeRoot;
+  const operator = loadMergedOperatorConfig(storeRoot);
+  const brownfield = readTiedYamlServerEntryFromProject(projectRoot)?.env ?? {};
+  const { set: operatorEnv, remove: operatorEnvRemove } = mapOperatorConfigToMcpEnv(
+    operator,
+    brownfield,
+  );
+  let collectMetrics = operatorCollectMetricsFromConfig(operator);
+  if (collectMetrics === null) {
+    collectMetrics = brownfield.TIED_MCP_COLLECT_METRICS === "1";
+  }
+  if (collectMetrics === null || collectMetrics === undefined) {
+    collectMetrics = false;
+  }
+  return {
+    collectMetrics,
+    operator,
+    operatorEnv,
+    operatorEnvRemove,
+    sources: [`store:${STORE_YAML_REL}`, OPERATOR_LOCAL_YAML_REL],
+  };
+}
+
 export function loadMergedStoreYaml(storeRoot) {
   const root = path.resolve(storeRoot);
   const tiedDir = path.join(root, ".tied");

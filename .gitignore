@@ -1,5 +1,6 @@
 .cursor/mcp.json
 .tied/store.local.yaml
+.tied/operator.local.yaml
 .cursor/debug-*.log
 .cursor/test-all-build-plan.log
 .cursor/skills/tied-yaml/

@@ -90,6 +90,72 @@ procedure RESOLVE_RUNTIME_FOR_CWD(cwd, processEnv, opts):
   IF storeRoot THEN RETURN RESOLVE_RUNTIME_FROM_STORE_YAML(storeRoot, opts)
   THROW RUNTIME_DIAGNOSTIC_MISSING
 
+## LOAD_MERGED_OPERATOR_CONFIG
+# [IMPL-TIED_RUNTIME_DISK_CONFIG] [ARCH-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG]
+# How: Merge store.yaml operator section with gitignored operator.local.yaml overlay.
+
+procedure LOAD_MERGED_OPERATOR_CONFIG(storeRoot):
+  Contract:
+    INPUT: storeRoot
+    OUTPUT: operator record
+    PRE: storeRoot path
+    POST: local overlay keys override base operator map
+    EFFECTS: read .tied/store.yaml merge and .tied/operator.local.yaml
+    TERMINATION: total
+  doc := LOAD_MERGED_STORE_YAML(storeRoot)
+  operator := doc.operator or empty map
+  IF operator.local.yaml exists THEN deepMerge operator with local file
+  RETURN operator
+
+## RESOLVE_OPERATOR_FLAGS_FOR_INSTALL
+# [IMPL-TIED_RUNTIME_DISK_CONFIG] [ARCH-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG]
+# How: Disk-first operator toggles for installMcpLayer; shell export ignored for catalogued keys when disk defines boolean.
+
+procedure RESOLVE_OPERATOR_FLAGS_FOR_INSTALL(storeRoot, projectRoot, processEnv):
+  Contract:
+    INPUT: storeRoot; optional projectRoot; processEnv (not authoritative for defined disk booleans)
+    OUTPUT: flags including collectMetrics
+    PRE: storeRoot resolvable
+    POST: collectMetrics from operator.mcp.collect_metrics when boolean; else brownfield mcp.json; else false
+    EFFECTS: read store operator yaml only
+    TERMINATION: total
+  operator := LOAD_MERGED_OPERATOR_CONFIG(storeRoot)
+  IF operator.mcp.collect_metrics is boolean THEN RETURN that value
+  ELSE IF client mcp.json has TIED_MCP_COLLECT_METRICS=1 THEN RETURN true
+  ELSE RETURN false
+
+## MAP_OPERATOR_CONFIG_TO_MCP_ENV
+# [IMPL-TIED_RUNTIME_DISK_CONFIG] [ARCH-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG]
+# How: Map store operator booleans to mcp.json env keys; brownfield mcp.json when store omits key.
+
+procedure MAP_OPERATOR_CONFIG_TO_MCP_ENV(operator, brownfieldEnv):
+  Contract:
+    INPUT: merged operator map; optional existing mcp env
+    OUTPUT: set env keys and remove list for refresh
+    PRE: operator is record
+    POST: disk boolean true -> env "1"; false -> remove key; omit -> preserve brownfield when present
+    EFFECTS: none
+    TERMINATION: total
+  FOR each catalogued bool field in operator.mcp, operator.agentstream, operator.jev.harness
+    APPLY disk-first mapping to set/remove lists
+  FOR each catalogued string field in operator.jev (decision_provider, local_bridge)
+    IF non-empty string on disk THEN set env; IF empty string THEN remove; ELSE brownfield mcp.json
+  RETURN set and remove
+
+## APPLY_OPERATOR_TOGGLE_ENV_TO_MCP_ENTRY
+# [IMPL-TIED_RUNTIME_DISK_CONFIG] [ARCH-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG] [IMPL-TIED_FILES]
+# How: refreshTiedMcpServersJson merges operator set/remove after path refresh.
+
+procedure APPLY_OPERATOR_TOGGLE_ENV_TO_MCP_ENTRY(entry, operatorEnv, operatorEnvRemove):
+  Contract:
+    INPUT: mcp server entry; operator env set; remove keys
+    OUTPUT: entry with merged env
+    PRE: entry optional
+    POST: remove keys deleted; set keys applied on tied-yaml and tied-yaml-optin
+    EFFECTS: none
+    TERMINATION: total
+  MERGE env on entry
+
 ## INSTALL_MCP_LAYER_RUNTIME_REFRESH
 # [IMPL-TIED_RUNTIME_DISK_CONFIG] [ARCH-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG] [IMPL-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
 # How: installMcpLayer delegates store-side refresh to REFRESH_STORE_RUNTIME_CONFIG and client mcp.json env.

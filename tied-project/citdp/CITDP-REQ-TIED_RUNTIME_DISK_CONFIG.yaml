@@ -74,6 +74,20 @@ CITDP-REQ-TIED_RUNTIME_DISK_CONFIG:
         notes: "SC-RDC-CONSUMERS harness coverage."
     unchanged_behavior:
       - "Feature/session env toggles remain env-OK; full non-secret on-disk migration queued in pending-full-runtime-disk-handoff.md"
+  pass3_extension:
+    change_definition:
+      current_behavior: "Non-secret operator toggles (metrics, envelope hooks, agentstream preflight, JEV harness) are set via shell export or ad hoc mcp.json edits; install layer reads TIED_MCP_COLLECT_METRICS from process.env during refresh."
+      desired_behavior: "Operator toggles live under store yaml operator section and sync to client mcp.json on refresh; shell export ignored for catalogued keys when disk defines them; REQ SC-RDC-OPERATOR-DISK."
+    linked_plan: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md"
+    refined_at: "2026-11-03"
+    success_criteria_add:
+      - "SC-RDC-OPERATOR-DISK"
+    test_strategy_add:
+      - command: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-layer.test.mjs"
+        notes: "SC-RDC-OPERATOR-DISK bootstrap disk-first operator flags."
+    unchanged_behavior:
+      - "Secrets remain env-only; global paths unchanged from pass 2"
+      - "MCP introspection and TS/JS fixture parity still deferred"
   record_identity:
     change_request_id: "REQ-TIED_RUNTIME_DISK_CONFIG"
     gate_policy: "advisory"

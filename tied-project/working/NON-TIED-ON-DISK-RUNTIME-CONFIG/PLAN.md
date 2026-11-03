@@ -26,7 +26,8 @@
 |-------|----------|--------|
 | **Global runtime paths** | store root, `mcp-server/dist/index.js`, `tied-project/`, linked `tied-bundle/` | **On-disk only**; **ignore** shell `TIED_MCP_BIN`, `TIED_REPO_ROOT`, `TIED_STORE_ROOT` |
 | **Corpus path (existing)** | `TIED_CLIENT_PROJECT_PATH`, legacy `TIED_BASE_PATH` | Already **mcp.json-only** for `tied-cli` ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)) |
-| **Feature / session toggles** | `TIED_MCP_COLLECT_METRICS`, `TIED_MCP_DIAGNOSTICS`, `AGENTSTREAM_*`, `TIED_CLI_IMPL_ESSENCE_*` | **Env OK** |
+| **Operator toggles (non-secret)** | `TIED_MCP_COLLECT_METRICS`, `TIED_ENVELOPE_HOOKS`, `AGENTSTREAM_*` (catalogued), `TIED_JEV_*` (non-secret) | **On-disk** via `.tied/store.yaml` / `operator.local.yaml` + mcp.json refresh ([REQ-TIED_RUNTIME_DISK_CONFIG pass 3](../REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md)); spawn injects env |
+| **Secrets / CLI session** | `JEV_API_KEY`, `TIED_CLI_IMPL_ESSENCE_*`, ad hoc diagnostics | **Env OK** |
 
 ---
 

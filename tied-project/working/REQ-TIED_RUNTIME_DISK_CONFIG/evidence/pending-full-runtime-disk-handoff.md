@@ -2,8 +2,9 @@
 
 **handoff_kind:** pending_queue  
 **Date:** 2026-11-03  
-**blocked_by:** [PLAN-rdc-env-cleanup-pass2.md](../PLAN-rdc-env-cleanup-pass2.md) (RDC pass 2 — global paths only)  
-**request_token:** TBD (likely new REQ or RDC pass 3; not started)
+**blocked_by:** none (RDC pass 2 closed **`eb9a0e17`** + **`8a16acec`**)  
+**request_token:** REQ-TIED_RUNTIME_DISK_CONFIG (pass 3 track)  
+**status:** **closed** 2026-11-03 — pass 3 close-out ([close-out-handoff.md](./close-out-handoff.md))
 
 ## When to pick up
 

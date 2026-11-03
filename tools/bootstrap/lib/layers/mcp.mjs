@@ -15,7 +15,7 @@ import fs from "node:fs";
 import { resolveMethodologyBundlePath } from "./store.mjs";
 import { resolveTiedLayout } from "../layout.mjs";
 import { ENV_CLIENT_BUNDLE_PATH } from "../tied-path-env.mjs";
-import { refreshStoreRuntimeConfig } from "../tied-runtime-config.mjs";
+import { refreshStoreRuntimeConfig, resolveOperatorFlagsForInstall } from "../tied-runtime-config.mjs";
 import { fileURLToPath } from "node:url";
 
 const _MCP_LAYER_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -37,7 +37,16 @@ export function installMcpLayer(projectRoot, options) {
   assertMcpPrerequisite(options.storeRoot);
   const mcpServerDist = path.join(options.storeRoot, "mcp-server", "dist", "index.js");
   const tiedBasePath = resolveTiedLayout(projectRoot).tiedDir;
-  const collectMetrics = env.TIED_MCP_COLLECT_METRICS === "1";
+  const operatorFlags = resolveOperatorFlagsForInstall({
+    storeRoot: options.storeRoot,
+    projectRoot,
+    processEnv: env,
+  });
+  const {
+    collectMetrics,
+    operatorEnv,
+    operatorEnvRemove,
+  } = operatorFlags;
   const projectBasename = path.basename(projectRoot);
   const metricsClient = resolveBootstrapMetricsClient(projectRoot, env);
 
@@ -62,6 +71,8 @@ export function installMcpLayer(projectRoot, options) {
     metricsClient,
     projectBasename,
     extraEnv,
+    operatorEnv,
+    operatorEnvRemove,
   };
 
   const harness = options.harness ?? "both";

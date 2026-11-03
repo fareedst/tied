@@ -1,4 +1,4 @@
-# close-out handoff — REQ-TIED_RUNTIME_DISK_CONFIG pass 2
+# close-out handoff — REQ-TIED_RUNTIME_DISK_CONFIG pass 3
 
 **Date:** 2026-11-03  
 **depth_tier:** minimal / advisory  
@@ -7,22 +7,30 @@
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | `merged_decision.allowed: true`; envelope blocking gaps 0 |
-| Process contract | Pass 2 implemented **`eb9a0e17`**; CITDP persisted; pending full-runtime handoff queued |
-| Adherence ledger | reconcile via close-out runner (`--reconcile`) |
+| **Machine close-out** | **pass** — `merged_decision.allowed: true`; envelope `blocking_gap_count: 0` |
+| **Process contract** | **pass** — pass 3 implement complete; manifest refreshed; CITDP synced to `tied-project/citdp/` |
+| **Adherence ledger** | **pass (B)** — `--reconcile` `process_grade.band: B`; advisory `evidence_stale` on prior pass-2 gate receipts (expected after tracker/CITDP hash change) |
 
-## Commits
+### Detail
 
-| SHA | Description |
-| --- | --- |
-| `eded7a37` | Pass 1 RDC traceability + e2e follow-through |
-| `eb9a0e17` | Pass 2 global path env cleanup |
-| (close-out) | CITDP + CHANGELOG + gate evidence — see post-commit `git log -1` |
+- **Machine close-out:** verification + `close_out` via `run-close-out-gates.mjs --envelope-blocking --sync-dispositions --reconcile`; receipt [close_out-2026-11-03T17-33-09-510Z.json](../../../../tied-bundle/working/REQ-TIED_RUNTIME_DISK_CONFIG/gates/close_out-2026-11-03T17-33-09-510Z.json); summary [closeout-run-close-out-gates-pass3.json](./closeout-run-close-out-gates-pass3.json)
+- **Process contract:** dual-write sync; [verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json); envelope [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json)
+- **Adherence ledger:** reconcile read-only; thin-ledger clear for pass-3 slugs
 
-## Next for handoff manager
+## Delivered (pass 3)
 
-[pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) — full on-disk config except secrets.
+- **SC-RDC-OPERATOR-DISK** — store `operator:` + `operator.local.yaml` → mcp.json refresh (metrics, envelope, agentstream, JEV non-secret)
+- Plan: [PLAN-rdc-full-runtime-disk-pass3.md](../PLAN-rdc-full-runtime-disk-pass3.md)
+- [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) — **closed**
 
-## Gate receipt
+## Traceable commit
 
-`tied-bundle/working/REQ-TIED_RUNTIME_DISK_CONFIG/gates/close_out-2026-11-03T17-12-12-371Z.json`
+**Deferred** — gates green; staging map in [proposed-commit-message.txt](./proposed-commit-message.txt). Run traceable commit when sponsor asks (uncommitted implementation on disk).
+
+## Upstream feedback
+
+N/A
+
+## Hygiene
+
+[git-hygiene-receipt-2026-11-03-pass3.md](./git-hygiene-receipt-2026-11-03-pass3.md) (`apply: false`)

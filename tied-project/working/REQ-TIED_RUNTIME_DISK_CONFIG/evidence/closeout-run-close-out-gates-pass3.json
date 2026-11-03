@@ -1,0 +1,20 @@
+{
+  "run_id": "close-out-rdc-pass3-20261103",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "path": "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  },
+  "gate_receipt_persist": {
+    "path": "tied-bundle/working/REQ-TIED_RUNTIME_DISK_CONFIG/gates/close_out-2026-11-03T17-33-09-510Z.json"
+  },
+  "reconcile": {
+    "process_grade": { "band": "B", "score": 88, "gap_codes": ["evidence_stale"] }
+  }
+}

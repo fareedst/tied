@@ -14,6 +14,7 @@ import {
   stripLegacyClientPathEnv,
 } from "./tied-path-env.mjs";
 import { canonicalizeMcpJsonDocument } from "./mcp-json-canonical.mjs";
+import { resolveOperatorFlagsForInstall } from "./tied-runtime-config.mjs";
 
 function projectTiedBasePath(projectRoot) {
   const tiedDir = resolveTiedLayout(projectRoot).tiedDir;
@@ -52,6 +53,7 @@ export function resolveBootstrapMetricsClient(projectRoot, env = process.env) {
  * @param {string} [params.harnessLabel]
  * @param {"core"|"optin"} params.toolProfile
  * @param {Record<string, string>} [params.extraEnv]
+ * @param {Record<string, string>} [params.operatorToggleEnv]
  */
 export function buildTiedMcpServerEntry({
   tiedMcpIndexJs,
@@ -62,6 +64,7 @@ export function buildTiedMcpServerEntry({
   harnessLabel,
   toolProfile,
   extraEnv,
+  operatorToggleEnv,
 }) {
   /** @type {Record<string, string>} */
   const env = {
@@ -75,6 +78,13 @@ export function buildTiedMcpServerEntry({
   if (collectMetrics) {
     env.TIED_MCP_COLLECT_METRICS = "1";
     env.TIED_MCP_METRICS_CLIENT = metricsClient || projectBasename || "tied-client";
+  }
+  if (operatorToggleEnv) {
+    for (const [key, value] of Object.entries(operatorToggleEnv)) {
+      if (value) {
+        env[key] = value;
+      }
+    }
   }
   return {
     type: "stdio",
@@ -158,6 +168,33 @@ export function applyTiedMcpPathRefresh(existing, pathPatch) {
 }
 
 /**
+ * Apply catalogued operator toggle env on refresh (disk sync).
+ * @param {Record<string, unknown>|null|undefined} entry
+ * @param {Record<string, string>} operatorEnv
+ * @param {string[]} operatorEnvRemove
+ */
+export function applyOperatorToggleEnvToMcpEntry(entry, operatorEnv, operatorEnvRemove) {
+  if (!entry || typeof entry !== "object") {
+    return entry;
+  }
+  const existingEnv =
+    entry.env && typeof entry.env === "object" && !Array.isArray(entry.env)
+      ? /** @type {Record<string, string>} */ ({ ...entry.env })
+      : {};
+  for (const key of operatorEnvRemove) {
+    delete existingEnv[key];
+  }
+  for (const [key, value] of Object.entries(operatorEnv)) {
+    if (value) {
+      existingEnv[key] = value;
+    } else {
+      delete existingEnv[key];
+    }
+  }
+  return { ...entry, env: stripLegacyClientPathEnv(existingEnv) };
+}
+
+/**
  * Merge or create both tied-yaml (core) and tied-yaml-optin entries; preserve foreign mcpServers keys.
  * @param {object} params
  * @param {string} params.mcpJsonPath
@@ -168,6 +205,8 @@ export function applyTiedMcpPathRefresh(existing, pathPatch) {
  * @param {string} [params.projectBasename]
  * @param {string} [params.harnessLabel]
  * @param {Record<string, string>} [params.extraEnv]
+ * @param {Record<string, string>} [params.operatorEnv]
+ * @param {string[]} [params.operatorEnvRemove]
  */
 export function refreshTiedMcpServersJson({
   mcpJsonPath,
@@ -178,7 +217,11 @@ export function refreshTiedMcpServersJson({
   projectBasename,
   harnessLabel,
   extraEnv,
+  operatorEnv,
+  operatorEnvRemove,
 }) {
+  const toggleEnv = operatorEnv ?? {};
+  const toggleRemove = operatorEnvRemove ?? [];
   const baseMetrics = metricsClient || projectBasename;
   const coreEntry = buildTiedMcpServerEntry({
     tiedMcpIndexJs,
@@ -189,6 +232,7 @@ export function refreshTiedMcpServersJson({
     harnessLabel,
     toolProfile: "core",
     extraEnv,
+    operatorToggleEnv: toggleEnv,
   });
   const optinMetrics =
     collectMetrics && baseMetrics ? `${baseMetrics}-optin` : baseMetrics;
@@ -201,6 +245,7 @@ export function refreshTiedMcpServersJson({
     harnessLabel,
     toolProfile: "optin",
     extraEnv,
+    operatorToggleEnv: toggleEnv,
   });
   const pathPatch = buildTiedMcpPathPatch({ tiedMcpIndexJs, tiedBasePath, extraEnv });
 
@@ -217,10 +262,16 @@ export function refreshTiedMcpServersJson({
   } else {
     cfg = { mcpServers: {} };
   }
-  cfg.mcpServers["tied-yaml"] =
-    applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml"], pathPatch) ?? coreEntry;
-  cfg.mcpServers["tied-yaml-optin"] =
-    applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml-optin"], pathPatch) ?? optinEntry;
+  cfg.mcpServers["tied-yaml"] = applyOperatorToggleEnvToMcpEntry(
+    applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml"], pathPatch) ?? coreEntry,
+    toggleEnv,
+    toggleRemove,
+  );
+  cfg.mcpServers["tied-yaml-optin"] = applyOperatorToggleEnvToMcpEntry(
+    applyTiedMcpPathRefresh(cfg.mcpServers["tied-yaml-optin"], pathPatch) ?? optinEntry,
+    toggleEnv,
+    toggleRemove,
+  );
   cfg = canonicalizeMcpJsonDocument(cfg);
   fs.mkdirSync(path.dirname(mcpJsonPath), { recursive: true });
   fs.writeFileSync(mcpJsonPath, `${JSON.stringify(cfg, null, 2)}\n`, "utf8");
@@ -236,15 +287,21 @@ export function initializeTiedMcpConfig(projectRoot, tiedRepoRoot, env = process
   assertMcpPrerequisite(tiedRepoRoot);
   const mcpServerDist = path.join(tiedRepoRoot, "mcp-server", "dist", "index.js");
   const existed = fs.existsSync(mcpJson);
-  const collectMetrics = env.TIED_MCP_COLLECT_METRICS === "1";
   const projectBasename = path.basename(projectRoot);
+  const operatorFlags = resolveOperatorFlagsForInstall({
+    storeRoot: tiedRepoRoot,
+    projectRoot,
+    processEnv: env,
+  });
   refreshTiedMcpServersJson({
     mcpJsonPath: mcpJson,
     tiedMcpIndexJs: mcpServerDist,
     tiedBasePath: projectTiedBasePath(projectRoot),
-    collectMetrics,
+    collectMetrics: operatorFlags.collectMetrics,
     metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
     projectBasename,
+    operatorEnv: operatorFlags.operatorEnv,
+    operatorEnvRemove: operatorFlags.operatorEnvRemove,
   });
   if (existed) {
     sayOk(
@@ -269,14 +326,21 @@ export function initializeClaudeMcpConfig(projectRoot, tiedRepoRoot, options = {
   assertMcpPrerequisite(tiedRepoRoot);
   const mcpServerDist = path.join(tiedRepoRoot, "mcp-server", "dist", "index.js");
   const projectBasename = path.basename(projectRoot);
+  const operatorFlags = resolveOperatorFlagsForInstall({
+    storeRoot: tiedRepoRoot,
+    projectRoot,
+    processEnv: env,
+  });
   const refreshArgs = {
     mcpJsonPath: mcpJson,
     tiedMcpIndexJs: mcpServerDist,
     tiedBasePath: projectTiedBasePath(projectRoot),
-    collectMetrics: env.TIED_MCP_COLLECT_METRICS === "1",
+    collectMetrics: operatorFlags.collectMetrics,
     metricsClient: resolveBootstrapMetricsClient(projectRoot, env),
     projectBasename,
     harnessLabel,
+    operatorEnv: operatorFlags.operatorEnv,
+    operatorEnvRemove: operatorFlags.operatorEnvRemove,
   };
 
   if (fs.existsSync(mcpJson)) {

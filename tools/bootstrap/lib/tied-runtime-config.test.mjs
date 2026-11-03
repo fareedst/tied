@@ -7,12 +7,17 @@ import { jsonSafeAbsolute } from "./paths.mjs";
 import { ENV_CLIENT_BUNDLE_PATH, ENV_CLIENT_PROJECT_PATH } from "./tied-path-env.mjs";
 import {
   deriveStoreRootFromMcpDist,
+  loadMergedOperatorConfig,
+  mapOperatorConfigToMcpEnv,
+  operatorCollectMetricsFromConfig,
   pathsSameResolved,
   refreshStoreRuntimeConfig,
+  resolveOperatorFlagsForInstall,
   resolveTiedRuntimeConfig,
   RUNTIME_DIAGNOSTIC_PREFIX,
   STORE_YAML_REL,
 } from "./tied-runtime-config.mjs";
+import yaml from "js-yaml";
 
 function seedTiedProject(tiedDir) {
   fs.mkdirSync(tiedDir, { recursive: true });
@@ -182,5 +187,95 @@ describe("tied-runtime-config", () => {
     refreshStoreRuntimeConfig(store, { mcpDistPath: dist });
     assert.ok(fs.existsSync(path.join(store, STORE_YAML_REL)));
     assert.ok(fs.existsSync(path.join(store, ".tied", "store.local.yaml")));
+  });
+
+  it("resolveOperatorFlagsForInstall uses store operator.collect_metrics and ignores shell export", () => {
+    const store = fs.mkdtempSync(path.join(os.tmpdir(), "rt-op-store-"));
+    const tiedDir = path.join(store, ".tied");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(tiedDir, "store.yaml"),
+      yaml.dump({
+        schema: "tied-store-config.v1",
+        operator: { mcp: { collect_metrics: false } },
+      }),
+    );
+    const flags = resolveOperatorFlagsForInstall({
+      storeRoot: store,
+      processEnv: { TIED_MCP_COLLECT_METRICS: "1" },
+    });
+    assert.equal(flags.collectMetrics, false);
+  });
+
+  it("resolveOperatorFlagsForInstall honors operator.local.yaml overlay", () => {
+    const store = fs.mkdtempSync(path.join(os.tmpdir(), "rt-op-local-"));
+    const tiedDir = path.join(store, ".tied");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(tiedDir, "store.yaml"),
+      yaml.dump({
+        schema: "tied-store-config.v1",
+        operator: { mcp: { collect_metrics: false } },
+      }),
+    );
+    fs.writeFileSync(
+      path.join(tiedDir, "operator.local.yaml"),
+      yaml.dump({ mcp: { collect_metrics: true } }),
+    );
+    const operator = loadMergedOperatorConfig(store);
+    assert.equal(operatorCollectMetricsFromConfig(operator), true);
+    const flags = resolveOperatorFlagsForInstall({ storeRoot: store, processEnv: {} });
+    assert.equal(flags.collectMetrics, true);
+  });
+
+  it("mapOperatorConfigToMcpEnv maps envelope and agentstream preflight booleans", () => {
+    const { set, remove } = mapOperatorConfigToMcpEnv({
+      mcp: { envelope_hooks: true },
+      agentstream: { tied_mcp_preflight: true, skip_tied_mcp_preflight: false },
+    });
+    assert.equal(set.TIED_ENVELOPE_HOOKS, "1");
+    assert.equal(set.AGENTSTREAM_TIED_MCP_PREFLIGHT, "1");
+    assert.ok(remove.includes("AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT"));
+  });
+
+  it("resolveOperatorFlagsForInstall ignores shell for disk-defined envelope_hooks false", () => {
+    const store = fs.mkdtempSync(path.join(os.tmpdir(), "rt-op-env-"));
+    const tiedDir = path.join(store, ".tied");
+    fs.mkdirSync(tiedDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(tiedDir, "store.yaml"),
+      yaml.dump({
+        schema: "tied-store-config.v1",
+        operator: {
+          mcp: { envelope_hooks: false, collect_metrics: false },
+          agentstream: { tied_mcp_preflight: true },
+        },
+      }),
+    );
+    const flags = resolveOperatorFlagsForInstall({
+      storeRoot: store,
+      processEnv: {
+        TIED_ENVELOPE_HOOKS: "1",
+        AGENTSTREAM_TIED_MCP_PREFLIGHT: "0",
+      },
+    });
+    assert.ok(flags.operatorEnvRemove.includes("TIED_ENVELOPE_HOOKS"));
+    assert.equal(flags.operatorEnv.AGENTSTREAM_TIED_MCP_PREFLIGHT, "1");
+  });
+
+  it("mapOperatorConfigToMcpEnv maps JEV harness and string provider fields", () => {
+    const { set, remove } = mapOperatorConfigToMcpEnv({
+      jev: {
+        harness: true,
+        decision_provider: "local",
+        local_bridge: "http://127.0.0.1:9999",
+      },
+      agentstream: { checklist_var_strict: true },
+    });
+    assert.equal(set.AGENTSTREAM_JEV_HARNESS, "1");
+    assert.equal(set.AGENTSTREAM_CHECKLIST_VAR_STRICT, "1");
+    assert.equal(set.TIED_JEV_DECISION_PROVIDER, "local");
+    assert.equal(set.TIED_JEV_LOCAL_BRIDGE, "http://127.0.0.1:9999");
+    assert.equal(remove.length, 0);
   });
 });

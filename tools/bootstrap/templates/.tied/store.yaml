@@ -1,0 +1,16 @@
+schema: tied-store-config.v1
+mcp_server:
+  dist: mcp-server/dist/index.js
+methodology:
+  bundle: tied-bundle
+# Non-secret operator toggles (pass 3). Gitignored overlay: .tied/operator.local.yaml merges over operator.*
+operator:
+  mcp:
+    collect_metrics: false
+    envelope_hooks: false
+  agentstream:
+    tied_mcp_preflight: false
+    skip_tied_mcp_preflight: false
+    checklist_var_strict: false
+  jev:
+    harness: false

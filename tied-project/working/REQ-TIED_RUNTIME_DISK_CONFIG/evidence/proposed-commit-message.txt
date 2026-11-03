@@ -1,4 +1,23 @@
-docs(close-out): persist RDC pass 2 CITDP and gate evidence
+feat(bootstrap): operator toggles on disk for MCP refresh [REQ-TIED_RUNTIME_DISK_CONFIG]
 
-Close-out run close-out-rdc-pass2-20261103; CHANGELOG pass 2 entry;
-SC-RDC-CONSUMERS in persisted CITDP. Implementation commit eb9a0e17.
+Pass 3: sync non-secret operator config from .tied store yaml and
+operator.local.yaml to client mcp.json on tied-install refresh; shell
+export ignored when disk defines catalogued keys (SC-RDC-OPERATOR-DISK).
+
+Tokens: REQ-TIED_RUNTIME_DISK_CONFIG, IMPL-TIED_RUNTIME_DISK_CONFIG
+
+Completion signals: close_out allowed; envelope blocking gaps 0;
+reconcile band B (evidence_stale advisory on legacy gate receipts).
+
+Staging map (scoped):
+- tools/bootstrap/lib/tied-runtime-config.mjs (+ tests)
+- tools/bootstrap/lib/mcp-config.mjs (+ tests)
+- tools/bootstrap/lib/layers/mcp.mjs (+ tests)
+- tools/bootstrap/templates/.tied/store.yaml
+- .gitignore (.tied/operator.local.yaml)
+- tied-project/requirements/REQ-TIED_RUNTIME_DISK_CONFIG.yaml
+- tied-project/citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
+- tied-project/implementation-decisions/IMPL-TIED_RUNTIME_DISK_CONFIG-pseudocode.md
+- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/ (plan + evidence, exclude regenerable gates/)
+- tied-project/working/NON-TIED-ON-DISK-RUNTIME-CONFIG/PLAN.md
+- CHANGELOG.md

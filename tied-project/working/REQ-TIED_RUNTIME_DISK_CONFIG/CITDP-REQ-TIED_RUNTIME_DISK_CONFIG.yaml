@@ -74,6 +74,22 @@ CITDP-REQ-TIED_RUNTIME_DISK_CONFIG:
         notes: "SC-RDC-CONSUMERS harness coverage."
     unchanged_behavior:
       - "Feature/session env toggles remain env-OK; full non-secret on-disk migration queued in pending-full-runtime-disk-handoff.md"
+  pass3_extension:
+    change_definition:
+      current_behavior: "Pass 3 shipped catalog sync for metrics, envelope, agentstream preflight, checklist strict, and JEV non-secret strings via operator yaml + refresh; operator-shell-profile still being adopted."
+      desired_behavior: "Close-out: verification gate, persist CITDP, session-handoff pass 3 closed; secrets env-only unchanged."
+    linked_plan: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md"
+    refined_at: "2026-11-03"
+    success_criteria_add:
+      - "SC-RDC-OPERATOR-DISK"
+    test_strategy_add:
+      - command: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-config.test.mjs tools/bootstrap/lib/layers/mcp-layer.test.mjs"
+        notes: "SC-RDC-OPERATOR-DISK full operator catalog on refresh."
+      - command: "cd mcp-server && npx tsx --test src/usage-metrics.test.ts src/request-evidence-envelope/hooks.composition.test.ts"
+        notes: "Spawn-env reader regression."
+    unchanged_behavior:
+      - "Secrets remain env-only; global paths unchanged from pass 2"
+      - "MCP introspection and TS/JS fixture parity still deferred"
   record_identity:
     change_request_id: "REQ-TIED_RUNTIME_DISK_CONFIG"
     gate_policy: "advisory"
