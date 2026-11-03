@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Runtime disk config traceability ([REQ-TIED_RUNTIME_DISK_CONFIG], [ARCH-TIED_RUNTIME_DISK_CONFIG], [IMPL-TIED_RUNTIME_DISK_CONFIG])** — Project REQ/ARCH/IMPL stack; bootstrap `tied-runtime-config.mjs`, store `.tied/store.yaml`, layout/store-self refresh LEAP; e2e linked-stub exec follow-through in `bootstrap-and-load.test.ts` ([REQ-TIED_CLI_MCP_JSON_BASE_PATH] SC-CLI-E2E-*). Plan: [PLAN-refine-pass2.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-refine-pass2.md).
+
 ### Fixed
 
 - **tied-cli install-only path authority ([REQ-TIED_CLI_MCP_JSON_BASE_PATH])** — Kaizen **`fb-mw0b2pe8-7kp0gt`**: shell-inherited `TIED_*` path env no longer overrides tied-install **`.cursor/mcp.json`**; MCP stdio child uses allowlisted env and **`TIED_PATH_AUTHORITY=install_mcp_json`** (no cwd discovery on CLI path); test helpers use mcp.json fixtures.

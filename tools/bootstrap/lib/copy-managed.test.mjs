@@ -38,6 +38,14 @@ describe("copy-managed warnModifiedCopyTarget", () => {
 });
 
 describe("linkOrMaterializeCopy [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM]", () => {
+  it("no-ops when source and dest are the same path (store self-install)", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "link-self-"));
+    const file = path.join(root, "doc.md");
+    fs.writeFileSync(file, "canonical\n", "utf8");
+    linkOrMaterializeCopy(file, file);
+    assert.equal(fs.readFileSync(file, "utf8"), "canonical\n");
+  });
+
   it("copies file when symlink raises EPERM", () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "link-or-copy-"));
     const source = path.join(root, "source.yaml");

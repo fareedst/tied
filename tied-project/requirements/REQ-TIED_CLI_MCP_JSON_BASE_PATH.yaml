@@ -27,7 +27,7 @@ REQ-TIED_CLI_MCP_JSON_BASE_PATH:
         id: "SC-CLI-MCP-CURSOR"
       - criterion: "Neither mcp file or missing TIED_BASE_PATH exits before MCP spawn with DIAGNOSTIC citing tied-install/mcp config."
         id: "SC-CLI-MCP-FAIL-CLOSED"
-      - criterion: "Shell or IDE-inherited TIED_* path env does not override tied-install mcp.json for tied-cli."
+      - criterion: "Shell or IDE-inherited TIED_* path env does not override tied-install mcp.json for tied-cli; linked install stubs may exec store tied-cli.sh (e2e exec follow-through in bootstrap-and-load.test.ts)."
         id: "SC-CLI-NO-SHELL-PATH-AUTHORITY"
       - criterion: "When both files exist with different TIED_BASE_PATH, .cursor/mcp.json wins."
         id: "SC-CLI-MCP-PRECEDENCE"
@@ -40,4 +40,5 @@ REQ-TIED_CLI_MCP_JSON_BASE_PATH:
       tests:
         - "tools/bootstrap/lib/mcp-base-path.test.mjs"
         - "tools/bootstrap/lib/tied-cli-invoke.test.mjs"
+        - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
   status: "Implemented"

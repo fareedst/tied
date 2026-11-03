@@ -75,11 +75,38 @@ function jsonSafeAbsoluteForTest(p: string): string {
   return rp(p).split(path.sep).join("/");
 }
 
-function assertLinkedWrapperBakesStoreRoot(scriptText: string, storeRoot: string, label: string) {
+/** [REQ-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_RUNTIME_DISK_CONFIG] [IMPL-TIED_LAYERED_CLIENT_INSTALL] — linked stubs exec store scripts; resolver assertion follows exec target when stub omits resolve-tied-cli-env.mjs */
+const LINKED_STUB_EXEC_TARGET_RE = /exec\s+"([^"]+)"/;
+const CANONICAL_SKILL_SCRIPTS_SEGMENT = "bundled-tied-yaml-skill/scripts/";
+
+function effectiveScriptTextForRuntimeDiskCheck(scriptPath: string, label: string): string {
+  const stubText = fs.readFileSync(scriptPath, "utf8");
+  if (stubText.includes("resolve-tied-cli-env.mjs")) {
+    return stubText;
+  }
+  const execMatch = stubText.match(LINKED_STUB_EXEC_TARGET_RE);
   assert.ok(
-    scriptText.includes(`export TIED_REPO_ROOT="\${TIED_REPO_ROOT:=${storeRoot}}"`) ||
-      scriptText.includes(`TIED_REPO_ROOT:=${storeRoot}`),
-    `${label} should export a baked TIED_REPO_ROOT default for the store checkout`
+    execMatch,
+    `${label} should embed resolve-tied-cli-env.mjs or exec a store bundled-tied-yaml-skill script`,
+  );
+  const execTarget = execMatch[1];
+  assert.ok(
+    execTarget.includes(CANONICAL_SKILL_SCRIPTS_SEGMENT),
+    `${label} exec target must stay under ${CANONICAL_SKILL_SCRIPTS_SEGMENT}`,
+  );
+  assert.ok(fs.existsSync(execTarget), `${label} exec target must exist on disk: ${execTarget}`);
+  return fs.readFileSync(execTarget, "utf8");
+}
+
+function assertScriptsResolveRuntimeFromDisk(scriptPath: string, label: string) {
+  const scriptText = effectiveScriptTextForRuntimeDiskCheck(scriptPath, label);
+  assert.ok(
+    scriptText.includes("resolve-tied-cli-env.mjs"),
+    `${label} should resolve TIED runtime paths from on-disk mcp.json via resolve-tied-cli-env.mjs`,
+  );
+  assert.ok(
+    !scriptText.includes("/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR"),
+    `${label} should not rely on baked TIED_REPO_ROOT placeholder`,
   );
 }
 
@@ -370,15 +397,7 @@ describe("e2e: bootstrap and load", () => {
       fs.existsSync(tiedCli),
       "tied-install.sh should install the canonical tied-cli at .cursor/skills/tied-yaml/scripts/tied-cli.sh [IMPL-TIED_FILES]"
     );
-    const tiedCliText = fs.readFileSync(tiedCli, "utf8");
-    const tiedRepoRootReal = tiedRepoRootForAssertions(repoRoot);
-    const storeTiedCli = path.join(repoRoot, "tools", "bundled-tied-yaml-skill", "scripts", "tied-cli.sh");
-    assert.ok(
-      tiedCliText.includes(`exec "${storeTiedCli}"`) ||
-        tiedCliText.includes(`TIED_REPO_ROOT:=${tiedRepoRootReal}`),
-      "linked tied-cli.sh should exec the store script or bake TIED_REPO_ROOT from the TIED repo used for install"
-    );
-    assertLinkedWrapperBakesStoreRoot(tiedCliText, tiedRepoRootReal, "installed tied-cli.sh");
+    assertScriptsResolveRuntimeFromDisk(tiedCli, "installed tied-cli.sh");
     const tiedOnboarding = path.join(tempDir, ".cursor", "skills", "tied-yaml", "scripts", "tied.sh");
     assert.ok(
       fs.existsSync(tiedOnboarding),
@@ -390,18 +409,13 @@ describe("e2e: bootstrap and load", () => {
         "installed tied.sh should be executable [IMPL-TIED_FILES]"
       );
     }
-    const tiedOnboardingText = fs.readFileSync(tiedOnboarding, "utf8");
-    assertLinkedWrapperBakesStoreRoot(tiedOnboardingText, tiedRepoRootReal, "installed tied.sh");
+    assertScriptsResolveRuntimeFromDisk(tiedOnboarding, "installed tied.sh");
     const featureOrchestrator = path.join(tempDir, ".cursor", "skills", "tied-yaml", "scripts", "feature-orchestrator.sh");
     assert.ok(
       fs.existsSync(featureOrchestrator),
       "tied-install.sh should install the standalone feature orchestration wrapper [REQ-FEAT_ORCHESTRATION_SURFACE]"
     );
-    assertLinkedWrapperBakesStoreRoot(
-      fs.readFileSync(featureOrchestrator, "utf8"),
-      tiedRepoRootReal,
-      "installed feature-orchestrator.sh"
-    );
+    assertScriptsResolveRuntimeFromDisk(featureOrchestrator, "installed feature-orchestrator.sh");
     if (bashAvailable()) {
       const onboardingResult = execShellScript(tiedOnboarding, ["init"], {
         cwd: tempDir,

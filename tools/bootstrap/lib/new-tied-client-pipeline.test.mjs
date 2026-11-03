@@ -9,15 +9,10 @@ import {
   createDisposableClientDir,
 } from "./new-tied-client-pipeline.mjs";
 
-test("resolveSourceRoot ignores stale TIED_REPO_ROOT when bootstrap entry is missing", () => {
+test("resolveSourceRoot uses engine fallback (shell TIED_REPO_ROOT ignored)", () => {
   const stale = "C:\\nonexistent-stale-tied-repo-for-test";
-  const resolved = resolveSourceRoot({ TIED_REPO_ROOT: stale }, TIED_REPO_ROOT);
-  assert.equal(resolved, TIED_REPO_ROOT);
-});
-
-test("resolveSourceRoot honors TIED_REPO_ROOT when bootstrap entry exists", () => {
-  const resolved = resolveSourceRoot({ TIED_REPO_ROOT: TIED_REPO_ROOT }, TIED_REPO_ROOT);
-  assert.equal(resolved, TIED_REPO_ROOT);
+  assert.equal(resolveSourceRoot({ TIED_REPO_ROOT: stale }, TIED_REPO_ROOT), TIED_REPO_ROOT);
+  assert.equal(resolveSourceRoot({ TIED_REPO_ROOT: TIED_REPO_ROOT }, TIED_REPO_ROOT), TIED_REPO_ROOT);
 });
 
 test("disposableClientBasename uses epoch only or epoch-tag [REQ-TIED_SETUP] [IMPL-TIED_FILES]", () => {

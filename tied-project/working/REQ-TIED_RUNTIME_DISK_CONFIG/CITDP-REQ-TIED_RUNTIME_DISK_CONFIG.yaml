@@ -1,0 +1,106 @@
+CITDP-REQ-TIED_RUNTIME_DISK_CONFIG:
+  change_definition:
+    current_behavior: "On-disk runtime resolver, store .tied/store.yaml, and tied-install store-refresh guards are implemented in bootstrap/agentstream/CLI but not traced in project REQ/ARCH/IMPL; IMPL pseudo-code for tied-install omits store self-refresh, legacy .tied/ store-config exception, DOCS_TO_COPY same-path skip, and linkOrMaterializeCopy self-path no-op."
+    desired_behavior: "Full TIED stack for runtime disk config; IMPL LEAP documents actual tied-install and layout behavior; tests cited in satisfaction criteria; store ./tied-install.sh --refresh . remains green."
+    non_goals:
+      - "Rewriting resolver or install layers unless LEAP finds drift"
+      - "Full MCP tied-layout.ts marker parity with layout.mjs"
+      - "Changing migrate-layout deletion rules for legacy .tied/ without store schema"
+      - "tied_config_get_base_path store_root/mcp_dist introspection (session-handoff item E)"
+      - "Shared TS/JS runtime fixtures parity test (session-handoff item 4)"
+    sponsor_decisions:
+      costly_accepted_on_implementation: "Promote NON-TIED runtime config work to REQ-TIED_RUNTIME_DISK_CONFIG (full stack, not cross-ref-only)"
+    success_criteria:
+      - "SC-RDC-RESOLVE"
+      - "SC-RDC-STORE"
+      - "SC-RDC-REFRESH"
+      - "SC-RDC-IGNORE-ENV"
+      - "SC-RDC-FAIL-CLOSED"
+      - "SC-RDC-INSTALL-WRITES"
+      - "SC-TFL-STORE-TIED"
+      - "SC-LCI-STORE-DOCS"
+      - "SC-LCI-REFRESH-SMOKE"
+    unchanged_behavior:
+      - "Client linked install still stubs/copies DOCS_TO_COPY to tied-bundle/docs when storeRoot != projectRoot"
+      - "Feature/session env toggles (metrics, diagnostics, IMPL essence stdin) remain env-OK"
+  completion_criteria:
+    activation:
+      phase: verification
+      request_token: REQ-TIED_RUNTIME_DISK_CONFIG
+      run_id: null
+      scope: []
+    envelope_path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json
+    lint_yaml: required on changed tied-project YAML
+    pre_implementation_gate: tied_checklist_gate_validate before YAML mutations
+    tied_validate_consistency: required before close-out
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-base-path.test.mjs tools/bootstrap/lib/mcp-layer.test.mjs tools/bootstrap/lib/layout.test.mjs tools/bootstrap/lib/copy-managed.test.mjs"
+      - "node --test tools/bootstrap/lib/tied-cli-invoke.test.mjs"
+      - "cd mcp-server && npm test -- --test-path-pattern=bootstrap-and-load"
+      - "./tied-install.sh --refresh ."
+    manifest_reference: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/verification-evidence-manifest.v1.json
+  impact_analysis:
+    impl_inventory:
+      - IMPL-TIED_RUNTIME_DISK_CONFIG
+      - IMPL-TIED_TWO_FOLDER_LAYOUT
+      - IMPL-TIED_LAYERED_CLIENT_INSTALL
+      - IMPL-TIED_FILES
+    modules_or_boundaries: "tools/bootstrap install layers; tied-runtime-config.mjs; layout.mjs; copy-managed.mjs; methodology.mjs; mcp layer"
+    tied_tokens_affected:
+      - REQ-TIED_LAYERED_CLIENT_INSTALL
+      - REQ-TIED_TWO_FOLDER_LAYOUT
+      - REQ-TIED_CLI_MCP_JSON_BASE_PATH
+      - IMPL-TIED_TWO_FOLDER_LAYOUT
+      - IMPL-TIED_LAYERED_CLIENT_INSTALL
+      - IMPL-TIED_FILES
+      - ARCH-TIED_TWO_FOLDER_LAYOUT
+      - ARCH-TIED_LAYERED_CLIENT_INSTALL
+    tied_tokens_new:
+      - REQ-TIED_RUNTIME_DISK_CONFIG
+      - ARCH-TIED_RUNTIME_DISK_CONFIG
+      - IMPL-TIED_RUNTIME_DISK_CONFIG
+  record_identity:
+    change_request_id: REQ-TIED_RUNTIME_DISK_CONFIG
+    gate_policy: advisory
+    profile_depth: minimal
+    recorded_at: "2026-11-03"
+    title: "Runtime disk config traceability + tied-install IMPL LEAP"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "LEAP updates pseudo-code but omits store self-refresh allowSelfInstall; store refresh regresses."
+        - "DETECT_LEGACY_LAYOUT pseudo-code still flags committed store .tied/; CI or doctor blocks store checkout."
+        - "INSTALL_METHODOLOGY_LINKED pseudo-code lacks same-path skip; store refresh deletes canonical tied-bundle/docs files."
+        - "New REQ duplicates NON-TIED resolver behavior and drifts from shipped tests."
+      depth_tier: minimal
+      disconfirming_observations:
+        - "layout.mjs isStoreRuntimeConfigDir + detectLegacyLayout skip already covered by layout.test.mjs."
+        - "copy-managed.test.mjs asserts linkOrMaterializeCopy same-path no-op; methodology.mjs has resolve equality guard."
+        - "install-layers-core.mjs refreshInstallFromManifest sets allowSelfInstall when project === store."
+        - "session-handoff documents green unit tests for tied-runtime-config and mcp layers."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tools/bootstrap/lib/layout.mjs"
+        - "tools/bootstrap/lib/install-layers-core.mjs"
+        - "tools/bootstrap/lib/layers/methodology.mjs"
+        - "tools/bootstrap/lib/copy-managed.mjs"
+        - "tied-project/working/NON-TIED-ON-DISK-RUNTIME-CONFIG/session-handoff.md"
+      falsification_questions:
+        - "Does any touched IMPL sidecar still describe pre-fix legacy .tied/ detection?"
+        - "Are SC-RDC-* and SC-LCI-STORE-DOCS mapped to existing or new tests in REQ detail?"
+        - "Does ./tied-install.sh --refresh . fail after YAML-only changes?"
+      gate_policy: advisory
+      prior_depth_tier: minimal
+      rationale: "Documentation-first LEAP on shipped bootstrap; no new auth, network, or persistence surfaces."
+      sub_adversarial_inquiry_pass: not_applicable
+    summary: "Traceability gap between shipped bootstrap and IMPL pseudo-code; mistaken legacy detection on store .tied/."
+  test_strategy:
+    integration_command_seq:
+      - command: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/layout.test.mjs tools/bootstrap/lib/copy-managed.test.mjs tools/bootstrap/lib/mcp-layer.test.mjs"
+        notes: "SC-RDC-* and SC-TFL-STORE-TIED unit coverage."
+      - command: "node --test tools/bootstrap/install-layers.integration.test.mjs"
+        notes: "Extend or add case for SC-LCI-STORE-DOCS store self methodology refresh."
+      - command: "cd mcp-server && npm test -- --test-path-pattern=bootstrap-and-load"
+        notes: "CLI resolver contract from session-handoff not-yet-run list."
+    matrix_notes: "Unit-first; one new integration test only if methodology/store-self path lacks assertion. E2E UI N/A. RED only for new test."

@@ -1,0 +1,49 @@
+{
+  "token": "IMPL-TIED_RUNTIME_DISK_CONFIG",
+  "index_record": {
+    "name": "tied-runtime-config module and MCP install refresh",
+    "status": "Draft",
+    "traceability": {
+      "architecture": ["ARCH-TIED_RUNTIME_DISK_CONFIG"],
+      "requirements": ["REQ-TIED_RUNTIME_DISK_CONFIG"]
+    }
+  },
+  "detail_record": {
+    "IMPL-TIED_RUNTIME_DISK_CONFIG": {
+      "name": "tied-runtime-config module and MCP install refresh",
+      "status": "Draft",
+      "essence_pseudocode_path": "implementation-decisions/IMPL-TIED_RUNTIME_DISK_CONFIG-pseudocode.md",
+      "code_locations": {
+        "files": [
+          {
+            "path": "tools/bootstrap/lib/tied-runtime-config.mjs",
+            "description": "resolveRuntimeFromMcpEntry, resolveRuntimeFromStoreYaml, refreshStoreRuntimeConfig, resolveRuntimeForCwd"
+          },
+          {
+            "path": "tools/bootstrap/lib/layers/mcp.mjs",
+            "description": "installMcpLayer calls refreshStoreRuntimeConfig on store refresh"
+          },
+          {
+            "path": "mcp-server/packages/agentstream/src/tied-runtime-config.ts",
+            "description": "TS mirror for agentstream disk resolution"
+          }
+        ],
+        "functions": [
+          "resolveRuntimeFromMcpEntry",
+          "resolveRuntimeFromStoreYaml",
+          "refreshStoreRuntimeConfig",
+          "resolveRuntimeForCwd"
+        ]
+      },
+      "traceability": {
+        "architecture": ["ARCH-TIED_RUNTIME_DISK_CONFIG"],
+        "requirements": ["REQ-TIED_RUNTIME_DISK_CONFIG"],
+        "tests": [
+          "tools/bootstrap/lib/tied-runtime-config.test.mjs",
+          "tools/bootstrap/lib/mcp-layer.test.mjs",
+          "tools/bootstrap/lib/tied-cli-invoke.test.mjs"
+        ]
+      }
+    }
+  }
+}

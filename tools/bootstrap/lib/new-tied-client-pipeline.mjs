@@ -17,23 +17,8 @@ import { bootstrapToolFlagsToArgv } from "./client-tool-use-bootstrap.mjs";
 import { buildTiedInstallArgv } from "./install-options.mjs";
 import { childProcessSpawnOptions } from "./child-process-win.mjs";
 
-export function resolveSourceRoot(env = process.env, fallback = TIED_REPO_ROOT) {
-  const resolvedFallback = path.resolve(fallback);
-  const raw = env.TIED_REPO_ROOT;
-  if (raw && raw.trim()) {
-    const fromEnv = path.resolve(raw.trim());
-    const { script: envBootstrap } = bootstrapEntry(fromEnv);
-    const envBootstrapExists = fs.existsSync(envBootstrap);
-    if (envBootstrapExists) {
-      return fromEnv;
-    }
-    if (fromEnv !== resolvedFallback) {
-      sayWarn(
-        `TIED_REPO_ROOT points to ${fromEnv} but bootstrap entry is missing (${envBootstrap}); using engine repo ${resolvedFallback}`,
-      );
-    }
-  }
-  return resolvedFallback;
+export function resolveSourceRoot(_env = process.env, fallback = TIED_REPO_ROOT) {
+  return path.resolve(fallback);
 }
 
 export function resolveTestRoot(env = process.env) {

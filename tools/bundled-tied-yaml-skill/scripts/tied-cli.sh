@@ -16,8 +16,8 @@
 # Large payloads: any args other than exactly "{}" are written to a temp file and
 # passed via TIED_CLI_ARGS_FILE so they are not subject to OS environment size limits.
 #
-# Environment (writable corpus paths come only from tied-install mcp.json — shell TIED_* path vars are ignored):
-#   TIED_MCP_BIN    -- path to mcp-server/dist/index.js (auto-detected if unset)
+# Environment (global paths from install mcp.json + .tied/store.yaml via resolve-tied-cli-env.mjs — shell path vars ignored):
+#   TIED_MCP_BIN / TIED_STORE_ROOT -- set by resolver from on-disk config (not operator export)
 #   TIED_CLI_QUIET_MCP_STDERR -- set to 0 to forward MCP server stderr (default: suppress)
 #   TIED_MCP_COLLECT_METRICS -- set to 1 or true to append usage metrics JSONL (default: off)
 #   TIED_MCP_METRICS_PATH -- optional override for metrics JSONL (default: ~/.cursor/logs/tied-mcp-metrics.jsonl)
@@ -74,7 +74,18 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
 # [IMPL-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_CLI_MCP_JSON_BASE_PATH] Install mcp.json is sole corpus authority for CLI.
+_TIED_RUNTIME_IGNORED_SHELL_ENV=""
+for _tied_global_var in TIED_MCP_BIN TIED_REPO_ROOT TIED_STORE_ROOT; do
+  if [[ -n "${!_tied_global_var:-}" ]]; then
+    _TIED_RUNTIME_IGNORED_SHELL_ENV=1
+  fi
+done
 unset TIED_BASE_PATH TIED_CLIENT_PROJECT_PATH TIED_CLIENT_BUNDLE_PATH TIED_METHODOLOGY_BUNDLE_PATH || true
+unset TIED_MCP_BIN TIED_REPO_ROOT TIED_STORE_ROOT || true
+if [[ -n "${_TIED_RUNTIME_IGNORED_SHELL_ENV}" ]]; then
+  echo "DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: global path env ignored; use .cursor/mcp.json and ./tied-install.sh --refresh" >&2
+fi
+unset _TIED_RUNTIME_IGNORED_SHELL_ENV _tied_global_var
 RESOLVER_JS="${SCRIPT_DIR}/resolve-tied-cli-env.mjs"
 if [[ ! -f "${RESOLVER_JS}" ]]; then
   echo "ERROR: Missing ${RESOLVER_JS} (companion to tied-cli.sh)." >&2
@@ -95,29 +106,19 @@ export TIED_PATH_AUTHORITY=install_mcp_json
 : "${TIED_METHOD_ROOT:=${TIED_METHODOLOGY_BUNDLE_PATH:-${REPO_ROOT}/tied-bundle}}"
 export TIED_METHOD_ROOT
 
-# TIED methodology repository (mcp-server lives here). tied-install.sh replaces the placeholder below
-# with the absolute TIED source dir used at bootstrap so TIED_MCP_BIN points at that repo's dist/index.js.
-: "${TIED_REPO_ROOT:=/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR}"
-if [[ "${TIED_REPO_ROOT}" == "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR" ]] \
-   && [[ -f "${REPO_ROOT}/mcp-server/dist/index.js" ]]; then
-  TIED_REPO_ROOT="${REPO_ROOT}"
-fi
-
-TIED_UMBRELLA_CLI="${TIED_REPO_ROOT}/mcp-server/packages/cli/dist/index.js"
+TIED_UMBRELLA_CLI="${TIED_STORE_ROOT}/mcp-server/packages/cli/dist/index.js"
 if [[ -f "${TIED_UMBRELLA_CLI}" ]]; then
   export TIED_CLI_UMBRELLA_MCP=1
   export TIED_CLI_UMBRELLA_ENTRY="${TIED_UMBRELLA_CLI}"
 fi
 
-: "${TIED_MCP_BIN:=$TIED_REPO_ROOT/mcp-server/dist/index.js}"
-
 if [[ ! -f "$TIED_MCP_BIN" ]]; then
   echo "ERROR: MCP server binary missing: $TIED_MCP_BIN" >&2
-  echo "  Build in your TIED clone: npm install && npm run build --prefix mcp-server" >&2
-  echo "  Or set TIED_MCP_BIN to an existing dist/index.js, e.g.:" >&2
-  echo "  export TIED_MCP_BIN=/path/to/tied-repository/mcp-server/dist/index.js" >&2
+  echo "  Build in your TIED store: npm install && npm run build --prefix mcp-server" >&2
+  echo "  Then run ./tied-install.sh --refresh in this client project." >&2
   exit 1
 fi
+export TIED_MCP_BIN TIED_STORE_ROOT
 
 export TIED_BASE_PATH
 

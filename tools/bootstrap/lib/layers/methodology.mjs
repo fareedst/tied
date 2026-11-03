@@ -63,6 +63,9 @@ export function installMethodologyLinked(projectRoot, options) {
   for (const f of paths.DOCS_TO_COPY) {
     const storeDoc = path.join(storeDocs, f);
     const dest = path.join(docsDest, f);
+    if (path.resolve(storeDoc) === path.resolve(dest)) {
+      continue;
+    }
     if (fs.existsSync(storeDoc)) {
       linkOrMaterializeCopy(storeDoc, dest);
     } else {

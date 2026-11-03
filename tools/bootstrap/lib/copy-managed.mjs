@@ -119,6 +119,9 @@ const SYMLINK_FALLBACK_CODES = new Set(["EPERM", "EACCES", "EINVAL"]);
  */
 export function linkOrMaterializeCopy(source, dest) {
   if (!fs.existsSync(source)) return;
+  if (path.resolve(source) === path.resolve(dest)) {
+    return;
+  }
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   if (fs.existsSync(dest)) {
     fs.rmSync(dest, { recursive: true, force: true });

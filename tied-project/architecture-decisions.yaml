@@ -2468,6 +2468,14 @@ ARCH-TIED_REVIEW_CONVERGENCE_POLICY:
       reason: "Phase 3 close-out"
   name: "Review convergence policy documentation topology"
   status: "Implemented"
+ARCH-TIED_RUNTIME_DISK_CONFIG:
+  detail_file: "architecture-decisions/ARCH-TIED_RUNTIME_DISK_CONFIG.yaml"
+  name: "On-disk runtime config surfaces"
+  traceability:
+    implementation:
+      - "IMPL-TIED_RUNTIME_DISK_CONFIG"
+    requirements:
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
 ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY:
   cross_references:
     implementation:

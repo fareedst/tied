@@ -8,8 +8,9 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { installTiedLayers } from "./lib/install-layers-core.mjs";
 import { readInstallManifest } from "./lib/layers/install-manifest.mjs";
-import { TIED_REPO_ROOT } from "./lib/constants.mjs";
+import { TIED_REPO_ROOT, manifestPaths } from "./lib/constants.mjs";
 import { resolveTiedLayout } from "./lib/layout.mjs";
+import { refreshInstallFromManifest } from "./lib/install-layers-core.mjs";
 import { migrateLayout } from "./lib/migrate-layout.mjs";
 import { detectLegacyLayout } from "./lib/layout.mjs";
 import {
@@ -64,6 +65,26 @@ describe("install-layers integration [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     assert.ok(fs.existsSync(path.join(tiedDir, "requirements.yaml")));
     assert.ok(!fs.existsSync(path.join(tmp, "tied", "methodology", "requirements.yaml")));
     assert.ok(!fs.existsSync(path.join(tmp, "tied-project", "methodology", "requirements.yaml")));
+  });
+
+  it("store self linked methodology refresh preserves canonical DOCS [SC-LCI-STORE-DOCS] [REQ-TIED_RUNTIME_DISK_CONFIG]", () => {
+    const store = TIED_REPO_ROOT;
+    const layout = resolveTiedLayout(store);
+    const docs = manifestPaths().DOCS_TO_COPY;
+    assert.ok(docs.length > 0, "manifest DOCS_TO_COPY non-empty");
+    const sample = docs[0];
+    const canonical = path.join(layout.docsDir, sample);
+    assert.ok(fs.existsSync(canonical), `canonical doc must exist before refresh: ${canonical}`);
+    const beforeStat = fs.statSync(canonical);
+    refreshInstallFromManifest(store, {
+      storeRoot: store,
+      mode: "linked",
+      layers: ["methodology"],
+      harness: "cursor",
+      skipVerify: true,
+    });
+    assert.ok(fs.existsSync(canonical), "canonical doc must remain after store self refresh");
+    assert.equal(fs.statSync(canonical).size, beforeStat.size);
   });
 
   it("linked methodology layer materializes tied-bundle corpus", () => {

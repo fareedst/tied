@@ -90,6 +90,22 @@ export function resolveStoreLayout(storeRoot) {
   };
 }
 
+/**
+ * Root `.tied/` with tied-store-config.v1 is on-disk store runtime config, not pre-migration layout junk.
+ * @param {string} projectRoot
+ */
+export function isStoreRuntimeConfigDir(projectRoot) {
+  const storeYaml = path.join(path.resolve(projectRoot), ".tied", "store.yaml");
+  if (!fs.existsSync(storeYaml)) {
+    return false;
+  }
+  try {
+    return fs.readFileSync(storeYaml, "utf8").includes("schema: tied-store-config.v1");
+  } catch {
+    return false;
+  }
+}
+
 /** Legacy markers that must not exist after install/migrate (SC-TFL-NO-LEGACY-TIED-DIR). */
 export const LEGACY_LAYOUT_MARKERS = [
   (root) => path.join(root, LEGACY_PROJECT_DIR_NAME),
@@ -119,6 +135,9 @@ export function detectLegacyLayout(projectRoot, opts = {}) {
   for (const marker of LEGACY_LAYOUT_MARKERS) {
     const p = marker(root);
     if (p.endsWith(LEGACY_PROJECT_DIR_NAME) && opts.allowLegacyProjectDir) {
+      continue;
+    }
+    if (p === path.join(root, ".tied") && isStoreRuntimeConfigDir(root)) {
       continue;
     }
     if (fs.existsSync(p)) {

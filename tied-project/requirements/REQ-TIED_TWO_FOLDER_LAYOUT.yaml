@@ -1,24 +1,17 @@
 REQ-TIED_TWO_FOLDER_LAYOUT:
   REQ-TIED_TWO_FOLDER_LAYOUT:
-    category: "Infrastructure"
-    description: "Split TIED clients into tied-project (committed traceability) and tied-bundle (local methodology/docs/templates/install); enforce SC-TFL-NO-LEGACY-TIED-DIR."
-    name: "Two-folder TIED layout"
-    priority: "P1"
     related_requirements:
-      depends_on:
-        - "REQ-TIED_LAYERED_CLIENT_INSTALL"
-        - "REQ-TIED_SETUP"
       related_to:
         - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
         - "REQ-TIED_NEW_CLIENT_ADHERENCE"
-      supersedes: []
+        - "REQ-TIED_RUNTIME_DISK_CONFIG"
     satisfaction_criteria:
       - criterion: "--migrate-layout idempotent from legacy fixture."
         id: "SC-TFL-MIGRATE"
         metric: "install-layers integration"
-      - criterion: "After install or --migrate-layout, no top-level tied/ directory on clients."
+      - criterion: "After install or --migrate-layout, no top-level tied/ directory on clients; root .tied/ exempt when tied-store-config.v1 store runtime config is present."
         id: "SC-TFL-NO-LEGACY-TIED-DIR"
-        metric: "detectLegacyLayout + factory git check"
+        metric: "detectLegacyLayout + layout.test.mjs isStoreRuntimeConfigDir"
       - criterion: "copy_files.* and legacy-bootstrap removed."
         id: "SC-TFL-LEGACY-REMOVED"
         metric: "stale lint + audit"
@@ -43,20 +36,13 @@ REQ-TIED_TWO_FOLDER_LAYOUT:
       - criterion: "Symlink-or-copy under tied-bundle; Windows CI green."
         id: "SC-TFL-WINDOWS"
         metric: "windows-bootstrap-smoke"
-    status: "Planned"
-    traceability:
-      architecture:
-        - "ARCH-TIED_PROJECT_CONFIG_OWNERSHIP"
-        - "ARCH-TIED_TWO_FOLDER_LAYOUT"
-      implementation:
-        - "IMPL-TIED_TWO_FOLDER_LAYOUT"
   satisfaction_criteria:
     - criterion: "--migrate-layout idempotent from legacy fixture."
       id: "SC-TFL-MIGRATE"
       metric: "install-layers integration"
-    - criterion: "After install or --migrate-layout, no top-level tied/ directory on clients."
+    - criterion: "After install or --migrate-layout, no top-level tied/ directory on clients; root .tied/ exempt when tied-store-config.v1 store runtime config is present."
       id: "SC-TFL-NO-LEGACY-TIED-DIR"
-      metric: "detectLegacyLayout + factory git check"
+      metric: "detectLegacyLayout + layout.test.mjs isStoreRuntimeConfigDir"
     - criterion: "Client bootstrap .gitignore is INSTALL MANAGED v2 only (no LOCAL WORKING or UNDIVIDED STORE MIRROR); includes skills/ for TIED_SKILLS_REROOT and BASE_FILES AGENTS.md and .cursorrules."
       id: "SC-TFL-CLIENT-GITIGNORE-SLIM"
       metric: "gitignore-block + working-gitignore + install-layers integration tests"

@@ -52,11 +52,20 @@ PROCEDURE RESOLVE_METHODOLOGY_ROOT(layout, env) -> path|null
   EFFECTS: none
 END PROCEDURE
 
-// [IMPL-TIED_TWO_FOLDER_LAYOUT] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT]
-// How: Fail-closed legacy markers including top-level tied/ after migration.
+// [IMPL-TIED_TWO_FOLDER_LAYOUT] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_RUNTIME_DISK_CONFIG]
+// How: True when root .tied/store.yaml declares schema tied-store-config.v1 (store runtime config, not legacy junk).
+PROCEDURE IS_STORE_RUNTIME_CONFIG_DIR(projectRoot) -> boolean
+  PRE: projectRoot resolvable
+  POST: true iff store.yaml exists and contains tied-store-config.v1 schema marker
+  EFFECTS: read store.yaml only
+  TERMINATION: total
+END PROCEDURE
+
+// [IMPL-TIED_TWO_FOLDER_LAYOUT] [ARCH-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_TWO_FOLDER_LAYOUT] [REQ-TIED_RUNTIME_DISK_CONFIG]
+// How: Fail-closed legacy markers including top-level tied/ after migration; skip root .tied/ when IS_STORE_RUNTIME_CONFIG_DIR.
 PROCEDURE DETECT_LEGACY_LAYOUT(projectRoot) -> result
   PRE: projectRoot writable path
-  POST: detected false or LEGACY_LAYOUT_DETECTED with migrate hint
+  POST: detected false or LEGACY_LAYOUT_DETECTED with migrate hint; root .tied/ ignored when store runtime config dir
   TERMINATION: scan complete
 END PROCEDURE
 

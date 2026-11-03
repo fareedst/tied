@@ -1,4 +1,5 @@
 .cursor/mcp.json
+.tied/store.local.yaml
 .cursor/debug-*.log
 .cursor/test-all-build-plan.log
 .cursor/skills/tied-yaml/
@@ -259,20 +260,19 @@ working/**/gate-tracker*.yaml
 !tied-project/working/**/evidence/verification-evidence-manifest.v1.json
 !working/**/evidence/verification-evidence-manifest.v1.json
 # END TIED COMMITTED WORKING REGENERABLE (managed)
-# BEGIN TIED STORE LOCAL WORKING (managed)
-tied-bundle/working/
-tied-bundle/install.json
-# END TIED STORE LOCAL WORKING (managed)
 # BEGIN TIED INSTALL MANAGED
 .cursor/mcp.json
 .mcp.json
 .cursor/skills/
 .claude/skills/
+skills/
+tied-bundle/
 CLAUDE.md
+AGENTS.md
+.cursorrules
 .cursor/hooks.json
 .claude/hooks/
 .claude/settings.json
-.claude/adherence-bridge.log
 # END TIED INSTALL MANAGED
 docs/visuals/2026-10-20.md
 .bkpdir.yml

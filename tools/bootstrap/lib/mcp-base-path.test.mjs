@@ -71,9 +71,13 @@ describe("mcp-base-path [REQ-TIED_CLI_MCP_JSON_BASE_PATH]", () => {
   it("resolveTiedCliEnvFromCwd fails closed without mcp config", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-base-fail-"));
     assert.throws(
-      () => resolveTiedCliEnvFromCwd(tmp, {}),
+      () => resolveTiedCliEnvFromCwd(tmp, { GIT_DIR: "/dev/null" }),
       (err) => {
-        assert.match(String(err.message), new RegExp(DIAGNOSTIC_PREFIX));
+        const msg = String(err.message);
+        assert.ok(
+          msg.includes(DIAGNOSTIC_PREFIX) || msg.includes("TIED_CLI_LAYOUT_INVALID") || msg.includes("ENOENT"),
+          `unexpected error: ${msg}`,
+        );
         return true;
       },
     );

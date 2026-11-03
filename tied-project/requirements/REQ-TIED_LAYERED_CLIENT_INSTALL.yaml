@@ -11,6 +11,7 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
     related_to:
       - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
       - "REQ-TIED_CLIENT_REFRESH_PARITY"
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
       - "REQ-TIED_TWO_FOLDER_LAYOUT"
     supersedes: []
   satisfaction_criteria:
@@ -29,6 +30,12 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
     - criterion: "Skill surface remains usable when IDE MCP config is absent: file-resolvable stubs and tied-cli over stdio."
       id: "SC-LCI-NO-MCP-SURFACE"
       metric: "install-layers tests + doctor subcommand"
+    - criterion: "Store ./tied-install.sh --refresh . with allowSelfInstall completes without deleting committed docs."
+      id: "SC-LCI-STORE-REFRESH"
+      metric: "CITDP evidence.command_seq tied-install --refresh"
+    - criterion: "Store self linked methodology refresh skips DOCS_TO_COPY when store doc path equals dest; canonical tied-bundle/docs preserved."
+      id: "SC-LCI-STORE-DOCS"
+      metric: "tools/bootstrap/install-layers.integration.test.mjs"
     - criterion: "tied-install linked mode installs harness-local SKILL.md stubs, tied-cli wrappers, and TIED_METHODOLOGY_BUNDLE_PATH in MCP config without local committed methodology tree."
       id: "SC-LCI-LINKED-DEFAULT"
       metric: "tools/bootstrap install-layers smoke + mcp.json env assertions"

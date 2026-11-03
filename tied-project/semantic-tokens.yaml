@@ -1257,6 +1257,17 @@ ARCH-TIED_REVIEW_CONVERGENCE_POLICY:
   source_index: "architecture-decisions.yaml"
   status: "Implemented"
   type: "ARCH"
+ARCH-TIED_RUNTIME_DISK_CONFIG:
+  category: "Architecture"
+  cross_references:
+    - "IMPL-TIED_RUNTIME_DISK_CONFIG"
+    - "REQ-TIED_RUNTIME_DISK_CONFIG"
+  description: "tied-runtime-config.mjs resolver and install refresh writers."
+  detail_file: "architecture-decisions/ARCH-TIED_RUNTIME_DISK_CONFIG.yaml"
+  metadata:
+    last_updated: "2026-11-03"
+  name: "On-disk runtime config surfaces"
+  type: "ARCH"
 ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY:
   cross_references:
     - "IMPL-TIED_SESSION_HANDOFF_SKILL"
@@ -2958,6 +2969,17 @@ IMPL-TIED_REVIEW_CONVERGENCE_POLICY:
   name: "Review convergence policy doc maintenance"
   source_index: "implementation-decisions.yaml"
   status: "Implemented"
+  type: "IMPL"
+IMPL-TIED_RUNTIME_DISK_CONFIG:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-TIED_RUNTIME_DISK_CONFIG"
+    - "REQ-TIED_RUNTIME_DISK_CONFIG"
+  description: "Bootstrap runtime resolver and store.local.yaml refresh."
+  detail_file: "implementation-decisions/IMPL-TIED_RUNTIME_DISK_CONFIG.yaml"
+  metadata:
+    last_updated: "2026-11-03"
+  name: "tied-runtime-config module and MCP install refresh"
   type: "IMPL"
 IMPL-TIED_SESSION_HANDOFF_SKILL:
   cross_references:
@@ -4833,6 +4855,18 @@ REQ-TIED_REVIEW_CONVERGENCE_POLICY:
   name: "Review convergence policy (Claude comparison Phase 3)"
   source_index: "requirements.yaml"
   status: "Implemented"
+  type: "REQ"
+REQ-TIED_RUNTIME_DISK_CONFIG:
+  category: "Infrastructure"
+  cross_references:
+    - "ARCH-TIED_RUNTIME_DISK_CONFIG"
+    - "IMPL-TIED_RUNTIME_DISK_CONFIG"
+  description: "Install-managed on-disk global paths (.tied/store.yaml, MCP JSON)."
+  detail_file: "requirements/REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
+  metadata:
+    last_updated: "2026-11-03"
+  name: "Runtime disk configuration"
+  status: "Active"
   type: "REQ"
 REQ-TIED_SESSION_HANDOFF_SKILL:
   cross_references:

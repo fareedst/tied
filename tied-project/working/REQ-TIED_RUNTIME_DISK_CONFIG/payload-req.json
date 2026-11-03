@@ -1,0 +1,112 @@
+{
+  "token": "REQ-TIED_RUNTIME_DISK_CONFIG",
+  "index_record": {
+    "name": "Runtime disk configuration",
+    "category": "Infrastructure",
+    "priority": "P1",
+    "status": "Draft",
+    "description": "Operator global paths (store root, MCP dist, client corpus) are install-managed on disk via .tied/store.yaml, .tied/store.local.yaml, and client MCP JSON—not shell exports.",
+    "related_requirements": {
+      "depends_on": [
+        "REQ-TIED_LAYERED_CLIENT_INSTALL",
+        "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      ],
+      "related_to": [
+        "REQ-TIED_TWO_FOLDER_LAYOUT",
+        "REQ-TIED_SETUP"
+      ]
+    },
+    "traceability": {
+      "architecture": ["ARCH-TIED_RUNTIME_DISK_CONFIG"],
+      "implementation": ["IMPL-TIED_RUNTIME_DISK_CONFIG"]
+    }
+  },
+  "detail_record": {
+    "REQ-TIED_RUNTIME_DISK_CONFIG": {
+      "name": "Runtime disk configuration",
+      "category": "Infrastructure",
+      "priority": "P1",
+      "status": "Draft",
+      "description": "Operator global paths (store root, MCP dist, client corpus) are install-managed on disk via .tied/store.yaml, .tied/store.local.yaml, and client MCP JSON—not shell exports.",
+      "rationale": {
+        "why": "NON-TIED bootstrap pass shipped resolver and install writers; project REQ/ARCH/IMPL traceability was missing.",
+        "problems_solved": [
+          "Shell TIED_* env overrides silently diverge from install-managed config",
+          "Store refresh and MCP spawn lack documented satisfaction criteria"
+        ],
+        "benefits": [
+          "CLI, IDE MCP, and agentstream share one on-disk contract",
+          "Fail-closed diagnostics before MCP spawn when surfaces missing"
+        ]
+      },
+      "related_requirements": {
+        "depends_on": [
+          "REQ-TIED_LAYERED_CLIENT_INSTALL",
+          "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+        ],
+        "related_to": [
+          "REQ-TIED_TWO_FOLDER_LAYOUT",
+          "REQ-TIED_SETUP"
+        ]
+      },
+      "satisfaction_criteria": [
+        {
+          "id": "SC-RDC-RESOLVE",
+          "criterion": "Client resolves MCP dist and corpus from MCP JSON without shell global path env.",
+          "metric": "tools/bootstrap/lib/tied-runtime-config.test.mjs; tools/bootstrap/lib/tied-cli-invoke.test.mjs"
+        },
+        {
+          "id": "SC-RDC-STORE",
+          "criterion": "Store resolves from .tied/store.yaml merged with store.local.yaml overlay.",
+          "metric": "tools/bootstrap/lib/tied-runtime-config.test.mjs"
+        },
+        {
+          "id": "SC-RDC-REFRESH",
+          "criterion": "MCP layer refresh writes or updates store.local.yaml with dist paths.",
+          "metric": "tools/bootstrap/lib/mcp-layer.test.mjs"
+        },
+        {
+          "id": "SC-RDC-IGNORE-ENV",
+          "criterion": "Shell TIED_MCP_BIN, TIED_REPO_ROOT, TIED_STORE_ROOT do not override install-managed global paths.",
+          "metric": "tools/bootstrap/lib/tied-runtime-config.test.mjs"
+        },
+        {
+          "id": "SC-RDC-FAIL-CLOSED",
+          "criterion": "Missing config surfaces emit DIAGNOSTIC and non-zero exit before MCP spawn.",
+          "metric": "tools/bootstrap/lib/tied-runtime-config.test.mjs"
+        },
+        {
+          "id": "SC-RDC-INSTALL-WRITES",
+          "criterion": "Store install refresh updates on-disk .tied paths and client mcp.json env.",
+          "metric": "tools/bootstrap/lib/mcp-layer.test.mjs; ./tied-install.sh --refresh ."
+        },
+        {
+          "id": "SC-TFL-STORE-TIED",
+          "criterion": "Committed store .tied/ with tied-store-config.v1 is not flagged as legacy layout junk.",
+          "metric": "tools/bootstrap/lib/layout.test.mjs"
+        },
+        {
+          "id": "SC-LCI-STORE-DOCS",
+          "criterion": "Store self linked methodology refresh skips DOCS_TO_COPY when store doc path equals dest.",
+          "metric": "tools/bootstrap/install-layers.integration.test.mjs; tools/bootstrap/lib/copy-managed.test.mjs"
+        },
+        {
+          "id": "SC-LCI-REFRESH-SMOKE",
+          "criterion": "Store ./tied-install.sh --refresh . exits 0.",
+          "metric": "CITDP evidence.command_seq"
+        }
+      ],
+      "traceability": {
+        "architecture": ["ARCH-TIED_RUNTIME_DISK_CONFIG"],
+        "implementation": ["IMPL-TIED_RUNTIME_DISK_CONFIG"],
+        "tests": [
+          "tools/bootstrap/lib/tied-runtime-config.test.mjs",
+          "tools/bootstrap/lib/mcp-layer.test.mjs",
+          "tools/bootstrap/lib/layout.test.mjs",
+          "tools/bootstrap/lib/copy-managed.test.mjs",
+          "tools/bootstrap/install-layers.integration.test.mjs"
+        ]
+      }
+    }
+  }
+}

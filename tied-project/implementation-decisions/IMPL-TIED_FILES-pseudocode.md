@@ -47,6 +47,23 @@ procedure NORMALIZE_COPIED_PATH_TIMESTAMPS(sourcePath, destinationPath):
   RETURN success
 
 
+procedure LINK_OR_MATERIALIZE_COPY(sourcePath, destinationPath):
+  # [IMPL-TIED_FILES] [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP] [REQ-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_LAYERED_CLIENT_INSTALL]
+  # How: Prefer symlink; copy when OS denies symlink; no-op when resolved source equals dest (store self DOCS_TO_COPY).
+  Contract:
+    INPUT: sourcePath; destinationPath
+    OUTPUT: void
+    PRE: source may exist
+    POST: when path.resolve(source)==path.resolve(dest) then no filesystem mutation; else dest materialized as symlink or copy
+    EFFECTS: File I/O; symlink or copyTreeWithAttributes fallback on EPERM/EACCES
+    FAILURE_MODES: symlink errors outside fallback set propagate
+    TERMINATION: total
+  IF path.resolve(sourcePath) equals path.resolve(destinationPath) THEN
+    RETURN success
+  TRY symlink source to dest
+  ON EPERM|EACCES|EINVAL THEN copy with attributes
+
+
 procedure COPY_WITH_ATTRIBUTES(sourcePath, destinationPath, recursive):
   # [IMPL-TIED_FILES] [ARCH-TIED_STRUCTURE] [REQ-TIED_SETUP]
   # How: Copy a managed file or tree with cp -p/cp -pR, then apply each source item's local-date midnight timestamp only to the copied path and descendants.

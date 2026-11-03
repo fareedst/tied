@@ -66,6 +66,19 @@ describe("detectLegacyLayout", () => {
     const result = detectLegacyLayout(root);
     assert.equal(result.detected, false);
   });
+
+  it("passes when .tied is store runtime config (tied-store-config.v1)", () => {
+    const root = mkdtemp("tfl-store-cfg-");
+    fs.mkdirSync(path.join(root, PROJECT_DIR_NAME), { recursive: true });
+    fs.mkdirSync(path.join(root, BUNDLE_DIR_NAME), { recursive: true });
+    fs.mkdirSync(path.join(root, ".tied"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, ".tied", "store.yaml"),
+      "schema: tied-store-config.v1\n",
+    );
+    const result = detectLegacyLayout(root);
+    assert.equal(result.detected, false);
+  });
 });
 
 describe("guardSelfInstall", () => {

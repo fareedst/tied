@@ -33,6 +33,33 @@ PROCEDURE INSTALL_TIED_LAYERS(projectRoot, options)
   WRITE_INSTALL_MANIFEST(projectRoot, selections)
 END PROCEDURE
 
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_RUNTIME_DISK_CONFIG]
+// How: Linked skill script stubs are thin bash wrappers that exec jsonSafeAbsolute store canonical scripts; on-disk runtime resolver (resolve-tied-cli-env.mjs) lives in the store target, verified by bootstrap-and-load e2e exec follow-through.
+PROCEDURE WRITE_EXEC_WRAPPER(wrapperPath, storeScriptPath, storeRoot, marker)
+  PRE: storeScriptPath resolves under store bundled-tied-yaml-skill/scripts/
+  POST: wrapper body includes exec "<absolute storeScriptPath>" "$@"; stub text may omit resolve-tied-cli-env.mjs
+  EFFECTS: writes bash header with shellScriptRoot marker and exec delegation line
+  FAILURE_MODES: STORE_SCRIPT_MISSING
+END PROCEDURE
+
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_RUNTIME_DISK_CONFIG]
+// How: Store self refresh sets allowSelfInstall and default skipVerify when projectRoot equals storeRoot.
+PROCEDURE REFRESH_INSTALL_FROM_MANIFEST(projectRoot, options)
+  PRE: prior manifest may be absent on store checkout
+  POST: when storeSelf then allowSelfInstall true and skipVerify default true; linked self-refresh when no install.json on store
+  EFFECTS: delegates to INSTALL_TIED_LAYERS with refresh flag
+  FAILURE_MODES: INSTALL_MANIFEST_MISSING when not store self and no manifest
+END PROCEDURE
+
+// [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_RUNTIME_DISK_CONFIG]
+// How: Linked methodology DOCS_TO_COPY loop skips linkOrMaterializeCopy when storeDoc resolves equal to dest (store self).
+PROCEDURE INSTALL_METHODOLOGY_LINKED(projectRoot, options)
+  PRE: storeRoot reachable
+  POST: allowlisted docs under tied-bundle/docs; same-path storeDoc==dest is no-op (canonical files preserved)
+  EFFECTS: linkOrMaterializeCopy or redirect stub per doc
+  FAILURE_MODES: STORE_DOC_OR_TEMPLATE_MISSING
+END PROCEDURE
+
 // [IMPL-TIED_LAYERED_CLIENT_INSTALL] [ARCH-TIED_LAYERED_CLIENT_INSTALL] [REQ-TIED_LAYERED_CLIENT_INSTALL]
 // How: Idempotent managed gitignore paths for gitignored install artifacts.
 PROCEDURE APPLY_GITIGNORE_MANAGED_BLOCK(projectRoot)

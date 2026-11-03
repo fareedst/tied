@@ -15,6 +15,11 @@ import fs from "node:fs";
 import { resolveMethodologyBundlePath } from "./store.mjs";
 import { resolveTiedLayout } from "../layout.mjs";
 import { ENV_CLIENT_BUNDLE_PATH } from "../tied-path-env.mjs";
+import { refreshStoreRuntimeConfig } from "../tied-runtime-config.mjs";
+import { fileURLToPath } from "node:url";
+
+const _MCP_LAYER_DIR = path.dirname(fileURLToPath(import.meta.url));
+const STORE_YAML_TEMPLATE = path.join(_MCP_LAYER_DIR, "../../templates/.tied/store.yaml");
 
 /**
  * @param {string} projectRoot
@@ -87,6 +92,11 @@ export function installMcpLayer(projectRoot, options) {
     });
     if (extraEnv) sayOk(`Refreshed ${mcpJson} with linked methodology bundle env.`);
   }
+
+  refreshStoreRuntimeConfig(options.storeRoot, {
+    mcpDistPath: mcpServerDist,
+    templatePath: STORE_YAML_TEMPLATE,
+  });
 
   return { extraEnv };
 }

@@ -3022,6 +3022,12 @@ REQ-TIED_LAYERED_CLIENT_INSTALL:
   detail_file: "requirements/REQ-TIED_LAYERED_CLIENT_INSTALL.yaml"
   name: "Layered TIED client install"
   priority: "P2"
+  related_requirements:
+    related_to:
+      - "REQ-TIED_BROWNFIELD_INTENT_ELEVATION"
+      - "REQ-TIED_CLIENT_REFRESH_PARITY"
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
   status: "Planned"
   traceability:
     architecture:
@@ -3399,6 +3405,25 @@ REQ-TIED_REVIEW_CONVERGENCE_POLICY:
       - "ARCH-TIED_REVIEW_CONVERGENCE_POLICY"
     implementation:
       - "IMPL-TIED_REVIEW_CONVERGENCE_POLICY"
+REQ-TIED_RUNTIME_DISK_CONFIG:
+  category: "Infrastructure"
+  description: "Operator global paths (store root, MCP dist, client corpus) are install-managed on disk via .tied/store.yaml, .tied/store.local.yaml, and client MCP JSON—not shell exports."
+  detail_file: "requirements/REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
+  name: "Runtime disk configuration"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      - "REQ-TIED_LAYERED_CLIENT_INSTALL"
+    related_to:
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_TWO_FOLDER_LAYOUT"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-TIED_RUNTIME_DISK_CONFIG"
+    implementation:
+      - "IMPL-TIED_RUNTIME_DISK_CONFIG"
 REQ-TIED_SESSION_HANDOFF_SKILL:
   category: "Tooling"
   cross_references:
@@ -3735,6 +3760,11 @@ REQ-TIED_TWO_FOLDER_LAYOUT:
   detail_file: "requirements/REQ-TIED_TWO_FOLDER_LAYOUT.yaml"
   name: "Two-folder TIED layout"
   priority: "P1"
+  related_requirements:
+    related_to:
+      - "REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY"
+      - "REQ-TIED_NEW_CLIENT_ADHERENCE"
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
   status: "Implemented"
   traceability:
     architecture:

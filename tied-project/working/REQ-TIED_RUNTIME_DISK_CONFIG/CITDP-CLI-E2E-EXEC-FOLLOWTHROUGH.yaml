@@ -1,0 +1,63 @@
+CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH:
+  change_definition:
+    current_behavior: "bootstrap-and-load.test.ts assertScriptsResolveRuntimeFromDisk reads only the linked client stub; stubs exec store tied-cli.sh without embedding resolve-tied-cli-env.mjs, so e2e fails despite correct runtime delegation."
+    desired_behavior: "E2e follows exec to store bundled-tied-yaml-skill scripts when verifying on-disk runtime resolver wiring; light LEAP documents linked wrapper contract; RDC handoff gap closed."
+    non_goals:
+      - "Changing writeExecWrapper or linked install stub generation"
+      - "Materializing resolve-tied-cli-env.mjs on client trees"
+      - "New REQ/ARCH/IMPL tokens"
+    success_criteria:
+      - "SC-CLI-E2E-EXEC-RESOLVER"
+      - "SC-CLI-E2E-NO-BAKE-PLACEHOLDER"
+      - "SC-CLI-E2E-REGRESSION"
+    unchanged_behavior:
+      - "Store tied-cli.sh resolver and mcp.json authority unchanged"
+      - "Linked install still exec-delegates to store scripts"
+  completion_criteria:
+    lint_yaml: required on changed tied-project YAML
+    pre_implementation_gate: tied_checklist_gate_validate before test edits
+    tied_validate_consistency: required after YAML LEAP
+  evidence:
+    command_seq:
+      - "cd mcp-server && npx tsx --test src/e2e/bootstrap-and-load.test.ts"
+  impact_analysis:
+    modules_or_boundaries: "mcp-server e2e; IMPL-TIED_LAYERED_CLIENT_INSTALL sidecar; REQ-TIED_CLI_MCP_JSON_BASE_PATH detail"
+    tied_tokens_affected:
+      - REQ-TIED_CLI_MCP_JSON_BASE_PATH
+      - REQ-TIED_LAYERED_CLIENT_INSTALL
+      - REQ-TIED_RUNTIME_DISK_CONFIG
+      - IMPL-TIED_LAYERED_CLIENT_INSTALL
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: CLI-E2E-EXEC-FOLLOWTHROUGH
+    gate_policy: advisory
+    profile_depth: minimal
+    recorded_at: "2026-11-03"
+    title: "E2E exec follow-through for linked CLI runtime assertions"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Exec follow-through follows a non-canonical path outside bundled-tied-yaml-skill/scripts."
+        - "Helper accepts exec target that omits resolve-tied-cli-env.mjs after a store script regression."
+        - "Regex fails on future wrapper format change without test failure."
+      depth_tier: minimal
+      disconfirming_observations:
+        - "writeExecWrapper format is stable single-line exec with jsonSafeAbsolute path."
+        - "Store scripts already contain resolve-tied-cli-env.mjs reference."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
+        - "tools/bootstrap/lib/layers/skills-linked.mjs"
+        - "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+      falsification_questions:
+        - "Does the helper reject exec targets not under bundled-tied-yaml-skill/scripts?"
+        - "Do all three installed wrappers pass after the change?"
+      gate_policy: advisory
+      prior_depth_tier: minimal
+      rationale: "Test-only alignment with existing linked install; no auth/network/persistence change."
+      sub_adversarial_inquiry_pass: not_applicable
+    summary: "False negative e2e on linked stubs; fix validates store delegation chain."
+  test_strategy:
+    integration_command_seq:
+      - command: "cd mcp-server && npx tsx --test src/e2e/bootstrap-and-load.test.ts"
+        notes: "SC-CLI-E2E-* acceptance."

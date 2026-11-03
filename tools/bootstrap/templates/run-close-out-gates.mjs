@@ -27,15 +27,23 @@ import {
   shouldCollectActivation,
 } from "./run-close-out-gates-activation.mjs";
 import { resolveTiedLayout, resolveWorkingRoot } from "../lib/layout.mjs";
+import { resolveTiedRuntimeConfig } from "../lib/tied-runtime-config.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATE_REPO_ROOT = path.resolve(__dirname, "../../..");
 
 /** [REQ-TIED_CLIENT_OPERATOR_TOOLING] Resolve built MCP dist from client config or store. */
 export function resolveMcpDistDirectory(projectRoot) {
-  const tiedMcpBin = process.env.TIED_MCP_BIN?.trim();
-  if (tiedMcpBin && existsSync(tiedMcpBin)) {
-    return path.dirname(tiedMcpBin);
+  try {
+    const runtime = resolveTiedRuntimeConfig({
+      cwd: projectRoot,
+      mode: "auto",
+      requireDistExists: true,
+      processEnv: {},
+    });
+    return path.dirname(runtime.mcpDistPath);
+  } catch {
+    /* fall through to legacy mcp.json probe */
   }
   const mcpJsonPath = path.join(projectRoot, ".cursor/mcp.json");
   if (existsSync(mcpJsonPath)) {
@@ -61,7 +69,7 @@ export function resolveMcpDistDirectory(projectRoot) {
   const templateDist = path.join(TEMPLATE_REPO_ROOT, "mcp-server/dist");
   if (existsSync(templateDist)) return templateDist;
   throw new Error(
-    "mcp-server/dist not found; build TIED store workspace or set TIED_MCP_BIN to mcp-server/dist/index.js",
+    "mcp-server/dist not found; build TIED store workspace and run ./tied-install.sh --refresh",
   );
 }
 

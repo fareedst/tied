@@ -6,6 +6,7 @@ import { describe, it } from "node:test";
 import { installMcpLayer } from "./mcp.mjs";
 import { TIED_REPO_ROOT } from "../constants.mjs";
 import { ENV_CLIENT_BUNDLE_PATH, ENV_CLIENT_PROJECT_PATH } from "../tied-path-env.mjs";
+import { STORE_YAML_REL } from "../tied-runtime-config.mjs";
 
 describe("mcp layer [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
   it("linked mode sets TIED_CLIENT_BUNDLE_PATH in mcp.json", () => {
@@ -22,6 +23,8 @@ describe("mcp layer [REQ-TIED_LAYERED_CLIENT_INSTALL]", () => {
     assert.ok(env[ENV_CLIENT_PROJECT_PATH]);
     assert.ok(env[ENV_CLIENT_BUNDLE_PATH]);
     assert.ok(env.TIED_STORE_ROOT);
+    assert.ok(fs.existsSync(path.join(TIED_REPO_ROOT, STORE_YAML_REL)));
+    assert.ok(fs.existsSync(path.join(TIED_REPO_ROOT, ".tied", "store.local.yaml")));
   });
 
   it("full mode omits bundle env keys", () => {
