@@ -1,30 +1,8 @@
-fix(tied-cli): install-only mcp.json path authority
+docs(close-out): REQ-TIED_CLI_MCP_JSON_BASE_PATH handoff
 
-Hypnos client tied-cli store pollution (Kaizen fb-mw0b2pe8-7kp0gt): ignore shell
-TIED_* path env; allowlist MCP stdio env; strict getBasePath for tied-cli.
-REQ-TIED_CLI_MCP_JSON_BASE_PATH SC-CLI-NO-SHELL-PATH-AUTHORITY.
+Record close-out completion signals and post-pass workspace restore
+(Hypnos IMPL pollution, CITDP gate-test litter, graph fixture drift).
 
-Staging map:
-- CHANGELOG.md
-- mcp-server/scripts/run-mcp-tests.mjs
-- mcp-server/src/test-helpers/client-path-env.ts
-- mcp-server/src/tools/index.ts
-- mcp-server/src/yaml-loader.ts
-- mcp-server/src/yaml-loader.test.ts
-- mcp-server/test/tied-cli-bundled-methodology-pilot.test.cjs
-- mcp-server/test/tied-cli-large-args.test.cjs
-- mcp-server/test/tied-cli-metrics-client.test.cjs
-- tied-project/feedback.yaml
-- tied-project/requirements.yaml
-- tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml
-- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/checklist-tracker.yaml
-- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/git-hygiene-receipt-2026-11-03.md
-- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/proposed-commit-message.txt
-- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/traceable-commit-evidence.md
-- tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/close-out-handoff.md
-- tools/bootstrap/README.md
-- tools/bootstrap/lib/mcp-base-path.mjs
-- tools/bootstrap/lib/mcp-base-path.test.mjs
-- tools/bootstrap/lib/tied-cli-invoke.mjs
-- tools/bootstrap/lib/tied-cli-invoke.test.mjs
-- tools/bundled-tied-yaml-skill/scripts/*
+Product change already at 421a5a2f. Kaizen fb-mw0b2pe8-7kp0gt.
+
+REQ-TIED_CLI_MCP_JSON_BASE_PATH
