@@ -79,14 +79,14 @@ describe("mcp-base-path [REQ-TIED_CLI_MCP_JSON_BASE_PATH]", () => {
     );
   });
 
-  it("env TIED_BASE_PATH overrides mcp.json", () => {
+  it("ignores shell TIED_BASE_PATH; mcp.json is sole authority", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-base-env-"));
     const tiedDir = path.join(tmp, "tied-project");
     const wrongDir = path.join(tmp, "wrong-tied-project");
     seedTiedProject(tiedDir);
-    fs.mkdirSync(wrongDir, { recursive: true });
-    writeMcp(tmp, ".cursor/mcp.json", wrongDir);
-    const resolved = resolveTiedCliEnvFromCwd(tmp, { TIED_BASE_PATH: tiedDir });
+    seedTiedProject(wrongDir);
+    writeMcp(tmp, ".cursor/mcp.json", tiedDir);
+    const resolved = resolveTiedCliEnvFromCwd(tmp, { TIED_BASE_PATH: wrongDir });
     assert.equal(resolved.TIED_CLIENT_PROJECT_PATH, jsonSafeAbsolute(tiedDir));
   });
 

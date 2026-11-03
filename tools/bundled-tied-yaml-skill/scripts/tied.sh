@@ -16,15 +16,15 @@ if [[ "${TIED_REPO_ROOT}" == "/ABSOLUTE/PATH/TO/TIED/SOURCE/DIR" ]] \
   TIED_REPO_ROOT="${REPO_ROOT}"
 fi
 
-if [[ -z "${TIED_BASE_PATH:-}" ]]; then
-  RESOLVER_JS="${SCRIPT_DIR}/resolve-tied-cli-env.mjs"
-  _TIED_CLI_ENV_EXPORTS="$(node "${RESOLVER_JS}" 2>&1)" || {
-    echo "${_TIED_CLI_ENV_EXPORTS}" >&2
-    exit 1
-  }
-  eval "${_TIED_CLI_ENV_EXPORTS}"
-  unset _TIED_CLI_ENV_EXPORTS
-fi
+unset TIED_BASE_PATH TIED_CLIENT_PROJECT_PATH TIED_CLIENT_BUNDLE_PATH TIED_METHODOLOGY_BUNDLE_PATH || true
+RESOLVER_JS="${SCRIPT_DIR}/resolve-tied-cli-env.mjs"
+_TIED_CLI_ENV_EXPORTS="$(node "${RESOLVER_JS}" 2>&1)" || {
+  echo "${_TIED_CLI_ENV_EXPORTS}" >&2
+  exit 1
+}
+eval "${_TIED_CLI_ENV_EXPORTS}"
+unset _TIED_CLI_ENV_EXPORTS
+export TIED_BASE_PATH="${TIED_CLIENT_PROJECT_PATH}"
 : "${TIED_MCP_BIN:=$TIED_REPO_ROOT/mcp-server/dist/index.js}"
 export TIED_BASE_PATH TIED_MCP_BIN
 

@@ -413,7 +413,7 @@ export const allTools = [
     name: "tied_config_get_base_path",
     config: {
       description:
-        "Return the effective TIED project corpus path (writable tied-project/). Resolution order: TIED_CLIENT_PROJECT_PATH (canonical), then legacy TIED_BASE_PATH, then cwd discovery. Legacy env values may appear in env_* fields without affecting base_path when canonical is set.",
+        "Return the effective TIED project corpus path (writable tied-project/). IDE MCP: env injected from tied-install mcp.json (canonical TIED_CLIENT_PROJECT_PATH, then legacy TIED_BASE_PATH), then cwd discovery. tied-cli stdio sets TIED_PATH_AUTHORITY=install_mcp_json and requires install path env only (no cwd discovery).",
       inputSchema: z.object({}),
     },
     handler: async () => {

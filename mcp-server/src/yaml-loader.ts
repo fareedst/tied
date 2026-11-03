@@ -110,8 +110,42 @@ function discoverDefaultBasePath(): string {
  * Resolve base path for YAML indexes. Uses TIED_BASE_PATH env; default discovers tied-project/.
  * Resolved relative to process.cwd(). This is the project (writable) root.
  */
+const TIED_PATH_AUTHORITY_INSTALL_MCP_JSON = "install_mcp_json";
+
+function failClosedInstallPathAuthority(reason: string): never {
+  throw new Error(
+    `DIAGNOSTIC: TIED_CLI_MCP_BASE_PATH: ${reason} Run ./tied-install.sh in the client project and use tied-cli from a directory under that repo.`,
+  );
+}
+
 export function getBasePath(): string {
   if (cachedBasePath !== null) return cachedBasePath;
+  if (process.env.TIED_PATH_AUTHORITY?.trim() === TIED_PATH_AUTHORITY_INSTALL_MCP_JSON) {
+    const strictRaw = pickClientProjectPath(process.env);
+    if (!strictRaw?.trim()) {
+      failClosedInstallPathAuthority(
+        "tied-cli MCP child missing install path env (TIED_CLIENT_PROJECT_PATH / legacy TIED_BASE_PATH from mcp.json).",
+      );
+    }
+    let strictResolved = path.isAbsolute(strictRaw)
+      ? strictRaw
+      : path.resolve(process.cwd(), strictRaw);
+    strictResolved = remapLegacyTiedBasePathIfNeeded(strictResolved);
+    if (!fs.existsSync(requirementsIndexAt(strictResolved))) {
+      failClosedInstallPathAuthority(
+        `install path is not a valid tied-project corpus: ${strictResolved}`,
+      );
+    }
+    cachedBasePath = strictResolved;
+    const loadedConfig = loadProjectConfig(path.dirname(cachedBasePath));
+    lastBasePathResolution = {
+      routing_mode: readIdentityRoutingFromRecord(loadedConfig?.record),
+      base_path_source: "env",
+      env_project_path_ignored: false,
+    };
+    assertBindingAtStartup(cachedBasePath, process.env);
+    return cachedBasePath;
+  }
   const envRaw = pickClientProjectPath(process.env);
   const markerOnlyHit = tryResolveMarkerOnlyBaseFromCwd(process.cwd());
   let envResolvedForMarkerGate: string | null = null;

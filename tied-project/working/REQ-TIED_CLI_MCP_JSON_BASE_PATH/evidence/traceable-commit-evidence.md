@@ -1,31 +1,30 @@
-# Traceable commit evidence — REQ-TIED_CLI_MCP_JSON_BASE_PATH
+# Traceable commit evidence — install-only CLI paths (2026-11-03)
 
-**Date:** 2026-10-25 (pass 3 close-out)
+## VALIDATE (vocab Touchpoint 3)
 
-## VALIDATE (vocab)
-
-Scoped terms (`tied-cli`, `TIED_BASE_PATH`, dual harness mcp.json) match
-`tied-project/vocab/project-operations-mcp.md` and PLAN §1.1.
+Deferred immaterial renames; terms align with existing `tied-project/vocab/project-operations-mcp.md` (tied-cli, mcp.json).
 
 ## Gates
 
-- `run-close-out-gates.mjs` — `merged_decision.allowed: true` (`close_out`, run-id `close-out-req-tied-cli-mcp-json-base-path-pass3-2026-10-25`)
-- Envelope blocking gaps **0** (regenerable path gitignored; validated at close-out)
+- **close_out:** `run-close-out-gates.mjs --envelope-blocking --sync-dispositions --reconcile`
+- **merged_decision.allowed:** true
+- **envelope blocking_gap_count:** 0
+- **gate receipt:** `tied-bundle/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/gates/close_out-2026-11-03T06-54-15-323Z.json`
 
-## Hygiene
+## Verification
 
-`tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/git-hygiene-receipt-2026-10-25.md`
+- `npm test --prefix mcp-server` (after `npm run build --prefix mcp-server`)
+- `node --test tools/bootstrap/lib/mcp-base-path.test.mjs tools/bootstrap/lib/tied-cli-invoke.test.mjs`
 
 ## Upstream feedback capture
 
-Store **`fb-mvny01eb-my451g`** (GF-16 proxy, countermeasure **`REQ-TIED_CLI_MCP_JSON_BASE_PATH`**). Ingested on original build-plan; **not re-ingested** this pass.
+- **Receipt id:** `fb-mw0b2pe8-7kp0gt`
+- **Store feedback.yaml:** appended (Kaizen Phase 1, hypnos tied-cli store pollution witness)
 
-## Excluded drift
+## Hygiene
 
-See hygiene receipt — CLIENT_FEEDBACK_CAPTURE, GF16-KAIZEN, fixtures, source-graph, JEV benchmark, evaluation manifest.
+- [git-hygiene-receipt-2026-11-03.md](./git-hygiene-receipt-2026-11-03.md) (`apply: false`)
 
-## Commit SHA
+## Excluded unrelated drift
 
-**Pass 3 supplement:** `25d50ba` on `main` (not pushed).
-
-**Prior feature commit:** `5ba4086ef39c119199a3ba4c64a238acb34d248d`
+See hygiene receipt; notably Hypnos IMPL index entries in `tied-project/implementation-decisions.yaml` are **not** part of this commit.

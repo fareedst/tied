@@ -24,10 +24,39 @@ const TIED_CLI_CURSOR = path.join(
 const TIED_CLI = fs.existsSync(TIED_CLI_BUNDLED) ? TIED_CLI_BUNDLED : TIED_CLI_CURSOR;
 const MCP_BIN = path.join(MCP_ROOT, "dist/index.js");
 
-function tiedCli(tool, argsJson, env) {
+function seedInstallMcp(projectRoot, tiedProjectPath, bundlePath) {
+  fs.mkdirSync(path.join(projectRoot, ".cursor"), { recursive: true });
+  fs.writeFileSync(
+    path.join(projectRoot, ".cursor/mcp.json"),
+    `${JSON.stringify(
+      {
+        mcpServers: {
+          "tied-yaml": {
+            env: {
+              TIED_CLIENT_PROJECT_PATH: tiedProjectPath,
+              TIED_CLIENT_BUNDLE_PATH: bundlePath,
+            },
+          },
+        },
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
+  );
+}
+
+function tiedCli(tool, argsJson, cwd) {
+  const env = { ...process.env, TIED_MCP_BIN: MCP_BIN };
+  delete env.TIED_BASE_PATH;
+  delete env.TIED_CLIENT_PROJECT_PATH;
+  delete env.TIED_CLIENT_BUNDLE_PATH;
+  delete env.TIED_METHODOLOGY_BUNDLE_PATH;
+  delete env.TIED_PATH_AUTHORITY;
   return spawnSync("bash", [TIED_CLI, tool, argsJson], {
     encoding: "utf8",
-    env: { ...process.env, ...env },
+    cwd,
+    env,
     maxBuffer: 10 * 1024 * 1024,
   });
 }
@@ -54,20 +83,23 @@ describe("G2 bundled methodology pilot tied-cli parity [REQ-TIED_METHODOLOGY_CLI
     );
     const { clearBasePathCache, listTokens } = await import("../dist/yaml-loader.js");
 
-    const pilotClient = fs.mkdtempSync(path.join(os.tmpdir(), "tied-mcb-g2-client-"));
+    const pilotRoot = fs.mkdtempSync(path.join(os.tmpdir(), "tied-mcb-g2-client-"));
+    const tiedDir = path.join(pilotRoot, "tied-project");
     const bundleDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-mcb-g2-bundle-"));
     try {
-      writeCopiedTreeFixture(pilotClient, bundleDir, { omitLocalMethodology: true });
-      assert.ok(!fs.existsSync(path.join(pilotClient, "methodology")));
+      writeCopiedTreeFixture(tiedDir, bundleDir, { omitLocalMethodology: true });
+      assert.ok(!fs.existsSync(path.join(tiedDir, "methodology")));
+      fs.writeFileSync(
+        path.join(tiedDir, "config.yaml"),
+        "schema: tied-project-config.v1\nidentity:\n  write_binding: false\nyaml:\n  scalar_style: wrapped\n",
+        "utf8",
+      );
+      seedInstallMcp(pilotRoot, tiedDir, bundleDir);
 
-      const pilotEnv = {
-        TIED_BASE_PATH: pilotClient,
-        TIED_METHODOLOGY_BUNDLE_PATH: bundleDir,
-        TIED_MCP_BIN: MCP_BIN,
-      };
-
-      process.env.TIED_BASE_PATH = pilotClient;
-      process.env.TIED_METHODOLOGY_BUNDLE_PATH = bundleDir;
+      process.env.TIED_CLIENT_PROJECT_PATH = tiedDir;
+      process.env.TIED_CLIENT_BUNDLE_PATH = bundleDir;
+      delete process.env.TIED_BASE_PATH;
+      delete process.env.TIED_METHODOLOGY_BUNDLE_PATH;
       clearBasePathCache();
       const inProcess = captureMethodologyReadProbe([
         "REQ-METH-ONLY",
@@ -76,7 +108,7 @@ describe("G2 bundled methodology pilot tied-cli parity [REQ-TIED_METHODOLOGY_CLI
       ]);
 
       const cliDetail = parseCliJson(
-        tiedCli("yaml_detail_read", '{"token":"REQ-METH-ONLY"}', pilotEnv),
+        tiedCli("yaml_detail_read", '{"token":"REQ-METH-ONLY"}', pilotRoot),
         "yaml_detail_read REQ-METH-ONLY"
       );
       const cliDetailName =
@@ -84,7 +116,7 @@ describe("G2 bundled methodology pilot tied-cli parity [REQ-TIED_METHODOLOGY_CLI
       assert.strictEqual(cliDetailName, inProcess.tokens["REQ-METH-ONLY"].detail_name);
 
       const cliList = parseCliJson(
-        tiedCli("yaml_index_list_tokens", '{"index":"requirements"}', pilotEnv),
+        tiedCli("yaml_index_list_tokens", '{"index":"requirements"}', pilotRoot),
         "yaml_index_list_tokens requirements"
       );
       assert.ok(Array.isArray(cliList));
@@ -92,7 +124,7 @@ describe("G2 bundled methodology pilot tied-cli parity [REQ-TIED_METHODOLOGY_CLI
       assert.deepStrictEqual([...cliList].sort(), [...inProcessIndexTokens].sort());
 
       const cliIndexRow = parseCliJson(
-        tiedCli("yaml_index_read", '{"index":"requirements","token":"REQ-METH-ONLY"}', pilotEnv),
+        tiedCli("yaml_index_read", '{"index":"requirements","token":"REQ-METH-ONLY"}', pilotRoot),
         "yaml_index_read REQ-METH-ONLY"
       );
       const indexName =
@@ -102,7 +134,7 @@ describe("G2 bundled methodology pilot tied-cli parity [REQ-TIED_METHODOLOGY_CLI
       assert.strictEqual(indexName, "Methodology only");
 
       const cliFallback = parseCliJson(
-        tiedCli("yaml_detail_read", '{"token":"REQ-FALLBACK"}', pilotEnv),
+        tiedCli("yaml_detail_read", '{"token":"REQ-FALLBACK"}', pilotRoot),
         "yaml_detail_read REQ-FALLBACK"
       );
       const fallbackName =
@@ -113,9 +145,11 @@ describe("G2 bundled methodology pilot tied-cli parity [REQ-TIED_METHODOLOGY_CLI
       assert.strictEqual(inProcess.bundled, true);
       assert.ok(inProcess.methodology_base?.includes(bundleDir));
     } finally {
+      delete process.env.TIED_CLIENT_PROJECT_PATH;
+      delete process.env.TIED_CLIENT_BUNDLE_PATH;
       delete process.env.TIED_BASE_PATH;
       delete process.env.TIED_METHODOLOGY_BUNDLE_PATH;
-      fs.rmSync(pilotClient, { recursive: true, force: true });
+      fs.rmSync(pilotRoot, { recursive: true, force: true });
       fs.rmSync(bundleDir, { recursive: true, force: true });
     }
   });

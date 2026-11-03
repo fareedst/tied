@@ -1361,9 +1361,11 @@ sub_procedures:
     title: "Checklist-local adversarial inquiry pass"
     tracking:
       consideration_before_proceeding: "Report persisted under working/{REQ-TOKEN}/adversarial-inquiry; caller receives summary; blocking only when caller blocking=true, strict-eligible, and error finding unresolved."
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/sub-adversarial-inquiry-pass-na.md"
       retry_count: "0"
       state_history: []
-      status: "pending"
+      status: "completed"
   - flow:
       return_to: "caller"
     goals: "Ensure every TIED YAML file is syntactically valid, skill-routed where applicable, and consistent before use. Use lint_yaml per [PROC-YAML_EDIT_LOOP] (processes.md); it accepts one or more paths and must process each file independently. Never use raw multi-argument `yq` pretty-print on multiple paths in one process."

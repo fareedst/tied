@@ -9,22 +9,17 @@ import { resolveTiedLayout } from "./layout.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
 import { ENV_CLIENT_PROJECT_PATH } from "./tied-path-env.mjs";
 
-function writeClientMcp(projectRoot, rel, tiedBasePath) {
+function writeClientMcp(projectRoot, rel, tiedBasePath, bundlePath) {
   const dir = path.dirname(path.join(projectRoot, rel));
   fs.mkdirSync(dir, { recursive: true });
+  /** @type {Record<string, string>} */
+  const env = { [ENV_CLIENT_PROJECT_PATH]: jsonSafeAbsolute(tiedBasePath) };
+  if (bundlePath) {
+    env.TIED_CLIENT_BUNDLE_PATH = jsonSafeAbsolute(bundlePath);
+  }
   fs.writeFileSync(
     path.join(projectRoot, rel),
-    `${JSON.stringify(
-      {
-        mcpServers: {
-          "tied-yaml": {
-            env: { [ENV_CLIENT_PROJECT_PATH]: jsonSafeAbsolute(tiedBasePath) },
-          },
-        },
-      },
-      null,
-      2,
-    )}\n`,
+    `${JSON.stringify({ mcpServers: { "tied-yaml": { env } } }, null, 2)}\n`,
   );
 }
 
@@ -46,15 +41,12 @@ describe("invokeTiedCliMcpTool [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM]", () => {
       path.join(TIED_REPO_ROOT, "tied-bundle", "requirements.yaml"),
       path.join(bundle, "requirements.yaml"),
     );
+    writeClientMcp(tmp, ".cursor/mcp.json", layout.tiedDir, bundle);
     const result = invokeTiedCliMcpTool({
       projectRoot: tmp,
       storeRoot: TIED_REPO_ROOT,
       toolName: "yaml_index_list_tokens",
       argsJson: '{"index":"requirements"}',
-      env: {
-        TIED_BASE_PATH: layout.tiedDir,
-        TIED_METHODOLOGY_BUNDLE_PATH: bundle,
-      },
     });
     assert.equal(result.ok, true, result.stderr || result.stdout);
   });

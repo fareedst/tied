@@ -25,6 +25,7 @@ import {
 import { ENV_CLIENT_BUNDLE_PATH, LEGACY_ENV_CLIENT_BUNDLE_PATH } from "./tied-path-env.js";
 import {
   bindWritableProjectCorpus,
+  CLIENT_PATH_ENV_KEYS,
   restoreClientPathEnv,
   snapshotClientPathEnv,
   useLegacyProjectPathOnly,
@@ -40,7 +41,22 @@ describe("getBasePath", () => {
     assert.ok(["tied-project", "tied"].includes(path.basename(base)));
   });
 
-  it("uses TIED_BASE_PATH when set", () => {
+  it("fail-closed under install_mcp_json authority when path env missing", () => {
+    const saved = snapshotClientPathEnv();
+    for (const k of CLIENT_PATH_ENV_KEYS) delete process.env[k];
+    delete process.env.TIED_BASE_PATH;
+    delete process.env.TIED_METHODOLOGY_BUNDLE_PATH;
+    process.env.TIED_PATH_AUTHORITY = "install_mcp_json";
+    try {
+      clearBasePathCache();
+      assert.throws(() => getBasePath(), /DIAGNOSTIC: TIED_CLI_MCP_BASE_PATH/);
+    } finally {
+      restoreClientPathEnv(saved);
+      clearBasePathCache();
+    }
+  });
+
+  it("uses install path env when set", () => {
     const saved = snapshotClientPathEnv();
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-loader-"));
     try {

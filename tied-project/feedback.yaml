@@ -98,6 +98,27 @@ entries:
     privacy_tier: "operator_local"
     title: "MCP stdio transport broken by DEBUG lines on stdout"
     type: "bug_report"
+  - capture_schema_version: "feedback-event.v1"
+    context:
+      capture:
+        delivery:
+          attempted_at: "2026-11-03T06:27:26.864Z"
+          idempotency_key: "hypnos-tied-cli-store-pollution-2026-11-02"
+        entry_type_omitted: false
+        evidence:
+          redaction: "not_required"
+          refs: []
+        observation:
+          kind: "user_report"
+          title: "Hypnos tied-cli wrote YAML to TIED store corpus"
+        schema_version: "feedback-event.v1"
+    created_at: "2026-11-03T06:27:26.864Z"
+    description: "## Observation\nSponsor witnessed the hypnos TIED client execute tied-cli; writable YAML mutations landed on the TIED methodology store tied-project/ instead of the client corpus.\n\n## Failure\nShell-inherited TIED_BASE_PATH / env-first resolver skipped install mcp.json; MCP stdio child inherited full process.env; getBasePath cwd discovery could bind nearest tied-project/ in the store monorepo.\n\n## Sponsor intent\nUse only tied-install-written .cursor/mcp.json (or .mcp.json) for corpus paths. If install config is absent, fail closed—no shell env, cwd discovery, or heuristics to find the store.\n\n## Workaround\nRun ./tied-install.sh in the client repo; verify mcpServers.tied-yaml.env.TIED_CLIENT_PROJECT_PATH before tied-cli.\n\n## Redaction\nNone."
+    id: "fb-mw0b2pe8-7kp0gt"
+    idempotency_key: "hypnos-tied-cli-store-pollution-2026-11-02"
+    privacy_tier: "operator_local"
+    title: "Hypnos tied-cli wrote YAML to TIED store corpus"
+    type: "bug_report"
   - context:
       client_repo: "/Users/fareed/Documents/dev/test/1792857852"
       evidence_links:

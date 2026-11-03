@@ -197,9 +197,43 @@ const callLine = JSON.stringify({
   },
 });
 
+/** [IMPL-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_CLI_MCP_JSON_BASE_PATH] Do not inherit host shell path env into MCP. */
+function buildMcpServerSpawnEnv() {
+  const allow = [
+    "TIED_CLIENT_PROJECT_PATH",
+    "TIED_CLIENT_BUNDLE_PATH",
+    "TIED_BASE_PATH",
+    "TIED_METHODOLOGY_BUNDLE_PATH",
+    "TIED_METHOD_ROOT",
+    "TIED_PATH_AUTHORITY",
+    "TIED_MCP_DIAGNOSTICS",
+    "TIED_MCP_COLLECT_METRICS",
+    "TIED_MCP_METRICS_PATH",
+    "TIED_MCP_METRICS_CLIENT",
+    "TIED_MCP_TEST_REPO_ROOT",
+  ];
+  /** @type {Record<string, string>} */
+  const env = {
+    PATH: process.env.PATH ?? "",
+    HOME: process.env.HOME ?? "",
+    NODE_ENV: process.env.NODE_ENV ?? "production",
+  };
+  if (process.platform === "win32" && process.env.SystemRoot) {
+    env.SystemRoot = process.env.SystemRoot;
+  }
+  for (const key of allow) {
+    const value = process.env[key];
+    if (typeof value === "string" && value.trim()) {
+      env[key] = value;
+    }
+  }
+  return env;
+}
+
 const spawnArgs = useUmbrellaMcp ? [umbrellaEntry, "mcp"] : [mcpBin];
 const child = spawn(process.execPath, spawnArgs, {
   stdio: ["pipe", "pipe", "pipe"],
+  env: buildMcpServerSpawnEnv(),
 });
 
 const quietMcpStderr = process.env.TIED_CLI_QUIET_MCP_STDERR !== "0";

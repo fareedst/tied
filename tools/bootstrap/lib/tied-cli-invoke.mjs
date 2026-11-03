@@ -1,6 +1,6 @@
 /**
  * [ARCH-TIED_BOOTSTRAP_CROSS_PLATFORM] [REQ-TIED_SETUP]
- * How: Invoke tied-yaml MCP tools via Node (same env contract as tied-cli.sh), without bash.
+ * [REQ-TIED_CLI_MCP_JSON_BASE_PATH] How: Invoke tied-yaml MCP tools via Node (install mcp.json path authority).
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -8,11 +8,6 @@ import { spawnSync } from "node:child_process";
 import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
 import { resolveTiedCliEnvFromCwd } from "./mcp-base-path.mjs";
-import {
-  pickClientBundlePath,
-  pickClientProjectPath,
-} from "./tied-path-env.mjs";
-import { validateTiedProjectLayout } from "./mcp-base-path.mjs";
 
 /**
  * @param {string} storeRoot
@@ -26,6 +21,17 @@ export function resolveTiedMcpStdioClientPath(storeRoot) {
  */
 export function resolveStoreMcpDistPath(storeRoot) {
   return path.join(storeRoot, "mcp-server", "dist", "index.js");
+}
+
+/**
+ * @param {Record<string, string | undefined>} env
+ */
+function stripInstallPathEnv(env) {
+  delete env.TIED_BASE_PATH;
+  delete env.TIED_CLIENT_PROJECT_PATH;
+  delete env.TIED_CLIENT_BUNDLE_PATH;
+  delete env.TIED_METHODOLOGY_BUNDLE_PATH;
+  delete env.TIED_PATH_AUTHORITY;
 }
 
 /**
@@ -59,49 +65,21 @@ export function invokeTiedCliMcpTool(options) {
     };
   }
   const umbrellaCli = path.join(options.storeRoot, "mcp-server", "packages", "cli", "dist", "index.js");
-  const env = {
-    ...process.env,
-    ...options.env,
-    TIED_CLI_MCP_BIN: jsonSafeAbsolute(mcpBin),
-    TIED_CLI_REQUEST_ID: "1",
-    TIED_CLI_TOOL_NAME: options.toolName,
-    TIED_CLI_ARGS_JSON: options.argsJson ?? "{}",
-  };
+  /** @type {Record<string, string | undefined>} */
+  const env = { ...process.env, ...options.env };
+  stripInstallPathEnv(env);
+  env.TIED_CLI_MCP_BIN = jsonSafeAbsolute(mcpBin);
+  env.TIED_CLI_REQUEST_ID = "1";
+  env.TIED_CLI_TOOL_NAME = options.toolName;
+  env.TIED_CLI_ARGS_JSON = options.argsJson ?? "{}";
   try {
-    if (options.env) {
-      delete env.TIED_CLIENT_PROJECT_PATH;
-      delete env.TIED_BASE_PATH;
-      const explicitProject = pickClientProjectPath(options.env);
-      if (explicitProject) {
-        env.TIED_CLIENT_PROJECT_PATH = validateTiedProjectLayout(
-          jsonSafeAbsolute(explicitProject),
-        );
-        const explicitBundle = pickClientBundlePath(options.env);
-        if (explicitBundle) {
-          env.TIED_CLIENT_BUNDLE_PATH = jsonSafeAbsolute(explicitBundle);
-        }
-      } else {
-        const resolved = resolveTiedCliEnvFromCwd(options.projectRoot, {
-          ...env,
-          ...options.env,
-        });
-        env.TIED_CLIENT_PROJECT_PATH = resolved.TIED_CLIENT_PROJECT_PATH;
-        if (resolved.TIED_CLIENT_BUNDLE_PATH) {
-          env.TIED_CLIENT_BUNDLE_PATH = resolved.TIED_CLIENT_BUNDLE_PATH;
-        }
-      }
-    } else if (!pickClientProjectPath(env)) {
-      const resolved = resolveTiedCliEnvFromCwd(options.projectRoot, env);
-      env.TIED_CLIENT_PROJECT_PATH = resolved.TIED_CLIENT_PROJECT_PATH;
-      if (resolved.TIED_CLIENT_BUNDLE_PATH) {
-        env.TIED_CLIENT_BUNDLE_PATH = resolved.TIED_CLIENT_BUNDLE_PATH;
-      }
-    } else {
-      env.TIED_CLIENT_PROJECT_PATH = validateTiedProjectLayout(
-        jsonSafeAbsolute(pickClientProjectPath(env)),
-      );
-      delete env.TIED_BASE_PATH;
+    const resolved = resolveTiedCliEnvFromCwd(options.projectRoot, {});
+    env.TIED_CLIENT_PROJECT_PATH = resolved.TIED_CLIENT_PROJECT_PATH;
+    if (resolved.TIED_CLIENT_BUNDLE_PATH) {
+      env.TIED_CLIENT_BUNDLE_PATH = resolved.TIED_CLIENT_BUNDLE_PATH;
     }
+    env.TIED_BASE_PATH = resolved.TIED_CLIENT_PROJECT_PATH;
+    env.TIED_PATH_AUTHORITY = "install_mcp_json";
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return {
@@ -112,8 +90,6 @@ export function invokeTiedCliMcpTool(options) {
       error: err instanceof Error ? err : null,
     };
   }
-  delete env.TIED_BASE_PATH;
-  delete env.TIED_METHODOLOGY_BUNDLE_PATH;
   delete env.TIED_CLI_ARGS_FILE;
   if (fs.existsSync(umbrellaCli)) {
     env.TIED_CLI_UMBRELLA_MCP = "1";

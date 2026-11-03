@@ -220,7 +220,7 @@ Everything else on those entries (and all foreign `mcpServers`) is **preserved**
 
 **Canonical JSON shape:** On every write, bootstrap sorts object keys alphabetically (`localeCompare`) across the full file—`mcpServers` names, each server entry’s properties, and nested `env` / `headers` maps—while preserving `args` array order. Reorder-only diffs may appear on the first refresh after upgrade; values are unchanged ([REQ-TIED_MCP_JSON_CANONICAL_OUTPUT](../../tied-project/requirements/REQ-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml)).
 
-**CLI parity:** **`tied-cli.sh`** (and **`tied.sh`** / **`feature-orchestrator.sh`**) read **`TIED_BASE_PATH`** from the same mcp files (**.cursor/mcp.json** first, then **`.mcp.json`**) relative to the operator’s cwd—not from the linked stub’s script directory. Keep both harness files aligned after **`tied-install`**; when both define different paths, the Cursor file wins ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
+**CLI parity:** **`tied-cli.sh`** (and **`tied.sh`** / **`feature-orchestrator.sh`**) resolve the writable corpus **only** from the same mcp files (**.cursor/mcp.json** first, then **`.mcp.json`**) relative to the operator’s cwd—inherited shell **`TIED_*`** path env is ignored. Missing install config fails closed before MCP spawn ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
 
 Contract tests: `node --test tools/bootstrap/lib/claude-harness.test.mjs` (requires built `mcp-server` for MCP prerequisite).
 

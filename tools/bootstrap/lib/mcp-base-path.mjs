@@ -152,23 +152,8 @@ export function failClosedMissingMcp(projectRoot) {
  * @param {NodeJS.ProcessEnv} [processEnv]
  * @returns {{ projectRoot: string, TIED_CLIENT_PROJECT_PATH: string, TIED_CLIENT_BUNDLE_PATH?: string }}
  */
-export function resolveTiedCliEnvFromCwd(cwd, processEnv = process.env) {
-  const envOverride = pickClientProjectPath(processEnv);
-  if (envOverride) {
-    const basePath = validateTiedProjectLayout(jsonSafeAbsolute(envOverride));
-    /** @type {{ projectRoot: string, TIED_CLIENT_PROJECT_PATH: string, TIED_CLIENT_BUNDLE_PATH?: string }} */
-    const out = {
-      projectRoot: path.dirname(basePath),
-      TIED_CLIENT_PROJECT_PATH: basePath,
-    };
-    const bundle = pickClientBundlePath(processEnv);
-    if (bundle) {
-      out.TIED_CLIENT_BUNDLE_PATH = jsonSafeAbsolute(bundle);
-    }
-    return out;
-  }
-
-  const projectRoot = resolveProjectRootFromCwd(cwd, processEnv);
+export function resolveTiedCliEnvFromCwd(cwd, _processEnv = process.env) {
+  const projectRoot = resolveProjectRootFromCwd(cwd, _processEnv);
   const mcpEnv = readTiedYamlEnvFromProjectMcp(projectRoot);
   const fromMcp = pickClientProjectPath(mcpEnv);
   if (!fromMcp?.trim()) {

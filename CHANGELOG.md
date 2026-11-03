@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **tied-cli install-only path authority ([REQ-TIED_CLI_MCP_JSON_BASE_PATH])** — Kaizen **`fb-mw0b2pe8-7kp0gt`**: shell-inherited `TIED_*` path env no longer overrides tied-install **`.cursor/mcp.json`**; MCP stdio child uses allowlisted env and **`TIED_PATH_AUTHORITY=install_mcp_json`** (no cwd discovery on CLI path); test helpers use mcp.json fixtures.
+
 ### Added
 
 - **PROMPT-WF-03 agentstream facilitator readout** — [trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md](docs/demos/trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md) for disposable `1793605811-wf-agentstream-wf-03` (`workflow-trial-agentstream wf-03`, Composer 2.5, producer/consumer/wiring composition seam); evidence [FACILITATOR-WF-03-1793605811-wf-agentstream-wf-03](tied-project/working/FACILITATOR-WF-03-1793605811-wf-agentstream-wf-03/). Docs-only.

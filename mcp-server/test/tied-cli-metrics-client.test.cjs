@@ -23,30 +23,53 @@ const TIED_CLI_CURSOR = path.join(
 );
 const TIED_CLI_SOURCE = fs.existsSync(TIED_CLI_BUNDLED) ? TIED_CLI_BUNDLED : TIED_CLI_CURSOR;
 const MCP_BIN = path.join(MCP_ROOT, "dist/index.js");
-const TIED_BASE = path.join(REPO_ROOT, "tied");
+const TIED_PROJECT = path.join(REPO_ROOT, "tied-project");
+
+function seedInstallMcp(projectRoot, tiedProjectPath) {
+  fs.mkdirSync(path.join(projectRoot, ".cursor"), { recursive: true });
+  fs.writeFileSync(
+    path.join(projectRoot, ".cursor/mcp.json"),
+    `${JSON.stringify(
+      {
+        mcpServers: {
+          "tied-yaml": {
+            env: { TIED_CLIENT_PROJECT_PATH: tiedProjectPath },
+          },
+        },
+      },
+      null,
+      2,
+    )}\n`,
+    "utf8",
+  );
+}
 
 function runTiedCliWithStub(stubBody, cliArgs, extraEnv = {}, deleteEnv = []) {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "tied-cli-metrics-client-"));
-  const scriptDir = path.join(tempDir, "scripts");
-  fs.mkdirSync(scriptDir, { recursive: true });
-  fs.copyFileSync(TIED_CLI_SOURCE, path.join(scriptDir, "tied-cli.sh"));
-  fs.writeFileSync(path.join(scriptDir, "tied-mcp-stdio-client.cjs"), stubBody, "utf8");
+  seedInstallMcp(tempDir, TIED_PROJECT);
+  const stubPath = path.join(tempDir, "tied-mcp-stdio-client-stub.cjs");
+  fs.writeFileSync(stubPath, stubBody, "utf8");
   const env = {
     ...process.env,
-    TIED_BASE_PATH: TIED_BASE,
     TIED_MCP_BIN: MCP_BIN,
     TIED_MCP_COLLECT_METRICS: "1",
+    TIED_CLI_STDIO_CLIENT_PATH: stubPath,
     ...extraEnv,
   };
-  // IDE / shell often sets TIED_MCP_METRICS_CLIENT (e.g. from .cursor/mcp.json); only honor it when the test sets it explicitly.
+  delete env.TIED_BASE_PATH;
+  delete env.TIED_CLIENT_PROJECT_PATH;
+  delete env.TIED_CLIENT_BUNDLE_PATH;
+  delete env.TIED_METHODOLOGY_BUNDLE_PATH;
+  delete env.TIED_PATH_AUTHORITY;
   if (!Object.prototype.hasOwnProperty.call(extraEnv, "TIED_MCP_METRICS_CLIENT")) {
     delete env.TIED_MCP_METRICS_CLIENT;
   }
   for (const key of deleteEnv) {
     delete env[key];
   }
-  const result = spawnSync("bash", [path.join(scriptDir, "tied-cli.sh"), ...cliArgs], {
+  const result = spawnSync("bash", [TIED_CLI_SOURCE, ...cliArgs], {
     encoding: "utf8",
+    cwd: tempDir,
     env,
   });
   try {

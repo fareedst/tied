@@ -10,7 +10,7 @@ function shellQuote(value) {
 }
 
 try {
-  const resolved = resolveTiedCliEnvFromCwd(process.cwd(), process.env);
+  const resolved = resolveTiedCliEnvFromCwd(process.cwd(), {});
   process.stdout.write(
     `export TIED_CLIENT_PROJECT_PATH=${shellQuote(resolved.TIED_CLIENT_PROJECT_PATH)}\n`,
   );

@@ -16,8 +16,7 @@
 # Large payloads: any args other than exactly "{}" are written to a temp file and
 # passed via TIED_CLI_ARGS_FILE so they are not subject to OS environment size limits.
 #
-# Environment:
-  #   TIED_BASE_PATH  -- absolute path to tied-project/ (auto-detected if unset)
+# Environment (writable corpus paths come only from tied-install mcp.json — shell TIED_* path vars are ignored):
 #   TIED_MCP_BIN    -- path to mcp-server/dist/index.js (auto-detected if unset)
 #   TIED_CLI_QUIET_MCP_STDERR -- set to 0 to forward MCP server stderr (default: suppress)
 #   TIED_MCP_COLLECT_METRICS -- set to 1 or true to append usage metrics JSONL (default: off)
@@ -74,23 +73,24 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # Script anchor (linked install: TIED store path); not used as TIED_BASE_PATH authority.
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
-# [IMPL-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_CLI_MCP_JSON_BASE_PATH] Resolve from client cwd + mcp.json unless env override set.
-if [[ -z "${TIED_BASE_PATH:-}" ]]; then
-  RESOLVER_JS="${SCRIPT_DIR}/resolve-tied-cli-env.mjs"
-  if [[ ! -f "${RESOLVER_JS}" ]]; then
-    echo "ERROR: Missing ${RESOLVER_JS} (companion to tied-cli.sh)." >&2
-    exit 1
-  fi
-  _TIED_CLI_ENV_EXPORTS="$(
-    node "${RESOLVER_JS}" 2>&1
-  )" || {
-    echo "${_TIED_CLI_ENV_EXPORTS}" >&2
-    exit 1
-  }
-  # shellcheck disable=SC1090
-  eval "${_TIED_CLI_ENV_EXPORTS}"
-  unset _TIED_CLI_ENV_EXPORTS
+# [IMPL-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_CLI_MCP_JSON_BASE_PATH] Install mcp.json is sole corpus authority for CLI.
+unset TIED_BASE_PATH TIED_CLIENT_PROJECT_PATH TIED_CLIENT_BUNDLE_PATH TIED_METHODOLOGY_BUNDLE_PATH || true
+RESOLVER_JS="${SCRIPT_DIR}/resolve-tied-cli-env.mjs"
+if [[ ! -f "${RESOLVER_JS}" ]]; then
+  echo "ERROR: Missing ${RESOLVER_JS} (companion to tied-cli.sh)." >&2
+  exit 1
 fi
+_TIED_CLI_ENV_EXPORTS="$(
+  node "${RESOLVER_JS}" 2>&1
+)" || {
+  echo "${_TIED_CLI_ENV_EXPORTS}" >&2
+  exit 1
+}
+# shellcheck disable=SC1090
+eval "${_TIED_CLI_ENV_EXPORTS}"
+unset _TIED_CLI_ENV_EXPORTS
+export TIED_BASE_PATH="${TIED_CLIENT_PROJECT_PATH}"
+export TIED_PATH_AUTHORITY=install_mcp_json
 
 : "${TIED_METHOD_ROOT:=${TIED_METHODOLOGY_BUNDLE_PATH:-${REPO_ROOT}/tied-bundle}}"
 export TIED_METHOD_ROOT
@@ -180,7 +180,7 @@ else
   printf '%s' "${ARGS_JSON}" > "${TIED_CLI_ARGS_FILE}"
 fi
 
-CLIENT_JS="$SCRIPT_DIR/tied-mcp-stdio-client.cjs"
+CLIENT_JS="${TIED_CLI_STDIO_CLIENT_PATH:-$SCRIPT_DIR/tied-mcp-stdio-client.cjs}"
 if [[ ! -f "$CLIENT_JS" ]]; then
   echo "ERROR: Missing $CLIENT_JS (companion to tied-cli.sh)." >&2
   exit 1

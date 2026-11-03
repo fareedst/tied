@@ -45,16 +45,18 @@ describe("tied-cli large arguments", () => {
       "utf8"
     );
     try {
+      const env = { ...process.env, TIED_MCP_BIN: MCP_BIN };
+      delete env.TIED_BASE_PATH;
+      delete env.TIED_CLIENT_PROJECT_PATH;
+      delete env.TIED_CLIENT_BUNDLE_PATH;
+      delete env.TIED_PATH_AUTHORITY;
       const r = spawnSync(
         "bash",
         [TIED_CLI, "yaml_index_list_tokens", `@${argsPath}`],
         {
           encoding: "utf8",
-          env: {
-            ...process.env,
-            TIED_BASE_PATH: TIED_BASE,
-            TIED_MCP_BIN: MCP_BIN,
-          },
+          cwd: REPO_ROOT,
+          env,
           maxBuffer: 20 * 1024 * 1024,
         }
       );
@@ -92,12 +94,15 @@ describe("tied-cli large arguments", () => {
         {
           encoding: "utf8",
           env: {
-            ...process.env,
+            PATH: process.env.PATH,
+            HOME: process.env.HOME ?? "",
             TIED_CLI_MCP_BIN: MCP_BIN,
             TIED_CLI_TOOL_NAME: "yaml_index_insert",
             TIED_CLI_ARGS_FILE: argsPath,
             TIED_CLI_QUIET_MCP_STDERR: "0",
+            TIED_CLIENT_PROJECT_PATH: TIED_BASE,
             TIED_BASE_PATH: TIED_BASE,
+            TIED_PATH_AUTHORITY: "install_mcp_json",
           },
         }
       );
