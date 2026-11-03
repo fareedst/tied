@@ -25,7 +25,7 @@ todos:
     status: completed
   - id: leap-verify-closeout
     content: IMPL LEAP, lint_yaml, tied_validate_consistency, verification, session-handoff pass 2 closed
-    status: pending
+    status: completed
 isProject: true
 ---
 

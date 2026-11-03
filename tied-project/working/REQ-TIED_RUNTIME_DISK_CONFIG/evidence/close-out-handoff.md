@@ -1,4 +1,4 @@
-# close-out handoff — REQ-TIED_RUNTIME_DISK_CONFIG
+# close-out handoff — REQ-TIED_RUNTIME_DISK_CONFIG pass 2
 
 **Date:** 2026-11-03  
 **depth_tier:** minimal / advisory  
@@ -7,17 +7,22 @@
 
 | Signal | Status |
 | --- | --- |
-| Machine close-out | envelope validate ok (blocking gaps 0); gate receipt persisted |
-| Process contract | RDC + e2e follow-through implemented; traceable commit this pass |
-| Adherence ledger | reconcile ok (advisory `evidence_stale` on prior gate hash — non-blocking at minimal) |
+| Machine close-out | `merged_decision.allowed: true`; envelope blocking gaps 0 |
+| Process contract | Pass 2 implemented **`eb9a0e17`**; CITDP persisted; pending full-runtime handoff queued |
+| Adherence ledger | reconcile via close-out runner (`--reconcile`) |
 
-## Unblock notes
+## Commits
 
-- Initial envelope gap `not_applicable_receipt_missing` cleared via `request_evidence_envelope_backfill`.
-- Added `session-bootstrap-evidence.md` and `translate-sponsor-intent-evidence.md`.
+| SHA | Description |
+| --- | --- |
+| `eded7a37` | Pass 1 RDC traceability + e2e follow-through |
+| `eb9a0e17` | Pass 2 global path env cleanup |
+| (close-out) | CITDP + CHANGELOG + gate evidence — see post-commit `git log -1` |
 
-## Commit
+## Next for handoff manager
 
-See `git log -1` after traceable commit; SHA recorded below post-commit.
+[pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) — full on-disk config except secrets.
 
-**commit_sha:** `eded7a37` (feat(tied): runtime disk config traceability + e2e exec follow-through)
+## Gate receipt
+
+`tied-bundle/working/REQ-TIED_RUNTIME_DISK_CONFIG/gates/close_out-2026-11-03T17-12-12-371Z.json`

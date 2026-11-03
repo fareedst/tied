@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Runtime disk config pass 2 ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-CONSUMERS**: JEV harness store-root resolution drops shell `TIED_MCP_BIN`/`TIED_REPO_ROOT`; operator scripts use checkout anchor; feature defaults read mcp.json only; [operator-shell-profile.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/operator-shell-profile.md). Full non-secret on-disk migration queued in [pending-full-runtime-disk-handoff.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/pending-full-runtime-disk-handoff.md). Plan: [PLAN-rdc-env-cleanup-pass2.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-env-cleanup-pass2.md). Commit **`eb9a0e17`**.
+
 - **Runtime disk config traceability ([REQ-TIED_RUNTIME_DISK_CONFIG], [ARCH-TIED_RUNTIME_DISK_CONFIG], [IMPL-TIED_RUNTIME_DISK_CONFIG])** — Project REQ/ARCH/IMPL stack; bootstrap `tied-runtime-config.mjs`, store `.tied/store.yaml`, layout/store-self refresh LEAP; e2e linked-stub exec follow-through in `bootstrap-and-load.test.ts` ([REQ-TIED_CLI_MCP_JSON_BASE_PATH] SC-CLI-E2E-*). Plan: [PLAN-refine-pass2.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-refine-pass2.md).
 
 ### Fixed

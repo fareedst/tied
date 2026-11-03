@@ -1,23 +1,4 @@
-feat(tied): runtime disk config traceability + e2e exec follow-through
+docs(close-out): persist RDC pass 2 CITDP and gate evidence
 
-Promote on-disk runtime resolver and store refresh behavior to
-REQ-TIED_RUNTIME_DISK_CONFIG with IMPL LEAP on layered install and
-two-folder layout. Bootstrap tests and install-layers integration cover
-SC-RDC-* and SC-LCI-STORE-DOCS; bootstrap-and-load e2e follows linked
-stub exec to store scripts (CLI-E2E-EXEC-FOLLOWTHROUGH).
-
-Tokens: REQ-TIED_RUNTIME_DISK_CONFIG, ARCH-TIED_RUNTIME_DISK_CONFIG,
-IMPL-TIED_RUNTIME_DISK_CONFIG, REQ-TIED_CLI_MCP_JSON_BASE_PATH,
-IMPL-TIED_LAYERED_CLIENT_INSTALL, IMPL-TIED_TWO_FOLDER_LAYOUT.
-
-Close-out: close_out gate allowed; envelope blocking gaps 0 (minimal).
-
-Staging map:
-- tools/bootstrap/lib/tied-runtime-config.mjs (+ test), layout, copy-managed, mcp layer, methodology, install-layers.integration.test.mjs, related tests
-- tools/bundled-tied-yaml-skill/scripts/{tied-cli,tied,feature-orchestrator,resolve-tied-cli-env}.sh|.mjs
-- mcp-server/src/e2e/bootstrap-and-load.test.ts
-- tied-project/{requirements,architecture-decisions,implementation-decisions,semantic-tokens,citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml}
-- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/, NON-TIED-ON-DISK-RUNTIME-CONFIG/
-- .gitignore (.tied/store.local.yaml), CHANGELOG.md
-
-Excluded: agentstream, feature-orchestration, mcp fixtures/reports, unrelated working folders.
+Close-out run close-out-rdc-pass2-20261103; CHANGELOG pass 2 entry;
+SC-RDC-CONSUMERS in persisted CITDP. Implementation commit eb9a0e17.

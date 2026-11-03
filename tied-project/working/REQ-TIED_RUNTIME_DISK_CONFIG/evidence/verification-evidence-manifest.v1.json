@@ -11,7 +11,7 @@
         "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-base-path.test.mjs tools/bootstrap/lib/mcp-layer.test.mjs tools/bootstrap/lib/layout.test.mjs tools/bootstrap/lib/copy-managed.test.mjs"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 283,
+      "duration_ms": 340,
       "exit_code": 0,
       "id": "citdp-evidence-1",
       "result": "passed"
@@ -27,7 +27,7 @@
         "node --test tools/bootstrap/lib/tied-cli-invoke.test.mjs"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 1209,
+      "duration_ms": 1246,
       "exit_code": 0,
       "id": "citdp-evidence-2",
       "result": "passed"
@@ -43,7 +43,7 @@
         "cd mcp-server && npm test -- --test-path-pattern=bootstrap-and-load"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 32429,
+      "duration_ms": 33588,
       "exit_code": 1,
       "id": "citdp-evidence-3",
       "result": "failed"
@@ -59,13 +59,13 @@
         "bash"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 293,
+      "duration_ms": 286,
       "exit_code": 0,
       "id": "citdp-evidence-4",
       "result": "passed"
     }
   ],
-  "commit": "ed25833ef474c96881169e06c01a744f4f72112e",
+  "commit": "eb9a0e17755cf5d87da81dc556695c4b8d54fcbc",
   "covered_tokens": [
     "ARCH-TIED_LAYERED_CLIENT_INSTALL",
     "ARCH-TIED_TWO_FOLDER_LAYOUT",
@@ -100,6 +100,6 @@
       "result": "pending"
     }
   ],
-  "run_id": "close-out-rdc-20261103-b",
+  "run_id": "close-out-rdc-pass2-20261103",
   "schema_version": "verification-evidence-manifest.v1"
 }

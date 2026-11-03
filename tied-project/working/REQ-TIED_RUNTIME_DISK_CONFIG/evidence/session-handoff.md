@@ -2,45 +2,28 @@
 
 **handoff_kind:** session  
 **Date:** 2026-11-03  
-**request_token:** REQ-TIED_RUNTIME_DISK_CONFIG (primary)  
-**prompt_type:** build-plan pass 2 **implemented**, close-out **pending**
+**request_token:** REQ-TIED_RUNTIME_DISK_CONFIG  
+**prompt_type:** pass 2 close-out complete (implementation **`eb9a0e17`**)
 
 ## Plan spine
 
 | Track | Status | Linked plan |
 | --- | --- | --- |
-| **Runtime disk TIED promotion** | committed **eded7a37** | [PLAN-refine-pass2.md](../PLAN-refine-pass2.md) |
-| **E2E exec follow-through** | committed **eded7a37** | [PLAN-e2e-exec-followthrough-pass1.md](../PLAN-e2e-exec-followthrough-pass1.md) |
-| **RDC pass 2 — global path env cleanup** | **implemented**, uncommitted | [PLAN-rdc-env-cleanup-pass2.md](../PLAN-rdc-env-cleanup-pass2.md) |
+| **Runtime disk pass 1** | committed **eded7a37** | [PLAN-refine-pass2.md](../PLAN-refine-pass2.md) |
+| **RDC pass 2 — global path env** | committed **eb9a0e17** + close-out CITDP | [PLAN-rdc-env-cleanup-pass2.md](../PLAN-rdc-env-cleanup-pass2.md) |
 
-## Authoritative refs
+## Completion signals
 
-| Artifact | Path |
+| Signal | Status |
 | --- | --- |
-| RDC CITDP (persisted) | [tied-project/citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml](../../../citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml) |
-| RDC working | [CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml](../CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml) |
-| Operator shell | [operator-shell-profile.md](./operator-shell-profile.md) |
-| Next wave (queued) | [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) |
-
-## Pass 2 delivered (uncommitted)
-
-| Area | Change |
-| --- | --- |
-| **JEV harness** | Removed `TIED_MCP_BIN` / `TIED_REPO_ROOT` resolution; disk + package anchor only; **SC-RDC-CONSUMERS** tests |
-| **Scripts** | `tied-post-session`, `tasd`, `feature-relay`, `lint`, `build-commands`, `_build_commands_cli_guide` — checkout anchor / ignore shell global path env |
-| **Docs** | SKILL, bootstrap README, `operator-shell-profile.md` |
-| **TIED** | **SC-RDC-CONSUMERS** in REQ detail; IMPL JEV pseudo-code LEAP |
-| **Follow-on** | `tied.sh`, `feature-orchestrator.sh`, `merged-routing-baseline.ts` (from pre-pass-2 slice) |
+| Machine close-out | ok — `close-out-rdc-pass2-20261103`, blocking gaps 0 |
+| Process contract | CITDP persisted; [close-out-handoff.md](./close-out-handoff.md) |
+| Adherence ledger | reconcile run in close-out gates |
 
 ## Do next
 
-1. **Scoped commit** — pass 2 files only (exclude fixture/source-graph drift unless intentional).
-2. **`@close-out`** — `lint_yaml`, `tied_validate_consistency`, persist CITDP, verification gate.
-3. **Handoff manager:** promote [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) to next `@add-feature` after pass 2 close-out.
-
-## Pending for handoff (after pass 2 close-out)
-
-Full runtime on-disk config **except secrets** — see [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md).
+1. **Handoff manager:** start [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) via `@add-feature` when ready.
+2. Optional: push `main` when sponsor ready.
 
 ## Repeatable verification
 
