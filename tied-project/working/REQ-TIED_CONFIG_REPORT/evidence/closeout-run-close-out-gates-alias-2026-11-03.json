@@ -1,0 +1,144 @@
+{
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "activation_collect": {
+    "skipped": true,
+    "reason": "no_run_id",
+    "run_id": null
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "REQ-TIED_CONFIG_REPORT",
+      "findings": [
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_CONFIG_REPORT/gates/close_out-2026-11-03T23-31-21-672Z.json",
+            "stored_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "current_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "stored_citdp_hash": "sha256:04de599522eb25f6ab2bc8fc723fdbfa2c9ea431686c58ac52edcfb39bb974dd",
+            "current_citdp_hash": "sha256:d15c497f1ff604ab28f7d2a0949111ed508a3079d64793492514b94ddb10c889"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_CONFIG_REPORT/gates/close_out-2026-11-03T23-31-50-112Z.json",
+            "stored_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "current_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "stored_citdp_hash": "sha256:04de599522eb25f6ab2bc8fc723fdbfa2c9ea431686c58ac52edcfb39bb974dd",
+            "current_citdp_hash": "sha256:d15c497f1ff604ab28f7d2a0949111ed508a3079d64793492514b94ddb10c889"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_CONFIG_REPORT/gates/close_out-2026-11-03T23-32-14-766Z.json",
+            "stored_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "current_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "stored_citdp_hash": "sha256:04de599522eb25f6ab2bc8fc723fdbfa2c9ea431686c58ac52edcfb39bb974dd",
+            "current_citdp_hash": "sha256:d15c497f1ff604ab28f7d2a0949111ed508a3079d64793492514b94ddb10c889"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_CONFIG_REPORT/gates/close_out-2026-11-03T23-49-12-269Z.json",
+            "stored_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "current_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "stored_citdp_hash": "sha256:04de599522eb25f6ab2bc8fc723fdbfa2c9ea431686c58ac52edcfb39bb974dd",
+            "current_citdp_hash": "sha256:d15c497f1ff604ab28f7d2a0949111ed508a3079d64793492514b94ddb10c889"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_CONFIG_REPORT/gates/close_out-2026-11-03T23-49-26-596Z.json",
+            "stored_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "current_tracker_hash": "sha256:f28845d07d67f5c08d224e4fc7327294cecbfc93e24e1ef0e5a1dd706269638c",
+            "stored_citdp_hash": "sha256:04de599522eb25f6ab2bc8fc723fdbfa2c9ea431686c58ac52edcfb39bb974dd",
+            "current_citdp_hash": "sha256:d15c497f1ff604ab28f7d2a0949111ed508a3079d64793492514b94ddb10c889"
+          }
+        }
+      ],
+      "ledger_rows": 6,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/REQ-TIED_CONFIG_REPORT/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/REQ-TIED_CONFIG_REPORT/gates/close_out-2026-11-03T23-49-26-596Z.json",
+    "hash": "sha256:9b444a7e6300ee8f995e79d1cefb07fd45c3cfc1e3197d79391a8b58170f10d6"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/REQ-TIED_CONFIG_REPORT/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

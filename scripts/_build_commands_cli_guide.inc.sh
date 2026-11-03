@@ -181,6 +181,9 @@ _how_tied() {
   _how_render_body <<'EOF'
   tied-cli TOOL [JSON]       MCP tool surface via tied-cli.sh
                              e.g. tied-cli yaml_index_list_tokens '{"index":"requirements"}'
+  tied-config-report [opts]  tied-config-report.v1 from cwd (no MCP spawn)
+                             --format json|text  --include-secrets
+                             MCP parity: tied-cli tied_config_report '{}'
   lint-tied                  lint all project tied/**/*.yaml
   lint-reorder [args]        scripts/lint.sh (list reorder policy; quiet on success)
   validate-tied              tied_validate_consistency (pseudo-code + detail checks)

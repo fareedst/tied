@@ -1,0 +1,11 @@
+chore(config): add tied-config-report build-commands alias
+
+Expose tied-config-report.v1 via `source scripts/build-commands.sh` and
+document it under `how` TIED YAML (parity with tied-cli tied_config_report).
+
+REQ-TIED_CONFIG_REPORT follow-up slice.
+
+Completion signals: close_out gate allowed; envelope blocking_gaps=0;
+node --test tools/bootstrap/build-commands-how.test.mjs passed.
+
+Upstream feedback: N/A

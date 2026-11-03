@@ -80,6 +80,15 @@ tied_cli() {
 }
 alias tied-cli=tied_cli
 
+# [REQ-TIED_CONFIG_REPORT] [IMPL-TIED_CONFIG_REPORT] — no MCP spawn; store or client cwd.
+tied_config_report() {
+  (
+    cd "${_BUILD_COMMANDS_REPO_ROOT}" || exit 1
+    node tools/bootstrap/tied-config-report-cli.mjs "$@"
+  )
+}
+alias tied-config-report=tied_config_report
+
 lint_tied() {
   local root="${_BUILD_COMMANDS_REPO_ROOT}"
   (
