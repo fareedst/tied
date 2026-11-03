@@ -14,6 +14,11 @@ execution_evidence:
     - session-bootstrap
     - test-strategy
     - translate-sponsor-intent
+    - persist-implementation-records
+    - unit-test-red
+    - unit-test-green
+    - verification-gate
+    - traceable-commit
   envelope_path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json
   operator_evidence:
     command_seq: []
@@ -106,3 +111,15 @@ steps:
       evidence_refs:
         - kind: file_path
           path: mcp-server/src/tied-runtime-introspection.ts
+  - disposition: completed
+    slug: verification-gate
+    tracking:
+      evidence_refs:
+        - kind: file_path
+          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/closeout-run-close-out-gates-mcp-introspection.json
+  - disposition: completed
+    slug: traceable-commit
+    tracking:
+      evidence_refs:
+        - kind: file_path
+          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/traceable-commit-evidence-mcp-introspection.md

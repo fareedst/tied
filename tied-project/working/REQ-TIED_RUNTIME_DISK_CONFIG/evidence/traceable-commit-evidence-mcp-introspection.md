@@ -26,7 +26,7 @@ N/A — reuses on-disk runtime vocabulary.
 
 ## Commit
 
-SHA: *(recorded after git commit)*
+SHA: **`97c35a5a`**
 
 Message: [proposed-commit-message.txt](./proposed-commit-message.txt)
 

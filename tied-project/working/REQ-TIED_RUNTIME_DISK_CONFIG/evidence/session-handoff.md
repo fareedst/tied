@@ -3,7 +3,7 @@
 **handoff_kind:** session  
 **Date:** 2026-11-03  
 **request_token:** REQ-TIED_RUNTIME_DISK_CONFIG  
-**git:** `main` — MCP introspection close-out committed (see traceable-commit evidence)
+**git:** `main` @ **`97c35a5a`** — MCP introspection close-out; push when ready
 
 ## One line
 
@@ -19,7 +19,7 @@ RDC **complete** for product scope: disk config, fixture parity, MCP **`tied_con
 | Agentstream resolver | closed | `d7c46e7f` | [spine-review-2026-11-03.md](./spine-review-2026-11-03.md) |
 | Spine-review bootstrap fixes | closed | `d9a7c5e9` | [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
 | Fixture parity | closed | `e6cb7169` | [PLAN-rdc-js-ts-fixture-parity-refine.md](../PLAN-rdc-js-ts-fixture-parity-refine.md) |
-| **MCP introspection** | **closed** | *(this close-out)* | [PLAN-rdc-mcp-introspection-refine.md](../PLAN-rdc-mcp-introspection-refine.md), [traceable-commit-evidence-mcp-introspection.md](./traceable-commit-evidence-mcp-introspection.md) |
+| **MCP introspection** | **closed** | **`97c35a5a`** | [PLAN-rdc-mcp-introspection-refine.md](../PLAN-rdc-mcp-introspection-refine.md), [traceable-commit-evidence-mcp-introspection.md](./traceable-commit-evidence-mcp-introspection.md) |
 
 ## Completion signals (MCP introspection slice)
 
