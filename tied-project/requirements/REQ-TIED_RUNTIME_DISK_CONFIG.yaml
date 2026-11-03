@@ -71,6 +71,7 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
         - "tools/bootstrap/lib/mcp-layer.test.mjs"
         - "tools/bootstrap/lib/tied-runtime-config.test.mjs"
         - "tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs"
+        - "mcp-server/src/tied-runtime-introspection.test.ts"
   satisfaction_criteria_append:
     - criterion: "Non-secret operator toggles resolve from store operator yaml and sync to mcp.json on refresh (collect_metrics, envelope_hooks, agentstream preflight); shell export ignored when disk defines the toggle."
       id: "SC-RDC-OPERATOR-DISK"
@@ -78,3 +79,6 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
     - criterion: "Shared fixture catalog cases produce identical normalized resolve output from bootstrap .mjs and agentstream .ts resolvers."
       id: "SC-RDC-FIXTURE-PARITY"
       metric: "node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs"
+    - criterion: "tied_config_get_base_path returns disk-resolved store_root, mcp_dist_path, and config_sources aligned with bootstrap resolver."
+      id: "SC-RDC-MCP-INTROSPECTION"
+      metric: "cd mcp-server && npm run build && npx tsx --test src/tied-runtime-introspection.test.ts"

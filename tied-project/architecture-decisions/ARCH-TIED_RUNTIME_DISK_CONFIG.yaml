@@ -4,7 +4,7 @@ ARCH-TIED_RUNTIME_DISK_CONFIG:
     implementation_approach:
       details:
         - "deriveStoreRootFromMcpDist from args[0]"
-        - "Intentional subset: MCP layout introspection not required for SC-RDC-*"
+        - "MCP tied-layout.ts remains subset of layout.mjs; runtime path introspection via tied_config_get_base_path (SC-RDC-MCP-INTROSPECTION)"
         - "refreshStoreRuntimeConfig on store refresh"
       summary: "tied-runtime-config.mjs + mcp layer refresh; no shell path authority for global roots."
     name: "On-disk runtime config surfaces"

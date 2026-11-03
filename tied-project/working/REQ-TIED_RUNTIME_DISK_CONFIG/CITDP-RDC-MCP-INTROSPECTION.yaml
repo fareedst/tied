@@ -1,0 +1,79 @@
+CITDP-RDC-MCP-INTROSPECTION:
+  change_definition:
+    current_behavior: "`tied_config_get_base_path` returns corpus `base_path`, layout mode, bundle_root, and echoes `store_root` from process.env.TIED_STORE_ROOT only. Operators and agents cannot see disk-resolved MCP dist or which surfaces (mcp.json, store yaml, discovery) authored global paths—despite RDC shipping on-disk resolution in bootstrap and agentstream."
+    desired_behavior: "Same MCP tool adds disk-aligned `mcp_dist_path`, resolved `store_root`, and structured `config_sources` (and preserves existing fields). Values match bootstrap `resolveTiedRuntimeConfig` / agentstream mirror for the active client project_root; env echo fields remain for stdio debugging but are not authoritative for global paths."
+    non_goals:
+      - "New MCP tools beyond extending tied_config_get_base_path"
+      - "Full ARCH-TIED_LAYOUT parity in MCP tied-layout.ts"
+      - "Changing resolver semantics or install refresh writers"
+      - "E2e metrics env LEAP (pass-4 candidate)"
+      - "Exposing secrets or operator.local.yaml contents"
+    sponsor_decisions:
+      costly_accepted_on_implementation: "MCP server dynamically imports bootstrap tied-runtime-config.mjs from resolved store root when present; thin TS fallback only when store checkout lacks tools/bootstrap (document limitation)"
+    success_criteria:
+      - "SC-RDC-CONSUMERS"
+      - "SC-RDC-MCP-INTROSPECTION"
+      - "SC-RDC-RESOLVE"
+    unchanged_behavior:
+      - "Existing base_path / binding_status / mode fields unchanged in shape"
+      - "YAML MCP tools still use getBasePath() corpus path authority"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_RUNTIME_DISK_CONFIG"
+      run_id: null
+      scope:
+        - "mcp-introspection"
+    envelope_path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required on changed tied-project YAML"
+    pre_implementation_gate: "tied_checklist_gate_validate before RED"
+    tied_validate_consistency: "required before close-out"
+  evidence:
+    command_seq:
+      - "cd mcp-server && npm test -- --test-path-pattern=tied-config-get-base-path"
+      - "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_config_get_base_path '{}'"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_RUNTIME_DISK_CONFIG"
+    modules_or_boundaries: "mcp-server/src/tools/index.ts; mcp-server/src/tied-runtime-introspection.ts (new); mcp-server/README.md; tied-yaml skill docs"
+    tied_tokens_affected:
+      - "ARCH-TIED_RUNTIME_DISK_CONFIG"
+      - "IMPL-TIED_RUNTIME_DISK_CONFIG"
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "REQ-TIED_RUNTIME_DISK_CONFIG"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-03"
+    title: "MCP tied_config_get_base_path disk introspection (handoff E)"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      research_profile: "integrated-agent"
+      counterexamples:
+        - "Dynamic import of bootstrap .mjs fails on Windows path or packaged MCP without store tree."
+        - "config_sources leaks wrong surface when mcp.json and store yaml disagree silently."
+        - "Operators treat introspection JSON as write authority and skip tied-install refresh."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Monolith store + linked clients already tested via tied-cli-invoke and fixture catalog."
+        - "Tool is read-only; no persistence or network."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "mcp-server/src/tools/index.ts"
+        - "tied-project/working/NON-TIED-ON-DISK-RUNTIME-CONFIG/PLAN.md"
+        - "tools/bootstrap/lib/tied-runtime-config.mjs"
+      falsification_questions:
+        - "Does introspection match bootstrap resolver for shared fixture catalog cases?"
+        - "Is behavior documented when bootstrap module is unavailable?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Read-only observability; no auth, network, or persistence."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    summary: "Closes deferred handoff E; low product risk if aligned to existing resolver tests."
+  test_strategy:
+    integration_command_seq:
+      - command: "cd mcp-server && npm test -- --test-path-pattern=tied-runtime-introspection"
+        notes: "Unit tests with temp mcp.json + optional store yaml."
+    matrix_notes: "RED: test expects mcp_dist_path + config_sources before handler wired; LEAP REQ satisfaction_criteria_append SC-RDC-MCP-INTROSPECTION; update ARCH intentional-subset note."

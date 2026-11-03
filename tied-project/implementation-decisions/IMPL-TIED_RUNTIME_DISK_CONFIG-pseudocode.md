@@ -90,6 +90,24 @@ procedure RESOLVE_RUNTIME_FOR_CWD(cwd, processEnv, opts):
   IF storeRoot THEN RETURN RESOLVE_RUNTIME_FROM_STORE_YAML(storeRoot, opts)
   THROW RUNTIME_DIAGNOSTIC_MISSING
 
+## MCP_RUNTIME_INTROSPECTION_SNAPSHOT
+# [IMPL-TIED_RUNTIME_DISK_CONFIG] [ARCH-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG]
+# How: tied_config_get_base_path calls bootstrap resolver for disk store_root, mcp_dist_path, config_sources (SC-RDC-MCP-INTROSPECTION).
+
+procedure MCP_RUNTIME_INTROSPECTION_SNAPSHOT(projectRoot, processEnv):
+  Contract:
+    INPUT: client project_root; MCP stdio processEnv from mcp.json
+    OUTPUT: store_root, mcp_dist_path, config_sources, runtime_introspection_status
+    PRE: projectRoot absolute
+    POST: when status ok, paths match resolveTiedRuntimeConfig for same cwd/env
+    FAILURE_MODES: unavailable when bootstrap module missing; error when resolver throws
+    EFFECTS: read-only dynamic import of tools/bootstrap/lib/tied-runtime-config.mjs
+    TERMINATION: total
+  modulePath := locate bootstrap tied-runtime-config.mjs under TIED_STORE_ROOT or projectRoot
+  IF modulePath missing THEN RETURN unavailable snapshot
+  cfg := resolveTiedRuntimeConfig(cwd=projectRoot, mode=auto, processEnv)
+  RETURN ok snapshot with cfg.storeRoot, cfg.mcpDistPath, cfg.sources
+
 ## LOAD_MERGED_OPERATOR_CONFIG
 # [IMPL-TIED_RUNTIME_DISK_CONFIG] [ARCH-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG]
 # How: Merge store.yaml operator section with gitignored operator.local.yaml overlay.

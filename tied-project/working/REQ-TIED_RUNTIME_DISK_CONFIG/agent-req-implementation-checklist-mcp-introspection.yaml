@@ -1,0 +1,108 @@
+citdp_pointer: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-RDC-MCP-INTROSPECTION.yaml
+copy_hygiene: Tracker for MCP introspection slice; separate from fixture-parity close-out.
+description: Tracker for tied_config_get_base_path disk introspection. See PLAN-rdc-mcp-introspection-refine.md.
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ''
+  completed:
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - session-bootstrap
+    - test-strategy
+    - translate-sponsor-intent
+  envelope_path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    command_seq: []
+    status: not_run
+  request: REQ-TIED_RUNTIME_DISK_CONFIG
+execution_profile:
+  depth_tier: minimal
+  gate_policy: advisory
+  profile_depth: minimal
+gate_contract:
+  depth_selection_before_inquiry: true
+  fail_closed: true
+  phases:
+    - close_out
+    - pre_implementation
+    - verification
+gate_policy: advisory
+linked_plans:
+  - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-mcp-introspection-refine.md
+notes: refine-plan 2026-11-03 — deferred handoff item E (NON-TIED plan introspection).
+profile_depth: minimal
+steps:
+  - disposition: completed
+    slug: translate-sponsor-intent
+    tracking:
+      evidence_refs: &ref_0
+        - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/translate-sponsor-intent-evidence.md
+      status: completed
+    evidence_refs: *ref_0
+  - disposition: completed
+    slug: change-definition
+    tracking:
+      evidence_refs: &ref_1
+        - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/change-definition-evidence.md
+      status: completed
+    evidence_refs: *ref_1
+  - disposition: completed
+    slug: impact-discovery
+    tracking:
+      evidence_refs: &ref_2
+        - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/impact-discovery-evidence.md
+      status: completed
+    evidence_refs: *ref_2
+  - disposition: completed
+    slug: risk-assessment
+    tracking:
+      evidence_refs: &ref_3
+        - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/risk-assessment-evidence.md
+      status: completed
+    evidence_refs: *ref_3
+  - disposition: completed
+    slug: test-strategy
+    tracking:
+      evidence_refs: &ref_4
+        - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/test-strategy-evidence.md
+      status: completed
+    evidence_refs: *ref_4
+  - disposition: completed
+    slug: session-bootstrap
+    tracking:
+      evidence_refs: &ref_5
+        - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/session-bootstrap-evidence.md
+      status: completed
+    evidence_refs: *ref_5
+  - disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: depth_tier minimal; read-only MCP fields; sub_adversarial_inquiry_pass not_applicable.
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      evidence_refs:
+        - kind: file_path
+          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-RDC-MCP-INTROSPECTION.yaml
+  - disposition: completed
+    slug: persist-implementation-records
+    tracking:
+      evidence_refs:
+        - kind: file_path
+          path: tied-project/requirements/REQ-TIED_RUNTIME_DISK_CONFIG.yaml
+        - kind: file_path
+          path: tied-project/implementation-decisions/IMPL-TIED_RUNTIME_DISK_CONFIG-pseudocode.md
+  - disposition: completed
+    slug: unit-test-red
+    tracking:
+      evidence_refs:
+        - kind: file_path
+          path: mcp-server/src/tied-runtime-introspection.test.ts
+  - disposition: completed
+    slug: unit-test-green
+    tracking:
+      evidence_refs:
+        - kind: file_path
+          path: mcp-server/src/tied-runtime-introspection.ts

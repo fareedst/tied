@@ -26,7 +26,7 @@ Every session that mutates project REQ/ARCH/IMPL YAML must **`tied_config_get_ba
 
 ### On-disk runtime configuration
 
-Global paths (**`tied-project/`**, store root, **`mcp-server/dist/index.js`**) come from install-managed **`.cursor/mcp.json`** / **`.mcp.json`** (`tied-yaml` entry: `args[0]` + `env.TIED_CLIENT_*`) and, at the methodology store, **`.tied/store.yaml`** plus gitignored **`.tied/store.local.yaml`** (written by **`tied-install` / `--refresh`**). **`tied-cli.sh`** ignores shell **`TIED_MCP_BIN`**, **`TIED_REPO_ROOT`**, and **`TIED_STORE_ROOT`**.
+Global paths (**`tied-project/`**, store root, **`mcp-server/dist/index.js`**) come from install-managed **`.cursor/mcp.json`** / **`.mcp.json`** (`tied-yaml` entry: `args[0]` + `env.TIED_CLIENT_*`) and, at the methodology store, **`.tied/store.yaml`** plus gitignored **`.tied/store.local.yaml`** (written by **`tied-install` / `--refresh`**). **`tied-cli.sh`** ignores shell **`TIED_MCP_BIN`**, **`TIED_REPO_ROOT`**, and **`TIED_STORE_ROOT`**. **`tied_config_get_base_path`** also returns disk-resolved **`store_root`**, **`mcp_dist_path`**, and **`config_sources`** when the store bootstrap resolver is available (**SC-RDC-MCP-INTROSPECTION**); use **`env_TIED_STORE_ROOT`** for raw stdio env echo only.
 
 ```bash
 cd /path/to/client-repo

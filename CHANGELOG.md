@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Runtime fixture parity ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-FIXTURE-PARITY**: shared catalog `tools/bootstrap/fixtures/tied-runtime/`, loader + cross-runtime parity gate; agentstream tests consume catalog via `tied-runtime-fixture-loader.d.mts`.
 
+- **MCP runtime introspection ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-MCP-INTROSPECTION**: `tied_config_get_base_path` returns disk-resolved `store_root`, `mcp_dist_path`, and `config_sources` via bootstrap resolver. Plan: [PLAN-rdc-mcp-introspection-refine.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-mcp-introspection-refine.md).
+
 ### Fixed
 
 - **Runtime disk config spine review ([REQ-TIED_RUNTIME_DISK_CONFIG])** — Install honors shell `TIED_MCP_COLLECT_METRICS=1` when operator/brownfield omit `collect_metrics`; tied-cli CJS tests seed disk-first `mcp.json`; linked vocab index validates `tied-project/vocab`; stale-layout lint allows store runtime paths under `.tied/`. Evidence: [spine-review-2026-11-03.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/spine-review-2026-11-03.md).

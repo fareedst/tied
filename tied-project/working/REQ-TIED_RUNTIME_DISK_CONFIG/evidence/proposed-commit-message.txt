@@ -1,22 +1,9 @@
-fix(bootstrap): RDC spine-review e2e and vocab validator [REQ-TIED_RUNTIME_DISK_CONFIG]
+feat(mcp): disk introspection on tied_config_get_base_path [REQ-TIED_RUNTIME_DISK_CONFIG]
 
-Install shell TIED_MCP_COLLECT_METRICS=1 when operator/brownfield omit
-collect_metrics (bootstrap-and-load + new-tied-client e2e). Seed tied-cli CJS
-fixtures with mcp.json args[0] + TIED_STORE_ROOT. Linked tied-bundle/vocab
-stubs validate against tied-project/vocab. Stale-layout lint allows store
-runtime paths under .tied/.
+SC-RDC-MCP-INTROSPECTION: store_root, mcp_dist_path, config_sources via
+bootstrap resolver; env_TIED_STORE_ROOT echo retained.
 
-Tests: bootstrap unit+e2e, tied-cli CJS, validate_vocab_index.rb (see session-handoff).
+Tests: mcp-server/src/tied-runtime-introspection.test.ts (3/3).
 
-Staging:
-- tools/bootstrap/lib/tied-runtime-config.mjs
-- tools/bootstrap/lib/tied-runtime-config.test.mjs
-- tools/bootstrap/lib/lint-stale-layout.mjs
-- tools/bootstrap/lib/lint-stale-layout.test.mjs
-- mcp-server/test/tied-cli-bundled-methodology-pilot.test.cjs
-- mcp-server/test/tied-cli-metrics-client.test.cjs
-- scripts/validate_vocab_index.rb
-- tools/bundled-tied-yaml-skill/SKILL.md
-- tied-project/citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
-- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/** (trackers, evidence, spine review)
-- CHANGELOG.md
+Staging: mcp-server/src/tied-runtime-introspection.*, tools/index.ts, README,
+TIED LEAP (REQ/ARCH/IMPL), CITDP + plan + tracker + close-out evidence.

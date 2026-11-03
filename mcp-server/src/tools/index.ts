@@ -413,7 +413,7 @@ export const allTools = [
     name: "tied_config_get_base_path",
     config: {
       description:
-        "Return the effective TIED project corpus path (writable tied-project/). IDE MCP: env injected from tied-install mcp.json (canonical TIED_CLIENT_PROJECT_PATH, then legacy TIED_BASE_PATH), then cwd discovery. tied-cli stdio sets TIED_PATH_AUTHORITY=install_mcp_json and requires install path env only (no cwd discovery).",
+        "Return the effective TIED project corpus path (writable tied-project/) plus disk-aligned runtime introspection (store_root, mcp_dist_path, config_sources via bootstrap resolver when available). IDE MCP: env injected from tied-install mcp.json (canonical TIED_CLIENT_PROJECT_PATH, then legacy TIED_BASE_PATH), then cwd discovery. tied-cli stdio sets TIED_PATH_AUTHORITY=install_mcp_json and requires install path env only (no cwd discovery).",
       inputSchema: z.object({}),
     },
     handler: async () => {
@@ -440,6 +440,13 @@ export const allTools = [
       const layout = resolveTiedLayout(project_root);
       const bundle_root = getMethodologyBasePath();
       const installConfigExists = fs.existsSync(layout.installConfigPath);
+      const env_TIED_STORE_ROOT = process.env.TIED_STORE_ROOT?.trim() || null;
+      const { resolveRuntimeIntrospection } = await import("../tied-runtime-introspection.js");
+      const runtimeIntrospection = await resolveRuntimeIntrospection(project_root, process.env);
+      const diskStoreRoot =
+        runtimeIntrospection.runtime_introspection_status === "ok"
+          ? runtimeIntrospection.store_root
+          : env_TIED_STORE_ROOT;
       return textContent(
         prettyCanonicalJson(
           {
@@ -451,11 +458,18 @@ export const allTools = [
             env_TIED_CLIENT_PROJECT_PATH,
             env_TIED_CLIENT_BUNDLE_PATH,
             env_TIED_BASE_PATH,
+            env_TIED_STORE_ROOT,
             project_path_resolved_from,
             legacy_project_path_env_ignored,
             project_root,
             bundle_root,
-            store_root: process.env.TIED_STORE_ROOT ?? null,
+            store_root: diskStoreRoot,
+            mcp_dist_path: runtimeIntrospection.mcp_dist_path,
+            config_sources: runtimeIntrospection.config_sources,
+            runtime_introspection_status: runtimeIntrospection.runtime_introspection_status,
+            ...(runtimeIntrospection.runtime_introspection_error
+              ? { runtime_introspection_error: runtimeIntrospection.runtime_introspection_error }
+              : {}),
             mode: installConfigExists ? "client" : "store",
             legacy_project_dir: layout.legacyProjectDir,
           }

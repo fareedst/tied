@@ -8,10 +8,10 @@
       "command": [
         "-lc",
         "bash",
-        "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-base-path.test.mjs tools/bootstrap/lib/mcp-layer.test.mjs tools/bootstrap/lib/layout.test.mjs tools/bootstrap/lib/copy-managed.test.mjs"
+        "cd mcp-server && npm test -- --test-path-pattern=tied-config-get-base-path"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 374,
+      "duration_ms": 34408,
       "exit_code": 0,
       "id": "citdp-evidence-1",
       "result": "passed"
@@ -24,57 +24,20 @@
       "command": [
         "-lc",
         "bash",
-        "node --test tools/bootstrap/lib/tied-cli-invoke.test.mjs"
+        "tools/bundled-tied-yaml-skill/scripts/tied-cli.sh tied_config_get_base_path '{}'"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 1372,
+      "duration_ms": 842,
       "exit_code": 0,
       "id": "citdp-evidence-2",
       "result": "passed"
-    },
-    {
-      "artifacts": [
-        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
-        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
-      ],
-      "command": [
-        "-lc",
-        "bash",
-        "cd mcp-server && npm test -- --test-path-pattern=bootstrap-and-load"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 35343,
-      "exit_code": 0,
-      "id": "citdp-evidence-3",
-      "result": "passed"
-    },
-    {
-      "artifacts": [
-        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/quality-manifest/citdp-evidence-4.stderr.txt",
-        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/quality-manifest/citdp-evidence-4.stdout.txt"
-      ],
-      "command": [
-        "-lc",
-        "./tied-install.sh --refresh .",
-        "bash"
-      ],
-      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 303,
-      "exit_code": 0,
-      "id": "citdp-evidence-4",
-      "result": "passed"
     }
   ],
-  "commit": "121fd287a22012f913abc47431f6eecb846ca5d9",
+  "commit": "c07706adfc6edfe683b10337d80809c54680f915",
   "covered_tokens": [
-    "ARCH-TIED_LAYERED_CLIENT_INSTALL",
-    "ARCH-TIED_TWO_FOLDER_LAYOUT",
-    "IMPL-TIED_FILES",
-    "IMPL-TIED_LAYERED_CLIENT_INSTALL",
-    "IMPL-TIED_TWO_FOLDER_LAYOUT",
-    "REQ-TIED_CLI_MCP_JSON_BASE_PATH",
-    "REQ-TIED_LAYERED_CLIENT_INSTALL",
-    "REQ-TIED_TWO_FOLDER_LAYOUT"
+    "ARCH-TIED_RUNTIME_DISK_CONFIG",
+    "IMPL-TIED_RUNTIME_DISK_CONFIG",
+    "REQ-TIED_RUNTIME_DISK_CONFIG"
   ],
   "environment": {
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
@@ -100,6 +63,6 @@
       "result": "pending"
     }
   ],
-  "run_id": "close-out-spine-fix-2026-11-03",
+  "run_id": "close-out-mcp-introspection-2026-11-03",
   "schema_version": "verification-evidence-manifest.v1"
 }
