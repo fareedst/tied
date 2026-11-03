@@ -1,6 +1,6 @@
 /**
  * [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING] [REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE]
- * [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
+ * [REQ-TIED_STORE_README_EXPERIENCE_HUB] [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
  * [IMPL-TIED_STORE_README_SECTIONS] [IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
  */
 import fs from "node:fs";
@@ -113,7 +113,7 @@ const HUB_LENS_LINKS = [
   "appendix-methodology.md",
 ] as const;
 
-describe("TIED experience hub structure", () => {
+describe("TIED experience hub structure [REQ-TIED_STORE_README_EXPERIENCE_HUB]", () => {
   it("hub index exists and links to all lenses and appendices", () => {
     assert.equal(fs.existsSync(hubIndexPath), true);
     const text = fs.readFileSync(hubIndexPath, "utf8");

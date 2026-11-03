@@ -106,11 +106,11 @@ Deep dives: [EDPC methodology](../../tied-bundle/docs/EDPC_Methodology_and_Workf
 
 ## Walk one REQ in the store: README operator spine
 
-This documentation hub was shaped by the same traceability model it describes. **`REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE`** required a named build→install spine in Band 1 and structure-test enforcement.
+This documentation hub was shaped by the same traceability model it describes. **`REQ-TIED_STORE_README_EXPERIENCE_HUB`** normatively aligns the hub and **Explore TIED** band with **[ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE](../../tied-project/architecture-decisions/ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE.yaml)**. **`REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE`** required the build→install spine in Band 1.
 
 | Facet | This store (example) |
 | --- | --- |
-| **REQ** | [REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml](../../tied-project/requirements/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml) — satisfaction criteria SC-README-SPINE, SC-README-STRUCTURE-TEST |
+| **REQ** | [REQ-TIED_STORE_README_EXPERIENCE_HUB.yaml](../../tied-project/requirements/REQ-TIED_STORE_README_EXPERIENCE_HUB.yaml) — SC-HUB-* · [operator spine](../../tied-project/requirements/REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE.yaml) — SC-README-SPINE |
 | **ARCH** | [ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE](../../tied-project/architecture-decisions/ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE.yaml) — three-band README IA |
 | **IMPL** | [IMPL-TIED_STORE_README_SECTIONS](../../tied-project/implementation-decisions/IMPL-TIED_STORE_README_SECTIONS.yaml) — section contracts |
 | **Test** | [store-readme-structure.test.ts](../../mcp-server/src/store-readme-structure.test.ts) — `NORMATIVE_H2`, `REQUIRED_SUBSTRINGS`, Quick start H3 order |

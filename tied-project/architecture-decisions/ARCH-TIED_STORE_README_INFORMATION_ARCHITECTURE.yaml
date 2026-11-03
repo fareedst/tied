@@ -2,18 +2,17 @@ ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE:
   ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE:
     consequences:
       negative:
-        - "README length shifts; satellite docs must stay cross-linked."
+        - "README and hub must stay cross-linked; hub moves require LEAP on README tokens."
       positive:
-        - "macOS-first operator path; certifiable workflow story before install appendix."
-    decision: "Three-band IA (QuickStart macOS, CertifiableWorkflow, InstallReference) with bootstrap README cross-link only for mechanics depth."
-    description: "Documentation architecture for store root README certifiable onboarding."
-    name: "Store README information architecture"
-    status: "Active"
+        - "macOS-first operator path; visual hub carries certifiable and EDPC depth before install appendix."
+    decision: "Three-band IA (QuickStart macOS, ExploreTIED hub doorway, InstallReference) with docs/tied-experience/ as canonical methodology narrative satellite; README retains certifiability substring teasers and structure-test enforcement."
     traceability:
       implementation:
         - "IMPL-TIED_STORE_README_SECTIONS"
       requirements:
         - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+        - "REQ-TIED_STORE_README_EXPERIENCE_HUB"
+        - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
   traceability:
     implementation:
       - "IMPL-TIED_STORE_README_SECTIONS"

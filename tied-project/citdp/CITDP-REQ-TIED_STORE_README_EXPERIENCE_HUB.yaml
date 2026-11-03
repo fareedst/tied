@@ -1,0 +1,70 @@
+CITDP-REQ-TIED_STORE_README_EXPERIENCE_HUB:
+  change_definition:
+    current_behavior: "TIED Experience Hub shipped in docs/tied-experience/ with README Explore TIED band; enrolled ARCH/REQ still described in-README certifiable body."
+    desired_behavior: "REQ-TIED_STORE_README_EXPERIENCE_HUB enrolls hub IA; parent README REQs and ARCH LEAP to Explore TIED + hub satellite."
+    non_goals:
+      - "Change bootstrap or MCP runtime behavior"
+    success_criteria:
+      - "SC-HUB-README-BAND through SC-HUB-LEAP-STACK satisfied"
+  completion_criteria:
+    verification_gate_notes: "store-readme-structure.test.ts green; tied_validate_consistency ok."
+  evidence:
+    command_seq:
+      - "node --import tsx --test mcp-server/src/store-readme-structure.test.ts"
+      - "tied_validate_consistency"
+    proof_boundaries:
+      - "documentation_only"
+      - "tied_yaml_alignment"
+  impact_analysis:
+    impl_inventory_notes: "tied-project REQ/ARCH/IMPL; IMPL pseudocode; structure test header"
+    modules_or_boundaries: "Documentation traceability only."
+    tied_tokens_affected:
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+      - "IMPL-TIED_STORE_README_SECTIONS"
+      - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+      - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
+    tied_tokens_new:
+      - "REQ-TIED_STORE_README_EXPERIENCE_HUB"
+  leap_feedback:
+    divergences_from_analysis: "none"
+    record_status: "complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "REQ-TIED_STORE_README_EXPERIENCE_HUB"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-03"
+    title: "Store README experience hub normative alignment"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Hub and README diverge when editors skip structure test."
+        - "Operators miss hub and read only README teasers for EDPC depth."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "client-development-index certifiability row points at hub lenses"
+        - "structure test asserts hub index and lens links"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "docs/tied-experience/index.md"
+        - "mcp-server/src/store-readme-structure.test.ts"
+        - "tied-project/requirements/REQ-TIED_STORE_README_EXPERIENCE_HUB.yaml"
+      falsification_questions:
+        - "Does Band 2 still say Performing work in certifiable workflows in ARCH decision text?"
+        - "Does hub index omit a lens link while test passes?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Documentation-only LEAP alignment."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - description: "README/hub narrative drift."
+        id: "RISK-HUB-001"
+        likelihood: "Medium"
+        mitigation: "Structure test + enrolled satisfaction criteria."
+        severity: "Low"
+    summary: "Doc-only normative alignment."
+  tdd_sequence:
+    summary: "Structure test already green from hub commit; LEAP YAML aligns tokens."
+  test_strategy:
+    red_green:
+      - "store-readme-structure.test.ts describes hub; token header references REQ-TIED_STORE_README_EXPERIENCE_HUB"

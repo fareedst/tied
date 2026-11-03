@@ -4923,11 +4923,25 @@ REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
   cross_references:
     - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     - "IMPL-TIED_STORE_README_SECTIONS"
-  description: "Store root README macOS quick start, certifiable workflow body, and install appendix."
+    - "REQ-TIED_STORE_README_EXPERIENCE_HUB"
+  description: "Store root README quick start, Explore TIED hub doorway, and install appendix."
   metadata:
-    last_updated: "2026-10-18"
+    last_updated: "2026-11-03"
     registered: "2026-10-18"
   name: "Store README certifiable operator onboarding"
+  status: "Active"
+  type: "REQ"
+REQ-TIED_STORE_README_EXPERIENCE_HUB:
+  cross_references:
+    - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    - "IMPL-TIED_STORE_README_SECTIONS"
+    - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+    - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
+  description: "Normative LEAP for docs/tied-experience hub and README Explore TIED band."
+  metadata:
+    last_updated: "2026-11-03"
+    registered: "2026-11-03"
+  name: "Store README experience hub normative alignment"
   status: "Active"
   type: "REQ"
 REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:

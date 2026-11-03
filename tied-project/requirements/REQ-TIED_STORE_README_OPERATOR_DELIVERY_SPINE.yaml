@@ -13,19 +13,20 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
     - criterion: "Band 1 H3 Primary operator delivery path lists build, install, MCP confirm with both help commands."
       id: "SC-README-SPINE"
       metric: "README.md and store-readme-structure.test.ts"
-    - criterion: "Extended structure test passes with unchanged three-band H2 order."
-      id: "SC-README-STRUCTURE-TEST"
-      metric: "store-readme-structure.test.ts"
     - criterion: "README documents no-arg tied-install help and --refresh for methodology refresh."
       id: "SC-README-INSTALL-HELP"
       metric: "README.md"
-    - criterion: "Repository layout lists build-workspace entry points at store root."
+    - criterion: "Repository layout lists build-workspace entry points and docs/tied-experience/ hub."
       id: "SC-README-LAYOUT"
       metric: "README.md"
+    - criterion: "Structure test passes three-band H2 order with Band 2 Explore TIED and hub index link."
+      id: "SC-README-STRUCTURE-TEST"
+      metric: "store-readme-structure.test.ts"
   status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     implementation:
       - "IMPL-TIED_STORE_README_SECTIONS"
-    requirements: []
+    requirements:
+      - "REQ-TIED_STORE_README_EXPERIENCE_HUB"

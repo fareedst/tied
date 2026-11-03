@@ -1,0 +1,34 @@
+REQ-TIED_STORE_README_EXPERIENCE_HUB:
+  REQ-TIED_STORE_README_EXPERIENCE_HUB:
+    category: "Documentation"
+    description: "Enroll docs/tied-experience/ and README Band 2 Explore TIED in the store README IA stack so REQ/ARCH/IMPL match shipped operator and structure-test contracts."
+    name: "Store README experience hub normative alignment"
+    priority: "P2"
+    rationale:
+      benefits:
+        - "Traceability stack matches GitHub hub and slim README doorway."
+      problems_solved:
+        - "Docs-only hub commit left ARCH/REQ describing in-README certifiable body."
+      why: "Sponsor add-feature normative alignment after TIED Experience Hub build-plan."
+    satisfaction_criteria:
+      - criterion: "ARCH decision and parent README REQs LEAP-updated for Explore TIED + hub satellite."
+        id: "SC-HUB-LEAP-STACK"
+        metric: "tied-project/requirements and architecture-decisions detail YAML"
+      - criterion: "Certifiability and EDPC narrative canonical in hub lenses; README retains required PCR substrings."
+        id: "SC-HUB-NARRATIVE-SPLIT"
+        metric: "docs/tied-experience/*.md"
+      - criterion: "Hub index links sponsor, operator, engineer-agent, and facilitator lenses plus both appendices."
+        id: "SC-HUB-INDEX-LINKS"
+        metric: "store-readme-structure.test.ts hub describe block"
+      - criterion: "Root README Band 2 is Explore TIED with link to docs/tied-experience/index.md and legacy performing-work anchor."
+        id: "SC-HUB-README-BAND"
+        metric: "README.md and store-readme-structure.test.ts"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+      implementation:
+        - "IMPL-TIED_STORE_README_SECTIONS"
+      requirements:
+        - "REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING"
+        - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"

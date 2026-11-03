@@ -3686,8 +3686,23 @@ REQ-TIED_STORE_BUNDLE_GIT_POLICY:
       - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
 REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING:
   category: "Documentation"
+  description: "Restructure root README into macOS quick start, Explore TIED hub doorway, and install appendix; canonical certifiable narrative in docs/tied-experience/."
   detail_file: "requirements/REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING.yaml"
   name: "Store README certifiable operator onboarding"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+    implementation:
+      - "IMPL-TIED_STORE_README_SECTIONS"
+    requirements:
+      - "REQ-TIED_STORE_README_EXPERIENCE_HUB"
+REQ-TIED_STORE_README_EXPERIENCE_HUB:
+  category: "Documentation"
+  description: "Normative LEAP alignment for docs/tied-experience hub and README Explore TIED band after methodology narrative moved out of root README."
+  detail_file: "requirements/REQ-TIED_STORE_README_EXPERIENCE_HUB.yaml"
+  name: "Store README experience hub normative alignment"
   priority: "P2"
   status: "Implemented"
   traceability:
@@ -3705,21 +3720,23 @@ REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
     - criterion: "Band 1 H3 Primary operator delivery path lists build, install, MCP confirm with both help commands."
       id: "SC-README-SPINE"
       metric: "README.md and store-readme-structure.test.ts"
-    - criterion: "Extended structure test passes with unchanged three-band H2 order."
-      id: "SC-README-STRUCTURE-TEST"
-      metric: "store-readme-structure.test.ts"
     - criterion: "README documents no-arg tied-install help and --refresh for methodology refresh."
       id: "SC-README-INSTALL-HELP"
       metric: "README.md"
-    - criterion: "Repository layout lists build-workspace entry points at store root."
+    - criterion: "Repository layout lists build-workspace entry points and docs/tied-experience/ hub."
       id: "SC-README-LAYOUT"
       metric: "README.md"
+    - criterion: "Structure test passes three-band H2 order with Band 2 Explore TIED and hub index link."
+      id: "SC-README-STRUCTURE-TEST"
+      metric: "store-readme-structure.test.ts"
   status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
     implementation:
       - "IMPL-TIED_STORE_README_SECTIONS"
+    requirements:
+      - "REQ-TIED_STORE_README_EXPERIENCE_HUB"
 REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE:
   category: "Methodology"
   description: "Methodology documentation distinguishing empirical tests and checklist gates from external machine-checked proof claims; Anthropic formal verification comparison Wave 3 Phase 1 compose."
