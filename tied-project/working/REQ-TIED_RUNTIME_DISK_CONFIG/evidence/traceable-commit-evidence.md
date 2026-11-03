@@ -1,26 +1,41 @@
-# traceable-commit evidence — REQ-TIED_RUNTIME_DISK_CONFIG pass 3
+# traceable-commit evidence — REQ-TIED_RUNTIME_DISK_CONFIG
 
 **Date:** 2026-11-03  
+**Slice:** agentstream SC-RDC-CONSUMERS follow-up (post pass 3)
 
 ## Gates
 
 | Step | Result |
 | --- | --- |
-| Verification + close_out runner | `merged_decision.allowed: true`; envelope blocking gaps 0 |
-| Gate receipt | `tied-bundle/working/REQ-TIED_RUNTIME_DISK_CONFIG/gates/close_out-2026-11-03T17-33-09-510Z.json` |
-| Summary JSON | [closeout-run-close-out-gates-pass3.json](./closeout-run-close-out-gates-pass3.json) |
+| Pass 3 close_out | **pass** (prior) — [closeout-run-close-out-gates-pass3.json](./closeout-run-close-out-gates-pass3.json) |
+| This slice | Unit tests only; no gate re-run (implementation completes missing module referenced at HEAD) |
+
+## Verification
+
+```bash
+cd mcp-server/packages/agentstream && npm run build && npx tsx --test \
+  src/tied-runtime-config.test.ts \
+  src/jev-harness-shared.test.ts \
+  src/jev-harness-preflight.test.ts
+```
+
+Result: **18/18 pass** (2026-11-03).
+
+## VALIDATE (vocab)
+
+N/A — no new domain terms; reuses on-disk runtime / linked client vocabulary from pass 2–3.
 
 ## Commit
 
 | SHA | Description |
 | --- | --- |
-| **`b2548e98`** | Pass 3 operator disk sync + SC-RDC-OPERATOR-DISK + close-out evidence |
+| _(pending)_ | agentstream `tied-runtime-config.ts` + tests |
 
 Message: [proposed-commit-message.txt](./proposed-commit-message.txt).
 
 ## Excluded unrelated drift
 
-mcp-server test fixtures, source-graph/corpus index JSON, stray citdp drafts, evaluation envelope-gap report — not pass-3 scope.
+None in working tree at commit time.
 
 ## Upstream feedback
 
@@ -28,4 +43,4 @@ N/A
 
 ## Hygiene
 
-[git-hygiene-receipt-2026-11-03-pass3.md](./git-hygiene-receipt-2026-11-03-pass3.md)
+Prior: [git-hygiene-receipt-2026-11-03-pass3.md](./git-hygiene-receipt-2026-11-03-pass3.md); workspace clear **bb06de0a**.

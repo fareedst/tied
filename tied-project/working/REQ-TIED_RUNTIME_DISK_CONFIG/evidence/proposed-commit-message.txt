@@ -1,23 +1,14 @@
-feat(bootstrap): operator toggles on disk for MCP refresh [REQ-TIED_RUNTIME_DISK_CONFIG]
+fix(agentstream): ship disk runtime resolver for harness store root [REQ-TIED_RUNTIME_DISK_CONFIG]
 
-Pass 3: sync non-secret operator config from .tied store yaml and
-operator.local.yaml to client mcp.json on tied-install refresh; shell
-export ignored when disk defines catalogued keys (SC-RDC-OPERATOR-DISK).
+HEAD imported tied-runtime-config.js without the module; add TS mirror of
+bootstrap mcp.json / store yaml resolution (SC-RDC-CONSUMERS).
 
-Tokens: REQ-TIED_RUNTIME_DISK_CONFIG, IMPL-TIED_RUNTIME_DISK_CONFIG
+Tests: tied-runtime-config.test.ts, jev-harness-shared.test.ts,
+jev-harness-preflight.test.ts (18/18).
 
-Completion signals: close_out allowed; envelope blocking gaps 0;
-reconcile band B (evidence_stale advisory on legacy gate receipts).
-
-Staging map (scoped):
-- tools/bootstrap/lib/tied-runtime-config.mjs (+ tests)
-- tools/bootstrap/lib/mcp-config.mjs (+ tests)
-- tools/bootstrap/lib/layers/mcp.mjs (+ tests)
-- tools/bootstrap/templates/.tied/store.yaml
-- .gitignore (.tied/operator.local.yaml)
-- tied-project/requirements/REQ-TIED_RUNTIME_DISK_CONFIG.yaml
-- tied-project/citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
-- tied-project/implementation-decisions/IMPL-TIED_RUNTIME_DISK_CONFIG-pseudocode.md
-- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/ (plan + evidence, exclude regenerable gates/)
-- tied-project/working/NON-TIED-ON-DISK-RUNTIME-CONFIG/PLAN.md
-- CHANGELOG.md
+Staging:
+- mcp-server/packages/agentstream/src/tied-runtime-config.ts
+- mcp-server/packages/agentstream/src/tied-runtime-config.test.ts
+- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/proposed-commit-message.txt
+- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/traceable-commit-evidence.md
+- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/session-handoff.md
