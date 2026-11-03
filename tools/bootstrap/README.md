@@ -22,7 +22,7 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 
 **Runtime resolver fixtures ([REQ-TIED_RUNTIME_DISK_CONFIG] SC-RDC-FIXTURE-PARITY):** Shared catalog under `tools/bootstrap/fixtures/tied-runtime/` (`manifest.json` + loader `lib/tied-runtime-fixture-loader.mjs`) drives bootstrap and agentstream resolver tests; cross-runtime gate: `node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs`.
 
-**Operator journey (macOS quick start, certifiable workflows, full install):** root [README.md](../../README.md). **Primary implementation repositories** (product repo + `tied-project/` in one tree, separate TIED store): see [README § Primary implementation repository](../../README.md#primary-implementation-repository).
+**Operator journey (macOS quick start, full install):** root [README.md](../../README.md) · visual methodology [TIED Experience Hub](../../docs/tied-experience/index.md). **Primary implementation repositories** (product repo + `tied-project/` in one tree, separate TIED store): see [README § Primary implementation repository](../../README.md#primary-implementation-repository).
 
 **Operator matrix:** `source scripts/build-commands.sh && how install-matrix` — maps smoke flags (`test-new-tied-client --install-mode full`, layer subsets) to committed vs gitignored paths; see `tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md`.
 

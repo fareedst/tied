@@ -1,0 +1,31 @@
+<svg width="900" height="480" viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TIED traceability facet stack">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#9ca3af"/>
+    </marker>
+    <marker id="leaphead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="310" y="24" width="280" height="44" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="2"/>
+  <text x="450" y="52" text-anchor="middle" font-weight="600" font-size="14" fill="#b45309">REQ  what must be true</text>
+  <rect x="310" y="88" width="280" height="44" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="450" y="116" text-anchor="middle" font-weight="600" font-size="14" fill="#1d4ed8">ARCH  where responsibility lives</text>
+  <rect x="310" y="152" width="280" height="44" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="2"/>
+  <text x="450" y="180" text-anchor="middle" font-weight="600" font-size="14" fill="#374151">IMPL  how behavior works</text>
+  <rect x="260" y="216" width="180" height="44" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text x="350" y="244" text-anchor="middle" font-size="12" fill="#b45309">Tests</text>
+  <rect x="460" y="216" width="180" height="44" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="550" y="244" text-anchor="middle" font-size="12" fill="#374151">Code</text>
+  <rect x="310" y="280" width="280" height="44" rx="8" fill="#ecfdf5" stroke="#047857" stroke-width="2"/>
+  <text x="450" y="308" text-anchor="middle" font-weight="600" font-size="14" fill="#047857">Evidence and gates</text>
+  <line x1="450" y1="68" x2="450" y2="88" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="450" y1="132" x2="450" y2="152" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="450" y1="196" x2="350" y2="216" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="450" y1="196" x2="550" y2="216" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="450" y1="260" x2="450" y2="280" stroke="#9ca3af" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 720 260 Q 820 200 720 140" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#leaphead)"/>
+  <text x="780" y="200" font-size="11" fill="#6b7280">LEAP</text>
+  <text x="450" y="360" text-anchor="middle" font-size="11" fill="#6b7280">Example: REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE ’ store-readme-structure.test.ts</text>
+  <text x="450" y="380" text-anchor="middle" font-size="10" fill="#9ca3af">One behavioral atom, many aligned facets  not one giant spec</text>
+</svg>

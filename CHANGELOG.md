@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **TIED Experience Hub (docs-only)** — [docs/tied-experience/index.md](docs/tied-experience/index.md): audience lenses (sponsor, operator, engineer/agent, facilitator), appendices, and SVG assets; root [README.md](README.md) Band 2 **Explore TIED** replaces in-README certifiable/EDPC essays (canonical narrative in hub). Structure tests: [store-readme-structure.test.ts](mcp-server/src/store-readme-structure.test.ts). Drift note: enrolled README IA tokens not LEAP-updated in this pass.
+
 - **E2e operator metrics alignment ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-E2E-METRICS-ALIGN**: `bootstrap-and-load.test.ts` seeds store `operator.mcp.collect_metrics` so e2e matches **SC-RDC-OPERATOR-DISK** precedence independent of monorepo `.tied/store.yaml` shape; helper `e2e-store-operator-seed.ts`. Plan: [PLAN-rdc-e2e-pass4-refine.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-e2e-pass4-refine.md).
 
 - **Runtime disk config pass 3 ([REQ-TIED_RUNTIME_DISK_CONFIG])** — **SC-RDC-OPERATOR-DISK**: non-secret operator toggles (`operator:` in store yaml, `.tied/operator.local.yaml`) sync to client mcp.json on refresh; catalog includes metrics, envelope hooks, agentstream preflight, checklist strict, JEV harness/provider strings; [operator-shell-profile.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/operator-shell-profile.md). Plan: [PLAN-rdc-full-runtime-disk-pass3.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md). Commit **`b2548e98`**.

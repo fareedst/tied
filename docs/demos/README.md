@@ -65,6 +65,7 @@ Install stubs: `./tied-install.sh --allow-self-install --layers skills .` from t
 
 ## Runnable entry points
 
+- [TIED Experience Hub](../tied-experience/index.md) — visual methodology and audience lenses (store dogfood)
 - [TIED feature demo](../tied-feature-demo.md) — staged feature orchestration walkthrough
 - [Client development index](../../tied-bundle/docs/client-development-index.md) — `tied gate check`, MCP, checklist tooling
 - [New-client adherence runbook](../pseudocode-new-client-tied-adherence-runbook.md) — disposable client smoke (`test-new-tied-client`)

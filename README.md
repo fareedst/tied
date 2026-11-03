@@ -2,7 +2,7 @@
 
 **TIED Methodology Version**: 4.0.0
 
-[TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. Deeper process and the Core seven documents: [client development index](tied-bundle/docs/client-development-index.md).
+[TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. **Visual how-to and methodology by example:** [TIED Experience Hub](docs/tied-experience/index.md). Core seven index: [client development index](tied-bundle/docs/client-development-index.md).
 
 ## Quick start (macOS)
 
@@ -77,98 +77,22 @@ After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`,
 | Architecture recovery | [Evidence-assured software architecture recovery (EASAR)](docs/methodologies/evidence-assured-software-architecture-recovery.md) |
 | External workflows / integrators | [Operating environment externalities](docs/tied-operating-environment-externalities.md) |
 
-Then follow `[PROC-AGENT_REQ_CHECKLIST]` via the [agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md).
+Then follow `[PROC-AGENT_REQ_CHECKLIST]` via the [agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md). **Program comprehension (EDPC):** [Engineer lens — brownfield comprehension](docs/tied-experience/engineer-agent-lens.md#brownfield-comprehension).
 
-### Brownfield comprehension on an existing codebase
+## Explore TIED
 
-**Purpose.** Brownfield comprehension is how TIED learns a legacy or unfamiliar system *before* feature work assumes correct intent. The goal is an evidence-backed **Software Comprehension Model**—declared intent, what code can do, what was observed, environmental effects, failures, and explicit unknowns—not a one-shot repository summary or “tests pass, so we’re fine.” TIED orchestrates this through **Evidence-Driven Program Comprehension (EDPC)** (`[PROC-EDPC_COMPREHENSION]`) and, when promoting sponsor-approved intent into REQ/ARCH, **brownfield intent elevation** (`[PROC-BROWNFIELD_INTENT_ELEVATION]`). Reverse documentation (**Track C**) captures observed behavior in IMPL sidecars only; it does not by itself create approved requirements.
+The [TIED Experience Hub](docs/tied-experience/index.md) teaches methodology with this store as the worked example—aligned facets, audience lanes, and proof boundaries instead of one long README essay.
 
-**Typical steps** (depth and tier vary by engagement):
+<a id="performing-work-in-certifiable-workflows"></a>
 
-1. **Commission (A)** — Charter, scope matrix, and **evidence-access tier** (`source_static`, `toolchain_readonly`, or `source_change`) on the target repository; validate with MCP `tied_edpc_access_validate` / `tied_edpc_engagement_validate`.
-2. **Baseline (B)** — Structural inventory and graph receipts (EASAR workflow **B** under the EDPC umbrella).
-3. **Deep slices (C)** — Focused investigation: source graph, claims review, Track C pseudo-code where appropriate.
-4. **Ops / change (D–E, when tier allows)** — Failure and operational state, or scoped change-impact analysis.
-5. **Intent elevation (when adopting TIED on legacy code)** — Evidence-to-intent matrix, dispositions (`observed`, `approved`, `unresolved`, `rejected`); enrich REQ/ARCH from **`approved`** rows only; close with `brownfield_intent_evidence_validate`.
-6. **Verify and publish (F)** — Publish manifest with explicit **`gaps[]`**; optional client assessment (workflow **H**) for external-facing summaries.
-7. **Refresh (G)** — Re-run when builds, access, or questions change material claims.
-8. **Optional — workflow diagrams** — Invoke **`@workflow-visualization`** to produce sponsor-facing Mermaid workflow docs at `docs/<project>-workflows.md` from comprehension artifacts (or a bounded static read). Machine evidence stays under `tied-project/working/`; see bundled **workflow-visualization** skill.
+| If you are… | Lens |
+| --- | --- |
+| Sponsor / PM | [sponsor-lens.md](docs/tied-experience/sponsor-lens.md) |
+| Operator | [operator-lens.md](docs/tied-experience/operator-lens.md) |
+| Engineer / agent | [engineer-agent-lens.md](docs/tied-experience/engineer-agent-lens.md) |
+| Facilitator | [facilitator-lens.md](docs/tied-experience/facilitator-lens.md) |
 
-Set the per-request Tracker to `brownfield_intent_elevation.engagement: edpc_full` with `mode: pilot` or `strict` for full choreography; use `report_only` when you need diagnostics without blocking the checklist. Artifacts live under `tied-project/working/{REQ-TOKEN}/evidence/edpc/` (and related brownfield working paths).
-
-**Benefits**
-
-- **Proof boundaries** — Tier caps what agents and tools may do; conclusions stay tied to revisions, environments, and observation windows.
-- **Reuse for later TDD/LEAP** — Approved intent and structural receipts feed `[PROC-AGENT_REQ_CHECKLIST]` without treating AI prose as REQ authority.
-- **Composable tooling** — EDPC sequences existing MCP passes (source graph, EASAR receipts, claims review, brownfield validation) instead of duplicating ledgers.
-- **Honest uncertainty** — Queues and publish gaps document what was not measured, not reproduced, or deferred.
-
-**Costs**
-
-- **Time and sponsor attention** — Adjudication and `approved` promotion are human-gated; `strict` mode can block checklist steps when validation fails.
-- **Artifact upkeep** — Charters, access matrices, claim ledgers, and queue files must stay aligned with the target repo and engagement scope.
-- **Not universal depth** — The scope matrix intentionally defers domains; a published comprehension is bounded, not a certificate of health.
-- **Infrastructure** — Built MCP server, correct `TIED_BASE_PATH`, and (for production evidence) explicit charter approval for `production_touch`.
-
-Deep dives: [EDPC methodology](tied-bundle/docs/EDPC_Methodology_and_Workflows.md), [brownfield intent elevation](tied-bundle/docs/brownfield-intent-elevation.md), [EDPC vocabulary](tied-project/vocab/edpc-comprehension.md), and the [client development index — program comprehension](tied-bundle/docs/client-development-index.md) row.
-
-## Performing work in certifiable workflows
-
-TIED work is designed so intent, evidence, and gates can support **external appraisal** without the repository claiming third-party certification. Deeper methodology narrative lives in the [client development index](tied-bundle/docs/client-development-index.md), [LEAP guide](tied-bundle/docs/LEAP.md), and [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
-
-### What “certifiable” means here
-
-[Certification of context-adaptive workflows](docs/methodologies/certification-of-workflows.md) distinguishes process compliance, capability, and effectiveness. In this repository, **certifiability readiness** means machine-assessable artifacts (spec, mappings, conformance, capability profile, independent assessment, bounded experiments) that support **`ready_for_external_appraisal`** — not **`certified`**, ISO compliance, or CMMI ratings. Stages **1–5** and **7** are in-repo tooling; stages **6** and **8** are human-owned external appraisal. Vocabulary: [process-certification-readiness.md](tied-project/vocab/process-certification-readiness.md).
-
-### EDSE daily loop
-
-**Evidence-Driven Situational Engineering (EDSE)** composes with TIED: characterize context → select practices (CASE) → execute the checklist → collect verification evidence. See [context-adaptive-engineering.md](tied-project/vocab/context-adaptive-engineering.md).
-
-```mermaid
-flowchart LR
-  Vocab[Vocabulary_PRELOAD]
-  CITDP[CITDP_and_Tracker]
-  Stack[REQ_ARCH_IMPL]
-  Execute[TDD_composition_gates]
-  Envelope[Request_evidence_envelope]
-  Readiness[PCR_readiness_artifacts]
-  Vocab --> CITDP --> Stack --> Execute --> Envelope --> Readiness
-```
-
-### Executable process spine
-
-1. **Vocabulary** — client [routing.md](tied-project/vocab/routing.md) → PRELOAD matched glossaries.
-2. **Change analysis** — CITDP + per-request Tracker copy ([checklist YAML](tied-bundle/docs/agent-req-implementation-checklist.yaml)).
-3. **Stack** — REQ → ARCH → IMPL pseudo-code (with block token comments) before RED tests.
-4. **Gates** — `tied gate check --request-token REQ-… --phase pre_implementation|verification|close_out` (see [client development index](tied-bundle/docs/client-development-index.md) § adherence ergonomics).
-5. **Envelope** — request evidence envelope at close-out when the Tracker requires it.
-
-Use the [multi-harness entry matrix](tied-bundle/docs/client-development-index.md#multi-harness-entry-matrix-cursor-vs-claude-code) to separate REQ-scoped Prompt Composer work from FEAT lifecycle orchestration.
-
-### Certifiability readiness (`[REQ-TIED_PROCESS_CERTIFICATION_READINESS]`)
-
-Read-only MCP/CLI layer: EDSE process spec, 12207 reference mapping (reference only), conformance matrix, seven-dimension capability profile (no rollup score), independent assessment file ingress, adaptive-effectiveness fixtures, assessor pack.
-
-After `cd mcp-server && npm run build`:
-
-```bash
-export TIED_BASE_PATH="/absolute/path/to/tied-project"
-node --import tsx --test src/process-certification-readiness/*.test.ts
-.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency
-```
-
-CLI (same surface as MCP): `tied certification spec-validate`, `conformance-evaluate`, `capability-evaluate`, `independent-assess`, `adaptive-experiment-run`, `readiness-report-compose`, `assessor-pack-generate` — see `mcp-server/src/cli/process-certification-cli.ts`.
-
-### REQ-scoped prompt types
-
-See [Compact feature rhythm](#compact-feature-rhythm) in Quick start. **[AGENTS.md](AGENTS.md)** remains authoritative. Prompt skills do not replace checklist gates or integrated adversarial inquiry when those apply.
-
-### Honest limits
-
-- Valid records ≠ correct product behavior.
-- Passing tests ≠ complete edge coverage.
-- Readiness **`ready_for_external_appraisal`** ≠ certification or standard compliance.
-- Reference mappings do not establish ISO/CMMI conformance claims.
+Certifiability (not certification): [certification-of-workflows.md](docs/methodologies/certification-of-workflows.md), [client-development-index.md](tied-bundle/docs/client-development-index.md), [process-certification-readiness.md](tied-project/vocab/process-certification-readiness.md), `[REQ-TIED_PROCESS_CERTIFICATION_READINESS]`, `tied certification` — full narrative in the [sponsor](docs/tied-experience/sponsor-lens.md) and [engineer](docs/tied-experience/engineer-agent-lens.md) lenses. Process spine, EDSE, and MCP/CLI readiness commands: [engineer lens](docs/tied-experience/engineer-agent-lens.md). [LEAP guide](tied-bundle/docs/LEAP.md) · [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
 
 ## Install and use
 
@@ -425,22 +349,13 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
 
 ## Where to read next
 
-The [client development index](tied-bundle/docs/client-development-index.md) names the Core seven documents for applying TIED:
-
-1. [AGENTS.md](AGENTS.md) — repository operating rules.
-2. [Vocabulary routing](tied-project/vocab/routing.md) — resolve and preload preferred terms.
-3. [Agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md) — the executable process.
-4. [Checklist YAML](tied-bundle/docs/agent-req-implementation-checklist.yaml) — the trackable copy of that process.
-5. [Processes](tied-bundle/docs/processes.md) — definitions for CITDP, LEAP, TDD, validation, and evidence.
-6. [Pseudo-code guide](tied-bundle/docs/pseudocode-writing-and-validation.md) — author and validate IMPL behavior contracts.
-7. [CITDP policy and record template](tied-bundle/docs/citdp-policy.md) — determine when to persist change analysis.
-
-For orientation, read [methodology diagrams](tied-bundle/docs/methodology-diagrams.md) and the [LEAP guide](tied-bundle/docs/LEAP.md). Semantic tokens link REQ → ARCH → IMPL → tests → code across client projects. For YAML operations, use the [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and the [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md) (installed under `.cursor/skills/tied-yaml/` in client projects). Agents should read [AGENTS.md](AGENTS.md) before working in a client project.
+Start at the [TIED Experience Hub](docs/tied-experience/index.md) or the [appendix — full methodology](docs/tied-experience/appendix-methodology.md) (Core seven links). Agents: [AGENTS.md](AGENTS.md) before every session. YAML: [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md).
 
 ## Repository layout
 
 ```text
 stdd/
+├── docs/tied-experience/      # Visual methodology hub (audience lenses + appendices)
 ├── tied-project/              # Committed project traceability (REQ/ARCH/IMPL, vocab, working/)
 ├── working/                   # Symlink → tied-project/working/ (legacy path alias; canonical prefix is tied-project/working/)
 ├── tied-bundle/               # Committed methodology corpus in this repo; gitignored on clients

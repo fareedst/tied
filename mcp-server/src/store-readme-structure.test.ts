@@ -13,7 +13,7 @@ const readmePath = path.join(repoRoot, "README.md");
 
 const NORMATIVE_H2 = [
   "## Quick start (macOS)",
-  "## Performing work in certifiable workflows",
+  "## Explore TIED",
   "## Install and use",
 ] as const;
 
@@ -34,6 +34,7 @@ const REQUIRED_SUBSTRINGS = [
   "/build-plan",
   "/close-out",
   "git clone",
+  "docs/tied-experience/index.md",
 ] as const;
 
 const FORBIDDEN_LEGACY_LAYOUT_DOC_PATTERNS = [
@@ -98,6 +99,26 @@ describe("store README structure [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING]"
       assert.ok(idx >= 0, `missing ${h3} in Quick start band`);
       assert.ok(idx > prev, `H3 order in Quick start: ${h3}`);
       prev = idx;
+    }
+  });
+});
+
+const hubIndexPath = path.join(repoRoot, "docs/tied-experience/index.md");
+const HUB_LENS_LINKS = [
+  "sponsor-lens.md",
+  "operator-lens.md",
+  "engineer-agent-lens.md",
+  "facilitator-lens.md",
+  "appendix-audiences.md",
+  "appendix-methodology.md",
+] as const;
+
+describe("TIED experience hub structure", () => {
+  it("hub index exists and links to all lenses and appendices", () => {
+    assert.equal(fs.existsSync(hubIndexPath), true);
+    const text = fs.readFileSync(hubIndexPath, "utf8");
+    for (const link of HUB_LENS_LINKS) {
+      assert.match(text, new RegExp(escapeRegExp(link)), `hub index missing link: ${link}`);
     }
   });
 });
