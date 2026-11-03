@@ -3,7 +3,7 @@
 **handoff_kind:** session  
 **Date:** 2026-11-03  
 **request_token:** REQ-TIED_RUNTIME_DISK_CONFIG  
-**git:** `main` @ **`db026dc8`** — e2e pass-4 close-out; push when ready
+**git:** `main` @ **`b299777e`** — e2e pass-4 close-out; push when ready
 
 ## One line
 
@@ -20,7 +20,7 @@ RDC **complete** for product scope including e2e pass-4 (**SC-RDC-E2E-METRICS-AL
 | Spine-review bootstrap fixes | closed | `d9a7c5e9` | [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
 | Fixture parity | closed | `e6cb7169` | [PLAN-rdc-js-ts-fixture-parity-refine.md](../PLAN-rdc-js-ts-fixture-parity-refine.md) |
 | **MCP introspection** | **closed** | **`97c35a5a`** | [PLAN-rdc-mcp-introspection-refine.md](../PLAN-rdc-mcp-introspection-refine.md), [traceable-commit-evidence-mcp-introspection.md](./traceable-commit-evidence-mcp-introspection.md) |
-| **E2e pass-4 metrics** | **closed** | **`db026dc8`** | [PLAN-rdc-e2e-pass4-refine.md](../PLAN-rdc-e2e-pass4-refine.md), [traceable-commit-evidence-e2e-pass4.md](./traceable-commit-evidence-e2e-pass4.md) |
+| **E2e pass-4 metrics** | **closed** | **`b299777e`** | [PLAN-rdc-e2e-pass4-refine.md](../PLAN-rdc-e2e-pass4-refine.md), [traceable-commit-evidence-e2e-pass4.md](./traceable-commit-evidence-e2e-pass4.md) |
 
 ## Completion signals (e2e pass-4 slice)
 

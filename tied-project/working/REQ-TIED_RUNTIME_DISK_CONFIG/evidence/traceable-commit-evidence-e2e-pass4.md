@@ -26,7 +26,7 @@ N/A — reuses operator disk / on-disk runtime vocabulary.
 
 ## Commit
 
-SHA: **`db026dc8`**
+SHA: **`b299777e`**
 
 Message: [proposed-commit-message.txt](./proposed-commit-message.txt)
 
