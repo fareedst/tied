@@ -8,11 +8,11 @@
 - **Machine close-out:** pass — `close_out` allowed=true; envelope validate blocking_gaps=0 (`tied-project/working/REQ-TIED_CLI_MCP_JSON_BASE_PATH/evidence/request-evidence-envelope.v1.json`)
 - **Process contract:** pass — gate runner `--sync-dispositions --reconcile`; tracker sub-adversarial sub_procedure disposition synced
 - **Adherence ledger:** pass — reconcile process_grade band B (hash_alignment evidence_stale advisory on legacy manifest; non-blocking at minimal depth)
-- **Workspace cleanliness (scoped REQ):** partial — scoped implementation staged; unrelated repo drift documented in hygiene receipt (Hypnos IMPL pollution, graph fixtures)
+- **Workspace cleanliness (scoped REQ):** pass — feature shipped at `421a5a2f`; post-close-out pass restored accidental drift (Hypnos IMPL index, graph fixtures, CITDP gate-test litter) per hygiene receipt 2026-11-03
 
 ## Commit
 
-See traceable-commit SHA after `git commit` (this handoff updated post-commit).
+**SHA:** `421a5a2f` — `fix(tied-cli): install-only mcp.json path authority`
 
 ## Remaining risks
 
