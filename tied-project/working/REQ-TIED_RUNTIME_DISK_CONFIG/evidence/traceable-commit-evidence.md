@@ -27,7 +27,7 @@ N/A — linked stub resolution only; no new glossary terms.
 | **`121fd287`** | docs: agentstream slice d7c46e7f |
 | **`d7c46e7f`** | agentstream SC-RDC-CONSUMERS |
 | **`b2548e98`** | Pass 3 operator disk |
-| **(this commit)** | Spine-review bootstrap collect fallback + CLI fixtures + vocab validator + stale-layout `.tied/` allowlist |
+| **`d9a7c5e9`** | Spine-review bootstrap collect fallback + CLI fixtures + vocab validator + stale-layout `.tied/` allowlist |
 
 Message: [proposed-commit-message.txt](./proposed-commit-message.txt).
 
