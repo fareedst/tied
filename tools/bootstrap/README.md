@@ -20,6 +20,8 @@ Cross-platform **BOOTSTRAP_TIED** implementation shared by all platform entry po
 
 **Batch targets:** Pass **`--targets PATH`** where `PATH` is a YAML list of client directories (or `-` for stdin). Use with **`--refresh`**, **`--doctor`**, or **`--migrate-ordered-list-keys`** to run sequentially across many clients (layout migration flags: **`tied-install --help`** only). Filters: **`--targets-only-installed`**, **`--targets-plan`**, **`--targets-continue-on-error`**. Same list via env **`TIED_INSTALL_TARGETS`** when **`--targets`** is omitted. Example fixture: `tools/bootstrap/fixtures/install-targets/sample.v1.yaml`.
 
+**Runtime resolver fixtures ([REQ-TIED_RUNTIME_DISK_CONFIG] SC-RDC-FIXTURE-PARITY):** Shared catalog under `tools/bootstrap/fixtures/tied-runtime/` (`manifest.json` + loader `lib/tied-runtime-fixture-loader.mjs`) drives bootstrap and agentstream resolver tests; cross-runtime gate: `node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs`.
+
 **Operator journey (macOS quick start, certifiable workflows, full install):** root [README.md](../../README.md). **Primary implementation repositories** (product repo + `tied-project/` in one tree, separate TIED store): see [README § Primary implementation repository](../../README.md#primary-implementation-repository).
 
 **Operator matrix:** `source scripts/build-commands.sh && how install-matrix` — maps smoke flags (`test-new-tied-client --install-mode full`, layer subsets) to committed vs gitignored paths; see `tied-project/working/REQ-TIED_LAYERED_CLIENT_INSTALL/install-resource-matrix.md`.

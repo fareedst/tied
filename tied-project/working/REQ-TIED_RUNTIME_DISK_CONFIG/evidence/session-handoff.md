@@ -29,9 +29,9 @@ RDC on disk **shipped** (passes 1–3, agentstream resolver, spine-review test f
 
 ## Next session
 
-1. **`git push origin main`** when sponsor wants remote updated (12+ commits ahead).
-2. **REQ status** — Sponsor **Draft → Implemented** after green `test-all` / sign-off ([spine-review](./spine-review-2026-11-03.md)).
-3. **Deferred** — MCP introspection (NON-TIED E), JS/TS fixture parity (handoff item 4).
+1. **`git push origin main`** when sponsor wants remote updated (13+ commits ahead; uncommitted verify YAML/manifest possible).
+2. **REQ status** — **Implemented** (2026-11-03 sponsor `test-all` + `tied_verify`); manifest [verification-evidence-manifest-test-all.v1.json](./verification-evidence-manifest-test-all.v1.json).
+3. **Deferred** — MCP introspection (NON-TIED E); optional e2e LEAP for operator-disk vs legacy metrics env (spine-review pass-4 candidate). **Fixture parity (item 4)** — **implemented** ([PLAN-rdc-js-ts-fixture-parity-refine.md](../PLAN-rdc-js-ts-fixture-parity-refine.md)): `node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs`.
 
 ## Operator migration
 

@@ -1,0 +1,94 @@
+citdp_pointer: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-RDC-FIXTURE-PARITY.yaml"
+copy_hygiene: "Tracker for RDC JS/TS fixture parity slice; do not inherit pass-3 close-out gates."
+description: "Tracker for shared runtime fixture catalog + cross-runtime parity gate. See PLAN-rdc-js-ts-fixture-parity-refine.md."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed:
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_RUNTIME_DISK_CONFIG"
+execution_profile:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+gate_contract:
+  depth_selection_before_inquiry: true
+  fail_closed: true
+  phases:
+    - "close_out"
+    - "pre_implementation"
+    - "verification"
+gate_policy: "advisory"
+linked_plans:
+  - "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-js-ts-fixture-parity-refine.md"
+notes: "refine-plan 2026-11-03 — deferred handoff item 4 (drift prevention)."
+profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/session-handoff.md"
+  - disposition: "completed"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-RDC-FIXTURE-PARITY.yaml"
+  - disposition: "completed"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-js-ts-fixture-parity-refine.md"
+  - disposition: "completed"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-RDC-FIXTURE-PARITY.yaml"
+  - disposition: "completed"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-js-ts-fixture-parity-refine.md"
+  - disposition: "completed"
+    slug: "session-bootstrap"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/session-handoff.md"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "depth_tier minimal; fixture parity test-infra; sub_adversarial_inquiry_pass not_applicable."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-RDC-FIXTURE-PARITY.yaml"
+  - disposition: "pending"
+    slug: "persist-implementation-records"
+    tracking:
+      evidence_refs: []
+  - disposition: "pending"
+    slug: "unit-test-red"
+    tracking:
+      evidence_refs: []
+  - disposition: "pending"
+    slug: "unit-test-green"
+    tracking:
+      evidence_refs: []

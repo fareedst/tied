@@ -171,3 +171,21 @@ procedure INSTALL_MCP_LAYER_RUNTIME_REFRESH(projectRoot, options):
     TERMINATION: total
   CALL refresh client mcp paths from store layout
   WHEN projectRoot equals storeRoot THEN CALL REFRESH_STORE_RUNTIME_CONFIG(storeRoot, dist from build)
+
+## RUNTIME_FIXTURE_CATALOG_PARITY
+# [IMPL-TIED_RUNTIME_DISK_CONFIG] [REQ-TIED_RUNTIME_DISK_CONFIG] SC-RDC-FIXTURE-PARITY
+# How: tools/bootstrap/fixtures/tied-runtime manifest materializes tmp workspaces; bootstrap + agentstream resolvers must match normalized snapshots.
+
+procedure RUNTIME_FIXTURE_CATALOG_PARITY(manifestCase):
+  Contract:
+    INPUT: manifest case id under tools/bootstrap/fixtures/tied-runtime/
+    OUTPUT: void
+    PRE: case tagged for bootstrap and agentstream runtimes
+    POST: normalize(resolve mjs) deep-equals normalize(resolve ts probe)
+    EFFECTS: temp dirs only; read committed manifest
+    TERMINATION: total
+  tmp := MATERIALIZE_FIXTURE_CASE(manifestCase)
+  mjs := RESOLVE_TIED_RUNTIME_CONFIG({ cwd: tmp.workspaceRoot, processEnv: tmp.processEnv })
+  ts := RESOLVE_TIED_RUNTIME_CONFIG_FROM_WORKSPACE(tmp.workspaceRoot)
+  ASSERT NORMALIZE_RESOLVE_SNAPSHOT(mjs) equals NORMALIZE_RESOLVE_SNAPSHOT(ts)
+  CLEANUP tmp

@@ -2,9 +2,9 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
   description: "Operator global paths and non-secret toggles are install-managed on disk (.tied/store.yaml, operator.local.yaml, client MCP JSON)—not shell exports. Secrets stay in env."
   metadata:
     last_updated:
-      author: "add-feature-pass3"
+      author: "build-plan-fixture-parity"
       date: "2026-11-03"
-      reason: "SC-RDC-OPERATOR-DISK slice 1"
+      reason: "SC-RDC-FIXTURE-PARITY catalog + cross-runtime parity gate"
   REQ-TIED_RUNTIME_DISK_CONFIG:
     category: "Infrastructure"
     description: "Operator global paths (store root, MCP dist, client corpus) are install-managed on disk via .tied/store.yaml, .tied/store.local.yaml, and client MCP JSON—not shell exports."
@@ -56,20 +56,25 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
       - criterion: "Store self linked methodology refresh skips DOCS_TO_COPY when store doc path equals dest."
         id: "SC-LCI-STORE-DOCS"
         metric: "tools/bootstrap/install-layers.integration.test.mjs; tools/bootstrap/lib/copy-managed.test.mjs"
-    status: "Draft"
+    status: "Implemented"
     traceability:
       architecture:
         - "ARCH-TIED_RUNTIME_DISK_CONFIG"
       implementation:
         - "IMPL-TIED_RUNTIME_DISK_CONFIG"
       tests:
+        - "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts"
         - "tools/bootstrap/install-layers.integration.test.mjs"
         - "tools/bootstrap/lib/copy-managed.test.mjs"
         - "tools/bootstrap/lib/layout.test.mjs"
-        - "tools/bootstrap/lib/mcp-layer.test.mjs"
         - "tools/bootstrap/lib/mcp-config.test.mjs"
+        - "tools/bootstrap/lib/mcp-layer.test.mjs"
         - "tools/bootstrap/lib/tied-runtime-config.test.mjs"
+        - "tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs"
   satisfaction_criteria_append:
     - criterion: "Non-secret operator toggles resolve from store operator yaml and sync to mcp.json on refresh (collect_metrics, envelope_hooks, agentstream preflight); shell export ignored when disk defines the toggle."
       id: "SC-RDC-OPERATOR-DISK"
       metric: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-config.test.mjs tools/bootstrap/lib/layers/mcp-layer.test.mjs"
+    - criterion: "Shared fixture catalog cases produce identical normalized resolve output from bootstrap .mjs and agentstream .ts resolvers."
+      id: "SC-RDC-FIXTURE-PARITY"
+      metric: "node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs"

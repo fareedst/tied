@@ -25,3 +25,9 @@ IMPL-TIED_RUNTIME_DISK_CONFIG:
         - "tools/bootstrap/lib/mcp-layer.test.mjs"
         - "tools/bootstrap/lib/tied-cli-invoke.test.mjs"
         - "tools/bootstrap/lib/tied-runtime-config.test.mjs"
+  metadata:
+    last_updated:
+      author: "sponsor-test-all-sign-off"
+      date: "2026-11-03"
+      reason: "test-all green; tied_verify verification phase"
+  status: "Active"

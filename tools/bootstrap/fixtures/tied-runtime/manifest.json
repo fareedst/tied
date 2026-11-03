@@ -1,0 +1,29 @@
+{
+  "schema_version": "tied-runtime-fixture-manifest.v1",
+  "cases": [
+    {
+      "id": "monolithic-mcp",
+      "runtimes": ["bootstrap", "agentstream"],
+      "layout": "monolithic",
+      "mcpStoreRootEnv": false
+    },
+    {
+      "id": "linked-client",
+      "runtimes": ["bootstrap", "agentstream"],
+      "layout": "linked",
+      "mcpStoreRootEnv": true,
+      "includeBundle": false
+    },
+    {
+      "id": "ignore-shell-path-env",
+      "runtimes": ["bootstrap", "agentstream"],
+      "layout": "linked",
+      "mcpStoreRootEnv": true,
+      "shellEnv": {
+        "TIED_MCP_BIN": "__WRONG_MCP_BIN__",
+        "TIED_REPO_ROOT": "__WRONG_STORE__",
+        "TIED_STORE_ROOT": "__WRONG_STORE__"
+      }
+    }
+  ]
+}

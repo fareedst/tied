@@ -17,6 +17,10 @@ import {
   RUNTIME_DIAGNOSTIC_PREFIX,
   STORE_YAML_REL,
 } from "./tied-runtime-config.mjs";
+import {
+  listSharedParityFixtureCases,
+  materializeTiedRuntimeFixture,
+} from "./tied-runtime-fixture-loader.mjs";
 import yaml from "js-yaml";
 
 function seedTiedProject(tiedDir) {
@@ -59,35 +63,24 @@ describe("tied-runtime-config", () => {
     assert.equal(deriveStoreRootFromMcpDist(dist), path.resolve(store));
   });
 
-  it("resolves monolithic client from mcp.json without shell env", () => {
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "rt-mcp-mono-"));
-    const tiedDir = path.join(tmp, "tied-project");
-    seedTiedProject(tiedDir);
-    writeMcpWithDist(tmp, ".cursor/mcp.json", tiedDir, tmp, { storeRootEnv: false });
-    const cfg = resolveTiedRuntimeConfig({ cwd: tmp, processEnv: {} });
-    assert.equal(cfg.clientProjectPath, jsonSafeAbsolute(tiedDir));
-    assert.ok(cfg.mcpDistPath.endsWith("index.js"));
-    assert.equal(cfg.storeRoot, path.resolve(tmp));
-  });
-
-  it("ignores shell TIED_MCP_BIN when mcp.json defines dist", () => {
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "rt-ignore-env-"));
-    const store = fs.mkdtempSync(path.join(os.tmpdir(), "rt-store-"));
-    const tiedDir = path.join(tmp, "tied-project");
-    seedTiedProject(tiedDir);
-    writeMcpWithDist(tmp, ".cursor/mcp.json", tiedDir, store);
-    const wrongBin = path.join(os.tmpdir(), "wrong", "index.js");
-    const cfg = resolveTiedRuntimeConfig({
-      cwd: tmp,
-      processEnv: {
-        TIED_MCP_BIN: wrongBin,
-        TIED_REPO_ROOT: "/wrong/store",
-        TIED_STORE_ROOT: "/wrong/store",
-      },
+  for (const spec of listSharedParityFixtureCases()) {
+    it(`catalog fixture ${spec.id} resolves via tied-runtime-config`, () => {
+      const materialized = materializeTiedRuntimeFixture(spec);
+      try {
+        const cfg = resolveTiedRuntimeConfig({
+          cwd: materialized.workspaceRoot,
+          processEnv: materialized.processEnv,
+        });
+        assert.ok(pathsSameResolved(cfg.storeRoot, materialized.storeRoot));
+        assert.ok(
+          pathsSameResolved(cfg.clientProjectPath, path.join(materialized.workspaceRoot, "tied-project")),
+        );
+        assert.ok(cfg.mcpDistPath.endsWith("index.js"));
+      } finally {
+        materialized.cleanup();
+      }
     });
-    assert.ok(pathsSameResolved(cfg.storeRoot, store));
-    assert.notEqual(cfg.mcpDistPath, wrongBin);
-  });
+  }
 
   it("resolves linked client with bundle env", () => {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "rt-linked-"));

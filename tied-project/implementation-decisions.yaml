@@ -3099,7 +3099,7 @@ IMPL-TIED_REVIEW_CONVERGENCE_POLICY:
 IMPL-TIED_RUNTIME_DISK_CONFIG:
   detail_file: "implementation-decisions/IMPL-TIED_RUNTIME_DISK_CONFIG.yaml"
   name: "tied-runtime-config module and MCP install refresh"
-  status: "Draft"
+  status: "Active"
   traceability:
     architecture:
       - "ARCH-TIED_RUNTIME_DISK_CONFIG"

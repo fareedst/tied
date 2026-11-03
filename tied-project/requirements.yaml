@@ -3418,7 +3418,7 @@ REQ-TIED_RUNTIME_DISK_CONFIG:
     related_to:
       - "REQ-TIED_SETUP"
       - "REQ-TIED_TWO_FOLDER_LAYOUT"
-  status: "Draft"
+  status: "Implemented"
   traceability:
     architecture:
       - "ARCH-TIED_RUNTIME_DISK_CONFIG"

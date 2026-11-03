@@ -1,0 +1,76 @@
+CITDP-RDC-FIXTURE-PARITY:
+  change_definition:
+    current_behavior: "Bootstrap `tied-runtime-config.test.mjs` and agentstream `tied-runtime-config.test.ts` each embed duplicate tmpdir seed helpers and overlapping scenarios; resolver logic lives in `.mjs` and `.ts` with no shared on-disk contract, so future RDC rule changes can pass one runtime and fail the other silently."
+    desired_behavior: "Committed fixture catalog under `tools/bootstrap/fixtures/tied-runtime/` drives both resolvers; a parity gate asserts identical normalized outcomes for the shared case set; bootstrap retains store/operator-only cases tagged bootstrap-only."
+    non_goals:
+      - "bootstrap-and-load e2e metrics env LEAP (pass-4 candidate)"
+      - "Changing resolver production semantics beyond test harness alignment"
+      - "MCP tied_config_get_base_path introspection (separate deferred slice)"
+      - "Merging bootstrap `.mjs` and agentstream `.ts` into one runtime module"
+    sponsor_decisions:
+      costly_accepted_on_implementation: "Fixture tree lives in bootstrap (store repo) and agentstream tests reach it via repo-root-relative paths — accepted coupling to prevent drift"
+    success_criteria:
+      - "SC-RDC-CONSUMERS"
+      - "SC-RDC-FIXTURE-PARITY"
+      - "SC-RDC-RESOLVE"
+    unchanged_behavior:
+      - "Existing SC metrics remain green; parity is additive gate"
+      - "Production resolver APIs unchanged unless LEAP finds test-only drift"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-TIED_RUNTIME_DISK_CONFIG"
+      run_id: null
+      scope:
+        - "fixture-parity"
+    envelope_path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required on changed tied-project YAML"
+    pre_implementation_gate: "tied_checklist_gate_validate before RED"
+    tied_validate_consistency: "required before close-out"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs"
+      - "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs"
+      - "cd mcp-server/packages/agentstream && npx tsx --test src/tied-runtime-config.test.ts"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-TIED_RUNTIME_DISK_CONFIG"
+    modules_or_boundaries: "tools/bootstrap/fixtures/tied-runtime; tied-runtime-fixture-loader.mjs; bootstrap + agentstream resolver tests"
+    tied_tokens_affected:
+      - "IMPL-TIED_RUNTIME_DISK_CONFIG"
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
+    tied_tokens_new: []
+  record_identity:
+    change_request_id: "REQ-TIED_RUNTIME_DISK_CONFIG"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-03"
+    title: "RDC shared JS/TS runtime fixture parity (anti-drift)"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Fixture paths break when agentstream tests run from package cwd only."
+        - "Parity test compares JSON with platform-specific path separators and flakes on Windows."
+        - "Shared catalog omits fail-closed throw cases and TS path never exercised."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Bootstrap tests already cover store yaml and operator flags TS suite does not need."
+        - "NON-TIED PLAN.md already specified `tools/bootstrap/fixtures/tied-runtime/`."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "mcp-server/packages/agentstream/src/tied-runtime-config.test.ts"
+        - "tied-project/working/NON-TIED-ON-DISK-RUNTIME-CONFIG/PLAN.md"
+        - "tools/bootstrap/lib/tied-runtime-config.test.mjs"
+      falsification_questions:
+        - "Are bootstrap-only cases explicitly tagged so TS is not required to duplicate store refresh?"
+        - "Does parity run in CI without extra env?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Test-infra only; no auth, network, or persistence."
+      sub_adversarial_inquiry_pass: "not_applicable"
+    summary: "Drift risk between duplicate resolver test harnesses; fixture catalog is the mitigation named in NON-TIED plan risks table."
+  test_strategy:
+    integration_command_seq:
+      - command: "node --test tools/bootstrap/lib/tied-runtime-cross-runtime-parity.test.mjs"
+        notes: "SC-RDC-FIXTURE-PARITY — mjs vs tsx probe on shared manifest cases."
+    matrix_notes: "RED: manifest + loader + parity test first; then refactor existing tests to consume fixtures; LEAP REQ SC append + IMPL note; no E2E."
