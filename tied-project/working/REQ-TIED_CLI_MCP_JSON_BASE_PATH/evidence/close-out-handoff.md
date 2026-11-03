@@ -12,7 +12,8 @@
 
 ## Commit
 
-**SHA:** `421a5a2f` — `fix(tied-cli): install-only mcp.json path authority`
+**SHA (product):** `421a5a2f` — `fix(tied-cli): install-only mcp.json path authority`  
+**SHA (close-out evidence):** `228359c5` — `docs(close-out): REQ-TIED_CLI_MCP_JSON_BASE_PATH handoff`
 
 ## Remaining risks
 
