@@ -12,7 +12,11 @@
 
 ## Commit
 
-**Skipped** (sponsor close-out requested gates/signals only). Message draft: [proposed-commit-message.txt](./proposed-commit-message.txt).
+| SHA | Description |
+| --- | --- |
+| **`b2548e98`** | Pass 3 operator disk sync + SC-RDC-OPERATOR-DISK + close-out evidence |
+
+Message: [proposed-commit-message.txt](./proposed-commit-message.txt).
 
 ## Excluded unrelated drift
 

@@ -23,9 +23,13 @@
 - Plan: [PLAN-rdc-full-runtime-disk-pass3.md](../PLAN-rdc-full-runtime-disk-pass3.md)
 - [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) — **closed**
 
-## Traceable commit
+## Commits
 
-**Deferred** — gates green; staging map in [proposed-commit-message.txt](./proposed-commit-message.txt). Run traceable commit when sponsor asks (uncommitted implementation on disk).
+| SHA | Description |
+| --- | --- |
+| **`b2548e98`** | Pass 3 operator toggles on disk + working evidence + CITDP sync |
+
+Prior: `8a16acec` (pass 2 close-out), `eb9a0e17` (pass 2 impl).
 
 ## Upstream feedback
 
