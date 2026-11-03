@@ -7,6 +7,38 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { isAllowlistedStaleHit } from "./stale-layout-allowlist.mjs";
+import {
+  OPERATOR_LOCAL_YAML_REL,
+  STORE_LOCAL_YAML_REL,
+  STORE_YAML_REL,
+} from "./tied-runtime-config.mjs";
+
+/** Store/runtime paths under `.tied/` ([REQ-TIED_RUNTIME_DISK_CONFIG]); not legacy report dir. */
+const ALLOWED_DOT_TIED_REL_PATHS = [
+  STORE_YAML_REL,
+  STORE_LOCAL_YAML_REL,
+  OPERATOR_LOCAL_YAML_REL,
+  ".tied/client-refresh-parity-report.json",
+];
+
+const DOT_TIED_ANY_RE = /(?:^|[\s`'"(])\.tied\//;
+
+/**
+ * True when line cites pre-migration `.tied/` (e.g. reports), not store runtime yaml.
+ * @param {string} line
+ */
+export function hasStaleDotTiedReference(line) {
+  if (!DOT_TIED_ANY_RE.test(line)) return false;
+  let scrubbed = line;
+  for (const rel of ALLOWED_DOT_TIED_REL_PATHS) {
+    scrubbed = scrubbed.split(rel).join("");
+  }
+  if (!DOT_TIED_ANY_RE.test(scrubbed)) return false;
+  if (/tied-store-config\.v1|isStoreRuntimeConfigDir|store runtime config/i.test(line)) {
+    return false;
+  }
+  return true;
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_REPO_ROOT = path.resolve(__dirname, "../../..");
@@ -156,7 +188,9 @@ export function lintStaleLayoutReferences(repoRoot, opts = {}) {
         continue;
       }
       for (const pat of STALE_LAYOUT_PATTERNS) {
-        if (!pat.re.test(line)) continue;
+        const matched =
+          pat.id === "dot_tied_dir" ? hasStaleDotTiedReference(line) : pat.re.test(line);
+        if (!matched) continue;
         if (pat.id === "root_templates" && line.includes("tied-bundle/templates/")) continue;
         if (isAllowlistedStaleHit(rel, pat.id)) continue;
         findings.push({

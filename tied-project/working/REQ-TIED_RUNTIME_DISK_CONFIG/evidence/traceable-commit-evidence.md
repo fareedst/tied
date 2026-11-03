@@ -1,42 +1,43 @@
 # traceable-commit evidence — REQ-TIED_RUNTIME_DISK_CONFIG
 
 **Date:** 2026-11-03  
-**Slice:** agentstream SC-RDC-CONSUMERS follow-up (post pass 3)
+**Slice:** post–spine-review bootstrap / CLI / vocab fixes
 
 ## Gates
 
 | Step | Result |
 | --- | --- |
-| Pass 3 close_out | **pass** (prior) — [closeout-run-close-out-gates-pass3.json](./closeout-run-close-out-gates-pass3.json) |
-| This slice | Unit tests only; no gate re-run (implementation completes missing module referenced at HEAD) |
+| Pass 3 close_out | **pass** — [closeout-run-close-out-gates-pass3.json](./closeout-run-close-out-gates-pass3.json) |
+| Spine-fix close_out | **pass** — [closeout-run-close-out-gates-spine-fix.json](./closeout-run-close-out-gates-spine-fix.json); receipt `close_out-2026-11-03T18-18-05-760Z.json` |
 
 ## Verification
 
-```bash
-cd mcp-server/packages/agentstream && npm run build && npx tsx --test \
-  src/tied-runtime-config.test.ts \
-  src/jev-harness-shared.test.ts \
-  src/jev-harness-preflight.test.ts
-```
+Session-handoff verify block (bootstrap unit, e2e bootstrap-and-load + new-tied-client, tied-cli CJS, vocab validator): **all pass** (2026-11-03).
 
-Result: **18/18 pass** (2026-11-03).
+Manifest: [verification-evidence-manifest.v1.json](./verification-evidence-manifest.v1.json) (citdp-evidence-3 exit 0 after fix).
 
 ## VALIDATE (vocab)
 
-N/A — no new domain terms; reuses on-disk runtime / linked client vocabulary from pass 2–3.
+N/A — linked stub resolution only; no new glossary terms.
 
-## Commit
+## Commits
 
 | SHA | Description |
 | --- | --- |
-| **`d7c46e7f`** | agentstream `tied-runtime-config.ts` + tests (SC-RDC-CONSUMERS) |
-| **`b2548e98`** | Pass 3 operator disk sync (prior) |
+| **`121fd287`** | docs: agentstream slice d7c46e7f |
+| **`d7c46e7f`** | agentstream SC-RDC-CONSUMERS |
+| **`b2548e98`** | Pass 3 operator disk |
+| **(this commit)** | Spine-review bootstrap collect fallback + CLI fixtures + vocab validator + stale-layout `.tied/` allowlist |
 
 Message: [proposed-commit-message.txt](./proposed-commit-message.txt).
 
-## Excluded unrelated drift
+## Excluded unrelated drift (restored post-commit)
 
-None in working tree at commit time.
+- `mcp-server/test/fixtures/**` envelope + graph JSON
+- `tied-bundle/**` (methodology install drift)
+- `tied-project/working/REQ-TIED_{CHECKLIST_GATE_ENFORCEMENT,JEV_*}/**`
+- `tied-project/requirements/*.yaml` sort-only
+- Untracked `tied-project/citdp/CITDP-REQ-{ACTIVATION,NESTED,PRESERVE,UNIT_TEST,UPGRADE*}.yaml` (fixture copies)
 
 ## Upstream feedback
 
@@ -44,4 +45,4 @@ N/A
 
 ## Hygiene
 
-Prior: [git-hygiene-receipt-2026-11-03-pass3.md](./git-hygiene-receipt-2026-11-03-pass3.md); workspace clear **bb06de0a**.
+[git-hygiene-receipt-2026-11-03-spine-fix.md](./git-hygiene-receipt-2026-11-03-spine-fix.md) (`apply: false`)

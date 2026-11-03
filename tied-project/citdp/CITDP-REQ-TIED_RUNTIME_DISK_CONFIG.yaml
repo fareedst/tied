@@ -86,8 +86,8 @@ CITDP-REQ-TIED_RUNTIME_DISK_CONFIG:
       - command: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-layer.test.mjs"
         notes: "SC-RDC-OPERATOR-DISK bootstrap disk-first operator flags."
     unchanged_behavior:
-      - "Secrets remain env-only; global paths unchanged from pass 2"
       - "MCP introspection and TS/JS fixture parity still deferred"
+      - "Secrets remain env-only; global paths unchanged from pass 2"
   record_identity:
     change_request_id: "REQ-TIED_RUNTIME_DISK_CONFIG"
     gate_policy: "advisory"

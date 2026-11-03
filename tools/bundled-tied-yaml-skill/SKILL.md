@@ -21,7 +21,7 @@ Every session that mutates project REQ/ARCH/IMPL YAML must **`tied_config_get_ba
 
 - **Registering `tied-yaml` in Cursor** (`.cursor/mcp.json` / **Settings → MCP**) is for **in-editor** tool calls. It is **optional** for shell use.
 - **`tied-cli.sh`** talks to the **same** server over **stdio** (`node …/dist/index.js`), using env from **`mcpServers.tied-yaml`** only (`TIED_MCP_TOOL_PROFILE=core`). An empty MCP server list in the IDE does **not** mean `tied-cli.sh` cannot run — enable **`tied-yaml`** (and optionally **`tied-yaml-optin`** for infrequent tools) in **Cursor Settings → MCP** after install writes `.cursor/mcp.json`.
-- **Default MCP binary**: After **`tied-install.sh`**, **`tied-cli.sh`** resolves **`mcp-server/dist/index.js`** from **`.cursor/mcp.json`** (and store **`.tied/`** when applicable)—not from shell **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`**. Run **`./tied-install.sh --refresh`** after moving checkouts.
+- **Default MCP binary**: After **`tied-install.sh`**, **`tied-cli.sh`** resolves **`mcp-server/dist/index.js`** from **`.cursor/mcp.json`** (and store **`.tied/store.yaml`** when applicable)—not from shell **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`**. Run **`./tied-install.sh --refresh`** after moving checkouts.
 - **Shell alone is not enough:** use **`tied-cli.sh`** under **`.cursor/skills/tied-yaml/scripts/`** (or the bundled copy under **`tools/bundled-tied-yaml-skill/scripts/`** in the store repo).
 
 ### On-disk runtime configuration

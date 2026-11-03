@@ -306,7 +306,18 @@ export function resolveOperatorFlagsForInstall(params) {
   );
   let collectMetrics = operatorCollectMetricsFromConfig(operator);
   if (collectMetrics === null) {
-    collectMetrics = brownfield.TIED_MCP_COLLECT_METRICS === "1";
+    const brownfieldCollect = brownfield.TIED_MCP_COLLECT_METRICS?.trim();
+    if (brownfieldCollect === "1") {
+      collectMetrics = true;
+    } else if (brownfieldCollect !== undefined) {
+      collectMetrics = false;
+    }
+  }
+  if (collectMetrics === null) {
+    const shellCollect = params.processEnv?.TIED_MCP_COLLECT_METRICS?.trim();
+    if (shellCollect === "1") {
+      collectMetrics = true;
+    }
   }
   if (collectMetrics === null || collectMetrics === undefined) {
     collectMetrics = false;

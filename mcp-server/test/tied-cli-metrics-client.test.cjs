@@ -33,7 +33,12 @@ function seedInstallMcp(projectRoot, tiedProjectPath) {
       {
         mcpServers: {
           "tied-yaml": {
-            env: { TIED_CLIENT_PROJECT_PATH: tiedProjectPath },
+            command: "node",
+            args: [MCP_BIN],
+            env: {
+              TIED_CLIENT_PROJECT_PATH: tiedProjectPath,
+              TIED_STORE_ROOT: REPO_ROOT,
+            },
           },
         },
       },

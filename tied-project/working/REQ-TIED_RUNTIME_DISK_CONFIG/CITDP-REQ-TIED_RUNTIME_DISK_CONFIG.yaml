@@ -83,13 +83,13 @@ CITDP-REQ-TIED_RUNTIME_DISK_CONFIG:
     success_criteria_add:
       - "SC-RDC-OPERATOR-DISK"
     test_strategy_add:
-      - command: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-config.test.mjs tools/bootstrap/lib/layers/mcp-layer.test.mjs"
-        notes: "SC-RDC-OPERATOR-DISK full operator catalog on refresh."
       - command: "cd mcp-server && npx tsx --test src/usage-metrics.test.ts src/request-evidence-envelope/hooks.composition.test.ts"
         notes: "Spawn-env reader regression."
+      - command: "node --test tools/bootstrap/lib/tied-runtime-config.test.mjs tools/bootstrap/lib/mcp-config.test.mjs tools/bootstrap/lib/layers/mcp-layer.test.mjs"
+        notes: "SC-RDC-OPERATOR-DISK full operator catalog on refresh."
     unchanged_behavior:
-      - "Secrets remain env-only; global paths unchanged from pass 2"
       - "MCP introspection and TS/JS fixture parity still deferred"
+      - "Secrets remain env-only; global paths unchanged from pass 2"
   record_identity:
     change_request_id: "REQ-TIED_RUNTIME_DISK_CONFIG"
     gate_policy: "advisory"

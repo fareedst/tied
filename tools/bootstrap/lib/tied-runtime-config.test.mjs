@@ -189,6 +189,15 @@ describe("tied-runtime-config", () => {
     assert.ok(fs.existsSync(path.join(store, ".tied", "store.local.yaml")));
   });
 
+  it("resolveOperatorFlagsForInstall honors install shell when operator and brownfield omit collect_metrics", () => {
+    const store = fs.mkdtempSync(path.join(os.tmpdir(), "rt-op-shell-"));
+    const flags = resolveOperatorFlagsForInstall({
+      storeRoot: store,
+      processEnv: { TIED_MCP_COLLECT_METRICS: "1" },
+    });
+    assert.equal(flags.collectMetrics, true);
+  });
+
   it("resolveOperatorFlagsForInstall uses store operator.collect_metrics and ignores shell export", () => {
     const store = fs.mkdtempSync(path.join(os.tmpdir(), "rt-op-store-"));
     const tiedDir = path.join(store, ".tied");

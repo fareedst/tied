@@ -6,7 +6,11 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
-import { lintStaleLayoutReferences, LIVE_SURFACE_ROOTS } from "./lint-stale-layout.mjs";
+import {
+  hasStaleDotTiedReference,
+  lintStaleLayoutReferences,
+  LIVE_SURFACE_ROOTS,
+} from "./lint-stale-layout.mjs";
 
 describe("lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
   it("flags planted copy_files reference on live surface", () => {
@@ -57,6 +61,33 @@ describe("lintStaleLayoutReferences [REQ-TIED_TWO_FOLDER_LAYOUT]", () => {
     );
     const result = lintStaleLayoutReferences(root, { roots: ["tools"] });
     assert.equal(result.ok, true);
+  });
+
+  it("allows store runtime .tied paths but flags legacy report dir [REQ-TIED_RUNTIME_DISK_CONFIG]", () => {
+    assert.equal(hasStaleDotTiedReference('export const X = ".tied/store.yaml";'), false);
+    assert.equal(
+      hasStaleDotTiedReference("Root `.tied/` with tied-store-config.v1 is not legacy"),
+      false,
+    );
+    assert.equal(hasStaleDotTiedReference("Write output under `.tied/reports/`"), true);
+
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "stale-lint-rdc-"));
+    fs.mkdirSync(path.join(root, "tools", "bootstrap", "lib"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, "tools", "bootstrap", "lib", "rdc.mjs"),
+      'export const STORE_YAML_REL = ".tied/store.yaml";\n',
+      "utf8",
+    );
+    fs.writeFileSync(
+      path.join(root, "README.md"),
+      "Old reports lived in `.tied/reports/summary.json`\n",
+      "utf8",
+    );
+    const ok = lintStaleLayoutReferences(root, { roots: ["tools", "README.md"] });
+    assert.equal(ok.ok, false);
+    assert.ok(ok.findings.some((f) => f.patternId === "dot_tied_dir" && f.file === "README.md"));
+    const storeOnly = lintStaleLayoutReferences(root, { roots: ["tools"] });
+    assert.equal(storeOnly.ok, true);
   });
 
   it("allowlists migrate-layout in REQ detail yaml", () => {

@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Runtime disk config spine review ([REQ-TIED_RUNTIME_DISK_CONFIG])** — Install honors shell `TIED_MCP_COLLECT_METRICS=1` when operator/brownfield omit `collect_metrics`; tied-cli CJS tests seed disk-first `mcp.json`; linked vocab index validates `tied-project/vocab`; stale-layout lint allows store runtime paths under `.tied/`. Evidence: [spine-review-2026-11-03.md](tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/spine-review-2026-11-03.md).
+
 - **tied-cli install-only path authority ([REQ-TIED_CLI_MCP_JSON_BASE_PATH])** — Kaizen **`fb-mw0b2pe8-7kp0gt`**: shell-inherited `TIED_*` path env no longer overrides tied-install **`.cursor/mcp.json`**; MCP stdio child uses allowlisted env and **`TIED_PATH_AUTHORITY=install_mcp_json`** (no cwd discovery on CLI path); test helpers use mcp.json fixtures.
 
 ### Added

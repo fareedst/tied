@@ -1,0 +1,23 @@
+{
+  "run_id": "close-out-spine-fix-2026-11-03",
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 1,
+    "path": "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json"
+  },
+  "gate_receipt_persist": {
+    "path": "tied-bundle/working/REQ-TIED_RUNTIME_DISK_CONFIG/gates/close_out-2026-11-03T18-18-05-760Z.json"
+  },
+  "reconcile": {
+    "ok": true,
+    "process_grade": { "band": "B", "gap_codes": ["evidence_stale"] }
+  }
+}

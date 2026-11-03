@@ -1,14 +1,22 @@
-fix(agentstream): ship disk runtime resolver for harness store root [REQ-TIED_RUNTIME_DISK_CONFIG]
+fix(bootstrap): RDC spine-review e2e and vocab validator [REQ-TIED_RUNTIME_DISK_CONFIG]
 
-HEAD imported tied-runtime-config.js without the module; add TS mirror of
-bootstrap mcp.json / store yaml resolution (SC-RDC-CONSUMERS).
+Install shell TIED_MCP_COLLECT_METRICS=1 when operator/brownfield omit
+collect_metrics (bootstrap-and-load + new-tied-client e2e). Seed tied-cli CJS
+fixtures with mcp.json args[0] + TIED_STORE_ROOT. Linked tied-bundle/vocab
+stubs validate against tied-project/vocab. Stale-layout lint allows store
+runtime paths under .tied/.
 
-Tests: tied-runtime-config.test.ts, jev-harness-shared.test.ts,
-jev-harness-preflight.test.ts (18/18).
+Tests: bootstrap unit+e2e, tied-cli CJS, validate_vocab_index.rb (see session-handoff).
 
 Staging:
-- mcp-server/packages/agentstream/src/tied-runtime-config.ts
-- mcp-server/packages/agentstream/src/tied-runtime-config.test.ts
-- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/proposed-commit-message.txt
-- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/traceable-commit-evidence.md
-- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/session-handoff.md
+- tools/bootstrap/lib/tied-runtime-config.mjs
+- tools/bootstrap/lib/tied-runtime-config.test.mjs
+- tools/bootstrap/lib/lint-stale-layout.mjs
+- tools/bootstrap/lib/lint-stale-layout.test.mjs
+- mcp-server/test/tied-cli-bundled-methodology-pilot.test.cjs
+- mcp-server/test/tied-cli-metrics-client.test.cjs
+- scripts/validate_vocab_index.rb
+- tools/bundled-tied-yaml-skill/SKILL.md
+- tied-project/citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
+- tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/** (trackers, evidence, spine review)
+- CHANGELOG.md

@@ -1,51 +1,51 @@
-citdp_pointer: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml
+citdp_pointer: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml"
 description: "Tracker for CLI e2e exec follow-through (approach 1). See PLAN-e2e-exec-followthrough-pass1.md."
 execution_evidence:
-  request: CLI-E2E-EXEC-FOLLOWTHROUGH
+  request: "CLI-E2E-EXEC-FOLLOWTHROUGH"
 execution_profile:
-  depth_tier: minimal
-  gate_policy: advisory
-  profile_depth: minimal
-gate_policy: advisory
-profile_depth: minimal
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+gate_policy: "advisory"
 linked_plans:
-  - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-e2e-exec-followthrough-pass1.md
+  - "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-e2e-exec-followthrough-pass1.md"
 notes: "Refine-plan pass 1 — 2026-11-03. Related REQ tokens: REQ-TIED_CLI_MCP_JSON_BASE_PATH, REQ-TIED_RUNTIME_DISK_CONFIG."
+profile_depth: "minimal"
 steps:
-  - disposition: completed
-    slug: change-definition
+  - disposition: "completed"
+    slug: "change-definition"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml
-      status: completed
-  - disposition: completed
-    slug: impact-discovery
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml"
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-e2e-exec-followthrough-pass1.md
-      status: completed
-  - disposition: completed
-    slug: risk-assessment
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-e2e-exec-followthrough-pass1.md"
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml
-      status: completed
-  - disposition: completed
-    slug: test-strategy
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml"
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-e2e-exec-followthrough-pass1.md
-      status: completed
-  - disposition: not_applicable
-    policy: minimal-depth-no-inquiry
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-e2e-exec-followthrough-pass1.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
     rationale: "depth_tier minimal; test-only e2e alignment; sub_adversarial_inquiry_pass not_applicable per CITDP risk_analysis.adversarial_inquiry."
-    slug: sub-adversarial-inquiry-pass
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml
-      status: not_applicable
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml"
+      status: "not_applicable"

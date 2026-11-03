@@ -62,12 +62,14 @@ class VocabularyIndexValidator
 
   def validate_methodology_layer
     with_vocab_root(@methodology_vocab_root) do
-      paths = glossary_paths
-      validate_index_files +
-        validate_glossary_structure(paths) +
-        validate_catalog_membership(paths) +
-        validate_links +
-        validate_alphabetical_indexes(paths)
+      with_linked_stub_resolution do
+        paths = glossary_paths
+        validate_index_files +
+          validate_glossary_structure(paths) +
+          validate_catalog_membership(paths) +
+          validate_links +
+          validate_alphabetical_indexes(paths)
+      end
     end
   end
 
@@ -91,6 +93,35 @@ class VocabularyIndexValidator
     @vocab_root = previous
   end
 
+  def with_linked_stub_resolution
+    previous = @resolve_linked_stubs
+    @resolve_linked_stubs = true
+    yield
+  ensure
+    @resolve_linked_stubs = previous
+  end
+
+  def linked_vocab_stub?(text)
+    text.include?("linked install stub")
+  end
+
+  def canonical_path_from_stub(text)
+    match = text.match(/Read the canonical content at:\s*\n+\s*`?([^\s`']+)`?/m)
+    return nil unless match
+
+    File.expand_path(match[1], @repository_root)
+  end
+
+  def vocab_text(path)
+    text = read(path)
+    return text unless @resolve_linked_stubs && linked_vocab_stub?(text)
+
+    canonical = canonical_path_from_stub(text)
+    return text unless canonical && File.file?(canonical) && canonical.start_with?(@repository_root)
+
+    read(canonical)
+  end
+
   def glossary_paths
     Dir.glob(File.join(@vocab_root, "*.md")).reject do |path|
       INDEX_FILES.include?(File.basename(path))
@@ -106,7 +137,7 @@ class VocabularyIndexValidator
 
   def validate_glossary_structure(paths)
     paths.flat_map do |path|
-      text = read(path)
+      text = vocab_text(path)
       REQUIRED_MARKERS.filter_map do |name, marker|
         "#{relative(path)} is missing #{name}" unless text.match?(marker)
       end
@@ -129,8 +160,20 @@ class VocabularyIndexValidator
   def validate_client_catalog_membership(paths)
     routing = File.join(@vocab_root, "routing.md")
     catalog = File.join(@vocab_root, "domain-references.md")
-    routing_paths = table_link_targets(routing, "## Client glossary routing table", "## Ownership")
-    catalog_paths = table_link_targets(catalog, "## Client canonical glossaries", "## Ownership")
+    routing_text = read(routing)
+    catalog_text = read(catalog)
+    routing_paths =
+      if routing_text.include?("## Client glossary routing table")
+        table_link_targets(routing, "## Client glossary routing table", "## Ownership")
+      else
+        table_link_targets(routing, "## Glossary routing table", "## Cross-topic lookup")
+      end
+    catalog_paths =
+      if catalog_text.include?("## Client canonical glossaries")
+        table_link_targets(catalog, "## Client canonical glossaries", "## Ownership")
+      else
+        table_link_targets(catalog, "## Canonical glossaries", "## Authoring guides")
+      end
 
     paths.flat_map do |path|
       basename = File.basename(path)
@@ -143,7 +186,10 @@ class VocabularyIndexValidator
 
   def validate_links
     Dir.glob(File.join(@vocab_root, "*.md")).flat_map do |source|
-      read(source).scan(/\]\(([^)]+)\)/).filter_map do |match|
+      raw = read(source)
+      next [] if linked_vocab_stub?(raw)
+
+      vocab_text(source).scan(/\]\(([^)]+)\)/).filter_map do |match|
         raw = match.first
         target = raw.split("#", 2).first.to_s.split("?", 2).first.to_s
         next if target.empty? || raw.start_with?("#") || target.start_with?("//") ||
@@ -157,7 +203,7 @@ class VocabularyIndexValidator
 
   def validate_alphabetical_indexes(paths)
     paths.flat_map do |path|
-      text = read(path)
+      text = vocab_text(path)
       body_text, index_text = text.split(/^## Alphabetical index$/, 2)
       index_text ||= ""
       entries = index_text.lines.filter_map do |line|
@@ -176,7 +222,7 @@ class VocabularyIndexValidator
   end
 
   def table_link_targets(path, start_heading, end_heading)
-    text = read(path)
+    text = vocab_text(path)
     after_start = text.split(start_heading, 2)
     return [] if after_start.length < 2
 

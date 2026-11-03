@@ -1,91 +1,91 @@
-citdp_pointer: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
-copy_hygiene: Per-request Tracker for REQ-TIED_RUNTIME_DISK_CONFIG pass 3.
-description: Tracker for pass 3 full runtime disk (except secrets). See PLAN-rdc-full-runtime-disk-pass3.md.
+citdp_pointer: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
+copy_hygiene: "Per-request Tracker for REQ-TIED_RUNTIME_DISK_CONFIG pass 3."
+description: "Tracker for pass 3 full runtime disk (except secrets). See PLAN-rdc-full-runtime-disk-pass3.md."
 execution_evidence:
   close_out_evidence:
     date: null
     deferred: []
     gates: {}
-    master_checklist: ''
+    master_checklist: ""
   completed:
-    - session-bootstrap
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-  envelope_path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json
+    - "change-definition"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     command_seq: []
-    status: not_run
-  request: REQ-TIED_RUNTIME_DISK_CONFIG
+    status: "not_run"
+  request: "REQ-TIED_RUNTIME_DISK_CONFIG"
 execution_profile:
-  depth_tier: minimal
-  gate_policy: advisory
-  profile_depth: minimal
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
 feedback_loops:
-  leap: IMPL pseudo-code before code; pass 3 operator disk slice.
+  leap: "IMPL pseudo-code before code; pass 3 operator disk slice."
 gate_contract:
   depth_selection_before_inquiry: true
   fail_closed: true
   phases:
-    - close_out
-    - pre_implementation
-    - verification
-profile_depth: minimal
-gate_policy: advisory
+    - "close_out"
+    - "pre_implementation"
+    - "verification"
+gate_policy: "advisory"
 linked_plans:
-  - tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md
-notes: add-feature pass 3 refine 2026-11-03.
+  - "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md"
+notes: "add-feature pass 3 refine 2026-11-03."
+profile_depth: "minimal"
 steps:
-  - disposition: completed
-    slug: change-definition
+  - disposition: "completed"
+    slug: "change-definition"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
-      status: completed
-  - disposition: completed
-    slug: impact-discovery
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
+      status: "completed"
+  - disposition: "completed"
+    slug: "impact-discovery"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md
-      status: completed
-  - disposition: completed
-    slug: risk-assessment
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md"
+      status: "completed"
+  - disposition: "completed"
+    slug: "risk-assessment"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
-      status: completed
-  - disposition: completed
-    slug: test-strategy
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
+      status: "completed"
+  - disposition: "completed"
+    slug: "test-strategy"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md
-      status: completed
-  - disposition: not_applicable
-    policy: minimal-depth-no-inquiry
-    rationale: depth_tier minimal; pass 3 operator disk; sub_adversarial_inquiry_pass not_applicable.
-    slug: sub-adversarial-inquiry-pass
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/PLAN-rdc-full-runtime-disk-pass3.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "depth_tier minimal; pass 3 operator disk; sub_adversarial_inquiry_pass not_applicable."
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml
-      status: not_applicable
-  - slug: session-bootstrap
-    disposition: completed
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
+      status: "not_applicable"
+  - disposition: "completed"
+    slug: "session-bootstrap"
     tracking:
-      status: completed
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/session-handoff.md
-  - slug: translate-sponsor-intent
-    disposition: completed
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/session-handoff.md"
+      status: "completed"
+  - disposition: "completed"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
       evidence_refs:
-        - kind: file_path
-          path: tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/pending-full-runtime-disk-handoff.md
+        - kind: "file_path"
+          path: "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/pending-full-runtime-disk-handoff.md"
+      status: "completed"
