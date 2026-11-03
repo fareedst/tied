@@ -58,3 +58,5 @@ cd mcp-server && npx tsx --test \
 ## Uncommitted local drift (exclude from RDC)
 
 Fixtures, source-graph index JSON, evaluation envelope-gap report, stray `tied-project/citdp/CITDP-REQ-{ACTIVATION,...}.yaml`, local `.tied/`, `mcp-server/.../tied-runtime-config.ts` if not a deliberate follow-up.
+
+**Workspace cleared** 2026-11-03 (restore + delete drift; `.tied/store.yaml` gitignored).
