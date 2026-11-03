@@ -75,6 +75,8 @@ node --test tools/bootstrap/lib/tied-cli-invoke.test.mjs
 5. **Remove `patchTiedRepoRoot`** from skill install path or leave as no-op (scripts no longer carry placeholder).
 6. **Promote to TIED** if you want REQ/ARCH/IMPL traceability.
 
+**After RDC pass 2 (global paths):** full env → on-disk for non-secret toggles is queued — [pending-full-runtime-disk-handoff.md](../REQ-TIED_RUNTIME_DISK_CONFIG/evidence/pending-full-runtime-disk-handoff.md).
+
 ## Git hygiene
 
 **In scope for this handoff (runtime config):** paths listed in Delivered + new files under `tools/bootstrap/lib/tied-runtime-config*`, `.tied/`, `tools/bootstrap/templates/.tied/`, `NON-TIED-ON-DISK-RUNTIME-CONFIG/`.

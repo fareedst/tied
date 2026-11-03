@@ -25,9 +25,36 @@ export type DefaultResolution =
   | { ok: true; defaults: DefaultReport; report: DefaultReport; mutated_configuration: false }
   | { ok: false; diagnostics: string[]; report: DefaultReport; mutated_configuration: false };
 
-function choose(explicit: string | undefined, environment: string | undefined, local: string): { value: string; source: DefaultSource } {
+function readMcpProjectPaths(projectRoot: string): { mcpBin?: string; basePath?: string } {
+  for (const rel of [".cursor/mcp.json", ".mcp.json"] as const) {
+    const mcpPath = path.join(projectRoot, rel);
+    if (!fs.existsSync(mcpPath)) continue;
+    try {
+      const cfg = JSON.parse(fs.readFileSync(mcpPath, "utf8")) as {
+        mcpServers?: Record<string, { args?: unknown[]; env?: Record<string, string> }>;
+      };
+      const entry = cfg.mcpServers?.["tied-yaml"];
+      const env = entry?.env;
+      if (!env) continue;
+      const baseRaw = env.TIED_CLIENT_PROJECT_PATH?.trim() || env.TIED_BASE_PATH?.trim();
+      const arg0 = Array.isArray(entry.args) && typeof entry.args[0] === "string" ? entry.args[0].trim() : "";
+      const mcpBin = arg0
+        ? path.isAbsolute(arg0)
+          ? path.resolve(arg0)
+          : path.resolve(projectRoot, arg0)
+        : undefined;
+      const basePath = baseRaw ? path.resolve(baseRaw) : undefined;
+      if (mcpBin || basePath) return { mcpBin, basePath };
+    } catch {
+      continue;
+    }
+  }
+  return {};
+}
+
+function choose(explicit: string | undefined, disk: string | undefined, local: string): { value: string; source: DefaultSource } {
   if (explicit) return { value: path.resolve(explicit), source: "explicit" };
-  if (environment) return { value: path.resolve(environment), source: "environment" };
+  if (disk) return { value: path.resolve(disk), source: "local" };
   return { value: path.resolve(local), source: "local" };
 }
 
@@ -38,8 +65,9 @@ function item(value: string, source: DefaultSource, corrective_command: string):
 // [IMPL-FEAT_LOCAL_DEFAULTS] [ARCH-FEAT_LOCAL_DEFAULT_RESOLUTION] [REQ-FEAT_LOCAL_DEFAULTS] — resolve local defaults deterministically without writing configuration.
 export function resolveLocalDefaults(options: DefaultOptions = {}, environment: NodeJS.ProcessEnv = process.env, projectRoot = process.cwd()): DefaultResolution {
   const root = path.resolve(projectRoot);
-  const mcp = choose(options.mcpBin, environment.TIED_MCP_BIN, path.join(root, "mcp-server", "dist", "index.js"));
-  const base = choose(options.basePath, environment.TIED_BASE_PATH, path.join(root, "tied-project"));
+  const disk = readMcpProjectPaths(root);
+  const mcp = choose(options.mcpBin, disk.mcpBin, path.join(root, "mcp-server", "dist", "index.js"));
+  const base = choose(options.basePath, disk.basePath, path.join(root, "tied-project"));
   const constitution = options.constitution
     ? { value: path.resolve(options.constitution), source: "explicit" as const }
     : { value: path.resolve(path.join(base.value, "constitution.yaml")), source: base.source };

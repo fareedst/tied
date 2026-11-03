@@ -184,7 +184,7 @@ _how_tied() {
   lint-tied                  lint all project tied/**/*.yaml
   lint-reorder [args]        scripts/lint.sh (list reorder policy; quiet on success)
   validate-tied              tied_validate_consistency (pseudo-code + detail checks)
-                             honors TIED_BASE_PATH, TIED_MCP_BIN (defaults: ./tied, mcp-server/dist)
+                             resolves paths from .cursor/mcp.json (run from store or client cwd)
   pseudocode-validate JSON   tied-cli pseudocode_validate (e.g. @working/REQ-…/pseudocode-validate-args.json)
 EOF
 }
@@ -320,10 +320,9 @@ EOF
 _how_env() {
   _how_header "Environment (this script sets TIED_MCP_COLLECT_METRICS=1 on source)"
   _how_render_body <<'EOF'
-  TIED_BASE_PATH             tied/ directory for tied-cli and MCP
-  TIED_MCP_BIN               path to mcp-server/dist/index.js
-  TIED_REPO_ROOT             TIED repo root for new-tied-client / test-new-tied-client
+  Global paths (store, MCP dist, corpus) — on-disk via mcp.json + .tied/store.yaml; do not export TIED_REPO_ROOT / TIED_MCP_BIN
   TIED_TEST_ROOT             parent dir for test-new-tied-client (default ~/Documents/dev/test)
+  new-tied-client DIR [SOURCE_ROOT]  optional second arg overrides checkout anchor (shell TIED_REPO_ROOT ignored with DIAGNOSTIC)
   TIED_SKIP_NEW_CLIENT_AUDIT set to 1 to skip G4 onboarding audit in bootstrap smoke
   TIED_CLAUDE_CLIENT_WITH_CONSISTENCY=1  opt-in consistency during Claude client validation
   AGENTSTREAM                prebuilt agentstream binary for batch drivers

@@ -10,6 +10,7 @@ import yaml from "js-yaml";
 
 import type { DryRunConfig } from "./dry-run-config.js";
 import { findRepoRootFromPath } from "./repo-root.js";
+import { resolveTiedRuntimeConfigFromWorkspace } from "./tied-runtime-config.js";
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null && !Array.isArray(v);
@@ -131,20 +132,9 @@ export function resolveJevHarnessDistStoreRoot(
     return clientRoot;
   }
 
-  const mcpBin = env.TIED_MCP_BIN?.trim();
-  if (mcpBin !== undefined && mcpBin !== "" && path.isAbsolute(mcpBin)) {
-    const fromMcpBin = path.resolve(path.dirname(path.dirname(path.dirname(mcpBin))));
-    if (storeRootHasHarnessDist(fromMcpBin)) {
-      return fromMcpBin;
-    }
-  }
-
-  const repoRoot = env.TIED_REPO_ROOT?.trim();
-  if (repoRoot !== undefined && repoRoot !== "" && path.isAbsolute(repoRoot)) {
-    const indexJs = path.join(repoRoot, "mcp-server", "dist", "index.js");
-    if (fs.existsSync(indexJs) && storeRootHasHarnessDist(repoRoot)) {
-      return path.resolve(repoRoot);
-    }
+  const fromDisk = resolveTiedRuntimeConfigFromWorkspace(clientRoot, { requireDistExists: false });
+  if (fromDisk && storeRootHasHarnessDist(fromDisk.storeRoot)) {
+    return fromDisk.storeRoot;
   }
 
   const skipAnchor =
@@ -173,7 +163,7 @@ export function formatHarnessDistMissingMessage(): string {
   return (
     "agentstream: jev harness enabled but mcp-server/dist/jev not built — " +
     "run: ./build-workspace.sh from the TIED store that owns this CLI " +
-    "(linked clients: set TIED_MCP_BIN or TIED_REPO_ROOT to that store)\n"
+    "(linked clients: ensure .cursor/mcp.json tied-yaml args/env point at that store, then ./tied-install.sh --refresh)\n"
   );
 }
 

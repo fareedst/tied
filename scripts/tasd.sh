@@ -27,7 +27,7 @@
 #
 # Workspace layout (fixed by this driver unless you edit it)
 #   test_path=/Users/fareed/Documents/dev/test/<name>   (working copy for the agent)
-#   tied_path=/Users/fareed/Documents/dev/chatgpt/stdd   (stdd repo; tied-install.sh + checklist source)
+#   tied_path=<parent of scripts/>   (TIED store checkout; tied-install.sh + checklist source)
 #   tied-install.sh must be run from a checkout that includes tools/bundled-tied-yaml-skill/ so
 #   .cursor/skills/tied-yaml (tied-cli.sh) is installed; override tied_path= if your TIED clone is elsewhere.
 #
@@ -128,8 +128,15 @@ tasd () {
     esac
   fi
 
-  : "${test_path:=/Users/fareed/Documents/dev/test/${name}}"
-  : "${tied_path:=/Users/fareed/Documents/dev/chatgpt/stdd}"
+  local _tasd_script_dir
+  _tasd_script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  local _tasd_store_anchor
+  _tasd_store_anchor="$(cd "${_tasd_script_dir}/.." && pwd)"
+  : "${test_path:=${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}/${name}}"
+  : "${tied_path:=${_tasd_store_anchor}}"
+  if [[ -n "${TIED_REPO_ROOT:-}" && "${TIED_REPO_ROOT}" != "${tied_path}" ]]; then
+    echo "DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: TIED_REPO_ROOT (tasd tied_path=${tied_path})" >&2
+  fi
 
   local -a _as_cmd=()
   tasd_agentstream_cmd
@@ -215,7 +222,7 @@ IN A FUTURE REQUEST, YOU WILL BE DIRECTED TO WRITE THE PSEUDO-CODE.
 
 Use \`tied agentstream\` from the TIED source repo (build mcp-server workspace first).
 
-TIED_MCP_BIN=${tied_path}/mcp-server/dist/index.js
+# MCP paths: use tied_path checkout (mcp-server/dist); do not export TIED_MCP_BIN / TIED_REPO_ROOT for global config.
 EOF
 )
 }

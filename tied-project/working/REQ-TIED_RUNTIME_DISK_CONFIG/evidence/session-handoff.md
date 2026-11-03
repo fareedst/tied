@@ -1,83 +1,58 @@
-# Session handoff — REQ-TIED_RUNTIME_DISK_CONFIG + e2e exec follow-through
+# Session handoff — REQ-TIED_RUNTIME_DISK_CONFIG
 
 **handoff_kind:** session  
 **Date:** 2026-11-03  
-**request_token:** REQ-TIED_RUNTIME_DISK_CONFIG (primary); CLI-E2E-EXEC-FOLLOWTHROUGH (implemented)  
-**prompt_type:** build-plan e2e slice **done**; close-out **deferred**
+**request_token:** REQ-TIED_RUNTIME_DISK_CONFIG (primary)  
+**prompt_type:** build-plan pass 2 **implemented**, close-out **pending**
 
 ## Plan spine
 
 | Track | Status | Linked plan |
 | --- | --- | --- |
-| **Runtime disk TIED promotion** | build-plan **implemented** (uncommitted) | [PLAN-refine-pass2.md](../PLAN-refine-pass2.md) |
-| **E2E exec follow-through (approach 1)** | build-plan **implemented** (uncommitted) | [PLAN-e2e-exec-followthrough-pass1.md](../PLAN-e2e-exec-followthrough-pass1.md) |
+| **Runtime disk TIED promotion** | committed **eded7a37** | [PLAN-refine-pass2.md](../PLAN-refine-pass2.md) |
+| **E2E exec follow-through** | committed **eded7a37** | [PLAN-e2e-exec-followthrough-pass1.md](../PLAN-e2e-exec-followthrough-pass1.md) |
+| **RDC pass 2 — global path env cleanup** | **implemented**, uncommitted | [PLAN-rdc-env-cleanup-pass2.md](../PLAN-rdc-env-cleanup-pass2.md) |
 
 ## Authoritative refs
 
 | Artifact | Path |
 | --- | --- |
-| RDC CITDP (working) | [CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml](../CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml) |
 | RDC CITDP (persisted) | [tied-project/citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml](../../../citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml) |
-| RDC Tracker | [agent-req-implementation-checklist.yaml](../agent-req-implementation-checklist.yaml) |
-| E2E CITDP | [CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml](../CITDP-CLI-E2E-EXEC-FOLLOWTHROUGH.yaml) |
-| E2E Tracker | [agent-req-e2e-exec-checklist.yaml](../agent-req-e2e-exec-checklist.yaml) |
-| NON-TIED runtime implement | [session-handoff.md](../../NON-TIED-ON-DISK-RUNTIME-CONFIG/session-handoff.md) |
+| RDC working | [CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml](../CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml) |
+| Operator shell | [operator-shell-profile.md](./operator-shell-profile.md) |
+| Next wave (queued) | [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) |
 
-## Environment
+## Pass 2 delivered (uncommitted)
 
-- **workspace_root:** `/Users/fareed/Documents/dev/chatgpt/stdd` (TIED store + client)
-- **TIED_BASE_PATH:** `tied-project/` via install MCP JSON (marker routing)
-- **execution_site:** store
-- **git:** sponsor pasted `main...origin/main [ahead 3]`; **large dirty tree** — stage RDC + runtime slice separately from fixtures/reports drift (see Constraints)
-
-## Requirements and dependencies
-
-- **Primary:** [REQ-TIED_RUNTIME_DISK_CONFIG], [REQ-TIED_CLI_MCP_JSON_BASE_PATH], [REQ-TIED_LAYERED_CLIENT_INSTALL], [REQ-TIED_TWO_FOLDER_LAYOUT]
-- **depth_tier / gate_policy:** minimal / advisory (both tracks)
-- **depends_on:** shipped bootstrap resolver (`tied-runtime-config.mjs`); linked install `writeExecWrapper` unchanged for e2e fix
-
-## Related and pending prior requests
-
-| id | kind | status | owner | blocks_current | evidence_link |
-| --- | --- | --- | --- | --- | --- |
-| CLI-E2E-EXEC-FOLLOWTHROUGH | PLAN | done | agent | no | [PLAN-e2e-exec-followthrough-pass1.md](../PLAN-e2e-exec-followthrough-pass1.md) |
-| NON-TIED-ON-DISK-RUNTIME-CONFIG | PLAN | done | agent | no | [NON-TIED session-handoff](../../NON-TIED-ON-DISK-RUNTIME-CONFIG/session-handoff.md) |
-| MCP introspection (handoff E) | sponsor_ask | pending | sponsor | no | NON-TIED handoff § Remaining |
-| TS/JS runtime fixture parity | sponsor_ask | pending | sponsor | no | NON-TIED handoff item 4 |
-
-## Finished this session
-
-- **build-plan [REQ-TIED_RUNTIME_DISK_CONFIG]:** Created REQ/ARCH/IMPL + semantic tokens; LEAP on IMPL-TIED_TWO_FOLDER_LAYOUT, IMPL-TIED_LAYERED_CLIENT_INSTALL, IMPL-TIED_FILES; integration test SC-LCI-STORE-DOCS; bootstrap unit battery green; `./tied-install.sh --refresh .` green; verification gate allowed; CITDP copied to `tied-project/citdp/`.
-- **build-plan CLI-E2E-EXEC-FOLLOWTHROUGH:** `effectiveScriptTextForRuntimeDiskCheck` + path-based `assertScriptsResolveRuntimeFromDisk` in `bootstrap-and-load.test.ts`; WRITE_EXEC_WRAPPER LEAP block; REQ SC-CLI-NO-SHELL-PATH-AUTHORITY + tests traceability; verification gate **allowed: true** (minimal, 2026-11-03).
-- **E2E run:** Script-runtime assertions (SC-CLI-E2E-*) pass; full file exit 1 from unrelated `tied.sh init` — `TIED_MCP_BIN` points at `/Users/fareed/Documents/dev/chatgpt/mcp-server/dist/index.js` (missing build / wrong parent path); **out of scope** per plan.
-
-## Completion signals
-
-- **Machine close-out:** not_run (no envelope sync; workspace uncommitted)
-- **Process contract:** RDC + e2e follow-through implement complete per plans; close-out **deferred**
-- **Adherence ledger:** not_run
+| Area | Change |
+| --- | --- |
+| **JEV harness** | Removed `TIED_MCP_BIN` / `TIED_REPO_ROOT` resolution; disk + package anchor only; **SC-RDC-CONSUMERS** tests |
+| **Scripts** | `tied-post-session`, `tasd`, `feature-relay`, `lint`, `build-commands`, `_build_commands_cli_guide` — checkout anchor / ignore shell global path env |
+| **Docs** | SKILL, bootstrap README, `operator-shell-profile.md` |
+| **TIED** | **SC-RDC-CONSUMERS** in REQ detail; IMPL JEV pseudo-code LEAP |
+| **Follow-on** | `tied.sh`, `feature-orchestrator.sh`, `merged-routing-baseline.ts` (from pre-pass-2 slice) |
 
 ## Do next
 
-1. Optional **`/close-out`** for combined RDC + e2e slice after scoped commit review (runtime code + `tied-project/` + `bootstrap-and-load.test.ts`).
-2. Optional: build `mcp-server` dist or fix resolver path so full `bootstrap-and-load` bash onboarding subtest passes (separate from exec follow-through).
+1. **Scoped commit** — pass 2 files only (exclude fixture/source-graph drift unless intentional).
+2. **`@close-out`** — `lint_yaml`, `tied_validate_consistency`, persist CITDP, verification gate.
+3. **Handoff manager:** promote [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md) to next `@add-feature` after pass 2 close-out.
 
-## Constraints
+## Pending for handoff (after pass 2 close-out)
 
-- **E2E approach 1 only:** no `writeExecWrapper` changes; test follows `exec` to store `bundled-tied-yaml-skill/scripts/*`.
-- **Git scope:** Prefer commits: runtime resolver/bootstrap, `tied-project/` RDC YAML, `install-layers.integration.test.mjs`, e2e test — **exclude** unrelated fixture/source-graph/envelope-gap dirt unless intentional.
+Full runtime on-disk config **except secrets** — see [pending-full-runtime-disk-handoff.md](./pending-full-runtime-disk-handoff.md).
 
 ## Repeatable verification
 
 ```bash
-# RDC battery (green after build-plan)
 node --test tools/bootstrap/lib/tied-runtime-config.test.mjs \
   tools/bootstrap/lib/mcp-base-path.test.mjs tools/bootstrap/lib/mcp-layer.test.mjs \
   tools/bootstrap/lib/layout.test.mjs tools/bootstrap/lib/copy-managed.test.mjs \
-  tools/bootstrap/lib/tied-cli-invoke.test.mjs \
-  tools/bootstrap/install-layers.integration.test.mjs
-./tied-install.sh --refresh .
+  tools/bootstrap/lib/tied-cli-invoke.test.mjs
 
-# E2E (script-runtime slice green; full file may fail on tied.sh init without MCP dist)
-cd mcp-server && npx tsx --test src/e2e/bootstrap-and-load.test.ts
+cd mcp-server && npx tsx --test \
+  src/e2e/bootstrap-and-load.test.ts \
+  packages/agentstream/src/jev-harness-preflight.test.ts \
+  packages/agentstream/src/jev-harness-shared.test.ts \
+  src/jev/plan-skills.test.ts
 ```

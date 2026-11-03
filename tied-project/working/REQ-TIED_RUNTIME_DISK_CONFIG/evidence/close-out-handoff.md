@@ -20,4 +20,4 @@
 
 See `git log -1` after traceable commit; SHA recorded below post-commit.
 
-**commit_sha:** _(pending)_
+**commit_sha:** `eded7a37` (feat(tied): runtime disk config traceability + e2e exec follow-through)

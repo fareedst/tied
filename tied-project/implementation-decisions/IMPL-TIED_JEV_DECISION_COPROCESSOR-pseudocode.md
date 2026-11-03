@@ -128,8 +128,7 @@ Grammar-Version: v2
 - procedure RESOLVE_JEV_HARNESS_DIST_STORE_ROOT(cfg, env):
   - PRE: clientRoot = resolveProjectRootForJev(cfg)
   - PRE: probe harness-tool-guard.js under clientRoot → return clientRoot when present (monolithic)
-  - PRE: TIED_MCP_BIN absolute → storeRoot = dirname³(mcpBin); probe → return storeRoot when present
-  - PRE: TIED_REPO_ROOT absolute with mcp-server/dist/index.js → probe → return when present
+  - PRE: resolveTiedRuntimeConfigFromWorkspace(clientRoot) → probe storeRoot from mcp.json / store yaml ([REQ-TIED_RUNTIME_DISK_CONFIG] SC-RDC-CONSUMERS); ignore operator shell TIED_MCP_BIN / TIED_REPO_ROOT
   - PRE: package anchor walk from jev-harness-shared module → return storeRoot when probe present (skip when AGENTSTREAM_JEV_HARNESS_DIST_SKIP_PACKAGE_ANCHOR for tests)
   - POST: null when no probe succeeds → isHarnessDistBuilt false → 2C hard-stop unchanged
   - OUTPUT: storeRoot | null

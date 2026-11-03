@@ -115,7 +115,7 @@ IN A FUTURE REQUEST, YOU WILL BE DIRECTED TO WRITE THE PSEUDO-CODE.
 
 Use \`tied agentstream\` (or node mcp-server/packages/cli/dist/index.js agentstream) from the TIED source repo.
 
-TIED_MCP_BIN=${tied_path}/mcp-server/dist/index.js
+# MCP paths: tied_path is the TIED store checkout; configure client via .cursor/mcp.json + tied-install --refresh.
 EOF
 ) \
   "$@"

@@ -37,13 +37,19 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TIED_REPO_ROOT="${TIED_REPO_ROOT:-$(cd "${SCRIPT_DIR}/.." && pwd)}"
-WORKING_PATHS_CLI="${TIED_REPO_ROOT}/tools/bootstrap/lib/working-paths-cli.mjs"
+TIED_STORE_ANCHOR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+if [[ -n "${TIED_REPO_ROOT:-}" && "${TIED_REPO_ROOT}" != "${TIED_STORE_ANCHOR}" ]]; then
+  echo "DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: TIED_REPO_ROOT" >&2
+fi
+if [[ -n "${TIED_MCP_BIN:-}" && "${TIED_MCP_BIN}" != "${TIED_STORE_ANCHOR}/mcp-server/dist/index.js" ]]; then
+  echo "DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: TIED_MCP_BIN" >&2
+fi
+WORKING_PATHS_CLI="${TIED_STORE_ANCHOR}/tools/bootstrap/lib/working-paths-cli.mjs"
 TIED_TEST_ROOT="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
-TIED_MCP_BIN="${TIED_MCP_BIN:-${TIED_REPO_ROOT}/mcp-server/dist/index.js}"
-ENVELOPE_BATCH_CLI="${TIED_REPO_ROOT}/mcp-server/dist/cli/request-evidence-envelope-batch-collect.js"
-METRICS_RUBY="${TIED_REPO_ROOT}/scripts/analyze_tied_mcp_metrics.rb"
-HOOK_ANALYZER="${TIED_REPO_ROOT}/scripts/analyze_hook_log.rb"
+TIED_MCP_BIN="${TIED_STORE_ANCHOR}/mcp-server/dist/index.js"
+ENVELOPE_BATCH_CLI="${TIED_STORE_ANCHOR}/mcp-server/dist/cli/request-evidence-envelope-batch-collect.js"
+METRICS_RUBY="${TIED_STORE_ANCHOR}/scripts/analyze_tied_mcp_metrics.rb"
+HOOK_ANALYZER="${TIED_STORE_ANCHOR}/scripts/analyze_hook_log.rb"
 
 CLIENT_ARG=""
 OUT_DIR=""
@@ -153,7 +159,7 @@ fi
 
 if [[ ! -f "${TIED_MCP_BIN}" ]]; then
   echo "ERROR: MCP server not built: ${TIED_MCP_BIN}" >&2
-  echo "  Run: npm run build --prefix ${TIED_REPO_ROOT}/mcp-server" >&2
+  echo "  Run: npm run build --prefix ${TIED_STORE_ANCHOR}/mcp-server" >&2
   exit 2
 fi
 
@@ -201,7 +207,7 @@ resolve_tied_cli() {
     printf '%s\n' "${client_cli}"
     return 0
   fi
-  local bundled="${TIED_REPO_ROOT}/tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
+  local bundled="${TIED_STORE_ANCHOR}/tools/bundled-tied-yaml-skill/scripts/tied-cli.sh"
   if [[ -x "${bundled}" ]]; then
     printf '%s\n' "${bundled}"
     return 0
@@ -276,7 +282,7 @@ step_envelope() {
   if [[ -n "${CORPUS_PATH}" ]]; then
     local corpus_abs="${CORPUS_PATH}"
     if [[ "${corpus_abs}" != /* ]]; then
-      corpus_abs="${TIED_REPO_ROOT}/${corpus_abs}"
+      corpus_abs="${TIED_STORE_ANCHOR}/${corpus_abs}"
     fi
     if [[ ! -f "${corpus_abs}" ]]; then
       echo "ERROR: corpus not found: ${corpus_abs}" >&2
@@ -327,7 +333,7 @@ resolve_reconcile_bin() {
     printf '%s\n' "${ADHERENCE_RECONCILE_BIN}"
     return 0
   fi
-  local built="${TIED_REPO_ROOT}/tools/agentstream/adherence-reconcile"
+  local built="${TIED_STORE_ANCHOR}/tools/agentstream/adherence-reconcile"
   if [[ -x "${built}" ]]; then
     printf '%s\n' "${built}"
     return 0
@@ -373,7 +379,7 @@ step_reconcile() {
     else
       echo "DIAGNOSTIC: building adherence-reconcile via go run (first run may compile)" >&2
       (
-        cd "${TIED_REPO_ROOT}/tools/agentstream"
+        cd "${TIED_STORE_ANCHOR}/tools/agentstream"
         go run ./cmd/adherence-reconcile "${recon_args[@]}"
       ) >"${req_dir}/adherence-reconcile.json"
     fi
@@ -387,13 +393,13 @@ step_grammar_v2() {
   fi
   local corpus_abs="${CORPUS_PATH}"
   if [[ "${corpus_abs}" != /* ]]; then
-    corpus_abs="${TIED_REPO_ROOT}/${corpus_abs}"
+    corpus_abs="${TIED_STORE_ANCHOR}/${corpus_abs}"
   fi
   if [[ ! -f "${corpus_abs}" ]]; then
     echo "ERROR: corpus not found: ${corpus_abs}" >&2
     return 1
   fi
-  node "${TIED_REPO_ROOT}/scripts/run-corpus-grammar-v2-audit.mjs" \
+  node "${TIED_STORE_ANCHOR}/scripts/run-corpus-grammar-v2-audit.mjs" \
     --corpus "${corpus_abs}" \
     --client-alias "${CLIENT_ALIAS}" \
     >"${OUT_DIR}/grammar-v2-cohort-audit.json"

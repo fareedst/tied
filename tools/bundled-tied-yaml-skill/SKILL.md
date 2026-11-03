@@ -21,21 +21,20 @@ Every session that mutates project REQ/ARCH/IMPL YAML must **`tied_config_get_ba
 
 - **Registering `tied-yaml` in Cursor** (`.cursor/mcp.json` / **Settings → MCP**) is for **in-editor** tool calls. It is **optional** for shell use.
 - **`tied-cli.sh`** talks to the **same** server over **stdio** (`node …/dist/index.js`), using env from **`mcpServers.tied-yaml`** only (`TIED_MCP_TOOL_PROFILE=core`). An empty MCP server list in the IDE does **not** mean `tied-cli.sh` cannot run — enable **`tied-yaml`** (and optionally **`tied-yaml-optin`** for infrequent tools) in **Cursor Settings → MCP** after install writes `.cursor/mcp.json`.
-- **Default MCP binary**: After **`tied-install.sh`**, `tied-cli.sh` bakes **`TIED_REPO_ROOT`** (and thus default **`TIED_MCP_BIN`**) to the TIED repository that ran bootstrap (`…/mcp-server/dist/index.js`). Client projects usually **do not** vendor `mcp-server/` at the project root; rely on the baked path or set **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`** to override.
-- **Shell alone is not enough:** `tied-cli.sh` in `.cursor/skills/tied-yaml/scripts/` plus Node; setting only **`TIED_MCP_BIN`** in the environment without the script does not provide the JSON-RPC client.
+- **Default MCP binary**: After **`tied-install.sh`**, **`tied-cli.sh`** resolves **`mcp-server/dist/index.js`** from **`.cursor/mcp.json`** (and store **`.tied/`** when applicable)—not from shell **`TIED_MCP_BIN`** / **`TIED_REPO_ROOT`**. Run **`./tied-install.sh --refresh`** after moving checkouts.
+- **Shell alone is not enough:** use **`tied-cli.sh`** under **`.cursor/skills/tied-yaml/scripts/`** (or the bundled copy under **`tools/bundled-tied-yaml-skill/scripts/`** in the store repo).
 
-### Environment overrides
+### On-disk runtime configuration
+
+Global paths (**`tied-project/`**, store root, **`mcp-server/dist/index.js`**) come from install-managed **`.cursor/mcp.json`** / **`.mcp.json`** (`tied-yaml` entry: `args[0]` + `env.TIED_CLIENT_*`) and, at the methodology store, **`.tied/store.yaml`** plus gitignored **`.tied/store.local.yaml`** (written by **`tied-install` / `--refresh`**). **`tied-cli.sh`** ignores shell **`TIED_MCP_BIN`**, **`TIED_REPO_ROOT`**, and **`TIED_STORE_ROOT`**.
 
 ```bash
-TIED_BASE_PATH=/absolute/path/to/tied-project \
-TIED_MCP_BIN=/absolute/path/to/tied-repository/mcp-server/dist/index.js \
-  .cursor/skills/tied-yaml/scripts/tied-cli.sh yaml_index_list_tokens '{"index":"requirements"}'
+cd /path/to/client-repo
+.cursor/skills/tied-yaml/scripts/tied-cli.sh yaml_index_list_tokens '{"index":"requirements"}'
 ```
 
-- **`TIED_BASE_PATH`** — absolute path to the project traceability root (**`tied-project/`**). **`tied-cli.sh`** resolves this from install-managed **`.cursor/mcp.json`** then repo-root **`.mcp.json`** (same order as IDE MCP bootstrap) using the **client cwd**; explicit **`export TIED_BASE_PATH`** remains an optional override for store CI. Missing mcp config fails closed with **`DIAGNOSTIC: TIED_CLI_MCP_BASE_PATH`** ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
-- **`TIED_METHOD_ROOT`** — absolute path to the methodology bundle root (**`tied-bundle/`**; defaults to `<client_repo_root>/tied-bundle`). Methodology reads use MCP **`getMethodologyBasePath`** / env **`TIED_METHODOLOGY_BUNDLE_PATH`** when set.
-- **`TIED_REPO_ROOT`** — TIED methodology repository used for **`mcp-server`** (baked by **`tied-install.sh`**; override if the TIED clone moved).
-- **`TIED_MCP_BIN`** — absolute path to **`mcp-server/dist/index.js`** (defaults to `$TIED_REPO_ROOT/mcp-server/dist/index.js`).
+- **Client corpus** — **`TIED_CLIENT_PROJECT_PATH`** in mcp.json; missing config fails closed with **`DIAGNOSTIC: TIED_CLI_MCP_BASE_PATH`** ([REQ-TIED_CLI_MCP_JSON_BASE_PATH](../../tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml)).
+- **`TIED_METHOD_ROOT`** — methodology bundle (**`tied-bundle/`**); from mcp **`TIED_CLIENT_BUNDLE_PATH`** when linked, else `<client_repo>/tied-bundle`.
 - **`TIED_MCP_COLLECT_METRICS`** — set to `1` or `true` to append local usage metrics JSONL (default **off**). Works for **`tied-cli.sh`** and IDE MCP when the server inherits the same env.
 - **`TIED_MCP_METRICS_PATH`** — optional override; default `~/.cursor/logs/tied-mcp-metrics.jsonl`.
 - Analyze with **`scripts/analyze_tied_mcp_metrics.rb`** in the TIED repo (see `docs/conversation-analysis-tools.md`). Traceability: [REQ-MCP_USAGE_METRICS], [IMPL-MCP_USAGE_METRICS].

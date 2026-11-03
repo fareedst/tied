@@ -6,7 +6,6 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
 unset TIED_MCP_BIN TIED_REPO_ROOT TIED_STORE_ROOT || true
 unset TIED_BASE_PATH TIED_CLIENT_PROJECT_PATH TIED_CLIENT_BUNDLE_PATH TIED_METHODOLOGY_BUNDLE_PATH || true
@@ -28,5 +27,5 @@ if [[ ! -f "${ONBOARDING_ENTRY}" ]]; then
   exit 1
 fi
 
-cd "${REPO_ROOT}"
+cd "${TIED_CLI_PROJECT_ROOT}"
 exec node "${ONBOARDING_ENTRY}" "$@"

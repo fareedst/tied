@@ -27,6 +27,39 @@ describe("LOCAL_DEFAULTS REQ-FEAT_LOCAL_DEFAULTS", () => {
     assert.equal(result.mutated_configuration, false);
   });
 
+  it("prefers mcp.json disk paths over shell environment", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "batch6-defaults-mcp-"));
+    const diskBin = path.join(root, "from-mcp", "index.js");
+    fs.mkdirSync(path.dirname(diskBin), { recursive: true });
+    fs.writeFileSync(diskBin, "server");
+    const diskTied = path.join(root, "tied-project");
+    fs.mkdirSync(diskTied, { recursive: true });
+    fs.mkdirSync(path.join(root, ".cursor"), { recursive: true });
+    fs.writeFileSync(
+      path.join(root, ".cursor", "mcp.json"),
+      `${JSON.stringify({
+        mcpServers: {
+          "tied-yaml": {
+            args: [diskBin],
+            env: { TIED_CLIENT_PROJECT_PATH: diskTied },
+          },
+        },
+      })}\n`,
+    );
+    const envBin = path.join(root, "env-only", "index.js");
+    fs.mkdirSync(path.dirname(envBin), { recursive: true });
+    fs.writeFileSync(envBin, "server");
+    const result = resolveLocalDefaults(
+      {},
+      { TIED_MCP_BIN: envBin, TIED_BASE_PATH: path.join(root, "env-tied") },
+      root,
+    );
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.defaults.mcp_bin.value, diskBin);
+    assert.equal(result.defaults.base_path.value, diskTied);
+  });
+
   it("reports source and corrective command for missing prerequisites", () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "batch6-defaults-"));
     const result = resolveLocalDefaults({}, {}, root);

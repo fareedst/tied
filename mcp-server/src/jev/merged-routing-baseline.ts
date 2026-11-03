@@ -6,7 +6,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import { BUNDLE_DIR_NAME } from "../tied-layout.js";
-import { getMethodologyBasePath } from "../yaml-loader.js";
 import {
   glossaryIdFromFile,
   parseRoutingTableMarkdown,
@@ -48,12 +47,7 @@ export function loadMergedRoutingBaseline(options: {
   const projectRoot = path.dirname(path.resolve(options.tiedBasePath));
   const bundleRouting = path.join(projectRoot, BUNDLE_DIR_NAME, "vocab", "routing.md");
   const legacyRouting = path.join(options.tiedBasePath, "methodology", "vocab", "routing.md");
-  const methodologyRoot = getMethodologyBasePath();
-  const methodologyPath = exists(bundleRouting)
-    ? bundleRouting
-    : methodologyRoot
-      ? path.join(methodologyRoot, "vocab", "routing.md")
-      : legacyRouting;
+  const methodologyPath = exists(bundleRouting) ? bundleRouting : legacyRouting;
   let methodologyRows: RoutingRow[] = [];
   if (exists(methodologyPath)) {
     methodologyRows = parseRoutingTableMarkdown(readFile(methodologyPath));

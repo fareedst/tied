@@ -16,6 +16,18 @@ shopt -s expand_aliases 2>/dev/null || true
 _BUILD_COMMANDS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 _BUILD_COMMANDS_REPO_ROOT="$(cd "${_BUILD_COMMANDS_DIR}/.." && pwd)"
 
+_build_commands_source_root() {
+  local positional="${1:-}"
+  if [[ -n "$positional" ]]; then
+    (cd "$positional" && pwd)
+    return
+  fi
+  if [[ -n "${TIED_REPO_ROOT:-}" && "${TIED_REPO_ROOT}" != "${_BUILD_COMMANDS_REPO_ROOT}" ]]; then
+    echo "DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: TIED_REPO_ROOT (using checkout anchor ${_BUILD_COMMANDS_REPO_ROOT})" >&2
+  fi
+  printf '%s\n' "${_BUILD_COMMANDS_REPO_ROOT}"
+}
+
 # echo_exec
 
 if ! command -v echo_exec >/dev/null 2>&1; then
@@ -88,15 +100,11 @@ lint_reorder() {
 alias lint-reorder=lint_reorder
 
 validate_tied() {
-  local default_base="${_BUILD_COMMANDS_REPO_ROOT}/tied-project"
-  if [[ ! -d "$default_base" && -d "${_BUILD_COMMANDS_REPO_ROOT}/tied" ]]; then
-    default_base="${_BUILD_COMMANDS_REPO_ROOT}/tied"
-  fi
-  local base_path="${TIED_BASE_PATH:-$default_base}"
-  local mcp_bin="${TIED_MCP_BIN:-${_BUILD_COMMANDS_REPO_ROOT}/mcp-server/dist/index.js}"
   local consistency_args='{"check_pseudocode":true,"check_detail_files":true}'
-  TIED_BASE_PATH="$base_path" TIED_MCP_BIN="$mcp_bin" \
+  (
+    cd "${_BUILD_COMMANDS_REPO_ROOT}" || exit 1
     tied_cli tied_validate_consistency "$consistency_args"
+  )
 }
 alias validate-tied=validate_tied
 
@@ -378,15 +386,17 @@ _new_tied_test_client() {
 }
 
 new_tied_client() {
-  local client_dir="${1:?usage: new-tied-client CLIENT_DIR [TIED_REPO_ROOT]}"
-  local source_root="${2:-${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
+  local client_dir="${1:?usage: new-tied-client CLIENT_DIR [SOURCE_ROOT]}"
+  local source_root
+  source_root="$(_build_commands_source_root "${2:-}")"
   _new_tied_test_client "$client_dir" "$source_root"
 }
 alias new-tied-client=new_tied_client
 
 make_new_tied_client() {
   local test_root="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
-  local source_root="${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
+  local source_root
+  source_root="$(_build_commands_source_root "")"
   node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
     --disposable \
     --source-root "${source_root}" \
@@ -402,8 +412,9 @@ workflow_trial_agentstream() {
 alias workflow-trial-agentstream=workflow_trial_agentstream
 
 new_claude_tied_client() {
-  local client_dir="${1:?usage: new-claude-tied-client CLIENT_DIR [TIED_REPO_ROOT]}"
-  local source_root="${2:-${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
+  local client_dir="${1:?usage: new-claude-tied-client CLIENT_DIR [SOURCE_ROOT]}"
+  local source_root
+  source_root="$(_build_commands_source_root "${2:-}")"
   node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
     --harness claude --with-agentstream-dry-run \
     --source-root "${source_root}" "${client_dir}"
@@ -412,7 +423,8 @@ alias new-claude-tied-client=new_claude_tied_client
 
 make_new_claude_tied_client() {
   local test_root="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
-  local source_root="${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}"
+  local source_root
+  source_root="$(_build_commands_source_root "")"
   node "${source_root}/tools/bootstrap/new-tied-client.mjs" \
     --disposable --harness claude --with-agentstream-dry-run \
     --source-root "${source_root}" --test-root "${test_root}" \
@@ -421,8 +433,9 @@ make_new_claude_tied_client() {
 alias test-new-claude-tied-client=make_new_claude_tied_client
 
 validate_claude_tied_client() {
-  local client_dir="${1:?usage: validate-claude-tied-client CLIENT_DIR [TIED_REPO_ROOT]}"
-  local source_root="${2:-${TIED_REPO_ROOT:-${_BUILD_COMMANDS_REPO_ROOT}}}"
+  local client_dir="${1:?usage: validate-claude-tied-client CLIENT_DIR [SOURCE_ROOT]}"
+  local source_root
+  source_root="$(_build_commands_source_root "${2:-}")"
   node "${source_root}/scripts/run-tied-claude-client-validation.mjs" \
     --client-root "${client_dir}" --source-root "${source_root}" --with-agentstream-dry-run
 }
