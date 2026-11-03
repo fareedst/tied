@@ -3,7 +3,7 @@
 **handoff_kind:** session  
 **Date:** 2026-11-03  
 **request_token:** REQ-TIED_RUNTIME_DISK_CONFIG  
-**git:** `main` @ _(see traceable commit below)_ (ahead of origin)
+**git:** `main` @ **`d7c46e7f`** (ahead of origin)
 
 ## One line
 
@@ -16,7 +16,7 @@
 | Pass 1 — RDC traceability + e2e | done | `eded7a37` | [PLAN-refine-pass2.md](../PLAN-refine-pass2.md) |
 | Pass 2 — global path env cleanup | done | `eb9a0e17`, `8a16acec` | [PLAN-rdc-env-cleanup-pass2.md](../PLAN-rdc-env-cleanup-pass2.md) |
 | Pass 3 — full runtime on disk (except secrets) | **closed** | `b2548e98` | [PLAN-rdc-full-runtime-disk-pass3.md](../PLAN-rdc-full-runtime-disk-pass3.md), [close-out-handoff.md](./close-out-handoff.md) |
-| Follow-up — agentstream disk resolver | **closed** | _(this commit)_ | SC-RDC-CONSUMERS — `tied-runtime-config.ts` |
+| Follow-up — agentstream disk resolver | **closed** | `d7c46e7f` | SC-RDC-CONSUMERS — `tied-runtime-config.ts` |
 
 ## Completion signals (pass 3)
 
@@ -25,7 +25,7 @@
 | **Machine close-out** | pass — [closeout-run-close-out-gates-pass3.json](./closeout-run-close-out-gates-pass3.json) |
 | **Process contract** | pass — CITDP @ [tied-project/citdp/](../../../citdp/CITDP-REQ-TIED_RUNTIME_DISK_CONFIG.yaml); manifest + envelope synced |
 | **Adherence ledger** | pass (B) — reconcile; advisory `evidence_stale` on legacy pass-2 gate receipts |
-| **Traceable commit** | pass 3 **`b2548e98`**; follow-up _(this commit)_ — [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
+| **Traceable commit** | pass 3 **`b2548e98`**; follow-up **`d7c46e7f`** — [traceable-commit-evidence.md](./traceable-commit-evidence.md) |
 
 ## Operator migration
 

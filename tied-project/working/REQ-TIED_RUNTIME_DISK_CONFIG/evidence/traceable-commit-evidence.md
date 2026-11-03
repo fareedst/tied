@@ -29,7 +29,8 @@ N/A — no new domain terms; reuses on-disk runtime / linked client vocabulary f
 
 | SHA | Description |
 | --- | --- |
-| _(pending)_ | agentstream `tied-runtime-config.ts` + tests |
+| **`d7c46e7f`** | agentstream `tied-runtime-config.ts` + tests (SC-RDC-CONSUMERS) |
+| **`b2548e98`** | Pass 3 operator disk sync (prior) |
 
 Message: [proposed-commit-message.txt](./proposed-commit-message.txt).
 
