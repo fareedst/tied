@@ -7,6 +7,11 @@
 
 WF four-phase trial hardening landed: preload copy-if-absent, MCP dist preflight env vars, batch phase-handoff hints, prompt-shared playbooks. Driven by PROMPT-WF-03 facilitator readout `1793817075`.
 
+## Commits
+
+- Feature: `3bb1dd1be363f38cf23eb5ba183358388f007587`
+- Evidence: `72c28e4869cc34a6ae77b06f24cb65aebbd77532`
+
 ## Machine state
 
 - REQ **Implemented** (`tied_verify`)

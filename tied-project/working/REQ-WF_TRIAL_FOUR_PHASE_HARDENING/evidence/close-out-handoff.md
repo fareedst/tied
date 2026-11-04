@@ -34,6 +34,13 @@ Reduces WF trial friction from [1793817075 readout](../../../docs/demos/trial-re
 node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
 ```
 
+## Commits
+
+| SHA | Role |
+| --- | --- |
+| `3bb1dd1be363f38cf23eb5ba183358388f007587` | Feature + TIED stack + playbooks |
+| `72c28e4869cc34a6ae77b06f24cb65aebbd77532` | Close-out traceable-commit evidence (gate paths on disk; receipts gitignored under `tied-project/working/**/gates/`) |
+
 ## Follow-ups
 
 - Re-run `workflow_trial_agentstream wf-03` and confirm preload materialize DIAGNOSTIC on new disposable.
