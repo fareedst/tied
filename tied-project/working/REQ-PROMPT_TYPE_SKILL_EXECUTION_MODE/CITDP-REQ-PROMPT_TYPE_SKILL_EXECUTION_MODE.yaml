@@ -1,0 +1,47 @@
+CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  change_definition:
+    current_behavior: "add-feature and refine-plan include Implement and tied-plan-citdp.md directs RED tests during Plan; non-tied-plan is monolithic; agents without Cursor Plan mode lack a skill-level forbid list for product mutations during planning."
+    desired_behavior: "Eight leaves declare skill execution mode plan or agent; shared prompt-execution-mode.md; TIED plan leaves stop after Plan handoff; non-tied four-step sequence with tied-project/non-tied-plans/{slug}/ artifacts; 18 leaf inventory."
+    non_goals:
+      - "Splitting debug, use-skill, or citdp-record leaves"
+      - "New handoff/git-hygiene/clear-workspace prompt-type leaves"
+      - "Automatic add-refine-build-close-out sequencer in v1"
+    success_criteria:
+      - "Plan leaves omit Implement and tied-implement.md links"
+      - "non-tied-plans root documented and boundary updated"
+      - "Static and subagent e2e cover 18 leaves and execution mode strings"
+    unchanged_behavior: "build-plan and close-out gate stacks when invoked as agent-mode execute steps"
+  evidence:
+    command_seq:
+      - "refine-plan pass: committed PLAN.md and test-strategy under working/REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE/"
+    proof_boundaries:
+      - "docs_and_skills_only"
+  impact_analysis:
+    impl_inventory_notes: "tools/bundled-prompt-type-skills/*, .cursor/agents/*, mcp-server e2e, bootstrap manifest, PROMPT_TYPE_LEAF_IDS, tied-project vocab and REQ extensions"
+    modules_or_boundaries: "Prompt Composer distribution; not MCP tool schema"
+    tied_tokens_affected:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    tied_tokens_new:
+      - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  leap_feedback:
+    divergences_from_analysis: "Canonical copy under tied-project/citdp/ at close-out."
+    record_status: "complete"
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    depth_tier: "integrated"
+    gate_policy: "advisory"
+    profile_depth: "not_measured"
+    recorded_at: "2026-11-03"
+    title: "Explicit skill execution mode (plan vs agent) for prompt-type sequences"
+  risk_analysis:
+    abuse_cases:
+      - "Agent treats plan mode as permission to skip TIED design writes entirely"
+      - "non-tied-plans CITDP mistaken for citdp-promote input without sponsor intent"
+    adversarial_inquiry:
+      depth_tier: "integrated"
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Skill text forbids code but agent mutates tests anyway without IDE Plan mode"
+    residual_risks:
+      - "Stale '15 leaf' prose outside grep list until close-out audit"

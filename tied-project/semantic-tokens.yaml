@@ -592,6 +592,17 @@ ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   name: "CITDP record and promote boundaries"
   status: "Active"
   type: "ARCH"
+ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  cross_references:
+    - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  description: "Plan vs agent execution mode split for prompt-type leaves."
+  metadata:
+    last_updated: "2026-11-03"
+    registered: "2026-11-03"
+  name: "Prompt-type skill execution mode"
+  status: "Active"
+  type: "ARCH"
 ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
   cross_references:
     - "IMPL-PSEUDOCODE_ANALYSIS_ENGINE"
@@ -2067,6 +2078,17 @@ IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
     last_updated: "2026-10-29"
     registered: "2026-10-29"
   name: "Citdp record and promote bundle files"
+  status: "Active"
+  type: "IMPL"
+IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  description: "prompt-execution-mode.md and 18-leaf e2e contracts."
+  metadata:
+    last_updated: "2026-11-03"
+    registered: "2026-11-03"
+  name: "Prompt-type skill execution mode bundle"
   status: "Active"
   type: "IMPL"
 IMPL-PSEUDOCODE_ALIAS_MUTATION_POLICY:
@@ -4179,6 +4201,17 @@ REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
     last_updated: "2026-10-29"
     registered: "2026-10-29"
   name: "CITDP record and promote prompt-type leaves"
+  status: "Implemented"
+  type: "REQ"
+REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  description: "Plan vs agent skill execution mode and 18-leaf prompt-type inventory."
+  metadata:
+    last_updated: "2026-11-03"
+    registered: "2026-11-03"
+  name: "Prompt-type skill execution mode"
   status: "Implemented"
   type: "REQ"
 REQ-PSEUDOCODE_CONSTRAINT_LANGUAGE:

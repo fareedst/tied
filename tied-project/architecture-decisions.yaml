@@ -1506,6 +1506,18 @@ ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
       - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
     requirements:
       - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml"
+  name: "Prompt-type skill execution mode"
+  related_decisions:
+    depends_on:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    requirements:
+      - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
 ARCH-PSEUDOCODE_ANALYSIS_PIPELINE:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

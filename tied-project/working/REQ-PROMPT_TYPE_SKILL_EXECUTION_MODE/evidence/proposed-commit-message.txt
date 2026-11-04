@@ -1,0 +1,13 @@
+feat(prompt-type): skill execution mode plan vs agent
+
+Declare normative skill execution mode on eight prompt-type leaves,
+add non-tied-refine/build/close (18-leaf inventory), and document
+tied-project/non-tied-plans/ for the non-TIED four-step sequence.
+
+[REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]
+[ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE]
+[IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE]
+
+Tests: prompt-type-skills + prompt-type-subagent e2e (29 pass).
+CITDP: tied-project/citdp/CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml
+Note: unified close_out skipped (no Tracker); sponsor-scoped staging.

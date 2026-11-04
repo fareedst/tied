@@ -1,6 +1,6 @@
 ---
 name: non-tied-plan
-description: "Ordinary development plan inside a TIED client without TIED synchronization writes. May read TIED/YAML for context. Use when the caller names non-tied-plan, wants development outside TIED tracking, or explicitly bypasses CITDP/Tracker. Do not use for add-feature, build-plan, or non-tied-debug."
+description: "Plan-mode non-TIED greenfield: refine and plan under tied-project/non-tied-plans/{slug}/. Use when the caller names non-tied-plan. Hand off to non-tied-refine or non-tied-build. Do not use for add-feature or non-tied-debug."
 disable-model-invocation: true
 ---
 
@@ -8,34 +8,36 @@ disable-model-invocation: true
 
 Explicit invocation only (`@non-tied-plan` or `prompt-type: non-tied-plan`).
 
-This skill is the workflow source of truth for client prompt-type invocation.
-`tied-install.sh` installs it under `.cursor/skills/non-tied-plan/`. Task wrappers under
-`.cursor/agents/` remain TIED-source development artifacts only.
-[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
-[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
+[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
 
+## Execution mode
+
+**skill execution mode:** plan
+
+See [prompt-execution-mode.md](../prompt-shared/prompt-execution-mode.md).
 
 ## Inputs
 
-- **Optional prompt envelope:** `prompt-type: non-tied-plan`, `git-condition:`
-- **Invocation remainder:** the request after the skill or agent name.
+- **Invocation remainder:** the request after the skill name.
+- **Optional envelope:** `prompt-type: non-tied-plan`, `git-condition:`
 
 ## TIED applicability
 
-TIED-client-local — [non-tied-boundary.md](../prompt-shared/non-tied-boundary.md). Read-only TIED context allowed; **no TIED writes.**
+Non-tied plan track — [non-tied-boundary.md](../prompt-shared/non-tied-boundary.md).
 
 ## Procedure
 
-Process the invocation remainder in this order:
-
 1. **Refine (simple)** — [non-tied-refine.md](../prompt-shared/non-tied-refine.md)
-2. **Plan (simple)** — [non-tied-plan.md](../prompt-shared/non-tied-plan.md) plan section
-3. **Implement (simple)** — [non-tied-plan.md](../prompt-shared/non-tied-plan.md) implement section
+2. **Plan** — [non-tied-plan-prepare.md](../prompt-shared/non-tied-plan-prepare.md)
 
-## Gates
+Choose `{slug}` for `tied-project/non-tied-plans/{slug}/`.
 
-Test strategy before code (no TIED pseudo-code gate enforcement via TIED tools).
+## Outputs
+
+- `PLAN.md` and optional CITDP in `non-tied-plans/{slug}/`
+- Hand off to `@non-tied-refine` or `@non-tied-build`
 
 ## Forbidden
 
-All items in [non-tied-boundary.md](../prompt-shared/non-tied-boundary.md); `pbpaste`/`pbcopy`; automatic git.
+- Product code/tests in plan mode; project REQ/ARCH/IMPL YAML
+- `pbpaste`/`pbcopy`; automatic git

@@ -1,6 +1,6 @@
 /**
  * [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT]
- * Summary: Validate the explicit-only Task wrappers for all 13 leaf prompt types and their clean-context workflow contracts.
+ * Summary: Validate the explicit-only Task wrappers for all 18 leaf prompt types and their clean-context workflow contracts.
  */
 
 import { describe, it } from "node:test";
@@ -21,6 +21,9 @@ const LEAF_PROMPT_TYPES = [
   "use-skill",
   "ammend-commit",
   "non-tied-plan",
+  "non-tied-refine",
+  "non-tied-build",
+  "non-tied-close",
   "non-tied-debug",
   "leap-ad-hoc",
   "leap-diff-promote",
@@ -33,7 +36,14 @@ type LeafPromptType = (typeof LEAF_PROMPT_TYPES)[number];
 
 const READONLY_LEAVES = new Set<LeafPromptType>(["question", "other"]);
 const MINIMAL_LEAVES = new Set<LeafPromptType>(["question", "other"]);
-const NON_TIED_LEAVES = new Set<LeafPromptType>(["non-tied-plan", "non-tied-debug"]);
+const NON_TIED_LEAVES = new Set<LeafPromptType>([
+  "non-tied-plan",
+  "non-tied-refine",
+  "non-tied-build",
+  "non-tied-close",
+  "non-tied-debug",
+]);
+const PLAN_MODE_LEAVES = new Set<LeafPromptType>(["add-feature", "refine-plan", "non-tied-plan", "non-tied-refine"]);
 const CITDP_ONLY_LEAVES = new Set<LeafPromptType>(["citdp-record"]);
 const CLOSE_OUT_LEAVES = new Set<LeafPromptType>([
   "close-out",
@@ -45,8 +55,6 @@ const CLOSE_OUT_NO_COMMIT_LEAVES = new Set<LeafPromptType>([
   "leap-diff-promote",
 ]);
 const REFINE_PLAN_IMPLEMENT_LEAVES = new Set<LeafPromptType>([
-  "add-feature",
-  "refine-plan",
   "debug",
   "use-skill",
   "leap-ad-hoc",
@@ -116,9 +124,10 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     const refine = planNewFeature.indexOf("1. **Refine**");
     const plan = planNewFeature.indexOf("2. **Plan**");
     const implement = planNewFeature.indexOf("3. **Implement**");
-    assert.ok(refine >= 0 && refine < plan && plan < implement, "add-feature must be Refine -> Plan -> Implement");
+    assert.ok(refine >= 0 && refine < plan, "add-feature must be Refine -> Plan (plan mode)");
+    assert.equal(implement, -1, "add-feature must not include Implement in plan mode");
     assert.match(planNewFeature, /do not start plan until ambiguity is cleared/i);
-    assert.match(planNewFeature, /do not start code until .*IMPL pseudo-code.*test strategy/i);
+    assert.match(planNewFeature, /skill execution mode|plan mode|prompt-execution-mode/i);
     assert.match(planNewFeature, /tied_checklist_gate_validate/);
     assert.match(planNewFeature, /pre_implementation/);
     assert.match(planNewFeature, /invocation remainder/i);
@@ -126,8 +135,9 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
 
     const refinePlan = readAgent("refine-plan").body;
     assert.ok(refinePlan.indexOf("1. **Refine**") < refinePlan.indexOf("2. **Plan**"));
+    assert.equal(refinePlan.indexOf("3. **Implement**"), -1, "refine-plan must not include Implement");
     assert.match(refinePlan, /do not start plan until ambiguity is cleared/i);
-    assert.match(refinePlan, /invalidate.*downstream/i);
+    assert.match(refinePlan, /invalidate.*downstream|plan-mode handoff|build-plan/i);
     assert.match(refinePlan, /linked plan/i);
     assert.doesNotMatch(refinePlan, /:::/);
 
@@ -162,7 +172,8 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
 
     const nonTiedPlan = readAgent("non-tied-plan").body;
     assert.match(nonTiedPlan, /non-tied-boundary\.md/);
-    assert.match(nonTiedPlan, /Do not start code until a test strategy is in place/);
+    assert.match(nonTiedPlan, /skill execution mode|plan mode|non-tied-plans/i);
+    assert.doesNotMatch(nonTiedPlan, /3\. \*\*Implement\*\*/);
 
     const citdpRecord = readAgent("citdp-record").body;
     assert.ok(
@@ -254,8 +265,12 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
 
     for (const promptType of NON_TIED_LEAVES) {
       const { body } = readAgent(promptType);
-      assert.match(body, /no TIED writes/i);
-      assert.match(body, /Do not write TIED YAML/);
+      assert.match(body, /Do not write TIED YAML/i);
+      if (promptType === "non-tied-debug") {
+        assert.match(body, /no TIED writes/i);
+      } else {
+        assert.match(body, /non-tied plan track|non-tied-plans/i);
+      }
     }
 
     for (const promptType of CITDP_ONLY_LEAVES) {

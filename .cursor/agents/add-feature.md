@@ -1,6 +1,6 @@
 ---
 name: add-feature
-description: Use when the caller explicitly selects add-feature or delegates a new TIED-tracked feature with full Refine, CITDP Plan, and Implement gates. Do not use for refine-plan, build-plan, debug, non-tied-plan, question, or other minimal workflows.
+description: Use when the caller explicitly selects add-feature or delegates plan-mode greenfield TIED Refine and Plan only. Do not use for refine-plan, build-plan, debug, non-tied-plan, question, or other minimal workflows.
 model: inherit
 readonly: false
 is_background: false
@@ -48,27 +48,15 @@ Do not treat a linked plan as the request.
 1. **Refine** — resolve sponsor terms and ambiguity using the canonical
    `tied-refine.md` procedure. Do not start Plan until ambiguity is cleared or
    explicitly accepted.
-2. **Plan** — perform CITDP change definition, impact, risk, and test-strategy
-   analysis; copy a per-task Tracker from
-   `tied-bundle/docs/agent-req-implementation-checklist.yaml`; update the
-   requirement/architecture/implementation stack as required.
-3. **Implement** — follow the Tracker and canonical `tied-implement.md`.
-   Do not start code until IMPL pseudo-code is complete and the test strategy
-   is in place; every block must have REQ/ARCH/IMPL token comments and
-   pseudo-code validation must pass. Write RED tests before production code,
-   then validate modules independently before composition.
+2. **Plan** — follow canonical `tied-plan-prepare.md`; copy a per-task Tracker
+   under `tied-project/working/{REQ-TOKEN}/`; update REQ/ARCH/IMPL design as
+   required. **Skill execution mode: plan** — see `prompt-execution-mode.md`.
 
-Before any depth-dependent inquiry, select and record `profile_depth`
-(`minimal`, `integrated`, or `strict_candidate`) and the gate policy. Before
-RED/code call `tied_checklist_gate_validate` with `phase: pre_implementation`,
-the Tracker, CITDP, and integrated activation evidence when applicable. At
-verification and close-out, pass the corresponding validated gate to
-`tied_verify`/close-out. Missing, malformed, stale, or unjustified evidence
-blocks progression.
+Do not run Implement, RED tests, or product code changes. Optional advisory
+`tied_checklist_gate_validate` (`phase: pre_implementation`). Hand off to
+`@refine-plan` or `@build-plan` with `PLAN.md` path.
 
-Keep project YAML changes in project-owned `tied/` records; never edit
-`tied/methodology/`. Run language lint, TIED YAML validation, the verification
-gate, and `tied_validate_consistency` before reporting completion.
+Keep project YAML in `tied-project/`; never edit `tied-bundle/` methodology.
 
 ## Forbidden operations
 

@@ -51,14 +51,11 @@ each step with the Cursor Task tool, `run_in_background` false, using the
 matching `subagent_type`. Pass a complete remainder and, when required, a
 linked plan so the child starts with no missing intent.
 
-1. **add-feature** — Task `subagent_type: add-feature`. Pass the
-   invocation remainder as the new-feature request. Do not treat a linked
-   plan as the request. Wait for the child handoff.
-2. **refine-plan** — Task `subagent_type: refine-plan` only after step 1
-   completed its required gates. Pass the add-feature plan as the
-   linked plan, plus any remainder as optional notes.
-3. **build-plan** — Task `subagent_type: build-plan` only after step 2
-   completed its required gates. Pass the refined plan as the linked plan.
+1. **add-feature** — Task `subagent_type: add-feature`. Plan mode only (no code). Pass invocation remainder.
+2. **refine-plan** — Task `subagent_type: refine-plan`. Plan mode only. Pass linked plan from step 1.
+3. **build-plan** — Task `subagent_type: build-plan`. Agent mode execute. Pass refined linked plan.
+
+**close-out** is a separate fourth sponsor invocation; this sequencer does not run it.
 
 Stop immediately if any child labels the work incomplete or a required gate,
 test, verification-gate, or `tied_validate_consistency` check failed. Do not

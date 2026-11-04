@@ -1,5 +1,7 @@
 # Plan (when the request is refined)
 
+> **Plan-mode leaves:** `add-feature` and `refine-plan` use [tied-plan-prepare.md](tied-plan-prepare.md) (no RED in plan mode). This file remains for **`use-skill`** and other leaves that still combine plan + RED in one skill until split.
+
 ## Plan (when the request is refined)
 
 1. **CITDP + LEAP + TIED:** Read `tied-bundle/docs/client-development-index.md` first -- it maps nicknames to paths, scenarios, YAML data, and tooling.

@@ -21,6 +21,9 @@ const LEAF_SKILLS = [
   "use-skill",
   "ammend-commit",
   "non-tied-plan",
+  "non-tied-refine",
+  "non-tied-build",
+  "non-tied-close",
   "non-tied-debug",
   "leap-ad-hoc",
   "leap-diff-promote",
@@ -66,7 +69,21 @@ const SHARED_REFERENCES = [
   "tied-refine-citdp-record.md",
   "tied-plan-citdp-record.md",
   "tied-promote-citdp.md",
+  "prompt-execution-mode.md",
+  "tied-plan-prepare.md",
+  "non-tied-plan-prepare.md",
+  "non-tied-build.md",
+  "non-tied-close.md",
 ] as const;
+
+const PLAN_MODE_LEAVES = [
+  "add-feature",
+  "refine-plan",
+  "non-tied-plan",
+  "non-tied-refine",
+] as const;
+
+const AGENT_MODE_LEAVES = ["build-plan", "close-out", "non-tied-build", "non-tied-close"] as const;
 
 const repoRoot = path.resolve(process.cwd(), "..");
 
@@ -278,9 +295,27 @@ describe("prompt-type skill bundle", () => {
     const planCitdp = fs.readFileSync(path.join(bundleRoot, "prompt-shared", "tied-plan-citdp.md"), "utf8");
     assert.match(planCitdp, /methodology-surface-enrollment-advisory\.md/);
 
+    const planPrepare = fs.readFileSync(path.join(bundleRoot, "prompt-shared", "tied-plan-prepare.md"), "utf8");
+    assert.match(planPrepare, /methodology-surface-enrollment-advisory\.md/);
+
     for (const skill of ["add-feature", "build-plan"] as const) {
       const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
       assert.match(content, /methodology-surface-enrollment-advisory\.md/);
     }
+  });
+
+  it("declares skill execution mode on plan and agent leaves [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE] [REQ-PROMPT_TYPE_GLOBAL_SKILLS]", () => {
+    const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
+    for (const skill of PLAN_MODE_LEAVES) {
+      const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
+      assert.match(content, /skill execution mode:\s*\*{0,2}\s*plan/i, `${skill} must declare plan mode`);
+      const procedure = content.split("## Procedure")[1]?.split("## ")[0] ?? content;
+      assert.doesNotMatch(procedure, /tied-implement\.md/, `${skill} procedure must not link tied-implement`);
+    }
+    for (const skill of AGENT_MODE_LEAVES) {
+      const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
+      assert.match(content, /skill execution mode:\s*\*{0,2}\s*agent/i, `${skill} must declare agent mode`);
+    }
+    assert.equal(LEAF_SKILLS.length, 18, "leaf inventory must be 18 prompt types");
   });
 });

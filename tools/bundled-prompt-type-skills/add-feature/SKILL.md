@@ -1,6 +1,6 @@
 ---
 name: add-feature
-description: "Plans a new TIED-tracked feature with Refine, CITDP analysis, and Implement gates. Use when the caller names add-feature, plans a new requirement with full TIED traceability, or starts feature work with Tracker and IMPL pseudo-code. Do not use for build-plan (execute an existing linked plan), refine-plan (improve a linked plan), non-tied-plan, question, or other minimal prompts."
+description: "Plan-mode greenfield TIED feature: Refine and CITDP prepare only. Use when the caller names add-feature or starts a new requirement. Hand off to refine-plan or build-plan; do not implement in this leaf. Do not use for build-plan, non-tied-plan, or question."
 disable-model-invocation: true
 ---
 
@@ -8,56 +8,45 @@ disable-model-invocation: true
 
 Explicit invocation only (`@add-feature` or caller names `prompt-type: add-feature`).
 
-This skill is the workflow source of truth for client prompt-type invocation.
-`tied-install.sh` installs it under `.cursor/skills/add-feature/`. Task wrappers under
-`.cursor/agents/` remain TIED-source development artifacts only.
-[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
-[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
+[REQ-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
 
+## Execution mode
+
+**skill execution mode:** plan
+
+See [prompt-execution-mode.md](../prompt-shared/prompt-execution-mode.md).
 
 ## Inputs
 
 - **Optional prompt envelope:** `prompt-type: add-feature`, `git-condition:` (informational only)
-- **Invocation remainder:** the request text after the skill or agent name.
-  That text is the requirement. Do not treat a linked plan as the request.
-- **Git context:** caller-pasted text from [git-context-templates.md](../prompt-shared/git-context-templates.md) when relevant
+- **Invocation remainder:** the requirement text after the skill name. Do not treat a linked plan as the request.
+- **Git context:** [git-context-templates.md](../prompt-shared/git-context-templates.md) when relevant
 
 ## TIED applicability
 
-Full TIED tracking — see [tied-boundary.md](../prompt-shared/tied-boundary.md).
+Full TIED tracking — [tied-boundary.md](../prompt-shared/tied-boundary.md).
 
 ## Procedure
 
-Process the invocation remainder in this order:
+1. **Refine** — [tied-refine.md](../prompt-shared/tied-refine.md)
+2. **Optional Jev plan-skills adjunct** — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
+3. **Optional plan process tools adjunct** — [plan-process-tools-adjunct.md](../prompt-shared/plan-process-tools-adjunct.md)
+4. **Plan** — [tied-plan-prepare.md](../prompt-shared/tied-plan-prepare.md) ([methodology-surface-enrollment-advisory.md](../prompt-shared/methodology-surface-enrollment-advisory.md))
 
-1. **Refine** — [tied-refine.md](../prompt-shared/tied-refine.md) (default variant)
-2. **Optional Jev plan-skills adjunct** (after PRELOAD) — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
-3. **Optional plan process tools adjunct** (DAE + BBCE) — [plan-process-tools-adjunct.md](../prompt-shared/plan-process-tools-adjunct.md)
-3. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md) (methodology surface enrollment: [methodology-surface-enrollment-advisory.md](../prompt-shared/methodology-surface-enrollment-advisory.md))
-4. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
-
-For behavior-changing work, select `profile_depth` (`minimal`, `integrated`, or
-`strict_candidate`) and the gate policy during impact discovery, before any
-depth-dependent inquiry. Copy the per-request Tracker and preserve its
-dispositions and evidence as the authoritative process record.
+Select `profile_depth` and gate policy during impact discovery. Copy per-task Tracker under `tied-project/working/{REQ-TOKEN}/`.
 
 ## Gates
 
 - Refine: do not start plan until ambiguity cleared
-- Plan: before RED or code, call `tied_checklist_gate_validate` with
-  `phase: pre_implementation`, the Tracker, CITDP, and (for integrated depth)
-  identity-bound activation evidence. A missing, malformed, stale, or
-  unjustified result blocks progression.
-- Verification and close-out: pass the same validated gate to `tied_verify` and
-  close-out; never claim completion or update status from tests alone.
+- Plan: optional advisory `tied_checklist_gate_validate` (`phase: pre_implementation`); blocking RED is expected in plan mode
 
 ## Outputs
 
-- Resolved sponsor terms; per-task Tracker copy path
-- CITDP analysis (persist `tied-project/citdp/CITDP-*.yaml` after implementation)
-- Test strategy; RED tests before code
+- `tied-project/working/{REQ-TOKEN}/PLAN.md`, tracker, draft CITDP, test-strategy design
+- **Plan-mode handoff:** next `@refine-plan` or `@build-plan`
 
 ## Forbidden
 
+- `tied-implement.md` procedure; product code/tests/fixtures/data; RED tests
 - `pbpaste`/`pbcopy`, automatic git mutation, unapproved repo inspection
 - Inferring TIED from repo layout

@@ -1,0 +1,81 @@
+CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  change_definition:
+    current_behavior: "add-feature and refine-plan include Implement and tied-plan-citdp.md directs RED tests during Plan; non-tied-plan is monolithic; agents without Cursor Plan mode lack a skill-level forbid list for product mutations during planning."
+    desired_behavior: "Eight leaves declare skill execution mode plan or agent; shared prompt-execution-mode.md; TIED plan leaves stop after Plan handoff; non-tied four-step sequence with tied-project/non-tied-plans/{slug}/ artifacts; 18 leaf inventory."
+    non_goals:
+      - "Automatic add-refine-build-close-out sequencer in v1"
+      - "New handoff/git-hygiene/clear-workspace prompt-type leaves"
+      - "Splitting debug, use-skill, or citdp-record leaves"
+    success_criteria:
+      - "non-tied-plans root documented and boundary updated"
+      - "Plan leaves omit Implement and tied-implement.md links"
+      - "Static and subagent e2e cover 18 leaves and execution mode strings"
+    unchanged_behavior: "build-plan and close-out gate stacks when invoked as agent-mode execute steps"
+  completion_criteria:
+    verification_gate_notes: "prompt-type-skills and prompt-type-subagent e2e pass; pseudocode_validate IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE pass; scoped close-out commit excludes unrelated fixture drift."
+  evidence:
+    command_seq:
+      - command: "cd mcp-server && node --import tsx --test src/e2e/prompt-type-skills.test.ts src/e2e/prompt-type-subagent.test.ts"
+        notes: "29 static contract tests pass including execution mode and 18-leaf inventory."
+        result: "pass"
+      - command: "pseudocode_validate IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+        notes: "Layer B contract fields pass after Grammar v2 sidecar update."
+        result: "pass"
+    manifest_reference: "mcp-server/src/e2e/prompt-type-skills.test.ts; mcp-server/src/e2e/prompt-type-subagent.test.ts"
+    proof_boundaries:
+      - "docs_and_skills_only"
+      - "does_not_prove_live_ide_skill_invocation"
+  impact_analysis:
+    impl_inventory_notes: "tools/bundled-prompt-type-skills/*, .cursor/agents/*, mcp-server e2e, bootstrap manifest, PROMPT_TYPE_LEAF_IDS, tied-project vocab and REQ extensions"
+    modules_or_boundaries: "Prompt Composer distribution; not MCP tool schema"
+    tied_tokens_affected:
+      - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    tied_tokens_new:
+      - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+      - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+      - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  leap_feedback:
+    divergences_from_analysis: "use-skill still references monolithic tied-plan-citdp.md; deferred follow-up per PLAN non-goals."
+    record_status: "complete"
+    tied_stack_updates_required: []
+  persist_policy: "Canonical under tied-project/citdp/; working copy remains plan artifact."
+  record_identity:
+    change_request_id: "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    checklist_session_note: "Store-repo change without per-request Tracker copy; unified close_out not run (missing tracker_path); sponsor-scoped traceable commit."
+    depth_tier: "integrated"
+    gate_policy: "full"
+    profile_depth: "baseline-functional"
+    recorded_at: "2026-11-03"
+    tied_context:
+      architecture:
+        - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+      implementation:
+        - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+      requirements:
+        - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    title: "Explicit skill execution mode (plan vs agent) for prompt-type sequences"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Agent treats plan mode as permission to skip TIED design writes entirely"
+      - "non-tied-plans CITDP mistaken for citdp-promote input without sponsor intent"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Skill text forbids code but agent mutates tests anyway without IDE Plan mode"
+      depth_tier: "integrated"
+      gate_policy: "full"
+      integrated_waiver:
+        expiry: "2026-12-01"
+        owner: "sponsor"
+        rationale: "No checklist Tracker for store-repo prompt-type bundle change; static e2e and CITDP persist satisfy docs/skills proof boundary."
+    residual_risks:
+      - "Stale 15-leaf prose outside grep list until follow-up audit"
+  tdd_sequence:
+    summary: "TIED stack; shared markdown and leaves; RED e2e; GREEN bundle; pseudocode validate; CITDP persist; scoped commit."
+  test_strategy:
+    summary: "Static contract tests for 18 leaves, execution mode strings, subagent Refine→Plan without Implement on plan leaves."

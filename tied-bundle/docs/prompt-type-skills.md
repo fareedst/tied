@@ -113,7 +113,7 @@ The skills shall:
 
 ### Acceptance criteria
 
-- 15 leaf `SKILL.md` files exist with exact prompt-type names (includes `citdp-record` and `citdp-promote`).
+- 18 leaf `SKILL.md` files exist with exact prompt-type names (includes `non-tied-refine`, `non-tied-build`, `non-tied-close`, `citdp-record`, and `citdp-promote`).
 - One `prompt-type-router/SKILL.md` exists.
 - All 14 skills have `disable-model-invocation: true`.
 - Shared references resolve and each leaf remains below 500 lines.

@@ -12,8 +12,13 @@ This skill is the workflow source of truth for client prompt-type invocation.
 `tied-install.sh` installs it under `.cursor/skills/build-plan/`. Task wrappers under
 `.cursor/agents/` remain TIED-source development artifacts only.
 [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
-[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
+[IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]
 
+## Execution mode
+
+**skill execution mode:** agent
+
+See [prompt-execution-mode.md](../prompt-shared/prompt-execution-mode.md).
 
 ## Inputs
 

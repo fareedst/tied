@@ -1,0 +1,19 @@
+ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  decision: "Split Prompt Composer greenfield and non-tied sequences into explicit plan-mode prepare leaves and agent-mode execute/close leaves, with one shared prompt-execution-mode.md contract and non-tied-plans committed root."
+  implementation_approach:
+    details:
+      - "Execution mode declared in skill body, not YAML frontmatter, to preserve Cursor frontmatter contract."
+      - "Non-tied lane uses tied-project/non-tied-plans/{slug}/ with optional CITDP and vocab RECORD."
+      - "Plan mode forbids product tree mutations; TIED plan lane uses tied-project/working/{REQ}/."
+    summary: "Thin leaf skills link to prompt-execution-mode.md and prepare/build shared splits; router taxonomy 18 leaves."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-03"
+  name: "Prompt-type skill execution mode architecture"
+  related_architecture: []
+  related_implementation:
+    - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  related_requirements:
+    - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  status: "Accepted"

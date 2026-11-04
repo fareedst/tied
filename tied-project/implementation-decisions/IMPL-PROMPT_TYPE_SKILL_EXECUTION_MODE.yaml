@@ -1,0 +1,21 @@
+IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  code_locations:
+    files:
+      - description: "Execution mode and 18-leaf contract tests"
+        path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - description: "Normative plan vs agent contract"
+        path: "tools/bundled-prompt-type-skills/prompt-shared/prompt-execution-mode.md"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    - "IMPL-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE-pseudocode.md"
+  implementation_approach:
+    summary: "Extend bundled prompt-type skills, bootstrap manifest, enrollment constants, subagents, and e2e tests."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-03"
+  name: "Prompt-type skill execution mode implementation"
+  status: "Implemented"

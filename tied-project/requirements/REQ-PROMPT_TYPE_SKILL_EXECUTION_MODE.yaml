@@ -1,0 +1,29 @@
+REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
+  category: "Tooling"
+  description: "Declare normative skill execution mode (plan vs agent) on prompt-type leaves so planning completes without product mutations; add non-tied-refine, non-tied-build, non-tied-close; split plan prepare shared docs."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-03"
+  name: "Prompt-type skill execution mode"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    related_to: []
+  satisfaction_criteria:
+    - criterion: "add-feature, refine-plan, non-tied-plan, and non-tied-refine declare skill execution mode plan and omit tied-implement.md."
+    - criterion: "build-plan, close-out, non-tied-build, and non-tied-close declare skill execution mode agent."
+    - criterion: "Leaf inventory is 18 in prompt-type-skills.test.ts, prompt-type-subagent.test.ts, manifest PROMPT_TYPE_SKILL_DIRS, and PROMPT_TYPE_LEAF_IDS."
+    - criterion: "prompt-execution-mode.md defines plan and agent allow/forbid lists and plan-mode handoff."
+    - criterion: "tied-project/non-tied-plans/ is documented in non-tied-boundary.md and working-artifact-placement.md."
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    implementation:
+      - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"

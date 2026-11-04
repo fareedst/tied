@@ -19,7 +19,7 @@ files and the implementation pseudo-code.
 | **prompt type** | prompt mode | One branch of the Prompt Composer taxonomy |
 | **global prompt skill** | personal skill copy | A versioned leaf skill distributed to client projects |
 | **prompt-type subagent** | agent wrapper, skill include | A TIED-source Cursor Task wrapper for a prompt type; distinct from the global prompt skill. One wrapper exists per leaf prompt type at `.cursor/agents/<prompt-type>.md` for static contract validation. Implementing and close-out wrappers are writable; `question` and `other` are readonly. Not installed into client projects by `tied-install.sh`. |
-| **prompt-type sequence subagent** | multi-agent wrapper, pipeline agent | A TIED-source Cursor Task orchestrator that launches leaf prompt-type subagents in a fixed order. Canonical: `add-refine-build` runs `add-feature`, then `refine-plan`, then `build-plan`. |
+| **prompt-type sequence subagent** | multi-agent wrapper, pipeline agent | A TIED-source Cursor Task orchestrator that launches leaf prompt-type subagents in a fixed order. Canonical: `add-refine-build` runs plan-mode `add-feature`, then `refine-plan`, then agent-mode `build-plan`; `@close-out` is a fourth invocation. |
 | **prompt-type router** | multi-prompt helper | Explicit ordered composition of prompt types |
 | **prompt envelope** | prompt wrapper | Optional `prompt-type:` and `git-condition:` fields on a generated prompt; not required for Cursor skill or agent invocation |
 | **invocation remainder** | ::: body, request after ::: | Text after the named skill or agent (or the Task prompt body). For `add-feature` this is the requirement, not a plan document. |
@@ -34,7 +34,10 @@ files and the implementation pseudo-code.
 | **surface enrollment contract** | enrollment helper, PDSA hook | Normative when/how to open or update a Loop 3 methodology experiment for non-`checklist_step` production surfaces (prompt types, assurance profiles, experiment `gate_policy` category); MCP assist + advisory skill steps; gate-blocking only when implement CITDP declares link · [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT](../requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml) |
 | **surface_ref** | surface id, prompt surface id | Optional field on methodology learning experiment records identifying the enrolled surface (leaf **prompt type** id, assurance profile id, or CITDP id depending on `production_system_surface`); required by enrollment validator for `prompt_type_workflow`, `assurance_profile`, and `gate_policy` surfaces · [REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT](../requirements/REQ-METHODOLOGY-PRODUCTION-SYSTEM-ENROLLMENT.yaml) |
 | **harness profile** | agent mode, harness mode | Bounded turn orchestration for a leaf **prompt type** (IDE agent, Task subagent, or agentstream `--harness`); tune prompts/delegation here—not checklist gate authority · [fresh-client-prompt-activation-map §0](../../tied-bundle/docs/fresh-client-prompt-activation-map.md) |
-| **TIED applicability boundary** | inferred TIED mode | Explicit **`full`** \| **`minimal`** \| **`none`** per leaf prompt type in the activation map; distinct from **harness profile** wording |
+| **skill execution mode** | IDE plan mode, prompt mode | Normative **`plan`** or **`agent`** on a leaf skill body (`prompt-execution-mode.md`); **`plan`** forbids product code/tests/fixtures/data and Implement; distinct from **harness profile** and Cursor IDE Plan mode (additive only) · [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE](../requirements/REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml) |
+| **plan-mode handoff** | done, shipped | End of a **plan** skill: linked paths under `tied-project/working/{REQ-TOKEN}/` or `tied-project/non-tied-plans/{slug}/` plus explicit next `@` skill; not a completion claim |
+| **non-tied-plans root** | non-tied working | Committed `tied-project/non-tied-plans/{slug}/` for the four-step non-TIED sequence (PLAN, CITDP with empty `tied_tokens_new`, optional vocab RECORD) |
+| **TIED applicability boundary** | inferred TIED mode | Explicit **`full`** \| **`minimal`** \| **`none`** per leaf prompt type in the activation map; distinct from **harness profile** and **skill execution mode** wording |
 | **TIED-client-local development** | non-TIED project | Development that reads context but intentionally avoids TIED synchronization |
 | **standalone CITDP** | CITDP spike | Change record with empty `tied_tokens_new`; created via `@citdp-record` |
 | **CITDP-only boundary** | partial TIED | Allows `citdp_record_write` and working evidence; forbids project V+R+A+I writes |
@@ -64,13 +67,15 @@ files and the implementation pseudo-code.
 
 ## Prompt-type taxonomy
 
-The 15 leaf prompt types are:
+The **18** leaf prompt types are (after [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE](../requirements/REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml)):
 
 - `add-feature`, `refine-plan`, `build-plan`, `close-out`, `debug`
 - `question`, `use-skill`, `ammend-commit`
-- `non-tied-plan`, `non-tied-debug`
+- `non-tied-plan`, `non-tied-refine`, `non-tied-build`, `non-tied-close`, `non-tied-debug`
 - `leap-ad-hoc`, `leap-diff-promote`
 - `citdp-record`, `citdp-promote`, `other`
+
+**Sponsor sequences:** TIED `add-feature` → `refine-plan` → `build-plan` → `close-out` (plan/plan/agent/agent). Non-TIED `non-tied-plan` → `non-tied-refine` → `non-tied-build` → `non-tied-close` (same mode pattern).
 
 **CITDP-only applicability** applies to `citdp-record` (partial sync: CITDP + working evidence only; no project V+R+A+I). **`citdp-promote`** enters full TIED enforcement from a named CITDP file.
 

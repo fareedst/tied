@@ -41,6 +41,7 @@ Under `tied-project/working/{REQ-TOKEN}/`:
 | Artifact | Notes |
 | --- | --- |
 | `PLAN.md` | Linked plan / refine output |
+| `../non-tied-plans/{slug}/` | Non-TIED four-step sequence (see `non-tied-plans/README.md`) |
 | `checklist-tracker.yaml` | Per-request checklist copy |
 | `CITDP-*.yaml` | Draft until `persist-citdp-record` → `tied-project/citdp/` |
 | `evidence/request-evidence-envelope.v1.json` | Machine index; paths relative to **repository project root** |

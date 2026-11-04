@@ -1,6 +1,6 @@
 ---
 name: refine-plan
-description: Use when the caller explicitly selects refine-plan or delegates improvement of an in-document TIED plan with Refine, CITDP Plan, and Implement gates. Do not use for build-plan, add-feature, non-tied-plan, debug, or question.
+description: Use when the caller explicitly selects refine-plan or delegates plan-mode improvement of a linked TIED plan (Refine and Plan only). Do not use for build-plan, add-feature, non-tied-refine, debug, or question.
 model: inherit
 readonly: false
 is_background: false
@@ -48,26 +48,11 @@ in-message plan is present, stop.
 1. **Refine** — resolve sponsor terms and ambiguity using the canonical
    `tied-refine.md` procedure. Do not start Plan until ambiguity is cleared or
    explicitly accepted.
-2. **Plan** — perform CITDP change definition, impact, risk, and test-strategy
-   analysis; copy a per-task Tracker from
-   `tied-bundle/docs/agent-req-implementation-checklist.yaml`; update the
-   requirement/architecture/implementation stack as required.
-3. **Implement** — follow the Tracker and canonical `tied-implement.md`.
-   Do not start code until IMPL pseudo-code is complete and the test strategy
-   is in place; every block must have REQ/ARCH/IMPL token comments and
-   pseudo-code validation must pass. Write RED tests before production code,
-   then validate modules independently before composition.
+2. **Plan** — follow canonical `tied-plan-prepare.md`. **Skill execution mode:
+   plan** — no Implement, RED tests, or product mutations. If scope or depth
+   changes, invalidate downstream tracker dispositions; re-run advisory gates.
 
-Select and record `profile_depth` and gate policy before any depth-dependent
-inquiry. If scope, depth, or policy changes, invalidate and clear dependent downstream
-dispositions/evidence and re-run `tied_checklist_gate_validate` with
-`phase: pre_implementation`; integrated depth also requires identity-bound
-activation evidence. Do not proceed or carry evidence across a loop-back when
-the gate is missing, malformed, stale, or unjustified.
-
-Keep project YAML changes in project-owned `tied/` records; never edit
-`tied/methodology/`. Run language lint, TIED YAML validation, the verification
-gate, and `tied_validate_consistency` before reporting completion.
+Hand off to `@build-plan` with updated linked plan path.
 
 ## Forbidden operations
 

@@ -12,17 +12,18 @@ Each **leaf prompt type** is a bounded **harness profile** (turn orchestration).
 
 | Leaf prompt type | TIED applicability | Harness profile note | Gate authority reminder |
 | --- | --- | --- | --- |
-| `add-feature` | **full** | Refine → CITDP plan → implement entry | **`pre_implementation`** before RED; full Tracker/CITDP when scoped |
-| `refine-plan` | **full** | Plan improvement only; no implement | Planning gates per linked PLAN/CITDP |
-| `build-plan` | **full** | Execute linked plan; omits Refine | **`pre_implementation`** before code; verification gate before status claims |
+| `add-feature` | **full** | **plan** mode: Refine → CITDP prepare only | Advisory **`pre_implementation`**; hand off to `refine-plan` / `build-plan` |
+| `refine-plan` | **full** | **plan** mode: improve linked plan | Same as `add-feature`; no RED in leaf |
+| `non-tied-plan` / `non-tied-refine` | **minimal** | **plan** mode; artifacts under `tied-project/non-tied-plans/` | No REQ/ARCH/IMPL YAML |
+| `non-tied-build` / `non-tied-close` | **minimal** | **agent** mode execute/close | No TIED sync |
+| `build-plan` | **full** | **agent** mode: execute linked plan; omits Refine | **`pre_implementation`** before code; verification gate before status claims |
 | `close-out` | **full** | Envelope, dispositions, traceable commit when allowed | **`close_out`** gate + **`sub-close-out-evidence-sync`**; no commit when blocked |
 | `debug` | **full** | Refine → capture failure → plan → implement | Same gate stack as feature work for the scoped defect |
 | `use-skill` | **full** | Import/apply skills under TIED boundaries | Mutating TIED YAML only via MCP/tied-cli after base-path check |
 | `leap-ad-hoc` | **full** | Fortify staged ad-hoc work | LEAP proposals; no gate waiver in skill text |
 | `leap-diff-promote` | **full** | Promote diff onto TIED-complete stage | Sponsor ladder for costly promotion |
 | `ammend-commit` | **minimal** | Staged amend preparation only | Does not bypass verification or envelope blocking |
-| `non-tied-plan` | **minimal** | TIED-client-local dev; read context, no TIED sync writes | No project YAML/IMPL/CITDP mutations; gates not auto-run |
-| `non-tied-debug` | **minimal** | TIED-client-local debugging | Same no-record boundary as `non-tied-plan` |
+| `non-tied-debug` | **minimal** | Monolithic TIED-client-local debugging | Legacy boundary; no TIED sync writes |
 | `citdp-record` | **citdp-only** | Standalone CITDP via `citdp_record_write`; no V+R+A+I | CITDP + working evidence only; no implement leaf |
 | `citdp-promote` | **full** | Promote named CITDP to V+R+A+I + Tracker + implement | Same gate stack as `build-plan` for scoped work |
 | `question` | **none** | Answer invocation remainder | No TIED blocks; operator may still run gates manually |

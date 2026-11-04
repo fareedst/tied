@@ -1,27 +1,43 @@
-# TIED-client-local boundary (non-tied-plan / non-tied-debug)
+# TIED-client-local boundary (non-tied-*)
 
-`non-tied-plan` and `non-tied-debug` are **TIED-client-local** workflows: development inside a TIED client repository that intentionally remains **outside** the TIED database and synchronization stack.
+Development inside a TIED client repository that intentionally remains **outside** full TIED V+R+A+I synchronization.
 
-## Allowed
+## Non-tied plan track (sequence)
 
-- Read TIED/YAML indexes, IMPL pseudo-code, CITDP records, and vocabulary glossaries for **domain understanding**
-- Inspect and change ordinary project source, tests, and tooling when the caller authorizes
-- Ordinary development test strategy and RED-before-code TDD
+**Leaves:** `non-tied-plan`, `non-tied-refine`, `non-tied-build`, `non-tied-close` ([prompt-execution-mode.md](prompt-execution-mode.md)).
 
-## Forbidden — TIED synchronization writes
+**Artifact root:** `tied-project/non-tied-plans/{slug}/` (`PLAN.md`, optional `CITDP-*.yaml` with **`tied_tokens_new: []`**, `test-strategy.md`).
 
-- Writing or updating project TIED YAML (`tied-project/requirements.yaml`, `tied-project/architecture-decisions.yaml`, `tied-project/implementation-decisions.yaml`, `tied-project/semantic-tokens.yaml`, detail files)
-- Editing IMPL pseudo-code sidecars (`IMPL-*-pseudocode.md`)
-- Creating or editing `tied-project/citdp/CITDP-*.yaml`
-- Recording vocabulary in `tied-project/vocab/` (RECORD touchpoint)
-- Creating or editing LEAP proposals (`leap-proposals/`, `tied_leap_proposal_*`)
-- Invoking mutating verification (`tied_verify` with update) or other TIED synchronization that changes tracked state
-- Copying per-task **Tracker** files for TIED checklist execution
+### Allowed (plan track)
+
+- Read TIED/YAML for context
+- Writes under `tied-project/non-tied-plans/{slug}/`
+- CITDP analysis in that folder (not promotion to V+R+A+I without `@citdp-promote` or TIED lane)
+- **RECORD** in `tied-project/vocab/` during plan/build track
+- Product source/tests in **agent** leaves (`non-tied-build`, `non-tied-close`)
+
+### Forbidden (plan track)
+
+- Project REQ/ARCH/IMPL indexes and detail YAML, IMPL pseudo-code sidecars
+- `tied-project/citdp/CITDP-*.yaml` canonical persist (use plan-folder draft only)
+- TIED checklist **Tracker** under `tied-project/working/{REQ}/` for this sequence
+- `tied_verify` with update; LEAP proposal mutators
+
+## Legacy monolithic (`non-tied-debug`)
+
+`non-tied-debug` keeps the prior boundary: read TIED context; change product code; **no** TIED sync writes and **no** vocab RECORD into `tied-project/vocab/` per [non-tied-plan.md](non-tied-plan.md) implement note.
+
+### Forbidden — TIED synchronization (all non-tied except plan-track vocab/CITDP above)
+
+- Writing or updating project TIED YAML indexes and detail files
+- Editing IMPL pseudo-code sidecars
+- Invoking mutating verification (`tied_verify` with update)
+- Copying per-task **Tracker** for TIED checklist execution (plan track)
 
 ## Not a fallback
 
-Presence of a `tied/` tree does **not** upgrade a `non-tied-*` request to full TIED tracking. The caller must explicitly choose a TIED prompt type instead.
+Presence of a `tied/` tree does **not** upgrade a `non-tied-*` request to full TIED tracking. Choose `add-feature` / `build-plan` explicitly.
 
 ## CITDP without V+R+A+I
 
-When the change merits a **CITDP record** but not project REQ/ARCH/IMPL tokens, use **`citdp-record`** ([citdp-only-boundary.md](citdp-only-boundary.md)), not `non-tied-plan` (which forbids CITDP writes).
+Standalone retrospective: **`citdp-record`** ([citdp-only-boundary.md](citdp-only-boundary.md)). The four-step non-tied sequence uses `non-tied-plans/` instead.
