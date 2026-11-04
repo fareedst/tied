@@ -1,0 +1,15 @@
+{
+  "schema": "trial-workflow-interaction-inventory.v1",
+  "analysis_label": "traditional-workflow-trial.v1",
+  "prompt_id": "PROMPT-WF-03",
+  "model_config": "claude-haiku-5-5",
+  "model_slug": "claude-haiku-5-5",
+  "harness": "claude",
+  "harness_notes": "Motivation cell 1793810114-wf-agentstream-wf-03-claude-claudehaiku55; REQ indexes follow-on gaps before re-run.",
+  "sponsor_turns": [
+    { "skill": "add-feature", "ordinal": 1, "notes": "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS indexed in stdd store" },
+    { "skill": "refine-plan", "ordinal": 2, "notes": "PLAN pillars E–H; pre_implementation gate allowed via tied_gate_check" },
+    { "skill": "build-plan", "ordinal": 3, "notes": "pending" },
+    { "skill": "close-out", "ordinal": 4, "notes": "pending" }
+  ]
+}

@@ -397,6 +397,25 @@ IMPL-CITDP_ORDERED_KEY_VALIDATE:
   requirements:
     - "REQ-CITDP_ORDERED_LIST_KEYS"
   status: "Active"
+IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS:
+  cross_references:
+    - "ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+  detail_file: "implementation-decisions/IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml"
+  implementation_approach:
+    details:
+      - "docs/demos/traditional-four-phase-agentstream.yaml"
+      - "scripts/lib/wf-trial-claude-preflight.inc.sh"
+      - "scripts/workflow-trial-agentstream.sh"
+      - "tools/bootstrap/lib/claude-client-validation.mjs"
+    summary: "TDD on claude-client-validation and workflow-trial preflight inc; close-out batch playbook; live-driver-bind workspace seam."
+  name: "Claude wf-03 live matrix gap closure implementation"
+  status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/packages/agentstream/src/live-driver-bind.test.ts"
+      - "tools/bootstrap/lib/claude-client-validation.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
 IMPL-CLIENT-NEW:
   name: "Client only"
   status: "Active"

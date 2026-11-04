@@ -1,0 +1,52 @@
+REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS:
+  category: "Tooling"
+  description: "Live Claude wf-03 disposable trial (1793810114-wf-agentstream-wf-03-claude-claudehaiku55) reached GREEN product tests but failed machine close_out and tied-claude-client-validation preflight. This REQ closes orchestrator/validation/playbook gaps—not LLM capability."
+  metadata:
+    created:
+      author: "agent"
+      date: "2026-11-04"
+      reason: "add-feature after refine-plan for live trial gaps"
+  name: "Claude wf-03 live matrix — validation, preflight, close-out gaps"
+  priority: "P1"
+  rationale:
+    benefits:
+      - "CI regression on validation and strict-preflight flag without live LLM"
+      - "Fair matrix signal when HARNESS=claude"
+      - "Operator path to close_out parity fingerprint after manual wf-03 re-run"
+    problems_solved:
+      - "assertMcpJsonHarnessContract requires legacy TIED_BASE_PATH and client/tied while bootstrap writes TIED_CLIENT_PROJECT_PATH and tied-project/"
+      - "Claude live driver may use TIED store cwd instead of disposable client root"
+      - "Close-out turn invokes gate with malformed/partial CITDP and missing request evidence envelope"
+      - "workflow-trial-agentstream continues after failed Claude preflight"
+    why: "Shipped parity REQ fixed argv and batch expansion; live matrix still reports ok:false preflight and turn-4 close_out blockers (envelope, gate invocation, tracker hygiene, cwd drift)."
+  related_requirements:
+    depends_on:
+      - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    related_to:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-TIED_CLAUDE_HARNESS"
+  satisfaction_criteria:
+    - criterion: "Claude AgentDriver live subprocess uses disposable WORKSPACE as cwd when orchestrator exports it."
+      id: "SC-WF03-DRIVER-CWD"
+      metric: "cd mcp-server/packages/agentstream && npm test"
+    - criterion: "Four-phase batch and/or prompt-shared close-out guidance documents tied_gate_check with citdp_path plus request_evidence_envelope before close_out turn."
+      id: "SC-WF03-CLOSEOUT-PLAYBOOK"
+      metric: "Facilitator checklist + docs review"
+    - criterion: "Manual live workflow_trial_agentstream wf-03 HARNESS=claude at fixed MODEL_SLUG achieves close_out allowed true and envelope blocking_gap_count 0 (operator proof)."
+      id: "SC-WF03-MANUAL-PARITY"
+      metric: "Facilitator evidence under working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/"
+    - criterion: "run-tied-claude-client-validation mcp_json_harness_contract passes on fresh disposable Claude client using TIED_CLIENT_PROJECT_PATH pointing at tied-project/ (legacy TIED_BASE_PATH accepted when equivalent)."
+      id: "SC-WF03-VALIDATION-CANONICAL"
+      metric: "node --test tools/bootstrap/lib/claude-client-validation.test.mjs"
+    - criterion: "When WF_TRIAL_STRICT_PREFLIGHT=1 and HARNESS=claude, workflow-trial-agentstream exits non-zero if validation report ok is false; default unset preserves DIAGNOSTIC continue behavior."
+      id: "SC-WF03-STRICT-PREFLIGHT"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  status: "Planned"
+  traceability:
+    architecture: []
+    code_annotations: []
+    implementation: []
+    tests: []

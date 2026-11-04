@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const SCRIPT = path.join(REPO_ROOT, "scripts/workflow-trial-agentstream.sh");
 const TAG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-disposable-tag.inc.sh");
+const PREFLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-claude-preflight.inc.sh");
 const TIED_CLI = path.join(REPO_ROOT, "mcp-server/packages/cli/dist/index.js");
 
 function buildDisposableTag(wfId, envOverrides = {}) {
@@ -88,6 +89,22 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
       }),
       "wf-agentstream-wf-02-cursor-composer25fast",
     );
+  });
+
+  it("wf_trial_handle_claude_validation_exit strict vs advisory [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", () => {
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-claude-preflight.inc.sh
+      source "${PREFLIGHT_INC}"
+      wf_trial_handle_claude_validation_exit 0; echo exit=$?
+      wf_trial_handle_claude_validation_exit 1; echo exit=$?
+      WF_TRIAL_STRICT_PREFLIGHT=1 wf_trial_handle_claude_validation_exit 1; echo strict_exit=$?
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stdout, /exit=0/);
+    assert.match(r.stdout, /exit=0/); // advisory path after failure
+    assert.match(r.stdout, /strict_exit=1/);
+    assert.match(r.stderr, /DIAGNOSTIC: Claude client validation failed/);
   });
 
   it("--workspace + --dry-run emits --model on stdout when CLI built", () => {

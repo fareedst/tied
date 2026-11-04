@@ -11,6 +11,8 @@ import { childProcessSpawnOptions } from "./child-process-win.mjs";
 import { assertMcpPrerequisite } from "./mcp-config.mjs";
 import { assertWindowsBootstrapClaude } from "./assert-windows-bootstrap-claude.mjs";
 import { jsonSafeAbsolute } from "./paths.mjs";
+import { resolveTiedLayout } from "./layout.mjs";
+import { pickClientProjectPath } from "./tied-path-env.mjs";
 import { skillsRerootEnabledFromEnv, SKILLS_REROOT_ENV } from "./skills-reroot.mjs";
 import { runTiedValidateConsistency } from "../../../scripts/lib/tied-new-client-audit.mjs";
 import { committedWorkingFileRel } from "./working-root.mjs";
@@ -44,7 +46,17 @@ export const TRACEABILITY = [
   "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
   "REQ-TIED_CLAUDE_HARNESS",
   "REQ-TIED_SETUP",
+  "REQ-TIED_CLI_MCP_JSON_BASE_PATH",
+  "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS",
 ];
+
+/**
+ * [IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-TIED_CLI_MCP_JSON_BASE_PATH]
+ * @param {string} clientDir
+ */
+export function expectedClientTiedProjectDir(clientDir) {
+  return jsonSafeAbsolute(resolveTiedLayout(clientDir).tiedDir);
+}
 
 /**
  * @param {string} sourceRoot
@@ -98,16 +110,20 @@ export function assertMcpJsonHarnessContract(clientDir, options = {}) {
       detail: `TIED_MCP_HARNESS expected ${expectedHarness}, got ${String(harness)}`,
     };
   }
-  const configuredBase = cfg?.mcpServers?.["tied-yaml"]?.env?.TIED_BASE_PATH;
+  const env = cfg?.mcpServers?.["tied-yaml"]?.env ?? {};
+  const configuredBase = pickClientProjectPath(env);
   if (!configuredBase) {
-    return { ok: false, detail: "TIED_BASE_PATH missing in .mcp.json env" };
+    return {
+      ok: false,
+      detail: "TIED_CLIENT_PROJECT_PATH (or legacy TIED_BASE_PATH) missing in .mcp.json env",
+    };
   }
-  const expectedBase = jsonSafeAbsolute(path.join(clientDir, "tied"));
+  const expectedBase = expectedClientTiedProjectDir(clientDir);
   const normalizedConfigured = jsonSafeAbsolute(configuredBase);
   if (normalizedConfigured !== expectedBase) {
     return {
       ok: false,
-      detail: `TIED_BASE_PATH mismatch: expected ${expectedBase}, got ${normalizedConfigured}`,
+      detail: `client project path mismatch: expected ${expectedBase}, got ${normalizedConfigured}`,
     };
   }
   return { ok: true };
@@ -146,7 +162,7 @@ export function runTiedCliBasePathSmoke(tiedCliPath, clientDir, mcpEnv, spawn = 
   } catch (err) {
     return { ok: false, detail: `TIED_CLI_JSON: ${err.message}; stdout=${result.stdout?.slice(0, 500)}` };
   }
-  const expectedBase = jsonSafeAbsolute(path.join(clientDir, "tied"));
+  const expectedBase = expectedClientTiedProjectDir(clientDir);
   const resolved = parsed?.base_path ? jsonSafeAbsolute(parsed.base_path) : "";
   if (resolved !== expectedBase) {
     return {
@@ -176,7 +192,7 @@ export function runClaudeCodeInteractiveSmoke(clientDir, spawn = spawnSync) {
   if (which.status !== 0) {
     return { ok: true, skipped: true, detail: "CLAUDE_CLI_NOT_ON_PATH" };
   }
-  const expectedBase = jsonSafeAbsolute(path.join(clientDir, "tied"));
+  const expectedBase = expectedClientTiedProjectDir(clientDir);
   const mcpConfigArg = jsonSafeAbsolute(mcpPath);
   const prompt =
     "Use the tied-yaml MCP tool tied_config_get_base_path. Reply with only the base_path string.";

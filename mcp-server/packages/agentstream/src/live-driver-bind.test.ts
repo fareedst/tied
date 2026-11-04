@@ -63,6 +63,25 @@ console.log(JSON.stringify({ type: "result", subtype: "success", is_error: false
     assert.match(out.jevGateStderr ?? "", /decision=block/);
   });
 
+  it("REQ-CLAUDE_WF03: passes workspace into Claude collect spawnCwd via custom launchFn stand-in", async () => {
+    const workspace = path.join(os.tmpdir(), `bind-ws-${Date.now()}`);
+    fs.mkdirSync(workspace, { recursive: true });
+    let seenCwd: string | undefined;
+    const stdout = readClaudeFixture("stream-session-id.ndjson");
+    const binding = bindLiveExecutorDriver({
+      harnessProfile: "claude",
+      agentPath: "",
+      workspace,
+      claudeLaunchFn: () => {
+        seenCwd = workspace;
+        return { stdout, exitCode: 0 };
+      },
+      claudeLaunchFnIsTestDouble: true,
+    });
+    await binding.runTurn(["claude", "--print"], []);
+    assert.equal(seenCwd, workspace);
+  });
+
   it("keeps cursor binding when harness=cursor even if agent_path is claude", async () => {
     const binding = bindLiveExecutorDriver({
       harnessProfile: "cursor",

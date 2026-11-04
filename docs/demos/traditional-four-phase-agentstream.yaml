@@ -52,6 +52,10 @@ features:
       When close_out gates allow, run traceable-commit per prompt-shared traceable-commit-close-out.md.
       Deliver CHANGELOG, three completion signals, and traceable commit when gates allow.
     behavior: |
+      Before close_out gates: build `request-evidence-envelope.v1.json` under `tied-project/working/{REQ-TOKEN}/evidence/`
+      (MCP `request_evidence_envelope_build` or documented equivalent). Invoke checklist gates with **`tied_gate_check`**
+      using `citdp_path` + `tracker_path` so the validator receives the **inner** CITDP body (not a wrapped stub)—inline
+      partial `citdp` objects yield `malformed_citdp:adversarial_inquiry`.
       Append or update `tied-project/working/{REQ-TOKEN}/evidence/trial-workflow-interaction-inventory.v1.json`:
       keep `harness`: `cursor-agentstream-four-phase` and `harness_notes` for this wrapper (not manual IDE @skills);
       record all four sponsor_turns with ordinals 1–4; set close_out turn gate receipt when close-out completes.

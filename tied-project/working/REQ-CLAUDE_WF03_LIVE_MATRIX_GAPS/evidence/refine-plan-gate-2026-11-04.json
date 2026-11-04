@@ -1,0 +1,11 @@
+{
+  "tool": "tied_gate_check",
+  "phase": "pre_implementation",
+  "request_token": "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS",
+  "allowed": true,
+  "exit_code": 0,
+  "reasons": [],
+  "citdp_path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/CITDP-REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml",
+  "tracker_path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/checklist-tracker.yaml",
+  "recorded_at": "2026-11-04"
+}

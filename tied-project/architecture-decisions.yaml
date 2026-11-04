@@ -298,6 +298,14 @@ ARCH-CITDP_ORDERED_LIST_KEYS:
   requirements:
     - "REQ-CITDP_ORDERED_LIST_KEYS"
   status: "Accepted"
+ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS:
+  cross_references:
+    - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  detail_file: "architecture-decisions/ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml"
+  name: "Claude wf-03 live matrix gap closure architecture"
+  status: "Active"
 ARCH-CONFIG_DISCOVERY_LAYERING:
   alternatives_considered:
     - cons:

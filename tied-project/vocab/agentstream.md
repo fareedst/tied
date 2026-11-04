@@ -54,6 +54,8 @@
 | **`{{SKILL_ROOT}}` batch placeholder** | skill root expansion | Expanded by `run-traditional-four-phase-agentstream.sh`: `.claude/skills` when `HARNESS=claude`, else `.cursor/skills`. [REQ-AGENTSTREAM_CLAUDE_WF_PARITY](../requirements/REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml) |
 | **harness turn trace** | AGENTSTREAM_HARNESS_TRACE | Optional JSONL `harness-turn-trace.v1` per live turn when `AGENTSTREAM_HARNESS_TRACE=1`. [REQ-AGENTSTREAM_CLAUDE_WF_PARITY](../requirements/REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml) |
 | **workflow-trial disposable tag** | fair comparison client id, epoch tag | `--tag` passed to `new-tied-client.mjs` from **`workflow-trial-agentstream.sh`**: `wf-agentstream-{wf-id}-{harness}-{modelBucket}`; full dirname `{epoch}-{tag}`. **modelBucket:** MODEL_CONFIG first, else MODEL_SLUG; lowercase; strip `.` and `-`. [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG](../requirements/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml) |
+| **WF03 Claude incomplete cell** | live matrix gap, haiku55 incomplete | Facilitator label when a Claude wf-03 disposable run reaches GREEN tests but fails machine **`close_out`** or Claude preflight validation (example client `1793810114-wf-agentstream-wf-03-claude-claudehaiku55`). Distinct from **WF03_CURSOR_GOLD**. Follow-on: [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS](../requirements/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml) · [PLAN](../working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/PLAN.md). |
+| **WF trial strict preflight** | `WF_TRIAL_STRICT_PREFLIGHT` | When set, **`workflow-trial-agentstream.sh`** should fail closed if `run-tied-claude-client-validation.mjs` reports `ok: false` (proposed in REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS refine-plan). Default today: DIAGNOSTIC and continue. |
 
 ---
 

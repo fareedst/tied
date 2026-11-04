@@ -1,0 +1,131 @@
+{
+  "artifacts": [
+    {
+      "content_hash": "sha256:1bace1bbcc24a24d1779f0a22b3bb18613e80683dc2509b46ec8fefb5e79af0c",
+      "kind": "request_evidence_envelope",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/request-evidence-envelope.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "request-evidence-envelope.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:1d1194197df768047cf1c7f061e80049fcb19a132c44e513fa689644195451bb",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/refine-plan-gate-2026-11-04.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:2945cd3858db780f081a7c7b02dcd2dc366d24826f92da545eec0ed385c52197",
+      "kind": "citdp_record",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/CITDP-REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml",
+      "phase": null,
+      "proof_boundaries": [
+        "citdp_snapshot_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:47a449c568825bb969071df1eaf759a26ed0c15019754d69e5f92829d47f68b7",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/sub-adversarial-inquiry-pass-na.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6e25aaa8bdb580ee30340200f6c2a3ffc6f3a3878bc3d03ee121d1de4e826676",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/gates/close_out-2026-11-04T17-04-17-869Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6f6c0f3a88b9ec8dcc92bce3cae12a84737329f2cae183039443236cb9ef8d6e",
+      "kind": "not_applicable_receipt",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/not-applicable-receipt.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:7a27ffe0ebd14864ef9727dd9e680206e5b231cda30c1f1f2d7382735abd18e9",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/build-plan-handoff.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:82572efe522d8aed1c1cd548f0e6e2b03cc1e817c2ffed14f7ca4e48910c3f2a",
+      "kind": "verification_evidence_manifest",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/verification-evidence-manifest.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "verification-evidence-manifest.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e4c743638515ae92043ac969fe028a8c439359e8d93a5dd93740f4f2b6323542",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/trial-workflow-interaction-inventory.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    }
+  ],
+  "cross_links": {
+    "citdp_path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/CITDP-REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml",
+    "evidence_chain_profile_path": null,
+    "tracker_hash": null,
+    "tracker_path": null
+  },
+  "envelope_meta": {
+    "generated_at": "2026-11-04T17:04:17.872Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
+  },
+  "gaps": [],
+  "identity": {
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "4.0.0",
+    "project_id": "43c95df716872c5d",
+    "request_token": "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+  },
+  "runs": [
+    {
+      "generator": "persistGateDecisionReceipt",
+      "phase": "close_out",
+      "run_id": "close-out-2026-11-04",
+      "started_at": null
+    }
+  ],
+  "schema_version": "request-evidence-envelope.v1"
+}

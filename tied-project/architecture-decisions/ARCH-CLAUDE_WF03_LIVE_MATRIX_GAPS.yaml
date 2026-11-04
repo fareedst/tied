@@ -1,0 +1,33 @@
+ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS:
+  cross_references:
+    - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+    - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+    - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  decision: "Align Claude disposable validation with canonical TIED_CLIENT_PROJECT_PATH and resolveTiedLayout tied-project/ paths; optional WF_TRIAL_STRICT_PREFLIGHT fail-closed in workflow-trial orchestrator; document close_out gate via tied_gate_check + envelope build in four-phase batch; Claude live subprocess cwd follows agentstream workspace."
+  implementation_approach:
+    details:
+      - "ASSERT_MCP_JSON_HARNESS_CONTRACT uses pickClientProjectPath + resolveTiedLayout"
+      - "CLOSE_OUT_PLAYBOOK hints in traditional-four-phase-agentstream.yaml"
+      - "WF_TRIAL_CLAUDE_VALIDATION_FAILED handler in wf-trial-claude-preflight.inc.sh"
+    summary: "Bootstrap validation helper shared with MCP base-path pickers; shell preflight policy function; batch YAML close-out playbook text; existing live-driver-bind workspace→spawnCwd seam."
+  name: "Claude wf-03 live matrix gap closure architecture"
+  rationale:
+    benefits:
+      - "Matrix cells report honest preflight"
+      - "Operators can reach WF03_CURSOR_GOLD close_out fingerprint on Claude"
+    problems_solved:
+      - "Close-out gate misuse and missing envelope"
+      - "Fail-open matrix preflight"
+      - "False-negative mcp_json_harness_contract on modern clients"
+    why: "Live trial proved argv parity insufficient when validation, orchestrator preflight, close-out playbook, and cwd contract diverge."
+  status: "Active"
+  traceability:
+    code_annotations: []
+    implementation:
+      - "IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    requirements:
+      - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    tests:
+      - "tools/bootstrap/lib/claude-client-validation.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

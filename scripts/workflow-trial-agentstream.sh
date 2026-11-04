@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -27,6 +27,7 @@ Usage:
   WF_ID examples: wf-02, WF-02, PROMPT-WF-02 (catalog PROMPT-WF-01 … PROMPT-WF-08)
 
 Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-2.5 HARNESS=cursor
+  WF_TRIAL_STRICT_PREFLIGHT=1 fails closed when HARNESS=claude and Claude client validation returns non-zero (default: DIAGNOSTIC and continue).
 
 Disposable bootstrap (no --workspace): client dir under TIED_TEST_ROOT is
   {epoch}-wf-agentstream-{wf-id}-{harness}-{modelBucket}
@@ -157,11 +158,13 @@ printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=
   "$WF_NORM" "$WORKSPACE" "$DRY_RUN" "${HARNESS:-cursor}" "${TAG:-—}" >&2
 
 if [[ "${HARNESS:-cursor}" == "claude" && "$DRY_RUN" -eq 0 ]]; then
+  # shellcheck source=scripts/lib/wf-trial-claude-preflight.inc.sh
+  source "${REPO_ROOT}/scripts/lib/wf-trial-claude-preflight.inc.sh"
   VALIDATION="${REPO_ROOT}/scripts/run-tied-claude-client-validation.mjs"
   if [[ -f "$VALIDATION" ]]; then
-    if ! node "$VALIDATION" --client-root "$WORKSPACE" --no-agentstream-dry-run --with-claude-code-interactive-smoke; then
-      printf 'DIAGNOSTIC: Claude client validation failed or claude CLI unavailable; continuing may weaken MCP parity\n' >&2
-    fi
+    VALIDATION_EXIT=0
+    node "$VALIDATION" --client-root "$WORKSPACE" --no-agentstream-dry-run --with-claude-code-interactive-smoke || VALIDATION_EXIT=$?
+    wf_trial_handle_claude_validation_exit "$VALIDATION_EXIT" || fail "Claude client validation preflight blocked (WF_TRIAL_STRICT_PREFLIGHT)"
   else
     printf 'DIAGNOSTIC: run-tied-claude-client-validation.mjs missing; skip Claude preflight\n' >&2
   fi

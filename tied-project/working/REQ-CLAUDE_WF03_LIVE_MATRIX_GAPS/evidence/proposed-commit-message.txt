@@ -1,0 +1,28 @@
+feat(bootstrap): Claude wf-03 live matrix validation and preflight gaps
+
+Close false-negative Claude client validation (TIED_CLIENT_PROJECT_PATH +
+tied-project/), optional WF_TRIAL_STRICT_PREFLIGHT fail-closed, four-phase
+close-out playbook hints, and live-driver workspace regression test.
+
+REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS
+IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS
+
+Machine close-out: pass (close_out allowed, envelope blocking_gap_count 0).
+Process: partial minimal depth. Ledger: partial band B.
+
+Staging map:
+- tools/bootstrap/lib/claude-client-validation.mjs
+- tools/bootstrap/lib/claude-client-validation.test.mjs
+- tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
+- scripts/lib/wf-trial-claude-preflight.inc.sh
+- scripts/workflow-trial-agentstream.sh
+- docs/demos/traditional-four-phase-agentstream.yaml
+- mcp-server/packages/agentstream/src/live-driver-bind.test.ts
+- tied-project/requirements.yaml + REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml
+- tied-project/architecture-decisions.yaml + ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml
+- tied-project/implementation-decisions.yaml + IMPL-* + pseudocode sidecar
+- tied-project/semantic-tokens.yaml
+- tied-project/citdp/CITDP-REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml
+- tied-project/vocab/agentstream.md
+- tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/ (PLAN, CITDP draft, tracker, evidence incl. manifest + envelope)
+- CHANGELOG.md

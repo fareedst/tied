@@ -1,0 +1,29 @@
+IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS:
+  code_locations:
+    - path: "mcp-server/packages/agentstream/src/claude-driver.ts"
+      role: "spawn cwd"
+    - path: "scripts/workflow-trial-agentstream.sh"
+      role: "preflight policy"
+    - path: "tools/bootstrap/lib/claude-client-validation.mjs"
+      role: "validation contract"
+  cross_references:
+    - "ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+  implementation_approach:
+    details:
+      - "claude-client-validation.mjs"
+      - "docs/demos/traditional-four-phase-agentstream.yaml"
+      - "scripts/lib/wf-trial-claude-preflight.inc.sh"
+    summary: "TDD on claude-client-validation and workflow-trial preflight inc; docs-only close-out playbook; spawn cwd test on collectClaudeStreamFromSpawn."
+  name: "Claude wf-03 live matrix gap closure implementation"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    code_annotations: []
+    requirements:
+      - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    tests:
+      - "mcp-server/packages/agentstream/src/claude-driver.spawn-cwd.test.ts"
+      - "tools/bootstrap/lib/claude-client-validation.test.mjs"
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

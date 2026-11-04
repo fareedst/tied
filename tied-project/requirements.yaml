@@ -396,6 +396,27 @@ REQ-CITDP_ORDERED_LIST_KEYS:
       - "citdp-ordered-keys.test.ts"
       - "citdp-writer.test.ts"
       - "yaml-canonicalizer.test.ts"
+REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS:
+  category: "Tooling"
+  description: "Follow-on after REQ-AGENTSTREAM_CLAUDE_WF_PARITY and REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG: fix false Claude client validation (canonical MCP path env), optional strict workflow-trial preflight, four-phase close-out gate/envelope playbook, and Claude driver client-root cwd so live wf-03 matrix runs can reach close_out like WF03_CURSOR_GOLD."
+  detail_file: "requirements/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml"
+  name: "Claude wf-03 live matrix — validation, preflight, close-out gaps"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+      - "REQ-TIED_CLAUDE_BOOTSTRAP_OPS"
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    related_to:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-TIED_CLAUDE_HARNESS"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+    implementation:
+      - "IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS"
 REQ-CONFIG_DISCOVERY_LOCAL_LAYER:
   category: "Functional"
   detail_file: "requirements/REQ-CONFIG_DISCOVERY_LOCAL_LAYER.yaml"

@@ -28,7 +28,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function tempClient() {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "tied-claude-validation-"));
-  fs.mkdirSync(path.join(root, "tied"), { recursive: true });
+  fs.mkdirSync(path.join(root, "tied-project"), { recursive: true });
+  fs.writeFileSync(path.join(root, "tied-project", "requirements.yaml"), "requirements: {}\n");
   return root;
 }
 
@@ -56,7 +57,7 @@ describe("buildClaudeClientValidationReport [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", ()
 });
 
 describe("assertMcpJsonHarnessContract [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () => {
-  it("passes when harness and TIED_BASE_PATH match client tied/", () => {
+  it("passes when harness and TIED_CLIENT_PROJECT_PATH match client tied-project/", () => {
     const clientRoot = tempClient();
     bootstrapMinimalClaudeClient(clientRoot);
     const result = assertMcpJsonHarnessContract(clientRoot);
@@ -93,7 +94,7 @@ describe("runClaudeCodeInteractiveSmoke [REQ-TIED_CLAUDE_BOOTSTRAP_OPS]", () => 
   it("passes when claude returns expected base_path", () => {
     const clientRoot = tempClient();
     bootstrapMinimalClaudeClient(clientRoot);
-    const expected = path.join(clientRoot, "tied");
+    const expected = path.join(clientRoot, "tied-project");
     const mockSpawn = (cmd, args) => {
       if (cmd === "which") {
         return { status: 0, stdout: "/usr/bin/claude\n", stderr: "" };

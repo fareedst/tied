@@ -1,0 +1,79 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/claude-client-validation.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 374,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 437,
+      "exit_code": 0,
+      "id": "citdp-evidence-2",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server/packages/agentstream && npm test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 1512,
+      "exit_code": 0,
+      "id": "citdp-evidence-3",
+      "result": "passed"
+    }
+  ],
+  "commit": "904895f74809aa3f0c525a7b2d819f4413333611",
+  "covered_tokens": [
+    "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS",
+    "IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS",
+    "REQ-AGENTSTREAM_CLAUDE_WF_PARITY",
+    "REQ-TIED_CLAUDE_BOOTSTRAP_OPS",
+    "REQ-TIED_CLI_MCP_JSON_BASE_PATH",
+    "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "Live close_out pass remains manual unless sponsor enables nightly matrix job",
+    "Trial client 1793810114 is facilitator evidence; not committed"
+  ],
+  "quality_rows": [],
+  "run_id": "close-out-2026-11-04",
+  "schema_version": "verification-evidence-manifest.v1"
+}
