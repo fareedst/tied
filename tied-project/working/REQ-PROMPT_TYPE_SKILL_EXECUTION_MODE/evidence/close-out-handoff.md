@@ -4,7 +4,7 @@
 | --- | --- |
 | date | 2026-11-03 |
 | request_token | REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE |
-| commit_sha | (filled post-commit) |
+| commit_sha | 8aacb8ba |
 
 ## Done
 
@@ -13,8 +13,8 @@
 - Scoped traceable commit (excludes unrelated fixture drift)
 - CHANGELOG [Unreleased] entry
 
-## Follow-up
+## Follow-up (2026-11-03)
 
-- `tied-install.sh --refresh` on client repos for three new skill directories
-- Split `use-skill` off monolithic `tied-plan-citdp.md`
-- Grep stale "15 leaf" prose
+- `tied-install.sh --refresh` on store workspace (see follow-up commit)
+- `use-skill` → `tied-plan-prepare.md` + `tied-plan-citdp-build.md` (done)
+- Inventory prose 15 → 18 in REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE index/detail

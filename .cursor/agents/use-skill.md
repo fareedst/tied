@@ -48,15 +48,13 @@ invocation remainder in this order:
 1. **Refine** — resolve sponsor terms and ambiguity using the canonical
    `tied-refine.md` procedure. Do not start Plan until ambiguity is cleared or
    explicitly accepted.
-2. **Plan** — perform CITDP change definition, impact, risk, and test-strategy
-   analysis; copy a per-task Tracker from
-   `tied-bundle/docs/agent-req-implementation-checklist.yaml`; update the
-   requirement/architecture/implementation stack as required.
-3. **Implement** — follow the Tracker and canonical `tied-implement.md`.
-   Do not start code until IMPL pseudo-code is complete and the test strategy
-   is in place; every block must have REQ/ARCH/IMPL token comments and
-   pseudo-code validation must pass. Write RED tests before production code,
-   then validate modules independently before composition.
+2. **Plan (prepare)** — canonical `tied-plan-prepare.md` (CITDP analysis and
+   test-strategy design; no RED test files).
+3. **Plan (RED)** — canonical `tied-plan-citdp-build.md`; run
+   `tied_checklist_gate_validate` for `pre_implementation` before RED tests.
+4. **Implement** — follow the Tracker and canonical `tied-implement.md`.
+   Every block must have REQ/ARCH/IMPL token comments and pseudo-code
+   validation must pass; validate modules independently before composition.
 
 Keep project YAML changes in project-owned `tied/` records; never edit
 `tied/methodology/`. Run language lint, TIED YAML validation, the verification

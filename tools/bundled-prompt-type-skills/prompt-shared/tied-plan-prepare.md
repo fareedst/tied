@@ -2,7 +2,7 @@
 
 [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE] [IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
 
-For **`add-feature`** and **`refine-plan`** ([prompt-execution-mode.md](prompt-execution-mode.md) **plan** mode). Execute leaves use [tied-plan-citdp-build.md](tied-plan-citdp-build.md) for RED tests.
+For **`add-feature`**, **`refine-plan`**, **`non-tied-plan`**, and **`non-tied-refine`** ([prompt-execution-mode.md](prompt-execution-mode.md) **plan** mode). **`use-skill`** runs this prepare step then continues to [tied-plan-citdp-build.md](tied-plan-citdp-build.md) in the same invocation. Execute leaves (`build-plan`, `non-tied-build`) use [tied-plan-citdp-build.md](tied-plan-citdp-build.md) for RED tests.
 
 ## Plan (when the request is refined)
 

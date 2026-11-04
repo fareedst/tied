@@ -159,6 +159,8 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     const useSkill = readAgent("use-skill").body;
     assert.match(useSkill, /do not start plan until ambiguity is cleared/i);
     assert.match(useSkill, /import a set of skills/i);
+    assert.match(useSkill, /tied-plan-prepare\.md/);
+    assert.match(useSkill, /tied-plan-citdp-build\.md/);
 
     const leapAdHoc = readAgent("leap-ad-hoc").body;
     assert.match(leapAdHoc, /Read Ad-Hoc/);

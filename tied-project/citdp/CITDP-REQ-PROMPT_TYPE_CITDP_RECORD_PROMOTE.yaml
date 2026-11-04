@@ -1,7 +1,7 @@
 CITDP-REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   change_definition:
     current_behavior: "Prompt-type taxonomy offers non-tied-plan or full TIED leaves without CITDP-only or CITDP-promotion paths."
-    desired_behavior: "citdp-record and citdp-promote leaves ship with tests and docs; 15 leaf inventory."
+    desired_behavior: "citdp-record and citdp-promote leaves ship with tests and docs; 18 leaf inventory (was 15 at initial ship; extended by non-tied-refine/build/close)."
     non_goals:
       - "MCP citdp_record_write schema changes"
     success_criteria:

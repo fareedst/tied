@@ -318,4 +318,12 @@ describe("prompt-type skill bundle", () => {
     }
     assert.equal(LEAF_SKILLS.length, 18, "leaf inventory must be 18 prompt types");
   });
+
+  it("splits use-skill Plan across prepare and RED build docs [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]", () => {
+    const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
+    const useSkill = fs.readFileSync(path.join(bundleRoot, "use-skill", "SKILL.md"), "utf8");
+    assert.match(useSkill, /tied-plan-prepare\.md/);
+    assert.match(useSkill, /tied-plan-citdp-build\.md/);
+    assert.doesNotMatch(useSkill, /tied-plan-citdp\.md/);
+  });
 });

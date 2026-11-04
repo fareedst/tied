@@ -12,8 +12,7 @@ This skill is the workflow source of truth for client prompt-type invocation.
 `tied-install.sh` installs it under `.cursor/skills/use-skill/`. Task wrappers under
 `.cursor/agents/` remain TIED-source development artifacts only.
 [REQ-PROMPT_TYPE_GLOBAL_SKILLS] [ARCH-PROMPT_TYPE_GLOBAL_SKILLS]
-[IMPL-PROMPT_TYPE_GLOBAL_SKILLS]
-
+[IMPL-PROMPT_TYPE_GLOBAL_SKILLS] [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]
 
 ## Inputs
 
@@ -30,12 +29,15 @@ Import a set of skills and apply them to this project. Process the
 invocation remainder in this order:
 
 1. **Refine** — [tied-refine.md](../prompt-shared/tied-refine.md)
-2. **Plan** — [tied-plan-citdp.md](../prompt-shared/tied-plan-citdp.md)
-3. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
+2. **Plan (prepare)** — [tied-plan-prepare.md](../prompt-shared/tied-plan-prepare.md) ([methodology-surface-enrollment-advisory.md](../prompt-shared/methodology-surface-enrollment-advisory.md))
+3. **Plan (RED)** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md)
+4. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
+
+Monolithic leaf: steps 2–4 run in one invocation (unlike plan-mode `add-feature` / `refine-plan`, which stop after prepare).
 
 ## Gates
 
-Same as add-feature.
+Same as add-feature through Implement (including `pre_implementation` before RED in step 3).
 
 ## Forbidden
 

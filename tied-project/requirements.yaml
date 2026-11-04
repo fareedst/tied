@@ -1711,7 +1711,7 @@ REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   satisfaction_criteria:
     - criterion: "citdp-promote SKILL.md requires a named CITDP file and follows build-plan-class gates for promotion."
     - criterion: "citdp-record SKILL.md installs under .cursor/skills/ and cites citdp-only-boundary.md with no Implement section."
-    - criterion: "prompt-type-skills.test.ts and prompt-type-subagent.test.ts cover 15 leaf prompt types including citdp-record and citdp-promote."
+    - criterion: "prompt-type-skills.test.ts and prompt-type-subagent.test.ts cover 18 leaf prompt types including citdp-record and citdp-promote."
     - criterion: "PROMPT_TYPE_LEAF_IDS and LEAF_PROMPT_TYPES include citdp-record and citdp-promote."
   status: "Implemented"
   traceability:

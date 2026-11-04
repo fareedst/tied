@@ -1,6 +1,6 @@
 # Plan (when the request is refined)
 
-> **Plan-mode leaves:** `add-feature` and `refine-plan` use [tied-plan-prepare.md](tied-plan-prepare.md) (no RED in plan mode). This file remains for **`use-skill`** and other leaves that still combine plan + RED in one skill until split.
+> **Plan-mode leaves:** `add-feature`, `refine-plan`, `non-tied-plan`, and `non-tied-refine` use [tied-plan-prepare.md](tied-plan-prepare.md) (no RED). **`use-skill`** uses prepare + [tied-plan-citdp-build.md](tied-plan-citdp-build.md) in one invocation. This legacy file keeps the combined plan+RED text for reference; prefer the split docs for new links.
 
 ## Plan (when the request is refined)
 

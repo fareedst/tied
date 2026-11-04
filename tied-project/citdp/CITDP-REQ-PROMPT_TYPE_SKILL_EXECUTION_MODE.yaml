@@ -38,7 +38,7 @@ CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
       - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
       - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
   leap_feedback:
-    divergences_from_analysis: "use-skill still references monolithic tied-plan-citdp.md; deferred follow-up per PLAN non-goals."
+    divergences_from_analysis: "use-skill split to tied-plan-prepare.md + tied-plan-citdp-build.md (follow-up after initial close-out)."
     record_status: "complete"
     tied_stack_updates_required: []
   persist_policy: "Canonical under tied-project/citdp/; working copy remains plan artifact."
@@ -74,7 +74,7 @@ CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
         owner: "sponsor"
         rationale: "No checklist Tracker for store-repo prompt-type bundle change; static e2e and CITDP persist satisfy docs/skills proof boundary."
     residual_risks:
-      - "Stale 15-leaf prose outside grep list until follow-up audit"
+      - "Historical plans and JEV taxonomy may still cite 13-leaf counts where not inventory-critical"
   tdd_sequence:
     summary: "TIED stack; shared markdown and leaves; RED e2e; GREEN bundle; pseudocode validate; CITDP persist; scoped commit."
   test_strategy:
