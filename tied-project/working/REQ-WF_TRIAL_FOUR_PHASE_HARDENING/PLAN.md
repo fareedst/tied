@@ -16,7 +16,7 @@
 | Process | **partial** — minimal; no `--sync-dispositions` |
 | Ledger | **partial** — reconcile at close-out gates |
 
-**Traceable commit:** see [traceable-commit-evidence.md](./evidence/traceable-commit-evidence.md)
+**Traceable commit:** `3bb1dd1be363f38cf23eb5ba183358388f007587` — [traceable-commit-evidence.md](./evidence/traceable-commit-evidence.md)
 
 ---
 

@@ -14,4 +14,4 @@
 
 ## Commit
 
-See [traceable-commit-evidence.md](./traceable-commit-evidence.md) for SHA after scoped traceable commit.
+**Commit:** `3bb1dd1be363f38cf23eb5ba183358388f007587` — [traceable-commit-evidence.md](./traceable-commit-evidence.md)
