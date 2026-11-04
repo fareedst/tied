@@ -237,6 +237,8 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | PROMPT-WF-01 | seven IDE + agentstream orchestrator | `1793483171-wf-01-*` … `1793560725-wf-01-muse-spark13-med`; `1793604353-wf-agentstream-wf-01` (`workflow-trial-agentstream wf-01`) | [IDE + agentstream comparison](wf-01-four-model-implementation-comparison.md) · [agentstream readout](trial-readout-PROMPT-WF-01-composer25-1793604353-wf-agentstream-wf-01.md) |
 | PROMPT-WF-02 | nine-model cohort | `1793562432-wf-02-composer25` … `1793592181-wf-02-claude-opus55-med` | [Nine-model comparison](wf-02-nine-model-implementation-comparison.md) + `trial-readout-PROMPT-WF-02-*` |
 | PROMPT-WF-03 | agentstream orchestrator | `1793605811-wf-agentstream-wf-03` (`workflow-trial-agentstream wf-03`) | [agentstream readout](trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md) |
+| PROMPT-WF-03 | Claude Haiku 5.5 / agentstream | `1793815895-wf-agentstream-wf-03-claude-claudehaiku55` | [Claude readout](trial-readout-PROMPT-WF-03-claudehaiku55-1793815895-wf-agentstream-wf-03-claude-claudehaiku55.md) (build-plan on disk; **close-out incomplete**) |
+| PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1793817075-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md) (full four-turn close-out; reconcile **not_run**) |
 
 Maintained by **`@record-wf-trial`**.
 
