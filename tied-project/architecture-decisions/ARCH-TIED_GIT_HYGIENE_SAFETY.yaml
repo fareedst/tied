@@ -10,11 +10,11 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
       - "IMPL-TIED_GIT_HYGIENE"
     requirements:
       - "REQ-TIED_GIT_HYGIENE"
-  decision: "Preview default; apply requires explicit allowlist; reject tracked deletion."
+  decision: "Preview default; apply requires explicit allowlist; reject tracked deletion; store test-all-hygiene uses git restore plus untracked-only rm with frozen lists (no MCP apply parity required)."
   metadata:
     last_updated:
-      author: "build-plan"
-      date: "2026-10-04"
-      reason: "mint"
+      author: "AI Agent"
+      date: "2026-11-03"
+      reason: "LEAP test-all-hygiene shell"
   name: "Git hygiene safety boundary"
-  status: "Planned"
+  status: "Implemented"

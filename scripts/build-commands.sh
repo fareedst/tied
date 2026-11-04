@@ -284,6 +284,76 @@ test_all() {
 }
 alias test-all=test_all
 
+# [REQ-TIED_GIT_HYGIENE] [IMPL-TIED_GIT_HYGIENE] Restore tracked + remove untracked artifacts commonly dirtied by test-mcp / test-all
+# (not evidence pins). Wipe map: working/post-session/git-hygiene-clear-workspace-2026-11-01.md
+test_all_hygiene() {
+  local root="${_BUILD_COMMANDS_REPO_ROOT}"
+  local dry_run=0
+  if [[ "${1:-}" == "--dry-run" || "${TEST_ALL_HYGIENE_DRY_RUN:-}" == 1 ]]; then
+    dry_run=1
+  fi
+
+  local -a restore_paths=(
+    "mcp-server/test/fixtures/adversarial-inquiry-go-mode-b/mini-project/working/REQ-FIXTURE-ADVERSARIAL/evidence/request-evidence-envelope.v1.json"
+    "mcp-server/test/fixtures/adversarial-inquiry-mode-b/mini-project/working/REQ-FIXTURE-ADVERSARIAL/evidence/request-evidence-envelope.v1.json"
+    "mcp-server/test/fixtures/corpus-graph/mini-repo/tied-bundle/reports/corpus-graph/corpus-graph-index.v1.json"
+    "mcp-server/test/fixtures/source-graph/mini-repo/tied-bundle/reports/source-graph/source-graph-index.v1.json"
+    "tied-bundle/reports/source-graph/source-graph-index.v1.json"
+    "tied-project/working/evaluation/envelope-gap-report.v1.yaml"
+    "working/evaluation/envelope-gap-report.v1.yaml"
+    "tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/regression-manifest.json"
+    "tied-project/working/REQ-TIED_JEV_CONTEXT_LOG_PRUNING/evidence/context-pruning-benchmark.v1.json"
+  )
+
+  local -a delete_untracked=(
+    "tied-project/citdp/CITDP-REQ-ACTIVATION.yaml"
+    "tied-project/citdp/CITDP-REQ-NESTED.yaml"
+    "tied-project/citdp/CITDP-REQ-PRESERVE.yaml"
+    "tied-project/citdp/CITDP-REQ-UNIT_TEST.yaml"
+    "tied-project/citdp/CITDP-REQ-UPGRADE.yaml"
+    "tied-project/citdp/CITDP-REQ-UPGRADE-MISSING.yaml"
+  )
+
+  local p abs
+  echo "DEBUG: test-all-hygiene: project_root=${root} dry_run=${dry_run}"
+
+  for p in "${restore_paths[@]}"; do
+    if ! git -C "${root}" ls-files --error-unmatch -- "${p}" >/dev/null 2>&1; then
+      continue
+    fi
+    if (( dry_run )); then
+      echo "DEBUG: test-all-hygiene: would git restore -- ${p}"
+    else
+      git -C "${root}" restore -- "${p}" 2>/dev/null || true
+      echo "DEBUG: test-all-hygiene: git restore -- ${p}"
+    fi
+  done
+
+  for p in "${delete_untracked[@]}"; do
+    abs="${root}/${p}"
+    if [[ ! -e "${abs}" ]]; then
+      continue
+    fi
+    if git -C "${root}" ls-files --error-unmatch -- "${p}" >/dev/null 2>&1; then
+      echo "DEBUG: test-all-hygiene: skip delete (tracked): ${p}" >&2
+      continue
+    fi
+    if (( dry_run )); then
+      echo "DEBUG: test-all-hygiene: would rm -f ${p}"
+    else
+      rm -f "${abs}"
+      echo "DEBUG: test-all-hygiene: rm -f ${p}"
+    fi
+  done
+
+  if (( dry_run )); then
+    echo "DEBUG: test-all-hygiene: dry-run complete (no changes)"
+  else
+    echo "DEBUG: test-all-hygiene: complete; run git status to verify"
+  fi
+}
+alias test-all-hygiene=test_all_hygiene
+
 # --- Close-out gates (REQ checklist + evidence envelope) ---
 
 run_close_out_gates() {

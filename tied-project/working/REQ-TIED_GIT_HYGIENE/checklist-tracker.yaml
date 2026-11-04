@@ -1,0 +1,156 @@
+copy_hygiene: "execution_evidence.request = REQ-TIED_GIT_HYGIENE; test-all-hygiene close-out wave."
+description: "Minimal tracker — store test-all-hygiene shell + LEAP on existing git hygiene stack."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "tied-project/working/REQ-TIED_GIT_HYGIENE/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "session-bootstrap"
+    - "sync-tied-stack"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_GIT_HYGIENE"
+record_identity:
+  change_request_id: "REQ-TIED_GIT_HYGIENE"
+  citdp_path: "tied-project/working/REQ-TIED_GIT_HYGIENE/CITDP-REQ-TIED_GIT_HYGIENE.yaml"
+  gate_policy: "default"
+  profile_depth: "minimal"
+  recorded_at: "2026-11-04"
+  req_token: "REQ-TIED_GIT_HYGIENE"
+  title: "Git hygiene test-all-hygiene shell"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "default"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/PLAN.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/CITDP-REQ-TIED_GIT_HYGIENE.yaml"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/CITDP-REQ-TIED_GIT_HYGIENE.yaml"
+    slug: "impact-discovery"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/CITDP-REQ-TIED_GIT_HYGIENE.yaml"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/test-strategy.md"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Shell wipe map; minimal depth."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/PLAN.md"
+    slug: "session-bootstrap"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_GIT_HYGIENE.yaml"
+    slug: "author-requirement"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/architecture-decisions/ARCH-TIED_GIT_HYGIENE_SAFETY.yaml"
+    slug: "author-architecture"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/implementation-decisions/IMPL-TIED_GIT_HYGIENE.yaml"
+    slug: "persist-implementation-records"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tools/bootstrap/build-commands-test-all-hygiene.test.mjs"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/quality-manifest/test-all-hygiene.stdout.txt"
+    slug: "unit-test-green"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_GIT_HYGIENE.yaml"
+    slug: "sync-tied-stack"
+    tracking:
+      status: "completed"
+  - disposition: "pending"
+    evidence_refs:
+      - "tied-project/citdp/CITDP-REQ-TIED_GIT_HYGIENE.yaml"
+    slug: "persist-citdp-record"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    evidence_refs:
+      - ".gitignore"
+    slug: "gitignore-close-out-hygiene"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    evidence_refs:
+      - "CHANGELOG.md"
+    slug: "user-facing-release-notes"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "sub-close-out-evidence-sync"
+    tracking:
+      status: "pending"
+  - disposition: "pending"
+    evidence_refs: []
+    slug: "traceable-commit"
+    tracking:
+      status: "pending"

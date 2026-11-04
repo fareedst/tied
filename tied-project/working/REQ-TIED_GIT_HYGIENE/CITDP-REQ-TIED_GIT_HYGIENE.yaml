@@ -1,0 +1,100 @@
+change_definition:
+  current_behavior: |
+    tied_git_hygiene MCP covers preview/apply for plan close-out; after test-all or test-mcp
+    the store checkout accumulates tracked regenerable diffs and untracked gate-test CITDP litter
+    with no frozen operator wipe map in build-commands.
+  desired_behavior: |
+    scripts/build-commands.sh exposes test-all-hygiene (and --dry-run) restoring frozen tracked
+    paths and deleting untracked CITDP gate fixtures only; LEAP documents RUN_STORE_TEST_ALL_HYGIENE;
+    composition test locks alias and dry-run non-mutation.
+  non_goals:
+    - "Parity with MCP apply for shell path"
+    - "Auto-run hygiene inside test-all without operator invoke"
+    - "Commit or push from hygiene helpers"
+  success_criteria:
+    - "test_all_hygiene restores listed tracked paths and rm -f untracked litter when not indexed"
+    - "Dry-run makes no porcelain delta"
+    - "how test documents test-all-hygiene"
+    - "REQ/ARCH/IMPL status Implemented with test traceability"
+  unchanged_behavior: |
+    tied_git_hygiene MCP preview/apply semantics unchanged from REQ-MCP-PROJECT-OPERATIONS wave.
+completion_criteria:
+  activation:
+    phase: "verification"
+    request_token: "REQ-TIED_GIT_HYGIENE"
+    run_id: "close-out-git-hygiene-test-all-20261104"
+  checklist_gate:
+    dispositions:
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
+    fail_closed: true
+    phases:
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
+  verification_gate_notes: "node --test build-commands-test-all-hygiene.test.mjs; git-hygiene MCP unit tests unchanged."
+evidence:
+  command_seq:
+    - "node --test tools/bootstrap/build-commands-test-all-hygiene.test.mjs"
+    - "cd mcp-server && npm test -- project-operations/git-hygiene.test.ts"
+  manifest_reference: "working/REQ-TIED_GIT_HYGIENE/evidence/"
+  proof_boundaries:
+    - "Shell wipe map frozen in build-commands; operators refresh lists when new litter patterns appear"
+impact_analysis:
+  impl_inventory_notes: "Extends existing git hygiene stack; no new MCP surface."
+  modules_or_boundaries: |
+    scripts/build-commands.sh, scripts/_build_commands_cli_guide.inc.sh (already documents alias),
+    tools/bootstrap/build-commands-test-all-hygiene.test.mjs,
+    tied-project REQ/ARCH/IMPL YAML and IMPL pseudo-code sidecar.
+  tied_tokens_affected:
+    - "REQ-TIED_GIT_HYGIENE"
+    - "ARCH-TIED_GIT_HYGIENE_SAFETY"
+    - "IMPL-TIED_GIT_HYGIENE"
+  tied_tokens_new: []
+leap_feedback:
+  divergences_from_analysis: "none"
+  record_status: "implemented"
+  tied_stack_updates_required: []
+record_identity:
+  change_request_id: "REQ-TIED_GIT_HYGIENE"
+  citdp_id: "CITDP-REQ-TIED_GIT_HYGIENE"
+  status: "draft"
+risk_analysis:
+  abuse_cases: []
+  adversarial_inquiry:
+    assurance_profile: "baseline-functional"
+    close_out_inquiry_waiver: null
+    counterexamples:
+      - "Hygiene rm -f deletes tracked CITDP by mistake"
+      - "Restore list omits new test-all churn paths"
+    depth_tier: "minimal"
+    disconfirming_observations:
+      - "delete loop skips when git ls-files matches"
+      - "build-commands-test-all-hygiene.test.mjs dry-run asserts porcelain unchanged"
+    eligibility_triggers_matched: []
+    evidence_references:
+      - "tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/not-applicable-receipt.v1.json"
+      - "tools/bootstrap/build-commands-test-all-hygiene.test.mjs"
+    falsification_questions:
+      - "Does --dry-run leave git status identical?"
+    gate_policy: "default"
+    prior_depth_tier: null
+    rationale: "Store shell operator; no auth or network expansion."
+    research_profile: "integrated-agent"
+  risks:
+    - description: "Frozen wipe map stale after new gate tests add litter paths."
+      id: "RISK-GH-001"
+      likelihood: "Medium"
+      mitigation: "Document refresh in wipe map comment; extend test when new patterns observed."
+      severity: "Low"
+test_strategy:
+  module_validation:
+    - boundary: "shell alias + dry-run"
+      module: "test_all_hygiene"
+      tests: "build-commands-test-all-hygiene.test.mjs"
+    - boundary: "MCP preview/apply unchanged"
+      module: "git_hygiene"
+      tests: "git-hygiene.test.ts"
+  summary: "RED composition test for shell; existing MCP unit tests remain green."

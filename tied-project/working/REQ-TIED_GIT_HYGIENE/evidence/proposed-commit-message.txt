@@ -1,0 +1,31 @@
+feat(git-hygiene): add store test-all-hygiene shell
+
+Post test-all/test-mcp, operators run test-all-hygiene to restore frozen
+tracked regenerable paths and delete untracked gate-test CITDP litter;
+--dry-run leaves porcelain unchanged.
+
+[REQ-TIED_GIT_HYGIENE] [ARCH-TIED_GIT_HYGIENE_SAFETY] [IMPL-TIED_GIT_HYGIENE]
+
+Completion signals: close_out allowed; envelope blocking_gaps=0; scoped commit.
+
+Staging map:
+- scripts/build-commands.sh
+- tools/bootstrap/build-commands-test-all-hygiene.test.mjs
+- tied-project/requirements/REQ-TIED_GIT_HYGIENE.yaml
+- tied-project/architecture-decisions/ARCH-TIED_GIT_HYGIENE_SAFETY.yaml
+- tied-project/implementation-decisions/IMPL-TIED_GIT_HYGIENE.yaml
+- tied-project/implementation-decisions/IMPL-TIED_GIT_HYGIENE-pseudocode.md
+- tied-project/citdp/CITDP-REQ-TIED_GIT_HYGIENE.yaml
+- tied-project/working/REQ-TIED_GIT_HYGIENE/PLAN.md
+- tied-project/working/REQ-TIED_GIT_HYGIENE/CITDP-REQ-TIED_GIT_HYGIENE.yaml
+- tied-project/working/REQ-TIED_GIT_HYGIENE/checklist-tracker.yaml
+- tied-project/working/REQ-TIED_GIT_HYGIENE/test-strategy.md
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/close-out-handoff.md
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/git-hygiene-receipt-2026-11-04.md
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/traceable-commit-evidence.md
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/proposed-commit-message.txt
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/gate-pseudocode-validation-evidence.md
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/not-applicable-receipt.v1.json
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/sub-adversarial-inquiry-pass-na.md
+- tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/verification-evidence-manifest.v1.json
+- CHANGELOG.md

@@ -53,3 +53,17 @@ procedure REGISTER_TIED_GIT_HYGIENE_MCP:
     EFFECTS: pure
   IF apply THEN CALL APPLY_GIT_HYGIENE ELSE CALL PREVIEW_GIT_HYGIENE
   RETURN JSON
+
+procedure RUN_STORE_TEST_ALL_HYGIENE:
+  # [IMPL-TIED_GIT_HYGIENE] [ARCH-TIED_GIT_HYGIENE_SAFETY] [REQ-TIED_GIT_HYGIENE] How: scripts/build-commands.sh test-all-hygiene restores tracked test-all churn and deletes known gate-test CITDP litter; complements MCP, does not commit.
+  Contract:
+    INPUT: { dry_run?: boolean, project_root: store checkout root }
+    OUTPUT: { restored: string[], deleted_untracked: string[], skipped: string[] }
+    PRE: git work tree; allowlists frozen in build-commands.sh; tracked paths never rm -f
+    POST: no git commit or push; dry_run makes no filesystem changes
+    FAILURE_MODES: skip_delete_when_tracked
+    DATA: restore_paths; delete_untracked basenames under tied-project/citdp/
+    EFFECTS: IO
+  FOR EACH tracked path IN restore_paths WHEN indexed THEN git restore
+  FOR EACH litter path IN delete_untracked WHEN present AND untracked THEN rm -f
+  RETURN summary diagnostics

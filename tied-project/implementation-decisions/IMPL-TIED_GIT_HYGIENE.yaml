@@ -7,12 +7,18 @@ IMPL-TIED_GIT_HYGIENE:
       - "REQ-TIED_GIT_HYGIENE"
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_GIT_HYGIENE-pseudocode.md"
   implementation_approach:
-    details: []
-    summary: "git-hygiene.ts with bootstrap gitignore bridge"
+    details:
+      - "mcp-server/src/project-operations/git-hygiene.ts — tied_git_hygiene MCP"
+      - "scripts/build-commands.sh — test-all-hygiene store operator alias"
+    summary: "git-hygiene.ts with bootstrap gitignore bridge; test-all-hygiene shell wipe map for post-test-all drift"
   metadata:
     last_updated:
-      author: "build-plan"
-      date: "2026-10-04"
-      reason: "mint"
+      author: "AI Agent"
+      date: "2026-11-03"
+      reason: "LEAP test-all-hygiene shell criterion"
   name: "Git hygiene implementation"
-  status: "Planned"
+  status: "Implemented"
+  traceability:
+    tests:
+      - "mcp-server/src/project-operations/git-hygiene.test.ts"
+      - "tools/bootstrap/build-commands-test-all-hygiene.test.mjs"
