@@ -1,0 +1,52 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 441,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    }
+  ],
+  "commit": "b0c7e8543f6446efb7c7d4a5c02c0baa58b91e09",
+  "covered_tokens": [
+    "REQ-GOAGENT-FEATURESPEC-BATCH",
+    "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE",
+    "REQ-TIED_SETUP"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "Historical trial readouts keep legacy dirname examples; catalog notes new shape for new runs"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-2026-11-04-wf-trial-tag-v2",
+  "schema_version": "verification-evidence-manifest.v1"
+}

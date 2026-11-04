@@ -2838,3 +2838,10 @@ ARCH-VOCABULARY_OFFLINE_VIEW:
   detail_file: "architecture-decisions/ARCH-VOCABULARY_OFFLINE_VIEW.yaml"
   name: "Offline HTML proof boundary"
   status: "Active"
+ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
+  name: "WF trial disposable tag composition at orchestrator bootstrap"
+  related_requirements:
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  status: "Active"
+  summary: "Tag built in scripts/lib/wf-trial-disposable-tag.inc.sh before new-tied-client.mjs; validateDisposableTag unchanged."

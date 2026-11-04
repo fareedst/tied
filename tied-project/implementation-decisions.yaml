@@ -3431,3 +3431,11 @@ IMPL-VOCABULARY_VIEWER_STATE:
   detail_file: "implementation-decisions/IMPL-VOCABULARY_VIEWER_STATE.yaml"
   name: "Pure viewer state encode/decode"
   status: "Active"
+IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
+  name: "Shell tag helpers for workflow-trial-agentstream"
+  related_architecture:
+    - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  related_requirements:
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  status: "Active"

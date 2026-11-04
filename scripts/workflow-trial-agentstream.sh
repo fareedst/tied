@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -28,6 +28,10 @@ Usage:
 
 Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-2.5 HARNESS=cursor
 
+Disposable bootstrap (no --workspace): client dir under TIED_TEST_ROOT is
+  {epoch}-wf-agentstream-{wf-id}-{harness}-{modelBucket}
+  modelBucket from MODEL_CONFIG (else MODEL_SLUG), lowercase, dots and hyphens removed.
+
 Run mode: live four-phase agentstream by default (four agent sessions). Use --dry-run first to verify --model wiring.
 
 Requires: GNU awk (gawk), built store CLI (./build-workspace.sh), gawk on PATH.
@@ -48,6 +52,9 @@ normalize_wf_id() {
 normalize_wf_tag_suffix() {
   normalize_wf_id "$1" | tr '[:upper:]' '[:lower:]'
 }
+
+# shellcheck source=lib/wf-trial-disposable-tag.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-disposable-tag.inc.sh"
 
 extract_feature_remainder() {
   local wf_id="$1"
@@ -117,6 +124,10 @@ WF_NORM="$(normalize_wf_id "$WF_ID")"
 CATALOG="${REPO_ROOT}/${CATALOG_REL}"
 [[ -f "$CATALOG" && -r "$CATALOG" ]] || fail "catalog missing: $CATALOG"
 
+export MODEL_SLUG="${MODEL_SLUG:-composer-2.5-fast}"
+export MODEL_CONFIG="${MODEL_CONFIG:-composer-2.5}"
+export HARNESS="${HARNESS:-cursor}"
+
 if [[ -n "$WORKSPACE_ARG" ]]; then
   case "$WORKSPACE_ARG" in
     /*) export WORKSPACE="$WORKSPACE_ARG" ;;
@@ -125,7 +136,7 @@ if [[ -n "$WORKSPACE_ARG" ]]; then
   [[ -d "$WORKSPACE" ]] || fail "WORKSPACE is not a directory: $WORKSPACE"
 else
   TEST_ROOT="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
-  TAG="wf-agentstream-$(normalize_wf_tag_suffix "$WF_ID")"
+  TAG="$(build_wf_trial_disposable_tag "$WF_ID")"
   WORKSPACE="$(
     node "${REPO_ROOT}/tools/bootstrap/new-tied-client.mjs" \
       --disposable --out-path \
@@ -139,14 +150,11 @@ fi
 BODY="$(extract_feature_remainder "$WF_NORM" "$CATALOG")"
 [[ -n "$BODY" ]] || fail "empty catalog extract for PROMPT-${WF_NORM} (check ${CATALOG})"
 
-export MODEL_SLUG="${MODEL_SLUG:-composer-2.5-fast}"
-export MODEL_CONFIG="${MODEL_CONFIG:-composer-2.5}"
-export HARNESS="${HARNESS:-cursor}"
 PROMPT_PREFACE="${PROMPT_PREFACE:-$PROMPT_PREFACE_DEFAULT}"
 export FEATURE_REMAINDER="${PROMPT_PREFACE}${BODY}"
 
-printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=%s\n' \
-  "$WF_NORM" "$WORKSPACE" "$DRY_RUN" "${HARNESS:-cursor}" >&2
+printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=%s disposable_tag=%s\n' \
+  "$WF_NORM" "$WORKSPACE" "$DRY_RUN" "${HARNESS:-cursor}" "${TAG:-—}" >&2
 
 if [[ "${HARNESS:-cursor}" == "claude" && "$DRY_RUN" -eq 0 ]]; then
   VALIDATION="${REPO_ROOT}/scripts/run-tied-claude-client-validation.mjs"

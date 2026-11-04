@@ -41,7 +41,7 @@ Artifacts:
 - Batch: [traditional-four-phase-agentstream.yaml](traditional-four-phase-agentstream.yaml)
 - Wrapper: [run-traditional-four-phase-agentstream.sh](../../scripts/run-traditional-four-phase-agentstream.sh)
 - Orchestrator: [workflow-trial-agentstream.sh](../../scripts/workflow-trial-agentstream.sh) (bootstrap + catalog extract + wrapper; `source scripts/build-commands.sh && workflow-trial-agentstream wf-02 --dry-run`)
-- Factory path: `test-new-tied-client --out-path --tag wf-agentstream-wf-02` prints absolute client root on stdout (progress on stderr)
+- Factory path: orchestrator bootstrap uses `--tag wf-agentstream-{wf-id}-{harness}-{modelBucket}` (e.g. `wf-agentstream-wf-03-cursor-composer25`); full dir `{epoch}-{tag}`. Manual: `test-new-tied-client --out-path --tag …` prints absolute client root on stdout (progress on stderr). Historical trials may use the shorter `wf-agentstream-wf-NN` tag only.
 - Smoke (2026-11-02): disposable `1793597183-wf-agentstream`, PROMPT-WF-02, four agentstream sessions — [smoke note](../../tied-project/working/PLAN-TRADITIONAL-FOUR-PHASE-AGENTSTREAM/evidence/smoke-1793597183-wf-agentstream.md)
 
 Preload: linked disposable clients may lack `tied-project/agent-preload-contract.yaml`; the wrapper falls back to `tied-bundle/docs/agent-preload-contract-template.yaml` when present. — **Jev W5 harness off by default** (`unset AGENTSTREAM_JEV_HARNESS` unless `TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1`).

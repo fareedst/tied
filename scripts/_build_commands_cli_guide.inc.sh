@@ -160,6 +160,9 @@ _how_test() {
   test-all                   fail-closed: build-mcp, test-mcp, test-bootstrap-layered-install,
                              CLI smoke, validate-tied, validate-vocab, lint-tied (recommended pre-push);
                              errexit isolated in a subshell (safe after source build-commands.sh)
+  test-all-hygiene [--dry-run]
+                             restore tracked test/regenerable churn + remove gate-test CITDP litter
+                             under tied-project/citdp/ (after test-all when not pinning evidence)
   test-mcp                   mcp-server unit/composition tests (includes Tier 1 workspace dist tests,
                              dist/e2e/new-tied-client.test.js install passthrough)
   test-bootstrap-layered-install
@@ -266,6 +269,8 @@ _how_smoke() {
   test-new-tied-client           same under $TIED_TEST_ROOT/<timestamp> or <timestamp>-<tag>
   test-new-tied-client --out-path --tag X   stdout: absolute client path (disposable only)
   workflow-trial-agentstream wf-02 [--dry-run]   bootstrap + PROMPT-WF extract + four-phase agentstream
+                                 disposable dir: {epoch}-wf-agentstream-{wf}-{harness}-{model}
+                                 model from MODEL_CONFIG (else MODEL_SLUG), HARNESS=cursor|claude
                                  tied-install linked + lint + G4 onboarding audit
                                  (tied-new-client-audit.v1.json) + mcp + git
                                  install flags: how install-matrix

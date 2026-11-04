@@ -1,0 +1,30 @@
+REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
+  category: "Tooling"
+  name: "WF trial agentstream disposable tag includes harness and model"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Aligns with wf-02-composer25 facilitator naming"
+      - "Side-by-side cursor vs claude runs without manual --tag"
+    problems_solved:
+      - "Colliding wf-agentstream-wf-NN tags under TIED_TEST_ROOT"
+      - "Hard to correlate facilitator readouts with harness/model cells"
+    why: "Catalog matrix fairness requires distinct disposable clients per PROMPT-WF-NN × harness × model configuration; dirname must encode harness and model bucket."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  satisfaction_criteria:
+    - criterion: "Default bootstrap --tag is wf-agentstream-{wf-id}-{harness}-{modelBucket} with modelBucket from MODEL_CONFIG first else MODEL_SLUG (lowercase, no dots or hyphens)."
+      id: "SC-WF-TAG-SHAPE"
+    - criterion: "workflow-trial-agentstream-sh.test.mjs covers tag helper cases."
+      id: "SC-WF-TAG-TEST"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    implementation:
+      - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"

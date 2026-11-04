@@ -8,7 +8,26 @@ import { fileURLToPath } from "node:url";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const SCRIPT = path.join(REPO_ROOT, "scripts/workflow-trial-agentstream.sh");
+const TAG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-disposable-tag.inc.sh");
 const TIED_CLI = path.join(REPO_ROOT, "mcp-server/packages/cli/dist/index.js");
+
+function buildDisposableTag(wfId, envOverrides = {}) {
+  const env = { ...process.env, NO_COLOR: "1", ...envOverrides };
+  const bash = `
+    normalize_wf_tag_suffix() {
+      local raw="$1"
+      raw="\${raw#PROMPT-}"
+      raw="\$(printf '%s' "\$raw" | tr '[:upper:]' '[:lower:]')"
+      printf '%s' "\$raw"
+    }
+    # shellcheck source=scripts/lib/wf-trial-disposable-tag.inc.sh
+    source "${TAG_INC}"
+    build_wf_trial_disposable_tag "${wfId}"
+  `;
+  const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env });
+  assert.equal(r.status, 0, r.stderr || r.stdout);
+  return r.stdout.trim();
+}
 
 function runScript(argv, envOverrides = {}) {
   const env = { ...process.env, NO_COLOR: "1", ...envOverrides };
@@ -40,6 +59,35 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     }
     assert.notEqual(r.status, 0);
     assert.match(r.stderr, /gawk/i);
+  });
+
+  it("build_wf_trial_disposable_tag default cursor + composer25 [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG]", () => {
+    assert.equal(
+      buildDisposableTag("wf-03", {
+        HARNESS: "cursor",
+        MODEL_CONFIG: "composer-2.5",
+        MODEL_SLUG: "composer-2.5-fast",
+      }),
+      "wf-agentstream-wf-03-cursor-composer25",
+    );
+  });
+
+  it("build_wf_trial_disposable_tag claude harness", () => {
+    assert.equal(
+      buildDisposableTag("wf-03", { HARNESS: "claude", MODEL_CONFIG: "composer-2.5" }),
+      "wf-agentstream-wf-03-claude-composer25",
+    );
+  });
+
+  it("build_wf_trial_disposable_tag MODEL_SLUG fallback when MODEL_CONFIG empty", () => {
+    assert.equal(
+      buildDisposableTag("wf-02", {
+        HARNESS: "cursor",
+        MODEL_CONFIG: "",
+        MODEL_SLUG: "composer-2.5-fast",
+      }),
+      "wf-agentstream-wf-02-cursor-composer25fast",
+    );
   });
 
   it("--workspace + --dry-run emits --model on stdout when CLI built", () => {

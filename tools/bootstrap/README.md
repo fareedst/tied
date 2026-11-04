@@ -56,7 +56,7 @@ Creates `%USERPROFILE%\Documents\dev\test\<unix-seconds>` (or `<unix-seconds>-<t
 
 **Scriptable path:** `--out-path` with `--disposable` prints the absolute client directory on **stdout** only (bootstrap progress on stderr). Example: `WORKSPACE=$(test-new-tied-client --out-path --tag my-trial)`.
 
-**WF trial one-liner (Git Bash):** `source scripts/build-commands.sh && workflow-trial-agentstream wf-02 --dry-run` — see [catalog automated path](../../docs/demos/catalog-traditional-workflow-trial-prompts.md).
+**WF trial one-liner (Git Bash):** `source scripts/build-commands.sh && workflow-trial-agentstream wf-02 --dry-run` — disposable tag `wf-agentstream-{wf}-{harness}-{modelBucket}` under `{epoch}-…` in `TIED_TEST_ROOT`; see [catalog automated path](../../docs/demos/catalog-traditional-workflow-trial-prompts.md).
 
 Explicit directory:
 

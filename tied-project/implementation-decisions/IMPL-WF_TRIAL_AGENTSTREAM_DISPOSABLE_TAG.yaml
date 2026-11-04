@@ -1,0 +1,17 @@
+IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
+  code_locations:
+    files:
+      - description: "Env order, bootstrap TAG, DEBUG disposable_tag"
+        path: "scripts/workflow-trial-agentstream.sh"
+      - description: "normalize_wf_trial_model_suffix, build_wf_trial_disposable_tag"
+        path: "scripts/lib/wf-trial-disposable-tag.inc.sh"
+    functions: []
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG-pseudocode.md"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    requirements:
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    tests:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

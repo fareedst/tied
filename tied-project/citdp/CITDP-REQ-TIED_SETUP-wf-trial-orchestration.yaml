@@ -9,10 +9,12 @@ CITDP-REQ-TIED_SETUP-wf-trial-orchestration:
     - "REQ-GOAGENT-FEATURESPEC-BATCH"
     - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
     - "REQ-TIED_SETUP"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
   satisfaction_criteria:
     - "parseNewTiedClientArgs rejects --out-path without --disposable"
     - "Successful disposable --out-path prints resolved clientDir on stdout only (progress on stderr)"
     - "workflow-trial-agentstream.sh validates WF-01..WF-08, requires gawk, --workspace + --dry-run shows --model in agentstream output"
+    - "Default bootstrap --tag wf-agentstream-{wf-id}-{harness}-{modelBucket} (modelBucket from MODEL_CONFIG first else MODEL_SLUG)"
   test_strategy:
     composition:
       - "scripts/workflow-trial-agentstream.sh --workspace + --dry-run"

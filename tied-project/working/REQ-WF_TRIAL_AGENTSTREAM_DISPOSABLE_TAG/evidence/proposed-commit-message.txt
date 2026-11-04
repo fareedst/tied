@@ -1,0 +1,5 @@
+feat(orchestrator): WF trial disposable dir includes harness and model
+
+Encode workflow-trial-agentstream bootstrap tags as wf-agentstream-{wf}-{harness}-{modelBucket} so matrix cells do not collide under TIED_TEST_ROOT.
+
+[REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG]

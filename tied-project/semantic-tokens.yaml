@@ -1428,6 +1428,14 @@ ARCH-TIED_YAML_STYLE_RESOLUTION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
+  cross_references:
+    - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  description: "WF trial disposable tag composition at orchestrator bootstrap"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
+  name: "WF trial disposable tag architecture"
+  status: "Active"
 IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Implementation"
   cross_references:
@@ -3169,6 +3177,14 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
+  cross_references:
+    - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  description: "Shell tag helpers for workflow-trial-agentstream disposable bootstrap"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
+  name: "WF trial disposable tag implementation"
+  status: "Active"
 PROC-AGENT_REQ_CHECKLIST:
   cross_references:
     - "PROC-GITIGNORE_CLOSE_OUT"
@@ -5135,3 +5151,13 @@ REQ-TIED_YAML_STYLE_CONFIGURATION:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
+REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-TIED_SETUP"
+  description: "WF trial agentstream disposable tag includes harness and model bucket"
+  detail_file: "requirements/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
+  name: "WF trial agentstream disposable tag"
+  status: "Active"
