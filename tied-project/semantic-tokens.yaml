@@ -998,6 +998,15 @@ ARCH-TIED_EDPC_CLIENT_ASSESSMENT_MODEL:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  category: "Infrastructure"
+  cross_references:
+    - "IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY"
+    - "REQ-TIED_ENVIRONMENT_VARIABLE_POLICY"
+  description: "Configuration planes and env-as-input-not-authority architecture."
+  detail_file: "architecture-decisions/ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
+  name: "TIED product configuration plane and env policy"
+  status: "Active"
 ARCH-TIED_EXTERNAL_SERVICE_COMPARISON:
   cross_references:
     - "IMPL-TIED_EXTERNAL_SERVICE_COMPARISON"
@@ -2757,6 +2766,15 @@ IMPL-TIED_EDPC_PUBLISH:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  category: "Infrastructure"
+  cross_references:
+    - "ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY"
+    - "REQ-TIED_ENVIRONMENT_VARIABLE_POLICY"
+  description: "Bootstrap static inventory for process.env reads against allowlist."
+  detail_file: "implementation-decisions/IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
+  name: "Environment allowlist inventory scanner"
+  status: "Active"
 IMPL-TIED_EXTERNAL_SERVICE_COMPARISON:
   cross_references:
     - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"
@@ -4721,6 +4739,15 @@ REQ-TIED_EDPC_COMPREHENSION:
   source_index: "requirements.yaml"
   status: "In Progress"
   type: "REQ"
+REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  category: "Infrastructure"
+  cross_references:
+    - "ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY"
+    - "IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY"
+  description: "Umbrella product policy for env var introduction; hybrid allowlist inventory enforcement."
+  detail_file: "requirements/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
+  name: "Environment variable usage policy (TIED product)"
+  status: "Active"
 REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
   cross_references:
     - "ARCH-TIED_EXTERNAL_SERVICE_COMPARISON"

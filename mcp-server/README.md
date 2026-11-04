@@ -41,6 +41,7 @@ copied `tied-project/` directory.
 
 ## Configuration
 
+- **First-party env catalog:** [docs/tied-first-party-env-catalog.md](../docs/tied-first-party-env-catalog.md) (allowlist + [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY](../tied-project/requirements/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml); inventory test `tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs`).
 - **`TIED_BASE_PATH`** (env): Directory containing the YAML index files. Defaults to `tied`. Resolved relative to the process working directory. For a template-only repo with files at project root, set to `.` or the repo root path.
 - **Repository YAML style**: Put `scalar_style: unwrapped` or `scalar_style: wrapped` in `tied-project/config.yaml` at the project root (the parent of `TIED_BASE_PATH`). Repository configuration overrides the global `TIED_YAML_STYLE` environment variable, which overrides `$XDG_CONFIG_HOME/tied/yaml-format.yaml`; the final default is `unwrapped`.
 - **Scalar style semantics**: `unwrapped` uses plain-when-safe strings. `wrapped` emits double-quoted string scalars only; booleans, numbers, and null remain typed YAML scalars. Invalid explicit configuration fails instead of falling back.

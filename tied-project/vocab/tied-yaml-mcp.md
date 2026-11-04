@@ -4,7 +4,7 @@
 
 **Traceability:** [REQ-TIED_SETUP](../requirements/REQ-TIED_SETUP.yaml) · [ARCH-TIED_STRUCTURE](../architecture-decisions/ARCH-TIED_STRUCTURE.yaml) · [IMPL-TIED_FILES](../implementation-decisions/IMPL-TIED_FILES.yaml) · [PROC-YAML_DB_OPERATIONS](../../tied-bundle/docs/processes.md) · [PROC-TIED_VERIFICATION_GATED](../../tied-bundle/docs/processes.md)
 
-**See also:** [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md)
+**See also:** [`domain-references.md`](domain-references.md) · [`tied-methodology.md`](tied-methodology.md) · [`tied-product-configuration.md`](tied-product-configuration.md) · [`feedback-to-tied.md`](feedback-to-tied.md) · [`leap-proposal-queue.md`](leap-proposal-queue.md) · [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md)
 
 ---
 

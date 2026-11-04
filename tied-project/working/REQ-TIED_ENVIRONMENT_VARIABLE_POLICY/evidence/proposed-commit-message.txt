@@ -1,0 +1,16 @@
+feat(infra): env allowlist inventory and catalog
+
+Motivation: hybrid v1 enforcement for first-party process.env reads under
+[REQ-TIED_ENVIRONMENT_VARIABLE_POLICY].
+
+- Allowlist fixture + bootstrap inventory test (SC-EVPOL-INVENTORY)
+- docs/tied-first-party-env-catalog.md (SC-EVPOL-CATALOG)
+- Gap audit evidence; RDC depends_on parent LEAP link
+- CITDP persisted; close_out gates green (envelope blocking_gap_count=0)
+
+Tokens: REQ/ARCH/IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY
+
+Completion signals: machine close-out pass; process contract pass (minimal);
+adherence reconcile partial (evidence_stale advisory only).
+
+Upstream feedback: N/A

@@ -1,0 +1,31 @@
+ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY:
+    decision: "First-party TIED-the-product separates configuration planes: (1) install-managed disk and MCP JSON for global paths and operator toggles; (2) spawn-injected MCP child env as transport only; (3) CLI session env for large payloads and operator texture; (4) secrets in process env never committed to mcp.json. Shell export of global path keys must not override disk authority (delegated to REQ-TIED_RUNTIME_DISK_CONFIG). New production process.env reads require allowlist catalog entry and pass static inventory test. Operational control surfaces prefer MCP tools and CLI commands over undocumented env toggles."
+    implementation_approach:
+      details:
+        - "Committed tied-env-allowlist.v1.yaml under tools/bootstrap/fixtures/tied-env-allowlist/"
+        - "docs/tied-first-party-env-catalog.md generated from allowlist"
+        - "REQ-TIED_RUNTIME_DISK_CONFIG implements disk/spawn path slice under this umbrella"
+        - "tied-env-allowlist-inventory.mjs scans scoped production trees excluding test globs"
+      summary: "Allowlist YAML + bootstrap inventory scanner; catalog doc; reuse tied-config-report for observability."
+    name: "TIED product configuration plane and env policy"
+    rationale:
+      benefits:
+        - "Clear spawn vs shell export distinction in vocab and report"
+        - "Traceable allowlist and inventory gate"
+      problems_solved:
+        - "No single configuration plane vocabulary for agents and operators"
+        - "Unbounded env growth without design test"
+      why: "Umbrella architecture for env policy complements implemented disk resolver without duplicating RDC semantics."
+    related_decisions:
+      related_to:
+        - "ARCH-TIED_CLI_MCP_JSON_BASE_PATH"
+        - "ARCH-TIED_CONFIG_REPORT"
+        - "ARCH-TIED_RUNTIME_DISK_CONFIG"
+        - "ARCH-TIED_YAML_STYLE_RESOLUTION"
+    status: "Planned"
+    traceability:
+      implementation:
+        - "IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY"
+      requirements:
+        - "REQ-TIED_ENVIRONMENT_VARIABLE_POLICY"

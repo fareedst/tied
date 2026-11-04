@@ -1,0 +1,250 @@
+# Draft allowlist for SC-EVPOL-INVENTORY (hybrid v1). Normative after REQ promotion.
+# Each entry: env_key, class, owner_req, notes
+schema: tied-env-allowlist.v1
+scan_roots:
+  - mcp-server/src
+  - mcp-server/packages/agentstream/src
+  - tools/bootstrap/lib
+  - tools/bundled-tied-yaml-skill/scripts
+scan_exclude_globs:
+  - "**/*.test.*"
+  - "**/*.composition.test.*"
+  - "**/e2e/**"
+  - "**/test-helpers/**"
+entries:
+  - env_key: TIED_CLIENT_PROJECT_PATH
+    class: spawn_transport
+    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
+    notes: "MCP child corpus path; install writes mcp.json"
+  - env_key: TIED_CLIENT_BUNDLE_PATH
+    class: spawn_transport
+    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
+    notes: "Linked bundle path"
+  - env_key: TIED_BASE_PATH
+    class: deprecated_legacy
+    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
+    notes: "Legacy alias; dual-read with TIED_CLIENT_PROJECT_PATH"
+  - env_key: TIED_METHODOLOGY_BUNDLE_PATH
+    class: spawn_transport
+    owner_req: REQ-TIED_TWO_FOLDER_LAYOUT
+    notes: "Bundled methodology read path when set"
+  - env_key: TIED_STORE_ROOT
+    class: spawn_transport
+    owner_req: REQ-TIED_RUNTIME_DISK_CONFIG
+    notes: "Spawn-only; shell override ignored for resolution"
+  - env_key: TIED_MCP_BIN
+    class: spawn_transport
+    owner_req: REQ-TIED_RUNTIME_DISK_CONFIG
+    notes: "Dist path; prefer args[0] + disk resolver"
+  - env_key: TIED_PATH_AUTHORITY
+    class: diagnostic
+    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
+    notes: "Test-only authority mode in yaml-loader tests"
+  - env_key: TIED_ENVELOPE_HOOKS
+    class: operator_toggle
+    owner_req: REQ-REQUEST_EVIDENCE_ENVELOPE
+    notes: "Prefer operator yaml + mcp refresh"
+  - env_key: TIED_MCP_COLLECT_METRICS
+    class: operator_toggle
+    owner_req: REQ-MCP_USAGE_METRICS
+    notes: "Prefer operator yaml"
+  - env_key: TIED_MCP_METRICS_PATH
+    class: cli_session
+    owner_req: REQ-MCP_USAGE_METRICS
+    notes: "Override metrics JSONL path"
+  - env_key: TIED_MCP_METRICS_CLIENT
+    class: cli_session
+    owner_req: REQ-MCP_USAGE_METRICS
+    notes: "Client label in metrics rows"
+  - env_key: TIED_MCP_PROJECT_ID
+    class: operator_toggle
+    owner_req: REQ-MCP_USAGE_METRICS
+    notes: "Configured project identity"
+  - env_key: TIED_MCP_DIAGNOSTICS
+    class: diagnostic
+    owner_req: REQ-MCP_STDIO_CONSOLE_GUARD
+    notes: "Stderr diagnostics guard"
+  - env_key: TIED_YAML_STYLE
+    class: operator_toggle
+    owner_req: REQ-TIED_YAML_STYLE_CONFIGURATION
+    notes: "Fallback below tied-project/config.yaml"
+  - env_key: TIED_CLI_IMPL_ESSENCE_FILE
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "Large IMPL body transport"
+  - env_key: TIED_CLI_IMPL_ESSENCE_STDIN
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "IMPL body from stdin"
+  - env_key: TIED_CLI_ARGS_FILE
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "Large MCP args payload"
+  - env_key: TIED_CLI_QUIET_MCP_STDERR
+    class: cli_session
+    owner_req: REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
+    notes: "Operator output texture"
+  - env_key: TIED_BOOTSTRAP_OUT_PATH
+    class: diagnostic
+    owner_req: REQ-TIED_SETUP
+    notes: "Bootstrap logging stream selector"
+  - env_key: TIED_MCP_TOOL_PROFILE
+    class: spawn_transport
+    owner_req: REQ-TIED_UNIFIED_TOOLCHAIN
+    notes: "Opt-in MCP tool surface"
+  - env_key: TIED_JEV_DECISION_PROVIDER
+    class: operator_toggle
+    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
+    notes: "JEV harness routing"
+  - env_key: TIED_JEV_LOCAL_BRIDGE
+    class: operator_toggle
+    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
+    notes: "Local bridge toggle"
+  - env_key: JEV_API_KEY
+    class: secret
+    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
+    notes: "Never commit; not in mcp.json"
+  - env_key: AGENTSTREAM_TIED_MCP_PREFLIGHT
+    class: operator_toggle
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Agentstream preflight"
+  - env_key: AGENTSTREAM_CLAUDE_LIVE_OK
+    class: diagnostic
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Live Claude driver opt-in; harness only"
+  - env_key: AGENTSTREAM_CLAUDE_STRICT_MCP
+    class: operator_toggle
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Claude argv MCP strictness"
+  - env_key: AGENTSTREAM_CLAUDE_KEEP_PERMISSIONS
+    class: operator_toggle
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Claude permissions harness"
+  - env_key: AGENTSTREAM_HARNESS_TRACE
+    class: diagnostic
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Harness turn trace enable"
+  - env_key: AGENTSTREAM_HARNESS_TRACE_PATH
+    class: cli_session
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Override harness trace path"
+  - env_key: TIED_MCP_TEST_REPO_ROOT
+    class: test_only
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Allowed only under excluded test paths"
+  - env_key: TIED_CLI_MCP_BIN
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "tied-cli MCP dist override for stdio client"
+  - env_key: TIED_CLI_UMBRELLA_ENTRY
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "Umbrella MCP entry path for tied-cli spawn"
+  - env_key: TIED_CLI_UMBRELLA_MCP
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "Use umbrella MCP subcommand instead of dist bin"
+  - env_key: TIED_CLI_REQUEST_ID
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "JSON-RPC request id for one-shot CLI MCP calls"
+  - env_key: TIED_CLI_TOOL_NAME
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "Target MCP tool name for one-shot CLI calls"
+  - env_key: TIED_CLI_ARGS_JSON
+    class: cli_session
+    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
+    notes: "Inline JSON args when TIED_CLI_ARGS_FILE unset"
+  - env_key: TIED_AGENTSTREAM_IMPL
+    class: operator_toggle
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Agentstream executor backend ts|go"
+  - env_key: AGENTSTREAM_JEV_HARNESS
+    class: diagnostic
+    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
+    notes: "Enable JEV harness dist preflight in agentstream"
+  - env_key: AGENTSTREAM_DAE_GATE_CHECK
+    class: diagnostic
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "DAE gate preflight in agentstream dry-run"
+  - env_key: AGENTSTREAM_CHECKLIST_VAR_STRICT
+    class: diagnostic
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Strict checklist variable validation in dry-run"
+  - env_key: AGENTSTREAM_SKIP_TIED_MCP_PREFLIGHT
+    class: operator_toggle
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Skip agentstream tied MCP preflight"
+  - env_key: AGENTSTREAM_SKIP_WORKSPACE_PRELOAD
+    class: operator_toggle
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Skip workspace preload in dry-run"
+  - env_key: AGENTSTREAM_RUN_ID
+    class: cli_session
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Override run id in dry-run config"
+  - env_key: ADHERENCE_RECONCILE_BIN
+    class: cli_session
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Override adherence reconcile binary path"
+  - env_key: AGENTSTREAM_BIN
+    class: cli_session
+    owner_req: REQ-GOAGENT-CLI-CONFIG
+    notes: "Override agentstream binary for adherence runner"
+  - env_key: JEV_MODEL
+    class: cli_session
+    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
+    notes: "JEV model id for benchmarks and harness"
+  - env_key: PLUMB_AUDIT_LOCALITY
+    class: diagnostic
+    owner_req: REQ-TIED_SETUP
+    notes: "Plumb audit locality report mode"
+  - env_key: PLUMB_AUDIT_GATE_OVERRIDE
+    class: diagnostic
+    owner_req: REQ-TIED_SETUP
+    notes: "Override plumb audit gate (dangerous; audit only)"
+  - env_key: GIT_INDEX_FILE
+    class: cli_session
+    owner_req: REQ-TIED_SETUP
+    notes: "Temporary git index for plumb audit CLI"
+  - env_key: GIT_SHA
+    class: runtime_passthrough
+    owner_req: REQ-TIED_EASAR_RECOVERY
+    notes: "CI/provenance SHA for inventory receipts"
+  - env_key: CLAUDE_PROJECT_DIR
+    class: runtime_passthrough
+    owner_req: REQ-TIED_CLAUDE_ADHERENCE_HOOKS
+    notes: "Claude Code project dir for adherence bridge hook"
+  - env_key: PATH
+    class: runtime_passthrough
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Node spawn PATH passthrough (isolated verify, tied-cli)"
+  - env_key: HOME
+    class: runtime_passthrough
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Node spawn HOME passthrough for tied-cli MCP child"
+  - env_key: NODE_ENV
+    class: runtime_passthrough
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Node spawn NODE_ENV passthrough for tied-cli MCP child"
+  - env_key: NODE_OPTIONS
+    class: runtime_passthrough
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Forwarded for isolated verification subprocess"
+  - env_key: TZ
+    class: runtime_passthrough
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Forwarded for isolated verification subprocess"
+  - env_key: LANG
+    class: runtime_passthrough
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Forwarded for isolated verification subprocess"
+  - env_key: SystemRoot
+    class: runtime_passthrough
+    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
+    notes: "Windows spawn passthrough for tied-cli MCP child"
+  - env_key: NO_COLOR
+    class: runtime_passthrough
+    owner_req: REQ-TIED_SETUP
+    notes: "Bootstrap console color disable"

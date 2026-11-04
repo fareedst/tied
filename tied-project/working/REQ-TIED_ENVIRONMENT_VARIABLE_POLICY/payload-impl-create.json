@@ -1,0 +1,28 @@
+{
+  "token": "IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY",
+  "index_record": {
+    "name": "Environment allowlist inventory scanner",
+    "status": "Planned",
+    "description": "Bootstrap module loads tied-env-allowlist.v1.yaml, scans scoped production trees for process.env reads, fails on undocumented keys."
+  },
+  "detail_record": {
+    "IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY": {
+      "name": "Environment allowlist inventory scanner",
+      "status": "Planned",
+      "implementation_approach": {
+        "summary": "tools/bootstrap/lib/tied-env-allowlist-inventory.mjs implements RUN_ENV_ALLOWLIST_INVENTORY pseudo-code; tests in tied-env-allowlist-inventory.test.mjs.",
+        "details": [
+          "Allowlist fixture: tools/bootstrap/fixtures/tied-env-allowlist/env-allowlist.v1.yaml",
+          "Exclude **/*.test.* and e2e paths per allowlist scan_exclude_globs",
+          "Block lead comments copied to test and module per PROC-IMPL_PSEUDOCODE_TOKENS"
+        ]
+      },
+      "traceability": {
+        "requirements": ["REQ-TIED_ENVIRONMENT_VARIABLE_POLICY"],
+        "architecture": ["ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY"],
+        "tests": ["tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs"]
+      },
+      "essence_pseudocode_path": "tied-project/implementation-decisions/IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY-pseudocode.md"
+    }
+  }
+}

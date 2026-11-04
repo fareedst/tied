@@ -2698,6 +2698,13 @@ REQ-TIED_EDPC_META_HUB_ENGAGEMENT:
   name: "EDPC meta-hub engagement methodology"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  category: "Infrastructure"
+  description: "Umbrella product policy: env vars are execution context and overrides, not primary configuration or operational control; hybrid v1 enforcement via allowlist inventory and catalog."
+  detail_file: "requirements/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
+  name: "Environment variable usage policy (TIED product)"
+  priority: "P1"
+  status: "Implemented"
 REQ-TIED_EXTERNAL_SERVICE_COMPARISON:
   category: "Methodology"
   detail_file: "requirements/REQ-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"

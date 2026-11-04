@@ -2023,6 +2023,11 @@ ARCH-TIED_EDPC_META_HUB_ENGAGEMENT:
   detail_file: "architecture-decisions/ARCH-TIED_EDPC_META_HUB_ENGAGEMENT.yaml"
   name: "EDPC meta-hub engagement surface"
   status: "Active"
+ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  description: "Configuration planes (disk, spawn-injected env, CLI session, secrets) with centralized resolution and observability; env is input not authority."
+  detail_file: "architecture-decisions/ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
+  name: "TIED product configuration plane and env policy"
+  status: "Planned"
 ARCH-TIED_EXTERNAL_SERVICE_COMPARISON:
   detail_file: "architecture-decisions/ARCH-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"
   name: "External service comparison architecture"

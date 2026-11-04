@@ -1,0 +1,74 @@
+REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  description: "First-party TIED-the-product policy for environment variable introduction and use (not methodology ai-principles)."
+  metadata:
+    last_updated:
+      author: "add-feature"
+      date: "2026-11-04"
+      reason: "Author REQ from working plan refine pass 2"
+  REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
+    category: "Infrastructure"
+    description: "Environment variables provide execution context, personal preferences, and convenient invocation overrides. They must not become the application's primary configuration or operational control interface."
+    name: "Environment variable usage policy (TIED product)"
+    policy_directive:
+      default_decision: "Prefer explicit configuration and control. Use environment variables only when convenience or deployment role provides clear benefit without sacrificing visibility, predictability, or reproducibility."
+      design_test_questions:
+        - "Can its effect be discovered, inspected, validated, and tested?"
+        - "Could inheritance cause surprising behavior?"
+        - "Is this execution context, a personal preference, or a temporary override?"
+        - "Would an explicit configuration option or command be clearer?"
+      principle: "Environment variables provide execution context, personal preferences, and convenient invocation overrides. They must not become the application's primary configuration or operational control interface."
+      rules:
+        - "Avoid hidden dependencies on undocumented or unexpectedly inherited environment variables."
+        - "Centralize configuration resolution with consistent defaults, precedence, validation, and semantic constraints."
+        - "Do not use environment variables for operational control; use explicit commands or APIs for actions and state transitions."
+        - "Make configuration observable with effective settings, sources, and redacted secrets."
+        - "Prefer explicit configuration via documented files, CLI options, or APIs."
+        - "Preserve reproducibility: identical explicit configuration yields equivalent behavior independent of unrelated environmental state."
+        - "Treat environment variables as inputs, not authority; they must not bypass validation, authorization, or safeguards."
+        - "Use environment variables sparingly for preferences, execution context, temporary overrides, and deployment-injected startup values."
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Explicit child link from REQ-TIED_RUNTIME_DISK_CONFIG for global paths on disk"
+        - "Mechanical inventory test blocks undocumented production reads in v1 scope"
+        - "Single umbrella REQ for new env introduction (design test)"
+      problems_solved:
+        - "MCP or CLI behavior controlled primarily by env without catalogued rationale"
+        - "Operators conflate shell export with install-managed spawn env"
+        - "Undocumented process.env reads in first-party packages"
+      why: "Policy existed only in TODO.md; enforcement was fragmented across RDC, CLI/MCP path REQs, and ad hoc reviews."
+    related_requirements:
+      related_to:
+        - "REQ-MCP_STDIO_CONSOLE_GUARD"
+        - "REQ-MCP_USAGE_METRICS"
+        - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+        - "REQ-TIED_CONFIG_REPORT"
+        - "REQ-TIED_RUNTIME_DISK_CONFIG"
+        - "REQ-TIED_YAML_STYLE_CONFIGURATION"
+    satisfaction_criteria:
+      - criterion: "Committed env catalog documents each allowlist entry with class and owner REQ."
+        id: "SC-EVPOL-CATALOG"
+        metric: "docs/tied-first-party-env-catalog.md"
+      - criterion: "MCP control-via-env gap audit committed under working evidence."
+        id: "SC-EVPOL-GAP-AUDIT"
+        metric: "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/evidence/mcp-control-env-audit.md"
+      - criterion: "Operators inspect effective settings and provenance via config report."
+        id: "SC-EVPOL-OBSERVE"
+        metric: "node tools/bootstrap/tied-config-report-cli.mjs --format json; REQ-TIED_CONFIG_REPORT"
+      - criterion: "REQ detail contains the full directive (rules 1–8 + design test)."
+        id: "SC-EVPOL-TEXT"
+        metric: "tied-project/requirements/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml detail policy_directive"
+      - criterion: "REQ-TIED_RUNTIME_DISK_CONFIG depends_on REQ-TIED_ENVIRONMENT_VARIABLE_POLICY."
+        id: "SC-EVPOL-RDC-LINK"
+        metric: "tied_validate_consistency traceability"
+      - criterion: "Undocumented production process.env read in scoped trees fails inventory test."
+        id: "SC-EVPOL-INVENTORY"
+        metric: "node --test tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs"
+    status: "Planned"
+    traceability:
+      architecture:
+        - "ARCH-TIED_ENVIRONMENT_VARIABLE_POLICY"
+      implementation:
+        - "IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY"
+      tests:
+        - "tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs"

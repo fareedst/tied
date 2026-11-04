@@ -1,0 +1,9 @@
+schema: tied-env-allowlist.v1
+scan_roots:
+  - inventory-pass/src
+scan_exclude_globs: []
+entries:
+  - env_key: TIED_ENVELOPE_HOOKS
+    class: operator_toggle
+    owner_req: REQ-REQUEST_EVIDENCE_ENVELOPE
+    notes: "fixture"

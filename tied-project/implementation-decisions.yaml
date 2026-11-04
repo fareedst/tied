@@ -2462,6 +2462,11 @@ IMPL-TIED_EDPC_PUBLISH:
   detail_file: "implementation-decisions/IMPL-TIED_EDPC_PUBLISH.yaml"
   name: "EDPC Publish Builder"
   status: "Active"
+IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY:
+  description: "Bootstrap module loads tied-env-allowlist.v1.yaml, scans scoped production trees for process.env reads, fails on undocumented keys."
+  detail_file: "implementation-decisions/IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
+  name: "Environment allowlist inventory scanner"
+  status: "Active"
 IMPL-TIED_EXTERNAL_SERVICE_COMPARISON:
   detail_file: "implementation-decisions/IMPL-TIED_EXTERNAL_SERVICE_COMPARISON.yaml"
   name: "External service comparison implementation"
