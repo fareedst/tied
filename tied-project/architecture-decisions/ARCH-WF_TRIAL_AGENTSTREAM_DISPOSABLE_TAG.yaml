@@ -1,11 +1,11 @@
 ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
-  context: "Extends wf-trial orchestrator disposable bootstrap only; --workspace bypass skips tag."
-  decision: "Compose --tag as wf-agentstream-{wf-id}-{harness}-{modelBucket} after exporting HARNESS and MODEL_* defaults; modelBucket strips dots and hyphens from MODEL_CONFIG-first bucket string."
   consequences:
     negative:
       - "New dirname shape; historical trials keep legacy paths"
     positive:
       - "Matrix cells distinguish harness and model on disk"
+  context: "Extends wf-trial orchestrator disposable bootstrap only; --workspace bypass skips tag."
+  decision: "Compose --tag as wf-agentstream-{wf-id}-{harness}-{modelBucket} after exporting HARNESS and MODEL_* defaults; modelBucket strips dots and hyphens from MODEL_CONFIG-first bucket string."
   status: "Active"
   traceability:
     implementation:

@@ -35,6 +35,7 @@ import type {
 } from "./types.js";
 import { ENVELOPE_SCHEMA_VERSION } from "./types.js";
 
+import { resolveDepthTierForBackfill } from "./citdp-envelope-context.js";
 import { classifyBoundedEvidenceFilename } from "../bounded-composition/envelope-artifact-kind.js";
 import { isValidWorkingRequestToken } from "../working-request-token.js";
 import { readTiedMethodologyVersion } from "../tied-methodology-version.js";
@@ -645,13 +646,19 @@ export async function buildRequestEvidenceEnvelope(
 
   const discovered = await discoverWorkingArtifacts(projectRoot, input.request_token);
   const artifacts = await toEnvelopeArtifacts(discovered);
-  const depthTier = input.depth_tier ?? "integrated";
+  const depthContext = await resolveDepthTierForBackfill({
+    projectRoot,
+    requestToken: input.request_token,
+    override: input.depth_tier,
+  });
+  const depthTier = depthContext.depthTier;
+  const gatePolicy = input.gate_policy ?? depthContext.gatePolicy ?? "advisory";
   const gaps = await detectGaps({
     projectRoot,
     requestToken: input.request_token,
     artifacts,
     depthTier,
-    gatePolicy: input.gate_policy,
+    gatePolicy,
     corpusInventory: input.corpus_inventory,
   });
 
@@ -692,7 +699,7 @@ export async function buildRequestEvidenceEnvelope(
       request_token: input.request_token,
       project_id: identity.project_id,
       depth_tier: depthTier,
-      gate_policy: input.gate_policy ?? "advisory",
+      gate_policy: gatePolicy,
       methodology_snapshot_id: methodologySnapshotId,
     },
     runs: extractRuns(artifacts),

@@ -1,0 +1,11 @@
+feat(agentstream): Claude WF-03 harness parity
+
+Align Claude live argv with validated MCP smoke, harness-aware four-phase
+batch {{SKILL_ROOT}}, optional turn trace, and dry wf-03 parity smoke.
+
+REQ-AGENTSTREAM_CLAUDE_WF_PARITY · ARCH-AGENTSTREAM_CLAUDE_WF_PARITY ·
+IMPL-AGENTSTREAM_CLAUDE_WF_PARITY
+
+Machine close-out: close_out allowed; envelope blocking_gaps=0.
+Process: verification manifest collected; thin_ledger warn (minimal depth).
+Feedback capture: N/A (no upstream feedback this wave).

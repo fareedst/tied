@@ -67,6 +67,7 @@ function seedFromSnapshots(tempRoot: string) {
 }
 
 describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
+  process.env.TIED_MCP_TEST_REPO_ROOT = REPO_ROOT;
   it("rejects invalid envelope schema", async () => {
     const invalid = { schema_version: "wrong" } as unknown as RequestEvidenceEnvelope;
     const result = await validateRequestEvidenceEnvelope({ envelope: invalid });
@@ -391,6 +392,118 @@ describe("request evidence envelope [REQ-REQUEST_EVIDENCE_ENVELOPE]", () => {
     assert.ok(
       !result.envelope.gaps.some((gap) => gap.detail.includes("provenance_incomplete:schema_version")),
       "root wrapper schemaVersion must satisfy A3 provenance contract",
+    );
+  });
+
+  it("T-ENV-01 infers minimal depth from CITDP when depth_tier omitted [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-citdp-minimal-build-"));
+    const req = "REQ-BT_BATTERY_DISPLAY";
+    const working = path.join(tempRoot, "working", req);
+    mkdirSync(working, { recursive: true });
+    writeFileSync(
+      path.join(working, "agent-req-implementation-checklist.yaml"),
+      "execution_evidence:\n  request: REQ-BT_BATTERY_DISPLAY\n",
+      "utf8",
+    );
+    writeFileSync(
+      path.join(working, "CITDP-BT_BATTERY_DISPLAY-draft.yaml"),
+      `CITDP-${req}:
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: minimal
+      gate_policy: advisory
+`,
+      "utf8",
+    );
+    const evidenceDir = path.join(working, "evidence");
+    mkdirSync(evidenceDir, { recursive: true });
+    writeFileSync(
+      path.join(evidenceDir, "not-applicable-receipt.v1.json"),
+      JSON.stringify({
+        schema_version: "not-applicable-receipt.v1",
+        request_token: req,
+        artifact_kind: "adversarial_inquiry",
+        depth_tier: "minimal",
+        phases: ["close_out", "pre_implementation", "verification"],
+        reason: "Adversarial inquiry not applicable at minimal depth_tier",
+        generated_at: "2026-09-10T16:00:00.000Z",
+        source: "request_evidence_envelope_backfill",
+      }),
+      "utf8",
+    );
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
+    const tiedBase = path.join(tempRoot, "tied-project");
+    const result = await buildRequestEvidenceEnvelope({
+      request_token: req,
+      project_root: tempRoot,
+      tied_base_path: tiedBase,
+      confirmed_tied_base_path: tiedBase,
+      generated_at: "2026-09-10T16:00:00.000Z",
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.envelope.identity.depth_tier, "minimal");
+    assert.ok(
+      !result.envelope.gaps.some(
+        (gap) => gap.code === "expected_artifact_missing" && gap.artifact_kind === "evidence_chain_profile",
+      ),
+    );
+    const validation = await validateRequestEvidenceEnvelope({
+      envelope: result.envelope,
+      fail_on_error_gaps: true,
+    });
+    assert.equal(validation.ok, true);
+  });
+
+  it("T-ENV-02 explicit depth_tier overrides CITDP inference [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-citdp-override-build-"));
+    const req = "REQ-BT_BATTERY_DISPLAY";
+    const working = path.join(tempRoot, "working", req);
+    mkdirSync(working, { recursive: true });
+    writeFileSync(
+      path.join(working, "CITDP-BT_BATTERY_DISPLAY-draft.yaml"),
+      `CITDP-${req}:
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: minimal
+`,
+      "utf8",
+    );
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
+    const tiedBase = path.join(tempRoot, "tied-project");
+    const result = await buildRequestEvidenceEnvelope({
+      request_token: req,
+      project_root: tempRoot,
+      tied_base_path: tiedBase,
+      confirmed_tied_base_path: tiedBase,
+      depth_tier: "integrated",
+      generated_at: "2026-09-10T16:00:00.000Z",
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.envelope.identity.depth_tier, "integrated");
+  });
+
+  it("T-ENV-03 defaults to integrated when no CITDP draft [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", async () => {
+    const tempRoot = mkdtempSync(path.join(os.tmpdir(), "ree-no-citdp-build-"));
+    const req = "REQ-EVIDENCE_CHAIN_PROFILE";
+    mkdirSync(path.join(tempRoot, "working", req), { recursive: true });
+    mkdirSync(path.join(tempRoot, "tied-project"), { recursive: true });
+    const tiedBase = path.join(tempRoot, "tied-project");
+    const result = await buildRequestEvidenceEnvelope({
+      request_token: req,
+      project_root: tempRoot,
+      tied_base_path: tiedBase,
+      confirmed_tied_base_path: tiedBase,
+      generated_at: "2026-09-10T16:00:00.000Z",
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.equal(result.envelope.identity.depth_tier, "integrated");
+    assert.ok(
+      result.envelope.gaps.some(
+        (gap) => gap.code === "expected_artifact_missing" && gap.artifact_kind === "evidence_chain_profile",
+      ),
     );
   });
 

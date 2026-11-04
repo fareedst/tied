@@ -34,6 +34,8 @@ export type LiveDriverBinding = {
 export type BindLiveExecutorInput = {
   harnessProfile: AgentHarnessProfile;
   agentPath: string;
+  /** Agentstream workspace (`-w`); used for Claude subprocess cwd when live. */
+  workspace?: string;
   claudeLaunchFn?: ClaudeLaunchFn;
   claudeLaunchFnIsTestDouble?: boolean;
   jevToolGate?: JevLiveToolGate | null;
@@ -73,6 +75,7 @@ export function bindLiveExecutorDriver(
             collectClaudeStreamFromSpawn(argv, extraEnv, {
               jevToolGate,
               contextLogPrune,
+              spawnCwd: input.workspace?.trim() || undefined,
             }));
         let lastStderrTail = "";
         let lastGateStderr = "";

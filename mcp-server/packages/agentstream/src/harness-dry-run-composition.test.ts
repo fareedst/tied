@@ -34,6 +34,12 @@ describe("harness CLI composition [REQ-TIED_CLAUDE_HARNESS]", () => {
     assert.equal(argv[0], "claude");
   });
 
+  it("joins multiple prompt parts into one Claude CLI positional", () => {
+    const argv = agentArgv("", "/ws", "claude-haiku-5-5", "", ["PRELOAD", "TASK"], "claude");
+    assert.equal(argv[argv.length - 1], "PRELOAD\n\nTASK");
+    assert.equal(argv.filter((a) => a === "TASK").length, 0);
+  });
+
   it("keeps --agent-path override independent of --harness claude", () => {
     const cfg = parseDryRunConfig(workspace, [
       "--dry-run",

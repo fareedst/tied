@@ -21,6 +21,8 @@ change_definition:
     - Four-phase close-out turn documents tied_gate_check + request_evidence_envelope_build sequence
     - Unit tests cover validation + orchestrator flag without live LLM
     - Manual re-run of wf-03 Claude cell achieves close_out allowed:true on disposable client (operator proof)
+    - request_evidence_envelope_build without depth_tier matches working CITDP minimal and passes fail_on_error_gaps when not-applicable receipt present (slice 2)
+    - Four-phase batch documents CITDP-aligned envelope build, backfill receipt, and {{HARNESS}} inventory label (slice 2)
   unchanged_behavior: Cursor harness wf-03 path and fixture-gated agentstream CI remain green.
 completion_criteria:
   activation:
@@ -55,7 +57,9 @@ impact_analysis:
     tools/bootstrap/lib/claude-client-validation.mjs;
     scripts/workflow-trial-agentstream.sh;
     docs/demos/traditional-four-phase-agentstream.yaml and/or prompt-shared close-out adjunct;
-    mcp-server/packages/agentstream/src/claude-driver.ts (cwd, unstaged WIP)
+    mcp-server/packages/agentstream/src/claude-driver.ts (cwd, unstaged WIP);
+    mcp-server/src/request-evidence-envelope/build.ts and citdp-envelope-context.ts (slice 2);
+    scripts/run-traditional-four-phase-agentstream.sh; scripts/lib/wf-trial-envelope-depth-check.inc.sh
   tied_tokens_affected:
     - REQ-AGENTSTREAM_CLAUDE_WF_PARITY
     - REQ-TIED_CLAUDE_BOOTSTRAP_OPS
@@ -66,7 +70,7 @@ impact_analysis:
     - ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS
     - IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS
 leap_feedback:
-  divergences_from_analysis: "Pillar H uses existing live-driver-bind workspace→spawnCwd; no claude-driver.ts change in scoped commit."
+  divergences_from_analysis: "Slice 2 extracted citdp-envelope-context.ts to share depth resolution (build/backfill); pillar H still deferred."
   record_status: applied
   tied_stack_updates_required: []
 record_identity:

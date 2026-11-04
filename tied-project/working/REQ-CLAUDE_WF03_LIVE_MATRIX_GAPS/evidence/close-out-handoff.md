@@ -31,7 +31,7 @@ Follow-on to [REQ-AGENTSTREAM_CLAUDE_WF_PARITY](../REQ-AGENTSTREAM_CLAUDE_WF_PAR
 
 ## Commit
 
-**SHA:** _(filled after commit)_
+**SHA:** `a38bbaa5` — `feat(bootstrap): Claude wf-03 live matrix validation and preflight gaps`
 
 ## CI / local checks
 

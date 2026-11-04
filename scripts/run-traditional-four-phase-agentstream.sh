@@ -193,11 +193,13 @@ expand_batch_placeholders() {
     claude) export SKILL_ROOT=".claude/skills" ;;
     *) export SKILL_ROOT=".cursor/skills" ;;
   esac
+  export HARNESS="$harness"
   perl -pe '
     s/\{\{MODEL_SLUG\}\}/$ENV{MODEL_SLUG}/g;
     s/\{\{MODEL_CONFIG\}\}/$ENV{MODEL_CONFIG}/g;
     s/\{\{FEATURE_REMAINDER\}\}/$ENV{FEATURE_REMAINDER}/g;
     s/\{\{SKILL_ROOT\}\}/$ENV{SKILL_ROOT}/g;
+    s/\{\{HARNESS\}\}/$ENV{HARNESS}/g;
   ' "$src" >"$dst"
 }
 
@@ -367,7 +369,12 @@ main() {
     unset AGENTSTREAM_JEV_HARNESS
   fi
 
-  exec "${cmd[@]}"
+  "${cmd[@]}"
+  local agentstream_exit=$?
+  # shellcheck source=scripts/lib/wf-trial-envelope-depth-check.inc.sh
+  source "${REPO_ROOT}/scripts/lib/wf-trial-envelope-depth-check.inc.sh"
+  wf_trial_envelope_depth_diagnostic "$workspace" || true
+  exit "$agentstream_exit"
 }
 
 main "$@"

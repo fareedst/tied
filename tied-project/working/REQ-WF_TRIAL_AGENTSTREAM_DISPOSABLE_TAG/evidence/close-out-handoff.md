@@ -41,4 +41,4 @@ node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
 
 ## Commit
 
-**SHA:** `e40f613b` — `feat(orchestrator): WF trial disposable dir includes harness and model`
+**SHA:** `ef1fe2db` — `feat(orchestrator): WF trial disposable dir includes harness and model`

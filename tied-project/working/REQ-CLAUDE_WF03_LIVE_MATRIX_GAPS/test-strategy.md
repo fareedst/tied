@@ -25,6 +25,18 @@
 | Claude wf-03 live cell | `AGENTSTREAM_CLAUDE_LIVE_OK=1 MODEL_CONFIG=claude-haiku-5-5 MODEL_SLUG=claude-haiku-5-5 HARNESS=claude workflow_trial_agentstream wf-03` | Preflight `ok: true`; turn 4 `close_out allowed: true`; envelope `blocking_gap_count: 0`; inventory turns 1–4 verified |
 | Gold comparison | Same MODEL_SLUG as Cursor gold | Parity fingerprint per [REQ-AGENTSTREAM_CLAUDE_WF_PARITY PLAN §3](../REQ-AGENTSTREAM_CLAUDE_WF_PARITY/PLAN.md) |
 
+## Slice 2 — envelope build + batch (build-plan)
+
+| ID | Level | Case | Pass |
+| --- | --- | --- | --- |
+| T-ENV-01 | Unit | CITDP draft `minimal`, build without `depth_tier` → identity minimal; blocking validate with receipt | `request-evidence-envelope.test.ts` |
+| T-ENV-02 | Unit | Explicit `depth_tier: integrated` overrides CITDP | same |
+| T-ENV-03 | Unit | No CITDP → default integrated | same |
+| T-BATCH-01 | Bootstrap | Turn 4 mentions backfill / run-close-out-gates; turn 1 `{{HARNESS}}` | `run-traditional-four-phase-agentstream-sh.test.mjs` |
+| T-SHELL-01 | Bootstrap | `HARNESS=claude` → `claude-agentstream-four-phase` | same |
+| T-WF-01 | Shell | Diagnostic inc on mismatch | `wf-trial-envelope-depth-check-sh.test.mjs` |
+| T-REG-01 | Regression | claude-client-validation, workflow-trial sh, agentstream package tests | all green |
+
 ## Out of scope for automated CI
 
 - Full four-phase live LLM on every PR

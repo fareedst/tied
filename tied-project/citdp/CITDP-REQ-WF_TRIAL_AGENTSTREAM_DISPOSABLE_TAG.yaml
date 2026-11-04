@@ -1,84 +1,69 @@
 change_definition:
-  current_behavior: |
-    workflow-trial-agentstream bootstraps disposable clients with --tag wf-agentstream-{wf-id}
-    only (e.g. 1793760220-wf-agentstream-wf-03). Harness (cursor vs claude) and model bucket
-    (MODEL_CONFIG) are not encoded in the directory name, so parallel matrix cells can collide
-    under TIED_TEST_ROOT and are hard to correlate with facilitator readouts.
-  desired_behavior: |
-    Default bootstrap tag is wf-agentstream-{wf-id}-{harness}-{modelBucket} where modelBucket
-    is derived from MODEL_CONFIG (fallback MODEL_SLUG): lowercase, strip dots and hyphens
-    (composer-2.5 -> composer25). Full client id: {epoch}-{tag}. --workspace bypass unchanged.
-    workflow_trial_agentstream in build-commands.sh remains a delegator; tag logic lives in
-    workflow-trial-agentstream.sh and scripts/lib/wf-trial-disposable-tag.inc.sh.
+  current_behavior: "workflow-trial-agentstream bootstraps disposable clients with --tag wf-agentstream-{wf-id}\nonly (e.g. 1793760220-wf-agentstream-wf-03). Harness (cursor vs claude) and model bucket\n(MODEL_CONFIG) are not encoded in the directory name, so parallel matrix cells can collide\nunder TIED_TEST_ROOT and are hard to correlate with facilitator readouts.\n"
+  desired_behavior: "Default bootstrap tag is wf-agentstream-{wf-id}-{harness}-{modelBucket} where modelBucket\nis derived from MODEL_CONFIG (fallback MODEL_SLUG): lowercase, strip dots and hyphens\n(composer-2.5 -> composer25). Full client id: {epoch}-{tag}. --workspace bypass unchanged.\nworkflow_trial_agentstream in build-commands.sh remains a delegator; tag logic lives in\nworkflow-trial-agentstream.sh and scripts/lib/wf-trial-disposable-tag.inc.sh.\n"
   non_goals:
-    - Renaming or migrating existing gold/disposable clients on disk
-    - Changing validateDisposableTag rules in new-tied-client.mjs
-    - Per-record model fields in feature-spec batch YAML
+    - "Changing validateDisposableTag rules in new-tied-client.mjs"
+    - "Per-record model fields in feature-spec batch YAML"
+    - "Renaming or migrating existing gold/disposable clients on disk"
   success_criteria:
-    - build_wf_trial_disposable_tag produces wf-agentstream-wf-03-cursor-composer25 for defaults
-    - HARNESS=claude with same MODEL_CONFIG yields distinct tag suffix vs cursor
-    - Tag passes DISPOSABLE_TAG_PATTERN (letters, digits, hyphens)
-    - workflow-trial-agentstream-sh.test.mjs covers tag helper cases
-  unchanged_behavior: |
-    Gold path WF03_GOLD_CLIENT (1793760220-wf-agentstream-wf-03) and dual-harness smoke default
-    unchanged; manual --workspace skips bootstrap tag.
+    - "build_wf_trial_disposable_tag produces wf-agentstream-wf-03-cursor-composer25 for defaults"
+    - "HARNESS=claude with same MODEL_CONFIG yields distinct tag suffix vs cursor"
+    - "Tag passes DISPOSABLE_TAG_PATTERN (letters, digits, hyphens)"
+    - "workflow-trial-agentstream-sh.test.mjs covers tag helper cases"
+  unchanged_behavior: "Gold path WF03_GOLD_CLIENT (1793760220-wf-agentstream-wf-03) and dual-harness smoke default\nunchanged; manual --workspace skips bootstrap tag.\n"
 completion_criteria:
   activation:
-    phase: pre_implementation
-    request_token: REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
-    run_id: refine-plan-2026-11-04
+    phase: "pre_implementation"
+    request_token: "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    run_id: "refine-plan-2026-11-04"
   checklist_gate:
     dispositions:
-      - completed
-      - not_applicable
-      - pending
-      - waived
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
     fail_closed: true
     phases:
-      - close_out
-      - pre_implementation
-      - verification
-  verification_gate_notes: build-plan runs unit tests on tag inc.sh; no live LLM required.
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
+  verification_gate_notes: "build-plan runs unit tests on tag inc.sh; no live LLM required."
 evidence:
   command_seq:
-    - node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
-  manifest_reference: working/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG/evidence/
+    - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  manifest_reference: "working/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG/evidence/"
   proof_boundaries:
-    - Historical trial readouts keep legacy dirname examples; catalog notes new shape for new runs
+    - "Historical trial readouts keep legacy dirname examples; catalog notes new shape for new runs"
 impact_analysis:
-  impl_inventory_notes: Shell-only operator surface; no agentstream package behavior change.
-  modules_or_boundaries: |
-    scripts/workflow-trial-agentstream.sh, scripts/lib/wf-trial-disposable-tag.inc.sh,
-    scripts/build-commands.sh (comment), scripts/_build_commands_cli_guide.inc.sh,
-    tools/bootstrap/workflow-trial-agentstream-sh.test.mjs,
-    docs/demos/catalog-traditional-workflow-trial-prompts.md, tools/bootstrap/README.md
+  impl_inventory_notes: "Shell-only operator surface; no agentstream package behavior change."
+  modules_or_boundaries: "scripts/workflow-trial-agentstream.sh, scripts/lib/wf-trial-disposable-tag.inc.sh,\nscripts/build-commands.sh (comment), scripts/_build_commands_cli_guide.inc.sh,\ntools/bootstrap/workflow-trial-agentstream-sh.test.mjs,\ndocs/demos/catalog-traditional-workflow-trial-prompts.md, tools/bootstrap/README.md\n"
   tied_tokens_affected:
-    - REQ-TIED_SETUP
-    - REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
-    - REQ-GOAGENT-FEATURESPEC-BATCH
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+    - "REQ-TIED_SETUP"
   tied_tokens_new:
-    - REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
-    - ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
-    - IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
+    - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
 leap_feedback:
-  divergences_from_analysis: none
-  record_status: implemented
+  divergences_from_analysis: "none"
+  record_status: "implemented"
   tied_stack_updates_required:
-    - Update CITDP-REQ-TIED_SETUP-wf-trial-orchestration satisfaction_criteria at close-out
+    - "Update CITDP-REQ-TIED_SETUP-wf-trial-orchestration satisfaction_criteria at close-out"
 record_identity:
-  change_request_id: REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
-  citdp_id: CITDP-REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
-  status: draft
+  change_request_id: "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  citdp_id: "CITDP-REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  status: "draft"
 risk_analysis:
   abuse_cases: []
   adversarial_inquiry:
-    assurance_profile: baseline-functional
+    assurance_profile: "baseline-functional"
     close_out_inquiry_waiver: null
     counterexamples:
-      - "MODEL_CONFIG empty and MODEL_SLUG unset yields unexpected modelBucket"
       - "Harness uppercase breaks validateDisposableTag"
+      - "MODEL_CONFIG empty and MODEL_SLUG unset yields unexpected modelBucket"
       - "Tag built before HARNESS export uses wrong harness segment"
-    depth_tier: minimal
+    depth_tier: "minimal"
     disconfirming_observations:
       - "workflow-trial-agentstream-sh.test.mjs asserts wf-agentstream-wf-03-cursor-composer25"
     eligibility_triggers_matched: []
@@ -89,23 +74,21 @@ risk_analysis:
     falsification_questions:
       - "Does --workspace still skip extended tag?"
       - "Does HARNESS=claude produce distinct tag suffix vs cursor at same MODEL_CONFIG?"
-    gate_policy: advisory
+    gate_policy: "advisory"
     prior_depth_tier: null
-    rationale: Shell orchestrator tag composition only; no new auth/network/persistence surface.
-    research_profile: integrated-agent
+    rationale: "Shell orchestrator tag composition only; no new auth/network/persistence surface."
+    research_profile: "integrated-agent"
 risk_assessment:
   costly_choices: []
-  depth_tier: minimal
-  gate_policy: advisory
+  depth_tier: "minimal"
+  gate_policy: "advisory"
   reversible_choices:
-    - Tag shape change for new bootstraps only; legacy dirs remain
-    - MODEL_CONFIG-first normalization rule (documented; matches wf-02-composer25 convention)
+    - "MODEL_CONFIG-first normalization rule (documented; matches wf-02-composer25 convention)"
+    - "Tag shape change for new bootstraps only; legacy dirs remain"
 test_strategy:
   composition: []
   end_to_end_ui: []
-  summary: |
-    Unit-test tag helpers via bash sourcing inc.sh in workflow-trial-agentstream-sh.test.mjs.
-    Optional composition: temp TIED_TEST_ROOT bootstrap deferred unless sponsor requires.
+  summary: "Unit-test tag helpers via bash sourcing inc.sh in workflow-trial-agentstream-sh.test.mjs.\nOptional composition: temp TIED_TEST_ROOT bootstrap deferred unless sponsor requires.\n"
   unit:
-    - tools/bootstrap/workflow-trial-agentstream-sh.test.mjs (tag suffix cases)
+    - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs (tag suffix cases)"
 title: "WF trial agentstream disposable client tag includes harness and model bucket"

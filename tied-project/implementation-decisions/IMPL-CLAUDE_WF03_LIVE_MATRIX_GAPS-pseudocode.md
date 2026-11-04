@@ -53,3 +53,45 @@ procedure CLOSE_OUT_PLAYBOOK_HINTS:
 ## Claude spawn cwd (Pillar H)
 
 - [IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS] [ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-TIED_CLAUDE_LIVE_DRIVER] BIND_LIVE_EXECUTOR_CLAUDE passes agentstream workspace into collectClaudeStreamFromSpawn spawnCwd (existing seam; regression via live-driver-bind tests).
+
+## CITDP-aware envelope build (Pillar I — slice 2)
+
+- [IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS] [ARCH-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-REQUEST_EVIDENCE_ENVELOPE] INFER_ENVELOPE_DEPTH_FROM_CITDP: build path calls shared resolveDepthTierForBackfill when input.depth_tier omitted; explicit depth_tier overrides CITDP; gate_policy from CITDP when omitted.
+procedure INFER_ENVELOPE_DEPTH_FROM_CITDP:
+  Contract:
+    INPUT: projectRoot, requestToken, optional depth_tier override, optional gate_policy override
+    PRE: working folder exists for request token
+    OUTPUT: depthTier and gatePolicy for envelope identity and gap detection
+    POST: override present => use override depth; else CITDP draft depth or integrated default; gate_policy from CITDP or advisory
+    FAILURE_MODES: invalid token, wrong tied base (upstream)
+    EFFECTS: read-only CITDP YAML under working/
+    TERMINATION: total
+  CALL resolveDepthTierForBackfill with override from input.depth_tier when defined
+  APPLY depthTier and gatePolicy to detectGaps and envelope.identity
+
+## Batch harness placeholder (Pillar J — slice 2)
+
+- [IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] EXPAND_BATCH_HARNESS: run-traditional-four-phase-agentstream.sh expands {{HARNESS}} in batch YAML; turn 4 documents backfill + minimal receipt + optional run-close-out-gates.mjs.
+procedure EXPAND_BATCH_HARNESS:
+  Contract:
+    INPUT: HARNESS env cursor or claude
+    OUTPUT: expanded batch YAML with harness-specific inventory label
+    POST: inventory harness string contains HARNESS value
+    EFFECTS: write temp batch file
+    TERMINATION: total
+  EXPORT HARNESS to perl placeholder expansion alongside MODEL_* and SKILL_ROOT
+
+## WF trial envelope depth diagnostic (Pillar K — slice 2)
+
+- [IMPL-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] WF_TRIAL_ENVELOPE_DEPTH_DIAGNOSTIC: after four-phase agentstream, compare envelope identity.depth_tier to CITDP draft; stderr DIAGNOSTIC only; exit code unchanged.
+procedure WF_TRIAL_ENVELOPE_DEPTH_DIAGNOSTIC:
+  Contract:
+    INPUT: client workspace root
+    PRE: optional envelope and CITDP under working/{REQ}
+    OUTPUT: stderr diagnostic when depths differ
+    POST: never mutates client tree
+    EFFECTS: read envelope JSON and CITDP YAML
+    TERMINATION: total
+  FOR each working request folder WITH envelope AND citdp
+    IF envelope.depth_tier != citdp.depth_tier THEN EMIT DIAGNOSTIC WF_TRIAL_ENVELOPE_DEPTH_MISMATCH
+  RETURN 0

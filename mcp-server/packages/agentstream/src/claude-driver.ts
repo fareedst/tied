@@ -152,11 +152,16 @@ export const DEFAULT_CLAUDE_PINNED_CONTRACT: ClaudePinnedContract = {
   proofBoundary: "no_live_claude_in_ci",
 };
 
+export type CollectClaudeStreamSpawnOptions = CollectClaudeStreamOptions & {
+  /** Agentstream `-w` workspace; when set, subprocess cwd should match (see live-driver-bind). */
+  spawnCwd?: string;
+};
+
 /** Collect raw NDJSON stdout from a Claude CLI subprocess (operator live only). */
 export async function collectClaudeStreamFromSpawn(
   argv: string[],
   extraEnv: string[] = [],
-  options: CollectClaudeStreamOptions = {},
+  options: CollectClaudeStreamSpawnOptions = {},
 ): Promise<ClaudeLaunchResult> {
   return new Promise((resolve) => {
     const env = { ...process.env } as Record<string, string | undefined>;
@@ -166,10 +171,15 @@ export async function collectClaudeStreamFromSpawn(
         env[entry.slice(0, eq)] = entry.slice(eq + 1);
       }
     }
-    const cmd = spawn(argv[0]!, argv.slice(1), {
+    const spawnOpts: Parameters<typeof spawn>[2] = {
       env,
       stdio: ["ignore", "pipe", "pipe"],
-    });
+    };
+    const spawnCwd = options.spawnCwd?.trim() ?? "";
+    if (spawnCwd !== "") {
+      spawnOpts.cwd = spawnCwd;
+    }
+    const cmd = spawn(argv[0]!, argv.slice(1), spawnOpts);
     const lines: string[] = [];
     let stderrBuf = "";
     const toolGate = options.jevToolGate ?? null;
@@ -181,6 +191,34 @@ export async function collectClaudeStreamFromSpawn(
       const trimmed = line.trim();
       if (trimmed !== "") {
         lines.push(trimmed);
+        // Stream assistant/thinking to stdout (Cursor runAgent parity).
+        try {
+          const obj = JSON.parse(trimmed) as Record<string, unknown>;
+          const typ = String(obj.type ?? "");
+          if (
+            typ === "thinking" &&
+            obj.subtype === "delta" &&
+            typeof obj.text === "string" &&
+            obj.text !== ""
+          ) {
+            process.stdout.write(obj.text);
+          } else if (typ === "assistant") {
+            const msg = obj.message as Record<string, unknown> | undefined;
+            const parts = msg?.content;
+            if (Array.isArray(parts)) {
+              for (const p of parts) {
+                const pm = p as Record<string, unknown>;
+                if (pm.type === "text" && typeof pm.text === "string" && pm.text !== "") {
+                  process.stdout.write(pm.text);
+                }
+              }
+            }
+          } else if (typ === "thinking" && obj.subtype === "completed") {
+            process.stdout.write("\n");
+          }
+        } catch {
+          /* non-JSON line */
+        }
       }
       if (toolGate) {
         enqueueToolGateLineCheck(gateState, toolGate, line, () => {

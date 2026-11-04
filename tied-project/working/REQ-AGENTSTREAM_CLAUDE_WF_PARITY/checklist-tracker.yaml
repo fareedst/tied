@@ -1269,36 +1269,6 @@ steps:
       state_history: []
       status: "pending"
 sub_procedures:
-  - flow:
-      return_to: "caller"
-    goals: "Apply presentation-only client YAML styling after baseline canonical formatting; fail closed when semantics change or formatter misbehaves."
-    invoked_by:
-      - "sub-yaml-edit-loop"
-    outcomes: "Post-style bytes are syntactically valid and semantically equivalent to pre-style canonical output; styling_status recorded as configured or not_configured; formatter errors return to owning checklist step."
-    preconditions:
-      - "Baseline canonical formatting already applied via lint_yaml or tied-cli.sh write with tied-yaml-canonical-v1."
-      - "Caller provides absolute or repo-relative paths for changed project-owned ./tied-project/ YAML files only."
-    references:
-      - "./tied-bundle/docs/processes.md § [PROC-YAML_EDIT_LOOP]"
-      - ".cursor/skills/tied-yaml/SKILL.md"
-      - "scripts/yaml_semantic_compare.rb"
-      - "tied-project/vocab/tied-yaml-mcp.md"
-    slug: "sub-client-yaml-styling"
-    tasks:
-      - "IF client_formatter is absent or empty: record styling_status not_configured; baseline tied-yaml-canonical-v1 plus resolved scalar_style remains the effective formatter; RETURN to sub-yaml-edit-loop caller."
-      - "IF client_formatter is configured: capture a pre-style snapshot of each path; invoke the configured formatter/hook on each path under project-owned ./tied-project/ only—never ./tied-bundle/**."
-      - "On formatter error, unsupported construct, non-idempotent output, semantic change, or write outside project-owned ./tied-project/: RETURN error to sub-yaml-edit-loop caller for correction at the owning step."
-      - "Re-read each formatted file from disk; run lint_yaml for syntax validation."
-      - "Record evidence: styling_status (configured|not_configured), scalar_style, style_source, client_formatter command/version when configured."
-      - "Resolve repository style policy from tied-project/config.yaml at the client project root (parent of TIED_BASE_PATH): scalar_style (unwrapped|wrapped) per [REQ-TIED_YAML_STYLE_CONFIGURATION]; optional client_formatter hook when present."
-      - "Run scripts/yaml_semantic_compare.rb (or equivalent) between pre-style snapshot and post-style bytes; semantic mismatch blocks acceptance and RETURNs error to the owning checklist step."
-      - "Verify idempotence: a second formatter pass on unchanged input must produce byte-identical output or fail closed."
-    title: "Client YAML presentation styling and semantic-equivalence gate"
-    tracking:
-      consideration_before_proceeding: "styling_status recorded; post-style lint_yaml passed; yaml_semantic_compare passed when client_formatter configured; no writes outside project-owned ./tied-project/."
-      retry_count: "0"
-      state_history: []
-      status: "pending"
   - disposition: "not_applicable"
     evidence_refs:
       - kind: "file_path"
@@ -1343,6 +1313,36 @@ sub_procedures:
       retry_count: "0"
       state_history: []
       status: "not_applicable"
+  - flow:
+      return_to: "caller"
+    goals: "Apply presentation-only client YAML styling after baseline canonical formatting; fail closed when semantics change or formatter misbehaves."
+    invoked_by:
+      - "sub-yaml-edit-loop"
+    outcomes: "Post-style bytes are syntactically valid and semantically equivalent to pre-style canonical output; styling_status recorded as configured or not_configured; formatter errors return to owning checklist step."
+    preconditions:
+      - "Baseline canonical formatting already applied via lint_yaml or tied-cli.sh write with tied-yaml-canonical-v1."
+      - "Caller provides absolute or repo-relative paths for changed project-owned ./tied-project/ YAML files only."
+    references:
+      - "./tied-bundle/docs/processes.md § [PROC-YAML_EDIT_LOOP]"
+      - ".cursor/skills/tied-yaml/SKILL.md"
+      - "scripts/yaml_semantic_compare.rb"
+      - "tied-project/vocab/tied-yaml-mcp.md"
+    slug: "sub-client-yaml-styling"
+    tasks:
+      - "IF client_formatter is absent or empty: record styling_status not_configured; baseline tied-yaml-canonical-v1 plus resolved scalar_style remains the effective formatter; RETURN to sub-yaml-edit-loop caller."
+      - "IF client_formatter is configured: capture a pre-style snapshot of each path; invoke the configured formatter/hook on each path under project-owned ./tied-project/ only—never ./tied-bundle/**."
+      - "On formatter error, unsupported construct, non-idempotent output, semantic change, or write outside project-owned ./tied-project/: RETURN error to sub-yaml-edit-loop caller for correction at the owning step."
+      - "Re-read each formatted file from disk; run lint_yaml for syntax validation."
+      - "Record evidence: styling_status (configured|not_configured), scalar_style, style_source, client_formatter command/version when configured."
+      - "Resolve repository style policy from tied-project/config.yaml at the client project root (parent of TIED_BASE_PATH): scalar_style (unwrapped|wrapped) per [REQ-TIED_YAML_STYLE_CONFIGURATION]; optional client_formatter hook when present."
+      - "Run scripts/yaml_semantic_compare.rb (or equivalent) between pre-style snapshot and post-style bytes; semantic mismatch blocks acceptance and RETURNs error to the owning checklist step."
+      - "Verify idempotence: a second formatter pass on unchanged input must produce byte-identical output or fail closed."
+    title: "Client YAML presentation styling and semantic-equivalence gate"
+    tracking:
+      consideration_before_proceeding: "styling_status recorded; post-style lint_yaml passed; yaml_semantic_compare passed when client_formatter configured; no writes outside project-owned ./tied-project/."
+      retry_count: "0"
+      state_history: []
+      status: "pending"
   - flow:
       return_to: "caller"
     goals: "Ensure every TIED YAML file is syntactically valid, skill-routed where applicable, and consistent before use. Use lint_yaml per [PROC-YAML_EDIT_LOOP] (processes.md); it accepts one or more paths and must process each file independently. Never use raw multi-argument `yq` pretty-print on multiple paths in one process."

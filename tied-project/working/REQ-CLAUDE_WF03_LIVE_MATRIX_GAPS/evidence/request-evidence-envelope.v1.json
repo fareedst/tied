@@ -1,14 +1,25 @@
 {
   "artifacts": [
     {
-      "content_hash": "sha256:1bace1bbcc24a24d1779f0a22b3bb18613e80683dc2509b46ec8fefb5e79af0c",
-      "kind": "request_evidence_envelope",
-      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/request-evidence-envelope.v1.json",
+      "content_hash": "sha256:08b0d8625fe04b58ca0ea0c5265368ec00c3adc7d7dc71b48689e3abf3cb73d6",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/tied-verify-payload.json",
       "phase": null,
       "proof_boundaries": [
-        "artifact_presence_only"
+        "discovery_only"
       ],
-      "schema_version": "request-evidence-envelope.v1",
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:0cce08910c0698be579986b3a24d693e0fa37c7c297434910e20ac9092ef722e",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/git-hygiene-receipt-2026-11-04.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
       "status": "present"
     },
     {
@@ -23,7 +34,18 @@
       "status": "present"
     },
     {
-      "content_hash": "sha256:2945cd3858db780f081a7c7b02dcd2dc366d24826f92da545eec0ed385c52197",
+      "content_hash": "sha256:32e8af8857ae336ab3bca6418c12e1343509d342f82ff7f893918412a06220f2",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/traceable-commit-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:3d63976b85cfe29e51b680bb4a9b1fdb9bf3522203da7d7852d71d43e7abd341",
       "kind": "citdp_record",
       "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/CITDP-REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml",
       "phase": null,
@@ -45,9 +67,20 @@
       "status": "present"
     },
     {
-      "content_hash": "sha256:6e25aaa8bdb580ee30340200f6c2a3ffc6f3a3878bc3d03ee121d1de4e826676",
+      "content_hash": "sha256:5241eb0cd80ea07fb51b938fb23c1105b743d7261cb6d07dee41a2562ce8f584",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/adherence-ledger.jsonl",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:535e744eeb975548db44a21701e34e2edb14fdc7d188e5cfe364939aa5f11066",
       "kind": "checklist_gate_receipt",
-      "path": "tied-bundle/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/gates/close_out-2026-11-04T17-04-17-869Z.json",
+      "path": "tied-bundle/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/gates/close_out-2026-11-04T17-06-15-639Z.json",
       "phase": "close_out",
       "proof_boundaries": [
         "gate_decision_only"
@@ -67,6 +100,28 @@
       "status": "present"
     },
     {
+      "content_hash": "sha256:741dba272de8d94f64470b52482ada87c859435ccd31d9da18fd144b78d5e278",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/build-plan-followon-handoff.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:7927b50df5ab99c79417bbe74702a95b449e7c5dd2bb63ee623f58618b907468",
+      "kind": "request_evidence_envelope",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/request-evidence-envelope.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "request-evidence-envelope.v1",
+      "status": "present"
+    },
+    {
       "content_hash": "sha256:7a27ffe0ebd14864ef9727dd9e680206e5b231cda30c1f1f2d7382735abd18e9",
       "kind": "unknown",
       "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/build-plan-handoff.md",
@@ -78,7 +133,7 @@
       "status": "present"
     },
     {
-      "content_hash": "sha256:82572efe522d8aed1c1cd548f0e6e2b03cc1e817c2ffed14f7ca4e48910c3f2a",
+      "content_hash": "sha256:892f0977810b8b69b393822d1160e6415259d8f3c29038754bb7bad1e807b2a0",
       "kind": "verification_evidence_manifest",
       "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/verification-evidence-manifest.v1.json",
       "phase": null,
@@ -89,9 +144,42 @@
       "status": "present"
     },
     {
+      "content_hash": "sha256:da49d1312b3722346fe7446c388d0d3407ee4a6e61b621d4a8e34fb682c8322d",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/tied-verify-result.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e3c1c4d51c013663a01af9d2fd8a6846c4d6778700c1629e467d54a623c29ac1",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/proposed-commit-message.txt",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
       "content_hash": "sha256:e4c743638515ae92043ac969fe028a8c439359e8d93a5dd93740f4f2b6323542",
       "kind": "unknown",
       "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/trial-workflow-interaction-inventory.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:fd04a445030f4974c9c25f0951c85445fa1dfd2a4f939b4a7958439a1f23e755",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/evidence/close-out-handoff.md",
       "phase": null,
       "proof_boundaries": [
         "discovery_only"
@@ -107,9 +195,9 @@
     "tracker_path": null
   },
   "envelope_meta": {
-    "generated_at": "2026-11-04T17:04:17.872Z",
-    "generator": "request_evidence_envelope_patch",
-    "revision": 2
+    "generated_at": "2026-11-04T18:34:33.908Z",
+    "generator": "request_evidence_envelope_build",
+    "revision": 1
   },
   "gaps": [],
   "identity": {
@@ -119,13 +207,6 @@
     "project_id": "43c95df716872c5d",
     "request_token": "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
   },
-  "runs": [
-    {
-      "generator": "persistGateDecisionReceipt",
-      "phase": "close_out",
-      "run_id": "close-out-2026-11-04",
-      "started_at": null
-    }
-  ],
+  "runs": [],
   "schema_version": "request-evidence-envelope.v1"
 }

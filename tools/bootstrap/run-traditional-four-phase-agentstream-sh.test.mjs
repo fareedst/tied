@@ -69,6 +69,32 @@ describe("run-traditional-four-phase-agentstream.sh [REQ-TIED_CLI_OPERATOR_OUTPU
     assert.match(r.stderr, /Environment/);
   });
 
+  it("T-BATCH-01 turn 4 documents envelope depth/backfill and turn 1 uses {{HARNESS}} [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", () => {
+    const template = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+    const body = fs.readFileSync(template, "utf8");
+    assert.match(body, /\{\{HARNESS\}\}-agentstream-four-phase/);
+    assert.match(body, /request_evidence_envelope_backfill/);
+    assert.match(body, /run-close-out-gates\.mjs/);
+    assert.match(body, /fail_on_error_gaps/);
+  });
+
+  it("T-SHELL-01 expands {{HARNESS}} per HARNESS env [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]", () => {
+    const template = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+    const tmp = path.join(REPO_ROOT, "tools/bootstrap/.tmp-four-phase-harness-expand.yaml");
+    const r = spawnSync(
+      "bash",
+      [
+        "-c",
+        `export HARNESS=claude SKILL_ROOT=.claude/skills MODEL_SLUG=x MODEL_CONFIG=y FEATURE_REMAINDER=z; perl -pe 's/\\{\\{MODEL_SLUG\\}\\}/$ENV{MODEL_SLUG}/g; s/\\{\\{MODEL_CONFIG\\}\\}/$ENV{MODEL_CONFIG}/g; s/\\{\\{FEATURE_REMAINDER\\}\\}/$ENV{FEATURE_REMAINDER}/g; s/\\{\\{SKILL_ROOT\\}\\}/$ENV{SKILL_ROOT}/g; s/\\{\\{HARNESS\\}\\}/$ENV{HARNESS}/g' "${template}" > "${tmp}"`,
+      ],
+      { cwd: REPO_ROOT, encoding: "utf8", env: { ...process.env, NO_COLOR: "1" } },
+    );
+    assert.equal(r.status, 0, r.stderr);
+    const expanded = fs.readFileSync(tmp, "utf8");
+    assert.match(expanded, /claude-agentstream-four-phase/);
+    fs.unlinkSync(tmp);
+  });
+
   it("expands {{SKILL_ROOT}} per HARNESS [REQ-AGENTSTREAM_CLAUDE_WF_PARITY]", () => {
     const template = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
     const tmp = path.join(REPO_ROOT, "tools/bootstrap/.tmp-four-phase-expand-test.yaml");
@@ -77,7 +103,7 @@ describe("run-traditional-four-phase-agentstream.sh [REQ-TIED_CLI_OPERATOR_OUTPU
         "bash",
         [
           "-c",
-          `export SKILL_ROOT='${skillRoot}' MODEL_SLUG=x MODEL_CONFIG=y FEATURE_REMAINDER=z; perl -pe 's/\\{\\{MODEL_SLUG\\}\\}/$ENV{MODEL_SLUG}/g; s/\\{\\{MODEL_CONFIG\\}\\}/$ENV{MODEL_CONFIG}/g; s/\\{\\{FEATURE_REMAINDER\\}\\}/$ENV{FEATURE_REMAINDER}/g; s/\\{\\{SKILL_ROOT\\}\\}/$ENV{SKILL_ROOT}/g' "${template}" > "${tmp}"`,
+          `export HARNESS=cursor SKILL_ROOT='${skillRoot}' MODEL_SLUG=x MODEL_CONFIG=y FEATURE_REMAINDER=z; perl -pe 's/\\{\\{MODEL_SLUG\\}\\}/$ENV{MODEL_SLUG}/g; s/\\{\\{MODEL_CONFIG\\}\\}/$ENV{MODEL_CONFIG}/g; s/\\{\\{FEATURE_REMAINDER\\}\\}/$ENV{FEATURE_REMAINDER}/g; s/\\{\\{SKILL_ROOT\\}\\}/$ENV{SKILL_ROOT}/g; s/\\{\\{HARNESS\\}\\}/$ENV{HARNESS}/g' "${template}" > "${tmp}"`,
         ],
         { cwd: REPO_ROOT, encoding: "utf8", env: { ...process.env, NO_COLOR: "1" } },
       );

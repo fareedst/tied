@@ -1,116 +1,103 @@
 change_definition:
-  current_behavior: |
-    workflow_trial_agentstream wf-03 with HARNESS=cursor reaches full PROMPT-WF-03 product outcome
-    (gold: client 1793760220-wf-agentstream-wf-03, REQ-MODULE_COMPOSITION, close_out allowed).
-    HARNESS=claude on the same four-phase batch often stops at build-plan (pre_implementation gate /
-    missing IMPL) with no product tree while the harness still runs close-out turn 4.
-    Claude live agentstream argv omits --mcp-config and --strict-mcp-config used by validated client smoke.
-  desired_behavior: |
-    Claude AgentDriver live argv matches validated MCP smoke; four-phase batch and orchestrator are
-    harness-aware (.claude/skills, preload, greenfield minimal gate playbook); optional AGENTSTREAM_HARNESS_TRACE
-    records per-turn product_signals; dual-harness wf-03 parity smoke (CI: argv/MCP; manual: live product parity
-    vs gold fingerprint at same MODEL_SLUG).
+  current_behavior: "workflow_trial_agentstream wf-03 with HARNESS=cursor reaches full PROMPT-WF-03 product outcome\n(gold: client 1793760220-wf-agentstream-wf-03, REQ-MODULE_COMPOSITION, close_out allowed).\nHARNESS=claude on the same four-phase batch often stops at build-plan (pre_implementation gate /\nmissing IMPL) with no product tree while the harness still runs close-out turn 4.\nClaude live agentstream argv omits --mcp-config and --strict-mcp-config used by validated client smoke.\n"
+  desired_behavior: "Claude AgentDriver live argv matches validated MCP smoke; four-phase batch and orchestrator are\nharness-aware (.claude/skills, preload, greenfield minimal gate playbook); optional AGENTSTREAM_HARNESS_TRACE\nrecords per-turn product_signals; dual-harness wf-03 parity smoke (CI: argv/MCP; manual: live product parity\nvs gold fingerprint at same MODEL_SLUG).\n"
   non_goals:
-    - Per-record model in feature-spec batch YAML
-    - Live dual-harness LLM runs in default CI
-    - Fixing model capability differences when harness surface is already equivalent
-    - Changing Cursor reference harness behavior
+    - "Changing Cursor reference harness behavior"
+    - "Fixing model capability differences when harness surface is already equivalent"
+    - "Live dual-harness LLM runs in default CI"
+    - "Per-record model in feature-spec batch YAML"
   success_criteria:
-    - Claude live argv includes project MCP config (strict by default) when .mcp.json or .cursor/mcp.json exists
-    - npm test in mcp-server/packages/agentstream green after changes
-    - Batch {{SKILL_ROOT}} expands per HARNESS; phase 4 does not assert staged changes when none exist
-    - Manual live: workflow_trial_agentstream wf-03 HARNESS=claude matches gold parity fingerprint at fixed MODEL_SLUG
-  unchanged_behavior: Cursor harness path and existing Claude fixture-gated CI remain green.
+    - "Batch {{SKILL_ROOT}} expands per HARNESS; phase 4 does not assert staged changes when none exist"
+    - "Claude live argv includes project MCP config (strict by default) when .mcp.json or .cursor/mcp.json exists"
+    - "npm test in mcp-server/packages/agentstream green after changes"
+    - Manual live: "workflow_trial_agentstream wf-03 HARNESS=claude matches gold parity fingerprint at fixed MODEL_SLUG"
+  unchanged_behavior: "Cursor harness path and existing Claude fixture-gated CI remain green."
 completion_criteria:
   activation:
-    phase: pre_implementation
-    request_token: REQ-AGENTSTREAM_CLAUDE_WF_PARITY
-    run_id: refine-plan-2026-11-04
+    phase: "pre_implementation"
+    request_token: "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+    run_id: "refine-plan-2026-11-04"
   checklist_gate:
     dispositions:
-      - completed
-      - not_applicable
-      - pending
-      - waived
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
     fail_closed: true
     phases:
-      - close_out
-      - pre_implementation
-      - verification
-  verification_gate_notes: Plan-mode refine; build-plan runs unit/composition tests and optional manual live matrix.
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
+  verification_gate_notes: "Plan-mode refine; build-plan runs unit/composition tests and optional manual live matrix."
 evidence:
   command_seq:
-    - cd mcp-server/packages/agentstream && npm test
-    - node --test tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs
-    - bash scripts/dual-harness-wf03-parity-smoke.sh --dry-run-only
-  manifest_reference: working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/
+    - "cd mcp-server/packages/agentstream && npm test"
+    - "node --test tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs"
+    - "bash scripts/dual-harness-wf03-parity-smoke.sh --dry-run-only"
+  manifest_reference: "working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/"
   proof_boundaries:
-    - Gold fingerprint read from 1793760220-wf-agentstream-wf-03 is facilitator reference only; not committed product
-    - Live Claude wf-03 parity proof is operator/manual unless sponsor enables nightly job
+    - "Gold fingerprint read from 1793760220-wf-agentstream-wf-03 is facilitator reference only; not committed product"
+    - "Live Claude wf-03 parity proof is operator/manual unless sponsor enables nightly job"
 impact_analysis:
-  impl_inventory_notes: |
-    Extends REQ-TIED_CLAUDE_LIVE_DRIVER / REQ-TIED_CLAUDE_HARNESS; no new external attack surface.
-  modules_or_boundaries: |
-    mcp-server/packages/agentstream/src/claude-agent-argv.ts, harness-turn-trace.ts, live-executor.ts;
-    scripts/run-traditional-four-phase-agentstream.sh, workflow-trial-agentstream.sh;
-    docs/demos/traditional-four-phase-agentstream.yaml; scripts/dual-harness-wf03-parity-smoke.*
+  impl_inventory_notes: "Extends REQ-TIED_CLAUDE_LIVE_DRIVER / REQ-TIED_CLAUDE_HARNESS; no new external attack surface.\n"
+  modules_or_boundaries: "mcp-server/packages/agentstream/src/claude-agent-argv.ts, harness-turn-trace.ts, live-executor.ts;\nscripts/run-traditional-four-phase-agentstream.sh, workflow-trial-agentstream.sh;\ndocs/demos/traditional-four-phase-agentstream.yaml; scripts/dual-harness-wf03-parity-smoke.*\n"
   tied_tokens_affected:
-    - REQ-TIED_CLAUDE_LIVE_DRIVER
-    - REQ-TIED_CLAUDE_HARNESS
-    - REQ-GOAGENT-FEATURESPEC-BATCH
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    - "REQ-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_LIVE_DRIVER"
   tied_tokens_new:
-    - REQ-AGENTSTREAM_CLAUDE_WF_PARITY
-    - ARCH-AGENTSTREAM_CLAUDE_WF_PARITY
-    - IMPL-AGENTSTREAM_CLAUDE_WF_PARITY
+    - "ARCH-AGENTSTREAM_CLAUDE_WF_PARITY"
+    - "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY"
+    - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
 leap_feedback:
-  divergences_from_analysis: none
-  record_status: draft
+  divergences_from_analysis: "none"
+  record_status: "draft"
   tied_stack_updates_required: []
 record_identity:
-  change_request_id: REQ-AGENTSTREAM_CLAUDE_WF_PARITY
+  change_request_id: "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
   recorded_at: "2026-11-04"
-  title: Agentstream Claude WF-03 harness product parity
+  title: "Agentstream Claude WF-03 harness product parity"
 risk_analysis:
   abuse_cases: []
   adversarial_inquiry:
-    assurance_profile: baseline-functional
+    assurance_profile: "baseline-functional"
     close_out_inquiry_waiver: null
     counterexamples:
-      - "Claude argv includes MCP flags but strict opt-out still loads wrong config path"
       - "Batch expands SKILL_ROOT for claude but orchestrator preflight skipped on dry-run"
-      - "Trace enabled but writes outside working/{REQ}/evidence"
+      - "Claude argv includes MCP flags but strict opt-out still loads wrong config path"
       - "Dual-harness smoke passes dry while live wf-03 still fails model capability"
+      - "Trace enabled but writes outside working/{REQ}/evidence"
     depth_change_waiver: null
-    depth_tier: minimal
+    depth_tier: "minimal"
     disconfirming_observations:
       - "claude-agent-argv.test.ts will assert --mcp-config when fixture client has .cursor/mcp.json"
       - "run-traditional-four-phase-agentstream-sh.test.mjs will assert {{SKILL_ROOT}} expansion per HARNESS"
     eligibility_triggers_matched: []
     evidence_references:
+      - "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts"
+      - "tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/CITDP-REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml"
       - "tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/not-applicable-receipt.v1.json"
       - "tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/sub-adversarial-inquiry-pass-na.md"
-      - "tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/CITDP-REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml"
-      - "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts"
     falsification_questions:
       - "Does AGENTSTREAM_CLAUDE_STRICT_MCP=0 omit --strict-mcp-config while keeping --mcp-config?"
       - "Does HARNESS=cursor leave .cursor/skills paths in expanded batch unchanged?"
-    gate_policy: advisory
+    gate_policy: "advisory"
     integrated_waiver: null
     prior_depth_tier: null
-    rationale: Store-repo harness and orchestrator changes only; no new network/auth/persistence surface in product under test.
-    research_profile: integrated-agent
+    rationale: "Store-repo harness and orchestrator changes only; no new network/auth/persistence surface in product under test."
+    research_profile: "integrated-agent"
     strict_eligibility_prerequisites: []
   quality_evidence_matrix:
-    - applicability: applicable
-      attribute: baseline-functional
-      command_or_test: cd mcp-server/packages/agentstream && npm test
-      evidence_method: Unit and composition tests including claude-agent-argv and live-driver-bind
-      limitation: Does not prove live wf-03 product parity without manual smoke
-      owner: build-plan
-      rationale: Regression guard for AgentDriver and batch expansion
+    - applicability: "applicable"
+      attribute: "baseline-functional"
+      command_or_test: "cd mcp-server/packages/agentstream && npm test"
+      evidence_method: "Unit and composition tests including claude-agent-argv and live-driver-bind"
+      limitation: "Does not prove live wf-03 product parity without manual smoke"
+      owner: "build-plan"
+      rationale: "Regression guard for AgentDriver and batch expansion"
       result: "~"
-      risk: argv drift breaks Claude MCP load
-      threshold: npm test exit 0
+      risk: "argv drift breaks Claude MCP load"
+      threshold: "npm test exit 0"
       waiver:
         expiry: "~"
         owner: "~"
@@ -120,4 +107,4 @@ risk_analysis:
   residual_risk:
     expiry: "~"
     owner: "~"
-    summary: Live LLM matrix cost and flake remain operator-controlled.
+    summary: "Live LLM matrix cost and flake remain operator-controlled."
