@@ -1,0 +1,24 @@
+copy_hygiene: "Close-out tracker for REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+description: "Minimal tracker for WF trial orchestrator process log close-out"
+execution_evidence:
+  close_out_evidence:
+    date: "2026-11-04"
+    deferred: []
+    gates:
+      close_out: "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/gates/close_out-latest.json"
+    master_checklist: "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/checklist-tracker.yaml"
+  completed:
+    - "sub-close-out-evidence-sync"
+    - "traceable-commit"
+  envelope_path: "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq:
+      - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    status: "passed"
+  request: "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+notes: "Build-plan complete; close-out 2026-11-04"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -30,6 +30,8 @@ Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-
   WF_TRIAL_STRICT_PREFLIGHT=1 fails closed when HARNESS=claude and Claude client validation returns non-zero (default: DIAGNOSTIC and continue).
   WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 skips store mcp-server/dist check before live four-phase.
   WF_TRIAL_STRICT_RECONCILE=1 fails closed when mcp-server/dist/index.js is missing (default: DIAGNOSTIC and continue).
+  Process log capture is on by default; WF_TRIAL_SKIP_PROCESS_LOG=1 disables stdout/stderr files under
+  tied-project/working/wf-trial-orchestrator-run/evidence/ on the client.
 
 Disposable bootstrap (no --workspace): client dir under TIED_TEST_ROOT is
   {epoch}-wf-agentstream-{wf-id}-{harness}-{modelBucket}
@@ -131,6 +133,9 @@ export MODEL_SLUG="${MODEL_SLUG:-composer-2.5-fast}"
 export MODEL_CONFIG="${MODEL_CONFIG:-composer-2.5}"
 export HARNESS="${HARNESS:-cursor}"
 
+BOOTSTRAP_PREPENDED=0
+TAG=""
+
 if [[ -n "$WORKSPACE_ARG" ]]; then
   case "$WORKSPACE_ARG" in
     /*) export WORKSPACE="$WORKSPACE_ARG" ;;
@@ -140,15 +145,38 @@ if [[ -n "$WORKSPACE_ARG" ]]; then
 else
   TEST_ROOT="${TIED_TEST_ROOT:-${HOME}/Documents/dev/test}"
   TAG="$(build_wf_trial_disposable_tag "$WF_ID")"
-  WORKSPACE="$(
-    node "${REPO_ROOT}/tools/bootstrap/new-tied-client.mjs" \
-      --disposable --out-path \
-      --source-root "${REPO_ROOT}" \
-      --test-root "${TEST_ROOT}" \
-      --tag "${TAG}"
-  )"
+  # shellcheck source=lib/wf-trial-process-log.inc.sh
+  source "${SCRIPT_DIR}/lib/wf-trial-process-log.inc.sh"
+  if wf_trial_process_log_enabled; then
+    wf_trial_process_log_bootstrap_stderr_init
+    BOOTSTRAP_PREPENDED=1
+    WORKSPACE="$(
+      node "${REPO_ROOT}/tools/bootstrap/new-tied-client.mjs" \
+        --disposable --out-path \
+        --source-root "${REPO_ROOT}" \
+        --test-root "${TEST_ROOT}" \
+        --tag "${TAG}" 2>"${WF_TRIAL_BOOTSTRAP_STDERR}"
+    )"
+  else
+    WORKSPACE="$(
+      node "${REPO_ROOT}/tools/bootstrap/new-tied-client.mjs" \
+        --disposable --out-path \
+        --source-root "${REPO_ROOT}" \
+        --test-root "${TEST_ROOT}" \
+        --tag "${TAG}"
+    )"
+  fi
   export WORKSPACE
 fi
+
+if [[ -z "${WF_TRIAL_PROCESS_LOG_SCHEMA:-}" ]]; then
+  # shellcheck source=lib/wf-trial-process-log.inc.sh
+  source "${SCRIPT_DIR}/lib/wf-trial-process-log.inc.sh"
+fi
+
+wf_trial_process_log_bind_workspace \
+  "$WORKSPACE" "$WF_NORM" "$REPO_ROOT" "${HARNESS}" "${MODEL_SLUG}" "${MODEL_CONFIG}" \
+  "${TAG}" "$DRY_RUN" "$BOOTSTRAP_PREPENDED"
 
 BODY="$(extract_feature_remainder "$WF_NORM" "$CATALOG")"
 [[ -n "$BODY" ]] || fail "empty catalog extract for PROMPT-${WF_NORM} (check ${CATALOG})"
@@ -183,4 +211,7 @@ fi
 ARGS=()
 ((DRY_RUN)) && ARGS+=(--dry-run)
 
-exec bash "$FOUR_PHASE" "${ARGS[@]}"
+FOUR_PHASE_EXIT=0
+bash "$FOUR_PHASE" "${ARGS[@]}" || FOUR_PHASE_EXIT=$?
+wf_trial_process_log_finalize "$FOUR_PHASE_EXIT"
+exit "$FOUR_PHASE_EXIT"

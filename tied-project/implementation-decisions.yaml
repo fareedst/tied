@@ -3466,3 +3466,12 @@ IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
     requirements:
       - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
+  name: "WF trial orchestrator process log implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    requirements:
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"

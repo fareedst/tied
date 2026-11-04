@@ -16,8 +16,8 @@
 1. From the TIED store, run **`test-new-tied-client`** ([runbook](../pseudocode-new-client-tied-adherence-runbook.md)); open the new client root in Cursor.
 2. Set the **target model** for this cell **before turn 1** (see [Model configurations](#model-configurations)).
 3. Confirm **`tied-yaml`** MCP and **`add-feature`**, **`refine-plan`**, **`build-plan`**, **`close-out`** skills are available.
-4. Run **four turns** per [Four-phase sponsor protocol](#four-phase-sponsor-protocol-normative).
-5. From the **TIED store** workspace, run **`@record-wf-trial`** with the disposable client path or numeric id (see [tools/bundled-record-wf-trial-skill/SKILL.md](../../tools/bundled-record-wf-trial-skill/SKILL.md)).
+4. Run **four turns** per [Four-phase sponsor protocol](#four-phase-sponsor-protocol-normative). **Automated path:** `workflow_trial_agentstream wf-NN` from the store (bootstrap + four-phase agentstream) writes **`tied-project/working/wf-trial-orchestrator-run/evidence/`** (`process.stdout.log`, `process.stderr.log`, `wf-trial-orchestrator-run.v1.json`) on the disposable client unless **`WF_TRIAL_SKIP_PROCESS_LOG=1`**.
+5. From the **TIED store** workspace, run **`@record-wf-trial`** with the disposable client path or numeric id (see [tools/bundled-record-wf-trial-skill/SKILL.md](../../tools/bundled-record-wf-trial-skill/SKILL.md)); pass **`--orchestrator-log-dir`** if logs were copied elsewhere.
 6. Score using [Facilitator grading readout](#facilitator-grading-readout); do not add methodology instructions to the pasted product text.
 
 **Fair comparison:** One fresh disposable client per **(PROMPT-WF-NN × model configuration)**. Do not reuse one client across models.
@@ -239,6 +239,7 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | PROMPT-WF-03 | agentstream orchestrator | `1793605811-wf-agentstream-wf-03` (`workflow-trial-agentstream wf-03`) | [agentstream readout](trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md) |
 | PROMPT-WF-03 | Claude Haiku 5.5 / agentstream | `1793815895-wf-agentstream-wf-03-claude-claudehaiku55` | [Claude readout](trial-readout-PROMPT-WF-03-claudehaiku55-1793815895-wf-agentstream-wf-03-claude-claudehaiku55.md) (build-plan on disk; **close-out incomplete**) |
 | PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1793817075-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md) (full four-turn close-out; reconcile **not_run**) |
+| PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1793820250-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`; orchestrator process log) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md) (full four-turn close-out; RED archived; reconcile **not_run**) |
 
 Maintained by **`@record-wf-trial`**.
 

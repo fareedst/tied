@@ -44,6 +44,7 @@ Documented disposable-client runs graded with **workflow choreography**. Not REQ
 | [PROMPT-WF-03 agentstream @ 1793605811](trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md) | [PROMPT-WF-03](catalog-traditional-workflow-trial-prompts.md#prompt-wf-03) | `composer-2.5` / `composer-2.5-fast` | `/Users/fareed/Documents/dev/test/1793605811-wf-agentstream-wf-03` |
 | [PROMPT-WF-03 Claude @ 1793815895](trial-readout-PROMPT-WF-03-claudehaiku55-1793815895-wf-agentstream-wf-03-claude-claudehaiku55.md) | [PROMPT-WF-03](catalog-traditional-workflow-trial-prompts.md#prompt-wf-03) | `claude-haiku-5-5` | `/Users/fareed/Documents/dev/test/1793815895-wf-agentstream-wf-03-claude-claudehaiku55` |
 | [PROMPT-WF-03 Cursor agentstream @ 1793817075](trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md) | [PROMPT-WF-03](catalog-traditional-workflow-trial-prompts.md#prompt-wf-03) | `composer-2.5` / `composer-2.5-fast` | `/Users/fareed/Documents/dev/test/1793817075-wf-agentstream-wf-03-cursor-composer25` |
+| [PROMPT-WF-03 Cursor agentstream @ 1793820250](trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md) | [PROMPT-WF-03](catalog-traditional-workflow-trial-prompts.md#prompt-wf-03) | `composer-2.5` / `composer-2.5-fast` | `/Users/fareed/Documents/dev/test/1793820250-wf-agentstream-wf-03-cursor-composer25` |
 
 Maintained by **`@record-wf-trial`**. Catalog: [traditional workflow trials](catalog-traditional-workflow-trial-prompts.md#recorded-trials-facilitator).
 

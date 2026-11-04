@@ -61,6 +61,8 @@
 | **WF_TRIAL_STRICT_RECONCILE** | strict reconcile preflight | When set, missing `mcp-server/dist/index.js` fails orchestrator before batch (default off). [REQ-WF_TRIAL_FOUR_PHASE_HARDENING](../requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml) |
 | **WF03 Claude incomplete cell** | live matrix gap, haiku55 incomplete | Facilitator label when a Claude wf-03 disposable run reaches GREEN tests but fails machine **`close_out`** or Claude preflight validation (example client `1793810114-wf-agentstream-wf-03-claude-claudehaiku55`). Distinct from **WF03_CURSOR_GOLD**. Follow-on: [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS](../requirements/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS.yaml) · [PLAN](../working/REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS/PLAN.md). |
 | **WF trial strict preflight** | `WF_TRIAL_STRICT_PREFLIGHT` | When set, **`workflow-trial-agentstream.sh`** should fail closed if `run-tied-claude-client-validation.mjs` reports `ok: false` (proposed in REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS refine-plan). Default today: DIAGNOSTIC and continue. |
+| **WF trial orchestrator process log** | wf-trial-orchestrator-run, process.stdout.log | Default-on tee of orchestrator stdout/stderr under `tied-project/working/wf-trial-orchestrator-run/evidence/` with manifest **`wf-trial-orchestrator-run.v1.json`**. **`WF_TRIAL_SKIP_PROCESS_LOG=1`** disables. Distinct from **`AGENTSTREAM_HARNESS_TRACE`**. [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG](../requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml) |
+| **WF_TRIAL_SKIP_PROCESS_LOG** | skip orchestrator process log | When set, **`workflow-trial-agentstream.sh`** does not write process log files or manifest. [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG](../requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml) |
 
 ---
 

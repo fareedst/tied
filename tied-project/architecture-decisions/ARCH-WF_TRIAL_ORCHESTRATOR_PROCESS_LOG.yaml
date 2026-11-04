@@ -1,0 +1,10 @@
+ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  decision: "Capture lives in scripts/lib/wf-trial-process-log.inc.sh sourced from workflow-trial-agentstream.sh immediately after WORKSPACE is known; fixed client path tied-project/working/wf-trial-orchestrator-run/evidence/; tee preserves live terminal; distinct from AGENTSTREAM_HARNESS_TRACE JSONL inside agentstream."
+  name: "WF trial orchestrator process log boundaries"
+  rationale: "Shell-level capture covers orchestrator DIAGNOSTICs and CLI without duplicating agentstream executor logging."
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    requirements:
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"

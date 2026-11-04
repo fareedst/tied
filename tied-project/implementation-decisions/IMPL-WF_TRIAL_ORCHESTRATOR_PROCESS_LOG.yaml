@@ -1,0 +1,10 @@
+IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  decision: "wf-trial-process-log.inc.sh implements enabled/bind/finalize with bash tee and node JSON manifest; workflow-trial-agentstream.sh binds after workspace, removes exec on four-phase; record-wf-trial skill + catalog updated."
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG-pseudocode.md"
+  name: "WF trial orchestrator process log implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    requirements:
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"

@@ -1,0 +1,9 @@
+feat(wf-trial): orchestrator process log + record-wf-trial readout
+
+Default-on stdout/stderr capture for workflow_trial_agentstream with
+wf-trial-orchestrator-run.v1.json on disposable clients; extend
+@record-wf-trial for log discovery. Includes PROMPT-WF-03 facilitator
+readout for client 1793820250 (process log cohort).
+
+REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG / ARCH / IMPL
+Close-out: machine close_out allowed; envelope blocking_gap_count=0

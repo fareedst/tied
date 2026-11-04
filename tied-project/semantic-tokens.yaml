@@ -1451,6 +1451,15 @@ ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
   name: "WF trial four-phase hardening architecture"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  cross_references:
+    - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  description: "Shell tee capture boundaries for workflow trials"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
+  name: "WF trial orchestrator process log architecture"
+  status: "Active"
+  type: "ARCH"
 IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Implementation"
   cross_references:
@@ -3213,6 +3222,16 @@ IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
   description: "WF trial four-phase hardening implementation"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
   name: "WF trial four-phase hardening implementation"
+  status: "Active"
+  type: "IMPL"
+IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  description: "wf-trial-process-log.inc.sh and orchestrator wiring"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
+  name: "WF trial orchestrator process log implementation"
   status: "Active"
   type: "IMPL"
 PROC-AGENT_REQ_CHECKLIST:
@@ -5209,5 +5228,16 @@ REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
   description: "WF trial four-phase friction reductions from facilitator readouts"
   detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
   name: "WF trial four-phase hardening"
+  status: "Active"
+  type: "REQ"
+REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    - "REQ-TIED_SETUP"
+  description: "Default-on orchestrator stdout/stderr capture for @record-wf-trial"
+  detail_file: "requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
+  name: "WF trial orchestrator process log"
   status: "Active"
   type: "REQ"

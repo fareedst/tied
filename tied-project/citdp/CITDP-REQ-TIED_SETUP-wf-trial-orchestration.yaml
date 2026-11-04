@@ -11,12 +11,14 @@ CITDP-REQ-TIED_SETUP-wf-trial-orchestration:
     - "REQ-TIED_SETUP"
     - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
     - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+    - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
   satisfaction_criteria:
     - "Default bootstrap --tag wf-agentstream-{wf-id}-{harness}-{modelBucket} (modelBucket from MODEL_CONFIG first else MODEL_SLUG)"
+    - "Default-on orchestrator process logs under tied-project/working/wf-trial-orchestrator-run/evidence/ with wf-trial-orchestrator-run.v1.json unless WF_TRIAL_SKIP_PROCESS_LOG=1 (REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG)"
+    - "Disposable bootstrap materializes tied-project/agent-preload-contract.yaml when absent; reconcile preflight DIAGNOSTIC when store mcp-server/dist missing (REQ-WF_TRIAL_FOUR_PHASE_HARDENING)"
     - "parseNewTiedClientArgs rejects --out-path without --disposable"
     - "Successful disposable --out-path prints resolved clientDir on stdout only (progress on stderr)"
     - "workflow-trial-agentstream.sh validates WF-01..WF-08, requires gawk, --workspace + --dry-run shows --model in agentstream output"
-    - "Disposable bootstrap materializes tied-project/agent-preload-contract.yaml when absent; reconcile preflight DIAGNOSTIC when store mcp-server/dist missing (REQ-WF_TRIAL_FOUR_PHASE_HARDENING)"
   test_strategy:
     composition:
       - "scripts/workflow-trial-agentstream.sh --workspace + --dry-run"

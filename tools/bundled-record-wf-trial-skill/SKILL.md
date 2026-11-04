@@ -19,7 +19,7 @@ Explicit invocation only (`/record-wf-trial`, `@record-wf-trial`).
 
 ## Procedure
 
-1. **Strip prefix** — Remove `/record-wf-trial` or `@record-wf-trial`; remainder is client locator and optional flags (see [reference.md](./reference.md): `--force`, `--skip-feedback-ingest`, `--prompt PROMPT-WF-NN`, `--model-config`).
+1. **Strip prefix** — Remove `/record-wf-trial` or `@record-wf-trial`; remainder is client locator and optional flags (see [reference.md](./reference.md): `--force`, `--skip-feedback-ingest`, `--prompt PROMPT-WF-NN`, `--model-config`, `--orchestrator-log-dir`).
 
 2. **Workspace gate (required before writes)** — Call `tied_config_get_base_path`. Resolved path must be **`{store}/tied-project/`**, not the subject client's `tied-project/`. Present path to sponsor; wrong destination is a **costly choice**.
 
@@ -33,7 +33,7 @@ Explicit invocation only (`/record-wf-trial`, `@record-wf-trial`).
 
 7. **Facilitator verification** — With client-scoped env (reference matrix): `git log -1`, project tests, lint/typecheck if present, `tied-cli.sh tied_validate_consistency`. Capture full JSON and stdout to `evidence/build-plan-verification-evidence.md`. **Do not** re-run subject `close_out` unless sponsor asks.
 
-8. **Inspect completion signals** — Three-way table: machine close_out, process contract, adherence ledger (GF-04 §2.3). Require or flag missing `trial-workflow-interaction-inventory.v1.json`. **Phase boundary audit:** compare git history to inventory turn order; note if product commits precede build-plan turn. **Four-turn table:** skill, outcome (plan updated / tests red / green / close-out signals).
+8. **Inspect completion signals** — Three-way table: machine close_out, process contract, adherence ledger (GF-04 §2.3). Require or flag missing `trial-workflow-interaction-inventory.v1.json`. **Phase boundary audit:** compare git history to inventory turn order; note if product commits precede build-plan turn. **Four-turn table:** skill, outcome (plan updated / tests red / green / close-out signals). **Process log review (when manifest or `--orchestrator-log-dir` present):** read `process.stderr.log` / `process.stdout.log` (default under `tied-project/working/wf-trial-orchestrator-run/evidence/` per `wf-trial-orchestrator-run.v1.json`); extract `DIAGNOSTIC`, `DEBUG`, `ERROR`, and turn-boundary lines; cross-check four-turn table and phase boundary audit. Use ≤12 excerpt bullets in the readout (≤3 quoted lines each).
 
 9. **Grade** — Seven weighted dimensions from [facilitator grading readout](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout); letter bands + rationale. **Cross-model notes:** prose comparison to other readouts for the same PROMPT-WF when they exist — no ranking. **Forbidden:** `maturity_score`, universal scores, CMMI levels, leaderboard-as-maturity. Include **future-test rule** paragraph.
 

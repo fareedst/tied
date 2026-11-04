@@ -4100,3 +4100,32 @@ REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
     implementation:
       - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  category: "Tooling"
+  description: "Default-on tee capture of workflow_trial_agentstream stdout/stderr on disposable clients with wf-trial-orchestrator-run.v1.json manifest; @record-wf-trial consumes logs for process friction grading."
+  detail_file: "requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
+  name: "WF trial orchestrator process log for facilitator grading"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "REQ-TIED_SETUP"
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+    related_to:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  satisfaction_criteria:
+    - criterion: "@record-wf-trial discovers default manifest path and documents --orchestrator-log-dir; step 8 includes Process log review."
+      id: "SC-WF-PROCESS-LOG-RECORD-WF-TRIAL"
+    - criterion: "On finalize, stderr emits DIAGNOSTIC: wf-trial process log manifest=<abs-path>."
+      id: "SC-WF-PROCESS-LOG-DIAGNOSTIC"
+    - criterion: "Unless WF_TRIAL_SKIP_PROCESS_LOG=1, orchestrator writes process.stdout.log, process.stderr.log, and manifest under tied-project/working/wf-trial-orchestrator-run/evidence/; bootstrap stderr prepended on disposable bootstrap; EXIT trap finalizes manifest."
+      id: "SC-WF-PROCESS-LOG-CAPTURE"
+    - criterion: "workflow-trial-agentstream-sh.test.mjs covers TS-C1 and TS-C2."
+      id: "SC-WF-PROCESS-LOG-TEST"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    implementation:
+      - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"

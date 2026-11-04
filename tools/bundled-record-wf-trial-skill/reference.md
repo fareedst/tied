@@ -3,7 +3,7 @@
 ## Invocation remainder
 
 ```text
-@record-wf-trial <client-path-or-id> [--force] [--skip-feedback-ingest] [--prompt PROMPT-WF-NN] [--model-config composer-2.5|luna-low|luna-med|luna-high]
+@record-wf-trial <client-path-or-id> [--force] [--skip-feedback-ingest] [--prompt PROMPT-WF-NN] [--model-config composer-2.5|luna-low|luna-med|luna-high] [--orchestrator-log-dir ABS_PATH]
 ```
 
 | Flag | Effect |
@@ -12,6 +12,7 @@
 | `--skip-feedback-ingest` | Readout + catalogs only; no store `tied_feedback_add`. Readout must state ingest **N/A** |
 | `--prompt PROMPT-WF-NN` | Override auto-discovery from client PLAN headers |
 | `--model-config` | Override or confirm model config id when PLAN header is ambiguous |
+| `--orchestrator-log-dir` | Directory with `wf-trial-orchestrator-run.v1.json` or `process.{stdout,stderr}.log` when logs were copied off-client |
 
 ## Client root resolution
 
@@ -44,6 +45,22 @@ export TIED_STORE_ROOT="{store repo root}"
 | `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency` | full JSON file |
 | Optional `tied_project_lint` | JSON summary |
 
+## Orchestrator process log (default discovery)
+
+When the trial used **`workflow_trial_agentstream`**, the client usually contains:
+
+| Artifact | Path (under client root) |
+| --- | --- |
+| Manifest | `tied-project/working/wf-trial-orchestrator-run/evidence/wf-trial-orchestrator-run.v1.json` |
+| Stdout log | `…/process.stdout.log` |
+| Stderr log | `…/process.stderr.log` |
+
+Schema id: **`wf-trial-orchestrator-run.v1`**. Opt out at run time with **`WF_TRIAL_SKIP_PROCESS_LOG=1`**.
+
+Readout: add **Orchestrator process log** (manifest path, `exit_code`, ≤12 friction bullets with log citations). When manifest is absent, state **N/A** and keep legacy “not transcript-grade” honesty only for non-orchestrator runs.
+
+**Methodology learning readout** (catalog 9%): score when process logs exist; still no maturity_score / leaderboard.
+
 ## Readout document contract
 
 Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-skill/reference.md#readout-document-contract-12-sections) with workflow-specific sections:
@@ -56,13 +73,14 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 6. Completion signals (three-way).
 7. TIED db capture + **Workflow inventory** (`trial-workflow-interaction-inventory.v1.json`) + cohort extras (`feedback.yaml`).
 8. **Four-turn table** (skill × outcome).
-9. **Phase boundary audit** (heuristic; document uncertainty).
-10. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)).
-11. **Cross-model notes** (same PROMPT-WF, other readouts if any — prose, no ranking).
-12. Cohort comparisons vs peer WF readouts.
-13. Optional TIED version / dogfood paragraph (not effectiveness claim).
-14. Facilitator follow-ups.
-15. Future-test rule.
+9. **Orchestrator process log** (when manifest or `--orchestrator-log-dir`; else **N/A**).
+10. **Phase boundary audit** (heuristic; document uncertainty).
+11. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)).
+12. **Cross-model notes** (same PROMPT-WF, other readouts if any — prose, no ranking).
+13. Cohort comparisons vs peer WF readouts.
+14. Optional TIED version / dogfood paragraph (not effectiveness claim).
+15. Facilitator follow-ups.
+16. Future-test rule.
 
 **Filename pattern:** `docs/demos/trial-readout-PROMPT-WF-{NN}-{modelConfigSlug}-{clientId}.md`
 

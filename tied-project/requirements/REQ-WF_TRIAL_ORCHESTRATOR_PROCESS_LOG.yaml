@@ -1,0 +1,36 @@
+REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  category: "Tooling"
+  description: "Persist shell orchestrator terminal streams for @record-wf-trial and cohort grading."
+  name: "WF trial orchestrator process log for facilitator grading"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Transcript-grade process evidence on disposable client"
+      - "Workflow choreography grading from DIAGNOSTIC/DEBUG lines"
+    problems_solved:
+      - "Ephemeral terminal-only orchestrator output"
+      - "Methodology learning readout N/A without friction log"
+    why: "Facilitator readouts lacked transcript-grade orchestrator friction; sponsor feeds logs alongside TIED evidence."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "REQ-TIED_SETUP"
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+    related_to:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  satisfaction_criteria:
+    - criterion: "DIAGNOSTIC manifest line on finalize."
+      id: "SC-WF-PROCESS-LOG-DIAGNOSTIC"
+    - criterion: "record-wf-trial step 8 Process log review + --orchestrator-log-dir."
+      id: "SC-WF-PROCESS-LOG-RECORD-WF-TRIAL"
+    - criterion: "TS-C1 TS-C2 pass."
+      id: "SC-WF-PROCESS-LOG-TEST"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    - criterion: "Unless WF_TRIAL_SKIP_PROCESS_LOG=1, orchestrator writes logs + manifest; bootstrap stderr prepended; trap on EXIT after bind."
+      id: "SC-WF-PROCESS-LOG-CAPTURE"
+  status: "Draft"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    implementation:
+      - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"

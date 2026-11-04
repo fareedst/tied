@@ -1,0 +1,73 @@
+CITDP-REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
+  change_definition:
+    current_behavior: "workflow_trial_agentstream and run-traditional-four-phase-agentstream emit DEBUG/DIAGNOSTIC and agentstream CLI output only to the operator terminal."
+    desired_behavior: "Default-on tee capture of orchestrator stdout/stderr on the disposable client under tied-project/working/wf-trial-orchestrator-run/evidence/ with wf-trial-orchestrator-run.v1.json manifest."
+    non_goals:
+      - "Auto-invoking @record-wf-trial after orchestrator exit"
+      - "Committing full raw logs into store docs/demos/"
+    success_criteria:
+      - "record-wf-trial step 8 includes Process log review"
+      - "workflow-trial-agentstream-sh.test.mjs TS-C1 and TS-C2 pass"
+    unchanged_behavior: "AGENTSTREAM_HARNESS_TRACE optional JSONL unchanged."
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+      run_id: "close-out-wf-orchestrator-process-log-2026-11-04"
+    checklist_gate:
+      dispositions:
+        - "completed"
+        - "not_applicable"
+        - "pending"
+        - "waived"
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    manifest_reference: "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/evidence/"
+    proof_boundaries:
+      - "Readouts contain excerpts only"
+  impact_analysis:
+    modules_or_boundaries: "scripts/lib/wf-trial-process-log.inc.sh, scripts/workflow-trial-agentstream.sh, record-wf-trial skill"
+    tied_tokens_new:
+      - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+      - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  metadata:
+    created:
+      author: "close-out"
+      date: "2026-11-04"
+    title: "WF trial orchestrator process log"
+  record_identity:
+    change_request_id: "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    citdp_id: "CITDP-REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Tee without EXIT trap loses manifest on orchestrator fail()"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "workflow-trial-agentstream-sh.test.mjs TS-C1 writes manifest on dry-run"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does bootstrap stderr prepend before four-phase tee?"
+        - "Does WF_TRIAL_SKIP_PROCESS_LOG=1 leave evidence dir absent?"
+      gate_policy: "advisory"
+      rationale: "Shell log capture only."
+      research_profile: "integrated-agent"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"

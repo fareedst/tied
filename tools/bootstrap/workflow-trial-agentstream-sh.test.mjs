@@ -11,7 +11,28 @@ const SCRIPT = path.join(REPO_ROOT, "scripts/workflow-trial-agentstream.sh");
 const TAG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-disposable-tag.inc.sh");
 const PREFLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-claude-preflight.inc.sh");
 const HARDENING_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-four-phase-hardening.inc.sh");
+const PROCESS_LOG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.inc.sh");
 const TIED_CLI = path.join(REPO_ROOT, "mcp-server/packages/cli/dist/index.js");
+
+const MANIFEST_REQUIRED_KEYS = [
+  "schema",
+  "orchestrator_script",
+  "repo_root",
+  "wf_id",
+  "workspace",
+  "harness",
+  "model_slug",
+  "model_config",
+  "disposable_tag",
+  "dry_run",
+  "log_capture_default",
+  "evidence_rel_dir",
+  "files",
+  "bootstrap_stderr_prepended",
+  "started_at",
+  "finished_at",
+  "exit_code",
+];
 
 function buildDisposableTag(wfId, envOverrides = {}) {
   const env = { ...process.env, NO_COLOR: "1", ...envOverrides };
@@ -154,5 +175,99 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
     assert.match(r.stdout, /"--model"/);
     assert.match(r.stdout, /composer-2\.5-fast/);
+  });
+
+  it("wf_trial_process_log_enabled respects WF_TRIAL_SKIP_PROCESS_LOG [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-process-log.inc.sh
+      source "${PROCESS_LOG_INC}"
+      wf_trial_process_log_enabled && echo on=1 || echo on=0
+      WF_TRIAL_SKIP_PROCESS_LOG=1 wf_trial_process_log_enabled && echo skip=1 || echo skip=0
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stdout, /on=1/);
+    assert.match(r.stdout, /skip=0/);
+  });
+
+  it("wf_trial_process_log bind prepends bootstrap stderr [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {
+    const ws = fs.mkdtempSync(path.join(os.tmpdir(), "wf-bind-"));
+    const bootstrapErr = path.join(os.tmpdir(), `wf-bootstrap-${Date.now()}.err`);
+    fs.writeFileSync(bootstrapErr, "BOOTSTRAP_MARKER_LINE\n", "utf8");
+    const bash = `
+      export WF_TRIAL_BOOTSTRAP_STDERR="${bootstrapErr}"
+      # shellcheck source=scripts/lib/wf-trial-process-log.inc.sh
+      source "${PROCESS_LOG_INC}"
+      wf_trial_process_log_bind_workspace "${ws}" "WF-02" "${REPO_ROOT}" cursor composer-2.5-fast composer-2.5 "" 1 1
+      printf 'after_bind\\n'
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    const stderrLog = path.join(
+      ws,
+      "tied-project/working/wf-trial-orchestrator-run/evidence/process.stderr.log",
+    );
+    assert.ok(fs.existsSync(stderrLog), stderrLog);
+    const stderrHead = fs.readFileSync(stderrLog, "utf8");
+    assert.match(stderrHead, /^BOOTSTRAP_MARKER_LINE/);
+    const stdoutLog = path.join(
+      ws,
+      "tied-project/working/wf-trial-orchestrator-run/evidence/process.stdout.log",
+    );
+    assert.match(fs.readFileSync(stdoutLog, "utf8"), /after_bind/);
+    const manifest = JSON.parse(
+      fs.readFileSync(
+        path.join(ws, "tied-project/working/wf-trial-orchestrator-run/evidence/wf-trial-orchestrator-run.v1.json"),
+        "utf8",
+      ),
+    );
+    assert.equal(manifest.schema, "wf-trial-orchestrator-run.v1");
+    assert.equal(manifest.exit_code, 0);
+    assert.ok(manifest.finished_at);
+  });
+
+  it("--workspace + --dry-run writes process log manifest and files [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {
+    if (!fs.existsSync(TIED_CLI)) {
+      console.log("DEBUG: skip — built tied CLI missing:", TIED_CLI);
+      return;
+    }
+    const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wf-trial-log-"));
+    const r = runScript(["wf-02", "--dry-run", "--workspace", workspace]);
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    const evidenceDir = path.join(
+      workspace,
+      "tied-project/working/wf-trial-orchestrator-run/evidence",
+    );
+    const manifestPath = path.join(evidenceDir, "wf-trial-orchestrator-run.v1.json");
+    assert.ok(fs.existsSync(path.join(evidenceDir, "process.stdout.log")));
+    assert.ok(fs.existsSync(path.join(evidenceDir, "process.stderr.log")));
+    assert.ok(fs.existsSync(manifestPath));
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    for (const key of MANIFEST_REQUIRED_KEYS) {
+      assert.ok(key in manifest, `missing manifest key ${key}`);
+    }
+    assert.equal(manifest.schema, "wf-trial-orchestrator-run.v1");
+    assert.equal(manifest.wf_id, "WF-02");
+    assert.equal(manifest.exit_code, 0);
+    assert.match(r.stderr, /DIAGNOSTIC: wf-trial process log manifest=/);
+    assert.match(r.stderr, /wf-trial-orchestrator-run\.v1\.json/);
+  });
+
+  it("WF_TRIAL_SKIP_PROCESS_LOG=1 skips evidence dir [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]", () => {
+    if (!fs.existsSync(TIED_CLI)) {
+      console.log("DEBUG: skip — built tied CLI missing:", TIED_CLI);
+      return;
+    }
+    const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wf-trial-skip-"));
+    const r = runScript(["wf-02", "--dry-run", "--workspace", workspace], {
+      WF_TRIAL_SKIP_PROCESS_LOG: "1",
+    });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    const evidenceDir = path.join(
+      workspace,
+      "tied-project/working/wf-trial-orchestrator-run/evidence",
+    );
+    assert.equal(fs.existsSync(evidenceDir), false);
+    assert.doesNotMatch(r.stderr, /DIAGNOSTIC: wf-trial process log manifest=/);
   });
 });
