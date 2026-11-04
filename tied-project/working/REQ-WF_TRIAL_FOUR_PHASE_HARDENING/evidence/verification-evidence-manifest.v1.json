@@ -1,0 +1,52 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 483,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    }
+  ],
+  "commit": "a38bbaa50eefa346fb5e02e713a660cbb0aba9ca",
+  "covered_tokens": [
+    "REQ-GOAGENT-FEATURESPEC-BATCH",
+    "REQ-TIED_SETUP",
+    "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "Process improvement REQ; not methodology effectiveness claim"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-wf-four-phase-hardening-2026-11-04",
+  "schema_version": "verification-evidence-manifest.v1"
+}

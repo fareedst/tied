@@ -33,7 +33,7 @@ Git-context + TIED — [tied-boundary.md](../prompt-shared/tied-boundary.md).
 ## Procedure
 
 1. Apply caller-supplied git preamble ([git_preamble_plan_close_out](../prompt-shared/git-context-templates.md) preferred)
-2. **Process** — [tied-close-out-process.md](../prompt-shared/tied-close-out-process.md) (process steps 1–6 only; defer prologue)
+2. **Process** — [tied-close-out-process.md](../prompt-shared/tied-close-out-process.md) (process steps 1–6 only; defer prologue). **WF trial four-phase batch:** also [wf-trial-four-phase-close-out-playbook.md](../prompt-shared/wf-trial-four-phase-close-out-playbook.md) ([REQ-WF_TRIAL_FOUR_PHASE_HARDENING]).
 3. Apply optional invocation remainder
 4. **Optional Jev plan-skills adjunct** (after `sub-close-out-evidence-sync`, before close-out gate) — [jev-plan-skills-adjunct.md](../prompt-shared/jev-plan-skills-adjunct.md)
 5. **Optional plan process tools adjunct** (DAE + BBCE) — [plan-process-tools-adjunct.md](../prompt-shared/plan-process-tools-adjunct.md)

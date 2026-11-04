@@ -40,6 +40,8 @@ Execute the linked plan in this order:
 4. **Plan** — [tied-plan-citdp-build.md](../prompt-shared/tied-plan-citdp-build.md) (enrollment advisory: [methodology-surface-enrollment-advisory.md](../prompt-shared/methodology-surface-enrollment-advisory.md))
 5. **Implement** — [tied-implement.md](../prompt-shared/tied-implement.md)
 
+**WF trial four-phase batch:** at handoff, follow [wf-trial-build-plan-handoff.md](../prompt-shared/wf-trial-build-plan-handoff.md) ([REQ-WF_TRIAL_FOUR_PHASE_HARDENING]).
+
 ### W6d build-plan triage hook (optional)
 
 After `tied_checklist_gate_validate` with `phase: pre_implementation` returns and **before** RED tests, the operator may call **`tied_jev_adversarial_triage_pilot`** with explicit labeled cases (inline JSON or `cases_path` under `working/{token}/…`), valid `request_token`, `pre_implementation_gate_passed: true`, and optional `record_evidence`. Observation only — never a substitute for `sub-adversarial-inquiry-pass` or integrated inquiry activation. Do not invoke triage before the pre_implementation gate.

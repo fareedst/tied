@@ -1442,6 +1442,15 @@ ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial disposable tag architecture"
   status: "Active"
+ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
+  cross_references:
+    - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+    - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+  description: "WF trial four-phase hardening boundaries"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
+  name: "WF trial four-phase hardening architecture"
+  status: "Active"
+  type: "ARCH"
 IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
   category: "Implementation"
   cross_references:
@@ -3197,6 +3206,15 @@ IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial disposable tag implementation"
   status: "Active"
+IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
+  cross_references:
+    - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
+    - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+  description: "WF trial four-phase hardening implementation"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
+  name: "WF trial four-phase hardening implementation"
+  status: "Active"
+  type: "IMPL"
 PROC-AGENT_REQ_CHECKLIST:
   cross_references:
     - "PROC-GITIGNORE_CLOSE_OUT"
@@ -5182,3 +5200,14 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   detail_file: "requirements/REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG.yaml"
   name: "WF trial agentstream disposable tag"
   status: "Active"
+REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
+    - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+    - "REQ-TIED_SETUP"
+  description: "WF trial four-phase friction reductions from facilitator readouts"
+  detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
+  name: "WF trial four-phase hardening"
+  status: "Active"
+  type: "REQ"

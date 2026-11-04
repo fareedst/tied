@@ -10,6 +10,7 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..
 const SCRIPT = path.join(REPO_ROOT, "scripts/workflow-trial-agentstream.sh");
 const TAG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-disposable-tag.inc.sh");
 const PREFLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-claude-preflight.inc.sh");
+const HARDENING_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-four-phase-hardening.inc.sh");
 const TIED_CLI = path.join(REPO_ROOT, "mcp-server/packages/cli/dist/index.js");
 
 function buildDisposableTag(wfId, envOverrides = {}) {
@@ -105,6 +106,42 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.match(r.stdout, /exit=0/); // advisory path after failure
     assert.match(r.stdout, /strict_exit=1/);
     assert.match(r.stderr, /DIAGNOSTIC: Claude client validation failed/);
+  });
+
+  it("materialize_disposable_preload_contract copy-if-absent [REQ-WF_TRIAL_FOUR_PHASE_HARDENING]", () => {
+    const ws = fs.mkdtempSync(path.join(os.tmpdir(), "wf-preload-"));
+    const bundleDocs = path.join(ws, "tied-bundle", "docs");
+    fs.mkdirSync(bundleDocs, { recursive: true });
+    const template = path.join(bundleDocs, "agent-preload-contract-template.yaml");
+    fs.writeFileSync(template, "agent_preload:\n  note: test\n", "utf8");
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-four-phase-hardening.inc.sh
+      source "${HARDENING_INC}"
+      materialize_disposable_preload_contract "${ws}"
+      test -f "${ws}/tied-project/agent-preload-contract.yaml"
+      materialize_disposable_preload_contract "${ws}"
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /materialized preload contract/);
+    assert.match(r.stderr, /preload contract exists/);
+  });
+
+  it("wf_trial_reconcile_preflight strict vs skip [REQ-WF_TRIAL_FOUR_PHASE_HARDENING]", () => {
+    const emptyStore = fs.mkdtempSync(path.join(os.tmpdir(), "wf-store-"));
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-four-phase-hardening.inc.sh
+      source "${HARDENING_INC}"
+      wf_trial_reconcile_preflight "${emptyStore}"; echo exit=$?
+      WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 wf_trial_reconcile_preflight "${emptyStore}"; echo skip_exit=$?
+      WF_TRIAL_STRICT_RECONCILE=1 wf_trial_reconcile_preflight "${emptyStore}"; echo strict_exit=$?
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stdout, /exit=0/);
+    assert.match(r.stdout, /skip_exit=0/);
+    assert.match(r.stdout, /strict_exit=1/);
+    assert.match(r.stderr, /reconcile preflight/);
   });
 
   it("--workspace + --dry-run emits --model on stdout when CLI built", () => {

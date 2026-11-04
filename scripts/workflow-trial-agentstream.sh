@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -28,6 +28,8 @@ Usage:
 
 Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-2.5 HARNESS=cursor
   WF_TRIAL_STRICT_PREFLIGHT=1 fails closed when HARNESS=claude and Claude client validation returns non-zero (default: DIAGNOSTIC and continue).
+  WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 skips store mcp-server/dist check before live four-phase.
+  WF_TRIAL_STRICT_RECONCILE=1 fails closed when mcp-server/dist/index.js is missing (default: DIAGNOSTIC and continue).
 
 Disposable bootstrap (no --workspace): client dir under TIED_TEST_ROOT is
   {epoch}-wf-agentstream-{wf-id}-{harness}-{modelBucket}
@@ -156,6 +158,14 @@ export FEATURE_REMAINDER="${PROMPT_PREFACE}${BODY}"
 
 printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=%s disposable_tag=%s\n' \
   "$WF_NORM" "$WORKSPACE" "$DRY_RUN" "${HARNESS:-cursor}" "${TAG:-—}" >&2
+
+# shellcheck source=lib/wf-trial-four-phase-hardening.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-four-phase-hardening.inc.sh"
+materialize_disposable_preload_contract "$WORKSPACE"
+
+if [[ "$DRY_RUN" -eq 0 ]]; then
+  wf_trial_reconcile_preflight "$REPO_ROOT" || fail "WF trial reconcile preflight blocked (WF_TRIAL_STRICT_RECONCILE)"
+fi
 
 if [[ "${HARNESS:-cursor}" == "claude" && "$DRY_RUN" -eq 0 ]]; then
   # shellcheck source=scripts/lib/wf-trial-claude-preflight.inc.sh

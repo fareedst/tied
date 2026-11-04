@@ -3458,3 +3458,11 @@ IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
   related_requirements:
     - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
   status: "Active"
+IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"

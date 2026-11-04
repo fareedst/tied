@@ -4089,3 +4089,14 @@ REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
       - "ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
     implementation:
       - "IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
+  category: "Tooling"
+  detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
+  name: "WF trial four-phase friction reductions from facilitator readouts"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
+    implementation:
+      - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"

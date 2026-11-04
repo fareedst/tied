@@ -1,0 +1,10 @@
+IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
+  decision: "Shell helpers materialize_disposable_preload_contract and wf_trial_reconcile_preflight in scripts/lib/wf-trial-four-phase-hardening.inc.sh; workflow-trial-agentstream.sh sources inc after WORKSPACE export, calls materialize before exec four-phase, reconcile preflight when DRY_RUN=0; promote working-folder playbook drafts to tools/bundled-prompt-type-skills/prompt-shared/wf-trial-four-phase-close-out-playbook.md and wf-trial-build-plan-handoff.md; extend traditional-four-phase-agentstream.yaml phase goals with handoff + playbook links; tests in workflow-trial-agentstream-sh.test.mjs."
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_FOUR_PHASE_HARDENING-pseudocode.md"
+  name: "WF trial four-phase hardening implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"

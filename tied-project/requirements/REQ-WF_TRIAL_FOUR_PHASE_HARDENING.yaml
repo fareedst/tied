@@ -1,0 +1,48 @@
+REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
+  category: "Tooling"
+  description: "Reduce operator and agent friction on traditional four-phase agentstream workflow trials, targeting difficulties recorded in PROMPT-WF-03 facilitator readouts (preload fallback, cold-session handoff, RED evidence, close-out reconcile/MCP dist, checklist disposition sync, gate mirror hygiene)."
+  name: "WF trial four-phase friction reductions from facilitator readouts"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Fairer matrix comparisons with less silent waiver"
+      - "Fewer turn-4 surprises when agentstream dist is missing"
+      - "Stronger test-strategy evidence for cohort grading"
+    problems_solved:
+      - "Adherence reconcile skipped when MCP/agentstream dist absent"
+      - "Disposable clients fall back to tied-bundle preload template"
+      - "GREEN-only verification archives without RED capture"
+      - "Process contract partial while machine close_out passes"
+    why: "Facilitator readout for 1793817075-wf-agentstream-wf-03-cursor-composer25 documented per-turn difficulties; sponsor selected harness/orchestrator/skill fixes over product-prompt changes."
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-TIED_SETUP"
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    related_to:
+      - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
+  satisfaction_criteria:
+    - criterion: "After disposable bootstrap, tied-project/agent-preload-contract.yaml exists (copy-if-absent from tied-bundle/docs/agent-preload-contract-template.yaml); orchestrator calls materialize helper before four-phase exec."
+      id: "SC-WF-PRELOAD-CONTRACT"
+    - criterion: "Each batch turn goal references evidence/phase-handoff-{add-feature|refine-plan|build-plan|close-out}.md; agents write handoff at end of turn."
+      id: "SC-WF-PHASE-HANDOFF"
+    - criterion: "build-plan adjunct requires archiving failing npm test stdout to evidence/quality-manifest/*-red.stdout.txt before GREEN manifest when product tests exist."
+      id: "SC-WF-RED-ARCHIVE"
+    - criterion: "Store REPO_ROOT reconcile preflight checks mcp-server/dist/index.js; emits DIAGNOSTIC with ./build-workspace.sh remediation; WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 skips; WF_TRIAL_STRICT_RECONCILE=1 fails closed (default off)."
+      id: "SC-WF-RECONCILE-PREFLIGHT"
+    - criterion: "prompt-shared wf-trial-four-phase-close-out-playbook.md documents sync-dispositions optional at minimal depth, single traceable commit (SHA in body not follow-up commit), project gates/ as commit source of truth vs tied-bundle/working mirrors."
+      id: "SC-WF-CLOSEOUT-PLAYBOOK"
+    - criterion: "workflow-trial-agentstream-sh.test.mjs covers materialize_disposable_preload_contract and wf_trial_reconcile_preflight."
+      id: "SC-WF-HARDENING-TEST"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
+    implementation:
+      - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+  validation_criteria:
+    - method: "Extended workflow-trial-agentstream-sh.test.mjs"
+    - method: "Disposable wf-03 dry-run shows no template-only preload DIAGNOSTIC when contract materialized"

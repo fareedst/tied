@@ -1,0 +1,11 @@
+ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
+  decision: "Hardening lives in (1) scripts/lib/wf-trial-four-phase-hardening.inc.sh sourced from workflow-trial-agentstream.sh after WORKSPACE is known, (2) prompt-shared wf-trial-* adjunct markdown linked from build-plan/close-out and traditional-four-phase-agentstream.yaml, (3) no change to feature-spec chainFromPrevious semantics. Pillar G close-out gate/envelope sequence remains owned by REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS + existing batch turn 4 text; this REQ adds WF-trial-specific playbook and preflight only."
+  name: "WF trial four-phase hardening boundaries"
+  rationale: "Separates harness/process fixes from disposable product REQ work; avoids duplicating Claude matrix validation (pillar E/F/H) while sharing one close-out playbook cross-link."
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+      - "REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS"

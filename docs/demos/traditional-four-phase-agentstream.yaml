@@ -14,9 +14,10 @@ features:
       Scaffold REQ/CITDP/PLAN/tracker only — no production code or RED tests this turn.
       Seed `evidence/trial-workflow-interaction-inventory.v1.json` with
       `analysis_label`: `traditional-workflow-trial.v1`,
-      `harness`: `cursor-agentstream-four-phase`,
+      `harness`: `{{HARNESS}}-agentstream-four-phase`,
       `harness_notes`: `run-traditional-four-phase-agentstream.sh` (four feature-spec batch turns; new agent session per turn),
       `model_config`: {{MODEL_CONFIG}}, `model_slug`: {{MODEL_SLUG}}.
+      Write `evidence/phase-handoff-add-feature.md` (RESOLVE, REQ token, next `@refine-plan`).
     behavior: |
       Product requirement (invocation remainder):
       {{FEATURE_REMAINDER}}
@@ -27,6 +28,7 @@ features:
       Explicitly follow `{{SKILL_ROOT}}/refine-plan/SKILL.md` (/refine-plan).
       Use the linked PLAN from phase 1 under `tied-project/working/{REQ-TOKEN}/PLAN.md`.
       Refine PLAN, CITDP notes, and tracker; still no product implementation commits.
+      Write `evidence/phase-handoff-refine-plan.md` (locked decisions, gate receipts, next `@build-plan`).
     behavior: |
       Optional sponsor refine notes may appear in the phase-1 PLAN or working folder.
       Do not start RED tests or production code.
@@ -39,6 +41,8 @@ features:
       Greenfield minimal path when depth_tier is minimal: create REQ/ARCH/IMPL + IMPL pseudo-code before RED;
       set sub-adversarial-inquiry-pass to not_applicable before RED; no sponsor questions in batch mode.
       RED → GREEN product code/tests; verification evidence per the build-plan skill.
+      Follow prompt-shared wf-trial-build-plan-handoff.md (RED archive, tracker sync).
+      Write `evidence/phase-handoff-build-plan.md` before deferring `@close-out`.
     behavior: |
       Linked plan is the authoritative input; do not re-run add-feature or refine-plan scope.
 
@@ -46,16 +50,25 @@ features:
     feature_name: "Phase 4 — close-out"
     goal: |
       Explicitly follow `{{SKILL_ROOT}}/close-out/SKILL.md` (/close-out).
+      Read prompt-shared wf-trial-four-phase-close-out-playbook.md (single commit, optional sync-dispositions).
+      Write `evidence/phase-handoff-close-out.md` with three completion signals.
       Git context (paste-in only; do not run git unless the skill allows at close-out):
       When no staged or unstaged product changes exist, do not assert that staged changes are ready—run close-out gates and handoff only.
       When changes exist, consider git diff or stage before traceable-commit.
       When close_out gates allow, run traceable-commit per prompt-shared traceable-commit-close-out.md.
       Deliver CHANGELOG, three completion signals, and traceable commit when gates allow.
     behavior: |
-      Before close_out gates: build `request-evidence-envelope.v1.json` under `tied-project/working/{REQ-TOKEN}/evidence/`
-      (MCP `request_evidence_envelope_build` or documented equivalent). Invoke checklist gates with **`tied_gate_check`**
-      using `citdp_path` + `tracker_path` so the validator receives the **inner** CITDP body (not a wrapped stub)—inline
-      partial `citdp` objects yield `malformed_citdp:adversarial_inquiry`.
+      Read `depth_tier` and `gate_policy` from working `CITDP-draft.yaml` / `CITDP-*.yaml`
+      (`risk_analysis.adversarial_inquiry` or `record_identity`). Before close_out gates: call MCP
+      `request_evidence_envelope_build` with those values (or rely on CITDP-aware inference when omitted).
+      For minimal depth: ensure `not-applicable-receipt.v1.json` exists via `request_evidence_envelope_backfill`
+      with `write_receipts: true` (or documented manual step) before `request_evidence_envelope_validate` with
+      `fail_on_error_gaps: true`. Optionally run `tools/bootstrap/templates/run-close-out-gates.mjs`
+      `--envelope-blocking --reconcile` when sponsor policy allows (WF trial: reconcile without
+      `--sync-dispositions` when sub-adversarial is N/A).
+      Invoke checklist gates with **`tied_gate_check`** using `citdp_path` + `tracker_path` so the validator
+      receives the **inner** CITDP body (not a wrapped stub)—inline partial `citdp` objects yield
+      `malformed_citdp:adversarial_inquiry`.
       Append or update `tied-project/working/{REQ-TOKEN}/evidence/trial-workflow-interaction-inventory.v1.json`:
-      keep `harness`: `cursor-agentstream-four-phase` and `harness_notes` for this wrapper (not manual IDE @skills);
+      keep `harness`: `{{HARNESS}}-agentstream-four-phase` and `harness_notes` for this wrapper (not manual IDE @skills);
       record all four sponsor_turns with ordinals 1–4; set close_out turn gate receipt when close-out completes.
