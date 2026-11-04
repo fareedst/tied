@@ -1,3 +1,27 @@
+REQ-AGENTSTREAM_CLAUDE_WF_PARITY:
+  category: "Tooling"
+  description: "Close harness/orchestrator gaps so Claude live agentstream on PROMPT-WF-03 four-phase batch reaches the same product class and close_out fingerprint as Cursor gold (argv MCP load, harness-aware batch skills/preload, optional turn trace, dual-harness smoke)."
+  detail_file: "requirements/REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml"
+  name: "Agentstream Claude WF-03 harness product parity"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+    related_to:
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-AGENTSTREAM_CLAUDE_WF_PARITY"
+    implementation:
+      - "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY"
+    tests:
+      - "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts"
+      - "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts"
+      - "tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs"
 REQ-ASYNC_BOUNDARY_ANALYSIS:
   category: "Non-Functional"
   detail_file: "requirements/REQ-ASYNC_BOUNDARY_ANALYSIS.yaml"

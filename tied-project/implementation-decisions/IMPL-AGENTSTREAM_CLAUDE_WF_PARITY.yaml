@@ -1,0 +1,23 @@
+IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
+  code_locations:
+    files:
+      - description: "Claude validation preflight"
+        path: "scripts/workflow-trial-agentstream.sh"
+      - description: "Dry parity smoke"
+        path: "scripts/dual-harness-wf03-parity-smoke.sh"
+      - description: "JSONL trace writer"
+        path: "mcp-server/packages/agentstream/src/harness-turn-trace.ts"
+      - description: "MCP argv helpers"
+        path: "mcp-server/packages/agentstream/src/claude-agent-argv.ts"
+      - description: "SKILL_ROOT expansion"
+        path: "scripts/run-traditional-four-phase-agentstream.sh"
+      - description: "Trace hook after turns"
+        path: "mcp-server/packages/agentstream/src/live-executor.ts"
+    functions: []
+  essence_pseudocode_path: "implementation-decisions/IMPL-AGENTSTREAM_CLAUDE_WF_PARITY-pseudocode.md"
+  status: "Active"
+  traceability:
+    tests:
+      - "mcp-server/packages/agentstream/src/claude-agent-argv.test.ts"
+      - "mcp-server/packages/agentstream/src/harness-turn-trace.test.ts"
+      - "tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs"

@@ -1,3 +1,13 @@
+ARCH-AGENTSTREAM_CLAUDE_WF_PARITY:
+  category: "Architecture"
+  detail_file: "architecture-decisions/ARCH-AGENTSTREAM_CLAUDE_WF_PARITY.yaml"
+  name: "Dual-harness WF-03 parity architecture"
+  related_decisions:
+    depends_on:
+      - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    implements_requirements:
+      - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+  status: "Active"
 ARCH-ASYNC_ANALYSIS_PASS:
   category: "Architecture"
   detail_file: "architecture-decisions/ARCH-ASYNC_ANALYSIS_PASS.yaml"
@@ -2127,7 +2137,7 @@ ARCH-TIED_GIT_HYGIENE_SAFETY:
     - "REQ-TIED_GIT_HYGIENE"
   detail_file: "architecture-decisions/ARCH-TIED_GIT_HYGIENE_SAFETY.yaml"
   name: "Git hygiene safety boundary"
-  status: "Planned"
+  status: "Implemented"
 ARCH-TIED_HARNESS_LANGCHAIN_PHASE3:
   detail_file: "architecture-decisions/ARCH-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
   name: "LangChain harness Phase 3 architecture"

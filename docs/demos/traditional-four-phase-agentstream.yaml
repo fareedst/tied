@@ -5,7 +5,7 @@ features:
   - order: 1
     feature_name: "Phase 1 — add-feature"
     goal: |
-      Explicitly follow `.cursor/skills/add-feature/SKILL.md` (/add-feature).
+      Explicitly follow `{{SKILL_ROOT}}/add-feature/SKILL.md` (/add-feature).
       Write `tied-project/working/{REQ-TOKEN}/PLAN.md` with header lines:
       **Trial:** (from product remainder or PROMPT-WF id),
       **Model config:** {{MODEL_CONFIG}},
@@ -24,7 +24,7 @@ features:
   - order: 2
     feature_name: "Phase 2 — refine-plan"
     goal: |
-      Explicitly follow `.cursor/skills/refine-plan/SKILL.md` (/refine-plan).
+      Explicitly follow `{{SKILL_ROOT}}/refine-plan/SKILL.md` (/refine-plan).
       Use the linked PLAN from phase 1 under `tied-project/working/{REQ-TOKEN}/PLAN.md`.
       Refine PLAN, CITDP notes, and tracker; still no product implementation commits.
     behavior: |
@@ -34,8 +34,10 @@ features:
   - order: 3
     feature_name: "Phase 3 — build-plan"
     goal: |
-      Explicitly follow `.cursor/skills/build-plan/SKILL.md` (/build-plan).
+      Explicitly follow `{{SKILL_ROOT}}/build-plan/SKILL.md` (/build-plan).
       Execute the linked PLAN (post-refine) from `tied-project/working/{REQ-TOKEN}/`.
+      Greenfield minimal path when depth_tier is minimal: create REQ/ARCH/IMPL + IMPL pseudo-code before RED;
+      set sub-adversarial-inquiry-pass to not_applicable before RED; no sponsor questions in batch mode.
       RED → GREEN product code/tests; verification evidence per the build-plan skill.
     behavior: |
       Linked plan is the authoritative input; do not re-run add-feature or refine-plan scope.
@@ -43,10 +45,10 @@ features:
   - order: 4
     feature_name: "Phase 4 — close-out"
     goal: |
-      Explicitly follow `.cursor/skills/close-out/SKILL.md` (/close-out).
+      Explicitly follow `{{SKILL_ROOT}}/close-out/SKILL.md` (/close-out).
       Git context (paste-in only; do not run git unless the skill allows at close-out):
-      Staged changes are ready for close-out.
-      Consider changes in git diff or stage.
+      When no staged or unstaged product changes exist, do not assert that staged changes are ready—run close-out gates and handoff only.
+      When changes exist, consider git diff or stage before traceable-commit.
       When close_out gates allow, run traceable-commit per prompt-shared traceable-commit-close-out.md.
       Deliver CHANGELOG, three completion signals, and traceable commit when gates allow.
     behavior: |

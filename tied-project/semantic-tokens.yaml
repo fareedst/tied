@@ -1,3 +1,10 @@
+ARCH-AGENTSTREAM_CLAUDE_WF_PARITY:
+  category: "Architecture"
+  cross_references:
+    - "ARCH-TIED_CLAUDE_LIVE_DRIVER"
+    - "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY"
+    - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+  description: "Dual-harness WF-03 parity architecture"
 ARCH-ASYNC_ANALYSIS_PASS:
   cross_references:
     - "IMPL-ASYNC_BOUNDARY_ANALYZER"
@@ -1421,6 +1428,12 @@ ARCH-TIED_YAML_STYLE_RESOLUTION:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
+  category: "Implementation"
+  cross_references:
+    - "ARCH-AGENTSTREAM_CLAUDE_WF_PARITY"
+    - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
+  description: "Claude WF-03 harness parity implementation"
 IMPL-ASYNC_BOUNDARY_ANALYZER:
   cross_references:
     - "ARCH-ASYNC_ANALYSIS_PASS"
@@ -3556,6 +3569,14 @@ PROC-YAML_EDIT_LOOP:
   source_index: "processes.md"
   status: "Active"
   type: "PROC"
+REQ-AGENTSTREAM_CLAUDE_WF_PARITY:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-AGENTSTREAM_CLAUDE_WF_PARITY"
+    - "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY"
+    - "REQ-TIED_CLAUDE_HARNESS"
+    - "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  description: "Agentstream Claude WF-03 harness product parity"
 REQ-ASYNC_BOUNDARY_ANALYSIS:
   cross_references:
     - "ARCH-ASYNC_ANALYSIS_PASS"

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { describe, it } from "node:test";
@@ -66,5 +67,28 @@ describe("run-traditional-four-phase-agentstream.sh [REQ-TIED_CLI_OPERATOR_OUTPU
     assert.equal(r.status, 0, r.stderr);
     assert.equal(r.stdout, "");
     assert.match(r.stderr, /Environment/);
+  });
+
+  it("expands {{SKILL_ROOT}} per HARNESS [REQ-AGENTSTREAM_CLAUDE_WF_PARITY]", () => {
+    const template = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
+    const tmp = path.join(REPO_ROOT, "tools/bootstrap/.tmp-four-phase-expand-test.yaml");
+    const runExpand = (skillRoot) =>
+      spawnSync(
+        "bash",
+        [
+          "-c",
+          `export SKILL_ROOT='${skillRoot}' MODEL_SLUG=x MODEL_CONFIG=y FEATURE_REMAINDER=z; perl -pe 's/\\{\\{MODEL_SLUG\\}\\}/$ENV{MODEL_SLUG}/g; s/\\{\\{MODEL_CONFIG\\}\\}/$ENV{MODEL_CONFIG}/g; s/\\{\\{FEATURE_REMAINDER\\}\\}/$ENV{FEATURE_REMAINDER}/g; s/\\{\\{SKILL_ROOT\\}\\}/$ENV{SKILL_ROOT}/g' "${template}" > "${tmp}"`,
+        ],
+        { cwd: REPO_ROOT, encoding: "utf8", env: { ...process.env, NO_COLOR: "1" } },
+      );
+    const claude = runExpand(".claude/skills");
+    assert.equal(claude.status, 0, claude.stderr);
+    const claudeBody = fs.readFileSync(tmp, "utf8");
+    assert.match(claudeBody, /\.claude\/skills\/build-plan/);
+    const cursor = runExpand(".cursor/skills");
+    assert.equal(cursor.status, 0, cursor.stderr);
+    const cursorBody = fs.readFileSync(tmp, "utf8");
+    assert.match(cursorBody, /\.cursor\/skills\/build-plan/);
+    fs.unlinkSync(tmp);
   });
 });

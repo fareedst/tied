@@ -19,6 +19,11 @@ import {
 } from "./harness-select.js";
 import { runDaeGatePreflight } from "./dae-gate-preflight.js";
 import { runJevHarnessPreflight } from "./jev-harness-preflight.js";
+import {
+  claudeAddDirArgs,
+  claudeMcpConfigArgs,
+  claudeSkipPermissionsArgs,
+} from "./claude-agent-argv.js";
 
 export type DryRunStreams = {
   stdout: string;
@@ -38,13 +43,19 @@ export function agentArgv(
     agentPath.trim() !== "" ? agentPath : defaultAgentBinForHarness(harness);
   const m = model.trim() !== "" ? model : "Auto";
   if (harness === "claude") {
-    // Claude Code CLI (2.x): stream-json requires --verbose; no --trust/--force/--workspace.
+    // Claude Code CLI (2.x): stream-json requires --verbose; cwd set at spawn; see claude-agent-argv.
+    const skipPerm = claudeSkipPermissionsArgs();
+    const addDir = claudeAddDirArgs(workspace);
+    const mcpArgs = claudeMcpConfigArgs(workspace);
     const cmd: string[] = [
       bin,
       "--print",
       "--verbose",
       "--output-format",
       "stream-json",
+      ...skipPerm,
+      ...addDir,
+      ...mcpArgs,
     ];
     if (m !== "" && m !== "Auto") {
       cmd.push("--model", m);
@@ -52,7 +63,14 @@ export function agentArgv(
     if (resumeId !== "") {
       cmd.push("--resume", resumeId);
     }
-    cmd.push(...parts);
+    // Claude CLI accepts one [prompt] positional; Cursor agent accepts multiple parts.
+    const promptBody = parts
+      .map((p) => p.trim())
+      .filter((p) => p !== "")
+      .join("\n\n");
+    if (promptBody !== "") {
+      cmd.push(promptBody);
+    }
     return cmd;
   }
   const cmd: string[] = [

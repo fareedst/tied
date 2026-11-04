@@ -42,6 +42,13 @@ import {
   type InstructionCorrelation,
 } from "./adherence-live.js";
 import { ensureTracker } from "./tracker-ensure.js";
+import { findRepoRootFromPath } from "./repo-root.js";
+import {
+  appendHarnessTurnTrace,
+  buildHarnessTurnTraceRecord,
+  harnessTraceEnabled,
+  resolveHarnessTracePath,
+} from "./harness-turn-trace.js";
 import {
   parseTrackerCompletionReceipt,
   receiptForEvidenceResolve,
@@ -270,6 +277,7 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
   const liveBinding = bindLiveExecutorDriver({
     harnessProfile: cfg.agentHarness,
     agentPath: cfg.agentPath,
+    workspace: cfg.workspace,
     jevToolGate,
     contextLogPrune,
   });
@@ -428,6 +436,30 @@ export async function executeLiveRun(cfg: DryRunConfig): Promise<LiveRunStreams>
     }
     stderrAcc += `session_id=${result.sessionId}\n`;
     running = result.sessionId;
+
+    if (harnessTraceEnabled()) {
+      try {
+        const projectRoot = findRepoRootFromPath(cfg.workspace);
+        const requestToken = trackerRequestTokenFromVars(cfg.checklistVars);
+        const tracePath = resolveHarnessTracePath(projectRoot, requestToken);
+        appendHarnessTurnTrace(
+          tracePath,
+          buildHarnessTurnTraceRecord({
+            harness: cfg.agentHarness,
+            model: cfg.model,
+            workspace: cfg.workspace,
+            turnIndex: cfg.firstTurn + i,
+            turnTotal: originalTotal,
+            sessionId: result.sessionId,
+            exitCode: 0,
+            requestToken,
+          }),
+        );
+        stderrAcc += `DIAGNOSTIC: harness trace appended ${tracePath}\n`;
+      } catch (err) {
+        stderrAcc += `DIAGNOSTIC: harness trace write failed: ${String(err)}\n`;
+      }
+    }
 
     const parsed = parseControl(result.transcript);
     if (parsed.error) {

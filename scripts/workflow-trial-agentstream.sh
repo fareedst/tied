@@ -145,8 +145,19 @@ export HARNESS="${HARNESS:-cursor}"
 PROMPT_PREFACE="${PROMPT_PREFACE:-$PROMPT_PREFACE_DEFAULT}"
 export FEATURE_REMAINDER="${PROMPT_PREFACE}${BODY}"
 
-printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s\n' \
-  "$WF_NORM" "$WORKSPACE" "$DRY_RUN" >&2
+printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=%s\n' \
+  "$WF_NORM" "$WORKSPACE" "$DRY_RUN" "${HARNESS:-cursor}" >&2
+
+if [[ "${HARNESS:-cursor}" == "claude" && "$DRY_RUN" -eq 0 ]]; then
+  VALIDATION="${REPO_ROOT}/scripts/run-tied-claude-client-validation.mjs"
+  if [[ -f "$VALIDATION" ]]; then
+    if ! node "$VALIDATION" --client-root "$WORKSPACE" --no-agentstream-dry-run --with-claude-code-interactive-smoke; then
+      printf 'DIAGNOSTIC: Claude client validation failed or claude CLI unavailable; continuing may weaken MCP parity\n' >&2
+    fi
+  else
+    printf 'DIAGNOSTIC: run-tied-claude-client-validation.mjs missing; skip Claude preflight\n' >&2
+  fi
+fi
 
 ARGS=()
 ((DRY_RUN)) && ARGS+=(--dry-run)

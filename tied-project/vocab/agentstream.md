@@ -50,6 +50,9 @@
 | **Claude stream oracle** | Claude fixture, frozen NDJSON | Version-pinned frozen stream/session files under `mcp-server/packages/agentstream/fixtures/claude/`; separate from Cursor oracles; gates live checklist enablement. [REQ-TIED_CLAUDE_LIVE_DRIVER](../requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml) |
 | **fixture-gated live checklist** | live Claude CI, unpinned live run | Operator live `tied agentstream --harness claude` allowed only after parser/session/harness composition fixtures pass; no live Claude subprocess required in CI initially. [REQ-TIED_CLAUDE_LIVE_DRIVER](../requirements/REQ-TIED_CLAUDE_LIVE_DRIVER.yaml) |
 | **dry vs live table** | live parity table | README operator table distinguishing `--harness claude` dry-run placeholder from fixture-gated live AgentDriver; CI remains fixture-only. |
+| **dual-harness wf-03 parity smoke** | wf03 smoke | `scripts/dual-harness-wf03-parity-smoke.sh --dry-run-only` — CI argv/MCP guard; manual live compares gold fingerprint (`1793760220-wf-agentstream-wf-03`). [REQ-AGENTSTREAM_CLAUDE_WF_PARITY](../requirements/REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml) |
+| **`{{SKILL_ROOT}}` batch placeholder** | skill root expansion | Expanded by `run-traditional-four-phase-agentstream.sh`: `.claude/skills` when `HARNESS=claude`, else `.cursor/skills`. [REQ-AGENTSTREAM_CLAUDE_WF_PARITY](../requirements/REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml) |
+| **harness turn trace** | AGENTSTREAM_HARNESS_TRACE | Optional JSONL `harness-turn-trace.v1` per live turn when `AGENTSTREAM_HARNESS_TRACE=1`. [REQ-AGENTSTREAM_CLAUDE_WF_PARITY](../requirements/REQ-AGENTSTREAM_CLAUDE_WF_PARITY.yaml) |
 
 ---
 

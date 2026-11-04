@@ -185,13 +185,19 @@ require_directory() {
 expand_batch_placeholders() {
   local src="$1"
   local dst="$2"
+  local harness="${HARNESS:-cursor}"
   export MODEL_SLUG="${MODEL_SLUG:-}"
   export MODEL_CONFIG="${MODEL_CONFIG:-}"
   export FEATURE_REMAINDER="${FEATURE_REMAINDER:-}"
+  case "$harness" in
+    claude) export SKILL_ROOT=".claude/skills" ;;
+    *) export SKILL_ROOT=".cursor/skills" ;;
+  esac
   perl -pe '
     s/\{\{MODEL_SLUG\}\}/$ENV{MODEL_SLUG}/g;
     s/\{\{MODEL_CONFIG\}\}/$ENV{MODEL_CONFIG}/g;
     s/\{\{FEATURE_REMAINDER\}\}/$ENV{FEATURE_REMAINDER}/g;
+    s/\{\{SKILL_ROOT\}\}/$ENV{SKILL_ROOT}/g;
   ' "$src" >"$dst"
 }
 

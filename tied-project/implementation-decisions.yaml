@@ -1,3 +1,15 @@
+IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
+  category: "Implementation"
+  detail_file: "implementation-decisions/IMPL-AGENTSTREAM_CLAUDE_WF_PARITY.yaml"
+  name: "Claude WF-03 harness parity implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-AGENTSTREAM_CLAUDE_WF_PARITY"
+    implementation:
+      - "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY"
+    requirements:
+      - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
 IMPL-APPEND-TST:
   cross_references: []
   detail_file: "implementation-decisions/IMPL-APPEND-TST.yaml"
@@ -2715,7 +2727,7 @@ IMPL-TIED_GIT_HYGIENE:
     - "REQ-TIED_GIT_HYGIENE"
   detail_file: "implementation-decisions/IMPL-TIED_GIT_HYGIENE.yaml"
   name: "Git hygiene implementation"
-  status: "Active"
+  status: "Implemented"
 IMPL-TIED_HARNESS_LANGCHAIN_PHASE3:
   detail_file: "implementation-decisions/IMPL-TIED_HARNESS_LANGCHAIN_PHASE3.yaml"
   name: "LangChain harness Phase 3 implementation"

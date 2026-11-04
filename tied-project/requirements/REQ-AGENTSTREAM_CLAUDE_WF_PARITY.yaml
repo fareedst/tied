@@ -1,0 +1,19 @@
+REQ-AGENTSTREAM_CLAUDE_WF_PARITY:
+  rationale:
+    benefits:
+      - "CI guards argv and batch expansion without live LLM cost"
+      - "Operator-visible parity fingerprint"
+    problems_solved:
+      - "Batch YAML hard-codes .cursor/skills"
+      - "Claude live argv omits validated MCP flags"
+      - "No durable harness turn trace for parity debugging"
+    why: "Claude wf-03 trials stall at build-plan while Cursor gold completes product + close_out; root cause is harness surface (MCP argv, skill paths, orchestrator preflight), not model capability alone."
+  satisfaction_criteria:
+    - criterion: "AGENTSTREAM_HARNESS_TRACE=1 appends harness-turn-trace.v1 JSONL with one record per live turn including harness, model, workspace, turn index, session_id, exit_code."
+      id: "SC-WF03-HARNESS-TRACE"
+    - criterion: "Claude live agentArgv includes --mcp-config and --strict-mcp-config when client MCP JSON exists; AGENTSTREAM_CLAUDE_STRICT_MCP=0 opts out of strict only."
+      id: "SC-WF03-ARGV-MCP"
+    - criterion: "Four-phase batch expands {{SKILL_ROOT}} to .claude/skills when HARNESS=claude and .cursor/skills when HARNESS=cursor; build-plan batch text documents greenfield minimal gate playbook."
+      id: "SC-WF03-BATCH-SKILL-ROOT"
+    - criterion: "scripts/dual-harness-wf03-parity-smoke.sh --dry-run-only exits 0 and asserts Claude argv MCP flags; documents manual live wf-03 parity procedure."
+      id: "SC-WF03-PARITY-SMOKE"

@@ -1,0 +1,76 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "cd mcp-server/packages/agentstream && npm test"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 1706,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test scripts/workflow-trial-agentstream-sh.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 147,
+      "exit_code": 1,
+      "id": "citdp-evidence-2",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-AGENTSTREAM_CLAUDE_WF_PARITY/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "scripts/dual-harness-wf03-parity-smoke.sh --dry-run-only"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 400,
+      "exit_code": 1,
+      "id": "citdp-evidence-3",
+      "result": "failed"
+    }
+  ],
+  "commit": "ff42e26f839d11d5646fb2a04561049911ae808d",
+  "covered_tokens": [
+    "REQ-GOAGENT-FEATURESPEC-BATCH",
+    "REQ-TIED_CLAUDE_HARNESS",
+    "REQ-TIED_CLAUDE_LIVE_DRIVER"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "Gold fingerprint read from 1793760220-wf-agentstream-wf-03 is facilitator reference only; not committed product",
+    "Live Claude wf-03 parity proof is operator/manual unless sponsor enables nightly job"
+  ],
+  "quality_rows": [],
+  "run_id": "close-out-2026-11-04",
+  "schema_version": "verification-evidence-manifest.v1"
+}

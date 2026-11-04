@@ -1,0 +1,15 @@
+ARCH-AGENTSTREAM_CLAUDE_WF_PARITY:
+  decision: "Extend Claude argv assembly (claude-agent-argv) with MCP config flags aligned to runClaudeCodeInteractiveSmoke; expand four-phase batch via shell placeholder {{SKILL_ROOT}} keyed on HARNESS; add optional JSONL harness-turn-trace hook in live-executor; ship dual-harness wf-03 dry smoke script. Cursor path unchanged."
+  implementation_approach:
+    details:
+      - "BATCH_SKILL_ROOT_EXPANSION in run-traditional-four-phase-agentstream.sh"
+      - "CLAUDE_MCP_ARGV resolves .cursor/mcp.json then .mcp.json"
+      - "DUAL_HARNESS_WF03_SMOKE dry-run compares Claude argv fingerprint"
+      - "HARNESS_TURN_TRACE writer invoked after successful live turns when env enabled"
+    summary: "Oracle-first TDD on argv, trace writer, and batch expansion; composition via live-executor hook; orchestrator preflight calls existing Claude client validation when HARNESS=claude."
+  rationale:
+    benefits:
+      - "Single MCP load story across bootstrap smoke and agentstream live"
+    problems_solved:
+      - "Divergent MCP argv between validation and live driver"
+    why: "Parity is a harness contract problem isolatable from LLM quality; reuse validated smoke argv and gold WF03_CURSOR_GOLD fingerprint."
