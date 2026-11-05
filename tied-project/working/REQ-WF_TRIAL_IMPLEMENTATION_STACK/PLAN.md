@@ -2,7 +2,7 @@
 
 | Field | Value |
 | --- | --- |
-| **Status** | build-plan complete (2026-11-04) — close-out deferred |
+| **Status** | close-out complete (2026-11-04) |
 | **profile_depth** | `minimal` |
 | **gate_policy** | `advisory` |
 | **Origin** | Sponsor: lock **TypeScript** (+ `node --test` / `tsx`) on WF matrix trials so cohorts compare product decisions, not Python vs npm harness |
