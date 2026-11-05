@@ -1,134 +1,132 @@
-# Draft allowlist for SC-EVPOL-INVENTORY (hybrid v1). Normative after REQ promotion.
-# Each entry: env_key, class, owner_req, notes
-schema: tied-env-allowlist.v1
-scan_roots:
-  - mcp-server/src
-  - mcp-server/packages/agentstream/src
-  - tools/bootstrap/lib
-  - tools/bundled-tied-yaml-skill/scripts
+entries:
+  - class: "cli_session"
+    env_key: "AGENTSTREAM_HARNESS_TRACE_PATH"
+    notes: "Override harness trace path"
+    owner_req: "REQ-GOAGENT-CLI-CONFIG"
+  - class: "cli_session"
+    env_key: "TIED_CLI_ARGS_FILE"
+    notes: "Large MCP args payload"
+    owner_req: "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  - class: "cli_session"
+    env_key: "TIED_CLI_IMPL_ESSENCE_FILE"
+    notes: "Large IMPL body transport"
+    owner_req: "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  - class: "cli_session"
+    env_key: "TIED_CLI_IMPL_ESSENCE_STDIN"
+    notes: "IMPL body from stdin"
+    owner_req: "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  - class: "cli_session"
+    env_key: "TIED_CLI_QUIET_MCP_STDERR"
+    notes: "Operator output texture"
+    owner_req: "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+  - class: "cli_session"
+    env_key: "TIED_MCP_METRICS_CLIENT"
+    notes: "Client label in metrics rows"
+    owner_req: "REQ-MCP_USAGE_METRICS"
+  - class: "cli_session"
+    env_key: "TIED_MCP_METRICS_PATH"
+    notes: "Override metrics JSONL path"
+    owner_req: "REQ-MCP_USAGE_METRICS"
+  - class: "deprecated_legacy"
+    env_key: "TIED_BASE_PATH"
+    notes: "Legacy alias; dual-read with TIED_CLIENT_PROJECT_PATH"
+    owner_req: "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  - class: "diagnostic"
+    env_key: "AGENTSTREAM_CLAUDE_LIVE_OK"
+    notes: "Live Claude driver opt-in; harness only"
+    owner_req: "REQ-GOAGENT-CLI-CONFIG"
+  - class: "diagnostic"
+    env_key: "AGENTSTREAM_HARNESS_TRACE"
+    notes: "Harness turn trace enable"
+    owner_req: "REQ-GOAGENT-CLI-CONFIG"
+  - class: "diagnostic"
+    env_key: "TIED_BOOTSTRAP_OUT_PATH"
+    notes: "Bootstrap logging stream selector"
+    owner_req: "REQ-TIED_SETUP"
+  - class: "diagnostic"
+    env_key: "TIED_MCP_DIAGNOSTICS"
+    notes: "Stderr diagnostics guard"
+    owner_req: "REQ-MCP_STDIO_CONSOLE_GUARD"
+  - class: "diagnostic"
+    env_key: "TIED_PATH_AUTHORITY"
+    notes: "Test-only authority mode in yaml-loader tests"
+    owner_req: "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  - class: "operator_toggle"
+    env_key: "AGENTSTREAM_CLAUDE_KEEP_PERMISSIONS"
+    notes: "Claude permissions harness"
+    owner_req: "REQ-GOAGENT-CLI-CONFIG"
+  - class: "operator_toggle"
+    env_key: "AGENTSTREAM_CLAUDE_STRICT_MCP"
+    notes: "Claude argv MCP strictness"
+    owner_req: "REQ-GOAGENT-CLI-CONFIG"
+  - class: "operator_toggle"
+    env_key: "AGENTSTREAM_TIED_MCP_PREFLIGHT"
+    notes: "Agentstream preflight"
+    owner_req: "REQ-GOAGENT-CLI-CONFIG"
+  - class: "operator_toggle"
+    env_key: "TIED_ENVELOPE_HOOKS"
+    notes: "Prefer operator yaml + mcp refresh"
+    owner_req: "REQ-REQUEST_EVIDENCE_ENVELOPE"
+  - class: "operator_toggle"
+    env_key: "TIED_JEV_DECISION_PROVIDER"
+    notes: "JEV harness routing"
+    owner_req: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  - class: "operator_toggle"
+    env_key: "TIED_JEV_LOCAL_BRIDGE"
+    notes: "Local bridge toggle"
+    owner_req: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  - class: "operator_toggle"
+    env_key: "TIED_MCP_COLLECT_METRICS"
+    notes: "Prefer operator yaml"
+    owner_req: "REQ-MCP_USAGE_METRICS"
+  - class: "operator_toggle"
+    env_key: "TIED_MCP_PROJECT_ID"
+    notes: "Configured project identity"
+    owner_req: "REQ-MCP_USAGE_METRICS"
+  - class: "operator_toggle"
+    env_key: "TIED_YAML_STYLE"
+    notes: "Fallback below tied-project/config.yaml"
+    owner_req: "REQ-TIED_YAML_STYLE_CONFIGURATION"
+  - class: "secret"
+    env_key: "JEV_API_KEY"
+    notes: "Never commit; not in mcp.json"
+    owner_req: "REQ-TIED_JEV_DECISION_COPROCESSOR"
+  - class: "spawn_transport"
+    env_key: "TIED_CLIENT_BUNDLE_PATH"
+    notes: "Linked bundle path"
+    owner_req: "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  - class: "spawn_transport"
+    env_key: "TIED_CLIENT_PROJECT_PATH"
+    notes: "MCP child corpus path; install writes mcp.json"
+    owner_req: "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+  - class: "spawn_transport"
+    env_key: "TIED_MCP_BIN"
+    notes: "Dist path; prefer args[0] + disk resolver"
+    owner_req: "REQ-TIED_RUNTIME_DISK_CONFIG"
+  - class: "spawn_transport"
+    env_key: "TIED_MCP_TOOL_PROFILE"
+    notes: "Opt-in MCP tool surface"
+    owner_req: "REQ-TIED_UNIFIED_TOOLCHAIN"
+  - class: "spawn_transport"
+    env_key: "TIED_METHODOLOGY_BUNDLE_PATH"
+    notes: "Bundled methodology read path when set"
+    owner_req: "REQ-TIED_TWO_FOLDER_LAYOUT"
+  - class: "spawn_transport"
+    env_key: "TIED_STORE_ROOT"
+    notes: "Spawn-only; shell override ignored for resolution"
+    owner_req: "REQ-TIED_RUNTIME_DISK_CONFIG"
+  - class: "test_only"
+    env_key: "TIED_MCP_TEST_REPO_ROOT"
+    notes: "Allowed only under excluded test paths"
+    owner_req: "REQ-TIED_ENVIRONMENT_VARIABLE_POLICY"
 scan_exclude_globs:
-  - "**/*.test.*"
   - "**/*.composition.test.*"
+  - "**/*.test.*"
   - "**/e2e/**"
   - "**/test-helpers/**"
-entries:
-  - env_key: TIED_CLIENT_PROJECT_PATH
-    class: spawn_transport
-    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
-    notes: "MCP child corpus path; install writes mcp.json"
-  - env_key: TIED_CLIENT_BUNDLE_PATH
-    class: spawn_transport
-    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
-    notes: "Linked bundle path"
-  - env_key: TIED_BASE_PATH
-    class: deprecated_legacy
-    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
-    notes: "Legacy alias; dual-read with TIED_CLIENT_PROJECT_PATH"
-  - env_key: TIED_METHODOLOGY_BUNDLE_PATH
-    class: spawn_transport
-    owner_req: REQ-TIED_TWO_FOLDER_LAYOUT
-    notes: "Bundled methodology read path when set"
-  - env_key: TIED_STORE_ROOT
-    class: spawn_transport
-    owner_req: REQ-TIED_RUNTIME_DISK_CONFIG
-    notes: "Spawn-only; shell override ignored for resolution"
-  - env_key: TIED_MCP_BIN
-    class: spawn_transport
-    owner_req: REQ-TIED_RUNTIME_DISK_CONFIG
-    notes: "Dist path; prefer args[0] + disk resolver"
-  - env_key: TIED_PATH_AUTHORITY
-    class: diagnostic
-    owner_req: REQ-TIED_CLI_MCP_JSON_BASE_PATH
-    notes: "Test-only authority mode in yaml-loader tests"
-  - env_key: TIED_ENVELOPE_HOOKS
-    class: operator_toggle
-    owner_req: REQ-REQUEST_EVIDENCE_ENVELOPE
-    notes: "Prefer operator yaml + mcp refresh"
-  - env_key: TIED_MCP_COLLECT_METRICS
-    class: operator_toggle
-    owner_req: REQ-MCP_USAGE_METRICS
-    notes: "Prefer operator yaml"
-  - env_key: TIED_MCP_METRICS_PATH
-    class: cli_session
-    owner_req: REQ-MCP_USAGE_METRICS
-    notes: "Override metrics JSONL path"
-  - env_key: TIED_MCP_METRICS_CLIENT
-    class: cli_session
-    owner_req: REQ-MCP_USAGE_METRICS
-    notes: "Client label in metrics rows"
-  - env_key: TIED_MCP_PROJECT_ID
-    class: operator_toggle
-    owner_req: REQ-MCP_USAGE_METRICS
-    notes: "Configured project identity"
-  - env_key: TIED_MCP_DIAGNOSTICS
-    class: diagnostic
-    owner_req: REQ-MCP_STDIO_CONSOLE_GUARD
-    notes: "Stderr diagnostics guard"
-  - env_key: TIED_YAML_STYLE
-    class: operator_toggle
-    owner_req: REQ-TIED_YAML_STYLE_CONFIGURATION
-    notes: "Fallback below tied-project/config.yaml"
-  - env_key: TIED_CLI_IMPL_ESSENCE_FILE
-    class: cli_session
-    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
-    notes: "Large IMPL body transport"
-  - env_key: TIED_CLI_IMPL_ESSENCE_STDIN
-    class: cli_session
-    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
-    notes: "IMPL body from stdin"
-  - env_key: TIED_CLI_ARGS_FILE
-    class: cli_session
-    owner_req: REQ-TIED_TOOL_INPUT_COMPATIBILITY
-    notes: "Large MCP args payload"
-  - env_key: TIED_CLI_QUIET_MCP_STDERR
-    class: cli_session
-    owner_req: REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE
-    notes: "Operator output texture"
-  - env_key: TIED_BOOTSTRAP_OUT_PATH
-    class: diagnostic
-    owner_req: REQ-TIED_SETUP
-    notes: "Bootstrap logging stream selector"
-  - env_key: TIED_MCP_TOOL_PROFILE
-    class: spawn_transport
-    owner_req: REQ-TIED_UNIFIED_TOOLCHAIN
-    notes: "Opt-in MCP tool surface"
-  - env_key: TIED_JEV_DECISION_PROVIDER
-    class: operator_toggle
-    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
-    notes: "JEV harness routing"
-  - env_key: TIED_JEV_LOCAL_BRIDGE
-    class: operator_toggle
-    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
-    notes: "Local bridge toggle"
-  - env_key: JEV_API_KEY
-    class: secret
-    owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR
-    notes: "Never commit; not in mcp.json"
-  - env_key: AGENTSTREAM_TIED_MCP_PREFLIGHT
-    class: operator_toggle
-    owner_req: REQ-GOAGENT-CLI-CONFIG
-    notes: "Agentstream preflight"
-  - env_key: AGENTSTREAM_CLAUDE_LIVE_OK
-    class: diagnostic
-    owner_req: REQ-GOAGENT-CLI-CONFIG
-    notes: "Live Claude driver opt-in; harness only"
-  - env_key: AGENTSTREAM_CLAUDE_STRICT_MCP
-    class: operator_toggle
-    owner_req: REQ-GOAGENT-CLI-CONFIG
-    notes: "Claude argv MCP strictness"
-  - env_key: AGENTSTREAM_CLAUDE_KEEP_PERMISSIONS
-    class: operator_toggle
-    owner_req: REQ-GOAGENT-CLI-CONFIG
-    notes: "Claude permissions harness"
-  - env_key: AGENTSTREAM_HARNESS_TRACE
-    class: diagnostic
-    owner_req: REQ-GOAGENT-CLI-CONFIG
-    notes: "Harness turn trace enable"
-  - env_key: AGENTSTREAM_HARNESS_TRACE_PATH
-    class: cli_session
-    owner_req: REQ-GOAGENT-CLI-CONFIG
-    notes: "Override harness trace path"
-  - env_key: TIED_MCP_TEST_REPO_ROOT
-    class: test_only
-    owner_req: REQ-TIED_ENVIRONMENT_VARIABLE_POLICY
-    notes: "Allowed only under excluded test paths"
+scan_roots:
+  - "mcp-server/packages/agentstream/src"
+  - "mcp-server/src"
+  - "tools/bootstrap/lib"
+  - "tools/bundled-tied-yaml-skill/scripts"
+schema: "tied-env-allowlist.v1"

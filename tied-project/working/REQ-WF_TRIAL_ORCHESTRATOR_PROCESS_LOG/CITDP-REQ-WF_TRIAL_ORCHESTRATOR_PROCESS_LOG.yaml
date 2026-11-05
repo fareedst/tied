@@ -32,9 +32,9 @@ CITDP-REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   impact_analysis:
     modules_or_boundaries: "scripts/lib/wf-trial-process-log.inc.sh; workflow-trial-agentstream.sh; record-wf-trial skill"
     tied_tokens_new:
-      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
       - "ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
       - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
   metadata:
     created:
       author: "close-out"
@@ -49,13 +49,13 @@ CITDP-REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
       depth_tier: "minimal"
       disconfirming_observations:
         - "workflow-trial-agentstream-sh.test.mjs TS-C1 writes manifest on dry-run"
-      falsification_questions:
-        - "Does WF_TRIAL_SKIP_PROCESS_LOG=1 leave evidence dir absent?"
-        - "Does bootstrap stderr prepend before four-phase tee?"
       eligibility_triggers_matched: []
       evidence_references:
         - "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/evidence/not-applicable-receipt.v1.json"
         - "tied-project/working/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG/evidence/sub-adversarial-inquiry-pass-na.md"
+      falsification_questions:
+        - "Does bootstrap stderr prepend before four-phase tee?"
+        - "Does WF_TRIAL_SKIP_PROCESS_LOG=1 leave evidence dir absent?"
       gate_policy: "advisory"
       rationale: "Shell log capture only; no new auth or network surface."
       research_profile: "integrated-agent"

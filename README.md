@@ -131,7 +131,7 @@ Complete reference for store setup, client bootstrap, MCP, automation, and layou
 | Install methodology into a **separate client directory** | [Getting started with a new client project](#getting-started-with-a-new-client-project) |
 | Product and `tied-project/` in **one primary repo** + linked store | [Primary implementation repository](#primary-implementation-repository) |
 
-### TIED source repository setup
+## TIED source repository setup
 
 These steps prepare **this TIED checkout** (MCP server, npm workspace CLIs, bootstrap engine). They are separate from bootstrapping a **client project** with `tied-install`.
 
@@ -185,7 +185,7 @@ Notes:
 - `scripts/run-feature-batch-agentstream.sh` requires a built `@tied/cli` (`cd mcp-server && npm run build`) unless `AGENTSTREAM` points at another compatible binary.
 - See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`tied-install.cmd`, `test-new-tied-client.cmd`, PowerShell `.ps1` shims).
 
-### Getting started with a new client project
+## Getting started with a new client project
 
 This section is for bootstrapping an **external client directory** from the TIED store checkout. If the client **is** your product repository (code and `tied-project/` in one tree), use [Primary implementation repository](#primary-implementation-repository) instead.
 
@@ -239,7 +239,7 @@ If Node or the built server is unavailable, use the documented bootstrap and man
 
 Read [using TIED without MCP](tied-bundle/docs/using-tied-without-mcp.md) before managing project records by hand.
 
-### Primary implementation repository
+## Primary implementation repository
 
 Use this path when **one git repository** holds both your application and TIED project data (`tied-project/`). That repo is the **primary implementation repository**. The **TIED store** is a separate checkout of this methodology repository (or a pinned clone such as under `tied_versions/`) with a built MCP server (`mcp-server/dist/index.js`) and bundled skills under `tools/bundled-*`.
 
@@ -327,7 +327,7 @@ For YAML workflows without IDE MCP, see [TIED YAML agent index](tied-bundle/docs
 
 `tied-install --mode full` materializes methodology under `tied-bundle/` for offline use (larger tree, different refresh tradeoffs). See profiles in [tools/bootstrap/README.md](tools/bootstrap/README.md).
 
-#### Methodology development layout
+### Methodology development layout
 
 When you work in **this** TIED git repository as the store **and** also track project REQ/ARCH/IMPL here, keep a **separate** store clone for installing into other primary repos. Do not run `tied-install .` with `--store` equal to the same root (self-install refused). A pinned store under `tied_versions/...` while product code lives elsewhere is a normal pattern.
 

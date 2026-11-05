@@ -26,14 +26,14 @@ REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
   satisfaction_criteria:
     - criterion: "After disposable bootstrap, tied-project/agent-preload-contract.yaml exists (copy-if-absent from tied-bundle/docs/agent-preload-contract-template.yaml); orchestrator calls materialize helper before four-phase exec."
       id: "SC-WF-PRELOAD-CONTRACT"
-    - criterion: "Each batch turn goal references evidence/phase-handoff-{add-feature|refine-plan|build-plan|close-out}.md; agents write handoff at end of turn."
-      id: "SC-WF-PHASE-HANDOFF"
     - criterion: "build-plan adjunct requires archiving failing npm test stdout to evidence/quality-manifest/*-red.stdout.txt before GREEN manifest when product tests exist."
       id: "SC-WF-RED-ARCHIVE"
-    - criterion: "Store REPO_ROOT reconcile preflight checks mcp-server/dist/index.js; emits DIAGNOSTIC with ./build-workspace.sh remediation; WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 skips; WF_TRIAL_STRICT_RECONCILE=1 fails closed (default off)."
-      id: "SC-WF-RECONCILE-PREFLIGHT"
+    - criterion: "Each batch turn goal references evidence/phase-handoff-{add-feature|refine-plan|build-plan|close-out}.md; agents write handoff at end of turn."
+      id: "SC-WF-PHASE-HANDOFF"
     - criterion: "prompt-shared wf-trial-four-phase-close-out-playbook.md documents sync-dispositions optional at minimal depth, single traceable commit (SHA in body not follow-up commit), project gates/ as commit source of truth vs tied-bundle/working mirrors."
       id: "SC-WF-CLOSEOUT-PLAYBOOK"
+    - criterion: "Store REPO_ROOT reconcile preflight checks mcp-server/dist/index.js; emits DIAGNOSTIC with ./build-workspace.sh remediation; WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1 skips; WF_TRIAL_STRICT_RECONCILE=1 fails closed (default off)."
+      id: "SC-WF-RECONCILE-PREFLIGHT"
     - criterion: "workflow-trial-agentstream-sh.test.mjs covers materialize_disposable_preload_contract and wf_trial_reconcile_preflight."
       id: "SC-WF-HARDENING-TEST"
       metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
@@ -44,5 +44,5 @@ REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
     implementation:
       - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
   validation_criteria:
-    - method: "Extended workflow-trial-agentstream-sh.test.mjs"
     - method: "Disposable wf-03 dry-run shows no template-only preload DIAGNOSTIC when contract materialized"
+    - method: "Extended workflow-trial-agentstream-sh.test.mjs"

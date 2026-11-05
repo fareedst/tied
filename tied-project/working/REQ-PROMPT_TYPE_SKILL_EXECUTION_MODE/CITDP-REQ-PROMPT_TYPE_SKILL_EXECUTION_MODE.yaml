@@ -3,12 +3,12 @@ CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
     current_behavior: "add-feature and refine-plan include Implement and tied-plan-citdp.md directs RED tests during Plan; non-tied-plan is monolithic; agents without Cursor Plan mode lack a skill-level forbid list for product mutations during planning."
     desired_behavior: "Eight leaves declare skill execution mode plan or agent; shared prompt-execution-mode.md; TIED plan leaves stop after Plan handoff; non-tied four-step sequence with tied-project/non-tied-plans/{slug}/ artifacts; 18 leaf inventory."
     non_goals:
-      - "Splitting debug, use-skill, or citdp-record leaves"
-      - "New handoff/git-hygiene/clear-workspace prompt-type leaves"
       - "Automatic add-refine-build-close-out sequencer in v1"
+      - "New handoff/git-hygiene/clear-workspace prompt-type leaves"
+      - "Splitting debug, use-skill, or citdp-record leaves"
     success_criteria:
-      - "Plan leaves omit Implement and tied-implement.md links"
       - "non-tied-plans root documented and boundary updated"
+      - "Plan leaves omit Implement and tied-implement.md links"
       - "Static and subagent e2e cover 18 leaves and execution mode strings"
     unchanged_behavior: "build-plan and close-out gate stacks when invoked as agent-mode execute steps"
   evidence:
@@ -39,9 +39,9 @@ CITDP-REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
       - "Agent treats plan mode as permission to skip TIED design writes entirely"
       - "non-tied-plans CITDP mistaken for citdp-promote input without sponsor intent"
     adversarial_inquiry:
-      depth_tier: "integrated"
       assurance_profile: "baseline-functional"
       counterexamples:
         - "Skill text forbids code but agent mutates tests anyway without IDE Plan mode"
+      depth_tier: "integrated"
     residual_risks:
       - "Stale '15 leaf' prose outside grep list until close-out audit"

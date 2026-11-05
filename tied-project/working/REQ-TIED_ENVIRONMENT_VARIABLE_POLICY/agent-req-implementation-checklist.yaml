@@ -9,21 +9,21 @@ execution_evidence:
       close_out: "tied-bundle/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/gates/close_out-2026-11-04T22-47-37-968Z.json"
     master_checklist: "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/agent-req-implementation-checklist.yaml"
   completed:
-    - "translate-sponsor-intent"
+    - "author-architecture"
+    - "author-requirement"
     - "change-definition"
     - "impact-discovery"
+    - "persist-citdp-record"
+    - "persist-implementation-records"
     - "risk-assessment"
     - "session-bootstrap"
-    - "test-strategy"
-    - "author-requirement"
-    - "author-architecture"
-    - "persist-implementation-records"
-    - "unit-test-red"
-    - "unit-test-green"
-    - "verification-gate"
     - "sync-tied-stack"
-    - "persist-citdp-record"
+    - "test-strategy"
     - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
   envelope_path: "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     command_seq: []
@@ -42,8 +42,8 @@ gate_contract:
     - "verification"
 gate_policy: "advisory"
 linked_plans:
-  - "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/PLAN.md"
   - "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/PLAN-refine.md"
+  - "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/PLAN.md"
 notes: "refine-plan pass 2 — 2026-11-04; pre_implementation gate allowed (receipt in tied-bundle/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/gates/)."
 profile_depth: "minimal"
 steps:
@@ -116,9 +116,9 @@ steps:
     tracking:
       evidence_refs:
         - kind: "file_path"
-          path: "tied-project/implementation-decisions/IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
-        - kind: "file_path"
           path: "tied-project/implementation-decisions/IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY-pseudocode.md"
+        - kind: "file_path"
+          path: "tied-project/implementation-decisions/IMPL-TIED_ENVIRONMENT_VARIABLE_POLICY.yaml"
       status: "completed"
   - disposition: "completed"
     slug: "unit-test-red"
@@ -133,12 +133,12 @@ steps:
     slug: "unit-test-green"
     tracking:
       evidence_refs:
+        - claimed_success: true
+          exit_code: 0
+          kind: "command_evidence"
+          manifest_ref: "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/evidence/verification-evidence-manifest.v1.json"
         - kind: "file_path"
           path: "tools/bootstrap/lib/tied-env-allowlist-inventory.mjs"
-        - kind: "command_evidence"
-          claimed_success: true
-          exit_code: 0
-          manifest_ref: "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/evidence/verification-evidence-manifest.v1.json"
       status: "completed"
   - disposition: "completed"
     slug: "verification-gate"

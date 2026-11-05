@@ -1,6 +1,21 @@
-feat(wf-trial): harden four-phase agentstream disposable workflow
+docs(tied): sync WF trial working folders and README IA
 
-Materialize tied-project agent-preload contract, MCP dist reconcile preflight,
-batch phase-handoff hints, and prompt-shared WF playbooks after 1793817075 readout.
+Restore store README H2 anchors for bootstrap tests; align project CITDP
+and checklist YAML across WF trial cohort REQs; extend tied-product-configuration
+vocab index and routing.
 
-[REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [ARCH-WF_TRIAL_FOUR_PHASE_HARDENING] [IMPL-WF_TRIAL_FOUR_PHASE_HARDENING]
+Staging map (33 tracked paths + CHANGELOG + close-out evidence):
+- README.md
+- tied-project/architecture-decisions/ARCH-WF_TRIAL_FOUR_PHASE_HARDENING.yaml
+- tied-project/citdp/CITDP-*.yaml (7 files)
+- tied-project/non-tied-plans/reddit-wf03-tied-agentic-readout/CITDP-reddit-wf03-tied-agentic-readout.yaml
+- tied-project/requirements/REQ-TIED_CLI_MCP_JSON_BASE_PATH.yaml
+- tied-project/requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml
+- tied-project/vocab/domain-references.md, routing.md, tied-product-configuration.md
+- tied-project/working/REQ-*/ CITDP, checklists, env-allowlist, trackers (see git diff)
+- tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/* (close-out receipts, manifest)
+- CHANGELOG.md
+
+[REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_IMPLEMENTATION_STACK]
+[REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS]
+[REQ-TIED_ENVIRONMENT_VARIABLE_POLICY] [REQ-TIED_STORE_README_IA_SKILL]

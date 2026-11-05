@@ -4,23 +4,23 @@ CITDP-REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
     desired_behavior: "Umbrella REQ-TIED_ENVIRONMENT_VARIABLE_POLICY holds the full directive (rules 1–8 + design test). Hybrid v1 adds committed env allowlist, first-party env catalog doc, and bootstrap inventory test blocking new undocumented process.env reads in scoped production trees. REQ-TIED_RUNTIME_DISK_CONFIG lists depends_on parent. Gap audit documents MCP tools controlled primarily by env without explicit MCP/CLI surface."
     non_goals:
       - "Changing tied-bundle/docs/ai-principles.md (methodology)"
+      - "Integrated adversarial inquiry activation"
       - "Removing IDE MCP spawn env blocks"
       - "Strict CI ban on all process.env without allowlist migration (deferred tier)"
-      - "Integrated adversarial inquiry activation"
     sponsor_decisions:
       costly_accepted_on_implementation: "Parent REQ over existing implemented REQ-TIED_RUNTIME_DISK_CONFIG (LEAP depends_on on child)"
       enforcement_tier: "hybrid"
     success_criteria:
-      - "SC-EVPOL-TEXT"
       - "SC-EVPOL-CATALOG"
+      - "SC-EVPOL-GAP-AUDIT"
       - "SC-EVPOL-INVENTORY"
       - "SC-EVPOL-OBSERVE"
       - "SC-EVPOL-RDC-LINK"
-      - "SC-EVPOL-GAP-AUDIT"
+      - "SC-EVPOL-TEXT"
     unchanged_behavior:
       - "resolveTiedRuntimeConfig and RDC satisfaction criteria semantics"
-      - "YAML MCP corpus write authority via getBasePath / install mcp.json"
       - "Secret handling policy in tied-config-report (JEV_API_KEY catalog)"
+      - "YAML MCP corpus write authority via getBasePath / install mcp.json"
   completion_criteria:
     activation:
       phase: "pre_implementation"
@@ -53,22 +53,23 @@ CITDP-REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
     profile_depth: "minimal"
     recorded_at: "2026-11-04"
     title: "TIED product environment variable usage policy"
+  record_status: "implemented"
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
         - "Allowlist drifts out of sync with production reads and blocks legitimate releases"
-        - "Operators treat spawn-injected mcp.json env as shell exports and double-configure"
         - "Inventory test false positives on dynamic process.env[key] patterns"
+        - "Operators treat spawn-injected mcp.json env as shell exports and double-configure"
       depth_tier: "minimal"
       disconfirming_observations:
         - "CONFIG_REPORT already catalogs operator toggles with provenance"
         - "RDC tests already assert ignored shell global paths"
       eligibility_triggers_matched: []
       evidence_references:
+        - "tied-project/requirements/REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
         - "tied-project/working/REQ-TIED_ENVIRONMENT_VARIABLE_POLICY/PLAN-refine.md"
         - "tools/bootstrap/lib/tied-config-report.mjs"
-        - "tied-project/requirements/REQ-TIED_RUNTIME_DISK_CONFIG.yaml"
       falsification_questions:
         - "Does inventory test scan test files and fail CI on TIED_MCP_TEST_REPO_ROOT?"
         - "Does LEAP parent link break RDC verification metrics?"
@@ -83,7 +84,6 @@ CITDP-REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
       reversible:
         - "Allowlist file under tools/bootstrap/fixtures vs tied-project/working (default fixtures)"
         - "scripts/ scan deferred vs included in v1 inventory (default deferred audit-only)"
-    summary: "Umbrella env policy reduces undocumented process.env growth; primary risks are allowlist drift and conflating spawn env with shell exports."
     residual_risks:
       - id: "RISK-EVPOL-ALLOWLIST-DRIFT"
         mitigation: "Inventory test must pass in CI; catalog generated from same YAML"
@@ -91,6 +91,7 @@ CITDP-REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
       - id: "RISK-EVPOL-SCAN-GAP"
         mitigation: "Document scan_roots; expand in follow-on if scripts/ need inclusion"
         severity: "low"
+    summary: "Umbrella env policy reduces undocumented process.env growth; primary risks are allowlist drift and conflating spawn env with shell exports."
   test_strategy:
     integration_command_seq:
       - command: "node --test tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs"
@@ -98,4 +99,3 @@ CITDP-REQ-TIED_ENVIRONMENT_VARIABLE_POLICY:
       - command: "node tools/bootstrap/tied-config-report-cli.mjs --format json"
         notes: "Observability cross-check for SC-EVPOL-OBSERVE"
     matrix_notes: "add-feature authors REQ/ARCH/IMPL; build-plan implements inventory; LEAP RDC depends_on parent only."
-  record_status: "implemented"

@@ -1,23 +1,16 @@
 change_definition:
-  current_behavior: |
-    tied_git_hygiene MCP covers preview/apply for plan close-out; after test-all or test-mcp
-    the store checkout accumulates tracked regenerable diffs and untracked gate-test CITDP litter
-    with no frozen operator wipe map in build-commands.
-  desired_behavior: |
-    scripts/build-commands.sh exposes test-all-hygiene (and --dry-run) restoring frozen tracked
-    paths and deleting untracked CITDP gate fixtures only; LEAP documents RUN_STORE_TEST_ALL_HYGIENE;
-    composition test locks alias and dry-run non-mutation.
+  current_behavior: "tied_git_hygiene MCP covers preview/apply for plan close-out; after test-all or test-mcp\nthe store checkout accumulates tracked regenerable diffs and untracked gate-test CITDP litter\nwith no frozen operator wipe map in build-commands.\n"
+  desired_behavior: "scripts/build-commands.sh exposes test-all-hygiene (and --dry-run) restoring frozen tracked\npaths and deleting untracked CITDP gate fixtures only; LEAP documents RUN_STORE_TEST_ALL_HYGIENE;\ncomposition test locks alias and dry-run non-mutation.\n"
   non_goals:
-    - "Parity with MCP apply for shell path"
     - "Auto-run hygiene inside test-all without operator invoke"
     - "Commit or push from hygiene helpers"
+    - "Parity with MCP apply for shell path"
   success_criteria:
-    - "test_all_hygiene restores listed tracked paths and rm -f untracked litter when not indexed"
     - "Dry-run makes no porcelain delta"
     - "how test documents test-all-hygiene"
     - "REQ/ARCH/IMPL status Implemented with test traceability"
-  unchanged_behavior: |
-    tied_git_hygiene MCP preview/apply semantics unchanged from REQ-MCP-PROJECT-OPERATIONS wave.
+    - "test_all_hygiene restores listed tracked paths and rm -f untracked litter when not indexed"
+  unchanged_behavior: "tied_git_hygiene MCP preview/apply semantics unchanged from REQ-MCP-PROJECT-OPERATIONS wave.\n"
 completion_criteria:
   activation:
     phase: "verification"
@@ -44,14 +37,11 @@ evidence:
     - "Shell wipe map frozen in build-commands; operators refresh lists when new litter patterns appear"
 impact_analysis:
   impl_inventory_notes: "Extends existing git hygiene stack; no new MCP surface."
-  modules_or_boundaries: |
-    scripts/build-commands.sh, scripts/_build_commands_cli_guide.inc.sh (already documents alias),
-    tools/bootstrap/build-commands-test-all-hygiene.test.mjs,
-    tied-project REQ/ARCH/IMPL YAML and IMPL pseudo-code sidecar.
+  modules_or_boundaries: "scripts/build-commands.sh, scripts/_build_commands_cli_guide.inc.sh (already documents alias),\ntools/bootstrap/build-commands-test-all-hygiene.test.mjs,\ntied-project REQ/ARCH/IMPL YAML and IMPL pseudo-code sidecar.\n"
   tied_tokens_affected:
-    - "REQ-TIED_GIT_HYGIENE"
     - "ARCH-TIED_GIT_HYGIENE_SAFETY"
     - "IMPL-TIED_GIT_HYGIENE"
+    - "REQ-TIED_GIT_HYGIENE"
   tied_tokens_new: []
 leap_feedback:
   divergences_from_analysis: "none"
@@ -71,8 +61,8 @@ risk_analysis:
       - "Restore list omits new test-all churn paths"
     depth_tier: "minimal"
     disconfirming_observations:
-      - "delete loop skips when git ls-files matches"
       - "build-commands-test-all-hygiene.test.mjs dry-run asserts porcelain unchanged"
+      - "delete loop skips when git ls-files matches"
     eligibility_triggers_matched: []
     evidence_references:
       - "tied-project/working/REQ-TIED_GIT_HYGIENE/evidence/not-applicable-receipt.v1.json"
@@ -91,10 +81,10 @@ risk_analysis:
       severity: "Low"
 test_strategy:
   module_validation:
-    - boundary: "shell alias + dry-run"
-      module: "test_all_hygiene"
-      tests: "build-commands-test-all-hygiene.test.mjs"
     - boundary: "MCP preview/apply unchanged"
       module: "git_hygiene"
       tests: "git-hygiene.test.ts"
+    - boundary: "shell alias + dry-run"
+      module: "test_all_hygiene"
+      tests: "build-commands-test-all-hygiene.test.mjs"
   summary: "RED composition test for shell; existing MCP unit tests remain green."

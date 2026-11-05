@@ -3,11 +3,11 @@ CITDP-RDC-MCP-INTROSPECTION:
     current_behavior: "`tied_config_get_base_path` returns corpus `base_path`, layout mode, bundle_root, and echoes `store_root` from process.env.TIED_STORE_ROOT only. Operators and agents cannot see disk-resolved MCP dist or which surfaces (mcp.json, store yaml, discovery) authored global paths—despite RDC shipping on-disk resolution in bootstrap and agentstream."
     desired_behavior: "Same MCP tool adds disk-aligned `mcp_dist_path`, resolved `store_root`, and structured `config_sources` (and preserves existing fields). Values match bootstrap `resolveTiedRuntimeConfig` / agentstream mirror for the active client project_root; env echo fields remain for stdio debugging but are not authoritative for global paths."
     non_goals:
-      - "New MCP tools beyond extending tied_config_get_base_path"
-      - "Full ARCH-TIED_LAYOUT parity in MCP tied-layout.ts"
       - "Changing resolver semantics or install refresh writers"
       - "E2e metrics env LEAP (pass-4 candidate)"
       - "Exposing secrets or operator.local.yaml contents"
+      - "Full ARCH-TIED_LAYOUT parity in MCP tied-layout.ts"
+      - "New MCP tools beyond extending tied_config_get_base_path"
     sponsor_decisions:
       costly_accepted_on_implementation: "MCP server dynamically imports bootstrap tied-runtime-config.mjs from resolved store root when present; thin TS fallback only when store checkout lacks tools/bootstrap (document limitation)"
     success_criteria:
@@ -50,10 +50,9 @@ CITDP-RDC-MCP-INTROSPECTION:
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
-      research_profile: "integrated-agent"
       counterexamples:
-        - "Dynamic import of bootstrap .mjs fails on Windows path or packaged MCP without store tree."
         - "config_sources leaks wrong surface when mcp.json and store yaml disagree silently."
+        - "Dynamic import of bootstrap .mjs fails on Windows path or packaged MCP without store tree."
         - "Operators treat introspection JSON as write authority and skip tied-install refresh."
       depth_tier: "minimal"
       disconfirming_observations:
@@ -70,6 +69,7 @@ CITDP-RDC-MCP-INTROSPECTION:
       gate_policy: "advisory"
       prior_depth_tier: "minimal"
       rationale: "Read-only observability; no auth, network, or persistence."
+      research_profile: "integrated-agent"
       sub_adversarial_inquiry_pass: "not_applicable"
     summary: "Closes deferred handoff E; low product risk if aligned to existing resolver tests."
   test_strategy:

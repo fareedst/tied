@@ -1,6 +1,6 @@
 # Close-out handoff — REQ-WF_TRIAL_FOUR_PHASE_HARDENING
 
-**Date:** 2026-11-04  
+**Date:** 2026-11-05 (working-folder sync batch) · prior feature close-out 2026-11-04  
 **Plan:** [../PLAN.md](../PLAN.md) · **CITDP:** [../../../citdp/CITDP-REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml](../../../citdp/CITDP-REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml)
 
 ## What shipped

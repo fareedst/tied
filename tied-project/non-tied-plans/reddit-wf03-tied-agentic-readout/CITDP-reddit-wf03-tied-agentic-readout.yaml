@@ -1,26 +1,20 @@
-# Non-TIED plan CITDP — analysis only, no TIED token promotion
-schema: citdp-plan-draft.v1
-slug: reddit-wf03-tied-agentic-readout
-tied_tokens_new: []
-
-scope:
-  summary: >
-    Long-form link-free Reddit article explaining TIED and lessons from one WF-03
-    agent trial readout for skeptical software engineers.
-  in_scope:
-    - Markdown under tied-project/non-tied-plans/reddit-wf03-tied-agentic-readout/
-  out_of_scope:
-    - Product code changes
-    - Project REQ/ARCH/IMPL YAML
-    - Public URLs in post body
-
-risks:
-  - id: overclaim
-    description: Readers infer methodology or model superiority from one trial
-    mitigation: Dedicated "does not prove" section; session-only grades; readout future-test rule
-  - id: jargon_creep
-    description: Internal names (MCP, agentstream) leak into opening
-    mitigation: JARGON-GLOSSARY; PLAN opening rules; optional Terms footer only
-
 evidence:
-  primary: docs/demos/trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md
+  primary: "docs/demos/trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md"
+risks:
+  - description: "Internal names (MCP, agentstream) leak into opening"
+    id: "jargon_creep"
+    mitigation: "JARGON-GLOSSARY; PLAN opening rules; optional Terms footer only"
+  - description: "Readers infer methodology or model superiority from one trial"
+    id: "overclaim"
+    mitigation: "Dedicated \"does not prove\" section; session-only grades; readout future-test rule"
+schema: "citdp-plan-draft.v1"
+scope:
+  in_scope:
+    - "Markdown under tied-project/non-tied-plans/reddit-wf03-tied-agentic-readout/"
+  out_of_scope:
+    - "Product code changes"
+    - "Project REQ/ARCH/IMPL YAML"
+    - "Public URLs in post body"
+  summary: "Long-form link-free Reddit article explaining TIED and lessons from one WF-03 agent trial readout for skeptical software engineers.\n"
+slug: "reddit-wf03-tied-agentic-readout"
+tied_tokens_new: []

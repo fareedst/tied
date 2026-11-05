@@ -28,3 +28,17 @@
 | spawn-injected env | operator shell export | RDC ignores shell global paths; spawn env comes from install refresh. |
 | configuration plane | operational control | State transitions and feature toggles prefer MCP tools/CLI; env is input, not authority (rule 8). |
 | env catalog | tied-yaml-mcp naming bridge | Catalog is normative for policy; vocab bridge summarizes common keys for agents. |
+
+---
+
+## Alphabetical index
+
+| Term | Section |
+|------|---------|
+| configuration plane | Preferred terms |
+| design test | Preferred terms |
+| env allowlist | Preferred terms |
+| env catalog | Distinctions |
+| env class | Preferred terms |
+| operator shell export | Preferred terms |
+| spawn-injected env | Preferred terms |

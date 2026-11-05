@@ -14,10 +14,10 @@ execution_evidence:
     - "session-bootstrap"
     - "sync-tied-stack"
     - "test-strategy"
-    - "unit-test-green"
-    - "verification-gate"
     - "traceable-commit"
     - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "verification-gate"
   envelope_path: "tied-project/working/REQ-TIED_STORE_README_IA_SKILL/evidence/request-evidence-envelope.v1.json"
   request: "REQ-TIED_STORE_README_IA_SKILL"
 record_identity:

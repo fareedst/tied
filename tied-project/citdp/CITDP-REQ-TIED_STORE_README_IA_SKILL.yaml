@@ -3,14 +3,14 @@ CITDP-REQ-TIED_STORE_README_IA_SKILL:
     current_behavior: "Sponsor readme-information-architecture skill (v1.0) lives outside the store; STORE_FACILITATOR_SKILLS lists record-gf-trial and record-wf-trial only; store README IA lacks intent navigation and Install chapter grouping."
     desired_behavior: "Third store facilitator skill readme-information-architecture installs via manifest (not methodology, not disposable clients); REQ/ARCH/IMPL traceability; README presentation IA pass with strict content preservation."
     non_goals:
-      - "Copy skill into tied-bundle methodology inheritance"
-      - "BUNDLED_STANDALONE_CLIENT_SKILLS entry for disposable clients"
       - "Automated README link checker in CI"
+      - "BUNDLED_STANDALONE_CLIENT_SKILLS entry for disposable clients"
+      - "Copy skill into tied-bundle methodology inheritance"
     success_criteria:
-      - "STORE_FACILITATOR_SKILLS includes readme-information-architecture"
-      - "store-facilitator-skills.test.mjs and readme-information-architecture-skill.test.ts pass"
-      - "tied_validate_consistency passes for new tokens"
       - "README.md gains intent navigation without semantic loss"
+      - "store-facilitator-skills.test.mjs and readme-information-architecture-skill.test.ts pass"
+      - "STORE_FACILITATOR_SKILLS includes readme-information-architecture"
+      - "tied_validate_consistency passes for new tokens"
     unchanged_behavior:
       - "Existing record-gf-trial and record-wf-trial procedures"
       - "Six standalone client bootstrap skills"
@@ -30,17 +30,17 @@ CITDP-REQ-TIED_STORE_README_IA_SKILL:
       - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
       - "REQ-TIED_STORE_README_EXPERIENCE_HUB"
     files:
-      - "README.md"
       - "mcp-server/src/e2e/readme-information-architecture-skill.test.ts"
+      - "README.md"
       - "tied-project/vocab/project-operations-mcp.md"
       - "tied-project/vocab/routing.md"
       - "tools/bootstrap/lib/store-facilitator-skills.test.mjs"
       - "tools/bootstrap/manifest.json"
-      - "tools/bundled-readme-information-architecture-skill/SKILL.md"
       - "tools/bundled-readme-information-architecture-skill/reference.md"
+      - "tools/bundled-readme-information-architecture-skill/SKILL.md"
     modules:
-      - "store_facilitator_skills"
       - "bundled_readme_information_architecture_skill"
+      - "store_facilitator_skills"
     tied_tokens_new:
       - "ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY"
       - "IMPL-TIED_STORE_README_IA_SKILL"
@@ -73,12 +73,12 @@ CITDP-REQ-TIED_STORE_README_IA_SKILL:
         referenced_verification_run_id: "close-out-req-tied-store-readme-ia-skill-2026-11-05"
       counterexamples:
         - "Manifest lists readme-information-architecture but bundled dir missing — store-facilitator test fails closed"
-        - "Skill procedure weakens must to should in README rewrite"
         - "Skill listed under BUNDLED_STANDALONE_CLIENT_SKILLS and installs on disposable clients"
+        - "Skill procedure weakens must to should in README rewrite"
       depth_tier: "minimal"
       disconfirming_observations:
-        - "store-facilitator-skills.test.mjs expects three facilitator skills including readme-information-architecture"
         - "readme-information-architecture-skill.test.ts asserts Not methodology and STORE_FACILITATOR_SKILLS contract"
+        - "store-facilitator-skills.test.mjs expects three facilitator skills including readme-information-architecture"
       eligibility_triggers_matched: []
       evidence_references:
         - "mcp-server/src/e2e/readme-information-architecture-skill.test.ts"

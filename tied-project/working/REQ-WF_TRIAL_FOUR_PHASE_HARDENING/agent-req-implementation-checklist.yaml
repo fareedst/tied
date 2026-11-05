@@ -1316,11 +1316,11 @@ sub_procedures:
       - "Caller supplies scope, phase (pre_implementation|verification|close_out), proof_boundaries, blocking (default false), and profile_depth (minimal|integrated|strict_candidate) selected before this call."
     rationale: "WF trial orchestrator hardening at minimal depth; integrated inquiry N/A per CITDP."
     references:
-      - "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/sub-adversarial-inquiry-pass-na.md"
       - "mcp-server/src/adversarial-inquiry/checklist-integration.ts"
       - "tied-project/implementation-decisions/IMPL-TIED_ADVERSARIAL_INQUIRY_CHECKLIST-pseudocode.md"
       - "tied-project/vocab/fidelity-research.md"
       - "tied-project/vocab/quality-assurance.md"
+      - "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/sub-adversarial-inquiry-pass-na.md"
     slug: "sub-adversarial-inquiry-pass"
     tasks:
       - "IF profile_depth >= integrated: CALL tied_adversarial_inquiry_run via MAP_ADVERSARIAL_OBLIGATIONS with explicit scope, phase, and read-only guarantee; persist only under working/{REQ-TOKEN}/adversarial-inquiry."

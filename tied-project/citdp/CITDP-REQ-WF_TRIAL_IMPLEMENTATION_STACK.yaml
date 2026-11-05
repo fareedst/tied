@@ -1,110 +1,85 @@
----
 change_definition:
-  current_behavior: |
-    workflow-trial-agentstream materializes generic agent-preload-contract from template with empty
-    language and test_framework; disposable clients have no package.json seed; refine-plan may lock
-    Python unittest or TypeScript npm test for the same PROMPT-WF (e.g. WF-03 Claude Sonnet vs Cursor).
-    PROMPT-WF-01 remainder invites TypeScript or Python.
-  desired_behavior: |
-    After orchestrator bootstrap (unless WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1):
-    seed_wf_trial_typescript_stack(WORKSPACE) copy-if-absent fixture files;
-    materialize_wf_trial_preload_contract(WORKSPACE) copy-if-absent from
-    tied-bundle/docs/wf-trial-agent-preload-contract.yaml with TypeScript + node-test fields set.
-    traditional-four-phase-agentstream.yaml turn 2 references wf-trial-refine-plan-stack.md — stack
-    pre-locked, PLAN Locked stack table, no language re-debate. Turn 1 inventory includes
-    implementation_stack_id wf-trial-ts-node-test-v1. Facilitator catalog documents stack;
-    PROMPT-WF-01 TypeScript-only remainder. record-wf-trial defaults verification to npm test.
+  current_behavior: "workflow-trial-agentstream materializes generic agent-preload-contract from template with empty\nlanguage and test_framework; disposable clients have no package.json seed; refine-plan may lock\nPython unittest or TypeScript npm test for the same PROMPT-WF (e.g. WF-03 Claude Sonnet vs Cursor).\nPROMPT-WF-01 remainder invites TypeScript or Python.\n"
+  desired_behavior: "After orchestrator bootstrap (unless WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1):\nseed_wf_trial_typescript_stack(WORKSPACE) copy-if-absent fixture files;\nmaterialize_wf_trial_preload_contract(WORKSPACE) copy-if-absent from\ntied-bundle/docs/wf-trial-agent-preload-contract.yaml with TypeScript + node-test fields set.\ntraditional-four-phase-agentstream.yaml turn 2 references wf-trial-refine-plan-stack.md — stack\npre-locked, PLAN Locked stack table, no language re-debate. Turn 1 inventory includes\nimplementation_stack_id wf-trial-ts-node-test-v1. Facilitator catalog documents stack;\nPROMPT-WF-01 TypeScript-only remainder. record-wf-trial defaults verification to npm test.\n"
   non_goals:
-  - Locking product ambiguity (WF-02 duplicate policy, WF-07 null semantics)
-  - Changing chainFromPrevious or four-turn skill names
-  - Mandatory stack on manual test-new-tied-client without orchestrator
-  - Vitest or Python as alternate matrix runners in v1
+    - "Changing chainFromPrevious or four-turn skill names"
+    - "Locking product ambiguity (WF-02 duplicate policy, WF-07 null semantics)"
+    - "Mandatory stack on manual test-new-tied-client without orchestrator"
+    - "Vitest or Python as alternate matrix runners in v1"
   success_criteria:
-  - SC-WF-STACK-SEED through SC-WF-STACK-TEST in REQ detail (authored at build-plan)
-  - Orchestrated wf-03 disposable has package.json + preload language TypeScript before turn 1
-  unchanged_behavior: |
-    materialize_disposable_preload_contract for non-WF paths; gold clients; methodology YAML read-only
-    in clients; four-phase handoff and process log behavior unchanged.
+    - "Orchestrated wf-03 disposable has package.json + preload language TypeScript before turn 1"
+    - "SC-WF-STACK-SEED through SC-WF-STACK-TEST in REQ detail (authored at build-plan)"
+  unchanged_behavior: "materialize_disposable_preload_contract for non-WF paths; gold clients; methodology YAML read-only\nin clients; four-phase handoff and process log behavior unchanged.\n"
 completion_criteria:
   activation:
-    phase: pre_implementation
-    request_token: REQ-WF_TRIAL_IMPLEMENTATION_STACK
-    run_id: refine-plan-2026-11-04
+    phase: "pre_implementation"
+    request_token: "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+    run_id: "refine-plan-2026-11-04"
   checklist_gate:
     dispositions:
-    - completed
-    - not_applicable
-    - pending
-    - waived
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
     fail_closed: true
     phases:
-    - close_out
-    - pre_implementation
-    - verification
-  verification_gate_notes: Shell tests only; no live LLM matrix in REQ scope.
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
+  verification_gate_notes: "Shell tests only; no live LLM matrix in REQ scope."
 evidence:
   command_seq:
-  - node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
-  manifest_reference: working/REQ-WF_TRIAL_IMPLEMENTATION_STACK/evidence/
+    - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  manifest_reference: "working/REQ-WF_TRIAL_IMPLEMENTATION_STACK/evidence/"
   proof_boundaries:
-  - Process/tooling REQ; not methodology effectiveness or model ranking claim
+    - "Process/tooling REQ; not methodology effectiveness or model ranking claim"
 impact_analysis:
-  impl_inventory_notes: Shell inc, bootstrap fixture, bundle preload YAML, catalog + batch YAML, prompt-shared markdown, record-wf-trial reference.
-  modules_or_boundaries: |
-    scripts/lib/wf-trial-implementation-stack.inc.sh
-    scripts/workflow-trial-agentstream.sh
-    tools/bootstrap/fixtures/wf-trial-typescript-stack/
-    tied-bundle/docs/wf-trial-agent-preload-contract.yaml
-    docs/demos/catalog-traditional-workflow-trial-prompts.md
-    docs/demos/traditional-four-phase-agentstream.yaml
-    tools/bundled-prompt-type-skills/prompt-shared/wf-trial-refine-plan-stack.md
-    tools/bundled-record-wf-trial-skill/reference.md
-    tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
-    tied-project/vocab/agentstream.md
+  impl_inventory_notes: "Shell inc, bootstrap fixture, bundle preload YAML, catalog + batch YAML, prompt-shared markdown, record-wf-trial reference."
+  modules_or_boundaries: "scripts/lib/wf-trial-implementation-stack.inc.sh\nscripts/workflow-trial-agentstream.sh\ntools/bootstrap/fixtures/wf-trial-typescript-stack/\ntied-bundle/docs/wf-trial-agent-preload-contract.yaml\ndocs/demos/catalog-traditional-workflow-trial-prompts.md\ndocs/demos/traditional-four-phase-agentstream.yaml\ntools/bundled-prompt-type-skills/prompt-shared/wf-trial-refine-plan-stack.md\ntools/bundled-record-wf-trial-skill/reference.md\ntools/bootstrap/workflow-trial-agentstream-sh.test.mjs\ntied-project/vocab/agentstream.md\n"
   tied_tokens_affected:
-  - REQ-TIED_SETUP
-  - REQ-WF_TRIAL_FOUR_PHASE_HARDENING
-  - REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
+    - "REQ-TIED_SETUP"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+    - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
   tied_tokens_new:
-  - REQ-WF_TRIAL_IMPLEMENTATION_STACK
-  - ARCH-WF_TRIAL_IMPLEMENTATION_STACK
-  - IMPL-WF_TRIAL_IMPLEMENTATION_STACK
+    - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
+    - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+    - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
 leap_feedback:
-  divergences_from_analysis: none
-  record_status: draft
+  divergences_from_analysis: "none"
+  record_status: "draft"
   tied_stack_updates_required: []
 record_identity:
-  change_request_id: REQ-WF_TRIAL_IMPLEMENTATION_STACK
-  citdp_id: CITDP-REQ-WF_TRIAL_IMPLEMENTATION_STACK
-  status: draft
+  change_request_id: "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+  citdp_id: "CITDP-REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+  status: "draft"
 risk_analysis:
   abuse_cases: []
   adversarial_inquiry:
-    assurance_profile: baseline-functional
+    assurance_profile: "baseline-functional"
     close_out_inquiry_waiver: null
     counterexamples:
-    - Seed overwrites agent-edited package.json if copy-if-absent guard wrong
-    - Strict stack blocks valid sponsor experiment with Python baseline
-    depth_tier: minimal
+      - "Seed overwrites agent-edited package.json if copy-if-absent guard wrong"
+      - "Strict stack blocks valid sponsor experiment with Python baseline"
+    depth_tier: "minimal"
     disconfirming_observations:
-    - WF-03 Sonnet readout used Python despite Cursor peers on TypeScript
+      - "WF-03 Sonnet readout used Python despite Cursor peers on TypeScript"
     eligibility_triggers_matched: []
     evidence_references:
-    - tied-project/working/REQ-WF_TRIAL_IMPLEMENTATION_STACK/evidence/sub-adversarial-inquiry-pass-na.md
-    - docs/demos/trial-readout-PROMPT-WF-03-claudesonnet55-1793848636-wf-agentstream-wf-03-claude-claudesonnet55.md
-    - docs/demos/trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md
-    - docs/demos/wf-02-nine-model-implementation-comparison.md
+      - "docs/demos/trial-readout-PROMPT-WF-03-claudesonnet55-1793848636-wf-agentstream-wf-03-claude-claudesonnet55.md"
+      - "docs/demos/trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md"
+      - "docs/demos/wf-02-nine-model-implementation-comparison.md"
+      - "tied-project/working/REQ-WF_TRIAL_IMPLEMENTATION_STACK/evidence/sub-adversarial-inquiry-pass-na.md"
     falsification_questions:
-    - After orchestrator bootstrap, does preload still leave language empty?
-    gate_policy: advisory
+      - "After orchestrator bootstrap, does preload still leave language empty?"
+    gate_policy: "advisory"
     hinge_decisions:
-    - id: HD-STACK-ORCHESTRATOR-ONLY
-      decision: Seed + WF preload only on workflow-trial-agentstream path; WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1 opt-out
-      ladder: reversible
-    - id: HD-PRELOAD-WF-SPECIFIC-FILE
-      decision: Separate wf-trial-agent-preload-contract.yaml rather than yq-merge overlay in shell
-      ladder: reversible
-    - id: HD-COLOCATED-TESTS
-      decision: src/**/*.test.ts for v1; stack id bump if layout changes
-      ladder: costly
-    research_profile: read-only-functional
+      - decision: "Seed + WF preload only on workflow-trial-agentstream path; WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1 opt-out"
+        id: "HD-STACK-ORCHESTRATOR-ONLY"
+        ladder: "reversible"
+      - decision: "Separate wf-trial-agent-preload-contract.yaml rather than yq-merge overlay in shell"
+        id: "HD-PRELOAD-WF-SPECIFIC-FILE"
+        ladder: "reversible"
+      - decision: "src/**/*.test.ts for v1; stack id bump if layout changes"
+        id: "HD-COLOCATED-TESTS"
+        ladder: "costly"
+    research_profile: "read-only-functional"

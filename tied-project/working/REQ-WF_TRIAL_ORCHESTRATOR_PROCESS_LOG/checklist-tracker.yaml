@@ -19,6 +19,6 @@ execution_evidence:
 metadata:
   gate_policy: "advisory"
   profile_depth: "minimal"
+notes: "Build-plan complete; close-out 2026-11-04"
 profile:
   depth_tier: "minimal"
-notes: "Build-plan complete; close-out 2026-11-04"

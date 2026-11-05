@@ -1,107 +1,80 @@
----
 change_definition:
-  current_behavior: |
-    WF trials log preload template fallback; four cold sessions without phase-handoff files;
-    GREEN-only test archives; close-out skips reconcile when store mcp-server/dist is missing;
-    agents may emit two commits or leave tracker steps pending while minimal close_out passes.
-  desired_behavior: |
-    workflow-trial-agentstream.sh sources wf-trial-four-phase-hardening.inc.sh:
-    materialize_disposable_preload_contract(WORKSPACE) before four-phase exec;
-    wf_trial_reconcile_preflight(REPO_ROOT) when live (skip via WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1;
-    fail closed via WF_TRIAL_STRICT_RECONCILE=1).
-    traditional-four-phase-agentstream.yaml phase goals require
-    evidence/phase-handoff-{add-feature|refine-plan|build-plan|close-out}.md.
-    prompt-shared wf-trial-four-phase-close-out-playbook.md and wf-trial-build-plan-handoff.md
-    (promoted from working drafts) document RED archive, sync-dispositions optionality, single commit,
-    and project-vs-bundle gate paths. REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS pillar G remains authoritative
-    for tied_gate_check + envelope build wording in turn 4; this REQ adds WF-trial playbook only.
+  current_behavior: "WF trials log preload template fallback; four cold sessions without phase-handoff files;\nGREEN-only test archives; close-out skips reconcile when store mcp-server/dist is missing;\nagents may emit two commits or leave tracker steps pending while minimal close_out passes.\n"
+  desired_behavior: "workflow-trial-agentstream.sh sources wf-trial-four-phase-hardening.inc.sh:\nmaterialize_disposable_preload_contract(WORKSPACE) before four-phase exec;\nwf_trial_reconcile_preflight(REPO_ROOT) when live (skip via WF_TRIAL_SKIP_RECONCILE_PREFLIGHT=1;\nfail closed via WF_TRIAL_STRICT_RECONCILE=1).\ntraditional-four-phase-agentstream.yaml phase goals require\nevidence/phase-handoff-{add-feature|refine-plan|build-plan|close-out}.md.\nprompt-shared wf-trial-four-phase-close-out-playbook.md and wf-trial-build-plan-handoff.md\n(promoted from working drafts) document RED archive, sync-dispositions optionality, single commit,\nand project-vs-bundle gate paths. REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS pillar G remains authoritative\nfor tied_gate_check + envelope build wording in turn 4; this REQ adds WF-trial playbook only.\n"
   non_goals:
-  - Changing chainFromPrevious or session chaining semantics
-  - Mandatory --sync-dispositions on every WF trial
-  - Claude validation or envelope depth fixes (REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS)
+    - "Changing chainFromPrevious or session chaining semantics"
+    - "Claude validation or envelope depth fixes (REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS)"
+    - "Mandatory --sync-dispositions on every WF trial"
   success_criteria:
-  - SC-WF-PRELOAD-CONTRACT through SC-WF-HARDENING-TEST in REQ detail
-  - 1793817075-class difficulties A–G addressed or documented waived in facilitator
-    re-run
-  unchanged_behavior: |
-    Manual --workspace skips bootstrap materialize unless helper run explicitly;
-    gold clients unchanged; PROMPT-WF product charters unchanged.
+    - "1793817075-class difficulties A–G addressed or documented waived in facilitator re-run"
+    - "SC-WF-PRELOAD-CONTRACT through SC-WF-HARDENING-TEST in REQ detail"
+  unchanged_behavior: "Manual --workspace skips bootstrap materialize unless helper run explicitly;\ngold clients unchanged; PROMPT-WF product charters unchanged.\n"
 completion_criteria:
   activation:
-    phase: pre_implementation
-    request_token: REQ-WF_TRIAL_FOUR_PHASE_HARDENING
-    run_id: refine-plan-2026-11-04
+    phase: "pre_implementation"
+    request_token: "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+    run_id: "refine-plan-2026-11-04"
   checklist_gate:
     dispositions:
-    - completed
-    - not_applicable
-    - pending
-    - waived
+      - "completed"
+      - "not_applicable"
+      - "pending"
+      - "waived"
     fail_closed: true
     phases:
-    - close_out
-    - pre_implementation
-    - verification
-  verification_gate_notes: Shell tests only at build-plan; no live LLM.
+      - "close_out"
+      - "pre_implementation"
+      - "verification"
+  verification_gate_notes: "Shell tests only at build-plan; no live LLM."
 evidence:
   command_seq:
-  - node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
-  manifest_reference: working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/
+    - "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  manifest_reference: "working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/"
   proof_boundaries:
-  - Process improvement REQ; not methodology effectiveness claim
+    - "Process improvement REQ; not methodology effectiveness claim"
 impact_analysis:
-  impl_inventory_notes: Shell + prompt-shared markdown + batch YAML goal lines.
-  modules_or_boundaries: |
-    scripts/lib/wf-trial-four-phase-hardening.inc.sh
-    scripts/workflow-trial-agentstream.sh
-    docs/demos/traditional-four-phase-agentstream.yaml
-    tools/bundled-prompt-type-skills/prompt-shared/wf-trial-four-phase-close-out-playbook.md
-    tools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md
-    tools/bundled-prompt-type-skills/build-plan/SKILL.md (link only)
-    tools/bundled-prompt-type-skills/close-out/SKILL.md (link only)
-    tools/bootstrap/workflow-trial-agentstream-sh.test.mjs
+  impl_inventory_notes: "Shell + prompt-shared markdown + batch YAML goal lines."
+  modules_or_boundaries: "scripts/lib/wf-trial-four-phase-hardening.inc.sh\nscripts/workflow-trial-agentstream.sh\ndocs/demos/traditional-four-phase-agentstream.yaml\ntools/bundled-prompt-type-skills/prompt-shared/wf-trial-four-phase-close-out-playbook.md\ntools/bundled-prompt-type-skills/prompt-shared/wf-trial-build-plan-handoff.md\ntools/bundled-prompt-type-skills/build-plan/SKILL.md (link only)\ntools/bundled-prompt-type-skills/close-out/SKILL.md (link only)\ntools/bootstrap/workflow-trial-agentstream-sh.test.mjs\n"
   tied_tokens_affected:
-  - REQ-TIED_SETUP
-  - REQ-GOAGENT-FEATURESPEC-BATCH
-  - REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG
+    - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    - "REQ-TIED_SETUP"
+    - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
   tied_tokens_new:
-  - REQ-WF_TRIAL_FOUR_PHASE_HARDENING
-  - ARCH-WF_TRIAL_FOUR_PHASE_HARDENING
-  - IMPL-WF_TRIAL_FOUR_PHASE_HARDENING
+    - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
+    - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+    - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
 leap_feedback:
-  divergences_from_analysis: none
-  record_status: implemented
+  divergences_from_analysis: "none"
+  record_status: "implemented"
   tied_stack_updates_required:
-  - CITDP-REQ-TIED_SETUP-wf-trial-orchestration satisfaction criteria at close-out
+    - "CITDP-REQ-TIED_SETUP-wf-trial-orchestration satisfaction criteria at close-out"
 record_identity:
-  change_request_id: REQ-WF_TRIAL_FOUR_PHASE_HARDENING
-  citdp_id: CITDP-REQ-WF_TRIAL_FOUR_PHASE_HARDENING
-  status: draft
+  change_request_id: "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+  citdp_id: "CITDP-REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+  status: "draft"
 risk_analysis:
   abuse_cases: []
   adversarial_inquiry:
-    assurance_profile: baseline-functional
-    close_out_inquiry_waiver:
+    assurance_profile: "baseline-functional"
+    close_out_inquiry_waiver: null
     counterexamples:
-    - Strict reconcile blocks all trials on fresh clone without build
-    - Preload copy overwrites sponsor-custom contract if guard omitted
-    depth_tier: minimal
+      - "Preload copy overwrites sponsor-custom contract if guard omitted"
+      - "Strict reconcile blocks all trials on fresh clone without build"
+    depth_tier: "minimal"
     disconfirming_observations:
-    - Readout 1793817075 reconcile not_run with missing dist
+      - "Readout 1793817075 reconcile not_run with missing dist"
     eligibility_triggers_matched: []
     evidence_references:
-    - docs/demos/trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md
-    - tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/wf-trial-four-phase-close-out-playbook.md
+      - "docs/demos/trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md"
+      - "tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_HARDENING/wf-trial-four-phase-close-out-playbook.md"
     falsification_questions:
-    - After bootstrap, does resolve_preload_contract still hit bundle template only?
-    gate_policy: advisory
+      - "After bootstrap, does resolve_preload_contract still hit bundle template only?"
+    gate_policy: "advisory"
     hinge_decisions:
-    - id: HD-PRELOAD-COPY-IF-ABSENT
-      decision: Copy template to tied-project/agent-preload-contract.yaml only when
-        missing
-      ladder: reversible
-    - id: HD-STRICT-RECONCILE-DEFAULT-OFF
-      decision: WF_TRIAL_STRICT_RECONCILE=1 opt-in fail-closed; default DIAGNOSTIC
-        continue
-      ladder: costly
-    research_profile: read-only-functional
+      - decision: "Copy template to tied-project/agent-preload-contract.yaml only when missing"
+        id: "HD-PRELOAD-COPY-IF-ABSENT"
+        ladder: "reversible"
+      - decision: "WF_TRIAL_STRICT_RECONCILE=1 opt-in fail-closed; default DIAGNOSTIC continue"
+        id: "HD-STRICT-RECONCILE-DEFAULT-OFF"
+        ladder: "costly"
+    research_profile: "read-only-functional"

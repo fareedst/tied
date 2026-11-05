@@ -4,15 +4,15 @@ CITDP-RDC-E2E-PASS4:
     desired_behavior: "E2e metrics and refresh assertions are **store-shape independent**: each case seeds explicit operator yaml (or documents brownfield-only path) and asserts outcomes aligned with [SC-RDC-OPERATOR-DISK] precedence (disk → brownfield mcp env → shell). Optional satisfaction criterion **SC-RDC-E2E-METRICS-ALIGN** ties the file to RDC verification matrix."
     non_goals:
       - "Changing `resolveOperatorFlagsForInstall` or bootstrap production semantics"
-      - "New MCP tools or resolver modules"
       - "Full REQ promotion or REQ status flip (sponsor optional)"
+      - "New MCP tools or resolver modules"
       - "Rewriting unrelated bootstrap-and-load cases"
     success_criteria:
-      - "SC-RDC-OPERATOR-DISK"
       - "SC-RDC-E2E-METRICS-ALIGN"
+      - "SC-RDC-OPERATOR-DISK"
     unchanged_behavior:
-      - "Unit coverage in `tied-runtime-config.test.mjs` and `mcp-config.test.mjs` remains authoritative for precedence"
       - "Production install still disk-first for operator toggles"
+      - "Unit coverage in `tied-runtime-config.test.mjs` and `mcp-config.test.mjs` remains authoritative for precedence"
   completion_criteria:
     lint_yaml: "required on changed tied-project YAML"
     pre_implementation_gate: "tied_checklist_gate_validate before test edits"
@@ -24,9 +24,9 @@ CITDP-RDC-E2E-PASS4:
   impact_analysis:
     modules_or_boundaries: "mcp-server/src/e2e/bootstrap-and-load.test.ts; optional REQ-TIED_RUNTIME_DISK_CONFIG satisfaction_criteria append; optional IMPL pseudo-code comment in install/MCP refresh block"
     tied_tokens_affected:
-      - "REQ-TIED_RUNTIME_DISK_CONFIG"
       - "IMPL-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-MCP_USAGE_METRICS"
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
     tied_tokens_new: []
   record_identity:
     change_request_id: "RDC-E2E-PASS4"
@@ -36,12 +36,11 @@ CITDP-RDC-E2E-PASS4:
     title: "E2e LEAP — operator-disk vs legacy metrics env expectations"
   risk_analysis:
     adversarial_inquiry:
-      assurance_profile: baseline-functional
-      research_profile: integrated-agent
+      assurance_profile: "baseline-functional"
       counterexamples:
+        - "Refresh case stops covering brownfield metrics client preservation."
         - "Seeded operator yaml in e2e diverges from real tied-install materialization path."
         - "Test helper hides regression by always forcing collect_metrics true."
-        - "Refresh case stops covering brownfield metrics client preservation."
       depth_tier: "minimal"
       disconfirming_observations:
         - "Bootstrap unit tests already lock disk-over-shell for collect_metrics."
@@ -49,21 +48,19 @@ CITDP-RDC-E2E-PASS4:
       eligibility_triggers_matched: []
       evidence_references:
         - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
-        - "tools/bootstrap/lib/tied-runtime-config.mjs"
         - "tied-project/working/REQ-TIED_RUNTIME_DISK_CONFIG/evidence/spine-review-2026-11-03.md"
+        - "tools/bootstrap/lib/tied-runtime-config.mjs"
       falsification_questions:
-        - "Does e2e pass with template store.yaml (operator collect_metrics false) after the change?"
         - "Does a case still prove shell fallback when operator field is absent?"
+        - "Does e2e pass with template store.yaml (operator collect_metrics false) after the change?"
       gate_policy: "advisory"
       prior_depth_tier: "minimal"
       rationale: "Test expectation alignment only; no auth/network/persistence."
+      research_profile: "integrated-agent"
       sub_adversarial_inquiry_pass: "not_applicable"
     summary: "Closes optional RDC deferral; removes flaky dependence on monorepo `.tied/store.yaml` operator block."
   test_strategy:
     integration_command_seq:
       - command: "cd mcp-server && npx tsx --test src/e2e/bootstrap-and-load.test.ts"
         notes: "SC-RDC-E2E-METRICS-ALIGN — full file green with deterministic operator seeding."
-    matrix_notes: |
-      RED (optional): add failing case with materialized template store (collect_metrics false) + shell export 1 → expect no metrics env until operator seeded true.
-      GREEN: e2e helper writes `.tied/store.yaml` operator block under temp target or pins storeRoot copy; refresh test expects disk/brownfield merge not raw install shell when operator defines collect_metrics.
-      LEAP: append SC-RDC-E2E-METRICS-ALIGN to REQ-TIED_RUNTIME_DISK_CONFIG with verification command above; one IMPL comment block if refresh merge behavior is clarified.
+    matrix_notes: "RED (optional): add failing case with materialized template store (collect_metrics false) + shell export 1 → expect no metrics env until operator seeded true.\nGREEN: e2e helper writes `.tied/store.yaml` operator block under temp target or pins storeRoot copy; refresh test expects disk/brownfield merge not raw install shell when operator defines collect_metrics.\nLEAP: append SC-RDC-E2E-METRICS-ALIGN to REQ-TIED_RUNTIME_DISK_CONFIG with verification command above; one IMPL comment block if refresh merge behavior is clarified.\n"
