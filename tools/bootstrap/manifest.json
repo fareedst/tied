@@ -76,6 +76,10 @@
     {
       "skillName": "record-wf-trial",
       "storeDir": "tools/bundled-record-wf-trial-skill"
+    },
+    {
+      "skillName": "readme-information-architecture",
+      "storeDir": "tools/bundled-readme-information-architecture-skill"
     }
   ],
   "SOURCE_ONLY_VOCAB_BASENAMES": [

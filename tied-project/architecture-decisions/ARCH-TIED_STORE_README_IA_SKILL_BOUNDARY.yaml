@@ -1,0 +1,9 @@
+ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY:
+  ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY:
+    consequences:
+      negative:
+        - "Quality of IA edits depends on agent discipline; not fully validated in CI beyond install smoke"
+      positive:
+        - "Reusable IA procedure for store README work aligned with REQ-TIED_STORE_README_EXPERIENCE_HUB"
+    context: "TIED store README and long-form docs presentation"
+    decision: "Store facilitator only; strict content and semantic preservation per reference.md; no runtime TIED YAML minting."

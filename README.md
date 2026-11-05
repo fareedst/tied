@@ -4,7 +4,26 @@
 
 [TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. **Visual how-to and methodology by example:** [TIED Experience Hub](docs/tied-experience/index.md). Core seven index: [client development index](tied-bundle/docs/client-development-index.md).
 
+## How to use this README
+
+Choose a path by intent—not every section applies to every reader.
+
+| I want to… | Start here |
+| --- | --- |
+| Run the store on macOS in minutes | [Quick start (macOS)](#quick-start-macos) |
+| Learn TIED by example (lenses, diagrams, proof boundaries) | [Explore TIED](#explore-tied) |
+| Build the store, install a client, or wire MCP (full reference) | [Install and use](#install-and-use) |
+| Keep product code and `tied-project/` in one git repo | [Primary implementation repository](#primary-implementation-repository) |
+| Drive checklist work from ordered feature specs | [Spec-driven execution (optional)](#spec-driven-execution-optional) |
+| Locate scripts, packages, and directory roles | [Tooling and scripts](#tooling-and-scripts) · [Repository layout](#repository-layout) |
+
+Agents: read [AGENTS.md](AGENTS.md) every session. YAML edits: [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md).
+
+---
+
 ## Quick start (macOS)
+
+**Context:** macOS-first **operator path** from a store clone. This section repeats only what you need to start; prerequisites, Windows entry points, and layout rules live under [Install and use](#install-and-use).
 
 From the TIED repository root on macOS (Unix / Git Bash). Windows and full prerequisites: [Install and use](#install-and-use) below.
 
@@ -79,7 +98,11 @@ After bootstrap: confirm `tied_config_get_base_path` → client `tied-project/`,
 
 Then follow `[PROC-AGENT_REQ_CHECKLIST]` via the [agent requirement implementation checklist](tied-bundle/docs/agent-req-implementation-checklist.md). **Program comprehension (EDPC):** [Engineer lens — brownfield comprehension](docs/tied-experience/engineer-agent-lens.md#brownfield-comprehension).
 
+---
+
 ## Explore TIED
+
+**Context:** You have the store checkout and want **methodology by example**—not install commands. The hub routes sponsors, operators, engineers, and facilitators to the same store-backed story.
 
 The [TIED Experience Hub](docs/tied-experience/index.md) teaches methodology with this store as the worked example—aligned facets, audience lanes, and proof boundaries instead of one long README essay.
 
@@ -94,11 +117,21 @@ The [TIED Experience Hub](docs/tied-experience/index.md) teaches methodology wit
 
 Certifiability (not certification): [certification-of-workflows.md](docs/methodologies/certification-of-workflows.md), [client-development-index.md](tied-bundle/docs/client-development-index.md), [process-certification-readiness.md](tied-project/vocab/process-certification-readiness.md), `[REQ-TIED_PROCESS_CERTIFICATION_READINESS]`, `tied certification` — full narrative in the [sponsor](docs/tied-experience/sponsor-lens.md) and [engineer](docs/tied-experience/engineer-agent-lens.md) lenses. Process spine, EDSE, and MCP/CLI readiness commands: [engineer lens](docs/tied-experience/engineer-agent-lens.md). [LEAP guide](tied-bundle/docs/LEAP.md) · [methodology diagrams](tied-bundle/docs/methodology-diagrams.md).
 
+---
+
 ## Install and use
+
+**Context:** End-to-end **setup and wiring** after (or instead of) [Quick start](#quick-start-macos). Work through the store build first, then pick the client layout that matches your repository shape.
 
 Complete reference for store setup, client bootstrap, MCP, automation, and layout. Operator mechanics for `tied-install` layers: [tools/bootstrap/README.md](tools/bootstrap/README.md).
 
-## TIED source repository setup
+| Your situation | Section |
+| --- | --- |
+| Build MCP, CLI, and bootstrap on the **store** clone | [TIED source repository setup](#tied-source-repository-setup) |
+| Install methodology into a **separate client directory** | [Getting started with a new client project](#getting-started-with-a-new-client-project) |
+| Product and `tied-project/` in **one primary repo** + linked store | [Primary implementation repository](#primary-implementation-repository) |
+
+### TIED source repository setup
 
 These steps prepare **this TIED checkout** (MCP server, npm workspace CLIs, bootstrap engine). They are separate from bootstrapping a **client project** with `tied-install`.
 
@@ -152,13 +185,13 @@ Notes:
 - `scripts/run-feature-batch-agentstream.sh` requires a built `@tied/cli` (`cd mcp-server && npm run build`) unless `AGENTSTREAM` points at another compatible binary.
 - See [tools/bootstrap/README.md](tools/bootstrap/README.md) for Windows entry points (`tied-install.cmd`, `test-new-tied-client.cmd`, PowerShell `.ps1` shims).
 
-## Getting started with a new client project
+### Getting started with a new client project
 
 This section is for bootstrapping an **external client directory** from the TIED store checkout. If the client **is** your product repository (code and `tied-project/` in one tree), use [Primary implementation repository](#primary-implementation-repository) instead.
 
 Complete [TIED source repository setup](#tied-source-repository-setup) first. **Prerequisite — built store workspace:** from the TIED store root, run `./build-workspace.sh` before any client install. `tied-install` fails without `mcp-server/dist/index.js` and bootstrap verification dependencies.
 
-### 1. Copy the methodology
+#### 1. Copy the methodology
 
 From a TIED repository clone, run client install ( `./tied-install.sh` with no arguments prints styled help; use `.` or a path to install):
 
@@ -184,7 +217,7 @@ Or from repo root: `test-new-tied-client.cmd`. PowerShell: `powershell -Executio
 
 Methodology-owned YAML under `tied-bundle/` is read-only in the client and can be refreshed by running `tied-install.sh` again. Project-owned REQ/ARCH/IMPL indexes and detail files live at the root of the client’s `tied-project/` directory and are not overwritten.
 
-### 2. Optionally enable the MCP server
+#### 2. Optionally enable the MCP server
 
 The MCP server stays in this TIED repository; it is not copied into the client. After [source setup](#tied-source-repository-setup), `mcp-server/dist/index.js` serves any client. `tied-install.sh` creates `.cursor/mcp.json` with the `tied-yaml` entry when that file is missing, and preserves an existing file byte-for-byte. For manual configuration or details, see [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md). From the client project root, the recommended Cursor flow is:
 
@@ -196,7 +229,7 @@ Approve the project MCP configuration when prompted, then type `quit` to exit th
 
 Confirm the server with a tool such as `yaml_index_read` or `tied_config_get_base_path`, or read the `tied://requirements` resource. The [MCP server README](mcp-server/README.md) documents the full tool surface and configuration.
 
-### 3. Work without MCP
+#### 3. Work without MCP
 
 If Node or the built server is unavailable, use the documented bootstrap and manual project-YAML workflow:
 
@@ -206,7 +239,7 @@ If Node or the built server is unavailable, use the documented bootstrap and man
 
 Read [using TIED without MCP](tied-bundle/docs/using-tied-without-mcp.md) before managing project records by hand.
 
-## Primary implementation repository
+### Primary implementation repository
 
 Use this path when **one git repository** holds both your application and TIED project data (`tied-project/`). That repo is the **primary implementation repository**. The **TIED store** is a separate checkout of this methodology repository (or a pinned clone such as under `tied_versions/`) with a built MCP server (`mcp-server/dist/index.js`) and bundled skills under `tools/bundled-*`.
 
@@ -225,11 +258,11 @@ flowchart LR
   mcp -->|TIED_BASE_PATH| tiedProject["tied-project/"]
 ```
 
-### Prerequisites
+#### Prerequisites
 
 Complete [TIED source repository setup](#tied-source-repository-setup) on the **store** checkout (Node 18+, `mcp-server/dist/index.js`). The primary repo only needs Node for `tied-install` and optional `--doctor`.
 
-### First-time linked install
+#### First-time linked install
 
 From the **primary repository root** (the `.` target), point `--store` at the absolute store path. Do **not** use the primary repo path as the store.
 
@@ -251,7 +284,7 @@ C:\path\to\tied-store\tied-install.cmd --mode linked --store C:\path\to\tied-sto
 
 The installer refuses **self-install** and **nested** store/project layouts (`SELF_INSTALL_REFUSED`): the store root must not equal the primary repo root, and neither tree may contain the other. See `guardSelfInstall` in [tools/bootstrap/lib/layout.mjs](tools/bootstrap/lib/layout.mjs).
 
-### Refresh without `--store`
+#### Refresh without `--store`
 
 After the first install, `.cursor/mcp.json` (or `.mcp.json`) records `TIED_STORE_ROOT`. From the primary repo root:
 
@@ -261,7 +294,7 @@ tied-install --mode linked .
 
 Store resolution order: `--store` → environment `TIED_STORE_ROOT` → MCP config → `TIED_REPO_ROOT` when invoked from the store tree. Details: [tools/bootstrap/lib/layers/store.mjs](tools/bootstrap/lib/layers/store.mjs).
 
-### MCP configuration (linked mode)
+#### MCP configuration (linked mode)
 
 Linked install refreshes the `tied-yaml` MCP entry when present: `node` with `args` pointing at `{store}/mcp-server/dist/index.js`, and env keys including:
 
@@ -275,11 +308,11 @@ Linked install refreshes the `tied-yaml` MCP entry when present: `node` with `ar
 
 Use absolute paths. `TIED_BASE_PATH` is set to the project traceability directory (`tied-project/`). One Cursor window per implementation repo; confirm with MCP `tied_config_get_base_path`. Optional: set `TIED_MCP_BIN` when the server binary is not under the store layout you use. See [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md) and [mcp-server/README.md](mcp-server/README.md).
 
-### Skills (linked stubs)
+#### Skills (linked stubs)
 
 Linked mode writes **stubs** under `.cursor/skills/` (tied-yaml, prompt-type leaf skills, xlate) and `.claude/skills/`; canonical skill bodies remain in the store (`tools/bundled-tied-yaml-skill/`, `tools/bundled-prompt-type-skills/`, etc.). If a stub points at a missing store path, re-run `tied-install --mode linked` with a valid `--store` or use `--mode full`. Optional IDE flow: `agent mcp enable tied-yaml` from the primary repo root.
 
-### Verify checklist
+#### Verify checklist
 
 1. Build the **store** (`mcp-server/dist/index.js`).
 2. First linked install on the primary repo with `--store`.
@@ -290,15 +323,19 @@ Linked mode writes **stubs** under `.cursor/skills/` (tied-yaml, prompt-type lea
 
 For YAML workflows without IDE MCP, see [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and the [client development index](tied-bundle/docs/client-development-index.md) (Core seven).
 
-### Full mode alternative
+#### Full mode alternative
 
 `tied-install --mode full` materializes methodology under `tied-bundle/` for offline use (larger tree, different refresh tradeoffs). See profiles in [tools/bootstrap/README.md](tools/bootstrap/README.md).
 
-### Methodology development layout
+#### Methodology development layout
 
 When you work in **this** TIED git repository as the store **and** also track project REQ/ARCH/IMPL here, keep a **separate** store clone for installing into other primary repos. Do not run `tied-install .` with `--store` equal to the same root (self-install refused). A pinned store under `tied_versions/...` while product code lives elsewhere is a normal pattern.
 
+---
+
 ## Spec-driven execution (optional)
+
+**Context:** Store and client are already bootstrapped; you want **batch or agentstream** drivers instead of hand-invoking prompt-type skills for each REQ.
 
 For a new client, an ordered feature-spec YAML can drive one change at a time through the checklist. A spec commonly contains `order`, `feature_name`, `goal`, `rules`, `examples`, `boundary_conditions`, and `out_of_scope`.
 
@@ -333,7 +370,11 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
 
 `scripts/run-feature-batch.sh` delegates to `scripts/run-feature-batch-agentstream.sh` (`tied agentstream` / `@tied/agentstream` after `./build-workspace.sh` on the store). Optional TIED MCP preflight is enabled with `--tied-mcp-preflight` or `AGENTSTREAM_TIED_MCP_PREFLIGHT=1`; it is off by default. See [mcp-server/packages/agentstream/README.md](mcp-server/packages/agentstream/README.md).
 
+---
+
 ## Tooling and scripts
+
+**Context:** **Reference** list of store-root scripts and packages—use after you know which [install path](#install-and-use) you follow.
 
 - `build-workspace.sh` / `build-workspace.ps1` / `build-workspace.cmd` — store workspace build (`mcp-server` + `tools/bootstrap`); `./build-workspace.sh --help`.
 - `tied-install.sh` / `tied-install.cmd` / `tied-install.ps1` — layered **client install** (`./tied-install.sh` with no args prints help; use `.` or a path to install).
@@ -349,9 +390,15 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
 
 ## Where to read next
 
-Start at the [TIED Experience Hub](docs/tied-experience/index.md) or the [appendix — full methodology](docs/tied-experience/appendix-methodology.md) (Core seven links). Agents: [AGENTS.md](AGENTS.md) before every session. YAML: [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md).
+Task-based routes are in [How to use this README](#how-to-use-this-readme). Curated depth:
+
+- [TIED Experience Hub](docs/tied-experience/index.md) or [appendix — full methodology](docs/tied-experience/appendix-methodology.md) (Core seven links)
+- [AGENTS.md](AGENTS.md) before every agent session
+- [TIED YAML agent index](tied-bundle/docs/tied-yaml-agent-index.md) and [tied-yaml skill](tools/bundled-tied-yaml-skill/SKILL.md)
 
 ## Repository layout
+
+**Context:** How this **store** repository is arranged—not the layout `tied-install` creates on a client.
 
 ```text
 stdd/

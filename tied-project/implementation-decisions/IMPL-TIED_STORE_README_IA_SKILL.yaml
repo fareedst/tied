@@ -1,0 +1,8 @@
+IMPL-TIED_STORE_README_IA_SKILL:
+  IMPL-TIED_STORE_README_IA_SKILL:
+    essence_pseudocode_path: "implementation-decisions/IMPL-TIED_STORE_README_IA_SKILL-pseudocode.md"
+    implementation_approach:
+      details: []
+      summary: "Bundled SKILL.md + reference.md; manifest STORE_FACILITATOR_SKILLS; store self-install stub via skills-linked.mjs"
+    name: "Store README IA skill bootstrap"
+    status: "Active"

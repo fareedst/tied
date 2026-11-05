@@ -2602,6 +2602,16 @@ ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
       - "IMPL-TIED_STORE_BUNDLE_GIT_POLICY"
     requirements:
       - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
+ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_STORE_README_IA_SKILL"
+    requirements:
+      - "REQ-TIED_STORE_README_IA_SKILL"
+  decision: "readme-information-architecture is a store-only facilitator skill (STORE_FACILITATOR_SKILLS). It edits Markdown presentation and authorized generator layers on the TIED store; it does not ship to disposable clients or inherit via tied-bundle."
+  detail_file: "architecture-decisions/ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY.yaml"
+  name: "Store README IA skill boundary"
+  status: "Implemented"
 ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE:
   detail_file: "architecture-decisions/ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE.yaml"
   name: "Store README information architecture"

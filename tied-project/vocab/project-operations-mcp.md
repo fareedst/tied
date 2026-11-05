@@ -1,8 +1,8 @@
 # Project operations MCP (canonical)
 
-**Scope:** Client vocabulary for MCP project-operation tools, the `/xlate` skill (Touchpoint 1 RESOLVE), the sponsor `/unblock` skill when **known or planned** costly choices block progress, **`/handoff`** chat continuity, **`/clear-workspace`** close-out orchestration, **`/feedback`** sponsor witness capture, **`/workflow-visualization`** EDPC sponsor workflow docs, and store-only **`/record-gf-trial`** greenfield facilitator ingest.
+**Scope:** Client vocabulary for MCP project-operation tools, the `/xlate` skill (Touchpoint 1 RESOLVE), the sponsor `/unblock` skill when **known or planned** costly choices block progress, **`/handoff`** chat continuity, **`/clear-workspace`** close-out orchestration, **`/feedback`** sponsor witness capture, **`/workflow-visualization`** EDPC sponsor workflow docs, store-only **`/record-gf-trial`** and **`/record-wf-trial`** facilitator ingest, and store-only **`/readme-information-architecture`** for README/docs presentation IA.
 
-**Traceability:** [REQ-TIED_PROJECT_LINT](../requirements/REQ-TIED_PROJECT_LINT.yaml) · [REQ-TIED_GIT_HYGIENE](../requirements/REQ-TIED_GIT_HYGIENE.yaml) · [REQ-TIED_SPONSOR_QUESTIONS](../requirements/REQ-TIED_SPONSOR_QUESTIONS.yaml) · [REQ-TIED_XLATE_SKILL](../requirements/REQ-TIED_XLATE_SKILL.yaml) · [REQ-TIED_SESSION_HANDOFF_SKILL](../requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml) · [REQ-TIED_CLEAR_WORKSPACE_SKILL](../requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml) · [REQ-TIED_FEEDBACK_REPORT_SKILL](../requirements/REQ-TIED_FEEDBACK_REPORT_SKILL.yaml) · [REQ-TIED_WORKFLOW_VISUALIZATION_SKILL](../requirements/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml) · [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS](../requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml)
+**Traceability:** [REQ-TIED_PROJECT_LINT](../requirements/REQ-TIED_PROJECT_LINT.yaml) · [REQ-TIED_GIT_HYGIENE](../requirements/REQ-TIED_GIT_HYGIENE.yaml) · [REQ-TIED_SPONSOR_QUESTIONS](../requirements/REQ-TIED_SPONSOR_QUESTIONS.yaml) · [REQ-TIED_XLATE_SKILL](../requirements/REQ-TIED_XLATE_SKILL.yaml) · [REQ-TIED_SESSION_HANDOFF_SKILL](../requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml) · [REQ-TIED_CLEAR_WORKSPACE_SKILL](../requirements/REQ-TIED_CLEAR_WORKSPACE_SKILL.yaml) · [REQ-TIED_FEEDBACK_REPORT_SKILL](../requirements/REQ-TIED_FEEDBACK_REPORT_SKILL.yaml) · [REQ-TIED_WORKFLOW_VISUALIZATION_SKILL](../requirements/REQ-TIED_WORKFLOW_VISUALIZATION_SKILL.yaml) · [REQ-TIED_STORE_README_IA_SKILL](../requirements/REQ-TIED_STORE_README_IA_SKILL.yaml) · [REQ-TIED_CLIENT_BOOTSTRAP_SKILLS](../requirements/REQ-TIED_CLIENT_BOOTSTRAP_SKILLS.yaml)
 
 **See also:** [`routing.md`](routing.md) (row **2c**) · [`domain-references.md`](domain-references.md) · [`tied-yaml-mcp.md`](tied-yaml-mcp.md) · [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) · [`tied-methodology.md`](tied-methodology.md)
 
@@ -31,6 +31,10 @@
 | **feedback skill** | Bundled skill at `tools/bundled-feedback-skill/SKILL.md`; manifest `BUNDLED_STANDALONE_CLIENT_SKILLS`. |
 | `/record-gf-trial` | Explicit skill for **store** facilitators: inspect disposable greenfield client, publish `docs/demos/trial-readout-*.md`, optional Kaizen feedback ingest. |
 | **record-gf-trial skill** | Bundled skill at `tools/bundled-record-gf-trial-skill/SKILL.md`; manifest **`STORE_FACILITATOR_SKILLS`** (store self-install only, not disposable clients). |
+| `/record-wf-trial` | Explicit skill for **store** facilitators: inspect disposable four-phase workflow client, publish workflow trial readout, optional Kaizen ingest. |
+| **record-wf-trial skill** | Bundled skill at `tools/bundled-record-wf-trial-skill/SKILL.md`; manifest **`STORE_FACILITATOR_SKILLS`**. |
+| `/readme-information-architecture` | Explicit skill for **store** maintainers: improve README/docs Markdown presentation (navigation, hierarchy, transitions) without semantic loss. |
+| **readme-information-architecture skill** | Bundled skill at `tools/bundled-readme-information-architecture-skill/SKILL.md`; procedure in `reference.md`; **not** methodology inheritance. |
 | **sponsor witness report** | Point-of-work account from the human sponsor who observed the failure; intake gate required before MCP write. |
 
 ## Boundaries

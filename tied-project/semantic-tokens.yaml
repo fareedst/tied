@@ -1347,6 +1347,9 @@ ARCH-TIED_STORE_BUNDLE_GIT_POLICY:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY:
+  description: "Store README IA skill boundary"
+  type: "architecture"
 ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE:
   cross_references:
     - "IMPL-TIED_STORE_README_SECTIONS"
@@ -3128,6 +3131,9 @@ IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-TIED_STORE_README_IA_SKILL:
+  description: "Store README IA skill bootstrap implementation"
+  type: "implementation"
 IMPL-TIED_STORE_README_SECTIONS:
   cross_references:
     - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
@@ -5129,6 +5135,9 @@ REQ-TIED_STORE_README_EXPERIENCE_HUB:
   name: "Store README experience hub normative alignment"
   status: "Active"
   type: "REQ"
+REQ-TIED_STORE_README_IA_SKILL:
+  description: "Store-only readme-information-architecture facilitator skill"
+  type: "requirement"
 REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
   cross_references:
     - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"

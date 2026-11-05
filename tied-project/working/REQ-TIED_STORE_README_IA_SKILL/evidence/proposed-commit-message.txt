@@ -1,0 +1,10 @@
+feat(skills): store readme-information-architecture facilitator
+
+Install @readme-information-architecture as STORE_FACILITATOR_SKILLS (not
+methodology); mint REQ/ARCH/IMPL; README intent navigation IA.
+
+[REQ-TIED_STORE_README_IA_SKILL] [ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY]
+[IMPL-TIED_STORE_README_IA_SKILL]
+
+Close-out: merged_decision.allowed=true; envelope blocking_gap_count=0;
+run_id=close-out-req-tied-store-readme-ia-skill-2026-11-05.

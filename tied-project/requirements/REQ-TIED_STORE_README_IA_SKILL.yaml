@@ -1,0 +1,10 @@
+REQ-TIED_STORE_README_IA_SKILL:
+  REQ-TIED_STORE_README_IA_SKILL:
+    description: "Bootstrap-installed store facilitator skill for Markdown information architecture on the TIED store README and docs."
+    satisfaction_criteria:
+      - criterion: "manifest.json STORE_FACILITATOR_SKILLS registers tools/bundled-readme-information-architecture-skill"
+        criterion_id: "manifest-store-facilitator"
+      - criterion: "Skill is absent from tied-bundle methodology copy and BUNDLED_STANDALONE_CLIENT_SKILLS"
+        criterion_id: "not-methodology"
+      - criterion: "Static install smoke via readme-information-architecture-skill.test.ts"
+        criterion_id: "contract-test"

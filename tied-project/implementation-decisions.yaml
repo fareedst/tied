@@ -3271,6 +3271,20 @@ IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
       - "ARCH-TIED_STORE_BUNDLE_GIT_POLICY"
     requirements:
       - "REQ-TIED_STORE_BUNDLE_GIT_POLICY"
+IMPL-TIED_STORE_README_IA_SKILL:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_STORE_README_IA_SKILL_BOUNDARY"
+    requirements:
+      - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
+      - "REQ-TIED_STORE_README_IA_SKILL"
+  detail_file: "implementation-decisions/IMPL-TIED_STORE_README_IA_SKILL.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_STORE_README_IA_SKILL-pseudocode.md"
+  implementation_approach:
+    details: []
+    summary: "tools/bundled-readme-information-architecture-skill registered via STORE_FACILITATOR_SKILLS"
+  name: "Store README IA skill bootstrap"
+  status: "Active"
 IMPL-TIED_STORE_README_SECTIONS:
   detail_file: "implementation-decisions/IMPL-TIED_STORE_README_SECTIONS.yaml"
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_STORE_README_SECTIONS-pseudocode.md"
