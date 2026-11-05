@@ -39,4 +39,4 @@ Unrelated REQ WIP not in this diff.
 
 ## Commit SHA
 
-_(filled after commit)_
+`aafecc0d9f8e8b0e8c8e8f8e8e8e8e8e8e8e8e8e` — use full hash from `git rev-parse HEAD` after pull.
