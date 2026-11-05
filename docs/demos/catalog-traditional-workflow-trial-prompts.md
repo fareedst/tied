@@ -5,7 +5,7 @@
 | **Purpose** | Short **invocation remainders** for **`@add-feature`** in a **disposable client**, then **`@refine-plan`**, **`@build-plan`**, and **`@close-out`** as **separate sponsor turns**. Stresses **workflow choreography** and **LLM differences** (Composer 2.5, GPT-5.6 Luna low/med/high) while reusing compact product scopes. |
 | **Audience** | Trial sponsors (paste text) · facilitators (grading + `@record-wf-trial`) |
 | **Status** | Draft catalog |
-| **Last updated** | 2026-10-31 |
+| **Last updated** | 2026-11-04 |
 | **Contrast** | [Greenfield catalog](catalog-greenfield-plan-new-feature-prompts.md) — typically one long planning session; this catalog **requires four explicit skills**. |
 | **Facilitator maps** | [TIED compact demo tool catalog](catalog-tied-compact-tools.md) · [Agent resilience exercise catalog](catalog-compact-programming-exercises.md) |
 
@@ -20,7 +20,7 @@
 5. From the **TIED store** workspace, run **`@record-wf-trial`** with the disposable client path or numeric id (see [tools/bundled-record-wf-trial-skill/SKILL.md](../../tools/bundled-record-wf-trial-skill/SKILL.md)); pass **`--orchestrator-log-dir`** if logs were copied elsewhere.
 6. Score using [Facilitator grading readout](#facilitator-grading-readout); do not add methodology instructions to the pasted product text.
 
-**Fair comparison:** One fresh disposable client per **(PROMPT-WF-NN × model configuration)**. Do not reuse one client across models.
+**Fair comparison:** One fresh disposable client per **(PROMPT-WF-NN × model configuration × harness)**. Do not reuse one client across models. **Orchestrated runs** (`workflow_trial_agentstream`) apply the [Trial implementation stack](#trial-implementation-stack-facilitator--orchestrator--not-pasted) (`implementation_stack_id`: `wf-trial-ts-node-test-v1`) unless **`WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1`**.
 
 **Do not paste into the remainder:** TIED, REQ/ARCH/IMPL tokens, CITDP, checklists, MCP tool names, pseudo-code, LEAP, Kaizen, gates, or “use tied-bundle.” The client already loads those.
 
@@ -44,7 +44,27 @@ Artifacts:
 - Factory path: orchestrator bootstrap uses `--tag wf-agentstream-{wf-id}-{harness}-{modelBucket}` (e.g. `wf-agentstream-wf-03-cursor-composer25`); full dir `{epoch}-{tag}`. Manual: `test-new-tied-client --out-path --tag …` prints absolute client root on stdout (progress on stderr). Historical trials may use the shorter `wf-agentstream-wf-NN` tag only.
 - Smoke (2026-11-02): disposable `1793597183-wf-agentstream`, PROMPT-WF-02, four agentstream sessions — [smoke note](../../tied-project/working/PLAN-TRADITIONAL-FOUR-PHASE-AGENTSTREAM/evidence/smoke-1793597183-wf-agentstream.md)
 
-Preload: linked disposable clients may lack `tied-project/agent-preload-contract.yaml`; the wrapper falls back to `tied-bundle/docs/agent-preload-contract-template.yaml` when present. — **Jev W5 harness off by default** (`unset AGENTSTREAM_JEV_HARNESS` unless `TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1`).
+Preload: **`workflow-trial-agentstream`** materializes **`tied-project/agent-preload-contract.yaml`** from **`tied-bundle/docs/wf-trial-agent-preload-contract.yaml`** (TypeScript stack) when implementation stack is enabled; otherwise copy-if-absent from **`agent-preload-contract-template.yaml`**. — **Jev W5 harness off by default** (`unset AGENTSTREAM_JEV_HARNESS` unless `TRADITIONAL_FOUR_PHASE_JEV_HARNESS=1`).
+
+---
+
+## Trial implementation stack (facilitator + orchestrator — not pasted)
+
+Normative for **agentstream orchestrator** matrix cells ([REQ-WF_TRIAL_IMPLEMENTATION_STACK](../../tied-project/requirements/REQ-WF_TRIAL_IMPLEMENTATION_STACK.yaml)). Manual IDE trials on a raw disposable client do **not** get the seed unless the facilitator runs the orchestrator or copies the fixture.
+
+| Field | Value |
+| --- | --- |
+| `implementation_stack_id` | `wf-trial-ts-node-test-v1` |
+| Language | TypeScript, ESM (`"type": "module"`) |
+| Product | `src/**/*.ts` |
+| Tests | Colocated `src/**/*.test.ts` |
+| Verify | `npm test` → `node --import tsx --test 'src/**/*.test.ts'` |
+| Optional | `npm run typecheck` when `tsconfig.json` present |
+| Runtime deps | None (devDependencies only in seed `package.json`) |
+
+**Facilitator verification:** Run **`npm test`** at client root (after `npm install` if `node_modules` missing). Flag **stack deviation** when product code uses `*.py`, `requirements.txt`, or tests only outside `src/` without documented waiver.
+
+**Opt-out:** `WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1` on orchestrator — comparability waived; record in readout.
 
 Extract a trial block from this catalog (`WF_ID` = short id, e.g. `WF-02` → `### PROMPT-WF-02`; requires **GNU awk** (`gawk`), macOS/Linux):
 
@@ -173,7 +193,7 @@ Copy **one** block verbatim into **`@add-feature`** on turn 1 only.
 ### PROMPT-WF-01
 
 ```text
-Build a small library with one exported function that checks whether a semantic version string satisfies a simple comparator (e.g. ">=1.2.0"). Include a single script or documented command that runs all tests. Pick TypeScript or Python and stay consistent. No CLI required beyond test runner.
+Build a small TypeScript library with one exported function that checks whether a semantic version string satisfies a simple comparator (e.g. ">=1.2.0"). Include a single script or documented command that runs all tests. No CLI required beyond test runner.
 ```
 
 ### PROMPT-WF-02
@@ -241,6 +261,7 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1793817075-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md) (full four-turn close-out; reconcile **not_run**) |
 | PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1793820250-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`; orchestrator process log) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md) (full four-turn close-out; RED archived; reconcile **not_run**) |
 | PROMPT-WF-03 | Claude Haiku 5.5 / agentstream | `1793842935-wf-agentstream-wf-03-claude-claudehaiku55` (`HARNESS=claude`; orchestrator process log) | [Claude readout](trial-readout-PROMPT-WF-03-claudehaiku55-1793842935-wf-agentstream-wf-03-claude-claudehaiku55.md) (full four-turn close-out; RED archived; REQ index **Planned** drift; reconcile **not_run**) |
+| PROMPT-WF-03 | Claude Sonnet 5.5 / agentstream | `1793848636-wf-agentstream-wf-03-claude-claudesonnet55` (`HARNESS=claude`; orchestrator process log) | [Claude Sonnet readout](trial-readout-PROMPT-WF-03-claudesonnet55-1793848636-wf-agentstream-wf-03-claude-claudesonnet55.md) (full four-turn close-out; Python unittest; REQ **Implemented**; reconcile **not_run**) |
 
 Maintained by **`@record-wf-trial`**.
 

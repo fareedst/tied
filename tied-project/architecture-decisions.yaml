@@ -2876,6 +2876,17 @@ ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
     requirements:
       - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+ARCH-WF_TRIAL_IMPLEMENTATION_STACK:
+  decision: "Stack enforcement lives in scripts/lib/wf-trial-implementation-stack.inc.sh sourced from workflow-trial-agentstream.sh; fixture under tools/bootstrap/fixtures/wf-trial-typescript-stack; preload body tied-bundle/docs/wf-trial-agent-preload-contract.yaml; batch and prompt-shared wf-trial-refine-plan-stack.md; does not change four-phase session chaining or product PROMPT-WF charters except PROMPT-WF-01 TypeScript wording."
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_IMPLEMENTATION_STACK.yaml"
+  name: "WF trial implementation stack boundaries"
+  rationale: "Separates matrix comparability from four-phase friction hardening REQ; orchestrator-only default preserves manual IDE trials."
+  status: "Accepted"
+  traceability:
+    implementation:
+      - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+    requirements:
+      - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
 ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
   name: "WF trial orchestrator process log boundaries"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # workflow-trial-agentstream — bootstrap disposable client, extract PROMPT-WF block, run four-phase agentstream.
-# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG]
+# [REQ-TIED_SETUP] [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG] [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS] [REQ-WF_TRIAL_FOUR_PHASE_HARDENING] [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG] [REQ-WF_TRIAL_IMPLEMENTATION_STACK]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -32,6 +32,7 @@ Defaults (override via env): MODEL_SLUG=composer-2.5-fast MODEL_CONFIG=composer-
   WF_TRIAL_STRICT_RECONCILE=1 fails closed when mcp-server/dist/index.js is missing (default: DIAGNOSTIC and continue).
   Process log capture is on by default; WF_TRIAL_SKIP_PROCESS_LOG=1 disables stdout/stderr files under
   tied-project/working/wf-trial-orchestrator-run/evidence/ on the client.
+  WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1 skips TypeScript fixture seed and WF-specific preload (matrix comparability waived).
 
 Disposable bootstrap (no --workspace): client dir under TIED_TEST_ROOT is
   {epoch}-wf-agentstream-{wf-id}-{harness}-{modelBucket}
@@ -189,7 +190,14 @@ printf 'DEBUG: workflow-trial-agentstream wf=%s workspace=%s dry_run=%s harness=
 
 # shellcheck source=lib/wf-trial-four-phase-hardening.inc.sh
 source "${SCRIPT_DIR}/lib/wf-trial-four-phase-hardening.inc.sh"
-materialize_disposable_preload_contract "$WORKSPACE"
+# shellcheck source=lib/wf-trial-implementation-stack.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-implementation-stack.inc.sh"
+if wf_trial_implementation_stack_enabled; then
+  wf_trial_apply_implementation_stack "$WORKSPACE" "$REPO_ROOT"
+else
+  printf 'DIAGNOSTIC: WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1; skipping stack seed and WF preload\n' >&2
+  materialize_disposable_preload_contract "$WORKSPACE"
+fi
 
 if [[ "$DRY_RUN" -eq 0 ]]; then
   wf_trial_reconcile_preflight "$REPO_ROOT" || fail "WF trial reconcile preflight blocked (WF_TRIAL_STRICT_RECONCILE)"

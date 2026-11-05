@@ -1,0 +1,11 @@
+Lock TypeScript stack on WF trial orchestrator runs for fair matrix comparison.
+
+Seed disposable clients with npm test + tsx, WF preload contract, and refine-plan playbook so cohorts differ on product choices—not Python vs TypeScript harness.
+
+[REQ-WF_TRIAL_IMPLEMENTATION_STACK] [ARCH-WF_TRIAL_IMPLEMENTATION_STACK] [IMPL-WF_TRIAL_IMPLEMENTATION_STACK]
+
+Close-out: run_id=close-out-wf-implementation-stack-2026-11-04; merged_decision.allowed=true; envelope blocking_gap_count=0.
+
+Tests: node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs (18/18).
+
+Upstream feedback: N/A.

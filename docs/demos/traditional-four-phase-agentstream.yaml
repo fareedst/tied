@@ -14,6 +14,7 @@ features:
       Scaffold REQ/CITDP/PLAN/tracker only — no production code or RED tests this turn.
       Seed `evidence/trial-workflow-interaction-inventory.v1.json` with
       `analysis_label`: `traditional-workflow-trial.v1`,
+      `implementation_stack_id`: `wf-trial-ts-node-test-v1` when orchestrator seeded stack,
       `harness`: `{{HARNESS}}-agentstream-four-phase`,
       `harness_notes`: `run-traditional-four-phase-agentstream.sh` (four feature-spec batch turns; new agent session per turn),
       `model_config`: {{MODEL_CONFIG}}, `model_slug`: {{MODEL_SLUG}}.
@@ -28,6 +29,8 @@ features:
       Explicitly follow `{{SKILL_ROOT}}/refine-plan/SKILL.md` (/refine-plan).
       Use the linked PLAN from phase 1 under `tied-project/working/{REQ-TOKEN}/PLAN.md`.
       Refine PLAN, CITDP notes, and tracker; still no product implementation commits.
+      Read prompt-shared wf-trial-refine-plan-stack.md: stack pre-locked from preload + package.json;
+      add PLAN **Locked stack** table; do not re-debate language or test runner.
       Write `evidence/phase-handoff-refine-plan.md` (locked decisions, gate receipts, next `@build-plan`).
     behavior: |
       Optional sponsor refine notes may appear in the phase-1 PLAN or working folder.
@@ -40,7 +43,7 @@ features:
       Execute the linked PLAN (post-refine) from `tied-project/working/{REQ-TOKEN}/`.
       Greenfield minimal path when depth_tier is minimal: create REQ/ARCH/IMPL + IMPL pseudo-code before RED;
       set sub-adversarial-inquiry-pass to not_applicable before RED; no sponsor questions in batch mode.
-      RED → GREEN product code/tests; verification evidence per the build-plan skill.
+      RED → GREEN product code/tests under `src/`; verification via `npm test` when stack seeded.
       Follow prompt-shared wf-trial-build-plan-handoff.md (RED archive, tracker sync).
       Write `evidence/phase-handoff-build-plan.md` before deferring `@close-out`.
     behavior: |

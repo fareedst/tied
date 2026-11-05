@@ -1,0 +1,11 @@
+ARCH-WF_TRIAL_IMPLEMENTATION_STACK:
+  ARCH-WF_TRIAL_IMPLEMENTATION_STACK:
+    decision: "Stack enforcement in wf-trial-implementation-stack.inc.sh + orchestrator hook; WF_TRIAL_SKIP_IMPLEMENTATION_STACK opt-out; generic materialize_disposable_preload_contract when skipped."
+    name: "WF trial implementation stack boundaries"
+    rationale: "Orchestrator-only seed avoids mutating gold clients; copy-if-absent guards agent edits."
+    status: "Accepted"
+    traceability:
+      implementation:
+        - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+      requirements:
+        - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"

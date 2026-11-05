@@ -1,0 +1,20 @@
+IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
+  IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
+    code_locations:
+      - path: "scripts/lib/wf-trial-implementation-stack.inc.sh"
+        role: "stack seed and preload materialize"
+      - path: "scripts/workflow-trial-agentstream.sh"
+        role: "orchestrator hook"
+      - path: "tied-bundle/docs/wf-trial-agent-preload-contract.yaml"
+        role: "WF preload source"
+      - path: "tools/bootstrap/fixtures/wf-trial-typescript-stack/"
+        role: "disposable seed fixture"
+    decision: "Shell helpers seed TypeScript fixture and WF preload; tests in workflow-trial-agentstream-sh.test.mjs."
+    essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_IMPLEMENTATION_STACK-pseudocode.md"
+    name: "WF trial implementation stack shell and docs"
+    status: "Active"
+    traceability:
+      architecture:
+        - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
+      requirements:
+        - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"

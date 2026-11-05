@@ -40,7 +40,7 @@ export TIED_STORE_ROOT="{store repo root}"
 | Command | Capture |
 | --- | --- |
 | `git log -1 --format=%H` @ client root | HEAD pin |
-| `npm test` or project test script | stdout summary (counts) |
+| `npm test` (default for orchestrated WF trials — TypeScript stack) or project test script | stdout summary (counts) |
 | `npm run lint:ts` / `npx tsc -b` if present | pass/fail |
 | `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency` | full JSON file |
 | Optional `tied_project_lint` | JSON summary |
@@ -75,12 +75,13 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 8. **Four-turn table** (skill × outcome).
 9. **Orchestrator process log** (when manifest or `--orchestrator-log-dir`; else **N/A**).
 10. **Phase boundary audit** (heuristic; document uncertainty).
-11. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)).
-12. **Cross-model notes** (same PROMPT-WF, other readouts if any — prose, no ranking).
-13. Cohort comparisons vs peer WF readouts.
-14. Optional TIED version / dogfood paragraph (not effectiveness claim).
-15. Facilitator follow-ups.
-16. Future-test rule.
+11. **Stack compliance** (orchestrated cells): `implementation_stack_id` in inventory; TypeScript under `src/`; facilitator `npm test`; note waivers when `WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1` or Python/alternate runner on disk.
+12. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)).
+13. **Cross-model notes** (same PROMPT-WF, other readouts if any — prose, no ranking).
+14. Cohort comparisons vs peer WF readouts.
+15. Optional TIED version / dogfood paragraph (not effectiveness claim).
+16. Facilitator follow-ups.
+17. Future-test rule.
 
 **Filename pattern:** `docs/demos/trial-readout-PROMPT-WF-{NN}-{modelConfigSlug}-{clientId}.md`
 

@@ -3485,6 +3485,17 @@ IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
     requirements:
       - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
+  decision: "wf-trial-implementation-stack.inc.sh implements enabled/seed/materialize/apply; workflow-trial-agentstream.sh branches stack vs generic preload; catalog batch record-wf-trial reference updated."
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_IMPLEMENTATION_STACK.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-WF_TRIAL_IMPLEMENTATION_STACK-pseudocode.md"
+  name: "WF trial implementation stack shell and docs"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
+    requirements:
+      - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
 IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml"
   name: "WF trial orchestrator process log implementation"

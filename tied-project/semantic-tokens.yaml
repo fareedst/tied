@@ -1463,6 +1463,16 @@ ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
   name: "WF trial four-phase hardening architecture"
   status: "Active"
   type: "ARCH"
+ARCH-WF_TRIAL_IMPLEMENTATION_STACK:
+  category: "Tooling"
+  cross_references:
+    - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+    - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+  description: "Fixture seed, WF preload YAML, batch refine stack playbook"
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_IMPLEMENTATION_STACK.yaml"
+  name: "WF trial implementation stack boundaries"
+  status: "Active"
+  type: "ARCH"
 ARCH-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   cross_references:
     - "IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
@@ -3246,6 +3256,16 @@ IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
   description: "WF trial four-phase hardening implementation"
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
   name: "WF trial four-phase hardening implementation"
+  status: "Active"
+  type: "IMPL"
+IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
+    - "REQ-WF_TRIAL_IMPLEMENTATION_STACK"
+  description: "wf-trial-implementation-stack.inc.sh and orchestrator hook"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_IMPLEMENTATION_STACK.yaml"
+  name: "WF trial implementation stack shell"
   status: "Active"
   type: "IMPL"
 IMPL-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
@@ -5264,6 +5284,17 @@ REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
   description: "WF trial four-phase friction reductions from facilitator readouts"
   detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_HARDENING.yaml"
   name: "WF trial four-phase hardening"
+  status: "Active"
+  type: "REQ"
+REQ-WF_TRIAL_IMPLEMENTATION_STACK:
+  category: "Tooling"
+  cross_references:
+    - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
+    - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+    - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+  description: "Orchestrator-enforced TypeScript stack for fair WF matrix comparison"
+  detail_file: "requirements/REQ-WF_TRIAL_IMPLEMENTATION_STACK.yaml"
+  name: "WF trial implementation stack"
   status: "Active"
   type: "REQ"
 REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:

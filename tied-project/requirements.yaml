@@ -4128,6 +4128,48 @@ REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
     implementation:
       - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+REQ-WF_TRIAL_IMPLEMENTATION_STACK:
+  category: "Tooling"
+  description: "Orchestrator-enforced TypeScript ESM stack with node --test/tsx on disposable workflow-trial-agentstream clients so cohorts differ on product decisions not language or test harness."
+  detail_file: "requirements/REQ-WF_TRIAL_IMPLEMENTATION_STACK.yaml"
+  name: "WF trial implementation stack for fair matrix comparison"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Comparable facilitator npm test verification"
+      - "Locked implementation_stack_id in inventory"
+    problems_solved:
+      - "Empty preload language fields"
+      - "PROMPT-WF-01 Python option"
+      - "refine-plan language roulette"
+    why: "WF readouts showed Python vs TypeScript and unittest vs npm test swamping product comparison for the same PROMPT-WF."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_SETUP"
+      - "REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG"
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+    related_to:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+  satisfaction_criteria:
+    - criterion: "catalog-traditional-workflow-trial-prompts.md documents trial stack; PROMPT-WF-01 TypeScript-only."
+      id: "SC-WF-STACK-CATALOG"
+    - criterion: "materialize_wf_trial_preload_contract sets language TypeScript and test_framework node-test."
+      id: "SC-WF-STACK-PRELOAD"
+    - criterion: "seed_wf_trial_typescript_stack copy-if-absent creates package.json with node --import tsx --test script."
+      id: "SC-WF-STACK-SEED"
+    - criterion: "traditional-four-phase-agentstream.yaml turn 1-3 reference stack id and wf-trial-refine-plan-stack.md."
+      id: "SC-WF-STACK-BATCH"
+    - criterion: "workflow-trial-agentstream-sh.test.mjs TS-STACK cases pass."
+      id: "SC-WF-STACK-TEST"
+      metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+    - criterion: "workflow-trial-agentstream.sh calls stack helpers unless WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1."
+      id: "SC-WF-STACK-ORCHESTRATOR"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
+    implementation:
+      - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
 REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG:
   category: "Tooling"
   description: "Default-on tee capture of workflow_trial_agentstream stdout/stderr on disposable clients with wf-trial-orchestrator-run.v1.json manifest; @record-wf-trial consumes logs for process friction grading."

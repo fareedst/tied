@@ -1,0 +1,46 @@
+REQ-WF_TRIAL_IMPLEMENTATION_STACK:
+  REQ-WF_TRIAL_IMPLEMENTATION_STACK:
+    category: "Tooling"
+    description: "Orchestrator-enforced TypeScript ESM stack with node --test/tsx on disposable workflow-trial-agentstream clients."
+    name: "WF trial implementation stack for fair matrix comparison"
+    priority: "P2"
+    rationale:
+      benefits:
+        - "Comparable facilitator npm test verification"
+        - "Locked implementation_stack_id in inventory"
+      problems_solved:
+        - "Empty preload language fields"
+        - "PROMPT-WF-01 Python option"
+        - "refine-plan language roulette"
+      why: "WF readouts showed Python vs TypeScript swamping product comparison."
+    related_requirements:
+      depends_on:
+        - "REQ-TIED_SETUP"
+        - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+      related_to:
+        - "REQ-GOAGENT-FEATURESPEC-BATCH"
+    satisfaction_criteria:
+      - criterion: "Batch YAML and prompt-shared wf-trial-refine-plan-stack.md."
+        id: "SC-WF-STACK-BATCH"
+      - criterion: "Facilitator stack section in workflow catalog."
+        id: "SC-WF-STACK-CATALOG"
+      - criterion: "Fixture seed copy-if-absent under tools/bootstrap/fixtures/wf-trial-typescript-stack/."
+        id: "SC-WF-STACK-SEED"
+      - criterion: "Shell tests pass."
+        id: "SC-WF-STACK-TEST"
+        metric: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+      - criterion: "tied-bundle/docs/wf-trial-agent-preload-contract.yaml materialized to tied-project."
+        id: "SC-WF-STACK-PRELOAD"
+      - criterion: "WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1 opt-out documented."
+        id: "SC-WF-STACK-ORCHESTRATOR"
+    status: "Draft"
+    traceability:
+      architecture:
+        - "ARCH-WF_TRIAL_IMPLEMENTATION_STACK"
+      implementation:
+        - "IMPL-WF_TRIAL_IMPLEMENTATION_STACK"
+    validation_criteria:
+      - method: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+  validation_criteria:
+    - method: "node --test tools/bootstrap/workflow-trial-agentstream-sh.test.mjs"
+      result: "18/18 pass on 2026-11-04"

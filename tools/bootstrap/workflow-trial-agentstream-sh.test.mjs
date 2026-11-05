@@ -11,6 +11,7 @@ const SCRIPT = path.join(REPO_ROOT, "scripts/workflow-trial-agentstream.sh");
 const TAG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-disposable-tag.inc.sh");
 const PREFLIGHT_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-claude-preflight.inc.sh");
 const HARDENING_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-four-phase-hardening.inc.sh");
+const STACK_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-implementation-stack.inc.sh");
 const PROCESS_LOG_INC = path.join(REPO_ROOT, "scripts/lib/wf-trial-process-log.inc.sh");
 const TIED_CLI = path.join(REPO_ROOT, "mcp-server/packages/cli/dist/index.js");
 
@@ -146,6 +147,67 @@ describe("workflow-trial-agentstream.sh [REQ-TIED_SETUP] [REQ-TIED_CLI_OPERATOR_
     assert.equal(r.status, 0, r.stderr);
     assert.match(r.stderr, /materialized preload contract/);
     assert.match(r.stderr, /preload contract exists/);
+  });
+
+  it("seed_wf_trial_typescript_stack copy-if-absent [REQ-WF_TRIAL_IMPLEMENTATION_STACK]", () => {
+    const ws = fs.mkdtempSync(path.join(os.tmpdir(), "wf-stack-seed-"));
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-implementation-stack.inc.sh
+      source "${STACK_INC}"
+      seed_wf_trial_typescript_stack "${ws}" "${REPO_ROOT}"
+      test -f "${ws}/package.json"
+      test -f "${ws}/tsconfig.json"
+      grep -q 'node --import tsx --test' "${ws}/package.json"
+      seed_wf_trial_typescript_stack "${ws}" "${REPO_ROOT}"
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /WF trial stack seeded/);
+    assert.match(r.stderr, /seed skip \(exists\)/);
+  });
+
+  it("materialize_wf_trial_preload_contract TypeScript fields [REQ-WF_TRIAL_IMPLEMENTATION_STACK]", () => {
+    const ws = fs.mkdtempSync(path.join(os.tmpdir(), "wf-stack-preload-"));
+    const bash = `
+      # shellcheck source=scripts/lib/wf-trial-implementation-stack.inc.sh
+      source "${STACK_INC}"
+      materialize_wf_trial_preload_contract "${ws}" "${REPO_ROOT}"
+      grep -q 'language: "TypeScript"' "${ws}/tied-project/agent-preload-contract.yaml"
+      grep -q 'test_framework: "node-test"' "${ws}/tied-project/agent-preload-contract.yaml"
+    `;
+    const r = spawnSync("bash", ["-c", bash], { cwd: REPO_ROOT, encoding: "utf8", env: process.env });
+    assert.equal(r.status, 0, r.stderr);
+    assert.match(r.stderr, /materialized WF trial preload contract/);
+  });
+
+  it("WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1 skips stack on dry-run workspace [REQ-WF_TRIAL_IMPLEMENTATION_STACK]", () => {
+    if (!fs.existsSync(TIED_CLI)) {
+      console.log("DEBUG: skip — built tied CLI missing:", TIED_CLI);
+      return;
+    }
+    const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wf-stack-skip-"));
+    const r = runScript(["wf-02", "--dry-run", "--workspace", workspace], {
+      WF_TRIAL_SKIP_IMPLEMENTATION_STACK: "1",
+    });
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.equal(fs.existsSync(path.join(workspace, "package.json")), false);
+    assert.match(r.stderr, /WF_TRIAL_SKIP_IMPLEMENTATION_STACK=1/);
+  });
+
+  it("--workspace + --dry-run seeds stack when enabled [REQ-WF_TRIAL_IMPLEMENTATION_STACK]", () => {
+    if (!fs.existsSync(TIED_CLI)) {
+      console.log("DEBUG: skip — built tied CLI missing:", TIED_CLI);
+      return;
+    }
+    const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "wf-stack-ws-"));
+    const r = runScript(["wf-02", "--dry-run", "--workspace", workspace]);
+    assert.equal(r.status, 0, `${r.stderr}\n${r.stdout}`);
+    assert.ok(fs.existsSync(path.join(workspace, "package.json")));
+    const preload = fs.readFileSync(
+      path.join(workspace, "tied-project/agent-preload-contract.yaml"),
+      "utf8",
+    );
+    assert.match(preload, /language: "TypeScript"/);
   });
 
   it("wf_trial_reconcile_preflight strict vs skip [REQ-WF_TRIAL_FOUR_PHASE_HARDENING]", () => {

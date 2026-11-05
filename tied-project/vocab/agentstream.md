@@ -63,6 +63,9 @@
 | **WF trial strict preflight** | `WF_TRIAL_STRICT_PREFLIGHT` | When set, **`workflow-trial-agentstream.sh`** should fail closed if `run-tied-claude-client-validation.mjs` reports `ok: false` (proposed in REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS refine-plan). Default today: DIAGNOSTIC and continue. |
 | **WF trial orchestrator process log** | wf-trial-orchestrator-run, process.stdout.log | Default-on tee of orchestrator stdout/stderr under `tied-project/working/wf-trial-orchestrator-run/evidence/` with manifest **`wf-trial-orchestrator-run.v1.json`**. **`WF_TRIAL_SKIP_PROCESS_LOG=1`** disables. Distinct from **`AGENTSTREAM_HARNESS_TRACE`**. [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG](../requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml) |
 | **WF_TRIAL_SKIP_PROCESS_LOG** | skip orchestrator process log | When set, **`workflow-trial-agentstream.sh`** does not write process log files or manifest. [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG](../requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml) |
+| **WF trial implementation stack** | TypeScript matrix stack, wf-trial stack | Orchestrator-enforced **TypeScript + ESM + `node --import tsx --test`** on disposable WF clients: fixture seed, **`wf-trial-agent-preload-contract.yaml`**, batch refine “Locked stack” table. Stack id **`wf-trial-ts-node-test-v1`**. [REQ-WF_TRIAL_IMPLEMENTATION_STACK](../requirements/REQ-WF_TRIAL_IMPLEMENTATION_STACK.yaml) |
+| **implementation_stack_id** | stack id, cohort filter | String in `trial-workflow-interaction-inventory.v1.json` (e.g. `wf-trial-ts-node-test-v1`); bump when runner or layout contract changes. |
+| **WF_TRIAL_SKIP_IMPLEMENTATION_STACK** | skip stack seed | When set, **`workflow-trial-agentstream.sh`** skips TypeScript fixture seed and WF-specific preload materialize; matrix comparability waived. See same PLAN. |
 
 ---
 
