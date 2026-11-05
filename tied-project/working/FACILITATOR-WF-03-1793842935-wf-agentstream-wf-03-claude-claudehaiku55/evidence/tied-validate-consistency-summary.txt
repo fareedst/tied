@@ -1,0 +1,3 @@
+ok: true
+bytes: 72195
+note: full MCP receipt on disk as tied_validate_consistency.json (regenerable; not staged)

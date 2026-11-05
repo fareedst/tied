@@ -240,6 +240,7 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | PROMPT-WF-03 | Claude Haiku 5.5 / agentstream | `1793815895-wf-agentstream-wf-03-claude-claudehaiku55` | [Claude readout](trial-readout-PROMPT-WF-03-claudehaiku55-1793815895-wf-agentstream-wf-03-claude-claudehaiku55.md) (build-plan on disk; **close-out incomplete**) |
 | PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1793817075-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1793817075-wf-agentstream-wf-03-cursor-composer25.md) (full four-turn close-out; reconcile **not_run**) |
 | PROMPT-WF-03 | Cursor agentstream / Composer 2.5 | `1793820250-wf-agentstream-wf-03-cursor-composer25` (`HARNESS=cursor`; orchestrator process log) | [Cursor readout](trial-readout-PROMPT-WF-03-composer25-1793820250-wf-agentstream-wf-03-cursor-composer25.md) (full four-turn close-out; RED archived; reconcile **not_run**) |
+| PROMPT-WF-03 | Claude Haiku 5.5 / agentstream | `1793842935-wf-agentstream-wf-03-claude-claudehaiku55` (`HARNESS=claude`; orchestrator process log) | [Claude readout](trial-readout-PROMPT-WF-03-claudehaiku55-1793842935-wf-agentstream-wf-03-claude-claudehaiku55.md) (full four-turn close-out; RED archived; REQ index **Planned** drift; reconcile **not_run**) |
 
 Maintained by **`@record-wf-trial`**.
 
