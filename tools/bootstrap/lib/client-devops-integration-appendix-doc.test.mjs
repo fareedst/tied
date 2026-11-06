@@ -21,6 +21,18 @@ const templatePath = path.join(
   "client-pr-handoff-fields.v1.example.yaml",
 );
 const indexPath = path.join(repoRoot, "tied-bundle", "docs", "client-development-index.md");
+const hostedGitGuidePath = path.join(
+  repoRoot,
+  "tied-bundle",
+  "docs",
+  "client-hosted-git-extension-appendix.md",
+);
+const hostedGitEnvTemplatePath = path.join(
+  repoRoot,
+  "tied-bundle",
+  "templates",
+  "client-hosted-git-env.example.env",
+);
 
 const REQUIRED_MARKERS = [
   "## Proof boundary",
@@ -55,5 +67,42 @@ describe("client DevOps integration appendix [REQ-TIED_CLIENT_DEVOPS_APPENDIX]",
   it("is linked from client-development-index Quick read", () => {
     const text = fs.readFileSync(indexPath, "utf8");
     assert.ok(text.includes("client-devops-integration-appendix.md"));
+  });
+});
+
+const HOSTED_GIT_MARKERS = [
+  "## Proof boundary",
+  "REQ-TIED_CLIENT_DEVOPS_APPENDIX",
+  "REQ-TIED_ENVIRONMENT_VARIABLE_POLICY",
+  "TIED_GIT_CLOUD_PROVIDER",
+  "TIED_DEV_BRANCH",
+  "client-pr-handoff-fields.v1.example.yaml",
+  "provider-agnostic",
+];
+
+describe("client hosted Git extension appendix (composes with [REQ-TIED_CLIENT_DEVOPS_APPENDIX])", () => {
+  it("exists under tied-bundle/docs with required sections", () => {
+    assert.ok(fs.existsSync(hostedGitGuidePath), `missing guide: ${hostedGitGuidePath}`);
+    const text = fs.readFileSync(hostedGitGuidePath, "utf8");
+    for (const marker of HOSTED_GIT_MARKERS) {
+      assert.ok(text.includes(marker), `hosted-git guide missing marker: ${marker}`);
+    }
+  });
+
+  it("ships example env template under tied-bundle/templates", () => {
+    assert.ok(fs.existsSync(hostedGitEnvTemplatePath), `missing template: ${hostedGitEnvTemplatePath}`);
+    const text = fs.readFileSync(hostedGitEnvTemplatePath, "utf8");
+    assert.ok(text.includes("TIED_REPO_OWNER"));
+    assert.ok(text.includes("GIT_CLOUD_API_TOKEN"));
+  });
+
+  it("is linked from client-development-index Quick read", () => {
+    const text = fs.readFileSync(indexPath, "utf8");
+    assert.ok(text.includes("client-hosted-git-extension-appendix.md"));
+  });
+
+  it("is linked from client-devops-integration-appendix", () => {
+    const text = fs.readFileSync(guidePath, "utf8");
+    assert.ok(text.includes("client-hosted-git-extension-appendix.md"));
   });
 });

@@ -17,6 +17,10 @@
 
 This Phase 5 slice is **documentation + example template**—**client-owned** configuration lives in each repo’s CI and release docs, not in methodology YAML.
 
+### Hosted Git cloud extensions
+
+When the **remote** is a **hosted Git provider** (Bitbucket, GitHub, GitLab, or similar), optional scripts may **read** pull-request / merge-request metadata and check-run status to **feed** the PR handoff fields above. That work stays **client-owned** and **does not** add host data as TIED index fields—see [client-hosted-git-extension-appendix.md](client-hosted-git-extension-appendix.md) for provider-agnostic env identity, dev vs prod branch conventions, and security notes.
+
 ---
 
 ## PR handoff fields

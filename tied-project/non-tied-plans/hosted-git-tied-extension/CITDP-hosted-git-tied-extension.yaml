@@ -1,0 +1,29 @@
+schema: "citdp-plan-draft.v1"
+slug: "hosted-git-tied-extension"
+tied_tokens_new: []
+scope:
+  summary: |
+    Add provider-agnostic hosted Git / Git cloud client documentation (appendix + env example +
+    cross-links + doc test) composing with REQ-TIED_CLIENT_DEVOPS_APPENDIX. No MCP, no new
+    REQ/ARCH/IMPL, no TIED YAML product for remote identity.
+  in_scope:
+    - "tied-bundle/docs/client-hosted-git-extension-appendix.md"
+    - "tied-bundle/templates/client-hosted-git-env.example.env"
+    - "tied-bundle/docs/client-development-index.md"
+    - "tied-bundle/docs/client-devops-integration-appendix.md"
+    - "docs/comparisons/persante-sdd-skills-vs-tied-agent-management.md"
+    - "tools/bootstrap/lib/client-devops-integration-appendix-doc.test.mjs"
+    - "tied-project/non-tied-plans/hosted-git-tied-extension/"
+  out_of_scope:
+    - "MCP or tied-cli Bitbucket/GitHub/GitLab tools"
+    - "New project REQ/ARCH/IMPL tokens"
+    - "Prod deploy automation from TIED core"
+evidence:
+  primary: "../../../tied-bundle/docs/client-devops-integration-appendix.md"
+risks:
+  - id: "host_specific_drift"
+    description: "Appendix leans too hard on one vendor; readers treat it as TIED standard."
+    mitigation: "Lead with generic env + workflow; vendor columns in one table only."
+  - id: "scope_creep_yaml"
+    description: "Accidental edits to TIED project YAML or REQ detail files."
+    mitigation: "Build follows non-tied-boundary; test-strategy checklist."

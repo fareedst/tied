@@ -38,6 +38,8 @@ docs/comparisons/*
 !docs/comparisons/ndtp-ai-ontology-extension-vs-tied-agent-management.md
 !docs/comparisons/software-engineering-degree.md
 !docs/comparisons/software-engineering-degree-vs-tied.md
+!docs/comparisons/persante-sdd-skills.md
+!docs/comparisons/persante-sdd-skills-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md
