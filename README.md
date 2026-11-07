@@ -1,16 +1,15 @@
 # TIED Methodology
 
-**TIED Methodology Version**: 4.2.0
+**TIED Methodology Version**: 4.2.1
 
 [TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. **Visual how-to and methodology by example:** [TIED Experience Hub](docs/tied-experience/index.md). Core seven index: [client development index](tied-bundle/docs/client-development-index.md).
 
-**Release highlights (4.2.0):** Methodology minor release since 4.1.0 — MCP over HTTPS, store README install spine, Netflix observability composition, and operator MCP onboarding. Full notes: [CHANGELOG — 4.2.0](CHANGELOG.md#420---2026-11-07).
+**Release highlights (4.2.1):** Methodology patch since 4.2.0 — **NVIDIA Auto-Ontology** external comparison compose (certified semantic layer × TIED harness preflight/read-write seam), plus trial methodology version readout, WF shell exit hardening, checklist gate operator path, and related close-outs. Full notes: [CHANGELOG — 4.2.1](CHANGELOG.md#421---2026-11-07).
 
-- **MCP HTTPS remote access** — Streamable HTTP transport, bearer gate, deploy examples; stdio default unchanged ([REQ-MCP_HTTPS_REMOTE_ACCESS]).
-- **Store README install spine** — disk-first operator paths; bootstrap/env catalog off README ([REQ-TIED_PRIMARY_REPO_ONBOARDING]).
-- **Netflix observability Wave 3** — methodology composition matrix row 17 and vocabulary alignment ([REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3]).
-- **Manual MCP acceptance** — Cursor **Settings → MCPs** and Claude enable flow in README ([REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE]).
-- **Operator smoke hardening** — `server_info` outputSchema SDK fix; compose and HTTP CLI ergonomics ([REQ-MCP_HTTPS_REMOTE_ACCESS]).
+- **NVIDIA Auto-Ontology compose (non-tied)** — Wave 1 capture + Wave 2 × TIED improvement analysis; plan packages under `tied-project/non-tied-plans/nvidia-auto-ontology-*` (comparisons local gitignored).
+- **Trial methodology version readout** — turn-1 session semver capture for WF/GF trials ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT]).
+- **Checklist gate operator path** — `tied gate check` documented in bundled tied-yaml skill ([REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH]).
+- **Netflix observability Wave 3 (4.2.0)** — methodology composition matrix row 17 ([REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3]); see [CHANGELOG — 4.2.0](CHANGELOG.md#420---2026-11-07) for MCP HTTPS and store README spine.
 
 ## How to use this README
 

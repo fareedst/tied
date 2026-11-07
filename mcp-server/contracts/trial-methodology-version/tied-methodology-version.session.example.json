@@ -1,6 +1,6 @@
 {
   "schema": "tied-methodology-version.session.v1",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "source": "version_file",
   "captured_at": "2026-11-07T11:00:00.000Z",
   "capture_path": "mcp_server_info",

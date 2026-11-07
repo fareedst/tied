@@ -309,4 +309,4 @@ See `tied-bundle/docs/processes.md` § LEAP for the canonical process definition
 - **Completion Phase**: Verify all documentation is current and complete
 
 **Last Updated**: 2026-06-02
-**TIED Methodology Version**: 4.1.0
+**TIED Methodology Version**: 4.2.1

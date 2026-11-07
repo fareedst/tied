@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
+### Added
 
-- **methodology release plan link ([PROC-VOCABULARY_INDEX])** — `tied-project/vocab/tied-methodology.md` **methodology release** row uses `../non-tied-plans/tied-methodology-release-4-2-0/PLAN.md` (was `../../`, broke `validate_vocab_index.rb` / `test-all` step 7).
+- **PROMPT-WF-06 facilitator readout (Claude Haiku 5.5 / Claude agentstream)** — [trial-readout-PROMPT-WF-06-claudehaiku55-1794062924-wf-agentstream-wf-06-claude-claudehaiku55.md](docs/demos/trial-readout-PROMPT-WF-06-claudehaiku55-1794062924-wf-agentstream-wf-06-claude-claudehaiku55.md) for client `1794062924-wf-agentstream-wf-06-claude-claudehaiku55` (`REQ-TOKEN_BUCKET_RATE_LIMITER`; orchestrator `exit_code: 0`; **9** green tests uncommitted; close-out `allowed: false`; pairs [Composer WF-06 @ 1794056678](docs/demos/trial-readout-PROMPT-WF-06-composer25-1794056678-wf-agentstream-wf-06-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+
+## [4.2.1] - 2026-11-07
 
 ### Added
+
+- **NVIDIA Auto-Ontology external comparison (non-tied ontology compose)** — Wave 1 methodology capture and Wave 2 × TIED improvement analysis for [NVIDIA/auto-ontology](https://github.com/NVIDIA/auto-ontology) (Generate → Certify → Answer, MCP read / REST write seam, readiness → answerability → ask); local `docs/comparisons/nvidia-auto-ontology*.md` (gitignored); plan slugs [`nvidia-auto-ontology-capture`](tied-project/non-tied-plans/nvidia-auto-ontology-capture/PLAN.md), [`nvidia-auto-ontology-vs-tied`](tied-project/non-tied-plans/nvidia-auto-ontology-vs-tied/PLAN.md); Wave 3 matrix row / bundle cross-links **Defer**; complements Netflix Wave 3 ontology row 17 without minting REQ from comparison prose.
 
 - **Trial methodology version readout ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT], [ARCH-TRIAL_METHODOLOGY_VERSION_READOUT], [IMPL-TRIAL_METHODOLOGY_VERSION_READOUT])** — Turn-1 WF batch + GF bootstrap capture `tied-methodology-version.session.v1.json`; facilitator skills require session TIED semver in readout metadata; contract `mcp-server/contracts/trial-methodology-version/` + `trial-methodology-version-readout-contract.test.mjs`; optional `DIAGNOSTIC: tied_methodology_version` in `wf-trial-process-log.inc.sh`. Close-out `close-out-trial-methodology-version-readout-2026-11-07-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/PLAN.md).
 - **WF trial four-phase shell exit ([REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT], [ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT], [IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT])** — `wf-trial-run-four-phase-agentstream.inc.sh` propagates agentstream exit under `set -u`; `T-AGENTSTREAM-EXIT-01` / `T-EXIT-TRAP-01` in `run-traditional-four-phase-agentstream-sh.test.mjs`. Close-out `close-out-wf-four-phase-shell-exit-2026-11-07`. Plan: [PLAN.md](tied-project/working/REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT/PLAN.md).
@@ -31,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **PROMPT-WF-05 facilitator readout (Composer 2.5 / Cursor agentstream)** — [trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md) for client `1794042383-wf-agentstream-wf-05-cursor-composer25` (`REQ-CSV_ROW_MAP`; orchestrator `exit_code: 1`; refine-plan artifacts on disk; workflow incomplete). Catalog + demos index updated via `@record-wf-trial`.
 - **PROMPT-WF-01 facilitator readout (Composer 2.5 / Cursor agentstream)** — [trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md) for client `1794044147-wf-agentstream-wf-01-cursor-composer25` (`REQ-SEMVER_SATISFIES`; orchestrator `exit_code: 1` after refine; contrasts complete [1793604353](docs/demos/trial-readout-PROMPT-WF-01-composer25-1793604353-wf-agentstream-wf-01.md)). Catalog + demos index updated via `@record-wf-trial`.
 - **PROMPT-WF-01 facilitator readout (Composer 2.5 / Cursor agentstream, success pair)** — [trial-readout-PROMPT-WF-01-composer25-1794048393-wf-agentstream-wf-01-cursor-composer25.md](docs/demos/trial-readout-PROMPT-WF-01-composer25-1794048393-wf-agentstream-wf-01-cursor-composer25.md) for client `1794048393-wf-agentstream-wf-01-cursor-composer25` (`REQ-SEMVER_SATISFIES`; orchestrator `exit_code: 0`; four turns; pairs incomplete [1794044147](docs/demos/trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md)). Catalog + demos index updated via `@record-wf-trial`.
+
+### Fixed
+
+- **methodology release plan link ([PROC-VOCABULARY_INDEX])** — `tied-project/vocab/tied-methodology.md` **methodology release** row uses `../non-tied-plans/tied-methodology-release-4-2-0/PLAN.md` (was `../../`, broke `validate_vocab_index.rb` / `test-all` step 7).
 
 ## [4.2.0] - 2026-11-07
 
