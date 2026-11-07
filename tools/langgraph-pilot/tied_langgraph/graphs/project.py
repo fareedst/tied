@@ -252,6 +252,9 @@ def run_checklist_segment(
     evidence_refs: dict[str, Any],
     policy_version: str = "v0",
     baseline_commit: str = "base",
+    runner_red: Callable[[RunState], dict[str, Any]] | None = None,
+    runner_green: Callable[[RunState], dict[str, Any]] | None = None,
+    apply_green: Callable[[Path], None] | None = None,
 ) -> RunState:
     """Operator entry: run a contiguous checklist segment end-to-end."""
     initial: RunState = {
@@ -272,5 +275,8 @@ def run_checklist_segment(
         tracker_path=tracker_path,
         segment=segment,
         worktree_path=worktree_path,
+        runner_red=runner_red,
+        runner_green=runner_green,
+        apply_green=apply_green,
     )
     return graph.invoke(initial)

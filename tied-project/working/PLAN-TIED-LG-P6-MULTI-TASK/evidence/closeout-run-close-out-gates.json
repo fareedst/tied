@@ -1,0 +1,104 @@
+{
+  "phase": "close_out",
+  "depth_tier": "integrated",
+  "activation_collect": {
+    "skipped": false,
+    "reason": "collect",
+    "run_id": "p6-closeout-closeout-20261107"
+  },
+  "reconcile": {
+    "ok": true,
+    "report": {
+      "request_token": "PLAN-TIED-LG-P6-MULTI-TASK",
+      "findings": [
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/PLAN-TIED-LG-P6-MULTI-TASK/gates/close_out-2026-11-07T18-53-33-244Z.json",
+            "stored_tracker_hash": "sha256:59b4414fb8d77fc0376f09705bcb9b1fb023e3be29998ecae00fb4355aae81ef",
+            "current_tracker_hash": "sha256:9225170184c1a12c6b3184b576c4e1461efaba4d48f73a527e92795e8bb46468",
+            "stored_citdp_hash": "sha256:d573d3882f8bb807207a64aae91d642a784bc6932af6dac31265e05f774ec555",
+            "current_citdp_hash": "sha256:2728e704ec8c1ebe018ab6497555b2aeb7456fdf81f4cdf291cf324aa9fe5333"
+          }
+        }
+      ],
+      "ledger_rows": 14,
+      "read_only": true,
+      "process_grade": {
+        "score": 88,
+        "band": "B",
+        "dimensions": [
+          {
+            "name": "tracker_integrity",
+            "score": 100,
+            "weight": 0.3,
+            "gap_codes": []
+          },
+          {
+            "name": "verification_manifest",
+            "score": 100,
+            "weight": 0.25,
+            "gap_codes": []
+          },
+          {
+            "name": "hash_alignment",
+            "score": 40,
+            "weight": 0.2,
+            "gap_codes": [
+              "evidence_stale"
+            ]
+          },
+          {
+            "name": "ledger_correlation",
+            "score": 100,
+            "weight": 0.15,
+            "gap_codes": []
+          },
+          {
+            "name": "typed_evidence_refs",
+            "score": 100,
+            "weight": 0.1
+          }
+        ],
+        "gap_codes": [
+          "evidence_stale"
+        ]
+      }
+    }
+  },
+  "quality_manifest": {
+    "ok": true,
+    "manifest_path": "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/evidence/verification-evidence-manifest.v1.json",
+    "schema_version": "verification-evidence-manifest.v1"
+  },
+  "evidence_chain_profile": {
+    "ok": false,
+    "skipped": true,
+    "reason": "no_psa_reports"
+  },
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "gate": {
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
+    "evidence_hydrated": true,
+    "hydration_diagnostics": []
+  },
+  "gate_receipt_persist": {
+    "ok": true,
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/PLAN-TIED-LG-P6-MULTI-TASK/gates/close_out-2026-11-07T18-53-33-244Z.json",
+    "hash": "sha256:61525664d5a4b545e1fc1c2395e48309d9ec0e275428c55af9b0e45c42556806"
+  },
+  "envelope": {
+    "ok": true,
+    "path": "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0,
+    "diagnostics": []
+  }
+}

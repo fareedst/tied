@@ -1,0 +1,112 @@
+CITDP-PLAN-TIED-LG-P6-MULTI-TASK:
+  change_definition:
+    current_behavior: "P5 project graph runs one contiguous checklist segment in a single worktree; no task DAG, Send parallelism, or merge regression across branches."
+    desired_behavior: "Project graph schedules tasks from a plan DAG; independent tasks run in isolated worktrees via Send; merge node integrates and runs combined regression; staleness invalidates pre-merge evidence; replan edge files advisory LEAP proposal without REQ mutation."
+    non_goals:
+      - "Phase 7 A/B evaluation readout"
+      - "Live charter client merge smoke in default CI"
+      - "LLM implementer nodes for parallel tasks"
+      - "Agentstream default executor replacement"
+    success_criteria:
+      - "Two-task hermetic fixture completes with merge regression observation"
+      - "Fault injection blocks merge when parallel task fails"
+      - "pytest green for pilot including P6 tests"
+      - "Run artifacts under tied-bundle/working/{REQ}/langgraph/{run_id}/"
+    unchanged_behavior: "P3 TDD, P4 verification, P5 checklist segment APIs remain callable from per-task subgraph invocations."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "pre_implementation"
+      project_id: "stdd-project"
+      request_token: "PLAN-TIED-LG-P6-MULTI-TASK"
+      run_id: "p6-refine-plan-20261107"
+      scope: []
+      scope_hash: "~"
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    command_seq:
+      - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
+    manifest_reference: null
+    proof_boundaries:
+      - "hermetic_git_fixture_two_worktrees"
+      - "mocked_mcp_default_ci"
+      - "pilot_tree_only"
+      - "max_parallel_two_in_ci"
+  impact_analysis:
+    impl_inventory_notes: "New scheduling/merge modules; extends or siblings project graph; hermetic git tests."
+    modules_or_boundaries:
+      - "tools/langgraph-pilot/tied_langgraph/task_dag.py"
+      - "tools/langgraph-pilot/tied_langgraph/worktree_pool.py"
+      - "tools/langgraph-pilot/tied_langgraph/graphs/project_multi.py"
+      - "tools/langgraph-pilot/tied_langgraph/graphs/project.py"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "machine_close_out_complete"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LG-P6-MULTI-TASK"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    prior_depth_tier: null
+    profile_depth: "integrated"
+    recorded_at: "2026-11-07"
+    title: "LangGraph program P6 multi-task scheduling"
+  risk_analysis:
+    abuse_cases:
+      - "parallel-send-shared-worktree-mutation"
+      - "merge-without-regression-evidence"
+      - "stale-evidence-accepted-after-merge"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Merge node runs while one Send worker still holds dirty worktree."
+        - "Graph accepts merge when regression exit_code != 0."
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "CI allows max_parallel > 2 without sponsor waiver in CITDP."
+      eligibility_triggers_matched:
+        - "external_input"
+        - "persistence"
+        - "concurrency"
+      evidence_references:
+        - "docs/langgraph/plan-tied-lg-p6-multi-task.md"
+        - "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/evidence/risk-assessment-evidence.md"
+      falsification_questions:
+        - "Can two Send workers write the same tracker path?"
+      gate_policy: "per_citdp"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Parallel worktrees, merge regression, and MCP replan hook touch persistence and external policy tools."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "plan_only_deferred_to_build"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-05-31"
+      owner: "P7 evaluation wave"
+      summary: "P6 does not run paired agentstream A/B or sponsor convergence disposition."
+    risks:
+      - "LangGraph Send API drift vs pinned langgraph version"
+      - "Hermetic git fixture diverges from real client merge conflicts"
+    scenarios:
+      - "Sponsor raises max_parallel without disk/memory waiver"
+  test_strategy:
+    composition_tests:
+      - "Two-task parallel fixture with merge regression and disposable trackers"
+      - "Fault injection: beta task fails, merge blocked"
+    integration_tests:
+      - "Staleness route after merge changes candidate_commit"
+    unit_tests:
+      - "task DAG cycle detection and topological order"
+      - "worktree pool path uniqueness per task id"
+      - "replan hook mocked leap proposal payload"

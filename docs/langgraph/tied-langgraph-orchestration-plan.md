@@ -323,6 +323,8 @@ Committed rationale (if tokens added later): `tied-project/working/PLAN-TIED-LAN
 
 ### Phase 6 — Multi-task coordination and parallelism
 
+**Linked plan (refined):** [plan-tied-lg-p6-multi-task.md](./plan-tied-lg-p6-multi-task.md) · Working folder: `tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK/`.
+
 **Goal:** Schedule dependent tasks; optional parallel independent slices.
 
 **Tasks:**

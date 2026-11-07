@@ -1,0 +1,14 @@
+{
+  "schema_version": "langgraph-task-plan.v1",
+  "merge_task_id": "merge-main",
+  "segment_preset": "tdd-unit-slice",
+  "tasks": [
+    { "id": "task-alpha", "depends_on": [] },
+    { "id": "task-beta", "depends_on": [] },
+    {
+      "id": "merge-main",
+      "depends_on": ["task-alpha", "task-beta"],
+      "kind": "merge"
+    }
+  ]
+}

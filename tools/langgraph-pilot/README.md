@@ -86,3 +86,24 @@ flowchart LR
 **Dual-write warning:** do not run LangGraph and `tied agentstream` against the same tracker file in one REQ. Use a disposable tracker copy under `tied-bundle/working/{REQ}/langgraph/{run_id}/`.
 
 Run artifacts: ledger observations use tool names `checklist_slug:{slug}`; slug completion JSON files live in the run directory.
+
+## Multi-task scheduling (P6)
+
+Schedule **task DAG** plans with isolated worktrees per parallel task, **LangGraph Send** fan-out wiring (`build_multi_task_graph`), merge + combined regression, and merge-blocked fault routing.
+
+```mermaid
+flowchart LR
+  ALPHA[task-alpha] --> MERGE[merge-main]
+  BETA[task-beta] --> MERGE
+```
+
+- Task plan schema: `langgraph-task-plan.v1.json` (fixture: `tests/fixtures/langgraph-task-plan-two-task.v1.json`)
+- DAG loader: `tied_langgraph.task_dag.load_task_plan`
+- Worktree pool: `tied_langgraph.worktree_pool.WorktreePool` (one path per task id)
+- Orchestrator: `tied_langgraph.graphs.project_multi.run_multi_task_plan`
+- Advisory replan: `tied_langgraph.replan.record_architectural_replan` (mocked MCP in CI)
+- CLI: `python -m tied_langgraph.cli multi-task --task-plan PATH --tracker-alpha PATH --tracker-beta PATH ...`
+
+**Dual-write warning:** unchanged from P5 — separate tracker copies per parallel task; never share with agentstream on the same path.
+
+Merge regression evidence: `merge-regression.json` + ledger tool `merge_regression`; blocked merges write `merge-blocked.json`.
