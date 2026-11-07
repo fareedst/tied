@@ -6,4 +6,4 @@
 - Hygiene: `evidence/git-hygiene-receipt-2026-11-07.md` (apply=false).
 - Close-out gates: `closeout-run-close-out-gates.json`, `closeout-run-verification-gates.json`.
 - Upstream feedback capture: **N/A** — no methodology feedback promoted this wave.
-- Git: pending commit on `main` (not pushed unless sponsor requests).
+- Git: **`f0cea237`** on `main` (not pushed unless sponsor requests).
