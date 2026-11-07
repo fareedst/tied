@@ -1450,6 +1450,10 @@ IMPL-MCP_FEEDBACK_TOOLS:
       - "REQ-FEEDBACK_TO_TIED"
     tests:
       - "feedback.test.ts"
+IMPL-MCP_HTTP_SERVER:
+  detail_file: "implementation-decisions/IMPL-MCP_HTTP_SERVER.yaml"
+  name: "MCP Streamable HTTP server implementation"
+  status: "Active"
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   code_locations:
     files:
@@ -1539,18 +1543,10 @@ IMPL-MCP_SERVER_INFO:
   detail_file: "implementation-decisions/IMPL-MCP_SERVER_INFO.yaml"
   name: "MCP server_info tool implementation"
   status: "Implemented"
-IMPL-MCP_HTTP_SERVER:
-  detail_file: "implementation-decisions/IMPL-MCP_HTTP_SERVER.yaml"
-  name: "MCP Streamable HTTP server implementation"
-  status: "Active"
 IMPL-MCP_STDIO_CONSOLE_GUARD:
   detail_file: "implementation-decisions/IMPL-MCP_STDIO_CONSOLE_GUARD.yaml"
   name: "MCP stdio console guard implementation"
   status: "Implemented"
-IMPL-TIED_CLI_HTTP_TRANSPORT:
-  detail_file: "implementation-decisions/IMPL-TIED_CLI_HTTP_TRANSPORT.yaml"
-  name: "tied-cli Streamable HTTP transport"
-  status: "Active"
 IMPL-MCP_USAGE_METRICS:
   code_locations:
     files:
@@ -2197,6 +2193,10 @@ IMPL-TIED_CLEAR_WORKSPACE_SKILL:
       - "REQ-TIED_CLIENT_BOOTSTRAP_SKILLS"
   detail_file: "implementation-decisions/IMPL-TIED_CLEAR_WORKSPACE_SKILL.yaml"
   name: "Clear-workspace skill bootstrap"
+  status: "Active"
+IMPL-TIED_CLI_HTTP_TRANSPORT:
+  detail_file: "implementation-decisions/IMPL-TIED_CLI_HTTP_TRANSPORT.yaml"
+  name: "tied-cli Streamable HTTP transport"
   status: "Active"
 IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
   detail_file: "implementation-decisions/IMPL-TIED_CLI_MCP_JSON_BASE_PATH.yaml"
@@ -2967,6 +2967,15 @@ IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND:
   detail_file: "implementation-decisions/IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND.yaml"
   name: "Methodology version on demand implementation"
   status: "Implemented"
+IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  detail_file: "implementation-decisions/IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml"
+  name: "Netflix ontology observability Wave 3 implementation"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    requirements:
+      - "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
     architecture:

@@ -5,7 +5,7 @@
 | **Purpose** | Sponsor-facing `/xlate`: what TIED is for, what it can do, and how it relates to widely used delivery, engineering, and quality methodologies—without treating TIED as “Agile vs Waterfall.” |
 | **Audience** | Sponsors, engineers, agent operators, methodology owners |
 | **TIED anchors** | [Client development index](../../tied-bundle/docs/client-development-index.md), [Vocabulary layer × TIED × LEAP × CITDP](../../tied-bundle/docs/vocabulary-layer-tied-leap-citdp.md), [LEAP](../../tied-bundle/docs/LEAP.md), [processes](../../tied-bundle/docs/processes.md), [AGENTS.md](../../AGENTS.md) |
-| **Sibling comparison** | [QMM (Kaizen & quality management) × TIED](qmm-kaizen-vs-tied.md) — deeper Loop 1–3 disposition matrix and QMM-specific gaps |
+| **Sibling comparison** | [QMM (Kaizen & quality management) × TIED](qmm-kaizen-vs-tied.md) — deeper Loop 1–3 disposition matrix and QMM-specific gaps; [Netflix observability ontology × TIED](netflix-ontology-driven-observability-vs-tied-agent-management.md) — client ops KG vs TIED vocabulary (matrix §2 row 17) |
 | **Status** | Outreach / analysis document; does not mint REQ/ARCH/IMPL tokens |
 | **Last updated** | 2026-10-10 |
 

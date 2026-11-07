@@ -1,0 +1,24 @@
+ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  decision: "Treat Netflix Wave 3 as outreach matrix inventory plus bundle doc compose (vocabulary-layer, HTOL, three-wave template, client index); keep checklist gates, MCP YAML writes, and operational RDF graphs outside TIED authoritative core."
+  implementation_approach:
+    details:
+      - "LEAP matrix row-count satisfaction criterion to 17"
+      - "No new prompt-type skill"
+      - "§2 row 17 agent-draft mechanism cells"
+    summary: "Docs and bootstrap contract tests only."
+  rationale:
+    benefits:
+      - "Explicit proof boundary for Netflix-reported metrics"
+    problems_solved:
+      - "Conflating ops KG with REQ traceability"
+    why: "Compose-don't-replace per Netflix × TIED analysis."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+      - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  traceability:
+    implementation:
+      - "IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    requirements:
+      - "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"

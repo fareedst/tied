@@ -1,0 +1,105 @@
+CITDP-REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  change_definition:
+    current_behavior: "Netflix ontology comparison Waves 1–2 are outreach-only; Wave 3 phased items (sibling backlinks complete, vocabulary-layer cross-link, HTOL cite, methodology-composition-matrix §2 row) are Defer; matrix has 16 §2 rows with no Netflix operational-ontology inventory row; HTOL source studies cite LangChain/Cursor only; uncommitted Wave 1–2 artifacts on disk."
+    desired_behavior: "REQ-tracked Wave 3 doc-compose: add §2 row 17 for Netflix ontology-driven observability (agent-draft mechanism cells), vocabulary-layer operational-identity vs meaning-ownership subsection with Heimsbakk+Netflix pair-read, HTOL Netflix source-study markers, complete sibling reciprocals (LangChain, Anthropic FV, tied-vs-well-known), external three-wave worked example + client-development-index cross-ref, mark Netflix comparison Wave 3 phases Implemented, LEAP matrix SC-MCM-DOC to 17 rows—no QuipuDB/SPARQL/AutoRCA in TIED core and no new prompt-type skill."
+    methodology_surface_change_class: "none"
+    non_goals:
+      - "QuipuDB, production SPARQL graph, or AutoRCA as TIED methodology core"
+      - "Minting REQ from Netflix comparison prose bodies"
+      - "New prompt-type skill or PROMPT_TYPE_LEAF_IDS changes"
+      - "Client observability ontology or MELT integrations"
+      - "tied-project/vocab RECORD for operational_identity unless separate costly scope"
+      - "Claiming Netflix SEV-2 or RCA metrics as TIED effectiveness"
+    success_criteria:
+      - "methodology-composition-matrix-netflix-row.test.mjs green with §2 row 17"
+      - "harness-trace-observation-loop-doc.test.mjs includes Netflix markers"
+      - "vocabulary-layer-tied-leap-citdp.md operational identity subsection"
+      - "Sibling reciprocals and Netflix phased table Updated"
+      - "pre_implementation and verification gate receipts; tied_validate_consistency after implement"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC updated to 17 §2 rows"
+    unchanged_behavior: "Checklist gate authority; HTOL Loop 2 capture semantics; harness skills unchanged."
+  evidence:
+    command_seq:
+      - "node --test tools/bootstrap/lib/methodology-composition-matrix-netflix-row.test.mjs"
+      - "node --test tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
+      - "pseudocode_validate IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3 gate_mode"
+      - "tied_checklist_gate_validate phase pre_implementation"
+    manifest_reference: null
+    proof_boundaries:
+      - "netflix_reported_metrics_not_tied_verify_outcomes"
+      - "matrix_row_structure_not_operational_equivalence_with_netflix"
+      - "htol_compose_not_autorco_substitute"
+  impact_analysis:
+    impl_inventory_notes: "docs/comparisons methodology-composition-matrix.md + netflix comparison + langchain/anthropic/well-known backlinks; tied-bundle/docs vocabulary-layer, HTOL, external-three-wave template, client-development-index; bootstrap doc tests; LEAP on REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX; optional Wave 1–2 git close-out."
+    modules_or_boundaries: "Outreach markdown and bundle docs only; no new MCP gate tools."
+    tied_tokens_affected:
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+    tied_tokens_new:
+      - "ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+      - "IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+      - "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+  leap_feedback:
+    divergences_from_analysis: null
+    record_status: "complete"
+    tied_stack_updates_required:
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC row count 17"
+  persist_policy: "Persist CITDP at refine-plan; record_status complete after implement persist-citdp-record"
+  record_identity:
+    change_request_id: "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-07"
+    title: "Netflix ontology observability Wave 3 (matrix row 17 + doc compose)"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    abuse_cases:
+      - "Matrix row 17 cited as proof TIED operates QuipuDB or AutoRCA-class systems"
+      - "Comparison prose treated as authority to mint YAML without MCP/checklist"
+      - "Netflix SEV-2 or RCA metrics imported into gate receipts"
+      - "HTOL Netflix cite implies operational graph replaces PRELOAD vocab discipline"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "vocabulary-layer subsection claims OWL/SPARQL as TIED SoT"
+        - "Row 17 sponsor_notes omit Netflix-reported label"
+      depth_change_waiver: null
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Doc edits add MCP tool that writes project YAML from incident graph"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "/Users/fareed/.cursor/plans/netflix_wave_3_add-feature_11e315ad.plan.md"
+        - "docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md"
+        - "tied-project/working/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3/PLAN.md"
+      falsification_questions:
+        - "Does row 17 keep QuipuDB/AutoRCA in Defer vocabulary?"
+        - "Do bundle docs still route costly behavior change through add-feature/build-plan?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Docs-first matrix row + bundle cross-links; no auth/network; minimal/advisory."
+      research_profile: "read-only"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "Bootstrap doc contract tests"
+        evidence_method: "RED/GREEN per test-strategy.md"
+        limitation: "Does not measure whether Netflix-inspired PRELOAD improves client RCA"
+        owner: "agent"
+        rationale: "Wave 3 full-optional doc compose with compose-don't-replace boundary"
+  test_strategy:
+    documentation_only: false
+    mandatory_order: "RED matrix + HTOL marker tests before markdown GREEN"
+    path: "tied-project/working/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3/test-strategy.md"
+    unit_tests:
+      - "tools/bootstrap/lib/methodology-composition-matrix-netflix-row.test.mjs"
+      - "tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
+    verification_command_seq:
+      - "tied_validate_consistency"

@@ -555,19 +555,6 @@ ARCH-LEAP_PROPOSAL_QUEUE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
-ARCH-MCP_SERVER_INFO:
-  cross_references:
-    - "IMPL-MCP_SERVER_INFO"
-    - "REQ-MCP_SERVER_INFO"
-  description: "server-info module plus structuredContent outputSchema for MCP preflight"
-  detail_file: "architecture-decisions/ARCH-MCP_SERVER_INFO.yaml"
-  metadata:
-    last_updated: "2026-11-06T00:00:00.000Z"
-    registered: "2026-11-06T00:00:00.000Z"
-  name: "MCP server_info introspection architecture"
-  source_index: "architecture-decisions.yaml"
-  status: "Accepted"
-  type: "ARCH"
 ARCH-MCP_HTTPS_REMOTE_TRANSPORT:
   cross_references:
     - "IMPL-MCP_HTTP_SERVER"
@@ -579,6 +566,19 @@ ARCH-MCP_HTTPS_REMOTE_TRANSPORT:
     last_updated: "2026-11-06T00:00:00.000Z"
     registered: "2026-11-06T00:00:00.000Z"
   name: "MCP HTTPS remote Streamable HTTP transport"
+  source_index: "architecture-decisions.yaml"
+  status: "Accepted"
+  type: "ARCH"
+ARCH-MCP_SERVER_INFO:
+  cross_references:
+    - "IMPL-MCP_SERVER_INFO"
+    - "REQ-MCP_SERVER_INFO"
+  description: "server-info module plus structuredContent outputSchema for MCP preflight"
+  detail_file: "architecture-decisions/ARCH-MCP_SERVER_INFO.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP server_info introspection architecture"
   source_index: "architecture-decisions.yaml"
   status: "Accepted"
   type: "ARCH"
@@ -1240,6 +1240,15 @@ ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
 ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND:
   description: "server_info extensions namespace for methodology semver"
   type: "architecture"
+ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  cross_references:
+    - "IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    - "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+  description: "Netflix Wave 3 doc-compose architecture"
+  detail_file: "architecture-decisions/ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-07"
+    registered: "2026-11-07"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
@@ -2131,6 +2140,19 @@ IMPL-MCP_FEEDBACK_TOOLS:
   source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
+IMPL-MCP_HTTP_SERVER:
+  cross_references:
+    - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
+    - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+  description: "tied-mcp-server-factory, mcp-http-server, http-entry, bearer and bind guards"
+  detail_file: "implementation-decisions/IMPL-MCP_HTTP_SERVER.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP Streamable HTTP server implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   cross_references:
     - "ARCH-LEAP_PROPOSAL_QUEUE"
@@ -2156,19 +2178,6 @@ IMPL-MCP_SERVER_INFO:
   name: "MCP server_info tool implementation"
   source_index: "implementation-decisions.yaml"
   status: "Implemented"
-  type: "IMPL"
-IMPL-MCP_HTTP_SERVER:
-  cross_references:
-    - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
-    - "REQ-MCP_HTTPS_REMOTE_ACCESS"
-  description: "tied-mcp-server-factory, mcp-http-server, http-entry, bearer and bind guards"
-  detail_file: "implementation-decisions/IMPL-MCP_HTTP_SERVER.yaml"
-  metadata:
-    last_updated: "2026-11-06T00:00:00.000Z"
-    registered: "2026-11-06T00:00:00.000Z"
-  name: "MCP Streamable HTTP server implementation"
-  source_index: "implementation-decisions.yaml"
-  status: "Active"
   type: "IMPL"
 IMPL-MCP_STDIO_CONSOLE_GUARD:
   cross_references:
@@ -3087,6 +3096,15 @@ IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
 IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND:
   description: "Resolver, server_info extension, loader and W7 updates"
   type: "implementation"
+IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  cross_references:
+    - "ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    - "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+  description: "Netflix Wave 3 implementation slices"
+  detail_file: "implementation-decisions/IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-07"
+    registered: "2026-11-07"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
     - "ARCH-TIED_NEW_CLIENT_ADHERENCE"
@@ -4383,20 +4401,6 @@ REQ-LEAP_PROPOSAL_QUEUE:
   source_index: "requirements.yaml"
   status: "Active"
   type: "REQ"
-REQ-MCP_SERVER_INFO:
-  category: "Functional"
-  cross_references:
-    - "ARCH-MCP_SERVER_INFO"
-    - "IMPL-MCP_SERVER_INFO"
-  description: "Read-only server_info MCP tool returning contract v1 identity, compatibility, health, and redacted configuration summary"
-  detail_file: "requirements/REQ-MCP_SERVER_INFO.yaml"
-  metadata:
-    last_updated: "2026-11-06T00:00:00.000Z"
-    registered: "2026-11-06T00:00:00.000Z"
-  name: "MCP server_info read-only introspection"
-  source_index: "requirements.yaml"
-  status: "Implemented"
-  type: "REQ"
 REQ-MCP_HTTPS_REMOTE_ACCESS:
   category: "Functional"
   cross_references:
@@ -4411,6 +4415,20 @@ REQ-MCP_HTTPS_REMOTE_ACCESS:
   name: "MCP HTTPS remote access"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-MCP_SERVER_INFO:
+  category: "Functional"
+  cross_references:
+    - "ARCH-MCP_SERVER_INFO"
+    - "IMPL-MCP_SERVER_INFO"
+  description: "Read-only server_info MCP tool returning contract v1 identity, compatibility, health, and redacted configuration summary"
+  detail_file: "requirements/REQ-MCP_SERVER_INFO.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP server_info read-only introspection"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-MCP_STDIO_CONSOLE_GUARD:
   category: "Functional"
@@ -5102,6 +5120,15 @@ REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
 REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
   description: "Deprecate per-turn TIEDv stamp; expose semver via server_info extensions.tied.methodology"
   type: "requirement"
+REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  cross_references:
+    - "ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    - "IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+  description: "Netflix ontology observability Wave 3 doc compose and matrix row 17"
+  detail_file: "requirements/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml"
+  metadata:
+    last_updated: "2026-11-07"
+    registered: "2026-11-07"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "ARCH-TIED_NEW_CLIENT_ADHERENCE"

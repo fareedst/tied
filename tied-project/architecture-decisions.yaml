@@ -1351,13 +1351,13 @@ ARCH-LEAP_PROPOSAL_QUEUE:
     tests:
       - "leap-proposal-mcp.test.ts"
       - "leap-proposal-queue.test.ts"
-ARCH-MCP_SERVER_INFO:
-  detail_file: "architecture-decisions/ARCH-MCP_SERVER_INFO.yaml"
-  name: "MCP server_info introspection architecture"
-  status: "Accepted"
 ARCH-MCP_HTTPS_REMOTE_TRANSPORT:
   detail_file: "architecture-decisions/ARCH-MCP_HTTPS_REMOTE_TRANSPORT.yaml"
   name: "MCP HTTPS remote Streamable HTTP transport"
+  status: "Accepted"
+ARCH-MCP_SERVER_INFO:
+  detail_file: "architecture-decisions/ARCH-MCP_SERVER_INFO.yaml"
+  name: "MCP server_info introspection architecture"
   status: "Accepted"
 ARCH-MCP_STDIO_CONSOLE_GUARD:
   detail_file: "architecture-decisions/ARCH-MCP_STDIO_CONSOLE_GUARD.yaml"
@@ -2377,6 +2377,15 @@ ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND:
   detail_file: "architecture-decisions/ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND.yaml"
   name: "Methodology version on demand via server_info"
   status: "Accepted"
+ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  detail_file: "architecture-decisions/ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml"
+  name: "Netflix ontology observability Wave 3 architecture"
+  status: "Active"
+  traceability:
+    implementation:
+      - "IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    requirements:
+      - "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     architecture:

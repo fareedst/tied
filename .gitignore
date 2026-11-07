@@ -44,6 +44,8 @@ docs/comparisons/*
 !docs/comparisons/software-engineering-degree-vs-tied.md
 !docs/comparisons/persante-sdd-skills.md
 !docs/comparisons/persante-sdd-skills-vs-tied-agent-management.md
+!docs/comparisons/netflix-ontology-driven-observability.md
+!docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md

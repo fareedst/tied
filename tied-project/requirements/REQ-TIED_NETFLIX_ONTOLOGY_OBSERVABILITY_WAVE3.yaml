@@ -1,0 +1,36 @@
+REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  rationale:
+    benefits:
+      - "Inventory row distinct from LangChain trace and Cursor telemetry"
+      - "Pair-read Heimsbakk meaning + Netflix operational identity in bundle docs"
+    problems_solved:
+      - "Incomplete sibling reciprocals"
+      - "Netflix Wave 3 phased items Defer"
+      - "No §2 matrix row for operational ontology compose"
+    why: "Sponsor promoted full-optional Wave 3 from netflix-ontology-observability-vs-tied handoff after Waves 1–2."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+    related_to:
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  satisfaction_criteria:
+    - criterion: "HTOL guide Netflix source-study markers"
+      id: "SC-NF3-HTOL"
+      metric: "harness-trace-observation-loop-doc.test.mjs"
+    - criterion: "Netflix comparison phased table Phase 1–3 Implemented where applicable; sibling reciprocals"
+      id: "SC-NF3-COMPOSE"
+      metric: "Link audit"
+    - criterion: "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC 17 §2 rows"
+      id: "SC-NF3-MCM"
+      metric: "LEAP on MCM REQ at implement"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-NF3-TRACE"
+      metric: "tied_validate_consistency"
+    - criterion: "vocabulary-layer operational identity subsection with Netflix and Heimsbakk links"
+      id: "SC-NF3-VOCAB"
+      metric: "Matrix or HTOL doc test cross-assert"
+    - criterion: "§2 row 17 and 17-row contract"
+      id: "SC-NF3-MATRIX"
+      metric: "methodology-composition-matrix-netflix-row.test.mjs"

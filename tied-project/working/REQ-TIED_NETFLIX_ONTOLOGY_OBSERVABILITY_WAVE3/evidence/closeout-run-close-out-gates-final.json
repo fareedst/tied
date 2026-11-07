@@ -1,0 +1,29 @@
+{
+  "run_id": "close-out-netflix-wave3-2026-11-07",
+  "phase": "close_out",
+  "depth_tier": "minimal",
+  "merged_decision": {
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
+  },
+  "envelope": {
+    "path": "tied-project/working/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3/evidence/request-evidence-envelope.v1.json",
+    "blocking_gap_count": 0,
+    "advisory_gap_count": 0
+  },
+  "gate_receipt_persist": {
+    "path": "tied-bundle/working/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3/gates/close_out-2026-11-07T09-00-29-719Z.json",
+    "hash": "sha256:e7272c3b83f3925b62f1e2b88988d7525e62ed703a48e3a4e4b52e6868d9bcf1"
+  },
+  "quality_manifest": {
+    "path": "tied-project/working/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3/evidence/verification-evidence-manifest.v1.json"
+  },
+  "reconcile": {
+    "process_grade": {
+      "band": "B",
+      "gap_codes": ["thin_ledger"]
+    }
+  }
+}

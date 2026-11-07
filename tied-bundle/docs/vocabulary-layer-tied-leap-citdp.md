@@ -161,6 +161,20 @@ An ontology asks “what exists and what follows?”; VOCAB asks “when we say 
 
 ---
 
+## Operational identity vs meaning ownership (compose)
+
+External **operational identity** graphs (for example Netflix’s observability ontology and client ops knowledge graphs) answer “which entity instance is this in production?” **Meaning ownership** essays and client glossaries answer “what do we call this concept for humans and agents?” TIED’s vocabulary layer targets the second job in `tied-project/vocab/`; it does **not** substitute QuipuDB, SPARQL, or AutoRCA for checklist gates.
+
+| Lens | Question | TIED / vocab surface |
+| --- | --- | --- |
+| **Operational identity** | Do metrics, incidents, and services refer to the same entity? | Client ops KG — **Defer** in methodology core; harness analogy only (`tied-project/vocab/routing.md` PRELOAD) |
+| **Meaning ownership** | Who owns the preferred term across UI, YAML, and code? | `[PROC-VOCABULARY_INDEX]` RESOLVE/RECORD; federated glossaries |
+| **Harness context** | Did the agent PRELOAD before naming REQ/ARCH/IMPL? | **PRELOAD** routing; **Netflix-reported** failure class when agents hallucinate without vocab |
+
+**Pair-read (sponsor recommendation):** [Heimsbakk × TIED](../../docs/comparisons/veronika-heimsbakk-ai-generated-ontologies-vs-tied-agent-management.md) (essay / meaning) with [Netflix observability ontology × TIED](../../docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md) (operational graph compose). Matrix §2 **row 17** inventory: [methodology-composition-matrix.md](../../docs/comparisons/methodology-composition-matrix.md). Traceability: [REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3](../../tied-project/requirements/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml).
+
+---
+
 ## Where to read more
 
 - [Vocabulary index analysis and standards](vocabulary-index-analysis-and-standards.md) — corpus structure, governance, agent touchpoints

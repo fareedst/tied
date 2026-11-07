@@ -1,20 +1,20 @@
 REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
     category: "Functional"
-    description: "Sponsor-facing outreach artifact: one markdown matrix mapping QMM Loop 1/2/3 × well-known and QMM methods (§1, exactly 27 rows) plus Layer C adjacent frameworks (§2, exactly 15 rows). Prefill disposition, tied_center_of_gravity, and evidence_refs from existing comparison docs; mechanism columns agent-drafted for sponsor review. Not ISO/CMMI certification or behavioral equivalence claims."
+    description: "Sponsor-facing outreach artifact: one markdown matrix mapping QMM Loop 1/2/3 × well-known and QMM methods (§1, exactly 27 rows) plus Layer C adjacent frameworks (§2, exactly 17 rows). Prefill disposition, tied_center_of_gravity, and evidence_refs from existing comparison docs; mechanism columns agent-drafted for sponsor review. Not ISO/CMMI certification or behavioral equivalence claims."
     metadata:
       created:
         author: "build-plan"
         date: "2026-10-13"
       last_updated:
         author: "build-plan"
-        date: "2026-10-26"
-        reason: "§2 row 16 Anthropic FV formal-methods compose (REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE)"
+        date: "2026-11-07"
+        reason: "§2 row 17 Netflix ontology observability compose (REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3)"
     name: "Methodology composition matrix"
     priority: "P2"
     rationale:
       benefits:
-        - "Single auditable 27+11 row matrix"
+        - "Single auditable 27+17 row matrix"
         - "Traceable docs-only REQ for outreach maintenance"
       problems_solved:
         - "No row-level inventory contract for sponsor mechanism fill-in"
@@ -32,7 +32,7 @@ REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
       - criterion: "Cross-links from tied-vs-well-known-methodologies.md and qmm-kaizen-vs-tied.md resolve to the new matrix."
         id: "SC-MCM-LINKS"
         metric: "Relative link check from docs/comparisons/"
-      - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 16 data rows."
+      - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 17 data rows."
         id: "SC-MCM-DOC"
         metric: "Row inventory script or manual count per working PLAN"
       - criterion: "Project REQ/ARCH/IMPL tokens registered; tied_validate_consistency passes for project YAML."

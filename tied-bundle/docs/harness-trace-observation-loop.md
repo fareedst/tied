@@ -6,7 +6,7 @@
 
 **Invoke skill:** `@harness-trace-review` (`tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md`; installed under `.cursor/skills/harness-trace-review/`).
 
-**Source studies:** [LangChain harness engineering × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) (trace/benchmark compose); [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md) (online metrics / Keep Rate compose — **Cursor-reported** only).
+**Source studies:** [LangChain harness engineering × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) (trace/benchmark compose); [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md) (online metrics / Keep Rate compose — **Cursor-reported** only); [Netflix observability ontology × TIED](../../docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md) (operational identity graph compose — **Netflix-reported** only).
 
 ---
 
@@ -83,6 +83,20 @@ Vendor benchmark scores remain **LangChain-reported** / **`not_measured`** for T
 
 ---
 
+## Source studies (Netflix compose)
+
+Netflix’s **ontology-driven observability** narrative (operational identity graph, enrichers, correlation engine) is a **client ops** pattern—not TIED’s authoritative REQ/ARCH/IMPL graph. This section records a **compose** failure class for harness sessions: agents acting without **PRELOAD** / shared vocabulary can mis-name entities even when production telemetry is rich.
+
+| Failure class | Harness signal | TIED compose response | Not TIED core |
+| --- | --- | --- | --- |
+| **Missing PRELOAD** | Agent invents entity names; YAML drift | Route through `tied-project/vocab/routing.md`; RESOLVE before mint | SPARQL graph as SoT |
+| **Metric overclaim** | Netflix SEV/RCA % cited as gate pass | Label **Netflix-reported** / **`not_measured`**; Kaizen capture only | AutoRCA as checklist substitute |
+| **Ops graph smear** | Comparison prose mints REQ | **`add-feature`** / **`build-plan`** only | QuipuDB product in bundle |
+
+**Primary study:** [netflix-ontology-driven-observability-vs-tied-agent-management.md](../../docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md). **REQ trace:** [REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3](../../tied-project/requirements/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml). Pair **matrix rows 14–15** (trace harness) with **row 17** (operational identity compose).
+
+---
+
 ## Optional LangSmith client compose
 
 When the operator already uses LangSmith, **`@harness-trace-langsmith-compose`** documents an **opt-in** export path:
@@ -123,10 +137,11 @@ When a sponsor scopes **HTOL effectiveness** (not just Loop 2 capture), use the 
 ## Related documents
 
 - [LangChain harness engineering × TIED — Phases 1–3](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md#phased-recommendations-doc-first)
+- [Netflix observability ontology × TIED — Wave 3](../../docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md#phased-recommendations-doc-first)
 - [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md)
 - [Traefik harness/platform × TIED](../../docs/comparisons/traefik-harness-platform-vs-tied-agent-management.md)
 - [Client development index](client-development-index.md)
 - [Feedback to TIED (vocab)](../../tied-project/vocab/feedback-to-tied.md)
 - [Agentstream README](../../mcp-server/packages/agentstream/README.md)
 
-**Last updated:** 2026-10-21
+**Last updated:** 2026-11-07

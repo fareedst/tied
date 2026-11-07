@@ -21,13 +21,13 @@ function countSection2DataRows(text) {
 }
 
 describe("methodology composition matrix Anthropic FV row [REQ-TIED_TESTS_CHECKER_CLAIM_COMPOSE]", () => {
-  it("has exactly 16 §2 data rows including formal verification compose row 16", () => {
+  it("has exactly 17 §2 data rows including formal verification compose row 16", () => {
     assert.ok(fs.existsSync(matrixPath), `missing matrix: ${matrixPath}`);
     const text = fs.readFileSync(matrixPath, "utf8");
-    assert.match(text, /§2 \*\*16\*\* rows/);
-    assert.match(text, /exactly \*\*16\*\* data rows/);
+    assert.match(text, /§2 \*\*17\*\* rows/);
+    assert.match(text, /exactly \*\*17\*\* data rows/);
     const rowNumbers = countSection2DataRows(text);
-    assert.deepEqual(rowNumbers, Array.from({ length: 16 }, (_, i) => i + 1));
+    assert.deepEqual(rowNumbers, Array.from({ length: 17 }, (_, i) => i + 1));
     const section2Start = text.indexOf("## §2 — Layer C adjacent frameworks");
     const section3Start = text.indexOf("## §3 — Sponsor fill-in checklist");
     const section2 = text.slice(section2Start, section3Start);

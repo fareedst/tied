@@ -26,6 +26,9 @@ const REQUIRED_MARKERS = [
   "## Optional LangSmith client compose",
   "tied_feedback_capture_observation",
   "model self-check",
+  "## Source studies (Netflix compose)",
+  "netflix-ontology-driven-observability-vs-tied-agent-management.md",
+  "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3",
 ];
 
 describe("harness trace observation loop guide [REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP]", () => {

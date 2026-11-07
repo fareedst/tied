@@ -1566,17 +1566,6 @@ REQ-LEAP_PROPOSAL_QUEUE:
       method: "Manual or MCP client"
     - coverage: "leap-proposal-queue module and schema strings"
       method: "Unit tests"
-REQ-MCP_SERVER_INFO:
-  category: "Functional"
-  cross_references:
-    architecture_decisions:
-      - "ARCH-MCP_SERVER_INFO"
-    implementation_decisions:
-      - "IMPL-MCP_SERVER_INFO"
-  detail_file: "requirements/REQ-MCP_SERVER_INFO.yaml"
-  name: "MCP server_info read-only introspection"
-  priority: "P2"
-  status: "Implemented"
 REQ-MCP_HTTPS_REMOTE_ACCESS:
   category: "Functional"
   cross_references:
@@ -1587,6 +1576,17 @@ REQ-MCP_HTTPS_REMOTE_ACCESS:
       - "IMPL-TIED_CLI_HTTP_TRANSPORT"
   detail_file: "requirements/REQ-MCP_HTTPS_REMOTE_ACCESS.yaml"
   name: "MCP HTTPS remote access"
+  priority: "P2"
+  status: "Implemented"
+REQ-MCP_SERVER_INFO:
+  category: "Functional"
+  cross_references:
+    architecture_decisions:
+      - "ARCH-MCP_SERVER_INFO"
+    implementation_decisions:
+      - "IMPL-MCP_SERVER_INFO"
+  detail_file: "requirements/REQ-MCP_SERVER_INFO.yaml"
+  name: "MCP server_info read-only introspection"
   priority: "P2"
   status: "Implemented"
 REQ-MCP_STDIO_CONSOLE_GUARD:
@@ -3241,6 +3241,18 @@ REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
   name: "Methodology semver on demand via server_info"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3:
+  category: "Methodology"
+  description: "Netflix ontology-driven observability comparison Wave 3: methodology-composition-matrix §2 row 17, vocabulary-layer operational-identity cross-link, HTOL source-study cite, sibling back-links, and external three-wave worked example—doc-compose only; no QuipuDB/SPARQL/AutoRCA as TIED core."
+  detail_file: "requirements/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml"
+  name: "Netflix ontology observability Wave 3 (matrix row + doc compose)"
+  priority: "P2"
+  status: "Planned"
+  traceability:
+    architecture:
+      - "ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
+    implementation:
+      - "IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   category: "Functional"
   cross_references:

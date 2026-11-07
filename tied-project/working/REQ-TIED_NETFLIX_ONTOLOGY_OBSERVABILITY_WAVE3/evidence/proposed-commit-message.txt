@@ -1,0 +1,19 @@
+docs(netflix): Wave 3 observability compose — matrix row 17
+
+Netflix comparison Wave 3 doc-compose: methodology-composition-matrix §2 row
+17, vocabulary-layer operational-identity subsection, HTOL Netflix source
+study, sibling reciprocals, three-wave template worked example, bootstrap
+contract tests — compose-only (no QuipuDB/SPARQL/AutoRCA in TIED core).
+
+REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3
+ARCH-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3
+IMPL-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3
+REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX (SC-MCM-DOC 17 rows)
+
+Completion signals: machine close-out pass (close_out gate +
+envelope blocking_gap_count=0); process contract pass (manifest present);
+adherence reconcile band B (thin_ledger advisory).
+
+Upstream feedback capture: N/A — no Kaizen promotion this wave.
+
+Staging map: evidence/git-hygiene-receipt-2026-11-07.md
