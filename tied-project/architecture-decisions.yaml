@@ -1351,6 +1351,10 @@ ARCH-LEAP_PROPOSAL_QUEUE:
     tests:
       - "leap-proposal-mcp.test.ts"
       - "leap-proposal-queue.test.ts"
+ARCH-MCP_SERVER_INFO:
+  detail_file: "architecture-decisions/ARCH-MCP_SERVER_INFO.yaml"
+  name: "MCP server_info introspection architecture"
+  status: "Accepted"
 ARCH-MCP_STDIO_CONSOLE_GUARD:
   detail_file: "architecture-decisions/ARCH-MCP_STDIO_CONSOLE_GUARD.yaml"
   name: "MCP stdio console guard architecture"

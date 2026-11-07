@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **MCP `server_info` ([REQ-MCP_SERVER_INFO], [ARCH-MCP_SERVER_INFO], [IMPL-MCP_SERVER_INFO])** — Read-only core-profile tool returning contract v1 identity, compatibility, redacted configuration, runtime, and health with `structuredContent` plus JSON text; reusable `mcp-server/src/server-info/` module and `mcp-server/contracts/server_info/`. Tests: `server-info.test.ts`, full `npm test`. Close-out `close-out-req-mcp-server-info-2026-11-06` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).
+
 ### Fixed
 
 - **Linked client adherence reconcile (S4 [REQ-TIED_CLIENT_OPERATOR_TOOLING])** — `tied_adherence_reconcile_run` resolves `@tied/agentstream` from the **TIED store** (MCP module self-anchor, `TIED_STORE_ROOT`, client `mcp.json` introspection) instead of requiring `mcp-server/` under the client tree; subprocess `cwd` is client `workspace`. `run-close-out-gates --reconcile` no longer passes client `repo_root` for store lookup; `tied-post-session.sh` uses TS agentstream dist instead of removed Go `adherence-reconcile`. Tests: `adherence-reconcile-resolve.test.ts`.

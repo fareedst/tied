@@ -1,0 +1,40 @@
+REQ-MCP_SERVER_INFO:
+  category: "Functional"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-06"
+      reason: "Initial server_info MCP tool"
+  name: "MCP server_info read-only introspection"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Agent preflight: identity, compatibility, health without ad-hoc config tool composition"
+      - "Reusable server-info module for future stdio entries"
+      - "Versioned structuredContent for evidence capture"
+    problems_solved:
+      - "Agents cannot distinguish transport connectivity from corpus readiness"
+      - "No single read-only snapshot for server readiness and tool-surface compatibility"
+    why: "Operators and agents need a low-overhead, schema-stable server_info tool that supplements MCP discovery without exposing secrets or duplicating tools/list."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_CONFIG_REPORT"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-MCP_USAGE_METRICS"
+      - "REQ-TIED_RUNTIME_DISK_CONFIG"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Complements tied_config_get_base_path and tied_config_report without deprecation"
+      metric: "README and tool descriptions cross-link"
+    - criterion: "Configuration summary never exposes secrets catalog values"
+      metric: "server-info.test.ts redaction assert"
+    - criterion: "Response validates against server_info.response.schema.json"
+      metric: "Ajv conformance in server-info.test.ts"
+    - criterion: "server_info is registered in core tool profile and returns contract v1 payload"
+      metric: "server-info.test.ts and tool-profile-stdio.test.ts pass"
+    - criterion: "supported_operations includes read, validate, write, verify"
+      metric: "builder constants and snapshot test"

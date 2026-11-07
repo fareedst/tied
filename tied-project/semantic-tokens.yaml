@@ -555,6 +555,19 @@ ARCH-LEAP_PROPOSAL_QUEUE:
   source_index: "architecture-decisions.yaml"
   status: "Active"
   type: "ARCH"
+ARCH-MCP_SERVER_INFO:
+  cross_references:
+    - "IMPL-MCP_SERVER_INFO"
+    - "REQ-MCP_SERVER_INFO"
+  description: "server-info module plus structuredContent outputSchema for MCP preflight"
+  detail_file: "architecture-decisions/ARCH-MCP_SERVER_INFO.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP server_info introspection architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Accepted"
+  type: "ARCH"
 ARCH-MCP_STDIO_CONSOLE_GUARD:
   cross_references:
     - "IMPL-MCP_STDIO_CONSOLE_GUARD"
@@ -2102,6 +2115,19 @@ IMPL-MCP_LEAP_PROPOSAL_QUEUE:
   name: "MCP LEAP proposal queue tools and module"
   source_index: "implementation-decisions.yaml"
   status: "Active"
+  type: "IMPL"
+IMPL-MCP_SERVER_INFO:
+  cross_references:
+    - "ARCH-MCP_SERVER_INFO"
+    - "REQ-MCP_SERVER_INFO"
+  description: "buildServerInfoSnapshot and handleServerInfoTool implementation"
+  detail_file: "implementation-decisions/IMPL-MCP_SERVER_INFO.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP server_info tool implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Implemented"
   type: "IMPL"
 IMPL-MCP_STDIO_CONSOLE_GUARD:
   cross_references:
@@ -4288,6 +4314,20 @@ REQ-LEAP_PROPOSAL_QUEUE:
   name: "Optional LEAP proposal queue with human review"
   source_index: "requirements.yaml"
   status: "Active"
+  type: "REQ"
+REQ-MCP_SERVER_INFO:
+  category: "Functional"
+  cross_references:
+    - "ARCH-MCP_SERVER_INFO"
+    - "IMPL-MCP_SERVER_INFO"
+  description: "Read-only server_info MCP tool returning contract v1 identity, compatibility, health, and redacted configuration summary"
+  detail_file: "requirements/REQ-MCP_SERVER_INFO.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP server_info read-only introspection"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-MCP_STDIO_CONSOLE_GUARD:
   category: "Functional"

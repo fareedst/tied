@@ -17,6 +17,7 @@ import {
   selectToolsForProfile,
   shouldRegisterResources,
 } from "./tool-profiles.js";
+import { setServerInfoRuntimeContext } from "./server-info/runtime-context.js";
 
 let profile: ReturnType<typeof resolveToolProfile>;
 try {
@@ -31,6 +32,13 @@ try {
 
 type RegisteredTool = (typeof allTools)[number];
 const activeTools: RegisteredTool[] = selectToolsForProfile(allTools, profile);
+
+setServerInfoRuntimeContext({
+  implementation: { name: "tied-yaml", version: "1.0.0" },
+  toolProfile: profile,
+  activeToolCount: activeTools.length,
+  resourcesRegistered: shouldRegisterResources(profile),
+});
 
 if (process.env.TIED_MCP_DIAGNOSTICS?.trim()) {
   console.error(`DIAGNOSTIC: TIED_MCP_TOOL_PROFILE=${profile} tools=${activeTools.length}`);
@@ -58,7 +66,7 @@ for (const tool of activeTools) {
   server.registerTool(
     tool.name,
     tool.config,
-    handler as (args: unknown) => Promise<{ content: Array<{ type: "text"; text: string }> }>,
+    handler as (args: unknown) => Promise<import("./types.js").McpToolResult>,
   );
 }
 

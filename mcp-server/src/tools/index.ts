@@ -75,6 +75,7 @@ import {
 } from "@tied/checklist-resume/checklist-controller-resume.js";
 import { applyYamlUpdates, parseYamlUpdateSteps } from "../yaml-updates-apply.js";
 import { formatYamlMetadata } from "../yaml-canonicalizer.js";
+import { handleServerInfoTool } from "../server-info/tool-handler.js";
 import {
   reportStylingEvidence,
   runClientFormatterHook,
@@ -408,6 +409,22 @@ export const allTools = [
       });
       return textContent(prettyCanonicalJson(report));
     },
+  },
+  {
+    name: "server_info",
+    config: {
+      description:
+        "Read-only server identity, compatibility, configuration summary, runtime, and health per server_info response contract v1. Complements MCP discovery and existing tied_config_get_base_path / tied_config_report tools (no secrets). Returns structuredContent plus JSON text.",
+      inputSchema: z.object({}),
+      // Normative contract: mcp-server/contracts/server_info/server_info.response.schema.json (Ajv in tests).
+      // MCP SDK requires Zod here; strict JSON Schema validation is test-gated.
+      outputSchema: z.record(z.string(), z.unknown()),
+      annotations: {
+        readOnlyHint: true,
+        destructiveHint: false,
+      },
+    },
+    handler: async () => handleServerInfoTool(),
   },
   {
     name: "tied_config_get_base_path",

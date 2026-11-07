@@ -56,6 +56,7 @@ const MAX_STRING_LEN = 200;
 
 export type ToolHandlerResult = {
   content: Array<{ type: string; text?: string }>;
+  structuredContent?: Record<string, unknown>;
   isError?: boolean;
 };
 

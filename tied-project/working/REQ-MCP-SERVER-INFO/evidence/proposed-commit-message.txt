@@ -1,0 +1,7 @@
+feat(mcp): add server_info read-only introspection tool
+
+REQ-MCP_SERVER_INFO: core-profile server_info with contract v1,
+structuredContent, and reusable server-info builder. Tests via npm test.
+Close-out run close-out-req-mcp-server-info-2026-11-06 (gate + envelope pass).
+
+Tokens: REQ-MCP_SERVER_INFO, ARCH-MCP_SERVER_INFO, IMPL-MCP_SERVER_INFO

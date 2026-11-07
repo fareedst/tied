@@ -1,0 +1,41 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "run_id": "close-out-req-mcp-server-info-2026-11-06",
+  "commit": null,
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "covered_tokens": [
+    "REQ-MCP_SERVER_INFO",
+    "ARCH-MCP_SERVER_INFO",
+    "IMPL-MCP_SERVER_INFO",
+    "REQ-TIED_CONFIG_REPORT",
+    "REQ-MCP_USAGE_METRICS"
+  ],
+  "proof_boundaries": ["command result only"],
+  "human_decisions": {
+    "stored_separately": true,
+    "references": []
+  },
+  "quality_rows": [
+    {
+      "id": "baseline-functional",
+      "attribute": "baseline-functional",
+      "applicability": "applicable",
+      "evidence_method": "command",
+      "result": "passed",
+      "rationale": "CITDP minimal depth"
+    }
+  ],
+  "command_results": [
+    {
+      "id": "citdp-evidence-1",
+      "command": ["bash", "-lc", "cd mcp-server && npm test"],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "exit_code": 0,
+      "result": "passed",
+      "duration_ms": 39115,
+      "artifacts": []
+    }
+  ]
+}

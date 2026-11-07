@@ -1,0 +1,21 @@
+ARCH-MCP_SERVER_INFO:
+  cross_references:
+    - "IMPL-MCP_SERVER_INFO"
+    - "REQ-MCP_SERVER_INFO"
+  detail_file: "architecture-decisions/ARCH-MCP_SERVER_INFO.yaml"
+  implementation_approach:
+    details:
+      - "Configuration slice from tied-config-report builder with redaction policy"
+      - "First tool using outputSchema plus structuredContent; text JSON mirror for legacy clients"
+      - "Health state authoritative; checks include writable_corpus and identity_binding"
+      - "MCP-agnostic mcp-server/src/server-info/* builder; tied-yaml stdio wires runtime context at startup"
+    summary: "Separate server-info module from MCP adapter; core-profile server_info tool with JSON Schema output validation"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+  rationale:
+    decision: "Add server_info as core read-only tool with committed JSON Schema contract under mcp-server/contracts/server_info/"
+    drivers:
+      - "Agent preflight and evidence capture"
+      - "Extensibility for tied-yaml-optin without duplicating builder logic"

@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-06T16:00:00Z",
+  "server": {
+    "name": "tied-yaml",
+    "version": "1.0.0",
+    "build_commit": null,
+    "build_time": null
+  },
+  "compatibility": {
+    "mcp_protocol_version": "2025-11-25",
+    "supported_mcp_protocol_versions": ["2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"],
+    "tool_contract_version": "1.0.0",
+    "api_schema_version": "tied-yaml-canonical-v1",
+    "intent_schema_version": null,
+    "database_schema_version": null,
+    "minimum_client_version": null,
+    "supported_operations": ["read", "validate", "write", "verify"]
+  },
+  "configuration": {
+    "schema_version": "tied-config-report.v1",
+    "revision": null,
+    "environment": "client",
+    "operating_mode": "normal",
+    "storage_backend": "filesystem"
+  },
+  "runtime": {
+    "instance_id": "example-7d1",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "started_at": "2026-11-06T08:00:00Z",
+    "uptime_seconds": 28800
+  },
+  "health": {
+    "state": "ready",
+    "checks": [
+      {
+        "id": "writable_corpus",
+        "status": "ok",
+        "required": true,
+        "observed_at": "2026-11-06T16:00:00Z"
+      },
+      {
+        "id": "identity_binding",
+        "status": "ok",
+        "required": true,
+        "observed_at": "2026-11-06T16:00:00Z"
+      }
+    ]
+  },
+  "features": {
+    "yaml_io": "enabled",
+    "consistency_validation": "enabled",
+    "usage_metrics": "disabled",
+    "mcp_resources": "enabled"
+  },
+  "extensions": {}
+}

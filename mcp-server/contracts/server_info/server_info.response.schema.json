@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MCP server_info response contract, major version 1",
+  "description": "Application-defined outputSchema for a read-only MCP server_info tool. This is not a standard MCP response payload.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "server",
+    "compatibility",
+    "configuration",
+    "runtime",
+    "health",
+    "features",
+    "extensions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "description": "Version of this response contract, not the MCP protocol or server application."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 snapshot time, preferably UTC."
+    },
+    "server": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "build_commit": { "type": ["string", "null"], "minLength": 1 },
+        "build_time": { "type": ["string", "null"], "format": "date-time" }
+      },
+      "required": ["name", "version"],
+      "additionalProperties": false
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "mcp_protocol_version": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "supported_mcp_protocol_versions": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "tool_contract_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+        },
+        "api_schema_version": { "type": ["string", "null"], "minLength": 1 },
+        "intent_schema_version": { "type": ["string", "null"], "minLength": 1 },
+        "database_schema_version": { "type": ["string", "null"], "minLength": 1 },
+        "minimum_client_version": { "type": ["string", "null"], "minLength": 1 },
+        "supported_operations": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z][a-z0-9_.-]*$" },
+          "uniqueItems": true
+        }
+      },
+      "required": ["mcp_protocol_version", "tool_contract_version"],
+      "additionalProperties": false
+    },
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "schema_version": { "type": ["string", "null"], "minLength": 1 },
+        "revision": { "type": ["string", "null"], "minLength": 1 },
+        "environment": { "type": ["string", "null"], "minLength": 1 },
+        "operating_mode": { "type": ["string", "null"], "minLength": 1 },
+        "storage_backend": { "type": ["string", "null"], "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "runtime": {
+      "type": "object",
+      "properties": {
+        "instance_id": { "type": ["string", "null"], "minLength": 1 },
+        "platform": { "type": ["string", "null"], "minLength": 1 },
+        "architecture": { "type": ["string", "null"], "minLength": 1 },
+        "started_at": { "type": ["string", "null"], "format": "date-time" },
+        "uptime_seconds": { "type": ["integer", "null"], "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "health": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": ["ready", "degraded", "unavailable", "unknown"]
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z][a-z0-9_.-]*$" },
+              "status": {
+                "type": "string",
+                "enum": ["ok", "degraded", "failed", "unknown", "not_applicable"]
+              },
+              "required": { "type": "boolean" },
+              "code": { "type": ["string", "null"], "minLength": 1 },
+              "message": { "type": ["string", "null"], "minLength": 1 },
+              "observed_at": { "type": ["string", "null"], "format": "date-time" }
+            },
+            "required": ["id", "status", "required"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["state", "checks"],
+      "additionalProperties": false
+    },
+    "features": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-z0-9_.-]*$": {
+          "type": "string",
+          "enum": ["enabled", "disabled", "unavailable", "unknown"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "diagnostics": {
+      "type": "object",
+      "properties": {
+        "pending_operations": { "type": ["integer", "null"], "minimum": 0 },
+        "active_errors": { "type": ["integer", "null"], "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "extensions": {
+      "type": "object",
+      "patternProperties": {
+        "^([a-z0-9-]+\\.)+[a-z0-9-]+$": { "type": "object" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

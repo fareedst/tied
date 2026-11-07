@@ -1,0 +1,21 @@
+IMPL-MCP_SERVER_INFO:
+  cross_references:
+    - "ARCH-MCP_SERVER_INFO"
+    - "REQ-MCP_SERVER_INFO"
+  detail_file: "implementation-decisions/IMPL-MCP_SERVER_INFO.yaml"
+  essence_pseudocode: "implementation-decisions/IMPL-MCP_SERVER_INFO-pseudocode.md"
+  implementation_approach:
+    details:
+      - "buildServerInfoSnapshot in server-info/build.ts"
+      - "handleServerInfoTool returns structuredToolResult"
+      - "setServerInfoRuntimeContext from index.ts before registerTool"
+    summary: "Builder plus thin MCP handler; schema loaded from contracts/"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-06"
+      reason: "Initial implementation"
+  status: "Active"
