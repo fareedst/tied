@@ -59,6 +59,7 @@
 | [`../docs/client-development-index.md`](../../tied-bundle/docs/client-development-index.md) | Minimal named set for CITDP + LEAP + TIED (Core seven, including domain vocabulary) |
 | [`../docs/vocabulary-index-analysis-and-standards.md`](../../tied-bundle/docs/vocabulary-index-analysis-and-standards.md) | Meta-standard for glossary structure and TIED integration |
 | [`../docs/vocabulary-layer-tied-leap-citdp.md`](../../tied-bundle/docs/vocabulary-layer-tied-leap-citdp.md) | Outreach: Vocab understanding vs TIED intent vs CITDP vs LEAP |
+| [`../../docs/tied-domain-vocabulary-architecture.md`](../../docs/tied-domain-vocabulary-architecture.md) | Outreach: corpus/partition architecture, stewardship, projections, merged-read skew |
 | [`../docs/tied-domain-vocabulary-research-prompt.md`](../../tied-bundle/docs/tied-domain-vocabulary-research-prompt.md) | Copy-paste agent prompt to author vocab corpora in client repos |
 | [`../docs/pseudocode-writing-and-validation.md`](../../tied-bundle/docs/pseudocode-writing-and-validation.md) | IMPL pseudo-code lifecycle (not domain term registry) |
 | [`../docs/implementation-decisions.md`](../../tied-bundle/docs/implementation-decisions.md) | IMPL grammar vocabulary (INPUT/OUTPUT/DATA/PRE/POST/EFFECTS/…) — distinct from domain vocab |

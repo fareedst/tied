@@ -90,6 +90,13 @@
 | **vocabulary merge mode** | overwrite vocab, vocab sync (alone) | `tied-install.sh --merge-vocab` refresh behavior that replaces methodology vocabulary while preserving client glossaries |
 | **vocabulary index validator** | vocab lint script, glossary checker | Layer-aware structural gate that checks methodology and client routing/catalog membership, glossary markers, links, and alphabetical-index definitions |
 | **vocabulary layer** | glossary-only documentation, terminology notes (alone) | Agent-control layer that resolves, preloads, records, and validates canonical domain terms across the TIED workflow; sponsor/agent/reviewer roles defined in [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) |
+| **canonical vocabulary corpus** | vocabulary catalog (for glossaries) | Glossary bodies in `tied-project/vocab/` ∪ `tied-bundle/vocab/`; outreach [`../../docs/tied-domain-vocabulary-architecture.md`](../../docs/tied-domain-vocabulary-architecture.md) |
+| **vocabulary directory** | whole catalog (for indices) | `routing.md` and `domain-references.md` index/dispatch the corpus without holding every definition |
+| **vocabulary partition** | split ownership (alone) | **Project zone** vs **methodology zone**; agents consume a merged read model |
+| **scoped vocabulary load** | PRELOAD filter (alone) | `[PROC-VOCABULARY_INDEX]` **PRELOAD**: **routing-selected glossary set** over the full corpus |
+| **vocabulary stewardship obligations** | touchpoint contracts, maintenance contracts | RESOLVE / PRELOAD / RECORD / VALIDATE keep the corpus and glossary-to-atom projections current |
+| **glossary-to-atom projections** | traceability extensions (alone) | **Glossary traceability blocks** link preferred terms to **registry atoms** and **distributed facets** |
+| **merged-read skew** | incongruous catalog (alone) | **Semantically inconsistent merged vocabulary view** when bundle ∪ project REQs or glossaries conflict, despite successful PRELOAD |
 | **agent-control layer** | agent guidance (alone), vocabulary policy (alone) | Peer control layer alongside semantic tokens and IMPL pseudo-code; owned by `[PROC-VOCABULARY_INDEX]`; sponsor/agent/reviewer roles defined in [`sponsor-agent-relationship.md`](sponsor-agent-relationship.md) |
 | **managed bootstrap artifact** | copied file, installed file (alone) | Canonical client artifact refreshed by `tied-install.sh` and checked for client edits before replacement |
 | **copy timestamp normalization** | artificial timestamp, fixed copy time | Apply the source item's local calendar-date midnight only to the managed client copy after `cp -p`/`cp -pR`; source mtimes remain unchanged |
@@ -280,6 +287,13 @@ Exact spellings for checklist and docs cross-reference:
 |------|---------|
 | AGENTS.md | Naming bridge |
 | agent-control layer | Preferred terms |
+| canonical vocabulary corpus | Preferred terms |
+| glossary-to-atom projections | Preferred terms |
+| merged-read skew | Preferred terms |
+| scoped vocabulary load | Preferred terms |
+| vocabulary directory | Preferred terms |
+| vocabulary partition | Preferred terms |
+| vocabulary stewardship obligations | Preferred terms |
 | atomized traceability graph | Preferred terms; Registry atoms and distributed facets |
 | declared facet | Preferred terms; Registry atoms and distributed facets |
 | distributed facet | Preferred terms; Registry atoms and distributed facets |
