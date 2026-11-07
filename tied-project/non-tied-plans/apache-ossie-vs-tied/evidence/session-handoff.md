@@ -16,8 +16,8 @@ Linked plan: [`../PLAN.md`](../PLAN.md).
 | --- | --- |
 | Plan | `tied-project/non-tied-plans/apache-ossie-vs-tied/PLAN.md` |
 | Test strategy | `tied-project/non-tied-plans/apache-ossie-vs-tied/test-strategy.md` |
-| Wave 1 capture | `docs/comparisons/apache-ossie.md` (gitignored) |
-| Wave 2 analysis | `docs/comparisons/apache-ossie-vs-tied-agent-management.md` (gitignored) |
+| Wave 1 capture | `docs/comparisons/apache-ossie.md` |
+| Wave 2 analysis | `docs/comparisons/apache-ossie-vs-tied-agent-management.md` |
 | Evaluation charter | `docs/tied-methodology-evaluation-framework.md` |
 | Source | https://github.com/apache/ossie |
 
@@ -37,7 +37,7 @@ Linked plan: [`../PLAN.md`](../PLAN.md).
 ### Optional
 
 - [x] `non-tied-close` — commit plan package only
-- [ ] `publish-allowlist` — `!docs/comparisons/apache-ossie*.md`
+- [x] `publish-allowlist` — `!docs/comparisons/apache-ossie*.md` + NVIDIA sibling cross-link
 - [ ] `validate-tpcds` — run `validation/validate.py` on TPC-DS example; log in capture Notes
 
 ### Recommendations
@@ -51,10 +51,11 @@ Linked plan: [`../PLAN.md`](../PLAN.md).
 - 2026-11-07 non-tied-refine: Plan package from sponsor link (evaluation framework + apache/ossie); Waves 1–2, static_only, Q1–Q6 executive contract.
 - 2026-11-07 non-tied-build: Wave 1 capture + Wave 2 analysis (gitignored); NVIDIA sibling cross-links.
 - 2026-11-07 non-tied-close: plan package committed (comparisons remain local-only).
+- 2026-11-07 traceable-commit: comparison markdown + allowlist + NVIDIA sibling cross-link.
 
 ## Finished this session
 
-- Plan package on main; Wave 1 + Wave 2 comparison docs on disk (gitignored).
+- Plan package and published comparison docs on main (`apache-ossie*.md` allowlist).
 
 ## Do next
 

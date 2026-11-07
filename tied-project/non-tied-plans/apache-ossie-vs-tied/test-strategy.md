@@ -37,11 +37,11 @@ No RED unit tests. Manual verification checklist for `@non-tied-build`.
 - [ ] Wave 1 **Analysis (sibling)** links Wave 2; NVIDIA **Distinct from** reciprocal line present
 - [ ] Business SoT vs delivery SoT discussed under Q3 compose only
 
-## Local-only git
+## Git publish (allowlisted)
 
-- [ ] `git check-ignore -v docs/comparisons/apache-ossie.md` shows ignored
-- [ ] `git check-ignore -v docs/comparisons/apache-ossie-vs-tied-agent-management.md` shows ignored
-- [ ] Plan folder committable on `@non-tied-close`
+- [ ] `git check-ignore -v docs/comparisons/apache-ossie.md` shows negated rule (tracked)
+- [ ] `git check-ignore -v docs/comparisons/apache-ossie-vs-tied-agent-management.md` shows negated rule (tracked)
+- [ ] Plan folder committable on `@non-tied-close` / traceable-commit
 
 ## Commands
 

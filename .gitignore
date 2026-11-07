@@ -46,6 +46,9 @@ docs/comparisons/*
 !docs/comparisons/persante-sdd-skills-vs-tied-agent-management.md
 !docs/comparisons/netflix-ontology-driven-observability.md
 !docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md
+!docs/comparisons/apache-ossie.md
+!docs/comparisons/apache-ossie-vs-tied-agent-management.md
+!docs/comparisons/nvidia-auto-ontology-vs-tied-agent-management.md
 docs/social/
 docs/visuals/visual-specs.md
 get-prompts.md
