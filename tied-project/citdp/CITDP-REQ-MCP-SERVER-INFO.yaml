@@ -57,19 +57,19 @@ CITDP-REQ-MCP-SERVER-INFO:
   risk_analysis:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
-      depth_tier: "minimal"
-      gate_policy: "advisory"
-      prior_depth_tier: null
       counterexamples:
-        - "server_info leaks JEV_API_KEY or connection strings"
         - "Health reports ready when writable corpus is missing"
+        - "server_info leaks JEV_API_KEY or connection strings"
+      depth_tier: "minimal"
       disconfirming_observations:
-        - "Redaction test asserts no secret keys in snapshot JSON"
         - "Corpus missing yields unavailable health state"
-      falsification_questions:
-        - "Does configuration mapping ever include secrets catalog values?"
+        - "Redaction test asserts no secret keys in snapshot JSON"
       evidence_references:
         - "tied-project/working/REQ-MCP-SERVER-INFO/evidence/not-applicable-receipt.v1.json"
+      falsification_questions:
+        - "Does configuration mapping ever include secrets catalog values?"
+      gate_policy: "advisory"
+      prior_depth_tier: null
     risks:
       - description: "Accidental secret leakage via config report mapping."
         id: "RISK-SI-003"

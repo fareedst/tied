@@ -1,142 +1,156 @@
-copy_hygiene: REQ-MCP-SERVER-INFO tracker — close-out 2026-11-06.
-description: Per-request Tracker for MCP server_info (read-only introspection).
+copy_hygiene: "REQ-MCP-SERVER-INFO tracker — close-out 2026-11-06."
+description: "Per-request Tracker for MCP server_info (read-only introspection)."
 execution_evidence:
   close_out_evidence:
-    date: '2026-11-06'
+    date: "2026-11-06"
     deferred: []
     gates: {}
-    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+    master_checklist: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
   completed:
-    - author-architecture
-    - author-requirement
-    - change-definition
-    - impact-discovery
-    - persist-implementation-records
-    - risk-assessment
-    - sub-adversarial-inquiry-pass
-    - test-strategy
-    - translate-sponsor-intent
-    - unit-test-green
-    - unit-test-red
-    - verification-gate
-    - traceable-commit
-  envelope_path: tied-project/working/REQ-MCP-SERVER-INFO/evidence/request-evidence-envelope.v1.json
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "impact-discovery"
+    - "persist-implementation-records"
+    - "risk-assessment"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "traceable-commit"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-MCP-SERVER-INFO/evidence/request-evidence-envelope.v1.json"
   operator_evidence:
     command_seq:
-      - cd mcp-server && npm test
-    depth_tier: minimal
-    gate_policy: advisory
+      - "cd mcp-server && npm test"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
     prior_depth_tier: null
-    profile_depth: minimal
-    status: complete
-  request: REQ-MCP_SERVER_INFO
+    profile_depth: "minimal"
+    status: "complete"
+  request: "REQ-MCP_SERVER_INFO"
 impact_analysis:
-  modules_or_boundaries: mcp-server server-info module; first structuredContent tool; core MCP profile.
+  modules_or_boundaries: "mcp-server server-info module; first structuredContent tool; core MCP profile."
   tied_tokens_affected:
-    - ARCH-MCP_SERVER_INFO
-    - IMPL-MCP_SERVER_INFO
-    - REQ-MCP_SERVER_INFO
+    - "ARCH-MCP_SERVER_INFO"
+    - "IMPL-MCP_SERVER_INFO"
+    - "REQ-MCP_SERVER_INFO"
 record_identity:
-  batch: mcp-server-info-v1
-  change_request_id: REQ-MCP_SERVER_INFO
-  record_status: closed
-  recorded_at: '2026-11-06'
+  batch: "mcp-server-info-v1"
+  change_request_id: "REQ-MCP_SERVER_INFO"
+  record_status: "closed"
+  recorded_at: "2026-11-06"
   refine_pass: 1
-  title: MCP server_info tool
+  title: "MCP server_info tool"
 references:
-  citdp: tied-project/working/REQ-MCP-SERVER-INFO/CITDP-REQ-MCP-SERVER-INFO.yaml
-  plan: tied-project/working/REQ-MCP-SERVER-INFO/PLAN.md
-  test_strategy: tied-project/working/REQ-MCP-SERVER-INFO/test-strategy.md
+  citdp: "tied-project/working/REQ-MCP-SERVER-INFO/CITDP-REQ-MCP-SERVER-INFO.yaml"
+  plan: "tied-project/working/REQ-MCP-SERVER-INFO/PLAN.md"
+  test_strategy: "tied-project/working/REQ-MCP-SERVER-INFO/test-strategy.md"
 steps:
-  - disposition: completed
-    slug: translate-sponsor-intent
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
-      evidence_refs: &ref_0
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/translate-sponsor-intent-evidence.md
-    evidence_refs: *ref_0
-  - disposition: completed
-    slug: change-definition
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/change-definition-evidence.md"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: &ref_1
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/change-definition-evidence.md
-    evidence_refs: *ref_1
-  - disposition: completed
-    slug: impact-discovery
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
     tracking:
-      status: completed
-      evidence_refs: &ref_2
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/impact-discovery-evidence.md
-    evidence_refs: *ref_2
-  - disposition: completed
-    slug: risk-assessment
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: &ref_3
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/risk-assessment-evidence.md
-    evidence_refs: *ref_3
-  - disposition: completed
-    slug: test-strategy
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: &ref_4
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/test-strategy-evidence.md
-    evidence_refs: *ref_4
-  - disposition: completed
-    slug: author-requirement
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/author-requirement-evidence.md"
+    slug: "author-requirement"
     tracking:
-      status: completed
-      evidence_refs: &ref_5
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/author-requirement-evidence.md
-    evidence_refs: *ref_5
-  - disposition: completed
-    slug: author-architecture
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/author-requirement-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/author-architecture-evidence.md"
+    slug: "author-architecture"
     tracking:
-      status: completed
-      evidence_refs: &ref_6
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/author-architecture-evidence.md
-    evidence_refs: *ref_6
-  - disposition: completed
-    slug: persist-implementation-records
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/author-architecture-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/persist-implementation-records-evidence.md"
+    slug: "persist-implementation-records"
     tracking:
-      status: completed
-      evidence_refs: &ref_7
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/persist-implementation-records-evidence.md
-    evidence_refs: *ref_7
-  - disposition: completed
-    slug: unit-test-red
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/persist-implementation-records-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
     tracking:
-      status: completed
-      evidence_refs: &ref_8
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/unit-test-red-evidence.md
-    evidence_refs: *ref_8
-  - disposition: completed
-    slug: unit-test-green
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
     tracking:
-      status: completed
-      evidence_refs: &ref_9
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/unit-test-green-evidence.md
-    evidence_refs: *ref_9
-  - disposition: completed
-    slug: verification-gate
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: &ref_10
-        - tied-project/working/REQ-MCP_SERVER_INFO/evidence/verification-evidence-manifest.v1.json
-    evidence_refs: *ref_10
-  - disposition: completed
-    slug: sub-adversarial-inquiry-pass
-    evidence_refs: &ref_11
-      - tied-project/working/REQ-MCP_SERVER_INFO/evidence/sub-adversarial-inquiry-pass-evidence.md
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
-      status: completed
-      evidence_refs: *ref_11
-  - disposition: completed
-    slug: traceable-commit
+      evidence_refs:
+        - "tied-project/working/REQ-MCP_SERVER_INFO/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-MCP-SERVER-INFO/evidence/close-out-handoff.md"
+      - "tied-project/working/REQ-MCP-SERVER-INFO/evidence/traceable-commit-evidence.md"
+    slug: "traceable-commit"
     tracking:
-      status: completed
-      evidence_refs: &ref_12
-        - tied-project/working/REQ-MCP-SERVER-INFO/evidence/traceable-commit-evidence.md
-        - tied-project/working/REQ-MCP-SERVER-INFO/evidence/close-out-handoff.md
-    evidence_refs: *ref_12
+      evidence_refs:
+        - "tied-project/working/REQ-MCP-SERVER-INFO/evidence/close-out-handoff.md"
+        - "tied-project/working/REQ-MCP-SERVER-INFO/evidence/traceable-commit-evidence.md"
+      status: "completed"

@@ -16,6 +16,10 @@
 
 Rebuild store `mcp-server`, restart MCP; no `ADHERENCE_RECONCILE_BIN` wrapper required.
 
+## Git
+
+Traceable commit: **`f3c04fc1`**
+
 ## Excluded from this commit
 
 Unrelated workspace drift: `tied-project/non-tied-plans/*`, `ordered-list-audit.jsonl`, `REQ-WF_TRIAL_FOUR_PHASE_HARDENING` evidence.

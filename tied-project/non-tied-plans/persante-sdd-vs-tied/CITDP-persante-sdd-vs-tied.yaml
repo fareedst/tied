@@ -1,28 +1,25 @@
+evidence:
+  primary: "/Users/fareed/Documents/persante/repos/ticketing-platform/.claude/skills/persante-sdd-workflow/references/artifact-contract.md"
+risks:
+  - description: "Build accidentally edits TIED project YAML."
+    id: "scope_creep_tied_yaml"
+    mitigation: "Follow non-tied-boundary; test-strategy boundary checklist before close."
+  - description: "Persante skills change or path moves; summary becomes stale without refresh."
+    id: "external_path_drift"
+    mitigation: "State proof boundary in both docs; pin fork/commit note where cited."
+  - description: "Readers infer 1:1 mapping between Persante IDs and TIED REQ/IMPL."
+    id: "false_equivalence"
+    mitigation: "RESOLVE table and gaps section call out non-1:1 rows explicitly."
 schema: "citdp-plan-draft.v1"
-slug: "persante-sdd-vs-tied"
-tied_tokens_new: []
 scope:
-  summary: |
-    Author two analysis Markdown files comparing Persante’s wiki/spec-driven agent skills
-    (external ticketing-platform clone path) to TIED as implemented in this repository.
-    No project REQ/ARCH/IMPL token minting in this non-tied track.
   in_scope:
-    - "docs/comparisons/persante-sdd-skills.md"
     - "docs/comparisons/persante-sdd-skills-vs-tied-agent-management.md"
+    - "docs/comparisons/persante-sdd-skills.md"
     - "tied-project/non-tied-plans/persante-sdd-vs-tied/"
   out_of_scope:
     - "Product application code or tests"
     - "Project TIED indexes and detail YAML"
     - "Vendoring Persante skills into this repository"
-evidence:
-  primary: "/Users/fareed/Documents/persante/repos/ticketing-platform/.claude/skills/persante-sdd-workflow/references/artifact-contract.md"
-risks:
-  - id: "external_path_drift"
-    description: "Persante skills change or path moves; summary becomes stale without refresh."
-    mitigation: "State proof boundary in both docs; pin fork/commit note where cited."
-  - id: "false_equivalence"
-    description: "Readers infer 1:1 mapping between Persante IDs and TIED REQ/IMPL."
-    mitigation: "RESOLVE table and gaps section call out non-1:1 rows explicitly."
-  - id: "scope_creep_tied_yaml"
-    description: "Build accidentally edits TIED project YAML."
-    mitigation: "Follow non-tied-boundary; test-strategy boundary checklist before close."
+  summary: "Author two analysis Markdown files comparing Persante’s wiki/spec-driven agent skills\n(external ticketing-platform clone path) to TIED as implemented in this repository.\nNo project REQ/ARCH/IMPL token minting in this non-tied track.\n"
+slug: "persante-sdd-vs-tied"
+tied_tokens_new: []

@@ -1,224 +1,238 @@
 citdp:
-  path: tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING-s4-linked-reconcile.yaml
-copy_hygiene: S4 slice; master checklist tracker for close_out 2026-11-06.
-depth_tier: minimal
-description: S4 — linked client adherence reconcile store resolution (REQ-TIED_CLIENT_OPERATOR_TOOLING).
+  path: "tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING-s4-linked-reconcile.yaml"
+copy_hygiene: "S4 slice; master checklist tracker for close_out 2026-11-06."
+depth_tier: "minimal"
+description: "S4 — linked client adherence reconcile store resolution (REQ-TIED_CLIENT_OPERATOR_TOOLING)."
 execution_evidence:
   close_out_evidence:
-    date: '2026-11-06'
+    date: "2026-11-06"
     deferred: []
     gates: {}
-    master_checklist: tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/checklist-tracker-s4-linked-reconcile.yaml
+    master_checklist: "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/checklist-tracker-s4-linked-reconcile.yaml"
   completed:
-    - translate-sponsor-intent
-    - change-definition
-    - impact-discovery
-    - risk-assessment
-    - test-strategy
-    - author-requirement
-    - author-architecture
-    - resolve-pseudocode
-    - gate-pseudocode-validation
-    - unit-test-red
-    - unit-test-green
-    - persist-citdp-record
-    - verification-gate
-    - sub-adversarial-inquiry-pass
-  envelope_path: tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/request-evidence-envelope-s4.v1.json
-  request: REQ-TIED_CLIENT_OPERATOR_TOOLING
-gate_policy: advisory
-profile_depth: minimal
-purpose: Tracker for S4 linked reconcile slice — close_out.
-request: REQ-TIED_CLIENT_OPERATOR_TOOLING
-request_token: REQ-TIED_CLIENT_OPERATOR_TOOLING
-source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: verification_complete
+    - "author-architecture"
+    - "author-requirement"
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "persist-citdp-record"
+    - "resolve-pseudocode"
+    - "risk-assessment"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+    - "unit-test-green"
+    - "unit-test-red"
+    - "verification-gate"
+  envelope_path: "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/request-evidence-envelope-s4.v1.json"
+  request: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+gate_policy: "advisory"
+profile_depth: "minimal"
+purpose: "Tracker for S4 linked reconcile slice — close_out."
+request: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+request_token: "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+source_template: "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+status: "verification_complete"
 steps:
-  - disposition: completed
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN-s4-linked-reconcile.md
-    id: translate-sponsor-intent
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN-s4-linked-reconcile.md"
+    id: "translate-sponsor-intent"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING-s4-linked-reconcile.yaml
-    id: change-definition
+      - "tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING-s4-linked-reconcile.yaml"
+    id: "change-definition"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN-s4-linked-reconcile.md
-    id: impact-discovery
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/PLAN-s4-linked-reconcile.md"
+    id: "impact-discovery"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/risk-assessment-s4-linked-reconcile.md
-    id: risk-assessment
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/risk-assessment-s4-linked-reconcile.md"
+    id: "risk-assessment"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/test-strategy-s4-linked-reconcile.md
-    id: test-strategy
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/test-strategy-s4-linked-reconcile.md"
+    id: "test-strategy"
     tracking:
-      status: completed
-  - disposition: not_applicable
+      status: "completed"
+  - disposition: "not_applicable"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/not-applicable-receipt.v1.json
-    id: sub-adversarial-inquiry-pass
-    policy: minimal-depth-no-inquiry
-    rationale: S4 linked reconcile slice at minimal depth.
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/not-applicable-receipt.v1.json"
+    id: "sub-adversarial-inquiry-pass"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "S4 linked reconcile slice at minimal depth."
     tracking:
-      status: not_applicable
-  - disposition: completed
+      status: "not_applicable"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/requirements/REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml
-    id: author-requirement
+      - "tied-project/requirements/REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+    id: "author-requirement"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/architecture-decisions/ARCH-TIED_CLIENT_OPERATOR_TOOLING.yaml
-    id: author-architecture
+      - "tied-project/architecture-decisions/ARCH-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+    id: "author-architecture"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING-pseudocode.md
-    id: resolve-pseudocode
+      - "tied-project/implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING-pseudocode.md"
+    id: "resolve-pseudocode"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING-pseudocode.md
-    id: gate-pseudocode-validation
+      - "tied-project/implementation-decisions/IMPL-TIED_CLIENT_OPERATOR_TOOLING-pseudocode.md"
+    id: "gate-pseudocode-validation"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/test-strategy-s4-linked-reconcile.md
-    id: unit-test-red
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/test-strategy-s4-linked-reconcile.md"
+    id: "unit-test-red"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-s4-evidence.md
-    id: unit-test-green
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-s4-evidence.md"
+    id: "unit-test-green"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING-s4-linked-reconcile.yaml
-    id: persist-citdp-record
+      - "tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING-s4-linked-reconcile.yaml"
+    id: "persist-citdp-record"
     tracking:
-      status: completed
-  - disposition: completed
+      status: "completed"
+  - disposition: "completed"
     evidence_refs:
-      - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-s4-evidence.md
-    id: verification-gate
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-s4-evidence.md"
+    id: "verification-gate"
     tracking:
-      status: completed
-  - disposition: pending
-    id: traceable-commit
+      status: "completed"
+  - disposition: "pending"
+    id: "traceable-commit"
     tracking:
-      status: pending
-  - slug: translate-sponsor-intent
+      status: "pending"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/translate-sponsor-intent-evidence.md"
+    slug: "translate-sponsor-intent"
     tracking:
-      status: completed
-      evidence_refs: &ref_0
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/translate-sponsor-intent-evidence.md
-    disposition: completed
-    evidence_refs: *ref_0
-  - slug: change-definition
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/translate-sponsor-intent-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/change-definition-evidence.md"
+    slug: "change-definition"
     tracking:
-      status: completed
-      evidence_refs: &ref_1
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/change-definition-evidence.md
-    disposition: completed
-    evidence_refs: *ref_1
-  - slug: impact-discovery
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/change-definition-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/impact-discovery-evidence.md"
+    slug: "impact-discovery"
     tracking:
-      status: completed
-      evidence_refs: &ref_2
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/impact-discovery-evidence.md
-    disposition: completed
-    evidence_refs: *ref_2
-  - slug: risk-assessment
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/impact-discovery-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/risk-assessment-evidence.md"
+    slug: "risk-assessment"
     tracking:
-      status: completed
-      evidence_refs: &ref_3
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/risk-assessment-evidence.md
-    disposition: completed
-    evidence_refs: *ref_3
-  - slug: test-strategy
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/risk-assessment-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/test-strategy-evidence.md"
+    slug: "test-strategy"
     tracking:
-      status: completed
-      evidence_refs: &ref_4
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/test-strategy-evidence.md
-    disposition: completed
-    evidence_refs: *ref_4
-  - slug: author-requirement
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/test-strategy-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/author-requirement-evidence.md"
+    slug: "author-requirement"
     tracking:
-      status: completed
-      evidence_refs: &ref_5
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/author-requirement-evidence.md
-    disposition: completed
-    evidence_refs: *ref_5
-  - slug: author-architecture
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/author-requirement-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/author-architecture-evidence.md"
+    slug: "author-architecture"
     tracking:
-      status: completed
-      evidence_refs: &ref_6
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/author-architecture-evidence.md
-    disposition: completed
-    evidence_refs: *ref_6
-  - slug: resolve-pseudocode
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/author-architecture-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/resolve-pseudocode-evidence.md"
+    slug: "resolve-pseudocode"
     tracking:
-      status: completed
-      evidence_refs: &ref_7
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/resolve-pseudocode-evidence.md
-    disposition: completed
-    evidence_refs: *ref_7
-  - slug: gate-pseudocode-validation
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/resolve-pseudocode-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/gate-pseudocode-validation-evidence.md"
+    slug: "gate-pseudocode-validation"
     tracking:
-      status: completed
-      evidence_refs: &ref_8
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/gate-pseudocode-validation-evidence.md
-    disposition: completed
-    evidence_refs: *ref_8
-  - slug: unit-test-red
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/gate-pseudocode-validation-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-red-evidence.md"
+    slug: "unit-test-red"
     tracking:
-      status: completed
-      evidence_refs: &ref_9
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-red-evidence.md
-    disposition: completed
-    evidence_refs: *ref_9
-  - slug: unit-test-green
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-red-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-evidence.md"
+    slug: "unit-test-green"
     tracking:
-      status: completed
-      evidence_refs: &ref_10
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-evidence.md
-    disposition: completed
-    evidence_refs: *ref_10
-  - slug: persist-citdp-record
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/unit-test-green-evidence.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+    slug: "persist-citdp-record"
     tracking:
-      status: completed
-      evidence_refs: &ref_11
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml
-    disposition: completed
-    evidence_refs: *ref_11
-  - slug: verification-gate
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/verification-evidence-manifest.v1.json"
+    slug: "verification-gate"
     tracking:
-      status: completed
-      evidence_refs: &ref_12
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/verification-evidence-manifest.v1.json
-    disposition: completed
-    evidence_refs: *ref_12
-  - slug: sub-adversarial-inquiry-pass
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/verification-evidence-manifest.v1.json"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/sub-adversarial-inquiry-pass-evidence.md"
+    slug: "sub-adversarial-inquiry-pass"
     tracking:
-      status: completed
-      evidence_refs: &ref_13
-        - tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/sub-adversarial-inquiry-pass-evidence.md
-    disposition: completed
-    evidence_refs: *ref_13
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/sub-adversarial-inquiry-pass-evidence.md"
+      status: "completed"
