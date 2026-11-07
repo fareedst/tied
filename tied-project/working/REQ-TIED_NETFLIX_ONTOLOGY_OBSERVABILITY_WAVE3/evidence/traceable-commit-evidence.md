@@ -21,7 +21,7 @@ Immature-client deferral: no new `tied-project/vocab` RECORD (`operational_ident
 
 ## Commit
 
-**Commit SHA:** `b7414d73` — slice-0 Waves 1–2 + Wave 3 doc compose (42 files).
+**Commit SHA:** `53d8a76f` — slice-0 Waves 1–2 + Wave 3 doc compose (42 files).
 
 ## Excluded unrelated drift
 

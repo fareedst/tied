@@ -32,7 +32,7 @@ Linked [PLAN.md](../PLAN.md) · [test-strategy.md](../test-strategy.md) · [CITD
 
 ### Required (build-plan)
 
-- [x] `slice-0-wave12` — Waves 1–2 + Wave 3 in commit `b7414d73`
+- [x] `slice-0-wave12` — Waves 1–2 + Wave 3 in commit `53d8a76f`
 - [x] `slice-a-red` — RED `methodology-composition-matrix-netflix-row.test.mjs`
 - [x] `slice-a-green` — matrix §2 row **17** + Netflix comparison phased **Implemented** + LEAP SC-MCM-DOC **17**
 - [x] `slice-b-red` — RED extend `harness-trace-observation-loop-doc.test.mjs` (Netflix markers)

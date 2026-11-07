@@ -32,7 +32,7 @@ Linked [PLAN.md](../PLAN.md) · [test-strategy.md](../test-strategy.md)
 
 ### Optional
 
-- [x] `non-tied-close` — included in `b7414d73` with REQ-TIED_NETFLIX Wave 3
+- [x] `non-tied-close` — included in `53d8a76f` with REQ-TIED_NETFLIX Wave 3
 - [ ] `sibling-backlinks-complete` — LangChain, Anthropic FV, `tied-vs-well-known-methodologies.md` reciprocal links (Phase 1 defer in Wave 2 doc)
 - [ ] `bundle-crosslink` — cite Netflix in `tied-bundle/docs/vocabulary-layer-tied-leap-citdp.md` (Wave 3 defer)
 - [ ] `methodology-matrix-row` — sponsor-only costly choice per `methodology-composition-matrix.md`

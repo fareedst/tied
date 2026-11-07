@@ -97,7 +97,7 @@ steps:
   - disposition: "completed"
     evidence_refs:
       - kind: "command"
-        path: "git commit b7414d73 — docs(netflix): Waves 1–2 outreach + Wave 3 matrix row 17 compose"
+        path: "git commit 53d8a76f — docs(netflix): Waves 1–2 outreach + Wave 3 matrix row 17 compose"
       - kind: "file_path"
         path: "tied-project/working/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3/evidence/traceable-commit-evidence.md"
     id: "traceable-commit"
