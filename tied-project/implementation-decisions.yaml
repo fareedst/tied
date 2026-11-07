@@ -10,17 +10,6 @@ IMPL-AGENTSTREAM_CLAUDE_WF_PARITY:
       - "IMPL-AGENTSTREAM_CLAUDE_WF_PARITY"
     requirements:
       - "REQ-AGENTSTREAM_CLAUDE_WF_PARITY"
-IMPL-APPEND-TST:
-  cross_references: []
-  detail_file: "implementation-decisions/IMPL-APPEND-TST.yaml"
-  implementation_approach:
-    details:
-      - "first bullet"
-    summary: "s"
-  name: "Append test"
-  rationale:
-    why: "test"
-  status: "Draft"
 IMPL-ASYNC_BINDING_VALIDATOR:
   category: "Implementation"
   detail_file: "implementation-decisions/IMPL-ASYNC_BINDING_VALIDATOR.yaml"
@@ -347,16 +336,6 @@ IMPL-ATDD-E2E-AGENT_STREAM:
       - "REQ-ATDD-E2E-AGENT_STREAM"
     tests:
       - "agent_stream_e2e_test.rb (upstream atdd)"
-IMPL-BLOCK-DUMP:
-  cross_references: []
-  detail_file: "implementation-decisions/IMPL-BLOCK-DUMP.yaml"
-  implementation_approach:
-    details: []
-    summary: "s"
-  name: "Block dump"
-  rationale:
-    why: "t"
-  status: "Draft"
 IMPL-BOUNDED_WORKER_POOL:
   cross_references:
     - "ARCH-BOUNDED_WORKER_POOL"
