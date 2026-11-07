@@ -284,6 +284,8 @@ AGENTS.md
 .claude/hooks/
 .claude/settings.json
 # END TIED INSTALL MANAGED
+# Store vendor skills (skills.sh) — store checkout only; not rewritten by tied-install
+.agents/skills/
 docs/visuals/2026-10-20.md
 .bkpdir.yml
 docs/methodologies/kirk-context-makes-agents-useful.md

@@ -51,6 +51,10 @@ After bootstrap: confirm MCP base path, then [Compact feature rhythm](../../READ
 
 **Store-as-primary note:** This git repository is both store and TIED client. To install into **other** primaries, keep a **separate store clone** and run install from that checkout ([tools/bootstrap/README.md](../../tools/bootstrap/README.md)).
 
+### Store vendor skills (not client bootstrap)
+
+Optional third-party skills for **this store checkout only** (Docker official pack under `skills/docker-*`; **agent-browser** via [skills.sh](https://skills.sh) and committed `skills-lock.json`). They are **not** installed on disposable clients by `tied-install`. Catalog and refresh: [store-vendor-skills plan](../../tied-project/non-tied-plans/store-vendor-skills/PLAN.md).
+
 ---
 
 ## Brownfield routing (not EDPC depth)

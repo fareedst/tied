@@ -1,5 +1,7 @@
 # Plan: Docker official skills (TIED store only)
 
+**Superseded catalog:** Track A of [store-vendor-skills](../store-vendor-skills/PLAN.md) (unified store vendor skills). This folder remains the docker-specific refresh evidence.
+
 **Slug:** `docker-official-skills-import`  
 **Track:** `@non-tied-plan` → `@non-tied-build` → optional `@non-tied-close`  
 **Source:** `/Users/fareed/Downloads/skills-main-2/skills` ([docker/skills](https://github.com/docker/skills), Apache-2.0)
