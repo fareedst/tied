@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Linked client adherence reconcile (S4 [REQ-TIED_CLIENT_OPERATOR_TOOLING])** — `tied_adherence_reconcile_run` resolves `@tied/agentstream` from the **TIED store** (MCP module self-anchor, `TIED_STORE_ROOT`, client `mcp.json` introspection) instead of requiring `mcp-server/` under the client tree; subprocess `cwd` is client `workspace`. `run-close-out-gates --reconcile` no longer passes client `repo_root` for store lookup; `tied-post-session.sh` uses TS agentstream dist instead of removed Go `adherence-reconcile`. Tests: `adherence-reconcile-resolve.test.ts`.
+
 ### Changed
 
 - **WF trial cohort working-folder sync** — Restore store README **H2** anchors (`Getting started`, `Primary implementation`, `TIED source repository setup`; `Methodology development layout` as H3) for `store-readme-structure` tests; mirror project `tied-project/citdp/` and per-REQ `tied-project/working/REQ-*/` CITDP/checklist YAML for [REQ-WF_TRIAL_FOUR_PHASE_HARDENING], [REQ-WF_TRIAL_IMPLEMENTATION_STACK], [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG], [REQ-CLAUDE_WF03_LIVE_MATRIX_GAPS], [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY], and related store hygiene/readme trials; extend [tied-product-configuration](tied-project/vocab/tied-product-configuration.md) alphabetical index. Close-out `run-close-out-gates.mjs` 2026-11-05 (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).

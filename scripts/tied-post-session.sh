@@ -333,9 +333,9 @@ resolve_reconcile_bin() {
     printf '%s\n' "${ADHERENCE_RECONCILE_BIN}"
     return 0
   fi
-  local built="${TIED_STORE_ANCHOR}/tools/agentstream/adherence-reconcile"
-  if [[ -x "${built}" ]]; then
-    printf '%s\n' "${built}"
+  local ts_entry="${TIED_STORE_ANCHOR}/mcp-server/packages/agentstream/dist/index.js"
+  if [[ -f "${ts_entry}" ]]; then
+    printf '%s\n' "${ts_entry}"
     return 0
   fi
   printf '%s\n' ""
@@ -375,13 +375,13 @@ step_reconcile() {
     fi
 
     if [[ -n "${reconcile_bin}" ]]; then
-      "${reconcile_bin}" "${recon_args[@]}" >"${req_dir}/adherence-reconcile.json"
+      if [[ "${reconcile_bin}" == *.js ]]; then
+        node "${reconcile_bin}" adherence-reconcile "${recon_args[@]}" >"${req_dir}/adherence-reconcile.json"
+      else
+        "${reconcile_bin}" "${recon_args[@]}" >"${req_dir}/adherence-reconcile.json"
+      fi
     else
-      echo "DIAGNOSTIC: building adherence-reconcile via go run (first run may compile)" >&2
-      (
-        cd "${TIED_STORE_ANCHOR}/tools/agentstream"
-        go run ./cmd/adherence-reconcile "${recon_args[@]}"
-      ) >"${req_dir}/adherence-reconcile.json"
+      echo "DIAGNOSTIC: adherence-reconcile missing — build store workspace (./build-workspace.sh)" >&2
     fi
   done
 }

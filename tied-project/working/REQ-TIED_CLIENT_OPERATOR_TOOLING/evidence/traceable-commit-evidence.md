@@ -1,28 +1,12 @@
-# Traceable commit evidence — REQ-TIED_CLIENT_OPERATOR_TOOLING
+# Traceable commit evidence — S4 linked reconcile
 
-**Date:** 2026-11-01
+**REQ:** REQ-TIED_CLIENT_OPERATOR_TOOLING  
+**Gate:** close_out `allowed=true` run `close-out-client-ops-s4-linked-reconcile-20261106-r3`  
+**Envelope:** `blocking_gap_count=0`  
+**Hygiene:** [git-hygiene-receipt-2026-11-06.md](git-hygiene-receipt-2026-11-06.md)
 
-## Vocab VALIDATE
+**VALIDATE:** S4 scoped paths only; unrelated repo drift deferred.
 
-Immature-client deferral: no new domain terms beyond existing REQ/ARCH/IMPL tokens and PLAN vocabulary.
+**Upstream feedback:** N/A + reason (store tooling slice).
 
-## Gate receipts
-
-- `tied-bundle/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/gates/close_out-2026-11-01T17-18-39-315Z.json`
-- Envelope: `tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/evidence/request-evidence-envelope.v1.json` (regenerable; validate blocking_gap_count=0 at close-out)
-
-## Git hygiene
-
-- `evidence/git-hygiene-receipt-2026-11-01.md` (MCP preview, apply=false)
-
-## Upstream feedback capture
-
-**N/A** — no MCP feedback receipt or client `feedback.yaml` row for this store REQ.
-
-## Excluded unrelated drift
-
-Modified but **not** staged: REQ-TIED_INTENT_CONTROL_PLANE, CORPUS_COMPREHENSION trackers, evaluation envelope corpus, EDPC dogfood charters, stray CITDP test fixtures under `tied-project/citdp/CITDP-REQ-{ACTIVATION,NESTED,...}.yaml`, source-graph index churn.
-
-## Store consistency
-
-`tied_validate_consistency` store-wide may report legacy gaps unrelated to this REQ; scoped YAML for this token validates via index/detail presence.
+**Excluded drift:** `tied-project/non-tied-plans/*`, `ordered-list-audit.jsonl`, `REQ-WF_TRIAL_FOUR_PHASE_HARDENING/evidence/traceable-commit-evidence.md`, adversarial fixture envelope paths.

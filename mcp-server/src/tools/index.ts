@@ -2310,7 +2310,7 @@ export const allTools = [
     name: "tied_adherence_reconcile_run",
     config: {
       description:
-        "Run read-only [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] adherence chain reconciliation via Go subprocess. Returns ReconcileReport JSON; never mutates Tracker or TIED YAML.",
+        "Run read-only [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] adherence chain reconciliation via @tied/agentstream TS CLI (store-resolved for linked clients). Returns ReconcileReport JSON; never mutates Tracker or TIED YAML.",
       inputSchema: z.object({
         ledger_path: z.string().describe("Path to agent-adherence-event.v1 JSONL ledger."),
         tracker_path: z.string().describe("Path to Authoritative Tracker YAML."),

@@ -374,7 +374,6 @@ async function runAdherenceReconcileStep(args, reconcileRunner, trackerAbsolute)
       ? (path.isAbsolute(args.citdpPath) ? args.citdpPath : path.join(args.projectRoot, args.citdpPath))
       : undefined,
     include_process_grade: true,
-    repo_root: args.projectRoot,
   });
 }
 

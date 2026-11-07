@@ -8,10 +8,10 @@
       "command": [
         "-lc",
         "bash",
-        "node --test tools/bootstrap/templates/run-close-out-gates-order.test.mjs"
+        "cd mcp-server && npm test"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 225,
+      "duration_ms": 37913,
       "exit_code": 0,
       "id": "citdp-evidence-1",
       "result": "passed"
@@ -24,20 +24,23 @@
       "command": [
         "-lc",
         "bash",
-        "cd mcp-server && npm test -- src/checklist-validator.test.ts src/tied-methodology-version.test.ts src/resolve-essence-pseudocode-source.test.ts"
+        "node --test tools/bootstrap/templates/run-close-out-gates-order.test.mjs"
       ],
       "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
-      "duration_ms": 31590,
-      "exit_code": 1,
+      "duration_ms": 234,
+      "exit_code": 0,
       "id": "citdp-evidence-2",
-      "result": "failed"
+      "result": "passed"
     }
   ],
-  "commit": "2c05613bc53286d6a8100e3b56a3a2f3ce4e586c",
+  "commit": "3ae0ac6e1942b8e71bcf23fcc8ae454a639bf81f",
   "covered_tokens": [
-    "REQ-PSEUDOCODE_VALIDATE_PATH_INPUT",
+    "ARCH-TIED_CLIENT_OPERATOR_TOOLING",
+    "IMPL-TIED_CLIENT_OPERATOR_TOOLING",
     "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
-    "REQ-TIED_SETUP"
+    "REQ-TIED_CLIENT_OPERATOR_TOOLING",
+    "REQ-TIED_RUNTIME_DISK_CONFIG",
+    "REQ-TIED_UNIFIED_TOOLCHAIN"
   ],
   "environment": {
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
@@ -51,8 +54,8 @@
     "stored_separately": true
   },
   "proof_boundaries": [
-    "does_not_prove_go_agentstream_gate_parity",
-    "t6_trial_client_smoke_documented_separately"
+    "does_not_prove_go_oracle_parity",
+    "does_not_prove_hl7receiver_live_ledger_completeness"
   ],
   "quality_rows": [
     {
@@ -64,6 +67,6 @@
       "result": "pending"
     }
   ],
-  "run_id": "close-out-req-tied-client-operator-tooling-20261101-r2",
+  "run_id": "close-out-client-ops-s4-linked-reconcile-20261106-r3",
   "schema_version": "verification-evidence-manifest.v1"
 }

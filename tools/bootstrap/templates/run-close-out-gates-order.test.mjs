@@ -19,4 +19,13 @@ test("run-close-out-gates reconcile follows gate receipt persist", () => {
   assert.ok(reconcileCallIdx >= 0, "expected reconcile block in main");
   assert.ok(reconcileCallIdx > persistIdx, "reconcile must run after receipt persist");
   assert.equal(earlyReconcileIdx, -1, "must not pass template REPO_ROOT to reconcile");
+  const reconcileStep = source.slice(
+    source.indexOf("async function runAdherenceReconcileStep"),
+    source.indexOf("async function main"),
+  );
+  assert.equal(
+    reconcileStep.includes("repo_root:"),
+    false,
+    "reconcile step must not pass repo_root for store lookup",
+  );
 });

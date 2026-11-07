@@ -1,10 +1,14 @@
 IMPL-TIED_CLIENT_OPERATOR_TOOLING:
   code_locations:
     files:
+      - description: "Adherence reconcile MCP subprocess wrapper"
+        path: "mcp-server/src/tools/adherence-reconcile-runner.ts"
       - description: "Checklist gate merged step enumeration"
         path: "mcp-server/src/checklist-validator.ts"
       - description: "Create-if-absent VERSION on install"
         path: "tools/bootstrap/lib/bootstrap.mjs"
+      - description: "Linked client agentstream store root for adherence reconcile"
+        path: "mcp-server/src/resolve-agentstream-store.ts"
       - description: "Methodology semver fallbacks"
         path: "mcp-server/src/tied-methodology-version.ts"
       - description: "Pseudocode path prefix normalization"

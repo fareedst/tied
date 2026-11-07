@@ -45,7 +45,7 @@ Cross-links: [agentstream vocab](../../../tied-project/vocab/agentstream.md), [T
 | Feature batch preview | `--preview-feature-spec-batch-yaml PATH`, optional `-o` |
 | Pipeline dry-run | `-d`, `-w`, optional `-c`, `-b`, `-p`, `-o`, checklist bounds/vars, `--skip-tied-mcp-preflight` |
 | Extended dry-run | `--prompts-file`, `--tdd-yaml`, `--verify-session`, `--non-compact-html`, argv after `--` |
-| Adherence reconcile | `adherence-reconcile` subcommand or standalone `--tracker` with reconcile flags |
+| Adherence reconcile | `adherence-reconcile` subcommand or standalone `--tracker` with reconcile flags. MCP `tied_adherence_reconcile_run` spawns this entry from the **TIED store** on linked clients (no per-repo `ADHERENCE_RECONCILE_BIN` when store dist is built). |
 | Live checklist + tracker | `-c`, `--checklist-tracker-yaml`, tracker vars, optional `--adherence-ledger`, `--enforce-envelope` |
 | Resume from Authoritative Tracker (Wave 4, [REQ-TIED_DURABLE_CHECKLIST_CONTROLLER](../../../tied-project/requirements/REQ-TIED_DURABLE_CHECKLIST_CONTROLLER.yaml)) | `--resume-from-tracker` with `--checklist-tracker-yaml` — derives `--first-turn` from pending step dispositions; fills `--session-id` from latest `state_history` when omitted |
 | Harness profile (Phase 2) | `--harness cursor\|claude` selects **AgentDriver** profile; **`--agent-path`** remains Cursor executable override only (not a Claude adapter). Dry-run command rendering uses placeholder bin **`claude`** when `--harness claude` and `--agent-path` is unset. |

@@ -1,11 +1,17 @@
 /**
- * [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT] [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
- * Summary: Spawn Go adherence-reconcile binary and parse read-only ReconcileReport JSON from stdout.
+ * [IMPL-TIED_CLIENT_OPERATOR_TOOLING] [IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT]
+ * [ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT] [REQ-TIED_CLIENT_OPERATOR_TOOLING]
+ * Summary: Spawn TS adherence-reconcile CLI and parse read-only ReconcileReport JSON from stdout.
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
+
+import {
+  agentstreamCliEntry,
+  resolveAgentstreamStoreRoot,
+} from "../resolve-agentstream-store.js";
 
 export type ReconcileFinding = {
   code: string;
@@ -42,8 +48,15 @@ export type ReconcileRunInput = {
   citdp_path?: string;
   requirements_index?: string;
   implementation_index?: string;
+  /** @deprecated Ignored for store lookup; workspace drives client subprocess cwd */
   repo_root?: string;
   include_process_grade?: boolean;
+};
+
+export type ResolveAdherenceReconcileOptions = {
+  workspace?: string;
+  /** @deprecated Ignored for store lookup */
+  repoRoot?: string;
 };
 
 type ProcessCapture = {
@@ -53,40 +66,33 @@ type ProcessCapture = {
   spawn_error?: string;
 };
 
-function findRepoRoot(start: string): string {
-  let dir = path.resolve(start);
-  for (;;) {
-    if (
-      fs.existsSync(path.join(dir, "AGENTS.md")) &&
-      fs.existsSync(path.join(dir, "mcp-server", "package.json"))
-    ) {
-      return dir;
-    }
-    const parent = path.dirname(dir);
-    if (parent === dir) {
-      throw new Error("repo root not found");
-    }
-    dir = parent;
-  }
-}
+export async function resolveAdherenceReconcileArgv(
+  options: ResolveAdherenceReconcileOptions | string = {},
+): Promise<{ argv: string[]; cwd: string }> {
+  const normalized: ResolveAdherenceReconcileOptions =
+    typeof options === "string" ? { repoRoot: options } : options;
+  const workspace = path.resolve(
+    normalized.workspace?.trim() ||
+      normalized.repoRoot?.trim() ||
+      process.cwd(),
+  );
 
-export function resolveAdherenceReconcileArgv(repoRoot?: string): { argv: string[]; cwd: string } {
-  const root = repoRoot ?? findRepoRoot(process.cwd());
   const dedicated = process.env.ADHERENCE_RECONCILE_BIN?.trim();
   if (dedicated && fs.existsSync(dedicated)) {
-    return { argv: [dedicated], cwd: root };
+    return { argv: [dedicated], cwd: workspace };
   }
   const agentstreamBin = process.env.AGENTSTREAM_BIN?.trim();
   if (agentstreamBin && fs.existsSync(agentstreamBin)) {
-    // Plan allows AGENTSTREAM_BIN when it points at the reconcile binary build.
     const sibling = path.join(path.dirname(agentstreamBin), "adherence-reconcile");
     if (fs.existsSync(sibling)) {
-      return { argv: [sibling], cwd: root };
+      return { argv: [sibling], cwd: workspace };
     }
   }
-  const tsEntry = path.join(root, "mcp-server/packages/agentstream/dist/index.js");
+
+  const storeRoot = await resolveAgentstreamStoreRoot({ workspace });
+  const tsEntry = agentstreamCliEntry(storeRoot);
   if (fs.existsSync(tsEntry)) {
-    return { argv: [process.execPath, tsEntry, "adherence-reconcile"], cwd: root };
+    return { argv: [process.execPath, tsEntry, "adherence-reconcile"], cwd: workspace };
   }
   throw new Error(
     "adherence-reconcile: build @tied/agentstream (mcp-server/packages/agentstream/dist/index.js) not found",
@@ -125,7 +131,10 @@ export async function runAdherenceReconcile(input: ReconcileRunInput): Promise<{
   diagnostics?: string[];
 }> {
   const workspace = input.workspace.trim() || process.cwd();
-  const { argv, cwd } = resolveAdherenceReconcileArgv(input.repo_root);
+  const { argv, cwd } = await resolveAdherenceReconcileArgv({
+    workspace,
+    repoRoot: input.repo_root,
+  });
   const args = [
     "--ledger", input.ledger_path,
     "--tracker", input.tracker_path,

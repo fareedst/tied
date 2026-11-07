@@ -39,3 +39,31 @@ procedure READ_METHODOLOGY_SEMVER:
   TRY install.json store_methodology_version
   TRY AGENTS.md TIED Methodology Version line
   THROW if none
+
+procedure RESOLVE_AGENTSTREAM_STORE_ROOT:
+  # [IMPL-TIED_CLIENT_OPERATOR_TOOLING] [REQ-TIED_CLIENT_OPERATOR_TOOLING] [REQ-TIED_RUNTIME_DISK_CONFIG]
+  Contract:
+    INPUT: optional workspace (client project root); MCP runner module URL
+    OUTPUT: store root path containing mcp-server/packages/agentstream/dist/index.js
+    PRE: overrides ADHERENCE_RECONCILE_BIN / AGENTSTREAM_BIN handled by caller
+    POST: store root exists and agentstream dist is present
+    EFFECTS: read-only filesystem; optional bootstrap runtime introspection
+    FAILURE_MODES: missing_dist
+    TERMINATION: total
+  TRY package self-anchor from MCP module path
+  TRY process.env.TIED_STORE_ROOT when dist exists
+  TRY resolveRuntimeIntrospection(workspace) from client mcp.json
+  TRY monolithic AGENTS.md + mcp-server walk from workspace then cwd
+  THROW operator build hint
+
+procedure RUN_ADHERENCE_RECONCILE_SUBPROCESS:
+  # [IMPL-TIED_CLIENT_OPERATOR_TOOLING] [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT]
+  Contract:
+    INPUT: ledger, tracker, gates_dir, workspace (client root)
+    OUTPUT: read-only ReconcileReport JSON
+    PRE: workspace is client project root for artifact paths
+    POST: spawn cwd equals workspace; CLI argv uses store-resolved agentstream entry
+    EFFECTS: subprocess IO
+    TERMINATION: total
+  CALL RESOLVE_AGENTSTREAM_STORE_ROOT(workspace)
+  SPAWN node agentstream dist adherence-reconcile with cwd workspace

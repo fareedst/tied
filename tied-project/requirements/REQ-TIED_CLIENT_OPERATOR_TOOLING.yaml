@@ -13,6 +13,8 @@ REQ-TIED_CLIENT_OPERATOR_TOOLING:
         criterion_id: "pseudocode-repo-path"
       - criterion: "run-close-out-gates resolves MCP dist from client MCP config and runs reconcile after gate receipt persist."
         criterion_id: "closeout-runner-client-root"
+      - criterion: "tied_adherence_reconcile_run and run-close-out-gates --reconcile resolve @tied/agentstream from the TIED store on linked clients without ADHERENCE_RECONCILE_BIN when store dist is built."
+        criterion_id: "linked-reconcile-store-resolve"
     status: "Implemented"
     traceability:
       architecture:
@@ -23,5 +25,6 @@ REQ-TIED_CLIENT_OPERATOR_TOOLING:
         - "mcp-server/src/checklist-validator.test.ts"
         - "mcp-server/src/resolve-essence-pseudocode-source.test.ts"
         - "mcp-server/src/tied-methodology-version.test.ts"
+        - "mcp-server/src/tools/adherence-reconcile-resolve.test.ts"
         - "mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts"
         - "tools/bootstrap/templates/run-close-out-gates-order.test.mjs"

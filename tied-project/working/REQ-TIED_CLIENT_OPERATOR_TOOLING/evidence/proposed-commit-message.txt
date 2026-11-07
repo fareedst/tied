@@ -1,36 +1,10 @@
-fix(operator): fresh client gate, path, semver close-out
+fix(operator): linked client adherence reconcile store resolve (S4)
 
-Three platform fixes for disposable TIED clients: merge sub_procedures
-into gate slug checks; normalize tied-project/ pseudocode paths;
-semver fallbacks and close-out runner reconcile-after-persist.
+REQ-TIED_CLIENT_OPERATOR_TOOLING criterion linked-reconcile-store-resolve:
+resolve @tied/agentstream from TIED store (MCP self-anchor) for linked clients;
+subprocess cwd is client workspace. Updates close-out runner, tied-post-session.
 
-REQ-TIED_CLIENT_OPERATOR_TOOLING
-ARCH-TIED_CLIENT_OPERATOR_TOOLING
-IMPL-TIED_CLIENT_OPERATOR_TOOLING
+ARCH-TIED_CLIENT_OPERATOR_TOOLING IMPL-TIED_CLIENT_OPERATOR_TOOLING
 
-Machine close-out: pass (close_out allowed; envelope blocking 0).
-Process contract: pass (unified runner sync+reconcile; manifest collected).
-Adherence ledger: partial advisory (reconcile B band; evidence_stale on
-prior gate receipts — non-blocking at minimal advisory depth).
-
-Upstream feedback: N/A.
-
-Staging map:
-- CHANGELOG.md
-- mcp-server/src/checklist-validator.ts (+ tests)
-- mcp-server/src/impl-pseudocode-input.ts
-- mcp-server/src/tied-methodology-version.ts (+ tests)
-- mcp-server/src/resolve-essence-pseudocode-source.test.ts
-- mcp-server/src/tools/pseudocode-validate-path-mcp.test.ts
-- mcp-server/src/e2e/gf05-close-out-runner-persist.test.ts
-- mcp-server/scripts/run-mcp-tests.mjs
-- mcp-server/src/request-evidence-envelope/request-evidence-envelope.test.ts
-- scripts/lib/read-tied-methodology-version.mjs
-- tools/bootstrap/lib/bootstrap.mjs
-- tools/bootstrap/templates/run-close-out-gates.mjs
-- tools/bootstrap/templates/run-close-out-gates-order.test.mjs
-- tied-project/{requirements,architecture-decisions,implementation-decisions,semantic-tokens}.yaml
-- tied-project/{requirements,architecture-decisions,implementation-decisions}/REQ|ARCH|IMPL-TIED_CLIENT_OPERATOR_TOOLING*
-- tied-project/citdp/CITDP-REQ-TIED_CLIENT_OPERATOR_TOOLING.yaml
-- tied-project/working/REQ-TIED_CLIENT_OPERATOR_TOOLING/
-- tied-project/working/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT/fixture-1787603099/corpus-manifest.json
+Machine close_out: allowed, envelope blocking_gap_count=0
+Process: minimal advisory; reconcile process_grade band B (evidence_stale advisory)

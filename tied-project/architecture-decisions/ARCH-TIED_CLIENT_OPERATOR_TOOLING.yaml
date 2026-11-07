@@ -1,6 +1,6 @@
 ARCH-TIED_CLIENT_OPERATOR_TOOLING:
   ARCH-TIED_CLIENT_OPERATOR_TOOLING:
-    decision: "Client operator tooling shares one validation plane: checklist gate reads merged main and sub_procedure steps; pseudocode path resolution normalizes repo-root prefixes; methodology semver uses VERSION then install.json then AGENTS.md; close-out runner resolves MCP dist from client MCP config and reconciles after receipt persist."
+    decision: "Client operator tooling shares one validation plane: checklist gate reads merged main and sub_procedure steps; pseudocode path resolution normalizes repo-root prefixes; methodology semver uses VERSION then install.json then AGENTS.md; close-out runner resolves MCP dist from client MCP config and reconciles after receipt persist. Adherence reconcile spawn resolves TIED store root (MCP self-anchor, TIED_STORE_ROOT, client mcp.json) separately from client workspace cwd."
     name: "Client operator tooling plane"
     status: "Active"
     traceability:

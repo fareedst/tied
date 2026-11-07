@@ -20,7 +20,10 @@ function toolHandler(name: string): (args: Record<string, unknown>) => Promise<T
 function repoRoot(): string {
   let dir = path.resolve(import.meta.dirname, "../../..");
   for (;;) {
-    if (fs.existsSync(path.join(dir, "AGENTS.md")) && fs.existsSync(path.join(dir, "tools", "agentstream"))) {
+    if (
+      fs.existsSync(path.join(dir, "AGENTS.md")) &&
+      fs.existsSync(path.join(dir, "mcp-server", "package.json"))
+    ) {
       return dir;
     }
     const parent = path.dirname(dir);

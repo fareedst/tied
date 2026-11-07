@@ -1,6 +1,7 @@
 # PLAN — [REQ-TIED_CLIENT_OPERATOR_TOOLING]
 
-**Status:** Implemented — handoff [plan-close-out-handoff.md](plan-close-out-handoff.md)  
+**Status:** Implemented (S1–S3) — S4 in progress: [PLAN-s4-linked-reconcile.md](PLAN-s4-linked-reconcile.md)  
+**S1–S3 handoff:** [plan-close-out-handoff.md](plan-close-out-handoff.md)  
 **Request token:** `REQ-TIED_CLIENT_OPERATOR_TOOLING`  
 **Adversarial depth:** `minimal` (tooling parity; no new integrated inquiry activation)  
 **Gate policy:** `advisory` (inherits CITDP default for checklist gate enforcement)  
