@@ -48,6 +48,16 @@
 
 ---
 
+## Port backlog
+
+_Optional — use on long agent branches; see [session-handoff-structure.md](../../../tools/bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md#port-backlog-optional--long-agent-branches)._
+
+| id | description | status | provenance |
+| --- | --- | --- | --- |
+| OWED-001 | {port from main not yet merged} | open | {PR/ref} |
+
+---
+
 ## Environment
 
 | Field | Value |

@@ -96,6 +96,21 @@ Use this order in **`session-handoff.md`** unless a section is genuinely **n/a**
 
 ---
 
+## Port backlog (optional — long agent branches)
+
+When work spans **many merges from main** or parallel agent lanes, maintain a **named port backlog** (owed-ports metaphor) so silent merge loss is visible before close-out. This is **operator hygiene**, not gate authority.
+
+| Field | Guidance |
+| --- | --- |
+| **Where** | `tied-project/working/{REQ-TOKEN}/evidence/session-handoff.md` (or non-tied `tied-project/non-tied-plans/{slug}/evidence/session-handoff.md`) |
+| **Shape** | Markdown subsection `## Port backlog` with table: `id`, `description`, `status` (`open` \| `ported` \| `waived`), `provenance` |
+| **Promotion** | Sponsor-confirmed items may become **`merge_miss`** rows in [incident-revert evaluation corpus](../../../tied-bundle/docs/incident-revert-evaluation-corpus.md); waivers need **costly choice** note |
+| **Compose** | [REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3](../../../tied-project/requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml); [langwatch-bounded-operator-skim](../../../tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/langwatch-bounded-operator-skim.md) |
+
+Do **not** treat an empty port backlog as merge-ready; do **not** encode waivers only in chat.
+
+---
+
 ## Related and pending prior requests
 
 Carry-forward table for work **known to the current effort** but not finished in this session.

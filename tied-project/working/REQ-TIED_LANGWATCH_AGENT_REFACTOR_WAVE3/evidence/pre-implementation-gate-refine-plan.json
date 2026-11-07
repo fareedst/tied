@@ -1,0 +1,9 @@
+{
+  "request_token": "REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3",
+  "phase": "pre_implementation",
+  "allowed": true,
+  "depth_tier": "minimal",
+  "gate_policy": "advisory",
+  "source": "tied_gate_check",
+  "recorded_at": "2026-11-07"
+}

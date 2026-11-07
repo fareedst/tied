@@ -1,0 +1,47 @@
+REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
+  rationale:
+    benefits:
+      - "Inventory row 18 distinct from LangChain/Cursor trace harness"
+      - "Q5/Q1 literacy without comparable-arms claims"
+    problems_solved:
+      - "No port backlog handoff norm"
+      - "No §2 matrix row for LangWatch refactor compose"
+      - "Wave 3 phased items Defer"
+    why: "Sponsor add-feature/refine-plan from LangWatch comparison bounded operator recommendations; comparisons gitignored."
+  related_requirements:
+    depends_on:
+      - "REQ-TIED_EXTERNAL_SERVICE_COMPARISON"
+      - "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP"
+      - "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+      - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+      - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+    related_to:
+      - "REQ-TIED_HARNESS_PLATFORM_SEAM"
+      - "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER"
+  satisfaction_criteria:
+    - criterion: "Evaluation framework LangWatch narrative-control subsection"
+      id: "SC-LW3-EVAL"
+      metric: "Doc test or link audit"
+    - criterion: "HTOL LangWatch source-study markers"
+      id: "SC-LW3-HTOL"
+      metric: "harness-trace-observation-loop-doc.test.mjs"
+    - criterion: "merge_miss case kind in incident-revert corpus"
+      id: "SC-LW3-INCIDENT"
+      metric: "incident-revert-eval-corpus-doc.test.mjs"
+    - criterion: "Port backlog in session-handoff structure"
+      id: "SC-LW3-PORT"
+      metric: "session-handoff-structure-doc.test.mjs"
+    - criterion: "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC 18 §2 rows"
+      id: "SC-LW3-MCM"
+      metric: "LEAP on MCM REQ at implement"
+    - criterion: "tied_validate_consistency after implement"
+      id: "SC-LW3-TRACE"
+      metric: "tied_validate_consistency"
+    - criterion: "§2 row 18 and 18-row contract"
+      id: "SC-LW3-MATRIX"
+      metric: "methodology-composition-matrix-langwatch-row.test.mjs"
+  traceability:
+    architecture:
+      - "ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3"
+    implementation:
+      - "IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3"

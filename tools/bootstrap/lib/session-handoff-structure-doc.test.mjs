@@ -41,6 +41,8 @@ const STRUCTURE_MARKERS = [
   "handoffs/{phase}.yaml",
   "REQ-TIED_DAE_INCORPORATION",
   "completion-signals-handoff.md",
+  "## Port backlog",
+  "REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3",
 ];
 
 describe("session handoff structure [REQ-TIED_SESSION_HANDOFF_SKILL]", () => {
@@ -58,6 +60,7 @@ describe("session handoff structure [REQ-TIED_SESSION_HANDOFF_SKILL]", () => {
     assert.ok(text.includes("Related and pending prior requests"));
     assert.ok(text.includes("Plan spine"));
     assert.ok(text.includes("Plan execution steps"));
+    assert.ok(text.includes("## Port backlog"));
     assert.ok(text.includes("Environment"));
   });
 

@@ -24,10 +24,10 @@ describe("methodology composition matrix Netflix row [REQ-TIED_NETFLIX_ONTOLOGY_
   it("has exactly 17 §2 data rows including Netflix ontology-driven observability row 17", () => {
     assert.ok(fs.existsSync(matrixPath), `missing matrix: ${matrixPath}`);
     const text = fs.readFileSync(matrixPath, "utf8");
-    assert.match(text, /§2 \*\*17\*\* rows/);
-    assert.match(text, /exactly \*\*17\*\* data rows/);
+    assert.match(text, /§2 \*\*18\*\* rows/);
+    assert.match(text, /exactly \*\*18\*\* data rows/);
     const rowNumbers = countSection2DataRows(text);
-    assert.deepEqual(rowNumbers, Array.from({ length: 17 }, (_, i) => i + 1));
+    assert.deepEqual(rowNumbers, Array.from({ length: 18 }, (_, i) => i + 1));
     assert.ok(
       text.includes("Netflix ontology-driven observability"),
       "row 17 framework label missing",

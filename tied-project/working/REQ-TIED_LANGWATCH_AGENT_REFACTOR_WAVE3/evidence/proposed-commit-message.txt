@@ -1,0 +1,13 @@
+feat(langwatch): Wave 3 bounded operator doc compose
+
+Institutionalize LangWatch Wave 2 bounded recommendations as committed
+methodology/docs: MCM §2 row 18, eval Q5/Q1 literacy, HTOL study,
+merge_miss corpus kind, and session-handoff Port backlog norm.
+
+REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3
+ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3
+IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3
+REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX (LEAP SC-MCM-DOC 18)
+
+Completion: close_out allowed; envelope blocking_gaps=0; 11 bootstrap
+doc tests green. LangWatch comparison markdown stays operator-local.

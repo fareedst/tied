@@ -1,0 +1,30 @@
+IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
+  code_locations:
+    files:
+      - description: "LangWatch source study"
+        path: "tied-bundle/docs/harness-trace-observation-loop.md"
+      - description: "Matrix row contract"
+        path: "tools/bootstrap/lib/methodology-composition-matrix-langwatch-row.test.mjs"
+      - description: "§2 row 18"
+        path: "docs/comparisons/methodology-composition-matrix.md"
+    functions: []
+  decision: "RED/GREEN bootstrap tests for matrix row 18, HTOL, incident-revert merge_miss, session-handoff port backlog; bundle doc edits; LEAP REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX SC-MCM-DOC at implement."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3-pseudocode.md"
+  implementation_approach:
+    details:
+      - "docs/comparisons/methodology-composition-matrix.md"
+      - "docs/tied-methodology-evaluation-framework.md"
+      - "tied-bundle/docs harness-trace, incident-revert, pre-handoff"
+      - "tools/bootstrap/lib contract tests"
+      - "tools/bundled-prompt-type-skills/prompt-shared session-handoff-structure"
+    summary: "Doc-compose slices per pseudo-code sidecar."
+  traceability:
+    architecture:
+      - "ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3"
+    requirements:
+      - "REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3"
+    tests:
+      - "tools/bootstrap/lib/harness-trace-observation-loop-doc.test.mjs"
+      - "tools/bootstrap/lib/incident-revert-eval-corpus-doc.test.mjs"
+      - "tools/bootstrap/lib/methodology-composition-matrix-langwatch-row.test.mjs"
+      - "tools/bootstrap/lib/session-handoff-structure-doc.test.mjs"

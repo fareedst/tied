@@ -31,6 +31,8 @@ const REQUIRED_MARKERS = [
   "review false positive",
   "REQ-TIED_REVIEW_CONVERGENCE_POLICY",
   "denominator",
+  "merge_miss",
+  "REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3",
 ];
 
 describe("incident revert eval corpus guide [REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS]", () => {
@@ -48,5 +50,6 @@ describe("incident revert eval corpus guide [REQ-TIED_INCIDENT_REVERT_EVAL_CORPU
     assert.ok(text.includes('schema_version: "evaluation-corpus.v1"'));
     assert.ok(text.includes("review_false_positive"));
     assert.ok(text.includes("post_merge_incident"));
+    assert.ok(text.includes("merge_miss"));
   });
 });

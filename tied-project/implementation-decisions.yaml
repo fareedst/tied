@@ -2914,6 +2914,10 @@ IMPL-TIED_JEV_TOOL_SAFETY_GATING:
   detail_file: "implementation-decisions/IMPL-TIED_JEV_TOOL_SAFETY_GATING.yaml"
   name: "Harness tool safety gating implementation"
   status: "Active"
+IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
+  detail_file: "implementation-decisions/IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml"
+  name: "LangWatch Wave 3 doc-compose implementation"
+  status: "Planned"
 IMPL-TIED_LAYERED_CLIENT_INSTALL:
   category: "Infrastructure"
   description: "install-layers.mjs orchestration and tools/bootstrap/lib/layers/* modules."

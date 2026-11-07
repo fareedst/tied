@@ -110,6 +110,17 @@ The program must answer questions that **structural validation alone cannot**:
 
 Denominators must be explicit (prefer **change count** and **comparable cohort keys**, not raw token or file counts). See [docs/tied-fidelity-research-plan.md](tied-fidelity-research-plan.md) §9.
 
+### External narrative control (Q1 / Q5 literacy — compose only)
+
+Vendor refactor stories (for example **LangWatch-reported** $/session, agent-hours, or post-ship UI/NLP misses after heavy verification) are **narrative control** for charter reading—they are **not** TIED outcomes, **not** comparable-arms evidence, and **not** substitutes for enrolled cohort arms.
+
+| Charter question | Vendor story use | Required TIED pairing |
+| --- | --- | --- |
+| **Q5** cost | Illustrate why raw token or session-cost leaderboards mislead | Pair with checklist/MCP wall time, git/PR cycle proxies, and explicit **not_measured** until cohort export |
+| **Q1** defects | Illustrate “green checks ≠ confirmed defect rate” | Map to **historical defect proxy** or fidelity case study paths—never automatic TIED superiority |
+
+Traceability: [REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3](../tied-project/requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml) · methodology matrix §2 row **18**. Phase 3 **comparable-arms.v1** static adapter remains a **separate** scoped REQ.
+
 ---
 
 ## Comparison dimensions

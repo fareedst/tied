@@ -26,8 +26,9 @@ This Phase 4 slice is **documentation + installable template**—not a new batch
 | **`post_merge_incident`** | Production or staging failure tied to a merged change with sponsor-confirmed scope | Merge ref, detection time, blast-radius summary, link to postmortem or Tracker handoff |
 | **`revert`** | Change reverted (full or partial) with recorded reason | Revert commit/ref, original REQ or PR id, sponsor **costly choice** note if waived |
 | **`review_false_positive`** | Automated or agent review finding confirmed **invalid** after human review | Finding text hash, reviewer disposition, link to [review convergence](review-convergence-policy.md) suppression row |
+| **`merge_miss`** | Named port/backlog item from a long agent branch: code from **main** not merged, silent loss, or wrong-module coupling confirmed by sponsor after merge window | Owed-port id, source branch/ref, sponsor confirmation note, link to `session-handoff.md` **Port backlog** when used |
 
-**Distinct from** a **historical defect proxy** alone ([fidelity-research](../../tied-project/vocab/fidelity-research.md)): raw revert labels without sponsor confirmation stay **out of corpus** until promoted to a **confirmed finding** narrative.
+**Distinct from** a **historical defect proxy** alone ([fidelity-research](../../tied-project/vocab/fidelity-research.md)): raw revert labels without sponsor confirmation stay **out of corpus** until promoted to a **confirmed finding** narrative. **`merge_miss`** rows compose with LangWatch **owed-ports** literacy ([REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3](../../tied-project/requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml))—they do **not** prove TIED methodology effectiveness.
 
 ---
 

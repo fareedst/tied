@@ -6,7 +6,7 @@
 
 **Invoke skill:** `@harness-trace-review` (`tools/bundled-prompt-type-skills/harness-trace-review/SKILL.md`; installed under `.cursor/skills/harness-trace-review/`).
 
-**Source studies:** [LangChain harness engineering × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) (trace/benchmark compose); [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md) (online metrics / Keep Rate compose — **Cursor-reported** only); [Netflix observability ontology × TIED](../../docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md) (operational identity graph compose — **Netflix-reported** only).
+**Source studies:** [LangChain harness engineering × TIED](../../docs/comparisons/langchain-harness-engineering-vs-tied-agent-management.md) (trace/benchmark compose); [Cursor harness engineering × TIED](../../docs/comparisons/cursor-harness-engineering-vs-tied-agent-management.md) (online metrics / Keep Rate compose — **Cursor-reported** only); [Netflix observability ontology × TIED](../../docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md) (operational identity graph compose — **Netflix-reported** only); LangWatch 51-day refactor compose ([REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3](../../tied-project/requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml), [operator skim](../../tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/langwatch-bounded-operator-skim.md)) — **LangWatch-reported** dogfood trace review only; pair matrix **rows 14–15** for empirical harness loops.
 
 ---
 
@@ -94,6 +94,14 @@ Netflix’s **ontology-driven observability** narrative (operational identity gr
 | **Ops graph smear** | Comparison prose mints REQ | **`add-feature`** / **`build-plan`** only | QuipuDB product in bundle |
 
 **Primary study:** [netflix-ontology-driven-observability-vs-tied-agent-management.md](../../docs/comparisons/netflix-ontology-driven-observability-vs-tied-agent-management.md). **REQ trace:** [REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3](../../tied-project/requirements/REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3.yaml). Pair **matrix rows 14–15** (trace harness) with **row 17** (operational identity compose).
+
+---
+
+## Source studies (LangWatch compose)
+
+LangWatch reports trace-informed harness tuning (for example the **11 September** workflow review) while enforcing **module contracts** and a **lint cage** on a long-lived agent branch. **LangWatch-reported** session costs and UI test-drive pass rates are **external** narratives only.
+
+**Operator skim:** [langwatch-bounded-operator-skim.md](../../tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/langwatch-bounded-operator-skim.md). **REQ trace:** [REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3](../../tied-project/requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml). Route observations through **`tied_feedback_capture_observation`**; do not treat trace review as **`tied_checklist_gate_validate`** outcomes. Pair **rows 14–15** (Cursor/LangChain trace harness) with **row 18** (repo-scale refactor + owed-ports handoff).
 
 ---
 

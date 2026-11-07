@@ -1,0 +1,90 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "node --test tools/bootstrap/lib/methodology-composition-matrix-langwatch-row.test.mjs"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 215,
+      "exit_code": 0,
+      "id": "citdp-evidence-1",
+      "result": "passed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "pseudocode_validate IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3 gate_mode"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 104,
+      "exit_code": 127,
+      "id": "citdp-evidence-2",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_checklist_gate_validate phase pre_implementation"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 104,
+      "exit_code": 127,
+      "id": "citdp-evidence-3",
+      "result": "failed"
+    }
+  ],
+  "commit": "c5da260ce36ce075b6403dad6a030ab260ea92aa",
+  "covered_tokens": [
+    "REQ-TIED_EXTERNAL_SERVICE_COMPARISON",
+    "REQ-TIED_HARNESS_PLATFORM_SEAM",
+    "REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP",
+    "REQ-TIED_INCIDENT_REVERT_EVAL_CORPUS",
+    "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX",
+    "REQ-TIED_PRE_HANDOFF_VERIFICATION_CHARTER",
+    "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "langwatch_reported_metrics_not_tied_outcomes",
+    "merge_miss_not_automatic_superiority_claim",
+    "port_backlog_not_gate_authority"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-1794070842690",
+  "schema_version": "verification-evidence-manifest.v1"
+}

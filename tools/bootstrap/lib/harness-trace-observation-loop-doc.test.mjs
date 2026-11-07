@@ -29,6 +29,10 @@ const REQUIRED_MARKERS = [
   "## Source studies (Netflix compose)",
   "netflix-ontology-driven-observability-vs-tied-agent-management.md",
   "REQ-TIED_NETFLIX_ONTOLOGY_OBSERVABILITY_WAVE3",
+  "## Source studies (LangWatch compose)",
+  "REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3",
+  "langwatch-bounded-operator-skim.md",
+  "LangWatch-reported",
 ];
 
 describe("harness trace observation loop guide [REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP]", () => {

@@ -31,6 +31,7 @@ Run what applies to the change; skip rows with proof **n/a** and say why in the 
 | **YAML lint** | Index/detail YAML edited | `lint_yaml` on changed files |
 | **Checklist gate** | TIED-tracked REQ | `tied_gate_check` or validated `pre_implementation` / `verification` receipt for depth |
 | **Completion signals** | Claiming “done” or “ready to commit” | Separate **machine close-out**, **process contract**, **adherence ledger** ([completion-signals-handoff](../../tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md) in store; clients: prompt-shared after install) |
+| **Composition path** | Behavior-changing TIED-tracked slice | One named path from sponsor intent → observable behavior (tests, gate receipt, or justified E2E) recorded in handoff **Finished** or **Repeatable verification**; optional **Port backlog** when branch absorbed many main merges ([session-handoff-structure.md](../../tools/bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md#port-backlog-optional--long-agent-branches), [REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3](../../tied-project/requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml)) |
 
 **Fresh-context review:** For large or high-risk diffs, prefer a **new session** (or `/session-handoff` when installed) so review is not only “same thread fatigue.”
 
@@ -58,6 +59,7 @@ Do **not** treat PR comment volume or bot scores as TIED authority.
 - [Client development index](client-development-index.md) — core seven and scenario entry
 - [Primary improvement pending queue](tied-improvement-pending-work-queue.md) — local `TIQ-*` index for cross-REQ maintenance ([REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE](../../tied-project/requirements/REQ-TIED_IMPROVEMENT_PENDING_WORK_QUEUE.yaml))
 - [Harness trace observation loop](harness-trace-observation-loop.md) — Loop 2 trace review → Kaizen capture ([REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP](../../tied-project/requirements/REQ-TIED_HARNESS_TRACE_OBSERVATION_LOOP.yaml))
+- [LangWatch bounded operator skim](../../tied-project/working/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3/langwatch-bounded-operator-skim.md) — owed-ports / Q5 literacy compose ([REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3](../../tied-project/requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml))
 - [Claude Code team code review × TIED](../../docs/comparisons/claude-code-team-code-review-vs-tied.md) — compose-don't-replace source study
 - [Sponsor–agent relationship](../../tied-project/vocab/sponsor-agent-relationship.md) — consequence ladder
 

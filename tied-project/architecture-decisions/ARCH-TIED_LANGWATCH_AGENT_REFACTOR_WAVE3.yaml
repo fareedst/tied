@@ -1,0 +1,27 @@
+ARCH-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
+  decision: "Treat LangWatch Wave 3 as outreach matrix row 18 plus bundle/handoff doc compose; keep checklist gates, MCP YAML, and LangWatch product stack outside TIED authoritative core."
+  implementation_approach:
+    details:
+      - "LEAP matrix SC-MCM-DOC to 18"
+      - "Port backlog optional handoff section"
+      - "§2 row 18 agent-draft cells"
+    summary: "Docs and bootstrap contract tests only."
+  rationale:
+    benefits:
+      - "Explicit LangWatch-reported proof boundary"
+    problems_solved:
+      - "Conflating lint cage with token graph truth"
+      - "Owed-ports metaphor without disk norm"
+    why: "Compose-don't-replace per LangWatch × TIED bounded recommendations."
+  related_decisions:
+    depends_on: []
+    see_also:
+      - "ARCH-TIED_HARNESS_PLATFORM_SEAM"
+      - "ARCH-TIED_HARNESS_TRACE_OBSERVATION"
+      - "ARCH-TIED_INCIDENT_REVERT_EVAL_CORPUS"
+      - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+  traceability:
+    implementation:
+      - "IMPL-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3"
+    requirements:
+      - "REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3"

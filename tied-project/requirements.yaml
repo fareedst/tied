@@ -3174,6 +3174,17 @@ REQ-TIED_JEV_TOOL_SAFETY_GATING:
   name: "Jev harness tool safety gating (Blueprint D)"
   priority: "P2"
   status: "Implemented"
+REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3:
+  category: "Methodology"
+  detail_file: "requirements/REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3.yaml"
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-07"
+      reason: "Slices A–H GREEN; matrix row 18; bootstrap doc tests"
+  name: "LangWatch agent refactor Wave 3 (bounded operator compose)"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_LAYERED_CLIENT_INSTALL:
   category: "Infrastructure"
   description: "Layer-selectable client installer (tied-install) with linked and full modes, no-MCP skill surface, and legacy tied-install.sh profile."
@@ -3295,15 +3306,37 @@ REQ-TIED_METHODOLOGY_CLIENT_BOUNDARY:
   status: "Implemented"
 REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   category: "Functional"
-  description: "Maintain sponsor-facing QMM loop × method composition matrix under docs/comparisons/methodology-composition-matrix.md with prefilled dispositions and blank TIED mechanism columns for sponsor fill-in."
+  description: "Sponsor-facing outreach artifact: one markdown matrix mapping QMM Loop 1/2/3 × well-known and QMM methods (§1, exactly 27 rows) plus Layer C adjacent frameworks (§2, exactly 18 rows). Prefill disposition, tied_center_of_gravity, and evidence_refs from existing comparison docs; mechanism columns agent-drafted for sponsor review. Not ISO/CMMI certification or behavioral equivalence claims."
   detail_file: "requirements/REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX.yaml"
+  metadata:
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-07"
+      reason: "§2 row 18 LangWatch compose (REQ-TIED_LANGWATCH_AGENT_REFACTOR_WAVE3); row 17 Netflix"
   name: "Methodology composition matrix"
   priority: "P2"
+  rationale:
+    benefits:
+      - "Single auditable 27+18 row matrix"
+      - "Traceable docs-only REQ for outreach maintenance"
   related_requirements:
     depends_on: []
     related_to:
       - "REQ-TIED_SETUP"
     supersedes: []
+  satisfaction_criteria:
+    - criterion: "All TIED mechanism columns and sponsor_notes cells are empty or _TBD_; no prefilled mechanism claims."
+      id: "SC-MCM-MECH"
+      metric: "Markdown table audit"
+    - criterion: "Cross-links from tied-vs-well-known-methodologies.md and qmm-kaizen-vs-tied.md resolve to the new matrix."
+      id: "SC-MCM-LINKS"
+      metric: "Relative link check from docs/comparisons/"
+    - criterion: "docs/comparisons/methodology-composition-matrix.md exists with §0–§3, §1 exactly 27 data rows, §2 exactly 18 data rows."
+      id: "SC-MCM-DOC"
+      metric: "Row inventory script or manual count per working PLAN"
+    - criterion: "Project REQ/ARCH/IMPL tokens registered; tied_validate_consistency passes for project YAML."
+      id: "SC-MCM-TRACE"
+      metric: "tied_validate_consistency"
   status: "Implemented"
   traceability:
     architecture:
