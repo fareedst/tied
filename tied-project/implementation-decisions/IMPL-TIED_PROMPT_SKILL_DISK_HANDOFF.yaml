@@ -1,12 +1,12 @@
 IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF:
   code_locations:
     files:
+      - description: "Agent parent handoff disk paths"
+        path: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
       - description: "Disk gate procedure"
         path: "tools/bundled-prompt-type-skills/prompt-shared/prompt-skill-disk-handoff.md"
       - description: "Plan leaf disk handoff contract"
         path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
-      - description: "Agent parent handoff disk paths"
-        path: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
   cross_references:
     - "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF"
     - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"

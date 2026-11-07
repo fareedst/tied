@@ -14,11 +14,11 @@ REQ-TIED_PROMPT_SKILL_DISK_HANDOFF:
       - "REQ-TIED_SESSION_HANDOFF_SKILL"
     related_to: []
   satisfaction_criteria:
+    - criterion: "e2e prompt-type-skills, prompt-type-subagent, and session-handoff-structure-doc tests pass."
+    - criterion: "Plan leaves and build-plan/close-out SKILLS and agents reference disk handoff."
+    - criterion: "prompt-execution-mode.md links prompt-skill-disk-handoff.md."
     - criterion: "prompt-skill-disk-handoff.md defines disk gate and bootstrap vs @handoff."
     - criterion: "session-handoff-structure.md documents Plan execution steps and merge rules."
-    - criterion: "prompt-execution-mode.md links prompt-skill-disk-handoff.md."
-    - criterion: "Plan leaves and build-plan/close-out SKILLS and agents reference disk handoff."
-    - criterion: "e2e prompt-type-skills, prompt-type-subagent, and session-handoff-structure-doc tests pass."
   status: "Implemented"
   traceability:
     architecture:
