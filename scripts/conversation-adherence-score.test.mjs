@@ -52,7 +52,7 @@ describe("conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
 
   it("returns all dimensions with denominators", () => {
     const raw = fs.readFileSync(path.join(FIXTURES, "unified-closeout.jsonl"), "utf8");
-    const dims = scoreAllDimensions(parseTranscriptLines(raw), { expectedMethodologyVersion: "4.1.0" });
+    const dims = scoreAllDimensions(parseTranscriptLines(raw), { expectedMethodologyVersion: "4.2.0" });
     assert.equal(dims.length, DIMENSION_IDS.length);
     assert.deepEqual(dims.map((d) => d.id), DIMENSION_IDS);
     for (const dim of dims) {
@@ -80,7 +80,7 @@ describe("conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
 
   it("records response_stamp_version_mismatch as warn-only against expected semver", () => {
     const raw = fs.readFileSync(path.join(FIXTURES, "response-stamp-version-mismatch.jsonl"), "utf8");
-    const result = scoreResponseStampVersionMismatch(parseTranscriptLines(raw), "4.1.0");
+    const result = scoreResponseStampVersionMismatch(parseTranscriptLines(raw), "4.2.0");
     assert.equal(result.flagged, false);
     assert.equal(result.severity, "warn");
     assert.equal(result.numerator, 1);

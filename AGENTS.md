@@ -2,7 +2,7 @@
 
 **Scope**: Entire repository (root unless overridden by nested `AGENTS.md` files)
 
-**TIED Methodology Version**: 4.1.0
+**TIED Methodology Version**: 4.2.0
 
 This document centralizes every instruction AI coding assistants must follow while working in TIED repositories. It supersedes reminders in `.ai-agent-instructions`, `.cursorrules`, and README snippets. Treat it as the canonical reference when configuring prompts, IDE rules, or agent workflows. For methodology background (what TIED is, costs and benefits, LEAP rationale), see `tied-bundle/docs/LEAP.md`, `tied-bundle/docs/implementation-decisions.md`, and `tied-bundle/docs/pseudocode-writing-and-validation.md` (IMPL pseudo-code lifecycle, three-way alignment, LEAP; copied into the project by `tied-install.sh` when missing).
 

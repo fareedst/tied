@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0] - 2026-11-07
+
 ### Fixed
 
 - **MCP HTTPS operator smoke ([REQ-MCP_HTTPS_REMOTE_ACCESS])** — `server_info` `outputSchema` uses `z.looseObject({})` (fixes MCP SDK `_zod` on stdio/HTTP); example compose defaults, host `127.0.0.1:8787`/`8788` publish, `deploy/.env.example`, clearer HTTP CLI `ECONNREFUSED` hints; gitignore local `.env`.
