@@ -1,7 +1,9 @@
 /**
  * [REQ-TIED_STORE_README_CERTIFIABLE_ONBOARDING] [REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE]
- * [REQ-TIED_STORE_README_EXPERIENCE_HUB] [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
- * [IMPL-TIED_STORE_README_SECTIONS] [IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
+ * [REQ-TIED_STORE_README_EXPERIENCE_HUB] [REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE]
+ * [REQ-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
+ * [IMPL-TIED_STORE_README_SECTIONS] [IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE]
+ * [IMPL-TIED_LEGACY_LAYOUT_DOC_DECOMMISSION]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -35,6 +37,13 @@ const REQUIRED_SUBSTRINGS = [
   "/close-out",
   "git clone",
   "docs/tied-experience/index.md",
+  "manual-mcp-acceptance",
+  "Customize",
+  "MCPs",
+  "tied-yaml-optin",
+  "2 new MCP servers found",
+  "Enable selected",
+  "#manual-mcp-acceptance",
 ] as const;
 
 const FORBIDDEN_LEGACY_LAYOUT_DOC_PATTERNS = [

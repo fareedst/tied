@@ -1377,6 +1377,17 @@ ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE:
   name: "Store README information architecture"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_STORE_README_MCP_ONBOARDING:
+  cross_references:
+    - "IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+    - "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+  description: "manual-mcp-acceptance anchor under Optionally enable MCP server."
+  metadata:
+    last_updated: "2026-11-07"
+    registered: "2026-11-07"
+  name: "Store README MCP onboarding IA"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_STRUCTURE:
   cross_references:
     - "IMPL-TIED_FILES"
@@ -3176,6 +3187,17 @@ IMPL-TIED_STORE_BUNDLE_GIT_POLICY:
 IMPL-TIED_STORE_README_IA_SKILL:
   description: "Store README IA skill bootstrap implementation"
   type: "implementation"
+IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+  cross_references:
+    - "ARCH-TIED_STORE_README_MCP_ONBOARDING"
+    - "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+  description: "README prose, structure test substrings, operator lens link."
+  metadata:
+    last_updated: "2026-11-07"
+    registered: "2026-11-07"
+  name: "Store README MCP manual acceptance implementation"
+  status: "Active"
+  type: "IMPL"
 IMPL-TIED_STORE_README_SECTIONS:
   cross_references:
     - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
@@ -5207,6 +5229,17 @@ REQ-TIED_STORE_README_EXPERIENCE_HUB:
 REQ-TIED_STORE_README_IA_SKILL:
   description: "Store-only readme-information-architecture facilitator skill"
   type: "requirement"
+REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+  cross_references:
+    - "ARCH-TIED_STORE_README_MCP_ONBOARDING"
+    - "IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+  description: "README manual Cursor and Claude MCP enable steps with structure-test enforcement."
+  metadata:
+    last_updated: "2026-11-07"
+    registered: "2026-11-07"
+  name: "Store README manual MCP acceptance"
+  status: "Active"
+  type: "REQ"
 REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
   cross_references:
     - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"

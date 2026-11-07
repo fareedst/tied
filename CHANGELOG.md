@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Store README manual MCP acceptance ([REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE], [ARCH-TIED_STORE_README_MCP_ONBOARDING], [IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE])** — README documents Cursor **Settings → Customize → MCPs** and Claude CLI **2 new MCP servers** enable flow (`#manual-mcp-acceptance`); structure-test substrings; operator-lens cross-link; delivery-path tables and copy-paste spine; prerequisites drop obsolete Go references. CITDP: [CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/PLAN.md).
+
 ## [4.1.0] - 2026-11-07
 
 ### Added

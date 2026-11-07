@@ -7,9 +7,7 @@
 **Release highlights (4.1.0):** Methodology minor release since 4.0.0 — disk-first plan handoffs, runtime configuration on disk, WF trial hardening, and MCP observability. Full notes: [CHANGELOG — 4.1.0](CHANGELOG.md#410---2026-11-07).
 
 - **Plan handoff on disk** — session-handoff **Plan execution steps** across Prompt Composer skills ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]).
-- **Semver on demand** — no mandatory per-turn `TIEDv` stamp; read version via MCP **`server_info`** ([REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND]).
-- **MCP `server_info`** — redacted identity, compatibility, runtime, and health snapshot ([REQ-MCP_SERVER_INFO]).
-- **Runtime disk config & env policy** — operator toggles and first-party env catalog on refresh paths ([REQ-TIED_RUNTIME_DISK_CONFIG], [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY]).
+- **MCP** `server_info` — redacted identity, compatibility, runtime, and health snapshot ([REQ-MCP_SERVER_INFO]).
 - **WF trials & prompt-type skills** — four-phase disposable cohort playbooks, TypeScript implementation stack, 18-leaf skill inventory ([REQ-WF_TRIAL_FOUR_PHASE_HARDENING], [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]).
 
 ## How to use this README
@@ -37,16 +35,34 @@ From the TIED repository root on macOS (Unix / Git Bash). Windows and full prere
 
 ### Primary operator delivery path
 
-The **configuration rhythm** (store → client) in four steps:
+**Configuration rhythm:** store clone → workspace build → client install → MCP confirm.
 
-1. **Clone:** `git clone` the [TIED store](https://github.com/fareedst/tied); `cd` to the store root.
-2. **Store workspace build:** `./build-workspace.sh` — details in [Store workspace build](#store-workspace-build) below; `./build-workspace.sh --help`.
-3. **Client install:** `./tied-install.sh /path/to/client` (or linked primary install from the greenfield table); `./tied-install.sh --help` (no arguments prints styled help). Methodology refresh: `--refresh`.
-4. **Confirm MCP:** `tied_config_get_base_path` → client `tied-project/` — [Optionally enable the MCP server](#2-optionally-enable-the-mcp-server).
+| Step | Goal | Command |
+| --- | --- | --- |
+| 1 | Clone [TIED store](https://github.com/fareedst/tied) | `git clone https://github.com/fareedst/tied` |
+| 2 | Build MCP / CLI / bootstrap | `./build-workspace.sh` |
+| 3 | Install into client directory | `./tied-install.sh /path/to/client` |
+| 4 | Confirm writable root | [Manually accept MCP](#manual-mcp-acceptance), then **`tied_config_get_base_path`** → `tied-project/` |
 
-Windows store build and install shims: [Install and use](#install-and-use).
+**Copy-paste spine** (replace `/path/to/client`; run from store root after clone):
 
-<a id="compact-feature-rhythm"></a>
+```bash
+git clone https://github.com/fareedst/tied
+cd tied
+./build-workspace.sh
+./tied-install.sh /path/to/client
+```
+
+| When you need… | Command |
+| --- | --- |
+| Build script help | `./build-workspace.sh --help` |
+| Install script help (no args = styled help) | `./tied-install.sh --help` |
+| Methodology refresh on an existing client | `./tied-install.sh --refresh /path/to/client` |
+| Linked primary repo (not a separate client path) | See [Greenfield](#greenfield) → primary row, or [Primary implementation repository](#primary-implementation-repository) |
+
+Details: [Store workspace build](#store-workspace-build). Windows store build and install shims: [Install and use](#install-and-use).
+
+
 
 ### Compact feature rhythm
 
@@ -82,7 +98,7 @@ From the store root:
 
 On macOS the default shell is **zsh** — run `./build-workspace.sh` anyway (bash via shebang), or `./build-workspace.zsh`. **Windows:** `.\build-workspace.ps1` or `build-workspace.cmd`.
 
-This produces `mcp-server/dist/index.js`, the umbrella **`tied`** CLI, **`tied agentstream`**, and bootstrap verification gates. The script prints colored steps and hints for common failures. See [TIED source repository setup](#tied-source-repository-setup) for prerequisites and manual equivalents.
+This produces `mcp-server/dist/index.js`, the umbrella `tied` CLI, `tied agentstream`, and bootstrap verification gates. The script prints colored steps and hints for common failures. See [TIED source repository setup](#tied-source-repository-setup) for prerequisites and manual equivalents.
 
 ### Greenfield
 
@@ -114,7 +130,7 @@ Then follow `[PROC-AGENT_REQ_CHECKLIST]` via the [agent requirement implementati
 
 The [TIED Experience Hub](docs/tied-experience/index.md) teaches methodology with this store as the worked example—aligned facets, audience lanes, and proof boundaries instead of one long README essay.
 
-<a id="performing-work-in-certifiable-workflows"></a>
+
 
 | If you are… | Lens |
 | --- | --- |
@@ -148,7 +164,6 @@ These steps prepare **this TIED checkout** (MCP server, npm workspace CLIs, boot
 | Tool | Version | Required for |
 | --- | --- | --- |
 | Node.js | 18+ | `tied-install`, MCP server, bootstrap verification gates |
-| Go | — | **Not required** (Go `tools/agentstream/` removed Phase **4d**; see [phase4d-go-oracle-freeze.json](tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json)) |
 
 **Unix / Git Bash / macOS zsh** (from the TIED repository root):
 
@@ -163,7 +178,7 @@ cd mcp-server && npm install && npm run build
 cd ../tools/bootstrap && npm install
 ```
 
-The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp`, `@tied/cli`, `@tied/agentstream`, `@tied/bootstrap`, `@tied/yaml-cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella **`tied`** CLI (`tied mcp` delegates to the same stdio entry), and **`tied agentstream`** (TypeScript-only after Phase **4d**). Ruby `tools/agent-stream` was removed in Phase **4b**. Legacy Go emergency reinstall: [phase4c-deprecation-notice.md](working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4c-deprecation-notice.md) and [phase4d-go-oracle-freeze.json](tied-project/working/REQ-TIED_UNIFIED_TOOLCHAIN/phase4d-go-oracle-freeze.json).
+The `mcp-server/` directory is an npm **workspace** (`@tied/mcp`, `@tied/cli`, `@tied/agentstream`, `@tied/bootstrap`, `@tied/yaml-cli`). One install/build at that root compiles the MCP server (`dist/index.js`), the umbrella `tied` CLI (`tied mcp` delegates to the same stdio entry), and `tied agentstream` (TypeScript in `mcp-server/packages/agentstream/`).
 
 **Windows** (from the TIED repository root):
 
@@ -171,7 +186,7 @@ The **`mcp-server/`** directory is an npm **workspace** (`@tied/mcp`, `@tied/cli
 .\build-workspace.ps1
 ```
 
-Or from **`cmd.exe`**: `build-workspace.cmd`
+Or from `cmd.exe`: `build-workspace.cmd`
 
 Manual equivalent:
 
@@ -227,15 +242,44 @@ Methodology-owned YAML under `tied-bundle/` is read-only in the client and can b
 
 #### 2. Optionally enable the MCP server
 
-The MCP server stays in this TIED repository; it is not copied into the client. After [source setup](#tied-source-repository-setup), `mcp-server/dist/index.js` serves any client. `tied-install.sh` creates `.cursor/mcp.json` with the `tied-yaml` entry when that file is missing, and preserves an existing file byte-for-byte. For manual configuration or details, see [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md). From the client project root, the recommended Cursor flow is:
+
+
+The MCP server stays in this TIED repository; it is not copied into the client. After [source setup](#tied-source-repository-setup), `mcp-server/dist/index.js` serves any client. `tied-install.sh` creates `.cursor/mcp.json` with the `tied-yaml` entry when that file is missing, and preserves an existing file byte-for-byte. Linked install also writes repo-root `.mcp.json` for the Claude harness ([REQ-TIED_CLAUDE_HARNESS](tied-project/requirements/REQ-TIED_CLAUDE_HARNESS.yaml)). For path and env details, see [adding TIED MCP and invoking passes](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md).
+
+**Cursor (manual accept)** — open the **client** or **primary** repo (folder containing `tied-project/` and `.cursor/mcp.json`):
+
+1. **Settings** → **Customize** → **MCPs**
+2. Under **Connected**, select `tied-yaml`
+3. Click the **first inner control** labeled with the **workspace folder basename** (parent of `tied-project/`, e.g. `stdd` on this store clone; after [REQ-TIED_CURSOR_MCP_DISPLAY_LABEL](tied-project/working/REQ-TIED_CURSOR_MCP_DISPLAY_LABEL/PLAN.md) ships, expect `tied`)
+4. Repeat for `tied-yaml-optin` when you need infrequent tools (see [mcp-server README](mcp-server/README.md) — tool profiles)
+
+**Claude CLI (manual enable)** — after `tied-install`, confirm `.mcp.json` at the project root lists `tied-yaml` and `tied-yaml-optin`. From the project root, run `claude` and approve **trust this folder** on first launch. When prompted with **2 new MCP servers found**, keep both servers checked and choose **Enable selected**:
+
+```
+────────────────────────────────────────────────────────────────────────────────
+  2 new MCP servers found in this project
+  Select any you wish to enable.
+
+  MCP servers may execute code or access system resources. All tool calls
+  require approval. Learn more in the MCP documentation.
+
+  ❯ [✔] tied-yaml
+    [✔] tied-yaml-optin
+       Enable selected
+ Space to select · Esc to reject all
+```
+
+Per-call tool approval still applies in Claude; **Esc** at this menu rejects all servers.
+
+**Verify:** Call `tied_config_get_base_path` and confirm the client’s `tied-project/` directory. Optionally use `yaml_index_read` or the `tied://requirements` resource. Set `TIED_BASE_PATH` (or `TIED_CLIENT_PROJECT_PATH`) to the client’s absolute `tied-project/` when editing `.cursor/mcp.json` by hand; set `TIED_MCP_BIN` when the server binary is outside the client tree.
+
+**Advanced (Cursor Agent CLI):** From the client project root:
 
 ```bash
 agent mcp enable tied-yaml
 ```
 
-Approve the project MCP configuration when prompted, then type `quit` to exit the interactive Agent session. Set `TIED_BASE_PATH` to the client’s absolute `tied-project/` directory. If the server binary is outside the client tree, set `TIED_MCP_BIN` to the absolute path of the TIED repository’s `mcp-server/dist/index.js`.
-
-Confirm the server with a tool such as `yaml_index_read` or `tied_config_get_base_path`, or read the `tied://requirements` resource. The [MCP server README](mcp-server/README.md) documents the full tool surface and configuration.
+Approve the project MCP configuration when prompted, then type `quit`. See [adding TIED MCP §3.3](tied-bundle/docs/adding-tied-mcp-and-invoking-passes.md#33-enable-the-server-in-cursor-cursor-agent-cli).
 
 #### 3. Work without MCP
 
@@ -249,7 +293,7 @@ Read [using TIED without MCP](tied-bundle/docs/using-tied-without-mcp.md) before
 
 ## Primary implementation repository
 
-Use this path when **one git repository** holds both your application and TIED project data (`tied-project/`). That repo is the **primary implementation repository**. The **TIED store** is a separate checkout of this methodology repository (or a pinned clone such as under `tied_versions/`) with a built MCP server (`mcp-server/dist/index.js`) and bundled skills under `tools/bundled-*`.
+Use this path when **one git repository** holds both your application and TIED project data (`tied-project/`). That repo is the **primary implementation repository**. The **TIED store** is a separate checkout of this methodology repository (or a pinned clone such as under `tied_versions/`) with a built MCP server (`mcp-server/dist/index.js`) and bundled skills under `tools/bundled-`*.
 
 ```mermaid
 flowchart LR
@@ -324,7 +368,7 @@ Linked mode writes **stubs** under `.cursor/skills/` (tied-yaml, prompt-type lea
 
 1. Build the **store** (`mcp-server/dist/index.js`).
 2. First linked install on the primary repo with `--store`.
-3. Open the primary repo in Cursor; approve MCP if prompted.
+3. Open the primary repo in Cursor; [manually accept MCP](#manual-mcp-acceptance) if prompted.
 4. Call `tied_config_get_base_path` and confirm the project traceability directory.
 5. Run `node tools/bootstrap/install-layers.mjs --doctor .` from the primary root (Node-only; no bash required on Windows).
 6. Optional: `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency`.
@@ -389,7 +433,7 @@ Run one selected spec with the agentstream batch driver (`scripts/run-feature-ba
 - `bootstrap_without_mcp.sh` — bootstrap and print next steps for non-MCP use.
 - `scripts/run-feature-batch.sh` — delegates to the agentstream batch driver (stable CLI surface; Ruby runner removed Phase **4b**).
 - `scripts/run-feature-batch-agentstream.sh` — `tied agentstream` feature-spec and checklist driver.
-- `@tied/agentstream` — TypeScript pipeline in `mcp-server/packages/agentstream/`; legacy Go path removed Phase **4d** ([tools/agentstream/README.md](tools/agentstream/README.md) redirect stub only).
+- `@tied/agentstream` — TypeScript pipeline in `mcp-server/packages/agentstream/` ([tools/agentstream/README.md](tools/agentstream/README.md) documents the retired `tools/agentstream/` path).
 - `feature-orchestrator` / `tied` feature commands — feature lifecycle CLI from the same workspace (see [feature-orchestration vocabulary](tied-project/vocab/feature-orchestration.md)).
 - `tools/bundled-tied-yaml-skill/` — canonical tied-yaml skill source; clients receive `.cursor/skills/tied-yaml/` via `tied-install`.
 - `scripts/yaml_tool.sh` and `scripts/lint_yaml.sh` — canonicalize or lint TIED YAML according to the documented edit loop.
@@ -419,7 +463,7 @@ stdd/
 ├── tools/
 │   ├── bootstrap/             # tied-install engine and client verification gates
 │   ├── bundled-tied-yaml-skill/   # Canonical tied-yaml skill (installed into clients)
-│   └── agentstream/           # Redirect stub only (Go runner removed Phase 4d)
+│   └── agentstream/           # Redirect stub (canonical runner: @tied/agentstream)
 ├── scripts/                   # Bootstrap, batch, YAML, and analysis utilities
 ├── build-workspace.sh         # Store workspace build (Unix / Git Bash)
 ├── build-workspace.ps1        # Store workspace build (Windows PowerShell)

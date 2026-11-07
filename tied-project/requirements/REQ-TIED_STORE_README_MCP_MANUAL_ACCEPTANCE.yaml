@@ -1,0 +1,32 @@
+REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+  REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+    category: "Documentation"
+    description: "Root README documents manual operator steps to accept tied-yaml and tied-yaml-optin in Cursor Settings and Claude CLI MCP discovery."
+    name: "Store README manual MCP acceptance"
+    priority: "P2"
+    rationale:
+      benefits:
+        - "Operators enable MCP without guessing agent CLI"
+      problems_solved:
+        - "README only documented agent mcp enable"
+      why: "Sponsor onboarding for Cursor Customize and Claude TUI flows"
+    satisfaction_criteria:
+      - criterion: "operator-lens step 4 links to README manual MCP anchor."
+        id: "SC-OPERATOR-LENS-MCP-LINK"
+        metric: "docs/tied-experience/operator-lens.md"
+      - criterion: "README §2 documents Cursor Customize MCPs flow and Claude 2 new MCP servers TUI with manual-mcp-acceptance anchor."
+        id: "SC-README-MCP-MANUAL"
+        metric: "README.md"
+      - criterion: "store-readme-structure.test.ts enforces locked substring contract."
+        id: "SC-README-MCP-STRUCTURE"
+        metric: "store-readme-structure.test.ts"
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_STORE_README_MCP_ONBOARDING"
+      implementation:
+        - "IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+      requirements:
+        - "REQ-TIED_CLAUDE_HARNESS"
+        - "REQ-TIED_SETUP"
+        - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"

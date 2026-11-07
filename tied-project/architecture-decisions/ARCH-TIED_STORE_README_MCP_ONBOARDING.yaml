@@ -1,0 +1,16 @@
+ARCH-TIED_STORE_README_MCP_ONBOARDING:
+  ARCH-TIED_STORE_README_MCP_ONBOARDING:
+    consequences:
+      negative:
+        - "Cursor or Claude UI copy may drift from documented TUI block"
+      positive:
+        - "Manual accept is primary; agent mcp enable demoted to advanced"
+    decision: "Band 3 H4 Optionally enable the MCP server hosts manual-mcp-acceptance anchor with Cursor Customize path and Claude MCP discovery TUI; structure-test substrings enforce contract."
+    status: "Accepted"
+    traceability:
+      implementation:
+        - "IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+        - "IMPL-TIED_STORE_README_SECTIONS"
+      requirements:
+        - "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+        - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"

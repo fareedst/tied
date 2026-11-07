@@ -1,0 +1,68 @@
+CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+  change_definition:
+    current_behavior: "Root README §2 Optionally enable the MCP server recommends agent mcp enable tied-yaml only. Quick start and operator lens say enable MCP without Cursor Customize or Claude MCP discovery UI steps."
+    desired_behavior: "README documents manual Cursor path (Settings → Customize → MCPs → tied-yaml → basename inner control; repeat for tied-yaml-optin) and Claude CLI path (folder trust then 2 new MCP servers TUI with Enable selected). agent mcp enable demoted to advanced. Structure test enforces anchor and key phrases. Operator lens step 4 links to README#manual-mcp-acceptance."
+    non_goals:
+      - "Bootstrap or mcp.json generation changes"
+      - "Full adding-tied-mcp doc rewrite"
+      - "mcp-server README parity copy"
+    success_criteria:
+      - "README contains manual-mcp-acceptance anchor and both harness flows"
+      - "store-readme-structure.test.ts REQUIRED_SUBSTRINGS updated and passing"
+      - "operator-lens.md one-line cross-link"
+      - "REQ/ARCH/IMPL tokens and tied_validate_consistency clean"
+    unchanged_behavior:
+      - "tied-install MCP create/refresh policy"
+      - "No-MCP bootstrap_without_mcp path"
+      - "Existing H2/H3 README structure contract"
+  impact_analysis:
+    blast_radius: "README.md; docs/tied-experience/operator-lens.md; mcp-server/src/store-readme-structure.test.ts; tied-project YAML indexes"
+    modules_or_boundaries: "IMPL-TIED_STORE_README_SECTIONS extension"
+    tied_tokens_affected:
+      - "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+      - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
+      - "REQ-TIED_CLAUDE_HARNESS"
+  profile:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  record_identity:
+    change_request_id: "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+    recorded_at: "2026-11-07"
+    status: "implemented"
+    title: "README manual MCP accept Cursor and Claude"
+  risk_analysis:
+    adversarial_inquiry:
+      counterexamples:
+        - "Cursor UI renames Customize or MCPs labels"
+        - "Claude TUI copy changes from sponsor block"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "store-readme-structure.test.ts enforces manual-mcp-acceptance and Enable selected substrings"
+        - "operator-lens.md links README#manual-mcp-acceptance without duplicating full TUI"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "README.md"
+        - "mcp-server/src/store-readme-structure.test.ts"
+        - "docs/tied-experience/operator-lens.md"
+      falsification_questions:
+        - "Does README still recommend agent mcp enable as the only path?"
+        - "Are Claude tied-yaml-optin steps missing from the manual flow?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      profile_depth: "minimal"
+      rationale: "Documentation-only MCP onboarding; reversible edits"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    risks:
+      - id: "ui-copy-drift"
+        severity: "low"
+        mitigation: "Avoid brittle full TUI match in tests; anchor id + server keys"
+        reversibility: "reversible"
+      - id: "display-label-req"
+        severity: "low"
+        mitigation: "Parenthetical forward note for REQ-TIED_CURSOR_MCP_DISPLAY_LABEL"
+        reversibility: "reversible"
+  test_strategy:
+    command_seq:
+      - "cd mcp-server && node --import tsx --test src/store-readme-structure.test.ts"
+    integration:
+      - "Manual L5: evidence/cursor-claude-mcp-acceptance.md"

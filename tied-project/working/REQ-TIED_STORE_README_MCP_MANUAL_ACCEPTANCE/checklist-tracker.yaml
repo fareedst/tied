@@ -1,0 +1,78 @@
+depth_tier: "minimal"
+execution_evidence:
+  citdp_path: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml"
+  impl_inventory:
+    - "IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+  request: "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+gate_policy: "advisory"
+name: "readme-mcp-manual-acceptance-build"
+note: "Tracker for build-plan (doc-only). execution_evidence cleared for this request."
+request_token: "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+schema_version: "checklist-tracker.v1"
+steps:
+  - disposition: "not_applicable"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Documentation-only README MCP onboarding; no integrated adversarial inquiry."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/PLAN.md"
+    slug: "change-definition"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml"
+    slug: "risk-assessment"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/test-strategy.md"
+    slug: "test-strategy"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "mcp-server/src/store-readme-structure.test.ts"
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/evidence/store-readme-structure-test.stdout.txt"
+    slug: "unit-test-red"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/requirements/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml"
+    slug: "author-requirement"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/implementation-decisions/IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml"
+    slug: "persist-implementation-records"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "command_evidence"
+        claimed_success: true
+        stdout_ref: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/evidence/store-readme-structure-test.stdout.txt"
+        exit_code: 0
+    slug: "sync-tied-stack"
+    tracking:
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - kind: "file_path"
+        path: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/evidence/traceable-commit-evidence.md"
+    slug: "traceable-commit"
+    tracking:
+      status: "completed"

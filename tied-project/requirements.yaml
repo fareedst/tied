@@ -3862,6 +3862,22 @@ REQ-TIED_STORE_README_IA_SKILL:
     - criterion: "STORE_FACILITATOR_SKILLS includes readme-information-architecture"
       criterion_id: "manifest-store-facilitator"
   status: "Implemented"
+REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+  category: "Documentation"
+  detail_file: "requirements/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml"
+  name: "Store README manual MCP acceptance"
+  priority: "P2"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+      - "ARCH-TIED_STORE_README_MCP_ONBOARDING"
+    implementation:
+      - "IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"
+    requirements:
+      - "REQ-TIED_CLAUDE_HARNESS"
+      - "REQ-TIED_SETUP"
+      - "REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE"
 REQ-TIED_STORE_README_OPERATOR_DELIVERY_SPINE:
   category: "Documentation"
   description: "Elevate build-workspace.sh and tied-install.sh as the primary store-to-client operator delivery path in root README with structure-test enforcement."

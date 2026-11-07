@@ -1,0 +1,10 @@
+IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+  IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE:
+    description: "README manual MCP acceptance prose, operator-lens cross-link, store-readme-structure substring enforcement."
+    status: "Implemented"
+    traceability:
+      architecture:
+        - "ARCH-TIED_STORE_README_INFORMATION_ARCHITECTURE"
+        - "ARCH-TIED_STORE_README_MCP_ONBOARDING"
+      requirements:
+        - "REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE"

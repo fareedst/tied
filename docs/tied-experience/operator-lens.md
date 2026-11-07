@@ -8,10 +8,30 @@ Canonical quick start also lives in [README.md](../../README.md#quick-start-maco
 
 ## Configuration rhythm (store → client)
 
-1. **Clone:** `git clone` the TIED store; `cd` to the store root.
-2. **Store workspace build:** `./build-workspace.sh` — produces `mcp-server/dist/index.js`, `tied` CLI, `tied agentstream`. See `./build-workspace.sh --help`.
-3. **Client install:** `./tied-install.sh /path/to/client` (or linked install from the greenfield table). `./tied-install.sh --help` (no arguments prints styled help). Methodology refresh: `--refresh`.
-4. **Confirm MCP:** `tied_config_get_base_path` → client `tied-project/`.
+Same spine as [README — Primary operator delivery path](../../README.md#primary-operator-delivery-path): store clone → workspace build → client install → MCP confirm.
+
+| Step | Goal | Command |
+| --- | --- | --- |
+| 1 | Clone TIED store | `git clone https://github.com/fareedst/tied` |
+| 2 | Build MCP / CLI / bootstrap (`mcp-server/dist/index.js`, `tied`, `tied agentstream`) | `./build-workspace.sh` |
+| 3 | Install into client directory | `./tied-install.sh /path/to/client` |
+| 4 | Confirm writable root | [Manually accept MCP](../../README.md#manual-mcp-acceptance) in Cursor or Claude CLI, then **`tied_config_get_base_path`** → `tied-project/` |
+
+**Copy-paste spine** (replace `/path/to/client`; run from store root after clone):
+
+```bash
+git clone https://github.com/fareedst/tied
+cd tied
+./build-workspace.sh
+./tied-install.sh /path/to/client
+```
+
+| When you need… | Command |
+| --- | --- |
+| Build script help | `./build-workspace.sh --help` |
+| Install script help (no args = styled help) | `./tied-install.sh --help` |
+| Methodology refresh on an existing client | `./tied-install.sh --refresh /path/to/client` |
+| Linked primary repo | [Greenfield routing](#greenfield-routing) → primary row, or [README primary implementation](../../README.md#primary-implementation-repository) |
 
 Windows: [README Install and use](../../README.md#install-and-use).
 
