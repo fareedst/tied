@@ -1223,6 +1223,9 @@ ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
 ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Architecture for docs/comparisons methodology composition matrix"
   type: "architecture"
+ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  description: "server_info extensions namespace for methodology semver"
+  type: "architecture"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     - "IMPL-TIED_NEW_CLIENT_ONBOARDING"
@@ -3029,6 +3032,9 @@ IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
   status: "Implemented"
 IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Markdown-only implementation for methodology composition matrix"
+  type: "implementation"
+IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  description: "Resolver, server_info extension, loader and W7 updates"
   type: "implementation"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
@@ -5015,6 +5021,9 @@ REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   type: "REQ"
 REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Methodology composition matrix outreach doc (QMM loop × method)"
+  type: "requirement"
+REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  description: "Deprecate per-turn TIEDv stamp; expose semver via server_info extensions.tied.methodology"
   type: "requirement"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:

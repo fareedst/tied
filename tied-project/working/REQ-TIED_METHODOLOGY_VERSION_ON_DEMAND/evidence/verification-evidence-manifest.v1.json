@@ -1,0 +1,85 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "[object Object]",
+        "bash"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 115,
+      "exit_code": 127,
+      "id": "citdp-evidence-1",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "[object Object]",
+        "bash"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 103,
+      "exit_code": 127,
+      "id": "citdp-evidence-2",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "[object Object]",
+        "bash"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 103,
+      "exit_code": 127,
+      "id": "citdp-evidence-3",
+      "result": "failed"
+    }
+  ],
+  "commit": "5c3566cd63f940a03c1004be048ed33b80bc7973",
+  "covered_tokens": [
+    "REQ-MCP_SERVER_INFO",
+    "REQ-PROMPT_TYPE_SUBAGENT",
+    "REQ-TIED_SETUP"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "server_info extension does not replace checklist gate authority",
+    "Static contract tests do not prove LLM omits stamp at runtime"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-1794018895958",
+  "schema_version": "verification-evidence-manifest.v1"
+}

@@ -54,5 +54,11 @@
     "usage_metrics": "disabled",
     "mcp_resources": "enabled"
   },
-  "extensions": {}
+  "extensions": {
+    "tied.methodology": {
+      "version": "4.0.0",
+      "source": "version_file",
+      "resolution_error": null
+    }
+  }
 }

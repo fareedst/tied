@@ -1,0 +1,90 @@
+CITDP-REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  change_definition:
+    current_behavior: "Loaders (AGENTS.md, ai-principles.md, methodology checklist session-bootstrap, 16 TIED-source .cursor/agents) require every assistant turn to start with TIEDv{semver}:. REQ-TIED_SETUP validation_criteria and W7 response_stamp_* dimensions treat missing stamp as a fidelity signal. Methodology semver is also available via readTiedMethodologyVersion for envelopes but not exposed in server_info extensions."
+    desired_behavior: "No mandatory per-turn transcript stamp. Session bootstrap may call server_info once when semver is needed; extensions.tied.methodology carries version and resolution source from readTiedMethodologyVersion. REQ-TIED_SETUP criterion and prompt-type subagent contract tests align. W7 stamp dimensions remain for historical transcripts but are warn-only and non-blocking."
+    non_goals:
+      - "Live IDE hooks enforcing absence of stamp"
+      - "Mass-editing frozen tied-project/working/** checklist copies"
+      - "New dedicated MCP tool besides server_info extension"
+      - "Removing readTiedMethodologyVersion from envelope or fidelity paths"
+    references:
+      - "AGENTS.md"
+      - "mcp-server/contracts/server_info/server_info.response.schema.json"
+      - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+      - "mcp-server/src/server-info/build.ts"
+      - "mcp-server/src/tied-methodology-version.ts"
+      - "scripts/lib/conversation-adherence-dimensions.mjs"
+      - "tied-bundle/docs/agent-req-implementation-checklist.yaml"
+      - "tied-bundle/docs/ai-principles.md"
+      - "tied-project/citdp/CITDP-REQ-TIED_SETUP-RESPONSE-STAMP.yaml"
+      - "tied-project/requirements/REQ-TIED_SETUP.yaml"
+      - "tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/PLAN.md"
+      - "tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/test-strategy.md"
+    success_criteria:
+      - "AGENTS and ai-principles do not mandate per-turn stamp"
+      - "conversation-adherence-score.test.mjs passes with warn-only stamp dimensions"
+      - "prompt-type-subagent.test.ts asserts server_info bootstrap language not TIEDv regex"
+      - "REQ-TIED_SETUP validation_criteria no longer requires per-turn stamp"
+      - "server_info returns Ajv-valid extensions.tied.methodology.version for a fixture client"
+  completion_criteria:
+    close_out_wave: "standard"
+    persist_policy: "Persist to tied-project/citdp/CITDP-REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND.yaml at persist-citdp-record"
+    verification: "Commands in PLAN.md verification battery; tied_validate_consistency"
+  evidence:
+    command_seq:
+      - command: "npm test --prefix mcp-server -- src/server-info/server-info.test.ts src/tied-methodology-version.test.ts src/e2e/prompt-type-subagent.test.ts"
+        result: "pass"
+      - command: "node scripts/conversation-adherence-score.test.mjs"
+        result: "pass"
+      - command: "ruby scripts/validate_vocab_index.rb ."
+        result: "pass"
+    proof_boundaries:
+      - "server_info extension does not replace checklist gate authority"
+      - "Static contract tests do not prove LLM omits stamp at runtime"
+  impact_analysis:
+    modules_or_boundaries: "server-info module; loader docs; W7 scripts; TIED-source .cursor/agents; project REQ/ARCH/IMPL for new token; LEAP REQ-TIED_SETUP"
+    tied_tokens_affected:
+      - "REQ-MCP_SERVER_INFO"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+      - "REQ-TIED_SETUP"
+    tied_tokens_new:
+      - "ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+      - "IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+      - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+  record_identity:
+    change_request_id: "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+    checklist_process: "[PROC-AGENT_REQ_CHECKLIST]"
+    date: "2026-11-06"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    record_status: "complete"
+    title: "Deprecate per-turn TIED response stamp; methodology semver via server_info"
+    workspace_root: "/Users/fareed/Documents/dev/chatgpt/stdd"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Only AGENTS updated; ai-principles in tied-bundle left mandating stamp until client refresh"
+        - "tied_verify still expects stamp criterion while AGENTS omit stamp"
+        - "W7 still flags missing stamp as error-tier in rollup"
+      depth_tier: "minimal"
+      depth_selected_at: "2026-11-06T18:30:00-08:00"
+      disconfirming_observations:
+        - "conversation-adherence-score.test.mjs passes with warn-only stamp dimensions"
+        - "grep 'Start every response with' .cursor/agents returns no TIEDv mandate"
+        - "server_info example JSON includes tied.methodology extension"
+        - "validate_vocab_index.rb passes after vocab RECORD"
+      evidence_references:
+        - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+        - "mcp-server/src/server-info/server-info.test.ts"
+        - "scripts/conversation-adherence-score.test.mjs"
+        - "tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/PLAN.md"
+      falsification_questions:
+        - "Does server_info omit extensions.tied.methodology when VERSION exists?"
+        - "Does validate_vocab fail because alphabetical index lists removed legacy terms?"
+        - "Does prompt-type-subagent.test.ts still require TIEDv regex in agent bodies?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      research_profile: "planning-only"
+      sub_adversarial_inquiry_pass: "not_applicable"

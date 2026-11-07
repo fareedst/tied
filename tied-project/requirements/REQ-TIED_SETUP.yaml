@@ -111,8 +111,8 @@ REQ-TIED_SETUP:
       - "scripts/validate_vocab_index_test.rb"
       - "tools/bootstrap/lib/client-tool-use-bootstrap.test.mjs"
   validation_criteria:
-    - coverage: "Agent prefaces with TIEDv{semver}: (full semver from TIED Methodology Version) confirming the operating guide is loaded"
-      method: "AI agent acknowledgment"
+    - coverage: "Loaders do not require a per-turn TIEDv stamp; methodology semver available on demand via server_info extensions.tied.methodology"
+      method: "Loader text + server_info contract test"
     - coverage: "File existence checks for all required files and directories"
       method: "Manual verification"
     - coverage: "All index files have corresponding detail directories with proper naming"

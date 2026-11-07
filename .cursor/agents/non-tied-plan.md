@@ -14,7 +14,7 @@ Read and follow the canonical skill at
 
 ## Bootstrap
 
-1. `TIEDv4.0.0:` stamp; PRELOAD `tied/vocab/prompt-composer.md`.
+1. Do not stamp every turn with `TIEDv{semver}:`. Optional `server_info` → `extensions.tied.methodology` for methodology semver; PRELOAD `tied/vocab/prompt-composer.md`.
 2. TIED applicability: non-tied plan track — `non-tied-boundary.md`.
 
 ## Procedure

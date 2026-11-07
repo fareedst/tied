@@ -1,0 +1,14 @@
+ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  category: "Integration"
+  decision: "Expose methodology semver in server_info v1 extensions namespace tied.methodology using resolveTiedMethodologyVersion; loaders stop requiring transcript stamps; compliance remains checklist and envelope authority."
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+  related_architecture: []
+  related_implementation:
+    - "IMPL-MCP_SERVER_INFO"
+    - "IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+  related_requirements:
+    - "REQ-MCP_SERVER_INFO"
+    - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"

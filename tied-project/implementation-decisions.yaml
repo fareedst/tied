@@ -2973,6 +2973,13 @@ IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
       - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
     requirements:
       - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  cross_references:
+    - "ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+    - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+  detail_file: "implementation-decisions/IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND.yaml"
+  name: "Methodology version on demand implementation"
+  status: "Implemented"
 IMPL-TIED_NEW_CLIENT_ONBOARDING:
   cross_references:
     architecture:

@@ -10,7 +10,15 @@ import { projectRootFromTiedBase } from "./request-evidence-envelope/hooks.js";
 const SEMVER_RE = /^\d+\.\d+\.\d+$/;
 const AGENTS_VERSION_LINE = /^\*\*TIED Methodology Version\*\*:\s*(.+)\s*$/m;
 
-let cached: { anchor: string; version: string } | null = null;
+export type TiedMethodologyVersionSource = "version_file" | "install_json" | "agents_md";
+
+export type TiedMethodologyVersionResolution = {
+  version: string | null;
+  source: TiedMethodologyVersionSource | null;
+  resolution_error: string | null;
+};
+
+let cached: { anchor: string; version: string; source: TiedMethodologyVersionSource } | null = null;
 
 /** Test hook — clear in-process cache between cases. */
 export function clearTiedMethodologyVersionCache(): void {
@@ -87,11 +95,17 @@ export type ReadTiedMethodologyVersionInput = {
   tied_base_path?: string;
 };
 
+const RESOLUTION_ERROR =
+  "Methodology semver not found (checked VERSION walk, tied-bundle/install.json store_methodology_version, AGENTS.md)";
+
 /**
- * PRE: At least one anchor resolves semver via VERSION, install.json, or AGENTS.md.
- * POST: Trimmed semver string; cached per first resolved source path/key.
+ * PRE: search roots derived from project_root and/or tied_base_path.
+ * POST: version and source when resolvable; else resolution_error (no throw).
+ * [REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND] [REQ-TIED_SETUP] [REQ-MCP_SERVER_INFO]
  */
-export function readTiedMethodologyVersion(input: ReadTiedMethodologyVersionInput = {}): string {
+export function resolveTiedMethodologyVersion(
+  input: ReadTiedMethodologyVersionInput = {},
+): TiedMethodologyVersionResolution {
   const anchors: string[] = [];
   if (input.project_root?.trim()) {
     anchors.push(path.resolve(input.project_root.trim()));
@@ -109,20 +123,30 @@ export function readTiedMethodologyVersion(input: ReadTiedMethodologyVersionInpu
     const versionPath = findVersionPath(anchor);
     if (!versionPath) continue;
     if (cached?.anchor === versionPath) {
-      return cached.version;
+      return {
+        version: cached.version,
+        source: cached.source,
+        resolution_error: null,
+      };
     }
     const version = readVersionFile(versionPath);
-    cached = { anchor: versionPath, version };
-    return version;
+    cached = { anchor: versionPath, version, source: "version_file" };
+    return { version, source: "version_file", resolution_error: null };
   }
 
   for (const root of searchRoots) {
     const fromInstall = readInstallConfigVersion(root);
     if (fromInstall) {
       const cacheKey = `install.json:${root}`;
-      if (cached?.anchor === cacheKey) return cached.version;
-      cached = { anchor: cacheKey, version: fromInstall };
-      return fromInstall;
+      if (cached?.anchor === cacheKey) {
+        return {
+          version: cached.version,
+          source: cached.source,
+          resolution_error: null,
+        };
+      }
+      cached = { anchor: cacheKey, version: fromInstall, source: "install_json" };
+      return { version: fromInstall, source: "install_json", resolution_error: null };
     }
   }
 
@@ -130,9 +154,15 @@ export function readTiedMethodologyVersion(input: ReadTiedMethodologyVersionInpu
     const fromAgents = readAgentsMdVersion(root);
     if (fromAgents) {
       const cacheKey = `AGENTS.md:${root}`;
-      if (cached?.anchor === cacheKey) return cached.version;
-      cached = { anchor: cacheKey, version: fromAgents };
-      return fromAgents;
+      if (cached?.anchor === cacheKey) {
+        return {
+          version: cached.version,
+          source: cached.source,
+          resolution_error: null,
+        };
+      }
+      cached = { anchor: cacheKey, version: fromAgents, source: "agents_md" };
+      return { version: fromAgents, source: "agents_md", resolution_error: null };
     }
   }
 
@@ -141,12 +171,26 @@ export function readTiedMethodologyVersion(input: ReadTiedMethodologyVersionInpu
     const versionPath = findVersionPath(testRepoRoot);
     if (versionPath) {
       const version = readVersionFile(versionPath);
-      cached = { anchor: versionPath, version };
-      return version;
+      cached = { anchor: versionPath, version, source: "version_file" };
+      return { version, source: "version_file", resolution_error: null };
     }
   }
 
-  throw new Error(
-    `Methodology semver not found from project roots: ${searchRoots.join(", ")} (checked VERSION walk, tied-bundle/install.json store_methodology_version, AGENTS.md)`,
-  );
+  return {
+    version: null,
+    source: null,
+    resolution_error: `${RESOLUTION_ERROR}: ${searchRoots.join(", ")}`,
+  };
+}
+
+/**
+ * PRE: At least one anchor resolves semver via VERSION, install.json, or AGENTS.md.
+ * POST: Trimmed semver string; cached per first resolved source path/key.
+ */
+export function readTiedMethodologyVersion(input: ReadTiedMethodologyVersionInput = {}): string {
+  const resolved = resolveTiedMethodologyVersion(input);
+  if (resolved.version) {
+    return resolved.version;
+  }
+  throw new Error(resolved.resolution_error ?? RESOLUTION_ERROR);
 }

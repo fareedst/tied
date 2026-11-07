@@ -66,6 +66,7 @@
 | Action | Use |
 |--------|-----|
 | Discover or confirm TIED base path | `tied_config_get_base_path` |
+| Read methodology semver on demand (identity, health, compatibility) | `server_info` → `extensions.tied.methodology` |
 | Read requirements, architecture, implementation, or semantic-tokens index | `yaml_index_read` or resources `tied://requirements`, etc. |
 | Read/write a single REQ/ARCH/IMPL detail | `yaml_detail_read`, `yaml_detail_create`, `yaml_detail_update`, `yaml_detail_delete` |
 | Traceability (REQ ↔ ARCH/IMPL) | `get_decisions_for_requirement`, `get_requirements_for_decision` |

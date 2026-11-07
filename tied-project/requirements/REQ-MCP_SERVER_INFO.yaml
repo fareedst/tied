@@ -32,6 +32,8 @@ REQ-MCP_SERVER_INFO:
       metric: "README and tool descriptions cross-link"
     - criterion: "Configuration summary never exposes secrets catalog values"
       metric: "server-info.test.ts redaction assert"
+    - criterion: "extensions.tied.methodology exposes methodology semver and source when resolvable"
+      metric: "server-info.test.ts tied.methodology assert"
     - criterion: "Response validates against server_info.response.schema.json"
       metric: "Ajv conformance in server-info.test.ts"
     - criterion: "server_info is registered in core tool profile and returns contract v1 payload"

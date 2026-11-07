@@ -1,0 +1,13 @@
+IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  category: "MCP"
+  essence_pseudocode: "tied-project/implementation-decisions/IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND-pseudocode.md"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+  related_architecture:
+    - "ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+  related_implementation:
+    - "IMPL-MCP_SERVER_INFO"
+  related_requirements:
+    - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"

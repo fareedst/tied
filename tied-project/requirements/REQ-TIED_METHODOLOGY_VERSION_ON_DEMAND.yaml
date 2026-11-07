@@ -1,0 +1,34 @@
+REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  category: "Functional"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+    last_updated:
+      author: "build-plan"
+      date: "2026-11-06"
+      reason: "Deprecate per-turn response stamp"
+  name: "Methodology semver on demand via server_info"
+  priority: "P2"
+  rationale:
+    benefits:
+      - "Cleaner user-facing assistant turns"
+      - "Single read path via readTiedMethodologyVersion in server_info extensions"
+    problems_solved:
+      - "Hard-coded TIEDv4.0.0 in loaders and agents"
+      - "W7 penalized missing stamps despite checklist gates being authoritative"
+    why: "Per-turn TIEDv stamps add noise; semver belongs in MCP server_info when operators or agents need it."
+  related_requirements:
+    depends_on:
+      - "REQ-MCP_SERVER_INFO"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+    supersedes: []
+  validation_criteria:
+    - coverage: "W7 response_stamp_present and response_stamp_version_mismatch are warn-only"
+      method: "conversation-adherence-score.test.mjs"
+    - coverage: "AGENTS.md and ai-principles do not mandate per-turn TIEDv stamp"
+      method: "Loader grep + prompt-type-subagent.test.ts"
+    - coverage: "server_info.extensions.tied.methodology exposes version and source when resolvable"
+      method: "server-info.test.ts"

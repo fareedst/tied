@@ -2,15 +2,15 @@
 
 **Purpose**: This document defines the operational mandates, checklists, and conventions that AI agents must follow when working on this project. It should be referenced at the start of every AI agent interaction. For methodology background (what TIED is, why tokens matter, bugs vs requirements), see `tied-bundle/docs/LEAP.md` and `tied-bundle/docs/semantic-tokens.md` (under `tied-bundle/docs/` after bootstrap).
 
-## MANDATORY ACKNOWLEDGMENT
+## Session load (no per-turn stamp)
 
-**AI AGENTS MUST** acknowledge adherence to these principles at the start of EVERY response by prefacing the first line with a **TIED response stamp**:
+**AI AGENTS MUST** read and follow these principles each session. Do **not** preface every response with a **`TIEDv{semver}:`** line.
 
-**`TIEDv{semver}:`** (for example **`TIEDv4.0.0:`** — use the full semver from **TIED Methodology Version** at the bottom of this file).
+When methodology semver is needed (evidence envelopes, debugging, or explicit version checks), call MCP **`server_info`** and read **`extensions["tied.methodology"].version`**. You may also read **TIED Methodology Version** at the bottom of this file or root `VERSION` when MCP is unavailable—without echoing semver in every user-visible turn.
 
-The stamp is a weak loader signal only; checklist gates, evidence envelopes, and reconcile tooling remain authoritative for compliance. During client `--refresh` lag, transcripts may still contain the deprecated phrase **`Observing AI principles!`**; W7 conversation-adherence records that as **warn-only**, not error-tier blocking.
+Checklist gates, evidence envelopes, and reconcile tooling remain authoritative for compliance. Do **not** use legacy one-line acknowledgments or per-turn **`TIEDv{semver}:`** stamps in new responses. W7 may still observe those patterns in old transcripts as **warn-only**, not error-tier blocking.
 
-This acknowledgment confirms that the AI agent has:
+Session load confirms that the AI agent has:
 - Read and understood this document
 - Will follow all documented processes
 - Will use semantic tokens consistently
@@ -233,7 +233,7 @@ See `tied-bundle/docs/processes.md` § LEAP for the canonical process definition
 
 **AT THE START OF EVERY RESPONSE:**
 
-- [ ] **MANDATORY**: Preface response with **`TIEDv{semver}:`** (semver from **TIED Methodology Version**)
+- [ ] **MANDATORY**: Session bootstrap complete; use **`server_info`** → `extensions.tied.methodology` when semver is needed (no per-turn **`TIEDv{semver}:`** stamp)
 - [ ] Read `tied-bundle/docs/ai-principles.md` (if not already read in this session)
 - [ ] Check `semantic-tokens.yaml` for existing tokens
 - [ ] Know the development process and priority levels

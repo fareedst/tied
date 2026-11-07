@@ -23,7 +23,7 @@ direct `prompt-shared` references.
 <!-- [REQ-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [IMPL-PROMPT_TYPE_SUBAGENT] — How: verify the agent file is an explicit-only writable foreground wrapper around the canonical citdp-record skill. -->
 ## Bootstrap and boundaries
 
-1. Start every response with `TIEDv4.0.0:` (use the semver from **TIED Methodology Version** in `AGENTS.md`).
+1. Do **not** preface every response with a `TIEDv{semver}:` line. When methodology semver is needed, call MCP `server_info` and read `extensions["tied.methodology"].version`.
 2. Read `AGENTS.md`, `tied-bundle/docs/ai-principles.md`, and
    `tied/vocab/routing.md` before reading project TIED records. PRELOAD
    `tied/vocab/prompt-composer.md`. RESOLVE terms; do not RECORD vocabulary

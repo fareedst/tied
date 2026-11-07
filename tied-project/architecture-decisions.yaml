@@ -2367,6 +2367,12 @@ ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
       - "IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX"
     requirements:
       - "REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  cross_references:
+    - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+  detail_file: "architecture-decisions/ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND.yaml"
+  name: "Methodology version on demand via server_info"
+  status: "Accepted"
 ARCH-TIED_NEW_CLIENT_ADHERENCE:
   cross_references:
     architecture:

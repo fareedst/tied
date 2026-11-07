@@ -62,11 +62,13 @@ describe("conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
     }
   });
 
-  it("scores response_stamp_present when first line lacks TIEDv stamp", () => {
+  it("records response_stamp_present as warn-only when first line lacks TIEDv stamp", () => {
     const raw = fs.readFileSync(path.join(FIXTURES, "early-exit-at-gate.jsonl"), "utf8");
     const result = scoreResponseStampPresent(parseTranscriptLines(raw));
     assert.ok(result.denominator >= 1);
-    assert.equal(result.flagged, true);
+    assert.equal(result.flagged, false);
+    assert.equal(result.severity, "warn");
+    assert.ok(result.numerator >= 1);
   });
 
   it("does not flag response_stamp_present when stamp is correct", () => {
@@ -76,10 +78,11 @@ describe("conversation-adherence dimensions [REQ-TIED_CHECKLIST_GATE_ENFORCEMENT
     assert.equal(result.numerator, 0);
   });
 
-  it("flags response_stamp_version_mismatch against expected semver", () => {
+  it("records response_stamp_version_mismatch as warn-only against expected semver", () => {
     const raw = fs.readFileSync(path.join(FIXTURES, "response-stamp-version-mismatch.jsonl"), "utf8");
     const result = scoreResponseStampVersionMismatch(parseTranscriptLines(raw), "4.0.0");
-    assert.equal(result.flagged, true);
+    assert.equal(result.flagged, false);
+    assert.equal(result.severity, "warn");
     assert.equal(result.numerator, 1);
   });
 

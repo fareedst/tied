@@ -16,6 +16,7 @@ import {
   SUPPORTED_OPERATIONS,
   TOOL_CONTRACT_VERSION,
 } from "./constants.js";
+import { resolveTiedMethodologyVersion } from "../tied-methodology-version.js";
 import { mapConfigurationSummary } from "./configuration.js";
 import { assembleHealthChecks, deriveHealthState } from "./health.js";
 import type { FeatureState, ServerInfoBuildOptions, ServerInfoSnapshot } from "./types.js";
@@ -51,6 +52,41 @@ function buildInstanceId(processEnv: NodeJS.ProcessEnv): string {
   }
   const raw = `${process.pid}:${PROCESS_STARTED_AT.toISOString()}:${projectSlice}`;
   return crypto.createHash("sha256").update(raw).digest("hex").slice(0, 12);
+}
+
+function buildTiedMethodologyExtension(projectRoot: string): Record<string, Record<string, unknown>> {
+  try {
+    const tiedBase = getBasePath();
+    const resolved = resolveTiedMethodologyVersion({
+      project_root: projectRoot,
+      tied_base_path: tiedBase,
+    });
+    if (resolved.version) {
+      return {
+        "tied.methodology": {
+          version: resolved.version,
+          source: resolved.source,
+          resolution_error: null,
+        },
+      };
+    }
+    return {
+      "tied.methodology": {
+        version: null,
+        source: null,
+        resolution_error: resolved.resolution_error,
+      },
+    };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return {
+      "tied.methodology": {
+        version: null,
+        source: null,
+        resolution_error: message,
+      },
+    };
+  }
 }
 
 function buildFeatures(options: ServerInfoBuildOptions): Record<string, FeatureState> {
@@ -121,6 +157,6 @@ export async function buildServerInfoSnapshot(
       checks,
     },
     features: buildFeatures(options),
-    extensions: {},
+    extensions: buildTiedMethodologyExtension(projectRoot),
   };
 }

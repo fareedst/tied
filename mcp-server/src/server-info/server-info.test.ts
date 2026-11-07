@@ -84,6 +84,12 @@ describe("server_info builder [REQ-MCP_SERVER_INFO]", () => {
       }
       const blob = JSON.stringify(snapshot);
       assert.ok(!blob.includes("JEV_API_KEY"));
+      const methodology = snapshot.extensions["tied.methodology"] as {
+        version?: string;
+        source?: string;
+      };
+      assert.ok(methodology?.version, "expected tied.methodology.version from fixture");
+      assert.ok(methodology?.source);
     } finally {
       mat.cleanup();
     }

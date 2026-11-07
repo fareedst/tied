@@ -242,7 +242,8 @@ export function scoreResponseStampPresent(turns) {
   return {
     numerator: missing,
     denominator,
-    flagged: missing > 0,
+    flagged: false,
+    severity: "warn",
     evidence_refs: missing > 0 ? ["response_stamp_missing_or_malformed"] : [],
   };
 }
@@ -268,7 +269,8 @@ export function scoreResponseStampVersionMismatch(turns, expectedVersion) {
   return {
     numerator: mismatches,
     denominator,
-    flagged: mismatches > 0,
+    flagged: false,
+    severity: "warn",
     evidence_refs: mismatches > 0 ? ["response_stamp_version_mismatch"] : [],
   };
 }

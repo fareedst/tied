@@ -3218,6 +3218,17 @@ REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX:
       - "ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX"
     implementation:
       - "IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX"
+REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
+  category: "Functional"
+  cross_references:
+    architecture_decisions:
+      - "ARCH-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+    implementation_decisions:
+      - "IMPL-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+  detail_file: "requirements/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND.yaml"
+  name: "Methodology semver on demand via server_info"
+  priority: "P2"
+  status: "Implemented"
 REQ-TIED_NEW_CLIENT_ADHERENCE:
   category: "Functional"
   cross_references:
@@ -3614,8 +3625,8 @@ REQ-TIED_SETUP:
     tests:
       - "mcp-server/src/e2e/bootstrap-and-load.test.ts"
   validation_criteria:
-    - coverage: "Agent prefaces with TIEDv{semver}: (full semver from TIED Methodology Version) confirming the operating guide is loaded"
-      method: "AI agent acknowledgment"
+    - coverage: "Loaders do not require a per-turn TIEDv stamp; methodology semver available on demand via server_info extensions.tied.methodology"
+      method: "Loader text + server_info contract test"
     - coverage: "File existence checks for all required files and directories"
       method: "Manual verification"
     - coverage: "All index files have corresponding detail directories with proper naming"

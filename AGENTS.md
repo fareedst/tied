@@ -10,7 +10,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 
 ## 1. Mandatory Acknowledgment & Session Bootstrap
 
-1. Preface **every** assistant response with a single first line: **`TIEDv4.0.0:`** (use the semver from **TIED Methodology Version** in this file). The stamp confirms the TIED operating guide is active for that turn; checklist gates and evidence artifacts remain the authority for whether work complied with principles.
+1. Do **not** preface every assistant response with a **`TIEDv{semver}:`** line. When methodology semver is needed, call MCP **`server_info`** and read **`extensions["tied.methodology"].version`** (and `source` when debugging resolution). Checklist gates and evidence artifacts remain the authority for whether work complied with principles.
 2. At session start (or when instructions may have changed), immediately:
    - Read `tied-bundle/docs/ai-principles.md` completely
    - Review `semantic-tokens.yaml` (token registry YAML index) and `tied-bundle/docs/semantic-tokens.md` (token guide)
@@ -87,7 +87,7 @@ This document centralizes every instruction AI coding assistants must follow whi
 ## 3. Operational Checklists
 
 ### 3.1 Start-of-Response Checklist (repeat every turn)
-- **`TIEDv{semver}:`** response stamp acknowledgment (semver from **TIED Methodology Version** above)
+- Confirm session bootstrap (governing docs read); use **`server_info`** for on-demand methodology semver when needed
 - Confirm `tied-bundle/docs/ai-principles.md` has been read this session
 - Reference current semantic tokens, architecture, and implementation decisions
 
@@ -202,7 +202,7 @@ You can apply these rules in several ways:
 
 1. **System Prompt Snippet**
    ```
-   MANDATORY: Preface every response with a first line `TIEDv{semver}:` using the TIED Methodology Version from AGENTS.md
+   MANDATORY: Do not preface every response with `TIEDv{semver}:`. Use `server_info` extensions.tied.methodology when semver is needed.
    Then follow the AGENTS.md checklists (read tied-bundle/docs/ai-principles.md, review semantic tokens, architecture, implementation decisions, maintain domain vocabulary via [PROC-VOCABULARY_INDEX], maintain semantic traceability, module validation, documentation, and priority order).
    ```
 2. **IDE Integration (`.cursorrules`)** – keep a lightweight loader that links directly to `AGENTS.md` so Cursor automatically enforces the rules.
