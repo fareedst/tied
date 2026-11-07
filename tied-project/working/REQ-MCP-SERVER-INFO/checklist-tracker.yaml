@@ -19,6 +19,7 @@ execution_evidence:
     - unit-test-green
     - unit-test-red
     - verification-gate
+    - traceable-commit
   envelope_path: tied-project/working/REQ-MCP-SERVER-INFO/evidence/request-evidence-envelope.v1.json
   operator_evidence:
     command_seq:
@@ -131,5 +132,11 @@ steps:
     tracking:
       status: completed
       evidence_refs: *ref_11
-  - disposition: pending
+  - disposition: completed
     slug: traceable-commit
+    tracking:
+      status: completed
+      evidence_refs: &ref_12
+        - tied-project/working/REQ-MCP-SERVER-INFO/evidence/traceable-commit-evidence.md
+        - tied-project/working/REQ-MCP-SERVER-INFO/evidence/close-out-handoff.md
+    evidence_refs: *ref_12

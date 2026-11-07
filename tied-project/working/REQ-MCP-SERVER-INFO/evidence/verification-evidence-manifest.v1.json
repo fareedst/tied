@@ -1,7 +1,7 @@
 {
   "schema_version": "verification-evidence-manifest.v1",
   "run_id": "close-out-req-mcp-server-info-2026-11-06",
-  "commit": null,
+  "commit": "96c5ba9c499d701f2f0e04d598400ebda86d5735",
   "environment": {
     "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
   },
