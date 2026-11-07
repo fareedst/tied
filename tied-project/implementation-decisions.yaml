@@ -3093,6 +3093,18 @@ IMPL-TIED_PROJECT_LINT:
   detail_file: "implementation-decisions/IMPL-TIED_PROJECT_LINT.yaml"
   name: "Project lint implementation"
   status: "Active"
+IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF:
+  cross_references:
+    - "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF"
+    - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+  detail_file: "implementation-decisions/IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF-pseudocode.md"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-07"
+  name: "Disk plan handoff implementation"
+  status: "Active"
 IMPL-TIED_RESEARCH_RECORDS:
   code_locations:
     files:

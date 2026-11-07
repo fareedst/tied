@@ -1,0 +1,76 @@
+CITDP-REQ-TIED_PROMPT_SKILL_DISK_HANDOFF:
+  change_definition:
+    current_behavior: "Plan-mode prompt-type skills may stop with chat-only handoff or Cursor .cursor/plans output. session-handoff.md is created mainly by @handoff; plan skills do not record required, optional, and recommendation steps in a durable handoff when PLAN.md changes. prompt-execution-mode stop rule does not gate on disk."
+    desired_behavior: "session-handoff.md Plan execution steps subsection is the primary record for required, optional, and recommendation steps created or modified during plan execution. Plan leaves create or update that subsection when PLAN changes; working PLAN.md remains canonical implementation plan; @handoff still owns full session log merge. Leaf skills and subagent contracts enforce disk before stop."
+    non_goals:
+      - "MCP handoff schema validator"
+      - "Replacing PLAN.md"
+      - "Renaming session-handoff.md repo-wide"
+    success_criteria:
+      - "session-handoff-structure.md defines Plan execution steps with required, optional, recommendations, changelog"
+      - "prompt-skill-disk-handoff.md wired from prompt-execution-mode.md and listed in SHARED_REFERENCES"
+      - "prompt-type-subagent.test.ts asserts disk handoff and plan execution steps language on plan leaves and build-plan/close-out"
+      - "add-feature and refine-plan SKILL.md forbid chat-only step handoff when PLAN steps change"
+      - "Bootstrap handoff uses same REQ folder as PLAN.md (documented in prompt-skill-disk-handoff.md)"
+    unchanged_behavior:
+      - "@handoff boundaries vs close-out and DAE handoffs"
+      - "WF trial phase-handoff snapshots may remain as merge inputs"
+  impact_analysis:
+    blast_radius: "All bundled prompt-type skills, .cursor/agents wrappers, session-handoff template, handoff standalone skill cross-refs"
+    modules_or_boundaries: "tools/bundled-prompt-type-skills/prompt-shared; tools/bundled-session-handoff-skill; .cursor/agents; mcp-server/src/e2e/prompt-type-*.test.ts; tied-bundle/templates/session-handoff.v1.template.md"
+    tied_tokens_affected:
+      - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+      - "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF"
+      - "IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF"
+      - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+      - "REQ-PROMPT_TYPE_SUBAGENT"
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
+      - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
+      - "IMPL-TIED_SESSION_HANDOFF_SKILL"
+  profile:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  record_identity:
+    change_request_id: "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+    recorded_at: "2026-11-07"
+    status: "implemented"
+    title: "Disk handoff as primary plan execution step ledger"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Agents duplicate steps in PLAN and handoff without changelog"
+        - "Bootstrap handoff without request_token writes wrong working folder"
+        - "Plan leaves update handoff but omit Last updated / prompt_type header"
+      depth_tier: "minimal"
+      profile_depth: "minimal"
+      gate_policy: "advisory"
+      disconfirming_observations:
+        - "refine-plan session-handoff.md includes changelog row and stable slugs"
+        - "session-handoff-structure-doc.test.mjs fails before structure doc updated (RED first)"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md"
+        - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/evidence/session-handoff.md"
+        - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      falsification_questions:
+        - "Can build-plan pass e2e without prompt-skill-disk-handoff.md on disk?"
+        - "Does tied-install full client copy omit new shared doc?"
+      rationale: "Documentation and static contract tests; no runtime API."
+    risks:
+      - id: "handoff-plan-drift"
+        mitigation: "Changelog rows name prompt_type and PLAN path; stable slugs; build-plan tests doc markers"
+        reversibility: "reversible"
+        severity: "medium"
+      - id: "wrong-req-bootstrap"
+        mitigation: "prompt-skill-disk-handoff.md states path must match PLAN working folder token"
+        reversibility: "reversible"
+        severity: "medium"
+  test_strategy:
+    command_seq:
+      - "npm test --prefix mcp-server -- src/e2e/prompt-type-subagent.test.ts src/e2e/prompt-type-skills.test.ts"
+      - "node --test tools/bootstrap/lib/session-handoff-structure-doc.test.mjs"
+    unit:
+      - "prompt-type-skills.test.ts includes plan execution steps string on plan leaves"
+      - "SHARED_REFERENCES includes prompt-skill-disk-handoff.md"
+    integration:
+      - "session-handoff-structure-doc.test.mjs links prompt-skill-disk-handoff.md"

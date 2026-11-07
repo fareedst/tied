@@ -35,7 +35,8 @@ Choose `{slug}` for `tied-project/non-tied-plans/{slug}/`.
 ## Outputs
 
 - `PLAN.md` and optional CITDP in `non-tied-plans/{slug}/`
-- Hand off to `@non-tied-refine` or `@non-tied-build`
+- `non-tied-plans/{slug}/evidence/session-handoff.md` § **Plan execution steps** when PLAN steps change ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md))
+- Hand off to `@non-tied-refine` or `@non-tied-build` (chat lists paths only)
 
 ## Forbidden
 

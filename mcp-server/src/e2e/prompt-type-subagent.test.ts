@@ -293,6 +293,24 @@ describe("prompt-type Task subagents [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     assert.match(readAgent("leap-ad-hoc").body, /automatic `git diff`/);
   });
 
+  it("documents disk session handoff in plan and build agents [REQ-TIED_PROMPT_SKILL_DISK_HANDOFF] [IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF]", () => {
+    // [IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF] [ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF] [REQ-TIED_PROMPT_SKILL_DISK_HANDOFF] — How: parent handoff lists session-handoff disk path; chat must not be sole step record.
+    const diskHandoffAgents: LeafPromptType[] = [
+      "add-feature",
+      "refine-plan",
+      "non-tied-plan",
+      "non-tied-refine",
+      "build-plan",
+      "close-out",
+    ];
+    for (const promptType of diskHandoffAgents) {
+      const { body } = readAgent(promptType);
+      assert.match(body, /evidence\/session-handoff\.md/, `${promptType} parent handoff must name disk handoff path`);
+      assert.match(body, /Plan execution steps/i, `${promptType} must reference Plan execution steps`);
+      assert.match(body, /lists paths only|chat lists paths/i, `${promptType} must forbid chat-only step detail`);
+    }
+  });
+
   it("sequences add-feature, refine-plan, then build-plan as Task children [REQ-PROMPT_TYPE_SUBAGENT]", () => {
     // [IMPL-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [REQ-PROMPT_TYPE_SUBAGENT] — How: verify the sequencer Task-launches the three leaf wrappers in order and stops on a failed gate.
     const content = fs.readFileSync(path.join(repoRoot, ".cursor", "agents", "add-refine-build.md"), "utf8");

@@ -30,7 +30,7 @@ If no linked plan, stop.
 
 ## Outputs
 
-Updated `PLAN.md`; hand off to `@non-tied-build`.
+Updated `PLAN.md`; update `evidence/session-handoff.md` § **Plan execution steps** when PLAN steps change ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md)). Hand off to `@non-tied-build` (chat lists paths only).
 
 ## Forbidden
 

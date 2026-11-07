@@ -70,6 +70,7 @@ const SHARED_REFERENCES = [
   "tied-plan-citdp-record.md",
   "tied-promote-citdp.md",
   "prompt-execution-mode.md",
+  "prompt-skill-disk-handoff.md",
   "tied-plan-prepare.md",
   "non-tied-plan-prepare.md",
   "non-tied-build.md",
@@ -317,6 +318,26 @@ describe("prompt-type skill bundle", () => {
       assert.match(content, /skill execution mode:\s*\*{0,2}\s*agent/i, `${skill} must declare agent mode`);
     }
     assert.equal(LEAF_SKILLS.length, 18, "leaf inventory must be 18 prompt types");
+  });
+
+  it("enforces disk plan handoff on plan leaves [REQ-TIED_PROMPT_SKILL_DISK_HANDOFF] [IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF]", () => {
+    // [IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF] [ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF] [REQ-TIED_PROMPT_SKILL_DISK_HANDOFF] — How: plan leaves must reference disk handoff contract and session-handoff path before stop.
+    const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
+    const executionMode = fs.readFileSync(path.join(bundleRoot, "prompt-shared", "prompt-execution-mode.md"), "utf8");
+    assert.match(executionMode, /prompt-skill-disk-handoff\.md/);
+    assert.match(executionMode, /session-handoff\.md/);
+    for (const skill of PLAN_MODE_LEAVES) {
+      const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
+      assert.match(content, /prompt-skill-disk-handoff\.md/, `${skill} must link disk handoff contract`);
+      assert.match(content, /session-handoff\.md/, `${skill} must name session-handoff path`);
+      assert.match(content, /Plan execution steps/i, `${skill} must name Plan execution steps subsection`);
+    }
+    const buildClose = ["build-plan", "close-out"] as const;
+    for (const skill of buildClose) {
+      const content = fs.readFileSync(path.join(bundleRoot, skill, "SKILL.md"), "utf8");
+      assert.match(content, /prompt-skill-disk-handoff\.md/, `${skill} must link disk handoff contract`);
+      assert.match(content, /Plan execution steps/i, `${skill} must update Plan execution steps when executing`);
+    }
   });
 
   it("splits use-skill Plan across prepare and RED build docs [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]", () => {

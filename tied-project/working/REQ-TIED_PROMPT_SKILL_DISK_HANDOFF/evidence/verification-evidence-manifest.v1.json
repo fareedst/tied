@@ -1,0 +1,26 @@
+{
+  "schema_version": "verification-evidence-manifest.v1",
+  "request_token": "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF",
+  "generated_at": "2026-11-07T03:16:00.000Z",
+  "command_results": [
+    {
+      "id": "disk-handoff-e2e-skills",
+      "command": ["npm", "test", "--", "src/e2e/prompt-type-skills.test.ts", "src/e2e/prompt-type-subagent.test.ts"],
+      "cwd": "mcp-server",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "id": "disk-handoff-structure-doc",
+      "command": ["node", "--test", "tools/bootstrap/lib/session-handoff-structure-doc.test.mjs"],
+      "cwd": ".",
+      "exit_code": 0,
+      "result": "passed"
+    }
+  ],
+  "covered_tokens": [
+    "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF",
+    "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF",
+    "IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF"
+  ]
+}

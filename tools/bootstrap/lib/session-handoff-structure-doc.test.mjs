@@ -29,6 +29,11 @@ const indexPath = path.join(repoRoot, "tied-bundle", "docs", "client-development
 const STRUCTURE_MARKERS = [
   "## Proof boundary",
   "## Section order",
+  "## Plan execution steps",
+  "### Required",
+  "### Optional",
+  "### Recommendations",
+  "prompt-skill-disk-handoff.md",
   "## Related and pending prior requests",
   "## Merge rules",
   "handoffs/{phase}.yaml",
@@ -50,7 +55,13 @@ describe("session handoff structure [REQ-TIED_SESSION_HANDOFF_SKILL]", () => {
     const text = fs.readFileSync(templatePath, "utf8");
     assert.ok(text.includes("Related and pending prior requests"));
     assert.ok(text.includes("Plan spine"));
+    assert.ok(text.includes("Plan execution steps"));
     assert.ok(text.includes("Environment"));
+  });
+
+  it("links plan execution ledger contract [REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]", () => {
+    const handoffSkill = fs.readFileSync(skillPath, "utf8");
+    assert.ok(handoffSkill.includes("prompt-skill-disk-handoff.md"));
   });
 
   it("ships optional session-handoff-context.v1 example YAML", () => {

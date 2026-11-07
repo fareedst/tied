@@ -1,0 +1,21 @@
+ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF:
+  consequences:
+    - "Plan leaves must touch handoff before stop when PLAN changes."
+    - "Wave 2 may add MCP validator; v1 uses static e2e only."
+  cross_references:
+    requirements:
+      - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+    implementation:
+      - "IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF"
+    architecture:
+      - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
+      - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+  decision: "Plan execution steps in session-handoff.md are authoritative for step dispositions; PLAN.md remains canonical for phases; @handoff owns full section merge; DAE handoffs YAML remains distinct."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-07"
+  name: "Disk plan handoff boundary"
+  rationale:
+    summary: "Close the gap between chat-only plan handoffs and durable operator continuity without replacing PLAN.md or @handoff."
+  status: "Implemented"

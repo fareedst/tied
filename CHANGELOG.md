@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Disk plan handoff ledger ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF], [ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF], [IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF])** — `prompt-skill-disk-handoff.md` and **Plan execution steps** in session-handoff structure; plan/build/close skills and six Task agents enforce disk before stop; e2e contracts in `prompt-type-skills.test.ts` and `prompt-type-subagent.test.ts`. Plan: [PLAN.md](tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md).
+
 - **Methodology semver on demand ([REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND])** — Removed mandatory per-turn `TIEDv{semver}:` from AGENTS, ai-principles, methodology checklist, and TIED-source `.cursor/agents/`; `server_info` now exposes `extensions.tied.methodology` via `resolveTiedMethodologyVersion`; W7 stamp dimensions are warn-only. Plan: [PLAN.md](tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/PLAN.md).
 
 - **MCP `server_info` ([REQ-MCP_SERVER_INFO], [ARCH-MCP_SERVER_INFO], [IMPL-MCP_SERVER_INFO])** — Read-only core-profile tool returning contract v1 identity, compatibility, redacted configuration, runtime, and health with `structuredContent` plus JSON text; reusable `mcp-server/src/server-info/` module and `mcp-server/contracts/server_info/`. Tests: `server-info.test.ts`, full `npm test`. Close-out `close-out-req-mcp-server-info-2026-11-06` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`).

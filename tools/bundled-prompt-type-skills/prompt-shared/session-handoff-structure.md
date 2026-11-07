@@ -41,6 +41,7 @@ Use this order in **`session-handoff.md`** unless a section is genuinely **n/a**
 | 1 | Header | required | required |
 | 2 | Plan spine | required | required |
 | 3 | Authoritative refs | required | when paths exist |
+| 3a | Plan execution steps | required when plan skills run | required when plan skills run |
 | 4 | Environment | required | recommended |
 | 5 | Requirements and dependencies | required | when named |
 | 6 | Related and pending prior requests | required | recommended |
@@ -59,6 +60,37 @@ Use this order in **`session-handoff.md`** unless a section is genuinely **n/a**
 **Environment:** `workspace_root`, `TIED_BASE_PATH`, `execution_site` (store vs client repo), git policy (paste-only — skill forbids automatic git).
 
 **Requirements and dependencies:** Primary REQ tokens; `depends_on` / `blocks`; `depth_tier` / `gate_policy` when applicable.
+
+---
+
+## Plan execution steps
+
+**Authority:** Primary durable record for **required**, **optional**, and **recommendation** steps created or changed during plan skills (`add-feature`, `refine-plan`, `non-tied-plan`, `non-tied-refine`, and revisions during `build-plan` / `close-out`). **`PLAN.md`** remains canonical for phased implementation narrative. Procedure: [prompt-skill-disk-handoff.md](prompt-skill-disk-handoff.md).
+
+```markdown
+## Plan execution steps
+
+**Last updated:** {ISO date} · **prompt_type:** {skill} · **PLAN:** ../PLAN.md
+
+### Required
+- [ ] {stable-slug} — {one line}
+
+### Optional
+- [ ] {stable-slug} — {one line}
+
+### Recommendations
+- {advice; flag costly choices}
+
+### Changelog (this REQ)
+- {date prompt_type}: {summary}
+```
+
+**Merge rules (plan execution steps):**
+
+1. **Append** changelog rows; do not delete prior rows.
+2. **Required** list keyed by stable slug; update disposition (`[ ]` / `[x]`) in handoff; keep phase detail in `PLAN.md`.
+3. When PLAN phases change, update this subsection in the **same turn**.
+4. Chat and parent handoff list **disk paths only** — not full step lists.
 
 ---
 
@@ -109,4 +141,4 @@ Gold markdown shape: [REQ-TIED_BOUNDED_COMPOSITION session-handoff.md](../../../
 - [completion-signals-handoff.md](completion-signals-handoff.md) — three signals + workspace cleanliness
 - [client-pr-handoff-fields.v1.example.yaml](../../../tied-bundle/templates/client-pr-handoff-fields.v1.example.yaml) — PR fields (parallel typed pattern)
 
-**Last updated:** 2026-11-01
+**Last updated:** 2026-11-07

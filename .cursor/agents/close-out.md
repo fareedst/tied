@@ -80,7 +80,8 @@ End with a concise handoff containing:
 - tests, lint, verification-gate, and `tied_validate_consistency` results;
 - the three completion signals (machine close-out, process contract, adherence
   ledger) per `tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md`;
-- remaining risks, blocked gates, or follow-up work.
+- remaining risks, blocked gates, or follow-up work;
+- `evidence/session-handoff.md` path and finalized **Plan execution steps** ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]); chat lists paths only.
 
 If any required validation failed, label the work incomplete and report the
 failure evidence instead of claiming success. Gate `allowed: true` alone is not machine close-out.

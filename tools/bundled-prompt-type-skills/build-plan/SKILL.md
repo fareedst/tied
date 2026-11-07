@@ -76,9 +76,10 @@ If neither a linked plan nor an in-message plan is present, stop.
 ## Outputs
 
 Implementation per Tracker; CITDP record after behavior changes; verification gate.
+When `evidence/session-handoff.md` exists, revise **Plan execution steps** dispositions and changelog ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md)).
 Parent handoff must include the three completion signals (machine / process /
 ledger) per completion-signals-handoff.md. Label close-out **deferred** when
-only the verification gate has run.
+only the verification gate has run. Chat lists paths only.
 
 ## Forbidden
 

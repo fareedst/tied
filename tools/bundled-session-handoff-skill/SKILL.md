@@ -12,7 +12,7 @@ disable-model-invocation: true
 
 Explicit invocation only (`/handoff`, `@handoff`, legacy natural phrasing **“session handoff”**, or “hand off this session to a new chat”).
 
-**Normative log shape:** [session-handoff-structure.md](../bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md) · template [session-handoff.v1.template.md](../../tied-bundle/templates/session-handoff.v1.template.md)
+**Normative log shape:** [session-handoff-structure.md](../bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md) · template [session-handoff.v1.template.md](../../tied-bundle/templates/session-handoff.v1.template.md) · plan execution ledger [prompt-skill-disk-handoff.md](../bundled-prompt-type-skills/prompt-shared/prompt-skill-disk-handoff.md)
 
 ## Procedure
 
@@ -42,7 +42,7 @@ Explicit invocation only (`/handoff`, `@handoff`, legacy natural phrasing **“s
 
 7. **Advisory section check** — Before persist, compare draft against [session-handoff-structure.md](../bundled-prompt-type-skills/prompt-shared/session-handoff-structure.md). If a **required** section for this thread type is empty, **WARN** in chat and still write the log (do not block handoff).
 
-8. **Persist session log** — When the working folder or `request_token` is known, create or update **`tied-project/working/{REQ}/evidence/session-handoff.md`** (filename **`session-handoff.md`**, not `handoff.md`) using the section order in the structure doc (header, plan spine, refs, environment, dependencies, pending prior requests, finished, completion signals, do next, constraints).
+8. **Persist session log** — When the working folder or `request_token` is known, create or update **`tied-project/working/{REQ}/evidence/session-handoff.md`** (filename **`session-handoff.md`**, not `handoff.md`) using the section order in the structure doc (header, plan spine, refs, **Plan execution steps** when plan skills ran, environment, dependencies, pending prior requests, finished, completion signals, do next, constraints). Plan leaves still own updates to **Plan execution steps** when `PLAN.md` changes ([prompt-skill-disk-handoff.md](../bundled-prompt-type-skills/prompt-shared/prompt-skill-disk-handoff.md)).
 
 9. **Update plan artifacts (optional)** — If sponsor included a working **PLAN.md**, append or edit a **Session handoff** section (do not rewrite entire plan).
 

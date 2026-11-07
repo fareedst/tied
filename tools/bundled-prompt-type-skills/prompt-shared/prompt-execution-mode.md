@@ -22,7 +22,7 @@ Normative **`plan`** or **`agent`** on leaf prompt-type skills. Distinct from **
 - Completion, verification, or close-out claims.
 - Running a later sequence step in the same invocation.
 
-**Stop rule:** **Plan-mode handoff** — canonical artifact paths, token or slug, and the next explicit skill (`@refine-plan`, `@build-plan`, …).
+**Stop rule:** **Plan-mode handoff** — canonical artifact paths, token or slug, and the next explicit skill (`@refine-plan`, `@build-plan`, …). When PLAN step lists change, create or update `evidence/session-handoff.md` § **Plan execution steps** before stop ([prompt-skill-disk-handoff.md](prompt-skill-disk-handoff.md)); chat lists paths only.
 
 ## Agent mode
 

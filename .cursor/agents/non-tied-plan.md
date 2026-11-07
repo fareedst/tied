@@ -36,4 +36,4 @@ Read and follow the canonical skill at
 <!-- [REQ-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [IMPL-PROMPT_TYPE_SUBAGENT] -->
 ## Return to the parent agent
 
-Resolved terms; `non-tied-plans/{slug}/` paths; remaining risks.
+Resolved terms; `non-tied-plans/{slug}/` paths; `evidence/session-handoff.md` and **Plan execution steps** when PLAN steps changed ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]); chat lists paths only; remaining risks.

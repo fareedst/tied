@@ -2488,6 +2488,18 @@ ARCH-TIED_PROJECT_LINT_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_PROJECT_LINT_BOUNDARY.yaml"
   name: "Project lint boundary"
   status: "Planned"
+ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+    - "ARCH-TIED_SESSION_HANDOFF_SKILL_BOUNDARY"
+    - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+  detail_file: "architecture-decisions/ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF.yaml"
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-07"
+  name: "Disk plan handoff boundary"
+  status: "Implemented"
 ARCH-TIED_RESEARCH_RECORD_BOUNDARY:
   cross_references:
     - "ARCH-QUALITY_ASSURANCE_PROFILES"

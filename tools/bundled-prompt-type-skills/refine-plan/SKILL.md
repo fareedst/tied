@@ -43,7 +43,7 @@ If no linked plan, stop.
 
 ## Outputs
 
-Improved `PLAN.md`; tracker; test-strategy design. Hand off to `@build-plan`.
+Improved `PLAN.md`; tracker; test-strategy design. Update `evidence/session-handoff.md` § **Plan execution steps** when PLAN steps change ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md)). Hand off to `@build-plan` (chat lists paths only).
 
 ## Forbidden
 

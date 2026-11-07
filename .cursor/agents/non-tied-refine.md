@@ -35,4 +35,4 @@ Read the canonical skill at `tools/bundled-prompt-type-skills/non-tied-refine/SK
 <!-- [REQ-PROMPT_TYPE_SUBAGENT] [ARCH-PROMPT_TYPE_SUBAGENT] [IMPL-PROMPT_TYPE_SUBAGENT] -->
 ## Return to the parent agent
 
-Report resolved terms, updated `non-tied-plans/` paths, and remaining risks.
+Report resolved terms, updated `non-tied-plans/` paths, `evidence/session-handoff.md` and **Plan execution steps** when PLAN steps changed ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]); chat lists paths only; and remaining risks.

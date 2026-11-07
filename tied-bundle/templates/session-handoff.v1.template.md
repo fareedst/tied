@@ -26,6 +26,28 @@
 
 ---
 
+## Plan execution steps
+
+**Last updated:** {YYYY-MM-DD} · **prompt_type:** {@add-feature | @refine-plan | …} · **PLAN:** ../PLAN.md
+
+### Required
+
+- [ ] {stable-slug} — {one line}
+
+### Optional
+
+- [ ] {stable-slug} — {one line}
+
+### Recommendations
+
+- {non-blocking advice}
+
+### Changelog (this REQ)
+
+- {date prompt_type}: {summary}
+
+---
+
 ## Environment
 
 | Field | Value |

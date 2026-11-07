@@ -68,8 +68,10 @@ LEAP close-out complete only after the `close_out` gate allows progression.
 
 Updated IMPL/ARCH/REQ as needed; gitignore hygiene handoff bullet per
 [gitignore-close-out-hygiene.md](../prompt-shared/gitignore-close-out-hygiene.md);
+when `evidence/session-handoff.md` exists, finalize **Plan execution steps** ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md));
 git hygiene receipt path; CHANGELOG entry; **commit SHA** (or explicit **commit skipped**);
 `evidence/proposed-commit-message.txt` and `evidence/traceable-commit-evidence.md` when commit runs.
+Chat lists paths only.
 
 ## Forbidden
 

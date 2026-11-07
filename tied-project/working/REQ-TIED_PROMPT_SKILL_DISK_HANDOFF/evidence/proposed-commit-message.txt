@@ -1,0 +1,12 @@
+feat(prompt-type): disk plan handoff ledger [REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]
+
+Plan skills and build/close agents must persist Plan execution steps to
+evidence/session-handoff.md before stop; prompt-skill-disk-handoff.md defines
+the gate. Static e2e + TIED REQ/ARCH/IMPL.
+
+Machine close-out: run-close-out-gates close_out allowed, envelope blocking 0.
+Process: prompt-type + session-handoff contract tests pass.
+Ledger: close_out receipt persisted (local gates dir).
+
+Tokens: REQ-TIED_PROMPT_SKILL_DISK_HANDOFF, ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF,
+IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF

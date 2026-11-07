@@ -79,7 +79,8 @@ End with a concise handoff containing:
 - CITDP path, or explicit deferred status when policy defers persistence;
 - files changed and the tests, lint, verification-gate, and
   `tied_validate_consistency` results;
-- remaining risks, blocked gates, or follow-up work.
+- remaining risks, blocked gates, or follow-up work;
+- `evidence/session-handoff.md` path and **Plan execution steps** status when PLAN steps changed ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]); chat lists paths only.
 
 If any required validation failed, label the work incomplete and report the
 failure evidence instead of claiming success.

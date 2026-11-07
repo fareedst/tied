@@ -1,0 +1,22 @@
+IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF:
+  code_locations:
+    files:
+      - description: "Disk gate procedure"
+        path: "tools/bundled-prompt-type-skills/prompt-shared/prompt-skill-disk-handoff.md"
+      - description: "Plan leaf disk handoff contract"
+        path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - description: "Agent parent handoff disk paths"
+        path: "mcp-server/src/e2e/prompt-type-subagent.test.ts"
+  cross_references:
+    - "ARCH-TIED_PROMPT_SKILL_DISK_HANDOFF"
+    - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+  detail_file: "implementation-decisions/IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF.yaml"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF-pseudocode.md"
+  implementation_approach:
+    summary: "Shared doc, structure template, execution-mode stop rule, skill outputs, agent return contracts, static e2e."
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-07"
+  name: "Disk plan handoff implementation"
+  status: "Implemented"
