@@ -45,7 +45,7 @@ CITDP-PLAN-TIED-LG-P5-CHECKLIST:
     tied_tokens_new: []
   leap_feedback:
     divergences_from_analysis: []
-    record_status: "implement_complete_close_out_deferred"
+    record_status: "machine_close_out_complete"
     tied_stack_updates_required: []
   record_identity:
     change_request_id: "PLAN-TIED-LG-P5-CHECKLIST"

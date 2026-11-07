@@ -9,7 +9,7 @@
 | **Prerequisite** | [PLAN-TIED-LG-P4-ACCEPTANCE](../PLAN-TIED-LG-P4-ACCEPTANCE/PLAN.md) implement + close-out complete |
 | **CITDP** | [CITDP-PLAN-TIED-LG-P5-CHECKLIST.yaml](../../citdp/CITDP-PLAN-TIED-LG-P5-CHECKLIST.yaml) |
 | **Fixture client** | Charter path optional; default CI hermetic only |
-| **Status** | Implement complete (`@build-plan` 2026-11-07) — close-out deferred |
+| **Status** | Implement + machine close-out complete (`@close-out` 2026-11-07) — commit `a997b6d6` |
 | **Exit** | Segment-driven project graph; tracker shows completed slugs with evidence refs |
 
 ## Authority

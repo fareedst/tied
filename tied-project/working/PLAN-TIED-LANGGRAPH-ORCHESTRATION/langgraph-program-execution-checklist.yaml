@@ -1,4 +1,4 @@
-agent_handoff: "P5 implement complete; proceed @close-out P5 or @build-plan P6. See tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/session-handoff.md"
+agent_handoff: "P5 close-out complete; proceed @build-plan P6. See tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/session-handoff.md"
 current_wave: "P5"
 execution_authority:
   p0_enrollment_complete_at: "2026-10-12T04:15:00-07:00"
@@ -24,7 +24,7 @@ program:
   program_evidence_registry: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/program-evidence-registry.v1.yaml"
   program_request: "PLAN-TIED-LANGGRAPH-ORCHESTRATION"
   refine_tracker: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/checklist-tracker.yaml"
-program_phase: "P5_implement_complete"
+program_phase: "P5_close_out_complete"
 schema_version: "langgraph-program-execution.v1"
 waves:
   P0:
@@ -79,7 +79,8 @@ waves:
     child_folder: "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST"
     linked_plan: "docs/langgraph/plan-tied-lg-p5-checklist-slice.md"
     mode: "implement"
-    status: "implement_complete"
+    exit_commit: "a997b6d6"
+    status: "implement_close_out_complete"
     title: "Checklist slice"
   P6:
     child_folder: "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK"

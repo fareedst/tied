@@ -16,13 +16,23 @@
           "detail": {
             "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/PLAN-TIED-LG-P5-CHECKLIST/gates/close_out-2026-11-07T18-42-09-547Z.json",
             "stored_tracker_hash": "sha256:425b2ff556385df2b14da5f83f7392c7ef4a9abb816d54efc7dd5f99b3890bff",
-            "current_tracker_hash": "sha256:425b2ff556385df2b14da5f83f7392c7ef4a9abb816d54efc7dd5f99b3890bff",
+            "current_tracker_hash": "sha256:7ac6ae4ec820d6364fd345aa9f0dbe3e6948585931c38f3ee1340ff3673cd7ba",
             "stored_citdp_hash": "sha256:63f322bd3ff4135d6f2b79e9b3749c3e1c2808e8ce8040cc2efaf738a06b25aa",
-            "current_citdp_hash": "sha256:811d66e48d71425ccebbefcbc90cc9a1e65dd647be102b31ed6ae3aca34ca12d"
+            "current_citdp_hash": "sha256:9344a65193a6640607e7531e34b0d87edf2bf0ad2e0cfe4f7883f16c672531b2"
+          }
+        },
+        {
+          "code": "gate_without_current_evidence",
+          "detail": {
+            "gate_receipt": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/PLAN-TIED-LG-P5-CHECKLIST/gates/close_out-2026-11-07T18-43-53-152Z.json",
+            "stored_tracker_hash": "sha256:d6f8ea2c20363cf566952a59e95257c3966b242eb19b621d8b0ddaf3da364d2b",
+            "current_tracker_hash": "sha256:7ac6ae4ec820d6364fd345aa9f0dbe3e6948585931c38f3ee1340ff3673cd7ba",
+            "stored_citdp_hash": "sha256:b5ac8f4602a06cd54c4154f5663bc1c9710bb16a8c2edbb1ee59c7f07a67e6c6",
+            "current_citdp_hash": "sha256:9344a65193a6640607e7531e34b0d87edf2bf0ad2e0cfe4f7883f16c672531b2"
           }
         }
       ],
-      "ledger_rows": 12,
+      "ledger_rows": 14,
       "read_only": true,
       "process_grade": {
         "score": 88,
@@ -77,35 +87,28 @@
     "reason": "no_psa_reports"
   },
   "merged_decision": {
-    "allowed": false,
-    "gate_allowed": false,
-    "envelope_ok": false,
-    "blocking": true
+    "allowed": true,
+    "gate_allowed": true,
+    "envelope_ok": true,
+    "blocking": false
   },
   "gate": {
-    "allowed": false,
-    "blocking": true,
-    "diagnostics": [
-      "tracker_sparse",
-      "missing_required_step:verification-gate",
-      "missing_required_step:traceable-commit",
-      "envelope_blocking_gap:expected_artifact_missing"
-    ],
+    "allowed": true,
+    "blocking": false,
+    "diagnostics": [],
     "evidence_hydrated": true,
     "hydration_diagnostics": []
   },
   "gate_receipt_persist": {
     "ok": true,
-    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/PLAN-TIED-LG-P5-CHECKLIST/gates/close_out-2026-11-07T18-42-09-547Z.json",
-    "hash": "sha256:8f4d43fdcefc00e8570bc010ddd7d4800a9aa58bf5391b9b2b1b7cc15c461d1c"
+    "path": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-bundle/working/PLAN-TIED-LG-P5-CHECKLIST/gates/close_out-2026-11-07T18-43-53-152Z.json",
+    "hash": "sha256:43bcc6f0fcb1f8a434cafc8b7362f48b7b75fa7f478701d318948eb81d32421d"
   },
   "envelope": {
-    "ok": false,
+    "ok": true,
     "path": "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/request-evidence-envelope.v1.json",
-    "blocking_gap_count": 1,
+    "blocking_gap_count": 0,
     "advisory_gap_count": 0,
-    "diagnostics": [
-      "envelope_blocking_gap:expected_artifact_missing"
-    ]
+    "diagnostics": []
   }
 }

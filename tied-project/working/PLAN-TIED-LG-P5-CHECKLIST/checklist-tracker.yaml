@@ -22,8 +22,8 @@ execution_evidence:
     - unit-test-green
     - unit-test-red
     - verification-gate
-  pending:
     - traceable-commit
+  pending: []
   request: PLAN-TIED-LG-P5-CHECKLIST
 gate_policy: per_citdp
 langgraph_segment:
@@ -36,7 +36,7 @@ purpose: P5 implement Tracker; build-plan 2026-11-07.
 request: PLAN-TIED-LG-P5-CHECKLIST
 schema_version: langgraph-p5-plan-tracker.v1
 source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
-status: implement_complete_close_out_deferred
+status: machine_close_out_complete
 steps:
   - disposition: completed
     evidence_refs: &ref_0
@@ -132,3 +132,10 @@ steps:
     tracking:
       status: completed
       evidence_refs: *ref_12
+  - disposition: completed
+    evidence_refs: &ref_13
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/traceable-commit-evidence.md
+    slug: traceable-commit
+    tracking:
+      status: completed
+      evidence_refs: *ref_13
