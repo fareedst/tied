@@ -2,7 +2,8 @@
 
 **Date:** 2026-11-07  
 **Slug:** `apache-ossie-vs-tied`  
-**Prior commit:** `f44d4729` — plan package only
+**Prior commit:** `f44d4729` — plan package only  
+**This commit:** `d7a8b671` — comparisons + allowlist + traceable evidence
 
 ## Scoped paths (this effort)
 
