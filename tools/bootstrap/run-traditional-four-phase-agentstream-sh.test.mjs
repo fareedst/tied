@@ -7,6 +7,11 @@ import { fileURLToPath } from "node:url";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const WRAPPER = path.join(REPO_ROOT, "scripts/run-traditional-four-phase-agentstream.sh");
+const FOUR_PHASE_INC = path.join(
+  REPO_ROOT,
+  "scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh",
+);
+const BATCH_TEMPLATE = path.join(REPO_ROOT, "docs/demos/traditional-four-phase-agentstream.yaml");
 
 /**
  * [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] Facilitator wrapper operator help/diagnostics.
@@ -60,6 +65,42 @@ describe("run-traditional-four-phase-agentstream.sh [REQ-TIED_CLI_OPERATOR_OUTPU
     assert.equal(r.status, 2);
     assert.match(r.stderr, /ERROR:/);
     assert.equal(r.stdout, "");
+  });
+
+  it("T-AGENTSTREAM-EXIT-01 inc.sh propagates stub exit without expanded_batch unbound (set -u) [REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT]", () => {
+    const bashScript = `
+set -euo pipefail
+# shellcheck source=scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh
+source "${FOUR_PHASE_INC}"
+export HARNESS=cursor MODEL_SLUG=stub MODEL_CONFIG=stub FEATURE_REMAINDER=stub-exit
+batch_path=""
+wf_trial_four_phase_prepare_expanded_batch "${BATCH_TEMPLATE}" batch_path
+[[ -n "\$batch_path" && -f "\$batch_path" ]] || exit 97
+set +e
+wf_trial_four_phase_run_agentstream bash -c 'exit 42'
+ec=\$?
+set -e
+exit "\$ec"
+`;
+    const r = spawnSync("bash", ["-c", bashScript], {
+      cwd: REPO_ROOT,
+      encoding: "utf8",
+      env: { ...process.env, NO_COLOR: "1" },
+    });
+    assert.equal(r.status, 42, r.stderr || r.stdout);
+    assert.doesNotMatch(r.stderr, /expanded_batch: unbound variable/, r.stderr);
+  });
+
+  it("T-EXIT-TRAP-01 dry-run EXIT trap does not reference unbound expanded_batch (set -u)", () => {
+    const workspace = path.join(REPO_ROOT, "tools/bootstrap/.tmp-four-phase-exit-trap-ws");
+    fs.mkdirSync(path.join(workspace, "tied-project"), { recursive: true });
+    const r = runWrapper(["--dry-run"], {
+      WORKSPACE: workspace,
+      MODEL_SLUG: "composer-2.5-fast",
+      FEATURE_REMAINDER: "exit-trap regression",
+    });
+    assert.doesNotMatch(r.stderr, /expanded_batch: unbound variable/, r.stderr);
+    assert.notEqual(r.status, 127, r.stderr);
   });
 
   it("--help does not require WORKSPACE", () => {

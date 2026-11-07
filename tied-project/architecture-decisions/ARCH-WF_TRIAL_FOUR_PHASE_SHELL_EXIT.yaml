@@ -1,0 +1,10 @@
+ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+  ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+    decision: "Shell library wf-trial-run-four-phase-agentstream.inc.sh owns expand_batch_placeholders, baked EXIT trap, and set +e agentstream invocation; run-traditional-four-phase-agentstream.sh remains operator entrypoint."
+    name: "WF trial four-phase shell exit architecture"
+    status: "Active"
+    traceability:
+      implementation:
+        - "IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+      requirements:
+        - "REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"

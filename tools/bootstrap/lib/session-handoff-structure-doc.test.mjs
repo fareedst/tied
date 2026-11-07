@@ -34,6 +34,8 @@ const STRUCTURE_MARKERS = [
   "### Optional",
   "### Recommendations",
   "prompt-skill-disk-handoff.md",
+  "plan-build-sequence-guard.md",
+  "plan_phase",
   "## Related and pending prior requests",
   "## Merge rules",
   "handoffs/{phase}.yaml",

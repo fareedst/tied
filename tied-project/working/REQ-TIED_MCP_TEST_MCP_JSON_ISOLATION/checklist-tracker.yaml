@@ -1,0 +1,33 @@
+copy_hygiene: "Fresh tracker REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+description: "Tracker — MCP test mcp.json isolation"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: "Minimal depth; test guard scope."
+    evidence_refs:
+      - tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/not-applicable-receipt.v1.json
+      - tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/sub-adversarial-inquiry-pass-na.md
+    tracking:
+      status: not_applicable
+      policy: minimal-depth-no-inquiry
+      evidence_refs:
+        - tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/not-applicable-receipt.v1.json
+        - tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/sub-adversarial-inquiry-pass-na.md

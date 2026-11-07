@@ -632,6 +632,9 @@ ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   name: "CITDP record and promote boundaries"
   status: "Active"
   type: "ARCH"
+ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  category: "architecture"
+  description: "Refine-build phase guard architecture"
 ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE:
   cross_references:
     - "IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE"
@@ -1234,6 +1237,9 @@ ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
     last_updated: "2026-10-29"
   name: "MCP JSON canonical serialization seam"
   status: "Accepted"
+ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  category: "architecture"
+  description: "MCP test mcp.json isolation"
 ARCH-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Architecture for docs/comparisons methodology composition matrix"
   type: "architecture"
@@ -1494,6 +1500,15 @@ ARCH-TIED_YAML_STYLE_RESOLUTION:
   description: "Repository configuration overrides global YAML style fallbacks for all TIED serialization surfaces."
   name: "Shared repository YAML style resolution"
   source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
+ARCH-TRIAL_METHODOLOGY_VERSION_READOUT:
+  cross_references:
+    - "IMPL-TRIAL_METHODOLOGY_VERSION_READOUT"
+    - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+  description: "Durable session evidence + facilitator resolution order"
+  detail_file: "architecture-decisions/ARCH-TRIAL_METHODOLOGY_VERSION_READOUT.yaml"
+  name: "Trial session methodology semver capture architecture"
   status: "Active"
   type: "ARCH"
 ARCH-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
@@ -2229,6 +2244,9 @@ IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   name: "Citdp record and promote bundle files"
   status: "Active"
   type: "IMPL"
+IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  category: "implementation"
+  description: "Refine-build phase guard implementation"
 IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE:
   cross_references:
     - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
@@ -3090,6 +3108,9 @@ IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
     last_updated: "2026-10-29"
   name: "mcp-json-canonical bootstrap writer"
   status: "Implemented"
+IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  category: "implementation"
+  description: "MCP test mcp.json isolation"
 IMPL-TIED_METHODOLOGY_COMPOSITION_MATRIX:
   description: "Markdown-only implementation for methodology composition matrix"
   type: "implementation"
@@ -3351,6 +3372,15 @@ IMPL-TIED_YAML_STYLE_RESOLVER:
   description: "Resolve and apply repository-over-global scalar style through canonicalizer, lint, CLI, and MCP writers."
   name: "Shared YAML scalar style resolver"
   source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
+IMPL-TRIAL_METHODOLOGY_VERSION_READOUT:
+  cross_references:
+    - "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT"
+    - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+  description: "Batch, facilitator skills, contract test, optional process log DIAGNOSTIC"
+  detail_file: "implementation-decisions/IMPL-TRIAL_METHODOLOGY_VERSION_READOUT.yaml"
+  name: "Trial methodology version readout implementation"
   status: "Active"
   type: "IMPL"
 IMPL-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:
@@ -4483,6 +4513,9 @@ REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
   name: "CITDP record and promote prompt-type leaves"
   status: "Implemented"
   type: "REQ"
+REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  category: "requirement"
+  description: "Harden refine-plan to build-plan sequencing via plan_phase and build-plan preflight"
 REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
   cross_references:
     - "ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE"
@@ -5106,6 +5139,9 @@ REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
   source_index: "requirements.yaml"
   status: "Implemented"
   type: "REQ"
+REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  category: "requirement"
+  description: "Isolate MCP test mcp.json fixtures from developer store checkout"
 REQ-TIED_METHODOLOGY_BUNDLE_CLOSURE:
   cross_references:
     - "ARCH-TIED_METHODOLOGY_CLIENT_BOUNDARY"
@@ -5427,6 +5463,16 @@ REQ-TIED_YAML_STYLE_CONFIGURATION:
   description: "Configurable repository-over-global wrapped or unwrapped YAML scalar style enforced by lint, CLI, and MCP writers."
   name: "Repository-wide YAML scalar style configuration"
   source_index: "requirements.yaml"
+  status: "Active"
+  type: "REQ"
+REQ-TRIAL_METHODOLOGY_VERSION_READOUT:
+  cross_references:
+    - "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT"
+    - "IMPL-TRIAL_METHODOLOGY_VERSION_READOUT"
+    - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+  description: "Session semver evidence on disposable trials; mandatory facilitator readout metadata"
+  detail_file: "requirements/REQ-TRIAL_METHODOLOGY_VERSION_READOUT.yaml"
+  name: "Trial methodology version in facilitator readouts"
   status: "Active"
   type: "REQ"
 REQ-WF_TRIAL_AGENTSTREAM_DISPOSABLE_TAG:

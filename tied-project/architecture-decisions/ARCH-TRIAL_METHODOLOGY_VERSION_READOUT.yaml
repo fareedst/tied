@@ -1,0 +1,16 @@
+ARCH-TRIAL_METHODOLOGY_VERSION_READOUT:
+  consequences:
+    negative:
+      - "Pre-ship trials need bootstrap-inferred disclaimer"
+    positive:
+      - "Cohort readouts cite MCP-resolved semver"
+      - "Process logs stay harness-only"
+  cross_references:
+    architecture: []
+    implementation:
+      - "IMPL-TRIAL_METHODOLOGY_VERSION_READOUT"
+    requirements:
+      - "REQ-MCP_SERVER_INFO"
+      - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+      - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+  decision: "Session semver is durable client evidence (tied-methodology-version.session.v1.json) from server_info; facilitator skills resolve with ordered fallbacks; orchestrator process log carries secondary DIAGNOSTIC only."

@@ -1,26 +1,44 @@
 /**
  * [REQ-MCP_HTTPS_REMOTE_ACCESS] [IMPL-MCP_HTTP_SERVER]
+ * [REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION] corpus via temp tied-project only.
  */
-import { describe, it, after } from "node:test";
+import { describe, it, after, beforeEach, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { createTiedYamlMcpServer } from "./tied-mcp-server-factory.js";
 import { startMcpHttpServer } from "./mcp-http-server.js";
 import { bindWritableProjectCorpus } from "./test-helpers/client-path-env.js";
 import { allTools } from "./tools/index.js";
 import { selectToolsForProfile } from "./tool-profiles.js";
+import { clearBasePathCache as clearYamlLoaderCache } from "./yaml-loader.js";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const storeRoot = path.resolve(__dirname, "../..");
-const tiedProject = path.join(storeRoot, "tied-project");
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
 describe("mcp-http-server [REQ-MCP_HTTPS_REMOTE_ACCESS]", () => {
   let close: (() => Promise<void>) | null = null;
   const bearer = "test-bearer-mhr";
   let baseUrl = "";
+  let tempRoot = "";
+  let tiedProject = "";
+
+  beforeEach(() => {
+    process.env.TIED_MCP_TEST_REPO_ROOT = repoRoot;
+    tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-http-fixture-"));
+    tiedProject = path.join(tempRoot, "tied-project");
+    fs.mkdirSync(tiedProject, { recursive: true });
+  });
+
+  afterEach(() => {
+    if (tempRoot && fs.existsSync(tempRoot)) {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+    }
+    clearYamlLoaderCache();
+  });
 
   after(async () => {
     if (close) await close();

@@ -1787,6 +1787,30 @@ REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
       - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
     implementation:
       - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  category: "Tooling"
+  description: "Harden prompt-type sequencing: normative plan_phase on session handoff, refine-plan Do next @build-plan when pre-implementation, build-plan preflight and non-silent idempotent re-entry; static contract tests. Field evidence fb-mw68y52s-ixqm8x (client cite only)."
+  detail_file: "requirements/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD.yaml"
+  name: "Refine-build plan phase guard"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE"
+      - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+      - "REQ-TIED_SESSION_HANDOFF_SKILL"
+    related_to:
+      - "REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+    implementation:
+      - "IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+    tests:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "tools/bootstrap/lib/plan-build-sequence-handoff.test.mjs"
+      - "tools/bootstrap/lib/session-handoff-structure-doc.test.mjs"
 REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE:
   category: "Tooling"
   description: "Declare normative skill execution mode (plan vs agent) on prompt-type leaves; non-tied four-step sequence leaves."
@@ -3168,6 +3192,28 @@ REQ-TIED_MCP_JSON_CANONICAL_OUTPUT:
       - "REQ-TIED_LAYERED_CLIENT_INSTALL"
       - "REQ-TIED_SETUP"
   status: "Implemented"
+REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  category: "Tooling"
+  description: "Stop mcp-server unit tests from overwriting the developer store .cursor/mcp.json via bindWritableProjectCorpus on the live tied-project path; fail-closed helper + migrate offenders."
+  detail_file: "requirements/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION.yaml"
+  name: "MCP test mcp.json fixture isolation"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+      - "REQ-TIED_CLI_MCP_JSON_BASE_PATH"
+    related_to:
+      - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+      - "REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+    implementation:
+      - "IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+    tests:
+      - "mcp-server/src/mcp-http-server.test.ts"
+      - "mcp-server/src/test-helpers/client-path-env.test.ts"
 REQ-TIED_META_HUB_REPRESENTATION:
   category: "Tooling"
   description: "Reconcile divergent working CITDP drafts, regenerate corpus map, and expose MCP/CLI meta-hub operator tools on the TIED store."
@@ -4170,6 +4216,24 @@ REQ-TIED_YAML_UPDATES_ATOMIC_BATCH:
   name: "Atomic yaml_updates_apply batch"
   priority: "P0"
   status: "Planned"
+REQ-TRIAL_METHODOLOGY_VERSION_READOUT:
+  category: "Documentation"
+  description: "Persist session methodology semver on disposable trial clients and require @record-wf-trial / @record-gf-trial readouts to cite it."
+  detail_file: "requirements/REQ-TRIAL_METHODOLOGY_VERSION_READOUT.yaml"
+  name: "Trial methodology version in facilitator readouts"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-MCP_SERVER_INFO"
+      - "REQ-TIED_CLIENT_OPERATOR_TOOLING"
+      - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT"
+    implementation:
+      - "IMPL-TRIAL_METHODOLOGY_VERSION_READOUT"
 REQ-VOCABULARY_ANALYSIS:
   category: "Functional"
   detail_file: "requirements/REQ-VOCABULARY_ANALYSIS.yaml"
@@ -4222,6 +4286,20 @@ REQ-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
     implementation:
       - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
+REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+  category: "Tooling"
+  description: "Harden run-traditional-four-phase-agentstream.sh so non-zero agentstream exits propagate without set -e errexit or EXIT-trap unbound-variable noise; preserves orchestrator exit_code fidelity for WF trial matrix and @record-wf-trial."
+  detail_file: "requirements/REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT.yaml"
+  name: "WF trial four-phase shell exit and trap hardening"
+  priority: "P1"
+  related_requirements:
+    depends_on:
+      - "REQ-GOAGENT-FEATURESPEC-BATCH"
+      - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+      - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+    related_to:
+      - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+  status: "Draft"
 REQ-WF_TRIAL_IMPLEMENTATION_STACK:
   category: "Tooling"
   description: "Orchestrator-enforced TypeScript ESM stack with node --test/tsx on disposable workflow-trial-agentstream clients so cohorts differ on product decisions not language or test harness."

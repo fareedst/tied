@@ -39,12 +39,28 @@ export TIED_STORE_ROOT="{store repo root}"
 | `npm run lint:ts` / `npx tsc -b` if present | pass/fail |
 | `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency` | full JSON file |
 | Optional `tied_project_lint` | JSON summary |
+| `tied-cli.sh server_info '{}'` (when session evidence missing) | Snapshot `extensions.tied.methodology` to store facilitator evidence |
+
+## Methodology version (session)
+
+Readout **metadata table** must include **TIED methodology version (session)** (semver), **source**, and **evidence path** when resolvable. Section **TIED version / dogfood** cites the same resolution; not an effectiveness claim.
+
+**Resolution order:**
+
+1. `tied-project/working/*/evidence/tied-methodology-version.session.v1.json` on the subject client.
+2. Facilitator-run `server_info` on the client; archive JSON under store `FACILITATOR-*/evidence/`.
+3. `tied-bundle/install.json` → `store_methodology_version` — **bootstrap pin**.
+4. Earliest bootstrap git commit — **bootstrap-inferred only** when (1) is absent.
+
+When (1) is missing, state **bootstrap-inferred only** explicitly.
+
+Capture procedure: [trial-session-methodology-version-capture.md](../../tools/bundled-prompt-type-skills/prompt-shared/trial-session-methodology-version-capture.md).
 
 ## Readout document contract (12 sections)
 
 Mirror [FACILITATOR-GF-04 §2.4](../../tied-project/working/FACILITATOR-GF-04-1792857852/PLAN.md):
 
-1. Metadata table (recorded date, touchpoint, catalog map, client root, HEAD, outcome headline).
+1. Metadata table (recorded date, touchpoint, catalog map, client root, HEAD, outcome headline, **TIED methodology version (session)** semver/source/path).
 2. Sponsor intent (verbatim PROMPT-GF block or reconstructed custom).
 3. RESOLVE table (subject client).
 4. What was built (modules, tests, fixtures, TIED stack paths, disturbance ladder).
@@ -53,7 +69,7 @@ Mirror [FACILITATOR-GF-04 §2.4](../../tied-project/working/FACILITATOR-GF-04-17
 7. TIED db capture (client paths) + GF cohort extras (`feedback.yaml`, interaction inventory).
 8. Session grading vs catalog (six dimensions + rationale).
 9. Cohort comparisons vs peer readouts.
-10. Optional TIED version / dogfood paragraph (not effectiveness claim).
+10. TIED version / dogfood — session resolution per **Methodology version (session)**; **bootstrap-inferred only** when session evidence absent (not effectiveness claim).
 11. Facilitator follow-ups (open vs done).
 12. Future-test rule.
 

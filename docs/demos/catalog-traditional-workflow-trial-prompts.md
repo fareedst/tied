@@ -255,6 +255,9 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | Prompt | Model config | Client | Readout |
 | --- | --- | --- | --- |
 | PROMPT-WF-01 | seven IDE + agentstream orchestrator | `1793483171-wf-01-*` … `1793560725-wf-01-muse-spark13-med`; `1793604353-wf-agentstream-wf-01` (`workflow-trial-agentstream wf-01`) | [IDE + agentstream comparison](wf-01-four-model-implementation-comparison.md) · [agentstream readout](trial-readout-PROMPT-WF-01-composer25-1793604353-wf-agentstream-wf-01.md) |
+| PROMPT-WF-01 | Cursor agentstream / Composer 2.5 | `1794044147-wf-agentstream-wf-01-cursor-composer25` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; TIED **4.2.0** bootstrap) | [Cursor readout](trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md) (**workflow incomplete** — `exit_code: 1` after refine; machine pre_implementation pass; no product code) |
+| PROMPT-WF-01 | Cursor agentstream / Composer 2.5 | `1794048393-wf-agentstream-wf-01-cursor-composer25` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; TIED **4.2.0** bootstrap; pairs with [1794044147](trial-readout-PROMPT-WF-01-composer25-1794044147-wf-agentstream-wf-01-cursor-composer25.md)) | [Cursor readout](trial-readout-PROMPT-WF-01-composer25-1794048393-wf-agentstream-wf-01-cursor-composer25.md) (**workflow complete** — orchestrator `exit_code: 0`; four turns; **`a2f82ac`**; REQ **Implemented**) |
+| PROMPT-WF-01 | Cursor agentstream / GPT-5.6 Luna med | `1794050603-wf-agentstream-wf-01-cursor-gpt56lunamediumfast` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; TIED **4.2.0** bootstrap pin) | [Cursor readout](trial-readout-PROMPT-WF-01-gpt56lunamediumfast-1794050603-wf-agentstream-wf-01-cursor-gpt56lunamediumfast.md) (**workflow incomplete** — orchestrator `exit_code: 1` after build-plan; **6** green tests uncommitted; close-out not run) |
 | PROMPT-WF-02 | nine-model cohort | `1793562432-wf-02-composer25` … `1793592181-wf-02-claude-opus55-med` | [Nine-model comparison](wf-02-nine-model-implementation-comparison.md) + `trial-readout-PROMPT-WF-02-*` |
 | PROMPT-WF-03 | agentstream orchestrator | `1793605811-wf-agentstream-wf-03` (`workflow-trial-agentstream wf-03`) | [agentstream readout](trial-readout-PROMPT-WF-03-composer25-1793605811-wf-agentstream-wf-03.md) |
 | PROMPT-WF-03 | Claude Haiku 5.5 / agentstream | `1793815895-wf-agentstream-wf-03-claude-claudehaiku55` | [Claude readout](trial-readout-PROMPT-WF-03-claudehaiku55-1793815895-wf-agentstream-wf-03-claude-claudehaiku55.md) (build-plan on disk; **close-out incomplete**) |
@@ -265,6 +268,8 @@ Build a tiny explicit state machine with three states and two events. Reject ill
 | PROMPT-WF-04 | Cursor agentstream / Composer 2.5 | `1793851888-wf-agentstream-wf-04-cursor-composer25` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1** stack) | [Cursor readout](trial-readout-PROMPT-WF-04-composer25-1793851888-wf-agentstream-wf-04-cursor-composer25.md) (full four-turn close-out; fixture REQ scanner; index/detail status drift; reconcile **not_run**) |
 | PROMPT-WF-04 | Claude Sonnet 5.5 / agentstream | `1793852946-wf-agentstream-wf-04-claude-claudesonnet55` (`HARNESS=claude`; orchestrator process log; **wf-trial-ts-node-test-v1** stack) | [Claude Sonnet readout](trial-readout-PROMPT-WF-04-claudesonnet55-1793852946-wf-agentstream-wf-04-claude-claudesonnet55.md) (**close-out incomplete** — CITDP YAML missing; 14/14 tests uncommitted; pre_implementation blocked) |
 | PROMPT-WF-04 | Claude Haiku 5.5 / agentstream | `1793853737-wf-agentstream-wf-04-claude-claudehaiku55` (`HARNESS=claude`; orchestrator process log; **wf-trial-ts-node-test-v1** stack) | [Claude Haiku readout](trial-readout-PROMPT-WF-04-claudehaiku55-1793853737-wf-agentstream-wf-04-claude-claudehaiku55.md) (machine close_out pass; CITDP YAML persisted; REQ **Proposed**; no gate receipt files; process **partial**) |
+| PROMPT-WF-05 | Cursor agentstream / Composer 2.5 | `1794042383-wf-agentstream-wf-05-cursor-composer25` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1** stack) | [Cursor readout](trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md) (**workflow incomplete** — orchestrator `exit_code: 1` at turn 2; refine AC locked on disk; no product code) |
+| PROMPT-WF-05 | Cursor agentstream / Composer 2.5 | `1794049382-wf-agentstream-wf-05-cursor-composer25` (`HARNESS=cursor`; orchestrator process log; **wf-trial-ts-node-test-v1**; TIED **4.2.0** bootstrap; pairs with [1794042383](trial-readout-PROMPT-WF-05-composer25-1794042383-wf-agentstream-wf-05-cursor-composer25.md)) | [Cursor readout](trial-readout-PROMPT-WF-05-composer25-1794049382-wf-agentstream-wf-05-cursor-composer25.md) (**workflow complete** — orchestrator `exit_code: 0`; four turns; **`7ce3a12`**; REQ **Proposed** index drift) |
 
 Maintained by **`@record-wf-trial`**.
 
@@ -281,6 +286,8 @@ Minimum shape for `trial-workflow-interaction-inventory.v1.json`:
   "prompt_id": "PROMPT-WF-03",
   "model_config": "luna-med",
   "model_slug": "<exact Cursor model id>",
+  "tied_methodology_version": "4.2.0",
+  "tied_methodology_version_source": "version_file",
   "sponsor_turns": [
     { "skill": "add-feature", "ordinal": 1 },
     { "skill": "refine-plan", "ordinal": 2 },
@@ -290,7 +297,11 @@ Minimum shape for `trial-workflow-interaction-inventory.v1.json`:
 }
 ```
 
+Optional top-level: `tied_methodology_version`, `tied_methodology_version_source` (mirror of `evidence/tied-methodology-version.session.v1.json` when turn 1 captured semver).
+
 Optional per turn: `commit_sha_after`, `mcp_tools`, `notes`, `iso_timestamp`.
+
+Canonical session semver file: `tied-project/working/{REQ-TOKEN}/evidence/tied-methodology-version.session.v1.json` — see [trial-session-methodology-version-capture.md](../../tools/bundled-prompt-type-skills/prompt-shared/trial-session-methodology-version-capture.md).
 
 **Proof boundary:** `facilitator_session_reconstruction` — documents turns and tool names for cohort compilation, not full chat transcripts.
 

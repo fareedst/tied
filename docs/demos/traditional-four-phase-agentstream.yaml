@@ -18,7 +18,13 @@ features:
       `harness`: `{{HARNESS}}-agentstream-four-phase`,
       `harness_notes`: `run-traditional-four-phase-agentstream.sh` (four feature-spec batch turns; new agent session per turn),
       `model_config`: {{MODEL_CONFIG}}, `model_slug`: {{MODEL_SLUG}}.
-      Write `evidence/phase-handoff-add-feature.md` (RESOLVE, REQ token, next `@refine-plan`).
+      After `tied_config_get_base_path`, call MCP `server_info` (or `tied-cli.sh server_info '{}'` when IDE MCP unavailable).
+      Read `extensions.tied.methodology.version` and `source`; write
+      `evidence/tied-methodology-version.session.v1.json` (`schema`: `tied-methodology-version.session.v1`;
+      `capture_path`: `mcp_server_info` or `tied_cli_server_info`; ISO `captured_at`; optional `turn`: `add-feature`).
+      Mirror `tied_methodology_version` and `tied_methodology_version_source` on the interaction inventory when present.
+      Read prompt-shared trial-session-methodology-version-capture.md for capture procedure.
+      Write `evidence/phase-handoff-add-feature.md` (RESOLVE, REQ token, session semver path, next `@refine-plan`).
     behavior: |
       Product requirement (invocation remainder):
       {{FEATURE_REMAINDER}}

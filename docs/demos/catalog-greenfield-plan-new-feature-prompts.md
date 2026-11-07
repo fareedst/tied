@@ -13,7 +13,7 @@
 ## Trial protocol (facilitator — not part of the pasted prompt)
 
 1. From the TIED store, run **`test-new-tied-client`** ([runbook](../pseudocode-new-client-tied-adherence-runbook.md)); open the new client root in Cursor.
-2. Confirm **`tied-yaml`** MCP and **plan-new-feature** skill are available (default after bootstrap).
+2. Confirm **`tied-yaml`** MCP and **`@add-feature`** (or **plan-new-feature**) skill are available (default after bootstrap). Early in the session, agents should capture methodology semver per [trial-session-methodology-version-capture.md](../../tools/bundled-prompt-type-skills/prompt-shared/trial-session-methodology-version-capture.md) (`tied-methodology-version.session.v1.json`).
 3. Attach **`@plan-new-feature`** and paste **one** block from [Trial prompts](#trial-prompts) below—nothing else unless the sponsor adds product constraints.
 4. Let the skill run; optionally **`@build-plan`** on the linked plan the session produces.
 5. From the **TIED store** workspace, run **`@record-gf-trial`** with the disposable client path or numeric id to publish a [trial readout](README.md) and update [Recorded trials](#recorded-trials-facilitator) (replaces ad hoc `/non-tied-plan … grade and record` ingest prompts).

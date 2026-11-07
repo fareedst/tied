@@ -1,0 +1,11 @@
+IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+  IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+    decision: "Implement inc.sh functions; refactor wrapper; T-AGENTSTREAM-EXIT-01 in run-traditional-four-phase-agentstream-sh.test.mjs"
+    essence_pseudocode: "MODULE wf_trial_run_four_phase_agentstream\n  # [REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT] [ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT] [IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT]\n  PROCEDURE wf_trial_four_phase_prepare_expanded_batch(batch_template)\n    PRE: batch_template readable\n    POST: stdout prints expanded path; EXIT trap baked for path\n  PROCEDURE wf_trial_four_phase_run_agentstream(argv...)\n    PRE: caller may have set -e\n    EFFECTS: set +e; run argv; set -e; return exit code"
+    name: "WF trial four-phase shell exit implementation"
+    status: "Active"
+    traceability:
+      architecture:
+        - "ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+      requirements:
+        - "REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"

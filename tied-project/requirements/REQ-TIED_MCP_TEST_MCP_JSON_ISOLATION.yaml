@@ -1,0 +1,10 @@
+REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-07"
+  satisfaction_criteria:
+    - criterion: "bindWritableProjectCorpus refuses live store repoRoot (fail-closed with TEST_FIXTURE diagnostic)."
+    - criterion: "mcp-http-server.test.ts uses temp workspace only; never writes store .cursor/mcp.json."
+    - criterion: "mcp-server test suite green after migration."
+    - criterion: "Static or composition test forbids bindWritableProjectCorpus on repoRoot/tied-project pattern."

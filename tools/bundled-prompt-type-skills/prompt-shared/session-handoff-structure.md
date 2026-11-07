@@ -51,9 +51,11 @@ Use this order in **`session-handoff.md`** unless a section is genuinely **n/a**
 | 10 | Constraints | required | required |
 | 11 | Repeatable verification | optional | optional |
 
-**Header fields:** `handoff_kind` (`session` | `close_out_snapshot` | `phase_snapshot`), date, `request_token`, optional `run_id`, `prompt_type`.
+**Header fields:** `handoff_kind` (`session` | `close_out_snapshot` | `phase_snapshot`), date, `request_token`, optional `run_id`, `prompt_type`, **`plan_phase`** (`pre-implementation` | `post-build` | `close-out-ready`).
 
-**Plan spine:** Linked `PLAN.md`, program phase, wave/slice table when multi-step.
+**Plan spine:** Linked `PLAN.md`, **`plan_phase`** (normative — see [plan-build-sequence-guard.md](plan-build-sequence-guard.md)), program phase / wave table when multi-step.
+
+**Do next vs plan_phase:** When `plan_phase: pre-implementation`, **Do next** MUST include **`@build-plan`** (not `@close-out` alone). When `post-build` or `close-out-ready`, refine-plan Do next is optional **`@close-out`** unless scope reopens.
 
 **Authoritative refs:** Tracker YAML, persisted CITDP, gate receipts, envelope paths (typed paths).
 

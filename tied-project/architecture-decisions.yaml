@@ -1532,6 +1532,15 @@ ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
       - "IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
     requirements:
       - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD.yaml"
+  name: "Refine-build phase guard architecture"
+  related_requirements:
+    depends_on:
+      - "REQ-PROMPT_TYPE_GLOBAL_SKILLS"
+      - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+      - "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
+  status: "Implemented"
 ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE:
   detail_file: "architecture-decisions/ARCH-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml"
   name: "Prompt-type skill execution mode"
@@ -2345,6 +2354,10 @@ ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT:
   detail_file: "architecture-decisions/ARCH-TIED_MCP_JSON_CANONICAL_OUTPUT.yaml"
   name: "MCP JSON canonical serialization seam"
   status: "Accepted"
+ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  detail_file: "architecture-decisions/ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION.yaml"
+  name: "MCP test mcp.json isolation architecture"
+  status: "Implemented"
 ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY:
   detail_file: "architecture-decisions/ARCH-TIED_META_HUB_REPRESENTATION_BOUNDARY.yaml"
   name: "Meta-hub representation boundary"
@@ -2892,6 +2905,13 @@ ARCH-TIED_YAML_UPDATES_ATOMIC_BATCH:
   name: "Atomic batch write transaction"
   status: "Planned"
   summary: "yaml_updates_apply batches snapshot touched project corpus files and roll back on write or consistency failure."
+ARCH-TRIAL_METHODOLOGY_VERSION_READOUT:
+  cross_references:
+    requirements:
+      - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+  detail_file: "architecture-decisions/ARCH-TRIAL_METHODOLOGY_VERSION_READOUT.yaml"
+  name: "Trial session methodology semver capture architecture"
+  status: "Implemented"
 ARCH-VOCABULARY_DATA_CONTRACT:
   category: "Architecture"
   detail_file: "architecture-decisions/ARCH-VOCABULARY_DATA_CONTRACT.yaml"
@@ -2922,6 +2942,13 @@ ARCH-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "IMPL-WF_TRIAL_FOUR_PHASE_HARDENING"
     requirements:
       - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+  decision: "Extract wf-trial-run-four-phase-agentstream.inc.sh for batch trap and agentstream exit capture; wrapper sources inc and uses set +e around invoke."
+  detail_file: "architecture-decisions/ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT.yaml"
+  status: "Active"
+  traceability:
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
 ARCH-WF_TRIAL_IMPLEMENTATION_STACK:
   decision: "Stack enforcement lives in scripts/lib/wf-trial-implementation-stack.inc.sh sourced from workflow-trial-agentstream.sh; fixture under tools/bootstrap/fixtures/wf-trial-typescript-stack; preload body tied-bundle/docs/wf-trial-agent-preload-contract.yaml; batch and prompt-shared wf-trial-refine-plan-stack.md; does not change four-phase session chaining or product PROMPT-WF charters except PROMPT-WF-01 TypeScript wording."
   detail_file: "architecture-decisions/ARCH-WF_TRIAL_IMPLEMENTATION_STACK.yaml"

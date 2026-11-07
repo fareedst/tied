@@ -1,0 +1,44 @@
+REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+  REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+    category: "Tooling"
+    description: "Harden run-traditional-four-phase-agentstream.sh so non-zero agentstream exits propagate without set -e errexit or EXIT-trap unbound-variable noise; preserves orchestrator exit_code fidelity for WF trial matrix and @record-wf-trial."
+    name: "WF trial four-phase shell exit and trap hardening"
+    priority: "P1"
+    rationale:
+      benefits:
+        - "Cleaner facilitator process-log grading"
+        - "Deterministic shell teardown on failed matrix cells"
+        - "Faithful FOUR_PHASE_EXIT for workflow-trial-agentstream.sh"
+      problems_solved:
+        - "Composition test T-EXIT-TRAP-01 covers dry-run only not live non-zero agentstream"
+        - "Misleading stderr expanded_batch: unbound variable masks real agentstream exit"
+        - "workflow-trial process log may attribute wrong failure class"
+      why: "Facilitator readouts 1794042383 and 1794044147 document orchestrator exit_code 1 with expanded_batch unbound variable after agentstream turn-2 failure; root cause is set -e abort before agentstream_exit capture plus EXIT trap referencing local expanded_batch after main returns."
+    related_requirements:
+      depends_on:
+        - "REQ-GOAGENT-FEATURESPEC-BATCH"
+        - "REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE"
+        - "REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG"
+      related_to:
+        - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+    satisfaction_criteria:
+      - criterion: "EXIT trap removes expanded batch temp file using a path baked at trap registration time; trap never references unbound expanded_batch when agentstream exits non-zero."
+        id: "SC-SHELL-TRAP-01"
+      - criterion: "Live four-phase wrapper captures node agentstream exit code under set -euo pipefail without triggering errexit before assignment (set +e or equivalent around the invocation)."
+        id: "SC-SHELL-EXIT-01"
+      - criterion: "run-traditional-four-phase-agentstream-sh.test.mjs includes regression for non-zero stub agentstream exit: stderr must not match expanded_batch: unbound variable; wrapper exit equals stub exit."
+        id: "SC-SHELL-TEST-01"
+    status: "Draft"
+    traceability:
+      architecture: []
+      implementation: []
+    validation_criteria:
+      - method: "node --test tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs"
+      - method: "Optional manual workflow-trial-agentstream wf-NN --dry-run unchanged"
+  status: "Implemented"
+  status_note: "refine-plan locked inc.sh extract for T-AGENTSTREAM-EXIT-01; no WF_TRIAL_TEST_HARNESS production env"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+    implementation:
+      - "IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"

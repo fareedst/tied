@@ -1,0 +1,8 @@
+IMPL-TRIAL_METHODOLOGY_VERSION_READOUT:
+  cross_references:
+    architecture:
+      - "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT"
+    requirements:
+      - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+  decision: "Contract example JSON, prompt-shared capture doc, WF batch turn-1 goal, facilitator SKILL/reference updates, bootstrap contract test, optional wf-trial-process-log DIAGNOSTIC."
+  essence_pseudocode_path: "implementation-decisions/IMPL-TRIAL_METHODOLOGY_VERSION_READOUT-pseudocode.md"

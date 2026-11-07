@@ -71,6 +71,7 @@ const SHARED_REFERENCES = [
   "tied-promote-citdp.md",
   "prompt-execution-mode.md",
   "prompt-skill-disk-handoff.md",
+  "plan-build-sequence-guard.md",
   "tied-plan-prepare.md",
   "non-tied-plan-prepare.md",
   "non-tied-build.md",
@@ -318,6 +319,29 @@ describe("prompt-type skill bundle", () => {
       assert.match(content, /skill execution mode:\s*\*{0,2}\s*agent/i, `${skill} must declare agent mode`);
     }
     assert.equal(LEAF_SKILLS.length, 18, "leaf inventory must be 18 prompt types");
+  });
+
+  it("enforces refine-build phase guard on plan leaves [REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD] [IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD]", () => {
+    // [IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD] — How: guard doc linked; refine-plan mandates @build-plan; build-plan preflight references PLAN_BUILD_SEQUENCE_VIOLATION.
+    const bundleRoot = path.join(repoRoot, "tools", "bundled-prompt-type-skills");
+    const guard = fs.readFileSync(path.join(bundleRoot, "prompt-shared", "plan-build-sequence-guard.md"), "utf8");
+    assert.match(guard, /plan_phase/);
+    assert.match(guard, /PLAN_BUILD_SEQUENCE_VIOLATION/);
+
+    const diskHandoff = fs.readFileSync(path.join(bundleRoot, "prompt-shared", "prompt-skill-disk-handoff.md"), "utf8");
+    assert.match(diskHandoff, /plan-build-sequence-guard\.md/);
+
+    const refine = fs.readFileSync(path.join(bundleRoot, "refine-plan", "SKILL.md"), "utf8");
+    assert.match(refine, /plan-build-sequence-guard\.md/);
+    assert.match(refine, /@build-plan/);
+    assert.match(refine, /pre-implementation/);
+
+    const build = fs.readFileSync(path.join(bundleRoot, "build-plan", "SKILL.md"), "utf8");
+    assert.match(build, /plan-build-sequence-guard\.md/);
+    assert.match(build, /PLAN_BUILD_SEQUENCE_VIOLATION/);
+
+    const addFeature = fs.readFileSync(path.join(bundleRoot, "add-feature", "SKILL.md"), "utf8");
+    assert.match(addFeature, /plan-build-sequence-guard\.md/);
   });
 
   it("enforces disk plan handoff on plan leaves [REQ-TIED_PROMPT_SKILL_DISK_HANDOFF] [IMPL-TIED_PROMPT_SKILL_DISK_HANDOFF]", () => {

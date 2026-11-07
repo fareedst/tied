@@ -65,6 +65,8 @@
 | **WF_TRIAL_SKIP_PROCESS_LOG** | skip orchestrator process log | When set, **`workflow-trial-agentstream.sh`** does not write process log files or manifest. [REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG](../requirements/REQ-WF_TRIAL_ORCHESTRATOR_PROCESS_LOG.yaml) |
 | **WF trial implementation stack** | TypeScript matrix stack, wf-trial stack | Orchestrator-enforced **TypeScript + ESM + `node --import tsx --test`** on disposable WF clients: fixture seed, **`wf-trial-agent-preload-contract.yaml`**, batch refine “Locked stack” table. Stack id **`wf-trial-ts-node-test-v1`**. [REQ-WF_TRIAL_IMPLEMENTATION_STACK](../requirements/REQ-WF_TRIAL_IMPLEMENTATION_STACK.yaml) |
 | **implementation_stack_id** | stack id, cohort filter | String in `trial-workflow-interaction-inventory.v1.json` (e.g. `wf-trial-ts-node-test-v1`); bump when runner or layout contract changes. |
+| **tied-methodology-version.session.v1** | session semver evidence | JSON under `tied-project/working/{REQ-TOKEN}/evidence/`; captured via MCP `server_info` on turn 1 ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT](../requirements/REQ-TRIAL_METHODOLOGY_VERSION_READOUT.yaml)); consumed by `@record-wf-trial`. |
+| **tied_methodology_version** | inventory semver mirror | Optional top-level field on `trial-workflow-interaction-inventory.v1.json` mirroring session evidence. |
 | **WF_TRIAL_SKIP_IMPLEMENTATION_STACK** | skip stack seed | When set, **`workflow-trial-agentstream.sh`** skips TypeScript fixture seed and WF-specific preload materialize; matrix comparability waived. See same PLAN. |
 
 ---

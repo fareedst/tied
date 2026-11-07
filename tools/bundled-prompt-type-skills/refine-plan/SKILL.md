@@ -43,7 +43,7 @@ If no linked plan, stop.
 
 ## Outputs
 
-Improved `PLAN.md`; tracker; test-strategy design. Update `evidence/session-handoff.md` § **Plan execution steps** when PLAN steps change ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md)). Hand off to `@build-plan` (chat lists paths only).
+Improved `PLAN.md`; tracker; test-strategy design. Update `evidence/session-handoff.md` § **Plan execution steps** when PLAN steps change ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md)). When **`plan_phase: pre-implementation`**, **Do next** MUST recommend **`@build-plan`** ([plan-build-sequence-guard.md](../prompt-shared/plan-build-sequence-guard.md)). When post-build, set `plan_phase` accordingly; Do next optional `@close-out` only.
 
 ## Forbidden
 

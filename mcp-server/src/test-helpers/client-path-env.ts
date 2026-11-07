@@ -1,9 +1,11 @@
 /**
  * Isolate TIED client path env for unit tests run inside a marker_only repo cwd.
  * [REQ-TIED_PROJECT_IDENTITY_MARKER_ROUTING] [REQ-TIED_CLIENT_PATH_ENV_MIGRATION]
- * [REQ-TIED_CLI_MCP_JSON_BASE_PATH] Tests apply paths only via install-shaped mcp.json fixtures.
+ * [REQ-TIED_CLI_MCP_JSON_BASE_PATH] [REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION]
+ * Tests apply paths only via install-shaped mcp.json fixtures — never on the live store checkout.
  */
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import {
   ENV_CLIENT_BUNDLE_PATH,
@@ -33,6 +35,29 @@ export function restoreClientPathEnv(saved: Record<string, string | undefined>):
   }
 }
 
+const MCP_JSON_WRITE_ALLOW_ENV = "TIED_MCP_TEST_ALLOW_MCP_JSON_WRITE";
+
+/**
+ * Fail closed before writing test mcp.json onto a developer store tree.
+ * [IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION]
+ */
+export function assertSafeMcpJsonWriteTarget(projectRoot: string): void {
+  if (process.env[MCP_JSON_WRITE_ALLOW_ENV] === "1") {
+    return;
+  }
+  const resolved = path.resolve(projectRoot);
+  const tmpRoot = path.resolve(os.tmpdir());
+  if (resolved === tmpRoot || resolved.startsWith(`${tmpRoot}${path.sep}`)) {
+    return;
+  }
+  const storeMarker = path.join(resolved, ".tied", "store.yaml");
+  if (fs.existsSync(storeMarker)) {
+    throw new Error(
+      `TEST_FIXTURE: refusing to write .cursor/mcp.json on store checkout ${resolved}; use mkdtemp tied-project or set ${MCP_JSON_WRITE_ALLOW_ENV}=1`,
+    );
+  }
+}
+
 /** Minimal index so env TIED_BASE_PATH wins over marker_only cwd discovery. */
 export function writeMinimalProjectCorpus(tiedDir: string): void {
   fs.mkdirSync(tiedDir, { recursive: true });
@@ -44,6 +69,7 @@ export function writeMinimalProjectCorpus(tiedDir: string): void {
  * Write tied-install-shaped .cursor/mcp.json under projectRoot (Cursor harness file).
  */
 export function writeInstallMcpJson(projectRoot: string, tiedDir: string, bundleDir?: string): void {
+  assertSafeMcpJsonWriteTarget(projectRoot);
   const absTied = path.resolve(tiedDir);
   const env: Record<string, string> = { [ENV_CLIENT_PROJECT_PATH]: absTied };
   if (bundleDir) {

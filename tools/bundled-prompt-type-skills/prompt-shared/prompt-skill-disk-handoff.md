@@ -4,7 +4,7 @@
 
 Normative gate: **plan execution steps** live on disk before a plan or build leaf stops. Chat lists paths only.
 
-**Traceability:** [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE](prompt-execution-mode.md) · [REQ-TIED_SESSION_HANDOFF_SKILL](../../../tied-project/requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml) · [session-handoff-structure.md](session-handoff-structure.md)
+**Traceability:** [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE](prompt-execution-mode.md) · [REQ-TIED_SESSION_HANDOFF_SKILL](../../../tied-project/requirements/REQ-TIED_SESSION_HANDOFF_SKILL.yaml) · [session-handoff-structure.md](session-handoff-structure.md) · [plan-build-sequence-guard.md](plan-build-sequence-guard.md)
 
 ---
 

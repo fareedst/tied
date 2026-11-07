@@ -1,0 +1,6 @@
+ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  cross_references:
+    - "REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+  decision: "assertSafeMcpJsonWriteTarget blocks .tied/store.yaml trees; tmpdir allowed; optional TIED_MCP_TEST_ALLOW_MCP_JSON_WRITE=1 escape."
+  name: "Fail-closed test fixture writes"
+  status: "Implemented"

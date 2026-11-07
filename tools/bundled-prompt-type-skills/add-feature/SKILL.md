@@ -44,7 +44,7 @@ Select `profile_depth` and gate policy during impact discovery. Copy per-task Tr
 
 - `tied-project/working/{REQ-TOKEN}/PLAN.md`, tracker, draft CITDP, test-strategy design
 - `tied-project/working/{REQ-TOKEN}/evidence/session-handoff.md` § **Plan execution steps** when PLAN steps change ([prompt-skill-disk-handoff.md](../prompt-shared/prompt-skill-disk-handoff.md))
-- **Plan-mode handoff:** next `@refine-plan` or `@build-plan` (chat lists paths only)
+- **Plan-mode handoff:** next `@refine-plan` or `@build-plan` (chat lists paths only). Set **`plan_phase: pre-implementation`**; Do next rules: [plan-build-sequence-guard.md](../prompt-shared/plan-build-sequence-guard.md)
 
 ## Forbidden
 

@@ -1,0 +1,8 @@
+feat(wf-trial): close-out TMV readout and related REQs
+
+Batch traceable close-out for facilitator semver capture, four-phase
+shell exit, refine/build phase guard, and MCP test mcp.json isolation.
+Gates: close_out allowed=true, envelope blocking_gap_count=0 per REQ.
+
+REQ-TRIAL_METHODOLOGY_VERSION_READOUT REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT
+REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION

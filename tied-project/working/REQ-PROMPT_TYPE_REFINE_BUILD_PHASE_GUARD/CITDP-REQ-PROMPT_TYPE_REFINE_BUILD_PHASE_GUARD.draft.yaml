@@ -1,0 +1,52 @@
+CITDP-REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  change_definition:
+    current_behavior: "Leaf skills state refine-plan hands off to @build-plan, and session-handoff Plan execution steps record work on disk ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]). Field case fb-mw68y52s-ixqm8x (client 1794045120, REQ-SEMVER_COMPARATOR): build-plan shipped implementation before sponsor refine-plan; a later refine-plan set post-build phase; sponsor @build-plan received silent idempotent pass while expecting pre-build sequencing."
+    desired_behavior: "prompt-shared/plan-build-sequence-guard.md defines plan_phase, Do next rules, build-plan preflight (DIAGNOSTIC PLAN_BUILD_SEQUENCE_VIOLATION), and non-silent idempotent re-entry. session-handoff-structure.md documents plan_phase. refine-plan and build-plan skills reference the guard doc. Static e2e and bootstrap handoff lint tests enforce contracts."
+    non_goals:
+      - "Fix workflow_trial_agentstream harness (WritableIterable, expanded_batch)"
+      - "Blocking MCP checklist gate on phase mismatch"
+      - "Ingest fb-mw68y52s-ixqm8x into store feedback.yaml"
+      - "Change add-refine-build Task sequencer behavior"
+    success_criteria:
+      - "T-SKILL-CONTRACT-01 and T-HANDOFF-LINT-01 pass"
+      - "tied_validate_consistency ok after build-plan"
+    unchanged_behavior: "Separate agentstream turns per workflow phase remain valid; guard applies per session handoff + explicit skill invocation."
+  impact_analysis:
+    modules_or_boundaries: "tools/bundled-prompt-type-skills/prompt-shared; leaf SKILL.md; mcp-server/src/e2e/prompt-type-skills.test.ts; tools/bootstrap/lib/plan-build-sequence-handoff.test.mjs"
+    tied_tokens_new:
+      - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+      - "ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+      - "IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+  profile:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Agents ignore build-plan preflight and still implement in refine thread"
+        - "plan_phase omitted; Do next still chat-only"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "T-SKILL-CONTRACT-01 fails if guard doc unlinked"
+        - "T-HANDOFF-LINT-01 fails on invalid fixture"
+      evidence_references:
+        - "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/field-case-fb-mw68y52s.md"
+        - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      falsification_questions:
+        - "Can build-plan pass e2e without PLAN_BUILD_SEQUENCE_VIOLATION language?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
+      rationale: "Static skill contracts and bootstrap lint; no runtime enforcement API."
+    risks:
+      - id: "preflight-ignored"
+        mitigation: "SKILL.md mandatory preflight step + e2e string asserts"
+        reversibility: "reversible"
+        severity: "medium"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "mcp-server/src/e2e/prompt-type-skills.test.ts"
+      - "tools/bootstrap/lib/plan-build-sequence-handoff.test.mjs"

@@ -1,0 +1,15 @@
+IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  code_locations:
+    files:
+      - description: "Guard"
+        path: "mcp-server/src/test-helpers/client-path-env.ts"
+      - description: "Temp corpus"
+        path: "mcp-server/src/mcp-http-server.test.ts"
+  cross_references:
+    - "ARCH-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+    - "REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION"
+  essence_pseudocode_path: "implementation-decisions/IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION-pseudocode.md"
+  implementation_approach:
+    summary: "assertSafeMcpJsonWriteTarget in writeInstallMcpJson; client-path-env.test.ts; mcp-http-server.test.ts mkdtemp."
+  name: "client-path-env guard + mcp-http-server temp fixture"
+  status: "Implemented"

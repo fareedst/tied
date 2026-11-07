@@ -1,0 +1,7 @@
+ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  cross_references:
+    - "ARCH-PROMPT_TYPE_GLOBAL_SKILLS"
+    - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+  decision: "Compose plan_phase and Do-next rules in prompt-shared plan-build-sequence-guard.md; static e2e and bootstrap lint enforce skill contracts; no blocking MCP phase gate at minimal depth."
+  name: "Prompt-type refine-build sequence boundary"
+  status: "Implemented"

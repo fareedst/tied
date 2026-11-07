@@ -32,6 +32,8 @@ Full TIED execute — [tied-boundary.md](../prompt-shared/tied-boundary.md). **O
 
 ## Procedure
 
+**Preflight:** Read linked `evidence/session-handoff.md`; apply [plan-build-sequence-guard.md](../prompt-shared/plan-build-sequence-guard.md) before **Implement**. On violation emit `DIAGNOSTIC: PLAN_BUILD_SEQUENCE_VIOLATION` and stop (no silent idempotent pass when `plan_phase: pre-implementation` disagrees with disk/product state).
+
 Execute the linked plan in this order:
 
 1. **Guiding vocab** — [guiding-vocab.md](../prompt-shared/guiding-vocab.md)

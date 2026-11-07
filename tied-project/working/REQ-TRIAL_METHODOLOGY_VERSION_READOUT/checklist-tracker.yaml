@@ -1,0 +1,33 @@
+copy_hygiene: "Fresh tracker for REQ-TRIAL_METHODOLOGY_VERSION_READOUT add-feature"
+description: "Tracker — trial methodology version session readout"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: "Minimal depth; CITDP counterexamples and N/A receipt on disk."
+    evidence_refs:
+      - tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/not-applicable-receipt.v1.json
+      - tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/sub-adversarial-inquiry-pass-na.md
+    tracking:
+      status: not_applicable
+      policy: minimal-depth-no-inquiry
+      evidence_refs:
+        - tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/not-applicable-receipt.v1.json
+        - tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/sub-adversarial-inquiry-pass-na.md

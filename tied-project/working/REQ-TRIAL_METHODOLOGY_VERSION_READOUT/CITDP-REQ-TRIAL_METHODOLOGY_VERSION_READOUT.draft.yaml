@@ -1,0 +1,49 @@
+CITDP-REQ-TRIAL_METHODOLOGY_VERSION_READOUT:
+  change_definition:
+    current_behavior: "@record-wf-trial and @record-gf-trial treat TIED semver as optional dogfood prose, often inferred from bootstrap git commits. WF orchestrator process logs tee harness stdout/stderr only — not MCP server_info payloads. add-feature turn 1 does not persist methodology version on the disposable client."
+    desired_behavior: "Turn-1 (WF batch) and GF session bootstrap instruct agents to call server_info (or tied-cli fallback), write tied-methodology-version.session.v1.json under working evidence, and mirror optional fields on trial-workflow-interaction-inventory.v1.json. Facilitator skills require metadata row TIED methodology version (session) with documented discovery order and grandfather disclaimer when evidence is absent."
+    non_goals:
+      - "Methodology effectiveness or leaderboard claims from semver reporting"
+      - "Mandatory backfill of all historical trial readouts"
+      - "Per-turn TIEDv{semver}: transcript stamp"
+      - "Full MCP tool transcript in process logs"
+    success_criteria:
+      - "SC-TMV-01 through SC-TMV-04 pass in tools/bootstrap contract test"
+      - "record-wf-trial reference lists five-step facilitator resolution order"
+    unchanged_behavior: "Subject product REQ tokens on disposable clients remain facilitator read-only. AGENTSTREAM_HARNESS_TRACE unchanged."
+  impact_analysis:
+    modules_or_boundaries: "tools/bundled-record-wf-trial-skill; tools/bundled-record-gf-trial-skill; docs/demos/traditional-four-phase-agentstream.yaml; docs/demos/catalog-*-trial-prompts.md; tools/bundled-prompt-type-skills/prompt-shared/trial-session-methodology-version-capture.md; mcp-server/contracts/trial-methodology-version/; tied-project/vocab/agentstream.md; tied-project/vocab/project-operations-mcp.md"
+    tied_tokens_new:
+      - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+      - "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT"
+      - "IMPL-TRIAL_METHODOLOGY_VERSION_READOUT"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      research_profile: "integrated-agent"
+      rationale: "Facilitator docs and batch prompt text only; no auth or production runtime change on store."
+      counterexamples:
+        - "Agent ignores turn-1 goal and facilitator still publishes readout using only git bootstrap"
+        - "install.json pin disagrees with server_info session capture"
+      falsification_questions:
+        - "Does facilitator metadata row appear without contract test?"
+      disconfirming_observations:
+        - "Pre-ship trials lack evidence file but readout still grades without grandfather disclaimer"
+      evidence_references:
+        - "tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/sub-adversarial-inquiry-pass-na.md"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Facilitator docs and batch prompt text only; no auth or production runtime change on store."
+    counterexamples:
+      - "Agent ignores turn-1 goal and facilitator still publishes readout using only git bootstrap"
+      - "install.json pin disagrees with server_info session capture"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/lib/trial-methodology-version-readout-contract.test.mjs"
+    unit: []

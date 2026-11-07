@@ -1,0 +1,27 @@
+CITDP-REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  change_definition:
+    current_behavior: "bindWritableProjectCorpus wrote minimal mcp.json on store checkout when tests used live tied-project path."
+    desired_behavior: "assertSafeMcpJsonWriteTarget fail-closed; mcp-http-server tests use temp tied-project."
+    success_criteria:
+      - "client-path-env.test.ts passes"
+      - "mcp-http-server.test.ts passes"
+  profile:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "A test bypasses ensureWritableClientTree and still mutates store tied-project/.cursor/mcp.json"
+      falsification_questions:
+        - "Does assertSafeMcpJsonWriteTarget refuse paths outside temp fixtures?"
+      disconfirming_observations:
+        - "grep finds direct writeMcpJson without guard on store paths"
+      evidence_references:
+        - "tied-project/working/REQ-TIED_MCP_TEST_MCP_JSON_ISOLATION/evidence/not-applicable-receipt.v1.json"
+        - "mcp-server/src/test-helpers/client-path-env.test.ts"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"

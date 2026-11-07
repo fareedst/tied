@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # run-traditional-four-phase-agentstream — four prompt-type turns via feature-spec batch (no full checklist).
 # [REQ-GOAGENT-FEATURESPEC-BATCH] [REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE] [IMPL-TIED_BUILD_COMMANDS_HOW_TEXTURE]
+# [REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT] [IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT]
 # Texture aligned with tools/bootstrap/lib/console.mjs; see docs/demos/traditional-four-phase-agentstream.yaml
 set -euo pipefail
 
@@ -182,26 +183,8 @@ require_directory() {
   [[ -d "$path" ]] || fail "$label is not a directory: $path"
 }
 
-expand_batch_placeholders() {
-  local src="$1"
-  local dst="$2"
-  local harness="${HARNESS:-cursor}"
-  export MODEL_SLUG="${MODEL_SLUG:-}"
-  export MODEL_CONFIG="${MODEL_CONFIG:-}"
-  export FEATURE_REMAINDER="${FEATURE_REMAINDER:-}"
-  case "$harness" in
-    claude) export SKILL_ROOT=".claude/skills" ;;
-    *) export SKILL_ROOT=".cursor/skills" ;;
-  esac
-  export HARNESS="$harness"
-  perl -pe '
-    s/\{\{MODEL_SLUG\}\}/$ENV{MODEL_SLUG}/g;
-    s/\{\{MODEL_CONFIG\}\}/$ENV{MODEL_CONFIG}/g;
-    s/\{\{FEATURE_REMAINDER\}\}/$ENV{FEATURE_REMAINDER}/g;
-    s/\{\{SKILL_ROOT\}\}/$ENV{SKILL_ROOT}/g;
-    s/\{\{HARNESS\}\}/$ENV{HARNESS}/g;
-  ' "$src" >"$dst"
-}
+# shellcheck source=lib/wf-trial-run-four-phase-agentstream.inc.sh
+source "${SCRIPT_DIR}/lib/wf-trial-run-four-phase-agentstream.inc.sh"
 
 assert_disposable_workspace() {
   local ws="$1"
@@ -328,10 +311,7 @@ main() {
   fi
 
   local expanded_batch
-  expanded_batch="$(mktemp -t traditional-four-phase-batch)"
-  expanded_batch="${expanded_batch}.yaml"
-  trap 'rm -f "$expanded_batch"' EXIT
-  expand_batch_placeholders "$batch_template" "$expanded_batch"
+  wf_trial_four_phase_prepare_expanded_batch "$batch_template" expanded_batch
 
   local tied_cli="${REPO_ROOT}/mcp-server/packages/cli/dist/index.js"
   if [[ ! -f "$tied_cli" ]]; then
@@ -369,8 +349,10 @@ main() {
     unset AGENTSTREAM_JEV_HARNESS
   fi
 
-  "${cmd[@]}"
+  set +e
+  wf_trial_four_phase_run_agentstream "${cmd[@]}"
   local agentstream_exit=$?
+  set -e
   # shellcheck source=scripts/lib/wf-trial-envelope-depth-check.inc.sh
   source "${REPO_ROOT}/scripts/lib/wf-trial-envelope-depth-check.inc.sh"
   wf_trial_envelope_depth_diagnostic "$workspace" || true

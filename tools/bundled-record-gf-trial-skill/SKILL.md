@@ -29,7 +29,7 @@ Explicit invocation only (`/record-gf-trial`, `@record-gf-trial`).
 
 5. **Idempotency** — Glob `docs/demos/trial-readout-*-{clientId}.md` under the store. If a match exists and **`--force`** is absent, **stop** and report existing readout path; do not duplicate catalog rows.
 
-6. **Discover trial identity (read-only on client)** — Scan `tied-project/working/*/PLAN.md` for `PROMPT-GF-XX` or custom header; map facilitator index row → `TIED-DEMO-*`, exercise bridge, **proof_boundary**. Create store working folder `tied-project/working/FACILITATOR-{slug}-{clientId}/` with PLAN/CITDP/tracker per [FACILITATOR-GF-04 precedent](../../tied-project/working/FACILITATOR-GF-04-1792857852/PLAN.md) when publishing a **new** readout.
+6. **Discover trial identity (read-only on client)** — Scan `tied-project/working/*/PLAN.md` for `PROMPT-GF-XX` or custom header; map facilitator index row → `TIED-DEMO-*`, exercise bridge, **proof_boundary**. Glob **`tied-methodology-version.session.v1.json`**; resolve semver per [reference § Methodology version (session)](./reference.md#methodology-version-session). Create store working folder `tied-project/working/FACILITATOR-{slug}-{clientId}/` with PLAN/CITDP/tracker per [FACILITATOR-GF-04 precedent](../../tied-project/working/FACILITATOR-GF-04-1792857852/PLAN.md) when publishing a **new** readout.
 
 7. **Facilitator verification** — With client-scoped env (reference matrix): `git log -1`, project tests, lint/typecheck if present, `tied-cli.sh tied_validate_consistency`. Capture full JSON and stdout to `evidence/build-plan-verification-evidence.md`. **Do not** re-run subject `close_out` unless sponsor asks.
 

@@ -78,6 +78,23 @@ wf_trial_process_log_bind_workspace() {
     unset WF_TRIAL_BOOTSTRAP_STDERR
   fi
 
+  # [REQ-TRIAL_METHODOLOGY_VERSION_READOUT] orchestrator pin — secondary to session evidence file
+  if command -v node >/dev/null 2>&1 && [[ -n "$repo_root" && -d "$workspace" ]]; then
+    local _wf_meth_ver=""
+    _wf_meth_ver="$(
+      WF_WS="$workspace" node --input-type=module -e "
+import { readTiedMethodologyVersionFromProjectRoot } from '${repo_root}/scripts/lib/read-tied-methodology-version.mjs';
+try {
+  process.stdout.write(readTiedMethodologyVersionFromProjectRoot(process.env.WF_WS || ''));
+} catch { /* optional */ }
+" 2>/dev/null
+    )" || true
+    if [[ -n "$_wf_meth_ver" ]]; then
+      printf 'DIAGNOSTIC: tied_methodology_version=%s source=orchestrator_resolver (secondary; session evidence file canonical)\n' \
+        "$_wf_meth_ver" >>"$stderr_log"
+    fi
+  fi
+
   WF_TRIAL_PROCESS_LOG_MANIFEST="$manifest"
   WF_TRIAL_PROCESS_LOG_FINALIZED=0
 

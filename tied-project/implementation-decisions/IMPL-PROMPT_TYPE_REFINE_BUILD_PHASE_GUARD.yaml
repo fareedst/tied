@@ -1,0 +1,17 @@
+IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  code_locations:
+    files:
+      - description: "Handoff lint"
+        path: "tools/bootstrap/lib/plan-build-sequence-handoff.mjs"
+      - description: "Normative guard"
+        path: "tools/bundled-prompt-type-skills/prompt-shared/plan-build-sequence-guard.md"
+      - description: "Skill contract test"
+        path: "mcp-server/src/e2e/prompt-type-skills.test.ts"
+  cross_references:
+    - "ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+    - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+  essence_pseudocode_path: "implementation-decisions/IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD-pseudocode.md"
+  implementation_approach:
+    summary: "plan-build-sequence-guard.md; SKILL.md preflight; plan-build-sequence-handoff.mjs; prompt-type-skills e2e."
+  name: "Guard doc, skill preflight, lint module"
+  status: "Implemented"

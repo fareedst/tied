@@ -1,0 +1,44 @@
+CITDP-REQ-TRIAL_METHODOLOGY_VERSION_READOUT:
+  change_definition:
+    current_behavior: "@record-wf-trial and @record-gf-trial treat TIED semver as optional dogfood prose, often inferred from bootstrap git commits. WF orchestrator process logs tee harness stdout/stderr only — not MCP server_info payloads."
+    desired_behavior: "Turn-1 and GF bootstrap persist tied-methodology-version.session.v1.json; facilitator skills require TIED methodology version (session) in readout metadata with documented fallbacks."
+    non_goals:
+      - "Mandatory historical readout backfill"
+      - "Per-turn TIEDv stamp"
+    success_criteria:
+      - "node --test tools/bootstrap/lib/trial-methodology-version-readout-contract.test.mjs passes"
+    unchanged_behavior: "Subject product tokens on disposable clients remain facilitator read-only."
+  record_identity:
+    change_request_id: "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+    citdp_id: "CITDP-REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+    status: "implemented"
+  risk_analysis:
+    adversarial_inquiry:
+      depth_tier: "minimal"
+      gate_policy: "advisory"
+      assurance_profile: "baseline-functional"
+      research_profile: "integrated-agent"
+      counterexamples:
+        - "Agent ignores turn-1 goal and facilitator still publishes readout using only git bootstrap"
+        - "install.json pin disagrees with server_info session capture"
+      falsification_questions:
+        - "Does facilitator metadata row appear without contract test?"
+      disconfirming_observations:
+        - "Pre-ship trials lack evidence file but readout still grades without grandfather disclaimer"
+      evidence_references:
+        - "tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/evidence/sub-adversarial-inquiry-pass-na.md"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/lib/trial-methodology-version-readout-contract.test.mjs"
+  impact_analysis:
+    modules_or_boundaries: "record-wf-trial/gf-trial skills; traditional-four-phase-agentstream.yaml; wf-trial-process-log.inc.sh"
+    tied_tokens_new:
+      - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+      - "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT"
+      - "IMPL-TRIAL_METHODOLOGY_VERSION_READOUT"

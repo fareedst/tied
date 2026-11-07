@@ -1,0 +1,33 @@
+copy_hygiene: "Fresh tracker for REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD refine-plan pass"
+description: "Tracker — prompt-type refine-build phase guard"
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ""
+  completed: []
+  envelope_path: "tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/request-evidence-envelope.v1.json"
+  operator_evidence:
+    command_seq: []
+    status: "not_run"
+  request: "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+steps:
+  - slug: sub-adversarial-inquiry-pass
+    disposition: not_applicable
+    policy: minimal-depth-no-inquiry
+    rationale: "Minimal depth; field case in CITDP evidence_references."
+    evidence_refs:
+      - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/not-applicable-receipt.v1.json
+      - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md
+    tracking:
+      status: not_applicable
+      policy: minimal-depth-no-inquiry
+      evidence_refs:
+        - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/not-applicable-receipt.v1.json
+        - tied-project/working/REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD/evidence/sub-adversarial-inquiry-pass-na.md

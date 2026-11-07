@@ -1,0 +1,17 @@
+REQ-TRIAL_METHODOLOGY_VERSION_READOUT:
+  satisfaction_criteria:
+    - criterion: "Facilitator five-step (WF) resolution order documented"
+      id: "SC-TMV-04"
+      metric: "contract test"
+    - criterion: "Optional orchestrator DIAGNOSTIC tied_methodology_version in process log inc"
+      id: "SC-TMV-05"
+      metric: "contract test"
+    - criterion: "record-wf-trial and record-gf-trial reference require TIED methodology version (session) metadata"
+      id: "SC-TMV-02"
+      metric: "contract test"
+    - criterion: "Session evidence example JSON schema tied-methodology-version.session.v1"
+      id: "SC-TMV-03"
+      metric: "contract test"
+    - criterion: "WF turn-1 batch goal names server_info and tied-methodology-version.session.v1.json"
+      id: "SC-TMV-01"
+      metric: "trial-methodology-version-readout-contract.test.mjs"

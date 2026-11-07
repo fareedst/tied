@@ -1,0 +1,12 @@
+REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  metadata:
+    created:
+      author: "AI Agent"
+      date: "2026-11-07"
+  satisfaction_criteria:
+    - criterion: "CITDP change_definition cites client fb-mw68y52s-ixqm8x narrative without store feedback ingest."
+    - criterion: "mcp-server/src/e2e/prompt-type-skills.test.ts asserts phase-guard contract strings on leaf skills."
+    - criterion: "prompt-shared/plan-build-sequence-guard.md defines plan_phase, Do next rules, and build-plan preflight stop messages."
+    - criterion: "refine-plan and build-plan bundled skills reference plan-build-sequence-guard.md."
+    - criterion: "session-handoff-structure.md documents normative plan_phase in Plan spine."
+    - criterion: "tools/bootstrap plan-build-sequence-handoff test rejects pre-implementation phase with Do next close-out only."

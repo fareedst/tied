@@ -44,6 +44,23 @@ export TIED_STORE_ROOT="{store repo root}"
 | `npm run lint:ts` / `npx tsc -b` if present | pass/fail |
 | `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_validate_consistency` | full JSON file |
 | Optional `tied_project_lint` | JSON summary |
+| `tied-cli.sh server_info '{}'` (when session evidence missing) | Snapshot `extensions.tied.methodology` to store facilitator evidence |
+
+## Methodology version (session)
+
+Readout **metadata table** must include **TIED methodology version (session)** (semver), **source**, and **evidence path** when resolvable. Section **TIED version / dogfood** (§15) cites the same resolution; not an effectiveness claim.
+
+**Resolution order** (stop at first hit; label weaker sources):
+
+1. `tied-project/working/*/evidence/tied-methodology-version.session.v1.json` on the subject client ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT]).
+2. `tied_methodology_version` and `tied_methodology_version_source` on `trial-workflow-interaction-inventory.v1.json` (WF mirror).
+3. Facilitator-run `server_info` on the client (`TIED_BASE_PATH` scoped); archive JSON under store `FACILITATOR-WF-*/evidence/`.
+4. `tied-bundle/install.json` → `store_methodology_version` — label **bootstrap pin** (not session MCP).
+5. Earliest bootstrap git commit message — label **bootstrap-inferred only** when (1) is absent; do not treat as session capture.
+
+When (1) is missing on pre-ship trials, state **bootstrap-inferred only** explicitly; `--force` republish is allowed.
+
+Contract example: `mcp-server/contracts/trial-methodology-version/tied-methodology-version.session.example.json`. Agent capture: [trial-session-methodology-version-capture.md](../../tools/bundled-prompt-type-skills/prompt-shared/trial-session-methodology-version-capture.md).
 
 ## Orchestrator process log (default discovery)
 
@@ -65,7 +82,7 @@ Readout: add **Orchestrator process log** (manifest path, `exit_code`, ≤12 fri
 
 Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-skill/reference.md#readout-document-contract-12-sections) with workflow-specific sections:
 
-1. Metadata table — include **Model config**, **Model slug**, **Touchpoint** (`add-feature` → `refine-plan` → `build-plan` → `close-out` + facilitator inspection).
+1. Metadata table — include **Model config**, **Model slug**, **TIED methodology version (session)** (semver, source, evidence path), **Touchpoint** (`add-feature` → `refine-plan` → `build-plan` → `close-out` + facilitator inspection).
 2. Sponsor intent (verbatim PROMPT-WF block).
 3. RESOLVE table (subject client).
 4. What was built.
@@ -79,7 +96,7 @@ Extends [record-gf-trial readout contract](../../tools/bundled-record-gf-trial-s
 12. Session grading — **seven dimensions** including **Workflow choreography** (see [catalog grading](../../docs/demos/catalog-traditional-workflow-trial-prompts.md#facilitator-grading-readout)).
 13. **Cross-model notes** (same PROMPT-WF, other readouts if any — prose, no ranking).
 14. Cohort comparisons vs peer WF readouts.
-15. Optional TIED version / dogfood paragraph (not effectiveness claim).
+15. TIED version / dogfood paragraph — session resolution per **Methodology version (session)**; when only (4)/(5) apply, say **bootstrap-inferred only** (not effectiveness claim).
 16. Facilitator follow-ups.
 17. Future-test rule.
 

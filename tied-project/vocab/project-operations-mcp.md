@@ -32,7 +32,8 @@
 | `/record-gf-trial` | Explicit skill for **store** facilitators: inspect disposable greenfield client, publish `docs/demos/trial-readout-*.md`, optional Kaizen feedback ingest. |
 | **record-gf-trial skill** | Bundled skill at `tools/bundled-record-gf-trial-skill/SKILL.md`; manifest **`STORE_FACILITATOR_SKILLS`** (store self-install only, not disposable clients). |
 | `/record-wf-trial` | Explicit skill for **store** facilitators: inspect disposable four-phase workflow client, publish workflow trial readout, optional Kaizen ingest. |
-| **record-wf-trial skill** | Bundled skill at `tools/bundled-record-wf-trial-skill/SKILL.md`; manifest **`STORE_FACILITATOR_SKILLS`**. |
+| **record-wf-trial skill** | Bundled skill at `tools/bundled-record-wf-trial-skill/SKILL.md`; manifest **`STORE_FACILITATOR_SKILLS`**. Resolves **TIED methodology version (session)** per reference § Methodology version (session) ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT](../requirements/REQ-TRIAL_METHODOLOGY_VERSION_READOUT.yaml)). |
+| **tied-methodology-version.session.v1** | trial semver artifact | Facilitator + disposable-client session evidence; not a store REQ for subject product. |
 | `/readme-information-architecture` | Explicit skill for **store** maintainers: improve README/docs Markdown presentation (navigation, hierarchy, transitions) without semantic loss. |
 | **readme-information-architecture skill** | Bundled skill at `tools/bundled-readme-information-architecture-skill/SKILL.md`; procedure in `reference.md`; **not** methodology inheritance. |
 | **sponsor witness report** | Point-of-work account from the human sponsor who observed the failure; intake gate required before MCP write. |

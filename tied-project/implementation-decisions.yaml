@@ -1707,6 +1707,15 @@ IMPL-PROMPT_TYPE_CITDP_RECORD_PROMOTE:
       - "ARCH-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
     requirements:
       - "REQ-PROMPT_TYPE_CITDP_RECORD_PROMOTE"
+IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD:
+  detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD.yaml"
+  name: "Refine-build phase guard implementation"
+  related_requirements:
+    depends_on:
+      - "ARCH-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+    implements:
+      - "REQ-PROMPT_TYPE_REFINE_BUILD_PHASE_GUARD"
+  status: "Implemented"
 IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE:
   detail_file: "implementation-decisions/IMPL-PROMPT_TYPE_SKILL_EXECUTION_MODE.yaml"
   name: "Prompt-type skill execution mode implementation"
@@ -2932,6 +2941,10 @@ IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT:
   essence_pseudocode_path: "implementation-decisions/IMPL-TIED_MCP_JSON_CANONICAL_OUTPUT-pseudocode.md"
   name: "mcp-json-canonical bootstrap writer"
   status: "Implemented"
+IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION:
+  detail_file: "implementation-decisions/IMPL-TIED_MCP_TEST_MCP_JSON_ISOLATION.yaml"
+  name: "MCP test mcp.json isolation implementation"
+  status: "Implemented"
 IMPL-TIED_META_HUB_MCP:
   detail_file: "implementation-decisions/IMPL-TIED_META_HUB_MCP.yaml"
   name: "Meta-hub MCP adapters"
@@ -3476,6 +3489,15 @@ IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH:
   detail_file: "implementation-decisions/IMPL-TIED_YAML_UPDATES_ATOMIC_BATCH.yaml"
   name: "yaml_updates_apply rollback module"
   status: "Active"
+IMPL-TRIAL_METHODOLOGY_VERSION_READOUT:
+  cross_references:
+    architecture:
+      - "ARCH-TRIAL_METHODOLOGY_VERSION_READOUT"
+    requirements:
+      - "REQ-TRIAL_METHODOLOGY_VERSION_READOUT"
+  detail_file: "implementation-decisions/IMPL-TRIAL_METHODOLOGY_VERSION_READOUT.yaml"
+  name: "Trial methodology version readout implementation"
+  status: "Implemented"
 IMPL-VOCABULARY_ANALYSIS:
   category: "Implementation"
   detail_file: "implementation-decisions/IMPL-VOCABULARY_ANALYSIS.yaml"
@@ -3512,6 +3534,15 @@ IMPL-WF_TRIAL_FOUR_PHASE_HARDENING:
       - "ARCH-WF_TRIAL_FOUR_PHASE_HARDENING"
     requirements:
       - "REQ-WF_TRIAL_FOUR_PHASE_HARDENING"
+IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+  decision: "wf_trial_four_phase_prepare_expanded_batch and wf_trial_four_phase_run_agentstream in scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh"
+  detail_file: "implementation-decisions/IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT.yaml"
+  status: "Active"
+  traceability:
+    architecture:
+      - "ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+    requirements:
+      - "REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
 IMPL-WF_TRIAL_IMPLEMENTATION_STACK:
   decision: "wf-trial-implementation-stack.inc.sh implements enabled/seed/materialize/apply; workflow-trial-agentstream.sh branches stack vs generic preload; catalog batch record-wf-trial reference updated."
   detail_file: "implementation-decisions/IMPL-WF_TRIAL_IMPLEMENTATION_STACK.yaml"

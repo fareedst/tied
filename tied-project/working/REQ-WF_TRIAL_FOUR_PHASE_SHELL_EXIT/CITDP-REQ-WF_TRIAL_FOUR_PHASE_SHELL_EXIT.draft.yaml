@@ -1,0 +1,29 @@
+CITDP-REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT:
+  change_definition:
+    current_behavior: "run-traditional-four-phase-agentstream.sh uses set -euo pipefail; non-zero node agentstream triggers errexit before agentstream_exit assignment; EXIT trap references local expanded_batch and can emit unbound variable on failed runs."
+    desired_behavior: "scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh centralizes baked EXIT trap and set +e agentstream invocation; wrapper sources inc; T-AGENTSTREAM-EXIT-01 tests inc with stub cmd exit 42."
+    non_goals:
+      - "Fix Cursor WritableIterable or turn-2 session scheduling"
+      - "WF_TRIAL_TEST_HARNESS or other test-only env on production orchestrator path"
+      - "Change agentstream batch turn prompts"
+    success_criteria:
+      - "run-traditional-four-phase-agentstream-sh.test.mjs includes T-AGENTSTREAM-EXIT-01"
+    unchanged_behavior: "Successful four-phase runs still exit 0; dry-run and --help behavior unchanged per REQ-TIED_CLI_OPERATOR_OUTPUT_TEXTURE."
+  impact_analysis:
+    modules_or_boundaries: "scripts/lib/wf-trial-run-four-phase-agentstream.inc.sh; scripts/run-traditional-four-phase-agentstream.sh; tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs"
+    tied_tokens_new:
+      - "REQ-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+      - "ARCH-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+      - "IMPL-WF_TRIAL_FOUR_PHASE_SHELL_EXIT"
+  risk_analysis:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    rationale: "Shell wrapper only; no auth, network, or disposable client mutation."
+    counterexamples:
+      - "inc.sh test passes but live agentstream still fails turn 2 for driver reasons"
+  risk_assessment:
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+  test_strategy:
+    composition:
+      - "tools/bootstrap/run-traditional-four-phase-agentstream-sh.test.mjs (T-AGENTSTREAM-EXIT-01 sources inc.sh)"
