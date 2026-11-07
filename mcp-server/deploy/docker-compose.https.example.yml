@@ -1,8 +1,16 @@
 # [REQ-MCP_HTTPS_REMOTE_ACCESS] Example: dual MCP over HTTPS (Caddy TLS → plain HTTP backends).
-# Usage: copy .env.example to .env, set TIED_MCP_HTTP_BEARER_TOKEN, mount client tied-project/.
+#
+# Env interpolation: only shell env, deploy/.env, or `docker compose --env-file <path>`.
+#   cp .env.example .env    # in this directory
+#   # or from repo root: docker compose --env-file .env -f mcp-server/deploy/docker-compose.https.example.yml up
+#
+# TIED_CLIENT_ROOT defaults to ../.. (this monorepo). Point at a client repo when the corpus lives elsewhere.
 
 services:
   tied-mcp-core:
+    env_file:
+      - path: ../../.env
+        required: false
     image: node:22-bookworm
     working_dir: /app/mcp-server
     command: ["node", "dist/http-entry.js"]
@@ -10,16 +18,22 @@ services:
       TIED_MCP_TOOL_PROFILE: core
       TIED_MCP_HTTP_HOST: 0.0.0.0
       TIED_MCP_HTTP_PORT: 8787
-      TIED_MCP_HTTP_BEARER_TOKEN: ${TIED_MCP_HTTP_BEARER_TOKEN:?set bearer token}
+      TIED_MCP_HTTP_BEARER_TOKEN: ${TIED_MCP_HTTP_BEARER_TOKEN:-changeme}
       TIED_CLIENT_PROJECT_PATH: /corpus/tied-project
       TIED_CLIENT_BUNDLE_PATH: /corpus/tied-bundle
     volumes:
       - ../..:/app:ro
-      - ${TIED_CLIENT_ROOT:?set client repo root}:/corpus:rw
+      - ${TIED_CLIENT_ROOT:-../..}:/corpus:rw
     expose:
       - "8787"
+    # Host smoke (optional): plain HTTP to tied-cli without Caddy/TLS
+    ports:
+      - "127.0.0.1:8787:8787"
 
   tied-mcp-optin:
+    env_file:
+      - path: ../../.env
+        required: false
     image: node:22-bookworm
     working_dir: /app/mcp-server
     command: ["node", "dist/http-entry.js"]
@@ -27,14 +41,16 @@ services:
       TIED_MCP_TOOL_PROFILE: optin
       TIED_MCP_HTTP_HOST: 0.0.0.0
       TIED_MCP_HTTP_PORT: 8788
-      TIED_MCP_HTTP_BEARER_TOKEN: ${TIED_MCP_HTTP_BEARER_TOKEN:?set bearer token}
+      TIED_MCP_HTTP_BEARER_TOKEN: ${TIED_MCP_HTTP_BEARER_TOKEN:-changeme}
       TIED_CLIENT_PROJECT_PATH: /corpus/tied-project
       TIED_CLIENT_BUNDLE_PATH: /corpus/tied-bundle
     volumes:
       - ../..:/app:ro
-      - ${TIED_CLIENT_ROOT:?set client repo root}:/corpus:rw
+      - ${TIED_CLIENT_ROOT:-../..}:/corpus:rw
     expose:
       - "8788"
+    ports:
+      - "127.0.0.1:8788:8788"
 
   caddy:
     image: caddy:2-alpine

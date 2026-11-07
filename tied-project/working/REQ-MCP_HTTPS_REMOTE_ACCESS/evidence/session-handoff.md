@@ -3,53 +3,58 @@
 | Field | Value |
 | --- | --- |
 | **handoff_kind** | `session` |
-| **date** | 2026-11-06 |
+| **date** | 2026-11-07 |
 | **request_token** | REQ-MCP_HTTPS_REMOTE_ACCESS |
-| **prompt_type** | close-out |
+| **prompt_type** | operator-smoke / post-close fixes (uncommitted) |
 
-## Plan spine
+## Ledger
 
-- **Canonical plan:** [../PLAN-refine.md](../PLAN-refine.md)
-- **Phase:** Pre-implementation (plan refined; no product code)
-- **CITDP:** [../CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS.yaml](../CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS.yaml)
-- **Tracker:** [../agent-req-implementation-checklist.yaml](../agent-req-implementation-checklist.yaml)
+| Item | Value |
+| --- | --- |
+| **Close-out commit** | `49027f6a` — `feat(mcp): Streamable HTTP remote access for dual MCP profiles` |
+| **Close-out run** | `close-out-mcp-https-2026-11-06` |
+| **Evidence** | [close-out-handoff.md](./close-out-handoff.md), [manual-smoke-checklist.md](./manual-smoke-checklist.md) |
 
-## Plan execution steps
+## Shipped (in `49027f6a`)
 
-### Required
+Streamable HTTP MCP (`http-entry.js`, `tied mcp serve`), dual profile (core/optin), bearer + bind policy, `TIED_CLI_MCP_URL` HTTP client, deploy compose + Caddy example, TIED REQ/ARCH/IMPL stack.
 
-- [x] **author-tied-stack** — Create REQ/ARCH/IMPL records, semantic tokens, IMPL pseudocode sidecars (`pseudocode_validate` gating).
-- [x] **red-http-tests** — `mcp-http-server.test.ts`, `mcp-http-auth.test.ts` (tied-cli-http.test.cjs deferred).
-- [x] **green-server-factory** — Extract `createTiedYamlMcpServer`; thin stdio `index.ts`.
-- [x] **green-http-serve** — `mcp-http-server.ts`, `http-entry.ts`, `tied mcp serve`.
-- [x] **green-cli-http** — `TIED_CLI_MCP_URL` branch in bundled client (`tied-mcp-http-client.mjs`).
-- [x] **deploy-and-docs** — `mcp-server/deploy/` compose + Caddy; `mcp-server/README.md`; env allowlist; vocab RECORD.
-- [x] **leap-server-info** — `extensions.tied.transport` in builder.
-- [x] **persist-citdp-and-validate** — `tied-project/citdp/CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS.yaml`; run `tied_validate_consistency` before close-out; [manual-smoke-checklist.md](./manual-smoke-checklist.md).
+## Post-close fixes (local, not committed)
 
-### Optional
+Operator smoke exposed three gaps; fixes are in the working tree:
 
-- [ ] **bootstrap-remote-template** — Separate follow-on REQ for opt-in `tied-install --mcp-remote-url` generator (deferred from v1).
-
-### Recommendations
-
-- **Costly:** Treat any public exposure as production incident surface — rotate bearer, restrict proxy to VPN, never commit tokens in compose overrides checked into git (use `.env.example` only).
-- Use **two vhosts** at proxy for core vs optin so IDE enablement matches today’s two stdio servers.
-
-### Changelog (this REQ)
-
-| Date | Prompt type | Summary |
+| Issue | Root cause | Fix (paths) |
 | --- | --- | --- |
-| 2026-11-06 | add-feature | Initial plan — dual MCP HTTPS via proxy TLS + bearer. |
-| 2026-11-06 | refine-plan | Locked defaults (stateful HTTP, `tied mcp serve`, vhosts, module map); CITDP + test strategy + tracker. |
-| 2026-11-06 | close-out | Gate `close-out-mcp-https-2026-11-06` allowed; commit `4f7bda90`. |
+| `tied-cli.sh server_info '{}'` → `Cannot read properties of undefined (reading '_zod')` | MCP SDK `validateToolOutput` requires an **object** Zod schema; `z.record()` does not normalize | `mcp-server/src/tools/index.ts` → `z.looseObject({})`; composition test in `server-info-mcp.composition.test.ts` |
+| `docker compose … config` → `TIED_CLIENT_ROOT` / bearer missing | Compose interpolates only shell env, `mcp-server/deploy/.env`, or `--env-file`; repo-root `.env` is not auto-loaded | Defaults in `docker-compose.https.example.yml`; `deploy/.env.example`; README + manual-smoke copy |
+| `TIED_CLI_MCP_URL=… tied-cli` → `fetch failed` | **ECONNREFUSED** — no listener on `127.0.0.1:8787`; `.env` does not start a server; compose had only `expose`, not host `ports` | Publish `127.0.0.1:8787`/`8788` in compose; manual-smoke requires starting listener; CLI ECONNREFUSED hints in `tied-mcp-http-client.mjs` |
+
+**Suggested commit scope (when ready):** `mcp-server/src/tools/index.ts`, `server-info-mcp.composition.test.ts`, `mcp-server/deploy/*`, `mcp-server/README.md`, `tools/bundled-tied-yaml-skill/scripts/tied-mcp-http-client.mjs`, `manual-smoke-checklist.md`, `deploy/.env.example` (not `.env`).
+
+## Operator quick path (HTTP smoke)
+
+1. `npm run build --prefix mcp-server`
+2. **Listener (pick one):**
+   - Local: `cd mcp-server && TIED_MCP_HTTP_BEARER_TOKEN=devtoken node dist/http-entry.js`
+   - Docker: `docker compose --env-file mcp-server/deploy/.env -f mcp-server/deploy/docker-compose.https.example.yml up -d tied-mcp-core`
+3. **CLI:** `TIED_CLI_MCP_URL=http://127.0.0.1:8787/mcp TIED_CLI_MCP_BEARER=devtoken tools/bundled-tied-yaml-skill/scripts/tied-cli.sh server_info '{}'`
+4. **Stdio (no HTTP):** `tools/bundled-tied-yaml-skill/scripts/tied-cli.sh server_info '{}` — works after rebuild (no `_zod` once `z.looseObject` is in dist).
+
+**Env cheat sheet**
+
+- Server: `TIED_MCP_HTTP_BEARER_TOKEN`, `TIED_MCP_HTTP_HOST` / `PORT`, corpus via `TIED_CLIENT_PROJECT_PATH` / install mcp.json
+- CLI HTTP: `TIED_CLI_MCP_URL`, `TIED_CLI_MCP_BEARER` (or reuse server bearer env)
+- Compose: put vars in `mcp-server/deploy/.env` **or** `docker compose --env-file .env` from repo root
 
 ## Do next
 
-Manual HTTPS smoke optional ([manual-smoke-checklist.md](./manual-smoke-checklist.md)).
+1. Commit post-close smoke fixes (scoped list above).
+2. Optional: push `49027f6a` + follow-up commit.
+3. Optional: `bootstrap-remote-template` (deferred v1).
+4. Wire `tied_verify` for REQ status automation (manual **Implemented** at close-out).
 
-## Close-out signals
+## Deferred / known
 
-- **Machine:** [request-evidence-envelope.v1.json](./request-evidence-envelope.v1.json) — `blocking_gap_count: 0`
-- **Process:** [checklist-tracker.yaml](../checklist-tracker.yaml); `tied_validate_consistency` ok
-- **Ledger:** [close-out-handoff.md](./close-out-handoff.md); commit **`4f7bda90`**
+- `tied-cli-http.test.cjs` still deferred in plan.
+- `tied_verify` `missing_checklist_gate` at close-out — status set by hand.
+- Do **not** commit root `.env` / `mcp-server/deploy/.env` (tokens).

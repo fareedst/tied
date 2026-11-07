@@ -42,7 +42,7 @@ The MCP server remains in the TIED repo; your project only references it via MCP
 
 **tied-cli over HTTP:** set `TIED_CLI_MCP_URL` (e.g. `https://mcp-core.local/mcp`) and `TIED_CLI_MCP_BEARER` (or reuse `TIED_MCP_HTTP_BEARER_TOKEN`). Stdio spawn is unchanged when `TIED_CLI_MCP_URL` is unset.
 
-**Cursor remote MCP (optional, additive):** add `mcpServers` entries with `"url"` and `"headers": { "Authorization": "Bearer …" }` — do not replace default stdio entries. Example compose: [`deploy/docker-compose.https.example.yml`](deploy/docker-compose.https.example.yml).
+**Cursor remote MCP (optional, additive):** add `mcpServers` entries with `"url"` and `"headers": { "Authorization": "Bearer …" }` — do not replace default stdio entries. Example compose: [`deploy/docker-compose.https.example.yml`](deploy/docker-compose.https.example.yml). Compose interpolates env from `mcp-server/deploy/.env` or `docker compose --env-file <path>` (a repo-root `.env` is not read unless you pass `--env-file .env`). `TIED_CLIENT_ROOT` defaults to `../..` for this store layout.
 
 ## Tests
 

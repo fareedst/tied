@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **MCP HTTPS operator smoke ([REQ-MCP_HTTPS_REMOTE_ACCESS])** — `server_info` `outputSchema` uses `z.looseObject({})` (fixes MCP SDK `_zod` on stdio/HTTP); example compose defaults, host `127.0.0.1:8787`/`8788` publish, `deploy/.env.example`, clearer HTTP CLI `ECONNREFUSED` hints; gitignore local `.env`.
+
 ### Changed
 
 - **Store README install spine (disk-first operators)** — Root [README.md](README.md) documents `tied-install` only **from the store root** with a client/primary path; no `--store`, default `--mode`, or process env keys in the README. Primary-repo flags, store resolution, and MCP env catalog: [tools/bootstrap/README.md](tools/bootstrap/README.md) and [docs/tied-first-party-env-catalog.md](docs/tied-first-party-env-catalog.md). [operator-lens.md](docs/tied-experience/operator-lens.md) aligned. Evidence: [readme-store-root-policy-2026-11-07.md](tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md). Cross-ref [REQ-TIED_PRIMARY_REPO_ONBOARDING], [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY].

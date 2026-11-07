@@ -72,10 +72,22 @@ try {
   await client.close();
 } catch (e) {
   const msg = e instanceof Error ? e.message : String(e);
+  const cause = e instanceof Error && e.cause instanceof Error ? e.cause : null;
+  const causeCode =
+    cause && typeof cause === "object" && "code" in cause ? String(cause.code) : null;
+  let recoveryHint =
+    "Verify TIED_CLI_MCP_URL, bearer token, and that tied mcp serve is running.";
+  if (causeCode === "ECONNREFUSED") {
+    recoveryHint =
+      "Nothing accepted the TCP connection (ECONNREFUSED). Start the HTTP MCP listener on that host:port, or map Docker publish ports. Local: cd mcp-server && TIED_MCP_HTTP_BEARER_TOKEN=<token> node dist/http-entry.js (core default port 8787). Docker example publishes 127.0.0.1:8787 after compose up; Caddy-only URLs use https://mcp-core.local/mcp not :8787.";
+  }
   emitCliHindranceDiagnostic({
     failure_kind: "transport_error",
-    recovery_hint: "Verify TIED_CLI_MCP_URL, bearer token, and that tied mcp serve is running.",
+    recovery_hint: recoveryHint,
   });
   console.error(`ERROR: MCP HTTP tool call failed: ${msg}`);
+  if (causeCode) {
+    console.error(`ERROR: underlying: ${causeCode}${cause?.message ? ` (${cause.message})` : ""}`);
+  }
   process.exit(1);
 }
