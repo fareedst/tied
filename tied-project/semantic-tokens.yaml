@@ -824,6 +824,15 @@ ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   name: "Shared checklist evidence gate boundary"
   status: "Active"
   type: "ARCH"
+ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  cross_references:
+    - "IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    - "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+  description: "Compose DAE gate check; skill as operator surface"
+  name: "Checklist gate operator path architecture"
+  source_index: "architecture-decisions.yaml"
+  status: "Active"
+  type: "ARCH"
 ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
   cross_references:
     - "IMPL-TIED_CLAIMS_EVIDENCE_REVIEW"
@@ -2605,6 +2614,15 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
     - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
   description: "Pure shared validator for Tracker dispositions, CITDP shape/depth, and identity-bound activation artifacts."
   name: "Checklist, CITDP, and activation validator"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    - "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+  description: "Skill section and gate composition tests"
+  name: "Checklist gate operator path implementation"
+  source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_CLAIMS_EVIDENCE_REVIEW:
@@ -4706,6 +4724,15 @@ REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   description: "Checklist progression, verification, and close-out require machine-validated adversarial and execution evidence."
   name: "Machine-enforced checklist evidence gates"
   status: "Active"
+  type: "REQ"
+REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  cross_references:
+    - "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    - "IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+  description: "Path-based tied_gate_check operator documentation and tests"
+  name: "Checklist gate operator path"
+  source_index: "requirements.yaml"
+  status: "Implemented"
   type: "REQ"
 REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
   category: "Functional"

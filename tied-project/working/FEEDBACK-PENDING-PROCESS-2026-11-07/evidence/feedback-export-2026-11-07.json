@@ -1,0 +1,331 @@
+[
+  {
+    "capture_schema_version": "feedback-capture.v1",
+    "context": {
+      "comparison_status": "compose_implemented",
+      "compose_phase_status": {
+        "1": "implemented",
+        "2": "implemented",
+        "3": "implemented",
+        "4": "implemented",
+        "5": "implemented"
+      },
+      "evidence_links": [
+        "docs/comparisons/claude-code-team-code-review-vs-tied.md",
+        "docs/comparisons/methodology-composition-matrix.md",
+        "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-analysis-digest-fb-mvclklsa.v1.json"
+      ],
+      "external_study_url": "https://claude.dev/blog/solving-code-review-at-anthropic/",
+      "kaizen_digest_projection_hash": "8561ece57efd07c4",
+      "leap_proposal_applied": "lp-2026-10-17T16-41-21-621Z-441a8fc5136b",
+      "methodology_experiment_id": "mle-claude-compose-20261017-001",
+      "observation_kind": "discovery",
+      "outcome_observations": [
+        {
+          "baseline_ref": "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-analysis-digest-fb-mvclklsa.v1.json",
+          "countermeasure_ref": "mle-claude-compose-20261017-001",
+          "evidence_links": [
+            "tied-project/methodology-experiments.yaml#mle-claude-compose-20261017-001",
+            "tied-project/working/PLAN-CLAUDE-REVIEW-FEEDBACK-MCP/evidence/kaizen-feedback-pilot-report-fb-mvclklsa.v1.json"
+          ],
+          "observation_id": "oo-mvcz428b-h50pjv",
+          "observed_at": "2026-10-17T22:35:00.000Z",
+          "outcome": "inconclusive",
+          "recorded_at": "2026-10-17T22:33:52.715Z",
+          "schema_version": "outcome-observation.v1"
+        }
+      ],
+      "recommended_phases": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "tied_version": "3.0.0"
+    },
+    "created_at": "2026-10-17T16:14:49.930Z",
+    "description": "Upstream methodology improvement derived from docs/comparisons/claude-code-team-code-review-vs-tied.md (2026-10-17). External study: Anthropic \"Solving code review at Anthropic\" (Oct 2026) — compose-don't-replace; do not treat PR bots or article metrics as TIED authority.\n\nGaps called out in TIED core today:\n- Review convergence: round cap, diff-only re-review, repeated-finding suppression — ad hoc in skills, not checklist/MCP receipts (matrix disposition: Gap).\n- Path-scoped review guidance (REVIEW.md-style) — not a standard TIED pattern (client-owned optional).\n- Risk-tier human approval automation — intent aligns via assurance profiles / depth_tier / consequence ladder; no shipped classifier for approver touchpoints (Gap automation).\n\nRecommended phased improvements (recommendations only; each behavior-changing phase needs its own sponsor REQ/CITDP):\n- Phase 1 (Loop 1): Pre-handoff verification charter — executable checks + evidence before PR/commit (doc-first).\n- Phase 2 (Loop 1): Risk-tier playbook mapping assurance profiles and depth_tier to human review attention (advisory; never auto-approve costly choices).\n- Phase 3 (Loop 2): Review convergence policy — round cap, diff-only re-review, class-level fixes; measure via operational observations.\n- Phase 4 (Loop 3): Incident/revert evaluation corpus with explicit denominators and stop criteria (compose closed QMM machinery).\n- Phase 5 (Composable): Client DevOps appendix for PR/CI/release fields — client-owned, not TIED core.\n\nExplicit non-adoptions preserved: mandatory finding voter gate, zero-human merge for costly paths, PR-only workflow replacing LEAP/checklist, merge queue/flags as TIED core.\n\nStore promotion (2026-10-17): Kaizen digest projection 8561ece57efd07c4; Loop 3 experiment mle-claude-compose-20261017-001; optional matrix row for PR-centric review remains deferred (REQ-TIED_METHODOLOGY_COMPOSITION_MATRIX).",
+    "id": "fb-mvclklsa-t5gzbo",
+    "privacy_tier": "operator_local",
+    "promotion_status": "canonical_ready",
+    "title": "Compose Anthropic-style review layers into TIED (Claude Code comparison)",
+    "type": "methodology_improvement"
+  },
+  {
+    "capture_schema_version": "feedback-event.v1",
+    "context": {
+      "capture": {
+        "delivery": {
+          "attempted_at": "2026-10-20T06:14:55.631Z",
+          "idempotency_key": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#32602-tied-token-create-2026-10-19"
+        },
+        "entry_type_omitted": false,
+        "evidence": {
+          "redaction": "not_required",
+          "refs": []
+        },
+        "observation": {
+          "kind": "workflow",
+          "title": "Witnessed -32602 on tied_token_create_with_detail record fields"
+        },
+        "schema_version": "feedback-event.v1"
+      },
+      "outcome_observations": [
+        {
+          "baseline_ref": "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md",
+          "countermeasure_ref": "REQ-TIED_TOOL_INPUT_COMPATIBILITY@047ca46e",
+          "evidence_links": [
+            "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md",
+            "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/verification-gate-evidence.md",
+            "git://commit/047ca46e"
+          ],
+          "observation_id": "oo-mvgahc5x-zacqtr",
+          "observed_at": "2026-10-20T06:15:00.000Z",
+          "outcome": "improved",
+          "recorded_at": "2026-10-20T06:15:26.421Z",
+          "schema_version": "outcome-observation.v1"
+        }
+      ]
+    },
+    "created_at": "2026-10-20T06:14:55.631Z",
+    "description": "Sponsor observed agent tied-cli call with @args JSON fail MCP -32602 (Expected string, received object at index_record/detail_record). Baseline: tied-project/working/REQ-TIED_TOOL_INPUT_COMPATIBILITY/evidence/operator-baseline-32602.md",
+    "id": "fb-mvgagoen-gtfuua",
+    "idempotency_key": "REQ-TIED_TOOL_INPUT_COMPATIBILITY#32602-tied-token-create-2026-10-19",
+    "occurred_at": "2026-10-19T22:18:00.000-07:00",
+    "privacy_tier": "operator_local",
+    "title": "Witnessed -32602 on tied_token_create_with_detail record fields",
+    "type": "methodology_improvement"
+  },
+  {
+    "capture_schema_version": "feedback-event.v1",
+    "context": {
+      "capture": {
+        "delivery": {
+          "attempted_at": "2026-10-25T15:38:59.239Z",
+          "idempotency_key": "mcp-stdio-debug-invalid-json-2026-10-25-stdd"
+        },
+        "entry_type_omitted": false,
+        "evidence": {
+          "redaction": "not_required",
+          "refs": []
+        },
+        "observation": {
+          "kind": "tooling_defect",
+          "title": "MCP stdio transport broken by DEBUG lines on stdout"
+        },
+        "schema_version": "feedback-event.v1"
+      }
+    },
+    "created_at": "2026-10-25T15:38:59.239Z",
+    "description": "## Observation\nSponsor witnessed Cursor MCP shared-process logs for server `project-0-stdd-tied-yaml` (`tied-yaml` stdio) while using the TIED store client repo `/Users/fareed/Documents/dev/chatgpt/stdd`. Connection initially succeeds; during tool activity the transport reports repeated JSON parse failures and FSM `connection:transport_error` (conn=connected → conn=failed).\n\n## Failure (verbatim / redacted log excerpts)\n- `Client error: Unexpected token 'D', \"DEBUG: [IM\"... is not valid JSON`\n- Follow-on lines on separate \"messages\": `request_to...`, `phases: [`, `path: 'tie...`, `}` — consistent with Node pretty-printing a multi-line object after a `DEBUG: [IMPL-...]` prefix.\n- Recurrence at 2026-10-25 07:53:43, 08:24:26, and 08:35:43 (local) on the same session pattern.\n- Separate noise: startup line `TIED YAML MCP Server running on stdio` appears at `[error]` in Cursor UI but uses `console.error` in `mcp-server/src/index.ts` and does not by itself break JSON-RPC; the DEBUG burst does.\n\n## Sponsor intent\nConfirm whether this is a known/common failure mode (diagnostic output on the MCP stdio channel) and record it for Kaizen / tooling hardening — not an authorization to implement fixes in this turn.\n\n## Workaround\nRestart MCP connection (`stopped connection` → reconnect succeeds until the next tool emits DEBUG on stdout). Avoid or gate tools that trigger verbose `console.debug` during MCP stdio sessions, or run equivalent work via CLI where stdout is not JSON-RPC.\n\n## Redaction\nNone required.\n\n## Technical hypothesis (intake instrument)\nMCP stdio JSON-RPC must own stdout exclusively. In Node, `console.debug` is an alias for `console.log` (stdout). Known emitters in this repo include `console.debug(\"DEBUG: [IMPL-REQUEST_EVIDENCE_ENVELOPE]...\", { request_token, phases, path, ... })` and similar in evidence-chain / batch-collect paths under `mcp-server/src/`. Each line of the formatted object is interpreted as a separate invalid JSON-RPC frame → transport failure.\n\n## Client\nTIED store: `/Users/fareed/Documents/dev/chatgpt/stdd` (witnessed MCP label `project-0-stdd-tied-yaml`).",
+    "id": "fb-mvnztbmv-ez5nep",
+    "idempotency_key": "mcp-stdio-debug-invalid-json-2026-10-25-stdd",
+    "occurred_at": "2026-10-25T14:53:43.600Z",
+    "privacy_tier": "operator_local",
+    "title": "MCP stdio transport broken by DEBUG lines on stdout",
+    "type": "bug_report"
+  },
+  {
+    "capture_schema_version": "feedback-event.v1",
+    "context": {
+      "capture": {
+        "delivery": {
+          "attempted_at": "2026-11-03T06:27:26.864Z",
+          "idempotency_key": "hypnos-tied-cli-store-pollution-2026-11-02"
+        },
+        "entry_type_omitted": false,
+        "evidence": {
+          "redaction": "not_required",
+          "refs": []
+        },
+        "observation": {
+          "kind": "user_report",
+          "title": "Hypnos tied-cli wrote YAML to TIED store corpus"
+        },
+        "schema_version": "feedback-event.v1"
+      }
+    },
+    "created_at": "2026-11-03T06:27:26.864Z",
+    "description": "## Observation\nSponsor witnessed the hypnos TIED client execute tied-cli; writable YAML mutations landed on the TIED methodology store tied-project/ instead of the client corpus.\n\n## Failure\nShell-inherited TIED_BASE_PATH / env-first resolver skipped install mcp.json; MCP stdio child inherited full process.env; getBasePath cwd discovery could bind nearest tied-project/ in the store monorepo.\n\n## Sponsor intent\nUse only tied-install-written .cursor/mcp.json (or .mcp.json) for corpus paths. If install config is absent, fail closed—no shell env, cwd discovery, or heuristics to find the store.\n\n## Workaround\nRun ./tied-install.sh in the client repo; verify mcpServers.tied-yaml.env.TIED_CLIENT_PROJECT_PATH before tied-cli.\n\n## Redaction\nNone.",
+    "id": "fb-mw0b2pe8-7kp0gt",
+    "idempotency_key": "hypnos-tied-cli-store-pollution-2026-11-02",
+    "privacy_tier": "operator_local",
+    "title": "Hypnos tied-cli wrote YAML to TIED store corpus",
+    "type": "bug_report"
+  },
+  {
+    "capture_schema_version": "feedback-event.v1",
+    "context": {
+      "capture": {
+        "delivery": {
+          "attempted_at": "2026-11-07T12:10:50.561Z",
+          "idempotency_key": "REQ-TRIAL_METHODOLOGY_VERSION_READOUT#yaml-require-checklist-gate-2026-11-07"
+        },
+        "entry_type_omitted": false,
+        "evidence": {
+          "redaction": "not_required",
+          "refs": []
+        },
+        "observation": {
+          "kind": "tooling_defect",
+          "title": "Trial readout: node require(yaml) fails; tied_checklist_gate_validate -32602 cascade"
+        },
+        "schema_version": "feedback-event.v1"
+      }
+    },
+    "created_at": "2026-11-07T12:10:50.561Z",
+    "description": "Sponsor witnessed in Cursor IDE chat (client stdd, REQ-TRIAL_METHODOLOGY_VERSION_READOUT).\n\n**Observation**\nAgent attempted pre_implementation checklist gate validation by piping a Node one-liner (CITDP YAML parse + JSON payload) into `.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_checklist_gate_validate`.\n\n**Failure (verbatim/redacted)**\n1. `Error: Cannot find module 'yaml'` from `node -e` at repo root (`Require stack: .../[eval]`).\n2. `DIAGNOSTIC: TIED_RUNTIME_IGNORED_SHELL_ENV: global path env ignored; use .cursor/mcp.json and ./tied-install.sh --refresh`\n3. `DIAGNOSTIC: TIED_CLI_HINDRANCE {\"failure_kind\":\"invalid_arguments\",\"jsonrpc_code\":-32602,\"tool_name\":\"tied_checklist_gate_validate\",...}`\n4. `MCP error -32602: ... Invalid option: expected one of \"pre_implementation\"|\"verification\"|\"close_out\" at phase`\n5. `Invalid input: expected record, received undefined at citdp`\n\n**Sponsor intent**\nRecord for Kaizen / subsequent countermeasure work—not implement a fix in this turn.\n\n**Workaround**\nNone documented; pipeline never delivered valid tool arguments after Node exited.\n\n**Redaction**\nNot required.\n\n**Analysis (intake)**\nRoot: ad-hoc `require('yaml')` is not resolvable from bare repo-root `node -e` (no package linkage). Cascade: empty/invalid stdin to tied-cli produced -32602 (missing `phase` enum + `citdp` record)—distinct from [REQ-TIED_TOOL_INPUT_COMPATIBILITY] string-vs-object record issue but same hindrance surface.",
+    "id": "fb-mw6d3pz5-9cg0e8",
+    "idempotency_key": "REQ-TRIAL_METHODOLOGY_VERSION_READOUT#yaml-require-checklist-gate-2026-11-07",
+    "occurred_at": "2026-11-07T12:10:00.000-08:00",
+    "privacy_tier": "operator_local",
+    "title": "Trial readout: node require(yaml) fails; tied_checklist_gate_validate -32602 cascade",
+    "type": "bug_report"
+  },
+  {
+    "context": {
+      "client_repo": "/Users/fareed/Documents/dev/test/1792857852",
+      "evidence_links": [
+        "/Users/fareed/Documents/dev/test/1792857852/tied-project/working/REQ-GLOSSARY_RENAME_CHECK/evidence/close-out-handoff.md",
+        "tied-project/citdp/CITDP-REQ-TIED_CHECKLIST_GATE_ENFORCEMENT-wave5-process-adherence.yaml",
+        "tied-project/working/PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK/PLAN.md"
+      ],
+      "ingest_track": "A",
+      "leap_proposal_pending": "lp-2026-10-24T16-33-13-575Z-707c63d33f60",
+      "leap_track_b": "pending doc/skill addendum for checklist items 1,4,5",
+      "plan_token": "PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK",
+      "related_req": "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+      "source_feedback_id": "fb-mvmlz1rk-tavn9z",
+      "tied_version": "4.0.0"
+    },
+    "created_at": "2026-10-24T16:33:07.837Z",
+    "description": "Observed on client REQ-GLOSSARY_RENAME_CHECK (TIED-DEMO-04 greenfield): traceable-commit close-out split into machine pass (close_out gate allowed, envelope fail_on_error_gaps=0) while process contract and adherence ledger remained partial. run-close-out-gates.mjs failed before root VERSION existed; tied_adherence_reconcile_run failed with repo root not found when project_root was wrong; execution_evidence.close_out_evidence referenced gate receipt paths that were never written while older close_out receipts existed on disk; sub-close-out-evidence-sync stayed pending though feature shipped and handoff documented partial signals.\n\nProblem: Agents and sponsors lack a first-class, checklist-aligned path for \"close-out completion (Wave 5)\" when machine close-out succeeds early (often via MCP gate + envelope MCP) but sub-close-out-evidence-sync (disposition sync, reconcile, dual-write) does not. Today this becomes ad-hoc addendum prompts and ambiguous \"done\" (EXIT vs ship).\n\nRequested improvements (methodology + tooling):\n\n1) Checklist / prompt-shared: Document \"close-out completion pass\" as normative recovery within traceable-commit (not a new lifecycle phase): same REQ, CALL sub-close-out-evidence-sync, three completion signals must all pass before declaring EXIT. Provide a bundled prompt slug or handoff template (e.g. close-out-wave5-completion) linked from completion-signals-handoff.md.\n\n2) run-close-out-gates.mjs / sync-tracker-dispositions.mjs: Fail closed or block marking machine close-out complete when reconcile or disposition sync did not run; or emit explicit partial receipt with required follow-up slugs. Auto-detect git repo root vs TIED_BASE_PATH and pass project_root correctly to tied_adherence_reconcile_run. Align generated gate paths in tracker dual-write with files actually written in gates/.\n\n3) MCP tied_gate_check / tied_checklist_gate_validate: Return structured reasons when allowed=true but process_grade or tracker dual-write is incomplete (warn vs allow policy at minimal depth). request_evidence_envelope_validate could surface process-adherence gaps separately from blocking error gaps.\n\n4) tied-yaml skill: Add \"close-out recovery\" procedure: ordered CLI/MCP calls, correct project_root, re-run gates if tracker hash changes, tied_verify update, handoff three-signal update. Mention VERSION and other bootstrap deps before envelope tooling.\n\n5) tied_feedback_capture_observation: Optional kaizen hook when close_out allowed while sub-close-out-evidence-sync pending in tracker (inconsistency detector).\n\nEvidence: tied-project/working/REQ-GLOSSARY_RENAME_CHECK/evidence/close-out-handoff.md\nContext: TIED 4.0.0, depth_tier minimal, gate_policy advisory.\n\nStore ingest note: Items 1, 4, 5 are documentation/skill addendum (Track B LEAP); Wave 5 CITDP remains primary tooling owner.",
+    "id": "fb-mvmmb3lp-723euw",
+    "promotion_status": "promotion_pending",
+    "title": "Close-out Wave 5 addendum when machine pass precedes process contract",
+    "type": "methodology_improvement"
+  },
+  {
+    "context": {
+      "links": [
+        "tied-project/working/PLAN-CLOSE-OUT-WORKSPACE-IN-PASS/PLAN.md",
+        "tools/bundled-prompt-type-skills/prompt-shared/clear-workspace-routing.md",
+        "tools/bundled-prompt-type-skills/prompt-shared/completion-signals-handoff.md",
+        "tools/bundled-prompt-type-skills/prompt-shared/tied-close-out-process.md",
+        "tools/bundled-prompt-type-skills/prompt-shared/traceable-commit-close-out.md"
+      ],
+      "observation_kind": "methodology_gap",
+      "plan_token": "PLAN-CLOSE-OUT-WORKSPACE-IN-PASS",
+      "related_plan_tokens": [
+        "PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK"
+      ],
+      "related_req": "REQ-TIED_CLEAR_WORKSPACE_SKILL",
+      "related_tokens": [
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_GIT_HYGIENE"
+      ],
+      "source": "sponsor_chat_2026-10-24",
+      "tied_version": "4.0.0"
+    },
+    "created_at": "2026-10-24T16:44:50.409Z",
+    "description": "Sponsor observation (2026-10-24): After successful feedback ingest (PLAN-CLOSE-OUT-W5-FIELD-FEEDBACK), the repo still showed a large unrelated dirty tree (other REQ trackers/CITDP, regenerable source-graph and envelope fixtures, benchmark JSON). Operators should not need a separate @clear-workspace management habit when close-out already normatively includes gitignore hygiene, tied_git_hygiene preview, and scoped traceable-commit staging.\n\nSuggested implementation:\n\n1) Methodology prose: State explicitly in completion-signals-handoff.md and/or traceable-commit-close-out.md that post-REQ \"workspace clean\" means (a) scoped REQ artifacts committed or classified, (b) regenerable noise restored/deleted in the same close-out pass—not a second lifecycle phase. Document when @clear-workspace is only a router (ambiguous scope, not commit-ready handoff) vs redundant when @close-out ran completely.\n\n2) Checklist: Ensure traceable-commit slug text requires a hygiene receipt and documents excluded unrelated drift; optional sub-slug or gate reason when tracked regenerable paths remain modified after close-out (warn at minimal depth).\n\n3) clear-workspace-routing.md: Add upfront note that cleanup obligations live inside close-out; this skill sequences close-out/hygiene when the sponsor did not name a REQ or gates failed mid-flight.\n\n4) Feedback / kaizen path: When tied_feedback_add or feedback ingest completes at minimal depth, handoff template should say orthogonal REQ dirt and regenerable indexes are expected until those REQs close out—avoid implying \"feedback done = entire repo clean.\"\n\n5) Tooling (optional, Wave 5 adjacent): tied_git_hygiene could emit post-close-out summary: scoped_staged, restored_regenerable, remaining_blockers_by_req_token.\n\nNon-goals: Auto git restore of unrelated WIP; repo-wide single commit; replacing close_out gate authority.\n\nRelated: REQ-TIED_CLEAR_WORKSPACE_SKILL, REQ-TIED_GIT_HYGIENE, REQ-TIED_CHECKLIST_GATE_ENFORCEMENT, pending LEAP lp-2026-10-24T16-33-13-575Z-707c63d33f60 (close-out completion pass).",
+    "id": "fb-mvmmq5pl-dxzvb6",
+    "promotion_status": "promotion_pending",
+    "title": "Treat workspace cleanup as part of close-out, not a separate management step",
+    "type": "methodology_improvement"
+  },
+  {
+    "context": {
+      "client_cohort": "1792937222-gf-16",
+      "client_evidence": "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project/working/REQ-RECONCILIATION_ENGINE/evidence/traceable-commit-evidence.md",
+      "kaizen_close_req": "REQ-GF16-KAIZEN-OUTCOME-CLOSE",
+      "observation_kind": "tooling_defect",
+      "outcome_observations": [
+        {
+          "baseline_ref": "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project/working/REQ-RECONCILIATION_ENGINE/evidence/traceable-commit-evidence.md",
+          "countermeasure_ref": "REQ-TIED_CLI_MCP_JSON_BASE_PATH@5ba4086e",
+          "evidence_links": [
+            "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/gf16-tied-cli-base-path-smoke.json",
+            "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project/working/REQ-RECONCILIATION_ENGINE/evidence/traceable-commit-evidence.md"
+          ],
+          "observation_id": "oo-mvnyuari-ma64j2",
+          "observed_at": "2026-10-25T15:20:00.000Z",
+          "outcome": "improved",
+          "recorded_at": "2026-10-25T15:11:45.150Z",
+          "schema_version": "outcome-observation.v1"
+        }
+      ],
+      "paired_feedback_id": "fb-mvnyr5n2-aaeg1j",
+      "tied_version": "4.0.0",
+      "trial_readout": "docs/demos/trial-readout-PROMPT-GF-16-1792937222.md"
+    },
+    "created_at": "2026-10-25T14:48:13.331Z",
+    "description": "Greenfield trial PROMPT-GF-16 (disposable client 1792937222) showed tied-cli YAML writes targeting the TIED store tied-project/ while IDE MCP (via .cursor/mcp.json env) targeted the client. Root cause: linked-install stubs run store copy of tied-cli.sh which defaulted TIED_BASE_PATH from script-dir REPO_ROOT (store), not client cwd + mcp.json — i.e. tied-cli depended on env/shell state that quick-start operators may not set. Countermeasure tracked as REQ-TIED_CLI_MCP_JSON_BASE_PATH. Paired process feedback: fb-mvnyr5n2-aaeg1j (client did not complete upstream capture).",
+    "id": "fb-mvny01eb-my451g",
+    "promotion_status": "canonical_ready",
+    "title": "GF-16: tied-cli must read TIED_BASE_PATH from client mcp.json (not unset env)",
+    "type": "methodology_improvement"
+  },
+  {
+    "context": {
+      "client_cohort": "1792937222-gf-16",
+      "client_evidence": "/Users/fareed/Documents/dev/test/1792937222-gf-16/tied-project/working/REQ-RECONCILIATION_ENGINE/evidence/traceable-commit-evidence.md",
+      "countermeasure_req": "REQ-TIED_CLIENT_FEEDBACK_CAPTURE",
+      "kaizen_close_req": "REQ-GF16-KAIZEN-OUTCOME-CLOSE",
+      "observation_kind": "methodology_gap",
+      "outcome_observations": [
+        {
+          "baseline_ref": "docs/demos/trial-readout-PROMPT-GF-16-1792937222.md",
+          "countermeasure_ref": "REQ-TIED_CLIENT_FEEDBACK_CAPTURE@planned",
+          "evidence_links": [
+            "file://tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/feedback-dual-track-register.md",
+            "file://tied-project/working/REQ-GF16-KAIZEN-OUTCOME-CLOSE/evidence/gf16-feedback-capture-closeout.md"
+          ],
+          "observation_id": "oo-mvnytkgp-17p51v",
+          "observed_at": "2026-10-25T15:15:00.000Z",
+          "outcome": "not_measured",
+          "recorded_at": "2026-10-25T15:11:11.065Z",
+          "schema_version": "outcome-observation.v1"
+        }
+      ],
+      "paired_feedback_id": "fb-mvny01eb-my451g",
+      "tied_version": "4.0.0",
+      "trial_readout": "docs/demos/trial-readout-PROMPT-GF-16-1792937222.md"
+    },
+    "created_at": "2026-10-25T15:09:18.542Z",
+    "description": "Greenfield disposable client 1792937222-gf-16 (PROMPT-GF-16): during wrong-base-path / tied-cli episode the agent stated it understood the error and would post feedback to the TIED store. No client tied/feedback.yaml was created; no tied_feedback_add or tied_feedback_capture_observation receipt on the store; facilitator @record-gf-trial used --skip-feedback-ingest. Sponsor later could not find the report in a feedback queue surface, while store agents could still read the full account from client traceable-commit-evidence.md.\n\nProblem class: gap between narrative intent to upstream feedback and Kaizen Phase 1 point-of-work capture (receipt + feedback.yaml append on the correct TIED_BASE_PATH).\n\nCountermeasure REQ: REQ-TIED_CLIENT_FEEDBACK_CAPTURE (separate from REQ-GF16-KAIZEN-OUTCOME-CLOSE coordinator). Desired direction: (1) close-out / traceable-commit checklist requires explicit capture outcome — receipt id, or documented N/A with reason; (2) agents must not claim \"posting to TIED store\" without MCP receipt or client feedback.yaml row; (3) greenfield facilitator ingest documents proxy vs client-originated entries; (4) optional client mirror row at trial end for cohort evidence.\n\nPaired technical feedback: fb-mvny01eb-my451g (tied-cli base path / env dependency).",
+    "id": "fb-mvnyr5n2-aaeg1j",
+    "promotion_status": "canonical_ready",
+    "title": "GF-16: client agent did not complete upstream feedback capture",
+    "type": "methodology_improvement"
+  },
+  {
+    "context": {
+      "client_cohort": "1792944114-gf-05",
+      "evidence_links": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tools/bootstrap/templates/run-close-out-gates.mjs",
+        "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/close-out-handoff.md",
+        "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/evidence/request-evidence-envelope.v1.json",
+        "/Users/fareed/Documents/dev/test/1792944114-gf-05/tied-project/working/REQ-REQ_TOKEN_COVERAGE/gates/close_out-2026-10-25T16-16-27-148Z.json"
+      ],
+      "leap_proposal_id": "lp-2026-10-25T16-23-32-863Z-c284570f3c0b",
+      "observation_kind": "methodology_gap",
+      "plan_token": "PLAN-GF-05-GATE-VERIFY-DUAL-TRACK",
+      "related_tokens": [
+        "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT",
+        "REQ-TIED_VERIFICATION_GATED"
+      ],
+      "req_token": "REQ-REQ_TOKEN_COVERAGE",
+      "source": "agent_session_2026-10-25",
+      "tied_version": "4.0.0",
+      "trial_prompt": "PROMPT-GF-05"
+    },
+    "created_at": "2026-10-25T16:18:46.886Z",
+    "description": "Field case from disposable client 1792944114-gf-05 (PROMPT-GF-05 / REQ-REQ_TOKEN_COVERAGE, TIED v4.0.0).\n\n**Problem (case):**\n1. `run-close-out-gates.mjs` can report machine close-out allowed while **not** writing `close_out-*.json` under `tied-project/working/{REQ}/gates/` (validates in memory only).\n2. Agents then call `tied_verify` with `{ update: true }` only → **`missing_checklist_gate`** (verify expects a `checklist_gate` payload: phase, tracker_path, full inner CITDP body).\n3. Request evidence envelope may lack `checklist_gate_receipt` until explicitly patched.\n4. A partial or wrapper CITDP object passed to `tied_checklist_gate_validate` produced **`malformed_citdp:adversarial_inquiry`** and a false `allowed: false` receipt (deleted after fix).\n\n**Working solution (operator sequence):**\n1. `tied_checklist_gate_validate` with `phase: close_out`, `receipt_persistence: true`, and the **unwrapped inner CITDP** from `CITDP-REQ-*.yaml` (same shape as `loadCitdpRecord` in the runner—not a `CITDP-…` wrapper or truncated object).\n2. Keep the persisted receipt (`allowed: true`) and gate-ledger line under working `gates/`.\n3. `request_evidence_envelope_patch` (or envelope runner) to attach `checklist_gate_receipt`.\n4. Re-run `run-close-out-gates.mjs` if needed for consistency.\n5. `tied_verify` with full `checklist_gate` + req/arch/impl tokens and `update: true` → `ok: true`.\n6. Traceable commit of gate receipt, ledger, envelope, handoff (required for verify-green + scoped workspace clean—not optional hygiene).\n\n**Suggested methodology improvements:**\n- **Runner:** `run-close-out-gates.mjs` optionally persists close_out receipts by default (or documents that persistence is a mandatory sub-step when verify/update is next).\n- **Close-out skill / completion signals:** Explicit checklist sub-step: persist gate → patch envelope → verify with `checklist_gate` (Wave 5 field feedback aligns with PLAN-CLOSE-OUT-W5).\n- **Agent guardrail:** Do not claim close-out complete on verify until `tied_verify` succeeds with `checklist_gate`; do not pass bare `{ update: true }`.\n- **MCP docs:** Example `checklist_gate` payload and CITDP unwrapping rule next to `tied_verify` / `tied_checklist_gate_validate`.\n\n**Evidence:** Client `tied-project/working/REQ-REQ_TOKEN_COVERAGE/gates/close_out-2026-10-25T16-16-27-148Z.json`, `close-out-handoff.md`, envelope rev 2; commits through `d801126` on client main.",
+    "id": "fb-mvo18hye-i6x5fq",
+    "promotion_status": "proposal_created",
+    "title": "GF-05: persist close_out gate receipt and pass checklist_gate to tied_verify after run-close-out-gates",
+    "type": "methodology_improvement"
+  }
+]

@@ -1798,6 +1798,15 @@ ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT:
   detail_file: "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
   name: "Shared checklist evidence gate boundary"
   status: "Active"
+ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  cross_references:
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+  detail_file: "architecture-decisions/ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+  name: "Checklist gate operator path architecture"
+  status: "Active"
 ARCH-TIED_CLAIMS_EVIDENCE_REVIEW:
   cross_references:
     architecture: []

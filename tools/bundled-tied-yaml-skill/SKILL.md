@@ -273,6 +273,45 @@ tied/
   docs/detail-files-schema.md       # schema for detail YAML files
 ```
 
+## Checklist gate operator path
+
+When running **pre_implementation**, **verification**, or **close_out** checklist gates, prefer **path-based** composition — not shell pipes or repo-root `node -e` YAML builders.
+
+### Forbidden anti-pattern
+
+Do **not** run `node -e "… require('yaml') …"` at the repo root and pipe stdout into:
+
+```bash
+.cursor/skills/tied-yaml/scripts/tied-cli.sh tied_checklist_gate_validate
+```
+
+Root `node -e` has no `yaml` package; failed or empty stdin yields JSON-RPC **-32602** (`phase` enum + missing `citdp` record). That failure class is **operator procedure** (witness `fb-mw6d3pz5`), not [REQ-TIED_TOOL_INPUT_COMPATIBILITY] record coercion.
+
+### Preferred — CLI `tied gate check`
+
+From **git repo root** (`project_root`); paths relative to that root:
+
+```bash
+node mcp-server/packages/cli/dist/index.js gate check \
+  --request-token REQ-EXAMPLE \
+  --phase pre_implementation \
+  --tracker tied-project/working/REQ-EXAMPLE/checklist-tracker.yaml \
+  --citdp tied-project/working/REQ-EXAMPLE/CITDP-REQ-EXAMPLE.yaml \
+  --project-root . \
+  --persist-receipt \
+  --run-id operator-gate-check
+```
+
+### Preferred — MCP `tied_gate_check`
+
+Same fields: `request_token`, `phase`, `citdp_path`, `tracker_path`, `project_root`. The composition layer loads YAML from disk.
+
+### Direct `tied_checklist_gate_validate` only when needed
+
+That tool expects a full inline **`citdp` record** object (or coerced JSON string per compatibility rules), **not** a filesystem path. Use `tied_gate_check` / `tied gate check` when you have paths only.
+
+Traceability: [REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH](../../tied-project/requirements/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml) · compose [REQ-TIED_DAE_INCORPORATION](../../tied-project/requirements/REQ-TIED_DAE_INCORPORATION.yaml).
+
 ## Close-out recovery (Wave 5 completion pass)
 
 When machine close-out looks green but Tracker dispositions, envelope, or reconcile lag, run recovery on the **same** `request_token` before YAML status updates or completion claims. Full handoff slug and checklist order: [close-out-wave5-completion-pass.md](../bundled-prompt-type-skills/prompt-shared/close-out-wave5-completion-pass.md).

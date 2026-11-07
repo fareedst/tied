@@ -1,0 +1,15 @@
+IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+    cross_references:
+      architecture:
+        - "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+      requirements:
+        - "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    description: "Skill/reference operator documentation, composition test on working CITDP, optional static skill-surface test."
+    implementation_approach:
+      details:
+        - approach: "SKILL_CHECKLIST_GATE_OPERATOR_SECTION + reference.md tool note + gate-check.test.ts fixture paths"
+          phase: "Wave 2"
+      summary: "Document operator path in bundled skill; extend gate-check composition tests; static assertions on skill markdown."
+    name: "Checklist gate operator path implementation"
+    status: "Active"

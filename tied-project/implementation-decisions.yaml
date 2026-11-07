@@ -2118,6 +2118,15 @@ IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT:
   detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
   name: "Checklist, CITDP, and activation validator"
   status: "Active"
+IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  cross_references:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    requirements:
+      - "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+  detail_file: "implementation-decisions/IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+  name: "Checklist gate operator path implementation"
+  status: "Active"
 IMPL-TIED_CITDP_RECONCILE:
   detail_file: "implementation-decisions/IMPL-TIED_CITDP_RECONCILE.yaml"
   name: "CITDP reconcile core"

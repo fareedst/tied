@@ -2290,6 +2290,40 @@ REQ-TIED_CHECKLIST_GATE_ENFORCEMENT:
   detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_ENFORCEMENT.yaml"
   name: "Machine-enforced checklist evidence gates"
   status: "Implemented"
+REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  category: "Tooling"
+  description: "Operators run checklist gates via path-based tied_gate_check / tied gate check; skill forbids shell-pipe into tied_checklist_gate_validate after ad-hoc node one-liners."
+  detail_file: "requirements/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+  name: "Checklist gate operator path"
+  priority: "P2"
+  related_requirements:
+    depends_on:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_DAE_INCORPORATION"
+      - "REQ-TIED_SETUP"
+    related_to:
+      - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+    supersedes: []
+  satisfaction_criteria:
+    - criterion: "Bundled tied-yaml skill documents forbidden pipe anti-pattern and preferred tied_gate_check examples with path args"
+      id: "SC-GATE-OPERATOR-SKILL"
+      metric: "Skill/reference composition or static test"
+    - criterion: "Composition test invokes gate check on working CITDP fixture paths"
+      id: "SC-GATE-OPERATOR-COMPOSITION"
+      metric: "gate-check.test.ts or sibling pass"
+    - criterion: "Witness fb-mw6d3pz5 ends canonical_ready with outcome record"
+      id: "SC-GATE-OPERATOR-KAIZEN"
+      metric: "feedback.yaml promotion_status + outcome observation"
+  status: "Implemented"
+  traceability:
+    architecture:
+      - "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    implementation:
+      - "IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    tests:
+      - "gate-check.test.ts"
+      - "skill-checklist-gate-operator.test.ts"
 REQ-TIED_CLAIMS_EVIDENCE_REVIEW:
   category: "Functional"
   description: "Read-only evaluation of a frozen claim surface with dispositions, proof boundaries, and human-gated promotion."

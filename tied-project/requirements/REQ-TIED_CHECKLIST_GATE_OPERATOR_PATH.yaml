@@ -1,0 +1,42 @@
+REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+    category: "Tooling"
+    description: "Document and test the checklist gate operator path: prefer MCP tied_gate_check or CLI tied gate check with request_token, phase, citdp_path, tracker_path, and project_root—without piping JSON from repo-root node -e scripts into tied_checklist_gate_validate."
+    name: "Checklist gate operator path"
+    priority: "P2"
+    rationale:
+      benefits:
+        - "Composition test locks path-based invocation"
+        - "Deterministic pre_implementation gate operator procedure"
+      problems_solved:
+        - "No skill guidance preferring path-based gate check"
+        - "Stale feedback promotion_status when LEAP applied"
+      why: "Witness fb-mw6d3pz5 during methodology version readout trial: agents built ad-hoc require(yaml) one-liners then piped empty stdin to tied-cli, producing -32602 cascade distinct from structured record input work."
+    related_requirements:
+      depends_on:
+        - "REQ-FEEDBACK_TO_TIED"
+        - "REQ-TIED_DAE_INCORPORATION"
+        - "REQ-TIED_SETUP"
+      related_to:
+        - "REQ-TIED_CHECKLIST_GATE_ENFORCEMENT"
+        - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+      supersedes: []
+    satisfaction_criteria:
+      - criterion: "Automated test covers path-based gate composition for this REQ working CITDP"
+        id: "SC-GATE-OPERATOR-COMPOSITION"
+        metric: "mcp-server/packages/cli/src/gate-check.test.ts"
+      - criterion: "fb-mw6d3pz5 promotion_status canonical_ready after outcome record"
+        id: "SC-GATE-OPERATOR-KAIZEN"
+        metric: "tied_feedback_outcome_record"
+      - criterion: "Skill forbids pipe anti-pattern; documents tied_gate_check / tied gate check"
+        id: "SC-GATE-OPERATOR-SKILL"
+        metric: "tools/bundled-tied-yaml-skill/SKILL.md"
+    status: "In Progress"
+    traceability:
+      architecture:
+        - "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+      implementation:
+        - "IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+      tests:
+        - "gate-check.test.ts"
+        - "skill-surface.test.ts"

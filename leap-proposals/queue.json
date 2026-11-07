@@ -1,6 +1,26 @@
 {
   "proposals": [
     {
+      "approval_note": "build-plan REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH sponsor scope",
+      "created_at": "2026-11-07T13:12:27.733Z",
+      "id": "lp-2026-11-07T13-12-27-733Z-8c5309d4dfc7",
+      "kind": "manual",
+      "leap_hints": {
+        "feedback_id": "fb-mw6d3pz5-9cg0e8",
+        "plan_path": "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/PLAN.md",
+        "req_token": "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+      },
+      "non_canonical": true,
+      "source": {
+        "type": "manual"
+      },
+      "status": "applied",
+      "suggested_leap_order": "req",
+      "summary": "Mint REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH: bundled tied-yaml skill documents path-based `tied_gate_check` / `tied gate check` and forbids pipe-into-tied_checklist_gate_validate anti-pattern; composition test on working CITDP. Source: trial readout REQ-TRIAL_METHODOLOGY_VERSION_READOUT.",
+      "title": "Checklist gate operator path (witness fb-mw6d3pz5)",
+      "updated_at": "2026-11-07T13:14:55.867Z"
+    },
+    {
       "approval_note": "Track B (SCOPE-VERIFY-GATE-COMMON) shipped commit ddb7ae14: checklist sub-checklist-gate-before-verify-update, processes.md, bundled skill, contract tests, CITDP closed. Track A (SCOPE-CLOSE-OUT-EXT) explicitly deferred per dual-track CITDP; no new REQ mint.",
       "created_at": "2026-10-25T16:23:32.864Z",
       "id": "lp-2026-10-25T16-23-32-863Z-c284570f3c0b",

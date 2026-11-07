@@ -1,0 +1,21 @@
+ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+    alternatives_considered:
+      - description: "Path arg on low-level validator"
+        name: "Extend tied_checklist_gate_validate to accept citdp_path"
+        rejected_because: "Out of scope; path loading belongs in tied_gate_check composition"
+    consequences:
+      negative:
+        - "Clients must refresh skill via tied-install for latest prose"
+      positive:
+        - "Reuses DAE gate composition"
+        - "Skill-first countermeasure with test lock"
+    context: "Agents need a single authoritative operator surface for checklist gates without inventing shell pipes or inline CITDP JSON builders."
+    cross_references:
+      implementation:
+        - "IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+      requirements:
+        - "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    decision: "Compose existing [REQ-TIED_DAE_INCORPORATION] tied_gate_check / tied gate check as the preferred operator path; document anti-patterns in bundled tied-yaml skill; add composition test using working-folder CITDP paths; do not add a second gate authority or change tied_checklist_gate_validate schema."
+    name: "Checklist gate operator path architecture"
+    status: "Active"

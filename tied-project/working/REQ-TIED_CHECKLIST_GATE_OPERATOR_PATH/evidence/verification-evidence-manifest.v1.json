@@ -1,0 +1,149 @@
+{
+  "command_results": [
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-1.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-1.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_feedback_export (Wave 0)"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 144,
+      "exit_code": 2,
+      "id": "citdp-evidence-1",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-2.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-2.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_feedback_analysis_digest (Wave 0)"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 111,
+      "exit_code": 2,
+      "id": "citdp-evidence-2",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-3.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-3.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_feedback_review_bridge or tied_leap_proposal_add (Wave 1)"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 114,
+      "exit_code": 2,
+      "id": "citdp-evidence-3",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-4.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-4.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_token_create_with_detail REQ ARCH IMPL (Wave 1)"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 108,
+      "exit_code": 2,
+      "id": "citdp-evidence-4",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-5.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-5.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_gate_check phase pre_implementation verification close_out"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 111,
+      "exit_code": 127,
+      "id": "citdp-evidence-5",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-6.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-6.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "npm test composition gate-path"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 221,
+      "exit_code": 1,
+      "id": "citdp-evidence-6",
+      "result": "failed"
+    },
+    {
+      "artifacts": [
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-7.stderr.txt",
+        "/Users/fareed/Documents/dev/chatgpt/stdd/tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/quality-manifest/citdp-evidence-7.stdout.txt"
+      ],
+      "command": [
+        "-lc",
+        "bash",
+        "tied_feedback_outcome_record fb-mw6d3pz5"
+      ],
+      "cwd": "/Users/fareed/Documents/dev/chatgpt/stdd",
+      "duration_ms": 112,
+      "exit_code": 127,
+      "id": "citdp-evidence-7",
+      "result": "failed"
+    }
+  ],
+  "commit": "681c8666b3e2850b261a99784bac99181c6d95d7",
+  "covered_tokens": [
+    "REQ-FEEDBACK_TO_TIED",
+    "REQ-TIED_DAE_INCORPORATION",
+    "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+  ],
+  "environment": {
+    "project_root": "/Users/fareed/Documents/dev/chatgpt/stdd"
+  },
+  "execution_runner": {
+    "entry": "/Users/fareed/Documents/dev/chatgpt/stdd/mcp-server/dist/cli/isolated-verification-runner.js",
+    "mode": "isolated_subprocess"
+  },
+  "human_decisions": {
+    "references": [],
+    "stored_separately": true
+  },
+  "proof_boundaries": [
+    "digest_does_not_authorize_canonical_yaml_without_sponsor_req",
+    "does_not_prove_all_clients_refreshed_skill_until_tied_install_refresh"
+  ],
+  "quality_rows": [
+    {
+      "applicability": "applicable",
+      "attribute": "baseline-functional",
+      "evidence_method": "command",
+      "id": "baseline-functional",
+      "rationale": "CITDP quality profile matrix",
+      "result": "pending"
+    }
+  ],
+  "run_id": "close-out-checklist-gate-operator-2026-11-07",
+  "schema_version": "verification-evidence-manifest.v1"
+}

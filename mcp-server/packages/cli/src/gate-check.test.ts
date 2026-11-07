@@ -71,6 +71,33 @@ describe("tied gate check composition [REQ-TIED_DAE_INCORPORATION]", () => {
     assert.equal(summary.exit_code, 2);
   });
 
+  it("loads REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH working paths [REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH]", async () => {
+    const fixtureRoot = repoRoot;
+    const tracker = path.join(
+      fixtureRoot,
+      "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/checklist-tracker.yaml",
+    );
+    const citdp = path.join(
+      fixtureRoot,
+      "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml",
+    );
+    assert.ok(fs.existsSync(tracker), "working tracker fixture must exist");
+    assert.ok(fs.existsSync(citdp), "working citdp fixture must exist");
+    const mockGate: GateValidateFn = async () => ({ allowed: true });
+
+    const summary = await runGateCheckComposition({
+      requestToken: "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH",
+      phase: "pre_implementation",
+      trackerPath: tracker,
+      citdpPath: citdp,
+      projectRoot: fixtureRoot,
+      callGateValidate: mockGate,
+    });
+
+    assert.equal(summary.exit_code, 0);
+    assert.equal(summary.allowed, true);
+  });
+
   it("returns exit 0 when mocked gate allows", async () => {
     const fixtureRoot = repoRoot;
     const tracker = path.join(

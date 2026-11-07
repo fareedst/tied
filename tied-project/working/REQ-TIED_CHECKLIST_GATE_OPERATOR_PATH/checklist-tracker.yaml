@@ -1,0 +1,111 @@
+copy_hygiene: "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH refine-plan pass 2 — plan steps complete through test-strategy."
+description: "Process pending feedback countermeasure — checklist gate operator path."
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/checklist-tracker.yaml"
+  completed:
+    - "change-definition"
+    - "gate-pseudocode-validation"
+    - "impact-discovery"
+    - "risk-assessment"
+    - "sub-adversarial-inquiry-pass"
+    - "test-strategy"
+    - "translate-sponsor-intent"
+  envelope_path: "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+metadata:
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+profile:
+  depth_tier: "minimal"
+record_identity:
+  change_request_id: "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+  citdp_path: "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+  recorded_at: "2026-11-07"
+  req_token: "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+  title: "Checklist gate operator path"
+risk_snapshot:
+  depth_tier: "minimal"
+  gate_policy: "advisory"
+  profile_depth: "minimal"
+steps:
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/feedback.yaml"
+      - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/PLAN.md"
+    slug: "translate-sponsor-intent"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/PLAN.md"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+    slug: "change-definition"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+    slug: "impact-discovery"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+    slug: "risk-assessment"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/test-strategy.md"
+    slug: "test-strategy"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/test-strategy.md"
+      status: "completed"
+  - disposition: "not_applicable"
+    evidence_refs:
+      - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/not-applicable-receipt.v1.json"
+    policy: "minimal-depth-no-inquiry"
+    rationale: "Minimal depth; CITDP adversarial block populated."
+    slug: "sub-adversarial-inquiry-pass"
+    tracking:
+      evidence_refs:
+        - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/not-applicable-receipt.v1.json"
+        - "tied-project/working/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH/evidence/sub-adversarial-inquiry-pass-na.md"
+      status: "not_applicable"
+  - disposition: "not_applicable"
+    policy: "pre-impl-no-impl-yet"
+    rationale: "IMPL pseudo-code authored in build-plan before RED."
+    slug: "gate-pseudocode-validation"
+    tracking:
+      status: "not_applicable"
+  - disposition: "completed"
+    evidence_refs:
+      - "tied-project/requirements/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+    slug: "author-requirement"
+    tracking:
+      evidence_refs:
+        - "tied-project/requirements/REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH.yaml"
+      status: "completed"
+  - disposition: "completed"
+    evidence_refs:
+      - "mcp-server/packages/cli/src/gate-check.test.ts"
+      - "mcp-server/src/e2e/skill-checklist-gate-operator.test.ts"
+    slug: "unit-test-red"
+    tracking:
+      evidence_refs:
+        - "mcp-server/src/e2e/skill-checklist-gate-operator.test.ts"
+      status: "completed"

@@ -1,0 +1,11 @@
+feat(req): checklist gate operator path close-out
+
+Document path-based tied gate check in bundled tied-yaml skill; forbid
+pipe-into-tied_checklist_gate_validate anti-pattern (witness fb-mw6d3pz5).
+Mint REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH with composition tests.
+
+[REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH] [ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH]
+[IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH]
+
+Machine close-out: allowed=true, envelope blocking_gap_count=0.
+Feedback: fb-mw6d3pz5-9cg0e8 outcome improved in tied-project/feedback.yaml.

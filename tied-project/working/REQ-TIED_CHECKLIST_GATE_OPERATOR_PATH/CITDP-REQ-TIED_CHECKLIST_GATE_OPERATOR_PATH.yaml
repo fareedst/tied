@@ -1,0 +1,94 @@
+CITDP-REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH:
+  change_definition:
+    current_behavior: "Agents running checklist gates from the TIED store often build ad-hoc node -e scripts that require('yaml') at repo root (module not linked), then pipe empty or invalid JSON into tied-cli.sh tied_checklist_gate_validate, producing JSON-RPC -32602 (missing phase, citdp undefined). tied-yaml skill emphasizes tied_checklist_gate_validate payloads but not tied_gate_check / tied gate check path-based invocation. feedback.yaml holds stale promotion_pending on fb-mvmmb3lp-723euw and fb-mvmmq5pl-dxzvb6 despite applied LEAP proposals."
+    desired_behavior: "Bundled tied-yaml skill and reference document the checklist gate operator path: prefer MCP tied_gate_check or CLI tied gate check with request_token, phase, citdp_path/tracker_path, and project_root—no shell pipe from node -e YAML builders. Composition test asserts path-based gate check succeeds on a fixture CITDP. Wave 0 reconciles promotion_status on closed Kaizen entries. Optional run-gate-check.sh wrapper and optional CLI recovery_hint on gate hindrance -32602."
+    non_goals:
+      - "Automatic tied_feedback_add on CLI failure"
+      - "Implementing unrelated feedback captures without sponsor scope"
+      - "Root-level yaml npm install solely for one-liner eval"
+      - "Second gate authority or tied_checklist_gate_validate schema rewrite"
+    success_criteria:
+      - "Composition test green for tied_gate_check on store working CITDP fixture"
+      - "fb-mw6d3pz5 promotion_status ends canonical_ready after outcome record"
+      - "Skill forbids pipe-into-tied_checklist_gate_validate anti-pattern with worked tied_gate_check example"
+      - "Stale pending rows canonical_ready with reviewed_at evidence"
+      - "tied_validate_consistency pass after REQ stack on disk"
+    unchanged_behavior: "[REQ-TIED_DAE_INCORPORATION] tied gate check algorithm; [REQ-TIED_TOOL_INPUT_COMPATIBILITY] record coercion and hindrance diagnostic format for non-gate failures."
+  evidence:
+    command_seq:
+      - "tied_feedback_export (Wave 0)"
+      - "tied_feedback_analysis_digest (Wave 0)"
+      - "tied_feedback_review_bridge or tied_leap_proposal_add (Wave 1)"
+      - "tied_token_create_with_detail REQ ARCH IMPL (Wave 1)"
+      - "tied_gate_check phase pre_implementation verification close_out"
+      - "npm test composition gate-path"
+      - "tied_feedback_outcome_record fb-mw6d3pz5"
+    proof_boundaries:
+      - "digest_does_not_authorize_canonical_yaml_without_sponsor_req"
+      - "does_not_prove_all_clients_refreshed_skill_until_tied_install_refresh"
+  impact_analysis:
+    impl_inventory_notes: "IMPL pseudo-code in build-plan; primary modules feedback.ts untouched except optional cli hint."
+    modules_or_boundaries: "tools/bundled-tied-yaml-skill/SKILL.md + reference.md; mcp-server/packages/cli gate-check composition tests; optional mcp-server stdio hindrance hint; tied-project/feedback.yaml hygiene (Wave 0 only)."
+    tied_tokens_affected:
+      - "REQ-FEEDBACK_TO_TIED"
+      - "REQ-TIED_DAE_INCORPORATION"
+      - "REQ-TIED_TOOL_INPUT_COMPATIBILITY"
+    tied_tokens_new:
+      - "ARCH-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+      - "IMPL-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+      - "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    wave0_feedback_snapshot:
+      fb-mvmmb3lp-723euw: "promotion_pending → canonical_ready (LEAP applied)"
+      fb-mvmmq5pl-dxzvb6: "promotion_pending → canonical_ready (slice applied per queue summary)"
+      fb-mvo18hye-i6x5fq: "proposal_created → canonical_ready (LEAP applied)"
+      fb-mw6d3pz5-9cg0e8: "unset → promotion_pending → proposal_created → canonical_ready (this REQ)"
+  record_identity:
+    change_request_id: "REQ-TIED_CHECKLIST_GATE_OPERATOR_PATH"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-07"
+    title: "Checklist gate operator path and pending feedback hygiene"
+  risk_analysis:
+    abuse_cases:
+      - "Agents treat skill prose as gate receipt without running tied_gate_check"
+      - "Hand-edited feedback.yaml promotion_status without evidence links"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Documented path works only from store root but fails on disposable clients without tied gate check on PATH."
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Wrapper script hardcodes wrong TIED_BASE_PATH."
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "leap-proposals/queue.json"
+        - "tied-project/feedback.yaml entry fb-mw6d3pz5-9cg0e8"
+        - "tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/"
+        - "tools/bundled-tied-yaml-skill/SKILL.md"
+      falsification_questions:
+        - "Are stale promotion_pending rows duplicating LEAP audit truth?"
+        - "Does tied gate check already cover the witness scenario without doc changes?"
+      gate_policy: "advisory"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Tooling/docs countermeasure with composition test; witness on store repo only."
+      research_profile: "read-only"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    quality_evidence_matrix:
+      - applicability: "applicable"
+        attribute: "baseline-functional"
+        command_or_test: "composition test tied_gate_check fixture"
+        evidence_method: "node --test"
+        evidence_ref: "mcp-server/packages/cli/src/gate-check.test.ts (extend) or mcp-server/src/e2e/tied-gate-check-cli.test.ts pattern"
+        limitation: "Does not E2E every client layout."
+        owner: "agent"
+        rationale: "Proves path-based gate invocation."
+        result: "not_run"
+        threshold: "test pass"
+  test_strategy:
+    approach: "TDD composition first; skill/docs GREEN; optional CLI hint if RED demands."
+    cases:
+      - "feedback promotion_status canonical_ready after hygiene"
+      - "Skill contains anti-pattern section referencing fb-mw6d3pz5 class"
+      - "tied_gate_check pre_implementation allowed with citdp_path fixture"
