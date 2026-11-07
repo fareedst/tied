@@ -28,7 +28,10 @@
 | **signature coverage** | top-k metadata | Analyzer YAML: `bound` / `considered` / `emitted` / `omitted` / `status` for bounded aggregation. `exact_within_bound` means the complete visible candidate set fits the bound; `approximate` discloses per-file truncation or visible aggregate overflow and never claims hidden candidates were globally ranked. |
 | **TIED YAML MCP** | yaml mcp, project-0-stdd-tied-yaml (alone) | IDE may show project-specific label; same tool surface |
 | **Cursor MCP display label** | stdd button, metrics client label | Customize → MCP inner control; inner label may show workspace basename until product ships stable `tied` / `tied-optin` names — see [README § manual MCP acceptance](../../README.md#manual-mcp-acceptance) |
-| **tool profile** | MCP profile, core/opt-in split | `TIED_MCP_TOOL_PROFILE` on stdio entry: `core` (~92 tools), `optin` (~37), `full`/unset (129) · [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) |
+| **tool profile** | MCP profile, core/opt-in split | `TIED_MCP_TOOL_PROFILE` on stdio entry: `core` (~101 tools), `optin` (~37), `full`/unset (138) · [REQ-MCP_USAGE_METRICS](../requirements/REQ-MCP_USAGE_METRICS.yaml) |
+| **streamable HTTP transport** | remote HTTP MCP, LAN MCP | MCP Streamable HTTP via `tied mcp serve` / `dist/http-entry.js`; TLS at reverse proxy; bearer `TIED_MCP_HTTP_BEARER_TOKEN` · [REQ-MCP_HTTPS_REMOTE_ACCESS](../requirements/REQ-MCP_HTTPS_REMOTE_ACCESS.yaml) |
+| **remote MCP URL** | http mcp url | `mcpServers.*.url` plus optional `headers.Authorization` for Cursor or Claude; additive to stdio · same REQ |
+| **bearer gate** | HTTP MCP auth | App-layer `Authorization: Bearer` before `/mcp` JSON-RPC when token configured · [IMPL-MCP_HTTP_SERVER](../implementation-decisions/IMPL-MCP_HTTP_SERVER.yaml) |
 | **`tied-yaml-optin`** | opt-in MCP server | Second stdio entry in `.cursor/mcp.json` / `.mcp.json` for infrequent tools; enable in **Settings → MCP** |
 | **`TIED_MCP_TOOL_PROFILE`** | tool profile env | `core` on `tied-yaml`; `optin` on `tied-yaml-optin`; invalid value fails fast at startup |
 | **tied-cli** | mcp curl, raw node invoke | Shell wrapper: `.cursor/skills/tied-yaml/scripts/tied-cli.sh` |

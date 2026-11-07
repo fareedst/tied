@@ -1,0 +1,22 @@
+ARCH-MCP_HTTPS_REMOTE_TRANSPORT:
+  cross_references:
+    - "IMPL-MCP_HTTP_SERVER"
+    - "IMPL-TIED_CLI_HTTP_TRANSPORT"
+    - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+  implementation_approach:
+    details:
+      - "Shared createTiedYamlMcpServer for stdio and HTTP transports"
+      - "TLS terminates at reverse proxy; Node serves plain HTTP with bearer gate"
+      - "Separate processes for core and optin profiles mirroring dual stdio entries"
+      - "Fail closed when binding beyond loopback without TIED_MCP_HTTP_BEARER_TOKEN"
+    summary: "Dual transport architecture: stdio default plus optional Streamable HTTP with proxy TLS seam and app-layer bearer"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+  rationale:
+    decision: "Add Streamable HTTP entry (http-entry.js, tied mcp serve) without replacing stdio index.js"
+    drivers:
+      - "LAN and Docker operators"
+      - "Remote IDE mcpServers url configuration"
+      - "Harness or platform TLS at proxy"

@@ -45,21 +45,22 @@ describe("tied-cli large arguments", () => {
       "utf8"
     );
     try {
-      const env = { ...process.env, TIED_MCP_BIN: MCP_BIN };
-      delete env.TIED_BASE_PATH;
-      delete env.TIED_CLIENT_PROJECT_PATH;
-      delete env.TIED_CLIENT_BUNDLE_PATH;
-      delete env.TIED_PATH_AUTHORITY;
-      const r = spawnSync(
-        "bash",
-        [TIED_CLI, "yaml_index_list_tokens", `@${argsPath}`],
-        {
-          encoding: "utf8",
-          cwd: REPO_ROOT,
-          env,
-          maxBuffer: 20 * 1024 * 1024,
-        }
-      );
+      const r = spawnSync(process.execPath, [STDIO_CLIENT], {
+        encoding: "utf8",
+        cwd: REPO_ROOT,
+        maxBuffer: 20 * 1024 * 1024,
+        env: {
+          PATH: process.env.PATH,
+          HOME: process.env.HOME ?? "",
+          TIED_CLI_MCP_BIN: MCP_BIN,
+          TIED_CLI_TOOL_NAME: "yaml_index_list_tokens",
+          TIED_CLI_ARGS_FILE: argsPath,
+          TIED_CLI_QUIET_MCP_STDERR: "1",
+          TIED_CLIENT_PROJECT_PATH: TIED_BASE,
+          TIED_CLIENT_BUNDLE_PATH: path.join(REPO_ROOT, "tied-bundle"),
+          TIED_BASE_PATH: TIED_BASE,
+        },
+      });
       assert.strictEqual(r.status, 0, `stderr: ${r.stderr}\nstdout: ${r.stdout?.slice(0, 500)}`);
       const out = JSON.parse(r.stdout.trim());
       assert.ok(Array.isArray(out));

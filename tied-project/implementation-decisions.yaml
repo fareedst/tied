@@ -1539,10 +1539,18 @@ IMPL-MCP_SERVER_INFO:
   detail_file: "implementation-decisions/IMPL-MCP_SERVER_INFO.yaml"
   name: "MCP server_info tool implementation"
   status: "Implemented"
+IMPL-MCP_HTTP_SERVER:
+  detail_file: "implementation-decisions/IMPL-MCP_HTTP_SERVER.yaml"
+  name: "MCP Streamable HTTP server implementation"
+  status: "Active"
 IMPL-MCP_STDIO_CONSOLE_GUARD:
   detail_file: "implementation-decisions/IMPL-MCP_STDIO_CONSOLE_GUARD.yaml"
   name: "MCP stdio console guard implementation"
   status: "Implemented"
+IMPL-TIED_CLI_HTTP_TRANSPORT:
+  detail_file: "implementation-decisions/IMPL-TIED_CLI_HTTP_TRANSPORT.yaml"
+  name: "tied-cli Streamable HTTP transport"
+  status: "Active"
 IMPL-MCP_USAGE_METRICS:
   code_locations:
     files:

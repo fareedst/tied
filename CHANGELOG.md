@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **MCP HTTPS remote access ([REQ-MCP_HTTPS_REMOTE_ACCESS], [ARCH-MCP_HTTPS_REMOTE_TRANSPORT], [IMPL-MCP_HTTP_SERVER], [IMPL-TIED_CLI_HTTP_TRANSPORT])** — Optional Streamable HTTP for core and optin MCP (`tied mcp serve`, `dist/http-entry.js`); bearer gate; `TIED_CLI_MCP_URL` HTTP client; proxy TLS examples under `mcp-server/deploy/`; stdio default unchanged. Close-out `close-out-mcp-https-2026-11-06` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN-refine.md](tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/PLAN-refine.md).
+
 - **Store README manual MCP acceptance ([REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE], [ARCH-TIED_STORE_README_MCP_ONBOARDING], [IMPL-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE])** — README documents Cursor **Settings → Customize → MCPs** and Claude CLI **2 new MCP servers** enable flow (`#manual-mcp-acceptance`); structure-test substrings; operator-lens cross-link; delivery-path tables and copy-paste spine; prerequisites drop obsolete Go references. CITDP: [CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml](tied-project/citdp/CITDP-REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE.yaml). Plan: [PLAN.md](tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/PLAN.md).
 
 ## [4.1.0] - 2026-11-07

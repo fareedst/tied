@@ -92,6 +92,30 @@ entries:
     class: spawn_transport
     owner_req: REQ-TIED_UNIFIED_TOOLCHAIN
     notes: "Opt-in MCP tool surface"
+  - env_key: TIED_MCP_HTTP_HOST
+    class: spawn_transport
+    owner_req: REQ-MCP_HTTPS_REMOTE_ACCESS
+    notes: "Streamable HTTP bind host"
+  - env_key: TIED_MCP_HTTP_PORT
+    class: spawn_transport
+    owner_req: REQ-MCP_HTTPS_REMOTE_ACCESS
+    notes: "Streamable HTTP listen port"
+  - env_key: TIED_MCP_HTTP_BEARER_TOKEN
+    class: secret
+    owner_req: REQ-MCP_HTTPS_REMOTE_ACCESS
+    notes: "Bearer gate for remote MCP HTTP; never commit"
+  - env_key: TIED_MCP_HTTP_ALLOWED_HOSTS
+    class: spawn_transport
+    owner_req: REQ-MCP_HTTPS_REMOTE_ACCESS
+    notes: "DNS rebinding host allowlist"
+  - env_key: TIED_CLI_MCP_URL
+    class: cli_session
+    owner_req: REQ-MCP_HTTPS_REMOTE_ACCESS
+    notes: "tied-cli Streamable HTTP endpoint"
+  - env_key: TIED_CLI_MCP_BEARER
+    class: cli_session
+    owner_req: REQ-MCP_HTTPS_REMOTE_ACCESS
+    notes: "tied-cli HTTP Authorization bearer"
   - env_key: TIED_JEV_DECISION_PROVIDER
     class: operator_toggle
     owner_req: REQ-TIED_JEV_DECISION_COPROCESSOR

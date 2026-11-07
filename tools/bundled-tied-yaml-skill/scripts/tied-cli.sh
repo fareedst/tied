@@ -181,7 +181,11 @@ else
   printf '%s' "${ARGS_JSON}" > "${TIED_CLI_ARGS_FILE}"
 fi
 
-CLIENT_JS="${TIED_CLI_STDIO_CLIENT_PATH:-$SCRIPT_DIR/tied-mcp-stdio-client.cjs}"
+if [[ -n "${TIED_CLI_MCP_URL:-}" ]]; then
+  CLIENT_JS="${TIED_CLI_HTTP_CLIENT_PATH:-$SCRIPT_DIR/tied-mcp-http-client.mjs}"
+else
+  CLIENT_JS="${TIED_CLI_STDIO_CLIENT_PATH:-$SCRIPT_DIR/tied-mcp-stdio-client.cjs}"
+fi
 if [[ ! -f "$CLIENT_JS" ]]; then
   echo "ERROR: Missing $CLIENT_JS (companion to tied-cli.sh)." >&2
   exit 1

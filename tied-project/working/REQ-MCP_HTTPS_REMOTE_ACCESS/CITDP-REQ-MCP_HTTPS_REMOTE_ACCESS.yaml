@@ -1,0 +1,99 @@
+CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS:
+  change_definition:
+    current_behavior: "TIED YAML MCP serves only on stdio via mcp-server/dist/index.js. tied-cli spawns a stdio child. No supported path for LAN, Docker-sidecar, or IDE remote MCP URL over HTTPS."
+    desired_behavior: "Same tool profiles (core and optin) available over MCP Streamable HTTP on plain HTTP behind a TLS reverse proxy; bearer authentication at the Node app; tied mcp serve CLI; tied-cli optional HTTP client; stdio remains default install transport; operator docs and compose examples for Docker."
+    non_goals:
+      - "OAuth or MCP SDK auth server"
+      - "mTLS or IP allowlists in v1"
+      - "Auto-replacing stdio entries in .cursor/mcp.json on tied-install refresh"
+      - "Integrated adversarial inquiry activation"
+    sponsor_decisions:
+      clients_v1: "IDE remote MCP url and headless/Docker callers"
+      tls_model: "Terminate TLS at reverse proxy; Node HTTP inside"
+      auth_v1: "Bearer token in TIED_MCP_HTTP_BEARER_TOKEN"
+    success_criteria:
+      - "SC-MHR-STDIO"
+      - "SC-MHR-HTTP-TOOLS"
+      - "SC-MHR-BEARER"
+      - "SC-MHR-BIND"
+      - "SC-MHR-CLI"
+      - "SC-MHR-SERVER-INFO"
+      - "SC-MHR-DOCKER"
+      - "SC-MHR-DOCS"
+    unchanged_behavior:
+      - "buildTiedMcpServerEntry stdio type for default install"
+      - "TIED_CLI_MCP_JSON_BASE_PATH stdio spawn and path authority"
+      - "MCP config preservation on existing .cursor/mcp.json"
+      - "TIED_MCP_TOOL_PROFILE core/optin split"
+  completion_criteria:
+    activation:
+      phase: "pre_implementation"
+      request_token: "REQ-MCP_HTTPS_REMOTE_ACCESS"
+      run_id: null
+      scope:
+        - "mcp-https-remote-v1"
+    envelope_path: "tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/request-evidence-envelope.v1.json"
+    lint_yaml: "required on changed tied-project YAML"
+    pre_implementation_gate: "tied_checklist_gate_validate advisory before RED"
+    tied_validate_consistency: "required before close-out"
+  evidence:
+    command_seq:
+      - "cd mcp-server && npm run build && npm test"
+      - "node --test tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs"
+  impact_analysis:
+    impl_inventory:
+      - "IMPL-MCP_HTTP_SERVER"
+      - "IMPL-TIED_CLI_HTTP_TRANSPORT"
+    modules_or_boundaries: "mcp-server/src/tied-mcp-server-factory.ts; mcp-http-server.ts; http-entry.ts; packages/cli index; bundled tied-mcp-stdio-client.cjs; mcp-server/deploy; server_info contract; env allowlist; tied-yaml-mcp vocab"
+    tied_tokens_affected:
+      - "REQ-MCP_SERVER_INFO"
+      - "REQ-TIED_UNIFIED_TOOLCHAIN"
+    tied_tokens_new:
+      - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+      - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
+      - "IMPL-MCP_HTTP_SERVER"
+      - "IMPL-TIED_CLI_HTTP_TRANSPORT"
+  record_identity:
+    change_request_id: "REQ-MCP_HTTPS_REMOTE_ACCESS"
+    depth_tier: "minimal"
+    gate_policy: "advisory"
+    profile_depth: "minimal"
+    recorded_at: "2026-11-06"
+    title: "HTTPS remote access for dual TIED YAML MCP servers"
+  risk_analysis:
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      counterexamples:
+        - "Bearer token leaked via compose env committed to git"
+        - "Wide bind without token if guard regresses"
+        - "Remote MCP points at wrong TIED_CLIENT_PROJECT_PATH and corrupts store tree"
+      depth_tier: "minimal"
+      disconfirming_observations:
+        - "Bind+token guard fails closed in unit tests"
+        - "Install still defaults to stdio"
+      eligibility_triggers_matched: []
+      evidence_references:
+        - "tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/PLAN-refine.md"
+        - "mcp-server/src/index.ts"
+        - "tools/bootstrap/lib/mcp-config.mjs"
+      falsification_questions:
+        - "Does any HTTP listener start on 0.0.0.0 without a configured bearer?"
+        - "Does tied-cli HTTP skip TIED_PATH_AUTHORITY / corpus validation paths?"
+      gate_policy: "advisory"
+      prior_depth_tier: "minimal"
+      rationale: "Network-facing write tools; minimal adversarial depth; security mitigations in bearer and bind gates."
+      research_profile: "integrated-agent"
+      sub_adversarial_inquiry_pass: "not_applicable"
+    consequence_ladder:
+      costly:
+        - "Exposing YAML write MCP on LAN or public Internet"
+      reversible:
+        - "Stateful vs stateless HTTP session (default stateful)"
+        - "Caddy vs Traefik in examples (default Caddy)"
+        - "Separate vhosts vs path routing (default vhosts)"
+    summary: "Additive remote transport with proxy TLS; primary risk is unauthorized network access to write tools."
+  test_strategy:
+    integration_command_seq:
+      - command: "cd mcp-server && npm run build && npm test"
+        notes: "Factory, HTTP auth, profile counts, server_info, tied-cli-http"
+    matrix_notes: "RED before GREEN per test-strategy.md; LEAP server_info contract on HTTP fields."

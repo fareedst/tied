@@ -568,6 +568,20 @@ ARCH-MCP_SERVER_INFO:
   source_index: "architecture-decisions.yaml"
   status: "Accepted"
   type: "ARCH"
+ARCH-MCP_HTTPS_REMOTE_TRANSPORT:
+  cross_references:
+    - "IMPL-MCP_HTTP_SERVER"
+    - "IMPL-TIED_CLI_HTTP_TRANSPORT"
+    - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+  description: "Dual transport: stdio default plus Streamable HTTP behind proxy TLS and bearer gate"
+  detail_file: "architecture-decisions/ARCH-MCP_HTTPS_REMOTE_TRANSPORT.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP HTTPS remote Streamable HTTP transport"
+  source_index: "architecture-decisions.yaml"
+  status: "Accepted"
+  type: "ARCH"
 ARCH-MCP_STDIO_CONSOLE_GUARD:
   cross_references:
     - "IMPL-MCP_STDIO_CONSOLE_GUARD"
@@ -2143,6 +2157,19 @@ IMPL-MCP_SERVER_INFO:
   source_index: "implementation-decisions.yaml"
   status: "Implemented"
   type: "IMPL"
+IMPL-MCP_HTTP_SERVER:
+  cross_references:
+    - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
+    - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+  description: "tied-mcp-server-factory, mcp-http-server, http-entry, bearer and bind guards"
+  detail_file: "implementation-decisions/IMPL-MCP_HTTP_SERVER.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP Streamable HTTP server implementation"
+  source_index: "implementation-decisions.yaml"
+  status: "Active"
+  type: "IMPL"
 IMPL-MCP_STDIO_CONSOLE_GUARD:
   cross_references:
     - "ARCH-MCP_STDIO_CONSOLE_GUARD"
@@ -2630,6 +2657,19 @@ IMPL-TIED_CLEAR_WORKSPACE_SKILL:
     - "REQ-TIED_CLEAR_WORKSPACE_SKILL"
   description: "Routing and manifest for clear-workspace"
   name: "Clear-workspace skill bootstrap"
+  status: "Active"
+  type: "IMPL"
+IMPL-TIED_CLI_HTTP_TRANSPORT:
+  cross_references:
+    - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
+    - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+  description: "tied-cli.sh and tied-mcp-http-client.mjs Streamable HTTP branch"
+  detail_file: "implementation-decisions/IMPL-TIED_CLI_HTTP_TRANSPORT.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "tied-cli Streamable HTTP transport"
+  source_index: "implementation-decisions.yaml"
   status: "Active"
   type: "IMPL"
 IMPL-TIED_CLI_MCP_JSON_BASE_PATH:
@@ -4356,6 +4396,21 @@ REQ-MCP_SERVER_INFO:
   name: "MCP server_info read-only introspection"
   source_index: "requirements.yaml"
   status: "Implemented"
+  type: "REQ"
+REQ-MCP_HTTPS_REMOTE_ACCESS:
+  category: "Functional"
+  cross_references:
+    - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
+    - "IMPL-MCP_HTTP_SERVER"
+    - "IMPL-TIED_CLI_HTTP_TRANSPORT"
+  description: "Optional Streamable HTTP for dual MCP profiles with proxy TLS and bearer auth; stdio default unchanged"
+  detail_file: "requirements/REQ-MCP_HTTPS_REMOTE_ACCESS.yaml"
+  metadata:
+    last_updated: "2026-11-06T00:00:00.000Z"
+    registered: "2026-11-06T00:00:00.000Z"
+  name: "MCP HTTPS remote access"
+  source_index: "requirements.yaml"
+  status: "Active"
   type: "REQ"
 REQ-MCP_STDIO_CONSOLE_GUARD:
   category: "Functional"

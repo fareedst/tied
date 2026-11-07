@@ -10,6 +10,7 @@
   "main": "dist/index.js",
   "bin": {
     "tied-yaml-mcp": "dist/index.js",
+    "tied-mcp-http": "dist/http-entry.js",
     "feature-orchestrator": "dist/feature-orchestration/entry.js",
     "tied": "packages/cli/dist/index.js"
   },
@@ -32,6 +33,7 @@
   "dependencies": {
     "@tied/checklist-resume": "*",
     "@modelcontextprotocol/sdk": "^1.32.2",
+    "express": "^5.2.1",
     "fast-glob": "^3.3.3",
     "ignore": "^7.0.5",
     "js-yaml": "^4.1.0",
@@ -39,6 +41,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "ajv": "^8.18.0",

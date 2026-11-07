@@ -19,9 +19,30 @@ npm install
 npm run build
 ```
 
-This directory is an npm **workspace**: **`@tied/mcp`** (this package — MCP sources and `dist/index.js`) and **`@tied/cli`** (`tied mcp` dispatches to the same stdio entry). Cursor MCP config should keep using **`mcp-server/dist/index.js`** (or `node …/dist/index.js`).
+This directory is an npm **workspace**: **`@tied/mcp`** (this package — MCP sources and `dist/index.js`) and **`@tied/cli`** (`tied mcp` dispatches stdio by default; **`tied mcp serve`** starts Streamable HTTP — see below). Cursor MCP config should keep using **`mcp-server/dist/index.js`** (or `node …/dist/index.js`) for local stdio.
 
 The MCP server remains in the TIED repo; your project only references it via MCP configuration.
+
+## Streamable HTTP (LAN / Docker / remote IDE)
+
+**[REQ-MCP_HTTPS_REMOTE_ACCESS](../tied-project/requirements/REQ-MCP_HTTPS_REMOTE_ACCESS.yaml)** adds an optional **Streamable HTTP** transport. TLS terminates at a reverse proxy (see `deploy/Caddyfile.example`); the Node process speaks plain HTTP and enforces a **Bearer** token when not bound to loopback.
+
+| Entry | Command |
+| --- | --- |
+| HTTP server | `node dist/http-entry.js` or `tied mcp serve` |
+| Core profile | `TIED_MCP_TOOL_PROFILE=core` (default), port **8787** |
+| Opt-in profile | `TIED_MCP_TOOL_PROFILE=optin`, port **8788** |
+
+**Environment (spawn / container):**
+
+- `TIED_MCP_HTTP_HOST` — bind address (default `127.0.0.1`; use `0.0.0.0` in Docker with `TIED_MCP_HTTP_BEARER_TOKEN` set)
+- `TIED_MCP_HTTP_PORT` — listen port
+- `TIED_MCP_HTTP_BEARER_TOKEN` — required for non-loopback binds; send as `Authorization: Bearer …`
+- `TIED_MCP_HTTP_ALLOWED_HOSTS` — comma-separated Host allowlist when binding widely
+
+**tied-cli over HTTP:** set `TIED_CLI_MCP_URL` (e.g. `https://mcp-core.local/mcp`) and `TIED_CLI_MCP_BEARER` (or reuse `TIED_MCP_HTTP_BEARER_TOKEN`). Stdio spawn is unchanged when `TIED_CLI_MCP_URL` is unset.
+
+**Cursor remote MCP (optional, additive):** add `mcpServers` entries with `"url"` and `"headers": { "Authorization": "Bearer …" }` — do not replace default stdio entries. Example compose: [`deploy/docker-compose.https.example.yml`](deploy/docker-compose.https.example.yml).
 
 ## Tests
 

@@ -157,6 +157,28 @@ export async function buildServerInfoSnapshot(
       checks,
     },
     features: buildFeatures(options),
-    extensions: buildTiedMethodologyExtension(projectRoot),
+    extensions: {
+      ...buildTiedMethodologyExtension(projectRoot),
+      ...buildTiedTransportExtension(options),
+    },
+  };
+}
+
+function buildTiedTransportExtension(
+  options: ServerInfoBuildOptions,
+): Record<string, Record<string, unknown>> {
+  const transport = options.transport ?? "stdio";
+  const listen = options.httpListen ?? null;
+  return {
+    "tied.transport": {
+      kind: transport,
+      http_listen: listen
+        ? {
+            host: listen.host,
+            port: listen.port,
+            bearer_configured: listen.bearer_configured,
+          }
+        : null,
+    },
   };
 }

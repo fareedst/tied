@@ -1,0 +1,12 @@
+feat(mcp): Streamable HTTP remote access for dual MCP profiles
+
+[REQ-MCP_HTTPS_REMOTE_ACCESS] Optional HTTPS (proxy TLS) + bearer for core/optin
+MCP; stdio default unchanged. tied mcp serve, tied-cli HTTP transport, deploy examples.
+
+Tokens: REQ-MCP_HTTPS_REMOTE_ACCESS, ARCH-MCP_HTTPS_REMOTE_TRANSPORT,
+IMPL-MCP_HTTP_SERVER, IMPL-TIED_CLI_HTTP_TRANSPORT
+
+Close-out: run_id=close-out-mcp-https-2026-11-06, merged_decision.allowed=true,
+envelope blocking_gap_count=0. npm test mcp-server green; env allowlist updated.
+
+Upstream feedback: N/A (no methodology_improvement capture this pass).

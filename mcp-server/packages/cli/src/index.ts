@@ -14,6 +14,7 @@ import {
   processCertificationCliEntryFromCliModule,
   gateCheckCliEntryFromCliModule,
   handoffValidateCliEntryFromCliModule,
+  mcpHttpEntryFromCliModule,
   mcpStdioEntryFromCliModule,
   onboardingEntryFromCliModule,
   tiedNextCliEntryFromCliModule,
@@ -24,7 +25,7 @@ function printHelp(): void {
   console.error(`Usage: tied <subcommand> [args...]
 
 Subcommands:
-  mcp         Start the TIED YAML MCP server on stdio (same as mcp-server/dist/index.js)
+  mcp         Start the TIED YAML MCP server (stdio default; use "mcp serve" for Streamable HTTP)
   bootstrap   Copy TIED templates into a client (default: copy-files; use "new-client" for pipeline)
   install     Layered client install (default linked; see tied-install.sh)
   yaml        Lint or canonicalize YAML (lint | canonicalize)
@@ -88,6 +89,11 @@ function main(): void {
   }
 
   if (subcommand === "mcp") {
+    const action = rest[0];
+    if (action === "serve") {
+      runNodeEntry(mcpHttpEntryFromCliModule(import.meta.url), rest.slice(1));
+      return;
+    }
     runNodeEntry(mcpStdioEntryFromCliModule(import.meta.url), rest);
     return;
   }

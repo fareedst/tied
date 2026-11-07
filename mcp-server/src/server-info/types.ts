@@ -65,11 +65,21 @@ export type ServerInfoSnapshot = {
   extensions: Record<string, Record<string, unknown>>;
 };
 
+export type McpTransportKind = "stdio" | "streamable_http";
+
+export type HttpListenSummary = {
+  host: string;
+  port: number;
+  bearer_configured: boolean;
+};
+
 export type ServerInfoBuildOptions = {
   implementation: { name: string; version: string };
   toolProfile: ToolProfile;
   activeToolCount: number;
   resourcesRegistered: boolean;
+  transport?: McpTransportKind;
+  httpListen?: HttpListenSummary | null;
   negotiatedProtocolVersion?: string | null;
   processEnv?: NodeJS.ProcessEnv;
 };

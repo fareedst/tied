@@ -1,0 +1,133 @@
+copy_hygiene: REQ-MCP_HTTPS_REMOTE_ACCESS tracker — close-out 2026-11-06.
+description: Per-request Tracker for MCP HTTPS remote access.
+execution_evidence:
+  close_out_evidence:
+    date: '2026-11-06'
+    deferred: []
+    gates: {}
+    master_checklist: tied-bundle/docs/agent-req-implementation-checklist.yaml
+  completed:
+    - change-definition
+    - impact-discovery
+    - risk-assessment
+    - test-strategy
+    - author-requirement
+    - author-architecture
+    - persist-implementation-records
+    - unit-test-red
+    - unit-test-green
+    - verification-gate
+    - sub-adversarial-inquiry-pass
+    - sub-close-out-evidence-sync
+  envelope_path: tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/request-evidence-envelope.v1.json
+  operator_evidence:
+    command_seq:
+      - cd mcp-server && npm run build && npm test
+      - node --test tools/bootstrap/lib/tied-env-allowlist-inventory.test.mjs
+    depth_tier: minimal
+    gate_policy: advisory
+    prior_depth_tier: null
+    profile_depth: minimal
+    status: complete
+  request: REQ-MCP_HTTPS_REMOTE_ACCESS
+record_identity:
+  change_request_id: REQ-MCP_HTTPS_REMOTE_ACCESS
+  depth_tier: minimal
+  gate_policy: advisory
+  record_status: closing
+  recorded_at: '2026-11-06'
+  title: MCP HTTPS remote access
+references:
+  citdp: tied-project/citdp/CITDP-REQ-MCP_HTTPS_REMOTE_ACCESS.yaml
+  plan: tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/PLAN-refine.md
+  test_strategy: tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/test-strategy.md
+steps:
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/verification-evidence-manifest.v1.json
+    slug: verification-gate
+    tracking:
+      evidence_refs:
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/verification-evidence-manifest.v1.json
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/sub-adversarial-inquiry-pass-evidence.md
+      - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/not-applicable-receipt.v1.json
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      evidence_refs:
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/sub-adversarial-inquiry-pass-evidence.md
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/not-applicable-receipt.v1.json
+      status: completed
+  - disposition: completed
+    evidence_refs:
+      - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/not-applicable-receipt.v1.json
+    slug: sub-close-out-evidence-sync
+    tracking:
+      evidence_refs:
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/not-applicable-receipt.v1.json
+      status: completed
+  - slug: change-definition
+    tracking:
+      status: completed
+      evidence_refs: &ref_0
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/change-definition-evidence.md
+    disposition: completed
+    evidence_refs: *ref_0
+  - slug: impact-discovery
+    tracking:
+      status: completed
+      evidence_refs: &ref_1
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/impact-discovery-evidence.md
+    disposition: completed
+    evidence_refs: *ref_1
+  - slug: risk-assessment
+    tracking:
+      status: completed
+      evidence_refs: &ref_2
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/risk-assessment-evidence.md
+    disposition: completed
+    evidence_refs: *ref_2
+  - slug: test-strategy
+    tracking:
+      status: completed
+      evidence_refs: &ref_3
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/test-strategy-evidence.md
+    disposition: completed
+    evidence_refs: *ref_3
+  - slug: author-requirement
+    tracking:
+      status: completed
+      evidence_refs: &ref_4
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/author-requirement-evidence.md
+    disposition: completed
+    evidence_refs: *ref_4
+  - slug: author-architecture
+    tracking:
+      status: completed
+      evidence_refs: &ref_5
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/author-architecture-evidence.md
+    disposition: completed
+    evidence_refs: *ref_5
+  - slug: persist-implementation-records
+    tracking:
+      status: completed
+      evidence_refs: &ref_6
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/persist-implementation-records-evidence.md
+    disposition: completed
+    evidence_refs: *ref_6
+  - slug: unit-test-red
+    tracking:
+      status: completed
+      evidence_refs: &ref_7
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/unit-test-red-evidence.md
+    disposition: completed
+    evidence_refs: *ref_7
+  - slug: unit-test-green
+    tracking:
+      status: completed
+      evidence_refs: &ref_8
+        - tied-project/working/REQ-MCP_HTTPS_REMOTE_ACCESS/evidence/unit-test-green-evidence.md
+    disposition: completed
+    evidence_refs: *ref_8

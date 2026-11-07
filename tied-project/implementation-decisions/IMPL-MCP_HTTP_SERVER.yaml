@@ -1,0 +1,29 @@
+IMPL-MCP_HTTP_SERVER:
+  code_locations:
+    files:
+      - description: "Shared MCP server factory"
+        path: "mcp-server/src/tied-mcp-server-factory.ts"
+      - description: "Bearer gate and bind policy"
+        path: "mcp-server/src/mcp-http-auth.ts"
+      - description: "Express and Streamable HTTP listener"
+        path: "mcp-server/src/mcp-http-server.ts"
+      - description: "HTTP process entry"
+        path: "mcp-server/src/http-entry.ts"
+      - description: "Thin stdio entry uses factory"
+        path: "mcp-server/src/index.ts"
+  cross_references:
+    - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
+    - "REQ-MCP_HTTPS_REMOTE_ACCESS"
+  essence_pseudocode_path: "implementation-decisions/IMPL-MCP_HTTP_SERVER-pseudocode.md"
+  implementation_approach:
+    details:
+      - "Stateful StreamableHTTPServerTransport with sessionIdGenerator randomUUID"
+      - "createMcpExpressApp host and allowedHosts from env"
+      - "Deploy examples under mcp-server/deploy/"
+    summary: "HTTP server modules, factory extraction, and operator docs"
+  metadata:
+    created:
+      author: "build-plan"
+      date: "2026-11-06"
+  name: "MCP Streamable HTTP server implementation"
+  status: "Active"

@@ -11,6 +11,10 @@ export function mcpStdioEntryFromCliModule(moduleUrl: string): string {
   return path.join(workspaceRootFromCliModule(moduleUrl), "dist", "index.js");
 }
 
+export function mcpHttpEntryFromCliModule(moduleUrl: string): string {
+  return path.join(workspaceRootFromCliModule(moduleUrl), "dist", "http-entry.js");
+}
+
 export function onboardingEntryFromCliModule(moduleUrl: string): string {
   return path.join(
     workspaceRootFromCliModule(moduleUrl),

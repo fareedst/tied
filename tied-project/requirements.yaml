@@ -1577,6 +1577,18 @@ REQ-MCP_SERVER_INFO:
   name: "MCP server_info read-only introspection"
   priority: "P2"
   status: "Implemented"
+REQ-MCP_HTTPS_REMOTE_ACCESS:
+  category: "Functional"
+  cross_references:
+    architecture_decisions:
+      - "ARCH-MCP_HTTPS_REMOTE_TRANSPORT"
+    implementation_decisions:
+      - "IMPL-MCP_HTTP_SERVER"
+      - "IMPL-TIED_CLI_HTTP_TRANSPORT"
+  detail_file: "requirements/REQ-MCP_HTTPS_REMOTE_ACCESS.yaml"
+  name: "MCP HTTPS remote access"
+  priority: "P2"
+  status: "Implemented"
 REQ-MCP_STDIO_CONSOLE_GUARD:
   category: "Functional"
   cross_references:

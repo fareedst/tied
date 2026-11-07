@@ -1,0 +1,12 @@
+# TLS termination only — backends speak plain HTTP on the Docker network.
+# Local dev: point mcp-core.local and mcp-optin.local to 127.0.0.1 (or use /etc/hosts).
+
+https://mcp-core.local {
+	tls internal
+	reverse_proxy tied-mcp-core:8787
+}
+
+https://mcp-optin.local:8443 {
+	tls internal
+	reverse_proxy tied-mcp-optin:8788
+}
