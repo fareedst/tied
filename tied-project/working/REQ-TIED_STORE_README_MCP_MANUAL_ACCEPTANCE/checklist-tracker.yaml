@@ -62,10 +62,10 @@ steps:
       status: "completed"
   - disposition: "completed"
     evidence_refs:
-      - kind: "command_evidence"
-        claimed_success: true
-        stdout_ref: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/evidence/store-readme-structure-test.stdout.txt"
+      - claimed_success: true
         exit_code: 0
+        kind: "command_evidence"
+        stdout_ref: "tied-project/working/REQ-TIED_STORE_README_MCP_MANUAL_ACCEPTANCE/evidence/store-readme-structure-test.stdout.txt"
     slug: "sync-tied-stack"
     tracking:
       status: "completed"

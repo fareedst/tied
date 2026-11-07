@@ -1,0 +1,6 @@
+feat(methodology): resolve TIED semver via server_info instead of per-turn stamp
+
+Remove mandatory TIEDv lines from loaders and agents; expose
+extensions.tied.methodology on server_info. W7 stamp dimensions warn-only.
+
+REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND REQ-TIED_SETUP REQ-MCP_SERVER_INFO

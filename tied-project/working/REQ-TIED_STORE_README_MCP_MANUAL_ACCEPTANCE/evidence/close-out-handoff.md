@@ -12,7 +12,7 @@
 
 ## Commit
 
-(record SHA after `git commit`)
+**SHA:** `456c62c1563deb6d457143ad87c286e118426622` — `docs(readme): manual MCP accept and operator spine tables`
 
 ## Feedback
 

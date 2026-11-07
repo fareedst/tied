@@ -1,111 +1,199 @@
 {
-  "schema_version": "request-evidence-envelope.v1",
-  "envelope_meta": {
-    "generated_at": "2026-10-06T03:59:59.958Z",
-    "generator": "request_evidence_envelope_build",
-    "revision": 1
-  },
-  "identity": {
-    "request_token": "REQ-TIED_PRIMARY_REPO_ONBOARDING",
-    "project_id": "43c95df716872c5d",
-    "depth_tier": "minimal",
-    "gate_policy": "advisory",
-    "methodology_snapshot_id": "3.0.0"
-  },
-  "runs": [],
   "artifacts": [
     {
-      "kind": "checklist_tracker",
-      "schema_version": null,
-      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml",
-      "content_hash": "sha256:57f16658c52a8d9419681f5d7f65caa0730538e3a1eb059586b6eb6d308dd726",
+      "content_hash": "sha256:07fdaee4918638e2c6ad750a9bbac39945538a4ac5f5df5894f6a08878779545",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-verification-replay.md",
       "phase": null,
-      "status": "present",
       "proof_boundaries": [
-        "tracker_disposition_only"
-      ]
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
     },
     {
-      "kind": "citdp_record",
-      "schema_version": null,
-      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml",
-      "content_hash": "sha256:fc5b3a347ec6dc5808556c9f1281ed854c1a6d282c5051a8616a1555f44737fb",
+      "content_hash": "sha256:2f76e75e3ba34122f9a9a02adac4f06df571cf50fd8ffde50407bb988413fcef",
+      "kind": "not_applicable_receipt",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json",
       "phase": null,
-      "status": "present",
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "not-applicable-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:3de1369a2524e3c50c016430f265afaae48356d14fb2187c2850e4b7a1dd5375",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/readme-store-root-policy-2026-11-07.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:40c909046565f5378be264a088069c1687da076afd63c7d697669889017c07cd",
+      "kind": "request_evidence_envelope",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json",
+      "phase": null,
+      "proof_boundaries": [
+        "artifact_presence_only"
+      ],
+      "schema_version": "request-evidence-envelope.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:49f30049acda6e30ec996d130b67f25fc19911ea55d8949f06337a877bb647a9",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:6f4d07f2d02a20b3fe3986f9aeddbf3f772dae630a522ce85d390d7d3a9a2bf4",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/gates/close_out-2026-11-07T04-38-13-648Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:7ddf8dd4cf815ca32ac5e9845d03bb0160a715c71707ca0b626b321374e68652",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/git-hygiene-receipt-2026-11-07.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:839944522f18e2867dd1d48476d1d9d38e6a1ea529eb6c2d8649361ff18dcaa5",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/proposed-commit-message.txt",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:90679980845fbefb453f0d3f2e84f0a256e826c634a8bb517713bef9b4575cbd",
+      "kind": "citdp_record",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml",
+      "phase": null,
       "proof_boundaries": [
         "citdp_snapshot_only"
-      ]
-    },
-    {
-      "kind": "not_applicable_receipt",
-      "schema_version": "not-applicable-receipt.v1",
-      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/not-applicable-receipt.v1.json",
-      "content_hash": "sha256:2f76e75e3ba34122f9a9a02adac4f06df571cf50fd8ffde50407bb988413fcef",
-      "phase": null,
-      "status": "present",
-      "proof_boundaries": [
-        "artifact_presence_only"
-      ]
-    },
-    {
-      "kind": "request_evidence_envelope",
-      "schema_version": "request-evidence-envelope.v1",
-      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/request-evidence-envelope.v1.json",
-      "content_hash": "sha256:faaca19f06949d1c00df5969a6cac0f2099aef6061989e45a4c2ad201d843f62",
-      "phase": null,
-      "status": "present",
-      "proof_boundaries": [
-        "artifact_presence_only"
-      ]
-    },
-    {
-      "kind": "unknown",
+      ],
       "schema_version": null,
-      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-gitignore-hygiene.md",
-      "content_hash": "sha256:49f30049acda6e30ec996d130b67f25fc19911ea55d8949f06337a877bb647a9",
-      "phase": null,
-      "status": "present",
-      "proof_boundaries": [
-        "discovery_only"
-      ]
+      "status": "present"
     },
     {
+      "content_hash": "sha256:945b36491208f9131445bf6c15677f1acb93efe975e6bfd21be1a2086f84e4c4",
       "kind": "unknown",
-      "schema_version": null,
-      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-verification-replay.md",
-      "content_hash": "sha256:07fdaee4918638e2c6ad750a9bbac39945538a4ac5f5df5894f6a08878779545",
-      "phase": null,
-      "status": "present",
-      "proof_boundaries": [
-        "discovery_only"
-      ]
-    },
-    {
-      "kind": "unknown",
-      "schema_version": null,
       "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-final.json",
-      "content_hash": "sha256:c569614f3c33075d76cdcd66dbf3f602ba39e317bb898d90562807efaaf9986f",
       "phase": null,
-      "status": "present",
       "proof_boundaries": [
         "discovery_only"
-      ]
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:9d4cbff21bd5f23f6f7bbda55ecfb09c3932dcf097c01d03afa73f6141d4231e",
+      "kind": "checklist_gate_receipt",
+      "path": "tied-bundle/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/gates/close_out-2026-11-07T04-39-05-023Z.json",
+      "phase": "close_out",
+      "proof_boundaries": [
+        "gate_decision_only"
+      ],
+      "schema_version": "checklist-gate-receipt.v1",
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:a10a76f5f502e502621bd1d1ac3239e5211c9168b1cbab94e09c70dd52dcc41b",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/traceable-commit-evidence.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:ce0aa128fb9c9a19d172de4e4df9a0d79c5fbff7edfe329ce076c62ae35aeed9",
+      "kind": "checklist_tracker",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml",
+      "phase": null,
+      "proof_boundaries": [
+        "tracker_disposition_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/closeout-run-close-out-gates-2026-11-07.json",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
+    },
+    {
+      "content_hash": "sha256:efda8685f49010713b3b14546adc349ccad5fbf6c5e369d8343d70083bd98aa0",
+      "kind": "unknown",
+      "path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/evidence/close-out-handoff.md",
+      "phase": null,
+      "proof_boundaries": [
+        "discovery_only"
+      ],
+      "schema_version": null,
+      "status": "present"
     }
   ],
   "cross_links": {
-    "tracker_path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml",
-    "tracker_hash": "sha256:23c6aa4c87c8cf137222c58f7610a6dce335a361d9dbe7a72d03378f7c48b483",
     "citdp_path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/CITDP-REQ-TIED_PRIMARY_REPO_ONBOARDING.yaml",
-    "evidence_chain_profile_path": null
+    "evidence_chain_profile_path": null,
+    "tracker_hash": "sha256:cf8172404d3ad9960f12ed464632bcc6ca8809cddf96c7b14564287416af0e63",
+    "tracker_path": "tied-project/working/REQ-TIED_PRIMARY_REPO_ONBOARDING/agent-req-implementation-checklist.yaml"
+  },
+  "envelope_meta": {
+    "generated_at": "2026-11-07T04:39:05.028Z",
+    "generator": "request_evidence_envelope_patch",
+    "revision": 2
   },
   "gaps": [
     {
-      "code": "thin_ledger",
-      "artifact_kind": null,
+      "artifact_kind": "checklist_gate_receipt",
+      "code": "evidence_stale",
+      "detail": "Envelope tracker_hash sha256:cf8172404d3ad9960f12ed464632bcc6ca8809cddf96c7b14564287416af0e63 differs from latest gate receipt sha256:79014a21b19bbb10817004a1626080f2c7624d9ad715e80506df4f33a9cbe2ae (close_out-2026-11-07T04-38-13-648Z.json)",
       "phase": null,
-      "detail": "Completed slugs without outcome_verified ledger rows: traceable-commit",
       "severity": "warn",
-      "source": "ledger-correlation"
+      "source": "gate-hash-drift"
     }
-  ]
+  ],
+  "identity": {
+    "depth_tier": "minimal",
+    "gate_policy": "advisory",
+    "methodology_snapshot_id": "4.1.0",
+    "project_id": "43c95df716872c5d",
+    "request_token": "REQ-TIED_PRIMARY_REPO_ONBOARDING"
+  },
+  "runs": [],
+  "schema_version": "request-evidence-envelope.v1"
 }

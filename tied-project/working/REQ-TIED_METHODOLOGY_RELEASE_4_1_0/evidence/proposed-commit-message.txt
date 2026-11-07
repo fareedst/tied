@@ -40,3 +40,5 @@ Close-out gates: merged_decision.allowed=true; envelope blocking_gap_count=0
 Gate receipt: tied-bundle/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/gates/close_out-2026-11-07T03-44-26-488Z.json
 
 Upstream feedback: N/A (methodology semver release; no client feedback ingest)
+
+Committed: ab6faa99

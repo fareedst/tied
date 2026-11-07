@@ -68,8 +68,8 @@ CITDP-REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
         - "Only AGENTS updated; ai-principles in tied-bundle left mandating stamp until client refresh"
         - "tied_verify still expects stamp criterion while AGENTS omit stamp"
         - "W7 still flags missing stamp as error-tier in rollup"
-      depth_tier: "minimal"
       depth_selected_at: "2026-11-06T18:30:00-08:00"
+      depth_tier: "minimal"
       disconfirming_observations:
         - "conversation-adherence-score.test.mjs passes with warn-only stamp dimensions"
         - "grep 'Start every response with' .cursor/agents returns no TIEDv mandate"
@@ -81,9 +81,9 @@ CITDP-REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND:
         - "scripts/conversation-adherence-score.test.mjs"
         - "tied-project/working/REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND/PLAN.md"
       falsification_questions:
+        - "Does prompt-type-subagent.test.ts still require TIEDv regex in agent bodies?"
         - "Does server_info omit extensions.tied.methodology when VERSION exists?"
         - "Does validate_vocab fail because alphabetical index lists removed legacy terms?"
-        - "Does prompt-type-subagent.test.ts still require TIEDv regex in agent bodies?"
       gate_policy: "advisory"
       profile_depth: "minimal"
       research_profile: "planning-only"

@@ -12,7 +12,7 @@
 
 ## Commit
 
-See `git log -1` after traceable commit (SHA recorded below by agent).
+**Commit:** `ab6faa99` — `chore(release): TIED methodology 4.1.0`
 
 ## Evidence paths
 

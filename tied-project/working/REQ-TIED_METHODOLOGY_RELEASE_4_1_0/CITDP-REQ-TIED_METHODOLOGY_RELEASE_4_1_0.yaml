@@ -3,27 +3,27 @@ CITDP-REQ-TIED_METHODOLOGY_RELEASE_4_1_0:
     current_behavior: "Store methodology semver is 4.0.0 in VERSION and AGENTS.md. CHANGELOG [Unreleased] holds unreleased features. tied-bundle/install.json may still show tied_version 4.0.0 until refresh."
     desired_behavior: "4.1.0 authoritative in VERSION and aligned loaders. Full [Unreleased] promoted to [4.1.0]. Live tests/contracts updated. After tied-install --refresh, committed tied-bundle/install.json witnesses tied_version 4.1.0."
     non_goals:
-      - "Rewrite all historical trial readouts to 4.1.0"
-      - "Reintroduce per-turn TIEDv stamp"
       - "Major 5.0.0 bump"
+      - "Reintroduce per-turn TIEDv stamp"
+      - "Rewrite all historical trial readouts to 4.1.0"
       - "Trim sponsor changelog entries"
     success_criteria:
-      - "VERSION file reads 4.1.0"
-      - "server_info extensions.tied.methodology.version is 4.1.0"
       - "CHANGELOG [4.1.0] contains all former [Unreleased] bullets"
       - "Committed tied-bundle/install.json tied_version is 4.1.0 after refresh"
       - "Inventory documents frozen vs live 4.0.0 pins"
+      - "server_info extensions.tied.methodology.version is 4.1.0"
+      - "VERSION file reads 4.1.0"
     unchanged_behavior:
-      - "readTiedMethodologyVersion resolution order"
       - "Methodology version on demand via server_info"
+      - "readTiedMethodologyVersion resolution order"
   impact_analysis:
     blast_radius: "VERSION, AGENTS.md, README, CHANGELOG, tied-bundle/install.json, mcp-server contracts/tests"
     modules_or_boundaries: "mcp-server/src/tied-methodology-version.ts; server_info; tools/bootstrap tied-install"
     tied_tokens_affected:
-      - "REQ-TIED_METHODOLOGY_RELEASE_4_1_0"
-      - "REQ-TIED_SETUP"
-      - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
       - "IMPL-TIED_FILES"
+      - "REQ-TIED_METHODOLOGY_RELEASE_4_1_0"
+      - "REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND"
+      - "REQ-TIED_SETUP"
   profile:
     depth_tier: "minimal"
     gate_policy: "advisory"
@@ -36,22 +36,26 @@ CITDP-REQ-TIED_METHODOLOGY_RELEASE_4_1_0:
     adversarial_inquiry:
       assurance_profile: "baseline-functional"
       counterexamples:
-        - "VERSION bumped but AGENTS.md left at 4.0.0"
         - "install.json committed without running refresh (stale tied_version)"
         - "Mass replace alters docs/demos trial readouts"
+        - "VERSION bumped but AGENTS.md left at 4.0.0"
       depth_tier: "minimal"
-      profile_depth: "minimal"
-      gate_policy: "advisory"
       disconfirming_observations:
         - "refresh + grep tied_version in install.json before commit"
       evidence_references:
-        - "tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/PLAN.md"
         - "CHANGELOG.md"
         - "tied-bundle/install.json"
+        - "tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/PLAN.md"
       falsification_questions:
         - "Does close-out commit include install.json with 4.1.0 without refresh?"
+      gate_policy: "advisory"
+      profile_depth: "minimal"
       rationale: "Mechanical semver, changelog move, install witness."
     risks:
+      - id: "fixture-overreach"
+        mitigation: "Frozen-path deny list in inventory"
+        reversibility: "reversible"
+        severity: "medium"
       - id: "stale-agents-version"
         mitigation: "Inventory + parity tests"
         reversibility: "reversible"
@@ -60,10 +64,6 @@ CITDP-REQ-TIED_METHODOLOGY_RELEASE_4_1_0:
         mitigation: "Refresh once in phase-d; commit in same release commit"
         reversibility: "reversible"
         severity: "low"
-      - id: "fixture-overreach"
-        mitigation: "Frozen-path deny list in inventory"
-        reversibility: "reversible"
-        severity: "medium"
   test_strategy:
     command_seq:
       - "npm test --prefix mcp-server -- src/tied-methodology-version.test.ts src/server-info/server-info.test.ts"

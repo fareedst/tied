@@ -1,51 +1,51 @@
 copy_hygiene: "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF refine-plan slice."
 depth_tier: "minimal"
+execution_evidence:
+  completed:
+    - evidence_refs:
+        - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/evidence/session-handoff.md"
+        - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md"
+      slug: "refine-plan"
+  envelope_path: "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/evidence/request-evidence-envelope.v1.json"
+  request: "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
 gate_policy: "advisory"
 profile_depth: "minimal"
 request: "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
 source_plan: "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md"
 status: "implementation_complete"
-execution_evidence:
-  request: "REQ-TIED_PROMPT_SKILL_DISK_HANDOFF"
-  envelope_path: "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/evidence/request-evidence-envelope.v1.json"
-  completed:
-    - slug: refine-plan
-      evidence_refs:
-        - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md"
-        - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/evidence/session-handoff.md"
 steps:
-  - slug: session-bootstrap
-    disposition: completed
+  - disposition: "completed"
     evidence_refs:
       - "tied-bundle/docs/ai-principles.md"
       - "tied-project/vocab/prompt-composer.md"
-  - slug: translate-sponsor-intent
-    disposition: completed
+    slug: "session-bootstrap"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md"
-  - slug: change-definition
-    disposition: completed
+    slug: "translate-sponsor-intent"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/CITDP-REQ-TIED_PROMPT_SKILL_DISK_HANDOFF.yaml"
-  - slug: impact-discovery
-    disposition: completed
+    slug: "change-definition"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/PLAN.md"
-  - slug: risk-assessment
-    disposition: completed
+    slug: "impact-discovery"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/CITDP-REQ-TIED_PROMPT_SKILL_DISK_HANDOFF.yaml"
-  - slug: test-strategy
-    disposition: completed
+    slug: "risk-assessment"
+  - disposition: "completed"
     evidence_refs:
       - "tied-project/working/REQ-TIED_PROMPT_SKILL_DISK_HANDOFF/test-strategy.md"
-  - slug: sub-adversarial-inquiry-pass
-    disposition: not_applicable
+    slug: "test-strategy"
+  - disposition: "not_applicable"
     policy: "minimal-depth-no-inquiry"
     rationale: "depth_tier minimal + gate_policy advisory; docs/static e2e only — integrated inquiry artifacts not required"
-  - slug: unit-test-red
-    disposition: completed
+    slug: "sub-adversarial-inquiry-pass"
+  - disposition: "completed"
     evidence_refs:
       - "mcp-server/src/e2e/prompt-type-skills.test.ts"
       - "mcp-server/src/e2e/prompt-type-subagent.test.ts"
       - "tools/bootstrap/lib/session-handoff-structure-doc.test.mjs"
+    slug: "unit-test-red"
