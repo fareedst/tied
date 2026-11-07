@@ -20,7 +20,7 @@ No automated RED tests in repo. Manual verification for `@non-tied-build` and op
 ## Git hygiene
 
 - [x] `git status` shows no staged/untracked payloads under `skills/` or `.agents/skills/`
-- [ ] Committed plan folder only (+ `skills-lock.json` + `.gitignore` hunk) — pending `@non-tied-close`
+- [x] Committed plan folder (+ `skills-lock.json` + `.gitignore` hunk)
 
 ## Operator CLI
 

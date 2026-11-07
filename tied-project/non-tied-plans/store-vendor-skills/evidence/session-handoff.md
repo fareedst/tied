@@ -21,7 +21,7 @@ Linked [PLAN.md](../PLAN.md) · [test-strategy.md](../test-strategy.md)
 
 ## Plan execution steps
 
-**Last updated:** 2026-11-07 · **prompt_type:** non-tied-build · **PLAN:** ../PLAN.md
+**Last updated:** 2026-11-07 · **prompt_type:** non-tied-close · **PLAN:** ../PLAN.md
 
 ### Required
 
@@ -36,7 +36,7 @@ Linked [PLAN.md](../PLAN.md) · [test-strategy.md](../test-strategy.md)
 
 - [ ] `claude-harness` — explicit `skills add -a '*'` if Claude must list agent-browser separately from skills.sh defaults
 - [x] `operator-lens-link` — subsection under Configuration rhythm in `docs/tied-experience/operator-lens.md`
-- [ ] `non-tied-close` — commit `.gitignore`, `skills-lock.json`, plan folder when sponsor ready
+- [x] `non-tied-close` — traceable commit `docs(store): unify vendor skills catalog (docker + agent-browser)`
 
 ### Recommendations
 
@@ -47,6 +47,7 @@ Linked [PLAN.md](../PLAN.md) · [test-strategy.md](../test-strategy.md)
 
 - 2026-11-07 non-tied-refine: parent slug `store-vendor-skills`; unified Track A + B PLAN, test-strategy, Plan execution steps.
 - 2026-11-07 non-tied-build: Track B install refresh; global CLI + Chrome; gitignore; operator-lens link; evidence capture.
+- 2026-11-07 non-tied-close: scoped commit; excluded unrelated `tied-project/citdp/CITDP-REQ-*.yaml` scratch files.
 
 ## Environment
 
@@ -61,7 +62,7 @@ Linked [PLAN.md](../PLAN.md) · [test-strategy.md](../test-strategy.md)
 
 ## Do next
 
-`@non-tied-close` — staged commit when manual [test-strategy.md](../test-strategy.md) checks are acceptable.
+(none — close complete; push only if sponsor requests)
 
 ## Constraints
 
