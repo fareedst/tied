@@ -1,0 +1,6 @@
+feat(langgraph-pilot): P5 checklist slice orchestration
+
+Bind project graph to contiguous checklist slugs with single-writer
+tracker updates and default tdd-unit-slice composition tests.
+
+Program PLAN-TIED-LG-P5-CHECKLIST; close-out run p5-closeout-closeout-20261107.

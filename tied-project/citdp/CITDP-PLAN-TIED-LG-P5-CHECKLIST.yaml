@@ -1,0 +1,104 @@
+CITDP-PLAN-TIED-LG-P5-CHECKLIST:
+  change_definition:
+    current_behavior: "P4 verification subgraph and policies exist; project graph is ping-only (P2); no checklist slug iteration."
+    desired_behavior: "Project graph drives a contiguous checklist segment (default unit RED → GREEN → composition); tracker updates through a single writer; run ledger records slug evidence."
+    non_goals:
+      - "Agentstream default executor replacement"
+      - "Live charter client consistency in default CI"
+      - "P6 multi-task Send / worktree"
+    success_criteria:
+      - "Default three-slug segment completes with tracker dispositions completed"
+      - "Dual-write with agentstream on same tracker path forbidden and documented"
+      - "pytest green for pilot including P5 tests"
+      - "Run artifacts under tied-bundle/working/{REQ}/langgraph/{run_id}/"
+    unchanged_behavior: "P3 TDD and P4 verification subgraphs unchanged at API level."
+  completion_criteria:
+    activation:
+      artifact_hashes: {}
+      phase: "pre_implementation"
+      project_id: "stdd-project"
+      request_token: "PLAN-TIED-LG-P5-CHECKLIST"
+      run_id: "p5-plan-add-feature-20261107"
+      scope: []
+      scope_hash: "~"
+    checklist_gate:
+      fail_closed: true
+      phases:
+        - "close_out"
+        - "pre_implementation"
+        - "verification"
+  evidence:
+    command_seq:
+      - "cd tools/langgraph-pilot && .venv/bin/pytest -q"
+    manifest_reference: null
+    proof_boundaries:
+      - "disposable_tracker_copy_for_runs"
+      - "mocked_mcp_default_ci"
+      - "pilot_tree_only"
+  impact_analysis:
+    impl_inventory_notes: "Extends tools/langgraph-pilot project graph and new checklist/tracker modules."
+    modules_or_boundaries:
+      - "tools/langgraph-pilot/tied_langgraph/checklist_segment.py"
+      - "tools/langgraph-pilot/tied_langgraph/graphs/project.py"
+      - "tools/langgraph-pilot/tied_langgraph/tracker_writer.py"
+    tied_tokens_affected: []
+    tied_tokens_new: []
+  leap_feedback:
+    divergences_from_analysis: []
+    record_status: "implement_complete_close_out_deferred"
+    tied_stack_updates_required: []
+  record_identity:
+    change_request_id: "PLAN-TIED-LG-P5-CHECKLIST"
+    depth_tier: "integrated"
+    gate_policy: "per_citdp"
+    prior_depth_tier: null
+    profile_depth: "integrated"
+    recorded_at: "2026-11-07"
+    title: "LangGraph program P5 checklist slice"
+  risk_analysis:
+    abuse_cases:
+      - "dual-tracker-write-agentstream-and-langgraph"
+      - "slug-skip-without-verification-subgraph"
+    adversarial_inquiry:
+      assurance_profile: "baseline-functional"
+      close_out_inquiry_waiver: null
+      counterexamples:
+        - "Project graph marks slug complete without verification on composition slug."
+        - "Two orchestrators update the same checklist-tracker.yaml concurrently."
+      depth_change_waiver: null
+      depth_tier: "integrated"
+      disconfirming_observations:
+        - "Default CI requires live tracker mutation on committed tracker file."
+      eligibility_triggers_matched:
+        - "external_input"
+        - "persistence"
+      evidence_references:
+        - "docs/langgraph/plan-tied-lg-p5-checklist-slice.md"
+        - "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/risk-assessment-evidence.md"
+      falsification_questions:
+        - "Can LangGraph complete a slug without appending ledger observations?"
+      gate_policy: "per_citdp"
+      integrated_waiver: null
+      prior_depth_tier: null
+      rationale: "Checklist slug dispatch touches MCP gate tools and persisted tracker YAML."
+      research_profile: "integrated-agent"
+      strict_eligibility_prerequisites: []
+      sub_adversarial_inquiry_pass: "plan_only_deferred_to_build"
+    quality_profiles:
+      - "baseline-functional"
+    residual_risk:
+      expiry: "2027-05-31"
+      owner: "P6 multi-task wave"
+      summary: "P5 does not schedule parallel tasks or merge regression across branches."
+    risks:
+      - "Segment ordering diverges from master checklist if YAML template changes"
+    scenarios:
+      - "Sponsor extends segment without refine-plan CITDP update"
+  test_strategy:
+    composition_tests:
+      - "Three-slug segment with mocked subgraphs and disposable tracker copy"
+    integration_tests: []
+    unit_tests:
+      - "checklist segment ordering and contiguity"
+      - "project graph slug dispatch table"
+      - "tracker writer evidence_refs contract"

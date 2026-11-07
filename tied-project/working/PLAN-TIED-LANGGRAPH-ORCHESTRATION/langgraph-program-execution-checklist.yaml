@@ -1,4 +1,4 @@
-agent_handoff: "P4 close-out complete; proceed @build-plan P5. See tied-project/working/PLAN-TIED-LG-P4-ACCEPTANCE/evidence/session-handoff.md"
+agent_handoff: "P5 implement complete; proceed @close-out P5 or @build-plan P6. See tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/session-handoff.md"
 current_wave: "P5"
 execution_authority:
   p0_enrollment_complete_at: "2026-10-12T04:15:00-07:00"
@@ -17,14 +17,14 @@ flow_control:
     - meaning: "Run build-plan or plan-close-out then RETURN"
       symbol: "CALL"
   ordering: "strict_sequential_P0_through_P7_unless_sponsor_reorders"
-last_updated: "2026-10-12T12:00:00-07:00"
+last_updated: "2026-11-07T10:35:00-08:00"
 program:
   citdp_plan: "tied-project/citdp/CITDP-PLAN-TIED-LANGGRAPH-ORCHESTRATION.yaml"
   linked_plan: "docs/langgraph/tied-langgraph-orchestration-plan.md"
   program_evidence_registry: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/evidence/program-evidence-registry.v1.yaml"
   program_request: "PLAN-TIED-LANGGRAPH-ORCHESTRATION"
   refine_tracker: "tied-project/working/PLAN-TIED-LANGGRAPH-ORCHESTRATION/checklist-tracker.yaml"
-program_phase: "P4_close_out_complete"
+program_phase: "P5_implement_complete"
 schema_version: "langgraph-program-execution.v1"
 waves:
   P0:
@@ -77,8 +77,9 @@ waves:
     title: "Acceptance gate"
   P5:
     child_folder: "tied-project/working/PLAN-TIED-LG-P5-CHECKLIST"
+    linked_plan: "docs/langgraph/plan-tied-lg-p5-checklist-slice.md"
     mode: "implement"
-    status: "pending"
+    status: "implement_complete"
     title: "Checklist slice"
   P6:
     child_folder: "tied-project/working/PLAN-TIED-LG-P6-MULTI-TASK"

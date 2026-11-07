@@ -1,0 +1,79 @@
+{
+  "graph": {
+    "projectId": "stdd-project",
+    "criteria": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P5-CHECKLIST#criterion-p5-implement",
+          "kind": "criterion",
+          "derivation": "explicit",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        },
+        "architectureConstraintIds": ["constraint-p5-implement"]
+      }
+    ],
+    "architectureConstraints": [
+      {
+        "id": "constraint-p5-implement",
+        "implementationBlockIds": ["PLAN-TIED-LG-P5-CHECKLIST#PILOT#checklist_slice"]
+      }
+    ],
+    "implementationBlocks": [
+      {
+        "identity": {
+          "id": "PLAN-TIED-LG-P5-CHECKLIST#PILOT#checklist_slice",
+          "kind": "block",
+          "name": "PILOT",
+          "derivation": "content",
+          "revision": "rev1",
+          "sourceRevision": "rev1"
+        }
+      }
+    ],
+    "evidenceLoci": []
+  },
+  "fidelity": {
+    "blockRevision": "rev1",
+    "specification": [
+      {
+        "id": "stmt-p5-1",
+        "kind": "behavior",
+        "value": "Project graph completes default checklist segment and updates tracker via single-writer mark_slug_completed",
+        "order": 1
+      }
+    ],
+    "testEvidence": [
+      {
+        "id": "test-p5-1",
+        "direction": "test",
+        "statementId": "stmt-p5-1",
+        "kind": "behavior",
+        "value": "Project graph completes default checklist segment and updates tracker via single-writer mark_slug_completed",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tests/test_project_checklist_graph.py:1" },
+        "provenance": "p5-implement-inquiry",
+        "blockRevision": "rev1"
+      }
+    ],
+    "productionEvidence": [
+      {
+        "id": "prod-p5-1",
+        "direction": "production",
+        "statementId": "stmt-p5-1",
+        "kind": "behavior",
+        "value": "Project graph completes default checklist segment and updates tracker via single-writer mark_slug_completed",
+        "order": 1,
+        "reliable": true,
+        "source": { "location": "tools/langgraph-pilot/tied_langgraph/graphs/project.py:1" },
+        "provenance": "p5-implement-inquiry",
+        "blockRevision": "rev1"
+      }
+    ]
+  },
+  "scope": ["PLAN-TIED-LG-P5-CHECKLIST#PILOT#checklist_slice"],
+  "policy": "advisory",
+  "repository_root": "/Users/fareed/Documents/dev/chatgpt/stdd",
+  "request_token": "PLAN-TIED-LG-P5-CHECKLIST"
+}

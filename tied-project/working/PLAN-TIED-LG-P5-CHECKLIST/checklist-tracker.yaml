@@ -1,0 +1,134 @@
+citdp:
+  path: tied-project/citdp/CITDP-PLAN-TIED-LG-P5-CHECKLIST.yaml
+  status: persisted
+depth_tier: integrated
+execution_evidence:
+  close_out_evidence:
+    date: null
+    deferred: []
+    gates: {}
+    master_checklist: ''
+  completed:
+    - change-definition
+    - composition-integration
+    - gate-pseudocode-validation
+    - impact-discovery
+    - risk-assessment
+    - session-bootstrap
+    - sub-adversarial-inquiry-pass
+    - sync-tied-stack
+    - test-strategy
+    - translate-sponsor-intent
+    - unit-test-green
+    - unit-test-red
+    - verification-gate
+  pending:
+    - traceable-commit
+  request: PLAN-TIED-LG-P5-CHECKLIST
+gate_policy: per_citdp
+langgraph_segment:
+  preset: tdd-unit-slice
+  slugs:
+    - composition-integration
+    - unit-test-green
+    - unit-test-red
+purpose: P5 implement Tracker; build-plan 2026-11-07.
+request: PLAN-TIED-LG-P5-CHECKLIST
+schema_version: langgraph-p5-plan-tracker.v1
+source_template: tied-bundle/docs/agent-req-implementation-checklist.yaml
+status: implement_complete_close_out_deferred
+steps:
+  - disposition: completed
+    evidence_refs: &ref_0
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/session-bootstrap-evidence.md
+    slug: session-bootstrap
+    tracking:
+      status: completed
+      evidence_refs: *ref_0
+  - disposition: completed
+    evidence_refs: &ref_1
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/translate-sponsor-intent-evidence.md
+    slug: translate-sponsor-intent
+    tracking:
+      status: completed
+      evidence_refs: *ref_1
+  - disposition: completed
+    evidence_refs: &ref_2
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/change-definition-evidence.md
+    slug: change-definition
+    tracking:
+      status: completed
+      evidence_refs: *ref_2
+  - disposition: completed
+    evidence_refs: &ref_3
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/impact-discovery-evidence.md
+    slug: impact-discovery
+    tracking:
+      status: completed
+      evidence_refs: *ref_3
+  - disposition: completed
+    evidence_refs: &ref_4
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/risk-assessment-evidence.md
+    slug: risk-assessment
+    tracking:
+      status: completed
+      evidence_refs: *ref_4
+  - disposition: completed
+    evidence_refs: &ref_5
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/test-strategy-evidence.md
+    slug: test-strategy
+    tracking:
+      status: completed
+      evidence_refs: *ref_5
+  - disposition: completed
+    evidence_refs: &ref_6
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/sub-adversarial-inquiry-pass-evidence.md
+    slug: sub-adversarial-inquiry-pass
+    tracking:
+      status: completed
+      evidence_refs: *ref_6
+  - disposition: completed
+    evidence_refs: &ref_7
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/gate-pseudocode-validation-evidence.md
+    slug: gate-pseudocode-validation
+    tracking:
+      status: completed
+      evidence_refs: *ref_7
+  - disposition: completed
+    evidence_refs: &ref_8
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/sync-tied-stack-evidence.md
+    slug: sync-tied-stack
+    tracking:
+      status: completed
+      evidence_refs: *ref_8
+  - disposition: completed
+    evidence_refs: &ref_9
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/unit-test-red-evidence.md
+    slug: unit-test-red
+    tracking:
+      status: completed
+      evidence_refs: *ref_9
+  - disposition: completed
+    evidence_refs: &ref_10
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/unit-test-green-evidence.md
+    slug: unit-test-green
+    tracking:
+      status: completed
+      evidence_refs: *ref_10
+  - disposition: completed
+    evidence_refs: &ref_11
+      - tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/composition-integration-evidence.md
+    slug: composition-integration
+    tracking:
+      status: completed
+      evidence_refs: *ref_11
+  - disposition: completed
+    evidence_refs: &ref_12
+      - kind: file_path
+        path: tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/verification-gate-evidence.md
+      - kind: manifest_ref
+        path: tied-project/working/PLAN-TIED-LG-P5-CHECKLIST/evidence/verification-evidence-manifest.v1.json
+    slug: verification-gate
+    tracking:
+      status: completed
+      evidence_refs: *ref_12

@@ -24,3 +24,7 @@ class RunState(TypedDict, total=False):
     worktree_path: str | None
     acceptance_route: str | None
     verification_decision_written: bool
+    completed_slugs: list[str]
+    current_slug: str | None
+    segment_complete: bool
+    requirements_covered: bool

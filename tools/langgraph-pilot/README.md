@@ -65,3 +65,24 @@ flowchart LR
 - Graph builder: `tied_langgraph.graphs.verification.build_verification_graph`
 - Evidence schema: `tied_langgraph.verification_evidence.validate_evidence_for_acceptance`
 - Default CI mocks MCP gate; optional live `tied_checklist_gate_validate` documented for sponsor runs
+
+## Checklist slice (P5)
+
+Bind the **project graph** to a contiguous checklist segment (default preset `tdd-unit-slice`: `unit-test-red` → `unit-test-green` → `composition-integration`).
+
+```mermaid
+flowchart LR
+  RED_SLUG --> GREEN_SLUG --> COMP_SLUG
+  RED_SLUG --> TDD_RED
+  GREEN_SLUG --> TDD_GREEN
+  COMP_SLUG --> VERIFICATION
+```
+
+- Segment loader: `tied_langgraph.checklist_segment.resolve_segment`
+- Single-writer tracker updates: `tied_langgraph.tracker_writer.mark_slug_completed` (refuses when `.langgraph-writer.lock` is held by another writer)
+- Graph entry: `tied_langgraph.graphs.project.run_checklist_segment` / `build_checklist_project_graph`
+- CLI: `python -m tied_langgraph.cli --tracker PATH --run-directory PATH --worktree PATH --request-token TOKEN --run-id ID`
+
+**Dual-write warning:** do not run LangGraph and `tied agentstream` against the same tracker file in one REQ. Use a disposable tracker copy under `tied-bundle/working/{REQ}/langgraph/{run_id}/`.
+
+Run artifacts: ledger observations use tool names `checklist_slug:{slug}`; slug completion JSON files live in the run directory.
