@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **methodology release plan link ([PROC-VOCABULARY_INDEX])** — `tied-project/vocab/tied-methodology.md` **methodology release** row uses `../non-tied-plans/tied-methodology-release-4-2-0/PLAN.md` (was `../../`, broke `validate_vocab_index.rb` / `test-all` step 7).
+
 ### Added
 
 - **Trial methodology version readout ([REQ-TRIAL_METHODOLOGY_VERSION_READOUT], [ARCH-TRIAL_METHODOLOGY_VERSION_READOUT], [IMPL-TRIAL_METHODOLOGY_VERSION_READOUT])** — Turn-1 WF batch + GF bootstrap capture `tied-methodology-version.session.v1.json`; facilitator skills require session TIED semver in readout metadata; contract `mcp-server/contracts/trial-methodology-version/` + `trial-methodology-version-readout-contract.test.mjs`; optional `DIAGNOSTIC: tied_methodology_version` in `wf-trial-process-log.inc.sh`. Close-out `close-out-trial-methodology-version-readout-2026-11-07-final` (`merged_decision.allowed=true`, envelope `blocking_gap_count=0`). Plan: [PLAN.md](tied-project/working/REQ-TRIAL_METHODOLOGY_VERSION_READOUT/PLAN.md).

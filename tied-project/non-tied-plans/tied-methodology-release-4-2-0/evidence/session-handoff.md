@@ -14,6 +14,7 @@
 - [x] `phase-d-changelog` — promote `[Unreleased]` → `[4.2.0] - 2026-11-07`
 - [x] `phase-e-refresh-validate` — refresh, test battery, vocab row
 - [x] `phase-f-close` — release commit `6a3f8962`
+- [x] `phase-g-vocab-link` — post-release hotfix (validate_vocab); commit `c6e54ce4`
 
 ### Changelog (this slug)
 

@@ -1,0 +1,13 @@
+fix(vocab): methodology release plan relative link
+
+Correct **methodology release** row in tied-project/vocab/tied-methodology.md:
+use ../non-tied-plans/tied-methodology-release-4-2-0/PLAN.md so validate_vocab_index.rb
+and test-all step 7 (validate_vocab) resolve the on-disk plan.
+
+[PROC-VOCABULARY_INDEX]
+Plan: tied-project/non-tied-plans/tied-methodology-release-4-2-0/PLAN.md
+
+Verification: ruby scripts/validate_vocab_index.rb .
+
+Completion signals: machine close-out not_run (hotfix); validate_vocab pass;
+unrelated repo drift excluded per evidence/git-hygiene-receipt-2026-11-07-vocab-link.md
