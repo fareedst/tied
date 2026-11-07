@@ -27,4 +27,10 @@ N/A (facilitator readouts only; no store `fb-*` ingest this pass)
 
 ## Commit SHA
 
-(filled post-commit)
+| SHA | Role |
+| --- | --- |
+| `1a687fd4` | Batch traceable close-out (`feat(wf-trial): close-out TMV readout and related REQs`) |
+
+## Post-commit workspace hygiene
+
+2026-11-07: `test-all-hygiene` (store `scripts/build-commands.sh`) restored frozen regenerable paths; removed untracked gate-test CITDP litter; `tied_git_hygiene` apply=false documented in [git-hygiene-receipt-2026-11-07.md](./git-hygiene-receipt-2026-11-07.md) (apply pass via `test-all-hygiene`, not MCP allowlist).
