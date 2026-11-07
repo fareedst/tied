@@ -7,4 +7,6 @@
 **tied_verify:** ok — REQ/IMPL status updated  
 **Upstream feedback:** N/A + no receipt  
 
-**Excluded drift:** Other modified paths in `git status` (MCP fixtures, unrelated working folders, routing.md) intentionally out of staging map.
+**Commit SHA:** `8d11396c43f512f15f4343c9fa932def2cb58b0b`
+
+**Excluded drift:** Other modified paths in `git status` (MCP fixtures, unrelated working folders, routing.md) intentionally out of staging map. `tied-bundle/templates/session-handoff.v1.template.md` updated locally (install-managed); confirm on next `tied-install` refresh if clients need template sync.

@@ -5,7 +5,7 @@
 ## Plan spine
 
 - Linked plan: [../PLAN.md](../PLAN.md)
-- Phase: close-out complete (pending commit SHA in parent handoff)
+- Phase: close-out complete · commit `8d11396c43f512f15f4343c9fa932def2cb58b0b`
 
 ## Authoritative refs
 

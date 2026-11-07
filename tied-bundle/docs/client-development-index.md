@@ -294,4 +294,4 @@ On a fresh bootstrap with no project-specific REQ/ARCH/IMPL tokens, `tied_valida
 
 ---
 
-**TIED Methodology Version**: 4.0.0 · **Last updated**: 2026-10-19
+**TIED Methodology Version**: 4.1.0 · **Last updated**: 2026-10-19

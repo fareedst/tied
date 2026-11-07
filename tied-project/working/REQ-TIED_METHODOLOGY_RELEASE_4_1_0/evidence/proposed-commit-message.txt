@@ -1,0 +1,42 @@
+chore(release): TIED methodology 4.1.0
+
+Promote accumulated [Unreleased] CHANGELOG to 4.1.0; align VERSION, AGENTS, README,
+bundled doc headers, server_info contract example, and live adherence tests.
+Refresh witness: tied-bundle/install.json tied_version 4.1.0 (local, gitignored).
+Add README Release highlights blurb.
+
+[REQ-TIED_METHODOLOGY_RELEASE_4_1_0]
+
+Staging map:
+VERSION
+AGENTS.md
+README.md
+CHANGELOG.md
+docs/tied-experience/index.md
+mcp-server/contracts/server_info/server_info.response.example.json
+scripts/conversation-adherence-score.test.mjs
+tied-bundle/docs/agent-req-implementation-checklist.md
+tied-bundle/docs/ai-principles.md
+tied-bundle/docs/architecture-decisions.md
+tied-bundle/docs/client-development-index.md
+tied-bundle/docs/implementation-decisions.md
+tied-bundle/docs/methodology-diagrams.md
+tied-bundle/docs/processes.md
+tied-bundle/docs/requirements.md
+tied-bundle/docs/semantic-tokens.md
+tied-project/vocab/tied-methodology.md
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/PLAN.md
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/CITDP-REQ-TIED_METHODOLOGY_RELEASE_4_1_0.yaml
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/checklist-tracker.yaml
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/test-strategy.md
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/evidence/version-inventory.md
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/evidence/session-handoff.md
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/evidence/close-out-handoff.md
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/evidence/traceable-commit-evidence.md
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/evidence/proposed-commit-message.txt
+tied-project/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/evidence/git-hygiene-receipt-2026-11-07.md
+
+Close-out gates: merged_decision.allowed=true; envelope blocking_gap_count=0
+Gate receipt: tied-bundle/working/REQ-TIED_METHODOLOGY_RELEASE_4_1_0/gates/close_out-2026-11-07T03-44-26-488Z.json
+
+Upstream feedback: N/A (methodology semver release; no client feedback ingest)

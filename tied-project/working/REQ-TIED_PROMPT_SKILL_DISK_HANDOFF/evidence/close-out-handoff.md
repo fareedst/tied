@@ -14,4 +14,5 @@
 
 - Envelope: `request-evidence-envelope.v1.json`
 - Verification manifest: `verification-evidence-manifest.v1.json`
+- Commit: `8d11396c43f512f15f4343c9fa932def2cb58b0b`
 - Commit message draft: `proposed-commit-message.txt`

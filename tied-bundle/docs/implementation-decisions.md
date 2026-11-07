@@ -1,6 +1,6 @@
 # Implementation Decisions
 
-**TIED Methodology Version**: 4.0.0
+**TIED Methodology Version**: 4.1.0
 
 ## Overview
 

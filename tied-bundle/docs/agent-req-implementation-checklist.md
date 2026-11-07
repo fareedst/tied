@@ -2,7 +2,7 @@
 
 **Audience**: AI agents. Process token: `[PROC-AGENT_REQ_CHECKLIST]`.
 
-**TIED Methodology Version**: 4.0.0
+**TIED Methodology Version**: 4.1.0
 
 **Purpose**: This document is the primary behavioral guide an AI agent follows for every new requirement or change to the tested system. It makes domain vocabulary a peer control layer alongside pseudo-code, semantic-token, YAML, and test validation, then unifies and sequences the controlling processes into a single executable checklist with explicit branching and looping. The agent executes this checklist from start to finish; skipping steps is not permitted unless a branch directive says otherwise.
 

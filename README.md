@@ -1,8 +1,16 @@
 # TIED Methodology
 
-**TIED Methodology Version**: 4.0.0
+**TIED Methodology Version**: 4.1.0
 
 [TIED](https://github.com/fareedst/tied) means **Token-Integrated Engineering & Development**. This repository is the **TIED store**—clone it, build the workspace, install methodology into your client, then ship compact features with Prompt Composer. **Visual how-to and methodology by example:** [TIED Experience Hub](docs/tied-experience/index.md). Core seven index: [client development index](tied-bundle/docs/client-development-index.md).
+
+**Release highlights (4.1.0):** Methodology minor release since 4.0.0 — disk-first plan handoffs, runtime configuration on disk, WF trial hardening, and MCP observability. Full notes: [CHANGELOG — 4.1.0](CHANGELOG.md#410---2026-11-07).
+
+- **Plan handoff on disk** — session-handoff **Plan execution steps** across Prompt Composer skills ([REQ-TIED_PROMPT_SKILL_DISK_HANDOFF]).
+- **Semver on demand** — no mandatory per-turn `TIEDv` stamp; read version via MCP **`server_info`** ([REQ-TIED_METHODOLOGY_VERSION_ON_DEMAND]).
+- **MCP `server_info`** — redacted identity, compatibility, runtime, and health snapshot ([REQ-MCP_SERVER_INFO]).
+- **Runtime disk config & env policy** — operator toggles and first-party env catalog on refresh paths ([REQ-TIED_RUNTIME_DISK_CONFIG], [REQ-TIED_ENVIRONMENT_VARIABLE_POLICY]).
+- **WF trials & prompt-type skills** — four-phase disposable cohort playbooks, TypeScript implementation stack, 18-leaf skill inventory ([REQ-WF_TRIAL_FOUR_PHASE_HARDENING], [REQ-PROMPT_TYPE_SKILL_EXECUTION_MODE]).
 
 ## How to use this README
 
